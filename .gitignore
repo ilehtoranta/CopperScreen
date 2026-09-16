@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+**/TestResults/
+artifacts/
+.vs/
+.idea/
+*.user
+*.suo
+media/
+*.rom
+*.adf
+*.hdf
+*.ipf
+*.nupkg
+*.snupkg
