@@ -48,6 +48,13 @@ Local evidence is under ignored `artifacts/`: `product-build.log`,
 No ROMs, disks, generated binaries or private local artifacts are in this commit.
 CI independently builds production and runs diagnostic tests in separate jobs.
 
+The first migration CI run (`35141801928`) correctly rejected stale package
+hashes copied from the developer's global cache. Copper68k and CopperPad cached
+DLLs also differed from the public artifacts, so local verification was rerun
+against a fresh public-only restore, not waived as a signing-only difference.
+The corrected locks use public package hashes. `NuGet.Config` now isolates the
+repository cache under ignored `artifacts/packages` to prevent recurrence.
+
 No formal FPS gate was rerun or reclassified. This source move does not change
 the accepted build's hardware behavior or complete the unfinished performance
 objective. Historical G6/G7 outcomes and disclosed hardware uncertainty remain

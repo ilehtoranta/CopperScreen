@@ -14,7 +14,9 @@ Requires the .NET 10 SDK. The app builds the engine and CopperDisk directly from
 this repository. The shared CPU remains a pinned
 [Copper68k 1.4.1-boundary.1](https://www.nuget.org/packages/Copper68k/1.4.1-boundary.1)
 package dependency. No CopperMod checkout or local package feed is required.
-Package locks pin external dependencies.
+Package locks pin external dependencies. Restore uses the public feed and an
+ignored repository-local package cache to avoid older experimental packages in
+the user's global cache.
 
 ```powershell
 dotnet restore CopperScreen.slnx --locked-mode
