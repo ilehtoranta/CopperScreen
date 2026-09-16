@@ -95,7 +95,20 @@ dependency adaptation. One pre-existing unstaged old-test reference to
 Lightweight was adapted to the published package and remains unstaged with
 that user's unfinished work. No historical host/CopperStart work was discarded.
 
-## Package/release boundary
+## Follow-up: retire the old host workspace
+
+The owner subsequently authorized removing the six old CopperScreen project
+trees from CopperMod after archiving their working contents. The
+[recovery archive](../archive/legacy-copperscreen-20260916/README.md) supersedes
+the earlier statement that these project trees must remain there. Shared
+CopperMod.Amiga/Cust/AHX and unrelated CopperStart/CPU work are not removed.
+The previously uncommitted phosphor hold/resume regression test is carried into
+the active focused host suite; production code is unchanged.
+Validation: the migrated test passed; the complete focused host suite passed
+65 tests, with its two optional native-media replays explicitly skipped. No
+runtime change required a new gameplay or FPS acceptance run.
+
+## Package/release boundary (unchanged)
 
 Published `0.1.0-preview.1` / `2.1.1-boundary.1` packages remain immutable and
 available to external or historical consumers. The next source versions above
