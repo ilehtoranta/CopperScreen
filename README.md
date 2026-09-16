@@ -13,9 +13,11 @@ Unsupported settings are rejected rather than silently changing the machine.
 Requires the .NET 10 SDK. Copper68k, CopperDisk and the Lightweight engine are
 versioned package dependencies; no sibling source checkout is required.
 
-**Migration status:** the three dependency preview packages have been verified
-locally; public-feed publication is pending. Until then, restore requires the
-local verified feed via `-p:RestoreAdditionalProjectSources=PATH_TO_FEED`.
+The verified preview dependencies are published on NuGet.org:
+[Copper68k 1.4.1-boundary.1](https://www.nuget.org/packages/Copper68k/1.4.1-boundary.1),
+[CopperDisk 2.1.1-boundary.1](https://www.nuget.org/packages/CopperDisk/2.1.1-boundary.1),
+and [Lightweight 0.1.0-preview.1](https://www.nuget.org/packages/CopperMod.Amiga.Lightweight/0.1.0-preview.1).
+Restore uses the public feed and committed package locks; no local feed is needed.
 
 ```powershell
 dotnet restore CopperScreen.slnx --locked-mode
@@ -42,8 +44,9 @@ Create a local Windows build (does not publish a release):
 ./scripts/package.ps1
 ```
 
-CI is manual-only until public dependency publication is confirmed. The repository
-move does not establish a new FPS result or close hardware uncertainty.
+CI builds and runs the focused tests on pushes to `main` and pull requests, and
+can also be started manually. The repository move does not establish a new FPS
+result or close hardware uncertainty.
 
 ## Source history and ownership
 
