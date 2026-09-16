@@ -54,6 +54,11 @@ DLLs also differed from the public artifacts, so local verification was rerun
 against a fresh public-only restore, not waived as a signing-only difference.
 The corrected locks use public package hashes. `NuGet.Config` now isolates the
 repository cache under ignored `artifacts/packages` to prevent recurrence.
+At corrected commit `a5e0e22ffa0f9b9a22a6efb8eeaf050753399981`, both
+[GitHub CI jobs passed](https://github.com/ilehtoranta/CopperScreen/actions/runs/35142346789).
+The public-package local rerun also passed all 382 + 74 + 66 tests, including
+the two native replays with zero skips. Local package creation was repeated
+successfully after isolating the cache.
 
 No formal FPS gate was rerun or reclassified. This source move does not change
 the accepted build's hardware behavior or complete the unfinished performance
@@ -79,6 +84,16 @@ The clean **pre-migration** CopperMod player build already fails in
 17-argument constructor. This is independent of repository ownership and must
 not be represented as a migration regression or silently fixed in this move.
 Post-cleanup comparison is recorded in CopperMod's `COPPERSCREEN_MIGRATION.md`.
+
+CopperMod cleanup was committed and pushed as
+[`30615e8317a4069e879b585049ed97ffdfecd4fe`](https://github.com/ilehtoranta/CopperMod/commit/30615e8317a4069e879b585049ed97ffdfecd4fe)
+only after the destination CI passed. Its staged tree exactly matched the
+separately verified cleanup, excluding all unrelated working changes. Of 132
+previously dirty tracked paths, 129 remained byte-identical; the other three
+retained their prior edits while receiving only the ownership notice or
+dependency adaptation. One pre-existing unstaged old-test reference to
+Lightweight was adapted to the published package and remains unstaged with
+that user's unfinished work. No historical host/CopperStart work was discarded.
 
 ## Package/release boundary
 
