@@ -1,0 +1,35 @@
+[
+  {
+    "id": "lemmings-gameplay",
+    "title": "Lemmings",
+    "caption": "In-game view with the skill selection panel.",
+    "alt": "Lemmings walking through a rocky level, with the skill selection panel below.",
+    "image": "assets/screenshots/lemmings-gameplay.png",
+    "thumbnail": "assets/screenshots/lemmings-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "hired-guns-gameplay",
+    "title": "Hired Guns",
+    "caption": "Training area with four character views.",
+    "alt": "Hired Guns training area shown through four character viewpoints in a two-by-two layout.",
+    "image": "assets/screenshots/hired-guns-gameplay.png",
+    "thumbnail": "assets/screenshots/hired-guns-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "hired-guns-menu",
+    "title": "Hired Guns",
+    "caption": "Main menu.",
+    "alt": "Hired Guns main menu offering a new game, a saved game or a return to Workbench.",
+    "image": "assets/screenshots/hired-guns-menu.png",
+    "thumbnail": "assets/screenshots/hired-guns-menu-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  }
+]
