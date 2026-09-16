@@ -40,32 +40,16 @@
         "type": "Direct",
         "requested": "[1.4.1-boundary.1, 1.4.1-boundary.1]",
         "resolved": "1.4.1-boundary.1",
-        "contentHash": "T84A885LnwAcj1EFeAYzA5j1TdxDNbL1DcLIHoZriNyQWh04XqeHlnJV49p8Aj3ejFZGcm0cXbSjBroceN+kdw==",
+        "contentHash": "NXSwUXlZAfFisdQz6wr2uB3VJfrXx+XwBS8XMAUxm5rwBMMKs4Oh9mmCzLV9Ph1TzQsf58uz0KikapIK++YDjg==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
-        }
-      },
-      "CopperDisk": {
-        "type": "Direct",
-        "requested": "[2.1.1-boundary.1, 2.1.1-boundary.1]",
-        "resolved": "2.1.1-boundary.1",
-        "contentHash": "MQptxZvkraYuWDxo0TzS10Od/Y/JKS85mP0EOPeFBKOHQHXs6uodWAnyN60IPnk+LG5m1z4GiDmd7ok1aW8sWg=="
-      },
-      "CopperMod.Amiga.Lightweight": {
-        "type": "Direct",
-        "requested": "[0.1.0-preview.1, 0.1.0-preview.1]",
-        "resolved": "0.1.0-preview.1",
-        "contentHash": "+LGV1jup+NjOs1eCd13XZ32b+V79jiA1S2JumUjCSoaN9IhpUyrGuKoLhnl+O+NtU4vfTIB94VEyj7jHUOCVBA==",
-        "dependencies": {
-          "Copper68k": "[1.4.1-boundary.1]",
-          "CopperDisk": "[2.1.1-boundary.1]"
         }
       },
       "CopperPad": {
         "type": "Direct",
         "requested": "[2.0.0-preview.1, )",
         "resolved": "2.0.0-preview.1",
-        "contentHash": "mu0TOvbIb0kKEj44g0he+KM5/uPuIH7an9HmUVp5nOSyLxqA7GHiO8NwIojNc6pNNRDQtVNhL3RK/DcXG3a0ww=="
+        "contentHash": "hNat6fDIlCPCoQHHoDSs8TZKjvTXeUgrfi7aeFfeCHxvoEETuJ6F2Elnkfwf7fB8rs1yA4hGwNVxQ+XhseV25g=="
       },
       "CopperPad.HidSharp": {
         "type": "Direct",
@@ -260,6 +244,16 @@
         "type": "Transitive",
         "resolved": "0.92.0",
         "contentHash": "h7IMakm0PF2jxiagoysoAjrzzLQ0UBdnSXQL5kb17YW0Fvyo12Tg96A99QkzwktWRrd7H+Uw9EzjasNLUfGYlA=="
+      },
+      "copperdisk": {
+        "type": "Project"
+      },
+      "coppermod.amiga.lightweight": {
+        "type": "Project",
+        "dependencies": {
+          "Copper68k": "[1.4.1-boundary.1, 1.4.1-boundary.1]",
+          "CopperDisk": "[2.1.1-boundary.2, )"
+        }
       }
     }
   }

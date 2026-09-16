@@ -1,5 +1,10 @@
 # Repository extraction — 2026-09-16
 
+**Superseded scope:** the owner subsequently clarified that CopperScreen owns
+the complete emulator product. Engine, disk support, tests and runner now live
+here and build locally. See [current product ownership](PRODUCT_OWNERSHIP.md).
+The UI-only split and package verification below remain historical evidence.
+
 The package boundary was committed and pushed in CopperMod as
 `713ad6c1bc1bc31efc038996c50faccec31208d6`. CopperScreen's subtree was split at that
 commit into `f776f7915522b1ad360dffc4e697f8d47a9d3790`, preserving 90 application

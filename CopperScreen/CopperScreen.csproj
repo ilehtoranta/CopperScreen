@@ -17,9 +17,7 @@
     <ApplicationIcon>Assets\CopperScreen.ico</ApplicationIcon>
     <ServerGarbageCollection>false</ServerGarbageCollection>
     <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
-    <LightweightPackageVersion Condition="'$(LightweightPackageVersion)' == ''">0.1.0-preview.1</LightweightPackageVersion>
     <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.4.1-boundary.1</Copper68kBoundaryVersion>
-    <CopperDiskBoundaryVersion Condition="'$(CopperDiskBoundaryVersion)' == ''">2.1.1-boundary.1</CopperDiskBoundaryVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -42,9 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CopperMod.Amiga.Lightweight" Version="[$(LightweightPackageVersion)]" />
+    <ProjectReference Include="..\CopperMod.Amiga.Lightweight\CopperMod.Amiga.Lightweight.csproj" />
     <PackageReference Include="Copper68k" Version="[$(Copper68kBoundaryVersion)]" />
-    <PackageReference Include="CopperDisk" Version="[$(CopperDiskBoundaryVersion)]" />
+    <ProjectReference Include="..\CopperDisk\CopperDisk.csproj" />
   </ItemGroup>
 
   <ItemGroup>

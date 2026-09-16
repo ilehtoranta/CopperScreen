@@ -23,3 +23,19 @@ jobs:
         run: dotnet build CopperScreen.slnx -c Release --no-restore
       - name: Focused host tests (native ROM/media excluded)
         run: dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release --no-build --no-restore
+      - name: Disk library tests
+        run: dotnet test CopperDisk.Tests/CopperDisk.Tests.csproj -c Release --no-build --no-restore
+      - name: Runner smoke (synthetic, not a performance gate)
+        run: dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release --no-build --no-restore -- --synthetic-rom-loop --frames 10
+
+  engine-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore diagnostic tests separately
+        run: dotnet restore CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj --locked-mode --artifacts-path artifacts/diagnostic-tests
+      - name: Engine timing tests
+        run: dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --no-restore --artifacts-path artifacts/diagnostic-tests

@@ -1,5 +1,10 @@
 # CopperScreen standalone repository boundary
 
+**Historical boundary:** this UI-only split was superseded by the owner's
+complete-product decision. See [current ownership](../docs/PRODUCT_OWNERSHIP.md).
+The app now references the local Lightweight and CopperDisk projects; only
+genuinely shared libraries such as Copper68k remain external packages.
+
 ## Decision and scope — 2026-09-16
 
 Prepare CopperScreen to move into its own repository without moving or copying
