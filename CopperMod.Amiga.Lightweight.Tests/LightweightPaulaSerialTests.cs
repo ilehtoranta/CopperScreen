@@ -146,7 +146,15 @@ public sealed class LightweightPaulaSerialTests
     {
         using var m = Create();
         W(m, 0x032, 19);
-        for (var i = 0; i < 10; i++) Receive(m, i, 8);
+        // Warm both directions and their interrupt writes through the same
+        // method as the measurement. Receive-only warmup leaves transmit cold.
+        _ = MeasureDuplex(m);
+        Assert.Equal(0, MeasureDuplex(m));
+    }
+
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private static long MeasureDuplex(LightweightA500Machine m)
+    {
         var before = GC.GetAllocatedBytesForCurrentThread();
         for (var i = 0; i < 100; i++)
         {
@@ -154,7 +162,7 @@ public sealed class LightweightPaulaSerialTests
             W(m, 0x09C, 0x0801);
             Receive(m, i, 8);
         }
-        Assert.Equal(0, GC.GetAllocatedBytesForCurrentThread() - before);
+        return GC.GetAllocatedBytesForCurrentThread() - before;
     }
 
     private static void Receive(LightweightA500Machine m, int value, int bits)

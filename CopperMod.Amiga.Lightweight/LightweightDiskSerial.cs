@@ -10,6 +10,8 @@ internal struct LightweightDiskSerial
     public LightweightDiskSerial() { }
 
     internal const int TrackBits = AmigaDosTrackEncoder.EncodedTrackByteCount * 8;
+    private LightweightDiskReceiver _receiver;
+    internal long NextRecoveredCycle => _receiver.Active ? _receiver.NextCycle : long.MaxValue;
     private int _byteBits;
     private ushort _shift;
     private byte _data;
@@ -22,6 +24,7 @@ internal struct LightweightDiskSerial
 
     internal void Reset()
     {
+        _receiver.Reset();
         _byteBits = 0;
         _shift = 0;
         _data = 0;
@@ -40,31 +43,52 @@ internal struct LightweightDiskSerial
     {
         if (drive.Selected && receive)
         {
-                var track = drive.Track;
-                var position = drive.BitPosition;
-                var bit = (track[position >> 3] >> (7 - (position & 7))) & 1;
-                if ((machine.Adkcon & 0x0100) == 0 || _slowPhase != 0)
-                    bit = RecoverSlowCell(bit);
-                // GCR byte synchronization waits for a set MSB before the
-                // next eight-bit group. Rotation and the recovery window still
-                // consume every physical cell while zero prefixes are ignored.
-                if (bit >= 0 && !(_byteBits == 0 && bit == 0 && (machine.Adkcon & 0x0200) != 0))
+            var bit = drive.ReadBit();
+            if (drive.Format == LightweightFloppyFormat.Ipf)
+            {
+                if (_receiver.Active)
                 {
-                    _shift = (ushort)((_shift << 1) | bit);
-                    if (++_byteBits == 8)
-                    {
-                        _byteBits = 0;
-                        _data = (byte)_shift;
-                        _byteReady = true;
-                    }
-                    CompareSync(cycle, machine);
-                    if (machine.DiskDmaActive)
-                        machine.ReceiveDiskBit(_shift, _wordEqual, cycle);
+                    AdvanceReceiver(cycle, machine);
+                    if (bit != 0) _receiver.Pulse();
                 }
+            }
+            else
+            {
+                if ((machine.Adkcon & 0x0100) == 0 || _slowPhase != 0) bit = RecoverSlowCell(bit);
+                if (bit >= 0) Receive(bit, cycle, machine);
+            }
         }
 
         if (drive.AdvanceRotation() && drive.Selected)
             machine.LatchDiskIndex(cycle);
+    }
+
+    internal void ConfigureReceiver(long cycle, bool active, bool fast)
+    {
+        if (active) { _receiver.Enable(cycle, fast); _receiver.SetFast(fast); }
+        else if (_receiver.Active) _receiver.Reset();
+    }
+
+    internal void AdvanceReceiver(long cycle, LightweightA500Machine machine)
+    {
+        if (!_receiver.Active) return;
+        var bit = _receiver.Advance(cycle);
+        _receiver.SetFast((machine.Adkcon & 0x0100) != 0);
+        if (bit >= 0) Receive(bit, cycle, machine);
+    }
+
+    private void Receive(int bit, long cycle, LightweightA500Machine machine)
+    {
+        if (_byteBits == 0 && bit == 0 && (machine.Adkcon & 0x0200) != 0) return;
+        _shift = (ushort)((_shift << 1) | bit);
+        if (++_byteBits == 8)
+        {
+            _byteBits = 0;
+            _data = (byte)_shift;
+            _byteReady = true;
+        }
+        CompareSync(cycle, machine);
+        if (machine.DiskDmaActive) machine.ReceiveDiskBit(_shift, _wordEqual, cycle);
     }
 
     internal void CompareSync(long cycle, LightweightA500Machine machine)

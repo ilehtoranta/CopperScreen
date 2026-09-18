@@ -10,7 +10,7 @@ namespace CopperMod.Amiga.Lightweight;
 /// Device phases are explicit extension points; unsupported hardware is
 /// reported instead of being delegated to the legacy scheduler.
 /// </remarks>
-public sealed class LightweightA500Machine : IM68kBus, IDisposable
+public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
 {
     private const int BatchProbeScalarInstructionBudget = 4;
     private const byte CiaAPortAResetLatch = 0xFC;
@@ -80,6 +80,14 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     internal LightweightA500Machine(
         LightweightA500Configuration? configuration,
         bool enableConservativeCpuLoopBatch)
+        : this(configuration, enableConservativeCpuLoopBatch, null)
+    {
+    }
+
+    private LightweightA500Machine(
+        LightweightA500Configuration? configuration,
+        bool enableConservativeCpuLoopBatch,
+        LightweightHdfBus? previousHardfiles)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
         if (_configuration.FloppyDriveCount is < 1 or > 4)
@@ -98,8 +106,13 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         _batchCpu = (IM68kBatchCore)_cpu;
         _cpuBoundary = new LightweightCpuBoundary(this);
         _enableConservativeCpuLoopBatch = enableConservativeCpuLoopBatch;
-        InstallResetLoop();
-        Reset();
+        try
+        {
+            if (_configuration.Hardfiles.Count != 0) _hdf = new(this, _configuration.Hardfiles, previousHardfiles);
+            InstallResetLoop();
+            Reset();
+        }
+        catch { try { _hdf?.Dispose(); } finally { _cpu.Dispose(); } throw; }
     }
 
     public M68kCpuState Cpu => _cpu.State;
@@ -219,14 +232,15 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
         "ECS/AGA chipset profiles",
-        "IPF and non-ADF disk formats",
+        "floppy formats other than standard ADF and read-only IPF",
+        "physical IDE/SCSI controllers and host-directory mounts",
         "save states",
         "dual-playfield HAM, HAM outside five/six-plane lores and hires BPU above four",
         "hires output with a 454-pixel framebuffer (select 908 for native OCS output)",
         "keyboard power-up/resynchronization/reset-chord MCU sequences and general CIA serial output/CNT timer modes",
         "physical paddle RC tolerances, controller adapters and mouse quadrature phase",
         "physical TOD pulse/debounce phases and comparator-write glitches (bounded raster-TOD model only)",
-        "nonstandard disk speed, analog disk recovery/precompensation and flux-preserving write splices",
+        "nonstandard spindle speed, silicon-exact analog disk recovery/precompensation and flux-preserving write splices",
         "simultaneous read streams from multiple selected drives",
         "external genlock and chip-test beam-counter repositioning beyond VPOSW LOF",
         "undocumented 227-CCK wrap-dummy bus data"
@@ -235,6 +249,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     public void Reset()
     {
         ThrowIfDisposed();
+        _hdf?.Reset();
         _clock.Reset();
         _registers.Reset();
         _copper.Reset();
@@ -475,6 +490,24 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
 
     public bool IsDriveWriteProtected(int drive) => GetDrive(drive).WriteProtected;
     public bool IsDriveDirty(int drive) => GetDrive(drive).IsDirty;
+    public LightweightFloppyFormat GetDriveFormat(int drive) => GetDrive(drive).Format;
+    public bool CanWriteDrive(int drive) => GetDrive(drive).CanWrite;
+
+    /// <summary>Decode and mount preserved read-only IPF media on the owner thread.</summary>
+    public void MountIpf(int drive, ReadOnlySpan<byte> image) => MountIpf(drive, LightweightIpfImage.Prepare(image));
+
+    /// <summary>Mount previously prepared, permanently read-only IPF tracks.</summary>
+    public void MountIpf(int drive, LightweightIpfImage image)
+    {
+        ThrowIfDisposed();
+        var floppy = GetDrive(drive);
+        floppy.MountIpf(image);
+        _diskSerial.OnDriveChanged(floppy, Cycle, mediaChanged: true);
+        RefreshDiskSchedule();
+        RefreshNextDeviceCycle();
+    }
+
+    public void MountIpf(ReadOnlySpan<byte> image) => MountIpf(0, image);
 
     /// <summary>Copies current standard sectors. Rejects incomplete/custom tracks.
     /// Call on the machine owner thread; export does not change the mounted medium.</summary>
@@ -509,7 +542,8 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     {
         if (_disposed) return;
         _disposed = true;
-        _cpu.Dispose();
+        try { _hdf?.Dispose(); }
+        finally { _cpu.Dispose(); }
     }
 
     public byte ReadByte(uint address, ref long cycle, M68kBusAccessKind accessKind)
@@ -592,6 +626,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     public void ResetExternalDevices(long cycle)
     {
         AdvanceHardwareTo(cycle);
+        _hdf?.Reset();
         _registers.Reset();
         _copper.Reset();
         _bitplanes.Reset();
@@ -1013,6 +1048,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         {
             if (_selectedReaders > 1 && !_diskDma.Writing)
                 ReportUnsupportedFeature("simultaneous disk read streams from multiple selected drives");
+            if (_diskSerial.NextRecoveredCycle == cycle) _diskSerial.AdvanceReceiver(cycle, this);
             foreach (var drive in _floppies)
                 if (cycle == drive.NextBitCycle)
                     _diskSerial.Step(cycle, drive, this, receive: _selectedReaders <= 1 && !_diskDma.Writing);
@@ -1322,6 +1358,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         }
         if (address >= RomBase && address + 1 < RomBase + _rom.Length)
             return ReadRomWord((int)(address - RomBase));
+        if (_hdf is { } hdf) return (ushort)((hdf.ReadExpansionByte(address) << 8) | hdf.ReadExpansionByte(address + 1));
         return 0xFFFF;
     }
 
@@ -1386,6 +1423,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             return;
         }
 
+        if (address >= 0x080000 && _hdf is { } hdf && hdf.TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
         if (IsCiaWordAccess(aligned))
             return;
@@ -1427,6 +1465,12 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         if (address >= CustomBase && address < CustomBase + 0x200)
         {
             WriteCustomRegister((ushort)(address - CustomBase), value, cycle);
+            return;
+        }
+        if (_hdf is { } hdf)
+        {
+            hdf.TryWriteExpansionByte(address, (byte)(value >> 8));
+            hdf.TryWriteExpansionByte(address + 1, (byte)value);
         }
     }
 
@@ -1445,6 +1489,8 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         }
 
         var previousAdkcon = _registers.Adkcon;
+        if (offset == LightweightRegisters.AdkconWrite)
+            _diskSerial.AdvanceReceiver(cycle, this);
         var previousDmacon = offset == LightweightRegisters.DmaconWrite
             ? _registers.Dmacon
             : (ushort)0;
@@ -1506,6 +1552,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
                     break;
                 case LightweightRegisters.Dsklen:
                     _diskDma.WriteLength(value, cycle, this);
+                    RefreshDiskSchedule();
                     break;
                 case LightweightRegisters.DmaconWrite:
                     _diskDma.OnDmaconChanged(cycle, this);
@@ -1535,6 +1582,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
                     _paula.OnAdkconChanged(_registers.Adkcon, cycle);
                     _serial.WriteBreak((_registers.Adkcon & 0x0800) != 0);
                     _diskDma.OnAdkconChanged(previousAdkcon, cycle, this);
+                    RefreshDiskSchedule();
                     break;
                 case LightweightRegisters.Dsksync:
                     _diskSerial.CompareSync(cycle, this);
@@ -1638,11 +1686,18 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     {
         _nextDiskCycle = long.MaxValue;
         _selectedReaders = 0;
+        var preserved = false;
         foreach (var drive in _floppies)
         {
             if (drive.NextBitCycle < _nextDiskCycle) _nextDiskCycle = drive.NextBitCycle;
-            if (drive.Selected && drive.MotorOn && drive.Mounted) _selectedReaders++;
+            if (drive.Selected && drive.MotorOn && drive.Mounted)
+            {
+                _selectedReaders++;
+                preserved |= drive.Format == LightweightFloppyFormat.Ipf;
+            }
         }
+        _diskSerial.ConfigureReceiver(Cycle, preserved && _selectedReaders == 1 && !_diskDma.Writing, (Adkcon & 0x100) != 0);
+        _nextDiskCycle = Math.Min(_nextDiskCycle, _diskSerial.NextRecoveredCycle);
     }
 
     private void AdvanceCiasTo(long cycle)

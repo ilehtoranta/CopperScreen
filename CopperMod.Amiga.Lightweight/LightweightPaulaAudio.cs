@@ -465,7 +465,10 @@ internal sealed partial class LightweightPaulaAudio
                 return;
             }
 
-            if (_manualPlayback)
+            // DMA and CPU-fed samples share the high/low-byte loop. A CPU
+            // AUDxDAT write while the last DMA word is playing must survive
+            // DMAOFF and enter the next word when its interrupt is clear.
+            if (_manualPlayback || _holdingLatchWritten)
             {
                 if (_irqCheck == 0)
                 {

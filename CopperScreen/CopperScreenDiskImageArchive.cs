@@ -51,7 +51,7 @@ internal readonly record struct CopperScreenDriveDiskAssignment(int DriveIndex, 
 internal static class CopperScreenDiskImageArchive
 {
 	private const string ZipEntrySeparator = "#/";
-    private static readonly string[] SupportedDiskEntryExtensions = [".adf"];
+    private static readonly string[] SupportedDiskEntryExtensions = [".adf", ".ipf"];
 
 	public static bool TryReadDiskSet(string path, out CopperScreenArchiveDiskSet? diskSet, out string? error)
 	{
@@ -285,21 +285,9 @@ internal static class CopperScreenDiskImageArchive
 	private static bool TryLoadArchiveEntryInMemory(ZipArchiveEntry entry, out CopperScreenAdfImage disk)
 	{
 		disk = null!;
-		var extension = Path.GetExtension(entry.Name);
-		if (!extension.Equals(".adf", StringComparison.OrdinalIgnoreCase))
-		{
-			return false;
-		}
-
-		if (entry.Length != CopperScreenAdfImage.StandardAdfSize)
-		{
-			return false;
-		}
-
-		var data = new byte[CopperScreenAdfImage.StandardAdfSize];
-		using var input = entry.Open();
-		input.ReadExactly(data);
-		disk = CopperScreenAdfImage.FromAdfBytes(data, Path.GetFileName(entry.Name));
+        if (!IsSupportedDiskEntryName(entry.Name)) return false;
+        using var input = entry.Open();
+        disk = CopperScreenAdfImage.Read(input, entry.Length, entry.Name);
 		return true;
 	}
 

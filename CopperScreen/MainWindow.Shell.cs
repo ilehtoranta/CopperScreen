@@ -27,9 +27,9 @@ internal sealed partial class MainWindow
         _benchToggleButton.Content = "CopperBench — Not yet available";
         _benchToggleButton.IsEnabled = false;
         ToolTip.SetTip(_benchToggleButton, "CopperBench and CopperStart are not yet available in this build.");
-        _writeProtectButton.Content = "Disk writing — Not yet available";
+        _writeProtectButton.Content = "DF0 read-only";
         _writeProtectButton.IsEnabled = false;
-        ToolTip.SetTip(_writeProtectButton, "Disk writing is not yet available. Mounted disk images are read-only.");
+        ToolTip.SetTip(_writeProtectButton, "ADF writes stay in memory until Save ADF. IPF is always read-only.");
         _fullscreenButton.Content = "Fullscreen";
         _restartButton = CreateToolbarButton("Restart", () => _ = ResetRuntimeAsync(), "Restart the current Amiga; its unsaved work will be lost");
         _muteButton = CreateToolbarButton("Mute", ToggleMute, "Mute emulator audio");
@@ -83,7 +83,7 @@ internal sealed partial class MainWindow
         });
         _moreButton.Flyout = new Flyout { Content = more };
 
-        _insertDiskButton = CreateToolbarButton("Insert disk…", () => _ = OpenDiskPickerAsync(0), "Choose an ADF disk image or ZIP archive for DF0");
+        _insertDiskButton = CreateToolbarButton("Insert disk…", () => _ = OpenDiskPickerAsync(0), "Choose an ADF, IPF or ZIP archive for DF0");
         _ejectDiskButton = CreateToolbarButton("Eject", () => _ = EjectPrimaryDiskAsync(), "Eject the disk from DF0");
         _previousDiskButton = CreateToolbarButton("Previous", () => _ = InsertPreviousDiskAsync(), "Previous disk in this set (Shift+F12)");
         _nextDiskButton = CreateToolbarButton("Next", () => _ = InsertNextDiskAsync(), "Next disk in this set (F12)");
@@ -160,7 +160,7 @@ internal sealed partial class MainWindow
         _benchToggleButton.IsEnabled = false;
         var drive = state.Drives.FirstOrDefault();
         _diskStatus.Text = drive.HasDisk ? "DF0 · " + drive.DiskName : "DF0 · No disk inserted";
-        ToolTip.SetTip(_diskStatus, drive.DiskPath ?? "Choose Insert disk to mount an ADF or ZIP file.");
+        ToolTip.SetTip(_diskStatus, drive.DiskPath ?? "Choose Insert disk to mount an ADF, IPF or ZIP file.");
         _insertDiskButton.Content = drive.HasDisk ? "Change…" : "Insert disk…";
         _insertDiskButton.IsEnabled = !_settingsVisible;
         _ejectDiskButton.IsEnabled = (drive.HasDisk || drive.IsSwapPending) && !_settingsVisible;

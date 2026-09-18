@@ -11,11 +11,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     private byte _mouseButtons, _joystick0, _joystick1;
     private int _fireFrames;
     private bool _haveFrame, _audioAvailable, _faulted;
-    private readonly byte[]?[] _pendingAdf = new byte[]?[4];
+    private readonly CopperScreenAdfImage?[] _pendingAdf = new CopperScreenAdfImage?[4];
     private readonly int[] _insertDelay = new int[4];
     private readonly string?[] _diskPaths = new string?[4];
 
-    public CopperScreenLightweightSession(CopperScreenStartupOptions options)
+    public CopperScreenLightweightSession(CopperScreenStartupOptions options, CopperScreenLightweightSession? previous = null)
     {
         Validate(options);
         // Media decoding is mount-time only; none of the old execution machinery is created.
@@ -25,15 +25,18 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         ProfileName = options.Profile.DisplayName + " [Lightweight]";
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
-        _machine = new(new LightweightA500Configuration
-            { FramebufferWidth = 908, FloppyDriveCount = options.Profile.FloppyDriveCount });
+        var configuration = new LightweightA500Configuration
+            { FramebufferWidth = 908, FloppyDriveCount = options.Profile.FloppyDriveCount,
+                Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition))).ToArray() };
+        if (previous is not null && !previous.IsPaused) throw new InvalidOperationException("Pause before preparing a replacement machine.");
+        _machine = previous?._machine.CreateRestartCandidate(configuration) ?? new(configuration);
         try
         {
             _machine.LoadKickstart(rom);
             for (var i = 0; i < _machine.FloppyDriveCount; i++)
             {
                 var path = options.DriveDiskPaths[i];
-                if (path != null) _machine.MountAdf(i, GetAdf(CopperScreenDiskImageArchive.LoadDiskImage(path)));
+                if (path != null) CopperScreenDiskImageArchive.LoadDiskImage(path).Mount(_machine, i);
                 _machine.SetDriveWriteProtected(i, options.DriveWriteProtected[i] ?? true);
                 _diskPaths[i] = path;
             }
@@ -42,6 +45,29 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         catch { _machine.Dispose(); throw; }
     }
 
+    private static CopperDisk.AmigaHardfilePartitionMetadata? ConvertPartition(AmigaHardfilePartitionMetadata? p)
+        => p is null ? null : new()
+        {
+            DeviceName = p.DeviceName,
+            TableSize = p.TableSize,
+            SizeBlockLongs = p.SizeBlockLongs,
+            SectorOrigin = p.SectorOrigin,
+            Surfaces = p.Surfaces,
+            SectorsPerBlock = p.SectorsPerBlock,
+            BlocksPerTrack = p.BlocksPerTrack,
+            ReservedBlocks = p.ReservedBlocks,
+            PreAllocBlocks = p.PreAllocBlocks,
+            Interleave = p.Interleave,
+            LowCylinder = p.LowCylinder,
+            HighCylinder = p.HighCylinder,
+            NumBuffers = p.NumBuffers,
+            BufferMemoryType = p.BufferMemoryType,
+            MaxTransfer = p.MaxTransfer,
+            Mask = p.Mask,
+            BootPriority = p.BootPriority,
+            DosType = p.DosType,
+        };
+
     internal static void Validate(CopperScreenStartupOptions options, bool requireRomPath = true)
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
@@ -49,11 +75,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (p.Chipset != AmigaChipset.OcsPal || p.ChipRamSize != 512 * 1024 ||
             p.ExpansionRamSize != 512 * 1024 || p.ExpansionRamBase != 0xC00000 ||
             p.RealFastRamSize != 0 || p.RtgVramSize != 0 || p.RtcEnabled ||
-            p.FloppyDriveCount is < 1 or > 4 || options.HardDrives.Count != 0 ||
+            p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
             p.KickstartSource is not (CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.KickstartRom) ||
             p.KickstartVersion != KickstartVersion.Kickstart13)
-            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC, RTG or hard drives.");
+            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC or RTG.");
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             throw new NotSupportedException("Choose your Kickstart 1.3 ROM in Settings > Setup, or supply --kickstart <path>.");
         if (options.DriveDiskPaths.Skip(p.FloppyDriveCount).Any(path => path != null))
@@ -72,13 +98,6 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (input.IsMousePort(1))
             throw new NotSupportedException("Lightweight currently supports a mouse on port 1 only.");
-    }
-
-    private static byte[] GetAdf(CopperScreenAdfImage disk)
-    {
-        if (!Path.GetExtension(disk.Name).Equals(".adf", StringComparison.OrdinalIgnoreCase) || disk.Data.Length != 901120)
-            throw new NotSupportedException("Lightweight accepts standard 880 KiB ADF media only (including ADF entries in ZIP files).");
-        return disk.Data;
     }
 
     public int Width => 908;
@@ -125,7 +144,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         for (var i = 0; i < _machine.FloppyDriveCount; i++)
         {
             if (_pendingAdf[i] is not { } adf || _insertDelay[i]-- > 0) continue;
-            _machine.MountAdf(i, adf);
+            adf.Mount(_machine, i);
             _pendingAdf[i] = null;
             StatusText = $"Lightweight: DF{i} inserted " + CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]);
         }
@@ -177,7 +196,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             destination[i] = new(i, true, _machine.IsDriveMounted(i),
                 CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]), _diskPaths[i], drive.Cylinder, drive.Head,
                 drive.MotorOn, drive.Selected, _machine.IsDriveWriteProtected(i), drive.ActiveDma)
-                { IsSwapPending = _pendingAdf[i] != null, HasUnsavedChanges = _machine.IsDriveDirty(i) };
+                { IsSwapPending = _pendingAdf[i] != null, HasUnsavedChanges = _machine.IsDriveDirty(i),
+                    Format = _pendingAdf[i]?.Format ?? _machine.GetDriveFormat(i),
+                    CanExportAdf = _pendingAdf[i] is null && _machine.CanWriteDrive(i) };
         }
     }
 
@@ -187,7 +208,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool InsertLoadedDisk(int drive, string path, CopperScreenAdfImage disk, bool markChanged)
     {
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
-        var adf = GetAdf(disk); // Validate before changing the existing medium.
+        if (disk.Format == LightweightFloppyFormat.Adf && !Path.GetExtension(disk.Name).Equals(".adf", StringComparison.OrdinalIgnoreCase))
+            throw new NotSupportedException("ADF media must have an .adf filename.");
+        var adf = disk; // Fully prepared by the loader before changing the existing medium.
         if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or discard and eject it before replacing the disk.");
         if (markChanged)
         {
@@ -195,7 +218,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             _pendingAdf[drive] = adf;
             _insertDelay[drive] = 25;
         }
-        else { _machine.MountAdf(drive, adf); _pendingAdf[drive] = null; }
+        else { adf.Mount(_machine, drive); _pendingAdf[drive] = null; }
         _diskPaths[drive] = path;
         StatusText = $"Lightweight: DF{drive} " + (markChanged ? "swapping " : "inserted ") + CopperScreenDiskImageArchive.GetDisplayName(path);
         return true;
@@ -220,6 +243,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool SetDriveWriteProtected(int drive, bool writeProtected)
     {
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
+        if (!writeProtected && (_pendingAdf[drive]?.Format ?? _machine.GetDriveFormat(drive)) == LightweightFloppyFormat.Ipf)
+            return Reject("IPF media is permanently read-only.");
         _machine.SetDriveWriteProtected(drive, writeProtected);
         SetStatusText($"DF{drive}: " + (writeProtected ? "write protected" : "writable in memory; use Save ADF to keep changes"));
         return true;
@@ -241,7 +266,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public void Reset()
     {
         for (var i = 0; i < _machine.FloppyDriveCount; i++)
-            if (_pendingAdf[i] is { } adf) _machine.MountAdf(i, adf);
+            if (_pendingAdf[i] is { } adf) adf.Mount(_machine, i);
         _machine.Reset();
         ResetHostState();
     }
@@ -255,7 +280,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         CompletedInterlaceField = 0;
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
-        StatusText = "Lightweight experimental A500 — native Kickstart 1.3, standard ADF";
+        StatusText = "Lightweight experimental A500 — native Kickstart 1.3, ADF / read-only IPF / CopperHDF";
     }
     private void ApplyInput(short dx = 0, short dy = 0)
         => _machine.SubmitInput(new((byte)(_joystick0 | (_inputOptions.IsMousePort(0) ? 0 : 128)),

@@ -6,21 +6,22 @@ external package. The original package ID and namespace are retained for compati
 
 Independent PAL OCS A500 engine: Copper68k accurate 68000, 512 KiB Chip RAM,
 512 KiB slow RAM, native 256 KiB Kickstart 1.3 (v34), one to four standard
-880 KiB ADF drives (including ADF entries in ZIP through the host/runner).
+880 KiB ADF/read-only IPF drives (including selected ZIP entries through the host/runner),
+and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
 
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, synchronized
 keyboard transport and implemented digital-controller input; output is a full
-raster and 48 kHz stereo PCM. ECS/AGA, other CPU/ROM profiles, RTC, RTG, hard disks,
-preserved-track media and save-state
+raster and 48 kHz stereo PCM. ECS/AGA, other CPU/ROM profiles, RTC, RTG, physical
+IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
 
 Native Lemmings and bounded Hired Guns sessions have recorded acceptance; this is
 not complete game compatibility or exhaustive hardware conformance. Residual
 interlace instability and other limitations remain in the issue register.
 
-Use the public `LightweightA500Machine` API to load a ROM, mount/eject ADF
+Use the public `LightweightA500Machine` API to load a ROM, mount/eject floppy
 bytes, submit input, reset and execute frames. Read `Framebuffer` and
 `AudioSamples` from their reusable buffers before executing the next frame.
 The engine is single-owner; marshal UI input onto its execution thread.
@@ -50,7 +51,7 @@ Paula receiver and DMA controller. Simultaneous selected read streams are report
 unsupported; ordinary drive switching and multi-select control/status are supported.
 See the [disk contract and verification boundaries](../docs/engine/ARCHITECTURE.md#floppy-drives).
 
-Drives start write protected. `SetDriveWriteProtected(drive, false)` enables
+Drives start write protected. For ADF, `SetDriveWriteProtected(drive, false)` enables
 guest memory-to-disk DMA into the owned encoded tracks. `ExportAdf(drive)` copies
 standard sectors and rejects damaged/custom tracks that cannot be represented in
 an ordinary ADF. Export and persistence are host operations, outside emulated
@@ -59,10 +60,26 @@ eject. Changes stay in memory until saved; mounting from a ZIP never modifies th
 archive automatically. Native Workbench format/write/read and a fresh-machine
 save/reopen check have run on disposable media.
 
+`MountIpf(drive, bytes)` decodes preserved tracks at mount time;
+`LightweightIpfImage.Prepare` and `MountIpf(drive, prepared)` separate preparation
+from attachment. Exact bit lengths, index orientation, stored gaps, density and
+weak regions feed the causal integer receiver. IPF cannot be made writable or
+exported as ADF. `GetDriveFormat` and `CanWriteDrive` expose media capabilities.
+Protection compatibility is **incomplete**, including a reproduced trace-exception
+failure in the pinned CPU dependency. See the [storage record](../docs/engine/STORAGE.md).
+
+Set `Hardfiles` in `LightweightA500Configuration` before constructing the machine.
+`CopperDisk.AmigaHardfileConfiguration` exposes unit/path/protection/creation size,
+Auto/RDB/Partition mode and partition metadata. Configuration changes require
+restart. CopperHDF preserves `copperhdf.device` and Legacy's virtual Zorro II board
+identity; native OFS partition and RDB cold boots without DF0 have been exercised.
+Writable HDFs update their backing files, unlike explicit-save ADFs.
+
 The [OCS completion record](../docs/engine/OCS_COMPLETION.md) tracks current
 validation, the 1% performance requirement and remaining register/physical-timing
 boundaries. The measured build has performance acceptance with two explicit
-exceptions; OCS completion remains in progress. This does not certify all OCS
+exceptions; those exceptions apply only to that earlier build. The storage
+candidate has its own 1% performance gate. OCS completion remains in progress. This does not certify all OCS
 register combinations or external synchronization modes.
 
 The host does not need friend access, a Legacy Bus/Scheduler or CopperStart.

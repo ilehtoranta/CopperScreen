@@ -268,6 +268,131 @@ presentation rates. Normal PAL playback remains approximately 50 fields/second.
 Trial paths, build identities, correctness evidence and the original blocked runs
 are in [OCS_COMPLETION.md](OCS_COMPLETION.md). Earlier evidence remains intact.
 
+## Storage extension 2026-09-18 — native acceptance required
+
+The [storage candidate](STORAGE.md) is compared against accepted commit `6b5cb1b`.
+Previous performance exceptions do not transfer. Every workload must have a
+one-sided 95% upper frame-time regression bound at or below 1%; a harness label
+of INCONCLUSIVE is not acceptance under this requirement.
+
+The complete frozen reference is in local `artifacts/storage-2026-09-18/reference`.
+Candidate `candidate2` retains the **identical frozen runner and CPU dependencies**
+and replaces only the engine and its changed CopperDisk dependency:
+
+| Binary | SHA-256 |
+| --- | --- |
+| Reference engine | `754C8A3DE511F65DD82E52F4485F89E888E0A7E6921736A019CC4B44BA5EB7C0` |
+| Candidate engine | `5EB543BCF6AD41E718D72C9ADA2445C64D05341BF233AD59584C83318A076FAA` |
+| Candidate CopperDisk | `4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F` |
+| Frozen runner, both sides | `40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF` |
+
+`retention-1` is INVALID: candidate startup failed because an internal constructor
+signature used by the frozen runner had changed. The original binary entry point
+was restored; a mount-time rejection for IPF cell intervals below one CCK was also
+added before the new freeze. Its incomplete samples are not pooled with later runs.
+`retention-2` completed the unchanged homogeneous-retention-v1 six-pair protocol, Normal
+priority, freshly verified logical CPU 2/SMT sibling 3, host-load policy v2, all
+complete-workload fingerprints and zero measured allocations. Builds/tests are
+excluded from the series. All 36 samples are valid, have matching complete-workload
+fingerprints and report zero measured allocations. The result is **not accepted**
+under the 1% requirement: native Lemmings needs an explicit exception or further
+optimization. Acceptance was requested; no earlier exception is carried forward.
+
+| Workload | Reference mean FPS | Candidate mean FPS | Paired frame-time change | One-sided 95% upper bound | Disposition |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Lores | 375.69 | 382.88 | −1.89% | −0.39% | PASS |
+| Hires | 337.94 | 345.84 | −2.31% | +0.60% | PASS |
+| Native Lemmings | 255.27 | 252.57 | +1.10% | +3.05% | ACCEPTANCE_REQUIRED |
+
+Candidate ranges are 379.93–386.45, 340.29–349.37 and 238.41–257.03 FPS,
+respectively. Frame-time statistics use all six paired log ratios and the frozen
+one-sided Student-t calculation, not ratios of mean FPS. These are uncapped engine
+throughput results with real PCM; normal PAL presentation remains about 50 fields/s.
+Local raw `retention-2/samples.json`, `summary.json`, workload logs, `protocol.log`
+and `telemetry.jsonl` retain every sample, placement check and host-load observation.
+
+Active IPF and HDF require separate diagnostics because the reference does not
+execute these features. The active-IPF fixture adds continuously serviced disk
+DMA to the synthetic wide Paula workload using Full Contact disk 1. The HDF
+[probe](../../scripts/probes/CopperHdfThroughput/Program.cs) measures validated
+512-byte synchronous gateway transfers with OS file caching; it is not emulated
+FPS. Neither result substitutes for native compatibility or retention acceptance.
+
+Final candidate diagnostics, logical CPU 2 and Normal priority, run after the
+retention series with no concurrent tests/builds/probes: active IPF **263.53 FPS**,
+HDF **54.732 MiB/s write / 75.796 MiB/s read**, all with **zero measured allocations**.
+IPF runs 600 warmup + 3,600 measured frames; cycle `596828538`, CPU
+`F86637B0C371B6EF`, hardware `C6EC0E064201FD0F`, output `97B8ED42D20D7163`.
+HDF measures 131,072 validated 512-byte requests per direction, with successful
+readback and Update. Logs are `ipf-active-final.log` and `hdf-active-final.log`.
+These bounded diagnostics do not collect the formal host-load telemetry and are
+not additional acceptance samples.
+
+## Copper WAIT border correction 2026-09-18 — INVALID / RERUN
+
+The [Beast border correction](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18)
+supersedes the storage engine above with
+`AF2550B2F47AC851AD2E29B5ECED7F7B39BB2944E63DC9C0931BB2C7ED38DAAF`.
+CopperDisk and the frozen runner remain unchanged. A fresh unchanged six-pair
+homogeneous-retention-v1 series against `6b5cb1b` is recorded under local
+`artifacts/beast-border-2026-09-18/retention/`. Previous exceptions do not transfer;
+the preceding storage +3.05% native result does not establish acceptance for this
+engine. The complete candidate is frozen; this task ran no builds or tests while
+measurements were active. The first series stopped during native R3 because host-load
+policy v2 detected a competing `dotnet.exe[25020]` test/build/benchmark. It is
+**INVALID / RERUN**, with raw samples and telemetry retained; no results are
+pooled with the fresh `retention-retry/` series. That retry also stopped, during
+lores R1, on competing `dotnet.exe[16996]`. Neither series establishes acceptance.
+Do not repeatedly wait for or terminate unrelated work; rerun the same frozen
+candidate in a fresh directory when concurrent tests/builds have finished.
+
+For diagnostic completeness only, the first series completed six lores and hires
+pairs before the interruption. Lores averaged 367.33 reference / 373.42 candidate
+FPS, paired frame time −1.71%, upper bound +2.19%; hires averaged 321.97 / 334.90
+FPS, paired frame time −3.90%, upper bound −1.10%. Only two native pairs completed.
+**These are partial results from an invalid series, not acceptance measurements.**
+The earlier progress report's hires PASS was provisional and is superseded by the
+whole-series INVALID status. All 28 completed samples matched their complete-workload
+fingerprints and reported zero measured allocations, but the missing valid full
+series leaves the owner's ≤1% requirement unresolved. No exception is requested
+from invalid evidence, and no earlier exception transfers to this candidate.
+
+## Trace development pin and Paula transition 2026-09-18 — INVALID / RERUN
+
+The [trace fix](CPU_TRACE.md) supersedes the preceding candidate. Frozen CPU
+SHA-256 is `0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC`;
+engine SHA-256 is `280B6B78321145C018135406409189B68F22AE85944285DFFA93E3294E876903`.
+CopperDisk remains `4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F`.
+The retained runner, baseline `6b5cb1b`, native input and six-pair protocol remain
+unchanged. The fresh candidate directory is
+`artifacts/trace-exception-2026-09-18/candidate/`; raw evidence is `retention/`
+under the same dated directory.
+
+Topology/placement and telemetry were rechecked by homogeneous-retention-v1,
+on logical CPU 2 with SMT sibling 3 protected and Normal priority. This task ran
+no builds, tests or other native runners during measurement. Host-load policy v2
+invalidated the series during low-resolution sampling on a competing
+`dotnet.exe[11284]` test/build/benchmark. Preserve `INVALID.txt`, `samples.json`
+and `telemetry.jsonl`; do not pool this attempt with earlier series or calculate
+an acceptance bound from its partial samples.
+
+**The one-sided 95% upper bound ≤1% requirement is not established.** No exception
+is requested from invalid data. Rerun the unchanged frozen candidate in a fresh
+evidence directory when competing work is finished. The completed production,
+CPU, engine, disk and host checks and bounded Thunderbolt gameplay are correctness
+evidence only. Earlier approvals do not transfer to this candidate.
+
+### Owner acceptance, 2026-09-18
+
+After the trace/Paula result above, the owner explicitly accepted this unresolved
+gate and authorized committing and pushing the current changes, followed by a
+fresh benchmark run. This is a one-off acceptance of the identified frozen
+candidate (CPU `0B9F1B4C...`, engine `280B6B78...`, CopperDisk `4F02010A...`).
+It permits committing the current development build without a valid ≤1% bound.
+The measurements remain **INVALID / RERUN**; this acceptance does not turn them
+into passing measurements, approve future builds or close unverified native
+coverage. Follow-up benchmarks retain the same baseline, workloads and protocol.
+
 ## Historical portability boundary
 
 The v1 harness above supplies a separate homogeneous-core/SMT placement rule,

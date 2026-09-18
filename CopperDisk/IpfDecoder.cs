@@ -77,6 +77,17 @@ public static class IpfDecoder
             {
                 if (descriptor.BlockCount == 0)
                 {
+                    // IMGE records for unformatted outer cylinders still describe
+                    // physical media. They must not disappear from the drive model.
+                    if (descriptor.DensityType == 1)
+                    {
+                        var bits = descriptor.TrackBits == 0 ? 100_000 : checked((int)descriptor.TrackBits);
+                        ValidateTrackLength(bits);
+                        tracks.Add(new IpfTrack(descriptor.Cylinder, descriptor.Head,
+                            bits, 0, new byte[(bits + 7) / 8],
+                            AmigaTrackFeatures.PreservedTrackData | AmigaTrackFeatures.NoFlux,
+                            [new AmigaTrackRegion(0, bits, AmigaTrackFeatures.NoFlux)], descriptor.DensityType));
+                    }
                     continue;
                 }
 
@@ -104,7 +115,7 @@ public static class IpfDecoder
 
                 var id = Encoding.ASCII.GetString(data.Slice(offset, 4));
                 var chunkSize = checked((int)ReadUInt32(data, offset + 4));
-                if (chunkSize < 12 || offset + chunkSize > data.Length)
+                if (chunkSize < 12 || chunkSize > data.Length - offset)
                 {
                     throw new IpfDecodeException($"Invalid IPF chunk size {chunkSize} for {id} at offset 0x{offset:X}.");
                 }
@@ -121,11 +132,13 @@ public static class IpfDecoder
                         break;
                     case ImageChunkId:
                         var imageDescriptor = ReadImageDescriptor(data, payloadOffset, chunkSize - 12);
-                        _imageDescriptors[imageDescriptor.DataId] = imageDescriptor;
+                        if (_imageDescriptors.Count >= 512 || !_imageDescriptors.TryAdd(imageDescriptor.DataId, imageDescriptor))
+                            throw new IpfDecodeException("IPF has excessive tracks or duplicate IMGE data identifiers.");
                         break;
                     case DataChunkId:
                         var dataDescriptor = ReadDataDescriptor(data, payloadOffset, chunkSize - 12, nextOffset);
-                        _dataDescriptors[dataDescriptor.DataId] = dataDescriptor;
+                        if (!_dataDescriptors.TryAdd(dataDescriptor.DataId, dataDescriptor))
+                            throw new IpfDecodeException("IPF contains duplicate DATA identifiers.");
                         nextOffset = checked(nextOffset + dataDescriptor.Data.Length);
                         if (nextOffset > data.Length)
                         {
@@ -150,6 +163,7 @@ public static class IpfDecoder
             var trackBits = image.TrackBits == 0
                 ? descriptorBits
                 : checked((int)image.TrackBits);
+            ValidateTrackLength(trackBits);
             if (trackBits < descriptorBits)
             {
                 throw new IpfDecodeException($"Track {image.Cylinder}/{image.Head} descriptor length {trackBits} bits is shorter than its block streams ({descriptorBits} bits).");
@@ -185,7 +199,48 @@ public static class IpfDecoder
                 startBit,
                 writer.ToArray(),
                 context.Features | AmigaTrackFeatures.PreservedTrackData,
-                context.Regions);
+                context.Regions,
+                image.DensityType,
+                CreateCellWeights(image.DensityType, blocks, trackBits, startBit));
+        }
+
+        private static void ValidateTrackLength(int bits)
+        {
+            // Bound untrusted expansion before allocating track data or timing maps.
+            if (bits is <= 0 or > 1_000_000)
+                throw new IpfDecodeException($"Unsupported IPF track length {bits} bits.");
+        }
+
+        private static ushort[]? CreateCellWeights(uint density, ImageBlock[] blocks, int bits, int start)
+        {
+            if (density is 1 or 2) return null;
+            if (density is < 3 or > 9) throw new IpfDecodeException($"Unknown IPF density profile {density}.");
+            // SPS profile selectors describe relative durations, not a different
+            // spindle speed. Positions follow the stored block/gap stream and
+            // wrap at index, exactly like the encoded data.
+            var weights = new ushort[bits];
+            Array.Fill(weights, (ushort)1000);
+            var position = start;
+            for (var block = 0; block < blocks.Length; block++)
+            {
+                var weight = density switch
+                {
+                    3 when block is >= 4 and <= 6 => 945 + (block - 4) * 50,
+                    4 when block <= 2 => 945 + block * 50,
+                    5 when block == 5 => 1050,
+                    6 when block == 1 => 1100,
+                    6 when block == 2 => 900,
+                    7 when block == 1 => 1050,
+                    8 => block switch { 1 => 1100, 2 => 1050, 4 => 950, 5 => 900, 6 => 850, _ => 1000 },
+                    9 when block is >= 1 and <= 32 => (blocks[0].GapValue & (1u << (block - 1))) != 0 ? 950 : 1050,
+                    _ => 1000
+                };
+                var previousGap = density is 3 or 4 ? checked((int)blocks[(block + blocks.Length - 1) % blocks.Length].GapBits) : 0;
+                for (var offset = -previousGap; offset < blocks[block].BlockBits; offset++)
+                    weights[(position + offset + bits) % bits] = (ushort)weight;
+                position = (int)((position + blocks[block].BlockBits + blocks[block].GapBits) % bits);
+            }
+            return weights;
         }
 
         private static ImageBlock[] ReadBlocks(InfoDescriptor info, ImageDescriptor image, ReadOnlySpan<byte> data)

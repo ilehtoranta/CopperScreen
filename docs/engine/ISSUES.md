@@ -1,8 +1,9 @@
 # Lightweight A500 issues and limitations
 
-Updated 2026-09-18 for the ongoing collision, UART, writable-ADF, paddle and
-light-pen work. The latest candidate is not yet accepted; see the
-[OCS completion record](OCS_COMPLETION.md). Scope is the [supported PAL OCS A500 profile](../../CopperMod.Amiga.Lightweight/README.md).
+Updated 2026-09-18 for the storage work following the accepted OCS candidate.
+Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
+The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
+performance exceptions. Scope is the [supported PAL OCS A500 profile](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
 For the broader ECS/AGA, CPU, storage and host transition, see the
 [product completion roadmap](ROADMAP.md), which separates missing implementation
@@ -36,10 +37,15 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-DISK-007 | Sync / byte status / reset | Unverified; OPEN | Obtain reset and coincident-write expectations. |
 | LWA-DISK-008 | Ideal-ADF mechanics | Bounded model; OPEN | Add an effect only when supported content demonstrably needs it. |
 | LWA-DISK-010 | Receiver-window phase | Approximation; OPEN | Measure FAST changes, window completion and readback phases. |
+| LWA-DISK-013 | Preserved IPF receiver / native compatibility | Implemented bounded model; OPEN | Full Contact completes a disk-two fight replay; Beast responds to outdoor game controls after a correctly timed swap. Thunderbolt now passes protection and enters gameplay; disk-two handling remains unverified. Verify density/weak/no-flux against independent hardware traces; bounded native success is not receiver certification. |
+| LWA-CPU-001 | 68000 trace exception in pinned Copper68k | Fixed in development pin | `1.4.1-trace.1` passes scalar/batched vector-9 integration and Thunderbolt protection. Source fix belongs to CopperMod; package is local and unpublished. See [CPU_TRACE.md](CPU_TRACE.md) for restore requirements, architecture and coverage. |
+| LWA-AUDIO-004 | CPU-fed word after DMAOFF | Fixed bounded transition | Queued AUDxDAT now survives the last DMA word and raises its manual-playback IRQ. Four discriminating channel/byte-phase cases and Thunderbolt gameplay pass. Exact physical interrupt phase remains within the audio uncertainties above. |
+| LWA-HDF-001 | CopperHDF integration | Implemented; bounded native OFS proof | Retain partition/RDB cold-boot/write/flush/reopen evidence; other filesystem handlers need supplied media. Physical IDE/SCSI and host directories are separate features. |
 | LWA-VIDEO-002 | Hires transitions | Unverified; OPEN | Investigate supported raster/scroll/mode-transition failures. |
 | LWA-VIDEO-005 | HAM edges | Mode implemented; edges OPEN | Establish hold reset, mid-line mode and sprite interaction phases. |
 | LWA-VIDEO-006 | Sprite sequencing edges | Early-blank corruption repaired; edges OPEN | Verify comparator reuse, manual control and stolen-slot boundaries. |
 | LWA-VIDEO-008 | Dual-playfield edges | Ordinary mode implemented; undocumented modes/physical phases OPEN | Broaden native gameplay; establish priority codes 5–7 and mode-write boundary expectations. |
+| LWA-COPPER-001 | WAIT wake-up under bitplane DMA | Confirmed early colour write; repaired 2026-09-18 | WAIT wake-up now yields to higher-priority DMA. Six-plane Beast border starts at x288 instead of x272; see the [native record](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18). Other undocumented control-state edges remain unverified. |
 | LWA-CIA-001 | Board TOD pulse phase | Unverified; OPEN | Obtain board pulse-to-counter/IRQ evidence. |
 | LWA-CIA-002 | TOD comparator / reset | Unverified; OPEN | Establish write-trigger and latch/reset behavior. |
 | LWA-CIA-003 | CIA-to-Paula synchronization | Lost held IRQ repaired; sub-CCK edges OPEN | Obtain acknowledgement/INTREQR/IPL phase evidence. |
@@ -342,8 +348,15 @@ I/O gaps recorded above. The new OCS interfaces do not implicitly close them.
 
 CopperStart/Legacy restoration is a deferred host feature, not a timing defect or
 a dependency of Lightweight. Follow the [optional adapter boundary](../../CopperScreen/COPPERSTART_RESTORATION.md).
-Other chipset/CPU profiles, RTC, RTG, hard disks and save-state
+Other chipset/CPU profiles, RTC, RTG, physical IDE/SCSI controllers and save-state
 compatibility are outside current product scope.
+
+The storage change also repairs TOD high-byte reads while CRB.ALARM is selected:
+they no longer leave a stale persistent TOD latch. Operation Thunderbolt passes
+its PAL count check after this correction. The independent CPU trace defect and
+subsequently exposed audio transition are now repaired in the local development
+build. The latch regression and evidence are recorded in [STORAGE.md](STORAGE.md);
+this does not close physical TOD/comparator uncertainties above.
 
 For each revisit record the build/profile, minimal reproducer, observed/expected
 cycle and state, evidence source, resolution and affected checks. Keep IDs stable

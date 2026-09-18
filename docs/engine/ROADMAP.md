@@ -27,13 +27,13 @@ for the implemented four-drive read support; verification boundaries remain expl
 | NTSC | Host rejects non-OCS-PAL; engine clock geometry and Paula frequency are PAL-specific. | Machine timing configuration across beam, CIA/TOD, disk, audio and host pacing. Changing a display label is insufficient. |
 | DF0–DF3 | Implemented: configurable 1–4 drives, independent media/mechanics/spindle phases, shared CIA status and Paula receiver/DMA, external DD identification, host controls/status and indexed scripted swaps. Native Workbench four-drive detection/media changes exercised. | Broaden native loader verification; physical overlapping read sources remain explicitly unsupported (LWA-DISK-011). |
 | Writable floppy | Guest write DMA, protection, strict ADF export and desktop Save ADF implemented; native format/write/read/reopen exercised. | Final candidate replay/performance acceptance; physical FIFO/splice timing remains unverified. |
-| More floppy formats | CopperDisk supports more formats, but host/engine admit only standard 880 KiB ADF. | Separate lossless sector-format loading from preserved-track/flux execution. IPF/extended ADF/SCP need correct track, weak-data and receiver behavior, not conversion to ordinary ADF. |
+| More floppy formats | Standard ADF and read-only IPF are integrated through DF0–DF3, ZIP selection and scripted swaps. IPF preserves raw tracks and uses a causal receiver; protected-game compatibility remains incomplete. | Close the CPU trace blocker and remaining native second-disk/gameplay failures; validate receiver physics independently. Extended ADF/SCP execution remains separate. See [storage](STORAGE.md). |
 | 68010 | Pinned Copper68k exposes M68010; Lightweight hardcodes M68000 and host CPU choices lack 68010. | Model selection, exceptions/VBR/reset/interrupt and bus-clock integration, configuration/UI, targeted CPU integration and native replay. |
 | 68EC020 / 68020 / 68030 / 68040 | Pinned Copper68k exposes interpreters; host metadata contains several later models but rejects them for Lightweight. | Per-model addressing, instruction/bus timing, interrupt boundaries and memory access. Separately scope cache/MMU/FPU behavior rather than inferring completeness from the model name. |
 | 68040 JIT / 68060 | Package documents opt-in 68040 JIT requiring a JIT-capable bus; Lightweight implements IM68kBus only. No M68060 model is exposed in the inspected package API. | JIT bus/snapshot/invalidation integration and parity are separate; 68060 would require CPU-package work as well as engine integration. |
 | RAM and expansion | Constructor enforces exactly 512 KiB Chip + 512 KiB slow; host rejects true Fast RAM. Addressing contains unconditional 24-bit masks and OCS pointer limits. | Supported Chip/slow/Fast RAM maps, chipset-specific DMA addressing, CPU-specific address width and expansion discovery where required. |
 | Other Kickstarts / Workbench | Host explicitly validates native KS 1.3; low-level ROM loading alone does not establish another machine profile. | ROM mapping/version validation, reset/overlay and native boot/application replay for each supported ROM/profile. Native ROM executes OS services; broad Workbench support does not require reimplementing those services in CopperStart. |
-| Hard disk / HDF | Settings/profile metadata and excluded Legacy code exist; active host rejects hard drives, and no active block controller/boot device was found. | Choose guest-visible device/controller, boot discovery/driver path, block I/O, geometry/partition support, persistence and native cold-boot/read/write tests. |
+| Hard disk / HDF | CopperHDF virtual Zorro II interface ported from pinned Legacy, with file-backed persistence, RDB/partition metadata, host settings and native OFS cold boot without DF0. | Complete storage acceptance; additional filesystems need supplied handlers. Physical IDE/SCSI and host directories are outside this milestone. See [interface/evidence](STORAGE.md). |
 | Keyboard and controllers | Synchronized keyboard and digital controls work; startup/resync/reset chord and general CIA clocked serial/CNT modes have gaps. Ideal paddle counters and a light-pen latch are newly implemented. Mouse is allowed on the first port only. | Complete required protocol/recovery paths, configurable port routing and native controls coverage. CD32/paddles/light pen/adapters are separate peripheral scopes. |
 | Paula serial / parallel ports | Paula UART transmit/receive, status, interrupts, break and pin API implemented. General parallel transport and CIA pin modes remain separate gaps. | Complete UART physical phase verification; add optional host transports separately. |
 | RTC | Explicitly rejected. | Select the RTC model per machine, implement registers/time policy and persistence, then native reads/set-time/reset checks. |
@@ -79,8 +79,9 @@ to other previously implemented features such as drives and hard disks.
    beam-counter/synchronization gaps. Extend native game/Workbench/input coverage
    and meet the owner's 1% performance ceiling; see [the active record](OCS_COMPLETION.md).
 2. **Extend storage.** Finish final-candidate writable-ADF save/reopen and host checks.
-   Design the first hard-disk interface and its boot path, then implement HDF/block
-   I/O. Avoid tying ordinary storage usability to completion of AGA.
+   Finish IPF protection/native compatibility and the separate 1% performance
+   gate for the implemented CopperHDF/ADF/IPF candidate. Avoid tying ordinary
+   storage usability to completion of AGA.
 3. **Add configurable machine resources.** Implement declared Chip/slow/Fast RAM
    layouts and required expansion discovery, newer ROM profiles and NTSC timing.
    Integrate 68010 as the smaller CPU-model step, while retaining 68000 regressions.
@@ -108,17 +109,17 @@ position. Shared select, step, side and motor lines must address the selected dr
 correctly, including defined multiple-selection behavior. Four UI disk slots backed
 by one drive object would not be four-drive support.
 
-**Hard disks:** an HDF file is storage, not an emulated interface. Choose an
-A500-compatible expansion/boot device or a declared virtual block device for that
-profile; if targeting an A600/A1200-compatible board, plan its IDE/controller path
-explicitly. Define RDB/partitioned versus partition-image support and filesystem
-ownership before coding. A host-directory filesystem is a separate device/service,
-not automatically the same feature as hardfile support.
+**Hard disks:** the selected A500 interface is virtual Zorro II CopperHDF,
+preserving `copperhdf.device`, RDB/partition discovery and filesystem ownership.
+The [storage contract](STORAGE.md) defines its native boot and persistence checks.
+A600/A1200 IDE and a host-directory filesystem are separate interfaces.
 
-**CPUs:** the installed `Copper68k 1.4.1-boundary.1` README/XML expose M68000,
+**CPUs:** the original `Copper68k 1.4.1-boundary.1` API audit exposed M68000,
 M68010, M68EC020, M68020, M68030 and M68040. This audit verifies API availability,
 not complete core correctness. CPU fixes stay in CopperMod and arrive through a
-new pinned package when required. Later CPU clock rates and bus widths must map
+new pinned package when required. The current unpublished development pin is
+[`1.4.1-trace.1`](CPU_TRACE.md), which repairs the 68000 trace exception.
+Later CPU clock rates and bus widths must map
 to the engine's single canonical timebase; do not preserve a 68000-specific
 CPU-cycle/CCK assumption merely by switching the factory argument.
 

@@ -8,10 +8,11 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 - PAL OCS A500 with a Motorola 68000.
 - 512 KiB Chip RAM and 512 KiB slow RAM.
 - Native Kickstart 1.3 ROM, supplied by the user.
-- One to four standard 880 KiB ADF floppy drives (DF0–DF3), including ADF images in ZIP. The default remains one write-protected drive; guest writes and explicit Save ADF are under [OCS completion validation](docs/engine/OCS_COMPLETION.md).
+- One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
+- File-backed CopperHDF virtual hard disks with partition/RDB discovery and native Kickstart 1.3 OFS boot. See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
 
-CopperStart, Legacy, ECS/AGA, accelerators and hard disks are not supported by
+CopperStart, Legacy, ECS/AGA, accelerators and physical IDE/SCSI controllers are not supported by
 the current application. Unsupported settings are reported explicitly rather
 than silently changing the configured machine.
 
@@ -87,7 +88,7 @@ This creates build artifacts; it does not publish a release.
 | --- | --- |
 | CopperScreen | Desktop interface, input, presentation and audio delivery. |
 | [CopperMod.Amiga.Lightweight](CopperMod.Amiga.Lightweight/README.md) | Independent A500 engine with a single execution clock. |
-| [CopperDisk](CopperDisk/README.md) | Amiga disk-image decoding. Library format support is broader than the application's current ADF-only drive. |
+| [CopperDisk](CopperDisk/README.md) | Disk-image decoding and hardfile metadata/range handling. Library floppy formats remain broader than the application's ADF/IPF support. |
 | CopperMod.Amiga.Lightweight.Runner | Headless execution and workload measurement. |
 | [Copper68k](https://github.com/ilehtoranta/CopperMod/tree/main/Copper68k) | Shared CPU interpreter, consumed as a pinned NuGet package. |
 

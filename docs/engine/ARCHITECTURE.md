@@ -45,6 +45,11 @@ disable transitions, completing with their accepted address and physical phase.
 Device-specific uncertainty about real hardware is recorded in the issue register;
 it does not justify changing implemented ordering during unrelated work.
 
+Copper WAIT requires a free memory slot to wake after its comparison succeeds;
+higher-priority DMA can defer that transition even though no instruction word is
+read during wake-up. The following MOVE retains its ordinary two-word bus path.
+This is distinct from palette presentation delay; see [the correction record](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18).
+
 Advance hardware through CPU instruction and accepted interrupt-entry retirement,
 including internal cycles after the final bus access. A CPU already beyond the
 field target must not leave hardware unable to complete that field (LWA-EXEC-001).
@@ -57,7 +62,7 @@ true fast RAM. Low-level API capabilities do not expand the supported host profi
 ## Floppy drives
 
 `FloppyDriveCount` connects DF0 through DF3 in order (1–4; default 1). Each drive
-owns its standard-ADF tracks, cylinder, motor latch, readiness/change state and
+owns its standard-ADF or preserved IPF tracks, cylinder, motor latch, readiness/change state and
 nominal 300 RPM spindle phase. CIA-B PRB bits 3–6 select the drives; side, direction,
 step and motor are shared. Selected status inputs combine as active-low lines.
 External empty DD drives identify as `DRT_AMIGA` on READY with the motor off;
@@ -71,12 +76,17 @@ receiver/DMA state while retaining mounted media and cylinders. One shared Paula
 receiver owns partial bytes, sync and slow-recovery state; one DMA FIFO owns
 accepted transfers. Disk arrivals still execute before the disk DMA phase.
 The next disk event is recomputed at disk/control/media events, with no additional
-per-CCK polling or allocation. Tracks are encoded only at mount time.
+per-CCK polling or allocation. Tracks are encoded/decoded only at mount time.
+IPF geometry has an exact bit count and optional cumulative integer cell deadlines;
+head/seek changes map elapsed spindle time into the new track. Index is independent
+of FAST/slow receiver mode. A separate causal receiver turns preserved transitions
+into recovered cells. The standard ADF path retains its compact equivalent model.
+See the [storage contract](STORAGE.md) for weak/no-flux, density and validation limits.
 
 Multiple selection fans out controls and combines status. More than one selected,
 running, mounted read source reports unsupported: this ideal-ADF implementation
 does not model overlapping physical read pulses. Standard-ADF write DMA is now
-implemented; HD media and analog recovery remain outside scope. See LWA-DISK-011
+implemented; HD media and silicon-exact analog recovery remain outside scope. See LWA-DISK-011
 and LWA-DISK-012 in the [issue register](ISSUES.md).
 
 In the desktop app, select **Settings > Floppy Drives > Connected** and restart to change
@@ -157,6 +167,20 @@ Inactive sequencing still computes its next control deadline. Hires composition
 uses the existing work mask to prepare pending playfield comparisons. A lone
 eligible sprite can stop comparing after both of its playfield bits are latched;
 read-clear re-enables that work, and overlapping groups still run the full test.
+
+## CopperHDF
+
+The optional virtual Zorro II board preserves the pinned Legacy CopperHDF identity
+and `copperhdf.device` protocol. CopperDisk owns file ranges, RDB discovery and
+filesystem metadata. Lightweight owns Autoconfig, diagnostic relocation, guest
+device/boot registration and bounded synchronous gateways on the machine owner.
+There is no scheduler import, recursive CPU dispatch, per-CCK HDF polling or runtime
+Legacy dependency. Non-quick completion returns through a guest ReplyMsg thunk;
+Exec calls run as ordinary CPU instructions. Guest RAM and whole transfer ranges
+are validated before transfer; a 512-byte stack buffer tracks completed bytes.
+Writable file handles flush on Update/Flush and disposal. Quiesced restart candidates
+can share a backing handle until construction succeeds, so failed construction
+leaves the current mount usable. Full interface and verification: [STORAGE.md](STORAGE.md).
 
 ## Newly implemented OCS interfaces
 

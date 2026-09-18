@@ -33,7 +33,8 @@ live checks; replay success is not a fresh hardware-correctness claim.
 
 Use `--drives 4`, `--adf` for DF0 and `--adf1`, `--adf2`, `--adf3` for the external
 drives. The default remains one connected drive; mounting an image in a disconnected
-drive is rejected. All images must contain standard 880 KiB ADF data; ZIP is supported.
+drive is rejected. These original checks use standard 880 KiB ADF data; ZIP is supported.
+Read-only IPF is now also accepted; its separate compatibility status is below.
 
 ```powershell
 dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release -- `
@@ -258,3 +259,210 @@ The three UART probes repeated for 900 fields each and retain their earlier comp
 fingerprints after removing diagnostic FPS/allocation totals; logs/captures use
 the suffix `-final-optimization`. The existing UART physical-phase uncertainty
 and outstanding manual desktop dialog checks are unchanged.
+
+## Storage extension 2026-09-18
+
+This candidate follows `6b5cb1b`; its performance budget is independent of the
+earlier OCS exceptions. See [STORAGE.md](engine/STORAGE.md) for interface, source
+provenance, test scope and the unresolved IPF/CPU failures. Raw local evidence
+is under ignored `artifacts/storage-2026-09-18/`.
+
+The final frozen engine is
+`5EB543BCF6AD41E718D72C9ADA2445C64D05341BF233AD59584C83318A076FAA`,
+with CopperDisk `4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F`.
+The native ROM remains SHA-256
+`EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53`.
+
+### Writable ADF retention
+
+The final engine repeats native Workbench format/write/read/export (14,000 fields)
+and a separate-machine reopen (3,500 fields), retaining every earlier fingerprint:
+
+| Run | Cycle | CPU | Hardware | Complete picture/PCM output |
+| --- | --- | --- | --- | --- |
+| Format/write/export | 1989428000 | `81D3D33E1508A04B` | `D26342811EFE536A` | `73AAEB98672A0FB1` |
+| Fresh reopen | 497357000 | `26BF001A5044702A` | `FFB7A4170792D93A` | `A07E2B7BC331854E` |
+
+Logs/captures: `adf-format-final`, `adf-reopen-final`; exported disposable disk
+`adf-formatted-final.adf`. Final images were inspected and show the proof text and
+WRITE/REOPEN TEST FINISHED markers. Both supplied-input native host tests pass in
+the 93-test host suite (`host-final2.log`).
+
+### Native CopperHDF OFS
+
+[prepare-lightweight-hdf-native.py](../scripts/prepare-lightweight-hdf-native.py)
+creates disposable fixtures from a supplied 880 KiB OFS Workbench 1.3 ADF/ZIP in
+a **new** output directory. The preparation changes a startup script and block
+checksums; guest execution performs all required Format/Copy/file-write operations.
+It creates a bootable partition HDF and a blank RDB HDF with partition offset 32
+sectors. ROM/filesystem code is never included in the repository.
+
+Use the Release runner with the native ROM and wide output:
+
+1. Partition: `--hdf <fixtures>/partition.hdf --frames 1800`; omit all floppy media.
+2. RDB setup: `--adf <fixtures>/format-rdb.adf --hdf <fixtures>/rdb.hdf --frames 17000`.
+   The guest Quick Formats DH0, copies Workbench and writes its ready marker.
+3. RDB cold boot: `--hdf <fixtures>/rdb.hdf --frames 2000`; omit all floppy media.
+   The copied startup now writes and reads `hdf-proof.txt` from its own SYS volume.
+4. Shut down, independently verify each image, then repeat each no-floppy boot in
+   a fresh process and verify again. Add unique `--boot-probe` directories to retain
+   register logs and BMPs. Probe FPS is diagnostic only.
+
+The complete corrected sequence is retained in `final-native2/`: `rdb-format`,
+`partition-write`, `rdb-write`, both `*-reopen` and both `*-final` repetitions.
+Images show RDB FORMAT COPY FINISHED or HDF COLD BOOT WRITE FINISHED with the proof
+text. Both no-floppy final runs report `adf=False`, `unsupported=none`. Earlier
+`final-native/` and `hdf-rdb-format-probe3` attempts are superseded; the latter
+used an unsupported shell append form and is not counted as a completed recipe.
+
+[verify-lightweight-ofs-proof.py](../scripts/verify-lightweight-ofs-proof.py)
+reads the files independently of CopperDisk and validates root/header/data block
+checksums, file ownership/sequence, length and content. Use `--offset-sectors 32`
+for the RDB fixture and zero for the partition fixture. Both final files contain
+33 bytes, SHA-256
+`D09F9C0F01892196C725C46E6D4B5CF0593682782742F2A9353053DED29A28E1`.
+
+| Final image | SHA-256 after guest write, flush and fresh-process repetitions |
+| --- | --- |
+| Partition | `99C4423CD81F20C0F06F8ACD6C32404B2813CC63CBFF9BA710D361556C93292E` |
+| RDB | `9674DEBD9279FBCE44D330D51DA3258785240719083F0A1291F013987B3B0C6E` |
+
+The startup writes again on each boot, so whole-image hashes can change with DOS
+timestamps while the independently checked file hash remains stable. OFS is the
+native baseline. Additional filesystem-handler/native coverage is unavailable.
+Read-only/range/error/QUICK-reply behavior has deterministic engine tests; this
+does not certify every filesystem or malformed guest program.
+
+### Native IPF: incomplete
+
+The [six-image manifest](engine/storage-native-media-2026-09-18.json) records ZIP
+and individual IPF SHA-256 values for the supplied two-disk sets. Full Contact
+completes a bounded title/loading/disk-two/gameplay replay. The corrected joystick
+script selects Start Game, shows the Tong Lo introduction at field 10,200, active
+fighting at 12,000 and a lost round with depleted player health at 14,400. Final
+field 18,000: cycle `2550504358`, CPU `542163D9AD25832B`, hardware
+`BC7544DF26E5659B`, complete output `29ED54CB36E7E75C`, `unsupported=none`.
+Captures/log: `ipf-fullcontact-gameplay/`, `fullcontact-gameplay.log`. Probe
+allocation totals include capture work and are not steady-state measurements.
+The runner's generic gameplay-unverified banner describes automatic classification;
+the frame captures above were inspected separately. Earlier 12,500-field input
+failed to select Start Game reliably and is retained as an unsuccessful attempt.
+
+Beast reaches intro/music and its disk-two prompt. The earlier swap at field 6,500
+was premature: it replaced disk one while its loader still needed disk-one data,
+then passed a corrupt packed-data length to the depacker at PC `$68EA8`. The first
+address error is at field 7,432, PC `$68EAA`; this does not establish a receiver
+defect. The corrected replay retains the intro skip presses, shows the disk-two
+prompt at field 10,440, ejects at 10,500, mounts at 10,550 and presses fire at 10,600.
+The disk-two game title appears by 12,000; inspected frames show crouching at
+17,220, an attack at 17,460 and an airborne jump at 18,120. Final field 19,000:
+cycle `2699507626`, CPU `0AE8BFCF33AE1148`, hardware `28887E76E8A938C0`, output
+`FF75125AE1D7A59B`, `unsupported=none`. Evidence: `ipf-beast-gameplay-final/` and
+`beast-gameplay-final.log`. This verifies bounded native loading, disk swapping
+and gameplay, not the entire game or every OCS display edge. The earlier
+`beast-gameplay` attempt also lacked the intro skip presses and remains failed.
+
+Operation Thunderbolt originally passed its PAL check after the CIA latch correction
+but hit the independently reproduced CPU trace exception defect. The development
+CPU pin and a subsequently exposed Paula transition now permit bounded gameplay;
+see the trace-fix record below. Second-disk acceptance remains incomplete.
+
+Bounded Full Contact (18,000 fields) and Beast (19,000 fields) input scripts are
+under `CopperScreen.Lightweight.Tests/Workloads/ipf-*-storage.json`; copy the
+user-owned disk-two ZIPs into the documented ignored `media/ipf-*-disk2.zip`
+aliases, supply disk one with `--ipf`, and run with `--input-script`, `--wide-output`
+and a fresh `--boot-probe` directory. Both record the successful bounded input
+sequences. They are not performance golden replays. Tracked script SHA-256 values:
+Full Contact `8FE594777642E64B5A4DB2F4665B16BF8DF99C14022F82B38B5FA37DD9E6414F`;
+Beast `B98D660517CB1D9EC097D4A4684B4EA48CF9EB21D4B43349D770AC8A2DFF58A0`.
+Thunderbolt's original trace failure occurred without input before gameplay. Earlier raw
+captures use `ipf-fullcontact-*`, `ipf-beast-*`, `ipf-thunderbolt-*` and
+`thunderbolt-*-trace.log`. The latter traces and the ROM-free CPU probe distinguish
+the CPU failure from receiver correctness. Earlier premature/incorrect input
+attempts remain recorded and are not silently relabeled as passing.
+
+### Copper WAIT wake-up correction, 2026-09-18
+
+The owner reported an early blue upper-left border. The saved Shadow of the Beast
+US replay reproduced it: at scanlines 60, 80, 100 and 112 the sky started at x272
+in the uncropped 908-pixel output, while DIWSTRT `$2C90` places the picture at x288.
+The Copper list waits on `$3C41/$FFFE` before writing COLOR00 `$0678`.
+
+The defect was WAIT completing its wake-up while bitplane DMA owned the required
+memory slot. [Commodore HRM chapter 2](https://bastya.net/AmigaDevDocs/hard_2.html)
+specifies the extra memory cycle for WAIT wake-up and higher bitplane DMA priority.
+In the existing physical phase convention, six-plane DDF `$38` has BPL5 output at
+`$3F`, so matching input `$3E` cannot wake the Copper. Wake-up moves to input `$40`;
+the MOVE words then complete at `$45` and `$49`. Previously they completed at `$41`
+and `$45`, making COLOR00 four CCKs (16 output pixels) early.
+
+Only the wake-up transition now checks higher-priority bus availability. No
+palette delay, display-window clipping, media behavior or title-specific rule was
+added. The check runs only after the comparator succeeds. The new 0/4/5/6-plane
+regression distinguishes contended wake-up from ordinary uncontended timing;
+the six-plane case failed before the fix. This uses the manual plus the existing
+DMA phase contract; no new physical-hardware capture is claimed. vAmiga's
+[Copper event implementation](https://github.com/dirkwhoffmann/vAmiga/blob/master/Core/Components/Agnus/Copper/CopperEvents.cpp)
+also gates wake-up on bus availability, as supporting implementation evidence.
+
+Release engine SHA-256:
+`AF2550B2F47AC851AD2E29B5ECED7F7B39BB2944E63DC9C0931BB2C7ED38DAAF`.
+Production Release build: zero warnings/errors. Isolated engine diagnostics:
+551 passed. Host tests: 93 passed with both native Lemmings replays enabled and
+their existing expected fingerprints unchanged. The unchanged 19,000-field two-disk Beast input script completed with
+cycle `2699507626`, CPU `0AE8BFCF33AE1148`, hardware `28887E76E8A938C0`, corrected
+output `9B9FF47082FAC0A5`, `unsupported=none`. CPU/hardware fingerprints match the
+earlier replay; the changed image fingerprint is expected for this correction.
+The border is black through x287 on all four sampled rows and the sky starts at
+x288. Frame 18,120 was visually checked; disk-two loading and scripted gameplay
+remain present. This does not certify the entire game.
+
+Local evidence is `artifacts/beast-border-2026-09-18/`: `test-before.log`,
+`engine.log`, `build.log`, `native.log`, `native/frame-018120.bmp` and
+`pixel-check.json`. Prior captures and fingerprints remain unchanged.
+Performance acceptance is recorded separately in [PERFORMANCE.md](engine/PERFORMANCE.md).
+
+### Thunderbolt trace and audio startup correction, 2026-09-18
+
+Exact unpublished CPU pin: `1.4.1-trace.1`. [CPU_TRACE.md](engine/CPU_TRACE.md)
+records architecture, source ownership, local-feed restore requirements and the
+[source/package/assembly hashes](engine/copper68k-trace-development-2026-09-18.json).
+The earlier `1.4.1-boundary.1` failures above remain historical evidence.
+
+With the CPU fix alone, protection reaches decoded game code but waits indefinitely
+at `$9828` for AUD0's interrupt. A bounded owner-thread trace shows DMA being
+disabled and AUD0DAT being written during the last DMA word. The queued data was
+discarded at the word boundary because the channel was not already marked manual.
+The common audio byte loop now admits that pending word with the interrupt clear.
+Four tests failed before the Paula change; all pass after it. No title-specific
+behavior or media alteration was added.
+
+Production Release build: zero warnings/errors. Isolated engine: **555 passed**;
+CopperDisk: **74 passed**; host: **93 passed**, zero skips with both native Lemmings
+replays enabled. Their existing complete-workload expectations remain unchanged.
+Copper68k's separate Release suite has **1,499 passes and six unavailable optional
+external-corpus tests**. The ROM-free vector-9 integration probe passes both
+scalar and batched execution.
+
+The six-image manifest's Thunderbolt FR disk-one IPF ZIP and Kickstart 1.3 were
+replayed with the [18,000-field input script](../CopperScreen.Lightweight.Tests/Workloads/ipf-thunderbolt-storage.json).
+Fire/left mouse are pressed for twenty fields at 6,000, 8,000, 10,000, 12,000 and
+14,000. No swaps occur. Use the production Release runner with `--rom`, `--ipf`,
+`--input-script`, `--frames 18000` and a fresh `--boot-probe` directory.
+
+Inspected captures show the opening airliner story (no-input field 6,120), active
+road/enemy gameplay (scripted field 7,980), a score of 200 and the continue prompt
+(9,000), another active gameplay scene (10,800) and mission failure (13,320).
+This establishes bounded protection/loading/gameplay progress. **Second-disk
+handling remains unverified**; the script does not attempt to complete the game.
+The runner's generic gameplay-unverified banner is not an automatic classifier;
+the listed captures were inspected separately.
+
+Final scripted run: cycle `2557836000`, CPU `F160527585CC788B`, hardware
+`AA41D3F54CE6D407`, complete output `D8E60B27F942357B`, `unsupported=none`.
+The preceding no-input 10,000-field run ends at cycle `1421020000`, CPU
+`58B69693AB591C66`, hardware `1C1756FE60FF69ED`, output `46C35DA041BC7242`.
+Local evidence: `artifacts/trace-exception-2026-09-18/`, including `audio-trace2.log`,
+`paula-before.log`, `engine-final.log`, `host-native-final.log`, `disk-final.log`,
+`thunderbolt-audio/` and `thunderbolt-input/`. Probe FPS/allocations include capture
+work and are not performance acceptance measurements.

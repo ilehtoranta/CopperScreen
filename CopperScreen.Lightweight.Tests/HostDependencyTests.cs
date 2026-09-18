@@ -64,7 +64,7 @@ public sealed class HostDependencyTests
             }
             Assert.Equal(bytes, CopperScreenDiskImageArchive.LoadDiskImage(zip).Data);
             Assert.Equal(bytes, CopperScreenDiskImageArchive.LoadDiskImage(CopperScreenDiskImageArchive.CreateEntryPath(zip, "disk.adf")).Data);
-            Assert.Throws<NotSupportedException>(() => CopperScreenAdfImage.Load(first + ".ipf"));
+            Assert.Throws<FileNotFoundException>(() => CopperScreenAdfImage.Load(first + ".ipf"));
             File.WriteAllBytes(second, [1, 2]);
             Assert.Throws<NotSupportedException>(() => CopperScreenAdfImage.Load(second));
         }

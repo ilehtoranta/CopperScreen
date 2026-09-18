@@ -43,7 +43,8 @@ internal sealed partial class MainWindow : Window
 		"Audio",
 		"Input"
 	];
-	internal static readonly string[] AmigaDiskImagePickerPatterns = ["*.adf", "*.zip"];
+	private readonly Button?[] _driveSaveAdfButtons = new Button?[4];
+	internal static readonly string[] AmigaDiskImagePickerPatterns = ["*.adf", "*.ipf", "*.zip"];
 	private sealed record ArchiveDiskAssignmentDialogResult(CopperScreenDriveDiskAssignment[] Assignments, int FloppyDriveCount);
 	private sealed record ArchiveEntryChoice(string Label, string? DiskPath)
 	{
@@ -1928,13 +1929,16 @@ internal sealed partial class MainWindow : Window
 			row.Children.Add(writeProtect);
 			driveMedia.Children.Add(CreateSettingsRow($"DF{driveIndex}", row));
 			var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-			actions.Children.Add(CreatePanelButton($"Save DF{driveIndex} ADF…", () => _ = SaveDiskAdfAsync(index)));
+            var saveAdf = CreatePanelButton($"Save DF{driveIndex} ADF…", () => _ = SaveDiskAdfAsync(index));
+            _driveSaveAdfButtons[driveIndex] = saveAdf;
+            actions.Children.Add(saveAdf);
 			actions.Children.Add(CreatePanelButton("Discard and eject", () => _ = DiscardAndEjectDiskAsync(index)));
 			driveMedia.Children.Add(CreateSettingsRow("", actions));
 		}
 
-		layout.Children.Add(SettingsNote("DF0–DF3 accept standard ADF images, including ADFs in ZIP files. Clear Read-only to allow guest writes. Changes stay in memory: use Save ADF before replacing a disk or closing the app. Changing the connected drive count requires a restart."));
-		layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
+        layout.Children.Add(SettingsNote("DF0–DF3 accept ADF and read-only IPF files, including selected entries in ZIP files. ADF writes stay in memory: use Save ADF before replacing a disk or closing the app. Changing the connected drive count requires a restart."));
+        layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
+        layout.Children.Add(CreateHardfileSettings());
 		return CreateScrollableSettingsPage(layout);
 	}
 
@@ -2190,7 +2194,7 @@ internal sealed partial class MainWindow : Window
 			SetDrivePathTextSilently(i, string.Empty);
 		}
 		_settingsDraft.MarkRequiresRestart();
-		UpdateDriveSettingsEnabled();
+        UpdateDriveSettingsEnabled();
 		if (_runtime == null)
 		{
 			_latestState = CreateIdleState(_settingsDraft);
@@ -2260,7 +2264,17 @@ internal sealed partial class MainWindow : Window
 			var connected = driveIndex < _settingsDraft.FloppyDriveCount;
 			_drivePathBoxes[driveIndex].IsEnabled = connected;
 			_driveBrowseButtons[driveIndex].IsEnabled = connected;
-			_driveWriteProtectBoxes[driveIndex].IsEnabled = connected;
+            CopperScreenDriveState? drive = driveIndex < _latestState.Drives.Length ? _latestState.Drives[driveIndex] : null;
+            var ipf = drive?.Format == CopperMod.Amiga.Lightweight.LightweightFloppyFormat.Ipf;
+            _driveWriteProtectBoxes[driveIndex].IsEnabled = connected && !ipf;
+            if (_driveSaveAdfButtons[driveIndex] is { } save) save.IsEnabled = connected && drive?.CanExportAdf == true;
+            if (ipf)
+            {
+                var wasUpdating = _updatingSettingsUi;
+                _updatingSettingsUi = true;
+                try { _driveWriteProtectBoxes[driveIndex].IsChecked = true; }
+                finally { _updatingSettingsUi = wasUpdating; }
+            }
 		}
 	}
 
@@ -2316,7 +2330,8 @@ internal sealed partial class MainWindow : Window
 			}
 			UpdateDriveSettingsEnabled();
 
-			_floppySoundsEnabledBox.IsChecked = _settingsDraft.FloppyDriveAudio.Enabled;
+            RefreshHardfileSettings();
+            _floppySoundsEnabledBox.IsChecked = _settingsDraft.FloppyDriveAudio.Enabled;
 			_floppySoundModeBox.SelectedItem = _settingsDraft.FloppyDriveAudio.Mode.ToString();
 			_floppySoundPackBox.Text = _settingsDraft.FloppyDriveAudio.SoundPack;
 			_floppySoundVolumeBox.Text = _settingsDraft.FloppyDriveAudio.Volume.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -2495,7 +2510,7 @@ internal sealed partial class MainWindow : Window
 				}
 			}
 			CopperScreenRuntime replacement;
-			try { replacement = CopperScreenRuntime.Create(options); }
+            try { replacement = CopperScreenRuntime.Create(options, previous); }
 			catch
 			{
 				if (resumePreviousOnFailure) await previous!.TogglePausedAsync();
@@ -2531,9 +2546,10 @@ internal sealed partial class MainWindow : Window
 		finally { _applyingSettings = false; UpdateSettingsStatus(); }
 	}
 
-	private CopperScreenSettingsDraft ReadSettingsDraft()
-	{
-		var draft = _settingsDraft.Clone();
+    private CopperScreenSettingsDraft ReadSettingsDraft()
+    {
+        var draft = _settingsDraft.Clone();
+        ReadHardfileSettings(draft);
 		draft.Id = _profileIdBox.Text?.Trim() ?? string.Empty;
 		draft.DisplayName = _profileNameBox.Text?.Trim() ?? string.Empty;
 		draft.Description = _profileDescriptionBox.Text?.Trim() ?? string.Empty;
@@ -4134,7 +4150,11 @@ internal sealed partial class MainWindow : Window
 			SetText(_faultMessage, $"Emulation stopped: {fault}\nChoose Restart to recover.");
 			if (_mouseGrabActive) ReleaseMouseGrab();
 		}
-		_pauseButton.Content = state.IsPaused ? "Resume" : "Pause";
+        _pauseButton.Content = state.IsPaused ? "Resume" : "Pause";
+        var primaryDrive = state.Drives.FirstOrDefault();
+        _writeProtectButton.IsEnabled = primaryDrive.CanExportAdf;
+        _writeProtectButton.Content = primaryDrive.HasDisk && !primaryDrive.WriteProtected ? "DF0 writable" : "DF0 read-only";
+        UpdateDriveSettingsEnabled();
 		_numpadModeButton.Content = _numpadMode == NumpadInputMode.Joystick ? "Numpad: Joystick" : "Numpad: Keyboard";
 		_fullscreenButton.Content = WindowState == WindowState.FullScreen ? "Windowed" : "Fullscreen";
 		_overscanButton.Content = _showFullOverscan ? "Overscan: Full" : "Overscan: Cropped";
@@ -4259,7 +4279,7 @@ internal sealed partial class MainWindow : Window
 		}
 
 		var insertedDisk = string.IsNullOrWhiteSpace(drive.DiskPath) ? drive.DiskName : drive.DiskPath;
-		return $"DF{drive.Index}: {drive.DiskName}\n{insertedDisk}\nWrite protect: {(drive.WriteProtected ? "on" : "off")}" +
+		return $"DF{drive.Index}: {drive.DiskName} ({drive.Format})\n{insertedDisk}\nWrite protect: {(drive.WriteProtected ? "on" : "off")}" +
 			(drive.HasUnsavedChanges ? "\nUnsaved changes — use Settings > Floppy > Save ADF" : "") + "\nClick to change disk image";
 	}
 

@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-18",
+  "package": "Copper68k",
+  "version": "1.4.1-trace.1",
+  "published": false,
+  "sourceRepository": "https://github.com/ilehtoranta/CopperMod",
+  "baseCommit": "713ad6c1bc1bc31efc038996c50faccec31208d6",
+  "branch": "codex/68000-trace-exception",
+  "sourceCommit": "ada86020ad7a9b298cd7f689c3731d8d779684d1",
+  "sourceState": "Committed fix; tested package built before commit and retained unchanged; embedded repository revision is the base commit",
+  "sources": [
+    {
+      "path": "Copper68k/Copper68k.csproj",
+      "sha256": "2CD6D8A03548EB73418587650E13BAE689D0E3A8DB64B54BD375268FBEC7230F"
+    },
+    {
+      "path": "Copper68k/M68kCore.cs",
+      "sha256": "DDF5ED894073244453B0E3FC46E865259932A8519590D03025CD17E929A2BFCD"
+    },
+    {
+      "path": "Copper68k/M68kJitCore.cs",
+      "sha256": "7026ECA01DFF143ED673E2DD00046C84B4D6F8FECC5F2EE6F0DA94A93E7206EE"
+    },
+    {
+      "path": "Copper68k.Tests/M68000TraceExceptionTests.cs",
+      "sha256": "4599A73D61E68EFC62C982F9ABF2313BBDB2069690F2CB788D615244F22B070C"
+    },
+    {
+      "path": "Copper68k.Tests/M68000JitDirectZeroWaitTests.cs",
+      "sha256": "CF4F92C40623B6C59365E161FF0DEBEDAE0FCC2EFD1FCE9E8DA888DCEAE5E28B"
+    },
+    {
+      "path": "Copper68k.Tests/M68kBcdTests.cs",
+      "sha256": "38DB33070D9EA96371DC9243DF280E78663CFEC524E14AFA33DA093F5C75D183"
+    },
+    {
+      "path": "Copper68k.Tests/M68kBitTests.cs",
+      "sha256": "D58BD0F07B617A970AC0BA4E14EC7BBA1EE48273C2BB67F096BDC2C0CB374207"
+    },
+    {
+      "path": "Copper68k.Tests/M68kDivideTests.cs",
+      "sha256": "957CA98F4E399C663436965858A4821F9AFF65B93A0E9DA2C2A22CCA2BABDFD3"
+    },
+    {
+      "path": "Copper68k.Tests/M68kLogicalTests.cs",
+      "sha256": "9C070A133AED7E91788E958F51B816CDF1055A905C4A98411BC283F4061A4BF4"
+    },
+    {
+      "path": "Copper68k.Tests/M68kSystemTests.cs",
+      "sha256": "67FCB06EB2A45271961B3CFA8BF404ABA4C7BEBD8B0E156AD6D051F03DA425E7"
+    }
+  ],
+  "packageSha256": "8C2B30CD902AD9F3A8C7D1938BC78DE3E4D12F9C1B59A2F56629931AF5E72747",
+  "assemblySha256": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC",
+  "engineSha256": "280B6B78321145C018135406409189B68F22AE85944285DFFA93E3294E876903",
+  "diskSha256": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+  "nativeScriptSha256": "945EA19208E3E5432562F28174B49D19637EC31CAD0F26D30B9F7BF6BA27BB1A"
+}

@@ -13,7 +13,7 @@ music player. CopperScreen is the canonical development and release repository.
 | Headless Lightweight runner and deterministic workload scripts | This repository |
 | CopperDisk, disk tests and package scripts | This repository; no music-player consumers were found |
 | Lightweight execution plan, issue register and performance harnesses | This repository |
-| Copper68k CPU interpreter | CopperMod; exact public package `1.4.1-boundary.1` here |
+| Copper68k CPU interpreter | CopperMod; exact unpublished development pin `1.4.1-trace.1` here; [local restore requirements](engine/CPU_TRACE.md) |
 | Older CopperMod.Amiga used by Cust/AHX, music backends and player | CopperMod; not dependencies of this product |
 
 The application builds the engine and CopperDisk from local projects. Neither

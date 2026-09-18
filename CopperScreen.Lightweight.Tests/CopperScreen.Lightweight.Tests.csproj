@@ -12,5 +12,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
     <Using Include="Xunit" />
     <ProjectReference Include="..\CopperScreen\CopperScreen.csproj" />
+    <Compile Include="../CopperMod.Amiga.Lightweight.Tests/IpfFixture.cs" Link="Fixtures/IpfFixture.cs" />
   </ItemGroup>
 </Project>

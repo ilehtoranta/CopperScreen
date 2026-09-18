@@ -65,17 +65,17 @@ internal enum CopperScreenEngine { Legacy, Lightweight }
 
 internal static class CopperScreenSession
 {
-    public static ICopperScreenSession Create(CopperScreenStartupOptions options)
+    public static ICopperScreenSession Create(CopperScreenStartupOptions options, ICopperScreenSession? previous = null)
         => options.Engine switch
         {
             CopperScreenEngine.Legacy => throw new NotSupportedException("Legacy/CopperStart support is not included in this build. Use Lightweight with native Kickstart 1.3; Legacy support will be restored separately."),
-            CopperScreenEngine.Lightweight => CreateLightweight(options),
+            CopperScreenEngine.Lightweight => CreateLightweight(options, previous as CopperScreenLightweightSession),
             _ => throw new ArgumentException("--engine must be Legacy or Lightweight.")
         };
 
-    private static ICopperScreenSession CreateLightweight(CopperScreenStartupOptions options)
+    private static ICopperScreenSession CreateLightweight(CopperScreenStartupOptions options, CopperScreenLightweightSession? previous)
     {
-        try { return new CopperScreenLightweightSession(options); }
+        try { return new CopperScreenLightweightSession(options, previous); }
         catch (NotSupportedException ex)
         {
             throw new NotSupportedException(ex.Message +

@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.Reflection;
 using CopperMod.Amiga.Lightweight;
+using CopperDisk;
 
 var frames = 10;
 var warmup = 0;
@@ -9,6 +10,7 @@ var romPath = (string?)null;
 var adfPath = (string?)null;
 var extraAdfPaths = new string?[3];
 var driveCount = 1;
+var hardfiles = new List<AmigaHardfileConfiguration>();
 var writableDrives = new List<int>();
 var exportDisks = new List<(int Drive, string Path)>();
 var scalarCpu = false;
@@ -40,11 +42,16 @@ for (var i = 0; i < args.Length; i++)
     if (args[i] == "--frames" && i + 1 < args.Length && int.TryParse(args[++i], out var parsed)) frames = parsed;
     else if (args[i] == "--warmup" && i + 1 < args.Length && int.TryParse(args[++i], out var warmupFrames)) warmup = warmupFrames;
     else if (args[i] == "--rom" && i + 1 < args.Length) romPath = args[++i];
-    else if (args[i] == "--adf" && i + 1 < args.Length) adfPath = args[++i];
-    else if (args[i] is "--adf1" or "--adf2" or "--adf3" && i + 1 < args.Length)
+    else if (args[i] is "--adf" or "--ipf" or "--disk" && i + 1 < args.Length) adfPath = args[++i];
+    else if (args[i] is "--adf1" or "--adf2" or "--adf3" or "--ipf1" or "--ipf2" or "--ipf3" && i + 1 < args.Length)
     {
         var drive = args[i][5] - '1';
         extraAdfPaths[drive] = args[++i];
+    }
+    else if (args[i] is "--hdf" or "--hdf-ro" && i + 1 < args.Length)
+    {
+        var readOnly = args[i] == "--hdf-ro";
+        hardfiles.Add(new(hardfiles.Count, args[++i], readOnly));
     }
     else if (args[i] == "--drives")
     {
@@ -116,7 +123,7 @@ for (var i = 0; i < extraAdfPaths.Length; i++)
 
 using var machine = new LightweightA500Machine(
     configuration: new LightweightA500Configuration
-        { FramebufferWidth = romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount },
+        { FramebufferWidth = romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles },
     enableConservativeCpuLoopBatch: !scalarCpu);
 var supportsBlitter = machine.GetType().GetProperty(
     "BlitterActive",
@@ -134,10 +141,10 @@ if (syntheticRomLoop || syntheticRomStop || syntheticCiaTimer || syntheticCopper
     machine.LoadKickstart(CreateSyntheticRom(syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes || syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites || syntheticSpriteDma || syntheticPaulaManual));
 else if (romPath is not null)
     machine.LoadKickstart(ReadImage(romPath, ".rom", ".bin", ".kick"));
-if (adfPath is not null) machine.MountAdf(ReadImage(adfPath, ".adf"));
-foreach (var drive in writableDrives) machine.SetDriveWriteProtected(drive, false);
+if (adfPath is not null) NativeInputScript.Mount(machine, 0, ReadImage(adfPath, ".adf", ".ipf"), adfPath);
 for (var i = 0; i < extraAdfPaths.Length; i++)
-    if (extraAdfPaths[i] is { } path) machine.MountAdf(i + 1, ReadImage(path, ".adf"));
+    if (extraAdfPaths[i] is { } path) NativeInputScript.Mount(machine, i + 1, ReadImage(path, ".adf", ".ipf"), path);
+foreach (var drive in writableDrives) machine.SetDriveWriteProtected(drive, false);
 if (syntheticCiaTimer) ConfigureSyntheticCiaTimer(machine);
 if (syntheticCopper) ConfigureSyntheticCopper(machine);
 if (syntheticBitplanes) ConfigureSyntheticBitplanes(machine, hires);
@@ -191,7 +198,7 @@ var todStartCycle = machine.Cycle;
 var todStartFrame = machine.CompletedFrames;
 var bootProbe = bootProbeDirectory is null ? null : new NativeBootProbe(bootProbeDirectory, probeContinueUnsupported);
 var inputScript = inputScriptPath is null ? null : new NativeInputScript(inputScriptPath,
-    path => ReadImage(path, ".adf"), driveCount);
+    path => ReadImage(path, ".adf", ".ipf"), driveCount);
 if (bootProbe is null && inputScript?.ChangesMediaBetween(warmup, checked(warmup + frames)) == true)
     throw new ArgumentException("Scripted media changes must precede measurement or use --boot-probe.");
 for (var frame = 0; frame < warmup; frame++)
@@ -939,15 +946,15 @@ static void WriteLong(Span<byte> bytes, int offset, uint value)
 
 static byte[] ReadImage(string path, params string[] extensions)
 {
-    if (!path.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+    var split = path.IndexOf("#/", StringComparison.Ordinal);
+    var archivePath = split >= 0 ? path[..split] : path;
+    var entryName = split >= 0 ? path[(split + 2)..].Replace('\\', '/') : null;
+    if (!archivePath.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
         return File.ReadAllBytes(path);
-
-    using var archive = ZipFile.OpenRead(path);
-    var entry = archive.Entries
-        .Where(candidate => extensions.Any(extension => candidate.FullName.EndsWith(extension, StringComparison.OrdinalIgnoreCase)))
-        .OrderBy(candidate => candidate.FullName, StringComparer.OrdinalIgnoreCase)
-        .FirstOrDefault()
-        ?? throw new InvalidDataException($"No {string.Join('/', extensions)} image was found in '{path}'.");
+    using var archive = ZipFile.OpenRead(archivePath);
+    var entries = archive.Entries.Where(e => extensions.Contains(Path.GetExtension(e.Name), StringComparer.OrdinalIgnoreCase)).ToArray();
+    var entry = entryName is not null ? archive.GetEntry(entryName) : entries.Length == 1 ? entries[0] : null;
+    if (entry is null || !entries.Contains(entry)) throw new InvalidDataException("Select a single supported ZIP entry with archive.zip#/entry.");
     using var stream = entry.Open();
     using var output = new MemoryStream(checked((int)entry.Length));
     stream.CopyTo(output);

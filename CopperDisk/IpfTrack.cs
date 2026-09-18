@@ -15,7 +15,9 @@ public sealed class IpfTrack : IAmigaTrack
         int startBit,
         byte[] encodedData,
         AmigaTrackFeatures features,
-        IReadOnlyList<AmigaTrackRegion>? regions = null)
+        IReadOnlyList<AmigaTrackRegion>? regions = null,
+        uint densityType = 2,
+        ushort[]? cellWeights = null)
     {
         Cylinder = cylinder;
         Head = head;
@@ -23,6 +25,8 @@ public sealed class IpfTrack : IAmigaTrack
         StartBit = startBit;
         EncodedData = encodedData;
         Features = features;
+        DensityType = densityType;
+        CellWeights = cellWeights ?? ReadOnlyMemory<ushort>.Empty;
         Regions = regions == null || regions.Count == 0
             ? Array.Empty<AmigaTrackRegion>()
             : Array.AsReadOnly(new List<AmigaTrackRegion>(regions).ToArray());
@@ -47,6 +51,14 @@ public sealed class IpfTrack : IAmigaTrack
     /// Gets the decoded stream start bit.
     /// </summary>
     public int StartBit { get; }
+
+    /// <summary>SPS density selector. 1 denotes unformatted media, 2 automatic
+    /// cell size; other selectors require their corresponding density profile.</summary>
+    public uint DensityType { get; }
+
+    /// <summary>Index-oriented relative cell durations; empty means uniform.
+    /// The nominal weight is 1000. Normalize the sum to one revolution.</summary>
+    public ReadOnlyMemory<ushort> CellWeights { get; }
 
     /// <summary>
     /// Gets the decoded encoded-track bytes.

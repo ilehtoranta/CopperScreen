@@ -9,6 +9,11 @@ small API.
 
 The package targets .NET 10 and has no external runtime dependencies.
 
+The source also owns `AmigaHardfileConfiguration`/partition metadata and internal
+file-range, RDB and filesystem metadata helpers used by Lightweight CopperHDF.
+Guest device registration, boot discovery and I/O gateways remain in the engine.
+See the [storage interface](../docs/engine/STORAGE.md).
+
 ## Supported Images
 
 - `.adf`: standard 880 KiB AmigaDOS sector images, plus modern `UAE-1ADF`
@@ -18,6 +23,13 @@ The package targets .NET 10 and has no external runtime dependencies.
 - `.ipf`: SPS/CAPS IPF images decoded to raw track streams.
 - `.scp`: read-only Amiga DD SuperCard Pro flux captures decoded to raw track streams.
 - `.zip`: an archive containing exactly one `.adf`, `.adz`, `.dms`, `.ipf`, or `.scp` entry.
+
+IPF tracks expose `DensityType` and optional index-oriented `CellWeights` (relative
+cell durations, nominal 1000), in addition to exact bit length, encoded data and
+weak/no-flux regions. Select `AlignTracksToWord = false` for preserved execution.
+The decoder's deterministic weak-byte materialization is a tooling view;
+Lightweight uses region masks and a reproducible per-drive/revolution seed instead.
+Decoder metadata does not certify native protection or exact receiver electronics.
 
 Standard ADF media is writable at the sector-image level. Extended ADF, ADZ,
 DMS, IPF, SCP, and encoded-track media are read-only, but still expose a

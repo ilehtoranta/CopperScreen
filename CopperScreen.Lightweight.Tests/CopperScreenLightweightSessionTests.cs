@@ -27,6 +27,80 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
             AppContext.BaseDirectory);
 
     [Fact]
+    public async Task SelectedZipIpfSupportsEveryDriveAndRejectsSaveAndWriteEnable()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options()); draft.FloppyDriveCount = 4;
+        var path = Path.Combine(_directory, "protected.zip");
+        var bytes = CopperMod.Amiga.Lightweight.Tests.IpfFixture.Create(new CopperMod.Amiga.Lightweight.Tests.IpfFixture.Track(100003, new byte[12501]));
+        using (var archive = System.IO.Compression.ZipFile.Open(path, System.IO.Compression.ZipArchiveMode.Create))
+        {
+            using (var stream = archive.CreateEntry("disk.ipf").Open()) stream.Write(bytes);
+            using (var stream = archive.CreateEntry("second.adf").Open()) stream.Write(new byte[901120]);
+        }
+        var original = File.ReadAllBytes(path);
+        var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory)); session.TogglePaused();
+        using var runtime = CopperScreenRuntime.CreateForTests(session); runtime.Start();
+        for (var i = 0; i < 4; i++)
+        {
+            var inserted = await runtime.InsertDriveDiskAsync(i, path + "#/disk.ipf", false);
+            Assert.True(inserted.Success, inserted.Message);
+            Assert.Equal(LightweightFloppyFormat.Ipf, inserted.State.Drives[i].Format);
+            Assert.True(inserted.State.Drives[i].WriteProtected);
+            Assert.False(inserted.State.Drives[i].CanExportAdf);
+            Assert.False((await runtime.SetDriveWriteProtectedAsync(i, false)).Success);
+            Assert.False((await runtime.SaveAdfAsync(i, Path.Combine(_directory, $"invalid{i}.adf"))).Success);
+        }
+        var invalid = Path.Combine(_directory, "bad.ipf"); File.WriteAllBytes(invalid, new byte[8]);
+        var failed = await runtime.InsertDriveDiskAsync(0, invalid, false);
+        Assert.False(failed.Success); Assert.Equal(LightweightFloppyFormat.Ipf, failed.State.Drives[0].Format);
+        Assert.Equal(original, File.ReadAllBytes(path));
+    }
+
+    [Fact]
+    public async Task DirtyAdfSurvivesFailedSaveResetAndRejectedReplacementThenSavesAtomically()
+    {
+        var session = new CopperScreenLightweightSession(Options());
+        var bytes = new byte[901120];
+        Assert.True(session.InsertLoadedDisk("original.zip", CopperScreenAdfImage.FromAdfBytes(bytes, "disk.adf"), false));
+        session.SetDriveWriteProtected(0, false);
+        var machine = session.Machine;
+        void WriteByte(uint address, byte value) { var cycle = machine.Cpu.Cycles; machine.WriteByte(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
+        void WriteWord(uint address, ushort value) { var cycle = machine.Cpu.Cycles; machine.WriteWord(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
+        WriteByte(0xBFD100, 0x77); WriteByte(0xBFD300, 255);
+        for (var i = 0; i < 31; i++) session.RenderNextFrame(session.Framebuffer);
+        // Write a complete valid track through Paula DMA, including padding.
+        var track = CopperDisk.AmigaDosTrackEncoder.EncodeTrack(CopperDisk.AmigaDiskLoader.FromAdfBytes(bytes), 0, 0);
+        for (var i = 0; i < track.Length; i += 2)
+            WriteWord((uint)(0x20000 + i), (ushort)((track[i] << 8) | track[i + 1]));
+        WriteWord((uint)(0x20000 + track.Length), 0xAAAA);
+        WriteWord(0xDFF020, 2); WriteWord(0xDFF022, 0);
+        WriteWord(0xDFF096, 0x8210); WriteWord(0xDFF09E, 0x8100);
+        var length = (ushort)(0xC000 | (track.Length / 2 + 1));
+        WriteWord(0xDFF024, length); WriteWord(0xDFF024, length);
+        for (var i = 0; i < 12; i++) session.RenderNextFrame(session.Framebuffer);
+        Assert.True(machine.IsDriveDirty(0)); Assert.Equal(bytes, machine.ExportAdf());
+        session.TogglePaused();
+        using var runtime = CopperScreenRuntime.CreateForTests(session); runtime.Start();
+        var destination = Path.Combine(_directory, "saved.adf"); File.WriteAllBytes(destination, [1, 2, 3]);
+        using (var locked = new FileStream(destination, FileMode.Open, FileAccess.Read, FileShare.None))
+        {
+            var failed = await runtime.SaveAdfAsync(0, destination);
+            Assert.False(failed.Success); Assert.True(failed.State.Drives[0].HasUnsavedChanges);
+        }
+        Assert.Equal(new byte[] { 1, 2, 3 }, File.ReadAllBytes(destination));
+        Assert.Empty(Directory.GetFiles(_directory, "*.tmp"));
+        Assert.False((await runtime.EjectDiskAsync()).Success);
+        Assert.Throws<InvalidOperationException>(() => CopperScreenRuntime.CreateReplacement(runtime, () => throw new Exception("Must not construct a replacement")));
+        var reset = await runtime.ResetAsync(); Assert.True(reset.State.Drives[0].HasUnsavedChanges);
+        await runtime.TogglePausedAsync();
+        var saved = await runtime.SaveAdfAsync(0, destination);
+        Assert.True(saved.Success, saved.Message); Assert.False(saved.State.Drives[0].HasUnsavedChanges);
+        Assert.Equal(bytes, File.ReadAllBytes(destination)); Assert.Equal("original.zip", saved.State.DiskPath);
+        using var reopened = new CopperScreenLightweightSession(Options(destination));
+        Assert.Equal(bytes, reopened.ExportAdf(0));
+    }
+
+    [Fact]
     public void DefaultIsLightweightAndExplicitLegacyReportsUnavailable()
     {
         Assert.Equal(CopperScreenEngine.Lightweight, CopperScreenStartupOptions.Parse([], AppContext.BaseDirectory).Engine);

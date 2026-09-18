@@ -35,6 +35,8 @@ internal readonly record struct CopperScreenDriveState(
 {
 	public bool IsSwapPending { get; init; }
 	public bool HasUnsavedChanges { get; init; }
+    public CopperMod.Amiga.Lightweight.LightweightFloppyFormat Format { get; init; }
+    public bool CanExportAdf { get; init; }
 }
 
 internal readonly record struct CopperScreenState(
@@ -222,9 +224,9 @@ internal sealed class CopperScreenRuntime : IDisposable
 	public static CopperScreenRuntime Create(string[] args, string baseDirectory)
 		=> Create(CopperScreenStartupOptions.Parse(args, baseDirectory));
 
-	public static CopperScreenRuntime Create(CopperScreenStartupOptions startupOptions)
+    public static CopperScreenRuntime Create(CopperScreenStartupOptions startupOptions, CopperScreenRuntime? previous = null)
 	{
-		var emulator = CopperScreenSession.Create(startupOptions);
+        var emulator = CopperScreenSession.Create(startupOptions, previous?._emulator);
 		try
 		{
 			var audio = MiniaudioAudioOutput.TryCreate(
@@ -243,6 +245,8 @@ internal sealed class CopperScreenRuntime : IDisposable
 	// execute until it is disposed; the caller starts the new worker afterward.
 	internal static CopperScreenRuntime CreateReplacement(CopperScreenRuntime? current, Func<CopperScreenRuntime> create)
 	{
+        if (current?.CurrentState.Drives.Any(d => d.HasUnsavedChanges) == true)
+            throw new InvalidOperationException("Save ADF or discard and eject changed disks before replacing the Amiga.");
 		var replacement = create();
 		try { current?.Dispose(); }
 		catch { replacement.Dispose(); throw; }
@@ -606,14 +610,13 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 		_disposed = true;
 		Stop();
-		_emulator.Dispose();
-		_wake.Dispose();
-		if (_disposeAudio)
+		try { _emulator.Dispose(); }
+		finally
 		{
-			_audio?.Dispose();
+			_wake.Dispose();
+			try { if (_disposeAudio) _audio?.Dispose(); }
+			finally { _floppyDriveAudio?.Dispose(); }
 		}
-
-		_floppyDriveAudio?.Dispose();
 	}
 
 	private Task<CopperScreenCommandResult> SetStatusAsync(string message)

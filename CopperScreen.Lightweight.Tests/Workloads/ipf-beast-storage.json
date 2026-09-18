@@ -1,0 +1,107 @@
+[
+  {
+    "frame": 4000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 4020
+  },
+  {
+    "frame": 5000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 5020
+  },
+  {
+    "frame": 6000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 6020
+  },
+  {
+    "frame": 7000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 7020
+  },
+  {
+    "frame": 8000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 8020
+  },
+  {
+    "frame": 9000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 9020
+  },
+  {
+    "frame": 10500,
+    "ejectAdf": true
+  },
+  {
+    "frame": 10550,
+    "diskPath": "../../media/ipf-beast-disk2.zip"
+  },
+  {
+    "frame": 10600,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10620
+  },
+  {
+    "frame": 14000,
+    "joystickPort1": 2
+  },
+  {
+    "frame": 14300,
+    "joystickPort1": 18
+  },
+  {
+    "frame": 14400
+  },
+  {
+    "frame": 16000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 16020
+  },
+  {
+    "frame": 17000,
+    "joystickPort1": 2
+  },
+  {
+    "frame": 17400,
+    "joystickPort1": 18
+  },
+  {
+    "frame": 17500
+  },
+  {
+    "frame": 18000,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 18300,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 18400
+  }
+]
+

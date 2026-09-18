@@ -47,7 +47,7 @@ internal sealed partial class MainWindow
         _romValidation = SettingsNote("Choose a Kickstart 1.3 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
-        _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF disk image or ZIP", MinWidth = 0 };
+        _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, IPF or ZIP", MinWidth = 0 };
         _setupDiskBox.TextChanged += (_, _) =>
         {
             if (_updatingSettingsUi || _drivePathBoxes[0] == null) return;

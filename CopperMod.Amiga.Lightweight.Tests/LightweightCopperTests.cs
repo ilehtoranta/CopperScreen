@@ -72,6 +72,37 @@ public sealed class LightweightCopperTests
         Assert.Equal(lineOne + 10, machine.CopperLastMoveCycle);
     }
 
+    [Theory]
+    [InlineData(0, 0x43)]
+    [InlineData(4, 0x43)]
+    [InlineData(5, 0x45)]
+    [InlineData(6, 0x49)]
+    public void WaitWakeupYieldsToBitplaneDmaBeforeFetchingTheFollowingMove(int planes, int outputCck)
+    {
+        // HRM chapter 2: WAIT needs a memory cycle to wake up. At DDF=$38,
+        // BPL5 owns output $3F for five/six planes. The WAIT $3C41 cannot
+        // wake on its matching input $3E; its first free wake input is $40.
+        // With six planes the MOVE uses outputs $45/$49 instead of $41/$45;
+        // with five, BPL6's free slot permits the first word at output $43.
+        using var machine = new LightweightA500Machine();
+        long cycle = machine.Cycle;
+        foreach (var (offset, value) in new (ushort, ushort)[]
+        {
+            (0x08E, 0x2C90), (0x090, 0xF4B0), (0x092, 0x0038), (0x094, 0x00D0),
+            (0x100, (ushort)(planes << 12)), (0x096, 0x8300)
+        })
+            machine.WriteWord(LightweightA500Machine.CustomBase + offset, value,
+                ref cycle, M68kBusAccessKind.CpuDataWrite);
+        _ = StartCopper(machine, (0x3C41, 0xFFFE), (0x0180, 0x0678), (0xFFFF, 0xFFFE));
+        var expectedCycle = 60L * LightweightClock.CpuCyclesPerLine + outputCck * 2;
+
+        machine.AdvanceHardwareTo(expectedCycle - 1);
+        Assert.Equal((ushort)0, machine.GetCustomRegister(0x180));
+        machine.AdvanceHardwareTo(expectedCycle);
+        Assert.Equal((ushort)0x0678, machine.GetCustomRegister(0x180));
+        Assert.Equal(expectedCycle, machine.CopperLastMoveCycle);
+    }
+
     [Fact]
     public void SatisfiedSkipSuppressesMoveButDoesNotSkipFollowingWait()
     {

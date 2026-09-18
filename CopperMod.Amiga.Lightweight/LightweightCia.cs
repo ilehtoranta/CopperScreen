@@ -208,7 +208,9 @@ internal sealed class LightweightCia
 
     private byte ReadTod(int register)
     {
-        if (register == 0x0A && !_todReadLatched)
+        // Alarm selection inhibits a new read latch (8520); reads still
+        // return the counter. An already active latch lasts until LSB read.
+        if (register == 0x0A && !_todReadLatched && (_timerB.Control & 0x80) == 0)
         {
             _todReadLatch = _tod;
             _todReadLatched = true;

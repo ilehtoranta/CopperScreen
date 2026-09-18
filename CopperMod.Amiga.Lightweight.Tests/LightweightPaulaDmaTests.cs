@@ -5,6 +5,32 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 public sealed class LightweightPaulaDmaTests
 {
     [Theory]
+    [InlineData(0, 600)]
+    [InlineData(1, 600)]
+    [InlineData(2, 900)]
+    [InlineData(3, 900)]
+    public void CpuWordQueuedAfterDmaOffContinuesAtWordBoundary(int channel, int disableCycle)
+    {
+        using var m = new LightweightA500Machine();
+        Configure(m, channel, period: 200);
+        m.WriteChipWordDma(0x1002, 0x1122);
+        var irq = (ushort)(0x80 << channel);
+        Write(m, 0x096, (ushort)(0x8200 | 1 << channel), 0);
+        Write(m, 0x096, (ushort)(1 << channel), disableCycle);
+        Write(m, 0x09C, irq, disableCycle + 2);
+        Write(m, (ushort)(0x0AA + channel * 16), 0x5566, disableCycle + 4);
+        var boundary = 1288 + channel * 4;
+        m.AdvanceHardwareTo(boundary - 2);
+        Assert.Equal(0, m.Intreq & irq);
+        Assert.Equal((ushort)0x1122, m.GetPaulaChannelSnapshot(channel).OutputLatch);
+        m.AdvanceHardwareTo(boundary);
+        Assert.Equal(irq, m.Intreq & irq);
+        Assert.Equal((ushort)0x5566, m.GetPaulaChannelSnapshot(channel).OutputLatch);
+        Assert.Equal((sbyte)0x55, m.GetPaulaChannelSnapshot(channel).CurrentSample);
+        Assert.False(m.GetPaulaChannelSnapshot(channel).DmaEnabled);
+    }
+
+    [Theory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]

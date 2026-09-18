@@ -177,7 +177,11 @@ internal sealed class LightweightCopper
                 _stage = ControlStage.WaitCompare;
                 break;
             case ControlStage.WaitCompare:
-                if (ComparisonSatisfied(machine, _waitFirst, _waitSecond))
+                // WAIT's wake-up memory cycle yields to higher-priority DMA
+                // even though it does not fetch an instruction word (HRM ch. 2).
+                // Testing after the comparator avoids bus checks while asleep.
+                if (ComparisonSatisfied(machine, _waitFirst, _waitSecond) &&
+                    machine.CanCopperOwnOutputSlot(cycle + LightweightClock.CpuCyclesPerColorClock))
                 {
                     _stage = ControlStage.ReadFirst;
                 }
