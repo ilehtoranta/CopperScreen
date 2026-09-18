@@ -393,6 +393,61 @@ The measurements remain **INVALID / RERUN**; this acceptance does not turn them
 into passing measurements, approve future builds or close unverified native
 coverage. Follow-up benchmarks retain the same baseline, workloads and protocol.
 
+### Post-push benchmarks, 2026-09-18
+
+CopperScreen source was pushed as `7eda19961226da6baf3791f78db193faab0ae185`
+and Copper68k as `ada86020ad7a9b298cd7f689c3731d8d779684d1` on
+`codex/68000-trace-exception`. The frozen accepted binaries above were retained
+unchanged; no package was repacked or published. The follow-up six-pair run used
+the same `6b5cb1b` reference, workload inputs, CPU 2 / protected sibling 3, Normal
+priority and host-load policy v2. It stopped during lores R1 on sustained sibling
+activity ≥25% for 10.215 seconds. This run is **INVALID / RERUN**; it has no
+completed formal samples or confidence bound. Evidence is
+`artifacts/trace-exception-2026-09-18/retention-post-commit/`.
+
+Separate single-sample diagnostics then ran the complete unchanged workload
+lengths: 600 warmup + 7,200 measured fields for each synthetic mode, and 10,920
+warmup + 3,600 measured native Lemmings fields. These are **raw exploratory
+observations, not a valid reference/candidate performance comparison**. The
+diagnostic collector continued to completion after recording interference;
+the formal harness and its rejection rules were not changed.
+
+| Workload | Reference FPS | Current FPS | Timing classification |
+| --- | ---: | ---: | --- |
+| Lores, Paula DMA / wide output | 315.26 | 319.21 | Current sample INVALID: sustained sibling interference. Reference has one exploratory sample only. |
+| Hires, Paula DMA / wide output | 287.28 | 341.69 | Reference sample INVALID: sustained sibling interference. Current has one exploratory sample only. |
+| Native Lemmings | 252.95 | 252.14 | Both INVALID: competing test/build processes (`21508`, `11588`). |
+
+All six samples completed without unsupported features or measured steady-state
+allocations. Reference/current complete-workload fingerprints match in each mode;
+native Lemmings retains cycle `2063321634`, CPU `6AE7090DA8AFB7E3`, hardware
+`334A819F6FDFB1CA` and output `C65F87325946E5DA`. No speedup, regression percentage
+or confidence-bound conclusion is drawn from these contaminated single pairs.
+
+Separate active-media diagnostics, on the same core/priority, completed with
+no host-load rejection recorded in their short observation windows:
+
+- Active IPF: **243.90 FPS**, 600 warmup + 3,600 measured fields, zero allocations;
+  cycle `596828538`, CPU `F86637B0C371B6EF`, hardware `C6EC0E064201FD0F`, output
+  `97B8ED42D20D7163`, `unsupported=none`. Full Contact disk one is the supplied
+  hashed media, with continuously serviced disk DMA and synthetic Paula/wide output.
+- CopperHDF: **55.134 MiB/s write, 75.078 MiB/s read**, 131,072 × 512-byte requests
+  per direction, zero allocations, readback and Update both pass. This is cached
+  synchronous gateway service, not guest FPS or physical-disk throughput.
+
+These short active-media observations are not six-pair acceptance measurements.
+The first HDF executable run also passed (54.286 / 75.138 MiB/s), but the diagnostic
+wrapper rejected Windows CRLF line endings while parsing the allocation output.
+The corrected parser reran only HDF on a new disposable file; both logs remain.
+No engine code changed or measurement was pooled.
+
+Local raw outputs, binary/argument manifests and per-sample telemetry are in
+`diagnostics-post-commit/` and `diagnostics-post-commit-hdf-retry/` under the dated
+trace directory. `run-post-commit-diagnostics-original.ps1` preserves the original
+collector and `run-post-commit-diagnostics.ps1` its line-ending correction. This
+task ran no concurrent local builds/tests/probes. The owner's one-off acceptance
+above still applies; these results do not convert any invalid sample into PASS.
+
 ## Historical portability boundary
 
 The v1 harness above supplies a separate homogeneous-core/SMT placement rule,
