@@ -7,6 +7,10 @@ var frames = 10;
 var warmup = 0;
 var romPath = (string?)null;
 var adfPath = (string?)null;
+var extraAdfPaths = new string?[3];
+var driveCount = 1;
+var writableDrives = new List<int>();
+var exportDisks = new List<(int Drive, string Path)>();
 var scalarCpu = false;
 var syntheticRomLoop = false;
 var syntheticRomStop = false;
@@ -37,7 +41,21 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--warmup" && i + 1 < args.Length && int.TryParse(args[++i], out var warmupFrames)) warmup = warmupFrames;
     else if (args[i] == "--rom" && i + 1 < args.Length) romPath = args[++i];
     else if (args[i] == "--adf" && i + 1 < args.Length) adfPath = args[++i];
+    else if (args[i] is "--adf1" or "--adf2" or "--adf3" && i + 1 < args.Length)
+    {
+        var drive = args[i][5] - '1';
+        extraAdfPaths[drive] = args[++i];
+    }
+    else if (args[i] == "--drives")
+    {
+        if (++i >= args.Length || !int.TryParse(args[i], out driveCount) || driveCount is < 1 or > 4)
+            throw new ArgumentException("--drives requires a count from 1 to 4.");
+    }
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
+    else if (args[i] == "--writable-drive" && i + 1 < args.Length)
+        writableDrives.Add(int.Parse(args[++i]));
+    else if (args[i] == "--export-adf" && i + 2 < args.Length)
+        exportDisks.Add((int.Parse(args[++i]), args[++i]));
     else if (args[i] == "--synthetic-rom-loop") syntheticRomLoop = true;
     else if (args[i] == "--synthetic-rom-stop") syntheticRomStop = true;
     else if (args[i] == "--synthetic-cia-timer") syntheticCiaTimer = true;
@@ -89,10 +107,16 @@ if (inputScriptPath is not null && (romPath is null || inputReplay ||
     throw new ArgumentException("--input-script requires a native --rom and no synthetic input/workload.");
 if (probeContinueUnsupported && bootProbeDirectory is null)
     throw new ArgumentException("--probe-continue-unsupported requires --boot-probe; it cannot produce a successful benchmark.");
+if (writableDrives.Any(d => d < 0 || d >= driveCount) || exportDisks.Any(d => d.Drive < 0 || d.Drive >= driveCount))
+    throw new ArgumentException("Writable/export drive must be connected.");
 if (syntheticPaulaDma) syntheticSpriteDma = true;
+for (var i = 0; i < extraAdfPaths.Length; i++)
+    if (extraAdfPaths[i] != null && i + 1 >= driveCount)
+        throw new ArgumentException($"--adf{i + 1} requires --drives {i + 2} or greater.");
 
 using var machine = new LightweightA500Machine(
-    configuration: romPath is null && !wideOutput ? null : new LightweightA500Configuration { FramebufferWidth = 908 },
+    configuration: new LightweightA500Configuration
+        { FramebufferWidth = romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount },
     enableConservativeCpuLoopBatch: !scalarCpu);
 var supportsBlitter = machine.GetType().GetProperty(
     "BlitterActive",
@@ -111,6 +135,9 @@ if (syntheticRomLoop || syntheticRomStop || syntheticCiaTimer || syntheticCopper
 else if (romPath is not null)
     machine.LoadKickstart(ReadImage(romPath, ".rom", ".bin", ".kick"));
 if (adfPath is not null) machine.MountAdf(ReadImage(adfPath, ".adf"));
+foreach (var drive in writableDrives) machine.SetDriveWriteProtected(drive, false);
+for (var i = 0; i < extraAdfPaths.Length; i++)
+    if (extraAdfPaths[i] is { } path) machine.MountAdf(i + 1, ReadImage(path, ".adf"));
 if (syntheticCiaTimer) ConfigureSyntheticCiaTimer(machine);
 if (syntheticCopper) ConfigureSyntheticCopper(machine);
 if (syntheticBitplanes) ConfigureSyntheticBitplanes(machine, hires);
@@ -164,7 +191,7 @@ var todStartCycle = machine.Cycle;
 var todStartFrame = machine.CompletedFrames;
 var bootProbe = bootProbeDirectory is null ? null : new NativeBootProbe(bootProbeDirectory, probeContinueUnsupported);
 var inputScript = inputScriptPath is null ? null : new NativeInputScript(inputScriptPath,
-    path => ReadImage(path, ".adf"));
+    path => ReadImage(path, ".adf"), driveCount);
 if (bootProbe is null && inputScript?.ChangesMediaBetween(warmup, checked(warmup + frames)) == true)
     throw new ArgumentException("Scripted media changes must precede measurement or use --boot-probe.");
 for (var frame = 0; frame < warmup; frame++)
@@ -272,6 +299,12 @@ if (hires) workload += "-hires";
 Console.WriteLine($"engine=lightweight-a500 workload={workload} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
 if (unsupported != "none")
     Environment.ExitCode = 2;
+// Host exports are after all timing/allocation samples and never replace the input implicitly.
+foreach (var export in exportDisks)
+{
+    File.WriteAllBytes(export.Path, machine.ExportAdf(export.Drive));
+    Console.WriteLine($"Exported DF{export.Drive}: {Path.GetFullPath(export.Path)}");
+}
 
 // Separate methods keep the same runner usable with frozen pre-DMA engines.
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]

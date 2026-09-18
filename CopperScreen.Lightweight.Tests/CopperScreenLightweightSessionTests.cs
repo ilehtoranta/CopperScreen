@@ -84,7 +84,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var options = CopperScreenStartupOptions.Default(AppContext.BaseDirectory);
         var error = Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(options));
         Assert.Contains("--kickstart <path>", error.Message);
-        Assert.Contains("Settings > Machine", error.Message);
+        Assert.Contains("Settings > Setup", error.Message);
     }
 
     [Theory]
@@ -163,11 +163,12 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     }
 
     [Fact]
-    public void WritableDriveIsRejectedBeforeMachineCreation()
+    public void WritableDriveConfigurationIsAppliedAtMachineCreation()
     {
         var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
         draft.DriveWriteProtected[0] = false;
-        Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(draft.ToStartupOptions(AppContext.BaseDirectory)));
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(AppContext.BaseDirectory));
+        Assert.False(session.Machine.IsDriveWriteProtected(0));
     }
 
     [Fact]
@@ -224,7 +225,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var disk = CopperScreenAdfImage.FromAdfBytes(new byte[901120], "blank.adf");
         Assert.True(session.InsertLoadedDisk("blank.adf", disk, false));
         Assert.True(session.Machine.IsAdfMounted);
-        Assert.False(session.SetDriveWriteProtected(0, false));
+        Assert.True(session.SetDriveWriteProtected(0, false));
         var bad = CopperScreenAdfImage.FromAdfBytes(new byte[901120], "not-adf.ipf");
         Assert.Throws<NotSupportedException>(() => session.InsertLoadedDisk("bad.ipf", bad, true));
         Assert.True(session.Machine.IsAdfMounted);
@@ -305,6 +306,96 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.DoesNotContain("48 kHz stereo required", runtime.CurrentState.StatusText);
     }
 
+    [Fact]
+    public void FourDriveStartupAndIndependentPendingSwapsRetainCorrectPaths()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.FloppyDriveCount = 4;
+        for (var i = 0; i < 4; i++)
+        {
+            var path = Path.Combine(_directory, $"disk{i}.adf");
+            File.WriteAllBytes(path, new byte[901120]);
+            draft.DriveDiskPaths[i] = path;
+        }
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        var states = new CopperScreenDriveState[4];
+        session.CaptureDriveStates(states);
+        for (var i = 0; i < 4; i++)
+        {
+            Assert.True(states[i].Connected && states[i].HasDisk && states[i].WriteProtected);
+            Assert.Equal(draft.DriveDiskPaths[i], states[i].DiskPath);
+            Assert.True(session.SetDriveWriteProtected(i, false));
+        }
+        var disk = CopperScreenAdfImage.FromAdfBytes(new byte[901120], "replacement.adf");
+        Assert.True(session.InsertLoadedDisk(1, "one.adf", disk, true));
+        Assert.True(session.InsertLoadedDisk(2, "two.adf", disk, true));
+        Assert.True(session.InsertLoadedDisk(3, "three.adf", disk, true));
+        Assert.True(session.EjectDisk(2)); // Cancel only DF2's pending insertion.
+        session.CaptureDriveStates(states);
+        Assert.False(states[0].IsSwapPending);
+        Assert.True(states[1].IsSwapPending);
+        Assert.False(states[2].IsSwapPending);
+        Assert.True(states[3].IsSwapPending);
+        Assert.Equal(draft.DriveDiskPaths[0], session.DiskPath);
+        var invalid = CopperScreenAdfImage.FromAdfBytes(new byte[901120], "bad.ipf");
+        Assert.Throws<NotSupportedException>(() => session.InsertLoadedDisk(3, "bad.ipf", invalid, true));
+        for (var frame = 0; frame < 25; frame++) session.RenderNextFrame(session.Framebuffer);
+        Assert.False(session.Machine.IsDriveMounted(1));
+        Assert.False(session.Machine.IsDriveMounted(3));
+        session.RenderNextFrame(session.Framebuffer);
+        Assert.False(session.IsDiskSwapPending);
+        session.CaptureDriveStates(states);
+        Assert.True(states[0].HasDisk && states[1].HasDisk && states[3].HasDisk);
+        Assert.False(states[2].HasDisk);
+        Assert.Equal("three.adf", states[3].DiskPath);
+        Assert.True(session.InsertLoadedDisk(2, "reset.adf", disk, true));
+        session.Reset();
+        for (var i = 0; i < 4; i++) Assert.True(session.Machine.IsDriveMounted(i));
+        Assert.False(session.IsDiskSwapPending);
+        Assert.False(session.EjectDisk(-1));
+        Assert.False(session.InsertLoadedDisk(4, "invalid.adf", disk, false));
+    }
+
+    [Fact]
+    public void DisconnectedDriveMediaIsRejectedAndDriveCountSurvivesProfileSave()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.DriveDiskPaths[3] = "missing.adf";
+        Assert.Throws<NotSupportedException>(() => CopperScreenLightweightSession.Validate(draft.ToStartupOptions(_directory)));
+        draft.FloppyDriveCount = 4;
+        CopperScreenLightweightSession.Validate(draft.ToStartupOptions(_directory));
+        draft.DriveDiskPaths[3] = null;
+        draft.Id = "four-drive-test";
+        var path = CopperScreenProfileStore.Save(draft, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error), error);
+        Assert.Equal(4, loaded.FloppyDriveCount);
+    }
+
+    [Fact]
+    public async Task RuntimeRoutesExternalDriveCommandsToTheirOwnPublishedState()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.FloppyDriveCount = 4;
+        var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        using var runtime = CopperScreenRuntime.CreateForTests(session, null);
+        runtime.Start();
+        await runtime.TogglePausedAsync();
+        var path = Path.Combine(_directory, "external.adf");
+        File.WriteAllBytes(path, new byte[901120]);
+        for (var i = 1; i < 4; i++)
+        {
+            var result = await runtime.InsertDriveDiskAsync(i, path, markChanged: false);
+            Assert.True(result.Success);
+            Assert.True(result.State.Drives[i].HasDisk);
+            Assert.Equal(path, result.State.Drives[i].DiskPath);
+            Assert.Null(result.State.DiskPath);
+        }
+        var ejected = await runtime.EjectDiskAsync(2);
+        Assert.True(ejected.Success);
+        Assert.True(ejected.State.Drives[1].HasDisk && ejected.State.Drives[3].HasDisk);
+        Assert.False(ejected.State.Drives[2].HasDisk);
+    }
+
     private sealed class AudioSink : ICopperScreenAudioOutput
     {
         public int Submissions, LastSampleCount, DiscardCount;
@@ -313,6 +404,73 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         { LastSampleCount = samples.Length; Interlocked.Increment(ref Submissions); return true; }
         public void Dispose() { }
         public void DiscardQueuedSamples() => Interlocked.Increment(ref DiscardCount);
+    }
+
+    [Fact]
+    public async Task RuntimeExportsAdfAndReportsSaveErrorsWithoutChangingMountedSource()
+    {
+        var session = new CopperScreenLightweightSession(Options());
+        var bytes = new byte[901120];
+        bytes[20] = 0xA5;
+        session.InsertLoadedDisk("original.zip", CopperScreenAdfImage.FromAdfBytes(bytes, "original.adf"), false);
+        session.TogglePaused();
+        using var runtime = CopperScreenRuntime.CreateForTests(session);
+        runtime.Start();
+        var savedPath = Path.Combine(_directory, "saved.adf");
+        var result = await runtime.SaveAdfAsync(0, savedPath);
+        Assert.True(result.Success);
+        Assert.Equal(bytes, File.ReadAllBytes(savedPath));
+        Assert.Equal("original.zip", result.State.DiskPath);
+        var wrongExtension = await runtime.SaveAdfAsync(0, Path.Combine(_directory, "wrong.zip"));
+        Assert.False(wrongExtension.Success);
+        Assert.True(wrongExtension.State.Drives[0].HasDisk);
+        var absent = await runtime.SaveAdfAsync(0, Path.Combine(_directory, "missing", "saved.adf"));
+        Assert.False(absent.Success);
+        Assert.Equal(bytes, File.ReadAllBytes(savedPath));
+    }
+
+    [Fact]
+    public async Task InvalidReplacementKeepsTheRunningSessionUsable()
+    {
+        var session = new CopperScreenLightweightSession(Options());
+        session.TogglePaused();
+        using var current = CopperScreenRuntime.CreateForTests(session);
+        current.Start();
+        var invalid = Options("--cpu", "m68040");
+        Assert.Throws<NotSupportedException>(() => CopperScreenRuntime.CreateReplacement(current,
+            () => CopperScreenRuntime.CreateForTests(CopperScreenSession.Create(invalid))));
+        Assert.True(current.CurrentState.IsPaused);
+        Assert.True((await current.EjectDiskAsync()).Success);
+        Assert.True((await current.ResetAsync()).Success);
+    }
+
+    [Fact]
+    public async Task SuccessfulReplacementStopsOldOwnerBeforeNewWorkerStarts()
+    {
+        using var current = CopperScreenRuntime.CreateForTests(new CopperScreenLightweightSession(Options()));
+        current.Start();
+        using var next = CopperScreenRuntime.CreateReplacement(current,
+            () => CopperScreenRuntime.CreateForTests(new CopperScreenLightweightSession(Options())));
+        Assert.Throws<ObjectDisposedException>(() => current.Start());
+        Assert.Equal(0, next.CurrentState.FramesRendered);
+        next.Start();
+        Assert.True((await next.EjectDiskAsync()).Success);
+    }
+
+    [Fact]
+    public void RomPickerValidationUsesTheSameFormatChecksAsStartup()
+    {
+        Assert.Equal(File.ReadAllBytes(_rom), CopperScreenKickstartRomArchive.ReadNative13Rom(_rom,
+            CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart13));
+        var wrong = Path.Combine(_directory, "wrong.rom");
+        File.WriteAllBytes(wrong, new byte[1024]);
+        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNative13Rom(wrong,
+            CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart13));
+        var bytes = File.ReadAllBytes(_rom);
+        bytes[13] = 40;
+        File.WriteAllBytes(wrong, bytes);
+        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNative13Rom(wrong,
+            CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart13));
     }
 
     [NativeLightweightFact]

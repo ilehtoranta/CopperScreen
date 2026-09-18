@@ -268,12 +268,12 @@ public sealed class LightweightInputTests
     }
 
     [Fact]
-    public void AnalogCounterUseAndInvalidControllerFlagsAreExplicit()
+    public void AnalogCountersResetToZeroAndInvalidControllerFlagsAreExplicit()
     {
         using var m = new LightweightA500Machine();
         Assert.Throws<ArgumentOutOfRangeException>(() => m.SubmitInput(new(0, 0x80, 0, 0, 0, 0)));
-        ReadCustom(m, 0x012);
-        Assert.Contains("analog POT", m.UnsupportedActiveFeature!);
+        Assert.Equal(0, ReadCustom(m, 0x012));
+        Assert.Null(m.UnsupportedActiveFeature);
     }
 
     [Fact]

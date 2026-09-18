@@ -33,13 +33,20 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     private readonly LightweightSpriteDma _spriteDma = new();
     private readonly LightweightSprites _sprites = new();
     private readonly LightweightPaulaAudio _paula = new();
+    private readonly LightweightPaulaSerial _serial = new();
     private readonly LightweightCia _ciaA = new();
     private readonly LightweightCia _ciaB = new();
-    private readonly LightweightFloppyDrive _floppy = new();
+    private readonly LightweightFloppyDrive[] _floppies;
+    private long _nextDiskCycle = long.MaxValue;
+    private long _nextSerialCycle = long.MaxValue;
+    private int _selectedReaders;
     private LightweightDiskSerial _diskSerial = new();
     private LightweightDiskDma _diskDma = new();
     private LightweightKeyboard _keyboard;
     private LightweightControllers _controllers;
+    private readonly LightweightPotentiometers _pots = new();
+    private bool _lightPenLatched;
+    private ushort _lightPenVpos, _lightPenVhpos;
     private readonly LightweightVideo _video;
     private readonly M68kCoreFactory _cpuFactory = M68kCoreFactory.Default;
     private readonly IM68kCore _cpu;
@@ -75,6 +82,10 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         bool enableConservativeCpuLoopBatch)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
+        if (_configuration.FloppyDriveCount is < 1 or > 4)
+            throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
+        _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
+        for (var i = 0; i < _floppies.Length; i++) _floppies[i] = new(i);
         if (_configuration.ChipRamBytes != 512 * 1024 || _configuration.SlowRamBytes != 512 * 1024)
             throw new ArgumentException("The lightweight A500 profile supports exactly 512 KiB Chip RAM and 512 KiB slow RAM.", nameof(configuration));
         if (_configuration.AudioSampleRate != 48_000 || _configuration.AudioChannels != 2)
@@ -105,17 +116,39 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     internal bool AudioProducesPcm => true;
     public ReadOnlyMemory<byte> ChipRam => _chipRam;
     public LightweightInputState Input => _input;
-    public bool IsAdfMounted => _floppy.Mounted;
+    /// <summary>Paula TXD logic level, including UARTBRK. Read on the execution owner.</summary>
+    public bool SerialTransmitHigh => _serial.TransmitHigh;
+    /// <summary>Apply an external RXD level at the current emulated cycle.</summary>
+    public void SetSerialReceivePin(bool high)
+    {
+        _serial.SetReceivePin(high, _clock.Cycle);
+        _nextSerialCycle = _serial.NextCycle;
+        RefreshCiaInterruptCycle();
+    }
+    public int FloppyDriveCount => _floppies.Length;
+    public bool IsAdfMounted => IsDriveMounted(0);
+    public bool IsDriveMounted(int drive) => GetDrive(drive).Mounted;
     /// <summary>Read-only host metadata; sample on the hardware owner thread.</summary>
-    public LightweightDriveState DriveState => new(_floppy.Cylinder, _floppy.Head,
-        _floppy.MotorOn, _floppy.Selected, _diskDma.Active);
+    public LightweightDriveState DriveState => GetDriveState(0);
+    public LightweightDriveState GetDriveState(int drive)
+    {
+        var floppy = GetDrive(drive);
+        return new(floppy.Cylinder, floppy.Head, floppy.MotorOn, floppy.Selected,
+            floppy.Selected && _diskDma.Active);
+    }
+    private LightweightFloppyDrive GetDrive(int drive)
+        => (uint)drive < (uint)_floppies.Length ? _floppies[drive] :
+            throw new ArgumentOutOfRangeException(nameof(drive), "Floppy drive is not connected.");
     public bool InterlaceEnabled => (_video.EffectiveBplcon0 & 4) != 0;
     public bool AudioFilterControlEnabled =>
         ((_ciaA.ReadPortLatch(0) | ~_ciaA.ReadDataDirection(0)) & 2) == 0;
-    internal long DiskSerialNextCycle => _diskSerial.NextCycle;
-    internal int DiskBitPosition => _diskSerial.BitPosition;
+    internal long DiskSerialNextCycle => _nextDiskCycle;
+    internal int DiskBitPosition => _floppies[0].BitPosition;
+    internal int GetDiskBitPosition(int drive) => GetDrive(drive).BitPosition;
+    internal long GetDiskNextCycle(int drive) => GetDrive(drive).NextBitCycle;
     internal ushort DiskInputShift => _diskSerial.Shift;
     internal bool DiskDmaActive => _diskDma.Active;
+    internal bool DiskDmaWriting => _diskDma.Writing;
     internal int DiskDmaRemaining => _diskDma.Remaining;
     internal long DiskDmaNextCycle => _diskDma.NextCycle;
     public bool RomOverlayEnabled => _overlayEnabled;
@@ -188,13 +221,14 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         "ECS/AGA chipset profiles",
         "IPF and non-ADF disk formats",
         "save states",
-        "dual-playfield output, HAM outside five/six-plane lores, hires BPU above four and disk write DMA",
+        "dual-playfield HAM, HAM outside five/six-plane lores and hires BPU above four",
         "hires output with a 454-pixel framebuffer (select 908 for native OCS output)",
         "keyboard power-up/resynchronization/reset-chord MCU sequences and general CIA serial output/CNT timer modes",
-        "analog paddles, controller adapters and physical mouse quadrature phase",
+        "physical paddle RC tolerances, controller adapters and mouse quadrature phase",
         "physical TOD pulse/debounce phases and comparator-write glitches (bounded raster-TOD model only)",
-        "nonstandard disk speed, analog disk recovery, slow/GCR/MSBSYNC disk input",
-        "writable ADF media and additional floppy drives",
+        "nonstandard disk speed, analog disk recovery/precompensation and flux-preserving write splices",
+        "simultaneous read streams from multiple selected drives",
+        "external genlock and chip-test beam-counter repositioning beyond VPOSW LOF",
         "undocumented 227-CCK wrap-dummy bus data"
     };
 
@@ -208,13 +242,18 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         _blitter.Reset();
         _spriteDma.Reset(_clock.FrameStartCycle);
         _sprites.Reset();
+        _serial.Reset();
+        _nextSerialCycle = long.MaxValue;
         _paula.Reset();
         _ciaA.Reset(CiaAPortAResetLatch, CiaAPortAResetDataDirection);
         _ciaB.Reset();
         _keyboard.Reset();
         _controllers = default;
+        _pots.Reset();
+        _lightPenLatched = false;
         _input = default;
-        _floppy.ResetControl();
+        foreach (var drive in _floppies) drive.ResetControl();
+        RefreshDiskSchedule();
         _diskSerial.Reset();
         _diskDma.Reset();
         _video.Reset();
@@ -376,8 +415,26 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             (input.JoystickPort1 & 0xC0) != 0)
             throw new ArgumentOutOfRangeException(nameof(input), "Unsupported controller flags.");
         if (input.KeyCode != 0) SubmitKey((byte)input.KeyCode);
+        _pots.Advance(Cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
         _input = input;
         _controllers.Submit(input);
+    }
+
+    /// <summary>Attach an ideal paddle pair. Values are capacitor charge times
+    /// measured in horizontal scan periods; call on the machine owner thread.</summary>
+    public void SetPaddlePosition(int port, byte x, byte y)
+    {
+        if ((uint)port > 1) throw new ArgumentOutOfRangeException(nameof(port));
+        _pots.SetPosition(port, x, y, Cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
+    }
+
+    /// <summary>Pulse the light-pen beam trigger at the current canonical cycle.</summary>
+    public void TriggerLightPen()
+    {
+        if ((_video.EffectiveBplcon0 & 8) == 0 || _lightPenLatched || _clock.Line < 25) return;
+        _lightPenVpos = (ushort)((_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & 1));
+        _lightPenVhpos = (ushort)(((_clock.Line & 255) << 8) | ((_clock.ColorClock + 4) % 227));
+        _lightPenLatched = true;
     }
 
     /// <summary>Queue a raw Amiga key transition (bit 7 means release).
@@ -410,19 +467,41 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         Reset();
     }
 
-    public void MountAdf(ReadOnlySpan<byte> image)
+    public void MountAdf(ReadOnlySpan<byte> image) => MountAdf(0, image);
+
+    /// <summary>Changes the write-protect tab of a connected drive. Defaults to protected.</summary>
+    public void SetDriveWriteProtected(int drive, bool writeProtected)
+        => GetDrive(drive).WriteProtected = writeProtected;
+
+    public bool IsDriveWriteProtected(int drive) => GetDrive(drive).WriteProtected;
+    public bool IsDriveDirty(int drive) => GetDrive(drive).IsDirty;
+
+    /// <summary>Copies current standard sectors. Rejects incomplete/custom tracks.
+    /// Call on the machine owner thread; export does not change the mounted medium.</summary>
+    public byte[] ExportAdf(int drive = 0) => GetDrive(drive).ExportAdf();
+
+    /// <summary>Acknowledge a successfully persisted export on the owner thread.</summary>
+    public void MarkAdfSaved(int drive) => GetDrive(drive).MarkSaved();
+
+    public void MountAdf(int drive, ReadOnlySpan<byte> image)
     {
         ThrowIfDisposed();
-        _floppy.Mount(image);
-        _diskSerial.OnDriveChanged(_floppy, Cycle, mediaChanged: true);
+        var floppy = GetDrive(drive);
+        floppy.Mount(image);
+        _diskSerial.OnDriveChanged(floppy, Cycle, mediaChanged: true);
+        RefreshDiskSchedule();
         RefreshNextDeviceCycle();
     }
 
-    public void EjectAdf()
+    public void EjectAdf() => EjectAdf(0);
+
+    public void EjectAdf(int drive)
     {
         ThrowIfDisposed();
-        _floppy.Eject();
-        _diskSerial.OnDriveChanged(_floppy, Cycle, mediaChanged: true);
+        var floppy = GetDrive(drive);
+        floppy.Eject();
+        _diskSerial.OnDriveChanged(floppy, Cycle, mediaChanged: true);
+        RefreshDiskSchedule();
         RefreshNextDeviceCycle();
     }
 
@@ -519,10 +598,15 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         _blitter.Reset();
         _spriteDma.Reset(_clock.FrameStartCycle);
         _sprites.Reset();
+        _serial.Reset();
+        _nextSerialCycle = long.MaxValue;
         _paula.ResetHardware(_clock.Cycle);
+        _pots.Reset();
+        _lightPenLatched = false;
         _ciaA.Reset(CiaAPortAResetLatch, CiaAPortAResetDataDirection);
         _ciaB.Reset();
-        _floppy.ResetControl();
+        foreach (var drive in _floppies) drive.ResetControl();
+        RefreshDiskSchedule();
         _diskSerial.Reset();
         _diskDma.Reset();
         _video.Reset();
@@ -803,12 +887,12 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         int line,
         int x,
         int playfieldColorIndex,
-        int playfieldPlacement)
+        int playfieldPlacement, int collisionCode = -1)
         => _sprites.ComposeColorIndex(
             line,
             x,
             playfieldColorIndex,
-            playfieldPlacement);
+            playfieldPlacement, collisionCode);
 
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -837,6 +921,15 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     internal bool IsManualSpriteArmed(int sprite)
         => _sprites.IsManualArmed(sprite);
 
+    internal void ComposeDualHiresSpriteColorIndexes(int line, int x, int firstPlacement,
+        int secondPlacement, int firstCode, int secondCode, out int first, out int second)
+        => _sprites.ComposeDualHiresColorIndexes(line, x, firstPlacement, secondPlacement, firstCode, secondCode,
+            out first, out second);
+
+    internal void SetCollisionControl(ushort value) => _sprites.SetCollisionControl(value);
+    internal void SetCollisionMode(bool dual, bool planesEnabled)
+        => _sprites.SetCollisionMode(dual, planesEnabled, _clock.Line);
+
     internal uint GetLiveBitplanePointer(int plane)
         => _bitplanes.GetPointer(plane);
 
@@ -846,6 +939,8 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     internal ushort GetCustomRegister(ushort offset)
     {
         offset &= 0x01FE;
+        if (offset == LightweightRegisters.Clxdat) return _sprites.PeekCollisionData;
+        if (offset == LightweightRegisters.Serdatr) return _serial.ReadData(_registers.Intreq);
         return offset == LightweightRegisters.Dmaconr
             ? (ushort)(_registers.Dmacon | _blitter.StatusBits)
             : _registers.Read(offset);
@@ -882,6 +977,11 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     internal void ReceiveDiskBit(ushort shift, bool equal, long cycle)
         => _diskDma.ReceiveBit(shift, equal, cycle, this);
 
+    internal void WriteDiskBit(int bit, long cycle, bool slow)
+    {
+        foreach (var drive in _floppies) drive.WriteBit(bit, cycle, slow);
+    }
+
     internal void WriteCustomRegisterFromCopper(
         ushort offset,
         ushort value,
@@ -909,9 +1009,14 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             _video.Step(cycle, this);
         }
 
-        if (cycle == _diskSerial.NextCycle)
+        if (cycle == _nextDiskCycle)
         {
-            _diskSerial.Step(cycle, _floppy, this);
+            if (_selectedReaders > 1 && !_diskDma.Writing)
+                ReportUnsupportedFeature("simultaneous disk read streams from multiple selected drives");
+            foreach (var drive in _floppies)
+                if (cycle == drive.NextBitCycle)
+                    _diskSerial.Step(cycle, drive, this, receive: _selectedReaders <= 1 && !_diskDma.Writing);
+            RefreshDiskSchedule();
         }
 
         if (cycle == _diskDma.NextCycle)
@@ -969,12 +1074,19 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal void OnLineCompleted(long cycle)
     {
+        if (_clock.Line == 25) _lightPenLatched = false;
         if (_ciaB.TodRunning)
             HandleCiaInterrupt(ciaA: false, _ciaB.PulseTod(cycle));
     }
 
     internal void OnFrameCompleted(long cycle)
     {
+        if ((_video.EffectiveBplcon0 & 8) != 0 && !_lightPenLatched)
+        {
+            _lightPenVpos = (ushort)((_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
+            _lightPenVhpos = (ushort)(((_clock.LinesThisField & 255) << 8) | 4);
+            _lightPenLatched = true;
+        }
         HandleCiaInterrupt(ciaA: true, _ciaA.PulseTod(cycle));
         var completedFieldLines = _clock.LinesThisField;
         _paula.CompleteFrame(cycle);
@@ -1059,6 +1171,9 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             cycle,
             cpuVisibilityDelay: 4 * LightweightClock.CpuCyclesPerColorClock);
 
+    internal void LatchSerialInterrupt(ushort bits, long cycle)
+        => LatchHardwareInterrupt(bits, cycle, cpuVisibilityDelay: 8);
+
     private void ScheduleInterruptRequestVisibility(ushort bits, long cycle)
     {
         cycle = Math.Max(_clock.Cycle, cycle);
@@ -1134,7 +1249,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             if (_blitter.NextCycle < next) next = _blitter.NextCycle;
             if (_sprites.NextCycle < next) next = _sprites.NextCycle;
             if (_paula.NextCycle < next) next = _paula.NextCycle;
-            if (_diskSerial.NextCycle < next) next = _diskSerial.NextCycle;
+            if (_nextDiskCycle < next) next = _nextDiskCycle;
             if (_diskDma.NextCycle < next) next = _diskDma.NextCycle;
         }
         else
@@ -1145,7 +1260,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             System.Diagnostics.Debug.Assert(_blitter.NextCycle >= next);
             System.Diagnostics.Debug.Assert(_sprites.NextCycle >= next);
             System.Diagnostics.Debug.Assert(_paula.NextCycle >= next);
-            System.Diagnostics.Debug.Assert(_diskSerial.NextCycle >= next);
+            System.Diagnostics.Debug.Assert(_nextDiskCycle >= next);
             System.Diagnostics.Debug.Assert(_diskDma.NextCycle >= next);
         }
 
@@ -1186,6 +1301,8 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
             var offset = (ushort)(address - CustomBase);
             return offset switch
             {
+                LightweightRegisters.Vposr when _lightPenLatched && (_video.EffectiveBplcon0 & 8) != 0 => _lightPenVpos,
+                LightweightRegisters.Vhposr when _lightPenLatched && (_video.EffectiveBplcon0 & 8) != 0 => _lightPenVhpos,
                 LightweightRegisters.Vposr => (ushort)((_clock.IsLongField ? 0x8000 : 0) |
                     ((_clock.Line >> 8) & 1)),
                 LightweightRegisters.Vhposr => (ushort)(((_clock.Line & 0xFF) << 8) |
@@ -1194,10 +1311,12 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
                 LightweightRegisters.Dmaconr =>
                     (ushort)(_registers.Dmacon | _blitter.StatusBits),
                 LightweightRegisters.Dskbytr => _diskSerial.ReadByteStatus(_registers),
+                LightweightRegisters.Clxdat => _sprites.PeekCollisionData,
+                LightweightRegisters.Serdatr => _serial.ReadData(_registers.Intreq),
                 0x00A => _controllers.ReadJoy(port1: false),
                 0x00C => _controllers.ReadJoy(port1: true),
-                0x012 or 0x014 => ReadUnsupportedPotCounter(offset),
-                0x016 => _controllers.ReadPotgor(_registers.Read(0x034)),
+                0x012 or 0x014 => _pots.ReadCounters((offset - 0x012) / 2, Cycle, _controllers.ReadPotgor(_registers.Read(0x034))),
+                0x016 => _pots.ReadPins(Cycle, _controllers.ReadPotgor(_registers.Read(0x034)), _registers.Read(0x034)),
                 _ => _registers.Read(offset)
             };
         }
@@ -1208,6 +1327,8 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
 
     private ushort ReadWordAt(uint address, long cycle)
     {
+        if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
+            return _sprites.ReadCollisionData();
         StrobeCopperRead(address, cycle);
         if (TryDecodeCiaRegister(address, out var ciaA, out var register))
         {
@@ -1224,14 +1345,13 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         return ReadWordRaw(address);
     }
 
-    private ushort ReadUnsupportedPotCounter(ushort offset)
-    {
-        ReportUnsupportedFeature("analog POT counter measurement");
-        return _registers.Read(offset);
-    }
-
     private byte ReadByteAt(uint address, long cycle)
     {
+        if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
+        {
+            var collision = _sprites.ReadCollisionData();
+            return (address & 1) == 0 ? (byte)(collision >> 8) : (byte)collision;
+        }
         StrobeCopperRead(address, cycle);
         if (TryDecodeCiaRegister(address, out var ciaA, out var register))
             return ReadCiaRegister(ciaA, register, cycle);
@@ -1313,7 +1433,9 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     private void WriteCustomRegister(ushort offset, ushort value, long cycle)
     {
         offset &= 0x01FE;
+        if (offset is LightweightRegisters.Clxdat or LightweightRegisters.Serdatr) return;
         if (offset == 0x036) _controllers.WriteJoytest(value);
+        if (offset == 0x034) _pots.WriteControl(value, cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
         if (offset == LightweightRegisters.Vposw)
         {
             _clock.SelectLongField((value & 0x8000) != 0);
@@ -1374,6 +1496,14 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         {
             switch (offset)
             {
+                case LightweightRegisters.Serdat:
+                    _serial.WriteData(value, cycle);
+                    _nextSerialCycle = _serial.NextCycle;
+                    RefreshCiaInterruptCycle();
+                    break;
+                case LightweightRegisters.Serper:
+                    _serial.WritePeriod(value);
+                    break;
                 case LightweightRegisters.Dsklen:
                     _diskDma.WriteLength(value, cycle, this);
                     break;
@@ -1403,6 +1533,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
                     break;
                 case LightweightRegisters.AdkconWrite:
                     _paula.OnAdkconChanged(_registers.Adkcon, cycle);
+                    _serial.WriteBreak((_registers.Adkcon & 0x0800) != 0);
                     _diskDma.OnAdkconChanged(previousAdkcon, cycle, this);
                     break;
                 case LightweightRegisters.Dsksync:
@@ -1414,6 +1545,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
                     break;
                 case LightweightRegisters.Bplcon1:
                 case LightweightRegisters.Bplcon2:
+                case LightweightRegisters.Clxcon:
                     _video.OnRegisterWrite(offset, value, cycle);
                     break;
                 case LightweightRegisters.Diwstrt:
@@ -1434,6 +1566,7 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
                     refreshDeviceCycle = false;
                     break;
                 case LightweightRegisters.IntreqWrite:
+                    _serial.AcknowledgeReceive(value);
                     // A CIA may fire again between the handler's ICR read
                     // and its Paula acknowledgement. A still-asserted /IRQ
                     // must survive that clear; there need not be another edge.
@@ -1464,7 +1597,9 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
     private byte ReadCiaRegister(bool ciaA, int register, long cycle)
     {
         var cia = ciaA ? _ciaA : _ciaB;
-        var pins = ciaA && register == 0 ? _floppy.ReadInputPins(cycle) : (byte)0xFF;
+        var pins = (byte)0xFF;
+        if (ciaA && register == 0)
+            foreach (var drive in _floppies) pins &= drive.ReadInputPins(cycle);
         if (ciaA && register == 0) pins &= _controllers.FirePins;
         var value = cia.ReadRegister(register, pins, cycle, out var interruptCycle);
         HandleCiaInterrupt(ciaA, interruptCycle);
@@ -1487,15 +1622,36 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         {
             var direction = _ciaB.ReadDataDirection(1);
             var pins = (byte)((_ciaB.ReadPortLatch(1) & direction) | (0xFF & ~direction));
-            if (!_floppy.WriteControlPins(pins, cycle))
-                ReportUnsupportedFeature("DF0 seek beyond the standard ADF cylinder range");
-            _diskSerial.OnDriveChanged(_floppy, cycle);
+            for (var i = 0; i < _floppies.Length; i++)
+            {
+                var drive = _floppies[i];
+                if (!drive.WriteControlPins(pins, cycle))
+                    ReportUnsupportedFeature($"DF{i} seek beyond the standard ADF cylinder range");
+                _diskSerial.OnDriveChanged(drive, cycle);
+            }
+            RefreshDiskSchedule();
         }
         RefreshCiaInterruptCycle();
     }
 
+    private void RefreshDiskSchedule()
+    {
+        _nextDiskCycle = long.MaxValue;
+        _selectedReaders = 0;
+        foreach (var drive in _floppies)
+        {
+            if (drive.NextBitCycle < _nextDiskCycle) _nextDiskCycle = drive.NextBitCycle;
+            if (drive.Selected && drive.MotorOn && drive.Mounted) _selectedReaders++;
+        }
+    }
+
     private void AdvanceCiasTo(long cycle)
     {
+        if (cycle == _nextSerialCycle)
+        {
+            _serial.Step(cycle, this);
+            _nextSerialCycle = _serial.NextCycle;
+        }
         HandleCiaInterrupt(ciaA: true, _ciaA.AdvanceTo(cycle));
         HandleCiaInterrupt(ciaA: false, _ciaB.AdvanceTo(cycle));
         if (cycle == _keyboard.NextCycle) _keyboard.Step(cycle, _ciaA, this);
@@ -1531,6 +1687,9 @@ public sealed class LightweightA500Machine : IM68kBus, IDisposable
         _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle,
             _ciaB.GetNextTodInterruptCycle(_clock.NextLineCycle, LightweightClock.CpuCyclesPerLine));
         _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle, _keyboard.NextCycle);
+        // UART shares this infrequent interface deadline; idle serial hardware
+        // adds no extra check to every display/device tick.
+        _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle, _nextSerialCycle);
         RefreshNextDeviceCycle();
     }
 

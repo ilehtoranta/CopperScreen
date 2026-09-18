@@ -10,11 +10,6 @@ internal struct LightweightDiskSerial
     public LightweightDiskSerial() { }
 
     internal const int TrackBits = AmigaDosTrackEncoder.EncodedTrackByteCount * 8;
-    private const int BitRateDenominator = 2 * 5 * TrackBits;
-    private const int WholeCcksPerBit = LightweightPaulaAudio.PalCpuFrequency / BitRateDenominator;
-    private const int FractionPerBit = LightweightPaulaAudio.PalCpuFrequency % BitRateDenominator;
-    private int _fraction;
-    private int _bitPosition;
     private int _byteBits;
     private ushort _shift;
     private byte _data;
@@ -23,14 +18,11 @@ internal struct LightweightDiskSerial
     private byte _slowPhase;
     private int _slowFirstBit;
 
-    internal long NextCycle { get; private set; } = long.MaxValue;
-    internal int BitPosition => _bitPosition;
     internal ushort Shift => _shift;
 
     internal void Reset()
     {
-        NextCycle = long.MaxValue;
-        _fraction = _bitPosition = _byteBits = 0;
+        _byteBits = 0;
         _shift = 0;
         _data = 0;
         _byteReady = _wordEqual = false;
@@ -40,38 +32,23 @@ internal struct LightweightDiskSerial
 
     internal void OnDriveChanged(LightweightFloppyDrive drive, long cycle, bool mediaChanged = false)
     {
-        if (!drive.Mounted || !drive.MotorOn)
-        {
-            NextCycle = long.MaxValue;
-            return;
-        }
-        if (NextCycle != long.MaxValue && !mediaChanged)
-            return; // Selection, side and head changes do not restart rotation.
-
-        // The bounded media model starts a new spindle run at track bit zero.
-        // It does not claim physical coast-down or insertion phase fidelity.
-        _bitPosition = 0;
-        _slowPhase = 0;
-        _fraction = BitRateDenominator - 1; // ceil to the receiving CCK
-        NextCycle = (Math.Max(cycle, drive.ReadyCycle) + 1) & ~1L;
-        ScheduleFollowingBit();
+        if (drive.UpdateRotation(cycle, mediaChanged) && drive.Selected)
+            _slowPhase = 0;
     }
 
-    internal void Step(long cycle, LightweightFloppyDrive drive, LightweightA500Machine machine)
+    internal void Step(long cycle, LightweightFloppyDrive drive, LightweightA500Machine machine, bool receive = true)
     {
-        if (drive.Selected)
+        if (drive.Selected && receive)
         {
-            if ((machine.Adkcon & 0x0200) != 0)
-            {
-                machine.ReportUnsupportedFeature("disk serial recovery with MSBSYNC");
-            }
-            else
-            {
                 var track = drive.Track;
-                var bit = (track[_bitPosition >> 3] >> (7 - (_bitPosition & 7))) & 1;
+                var position = drive.BitPosition;
+                var bit = (track[position >> 3] >> (7 - (position & 7))) & 1;
                 if ((machine.Adkcon & 0x0100) == 0 || _slowPhase != 0)
                     bit = RecoverSlowCell(bit);
-                if (bit >= 0)
+                // GCR byte synchronization waits for a set MSB before the
+                // next eight-bit group. Rotation and the recovery window still
+                // consume every physical cell while zero prefixes are ignored.
+                if (bit >= 0 && !(_byteBits == 0 && bit == 0 && (machine.Adkcon & 0x0200) != 0))
                 {
                     _shift = (ushort)((_shift << 1) | bit);
                     if (++_byteBits == 8)
@@ -84,16 +61,10 @@ internal struct LightweightDiskSerial
                     if (machine.DiskDmaActive)
                         machine.ReceiveDiskBit(_shift, _wordEqual, cycle);
                 }
-            }
         }
 
-        if (++_bitPosition == TrackBits)
-        {
-            _bitPosition = 0;
-            if (drive.Selected)
-                machine.LatchDiskIndex(cycle);
-        }
-        ScheduleFollowingBit();
+        if (drive.AdvanceRotation() && drive.Selected)
+            machine.LatchDiskIndex(cycle);
     }
 
     internal void CompareSync(long cycle, LightweightA500Machine machine)
@@ -137,15 +108,4 @@ internal struct LightweightDiskSerial
         return value;
     }
 
-    private void ScheduleFollowingBit()
-    {
-        var ccks = WholeCcksPerBit;
-        _fraction += FractionPerBit;
-        if (_fraction >= BitRateDenominator)
-        {
-            _fraction -= BitRateDenominator;
-            ccks++;
-        }
-        NextCycle += 2 * ccks;
-    }
 }

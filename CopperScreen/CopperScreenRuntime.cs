@@ -10,6 +10,7 @@ internal interface ICopperScreenAudioOutput : IDisposable
 	bool Submit(ReadOnlySpan<float> samples);
 
 	void DiscardQueuedSamples() { }
+	void SetVolume(float volume) { }
 }
 
 internal readonly record struct CopperScreenCommandResult(bool Success, string Message, CopperScreenState State);
@@ -30,7 +31,11 @@ internal readonly record struct CopperScreenDriveState(
 	bool MotorOn,
 	bool Selected,
 	bool WriteProtected,
-	bool ActiveDma);
+	bool ActiveDma)
+{
+	public bool IsSwapPending { get; init; }
+	public bool HasUnsavedChanges { get; init; }
+}
 
 internal readonly record struct CopperScreenState(
 	string ProfileName,
@@ -233,6 +238,22 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	internal static CopperScreenRuntime CreateForTests(ICopperScreenSession emulator, ICopperScreenAudioOutput? audio = null)
 		=> new CopperScreenRuntime(emulator, audio, disposeAudio: false);
+
+	// Construct and validate a stopped replacement first. Only the old machine can
+	// execute until it is disposed; the caller starts the new worker afterward.
+	internal static CopperScreenRuntime CreateReplacement(CopperScreenRuntime? current, Func<CopperScreenRuntime> create)
+	{
+		var replacement = create();
+		try { current?.Dispose(); }
+		catch { replacement.Dispose(); throw; }
+		return replacement;
+	}
+
+	public void SetOutputVolume(float volume)
+	{
+		var gain = CopperScreenAudioGain.Validate(volume);
+		_audio?.SetVolume(gain);
+	}
 
 	public static int CalculateFramesToRender(int? queuedAudioBuffers, bool catchUpAudio)
 	{
@@ -521,6 +542,43 @@ internal sealed class CopperScreenRuntime : IDisposable
 		=> EnqueueAsync(emulator =>
 		{
 			var ejected = emulator.EjectDisk(driveIndex);
+			return new CopperScreenCommandResult(ejected, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+		});
+
+	public Task<CopperScreenCommandResult> SaveAdfAsync(int driveIndex, string path)
+		=> EnqueueAsync(emulator =>
+		{
+			string? temporary = null;
+			try
+			{
+				var destination = Path.GetFullPath(path);
+				if (!Path.GetExtension(destination).Equals(".adf", StringComparison.OrdinalIgnoreCase))
+					throw new ArgumentException("Choose an .adf file for the saved disk.");
+				var bytes = emulator.ExportAdf(driveIndex);
+				temporary = destination + "." + Guid.NewGuid().ToString("N") + ".tmp";
+				File.WriteAllBytes(temporary, bytes);
+				File.Move(temporary, destination, overwrite: true);
+				emulator.MarkAdfSaved(driveIndex);
+				emulator.SetStatusText($"Saved DF{driveIndex}: {destination}");
+				return new CopperScreenCommandResult(true, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+			}
+			catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
+			{
+				emulator.SetStatusText(ex.Message);
+				return new CopperScreenCommandResult(false, ex.Message, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+			}
+			finally
+			{
+				if (temporary != null && File.Exists(temporary))
+					try { File.Delete(temporary); }
+					catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { }
+			}
+		});
+
+	public Task<CopperScreenCommandResult> DiscardAndEjectDiskAsync(int driveIndex)
+		=> EnqueueAsync(emulator =>
+		{
+			var ejected = emulator.DiscardAndEjectDisk(driveIndex);
 			return new CopperScreenCommandResult(ejected, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
 		});
 

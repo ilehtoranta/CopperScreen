@@ -125,7 +125,9 @@ internal sealed class FramebufferPresenter : Control
 	{
 		var renderStartTimestamp = Stopwatch.GetTimestamp();
 		base.Render(context);
-		context.FillRectangle(Brushes.Black, Bounds);
+		// Drawing coordinates are local to this control; Bounds includes its offset
+		// below the toolbar and must not shift the viewport background a second time.
+		context.FillRectangle(Brushes.Black, new Rect(Bounds.Size));
 		if (!TryCalculateUniformDestination(
 				Bounds.Size,
 				GetEffectiveSourceSize(),

@@ -12,6 +12,14 @@ internal static class CopperScreenKickstartRomArchive
 	private const long MaximumRomImageSize = 16 * 1024 * 1024;
 	private static readonly string[] RomExtensions = [".rom", ".bin", ".kick"];
 
+	internal static byte[] ReadNative13Rom(string path, CopperScreenKickstartSource source, KickstartVersion version)
+	{
+		var rom = ReadRomImage(path, source, version);
+		if (rom.Length != 262144 || rom[12] != 0 || rom[13] != 34)
+			throw new NotSupportedException("Choose a native 256 KiB Kickstart 1.3 (v34) ROM.");
+		return rom;
+	}
+
 	public static byte[] ReadRomImage(
 		string path,
 		CopperScreenKickstartSource source,

@@ -128,7 +128,7 @@ public sealed class LightweightFloppyDriveTests
     }
 
     [Fact]
-    public void MountEjectAndResetStayAtHostBoundaryAndWriteDmaIsUnsupported()
+    public void MountEjectAndResetStayAtHostBoundaryAndEmptyDriveCanAcceptWriteDma()
     {
         using var machine = new LightweightA500Machine();
         var cycle = machine.Cycle;
@@ -145,7 +145,8 @@ public sealed class LightweightFloppyDriveTests
         machine.WriteCustomRegisterFromCopper(0x024, 0x4000, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x024, 0xC001, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x024, 0xC001, machine.Cycle);
-        Assert.Contains("disk", machine.UnsupportedActiveFeature!);
+        Assert.True(machine.DiskDmaWriting);
+        Assert.Null(machine.UnsupportedActiveFeature);
     }
 
     private static LightweightFloppyDrive MountedDrive()

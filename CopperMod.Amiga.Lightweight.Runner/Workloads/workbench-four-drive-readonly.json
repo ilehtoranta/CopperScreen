@@ -1,0 +1,17 @@
+[
+  { "frame": 3500, "mouseDeltaX": 100, "mouseDeltaY": 96 },
+  { "frame": 3504, "mouseDeltaX": 100, "mouseDeltaY": 112 },
+  { "frame": 3508, "mouseDeltaX": 100 },
+  { "frame": 3512, "mouseDeltaX": 100 },
+  { "frame": 3516, "mouseDeltaX": 100 },
+  { "frame": 3520, "mouseDeltaX": 90 },
+  { "frame": 3540, "mouseButtons": 1 },
+  { "frame": 3543, "mouseButtons": 0 },
+  { "frame": 3546, "mouseButtons": 1 },
+  { "frame": 3549, "mouseButtons": 0 },
+  { "frame": 4200, "drive": 2, "ejectAdf": true },
+  { "frame": 4260, "drive": 2, "adfPath": "../../media/four-drive/hiredguns-disk3.zip" },
+  { "frame": 5200, "drive": 3, "ejectAdf": true },
+  { "frame": 5260, "drive": 3, "adfPath": "../../media/four-drive/hiredguns-disk4.zip" },
+  { "frame": 6200, "drive": 1, "ejectAdf": true }
+]

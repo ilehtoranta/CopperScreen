@@ -16,22 +16,18 @@ internal sealed class LightweightVideo
     private const int VisibleRasterYStart = 26;
     private const int VisibleRasterYStop = 311;
     private const int MaxPlanes = 6;
-    private const ulong FourShifterLaneMask = 0xFFFE_FFFE_FFFE_FFFEUL;
-    private const uint TwoShifterLaneMask = 0xFFFE_FFFEu;
-    private const ulong FourShifterPairLaneMask = 0xFFFC_FFFC_FFFC_FFFCUL;
-    private const uint TwoShifterPairLaneMask = 0xFFFC_FFFCu;
-    private const ulong FourShifterFirstPixelMask = 0x8000_8000_8000_8000UL;
-    private const ulong FourShifterSecondPixelMask = 0x4000_4000_4000_4000UL;
-    private const uint TwoShifterFirstPixelMask = 0x8000_8000u;
-    private const uint TwoShifterSecondPixelMask = 0x4000_4000u;
+    private const ulong PlaneZeroLowMask = 0x1041_0410_4104_1041UL;
+    private const uint PlaneZeroHighMask = 0x0410_4104u;
 
     private readonly int[] _bufferA;
     private readonly int[] _bufferB;
     private readonly int _outputScale;
     private readonly ushort[] _dataLatches = new ushort[MaxPlanes];
     private readonly ushort[] _intermediate = new ushort[MaxPlanes];
-    private ulong _shifters03;
-    private uint _shifters45;
+    // Six bits per physical pixel, with the next pixel at bits 90..95.
+    // Reloads replace only their plane's sixteen bits; parity timing is unchanged.
+    private ulong _pixelShiftersLow;
+    private uint _pixelShiftersHigh;
     private readonly int[] _palette = new int[64];
     private int[] _completed;
     private int[] _rendering;
@@ -39,6 +35,10 @@ internal sealed class LightweightVideo
     private ushort _effectiveBplcon1;
     private int _hamColor;
     private int _effectiveSpritePlayfieldPlacement;
+    private ushort _effectiveBplcon2;
+    // Raw six-plane code -> palette index (low nibble), sprite placement (high).
+    // Only the dual path reads this register-derived, 64-byte table.
+    private readonly byte[] _dualPlayfieldPixels = new byte[64];
     private ushort _effectiveDiwStart;
     private ushort _effectiveDiwStop;
     private int _effectivePlaneCount;
@@ -93,8 +93,8 @@ internal sealed class LightweightVideo
         Array.Clear(_bufferB);
         Array.Clear(_dataLatches);
         Array.Clear(_intermediate);
-        _shifters03 = 0;
-        _shifters45 = 0;
+        _pixelShiftersLow = 0;
+        _pixelShiftersHigh = 0;
         Array.Fill(_palette, unchecked((int)0xFF000000));
         _completed = _bufferA;
         _rendering = _bufferB;
@@ -102,6 +102,8 @@ internal sealed class LightweightVideo
         _effectiveBplcon1 = 0;
         _hamColor = unchecked((int)0xFF000000);
         _effectiveSpritePlayfieldPlacement = 0;
+        _effectiveBplcon2 = 0;
+        UpdateDualPlayfieldPixels();
         _effectiveDiwStart = 0;
         _effectiveDiwStop = 0;
         _effectivePlaneCount = 0;
@@ -134,7 +136,7 @@ internal sealed class LightweightVideo
             UpdatePalette((offset - LightweightRegisters.ColorFirst) >> 1, value);
         }
         if (offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
-            LightweightRegisters.Bplcon2 or
+            LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
             LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop)
         {
             _pendingControlOffset = offset;
@@ -154,7 +156,7 @@ internal sealed class LightweightVideo
         if (offset == LightweightRegisters.DmaconWrite ||
             offset is >= LightweightRegisters.ColorFirst and <= LightweightRegisters.ColorLast ||
             offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
-                LightweightRegisters.Bplcon2 or
+                LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
                 LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop ||
             offset is >= LightweightRegisters.BpldatFirst and <= LightweightRegisters.BpldatLast)
         {
@@ -225,7 +227,15 @@ internal sealed class LightweightVideo
             : long.MaxValue;
     }
 
-    private void ApplyPendingInputs(
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void ApplyPendingInputs(long cycle, LightweightA500Machine machine)
+    {
+        if (_pendingControlCycle <= cycle || _pendingDataCycle <= cycle)
+            ApplyDueInputs(cycle, machine);
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void ApplyDueInputs(
         long cycle,
         LightweightA500Machine machine)
     {
@@ -237,6 +247,7 @@ internal sealed class LightweightVideo
                 case LightweightRegisters.Bplcon0:
                     _effectiveBplcon0 = _pendingControlValue;
                     _effectivePlaneCount = GetDecodePlaneCount(_effectiveBplcon0);
+                    machine.SetCollisionMode((_effectiveBplcon0 & 0x0400) != 0, _effectivePlaneCount != 0);
                     _effectivePlaneMask = (1 << _effectivePlaneCount) - 1;
                     UpdateUnsupportedMode();
                     refreshRenderLine = true;
@@ -244,10 +255,19 @@ internal sealed class LightweightVideo
                 case LightweightRegisters.Bplcon1:
                     _effectiveBplcon1 = _pendingControlValue;
                     break;
+                case LightweightRegisters.Clxcon:
+                    machine.SetCollisionControl(_pendingControlValue);
+                    break;
                 case LightweightRegisters.Bplcon2:
+                    if ((_effectiveBplcon2 & 0x7F) != (_pendingControlValue & 0x7F))
+                    {
+                        _effectiveBplcon2 = _pendingControlValue;
+                        UpdateDualPlayfieldPixels();
+                    }
                     _effectiveSpritePlayfieldPlacement = Math.Min(
                         (_pendingControlValue >> 3) & 7,
                         4);
+                    if ((_effectiveBplcon0 & 0x0400) != 0) UpdateUnsupportedMode();
                     break;
                 case LightweightRegisters.Diwstrt:
                     _effectiveDiwStart = _pendingControlValue;
@@ -388,6 +408,11 @@ internal sealed class LightweightVideo
     private void RenderHiresVisiblePair(int line, int x, int index, int pair,
         LightweightA500Machine machine)
     {
+        if ((_effectiveBplcon0 & 0x0400) != 0)
+        {
+            RenderDualHiresVisiblePair(line, x, index, pair, machine);
+            return;
+        }
         var first = pair & 0x3F;
         var second = (pair >> 8) & 0x3F;
         machine.ComposeHiresSpriteColorIndexes(line, x, first, second,
@@ -431,9 +456,9 @@ internal sealed class LightweightVideo
         bool wide = false)
     {
         var playfieldPair = ShiftPlayfieldPair(x);
-        if ((_effectiveBplcon0 & 0x0800) != 0)
+        if ((_effectiveBplcon0 & 0x0C00) != 0)
         {
-            RenderHamPair(line, x, index, playfieldPair, machine, wide);
+            RenderSpecialLowResPair(line, x, index, playfieldPair, machine, wide);
             return;
         }
         var firstPlayfield = playfieldPair & 0x3F;
@@ -488,14 +513,60 @@ internal sealed class LightweightVideo
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void RenderHamPair(int line, int x, int index, int pair,
+    private void RenderSpecialLowResPair(int line, int x, int index, int pair,
         LightweightA500Machine machine, bool wide)
     {
-        // One held playfield color, updated in physical pixel order. Sprite
-        // colors overlay the result but must never feed the hold register.
-        var first = RenderHamPixel(line, x, pair & 63, machine);
-        var second = RenderHamPixel(line, x + 1, (pair >> 8) & 63, machine);
-        WriteLowResPair(index, first, second, wide);
+        if ((_effectiveBplcon0 & 0x0800) == 0)
+        {
+            var first = RenderDualLowResPixel(line, x, pair & 63, machine);
+            var second = RenderDualLowResPixel(line, x + 1, (pair >> 8) & 63, machine);
+            WriteLowResPair(index, first, second, wide);
+            return;
+        }
+        // HAM still updates its held color in physical pixel order; sprite
+        // overlays never feed that hold register.
+        var hamFirst = RenderHamPixel(line, x, pair & 63, machine);
+        var hamSecond = RenderHamPixel(line, x + 1, (pair >> 8) & 63, machine);
+        WriteLowResPair(index, hamFirst, hamSecond, wide);
+    }
+
+    private int RenderDualLowResPixel(int line, int x, int code, LightweightA500Machine machine)
+    {
+        if (_renderLineVerticallyBlanked || x < VisibleRasterXStart)
+            return unchecked((int)0xFF000000);
+        if (!_renderLineVerticallyInWindow || x < _horizontalWindowStart || x >= _horizontalWindowStop)
+            return _palette[0];
+        var pixel = _dualPlayfieldPixels[code];
+        var sprite = machine.ComposeSpriteColorIndex(line, x, 1, pixel >> 4, code);
+        return _palette[_renderLineSpriteOutputEnabled && sprite >= 0 ? sprite : pixel & 15];
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void RenderDualHiresVisiblePair(int line, int x, int index, int pair,
+        LightweightA500Machine machine)
+    {
+        var first = _dualPlayfieldPixels[pair & 63];
+        var second = _dualPlayfieldPixels[(pair >> 8) & 63];
+        machine.ComposeDualHiresSpriteColorIndexes(line, x, first >> 4, second >> 4, pair & 63, (pair >> 8) & 63,
+            out var sprite1, out var sprite2);
+        _rendering[index] = _palette[_renderLineSpriteOutputEnabled && sprite1 >= 0 ? sprite1 : first & 15];
+        _rendering[index + 1] = _palette[_renderLineSpriteOutputEnabled && sprite2 >= 0 ? sprite2 : second & 15];
+    }
+
+    private void UpdateDualPlayfieldPixels()
+    {
+        var placement1 = Math.Min(_effectiveBplcon2 & 7, 4);
+        var placement2 = Math.Min((_effectiveBplcon2 >> 3) & 7, 4);
+        var pf2First = (_effectiveBplcon2 & 0x40) != 0;
+        for (var code = 0; code < 64; code++)
+        {
+            var pf1 = (code & 1) | ((code >> 1) & 2) | ((code >> 2) & 4);
+            var pf2 = ((code >> 1) & 1) | ((code >> 2) & 2) | ((code >> 3) & 4);
+            var color = pf2 != 0 && (pf2First || pf1 == 0) ? 8 + pf2 : pf1;
+            // HRM ch.7: even an obscured opaque playfield can mask a sprite.
+            var placement = Math.Min(pf1 != 0 ? placement1 : 4, pf2 != 0 ? placement2 : 4);
+            _dualPlayfieldPixels[code] = (byte)(color | (placement << 4));
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -634,22 +705,11 @@ internal sealed class LightweightVideo
             return ShiftPlayfieldPairWithReload(x);
         }
 
-        var shifters03 = _shifters03;
-        var shifters45 = _shifters45;
-        var first = ExtractPlayfieldPixel(
-            shifters03,
-            shifters45,
-            FourShifterFirstPixelMask,
-            TwoShifterFirstPixelMask);
-        var second = ExtractPlayfieldPixel(
-            shifters03,
-            shifters45,
-            FourShifterSecondPixelMask,
-            TwoShifterSecondPixelMask);
-        _shifters03 = (shifters03 << 2) & FourShifterPairLaneMask;
-        _shifters45 = (shifters45 << 2) & TwoShifterPairLaneMask;
+        var pixels = (int)(_pixelShiftersHigh >> 20);
+        _pixelShiftersHigh = (_pixelShiftersHigh << 12) | (uint)(_pixelShiftersLow >> 52);
+        _pixelShiftersLow <<= 12;
         var planeMask = _effectivePlaneMask;
-        return (first & planeMask) | ((second & planeMask) << 8);
+        return ((pixels >> 6) & planeMask) | ((pixels & planeMask) << 8);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -663,99 +723,87 @@ internal sealed class LightweightVideo
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private int ShiftPlayfieldPixel(int x)
     {
-        var shifters03 = _shifters03;
-        var shifters45 = _shifters45;
-        var colorIndex = ExtractPlayfieldPixel(
-            shifters03,
-            shifters45,
-            FourShifterFirstPixelMask,
-            TwoShifterFirstPixelMask);
-        _shifters03 = (shifters03 << 1) & FourShifterLaneMask;
-        _shifters45 = (shifters45 << 1) & TwoShifterLaneMask;
-        colorIndex &= _effectivePlaneMask;
+        var colorIndex = (int)(_pixelShiftersHigh >> 26) & _effectivePlaneMask;
+        _pixelShiftersHigh = (_pixelShiftersHigh << 6) | (uint)(_pixelShiftersLow >> 58);
+        _pixelShiftersLow <<= 6;
 
         var pendingReload = _pendingReloadParity;
         if (pendingReload != 0)
         {
-            for (var parity = 0; parity < 2; parity++)
+            var scrolls = (int)_effectiveBplcon1;
+            if ((_effectiveBplcon0 & 0x8000) != 0)
+                scrolls = ((scrolls & 0x77) << 1) | 0x11;
+            var position = x & 15;
+            if ((pendingReload & 1) != 0 && position == (scrolls & 15))
             {
-                var flag = 1 << parity;
-                var scroll = (_effectiveBplcon1 >> (parity * 4)) & 15;
-                if ((_effectiveBplcon0 & 0x8000) != 0)
-                    scroll = ((scroll & 7) << 1) | 1;
-                if ((pendingReload & flag) == 0 || (x & 15) != scroll)
+                if (_effectivePlaneCount > 0)
                 {
-                    continue;
+                    ReloadPlane(0, _intermediate[0]);
                 }
-                if (parity == 0)
+                if (_effectivePlaneCount > 2)
                 {
-                    if (_effectivePlaneCount > 0)
-                    {
-                        _shifters03 = (_shifters03 & 0xFFFF_FFFF_FFFF_0000UL) |
-                            _intermediate[0];
-                    }
-                    if (_effectivePlaneCount > 2)
-                    {
-                        _shifters03 = (_shifters03 & 0xFFFF_0000_FFFF_FFFFUL) |
-                            ((ulong)_intermediate[2] << 32);
-                    }
-                    if (_effectivePlaneCount > 4)
-                    {
-                        _shifters45 = (_shifters45 & 0xFFFF_0000u) |
-                            _intermediate[4];
-                    }
+                    ReloadPlane(2, _intermediate[2]);
                 }
-                else
+                if (_effectivePlaneCount > 4)
                 {
-                    if (_effectivePlaneCount > 1)
-                    {
-                        _shifters03 = (_shifters03 & 0xFFFF_FFFF_0000_FFFFUL) |
-                            ((ulong)_intermediate[1] << 16);
-                    }
-                    if (_effectivePlaneCount > 3)
-                    {
-                        _shifters03 = (_shifters03 & 0x0000_FFFF_FFFF_FFFFUL) |
-                            ((ulong)_intermediate[3] << 48);
-                    }
-                    if (_effectivePlaneCount > 5)
-                    {
-                        _shifters45 = (_shifters45 & 0x0000_FFFFu) |
-                            ((uint)_intermediate[5] << 16);
-                    }
+                    ReloadPlane(4, _intermediate[4]);
                 }
-                _pendingReloadParity &= ~flag;
+                pendingReload &= ~1;
             }
+            if ((pendingReload & 2) != 0 && position == ((scrolls >> 4) & 15))
+            {
+                if (_effectivePlaneCount > 1)
+                {
+                    ReloadPlane(1, _intermediate[1]);
+                }
+                if (_effectivePlaneCount > 3)
+                {
+                    ReloadPlane(3, _intermediate[3]);
+                }
+                if (_effectivePlaneCount > 5)
+                {
+                    ReloadPlane(5, _intermediate[5]);
+                }
+                pendingReload &= ~2;
+            }
+            _pendingReloadParity = pendingReload;
         }
 
         return colorIndex;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int ExtractPlayfieldPixel(
-        ulong shifters03,
-        uint shifters45,
-        ulong mask03,
-        uint mask45)
+    private void ReloadPlane(int plane, ushort word)
     {
+        // Plane is constant at every call site. Deposit at reload time instead
+        // of gathering six separate lane bits on every output pixel.
+        var lowMask = PlaneZeroLowMask << plane;
+        var highMask = plane == 0 ? PlaneZeroHighMask :
+            (PlaneZeroHighMask << plane) | (uint)(PlaneZeroLowMask >> (64 - plane));
+        ulong low;
+        uint high;
         if (Bmi2.X64.IsSupported)
         {
-            return (int)Bmi2.X64.ParallelBitExtract(shifters03, mask03) |
-                ((int)Bmi2.ParallelBitExtract(shifters45, mask45) << 4);
+            low = Bmi2.X64.ParallelBitDeposit(word, lowMask);
+            high = Bmi2.ParallelBitDeposit((uint)word >> (plane < 4 ? 11 : 10), highMask);
         }
+        else
+        {
+            low = SpreadPlaneBits(word) << plane;
+            high = (uint)(SpreadPlaneBits((uint)word >> (plane < 4 ? 11 : 10)) <<
+                (plane < 4 ? plane + 2 : plane - 4));
+        }
+        _pixelShiftersLow = (_pixelShiftersLow & ~lowMask) | low;
+        _pixelShiftersHigh = (_pixelShiftersHigh & ~highMask) | high;
+    }
 
-        return mask03 == FourShifterFirstPixelMask
-            ? (int)((shifters03 >> 15) & 0x01) |
-                (int)((shifters03 >> 30) & 0x02) |
-                (int)((shifters03 >> 45) & 0x04) |
-                (int)((shifters03 >> 60) & 0x08) |
-                (int)((shifters45 >> 11) & 0x10) |
-                (int)((shifters45 >> 26) & 0x20)
-            : (int)((shifters03 >> 14) & 0x01) |
-                (int)((shifters03 >> 29) & 0x02) |
-                (int)((shifters03 >> 44) & 0x04) |
-                (int)((shifters03 >> 59) & 0x08) |
-                (int)((shifters45 >> 10) & 0x10) |
-                (int)((shifters45 >> 25) & 0x20);
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static ulong SpreadPlaneBits(uint word)
+    {
+        ulong result = 0;
+        for (var bit = 0; bit < 11; bit++)
+            result |= (ulong)((word >> bit) & 1) << (bit * 6);
+        return result;
     }
 
     private void UpdateWindowBounds()
@@ -804,8 +852,11 @@ internal sealed class LightweightVideo
             : (_effectiveBplcon0 & 0x0800) != 0 &&
                 (hires || _effectivePlaneCount is < 5 or > 6)
                 ? "OCS HAM outside five/six-plane lores"
-                : (_effectiveBplcon0 & 0x0400) != 0
-                    ? "OCS dual-playfield output"
+                : (_effectiveBplcon0 & 0x0C00) == 0x0C00
+                    ? "OCS dual-playfield HAM output"
+                : (_effectiveBplcon0 & 0x0400) != 0 &&
+                    ((_effectiveBplcon2 & 7) > 4 || ((_effectiveBplcon2 >> 3) & 7) > 4)
+                    ? "OCS dual-playfield priority codes above four"
                     : ((_effectiveBplcon0 >> 12) & 7) == 7
                         ? "OCS BPU=7 output"
                         : null;

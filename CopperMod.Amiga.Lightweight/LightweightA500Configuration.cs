@@ -3,6 +3,8 @@ namespace CopperMod.Amiga.Lightweight;
 /// <summary>Fixed configuration for the first lightweight engine milestone.</summary>
 public sealed record LightweightA500Configuration
 {
+    /// <summary>Connected read-only DD drives, DF0 through DF3 (1–4).</summary>
+    public int FloppyDriveCount { get; init; } = 1;
     public int ChipRamBytes { get; init; } = 512 * 1024;
     public int SlowRamBytes { get; init; } = 512 * 1024;
     /// <summary>908 retains every OCS hires pixel; 454 is a lowres-only output contract.</summary>

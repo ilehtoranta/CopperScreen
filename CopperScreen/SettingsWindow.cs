@@ -18,10 +18,10 @@ internal sealed class SettingsWindow : Window
 	{
 		_requestClose = requestClose;
 		Title = "CopperScreen Settings";
-		Width = 1060;
-		Height = 720;
-		MinWidth = 920;
-		MinHeight = 560;
+		Width = 980;
+		Height = 760;
+		MinWidth = 780;
+		MinHeight = 620;
 		WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		Content = content;
 		Closing += OnClosing;

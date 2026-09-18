@@ -139,20 +139,19 @@ internal sealed class LightweightBitplanes
         AdvanceDdfControl(cycle, machine, dmaEnabled, planeCount);
         TryAcceptInput(cycle, machine, planeCount);
 
-        NextCycle = long.MaxValue;
-        if (_pendingBplcon0Cycle != long.MaxValue)
-        {
-            Publish(_pendingBplcon0Cycle);
-        }
-        if (_hasPendingOutput)
-        {
-            Publish(_pendingOutputCycle);
-        }
         if (_runActive || _hasPendingOutput)
         {
-            Publish(cycle + LightweightClock.CpuCyclesPerColorClock);
+            // An active sequencer must observe the next CCK. Register input
+            // and accepted RAM output cannot precede that physical phase, so
+            // repeated minimum calculations cannot select an earlier event.
+            NextCycle = cycle + LightweightClock.CpuCyclesPerColorClock;
+            System.Diagnostics.Debug.Assert(_pendingBplcon0Cycle >= NextCycle);
+            System.Diagnostics.Debug.Assert(!_hasPendingOutput || _pendingOutputCycle >= NextCycle);
+            return;
         }
-        else if (dmaEnabled && planeCount != 0)
+
+        NextCycle = _pendingBplcon0Cycle;
+        if (dmaEnabled && planeCount != 0)
         {
             PublishNextInactiveControlCycle(cycle, machine);
         }

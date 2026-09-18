@@ -6,12 +6,12 @@ internal sealed class NativeInputScript
 {
     internal sealed record Entry(int Frame, byte MouseButtons = 0, short MouseDeltaX = 0,
         short MouseDeltaY = 0, ushort KeyCode = 0, byte JoystickPort0 = 0, byte JoystickPort1 = 0,
-        string? AdfPath = null, bool EjectAdf = false);
+        string? AdfPath = null, bool EjectAdf = false, int Drive = 0);
     private readonly Entry[] _entries;
     private readonly byte[]?[] _media;
     private int _next;
 
-    internal NativeInputScript(string path, Func<string, byte[]> readAdf)
+    internal NativeInputScript(string path, Func<string, byte[]> readAdf, int driveCount = 1)
     {
         _entries = JsonSerializer.Deserialize<Entry[]>(File.ReadAllText(path),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ??
@@ -24,6 +24,8 @@ internal sealed class NativeInputScript
                 (i > 0 && _entries[i].Frame < _entries[i - 1].Frame))
                 throw new ArgumentException("Input script frames must be nonnegative and ordered.");
             var entry = _entries[i];
+            if ((uint)entry.Drive >= (uint)driveCount)
+                throw new ArgumentException("Input script refers to a disconnected floppy drive.");
             if (entry.AdfPath is not null)
             {
                 if (entry.EjectAdf || string.IsNullOrWhiteSpace(entry.AdfPath))
@@ -44,8 +46,8 @@ internal sealed class NativeInputScript
         while (_next < _entries.Length && _entries[_next].Frame == frame)
         {
             var e = _entries[_next];
-            if (e.EjectAdf) m.EjectAdf();
-            if (_media[_next] is { } media) m.MountAdf(media);
+            if (e.EjectAdf) m.EjectAdf(e.Drive);
+            if (_media[_next] is { } media) m.MountAdf(e.Drive, media);
             _next++;
             m.SubmitInput(new(e.JoystickPort0, e.JoystickPort1, e.MouseButtons,
                 e.MouseDeltaX, e.MouseDeltaY, e.KeyCode));

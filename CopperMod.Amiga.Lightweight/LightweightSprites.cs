@@ -24,7 +24,9 @@ internal sealed class LightweightSprites
     private byte _upcomingMask;
     private byte _shiftingMask;
     private byte _latchedAttachedMask;
-    private byte _dirtyMask;
+    // Low eight bits are pending sprite registers; bit 8 requests an
+    // unlatched playfield collision check through the same pixel slow path.
+    private ushort _dirtyMask;
     private int _outputLine;
     private int _lastOutputX;
     private int _nextStart;
@@ -34,12 +36,27 @@ internal sealed class LightweightSprites
     private int _pendingSprite;
     private PendingInputKind _pendingKind;
     private long _pendingInputCycle;
+    private ushort _collisionData;
+    private ushort _collisionControl;
+    private bool _collisionDual;
+    private bool _collisionPlanesEnabled;
+    private int _collisionTailLine;
+    private byte _collisionSpriteEnable = 0x55;
+    private readonly byte[] _collisionMatches = new byte[64];
+    private static readonly ushort[] SpritePairCollisions =
+    [0, 0, 0, 0x0200, 0, 0x0400, 0x1000, 0x1600,
+     0, 0x0800, 0x2000, 0x2A00, 0x4000, 0x4C00, 0x7000, 0x7E00];
 
     internal long NextCycle { get; private set; } = long.MaxValue;
     internal long LastRegisterInputCycle { get; private set; } = long.MinValue;
 
     internal void Reset()
     {
+        _collisionData = _collisionControl = 0;
+        _collisionDual = false;
+        _collisionPlanesEnabled = false;
+        _collisionTailLine = -1;
+        SetCollisionControl(0);
         Array.Clear(_channels);
         _armedMask = 0;
         _lineArmedMask = 0;
@@ -139,8 +156,10 @@ internal sealed class LightweightSprites
         int line,
         int x,
         int playfieldColorIndex,
-        int playfieldPlacement)
+        int playfieldPlacement,
+        int collisionCode = -1)
     {
+        var raw = collisionCode < 0 ? playfieldColorIndex : collisionCode;
         // Keep the overwhelmingly common transparent interval out of the
         // comparator/shifter body.  This preserves one incremental pixel
         // clock without inlining the full sprite compositor into Denise's
@@ -155,14 +174,14 @@ internal sealed class LightweightSprites
                 ? -1
                 : ComposeShifterColorIndex(
                     playfieldColorIndex,
-                    playfieldPlacement);
+                    playfieldPlacement, raw);
         }
 
         return ComposeColorIndexSlow(
             line,
             x,
             playfieldColorIndex,
-            playfieldPlacement);
+            playfieldPlacement, raw);
     }
 
     /// <summary>
@@ -185,16 +204,8 @@ internal sealed class LightweightSprites
             _dirtyMask != 0 ||
             _nextStart <= x + 1)
         {
-            first = ComposeColorIndex(
-                line,
-                x,
-                firstPlayfieldColorIndex,
-                playfieldPlacement);
-            second = ComposeColorIndex(
-                line,
-                x + 1,
-                secondPlayfieldColorIndex,
-                playfieldPlacement);
+            ComposePairBoundary(line, x, firstPlayfieldColorIndex, secondPlayfieldColorIndex,
+                playfieldPlacement, out first, out second);
             return;
         }
 
@@ -226,15 +237,23 @@ internal sealed class LightweightSprites
 
         first = ComposeShifterColorIndex(
             firstPlayfieldColorIndex,
-            playfieldPlacement);
+            playfieldPlacement, firstPlayfieldColorIndex);
         second = _shiftingMask == 0
             ? -1
             : ComposeShifterColorIndex(
                 secondPlayfieldColorIndex,
-                playfieldPlacement);
+                playfieldPlacement, secondPlayfieldColorIndex);
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void ComposePairBoundary(int line, int x, int firstPlayfield, int secondPlayfield,
+        int placement, out int first, out int second)
+    {
+        first = ComposeColorIndex(line, x, firstPlayfield, placement);
+        second = ComposeColorIndex(line, x + 1, secondPlayfield, placement);
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
     private void ComposeSingleShifterPair(
         int sprite,
         int firstPlayfieldColorIndex,
@@ -250,6 +269,11 @@ internal sealed class LightweightSprites
         var secondPixel = ((state.ShiftA >> 14) & 1) |
             (((state.ShiftB >> 14) & 1) << 1);
         var group = sprite >> 1;
+        if ((_collisionSpriteEnable & bit) != 0)
+        {
+            if (firstPixel != 0) ObserveSpriteGroups(1 << group, firstPlayfieldColorIndex, firstPlayfieldColorIndex);
+            if (secondPixel != 0) ObserveSpriteGroups(1 << group, secondPlayfieldColorIndex, secondPlayfieldColorIndex);
+        }
         var attached = (sprite & 1) != 0 &&
             (_latchedAttachedMask & bit) != 0;
         if (attached)
@@ -293,16 +317,18 @@ internal sealed class LightweightSprites
         int line,
         int x,
         int playfieldColorIndex,
-        int playfieldPlacement)
+        int playfieldPlacement, int collisionCode)
     {
         if (_outputLine != line || x <= _lastOutputX)
         {
             BeginLine(line, x);
         }
-        else if (_dirtyMask != 0)
+        else if ((_dirtyMask & 255) != 0)
         {
             ApplyDirtyRegisters(line, x);
         }
+
+        ObservePlayfieldPair(collisionCode, collisionCode);
 
         if (_nextStart <= x)
         {
@@ -317,14 +343,15 @@ internal sealed class LightweightSprites
 
         return ComposeShifterColorIndex(
             playfieldColorIndex,
-            playfieldPlacement);
+            playfieldPlacement, collisionCode);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private int ComposeShifterColorIndex(
         int playfieldColorIndex,
-        int playfieldPlacement)
+        int playfieldPlacement, int collisionCode)
     {
+        ObserveActiveSpriteCollisions(collisionCode, collisionCode);
         var shifting = (uint)_shiftingMask;
         if ((shifting & (shifting - 1)) == 0)
         {
@@ -421,12 +448,13 @@ internal sealed class LightweightSprites
     internal void ComposeHiresColorIndexes(int line, int x, int firstPlayfield,
         int secondPlayfield, int placement, out int first, out int second)
     {
-        if (_outputLine != line || x <= _lastOutputX) BeginLine(line, x);
-        else if (_dirtyMask != 0) ApplyDirtyRegisters(line, x);
+        if (_outputLine != line || x <= _lastOutputX || _dirtyMask != 0)
+            PrepareHiresLine(line, x, firstPlayfield, secondPlayfield);
         if (_nextStart <= x) LatchComparatorsThrough(x);
         _lastOutputX = x;
         first = second = -1;
         if (_shiftingMask == 0) return;
+        ObserveActiveSpriteCollisions(firstPlayfield, secondPlayfield);
         var pairs = (uint)((_shiftingMask | (_shiftingMask >> 1)) & 0x55);
         while (pairs != 0)
         {
@@ -447,6 +475,152 @@ internal sealed class LightweightSprites
             break;
         }
         AdvanceShifters();
+    }
+
+    // Dual hires uses a different sprite threshold for each subpixel. Kept off
+    // the existing single-playfield compositor so its hot path stays unchanged.
+    internal void ComposeDualHiresColorIndexes(int line, int x, int firstPlacement,
+        int secondPlacement, int firstCode, int secondCode, out int first, out int second)
+    {
+        if (_outputLine != line || x <= _lastOutputX || _dirtyMask != 0)
+            PrepareHiresLine(line, x, firstCode, secondCode);
+        if (_nextStart <= x) LatchComparatorsThrough(x);
+        _lastOutputX = x;
+        first = second = -1;
+        if (_shiftingMask == 0) return;
+        ObserveActiveSpriteCollisions(firstCode, secondCode);
+        var pairs = (uint)((_shiftingMask | (_shiftingMask >> 1)) & 0x55);
+        while (pairs != 0)
+        {
+            var even = BitOperations.TrailingZeroCount(pairs);
+            pairs &= pairs - 1;
+            var odd = even + 1;
+            var group = even >> 1;
+            var a = GetShiftPixel(even);
+            var b = GetShiftPixel(odd);
+            var attached = (_latchedAttachedMask & (1 << odd)) != 0;
+            var pixel = attached
+                ? ((_lineArmedMask & (1 << even)) != 0 ? a | (b << 2) : 0)
+                : (a != 0 ? a : b);
+            if (pixel == 0) continue;
+            var color = 16 + (attached ? pixel : group * 4 + pixel);
+            if (group < firstPlacement) first = color;
+            if (group < secondPlacement) second = color;
+            break;
+        }
+        AdvanceShifters();
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void PrepareHiresLine(int line, int x, int firstCode, int secondCode)
+    {
+        if (_outputLine != line || x <= _lastOutputX) BeginLine(line, x);
+        else if ((_dirtyMask & 255) != 0) ApplyDirtyRegisters(line, x);
+        ObservePlayfieldPair(firstCode, secondCode);
+    }
+
+    internal ushort PeekCollisionData => (ushort)(_collisionData | 0x8000);
+
+    internal ushort ReadCollisionData()
+    {
+        var value = PeekCollisionData;
+        _collisionData = 0;
+        if (_collisionPlanesEnabled || (_collisionTailLine >= 0 && _collisionTailLine == _outputLine))
+            _dirtyMask |= 0x100;
+        return value;
+    }
+
+    internal void SetCollisionControl(ushort value)
+    {
+        _collisionControl = value;
+        _collisionSpriteEnable = (byte)(0x55 | ((value >> 11) & 2) |
+            ((value >> 10) & 8) | ((value >> 9) & 32) | ((value >> 8) & 128));
+        UpdateCollisionMatches();
+    }
+
+    internal void SetCollisionMode(bool dual, bool planesEnabled, int line)
+    {
+        // BPU=0 stops subsequent lines, but does not erase the current line's
+        // comparison interval before DIW closes. This bounded transition model
+        // preserves sprcoll8/8d bit 0 and sprcollbrd1/2 clipping together.
+        if (_collisionPlanesEnabled && !planesEnabled) _collisionTailLine = line;
+        else if (planesEnabled) _collisionTailLine = -1;
+        _collisionPlanesEnabled = planesEnabled;
+        _dirtyMask = (ushort)((_dirtyMask & 255) |
+            ((planesEnabled || _collisionTailLine == line) && (_collisionData & 1) == 0 ? 0x100 : 0));
+        if (_collisionDual == dual) return;
+        _collisionDual = dual;
+        UpdateCollisionMatches();
+    }
+
+    private void UpdateCollisionMatches()
+    {
+        var enabled = (_collisionControl >> 6) & 63;
+        for (var code = 0; code < 64; code++)
+        {
+            var mismatch = (code ^ _collisionControl) & enabled;
+            var even = (mismatch & 0x2A) == 0;
+            var odd = (mismatch & 0x15) == 0;
+            // OCS hardware sprcoll8/8d: in single-playfield mode an even
+            // mismatch also suppresses odd-playfield/sprite collisions.
+            _collisionMatches[code] = (byte)((odd && even ? 1 : 0) |
+                (odd && (even || _collisionDual) ? 2 : 0) | (even ? 4 : 0));
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void ObservePlayfieldPair(int first, int second)
+    {
+        // An already latched event needs no repeated match calculation.
+        if ((_dirtyMask & 0x100) != 0) MatchPlayfieldPair(first, second);
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void MatchPlayfieldPair(int first, int second)
+    {
+        _collisionData |= (ushort)((_collisionMatches[first] | _collisionMatches[second]) & 1);
+        if ((_collisionData & 1) != 0) _dirtyMask &= 255;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void ObserveActiveSpriteCollisions(int first, int second)
+    {
+        var active = (uint)(_shiftingMask & _collisionSpriteEnable);
+        if (active == 0) return;
+        if ((active & (active - 1)) == 0)
+        {
+            var sprite = BitOperations.TrailingZeroCount(active);
+            var group = sprite >> 1;
+            var possible = 0x22 << group;
+            // One eligible sprite cannot produce a sprite/group-pair event.
+            // Its two playfield bits need no further sampling once latched;
+            // CLXDAT read-clear makes this guard false again immediately.
+            if ((_collisionData & possible) == possible) return;
+            ref var state = ref _channels[sprite];
+            if (((state.ShiftA | state.ShiftB) & 0x8000) != 0)
+                ObserveSpriteGroups(1 << group, first, second);
+            return;
+        }
+        var groups = 0;
+        while (active != 0)
+        {
+            var sprite = BitOperations.TrailingZeroCount(active);
+            active &= active - 1;
+            ref var state = ref _channels[sprite];
+            if (((state.ShiftA | state.ShiftB) & 0x8000) != 0)
+                groups |= 1 << (sprite >> 1);
+        }
+        if (groups != 0) ObserveSpriteGroups(groups, first, second);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void ObserveSpriteGroups(int groups, int first, int second)
+    {
+        var matches = _collisionMatches[first] | _collisionMatches[second];
+        var bits = (int)SpritePairCollisions[groups];
+        if ((matches & 2) != 0) bits |= groups << 1;
+        if ((matches & 4) != 0) bits |= groups << 5;
+        _collisionData |= (ushort)bits;
     }
 
     private void QueueDmaInput(
@@ -543,6 +717,11 @@ internal sealed class LightweightSprites
 
     private void BeginLine(int line, int x)
     {
+        if (!_collisionPlanesEnabled && _collisionTailLine != line)
+        {
+            _dirtyMask &= 255;
+            _collisionTailLine = -1;
+        }
         _outputLine = line;
         _lastOutputX = x - 1;
         _lineArmedMask = 0;
@@ -569,14 +748,14 @@ internal sealed class LightweightSprites
                 LatchSprite(sprite, x - start);
             }
         }
-        _dirtyMask = 0;
+        _dirtyMask &= 0x100;
         RefreshNextStart();
     }
 
     private void ApplyDirtyRegisters(int line, int x)
     {
-        var dirty = _dirtyMask;
-        _dirtyMask = 0;
+        var dirty = _dirtyMask & 255;
+        _dirtyMask &= 0x100;
         for (var sprite = 0; sprite < ChannelCount; sprite++)
         {
             var bit = (byte)(1 << sprite);

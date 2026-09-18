@@ -1,6 +1,6 @@
 namespace CopperMod.Amiga.Lightweight;
 
-// Read-only standard-ADF DMA. FIFO/input/request timing is the bounded H6b2
+// Standard-ADF DMA. FIFO/input/request timing is the bounded H6b2
 // model recorded in LIGHTWEIGHT_A500_ENGINE_PLAN, not a Paula DMAL oracle.
 internal struct LightweightDiskDma
 {
@@ -15,8 +15,13 @@ internal struct LightweightDiskDma
     private long _inputCycle = long.MaxValue;
     private uint _pendingAddress;
     private ushort _pendingData;
+    private bool _pendingWrite;
+    private ushort _writeShift;
+    private int _writeShiftBits, _writeBitsRemaining;
+    private long _writeCycle = long.MaxValue;
 
     internal bool Active { get; private set; }
+    internal bool Writing { get; private set; }
     internal int Remaining { get; private set; }
     internal long NextCycle { get; private set; } = long.MaxValue;
     internal long PendingOutputCycle { get; private set; } = long.MaxValue;
@@ -29,6 +34,10 @@ internal struct LightweightDiskDma
         _armed = _waitingForSync = _pendingCounts = Active = false;
         _pendingAddress = 0;
         _pendingData = 0;
+        Writing = _pendingWrite = false;
+        _writeShift = 0;
+        _writeShiftBits = _writeBitsRemaining = 0;
+        _writeCycle = long.MaxValue;
         _inputCycle = PendingOutputCycle = NextCycle = long.MaxValue;
         LastOutputCycle = long.MinValue;
     }
@@ -57,35 +66,45 @@ internal struct LightweightDiskDma
             machine.LatchDiskBlock(cycle);
             return;
         }
-        if ((value & 0x4000) != 0)
-        {
-            machine.ReportUnsupportedFeature("disk write DMA on read-only ADF media");
-            return;
-        }
         Active = true;
-        _waitingForSync = (machine.Adkcon & 0x0400) != 0;
+        Writing = (value & 0x4000) != 0;
+        _waitingForSync = !Writing && (machine.Adkcon & 0x0400) != 0;
         _wordBits = 0;
+        if (Writing)
+        {
+            // HRM: the last three transmitted bits are lost. Software pads
+            // writes with a spare word. Completion belongs to the serializer.
+            _writeBitsRemaining = Remaining * 16 - 3;
+            if (DmaEnabled(machine)) ScheduleInput(cycle);
+            RefreshNextCycle();
+        }
     }
 
     private void Cancel()
     {
-        Active = _waitingForSync = _pendingCounts = false;
+        Active = Writing = _waitingForSync = _pendingCounts = false;
         Remaining = _wordBits = _fifoCount = 0;
         _fifo = 0;
         _inputCycle = long.MaxValue;
+        _writeCycle = long.MaxValue;
+        _writeShiftBits = _writeBitsRemaining = 0;
         NextCycle = PendingOutputCycle;
     }
 
     internal void OnDmaconChanged(long cycle, LightweightA500Machine machine)
     {
-        if (!DmaEnabled(machine)) _inputCycle = long.MaxValue;
-        else ScheduleInput(cycle);
+        if (!DmaEnabled(machine)) _inputCycle = _writeCycle = long.MaxValue;
+        else
+        {
+            ScheduleInput(cycle);
+            ScheduleWrite(cycle, machine);
+        }
         RefreshNextCycle();
     }
 
     internal void OnAdkconChanged(ushort previous, long cycle, LightweightA500Machine machine)
     {
-        if (!Active || ((previous ^ machine.Adkcon) & 0x0400) == 0) return;
+        if (!Active || Writing || ((previous ^ machine.Adkcon) & 0x0400) == 0) return;
         machine.ReportUnsupportedFeature("WORDSYNC enable change during active disk DMA");
         _waitingForSync = (machine.Adkcon & 0x0400) != 0;
         _wordBits = 0;
@@ -94,6 +113,7 @@ internal struct LightweightDiskDma
     internal void ReceiveBit(ushort shift, bool wordEqual, long cycle, LightweightA500Machine machine)
     {
         System.Diagnostics.Debug.Assert(Active);
+        if (Writing) return;
         if (_waitingForSync)
         {
             if (wordEqual && DmaEnabled(machine))
@@ -132,8 +152,21 @@ internal struct LightweightDiskDma
         System.Diagnostics.Debug.Assert(cycle == NextCycle);
         if (cycle == PendingOutputCycle)
         {
-            machine.WriteChipWordDma(_pendingAddress, _pendingData);
-            machine.SetDiskDataFromDma(_pendingData);
+            if (_pendingWrite)
+            {
+                var data = machine.ReadChipWordDma(_pendingAddress);
+                if (_pendingCounts)
+                {
+                    _fifo |= (ulong)data << (_fifoCount * 16);
+                    _fifoCount++;
+                    ScheduleWrite(cycle, machine);
+                }
+            }
+            else
+            {
+                machine.WriteChipWordDma(_pendingAddress, _pendingData);
+                machine.SetDiskDataFromDma(_pendingData);
+            }
             PendingOutputCycle = long.MaxValue;
             LastOutputCycle = cycle; // Also excludes a CPU arriving at this CCK.
             if (_pendingCounts)
@@ -141,7 +174,7 @@ internal struct LightweightDiskDma
                 _pendingCounts = false;
                 Remaining--;
                 machine.SetDiskLengthFromDma(Remaining);
-                if (Remaining == 0)
+                if (Remaining == 0 && !_pendingWrite)
                 {
                     Active = _armed = false;
                     _fifo = 0;
@@ -149,25 +182,32 @@ internal struct LightweightDiskDma
                     _inputCycle = long.MaxValue;
                     machine.LatchDiskBlock(cycle);
                 }
+                if (Writing && DmaEnabled(machine)) ScheduleInput(cycle);
             }
         }
         if (cycle == _inputCycle)
         {
             _inputCycle = long.MaxValue;
-            if (Active && DmaEnabled(machine) && _fifoCount != 0)
+            if (Active && DmaEnabled(machine) &&
+                (Writing ? Remaining > 0 && _fifoCount < 3 : _fifoCount != 0))
             {
                 _pendingAddress = machine.GetDiskPointer();
-                _pendingData = (ushort)_fifo;
-                _fifo >>= 16;
-                _fifoCount--;
+                _pendingWrite = Writing;
+                if (!Writing)
+                {
+                    _pendingData = (ushort)_fifo;
+                    _fifo >>= 16;
+                    _fifoCount--;
+                }
                 _pendingCounts = true;
                 PendingOutputCycle = cycle + LightweightClock.CpuCyclesPerColorClock;
                 // Agnus accepts an address and increments its pointer here.
                 // Later register writes cannot retarget this accepted word.
                 machine.SetDiskPointerFromDma(_pendingAddress + 2);
-                ScheduleInput(cycle);
+                if (!Writing) ScheduleInput(cycle);
             }
         }
+        if (cycle == _writeCycle) StepWrite(cycle, machine);
         RefreshNextCycle();
     }
 
@@ -176,8 +216,41 @@ internal struct LightweightDiskDma
 
     private void ScheduleInput(long cycle)
     {
-        if (_fifoCount == 0 || _inputCycle != long.MaxValue) return;
+        if (!Active || _inputCycle != long.MaxValue ||
+            (Writing ? Remaining == 0 || _fifoCount + (_pendingCounts ? 1 : 0) >= 3 : _fifoCount == 0)) return;
         _inputCycle = NextInputAfter(cycle);
+    }
+
+    private void ScheduleWrite(long cycle, LightweightA500Machine machine)
+    {
+        if (Writing && DmaEnabled(machine) && _writeCycle == long.MaxValue &&
+            (_writeShiftBits != 0 || _fifoCount != 0))
+            _writeCycle = cycle + ((machine.Adkcon & 0x0100) != 0 ? 14 : 28);
+    }
+
+    private void StepWrite(long cycle, LightweightA500Machine machine)
+    {
+        _writeCycle = long.MaxValue;
+        if (_writeShiftBits == 0)
+        {
+            _writeShift = (ushort)_fifo;
+            _writeShiftBits = 16;
+            _fifo >>= 16;
+            _fifoCount--;
+            ScheduleInput(cycle);
+        }
+        machine.WriteDiskBit(_writeShift >> 15, cycle, (machine.Adkcon & 0x0100) == 0);
+        _writeShift <<= 1;
+        _writeShiftBits--;
+        if (--_writeBitsRemaining == 0)
+        {
+            Active = Writing = _armed = false;
+            _writeShiftBits = _fifoCount = 0;
+            _fifo = 0;
+            _inputCycle = long.MaxValue;
+            machine.LatchDiskBlock(cycle);
+        }
+        else ScheduleWrite(cycle, machine);
     }
 
     // Accepted input is one CCK before each physical OUT8/OUTA/OUTC. A
@@ -191,5 +264,5 @@ internal struct LightweightDiskDma
         return line + LightweightClock.CpuCyclesPerLine + 14;
     }
 
-    private void RefreshNextCycle() => NextCycle = Math.Min(_inputCycle, PendingOutputCycle);
+    private void RefreshNextCycle() => NextCycle = Math.Min(_writeCycle, Math.Min(_inputCycle, PendingOutputCycle));
 }

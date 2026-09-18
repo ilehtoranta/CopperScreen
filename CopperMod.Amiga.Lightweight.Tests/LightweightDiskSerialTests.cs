@@ -74,10 +74,10 @@ public sealed class LightweightDiskSerialTests
         {
             var denominator = 10L * LightweightDiskSerial.TrackBits;
             var expected = origin + 2 * ((bit * LightweightPaulaAudio.PalCpuFrequency + denominator - 1) / denominator);
-            Assert.Equal(expected, serial.NextCycle);
+            Assert.Equal(expected, drive.NextBitCycle);
             serial.Step(expected, drive, machine);
         }
-        Assert.Equal(0, serial.BitPosition);
+        Assert.Equal(0, drive.BitPosition);
     }
 
     [Fact]
@@ -222,17 +222,39 @@ public sealed class LightweightDiskSerialTests
     [Theory]
     [InlineData(0x0200)]
     [InlineData(0x0300)]
-    public void UnsupportedRecoveryCannotProduceASuccessfulWorkload(int adkcon)
+    public void MsbsyncReceiverRemainsActiveInBothCellRates(int adkcon)
     {
         using var machine = RunningMachine();
         machine.WriteCustomRegisterFromCopper(0x09E, 0x0300, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x09E, (ushort)(0x8000 | adkcon), machine.Cycle);
         machine.AdvanceHardwareTo(machine.DiskSerialNextCycle);
-        Assert.Contains("disk serial recovery", machine.UnsupportedActiveFeature!);
+        machine.AdvanceHardwareTo(machine.Cycle + 5000);
+        Assert.Null(machine.UnsupportedActiveFeature);
+        Assert.True(machine.DiskBitPosition > 8);
     }
 
     // These are declared ideal-ADF receiver-model checks, not physical Paula
     // rate-switch conformance. See LWA-DISK-009/010 in the issue register.
+    [Fact]
+    public void MsbsyncIgnoresZeroPrefixThenReceivesEightBitsIncludingSetMsb()
+    {
+        using var machine = new LightweightA500Machine();
+        var drive = SelectedDrive();
+        var serial = new LightweightDiskSerial();
+        serial.OnDriveChanged(drive, 0);
+        drive.WriteProtected = false;
+        var writeCycle = drive.ReadyCycle;
+        foreach (var bit in new[] { 0, 0, 1, 0, 1, 0, 0, 1, 0, 1 })
+            drive.WriteBit(bit, writeCycle += 14, false);
+        machine.WriteCustomRegisterFromCopper(0x09E, 0x8300, machine.Cycle);
+        for (var i = 0; i < 9; i++) SampleCell(ref serial, drive, machine);
+        var registers = new LightweightRegisters();
+        Assert.Equal(0, serial.ReadByteStatus(registers) & 0x8000);
+        SampleCell(ref serial, drive, machine);
+        Assert.Equal(0x80A5, serial.ReadByteStatus(registers) & 0x80FF);
+        Assert.Null(machine.UnsupportedActiveFeature);
+    }
+
     [Theory]
     [InlineData(32, 1, 3)] // Sync prefix 01: late pulse adds a settling cell.
     [InlineData(33, 1, 2)] // 10: early pulse.
@@ -256,7 +278,7 @@ public sealed class LightweightDiskSerialTests
         SampleCell(ref serial, drive, machine);
 
         Assert.Equal((ushort)((shift << 1) | bit), serial.Shift);
-        Assert.Equal(prefix + cells, serial.BitPosition);
+        Assert.Equal(prefix + cells, drive.BitPosition);
         Assert.Null(machine.UnsupportedActiveFeature);
     }
 
@@ -275,19 +297,19 @@ public sealed class LightweightDiskSerialTests
         machine.WriteCustomRegisterFromCopper(0x09E, 0x0100, machine.Cycle);
         var shift = serial.Shift;
         SampleCell(ref serial, drive, machine);
-        var pendingArrival = serial.NextCycle;
+        var pendingArrival = drive.NextBitCycle;
         machine.WriteCustomRegisterFromCopper(0x09E, 0x8100, machine.Cycle);
-        Assert.Equal(pendingArrival, serial.NextCycle);
+        Assert.Equal(pendingArrival, drive.NextBitCycle);
         Assert.Equal(shift, serial.Shift);
 
         for (var i = 1; i < cells; i++) SampleCell(ref serial, drive, machine);
         shift = (ushort)((shift << 1) | bit);
         Assert.Equal(shift, serial.Shift);
-        var nextBit = (drive.Track[serial.BitPosition >> 3] >> (7 - (serial.BitPosition & 7))) & 1;
+        var nextBit = (drive.Track[drive.BitPosition >> 3] >> (7 - (drive.BitPosition & 7))) & 1;
         SampleCell(ref serial, drive, machine);
 
         Assert.Equal((ushort)((shift << 1) | nextBit), serial.Shift);
-        Assert.Equal(prefix + cells + 1, serial.BitPosition);
+        Assert.Equal(prefix + cells + 1, drive.BitPosition);
         Assert.Null(machine.UnsupportedActiveFeature);
     }
 
@@ -366,7 +388,7 @@ public sealed class LightweightDiskSerialTests
         Assert.Equal(0, serial.Shift);
         SampleCell(ref serial, drive, machine);
         Assert.Equal(1, serial.Shift);
-        Assert.Equal(2, serial.BitPosition);
+        Assert.Equal(2, drive.BitPosition);
         Assert.Null(machine.UnsupportedActiveFeature);
     }
 
@@ -379,7 +401,9 @@ public sealed class LightweightDiskSerialTests
         serial.OnDriveChanged(drive, 0);
         SampleCell(ref serial, drive, machine);
         serial.Reset();
-        Assert.Equal(long.MaxValue, serial.NextCycle);
+        drive.ResetControl();
+        drive.WriteControlPins(0x77, machine.Cycle);
+        Assert.Equal(long.MaxValue, drive.NextBitCycle);
         serial.OnDriveChanged(drive, machine.Cycle);
         SampleCell(ref serial, drive, machine);
         Assert.Equal(0, serial.Shift);
@@ -390,7 +414,7 @@ public sealed class LightweightDiskSerialTests
     private static void SampleCell(ref LightweightDiskSerial serial, LightweightFloppyDrive drive,
         LightweightA500Machine machine)
     {
-        machine.AdvanceHardwareTo(serial.NextCycle);
+        machine.AdvanceHardwareTo(drive.NextBitCycle);
         serial.Step(machine.Cycle, drive, machine);
     }
 

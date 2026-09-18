@@ -14,6 +14,7 @@ internal sealed unsafe class MiniaudioAudioOutput : ICopperScreenAudioOutput
 	private GCHandle _selfHandle;
 	private bool _deviceInitialized;
 	private int _disposed;
+	private float _volume = 1;
 
 	private MiniaudioAudioOutput(int channels, int samplesPerBuffer, int bufferCount)
 	{
@@ -81,6 +82,7 @@ internal sealed unsafe class MiniaudioAudioOutput : ICopperScreenAudioOutput
 		=> Volatile.Read(ref _disposed) == 0 && _queue.TryEnqueue(samples);
 
 	public void DiscardQueuedSamples() => _queue.DiscardQueuedSamples();
+	public void SetVolume(float volume) => Volatile.Write(ref _volume, CopperScreenAudioGain.Validate(volume));
 
 	public void Dispose()
 	{
@@ -125,7 +127,9 @@ internal sealed unsafe class MiniaudioAudioOutput : ICopperScreenAudioOutput
 			}
 
 			var sampleCount = checked((int)frameCount * output.Channels);
-			output._queue.Dequeue(new Span<float>(outputFrames, sampleCount));
+			var samples = new Span<float>(outputFrames, sampleCount);
+			output._queue.Dequeue(samples);
+			CopperScreenAudioGain.Apply(samples, Volatile.Read(ref output._volume));
 		}
 		catch
 		{

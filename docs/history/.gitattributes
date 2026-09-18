@@ -1,0 +1,4 @@
+# Preserve archived snapshot bytes so archive-manifest.json hashes survive checkout.
+amiga/G6_HOST_MEASUREMENT_POLICY_V2.md -text
+amiga/LIGHTWEIGHT_A500_*.md -text
+migration/LIGHTWEIGHT_COMMIT_ISOLATION_2026-09-16.md -text

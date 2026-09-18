@@ -39,7 +39,8 @@ internal sealed class NativeBootProbe
     private void Capture(LightweightA500Machine m)
     {
         var registers = Field<LightweightRegisters>(m, "_registers");
-        var drive = Field<LightweightFloppyDrive>(m, "_floppy");
+        var drives = Field<LightweightFloppyDrive[]>(m, "_floppies");
+        var drive = drives[0];
         var stem = Path.Combine(_directory, $"frame-{m.CompletedFrames:D6}");
         var state = new
         {
@@ -52,6 +53,11 @@ internal sealed class NativeBootProbe
             copperPc = $"{m.CopperProgramCounter:X8}", copperWaiting = m.CopperWaiting,
             blitterBusy = m.BlitterBusy, diskActive = m.DiskDmaActive, diskRemaining = m.DiskDmaRemaining,
             diskBit = m.DiskBitPosition, drive.Cylinder, drive.Head, drive.Selected, drive.MotorOn, drive.ReadyCycle,
+            drives = drives.Select((d, i) => new
+            {
+                index = i, d.Mounted, d.Cylinder, d.Head, d.Selected, d.MotorOn,
+                d.ReadyCycle, d.DiskChanged, d.BitPosition, d.NextBitCycle
+            }).ToArray(),
             ciaAMask = m.CiaAInterruptMask, ciaAPending = m.CiaAPendingInterrupts,
             ciaBMask = m.CiaBInterruptMask, ciaBPending = m.CiaBPendingInterrupts,
             bplcon0 = $"{registers.Read(0x100):X4}", diwstart = $"{registers.Read(0x08E):X4}",

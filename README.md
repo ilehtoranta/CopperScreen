@@ -8,7 +8,7 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 - PAL OCS A500 with a Motorola 68000.
 - 512 KiB Chip RAM and 512 KiB slow RAM.
 - Native Kickstart 1.3 ROM, supplied by the user.
-- One read-only standard 880 KiB ADF floppy drive, including ADF images in ZIP.
+- One to four standard 880 KiB ADF floppy drives (DF0–DF3), including ADF images in ZIP. The default remains one write-protected drive; guest writes and explicit Save ADF are under [OCS completion validation](docs/engine/OCS_COMPLETION.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
 
 CopperStart, Legacy, ECS/AGA, accelerators and hard disks are not supported by
@@ -17,7 +17,7 @@ than silently changing the configured machine.
 
 Compatibility and timing accuracy are still being developed. Known limitations,
 including residual interlace instability, are recorded in the
-[engine issue register](CopperMod.Amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md).
+[engine issue register](docs/engine/ISSUES.md).
 ROMs, operating-system files and game media are not included.
 
 ## Build and run
@@ -62,8 +62,14 @@ dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release --no-build --
 ```
 
 This synthetic run is not a gameplay benchmark. Native performance harnesses
-are under `scripts`; the [engine plan](CopperMod.Amiga/LIGHTWEIGHT_A500_ENGINE_PLAN.md)
-records workloads, measurement requirements and results.
+are under `scripts`; the [performance guide](docs/engine/PERFORMANCE.md)
+describes workloads, measurement requirements and their current portability limits.
+The retained native benchmark scripts have host and frozen-workload restrictions;
+a smoke test or optional native replay does not establish formal throughput acceptance.
+
+Engine development guidance is in [architecture](docs/engine/ARCHITECTURE.md) and
+[known issues](docs/engine/ISSUES.md). Dated implementation, acceptance and
+performance records are in the [history archive](docs/history/amiga/README.md).
 
 ## Windows package
 

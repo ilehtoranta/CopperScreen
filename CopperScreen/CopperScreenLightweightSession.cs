@@ -11,51 +11,53 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     private byte _mouseButtons, _joystick0, _joystick1;
     private int _fireFrames;
     private bool _haveFrame, _audioAvailable, _faulted;
-    private byte[]? _pendingAdf;
-    private int _insertDelay;
+    private readonly byte[]?[] _pendingAdf = new byte[]?[4];
+    private readonly int[] _insertDelay = new int[4];
+    private readonly string?[] _diskPaths = new string?[4];
 
     public CopperScreenLightweightSession(CopperScreenStartupOptions options)
     {
         Validate(options);
         // Media decoding is mount-time only; none of the old execution machinery is created.
-        var rom = CopperScreenKickstartRomArchive.ReadRomImage(options.KickstartRomPath!,
+        var rom = CopperScreenKickstartRomArchive.ReadNative13Rom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion);
-        if (rom.Length != 262144 || rom[12] != 0 || rom[13] != 34)
-            throw new NotSupportedException("Lightweight requires a native 256 KiB Kickstart 1.3 (v34) ROM.");
-        var diskPath = options.DriveDiskPaths[0];
-        var adf = diskPath is null ? null : GetAdf(CopperScreenDiskImageArchive.LoadDiskImage(diskPath));
         BaseDirectory = options.BaseDirectory;
         ProfileName = options.Profile.DisplayName + " [Lightweight]";
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
-        _machine = new(new LightweightA500Configuration { FramebufferWidth = 908 });
+        _machine = new(new LightweightA500Configuration
+            { FramebufferWidth = 908, FloppyDriveCount = options.Profile.FloppyDriveCount });
         try
         {
             _machine.LoadKickstart(rom);
-            if (adf != null) _machine.MountAdf(adf);
-            DiskPath = diskPath;
+            for (var i = 0; i < _machine.FloppyDriveCount; i++)
+            {
+                var path = options.DriveDiskPaths[i];
+                if (path != null) _machine.MountAdf(i, GetAdf(CopperScreenDiskImageArchive.LoadDiskImage(path)));
+                _machine.SetDriveWriteProtected(i, options.DriveWriteProtected[i] ?? true);
+                _diskPaths[i] = path;
+            }
             ResetHostState();
         }
         catch { _machine.Dispose(); throw; }
     }
 
-    internal static void Validate(CopperScreenStartupOptions options)
+    internal static void Validate(CopperScreenStartupOptions options, bool requireRomPath = true)
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
         if (p.Chipset != AmigaChipset.OcsPal || p.ChipRamSize != 512 * 1024 ||
             p.ExpansionRamSize != 512 * 1024 || p.ExpansionRamBase != 0xC00000 ||
             p.RealFastRamSize != 0 || p.RtgVramSize != 0 || p.RtcEnabled ||
-            p.FloppyDriveCount != 1 || options.HardDrives.Count != 0 ||
+            p.FloppyDriveCount is < 1 or > 4 || options.HardDrives.Count != 0 ||
             (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
             p.KickstartSource is not (CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.KickstartRom) ||
             p.KickstartVersion != KickstartVersion.Kickstart13)
-            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one read-only DF0 only; no RTC, RTG or hard drives.");
-        if (string.IsNullOrWhiteSpace(options.KickstartRomPath))
-            throw new NotSupportedException("Lightweight needs your native Kickstart 1.3 ROM. Set ROM path in Settings > Machine or supply --kickstart <path>.");
-        if (options.DriveWriteProtected.Any(value => value == false) ||
-            options.DriveDiskPaths.Skip(1).Any(path => path != null))
-            throw new NotSupportedException("Lightweight supports read-only DF0 only.");
+            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC, RTG or hard drives.");
+        if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
+            throw new NotSupportedException("Choose your Kickstart 1.3 ROM in Settings > Setup, or supply --kickstart <path>.");
+        if (options.DriveDiskPaths.Skip(p.FloppyDriveCount).Any(path => path != null))
+            throw new NotSupportedException("Lightweight accepts media in connected floppy drives only.");
         if (options.AgnusBusArbitration != AgnusBusArbitrationMode.Legacy ||
             options.CopperQuiescentFastPath || options.CopperQuiescentFastPathVerify || options.CopperQuiescentDiagnostics ||
             options.DeferredCpuBusBatchConfigured || options.DeferredCpuChipWriteJournalConfigured ||
@@ -98,7 +100,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public int CompletedInterlaceField { get; private set; }
     public string ProfileName { get; }
     public string DiskName => CopperScreenDiskImageArchive.GetDisplayName(DiskPath);
-    public string? DiskPath { get; private set; }
+    public string? DiskPath => _diskPaths[0];
     public string BaseDirectory { get; }
     public FloppyDriveAudioOptions FloppyDriveAudioOptions { get; }
     public CopperScreenCpuState CpuState => new(_machine.Cpu.ProgramCounter,
@@ -108,7 +110,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public string? FaultMessage => _faulted ? StatusText : null;
     public bool IsPaused { get; private set; }
     public bool IsWorkbenchHandoffPending => false;
-    public bool IsDiskSwapPending => _pendingAdf != null;
+    public bool IsDiskSwapPending => Array.Exists(_pendingAdf, adf => adf != null);
     public bool IsPrimaryFirePressed => (_mouseButtons & 1) != 0 || ((_joystick0 | _joystick1) & 16) != 0 || _fireFrames > 0;
     public bool AudioFilterEnabled => _machine.AudioFilterControlEnabled;
     internal LightweightA500Machine Machine => _machine;
@@ -120,11 +122,12 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (destination.Length != Framebuffer.Length) throw new ArgumentException("Wrong framebuffer size.");
         if (IsPaused) { Framebuffer.CopyTo(destination, 0); return; }
-        if (_pendingAdf != null && _insertDelay-- <= 0)
+        for (var i = 0; i < _machine.FloppyDriveCount; i++)
         {
-            _machine.MountAdf(_pendingAdf);
-            _pendingAdf = null;
-            StatusText = "Lightweight: inserted " + DiskName;
+            if (_pendingAdf[i] is not { } adf || _insertDelay[i]-- > 0) continue;
+            _machine.MountAdf(i, adf);
+            _pendingAdf[i] = null;
+            StatusText = $"Lightweight: DF{i} inserted " + CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]);
         }
         var field = _machine.IsLongField ? 0 : 1;
         _machine.ExecuteFrame();
@@ -163,12 +166,19 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     public void CaptureDriveStates(Span<CopperScreenDriveState> destination)
     {
-        var drive = _machine.DriveState;
         for (var i = 0; i < destination.Length; i++)
-            destination[i] = i == 0
-                ? new(i, true, _machine.IsAdfMounted, DiskName, DiskPath, drive.Cylinder, drive.Head,
-                    drive.MotorOn, drive.Selected, true, drive.ActiveDma)
-                : new(i, false, false, "Not connected", null, 0, 0, false, false, true, false);
+        {
+            if (i >= _machine.FloppyDriveCount)
+            {
+                destination[i] = new(i, false, false, "Not connected", null, 0, 0, false, false, true, false);
+                continue;
+            }
+            var drive = _machine.GetDriveState(i);
+            destination[i] = new(i, true, _machine.IsDriveMounted(i),
+                CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]), _diskPaths[i], drive.Cylinder, drive.Head,
+                drive.MotorOn, drive.Selected, _machine.IsDriveWriteProtected(i), drive.ActiveDma)
+                { IsSwapPending = _pendingAdf[i] != null, HasUnsavedChanges = _machine.IsDriveDirty(i) };
+        }
     }
 
     public bool InsertLoadedDisk(string path, CopperScreenAdfImage disk, bool markChanged)
@@ -176,31 +186,47 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     public bool InsertLoadedDisk(int drive, string path, CopperScreenAdfImage disk, bool markChanged)
     {
-        if (drive != 0) return Reject("Only DF0 is supported.");
+        if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
         var adf = GetAdf(disk); // Validate before changing the existing medium.
+        if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or discard and eject it before replacing the disk.");
         if (markChanged)
         {
-            _machine.EjectAdf();
-            _pendingAdf = adf;
-            _insertDelay = 25;
+            _machine.EjectAdf(drive);
+            _pendingAdf[drive] = adf;
+            _insertDelay[drive] = 25;
         }
-        else { _machine.MountAdf(adf); _pendingAdf = null; }
-        DiskPath = path;
-        StatusText = "Lightweight: " + (markChanged ? "swapping " : "inserted ") + DiskName;
+        else { _machine.MountAdf(drive, adf); _pendingAdf[drive] = null; }
+        _diskPaths[drive] = path;
+        StatusText = $"Lightweight: DF{drive} " + (markChanged ? "swapping " : "inserted ") + CopperScreenDiskImageArchive.GetDisplayName(path);
         return true;
     }
 
     public bool EjectDisk(int drive)
     {
-        if (drive != 0) return Reject("Only DF0 is supported.");
-        _pendingAdf = null;
-        _machine.EjectAdf();
-        DiskPath = null;
-        StatusText = "Lightweight: DF0 ejected";
+        if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
+        if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or use Discard and eject.");
+        return DiscardAndEjectDisk(drive);
+    }
+
+    public bool DiscardAndEjectDisk(int drive)
+    {
+        if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
+        _pendingAdf[drive] = null;
+        _machine.EjectAdf(drive);
+        _diskPaths[drive] = null;
+        StatusText = $"Lightweight: DF{drive} ejected";
         return true;
     }
     public bool SetDriveWriteProtected(int drive, bool writeProtected)
-        => drive == 0 && writeProtected ? true : Reject("Lightweight supports read-only DF0 only.");
+    {
+        if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
+        _machine.SetDriveWriteProtected(drive, writeProtected);
+        SetStatusText($"DF{drive}: " + (writeProtected ? "write protected" : "writable in memory; use Save ADF to keep changes"));
+        return true;
+    }
+
+    public byte[] ExportAdf(int drive) => _machine.ExportAdf(drive);
+    public void MarkAdfSaved(int drive) => _machine.MarkAdfSaved(drive);
     private bool Reject(string message) { SetStatusText(message); return false; }
     public void SetStatusText(string message) { if (!_faulted) StatusText = message; }
     public void CaptureFatalException(Exception exception)
@@ -214,20 +240,22 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     }
     public void Reset()
     {
-        if (_pendingAdf != null) _machine.MountAdf(_pendingAdf);
+        for (var i = 0; i < _machine.FloppyDriveCount; i++)
+            if (_pendingAdf[i] is { } adf) _machine.MountAdf(i, adf);
         _machine.Reset();
         ResetHostState();
     }
     private void ResetHostState()
     {
-        _pendingAdf = null;
+        Array.Clear(_pendingAdf);
+        Array.Clear(_insertDelay);
         _mouseButtons = _joystick0 = _joystick1 = 0;
         _fireFrames = 0;
         _haveFrame = _audioAvailable = _faulted = IsPaused = IsInterlaced = false;
         CompletedInterlaceField = 0;
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
-        StatusText = "Lightweight experimental A500 — native Kickstart 1.3, read-only ADF";
+        StatusText = "Lightweight experimental A500 — native Kickstart 1.3, standard ADF";
     }
     private void ApplyInput(short dx = 0, short dy = 0)
         => _machine.SubmitInput(new((byte)(_joystick0 | (_inputOptions.IsMousePort(0) ? 0 : 128)),

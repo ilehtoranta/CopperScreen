@@ -4,8 +4,12 @@
 complete-product decision. See [current ownership](../docs/PRODUCT_OWNERSHIP.md).
 The app now references the local Lightweight and CopperDisk projects; only
 genuinely shared libraries such as Copper68k remain external packages.
+For the current source-build and test contract, use the repository
+[README](../README.md). The package-extraction proposal and
+package-only proof below are retained as historical audit evidence, not as
+current migration or release instructions.
 
-## Decision and scope — 2026-09-16
+## Superseded decision and scope — 2026-09-16 (historical)
 
 Prepare CopperScreen to move into its own repository without moving or copying
 emulator implementation code. Keep Copper68k, CopperDisk and
@@ -18,7 +22,7 @@ windowing, input mapping, pacing and audio-device delivery. The engine owns all
 emulated hardware. The split adds no per-cycle interfaces, dispatch, copying,
 logging or diagnostics. Existing native-session pixel and audio paths are unchanged.
 
-## Dependencies
+### Historical dependencies
 
 The active host no longer references CopperMod.Amiga, CyberGraphics,
 CopperMod.Amiga.Emulator, CopperStart or its SDK. The old Legacy emulator,
@@ -42,49 +46,47 @@ Engine and host package references use exact version ranges. These are local
 verification versions, not claims that a public feed contains them. Do not
 publish different binaries under an already published version.
 
-## Build modes
+## Historical build modes (superseded)
 
-Monorepo development retains source references by default:
+The package-only consumer mode described in this historical proposal is not
+implemented by the current `CopperScreen.csproj`. In particular,
+`UseEmulatorProjectReferences=false` does not remove its unconditional project
+references, so that switch must not be treated as a supported current
+package-consumer build.
 
-```powershell
-dotnet build CopperScreen.Lightweight.slnx -c Release
-dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release
-```
-
-The standalone consumer selects `UseEmulatorProjectReferences=false`:
-
-```powershell
-dotnet build CopperScreen/CopperScreen.csproj -c Release -p:UseEmulatorProjectReferences=false -p:RestoreAdditionalProjectSources=PATH_TO_LOCAL_FEED
-```
-
-Pack the engine with `UseEmulatorPackageDependencies=true`, Release configuration
-and `LightweightDiagnostics=false`. Packing diagnostics, Debug configuration or
-unversioned source-project dependencies is rejected before package generation.
-The guard does not affect ordinary source builds or diagnostic tests.
-
-## Repeatable isolated verification
-
-From the library repository root:
+Current monorepo development uses the commands in the [README](../README.md#tests-and-headless-execution).
+For reference, the production build is:
 
 ```powershell
-./scripts/verify-copperscreen-package-boundary.ps1
+dotnet build CopperScreen.slnx -c Release
 ```
 
-For native replay, also supply all of `-NativeRom`, `-NativeAdf`, `-NativeScript`
+The old package-only packing flags and consumer command belonged to the
+superseded proof. Local package creation, when explicitly needed, is provided by
+`scripts/pack-engine.ps1`; it does not publish packages.
+
+## Historical isolated verification (superseded)
+
+The one-off verification script referenced by this historical record is not
+present in the current repository. Do not use or recreate it as the current
+verification procedure; follow the commands and test separation in the
+[README](../README.md#tests-and-headless-execution) instead.
+
+The historical native-replay procedure supplied all of `-NativeRom`, `-NativeAdf`, `-NativeScript`
 with local paths to the native Kickstart 1.3 ROM, frozen Lemmings disk and
 `CopperMod.Amiga.Lightweight.Runner/Workloads/lemmings-native-level1-exploratory.json`.
 Without these paths the two native tests are explicitly skipped.
 
-The script creates a fresh directory, packs the three libraries to a local feed,
+The historical proof created a fresh directory, packed the three libraries to a local feed,
 uses a fresh package cache, copies only the app and focused host tests, and builds
 and tests the copied consumer. There are no CPU, disk or engine source projects
 beside it. It checks restored dependencies are packages and rejects forbidden
 Legacy/CopperStart DLLs in host output. Logs and test results remain in the printed
 evidence directory. It never publishes, commits, deletes evidence or touches a remote.
 
-Use `-SourceRoot` to select an isolated source snapshot and `-WorkDirectory` to
-choose a new evidence directory. Source builds may update bin/obj in that snapshot;
-the script does not isolate unrelated uncommitted library changes automatically.
+The retired proof accepted `-SourceRoot` to select an isolated source snapshot and
+`-WorkDirectory` to choose a new evidence directory. Those were options of the
+absent historical script, not current repository commands.
 
 ## Verification evidence
 
@@ -116,7 +118,10 @@ treated as an execution defect; build-tool dependency maintenance remains separa
 This is dependency/correctness verification, not a new throughput gate; no new FPS
 claim or historical gate disposition follows from it.
 
-## Repository migration still to do
+## Superseded repository migration checklist (historical)
+
+The following checklist records the abandoned UI-only repository/package split.
+It is retained for audit history and is not an open current-work list.
 
 1. Commit the scoped boundary change without unrelated work.
 2. Choose the new repository owner/name and visibility, then create it with

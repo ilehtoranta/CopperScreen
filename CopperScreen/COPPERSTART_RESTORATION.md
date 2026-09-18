@@ -11,11 +11,17 @@ unavailable message; use native Workbench to launch disk applications.
 From the repository root:
 
 ```powershell
-dotnet build CopperScreen.Lightweight.slnx -c Release
-dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release
-dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release
+dotnet build CopperScreen.slnx -c Release
+dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release --no-build --no-restore
+dotnet test CopperDisk.Tests/CopperDisk.Tests.csproj -c Release --no-build --no-restore
+dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --artifacts-path artifacts/diagnostic-tests
+dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release --no-build --no-restore -- --synthetic-rom-loop --frames 10
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
 ```
+
+The diagnostic test project is intentionally outside the production solution and
+uses separate build outputs. The synthetic runner invocation is a smoke test,
+not a gameplay or throughput benchmark.
 
 The historical `CopperMod.sln`, `CopperScreen.Tests` and Legacy benchmark
 projects include the unfinished CopperStart migration. They are not the native
@@ -40,8 +46,8 @@ and audio tests and adds build-boundary/media checks.
   raster geometry are now host-owned. The old presentation-frame helper is
   excluded with the Legacy emulator. A restored adapter must explicitly convert
   these values instead of importing Legacy types into the common host.
-- See `PACKAGE_BOUNDARY.md` for the package-only build and repository split
-  boundary. No emulator execution abstraction was added by this separation.
+- See `PACKAGE_BOUNDARY.md` for the historical package-extraction boundary.
+  No emulator execution abstraction was added by that separation.
 
 Restore CopperStart through a separately buildable optional Legacy adapter,
 with explicit factory registration and unavailable handling when absent.

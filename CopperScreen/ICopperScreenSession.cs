@@ -49,7 +49,10 @@ internal interface ICopperScreenSession : IDisposable
     bool InsertLoadedDisk(string path, CopperScreenAdfImage disk, bool markChanged);
     bool InsertLoadedDisk(int drive, string path, CopperScreenAdfImage disk, bool markChanged);
     bool SetDriveWriteProtected(int drive, bool writeProtected);
+    byte[] ExportAdf(int drive) => throw new NotSupportedException("ADF export is not exposed by this session.");
+    void MarkAdfSaved(int drive) { }
     bool EjectDisk(int drive) => throw new NotSupportedException("Disk eject is not exposed by this session.");
+    bool DiscardAndEjectDisk(int drive) => EjectDisk(drive);
     bool ConsumeCopperBenchRequest();
     bool LaunchCopperBenchPath(string path, out string message);
     void QueueHostClipboardText(string text);

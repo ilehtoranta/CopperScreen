@@ -131,6 +131,22 @@ internal sealed class CopperScreenSettingsDraft
 		RequiresRestart = false;
 	}
 
+	public CopperScreenSettingsDraft Clone()
+	{
+		var copy = FromProfile(ToProfile());
+		copy.Engine = Engine;
+		copy.RequiresRestart = RequiresRestart;
+		return copy;
+	}
+
+	public bool NeedsRestartComparedWith(CopperScreenSettingsDraft active)
+		=> Engine != active.Engine || Chipset != active.Chipset || RomVersion != active.RomVersion ||
+			KickstartSource != active.KickstartSource || !string.Equals(KickstartRomPath, active.KickstartRomPath, StringComparison.Ordinal) ||
+			CpuBackend != active.CpuBackend || ChipRamKb != active.ChipRamKb || PseudoFastRamKb != active.PseudoFastRamKb ||
+			PseudoFastBase != active.PseudoFastBase || RealFastRamKb != active.RealFastRamKb || RealFastBase != active.RealFastBase ||
+			RtgVramMb != active.RtgVramMb || RtcEnabled != active.RtcEnabled || FloppyDriveCount != active.FloppyDriveCount ||
+			FloppyDriveAudio != active.FloppyDriveAudio || !HardDrives.SequenceEqual(active.HardDrives);
+
 	public CopperScreenStartupOptions ToStartupOptions(string baseDirectory)
 	{
 		var profile = ToProfile();
@@ -236,7 +252,8 @@ internal static class CopperScreenProfileStore
 		{
 			if (CopperScreenProfile.TryLoad(path, baseDirectory, out var profile, out _))
 			{
-				profiles.Add(new CopperScreenProfileSummary(profile.Id, profile.DisplayName, path));
+				var unavailable = CopperScreenAvailability.GetUnavailableReason(CopperScreenSettingsDraft.FromProfile(profile), baseDirectory);
+				profiles.Add(new CopperScreenProfileSummary(profile.Id, profile.DisplayName, path, unavailable));
 			}
 		}
 
@@ -705,8 +722,9 @@ internal static class CopperScreenProfileStore
 	}
 }
 
-internal sealed record CopperScreenProfileSummary(string Id, string DisplayName, string Path)
+internal sealed record CopperScreenProfileSummary(string Id, string DisplayName, string Path, string? UnavailableReason = null)
 {
+	public bool IsAvailable => UnavailableReason == null;
 	public override string ToString()
-		=> DisplayName + " (" + Id + ") - " + Path;
+		=> DisplayName + (IsAvailable ? string.Empty : " — Not yet available");
 }

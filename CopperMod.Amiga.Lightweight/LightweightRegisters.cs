@@ -5,6 +5,11 @@ internal sealed class LightweightRegisters
     internal const ushort Dmaconr = 0x002;
     internal const ushort Vposr = 0x004;
     internal const ushort Vhposr = 0x006;
+    internal const ushort Clxdat = 0x00E;
+    internal const ushort Clxcon = 0x098;
+    internal const ushort Serdatr = 0x018;
+    internal const ushort Serdat = 0x030;
+    internal const ushort Serper = 0x032;
     internal const ushort Adkconr = 0x010;
     internal const ushort Dskbytr = 0x01A;
     internal const ushort Dskdatr = 0x008;
