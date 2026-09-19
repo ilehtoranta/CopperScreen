@@ -448,6 +448,102 @@ collector and `run-post-commit-diagnostics.ps1` its line-ending correction. This
 task ran no concurrent local builds/tests/probes. The owner's one-off acceptance
 above still applies; these results do not convert any invalid sample into PASS.
 
+## Lean engine optimization, 2026-09-19 — accepted with an unresolved measurement gate
+
+The owner requested a modest 5% throughput improvement. This comparison starts
+from the accepted trace/Paula engine `280B6B78…` above, with the same CPU, disk and
+runner assemblies. It does not restart from `6b5cb1b` or inherit the preceding
+build's scoped acceptance. The 5% objective and the per-workload one-sided 95%
+upper frame-time regression limit of 1% remain unverified for this candidate.
+
+Sampled-thread profiling of the actual lores and native Lemmings workloads found
+the device/video loop, bitplane work and CPU dispatch as the main costs. Profiles
+include startup/warmup and are diagnostic evidence, not steady-state timing.
+The small candidate changes are:
+
+- Keep paired playfield codes in their original adjacent six-bit lanes, with a
+  register-derived mask. Retain the scalar reload path and physical pixel order,
+  including independent odd/even scroll, HAM and dual-playfield composition.
+- Store a full wide-output CCK with one vector store; preserve narrow output and
+  the portable intrinsic fallback. No pixels, shifts or collision work are skipped.
+- Load validated big-endian memory words directly rather than joining two bytes.
+- Calculate the clock-loop endpoint once and retain the CPU/state references
+  within a scalar execution quantum. Device deadlines and execution order remain
+  unchanged; no scheduler, callback, diagnostic counter or allocation is added.
+
+Frozen engine SHA256:
+`382E455B98BCECC7E4E1B66ABE86A99738F46D46DCD5CFABE99153426777FE54`.
+The candidate was built from `acb9411` plus the recorded source patch; the performance
+reference is the unchanged accepted engine binary. `source-final.patch` and
+`manifest-final.json` under local `artifacts/lean-2026-09-19/` record source and
+complete frozen binary identities. `reference/` and `candidate-final/` use the
+identical runner and dependencies. No package was repacked or published.
+
+Engineering trials are separate from acceptance. A pending-reload shortcut was
+discarded after inconsistent timing; passing pixel values by reference was
+discarded after generated-code inspection exposed extra stack traffic. A palette
+range-check trial was also removed. The final packed representation removes the
+conversion without those spills; vector stores use a shuffle to avoid a chain of
+four scalar lane insertions. Generated-code size alone is not a speed measurement.
+
+Short four-sample trials retain every completed sample and any recorded host-load
+failure. `direct-trial`, `direct-native-trial` and `packed-trial` encountered active
+build/test or sustained package/SMT interference. Other short trials varied enough
+to obscure a modest gain even without a telemetry rejection. No favorable subset,
+profiled FPS or short-trial average establishes the 5% objective or the 1% ceiling.
+The formal comparison used the unchanged homogeneous-retention-v1 protocol in
+`retention-final/`: freshly verified CPU 2 / protected sibling 3, Normal priority,
+ten-second preflight/cooldowns and host-load policy v2. Lores R1 completed at
+372.37 FPS (2.6855 ms/field). During C1, sustained sibling activity exceeded 25%
+for 10.159 seconds; the harness stopped and marked the series **INVALID / RERUN**.
+There is no completed pair, candidate FPS result or confidence bound. The solitary
+reference sample cannot establish any speedup or regression. This task ran no
+builds, tests or other probes during the formal series. Earlier evidence and
+acceptance decisions are unchanged; no exception for this candidate is implied.
+
+The production Release solution builds with zero warnings/errors. All 557 engine
+tests pass both with hardware intrinsics enabled and with
+`DOTNET_EnableHWIntrinsic=0`; this includes all 256 odd/even scroll combinations
+in both lores and hires. All 93 host tests pass with both native gameplay and
+keyboard replays enabled, and all 74 CopperDisk tests pass; none were skipped.
+These results establish correctness coverage, not the outstanding performance
+bound. Logs are retained under the dated local evidence directory.
+
+Separate correctness-only runs in `final-fingerprints/` completed the full retained
+lores, hires and native Lemmings workloads. Every complete fingerprint matches
+the accepted trace/Paula engine, with real PCM, zero measured steady-state
+allocations and no unsupported-mode reports. Native cycle `2063321634`, CPU
+`6AE7090DA8AFB7E3`, hardware `334A819F6FDFB1CA` and output `C65F87325946E5DA`
+are unchanged. These uncontrolled run times are excluded from performance claims;
+they do not repair the invalid formal series. Its 5% objective / 1% regression
+bound remain unverified; the owner's subsequent acceptance is recorded below.
+
+The owner-requested retry in `retention-retry-1/` reverified all frozen source,
+binary and six protocol/media input identities before running the same protocol
+on CPU 2 / sibling 3. It completed all twelve lores samples and seven hires
+samples, each with matching complete fingerprints and zero measured allocations.
+During hires R4, sustained sibling activity exceeded 25% for 10.394 seconds.
+The harness stopped with **INVALID / RERUN**; native measurements never started,
+and there is no complete-series result or acceptance from measurement. Completed samples are not
+pooled with the earlier attempt or promoted to an overall performance claim.
+
+A subsequent twelve-second idle-core survey found the selected pair still had
+the lowest average background activity (7.56%, versus 8.14% for CPU 6/7), so it
+did not identify a quieter alternative. Placement and thresholds were unchanged.
+`retry-core-survey.json` and `retry-core-ranking.json` retain this diagnostic;
+the short survey cannot establish quiet conditions for a full benchmark run.
+
+### Owner acceptance, 2026-09-19
+
+After reviewing the retry, the owner explicitly accepted this unresolved gate
+and authorized committing and pushing the optimization candidate, engine SHA256
+`382E455B98BCECC7E4E1B66ABE86A99738F46D46DCD5CFABE99153426777FE54`.
+This is a scoped acceptance of that build despite the unavailable performance
+bound. Both formal attempts remain **INVALID / RERUN**. Neither a 5% gain nor
+compliance with the 1% regression ceiling has been demonstrated. The acceptance
+does not waive future changes, certify remaining OCS behavior or authorize package
+publication. Source and correctness evidence above remain unchanged.
+
 ## Historical portability boundary
 
 The v1 harness above supplies a separate homogeneous-core/SMT placement rule,

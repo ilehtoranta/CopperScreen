@@ -98,7 +98,10 @@ internal sealed class LightweightClock
             CompleteColorClock(machine);
         }
 
-        while (targetCycle - Cycle >= CpuCyclesPerColorClock)
+        // Canonical cycles are nonnegative and targetCycle is at least Cycle.
+        // Compute the complete-CCK limit once instead of subtracting per CCK.
+        var lastCompleteCckStart = targetCycle - CpuCyclesPerColorClock;
+        while (Cycle <= lastCompleteCckStart)
         {
             Cycle += CpuCyclesPerColorClock;
             CompleteColorClock(machine);

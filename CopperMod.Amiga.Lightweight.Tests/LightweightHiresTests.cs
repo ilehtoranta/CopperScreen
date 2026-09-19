@@ -103,6 +103,44 @@ public sealed class LightweightHiresTests
     }
 
     [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void OddAndEvenReloadPositionsRemainIndependentForEveryScroll(bool hires)
+    {
+        const int green = unchecked((int)0xFF00FF00);
+        const int yellow = unchecked((int)0xFFFFFF00);
+        for (var scroll = 0; scroll < 256; scroll++)
+        {
+            using var m = Create();
+            Configure(m, 2);
+            if (!hires)
+            {
+                W(m, 0x100, 0x2200);
+                W(m, 0x092, 0x38);
+                W(m, 0x094, 0xD0);
+            }
+            W(m, 0x102, (ushort)scroll);
+            W(m, 0x184, 0x0F0);
+            W(m, 0x186, 0xFF0);
+            var cycle = m.Cycle;
+            m.WriteWord(Address(0), 0x8000, ref cycle, M68kBusAccessKind.CpuDataWrite);
+            m.WriteWord(Address(1), 0x8000, ref cycle, M68kBusAccessKind.CpuDataWrite);
+            m.ExecuteFrame();
+            var mask = hires ? 7 : 15;
+            var oddX = 258 + 2 * (scroll & mask);
+            var evenX = 258 + 2 * ((scroll >> 4) & mask);
+            var pixelWidth = hires ? 1 : 2;
+            for (var x = 250; x < 300; x++)
+            {
+                var odd = x >= oddX && x < oddX + pixelWidth;
+                var even = x >= evenX && x < evenX + pixelWidth;
+                var expected = odd ? (even ? yellow : Red) : (even ? green : Black);
+                Assert.Equal(expected, m.Framebuffer.Span[44 * Width + x]);
+            }
+        }
+    }
+
+    [Theory]
     [InlineData(false)] [InlineData(true)]
     public void SpriteAdvancesOnceAndPriorityIsResolvedForBothHiresHalves(bool attached)
     {

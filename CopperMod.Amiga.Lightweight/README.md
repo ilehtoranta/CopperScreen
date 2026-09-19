@@ -65,8 +65,10 @@ save/reopen check have run on disposable media.
 from attachment. Exact bit lengths, index orientation, stored gaps, density and
 weak regions feed the causal integer receiver. IPF cannot be made writable or
 exported as ADF. `GetDriveFormat` and `CanWriteDrive` expose media capabilities.
-Protection compatibility is **incomplete**, including a reproduced trace-exception
-failure in the pinned CPU dependency. See the [storage record](../docs/engine/STORAGE.md).
+Protection compatibility is **incomplete**. The trace-exception defect is repaired
+in the pinned development CPU package; Operation Thunderbolt reaches gameplay,
+but its second-disk handling remains unverified. See the
+[storage record](../docs/engine/STORAGE.md) and [CPU pin](../docs/engine/CPU_TRACE.md).
 
 Set `Hardfiles` in `LightweightA500Configuration` before constructing the machine.
 `CopperDisk.AmigaHardfileConfiguration` exposes unit/path/protection/creation size,
@@ -79,7 +81,8 @@ The [OCS completion record](../docs/engine/OCS_COMPLETION.md) tracks current
 validation, the 1% performance requirement and remaining register/physical-timing
 boundaries. The measured build has performance acceptance with two explicit
 exceptions; those exceptions apply only to that earlier build. The storage
-candidate has its own 1% performance gate. OCS completion remains in progress. This does not certify all OCS
+and optimization candidates have separately recorded owner acceptance of unresolved
+measurement gates, not measured performance passes. OCS completion remains in progress. This does not certify all OCS
 register combinations or external synchronization modes.
 
 The host does not need friend access, a Legacy Bus/Scheduler or CopperStart.

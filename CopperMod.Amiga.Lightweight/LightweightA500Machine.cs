@@ -1,4 +1,5 @@
 using Copper68k;
+using System.Buffers.Binary;
 
 namespace CopperMod.Amiga.Lightweight;
 
@@ -397,27 +398,29 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
 
     private void ExecuteScalarFallbackQuantum(long targetCycle)
     {
-        while (_cpu.State.Cycles < targetCycle)
+        var cpu = _cpu;
+        var state = cpu.State;
+        while (state.Cycles < targetCycle)
         {
             if (DispatchPendingCpuInterrupt())
             {
                 continue;
             }
 
-            if (_cpu.State.Halted || _cpu.State.Stopped)
+            if (state.Halted || state.Stopped)
             {
                 return;
             }
 
-            var previousCycle = _cpu.State.Cycles;
-            _cpu.ExecuteInstruction();
-            if (_cpu.State.Cycles <= previousCycle)
+            var previousCycle = state.Cycles;
+            cpu.ExecuteInstruction();
+            if (state.Cycles <= previousCycle)
             {
                 throw new InvalidOperationException(
                     "The 68000 core did not advance the lightweight clock.");
             }
 
-            AdvanceHardwareTo(_cpu.State.Cycles);
+            AdvanceHardwareTo(state.Cycles);
         }
     }
 
@@ -830,7 +833,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     {
         address &= (uint)(_chipRam.Length - 1);
         address &= 0x00FF_FFFEu;
-        return (ushort)((_chipRam[address] << 8) | _chipRam[address + 1]);
+        return BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)address, 2));
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -1326,11 +1329,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         if (_overlayEnabled && address + 1 < 0x400)
             return ReadRomWord(_romImageOffset + (int)address);
         if (address + 1 < _chipRam.Length)
-            return (ushort)((_chipRam[address] << 8) | _chipRam[address + 1]);
+            return BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)address, 2));
         if (address >= 0x00C00000 && address + 1 < 0x00C00000 + _slowRam.Length)
         {
             var offset = (int)(address - 0x00C00000);
-            return (ushort)((_slowRam[offset] << 8) | _slowRam[offset + 1]);
+            return BinaryPrimitives.ReadUInt16BigEndian(_slowRam.AsSpan(offset, 2));
         }
         if (address >= CustomBase && address < CustomBase + 0x200)
         {
@@ -1412,7 +1415,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     {
         if (!_romLoaded || offset < _romImageOffset || offset + 1 >= _romImageOffset + _romImageLength)
             return 0xFFFF;
-        return (ushort)((_rom[offset] << 8) | _rom[offset + 1]);
+        return BinaryPrimitives.ReadUInt16BigEndian(_rom.AsSpan(offset, 2));
     }
 
     private void WriteByteRaw(uint address, byte value, long cycle)

@@ -1,6 +1,6 @@
 # Lightweight A500 issues and limitations
 
-Updated 2026-09-18 for the storage work following the accepted OCS candidate.
+Updated 2026-09-19 for the accepted optimization candidate and current OCS gap audit.
 Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL OCS A500 profile](../../CopperMod.Amiga.Lightweight/README.md).
@@ -57,6 +57,40 @@ Prioritize a demonstrated failure in the supported profile first. Residual
 interlace is a disclosed non-blocking follow-up. Hardware research should start
 from the smallest discriminating case, not from reopening all completed stages.
 Benchmark portability remains separate tooling work in the performance guide.
+
+## Remaining PAL OCS completion work — 2026-09-19
+
+Ordinary dual playfield, collisions, Paula UART, DF0–DF3 and standard-ADF writes
+are implemented. The following source-backed gaps prevent an unrestricted OCS
+completeness claim; undocumented combinations are separate from ordinary mode support.
+
+| Area | Missing implementation |
+| --- | --- |
+| Beam and synchronization | VHPOSW and VPOSW beam repositioning beyond LOF; external synchronization/genlock and consistent DMA/display rescheduling. See LWA-VIDEO-009. |
+| Nonstandard display and blitter modes | Dual HAM, HAM outside five/six-plane lores, hires BPU above four, BPU=7, dual-playfield priority codes 5–7, and line-mode BLTSIZE widths other than two. These remain explicitly rejected. |
+| Disk-controller edge behavior | Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA, FIFO overrun behavior and simultaneous selected read streams. Preserved-track writes and fully physical write splices/precompensation are absent. |
+| A500 board I/O | Keyboard power-up/resynchronization/retransmission/reset chord; general CIA clocked serial output and external CNT timer modes. General parallel-port integration remains separate work. |
+| Undocumented bus data | The 227-CCK wrap-dummy bus-data case remains explicitly unsupported. |
+
+Implemented behavior still needs independent physical verification at display
+mode/reload, HAM, sprite/collision, Copper/bus, disk FIFO/sync/completion, CIA TOD/IRQ,
+Paula audio/UART interrupt and analog input boundaries. The IPF receiver is a
+bounded model, not a silicon-certified separator. Residual interlace instability
+still needs a reproducible host-versus-engine diagnosis. These are verification
+gaps or disclosed approximations, not proof that each feature is broken.
+
+Host paddle/light-pen mapping, optional serial/parallel transports, interactive
+storage-dialog checks and Thunderbolt disk-two replay remain integration/native
+coverage work. They should not be counted as missing collision, UART, four-drive
+or ADF-write implementations. See [storage](STORAGE.md) for the exact evidence.
+
+Recommended implementation order is beam/synchronization, keyboard/CIA recovery
+and pin modes, then the explicitly rejected disk and nonstandard register cases,
+prioritizing any demonstrated native failure. Each slice needs focused hardware
+expectations and its own unchanged-work performance comparison. The latest scoped
+performance acceptance does not close these gaps. NTSC is also missing for a
+broader OCS profile; ECS/AGA, newer CPUs and expansion/storage devices are separate
+capabilities beyond the agreed PAL OCS/68000 scope.
 
 ## Disk assumptions
 
@@ -302,8 +336,10 @@ it is not an outstanding performance defect.
 
 Dual-playfield HAM and priority codes 5–7 remain explicitly unsupported.
 Nonstandard line-mode BLTSIZE widths other than two are also rejected. The
-2026-09-17 collision/UART gaps now have implementations and focused coverage;
-final candidate validation and the 1% performance acceptance remain pending.
+2026-09-17 collision/UART gaps now have implementations and focused/native
+coverage. Their original OCS candidate and later candidates have separate scoped
+performance decisions in [PERFORMANCE.md](PERFORMANCE.md); physical verification
+remains distinct from that acceptance.
 
 Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA and
 FIFO overrun currently report unsupported. Standard-ADF write DMA and MSBSYNC

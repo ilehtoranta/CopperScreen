@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
 namespace CopperMod.Amiga.Lightweight;
@@ -43,6 +44,7 @@ internal sealed class LightweightVideo
     private ushort _effectiveDiwStop;
     private int _effectivePlaneCount;
     private int _effectivePlaneMask;
+    private int _effectivePlanePairMask;
     private int _horizontalWindowStart;
     private int _horizontalWindowStop;
     private int _verticalWindowStart;
@@ -108,6 +110,7 @@ internal sealed class LightweightVideo
         _effectiveDiwStop = 0;
         _effectivePlaneCount = 0;
         _effectivePlaneMask = 0;
+        _effectivePlanePairMask = 0;
         UpdateWindowBounds();
         _pendingControlValue = 0;
         _pendingControlOffset = 0;
@@ -249,6 +252,7 @@ internal sealed class LightweightVideo
                     _effectivePlaneCount = GetDecodePlaneCount(_effectiveBplcon0);
                     machine.SetCollisionMode((_effectiveBplcon0 & 0x0400) != 0, _effectivePlaneCount != 0);
                     _effectivePlaneMask = (1 << _effectivePlaneCount) - 1;
+                    _effectivePlanePairMask = _effectivePlaneMask | (_effectivePlaneMask << 6);
                     UpdateUnsupportedMode();
                     refreshRenderLine = true;
                     break;
@@ -398,10 +402,7 @@ internal sealed class LightweightVideo
     private void FillHiresCck(int index, int color)
     {
         ref var destination = ref _rendering[index];
-        destination = color;
-        Unsafe.Add(ref destination, 1) = color;
-        Unsafe.Add(ref destination, 2) = color;
-        Unsafe.Add(ref destination, 3) = color;
+        Vector128.Create(color).StoreUnsafe(ref destination);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -413,8 +414,8 @@ internal sealed class LightweightVideo
             RenderDualHiresVisiblePair(line, x, index, pair, machine);
             return;
         }
-        var first = pair & 0x3F;
-        var second = (pair >> 8) & 0x3F;
+        var first = pair >> 6;
+        var second = pair & 0x3F;
         machine.ComposeHiresSpriteColorIndexes(line, x, first, second,
             _effectiveSpritePlayfieldPlacement, out var sprite1, out var sprite2);
         if (_renderLineSpriteOutputEnabled)
@@ -461,8 +462,8 @@ internal sealed class LightweightVideo
             RenderSpecialLowResPair(line, x, index, playfieldPair, machine, wide);
             return;
         }
-        var firstPlayfield = playfieldPair & 0x3F;
-        var secondPlayfield = (playfieldPair >> 8) & 0x3F;
+        var firstPlayfield = playfieldPair >> 6;
+        var secondPlayfield = playfieldPair & 0x3F;
 
         if (_renderLineVerticallyBlanked || x + 1 < VisibleRasterXStart)
         {
@@ -518,15 +519,15 @@ internal sealed class LightweightVideo
     {
         if ((_effectiveBplcon0 & 0x0800) == 0)
         {
-            var first = RenderDualLowResPixel(line, x, pair & 63, machine);
-            var second = RenderDualLowResPixel(line, x + 1, (pair >> 8) & 63, machine);
+            var first = RenderDualLowResPixel(line, x, pair >> 6, machine);
+            var second = RenderDualLowResPixel(line, x + 1, pair & 63, machine);
             WriteLowResPair(index, first, second, wide);
             return;
         }
         // HAM still updates its held color in physical pixel order; sprite
         // overlays never feed that hold register.
-        var hamFirst = RenderHamPixel(line, x, pair & 63, machine);
-        var hamSecond = RenderHamPixel(line, x + 1, (pair >> 8) & 63, machine);
+        var hamFirst = RenderHamPixel(line, x, pair >> 6, machine);
+        var hamSecond = RenderHamPixel(line, x + 1, pair & 63, machine);
         WriteLowResPair(index, hamFirst, hamSecond, wide);
     }
 
@@ -545,9 +546,9 @@ internal sealed class LightweightVideo
     private void RenderDualHiresVisiblePair(int line, int x, int index, int pair,
         LightweightA500Machine machine)
     {
-        var first = _dualPlayfieldPixels[pair & 63];
-        var second = _dualPlayfieldPixels[(pair >> 8) & 63];
-        machine.ComposeDualHiresSpriteColorIndexes(line, x, first >> 4, second >> 4, pair & 63, (pair >> 8) & 63,
+        var first = _dualPlayfieldPixels[pair >> 6];
+        var second = _dualPlayfieldPixels[pair & 63];
+        machine.ComposeDualHiresSpriteColorIndexes(line, x, first >> 4, second >> 4, pair >> 6, pair & 63,
             out var sprite1, out var sprite2);
         _rendering[index] = _palette[_renderLineSpriteOutputEnabled && sprite1 >= 0 ? sprite1 : first & 15];
         _rendering[index + 1] = _palette[_renderLineSpriteOutputEnabled && sprite2 >= 0 ? sprite2 : second & 15];
@@ -602,12 +603,15 @@ internal sealed class LightweightVideo
         // The caller reserves one physical CCK: two narrow or four wide pixels.
         // Both call sites pass a constant width, so the hot paths specialize.
         ref var destination = ref _rendering[index];
-        destination = first;
-        Unsafe.Add(ref destination, wide ? 2 : 1) = second;
         if (wide)
         {
-            Unsafe.Add(ref destination, 1) = first;
-            Unsafe.Add(ref destination, 3) = second;
+            var colors = Vector128.CreateScalar(first).WithElement(1, second);
+            Vector128.Shuffle(colors, Vector128.Create(0, 0, 1, 1)).StoreUnsafe(ref destination);
+        }
+        else
+        {
+            destination = first;
+            Unsafe.Add(ref destination, 1) = second;
         }
     }
 
@@ -708,8 +712,9 @@ internal sealed class LightweightVideo
         var pixels = (int)(_pixelShiftersHigh >> 20);
         _pixelShiftersHigh = (_pixelShiftersHigh << 12) | (uint)(_pixelShiftersLow >> 52);
         _pixelShiftersLow <<= 12;
-        var planeMask = _effectivePlaneMask;
-        return ((pixels >> 6) & planeMask) | ((pixels & planeMask) << 8);
+        // Retain the shifter's adjacent six-bit lanes: first pixel above second.
+        // This avoids repacking to bytes only for the renderer to unpack them.
+        return pixels & _effectivePlanePairMask;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -717,7 +722,7 @@ internal sealed class LightweightVideo
     {
         var first = ShiftPlayfieldPixel(x);
         var second = ShiftPlayfieldPixel(x + 1);
-        return first | (second << 8);
+        return (first << 6) | second;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
