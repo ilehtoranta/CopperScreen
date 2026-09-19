@@ -28,7 +28,8 @@ unavailable coverage, not a passing native replay.
 | [run-lightweight-native-paired.ps1](../../scripts/run-lightweight-native-paired.ps1) | Historical Lightweight/Legacy comparison, requiring an external frozen Legacy runner. Not a product release prerequisite. |
 | [run-lightweight-h2-controlled-performance.ps1](../../scripts/run-lightweight-h2-controlled-performance.ps1) and H3/H4 wrappers | Historical synthetic stage workloads; their CPU/efficiency defaults and workload contracts are not current-host defaults. |
 | [agnus-g6-host-load.ps1](../../scripts/agnus-g6-host-load.ps1) | Shared host telemetry used by the Lightweight scripts. Its G6 name does not make it disposable. |
-| [run-lightweight-homogeneous-retention-v1.ps1](../../scripts/run-lightweight-homogeneous-retention-v1.ps1) | Current homogeneous Windows host comparison; full lores/hires fixtures and portable native Lemmings, with the per-change 1% budget below. |
+| [run-lightweight-homogeneous-retention-v1.ps1](../../scripts/run-lightweight-homogeneous-retention-v1.ps1) | Homogeneous Windows host retention; full lores/hires fixtures and the portable pre-ERSY native Lemmings identity, with the per-change 1% budget below. |
+| [run-lightweight-ersy-comparison-v1.ps1](../../scripts/run-lightweight-ersy-comparison-v1.ps1) | Explicit comparison of accepted `67c13f6` with the ERSY hardware correction: matching synthetic states and independently verified per-build native states. Same six-pair timing, host-load rules and 1% upper-bound limit. |
 
 The old G6 controlled runner and contention-test script cited in historical policy
 are not included here. Their recorded tests are historical evidence, not locally
@@ -567,6 +568,206 @@ evidence directory. Each result must record date/host, source and assembly hashe
 ROM/media/script identities, runtime, protocol version, interval, samples,
 fingerprints, allocations, telemetry and disposition. A hardware correction may
 justify new fingerprints only with its own evidence and regression coverage.
+
+## ERSY absent-source beam synchronization — 2026-09-19
+
+The [beam record](BEAM_SYNC.md) defines the bounded hardware correction and
+preserves old/new native fingerprints. Reference is accepted commit `67c13f6`;
+previous performance exceptions do not transfer. Candidate engine SHA-256 is
+`2E87659F28E3A4BE25DA0D7C348B947A4FF15B08634C91329102E3FE7D95F4DB`;
+reference is `382E455B98BCECC7E4E1B66ABE86A99738F46D46DCD5CFABE99153426777FE54`.
+Frozen directories are `artifacts/beam-sync-2026-09-19/reference` and `candidate-request-fix`.
+Both use the same retained runner
+`40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF`, CPU and disk DLLs.
+The production runner's new short/empty-PCM checksum guard is deliberately absent
+from these frozen measurement bundles.
+
+Production Release build: no warnings/errors. Isolated engine: 573 passed plus
+one additional zero-allocation sync-loss test (574 distinct checks);
+CopperDisk: 74 passed; host: 94 passed including both supplied-media native
+replays, no skips. The unchanged 10,920 + 3,600 Lemmings workload executes without
+unsupported features or steady-state allocations, but its fingerprints change
+because Kickstart now detects missing external sync. The existing native
+performance protocol must reject that change, not silently adopt new expected
+values. Diagnostic throughput is not performance acceptance.
+
+The initial `retention-v1` series was deliberately withdrawn after source review
+found an early period-modulation DMA request on sync recovery. Its original
+`candidate` engine (`D8046708A681F32D52005EA65EF381A1902C51085FFC23751E227B83C225AD6C`)
+and raw partial samples remain intact; they do not accept the replacement build.
+
+The unchanged homogeneous-retention-v1 retry is recorded under
+`artifacts/beam-sync-2026-09-19/retention-request-fix`: Normal priority, CPU 2 with SMT
+sibling 3 protected, Ryzen 5 5600X topology rechecked, host-load policy v2, six
+balanced pairs per workload. No concurrent builds or tests. The series stopped
+after hires C5 with **INVALID / RERUN**: sustained package interference ≥25% for
+10.9098 seconds. The raw label, samples and telemetry remain unchanged. No native
+sample was reached in this series; its old expected fingerprint is incompatible
+independently of the host-noise failure.
+
+All six lores pairs completed before the later interference episode, with matching
+complete-workload fingerprints and zero steady-state allocations. Their descriptive
+result is **+1.8214% mean frame time, +2.4675% one-sided 95% upper bound** (the
+unchanged paired-log/t-distribution calculation). Arithmetic mean throughput was
+386.49 reference versus 379.59 candidate FPS. This exceeds the owner's ≤1% rule;
+it does not relabel the full invalid series as PASS. Hires has only five pairs
+and the interference episode; no retained bound or acceptance result is claimed.
+
+| Pair | Lores reference FPS | Lores candidate FPS | Hires reference FPS | Hires candidate FPS |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 380.53 | 374.85 | 345.95 | 341.81 |
+| 2 | 386.86 | 381.87 | 346.43 | 336.31 |
+| 3 | 385.69 | 381.81 | 356.09 | 348.97 |
+| 4 | 392.70 | 386.02 | 348.77 | 346.18 |
+| 5 | 386.15 | 374.10 | 348.98 | 324.31 |
+| 6 | 387.02 | 378.86 | unavailable | unavailable |
+
+The owner requested further optimization; this candidate received **no waiver**.
+The default 1% gate did not pass. No commit, push, package publication or
+carry-over waiver is implied.
+
+### ERSY optimization and comparison v1
+
+The next frozen engine was
+`87E9E1463FF999383A8C93B5854CDAA9EEAF9F3F3793172CF52DCA4CD93FB5E2`.
+Its unchanged homogeneous-retention-v1 attempt is retained under
+`artifacts/beam-opt-2026-09-19/retention-final`. All six lores pairs completed:
+**+0.6382% mean frame time, +2.2692% one-sided upper bound**, matching state and
+zero allocation. Hires stopped after one pair; native was not reached. The
+series was deliberately withdrawn to continue optimization, not classified as
+host-noise invalid or accepted. Do not pool its samples with another build.
+
+| Pair | Lores reference FPS | Lores candidate FPS |
+| --- | ---: | ---: |
+| 1 | 385.95 | 385.44 |
+| 2 | 393.08 | 381.47 |
+| 3 | 381.29 | 390.59 |
+| 4 | 386.81 | 387.78 |
+| 5 | 387.91 | 384.24 |
+| 6 | 391.45 | 382.18 |
+
+The [ERSY comparison v1](../../scripts/run-lightweight-ersy-comparison-v1.ps1)
+explicitly versions the hardware correction's native fingerprint change. It
+retains six balanced pairs per workload, 600/7,200 synthetic and 10,920/3,600
+native warmup/measurement lengths, ten-second cooldowns, Normal priority,
+verified homogeneous CPU/SMT placement, host-load policy v2 and the paired-log
+one-sided Student-t bound (df=5, 2.015048). The acceptance limit remains ≤1% for
+every workload. This does not replace historical retention protocols.
+
+Synthetic fingerprints must match across builds. Native samples must match their
+independently established complete identities in [BEAM_SYNC.md](BEAM_SYNC.md),
+including the changed cold-boot cycles and PCM count. No expected identity is
+learned from timing samples. The harness pins the accepted `67c13f6` reference
+and common runner/CPU/disk assemblies. Its preflight rejects role-swapped states,
+altered CPU/hardware/output hashes, output length, frame count, PCM mode and
+allocation. Missing telemetry and sustained interference rejection are also
+exercised. This is a **changed-state native comparison**, not a claim of
+cross-build native state equality.
+
+Validation passed on the Ryzen 5 5600X, CPU 2 with sibling 3 protected, under
+`artifacts/beam-opt-2026-09-19/terminal-validation`. Protocol SHA-256:
+`9F02EB004B06C5392DD6CF892B805B98115A189D2E34707303964EC711B6078C`.
+The original homogeneous-retention-v1 remains
+`F6F56FB703DACC45A2D70C8266190322841EF3658AD59D9EA5160471425A6D30`;
+the unchanged host-load helper remains
+`7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6`.
+
+The subsequent frozen engine is
+`BB3F5233EA3FB132E89C018BB76B1CB4260144EFC61CE5A558D67CF7B3A0D7CA`
+(`candidate-terminal`). Production Release has no warnings/errors; engine 577,
+disk 74 and host 94 tests pass, including both native host replays with no skips.
+The preceding 575-test build passes full Debug; the final 47 focused Copper/beam
+Debug cases also pass. The retained changes and discarded experiments are
+described in the beam record. Its comparison evidence is
+`artifacts/beam-opt-2026-09-19/terminal-comparison-v1`.
+
+That complete series is **valid**, with matching synthetic fingerprints, exact
+per-build native identities, zero measured steady-state allocation and valid
+placement/host telemetry throughout. No builds, tests or profiles ran concurrently.
+The candidate does **not** pass the owner's gate:
+
+| Workload | Reference mean FPS | Candidate mean FPS | Mean frame-time change | One-sided 95% upper bound | Disposition |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Lores | 380.59 | 381.63 | -0.2817% | +1.1250% | INCONCLUSIVE; above limit |
+| Hires | 349.41 | 343.48 | +1.7254% | +2.4179% | ACCEPTANCE_REQUIRED |
+| Native Lemmings | 254.19 | 262.11 | -3.0368% | -1.3769% | PASS for defined changed-state comparison |
+
+| Pair | Lores R / C FPS | Hires R / C FPS | Native R / C FPS |
+| --- | --- | --- | --- |
+| 1 | 380.96 / 382.70 | 344.21 / 339.15 | 255.95 / 260.16 |
+| 2 | 381.55 / 379.19 | 350.36 / 344.43 | 256.21 / 262.76 |
+| 3 | 369.62 / 382.65 | 351.87 / 343.53 | 255.90 / 261.96 |
+| 4 | 384.01 / 384.51 | 349.33 / 348.31 | 243.68 / 261.99 |
+| 5 | 381.41 / 380.59 | 351.68 / 342.52 | 257.48 / 263.50 |
+| 6 | 385.97 / 380.14 | 348.99 / 342.95 | 255.93 / 262.28 |
+
+No exception was accepted. Further optimization continues from this measured
+candidate; a later build cannot inherit its native PASS without remeasurement.
+
+#### Compact bitplane fetch order
+
+Preparing the eight-slot fetch order and terminal modulo offset when effective
+BPLCON0 changes removes a per-input mode branch/table load. Input/output phases
+and plane ordering are unchanged. A separate scroll-decoding cache was discarded:
+its short hires improvement came with slower lores results.
+
+Final engine SHA-256:
+`7778A0F26FCC2D2EE1F66C69172F48D7DFB6E61D2CD6623693A47FBDFC7D4C85`.
+Frozen directory: `artifacts/beam-opt-2026-09-19/candidate-fetch-order`.
+Reference and shared assemblies remain the same as above. The source patch at
+freeze is `fetch-source.patch`, SHA-256
+`F4AD62063F2311701B1C6CDACFFA2E6CBC0B6EC9559249FE1C20B69D5A060B5D`;
+the separate new beam test source is `terminal-BeamSyncTests.cs`, SHA-256
+`FB03646311942B868BD3B2C7F59F72A98378215523D616200453BE6FE56324C6`.
+
+Production Release builds with zero warnings/errors. The complete engine suite
+passes **577 in Release and 577 in Debug**; host **94** passes with both native
+replays enabled and no skips. CopperDisk's unchanged source/dependency retains
+its 74 passing tests. Local TRX files are `fetch-final-engine.trx`,
+`fetch-final-debug.trx`, `fetch-final-host.trx` and `final-disk.trx` under the
+optimization evidence directory. One initial serial zero-allocation assertion
+failed with 8,088 bytes; the isolated repeat and final full suites pass. Its
+failure log remains unchanged. No acceptance measurement permits allocation.
+
+Two short balanced pairs against the terminal-only build favored the fetch-order
+candidate in both synthetic workloads, with exact fingerprints and zero
+allocation. They remain diagnostic, not acceptance evidence. The full frozen
+six-pair series is recorded separately under `fetch-comparison-v1`.
+
+The complete final series is **valid**: CPU 2 / protected sibling 3, Normal
+priority, verified topology/placement, valid host-load policy v2 telemetry, no
+concurrent builds/tests/profiles. All synthetic complete-workload fingerprints
+match; every native sample matches its independently recorded per-build identity.
+Every measured sample has zero steady-state allocation and no unsupported feature.
+
+| Workload | Reference mean FPS | Candidate mean FPS | Mean frame-time change | One-sided 95% upper bound | Disposition |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Lores | 386.39 | 387.08 | -0.1755% | +0.7894% | PASS |
+| Hires | 350.28 | 349.19 | +0.3736% | +3.7272% | INCONCLUSIVE; above limit |
+| Native Lemmings | 254.83 | 259.90 | -1.9442% | -0.3364% | PASS for defined changed-state comparison |
+
+| Pair | Lores R / C FPS | Hires R / C FPS | Native R / C FPS |
+| --- | --- | --- | --- |
+| 1 | 382.89 / 390.78 | 349.27 / 356.98 | 257.05 / 261.37 |
+| 2 | 386.17 / 388.72 | 348.67 / 357.21 | 254.54 / 261.96 |
+| 3 | 385.81 / 383.68 | 352.46 / 352.65 | 254.00 / 260.62 |
+| 4 | 387.79 / 382.54 | 350.63 / 323.71 | 257.22 / 260.46 |
+| 5 | 389.89 / 389.11 | 348.83 / 356.66 | 255.51 / 252.31 |
+| 6 | 385.82 / 387.65 | 351.84 / 347.90 | 250.68 / 262.68 |
+
+The slow hires C4 sample did not cross the protocol's sustained-interference
+threshold. It remains in the calculation; no trimming, substitution or pooling
+with another attempt was used. The mean hires change is below 1%, but the owner
+requires the **upper bound**, so the complete candidate did not pass the default
+gate. Lores/native passes do not waive the hires +3.7272% result.
+
+On 2026-09-19 the owner explicitly accepted this specific hires exception and
+authorized commit and push. Acceptance applies to the frozen
+`7778A0F26FCC2D2EE1F66C69172F48D7DFB6E61D2CD6623693A47FBDFC7D4C85`
+candidate and this complete comparison. The measured hires classification remains
+INCONCLUSIVE; no sample, confidence bound or earlier evidence is reclassified.
+This is a scoped acceptance, not a higher default budget or a waiver for future
+changes. Package publication is not included.
 
 ## Historical evidence index
 

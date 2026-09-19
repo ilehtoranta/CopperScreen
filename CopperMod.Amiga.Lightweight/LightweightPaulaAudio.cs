@@ -164,6 +164,13 @@ internal sealed partial class LightweightPaulaAudio
             : -1;
     }
 
+    internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+    {
+        for (var i = 0; i < _channels.Length; i++)
+            _channels[i].OnBeamSyncChanged(cycle, machine);
+        RefreshNextCycle();
+    }
+
     private void RefreshNextCycle()
     {
         var next = long.MaxValue;
@@ -208,6 +215,9 @@ internal sealed partial class LightweightPaulaAudio
         private long _dmaInputCycle;
         private long _dmaOutputCycle;
         private long _dmaLoadCycle;
+        private bool _beamHeld;
+        private bool _requestHeldForBeam;
+        private long _beamOffset;
 
         internal Channel(int index)
         {
@@ -241,6 +251,9 @@ internal sealed partial class LightweightPaulaAudio
 
         internal void Reset()
         {
+            _beamHeld = false;
+            _requestHeldForBeam = false;
+            _beamOffset = 0;
             Location = 0;
             LengthWords = 1;
             Period = 428;
@@ -276,6 +289,7 @@ internal sealed partial class LightweightPaulaAudio
             _dmaEnabled = enabled;
             if (!enabled)
             {
+                _requestHeldForBeam = false;
                 _dmaInputCycle = long.MaxValue;
                 // An accepted physical transfer finishes even after DMAOFF.
                 if (!_hasOutputWord)
@@ -302,14 +316,35 @@ internal sealed partial class LightweightPaulaAudio
             RequestWord(cycle);
         }
 
+        internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+        {
+            _beamHeld = !machine.BeamSyncRunning;
+            _beamOffset = machine.BeamCycleOffset;
+            if (_beamHeld)
+            {
+                _requestHeldForBeam |= _dmaInputCycle != long.MaxValue;
+                _dmaInputCycle = long.MaxValue;
+            }
+            else if (_requestHeldForBeam)
+            {
+                _requestHeldForBeam = false;
+                RequestWord(cycle);
+            }
+        }
+
         private void RequestWord(long cycle)
         {
             if (!_dmaEnabled || _hasPrefetch || _dmaInputCycle != long.MaxValue ||
                 _dmaOutputCycle != long.MaxValue || _dmaLoadCycle != long.MaxValue)
                 return;
+            if (_beamHeld)
+            {
+                _requestHeldForBeam = true;
+                return;
+            }
             // One request uses the next channel-specific address phase. Late
             // enables never recreate an input that has already happened.
-            var lineStart = cycle - cycle % LightweightClock.CpuCyclesPerLine;
+            var lineStart = cycle - (cycle - _beamOffset) % LightweightClock.CpuCyclesPerLine;
             var input = lineStart + (0x0F + _index * 2) * 2;
             if (input <= cycle) input += LightweightClock.CpuCyclesPerLine;
             _dmaInputCycle = input;

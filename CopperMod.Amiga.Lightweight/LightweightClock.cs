@@ -18,12 +18,15 @@ internal sealed class LightweightClock
     internal long FrameNumber { get; private set; }
     internal int LinesThisField { get; private set; }
     internal bool IsLongField => LinesThisField == PalLongFieldLines;
-    internal long NextLineCycle => Cycle + CpuCyclesPerLine -
+    internal bool SyncStopped { get; private set; }
+    internal long BeamCycleOffset { get; private set; }
+    internal long NextLineCycle => SyncStopped ? long.MaxValue : Cycle + CpuCyclesPerLine -
         (ColorClock * CpuCyclesPerColorClock + _cpuPhase);
     internal long NextFrameCycle
     {
         get
         {
+            if (SyncStopped) return long.MaxValue;
             var nominalEnd = FrameStartCycle +
                 ((long)LinesThisField * CpuCyclesPerLine);
             if (nominalEnd > Cycle)
@@ -38,6 +41,9 @@ internal sealed class LightweightClock
     }
 
     private int _cpuPhase;
+    private bool _externalSync;
+    private int _horizontalLimit = CpuCyclesPerLine / CpuCyclesPerColorClock;
+    private long _syncStopCycle;
 
     internal void Reset()
     {
@@ -48,10 +54,27 @@ internal sealed class LightweightClock
         FrameNumber = 0;
         LinesThisField = PalLongFieldLines;
         _cpuPhase = 0;
+        _externalSync = SyncStopped = false;
+        BeamCycleOffset = 0;
+        _horizontalLimit = CpuCyclesPerLine / CpuCyclesPerColorClock;
     }
 
     internal void SelectLongField(bool longField)
         => LinesThisField = longField ? PalLongFieldLines : PalShortFieldLines;
+
+    internal void SetExternalSync(bool enabled, LightweightA500Machine machine)
+    {
+        _externalSync = enabled;
+        if (enabled || !SyncStopped) return;
+        // No line/field strobe was emitted while the HSYNC input was absent.
+        // Resume this same vertical count, at H0, on the canonical clock.
+        var heldCycles = Cycle - _cpuPhase - _syncStopCycle;
+        FrameStartCycle += heldCycles + CpuCyclesPerLine;
+        BeamCycleOffset = (BeamCycleOffset + heldCycles) % CpuCyclesPerLine;
+        SyncStopped = false;
+        _horizontalLimit = CpuCyclesPerLine / CpuCyclesPerColorClock;
+        machine.OnBeamSyncChanged(Cycle);
+    }
 
     // A pending CPU transfer uses the same physical CCK completion routine as
     // device-only advancement. Stay inside that loop while waiting instead of
@@ -119,20 +142,33 @@ internal sealed class LightweightClock
     private void CompleteColorClock(LightweightA500Machine machine)
     {
         ColorClock++;
-        if (ColorClock == CpuCyclesPerLine / CpuCyclesPerColorClock)
+        if (ColorClock == _horizontalLimit)
         {
             ColorClock = 0;
-            Line++;
-            machine.OnLineCompleted(Cycle);
-            if (Line >= LinesThisField)
+            if (_externalSync)
             {
-                Line = 0;
-                FrameStartCycle = Cycle;
-                FrameNumber++;
-                machine.OnFrameCompleted(Cycle);
+                if (!SyncStopped)
+                {
+                    SyncStopped = true;
+                    _syncStopCycle = Cycle;
+                    _horizontalLimit = 1;
+                    machine.OnBeamSyncChanged(Cycle);
+                }
             }
+            else
+            {
+                Line++;
+                machine.OnLineCompleted(Cycle);
+                if (Line >= LinesThisField)
+                {
+                    Line = 0;
+                    FrameStartCycle = Cycle;
+                    FrameNumber++;
+                    machine.OnFrameCompleted(Cycle);
+                }
+            }
+            machine.CompleteOutputIfDue(Cycle);
         }
-
         if (Cycle >= machine.NextDeviceCycle)
         {
             machine.TickDevices(Cycle);

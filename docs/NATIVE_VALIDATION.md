@@ -466,3 +466,34 @@ Local evidence: `artifacts/trace-exception-2026-09-18/`, including `audio-trace2
 `paula-before.log`, `engine-final.log`, `host-native-final.log`, `disk-final.log`,
 `thunderbolt-audio/` and `thunderbolt-input/`. Probe FPS/allocations include capture
 work and are not performance acceptance measurements.
+
+### ERSY absent-source synchronization, 2026-09-19
+
+The [beam/synchronization record](engine/BEAM_SYNC.md) records the pinned
+hardware probes, media hashes, exact RAM values and remaining phase discrepancies.
+ERSY2 now holds `$4000` across absent HSYNC while its CPU handler continues and
+clears ERSY. The accepted reference advanced into `$41xx`. ERSY1's within-line
+toggle values remain identical between builds. Neither probe's pre-hold read
+phases match all A500 photograph expectations; no full-probe certification is
+claimed. The host retains the last synchronized framebuffer instead of trying
+to reproduce the photograph's loss-of-sync distortion.
+
+The unchanged supplied Lemmings script was replayed for 14,520 outputs. The final
+capture shows active level one, ten lemmings out and the dug passage. Both native
+host gameplay and keyboard press/release tests pass with the corrected boot
+fingerprints. Kickstart now detects an absent genlock source and clears ERSY;
+the older native fingerprint is retained in the beam record and frozen
+performance protocol. Local evidence is under `artifacts/beam-sync-2026-09-19/`,
+including `native-candidate-lemmings/`, both ERSY probe captures and test TRX files.
+This is bounded native progress, not full game or cycle-exact chipset certification.
+
+The subsequent optimized engine (`BB3F5233EA3FB132E89C018BB76B1CB4260144EFC61CE5A558D67CF7B3A0D7CA`)
+passes all 94 host tests, including both native replays, with the same corrected
+expectations. Local result: `artifacts/beam-opt-2026-09-19/terminal-host.trx`.
+The separate ERSY comparison v1 checks the independently recorded old/new native
+identities; its throughput disposition is recorded in the performance guide.
+
+The final compact-fetch-order engine (`7778A0F26FCC2D2EE1F66C69172F48D7DFB6E61D2CD6623693A47FBDFC7D4C85`)
+also passes all 94 host tests with the same native expectations and no skips:
+`artifacts/beam-opt-2026-09-19/fetch-final-host.trx`. Optimization did not rebase
+the corrected gameplay or keyboard fingerprints.

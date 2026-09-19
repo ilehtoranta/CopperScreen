@@ -36,6 +36,8 @@ internal sealed class LightweightBlitter
     private const int NiceDmaGrantsBeforeYield = 3;
 
     private bool _active;
+    private bool _beamStopped;
+    private bool _dmaEnabled;
     private bool _busy;
     private bool _zero;
     private bool _useA;
@@ -124,6 +126,8 @@ internal sealed class LightweightBlitter
     internal void Reset()
     {
         _active = false;
+        _beamStopped = false;
+        _dmaEnabled = false;
         _busy = false;
         _zero = true;
         _useA = false;
@@ -206,6 +210,7 @@ internal sealed class LightweightBlitter
         long cycle,
         LightweightA500Machine machine)
     {
+        _dmaEnabled = IsDmaEnabled(current);
         if (((previous ^ current) & DmaconNasty) != 0)
         {
             _pendingNasty = (current & DmaconNasty) != 0;
@@ -214,7 +219,7 @@ internal sealed class LightweightBlitter
             Publish(_nastyVisibilityCycle);
         }
 
-        if (_active && IsDmaEnabled(current))
+        if (_active && _dmaEnabled)
         {
             Publish(NextCckAfter(cycle));
         }
@@ -260,6 +265,13 @@ internal sealed class LightweightBlitter
         _niceDmaGrants = 0;
     }
 
+    internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+    {
+        _beamStopped = !machine.BeamSyncRunning;
+        NextCycle = long.MaxValue;
+        RefreshNextCycle(cycle, machine);
+    }
+
     internal void Step(long cycle, LightweightA500Machine machine)
     {
         System.Diagnostics.Debug.Assert(
@@ -284,8 +296,8 @@ internal sealed class LightweightBlitter
             CompleteOutput(cycle, machine);
         }
 
-        if (_active && !_hasPendingOutput && _startCycle != cycle &&
-            (!_requiresDma || IsDmaEnabled(machine.Dmacon)))
+        if (!_beamStopped && _active && !_hasPendingOutput && _startCycle != cycle &&
+            (!_requiresDma || _dmaEnabled))
         {
             if (_startupRemaining != 0)
             {
@@ -1023,8 +1035,8 @@ internal sealed class LightweightBlitter
         {
             Publish(_nastyVisibilityCycle);
         }
-        if (_active && !_hasPendingOutput &&
-            (!_requiresDma || IsDmaEnabled(machine.Dmacon)))
+        if (!_beamStopped && _active && !_hasPendingOutput &&
+            (!_requiresDma || _dmaEnabled))
         {
             Publish(NextCckAfter(cycle));
         }

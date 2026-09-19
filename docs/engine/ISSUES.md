@@ -1,6 +1,8 @@
 # Lightweight A500 issues and limitations
 
-Updated 2026-09-19 for the accepted optimization candidate and current OCS gap audit.
+Updated 2026-09-19 for accepted `67c13f6`, the current OCS gap audit and the
+ERSY optimization follow-up, accepted on 2026-09-19 with a scoped hires
+performance exception recorded in [PERFORMANCE.md](PERFORMANCE.md).
 Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL OCS A500 profile](../../CopperMod.Amiga.Lightweight/README.md).
@@ -66,7 +68,7 @@ completeness claim; undocumented combinations are separate from ordinary mode su
 
 | Area | Missing implementation |
 | --- | --- |
-| Beam and synchronization | VHPOSW and VPOSW beam repositioning beyond LOF; external synchronization/genlock and consistent DMA/display rescheduling. See LWA-VIDEO-009. |
+| Beam and synchronization | VHPOSW and VPOSW beam repositioning beyond LOF; external genlock source/pulse qualification and physical display synchronization. ERSY absent-source hold/recovery is implemented as a bounded first slice; see LWA-VIDEO-009. |
 | Nonstandard display and blitter modes | Dual HAM, HAM outside five/six-plane lores, hires BPU above four, BPU=7, dual-playfield priority codes 5–7, and line-mode BLTSIZE widths other than two. These remain explicitly rejected. |
 | Disk-controller edge behavior | Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA, FIFO overrun behavior and simultaneous selected read streams. Preserved-track writes and fully physical write splices/precompensation are absent. |
 | A500 board I/O | Keyboard power-up/resynchronization/retransmission/reset chord; general CIA clocked serial output and external CNT timer modes. General parallel-port integration remains separate work. |
@@ -373,11 +375,14 @@ the standard-ADF scope. Slow-mode input retains the approximation above.
   implemented. Four focused tests passed. Eight-line POT discharge, PAL line-25
   release and no-trigger blank capture are model choices; exact analog/silicon
   boundary timing and host peripheral mapping remain unverified.
-- **LWA-VIDEO-009:** The broader register audit found VHPOSW and VPOSW beam
-  repositioning beyond LOF, plus external synchronization/genlock, unimplemented.
-  They must not be counted as completed OCS hardware merely because the register
-  store accepts their values. Canonical beam/DMA rescheduling needs its own
-  discriminating tests and implementation before an unrestricted completeness claim.
+- **LWA-VIDEO-009:** ERSY with no external HSYNC now holds H0 and the current V,
+  preserves CPU/device time, and resumes DMA at the new beam phase. See
+  [the bounded implementation and hardware-probe record](BEAM_SYNC.md).
+  VHPOSW/VPOSW counter repositioning beyond LOF, external pulse input/qualification,
+  and physical Denise/monitor behavior during lost sync remain open. ERSY1/2
+  pre-hold samples still expose a CPU/interrupt/register phase discrepancy versus
+  A500 photographs. Hardware certification and the new performance gate remain
+  separate; this is not an unrestricted beam/synchronization completeness claim.
 
 Keyboard MCU startup/recovery and general CIA serial/CNT modes remain the board
 I/O gaps recorded above. The new OCS interfaces do not implicitly close them.

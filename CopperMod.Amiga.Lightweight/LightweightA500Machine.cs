@@ -60,6 +60,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     private bool _romLoaded;
     private bool _overlayEnabled;
     private long _completedFrames;
+    // 329 lines fit in the fixed 1,024-stereo-sample buffer. The margin lets
+    // brief resync holds finish one real field without splitting its output.
+    internal const long MaximumOutputIntervalCycles = 329L * LightweightClock.CpuCyclesPerLine;
+    private long _nextOutputCycle = MaximumOutputIntervalCycles;
+    private bool _unsynchronizedField;
     private long _nextDeviceCycle = long.MaxValue;
     private long _nextVerticalBlankLatchCycle = long.MaxValue;
     private long _nextCiaInterruptCycle = long.MaxValue;
@@ -121,6 +126,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     public long CompletedFrames => _completedFrames;
     public int BeamLine => _clock.Line;
     public int BeamColorClock => _clock.ColorClock;
+    /// <summary>False while ERSY is waiting for an absent external HSYNC.
+    /// The current profile has no external genlock source.</summary>
+    public bool BeamSyncRunning => !_clock.SyncStopped;
+    internal long BeamCycleOffset => _clock.BeamCycleOffset;
     public ReadOnlyMemory<int> Framebuffer => _video.Framebuffer;
     public int FramebufferWidth => _configuration.FramebufferWidth;
     public int FramebufferHeight => _configuration.FramebufferHeight;
@@ -170,7 +179,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _unsupportedActiveFeature ?? _video.UnsupportedActiveFeature;
     internal int LinesThisField => _clock.LinesThisField;
     public bool IsLongField => _clock.IsLongField;
-    internal long NextFrameCycle => _clock.NextFrameCycle;
+    internal long NextFrameCycle => Math.Min(_clock.NextFrameCycle, _nextOutputCycle);
     internal long NextDeviceCycle => _nextDeviceCycle;
     internal ushort Dmacon => _registers.Dmacon;
     internal ushort Adkcon => _registers.Adkcon;
@@ -275,6 +284,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _video.Reset();
         _overlayEnabled = _romLoaded;
         _completedFrames = 0;
+        _nextOutputCycle = MaximumOutputIntervalCycles;
+        _unsynchronizedField = false;
         _nextDeviceCycle = long.MaxValue;
         _nextVerticalBlankLatchCycle = long.MaxValue;
         _nextCiaInterruptCycle = long.MaxValue;
@@ -304,7 +315,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         var targetCompletedFrames = _completedFrames + 1;
         while (_completedFrames < targetCompletedFrames)
         {
-            var frameBoundary = _clock.NextFrameCycle;
+            var frameBoundary = NextFrameCycle;
             if (_cpu.State.Halted)
             {
                 AdvanceHardwareTo(frameBoundary);
@@ -629,6 +640,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     public void ResetExternalDevices(long cycle)
     {
         AdvanceHardwareTo(cycle);
+        _clock.SetExternalSync(false, this);
         _hdf?.Reset();
         _registers.Reset();
         _copper.Reset();
@@ -662,7 +674,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _unsupportedActiveFeature = null;
         // RESET resets the CIA, not the independently powered keyboard.
         _keyboard.HostDataChanged(_ciaA.SerialSpHigh, cycle);
-        RefreshCiaInterruptCycle();
+        RephaseBeamDma(cycle);
     }
 
     private void GrantCpuWord(
@@ -740,11 +752,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
 
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    internal bool CanCopperOwnOutputSlot(long outputCycle)
+    internal bool CanCopperOwnOutputSlot(long outputCycle, bool normalInputPhase = false)
     {
         System.Diagnostics.Debug.Assert(
             outputCycle == _clock.Cycle + LightweightClock.CpuCyclesPerColorClock);
-        return !IsFollowingCckMandatoryRefresh() &&
+        // Normal Copper inputs are even H below 224, or H225: their outputs
+        // are odd H, or H226. Neither can be an even H0..H6 refresh slot.
+        // General ownership queries retain the full refresh check.
+        System.Diagnostics.Debug.Assert(!normalInputPhase || !IsFollowingCckMandatoryRefresh());
+        return (normalInputPhase || !IsFollowingCckMandatoryRefresh()) &&
             _diskDma.PendingOutputCycle != outputCycle &&
             !_paula.OwnsOutputSlot(outputCycle) &&
             !_bitplanes.OwnsOutputSlot(outputCycle) &&
@@ -808,6 +824,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     {
         var horizontal = _clock.ColorClock;
         return horizontal <= LightweightBusArbiter.LastRefreshHorizontal &&
+            !_clock.SyncStopped &&
             ((horizontal - LightweightBusArbiter.FirstRefreshHorizontal) & 1) == 0;
     }
 
@@ -1028,7 +1045,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
 
     internal long ClampCpuBatchTarget(long targetCycle)
     {
-        var boundary = Math.Min(targetCycle, _clock.NextFrameCycle);
+        var boundary = Math.Min(targetCycle, NextFrameCycle);
         boundary = Math.Min(boundary, _nextDeviceCycle);
         return Math.Max(_cpu.State.Cycles, boundary);
     }
@@ -1129,8 +1146,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         HandleCiaInterrupt(ciaA: true, _ciaA.PulseTod(cycle));
         var completedFieldLines = _clock.LinesThisField;
         _paula.CompleteFrame(cycle);
-        _video.CompleteFrame(cycle, completedFieldLines, this);
+        if (_unsynchronizedField)
+            _video.DiscardUnsynchronizedField(cycle, this);
+        else
+            _video.CompleteFrame(cycle, completedFieldLines, this);
+        _unsynchronizedField = false;
         _completedFrames++;
+        _nextOutputCycle = cycle + MaximumOutputIntervalCycles;
         if ((_video.EffectiveBplcon0 & 0x0004) != 0)
         {
             _clock.SelectLongField(!_clock.IsLongField);
@@ -1141,6 +1163,41 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         // The OCS raster strobe is issued at h0; the captured A500 path
         // latches VERTB and presents IPL3 one color clock later.
         _nextVerticalBlankLatchCycle = cycle + LightweightClock.CpuCyclesPerColorClock;
+        RefreshCiaInterruptCycle();
+    }
+
+    internal void CompleteOutputIfDue(long cycle)
+    {
+        if (cycle < _nextOutputCycle) return;
+        // Bounded host output without inventing TOD, VERTB, LOF or DMA reloads.
+        _paula.CompleteFrame(cycle);
+        _completedFrames++;
+        _nextOutputCycle = cycle + MaximumOutputIntervalCycles;
+    }
+
+    internal void OnBeamSyncChanged(long cycle)
+    {
+        if (_clock.SyncStopped) _unsynchronizedField = true;
+        else
+        {
+            // Resume at H0. Round down to a real line boundary so the fixed
+            // PCM buffer cannot outlive its maximum PAL output interval.
+            var lineStart = cycle & ~1L;
+            _nextOutputCycle = lineStart + ((_nextOutputCycle - lineStart) /
+                LightweightClock.CpuCyclesPerLine) * LightweightClock.CpuCyclesPerLine;
+            CompleteOutputIfDue(cycle);
+        }
+        RephaseBeamDma(cycle);
+    }
+
+    private void RephaseBeamDma(long cycle)
+    {
+        _diskDma.OnBeamSyncChanged(cycle, this);
+        _paula.OnBeamSyncChanged(cycle, this);
+        _spriteDma.OnBeamSyncChanged(cycle, this);
+        _bitplanes.OnBeamSyncChanged(cycle, this);
+        _copper.OnBeamSyncChanged(cycle, this);
+        _blitter.OnBeamSyncChanged(cycle, this);
         RefreshCiaInterruptCycle();
     }
 
@@ -1345,7 +1402,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
                 LightweightRegisters.Vposr => (ushort)((_clock.IsLongField ? 0x8000 : 0) |
                     ((_clock.Line >> 8) & 1)),
                 LightweightRegisters.Vhposr => (ushort)(((_clock.Line & 0xFF) << 8) |
-                    ((_clock.ColorClock + 4) % (LightweightClock.CpuCyclesPerLine /
+                    (_clock.SyncStopped ? 0 : (_clock.ColorClock + 4) % (LightweightClock.CpuCyclesPerLine /
                         LightweightClock.CpuCyclesPerColorClock))),
                 LightweightRegisters.Dmaconr =>
                     (ushort)(_registers.Dmacon | _blitter.StatusBits),
@@ -1507,6 +1564,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
             offset <= LightweightRegisters.ColorLast)
         {
             _video.OnRegisterWrite(offset, value, cycle);
+            // A palette write only activates/advances video. Every other
+            // device deadline is unchanged; the aggregate can only decrease.
+            // TickDevices recomputes it after any in-flight Copper MOVE.
+            if (_video.NextCycle < _nextDeviceCycle) _nextDeviceCycle = _video.NextCycle;
+            return;
         }
         else if (offset is LightweightRegisters.Copjmp1 or
             LightweightRegisters.Copjmp2)
@@ -1591,6 +1653,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
                     _diskSerial.CompareSync(cycle, this);
                     break;
                 case LightweightRegisters.Bplcon0:
+                    _clock.SetExternalSync((value & 2) != 0, this);
+                    RefreshCiaInterruptCycle();
                     _bitplanes.OnRegisterWrite(offset, value, cycle, this);
                     _video.OnRegisterWrite(offset, value, cycle);
                     break;

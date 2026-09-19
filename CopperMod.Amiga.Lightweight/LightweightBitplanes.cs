@@ -16,18 +16,24 @@ internal sealed class LightweightBitplanes
     private const int DdfHardStopTargetHorizontal = 0xD8;
     private const int FetchUnitColorClocks = 8;
     private const uint OcsChipAddressMask = 0x0007_FFFEu;
-    private static ReadOnlySpan<sbyte> LowResPlaneBySlot =>
-        [-1, 3, 5, 1, -1, 2, 4, 0];
-    private static ReadOnlySpan<sbyte> HighResPlaneBySlot => [3, 1, 2, 0, 3, 1, 2, 0];
+    // Three bits per CCK, storing plane + 1 (zero is the idle slot).
+    // Lores: -1,3,5,1,-1,2,4,0; hires: 3,1,2,0,3,1,2,0.
+    private const uint LowResFetchOrder = 0x3585A0;
+    private const uint HighResFetchOrder = 0x2D42D4;
 
     private readonly uint[] _pointers = new uint[6];
     private readonly ushort[] _dataLatches = new ushort[6];
     private ushort _effectiveBplcon0;
     private int _effectivePlaneCount;
+    private uint _fetchOrder;
+    private int _terminalFetchOffset;
     private ushort _pendingBplcon0;
     private long _pendingBplcon0Cycle;
     private bool _startPermit;
     private bool _runActive;
+    // Updated at the canonical sync edge; no clock-object lookup per DMA CCK.
+    private bool _beamStopped;
+    private bool _dmaEnabled;
     private long _sequenceOriginCycle;
     private long _terminalUnitStartCycle;
     private long _completionCycle;
@@ -54,10 +60,14 @@ internal sealed class LightweightBitplanes
         Array.Clear(_dataLatches);
         _effectiveBplcon0 = 0;
         _effectivePlaneCount = 0;
+        _fetchOrder = LowResFetchOrder;
+        _terminalFetchOffset = 0;
         _pendingBplcon0 = 0;
         _pendingBplcon0Cycle = long.MaxValue;
         _startPermit = false;
         _runActive = false;
+        _beamStopped = false;
+        _dmaEnabled = false;
         _sequenceOriginCycle = long.MaxValue;
         _terminalUnitStartCycle = long.MaxValue;
         _completionCycle = long.MaxValue;
@@ -80,10 +90,15 @@ internal sealed class LightweightBitplanes
         long cycle,
         LightweightA500Machine machine)
     {
+        if (offset == LightweightRegisters.DmaconWrite)
+            _dmaEnabled = IsDmaEnabled(machine.Dmacon);
         if (offset == LightweightRegisters.Bplcon0)
         {
             _pendingBplcon0 = value;
-            _pendingBplcon0Cycle = cycle + LightweightClock.CpuCyclesPerColorClock;
+            // Public bus strobes are even; direct owner input can occur at an
+            // odd CPU phase. Publish the first physical CCK at/after the delay.
+            _pendingBplcon0Cycle = LightweightBusArbiter.AlignToSlot(
+                cycle + LightweightClock.CpuCyclesPerColorClock);
             Publish(_pendingBplcon0Cycle);
         }
         else if (offset >= LightweightRegisters.BplPointerFirst &&
@@ -96,7 +111,7 @@ internal sealed class LightweightBitplanes
             }
         }
 
-        if (ShouldClock(machine))
+        if (ShouldClock())
         {
             Publish(NextCckAfter(cycle));
         }
@@ -110,8 +125,28 @@ internal sealed class LightweightBitplanes
         _terminalUnitStartCycle = long.MaxValue;
         _completionCycle = long.MaxValue;
         _ownerLine = -1;
-        if (ShouldClock(machine))
+        if (ShouldClock())
         {
+            Publish(NextCckAfter(cycle));
+        }
+    }
+
+    private long _syncStopCycle;
+
+    internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+    {
+        _beamStopped = !machine.BeamSyncRunning;
+        if (_beamStopped)
+        {
+            _syncStopCycle = cycle;
+            NextCycle = Math.Min(_pendingBplcon0Cycle, PendingOutputCycle);
+        }
+        else
+        {
+            var delta = (cycle & ~1L) - _syncStopCycle;
+            if (_sequenceOriginCycle != long.MaxValue) _sequenceOriginCycle += delta;
+            if (_terminalUnitStartCycle != long.MaxValue) _terminalUnitStartCycle += delta;
+            if (_completionCycle != long.MaxValue) _completionCycle += delta;
             Publish(NextCckAfter(cycle));
         }
     }
@@ -131,10 +166,19 @@ internal sealed class LightweightBitplanes
         {
             _effectiveBplcon0 = _pendingBplcon0;
             _effectivePlaneCount = GetSupportedPlaneCount(_effectiveBplcon0);
+            var hires = (_effectiveBplcon0 & 0x8000) != 0;
+            _fetchOrder = hires ? HighResFetchOrder : LowResFetchOrder;
+            _terminalFetchOffset = hires ? 8 : 0;
             _pendingBplcon0Cycle = long.MaxValue;
         }
 
-        var dmaEnabled = IsDmaEnabled(machine.Dmacon);
+        if (_beamStopped)
+        {
+            NextCycle = Math.Min(_pendingBplcon0Cycle, PendingOutputCycle);
+            return;
+        }
+
+        var dmaEnabled = _dmaEnabled;
         var planeCount = _effectivePlaneCount;
         AdvanceDdfControl(cycle, machine, dmaEnabled, planeCount);
         TryAcceptInput(cycle, machine, planeCount);
@@ -187,8 +231,21 @@ internal sealed class LightweightBitplanes
             _startPermit = true;
         }
 
-        if (_runActive && cycle == _completionCycle)
+        if (_runActive)
         {
+            if (cycle < _completionCycle)
+            {
+                if (_completionCycle == long.MaxValue)
+                {
+                    if (horizontal == (machine.DdfStop & DdfMask))
+                        ArmStop(cycle, cycle);
+                    else if (horizontal == DdfHardStopCompareHorizontal)
+                        ArmStop(cycle, cycle + LightweightClock.CpuCyclesPerColorClock);
+                }
+                // The running sequencer cannot start again at this CCK.
+                // Keep the inactive-window tests out of its steady path.
+                return;
+            }
             _runActive = false;
             _startPermit = false;
             _sequenceOriginCycle = long.MaxValue;
@@ -197,24 +254,7 @@ internal sealed class LightweightBitplanes
             _ownerLine = -1;
         }
 
-        var ddfStop = machine.DdfStop & DdfMask;
-        if (_runActive && _completionCycle == long.MaxValue &&
-            horizontal == ddfStop)
-        {
-            ArmStop(cycle, cycle);
-        }
-        if (_runActive && _completionCycle == long.MaxValue &&
-            horizontal == DdfHardStopCompareHorizontal)
-        {
-            var lineStart = cycle -
-                ((long)horizontal * LightweightClock.CpuCyclesPerColorClock);
-            ArmStop(
-                cycle,
-                lineStart + ((long)DdfHardStopTargetHorizontal *
-                    LightweightClock.CpuCyclesPerColorClock));
-        }
-
-        if (!_runActive && _startPermit && dmaEnabled && planeCount != 0 &&
+        if (_startPermit && dmaEnabled && planeCount != 0 &&
             horizontal == (machine.GetCustomRegister(
                 LightweightRegisters.Ddfstrt) & DdfMask) &&
             IsVerticalWindowOpen(machine))
@@ -232,19 +272,21 @@ internal sealed class LightweightBitplanes
         LightweightA500Machine machine,
         int planeCount)
     {
-        if (!_runActive || cycle < _sequenceOriginCycle ||
-            _completionCycle != long.MaxValue && cycle >= _completionCycle)
+        if (!_runActive)
         {
             return;
         }
 
-        // The guard above proves this delta is non-negative. One CCK is two
+        // AdvanceDdfControl has already retired a completed run at this CCK.
+        // Starts and sync recovery cannot place its origin after this cycle.
+        System.Diagnostics.Debug.Assert(cycle >= _sequenceOriginCycle && cycle < _completionCycle);
+
+        // The active-run invariant makes this delta non-negative. One CCK is two
         // CPU cycles, so an arithmetic shift is the exact phase conversion
         // without the signed-division correction sequence.
         var deltaCcks = (cycle - _sequenceOriginCycle) >> 1;
         var slot = (int)(deltaCcks & (FetchUnitColorClocks - 1));
-        var hires = (_effectiveBplcon0 & 0x8000) != 0;
-        var plane = hires ? HighResPlaneBySlot[slot] : LowResPlaneBySlot[slot];
+        var plane = (int)((_fetchOrder >> (slot * 3)) & 7) - 1;
         if ((uint)plane >= (uint)planeCount)
         {
             return;
@@ -260,7 +302,7 @@ internal sealed class LightweightBitplanes
         _pendingPlane = plane;
         _pendingAddress = _pointers[plane];
         _pendingModulo = _terminalUnitStartCycle != long.MaxValue &&
-            cycle >= _terminalUnitStartCycle + (hires ? 8 : 0);
+            cycle >= _terminalUnitStartCycle + _terminalFetchOffset;
         _pendingOutputCycle = outputCycle;
 #if LIGHTWEIGHT_DIAGNOSTICS
         LastInputCycle = cycle;
@@ -328,14 +370,8 @@ internal sealed class LightweightBitplanes
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool ShouldClock(LightweightA500Machine machine)
-        => ShouldClock(
-            IsDmaEnabled(machine.Dmacon),
-            GetSupportedPlaneCount(_effectiveBplcon0));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool ShouldClock(bool dmaEnabled, int planeCount)
-        => _runActive || _hasPendingOutput || dmaEnabled && planeCount != 0;
+    private bool ShouldClock()
+        => _runActive || _hasPendingOutput || _dmaEnabled && _effectivePlaneCount != 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsDmaEnabled(ushort dmacon)

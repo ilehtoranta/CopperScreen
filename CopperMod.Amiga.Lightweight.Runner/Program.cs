@@ -439,12 +439,15 @@ static ulong AccumulateOutputChecksum(
             pixelIndex -= pixels.Length;
     }
 
+    // A recovered sync signal can publish a partial or empty PCM interval.
+    // Preserve the ordinary workload's exact sampling/fingerprint protocol.
+    if (audio.Length == 0) return hash;
     var audioIndex = (frame * 17) % audio.Length;
     for (var sample = 0; sample < audioSamples; sample++)
     {
         hash = (hash ^ (ushort)audio[audioIndex]) * prime;
         audioIndex += 31;
-        if (audioIndex >= audio.Length)
+        while (audioIndex >= audio.Length)
             audioIndex -= audio.Length;
     }
     return hash;

@@ -39,6 +39,13 @@ and 312/313-line fields. Reset selects the long field; field selection and LACE
 behavior use the same beam state. CPU accesses may stop on either CPU-cycle phase.
 The clock completes the partial CCK before continuing steady CCK advancement.
 
+ERSY without an external HSYNC holds H0 and V at the line boundary; canonical
+CPU/device time continues. Accepted outputs finish, future Agnus DMA/control
+steps pause, and fixed-slot requests resume from an integer beam-phase offset.
+Bounded host output during lost sync is distinct from actual VSYNC/TOD/VERTB.
+See [BEAM_SYNC.md](BEAM_SYNC.md) for output/reset contracts, hardware evidence
+and the still-open genlock/beam-write scope.
+
 Preserve the ordering in `CompleteColorClock`, `TickDevices` and register dispatch.
 Accepted address/data operations survive line/field boundaries and relevant DMA
 disable transitions, completing with their accepted address and physical phase.

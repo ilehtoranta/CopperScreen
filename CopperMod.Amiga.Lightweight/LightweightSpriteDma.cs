@@ -42,6 +42,8 @@ internal sealed class LightweightSpriteDma
     private WordPurpose _pendingPurpose;
     private uint _pendingAddress;
     private long _pendingOutputCycle;
+    private bool _beamHeld;
+    private long _beamOffset;
 
     internal long NextCycle { get; private set; } = long.MaxValue;
     internal long PendingOutputCycle => _hasPendingOutput
@@ -56,6 +58,8 @@ internal sealed class LightweightSpriteDma
 
     internal void Reset(long frameStartCycle)
     {
+        _beamHeld = false;
+        _beamOffset = frameStartCycle % LightweightClock.CpuCyclesPerLine;
         Array.Clear(_pointers);
         Array.Clear(_channels);
         _nextInputCycle = long.MaxValue;
@@ -354,10 +358,26 @@ internal sealed class LightweightSpriteDma
         return channel < usableChannels;
     }
 
+    internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+    {
+        _beamHeld = !machine.BeamSyncRunning;
+        _beamOffset = machine.BeamCycleOffset;
+        _nextInputCycle = long.MaxValue;
+        if (!_beamHeld)
+        {
+            _firstFieldInputCycle = (cycle & ~1L) - machine.BeamColorClock * 2 + Math.Max(0, PalControlReloadLine - machine.BeamLine) *
+                LightweightClock.CpuCyclesPerLine + FirstInputHorizontal * 2;
+            if (IsDmaEnabled(machine.Dmacon))
+                ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1));
+        }
+        PublishNextCycle();
+    }
+
     private void ScheduleInputAfter(long cycle)
     {
+        if (_beamHeld) return;
         var candidate = LightweightBusArbiter.AlignToSlot(cycle + 1);
-        var horizontal = LightweightBusArbiter.GetHorizontal(candidate);
+        var horizontal = LightweightBusArbiter.GetHorizontal(candidate - _beamOffset);
         var lineStart = candidate -
             ((long)horizontal * LightweightClock.CpuCyclesPerColorClock);
         var inputHorizontal = Math.Max(horizontal, FirstInputHorizontal);

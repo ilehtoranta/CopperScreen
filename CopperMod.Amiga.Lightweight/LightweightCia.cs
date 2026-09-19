@@ -195,7 +195,7 @@ internal sealed class LightweightCia
 
     internal long GetNextTodInterruptCycle(long nextPulse, int interval)
     {
-        if (!TodRunning || (_interruptMask & TodInterrupt) == 0 ||
+        if (nextPulse == long.MaxValue || !TodRunning || (_interruptMask & TodInterrupt) == 0 ||
             (_pendingInterrupts & TodInterrupt) != 0)
             return long.MaxValue;
         var pulses = (_todAlarm - _tod) & 0x00FF_FFFF;

@@ -135,7 +135,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     internal LightweightA500Machine Machine => _machine;
 
     public int AudioFramesPerAppFrame(int sampleRate)
-        => sampleRate == AudioSampleRate ? 962 : throw new NotSupportedException("Lightweight delivers 48 kHz stereo without host resampling.");
+        // Capacity, not a fixed sample count: a sync hold can extend a field.
+        => sampleRate == AudioSampleRate ? 1024 : throw new NotSupportedException("Lightweight delivers 48 kHz stereo without host resampling.");
 
     public void RenderNextFrame(int[] destination)
     {

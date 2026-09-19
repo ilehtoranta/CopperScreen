@@ -26,6 +26,12 @@ bytes, submit input, reset and execute frames. Read `Framebuffer` and
 `AudioSamples` from their reusable buffers before executing the next frame.
 The engine is single-owner; marshal UI input onto its execution thread.
 Host presentation, pacing and audio-device delivery remain outside this library.
+ERSY without an external HSYNC source now holds the beam while CPU/device time
+continues. `BeamSyncRunning` exposes that state. During lost sync, output delivery
+is bounded and retains the last complete image without generating a hardware
+VSYNC. PCM consumers need capacity for 1,024 stereo samples and must use the
+actual returned length. External genlock and beam-counter writes beyond LOF
+remain open; see the [beam/synchronization record](../docs/engine/BEAM_SYNC.md).
 Request `FramebufferWidth = 908` to retain OCS hires output. The library default
 is 454, which is lowres-only; it is not the complete native display contract.
 

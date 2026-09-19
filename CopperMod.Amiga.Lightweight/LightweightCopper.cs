@@ -42,6 +42,8 @@ internal sealed class LightweightCopper
     private ushort _waitFirst;
     private ushort _waitSecond;
     private bool _skipNextMove;
+    private bool _beamStopped;
+    private bool _dmaEnabled;
 
     internal long NextCycle { get; private set; } = long.MaxValue;
     internal long PendingOutputCycle => _pendingOutputCycle;
@@ -66,6 +68,8 @@ internal sealed class LightweightCopper
         _waitFirst = 0;
         _waitSecond = 0;
         _skipNextMove = false;
+        _beamStopped = false;
+        _dmaEnabled = false;
         NextCycle = long.MaxValue;
         LastOutputCycle = long.MinValue;
         LastAcceptedInputCycle = long.MinValue;
@@ -81,6 +85,7 @@ internal sealed class LightweightCopper
     {
         var wasEnabled = IsDmaEnabled(previous);
         var enabled = IsDmaEnabled(current);
+        _dmaEnabled = enabled;
         if (!wasEnabled && enabled)
         {
             if (_stage == ControlStage.Dormant)
@@ -109,7 +114,7 @@ internal sealed class LightweightCopper
             Restart(machine.GetCopperListPointer(secondList: true), cycle);
         }
 
-        if (IsDmaEnabled(machine.Dmacon) &&
+        if (_dmaEnabled &&
             offset is LightweightRegisters.Copjmp1 or LightweightRegisters.Copjmp2)
         {
             ActivateAfter(cycle);
@@ -119,10 +124,17 @@ internal sealed class LightweightCopper
     internal void OnFrameStart(long cycle, LightweightA500Machine machine)
     {
         Restart(machine.GetCopperListPointer(secondList: false), cycle);
-        if (IsDmaEnabled(machine.Dmacon))
+        if (_dmaEnabled)
         {
             ActivateAfter(cycle);
         }
+    }
+
+    internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+    {
+        _beamStopped = !machine.BeamSyncRunning;
+        NextCycle = HasPendingOutput ? _pendingOutputCycle : long.MaxValue;
+        if (!_beamStopped && _dmaEnabled) ActivateAfter(cycle);
     }
 
     internal void Step(long cycle, LightweightA500Machine machine)
@@ -136,20 +148,26 @@ internal sealed class LightweightCopper
             CompleteWord(cycle, machine);
         }
 
-        if (IsDmaEnabled(machine.Dmacon))
+        if (_beamStopped || !_dmaEnabled)
         {
-            var horizontal = machine.BeamColorClock;
-            var phase = ClassifyInput(horizontal);
-            if (phase == CopperInputPhase.Normal)
-            {
-                AdvanceControlInput(cycle, machine);
-            }
-            // The 227-CCK wrap dummy consumes no instruction address. Its
-            // undocumented data-bus value is deliberately not exposed in H2.
+            NextCycle = HasPendingOutput ? _pendingOutputCycle : long.MaxValue;
+            return;
         }
 
-        NextCycle = HasPendingOutput ||
-            IsDmaEnabled(machine.Dmacon) && _stage != ControlStage.Dormant
+        var horizontal = machine.BeamColorClock;
+        var phase = ClassifyInput(horizontal);
+        if (phase == CopperInputPhase.Normal)
+        {
+            AdvanceControlInput(cycle, machine);
+        }
+        // The 227-CCK wrap dummy consumes no instruction address. Its
+        // undocumented data-bus value is deliberately not exposed in H2.
+
+        // Input acceptance cannot write DMACON or BPLCON0; MOVE outputs above
+        // have already updated both gates before this input phase.
+        // End already has no control transition. Frame restart and COPJMP
+        // explicitly reactivate it; do not publish empty per-CCK work meanwhile.
+        NextCycle = HasPendingOutput || _stage is not (ControlStage.Dormant or ControlStage.End)
                 ? cycle + LightweightClock.CpuCyclesPerColorClock
                 : long.MaxValue;
     }
@@ -181,7 +199,8 @@ internal sealed class LightweightCopper
                 // even though it does not fetch an instruction word (HRM ch. 2).
                 // Testing after the comparator avoids bus checks while asleep.
                 if (ComparisonSatisfied(machine, _waitFirst, _waitSecond) &&
-                    machine.CanCopperOwnOutputSlot(cycle + LightweightClock.CpuCyclesPerColorClock))
+                    machine.CanCopperOwnOutputSlot(cycle + LightweightClock.CpuCyclesPerColorClock,
+                        normalInputPhase: true))
                 {
                     _stage = ControlStage.ReadFirst;
                 }
@@ -206,7 +225,7 @@ internal sealed class LightweightCopper
         LightweightA500Machine machine)
     {
         var outputCycle = inputCycle + LightweightClock.CpuCyclesPerColorClock;
-        if (!machine.CanCopperOwnOutputSlot(outputCycle))
+        if (!machine.CanCopperOwnOutputSlot(outputCycle, normalInputPhase: true))
         {
             return;
         }

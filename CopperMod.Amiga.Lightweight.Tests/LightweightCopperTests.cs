@@ -7,6 +7,35 @@ public sealed class LightweightCopperTests
 {
     private const uint ListAddress = 0x2000;
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void TerminalWaitRetainsBusStateAndReactivatesOnFrameOrJump(bool jump)
+    {
+        using var machine = new LightweightA500Machine();
+        var cycle = StartCopper(machine, (0x0180, 0x0F00), (0xFFFF, 0xFFFE), (0x0180, 0x00F0));
+        machine.AdvanceHardwareTo(cycle + 64);
+        Assert.True(machine.CopperWaiting);
+        Assert.Equal(ListAddress + 8, machine.CopperProgramCounter);
+        Assert.Equal(long.MaxValue, machine.CopperNextCycle);
+        Assert.Equal((ushort)0x0F00, machine.GetCustomRegister(0x180));
+        machine.WriteChipWordDma(ListAddress + 2, 0x000F);
+        if (jump)
+        {
+            cycle = machine.Cycle;
+            machine.WriteWord(LightweightA500Machine.CustomBase + LightweightRegisters.Copjmp1,
+                0, ref cycle, M68kBusAccessKind.CpuDataWrite);
+            machine.AdvanceHardwareTo(cycle + 32);
+        }
+        else
+        {
+            machine.AdvanceHardwareTo(LightweightClock.PalLongFieldCycles + 32);
+        }
+        Assert.Equal((ushort)0x000F, machine.GetCustomRegister(0x180));
+        Assert.Equal(ListAddress + 8, machine.CopperProgramCounter);
+        Assert.Equal(long.MaxValue, machine.CopperNextCycle);
+    }
+
     [Fact]
     public void MoveCommitsAtRetainedSecondWordOutputPhase()
     {

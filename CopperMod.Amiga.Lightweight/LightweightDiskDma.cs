@@ -19,6 +19,8 @@ internal struct LightweightDiskDma
     private ushort _writeShift;
     private int _writeShiftBits, _writeBitsRemaining;
     private long _writeCycle = long.MaxValue;
+    private bool _beamHeld;
+    private long _beamOffset;
 
     internal bool Active { get; private set; }
     internal bool Writing { get; private set; }
@@ -29,6 +31,8 @@ internal struct LightweightDiskDma
 
     internal void Reset()
     {
+        _beamHeld = false;
+        _beamOffset = 0;
         _fifo = 0;
         _fifoCount = _wordBits = Remaining = 0;
         _armed = _waitingForSync = _pendingCounts = Active = false;
@@ -214,11 +218,20 @@ internal struct LightweightDiskDma
     private static bool DmaEnabled(LightweightA500Machine machine)
         => (machine.Dmacon & 0x0210) == 0x0210;
 
+    internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
+    {
+        _beamHeld = !machine.BeamSyncRunning;
+        _beamOffset = machine.BeamCycleOffset;
+        _inputCycle = long.MaxValue;
+        if (!_beamHeld && DmaEnabled(machine)) ScheduleInput(cycle);
+        RefreshNextCycle();
+    }
+
     private void ScheduleInput(long cycle)
     {
-        if (!Active || _inputCycle != long.MaxValue ||
+        if (_beamHeld || !Active || _inputCycle != long.MaxValue ||
             (Writing ? Remaining == 0 || _fifoCount + (_pendingCounts ? 1 : 0) >= 3 : _fifoCount == 0)) return;
-        _inputCycle = NextInputAfter(cycle);
+        _inputCycle = NextInputAfter(cycle - _beamOffset) + _beamOffset;
     }
 
     private void ScheduleWrite(long cycle, LightweightA500Machine machine)

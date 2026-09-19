@@ -272,6 +272,31 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     }
 
     [Fact]
+    public void MissingSyncUsesAdvertisedAudioCapacityAndKeepsSessionResponsive()
+    {
+        using var session = new CopperScreenLightweightSession(Options());
+        var audio = new float[session.AudioFramesPerAppFrame(48000) * 2];
+        var cycle = session.Machine.Cycle;
+        session.Machine.WriteWord(0xDFF100, 2, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
+        for (var i = 0; i < 3; i++)
+        {
+            session.RenderNextFrame(session.Framebuffer);
+            var count = session.RenderAudio(audio, 48000, 2);
+            Assert.False(session.Machine.BeamSyncRunning);
+            Assert.InRange(count, 1010, audio.Length / 2);
+            Assert.False(session.IsPaused);
+        }
+        cycle = session.Machine.Cycle;
+        session.Machine.WriteWord(0xDFF100, 0, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
+        for (var i = 0; i < 3; i++)
+        {
+            session.RenderNextFrame(session.Framebuffer);
+            Assert.InRange(session.RenderAudio(audio, 48000, 2), 0, audio.Length / 2);
+        }
+        Assert.True(session.Machine.BeamSyncRunning);
+    }
+
+    [Fact]
     public void InputCommandsDoNotReplayMouseDeltasOnFollowingFrames()
     {
         using var session = new CopperScreenLightweightSession(Options());
@@ -566,7 +591,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var options = CopperScreenStartupOptions.Parse(["--rom", rom, disk], AppContext.BaseDirectory);
         using var created = CopperScreenSession.Create(options);
         var session = Assert.IsType<CopperScreenLightweightSession>(created);
-        var audio = new float[1924];
+        var audio = new float[session.AudioFramesPerAppFrame(48000) * 2];
         var output = 1469598103934665603UL;
         const ulong prime = 1099511628211UL;
         var next = 0;
@@ -627,11 +652,13 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         cpuHash = (cpuHash ^ (ulong)cpu.Cycles) * prime;
         foreach (var value in cpu.D) cpuHash = (cpuHash ^ value) * prime;
         foreach (var value in cpu.A) cpuHash = (cpuHash ^ value) * prime;
-        // Accepted 2026-09-15 sprite-repair/native gameplay fingerprints, not the
-        // older COPJMP checkpoint. The default switch leaves engine/CPU DLLs identical.
-        Assert.Equal(2063321634, session.Machine.Cycle);
-        if (!keyboard) Assert.Equal(0x6AE7090DA8AFB7E3UL, cpuHash);
-        Assert.Equal(0xC65F87325946E5DAUL, output);
+        // ERSY absent-source correction changes Kickstart's genlock detection.
+        // The unchanged script still enters level one and assigns the digger.
+        // Previous expectations and the hardware reason are retained in
+        // docs/engine/BEAM_SYNC.md; the frozen performance protocol is unchanged.
+        Assert.Equal(2063189682, session.Machine.Cycle);
+        if (!keyboard) Assert.Equal(0xBCF441F9BABF1113UL, cpuHash);
+        Assert.Equal(0xF7328C7C24582FCBUL, output);
         Assert.True(activeFields > 0);
         Assert.Equal(entries.Length, next);
         Assert.Null(session.Machine.UnsupportedActiveFeature);

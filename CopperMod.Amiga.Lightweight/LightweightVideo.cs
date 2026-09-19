@@ -137,6 +137,8 @@ internal sealed class LightweightVideo
         if (offset is >= LightweightRegisters.ColorFirst and <= LightweightRegisters.ColorLast)
         {
             UpdatePalette((offset - LightweightRegisters.ColorFirst) >> 1, value);
+            ActivateAfter(cycle);
+            return;
         }
         if (offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
             LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
@@ -157,7 +159,6 @@ internal sealed class LightweightVideo
         }
 
         if (offset == LightweightRegisters.DmaconWrite ||
-            offset is >= LightweightRegisters.ColorFirst and <= LightweightRegisters.ColorLast ||
             offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
                 LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
                 LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop ||
@@ -228,6 +229,17 @@ internal sealed class LightweightVideo
         NextCycle = _active
             ? boundaryCycle + LightweightClock.CpuCyclesPerColorClock
             : long.MaxValue;
+    }
+
+    internal void DiscardUnsynchronizedField(long cycle, LightweightA500Machine machine)
+    {
+        // A fixed PAL framebuffer cannot describe a monitor losing sync.
+        // Retain the last complete image and start afresh at the next VSYNC.
+        ApplyPendingInputs(cycle, machine);
+        Array.Clear(_rendering);
+        _spriteOutputEnableLine = -1;
+        _renderCursorInitialized = false;
+        NextCycle = _active ? cycle + LightweightClock.CpuCyclesPerColorClock : long.MaxValue;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
