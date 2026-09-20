@@ -44,6 +44,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     private LightweightDiskSerial _diskSerial = new();
     private LightweightDiskDma _diskDma = new();
     private LightweightKeyboard _keyboard;
+    private byte _ciaBPortPins = 0xFF;
+    private byte _parallelInputPins = 0xFF;
     private LightweightControllers _controllers;
     private readonly LightweightPotentiometers _pots = new();
     private bool _lightPenLatched;
@@ -247,7 +249,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         "save states",
         "dual-playfield HAM, HAM outside five/six-plane lores and hires BPU above four",
         "hires output with a 454-pixel framebuffer (select 908 for native OCS output)",
-        "keyboard power-up/resynchronization/reset-chord MCU sequences and general CIA serial output/CNT timer modes",
+        "keyboard MCU scan/debounce and physical reset-pulse duration; CIA sub-E-clock pipeline quirks",
         "physical paddle RC tolerances, controller adapters and mouse quadrature phase",
         "physical TOD pulse/debounce phases and comparator-write glitches (bounded raster-TOD model only)",
         "nonstandard spindle speed, silicon-exact analog disk recovery/precompensation and flux-preserving write splices",
@@ -272,7 +274,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _paula.Reset();
         _ciaA.Reset(CiaAPortAResetLatch, CiaAPortAResetDataDirection);
         _ciaB.Reset();
-        _keyboard.Reset();
+        // ROM-free diagnostics start synchronized; native cold boot includes
+        // the keyboard's slow synchronization and FD/held-key/FE stream.
+        _keyboard.Reset(coldStart: _romLoaded);
+        _ciaBPortPins = 0xFF;
+        _parallelInputPins = 0xFF;
         _controllers = default;
         _pots.Reset();
         _lightPenLatched = false;
@@ -307,6 +313,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
             programCounter = 0x1000;
         _cpu.Reset(programCounter, stackPointer);
         _input = default;
+        RefreshCiaInterruptCycle();
     }
 
     public void ExecuteFrame()
@@ -476,6 +483,59 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
             throw new InvalidOperationException("Keyboard type-ahead buffer is full (10 queued keycodes).");
         RefreshCiaInterruptCycle();
     }
+
+    /// <summary>Set a physical Amiga key (0..0x77) on the owner thread between
+    /// execution calls. Includes repeat suppression, Caps Lock and A500 reset.</summary>
+    public void SetKeyState(byte key, bool down)
+    {
+        ThrowIfDisposed();
+        if (key >= 0x78) throw new ArgumentOutOfRangeException(nameof(key));
+        var wasReset = _keyboard.ResetChord;
+        _keyboard.SetKeyState(key, down, Cycle);
+        if (!wasReset && _keyboard.ResetChord)
+        {
+            // Dedicated A500 reset, not the A2000 warning protocol. The host
+            // transition is already at a CPU instruction boundary.
+            var cycle = Cycle;
+            ResetExternalDevices(cycle);
+            _cpu.Reset(ReadLongRaw(4), ReadLongRaw(0));
+            _cpu.State.Cycles = cycle;
+        }
+        RefreshCiaInterruptCycle();
+    }
+
+    public bool KeyboardCapsLockOn => _keyboard.CapsLockOn;
+
+    /// <summary>External CIA-B SP/CNT levels at the current owner-thread cycle.
+    /// CIA-A is wired to the emulated keyboard.</summary>
+    public void SetCiaBSerialPins(bool spHigh, bool cntHigh)
+    {
+        ThrowIfDisposed();
+        HandleCiaInterrupt(false, _ciaB.SetSerialPins(spHigh, cntHigh, Cycle));
+        UpdateFloppyControlPins(Cycle);
+        RefreshCiaInterruptCycle();
+    }
+
+    public bool CiaBSerialDataHigh => _ciaB.SerialDataPinHigh;
+    public bool CiaBSerialClockHigh => _ciaB.SerialClockPinHigh;
+
+    /// <summary>External parallel data levels; input DDR bits sample these.</summary>
+    public void SetParallelDataPins(byte pins)
+    {
+        ThrowIfDisposed();
+        _parallelInputPins = pins;
+    }
+
+    /// <summary>External parallel-port acknowledge (/FLAG on CIA-A).</summary>
+    public void SetParallelAcknowledgePin(bool high)
+    {
+        ThrowIfDisposed();
+        HandleCiaInterrupt(true, _ciaA.SetFlagPin(high, Cycle));
+        RefreshCiaInterruptCycle();
+    }
+
+    public bool ParallelStrobeHigh => _ciaA.PcHigh(Cycle);
+    public byte ParallelOutputPins => _ciaA.ReadPort(1, _parallelInputPins, Cycle);
 
     public void LoadKickstart(ReadOnlySpan<byte> image, uint baseAddress = RomBase)
     {
@@ -653,9 +713,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _paula.ResetHardware(_clock.Cycle);
         _pots.Reset();
         _lightPenLatched = false;
-        _ciaA.Reset(CiaAPortAResetLatch, CiaAPortAResetDataDirection);
-        _ciaB.Reset();
+        _ciaA.Reset(CiaAPortAResetLatch, CiaAPortAResetDataDirection, preserveInputPins: true);
+        _ciaB.Reset(preserveInputPins: true);
         foreach (var drive in _floppies) drive.ResetControl();
+        _ciaBPortPins = 0xFF;
         RefreshDiskSchedule();
         _diskSerial.Reset();
         _diskDma.Reset();
@@ -673,6 +734,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _interruptPinChangeCycle = long.MinValue;
         _unsupportedActiveFeature = null;
         // RESET resets the CIA, not the independently powered keyboard.
+        SetKeyboardPins(_keyboard.DataHigh, _keyboard.ClockHigh, cycle);
         _keyboard.HostDataChanged(_ciaA.SerialSpHigh, cycle);
         RephaseBeamDma(cycle);
     }
@@ -1713,6 +1775,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     {
         var cia = ciaA ? _ciaA : _ciaB;
         var pins = (byte)0xFF;
+        if (ciaA && register == 1) pins = _parallelInputPins;
         if (ciaA && register == 0)
             foreach (var drive in _floppies) pins &= drive.ReadInputPins(cycle);
         if (ciaA && register == 0) pins &= _controllers.FirePins;
@@ -1733,20 +1796,23 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         }
         if (ciaA && register is 0x00 or 0x02)
             UpdateOverlayFromCiaA();
-        if (!ciaA && register is 0x01 or 0x03)
-        {
-            var direction = _ciaB.ReadDataDirection(1);
-            var pins = (byte)((_ciaB.ReadPortLatch(1) & direction) | (0xFF & ~direction));
-            for (var i = 0; i < _floppies.Length; i++)
-            {
-                var drive = _floppies[i];
-                if (!drive.WriteControlPins(pins, cycle))
-                    ReportUnsupportedFeature($"DF{i} seek beyond the standard ADF cylinder range");
-                _diskSerial.OnDriveChanged(drive, cycle);
-            }
-            RefreshDiskSchedule();
-        }
+        if (!ciaA) UpdateFloppyControlPins(cycle);
         RefreshCiaInterruptCycle();
+    }
+
+    private void UpdateFloppyControlPins(long cycle)
+    {
+        var pins = _ciaB.ReadPort(1, 0xFF, cycle);
+        if (pins == _ciaBPortPins) return;
+        _ciaBPortPins = pins;
+        for (var i = 0; i < _floppies.Length; i++)
+        {
+            var drive = _floppies[i];
+            if (!drive.WriteControlPins(pins, cycle))
+                ReportUnsupportedFeature($"DF{i} seek beyond the standard ADF cylinder range");
+            _diskSerial.OnDriveChanged(drive, cycle);
+        }
+        RefreshDiskSchedule();
     }
 
     private void RefreshDiskSchedule()
@@ -1776,21 +1842,19 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         }
         HandleCiaInterrupt(ciaA: true, _ciaA.AdvanceTo(cycle));
         HandleCiaInterrupt(ciaA: false, _ciaB.AdvanceTo(cycle));
+        _keyboard.HostDataChanged(_ciaA.SerialSpHigh, cycle);
+        UpdateFloppyControlPins(cycle);
         if (cycle == _keyboard.NextCycle) _keyboard.Step(cycle, _ciaA, this);
         RefreshCiaInterruptCycle();
     }
 
-    internal void ReceiveKeyboardBit(bool high, long cycle)
+    internal void SetKeyboardPins(bool dataHigh, bool clockHigh, long cycle)
     {
-        if (_ciaA.UsesUnsupportedKeyboardCntMode)
-            ReportUnsupportedFeature("keyboard CNT pulses used with unimplemented CIA external timer mode");
-        HandleCiaInterrupt(ciaA: true, _ciaA.ReceiveSerialBit(high, cycle));
+        HandleCiaInterrupt(ciaA: true, _ciaA.SetSerialPins(dataHigh, clockHigh, cycle));
     }
 
     private void HandleCiaInterrupt(bool ciaA, long interruptCycle)
     {
-        if ((ciaA ? _ciaA : _ciaB).SerialOutputClockReached)
-            ReportUnsupportedFeature("clocked CIA serial output transmission");
         if (interruptCycle == long.MaxValue)
             return;
         LatchHardwareInterrupt(

@@ -51,8 +51,8 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-CIA-001 | Board TOD pulse phase | Unverified; OPEN | Obtain board pulse-to-counter/IRQ evidence. |
 | LWA-CIA-002 | TOD comparator / reset | Unverified; OPEN | Establish write-trigger and latch/reset behavior. |
 | LWA-CIA-003 | CIA-to-Paula synchronization | Lost held IRQ repaired; sub-CCK edges OPEN | Obtain acknowledgement/INTREQR/IPL phase evidence. |
-| LWA-INPUT-001 | Keyboard startup / resync | Unsupported; OPEN | Implement when supported boot/recovery needs the missing protocol. |
-| LWA-INPUT-002 | Keyboard / CIA serial pins | Unverified edges and unsupported modes; OPEN | Isolate a pin/IRQ discrepancy or required clocked serial mode. |
+| LWA-INPUT-001 | Keyboard startup / resync | Digital protocol implemented; MCU/electrical detail OPEN | See [keyboard/CIA record](KEYBOARD_CIA.md); verify physical scan/reset timing. |
+| LWA-INPUT-002 | Keyboard / CIA serial pins | Serial/CNT/port modes implemented; physical edges OPEN | Verify CIA pipeline and pin/IRQ phases against hardware. |
 | LWA-INPUT-003 | Controller pins / analog input | Digital controls and ideal paddle counters implemented; physical edges OPEN | Establish pin/RC timing; see LWA-INPUT-005. |
 
 Prioritize a demonstrated failure in the supported profile first. Residual
@@ -71,7 +71,7 @@ completeness claim; undocumented combinations are separate from ordinary mode su
 | Beam and synchronization | VHPOSW and VPOSW beam repositioning beyond LOF; external genlock source/pulse qualification and physical display synchronization. ERSY absent-source hold/recovery is implemented as a bounded first slice; see LWA-VIDEO-009. |
 | Nonstandard display and blitter modes | Dual HAM, HAM outside five/six-plane lores, hires BPU above four, BPU=7, dual-playfield priority codes 5–7, and line-mode BLTSIZE widths other than two. These remain explicitly rejected. |
 | Disk-controller edge behavior | Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA, FIFO overrun behavior and simultaneous selected read streams. Preserved-track writes and fully physical write splices/precompensation are absent. |
-| A500 board I/O | Keyboard power-up/resynchronization/retransmission/reset chord; general CIA clocked serial output and external CNT timer modes. General parallel-port integration remains separate work. |
+| A500 board I/O | Digital keyboard startup/recovery, physical key state/reset chord, CIA serial/CNT and timer-port modes are implemented. MCU scan/debounce, reset electrical timing and CIA silicon pipelines remain unverified. Host parallel transports remain separate. |
 | Undocumented bus data | The 227-CCK wrap-dummy bus-data case remains explicitly unsupported. |
 
 Implemented behavior still needs independent physical verification at display
@@ -86,8 +86,8 @@ storage-dialog checks and Thunderbolt disk-two replay remain integration/native
 coverage work. They should not be counted as missing collision, UART, four-drive
 or ADF-write implementations. See [storage](STORAGE.md) for the exact evidence.
 
-Recommended implementation order is beam/synchronization, keyboard/CIA recovery
-and pin modes, then the explicitly rejected disk and nonstandard register cases,
+Next hardware work is remaining beam/synchronization and CIA pin/pipeline evidence,
+then the explicitly rejected disk and nonstandard register cases,
 prioritizing any demonstrated native failure. Each slice needs focused hardware
 expectations and its own unchanged-work performance comparison. The latest scoped
 performance acceptance does not close these gaps. NTSC is also missing for a
@@ -266,24 +266,21 @@ held-source regressions; use physical phase evidence to refine propagation.
 
 ### LWA-INPUT-001 — Keyboard startup and recovery
 
-Synchronized raw-key transport includes KCLK phases, serial receive, ten-code
-type-ahead and host data-line acknowledgement; SDR/ICR reads do not acknowledge.
-Startup/resync pulses, FD/FE power-up stream, F9 retransmission, MCU scanning,
-power-up held keys and reset chord are missing. A 143 ms timeout parks/reports
-unsupported; changing direction during active receive is also unsupported.
-Implement when supported startup/recovery requires it, using protocol-backed
-interrupted-byte/held-key/reset cases and native replay. A synchronized fixture
-does not establish cold-keyboard boot behavior.
+Digital cold synchronization, FD/held-key/FE startup, F9 retransmission, physical
+key state, Caps Lock, overflow and A500 reset-chord handling are implemented.
+A timeout now recovers instead of parking unsupported. The independently powered
+keyboard survives CPU RESET. Native ROM boot/reset and the exact model boundaries
+are recorded in [KEYBOARD_CIA.md](KEYBOARD_CIA.md). MCU scanning/debounce, self-test
+failure and electrical reset-pulse duration remain unverified/unmodeled.
 
 ### LWA-INPUT-002 — Keyboard and CIA serial pins
 
-The chosen model has three 142-CPU-cycle phases per bit (~20 microseconds), starts
-data at the next CCK, latches receive/ICR on the eighth rising KCLK edge and uses
-the eight-cycle CIA/Paula IRQ path. Host low/high pulses of at least eight CPU
-cycles acknowledge; fixtures use at least 604 cycles. These are model choices,
-not measured oscillator/pin propagation. General timer-clocked serial output and
-keyboard CNT timer modes remain unsupported. Revisit a required mode or observed
-pin/IRQ mismatch; isolate the first differing phase before changing execution.
+The 142-cycle keyboard phases and eight-cycle CIA/Paula IRQ model remain. General
+CIA serial output, holding buffer, CNT input/gated timers, PB6/PB7 outputs and
+FLAG/PC digital interfaces now have focused tests. These are specification/model
+checks, not measured pin propagation. The existing timer load/underflow pipeline,
+ICR/sub-CCK synchronization and board electrical phases remain open; isolate the
+first differing phase before changing execution. See [KEYBOARD_CIA.md](KEYBOARD_CIA.md).
 
 ### LWA-INPUT-003 — Controller pins and analog behavior
 
@@ -316,7 +313,7 @@ No historical test count is presented as a newly run suite.
 | LWA-VIDEO-007 | Decode OCS DIWSTOP V8 correctly and use host beam-coordinate viewports. | Bitplane and host viewport regressions; historical cracktro ID alias described below. |
 | LWA-VIDEO-008 | Implement ordinary OCS dual playfield. | `LightweightDualPlayfieldTests`; undocumented modes and physical phases remain above. |
 | LWA-DISK-009 | Execute slow-mode ideal-ADF reception with a bounded recovery window. | `LightweightDiskSerialTests` and recorded native replay; rate-switch phases remain LWA-DISK-010. |
-| LWA-INPUT-004 | SDR is a holding buffer; reject actual clocked output, not an unclocked handshake write. | `LightweightKeyboardHandshakeTests` and native Return press/release replay. Actual clocked output remains unsupported. |
+| LWA-INPUT-004 | SDR is a holding buffer; reject actual clocked output, not an unclocked handshake write. | `LightweightKeyboardHandshakeTests` and native Return press/release replay. Clocked output is now implemented; see KEYBOARD_CIA.md. |
 | LWA-PERF-001 | Keep the cycle-preserving CPU-wait simplification that resolved the input-active retention shortfall. | Historical same-work evidence; not an open hardware defect or a current-host speed claim. |
 
 The historical register used LWA-VIDEO-003 twice. From this consolidation onward,
@@ -384,8 +381,8 @@ the standard-ADF scope. Slow-mode input retains the approximation above.
   A500 photographs. Hardware certification and the new performance gate remain
   separate; this is not an unrestricted beam/synchronization completeness claim.
 
-Keyboard MCU startup/recovery and general CIA serial/CNT modes remain the board
-I/O gaps recorded above. The new OCS interfaces do not implicitly close them.
+Keyboard/CIA digital functionality is recorded in [KEYBOARD_CIA.md](KEYBOARD_CIA.md).
+MCU and CIA physical/pipeline accuracy boundaries remain open above.
 
 CopperStart/Legacy restoration is a deferred host feature, not a timing defect or
 a dependency of Lightweight. Follow the [optional adapter boundary](../../CopperScreen/COPPERSTART_RESTORATION.md).

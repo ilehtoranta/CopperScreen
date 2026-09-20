@@ -11,8 +11,8 @@ and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
 
 Lightweight is the application's active/default engine. Legacy and CopperStart
-are unavailable in the standard build. Supported input is mouse, synchronized
-keyboard transport and implemented digital-controller input; output is a full
+are unavailable in the standard build. Supported input is mouse, keyboard
+startup/recovery and physical keys, and digital-controller input; output is a full
 raster and 48 kHz stereo PCM. ECS/AGA, other CPU/ROM profiles, RTC, RTG, physical
 IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
@@ -47,6 +47,15 @@ with buffering, SERPER timing, TBE/RBF interrupts, overrun and break control.
 `SetPaddlePosition` supplies ideal scan-period charge times; `TriggerLightPen`
 captures the current beam. Physical pin phases and optional host transports are
 separate from these digital models.
+
+`SetKeyState(key, down)` handles physical key repeat, Caps Lock and the A500
+Ctrl–Amiga–Amiga reset chord. `SubmitKey` remains a raw-byte replay interface.
+ROM cold boot includes keyboard synchronization and FD/held-key/FE startup;
+lost acknowledgments recover with F9 and retransmission. CIA serial output,
+CNT timer modes and PB6/PB7 timer outputs are implemented. Owner-thread
+`SetCiaBSerialPins`, `SetParallelDataPins` and `SetParallelAcknowledgePin` supply
+external digital levels. Physical MCU/reset and CIA pipeline accuracy remain
+bounded; see [keyboard/CIA contracts and evidence](../docs/engine/KEYBOARD_CIA.md).
 
 Set `FloppyDriveCount = 1..4` at construction (default 1). Use
 `MountAdf(drive, bytes)`, `EjectAdf(drive)`, `IsDriveMounted(drive)` and

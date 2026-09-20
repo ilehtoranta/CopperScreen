@@ -65,12 +65,13 @@ public sealed class LightweightInputTests
     }
 
     [Fact]
-    public void HandshakeTimeoutIsReportedInsteadOfSilentlyDroppingKeys()
+    public void HandshakeTimeoutStartsRecoveryInsteadOfDroppingKeys()
     {
         using var m = new LightweightA500Machine();
         m.SubmitKey(0x35);
         m.AdvanceHardwareTo(3268 + 1_014_412);
-        Assert.Contains("resynchronization", m.UnsupportedActiveFeature!);
+        Assert.Null(m.UnsupportedActiveFeature);
+        Assert.Equal(3268 + 1_014_412 + 2, m.KeyboardNextCycle);
     }
 
     [Fact]
@@ -241,18 +242,22 @@ public sealed class LightweightInputTests
     }
 
     [Fact]
-    public void OutputCollisionAndExternalCntModeAreNotSuccessfulInput()
+    public void OutputModeIgnoresInputWhileExternalCntModeReceivesAndCounts()
     {
         using var m = new LightweightA500Machine();
         m.SubmitKey(1);
         WriteCia(m, 14, 0x40);
         m.AdvanceHardwareTo(4000);
-        Assert.Contains("output mode", m.UnsupportedActiveFeature!);
+        Assert.Null(m.UnsupportedActiveFeature);
+        Assert.Equal(0, m.CiaAPendingInterrupts & 8);
         using var cnt = new LightweightA500Machine();
+        WriteCia(cnt, 4, 8);
+        WriteCia(cnt, 5, 0);
         WriteCia(cnt, 14, 0x21);
         cnt.SubmitKey(1);
         cnt.AdvanceHardwareTo(4000);
-        Assert.Contains("external timer mode", cnt.UnsupportedActiveFeature!);
+        Assert.Null(cnt.UnsupportedActiveFeature);
+        Assert.Equal(9, cnt.CiaAPendingInterrupts & 9);
     }
 
     [Fact]

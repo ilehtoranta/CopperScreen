@@ -30,9 +30,14 @@ requester graph or parallel device timeline to synchronize.
 | Display and sprites | [LightweightBitplanes](../../CopperMod.Amiga.Lightweight/LightweightBitplanes.cs), [LightweightVideo](../../CopperMod.Amiga.Lightweight/LightweightVideo.cs), [LightweightSpriteDma](../../CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs), [LightweightSprites](../../CopperMod.Amiga.Lightweight/LightweightSprites.cs) | Direct OCS raster generation retains fetches, delayed shifter/composition state and full output. |
 | Audio | [LightweightPaulaAudio](../../CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs), [PCM output](../../CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs) | Manual/DMA channels and modulation produce real 48 kHz stereo PCM from canonical-clock state. |
 | Disk | [LightweightFloppyDrive](../../CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs), [LightweightDiskSerial](../../CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs), [LightweightDiskDma](../../CopperMod.Amiga.Lightweight/LightweightDiskDma.cs) | Standard ADF encoding occurs at mount; rotation, receiver state and RAM transfers remain distinct within one clock. |
-| CIA and input | [LightweightCia](../../CopperMod.Amiga.Lightweight/LightweightCia.cs), [LightweightKeyboard](../../CopperMod.Amiga.Lightweight/LightweightKeyboard.cs), [LightweightControllers](../../CopperMod.Amiga.Lightweight/LightweightControllers.cs) | Timers, TOD, held interrupt lines, synchronized keyboard transport and digital input retain their documented model boundaries. |
+| CIA and input | [LightweightCia](../../CopperMod.Amiga.Lightweight/LightweightCia.cs), [LightweightKeyboard](../../CopperMod.Amiga.Lightweight/LightweightKeyboard.cs), [LightweightControllers](../../CopperMod.Amiga.Lightweight/LightweightControllers.cs) | Batched timers, TOD, held IRQ, serial/CNT/port pins, keyboard startup/recovery and physical keys retain their documented model boundaries. |
 
 ## Clock and state invariants
+
+Keyboard startup/recovery, physical key state, A500 reset, CIA serial/CNT modes
+and timer-port/pin interfaces are specified in [KEYBOARD_CIA.md](KEYBOARD_CIA.md).
+Idle CIA timers retain arithmetic advancement; active pin edges share the existing
+interface deadline. No MCU execution loop or additional per-CCK polling is used.
 
 The PAL model has two CPU cycles per color clock (CCK), 454 CPU cycles per line,
 and 312/313-line fields. Reset selects the long field; field selection and LACE

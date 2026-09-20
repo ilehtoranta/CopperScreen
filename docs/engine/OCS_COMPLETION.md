@@ -8,6 +8,10 @@ separate work. Existing physical timing uncertainties remain identified in
 [ISSUES.md](ISSUES.md); functional support does not establish exhaustive silicon
 conformance.
 
+The subsequent [keyboard/CIA milestone](KEYBOARD_CIA.md) implements digital
+startup/recovery, physical keys/reset, CIA serial/CNT and timer-port/pin modes.
+It retains separate MCU, electrical and CIA pipeline accuracy boundaries.
+
 ## Implementation and verification sequence
 
 1. Denise collisions: CLXCON matching, sprite grouping, persistent CLXDAT and
@@ -71,8 +75,9 @@ Desktop save/close dialogs have not been manually exercised. See
 The register audit additionally found **missing VHPOSW/VPOSW beam repositioning
 beyond LOF and external synchronization/genlock** (LWA-VIDEO-009). Raw latches do
 not implement these features. Canonical beam changes must preserve accepted bus
-phases and correctly reschedule device work. Keyboard MCU startup/recovery and
-general CIA serial/CNT modes remain separate board-I/O gaps. The issue register
+phases and correctly reschedule device work. At this initial 2026-09-18 audit,
+keyboard startup/recovery and general CIA serial/CNT modes were separate board-I/O
+gaps; their subsequent digital implementation is recorded in [KEYBOARD_CIA.md](KEYBOARD_CIA.md). The issue register
 also retains bounded disk, sprite, HAM and interrupt timing assumptions. These
 facts prevent an unrestricted OCS-complete claim.
 

@@ -22,13 +22,33 @@ internal sealed class LightweightCia
     internal uint TodCounter => _tod;
     private byte _serialShift, _serialBits;
     private bool _serialOutputPending;
-    internal bool SerialOutputClockReached { get; private set; }
+    private byte _serialOutputShift, _serialOutputBits;
+    private bool _spOutputHigh, _cntOutputHigh = true;
+    private bool _spInputHigh = true, _cntInputHigh = true, _flagHigh = true;
+    // At most one PRB access per E-clock: retain the active pulse plus the
+    // three delayed pulses. No device-loop event is needed for this output pin.
+    [InlineArray(4)] private struct PcPulses { private long _first; }
+    private PcPulses _pcPulses;
+    private int _pcIndex;
     internal bool SerialOutput => (_timerA.Control & 0x40) != 0;
-    // The supported direction-toggle handshake drives the reset output latch low.
-    // SDR is only a holding buffer. Actual clocked output remains unsupported.
-    internal bool SerialSpHigh => !SerialOutput;
-    internal bool UsesUnsupportedKeyboardCntMode => (_timerA.Control & 0x21) == 0x21 ||
-        (_timerB.Control & 0x61) is 0x21 or 0x61;
+    internal bool SerialSpHigh => !SerialOutput || _spOutputHigh;
+    internal bool SerialCntHigh => !SerialOutput || _cntOutputHigh;
+    internal bool SerialDataPinHigh => _spInputHigh && SerialSpHigh;
+    internal bool SerialClockPinHigh => CntHigh;
+    private bool CntHigh => _cntInputHigh && SerialCntHigh;
+    private bool SerialActive => _serialOutputPending || _serialOutputBits != 0;
+    internal bool PcHigh(long cycle)
+    {
+        for (var i = 0; i < 4; i++)
+            if (cycle >= _pcPulses[i] && cycle - _pcPulses[i] < CpuCyclesPerTick) return false;
+        return true;
+    }
+
+    private void StrobePc(long cycle)
+    {
+        _pcPulses[_pcIndex] = cycle + 3 * CpuCyclesPerTick;
+        _pcIndex = (_pcIndex + 1) & 3;
+    }
 
     internal byte InterruptMask => _interruptMask;
     internal byte PendingInterrupts => _pendingInterrupts;
@@ -37,7 +57,7 @@ internal sealed class LightweightCia
     internal ushort TimerACounter => (ushort)_timerA.Counter;
     internal ushort TimerBCounter => (ushort)_timerB.Counter;
 
-    internal void Reset(byte initialPortA = 0, byte initialPortADataDirection = 0)
+    internal void Reset(byte initialPortA = 0, byte initialPortADataDirection = 0, bool preserveInputPins = false)
     {
         Array.Clear(_registers);
         _registers[0] = initialPortA;
@@ -51,16 +71,22 @@ internal sealed class LightweightCia
         _todReadLatched = false;
         TodRunning = false;
         _serialShift = _serialBits = 0;
-        _serialOutputPending = SerialOutputClockReached = false;
+        _serialOutputPending = _spOutputHigh = false;
+        _serialOutputShift = _serialOutputBits = 0;
+        _cntOutputHigh = true;
+        if (!preserveInputPins) _spInputHigh = _cntInputHigh = _flagHigh = true;
+        for (var i = 0; i < 4; i++) _pcPulses[i] = long.MaxValue;
+        _pcIndex = 0;
     }
 
     internal byte ReadRegister(int register, byte inputPins, long cycle, out long interruptCycle)
     {
         interruptCycle = AdvanceTo(cycle);
         register &= 0x0F;
+        if (register == 1) StrobePc(cycle);
         return register switch
         {
-            0x00 or 0x01 => ReadPort(register, inputPins),
+            0x00 or 0x01 => ReadPort(register, inputPins, cycle),
             0x04 => (byte)_timerA.Counter,
             0x05 => (byte)(_timerA.Counter >> 8),
             0x06 => (byte)_timerB.Counter,
@@ -77,6 +103,7 @@ internal sealed class LightweightCia
     {
         interruptCycle = AdvanceTo(cycle);
         register &= 0x0F;
+        if (register == 1) StrobePc(cycle);
         switch (register)
         {
             case 0x04:
@@ -119,6 +146,8 @@ internal sealed class LightweightCia
                 {
                     _serialShift = _serialBits = 0;
                     _serialOutputPending = false;
+                    _serialOutputBits = 0;
+                    _cntOutputHigh = true;
                 }
                 _timerA.WriteControl(value, cycle);
                 break;
@@ -137,24 +166,29 @@ internal sealed class LightweightCia
 
     internal long AdvanceTo(long targetCycle)
     {
-        // Stop at the first potential output clock, not at an SDR buffer write.
-        // Returning to input before this clock cancels the pending transmission.
-        if (_serialOutputPending && _timerA.GetNextUnderflowCycle() <= targetCycle)
+        var interruptCycle = long.MaxValue;
+        // Only an active transmitter needs individual half-bit edges. At most
+        // two buffered bytes are visited; ordinary timers remain arithmetic.
+        while (SerialActive)
         {
-            _serialOutputPending = false;
-            SerialOutputClockReached = true;
+            var edge = _timerA.GetNextUnderflowCycle();
+            if (edge > targetCycle || edge == long.MaxValue) break;
+            interruptCycle = Math.Min(interruptCycle, AdvanceTimersTo(edge));
+            interruptCycle = Math.Min(interruptCycle, ClockSerialOutput(edge));
         }
+        return Math.Min(interruptCycle, AdvanceTimersTo(targetCycle));
+    }
+
+    private long AdvanceTimersTo(long targetCycle)
+    {
+        var cascade = _timerB.CountsTimerAUnderflows && (!_timerB.CntGated || CntHigh);
         var interruptCycle = _timerA.AdvanceTo(
             targetCycle,
             this,
             TimerAInterrupt,
-            _timerB.CountsTimerAUnderflows ? _timerB : null);
-        if (!_timerB.CountsTimerAUnderflows)
-        {
-            interruptCycle = Math.Min(
-                interruptCycle,
-                _timerB.AdvanceTo(targetCycle, this, TimerBInterrupt, null));
-        }
+            cascade ? _timerB : null);
+        interruptCycle = Math.Min(interruptCycle,
+            _timerB.AdvanceTo(targetCycle, this, TimerBInterrupt, null));
 
         return interruptCycle;
     }
@@ -162,7 +196,9 @@ internal sealed class LightweightCia
     internal long GetNextActiveInterruptCycle()
     {
         // The serial boundary is observable even when all CIA IRQs are masked.
-        var cycle = _serialOutputPending ? _timerA.GetNextUnderflowCycle() : long.MaxValue;
+        var cycle = SerialActive ? _timerA.GetNextUnderflowCycle() : long.MaxValue;
+        cycle = Math.Min(cycle, _timerA.GetNextPortTransition());
+        cycle = Math.Min(cycle, _timerB.GetNextPortTransition());
         if ((_interruptMask & TimerAInterrupt) != 0 &&
             (_pendingInterrupts & TimerAInterrupt) == 0)
         {
@@ -173,10 +209,13 @@ internal sealed class LightweightCia
             (_pendingInterrupts & TimerBInterrupt) == 0)
         {
             var timerB = _timerB.CountsTimerAUnderflows
-                ? _timerA.GetUnderflowCycleAfterEvents(_timerB.Counter)
+                ? (!_timerB.CntGated || CntHigh ? _timerA.GetUnderflowCycleAfterEvents(_timerB.Counter) : long.MaxValue)
                 : _timerB.GetNextUnderflowCycle();
             cycle = Math.Min(cycle, timerB);
         }
+
+        if (_timerB.PortEnabled && _timerB.CountsTimerAUnderflows && (!_timerB.CntGated || CntHigh))
+            cycle = Math.Min(cycle, _timerA.GetUnderflowCycleAfterEvents(_timerB.Counter));
 
         return cycle;
     }
@@ -236,6 +275,61 @@ internal sealed class LightweightCia
 
     internal long LatchFlag(long cycle) => SetPending(0x10, cycle);
 
+    internal long SetFlagPin(bool high, long cycle)
+    {
+        var interrupt = AdvanceTo(cycle);
+        if (_flagHigh && !high) interrupt = Math.Min(interrupt, LatchFlag(cycle));
+        _flagHigh = high;
+        return interrupt;
+    }
+
+    internal long SetSerialPins(bool spHigh, bool cntHigh, long cycle)
+    {
+        var interrupt = AdvanceTo(cycle);
+        var wasHigh = CntHigh;
+        _spInputHigh = spHigh;
+        _cntInputHigh = cntHigh;
+        return !wasHigh && CntHigh ? Math.Min(interrupt, RisingCnt(cycle)) : interrupt;
+    }
+
+    private long RisingCnt(long cycle)
+    {
+        var interrupt = ReceiveSerialBit(_spInputHigh, cycle);
+        if (_timerA.CountsCnt)
+        {
+            var underflow = _timerA.Running && _timerA.Counter == 1;
+            interrupt = Math.Min(interrupt, _timerA.CountExternalEvents(cycle, 0, 1, this, TimerAInterrupt));
+            if (underflow && _timerB.CountsTimerAUnderflows)
+                interrupt = Math.Min(interrupt, _timerB.CountExternalEvents(cycle, 0, 1, this, TimerBInterrupt));
+            if (underflow && SerialActive)
+                interrupt = Math.Min(interrupt, ClockSerialOutput(cycle));
+        }
+        if (_timerB.CountsCnt)
+            interrupt = Math.Min(interrupt, _timerB.CountExternalEvents(cycle, 0, 1, this, TimerBInterrupt));
+        return interrupt;
+    }
+
+    private long ClockSerialOutput(long cycle)
+    {
+        if (_cntOutputHigh)
+        {
+            if (_serialOutputBits == 0)
+            {
+                _serialOutputShift = _registers[12];
+                _serialOutputBits = 8;
+                _serialOutputPending = false;
+            }
+            _spOutputHigh = (_serialOutputShift & 0x80) != 0;
+            _cntOutputHigh = false;
+            return long.MaxValue;
+        }
+        _cntOutputHigh = true;
+        _serialOutputShift <<= 1;
+        var interrupt = --_serialOutputBits == 0 ? SetPending(8, cycle) : long.MaxValue;
+        if (_cntInputHigh) interrupt = Math.Min(interrupt, RisingCnt(cycle));
+        return interrupt;
+    }
+
     internal long ReceiveSerialBit(bool high, long cycle)
     {
         if (SerialOutput) return long.MaxValue;
@@ -250,11 +344,17 @@ internal sealed class LightweightCia
         => _registers[(register & 1) + 2];
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private byte ReadPort(int register, byte inputPins)
+    internal byte ReadPort(int register, byte inputPins, long cycle)
     {
         var latch = _registers[register];
         var direction = _registers[register + 2];
-        return (byte)((latch & direction) | (inputPins & ~direction));
+        var pins = (byte)((latch & direction) | (inputPins & ~direction));
+        if (register == 1)
+        {
+            if (_timerA.PortEnabled) pins = (byte)((pins & ~0x40) | (_timerA.OutputHigh(cycle) ? 0x40 : 0));
+            if (_timerB.PortEnabled) pins = (byte)((pins & ~0x80) | (_timerB.OutputHigh(cycle) ? 0x80 : 0));
+        }
+        return pins;
     }
 
     private byte ReadInterruptControl()
@@ -280,6 +380,9 @@ internal sealed class LightweightCia
     {
         private readonly bool _isTimerB;
         private long _nextTickCycle;
+        private long _pulseEnd = long.MinValue;
+        private long _advancedCycle;
+        private bool _toggleHigh;
 
         internal CiaTimer(bool isTimerB)
         {
@@ -289,9 +392,15 @@ internal sealed class LightweightCia
         internal ushort Latch { get; private set; }
         internal int Counter { get; private set; }
         internal byte Control { get; private set; }
-        internal bool CountsTimerAUnderflows => _isTimerB && (Control & 0x60) == 0x40;
+        internal bool CountsTimerAUnderflows => _isTimerB && (Control & 0x40) != 0;
+        internal bool CntGated => (Control & 0x60) == 0x60;
+        internal bool CountsCnt => _isTimerB ? (Control & 0x60) == 0x20 : (Control & 0x20) != 0;
+        internal bool PortEnabled => (Control & 2) != 0;
+        internal bool OutputHigh(long cycle) => (Control & 4) != 0 ? _toggleHigh : cycle < _pulseEnd;
+        internal long GetNextPortTransition() => !PortEnabled ? long.MaxValue :
+            Math.Min(GetNextUnderflowCycle(), (Control & 4) == 0 && _pulseEnd > _advancedCycle ? _pulseEnd : long.MaxValue);
 
-        private bool Running => (Control & 0x01) != 0;
+        internal bool Running => (Control & 0x01) != 0;
         private bool OneShot => (Control & 0x08) != 0;
         private bool CountsCpu => _isTimerB
             ? (Control & 0x60) == 0
@@ -304,6 +413,9 @@ internal sealed class LightweightCia
             Counter = 0;
             Control = 0;
             _nextTickCycle = 0;
+            _pulseEnd = long.MinValue;
+            _advancedCycle = 0;
+            _toggleHigh = false;
         }
 
         internal void WriteLatchLow(byte value)
@@ -319,6 +431,7 @@ internal sealed class LightweightCia
             if (OneShot)
             {
                 Load(cycle);
+                if (!Running) _toggleHigh = true;
                 Control |= 0x01;
             }
             else if (!Running)
@@ -330,16 +443,19 @@ internal sealed class LightweightCia
         internal void WriteControl(byte value, long cycle)
         {
             var wasRunning = Running;
+            var wasCpu = CountsCpu;
             if ((value & 0x10) != 0)
                 Load(cycle);
 
             Control = (byte)(value & 0xEF);
             if (!wasRunning && Running)
             {
+                _toggleHigh = true;
                 if (Counter <= 0)
                     Counter = LatchTicks;
                 _nextTickCycle = NextTickAfter(cycle);
             }
+            else if (Running && !wasCpu && CountsCpu) _nextTickCycle = NextTickAfter(cycle);
         }
 
         internal long GetNextUnderflowCycle()
@@ -367,6 +483,7 @@ internal sealed class LightweightCia
             byte interruptBit,
             CiaTimer? timerBUnderflowCounter)
         {
+            _advancedCycle = targetCycle;
             if (!Running || !CountsCpu || targetCycle < _nextTickCycle)
                 return long.MaxValue;
 
@@ -387,11 +504,12 @@ internal sealed class LightweightCia
                             underflowCycle,
                             intervalCycles,
                             underflows,
-                            cia));
+                            cia, TimerBInterrupt));
                 }
 
                 Counter = LatchTicks;
                 var lastUnderflowCycle = underflowCycle + ((underflows - 1L) * intervalCycles);
+                UnderflowOutputs(lastUnderflowCycle, underflows);
                 _nextTickCycle = lastUnderflowCycle + CpuCyclesPerTick;
                 if (OneShot)
                 {
@@ -410,11 +528,11 @@ internal sealed class LightweightCia
             return interruptCycle;
         }
 
-        private long CountExternalEvents(
+        internal long CountExternalEvents(
             long firstCycle,
             long intervalCycles,
             long eventCount,
-            LightweightCia cia)
+            LightweightCia cia, byte interruptBit)
         {
             if (!Running || Counter <= 0 || eventCount <= 0)
                 return long.MaxValue;
@@ -428,7 +546,9 @@ internal sealed class LightweightCia
             }
 
             var underflowCycle = firstCycle + ((Counter - 1L) * Math.Max(1, intervalCycles));
-            var interruptCycle = cia.SetPending(TimerBInterrupt, underflowCycle);
+            var interruptCycle = cia.SetPending(interruptBit, underflowCycle);
+            var underflows = OneShot ? 1 : 1 + (eventCount - Counter) / LatchTicks;
+            UnderflowOutputs(underflowCycle + (underflows - 1) * LatchTicks * intervalCycles, underflows);
             if (OneShot)
             {
                 Counter = LatchTicks;
@@ -458,6 +578,12 @@ internal sealed class LightweightCia
         {
             Counter = LatchTicks;
             _nextTickCycle = NextTickAfter(cycle);
+        }
+
+        private void UnderflowOutputs(long lastCycle, long count)
+        {
+            if ((count & 1) != 0) _toggleHigh = !_toggleHigh;
+            _pulseEnd = lastCycle + CpuCyclesPerTick;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

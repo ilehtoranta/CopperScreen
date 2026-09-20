@@ -1,7 +1,15 @@
 # Optional native replay
 
-The normal focused suite skips two tests unless all three environment variables
+The normal focused suite skips three tests unless all three environment variables
 are set. These are correctness/allocation checks, not formal throughput samples.
+
+The 2026-09-20 [keyboard/CIA milestone](engine/KEYBOARD_CIA.md) adds a ROM-only
+keyboard check through the desktop session: cold synchronization completes,
+Caps Lock on/off is acknowledged, and Ctrl–Amiga–Amiga resets and boots again
+without rewinding machine time. The two existing Lemmings runs retain their
+accepted complete-output identities and the ordinary run retains its CPU identity.
+The native keyboard test verifies guest acknowledgement and reboot, not physical
+MCU scan or reset-pulse timing. No reference fingerprint was changed for this work.
 
 Place your own copy of Lemmings disk 2 ZIP at `media/lemmings-disk2.zip`. The media
 directory is ignored by Git. Set paths for a native 256 KiB Kickstart 1.3 ROM and

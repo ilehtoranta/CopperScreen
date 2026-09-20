@@ -311,8 +311,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public void SetInputOptions(CopperScreenInputOptions options)
     { ValidateInput(options); _inputOptions = options; _joystick0 = _joystick1 = _mouseButtons = 0; ApplyInput(); }
     public void SetPresentationOptions(CopperScreenPresentationOptions options) { /* Host presenter owns these options. */ }
-    public void KeyDown(AmigaRawKey key) => _machine.SubmitKey((byte)key);
-    public void KeyUp(AmigaRawKey key) => _machine.SubmitKey((byte)((byte)key | 128));
+    public void KeyDown(AmigaRawKey key) => _machine.SetKeyState((byte)key, true);
+    public void KeyUp(AmigaRawKey key) => _machine.SetKeyState((byte)key, false);
     public bool ConsumeCopperBenchRequest() => false;
     public bool LaunchCopperBenchPath(string path, out string message)
     { message = "CopperBench/CopperStart services are not available in Lightweight."; return Reject(message); }

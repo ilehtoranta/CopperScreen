@@ -14,10 +14,11 @@ public sealed class LightweightKeyboardHandshakeTests
         cia.WriteRegister(4, 20, 0, out _);
         cia.WriteRegister(5, 0, 0, out _);
         cia.WriteRegister(14, 0x51, 0, out _);
-        cia.WriteRegister(12, 1, 10, out _);
+        cia.WriteRegister(12, 0x80, 10, out _);
         cia.WriteRegister(14, 1, writeCycle, out _);
         cia.AdvanceTo(500);
-        Assert.Equal(reached, cia.SerialOutputClockReached);
+        cia.WriteRegister(14, 0x40, 510, out _);
+        Assert.Equal(reached, cia.SerialSpHigh);
     }
 
     [Fact]
@@ -31,9 +32,9 @@ public sealed class LightweightKeyboardHandshakeTests
         cia.WriteRegister(12, 1, 200, out _);
         Assert.Equal(400, cia.GetNextActiveInterruptCycle());
         cia.AdvanceTo(399);
-        Assert.False(cia.SerialOutputClockReached);
+        Assert.True(cia.SerialCntHigh);
         cia.AdvanceTo(400);
-        Assert.True(cia.SerialOutputClockReached);
+        Assert.False(cia.SerialCntHigh);
     }
 
     [Fact]
@@ -77,7 +78,7 @@ public sealed class LightweightKeyboardHandshakeTests
     }
 
     [Fact]
-    public void PendingSerialOutputIsRejectedAtUnderflowEvenWithInterruptsMasked()
+    public void PendingSerialOutputClocksAtUnderflowEvenWithInterruptsMasked()
     {
         using var m = new LightweightA500Machine();
         LightweightInputTests.WriteCia(m, 4, 100);
@@ -89,7 +90,7 @@ public sealed class LightweightKeyboardHandshakeTests
         m.AdvanceHardwareTo(first - 1);
         Assert.Null(m.UnsupportedActiveFeature);
         m.AdvanceHardwareTo(first);
-        Assert.Contains("serial output", m.UnsupportedActiveFeature!);
+        Assert.Null(m.UnsupportedActiveFeature);
     }
 
     [Fact]
@@ -120,7 +121,7 @@ public sealed class LightweightKeyboardHandshakeTests
         Assert.Null(m.UnsupportedActiveFeature);
         LightweightInputTests.WriteCia(m, 14, 0x41);
         m.AdvanceHardwareTo(m.Cycle + 1100);
-        Assert.Contains("serial output", m.UnsupportedActiveFeature!);
+        Assert.Null(m.UnsupportedActiveFeature);
         m.Reset();
         m.AdvanceHardwareTo(5000);
         Assert.Null(m.UnsupportedActiveFeature);

@@ -11,6 +11,13 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The 2026-09-20 keyboard/CIA candidate uses
+[homogeneous retention v2](../../scripts/run-lightweight-homogeneous-retention-v2.ps1):
+accepted `d403d35` reference and its post-ERSY native identity, identical between
+reference/candidate. The six-pair design and host-load policy are unchanged.
+See [the candidate record](KEYBOARD_CIA.md#performance-gate) for results; earlier
+exceptions do not transfer.
+
 As audited on 2026-09-17, this machine is an AMD Ryzen 5 5600X (6 cores / 12 logical
 CPUs). The retained native scripts explicitly require a hybrid P/E-core topology
 and reject a homogeneous topology. Their frozen workload hashes and the retention
@@ -784,3 +791,27 @@ checkout; these rows summarize recorded evidence, not fresh verification.
 
 Neither consolidation nor the machine move reopens those accepted sessions or
 requires reruns solely to recreate historical gates.
+
+## Keyboard/CIA retention, 2026-09-20
+
+The corrected digital keyboard/CIA build was measured with homogeneous retention
+v2 against accepted `d403d35`. All 36 samples match complete-workload identities,
+allocate zero steady-state bytes, and pass telemetry checks. The full gate is
+**not met by measurement; the owner accepted the specific lores/hires exceptions
+on 2026-09-20**. The default 1% upper-bound budget for future changes is unchanged.
+
+| Workload | Reference mean FPS | Candidate mean FPS | Paired frame-time change | One-sided 95% upper bound | Gate |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Lores | 394.86 | 389.95 | +1.2690% | +3.2345% | Above limit; exception accepted |
+| Hires | 356.66 | 353.41 | +0.9377% | +2.6422% | Inconclusive; exception accepted |
+| Native Lemmings | 264.94 | 265.85 | -0.3450% | +0.5559% | Pass |
+
+See [KEYBOARD_CIA.md](KEYBOARD_CIA.md#completed-performance-result) for frozen
+build/protocol identities, all paired samples, test/native results and remaining
+hardware limits. The earlier partial series was aborted for a parallel strobe
+correction; its timings are not accepted or pooled into this result.
+
+The [owner acceptance](KEYBOARD_CIA.md#owner-acceptance-2026-09-20) applies only to
+engine `D79290B6BD3ED08B5797DC89DC69F77A41E6D5B58935844DCEC85906BBE5890A`
+against this recorded reference. It does not relabel the measured results as
+passes or waive remaining keyboard/CIA hardware-accuracy boundaries.

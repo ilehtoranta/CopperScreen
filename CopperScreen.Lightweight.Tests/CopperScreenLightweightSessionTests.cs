@@ -577,6 +577,51 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         => RunNativeReplay(keyboard: false);
 
     [NativeLightweightFact]
+    public void NativeKeyboardPowerUpCapsLockAndA500ResetAreAcknowledged()
+    {
+        var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_LIGHTWEIGHT_NATIVE_ROM")!;
+        var options = CopperScreenStartupOptions.Parse(["--rom", rom], AppContext.BaseDirectory);
+        using var session = new CopperScreenLightweightSession(options);
+        void Run(int fields)
+        {
+            for (var i = 0; i < fields; i++) session.RenderNextFrame(session.Framebuffer);
+            Assert.False(session.IsPaused);
+            Assert.Null(session.Machine.UnsupportedActiveFeature);
+        }
+        void AssertAcknowledged()
+        {
+            var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            Assert.Equal(long.MaxValue, typeof(LightweightA500Machine).GetProperty("KeyboardNextCycle", flags)!.GetValue(session.Machine));
+        }
+        Run(600);
+        AssertAcknowledged();
+        session.KeyDown(AmigaRawKey.CapsLock);
+        session.KeyDown(AmigaRawKey.CapsLock); // Host repeat must be suppressed.
+        session.KeyUp(AmigaRawKey.CapsLock);
+        Run(20);
+        Assert.True(session.Machine.KeyboardCapsLockOn);
+        AssertAcknowledged();
+        session.KeyDown(AmigaRawKey.CapsLock);
+        session.KeyUp(AmigaRawKey.CapsLock);
+        Run(20);
+        Assert.False(session.Machine.KeyboardCapsLockOn);
+        AssertAcknowledged();
+        var cycle = session.Machine.Cycle;
+        session.KeyDown(AmigaRawKey.Control);
+        session.KeyDown(AmigaRawKey.LeftAmiga);
+        session.KeyDown(AmigaRawKey.RightAmiga);
+        Assert.Equal(cycle, session.Machine.Cycle);
+        Assert.Equal(0x2700, session.Machine.Cpu.StatusRegister);
+        Assert.True(session.Machine.RomOverlayEnabled);
+        session.KeyUp(AmigaRawKey.RightAmiga);
+        session.KeyUp(AmigaRawKey.LeftAmiga);
+        session.KeyUp(AmigaRawKey.Control);
+        Run(600);
+        Assert.True(session.Machine.Cycle > cycle);
+        AssertAcknowledged();
+    }
+
+    [NativeLightweightFact]
     public void NativeKeyboardPressAndReleaseAreAcknowledgedAndGameplayContinues()
         => RunNativeReplay(keyboard: true);
 
