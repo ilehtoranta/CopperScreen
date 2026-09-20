@@ -11,6 +11,16 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The North & South Copper restart candidate uses
+[homogeneous retention v5](../../scripts/run-lightweight-homogeneous-retention-v5.ps1)
+against accepted `1db2d0d`. Its native preflight retains the existing Lemmings
+identity and zero measured allocations. The protocol changes only its identity
+and reference pin from v4; acceptance is pending the complete six-pair series.
+The first series was invalidated during hires by package interference above 25%
+for 10.298 seconds. Partial results are retained as diagnostic evidence only;
+the candidate has no accepted performance result yet.
+See [the investigation](NORTH_SOUTH_INVESTIGATION.md) for correctness evidence.
+
 The disk-control follow-up uses
 [homogeneous retention v4](../../scripts/run-lightweight-homogeneous-retention-v4.ps1)
 against accepted `a10b22c`, with unchanged workload identities and measurement

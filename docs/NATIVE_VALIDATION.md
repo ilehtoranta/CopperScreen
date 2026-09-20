@@ -1,5 +1,19 @@
 # Optional native replay
 
+The 2026-09-20 [additional game corpus](engine/GAME_CORPUS_2026-09-20.md) records
+bounded Lotus II and Apidya gameplay, persistent North & South menu corruption,
+and a Super Cars II boot Guru. Both failures reproduce identically before the
+latest disk-control fixes. Media hashes, input scripts and diagnostic identities
+are retained; second disks and full-game completion remain unverified.
+
+The [North & South follow-up](engine/NORTH_SOUTH_INVESTIGATION.md) corrects a
+Copper restart defect after the user reported real-A500 success. A frame restart
+held by disabled DMA now consumes the current list pointer when its bus output
+completes. Untouched CP menus and borders render correctly; four independent
+probe patterns agree with published hardware photographs. The initial inference
+about the CP release is withdrawn. Gameplay and performance acceptance remain
+separate from this visual correction.
+
 The 2026-09-20 [disk-control follow-up](engine/DISK_CONTROL_EDGES.md) repeats native
 Workbench format/write/export and fresh-machine reopen against accepted `a10b22c`.
 Both builds produce matching CPU/hardware/output fingerprints and byte-identical

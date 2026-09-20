@@ -62,6 +62,13 @@ higher-priority DMA can defer that transition even though no instruction word is
 read during wake-up. The following MOVE retains its ordinary two-word bus path.
 This is distinct from palette presentation delay; see [the correction record](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18).
 
+A frame restart requested while Copper DMA is disabled remains pending. Its
+retained dummy output loads the then-current COP1LC before instruction fetches
+resume; writing a new list while DMA is off must not execute the old list first.
+An ordinary mid-field DMA pause retains execution position. See the
+[North & South investigation](NORTH_SOUTH_INVESTIGATION.md) for the discriminating
+hardware-photo probes and the bounded implementation scope.
+
 Advance hardware through CPU instruction and accepted interrupt-entry retirement,
 including internal cycles after the final bus access. A CPU already beyond the
 field target must not leave hardware unable to complete that field (LWA-EXEC-001).

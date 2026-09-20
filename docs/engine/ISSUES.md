@@ -30,6 +30,8 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | ID | Subsystem / subject | Category and current status | Next action or trigger |
 | --- | --- | --- | --- |
 | LWA-HOST-002 | Interlace steadiness | Blackout repaired; residual symptom OPEN / deferred | On a repeatable report, distinguish host cadence, field sequencing and inherent flicker. |
+| LWA-NATIVE-001 | North & South CP release / Copper restart with DMA off | Corrected in candidate; performance gate pending | Defer the DMA-disabled frame restart's pointer load until its retained bus output. Untouched CP menus/borders and four hardware-photo probe patterns now agree. Earlier release-blame inference withdrawn; see [investigation](NORTH_SOUTH_INVESTIGATION.md). |
+| LWA-NATIVE-002 | Super Cars II Flashtro release | Reproduced boot Guru; cause OPEN | Guru and complete-workload identities match on `a10b22c` and `1db2d0d`. Investigate loader/exception path and distinguish engine from release behavior; see [game corpus](GAME_CORPUS_2026-09-20.md). |
 | LWA-DISK-001 | Request sampling / slots | Unverified; OPEN | Capture FIFO arrivals around eligible slots. |
 | LWA-DISK-002 | Final word / completion IRQ | Unverified; OPEN | Tie RAM visibility, countdown and interrupt to a hardware-backed timeline. |
 | LWA-DISK-003 | Cancel / rearm | Unverified; OPEN | Check accepted transfers across cancellation/disable/rearm. |

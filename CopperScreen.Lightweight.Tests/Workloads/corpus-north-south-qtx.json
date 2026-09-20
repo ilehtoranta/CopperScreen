@@ -1,0 +1,48 @@
+[
+  {
+    "frame": 2500,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 2520
+  },
+  {
+    "frame": 6100,
+    "mouseDeltaX": 95,
+    "mouseDeltaY": 55
+  },
+  {
+    "frame": 6110,
+    "mouseDeltaY": 55
+  },
+  {
+    "frame": 6120,
+    "mouseDeltaY": 55
+  },
+  {
+    "frame": 6140,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 6160
+  },
+  {
+    "mouseDeltaX": 90,
+    "frame": 8520,
+    "mouseDeltaY": 15
+  },
+  {
+    "frame": 8540,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 8560
+  },
+  {
+    "frame": 11020,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11040
+  }
+]

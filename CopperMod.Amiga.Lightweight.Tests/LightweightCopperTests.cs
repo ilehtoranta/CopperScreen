@@ -7,6 +7,59 @@ public sealed class LightweightCopperTests
 {
     private const uint ListAddress = 0x2000;
 
+    // vAmigaTS Agnus/Copper/lc (0489f55), lc1/lc2/lc3 and A500 hardware
+    // photographs: a VSYNC restart held by disabled DMA follows later COP1LC
+    // writes until Copper can execute. lc4 distinguishes a later ordinary pause.
+    [Theory]
+    [InlineData(1, false)]
+    [InlineData(2, false)]
+    [InlineData(1, true)]
+    [InlineData(2, true)]
+    public void FrameRestartWhileDmaDisabledUsesLatestList(int disabledFrames, bool masterOff)
+    {
+        using var machine = new LightweightA500Machine();
+        var cycle = StartCopper(machine, (0x0180, 0x0F00), (0xFFFF, 0xFFFE));
+        machine.AdvanceHardwareTo(cycle + 64);
+        WriteControl(machine, LightweightRegisters.DmaconWrite, masterOff ? (ushort)0x0200 : (ushort)0x0080);
+        machine.AdvanceHardwareTo(disabledFrames * (long)LightweightClock.PalLongFieldCycles + 128);
+        machine.WriteChipWordDma(0x3000, 0x0180);
+        machine.WriteChipWordDma(0x3002, 0x00F0);
+        machine.WriteChipWordDma(0x3004, 0xFFFF);
+        machine.WriteChipWordDma(0x3006, 0xFFFE);
+        WriteControl(machine, LightweightRegisters.Cop1lcl, 0x4000);
+        WriteControl(machine, LightweightRegisters.Cop1lcl, 0x3000);
+        Assert.Equal((ushort)0x0F00, machine.GetCustomRegister(0x180));
+        WriteControl(machine, LightweightRegisters.DmaconWrite, 0x8280);
+        machine.AdvanceHardwareTo(machine.Cycle + 80);
+        Assert.Equal((ushort)0x00F0, machine.GetCustomRegister(0x180));
+        Assert.Equal(0x3008u, machine.CopperProgramCounter);
+    }
+
+    [Fact]
+    public void OrdinaryDmaPauseAfterExecutionDoesNotReloadChangedList()
+    {
+        using var machine = new LightweightA500Machine();
+        var cycle = StartCopper(machine, (0x0180, 0x0F00), (0xFFFF, 0xFFFE));
+        machine.AdvanceHardwareTo(cycle + 64);
+        WriteControl(machine, LightweightRegisters.DmaconWrite, 0x0080);
+        machine.WriteChipWordDma(0x3000, 0x0180);
+        machine.WriteChipWordDma(0x3002, 0x00F0);
+        machine.WriteChipWordDma(0x3004, 0xFFFF);
+        machine.WriteChipWordDma(0x3006, 0xFFFE);
+        WriteControl(machine, LightweightRegisters.Cop1lcl, 0x3000);
+        WriteControl(machine, LightweightRegisters.DmaconWrite, 0x8080);
+        machine.AdvanceHardwareTo(machine.Cycle + 80);
+        Assert.Equal((ushort)0x0F00, machine.GetCustomRegister(0x180));
+        Assert.Equal(ListAddress + 8, machine.CopperProgramCounter);
+    }
+
+    private static void WriteControl(LightweightA500Machine machine, ushort register, ushort value)
+    {
+        var cycle = machine.Cycle;
+        machine.WriteWord(LightweightA500Machine.CustomBase + register, value,
+            ref cycle, M68kBusAccessKind.CpuDataWrite);
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

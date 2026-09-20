@@ -18,13 +18,15 @@ internal sealed class LightweightCopper
         SkipIdle,
         SkipDelay,
         SkipCompare,
-        End
+        End,
+        FrameRestart
     }
 
     private enum WordPurpose : byte
     {
         First,
-        Second
+        Second,
+        FrameRestart
     }
 
     private const ushort DmaconMaster = 0x0200;
@@ -128,6 +130,15 @@ internal sealed class LightweightCopper
         {
             ActivateAfter(cycle);
         }
+        else
+        {
+            // VSYNC requests a restart even with DMA off. The list address is
+            // consumed when the pending restart obtains its bus cycle, so a
+            // later COP1LC write must not leave us executing the previous list.
+            // Ordinary mid-field DMA pauses do not request another restart.
+            _stage = ControlStage.FrameRestart;
+            NextCycle = HasPendingOutput ? _pendingOutputCycle : long.MaxValue;
+        }
     }
 
     internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
@@ -185,6 +196,9 @@ internal sealed class LightweightCopper
 
         switch (_stage)
         {
+            case ControlStage.FrameRestart:
+                TryAcceptWord(cycle, WordPurpose.FrameRestart, machine);
+                break;
             case ControlStage.ReadFirst:
                 TryAcceptWord(cycle, WordPurpose.First, machine);
                 break;
@@ -264,7 +278,17 @@ internal sealed class LightweightCopper
             return;
         }
 
-        DecodeInstruction(value, cycle, machine);
+        if (purpose == WordPurpose.Second)
+        {
+            DecodeInstruction(value, cycle, machine);
+        }
+        else
+        {
+            // The restart's retained RAM output is a dummy read, not IR1.
+            // Sample COP1LC here, after arbitration and before the first fetch.
+            _programCounter = MaskAddress(machine.GetCopperListPointer(secondList: false));
+            _stage = ControlStage.ReadFirst;
+        }
     }
 
     private void DecodeInstruction(
