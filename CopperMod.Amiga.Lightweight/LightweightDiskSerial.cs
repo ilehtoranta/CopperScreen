@@ -122,12 +122,13 @@ internal struct LightweightDiskSerial
         return recovered;
     }
 
-    internal ushort ReadByteStatus(LightweightRegisters registers)
+    internal ushort ReadByteStatus(LightweightRegisters registers, bool dmaActive)
     {
         var length = registers.Read(LightweightRegisters.Dsklen);
         var value = (ushort)(_data | (_byteReady ? 0x8000 : 0) |
             (_wordEqual ? 0x1000 : 0) | ((length & 0x4000) >> 1) |
-            ((length & 0x8000) != 0 && (registers.Dmacon & 0x0210) == 0x0210 ? 0x4000 : 0));
+            // DMAEN is the armed transfer latch, not the last DSKLEN write.
+            (dmaActive && (registers.Dmacon & 0x0210) == 0x0210 ? 0x4000 : 0));
         _byteReady = false;
         return value;
     }

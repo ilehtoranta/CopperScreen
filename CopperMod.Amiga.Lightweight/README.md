@@ -70,6 +70,10 @@ Paula receiver and DMA controller. Simultaneous selected read streams are report
 unsupported; ordinary drive switching and multi-select control/status are supported.
 See the [disk contract and verification boundaries](../docs/engine/ARCHITECTURE.md#floppy-drives).
 
+DSKBYTR DMA status follows the active transfer, including sync wait and write
+serialization. Zero-length WORDSYNC reads complete at the qualifying match without
+RAM transfer. See [disk control edges and limits](../docs/engine/DISK_CONTROL_EDGES.md).
+
 Drives start write protected. For ADF, `SetDriveWriteProtected(drive, false)` enables
 guest memory-to-disk DMA into the owned encoded tracks. `ExportAdf(drive)` copies
 standard sectors and rejects damaged/custom tracks that cannot be represented in

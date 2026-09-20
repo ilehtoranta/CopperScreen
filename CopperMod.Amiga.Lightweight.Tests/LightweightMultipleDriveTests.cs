@@ -146,7 +146,7 @@ public sealed class LightweightMultipleDriveTests
         Assert.Equal(5, a.BitPosition);
         Assert.Equal(3, b.BitPosition);
         Assert.Equal(expected, serial.Shift);
-        Assert.Equal(0x8000 | expected, serial.ReadByteStatus(new LightweightRegisters()));
+        Assert.Equal(0x8000 | expected, serial.ReadByteStatus(new LightweightRegisters(), false));
     }
 
     [Fact]

@@ -122,7 +122,7 @@ public sealed class LightweightDiskSerialTests
         registers.Write(0x024, (ushort)length);
         registers.Write(0x096, (ushort)(0x8000 | dma));
         var serial = new LightweightDiskSerial();
-        Assert.Equal(expected, serial.ReadByteStatus(registers) & 0x6000);
+        Assert.Equal(expected, serial.ReadByteStatus(registers, (length & 0x8000) != 0) & 0x6000);
     }
 
     [Fact]
@@ -249,9 +249,9 @@ public sealed class LightweightDiskSerialTests
         machine.WriteCustomRegisterFromCopper(0x09E, 0x8300, machine.Cycle);
         for (var i = 0; i < 9; i++) SampleCell(ref serial, drive, machine);
         var registers = new LightweightRegisters();
-        Assert.Equal(0, serial.ReadByteStatus(registers) & 0x8000);
+        Assert.Equal(0, serial.ReadByteStatus(registers, false) & 0x8000);
         SampleCell(ref serial, drive, machine);
-        Assert.Equal(0x80A5, serial.ReadByteStatus(registers) & 0x80FF);
+        Assert.Equal(0x80A5, serial.ReadByteStatus(registers, false) & 0x80FF);
         Assert.Null(machine.UnsupportedActiveFeature);
     }
 
@@ -324,16 +324,16 @@ public sealed class LightweightDiskSerialTests
         for (var i = 0; i < 7; i++) SampleCell(ref serial, drive, machine);
         Assert.Equal(0x55, serial.Shift);
         var status = new LightweightRegisters();
-        Assert.Equal(0, serial.ReadByteStatus(status) & 0x8000);
+        Assert.Equal(0, serial.ReadByteStatus(status, false) & 0x8000);
         machine.WriteCustomRegisterFromCopper(0x07E, 0x00AB, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x09E, 0x0100, machine.Cycle);
         SampleCell(ref serial, drive, machine); // 01 + settling cell.
         SampleCell(ref serial, drive, machine);
-        Assert.Equal(0, serial.ReadByteStatus(status) & 0x8000);
+        Assert.Equal(0, serial.ReadByteStatus(status, false) & 0x8000);
         SampleCell(ref serial, drive, machine);
 
-        Assert.Equal(0x90AB, serial.ReadByteStatus(status));
-        Assert.Equal(0x10AB, serial.ReadByteStatus(status));
+        Assert.Equal(0x90AB, serial.ReadByteStatus(status, false));
+        Assert.Equal(0x10AB, serial.ReadByteStatus(status, false));
         Assert.NotEqual(0, machine.Intreq & 0x1000);
         Assert.Equal(0, machine.Dmacon);
         Assert.Null(machine.UnsupportedActiveFeature);

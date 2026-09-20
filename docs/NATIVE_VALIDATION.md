@@ -1,5 +1,12 @@
 # Optional native replay
 
+The 2026-09-20 [disk-control follow-up](engine/DISK_CONTROL_EDGES.md) repeats native
+Workbench format/write/export and fresh-machine reopen against accepted `a10b22c`.
+Both builds produce matching CPU/hardware/output fingerprints and byte-identical
+exported ADFs; final candidate captures show both completion markers. All three
+native host checks also pass. This is functional retention, not physical Paula
+phase certification; the record preserves an initial incompatible-runner failure.
+
 The 2026-09-20 [nonstandard OCS investigation](engine/NONSTANDARD_OCS.md) records
 ten bounded display-test ADF replays and comparison with published hardware
 photographs. Two additional nonstandard blitter-width runs disagree with those

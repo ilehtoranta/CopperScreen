@@ -64,7 +64,8 @@ internal struct LightweightDiskDma
 
         Cancel(); // Does not revoke a preceding transfer's accepted RAM word.
         Remaining = value & 0x3FFF;
-        if (Remaining == 0)
+        _waitingForSync = (value & 0x4000) == 0 && (machine.Adkcon & 0x0400) != 0;
+        if (Remaining == 0 && !_waitingForSync)
         {
             _armed = false;
             machine.LatchDiskBlock(cycle);
@@ -72,7 +73,6 @@ internal struct LightweightDiskDma
         }
         Active = true;
         Writing = (value & 0x4000) != 0;
-        _waitingForSync = !Writing && (machine.Adkcon & 0x0400) != 0;
         _wordBits = 0;
         if (Writing)
         {
@@ -124,6 +124,13 @@ internal struct LightweightDiskDma
             {
                 _waitingForSync = false;
                 _wordBits = 0; // First matching word is not transferred.
+                // Even a zero-length synchronized read must pass the start
+                // gate. It completes here without requesting a RAM word.
+                if (Remaining == 0)
+                {
+                    Active = _armed = false;
+                    machine.LatchDiskBlock(cycle);
+                }
             }
             return;
         }

@@ -11,6 +11,15 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The disk-control follow-up uses
+[homogeneous retention v4](../../scripts/run-lightweight-homogeneous-retention-v4.ps1)
+against accepted `a10b22c`, with unchanged workload identities and measurement
+rules. After two invalid attempts, a valid complete series gives one-sided 95%
+upper frame-time bounds of +1.606% lores, +0.527% hires and +0.448% native Lemmings.
+Hires/native pass; the user accepted the scoped lores exception on 2026-09-20.
+The default 1% bound remains unchanged for future work. See
+[the disk-control record](DISK_CONTROL_EDGES.md#validation-and-performance).
+
 The nonstandard-display candidate uses
 [homogeneous retention v3](../../scripts/run-lightweight-homogeneous-retention-v3.ps1),
 pinning accepted `6651307` with the same workload identities, six-pair design and

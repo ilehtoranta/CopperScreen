@@ -35,7 +35,7 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-DISK-003 | Cancel / rearm | Unverified; OPEN | Check accepted transfers across cancellation/disable/rearm. |
 | LWA-DISK-004 | Non-WORDSYNC alignment | Unverified; OPEN | Vary start strobe across all bit positions. |
 | LWA-DISK-005 | Partial words / drive transitions | Unverified; OPEN | Investigate a transition-related read failure. |
-| LWA-DISK-006 | DMAON readback | Unverified; OPEN | Establish readback after start, completion and pause. |
+| LWA-DISK-006 | DMAON readback | Active-latch correction implemented; physical phases OPEN | First-strobe/completion status and zero-length sync gating have focused coverage; see [disk control edges](DISK_CONTROL_EDGES.md). |
 | LWA-DISK-007 | Sync / byte status / reset | Unverified; OPEN | Obtain reset and coincident-write expectations. |
 | LWA-DISK-008 | Ideal-ADF mechanics | Bounded model; OPEN | Add an effect only when supported content demonstrably needs it. |
 | LWA-DISK-010 | Receiver-window phase | Approximation; OPEN | Measure FAST changes, window completion and readback phases. |
@@ -138,10 +138,13 @@ shared clock and already accepted RAM effects.
 
 ### LWA-DISK-006 — DMA-active readback
 
-DSKBYTR enable/direction bits derive from raw DSKLEN/DMACON, separately from internal
-activity. DMAON after completion, first start strobe, cancellation and pause needs
-external evidence. Revisit software polling; test externally justified readback,
-not merely the raw-bit formula.
+DSKBYTR.DMAON now follows the active transfer latch gated by both DMACON enables;
+the first DSKLEN strobe does not enable it, and completion clears it. Waiting for
+sync is active; write prefetch completion is not serializer completion. Direction
+still reflects raw DSKLEN. Specification/model tests cover start, pause, cancel,
+reset and read/write completion; exact physical readback phases remain open.
+Zero-length synchronized reads now wait for a qualifying match before DSKBLK.
+See [the evidence and limits](DISK_CONTROL_EDGES.md).
 
 ### LWA-DISK-007 — Sync, byte status and reset
 

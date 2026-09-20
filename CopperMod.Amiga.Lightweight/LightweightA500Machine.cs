@@ -1468,7 +1468,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
                         LightweightClock.CpuCyclesPerColorClock))),
                 LightweightRegisters.Dmaconr =>
                     (ushort)(_registers.Dmacon | _blitter.StatusBits),
-                LightweightRegisters.Dskbytr => _diskSerial.ReadByteStatus(_registers),
+                LightweightRegisters.Dskbytr => _diskSerial.ReadByteStatus(_registers, _diskDma.Active),
                 LightweightRegisters.Clxdat => _sprites.PeekCollisionData,
                 LightweightRegisters.Serdatr => _serial.ReadData(_registers.Intreq),
                 0x00A => _controllers.ReadJoy(port1: false),
