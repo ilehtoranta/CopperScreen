@@ -8,7 +8,7 @@
     "thumbnail": "assets/screenshots/lemmings-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   },
   {
     "id": "hired-guns-gameplay",
@@ -19,15 +19,37 @@
     "thumbnail": "assets/screenshots/hired-guns-gameplay-thumb.png",
     "width": 712,
     "height": 570,
+    "featured": false
+  },
+  {
+    "id": "full-contact-gameplay",
+    "title": "Full Contact",
+    "caption": "A fight against Tong Lo in the temple arena.",
+    "alt": "Two martial artists fighting in front of a seated statue, with health bars above the arena.",
+    "image": "assets/screenshots/full-contact-gameplay.png",
+    "thumbnail": "assets/screenshots/full-contact-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
     "featured": true
   },
   {
-    "id": "hired-guns-menu",
-    "title": "Hired Guns",
-    "caption": "Main menu.",
-    "alt": "Hired Guns main menu offering a new game, a saved game or a return to Workbench.",
-    "image": "assets/screenshots/hired-guns-menu.png",
-    "thumbnail": "assets/screenshots/hired-guns-menu-thumb.png",
+    "id": "shadow-of-the-beast-gameplay",
+    "title": "Shadow of the Beast",
+    "caption": "A jump across the outdoor landscape.",
+    "alt": "The beast jumping beside a tree against layered mountains and a cloudy sky.",
+    "image": "assets/screenshots/shadow-of-the-beast-gameplay.png",
+    "thumbnail": "assets/screenshots/shadow-of-the-beast-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "operation-thunderbolt-gameplay",
+    "title": "Operation Thunderbolt",
+    "caption": "Roadside action with enemies and a supply drop.",
+    "alt": "Armed enemies beside a desert road and a parachuting supply crate, with ammunition and life indicators below.",
+    "image": "assets/screenshots/operation-thunderbolt-gameplay.png",
+    "thumbnail": "assets/screenshots/operation-thunderbolt-gameplay-thumb.png",
     "width": 712,
     "height": 570,
     "featured": true

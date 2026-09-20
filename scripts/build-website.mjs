@@ -6,11 +6,15 @@ const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const entries = JSON.parse(readFileSync(resolve(root, 'gallery.json'), 'utf8'));
 if (!Array.isArray(entries) || entries.length === 0) throw new Error('Gallery must contain screenshots.');
 const ids = new Set();
+const games = new Set();
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 for (const entry of entries) {
   if (typeof entry.id !== 'string' || !/^[a-z0-9-]+$/.test(entry.id) || ids.has(entry.id)) throw new Error('Invalid or duplicate image ID.');
   ids.add(entry.id);
   for (const key of ['title', 'caption', 'alt', 'image', 'thumbnail']) if (typeof entry[key] !== 'string' || !entry[key].trim()) throw new Error(`Missing ${key}.`);
+  const game = entry.title.trim().toLowerCase();
+  if (games.has(game)) throw new Error(`Keep one screenshot per game: ${entry.title}`);
+  games.add(game);
   for (const key of ['width', 'height']) if (!Number.isInteger(entry[key]) || entry[key] < 1) throw new Error(`Invalid ${key}.`);
   if (typeof entry.featured !== 'boolean') throw new Error('featured must be true or false.');
   for (const key of ['image', 'thumbnail']) {

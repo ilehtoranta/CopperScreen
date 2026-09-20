@@ -9,11 +9,17 @@ $repository = Split-Path $PSScriptRoot -Parent
 $output = Join-Path $repository 'docs/assets/screenshots'
 $null = New-Item -ItemType Directory -Path $output -Force
 $captures = @(
-    @{ Name = 'lemmings-gameplay'; File = 'hiredguns-sprite-repaired-probe/lemmings/frame-014520.bmp' },
-    @{ Name = 'hired-guns-gameplay'; File = 'hiredguns-sprite-scheduled-probe/final-training/frame-020648.bmp' },
-    @{ Name = 'hired-guns-menu'; File = 'hiredguns-sprite-repaired-probe/menu/frame-009000.bmp' }
+    @{ Name = 'lemmings-gameplay'; File = 'beam-sync-2026-09-19/native-candidate-lemmings/frame-014520.bmp'; Hash = '7F25E37ADADBDE931C93E55EABB4CD05BC1910F2B18887B56BF9009C2D588BBB' },
+    @{ Name = 'full-contact-gameplay'; File = 'storage-2026-09-18/ipf-fullcontact-gameplay/frame-012000.bmp'; Hash = '3EC6CDD7135609F8EA6602BF8B1C8556866D3E343C50D02F3EE91144D0FEAEBC' },
+    @{ Name = 'shadow-of-the-beast-gameplay'; File = 'beast-border-2026-09-18/native/frame-018120.bmp'; Hash = '1661C0201823DBA6BE9E4D233DB18BC8ED6A9F378F0FC4B33135FD71370806D8' },
+    @{ Name = 'operation-thunderbolt-gameplay'; File = 'trace-exception-2026-09-18/thunderbolt-input/frame-007980.bmp'; Hash = '6C473C0B0F79CEC0874CCB5AA59F3888C1CE8723FACD73C0D1F4F510EDE88A08' }
 )
+# Hired Guns keeps its committed gameplay PNG/thumbnail: the original capture
+# belongs to the earlier machine's evidence and is not present in this checkout.
 foreach ($capture in $captures) {
+    if ((Get-FileHash -LiteralPath (Join-Path $CaptureRoot $capture.File)).Hash -ne $capture.Hash) {
+        throw "Unexpected source capture: $($capture.Name)"
+    }
     $source = [Drawing.Bitmap]::new((Join-Path $CaptureRoot $capture.File))
     try {
         if ($source.Width -ne 908 -or $source.Height -ne 313) { throw 'Unexpected capture geometry' }
