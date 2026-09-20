@@ -46,7 +46,7 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-VIDEO-002 | Hires transitions | Unverified; OPEN | Investigate supported raster/scroll/mode-transition failures. |
 | LWA-VIDEO-005 | HAM edges | Mode implemented; edges OPEN | Establish hold reset, mid-line mode and sprite interaction phases. |
 | LWA-VIDEO-006 | Sprite sequencing edges | Early-blank corruption repaired; edges OPEN | Verify comparator reuse, manual control and stolen-slot boundaries. |
-| LWA-VIDEO-008 | Dual-playfield edges | Ordinary mode implemented; undocumented modes/physical phases OPEN | Broaden native gameplay; establish priority codes 5–7 and mode-write boundary expectations. |
+| LWA-VIDEO-008 | Dual-playfield edges | Dual HAM and priority codes 5–7 modeled; physical phases OPEN | Broaden native gameplay and establish mode-write boundary expectations; see [nonstandard modes](NONSTANDARD_OCS.md). |
 | LWA-COPPER-001 | WAIT wake-up under bitplane DMA | Confirmed early colour write; repaired 2026-09-18 | WAIT wake-up now yields to higher-priority DMA. Six-plane Beast border starts at x288 instead of x272; see the [native record](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18). Other undocumented control-state edges remain unverified. |
 | LWA-CIA-001 | Board TOD pulse phase | Unverified; OPEN | Obtain board pulse-to-counter/IRQ evidence. |
 | LWA-CIA-002 | TOD comparator / reset | Unverified; OPEN | Establish write-trigger and latch/reset behavior. |
@@ -69,7 +69,7 @@ completeness claim; undocumented combinations are separate from ordinary mode su
 | Area | Missing implementation |
 | --- | --- |
 | Beam and synchronization | VHPOSW and VPOSW beam repositioning beyond LOF; external genlock source/pulse qualification and physical display synchronization. ERSY absent-source hold/recovery is implemented as a bounded first slice; see LWA-VIDEO-009. |
-| Nonstandard display and blitter modes | Dual HAM, HAM outside five/six-plane lores, hires BPU above four, BPU=7, dual-playfield priority codes 5–7, and line-mode BLTSIZE widths other than two. These remain explicitly rejected. |
+| Nonstandard display and blitter modes | HAM/BPU combinations and priority codes 5–7 have a bounded display implementation. Line-mode BLTSIZE widths other than two remain explicitly rejected: hardware photographs contradict the available emulator reference. See [the investigation](NONSTANDARD_OCS.md). |
 | Disk-controller edge behavior | Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA, FIFO overrun behavior and simultaneous selected read streams. Preserved-track writes and fully physical write splices/precompensation are absent. |
 | A500 board I/O | Digital keyboard startup/recovery, physical key state/reset chord, CIA serial/CNT and timer-port modes are implemented. MCU scan/debounce, reset electrical timing and CIA silicon pipelines remain unverified. Host parallel transports remain separate. |
 | Undocumented bus data | The 227-CCK wrap-dummy bus-data case remains explicitly unsupported. |
@@ -215,9 +215,10 @@ PAL OCS five/six-plane lores HAM, including interlaced fields, is implemented.
 The output stage holds a playfield color, resets to COLOR00 outside the window
 and overlays sprites without modifying that hold. Exact reset versus HBLANK/DIW,
 off-window fetch/scroll, mid-line HAM toggles without direct-color pixels and
-undocumented sprite priority/transparency need evidence. Hires HAM, fewer-plane
-HAM, BPU=7 and dual-playfield HAM remain unsupported; native artwork/menu success
-does not verify these transitions.
+undocumented sprite priority/transparency need evidence. Low-plane/hires HAM,
+BPU=7 and dual HAM now have bounded decoding and native probe coverage; see
+[the evidence record](NONSTANDARD_OCS.md). Native artwork/menu success does not
+verify these transitions, including held colour across resolution changes.
 
 ### LWA-VIDEO-006 — Sprite comparator and control edges
 
@@ -231,7 +232,8 @@ expectations before expanding or certifying the later range-based sequencer.
 
 Ordinary OCS lores/hires dual playfield is implemented, including interlaced fields,
 independent scrolling and sprite masking by both opaque playfields. Priority codes
-0–4 follow the Commodore HRM; codes 5–7 and dual HAM explicitly report unsupported.
+0–4 follow the Commodore HRM; codes 5–7 and dual HAM now have bounded decoding
+and native probe coverage in [NONSTANDARD_OCS.md](NONSTANDARD_OCS.md).
 Regression tests preserve existing effective-register and shifter phases without
 claiming new physical timing proof. A 3,600-field native Shadow of the Beast PNA
 crackintro replay exercises BPLCON0=$4600, separate modulo values and audio. It is
@@ -333,7 +335,7 @@ it is not an outstanding performance defect.
 
 ## Explicit scope gaps
 
-Dual-playfield HAM and priority codes 5–7 remain explicitly unsupported.
+Dual-playfield HAM and priority codes 5–7 now have bounded decoding coverage.
 Nonstandard line-mode BLTSIZE widths other than two are also rejected. The
 2026-09-17 collision/UART gaps now have implementations and focused/native
 coverage. Their original OCS candidate and later candidates have separate scoped

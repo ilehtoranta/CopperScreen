@@ -91,25 +91,52 @@ public sealed class LightweightDualPlayfieldTests
     }
 
     [Theory]
-    [InlineData(5)] [InlineData(6)] [InlineData(7)]
-    [InlineData(5 << 3)] [InlineData(6 << 3)] [InlineData(7 << 3)]
-    public void UndocumentedPriorityCodesWrittenAfterModeEnableAreReported(int priority)
+    [InlineData(false)] [InlineData(true)]
+    public void InvalidPrioritiesBlankTheWinnerWithoutRevealingTheOtherField(bool hires)
     {
-        using var m = Create(908, false, [3]);
-        m.ExecuteFrame();
-        Assert.Null(m.UnsupportedActiveFeature);
-        W(m, 0x104, (ushort)priority);
-        m.ExecuteFrame();
-        Assert.Contains("priority codes above four", m.UnsupportedActiveFeature);
+        foreach (var priority in new[] { 5, 6, 7 })
+            foreach (var pf2First in new[] { false, true })
+            {
+                using var m = Create(908, hires, [3, 1, 2, 0],
+                    control: pf2First ? 0x40 | (priority << 3) : priority);
+                m.ExecuteFrame();
+                Assert.Null(m.UnsupportedActiveFeature);
+                Pixel(m, hires, 0, 0); // Both opaque: winner is COLOR00.
+                Pixel(m, hires, 1, pf2First ? 1 : 0);
+                Pixel(m, hires, 2, pf2First ? 0 : 9);
+                Pixel(m, hires, 3, 0);
+            }
     }
 
     [Fact]
-    public void DualPlayfieldHamRemainsExplicitlyUnsupported()
+    public void InvalidPriorityWrittenAfterModeEnableAffectsOnlyFuturePixels()
     {
-        using var m = Create(908, false, [3]);
-        W(m, 0x100, 0x6E00);
+        using var m = Create(454, false, Enumerable.Repeat(3, 32).ToArray());
+        var writeCycle = 44L * 454 + 136;
+        m.AdvanceHardwareTo(writeCycle);
+        m.WriteCustomRegisterFromCopper(0x104, 5, writeCycle);
         m.ExecuteFrame();
-        Assert.Contains("dual-playfield HAM", m.UnsupportedActiveFeature);
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, false, 6, 1);
+        Pixel(m, false, 7, 0);
+    }
+
+    [Theory]
+    [InlineData(5)] [InlineData(6)] [InlineData(7)]
+    public void InvalidPriorityKeepsRawOpacityAndSpriteMasking(int priority)
+    {
+        for (var group = 0; group < 4; group++)
+        {
+            using var both = Create(908, false, [3], control: priority);
+            Sprite(both, group * 2);
+            both.ExecuteFrame();
+            Pixel(both, false, 0, 0); // hidden opaque PF2 still hides every sprite
+
+            using var firstOnly = Create(908, false, [1], control: priority);
+            Sprite(firstOnly, group * 2);
+            firstOnly.ExecuteFrame();
+            Pixel(firstOnly, false, 0, 17 + group * 4);
+        }
     }
 
     [Theory]

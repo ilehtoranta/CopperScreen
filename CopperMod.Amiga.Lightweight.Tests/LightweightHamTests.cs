@@ -89,14 +89,88 @@ public sealed class LightweightHamTests
     }
 
     [Theory]
-    [InlineData(0x4800)]
-    [InlineData(0xC800)]
-    [InlineData(0x6C00)]
-    public void UnimplementedHamCombinationsStillStop(int mode)
+    [InlineData(0x0800, 0)]
+    [InlineData(0x1800, 1)]
+    [InlineData(0x2800, 1)]
+    [InlineData(0x3800, 1)]
+    [InlineData(0x4800, 1)]
+    [InlineData(0x7800, 1)]
+    public void LowPlaneHamUsesDirectPaletteCodes(int mode, int code)
     {
         using var m = Create(908, (ushort)mode, [1]);
-        m.AdvanceHardwareTo(m.Cycle + 4);
-        Assert.NotNull(m.UnsupportedActiveFeature);
+        m.ExecuteFrame();
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, 908, 129, 44, code == 0 ? 0x123 : 0x456);
+    }
+
+    [Theory]
+    [InlineData(0xD800)] [InlineData(0xE800)] [InlineData(0xF800)]
+    public void ExcessHiresPlanesDisableDmaAndDisplayInsteadOfClamping(int mode)
+    {
+        using var m = Create(908, (ushort)mode, [1]);
+        m.ExecuteFrame();
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, 908, 129, 44, 0x123);
+        for (var plane = 0; plane < 6; plane++)
+            Assert.Equal(0x2000u + (uint)(plane * 0x100), m.GetLiveBitplanePointer(plane));
+    }
+
+    [Fact]
+    public void SevenPlaneEncodingFetchesFourPlanesButRetainsManualHamControlLatches()
+    {
+        using var m = Create(454, 0x7800, [1]);
+        long cycle = m.Cycle;
+        Write(m, 0x118, 0xFFFF, ref cycle);
+        Write(m, 0x11A, 0xFFFF, ref cycle);
+        m.ExecuteFrame();
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, 454, 129, 44, 0x113); // retained planes 5/6 select green
+        Assert.True(m.GetLiveBitplanePointer(0) > 0x2000u);
+        Assert.Equal(0x2400u, m.GetLiveBitplanePointer(4));
+        Assert.Equal(0x2500u, m.GetLiveBitplanePointer(5));
+    }
+
+    [Theory]
+    [InlineData(0x9800)] [InlineData(0xA800)] [InlineData(0xB800)] [InlineData(0xC800)]
+    public void HiresHamWithoutControlPlanesUsesDirectPalette(int mode)
+    {
+        using var m = Create(908, (ushort)mode, [1, 1]);
+        m.ExecuteFrame();
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, 908, 129, 44, 0x456);
+    }
+
+    [Theory]
+    [InlineData(5)] [InlineData(6)] [InlineData(7)]
+    public void InvalidDualPriorityAlsoBlanksHamComponentData(int priority)
+    {
+        using var m = Create(454, 0x6C00, [0x13, 3]);
+        long cycle = m.Cycle;
+        Write(m, 0x104, (ushort)priority, ref cycle);
+        m.ExecuteFrame();
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, 454, 129, 44, 0x120); // blue modify, but selected PF1 index is zero
+        Pixel(m, 454, 130, 44, 0x123); // direct COLOR00
+    }
+
+    [Theory]
+    [InlineData(false, 0x456, 0x455, 0x156, 0x156)]
+    [InlineData(true, 0xABC, 0xAB9, 0xDBC, 0xDDC)]
+    public void DualHamUsesRawControlBitsAndSelectedFieldColorForComponents(
+        bool pf2First, int direct, int blue, int red, int green)
+    {
+        // Raw 3: PF1=1/PF2=1. Raw 0x13: PF1=5/PF2=1.
+        // Raw 0x23: PF1=1/PF2=5. Raw 0x33: PF1=5/PF2=5.
+        using var m = Create(454, 0x6C00, [3, 0x13, 3, 0x23, 0x33]);
+        long cycle = m.Cycle;
+        Write(m, 0x192, 0xABC, ref cycle); // COLOR09
+        Write(m, 0x104, (ushort)(pf2First ? 0x40 : 0), ref cycle);
+        m.ExecuteFrame();
+        Assert.Null(m.UnsupportedActiveFeature);
+        Pixel(m, 454, 129, 44, direct);
+        Pixel(m, 454, 130, 44, blue);
+        Pixel(m, 454, 132, 44, red);
+        Pixel(m, 454, 133, 44, green);
     }
 
     private static LightweightA500Machine Create(int width, ushort mode, int[] codes, int startX = 129)
@@ -120,7 +194,7 @@ public sealed class LightweightHamTests
         Write(m, 0x182, 0x456, ref cycle);
         Write(m, 0x08E, (ushort)(0x2C00 | startX), ref cycle);
         Write(m, 0x090, 0x2CC1, ref cycle);
-        Write(m, 0x092, 0x38, ref cycle);
+        Write(m, 0x092, (ushort)((mode & 0x8000) != 0 ? 0x3C : 0x38), ref cycle);
         Write(m, 0x094, 0x40, ref cycle);
         Write(m, 0x100, mode, ref cycle);
         Write(m, 0x096, 0x8300, ref cycle);

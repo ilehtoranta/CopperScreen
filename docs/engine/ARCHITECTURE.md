@@ -155,8 +155,12 @@ was not imported. The [dual-playfield regressions](../../CopperMod.Amiga.Lightwe
 exercise color combinations, scroll, attached/unattached sprite masks, hidden
 playfields, clipping, mid-line changes, DMA invariance and interlaced allocation-free
 output. These retain the current pipeline phase contract; they do not independently
-certify undocumented physical transition timing. Dual HAM and priority codes 5–7
-remain explicit unsupported modes. CLXCON/CLXDAT collisions use the same raw
+certify undocumented physical transition timing. Dual HAM uses the selected
+playfield index for palette/component data and raw planes 5/6 for HAM control.
+Priority codes 5–7 select COLOR00 for the winning field without changing raw
+opacity or exposing the field behind it. The same table handles these values at
+register-write time; ordinary pixel execution is unchanged. See the
+[nonstandard-mode evidence and limits](NONSTANDARD_OCS.md). CLXCON/CLXDAT collisions use the same raw
 bitplane pixels and sprite shifters, before display priority hides either source.
 CLXDAT bits are sticky until a CPU read; debug peeks do not clear them, and bit 15
 reads high. Odd sprite inclusion follows CLXCON. Single-playfield PF1/sprite

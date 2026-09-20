@@ -11,6 +11,15 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The nonstandard-display candidate uses
+[homogeneous retention v3](../../scripts/run-lightweight-homogeneous-retention-v3.ps1),
+pinning accepted `6651307` with the same workload identities, six-pair design and
+host-load policy as v2. All three workloads passed: one-sided 95% upper frame-time
+bounds were +0.737% lores, +0.216% hires and +0.425% native Lemmings.
+See [the current record](NONSTANDARD_OCS.md#validation-and-performance).
+The blitter-width portion remains unimplemented; a display measurement cannot
+serve as acceptance for a future blitter change.
+
 The 2026-09-20 keyboard/CIA candidate uses
 [homogeneous retention v2](../../scripts/run-lightweight-homogeneous-retention-v2.ps1):
 accepted `d403d35` reference and its post-ERSY native identity, identical between

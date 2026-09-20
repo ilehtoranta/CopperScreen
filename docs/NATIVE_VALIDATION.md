@@ -1,5 +1,12 @@
 # Optional native replay
 
+The 2026-09-20 [nonstandard OCS investigation](engine/NONSTANDARD_OCS.md) records
+ten bounded display-test ADF replays and comparison with published hardware
+photographs. Two additional nonstandard blitter-width runs disagree with those
+photographs and remain unsupported; their diagnostic bypass is not passing
+coverage. ROM/media hashes, candidate identities and limits are recorded separately
+from performance acceptance.
+
 The normal focused suite skips three tests unless all three environment variables
 are set. These are correctness/allocation checks, not formal throughput samples.
 

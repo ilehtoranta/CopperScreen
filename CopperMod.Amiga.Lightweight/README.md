@@ -38,7 +38,11 @@ is 454, which is lowres-only; it is not the complete native display contract.
 OCS dual playfield supports odd/even-plane separation, independent scrolling,
 transparent color zero, PF2 palette selection, BPLCON2 playfield/sprite priorities,
 lores/hires and interlaced fields. It reuses the existing DMA and shifter pipeline.
-Dual-playfield HAM and priority codes 5–7 remain unsupported. CLXCON/CLXDAT now
+Dual-playfield HAM and priority codes 5–7 are modeled, including selected-field
+colour blanking without changing raw opacity. Low-plane HAM uses palette codes;
+BPU=7 fetches four lores planes while retaining the six physical display latches.
+Hires BPU above four disables bitplanes. Nonstandard line-mode widths remain
+rejected; see the [evidence and limits](../docs/engine/NONSTANDARD_OCS.md). CLXCON/CLXDAT
 implement playfield and sprite collisions, including CPU read-clear strobes.
 See the [display contract](../docs/engine/ARCHITECTURE.md#dual-playfield-output).
 

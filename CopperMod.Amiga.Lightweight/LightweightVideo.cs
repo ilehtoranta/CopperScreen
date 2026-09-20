@@ -568,14 +568,20 @@ internal sealed class LightweightVideo
 
     private void UpdateDualPlayfieldPixels()
     {
-        var placement1 = Math.Min(_effectiveBplcon2 & 7, 4);
-        var placement2 = Math.Min((_effectiveBplcon2 >> 3) & 7, 4);
+        var priority1 = _effectiveBplcon2 & 7;
+        var priority2 = (_effectiveBplcon2 >> 3) & 7;
+        var placement1 = Math.Min(priority1, 4);
+        var placement2 = Math.Min(priority2, 4);
         var pf2First = (_effectiveBplcon2 & 0x40) != 0;
         for (var code = 0; code < 64; code++)
         {
             var pf1 = (code & 1) | ((code >> 1) & 2) | ((code >> 2) & 4);
             var pf2 = ((code >> 1) & 1) | ((code >> 2) & 2) | ((code >> 3) & 4);
-            var color = pf2 != 0 && (pf2First || pf1 == 0) ? 8 + pf2 : pf1;
+            var select2 = pf2 != 0 && (pf2First || pf1 == 0);
+            var color = select2 ? 8 + pf2 : pf1;
+            // Invalid priorities blank the selected field's colour, without
+            // making its underlying pixels transparent to the other field.
+            if ((select2 ? priority2 : priority1) >= 5) color = 0;
             // HRM ch.7: even an obscured opaque playfield can mask a sprite.
             var placement = Math.Min(pf1 != 0 ? placement1 : 4, pf2 != 0 ? placement2 : 4);
             _dualPlayfieldPixels[code] = (byte)(color | (placement << 4));
@@ -595,17 +601,21 @@ internal sealed class LightweightVideo
             return _hamColor = _palette[0];
 
         // HRM: plane 6/5 = 00 palette, 01 blue, 10 red, 11 green.
-        var component = (code & 15) * 17;
+        var dual = (_effectiveBplcon0 & 0x0400) != 0;
+        var dualPixel = _dualPlayfieldPixels[code];
+        var paletteIndex = dual ? dualPixel & 15 : code & 15;
+        var component = paletteIndex * 17;
         var color = (code >> 4) switch
         {
-            0 => _palette[code],
+            0 => _palette[paletteIndex],
             1 => (_hamColor & ~0xFF) | component,
             2 => (_hamColor & ~0xFF0000) | (component << 16),
             _ => (_hamColor & ~0xFF00) | (component << 8)
         };
         _hamColor = color;
-        var sprite = machine.ComposeSpriteColorIndex(line, x, code,
-            _effectiveSpritePlayfieldPlacement);
+        var sprite = dual
+            ? machine.ComposeSpriteColorIndex(line, x, 1, dualPixel >> 4, code)
+            : machine.ComposeSpriteColorIndex(line, x, code, _effectiveSpritePlayfieldPlacement);
         return _renderLineSpriteOutputEnabled && sprite >= 0 ? _palette[sprite] : color;
     }
 
@@ -864,19 +874,7 @@ internal sealed class LightweightVideo
         var hires = (_effectiveBplcon0 & 0x8000) != 0;
         var feature = hires && _outputScale != 2
             ? "OCS hires output"
-            : hires && ((_effectiveBplcon0 >> 12) & 7) > 4
-                ? "OCS hires BPU above four"
-            : (_effectiveBplcon0 & 0x0800) != 0 &&
-                (hires || _effectivePlaneCount is < 5 or > 6)
-                ? "OCS HAM outside five/six-plane lores"
-                : (_effectiveBplcon0 & 0x0C00) == 0x0C00
-                    ? "OCS dual-playfield HAM output"
-                : (_effectiveBplcon0 & 0x0400) != 0 &&
-                    ((_effectiveBplcon2 & 7) > 4 || ((_effectiveBplcon2 >> 3) & 7) > 4)
-                    ? "OCS dual-playfield priority codes above four"
-                    : ((_effectiveBplcon0 >> 12) & 7) == 7
-                        ? "OCS BPU=7 output"
-                        : null;
+            : null;
         if (feature is not null)
         {
             UnsupportedActiveFeature = feature;
@@ -898,6 +896,7 @@ internal sealed class LightweightVideo
     private static int GetDecodePlaneCount(ushort bplcon0)
     {
         var count = (bplcon0 >> 12) & 7;
-        return Math.Min(count, (bplcon0 & 0x8000) != 0 ? 4 : MaxPlanes);
+        if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
+        return Math.Min(count, MaxPlanes);
     }
 }

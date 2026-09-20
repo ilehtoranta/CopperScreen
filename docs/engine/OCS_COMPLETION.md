@@ -12,6 +12,11 @@ The subsequent [keyboard/CIA milestone](KEYBOARD_CIA.md) implements digital
 startup/recovery, physical keys/reset, CIA serial/CNT and timer-port/pin modes.
 It retains separate MCU, electrical and CIA pipeline accuracy boundaries.
 
+The [nonstandard-display slice](NONSTANDARD_OCS.md) adds HAM/BPU combinations and
+dual-playfield priority codes 5–7. Nonstandard blitter line widths remain rejected:
+the available emulator reference disagrees with the physical photograph, and the
+required transfer/register behavior has not been established.
+
 ## Implementation and verification sequence
 
 1. Denise collisions: CLXCON matching, sprite grouping, persistent CLXDAT and

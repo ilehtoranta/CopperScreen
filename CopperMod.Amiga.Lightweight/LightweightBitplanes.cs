@@ -366,7 +366,10 @@ internal sealed class LightweightBitplanes
     private static int GetSupportedPlaneCount(ushort bplcon0)
     {
         var count = (bplcon0 >> 12) & 7;
-        return count <= ((bplcon0 & 0x8000) != 0 ? 4 : 6) ? count : 0;
+        if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
+        // OCS Agnus aliases BPU=7 to four lores DMA channels. Denise still
+        // decodes the six physical data latches, including retained BPL5/6DAT.
+        return count == 7 ? 4 : count;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
