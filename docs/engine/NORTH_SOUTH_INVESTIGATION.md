@@ -67,6 +67,12 @@ Formal performance acceptance is separate and pending below. Gameplay of North
 
 ### Performance candidate
 
+Follow-up, 2026-09-21: the user accepted the combined Copper-restart/chip-mirror
+candidate after a valid six-pair comparison. Hires/native pass the 1% upper-bound
+limit; lores has a scoped +2.2310% upper-bound exception. See the
+[Super Cars II record](SUPER_CARS_II_INVESTIGATION.md). The original isolated
+candidate's invalid series below remains invalid historical evidence.
+
 The user authorized committing and pushing this fix on 2026-09-20 with the
 invalid benchmark disclosed. This does not establish compliance with the 1%
 performance limit or change the invalid measurement's disposition.

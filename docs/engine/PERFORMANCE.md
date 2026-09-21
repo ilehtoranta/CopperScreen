@@ -11,6 +11,23 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The combined Copper-restart and [Super Cars II memory-map correction](SUPER_CARS_II_INVESTIGATION.md)
+has a **valid complete** six-pair comparison against performance-accepted
+`1db2d0d`, using [chip-mirror comparison v1](../../scripts/run-lightweight-chip-mirror-comparison-v1.ps1).
+Mean frame-time changes / one-sided 95% upper bounds are: lores **+1.0785% /
++2.2310%**, hires **-0.2418% / +0.2671%**, native Lemmings **+0.1154% / +0.6240%**.
+Hires/native pass; the user accepted the scoped lores exception on 2026-09-21
+and authorized commit/push. Lores remains numerically above the limit; this
+acceptance does not transfer to later changes. All 36 samples have zero measured allocations and the
+required full identities, with valid host-load telemetry and unchanged frozen hashes.
+
+The memory correction changes Kickstart's probe exit by 20 cycles and therefore
+the native identity. The new protocol uses independently validated per-build
+native identities, following the earlier ERSY method, and identical synthetic
+identities across builds. Timing, input script, six-pair order, host policy and
+the 1% bound are unchanged. Frozen v5 remains incompatible with this changed
+native identity; its expectations and prior invalid evidence are preserved.
+
 The North & South Copper restart candidate uses
 [homogeneous retention v5](../../scripts/run-lightweight-homogeneous-retention-v5.ps1)
 against accepted `1db2d0d`. Its native preflight retains the existing Lemmings
@@ -18,7 +35,8 @@ identity and zero measured allocations. The protocol changes only its identity
 and reference pin from v4; acceptance is pending the complete six-pair series.
 The first series was invalidated during hires by package interference above 25%
 for 10.298 seconds. Partial results are retained as diagnostic evidence only;
-the candidate has no accepted performance result yet.
+that isolated Copper candidate has no accepted performance result. The newer
+combined candidate result above does not reclassify this invalid series.
 See [the investigation](NORTH_SOUTH_INVESTIGATION.md) for correctness evidence.
 
 The disk-control follow-up uses

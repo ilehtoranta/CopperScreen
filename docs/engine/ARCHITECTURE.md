@@ -78,6 +78,12 @@ The supported product profile has 512 KiB Chip RAM and 512 KiB slow RAM at
 `$C00000`, native 256 KiB Kickstart 1.3 and reset overlay vectors. Slow RAM is not
 true fast RAM. Low-level API capabilities do not expand the supported host profile.
 
+CPU chip-memory addresses below `$200000` alias the fitted 512 KiB through
+`$07FFFF`, including instruction fetches and Agnus bus contention. This follows
+the default A500 JP2 wiring; it adds no memory capacity. See the
+[Super Cars II investigation](SUPER_CARS_II_INVESTIGATION.md) for the hardware
+basis, regression tests and the resulting Kickstart memory-probe timing change.
+
 ## Floppy drives
 
 `FloppyDriveCount` connects DF0 through DF3 in order (1–4; default 1). Each drive

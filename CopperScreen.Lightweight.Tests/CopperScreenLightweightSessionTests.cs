@@ -697,13 +697,14 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         cpuHash = (cpuHash ^ (ulong)cpu.Cycles) * prime;
         foreach (var value in cpu.D) cpuHash = (cpuHash ^ value) * prime;
         foreach (var value in cpu.A) cpuHash = (cpuHash ^ value) * prime;
-        // ERSY absent-source correction changes Kickstart's genlock detection.
-        // The unchanged script still enters level one and assigns the digger.
-        // Previous expectations and the hardware reason are retained in
-        // docs/engine/BEAM_SYNC.md; the frozen performance protocol is unchanged.
-        Assert.Equal(2063189682, session.Machine.Cycle);
-        if (!keyboard) Assert.Equal(0xBCF441F9BABF1113UL, cpuHash);
-        Assert.Equal(0xF7328C7C24582FCBUL, output);
+        // A500 chip-RAM mirroring makes Kickstart's RAM probe exit 20 cycles
+        // earlier. The unchanged script still enters level one. The hardware
+        // basis, before/after boot trace and previous identities are retained
+        // in docs/engine/SUPER_CARS_II_INVESTIGATION.md. Frozen performance
+        // protocols retain their historical expectations.
+        Assert.Equal(2063189662, session.Machine.Cycle);
+        if (!keyboard) Assert.Equal(0x249E90223C45891FUL, cpuHash);
+        Assert.Equal(0x45AB46F7600E1C9FUL, output);
         Assert.True(activeFields > 0);
         Assert.Equal(entries.Length, next);
         Assert.Null(session.Machine.UnsupportedActiveFeature);

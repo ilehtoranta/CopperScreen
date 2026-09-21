@@ -10,6 +10,10 @@ Independent PAL OCS A500 engine: Copper68k accurate 68000, 512 KiB Chip RAM,
 and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
 
+The fitted 512 KiB chip RAM is CPU-mirrored through the low 2 MiB address window,
+with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
+for the default A500 wiring and the changed native boot identity.
+
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full

@@ -21,6 +21,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     public const uint CiaBBase = 0x00BFD000;
     public const uint RomBase = 0x00F80000;
 
+    // A500 / 8371, default JP2: CPU A23 selects the expansion bank.
+    // Gary decodes the low 2 MiB; A19/A20 alias the fitted 512 KiB.
+    private const uint ChipRamCpuDecodeSize = 0x00200000;
+    private const uint ChipRamAddressMask = 0x0007FFFF;
+
     private readonly LightweightA500Configuration _configuration;
     private readonly byte[] _chipRam;
     private readonly byte[] _slowRam;
@@ -400,7 +405,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         address &= 0x00FF_FFFFu;
         var readable =
             _overlayEnabled && address + 1 < 0x400 ||
-            address + 1 < _chipRam.Length ||
+            address + 1 < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 &&
                 address + 1 < 0x00C00000 + _slowRam.Length ||
             address >= RomBase && address + 1 < RomBase + _rom.Length;
@@ -794,7 +799,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         address &= 0x00FF_FFFFu;
         if (_overlayEnabled && address < 0x400)
             return false;
-        return address < _chipRam.Length ||
+        return address < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 && address < 0x00C00000 + _slowRam.Length ||
             address >= CustomBase && address < CustomBase + 0x200;
     }
@@ -1447,8 +1452,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         address &= 0x00FF_FFFFu;
         if (_overlayEnabled && address + 1 < 0x400)
             return ReadRomWord(_romImageOffset + (int)address);
-        if (address + 1 < _chipRam.Length)
-            return BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)address, 2));
+        if (address + 1 < ChipRamCpuDecodeSize)
+            return BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)(address & ChipRamAddressMask), 2));
         if (address >= 0x00C00000 && address + 1 < 0x00C00000 + _slowRam.Length)
         {
             var offset = (int)(address - 0x00C00000);
@@ -1571,8 +1576,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         }
         if (_overlayEnabled && address + 1 < 0x400)
             return;
-        if (address + 1 < _chipRam.Length)
+        if (address + 1 < ChipRamCpuDecodeSize)
         {
+            address &= ChipRamAddressMask;
             _chipRam[address] = (byte)(value >> 8);
             _chipRam[address + 1] = (byte)value;
             return;

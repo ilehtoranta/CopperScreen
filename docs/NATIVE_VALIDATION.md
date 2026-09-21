@@ -14,6 +14,16 @@ probe patterns agree with published hardware photographs. The initial inference
 about the CP release is withdrawn. Gameplay and performance acceptance remain
 separate from this visual correction.
 
+The [Super Cars II follow-up](engine/SUPER_CARS_II_INVESTIGATION.md) identifies
+missing CPU chip-RAM mirrors as the boot Guru's cause. The candidate now passes
+the depacker and reaches the first race with the same RAM sizes and disk. The
+hardware correction also changes Kickstart's memory-probe exit by 20 cycles;
+the unchanged Lemmings script still reaches level one. Previous native identities
+and the initial golden-test failures are preserved in the investigation.
+The complete benchmark passes hires/native but exceeds the lores 1% bound;
+the user accepted that scoped exception on 2026-09-21. Second-disk coverage
+remains unverified.
+
 The 2026-09-20 [disk-control follow-up](engine/DISK_CONTROL_EDGES.md) repeats native
 Workbench format/write/export and fresh-machine reopen against accepted `a10b22c`.
 Both builds produce matching CPU/hardware/output fingerprints and byte-identical

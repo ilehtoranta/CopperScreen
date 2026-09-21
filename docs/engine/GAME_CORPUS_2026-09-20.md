@@ -13,6 +13,11 @@ menus and borders. The alternate QTX release also has clean menus on the unchang
 engine. The original observations below remain historical evidence; QTX's hash
 was added to the manifest.
 
+The [Super Cars II follow-up](SUPER_CARS_II_INVESTIGATION.md) identifies missing
+CPU chip-RAM mirrors. The candidate passes the formerly crashing depacker and
+reaches the first race with the same 512 KiB chip + 512 KiB expansion profile.
+The original failure below remains historical evidence.
+
 ## Configuration and identity
 
 PAL OCS A500, 68000, 512 KiB chip plus 512 KiB slow RAM, Kickstart 1.3,
