@@ -1,0 +1,98 @@
+[
+  {
+    "id": "major-motion",
+    "archive": "OK/Major Motion (1988)(Microdeal).zip",
+    "archiveSha256": "7EDACA73ABE7381C987E90D01F1A8D9954E40636B0FE1CE6C30E9D37EAE325EF",
+    "entry": "Major Motion (1988)(Microdeal).adf",
+    "entrySha256": "3DBA00F0525C3599ED530C359469FF4E6D7555CDA3B752D2D95E84AA02FD756E",
+    "bytes": 901120
+  },
+  {
+    "id": "alien-breed",
+    "archive": "Team17/AlienBreed_998.zip",
+    "archiveSha256": "F71725C4DD05EA2724DAE61760C8BED2B5C9D14289EA56A719F6299AD20FA75F",
+    "entry": "AlienBreed_GameDisk1.ipf",
+    "entrySha256": "8FF762F210F085B0A8F423CA31660CC7D98CF98913290013D4EF9E1A1F5DA111",
+    "bytes": 1049612
+  },
+  {
+    "id": "lotus3",
+    "archive": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+    "archiveSha256": "C8241ACD91206A0D857CD589DA2ECDEB4084BD270E597DEE4C0EB7D7885FC30C",
+    "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+    "entrySha256": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+    "bytes": 901120
+  },
+  {
+    "id": "miami-chase",
+    "archive": "Team17/downloads_miamichase_ADFs.zip",
+    "archiveSha256": "FF28FF6BF2CE2B27739053D541ABE7513C68800A17B9709E0ECF7A8829BBFA18",
+    "entry": "Miami Chase (1990)(Codemasters)(Disk 1 of 2).adf",
+    "entrySha256": "080A79C0EB2BE31892DF55C47AEFC0F0EC2656E81D53E98CA79D134006B0CBAF",
+    "bytes": 901120
+  },
+  {
+    "id": "arte",
+    "archive": "Arte (Sanity).zip",
+    "archiveSha256": "F09F2D661FDF4AF786A28FA162AE0C687D89475BC2550EC190D33EFA2927ACB5",
+    "entry": "Arte (Sanity).adf",
+    "entrySha256": "EB7521FC1DE886C69706AB0E21898A89199FB12256DB40743F3ED190957E896A",
+    "bytes": 901120
+  },
+  {
+    "id": "desert-dream",
+    "archive": "Desert Dream (Kefrens).zip",
+    "archiveSha256": "0C41C82A744A2CF915082B968EF3763BF9152F19023B9340287FC593B73E7849",
+    "entry": "Desert Dream (Kefrens) A.adf",
+    "entrySha256": "25738C042EFDF2202E67A5BD5A40A08766384DFC31A92ED8E248D1B12E26E1E3",
+    "bytes": 901120
+  },
+  {
+    "id": "inside-machine",
+    "archive": "DESiRE-InsideTheMachine-v1.0.1.zip",
+    "archiveSha256": "07842172B2DB35E3A5DFF1B5F4669E8E27C238E4832BBDEA1CA9BE0DF1060D96",
+    "entry": "DESiRE-InsideTheMachine.adf",
+    "entrySha256": "E03A8713BE0CA4E0AD899553FE8CFFEC3C6667804190A3415809B9B7D95A6F2E",
+    "bytes": 901120
+  },
+  {
+    "id": "alien-breed-disk2",
+    "archive": "Team17/AlienBreed_998.zip",
+    "archiveSha256": "F71725C4DD05EA2724DAE61760C8BED2B5C9D14289EA56A719F6299AD20FA75F",
+    "entry": "AlienBreed_GameDisk2.ipf",
+    "entrySha256": "E9393B3F2D89F5A9E5D22443CFF369E21B98F7CBCFE900FAB9CAC1F92FF82712",
+    "bytes": 1043227,
+    "exercised": true,
+    "localSwapPath": "media/alien-breed-disk2.ipf"
+  },
+  {
+    "id": "lotus3-disk2",
+    "archive": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+    "archiveSha256": "699D6C7A9562184F4DABA8D23FF6C4CBFD28A3E1863EBA5C764BA96D735ABD9C",
+    "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+    "entrySha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887",
+    "bytes": 901120,
+    "exercised": true,
+    "localSwapPath": "media/lotus3-disk2.adf"
+  },
+  {
+    "id": "miami-chase-disk2",
+    "archive": "Team17/downloads_miamichase_ADFs.zip",
+    "archiveSha256": "FF28FF6BF2CE2B27739053D541ABE7513C68800A17B9709E0ECF7A8829BBFA18",
+    "entry": "Miami Chase (1990)(Codemasters)[cr AGL](Disk 2 of 2).adf",
+    "entrySha256": "563662CD9705D5F4E510456368278251BFA71712FCBE1B46B1CD182D27E18FF4",
+    "bytes": 901120,
+    "exercised": true,
+    "localSwapPath": "media/miami-chase-disk2.adf"
+  },
+  {
+    "id": "desert-dream-disk2",
+    "archive": "Desert Dream (Kefrens).zip",
+    "archiveSha256": "0C41C82A744A2CF915082B968EF3763BF9152F19023B9340287FC593B73E7849",
+    "entry": "Desert Dream (Kefrens) B.adf",
+    "entrySha256": "3E34D376C9805E0E64A3227B04E0D0BCE0C1531F3E90938329BF5079CD214F97",
+    "bytes": 901120,
+    "exercised": false,
+    "localSwapPath": null
+  }
+]

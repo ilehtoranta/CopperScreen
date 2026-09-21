@@ -1,0 +1,17 @@
+[
+  { "frame": 3500, "keyCode": 324 },
+  { "frame": 3510, "keyCode": 452 },
+  { "frame": 5000, "ejectAdf": true },
+  { "frame": 5100, "diskPath": "../../media/lotus3-disk2.adf" },
+  { "frame": 6500, "joystickPort1": 16, "mouseButtons": 1 },
+  { "frame": 6520 },
+  { "frame": 8500, "joystickPort1": 16 },
+  { "frame": 8520 },
+  { "frame": 10500, "joystickPort1": 16 },
+  { "frame": 10520 },
+  { "frame": 13000, "joystickPort1": 16 },
+  { "frame": 13600, "joystickPort1": 24 },
+  { "frame": 13700, "joystickPort1": 20 },
+  { "frame": 13800, "joystickPort1": 16 },
+  { "frame": 14800 }
+]

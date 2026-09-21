@@ -1,5 +1,16 @@
 # Optional native replay
 
+The 2026-09-21 [game and demo corpus](engine/NATIVE_CORPUS_2026-09-21.md)
+adds seven titles: Major Motion and Alien Breed reach interactive gameplay;
+Arte and Desert Dream advance through bounded demo sequences. Inside the Machine
+has reproducible effect corruption, Miami Chase has overlapping menu text, and
+Lotus III remains at its disk-2 prompt. Alien Breed's IPF disk-2 swap and Miami
+Chase's ADF disk-2 load are exercised. A Windows scripted-ZIP path defect is
+recorded separately from emulation. These are the original corpus outcomes.
+The [blitter follow-up](engine/BLITTER_FINAL_MODULO.md) corrects the first two
+visual defects with final-row modulo handling and records the new native
+identities and performance gate separately.
+
 The 2026-09-20 [additional game corpus](engine/GAME_CORPUS_2026-09-20.md) records
 bounded Lotus II and Apidya gameplay, persistent North & South menu corruption,
 and a Super Cars II boot Guru. Both failures reproduce identically before the

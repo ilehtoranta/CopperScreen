@@ -32,6 +32,10 @@ requester graph or parallel device timeline to synchronize.
 | Disk | [LightweightFloppyDrive](../../CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs), [LightweightDiskSerial](../../CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs), [LightweightDiskDma](../../CopperMod.Amiga.Lightweight/LightweightDiskDma.cs) | Standard ADF encoding occurs at mount; rotation, receiver state and RAM transfers remain distinct within one clock. |
 | CIA and input | [LightweightCia](../../CopperMod.Amiga.Lightweight/LightweightCia.cs), [LightweightKeyboard](../../CopperMod.Amiga.Lightweight/LightweightKeyboard.cs), [LightweightControllers](../../CopperMod.Amiga.Lightweight/LightweightControllers.cs) | Batched timers, TOD, held IRQ, serial/CNT/port pins, keyboard startup/recovery and physical keys retain their documented model boundaries. |
 
+Area blits publish enabled-channel pointers including the final row modulo before
+completion. A later `BLTSIZE` may continue without pointer reload; see the
+[hardware basis and regression evidence](BLITTER_FINAL_MODULO.md).
+
 ## Clock and state invariants
 
 Keyboard startup/recovery, physical key state, A500 reset, CIA serial/CNT modes

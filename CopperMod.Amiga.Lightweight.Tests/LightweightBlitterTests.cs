@@ -12,6 +12,65 @@ public sealed class LightweightBlitterTests
     private const long QuietStartCycle =
         LightweightClock.CpuCyclesPerLine + (80 * LightweightClock.CpuCyclesPerColorClock);
 
+    [Theory]
+    [InlineData(false, 1)]
+    [InlineData(true, 1)]
+    [InlineData(false, -1)]
+    [InlineData(true, -1)]
+    public void FinalAreaRowIncludesModuloForEveryEnabledPointer(bool descending, int moduloSign)
+    {
+        // HRM BLTxPT: completed pointers include the last increment and modulo.
+        using var machine = new LightweightA500Machine();
+        ConfigureArea(machine, 0x0FFE, descending ? (ushort)2 : (ushort)0);
+        WriteRegister(machine, LightweightRegisters.Bltamod, unchecked((ushort)(2 * moduloSign)));
+        WriteRegister(machine, LightweightRegisters.Bltbmod, unchecked((ushort)(4 * moduloSign)));
+        WriteRegister(machine, LightweightRegisters.Bltcmod, unchecked((ushort)(6 * moduloSign)));
+        WriteRegister(machine, LightweightRegisters.Bltdmod, unchecked((ushort)(8 * moduloSign)));
+        WriteWord(machine, SourceA, 0x1111);
+        WriteWord(machine, SourceB, 0x2222);
+        WriteWord(machine, SourceC, 0x4444);
+        EnableBlitter(machine, nasty: true);
+        _ = StartBlit(machine, 0x0041);
+        AdvanceUntilBlitterIdle(machine);
+
+        var direction = descending ? -1 : 1;
+        Assert.Equal((ushort)0x7777, ReadWord(machine, DestinationD));
+        Assert.Equal((uint)(SourceA + direction * (2 + 2 * moduloSign)), machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+        Assert.Equal((uint)(SourceB + direction * (2 + 4 * moduloSign)), machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal((uint)(SourceC + direction * (2 + 6 * moduloSign)), machine.GetBlitterPointer(LightweightRegisters.Bltcpth));
+        Assert.Equal((uint)(DestinationD + direction * (2 + 8 * moduloSign)), machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void AreaRestartContinuesStridedSourceWithoutReloadingPointers(bool descending)
+    {
+        // A 1,800-row pass must be split at the OCS 1,024-row size limit.
+        // Sentinel words distinguish a missing final modulo from valid data.
+        using var machine = new LightweightA500Machine();
+        for (var i = 0; i < 1800; i++)
+        {
+            WriteWord(machine, SourceA + (uint)(i * 4), (ushort)(0x8000 + i));
+            WriteWord(machine, SourceA + (uint)(i * 4 + 2), 0xDEAD);
+        }
+        ConfigureArea(machine, 0x09F0, descending ? (ushort)2 : (ushort)0);
+        WriteRegister(machine, LightweightRegisters.Bltamod, 2);
+        if (descending)
+        {
+            WritePointer(machine, LightweightRegisters.Bltapth, SourceA + 1799 * 4);
+            WritePointer(machine, LightweightRegisters.Bltdpth, DestinationD + 1799 * 2);
+        }
+        EnableBlitter(machine, nasty: true);
+        _ = StartBlit(machine, 1); // Height zero encodes 1,024 rows.
+        AdvanceUntilBlitterIdle(machine);
+        _ = StartBlit(machine, (776 << 6) | 1);
+        AdvanceUntilBlitterIdle(machine);
+
+        for (var i = 0; i < 1800; i++)
+            Assert.Equal((ushort)(0x8000 + i), ReadWord(machine, DestinationD + (uint)(i * 2)));
+    }
+
     [Fact]
     public void AreaReadAndWriteCommitAtRetainedFollowingOutputPhases()
     {
@@ -161,8 +220,8 @@ public sealed class LightweightBlitterTests
         Assert.Equal(expected[3], ReadWord(machine, DestinationD + 10));
         Assert.Equal(expected[4], ReadWord(machine, DestinationD + 12));
         Assert.Equal(expected[5], ReadWord(machine, DestinationD + 14));
-        Assert.Equal(SourceA + 16, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
-        Assert.Equal(DestinationD + 16, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+        Assert.Equal(SourceA + 20, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+        Assert.Equal(DestinationD + 20, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
     }
 
     [Fact]
@@ -397,8 +456,8 @@ public sealed class LightweightBlitterTests
             Assert.Equal(expected1, ReadWord(machine, DestinationD + 12));
             Assert.Equal(expected2, ReadWord(machine, DestinationD + 6));
             Assert.Equal(expected3, ReadWord(machine, DestinationD + 4));
-            Assert.Equal(SourceA + 2, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
-            Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+            Assert.Equal(SourceA - 2, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+            Assert.Equal(DestinationD - 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
         }
     }
 

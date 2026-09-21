@@ -1,0 +1,17 @@
+[
+  { "frame": 8200, "joystickPort1": 16 },
+  { "frame": 8220 },
+  { "frame": 9300, "ejectAdf": true },
+  { "frame": 9400, "diskPath": "../../media/miami-chase-disk2.adf" },
+  { "frame": 10000, "joystickPort1": 16 },
+  { "frame": 10020 },
+  { "frame": 12000, "joystickPort1": 17 },
+  { "frame": 12500 },
+  { "frame": 14000, "joystickPort1": 16 },
+  { "frame": 14020 },
+  { "frame": 15500, "joystickPort1": 17 },
+  { "frame": 16200, "joystickPort1": 25 },
+  { "frame": 16320, "joystickPort1": 21 },
+  { "frame": 16440, "joystickPort1": 17 },
+  { "frame": 17500 }
+]

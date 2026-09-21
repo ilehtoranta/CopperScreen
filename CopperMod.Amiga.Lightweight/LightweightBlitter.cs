@@ -820,28 +820,30 @@ internal sealed class LightweightBlitter
 
         _wordX = 0;
         _rowY++;
+        // The completed area pointers include the final row's modulo too.
+        // A following BLTSIZE can continue directly from these registers.
+        if (_useA)
+        {
+            _pointerA = AddModulo(_pointerA, _moduloA, _descending);
+            machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
+        }
+        if (_useB)
+        {
+            _pointerB = AddModulo(_pointerB, _moduloB, _descending);
+            machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
+        }
+        if (_useC)
+        {
+            _pointerC = AddModulo(_pointerC, _moduloC, _descending);
+            machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
+        }
+        if (_useD)
+        {
+            _pointerD = AddModulo(_pointerD, _moduloD, _descending);
+            machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
+        }
         if (_rowY < _height)
         {
-            if (_useA)
-            {
-                _pointerA = AddModulo(_pointerA, _moduloA, _descending);
-                machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
-            }
-            if (_useB)
-            {
-                _pointerB = AddModulo(_pointerB, _moduloB, _descending);
-                machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
-            }
-            if (_useC)
-            {
-                _pointerC = AddModulo(_pointerC, _moduloC, _descending);
-                machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
-            }
-            if (_useD)
-            {
-                _pointerD = AddModulo(_pointerD, _moduloD, _descending);
-                machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
-            }
             _fillCarry = _fillCarryInitial;
             _phaseIndex = 0;
             return;

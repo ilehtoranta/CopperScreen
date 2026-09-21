@@ -11,6 +11,25 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [final-row blitter modulo correction](BLITTER_FINAL_MODULO.md) has two valid
+complete comparisons against accepted `9bdc53a`, using the unchanged pinned
+[blitter-modulo comparison v1](../../scripts/run-lightweight-blitter-modulo-comparison-v1.ps1).
+The user-requested repeat gives paired frame-time changes / one-sided 95% upper
+bounds of lores **-1.5263% / -0.0478%**, hires **-1.7626% / +1.2977%**, native
+Lemmings **-2.3416% / -1.1599%**. Lores/native pass this repeat; hires exceeds the
+1% bound despite improving on average. The owner accepted the repeat's scoped hires exception on 2026-09-21 and
+authorized commit/push. The numerical hires result remains INCONCLUSIVE; the
+complete repeat does not pass the default gate by measurement. Future changes
+retain the 1% limit.
+
+The first series remains valid evidence: lores **+2.5863% / +6.2317%**, hires
+**-0.7905% / +0.6797%**, native **-0.7274% / +1.1355%**. Results are neither pooled
+nor substituted across series. Both use the same frozen binaries and inputs,
+six-pair order, host policy, matching synthetic identities and prevalidated native
+identities. Native CPU/hardware state is identical across builds; corrected pixel
+output differs. All 36 samples in each series have zero measured allocations and
+valid telemetry. No samples were dropped and earlier exceptions do not transfer.
+
 The combined Copper-restart and [Super Cars II memory-map correction](SUPER_CARS_II_INVESTIGATION.md)
 has a **valid complete** six-pair comparison against performance-accepted
 `1db2d0d`, using [chip-mirror comparison v1](../../scripts/run-lightweight-chip-mirror-comparison-v1.ps1).

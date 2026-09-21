@@ -1,0 +1,18 @@
+[
+  { "frame": 4000, "ejectAdf": true },
+  { "frame": 4100, "diskPath": "../../media/alien-breed-disk2.ipf" },
+  { "frame": 7500, "joystickPort1": 16 },
+  { "frame": 7520 },
+  { "frame": 9500, "joystickPort1": 16 },
+  { "frame": 9520 },
+  { "frame": 11000, "joystickPort1": 24 },
+  { "frame": 11300, "joystickPort1": 17 },
+  { "frame": 11600, "joystickPort1": 20 },
+  { "frame": 11900 },
+  { "frame": 12600, "joystickPort1": 16 },
+  { "frame": 12620 },
+  { "frame": 16000, "joystickPort1": 24 },
+  { "frame": 16400, "joystickPort1": 17 },
+  { "frame": 16800, "joystickPort1": 20 },
+  { "frame": 17200 }
+]

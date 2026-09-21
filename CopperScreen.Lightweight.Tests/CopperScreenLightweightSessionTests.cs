@@ -704,7 +704,10 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         // protocols retain their historical expectations.
         Assert.Equal(2063189662, session.Machine.Cycle);
         if (!keyboard) Assert.Equal(0x249E90223C45891FUL, cpuHash);
-        Assert.Equal(0x45AB46F7600E1C9FUL, output);
+        // Final-row blitter modulo corrects subsequent chained sprite/image blits.
+        // CPU/beam identities remain unchanged; prior output 45AB46F7600E1C9F
+        // and native before/after captures are retained in BLITTER_FINAL_MODULO.md.
+        Assert.Equal(0x7D31C3889FF73760UL, output);
         Assert.True(activeFields > 0);
         Assert.Equal(entries.Length, next);
         Assert.Null(session.Machine.UnsupportedActiveFeature);
