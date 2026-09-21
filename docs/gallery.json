@@ -1,5 +1,49 @@
 [
   {
+    "id": "super-cars-ii-gameplay",
+    "title": "Super Cars II",
+    "caption": "Racing around Bagley Marsh, with four laps remaining.",
+    "alt": "The red player car racing through Bagley Marsh traffic, with position, laps and damage shown below.",
+    "image": "assets/screenshots/super-cars-ii-gameplay.png",
+    "thumbnail": "assets/screenshots/super-cars-ii-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "lotus-turbo-challenge-2-gameplay",
+    "title": "Lotus Turbo Challenge 2",
+    "caption": "A country-road race at 61 MPH.",
+    "alt": "A red sports car approaching a bend beneath a blue sky, with speed and race position above.",
+    "image": "assets/screenshots/lotus-turbo-challenge-2-gameplay.png",
+    "thumbnail": "assets/screenshots/lotus-turbo-challenge-2-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "apidya-gameplay",
+    "title": "Apidya",
+    "caption": "Flying through the opening garden stage.",
+    "alt": "An insect flying over dense green foliage and tall flowers in the opening stage of Apidya.",
+    "image": "assets/screenshots/apidya-gameplay.png",
+    "thumbnail": "assets/screenshots/apidya-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "north-and-south-menu",
+    "title": "North & South",
+    "caption": "Main menu with scenario and year selection.",
+    "alt": "The colorful North and South main menu, showing commanders, scenario maps and the selected year 1861.",
+    "image": "assets/screenshots/north-and-south-menu.png",
+    "thumbnail": "assets/screenshots/north-and-south-menu-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": false
+  },
+  {
     "id": "lemmings-gameplay",
     "title": "Lemmings",
     "caption": "In-game view with the skill selection panel.",
@@ -30,7 +74,7 @@
     "thumbnail": "assets/screenshots/full-contact-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   },
   {
     "id": "shadow-of-the-beast-gameplay",
@@ -41,7 +85,7 @@
     "thumbnail": "assets/screenshots/shadow-of-the-beast-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   },
   {
     "id": "operation-thunderbolt-gameplay",
@@ -52,6 +96,6 @@
     "thumbnail": "assets/screenshots/operation-thunderbolt-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   }
 ]

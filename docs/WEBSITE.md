@@ -81,5 +81,33 @@ Game imagery belongs to its respective owners. ROMs and disk images are not
 website assets. Full Contact uses the Lightweight gameplay capture above, not
 the old CopperStart screenshot.
 
+## Gallery refresh — 2026-09-21
+
+Added Super Cars II, Lotus Turbo Challenge 2, Apidya, and North & South, bringing
+the gallery to nine games with one image each. The homepage features the three
+new gameplay captures; North & South is explicitly labeled as a main-menu view.
+Existing images remain unchanged. The preparation script uses the same full PAL
+LCD viewport and proportional thumbnail transform, with source hashes checked
+before conversion. These are authentic September 20 replay captures selected on
+September 21, not new desktop-window captures or a claim of full-game coverage.
+
+| Game | Capture relative to `artifacts/` | Original BMP SHA-256 |
+| --- | --- | --- |
+| Super Cars II | `supercars2-investigation/driving-fixed/frame-019000.bmp` | `091D8461C89A76B378284BCDD3F67A5FED1B92C276185A2BCF766A66EBE54439` |
+| Lotus Turbo Challenge 2 | `game-corpus-2026-09-20/lotus2-gameplay/frame-013020.bmp` | `67E80A46F06F344D40735E1E390165FE176A8D692D7A95B5EC3BA293057444EE` |
+| Apidya | `game-corpus-2026-09-20/apidya-gameplay/frame-008820.bmp` | `27DB1B829CE77D1AF43EF47B4B4438EDF917DD260EC3EE3035190A1EB2A5DCE7` |
+| North & South | `north-south-investigation/cp-candidate/frame-008500.bmp` | `8BD3B202C1BDDE9928E08D9DF279B3E0E93FAE366BE45456E367129FA6896862` |
+
+Lotus and Apidya use the `1db2d0d` engine, SHA-256
+`501A3DBD82A29DEA310E308D077BB93965CB31D9F4E8E166C7050CA5166DFA02`;
+see the [game corpus](engine/GAME_CORPUS_2026-09-20.md). North & South uses the
+corrected Copper candidate committed as `19c525b`, engine SHA-256
+`4DEF0F612624A6556F4BCF49304BDF6D9C7F1B74F9CB9A1CC53C9CDC6AEC6968`;
+see its [investigation](engine/NORTH_SOUTH_INVESTIGATION.md). Super Cars II uses
+the combined Copper/chip-mirror candidate accepted on September 21, engine SHA-256
+`AE033B1E1F787E37ACFDFA355DFCE97EFF6F7C0433CB7CB7ED915F136DA03FC6`;
+see its [driving replay](engine/SUPER_CARS_II_INVESTIGATION.md). All four use the
+512 KiB chip + 512 KiB slow-RAM PAL OCS profile with Kickstart 1.3.
+
 Keep visible copy factual. Do not claim comparative performance against other
 emulators, full hardware correctness or broad compatibility without evidence.
