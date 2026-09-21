@@ -1,5 +1,71 @@
 [
   {
+    "id": "major-motion-gameplay",
+    "title": "Major Motion",
+    "caption": "Highway action among cars and trucks.",
+    "alt": "An overhead highway chase with cars, a red truck and the blue status panel at the left.",
+    "image": "assets/screenshots/major-motion-gameplay.png",
+    "thumbnail": "assets/screenshots/major-motion-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "alien-breed-gameplay",
+    "title": "Alien Breed",
+    "caption": "Exploring the corridors of level one.",
+    "alt": "An armed character exploring a metal-walled corridor, with a bright shot and status bars at the edges.",
+    "image": "assets/screenshots/alien-breed-gameplay.png",
+    "thumbnail": "assets/screenshots/alien-breed-gameplay-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "inside-the-machine-face",
+    "title": "Inside the Machine",
+    "caption": "The face-light scene from DESiRE's demo.",
+    "alt": "A shaded face lit in red, blue and purple against a dark background.",
+    "image": "assets/screenshots/inside-the-machine-face.png",
+    "thumbnail": "assets/screenshots/inside-the-machine-face-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "miami-chase-menu",
+    "title": "Miami Chase",
+    "caption": "Main menu beneath the Miami Chase logo.",
+    "alt": "The Miami Chase logo above red menu text and a blue selection bar.",
+    "image": "assets/screenshots/miami-chase-menu.png",
+    "thumbnail": "assets/screenshots/miami-chase-menu-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": false
+  },
+  {
+    "id": "arte-flower",
+    "title": "Arte",
+    "caption": "A geometric flower from Sanity's demo.",
+    "alt": "Layered pink, white and turquoise petals forming a geometric flower on a dark red background.",
+    "image": "assets/screenshots/arte-flower.png",
+    "thumbnail": "assets/screenshots/arte-flower-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": false
+  },
+  {
+    "id": "desert-dream-title",
+    "title": "Desert Dream",
+    "caption": "The sculpted title from Kefrens' demo.",
+    "alt": "The Desert Dream title sculpted into a tilted brown slab with green and black details.",
+    "image": "assets/screenshots/desert-dream-title.png",
+    "thumbnail": "assets/screenshots/desert-dream-title-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": false
+  },
+  {
     "id": "super-cars-ii-gameplay",
     "title": "Super Cars II",
     "caption": "Racing around Bagley Marsh, with four laps remaining.",
@@ -8,7 +74,7 @@
     "thumbnail": "assets/screenshots/super-cars-ii-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   },
   {
     "id": "lotus-turbo-challenge-2-gameplay",
@@ -19,7 +85,7 @@
     "thumbnail": "assets/screenshots/lotus-turbo-challenge-2-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   },
   {
     "id": "apidya-gameplay",
@@ -30,7 +96,7 @@
     "thumbnail": "assets/screenshots/apidya-gameplay-thumb.png",
     "width": 712,
     "height": 570,
-    "featured": true
+    "featured": false
   },
   {
     "id": "north-and-south-menu",

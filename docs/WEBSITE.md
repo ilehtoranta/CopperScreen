@@ -111,3 +111,37 @@ see its [driving replay](engine/SUPER_CARS_II_INVESTIGATION.md). All four use th
 
 Keep visible copy factual. Do not claim comparative performance against other
 emulators, full hardware correctness or broad compatibility without evidence.
+
+## Games and demos refresh — 2026-09-21
+
+Added Major Motion, Alien Breed, Miami Chase, Arte, Desert Dream and Inside the
+Machine, bringing the gallery to **15 titles with one image each**. Miami Chase
+is explicitly a menu capture; the three demos are identified in their captions.
+The homepage features Major Motion, Alien Breed and Inside the Machine. Lemmings'
+existing entry and hero image are refreshed from the corrected blitter build.
+Lotus III's unresolved disk-2 prompt is not presented as gameplay.
+
+These are authentic retained native captures with the same full PAL viewport
+transform described above. No game overscan is removed and no image effects are
+added. Use `scripts/prepare-website-screenshots.ps1 -CaptureRoot artifacts -Names`
+with the selected image IDs to regenerate a subset without needing older captures.
+Omitting `-Names` regenerates all locally reproducible entries.
+
+| Title | Capture relative to `artifacts/` | Original BMP SHA-256 |
+| --- | --- | --- |
+| Major Motion | `native-corpus-2026-09-21/major-motion-play/frame-006960.bmp` | `83815F816A4A1B653DF5C7F0462C27045A59B9B6478089A220B3F75E3F4160F3` |
+| Alien Breed | `native-corpus-2026-09-21/alien-breed-gameplay/frame-016380.bmp` | `9577B2BF341D4EE094D1E7DBF5766EE0ECF19157A3D1A6AAFDCA33761E3E00CA` |
+| Inside the Machine | `inside-machine-investigation/full-demo/frame-003840.bmp` | `14414E2A9E9859B4C350FE0B8816B1B1BBE943B0056622EE0510C6D8335AD0EF` |
+| Miami Chase | `inside-machine-investigation/miami-chase/frame-018000.bmp` | `AD116E700066DBE60D3FDBF664C9ED2583E8D4E4F06BF21C3281099A06AF3A21` |
+| Arte | `native-corpus-2026-09-21/arte-boot/frame-008160.bmp` | `35D88C1F40E70307EA27E1D0177DBC15F2917B366B25EF8EF2D90A46E7010645` |
+| Desert Dream | `native-corpus-2026-09-21/desert-dream-boot/frame-016380.bmp` | `E15FE7F8401AB34067C8107FE2344924EFD5436915F4B880B5C265349F34AD9A` |
+| Lemmings | `inside-machine-investigation/lemmings-candidate/frame-014520.bmp` | `0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58` |
+
+Major Motion, Alien Breed, Arte and Desert Dream use the corpus engine
+`5934338EFBB493787F29644030F0B6F9971CB4BF3972061E40D6BB2D5AF44C8F`;
+see the [native corpus](engine/NATIVE_CORPUS_2026-09-21.md). Inside the Machine,
+Miami Chase and the refreshed Lemmings use the final-row blitter correction,
+engine `DDD6C3634ECA4DA1D53D9E8B09A49ED36D7383D44122C15B2274578FC796A365`,
+accepted and committed as `c92b16b`; see the [investigation](engine/BLITTER_FINAL_MODULO.md).
+Earlier capture provenance remains historical evidence. Images demonstrate these
+specific scenes, not complete game/demo compatibility or a common release build.
