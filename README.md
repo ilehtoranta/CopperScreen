@@ -24,7 +24,7 @@ ROMs, operating-system files and game media are not included.
 ## Build and run
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
-The Copper68k trace development pin needs a verified GitHub prerelease package in the
+The Copper68k `1.4.1-locality.1` development pin needs a verified GitHub prerelease package in the
 local feed before restore; see [dependency bootstrap and availability](docs/engine/CPU_TRACE.md#restore-on-another-machine).
 Other packages restore from NuGet.org.
 

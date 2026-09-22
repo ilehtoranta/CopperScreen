@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-09-22",
-  "status": "CORRECTNESS_VALIDATED; PERFORMANCE_VALID_COMPLETE; GATE_PASS; CPU_SOURCE_COMMITTED; PRODUCTION_PIN_UNCHANGED",
+  "status": "CORRECTNESS_VALIDATED; PERFORMANCE_VALID_COMPLETE; GATE_PASS; PACKAGE_ACTIVATED_IN_SEPARATE_RECORD",
   "productionCodeChanged": false,
   "productionPinChanged": false,
   "cpuSourceBaseCommit": "ada86020ad7a9b298cd7f689c3731d8d779684d1",
@@ -803,5 +803,7 @@
     "benchmarkScope": "Original frozen candidate DLL only; rebuilt development DLL has separate provenance and no relabelled performance result.",
     "patchFormatting": "Removed leading context lines from each hunk to avoid blank diff-context lines triggering whitespace checks; source change unchanged."
   },
-  "originalPatchSha256": "4833A692568B8C0AE2F653BB4E49197010A638F4A5276129C51D7BFE8DE48485"
+  "originalPatchSha256": "4833A692568B8C0AE2F653BB4E49197010A638F4A5276129C51D7BFE8DE48485",
+  "activationRecord": "CPU_PREFETCH_ACTIVATION_2026-09-22.json",
+  "historicalStateScope": "productionCodeChanged/productionPinChanged describe the original benchmark setup. sourceIntegration describes the source-commit stage before publication. Current package/pin state is in activationRecord."
 }

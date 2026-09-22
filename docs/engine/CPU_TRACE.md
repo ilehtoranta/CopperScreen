@@ -1,7 +1,22 @@
-# Copper68k trace development pin — 2026-09-18
+# Copper68k development pin and trace evidence
 
-The current exact CPU pin is **`1.4.1-trace.1`**, a development package distributed
-as a GitHub prerelease asset with owner approval on 2026-09-22. It replaces
+The current exact CPU pin is **`1.4.1-locality.1`**, a development package
+distributed as a GitHub prerelease asset. It retains the trace correction below
+and integrates the [validated prefetch-locality optimization](CPU_PREFETCH_LOCALITY_2026-09-22.md).
+The source is CopperMod commit
+[`b59985f682e342b9b830771c09f617bb547e4116`](https://github.com/ilehtoranta/CopperMod/commit/b59985f682e342b9b830771c09f617bb547e4116),
+branch `codex/cpu-prefetch-locality`. The
+[current hash manifest](copper68k-locality-development-2026-09-22.json) identifies
+the original package and CPU assembly. The package was built before that commit;
+its embedded repository revision remains `ada86020ad7a9b298cd7f689c3731d8d779684d1`,
+and its release notes retain the unpublished build-time description. The asset
+preserves those original bytes. No existing package was overwritten, and this
+version is not published on NuGet.org.
+
+## Original trace correction — 2026-09-18
+
+The earlier **`1.4.1-trace.1`** development package was distributed as a GitHub
+prerelease asset with owner approval on 2026-09-22. It replaced
 `1.4.1-boundary.1` for the Operation Thunderbolt vector-9 defect. No existing
 published package was overwritten; this version is not published on NuGet.org.
 
@@ -12,20 +27,23 @@ The tested package was built from those source changes before committing; its
 original bytes are retained rather than repacking the same version. Its embedded
 repository metadata therefore still names the base revision.
 The [dated hash manifest](copper68k-trace-development-2026-09-18.json) identifies
-the source files, package and assemblies. Raw evidence is under ignored
-`artifacts/trace-exception-2026-09-18/`.
+the source files, package and assemblies. Its `published: false` records the
+original 2026-09-18 state; subsequent availability is preserved in
+[the CI record](../CI_DEPENDENCY.md). Raw evidence is under ignored
+`artifacts/trace-exception-2026-09-18/`. These trace results remain historical
+evidence rather than new validation of the locality package.
 
 ## Restore on another machine
 
 `NuGet.Config` adds the ignored `artifacts/development-packages` feed and retains
 the isolated `artifacts/packages` cache. A fresh machine needs the exact development
 package before locked restore. The [bootstrap script](../../scripts/restore-development-package.ps1)
-checks the dated manifest's SHA256, stages the package atomically and rejects an
+checks the current locality manifest's SHA256, stages the package atomically and rejects an
 existing package with different bytes. Both CI jobs run it before locked restore.
 
-**Availability as of 2026-09-22:** the original package is available from the
-[CopperMod development prerelease](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-trace.1).
-A fresh public download matches the recorded SHA256. Normal bootstrap is:
+The original locality package is available from the
+[CopperMod development prerelease](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-locality.1).
+Normal bootstrap is:
 
 ```powershell
 ./scripts/restore-development-package.ps1
@@ -35,16 +53,14 @@ dotnet restore CopperScreen.slnx --locked-mode
 For an offline copy of the same package, use:
 
 ```powershell
-./scripts/restore-development-package.ps1 -PackagePath <path-to-original>/Copper68k.1.4.1-trace.1.nupkg
+./scripts/restore-development-package.ps1 -PackagePath <path-to-original>/Copper68k.1.4.1-locality.1.nupkg
 dotnet restore CopperScreen.slnx --locked-mode
 ```
 
 The GitHub asset preserves the original package bytes and remains a
 development dependency, not a NuGet.org release. Its exact package SHA256 is
-`8C2B30CD902AD9F3A8C7D1938BC78DE3E4D12F9C1B59A2F56629931AF5E72747`.
+`4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE`.
 The bootstrap does not regenerate locks, downgrade Copper68k or disable validation.
-The dated manifest's `published: false` records its original 2026-09-18 state;
-the later GitHub asset availability is recorded here and in [the CI record](../CI_DEPENDENCY.md).
 
 Rebuilding source is not a drop-in bootstrap: the tested package predates its
 source commit, and a repack can differ in metadata and archive bytes. A differing

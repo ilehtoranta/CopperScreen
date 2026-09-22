@@ -2,8 +2,10 @@
 
 **Correctness validated; all three workloads pass the default 1% performance gate.**
 Native Lemmings gains 26.47% paired FPS in the frozen benchmark candidate.
-The tested source change is now committed in CopperMod; CopperScreen's
-`1.4.1-trace.1` package pin and published packages remain unchanged.
+The tested source change is committed in CopperMod. Subsequent owner-authorized
+[package activation](CPU_PREFETCH_ACTIVATION_2026-09-22.md) now pins the published
+development package `1.4.1-locality.1`; the original benchmark identities and
+results below remain unchanged.
 
 ## Change and rationale
 
@@ -147,8 +149,8 @@ To reproduce from the repository root, use a fresh evidence directory:
 
 Require the one-sided 95% upper frame-time regression bound to be at most 1%
 for **each** retained workload. No earlier exception transfers. This candidate
-meets that requirement. Source integration is recorded below; the production
-development pin has not been changed. No package publication is included.
+meets that requirement. The source-commit stage is recorded below; subsequent
+publication and pin activation have a [separate record](CPU_PREFETCH_ACTIVATION_2026-09-22.md).
 
 ## Source integration and commit
 
@@ -172,6 +174,8 @@ the local package SHA256 is
 `4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE`.
 These differ from the isolated benchmark assembly. The throughput record above
 continues to identify the original frozen `658025...` DLL; it has not been
-relabelled as a benchmark of this newly packaged binary. No package was published
-or copied over an existing released version. CopperScreen's default runtime
-remains on `1.4.1-trace.1` pending development-package integration.
+relabelled as a benchmark of this newly packaged binary. At this source-commit
+stage, no package had been published or copied over an existing released version,
+and CopperScreen remained on `1.4.1-trace.1`. The later
+[activation record](CPU_PREFETCH_ACTIVATION_2026-09-22.md) documents publication,
+the new production pin, executable comparison and integration checks.

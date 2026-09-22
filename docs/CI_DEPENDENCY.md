@@ -1,6 +1,31 @@
 # CI development-dependency bootstrap — 2026-09-22
 
-## Failure and cause
+## Current dependency
+
+The production engine, runner and desktop now pin **Copper68k
+`1.4.1-locality.1`**. Both CI jobs use the same
+[bootstrap script](../scripts/restore-development-package.ps1), now bound to the
+[locality hash manifest](engine/copper68k-locality-development-2026-09-22.json).
+It obtains the original 315,868-byte package from the
+[CopperMod development prerelease](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-locality.1)
+and verifies SHA256
+`4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE`
+before staging it. Offline bootstrap requires the same original bytes.
+An anonymous download from the published release matches that SHA256.
+
+This pin retains the trace correction and integrates the validated CPU-locality
+optimization. Its source commit is `b59985f682e342b9b830771c09f617bb547e4116`;
+the package was built before that commit, so embedded metadata still records
+the base `ada86020ad7a9b298cd7f689c3731d8d779684d1`. The release preserves the
+package without repacking it. It is a GitHub development prerelease, not a
+NuGet.org publication. See the
+[current integration evidence](engine/CPU_PREFETCH_LOCALITY_2026-09-22.md) and
+[restore guidance](engine/CPU_TRACE.md#restore-on-another-machine).
+
+The sections below preserve the original trace-package bootstrap investigation
+and its hosted CI result. They do not claim hosted validation of the newer pin.
+
+## Original failure and cause
 
 Both jobs in [CI run 35686134348](https://github.com/ilehtoranta/CopperScreen/actions/runs/35686134348)
 fail during restore, before compilation or test execution. The logs report
@@ -17,7 +42,7 @@ limitation. README's assertion that all packages restore from NuGet.org was
 incomplete and is now corrected. This is a dependency-delivery defect, not an
 observed engine compilation failure.
 
-## Correction
+## Original correction
 
 Both jobs now invoke [restore-development-package.ps1](../scripts/restore-development-package.ps1)
 before locked restore. It obtains the original package from the
@@ -40,7 +65,7 @@ as a public GitHub development prerelease asset. A fresh unauthenticated downloa
 through the bootstrap script matches the recorded SHA256. It is not a NuGet.org
 publication, and no existing package was overwritten.
 
-## Local verification
+## Original local verification
 
 A fresh archive of `dfe9709` with an empty package cache reproduces NU1301.
 After preparing the exact package, both production and isolated diagnostic
@@ -63,7 +88,7 @@ response, and download-failure cleanup. Evidence is under ignored
 `artifacts/ci-investigation/`. No native media replay or performance measurement
 was performed for this CI-only change.
 
-## Hosted verification
+## Original hosted verification
 
 [CI run 35692065083](https://github.com/ilehtoranta/CopperScreen/actions/runs/35692065083)
 on commit `ea12edbc1abd5094e4dd9b63f0e186615c056977` passed both jobs on

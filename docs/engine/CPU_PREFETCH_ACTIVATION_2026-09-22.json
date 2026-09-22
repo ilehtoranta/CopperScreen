@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-22",
+  "status": "PUBLISHED_AND_PINNED; LOCAL_CORRECTNESS_VALIDATED",
+  "release": {
+    "release_id": 394055770,
+    "release_url": "https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-locality.1",
+    "tag": "copper68k-1.4.1-locality.1",
+    "sourceCommit": "b59985f682e342b9b830771c09f617bb547e4116",
+    "asset_id": 582097936,
+    "asset_url": "https://github.com/ilehtoranta/CopperMod/releases/download/copper68k-1.4.1-locality.1/Copper68k.1.4.1-locality.1.nupkg",
+    "sha256": "4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE",
+    "nugetOrgPublished": false
+  },
+  "packageVersion": "1.4.1-locality.1",
+  "packageSha256": "4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE",
+  "packageContentSha512Base64": "F0qXWFdIhdtp2Rw3xuoGspbqviDokUC0EmE8bRqrwXLG4tFrIbo198rSoFTIvOm3snGGcSYV2vu3rBNDyaG91w==",
+  "cpuAssemblySha256": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+  "productionAssemblyPaths": [
+    "CopperScreen/bin/Release/net10.0/Copper68k.dll",
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/Copper68k.dll",
+    "CopperScreen.Lightweight.Tests/bin/Release/net10.0/Copper68k.dll",
+    "artifacts/diagnostic-tests/bin/CopperMod.Amiga.Lightweight.Tests/release/Copper68k.dll"
+  ],
+  "lockedProjects": [
+    "CopperMod.Amiga.Lightweight",
+    "CopperMod.Amiga.Lightweight.Runner",
+    "CopperMod.Amiga.Lightweight.Tests",
+    "CopperScreen",
+    "CopperScreen.Lightweight.Tests"
+  ],
+  "build": "Production Release: zero warnings/errors; production and isolated diagnostic locked restore passed.",
+  "tests": {
+    "engine": {
+      "counters": {
+        "total": "669",
+        "executed": "669",
+        "passed": "669",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "trxSha256": "9354680B724DFF45A67D452B8C14FF93CF8BD6D2435C128C0A22F61579B68374"
+    },
+    "disk": {
+      "counters": {
+        "total": "74",
+        "executed": "74",
+        "passed": "74",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "trxSha256": "4C4108B0C8E4EA54FFA57405EAFF9733D01FBC0F63FB84DEF814E7E38D965A34"
+    },
+    "host-native": {
+      "counters": {
+        "total": "95",
+        "executed": "95",
+        "passed": "95",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "trxSha256": "DF4ECE24E6446AD7DD2499BC003E8260D62C1B74592CFB308F9FA11E01FBE88A"
+    }
+  },
+  "replays": [
+    {
+      "workload": "lores",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "logSha256": "B7E5D79A880DABAC5A2151AE9E5F190C6E523C55D9389F2BA8479B041C644E1D",
+      "purpose": "Correctness verification only; no new throughput result."
+    },
+    {
+      "workload": "hires",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "logSha256": "D23418B45B1D60CCCBB466FB11AF837F6B20C29DEFF9B79A854B7C57D6A13E74",
+      "purpose": "Correctness verification only; no new throughput result."
+    },
+    {
+      "workload": "lemmings",
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+      "logSha256": "99986DA2F32F0A061C457EE99C5E9A6B7CC17CB740056466B4BF1484AA41185B",
+      "purpose": "Correctness verification only; no new throughput result."
+    }
+  ],
+  "assemblyComparisons": {
+    "cpu": {
+      "reference": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-locality-2026-09-22\\runtime\\Copper68k.dll",
+        "byteLength": 841728,
+        "sha256": "658025CFD4ADC26C275559B6CC171220110820B412BFEE8D1B4013095F781AD4",
+        "mvid": "f29e1ad5-544b-46fb-87e9-1b2b7436497b",
+        "methodDefinitions": 4357,
+        "fieldDefinitions": 2992,
+        "typeDefinitions": 227
+      },
+      "candidate": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-locality-2026-09-22\\integration\\build\\bin\\Copper68k\\release\\Copper68k.dll",
+        "byteLength": 841728,
+        "sha256": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+        "mvid": "74ffd407-4ad3-497a-8e58-805101f654c7",
+        "methodDefinitions": 4357,
+        "fieldDefinitions": 2992,
+        "typeDefinitions": 227
+      },
+      "checkedRecords": 28186,
+      "executableDifferenceCount": 0,
+      "identityDebugInformationalDifferenceKeys": [
+        "debug/0",
+        "debug/1",
+        "identity/mvid",
+        "identity/peTimestamp",
+        "informational/201326617"
+      ],
+      "matchingMethods": 4357,
+      "matchingMethodBodies": 4250,
+      "matchingFieldInitializers": 0,
+      "rawResultSha256": "C091760FB1ED9DFF6D0C1219B3A3F08DDE617345452A6A48F9151A33F0739F80"
+    },
+    "engine": {
+      "reference": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\wordsync-investigation\\bench-candidate\\CopperMod.Amiga.Lightweight.dll",
+        "byteLength": 188416,
+        "sha256": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+        "mvid": "07479a36-1b89-409c-883d-1db63ffd3f68",
+        "methodDefinitions": 1222,
+        "fieldDefinitions": 936,
+        "typeDefinitions": 59
+      },
+      "candidate": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.dll",
+        "byteLength": 188416,
+        "sha256": "9F93E08FD6DFE1317CF63EB3C1AD191E04F194F1FDE5F79DBE7CED8CF115B941",
+        "mvid": "81f556e5-7ebd-49dd-8cd0-65e68eaa52f4",
+        "methodDefinitions": 1222,
+        "fieldDefinitions": 936,
+        "typeDefinitions": 59
+      },
+      "checkedRecords": 7238,
+      "executableDifferenceCount": 0,
+      "identityDebugInformationalDifferenceKeys": [
+        "debug/0",
+        "debug/1",
+        "identity/mvid",
+        "identity/peTimestamp",
+        "informational/201326606"
+      ],
+      "matchingMethods": 1222,
+      "matchingMethodBodies": 1206,
+      "matchingFieldInitializers": 4,
+      "rawResultSha256": "C73AD7DB360550C422AAEE921FF5287045E7D2494B6340E5663C21A508005C90"
+    },
+    "runner": {
+      "reference": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\wordsync-investigation\\bench-candidate\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "byteLength": 56320,
+        "sha256": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+        "mvid": "65fc7e9e-e028-4fe5-82f1-746a35ce5c70",
+        "methodDefinitions": 152,
+        "fieldDefinitions": 82,
+        "typeDefinitions": 13
+      },
+      "candidate": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "byteLength": 58880,
+        "sha256": "1BE90E79FDBD0242D2DEC702F125B1E03468CD2ED365A4B0378C811C79090E90",
+        "mvid": "25228e24-4abe-4433-8fab-fc6e6bb41e26",
+        "methodDefinitions": 156,
+        "fieldDefinitions": 84,
+        "typeDefinitions": 15
+      },
+      "checkedRecords": 2102,
+      "executableDifferenceCount": 1546,
+      "identityDebugInformationalDifferenceKeys": [
+        "debug/0",
+        "debug/1",
+        "identity/mvid",
+        "identity/peTimestamp",
+        "informational/201326603"
+      ],
+      "matchingMethods": 65,
+      "matchingMethodBodies": 0,
+      "matchingFieldInitializers": 0,
+      "rawResultSha256": "C2F9E80CF82FC80D6281F174EC412E154AB8BBCF7BD862359E2A7F505A3C3AF1"
+    },
+    "negativeControl": {
+      "reference": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\wordsync-investigation\\bench-candidate\\Copper68k.dll",
+        "byteLength": 841728,
+        "sha256": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC",
+        "mvid": "f2880ce2-3096-4fe3-81d8-3aebd3707022",
+        "methodDefinitions": 4357,
+        "fieldDefinitions": 2992,
+        "typeDefinitions": 227
+      },
+      "candidate": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-locality-2026-09-22\\runtime\\Copper68k.dll",
+        "byteLength": 841728,
+        "sha256": "658025CFD4ADC26C275559B6CC171220110820B412BFEE8D1B4013095F781AD4",
+        "mvid": "f29e1ad5-544b-46fb-87e9-1b2b7436497b",
+        "methodDefinitions": 4357,
+        "fieldDefinitions": 2992,
+        "typeDefinitions": 227
+      },
+      "checkedRecords": 28186,
+      "executableDifferenceCount": 3,
+      "identityDebugInformationalDifferenceKeys": [
+        "debug/0",
+        "debug/1",
+        "identity/mvid",
+        "identity/peTimestamp",
+        "informational/201326617"
+      ],
+      "matchingMethods": 4354,
+      "matchingMethodBodies": 4250,
+      "matchingFieldInitializers": 0,
+      "rawResultSha256": "B4CF5DB6DC5181D454F58FC830C81DC70BF4F4376E57F3BA291028076974EF64"
+    }
+  },
+  "comparatorSource": "scripts/probes/AssemblyExecutionComparison/Program.cs",
+  "comparatorSourceSha256": "8B2F7389DB8C100B28AB54870E4C5FBB282786CEF006E005A5022C108CC435A3",
+  "performanceScope": "The original six-pair gate and its frozen assembly/runner identities remain unchanged. This activation has no new timing gate; CPU and engine executable inputs match those previously validated. Equality does not prove equal JIT placement or throughput. Current production runner has older feature differences from the frozen runner, so full production replay identities were separately checked.",
+  "nativeCoverage": "All 95 local host cases ran with supplied ROM/media. Six optional external CPU cases remain unavailable from the prior exact-package CPU suite.",
+  "hostedCi": "Pending at this local validation stage; will run when the integration commit is pushed.",
+  "artifactRoot": "artifacts/cpu-prefetch-activation-2026-09-22",
+  "artifactSha256": {
+    "bootstrap.log": "37F86A24700F8787D044889BA78AC026809ACBC688F80459CC6CF481B40CC223",
+    "bootstrap-existing.log": "6B05CE8360C01154D6C59F964648CE16599ABA5805B84FE90F4A7CE8DAB80558",
+    "production-build.log": "AE6ED9C0E90DB0B84988357767B2E844C6AA2B812BA5AB2C09E3AC83F0CE71EA",
+    "locked-restore.log": "9CC262D93D7F6A6EA00C94F71955C1222CBB1F263BDED0DB686CBF6B4B1343D6",
+    "locked-diagnostic-restore.log": "4303B098C72024A48434935B3975636841B95F581DDC1E7E22DC475C07A751C0",
+    "engine-tests.log": "3910A7BF964883AD4FD7684E651EC8436631EAB831B52091075C1FB31F550DD0",
+    "disk-tests.log": "163CD234D8BFFA28C1C4ED1BA0444843650FD07B8DAFC3CDED00296FA7C2DE9D",
+    "host-native.log": "ED7F09E67FB059830F400EF87DD9A5F262154580F431D1692548AA97D1B269B1",
+    "published-asset.json": "EAB5CE6AA41CBE39D39973609243C3CAC78EAD44C3AD9999D0A01C2F59C742ED",
+    "build-record.py": "77C57FA9C6F67DEE662952144FAA424E78AD0A2E6C07C7CBAC054E60CD432181",
+    "clean-bootstrap.log": "37F86A24700F8787D044889BA78AC026809ACBC688F80459CC6CF481B40CC223",
+    "rejected-bootstrap.log": "31C1A4B1C9051C504E83BADDDC5EE8053F91DDE5A1587DDA9ABCA30C25A7D561"
+  },
+  "bootstrapChecks": {
+    "emptyFeed": "PASS: downloaded published asset and verified SHA-256.",
+    "existingPackage": "PASS: verified existing package bytes.",
+    "wrongPackage": "PASS: rejected old trace package as a locality package."
+  }
+}

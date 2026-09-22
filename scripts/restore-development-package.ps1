@@ -7,7 +7,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repository = Split-Path $PSScriptRoot -Parent
-$manifest = Get-Content -LiteralPath (Join-Path $repository 'docs/engine/copper68k-trace-development-2026-09-18.json') -Raw | ConvertFrom-Json
+$manifest = Get-Content -LiteralPath (Join-Path $repository 'docs/engine/copper68k-locality-development-2026-09-22.json') -Raw | ConvertFrom-Json
 $filename = "$($manifest.package).$($manifest.version).nupkg"
 $uri = "https://github.com/ilehtoranta/CopperMod/releases/download/copper68k-$($manifest.version)/$filename"
 $feed = [IO.Path]::GetFullPath($FeedDirectory)

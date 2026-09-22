@@ -13,6 +13,6 @@
     <Reference Include="CopperMod.Amiga.Lightweight" HintPath="$(LightweightReferencePath)" Private="true" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Copper68k" Version="[1.4.1-trace.1]" />
+    <PackageReference Include="Copper68k" Version="[1.4.1-locality.1]" />
   </ItemGroup>
 </Project>

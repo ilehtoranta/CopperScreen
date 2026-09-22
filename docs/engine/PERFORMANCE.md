@@ -24,10 +24,13 @@ upper bounds are lores **-0.6857% / +0.9525%**, hires **-2.3723% / -0.2033%**,
 native **-20.9296% / -20.2527%**. All three workloads pass the default 1% gate.
 Native mean FPS rises from **262.76 to 332.31**, a paired **26.4696%** gain.
 The tested shared-CPU source change is now committed in CopperMod as `b59985f`
-on `codex/cpu-prefetch-locality`, with unpublished development version
-`1.4.1-locality.1`. The new local package passed CPU tests and packing; its binary
-identity is recorded separately from the original benchmark DLL. CopperScreen's
-production pin remains unchanged. No exception or package publication is included.
+on `codex/cpu-prefetch-locality`. The owner subsequently authorized
+[development-package publication and activation](CPU_PREFETCH_ACTIVATION_2026-09-22.md):
+production now pins `1.4.1-locality.1` from the verified GitHub prerelease asset.
+Its binary identity remains separate from the original benchmark DLL. Actual CPU
+and engine executable inputs match the frozen candidate; activation tests and
+complete production replay fingerprints pass. The formal result above is not
+relabelled as a new timing measurement of the packaged build/current runner.
 
 The [native CPU dispatch/locality investigation](CPU_DISPATCH_LOCALITY_2026-09-22.md)
 identifies unconditional stack-zeroing loops in three Copper68k dispatch methods:

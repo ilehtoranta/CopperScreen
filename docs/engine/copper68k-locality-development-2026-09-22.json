@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-22",
+  "package": "Copper68k",
+  "version": "1.4.1-locality.1",
+  "published": true,
+  "distribution": "GitHub development prerelease",
+  "nugetOrgPublished": false,
+  "releaseUrl": "https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-locality.1",
+  "sourceRepository": "https://github.com/ilehtoranta/CopperMod",
+  "baseCommit": "ada86020ad7a9b298cd7f689c3731d8d779684d1",
+  "branch": "codex/cpu-prefetch-locality",
+  "sourceCommit": "b59985f682e342b9b830771c09f617bb547e4116",
+  "embeddedRepositoryCommit": "ada86020ad7a9b298cd7f689c3731d8d779684d1",
+  "sourceState": "Committed optimization; development package built before commit and retained unchanged. Embedded repository revision names the base commit; embedded release notes describe its unpublished build-time state.",
+  "sources": [
+    {
+      "path": "Copper68k/Copper68k.csproj",
+      "sha256": "C2548C18DC11F74A1B898EBB329D49462B8DFDF22E479D891D409DBE4E14FDBF"
+    },
+    {
+      "path": "Copper68k/M68kCore.cs",
+      "sha256": "5226EBDE412921DA0244EC3A3D4E797BBC54BA77FBE5219DCAB0809619D54BA0"
+    }
+  ],
+  "packageBytes": 315868,
+  "packageSha256": "4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE",
+  "assemblySha256": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+  "benchmarkCandidateAssemblySha256": "658025CFD4ADC26C275559B6CC171220110820B412BFEE8D1B4013095F781AD4",
+  "validationRecord": "CPU_PREFETCH_LOCALITY_2026-09-22.md"
+}
