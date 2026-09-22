@@ -17,6 +17,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
+      - name: Prepare pinned development dependency
+        shell: pwsh
+        run: ./scripts/restore-development-package.ps1
       - name: Restore locked packages
         run: dotnet restore CopperScreen.slnx --locked-mode
       - name: Build
@@ -35,6 +38,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
+      - name: Prepare pinned development dependency
+        shell: pwsh
+        run: ./scripts/restore-development-package.ps1
       - name: Restore diagnostic tests separately
         run: dotnet restore CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj --locked-mode --artifacts-path artifacts/diagnostic-tests
       - name: Engine timing tests

@@ -1,8 +1,9 @@
 # Copper68k trace development pin — 2026-09-18
 
-The current exact CPU pin is **`1.4.1-trace.1`**, an unpublished local development
-package. It replaces `1.4.1-boundary.1` for the Operation Thunderbolt vector-9
-defect. No existing published package was overwritten; no publication is included.
+The current exact CPU pin is **`1.4.1-trace.1`**, a development package distributed
+as a GitHub prerelease asset with owner approval on 2026-09-22. It replaces
+`1.4.1-boundary.1` for the Operation Thunderbolt vector-9 defect. No existing
+published package was overwritten; this version is not published on NuGet.org.
 
 Source lives in CopperMod, branch `codex/68000-trace-exception`, based on
 `713ad6c1bc1bc31efc038996c50faccec31208d6`. The fix is now committed as
@@ -17,18 +18,37 @@ the source files, package and assemblies. Raw evidence is under ignored
 ## Restore on another machine
 
 `NuGet.Config` adds the ignored `artifacts/development-packages` feed and retains
-the isolated `artifacts/packages` cache. **A clean CI checkout cannot restore this
-unpublished version until the development package is supplied.** Copy the exact
-locally built `Copper68k.1.4.1-trace.1.nupkg` into that feed before locked restore,
-or pack the fixed CopperMod source into it:
+the isolated `artifacts/packages` cache. A fresh machine needs the exact development
+package before locked restore. The [bootstrap script](../../scripts/restore-development-package.ps1)
+checks the dated manifest's SHA256, stages the package atomically and rejects an
+existing package with different bytes. Both CI jobs run it before locked restore.
+
+**Availability as of 2026-09-22:** the original package is available from the
+[CopperMod development prerelease](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-trace.1).
+A fresh public download matches the recorded SHA256. Normal bootstrap is:
 
 ```powershell
-dotnet pack <CopperMod-source>/Copper68k/Copper68k.csproj -c Release -o <CopperScreen>/artifacts/development-packages
+./scripts/restore-development-package.ps1
 dotnet restore CopperScreen.slnx --locked-mode
 ```
 
-For a rebuild, compare the package with the recorded hash; a differing development
-package must receive a new version and regenerated locks. Do not silently replace
+For an offline copy of the same package, use:
+
+```powershell
+./scripts/restore-development-package.ps1 -PackagePath <path-to-original>/Copper68k.1.4.1-trace.1.nupkg
+dotnet restore CopperScreen.slnx --locked-mode
+```
+
+The GitHub asset preserves the original package bytes and remains a
+development dependency, not a NuGet.org release. Its exact package SHA256 is
+`8C2B30CD902AD9F3A8C7D1938BC78DE3E4D12F9C1B59A2F56629931AF5E72747`.
+The bootstrap does not regenerate locks, downgrade Copper68k or disable validation.
+The dated manifest's `published: false` records its original 2026-09-18 state;
+the later GitHub asset availability is recorded here and in [the CI record](../CI_DEPENDENCY.md).
+
+Rebuilding source is not a drop-in bootstrap: the tested package predates its
+source commit, and a repack can differ in metadata and archive bytes. A differing
+development package must receive a new version and regenerated locks. Do not silently replace
 an existing version. ROMs, media and generated packages remain untracked. There is
 no source/project reference or runtime dependency on a sibling checkout.
 

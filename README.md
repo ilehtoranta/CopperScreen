@@ -23,10 +23,13 @@ ROMs, operating-system files and game media are not included.
 
 ## Build and run
 
-Requires the .NET 10 SDK. External dependencies are pinned by package locks and
-restored from NuGet.org.
+Requires the .NET 10 SDK. External dependencies are pinned by package locks.
+The Copper68k trace development pin needs a verified GitHub prerelease package in the
+local feed before restore; see [dependency bootstrap and availability](docs/engine/CPU_TRACE.md#restore-on-another-machine).
+Other packages restore from NuGet.org.
 
 ```powershell
+./scripts/restore-development-package.ps1
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
