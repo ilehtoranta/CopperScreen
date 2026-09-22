@@ -1,0 +1,334 @@
+{
+  "date": "2026-09-22",
+  "status": "DISCARDED at owner request; complete comparison remains VALID; no performance exception accepted",
+  "referenceCommit": "9be9feef098c9850ee7d8e645121593551a11bb3",
+  "referenceEngine": {
+    "path": "artifacts/wordsync-investigation/bench-candidate/CopperMod.Amiga.Lightweight.dll",
+    "sha256": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5"
+  },
+  "candidateBinaries": [
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate/Copper68k.dll",
+      "sha256": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate/CopperDisk.dll",
+      "sha256": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate/CopperFloat.dll",
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "25FC088CEEA8BFB738279A93277DE848DFD29675798BCD8792802AD3ACA72333"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF"
+    }
+  ],
+  "protocol": {
+    "path": "scripts/run-lightweight-empty-shifter-comparison-v1.ps1",
+    "sha256": "25B5BEEEE8B3674CDE4D448DE6D241B953C88ADC1C3AC0DEC661FC455DA5A270"
+  },
+  "hostPolicy": {
+    "path": "scripts/agnus-g6-host-load.ps1",
+    "sha256": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6"
+  },
+  "samples": 36,
+  "telemetrySamples": 1600,
+  "maximumSustainedInterferenceSeconds": {
+    "Selected": 0.0,
+    "Sibling": 5.666734500031453,
+    "Package": 5.631718599994201
+  },
+  "results": [
+    {
+      "workload": "lores",
+      "referenceMeanFps": 385.13666666666666,
+      "candidateMeanFps": 377.5233333333333,
+      "pairedFrameTimeChangePercent": 2.105369239922329,
+      "oneSided95UpperPercent": 6.607773350522428,
+      "disposition": "ACCEPTANCE_REQUIRED",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "pairs": [
+        {
+          "pair": 1,
+          "referenceFps": 378.42,
+          "candidateFps": 387.37,
+          "frameTimeChangePercent": -2.3104525389162744
+        },
+        {
+          "pair": 2,
+          "referenceFps": 390.94,
+          "candidateFps": 384.56,
+          "frameTimeChangePercent": 1.6590389016018392
+        },
+        {
+          "pair": 3,
+          "referenceFps": 378.48,
+          "candidateFps": 382.88,
+          "frameTimeChangePercent": -1.1491851232762196
+        },
+        {
+          "pair": 4,
+          "referenceFps": 386.47,
+          "candidateFps": 377.43,
+          "frameTimeChangePercent": 2.3951461198103097
+        },
+        {
+          "pair": 5,
+          "referenceFps": 389.47,
+          "candidateFps": 390.26,
+          "frameTimeChangePercent": -0.2024291497975561
+        },
+        {
+          "pair": 6,
+          "referenceFps": 387.04,
+          "candidateFps": 342.64,
+          "frameTimeChangePercent": 12.958206864347432
+        }
+      ]
+    },
+    {
+      "workload": "hires",
+      "referenceMeanFps": 345.18333333333334,
+      "candidateMeanFps": 347.63166666666666,
+      "pairedFrameTimeChangePercent": -0.7078317372200303,
+      "oneSided95UpperPercent": 0.9403753117246647,
+      "disposition": "PASS",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "pairs": [
+        {
+          "pair": 1,
+          "referenceFps": 347.26,
+          "candidateFps": 353.28,
+          "frameTimeChangePercent": -1.7040307971014412
+        },
+        {
+          "pair": 2,
+          "referenceFps": 340.37,
+          "candidateFps": 349.99,
+          "frameTimeChangePercent": -2.748649961427474
+        },
+        {
+          "pair": 3,
+          "referenceFps": 339.85,
+          "candidateFps": 343.02,
+          "frameTimeChangePercent": -0.92414436476006
+        },
+        {
+          "pair": 4,
+          "referenceFps": 352.36,
+          "candidateFps": 351.88,
+          "frameTimeChangePercent": 0.13641013982039762
+        },
+        {
+          "pair": 5,
+          "referenceFps": 351.15,
+          "candidateFps": 341.27,
+          "frameTimeChangePercent": 2.8950684208984168
+        },
+        {
+          "pair": 6,
+          "referenceFps": 340.11,
+          "candidateFps": 346.35,
+          "frameTimeChangePercent": -1.801645734084023
+        }
+      ]
+    },
+    {
+      "workload": "lemmings",
+      "referenceMeanFps": 256.12666666666667,
+      "candidateMeanFps": 257.59499999999997,
+      "pairedFrameTimeChangePercent": -0.5651976057059157,
+      "oneSided95UpperPercent": 1.0572940870500818,
+      "disposition": "INCONCLUSIVE",
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+      "pairs": [
+        {
+          "pair": 1,
+          "referenceFps": 257.75,
+          "candidateFps": 257.76,
+          "frameTimeChangePercent": -0.003879577901921838
+        },
+        {
+          "pair": 2,
+          "referenceFps": 252.94,
+          "candidateFps": 256.28,
+          "frameTimeChangePercent": -1.3032620571250098
+        },
+        {
+          "pair": 3,
+          "referenceFps": 257.98,
+          "candidateFps": 250.51,
+          "frameTimeChangePercent": 2.981916889545344
+        },
+        {
+          "pair": 4,
+          "referenceFps": 252.21,
+          "candidateFps": 258.27,
+          "frameTimeChangePercent": -2.3463816935764825
+        },
+        {
+          "pair": 5,
+          "referenceFps": 259.6,
+          "candidateFps": 260.59,
+          "frameTimeChangePercent": -0.3799071338117188
+        },
+        {
+          "pair": 6,
+          "referenceFps": 256.28,
+          "candidateFps": 262.16,
+          "frameTimeChangePercent": -2.2429050961245256
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/build.log",
+      "sha256": "1218CEB8895FD3D018CAFB3F6860C1924E6CD2E51CD9C5B23360EA83DBCC9547"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/engine-tests.log",
+      "sha256": "837D013449C4861B079E78A830DCD401A0BA7AD88BDE9FC020ADD6CD51F3EC15"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/native-preflight.log",
+      "sha256": "9AC056464A0A6ED57827248B630E530A4FA4B226E2EC45FF728C0F248CD50E8E"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/hires-preflight.log",
+      "sha256": "FB0C57FEF96210B11C0F3EB21AFFF5F16D495688694FA49A2C6EDF0FCFA36308"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/source.patch",
+      "sha256": "90E224C34405936CB9A88E41939298DBC459C61E6804DFD0AA1A2B9FED9515DD"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate-jit.txt",
+      "sha256": "5C09E7326BF4F85BD1085922F1897B3B17D1C171D93F82E0A8FEDCB32B089BB1"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/candidate-jit.log",
+      "sha256": "3871A9593BAFE43F95CC84D2324B56DB692EA41F4F44109A49E6C02706E7BA68"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/analyze.py",
+      "sha256": "7A1C49F0DB77D8488F85BFDC7791CB25E8F4104D2AF8AD2CBB01D3E15EECAD94"
+    }
+  ],
+  "comparisonEvidence": [
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/comparison-retry5/protocol.log",
+      "sha256": "ED3EA51FE13C1BAF377B8D905C2876FE38FFC25E6563EB2767CD22C122C6F6BE"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/comparison-retry5/samples.json",
+      "sha256": "99EB1437DDFDA40E18957BF4A479205B3714D189B5428A03A914420503ACEA1F"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/comparison-retry5/summary.json",
+      "sha256": "66329E236C7BB399AE89630CAFBCA6B229880A7B90E355BF37DA764AEA099633"
+    },
+    {
+      "path": "artifacts/empty-shifter-2026-09-22/comparison-retry5/telemetry.jsonl",
+      "sha256": "BF8762F98B89641C953D57CB184217D6DB0C6FB39A4092F7C011FF16A41B14CB"
+    }
+  ],
+  "invalidFullComparisons": [
+    {
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Package interference >=25% for 11.4083608000074 seconds.",
+      "evidence": {
+        "path": "artifacts/empty-shifter-2026-09-22/comparison/INVALID.txt",
+        "sha256": "6E6671EDBFB6BD165F2C25F72FAC8AD9AC56D0DB25DBD2093016B813E65CCF2B"
+      }
+    },
+    {
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Package interference >=25% for 10.0487446000334 seconds.",
+      "evidence": {
+        "path": "artifacts/empty-shifter-2026-09-22/comparison-retry1/INVALID.txt",
+        "sha256": "AFDD9EF1331FE7CBDDE6A3DD533C10808324AD22262333194D9382065B78EFC4"
+      }
+    },
+    {
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Package interference >=25% for 11.2119215999264 seconds.",
+      "evidence": {
+        "path": "artifacts/empty-shifter-2026-09-22/comparison-retry2/INVALID.txt",
+        "sha256": "BEB2660ABDA0C2FB22F86A689CD0BBBC1ADFE5B329BDFB7AA7BB31750AC18CB3"
+      }
+    },
+    {
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Package interference >=25% for 10.3123110000161 seconds.",
+      "evidence": {
+        "path": "artifacts/empty-shifter-2026-09-22/comparison-retry3/INVALID.txt",
+        "sha256": "86A6060A12D65D1CB22D10E3F56193E4CC50E542B60EB9051BB2802957018096"
+      }
+    },
+    {
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Selected interference >=25% for 11.6779055000516 seconds.",
+      "evidence": {
+        "path": "artifacts/empty-shifter-2026-09-22/comparison-retry4/INVALID.txt",
+        "sha256": "FCFC7B14B270F42CA8575FE1A9D2427CEB4E0F3E31560D4B3524B5D7B7ECC5BE"
+      }
+    }
+  ],
+  "diagnosticScreen": {
+    "classification": "two-pair lores screen, not acceptance; not pooled with full comparison",
+    "samples": [
+      {
+        "Workload": "lores",
+        "Label": "R1",
+        "Fps": 360.48,
+        "MsPerFrame": 2.7740790057700844,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C1",
+        "Fps": 377.69,
+        "MsPerFrame": 2.6476740183748575,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C2",
+        "Fps": 384.96,
+        "MsPerFrame": 2.5976724854530344,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "R2",
+        "Fps": 380.75,
+        "MsPerFrame": 2.6263952724885096,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      }
+    ],
+    "evidence": {
+      "path": "artifacts/empty-shifter-2026-09-22/trial-lores-retry1/samples.json",
+      "sha256": "8B1CFCC5814BBDD802BCBE3A97C31B15B7A69196481BD65088AA13EA48CFC939"
+    },
+    "firstAttempt": {
+      "status": "INVALID / RERUN",
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Sibling interference >=25% for 10.2596248000045 seconds.",
+      "evidence": {
+        "path": "artifacts/empty-shifter-2026-09-22/trial-lores/INVALID.txt",
+        "sha256": "305B3D9EE124D2CAE5A2C451A0ED1F7F8A4FEB5287886F62C33A6C8C2AAE05EB"
+      }
+    }
+  },
+  "nativePreflightFingerprintMatches": true,
+  "steadyStateAllocations": 0,
+  "defaultLimit": "one-sided95 upper frame-time regression <=1% for every workload; earlier exceptions do not transfer",
+  "decision": {
+    "date": "2026-09-22",
+    "action": "discard",
+    "requestedBy": "owner",
+    "sourceRestoredTo": "9be9feef098c9850ee7d8e645121593551a11bb3",
+    "performanceExceptionsAccepted": false,
+    "measurementResultsUnchanged": true
+  }
+}

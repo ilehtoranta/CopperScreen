@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Version="1.0">
+  <Profiles>
+    <!-- Diagnostic collection only; never part of an FPS acceptance run. -->
+    <SystemCollector Id="CopperPmuCollector" Name="CopperLightweightPmu">
+      <BufferSize Value="1024" />
+      <Buffers Value="128" />
+    </SystemCollector>
+    <EventCollector Id="CopperRuntimeCollector" Name="CopperLightweightRuntime">
+      <BufferSize Value="256" />
+      <Buffers Value="32" />
+    </EventCollector>
+    <SystemProvider Id="CopperPmuSwitches">
+      <Keywords>
+        <Keyword Value="ProcessThread" />
+        <Keyword Value="Loader" />
+        <Keyword Value="CSwitch" />
+      </Keywords>
+    </SystemProvider>
+    <!-- Separate groups avoid relying on counter multiplexing. Strict mode
+         prevents an apparently successful trace with unavailable counters. -->
+    <HardwareCounter Id="CopperBranchCounters" Strict="true">
+      <Counters>
+        <Counter Value="TotalCycles" />
+        <Counter Value="InstructionRetired" />
+        <Counter Value="BranchInstructions" />
+        <Counter Value="BranchMispredictions" />
+      </Counters>
+      <Events><Event Value="CSwitch" /></Events>
+    </HardwareCounter>
+    <HardwareCounter Id="CopperDataCounters" Strict="true">
+      <Counters>
+        <Counter Value="TotalCycles" />
+        <Counter Value="InstructionRetired" />
+        <Counter Value="DcacheAccesses" />
+        <Counter Value="DcacheMisses" />
+      </Counters>
+      <Events><Event Value="CSwitch" /></Events>
+    </HardwareCounter>
+    <HardwareCounter Id="CopperInstructionCounters" Strict="true">
+      <Counters>
+        <Counter Value="TotalCycles" />
+        <Counter Value="InstructionRetired" />
+        <Counter Value="IcacheIssues" />
+        <Counter Value="IcacheMisses" />
+      </Counters>
+      <Events><Event Value="CSwitch" /></Events>
+    </HardwareCounter>
+    <!-- The frozen runner forces GC immediately before its measured loop.
+         Observe that boundary externally; add no engine instrumentation. -->
+    <EventProvider Id="CopperRuntimeGc" Name="e13c0d23-ccbc-4e12-931b-d9cc2eee27e4" Level="5">
+      <Keywords><Keyword Value="0x1" /></Keywords>
+    </EventProvider>
+    <Profile Id="CopperBranches.Verbose.File" Name="CopperBranches" Description="Lightweight diagnostic cycles, instructions and branch counters" LoggingMode="File" DetailLevel="Verbose">
+      <Collectors><SystemCollectorId Value="CopperPmuCollector">
+        <SystemProviderId Value="CopperPmuSwitches" />
+        <HardwareCounterId Value="CopperBranchCounters" />
+      </SystemCollectorId><EventCollectorId Value="CopperRuntimeCollector"><EventProviders><EventProviderId Value="CopperRuntimeGc" /></EventProviders></EventCollectorId></Collectors>
+    </Profile>
+    <Profile Id="CopperData.Verbose.File" Name="CopperData" Description="Lightweight diagnostic cycles, instructions and data-cache counters" LoggingMode="File" DetailLevel="Verbose">
+      <Collectors><SystemCollectorId Value="CopperPmuCollector">
+        <SystemProviderId Value="CopperPmuSwitches" />
+        <HardwareCounterId Value="CopperDataCounters" />
+      </SystemCollectorId><EventCollectorId Value="CopperRuntimeCollector"><EventProviders><EventProviderId Value="CopperRuntimeGc" /></EventProviders></EventCollectorId></Collectors>
+    </Profile>
+    <Profile Id="CopperInstructions.Verbose.File" Name="CopperInstructions" Description="Lightweight diagnostic cycles, instructions and instruction-cache counters" LoggingMode="File" DetailLevel="Verbose">
+      <Collectors><SystemCollectorId Value="CopperPmuCollector">
+        <SystemProviderId Value="CopperPmuSwitches" />
+        <HardwareCounterId Value="CopperInstructionCounters" />
+      </SystemCollectorId><EventCollectorId Value="CopperRuntimeCollector"><EventProviders><EventProviderId Value="CopperRuntimeGc" /></EventProviders></EventCollectorId></Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>

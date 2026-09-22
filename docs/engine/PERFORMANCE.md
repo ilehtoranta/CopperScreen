@@ -11,6 +11,81 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [combined CPU prefetch locality candidate](CPU_PREFETCH_LOCALITY_2026-09-22.md)
+keeps full-refill, extension-refill and retirement helpers out of common dispatch
+frames. Captured unconditional dispatch-entry initialization falls from 4,744
+to 1,016 bytes; this is code-generation evidence, not an FPS gain. CPU, engine,
+disk and native host checks pass, with one initial serial allocation-probe failure
+preserved alongside passing focused/control/candidate reruns. Six optional external
+CPU-corpus cases remain unavailable. After the owner paused Blender, the full
+six-pair comparison completed **VALID**, with all 36 identities matching, zero
+allocations and valid telemetry. Paired mean frame-time changes / one-sided 95%
+upper bounds are lores **-0.6857% / +0.9525%**, hires **-2.3723% / -0.2033%**,
+native **-20.9296% / -20.2527%**. All three workloads pass the default 1% gate.
+Native mean FPS rises from **262.76 to 332.31**, a paired **26.4696%** gain.
+The tested shared-CPU source change is now committed in CopperMod as `b59985f`
+on `codex/cpu-prefetch-locality`, with unpublished development version
+`1.4.1-locality.1`. The new local package passed CPU tests and packing; its binary
+identity is recorded separately from the original benchmark DLL. CopperScreen's
+production pin remains unchanged. No exception or package publication is included.
+
+The [native CPU dispatch/locality investigation](CPU_DISPATCH_LOCALITY_2026-09-22.md)
+identifies unconditional stack-zeroing loops in three Copper68k dispatch methods:
+4,744 bytes written per path entering all three, with 15.45% of native cycle
+samples landing in those loops. After initially blocked attempts, a one-helper
+inlining experiment now runs: instruction-body initialization drops from 2,864
+to 1,776 bytes, with 104 bytes in the extracted helper. Rebuilt control and candidate
+native fingerprints match, as do candidate lores and hires, all with zero measured
+allocations. The subsequent [complete candidate validation and comparison](CPU_PREFETCH_BOUNDARY_2026-09-22.md)
+passes 1,499 CPU tests (six external-corpus skips), 669 engine diagnostics on rerun,
+74 disk tests and all 95 host tests including native replays. The first benchmark
+attempt was invalidated by package interference; the fresh second series is
+VALID, with 36 matching identities, zero allocations and valid telemetry.
+Paired mean frame-time changes / one-sided 95% upper bounds are lores **+2.7629% /
++6.5470%**, hires **+0.8059% / +4.4964%**, native **-3.6202% / -1.5164%**.
+Native passes; lores requires acceptance and hires is inconclusive. The candidate
+does not meet the default 1% gate. No exception has been granted; production code
+and the package pin remain unchanged.
+
+The [hardware-counter investigation](MICROARCHITECTURE_2026-09-22.md) completed nine
+captures of the accepted engine after authorized Windows elevation. All full
+fingerprints match, allocations are zero and traces report zero lost events.
+Branch mispredictions are 0.405–0.575% of branches; native execution has higher
+named cache-event rates. Two counter windows have substantial sibling-CPU activity,
+so their IPC is explicitly qualified. This is diagnostic evidence, not a speedup,
+FPS acceptance result or proof of maximum efficiency. No engine change is retained.
+
+The [2026-09-22 execution profile](PROFILE_2026-09-22.md) samples current-source
+lores, hires and native Lemmings execution using the accepted frozen build.
+It identifies device/video, bitplane and native CPU dispatch costs. All complete
+fingerprints match and measured allocations are zero. This is diagnostic
+attribution only, not a new FPS baseline, speedup or acceptance comparison.
+The subsequent [device/video optimization trials](VIDEO_OPTIMIZATION_TRIALS_2026-09-22.md)
+retained no runtime change: completed short comparisons did not establish a gain,
+and Windows Application Control blocked the final trial and native host checks.
+The accepted engine source was restored; no new acceptance or waiver is implied.
+
+The follow-up [operation-count investigation](OPTIMIZATION_TARGETS_2026-09-22.md)
+identifies specific redundant work: zero-state bitplane shifts and equal-target
+clock advancement. All three diagnostic workload fingerprints match. Baseline
+generated code confirms repeated shifter stores and shows that clock advancement
+is already inlined. These are quantified candidates, not demonstrated speedups;
+the extended Copper counters remain unavailable after application-control blocks.
+
+The [discarded empty-shifter candidate](EMPTY_SHIFTER_OPTIMIZATION_2026-09-22.md) tested
+the first measured target. Release build, 669 engine diagnostics and all three
+complete workload fingerprints pass, with zero measured allocations. Its short
+lores screen is diagnostic evidence only. The complete six-pair comparison is now
+**VALID**, with all 36 full identities matching, zero allocations and valid telemetry.
+Paired mean frame-time changes / one-sided 95% upper bounds are lores **+2.1054% /
++6.6078%**, hires **-0.7078% / +0.9404%**, native Lemmings **-0.5652% / +1.0573%**.
+Hires passes; lores is ACCEPTANCE_REQUIRED and native is INCONCLUSIVE. The candidate
+does not pass the owner's 1% gate. The owner requested its removal on 2026-09-22;
+the runtime change was reverted and no exception was granted.
+Five earlier invalid attempts remain excluded, including the attempt stopped
+after 35 samples. No samples were dropped or pooled. The requested 5% gain is not
+achieved. The measurements remain evidence of a discarded experiment.
+
 The [running-read WORDSYNC correction](DISK_LIVE_WORDSYNC.md#complete-comparison--2026-09-22)
 has a **valid complete** comparison against accepted `c92b16b`, using the unchanged
 pinned [live-WORDSYNC comparison v1](../../scripts/run-lightweight-live-wordsync-comparison-v1.ps1).

@@ -1,0 +1,1538 @@
+{
+  "date": "2026-09-22",
+  "classification": "DIAGNOSTIC hardware-counter observations, not a performance acceptance test or demonstrated optimization",
+  "status": "COMPLETE nine captures and validated counter windows; CPU-specific cache-event mapping and stall attribution remain unverified",
+  "sourceCommit": "9be9feef098c9850ee7d8e645121593551a11bb3",
+  "engineUnchanged": true,
+  "host": "Ryzen 5 5600X; Windows 10.0.26200; LP2, sibling LP3, Normal priority",
+  "tool": "Windows Performance Recorder 10.0.26100; tracerpt 10.0.26100.5074; Python standard-library XML/CSV analysis",
+  "method": "Eight-second middle of mandatory intersection between the final forced generation-2 GC boundary, process exit and shortest duration consistent with rounded FPS. Per-CPU CSwitch deltas attributed to outgoing main thread. Partial boundary slices excluded; no counter discontinuities or missing counters inside window. Order read from trace PmcCtrConfig. Counters include kernel/interrupt execution in the attributed slices. Generic cache events are not assigned an independently verified cache level or stall penalty. Three counter groups recorded separately, one observation each; no confidence interval. No concurrent builds, tests or offline analysis during the nine captures.",
+  "scripts": [
+    {
+      "path": "scripts/collect-lightweight-pmu.ps1",
+      "sha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628"
+    },
+    {
+      "path": "scripts/lightweight-pmu.wprp",
+      "sha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E"
+    },
+    {
+      "path": "artifacts/pmu-2026-09-22/extract.py",
+      "sha256": "06C4E9FE365A022D1C58BDEAC2DBE2011C3B042770B674B1BD14AF96FF2666B6"
+    },
+    {
+      "path": "artifacts/pmu-2026-09-22/analyze.py",
+      "sha256": "4B67E09B8BEB0BC7339E6DF65DA852DAC970D7213F7496871E0CFC2824F353CF"
+    },
+    {
+      "path": "artifacts/pmu-2026-09-22/repair-gc-metadata.py",
+      "sha256": "916922EBF6C227F245696A3F819B6CC3534B87C163597FA6DCB54F9C9B4042F1"
+    },
+    {
+      "path": "artifacts/pmu-2026-09-22/report.py",
+      "sha256": "404233C782DB91E792758EB6D646A39AB0FA1C29566C64F7C956C72DE48D6591"
+    }
+  ],
+  "records": [
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-hires-Branches",
+      "analysis": {
+        "workload": "hires",
+        "counterGroup": "Branches",
+        "pid": 59764,
+        "mainThread": 54920,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 4.769200086593628,
+        "windowStartAfterProcessSeconds": 10.8834810256958,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 20.00440788269043,
+        "runnerScheduledSeconds": 7.7576963901519775,
+        "completeIntervals": 93,
+        "counterOrder": [
+          "BranchInstructions",
+          "BranchMispredictions",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "BranchInstructions": 31020505101,
+          "BranchMispredictions": 125637562,
+          "InstructionRetired": 144690088800,
+          "TotalCycles": 35692753004
+        },
+        "cyclesPerInstruction": 0.24668415991738613,
+        "instructionsPerCycle": 4.053766566669288,
+        "instructionsPerScheduledSecond": 18651166728.267056,
+        "errors": {},
+        "BranchInstructionsPerThousandInstructions": 214.39274354084162,
+        "BranchMispredictionsPerThousandInstructions": 0.8683218252334088,
+        "branchMissPercent": 0.4050145592115128
+      },
+      "telemetry": {
+        "samples": 6,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 1.0,
+        "siblingMaxPercent": 3.0,
+        "packageMeanPercent": 11.166666666666666,
+        "packageMaxPercent": 13.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "hires",
+        "counterGroup": "Branches",
+        "instance": "CopperPmu-84755042b0bd431285817e81d795c53f",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "arguments": [
+          "--synthetic-paula-dma",
+          "--hires",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "startedUtc": "2026-09-22T14:47:35.2863942Z",
+        "runnerPid": 59764,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "703A3FDD3934DC22C2008218381698C43788BD67AA7B5AE36BDEE377FC98D9F0",
+        "runnerStartedUtc": "2026-09-22T14:47:35.5028572Z",
+        "runnerEndedUtc": "2026-09-22T14:48:00.5004352Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=356,14 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "92B4167ED7DB480F0B95A129CC825C45FBFB0BB7F53B17B1E5513827D2D11919",
+        "analysis.json": "50104D839AE740095C2478DD16B6B44715532DCBE07405662E5FB50A7C7763B0",
+        "metadata.json": "019F7E7D74212EBF3EB77540E2A49F2B0E8E71B736C05170E2EF497F935091D9",
+        "switches.csv": "7236D7733B7A0BE9B7DC0BC394E586AE171E658A1F39634A241B932593D0BA12",
+        "host-load.json": "621BD19424665147842F08C9C09FA491B5AEBDB7D094F20359F3C48F970EE994",
+        "summary.txt": "F21F53B1DAB4117D76BFCFE152AEA9A3FB3E016D2DC455868303CA775540FFBB"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-hires-Data",
+      "analysis": {
+        "workload": "hires",
+        "counterGroup": "Data",
+        "pid": 78180,
+        "mainThread": 35780,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 4.793251991271973,
+        "windowStartAfterProcessSeconds": 11.567014694213867,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 21.325624704360962,
+        "runnerScheduledSeconds": 7.918876886367798,
+        "completeIntervals": 433,
+        "counterOrder": [
+          "DcacheAccesses",
+          "DcacheMisses",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "DcacheAccesses": 57699683632,
+          "DcacheMisses": 90810915,
+          "InstructionRetired": 143600998808,
+          "TotalCycles": 36339421071
+        },
+        "cyclesPerInstruction": 0.2530582751697096,
+        "instructionsPerCycle": 3.9516589581169224,
+        "instructionsPerScheduledSecond": 18134010778.12013,
+        "errors": {},
+        "DcacheAccessesPerThousandInstructions": 401.8055870847157,
+        "DcacheMissesPerThousandInstructions": 0.6323835889290551
+      },
+      "telemetry": {
+        "samples": 6,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 2.3333333333333335,
+        "siblingMaxPercent": 8.0,
+        "packageMeanPercent": 22.666666666666668,
+        "packageMaxPercent": 27.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "hires",
+        "counterGroup": "Data",
+        "instance": "CopperPmu-17e3635a2c814e909db57e94995ecfb6",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "arguments": [
+          "--synthetic-paula-dma",
+          "--hires",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "startedUtc": "2026-09-22T14:48:04.7406371Z",
+        "runnerPid": 78180,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "E25CCF940348928A6D92A0177780ABFAB691556F6AEDF7AF1E7A3CEB28D5CA0A",
+        "runnerStartedUtc": "2026-09-22T14:48:04.9577209Z",
+        "runnerEndedUtc": "2026-09-22T14:48:31.2983014Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=334,31 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "5ECABF4F9E0D64CB19778ACB6F0124D0500202B1D4EF3FE8BAF71B8A01308D20",
+        "analysis.json": "9410F86CB2B4B6B004CD45F33DFDA72CF6EF54322DD79219311885CE32D386E4",
+        "metadata.json": "3C93AE17E7C01989EDA85E4E2B3E1F1435F84EB8551B8331D0D804513A0043F3",
+        "switches.csv": "89950501535169EC2581DD77374D1E05C28CC1D004CAAD058250D43AECEBB4D6",
+        "host-load.json": "F1EFD6268FB3977904FAEE66663D547996BAED9E6CE6510F966ACD8BCE607B8B",
+        "summary.txt": "D8BE8512A6EAF4F79D35003F27D9A854582372962EBF569E68A091CD883B1572"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-hires-Instructions",
+      "analysis": {
+        "workload": "hires",
+        "counterGroup": "Instructions",
+        "pid": 55476,
+        "mainThread": 67752,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 5.006734132766724,
+        "windowStartAfterProcessSeconds": 11.404510498046875,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 20.57308602333069,
+        "runnerScheduledSeconds": 7.8614280223846436,
+        "completeIntervals": 168,
+        "counterOrder": [
+          "IcacheIssues",
+          "IcacheMisses",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "IcacheIssues": 2957779004,
+          "IcacheMisses": 593274,
+          "InstructionRetired": 143473010279,
+          "TotalCycles": 36189546249
+        },
+        "cyclesPerInstruction": 0.25223940153360697,
+        "instructionsPerCycle": 3.9644876808303304,
+        "instructionsPerScheduledSecond": 18250247902.858704,
+        "errors": {},
+        "IcacheIssuesPerThousandInstructions": 20.615577788799815,
+        "IcacheMissesPerThousandInstructions": 0.0041350913237709975
+      },
+      "telemetry": {
+        "samples": 7,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 2.7142857142857144,
+        "siblingMaxPercent": 10.0,
+        "packageMeanPercent": 14.285714285714286,
+        "packageMaxPercent": 17.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "hires",
+        "counterGroup": "Instructions",
+        "instance": "CopperPmu-9ad5fa226e604131bacdae0aa3b3a46d",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "arguments": [
+          "--synthetic-paula-dma",
+          "--hires",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "startedUtc": "2026-09-22T14:48:36.1525121Z",
+        "runnerPid": 55476,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "1FD0D3A9F36CA1B0B2CEB36C32821DE382FB94ACF3A3147EA0A912A0E76AE43F",
+        "runnerStartedUtc": "2026-09-22T14:48:36.3861980Z",
+        "runnerEndedUtc": "2026-09-22T14:49:02.1883399Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=346,41 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "4717CE17CB6C2724F66E7D8F03932B424F83331954070972830C25A82CFACEBF",
+        "analysis.json": "2C0A45E8DD00F0999BEA1FD6C6AAA4CA5F9CBC72A97606569815F3F2D9FDDBBA",
+        "metadata.json": "B640DD4B5DCE5372EC0D4F193C79ABC5DE6A98F081194E7B93565621789BA751",
+        "switches.csv": "1EC761ED02E1D4D817242F0A3FA59EC7313F9997B42853C5270DE079455206B3",
+        "host-load.json": "1D92306AD6A42B126FD4F4837B63E5F39A8955E2F66D35B67BBEAB4025808238",
+        "summary.txt": "C870797AEC387E4BFAFA246334A81C6FE9727CCC324A752A151EAEDA4CC11CFE"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-lemmings-Branches",
+      "analysis": {
+        "workload": "lemmings",
+        "counterGroup": "Branches",
+        "pid": 28496,
+        "mainThread": 61684,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 50.33278203010559,
+        "windowStartAfterProcessSeconds": 54.85114407539368,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 16.82112717628479,
+        "runnerScheduledSeconds": 7.846179962158203,
+        "completeIntervals": 951,
+        "counterOrder": [
+          "BranchInstructions",
+          "BranchMispredictions",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "BranchInstructions": 18586671101,
+          "BranchMispredictions": 100232724,
+          "InstructionRetired": 91343419281,
+          "TotalCycles": 36183627603
+        },
+        "cyclesPerInstruction": 0.39612736076463495,
+        "instructionsPerCycle": 2.524440619475828,
+        "instructionsPerScheduledSecond": 11641769589.984613,
+        "errors": {},
+        "BranchInstructionsPerThousandInstructions": 203.48122773707183,
+        "BranchMispredictionsPerThousandInstructions": 1.0973174070882306,
+        "branchMissPercent": 0.5392720592909576
+      },
+      "telemetry": {
+        "samples": 7,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 39.57142857142857,
+        "siblingMaxPercent": 56.0,
+        "packageMeanPercent": 22.571428571428573,
+        "packageMaxPercent": 35.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "lemmings",
+        "counterGroup": "Branches",
+        "instance": "CopperPmu-9dfd9322d2dc4cd6bc230d4319e1ffa6",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+        "arguments": [
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen/CopperScreen.Lightweight.Tests/Workloads/lemmings-native-level1.json",
+          "--warmup",
+          "10920",
+          "--frames",
+          "3600"
+        ],
+        "startedUtc": "2026-09-22T14:49:06.4388252Z",
+        "runnerPid": 28496,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "D548F10A7E3F83A12C806671557BF226E7C859EA01A122BB72C95262F85CD5F0",
+        "runnerStartedUtc": "2026-09-22T14:49:06.6605562Z",
+        "runnerEndedUtc": "2026-09-22T14:50:14.0298434Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=211,40 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "D92932FC0925B679D98FEC54E22BF9533302C81C27620289A255B65782554F53",
+        "analysis.json": "B07F95A057D3E394ED8BFCC648D82D6734354D731003A2E13714DA61F4069C84",
+        "metadata.json": "7FF57CC3F153C3E8302938524123CB2A49F4F7CBE99ED8B4F4ED66D7FF06A435",
+        "switches.csv": "28518EAB7A394693275183CD7C8140ADF08CBA4DA572886F3DA9187E0772F49E",
+        "host-load.json": "FE667474C3BE9FCF6C647051F2DEE8A95DA6E40F1CC908A3DA1348D446FE8DD7",
+        "summary.txt": "B7654A9CD1AED50BB1F8B256C818E3BAB87689AEF3C79749737B962D2F6D3279"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-lemmings-Data",
+      "analysis": {
+        "workload": "lemmings",
+        "counterGroup": "Data",
+        "pid": 25736,
+        "mainThread": 37940,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 47.81196904182434,
+        "windowStartAfterProcessSeconds": 50.75040102005005,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 13.661852836608887,
+        "runnerScheduledSeconds": 7.863649606704712,
+        "completeIntervals": 65,
+        "counterOrder": [
+          "DcacheAccesses",
+          "DcacheMisses",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "DcacheAccesses": 53087831316,
+          "DcacheMisses": 297299617,
+          "InstructionRetired": 110610367708,
+          "TotalCycles": 36536742669
+        },
+        "cyclesPerInstruction": 0.3303193310545106,
+        "instructionsPerCycle": 3.0273735321744644,
+        "instructionsPerScheduledSecond": 14066034632.785685,
+        "errors": {},
+        "DcacheAccessesPerThousandInstructions": 479.9534837109159,
+        "DcacheMissesPerThousandInstructions": 2.6878096796933217
+      },
+      "telemetry": {
+        "samples": 6,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 6.166666666666667,
+        "siblingMaxPercent": 15.0,
+        "packageMeanPercent": 12.666666666666666,
+        "packageMaxPercent": 16.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "lemmings",
+        "counterGroup": "Data",
+        "instance": "CopperPmu-74775a0e17444050a337f14856664d8d",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+        "arguments": [
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen/CopperScreen.Lightweight.Tests/Workloads/lemmings-native-level1.json",
+          "--warmup",
+          "10920",
+          "--frames",
+          "3600"
+        ],
+        "startedUtc": "2026-09-22T14:50:19.9838412Z",
+        "runnerPid": 25736,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "865643E011E67AD1C0A1527770B75089F7D6D54BED07B3605224B08B5C406D04",
+        "runnerStartedUtc": "2026-09-22T14:50:20.1985469Z",
+        "runnerEndedUtc": "2026-09-22T14:51:21.8871533Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=259,56 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "111B1AD552B7DFBD0A9DFCEEB1C14740331458696918B32214FFD74197F077EE",
+        "analysis.json": "3EA0ED7D18B52B28630F6254330B1F5621D8534F42AB6954515C7AC9A8D8B747",
+        "metadata.json": "9481BE28B2B381CD40A140A4771657D10D6CFF505E156C2F655601D13B00DFA2",
+        "switches.csv": "96C6AD9942E3E23E3A203C9EA441BAB06104607227D60F37A18C938F0DE6102C",
+        "host-load.json": "3750BE5927F9B5FEA1E519B8D5089C6A6365DBC21BE490AC6139EEBB86E20582",
+        "summary.txt": "CD7B7C8175D5A88F24EC492051F953DC3B961BED0713C3936BD3C6D2E762C4FC"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-lemmings-Instructions",
+      "analysis": {
+        "workload": "lemmings",
+        "counterGroup": "Instructions",
+        "pid": 27536,
+        "mainThread": 39612,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 49.30263686180115,
+        "windowStartAfterProcessSeconds": 52.25511407852173,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 13.688371896743774,
+        "runnerScheduledSeconds": 7.91876482963562,
+        "completeIntervals": 83,
+        "counterOrder": [
+          "IcacheIssues",
+          "IcacheMisses",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "IcacheIssues": 6217462429,
+          "IcacheMisses": 23974112,
+          "InstructionRetired": 110966469576,
+          "TotalCycles": 36801881687
+        },
+        "cyclesPerInstruction": 0.33164866673346494,
+        "instructionsPerCycle": 3.015239017389649,
+        "instructionsPerScheduledSecond": 14013103301.25135,
+        "errors": {},
+        "IcacheIssuesPerThousandInstructions": 56.03010037858069,
+        "IcacheMissesPerThousandInstructions": 0.21604825395999763
+      },
+      "telemetry": {
+        "samples": 6,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 9.166666666666666,
+        "siblingMaxPercent": 22.0,
+        "packageMeanPercent": 12.833333333333334,
+        "packageMaxPercent": 18.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "lemmings",
+        "counterGroup": "Instructions",
+        "instance": "CopperPmu-2082e101cb2d4c27a827f181a8ab81d7",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+        "arguments": [
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen/CopperScreen.Lightweight.Tests/Workloads/lemmings-native-level1.json",
+          "--warmup",
+          "10920",
+          "--frames",
+          "3600"
+        ],
+        "startedUtc": "2026-09-22T14:51:26.1954768Z",
+        "runnerPid": 27536,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "1F1A06416044F023F938FC00FC23D0A57AE5D49EF81F9D534923E46920CD485A",
+        "runnerStartedUtc": "2026-09-22T14:51:26.4038443Z",
+        "runnerEndedUtc": "2026-09-22T14:52:29.6112119Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=259,05 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "C0991B26588BFE2BDC8111C110FF68BFB7296BF8890C6B63864821040270043B",
+        "analysis.json": "0DEB1BF900BEFC751899448117D911F8133D14D3DC8B5812082885515331CFA4",
+        "metadata.json": "E27DC3C2735F03686F2C0681A31E93394855ABB1B8BC74BB7BF81DEE334BEA93",
+        "switches.csv": "ECE7A18538176D29CE10BBECE5650F80D8038E8DF5F56B804BD410F6F4E884C6",
+        "host-load.json": "ACCAC1C02D4DB627DE970AD91B05C501AE42A257E38E14CF786A93CEB4F30C87",
+        "summary.txt": "0FDF31240C3685574477ED8C7D18E57D25D43D33E32B1D92CFB869C8784883F4"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-lores-Branches",
+      "analysis": {
+        "workload": "lores",
+        "counterGroup": "Branches",
+        "pid": 30864,
+        "mainThread": 43812,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 4.627565145492554,
+        "windowStartAfterProcessSeconds": 9.874566555023193,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 18.27315044403076,
+        "runnerScheduledSeconds": 7.844426155090332,
+        "completeIntervals": 141,
+        "counterOrder": [
+          "BranchInstructions",
+          "BranchMispredictions",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "BranchInstructions": 30891741717,
+          "BranchMispredictions": 177624769,
+          "InstructionRetired": 137138299821,
+          "TotalCycles": 35980524317
+        },
+        "cyclesPerInstruction": 0.26236670838098214,
+        "instructionsPerCycle": 3.8114591831060447,
+        "instructionsPerScheduledSecond": 17482260283.884434,
+        "errors": {},
+        "BranchInstructionsPerThousandInstructions": 225.25976884153806,
+        "BranchMispredictionsPerThousandInstructions": 1.2952236481846795,
+        "branchMissPercent": 0.5749911113048427
+      },
+      "telemetry": {
+        "samples": 6,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 0.6666666666666666,
+        "siblingMaxPercent": 4.0,
+        "packageMeanPercent": 11.0,
+        "packageMaxPercent": 20.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "lores",
+        "counterGroup": "Branches",
+        "instance": "CopperPmu-ad1a5fc4741c451782377a2cfcd7d207",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "arguments": [
+          "--synthetic-paula-dma",
+          "--wide-output",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "startedUtc": "2026-09-22T14:46:09.1869099Z",
+        "runnerPid": 30864,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "241ECDDF7355607F79D9EF6E88C13835D831202E6AF28848AEBCA37A8E788FF4",
+        "runnerStartedUtc": "2026-09-22T14:46:09.4551179Z",
+        "runnerEndedUtc": "2026-09-22T14:46:32.5764975Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=389,53 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "945514BA0ED498C67E43C9F02615FD334C17417A6D393E33B8E26A87DBD2E278",
+        "analysis.json": "DD1959B15EE278174C1F8F10734BE00D06E2A838BB1555652EE8AA44B6103175",
+        "metadata.json": "23298EB329564C15620AD8A4F9B4CB26171A21BA4A5A31C25E13616BB313F622",
+        "switches.csv": "355A109CDB32F79FA4F76CBCEC72EC57EBB098304663AEC9751073CC91F0DBB5",
+        "host-load.json": "1329FE468E74E1F244449D274FC20C2884954C13ECF98DBE38D436783508A410",
+        "summary.txt": "2C4E36AC24470042DE78ED44E2802670C8660E61573C6D6D9F2286B54F1A65CC"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-lores-Data",
+      "analysis": {
+        "workload": "lores",
+        "counterGroup": "Data",
+        "pid": 24332,
+        "mainThread": 38964,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 4.62034797668457,
+        "windowStartAfterProcessSeconds": 10.146611452102661,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 18.829110622406006,
+        "runnerScheduledSeconds": 7.811468124389648,
+        "completeIntervals": 125,
+        "counterOrder": [
+          "DcacheAccesses",
+          "DcacheMisses",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "DcacheAccesses": 55830572644,
+          "DcacheMisses": 159200588,
+          "InstructionRetired": 135943535688,
+          "TotalCycles": 35872878190
+        },
+        "cyclesPerInstruction": 0.26388072083347003,
+        "instructionsPerCycle": 3.7895909820220646,
+        "instructionsPerScheduledSecond": 17403071167.063362,
+        "errors": {},
+        "DcacheAccessesPerThousandInstructions": 410.6894260285763,
+        "DcacheMissesPerThousandInstructions": 1.171078765858912
+      },
+      "telemetry": {
+        "samples": 7,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 1.2857142857142858,
+        "siblingMaxPercent": 7.0,
+        "packageMeanPercent": 14.142857142857142,
+        "packageMaxPercent": 38.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "lores",
+        "counterGroup": "Data",
+        "instance": "CopperPmu-8bfbe1203513461c8060f33241955213",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "arguments": [
+          "--synthetic-paula-dma",
+          "--wide-output",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "startedUtc": "2026-09-22T14:46:37.1747209Z",
+        "runnerPid": 24332,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "C22CD16701C653CC58A9D1C49A38EA78585655AFB156D09535BBF424FE3DC36E",
+        "runnerStartedUtc": "2026-09-22T14:46:37.3976575Z",
+        "runnerEndedUtc": "2026-09-22T14:47:01.0703421Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=378,13 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "62669B3E237E5DAEDD35816FD1E2DAE3C63ACAF6587E15B77973E81C56804D40",
+        "analysis.json": "45036E84B70C67A06FD8EB588D2F44273CDC529ADD333BAFBB0D334D122D7540",
+        "metadata.json": "E06FC9FE7B1A0AB1855CE214B45C0782DEA7B4DC6F43B860B574DE6B48F04AC1",
+        "switches.csv": "2A6EBE326BB53322B2940E81FCF0687EEBB47BF0D4B4CB61DD0B3A2B8F5B802F",
+        "host-load.json": "03DEFB6816D3D9A058D199623A14B3710BBBC19ABF62746A5C2D8CAC150A3B3F",
+        "summary.txt": "22E8E1DA99AB86FF4675AF5F30F7D20FA6E7F823CE5478542AA3A37D9D073BF9"
+      }
+    },
+    {
+      "evidence": "artifacts/pmu-2026-09-22/series-lores-Instructions",
+      "analysis": {
+        "workload": "lores",
+        "counterGroup": "Instructions",
+        "pid": 42572,
+        "mainThread": 38288,
+        "phaseAnchor": "final forced generation-2 GC / process-exit intersection",
+        "forcedGcCounts": [
+          2,
+          3
+        ],
+        "anchorAfterProcessSeconds": 4.669554948806763,
+        "windowStartAfterProcessSeconds": 10.764534950256348,
+        "windowSeconds": 8,
+        "guaranteedMeasuredIntersectionSeconds": 19.965957164764404,
+        "runnerScheduledSeconds": 7.7280168533325195,
+        "completeIntervals": 302,
+        "counterOrder": [
+          "IcacheIssues",
+          "IcacheMisses",
+          "InstructionRetired",
+          "TotalCycles"
+        ],
+        "counts": {
+          "IcacheIssues": 3259283463,
+          "IcacheMisses": 1349433,
+          "InstructionRetired": 124366067736,
+          "TotalCycles": 35442052785
+        },
+        "cyclesPerInstruction": 0.2849816950089245,
+        "instructionsPerCycle": 3.5089973058398853,
+        "instructionsPerScheduledSecond": 16092882572.114235,
+        "errors": {},
+        "IcacheIssuesPerThousandInstructions": 26.20717630084353,
+        "IcacheMissesPerThousandInstructions": 0.010850491814733017
+      },
+      "telemetry": {
+        "samples": 6,
+        "selectedMeanPercent": 100.0,
+        "selectedMaxPercent": 100.0,
+        "siblingMeanPercent": 16.333333333333332,
+        "siblingMaxPercent": 45.0,
+        "packageMeanPercent": 24.166666666666668,
+        "packageMaxPercent": 35.0
+      },
+      "capture": {
+        "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+        "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+        "workload": "lores",
+        "counterGroup": "Instructions",
+        "instance": "CopperPmu-00e813890f7a490f9b9f528a847c8e26",
+        "binaryHashes": {
+          "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+          "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+          "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+          "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+          "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+        },
+        "topology": [
+          {
+            "Group": 0,
+            "Cpu": 0,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 1,
+            "Core": 0,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 2,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 3,
+            "Core": 2,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 4,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 5,
+            "Core": 4,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 6,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 7,
+            "Core": 6,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 8,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 9,
+            "Core": 8,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 10,
+            "Core": 10,
+            "Efficiency": 0
+          },
+          {
+            "Group": 0,
+            "Cpu": 11,
+            "Core": 10,
+            "Efficiency": 0
+          }
+        ],
+        "affinity": 4,
+        "priority": "Normal",
+        "expectedFingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "arguments": [
+          "--synthetic-paula-dma",
+          "--wide-output",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "startedUtc": "2026-09-22T14:47:05.5593581Z",
+        "runnerPid": 42572,
+        "collectorSha256": "DAB149C04E9FCE4D6CD320CF854348653BBA06E3D969DB230C869E96B0262628",
+        "profileSha256": "00D111013D2308FB7C7277F5CD84F98C7FD5233772A66763B52E3EB18C2E462E",
+        "error": null,
+        "etlSha256": "344FE1378A0917D53F7D3F051BDA014E4A5FEB8DC620611B7E2A7EA9D769342E",
+        "runnerStartedUtc": "2026-09-22T14:47:05.8266398Z",
+        "runnerEndedUtc": "2026-09-22T14:47:30.6860145Z",
+        "runnerExitCode": 0,
+        "result": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=356,82 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      "eventsLost": 0,
+      "evidenceHashes": {
+        "capture.json": "375664F2021E67C57F3F2253059B7942733BAB57B5CE6EA245D053F859C276C9",
+        "analysis.json": "91AC71BB8DC97915AFCB6C9C6889C6ECA7865A5FF7EAD67909BF0D54D8738D25",
+        "metadata.json": "7AC42E50A89446372F52564E3506C9322E99351ECCA5B37F623A8F0C39F2BD17",
+        "switches.csv": "E0A4DA4D354E640C31CD09E84A5E3A6CD5B2CEB1E3CC7FECEE9FB23D65855DF8",
+        "host-load.json": "297A0A3E83C9136C2EBAF14D76A057CD86BEBA08116A4309E21032E67E35845A",
+        "summary.txt": "91D6AF9E20F38DC6EBD31BDB23D252CE7A70A5F2C5DB5AB629A51829A35F4E35"
+      }
+    }
+  ]
+}

@@ -1,0 +1,807 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-22",
+  "status": "CORRECTNESS_VALIDATED; PERFORMANCE_VALID_COMPLETE; GATE_PASS; CPU_SOURCE_COMMITTED; PRODUCTION_PIN_UNCHANGED",
+  "productionCodeChanged": false,
+  "productionPinChanged": false,
+  "cpuSourceBaseCommit": "ada86020ad7a9b298cd7f689c3731d8d779684d1",
+  "referenceCommit": "9be9feef098c9850ee7d8e645121593551a11bb3",
+  "change": "Exactly three AggressiveInlining -> NoInlining attributes; no executable statement or API changes. FullPrefetch(uint), TopUpPrefetchOne(out long), TopUpPrefetchAtRetirement().",
+  "sourcePatch": "docs/engine/patches/copper68k-prefetch-locality.patch",
+  "patchSha256": "7F284477B1E6B3C237B74A2B45A0FD992FD52B046EFABF28E15722FA97ED32BC",
+  "sourceSha256": "5226EBDE412921DA0244EC3A3D4E797BBC54BA77FBE5219DCAB0809619D54BA0",
+  "candidateCpuSha256": "658025CFD4ADC26C275559B6CC171220110820B412BFEE8D1B4013095F781AD4",
+  "testedCpuPaths": [
+    "runtime/Copper68k.dll",
+    "build/bin/Copper68k.Tests/release/Copper68k.dll",
+    "diagnostic-tests/bin/CopperMod.Amiga.Lightweight.Tests/release/Copper68k.dll",
+    "production/bin/CopperScreen.Lightweight.Tests/release/Copper68k.dll"
+  ],
+  "comparison": [
+    {
+      "method": "ExecuteSingleInstruction()",
+      "reference": {
+        "codeBytes": 3260,
+        "stackReservationBytes": 1360,
+        "unconditionalZeroStoreBytes": 1000
+      },
+      "candidate": {
+        "codeBytes": 2170,
+        "stackReservationBytes": 224,
+        "unconditionalZeroStoreBytes": 168
+      }
+    },
+    {
+      "method": "ExecuteInstructionBody(long)",
+      "reference": {
+        "codeBytes": 7616,
+        "stackReservationBytes": 3160,
+        "unconditionalZeroStoreBytes": 2864
+      },
+      "candidate": {
+        "codeBytes": 4620,
+        "stackReservationBytes": 392,
+        "unconditionalZeroStoreBytes": 344
+      }
+    },
+    {
+      "method": "TryExecutePlannedKind(ushort,uint,byte)",
+      "reference": {
+        "codeBytes": 10193,
+        "stackReservationBytes": 1304,
+        "unconditionalZeroStoreBytes": 880
+      },
+      "candidate": {
+        "codeBytes": 9774,
+        "stackReservationBytes": 936,
+        "unconditionalZeroStoreBytes": 504
+      }
+    }
+  ],
+  "candidateTier1Methods": {
+    "TopUpPrefetchOne(byref,byte,long,Copper68k.M68kInstructionFetchPublicationContext,bool,bool,long):long:this": {
+      "codeBytes": 3017,
+      "stackReservationBytes": 264,
+      "unconditionalZeroStoreBytes": 104,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOne(byref,byte,long,Copper68k.M68kInstructionFetchPublicationContext,bool,bool,long):long:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 133853\n; 33 inlinees with PGO data; 115 single block inlinees; 3 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 264\n       lea      rbp, [rsp+0x140]\n       xor      eax, eax\n       mov      qword ptr [rbp-0xA8], rax\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqu  ymmword ptr [rbp-0xA0], ymm4\n       vmovdqu  ymmword ptr [rbp-0x80], ymm4\n       vmovdqu  ymmword ptr [rbp-0x60], ymm4\n       mov      rbx, rcx\n       mov      r14, rdx\n       mov      esi, r8d\n       mov      rdi, r9\n       mov      r15d, dword ptr [rbp+0x40]\n \n"
+    },
+    "ExecuteSingleInstruction():int:this": {
+      "codeBytes": 2170,
+      "stackReservationBytes": 224,
+      "unconditionalZeroStoreBytes": 168,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteSingleInstruction():int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 108864\n; 7 inlinees with PGO data; 75 single block inlinees; 5 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 224\n       lea      rbp, [rsp+0x110]\n       xor      eax, eax\n       mov      qword ptr [rbp-0xE8], rax\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqu  ymmword ptr [rbp-0xE0], ymm4\n       vmovdqu  ymmword ptr [rbp-0xC0], ymm4\n       vmovdqu  ymmword ptr [rbp-0xA0], ymm4\n       vmovdqu  ymmword ptr [rbp-0x80], ymm4\n       vmovdqu  ymmword ptr [rbp-0x60], ymm4\n       mov      gword ptr [rbp+0x10], rcx\n       mov      rsi, rcx\n \n"
+    },
+    "ExecuteInstructionBody(long):int:this": {
+      "codeBytes": 4620,
+      "stackReservationBytes": 392,
+      "unconditionalZeroStoreBytes": 344,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteInstructionBody(long):int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rsp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 133259\n; 43 inlinees with PGO data; 256 single block inlinees; 1 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     r15\n       push     r14\n       push     rdi\n       push     rsi\n       push     rbp\n       push     rbx\n       sub      rsp, 392\n       vxorps   xmm4, xmm4, xmm4\n       mov      rax, -336\n       vmovdqa  xmmword ptr [rsp+rax+0x180], xmm4\n       vmovdqa  xmmword ptr [rsp+rax+0x190], xmm4\n       vmovdqa  xmmword ptr [rsp+rax+0x1A0], xmm4\n       add      rax, 48\n       jne      SHORT  -5 instr\n       mov      qword ptr [rsp+0x180], rax\n       mov      rbx, rcx\n       mov      rsi, rdx\n \n"
+    },
+    "TryExecutePlannedKind(ushort,uint,byte):byte:this": {
+      "codeBytes": 9774,
+      "stackReservationBytes": 936,
+      "unconditionalZeroStoreBytes": 504,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TryExecutePlannedKind(ushort,uint,byte):byte:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 134751\n; 73 inlinees with PGO data; 270 single block inlinees; 11 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 936\n       lea      rbp, [rsp+0x3E0]\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqa  xmmword ptr [rbp-0x250], xmm4\n       mov      rax, -480\n       vmovdqa  xmmword ptr [rbp+rax-0x60], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x50], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       add      rax, 48\n       jne      SHORT  -5 instr\n       mov      qword ptr [rbp-0x60], rax\n       mov      qword ptr [rbp-0x40], rcx\n       mov      rbx, rcx\n       mov      edi, edx\n       mov      eax, r8d\n       mov      esi, r9d\n \n"
+    },
+    "TopUpPrefetchOne():long:this": {
+      "codeBytes": 28,
+      "stackReservationBytes": 40,
+      "unconditionalZeroStoreBytes": 8,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOne():long:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rsp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 100\n; No PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       sub      rsp, 40\n       xor      eax, eax\n       mov      qword ptr [rsp+0x20], rax\n \n"
+    },
+    "TopUpPrefetchOne(byref):long:this": {
+      "codeBytes": 2814,
+      "stackReservationBytes": 696,
+      "unconditionalZeroStoreBytes": 0,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOne(byref):long:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 100\n; No PGO data\n; 28 inlinees with PGO data; 107 single block inlinees; 3 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 696\n       lea      rbp, [rsp+0x2F0]\n       mov      rbx, rcx\n       mov      r14, rdx\n \n"
+    },
+    "TopUpPrefetchAtRetirement():this": {
+      "codeBytes": 4174,
+      "stackReservationBytes": 968,
+      "unconditionalZeroStoreBytes": 104,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchAtRetirement():this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 1856224\n; 38 inlinees with PGO data; 164 single block inlinees; 3 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 968\n       lea      rbp, [rsp+0x400]\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqu  ymmword ptr [rbp-0x350], ymm4\n       vmovdqu  ymmword ptr [rbp-0x330], ymm4\n       vmovdqu  ymmword ptr [rbp-0x310], ymm4\n       xor      eax, eax\n       mov      qword ptr [rbp-0x2F0], rax\n       mov      rbx, rcx\n \n"
+    },
+    "FullPrefetch(uint):long:this": {
+      "codeBytes": 3683,
+      "stackReservationBytes": 968,
+      "unconditionalZeroStoreBytes": 272,
+      "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:FullPrefetch(uint):long:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 72944\n; 35 inlinees with PGO data; 141 single block inlinees; 3 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 968\n       lea      rbp, [rsp+0x400]\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqa  xmmword ptr [rbp-0x350], xmm4\n       vmovdqa  xmmword ptr [rbp-0x340], xmm4\n       mov      rax, -240\n       vmovdqa  xmmword ptr [rbp+rax-0x240], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x230], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x220], xmm4\n       add      rax, 48\n       jne      SHORT  -5 instr\n       mov      rbx, rcx\n       mov      esi, edx\n \n"
+    }
+  },
+  "replays": [
+    {
+      "file": "lemmings-C-jit.log",
+      "sha256": "06B8A3925B342CE8CBBE50877812FD09996498EF6797C2266C0D6A6E9138DD93",
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+      "timingUse": "None: correctness/disassembly only. Formal acceptance samples are recorded separately under performance."
+    },
+    {
+      "file": "lores-C-verify.log",
+      "sha256": "DD98C8C6B1259C8848C401ABED887297D26D143A225C5A5BF4C8058D62A560B7",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "timingUse": "None: correctness/disassembly only. Formal acceptance samples are recorded separately under performance."
+    },
+    {
+      "file": "hires-C-verify.log",
+      "sha256": "BA0792051833BFA6D9309F6E63356FDCABACFD849C9A8F2FF2A3DC82AE3DF4B0",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "timingUse": "None: correctness/disassembly only. Formal acceptance samples are recorded separately under performance."
+    },
+    {
+      "file": "lemmings-C-verify.log",
+      "sha256": "809E6575998923AF71E84A172C6D91C715972C742754FEB11C3E674A37BFC9DA",
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+      "timingUse": "None: correctness/disassembly only. Formal acceptance samples are recorded separately under performance."
+    }
+  ],
+  "tests": {
+    "cpu": {
+      "path": "cpu-results/cpu.trx",
+      "sha256": "FDA20E4EDEA46076E48473A61DCAFE7856A3E78C907BF138ADE12EC5ADE649EE",
+      "counters": {
+        "total": "1505",
+        "executed": "1499",
+        "passed": "1499",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "engineInitial": {
+      "path": "engine-results/engine.trx",
+      "sha256": "7C7A8C198CAB1B86E7F10E5D27F15F5E1713F43E59D666B48F6E1080F7BB398D",
+      "counters": {
+        "total": "669",
+        "executed": "669",
+        "passed": "668",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "serialFocused": {
+      "path": "engine-results/serial-candidate.trx",
+      "sha256": "DD09770396F6F2DDF8C60F733639BBE3440A7D8AFA6404FB682AA37072A047E4",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "engineControl": {
+      "path": "engine-results/engine-control.trx",
+      "sha256": "67A1B67DF4A2C2050E60889612E09A732D839F887E444CDFABCA9DDF069A42ED",
+      "counters": {
+        "total": "669",
+        "executed": "669",
+        "passed": "669",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "engineCandidate": {
+      "path": "engine-results/engine-candidate-rerun.trx",
+      "sha256": "55A7798F3CF3B5C137CAC062C4D8FDF65D66E0F5CDE03C89D2828F3A5EC612DE",
+      "counters": {
+        "total": "669",
+        "executed": "669",
+        "passed": "669",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "disk": {
+      "path": "disk-results/disk.trx",
+      "sha256": "E06DC7C83D2555C69C7439980CF00116AD3FA79F167C6DE59D572262FCB985C4",
+      "counters": {
+        "total": "74",
+        "executed": "74",
+        "passed": "74",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "hostNative": {
+      "path": "host-results/host-native.trx",
+      "sha256": "9D83EDB878CA73D171A2C31472A0CB4EF72F02B29F50EE1B4926085530BBC43E",
+      "counters": {
+        "total": "95",
+        "executed": "95",
+        "passed": "95",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  },
+  "builds": {
+    "productionRelease": "PASS: zero warnings/errors; accepted package pin",
+    "engineDiagnosticRelease": "PASS: zero warnings/errors; separate outputs",
+    "cpuRelease": "PASS: two NU1902 occurrences for existing Microsoft.Build.Tasks.Git 10.0.300 dependency; zero errors"
+  },
+  "transientFailure": "Initial engine serial allocation probe reported 7928 bytes. Focused candidate, full accepted-CPU control, and full candidate rerun passed. This test advances hardware without executing CPU instructions; precise transient allocation origin unresolved. Original failure retained, assertions unchanged.",
+  "unavailableCoverage": "Six optional external CPU-corpus tests; native host tests all ran.",
+  "performance": {
+    "status": "VALID_COMPLETE",
+    "gatePassed": true,
+    "ownerResumed": "Owner reported Blender paused and explicitly requested the benchmark after initially deferring it.",
+    "gate": "One-sided 95% upper paired frame-time regression <=1% for EACH workload; no inherited waiver.",
+    "protocol": "scripts/run-lightweight-cpu-locality-comparison-v1.ps1",
+    "protocolSha256": "6B56522C9D5921BACF59EDADDE399294D87995E325969E59215137C072343970",
+    "hostLoadPolicySha256": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6",
+    "logicalProcessor": 2,
+    "protectedSibling": 3,
+    "priority": "Normal",
+    "studentTCriticalDf5": 2.015048,
+    "pairOrder": [
+      "R1",
+      "C1",
+      "C2",
+      "R2",
+      "R3",
+      "C3",
+      "C4",
+      "R4",
+      "R5",
+      "C5",
+      "C6",
+      "R6"
+    ],
+    "sampleCount": 36,
+    "fingerprintsMatch": true,
+    "zeroAllocations": true,
+    "concurrentBuildsTestsOrProfiling": false,
+    "summary": [
+      {
+        "workload": "lores",
+        "referenceMeanFps": 378.09833333333336,
+        "candidateMeanFps": 380.69166666666666,
+        "pairedFrameTimeRegressionPercent": -0.6857354636640506,
+        "pairedFpsGainPercent": 0.6904702631243488,
+        "upper95FrameTimeRegressionPercent": 0.9525067893835418,
+        "disposition": "PASS",
+        "pairs": [
+          {
+            "pair": 1,
+            "referenceFps": 370.44,
+            "candidateFps": 375.89,
+            "logFrameTimeRatio": -0.014605059094303827
+          },
+          {
+            "pair": 2,
+            "referenceFps": 383.17,
+            "candidateFps": 371.77,
+            "logFrameTimeRatio": 0.030203371442202528
+          },
+          {
+            "pair": 3,
+            "referenceFps": 389.43,
+            "candidateFps": 389.9,
+            "logFrameTimeRatio": -0.0012061644155387595
+          },
+          {
+            "pair": 4,
+            "referenceFps": 379.25,
+            "candidateFps": 383.51,
+            "logFrameTimeRatio": -0.011170077858002104
+          },
+          {
+            "pair": 5,
+            "referenceFps": 370.33,
+            "candidateFps": 379.85,
+            "logFrameTimeRatio": -0.025381937918308776
+          },
+          {
+            "pair": 6,
+            "referenceFps": 375.97,
+            "candidateFps": 383.23,
+            "logFrameTimeRatio": -0.019125978159879608
+          }
+        ]
+      },
+      {
+        "workload": "hires",
+        "referenceMeanFps": 341.4483333333333,
+        "candidateMeanFps": 349.71500000000003,
+        "pairedFrameTimeRegressionPercent": -2.3723498136073964,
+        "pairedFpsGainPercent": 2.429997863390197,
+        "upper95FrameTimeRegressionPercent": -0.20334789823672453,
+        "disposition": "PASS",
+        "pairs": [
+          {
+            "pair": 1,
+            "referenceFps": 344.01,
+            "candidateFps": 337.63,
+            "logFrameTimeRatio": 0.01872010538532218
+          },
+          {
+            "pair": 2,
+            "referenceFps": 336.26,
+            "candidateFps": 347.48,
+            "logFrameTimeRatio": -0.032822439140937715
+          },
+          {
+            "pair": 3,
+            "referenceFps": 354.23,
+            "candidateFps": 356.56,
+            "logFrameTimeRatio": -0.006556108965447868
+          },
+          {
+            "pair": 4,
+            "referenceFps": 343.93,
+            "candidateFps": 354.99,
+            "logFrameTimeRatio": -0.031651471769839686
+          },
+          {
+            "pair": 5,
+            "referenceFps": 340.72,
+            "candidateFps": 352.06,
+            "logFrameTimeRatio": -0.032740590002868136
+          },
+          {
+            "pair": 6,
+            "referenceFps": 329.54,
+            "candidateFps": 349.57,
+            "logFrameTimeRatio": -0.05900608511302463
+          }
+        ]
+      },
+      {
+        "workload": "lemmings",
+        "referenceMeanFps": 262.7633333333333,
+        "candidateMeanFps": 332.30833333333334,
+        "pairedFrameTimeRegressionPercent": -20.929590688814148,
+        "pairedFpsGainPercent": 26.46956158585776,
+        "upper95FrameTimeRegressionPercent": -20.25272953206659,
+        "disposition": "PASS",
+        "pairs": [
+          {
+            "pair": 1,
+            "referenceFps": 264.59,
+            "candidateFps": 333.31,
+            "logFrameTimeRatio": -0.23089152979216299
+          },
+          {
+            "pair": 2,
+            "referenceFps": 260.69,
+            "candidateFps": 334.93,
+            "logFrameTimeRatio": -0.2505895928294488
+          },
+          {
+            "pair": 3,
+            "referenceFps": 266.81,
+            "candidateFps": 335.63,
+            "logFrameTimeRatio": -0.22947256813287062
+          },
+          {
+            "pair": 4,
+            "referenceFps": 262.83,
+            "candidateFps": 328.06,
+            "logFrameTimeRatio": -0.22168908313795763
+          },
+          {
+            "pair": 5,
+            "referenceFps": 263.81,
+            "candidateFps": 333.1,
+            "logFrameTimeRatio": -0.23321359812920503
+          },
+          {
+            "pair": 6,
+            "referenceFps": 257.85,
+            "candidateFps": 328.82,
+            "logFrameTimeRatio": -0.24313246808576286
+          }
+        ]
+      }
+    ],
+    "samples": [
+      {
+        "Workload": "lores",
+        "Label": "R1",
+        "Fps": 370.44,
+        "MsPerFrame": 2.699492495410863,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C1",
+        "Fps": 375.89,
+        "MsPerFrame": 2.6603527627763444,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C2",
+        "Fps": 371.77,
+        "MsPerFrame": 2.689835113107567,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "R2",
+        "Fps": 383.17,
+        "MsPerFrame": 2.609807657175666,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "R3",
+        "Fps": 389.43,
+        "MsPerFrame": 2.567855583801967,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C3",
+        "Fps": 389.9,
+        "MsPerFrame": 2.564760194921775,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C4",
+        "Fps": 383.51,
+        "MsPerFrame": 2.6074939375765953,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "R4",
+        "Fps": 379.25,
+        "MsPerFrame": 2.6367831245880025,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "R5",
+        "Fps": 370.33,
+        "MsPerFrame": 2.7002943320821973,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C5",
+        "Fps": 379.85,
+        "MsPerFrame": 2.6326181387389758,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C6",
+        "Fps": 383.23,
+        "MsPerFrame": 2.609399055397542,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "R6",
+        "Fps": 375.97,
+        "MsPerFrame": 2.659786685107854,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "R1",
+        "Fps": 344.01,
+        "MsPerFrame": 2.9068922415046075,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "C1",
+        "Fps": 337.63,
+        "MsPerFrame": 2.9618221129638953,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "C2",
+        "Fps": 347.48,
+        "MsPerFrame": 2.877863474156786,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "R2",
+        "Fps": 336.26,
+        "MsPerFrame": 2.973889252364242,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "R3",
+        "Fps": 354.23,
+        "MsPerFrame": 2.823024588544166,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "C3",
+        "Fps": 356.56,
+        "MsPerFrame": 2.8045770697778774,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "C4",
+        "Fps": 354.99,
+        "MsPerFrame": 2.816980760021409,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "R4",
+        "Fps": 343.93,
+        "MsPerFrame": 2.907568400546623,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "R5",
+        "Fps": 340.72,
+        "MsPerFrame": 2.9349612585113873,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "C5",
+        "Fps": 352.06,
+        "MsPerFrame": 2.840424927569164,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "C6",
+        "Fps": 349.57,
+        "MsPerFrame": 2.8606573790657093,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "hires",
+        "Label": "R6",
+        "Fps": 329.54,
+        "MsPerFrame": 3.0345329853735508,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "R1",
+        "Fps": 264.59,
+        "MsPerFrame": 3.7794323292641447,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "C1",
+        "Fps": 333.31,
+        "MsPerFrame": 3.000210014701029,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "C2",
+        "Fps": 334.93,
+        "MsPerFrame": 2.9856985041650494,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "R2",
+        "Fps": 260.69,
+        "MsPerFrame": 3.8359737619394685,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "R3",
+        "Fps": 266.81,
+        "MsPerFrame": 3.747985457816424,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "C3",
+        "Fps": 335.63,
+        "MsPerFrame": 2.979471441766231,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "C4",
+        "Fps": 328.06,
+        "MsPerFrame": 3.0482228860574283,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "R4",
+        "Fps": 262.83,
+        "MsPerFrame": 3.8047407069208234,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "R5",
+        "Fps": 263.81,
+        "MsPerFrame": 3.790606876160873,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "C5",
+        "Fps": 333.1,
+        "MsPerFrame": 3.0021014710297207,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "C6",
+        "Fps": 328.82,
+        "MsPerFrame": 3.0411775439450155,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Workload": "lemmings",
+        "Label": "R6",
+        "Fps": 257.85,
+        "MsPerFrame": 3.8782237735117313,
+        "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      }
+    ],
+    "telemetry": {
+      "samples": 1503,
+      "seconds": 1656.7626005001948,
+      "longestOverThresholdSeconds": {
+        "Selected": 1.1293054000125267,
+        "Sibling": 1.149864399980288,
+        "Package": 3.428670199995395
+      },
+      "meanPercent": {
+        "Selected": 1.451708248312372,
+        "Sibling": 3.0966054608036493,
+        "Package": 5.988301442589249
+      },
+      "maximumPercent": {
+        "Selected": 36.986301369863014,
+        "Sibling": 43.83561643835616,
+        "Package": 50.52366429275252
+      }
+    }
+  },
+  "intermediateTrials": [
+    {
+      "name": "full-refill-only",
+      "root": "artifacts/cpu-refill-boundary-2026-09-22",
+      "status": "native disassembly identity passed; 8 completed diagnostic synthetic samples retained; timing screen stopped with Blender active; no acceptance result"
+    },
+    {
+      "name": "full-refill-and-extension",
+      "root": "artifacts/cpu-refill-extension-boundary-2026-09-22",
+      "status": "native disassembly identity passed; no performance result"
+    }
+  ],
+  "limitations": [
+    "Lower unconditional stores in dispatch entry do not equal total removed stores: extracted helpers still execute when needed and introduce calls.",
+    "No new hardware-counter attribution was collected for this candidate.",
+    "Tier1 code shape depends on the process and runtime; these are actual captured shapes, not promises for every host.",
+    "Disassembly and preliminary-screen FPS remain diagnostic only; the separate formal series supplies the performance result."
+  ],
+  "artifacts": {
+    "root": "artifacts/cpu-prefetch-locality-2026-09-22",
+    "sha256": {
+      "build.log": "09D3EECF9317E4AC725CE4F4D10F2876FC98757A688C0A2214FAF6DC59326A06",
+      "cpu-tests.log": "ACAF157E2DB6337FC83BE0F4B89A6CF3C71A1178C2F046B89FA748616B10252B",
+      "production-build.log": "4840FF8EAF8C27689B5F9137612D7DC78D4124E652CEDFA2389C24469AF33E74",
+      "diagnostic-build.log": "1108C67CCC98C7E42EA165F566E37C8AA5C21BC78243C565F695C406607BC19D",
+      "engine-tests.log": "0BAFDF4529A8FE1EC7CDE23647470D409D3BC6D81B07E160EBD2E9D80610058A",
+      "serial-candidate.log": "1D55E1B40CCDB427066A856ECB07E8AD80AAA2205F0F183A5191D3779B93FBB5",
+      "engine-control.log": "9DE3DBCF06158303CB1DBA1C8409802CC09AFB4DED57FC533268E66C496EA1BA",
+      "engine-candidate-rerun.log": "97D8D9D32A2920E61ED33CBD1E0645D5A7BB7D06A2849FA547397126B828D815",
+      "disk-tests.log": "876898E68B93BB1017DE8C1CA7B38CAC767E7460C6AF7FEA01AB80BBA72D14E7",
+      "host-native.log": "EAB755DF2A2617385DB74C0F47451594401A621793F503B381F387EEA0A8E41B",
+      "preflight.log": "1E669B8259DC1D018A8DE50EB5CF4F89BC1EE34A6B67D30EA4BC594BA9385DDE",
+      "attempt-1.log": "DF99CD8197A40BC0A3083671E01534DB7033D7066922B9EA99AEE519D0D77F5C",
+      "attempt-1/samples.json": "49069048AAA87029235D2B4D0EE2A01E4E267891971F82A54B2AA7B1A4C84FED",
+      "attempt-1/summary.json": "6398E15C7EC9B87D8C3C9A802B0CD5E6119AF437B25CB0792733368C702FE341",
+      "attempt-1/telemetry.jsonl": "2F91F469BFD7DA2C5B762D2B9145F02EB7E011F15E9DA17A4AFF2833C1391136",
+      "build-record.py": "0EB571C133715E53692008AAB91BA723ECF2997490A9917789BAA8B78D6B7C48",
+      "finish-record.py": "A93E76B27DA8A615B49AC16DBC2375CC57BCA198056C9D82B7CDA1B829D3E759",
+      "refill-jit.txt": "5C7DF0BA01C31F3590B0D99494793DA721ACF68CD42604BC1495A5E3D4DD1BAE"
+    }
+  },
+  "sourceIntegration": {
+    "sourceRepository": "https://github.com/ilehtoranta/CopperMod",
+    "sourceCommit": "b59985f682e342b9b830771c09f617bb547e4116",
+    "branch": "codex/cpu-prefetch-locality",
+    "developmentVersion": "1.4.1-locality.1",
+    "published": false,
+    "normalizedExecutableSourceMatchesCandidate": true,
+    "productionPinChanged": false,
+    "integrationCpuSha256": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+    "packageSha256": "4005DB85A1E7F288376AC65678BD28B29B30EFF811C25EC31EB6BA4533DFA8CE",
+    "cpuTestsPassed": 1499,
+    "cpuTestsUnavailable": 6,
+    "cpuTrxSha256": "A68EB5AA1D72CF0CA7171E372DAE4B8497783648058F2669A0F500E6B6A93325",
+    "packageDllMatchesTestedDll": true,
+    "packageBuild": "PASS; existing NU1902 dependency warning remains",
+    "benchmarkScope": "Original frozen candidate DLL only; rebuilt development DLL has separate provenance and no relabelled performance result.",
+    "patchFormatting": "Removed leading context lines from each hunk to avoid blank diff-context lines triggering whitespace checks; source change unchanged."
+  },
+  "originalPatchSha256": "4833A692568B8C0AE2F653BB4E49197010A638F4A5276129C51D7BFE8DE48485"
+}

@@ -1,0 +1,1751 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-22",
+  "classification": "DIAGNOSTIC WITH COMPLETED FOLLOW-UP; correctness checks passed; native performance passes, lores and hires exceed the default upper-bound gate; production unchanged",
+  "productionCodeChanged": false,
+  "sourceCommit": "ada86020ad7a9b298cd7f689c3731d8d779684d1",
+  "sourceCoreSha256": "DDF5ED894073244453B0E3FC46E865259932A8519590D03025CD17E929A2BFCD",
+  "package": "Copper68k 1.4.1-trace.1",
+  "capture": {
+    "classification": "DIAGNOSTIC ONLY; PMU payloads require analysis; not an FPS acceptance run",
+    "status": "REPLAY_MATCHED; COUNTER ANALYSIS PENDING",
+    "workload": "lemmings",
+    "counterGroup": "Locality",
+    "instance": "CopperPmu-3f89590ede18467a935bb3be6d976608",
+    "binaryHashes": {
+      "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "CopperMod.Amiga.Lightweight.dll": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+      "CopperDisk.dll": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F",
+      "CopperMod.Amiga.Lightweight.Runner.dll": "40B979416A38D99E0342C366D34D385D8EABF7C6C737EDFF332044EA41BBE2DF",
+      "Copper68k.dll": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+    },
+    "topology": [
+      {
+        "Group": 0,
+        "Cpu": 0,
+        "Core": 0,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 1,
+        "Core": 0,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 2,
+        "Core": 2,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 3,
+        "Core": 2,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 4,
+        "Core": 4,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 5,
+        "Core": 4,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 6,
+        "Core": 6,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 7,
+        "Core": 6,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 8,
+        "Core": 8,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 9,
+        "Core": 8,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 10,
+        "Core": 10,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 11,
+        "Core": 10,
+        "Efficiency": 0
+      }
+    ],
+    "affinity": 4,
+    "priority": "Normal",
+    "expectedFingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+    "arguments": [
+      "--rom",
+      "C:/Data/ROM/Kickstart_13.rom",
+      "--adf",
+      "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "--input-script",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen/CopperScreen.Lightweight.Tests/Workloads/lemmings-native-level1.json",
+      "--warmup",
+      "10920",
+      "--frames",
+      "3600"
+    ],
+    "startedUtc": "2026-09-22T15:21:24.6287883Z",
+    "runnerPid": 9092,
+    "collectorSha256": "02928F3BC1E11497BA04E66672B3624547BE8590E20A2AD67FCD6FEA2AC4309A",
+    "profileSha256": "CB700778FFF2F21416E8EB5301C4FBDD993322AAF9E040B345452A1FD331B8ED",
+    "error": null,
+    "etlSha256": "20F9F8D1F30FE5CD25EDA2FD6B735194F92E0A86BEFB9EBCAD14103AA47C2F3F",
+    "runnerStartedUtc": "2026-09-22T15:21:24.8794351Z",
+    "runnerEndedUtc": "2026-09-22T15:22:29.3143355Z",
+    "runnerExitCode": 0,
+    "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=255,12 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+  },
+  "window": {
+    "pid": 9092,
+    "mainThread": 57632,
+    "eventsLost": 0,
+    "windowStartAfterProcessSeconds": 53.37398099899292,
+    "windowSeconds": 8,
+    "phaseAnchorAfterProcessSeconds": 50.31286597251892,
+    "forcedGcCounts": [
+      2,
+      3
+    ],
+    "mainThreadSamplesAll": {
+      "9": 25206,
+      "19": 17110
+    },
+    "mainThreadSamplesWindow": {
+      "19": 2194,
+      "9": 2277
+    },
+    "unresolvedWindow": {
+      "9": 16,
+      "19": 11
+    },
+    "samplesTotal": 109882,
+    "methodsRecorded": 3191,
+    "lateMethodsInWindow": 0,
+    "dispatchCodeVersions": [
+      {
+        "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+        "start": 140714310366624,
+        "size": 7616,
+        "samples": 558
+      },
+      {
+        "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+        "start": 140714310377056,
+        "size": 10193,
+        "samples": 166
+      },
+      {
+        "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+        "start": 140714310362704,
+        "size": 3260,
+        "samples": 160
+      }
+    ],
+    "windowStartUtc": "2026-09-22T15:23:18.253481+00:00",
+    "windowEndUtc": "2026-09-22T15:23:26.253481+00:00",
+    "processStartUtc": "2026-09-22T15:22:24.879500+00:00",
+    "phaseAnchorUtc": "2026-09-22T15:23:15.192366+00:00"
+  },
+  "counterConfiguration": [
+    {
+      "time": 1790090544.81336,
+      "opcode": 73,
+      "data": {
+        "Source": "       9",
+        "NewInterval": "    8192",
+        "OldInterval": "    8192",
+        "SourceName": "IcacheMisses"
+      },
+      "hex": ""
+    },
+    {
+      "time": 1790090544.81336,
+      "opcode": 73,
+      "data": {
+        "Source": "      19",
+        "NewInterval": "16777216",
+        "OldInterval": "16777216",
+        "SourceName": "TotalCycles"
+      },
+      "hex": ""
+    },
+    {
+      "time": 1790090609.439877,
+      "opcode": 34,
+      "data": {},
+      "hex": "5770725f496e697469617465645f52756e646f776e00"
+    },
+    {
+      "time": 1790090609.730873,
+      "opcode": 74,
+      "data": {
+        "Source": "       9",
+        "NewInterval": "    8192",
+        "OldInterval": "    8192",
+        "SourceName": "IcacheMisses"
+      },
+      "hex": ""
+    },
+    {
+      "time": 1790090609.730873,
+      "opcode": 74,
+      "data": {
+        "Source": "      19",
+        "NewInterval": "16777216",
+        "OldInterval": "16777216",
+        "SourceName": "TotalCycles"
+      },
+      "hex": ""
+    },
+    {
+      "time": 1790090609.747441,
+      "opcode": 34,
+      "data": {},
+      "hex": "47656e6572616c00"
+    },
+    {
+      "time": 1790090609.747442,
+      "opcode": 34,
+      "data": {},
+      "hex": "4e6f206465736372697074696f6e2070726f766964656400"
+    },
+    {
+      "time": 1790090609.747443,
+      "opcode": 34,
+      "data": {},
+      "hex": "436f707065724c6f63616c69747900"
+    }
+  ],
+  "profileXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<WindowsPerformanceRecorder Version=\"1.0\"><Profiles>\n  <SystemCollector Id=\"Kernel\" Name=\"CopperCpuLocality\"><BufferSize Value=\"1024\"/><Buffers Value=\"128\"/></SystemCollector>\n  <EventCollector Id=\"Runtime\" Name=\"CopperCpuMethods\"><BufferSize Value=\"256\"/><Buffers Value=\"64\"/></EventCollector>\n  <SystemProvider Id=\"Cpu\"><Keywords><Keyword Value=\"ProcessThread\"/><Keyword Value=\"Loader\"/><Keyword Value=\"PmcProfile\"/></Keywords></SystemProvider>\n  <HardwareCounter Id=\"Samples\" Strict=\"true\"><SampledCounters>\n    <SampledCounter Value=\"IcacheMisses\" Interval=\"8192\"/>\n    <SampledCounter Value=\"TotalCycles\" Interval=\"16777216\"/>\n  </SampledCounters></HardwareCounter>\n  <EventProvider Id=\"Clr\" Name=\"e13c0d23-ccbc-4e12-931b-d9cc2eee27e4\" Level=\"5\"><Keywords><Keyword Value=\"0x39\"/></Keywords></EventProvider>\n  <Profile Id=\"CopperLocality.Verbose.File\" Name=\"CopperLocality\" Description=\"Diagnostic sampled instruction-cache misses and cycles with JIT method ranges\" LoggingMode=\"File\" DetailLevel=\"Verbose\">\n    <Collectors><SystemCollectorId Value=\"Kernel\"><SystemProviderId Value=\"Cpu\"/><HardwareCounterId Value=\"Samples\"/></SystemCollectorId><EventCollectorId Value=\"Runtime\"><EventProviders><EventProviderId Value=\"Clr\"/></EventProviders></EventCollectorId></Collectors>\n  </Profile>\n</Profiles></WindowsPerformanceRecorder>\n",
+  "hostTelemetry": {
+    "tracerptProcessStartMinusCollectorSeconds": 60.000064849853516,
+    "alignment": "Elapsed since process start; converted ETW wall time is not directly comparable to collector UTC.",
+    "samples": [
+      {
+        "utc": "2026-09-22T15:22:18.6926182Z",
+        "selectedPercent": 100,
+        "siblingPercent": 0
+      },
+      {
+        "utc": "2026-09-22T15:22:19.9740866Z",
+        "selectedPercent": 100,
+        "siblingPercent": 0
+      },
+      {
+        "utc": "2026-09-22T15:22:21.2522444Z",
+        "selectedPercent": 100,
+        "siblingPercent": 2
+      },
+      {
+        "utc": "2026-09-22T15:22:22.5245880Z",
+        "selectedPercent": 100,
+        "siblingPercent": 0
+      },
+      {
+        "utc": "2026-09-22T15:22:23.8083912Z",
+        "selectedPercent": 100,
+        "siblingPercent": 0
+      },
+      {
+        "utc": "2026-09-22T15:22:25.0753621Z",
+        "selectedPercent": 100,
+        "siblingPercent": 0
+      }
+    ],
+    "siblingMeanPercent": 0.3333333333333333,
+    "siblingMaxPercent": 2
+  },
+  "dispatchMethods": [
+    {
+      "method": "ExecuteSingleInstruction",
+      "qualifiedMethod": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+      "codeBytes": 3260,
+      "stackReservationBytes": 1360,
+      "unconditionalZeroStoreBytes": 1000,
+      "loopOffsetsHex": [
+        "0x40",
+        "0x58"
+      ],
+      "prologueEndOffsetHex": "0x5f",
+      "prologueDisassembly": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteSingleInstruction():int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 80368\n; 10 inlinees with PGO data; 108 single block inlinees; 5 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 0x550\n       lea      rbp, [rsp+0x580]\n       xor      eax, eax\n       mov      qword ptr [rbp-0x428], rax\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqa  xmmword ptr [rbp-0x420], xmm4\n       vmovdqa  xmmword ptr [rbp-0x410], xmm4\n       mov      rax, -960\n       vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       add      rax, 48\n       jne      SHORT  -5 instr\n       mov      gword ptr [rbp+0x10], rcx\n       mov      rsi, rcx\n \n",
+      "loadedRange": {
+        "time": 1790090552.764177,
+        "start": 140714310362704,
+        "size": 3260,
+        "id": "0x7FFA9A4FEAE8",
+        "name": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+        "signature": "instance int32  ()",
+        "flags": 526,
+        "data": {
+          "MethodID": "0x7FFA9A4FEAE8",
+          "ModuleID": "0x7FFA9A45F458",
+          "MethodStartAddress": "0x7FFA9A7BE650",
+          "MethodSize": "0xCBC",
+          "MethodToken": "0x600074A",
+          "MethodFlags": "526",
+          "MethodNamespace": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]",
+          "MethodName": "ExecuteSingleInstruction",
+          "MethodSignature": "instance int32  ()",
+          "ClrInstanceID": "5",
+          "ReJITID": "0x2"
+        }
+      },
+      "samples": {
+        "19": {
+          "methodTotal": 92,
+          "loop": 69,
+          "loopPercentOfMainThread": 3.144940747493163,
+          "prologue": 74,
+          "offsets": [
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 82,
+              "samples": 37
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 70,
+              "samples": 23
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 76,
+              "samples": 9
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 312,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 0,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 324,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 492,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 171,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 396,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 206,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 429,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 449,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 289,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 366,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 243,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 54,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 2000,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 17,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 232,
+              "samples": 1
+            }
+          ]
+        },
+        "9": {
+          "methodTotal": 68,
+          "loop": 42,
+          "loopPercentOfMainThread": 1.844532279314888,
+          "prologue": 50,
+          "offsets": [
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 82,
+              "samples": 19
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 70,
+              "samples": 19
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 312,
+              "samples": 5
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 76,
+              "samples": 4
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 0,
+              "samples": 4
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 34,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 206,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 363,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 167,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 2000,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 171,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 128,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 324,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 328,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 17,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 214,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 374,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 332,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 2010,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+              "offset": 54,
+              "samples": 1
+            }
+          ]
+        }
+      },
+      "secondReplay": {
+        "codeBytes": 3260,
+        "prologueWithBytes": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteSingleInstruction():int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 2116096\n; 10 inlinees with PGO data; 108 single block inlinees; 5 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC50050000       sub      rsp, 0x550\n       488DAC2480050000     lea      rbp, [rsp+0x580]\n       33C0                 xor      eax, eax\n       488985D8FBFFFF       mov      qword ptr [rbp-0x428], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA5E0FBFFFF     vmovdqa  xmmword ptr [rbp-0x420], xmm4\n       C5F97FA5F0FBFFFF     vmovdqa  xmmword ptr [rbp-0x410], xmm4\n       48B840FCFFFFFFFFFFFF mov      rax, -960\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       C5F97F6405E0         vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       48894D10             mov      gword ptr [rbp+0x10], rcx\n       488BF1               mov      rsi, rcx\n \n"
+      }
+    },
+    {
+      "method": "ExecuteInstructionBody",
+      "qualifiedMethod": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+      "codeBytes": 7616,
+      "stackReservationBytes": 3160,
+      "unconditionalZeroStoreBytes": 2864,
+      "loopOffsetsHex": [
+        "0x3a",
+        "0x52"
+      ],
+      "prologueEndOffsetHex": "0x5c",
+      "prologueDisassembly": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteInstructionBody(long):int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 90731\n; 50 inlinees with PGO data; 397 single block inlinees; 1 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 0xC58\n       lea      rbp, [rsp+0xC90]\n       xor      eax, eax\n       mov      qword ptr [rbp-0xB68], rax\n       vxorps   xmm4, xmm4, xmm4\n       vmovdqa  xmmword ptr [rbp-0xB60], xmm4\n       mov      rax, -0xB10\n       vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       add      rax, 48\n       jne      SHORT  -5 instr\n       mov      qword ptr [rbp-0x40], rax\n       mov      rbx, rcx\n       mov      rsi, rdx\n \n",
+      "loadedRange": {
+        "time": 1790090552.812176,
+        "start": 140714310366624,
+        "size": 7616,
+        "id": "0x7FFA9A4FF3E8",
+        "name": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+        "signature": "instance int32  (int64)",
+        "flags": 526,
+        "data": {
+          "MethodID": "0x7FFA9A4FF3E8",
+          "ModuleID": "0x7FFA9A45F458",
+          "MethodStartAddress": "0x7FFA9A7BF5A0",
+          "MethodSize": "0x1DC0",
+          "MethodToken": "0x60007A9",
+          "MethodFlags": "526",
+          "MethodNamespace": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]",
+          "MethodName": "ExecuteInstructionBody",
+          "MethodSignature": "instance int32  (int64)",
+          "ClrInstanceID": "5",
+          "ReJITID": "0x2"
+        }
+      },
+      "samples": {
+        "19": {
+          "methodTotal": 309,
+          "loop": 211,
+          "loopPercentOfMainThread": 9.617137648131267,
+          "prologue": 215,
+          "offsets": [
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 64,
+              "samples": 88
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 76,
+              "samples": 83
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 70,
+              "samples": 40
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1491,
+              "samples": 19
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1506,
+              "samples": 7
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1391,
+              "samples": 5
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1499,
+              "samples": 4
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1394,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 336,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 384,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 439,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 0,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 445,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1428,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1095,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 293,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 986,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1447,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 588,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 810,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1593,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1525,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1384,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1380,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 994,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 228,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 663,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 483,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 108,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 878,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 966,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 962,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1477,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1398,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 937,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1042,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1474,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 894,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1317,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 864,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2777,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2861,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 849,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1585,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1341,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1079,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 887,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1122,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1356,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 634,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 766,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 952,
+              "samples": 1
+            }
+          ]
+        },
+        "9": {
+          "methodTotal": 249,
+          "loop": 180,
+          "loopPercentOfMainThread": 7.905138339920948,
+          "prologue": 183,
+          "offsets": [
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 64,
+              "samples": 79
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 76,
+              "samples": 63
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 70,
+              "samples": 38
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1506,
+              "samples": 4
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1491,
+              "samples": 4
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1391,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 396,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 431,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1317,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 381,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1394,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 588,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 228,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1333,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 0,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1356,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2436,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1042,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2174,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1474,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2302,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 439,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 531,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1561,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1593,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1258,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2201,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 547,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1337,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1352,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 500,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2159,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1601,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1087,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 293,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1384,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2657,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 336,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1310,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 149,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 743,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1327,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1499,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2429,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2170,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1262,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2821,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 1,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 2878,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+              "offset": 384,
+              "samples": 1
+            }
+          ]
+        }
+      },
+      "secondReplay": {
+        "codeBytes": 9068,
+        "prologueWithBytes": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteInstructionBody(long):int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 2110315\n; 61 inlinees with PGO data; 459 single block inlinees; 1 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC480D0000       sub      rsp, 0xD48\n       488DAC24800D0000     lea      rbp, [rsp+0xD80]\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA520F3FFFF     vmovdqa  xmmword ptr [rbp-0xCE0], xmm4\n       48B870F3FFFFFFFFFFFF mov      rax, -0xC90\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       C5F97F6405E0         vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       488945C0             mov      qword ptr [rbp-0x40], rax\n       488BD9               mov      rbx, rcx\n       488BF2               mov      rsi, rdx\n \n"
+      }
+    },
+    {
+      "method": "TryExecutePlannedKind",
+      "qualifiedMethod": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+      "codeBytes": 10193,
+      "stackReservationBytes": 1304,
+      "unconditionalZeroStoreBytes": 880,
+      "loopOffsetsHex": [
+        "0x32",
+        "0x4a"
+      ],
+      "prologueEndOffsetHex": "0x5d",
+      "prologueDisassembly": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TryExecutePlannedKind(ushort,uint,byte):byte:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 101117\n; 78 inlinees with PGO data; 276 single block inlinees; 7 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       push     rbp\n       push     r15\n       push     r14\n       push     r13\n       push     r12\n       push     rdi\n       push     rsi\n       push     rbx\n       sub      rsp, 0x518\n       lea      rbp, [rsp+0x550]\n       xor      eax, eax\n       mov      qword ptr [rbp-0x3C8], rax\n       vxorps   xmm4, xmm4, xmm4\n       mov      rax, -864\n       vmovdqa  xmmword ptr [rbp+rax-0x60], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x50], xmm4\n       vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       add      rax, 48\n       jne      SHORT  -5 instr\n       mov      qword ptr [rbp-0x60], rax\n       mov      qword ptr [rbp-0x40], rcx\n       mov      rbx, rcx\n       mov      edi, edx\n       mov      eax, r8d\n       mov      esi, r9d\n \n",
+      "loadedRange": {
+        "time": 1790090552.864279,
+        "start": 140714310377056,
+        "size": 10193,
+        "id": "0x7FFA9A4FF418",
+        "name": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+        "signature": "instance value class PlannedRetireMode<!0,!1>  (unsigned int16,unsigned int32,value class Copper68k.M68kOpcodePlanKind)",
+        "flags": 526,
+        "data": {
+          "MethodID": "0x7FFA9A4FF418",
+          "ModuleID": "0x7FFA9A45F458",
+          "MethodStartAddress": "0x7FFA9A7C1E60",
+          "MethodSize": "0x27D1",
+          "MethodToken": "0x60007AB",
+          "MethodFlags": "526",
+          "MethodNamespace": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]",
+          "MethodName": "TryExecutePlannedKind",
+          "MethodSignature": "instance value class PlannedRetireMode<!0,!1>  (unsigned int16,unsigned int32,value class Copper68k.M68kOpcodePlanKind)",
+          "ClrInstanceID": "5",
+          "ReJITID": "0x2"
+        }
+      },
+      "samples": {
+        "19": {
+          "methodTotal": 70,
+          "loop": 59,
+          "loopPercentOfMainThread": 2.6891522333637194,
+          "prologue": 65,
+          "offsets": [
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 56,
+              "samples": 28
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 68,
+              "samples": 22
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 62,
+              "samples": 9
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 0,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 241,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 19,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 1,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 244,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 162,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 179,
+              "samples": 1
+            }
+          ]
+        },
+        "9": {
+          "methodTotal": 96,
+          "loop": 71,
+          "loopPercentOfMainThread": 3.1181379007465964,
+          "prologue": 76,
+          "offsets": [
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 68,
+              "samples": 36
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 56,
+              "samples": 30
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 62,
+              "samples": 5
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 9250,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 0,
+              "samples": 3
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 870,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 177,
+              "samples": 2
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 1,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 3679,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 227,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 120,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 9257,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 6390,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 588,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 499,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 93,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 19,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 289,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 373,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 130,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 97,
+              "samples": 1
+            },
+            {
+              "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+              "offset": 10010,
+              "samples": 1
+            }
+          ]
+        }
+      },
+      "secondReplay": {
+        "codeBytes": 10107,
+        "prologueWithBytes": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TryExecutePlannedKind(ushort,uint,byte):byte:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 2163634\n; 73 inlinees with PGO data; 277 single block inlinees; 12 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC08050000       sub      rsp, 0x508\n       488DAC2440050000     lea      rbp, [rsp+0x540]\n       33C0                 xor      eax, eax\n       48898548FCFFFF       mov      qword ptr [rbp-0x3B8], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       48B8A0FCFFFFFFFFFFFF mov      rax, -864\n       C5F97F6405B0         vmovdqa  xmmword ptr [rbp+rax-0x50], xmm4\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       488945B0             mov      qword ptr [rbp-0x50], rax\n       48894DC0             mov      qword ptr [rbp-0x40], rcx\n       488BD9               mov      rbx, rcx\n       8BFA                 mov      edi, edx\n       418BC0               mov      eax, r8d\n       418BF1               mov      esi, r9d\n \n"
+      }
+    }
+  ],
+  "zeroBytesPerThreeMethodPath": 4744,
+  "combinedLoopSamples": {
+    "19": 339,
+    "9": 293
+  },
+  "topCycleMethods": [
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+      "samples": 309,
+      "percentOfAllMainSamples": 14.083865086599817,
+      "codeSize": 7616
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices",
+      "samples": 284,
+      "percentOfAllMainSamples": 12.944393801276208,
+      "codeSize": 3052
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+      "samples": 92,
+      "percentOfAllMainSamples": 4.193254329990884,
+      "codeSize": 3260
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedBranch",
+      "samples": 87,
+      "percentOfAllMainSamples": 3.965360072926162,
+      "codeSize": 6899
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightBitplanes.Step",
+      "samples": 87,
+      "percentOfAllMainSamples": 3.965360072926162,
+      "codeSize": 950
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedTestByteDisplacement",
+      "samples": 84,
+      "percentOfAllMainSamples": 3.828623518687329,
+      "codeSize": 3615
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightVideo.RenderHiresCck",
+      "samples": 77,
+      "percentOfAllMainSamples": 3.509571558796718,
+      "codeSize": 1523
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightClock.AdvanceTo",
+      "samples": 72,
+      "percentOfAllMainSamples": 3.2816773017319965,
+      "codeSize": 744
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchOne",
+      "samples": 72,
+      "percentOfAllMainSamples": 3.2816773017319965,
+      "codeSize": 3017
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+      "samples": 70,
+      "percentOfAllMainSamples": 3.1905195989061075,
+      "codeSize": 10193
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].BranchToAndRefillTarget",
+      "samples": 66,
+      "percentOfAllMainSamples": 3.00820419325433,
+      "codeSize": 7399
+    },
+    {
+      "method": "System.SpanHelpers.Memmove",
+      "samples": 56,
+      "percentOfAllMainSamples": 2.552415679124886,
+      "codeSize": 325
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightBitplanes.CompleteOutput",
+      "samples": 52,
+      "percentOfAllMainSamples": 2.3701002734731085,
+      "codeSize": 422
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightCopper.Step",
+      "samples": 51,
+      "percentOfAllMainSamples": 2.324521422060164,
+      "codeSize": 238
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ResolvePlannedEa",
+      "samples": 42,
+      "percentOfAllMainSamples": 1.9143117593436645,
+      "codeSize": 7338
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightVideo.ApplyDueInputs",
+      "samples": 41,
+      "percentOfAllMainSamples": 1.8687329079307202,
+      "codeSize": 1213
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase",
+      "samples": 40,
+      "percentOfAllMainSamples": 1.8231540565177755,
+      "codeSize": 908
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedMove",
+      "samples": 36,
+      "percentOfAllMainSamples": 1.6408386508659982,
+      "codeSize": 15215
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightCopper.AdvanceControlInput",
+      "samples": 35,
+      "percentOfAllMainSamples": 1.5952597994530537,
+      "codeSize": 443
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightVideo.ShiftPlayfieldPairWithReload",
+      "samples": 34,
+      "percentOfAllMainSamples": 1.5496809480401095,
+      "codeSize": 1513
+    }
+  ],
+  "topNamedIcacheMethods": [
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices",
+      "samples": 272,
+      "percentOfAllMainSamples": 11.945542380324989,
+      "codeSize": 3052
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody",
+      "samples": 249,
+      "percentOfAllMainSamples": 10.935441370223979,
+      "codeSize": 7616
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ResolvePlannedEa",
+      "samples": 121,
+      "percentOfAllMainSamples": 5.314009661835748,
+      "codeSize": 7338
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].DecodeLine4",
+      "samples": 115,
+      "percentOfAllMainSamples": 5.05050505050505,
+      "codeSize": 19957
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedMove",
+      "samples": 106,
+      "percentOfAllMainSamples": 4.655248133509003,
+      "codeSize": 15215
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind",
+      "samples": 96,
+      "percentOfAllMainSamples": 4.216073781291173,
+      "codeSize": 10193
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchOne",
+      "samples": 81,
+      "percentOfAllMainSamples": 3.557312252964427,
+      "codeSize": 3017
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction",
+      "samples": 68,
+      "percentOfAllMainSamples": 2.9863855950812472,
+      "codeSize": 3260
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightVideo.RenderHiresCck",
+      "samples": 59,
+      "percentOfAllMainSamples": 2.5911286780852,
+      "codeSize": 1523
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightClock.AdvanceTo",
+      "samples": 58,
+      "percentOfAllMainSamples": 2.547211242863417,
+      "codeSize": 744
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightBitplanes.Step",
+      "samples": 53,
+      "percentOfAllMainSamples": 2.3276240667545016,
+      "codeSize": 950
+    },
+    {
+      "method": "System.SpanHelpers.Memmove",
+      "samples": 46,
+      "percentOfAllMainSamples": 2.0202020202020203,
+      "codeSize": 325
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightCopper.Step",
+      "samples": 46,
+      "percentOfAllMainSamples": 2.0202020202020203,
+      "codeSize": 238
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ResolveEa",
+      "samples": 42,
+      "percentOfAllMainSamples": 1.844532279314888,
+      "codeSize": 7688
+    },
+    {
+      "method": "Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedBranch",
+      "samples": 39,
+      "percentOfAllMainSamples": 1.7127799736495388,
+      "codeSize": 6899
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightBitplanes.CompleteOutput",
+      "samples": 34,
+      "percentOfAllMainSamples": 1.4931927975406236,
+      "codeSize": 422
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightSpriteDma.Step",
+      "samples": 34,
+      "percentOfAllMainSamples": 1.4931927975406236,
+      "codeSize": 913
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightVideo.ShiftPlayfieldPairWithReload",
+      "samples": 32,
+      "percentOfAllMainSamples": 1.4053579270970575,
+      "codeSize": 1513
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteScalarFallbackQuantum",
+      "samples": 30,
+      "percentOfAllMainSamples": 1.3175230566534915,
+      "codeSize": 1351
+    },
+    {
+      "method": "CopperMod.Amiga.Lightweight.LightweightVideo.ApplyDueInputs",
+      "samples": 29,
+      "percentOfAllMainSamples": 1.2736056214317084,
+      "codeSize": 1213
+    }
+  ],
+  "secondReplay": {
+    "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=250,86 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+    "fingerprintMatched": true,
+    "purpose": "Independent disassembly with instruction bytes, not a timing comparison; Tier1 layouts differ."
+  },
+  "isolationTrial": {
+    "change": "Only TopUpPrefetchAtRetirement AggressiveInlining -> NoInlining in an archived source copy.",
+    "build": "Succeeded: zero errors, two NU1902 warnings for transitive Microsoft.Build.Tasks.Git 10.0.300.",
+    "replay": "UNAVAILABLE: Windows Application Control rejected Copper68k.dll with 0x800711C7 before emulation.",
+    "frameReductionVerified": false,
+    "correctnessVerified": false,
+    "speedupVerified": false,
+    "productionPinChanged": false,
+    "retry": {
+      "date": "2026-09-22T16:04:28.8184160Z",
+      "status": "BLOCKED_BEFORE_EMULATION",
+      "error": "0x800711C7",
+      "binarySha256": "2710185867F6E2D4B219704F6B1670BA4F012B24686284CE458B33F87B1E7E23",
+      "signatureStatus": "NotSigned",
+      "zoneIdentifierPresent": false,
+      "events": [
+        {
+          "TimeCreated": "2026-09-22T19:03:44.9225191+03:00",
+          "Id": 3077,
+          "Message": "Code Integrity determined that a process (\\Device\\HarddiskVolume3\\Program Files\\dotnet\\dotnet.exe) attempted to load \\Device\\HarddiskVolume3\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-dispatch-2026-09-22\\isolation\\runtime\\Copper68k.dll that did not meet the Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6})."
+        },
+        {
+          "TimeCreated": "2026-09-22T19:03:44.9199526+03:00",
+          "Id": 3033,
+          "Message": "Code Integrity determined that a process (\\Device\\HarddiskVolume3\\Program Files\\dotnet\\dotnet.exe) attempted to load \\Device\\HarddiskVolume3\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-dispatch-2026-09-22\\isolation\\runtime\\Copper68k.dll that did not meet the Enterprise signing level requirements."
+        },
+        {
+          "TimeCreated": "2026-09-22T19:03:44.859141+03:00",
+          "Id": 3077,
+          "Message": "Code Integrity determined that a process (\\Device\\HarddiskVolume3\\Program Files\\dotnet\\dotnet.exe) attempted to load \\Device\\HarddiskVolume3\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-dispatch-2026-09-22\\isolation\\runtime\\Copper68k.dll that did not meet the Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6})."
+        },
+        {
+          "TimeCreated": "2026-09-22T19:03:44.85648+03:00",
+          "Id": 3033,
+          "Message": "Code Integrity determined that a process (\\Device\\HarddiskVolume3\\Program Files\\dotnet\\dotnet.exe) attempted to load \\Device\\HarddiskVolume3\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-dispatch-2026-09-22\\isolation\\runtime\\Copper68k.dll that did not meet the Enterprise signing level requirements."
+        }
+      ],
+      "runnerLogSha256": "A1F92A215A83905B01EE8EBEB0BFC2B020B7C3172EED133C268EE48D12F18616"
+    }
+  },
+  "limitations": [
+    "PMU interrupt skid; sample IP is not a precise miss origin or recoverable time fraction.",
+    "One native sample window, no confidence interval or demonstrated performance gain.",
+    "Stack writes are not heap allocations or measured external-memory traffic.",
+    "JIT layout differs between runs; attribution uses method ranges and disassembly from the PMU process.",
+    "Retry confirms this helper boundary reduces common instruction-body initialization; full optimization safety and speed remain unverified."
+  ],
+  "localArtifacts": {
+    "root": "artifacts/cpu-dispatch-2026-09-22",
+    "files": {
+      "capture/counters.etl": "20F9F8D1F30FE5CD25EDA2FD6B735194F92E0A86BEFB9EBCAD14103AA47C2F3F",
+      "capture/events.xml": "0E927AFD28E23D105930B04F32826FB3C595868816EDEAE7354CB6C5487FD7E4",
+      "capture/summary.txt": "649FA7C48E2564482ED00ED449316314AF187481A1ED62D4E313EE59BBB9D715",
+      "capture/capture.json": "ABFD1F8834A7D05C78E55C19F8DDD45E1C6F4CD05D4B03FA6AF96387C140F32A",
+      "capture/host-load.json": "FD015C45AD63D7761F4AC5CD34B7F6DBDDAD7C91CEE6310195EFA95867DFF751",
+      "native-jit.txt": "AAAE67232C630C895AC271CE341245EF8A883E57780A8641E6FD3D93441B9BAD",
+      "baseline-bytes.txt": "7D36E8EFED6F33393A7C86897BF54B08CA8E70F0677603279425B8817E025F23",
+      "baseline-bytes-runner.log": "A1175F3A87DF2B87945004F0A740F79045E800D2745352C5B7E5EB23A784C9A1",
+      "locality.json": "93EC65ACE5A6D1A8202BE2B344E87E13084D421B6A4E87645152DAB6EB635B50",
+      "methods.json": "0E556F1A68B68EA7C68422B22F7C386D387E4F856AF4FE79CE5C7729097D9CDD",
+      "collect.ps1": "02928F3BC1E11497BA04E66672B3624547BE8590E20A2AD67FCD6FEA2AC4309A",
+      "locality.wprp": "CB700778FFF2F21416E8EB5301C4FBDD993322AAF9E040B345452A1FD331B8ED",
+      "launch.ps1": "1AEA03820DD2DBFD4B8F32D82BAC15FD9FEF60CE5A424F170C62B8E59B9E4AEB",
+      "analyze-locality.py": "4A9D0AA44C4D26002CB1420066C2EDC1090673817F6640A6A93179331F94FF52",
+      "build-record.py": "EBDBB64BF011D962E0DBD32F14481079E349CA5A1258570856639787736953A7",
+      "isolation/source.zip": "63278C2BD9404D98E2F088AA339993CD4D3C7BBBDEB07307A015606271001D99",
+      "isolation/source/Copper68k/M68kCore.cs": "AF6584AB7D407B1ECA5AC22F123FC41A524C34F67545B7BDA3D82C258D1D6A1A",
+      "isolation/cpu/Copper68k.dll": "2710185867F6E2D4B219704F6B1670BA4F012B24686284CE458B33F87B1E7E23",
+      "isolation/build.log": "6193619A8345A0A8A877B52A8905BBB72BE87BB2DD505D00032FD6A31D873D5F",
+      "isolation/runner.log": "A1F92A215A83905B01EE8EBEB0BFC2B020B7C3172EED133C268EE48D12F18616"
+    }
+  },
+  "successfulRetry": {
+    "date": "2026-09-22T16:16:19.859242+00:00",
+    "status": "ISOLATED EXPERIMENT COMPLETED; full fingerprints matched; performance acceptance pending",
+    "sourceChangeVerified": "Exactly one AggressiveInlining -> NoInlining attribute; archive LF differs from checkout CRLF only.",
+    "controlCoreSourceSha256": "54F7C172476C570CAAD529C06A5B3924CF6722169EAD0E8573A90658CDAF96A9",
+    "candidateCoreSourceSha256": "AF6584AB7D407B1ECA5AC22F123FC41A524C34F67545B7BDA3D82C258D1D6A1A",
+    "controlCpuSha256": "937E364338C05DAE83C264D367B1AF4E30DFC5BA5A74B01FD3241A30F2F6495A",
+    "candidateCpuSha256": "2710185867F6E2D4B219704F6B1670BA4F012B24686284CE458B33F87B1E7E23",
+    "controlDisassembly": {
+      "ExecuteSingleInstruction": {
+        "codeBytes": 3260,
+        "stackReservationBytes": 1360,
+        "unconditionalZeroStoreBytes": 1000,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteSingleInstruction():int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 111968\n; 10 inlinees with PGO data; 108 single block inlinees; 5 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC50050000       sub      rsp, 0x550\n       488DAC2480050000     lea      rbp, [rsp+0x580]\n       33C0                 xor      eax, eax\n       488985D8FBFFFF       mov      qword ptr [rbp-0x428], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA5E0FBFFFF     vmovdqa  xmmword ptr [rbp-0x420], xmm4\n       C5F97FA5F0FBFFFF     vmovdqa  xmmword ptr [rbp-0x410], xmm4\n       48B840FCFFFFFFFFFFFF mov      rax, -960\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       C5F97F6405E0         vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       48894D10             mov      gword ptr [rbp+0x10], rcx\n       488BF1               mov      rsi, rcx\n \n"
+      },
+      "ExecuteInstructionBody": {
+        "codeBytes": 7632,
+        "stackReservationBytes": 3160,
+        "unconditionalZeroStoreBytes": 2864,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteInstructionBody(long):int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 139157\n; 50 inlinees with PGO data; 397 single block inlinees; 1 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC580C0000       sub      rsp, 0xC58\n       488DAC24900C0000     lea      rbp, [rsp+0xC90]\n       33C0                 xor      eax, eax\n       48898598F4FFFF       mov      qword ptr [rbp-0xB68], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA5A0F4FFFF     vmovdqa  xmmword ptr [rbp-0xB60], xmm4\n       48B8F0F4FFFFFFFFFFFF mov      rax, -0xB10\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       C5F97F6405E0         vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       488945C0             mov      qword ptr [rbp-0x40], rax\n       488BD9               mov      rbx, rcx\n       488BF2               mov      rsi, rdx\n \n"
+      },
+      "TryExecutePlannedKind": {
+        "codeBytes": 10146,
+        "stackReservationBytes": 1304,
+        "unconditionalZeroStoreBytes": 880,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TryExecutePlannedKind(ushort,uint,byte):byte:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 167057\n; 74 inlinees with PGO data; 276 single block inlinees; 11 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC18050000       sub      rsp, 0x518\n       488DAC2450050000     lea      rbp, [rsp+0x550]\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA540FCFFFF     vmovdqa  xmmword ptr [rbp-0x3C0], xmm4\n       48B8A0FCFFFFFFFFFFFF mov      rax, -864\n       C5F97F6405B0         vmovdqa  xmmword ptr [rbp+rax-0x50], xmm4\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       48894DC0             mov      qword ptr [rbp-0x40], rcx\n       488BD9               mov      rbx, rcx\n       8BFA                 mov      edi, edx\n       418BC0               mov      eax, r8d\n       418BF1               mov      esi, r9d\n \n"
+      },
+      "TopUpPrefetchAtRetirement": {
+        "codeBytes": 4174,
+        "stackReservationBytes": 968,
+        "unconditionalZeroStoreBytes": 104,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchAtRetirement():this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 1841568\n; 38 inlinees with PGO data; 164 single block inlinees; 3 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881ECC8030000       sub      rsp, 968\n       488DAC2400040000     lea      rbp, [rsp+0x400]\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5FE7FA5B0FCFFFF     vmovdqu  ymmword ptr [rbp-0x350], ymm4\n       C5FE7FA5D0FCFFFF     vmovdqu  ymmword ptr [rbp-0x330], ymm4\n       C5FE7FA5F0FCFFFF     vmovdqu  ymmword ptr [rbp-0x310], ymm4\n       33C0                 xor      eax, eax\n       48898510FDFFFF       mov      qword ptr [rbp-0x2F0], rax\n       488BD9               mov      rbx, rcx\n \n"
+      }
+    },
+    "candidateDisassembly": {
+      "ExecuteSingleInstruction": {
+        "codeBytes": 3260,
+        "stackReservationBytes": 1360,
+        "unconditionalZeroStoreBytes": 1000,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteSingleInstruction():int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 106880\n; 10 inlinees with PGO data; 108 single block inlinees; 5 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC50050000       sub      rsp, 0x550\n       488DAC2480050000     lea      rbp, [rsp+0x580]\n       33C0                 xor      eax, eax\n       488985D8FBFFFF       mov      qword ptr [rbp-0x428], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA5E0FBFFFF     vmovdqa  xmmword ptr [rbp-0x420], xmm4\n       C5F97FA5F0FBFFFF     vmovdqa  xmmword ptr [rbp-0x410], xmm4\n       48B840FCFFFFFFFFFFFF mov      rax, -960\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       C5F97F6405E0         vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       48894D10             mov      gword ptr [rbp+0x10], rcx\n       488BF1               mov      rsi, rcx\n \n"
+      },
+      "ExecuteInstructionBody": {
+        "codeBytes": 6020,
+        "stackReservationBytes": 1912,
+        "unconditionalZeroStoreBytes": 1776,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:ExecuteInstructionBody(long):int:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 132353\n; 46 inlinees with PGO data; 295 single block inlinees; 1 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC78070000       sub      rsp, 0x778\n       488DAC24B0070000     lea      rbp, [rsp+0x7B0]\n       33C0                 xor      eax, eax\n       488985D8F8FFFF       mov      qword ptr [rbp-0x728], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5F97FA5E0F8FFFF     vmovdqa  xmmword ptr [rbp-0x720], xmm4\n       C5F97FA5F0F8FFFF     vmovdqa  xmmword ptr [rbp-0x710], xmm4\n       48B840F9FFFFFFFFFFFF mov      rax, -0x6C0\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       C5F97F6405D0         vmovdqa  xmmword ptr [rbp+rax-0x30], xmm4\n       C5F97F6405E0         vmovdqa  xmmword ptr [rbp+rax-0x20], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       488945C0             mov      qword ptr [rbp-0x40], rax\n       488BD9               mov      rbx, rcx\n       488BF2               mov      rsi, rdx\n \n"
+      },
+      "TryExecutePlannedKind": {
+        "codeBytes": 10187,
+        "stackReservationBytes": 1304,
+        "unconditionalZeroStoreBytes": 880,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TryExecutePlannedKind(ushort,uint,byte):byte:this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; partially interruptible\n; with Synthesized PGO: fgCalledCount is 157832\n; 74 inlinees with PGO data; 276 single block inlinees; 11 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881EC18050000       sub      rsp, 0x518\n       488DAC2450050000     lea      rbp, [rsp+0x550]\n       33C0                 xor      eax, eax\n       48898538FCFFFF       mov      qword ptr [rbp-0x3C8], rax\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       48B8A0FCFFFFFFFFFFFF mov      rax, -864\n       C5F97F6405A0         vmovdqa  xmmword ptr [rbp+rax-0x60], xmm4\n       C5F97F6405B0         vmovdqa  xmmword ptr [rbp+rax-0x50], xmm4\n       C5F97F6405C0         vmovdqa  xmmword ptr [rbp+rax-0x40], xmm4\n       4883C030             add      rax, 48\n       75E8                 jne      SHORT  -5 instr\n       488945A0             mov      qword ptr [rbp-0x60], rax\n       48894DC0             mov      qword ptr [rbp-0x40], rcx\n       488BD9               mov      rbx, rcx\n       8BFA                 mov      edi, edx\n       418BC0               mov      eax, r8d\n       418BF1               mov      esi, r9d\n \n"
+      },
+      "TopUpPrefetchAtRetirement": {
+        "codeBytes": 4174,
+        "stackReservationBytes": 968,
+        "unconditionalZeroStoreBytes": 104,
+        "prologue": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchAtRetirement():this (Tier1)\n; Emitting BLENDED_CODE for generic X64 + VEX on Windows\n; Tier1 code\n; optimized code\n; optimized using Synthesized PGO\n; rbp based frame\n; fully interruptible\n; with Synthesized PGO: fgCalledCount is 1787536\n; 38 inlinees with PGO data; 164 single block inlinees; 3 inlinees without PGO data\n\nG_M000_IG01:                ;; offset=0x0000\n       55                   push     rbp\n       4157                 push     r15\n       4156                 push     r14\n       4155                 push     r13\n       4154                 push     r12\n       57                   push     rdi\n       56                   push     rsi\n       53                   push     rbx\n       4881ECC8030000       sub      rsp, 968\n       488DAC2400040000     lea      rbp, [rsp+0x400]\n       C5D857E4             vxorps   xmm4, xmm4, xmm4\n       C5FE7FA5B0FCFFFF     vmovdqu  ymmword ptr [rbp-0x350], ymm4\n       C5FE7FA5D0FCFFFF     vmovdqu  ymmword ptr [rbp-0x330], ymm4\n       C5FE7FA5F0FCFFFF     vmovdqu  ymmword ptr [rbp-0x310], ymm4\n       33C0                 xor      eax, eax\n       48898510FDFFFF       mov      qword ptr [rbp-0x2F0], rax\n       488BD9               mov      rbx, rcx\n \n"
+      }
+    },
+    "replays": [
+      {
+        "log": "retry2-runner.log",
+        "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=268,04 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+        "fingerprintMatched": true,
+        "zeroMeasuredAllocations": true,
+        "sha256": "292D24331DFE54F156575D07BB2812D714485F2CC80571C85EB3741B09A9099D"
+      },
+      {
+        "log": "control-runner.log",
+        "result": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 fps=263,23 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+        "fingerprintMatched": true,
+        "zeroMeasuredAllocations": true,
+        "sha256": "7FCF0BE10667F1E8788C915B697C548741BE687751837F4A7079F0D1A721FA52"
+      },
+      {
+        "log": "candidate-lores.log",
+        "result": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=385,63 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "fingerprintMatched": true,
+        "zeroMeasuredAllocations": true,
+        "sha256": "346229F52D5E801D1412143F4F83FF82306EB3B4F5A835FD5B55CAF30C73AA49"
+      },
+      {
+        "log": "candidate-hires.log",
+        "result": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 fps=344,62 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "fingerprintMatched": true,
+        "zeroMeasuredAllocations": true,
+        "sha256": "AB5C195DE2275E6308981DBEAA227C73DD91F9E07403D2EFCDB610E42B29610C"
+      }
+    ],
+    "formalPerformanceGate": "NOT RUN; unpaired JIT diagnostic FPS is not performance evidence.",
+    "cpuSuite": "NOT RUN against the isolated CPU; workload fingerprint coverage only.",
+    "productionCodeChanged": false,
+    "productionPinChanged": false
+  },
+  "followupValidation": {
+    "status": "VALID_COMPLETE; acceptance not granted",
+    "productionPinChanged": false,
+    "record": "CPU_PREFETCH_BOUNDARY_2026-09-22.json"
+  }
+}

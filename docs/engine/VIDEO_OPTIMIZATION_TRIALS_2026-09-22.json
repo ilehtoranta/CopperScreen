@@ -1,0 +1,223 @@
+{
+  "date": "2026-09-22",
+  "baselineSource": "9be9fee",
+  "baselineEngineSha256": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+  "disposition": "No optimization retained. Completed short trials do not demonstrate a gain. Final compilation-mode trial blocked by Windows Application Control; original engine/test sources restored. No acceptance series or new performance waiver.",
+  "evidence": "artifacts/video-opt-2026-09-22",
+  "candidates": [
+    {
+      "directory": "candidate-composed-pair",
+      "engineSha256": "4E18770E5F7C5602223BA003571957E415DC1EB3EDEA13C0DB06AF14B8AD21BE"
+    },
+    {
+      "directory": "candidate-optimized-tick",
+      "engineSha256": "4B726E3B832A83774D1177160EFE7897B4C0ADEB6EE5786855CAC0B4A3A1FC4F"
+    },
+    {
+      "directory": "candidate-packed-sprites",
+      "engineSha256": "83B4301CED39A8A36793EF51A587E9959D392B5A49617247BDE376FF56A9FA50"
+    },
+    {
+      "directory": "candidate-video-step",
+      "engineSha256": "A81678EDC018F3495D8F953C111F5B29FA07B947616E5D724B323534360007A0"
+    },
+    {
+      "directory": "candidate-window",
+      "engineSha256": "CA0BE11102323695EB27976459409B11130680761F5ED11F2C85D79039EB01C3"
+    },
+    {
+      "directory": "candidate-window-inline",
+      "engineSha256": "6EE58F8179268C5A3EBF0C045BF495311704E2C51E2032B0A488DE8F064DE1C8"
+    }
+  ],
+  "trials": [
+    {
+      "trial": "trial-composed-pair-lores",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": true,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 382.42,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C1",
+          "Fps": 381.61,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C2",
+          "Fps": 374.13,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "R2",
+          "Fps": 382.59,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": 1.2315683809057605
+    },
+    {
+      "trial": "trial-optimized-tick-lores",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": false,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 386.05,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": null
+    },
+    {
+      "trial": "trial-packed-sprites-hires",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": true,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 344.35,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C1",
+          "Fps": 347.96,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C2",
+          "Fps": 351.38,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "R2",
+          "Fps": 353.16,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": -0.2684388344829357
+    },
+    {
+      "trial": "trial-packed-sprites-lores",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": true,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 382.93,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C1",
+          "Fps": 389.75,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C2",
+          "Fps": 379.37,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "R2",
+          "Fps": 389.56,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": 0.4436116487810834
+    },
+    {
+      "trial": "trial-video-step-lores",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": true,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 377.72,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C1",
+          "Fps": 370.41,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C2",
+          "Fps": 374.54,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "R2",
+          "Fps": 373.83,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": 0.886164516249596
+    },
+    {
+      "trial": "trial-window-inline-lores",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": true,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 378.24,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C1",
+          "Fps": 372.46,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C2",
+          "Fps": 386.4,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "R2",
+          "Fps": 392.07,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": 1.5096091160186405
+    },
+    {
+      "trial": "trial-window-lores",
+      "classification": "Short diagnostic only; not acceptance",
+      "complete": true,
+      "fingerprintsMatchAccepted": true,
+      "samples": [
+        {
+          "Label": "R1",
+          "Fps": 374.34,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C1",
+          "Fps": 370.78,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "C2",
+          "Fps": 376.2,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "Label": "R2",
+          "Fps": 384.67,
+          "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        }
+      ],
+      "pairedMeanFrameTimeChangePercent": 1.6037485625652521
+    }
+  ]
+}

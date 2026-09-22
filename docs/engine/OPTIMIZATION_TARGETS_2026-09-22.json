@@ -1,0 +1,277 @@
+{
+  "date": "2026-09-22",
+  "classification": "DIAGNOSTIC OPERATION COUNTS AND GENERATED CODE; no optimization or speedup measurement",
+  "sourceCommit": "9be9feef098c9850ee7d8e645121593551a11bb3",
+  "evidence": "artifacts/target-analysis-2026-09-22",
+  "method": "Single-owner counters in isolated source copy; reset after warmup; snapshot after allocation measurement. Counters perturb generated code and timings. Accepted uninstrumented build used separately for JIT disassembly.",
+  "baselineEngineSha256": "8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5",
+  "inputs": [
+    {
+      "name": "Kickstart_13.rom",
+      "sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+    },
+    {
+      "name": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "sha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59"
+    },
+    {
+      "name": "lemmings-disk2.zip",
+      "sha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A"
+    },
+    {
+      "name": "lemmings-native-level1.json",
+      "sha256": "4C6B630D3F2C9AE3AD2ADC6E361C27277EEBF23EA02B9621C0753BCFCB5A7253"
+    }
+  ],
+  "probeBinaries": [
+    {
+      "path": "artifacts/target-analysis-2026-09-22/probe/Copper68k.dll",
+      "sha256": "0B9F1B4C4AA682AEE9E9D990FCDC6347F23309A96D47FD9A5AFCDCFA191565CC"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/probe/CopperDisk.dll",
+      "sha256": "4F02010A01B314B6B385C81BF1AB608DDA0D799620105B20B986B438BB31DE8F"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/probe/CopperFloat.dll",
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/probe/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "6BE6B1732C8701C12F4C21CB9A0D87CF14C3DC0587144FCEB517B0B0B4CFB9E7"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/probe/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "CC1E0D3CEE49C05E30EFF134751520C30CC32914C234E4689F6BF6D882757CF2"
+    }
+  ],
+  "reproduction": [
+    {
+      "path": "artifacts/target-analysis-2026-09-22/source.zip",
+      "sha256": "3075BA60CD784D9ABEB5A94523F6DDB42650A284A5C7A850C7C72A769F85C31B"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/instrument.py",
+      "sha256": "CA746D437B5A388DF70B182005B97B5F5371E83CEDEFB6062E51A7CE9A89C2C9"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/counter-names.json",
+      "sha256": "B7AE2802A0B6D2DD5B534183C60A0A6AC0E20600BAA9016E0DF07696FD012CD9"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/analyze.py",
+      "sha256": "95FF577A4184A4D3FFB5F63DC794DE818026B54E2576DBBFD6DF726304C8851A"
+    },
+    {
+      "path": "artifacts/target-analysis-2026-09-22/build.log",
+      "sha256": "10F7C22AB07A5F72A9AF19285F4625643838ED2F18AFBBCC56C697E714E7FF28"
+    }
+  ],
+  "results": [
+    {
+      "workload": "lores",
+      "frames": 7200,
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "fingerprintMatches": true,
+      "log": {
+        "path": "artifacts/target-analysis-2026-09-22/lores.log",
+        "sha256": "BB441DDD9C23D7F3BCBB9ED761F25C02EF50F4A0F7FA4A967EB69BCC60CF9CE9"
+      },
+      "counts": {
+        "deviceTicks": 511560127,
+        "ciaDue": 4032,
+        "videoDue": 511560000,
+        "diskDue": 0,
+        "diskDmaDue": 0,
+        "audioDue": 20694874,
+        "bitplanesDue": 299023200,
+        "spriteDmaDue": 61056000,
+        "copperDue": 511560000,
+        "blitterDue": 492511892,
+        "spritesDue": 27763200,
+        "vblankDue": 7200,
+        "interruptDue": 7200,
+        "pendingInputChecks": 511567200,
+        "pendingInputDue": 221184000,
+        "shiftPairs": 511567200,
+        "shiftPairsWithPendingReload": 36864000,
+        "emptyShiftPairsWithoutReload": 214812000,
+        "scalarShiftPixels": 73728000,
+        "planeReloads": 221184000,
+        "zeroPlaneReloads": 1843200,
+        "renderCcks": 511567200,
+        "blankedCcks": 146311200,
+        "borderCcks": 68500800,
+        "windowCcks": 296755200,
+        "clockAdvanceCalls": 396000,
+        "clockAdvanceNoop": 194400,
+        "clockAdvanceAtMostOneCck": 194400,
+        "bitplaneMemoryReads": 221184000,
+        "spritePairCalls": 293068800,
+        "spritePairsEmptyFast": 170380800
+      },
+      "derived": {
+        "emptyShiftPairsPercent": 41.99096423695655,
+        "emptyShiftPairsPerFrame": 29835.0,
+        "redundantZeroStoresInPairShift": 429624000,
+        "noProgressAdvancePercent": 49.09090909090909,
+        "noProgressAdvancesPerFrame": 27.0
+      }
+    },
+    {
+      "workload": "hires",
+      "frames": 7200,
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "fingerprintMatches": true,
+      "log": {
+        "path": "artifacts/target-analysis-2026-09-22/hires.log",
+        "sha256": "04B441DEC96CAA3D499266E88B763445D9CC77D0A33E41D1D3756ECB5A7880C3"
+      },
+      "counts": {
+        "deviceTicks": 511560129,
+        "ciaDue": 4032,
+        "videoDue": 511560002,
+        "diskDue": 0,
+        "diskDmaDue": 0,
+        "audioDue": 20694874,
+        "bitplanesDue": 299023200,
+        "spriteDmaDue": 61056000,
+        "copperDue": 511560002,
+        "blitterDue": 492511996,
+        "spritesDue": 27763200,
+        "vblankDue": 7200,
+        "interruptDue": 7200,
+        "pendingInputChecks": 511567202,
+        "pendingInputDue": 294912000,
+        "shiftPairs": 1023134404,
+        "shiftPairsWithPendingReload": 73728000,
+        "emptyShiftPairsWithoutReload": 431467204,
+        "scalarShiftPixels": 147456000,
+        "planeReloads": 294912000,
+        "zeroPlaneReloads": 1843200,
+        "renderCcks": 511567202,
+        "blankedCcks": 146311202,
+        "borderCcks": 68500800,
+        "windowCcks": 296755200,
+        "clockAdvanceCalls": 396000,
+        "clockAdvanceNoop": 194400,
+        "clockAdvanceAtMostOneCck": 194400,
+        "bitplaneMemoryReads": 294912000,
+        "spritePairCalls": 0,
+        "spritePairsEmptyFast": 0
+      },
+      "derived": {
+        "emptyShiftPairsPercent": 42.17111674802014,
+        "emptyShiftPairsPerFrame": 59926.000555555554,
+        "redundantZeroStoresInPairShift": 862934408,
+        "noProgressAdvancePercent": 49.09090909090909,
+        "noProgressAdvancesPerFrame": 27.0
+      }
+    },
+    {
+      "workload": "lemmings",
+      "frames": 3600,
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+      "fingerprintMatches": true,
+      "log": {
+        "path": "artifacts/target-analysis-2026-09-22/lemmings.log",
+        "sha256": "9F2C66A33DDD8D0D305E2C48D0DC9265B4FE53DE5C38D658CCF15B1FB8D52621"
+      },
+      "counts": {
+        "deviceTicks": 255781252,
+        "ciaDue": 5055,
+        "videoDue": 255780023,
+        "diskDue": 0,
+        "diskDmaDue": 0,
+        "audioDue": 7123413,
+        "bitplanesDue": 117137752,
+        "spriteDmaDue": 17308800,
+        "copperDue": 199429223,
+        "blitterDue": 54885655,
+        "spritesDue": 676800,
+        "vblankDue": 3600,
+        "interruptDue": 18014,
+        "pendingInputChecks": 255783623,
+        "pendingInputDue": 69141600,
+        "shiftPairs": 358077646,
+        "shiftPairsWithPendingReload": 17280000,
+        "emptyShiftPairsWithoutReload": 256861374,
+        "scalarShiftPixels": 34560000,
+        "planeReloads": 69120000,
+        "zeroPlaneReloads": 29560637,
+        "renderCcks": 255783623,
+        "blankedCcks": 73155623,
+        "borderCcks": 66708000,
+        "windowCcks": 115920000,
+        "clockAdvanceCalls": 186641897,
+        "clockAdvanceNoop": 65354247,
+        "clockAdvanceAtMostOneCck": 104257208,
+        "bitplaneMemoryReads": 69120000,
+        "spritePairCalls": 91584000,
+        "spritePairsEmptyFast": 91065600
+      },
+      "derived": {
+        "emptyShiftPairsPercent": 71.73342901165073,
+        "emptyShiftPairsPerFrame": 71350.38166666667,
+        "redundantZeroStoresInPairShift": 513722748,
+        "noProgressAdvancePercent": 35.01585016573208,
+        "noProgressAdvancesPerFrame": 18153.9575
+      }
+    }
+  ],
+  "generatedCode": {
+    "nativeClock": {
+      "path": "artifacts/target-analysis-2026-09-22/baseline-native-clock-jit.txt",
+      "sha256": "CCE03B116CC6B8E0837D734CF2E6C5C8DEA9334DB68BCE67EA81D2F13346739A"
+    },
+    "nativeClockLog": {
+      "path": "artifacts/target-analysis-2026-09-22/baseline-native-clock-jit.log",
+      "sha256": "44D2E6165C9902C6BAB3F7EBBAB54FC23A82938ACEA33009E565B3488277EDE1"
+    },
+    "nativeClockFingerprintMatches": true,
+    "advanceToInlinedIntoTier1CpuGrant": true,
+    "baselineVideo": {
+      "path": "artifacts/video-opt-2026-09-22/reference-jit.txt",
+      "sha256": "F5BDDAC052F7FEC1EDF24AE711F2F5520709285A98C451FCE290938FE62C2C27"
+    },
+    "shiftPairStores": "32-bit high shifter plus 64-bit low shifter; both repeated for zero state"
+  },
+  "unavailable": {
+    "extendedCopperAndBlitterCounters": "Windows Application Control 0x800711C7; no execution counts from this build",
+    "logs": [
+      {
+        "path": "artifacts/target-analysis-2026-09-22/lores-v2.log",
+        "sha256": "2DCE142FFFE542C1865F0B037EA66DCB07A71A446C36DDC35233C1EDA8C2B558"
+      },
+      {
+        "path": "artifacts/target-analysis-2026-09-22/hires-v2.log",
+        "sha256": "2DCE142FFFE542C1865F0B037EA66DCB07A71A446C36DDC35233C1EDA8C2B558"
+      },
+      {
+        "path": "artifacts/target-analysis-2026-09-22/lores-v2-compatible.log",
+        "sha256": "B492C1C72F2955A71C2F5249C9F253C57AF7B7351AFD517291EAF10E8B5AF878"
+      }
+    ],
+    "sourceInstrumentation": {
+      "path": "artifacts/target-analysis-2026-09-22/instrument-copper.py",
+      "sha256": "A1963D0F61BFEF52A5E6089940B6F0F3BEA7A63348F6AA9CDDEB3936B5B01E53"
+    },
+    "buildLog": {
+      "path": "artifacts/target-analysis-2026-09-22/build-v2.log",
+      "sha256": "5C5F574244FE4CBF4713BC5013481E4FEBCEAAE7441AC881A4471409F9E9ECFB"
+    },
+    "engine": {
+      "path": "artifacts/target-analysis-2026-09-22/probe-v2/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "7039844EFC456C4AE230BD1A0F6DC2F2E090CA4F0994332C594B6D7D7A4EB786"
+    },
+    "runner": {
+      "path": "artifacts/target-analysis-2026-09-22/probe-v2/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "3C802CE7069D19ED1F3C691388B375717D16D4071F5A28E7511B741809A1913E"
+    },
+    "compatibleRetryRunner": {
+      "path": "artifacts/target-analysis-2026-09-22/probe-v2-compatible/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "CC1E0D3CEE49C05E30EFF134751520C30CC32914C234E4689F6BF6D882757CF2"
+    }
+  },
+  "performanceAcceptance": "Not attempted: production engine unchanged; future candidates require unchanged full protocol and <=1% one-sided95 upper frame-time bound on every workload."
+}

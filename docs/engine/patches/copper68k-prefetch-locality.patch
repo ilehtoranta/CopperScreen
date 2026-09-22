@@ -1,0 +1,20 @@
+--- a/Copper68k/M68kCore.cs
++++ b/Copper68k/M68kCore.cs
+@@ -12995,4 +12995,4 @@
+-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
++        [MethodImpl(MethodImplOptions.NoInlining)]
+         private long FullPrefetch(uint address)
+         {
+             if (_hasPendingPrefetch &&
+@@ -13038,4 +13038,4 @@
+-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
++        [MethodImpl(MethodImplOptions.NoInlining)]
+         private long TopUpPrefetchOne(out long requestedCycle)
+             => TopUpPrefetchOne(
+                 out requestedCycle,
+@@ -13157,4 +13157,4 @@
+-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
++        [MethodImpl(MethodImplOptions.NoInlining)]
+         private void TopUpPrefetchAtRetirement()
+         {
+             if ((State.ProgramCounter & 1) != 0)
