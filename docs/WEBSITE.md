@@ -112,7 +112,7 @@ see its [driving replay](engine/SUPER_CARS_II_INVESTIGATION.md). All four use th
 Keep visible copy factual. Do not claim comparative performance against other
 emulators, full hardware correctness or broad compatibility without evidence.
 
-## Games and demos refresh � 2026-09-21
+## Games and demos refresh — 2026-09-21
 
 Added Major Motion, Alien Breed, Miami Chase, Arte, Desert Dream and Inside the
 Machine, bringing the gallery to **15 titles with one image each**. Miami Chase
@@ -145,3 +145,35 @@ engine `DDD6C3634ECA4DA1D53D9E8B09A49ED36D7383D44122C15B2274578FC796A365`,
 accepted and committed as `c92b16b`; see the [investigation](engine/BLITTER_FINAL_MODULO.md).
 Earlier capture provenance remains historical evidence. Images demonstrate these
 specific scenes, not complete game/demo compatibility or a common release build.
+
+## WORDSYNC game refresh — 2026-09-22
+
+Added Superfrog, F17 Challenge and Overdrive, bringing the gallery to **18 titles
+with one image each**. These three now appear on the homepage. Superfrog is
+explicitly an attract-mode demonstration; F17 shows a race scene after loading
+disk two; Overdrive shows race selection and statistics after its disk-two load.
+The captions do not claim controlled Superfrog play, an Overdrive driven race
+or complete game compatibility.
+
+All three are retained native captures from the WORDSYNC candidate accepted and
+committed as `6974a6d`, engine SHA256
+`8E390EE8307DA4B59FF5C6B9A3E5FCF3A274FDC72E6B51D3211ADC9106C316C5`.
+The [validation record](engine/DISK_LIVE_WORDSYNC.md) identifies the profile,
+media, input scripts and bounded native coverage. The owner accepted its three
+specific performance upper-bound exceptions on September 22; this does not
+change the default gate for future engine work.
+
+| Title | Capture relative to `artifacts/` | Original BMP SHA-256 |
+| --- | --- | --- |
+| Superfrog | `wordsync-investigation/superfrog-boot/frame-007320.bmp` | `AA69C97B55A113AF7AB36856B2BBCE8B40A642A5119E18E47B881DAB0FDA1389` |
+| F17 Challenge | `wordsync-investigation/f17-play/frame-018000.bmp` | `84569DF5A097362ABDCD3C2A92F0CB69CC63A3609E6596FA290EDEAEA4E6954A` |
+| Overdrive | `wordsync-investigation/overdrive-disk2/frame-015300.bmp` | `CBB1C31E590CF13649349C8B7435258A7883A2E2FE4A7D764E5BD2733C573329` |
+
+Reproduce these entries with `scripts/prepare-website-screenshots.ps1 -CaptureRoot
+artifacts -Names superfrog-attract,f17-challenge-race,overdrive-race-selection`.
+The existing full PAL viewport transform and proportional thumbnails are
+unchanged, with no retouching or additional cropping. Source images and generated
+full-size PNGs were visually inspected. Gallery generation checks unique titles,
+asset existence, PNG dimensions, thumbnail proportions and generated HTML;
+JavaScript syntax and local links were also checked. Earlier provenance remains
+historical evidence.

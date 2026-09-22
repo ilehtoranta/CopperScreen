@@ -12,6 +12,9 @@ $repository = Split-Path $PSScriptRoot -Parent
 $output = Join-Path $repository 'docs/assets/screenshots'
 $null = New-Item -ItemType Directory -Path $output -Force
 $captures = @(
+    @{ Name = 'superfrog-attract'; File = 'wordsync-investigation/superfrog-boot/frame-007320.bmp'; Hash = 'AA69C97B55A113AF7AB36856B2BBCE8B40A642A5119E18E47B881DAB0FDA1389' },
+    @{ Name = 'f17-challenge-race'; File = 'wordsync-investigation/f17-play/frame-018000.bmp'; Hash = '84569DF5A097362ABDCD3C2A92F0CB69CC63A3609E6596FA290EDEAEA4E6954A' },
+    @{ Name = 'overdrive-race-selection'; File = 'wordsync-investigation/overdrive-disk2/frame-015300.bmp'; Hash = 'CBB1C31E590CF13649349C8B7435258A7883A2E2FE4A7D764E5BD2733C573329' },
     @{ Name = 'lemmings-gameplay'; File = 'inside-machine-investigation/lemmings-candidate/frame-014520.bmp'; Hash = '0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58' },
     @{ Name = 'full-contact-gameplay'; File = 'storage-2026-09-18/ipf-fullcontact-gameplay/frame-012000.bmp'; Hash = '3EC6CDD7135609F8EA6602BF8B1C8556866D3E343C50D02F3EE91144D0FEAEBC' },
     @{ Name = 'shadow-of-the-beast-gameplay'; File = 'beast-border-2026-09-18/native/frame-018120.bmp'; Hash = '1661C0201823DBA6BE9E4D233DB18BC8ED6A9F378F0FC4B33135FD71370806D8' },

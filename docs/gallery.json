@@ -1,5 +1,38 @@
 [
   {
+    "id": "superfrog-attract",
+    "title": "Superfrog",
+    "caption": "Forest platforms and coins in the attract-mode demonstration.",
+    "alt": "Superfrog's forest stage with golden coins, flowers and grassy platforms beneath a blue sky.",
+    "image": "assets/screenshots/superfrog-attract.png",
+    "thumbnail": "assets/screenshots/superfrog-attract-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "f17-challenge-race",
+    "title": "F17 Challenge",
+    "caption": "On the South African circuit after loading disk two.",
+    "alt": "A red Formula racing car on the South African circuit, with timing panels above and pit signs beside the track.",
+    "image": "assets/screenshots/f17-challenge-race.png",
+    "thumbnail": "assets/screenshots/f17-challenge-race-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
+    "id": "overdrive-race-selection",
+    "title": "Overdrive",
+    "caption": "Race selection and driver statistics after loading disk two.",
+    "alt": "Overdrive's first-race selection screen with driver portraits, vehicle classes, prizes and circuit options.",
+    "image": "assets/screenshots/overdrive-race-selection.png",
+    "thumbnail": "assets/screenshots/overdrive-race-selection-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": true
+  },
+  {
     "id": "major-motion-gameplay",
     "title": "Major Motion",
     "caption": "Highway action among cars and trucks.",
