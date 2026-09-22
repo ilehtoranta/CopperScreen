@@ -54,10 +54,28 @@ allocation-assertion failures (Paula serial: 3,808 bytes; floppy controls: 8,168
 An unchanged isolated repeat passes **669/669**. Both logs are retained; the
 initial failures are not relabeled as passes. Their intermittent cause remains
 unresolved. No assertion was weakened and no automatic test retry was added to CI.
-Remote execution after dependency delivery is still required.
+Remote execution subsequently passed as recorded below; the initial local
+allocation failures remain preserved as separate evidence.
 
 Bootstrap checks cover the valid package, repeat invocation, altered input,
 preservation of a mismatched existing file, the download branch with a simulated
 response, and download-failure cleanup. Evidence is under ignored
 `artifacts/ci-investigation/`. No native media replay or performance measurement
 was performed for this CI-only change.
+
+## Hosted verification
+
+[CI run 35692065083](https://github.com/ilehtoranta/CopperScreen/actions/runs/35692065083)
+on commit `ea12edbc1abd5094e4dd9b63f0e186615c056977` passed both jobs on
+2026-09-22. Each clean Windows runner downloaded the original package and
+verified the expected SHA256 before successful locked restore.
+
+- Production Release build and synthetic runner smoke: passed.
+- Host tests: **92 passed**, **three optional native cases unavailable**.
+- CopperDisk: **74 passed**.
+- Isolated engine diagnostics: **669 passed**, no skips or failures.
+
+No CI rerun, assertion relaxation, dependency downgrade or engine change was
+needed. This verifies the dependency-delivery correction; it is not new native
+gameplay or performance evidence. Downloaded job logs are retained locally as
+`artifacts/ci-job-106630963243.log` and `artifacts/ci-job-106630963269.log`.
