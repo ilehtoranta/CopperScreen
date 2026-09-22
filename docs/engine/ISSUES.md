@@ -35,6 +35,10 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-NATIVE-003 | Inside the Machine v1.0.1 / effect corruption | Final-row area-blitter modulo corrected; scoped performance exception accepted | Chained C2P blits continued from pointers missing the final modulo. Six new regressions and the 18,000-field replay verify the correction and closing logo. See [investigation](BLITTER_FINAL_MODULO.md); no full hardware-frame certification. |
 | LWA-NATIVE-004 | Miami Chase / overlapping menu text | Visual symptom repaired by the same blitter correction; scoped performance exception accepted | Unchanged disk-2/menu replay now clears text between screens. Gameplay with the supplied mixed-release media remains unverified. See [investigation](BLITTER_FINAL_MODULO.md). |
 | LWA-NATIVE-005 | Lotus III / disk-2 prompt | Unresolved loader/input wait; OPEN | Supplied disk 2 plus joystick fire and a mouse click do not advance the bounded replay. Establish input acknowledgement and loader expectations before claiming a disk-controller defect. See [native corpus](NATIVE_CORPUS_2026-09-21.md). |
+| LWA-NATIVE-006 | Alien Breed Special Edition '92 / black boot | Reproducible loader wait; OPEN | Supplied boot IPF stays black for 8,000 fields. All 135 captured states/images/RAM match the pre-blitter-fix engine. Isolate the loader/receiver expectation before assigning cause; see [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
+| LWA-NATIVE-007 | Desert Dream / late execution failure | Reproducible beyond prior coverage; OPEN | Point-cloud effects give way to corrupted execution near field 19,380. All 401 checkpoints through 24,000 fields match the pre-blitter-fix engine; disk B in DF1 does not resolve it. See [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
+| LWA-DISK-014 | Live WORDSYNC changes / IPF boot blockers | Running reads corrected; first-sync wait OPEN | Established reads preserve partial/FIFO/accepted words on toggles; Superfrog, F17 Challenge and Overdrive pass their former boot stops. First-sync-wait toggles remain explicitly unsupported; physical coincident-edge validation remains open. See [evidence and gate](DISK_LIVE_WORDSYNC.md) and original [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
+| LWA-NATIVE-008 | Desert Strike / disk-2 drive-range stop | Explicit unsupported seek; cause OPEN | PDX disk 1 plus supplied unlabeled disk 2 reaches data loading, then stops at field 22,084 on a seek beyond cylinder 79. Isolate drive travel and loader/media expectations; no gameplay or pre-fix comparison claimed. See [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
 | LWA-RUNNER-001 | Scripted ZIP-entry media paths on Windows | Confirmed host path-parsing bug; OPEN | `Path.GetFullPath` changes `#/` to `#\` before the ZIP parser sees it. Resolve archive and entry separately; exact extracted media works for native swaps. See [reproduction](NATIVE_CORPUS_2026-09-21.md#runner-scripted-zip-entry-paths-on-windows). |
 | LWA-DISK-001 | Request sampling / slots | Unverified; OPEN | Capture FIFO arrivals around eligible slots. |
 | LWA-DISK-002 | Final word / completion IRQ | Unverified; OPEN | Tie RAM visibility, countdown and interrupt to a hardware-backed timeline. |
@@ -76,7 +80,7 @@ completeness claim; undocumented combinations are separate from ordinary mode su
 | --- | --- |
 | Beam and synchronization | VHPOSW and VPOSW beam repositioning beyond LOF; external genlock source/pulse qualification and physical display synchronization. ERSY absent-source hold/recovery is implemented as a bounded first slice; see LWA-VIDEO-009. |
 | Nonstandard display and blitter modes | HAM/BPU combinations and priority codes 5–7 have a bounded display implementation. Line-mode BLTSIZE widths other than two remain explicitly rejected: hardware photographs contradict the available emulator reference. See [the investigation](NONSTANDARD_OCS.md). |
-| Disk-controller edge behavior | Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA, FIFO overrun behavior and simultaneous selected read streams. Preserved-track writes and fully physical write splices/precompensation are absent. |
+| Disk-controller edge behavior | Active DSKLEN reprogramming without cancellation, WORDSYNC changes while waiting for first sync, FIFO overrun behavior and simultaneous selected read streams. Preserved-track writes and fully physical write splices/precompensation are absent. |
 | A500 board I/O | Digital keyboard startup/recovery, physical key state/reset chord, CIA serial/CNT and timer-port modes are implemented. MCU scan/debounce, reset electrical timing and CIA silicon pipelines remain unverified. Host parallel transports remain separate. |
 | Undocumented bus data | The 227-CCK wrap-dummy bus-data case remains explicitly unsupported. |
 
@@ -351,7 +355,7 @@ coverage. Their original OCS candidate and later candidates have separate scoped
 performance decisions in [PERFORMANCE.md](PERFORMANCE.md); physical verification
 remains distinct from that acceptance.
 
-Active DSKLEN reprogramming without cancellation, WORDSYNC changes during DMA and
+Active DSKLEN reprogramming without cancellation, WORDSYNC changes while waiting for first sync and
 FIFO overrun currently report unsupported. Standard-ADF write DMA and MSBSYNC
 byte alignment are implemented in the ideal bit-cell model. Preserved-track/flux
 formats, analog precompensation and general GCR media admission remain outside

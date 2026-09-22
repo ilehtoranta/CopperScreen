@@ -1,5 +1,20 @@
 # Optional native replay
 
+The [live WORDSYNC follow-up](engine/DISK_LIVE_WORDSYNC.md) removes the three
+Team17 boot stops below on its identified candidate. Superfrog reaches attract
+gameplay, F17 Challenge loads disk two and reaches a race, and Overdrive loads
+disk two and responds at race selection. The record separates later native checks
+and the required performance gate from the original batch-2 failures.
+
+The [second September 21 corpus](engine/NATIVE_CORPUS_2026-09-21_BATCH2.md) adds
+six games and extends two previously tested demos. It exposes three native IPF
+boots blocked by live WORDSYNC changes, Alien Breed SE's black loader wait and
+a late Desert Dream failure; all reproduce on the pre-blitter-fix engine. Arte
+reaches later credits and closing artwork. Desert Strike reaches a disk-2 load
+but stops at the drive-range guard; Xenon 2 reaches its game-disk request, with
+that second disk unavailable locally. This is diagnostic coverage, not a new
+engine change or performance gate.
+
 The 2026-09-21 [game and demo corpus](engine/NATIVE_CORPUS_2026-09-21.md)
 adds seven titles: Major Motion and Alien Breed reach interactive gameplay;
 Arte and Desert Dream advance through bounded demo sequences. Inside the Machine

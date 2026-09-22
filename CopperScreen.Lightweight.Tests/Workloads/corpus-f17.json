@@ -1,0 +1,45 @@
+[
+  {
+    "frame": 6000,
+    "ejectAdf": true
+  },
+  {
+    "frame": 6120,
+    "diskPath": "../../media/corpus-f17-disk2.ipf"
+  },
+  {
+    "frame": 9000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 9012
+  },
+  {
+    "frame": 11000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 11012
+  },
+  {
+    "frame": 13000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 13012
+  },
+  {
+    "frame": 14500,
+    "joystickPort1": 8
+  },
+  {
+    "frame": 14750
+  },
+  {
+    "frame": 15000,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 15400
+  }
+]

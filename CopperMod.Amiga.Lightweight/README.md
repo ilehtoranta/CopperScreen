@@ -77,6 +77,9 @@ See the [disk contract and verification boundaries](../docs/engine/ARCHITECTURE.
 DSKBYTR DMA status follows the active transfer, including sync wait and write
 serialization. Zero-length WORDSYNC reads complete at the qualifying match without
 RAM transfer. See [disk control edges and limits](../docs/engine/DISK_CONTROL_EDGES.md).
+Running reads preserve partial and buffered words across WORDSYNC enable changes;
+changes during the initial sync wait remain unsupported. See
+[live WORDSYNC evidence](../docs/engine/DISK_LIVE_WORDSYNC.md).
 
 Drives start write protected. For ADF, `SetDriveWriteProtected(drive, false)` enables
 guest memory-to-disk DMA into the owned encoded tracks. `ExportAdf(drive)` copies

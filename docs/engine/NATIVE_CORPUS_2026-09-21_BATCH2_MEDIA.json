@@ -1,0 +1,149 @@
+[
+  {
+    "id": "superfrog",
+    "archive": "Team17/Superfrog_35.zip",
+    "archiveSha256": "1D80C4DAC028B5389FD2DB82B4F99179E93EF7BF7A19BDE66C6AF94EC18E7487",
+    "selected": "SuperFrog_DiskOne.ipf",
+    "entries": [
+      {
+        "name": "SuperFrog_DiskOne.ipf",
+        "sha256": "92ADA1F19ABE94CDD848DCDB84B8BEC20428AC9DB221F94F8C06E0FEC9A557A5",
+        "bytes": 1139672
+      },
+      {
+        "name": "SuperFrog_DiskTwo.ipf",
+        "sha256": "B2C02CA619605B9015F333982920ABCD184B741507BF788970589A0337B8126D",
+        "bytes": 1140812
+      },
+      {
+        "name": "SuperFrog_StoryDisk.ipf",
+        "sha256": "73336668A83F5DB6115CD4F59D8ED74A9212CA67BDE6BAB72E536A89F4D86BA7",
+        "bytes": 1139672
+      }
+    ]
+  },
+  {
+    "id": "f17",
+    "archive": "Team17/F17Challenge_1703.zip",
+    "archiveSha256": "63D94E701F09D156A556770B3C61C95F305B617704E39E116018CA709E5A6B1E",
+    "selected": "F17Challenge_Disk1.ipf",
+    "entries": [
+      {
+        "name": "F17Challenge_Disk1.ipf",
+        "sha256": "20ECA43AA6CBB865FE982D5284C519E07CEB3AEC520ABE3D42BAA3C88832F2EF",
+        "bytes": 1139672
+      },
+      {
+        "name": "F17Challenge_Disk2.ipf",
+        "sha256": "59BFB9DAC3179F2D4133D9AB2426906C50FEA8C50E3857C7A6135D97163AC920",
+        "bytes": 1139672
+      }
+    ]
+  },
+  {
+    "id": "overdrive",
+    "archive": "Team17/downloads_overdrive_IPFs.zip",
+    "archiveSha256": "6BBB7F240851620AA74D136DF58115D8A55703A097D4001A24D5F5C15E5018E1",
+    "selected": "Overdrive_Disk1.ipf",
+    "entries": [
+      {
+        "name": "Overdrive_Disk1.ipf",
+        "sha256": "0ECD634D62D49B109558128E51F11A5895FBA90030906C199B3E4BB047F73E57",
+        "bytes": 1139240
+      },
+      {
+        "name": "Overdrive_Disk2.ipf",
+        "sha256": "1819B1B46A80CF08FAE2C2960CA22DD5715E688342AE2FE304FE6D253CB74327",
+        "bytes": 1139240
+      }
+    ]
+  },
+  {
+    "id": "alien-breed-se92",
+    "archive": "Team17/AlienBreedSpecialEdition92_615.zip",
+    "archiveSha256": "FC478A1F5ADFBC6EC56253A3C14DA48448AACF07D8B0F9781D56D837D746973F",
+    "selected": "AlienBreedSpecialEdition92_BootDisk.ipf",
+    "entries": [
+      {
+        "name": "AlienBreedSpecialEdition92_BootDisk.ipf",
+        "sha256": "B9F68CB237C20614035555AA7ECA70B1DD43B64F061B20422A025EEFDC89112D",
+        "bytes": 1049304
+      },
+      {
+        "name": "AlienBreedSpecialEdition92_Disk2.ipf",
+        "sha256": "8F27F047E15788DE9D0FD6B6691D7FBB2DCEE401095A4B34DBD1BD4FC572A3EF",
+        "bytes": 1049612
+      }
+    ]
+  },
+  {
+    "id": "arte-extended",
+    "archive": "Arte (Sanity).zip",
+    "archiveSha256": "F09F2D661FDF4AF786A28FA162AE0C687D89475BC2550EC190D33EFA2927ACB5",
+    "selected": "Arte (Sanity).adf",
+    "entries": [
+      {
+        "name": "Arte (Sanity).adf",
+        "sha256": "EB7521FC1DE886C69706AB0E21898A89199FB12256DB40743F3ED190957E896A",
+        "bytes": 901120
+      }
+    ]
+  },
+  {
+    "id": "desert-dream-extended",
+    "archive": "Desert Dream (Kefrens).zip",
+    "archiveSha256": "0C41C82A744A2CF915082B968EF3763BF9152F19023B9340287FC593B73E7849",
+    "selected": "Desert Dream (Kefrens) A.adf",
+    "entries": [
+      {
+        "name": "Desert Dream (Kefrens) A.adf",
+        "sha256": "25738C042EFDF2202E67A5BD5A40A08766384DFC31A92ED8E248D1B12E26E1E3",
+        "bytes": 901120
+      },
+      {
+        "name": "Desert Dream (Kefrens) B.adf",
+        "sha256": "3E34D376C9805E0E64A3227B04E0D0BCE0C1531F3E90938329BF5079CD214F97",
+        "bytes": 901120
+      }
+    ]
+  },
+  {
+    "id": "desert-strike",
+    "archive": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[cr PDX].zip",
+    "archiveSha256": "C482F0DEB3829F46DECE514680B53372F4D58FC3C3C5D2B2A3DBE3232FD596C6",
+    "selected": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[cr PDX].adf",
+    "entries": [
+      {
+        "name": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[cr PDX].adf",
+        "sha256": "9A1DA711186D67F06B43815B645BF0013E6159CBAAD438515AC1760903340239",
+        "bytes": 901120
+      }
+    ]
+  },
+  {
+    "id": "xenon2",
+    "archive": "Xenon 2 - Megablast (1989)(Image Works)(Disk 1 of 2)[cr Band][h Cardinals][t +3 Band].zip",
+    "archiveSha256": "54F9DE9CC96DF938722572525F27EFB1388BF29CA66DD3CBD0A61CAD28DF8B73",
+    "selected": "Xenon 2 - Megablast (1989)(Image Works)(Disk 1 of 2)[cr Band][h Cardinals][t +3 Band].adf",
+    "entries": [
+      {
+        "name": "Xenon 2 - Megablast (1989)(Image Works)(Disk 1 of 2)[cr Band][h Cardinals][t +3 Band].adf",
+        "sha256": "ABFC5E1AAA6595C97637D64964D7D54F3F3AD4F47F6C98952508A0E69A99A82A",
+        "bytes": 901120
+      }
+    ]
+  },
+  {
+    "id": "desert-strike-disk2",
+    "archive": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).zip",
+    "archiveSha256": "13EE029113463F60F052D125AA05AB45566E40AF319F2AC1D354C992CB8726E3",
+    "selected": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf",
+    "entries": [
+      {
+        "name": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf",
+        "sha256": "7CEB60B1FB3A9683DDA55F4184410A31885D7FD79C5F37616BD7C0AD634662C6",
+        "bytes": 901120
+      }
+    ]
+  }
+]

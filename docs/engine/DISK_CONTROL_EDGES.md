@@ -4,6 +4,10 @@ This bounded follow-up starts from accepted display commit `a10b22c`. It correct
 DMA status and zero-length WORDSYNC read completion in the PAL OCS/68000 model.
 It does not complete the disk-controller timing audit.
 
+The later [live WORDSYNC correction](DISK_LIVE_WORDSYNC.md) supports toggles after
+the initial sync gate has opened. The first-sync-wait case remains unsupported;
+the original validation and performance evidence below is preserved.
+
 ## Control changes
 
 - DSKBYTR.DMAON now uses the active transfer latch and both DMACON enables.

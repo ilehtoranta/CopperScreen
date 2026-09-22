@@ -104,6 +104,10 @@ mounting/ejecting one drive does not reset another. Reset stops all motors and
 receiver/DMA state while retaining mounted media and cylinders. One shared Paula
 receiver owns partial bytes, sync and slow-recovery state; one DMA FIFO owns
 accepted transfers. Disk arrivals still execute before the disk DMA phase.
+After the initial sync gate opens, ADKCON.WORDSYNC toggles preserve partial and
+buffered words; only subsequent enabled input matches realign a running read.
+Toggles while still waiting for the first sync remain explicitly unsupported.
+See [live WORDSYNC evidence and limits](DISK_LIVE_WORDSYNC.md).
 The next disk event is recomputed at disk/control/media events, with no additional
 per-CCK polling or allocation. Tracks are encoded/decoded only at mount time.
 IPF geometry has an exact bit count and optional cumulative integer cell deadlines;

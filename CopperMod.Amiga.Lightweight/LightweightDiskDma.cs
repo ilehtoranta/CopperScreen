@@ -109,9 +109,11 @@ internal struct LightweightDiskDma
     internal void OnAdkconChanged(ushort previous, long cycle, LightweightA500Machine machine)
     {
         if (!Active || Writing || ((previous ^ machine.Adkcon) & 0x0400) == 0) return;
-        machine.ReportUnsupportedFeature("WORDSYNC enable change during active disk DMA");
-        _waitingForSync = (machine.Adkcon & 0x0400) != 0;
-        _wordBits = 0;
+        if (_waitingForSync)
+            machine.ReportUnsupportedFeature("WORDSYNC enable change while disk DMA waits for first sync");
+        // An ADKCON write neither starts a new transfer nor supplies a sync
+        // match. Preserve the partial word, FIFO and accepted RAM phase.
+        // ReceiveBit samples the live enable on subsequent input matches.
     }
 
     internal void ReceiveBit(ushort shift, bool wordEqual, long cycle, LightweightA500Machine machine)

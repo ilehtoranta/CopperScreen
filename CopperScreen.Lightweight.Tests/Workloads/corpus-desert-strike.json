@@ -1,0 +1,67 @@
+[
+  {
+    "frame": 1200,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 1206
+  },
+  {
+    "frame": 8000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 8012
+  },
+  {
+    "frame": 12000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 12012
+  },
+  {
+    "frame": 16000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 16012
+  },
+  {
+    "frame": 18000,
+    "ejectAdf": true
+  },
+  {
+    "frame": 18120,
+    "diskPath": "../../media/corpus-desert-strike-disk2.adf"
+  },
+  {
+    "frame": 20000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 20012
+  },
+  {
+    "frame": 22000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 22012
+  },
+  {
+    "frame": 24000,
+    "joystickPort1": 24
+  },
+  {
+    "frame": 24400,
+    "joystickPort1": 17
+  },
+  {
+    "frame": 24800,
+    "joystickPort1": 20
+  },
+  {
+    "frame": 25200
+  }
+]

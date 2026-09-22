@@ -11,6 +11,29 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [running-read WORDSYNC correction](DISK_LIVE_WORDSYNC.md#complete-comparison--2026-09-22)
+has a **valid complete** comparison against accepted `c92b16b`, using the unchanged
+pinned [live-WORDSYNC comparison v1](../../scripts/run-lightweight-live-wordsync-comparison-v1.ps1).
+Paired mean frame-time changes / one-sided 95% upper bounds are lores **+0.8098% /
++3.9888%**, hires **-0.0279% / +1.0749%**, native Lemmings **-1.6501% / +1.6400%**.
+All three are numerically **INCONCLUSIVE** and exceed the owner's 1% upper-bound
+gate, despite mean changes below 1%. On 2026-09-22 the owner accepted all three
+scoped exceptions for the identified candidate and authorized commit/push.
+The numerical results remain INCONCLUSIVE; future changes retain the 1% default.
+All 36 samples have matching complete workload
+identities, real PCM, zero measured allocations and valid host-load telemetry.
+The [measurement record](DISK_LIVE_WORDSYNC_PERFORMANCE_2026-09-22.json) preserves
+all paired FPS, full fingerprints, exact statistics and evidence hashes.
+
+The two September 21 attempts remain **INVALID / RERUN** (package interference
+for 10.361 seconds, then protected-sibling interference for 10.584 seconds).
+The owner deferred further measurement that day and resumed it on September 22.
+That day's first series was also **INVALID / RERUN**, during lores R3, after
+selected-core interference for 11.024 seconds. After the owner stopped the
+competing game, a fresh full series completed with unchanged frozen inputs,
+six-pair order and host-load policy. No samples were dropped or pooled, and
+earlier invalid timings remain excluded from acceptance.
+
 The [final-row blitter modulo correction](BLITTER_FINAL_MODULO.md) has two valid
 complete comparisons against accepted `9bdc53a`, using the unchanged pinned
 [blitter-modulo comparison v1](../../scripts/run-lightweight-blitter-modulo-comparison-v1.ps1).
