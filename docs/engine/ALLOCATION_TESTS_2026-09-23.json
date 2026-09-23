@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-23",
+  "status": "RESOLVED_DIAGNOSTIC_BACKGROUND_GC_ACCOUNTING",
+  "runtime": ".NET 10.0.11, Windows x64",
+  "change": "ConcurrentGarbageCollection=false in diagnostic test project only; measured code and zero-byte assertions unchanged",
+  "referenceCpuSha256": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+  "candidateCpuSha256": "881982995B5FBA962E53BBDC83DD64E4893C7B5699802E0C3D31DC33C022DE13",
+  "runtimeDifferences": [
+    "Copper68k.dll"
+  ],
+  "testAssemblySha256": "7632EF94901DD7A6EDFA2375B81B8DBDD5C0F099F0AF0FD134A4157C8FB526CA",
+  "runtimeConfig": {
+    "runtimeOptions": {
+      "tfm": "net10.0",
+      "framework": {
+        "name": "Microsoft.NETCore.App",
+        "version": "10.0.0"
+      },
+      "configProperties": {
+        "MSTest.EnableParentProcessQuery": true,
+        "System.GC.Concurrent": false,
+        "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+        "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+      }
+    }
+  },
+  "tests": [
+    {
+      "role": "reference",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-reference-1.trx",
+      "sha256": "7398C7273EE33E8184EBB4783F5077C54067656A3176F3A1B4C2794CD59879E1",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "reference",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-reference-2.trx",
+      "sha256": "1339E58674A1C203515E003A3D23B45F073CA0ED23CCA2B069381E326E787611",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "reference",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-reference-3.trx",
+      "sha256": "FE451A6914C3881BE85F62BDD6BC180B0961B4722B499723950A37FFAA5E5E47",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "reference",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-reference-4.trx",
+      "sha256": "C708F9D2DB8AB63339CEB99CC64F415BE4204EEB7808C8509F17F6B75AEBC0B7",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "reference",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-reference-5.trx",
+      "sha256": "EB36A50844A4EC869DEF763991E619AFAE303A57CC7D2FDADED5D2C8DF23A474",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "candidate",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-candidate-1.trx",
+      "sha256": "AFE13FD111C4B16F140C32CEFE571EA914C4CE386BC7B4A6833FE41A3893169B",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "candidate",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-candidate-2.trx",
+      "sha256": "47A6BA1A1525628260F75F11F88F85C55A08461BDF2AA47D61B8395C2A11C527",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "candidate",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-candidate-3.trx",
+      "sha256": "E83A12B8F590ECBC2661198F72150855608F98027E105CEF50090C16AE35FD9A",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "candidate",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-candidate-4.trx",
+      "sha256": "E2ABE367F4F753249CFBB4FE5B67AD1E6BBB84E5FCC9904712A85AC5CBCF24AC",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "role": "candidate",
+      "path": "artifacts/allocation-probes-2026-09-23/results/fixed-candidate-5.trx",
+      "sha256": "28825885716E417EBF5BCF808514A28B1AED58C87E38459FDA1F479995CA8F6A",
+      "passed": 669,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "totalPassed": 6690,
+  "stressProbe": {
+    "blockingRequests": {
+      "windows": 36000,
+      "nonzero": 0
+    },
+    "backgroundRequests": {
+      "windows": 120000,
+      "nonzero": 455
+    },
+    "concurrentGcDisabled": {
+      "windows": 120000,
+      "nonzero": 0
+    },
+    "positiveControl": {
+      "windows": 120000,
+      "nonzero": 120000,
+      "minimumBytes": 1024,
+      "maximumBytes": 1024
+    }
+  },
+  "exactProfiler": {
+    "serialCounterDeltasWithoutObjectCallbacks": [
+      3360,
+      1256
+    ],
+    "positiveControlBytes": 1024
+  },
+  "evidence": [
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/production-build.log",
+      "sha256": "F3235365FB9DCD4F9C9AFC4068982CEBB19993135FA9288FDCCDD73ECB3D913C"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/receiver-pressure.log",
+      "sha256": "F8D2A0DC3E6DE254C311A55502A8D55C810514FB4F9939C9170220B8386A6546"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/receiver-background-pressure.log",
+      "sha256": "FBB53666E7F24287E644E181E68AD3921EFF0CC97EAE05D576E9061062C04AEC"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/receiver-fixed.log",
+      "sha256": "DE2E65D055B793DAD8A336E8AB55E6FAE62D91B3ACAB71669EE527B7C13C95A3"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/receiver-positive.log",
+      "sha256": "AF825A87BC06D6E82A3646DA422E9B2149469296BBB3B004B634C41E32621727"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/exact-run1.log",
+      "sha256": "F921769D348F416EA2A3DEF9B2CD56E4E8A77387E397769F148CBD63DD04B365"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/exact-run3.log",
+      "sha256": "8EEFDA7142077957FB9302840E853F7D5814F5FA30ECB377CA50EA2AA7C86437"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/receiver-background-source.cs.txt",
+      "sha256": "E6F58B47E928A60660779A24BC71A35B98B73C22056B0210E800779AC78B87B5"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/ReceiverProbe/Program.cs",
+      "sha256": "3512254313E868A84C6F7FDF632B41AA5FE3B5A623BD4E4292D66CB9A76BBA98"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/ReceiverProbe/ReceiverProbe.csproj",
+      "sha256": "935132EAFB66A02DA45F316096AC2C9DDD7936170F71232D18323385E4DA4815"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/Profiler.cpp",
+      "sha256": "6343DF633A0FFDF486472054A914FC8936428A3FF615701EAEBD6FFF9DCDEFB8"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/build-profiler.cmd",
+      "sha256": "D88C5D23BA674A0A3FFBEDB6227BC6C29EDF56400E87C9615C2756394DD771E2"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/results/deliberate-allocation-mutation.trx",
+      "sha256": "53FD0D1762C4E72CB2BBF1B3E7246168449DE3836F867DD38D6B062A3F137B34"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/deliberate-allocation-mutation.log",
+      "sha256": "B12A8AAF1E875194AE7B997F7F658425B9145A1A09331EF42A94B2819B13A4D7"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/profiler-positive-final-allocations.log",
+      "sha256": "9064909BF93370802612E5A9DA3BB8886BD8745841D9603B37C9A570FCF31246"
+    },
+    {
+      "path": "artifacts/allocation-probes-2026-09-23/results/profiler-positive-final.trx",
+      "sha256": "CE3A4A3D14C27E2D7E8C255546965C6574E3F92FD817A6B9EDA8B7C3838ABC12"
+    }
+  ],
+  "productionBuild": "PASS: 0 warnings, 0 errors",
+  "benchmarkRerun": false,
+  "previousFailuresPreserved": true,
+  "mutationCheck": {
+    "status": "EXPECTED_FAILURE_DETECTED",
+    "injectedArrayLength": 1000,
+    "expectedBytes": 0,
+    "actualBytes": 1024,
+    "productionTestsMutated": false
+  }
+}

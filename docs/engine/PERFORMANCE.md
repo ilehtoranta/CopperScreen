@@ -11,6 +11,33 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [combined batch-prefetch candidate](CPU_BATCH_PREFETCH_2026-09-23.md)
+completes a **VALID** six-pair series against the shipped `1.4.1-locality.1` CPU.
+All 36 complete fingerprints match, allocations are zero and telemetry is valid.
+Paired frame-time changes / one-sided 95% upper bounds are lores
+**-1.2458% / +0.0898%**, hires **-0.4849% / +0.6199%**, native
+**-2.6891% / -1.7755%**. Every workload passes the 1% performance gate; native
+paired FPS improves **2.7634%**. CPU tests (1,499) and native host tests (95) pass;
+six external CPU cases remain unavailable. Initial full candidate engine runs
+retain allocation-only failures. A subsequent
+[allocation-counter investigation](ALLOCATION_TESTS_2026-09-23.md) identifies
+background-GC accounting as the cause and corrects the diagnostic host settings:
+five full runs per CPU now pass all 669 tests, with exact zero-byte assertions
+preserved. Earlier failed runs and FPS measurements retain their original results.
+The production pin is unchanged.
+
+The preceding [interrupt-sample retirement candidate](CPU_INTERRUPT_RETIREMENT_2026-09-22.md)
+passes 1,499 CPU, 669 engine and 95 host tests, plus all three complete replay
+fingerprints with zero measured allocations. Six optional CPU corpus cases remain
+unavailable. The first two comparisons against the shipped `1.4.1-locality.1` CPU
+stopped on sustained sibling-CPU interference and remain **INVALID / RERUN**.
+After the owner reported the system free, the third series completed **VALID**
+on 2026-09-23, with all 36 fingerprints matching, zero allocations and valid
+telemetry. Paired frame-time changes / one-sided 95% upper bounds are lores
+**+0.9783% / +6.1871%**, hires **+1.4832% / +6.2545%**, native
+**-1.1551% / +1.3522%**. Native paired FPS improves 1.1686%, but every upper bound
+exceeds the 1% gate. No exception is accepted and the production pin is unchanged.
+
 The [combined CPU prefetch locality candidate](CPU_PREFETCH_LOCALITY_2026-09-22.md)
 keeps full-refill, extension-refill and retirement helpers out of common dispatch
 frames. Captured unconditional dispatch-entry initialization falls from 4,744
