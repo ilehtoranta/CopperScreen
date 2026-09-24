@@ -1,5 +1,10 @@
 # Lightweight performance measurements
 
+On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
+`1.4.1-locality.1` development pin. Dated comparisons below retain the package
+identity and protocol that were actually measured; they are not relabeled as
+measurements of the subsequently published package.
+
 Correctness, host throughput and interactive compatibility are separate results.
 G6/G7 Legacy cutover is retired. Lightweight is already the active engine; ordinary
 development does not repeat that cutover or the completed H-stage sequence.

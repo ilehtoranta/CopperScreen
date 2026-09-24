@@ -1,17 +1,20 @@
-# Copper68k development pin and trace evidence
+# Copper68k stable dependency and trace evidence
 
-The current exact CPU pin is **`1.4.1-locality.1`**, a development package
-distributed as a GitHub prerelease asset. It retains the trace correction below
-and integrates the [validated prefetch-locality optimization](CPU_PREFETCH_LOCALITY_2026-09-22.md).
-The source is CopperMod commit
-[`b59985f682e342b9b830771c09f617bb547e4116`](https://github.com/ilehtoranta/CopperMod/commit/b59985f682e342b9b830771c09f617bb547e4116),
-branch `codex/cpu-prefetch-locality`. The
-[current hash manifest](copper68k-locality-development-2026-09-22.json) identifies
-the original package and CPU assembly. The package was built before that commit;
-its embedded repository revision remains `ada86020ad7a9b298cd7f689c3731d8d779684d1`,
-and its release notes retain the unpublished build-time description. The asset
-preserves those original bytes. No existing package was overwritten, and this
-version is not published on NuGet.org.
+The current exact CPU pin is **`1.4.1`**, the stable
+[Copper68k NuGet package](https://www.nuget.org/packages/Copper68k/1.4.1).
+Its source is CopperMod commit
+[`8fb826eacf8e9dc32948b482c878079448bd6e61`](https://github.com/ilehtoranta/CopperMod/commit/8fb826eacf8e9dc32948b482c878079448bd6e61).
+The desktop, engine, runner and test lockfiles resolve that exact version from
+the standard NuGet source; no development-feed bootstrap is needed.
+Restore with `dotnet restore CopperScreen.slnx --locked-mode`, and restore the
+isolated engine diagnostics separately as described in the README.
+
+Stable 1.4.1 retains the trace correction below and the
+[validated prefetch-locality optimization](CPU_PREFETCH_LOCALITY_2026-09-22.md),
+plus the release optimizations recorded in CopperMod's 1.4.1 release notes.
+The 1.4.1-locality.1 package and its exact hash remain documented below as a
+historical development artifact; its test and performance records retain their
+original package labels and results.
 
 ## Original trace correction — 2026-09-18
 
@@ -33,13 +36,14 @@ original 2026-09-18 state; subsequent availability is preserved in
 `artifacts/trace-exception-2026-09-18/`. These trace results remain historical
 evidence rather than new validation of the locality package.
 
-## Restore on another machine
+## Historical 1.4.1-locality.1 development-package restoration
 
-`NuGet.Config` adds the ignored `artifacts/development-packages` feed and retains
-the isolated `artifacts/packages` cache. A fresh machine needs the exact development
-package before locked restore. The [bootstrap script](../../scripts/restore-development-package.ps1)
-checks the current locality manifest's SHA256, stages the package atomically and rejects an
-existing package with different bytes. Both CI jobs run it before locked restore.
+At the 2026-09-22 milestone, `NuGet.Config` added the ignored
+`artifacts/development-packages` feed and both CI jobs used the
+[bootstrap script](../../scripts/restore-development-package.ps1) to verify and
+stage the exact prerelease bytes before locked restore. Stable 1.4.1 supersedes
+that bootstrap; the remaining details preserve how the earlier pin was made
+reproducible.
 
 The original locality package is available from the
 [CopperMod development prerelease](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.4.1-locality.1).

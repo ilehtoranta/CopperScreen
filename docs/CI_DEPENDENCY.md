@@ -1,6 +1,12 @@
 # CI development-dependency bootstrap — 2026-09-22
 
-## Current dependency
+> **Superseded on 2026-09-24:** Copper68k `1.4.1` is now the stable NuGet.org
+> dependency, pinned exactly in project files and lockfiles. CI restores directly
+> from NuGet.org; the development-feed bootstrap below records the earlier
+> prerelease transition and remains historical evidence. Current CPU guidance is
+> in [CPU_TRACE.md](engine/CPU_TRACE.md).
+
+## Development dependency at the 2026-09-22 milestone (historical)
 
 The production engine, runner and desktop now pin **Copper68k
 `1.4.1-locality.1`**. Both CI jobs use the same
@@ -20,7 +26,7 @@ the base `ada86020ad7a9b298cd7f689c3731d8d779684d1`. The release preserves the
 package without repacking it. It is a GitHub development prerelease, not a
 NuGet.org publication. See the
 [current integration evidence](engine/CPU_PREFETCH_LOCALITY_2026-09-22.md) and
-[restore guidance](engine/CPU_TRACE.md#restore-on-another-machine).
+[package and restore history](engine/CPU_TRACE.md).
 
 The sections below preserve the original trace-package bootstrap investigation
 and its hosted CI result. They do not claim hosted validation of the newer pin.
