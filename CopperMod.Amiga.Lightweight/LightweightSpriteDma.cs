@@ -242,7 +242,7 @@ internal sealed class LightweightSpriteDma
         var channel = _pendingChannel;
         var purpose = _pendingPurpose;
         var address = _pendingAddress;
-        var value = machine.ReadChipWordDma(address);
+        var value = machine.ReadChipWordBus(address);
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
 

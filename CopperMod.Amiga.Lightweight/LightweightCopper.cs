@@ -265,7 +265,7 @@ internal sealed class LightweightCopper
         var generation = _pendingGeneration;
         _pendingOutputCycle = long.MaxValue;
         LastOutputCycle = cycle;
-        var value = machine.ReadChipWordDma(address);
+        var value = machine.ReadChipWordBus(address);
         if (generation != _decodeGeneration)
         {
             return;

@@ -316,7 +316,7 @@ internal sealed class LightweightBitplanes
         var applyModulo = _pendingModulo;
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
-        var value = machine.ReadChipWordDma(address);
+        var value = machine.ReadChipWordBus(address);
         _dataLatches[plane] = value;
         machine.OnBitplaneDataOutput(plane, value, cycle);
         var pointer = MaskAddress(address + 2);

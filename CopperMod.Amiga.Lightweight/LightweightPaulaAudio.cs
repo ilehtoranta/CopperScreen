@@ -363,7 +363,7 @@ internal sealed partial class LightweightPaulaAudio
             }
             if (_dmaOutputCycle == cycle)
             {
-                _pendingData = machine.ReadChipWordDma(_pendingAddress);
+                _pendingData = machine.ReadChipWordBus(_pendingAddress);
                 _currentAddress = (_pendingAddress + 2) & 0x0007_FFFEu;
                 _remainingWords = _pendingRemainingWords;
                 if (_pendingReload && !_pendingDiscard && _hasOutputWord)

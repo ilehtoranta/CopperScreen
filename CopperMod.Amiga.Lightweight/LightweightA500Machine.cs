@@ -1,5 +1,7 @@
 using Copper68k;
 using System.Buffers.Binary;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace CopperMod.Amiga.Lightweight;
 
@@ -25,6 +27,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     // Gary decodes the low 2 MiB; A19/A20 alias the fitted 512 KiB.
     private const uint ChipRamCpuDecodeSize = 0x00200000;
     private const uint ChipRamAddressMask = 0x0007FFFF;
+    private const uint ChipRamWordAddressMask = ChipRamAddressMask & ~1u;
 
     private readonly LightweightA500Configuration _configuration;
     private readonly byte[] _chipRam;
@@ -33,6 +36,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
     private readonly LightweightClock _clock = new();
     private readonly LightweightBusArbiter _busArbiter = new();
     private readonly LightweightRegisters _registers = new();
+    private ushort _lastDmaBusWord;
     private readonly LightweightCopper _copper = new();
     private readonly LightweightBitplanes _bitplanes = new();
     private readonly LightweightBlitter _blitter = new();
@@ -915,19 +919,43 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal ushort ReadChipWordDma(uint address)
     {
-        address &= (uint)(_chipRam.Length - 1);
-        address &= 0x00FF_FFFEu;
-        return BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)address, 2));
+        // Construction enforces a fixed 512 KiB array. Masked offsets are
+        // even and at most 0x7FFFE, so both bytes are always inside that array.
+        // This is a host memory load, not a change to the accepted bus phase.
+        ref var data = ref MemoryMarshal.GetArrayDataReference(_chipRam);
+        var value = Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref data, (nint)(address & ChipRamWordAddressMask)));
+        return BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value;
+    }
+
+    // Only actual DMA output phases drive this latch. The devices already keep
+    // their completion cycles for arbitration; consult those only on readback.
+    // Untimed memory helpers remain side-effect-free for diagnostics/host setup.
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal ushort ReadChipWordBus(uint address)
+    {
+        var value = ReadChipWordDma(address);
+        _lastDmaBusWord = value;
+        return value;
+    }
+
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal void WriteChipWordBus(uint address, ushort value)
+    {
+        WriteChipWordDma(address, value);
+        _lastDmaBusWord = value;
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal void WriteChipWordDma(uint address, ushort value)
     {
-        address &= (uint)(_chipRam.Length - 1);
-        address &= 0x00FF_FFFEu;
-        _chipRam[address] = (byte)(value >> 8);
-        _chipRam[address + 1] = (byte)value;
+        // The same fixed-size/alignment proof as ReadChipWordDma covers both
+        // bytes. No observer can run between them on the single owner thread.
+        ref var data = ref MemoryMarshal.GetArrayDataReference(_chipRam);
+        Unsafe.WriteUnaligned(ref Unsafe.Add(ref data, (nint)(address & ChipRamWordAddressMask)),
+            BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
     }
 
     internal uint GetCopperListPointer(bool secondList)
@@ -1117,6 +1145,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         return Math.Max(_cpu.State.Cycles, boundary);
     }
 
+    // Rendering's inlined scalar out-locals are assigned before use. Keep this
+    // scope free of stackalloc or other uninitialized local storage.
+    [SkipLocalsInit]
     internal void TickDevices(long cycle)
     {
         System.Diagnostics.Debug.Assert(cycle >= _nextDeviceCycle);
@@ -1447,6 +1478,23 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _interruptPinChangeCycle = cycle;
     }
 
+    // Keep the uncommon undriven read out of ordinary custom-register dispatch.
+    // LastOutputCycle denotes a completed physical word, including an accepted
+    // transfer whose consumer was subsequently canceled. Blitter idle phases
+    // do not update LastBusOutputCycle. All six histories are cleared on reset.
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private ushort ReadUndrivenCustomBus()
+    {
+        var lastCycle = Math.Max(_diskDma.LastOutputCycle, _paula.LastOutputCycle);
+        lastCycle = Math.Max(lastCycle, _bitplanes.LastOutputCycle);
+        lastCycle = Math.Max(lastCycle, _spriteDma.LastOutputCycle);
+        lastCycle = Math.Max(lastCycle, _copper.LastOutputCycle);
+        lastCycle = Math.Max(lastCycle, _blitter.LastBusOutputCycle);
+        return _clock.Cycle == lastCycle + LightweightBusArbiter.SlotCycles
+            ? _lastDmaBusWord : (ushort)0xFFFF;
+    }
+
     private ushort ReadWordRaw(uint address)
     {
         address &= 0x00FF_FFFFu;
@@ -1476,6 +1524,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
                 LightweightRegisters.Dskbytr => _diskSerial.ReadByteStatus(_registers, _diskDma.Active),
                 LightweightRegisters.Clxdat => _sprites.PeekCollisionData,
                 LightweightRegisters.Serdatr => _serial.ReadData(_registers.Intreq),
+                // 8362 has no DENISEID. Model the undriven CPU read, never the
+                // storage at this offset: preceding-CCK DMA data, else pull-ups.
+                // Electrical decay / coincident edges remain unverified; see
+                // docs/engine/TOWER_ASSAULT_INVESTIGATION.md.
+                0x07C => ReadUndrivenCustomBus(),
                 0x00A => _controllers.ReadJoy(port1: false),
                 0x00C => _controllers.ReadJoy(port1: true),
                 0x012 or 0x014 => _pots.ReadCounters((offset - 0x012) / 2, Cycle, _controllers.ReadPotgor(_registers.Read(0x034))),

@@ -167,7 +167,7 @@ internal struct LightweightDiskDma
         {
             if (_pendingWrite)
             {
-                var data = machine.ReadChipWordDma(_pendingAddress);
+                var data = machine.ReadChipWordBus(_pendingAddress);
                 if (_pendingCounts)
                 {
                     _fifo |= (ulong)data << (_fifoCount * 16);
@@ -177,7 +177,7 @@ internal struct LightweightDiskDma
             }
             else
             {
-                machine.WriteChipWordDma(_pendingAddress, _pendingData);
+                machine.WriteChipWordBus(_pendingAddress, _pendingData);
                 machine.SetDiskDataFromDma(_pendingData);
             }
             PendingOutputCycle = long.MaxValue;

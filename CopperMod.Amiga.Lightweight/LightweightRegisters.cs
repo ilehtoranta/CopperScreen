@@ -1,3 +1,6 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
 namespace CopperMod.Amiga.Lightweight;
 
 internal sealed class LightweightRegisters
@@ -75,7 +78,18 @@ internal sealed class LightweightRegisters
     internal const ushort ColorFirst = 0x180;
     internal const ushort ColorLast = 0x1BE;
 
-    private readonly ushort[] _values = new ushort[0x100];
+    private const int RegisterWordCount = 0x100;
+
+    private readonly ushort[] _values = new ushort[RegisterWordCount];
+
+    // The readonly array is always allocated with this same constant extent.
+    // Keep its original storage layout while making checked indexes constant-bound.
+    private Span<ushort> Values
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => MemoryMarshal.CreateSpan(
+            ref MemoryMarshal.GetArrayDataReference(_values), RegisterWordCount);
+    }
 
     internal ushort Dmacon { get; private set; }
     internal ushort Adkcon { get; private set; }
@@ -92,7 +106,7 @@ internal sealed class LightweightRegisters
             Intenar => Intena,
             Intreqr => Intreq,
             Ddfstop => DdfStopValue,
-            _ when (uint)offset < _values.Length * 2 => _values[offset >> 1],
+            _ when (uint)offset < RegisterWordCount * 2 => Values[offset >> 1],
             _ => 0
         };
     }
@@ -117,8 +131,8 @@ internal sealed class LightweightRegisters
                 DdfStopValue = value;
                 break;
             default:
-                if ((uint)offset < _values.Length * 2)
-                    _values[offset >> 1] = value;
+                if ((uint)offset < RegisterWordCount * 2)
+                    Values[offset >> 1] = value;
                 break;
         }
     }
@@ -126,7 +140,7 @@ internal sealed class LightweightRegisters
     internal void Reset()
     {
         Array.Clear(_values);
-        _values[Dsksync >> 1] = 0x4489;
+        Values[Dsksync >> 1] = 0x4489;
         Dmacon = 0;
         Adkcon = 0;
         Intena = 0;
@@ -176,33 +190,39 @@ internal sealed class LightweightRegisters
     internal void SetDiskPointerFromDma(uint pointer)
     {
         pointer &= 0x0007_FFFE;
-        _values[Dskpth >> 1] = (ushort)(pointer >> 16);
-        _values[Dskptl >> 1] = (ushort)pointer;
+        var values = Values;
+        values[Dskpth >> 1] = (ushort)(pointer >> 16);
+        values[Dskptl >> 1] = (ushort)pointer;
     }
 
-    internal void SetDiskDataFromDma(ushort data) => _values[Dskdatr >> 1] = data;
+    internal void SetDiskDataFromDma(ushort data) => Values[Dskdatr >> 1] = data;
 
     internal void SetDiskLengthFromDma(int remaining)
-        => _values[Dsklen >> 1] = (ushort)((_values[Dsklen >> 1] & 0xC000) | remaining);
+    {
+        var values = Values;
+        values[Dsklen >> 1] = (ushort)((values[Dsklen >> 1] & 0xC000) | remaining);
+    }
 
     internal void SetBlitterPointerFromDma(ushort highOffset, uint pointer)
     {
         pointer &= 0x0007_FFFEu;
-        _values[highOffset >> 1] = (ushort)(pointer >> 16);
-        _values[(highOffset + 2) >> 1] = (ushort)pointer;
+        var values = Values;
+        values[highOffset >> 1] = (ushort)(pointer >> 16);
+        values[(highOffset + 2) >> 1] = (ushort)pointer;
     }
 
     internal void SetBlitterDataFromDma(ushort offset, ushort value)
-        => _values[offset >> 1] = value;
+        => Values[offset >> 1] = value;
 
     internal void SetBitplanePointerFromDma(int plane, uint pointer)
     {
         if ((uint)plane >= 8)
             return;
         pointer &= 0x0007_FFFEu;
-        var highOffset = (ushort)(BplPointerFirst + (plane * 4));
-        _values[highOffset >> 1] = (ushort)(pointer >> 16);
-        _values[(highOffset + 2) >> 1] = (ushort)pointer;
+        var highIndex = (BplPointerFirst >> 1) + (plane * 2);
+        var values = Values;
+        values[highIndex] = (ushort)(pointer >> 16);
+        values[highIndex + 1] = (ushort)pointer;
     }
 
     internal void SetSpritePointerFromDma(int sprite, uint pointer)
@@ -210,9 +230,10 @@ internal sealed class LightweightRegisters
         if ((uint)sprite >= 8)
             return;
         pointer &= 0x0007_FFFEu;
-        var highOffset = (ushort)(SpritePointerFirst + (sprite * 4));
-        _values[highOffset >> 1] = (ushort)(pointer >> 16);
-        _values[(highOffset + 2) >> 1] = (ushort)pointer;
+        var highIndex = (SpritePointerFirst >> 1) + (sprite * 2);
+        var values = Values;
+        values[highIndex] = (ushort)(pointer >> 16);
+        values[highIndex + 1] = (ushort)pointer;
     }
 
     internal void SetSpriteRegisterFromDma(
@@ -228,7 +249,7 @@ internal sealed class LightweightRegisters
         }
 
         var offset = SpritePosFirst + (sprite * 8) + registerOffset;
-        _values[offset >> 1] = value;
+        Values[offset >> 1] = value;
     }
 
     internal static int GetHighestEnabledInterruptLevel(ushort intena, ushort intreq)

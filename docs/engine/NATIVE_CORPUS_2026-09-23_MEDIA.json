@@ -1,0 +1,149 @@
+{
+  "date": "2026-09-23",
+  "checkout": "cb946eb5791c31cafa20823f99f5d207e5da6fb5",
+  "profile": "PAL OCS A500; 68000; Kickstart 1.3; 512 KiB chip + 512 KiB slow; one DF0; read-only media; no hardfiles",
+  "binaries": {
+    "Copper68k.dll": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+    "CopperDisk.dll": "5D2625E5EB504F8FF60921CFA3616ACCC9D0CDE0CFC77A554A24EAD2B718956A",
+    "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+    "CopperMod.Amiga.Lightweight.dll": "1B7F7AF0742F8B94DEA8F8AED1C1C76BA459B022CF6FAB412911657CA8D09683",
+    "CopperMod.Amiga.Lightweight.Runner.dll": "9AB9627DA0BC4207F1AB0D37621241C9012C77C22DDBCF4B3106C0B59E3240C0",
+    "Kickstart_13.rom": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+  },
+  "media": [
+    {
+      "title": "lotus1",
+      "archive": "C:\\Data\\TestImages\\OK\\Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Angels][b doscopy].zip",
+      "archiveSha256": "6DEAA0ED51B727507EACCF775760042E3A94ED22DF89AB571F9F84FF22BBCCB5",
+      "entry": "Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Angels][b doscopy].adf",
+      "size": 901120,
+      "sha256": "6A7C7CAC2D122795C3E254348E4519F0838ED7E535BA10C60406C1ADFFE1C02D",
+      "selector": "C:\\Data\\TestImages\\OK\\Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Angels][b doscopy].zip#/Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Angels][b doscopy].adf",
+      "coverage": "booted"
+    },
+    {
+      "title": "railroad",
+      "archive": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+      "archiveSha256": "C384879077D23CE9617D148F5F27BA9F5B3AA80C781335BC74591985DD07CAC4",
+      "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+      "size": 901120,
+      "sha256": "00482409CDC483B1D03304F393794EFB5F073262B5461291C6A11A80F456472E",
+      "selector": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+      "coverage": "booted and remounted in DF0 after disk B"
+    },
+    {
+      "title": "worms",
+      "archive": "C:\\Data\\TestImages\\Team17\\Worms_230.zip",
+      "archiveSha256": "31B9983AA74270FB39EF4C08483DFB79DA4D9B8AC006A7600E07D2876C2D091F",
+      "entry": "Worms_Disk1of3.ipf",
+      "size": 1049180,
+      "sha256": "ABDE449D92EAA8FC0DAA054C734F5BCA2E01422734E1488142F8E813B9CC1606",
+      "selector": "C:\\Data\\TestImages\\Team17\\Worms_230.zip#/Worms_Disk1of3.ipf",
+      "coverage": "booted"
+    },
+    {
+      "title": "worms",
+      "archive": "C:\\Data\\TestImages\\Team17\\Worms_230.zip",
+      "archiveSha256": "31B9983AA74270FB39EF4C08483DFB79DA4D9B8AC006A7600E07D2876C2D091F",
+      "entry": "Worms_Disk2of3.ipf",
+      "size": 1049180,
+      "sha256": "4283FC4E175166A05F7468AE3E2D9514F56F6554C2C77F6E063EEF5037AEC57A",
+      "selector": "C:\\Data\\TestImages\\Team17\\Worms_230.zip#/Worms_Disk2of3.ipf",
+      "coverage": "inventoried only; not exercised"
+    },
+    {
+      "title": "worms",
+      "archive": "C:\\Data\\TestImages\\Team17\\Worms_230.zip",
+      "archiveSha256": "31B9983AA74270FB39EF4C08483DFB79DA4D9B8AC006A7600E07D2876C2D091F",
+      "entry": "Worms_Disk3of3.ipf",
+      "size": 1049180,
+      "sha256": "58C531A44938BB3A1AB432F771F78C06EEFEA6036EA80F2658369F5879CB3A70",
+      "selector": "C:\\Data\\TestImages\\Team17\\Worms_230.zip#/Worms_Disk3of3.ipf",
+      "coverage": "inventoried only; not exercised"
+    },
+    {
+      "title": "alien-breed2",
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip",
+      "archiveSha256": "84A72AA14AAFDBBD6867921F7FC8E9FC436138C5EC6BC0F3B51FB265B8DB475D",
+      "entry": "AlienBreed2_Disk1.ipf",
+      "size": 1139240,
+      "sha256": "09D156CBF31B06826C885CC982439CB8D9F9294524B5A0046FFD3FB02ABB369C",
+      "selector": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip#/AlienBreed2_Disk1.ipf",
+      "coverage": "booted"
+    },
+    {
+      "title": "alien-breed2",
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip",
+      "archiveSha256": "84A72AA14AAFDBBD6867921F7FC8E9FC436138C5EC6BC0F3B51FB265B8DB475D",
+      "entry": "AlienBreed2_Disk2.ipf",
+      "size": 1140380,
+      "sha256": "0D987F512EB3693A18073677A7DFFD695523879324DE2CBE43B9C0D8A19BFB4C",
+      "selector": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip#/AlienBreed2_Disk2.ipf",
+      "coverage": "inventoried only; not exercised"
+    },
+    {
+      "title": "alien-breed2",
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip",
+      "archiveSha256": "84A72AA14AAFDBBD6867921F7FC8E9FC436138C5EC6BC0F3B51FB265B8DB475D",
+      "entry": "AlienBreed2_Disk3.ipf",
+      "size": 1140380,
+      "sha256": "8587EFA16646883614AA4BC4AA3170DD58C828201F3219532EEAE351BBF0A7D4",
+      "selector": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip#/AlienBreed2_Disk3.ipf",
+      "coverage": "inventoried only; not exercised"
+    },
+    {
+      "title": "tower-assault",
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+      "archiveSha256": "52DC0DBA381EAA53DC671E83993A5FDD978DF4558891003856B66C58C71879F4",
+      "entry": "AlienBreedTowerAssault_Disk1.ipf",
+      "size": 1139240,
+      "sha256": "EC181B9C9F14D593DA2C96D751286C5A629EABCF90B66A4D7114EF2FABE245F6",
+      "selector": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+      "coverage": "booted"
+    },
+    {
+      "title": "tower-assault",
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+      "archiveSha256": "52DC0DBA381EAA53DC671E83993A5FDD978DF4558891003856B66C58C71879F4",
+      "entry": "AlienBreedTowerAssault_Disk2.ipf",
+      "size": 1139240,
+      "sha256": "256B2FBDF5242342CFB0959F5AD3B8FB837ADB418D23316B2AE7B085C5158827",
+      "selector": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk2.ipf",
+      "coverage": "inventoried only; not exercised"
+    },
+    {
+      "title": "tower-assault",
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+      "archiveSha256": "52DC0DBA381EAA53DC671E83993A5FDD978DF4558891003856B66C58C71879F4",
+      "entry": "AlienBreedTowerAssault_Disk3.ipf",
+      "size": 1140380,
+      "sha256": "9C32244BEB84DBB3E9B1A8FC4DC1497596136800BA6A61719B627DA1432C1FAF",
+      "selector": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk3.ipf",
+      "coverage": "inventoried only; not exercised"
+    },
+    {
+      "title": "railroad",
+      "archive": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+      "archiveSha256": "72EACE1E0D439B03A2D9731FBB314FC99A3C49F2BBE3C4A85898178EDB144616",
+      "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+      "size": 901120,
+      "sha256": "98F3785835ABE74AF58D9B375A89BC2000ACD5E8AD963DA0A6B0A33107E74C72",
+      "selector": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+      "coverage": "swapped into DF0"
+    }
+  ],
+  "inputScripts": [
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-lotus1.json",
+      "sha256": "FD4AEF40280F7D84FD09F10CE182108400A559704024CFF8D5F588718FE8E70A"
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-railroad.json",
+      "sha256": "DDD58677575E573EC267AF6D822AD48AC90008B6EB4AF6B7E87C1CB88B6F1D36"
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-worms-code.json",
+      "sha256": "952509E293D9A3724108D172634B367376D5A7C02E563817B5656FF038BE21B1"
+    }
+  ]
+}

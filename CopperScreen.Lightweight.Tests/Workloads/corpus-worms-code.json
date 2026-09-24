@@ -1,0 +1,56 @@
+[
+  {
+    "frame": 7500,
+    "keyCode": 257
+  },
+  {
+    "frame": 7510,
+    "keyCode": 385
+  },
+  {
+    "frame": 7530,
+    "keyCode": 258
+  },
+  {
+    "frame": 7540,
+    "keyCode": 386
+  },
+  {
+    "frame": 7560,
+    "keyCode": 259
+  },
+  {
+    "frame": 7570,
+    "keyCode": 387
+  },
+  {
+    "frame": 7590,
+    "keyCode": 260
+  },
+  {
+    "frame": 7600,
+    "keyCode": 388
+  },
+  {
+    "frame": 7620,
+    "keyCode": 324
+  },
+  {
+    "frame": 7630,
+    "keyCode": 452
+  },
+  {
+    "frame": 10000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 10020
+  },
+  {
+    "frame": 13000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 13020
+  }
+]

@@ -1,0 +1,77 @@
+{
+  "date": "2026-09-23",
+  "classification": "UNSUPPORTED_AGA_MEDIA_NOT_OCS_FAILURE_EVIDENCE",
+  "spsRelease": 44,
+  "mameRevision": "7717e680bd915969d41c253932c73e9489d06af7",
+  "catalogPath": "hash/amigaaga_flop.xml",
+  "catalogSha256": "1AD2C967443EAC90EC4236107DEAD628B227D611C7C3DB98AEEC8AB247B6E7DD",
+  "catalogDescription": "Alien Breed II - The Horror Continues (Europe, AGA)",
+  "archive": "C:\\Data\\TestImages\\Team17\\AlienBreedII-TheHorrorContinues_44.zip",
+  "archiveSha256": "84A72AA14AAFDBBD6867921F7FC8E9FC436138C5EC6BC0F3B51FB265B8DB475D",
+  "disks": [
+    {
+      "entry": "AlienBreed2_Disk2.ipf",
+      "size": 1140380,
+      "crc32": "C4DEAF3B",
+      "sha1": "343204FED87783FF300F045D1CEE5E741D44DBB9",
+      "sha256": "0D987F512EB3693A18073677A7DFFD695523879324DE2CBE43B9C0D8A19BFB4C",
+      "catalogName": "(sps44)alienbreed2_disk2.ipf",
+      "identityMatches": true
+    },
+    {
+      "entry": "AlienBreed2_Disk3.ipf",
+      "size": 1140380,
+      "crc32": "AA9B1408",
+      "sha1": "9C89C6DC3B723C2E71742BC41770CA0EE0616514",
+      "sha256": "8587EFA16646883614AA4BC4AA3170DD58C828201F3219532EEAE351BBF0A7D4",
+      "catalogName": "(sps44)alienbreed2_disk3.ipf",
+      "identityMatches": true
+    },
+    {
+      "entry": "AlienBreed2_Disk1.ipf",
+      "size": 1139240,
+      "crc32": "8F1A1117",
+      "sha1": "2BE4018FD32B0F0E53EE8F42EB46FAFEDC177CD4",
+      "sha256": "09D156CBF31B06826C885CC982439CB8D9F9294524B5A0046FFD3FB02ABB369C",
+      "catalogName": "(sps44)alienbreed2_disk1.ipf",
+      "identityMatches": true
+    }
+  ],
+  "ocsAlternative": {
+    "spsRelease": 278,
+    "availableLocally": false,
+    "catalogPath": "hash/amigaocs_flop.xml",
+    "disks": [
+      {
+        "name": "(sps278)alienbreedii_disk1.ipf",
+        "size": "1139240",
+        "crc": "4f08a516",
+        "sha1": "b0a43444f4e35d98313d55f91dce119b08ac8ad8"
+      },
+      {
+        "name": "(sps278)alienbreedii_disk2.ipf",
+        "size": "1140380",
+        "crc": "6bcd30c7",
+        "sha1": "00df7bbd2b4e8343193dffb671183d1bb649cd2c"
+      },
+      {
+        "name": "(sps278)alienbreedii_disk3.ipf",
+        "size": "1140380",
+        "crc": "1c4b0b05",
+        "sha1": "4e7050317179c249e2d274d4f02ec49b3a55de00"
+      }
+    ]
+  },
+  "probe": {
+    "engine": "1B7F7AF0742F8B94DEA8F8AED1C1C76BA459B022CF6FAB412911657CA8D09683",
+    "firstClearPc": "000FF334",
+    "startAddress": "0000BD1C",
+    "longwordCount": "0003A654",
+    "logicalEndExclusive": "000F566C",
+    "physicalLoaderAlias": "0007F334",
+    "overwrittenInstructionCycle": 159059412,
+    "sourceSha256": "1FFCC21B875C846B0DD0D6B7379890F794DA8091A8320B0B39F5A4B19166908D",
+    "logSha256": "5AB1DA6FDA5822923C6A8592A91C5AFC2AEDE84B3E1A57D40F607CA324D5B61E"
+  },
+  "runtimeChangesForAlienBreed2": false
+}

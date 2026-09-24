@@ -1,5 +1,44 @@
 # Optional native replay
 
+The [September 23 corpus](engine/NATIVE_CORPUS_2026-09-23.md) adds five games on
+the shipped locality CPU. Lotus Esprit Turbo Challenge reaches interactive racing;
+Railroad Tycoon completes disk A → B → A loading, scenario selection and map/new
+company initialization. Worms reaches its manual-code check; the owner's suggested
+arbitrary-code attempt does not advance to gameplay. Alien Breed II stays black
+and Tower Assault enters a Guru by captured field 600. Both failures have 135
+byte-identical state/image/RAM checkpoints in scalar and batched CPU runs. Their
+original failures are retained as compatibility evidence, not a performance result.
+The [Tower Assault follow-up](engine/TOWER_ASSAULT_INVESTIGATION.md) identifies
+false AGA detection from absent OCS DENISEID readback. Its candidate reaches
+disk-2 loading and the opening level with audio. The
+[Alien Breed II investigation](engine/ALIEN_BREED_II_INVESTIGATION.md) identifies
+all three supplied disks as the AGA edition by exact catalog hashes. That replay
+is outside the OCS profile; the OCS edition remains unavailable and unverified.
+The [single-latch optimization](engine/DMA_LATCH_OPTIMIZATION_2026-09-23.md),
+[direct DMA word-access follow-up](engine/DMA_WORD_ACCESS_2026-09-23.md) and
+[fixed-size palette candidate](engine/VIDEO_PALETTE_2026-09-23.md) retain all 1005
+Tower Assault state/image/RAM captures and complete workload fingerprints. The
+word-access candidate also repeats those checks after the host update to .NET
+10.0.12; the palette candidate is built and verified on that runtime.
+Performance acceptance is recorded separately. The palette candidate fails the
+confidence-bound gate and its edit is discarded; its passing native evidence
+remains attached to the measured binary. The preceding word-access candidate
+also has no performance exception. The subsequent
+[register-bank trial](engine/REGISTER_BANK_2026-09-24.md) retains all four
+complete workload identities and all 1005 Tower Assault captures. Its valid
+performance comparison also misses the 1% gate; inline register storage is
+discarded, with native evidence preserved against that frozen candidate.
+The subsequent [fixed-bounds candidate](engine/FIXED_BOUNDS_2026-09-24.md)
+preserves the original arrays and likewise passes all four identities and all
+1005 Tower Assault capture comparisons. Its valid performance series passes
+hires and native Lemmings but remains inconclusive for lores under the 1% gate;
+native correctness does not constitute performance acceptance.
+The [scoped-local follow-up](engine/SCOPED_LOCALS_2026-09-24.md) also passes all
+874 tests, all four complete workload identities with zero measured allocation,
+and all 1005 Tower Assault capture comparisons. Its complete v8 comparison passes
+the 1% upper-bound limit for every retained workload without an exception. The
+bounded native and physical-hardware coverage limits are unchanged.
+
 The [live WORDSYNC follow-up](engine/DISK_LIVE_WORDSYNC.md) removes the three
 Team17 boot stops below on its identified candidate. Superfrog reaches attract
 gameplay, F17 Challenge loads disk two and reaches a race, and Overdrive loads

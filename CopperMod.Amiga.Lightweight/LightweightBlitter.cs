@@ -588,13 +588,13 @@ internal sealed class LightweightBlitter
         switch (channel)
         {
             case AreaChannel.A when _useA:
-                _dataA = machine.ReadChipWordDma(address);
+                _dataA = machine.ReadChipWordBus(address);
                 _pointerA = AddPointer(_pointerA, _descending ? -2 : 2);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltadat, _dataA);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
                 break;
             case AreaChannel.B when _useB:
-                _dataB = machine.ReadChipWordDma(address);
+                _dataB = machine.ReadChipWordBus(address);
                 _pointerB = AddPointer(_pointerB, _descending ? -2 : 2);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
@@ -604,7 +604,7 @@ internal sealed class LightweightBlitter
                 }
                 break;
             case AreaChannel.C when _useC:
-                _dataC = machine.ReadChipWordDma(address);
+                _dataC = machine.ReadChipWordBus(address);
                 _pointerC = AddPointer(_pointerC, _descending ? -2 : 2);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltcdat, _dataC);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
@@ -612,7 +612,7 @@ internal sealed class LightweightBlitter
             case AreaChannel.D:
                 if (_useD)
                 {
-                    machine.WriteChipWordDma(address, writeValue);
+                    machine.WriteChipWordBus(address, writeValue);
                     _pointerD = AddPointer(_pointerD, _descending ? -2 : 2);
                     machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
                 }
@@ -642,7 +642,7 @@ internal sealed class LightweightBlitter
             {
                 case AreaChannel.B:
                 {
-                    var value = machine.ReadChipWordDma(address);
+                    var value = machine.ReadChipWordBus(address);
                     // The first B access reloads the hidden latch. The second
                     // exposes the pattern word and advances by BLTBMOD.
                     if (_phaseIndex == 1)
@@ -659,13 +659,13 @@ internal sealed class LightweightBlitter
                     break;
                 }
                 case AreaChannel.C:
-                    _dataC = machine.ReadChipWordDma(address);
+                    _dataC = machine.ReadChipWordBus(address);
                     machine.SetBlitterDataFromDma(
                         LightweightRegisters.Bltcdat,
                         _dataC);
                     break;
                 case AreaChannel.D:
-                    machine.WriteChipWordDma(address, writeValue);
+                    machine.WriteChipWordBus(address, writeValue);
                     _lineLastDrawnY = _lineY;
                     break;
             }

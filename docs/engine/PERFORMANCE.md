@@ -11,6 +11,95 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [scoped scalar-local candidate](SCOPED_LOCALS_2026-09-24.md) removes observed
+stack-clearing instructions in the hot device dispatcher without changing device
+work or timing. Production Release, all 874 tests, all four complete identities
+with zero measured allocation, and all 1005 Tower Assault capture comparisons
+pass. Its separately bound v8 comparison completes **VALID / PASS** with all
+36 identities matching, zero measured allocations and valid telemetry. Paired
+frame-time changes / one-sided 95% upper bounds are lores **-2.0306% / -0.8096%**,
+hires **-1.1815% / -0.6618%**, native Lemmings **-0.8746% / +0.2946%**. Every
+workload meets the unchanged 1% confidence-bound limit; no exception is required.
+The owner accepted this complete candidate on 2026-09-24; the linked record
+identifies its frozen engine hash and evidence.
+Mean reference/candidate engine FPS is **395.16 / 403.35**, **359.19 / 363.49**
+and **335.30 / 338.26**, respectively. These are complete-candidate results;
+they do not isolate the local-initialization change's effect. All earlier valid
+and invalid comparisons retain their original dispositions.
+
+The [fixed-bounds candidate](FIXED_BOUNDS_2026-09-24.md) preserves the original
+register/palette arrays and field layouts, while exposing checked constant extents
+and reusing local views for paired accesses. Production Release, all 874 tests,
+all four complete workload identities and all 1005 Tower Assault capture files
+pass. The separately bound v7 comparison completes VALID with all 36 identities
+matching, zero measured allocations and valid telemetry. Paired frame-time
+changes / one-sided 95% upper bounds are lores **-0.5602% / +2.2979%**, hires
+**-0.7459% / +0.4647%**, native Lemmings **-4.0274% / -0.0878%**. Hires and
+native pass; lores remains inconclusive. **No exception is granted.** The 1%
+confidence-bound limit remains unchanged while investigation continues.
+
+The [inline register-bank trial](REGISTER_BANK_2026-09-24.md) passes production
+Release, all 874 tests, all four workload identities and all 1005 Tower Assault
+capture files. Its complete v6 comparison is VALID: all 36 identities match,
+allocations are zero and telemetry is valid. Paired frame-time changes / one-sided
+95% upper bounds are lores **+1.5456% / +4.4445%**, hires **-1.6053% / -0.5406%**,
+native Lemmings **+0.1864% / +2.4795%**. Only hires passes. **Inline register
+storage is discarded; no exception is granted.** Investigation continues with
+constant bounds on the original arrays, retaining the 1% gate.
+
+The [fixed-size OCS palette trial](VIDEO_PALETTE_2026-09-23.md) passes production
+Release, all 874 tests, all four complete workload identities and all 1005 Tower
+Assault capture files. Its complete v5 six-pair comparison is VALID, with matching
+identities, zero allocations and valid telemetry. Paired frame-time changes /
+one-sided 95% upper bounds are lores **-0.2509% / +1.4213%**, hires
+**-2.3057% / -1.3773%**, native Lemmings **+1.3041% / +3.7981%**. Only hires passes
+the 1% gate. **The palette edit is discarded; no exception is granted.**
+Investigation continues from the word-access candidate below, whose evidence
+remains valid and unaccepted.
+
+The [fixed-size DMA word-access candidate](DMA_WORD_ACCESS_2026-09-23.md) retains
+the bus word latch and simplifies address calculation and range checking for
+physical DMA access under the constructor-enforced 512 KiB invariant. Production
+Release and all 874 tests pass; all 1005 Tower Assault capture files match the
+original correction. A Visual Studio update removed .NET 10.0.11 during the first
+attempt, making that whole series INVALID / RERUN. The unchanged binaries are
+revalidated on .NET 10.0.12, then compared with explicit runtime pins in v4.
+That complete six-pair series is **VALID**, with all 36 identities matching,
+zero measured allocations and valid telemetry. Paired frame-time changes /
+one-sided 95% upper bounds are lores **-0.3585% / +3.2687%**, hires
+**-1.8964% / -0.0605%**, native Lemmings **+0.5053% / +4.9319%**. Hires passes;
+lores and native remain inconclusive under the 1% gate. **No exception is
+granted.** The owner requested continued investigation; all preceding evidence
+retains its original result and runtime.
+
+The [DMA latch optimization](DMA_LATCH_OPTIMIZATION_2026-09-23.md) removes the
+duplicate timestamp store from the Tower Assault correction, retaining one word
+and reusing device timing histories on readback. Production Release, 691 engine,
+74 disk and 95 native-enabled host tests pass; all 1005 Tower Assault capture files
+match the preceding correction. Its complete six-pair series is **VALID**, with
+all 36 identities matching, zero measured allocation and valid telemetry. Paired
+frame-time changes / one-sided 95% upper bounds are lores **+0.3011% / +2.2299%**,
+hires **+2.5009% / +6.8299%**, native Lemmings **+0.2067% / +2.6925%**. All upper
+bounds exceed 1%; **acceptance is required and has not been granted**. This does
+not establish an overall throughput improvement. The first candidate's result
+below remains unchanged evidence; these separate series are not a paired
+comparison of the two candidates.
+
+The [Tower Assault / absent OCS DENISEID correction](TOWER_ASSAULT_INVESTIGATION.md)
+passes its bounded native and correctness checks. After three invalid attempts,
+the fourth separately pinned OCS identification v1 series completed **VALID**:
+all 36 complete fingerprints match, allocations are zero and telemetry is valid.
+Paired frame-time changes / one-sided 95% upper bounds are lores
+**+2.7952% / +5.0003%**, hires **-2.8678% / +1.3831%**, native Lemmings
+**+0.8247% / +2.1427%**. Every upper bound exceeds the default 1% gate;
+**performance acceptance is required and has not been granted**. Earlier invalid
+series remain invalid and contribute no samples. The initial owner-requested pause
+was superseded by a request to retry after other build/test jobs were paused.
+Separate candidate-only Tower Assault gameplay averages **291.77 FPS** across
+six valid samples (289.87–295.24), with matching identities and zero measured
+allocation. The reference cannot reach gameplay, so this is throughput only.
+See the [complete result record](TOWER_ASSAULT_PERFORMANCE_2026-09-23.json).
+
 The [combined batch-prefetch candidate](CPU_BATCH_PREFETCH_2026-09-23.md)
 completes a **VALID** six-pair series against the shipped `1.4.1-locality.1` CPU.
 All 36 complete fingerprints match, allocations are zero and telemetry is valid.

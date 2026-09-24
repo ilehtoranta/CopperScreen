@@ -22,6 +22,33 @@ boundary. Compact device state shares that clock; host UI, pacing and audio-devi
 delivery are outside emulated hardware ownership. There is no Legacy scheduler,
 requester graph or parallel device timeline to synchronize.
 
+Absent OCS DENISEID readback retains one completed DMA word. Actual DMA
+transfers update it at output; untimed memory inspection does not. Readback
+consults the devices' existing completion histories, with no duplicate global
+timestamp update; see the [latch optimization](DMA_LATCH_OPTIMIZATION_2026-09-23.md). The
+preceding-CCK/idle policy is a bounded digital model, with physical uncertainties
+listed in the [Tower Assault record](TOWER_ASSAULT_INVESTIGATION.md).
+
+DMA RAM helpers use direct big-endian word access after masking to an even offset
+inside the constructor-enforced 512 KiB array. This preserves the same completed
+bus phase and byte contents, with no observer between the former two byte stores.
+The fixed-size invariant and its boundary tests are documented in the
+[word-access optimization](DMA_WORD_ACCESS_2026-09-23.md); changing supported RAM
+sizes requires reviewing that access proof. CPU memory decoding is separate.
+
+Private register and palette arrays retain their original storage and expose
+checked spans with the same constant sizes used at allocation. Their readonly
+references must never be replaced or exposed; this is the proof that permits
+constant-bound access. Paired accesses reuse the view, not hardware values across
+device updates. See the [fixed-bounds record](FIXED_BOUNDS_2026-09-24.md).
+
+The current optimization candidate scopes `SkipLocalsInit` to device dispatch,
+video step and lores-pair rendering. These methods and their inlined paths assign
+scalar locals before use and contain no uninitialized stack storage. Changes to
+those paths must preserve that obligation. Device execution order is unchanged;
+the [scoped-local record](SCOPED_LOCALS_2026-09-24.md) separates generated-code
+evidence, correctness and the passing performance comparison.
+
 | Area | Implementation entry point | Contract |
 | --- | --- | --- |
 | Machine and registers | [LightweightA500Machine](../../CopperMod.Amiga.Lightweight/LightweightA500Machine.cs), [LightweightRegisters](../../CopperMod.Amiga.Lightweight/LightweightRegisters.cs) | CPU and Copper use shared register storage and side effects, including read strobes. Debug peeks must not become hardware accesses. |

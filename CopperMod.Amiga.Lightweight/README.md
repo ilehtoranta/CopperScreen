@@ -14,6 +14,11 @@ The fitted 512 KiB chip RAM is CPU-mirrored through the low 2 MiB address window
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
 for the default A500 wiring and the changed native boot identity.
 
+Original Denise has no chip-ID register. Its `$DFF07C` read uses the bounded
+preceding-DMA/idle bus model documented in the
+[Tower Assault investigation](../docs/engine/TOWER_ASSAULT_INVESTIGATION.md).
+Electrical edge cases and broader write-only readback remain unverified.
+
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full

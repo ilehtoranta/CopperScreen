@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
@@ -17,6 +18,7 @@ internal sealed class LightweightVideo
     private const int VisibleRasterYStart = 26;
     private const int VisibleRasterYStop = 311;
     private const int MaxPlanes = 6;
+    private const int PaletteColorCount = 64;
     private const ulong PlaneZeroLowMask = 0x1041_0410_4104_1041UL;
     private const uint PlaneZeroHighMask = 0x0410_4104u;
 
@@ -29,7 +31,7 @@ internal sealed class LightweightVideo
     // Reloads replace only their plane's sixteen bits; parity timing is unchanged.
     private ulong _pixelShiftersLow;
     private uint _pixelShiftersHigh;
-    private readonly int[] _palette = new int[64];
+    private readonly int[] _palette = new int[PaletteColorCount];
     private int[] _completed;
     private int[] _rendering;
     private ushort _effectiveBplcon0;
@@ -88,6 +90,15 @@ internal sealed class LightweightVideo
     internal ushort EffectiveBplcon0 => _effectiveBplcon0;
     internal bool Active => _active;
     internal string? UnsupportedActiveFeature { get; private set; }
+
+    // The readonly array and this checked view share the same fixed extent.
+    // No palette storage or renderer field layout changes are needed.
+    private Span<int> Palette
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => MemoryMarshal.CreateSpan(
+            ref MemoryMarshal.GetArrayDataReference(_palette), PaletteColorCount);
+    }
 
     internal void Reset()
     {
@@ -183,6 +194,7 @@ internal sealed class LightweightVideo
     internal void ActivateForSprite(long cycle)
         => ActivateAfter(cycle);
 
+    [SkipLocalsInit]
     internal void Step(long cycle, LightweightA500Machine machine)
     {
         System.Diagnostics.Debug.Assert(
@@ -397,7 +409,7 @@ internal sealed class LightweightVideo
         if (x >= VisibleRasterXStart && (!_renderLineVerticallyInWindow ||
             x + 1 < _horizontalWindowStart || x >= _horizontalWindowStop))
         {
-            FillHiresCck(index, _palette[0]);
+            FillHiresCck(index, Palette[0]);
             return;
         }
         if (x >= VisibleRasterXStart && x >= _horizontalWindowStart &&
@@ -435,8 +447,9 @@ internal sealed class LightweightVideo
             if (sprite1 >= 0) first = sprite1;
             if (sprite2 >= 0) second = sprite2;
         }
-        _rendering[index] = _palette[first];
-        _rendering[index + 1] = _palette[second];
+        var palette = Palette;
+        _rendering[index] = palette[first];
+        _rendering[index + 1] = palette[second];
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -453,7 +466,7 @@ internal sealed class LightweightVideo
                     pixel == 0 ? firstPair : secondPair, machine);
             else
             {
-                var color = lowX < VisibleRasterXStart ? unchecked((int)0xFF000000) : _palette[0];
+                var color = lowX < VisibleRasterXStart ? unchecked((int)0xFF000000) : Palette[0];
                 _rendering[destination] = color;
                 _rendering[destination + 1] = color;
             }
@@ -461,6 +474,9 @@ internal sealed class LightweightVideo
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    // Both sprite outputs are assigned on every returning compositor path.
+    // There is no stackalloc or unchecked initialization in this scope.
+    [SkipLocalsInit]
     private void RenderLowResPair(
         int line,
         int x,
@@ -487,7 +503,7 @@ internal sealed class LightweightVideo
             x + 1 < _horizontalWindowStart ||
             x >= _horizontalWindowStop)
         {
-            var border = _palette[0];
+            var border = Palette[0];
             WriteLowResPair(index, border, border, wide);
             return;
         }
@@ -511,7 +527,8 @@ internal sealed class LightweightVideo
                 secondPlayfield = secondSprite;
             }
 
-            WriteLowResPair(index, _palette[firstPlayfield], _palette[secondPlayfield], wide);
+            var palette = Palette;
+            WriteLowResPair(index, palette[firstPlayfield], palette[secondPlayfield], wide);
             return;
         }
 
@@ -548,10 +565,10 @@ internal sealed class LightweightVideo
         if (_renderLineVerticallyBlanked || x < VisibleRasterXStart)
             return unchecked((int)0xFF000000);
         if (!_renderLineVerticallyInWindow || x < _horizontalWindowStart || x >= _horizontalWindowStop)
-            return _palette[0];
+            return Palette[0];
         var pixel = _dualPlayfieldPixels[code];
         var sprite = machine.ComposeSpriteColorIndex(line, x, 1, pixel >> 4, code);
-        return _palette[_renderLineSpriteOutputEnabled && sprite >= 0 ? sprite : pixel & 15];
+        return Palette[_renderLineSpriteOutputEnabled && sprite >= 0 ? sprite : pixel & 15];
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -562,8 +579,9 @@ internal sealed class LightweightVideo
         var second = _dualPlayfieldPixels[pair & 63];
         machine.ComposeDualHiresSpriteColorIndexes(line, x, first >> 4, second >> 4, pair >> 6, pair & 63,
             out var sprite1, out var sprite2);
-        _rendering[index] = _palette[_renderLineSpriteOutputEnabled && sprite1 >= 0 ? sprite1 : first & 15];
-        _rendering[index + 1] = _palette[_renderLineSpriteOutputEnabled && sprite2 >= 0 ? sprite2 : second & 15];
+        var palette = Palette;
+        _rendering[index] = palette[_renderLineSpriteOutputEnabled && sprite1 >= 0 ? sprite1 : first & 15];
+        _rendering[index + 1] = palette[_renderLineSpriteOutputEnabled && sprite2 >= 0 ? sprite2 : second & 15];
     }
 
     private void UpdateDualPlayfieldPixels()
@@ -593,12 +611,12 @@ internal sealed class LightweightVideo
     {
         if (_renderLineVerticallyBlanked || x < VisibleRasterXStart)
         {
-            _hamColor = _palette[0];
+            _hamColor = Palette[0];
             return unchecked((int)0xFF000000);
         }
         if (!_renderLineVerticallyInWindow ||
             x < _horizontalWindowStart || x >= _horizontalWindowStop)
-            return _hamColor = _palette[0];
+            return _hamColor = Palette[0];
 
         // HRM: plane 6/5 = 00 palette, 01 blue, 10 red, 11 green.
         var dual = (_effectiveBplcon0 & 0x0400) != 0;
@@ -607,7 +625,7 @@ internal sealed class LightweightVideo
         var component = paletteIndex * 17;
         var color = (code >> 4) switch
         {
-            0 => _palette[paletteIndex],
+            0 => Palette[paletteIndex],
             1 => (_hamColor & ~0xFF) | component,
             2 => (_hamColor & ~0xFF0000) | (component << 16),
             _ => (_hamColor & ~0xFF00) | (component << 8)
@@ -616,7 +634,7 @@ internal sealed class LightweightVideo
         var sprite = dual
             ? machine.ComposeSpriteColorIndex(line, x, 1, dualPixel >> 4, code)
             : machine.ComposeSpriteColorIndex(line, x, code, _effectiveSpritePlayfieldPlacement);
-        return _renderLineSpriteOutputEnabled && sprite >= 0 ? _palette[sprite] : color;
+        return _renderLineSpriteOutputEnabled && sprite >= 0 ? Palette[sprite] : color;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -707,9 +725,10 @@ internal sealed class LightweightVideo
             }
         }
 
+        var palette = Palette;
         WriteLowResPair(index,
-            firstBlanked ? unchecked((int)0xFF000000) : _palette[firstOutput],
-            secondBlanked ? unchecked((int)0xFF000000) : _palette[secondOutput], wide);
+            firstBlanked ? unchecked((int)0xFF000000) : palette[firstOutput],
+            secondBlanked ? unchecked((int)0xFF000000) : palette[secondOutput], wide);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -863,9 +882,10 @@ internal sealed class LightweightVideo
         var r = ((encoded >> 8) & 0x0F) * 17;
         var g = ((encoded >> 4) & 0x0F) * 17;
         var b = (encoded & 0x0F) * 17;
-        _palette[colorIndex] = unchecked((int)(0xFF000000u |
+        var palette = Palette;
+        palette[colorIndex] = unchecked((int)(0xFF000000u |
             ((uint)r << 16) | ((uint)g << 8) | (uint)b));
-        _palette[colorIndex + 32] = unchecked((int)(0xFF000000u |
+        palette[colorIndex + 32] = unchecked((int)(0xFF000000u |
             ((uint)(r >> 1) << 16) | ((uint)(g >> 1) << 8) | (uint)(b >> 1)));
     }
 

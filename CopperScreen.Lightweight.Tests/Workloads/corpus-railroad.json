@@ -1,0 +1,96 @@
+[
+  {
+    "frame": 4000,
+    "keyCode": 257
+  },
+  {
+    "frame": 4010,
+    "keyCode": 385
+  },
+  {
+    "frame": 4100,
+    "keyCode": 324
+  },
+  {
+    "frame": 4110,
+    "keyCode": 452
+  },
+  {
+    "frame": 6500,
+    "ejectAdf": true
+  },
+  {
+    "frame": 6600,
+    "diskPath": "../../media/railroad-disk2.adf"
+  },
+  {
+    "frame": 17500,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 17510
+  },
+  {
+    "frame": 18500,
+    "keyCode": 324
+  },
+  {
+    "frame": 18510,
+    "keyCode": 452
+  },
+  {
+    "frame": 19500,
+    "keyCode": 324
+  },
+  {
+    "frame": 19510,
+    "keyCode": 452
+  },
+  {
+    "frame": 20500,
+    "keyCode": 324
+  },
+  {
+    "frame": 20510,
+    "keyCode": 452
+  },
+  {
+    "frame": 21500,
+    "keyCode": 324
+  },
+  {
+    "frame": 21510,
+    "keyCode": 452
+  },
+  {
+    "frame": 22500,
+    "keyCode": 324
+  },
+  {
+    "frame": 22510,
+    "keyCode": 452
+  },
+  {
+    "frame": 22600,
+    "ejectAdf": true
+  },
+  {
+    "frame": 22700,
+    "diskPath": "../../media/railroad-disk1.adf"
+  },
+  {
+    "frame": 23500,
+    "keyCode": 324
+  },
+  {
+    "frame": 23510,
+    "keyCode": 452
+  },
+  {
+    "frame": 30000,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 30010
+  }
+]

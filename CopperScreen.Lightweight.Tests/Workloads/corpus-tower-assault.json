@@ -1,0 +1,61 @@
+[
+  {
+    "frame": 3200,
+    "ejectAdf": true
+  },
+  {
+    "frame": 3300,
+    "diskPath": "../../media/tower-assault-disk2.ipf"
+  },
+  {
+    "frame": 6500,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 6520
+  },
+  {
+    "frame": 8500,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 8520
+  },
+  {
+    "frame": 12100,
+    "keyCode": 325
+  },
+  {
+    "frame": 12110,
+    "keyCode": 453
+  },
+  {
+    "frame": 13000,
+    "keyCode": 324
+  },
+  {
+    "frame": 13010,
+    "keyCode": 452
+  },
+  {
+    "frame": 14000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 14020
+  },
+  {
+    "frame": 16000,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 16100
+  },
+  {
+    "frame": 17000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 17020
+  }
+]

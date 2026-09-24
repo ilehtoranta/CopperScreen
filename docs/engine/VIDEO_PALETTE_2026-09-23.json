@@ -1,0 +1,501 @@
+{
+  "date": "2026-09-23",
+  "measurementStartedAtUtc": "2026-09-23T20:33:04.1860678Z",
+  "measurementCompletedAtUtc": "2026-09-23T20:59:42.104440+00:00",
+  "status": "VALID_GATE_NOT_MET_CONTINUE_INVESTIGATION",
+  "sourceBase": "cb946eb5791c31cafa20823f99f5d207e5da6fb5",
+  "workspaceHeadAtMeasurement": "123ec934261550e6527addc7dd9db2e58da5ce80",
+  "workspaceHeadDifference": "One unrelated website verification file; no engine or dependency changes",
+  "description": "Cached DMA bus word, fixed-size bounded DMA word access, and checked inline OCS palette",
+  "host": {
+    "cpu": "AMD Ryzen 5 5600X",
+    "logicalProcessor": 2,
+    "protectedSibling": 3,
+    "priority": "Normal",
+    "powerPlan": "Balanced",
+    "os": "Windows 10.0.26200",
+    "runtime": "10.0.12",
+    "sdk": "10.0.401",
+    "referenceBuildSdk": "10.0.400",
+    "candidateBuildSdk": "10.0.401"
+  },
+  "referenceEngineSha256": "1B7F7AF0742F8B94DEA8F8AED1C1C76BA459B022CF6FAB412911657CA8D09683",
+  "candidateAssemblies": {
+    "Copper68k.dll": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+    "CopperDisk.dll": "5D2625E5EB504F8FF60921CFA3616ACCC9D0CDE0CFC77A554A24EAD2B718956A",
+    "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+    "CopperMod.Amiga.Lightweight.dll": "2F9E2C78E0B53ADBE1349B857D047A28892EC934F277B2BB27F7E0A34DD607EA",
+    "CopperMod.Amiga.Lightweight.Runner.dll": "9AB9627DA0BC4207F1AB0D37621241C9012C77C22DDBCF4B3106C0B59E3240C0"
+  },
+  "sourceSha256": {
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "37C5EE763D97EAB61C0DD6F1D3266A570AB31210C51480AF60EE6C90603851B0",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "BED7CC35B4E57C45B52C994F721F4E1873ADC65C6C03EDC8A868845894BFD015",
+    "CopperMod.Amiga.Lightweight/LightweightBlitter.cs": "031B967990F38B1898BD84D332ECEE96B07FE01092BC1CF2A19DF8A407011991",
+    "CopperMod.Amiga.Lightweight/LightweightCopper.cs": "15486B70C6F383D03ACFB21140C1A6F6DAE9BD22F8A9F06F1357CFBCE9052972",
+    "CopperMod.Amiga.Lightweight/LightweightDiskDma.cs": "BD0809AB9A3B082C5CFC508CC92EB16C5322CAC84BAF1DA8859026E32DABA0EC",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs": "4464A1541CE7F7C1382E6FBC52BD813EBE4320DEC0EA341E65B3DB1A88990951",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "D83C789EC7867073BD99D849854290F6BB318B091567EC1E3CA37B4265CBAF48",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.cs": "66FE6C4283D69B7F4701DC381AF31DA7AE9F64748942DF2A487ED50510100B00"
+  },
+  "testsSha256": {
+    "LightweightChipMirrorTests.cs": "F3B1C663AC20874E8EB01EBF1F70C47A660010CB09787E42F71B76FA4461A5D6",
+    "LightweightOcsIdentificationTests.cs": "8D8CBAEF7F990E1066CB23FACF1B415FAA905E0A50C85B482F0EFAA0F66F922B"
+  },
+  "protocolSha256": "8307FBB66FC74BCE7CD91D0BD4C215F27C17EACB71DE5C4B67170DC5C0FBAE6F",
+  "gate": {
+    "limitPercent": 1,
+    "statistic": "One-sided 95% Student-t upper bound of paired log frame-time ratios; n=6, df=5, t=2.015048",
+    "allCompleteFingerprintsMatch": true,
+    "measuredAllocationsBytes": 0,
+    "exceptionGranted": false
+  },
+  "summary": [
+    {
+      "workload": "lores",
+      "referenceMeanFps": 382.3466666666667,
+      "candidateMeanFps": 383.25,
+      "pairedFrameTimeChangePercent": -0.250944622400731,
+      "oneSided95UpperPercent": 1.4212662006667822,
+      "pairedFpsChangePercent": 0.251575938690128,
+      "disposition": "INCONCLUSIVE"
+    },
+    {
+      "workload": "hires",
+      "referenceMeanFps": 344.77,
+      "candidateMeanFps": 352.9033333333333,
+      "pairedFrameTimeChangePercent": -2.3057484311532503,
+      "oneSided95UpperPercent": -1.3772831466921716,
+      "pairedFpsChangePercent": 2.360167967025523,
+      "disposition": "PASS"
+    },
+    {
+      "workload": "lemmings",
+      "referenceMeanFps": 322.87666666666667,
+      "candidateMeanFps": 318.81333333333333,
+      "pairedFrameTimeChangePercent": 1.304108115657812,
+      "oneSided95UpperPercent": 3.798073374139281,
+      "pairedFpsChangePercent": -1.2873200701485132,
+      "disposition": "ACCEPTANCE_REQUIRED"
+    }
+  ],
+  "samples": [
+    {
+      "Workload": "lores",
+      "Label": "R1",
+      "Fps": 371.6,
+      "MsPerFrame": 2.6910656620021527,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C1",
+      "Fps": 381.4,
+      "MsPerFrame": 2.6219192448872577,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C2",
+      "Fps": 382.24,
+      "MsPerFrame": 2.616157388028464,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R2",
+      "Fps": 390.07,
+      "MsPerFrame": 2.5636424231548185,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R3",
+      "Fps": 384.93,
+      "MsPerFrame": 2.5978749383004702,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C3",
+      "Fps": 385.72,
+      "MsPerFrame": 2.5925541843824536,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C4",
+      "Fps": 393.81,
+      "MsPerFrame": 2.539295599400726,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R4",
+      "Fps": 393.1,
+      "MsPerFrame": 2.543881963876876,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R5",
+      "Fps": 383.95,
+      "MsPerFrame": 2.604505795025394,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C5",
+      "Fps": 376.62,
+      "MsPerFrame": 2.655196219000584,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C6",
+      "Fps": 379.71,
+      "MsPerFrame": 2.633588791446104,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R6",
+      "Fps": 370.43,
+      "MsPerFrame": 2.699565369975434,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R1",
+      "Fps": 339.1,
+      "MsPerFrame": 2.948982601002654,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C1",
+      "Fps": 347.4,
+      "MsPerFrame": 2.878526194588371,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C2",
+      "Fps": 356.07,
+      "MsPerFrame": 2.8084365433763026,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R2",
+      "Fps": 350.54,
+      "MsPerFrame": 2.8527414845666685,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R3",
+      "Fps": 344.47,
+      "MsPerFrame": 2.903010421807414,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C3",
+      "Fps": 348.48,
+      "MsPerFrame": 2.8696051423324147,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C4",
+      "Fps": 356.38,
+      "MsPerFrame": 2.8059936023345866,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R4",
+      "Fps": 349.24,
+      "MsPerFrame": 2.8633604398121633,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R5",
+      "Fps": 341.18,
+      "MsPerFrame": 2.93100416202591,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C5",
+      "Fps": 356.75,
+      "MsPerFrame": 2.803083391730904,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C6",
+      "Fps": 352.34,
+      "MsPerFrame": 2.8381676789464723,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R6",
+      "Fps": 344.09,
+      "MsPerFrame": 2.9062163968729116,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R1",
+      "Fps": 324.69,
+      "MsPerFrame": 3.0798607902922788,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C1",
+      "Fps": 309.47,
+      "MsPerFrame": 3.231330985232817,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C2",
+      "Fps": 305.64,
+      "MsPerFrame": 3.2718230598089257,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R2",
+      "Fps": 317.36,
+      "MsPerFrame": 3.150995714645828,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R3",
+      "Fps": 323.14,
+      "MsPerFrame": 3.0946339048090614,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C3",
+      "Fps": 325.17,
+      "MsPerFrame": 3.0753144509026047,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C4",
+      "Fps": 322.74,
+      "MsPerFrame": 3.0984693561380676,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R4",
+      "Fps": 325.58,
+      "MsPerFrame": 3.071441734750292,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R5",
+      "Fps": 318.85,
+      "MsPerFrame": 3.1362709738121373,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C5",
+      "Fps": 329.37,
+      "MsPerFrame": 3.0360992197225003,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C6",
+      "Fps": 320.49,
+      "MsPerFrame": 3.120222159817779,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R6",
+      "Fps": 327.64,
+      "MsPerFrame": 3.0521303870101333,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    }
+  ],
+  "telemetry": {
+    "intervals": 1456,
+    "seconds": 1600.6265103999176,
+    "maxIntervalSeconds": 1.1876271999790333,
+    "longestContinuousSecondsAtOrAbove25Percent": {
+      "Selected": 0.12982749997172505,
+      "Sibling": 2.2842708000098355,
+      "Package": 1.1491191000095569
+    },
+    "competingWorkloads": [],
+    "status": "VALID_HOST_LOAD_POLICY_V2"
+  },
+  "runtimeEvidence": [
+    {
+      "Path": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "Hash": "21A46F1E5235CF4E844B9DE5429F0E198B9C97A41F0503A66442F1D639CA3EE6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\host\\fxr\\10.0.12\\hostfxr.dll",
+      "Hash": "838591885C5396FB0588A3AEDC2F3E841D3AFC67570868B1BCE615264005A44C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+      "Hash": "128AEE8C62A673D64739E585E3876B61133571CEC83A46240A62581D5465639B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrjit.dll",
+      "Hash": "0749D8FC8E944D0576E1BB47120F87ADD8F875E5CD8968995633063FC79256F6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+      "Hash": "1125ACC8106C43FC8BAD2D203C4C4485DF6182D292846C2FFF415C1040C54678"
+    }
+  ],
+  "regressionEvidence": {
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-C1.log": "2273F2D1C38201466B5241BD31E06B69A1904F7D595D67821A706C6B0CB77590",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-C2.log": "B326B829318963B8591A008CAFA203DF7DC9A83656090268F20FF9E6F585D510",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-C3.log": "F3D1B252057BE49F9D0828F065AEC88D6407F227CACB0A5856BE0B5E5020553D",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-C4.log": "81CC5B6BAE6DF10500EAD3D3BCC00FC88796793869DA6B7DD5C486F63C026F8F",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-C5.log": "C54EBB950E11B34ED27CA3D2E12D720AAF30E948551C9B3C9D97572B7FEB355C",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-C6.log": "16A7FD08E06EDBCC45BA2508D60D92A789803AA7F0510C6E82353E3D616E66BF",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-R1.log": "0EF01CB4F3B9A9AB5E8CF9DBA2D92F3E9F7A7E635FB020FF24E1B1628A335B5D",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-R2.log": "A0A9CCBD7D568D0EF9DB161A778095E004268C1C4A490E5DA8D1813EAD4CF653",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-R3.log": "7413827C4DBA3E416380CCA59D8852EC861A7F061637A28A7490F55FCD1DEDAE",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-R4.log": "C2A4B78BF4257C10EE2A355389ED573EC8FBC182508B293156C17BE0CB2A1FCA",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-R5.log": "CE20CECFB7041DA63FBA33380673268F85876194806268626BFA5CE9E916F7D0",
+    "artifacts/video-palette-optimization/performance-attempt-1/hires-R6.log": "F28A32F8D1AE6E0598D51D1B31E9EF332C629B050A704BE243916BE599CBBDBF",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-C1.log": "06892EFD16C256AE5600DF634B53D7A1C9D629D7B370F471468CE45CFCE02D96",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-C2.log": "1D754464CE3CD03F8BB4CF4C70D7487DB2C1436D6CA3A16FE817DB08451E5699",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-C3.log": "E73CE116C6C1C444B8EF6E0C4F8E58B0BF7DD739E3D8C1F5CAD85F1B24063C85",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-C4.log": "F261728C564B5CE1E392CEDF32379290F93027A3E12C54192840FF63CC32571E",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-C5.log": "9FF48A9CD577F2AAB1780089B84A387DD5603A915ACB90BE08420FB6A41BD8EB",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-C6.log": "0D12DFB78B0F8026D4B096FA8032DF1A8949C1C10C6EA4903C5FFE2131E8C10E",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-R1.log": "537B3F10C250DE4579F1B1BB67D556AE3FB734BA08DE5BBECEF5ABAF599CEF63",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-R2.log": "4A8C244A25403172E5FB2265E80E6A92BC865B4921DF4C23203AD6DC2A0AF7E9",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-R3.log": "A23F64022C21F3ED47A77A4780741FCE1D3B7DC1F8167AA316EA96BB969A5154",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-R4.log": "1694DC4381C9902BFA2C3BFB224DB9FBBDDC4DACBAA4B1C1F854AC6167A97E42",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-R5.log": "6F486D0A9965CC1220FE6C0AA1BD6E693C8067FCEB62C7A6428BCE03BB0B938A",
+    "artifacts/video-palette-optimization/performance-attempt-1/lemmings-R6.log": "837B7274624EA76011A4F15950A88BEC3E1F7D23FC98749DFD7A509F333908AB",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-C1.log": "B3D8071DA98EAE9F1C73539F8E5AE93F2931726D8421F9FDBF44686288E48644",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-C2.log": "E098D90F401912F2C53441DB1720CB9ADCA2C9DF8927C3D3470B25AEBBD7A36C",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-C3.log": "7DA5A5EE236249EF76A05951ABFCF23AB14DD1750506E9AA1632B6195A1B0E61",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-C4.log": "ED512B067150624FC91CD2EC25D300F20B4CADC54C09ACDBC7F03A727D7AA63B",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-C5.log": "877887A476EF89B19690173487BC3B03B40006E946814C34737E08D1D52EDE24",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-C6.log": "7167CF006F572DA64D552993B0AEE12792502877E7AFF7A289EE938C01D5A1D8",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-R1.log": "371E49F429A4B9976829A0F0C4DFC167FEE3C6A1CB454D0B9E380AC2718591F9",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-R2.log": "8D5D57B044C294C3F5E2D905A54C9B0C86853ECD7F9F8A6954503CEF521FE5A2",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-R3.log": "1DE9AB2770ED74954453E22C3B42190C3F5C2C63723D29669EFCE879D1B0CCD7",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-R4.log": "4E0323ADDD5AB3ABDF54EBC87957766AFACE97DB311D80814FFB69664991BF52",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-R5.log": "A0BB67E555F3DFC0C730B571F6DAC9466E9FF9445E7A3F47A19AE312437EFE08",
+    "artifacts/video-palette-optimization/performance-attempt-1/lores-R6.log": "8404E98B1E7179F08A4730E26C587AFC41002499BC6F7F0EF10AB22F90874D9C",
+    "artifacts/video-palette-optimization/performance-attempt-1/protocol.log": "640508FAA833685AF01702683461BD21626CDA952DB904FB9E933351117F37C2",
+    "artifacts/video-palette-optimization/performance-attempt-1/samples.json": "61B4314FB14B887AE4E52CD2B76A06ECA8918C6552D43A025227122322214D08",
+    "artifacts/video-palette-optimization/performance-attempt-1/summary.json": "6BA57D04A3DA11765BFD84699FD9432D16D43823FCDFFE87AA1C61AC9366F143",
+    "artifacts/video-palette-optimization/performance-attempt-1/telemetry.jsonl": "E85052D7F9314E059524BD7FFEF8D1015BE6C34FF03CA0FF40D588892E908C6F"
+  },
+  "preflightEvidence": {
+    "artifacts/video-palette-optimization/performance-validation/protocol.log": "1ADE7544B5C1A488E7B12589EC5EA85D46D3509C188E1A095BB9935B696D803A",
+    "artifacts/video-palette-optimization/performance-validation/telemetry.jsonl": "CE15ABFCC3BF4DEDE6C2ABFD0D8113814B1F785EBF811D7F6B316426EBA4D070"
+  },
+  "validation": {
+    "productionBuildWarnings": 0,
+    "productionBuildErrors": 0,
+    "enginePassed": 705,
+    "diskPassed": 74,
+    "hostPassed": 95,
+    "skipped": 0,
+    "nativeTowerFields": 20000,
+    "matchingNativeCaptureFiles": 1005,
+    "matchingStates": 335,
+    "matchingBitmaps": 335,
+    "matchingRamDumps": 335,
+    "fullLoresHiresLemmingsTowerIdentitiesRetained": true,
+    "physicalBusEdgeCertification": false
+  },
+  "codeGenerationRuntime": "10.0.12",
+  "codeGenerationSdk": "10.0.401",
+  "codeSizes": {
+    "control401": {
+      "lores/CopperMod.Amiga.Lightweight.LightweightA500Machine:TickDevices(long):this (Tier1)": 3598,
+      "lores/CopperMod.Amiga.Lightweight.LightweightVideo:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 2167,
+      "lores/CopperMod.Amiga.Lightweight.LightweightVideo:RenderLowResPair(int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine,bool):this (Tier1)": 936,
+      "hires/CopperMod.Amiga.Lightweight.LightweightA500Machine:TickDevices(long):this (Tier1)": 3536,
+      "hires/CopperMod.Amiga.Lightweight.LightweightVideo:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 2086,
+      "hires/CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresCck(int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 2294,
+      "hires/CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 921
+    },
+    "inline": {
+      "lores/CopperMod.Amiga.Lightweight.LightweightA500Machine:TickDevices(long):this (Tier1)": 3585,
+      "lores/CopperMod.Amiga.Lightweight.LightweightVideo:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 2144,
+      "lores/CopperMod.Amiga.Lightweight.LightweightVideo:RenderLowResPair(int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine,bool):this (Tier1)": 924,
+      "hires/CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 929,
+      "hires/CopperMod.Amiga.Lightweight.LightweightA500Machine:TickDevices(long):this (Tier1)": 3522,
+      "hires/CopperMod.Amiga.Lightweight.LightweightVideo:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 2072,
+      "hires/CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresCck(int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)": 2313
+    }
+  },
+  "localEvidenceHashes": {
+    "artifacts/video-palette-optimization/array-code-sizes.json": "521EBC112EAAFB76FDFAE2E3F89393289B1D36E9CBD63A1988F4C688BAEB7233",
+    "artifacts/video-palette-optimization/array-hires-jit.log": "91EE8E49861AEFB438B1138D978C1E0D1880C2151F41BD14A2E8ACFF768266B6",
+    "artifacts/video-palette-optimization/array-hires-jit.txt": "2E818E21C670E2CCA3DC69A76BD9B988934F8DDAF6BCFA9E5B950A34E02C4C06",
+    "artifacts/video-palette-optimization/array-hires-tier1.txt": "4933090B16094AC93F1F55C712F56802922F8FE9E592733B3D73657D65C32A61",
+    "artifacts/video-palette-optimization/array-inspection.log": "BB2556FAB6B292596C3FC696EBC01BDC20A911F51523A6114DB25B6A3FEA9E55",
+    "artifacts/video-palette-optimization/array-lores-jit.log": "0B5E61CB983BAAFB0E4BFB77C9699531D1A64ECAC348C3787F5DC1077FEB3508",
+    "artifacts/video-palette-optimization/array-lores-jit.txt": "1D31297390D62AFDE77894D173AD3948065128C359C3D65B4B6A3E1933BF51B7",
+    "artifacts/video-palette-optimization/array-lores-render.txt": "226ACECDD28ED281FEA43CDA0A310554076DF193843E67C1D9DE02D3FAF80BC2",
+    "artifacts/video-palette-optimization/array-lores-tier1.txt": "0BC36EACA72C538FE32423F46CE7B21595D4375B8179182B090105D049BD4E99",
+    "artifacts/video-palette-optimization/compare-inline-native.py": "2997D9CC7866899C2384E011942D88C203F53B67C59647D3D8EFEC4F1B043F74",
+    "artifacts/video-palette-optimization/control401-hires-jit.log": "553BDE492D0F506FEE65213A510E30C980FA423BAAC7677A36966C1EBE1B74B7",
+    "artifacts/video-palette-optimization/control401-hires-jit.txt": "065B10BC90D2B0469BD50E3CD97F80BD23A003C9642D1D7C61078DE80C78BFEA",
+    "artifacts/video-palette-optimization/control401-hires-tier1.txt": "D1B59BF379012A15052D96612A455C3A0BCB00EEA920A993B15A4B57B06C410B",
+    "artifacts/video-palette-optimization/control401-inspection.log": "0AFD3320CF2C436D8363314F7A312E283077E8AD70570A1D0903B0B051B7F28F",
+    "artifacts/video-palette-optimization/control401-lores-jit.log": "3BE967833ED04A29256B1D6CC437280CACA86F6410B65503CC71F0F40EBE2E87",
+    "artifacts/video-palette-optimization/control401-lores-jit.txt": "5DE3AF3519DE1BB93E5CA788EA351381A5A106AC9E8678213A059FB1488452A5",
+    "artifacts/video-palette-optimization/control401-lores-render.txt": "8EC1267E065CE381BB3EE0F9C6DFE8E593245E1618F9A1420A8522EE31C9E68F",
+    "artifacts/video-palette-optimization/control401-lores-tier1.txt": "C0BB9F6DFB278A3697E9BF7D978FEF0F275259DEF6F12B40DDEA4A5CB6D7C614",
+    "artifacts/video-palette-optimization/hires-inline-identity.log": "23E09ABDDE480EAC142DE234633F8FF77C7A3265BD20867DC6504AB5AE9321DE",
+    "artifacts/video-palette-optimization/inline-disk-tests.log": "C8316398388FFBB2F66D6D28FC8665DF9B0F719B48DDBDFE9A65997CCE83FD5C",
+    "artifacts/video-palette-optimization/inline-engine-tests.log": "5EFBC1EADA31EE04310173FA74160B532B10DA08DFDE15E42FD6368FA5550EED",
+    "artifacts/video-palette-optimization/inline-hires-jit.log": "9C114523F0BFE325C212FC4E5874A258C895DA9CB3C88FD34DC15A57CAFB545D",
+    "artifacts/video-palette-optimization/inline-hires-jit.txt": "DB94B621B3296C72AFA035AFF79D7EDDD7CE619360CBEC2609F9A6C05FBB09FE",
+    "artifacts/video-palette-optimization/inline-hires-tier1.txt": "7213B516C013612FDFFAD65202965246756CE056C2856311E2028D1FC70E88CF",
+    "artifacts/video-palette-optimization/inline-host-tests.log": "A2102DD526DE79D5C399DDBF13A23F08294894327E333B7CE278F8D14E9589E8",
+    "artifacts/video-palette-optimization/inline-inspection.log": "8BB8A6B8ADB6E795B80DF38D7660CCD0927E48FE57A42AAC76F854F26BEB040C",
+    "artifacts/video-palette-optimization/inline-lores-jit.log": "E536D163C101D00891CB1086A2A643243AABA03F30D45AF9203CEF85238AF29B",
+    "artifacts/video-palette-optimization/inline-lores-jit.txt": "A81ED75FBF6EFF6DF398546904A203E6F8B30F9D51C1A995BC35C5030D00F723",
+    "artifacts/video-palette-optimization/inline-lores-render.txt": "B29A86D956E4783D29ED09BDC34A0CD3559E185475B0E40252BD4E59D1EFA2D1",
+    "artifacts/video-palette-optimization/inline-lores-tier1.txt": "82CD0386209A44E31CBBA470D67AA4206F7FD89CEFA6E700F500951AB19244B6",
+    "artifacts/video-palette-optimization/inline-release-build.log": "07041BEBC18FB6BAD1DF841553435CF2F4D7EF07007EB7D42CCB180F428EF78D",
+    "artifacts/video-palette-optimization/inspect-palette.ps1": "CE36FE61C862280E89870176BB9A8869B60EF2E664820678E53D7B8A6EEF0746",
+    "artifacts/video-palette-optimization/lemmings-inline-identity.log": "CB00104A78D11FB14E20E43251835CF38F74C3764692C39B7FE1D8AC9E4D39EB",
+    "artifacts/video-palette-optimization/LightweightVideo.before.cs": "020F7155C5156419FDBC7519F6F12309FC3C42AA5A355A506646254F1B401AC1",
+    "artifacts/video-palette-optimization/lores-inline-identity.log": "E8D639BFEB58582F8FD83FC4F2826E2246FBA29F37272E9201E738A77A7731EC",
+    "artifacts/video-palette-optimization/native-inline-equivalence.json": "DE67CC2C8B2A709B6C8866A64A982BC05761DD010E5C0187905D0D45DCC6D426",
+    "artifacts/video-palette-optimization/palette-code-sizes.json": "9CC0791C9C6C54BA9808F58D91909A10C56B1C928C1B21224B303F07C2D29609",
+    "artifacts/video-palette-optimization/performance-attempt-1.log": "71AEAB717E31BBB0B74D2735D01D71BA4BA41E35920DE33652883B66A6383183",
+    "artifacts/video-palette-optimization/performance-validation.log": "C2F0DA8B93479588BAAC63C2176C9EEAABEA53BD0C3C8C95AD1FB729CBA94C6D",
+    "artifacts/video-palette-optimization/record-results.py": "CA8ACE616BFBC87516DFEEDBB32C786F0A807D3BB7B0B80F33083C5C3E82AB8F",
+    "artifacts/video-palette-optimization/sdk401-control-build.log": "26081743AC015E836B5F530A07F026AECDA5AC0B8C8DDCADF8D735E6EBF3B7D2",
+    "artifacts/video-palette-optimization/source-before.json": "9FDB6AD25D5506BAF73D34B2396B6ACC3AE7821AE9A146FBA5E89A8BB83611AC",
+    "artifacts/video-palette-optimization/tower-inline-identity.log": "BBB202D45A432B6A246DB069E7AF2704F5D6E65F564689C49FF6B778CDE7AB34",
+    "artifacts/video-palette-optimization/tower-inline.log": "8E011B1E7B55698BA9A54A418F55B8E0213A3AE0A602C05ACFD9C01C049882E3",
+    "artifacts/video-palette-optimization/verify-inline-identities.log": "7CB26FFC8C57F5BFB7E5C047714CE8CF7E8E880E119A1B8E728782EF646E5335",
+    "artifacts/video-palette-optimization/verify-inline-identities.ps1": "FFC31112EDD8D53207B7966C71C6E412F004FDA2A88B61FE3BCEE214E60816F9"
+  },
+  "precedingCandidateResult": "DMA_WORD_ACCESS_2026-09-23.json"
+}

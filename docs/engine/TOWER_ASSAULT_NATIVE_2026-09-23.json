@@ -1,0 +1,582 @@
+{
+  "date": "2026-09-23",
+  "status": "BOUNDED_NATIVE_CORRECTION_NOT_PERFORMANCE_EVIDENCE",
+  "productionSourceBase": "cb946eb5791c31cafa20823f99f5d207e5da6fb5",
+  "assemblies": {
+    "Copper68k.dll": "982DFFFFBB18BA1D96ACE514E0B8044D3AC780565A018112CED3FB4FCD784F0F",
+    "CopperDisk.dll": "5D2625E5EB504F8FF60921CFA3616ACCC9D0CDE0CFC77A554A24EAD2B718956A",
+    "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+    "CopperMod.Amiga.Lightweight.dll": "2076345FF2476EE86A1F77CB9B553641D4ECFC1363705051BD75F7F9A426EFA3",
+    "CopperMod.Amiga.Lightweight.Runner.dll": "9AB9627DA0BC4207F1AB0D37621241C9012C77C22DDBCF4B3106C0B59E3240C0"
+  },
+  "inputScriptSha256": "C321865216C6D9BBF9DF027658277AD2952735D81E728D7B25259CE9094DAA9E",
+  "scalarMatchingCaptureFiles": 1005,
+  "alienBreed2UnchangedCaptureFiles": 405,
+  "firstMovementDifference": "frame-016020.bmp",
+  "runs": [
+    {
+      "run": "tower-candidate",
+      "checkpoints": 201,
+      "audioNonzero": 89,
+      "finalState": {
+        "frame": 12000,
+        "cycle": 1704812382,
+        "beam": [
+          0,
+          9
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C5EA0A",
+        "sr": "0001",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000000",
+          "00033ED4",
+          "00000000",
+          "00000054",
+          "00000000",
+          "000302C2",
+          "00000004"
+        ],
+        "address": [
+          "00C00E60",
+          "0001F018",
+          "00C617D4",
+          "00C5FBBC",
+          "00C3E6E6",
+          "00C396BE",
+          "00DFF000",
+          "00C7FAF8"
+        ],
+        "dmacon": "03DF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "0001EEA0",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 61680,
+        "Cylinder": 5,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 5,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 61680,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "1C71",
+        "diwstop": "3CD1",
+        "ddfstart": "0030",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002212C",
+          "000252AC",
+          "0002842C",
+          "0002B5AC",
+          "00034A2C",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "finalBitmapSha256": "5124D6C24E715A64532C7346F2D4D408589A87104F12194A41745E7CACCFE4DB",
+      "logSha256": "FB55AFF73174A554DC1F493436D2C70813EA7432A8B91D5394CD428EA8567E96"
+    },
+    {
+      "run": "tower-controls",
+      "checkpoints": 335,
+      "audioNonzero": 206,
+      "finalState": {
+        "frame": 20000,
+        "cycle": 2841628368,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C00ACC",
+        "sr": "0009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000003",
+          "0000008A",
+          "00003C90",
+          "00003C90",
+          "00000803",
+          "00000000",
+          "0000FFFF"
+        ],
+        "address": [
+          "00C07F1C",
+          "00C077E6",
+          "00000DD3",
+          "00C07F1C",
+          "00C20B9E",
+          "00C0C2E8",
+          "00DFF000",
+          "00C7FAFC"
+        ],
+        "dmacon": "03F1",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "0000417C",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 61713,
+        "Cylinder": 18,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 18,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 61713,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "4200",
+        "diwstart": "287B",
+        "diwstop": "2DBD",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "00000F38",
+          "00001148",
+          "00001358",
+          "00001568",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "finalBitmapSha256": "B2F6C003EBCDEDAE5E5DB13F3033E0BF143569EA2D0DD4EEF1B0A028E793FE1F",
+      "logSha256": "1BD2FA1B66797DF07443DF87E2731FC854572F018DA983F246A0B3776D27D03E"
+    },
+    {
+      "run": "tower-scalar",
+      "checkpoints": 335,
+      "audioNonzero": 206,
+      "finalState": {
+        "frame": 20000,
+        "cycle": 2841628368,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C00ACC",
+        "sr": "0009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000003",
+          "0000008A",
+          "00003C90",
+          "00003C90",
+          "00000803",
+          "00000000",
+          "0000FFFF"
+        ],
+        "address": [
+          "00C07F1C",
+          "00C077E6",
+          "00000DD3",
+          "00C07F1C",
+          "00C20B9E",
+          "00C0C2E8",
+          "00DFF000",
+          "00C7FAFC"
+        ],
+        "dmacon": "03F1",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "0000417C",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 61713,
+        "Cylinder": 18,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 18,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 61713,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "4200",
+        "diwstart": "287B",
+        "diwstop": "2DBD",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "00000F38",
+          "00001148",
+          "00001358",
+          "00001568",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "finalBitmapSha256": "B2F6C003EBCDEDAE5E5DB13F3033E0BF143569EA2D0DD4EEF1B0A028E793FE1F",
+      "logSha256": "9AE3CB35D3D3E696AB89F0A1F32E89A9A45194553FB2F0CB97CA882392E73235"
+    },
+    {
+      "run": "tower-no-controls",
+      "checkpoints": 301,
+      "audioNonzero": 172,
+      "finalState": {
+        "frame": 18000,
+        "cycle": 2557424366,
+        "beam": [
+          0,
+          1
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01CC0",
+        "sr": "0000",
+        "overlay": false,
+        "data": [
+          "00000070",
+          "00000001",
+          "000025FF",
+          "00000000",
+          "00000054",
+          "00000000",
+          "000502C2",
+          "00000030"
+        ],
+        "address": [
+          "00C32068",
+          "00C01F5C",
+          "00C1A26C",
+          "00C01FAE",
+          "00C3E6E6",
+          "0004F1D0",
+          "00DFF000",
+          "00C7FAF8"
+        ],
+        "dmacon": "03D1",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "000044C2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 61713,
+        "Cylinder": 18,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 18,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 61713,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2C81",
+        "diwstop": "2CC1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "00021690",
+          "00023E90",
+          "00026690",
+          "00028E90",
+          "0002B690",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "finalBitmapSha256": "BB6ED44A24C6BBF63941E325FB3580157003F235CE0F709CCC66632FFB4D09FA",
+      "logSha256": "875BA3E0031A95F8DDAC58340A2120B768B7CA3C54252F647FFD1172021627E5"
+    },
+    {
+      "run": "tower-idle-level",
+      "checkpoints": 301,
+      "audioNonzero": 172,
+      "finalState": {
+        "frame": 18000,
+        "cycle": 2557424364,
+        "beam": [
+          0,
+          0
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C00AC4",
+        "sr": "0009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000005",
+          "0000008A",
+          "00003C90",
+          "00003C90",
+          "00000000",
+          "00007681",
+          "0000FFFF"
+        ],
+        "address": [
+          "00C07F1C",
+          "00C077E6",
+          "00000DD3",
+          "00C07F1C",
+          "00057B00",
+          "00C0C2E8",
+          "00DFF000",
+          "00C7FAFC"
+        ],
+        "dmacon": "03F5",
+        "intena": "4030",
+        "intreq": "17C0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "0000417A",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 61713,
+        "Cylinder": 18,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 18,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 61713,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "4200",
+        "diwstart": "287B",
+        "diwstop": "2DBD",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "00000F38",
+          "00001148",
+          "00001358",
+          "00001568",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "finalBitmapSha256": "2C3F6E6790B43783DBB7D52E4C26CF23BCE66A84F215D7234012937D5A589F5E",
+      "logSha256": "5FCAAE6A952D79416AD02CA40881B864250853024111CBD3D564CE7C81ADD644"
+    },
+    {
+      "run": "ab2-candidate",
+      "checkpoints": 135,
+      "audioNonzero": 0,
+      "finalState": {
+        "frame": 8000,
+        "cycle": 1136684028,
+        "beam": [
+          0,
+          0
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "000FF334",
+        "sr": "2008",
+        "overlay": false,
+        "data": [
+          "0001D8CD",
+          "0000002C",
+          "0002F390",
+          "0000BD1C",
+          "00123111",
+          "00000004",
+          "00000000",
+          "00000020"
+        ],
+        "address": [
+          "0007F338",
+          "00C00F60",
+          "00000400",
+          "000F566C",
+          "000FF202",
+          "00C00F60",
+          "0000BD1C",
+          "00C00F60"
+        ],
+        "dmacon": "03D0",
+        "intena": "0000",
+        "intreq": "1020",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "000003F4",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 95239,
+        "Cylinder": 17,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 17,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 95239,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "0000",
+        "diwstart": "2C81",
+        "diwstop": "F4C1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "00000E60",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": false
+      },
+      "finalBitmapSha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+      "logSha256": "8A78E26B8CFA50AC2DF93ABC26C1B0C0FF70F53865ADDE8AD8044943EA8E60D1"
+    }
+  ]
+}
