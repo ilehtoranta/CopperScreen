@@ -16,6 +16,37 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [combined native-corrections comparison](NATIVE_CORRECTIONS_VALIDATION_2026-09-25.md)
+is **VALID** for the current engine, covering the Alien Breed byte-WORDSYNC,
+Desert Strike end-stop and Desert Dream live-pointer changes together. All 36
+complete identities match with zero measured allocation and valid host telemetry.
+Lores frame time is **+1.4898%**, upper bound **+3.3621%**: **ACCEPTANCE_REQUIRED**
+under the unchanged 1% limit. Hires (**-0.6733% / +0.4938%**) and native Lemmings
+(**-1.0536% / +0.3907%**) pass. No exception is inferred. The separately pinned
+[comparison v1](../../scripts/run-lightweight-native-corrections-comparison-v1.ps1)
+uses identical frozen runners/dependencies on both sides. This combined result
+does not attribute cost to an individual correction or replace older evidence.
+
+The [Desert Dream live area-pointer correction](DESERT_DREAM_LIVE_POINTERS_2026-09-25.md)
+passes Release, all 726 engine tests and matching normal/scalar 72,000-field
+replays through both disks to the closing credits. The follow-up also verifies
+both hidden sections through final greetings: 30,000 fields and all 120 saved
+normal/scalar files identical. Throughput is assessed separately above.
+
+The [Desert Strike end-stop correction](DESERT_STRIKE_END_STOP_2026-09-24.md)
+passes the Release build, 719 engine tests and matching normal/scalar 26,000-field
+replays through the disk-three prompt. It is included in the combined measurement;
+no isolated end-stop performance result is claimed.
+
+The [Alien Breed CPU disk-byte WORDSYNC correction](DISK_BYTE_WORDSYNC_2026-09-24.md)
+passes the production Release build, all 716 engine tests, matching scalar/batched
+boot captures and a native disk-two menu replay. Its separately pinned comparison
+v1 is **INVALID / RERUN**: sustained package interference exceeded 25% for
+10.32031 seconds during lores R2. The three completed identities match with zero
+allocation, but their timing samples are excluded from acceptance. The new combined
+comparison above measures the current engine; the earlier isolated series remains
+invalid. Earlier package-specific exceptions do not apply.
+
 The [scoped scalar-local candidate](SCOPED_LOCALS_2026-09-24.md) removes observed
 stack-clearing instructions in the hot device dispatcher without changing device
 work or timing. Production Release, all 874 tests, all four complete identities

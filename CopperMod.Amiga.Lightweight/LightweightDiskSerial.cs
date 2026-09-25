@@ -88,6 +88,9 @@ internal struct LightweightDiskSerial
             _byteReady = true;
         }
         CompareSync(cycle, machine);
+        // Received WORDSYNC aligns CPU byte reads too, even with DMA disabled.
+        // Register-only comparisons do not clock the serial byte counter.
+        if (_wordEqual && (machine.Adkcon & 0x0400) != 0) _byteBits = 0;
         if (machine.DiskDmaActive) machine.ReceiveDiskBit(_shift, _wordEqual, cycle);
     }
 

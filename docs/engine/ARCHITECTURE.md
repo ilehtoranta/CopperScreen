@@ -62,6 +62,10 @@ evidence, correctness and the passing performance comparison.
 Area blits publish enabled-channel pointers including the final row modulo before
 completion. A later `BLTSIZE` may continue without pointer reload; see the
 [hardware basis and regression evidence](BLITTER_FINAL_MODULO.md).
+CPU/Copper writes to area-blitter pointer halves also update the running pointers;
+already accepted bus outputs keep their captured addresses and values. Live
+control/modulo/data writes, line-mode reprogramming and active BLTSIZE restart
+remain unverified. See the [Desert Dream correction and limits](DESERT_DREAM_LIVE_POINTERS_2026-09-25.md).
 
 ## Clock and state invariants
 
@@ -126,6 +130,12 @@ disconnected drives do not pull any input low. References:
 [Commodore Hardware Reference Manual, disk interface](https://bastya.net/AmigaDevDocs/hard_8.html)
 and [Commodore disk.resource constants](https://d0.se/include/resources/disk.i).
 
+Further inward STEP pulses at the bounded drive limit leave the head in place
+and let the guest continue; side changes and outward homing still work. The
+existing maxima remain cylinder 79 for ADF/empty drives and 83 for IPF. These
+are model limits, not universal physical-drive measurements. See the
+[Desert Strike end-stop comparison](DESERT_STRIKE_END_STOP_2026-09-24.md).
+
 Unselected running drives keep rotating. Selection/head changes preserve phase;
 mounting/ejecting one drive does not reset another. Reset stops all motors and
 receiver/DMA state while retaining mounted media and cylinders. One shared Paula
@@ -135,6 +145,10 @@ After the initial sync gate opens, ADKCON.WORDSYNC toggles preserve partial and
 buffered words; only subsequent enabled input matches realign a running read.
 Toggles while still waiting for the first sync remain explicitly unsupported.
 See [live WORDSYNC evidence and limits](DISK_LIVE_WORDSYNC.md).
+Received matches with WORDSYNC enabled also realign the CPU's DSKBYTR byte
+counter independently of DMA. Register-only comparisons preserve that counter;
+already published byte data/ready state survives alignment. See
+[CPU byte alignment evidence and limits](DISK_BYTE_WORDSYNC_2026-09-24.md).
 The next disk event is recomputed at disk/control/media events, with no additional
 per-CCK polling or allocation. Tracks are encoded/decoded only at mount time.
 IPF geometry has an exact bit count and optional cumulative integer cell deadlines;

@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-24",
+  "status": "END_STOP_CORRECTED_GAMEPLAY_OPEN",
+  "source_head": "6de958a9a5787594e2290bca320fc0e31b4f2798",
+  "scope": "Working tree also includes the earlier CPU disk-byte WORDSYNC correction.",
+  "engines": {
+    "before_sha256": "AC21CD70A32365755652B1BEBAACBA423C3150FDD89185E2775EB4F6A23F72CF",
+    "after_sha256": "66CF94D3AF712F7BB12822A44FFCD7A4DD0E2C45B5899A87A9B9C70E7D2AEC5C",
+    "copper68k_sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+    "copper68k_version": "1.4.1"
+  },
+  "winuae": {
+    "version": "6.0.3.0",
+    "exe_sha256": "F3E55700FD811CD543FDFEBF6C3221CFAA3D385828F110C6D3EB534C64503123",
+    "source_commit": "857f48fcb09399d4d95527e29a2fdeaedb41f827",
+    "source_tag": "6030",
+    "profile": "PAL OCS A500; compatible cycle-exact 68000, memory and blitter; no JIT; 512 KiB chip + 512 KiB slow; one read-only DD drive at 100%; warp",
+    "inputs": "Mouse click past crack intro; joystick fire through menu; replace PDX disk one with same disk two; fire through campaign briefing. Interactive, not frame aligned.",
+    "guest_patched": false,
+    "observed_cache_1": "$C1CAC6=$000B",
+    "observed_cache_2": "$01A970=$0050",
+    "observed_physical_at_briefing": "40/0",
+    "result": "Disk-three prompt after inward over-seeks; maximum observed cylinder 83",
+    "authority": "Supporting reference-emulator evidence, not a physical-drive timing oracle"
+  },
+  "rom_sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "media": [
+    {
+      "archive": "C:\\Data\\TestImages\\Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip",
+      "sha256": "5112C18F10A7BB39FA518BCD50CE07453D066479E2233B5A10277624562B3151",
+      "entries": [
+        {
+          "name": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "sha256": "6A961CC2AAC90FD39BA8D8C1EB3020517AAC201A05B00C34448834BE52FD7F02",
+          "bytes": 901120
+        }
+      ]
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[cr PDX].zip",
+      "sha256": "C482F0DEB3829F46DECE514680B53372F4D58FC3C3C5D2B2A3DBE3232FD596C6",
+      "entries": [
+        {
+          "name": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[cr PDX].adf",
+          "sha256": "9A1DA711186D67F06B43815B645BF0013E6159CBAAD438515AC1760903340239",
+          "bytes": 901120
+        }
+      ]
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[h QTX].zip",
+      "sha256": "07DE8A3FDDF6D474E95885A7524E076DFEB04C0B7A55A65A0E635CC2224DFA16",
+      "entries": [
+        {
+          "name": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3)[h QTX].adf",
+          "sha256": "0FF8FDB58239ED89CC8720A5BEBBDCDBDA0A0A64A95139FC4732BE478DFEBB28",
+          "bytes": 901120
+        }
+      ]
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).zip",
+      "sha256": "13EE029113463F60F052D125AA05AB45566E40AF319F2AC1D354C992CB8726E3",
+      "entries": [
+        {
+          "name": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf",
+          "sha256": "7CEB60B1FB3A9683DDA55F4184410A31885D7FD79C5F37616BD7C0AD634662C6",
+          "bytes": 901120
+        }
+      ]
+    }
+  ],
+  "native_input": {
+    "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-desert-strike.json",
+    "sha256": "0FED56FB3049B5E8CCD662EA8FE01AA7C454D4CFF309F0ED29BBD1F4B8D4034E",
+    "disk2_sha256": "7CEB60B1FB3A9683DDA55F4184410A31885D7FD79C5F37616BD7C0AD634662C6"
+  },
+  "pre_fix_variants": {
+    "plain": 22084,
+    "QTX": 22084,
+    "PDX": 22084
+  },
+  "trials": {
+    "clamp79": "disk-three prompt at 26000 fields",
+    "clamp83": "disk-three prompt at 26000 fields"
+  },
+  "production": {
+    "guest_patched": false,
+    "fields": 26000,
+    "result": "Disk-three prompt",
+    "final_state": {
+      "frame": 26000,
+      "cycle": 3694520030,
+      "pc": "00C1C384",
+      "sr": "2100",
+      "data": [
+        "00003800",
+        "00C20E42",
+        "00000000",
+        "00000000",
+        "000003FF",
+        "AF62FFFF",
+        "000F0000",
+        "FFF0010B"
+      ],
+      "address": [
+        "00000F08",
+        "00001CF8",
+        "00C20E46",
+        "00C20E46",
+        "00C001CC",
+        "00DFF000",
+        "00020E64",
+        "00C7FF7E"
+      ],
+      "cylinder": 33,
+      "head": 0,
+      "remaining": 0,
+      "dsklen": "4000",
+      "dsksync": "4489",
+      "intreq": "17A0",
+      "adkcon": "1100",
+      "unsupported": null
+    },
+    "comparisons": [
+      {
+        "left": "fixed-native",
+        "right": "fixed-scalar",
+        "limit_fields": 26000,
+        "compared": 104,
+        "missing": [],
+        "differences": []
+      },
+      {
+        "left": "fixed-native",
+        "right": "stop79-native",
+        "limit_fields": 26000,
+        "compared": 104,
+        "missing": [],
+        "differences": []
+      },
+      {
+        "left": "pdx-native-zip",
+        "right": "fixed-native",
+        "limit_fields": 22000,
+        "compared": 88,
+        "missing": [],
+        "differences": []
+      }
+    ],
+    "adf_empty_limit": 79,
+    "ipf_limit": 83
+  },
+  "validation": {
+    "build": "PASS, zero warnings/errors",
+    "engine_tests": {
+      "passed": 719,
+      "failed": 0,
+      "skipped": 0
+    },
+    "regression_before": {
+      "failed": 3,
+      "passed": 0
+    },
+    "host_disk_tests": "not rerun",
+    "formal_throughput": "not measured; prior WORDSYNC INVALID/RERUN unchanged"
+  },
+  "unavailable": [
+    "disk three",
+    "mission/gameplay verification",
+    "universal physical inward travel limit"
+  ],
+  "failed_attempts": [
+    "WinUAE initial startup stalled before window; owned process restarted with input enumeration disabled",
+    "Native PDX extracted ADF held exclusively by WinUAE; fresh successful replay used identical ZIP entry"
+  ],
+  "evidence": {
+    "pdx.uae": {
+      "path": "artifacts/desert-strike-reference/pdx.uae",
+      "sha256": "8B4C597091389E28C14AB2D5556BD1DA4B5E384F1612F72A1070615325D2E2E8"
+    },
+    "winuae-profile.txt": {
+      "path": "artifacts/desert-strike-reference/winuae-profile.txt",
+      "sha256": "C02F01FF5224643B84BA780A1C885D7601B0352C4F21A7DFBD17864F2F0459E7"
+    },
+    "winuae-campaign-loading.txt": {
+      "path": "artifacts/desert-strike-reference/winuae-campaign-loading.txt",
+      "sha256": "E4574B490D2E7312FA353624EEF3E97C6EEE30BBE0352C5B6DFD274E4999480D"
+    },
+    "winuae-pdx.log": {
+      "path": "artifacts/desert-strike-reference/winuae-pdx.log",
+      "sha256": "C467840E74E9985E9539EFBA3FF315E5DF401B634F4B34729AAE182AC4DD674B"
+    },
+    "winuae-disk3.png": {
+      "path": "artifacts/desert-strike-reference/winuae-disk3.png",
+      "sha256": "1FFD0FD1E7DC9E92606B470EEE28CDED76D3A53EA56AD97B6D8AB835CA5327AE"
+    },
+    "plain-native.log": {
+      "path": "artifacts/desert-strike-reference/plain-native.log",
+      "sha256": "9AF9C5CBDDDC35F5F2FF3354463D3310D7715BCEDED30189377F76E0F49059AC"
+    },
+    "qtx-native.log": {
+      "path": "artifacts/desert-strike-reference/qtx-native.log",
+      "sha256": "273462A336A1CC8AE4CECFBC2E93962466E2878740AABB6A2738786C3DA887A7"
+    },
+    "pdx-native-zip.log": {
+      "path": "artifacts/desert-strike-reference/pdx-native-zip.log",
+      "sha256": "FC6520F92B44CC502ED3C44826D50E71CA1D716CCC9E6CA03267EE3ECE79C027"
+    },
+    "stop79-native.log": {
+      "path": "artifacts/desert-strike-reference/stop79-native.log",
+      "sha256": "89C7C9B4BED2878800CFE556A936D2920BE0D3D2EB12715BE8B353238551214D"
+    },
+    "stop83-native.log": {
+      "path": "artifacts/desert-strike-reference/stop83-native.log",
+      "sha256": "D14BAD915BB25C436FDB32EF5D90C49C92FBEA9DFC1B737925BAEFFBA5ECAA88"
+    },
+    "fixed-native.log": {
+      "path": "artifacts/desert-strike-reference/fixed-native.log",
+      "sha256": "89C7C9B4BED2878800CFE556A936D2920BE0D3D2EB12715BE8B353238551214D"
+    },
+    "fixed-scalar.log": {
+      "path": "artifacts/desert-strike-reference/fixed-scalar.log",
+      "sha256": "89C7C9B4BED2878800CFE556A936D2920BE0D3D2EB12715BE8B353238551214D"
+    },
+    "regression-before.log": {
+      "path": "artifacts/desert-strike-reference/regression-before.log",
+      "sha256": "11DFF42A76B18CCB1C7BCC7009282057F3F3931C32AF4B946DBA4E900FC7E3F9"
+    },
+    "build.log": {
+      "path": "artifacts/desert-strike-reference/build.log",
+      "sha256": "1218CEB8895FD3D018CAFB3F6860C1924E6CD2E51CD9C5B23360EA83DBCC9547"
+    },
+    "tests.log": {
+      "path": "artifacts/desert-strike-reference/tests.log",
+      "sha256": "7EC573FD12A2A18266734F32B2BC0E4D7AA78995DCC9FD20107F1EF18FA92E9A"
+    },
+    "probe/Program.cs": {
+      "path": "artifacts/desert-strike-reference/probe/Program.cs",
+      "sha256": "4F8FC3A478031F4555EF43C0B50D5ADA8032B2D4ED5E94529BB7D714DFADA9C1"
+    },
+    "probe/NativeInputScript.cs": {
+      "path": "artifacts/desert-strike-reference/probe/NativeInputScript.cs",
+      "sha256": "AEF9B2ED6CAA27D4E77760CB0D37A59ED181AB06E29B945C6CB94FF67CB375F8"
+    },
+    "probe/Probe.csproj": {
+      "path": "artifacts/desert-strike-reference/probe/Probe.csproj",
+      "sha256": "F470A5E22570639DED6C81EF4287A98D09D8A1B7E29D67C97657E42EABD697FD"
+    }
+  }
+}

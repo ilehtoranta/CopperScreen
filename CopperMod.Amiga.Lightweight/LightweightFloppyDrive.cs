@@ -138,8 +138,7 @@ internal sealed class LightweightFloppyDrive
         // A reset does not remove media, move the head or clear disk change.
     }
 
-    // Return false for a seek outside this deliberately bounded drive model.
-    internal bool WriteControlPins(byte pins, long cycle)
+    internal void WriteControlPins(byte pins, long cycle)
     {
         var previous = _controlPins;
         var previousTrack = Cylinder * 2 + Head;
@@ -147,7 +146,7 @@ internal sealed class LightweightFloppyDrive
         if (!Selected)
         {
             if (previousTrack != Cylinder * 2 + Head) SelectTrack(cycle, preservePhase: true);
-            return true;
+            return;
         }
 
         if ((previous & _selectMask) != 0)
@@ -168,11 +167,10 @@ internal sealed class LightweightFloppyDrive
                 Cylinder = Math.Max(0, Cylinder - 1);
             else if (Cylinder < (Format == LightweightFloppyFormat.Ipf ? 83 : 79))
                 Cylinder++;
-            else if (Format != LightweightFloppyFormat.Ipf)
-                return false; // IPF drive hits its mechanical stop at cylinder 83.
+            // At the model's end stop, further inward pulses leave the head
+            // in place. They must not halt the guest or skip a side change.
         }
         if (previousTrack != Cylinder * 2 + Head) SelectTrack(cycle, preservePhase: true);
-        return true;
     }
 
     internal byte ReadInputPins(long cycle)

@@ -135,6 +135,110 @@ public sealed class LightweightDiskSerialTests
         Assert.Equal(0, ReadStatus(machine) & 0x8000);
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(6)]
+    [InlineData(7)]
+    public void WordsyncAlignsFollowingCpuBytesAtEveryBitOffsetWithoutDma(int offset)
+    {
+        using var machine = new LightweightA500Machine();
+        var drive = SerialPattern(offset, 0x89112A91, 32);
+        var serial = new LightweightDiskSerial();
+        serial.OnDriveChanged(drive, 0);
+        machine.WriteCustomRegisterFromCopper(0x09E, 0x8500, 0);
+        machine.WriteCustomRegisterFromCopper(0x07E, 0x8911, 0);
+        var status = new LightweightRegisters();
+        for (var i = 0; i < offset + 16; i++) SampleCell(ref serial, drive, machine);
+        Assert.Equal(0x8911, serial.Shift);
+        Assert.Equal(0x9000, serial.ReadByteStatus(status, false) & 0x9000);
+        Assert.Equal(0x1000, serial.ReadByteStatus(status, false) & 0x9000);
+        Assert.NotEqual(0, machine.Intreq & 0x1000);
+        Assert.False(machine.DiskDmaActive);
+        Assert.Equal(0, machine.Dmacon);
+        foreach (var expected in new[] { 0x2A, 0x91 })
+        {
+            for (var i = 0; i < 7; i++)
+            {
+                SampleCell(ref serial, drive, machine);
+                Assert.Equal(0, serial.ReadByteStatus(status, false) & 0x9000);
+            }
+            SampleCell(ref serial, drive, machine);
+            Assert.Equal(0x8000 | expected, serial.ReadByteStatus(status, false));
+            Assert.Equal(expected, serial.ReadByteStatus(status, false));
+        }
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void SyncComparisonWithoutReceivedWordsyncPreservesPartialByte(bool registerWrite)
+    {
+        using var machine = new LightweightA500Machine();
+        var drive = SerialPattern(3, 0x89112A91, 32);
+        var serial = new LightweightDiskSerial();
+        serial.OnDriveChanged(drive, 0);
+        machine.WriteCustomRegisterFromCopper(0x09E, (ushort)(registerWrite ? 0x8500 : 0x8100), 0);
+        if (!registerWrite) machine.WriteCustomRegisterFromCopper(0x07E, 0x8911, 0);
+        for (var i = 0; i < 19; i++) SampleCell(ref serial, drive, machine);
+        if (registerWrite)
+        {
+            machine.WriteCustomRegisterFromCopper(0x07E, 0x8911, machine.Cycle);
+            serial.CompareSync(machine.Cycle, machine);
+        }
+        var status = new LightweightRegisters();
+        Assert.NotEqual(0, serial.ReadByteStatus(status, false) & 0x1000);
+        for (var i = 0; i < 4; i++)
+        {
+            SampleCell(ref serial, drive, machine);
+            Assert.Equal(0, serial.ReadByteStatus(status, false) & 0x8000);
+        }
+        SampleCell(ref serial, drive, machine);
+        Assert.Equal(0x8025, serial.ReadByteStatus(status, false)); // Last 3 sync bits + first 5 payload bits.
+    }
+
+    [Fact]
+    public void ContinuingSyncEqualityAlignsEachReceivedBitButInterruptRemainsEdgeTriggered()
+    {
+        using var machine = new LightweightA500Machine();
+        var drive = SerialPattern(0, 0xFFFFFF2A, 32);
+        var serial = new LightweightDiskSerial();
+        serial.OnDriveChanged(drive, 0);
+        machine.WriteCustomRegisterFromCopper(0x09E, 0x8500, 0);
+        machine.WriteCustomRegisterFromCopper(0x07E, 0xFFFF, 0);
+        for (var i = 0; i < 16; i++) SampleCell(ref serial, drive, machine);
+        var status = new LightweightRegisters();
+        Assert.Equal(0x90FF, serial.ReadByteStatus(status, false));
+        machine.WriteCustomRegisterFromCopper(0x09C, 0x1000, machine.Cycle);
+        for (var i = 0; i < 8; i++)
+        {
+            SampleCell(ref serial, drive, machine);
+            Assert.Equal(0x10FF, serial.ReadByteStatus(status, false));
+        }
+        Assert.Equal(0, machine.Intreq & 0x1000);
+        for (var i = 0; i < 7; i++)
+        {
+            SampleCell(ref serial, drive, machine);
+            Assert.Equal(0, serial.ReadByteStatus(status, false) & 0x9000);
+        }
+        SampleCell(ref serial, drive, machine);
+        Assert.Equal(0x802A, serial.ReadByteStatus(status, false));
+    }
+
+    private static LightweightFloppyDrive SerialPattern(int prefixBits, uint pattern, int bits)
+    {
+        var drive = SelectedDrive();
+        drive.WriteProtected = false;
+        var cycle = drive.ReadyCycle;
+        for (var i = 0; i < prefixBits; i++) drive.WriteBit(0, cycle += 14, false);
+        for (var i = bits - 1; i >= 0; i--) drive.WriteBit((int)((pattern >> i) & 1), cycle += 14, false);
+        return drive;
+    }
+
     [Fact]
     public void SyncRegisterWritesUseSameComparatorWithoutRepeatedLevelInterrupts()
     {

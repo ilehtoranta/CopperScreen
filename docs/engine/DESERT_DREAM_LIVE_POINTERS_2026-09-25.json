@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "status": "CORRECTION_IMPLEMENTED_MAIN_DEMO_ENDING_VERIFIED",
+  "source_head": "6de958a9a5787594e2290bca320fc0e31b4f2798",
+  "scope": "Active area-blitter pointers only; previous WORDSYNC and Desert Strike end-stop fixes retained.",
+  "profile": "PAL OCS A500, 68000, 512 KiB chip + 512 KiB slow RAM, Kickstart 1.3, read-only DF0, 908-wide output",
+  "engines": {
+    "before_sha256": "66CF94D3AF712F7BB12822A44FFCD7A4DD0E2C45B5899A87A9B9C70E7D2AEC5C",
+    "after_sha256": "7EB9C87905BD8CA790DFF21BB918A0B34F7E4B94FE8489F673058BC4D1581FDC",
+    "copper68k_sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+    "copper68k_version": "1.4.1"
+  },
+  "rom_sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "media": {
+    "id": "desert-dream-extended",
+    "archive": "Desert Dream (Kefrens).zip",
+    "archiveSha256": "0C41C82A744A2CF915082B968EF3763BF9152F19023B9340287FC593B73E7849",
+    "selected": "Desert Dream (Kefrens) A.adf",
+    "entries": [
+      {
+        "name": "Desert Dream (Kefrens) A.adf",
+        "sha256": "25738C042EFDF2202E67A5BD5A40A08766384DFC31A92ED8E248D1B12E26E1E3",
+        "bytes": 901120
+      },
+      {
+        "name": "Desert Dream (Kefrens) B.adf",
+        "sha256": "3E34D376C9805E0E64A3227B04E0D0BCE0C1531F3E90938329BF5079CD214F97",
+        "bytes": 901120
+      }
+    ]
+  },
+  "input_script": {
+    "path": "CopperScreen.Lightweight.Tests/Workloads/desert-dream-live-pointers.json",
+    "sha256": "BDBFBF8F09E53B22550C93ECDE85B215459E459C2A53699FC63847788B5DF7A7",
+    "bytes": 135
+  },
+  "pre_correction": {
+    "completed_fields": 19359,
+    "cycle": 2748770232,
+    "pc": "00000000",
+    "guest_patched": false
+  },
+  "diagnostic_trace": {
+    "unchanged_third_clear_start_cycle": 2748681378,
+    "high_pointer_write": {
+      "cycle": 2748695510,
+      "old_live": "0007C480",
+      "new_bank": "0006C480",
+      "pending_output": false
+    },
+    "low_pointer_write": {
+      "cycle": 2748695518,
+      "old_live": "0006C480",
+      "new_bank": "00062800",
+      "pending_output": false
+    },
+    "deferred_start": {
+      "cycle": 2748730468,
+      "size": "4014",
+      "before_destination": "00000000",
+      "after_destination": "00066380"
+    },
+    "interpretation": "CPU clear and Copper write timing remains as before. Live destination persists through remaining DMA. No guessed restart policy is required."
+  },
+  "production": {
+    "fields": 72000,
+    "guest_patched": false,
+    "result": "Disk-two effects and closing credits/message routine",
+    "final_state": {
+      "frame": 72000,
+      "cycle": 10210654050,
+      "pc": "0004013A",
+      "sr": "2004",
+      "data": [
+        "00580006",
+        "0006CB80",
+        "000600B0",
+        "00000010",
+        "00000002",
+        "0000FFFF",
+        "0000002F",
+        "0000FFFF"
+      ],
+      "address": [
+        "00040316",
+        "0004063B",
+        "00040448",
+        "0004C476",
+        "0006C080",
+        "0004C44E",
+        "00DFF000",
+        "000001FC"
+      ],
+      "cylinder": 18,
+      "head": 1,
+      "remaining": 0,
+      "dsklen": "4000",
+      "dsksync": "4489",
+      "intreq": "17E2",
+      "adkcon": "1100",
+      "unsupported": null
+    },
+    "normal_scalar_matching_files": 288,
+    "pre_transition_matching_files": 76,
+    "pre_transition_last_field": 19000,
+    "all_pointer_trial_matching_files": 104,
+    "all_pointer_trial_last_field": 26000,
+    "capture_manifest": {
+      "path": "artifacts/desert-dream-live-blitter/capture-manifest.json",
+      "sha256": "F242C54F6AE3BCDE9568BCB93A38B187A51A8C554A6F68467CA0EA5DB08F2613",
+      "bytes": 58109
+    },
+    "checkpoints": {
+      "20000": "line figures",
+      "21000": "tunnel",
+      "22000": "circles",
+      "35000": "disk-two prompt",
+      "42000": "disk-two shaded objects",
+      "47000": "disk-two point wave",
+      "53000": "closing message",
+      "72000": "closing credits"
+    }
+  },
+  "validation": {
+    "build": "PASS, zero warnings/errors",
+    "engine_tests": {
+      "passed": 726,
+      "failed": 0,
+      "skipped": 0
+    },
+    "new_regressions": {
+      "before_failed": 7,
+      "after_passed": 7,
+      "scope": "DMA-paused area source/destination pointer writes, excluding exact same-cycle races"
+    },
+    "retained_identities": [
+      {
+        "workload": "lores",
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "matches_retained": true,
+        "timing_disposition": "DIAGNOSTIC_ONLY",
+        "evidence": {
+          "path": "artifacts/desert-dream-live-blitter/lores-identity.log",
+          "sha256": "1B617A947539FC3678BDF82CD9473ACBEC38FFAAB2F6650C9B781A099CD48F35",
+          "bytes": 299
+        }
+      },
+      {
+        "workload": "hires",
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "matches_retained": true,
+        "timing_disposition": "DIAGNOSTIC_ONLY",
+        "evidence": {
+          "path": "artifacts/desert-dream-live-blitter/hires-identity.log",
+          "sha256": "5052967C23FCE1D0D8AA983CFCC1279BC03C8B7B9404D09FEBC8AD68B4CD6254",
+          "bytes": 305
+        }
+      },
+      {
+        "workload": "lemmings",
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+        "matches_retained": true,
+        "timing_disposition": "DIAGNOSTIC_ONLY",
+        "evidence": {
+          "path": "artifacts/desert-dream-live-blitter/lemmings-identity.log",
+          "sha256": "023BB4FC5DC16C011B192267BB07B9296B50791AFA179EEC777AB228C2292072",
+          "bytes": 292
+        }
+      }
+    ],
+    "host_disk_suites": "not rerun",
+    "formal_throughput": "not measured"
+  },
+  "winuae": {
+    "version": "6.0.3.0",
+    "exe_sha256": "F3E55700FD811CD543FDFEBF6C3221CFAA3D385828F110C6D3EB534C64503123",
+    "source_commit": "857f48fcb09399d4d95527e29a2fdeaedb41f827",
+    "source_tag": "6030",
+    "profile": "PAL OCS A500, compatible cycle-exact 68000/memory/blitter, no JIT, 512 KiB chip + 512 KiB slow, read-only DD at 100%, waiting-blits disabled, warp",
+    "result": "Disk-two prompt, followed by closing Kefrens message after replacing A with B",
+    "guest_patched": false,
+    "timing_comparison": "Interactive reference, not frame aligned; instruction breakpoint attempt unavailable"
+  },
+  "limits": [
+    "exact pointer-write/accepted-output collision phases",
+    "live control/modulo/data writes",
+    "active BLTSIZE restart",
+    "line-mode reprogramming",
+    "independent physical timing before overlap",
+    "secret part not entered",
+    "not a per-effect pixel or hardware-timing certification"
+  ],
+  "failed_attempts": [
+    "Initial trial builds used nonexistent low-half constant names; aborted runs with old DLLs excluded; corrected v2 trials used for findings",
+    "Initial production script used a ZIP-entry path normalized to Windows separators by NativeInputScript; failed before replay; exact extracted B entry used in v2",
+    "WinUAE interactive debugger stopped named-pipe service; task-owned instance ended and clean reference run performed"
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/desert-dream-live-blitter/build.log",
+      "sha256": "DF353F444CC88833FE83C0DFC9DC812471090DD0CB4F307BB8DDC21286BF7FA0",
+      "bytes": 983
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/tests-before.log",
+      "sha256": "BF66F3849236339EE2DDCCFBB08236A02028C3E41054521FF5BCAB95A19946D4",
+      "bytes": 7761
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/tests-after.log",
+      "sha256": "E8FBB20A3948F1354EB30FC75CC405DFBF6B9FFF97E3C776E1E82E931A46EA72",
+      "bytes": 951
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/baseline.log",
+      "sha256": "80009859A9A00FED31CDC0ADEECEEB79F1FA3058A13821567EBE1CD951E51666",
+      "bytes": 8020
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/fixed-native-v2.log",
+      "sha256": "298C29811856442B9C633D5D9C7EA99A44F5F4F0E36E3BB65C64CED13DD8135E",
+      "bytes": 27482
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/fixed-scalar-v2.log",
+      "sha256": "298C29811856442B9C633D5D9C7EA99A44F5F4F0E36E3BB65C64CED13DD8135E",
+      "bytes": 27482
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/trace-native.log",
+      "sha256": "67078F75B4E82A69C857C18353F0E0719C0D250CC85DAB485CA785C1D122A801",
+      "bytes": 9646
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/trace-engine/LightweightBlitter.cs",
+      "sha256": "58E122C20E29EE8B0B421E41523C53DF135A229E4077833F3D394140E193E0DF",
+      "bytes": 37420
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/liveptr-native-v2.log",
+      "sha256": "F5E8E220762DF3227E628558F9140EC6ACF519F7249D611DE147AFE506CBCD06",
+      "bytes": 9925
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/liveptr-restart-native-v2.log",
+      "sha256": "F5E8E220762DF3227E628558F9140EC6ACF519F7249D611DE147AFE506CBCD06",
+      "bytes": 9925
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/probe/Program.cs",
+      "sha256": "D342990DE66331C2D356AD991B771FE5C81981091F474ECFE76BDE91E797F340",
+      "bytes": 7941
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/probe/Probe.csproj",
+      "sha256": "F470A5E22570639DED6C81EF4287A98D09D8A1B7E29D67C97657E42EABD697FD",
+      "bytes": 690
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/probe/NativeInputScript.cs",
+      "sha256": "AEF9B2ED6CAA27D4E77760CB0D37A59ED181AB06E29B945C6CB94FF67CB375F8",
+      "bytes": 3759
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/capture-manifest.json",
+      "sha256": "F242C54F6AE3BCDE9568BCB93A38B187A51A8C554A6F68467CA0EA5DB08F2613",
+      "bytes": 58109
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/dream.uae",
+      "sha256": "89296CF3A28628D638DB529B4CEAA1CF59A9261D9521B807134C854976BC13BF",
+      "bytes": 880
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/winuae-reference.log",
+      "sha256": "59EE2E503E41F568B25F54DC846CA39A38B784174CBB6DFC9DE99F2AEAEEB1D9",
+      "bytes": 9449
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/winuae-boot.log",
+      "sha256": "3E686D376B2EE57A7EC5B08929D348AF88FEA4C04092199537CC8F786DCF65FF",
+      "bytes": 16020
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/winuae-final.txt",
+      "sha256": "498655BE337185DCE197F82A0360220D867FB9AFD752E9416D40FEE4C6BBAAFD",
+      "bytes": 1787
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/winuae-swap.txt",
+      "sha256": "7A6E148BD6BFB423BE8C688E1B786216CA18B1C269F0BEED02A3E4586FACF843",
+      "bytes": 221
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/winuae-disk2-prompt.png",
+      "sha256": "8C99EABF304953F44A8EF12ED2CC5D322443E2EA27A143FE85D7C2741E4560B7",
+      "bytes": 41477
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/winuae-ending.png",
+      "sha256": "3B71C8468BC9C179720D4D851B2FCFA47F57192D96FFB94D0426E6DDD42882C2",
+      "bytes": 42886
+    },
+    {
+      "path": "artifacts/desert-dream-live-blitter/production-scenes.png",
+      "sha256": "869DBB53047334A520E6A7D6B6F2550C9FDC2302189A88E2E55A52EE730649D0",
+      "bytes": 111080
+    }
+  ]
+}

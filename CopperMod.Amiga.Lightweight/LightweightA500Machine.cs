@@ -1793,6 +1793,14 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
                 case LightweightRegisters.Ddfstop:
                     _bitplanes.OnRegisterWrite(offset, value, cycle, this);
                     break;
+                case LightweightRegisters.Bltapth:
+                case LightweightRegisters.Bltapth + 2:
+                case LightweightRegisters.Bltbpth:
+                case LightweightRegisters.Bltbpth + 2:
+                case LightweightRegisters.Bltcpth:
+                case LightweightRegisters.Bltcpth + 2:
+                case LightweightRegisters.Bltdpth:
+                case LightweightRegisters.Bltdpth + 2:
                 case LightweightRegisters.Bltsize:
                     _blitter.OnRegisterWrite(offset, value, cycle, this);
                     break;
@@ -1867,8 +1875,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         for (var i = 0; i < _floppies.Length; i++)
         {
             var drive = _floppies[i];
-            if (!drive.WriteControlPins(pins, cycle))
-                ReportUnsupportedFeature($"DF{i} seek beyond the standard ADF cylinder range");
+            drive.WriteControlPins(pins, cycle);
             _diskSerial.OnDriveChanged(drive, cycle);
         }
         RefreshDiskSchedule();

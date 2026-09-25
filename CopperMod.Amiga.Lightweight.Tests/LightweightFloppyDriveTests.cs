@@ -157,17 +157,68 @@ public sealed class LightweightFloppyDriveTests
     }
 
     [Fact]
-    public void SeekBeyondStandardGeometryIsReportedInsteadOfWrapping()
+    public void AdfEndStopClampsTheHeadAndAllowsTrackZeroRecovery()
     {
         var drive = MountedDrive();
-        for (var cylinder = 1; cylinder <= 79; cylinder++)
+        for (var cylinder = 1; cylinder <= 100; cylinder++)
         {
             drive.WriteControlPins(0x75, cylinder * 20);
-            Assert.True(drive.WriteControlPins(0x74, cylinder * 20 + 10));
+            drive.WriteControlPins(0x74, cylinder * 20 + 10);
+            Assert.Equal(Math.Min(cylinder, 79), drive.Cylinder);
         }
+        Assert.NotEqual(0, drive.ReadInputPins(2010) & 0x10);
+        for (var pulse = 0; pulse < 79; pulse++)
+        {
+            drive.WriteControlPins(0x77, 2020 + pulse * 20);
+            drive.WriteControlPins(0x76, 2030 + pulse * 20);
+        }
+        Assert.Equal(0, drive.Cylinder);
+        Assert.Equal(0, drive.ReadInputPins(4000) & 0x10);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void CiaOverseekDoesNotStopExecutionAndCanRecoverToTrackZero(bool mounted)
+    {
+        using var machine = new LightweightA500Machine();
+        if (mounted) machine.MountAdf(new byte[LightweightFloppyDrive.StandardAdfBytes]);
+        long cycle = 0;
+        Write(machine, 0xBFD100, 0x75, ref cycle);
+        Write(machine, 0xBFD300, 0xFF, ref cycle);
+        for (var pulse = 0; pulse < 100; pulse++)
+        {
+            Write(machine, 0xBFD100, 0x75, ref cycle);
+            Write(machine, 0xBFD100, 0x74, ref cycle);
+        }
+        Assert.Null(machine.UnsupportedActiveFeature);
+        Assert.NotEqual(0, Read(machine, 0xBFE001, ref cycle) & 0x10);
+        for (var pulse = 0; pulse < 79; pulse++)
+        {
+            Write(machine, 0xBFD100, 0x77, ref cycle);
+            Write(machine, 0xBFD100, 0x76, ref cycle);
+        }
+        Assert.Equal(0, Read(machine, 0xBFE001, ref cycle) & 0x10);
+        Assert.Null(machine.UnsupportedActiveFeature);
+    }
+
+    [Fact]
+    public void HeadChangeOnClampedStepStillSelectsTheOtherSurface()
+    {
+        var drive = MountedDrive();
+        for (var pulse = 0; pulse < 79; pulse++)
+        {
+            drive.WriteControlPins(0x75, pulse * 20);
+            drive.WriteControlPins(0x74, pulse * 20 + 10);
+        }
+        var firstSurface = drive.Track.ToArray();
         drive.WriteControlPins(0x75, 1600);
-        Assert.False(drive.WriteControlPins(0x74, 1610));
+        drive.WriteControlPins(0x70, 1610); // Inward STEP and head 1 at the end stop.
         Assert.Equal(79, drive.Cylinder);
+        Assert.Equal(1, drive.Head);
+        Assert.False(firstSurface.AsSpan().SequenceEqual(drive.Track));
+        drive.WriteControlPins(0x74, 1620); // STEP held low; select head 0 again.
+        Assert.Equal(firstSurface, drive.Track.ToArray());
     }
 
     [Fact]

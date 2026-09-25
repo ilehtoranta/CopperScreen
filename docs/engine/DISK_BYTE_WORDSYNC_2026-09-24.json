@@ -1,0 +1,761 @@
+{
+  "date": "2026-09-24",
+  "sourceCommit": "6de958a9a5787594e2290bca320fc0e31b4f2798",
+  "status": "SOURCE_FIX_VERIFIED_BOOT_AND_DISK2_MENU_PERFORMANCE_PENDING",
+  "profile": "PAL OCS A500; 68000; 512 KiB chip + 512 KiB slow RAM; Kickstart 1.3; DF0 read-only; 908-wide output",
+  "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "media": {
+    "id": "alien-breed-se92",
+    "archive": "Team17/AlienBreedSpecialEdition92_615.zip",
+    "archiveSha256": "FC478A1F5ADFBC6EC56253A3C14DA48448AACF07D8B0F9781D56D837D746973F",
+    "selected": "AlienBreedSpecialEdition92_BootDisk.ipf",
+    "entries": [
+      {
+        "name": "AlienBreedSpecialEdition92_BootDisk.ipf",
+        "sha256": "B9F68CB237C20614035555AA7ECA70B1DD43B64F061B20422A025EEFDC89112D",
+        "bytes": 1049304
+      },
+      {
+        "name": "AlienBreedSpecialEdition92_Disk2.ipf",
+        "sha256": "8F27F047E15788DE9D0FD6B6691D7FBB2DCEE401095A4B34DBD1BD4FC572A3EF",
+        "bytes": 1049612
+      }
+    ]
+  },
+  "implementation": {
+    "behavior": "Received sync equality with WORDSYNC enabled resets the CPU byte counter, independently of DMA. Register-only comparisons do not reset it; interrupt remains edge triggered.",
+    "files": [
+      {
+        "path": "CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs",
+        "sha256": "2546AD829D1031AD04F192F16CB4A321BB05099889224B441CE93D0C673E784C",
+        "bytes": 4987
+      },
+      {
+        "path": "CopperMod.Amiga.Lightweight.Tests/LightweightDiskSerialTests.cs",
+        "sha256": "33D11A7DB0181C2FD3F9C0D63B6D4F106B62CC1B5AC46A8DA7A61B794274B851",
+        "bytes": 25282
+      }
+    ],
+    "referenceBundle": [
+      {
+        "path": "artifacts/three-native-investigation/runner/Copper68k.dll",
+        "sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+        "bytes": 842240
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperDisk.dll",
+        "sha256": "0EB1277215A506FB57FD9AD678D3C71F81FB89C0DD1A99190F044BDFDCE1C356",
+        "bytes": 105472
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperDisk.pdb",
+        "sha256": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+        "bytes": 41884
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperDisk.xml",
+        "sha256": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+        "bytes": 49078
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperFloat.dll",
+        "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+        "bytes": 28672
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.dll",
+        "sha256": "4333ABB681731F8D50A80B7670E9880986212CEE9DEC41B5CF884FAA7D57B435",
+        "bytes": 190464
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.pdb",
+        "sha256": "37C1DCBD3D2146D713A1465CD42A5F2DC10E5334C5D5D60E25A0861F34C5184E",
+        "bytes": 82304
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.Runner.deps.json",
+        "sha256": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+        "bytes": 2524
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+        "sha256": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+        "bytes": 58880
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.Runner.exe",
+        "sha256": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+        "bytes": 162816
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.Runner.pdb",
+        "sha256": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+        "bytes": 22448
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+        "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+        "bytes": 342
+      },
+      {
+        "path": "artifacts/three-native-investigation/runner/CopperMod.Amiga.Lightweight.xml",
+        "sha256": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F",
+        "bytes": 12505
+      }
+    ],
+    "candidateBundle": [
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/Copper68k.dll",
+        "sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+        "bytes": 842240
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperDisk.dll",
+        "sha256": "0EB1277215A506FB57FD9AD678D3C71F81FB89C0DD1A99190F044BDFDCE1C356",
+        "bytes": 105472
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperDisk.pdb",
+        "sha256": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+        "bytes": 41884
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperDisk.xml",
+        "sha256": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+        "bytes": 49078
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperFloat.dll",
+        "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+        "bytes": 28672
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.dll",
+        "sha256": "AC21CD70A32365755652B1BEBAACBA423C3150FDD89185E2775EB4F6A23F72CF",
+        "bytes": 190464
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.pdb",
+        "sha256": "AC1B3400F59BC085970712C9BA4B1F2DB81320D07E2CDE9C5CDD67A8C91D91CF",
+        "bytes": 82312
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.Runner.deps.json",
+        "sha256": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+        "bytes": 2524
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+        "sha256": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+        "bytes": 58880
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.Runner.exe",
+        "sha256": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+        "bytes": 162816
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.Runner.pdb",
+        "sha256": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+        "bytes": 22448
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+        "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+        "bytes": 342
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.xml",
+        "sha256": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F",
+        "bytes": 12505
+      }
+    ],
+    "unverified": [
+      "physical comparator propagation",
+      "coincident reads and register writes",
+      "reset seed",
+      "combined MSBSYNC and WORDSYNC",
+      "full gameplay"
+    ]
+  },
+  "tests": {
+    "before": {
+      "failed": 8,
+      "passed": 3,
+      "skipped": 0,
+      "log": {
+        "path": "artifacts/three-native-investigation/wordsync-tests-before.log",
+        "sha256": "384FC2FF464AC5EBD733046BAC4C370BBADCFDDF0387075C61D53110A8E6211D",
+        "bytes": 8758
+      }
+    },
+    "after": {
+      "passed": 716,
+      "failed": 0,
+      "skipped": 0,
+      "log": {
+        "path": "artifacts/three-native-investigation/wordsync-tests-after.log",
+        "sha256": "241DB0AA7E1EEF9D8B90C4B579EF03C8CE94EB42E6018E37771A869E5974CCFA",
+        "bytes": 951
+      }
+    },
+    "productionBuild": {
+      "warnings": 0,
+      "errors": 0,
+      "log": {
+        "path": "artifacts/three-native-investigation/wordsync-build.log",
+        "sha256": "70B85DD4409F6005024EEDD010A111731BC333ACD60F8BB5CA842751F7797683",
+        "bytes": 983
+      }
+    },
+    "hostAndDiskSuites": "Not rerun for the serial-only correction; native replays are recorded separately."
+  },
+  "boot": {
+    "fields": 8000,
+    "modes": [
+      "conservative-batch",
+      "scalar"
+    ],
+    "comparedFiles": [
+      {
+        "file": "frame-001000.bmp",
+        "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-001000.chipram",
+        "sha256": "F74EA53B0079E470DFE4F7B2D499C3738079DF8EF3B0AE61C62C1B609D77C188",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-001000.json",
+        "sha256": "FCB700E0553F4993D9923D75D78E722DC1020A050DEA7E987333254E09587412",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-001000.slowram",
+        "sha256": "301855610C7E1364906F50E4DB03C4D18DE454CB97BC4D88C56AC38E380C83E3",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-002000.bmp",
+        "sha256": "FDDE41CDDB5BB4EA02D91D44C9C67D51B348C598C6F7B4487751BED1D5068DF8",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-002000.chipram",
+        "sha256": "8D4256CE0F69EBD64070DD79D84C833CB0C011B68460269A52626467C354AF30",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-002000.json",
+        "sha256": "E2CFE3F97F393CD127686850A0D5134E8CCEBDDBEB09FCA018B8783B4B52E1AC",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-002000.slowram",
+        "sha256": "301855610C7E1364906F50E4DB03C4D18DE454CB97BC4D88C56AC38E380C83E3",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-003000.bmp",
+        "sha256": "DFC06F8361F4985964CBA3936AF668BC55A89F6A44FB1E4B1742C914A567CBE2",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-003000.chipram",
+        "sha256": "4CB44D9221D9954CB96A416D1DE6E5E06C44C74EDF7E1818F082EA708FDC0CB1",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-003000.json",
+        "sha256": "945D17F7CC14378A8B26C3A62F3D1620AB96DAE3E257D74244B7379B95FC5120",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-003000.slowram",
+        "sha256": "335E12FE7B5BCD874A1F81102BB33587C78B6EB72A30750F0F4A60937AFBADFD",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-004000.bmp",
+        "sha256": "DFC06F8361F4985964CBA3936AF668BC55A89F6A44FB1E4B1742C914A567CBE2",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-004000.chipram",
+        "sha256": "D90BA2F32AE9A60E0D6991AEE20DD8BFB6F8D335A11F3A481FEC2EAA42B5CA7D",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-004000.json",
+        "sha256": "DBE2514A3A25F077768D9E506ACE6339C74FA25F4C936895ACEF0FBD180EE734",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-004000.slowram",
+        "sha256": "6CFD20FA8ADBE22F89C8AF80CF9A96CD50BB53ADB2A2FBFC2E2A082EF9D07583",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-005000.bmp",
+        "sha256": "F1F3D04F706BF40E935B785558D8D0792CDC3ECA2DF833863F08F5DD1DEEDFFC",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-005000.chipram",
+        "sha256": "D9B49673D7809F17FF1D27A9AB44DE1839097C3FD56B04242D4D90B70C844654",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-005000.json",
+        "sha256": "FE36347BD9F2842055AC312CBA1CC712D74C56EAD1D0DDEAC7409A53237AF210",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-005000.slowram",
+        "sha256": "8CA998DD4976582EA26DE277046FFE8EA6BB579FCF7A43079B13DE0CB9720159",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-006000.bmp",
+        "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-006000.chipram",
+        "sha256": "72E4DFDF089134BC3F961199A8703B906ADE1329746C3AB21A5FC4C7FA930DBF",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-006000.json",
+        "sha256": "3EF946D2C755CE5840E572DCCA3D33BE33AE05B4CCDBCAF8B6211D2682F73BA1",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-006000.slowram",
+        "sha256": "EA7FAE73A443D2AE533D2F5943B6E5C01E150EAB03A3D0B249AD9EB05925A40F",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-007000.bmp",
+        "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-007000.chipram",
+        "sha256": "67C0CF3F29C3270CC5D38ADB4FB88917DFC1CFE72828947505A79591A409E011",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-007000.json",
+        "sha256": "82D6204077C81B8564EC8F9285C2E0CC298B1EEBB3D7E5E183EC866FD1EA1D46",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-007000.slowram",
+        "sha256": "2B13F68BD1AC2F98197DF25E86BFC33F421C8D75D9474EC9611B4AF069FB2263",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-008000.bmp",
+        "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-008000.chipram",
+        "sha256": "67C0CF3F29C3270CC5D38ADB4FB88917DFC1CFE72828947505A79591A409E011",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-008000.json",
+        "sha256": "E8DB9C9F2636A5AFB09BE1ADF81698D3601431901560E0DEE3CE0DDCDA4C19FA",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      },
+      {
+        "file": "frame-008000.slowram",
+        "sha256": "5AEFE727D5CE0601F10759E224FFF79E3D202C78D2890A651502FC699C045B1B",
+        "scalarMatches": true,
+        "diagnosticExperimentMatches": true
+      }
+    ],
+    "final": {
+      "frame": 8000,
+      "cycle": 1133694900,
+      "pc": "000281DA",
+      "sr": "2000",
+      "data": [
+        "85520002",
+        "000000F9",
+        "00002E38",
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000000"
+      ],
+      "address": [
+        "00028296",
+        "0002819C",
+        "00000000",
+        "00C7FC00",
+        "00000000",
+        "00000000",
+        "00000000",
+        "0007F7E4"
+      ],
+      "cylinder": 56,
+      "head": 0,
+      "remaining": 0,
+      "dsklen": "4000",
+      "dsksync": "4489",
+      "intreq": "1420",
+      "adkcon": "1100",
+      "unsupported": null
+    },
+    "reference": {
+      "frame": 8000,
+      "cycle": 1136684046,
+      "pc": "0007F6D6",
+      "sr": "2004",
+      "data": [
+        "5F6B03FE",
+        "00008000",
+        "00000000",
+        "00000000",
+        "00000001",
+        "40510010",
+        "00000000",
+        "00000003"
+      ],
+      "address": [
+        "0007D82E",
+        "00DFF000",
+        "0007F6CC",
+        "0007D9D4",
+        "3E2A17DA",
+        "2C6F2F3C",
+        "0007D5F8",
+        "0007F6BA"
+      ],
+      "cylinder": 0,
+      "head": 1,
+      "remaining": 0,
+      "dsklen": "8000",
+      "intreq": "1022",
+      "adkcon": "1500",
+      "unsupported": null
+    },
+    "probeBinary": {
+      "path": "artifacts/alien-wordsync-fix/probe/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "A447CBD67D4F57707772F582F92AA6C3A0BC671E3856ED0D3F721B4C306F3DC8",
+      "bytes": 31232
+    },
+    "probeSource": {
+      "path": "artifacts/three-native-investigation/probe/Program.cs",
+      "sha256": "E7512AA459C684451A50048FEBA93BF02FFD88FEAA148A3320679F71939D1F3D",
+      "bytes": 7675
+    },
+    "engineAssembly": {
+      "path": "artifacts/alien-wordsync-fix/probe/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "AC21CD70A32365755652B1BEBAACBA423C3150FDD89185E2775EB4F6A23F72CF",
+      "bytes": 190464
+    },
+    "commands": [
+      "dotnet artifacts/alien-wordsync-fix/probe/CopperMod.Amiga.Lightweight.Runner.dll alien artifacts/alien-wordsync-fix/native-batch 99999 8000",
+      "dotnet artifacts/alien-wordsync-fix/probe/CopperMod.Amiga.Lightweight.Runner.dll alien artifacts/alien-wordsync-fix/native-scalar 99999 8000 scalar"
+    ]
+  },
+  "disk2": {
+    "fields": 16000,
+    "stateCheckpoints": 268,
+    "captureFiles": 804,
+    "outcome": "Main menu visible by field 9000; menu/credits sequence and nonzero audio through 16000. Started level not established.",
+    "script": {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/alien-breed-se92-wordsync.json",
+      "sha256": "97035F9E3C41F247DD6EF6129EF50113ABD6B212E057BADE012A7AFF9F86856B",
+      "bytes": 396
+    },
+    "allUnsupportedNull": true,
+    "allVideoUnsupportedNull": true,
+    "final": {
+      "frame": 16000,
+      "cycle": 2266878896,
+      "beam": [
+        0,
+        2
+      ],
+      "width": 908,
+      "height": 313,
+      "pc": "0002C142",
+      "sr": "2001",
+      "overlay": false,
+      "data": [
+        "00000148",
+        "000000AE",
+        "00001B20",
+        "00003000",
+        "00000000",
+        "00000000",
+        "00020402",
+        "00000048"
+      ],
+      "address": [
+        "0002C45A",
+        "0002BF92",
+        "0002F016",
+        "0002D500",
+        "0002A45E",
+        "00047B72",
+        "00DFF000",
+        "0007F81C"
+      ],
+      "dmacon": "03FF",
+      "intena": "4030",
+      "intreq": "17E0",
+      "adkcon": "1100",
+      "dsklen": "4000",
+      "copperPc": "0002A954",
+      "copperWaiting": false,
+      "blitterBusy": false,
+      "diskActive": false,
+      "diskRemaining": 0,
+      "diskBit": 91461,
+      "Cylinder": 31,
+      "Head": 0,
+      "Selected": false,
+      "MotorOn": false,
+      "ReadyCycle": 9223372036854775807,
+      "drives": [
+        {
+          "index": 0,
+          "Mounted": true,
+          "Cylinder": 31,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "DiskChanged": false,
+          "BitPosition": 91461,
+          "NextBitCycle": 9223372036854775807
+        }
+      ],
+      "ciaAMask": 10,
+      "ciaAPending": 0,
+      "ciaBMask": 4,
+      "ciaBPending": 17,
+      "bplcon0": "6600",
+      "diwstart": "2C81",
+      "diwstop": "2CC1",
+      "ddfstart": "0038",
+      "ddfstop": "00D0",
+      "bitplanes": [
+        "00040548",
+        "000467C8",
+        "00043548",
+        "00046A48",
+        "00046548",
+        "00046CC8"
+      ],
+      "modulos": [
+        8,
+        0
+      ],
+      "unsupported": null,
+      "videoUnsupported": null,
+      "audioNonzero": true
+    },
+    "captureManifest": {
+      "path": "artifacts/alien-wordsync-fix/disk2-manifest.json",
+      "sha256": "26C6099A5E4939426A3D9F900BC76CE83E68A5FFAC81367D22B05F18F706E22E",
+      "bytes": 148209
+    },
+    "selectedFiles": [
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-009000.bmp",
+        "sha256": "A7A067909211851F53F2A69DAB9A9621E92AF47962F8DD33CA5B15661C99D18F",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-009000.json",
+        "sha256": "9D2D2DDD33384AF9C5192F7C99E6A7F9A7AF4677D0CBB4612DB6E63A00F8B77D",
+        "bytes": 1106
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-009000.chipram",
+        "sha256": "1E7C4560CEE1E7A8DB853C0710F8BC4829504ED4A4DF6AE61A2D2A9149BFFB47",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-015960.bmp",
+        "sha256": "0D34DC15AFA8076469D5C1238349305A3D995B925B5607B40E366D8B5EE62379",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-015960.json",
+        "sha256": "2043E74BB645239050FC11501C1433390FEB414279C0204C50AE578F8C50A2A0",
+        "bytes": 1107
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-015960.chipram",
+        "sha256": "B10EE2ACFE07B4DBCCC8E2372B5EFDE0B48FE3DCDD760D094E9D0EC6222B79A6",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-016000.bmp",
+        "sha256": "922A9339C6A49A601F9156FF0BDEFF4B797FDE25D8C542B98D4E58A692D58A62",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-016000.json",
+        "sha256": "F39DFBD62BB2D22A86058528BFA4726CE0CB0568DA6200DDFE5D5785A18E4806",
+        "bytes": 1107
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/disk2/frame-016000.chipram",
+        "sha256": "89A3F36DA5D8FD9A5D7434CF49128833D7F3961BD10476847A7DA327FF57F1A1",
+        "bytes": 524288
+      }
+    ],
+    "log": {
+      "path": "artifacts/alien-wordsync-fix/disk2.log",
+      "sha256": "612016A940BCE2C561BC143D19B90B093C991A24C2923C0C4138F05F6BE3A8FB",
+      "bytes": 295449
+    },
+    "timingAndAllocations": "Capture and media-swap instrumentation; not acceptance measurements.",
+    "command": "dotnet artifacts/alien-wordsync-fix/runner/CopperMod.Amiga.Lightweight.Runner.dll --rom C:/Data/ROM/Kickstart_13.rom --disk 'C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf' --input-script CopperScreen.Lightweight.Tests/Workloads/alien-breed-se92-wordsync.json --frames 16000 --wide-output --boot-probe artifacts/alien-wordsync-fix/disk2"
+  },
+  "retainedIdentities": [
+    {
+      "workload": "lores",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "matchesRetainedIdentity": true,
+      "evidence": {
+        "path": "artifacts/alien-wordsync-fix/performance-v1/lores-C2.log",
+        "sha256": "0F89CD6DDC8ECC0A45CB864DE26B6C759BF3A270FBB087C8F260AFDA19165BBF",
+        "bytes": 299
+      },
+      "timingDisposition": "EXCLUDED_INVALID_SERIES"
+    },
+    {
+      "workload": "hires",
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "matchesRetainedIdentity": true,
+      "evidence": {
+        "path": "artifacts/alien-wordsync-fix/hires-identity.log",
+        "sha256": "3EE946E4B88CCD22FBFFDF1E122BCBFD24203C33F45456115604F63C76390BD0",
+        "bytes": 305
+      },
+      "timingDisposition": "DIAGNOSTIC_ONLY"
+    },
+    {
+      "workload": "lemmings",
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=10920 frames=3600 completed=14520 cycle=2063189662 cpu=0x249E90223C45891F hardware=0xF4951BBFA89CA99A output=0x7D31C3889FF73760 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+      "matchesRetainedIdentity": true,
+      "evidence": {
+        "path": "artifacts/alien-wordsync-fix/lemmings-identity.log",
+        "sha256": "0EBE5B9194640DC58A6CFE50238C63F570EF6D2DA5E6AA25C9D68F9577618417",
+        "bytes": 292
+      },
+      "timingDisposition": "DIAGNOSTIC_ONLY"
+    }
+  ],
+  "performance": {
+    "status": "INVALID_RERUN",
+    "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: sustained Package interference >=25% for 10.3203100000974 seconds.",
+    "accepted": false,
+    "scopeException": null,
+    "protocol": {
+      "path": "scripts/run-lightweight-disk-byte-wordsync-comparison-v1.ps1",
+      "sha256": "A17383C1AAD86F04A1B5EBCCBF72C3075E723453F4FDB8589BBD6B501F2D42C4",
+      "bytes": 17185
+    },
+    "hostPolicy": {
+      "path": "scripts/agnus-g6-host-load.ps1",
+      "sha256": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6",
+      "bytes": 6589
+    },
+    "rawCompletedSamplesExcludedFromAcceptance": [
+      {
+        "Workload": "lores",
+        "Label": "R1",
+        "Fps": 339.03,
+        "MsPerFrame": 2.9495914815798012,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C1",
+        "Fps": 369.95,
+        "MsPerFrame": 2.703067982159751,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Workload": "lores",
+        "Label": "C2",
+        "Fps": 357.46,
+        "MsPerFrame": 2.797515805964304,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "artifacts/alien-wordsync-fix/performance-v1/INVALID.txt",
+        "sha256": "60751FF99DEF4E69A5B9958065BA124738A95E6C5CF1BC33DF178A07809EB285",
+        "bytes": 117
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/performance-v1/protocol.log",
+        "sha256": "BA7528D372F5DA27C927FC949C53EC0582A4C66952F2D5732B611E7A19E1A247",
+        "bytes": 2705
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/performance-v1/telemetry.jsonl",
+        "sha256": "8315FE31967C53A10FE634BED72CD280C706EE753C06670229CBE3C96E9C5861",
+        "bytes": 13610
+      },
+      {
+        "path": "artifacts/alien-wordsync-fix/performance-v1/samples.json",
+        "sha256": "58C79FA62229DD0502B288A4EF1DEC8F4B36D9AE5A0FA50B9698B5147CB29FC7",
+        "bytes": 1278
+      }
+    ],
+    "required": "Fresh complete six-pair comparison of all three workloads; unchanged 1% one-sided 95% upper-bound limit."
+  },
+  "sources": {
+    "manual": "https://bastya.net/AmigaDevDocs/hard_8.html",
+    "supportingEmulator": "https://github.com/tonioni/WinUAE/blob/2b64e9cff1ca5ce4ec2f1808042cad7d72dc24da/disk.cpp",
+    "interpretation": "CPU byte-phase extension is supported by native isolation and emulator behavior, not a physical hardware capture."
+  }
+}

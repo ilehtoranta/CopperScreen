@@ -35,10 +35,11 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-NATIVE-003 | Inside the Machine v1.0.1 / effect corruption | Final-row area-blitter modulo corrected; scoped performance exception accepted | Chained C2P blits continued from pointers missing the final modulo. Six new regressions and the 18,000-field replay verify the correction and closing logo. See [investigation](BLITTER_FINAL_MODULO.md); no full hardware-frame certification. |
 | LWA-NATIVE-004 | Miami Chase / overlapping menu text | Visual symptom repaired by the same blitter correction; scoped performance exception accepted | Unchanged disk-2/menu replay now clears text between screens. Gameplay with the supplied mixed-release media remains unverified. See [investigation](BLITTER_FINAL_MODULO.md). |
 | LWA-NATIVE-005 | Lotus III / disk-2 prompt | Unresolved loader/input wait; OPEN | Supplied disk 2 plus joystick fire and a mouse click do not advance the bounded replay. Establish input acknowledgement and loader expectations before claiming a disk-controller defect. See [native corpus](NATIVE_CORPUS_2026-09-21.md). |
-| LWA-NATIVE-006 | Alien Breed Special Edition '92 / black boot | Reproducible loader wait; OPEN | Supplied boot IPF stays black for 8,000 fields. All 135 captured states/images/RAM match the pre-blitter-fix engine. Isolate the loader/receiver expectation before assigning cause; see [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
-| LWA-NATIVE-007 | Desert Dream / late execution failure | Reproducible beyond prior coverage; OPEN | Point-cloud effects give way to corrupted execution near field 19,380. All 401 checkpoints through 24,000 fields match the pre-blitter-fix engine; disk B in DF1 does not resolve it. See [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
+| LWA-NATIVE-006 | Alien Breed Special Edition '92 / black boot | CPU byte alignment corrected; bounded boot/menu verified | Received WORDSYNC now aligns DSKBYTR bytes without DMA. All 716 engine tests pass; normal/scalar boot captures match, and the matching second disk reaches the main menu. Gameplay and physical coincident edges remain unverified. See [correction and validation](DISK_BYTE_WORDSYNC_2026-09-24.md); [combined throughput](NATIVE_CORRECTIONS_VALIDATION_2026-09-25.md) is valid with the lores gate unmet. The [original failure](NATIVE_CORPUS_2026-09-21_BATCH2.md) is retained. |
+| LWA-NATIVE-007 | Desert Dream / late execution failure | Live area-pointer correction; main and hidden endings verified | Pointer writes reach the running area blit, preventing the wrapped-zero clear of vector $78. Normal/scalar 72,000-field main replays match all 288 files; the 30,000-field hidden sequence matches all 120 files through final greetings. See [correction](DESERT_DREAM_LIVE_POINTERS_2026-09-25.md) and [follow-up validation](NATIVE_CORRECTIONS_VALIDATION_2026-09-25.md). Active restart and exact hardware timing remain unverified; combined throughput is valid with the lores gate unmet. |
+| LWA-BLITTER-001 | Active blitter reprogramming | Area pointers corrected; remaining edges OPEN | CPU/Copper pointer-half writes reach an active area blit. Same-cycle pointer/output collisions, live control/modulo/data writes, line-mode changes and active BLTSIZE restart need discriminating hardware evidence. See [scope and validation](DESERT_DREAM_LIVE_POINTERS_2026-09-25.md). |
 | LWA-DISK-014 | Live WORDSYNC changes / IPF boot blockers | Running reads corrected; first-sync wait OPEN | Established reads preserve partial/FIFO/accepted words on toggles; Superfrog, F17 Challenge and Overdrive pass their former boot stops. First-sync-wait toggles remain explicitly unsupported; physical coincident-edge validation remains open. See [evidence and gate](DISK_LIVE_WORDSYNC.md) and original [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
-| LWA-NATIVE-008 | Desert Strike / disk-2 drive-range stop | Explicit unsupported seek; cause OPEN | PDX disk 1 plus supplied unlabeled disk 2 reaches data loading, then stops at field 22,084 on a seek beyond cylinder 79. Isolate drive travel and loader/media expectations; no gameplay or pre-fix comparison claimed. See [batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). |
+| LWA-NATIVE-008 | Desert Strike / disk-2 drive-range stop | End-stop correction implemented; gameplay OPEN | WinUAE reproduces the stale guest track cache but continues after over-seeking. Lightweight now clamps at its existing drive limit without stopping execution or patching guest memory. See [reference comparison and validation](DESERT_STRIKE_END_STOP_2026-09-24.md); disk three is unavailable. The [original failure](NATIVE_CORPUS_2026-09-21_BATCH2.md) is retained. |
 | LWA-NATIVE-009 | Alien Breed II / black loader state | Reclassified: supplied AGA edition, outside current profile | All three supplied SPS 44 disks match the AGA catalog by size/CRC/SHA1. Loader clearing overlaps its mirrored code in 512 KiB chip RAM. This is not evidence of an OCS engine defect; OCS SPS 278 media is unavailable locally. See [investigation](ALIEN_BREED_II_INVESTIGATION.md); original failure captures remain preserved. |
 | LWA-NATIVE-010 | Alien Breed: Tower Assault / boot Guru | Absent OCS DENISEID corrected; optimized candidate accepted 2026-09-24 | Zero register-storage readback selected the AGA stack outside fitted RAM. Bounded undriven-bus readback reaches disk-2 loading and the opening level; 335 state/image/RAM checkpoints match scalar execution. The [scoped-local candidate](SCOPED_LOCALS_2026-09-24.md) retains all 1005 captures and passes every retained workload under the unchanged 1% upper-bound limit, without an exception. Earlier comparison results remain separate evidence; physical bus uncertainties remain open. See [investigation](TOWER_ASSAULT_INVESTIGATION.md); original [corpus failure](NATIVE_CORPUS_2026-09-23.md) is retained. |
 | LWA-BUS-001 | OCS undriven custom-register reads | DENISEID bounded digital model; physical edges OPEN | Previous-CCK DMA data / idle pull-ups implemented for absent `$DFF07C`. Electrical decay, refresh/dummy cycles, coincident edges and other write-only register read side effects are not certified. See [evidence boundary](TOWER_ASSAULT_INVESTIGATION.md#hardware-evidence-and-model-boundary). |
@@ -163,15 +164,22 @@ See [the evidence and limits](DISK_CONTROL_EDGES.md).
 
 The live shift register is compared on incoming bits and DSKSYNC writes. A new
 match requests a sync interrupt with provisional four-CCK CPU visibility;
-DSKSYNC resets to `$4489`. Comparator propagation, reset seed, WORDSYNC byte phase
-and IRQ visibility remain unverified. Revisit sync/status loader failures with
-reset/coincident-write evidence; retain documented following-word WORDSYNC coverage.
+DSKSYNC resets to `$4489`. Received WORDSYNC now aligns the CPU byte counter even
+without DMA; register-only comparisons retain its phase. The
+[Alien Breed correction](DISK_BYTE_WORDSYNC_2026-09-24.md) has focused phase/readback
+and native boot/menu coverage. Comparator propagation, reset seed, coincident
+read/write phase, combined MSBSYNC/WORDSYNC and IRQ visibility remain unverified.
+Retain documented following-word WORDSYNC coverage.
 
 ### LWA-DISK-008 — Ideal-ADF mechanics
 
 Standard encoded ADF tracks use nominal 300 RPM and a new motor/media run starting
 at track bit zero after readiness. Insertion phase, coast-down, seek settling and
 speed variation are not fully modeled. ADF sectors are not physical flux captures.
+Inward over-seeks now clamp without stopping guest execution. Existing model
+limits remain 79 for ADF/empty drives and 83 for IPF; actual mechanical travel and
+media-independent bounds remain unverified. See the
+[Desert Strike comparison](DESERT_STRIKE_END_STOP_2026-09-24.md).
 Add effects only for demonstrated supported-workload needs with bounded evidence;
 broader protection/flux support remains outside scope.
 

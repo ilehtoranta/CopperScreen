@@ -13,6 +13,76 @@ public sealed class LightweightBlitterTests
         LightweightClock.CpuCyclesPerLine + (80 * LightweightClock.CpuCyclesPerColorClock);
 
     [Theory]
+    [InlineData(LightweightRegisters.Bltapth, SourceA)]
+    [InlineData(LightweightRegisters.Bltbpth, SourceB)]
+    [InlineData(LightweightRegisters.Bltcpth, SourceC)]
+    public void ActiveAreaSourcePointerWriteFeedsSubsequentReads(ushort pointerRegister, uint source)
+    {
+        using var machine = new LightweightA500Machine();
+        const uint replacement = 0x24000;
+        for (var word = 0; word < 64; word++)
+        {
+            WriteWord(machine, source + (uint)(word * 2), 0x1111);
+            WriteWord(machine, replacement + (uint)(word * 2), 0xCAFE);
+        }
+        ConfigureArea(machine, 0x0FFE); // A OR B OR C; other sources contain zero.
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0040); // One row of 64 words.
+        machine.AdvanceHardwareTo(start + 40);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x0040);
+        machine.AdvanceHardwareTo(machine.Cycle + 16); // Drain accepted output.
+        Assert.True(machine.BlitterBusy);
+        Assert.Equal((ushort)0x1111, ReadWord(machine, DestinationD));
+
+        WritePointer(machine, pointerRegister, replacement);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x8040);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal((ushort)0x1111, ReadWord(machine, DestinationD));
+        Assert.Equal((ushort)0xCAFE, ReadWord(machine, DestinationD + 126));
+        Assert.InRange(machine.GetBlitterPointer(pointerRegister), replacement + 2, replacement + 128);
+    }
+
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(false, true)]
+    [InlineData(true, false)]
+    [InlineData(true, true)]
+    public void ActiveAreaDestinationHalfWriteRedirectsRemainingWords(bool descending, bool highHalf)
+    {
+        using var machine = new LightweightA500Machine();
+        for (var word = -64; word < 128; word++)
+        {
+            WriteWord(machine, (uint)(DestinationD + word * 2), 0xBEEF);
+            WriteWord(machine, (uint)(0x26000 + word * 2), 0xBEEF);
+            WriteWord(machine, (uint)(0x17000 + word * 2), 0xBEEF);
+        }
+        ConfigureArea(machine, 0x0100, descending ? (ushort)2 : (ushort)0);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0040);
+        machine.AdvanceHardwareTo(start + 40);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x0040);
+        machine.AdvanceHardwareTo(machine.Cycle + 16);
+        Assert.True(machine.BlitterBusy);
+        var previous = machine.GetBlitterPointer(LightweightRegisters.Bltdpth);
+        var direction = descending ? -1 : 1;
+        var completed = ((int)previous - (int)DestinationD) / (2 * direction);
+        Assert.InRange(completed, 1, 63);
+
+        WriteRegister(machine, (ushort)(LightweightRegisters.Bltdpth + (highHalf ? 0 : 2)),
+            highHalf ? (ushort)2 : (ushort)0x7001); // Low bit is not an address bit.
+        var replacement = machine.GetBlitterPointer(LightweightRegisters.Bltdpth);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x8040);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal((ushort)0xBEEF, ReadWord(machine, previous));
+        for (var word = 0; word < 64 - completed; word++)
+            Assert.Equal((ushort)0, ReadWord(machine, (uint)(replacement + word * 2 * direction)));
+        Assert.Equal((uint)(replacement + (64 - completed) * 2 * direction),
+            machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+    }
+
+    [Theory]
     [InlineData(false, 1)]
     [InlineData(true, 1)]
     [InlineData(false, -1)]

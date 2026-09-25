@@ -85,6 +85,10 @@ RAM transfer. See [disk control edges and limits](../docs/engine/DISK_CONTROL_ED
 Running reads preserve partial and buffered words across WORDSYNC enable changes;
 changes during the initial sync wait remain unsupported. See
 [live WORDSYNC evidence](../docs/engine/DISK_LIVE_WORDSYNC.md).
+Received WORDSYNC aligns DSKBYTR byte reads even without DMA. The
+[CPU byte alignment correction](../docs/engine/DISK_BYTE_WORDSYNC_2026-09-24.md)
+passes Alien Breed SE '92's black boot and reaches its disk-two menu; exact
+physical coincident-edge timing remains unverified.
 
 Drives start write protected. For ADF, `SetDriveWriteProtected(drive, false)` enables
 guest memory-to-disk DMA into the owned encoded tracks. `ExportAdf(drive)` copies

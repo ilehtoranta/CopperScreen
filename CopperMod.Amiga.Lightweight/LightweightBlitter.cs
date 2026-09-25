@@ -235,6 +235,31 @@ internal sealed class LightweightBlitter
     {
         if (offset != LightweightRegisters.Bltsize)
         {
+            // Area DMA pointers are live registers, not a snapshot at BLTSIZE.
+            // Keep any already accepted bus output's address/value intact.
+            // Active line-mode reprogramming remains outside this correction.
+            if (_active && !_lineMode)
+            {
+                switch (offset)
+                {
+                    case LightweightRegisters.Bltapth:
+                    case LightweightRegisters.Bltapth + 2:
+                        _pointerA = machine.GetBlitterPointer(LightweightRegisters.Bltapth);
+                        break;
+                    case LightweightRegisters.Bltbpth:
+                    case LightweightRegisters.Bltbpth + 2:
+                        _pointerB = machine.GetBlitterPointer(LightweightRegisters.Bltbpth);
+                        break;
+                    case LightweightRegisters.Bltcpth:
+                    case LightweightRegisters.Bltcpth + 2:
+                        _pointerC = machine.GetBlitterPointer(LightweightRegisters.Bltcpth);
+                        break;
+                    case LightweightRegisters.Bltdpth:
+                    case LightweightRegisters.Bltdpth + 2:
+                        _pointerD = machine.GetBlitterPointer(LightweightRegisters.Bltdpth);
+                        break;
+                }
+            }
             return;
         }
 
