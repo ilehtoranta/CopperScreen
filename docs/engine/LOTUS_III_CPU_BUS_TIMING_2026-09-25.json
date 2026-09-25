@@ -1,0 +1,812 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "status": "BUS_SPACING_CORRECTED_BOUNDED_NATIVE_PASS",
+  "scope": "CPU bus-spacing integration; no guest/media patch or CPU package change.",
+  "candidate_engine": {
+    "path": "artifacts/lotus3-timing/production-probe/CopperMod.Amiga.Lightweight.dll",
+    "sha256": "7EE0B872B7E2F4A491FCBBC4D8BDC2BBFD577DF34A1EBB62CF4B0148018EE3E9",
+    "bytes": 190976
+  },
+  "baseline_engine": {
+    "path": "artifacts/desert-dream-live-blitter/runner/CopperMod.Amiga.Lightweight.dll",
+    "sha256": "7EB9C87905BD8CA790DFF21BB918A0B34F7E4B94FE8489F673058BC4D1581FDC",
+    "bytes": 190464
+  },
+  "cpu": {
+    "path": "artifacts/lotus3-timing/production-probe/Copper68k.dll",
+    "sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+    "bytes": 842240
+  },
+  "native_probe": {
+    "path": "artifacts/lotus3-timing/production-probe/CopperMod.Amiga.Lightweight.Runner.dll",
+    "sha256": "64AF2931E847FD7C9E58BD711841387725A47AA2ECF0B1EA46BF1D0A1E1766B2",
+    "bytes": 31232
+  },
+  "rom_sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "lotus_media": [
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "C8241ACD91206A0D857CD589DA2ECDEB4084BD270E597DEE4C0EB7D7885FC30C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+      "bytes": 901120
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "699D6C7A9562184F4DABA8D23FF6C4CBFD28A3E1863EBA5C764BA96D735ABD9C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887",
+      "bytes": 901120
+    }
+  ],
+  "tests": {
+    "release_warnings": 0,
+    "release_errors": 0,
+    "spacing_before_failed": 2,
+    "spacing_after_passed": 2,
+    "engine_passed": 728,
+    "engine_skipped": 0,
+    "host_passed": 92,
+    "host_optional_native_skipped": 3,
+    "disk_passed": 74
+  },
+  "lotus_normal_scalar_equal_files": [
+    {
+      "file": "frame-001000.bmp",
+      "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A"
+    },
+    {
+      "file": "frame-001000.chipram",
+      "sha256": "D0C4329E0F0D4D4FC8CC6A7BCA624D6A0812D8858FAB191DE5D247D87D37028E"
+    },
+    {
+      "file": "frame-001000.json",
+      "sha256": "98567B9F1620652DD608AC204D1C35CC73468A3770AA11158B016EF57846A527"
+    },
+    {
+      "file": "frame-001000.slowram",
+      "sha256": "847FB39646DF694C16A0032E21B9AE335D9331BF1E2270E0F457CFBE084EAFCD"
+    },
+    {
+      "file": "frame-002000.bmp",
+      "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A"
+    },
+    {
+      "file": "frame-002000.chipram",
+      "sha256": "FBF8C93266E1A0FB998AEA98FEE99C92051A4D205B19C9594C1FF5203AC8B0A3"
+    },
+    {
+      "file": "frame-002000.json",
+      "sha256": "0A53107CB9517D25FE0F85AA11A3609C7B1275CA49078EE443CD7DA0B57A8242"
+    },
+    {
+      "file": "frame-002000.slowram",
+      "sha256": "ED87B742F0C2ACE0C272EA47488F66117613F3F317DEB038CA92AD572D0A826B"
+    },
+    {
+      "file": "frame-003000.bmp",
+      "sha256": "C18747180967EA5E9B18A4830F516467D49B26D3FCF7F43FD3AB577E014266D6"
+    },
+    {
+      "file": "frame-003000.chipram",
+      "sha256": "572228E1577CB88CDE3CAC2A308040F3E922167232DDA95B0E451770D76EA214"
+    },
+    {
+      "file": "frame-003000.json",
+      "sha256": "B310F95A54B7D89B830550D47FA21018404BA25F0F5570413068568ABF7E0530"
+    },
+    {
+      "file": "frame-003000.slowram",
+      "sha256": "1FB566CC9F7E69AB4C404E9BCD76640F6299D1071231130A9DF9309BC723FA8F"
+    },
+    {
+      "file": "frame-004000.bmp",
+      "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22"
+    },
+    {
+      "file": "frame-004000.chipram",
+      "sha256": "3866B352BB30566F6EB5967D0A1BF0F4B9A2B10D2BD4BF7D0E58BB39116C4C78"
+    },
+    {
+      "file": "frame-004000.json",
+      "sha256": "E10FA73A9EF9ADF417B4C5C59A3720A06B4F8BCB34C16C7B793B8FF238148167"
+    },
+    {
+      "file": "frame-004000.slowram",
+      "sha256": "A6E98153423B748EA088342825CC8C5662C22AB0D518D5DE194054CFCF2DA23D"
+    },
+    {
+      "file": "frame-005000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "file": "frame-005000.chipram",
+      "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1"
+    },
+    {
+      "file": "frame-005000.json",
+      "sha256": "A5A29DDBE79C3BC97A0884772007CA4C42620D2EFEDD2FF44F073C4A5CB84E56"
+    },
+    {
+      "file": "frame-005000.slowram",
+      "sha256": "AAF8AB330670E7CF2CE0282FC328DE32E63A062F7E6225254F685FFA0D0913EF"
+    },
+    {
+      "file": "frame-006000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "file": "frame-006000.chipram",
+      "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1"
+    },
+    {
+      "file": "frame-006000.json",
+      "sha256": "76F4884A97CC085288DC97D37E96C9EB4ADE87616D03316CACFEC0F5906E021E"
+    },
+    {
+      "file": "frame-006000.slowram",
+      "sha256": "A8605DE9A05ED40FF4F4963C3117ECA5ED8FF1A4942AF2C93729B6E6339604D4"
+    },
+    {
+      "file": "frame-007000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "file": "frame-007000.chipram",
+      "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1"
+    },
+    {
+      "file": "frame-007000.json",
+      "sha256": "F89B262069947769606D301DE8B2642399644899ED44B02C0B584A10BD962983"
+    },
+    {
+      "file": "frame-007000.slowram",
+      "sha256": "2AB64EC9398B0B0898047A64987ACF87CB6DA131596337F20AC9B9BBAC3ECE85"
+    },
+    {
+      "file": "frame-008000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "file": "frame-008000.chipram",
+      "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1"
+    },
+    {
+      "file": "frame-008000.json",
+      "sha256": "E63AA9A9B3868069A6550DC492F2ECF66BA5EF90DAC2B159D785E9279D1C55AC"
+    },
+    {
+      "file": "frame-008000.slowram",
+      "sha256": "17C4DA30AFBAF37649B2FB15457F166BC9B7A55791DB7D832AE9DCBEBDADDF97"
+    },
+    {
+      "file": "frame-009000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "file": "frame-009000.chipram",
+      "sha256": "8A507F0DF6F71A7BF8D1932CD199F1F2A651AD731B66D2673A823B1574C53679"
+    },
+    {
+      "file": "frame-009000.json",
+      "sha256": "F462E9FD8FAA479BAA11BFB453AFE8292EA2DC091F4FCF4BBFC24D49D0AEECE0"
+    },
+    {
+      "file": "frame-009000.slowram",
+      "sha256": "BE9E7BA7C6B60D8CC410DCDC2DC8B7A5795939A374722C4A313A74D510794D52"
+    },
+    {
+      "file": "frame-010000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "file": "frame-010000.chipram",
+      "sha256": "2263D2E2E7E7B745C79BE0706A09BD0F6B915881DED9B4AFC46896D6562BEF09"
+    },
+    {
+      "file": "frame-010000.json",
+      "sha256": "F8679B3D95BB59ED74692FB74239FDAB171C319959C120CC15304A33177C37F3"
+    },
+    {
+      "file": "frame-010000.slowram",
+      "sha256": "F28EB4C96B569AF8EB32391D3CB9274F8AC3B3113C4A31AF4B1111A2D7AFF241"
+    },
+    {
+      "file": "frame-011000.bmp",
+      "sha256": "CECECC3719C981239730595E51F2D5D615336CD2E96210762168389CB53FDFC4"
+    },
+    {
+      "file": "frame-011000.chipram",
+      "sha256": "762BE46860F36FFDD9583B8993A4980BE61182C1A8A8FE0D3A78680A7D880E2B"
+    },
+    {
+      "file": "frame-011000.json",
+      "sha256": "34EB74490CDA07F9C0609A8489DCB3BDA3DDF103853828C9E83AE353DFE7FF2C"
+    },
+    {
+      "file": "frame-011000.slowram",
+      "sha256": "CBBDB1B315C1D67221E19B098879E68C2506D237C1F17933B8BA930B3D34D7CE"
+    },
+    {
+      "file": "frame-012000.bmp",
+      "sha256": "500BE9A47C3457D4C5C69F85ECD40403EA95991CE0CB2DD404B4D298DA141DFA"
+    },
+    {
+      "file": "frame-012000.chipram",
+      "sha256": "BAA1FA5A955D89B9228EFEDFB2AFBE785DA7BEA91BC888B2AFEDA284D63F24C7"
+    },
+    {
+      "file": "frame-012000.json",
+      "sha256": "38B1519ADA07979E99DA5FD971BF78D9FF4373BAA09F9C1B9466F0DB95365C80"
+    },
+    {
+      "file": "frame-012000.slowram",
+      "sha256": "AE5961AE8A92F465A30BFF05AAF6BE69212F721206D05B62DCBDD7257E9F1E21"
+    },
+    {
+      "file": "frame-013000.bmp",
+      "sha256": "109383F6780EFF76BBD875A26154C4F155CB315B1391C1B5703AD7F8ADB432BC"
+    },
+    {
+      "file": "frame-013000.chipram",
+      "sha256": "C0A0856DF414AD8A597FD4F2FCC950008E6CA1BCEC0BAA922E2839D5C8F70A25"
+    },
+    {
+      "file": "frame-013000.json",
+      "sha256": "AB2D890622F29E6548D54C6044D7C038535D9C8B44977F609D2102B0513397F4"
+    },
+    {
+      "file": "frame-013000.slowram",
+      "sha256": "FF087D19BAE59C766BBCA452FC2E0DAE7F1C6F5D0AB4E5C8BE82D0D97DC609A9"
+    },
+    {
+      "file": "frame-014000.bmp",
+      "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697"
+    },
+    {
+      "file": "frame-014000.chipram",
+      "sha256": "FDBBF4643521FAFA5F95BA9FC2E2A1B717DF68B36F0B508BF639CA6A3FEDD6A9"
+    },
+    {
+      "file": "frame-014000.json",
+      "sha256": "084A4FE14B718E35ECDBB050E580AFC136812AF29D59FF886D3C7BE585A3AF59"
+    },
+    {
+      "file": "frame-014000.slowram",
+      "sha256": "6A726810AAFB2F13548CF70888C97F476B8BBB8B65E17E223847F521E58F7A49"
+    },
+    {
+      "file": "frame-015000.bmp",
+      "sha256": "881B09173100B6119585B0C57C8B06946849D237333814C2A35E1639D864F4D7"
+    },
+    {
+      "file": "frame-015000.chipram",
+      "sha256": "61AB51CEEF3A1BCE69AF8F0A6D524C417031A7FF557A322A022B8725CA2EC68D"
+    },
+    {
+      "file": "frame-015000.json",
+      "sha256": "5635528CB890F02EB85B50D48245131399285E51616A77CA5A6F4537FAD373B0"
+    },
+    {
+      "file": "frame-015000.slowram",
+      "sha256": "12C2F7794C8D924AC51C5A0315221DE8CA0656B91D1C7A6136B9C195E85047CA"
+    },
+    {
+      "file": "frame-016000.bmp",
+      "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697"
+    },
+    {
+      "file": "frame-016000.chipram",
+      "sha256": "516169997A28E25D702382C1FD211E173EC67840E3772E4344C01B1DAD436942"
+    },
+    {
+      "file": "frame-016000.json",
+      "sha256": "D8A02239A96BF11191EFD7D50A6D82769AA65A8D8596D8A0321A19036AAE91ED"
+    },
+    {
+      "file": "frame-016000.slowram",
+      "sha256": "B7CAEB5B77D59FA87D2B9B8C6CBE2AF02AAACF447F8DCAF3661562610EBBA5F2"
+    },
+    {
+      "file": "frame-017000.bmp",
+      "sha256": "64E2D3F0C539A9D162463914FE2AD05026FF5760466B3DD57966673D5AB0637A"
+    },
+    {
+      "file": "frame-017000.chipram",
+      "sha256": "6285F852578E86B396AFA231BA09A7E39F650EE2D1EA088079BCB4675A734D91"
+    },
+    {
+      "file": "frame-017000.json",
+      "sha256": "D0AFA29276DB3EC13B680FEF5FC4A5048AA238C2715DAF18D0461F77BA8CF3EB"
+    },
+    {
+      "file": "frame-017000.slowram",
+      "sha256": "7A9423CB0ED2E86F381A7473EB25A017A0809BB1F314CD8DBCBF24BFBBB594B5"
+    },
+    {
+      "file": "frame-018000.bmp",
+      "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22"
+    },
+    {
+      "file": "frame-018000.chipram",
+      "sha256": "09CDF66F606DE7D75A2E64B7050003CC9FE6271808EF2A0E3CA81CC7BCFCE121"
+    },
+    {
+      "file": "frame-018000.json",
+      "sha256": "3ADBE6F86C821DF0AA6FAC12F657B8CA77CEAA71C77B4113E4D6294E4746B140"
+    },
+    {
+      "file": "frame-018000.slowram",
+      "sha256": "7C4A0DC6555C5771EFDDB741377A138C75A83DFFD1AF5F066D7FF3723B4F6849"
+    }
+  ],
+  "replays": [
+    {
+      "directory": "artifacts/lotus3-timing/fixed-normal",
+      "fields": 18000,
+      "capture_files": 72,
+      "capture_manifest_sha256": "875D54FE88D7128C00BE543E08FE03B337C08CCB115A443CA38E829ABA0F9722",
+      "final_state": {
+        "frame": 18000,
+        "cycle": 2557703978,
+        "pc": "0007DA66",
+        "sr": "2004",
+        "data": [
+          "00000006",
+          "0000FF00",
+          "0000BBFF",
+          "00004800",
+          "00494BFF",
+          "00000000",
+          "0000FE00",
+          "00004660"
+        ],
+        "address": [
+          "00C0004C",
+          "0000F7BE",
+          "0000142A",
+          "00C08000",
+          "0000F808",
+          "00001C74",
+          "0007DA4C",
+          "000013A0"
+        ],
+        "cylinder": 29,
+        "head": 1,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "17A2",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_evidence": [
+        {
+          "path": "artifacts/lotus3-timing/fixed-normal/frame-018000.bmp",
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/lotus3-timing/fixed-normal/frame-018000.json",
+          "sha256": "3ADBE6F86C821DF0AA6FAC12F657B8CA77CEAA71C77B4113E4D6294E4746B140",
+          "bytes": 380
+        },
+        {
+          "path": "artifacts/lotus3-timing/fixed-normal/frame-018000.chipram",
+          "sha256": "09CDF66F606DE7D75A2E64B7050003CC9FE6271808EF2A0E3CA81CC7BCFCE121",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/lotus3-timing/fixed-normal/frame-018000.slowram",
+          "sha256": "7C4A0DC6555C5771EFDDB741377A138C75A83DFFD1AF5F066D7FF3723B4F6849",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "directory": "artifacts/lotus3-timing/fixed-scalar",
+      "fields": 18000,
+      "capture_files": 72,
+      "capture_manifest_sha256": "C03F7A0B3A6DD2B9C2141E7A22BCE6288D4F2026FE78C89E6A84D9EB9D4DEEED",
+      "final_state": {
+        "frame": 18000,
+        "cycle": 2557703978,
+        "pc": "0007DA66",
+        "sr": "2004",
+        "data": [
+          "00000006",
+          "0000FF00",
+          "0000BBFF",
+          "00004800",
+          "00494BFF",
+          "00000000",
+          "0000FE00",
+          "00004660"
+        ],
+        "address": [
+          "00C0004C",
+          "0000F7BE",
+          "0000142A",
+          "00C08000",
+          "0000F808",
+          "00001C74",
+          "0007DA4C",
+          "000013A0"
+        ],
+        "cylinder": 29,
+        "head": 1,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "17A2",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_evidence": [
+        {
+          "path": "artifacts/lotus3-timing/fixed-scalar/frame-018000.bmp",
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/lotus3-timing/fixed-scalar/frame-018000.json",
+          "sha256": "3ADBE6F86C821DF0AA6FAC12F657B8CA77CEAA71C77B4113E4D6294E4746B140",
+          "bytes": 380
+        },
+        {
+          "path": "artifacts/lotus3-timing/fixed-scalar/frame-018000.chipram",
+          "sha256": "09CDF66F606DE7D75A2E64B7050003CC9FE6271808EF2A0E3CA81CC7BCFCE121",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/lotus3-timing/fixed-scalar/frame-018000.slowram",
+          "sha256": "7C4A0DC6555C5771EFDDB741377A138C75A83DFFD1AF5F066D7FF3723B4F6849",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "directory": "artifacts/lotus3-timing/alien-normal",
+      "fields": 16000,
+      "capture_files": 64,
+      "capture_manifest_sha256": "65C24045E5653FEC126457BE85951B4F85D733C14DBB4220BE03EC54B95340A1",
+      "final_state": {
+        "frame": 16000,
+        "cycle": 2266635956,
+        "pc": "0002BF84",
+        "sr": "2001",
+        "data": [
+          "000000AB",
+          "00000094",
+          "00002580",
+          "00000540",
+          "0002BEFC",
+          "00000000",
+          "00020402",
+          "00000048"
+        ],
+        "address": [
+          "0002A57A",
+          "0002BF92",
+          "00035C7D",
+          "0002D4E2",
+          "0002A45E",
+          "00047B72",
+          "00DFF000",
+          "0007F7DC"
+        ],
+        "cylinder": 31,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "unsupported": null
+      },
+      "final_evidence": [
+        {
+          "path": "artifacts/lotus3-timing/alien-normal/frame-016000.bmp",
+          "sha256": "31C03035AC184F6ADD32C592FD0F628B2B2994BA4E50378936BC9FDCA59C0528",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/lotus3-timing/alien-normal/frame-016000.json",
+          "sha256": "9A7FC8E8E5ED84B91ABBF553FC0B814B2E174A30EA31C462E53C7BC25D81FFC8",
+          "bytes": 380
+        },
+        {
+          "path": "artifacts/lotus3-timing/alien-normal/frame-016000.chipram",
+          "sha256": "5ED06D4245E2EC487A468EC53CE25C65124A8E05EC4005EBCEA84C453212966F",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/lotus3-timing/alien-normal/frame-016000.slowram",
+          "sha256": "73AC8DCFBED0ADAEBBA2110CB0C236DEF79753679099B1A076EA928F304C2E3A",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "directory": "artifacts/lotus3-timing/strike-normal",
+      "fields": 26000,
+      "capture_files": 104,
+      "capture_manifest_sha256": "DB4FB2246E0DC5E1AA7EE26BEFD6016EAF9E45ABCE7C152C3F2A5BCB80BFAD97",
+      "final_state": {
+        "frame": 26000,
+        "cycle": 3694519982,
+        "pc": "00C1C38A",
+        "sr": "2100",
+        "data": [
+          "00000005",
+          "00C20E42",
+          "00000000",
+          "00000000",
+          "000003FF",
+          "CA99FFFF",
+          "000F0000",
+          "FFF0010B"
+        ],
+        "address": [
+          "00000F08",
+          "00001CF8",
+          "00C20E46",
+          "00C20E46",
+          "00C001CC",
+          "00DFF000",
+          "00020E64",
+          "00C7FF7E"
+        ],
+        "cylinder": 33,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "17A0",
+        "adkcon": "1100",
+        "unsupported": null
+      },
+      "final_evidence": [
+        {
+          "path": "artifacts/lotus3-timing/strike-normal/frame-026000.bmp",
+          "sha256": "7572273804824870CB36A6CA58FBD3996F01C43A7D4D61F329A0C0D9BD14673F",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/lotus3-timing/strike-normal/frame-026000.json",
+          "sha256": "11CB78847FEFF505DC10302D052D42C463858756CAFBFC676EEFDD4C7C7D23FB",
+          "bytes": 380
+        },
+        {
+          "path": "artifacts/lotus3-timing/strike-normal/frame-026000.chipram",
+          "sha256": "46EFCBA91A97F4F32FC7410EE07F2D9C05B489F07F887BC95BEE68E02DF9F0A1",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/lotus3-timing/strike-normal/frame-026000.slowram",
+          "sha256": "A2F4C425B470DE8547A60B0AD567E9CAE2D0A7E4B367E8B667311BEB5F4FE73E",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "directory": "artifacts/lotus3-timing/dream-normal",
+      "fields": 72000,
+      "capture_files": 288,
+      "capture_manifest_sha256": "802E5B104552F76F0B0F1E6376FDBEA376AD8121BED98CC1FB2435A1082AEC8D",
+      "final_state": {
+        "frame": 72000,
+        "cycle": 10225552872,
+        "pc": "0004013A",
+        "sr": "2000",
+        "data": [
+          "00580006",
+          "0006CB80",
+          "000600B0",
+          "00000010",
+          "00000002",
+          "0000FFFF",
+          "000000ED",
+          "0000FFFF"
+        ],
+        "address": [
+          "00040316",
+          "00040643",
+          "00040448",
+          "0004C4AE",
+          "0006C080",
+          "0004C44E",
+          "00DFF000",
+          "000001FC"
+        ],
+        "cylinder": 18,
+        "head": 1,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "17E2",
+        "adkcon": "1100",
+        "unsupported": null
+      },
+      "final_evidence": [
+        {
+          "path": "artifacts/lotus3-timing/dream-normal/frame-072000.bmp",
+          "sha256": "5DD3EDDF77D6D6F539CE5BFC0874E9C76A0B856EC156D41D3E3F2DB66804E901",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/lotus3-timing/dream-normal/frame-072000.json",
+          "sha256": "72C34E079B7F2D27F4D603F831A838EA0E62F2CE7E221B17819A6D0CA65D3CBB",
+          "bytes": 381
+        },
+        {
+          "path": "artifacts/lotus3-timing/dream-normal/frame-072000.chipram",
+          "sha256": "941134B36DB343AB062AAD8CF7B1B049788903DB175013448E08E5F09AF4B75D",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/lotus3-timing/dream-normal/frame-072000.slowram",
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        }
+      ]
+    }
+  ],
+  "capture_manifest_algorithm": "SHA256(UTF8(concatenated sorted relative-path=UPPERCASE-SHA256 lines, LF terminated))",
+  "observed_screens": {
+    "fixed-normal": [
+      11000,
+      12000,
+      15000,
+      17000,
+      18000
+    ],
+    "alien-normal": [
+      9000,
+      16000
+    ],
+    "strike-normal": [
+      26000
+    ],
+    "dream-normal": [
+      24000,
+      52000,
+      72000
+    ]
+  },
+  "evidence": [
+    {
+      "path": "artifacts/lotus3-timing/spacing-before.log",
+      "sha256": "B082D84594CBD4EDA140FDCA931C4EF897739E97E563A569EDE40CA3B4B84D44",
+      "bytes": 2425
+    },
+    {
+      "path": "artifacts/lotus3-timing/spacing-after.log",
+      "sha256": "7C5CFD48E18353642FC75D3EE925FA225B197ADC648F63D668BB5DD9FF77DCFE",
+      "bytes": 953
+    },
+    {
+      "path": "artifacts/lotus3-timing/engine-tests.log",
+      "sha256": "9739E57D4C78C2DCCA65BFD7C8BB7D5BB7B78DC5BE8D64F3F0DB8F2F8300F279",
+      "bytes": 951
+    },
+    {
+      "path": "artifacts/lotus3-timing/release-build.log",
+      "sha256": "10827EF1E97DC227942E7F1665C4D3980D6D02EA593B23CA3CAA1611B845D09D",
+      "bytes": 983
+    },
+    {
+      "path": "artifacts/lotus3-timing/host-tests.log",
+      "sha256": "5B25508704F24E1BD0BE8BCB0923D40DE5B658C51310784AC1AAFF7882104B6D",
+      "bytes": 1220
+    },
+    {
+      "path": "artifacts/lotus3-timing/disk-tests.log",
+      "sha256": "41B946AFA7BE8C7CF3D8C089F6592035EF60D3CCE54A2B66FB2656EA60EF20C5",
+      "bytes": 316
+    },
+    {
+      "path": "artifacts/lotus3-timing/winuae-valid.txt",
+      "sha256": "F1E82EDF74E5B65FED26CC169483FA03102E0645E4383C1C1377A78F85296A42",
+      "bytes": 1228
+    },
+    {
+      "path": "artifacts/lotus3-timing/winuae-valid-dma.txt",
+      "sha256": "144C8F4FBEE377A0B74EFC85070F5665C72B5E4E45916C05F10DF30BD12253C4",
+      "bytes": 20347
+    },
+    {
+      "path": "artifacts/lotus3-timing/winuae-loop-dma.txt",
+      "sha256": "BA5352A936616F2746703B8AD0A226D459CAF38E9BFB52E618CA9F21C330BBFA",
+      "bytes": 25869
+    },
+    {
+      "path": "artifacts/lotus3-timing/unpaced/native-bus.txt",
+      "sha256": "88D19B91E696E0768C090B338908A864F073E865E7CA20651BE80A8A5BE6C674",
+      "bytes": 21292
+    },
+    {
+      "path": "artifacts/lotus3-timing/unpaced/native-instructions.txt",
+      "sha256": "A7D9553C6DA46CE60754E2FB7D87AB563DE087B3FCAB13EC8A1F3E95E23FD3A3",
+      "bytes": 8524
+    },
+    {
+      "path": "artifacts/lotus3-timing/native-bus.txt",
+      "sha256": "E581AA62E2CB274159467E26DE92DC4EE9708AD84F68A09904E95CA52B0FCF5C",
+      "bytes": 20542
+    },
+    {
+      "path": "artifacts/lotus3-timing/native-instructions.txt",
+      "sha256": "C0061551049A81F44590D5290E7E999FB7C3A5C58890B166E159F4C114238CF0",
+      "bytes": 8395
+    },
+    {
+      "path": "artifacts/lotus3-timing/retained-probe/polling.rom",
+      "sha256": "B4BBF99E61796E74CA96A880080B944B68D8EE3B3BFA22BA56CE49076426373B",
+      "bytes": 524288
+    },
+    {
+      "path": "artifacts/lotus3-timing/retained-probe/normal.json",
+      "sha256": "05426C85344D3BDAE6128226633C07791A6658F1223226A6627426F8A8AC5F24",
+      "bytes": 182
+    },
+    {
+      "path": "artifacts/lotus3-timing/retained-probe/scalar.json",
+      "sha256": "BA46156F7C077277ED7DC475EB15E9C50E4D0DA9B20A39B59A1C94A57297527B",
+      "bytes": 182
+    }
+  ],
+  "sources": [
+    {
+      "path": "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "sha256": "69E8EDDBE6B0F5140BD43AABC195E90A5521D5B9FBE2E6AA3B634C667D684BBF",
+      "bytes": 85377
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Tests/LightweightCpuBusSpacingTests.cs",
+      "sha256": "42972077C9E4EE07B88AE60842022BB52FF98119C7F7F5DCFB1C368CD7B3ACBE",
+      "bytes": 3214
+    },
+    {
+      "path": "scripts/probes/CopperPollingTiming/Program.cs",
+      "sha256": "ABA813A4B527BB549B5C657CCBA6E9FD9E37770C66F80B272AEE2560C1FE2F6D",
+      "bytes": 3896
+    },
+    {
+      "path": "scripts/probes/CopperPollingTiming/CopperPollingTiming.csproj",
+      "sha256": "A6516ED4C5151C7DE466720D7026E442D94433EE142F35C68CBF108F04ED68F3",
+      "bytes": 402
+    }
+  ],
+  "input_scripts": [
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-lotus3.json",
+      "sha256": "9CE09272B91C11EA40F780B302B1F492BD932D28DE0DE45141FB9092517D26DE",
+      "bytes": 585
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/alien-breed-se92-wordsync.json",
+      "sha256": "97035F9E3C41F247DD6EF6129EF50113ABD6B212E057BADE012A7AFF9F86856B",
+      "bytes": 396
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-desert-strike.json",
+      "sha256": "0FED56FB3049B5E8CCD662EA8FE01AA7C454D4CFF309F0ED29BBD1F4B8D4034E",
+      "bytes": 877
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/desert-dream-live-pointers.json",
+      "sha256": "BDBFBF8F09E53B22550C93ECDE85B215459E459C2A53699FC63847788B5DF7A7",
+      "bytes": 135
+    }
+  ],
+  "primary_timing_reference": "https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf",
+  "limitations": [
+    "Original Lotus polling loop still misses the first two presses; third at field 10500 advances.",
+    "Driving demos, not player-controlled racing, verified.",
+    "WinUAE still differs in CLR/MOVE prefetch and JSR bus ordering; no matched-state first-divergence claim.",
+    "Earlier synthetic ROM without interrupt-acknowledge vector bytes was invalid for WinUAE and is excluded.",
+    "Formal performance verification is valid and owner accepted on 2026-09-25 with a scoped exception: lores/hires remain statistically inconclusive above the 1% upper-bound limit; see LOTUS_III_PERFORMANCE_2026-09-25.json. Prior frozen evidence not rebased."
+  ]
+}

@@ -1,10 +1,29 @@
-# Storage diagnostic probes
+# Engine diagnostic probes
 
 These are separate, bounded development executables. They are not in the
 production solution and must not run during formal retention measurement.
 Their assembly name uses the engine's existing runner friend boundary so probes
 can select scalar/batched execution or call a gateway without widening public APIs.
 They reference this repository's engine and its exact pinned CPU package.
+
+## Copper interrupt and polling timing
+
+```powershell
+dotnet run --project scripts/probes/CopperPollingTiming -c Release -- artifacts/new-polling-timing
+```
+
+Use a new output directory. This needs no commercial ROM or game media. It
+generates an independently authored test ROM and runs 100 fields in scalar and
+normal execution, checking chip/slow RAM parity. A Copper interrupt sets a flag;
+the CPU loop clears and tests that flag with the addressing forms implicated in
+Lotus III. The handler records interrupted PCs in slow RAM `$C09100` and the
+consumed-edge count at `$C09008`. The generated ROM includes the interrupt-vector
+bytes needed for a separate PAL OCS 512+512 KiB WinUAE comparison.
+
+The count and PC distribution are diagnostic observations, not hardware golden
+values or a gameplay test. The independent four-clock CPU-transfer regression
+lives in `LightweightCpuBusSpacingTests`. See the
+[investigation](../../docs/engine/LOTUS_III_CPU_BUS_TIMING_2026-09-25.md).
 
 ## CPU trace regression
 

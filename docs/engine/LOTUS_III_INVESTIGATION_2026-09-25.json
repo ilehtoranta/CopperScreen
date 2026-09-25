@@ -1,0 +1,545 @@
+{
+  "date": "2026-09-25",
+  "status": "OPEN_INPUT_RACE_TIMING_UNRESOLVED",
+  "engine_changed": false,
+  "guest_patched": false,
+  "gameplay_verified": false,
+  "baseline_fields": 18000,
+  "baseline_state": {
+    "frame": 18000,
+    "cycle": 2557704034,
+    "pc": "000741B6",
+    "sr": "2005",
+    "data": [
+      "0000157E",
+      "00000003",
+      "00000090",
+      "0000038A",
+      "00000000",
+      "0000014B",
+      "00000012",
+      "0000FFFF"
+    ],
+    "address": [
+      "0007FFF4",
+      "0000597A",
+      "000694F8",
+      "00C08000",
+      "00000200",
+      "00C089E6",
+      "00DFF000",
+      "000013FC"
+    ],
+    "cylinder": 17,
+    "head": 0,
+    "remaining": 0,
+    "dsklen": "4000",
+    "dsksync": "4489",
+    "intreq": "1020",
+    "adkcon": "1500",
+    "unsupported": null
+  },
+  "media": [
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "C8241ACD91206A0D857CD589DA2ECDEB4084BD270E597DEE4C0EB7D7885FC30C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+      "bytes": 901120
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "699D6C7A9562184F4DABA8D23FF6C4CBFD28A3E1863EBA5C764BA96D735ABD9C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887",
+      "bytes": 901120
+    }
+  ],
+  "engine_sha256": "7EB9C87905BD8CA790DFF21BB918A0B34F7E4B94FE8489F673058BC4D1581FDC",
+  "cpu_sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+  "winuae_sha256": "F3E55700FD811CD543FDFEBF6C3221CFAA3D385828F110C6D3EB534C64503123",
+  "normal_scalar_checkpoint_pairs": [
+    {
+      "file": "frame-001000.bmp",
+      "normal_sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+      "scalar_sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+      "equal": true
+    },
+    {
+      "file": "frame-001000.chipram",
+      "normal_sha256": "E984AAE20DFB1A3B77B978774A689CB212D78C822D9669F4AB5B17D8303EABC0",
+      "scalar_sha256": "E984AAE20DFB1A3B77B978774A689CB212D78C822D9669F4AB5B17D8303EABC0",
+      "equal": true
+    },
+    {
+      "file": "frame-001000.json",
+      "normal_sha256": "2C7EF85039BAE77BC9D1DE4DF6EC36EF74D6972ECE00B04290DB8AC6E3128889",
+      "scalar_sha256": "2C7EF85039BAE77BC9D1DE4DF6EC36EF74D6972ECE00B04290DB8AC6E3128889",
+      "equal": true
+    },
+    {
+      "file": "frame-001000.slowram",
+      "normal_sha256": "7FEE36D1E3B4C02E8E2FFA4E3558C64CFBD270787F0C603CBBCF9BC0CECAAAC8",
+      "scalar_sha256": "7FEE36D1E3B4C02E8E2FFA4E3558C64CFBD270787F0C603CBBCF9BC0CECAAAC8",
+      "equal": true
+    },
+    {
+      "file": "frame-002000.bmp",
+      "normal_sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+      "scalar_sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+      "equal": true
+    },
+    {
+      "file": "frame-002000.chipram",
+      "normal_sha256": "9FCC69CD2417B8BB01B40520FD69F499F061B221584A79D1F6E8D8DA0FE7F8AA",
+      "scalar_sha256": "9FCC69CD2417B8BB01B40520FD69F499F061B221584A79D1F6E8D8DA0FE7F8AA",
+      "equal": true
+    },
+    {
+      "file": "frame-002000.json",
+      "normal_sha256": "F776D7625BC89B5F2459DDA0355FAEFC69DB3BE85835CE5B19AA98334F75AFDB",
+      "scalar_sha256": "F776D7625BC89B5F2459DDA0355FAEFC69DB3BE85835CE5B19AA98334F75AFDB",
+      "equal": true
+    },
+    {
+      "file": "frame-002000.slowram",
+      "normal_sha256": "4E6C9D226F09B26FFF61C030380612176615354DB658DA6074D59C3E8F47DFBF",
+      "scalar_sha256": "4E6C9D226F09B26FFF61C030380612176615354DB658DA6074D59C3E8F47DFBF",
+      "equal": true
+    },
+    {
+      "file": "frame-003000.bmp",
+      "normal_sha256": "EB5DB78C0BF3EDE6505F8DA28E760C52A71CCA476BBFDF80D0945573F565C518",
+      "scalar_sha256": "EB5DB78C0BF3EDE6505F8DA28E760C52A71CCA476BBFDF80D0945573F565C518",
+      "equal": true
+    },
+    {
+      "file": "frame-003000.chipram",
+      "normal_sha256": "710AE95F48BF63057D870E29109DBD4090AB76A00928A5EC050D53FEAE2DE0C3",
+      "scalar_sha256": "710AE95F48BF63057D870E29109DBD4090AB76A00928A5EC050D53FEAE2DE0C3",
+      "equal": true
+    },
+    {
+      "file": "frame-003000.json",
+      "normal_sha256": "B1D749C781092A7225872322FD786E77CA2493FD20B8671BC68E2FDAD5FF9F9E",
+      "scalar_sha256": "B1D749C781092A7225872322FD786E77CA2493FD20B8671BC68E2FDAD5FF9F9E",
+      "equal": true
+    },
+    {
+      "file": "frame-003000.slowram",
+      "normal_sha256": "F86ABD0B2F2C5FFBA9C5FF4E93660127C45C8EEAF6359769DD236D392F099A7F",
+      "scalar_sha256": "F86ABD0B2F2C5FFBA9C5FF4E93660127C45C8EEAF6359769DD236D392F099A7F",
+      "equal": true
+    },
+    {
+      "file": "frame-004000.bmp",
+      "normal_sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+      "scalar_sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+      "equal": true
+    },
+    {
+      "file": "frame-004000.chipram",
+      "normal_sha256": "DE27EF7F3D1C4A3B040D1E17A8F1E388D1E9DF1A95331CD467A512D645279713",
+      "scalar_sha256": "DE27EF7F3D1C4A3B040D1E17A8F1E388D1E9DF1A95331CD467A512D645279713",
+      "equal": true
+    },
+    {
+      "file": "frame-004000.json",
+      "normal_sha256": "1945672FF16D29530BE62D32E35EDBCE00472C3285EA069D472A23D71F64CB9D",
+      "scalar_sha256": "1945672FF16D29530BE62D32E35EDBCE00472C3285EA069D472A23D71F64CB9D",
+      "equal": true
+    },
+    {
+      "file": "frame-004000.slowram",
+      "normal_sha256": "872B9EECB6D34880325E5A80B7D896C9F581E29C5845AEA62BAECBE5A2B7479A",
+      "scalar_sha256": "872B9EECB6D34880325E5A80B7D896C9F581E29C5845AEA62BAECBE5A2B7479A",
+      "equal": true
+    },
+    {
+      "file": "frame-005000.bmp",
+      "normal_sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "scalar_sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "equal": true
+    },
+    {
+      "file": "frame-005000.chipram",
+      "normal_sha256": "04BD9029C6B7145160745BA5E2D35D698345A54979748E90D38F4BF8E1AB4BE6",
+      "scalar_sha256": "04BD9029C6B7145160745BA5E2D35D698345A54979748E90D38F4BF8E1AB4BE6",
+      "equal": true
+    },
+    {
+      "file": "frame-005000.json",
+      "normal_sha256": "F6D6D7E8F9245CC159FE86DEA82E5181E3994BC2BB9A3FA98575FC7E96CF318D",
+      "scalar_sha256": "F6D6D7E8F9245CC159FE86DEA82E5181E3994BC2BB9A3FA98575FC7E96CF318D",
+      "equal": true
+    },
+    {
+      "file": "frame-005000.slowram",
+      "normal_sha256": "1D01F7C95D38E901A281502E9F5BD8D0D6ADD6B44A6B61C915A691D082C1F929",
+      "scalar_sha256": "1D01F7C95D38E901A281502E9F5BD8D0D6ADD6B44A6B61C915A691D082C1F929",
+      "equal": true
+    },
+    {
+      "file": "frame-006000.bmp",
+      "normal_sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "scalar_sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "equal": true
+    },
+    {
+      "file": "frame-006000.chipram",
+      "normal_sha256": "04BD9029C6B7145160745BA5E2D35D698345A54979748E90D38F4BF8E1AB4BE6",
+      "scalar_sha256": "04BD9029C6B7145160745BA5E2D35D698345A54979748E90D38F4BF8E1AB4BE6",
+      "equal": true
+    },
+    {
+      "file": "frame-006000.json",
+      "normal_sha256": "BBA965394C73E44B60E00A1C014838FE57C2F106BBBB7C40085E38E9D230B5C4",
+      "scalar_sha256": "BBA965394C73E44B60E00A1C014838FE57C2F106BBBB7C40085E38E9D230B5C4",
+      "equal": true
+    },
+    {
+      "file": "frame-006000.slowram",
+      "normal_sha256": "B7162569F0D2B405B5BA8C42AF024CBCA289D5C4F34FD698ABFF416D02A0F780",
+      "scalar_sha256": "B7162569F0D2B405B5BA8C42AF024CBCA289D5C4F34FD698ABFF416D02A0F780",
+      "equal": true
+    },
+    {
+      "file": "frame-007000.bmp",
+      "normal_sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "scalar_sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "equal": true
+    },
+    {
+      "file": "frame-007000.chipram",
+      "normal_sha256": "57F670B8C7CF3A19069ACA91F1E9B6C88E46F31FB41C45A7FA444511294BDE27",
+      "scalar_sha256": "57F670B8C7CF3A19069ACA91F1E9B6C88E46F31FB41C45A7FA444511294BDE27",
+      "equal": true
+    },
+    {
+      "file": "frame-007000.json",
+      "normal_sha256": "94316FD428BFA6106995E080D36400C17E334D148BE6A8D021F3D2B87F1D3F96",
+      "scalar_sha256": "94316FD428BFA6106995E080D36400C17E334D148BE6A8D021F3D2B87F1D3F96",
+      "equal": true
+    },
+    {
+      "file": "frame-007000.slowram",
+      "normal_sha256": "C72C64F62F28B3C2140B1F322FEE141C24CA4A08C21DF3A954B294E5350A8595",
+      "scalar_sha256": "C72C64F62F28B3C2140B1F322FEE141C24CA4A08C21DF3A954B294E5350A8595",
+      "equal": true
+    }
+  ],
+  "variants": [
+    {
+      "directory": "phase-replay-v2",
+      "fields": 11000,
+      "result": "prompt_wait",
+      "input": "artifacts/lotus3-investigation/phase-input-v2.json",
+      "input_sha256": "55ABDAF5F846948CAC40821FF54240E489DE037EA9B88BB763BAFD00B061CF8D",
+      "final_state": {
+        "frame": 11000,
+        "cycle": 1562990032,
+        "pc": "00069B50",
+        "sr": "2004",
+        "data": [
+          "00000000",
+          "00000003",
+          "00000090",
+          "0000038A",
+          "00000000",
+          "0000014B",
+          "00000012",
+          "0000FFFF"
+        ],
+        "address": [
+          "0007FFF4",
+          "0000597A",
+          "000694F8",
+          "00C08000",
+          "00000200",
+          "00C089E6",
+          "00DFF000",
+          "00001400"
+        ],
+        "cylinder": 17,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "1020",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_state_sha256": "541937CE895B6C6A25554DA7BB531041B23663B5FAEF353FD23A33B792D5C8FF"
+    },
+    {
+      "directory": "return-phase",
+      "fields": 6502,
+      "result": "prompt_wait",
+      "input": "artifacts/lotus3-investigation/return-phase.json",
+      "input_sha256": "1CAB939E4733B98FC369D26206D4B73AC1030FC8E4F90D0E5B21C794FA374320",
+      "final_state": {
+        "frame": 6502,
+        "cycle": 923815236,
+        "pc": "000741A6",
+        "sr": "2004",
+        "data": [
+          "00000000",
+          "00000003",
+          "00000090",
+          "0000038A",
+          "00000000",
+          "0000014B",
+          "00000012",
+          "0000FFFF"
+        ],
+        "address": [
+          "0007FFF4",
+          "0000597A",
+          "000694F8",
+          "00C08000",
+          "00000200",
+          "00C089E6",
+          "00DFF000",
+          "000013FC"
+        ],
+        "cylinder": 17,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "1020",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_state_sha256": "C24ADEB7651C26628911A865539642AE24BF6BAAE3F8C99B14ECAE945294C7E6"
+    },
+    {
+      "directory": "direction-phase",
+      "fields": 11000,
+      "result": "prompt_wait",
+      "input": "artifacts/lotus3-investigation/direction-phase.json",
+      "input_sha256": "E54EC55596E0F1EE72B066C358119EB8925C7CE63AE87C4D6095307DDFED47FC",
+      "final_state": {
+        "frame": 11000,
+        "cycle": 1562990034,
+        "pc": "000741B6",
+        "sr": "2005",
+        "data": [
+          "00001A26",
+          "00000003",
+          "00000090",
+          "0000038A",
+          "00000000",
+          "0000014B",
+          "00000012",
+          "0000FFFF"
+        ],
+        "address": [
+          "0007FFF4",
+          "0000597A",
+          "000694F8",
+          "00C08000",
+          "00000200",
+          "00C089E6",
+          "00DFF000",
+          "000013FC"
+        ],
+        "cylinder": 17,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "1020",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_state_sha256": "55ADCDCD805D28416F7EE28564CE3937416E3085B1C14E2C871BE5EA20A2C00C"
+    },
+    {
+      "directory": "right-held-v2",
+      "fields": 6502,
+      "result": "prompt_wait",
+      "input": "artifacts/lotus3-investigation/right-held.json",
+      "input_sha256": "59F008CEDE1066B1B77F24208EA7D6AE2D56EE71CCDE5B2881C3270163BEDDB0",
+      "final_state": {
+        "frame": 6502,
+        "cycle": 923815236,
+        "pc": "00069B50",
+        "sr": "2004",
+        "data": [
+          "00000000",
+          "00000003",
+          "00000090",
+          "0000038A",
+          "00000000",
+          "0000014B",
+          "00000012",
+          "0000FFFF"
+        ],
+        "address": [
+          "0007FFF4",
+          "0000597A",
+          "000694F8",
+          "00C08000",
+          "00000200",
+          "00C089E6",
+          "00DFF000",
+          "00001400"
+        ],
+        "cylinder": 17,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "1020",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_state_sha256": "73FF19962C4F130BE8BB844FBA20E6AF7EFE18607AC9D35E32A293AB13B1D6BB"
+    },
+    {
+      "directory": "up-held-v2",
+      "fields": 11000,
+      "result": "prompt_wait",
+      "input": "artifacts/lotus3-investigation/up-held.json",
+      "input_sha256": "B6F1EB8EB63E0318DFA8F148CC4444501A3400B0E4D6128011B30231C8E816DD",
+      "final_state": {
+        "frame": 11000,
+        "cycle": 1562990032,
+        "pc": "00069B50",
+        "sr": "2004",
+        "data": [
+          "00000000",
+          "00000003",
+          "00000090",
+          "0000038A",
+          "00000000",
+          "0000014B",
+          "00000012",
+          "0000FFFF"
+        ],
+        "address": [
+          "0007FFF4",
+          "0000597A",
+          "000694F8",
+          "00C08000",
+          "00000200",
+          "00C089E6",
+          "00DFF000",
+          "00001400"
+        ],
+        "cylinder": 17,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "1020",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_state_sha256": "541937CE895B6C6A25554DA7BB531041B23663B5FAEF353FD23A33B792D5C8FF"
+    },
+    {
+      "directory": "rapid-fire",
+      "fields": 10000,
+      "result": "prompt_wait",
+      "input": "artifacts/lotus3-investigation/rapid-fire.json",
+      "input_sha256": "0538EA2E27A5A5555AB0FD801AD76EB90FD45B9C0210EAF77FDE6B18BE025B71",
+      "final_state": {
+        "frame": 10000,
+        "cycle": 1420888032,
+        "pc": "00069B50",
+        "sr": "2004",
+        "data": [
+          "00000000",
+          "00000003",
+          "00000090",
+          "0000038A",
+          "00000000",
+          "0000014B",
+          "00000012",
+          "0000FFFF"
+        ],
+        "address": [
+          "0007FFF4",
+          "0000597A",
+          "000694F8",
+          "00C08000",
+          "00000200",
+          "00C089E6",
+          "00DFF000",
+          "00001400"
+        ],
+        "cylinder": 17,
+        "head": 0,
+        "remaining": 0,
+        "dsklen": "4000",
+        "dsksync": "4489",
+        "intreq": "1020",
+        "adkcon": "1500",
+        "unsupported": null
+      },
+      "final_state_sha256": "1777B8EE24429A9AF43D4A043CCAF5267941200394846D941738D33B8C1F37FF"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/lotus3-investigation/baseline/frame-018000.json",
+      "sha256": "12C4B3A3AC5A0BAB820E46687928ECEC61A7D2917BC0CBC0A3EC48B171B6CBB9"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/baseline/frame-018000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/beam-trace/trace.txt",
+      "sha256": "BE8AD08A459C1997CD0A158BB26056BAF34E1ADED190F4C19C0BAD30A64DBEA4"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/probe/Program.cs",
+      "sha256": "8D0DDFAB7414F3B47D0C7A08410AB33E415C58B55BAF3A1AE9A74382EABAAE7A"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/probe/NativeInputScript.cs",
+      "sha256": "AEF9B2ED6CAA27D4E77760CB0D37A59ED181AB06E29B945C6CB94FF67CB375F8"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/probe/Probe.csproj",
+      "sha256": "1F1584094712F88B5482313567D22E4E2B886CDC71FB61659F69971CB88DA823"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/winuae-wait-code.txt",
+      "sha256": "5AC9F9BA19469AE00AB111C33A999C5DBFA374D32A8A6861404B5A211CAD8A17"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/winuae-irq-dma.txt",
+      "sha256": "F4F1BBECBEBF555BD8B68D29C275F42EEB913B9BB02D1FAF0EC603BEFBBE2A0B"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/winuae-profile.txt",
+      "sha256": "A71AE691AF98157C6ECAF24522218DBEEC0214939C18C3ED667FA1772C5855EF"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/winuae-high-scores.png",
+      "sha256": "5AE35DC2114084D59D7A577845F753232D18033E5F5B0A15011777A59DEA939A"
+    },
+    {
+      "path": "artifacts/lotus3-investigation/lotus3.uae",
+      "sha256": "0B2B1BA0BA4B4D82056A567747931E8E29D002737E9DC4754D7BC43EF9D4A0BE"
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-lotus3.json",
+      "sha256": "9CE09272B91C11EA40F780B302B1F492BD932D28DE0DE45141FB9092517D26DE"
+    }
+  ],
+  "failed_attempts": [
+    "phase-replay: media locked by reference; no replay result",
+    "right-held and up-held: disk one locked by reference; rerun as v2 using exact duplicate"
+  ],
+  "limitations": [
+    "WinUAE reached high scores but a later restart also missed presses",
+    "Reference and native traces are not from matched CPU/prefetch states",
+    "No first hardware divergence established",
+    "No CPU or chipset fix and no new throughput measurement"
+  ]
+}

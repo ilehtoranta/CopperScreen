@@ -79,6 +79,13 @@ and 312/313-line fields. Reset selects the long field; field selection and LACE
 behavior use the same beam state. CPU accesses may stop on either CPU-cycle phase.
 The clock completes the partial CCK before continuing steady CCK advancement.
 
+The CPU uses Copper68k's existing `IM68000BusCycleTiming` contract. An Agnus
+transfer completes after one CCK, while the next CPU address phase remains
+separated by the 68000's four-clock bus cycle. Data readiness and next-bus
+availability are distinct; longword accesses retain their two word grants.
+See the [Lotus III bus-timing correction](LOTUS_III_CPU_BUS_TIMING_2026-09-25.md)
+for the failure-before regression and remaining prefetch-order limitations.
+
 ERSY without an external HSYNC holds H0 and V at the line boundary; canonical
 CPU/device time continues. Accepted outputs finish, future Agnus DMA/control
 steps pause, and fixed-slot requests resume from an integer beam-phase offset.

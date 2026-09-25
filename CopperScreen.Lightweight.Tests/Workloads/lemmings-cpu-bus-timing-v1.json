@@ -1,0 +1,84 @@
+[
+  {
+    "frame": 600,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 606,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 7200,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 7206,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 8400,
+    "ejectAdf": true
+  },
+  {
+    "frame": 8460,
+    "adfPath": "../../media/lemmings-disk2.zip"
+  },
+  {
+    "frame": 8520,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 8526,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11600,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 11604,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 11608,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 11612,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 11616,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 11620,
+    "mouseDeltaX": 35,
+    "mouseDeltaY": 75
+  },
+  {
+    "frame": 11624,
+    "mouseDeltaY": 75
+  },
+  {
+    "frame": 11630,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11636,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 13600,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 13606,
+    "mouseButtons": 0
+  }
+]

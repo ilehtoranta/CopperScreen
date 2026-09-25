@@ -13,7 +13,7 @@ namespace CopperMod.Amiga.Lightweight;
 /// Device phases are explicit extension points; unsupported hardware is
 /// reported instead of being delegated to the legacy scheduler.
 /// </remarks>
-public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
+public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTiming, IDisposable
 {
     private const int BatchProbeScalarInstructionBudget = 4;
     private const byte CiaAPortAResetLatch = 0xFC;
@@ -627,6 +627,23 @@ public sealed partial class LightweightA500Machine : IM68kBus, IDisposable
         _disposed = true;
         try { _hdf?.Dispose(); }
         finally { _cpu.Dispose(); }
+    }
+
+    // Agnus owns a single CCK for the transfer, but the 68000 bus cycle
+    // occupies four CPU clocks. Keep data readiness separate from the next
+    // address phase so adjacent CPU accesses cannot consume adjacent CCKs.
+    int IM68000BusCycleTiming.M68000BusCycleStartDelay => LightweightBusArbiter.SlotCycles;
+
+    bool IM68000BusCycleTiming.RequiresExactM68000PipelineFallback => true;
+
+    M68000BusAccessTiming IM68000BusCycleTiming.GetM68000BusAccessTiming(
+        uint address, M68kOperandSize size, M68kBusAccessKind accessKind,
+        bool isWrite, long requestedCycle, long completedCycle)
+    {
+        var nextBusCycle = UsesAgnusBus(address)
+            ? completedCycle + LightweightBusArbiter.SlotCycles
+            : Math.Max(requestedCycle, completedCycle) + (size == M68kOperandSize.Long ? 8 : 4);
+        return new(completedCycle, nextBusCycle);
     }
 
     public byte ReadByte(uint address, ref long cycle, M68kBusAccessKind accessKind)

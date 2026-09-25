@@ -1,0 +1,1458 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "source_head": "0a358c76c2e1c081a7a6a434e55beda6c6af98f6",
+  "scope": "Incremental Lotus CPU bus-spacing correction versus frozen pre-Lotus engine; previous unmet combined gate retained.",
+  "status": "VALID",
+  "acceptance": "OWNER_ACCEPTED_SCOPED_EXCEPTION",
+  "limit": {
+    "frame_time_regression_upper_one_sided_95_percent": 1,
+    "exceptions_authorized": true
+  },
+  "owner_acceptance": {
+    "date": "2026-09-25",
+    "instruction": "I can accept this. Please commit and push.",
+    "scope": "This exact Lotus CPU bus-spacing candidate and comparison only; lores and hires upper bounds accepted as a scoped exception.",
+    "candidate_engine_sha256": "7EE0B872B7E2F4A491FCBBC4D8BDC2BBFD577DF34A1EBB62CF4B0148018EE3E9",
+    "lores_upper95_percent": 1.3998411042604575,
+    "hires_upper95_percent": 2.4202887784153804,
+    "statistical_dispositions_unchanged": true,
+    "default_limit_and_prior_results_unchanged": true
+  },
+  "host": {
+    "cpu": "AMD Ryzen 5 5600X",
+    "logical_processors": 12,
+    "physical_cores": 6,
+    "processor_groups": 1,
+    "efficiency_classes": 1,
+    "selected_cpu": 2,
+    "smt_sibling": 3,
+    "priority": "Normal",
+    "runtime": ".NET 10.0.12",
+    "load_policy": "v2"
+  },
+  "protocol": {
+    "path": "scripts/run-lightweight-lotus-bus-timing-comparison-v1.ps1",
+    "sha256": "3E114EC01F796204CF03F73BB8BB92118C92E840A673D2CFEA65365354626934",
+    "bytes": 19711
+  },
+  "builds": {
+    "reference": [
+      {
+        "path": "artifacts/lotus3-performance/reference/Copper68k.dll",
+        "sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+        "bytes": 842240
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperDisk.dll",
+        "sha256": "0EB1277215A506FB57FD9AD678D3C71F81FB89C0DD1A99190F044BDFDCE1C356",
+        "bytes": 105472
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperDisk.pdb",
+        "sha256": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+        "bytes": 41884
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperDisk.xml",
+        "sha256": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+        "bytes": 49078
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperFloat.dll",
+        "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+        "bytes": 28672
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.dll",
+        "sha256": "7EB9C87905BD8CA790DFF21BB918A0B34F7E4B94FE8489F673058BC4D1581FDC",
+        "bytes": 190464
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.pdb",
+        "sha256": "27A3DE15F84AAB332B5C69CAF7A293B3524E180D3D7113F19D20A8A30C91D830",
+        "bytes": 82336
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.Runner.deps.json",
+        "sha256": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+        "bytes": 2524
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.Runner.dll",
+        "sha256": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+        "bytes": 58880
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.Runner.exe",
+        "sha256": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+        "bytes": 162816
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.Runner.pdb",
+        "sha256": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+        "bytes": 22448
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+        "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+        "bytes": 342
+      },
+      {
+        "path": "artifacts/lotus3-performance/reference/CopperMod.Amiga.Lightweight.xml",
+        "sha256": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F",
+        "bytes": 12505
+      }
+    ],
+    "candidate": [
+      {
+        "path": "artifacts/lotus3-performance/candidate/Copper68k.dll",
+        "sha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+        "bytes": 842240
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperDisk.dll",
+        "sha256": "0EB1277215A506FB57FD9AD678D3C71F81FB89C0DD1A99190F044BDFDCE1C356",
+        "bytes": 105472
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperDisk.pdb",
+        "sha256": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+        "bytes": 41884
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperDisk.xml",
+        "sha256": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+        "bytes": 49078
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperFloat.dll",
+        "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+        "bytes": 28672
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.dll",
+        "sha256": "7EE0B872B7E2F4A491FCBBC4D8BDC2BBFD577DF34A1EBB62CF4B0148018EE3E9",
+        "bytes": 190976
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.pdb",
+        "sha256": "BAA6E641520837DCB3C8A89DA3938223DEF0D31F0A395F9E2BFBDC04165E6CDF",
+        "bytes": 82444
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.Runner.deps.json",
+        "sha256": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+        "bytes": 2524
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.Runner.dll",
+        "sha256": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+        "bytes": 58880
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.Runner.exe",
+        "sha256": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+        "bytes": 162816
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.Runner.pdb",
+        "sha256": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+        "bytes": 22448
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+        "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+        "bytes": 342
+      },
+      {
+        "path": "artifacts/lotus3-performance/candidate/CopperMod.Amiga.Lightweight.xml",
+        "sha256": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F",
+        "bytes": 12505
+      }
+    ]
+  },
+  "source_change": [
+    {
+      "path": "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "sha256": "69E8EDDBE6B0F5140BD43AABC195E90A5521D5B9FBE2E6AA3B634C667D684BBF",
+      "bytes": 85377
+    },
+    {
+      "path": "artifacts/lotus3-performance/engine-change.patch",
+      "sha256": "B4D8D515A3994DA85D5D2514ECDF91CDCDDF5D5C3AFE436F7EF26B40112CF7E5",
+      "bytes": 1972
+    }
+  ],
+  "native_input": {
+    "script": {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/lemmings-cpu-bus-timing-v1.json",
+      "sha256": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA",
+      "bytes": 1229
+    },
+    "original_script": {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/lemmings-native-level1.json",
+      "sha256": "4C6B630D3F2C9AE3AD2ADC6E361C27277EEBF23EA02B9621C0753BCFCB5A7253",
+      "bytes": 943
+    },
+    "event_change_validated": "Only fields at or after 3600 shift by +3600; all input and media values unchanged.",
+    "rom_sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+    "disk1_sha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59",
+    "disk2_sha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A",
+    "warmup": 14520,
+    "measured_fields": 3600,
+    "final_field": 18120,
+    "old_script_disposition": "REJECTED_WORKLOAD: candidate swaps disk during introduction and finishes black in loader; diagnostic FPS excluded."
+  },
+  "preflight": {
+    "identity_validation": {
+      "identities": {
+        "R": {
+          "lores": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+          "hires": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+          "lemmings": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+        },
+        "C": {
+          "lores": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+          "hires": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+          "lemmings": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+        }
+      },
+      "checks": [
+        {
+          "path": "artifacts/lotus3-performance/identities/reference-normal-lores.log",
+          "sha256": "6369292D7B2A22BD6F699B9133A250954AE5468F964299AAEE6EE6C1105F7DAD"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/reference-scalar-lores.log",
+          "sha256": "D3F2BD881FD93B7420F1E5C516C13183A87797C080EDF3F37B4E957920D79E00"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/reference-normal-hires.log",
+          "sha256": "464C518B25D2A89E588927BD56FC39C62CAB429E8F924774875715F9A9977484"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/reference-scalar-hires.log",
+          "sha256": "4B0651A7889B10FDCFF41C0B816A2CE0D4FF8E7D5EA8E23E48A384896E60F5EC"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/reference-normal-lemmings-delayed.log",
+          "sha256": "C05DC57CDA0E8D54FFDD7F0D1E6049C121BDB1106E42649FE202D9537D354003"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/reference-scalar-lemmings-delayed.log",
+          "sha256": "6F9B5D14A2DD46BFD9F5994BA2197173ABF011734586AB82EF37C2DF209A3FC2"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/candidate-normal-lores.log",
+          "sha256": "9CAFAFBEA2D482BC76FE03F551351D850A8871566AAA162ECA05DDC1343654F6"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/candidate-scalar-lores.log",
+          "sha256": "1B5875D6A86237BB823FAD6E0101B04D3934A459CAD87EC10B7D09ADF156AC3D"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/candidate-normal-hires.log",
+          "sha256": "548ACD70F7F44E5EBEA01B2EBDB0315A28238234EAE5574816EABD944DAF980A"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/candidate-scalar-hires.log",
+          "sha256": "45E700B3412C6E8AFA2B839827B425F0F8681054695BD75E52280E57F2DA42EF"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/candidate-normal-lemmings-delayed.log",
+          "sha256": "FED25AD506F307A7466AC2E44DA78950D55611061DA1F63221F61759E0C8B9FC"
+        },
+        {
+          "path": "artifacts/lotus3-performance/identities/candidate-scalar-lemmings-delayed.log",
+          "sha256": "0A223A1771797A16B36103305FFEFC37B23614D3D00B3693419218F7BCB94E60"
+        }
+      ],
+      "protocol_sha256": "3E114EC01F796204CF03F73BB8BB92118C92E840A673D2CFEA65365354626934"
+    },
+    "captures": [
+      {
+        "build": "reference",
+        "frame": 13920,
+        "state": {
+          "frame": 13920,
+          "cycle": 1977928386,
+          "beam": [
+            1,
+            32
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "000049AE",
+          "sr": "2104",
+          "overlay": false,
+          "data": [
+            "0000004E",
+            "00000000",
+            "000009F0",
+            "00000003",
+            "00000007",
+            "00000010",
+            "00000000",
+            "00002816"
+          ],
+          "address": [
+            "0002DE40",
+            "0003F9DE",
+            "00034404",
+            "00009DA4",
+            "0000A3C0",
+            "00009E10",
+            "00DFF000",
+            "000003F6"
+          ],
+          "dmacon": "07FF",
+          "intena": "4018",
+          "intreq": "17E2",
+          "adkcon": "1500",
+          "dsklen": "4000",
+          "copperPc": "000084C8",
+          "copperWaiting": true,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 74593,
+          "Cylinder": 65,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 65,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 74593,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 9,
+          "ciaAPending": 0,
+          "ciaBMask": 0,
+          "ciaBPending": 16,
+          "bplcon0": "C200",
+          "diwstart": "2C81",
+          "diwstop": "F4C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D4",
+          "bitplanes": [
+            "00034B00",
+            "00035780",
+            "00036400",
+            "00037080",
+            "0006CF50",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "files": [
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-013920.json",
+            "sha256": "066D2B9A0646770A631E8CDDE0118C80B99C258BC51CEA16461736D46E941020",
+            "bytes": 1106
+          },
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-013920.bmp",
+            "sha256": "7F6D2FD0CFEAAF788A4C7005EBD828CF719F086397198038CE24B9BD5C18669A",
+            "bytes": 1136870
+          },
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-013920.chipram",
+            "sha256": "2F4E2CA1AA224A743238E9824A34AF3C032939C04CB7BDCBE9C6565AA5FCC294",
+            "bytes": 524288
+          }
+        ]
+      },
+      {
+        "build": "reference",
+        "frame": 14520,
+        "state": {
+          "frame": 14520,
+          "cycle": 2063189926,
+          "beam": [
+            1,
+            202
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "000049AE",
+          "sr": "2104",
+          "overlay": false,
+          "data": [
+            "0000004E",
+            "00000000",
+            "000009F0",
+            "00000003",
+            "00000007",
+            "00000010",
+            "00000000",
+            "00002816"
+          ],
+          "address": [
+            "0002DE40",
+            "0003F9DE",
+            "00034404",
+            "00009DA4",
+            "0000A3C0",
+            "00009E10",
+            "00DFF000",
+            "000003F6"
+          ],
+          "dmacon": "07FF",
+          "intena": "4018",
+          "intreq": "17E2",
+          "adkcon": "1500",
+          "dsklen": "4000",
+          "copperPc": "000084C8",
+          "copperWaiting": true,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 74593,
+          "Cylinder": 65,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 65,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 74593,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 9,
+          "ciaAPending": 0,
+          "ciaBMask": 0,
+          "ciaBPending": 16,
+          "bplcon0": "C200",
+          "diwstart": "2C81",
+          "diwstop": "F4C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D4",
+          "bitplanes": [
+            "00034B00",
+            "00035780",
+            "00036400",
+            "00037080",
+            "0006CF50",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "files": [
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-014520.json",
+            "sha256": "2A434C855F9C938900D5821ACF5E4A57C27765FB76459AD3B06637E4DF559BFC",
+            "bytes": 1107
+          },
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-014520.bmp",
+            "sha256": "F1AC58FDC1F428DE78063A06C3762CFDE17B9F4C549A49BC4E7D2066E3FEE1FC",
+            "bytes": 1136870
+          },
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-014520.chipram",
+            "sha256": "4FFB3463B12F35D4BA577D37086A3BB065F4AAF986FD1A25A88FAE735F3B938B",
+            "bytes": 524288
+          }
+        ]
+      },
+      {
+        "build": "reference",
+        "frame": 18120,
+        "state": {
+          "frame": 18120,
+          "cycle": 2574756864,
+          "beam": [
+            1,
+            71
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "000049AE",
+          "sr": "2104",
+          "overlay": false,
+          "data": [
+            "0000004E",
+            "00000000",
+            "000009F0",
+            "00000003",
+            "00000007",
+            "00000010",
+            "00000000",
+            "00002816"
+          ],
+          "address": [
+            "0002DE40",
+            "0003F9DE",
+            "00034404",
+            "00009DA4",
+            "0000A3C0",
+            "00009E10",
+            "00DFF000",
+            "000003F6"
+          ],
+          "dmacon": "07FF",
+          "intena": "4018",
+          "intreq": "17E2",
+          "adkcon": "1500",
+          "dsklen": "4000",
+          "copperPc": "000084C8",
+          "copperWaiting": true,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 74593,
+          "Cylinder": 65,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 65,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 74593,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 9,
+          "ciaAPending": 0,
+          "ciaBMask": 0,
+          "ciaBPending": 16,
+          "bplcon0": "C200",
+          "diwstart": "2C81",
+          "diwstop": "F4C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D4",
+          "bitplanes": [
+            "00034B00",
+            "00035780",
+            "00036400",
+            "00037080",
+            "0006CF50",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "files": [
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-018120.json",
+            "sha256": "A0548098D43D7D0BFE4601120CDE6F7FBA965CE7CCE0A418AC91CBD77A04649B",
+            "bytes": 1106
+          },
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-018120.bmp",
+            "sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58",
+            "bytes": 1136870
+          },
+          {
+            "path": "artifacts/lotus3-performance/reference-delayed-gameplay/frame-018120.chipram",
+            "sha256": "1FEB10C78AB0A7BA653F6E00F7378BFA152DF0F848B8981DE1843AE75F1C15BB",
+            "bytes": 524288
+          }
+        ]
+      },
+      {
+        "build": "candidate",
+        "frame": 13920,
+        "state": {
+          "frame": 13920,
+          "cycle": 1977930262,
+          "beam": [
+            5,
+            87
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "000049AE",
+          "sr": "2104",
+          "overlay": false,
+          "data": [
+            "0000004E",
+            "00000000",
+            "000009F0",
+            "00000003",
+            "00000007",
+            "00000010",
+            "00000000",
+            "00002816"
+          ],
+          "address": [
+            "0002DE40",
+            "0003F9DE",
+            "00034404",
+            "00009DA4",
+            "0000A3C0",
+            "00009E10",
+            "00DFF000",
+            "000003F6"
+          ],
+          "dmacon": "07FF",
+          "intena": "4018",
+          "intreq": "17E2",
+          "adkcon": "1500",
+          "dsklen": "4000",
+          "copperPc": "000084C8",
+          "copperWaiting": true,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 9679,
+          "Cylinder": 65,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 65,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 9679,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 9,
+          "ciaAPending": 0,
+          "ciaBMask": 0,
+          "ciaBPending": 16,
+          "bplcon0": "C200",
+          "diwstart": "2C81",
+          "diwstop": "F4C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D4",
+          "bitplanes": [
+            "00034B00",
+            "00035780",
+            "00036400",
+            "00037080",
+            "0006CF50",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "files": [
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-013920.json",
+            "sha256": "3823EE99C111A16BF32AABAE55737A170F66176329C4B23E1D92E6663FF09C7E",
+            "bytes": 1104
+          },
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-013920.bmp",
+            "sha256": "7F6D2FD0CFEAAF788A4C7005EBD828CF719F086397198038CE24B9BD5C18669A",
+            "bytes": 1136870
+          },
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-013920.chipram",
+            "sha256": "DD111A11F8888AF6118DE95CD2158C4CF8578125213364B41EF3147CB09ECEA3",
+            "bytes": 524288
+          }
+        ]
+      },
+      {
+        "build": "candidate",
+        "frame": 14520,
+        "state": {
+          "frame": 14520,
+          "cycle": 2063189596,
+          "beam": [
+            1,
+            62
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "000049AE",
+          "sr": "2104",
+          "overlay": false,
+          "data": [
+            "0000004E",
+            "00000000",
+            "000009F0",
+            "00000003",
+            "00000007",
+            "00000010",
+            "00000000",
+            "00002816"
+          ],
+          "address": [
+            "0002DE40",
+            "0003F9DE",
+            "00034404",
+            "00009DA4",
+            "0000A3C0",
+            "00009E10",
+            "00DFF000",
+            "000003F6"
+          ],
+          "dmacon": "07FF",
+          "intena": "4018",
+          "intreq": "17E2",
+          "adkcon": "1500",
+          "dsklen": "4000",
+          "copperPc": "000084C8",
+          "copperWaiting": true,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 9679,
+          "Cylinder": 65,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 65,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 9679,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 9,
+          "ciaAPending": 0,
+          "ciaBMask": 0,
+          "ciaBPending": 16,
+          "bplcon0": "C200",
+          "diwstart": "2C81",
+          "diwstop": "F4C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D4",
+          "bitplanes": [
+            "00034B00",
+            "00035780",
+            "00036400",
+            "00037080",
+            "0006CF50",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "files": [
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-014520.json",
+            "sha256": "33B6C43FD507E254992C79A1913C1679A6226747CDF40D8CC6479C66EDF71DC2",
+            "bytes": 1104
+          },
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-014520.bmp",
+            "sha256": "F1AC58FDC1F428DE78063A06C3762CFDE17B9F4C549A49BC4E7D2066E3FEE1FC",
+            "bytes": 1136870
+          },
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-014520.chipram",
+            "sha256": "10EA1A44097805C2B914A940C0660F961675045034A682A14E3FD8644B0FC2EE",
+            "bytes": 524288
+          }
+        ]
+      },
+      {
+        "build": "candidate",
+        "frame": 18120,
+        "state": {
+          "frame": 18120,
+          "cycle": 2574756850,
+          "beam": [
+            1,
+            89
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "000049AE",
+          "sr": "2104",
+          "overlay": false,
+          "data": [
+            "0000004E",
+            "00000000",
+            "000009F0",
+            "00000003",
+            "00000007",
+            "00000010",
+            "00000000",
+            "00002816"
+          ],
+          "address": [
+            "0002DE40",
+            "0003F9DE",
+            "00034404",
+            "00009DA4",
+            "0000A3C0",
+            "00009E10",
+            "00DFF000",
+            "000003F6"
+          ],
+          "dmacon": "07FF",
+          "intena": "4018",
+          "intreq": "17E2",
+          "adkcon": "1500",
+          "dsklen": "4000",
+          "copperPc": "000084C8",
+          "copperWaiting": true,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 9679,
+          "Cylinder": 65,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 65,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 9679,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 9,
+          "ciaAPending": 0,
+          "ciaBMask": 0,
+          "ciaBPending": 16,
+          "bplcon0": "C200",
+          "diwstart": "2C81",
+          "diwstop": "F4C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D4",
+          "bitplanes": [
+            "00034B00",
+            "00035780",
+            "00036400",
+            "00037080",
+            "0006CF50",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "files": [
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-018120.json",
+            "sha256": "2C8E13E883D4CFC765A5DD20B8F535E2B20E91A79857C0F817AB4E99E87959C4",
+            "bytes": 1104
+          },
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-018120.bmp",
+            "sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58",
+            "bytes": 1136870
+          },
+          {
+            "path": "artifacts/lotus3-performance/candidate-delayed-gameplay/frame-018120.chipram",
+            "sha256": "29B28941F600E6467FE954E3373605FC3F41A1EB59CE63DE55B556439DEE9792",
+            "bytes": 524288
+          }
+        ]
+      }
+    ],
+    "visual_observations": "Both builds show level-one gameplay at 13920 (out 2, time 4:55) and 18120 (out 10, time 3:31); final BMP byte-identical."
+  },
+  "samples": [
+    {
+      "Workload": "lores",
+      "Label": "R1",
+      "Fps": 398.42,
+      "MsPerFrame": 2.509914160935696,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C1",
+      "Fps": 392.45,
+      "MsPerFrame": 2.548095298764174,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C2",
+      "Fps": 402.14,
+      "MsPerFrame": 2.486696175461282,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R2",
+      "Fps": 395.99,
+      "MsPerFrame": 2.525316295866057,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R3",
+      "Fps": 403.76,
+      "MsPerFrame": 2.4767188428769566,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C3",
+      "Fps": 397.9,
+      "MsPerFrame": 2.5131942699170646,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C4",
+      "Fps": 390.75,
+      "MsPerFrame": 2.5591810620601407,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R4",
+      "Fps": 397.35,
+      "MsPerFrame": 2.5166729583490626,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R5",
+      "Fps": 394.41,
+      "MsPerFrame": 2.535432671585406,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C5",
+      "Fps": 404.04,
+      "MsPerFrame": 2.475002475002475,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "C6",
+      "Fps": 404.39,
+      "MsPerFrame": 2.4728603575756076,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lores",
+      "Label": "R6",
+      "Fps": 394.24,
+      "MsPerFrame": 2.536525974025974,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R1",
+      "Fps": 358.9,
+      "MsPerFrame": 2.7862914460852606,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C1",
+      "Fps": 354.64,
+      "MsPerFrame": 2.8197608842770134,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C2",
+      "Fps": 351.42,
+      "MsPerFrame": 2.8455978601104093,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R2",
+      "Fps": 356.96,
+      "MsPerFrame": 2.8014343343792025,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R3",
+      "Fps": 363.07,
+      "MsPerFrame": 2.7542898063734267,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C3",
+      "Fps": 349.32,
+      "MsPerFrame": 2.862704683384862,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C4",
+      "Fps": 361.01,
+      "MsPerFrame": 2.770006371014653,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R4",
+      "Fps": 355.73,
+      "MsPerFrame": 2.811120793860512,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R5",
+      "Fps": 353.66,
+      "MsPerFrame": 2.8275745065882485,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C5",
+      "Fps": 356.3,
+      "MsPerFrame": 2.8066236317709796,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "C6",
+      "Fps": 360.06,
+      "MsPerFrame": 2.7773148919624506,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "hires",
+      "Label": "R6",
+      "Fps": 362.48,
+      "MsPerFrame": 2.7587728978150516,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R1",
+      "Fps": 335.27,
+      "MsPerFrame": 2.9826706833298537,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C1",
+      "Fps": 346.68,
+      "MsPerFrame": 2.8845044421368407,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C2",
+      "Fps": 342.58,
+      "MsPerFrame": 2.9190262128553917,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R2",
+      "Fps": 324.6,
+      "MsPerFrame": 3.080714725816389,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R3",
+      "Fps": 334.1,
+      "MsPerFrame": 2.9931158335827592,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C3",
+      "Fps": 351.59,
+      "MsPerFrame": 2.844221963081999,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C4",
+      "Fps": 354.1,
+      "MsPerFrame": 2.824060999717594,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R4",
+      "Fps": 341.59,
+      "MsPerFrame": 2.9274861676278583,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R5",
+      "Fps": 339.83,
+      "MsPerFrame": 2.9426477944854783,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C5",
+      "Fps": 346.41,
+      "MsPerFrame": 2.886752691896885,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "C6",
+      "Fps": 338.53,
+      "MsPerFrame": 2.953947951437096,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "R6",
+      "Fps": 341.79,
+      "MsPerFrame": 2.925773135551069,
+      "Fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756864 cpu=0xC815695C1AAE835D hardware=0xD5E0FB6D7BEB0984 output=0xDA8F27A2904E84D4 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    }
+  ],
+  "summary": [
+    {
+      "Workload": "lores",
+      "FrameTimeRegressionPercent": -0.3076439274336651,
+      "Upper95Percent": 1.3998411042604575,
+      "Disposition": "INCONCLUSIVE",
+      "ReferenceMeanFps": 397.3616666666667,
+      "CandidateMeanFps": 398.6116666666667,
+      "PairedLogFrameTimeRatios": [
+        0.015097584680815275,
+        -0.015411328287123497,
+        0.01461992459912403,
+        0.01674953508460248,
+        -0.024122905584360848,
+        -0.025419897943387136
+      ]
+    },
+    {
+      "Workload": "hires",
+      "FrameTimeRegressionPercent": 0.8488725821547805,
+      "Upper95Percent": 2.4202887784153804,
+      "Disposition": "INCONCLUSIVE",
+      "ReferenceMeanFps": 358.4666666666667,
+      "CandidateMeanFps": 355.4583333333333,
+      "PairedLogFrameTimeRatios": [
+        0.011940607716763401,
+        0.01564164135447627,
+        0.03860724559412929,
+        -0.01473364264573952,
+        -0.0074370729849590495,
+        0.00669861612940629
+      ]
+    },
+    {
+      "Workload": "lemmings",
+      "FrameTimeRegressionPercent": -3.019553126575636,
+      "Upper95Percent": -1.1328652783193616,
+      "Disposition": "PASS",
+      "ReferenceMeanFps": 336.19666666666666,
+      "CandidateMeanFps": 346.6483333333333,
+      "PairedLogFrameTimeRatios": [
+        -0.03346598691135412,
+        -0.05391155198934795,
+        -0.051025374633152334,
+        -0.035968171636619285,
+        -0.01917755206334951,
+        0.009583798660415581
+      ]
+    }
+  ],
+  "telemetry": {
+    "samples": 1540,
+    "total_seconds": 1678.4972337994259,
+    "maximum_gap_seconds": 1.1429078000364825,
+    "longest_continuous_seconds_at_or_above_25_percent": {
+      "Selected": 0.0,
+      "Sibling": 1.1043014000169933,
+      "Package": 1.1424592999974266
+    },
+    "missing_or_invalid_samples": 0,
+    "active_competing_workloads": 0
+  },
+  "evidence": [
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-C1.log",
+      "sha256": "5D0A6A6C2DD12BF260444A5F04869CBF44160E5EB08A9FB05BA030E8E2BBE209",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-C2.log",
+      "sha256": "D97FCEF75252FE47BCCADFD471E35E825F40A2CBB2A9DD2A1BAFB70E7011FD11",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-C3.log",
+      "sha256": "3498220F0C89AAA7918EC0E577C1AD1E9F73CA1F4F6F34C11DE3F21B58A41E02",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-C4.log",
+      "sha256": "491D32290D57D2B84F3494645FF018265100DA18CEDC969B1F27CABA1FC2D79B",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-C5.log",
+      "sha256": "213C1501BCE481349BA572EF2F0C08631C091E82CDA4DD4BCF2DB14EA85B140A",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-C6.log",
+      "sha256": "2019C94BD0F60968F976CC1EA342DAF9520AC7D1DA923E845B63EB340770EAEB",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-R1.log",
+      "sha256": "EC51D289BBD52EC36FAF2C8D0D9F5EFEFF3C6FE822BB32D00709B68D60259CD4",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-R2.log",
+      "sha256": "2EDCB5F47B958838D3018D4DF69A7A122263EF7E10C4BFB6C20AE89A52D61FC2",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-R3.log",
+      "sha256": "48D8FD1B5FC5A9921A141767FE4EC5F23918DEB40EB3F3076D2476E1D144C1E2",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-R4.log",
+      "sha256": "6839803BF49434CA101F8B54125A4D70EA46076F0EF066485C7D9B2519D4FBB8",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-R5.log",
+      "sha256": "90D257F2005415B880AA04688D263C0997FD71D3FAC61E028099E58DED4D905C",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/hires-R6.log",
+      "sha256": "1DDB3598CF79345888EA7B1CD643C0DD4500C4DBDD3610E322621289B297D0C2",
+      "bytes": 305
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-C1.log",
+      "sha256": "C2E7537F4F6BC7641FB5A22D9502FBF783325496E746DC958B65600D56661B19",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-C2.log",
+      "sha256": "226E91B4E90188B932E2CA8AD940FEA925DEEB2DA8C55737125A01DADC3F9F47",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-C3.log",
+      "sha256": "64CE3AAE7DA19EA4888F40A396F35F32B49C5B684D9A5D728555E2DDA90C8901",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-C4.log",
+      "sha256": "113B1D0FA7254FCA85107FDF88132800765DDAE163F290797D5DD86EE31209A0",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-C5.log",
+      "sha256": "5F1ECF81495D19CF45B8CB72998C544A0136E68BC9FE6333E85A50747A7E7BB2",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-C6.log",
+      "sha256": "6A8D68E521907A596F502E63E5AA19EEF0C5748DF0EFBCD803522443F0472644",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-R1.log",
+      "sha256": "F6682B848BC3F3DA98A6E355D493D0CA76CF4C794E28B5AF0E01FD553313334F",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-R2.log",
+      "sha256": "B511B58352D3C10D33CD4CAF095EAB3786FF847D431DCA89DA697CF0D90E9465",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-R3.log",
+      "sha256": "035D55EB2B8EE2909B971CEAB85F72BBD69D1519C04F05654C4FAA06A5C14CCA",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-R4.log",
+      "sha256": "8F6ADE9AEA2D7890C8B8D00075D89C2B6472409127A9A6017636CA69C996C400",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-R5.log",
+      "sha256": "2A0F49CF49145237298B19CB534A687862E46581F595224C73FE144CACD7E68C",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lemmings-R6.log",
+      "sha256": "5EF2DD9FDD574AE0FC49F99E2F1657EF5D3D5E572703FB8D0C8F38FAC060755A",
+      "bytes": 292
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-C1.log",
+      "sha256": "BEEB0D82FCA63C2E11DE0F0C29B065BF566C6E15F82AEB7571E77F980FB02A3B",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-C2.log",
+      "sha256": "10EF24725C8FA51C21E43B1537F2027455CDE7106A841C8DE5051A943FFF81AB",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-C3.log",
+      "sha256": "08478F3595EAC2E47519A6654558804352A0C02CE7664A5773F94F1B1E1C0573",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-C4.log",
+      "sha256": "537FA0C7554B1E6E7026FB0A17222BB89EC7E749C68B33DDB25F111F6CD89DE5",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-C5.log",
+      "sha256": "C81A5C0018C39C5BA40C0182FB805F798E903316CD38624CBED689226F4DDA36",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-C6.log",
+      "sha256": "770B881D1D61CB6147BCA6BC962D638B345875C112CCCDA02375A408542E60AA",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-R1.log",
+      "sha256": "D75E2C3E61C68A165B2E4D51E2BFCAFD9088D399D28BDF88B3AEF778479CC841",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-R2.log",
+      "sha256": "1357C9A63C9C7A519340FF31AB8D97A2B8F666D00D66BB0A577E1A95B1EC8456",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-R3.log",
+      "sha256": "245DDB971CBB24719DE71BDD260D2CFE0C033038453E75DD3D2E147D873FCB62",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-R4.log",
+      "sha256": "791A77675F2E0AB6C8C6F00C18AC7915128B006497CA4022A2ADF7434459DC93",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-R5.log",
+      "sha256": "A333859D598FFA4036E9FAF77FACE3E9D35FE99C7F7EFF81AA79265AA4C47071",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/lores-R6.log",
+      "sha256": "6EF13AA1B5C23DFA717D9E15F1D87046B8B978AED6F156491B4AEFB8EDD723DB",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/protocol.log",
+      "sha256": "9589408F752EFA2352AB55C86CC318E4E9AFD3C9786A24DC8E6600E592B36995",
+      "bytes": 15477
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/samples.json",
+      "sha256": "7D0E2713D1D8C03BFE0C00888F606EE5DDED07448D0246D772D6236D47745D41",
+      "bytes": 15307
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/summary.json",
+      "sha256": "7832BD0A270D523FB079DB08F92D670B04AE65D3C26112801E3A6C4F9B029DBE",
+      "bytes": 512
+    },
+    {
+      "path": "artifacts/lotus3-performance/performance-v1/telemetry.jsonl",
+      "sha256": "FDC235E5447E53F914D9C63A53DFCE68E7CF38744504CD72D36D88BF965AAC6F",
+      "bytes": 187829
+    },
+    {
+      "path": "artifacts/lotus3-performance/protocol-validation/protocol.log",
+      "sha256": "DC48E8447E248E0F3B0AC00A25B0612AE14608284BE56F53AD75C65C63964819",
+      "bytes": 10994
+    },
+    {
+      "path": "artifacts/lotus3-performance/protocol-validation/telemetry.jsonl",
+      "sha256": "2203D02EEAAA8469FBA8A76B894E3DA867B0A40D4E6A9D4067E43355DC391D5A",
+      "bytes": 1060
+    }
+  ],
+  "limitations": [
+    "Engine throughput on three fixed workloads; no desktop pacing or Lotus racing benchmark.",
+    "Statistical confidence does not exclude all systematic thermal or clock effects.",
+    "No acceptance of older package or combined-native results is implied."
+  ]
+}

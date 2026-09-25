@@ -16,8 +16,21 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [Lotus III CPU bus-spacing comparison](LOTUS_III_PERFORMANCE_2026-09-25.md)
+is **VALID / OWNER ACCEPTED** with a scoped exception dated 2026-09-25. Lores and hires are
+**INCONCLUSIVE**: paired frame-time changes / one-sided 95% upper bounds are
+**-0.3076% / +1.3998%** and **+0.8489% / +2.4203%**. Native Lemmings passes at
+**-3.0196% / -1.1329%**. All 36 complete identities match their independently
+validated builds with zero measured allocation and valid host telemetry. The
+separately versioned protocol delays the native input sequence so both builds
+reach the same gameplay interval; normal/scalar checks and identical final
+gameplay images validate it before timing. The owner accepted these exact lores
+and hires bounds; the default 1% limit remains unchanged for other candidates. The
+[correction's correctness/replay evidence](LOTUS_III_CPU_BUS_TIMING_2026-09-25.md)
+is separate, and all earlier frozen comparisons retain their original scope.
+
 The [combined native-corrections comparison](NATIVE_CORRECTIONS_VALIDATION_2026-09-25.md)
-is **VALID** for the current engine, covering the Alien Breed byte-WORDSYNC,
+is **VALID** for the frozen pre-Lotus engine, covering the Alien Breed byte-WORDSYNC,
 Desert Strike end-stop and Desert Dream live-pointer changes together. All 36
 complete identities match with zero measured allocation and valid host telemetry.
 Lores frame time is **+1.4898%**, upper bound **+3.3621%**: **ACCEPTANCE_REQUIRED**
