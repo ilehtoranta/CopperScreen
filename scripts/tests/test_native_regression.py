@@ -95,7 +95,7 @@ class NativeRegressionTests(unittest.TestCase):
             archive.writestr(entry, b"test media")
         record = {"path": path.name, "entry": entry, "archiveSha256": n.file_hash(path),
                   "sha256": n.digest(b"test media"), "bytes": 10}
-        self.assertEqual(n.resolve_media(record, self.root), str(path) + "#/" + entry)
+        self.assertEqual(n.resolve_media(record, self.root), str(path.resolve()) + "#/" + entry)
         record["sha256"] = "F" * 64
         with self.assertRaises(n.InvalidInput):
             n.resolve_media(record, self.root)

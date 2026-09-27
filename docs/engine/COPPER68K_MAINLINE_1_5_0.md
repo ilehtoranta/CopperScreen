@@ -78,3 +78,12 @@ Player-controlled Lotus III racing and full completion remain unverified.
 Optional skipped cases are unavailable coverage, not successful native replays.
 This is correctness and release validation; it does not replace any historical
 throughput measurement or hardware golden.
+
+## Mainline CI follow-up
+
+The first CopperScreen mainline run exposed a Windows-only test expectation:
+the hosted runner's temporary directory used an 8.3 alias (`RUNNER~1`) while
+the media resolver correctly returned the full canonical path (`runneradmin`).
+The ZIP selection test now compares against the resolved expected path. This
+changes neither media resolution nor emulator behavior. The 21 tooling cases
+pass locally; the same Windows/Linux matrix remains enabled in mainline CI.
