@@ -1,8 +1,5 @@
 <Project>
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <!-- Unpublished CPU candidates stay local. Clean clones require the exact
-         package in this ignored feed until an explicit NuGet release. -->
-    <RestoreAdditionalProjectSources Condition="Exists('$(MSBuildThisFileDirectory)artifacts/copper68k-feed/Copper68k.1.4.2-ocs020.54.nupkg')">$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)artifacts/copper68k-feed</RestoreAdditionalProjectSources>
   </PropertyGroup>
 </Project>
