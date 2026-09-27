@@ -1,5 +1,9 @@
 # CI development-dependency bootstrap — 2026-09-22
 
+> **Current dependency:** Public mainline Copper68k `1.5.0` restores directly
+> from NuGet.org. See [release verification](engine/COPPER68K_MAINLINE_1_5_0.md).
+> The dated bootstrap and supersession notes below retain their original scope.
+
 > **Superseded on 2026-09-24:** Copper68k `1.4.1` is now the stable NuGet.org
 > dependency, pinned exactly in project files and lockfiles. CI restores directly
 > from NuGet.org; the development-feed bootstrap below records the earlier

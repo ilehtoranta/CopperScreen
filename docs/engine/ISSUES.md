@@ -423,8 +423,8 @@ compatibility are outside current product scope.
 The storage change also repairs TOD high-byte reads while CRB.ALARM is selected:
 they no longer leave a stale persistent TOD latch. Operation Thunderbolt passes
 its PAL count check after this correction. The independent CPU trace defect and
-subsequently exposed audio transition are now repaired in the local development
-build. The latch regression and evidence are recorded in [STORAGE.md](STORAGE.md);
+subsequently exposed audio transition are repaired in the current mainline build
+using public Copper68k 1.5.0. The latch regression and evidence are recorded in [STORAGE.md](STORAGE.md);
 this does not close physical TOD/comparator uncertainties above.
 
 For each revisit record the build/profile, minimal reproducer, observed/expected

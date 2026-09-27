@@ -1,0 +1,719 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-27",
+  "result": "Published mainline Copper68k 1.5.0 passes public-only consumer restore, correctness tests and unchanged Lotus III replay.",
+  "consumerBaseCommit": "d67593d0ca6b2e6441a3180c8166d13a913dc572",
+  "cpuPackage": {
+    "version": "1.5.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/copper68k/1.5.0/copper68k.1.5.0.nupkg",
+    "sourceCommit": "fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ilehtoranta/CopperMod.git",
+      "commit": "fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5"
+    },
+    "packageSha256": "cf2b293f5a2d7c18f29fca0e193c9d15cccc0c751576239c3e50bb147cadf470",
+    "packageBytes": 345427,
+    "dllSha256": "5df5bbd7c37e5995ef718f476db5d31a81efe41cee54861baaf2806c37155855",
+    "xmlSha256": "659b695a3fabd5b2270ce63ce68087634b3106b032151c52348f1d9a793909be",
+    "xmlMemberCount": 167,
+    "xmlMemberNamesMatch56": true,
+    "nugetSignaturePresent": true
+  },
+  "tag": "copper68k-v1.5.0",
+  "cpuImplementationAndTestsUnchangedFrom": "d9123624f549137b272dfa714ef5c17f4e43aa46",
+  "publicCacheMatchesDownloadedPackage": true,
+  "signatureVerification": "dotnet nuget verify --all succeeded",
+  "consumerLocks": [
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/packages.lock.json",
+      "type": "Direct",
+      "requested": "[1.5.0, 1.5.0]",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Tests/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight/packages.lock.json",
+      "type": "Direct",
+      "requested": "[1.5.0, 1.5.0]",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "CopperScreen/packages.lock.json",
+      "type": "Direct",
+      "requested": "[1.5.0, 1.5.0]",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "scripts/CpuModelProbe/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "scripts/probes/ChipInstructionCache/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "scripts/probes/Copper68kTrace/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "scripts/probes/CopperHdfThroughput/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    },
+    {
+      "path": "scripts/probes/CopperPollingTiming/packages.lock.json",
+      "type": "Transitive",
+      "resolved": "1.5.0",
+      "contentHash": "Y7TTNMsaoNKLtdanTZuwPeGvzpctp6/icXdKdXiKqPx6uMGyBovXVBngSflxYgA3IMihUAseP5PLiXkxEMvNgA==",
+      "dependencies": {
+        "CopperFloat": "[1.0.0]"
+      }
+    }
+  ],
+  "assemblies": {
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/Copper68k.dll": "5df5bbd7c37e5995ef718f476db5d31a81efe41cee54861baaf2806c37155855",
+    "CopperScreen/bin/Release/net10.0/Copper68k.dll": "5df5bbd7c37e5995ef718f476db5d31a81efe41cee54861baaf2806c37155855",
+    "artifacts/diagnostic-tests/bin/CopperMod.Amiga.Lightweight.Tests/release/Copper68k.dll": "5df5bbd7c37e5995ef718f476db5d31a81efe41cee54861baaf2806c37155855",
+    "artifacts/copper68k-mainline-release/public-cpu-tests/Copper68k.dll": "5df5bbd7c37e5995ef718f476db5d31a81efe41cee54861baaf2806c37155855"
+  },
+  "tests": [
+    {
+      "name": "CPU public binary",
+      "passed": 3475,
+      "unavailable": 6,
+      "trxSha256": "c66aa0585429d1a55a268063f6adb6331d2ea7048174e3d335620e7f96da7814"
+    },
+    {
+      "name": "Engine",
+      "passed": 802,
+      "unavailable": 0,
+      "trxSha256": "762895f33e353e840aa333b5249e316f2c666bed58746c99a0b49accaa3b983e"
+    },
+    {
+      "name": "Host",
+      "passed": 112,
+      "unavailable": 3,
+      "trxSha256": "cf2d3766413b932ff51f6bd6fb4fabe88acad6a5935dc5d5904fcb014b79823f"
+    },
+    {
+      "name": "Disk",
+      "passed": 74,
+      "unavailable": 0,
+      "trxSha256": "a93fbce5570869a667f154f8b5fdaa2fb88e8512195c7c5c44c3acf5a548b735"
+    }
+  ],
+  "otherChecks": {
+    "retainedAhxConsumerPassed": 18,
+    "replayToolTestsPassed": 21,
+    "productionBuildWarnings": 0,
+    "productionBuildErrors": 0
+  },
+  "restores": [
+    {
+      "name": "solution",
+      "command": [
+        "dotnet",
+        "restore",
+        "CopperScreen.slnx",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "diagnostics",
+      "command": [
+        "dotnet",
+        "restore",
+        "CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj",
+        "--artifacts-path",
+        "artifacts/diagnostic-tests",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "CpuModelProbe",
+      "command": [
+        "dotnet",
+        "restore",
+        "scripts\\CpuModelProbe\\CpuModelProbe.csproj",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "AssemblyExecutionComparison",
+      "command": [
+        "dotnet",
+        "restore",
+        "scripts\\probes\\AssemblyExecutionComparison\\AssemblyExecutionComparison.csproj",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "ChipInstructionCache",
+      "command": [
+        "dotnet",
+        "restore",
+        "scripts\\probes\\ChipInstructionCache\\ChipInstructionCache.csproj",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "Copper68kTrace",
+      "command": [
+        "dotnet",
+        "restore",
+        "scripts\\probes\\Copper68kTrace\\Copper68kTrace.csproj",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "CopperHdfThroughput",
+      "command": [
+        "dotnet",
+        "restore",
+        "scripts\\probes\\CopperHdfThroughput\\CopperHdfThroughput.csproj",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "CopperPollingTiming",
+      "command": [
+        "dotnet",
+        "restore",
+        "scripts\\probes\\CopperPollingTiming\\CopperPollingTiming.csproj",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--packages",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\fresh-public-cache",
+        "--force-evaluate",
+        "--no-http-cache"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "consumerChecks": [
+    {
+      "name": "build",
+      "command": [
+        "dotnet",
+        "build",
+        "CopperScreen.slnx",
+        "-c",
+        "Release",
+        "--no-restore"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "engine",
+      "command": [
+        "dotnet",
+        "test",
+        "CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj",
+        "-c",
+        "Release",
+        "--no-restore",
+        "--artifacts-path",
+        "artifacts/diagnostic-tests",
+        "--logger",
+        "trx;LogFileName=engine.trx",
+        "--results-directory",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\test-results"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "host",
+      "command": [
+        "dotnet",
+        "test",
+        "CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--logger",
+        "trx;LogFileName=host.trx",
+        "--results-directory",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\test-results"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "disk",
+      "command": [
+        "dotnet",
+        "test",
+        "CopperDisk.Tests/CopperDisk.Tests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--logger",
+        "trx;LogFileName=disk.trx",
+        "--results-directory",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\test-results"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "replay-tools",
+      "command": [
+        "C:\\Users\\ilkle\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_native_regression.py",
+        "-v"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "publicationReceipts": [
+    "2026-09-27T17:27:55.1883346Z Pushing Copper68k.1.5.0.nupkg to 'https://www.nuget.org/api/v2/package'...",
+    "2026-09-27T17:27:55.4928144Z   Created https://www.nuget.org/api/v2/package/ 294ms",
+    "2026-09-27T17:27:55.4945373Z Your package was pushed.",
+    "2026-09-27T17:27:55.8389156Z Pushing Copper68k.1.5.0.snupkg to 'https://www.nuget.org/api/v2/symbolpackage'...",
+    "2026-09-27T17:27:56.0559333Z   Created https://www.nuget.org/api/v2/symbolpackage/ 207ms",
+    "2026-09-27T17:27:56.0576730Z Your package was pushed."
+  ],
+  "ownerActions": [
+    {
+      "id": 36336934105,
+      "name": "Publish Copper68k approved tags",
+      "head_sha": "fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5",
+      "head_branch": "copper68k-v1.5.0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/ilehtoranta/CopperMod/actions/runs/36336934105",
+      "jobs": [
+        {
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out release source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up .NET",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Select immutable package version for this release tag",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run Copper68k CPU tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build and validate Copper68k packages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Exchange GitHub identity for a temporary NuGet API key",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Publish Copper68k package and symbols",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up .NET",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out release source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 36336932469,
+      "name": "Deploy website to GitHub Pages",
+      "head_sha": "fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5",
+      "head_branch": "main",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/ilehtoranta/CopperMod/actions/runs/36336932469",
+      "jobs": [
+        {
+          "name": "deploy",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Configure Pages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload static site",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Deploy to GitHub Pages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 36336932496,
+      "name": "CI",
+      "head_sha": "fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5",
+      "head_branch": "main",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/ilehtoranta/CopperMod/actions/runs/36336932496",
+      "jobs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up .NET",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Pack Copper68k NuGet",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Test Copper68k",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Test AHX shared Amiga dependency",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up .NET",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "lotus3PublicReplay": {
+    "command": [
+      "dotnet",
+      "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+      "--cpu",
+      "68040",
+      "--rom",
+      "C:/Data/ROM/Kickstart_13.rom",
+      "--disk",
+      "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+      "--frames",
+      "18000",
+      "--input-script",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\native-regression-2026-09-26\\final\\lotus3\\input.json",
+      "--boot-probe",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copper68k-mainline-release\\lotus3-040-public",
+      "--boot-probe-interval",
+      "1000",
+      "--boot-probe-extended"
+    ],
+    "exitCode": 0,
+    "scriptSha256": "a5fb0d22f79daeecefaa02e2cc2cf05ba39bf209a683de95e5e02e4fceb3e649",
+    "inputsUnchanged": true,
+    "comparedCandidateVersion": "1.4.2-ocs020.56",
+    "comparedCaptures": 95,
+    "mismatches": [],
+    "captures": {
+      "frame-000001.bmp": "3fe7c52f12ec7debea1caaf422e968055f974127935a12df80391af775807a24",
+      "frame-000001.chipram": "39161bc532feb140faf1ac405c9b10a663eeffc5ba3e15ddc6ea134bf285fa35",
+      "frame-000001.json": "6ad035fba57b77269ad0e488d221dc18a9fdea72d31268ffe8669fd029c88918",
+      "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+      "frame-000001.slowram": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+      "frame-001000.bmp": "0cdc8203f859cd8286b3d85c6a5e109c962d1ec8339752f0d041d10ccc5c560a",
+      "frame-001000.chipram": "286d7bc7559610b698585fc842950f4e8e516d33988f92a1f936bd7f9c37b307",
+      "frame-001000.json": "eee7bdbd9a00ac0012546e676f8d4d7147a81a134635a5054f75fc263af01f40",
+      "frame-001000.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+      "frame-001000.slowram": "4bb3a53a4b2a018d4e66373e1b3413cc2d09a9a24a82d1afe53cd6db06611109",
+      "frame-002000.bmp": "0cdc8203f859cd8286b3d85c6a5e109c962d1ec8339752f0d041d10ccc5c560a",
+      "frame-002000.chipram": "29a47d308a149d242aaf56a87f5a114898e195df8fd82aa856f8f65de0072d62",
+      "frame-002000.json": "5c041e2dc2797e24faa7fdb28339d85a1889dd1a3e6f2216de4e3bc4ead5bd98",
+      "frame-002000.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+      "frame-002000.slowram": "e2e9c9b9d455facb34d1076c527b7804ca79156e97ca65b50522d2fad6dfa8b8",
+      "frame-003000.bmp": "37e9f1c8e85802980601c018d1d7a3186dc834d51986c2d4fcaeb5c49fb9d85c",
+      "frame-003000.chipram": "fabcfdf700f6ea2d666e74e1499d01eab2093f012521f52e212d11e6355590d2",
+      "frame-003000.json": "1ab7c6240968ccd5b2d39f4c77a749c1f059b7de5550134a09f7abe69690c7c2",
+      "frame-003000.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+      "frame-003000.slowram": "936d390f00841ea67784f4ffd7b38953b7ef5121212f293250346dfdc4155f42",
+      "frame-004000.bmp": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22",
+      "frame-004000.chipram": "0f25936cff45b23641d890cefd8626fad955959aa8215e1b4f6502bd5812d162",
+      "frame-004000.json": "8e54395ae00e93a8a19bda39f4dd69ee7dbb8a795183e3bee3b0a227105660a3",
+      "frame-004000.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+      "frame-004000.slowram": "77fd004c6b31902f3a857570cc53bcbd4b1958cb24ebc2db81ec36818568da43",
+      "frame-005000.bmp": "68c898fbe8956487037a8faefe14d941d432b3300e368ad1f5e8bac7e1a6ea96",
+      "frame-005000.chipram": "2ce34937cd09189482e21ab10459cdc606894a0dd83ebb8324c7241a6abf4196",
+      "frame-005000.json": "344384bff7b4de3eba1d98375ebed56e3285aadf245ab123c04368157a2269b9",
+      "frame-005000.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+      "frame-005000.slowram": "70d30e7e03a30b16a25f2ace3517e8c6125cb23d1c439ff639ee3ba1ace070e3",
+      "frame-006000.bmp": "68c898fbe8956487037a8faefe14d941d432b3300e368ad1f5e8bac7e1a6ea96",
+      "frame-006000.chipram": "2ce34937cd09189482e21ab10459cdc606894a0dd83ebb8324c7241a6abf4196",
+      "frame-006000.json": "83681d08bd4e0076c2a95c4f7c857072553d19ae8f4e3c5d36a075641e01bd57",
+      "frame-006000.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+      "frame-006000.slowram": "b2a6df35c34b48df4c7cb20d7c0b5c40a33b6cb38c28325790962fa55861760d",
+      "frame-007000.bmp": "cececc3719c981239730595e51f2d5d615336cd2e96210762168389cb53fdfc4",
+      "frame-007000.chipram": "7f25cc032fde27ff68f620fc0273d0dd3d5ed36782b4aaba95b6e5097135a02a",
+      "frame-007000.json": "dac1126990836002b92f587dd9753c20eceab6aae4bb1ee8ae4e404968bb60ca",
+      "frame-007000.pcm": "4bcdeccb3c7f6d43b0bfa505893db57b7088b3c511efc0097afa59cc91981b90",
+      "frame-007000.slowram": "c68a1bf631b785d107cc375150248ce5fad2c4493104a0629275538aa898d474",
+      "frame-008000.bmp": "500be9a47c3457d4c5c69f85ecd40403ea95991ce0cb2dd404b4d298da141dfa",
+      "frame-008000.chipram": "f34323de5b391df872f973cf9e0c35c7812729f0773555f279dc5cc68a26f43b",
+      "frame-008000.json": "1cb2ca6a5927deeb7c084495b9918d5e8a9db7a99d0a6b2edebdff4b74c74657",
+      "frame-008000.pcm": "5a5b66d6cd7146b4c32dce157fa8a88296f7d506a49fd9bf25b4e348a0ae1ed0",
+      "frame-008000.slowram": "1cf34d801b05f1ff44f1fa8edf218241707fd54f4fdc087678a529fc5eac10b1",
+      "frame-009000.bmp": "e32aef55fb3e5e2501e3c0015bd6f05996a9422a71b19d551b72f7e772ce7697",
+      "frame-009000.chipram": "4866f5a6ec12288c349c7045030281f5c11446292a3996fc3f90136952a093bd",
+      "frame-009000.json": "d6e4bd7fe045c65e0eeedc991e491d6bfc52e8329387bf1ffc2b6ce649272a71",
+      "frame-009000.pcm": "3bbb41d13dce095dcb51a5294ba7e1d4c97386c39ad32dffa0a574de59b79a1e",
+      "frame-009000.slowram": "008a62dce7075b4eefa32d2fa8b392b640eacb41a83f8d5924211072f52395b3",
+      "frame-010000.bmp": "27555b2189222c8fe83ae3caee8b5a27d10104a2c2f90dc6fc78a14e472abb58",
+      "frame-010000.chipram": "9d74f1df672e248e702d339851e158bc702b0287d94598c2a647cad6fe469ec2",
+      "frame-010000.json": "c7d580e97c0f88247730559822cd535e6239ec6384bb3712f5831cba5f33fe35",
+      "frame-010000.pcm": "65c0d54e49963ddc549f2b4fab53dc03e15730229f32f525baa2905c2089e21d",
+      "frame-010000.slowram": "e3db6c6ff919572dae5c17a62941c649176c51e9de01bcfaec8cbe560bf110ba",
+      "frame-011000.bmp": "5bde954d4a8b5be50a27c074dd64231a6d67e9daa7f6010bcfe1cd3fe06d34b4",
+      "frame-011000.chipram": "5bc587f10eeb0c69d37fc6deb08e758eb811247e9ab2abb945b929dc13819e75",
+      "frame-011000.json": "6696672c45e65d9c801618e06ee72286494729697ee5bb577b48bfe0dfdfbb87",
+      "frame-011000.pcm": "fb652f7e43467158981ddda19104be63696bbc5b2006b2cf37c86194d520bf5b",
+      "frame-011000.slowram": "c339f0e593c66961f2556198cf50a03825e02c606144f2656d7bd53892e21560",
+      "frame-012000.bmp": "5bde954d4a8b5be50a27c074dd64231a6d67e9daa7f6010bcfe1cd3fe06d34b4",
+      "frame-012000.chipram": "e0d5bf1e0205ae02f531d48c12d251de954d617c90a7d778d70d283a10773347",
+      "frame-012000.json": "9b2c278d45a9b9267ad083567338e6dfc9672fed319d06b57a4dedcad451e55e",
+      "frame-012000.pcm": "80b4a2a4481ad0b35310e6a22b00151014ed7297659c0928e3f0656a04eb4172",
+      "frame-012000.slowram": "21d5ae0ad7b88429c46267cc4d8b191ad7825a5d4749380d9e316d762c9b4a02",
+      "frame-013000.bmp": "5bde954d4a8b5be50a27c074dd64231a6d67e9daa7f6010bcfe1cd3fe06d34b4",
+      "frame-013000.chipram": "3379b6dfbe4397377252f972e12f2a323829623e514b8887a11b815b70e6dc9e",
+      "frame-013000.json": "bd01078b310e527712fbdf011f4445ec9af1e494d6e0616457872897fe48694c",
+      "frame-013000.pcm": "e930c90ac20b4f8cdc5337904f7a30e383b3ffe861f1f16a7a0ef4046c7167cd",
+      "frame-013000.slowram": "db8a877d9b3e8dfd53f1c5a01933b1a69423ac08fbabf0e5e6d17e84e45a5c2c",
+      "frame-014000.bmp": "13939c3f8e90640fffed19b6f8bc70b4ea98c84c5a61fee86d998107f21aa547",
+      "frame-014000.chipram": "fa7037507cf433869a253a14504b0881c464cb5f52eb9833814b08404a588b6f",
+      "frame-014000.json": "e22a6f7e0965b33763a796b8e431fb9ca849e11f6be0d081b58565e5aeaea0d5",
+      "frame-014000.pcm": "cafbc47d7a698bd654724b45097a104c24c1cfc5ca2262d632ce254a1c966d6a",
+      "frame-014000.slowram": "c1bff6935da7d37f1c891a0e610dca21a935024141d51c9eb92153ed9326aa46",
+      "frame-015000.bmp": "0acf32c6fcd2d43a28d61fcf39557b0d036f79f87c006a1c19fdcad16759839f",
+      "frame-015000.chipram": "1ef92ffba99baad8c8eda1ad3a27a085e8fd91fb171774cac74fa9d620d297cd",
+      "frame-015000.json": "10a5a50a4186c18be57bd4eabff73eb3acdb58c2ff096128d995af5af26ade9d",
+      "frame-015000.pcm": "1fbd2396800bce9b076455469cb6a39891122bc2effff043389d2f7929c02f55",
+      "frame-015000.slowram": "cd149018eced2a99b68e7225c39402397e603d9c000c79766de8c07231f3474c",
+      "frame-016000.bmp": "522dced47fe687454543953735393034d14a48ebec51bd73bf7810f8b1c51b2a",
+      "frame-016000.chipram": "9e601eae62f429511b66ae473f958d684a4578484c53f4ba634eec13b19e4504",
+      "frame-016000.json": "2a3a5b19b5f0da8729d56423553021d1de02de0adcf2a7386d9d4df86e353a13",
+      "frame-016000.pcm": "7907b03632c75d9106ed94038329d19bab44098b2db8662fb5f5119dc7cf973f",
+      "frame-016000.slowram": "aa0e6b60a254e139a3eaa6832ad30e2a3f0376ff77230a7045d5eed10b4f4961",
+      "frame-017000.bmp": "9b85f126eb041fa035893d5ebb4831dc1a63ec6002cbe811fac81bc336a2e061",
+      "frame-017000.chipram": "cf5a24df72530869a6a22ff203edbbc30d4564dcc1028030034843c95b197ab2",
+      "frame-017000.json": "26060b1fbc2f4f47937fb082f5b73a492d381cc0c21778097bc71711c43746cd",
+      "frame-017000.pcm": "70243458a58c8648215c41d4b438ece4aac0b1ac0c0b152c2a284825370ecea5",
+      "frame-017000.slowram": "1212fc0bbdcf24938f7889d7f29cb5a86ec76410c3ce92d292e6a987e9966951",
+      "frame-018000.bmp": "e705d4a68dacf42e7331060ec8cfbc5ede9524bb3e1ad6d91df75553bcb1924c",
+      "frame-018000.chipram": "6b21fa038414c96885cfde55e3720186a4fde994314bbf7c499ab09c29cea1af",
+      "frame-018000.json": "f1eb99d9c563569a667dcef7a098669583912cf87890c8baaf0e8e1a42d394e7",
+      "frame-018000.pcm": "d804b6cb423cc2477f01559c70126b6c3472676f5d466ade05c73ae4463f2d98",
+      "frame-018000.slowram": "89c98a56b1b25f297e6e84d62faf5aea64c4492800e81a0756965d44a2b0b1a8"
+    },
+    "final": "engine=lightweight-a500 workload=image cpuModel=M68040 timingPolicy=ocs-accelerator-v1 cpuMode=conservative-batch warmup=0 frames=18000 completed=18000 fps=307,91 cycle=2557702545 cpu=0x23F9E514495C578D hardware=0xD3FAC3ED960A6990 output=0x4F7F9395A4ED32CE pixels=284204 audioSamples=1924 pcm=real allocated=39421640 adf=True unsupported=none"
+  },
+  "packagingGateCorrection": "Replaced pre-extraction Amiga test project with retained AHX consumer after removed CopperStart dependencies made the old project unbuildable; CPU suite retained.",
+  "evidence": {
+    "build.log": "2d5da0def0f9267b33a33dd9627eb7c59f2d0e85c441907b2b4f00a49f515f64",
+    "cpu-public.log": "e7008e36743d293cb7f876f9c3293348e398d85cf80554097e9daf3f27d53809",
+    "disk.log": "98689e81bd2c94f0915118ed90afd6b262b26eebf4ae325c06f3b7dc0ff4342c",
+    "engine.log": "42e2d7985a1cfff316c25bd89fc283412253ea28eb4cd25e63dfade6ecfc8215",
+    "host.log": "572ef830532e5921be1e0d8eb08c075e7432bc96d7bc2fe0505dee0970e70be8",
+    "lotus3-040-public.log": "97ebb5232597132ec4f452d9176f68f9491754974a94df5679ffb7808327f6f4",
+    "nuget-verify.log": "632f71c4e3e41bb6d82591953ca34524f261329c2b0f5aff2d60ffacbbe79b12",
+    "pack-active-consumer.log": "a48c6204a15cb04ad35c81b159271e2344faaaf58c2b4a8d3a7ab2cc6abd4704",
+    "pack.log": "a52ba1e6cabf7bee870f25febd2ba3d3de1cac5d5a2eb287f7c6b07c3ab7f671",
+    "replay-tools.log": "eb5a9015c76a38503f6c8c5ac7135c9b4aa0f4e80e3d6f30a38f536241e8a58a",
+    "restore-AssemblyExecutionComparison.log": "d7822e71c9e38abe369133063d6a97ccd501c348b50fc6dedf758e8ed9cc3c8e",
+    "restore-ChipInstructionCache.log": "b36c5dd059e7e67a6cbdabeda93a19a124aa5831eca33b18c748091be12cb8c5",
+    "restore-Copper68kTrace.log": "3c721cae4cfd29edc6129c2e6da7f09e9b144c650f014d18711f227e57d201fd",
+    "restore-CopperHdfThroughput.log": "7aa8e30cae00ca5f3141f31c5d40170f17a9d8c522c1cfa54de8e5f316b6a7d0",
+    "restore-CopperPollingTiming.log": "bb26c4c0e318bf177ca85b154052130f22e0c3e442807aa27c96853d4160deb9",
+    "restore-CpuModelProbe.log": "08770b282886a64f1ecf284845cea371503a44cde063c8fb85be32f6ffd42140",
+    "restore-diagnostics.log": "1c0ea4f5aa1c69ee374a0d65ef10d58e18afaf2c6a16c454ef45d5cc16c7a260",
+    "restore-solution.log": "635d5a7dda3e3d58f4fd3a2709b4723b0cc4604a1d8bd095ba51cde5dae259cb"
+  },
+  "limits": [
+    "Advanced CPU profiles remain experimental; MC68060 remains diagnostic-only and cannot boot native Kickstart 1.3.",
+    "No new throughput acceptance result; prior performance measurements retain their original binary identities.",
+    "Lotus III demo/menu continuation is verified; player-controlled racing and full game completion remain unverified.",
+    "Nine optional external/native test cases are unavailable coverage, not successful replays."
+  ]
+}

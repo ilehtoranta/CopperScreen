@@ -1,11 +1,14 @@
 # Lightweight performance measurements
 
 On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
-`1.4.1-locality.1` development pin. The current project already pins stable
-`1.4.1`; its measured binary is recorded separately in
+`1.4.1-locality.1` development pin. That measured `1.4.1` binary is recorded separately in
 [Copper68k NuGet comparison](COPPER68K_NUGET_2026-09-24.md). Older comparisons
 retain their actual package identities and are not relabeled as measurements of
 stable `1.4.1`.
+
+The current project pins public mainline [Copper68k `1.5.0`](COPPER68K_MAINLINE_1_5_0.md).
+Its release validation covers correctness and package integration; it is not a
+new throughput acceptance measurement and does not relabel the earlier results.
 
 Correctness, host throughput and interactive compatibility are separate results.
 G6/G7 Legacy cutover is retired. Lightweight is already the active engine; ordinary

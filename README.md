@@ -25,10 +25,11 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-The current CPU development slice pins local Copper68k `1.4.2-ocs020.56` for
-040 instruction-fetch corrections, experimental 030/040 and a separate 060 diagnostic core. A clean checkout
-needs that exact candidate in `artifacts/copper68k-feed` until explicitly released.
-The preceding `.54` is published and verified. CPU profiles remain experimental;
+CopperScreen pins the public mainline [Copper68k `1.5.0`](https://www.nuget.org/packages/Copper68k/1.5.0)
+release for 040 instruction-fetch corrections, experimental 030/040 and a separate
+060 diagnostic core. A clean checkout restores from NuGet.org without a local
+candidate feed. See the [mainline release verification](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
+Advanced CPU profiles remain experimental;
 physical accelerator timing and full compatibility are not certified. The 060 is
 unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
 FPU state format. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)

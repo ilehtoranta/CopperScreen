@@ -1,15 +1,16 @@
 # Copper68k stable dependency and trace evidence
 
-The current exact CPU pin is **`1.4.1`**, the stable
-[Copper68k NuGet package](https://www.nuget.org/packages/Copper68k/1.4.1).
+The current exact CPU pin is **`1.5.0`**, the public mainline
+[Copper68k NuGet package](https://www.nuget.org/packages/Copper68k/1.5.0).
 Its source is CopperMod commit
-[`8fb826eacf8e9dc32948b482c878079448bd6e61`](https://github.com/ilehtoranta/CopperMod/commit/8fb826eacf8e9dc32948b482c878079448bd6e61).
+[`fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5`](https://github.com/ilehtoranta/CopperMod/commit/fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5).
 The desktop, engine, runner and test lockfiles resolve that exact version from
 the standard NuGet source; no development-feed bootstrap is needed.
 Restore with `dotnet restore CopperScreen.slnx --locked-mode`, and restore the
 isolated engine diagnostics separately as described in the README.
+See [mainline release verification and advanced CPU limits](COPPER68K_MAINLINE_1_5_0.md).
 
-Stable 1.4.1 retains the trace correction below and the
+The preceding stable 1.4.1 retained the trace correction below and the
 [validated prefetch-locality optimization](CPU_PREFETCH_LOCALITY_2026-09-22.md),
 plus the release optimizations recorded in CopperMod's 1.4.1 release notes.
 The 1.4.1-locality.1 package and its exact hash remain documented below as a

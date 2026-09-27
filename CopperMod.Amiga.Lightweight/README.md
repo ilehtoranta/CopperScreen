@@ -4,6 +4,9 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
+The CPU dependency is the public mainline Copper68k `1.5.0` release. See
+[package and consumer verification](../docs/engine/COPPER68K_MAINLINE_1_5_0.md).
+
 Independent PAL OCS A500 engine: Copper68k accurate 68000, 512 KiB Chip RAM,
 512 KiB slow RAM, native 256 KiB Kickstart 1.3 (v34), one to four standard
 880 KiB ADF/read-only IPF drives (including selected ZIP entries through the host/runner),
@@ -132,7 +135,7 @@ from attachment. Exact bit lengths, index orientation, stored gaps, density and
 weak regions feed the causal integer receiver. IPF cannot be made writable or
 exported as ADF. `GetDriveFormat` and `CanWriteDrive` expose media capabilities.
 Protection compatibility is **incomplete**. The trace-exception defect is repaired
-in the pinned development CPU package; Operation Thunderbolt reaches gameplay,
+in the pinned CPU package; Operation Thunderbolt reaches gameplay,
 but its second-disk handling remains unverified. See the
 [storage record](../docs/engine/STORAGE.md) and [CPU pin](../docs/engine/CPU_TRACE.md).
 

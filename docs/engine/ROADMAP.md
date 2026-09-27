@@ -119,11 +119,12 @@ A600/A1200 IDE and a host-directory filesystem are separate interfaces.
 **CPUs:** the original `Copper68k 1.4.1-boundary.1` API audit exposed M68000,
 M68010, M68EC020, M68020, M68030 and M68040. This audit verifies API availability,
 not complete core correctness. CPU fixes stay in CopperMod and arrive through a
-new pinned package when required. The current development pin is
-[`1.4.2-ocs020.56`](LOTUS_III_040_FETCH_2026-09-27.md); the preceding
-[`.54`](COPPERHDF_020_2026-09-27.md) is published and verified. Stable
-[`1.4.1`](CPU_TRACE.md) remains available on NuGet.org.
-The candidate retains its 68000 trace and prefetch-locality implementation.
+new pinned package when required. The current public mainline pin is
+[`1.5.0`](COPPER68K_MAINLINE_1_5_0.md), incorporating the validated
+[040 fetch correction](LOTUS_III_040_FETCH_2026-09-27.md) and preceding
+[020/HDF work](COPPERHDF_020_2026-09-27.md). Advanced CPU profiles remain
+experimental and the 060 remains diagnostic-only.
+The release retains its 68000 trace and prefetch-locality implementation.
 Later CPU clock rates and bus widths must map
 to the engine's single canonical timebase; do not preserve a 68000-specific
 CPU-cycle/CCK assumption merely by switching the factory argument.

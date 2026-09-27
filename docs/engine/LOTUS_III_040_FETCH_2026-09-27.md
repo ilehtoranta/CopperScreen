@@ -128,3 +128,12 @@ dotnet CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Li
 ```
 
 Add `--scalar-cpu` and select another new output directory for the comparison.
+
+## Authorized mainline release follow-up
+
+The owner subsequently authorized publication and requested mainline integration.
+The validated CPU source was merged into CopperMod `main` and released as
+`1.5.0`, replacing the historical `ocs020` development suffix. CopperScreen now
+pins that public version without a local feed. The `.56` identities and results
+above remain the original candidate evidence; `.56` itself was not published.
+See [public-package and mainline verification](COPPER68K_MAINLINE_1_5_0.md).
