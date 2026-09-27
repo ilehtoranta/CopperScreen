@@ -6,8 +6,12 @@ namespace CopperMod.Amiga.Lightweight;
 /// <summary>Configuration for the PAL OCS machine.</summary>
 public sealed record LightweightA500Configuration
 {
-    /// <summary>68000, or an experimental 68EC020/68020 OCS accelerator.
-    /// The accelerator runs at two native clocks per motherboard clock.</summary>
+    /// <summary>68000, or an experimental 68EC020/68020/68030/68040 OCS accelerator.
+    /// 020/030 use two native clocks per motherboard clock; 040 uses four with
+    /// approximate fixed instruction timing. This does not model a physical card.</summary>
+    /// <remarks>M68060 is an integer-focused diagnostic core with an eight-clock
+    /// policy. It needs 060-aware OS task/FPU support; native Kickstart 1.3 cannot
+    /// boot it. Full FPU arithmetic and enabled MMU operation are unavailable.</remarks>
     public M68kCpuModel CpuModel { get; init; } = M68kCpuModel.M68000;
     /// <summary>Connected DD drives, DF0 through DF3 (1–4). Media starts write protected.</summary>
     public int FloppyDriveCount { get; init; } = 1;

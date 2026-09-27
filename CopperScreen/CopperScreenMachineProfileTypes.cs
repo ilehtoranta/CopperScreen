@@ -13,7 +13,7 @@ internal enum KickstartVersion { Kickstart13, Kickstart20, Kickstart30, Kickstar
 internal enum M68kBackendKind
 {
     AccurateM68000 = 0, AccurateM68020 = 1, FastM68000 = 2, JitM68000 = 3,
-    Cpu32 = 4, AccurateM68030 = 5, AccurateM68040 = 6, JitM68040 = 7, AccurateM68EC020 = 8
+    Cpu32 = 4, AccurateM68030 = 5, AccurateM68040 = 6, JitM68040 = 7, AccurateM68EC020 = 8, AccurateM68060 = 9
 }
 internal enum AgnusBusArbitrationMode { Legacy, SlotKernel, ForcedLegacy }
 internal enum AmigaHardfileMountMode { Auto, RigidDiskBlock, Partition }

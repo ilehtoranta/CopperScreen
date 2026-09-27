@@ -3104,6 +3104,7 @@ internal sealed partial class MainWindow : Window
 			string backend when string.Equals(backend, "AccurateM68EC020", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68EC020,
 			string backend when string.Equals(backend, "AccurateM68030", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68030,
 			string backend when string.Equals(backend, "AccurateM68040", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68040,
+			string backend when string.Equals(backend, "AccurateM68060", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68060,
 			_ => M68kBackendKind.AccurateM68000
 		};
 

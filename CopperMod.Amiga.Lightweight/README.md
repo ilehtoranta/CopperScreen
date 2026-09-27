@@ -18,14 +18,19 @@ CPU accesses bypass Agnus contention; chipset DMA remains in Chip RAM. Both
 reset paths remove the mapping while preserving RAM contents. Size changes
 require a new machine. See [implementation, package and native evidence](../docs/engine/FAST_RAM_2026-09-27.md).
 
-`LightweightA500Configuration.CpuModel` also accepts experimental `M68EC020` and
-`M68020`. Both use two native clocks per motherboard clock and the fitted 16-bit
-OCS bus. EC020 wraps addresses at 24 bits; 68020 upper addresses remain unmapped.
-The default 68000 uses its original bus path. CPU changes require a new machine.
-See the [CPU implementation and validation record](../docs/engine/CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md)
-for the development package, timing policy and known compatibility limits.
-The [cache and decoder correction](../docs/engine/LOTUS_III_020_CACHE_2026-09-26.md)
-records the current package and subsequent native continuation checks.
+`LightweightA500Configuration.CpuModel` accepts experimental `M68EC020`,
+`M68020`, `M68030` and `M68040`. The 020/030 use two native clocks per motherboard
+clock; 040 uses four and approximate fixed instruction timing. All use the fitted
+16-bit OCS bridge; only EC020 wraps addresses at 24 bits. The default 68000 retains
+its original bus path. CPU changes require a new machine.
+
+`M68060` is accepted for diagnostic callers using an eight-clock integer policy.
+It cannot boot the supported Kickstart 1.3 profile: native task frames lack the
+060's 12-byte FPU state layout. FPU arithmetic and enabled MMU operation remain
+unavailable. It is explicitly unavailable in the desktop. See [030/040/060
+implementation and evidence](../docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md),
+the [initial bridge](../docs/engine/CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md), and
+[020 decoder/cache validation](../docs/engine/LOTUS_III_020_CACHE_2026-09-26.md).
 
 The fitted 512 KiB chip RAM is CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)

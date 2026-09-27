@@ -30,7 +30,9 @@ internal sealed class NativeBootProbe
             File.WriteAllText(Path.Combine(_directory, "cpu-profile.json"), JsonSerializer.Serialize(new
             {
                 schemaVersion = 1, cpuModel = machine.CpuModel.ToString(), experimental = true,
-                nativeClocksPerMotherboardClock = 2, motherboardBusBits = 16,
+                nativeClocksPerMotherboardClock = machine.CpuModel == Copper68k.M68kCpuModel.M68060 ? 8 : machine.CpuModel == Copper68k.M68kCpuModel.M68040 ? 4 : 2,
+                motherboardBusBits = 16,
+                instructionTiming = machine.CpuModel is Copper68k.M68kCpuModel.M68040 or Copper68k.M68kCpuModel.M68060 ? "approximate-fixed" : "approximate-operand-shape",
                 timingPolicy = "ocs-accelerator-v1",
                 copper68k = typeof(Copper68k.M68kCpuState).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
             }));

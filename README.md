@@ -5,7 +5,7 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 
 ## Supported machine
 
-- PAL OCS A500 with a Motorola 68000 by default; experimental 68EC020 and 68020 choices are available in Settings.
+- PAL OCS A500 with a Motorola 68000 by default; experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
 - 512 KiB Chip RAM and 512 KiB slow RAM, with optional 512 KiB–8 MiB Autoconfig Fast RAM.
 - Native Kickstart 1.3 ROM, supplied by the user.
 - One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
@@ -25,13 +25,14 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-The current Fast RAM / CopperHDF slice pins published Copper68k
-`1.4.2-ocs020.54` for the 020 native boot and file-I/O instructions. Clean checkouts
-restore the public NuGet package using the committed locks. The CPU models
-remain experimental; full compatibility and physical accelerator timing are not
-certified. See the [020 CopperHDF correction](docs/engine/COPPERHDF_020_2026-09-27.md),
-[Fast RAM record](docs/engine/FAST_RAM_2026-09-27.md) and
-[preceding CPU correction and release](docs/engine/LOTUS_III_020_CACHE_2026-09-26.md).
+The current CPU development slice pins local Copper68k `1.4.2-ocs020.55` for
+030/040 cache corrections and a separate 060 diagnostic core. A clean checkout
+needs that exact candidate in `artifacts/copper68k-feed` until explicitly released.
+The preceding `.54` is published and verified. CPU profiles remain experimental;
+physical accelerator timing and full compatibility are not certified. The 060 is
+unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
+FPU state format. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
+and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
 
 ```powershell
 dotnet restore CopperScreen.slnx --locked-mode

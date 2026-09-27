@@ -107,8 +107,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         LightweightHdfBus? previousHardfiles)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
-        if (_configuration.CpuModel is not (M68kCpuModel.M68000 or M68kCpuModel.M68EC020 or M68kCpuModel.M68020))
-            throw new ArgumentException("Lightweight supports 68000 and experimental 68EC020/68020 OCS accelerators.", nameof(configuration));
+        if (_configuration.CpuModel is not (M68kCpuModel.M68000 or M68kCpuModel.M68EC020 or M68kCpuModel.M68020 or M68kCpuModel.M68030 or M68kCpuModel.M68040 or M68kCpuModel.M68060))
+            throw new ArgumentException("Lightweight supports 68000 and experimental 68EC020/68020/68030/68040/68060 OCS accelerators.", nameof(configuration));
         if (_configuration.FloppyDriveCount is < 1 or > 4)
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];

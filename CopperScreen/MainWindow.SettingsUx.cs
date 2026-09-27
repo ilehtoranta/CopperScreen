@@ -62,7 +62,7 @@ internal sealed partial class MainWindow
         var options = CreateSettingsGroupForm();
         _kickstartSourceBox = AddComboSetting(options, "Kickstart", ["Kickstart13Rom", "KickstartRom", "CopperStart", "DiagRom"]);
         _engineBox = AddComboSetting(options, "Engine", ["Lightweight", "Legacy"]);
-        _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"]);
+        _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"]);
         options.Children.Add(SettingsNote("Greyed choices are planned and not yet available. They cannot be selected."));
         var reset = CreatePanelButton("Use supported Amiga 500 settings", UseSupportedMachine);
         options.Children.Add(reset);

@@ -23,7 +23,7 @@ internal static class CopperScreenAvailability
     public static bool IsChoiceAvailable(string setting, string value) => setting switch
     {
         "Engine" => value == "Lightweight",
-        "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020",
+        "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040",
         "Kickstart" => value is "KickstartRom" or "Kickstart13Rom",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
@@ -37,8 +37,9 @@ internal static class CopperScreenAvailability
         "AccurateM68000" => "Motorola 68000",
         "AccurateM68EC020" => "Motorola 68EC020 (experimental)",
         "AccurateM68020" => "Motorola 68020 (experimental)",
-        "AccurateM68030" => "Motorola 68030",
-        "AccurateM68040" => "Motorola 68040",
+        "AccurateM68030" => "Motorola 68030 (experimental)",
+        "AccurateM68040" => "Motorola 68040 (experimental)",
+        "AccurateM68060" => "Motorola 68060 (requires 060 OS support)",
         "JitM68040" => "Motorola 68040 (JIT)",
         "Kickstart13Rom" => "Kickstart 1.3 ROM",
         "KickstartRom" => "Native Kickstart ROM (1.3)",

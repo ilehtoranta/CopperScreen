@@ -13,7 +13,7 @@ music player. CopperScreen is the canonical development and release repository.
 | Headless Lightweight runner and deterministic workload scripts | This repository |
 | CopperDisk, disk tests and package scripts | This repository; no music-player consumers were found |
 | Lightweight execution plan, issue register and performance harnesses | This repository |
-| Copper68k CPU interpreter | CopperMod; exact public NuGet pin `1.4.2-ocs020.54`; [020 CopperHDF correction and release](engine/COPPERHDF_020_2026-09-27.md), [Fast RAM dependency](engine/FAST_RAM_2026-09-27.md); [CPU correction and release boundary](engine/LOTUS_III_020_CACHE_2026-09-26.md), [stable dependency and trace history](engine/CPU_TRACE.md) |
+| Copper68k CPU interpreter | CopperMod; local development NuGet pin `1.4.2-ocs020.55` for [030/040 and 060 diagnostics](engine/CPU_OPTIONS_030_040_060_2026-09-27.md); `.54` is published; [020 CopperHDF correction and release](engine/COPPERHDF_020_2026-09-27.md), [Fast RAM dependency](engine/FAST_RAM_2026-09-27.md); [CPU correction and release boundary](engine/LOTUS_III_020_CACHE_2026-09-26.md), [stable dependency and trace history](engine/CPU_TRACE.md) |
 | Older CopperMod.Amiga used by Cust/AHX, music backends and player | CopperMod; not dependencies of this product |
 
 The application builds the engine and CopperDisk from local projects. Neither

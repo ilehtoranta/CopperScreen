@@ -72,13 +72,16 @@ for (var i = 0; i < args.Length; i++)
     }
     else if (args[i] == "--cpu")
     {
-        if (++i >= args.Length) throw new ArgumentException("--cpu requires 68000, 68ec020 or 68020.");
+        if (++i >= args.Length) throw new ArgumentException("--cpu requires 68000, 68ec020, 68020, 68030, 68040 or 68060.");
         cpuModel = args[i].ToLowerInvariant() switch
         {
             "68000" or "m68000" => M68kCpuModel.M68000,
             "68ec020" or "m68ec020" => M68kCpuModel.M68EC020,
             "68020" or "m68020" => M68kCpuModel.M68020,
-            _ => throw new ArgumentException("--cpu requires 68000, 68ec020 or 68020.")
+            "68030" or "m68030" => M68kCpuModel.M68030,
+            "68040" or "m68040" => M68kCpuModel.M68040,
+            "68060" or "m68060" => M68kCpuModel.M68060,
+            _ => throw new ArgumentException("--cpu requires 68000, 68ec020, 68020, 68030, 68040 or 68060.")
         };
     }
     else if (args[i] == "--writable-drive" && i + 1 < args.Length)
@@ -264,7 +267,7 @@ for (var frame = 0; frame < frames; frame++)
     if (inputReplay) inputChecksum = ConsumeInputReplayFrame(machine, warmup + frame, inputChecksum);
 }
 stopwatch.Stop();
-if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: 2 native clocks per motherboard clock, 16-bit OCS bus; accelerator timing is not hardware-certified.");
+if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: {(cpuModel == M68kCpuModel.M68060 ? 8 : cpuModel == M68kCpuModel.M68040 ? 4 : 2)} native clocks per motherboard clock, 16-bit OCS bus; accelerator timing is not hardware-certified.");
 if (bootProbe is not null) Console.WriteLine("BOOT_PROBE diagnostic run: FPS/allocation totals are not acceptance measurements; native gameplay is not verified.");
 var allocatedBytes = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
 if (inputReplay && machine.CompletedFrames != (long)warmup + frames)

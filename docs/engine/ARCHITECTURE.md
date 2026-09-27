@@ -22,25 +22,29 @@ boundary. Compact device state shares that clock; host UI, pacing and audio-devi
 delivery are outside emulated hardware ownership. There is no Legacy scheduler,
 requester graph or parallel device timeline to synchronize.
 
-The default 68000 reaches the machine directly. Experimental 68EC020/68020 use
+The default 68000 reaches the machine directly. Experimental 68EC020/68020/68030/68040 use
 [LightweightAcceleratorBus](../../CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs)
 under the versioned `ocs-accelerator-v1` policy. Copper68k converts two native CPU
-clocks to one motherboard clock; the adapter must not convert that clock again.
+clocks for 020/030 or four for 040 to one motherboard clock; the adapter must not convert that clock again.
 Aligned long operands use two 16-bit transfers; odd long operands use byte, word,
 byte transfers. Each transfer retains at least four motherboard clocks including
 its address/data phases, with existing contention or CIA synchronization allowed
 to extend it. All device progress remains owned by the machine.
 
-EC020 masks each transfer to 24 bits. A 68020 address above `$FFFFFF` returns
+EC020 masks each transfer to 24 bits. A 68020/030/040 address above `$FFFFFF` returns
 all-one data or ignores a write while advancing time; it never aliases a device.
 This is an explicit unmapped-address policy, not accelerator autoconfiguration or
 a physical bus-error model. Cache code reads use side-effect-free RAM/ROM peeks;
 they do not strobe CIA/custom registers. Cache, exception and instruction timing
 remain bounded package policies, not accelerator-card certification. See
 [CPU options](CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md) for coverage and limits.
-The 020 instruction cache includes Chip RAM when enabled; guest code writes
+The 020/030/040 instruction cache includes Chip RAM when enabled; guest code writes
 remain stale in that cache until guest invalidation. See the independent probe
 and [native cache correction](LOTUS_III_020_CACHE_2026-09-26.md).
+040 uses CACR bits 15/31 and CINV/CPUSH; cache geometry and write-back behavior
+remain approximate. The diagnostic-only 060 has an eight-clock policy, distinct
+integer exceptions and a single supervisor stack. It requires 060-aware OS/FPU
+task frames; see [implementation and limitations](CPU_OPTIONS_030_040_060_2026-09-27.md).
 
 Absent OCS DENISEID readback retains one completed DMA word. Actual DMA
 transfers update it at output; untimed memory inspection does not. Readback

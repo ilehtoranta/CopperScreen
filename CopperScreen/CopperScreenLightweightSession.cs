@@ -80,10 +80,10 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.ExpansionRamSize != 512 * 1024 || p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
-            (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020) ||
+            (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040) ||
             p.KickstartSource is not (CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.KickstartRom) ||
             p.KickstartVersion != KickstartVersion.Kickstart13)
-            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 or experimental 68EC020/68020 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC or RTG.");
+            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 or experimental 68EC020/68020/68030/68040 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC or RTG. The 68060 requires 060-aware OS task/FPU support and cannot boot the current Kickstart 1.3 profile.");
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             throw new NotSupportedException("Choose your Kickstart 1.3 ROM in Settings > Setup, or supply --kickstart <path>.");
         if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
@@ -107,6 +107,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         M68kBackendKind.AccurateM68000 => Copper68k.M68kCpuModel.M68000,
         M68kBackendKind.AccurateM68EC020 => Copper68k.M68kCpuModel.M68EC020,
         M68kBackendKind.AccurateM68020 => Copper68k.M68kCpuModel.M68020,
+        M68kBackendKind.AccurateM68030 => Copper68k.M68kCpuModel.M68030,
+        M68kBackendKind.AccurateM68040 => Copper68k.M68kCpuModel.M68040,
+        M68kBackendKind.AccurateM68060 => Copper68k.M68kCpuModel.M68060,
         _ => throw new NotSupportedException($"CPU backend {backend} is unavailable in Lightweight.")
     };
 

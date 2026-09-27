@@ -72,6 +72,8 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
 
     [Theory]
     [InlineData("AccurateM68EC020", Copper68k.M68kCpuModel.M68EC020)]
+    [InlineData("AccurateM68030", Copper68k.M68kCpuModel.M68030)]
+    [InlineData("AccurateM68040", Copper68k.M68kCpuModel.M68040)]
     [InlineData("AccurateM68020", Copper68k.M68kCpuModel.M68020)]
     public void CpuSelectionSurvivesProfileSaveAndSessionReplacement(string backendName, Copper68k.M68kCpuModel model)
     {
@@ -95,6 +97,19 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         replacement.RenderNextFrame(replacement.Framebuffer);
         Assert.Null(replacement.FaultMessage);
         Assert.Equal(1, replacement.Machine.CompletedFrames);
+    }
+
+    [Fact]
+    public void Cpu060SelectionIsRetainedButExplainsItsOsRequirement()
+    {
+        var options = Options("--cpu", "68060");
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(options);
+        Assert.Equal(M68kBackendKind.AccurateM68060, draft.CpuBackend);
+        Assert.Contains("060-aware OS", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        var path = CopperScreenProfileStore.Save(draft, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
+        Assert.Equal(M68kBackendKind.AccurateM68060, profile.CpuBackend);
+        Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(options));
     }
 
     [Fact]
@@ -606,7 +621,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         session.TogglePaused();
         using var current = CopperScreenRuntime.CreateForTests(session);
         current.Start();
-        var invalid = Options("--cpu", "m68040");
+        var invalid = Options("--cpu", "jitm68040");
         Assert.Throws<NotSupportedException>(() => CopperScreenRuntime.CreateReplacement(current,
             () => CopperScreenRuntime.CreateForTests(CopperScreenSession.Create(invalid))));
         Assert.True(current.CurrentState.IsPaused);

@@ -15,27 +15,32 @@ public sealed class LightweightCpuOptionsTests
 
     [Theory]
     [InlineData(M68kCpuModel.M68010)]
-    [InlineData(M68kCpuModel.M68030)]
-    [InlineData(M68kCpuModel.M68040)]
+    [InlineData((M68kCpuModel)999)]
     public void UnsupportedModelsAreRejected(M68kCpuModel model)
         => Assert.Throws<ArgumentException>(() => new LightweightA500Machine(new() { CpuModel = model }));
 
     [Theory]
     [InlineData(M68kCpuModel.M68020)]
     [InlineData(M68kCpuModel.M68EC020)]
+    [InlineData(M68kCpuModel.M68030)]
+    [InlineData(M68kCpuModel.M68040)]
+    [InlineData(M68kCpuModel.M68060)]
     public void AcceleratorRunsWithCacheEnabledInMotherboardClockDomain(M68kCpuModel model)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model });
-        ushort[] code = [0x7001, 0x4E7B, 0x0002, 0x4E71, 0x60FC];
+        var cacheEnable = model is M68kCpuModel.M68040 or M68kCpuModel.M68060 ? 0x8000u : 1u;
+        var ratio = model == M68kCpuModel.M68060 ? 8 : model == M68kCpuModel.M68040 ? 4 : 2;
+        ushort[] code = [0x203C, 0, (ushort)cacheEnable, 0x4E7B, 0x0002, 0x4E71, 0x60FC];
         for (var i = 0; i < code.Length; i++) machine.WriteChipWordDma(0x1000u + (uint)i * 2, code[i]);
         machine.Reset();
         for (var i = 0; i < 4; i++) machine.ExecuteFrame();
         Assert.Equal(model, machine.CpuModel);
-        Assert.Equal(1u, machine.Cpu.CacheControlRegister);
-        Assert.InRange(machine.Cpu.ProgramCounter, 0x1006u, 0x1008u);
+        Assert.Equal(cacheEnable, machine.Cpu.CacheControlRegister);
+        Assert.InRange(machine.Cpu.ProgramCounter, 0x100Au, 0x100Cu);
         Assert.InRange(machine.Cycle, 4L * 454 * 313, 4L * 454 * 313 + 100);
         Assert.Equal(machine.Cycle, machine.Cpu.Cycles);
-        Assert.InRange(machine.Cpu.NativeCycles, machine.Cpu.Cycles * 2, machine.Cpu.Cycles * 2 + 20);
+        // Native completion rounds up to the next whole motherboard clock.
+        Assert.InRange(machine.Cpu.NativeCycles, machine.Cpu.Cycles * ratio - (ratio - 1), machine.Cpu.Cycles * ratio + 20);
         Assert.Null(machine.UnsupportedActiveFeature);
         machine.Reset();
         Assert.Equal(model, machine.CpuModel);
@@ -48,6 +53,8 @@ public sealed class LightweightCpuOptionsTests
     [InlineData(M68kCpuModel.M68EC020)]
     [InlineData(M68kCpuModel.M68020, false)]
     [InlineData(M68kCpuModel.M68EC020, false)]
+    [InlineData(M68kCpuModel.M68030, true)]
+    [InlineData(M68kCpuModel.M68030, false)]
     public void ChipInstructionWritesRequireGuestCacheInvalidation(M68kCpuModel model, bool batch = true)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model }, batch);
@@ -73,6 +80,9 @@ public sealed class LightweightCpuOptionsTests
     [Theory]
     [InlineData(M68kCpuModel.M68020)]
     [InlineData(M68kCpuModel.M68EC020)]
+    [InlineData(M68kCpuModel.M68030)]
+    [InlineData(M68kCpuModel.M68040)]
+    [InlineData(M68kCpuModel.M68060)]
     public void UnalignedLongTransfersPreserveSurroundingBytesAndAdvanceSingleClock(M68kCpuModel model)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model });
@@ -93,6 +103,9 @@ public sealed class LightweightCpuOptionsTests
     [Theory]
     [InlineData(M68kCpuModel.M68020, 0x11223344u)]
     [InlineData(M68kCpuModel.M68EC020, 0xAABBCCDDu)]
+    [InlineData(M68kCpuModel.M68030, 0x11223344u)]
+    [InlineData(M68kCpuModel.M68040, 0x11223344u)]
+    [InlineData(M68kCpuModel.M68060, 0x11223344u)]
     public void OnlyEc020AliasesAbove24Bits(M68kCpuModel model, uint expected)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model });
@@ -101,10 +114,10 @@ public sealed class LightweightCpuOptionsTests
         bus.WriteLong(0x4000, 0x11223344, ref cycle, M68kBusAccessKind.CpuDataWrite);
         bus.WriteLong(0x01004000, 0xAABBCCDD, ref cycle, M68kBusAccessKind.CpuDataWrite);
         Assert.Equal(expected, bus.ReadLong(0x4000, ref cycle, M68kBusAccessKind.CpuDataRead));
-        Assert.Equal(model == M68kCpuModel.M68020 ? uint.MaxValue : expected,
+        Assert.Equal(model != M68kCpuModel.M68EC020 ? uint.MaxValue : expected,
             bus.ReadLong(0x01004000, ref cycle, M68kBusAccessKind.CpuDataRead));
         var before = machine.Cycle;
-        Assert.Equal(model == M68kCpuModel.M68020 ? 0xFFFF : 0xAABB, bus.ReadHostWord(0x01004000));
+        Assert.Equal(model != M68kCpuModel.M68EC020 ? 0xFFFF : 0xAABB, bus.ReadHostWord(0x01004000));
         Assert.Equal(0xFFFF, bus.ReadHostWord(0xDFF000));
         Assert.Equal(before, machine.Cycle); // Cache peeks do not strobe devices.
     }
@@ -112,6 +125,9 @@ public sealed class LightweightCpuOptionsTests
     [Theory]
     [InlineData(M68kCpuModel.M68020, 0x22334400u)]
     [InlineData(M68kCpuModel.M68EC020, 0xABCDEF00u)]
+    [InlineData(M68kCpuModel.M68030, 0x22334400u)]
+    [InlineData(M68kCpuModel.M68040, 0x22334400u)]
+    [InlineData(M68kCpuModel.M68060, 0x22334400u)]
     public void Crossing24BitBoundaryWrapsEachEc020TransferOnly(M68kCpuModel model, uint expected)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model });
@@ -128,6 +144,12 @@ public sealed class LightweightCpuOptionsTests
     [InlineData(M68kCpuModel.M68EC020, 0u)]
     [InlineData(M68kCpuModel.M68020, 0x2000u)]
     [InlineData(M68kCpuModel.M68EC020, 0x2000u)]
+    [InlineData(M68kCpuModel.M68030, 0u)]
+    [InlineData(M68kCpuModel.M68040, 0u)]
+    [InlineData(M68kCpuModel.M68060, 0u)]
+    [InlineData(M68kCpuModel.M68030, 0x2000u)]
+    [InlineData(M68kCpuModel.M68040, 0x2000u)]
+    [InlineData(M68kCpuModel.M68060, 0x2000u)]
     public void InterruptWakesStoppedAcceleratorWithFormatZeroFrame(M68kCpuModel model, uint vectorBase)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model });
@@ -157,6 +179,9 @@ public sealed class LightweightCpuOptionsTests
     [Theory]
     [InlineData(M68kCpuModel.M68020)]
     [InlineData(M68kCpuModel.M68EC020)]
+    [InlineData(M68kCpuModel.M68030)]
+    [InlineData(M68kCpuModel.M68040)]
+    [InlineData(M68kCpuModel.M68060)]
     public void MaskedInterruptDoesNotWakeStoppedAccelerator(M68kCpuModel model)
     {
         using var machine = new LightweightA500Machine(new() { CpuModel = model });

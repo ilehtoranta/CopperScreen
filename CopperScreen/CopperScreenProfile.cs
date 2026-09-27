@@ -572,6 +572,7 @@ internal sealed class CopperScreenProfile
 			"accuratem68040" or "m68040" or "68040" or "040" or "ocs6804025mhz" => M68kBackendKind.AccurateM68040,
 			"jit" or "jitm68000" => throw new InvalidOperationException(
 				"The Amiga MC68000 JIT is not yet benchmark-stable. Use 'accuratem68000'."),
+			"accuratem68060" or "m68060" or "68060" or "060" => M68kBackendKind.AccurateM68060,
 			"jitm68040" or "jit68040" or "m68040jit" or "040jit" => M68kBackendKind.JitM68040,
 			_ => throw new InvalidOperationException($"Unsupported CPU backend '{value}'.")
 		};
