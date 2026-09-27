@@ -4,6 +4,39 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class NativeInputScriptTests
 {
+    [Theory]
+    [InlineData(false, "diskPath")]
+    [InlineData(true, "diskPath")]
+    [InlineData(false, "adfPath")]
+    [InlineData(true, "adfPath")]
+    public void ZipEntrySelectorSurvivesHostPathResolution(bool absolute, string property)
+    {
+        var path = Path.GetTempFileName();
+        try
+        {
+            var archive = absolute ? Path.Combine(Path.GetDirectoryName(path)!, "Disk Set.zip") : "Disk Set.zip";
+            const string selector = "#/Nested Directory/Disk 2.adf";
+            File.WriteAllText(path, System.Text.Json.JsonSerializer.Serialize(new[]
+            {
+                new Dictionary<string, object> { ["frame"] = 2, [property] = archive + selector }
+            }));
+            var reads = 0;
+            var script = new NativeInputScript(path, mediaPath =>
+            {
+                reads++;
+                Assert.Equal(Path.GetFullPath(archive, Path.GetDirectoryName(path)!) + selector, mediaPath);
+                return new byte[901120];
+            });
+            using var machine = new LightweightA500Machine();
+            script.Apply(machine, 0);
+            Assert.False(machine.IsAdfMounted);
+            script.Apply(machine, 2);
+            Assert.True(machine.IsAdfMounted);
+            Assert.Equal(1, reads);
+        }
+        finally { File.Delete(path); }
+    }
+
     [Fact]
     public void MediaIsReadBeforeExecutionAndAppliedAtItsScriptedFrame()
     {

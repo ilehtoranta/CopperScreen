@@ -13,7 +13,7 @@ music player. CopperScreen is the canonical development and release repository.
 | Headless Lightweight runner and deterministic workload scripts | This repository |
 | CopperDisk, disk tests and package scripts | This repository; no music-player consumers were found |
 | Lightweight execution plan, issue register and performance harnesses | This repository |
-| Copper68k CPU interpreter | CopperMod; exact stable NuGet pin `1.4.1`; [CPU dependency and trace evidence](engine/CPU_TRACE.md) |
+| Copper68k CPU interpreter | CopperMod; exact local development NuGet pin `1.4.2-ocs020.54`; [020 CopperHDF correction](engine/COPPERHDF_020_2026-09-27.md), [Fast RAM dependency](engine/FAST_RAM_2026-09-27.md); [CPU correction and release boundary](engine/LOTUS_III_020_CACHE_2026-09-26.md), [stable dependency and trace history](engine/CPU_TRACE.md) |
 | Older CopperMod.Amiga used by Cust/AHX, music backends and player | CopperMod; not dependencies of this product |
 
 The application builds the engine and CopperDisk from local projects. Neither
@@ -113,7 +113,9 @@ runtime change required a new gameplay or FPS acceptance run.
 ## Package/release boundary (unchanged)
 
 Published `0.1.0-preview.1` / `2.1.1-boundary.1` packages remain immutable and
-available to external or historical consumers. The next source versions above
-are **unpublished development versions**; no NuGet or binary release is
-authorized by this source migration. `scripts/pack-engine.ps1` creates isolated
-local packages without publishing. A later release must use fresh versions.
+available to external or historical consumers. This source migration did not
+itself authorize package releases. In a separate later release, Copper68k
+`1.4.2-ocs020.52` was published as an experimental prerelease after CPU tests
+and bounded native validation. Other new source versions remain unpublished;
+`scripts/pack-engine.ps1` creates isolated local packages without publishing.
+Any later release must use a fresh version.

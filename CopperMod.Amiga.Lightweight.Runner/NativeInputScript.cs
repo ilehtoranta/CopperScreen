@@ -36,7 +36,12 @@ internal sealed class NativeInputScript
                     throw new ArgumentException("Use separate, nonempty mount and eject entries.");
                 // File/ZIP reading is outside execution. Mount-time track encoding
                 // is still excluded from acceptance timing by the runner's guard.
-                _media[i] = readAdf(Path.GetFullPath(mediaPath, directory));
+                // A ZIP selector is not part of the host filesystem path. In
+                // particular, Windows would turn its #/ delimiter into #\.
+                var selector = mediaPath.IndexOf("#/", StringComparison.Ordinal);
+                var resolvedPath = selector < 0 ? Path.GetFullPath(mediaPath, directory) :
+                    Path.GetFullPath(mediaPath[..selector], directory) + mediaPath[selector..];
+                _media[i] = readAdf(resolvedPath);
                 if (IsIpf(_media[i]!, mediaPath)) _ipf[i] = LightweightIpfImage.Prepare(_media[i]!);
             }
         }

@@ -2,8 +2,16 @@ using System.Buffers.Binary;
 using System.Reflection;
 using System.Text.Json;
 using CopperMod.Amiga.Lightweight;
+using Copper68k;
 
-if (args.Length != 1) throw new ArgumentException("Provide a new output directory under artifacts.");
+if (args.Length is < 1 or > 2) throw new ArgumentException("Provide a new output directory under artifacts and optionally 68000, 68ec020 or 68020.");
+var cpuModel = args.Length == 1 ? M68kCpuModel.M68000 : args[1].ToLowerInvariant() switch
+{
+    "68000" => M68kCpuModel.M68000,
+    "68ec020" => M68kCpuModel.M68EC020,
+    "68020" => M68kCpuModel.M68020,
+    _ => throw new ArgumentException("CPU must be 68000, 68ec020 or 68020.")
+};
 var output = Path.GetFullPath(args[0]);
 if (Directory.Exists(output)) throw new IOException("Use a new output directory to preserve prior evidence.");
 Directory.CreateDirectory(output);
@@ -39,7 +47,7 @@ File.WriteAllBytes(Path.Combine(output, "polling.rom"), rom);
 byte[] priorChip = null, priorSlow = null;
 foreach (var batch in new[] { false, true })
 {
-    using var machine = new LightweightA500Machine(new(), batch);
+    using var machine = new LightweightA500Machine(new() { CpuModel = cpuModel }, batch);
     machine.LoadKickstart(rom);
     for (var i = 0; i < 100; i++) machine.ExecuteFrame();
     if (machine.Cpu.Halted || machine.UnsupportedActiveFeature != null)
@@ -54,7 +62,7 @@ foreach (var batch in new[] { false, true })
     var pcs = Enumerable.Range(0, 100)
         .Select(i => BinaryPrimitives.ReadUInt32BigEndian(slow.AsSpan(0x9100 + i * 4)))
         .GroupBy(pc => pc).ToDictionary(g => g.Key.ToString("X6"), g => g.Count());
-    var result = new { mode = name, machine.CompletedFrames, machine.Cycle,
+    var result = new { mode = name, cpuModel = cpuModel.ToString(), machine.CompletedFrames, machine.Cycle,
         pc = machine.Cpu.ProgramCounter.ToString("X6"), interruptedPcs = pcs,
         consumedEdges = BinaryPrimitives.ReadUInt32BigEndian(slow.AsSpan(0x9008)) };
     var json = JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true });

@@ -1,0 +1,4722 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-27",
+  "status": "IMPLEMENTED_BOUNDED_NATIVE_VALIDATION",
+  "configuration": {
+    "chipKiB": 512,
+    "slowKiB": 512,
+    "fastKiB": [
+      0,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "models": [
+      "M68000",
+      "M68020",
+      "M68EC020"
+    ],
+    "bus": "Zorro II, 16-bit, guest Autoconfig"
+  },
+  "package": {
+    "version": "1.4.2-ocs020.53",
+    "published": false,
+    "ownerCommit": "77027052e4694a02a4c88003da663568b55c18ba",
+    "nupkg": {
+      "path": "artifacts/copper68k-feed/Copper68k.1.4.2-ocs020.53.nupkg",
+      "sha256": "3F4391C19BDBD3F0DA66C8947F17D41D9FBCDDCD645FC1A3EF85F18F62762A9E",
+      "bytes": 326489
+    },
+    "patches": [
+      {
+        "path": "artifacts/fast-ram-2026-09-27/source/0001-Support-PC-indexed-LEA-in-020-Autoconfig-boot.patch",
+        "sha256": "7D527F9726579B7AB8875AD2D91F943B2AA34BF169FADAFAF8518090F7DFD65C",
+        "bytes": 7790
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "CopperMod.Amiga.Lightweight/LightweightFastRam.cs",
+      "sha256": "7BB730CE1DF141B435049531D0BD5145ADCE0D3BBAC1A8E6E7B72A34125355EA",
+      "bytes": 2921
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs",
+      "sha256": "03B7EDFF739E6701923D1E4490F3809937F9FA93E272289A219E25925910AB77",
+      "bytes": 1443
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "sha256": "BFD146EF262BD84617B9AEE7F40B291798FB5ED5408B7DC76698BCD42C4FE051",
+      "bytes": 89039
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight/LightweightHdfBus.cs",
+      "sha256": "713F615F8B06A053B4180E29F910156E33BF7FF9628B23BD40CAB9B467F4C35D",
+      "bytes": 6187
+    },
+    {
+      "path": "CopperScreen/CopperScreenLightweightSession.cs",
+      "sha256": "DF517DF4A8B36B055285B817C7F994F633365941590AD421DFF05A97AE82414B",
+      "bytes": 19965
+    },
+    {
+      "path": "CopperScreen/MainWindow.cs",
+      "sha256": "A2E4381BF148C2F5E09EE44255EEF3C92F2129255B2D58156FD0651C398D6147",
+      "bytes": 144793
+    },
+    {
+      "path": "CopperScreen/MainWindow.SettingsUx.cs",
+      "sha256": "02227CF7DEE449898221A314F6F06C77371318400A8624152DFFCCCEECD827CC",
+      "bytes": 20730
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/Program.cs",
+      "sha256": "BE312B54518092F32EFA5A126AF5E087DC97FBD71CDB65EB4A69E7B623B99A8E",
+      "bytes": 49482
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/NativeBootProbe.cs",
+      "sha256": "FEE58AAE565D7CD6F62A474528AD25ADDCF71C0B8934EA2E72A46D8FCE8B4F90",
+      "bytes": 6493
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Tests/LightweightFastRamTests.cs",
+      "sha256": "AE52AFFEBF0BCC00E3CD380DFCF0BB228E3F8D77D7CE2D7127B0D8DA52FE823B",
+      "bytes": 11282
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/CopperScreenLightweightSessionTests.cs",
+      "sha256": "BF953192F548815D0AE47B0CAFC55AE533BEFED97B3B52F0216DB506F7BFEEBA",
+      "bytes": 43462
+    },
+    {
+      "path": "scripts/probes/FastRam/inspect_snapshot.py",
+      "sha256": "C20112A4C48D3F93459819CE718318A729B5ABEF20CA90B3C7DC3867EE1A731C",
+      "bytes": 3159
+    },
+    {
+      "path": "scripts/probes/FastRam/prepare_native.py",
+      "sha256": "E3902CE4F7AE8BBF2F24FABF71228171C8FFA82FC313C1A53E26E5990A9EF020",
+      "bytes": 2426
+    }
+  ],
+  "binaries": [
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/Copper68k.dll",
+      "sha256": "E1D863CCFDDED5838A8AE784B89895F28CFF8154302E004EECE55608256DD55A",
+      "bytes": 876032
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "63C2C7FA45BA07F1187651BAC1B5F2B1F5BFC750F90334A14346368CDCE03D9D",
+      "bytes": 190976
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "3CBF767814F8D1FC7757558579BCA40240C9FB7AA2B876A4A2CFF65A8666E3FC",
+      "bytes": 65024
+    }
+  ],
+  "tests": {
+    "cpu": {
+      "total": 3212,
+      "passed": 3206,
+      "failed": 0,
+      "skipped": 6,
+      "report": {
+        "path": "artifacts/fast-ram-2026-09-27/tests/cpu-final.trx",
+        "sha256": "6CBAC09D9EC5CA352A6C753A097655CFE83C4077077273157EE355D6CCF37D92",
+        "bytes": 4876401
+      }
+    },
+    "engine": {
+      "total": 780,
+      "passed": 780,
+      "failed": 0,
+      "skipped": 0,
+      "report": {
+        "path": "artifacts/fast-ram-2026-09-27/tests/engine-final.trx",
+        "sha256": "A08D8558FE23AEA16CB48272E013F24B50DB3C927D275082DA62DC57443ED76A",
+        "bytes": 1208165
+      }
+    },
+    "host": {
+      "total": 111,
+      "passed": 108,
+      "failed": 0,
+      "skipped": 3,
+      "report": {
+        "path": "artifacts/fast-ram-2026-09-27/tests/host-final.trx",
+        "sha256": "9583C29D0901DE9184906B24419BFBEC67F191C57B0BF28C883BAEE57FD3AD1D",
+        "bytes": 169654
+      }
+    },
+    "disk": {
+      "total": 74,
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0,
+      "report": {
+        "path": "artifacts/fast-ram-2026-09-27/tests/disk-final.trx",
+        "sha256": "826D59BD5429671FE7602F15705C39A79440599E1ED5D0E6C5C92855EFCDDFA3",
+        "bytes": 100160
+      }
+    }
+  },
+  "buildReports": [
+    {
+      "path": "artifacts/fast-ram-2026-09-27/build-final.log",
+      "sha256": "95B065638815945E891A1077CA9B6F4B74D9B307554465391AF9C37DA54DA873",
+      "bytes": 1635
+    },
+    {
+      "path": "artifacts/fast-ram-2026-09-27/pack.log",
+      "sha256": "294D2832FBA9E0060FF5FF9DCA3DE407909AB2506B8FD470BC03432670170E72",
+      "bytes": 478
+    },
+    {
+      "path": "artifacts/fast-ram-2026-09-27/locked-final.log",
+      "sha256": "F0881836B2B5F042BC60C267E9B00F4D59CD121EE3E98551415CBB343A7F3037",
+      "bytes": 957
+    },
+    {
+      "path": "artifacts/fast-ram-2026-09-27/probe-restores.log",
+      "sha256": "5011F269FB2234FEA3FE9C4F62458E0094222195FDDD1D07783E3FB574BFD265",
+      "bytes": 2267
+    }
+  ],
+  "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "media": [
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "C8241ACD91206A0D857CD589DA2ECDEB4084BD270E597DEE4C0EB7D7885FC30C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+      "bytes": 901120
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "699D6C7A9562184F4DABA8D23FF6C4CBFD28A3E1863EBA5C764BA96D735ABD9C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887",
+      "bytes": 901120
+    }
+  ],
+  "lotusInput": {
+    "path": "artifacts/native-regression-2026-09-26/final/lotus3/input.json",
+    "sha256": "A5FB0D22F79DAEECEFAA02E2CC2CF05BA39BF209A683DE95E5E02E4FCEB3E649",
+    "bytes": 952
+  },
+  "nativeBoots": [
+    {
+      "model": "68000",
+      "kib": 512,
+      "name": "final-boot-68000-512",
+      "frames": 1200,
+      "cycle": 170390288,
+      "pc": "00FC0D14",
+      "cpuFingerprint": "0x74B17461DB2F1CBD",
+      "hardwareFingerprint": "0x72EB96CEE7FBA1AD",
+      "outputFingerprint": "0xE5392D8AC226ABAB",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512.log",
+        "sha256": "66700ADDF270D49C945117127974B8B3544D6616825EF728B259273EB92252BB",
+        "bytes": 2596
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.fastram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.json",
+          "sha256": "104B3D6799EF76EEC5AF9BDA142E8163595DBC528622110098EF94036112548F",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.memory.json",
+          "sha256": "66C5931D7024D872FDA3A624F5B5905944F1D4E7726EDE4C69049A66E1F25B51",
+          "bytes": 42
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.chipram",
+          "sha256": "626171E8AB786F89DB00E5124E9F875CD16EA7EEF0F5BB52AAD636E32B868796",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.fastram",
+          "sha256": "959687E99356B4BAD4BD47CA507AEC53486EA755E4214E4331C0E3C301CFA0F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.json",
+          "sha256": "75312AD84087B06E5D139373CBA588EFEA4CA12F95AF161FF2A87EC8094C57D1",
+          "bytes": 1096
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.memory.json",
+          "sha256": "D9A9B8334727438C159B44F16F658C8A78932DAF5982FB9C98576CBD5209C55B",
+          "bytes": 45
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-512/frame-001200.slowram",
+          "sha256": "A1E6C2132C7D49714EA0C338727F24276BC4D4E90AF6C03932C1138BBB3E4AD5",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 524288,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 2621440,
+            "free": 524256,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68000",
+      "kib": 1024,
+      "name": "final-boot-68000-1024",
+      "frames": 1200,
+      "cycle": 170390320,
+      "pc": "00FC0722",
+      "cpuFingerprint": "0x3E6748FF14A730FB",
+      "hardwareFingerprint": "0xB8F533E4FD239FB4",
+      "outputFingerprint": "0x131F43FAEE877B97",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024.log",
+        "sha256": "5E8C8489DDE4D7521072571B450E006B28506E7318C3486EFA369BD09D044033",
+        "bytes": 2595
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.fastram",
+          "sha256": "30E14955EBF1352266DC2FF8067E68104607E750ABB9D3B36582B8AF909FCB58",
+          "bytes": 1048576
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.json",
+          "sha256": "104B3D6799EF76EEC5AF9BDA142E8163595DBC528622110098EF94036112548F",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.memory.json",
+          "sha256": "2A5D64C0ECF4DD60291E5663CA8C7D87E42FDE285732623B9D247768CAB73FE3",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.chipram",
+          "sha256": "626171E8AB786F89DB00E5124E9F875CD16EA7EEF0F5BB52AAD636E32B868796",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.fastram",
+          "sha256": "6B7CC25F8C0A674AFAF078BBCB915F12F8EFEFCC318AC11B306CB61D0DFCD15E",
+          "bytes": 1048576
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.json",
+          "sha256": "61BA3BDFCC33D8200BF43DDAD02FE6BFF55B513A0B15AFDFB6E3CEC9D09E7EFA",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.memory.json",
+          "sha256": "7A0DA185A6F8D48D2186860E9609104EC22E372857A1D6DAD27A5FD8E896BD04",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-1024/frame-001200.slowram",
+          "sha256": "BA97F191D1052EBD7CFD59BCEFCFA875EBABA2453DAB27715DCF8B9DF18059D3",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 1048576,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 3145728,
+            "free": 1048544,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68000",
+      "kib": 2048,
+      "name": "final-boot-68000-2048",
+      "frames": 1200,
+      "cycle": 170390272,
+      "pc": "00FC0D14",
+      "cpuFingerprint": "0x4762C4E2DB126E0D",
+      "hardwareFingerprint": "0x8AB215680E496ECD",
+      "outputFingerprint": "0x14CD206ED8614E4F",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048.log",
+        "sha256": "7CAD8514ABC8C8D8B5F57DF44B25BE5B8B64ECFA91E4DE8E89B66D470605218C",
+        "bytes": 2596
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.fastram",
+          "sha256": "5647F05EC18958947D32874EEB788FA396A05D0BAB7C1B71F112CEB7E9B31EEE",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.json",
+          "sha256": "104B3D6799EF76EEC5AF9BDA142E8163595DBC528622110098EF94036112548F",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.memory.json",
+          "sha256": "211986907ABC34B2E581124C883A593C894BA06FFD0A950297CB568DB9AD3C06",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.chipram",
+          "sha256": "626171E8AB786F89DB00E5124E9F875CD16EA7EEF0F5BB52AAD636E32B868796",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.fastram",
+          "sha256": "DD74CE3BDE4B44703E6DA1928F4B982EDFCA523DCB218769CBD749314A0D527F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.json",
+          "sha256": "D287D0849213367A99C6F5B48DF1E13B6E58042E277DF1D21ABB0023192DBF74",
+          "bytes": 1096
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-2048/frame-001200.slowram",
+          "sha256": "BE12864D1F2F5C301EF02D816E3A43768200642AD0348CF49BF2CA201445E74F",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 2097152,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 4194304,
+            "free": 2097120,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68000",
+      "kib": 4096,
+      "name": "final-boot-68000-4096",
+      "frames": 1200,
+      "cycle": 170390272,
+      "pc": "00FC0D14",
+      "cpuFingerprint": "0x4762C4E2DB126E0D",
+      "hardwareFingerprint": "0x8AB215680E496ECD",
+      "outputFingerprint": "0x14CD206ED8614E4F",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096.log",
+        "sha256": "B5CBCDB59364AC934FD69BD2F504CBF7021AB81D52B810A131B1D1C64E4F0D51",
+        "bytes": 2597
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.fastram",
+          "sha256": "BB9F8DF61474D25E71FA00722318CD387396CA1736605E1248821CC0DE3D3AF8",
+          "bytes": 4194304
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.json",
+          "sha256": "104B3D6799EF76EEC5AF9BDA142E8163595DBC528622110098EF94036112548F",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.memory.json",
+          "sha256": "9AE4FF15B56248192FC286780786D7F12A7628CF17ACF316F43D71222D9CAAF8",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.chipram",
+          "sha256": "626171E8AB786F89DB00E5124E9F875CD16EA7EEF0F5BB52AAD636E32B868796",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.fastram",
+          "sha256": "6A73DEF4C9C88CACE52916842188C5DCAFDE437E28077C97F307980A0BA4D2EE",
+          "bytes": 4194304
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.json",
+          "sha256": "D287D0849213367A99C6F5B48DF1E13B6E58042E277DF1D21ABB0023192DBF74",
+          "bytes": 1096
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.memory.json",
+          "sha256": "388E674B323578762075FDBFF9177F706315A4D9171530D5C177419B3188AB2E",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-4096/frame-001200.slowram",
+          "sha256": "79739098E7FA2D43C25F5E93848BA8E00A61782542FE88369CFD7E701C406E37",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 4194304,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 6291456,
+            "free": 4194272,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68000",
+      "kib": 8192,
+      "name": "final-boot-68000-8192",
+      "frames": 1200,
+      "cycle": 170390240,
+      "pc": "00FC0722",
+      "cpuFingerprint": "0x81F84446B3BD2BEB",
+      "hardwareFingerprint": "0xF0A386B30B591634",
+      "outputFingerprint": "0x2D9AEFE3AF22C0AF",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192.log",
+        "sha256": "383F6966F3318B644744C2F69272123BD1AA1243979AEFA4F1FD51079D9B9D53",
+        "bytes": 2596
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.fastram",
+          "sha256": "2DAEB1F36095B44B318410B3F4E8B5D989DCC7BB023D1426C492DAB0A3053E74",
+          "bytes": 8388608
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.json",
+          "sha256": "104B3D6799EF76EEC5AF9BDA142E8163595DBC528622110098EF94036112548F",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.memory.json",
+          "sha256": "395BA55BC9F4A917BFFFA74EA1FF2AC08F8AA6CCF8C02C57F84DCCD69C3F5F43",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.chipram",
+          "sha256": "626171E8AB786F89DB00E5124E9F875CD16EA7EEF0F5BB52AAD636E32B868796",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.fastram",
+          "sha256": "47FAF16F929A8CFE7EFA94EB9174E4795F16BE01C147C9EA9B7029CD3C906151",
+          "bytes": 8388608
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.json",
+          "sha256": "2BE1D2DECF7606F8237375F2D5B0934991C0746B7D79CE3DC161A65BD0F270A8",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.memory.json",
+          "sha256": "F6FA5D42806D51695D6499FC30F90A49813359609FE4EBA69FA2710A0785C528",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68000-8192/frame-001200.slowram",
+          "sha256": "D7DE9590C1FAC94338E1D5C5DC8DB4B45B843AA1A631EA97021B25AC12B44A48",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 8388608,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 10485760,
+            "free": 8388576,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68020",
+      "kib": 512,
+      "name": "final-boot-68020-512",
+      "frames": 1200,
+      "cycle": 170524673,
+      "pc": "00FC0726",
+      "cpuFingerprint": "0x2392C6F6828301EA",
+      "hardwareFingerprint": "0x3E4492A6ABB1A966",
+      "outputFingerprint": "0x2E434386E0FA1CC5",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512.log",
+        "sha256": "F1D6EF98E933F050FA4AA84280F3ACE2F91D36766DD5769016F58B6B641B16CC",
+        "bytes": 2780
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.fastram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.memory.json",
+          "sha256": "66C5931D7024D872FDA3A624F5B5905944F1D4E7726EDE4C69049A66E1F25B51",
+          "bytes": 42
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.fastram",
+          "sha256": "959687E99356B4BAD4BD47CA507AEC53486EA755E4214E4331C0E3C301CFA0F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.json",
+          "sha256": "F11C0C97F31887F26781F9EE8437164E3526906AB9E0CCD98D25585AB962887B",
+          "bytes": 1096
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.memory.json",
+          "sha256": "D9A9B8334727438C159B44F16F658C8A78932DAF5982FB9C98576CBD5209C55B",
+          "bytes": 45
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-512/frame-001200.slowram",
+          "sha256": "31AFBAC98E1B42F452B44C2C9356B1A8A203B4646028CDE4722AA88AFC628104",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 524288,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 2621440,
+            "free": 524256,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68020",
+      "kib": 1024,
+      "name": "final-boot-68020-1024",
+      "frames": 1200,
+      "cycle": 170524664,
+      "pc": "00FE863C",
+      "cpuFingerprint": "0xA78BB6F84E596DD5",
+      "hardwareFingerprint": "0x5664CE20C507097B",
+      "outputFingerprint": "0xE25479AE4C5A3F9D",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024.log",
+        "sha256": "0EB0745194C99028F6CB7FF8A75E95A538C6D7F0A330E884A447EC4ABA8CF8B3",
+        "bytes": 2779
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.fastram",
+          "sha256": "30E14955EBF1352266DC2FF8067E68104607E750ABB9D3B36582B8AF909FCB58",
+          "bytes": 1048576
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.memory.json",
+          "sha256": "2A5D64C0ECF4DD60291E5663CA8C7D87E42FDE285732623B9D247768CAB73FE3",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.fastram",
+          "sha256": "6B7CC25F8C0A674AFAF078BBCB915F12F8EFEFCC318AC11B306CB61D0DFCD15E",
+          "bytes": 1048576
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.json",
+          "sha256": "3765D1E799C7CC4F24BDB0099870EDDA4F0FD79227A1049EB1C16BE74D931146",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.memory.json",
+          "sha256": "7A0DA185A6F8D48D2186860E9609104EC22E372857A1D6DAD27A5FD8E896BD04",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024/frame-001200.slowram",
+          "sha256": "56B53AB99D3738BBB69227CF2C04FD4BD1DC5B6E35BAACAE97992A6418C68A24",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 1048576,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 3145728,
+            "free": 1048544,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68020",
+      "kib": 2048,
+      "name": "final-boot-68020-2048",
+      "frames": 1200,
+      "cycle": 170524663,
+      "pc": "00FE9C48",
+      "cpuFingerprint": "0xF3AE8328D0E1CA8F",
+      "hardwareFingerprint": "0x0314A1748D61EE19",
+      "outputFingerprint": "0xA5FBF2B0D3782AED",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048.log",
+        "sha256": "F42AA18921D1304C252671035C758ADCDE1E8AF2C02BED99C10B2C33C3CF2BC7",
+        "bytes": 2779
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.fastram",
+          "sha256": "5647F05EC18958947D32874EEB788FA396A05D0BAB7C1B71F112CEB7E9B31EEE",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.memory.json",
+          "sha256": "211986907ABC34B2E581124C883A593C894BA06FFD0A950297CB568DB9AD3C06",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.fastram",
+          "sha256": "DD74CE3BDE4B44703E6DA1928F4B982EDFCA523DCB218769CBD749314A0D527F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.json",
+          "sha256": "08EA8B667F57FDB1FEB3EDFCC552A73C58556BE2E52D785F2F17AAC77B91EE18",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048/frame-001200.slowram",
+          "sha256": "52A96739E5C9DCD0980F6C64A4CBED661772D6C7761D061EA547CF0CC303F5D9",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 2097152,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 4194304,
+            "free": 2097120,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68020",
+      "kib": 4096,
+      "name": "final-boot-68020-4096",
+      "frames": 1200,
+      "cycle": 170524664,
+      "pc": "00FE863C",
+      "cpuFingerprint": "0xA78BB6F84E596DD5",
+      "hardwareFingerprint": "0x5664CE20C507097B",
+      "outputFingerprint": "0xE25479AE4C5A3F9D",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096.log",
+        "sha256": "1B794A268B2EAD2DF4C38107D175AA18930853A296BE4F3C6F3B2EB84A6E7AD1",
+        "bytes": 2779
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.fastram",
+          "sha256": "BB9F8DF61474D25E71FA00722318CD387396CA1736605E1248821CC0DE3D3AF8",
+          "bytes": 4194304
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.memory.json",
+          "sha256": "9AE4FF15B56248192FC286780786D7F12A7628CF17ACF316F43D71222D9CAAF8",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.fastram",
+          "sha256": "6A73DEF4C9C88CACE52916842188C5DCAFDE437E28077C97F307980A0BA4D2EE",
+          "bytes": 4194304
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.json",
+          "sha256": "3765D1E799C7CC4F24BDB0099870EDDA4F0FD79227A1049EB1C16BE74D931146",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.memory.json",
+          "sha256": "388E674B323578762075FDBFF9177F706315A4D9171530D5C177419B3188AB2E",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096/frame-001200.slowram",
+          "sha256": "1966BAF8695E18F15E9E8E117C60DD8CCF259CDC3DBE34425758A446EB564C03",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 4194304,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 6291456,
+            "free": 4194272,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68020",
+      "kib": 8192,
+      "name": "final-boot-68020-8192",
+      "frames": 1200,
+      "cycle": 170524674,
+      "pc": "00FE863C",
+      "cpuFingerprint": "0x8162DC6220EEF92F",
+      "hardwareFingerprint": "0xC2765AD707E56657",
+      "outputFingerprint": "0x5DB7DD586A0AECCB",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192.log",
+        "sha256": "7A8CE6EE74E9425A4AB3E75FE54156A89883496AE6F43C2AFF9DCE5F8151623F",
+        "bytes": 2779
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.fastram",
+          "sha256": "2DAEB1F36095B44B318410B3F4E8B5D989DCC7BB023D1426C492DAB0A3053E74",
+          "bytes": 8388608
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.memory.json",
+          "sha256": "395BA55BC9F4A917BFFFA74EA1FF2AC08F8AA6CCF8C02C57F84DCCD69C3F5F43",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.fastram",
+          "sha256": "47FAF16F929A8CFE7EFA94EB9174E4795F16BE01C147C9EA9B7029CD3C906151",
+          "bytes": 8388608
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.json",
+          "sha256": "8641D603F80644B7C89C3E4B70BBE5ACA619FD683A298C476049279721BABB81",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.memory.json",
+          "sha256": "F6FA5D42806D51695D6499FC30F90A49813359609FE4EBA69FA2710A0785C528",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192/frame-001200.slowram",
+          "sha256": "65430FB08B2897CCDA793CF346205835B0BC8C00CB845E08749DB27E9E1D264F",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 8388608,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 10485760,
+            "free": 8388576,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68ec020",
+      "kib": 512,
+      "name": "final-boot-68ec020-512",
+      "frames": 1200,
+      "cycle": 170524673,
+      "pc": "00FC0726",
+      "cpuFingerprint": "0x2392C6F6828301EA",
+      "hardwareFingerprint": "0x3E4492A6ABB1A966",
+      "outputFingerprint": "0x2E434386E0FA1CC5",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512.log",
+        "sha256": "70F74DBBCEB2EEEB30FF77360F21D87367B92AC9044AE8C88716E07C619C5EBA",
+        "bytes": 2784
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.fastram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.memory.json",
+          "sha256": "66C5931D7024D872FDA3A624F5B5905944F1D4E7726EDE4C69049A66E1F25B51",
+          "bytes": 42
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.fastram",
+          "sha256": "959687E99356B4BAD4BD47CA507AEC53486EA755E4214E4331C0E3C301CFA0F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.json",
+          "sha256": "F11C0C97F31887F26781F9EE8437164E3526906AB9E0CCD98D25585AB962887B",
+          "bytes": 1096
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.memory.json",
+          "sha256": "D9A9B8334727438C159B44F16F658C8A78932DAF5982FB9C98576CBD5209C55B",
+          "bytes": 45
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512/frame-001200.slowram",
+          "sha256": "31AFBAC98E1B42F452B44C2C9356B1A8A203B4646028CDE4722AA88AFC628104",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 524288,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 2621440,
+            "free": 524256,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68ec020",
+      "kib": 1024,
+      "name": "final-boot-68ec020-1024",
+      "frames": 1200,
+      "cycle": 170524664,
+      "pc": "00FE863C",
+      "cpuFingerprint": "0xA78BB6F84E596DD5",
+      "hardwareFingerprint": "0x5664CE20C507097B",
+      "outputFingerprint": "0xE25479AE4C5A3F9D",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024.log",
+        "sha256": "2404A1DCDA549C9CC1B34F220611361395779445B9AB086073FF48A2EE20C4B9",
+        "bytes": 2783
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.fastram",
+          "sha256": "30E14955EBF1352266DC2FF8067E68104607E750ABB9D3B36582B8AF909FCB58",
+          "bytes": 1048576
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.memory.json",
+          "sha256": "2A5D64C0ECF4DD60291E5663CA8C7D87E42FDE285732623B9D247768CAB73FE3",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.fastram",
+          "sha256": "6B7CC25F8C0A674AFAF078BBCB915F12F8EFEFCC318AC11B306CB61D0DFCD15E",
+          "bytes": 1048576
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.json",
+          "sha256": "3765D1E799C7CC4F24BDB0099870EDDA4F0FD79227A1049EB1C16BE74D931146",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.memory.json",
+          "sha256": "7A0DA185A6F8D48D2186860E9609104EC22E372857A1D6DAD27A5FD8E896BD04",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024/frame-001200.slowram",
+          "sha256": "56B53AB99D3738BBB69227CF2C04FD4BD1DC5B6E35BAACAE97992A6418C68A24",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 1048576,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 3145728,
+            "free": 1048544,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68ec020",
+      "kib": 2048,
+      "name": "final-boot-68ec020-2048",
+      "frames": 1200,
+      "cycle": 170524663,
+      "pc": "00FE9C48",
+      "cpuFingerprint": "0xF3AE8328D0E1CA8F",
+      "hardwareFingerprint": "0x0314A1748D61EE19",
+      "outputFingerprint": "0xA5FBF2B0D3782AED",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048.log",
+        "sha256": "FF5EC00E833DE5A4249541211721C14E47A9A113DBAE0C89D4378C175B1595DC",
+        "bytes": 2783
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.fastram",
+          "sha256": "5647F05EC18958947D32874EEB788FA396A05D0BAB7C1B71F112CEB7E9B31EEE",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.memory.json",
+          "sha256": "211986907ABC34B2E581124C883A593C894BA06FFD0A950297CB568DB9AD3C06",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.fastram",
+          "sha256": "DD74CE3BDE4B44703E6DA1928F4B982EDFCA523DCB218769CBD749314A0D527F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.json",
+          "sha256": "08EA8B667F57FDB1FEB3EDFCC552A73C58556BE2E52D785F2F17AAC77B91EE18",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048/frame-001200.slowram",
+          "sha256": "52A96739E5C9DCD0980F6C64A4CBED661772D6C7761D061EA547CF0CC303F5D9",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 2097152,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 4194304,
+            "free": 2097120,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68ec020",
+      "kib": 4096,
+      "name": "final-boot-68ec020-4096",
+      "frames": 1200,
+      "cycle": 170524664,
+      "pc": "00FE863C",
+      "cpuFingerprint": "0xA78BB6F84E596DD5",
+      "hardwareFingerprint": "0x5664CE20C507097B",
+      "outputFingerprint": "0xE25479AE4C5A3F9D",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096.log",
+        "sha256": "11072CC32D10457FBEBD93A60DFB23DFED0A58A8CD50324B300683209500D417",
+        "bytes": 2783
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.fastram",
+          "sha256": "BB9F8DF61474D25E71FA00722318CD387396CA1736605E1248821CC0DE3D3AF8",
+          "bytes": 4194304
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.memory.json",
+          "sha256": "9AE4FF15B56248192FC286780786D7F12A7628CF17ACF316F43D71222D9CAAF8",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.fastram",
+          "sha256": "6A73DEF4C9C88CACE52916842188C5DCAFDE437E28077C97F307980A0BA4D2EE",
+          "bytes": 4194304
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.json",
+          "sha256": "3765D1E799C7CC4F24BDB0099870EDDA4F0FD79227A1049EB1C16BE74D931146",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.memory.json",
+          "sha256": "388E674B323578762075FDBFF9177F706315A4D9171530D5C177419B3188AB2E",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096/frame-001200.slowram",
+          "sha256": "1966BAF8695E18F15E9E8E117C60DD8CCF259CDC3DBE34425758A446EB564C03",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 4194304,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 6291456,
+            "free": 4194272,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    },
+    {
+      "model": "68ec020",
+      "kib": 8192,
+      "name": "final-boot-68ec020-8192",
+      "frames": 1200,
+      "cycle": 170524674,
+      "pc": "00FE863C",
+      "cpuFingerprint": "0x8162DC6220EEF92F",
+      "hardwareFingerprint": "0xC2765AD707E56657",
+      "outputFingerprint": "0x5DB7DD586A0AECCB",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192.log",
+        "sha256": "47E57C1C9DB62D31518D636A8014A46E2656D4C9B6D68554A1A0A37170ECDE65",
+        "bytes": 2783
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.fastram",
+          "sha256": "2DAEB1F36095B44B318410B3F4E8B5D989DCC7BB023D1426C492DAB0A3053E74",
+          "bytes": 8388608
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.json",
+          "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+          "bytes": 1087
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.memory.json",
+          "sha256": "395BA55BC9F4A917BFFFA74EA1FF2AC08F8AA6CCF8C02C57F84DCCD69C3F5F43",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.bmp",
+          "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.chipram",
+          "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.fastram",
+          "sha256": "47FAF16F929A8CFE7EFA94EB9174E4795F16BE01C147C9EA9B7029CD3C906151",
+          "bytes": 8388608
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.json",
+          "sha256": "8641D603F80644B7C89C3E4B70BBE5ACA619FD683A298C476049279721BABB81",
+          "bytes": 1095
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.memory.json",
+          "sha256": "F6FA5D42806D51695D6499FC30F90A49813359609FE4EBA69FA2710A0785C528",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192/frame-001200.slowram",
+          "sha256": "65430FB08B2897CCDA793CF346205835B0BC8C00CB845E08749DB27E9E1D264F",
+          "bytes": 524288
+        }
+      ],
+      "guestMemory": {
+        "frame": 1200,
+        "execBase": 12583542,
+        "base": 2097152,
+        "bytes": 8388608,
+        "headers": [
+          {
+            "header": 12584130,
+            "attributes": 5,
+            "lower": 12584168,
+            "upper": 13101056,
+            "free": 498640,
+            "chunks": 2
+          },
+          {
+            "header": 2097152,
+            "attributes": 5,
+            "lower": 2097184,
+            "upper": 10485760,
+            "free": 8388576,
+            "chunks": 1
+          },
+          {
+            "header": 1024,
+            "attributes": 3,
+            "lower": 1056,
+            "upper": 524288,
+            "free": 476944,
+            "chunks": 1
+          }
+        ],
+        "fastMemoryRegistered": true,
+        "freeListsConsistent": true
+      }
+    }
+  ],
+  "scalarBoot": {
+    "name": "final-boot-68020-8192-scalar",
+    "frames": 1200,
+    "cycle": 170524674,
+    "pc": "00FE863C",
+    "cpuFingerprint": "0x8162DC6220EEF92F",
+    "hardwareFingerprint": "0xC2765AD707E56657",
+    "outputFingerprint": "0x5DB7DD586A0AECCB",
+    "log": {
+      "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar.log",
+      "sha256": "A4A1FB18E7422FC14BA12BE23B3868F8B3E5F40A39C7E571BD299554E53FC1F6",
+      "bytes": 2767
+    },
+    "captures": [
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.bmp",
+        "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.chipram",
+        "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.fastram",
+        "sha256": "2DAEB1F36095B44B318410B3F4E8B5D989DCC7BB023D1426C492DAB0A3053E74",
+        "bytes": 8388608
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.json",
+        "sha256": "C591E40B260192C2993789B9664918547CA4B2E8E02E6B4953EF33BA3AC5BF58",
+        "bytes": 1087
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.memory.json",
+        "sha256": "395BA55BC9F4A917BFFFA74EA1FF2AC08F8AA6CCF8C02C57F84DCCD69C3F5F43",
+        "bytes": 43
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.pcm",
+        "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+        "bytes": 3844
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-000001.slowram",
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.bmp",
+        "sha256": "8E524170C5F074DC04C55CEB3C4F87D24B217E10BDBD9AC4A8B5F66C31D8D5A7",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.chipram",
+        "sha256": "8FD2DED2003BFE2B2B6C42AC86294CB719007981AE69104AB21A555E7DA8DA75",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.fastram",
+        "sha256": "47FAF16F929A8CFE7EFA94EB9174E4795F16BE01C147C9EA9B7029CD3C906151",
+        "bytes": 8388608
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.json",
+        "sha256": "8641D603F80644B7C89C3E4B70BBE5ACA619FD683A298C476049279721BABB81",
+        "bytes": 1095
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.memory.json",
+        "sha256": "F6FA5D42806D51695D6499FC30F90A49813359609FE4EBA69FA2710A0785C528",
+        "bytes": 46
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.pcm",
+        "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+        "bytes": 3848
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar/frame-001200.slowram",
+        "sha256": "65430FB08B2897CCDA793CF346205835B0BC8C00CB845E08749DB27E9E1D264F",
+        "bytes": 524288
+      }
+    ]
+  },
+  "lotusRuns": [
+    {
+      "name": "lotus-68000-0",
+      "frames": 18000,
+      "cycle": 2557703978,
+      "pc": "0007DA66",
+      "cpuFingerprint": "0x5F5BEE5D7DFD194F",
+      "hardwareFingerprint": "0x9C79BFD36438BAD4",
+      "outputFingerprint": "0xDB03B181E11EBD9C",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0.log",
+        "sha256": "161BCBE62F600FCF520008981F7791A3F1501CA2372DFB38DF84091F4C74339F",
+        "bytes": 21108
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-000001.json",
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-001000.bmp",
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-001000.chipram",
+          "sha256": "D0C4329E0F0D4D4FC8CC6A7BCA624D6A0812D8858FAB191DE5D247D87D37028E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-001000.json",
+          "sha256": "E467AF20461D6E08F1AB85FA0F7236EE87558B399DA542ABD9C582271CC2764A",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-001000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-001000.slowram",
+          "sha256": "847FB39646DF694C16A0032E21B9AE335D9331BF1E2270E0F457CFBE084EAFCD",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-002000.bmp",
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-002000.chipram",
+          "sha256": "FBF8C93266E1A0FB998AEA98FEE99C92051A4D205B19C9594C1FF5203AC8B0A3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-002000.json",
+          "sha256": "16491DFCA5D5D8431B9A2CBD69EEA037B16A6865744B232C61942ACED36AB163",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-002000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-002000.slowram",
+          "sha256": "ED87B742F0C2ACE0C272EA47488F66117613F3F317DEB038CA92AD572D0A826B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-003000.bmp",
+          "sha256": "C18747180967EA5E9B18A4830F516467D49B26D3FCF7F43FD3AB577E014266D6",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-003000.chipram",
+          "sha256": "572228E1577CB88CDE3CAC2A308040F3E922167232DDA95B0E451770D76EA214",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-003000.json",
+          "sha256": "D428BC7E2DD46837C5C02428E1F168EF5E3AFC6319DAE9677A5FC510485B56E7",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-003000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-003000.slowram",
+          "sha256": "1FB566CC9F7E69AB4C404E9BCD76640F6299D1071231130A9DF9309BC723FA8F",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-004000.bmp",
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-004000.chipram",
+          "sha256": "3866B352BB30566F6EB5967D0A1BF0F4B9A2B10D2BD4BF7D0E58BB39116C4C78",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-004000.json",
+          "sha256": "ACEB705B3F8CF877AEC031D143F28F2FE1C32200CDC207E31692B30004F78B0E",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-004000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-004000.slowram",
+          "sha256": "A6E98153423B748EA088342825CC8C5662C22AB0D518D5DE194054CFCF2DA23D",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-005000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-005000.chipram",
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-005000.json",
+          "sha256": "53E79C8828A2258D386D249F3BB0380EC4D90A8147140A535ABA118C49E5B2D1",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-005000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-005000.slowram",
+          "sha256": "AAF8AB330670E7CF2CE0282FC328DE32E63A062F7E6225254F685FFA0D0913EF",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-006000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-006000.chipram",
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-006000.json",
+          "sha256": "79BFF812EC675A4708C8E3CC9158A473C1383908964A6340DF910939BCF586F3",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-006000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-006000.slowram",
+          "sha256": "A8605DE9A05ED40FF4F4963C3117ECA5ED8FF1A4942AF2C93729B6E6339604D4",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-007000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-007000.chipram",
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-007000.json",
+          "sha256": "1CFB9D1FA5A6DD6F4CB4C7FFCA5E1EEC4E7000B8CFC31BDF7C00649B594CF38F",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-007000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-007000.slowram",
+          "sha256": "2AB64EC9398B0B0898047A64987ACF87CB6DA131596337F20AC9B9BBAC3ECE85",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-008000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-008000.chipram",
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-008000.json",
+          "sha256": "606B319D6E7D483B4F07886DBE23B3A6D641B3A4D44D95189673E631259D25AD",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-008000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-008000.slowram",
+          "sha256": "17C4DA30AFBAF37649B2FB15457F166BC9B7A55791DB7D832AE9DCBEBDADDF97",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-009000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-009000.chipram",
+          "sha256": "8A507F0DF6F71A7BF8D1932CD199F1F2A651AD731B66D2673A823B1574C53679",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-009000.json",
+          "sha256": "5E74B7B4F737D387E34C64F07A917CB324FCD591A5F63B8AD2174A3B1687895A",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-009000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-009000.slowram",
+          "sha256": "BE9E7BA7C6B60D8CC410DCDC2DC8B7A5795939A374722C4A313A74D510794D52",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-010000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-010000.chipram",
+          "sha256": "2263D2E2E7E7B745C79BE0706A09BD0F6B915881DED9B4AFC46896D6562BEF09",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-010000.json",
+          "sha256": "D57C49B5BAB63606AD1CC379090C70CCE69700DAB0CA8B2946C0CFFE6CE73B8D",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-010000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-010000.slowram",
+          "sha256": "F28EB4C96B569AF8EB32391D3CB9274F8AC3B3113C4A31AF4B1111A2D7AFF241",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-011000.bmp",
+          "sha256": "CECECC3719C981239730595E51F2D5D615336CD2E96210762168389CB53FDFC4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-011000.chipram",
+          "sha256": "762BE46860F36FFDD9583B8993A4980BE61182C1A8A8FE0D3A78680A7D880E2B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-011000.json",
+          "sha256": "0075DFF53282E04D74CBFB373DDFE9CB90F220C3D79C21835C93B7975030BABF",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-011000.pcm",
+          "sha256": "B514168A155E6A289B57F6C12DDC51C22C18F0FF1DEB6F576A22FC3FB0AA2216",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-011000.slowram",
+          "sha256": "CBBDB1B315C1D67221E19B098879E68C2506D237C1F17933B8BA930B3D34D7CE",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-012000.bmp",
+          "sha256": "500BE9A47C3457D4C5C69F85ECD40403EA95991CE0CB2DD404B4D298DA141DFA",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-012000.chipram",
+          "sha256": "BAA1FA5A955D89B9228EFEDFB2AFBE785DA7BEA91BC888B2AFEDA284D63F24C7",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-012000.json",
+          "sha256": "3188137C936DCF4D68E0C00CEDE29479F6CBC1EF1CF21688E4378EC00A38D8FD",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-012000.pcm",
+          "sha256": "FFD1B0ACC2959170F1C64300962AFFEBA4A92421325B981CB9CD87AE57B561BE",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-012000.slowram",
+          "sha256": "AE5961AE8A92F465A30BFF05AAF6BE69212F721206D05B62DCBDD7257E9F1E21",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-013000.bmp",
+          "sha256": "109383F6780EFF76BBD875A26154C4F155CB315B1391C1B5703AD7F8ADB432BC",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-013000.chipram",
+          "sha256": "C0A0856DF414AD8A597FD4F2FCC950008E6CA1BCEC0BAA922E2839D5C8F70A25",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-013000.json",
+          "sha256": "E22CDFBE9E28BF12C796E77737877A4A21BF75E76A530C8E8CAFF635B797FD1D",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-013000.pcm",
+          "sha256": "43469F96CCA0164F33B2AF841664C37D38BB69D28309B380052FEB7D5DE3A798",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-013000.slowram",
+          "sha256": "FF087D19BAE59C766BBCA452FC2E0DAE7F1C6F5D0AB4E5C8BE82D0D97DC609A9",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-014000.bmp",
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-014000.chipram",
+          "sha256": "FDBBF4643521FAFA5F95BA9FC2E2A1B717DF68B36F0B508BF639CA6A3FEDD6A9",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-014000.json",
+          "sha256": "3F6C153D8A92EA32701BBFCFA86603C9426F8024699618F1BA768D93B6C555AC",
+          "bytes": 1077
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-014000.pcm",
+          "sha256": "1452F1C22534DFA4D45AE89E0038166C20C0BF3780665FAFB7A5859C5E922E54",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-014000.slowram",
+          "sha256": "6A726810AAFB2F13548CF70888C97F476B8BBB8B65E17E223847F521E58F7A49",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-015000.bmp",
+          "sha256": "881B09173100B6119585B0C57C8B06946849D237333814C2A35E1639D864F4D7",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-015000.chipram",
+          "sha256": "61AB51CEEF3A1BCE69AF8F0A6D524C417031A7FF557A322A022B8725CA2EC68D",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-015000.json",
+          "sha256": "79DBC05EC453352C0DD36B30867283EBB2A471A47CD7DB7885C0749CBF202F94",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-015000.pcm",
+          "sha256": "8CB8A662AAA9344A826EA4F80FFEB64FE9F2B9C8E2D25CDA967BC7EC7FB9D745",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-015000.slowram",
+          "sha256": "12C2F7794C8D924AC51C5A0315221DE8CA0656B91D1C7A6136B9C195E85047CA",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-016000.bmp",
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-016000.chipram",
+          "sha256": "516169997A28E25D702382C1FD211E173EC67840E3772E4344C01B1DAD436942",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-016000.json",
+          "sha256": "BEA23D2923F762A03C605B8C2810D2CDD59BF9497FD4C4377E7D723E5948F1B5",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-016000.pcm",
+          "sha256": "28BF33799CD09941B66558FA55F5E4A88B3E43BBA25234D5121E45E505BD1FAA",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-016000.slowram",
+          "sha256": "B7CAEB5B77D59FA87D2B9B8C6CBE2AF02AAACF447F8DCAF3661562610EBBA5F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-017000.bmp",
+          "sha256": "64E2D3F0C539A9D162463914FE2AD05026FF5760466B3DD57966673D5AB0637A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-017000.chipram",
+          "sha256": "6285F852578E86B396AFA231BA09A7E39F650EE2D1EA088079BCB4675A734D91",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-017000.json",
+          "sha256": "016492FB86F3743B3267C04A06DFE9C4DFBFDCA7BE43B44CE209BE2BACBBA020",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-017000.pcm",
+          "sha256": "16F16FC778F794ACB1E0A16CB6694232787496EA45F73A8E28F4AC5CEB68A2D4",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-017000.slowram",
+          "sha256": "7A9423CB0ED2E86F381A7473EB25A017A0809BB1F314CD8DBCBF24BFBBB594B5",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-018000.bmp",
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-018000.chipram",
+          "sha256": "09CDF66F606DE7D75A2E64B7050003CC9FE6271808EF2A0E3CA81CC7BCFCE121",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-018000.json",
+          "sha256": "3ED7A7CE63FF7F8DBC8B128818F5E8C87EB064093CB36590F479E474920E25D0",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-018000.pcm",
+          "sha256": "C6B06E2F8EFDE366523FE14E1FC532262CA467C677FB7DC914B8362C2A1225F7",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-0/frame-018000.slowram",
+          "sha256": "7C4A0DC6555C5771EFDDB741377A138C75A83DFFD1AF5F066D7FF3723B4F6849",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "name": "lotus-68000-2048",
+      "frames": 18000,
+      "cycle": 2557703828,
+      "pc": "0006EDB0",
+      "cpuFingerprint": "0xCA94FA858D91CD51",
+      "hardwareFingerprint": "0x008A3EE54C7ABA5B",
+      "outputFingerprint": "0x0CB430DACAC1586C",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048.log",
+        "sha256": "718A2D98C2E963FB1B0206BCC7A5AF75AFBD36E6CA4A81A0E98934873E027486",
+        "bytes": 21157
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.fastram",
+          "sha256": "5647F05EC18958947D32874EEB788FA396A05D0BAB7C1B71F112CEB7E9B31EEE",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.json",
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.memory.json",
+          "sha256": "211986907ABC34B2E581124C883A593C894BA06FFD0A950297CB568DB9AD3C06",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.bmp",
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.chipram",
+          "sha256": "B2750A23C8F33C26E84757C200A1498CF17116D7A58D334B839B77805F5AF06B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.fastram",
+          "sha256": "18C1C65B2CC43672CFB5ED580B4F6A462454571D1A9A8FA66F27E858F82BD331",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.json",
+          "sha256": "60675A8B56AE4E3695E13F68B6DBBCFC819FE04D3DB9A3AA5346ECF21B93CF98",
+          "bytes": 1068
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-001000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.bmp",
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.chipram",
+          "sha256": "97C2A4BC212F398B8B873EDA2121551FFD7CB4BBBA82A393E8AC9AD5529B09F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.fastram",
+          "sha256": "BAE69C9D26CAE2046ACC3E1D523BE7BBDEC16887E9C0E23CCFFE658ECB4F997D",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.json",
+          "sha256": "C70AFEDD5BDD07E7C805BB215B1215B2B5093124948D3FCD8DAC20A655FA470F",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-002000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.bmp",
+          "sha256": "206AD7451D58D29AF5ACF8F58442B849DBE8C1BA52C55DE467B57A7A2FDADB17",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.chipram",
+          "sha256": "591896647C2E9B8CED43FF06C46FFE867526174FE5CEA17ADC7494713152794D",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.fastram",
+          "sha256": "B45A3010366FCC1E437A32C07044D3DF09B37BCA93231932EE68D445DDC4AADA",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.json",
+          "sha256": "029C14115A8337E4504344135E8F5CC96ED4F7277B281483CD9F2F3EE98250FC",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-003000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.bmp",
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.chipram",
+          "sha256": "0D159FE163114212235CDFBA52C0EB644A0ABFB984812DD3AC183A03A1339839",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.fastram",
+          "sha256": "A6C69E079AF1ED783F499424961FBFC1DC7DCFD3F875A3CBD64109049125AED1",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.json",
+          "sha256": "EB575EFFD4E96A56A6837E304E42D203E1589995D21D06AB782CAE2F2EA0A333",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-004000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.chipram",
+          "sha256": "DF38734B793DC25AB44DF530FF86B9B04915B69C7F44A33B101D12D9231E3AD5",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.fastram",
+          "sha256": "6217AAFD282BCB09045E7EA832407AEF5F0170F5E733A716F1016BC7F3366DEA",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.json",
+          "sha256": "F3BE51A08E6EC121FF893BC01EF850A7AAF9E8222A41387AAD450A746636B970",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-005000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.chipram",
+          "sha256": "C3BDEBB09628AE0C76B8BCFB0738CBC4DAE9E1D62ECCC961CEC859A46B41D5ED",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.fastram",
+          "sha256": "D5D76B75F33BE56C93FE66CC5350E2052FEDF0E9B36970930F394F3789FA6C1A",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.json",
+          "sha256": "69D9C45B69814C41A4BF99C03B4528A3CD17F5DB78BEC04CEE4B5200F3AB6040",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-006000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.bmp",
+          "sha256": "CECECC3719C981239730595E51F2D5D615336CD2E96210762168389CB53FDFC4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.chipram",
+          "sha256": "F6DD65B3E486C4F5B4D658F34CF34F7A32CD23FFD2E4AE6F389CEF4537A2F378",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.fastram",
+          "sha256": "70C3E6D8B2125A154CAB9FB3ED8B8A9DF8E24776C8C084169445D09D4A96CB29",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.json",
+          "sha256": "58232103357969775104331B3B33CD3015E64DBB0A3D3AE40FE01BBDEB5E88F8",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.pcm",
+          "sha256": "55262022F5F18B84217B71C0F74D3E60F3748B35C71EB2DE8FF9493CF41359B0",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-007000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.bmp",
+          "sha256": "500BE9A47C3457D4C5C69F85ECD40403EA95991CE0CB2DD404B4D298DA141DFA",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.chipram",
+          "sha256": "09ED6D5CFFC120D5C94F0F24F7A5DD2FAB50668BE22045FF14C0AFE371C24FB0",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.fastram",
+          "sha256": "571461E3173DEA1167A2C888E3CB221C039A4E62CD79043223B867CB5EDE04D3",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.json",
+          "sha256": "13128D40F80A7E8FD19C7882D7A4FA51501141AAD257D136A5D8C2998BAD31B7",
+          "bytes": 1073
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.pcm",
+          "sha256": "D27059D04113447A410E8770A2EF470F1A0F2E4E7E9560BEBC14C1DE63A2A684",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-008000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.bmp",
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.chipram",
+          "sha256": "B78E60EC1A7C841E384C1C035B7DB2EE36A288E89DBFD069DA140BF988202C57",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.fastram",
+          "sha256": "67B80EC1D85BAA71BCB04CD50F8D486B480997313710EAF4BB0F727CD144CF74",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.json",
+          "sha256": "7742E675A2C7F2CF22129DB0B6602F4C1AD672A5A4A055757701ED2705F25977",
+          "bytes": 1075
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.pcm",
+          "sha256": "ED611AA35BFAE735E6A09894B55FB091BF2F366380BA9CD3A8B2508B6618BA90",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-009000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.bmp",
+          "sha256": "2BD46DAE52E20A1A892FBBE3C6BF39C6B55904AEBF164CFFD31B499CB6BCEFC2",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.chipram",
+          "sha256": "EF5C400858BFA76B1581E839D98F4890BFD70D48694EE2AC0437EEF9D25B7548",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.fastram",
+          "sha256": "AD341EA5B7B20BFCD8BD880951483F8266268CCF0BAFCB66C410D3C210E30E1F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.json",
+          "sha256": "2E3C2948EB107D5E47B95A984E8AD7D784A21C5997DFFEA3CAE8465118766A11",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.pcm",
+          "sha256": "B6D31687E321B98DE84DE1C268BFB8F39AC9645204613180589726B22E63C42C",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-010000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.chipram",
+          "sha256": "C435954A31D438D5FDB35C78D26D767F7A9966401B71665561D9746E89CBD704",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.fastram",
+          "sha256": "334BBACB6668C2AB44F2E38BDEC823BE3DCA1140BEAF973292FE4AB8B4F0FABD",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.json",
+          "sha256": "B56A473E931D1BABFC1792850FDE1133523B1874261BD0653A054E4046CD6CBA",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.pcm",
+          "sha256": "7712FAE88544C11A52A0F71C60C00F411C1D01491249FD6721EE42BF7F875282",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-011000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.chipram",
+          "sha256": "06C722668DA0192487706D726A31D714006CA9A29AF46BD3FBD7B656F6EF7B42",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.fastram",
+          "sha256": "AD74EDEFFAA145CA02BB242A6C45C20EFFFFB8F4B23A109383C40BC1602B9374",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.json",
+          "sha256": "A8A373F7B072C16D4DDF38B226B83051CCCB005E8B21AB7DA200935C50D31E98",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.pcm",
+          "sha256": "99E978527F7A22A7B782E6121D99B6E9FE7928397376B6E33F6E425C0D1841F2",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-012000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.chipram",
+          "sha256": "71566D552E297A46B637AF9F66961C084EA80A15C926627C82D3AAA16EC30E3B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.fastram",
+          "sha256": "BE3CAF16CFE1DB8E3E42FA97BBB4613793012C5128EDC518E4371BE03C977137",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.json",
+          "sha256": "A04C4E1036B56469D0AB149CD9598D3A5DB2C785F5499D4A3A8BCE27AC5E31D4",
+          "bytes": 1106
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.pcm",
+          "sha256": "30860B46FD0353AC02FC2578789417A97594D08DBA7BB40ADDB08B7965ED51A1",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-013000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.bmp",
+          "sha256": "426509C6267096812AB4CC3D4BC323D983A75F7BC5CF1C17A54286CEF1213D69",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.chipram",
+          "sha256": "867977EDCAFCEE446A12FED86E8B1D8091FF34CCDBB58ED48804D951E3D25C5F",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.fastram",
+          "sha256": "928A14072F948C586331094C34581E643DF279185D08BCFA4FABE91FEF24C06E",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.json",
+          "sha256": "B3608FECF64BC5386205626910E5AC4A4127B6E75810D4394CEEE84F17D8EFB2",
+          "bytes": 1100
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.pcm",
+          "sha256": "93D0D47CBEC771B61F99E02FD4BA57B4C2CDC4AE495809A7A30EC66AE55A41D9",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-014000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.bmp",
+          "sha256": "CDC0E7A05B9CDBFCA6855AEB9EE379C5E767B8807856B5A6F529031ABC565255",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.chipram",
+          "sha256": "86C96C4F6910CAFFA0FE0C2AF89FB11AFC725540E97EDA9BB404752E381A87C8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.fastram",
+          "sha256": "0943C5E600B55D31AE1C2D42DF54EA0867D3A12A963EF1B1CD7127E101C612C0",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.json",
+          "sha256": "409FF32E7FC55C17643012F445C3C00B0078A528E34D10F40BA970CDA03EEB06",
+          "bytes": 1099
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.pcm",
+          "sha256": "A9EB7DC0C4BBEDE621633D34AF81EE68E7BACB2FD440F20AE9D2825532FD7F9D",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-015000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.bmp",
+          "sha256": "E2369C0842A946640DD223EF766676AAC5634FA7FBC856704653DE9496FFF36D",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.chipram",
+          "sha256": "1785C0E3C8029E45A5B0D6B1A3989CE68E22516371A8C2ECA04CC389F3E5E46F",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.fastram",
+          "sha256": "75A071265C34FE162FAF26F9959B2B0519CC49ACED570B88DE1BE089770FA7FD",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.json",
+          "sha256": "8ED7DB70502BF223E3063C7A94EA6FDC85B4FE8DACE54699FE15BECE1FB3156A",
+          "bytes": 1099
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.pcm",
+          "sha256": "35617B67A9D1DDE33BE45D60D746E391792D9CB3EEE60D514A0F8AD6EBB0B870",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-016000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.bmp",
+          "sha256": "AD620686FF2EE3F6317607211FD448B8BF7AA36A1CC078D55B6DF9FB6F9F8354",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.chipram",
+          "sha256": "3C25D4551703E16FC835C2572749D1EF1F421985E65612DB82F0323725B2A19B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.fastram",
+          "sha256": "75E6C771CC38A5F87246CDD9C734EB69B46D155D9F3252CD74231EB4C7AAD701",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.json",
+          "sha256": "AB793B7BF664DB6C30073788137CE629AEA063755ED32FB8728AFB698B606A3E",
+          "bytes": 1099
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.pcm",
+          "sha256": "E2B88A195B1D02A0BE82B7257985AFD7BD38CAAB02E001767C7AFA3C0AB3ED6E",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-017000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.bmp",
+          "sha256": "80B707C305206E45A065605B170325F70138A9925F40C87AF61E04DD80B6A153",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.chipram",
+          "sha256": "F19CD1CABFCA27D4095A49A82E845E37D555D92FA1131F49E0E6B0FEAFB75227",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.fastram",
+          "sha256": "FDBA6B15E1505957E1CC3B9781489B9EF104A84BD8E328F22038DF4D1E161BAF",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.json",
+          "sha256": "28503AD1E5DED03F054E5D7D273A45E891CFD62B37B7D9252BD7F9976C85EBC7",
+          "bytes": 1099
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.pcm",
+          "sha256": "64F3DFE331BD5938D309015541EA01B02F74347FAC2817921B3816D124036B4F",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68000-2048/frame-018000.slowram",
+          "sha256": "5F14CFD904A83D7394B4EF40B0A425A04CD2C1C29B4F9091CE83F4AC4334A3E8",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "name": "lotus-68020-0",
+      "frames": 18000,
+      "cycle": 2557838300,
+      "pc": "0006EDA4",
+      "cpuFingerprint": "0x49D607FF8E9FA8DD",
+      "hardwareFingerprint": "0x52970C8E596514D2",
+      "outputFingerprint": "0x257DA82648A40612",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0.log",
+        "sha256": "A7BB4AE8E48D7FD61C9B8B16CE37B8361BF56D2BE0F8A43801B771FB1536B88D",
+        "bytes": 21398
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-000001.json",
+          "sha256": "F6A4649D4A2464CE7DC9532DD636B4B2CF550BF554013B88A02EDF8E711E9F95",
+          "bytes": 1086
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-001000.bmp",
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-001000.chipram",
+          "sha256": "F57038333C40266EC7F7EF89A17BE6D737870E9AFE84432852474A3E4EA105D9",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-001000.json",
+          "sha256": "31B7CCDAF01581FEB55A850332855250A8E44A998EABF3A430DFC1A13F61FC87",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-001000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-001000.slowram",
+          "sha256": "DA0A15E3F4922A3B001A97587986F927D7E651AD83403D04C95E03D17DBEF113",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-002000.bmp",
+          "sha256": "F3B2B206A5D9CF94B5B87EFE3993C971E410F966028DA8EC988009C91FF31FC6",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-002000.chipram",
+          "sha256": "83B3D813C5A6684113A332C8EB0B21B9FF00C2D997DB0CF4F6338D1830E33DF8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-002000.json",
+          "sha256": "429483C72AA84D06E462BE12E7C2A23AA198BEE6833B42E8D86E5B45992D3313",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-002000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-002000.slowram",
+          "sha256": "3F301DFC4C16A00090FA053B89B7368F6A5B10256957B7AD28BC7A455535FD6B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-003000.bmp",
+          "sha256": "F3B2B206A5D9CF94B5B87EFE3993C971E410F966028DA8EC988009C91FF31FC6",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-003000.chipram",
+          "sha256": "83B3D813C5A6684113A332C8EB0B21B9FF00C2D997DB0CF4F6338D1830E33DF8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-003000.json",
+          "sha256": "A734703D650B8AF835036C30B1898F609E7C28CEF43B8F55523B8CD5AA9DC137",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-003000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-003000.slowram",
+          "sha256": "C4ED21FAE025140A9ACEC5D1C8DB6E329C6A5653AE606190238F95DA72E163A0",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-004000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-004000.chipram",
+          "sha256": "F808EE4D3C1C5E9BB2913F50B0F059A9A7B605F494D79404BEA0CAD1B3F26FB3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-004000.json",
+          "sha256": "5DF0357FD12CE73B8949EF6D5383E587085C39B3E0B6E974C62F219617AF1812",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-004000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-004000.slowram",
+          "sha256": "73C6D331EE9FE94212840C35AE4C063C38F7D0ED006AA0A19063FAA8C3205934",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-005000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-005000.chipram",
+          "sha256": "F808EE4D3C1C5E9BB2913F50B0F059A9A7B605F494D79404BEA0CAD1B3F26FB3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-005000.json",
+          "sha256": "183A46471043ECA9D702083361D7892A93830BBC6B723010DB98975AB6C1197B",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-005000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-005000.slowram",
+          "sha256": "08EC054382EA3D278FE8B47FF9D579D46976E72D9A03CD7227E63731A04310BF",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-006000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-006000.chipram",
+          "sha256": "F808EE4D3C1C5E9BB2913F50B0F059A9A7B605F494D79404BEA0CAD1B3F26FB3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-006000.json",
+          "sha256": "2A30F71DEB34CA905C3244A5CF73E8B3F6CC6304FECAA1AFFF51D6F1C5C2B867",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-006000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-006000.slowram",
+          "sha256": "4B0FB953480FFA04A50E675CED47EEEE7440E242CB93FC62AE5AC8825CF852B6",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-007000.bmp",
+          "sha256": "CECECC3719C981239730595E51F2D5D615336CD2E96210762168389CB53FDFC4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-007000.chipram",
+          "sha256": "D619A532C5E5BE177337494A6AD811E25C0A230247B23AA0AA639A436218A557",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-007000.json",
+          "sha256": "CC26DACFE6FA4742D11C9ECA0220E09658F47D8C931F165A459861A4AB9B99D2",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-007000.pcm",
+          "sha256": "6C50386716DED7AC0BCE73144259482E587F6B59E80E517169BA9134C3448757",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-007000.slowram",
+          "sha256": "B3333D46BE8EC2450D57F76B2A0982D47D9038255558C454B3173C635B0BEB0E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-008000.bmp",
+          "sha256": "5ADB0109850ACAC9FBE036FFDC018C99B287EFA5A138C9E27C938DBB036CF23B",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-008000.chipram",
+          "sha256": "F5208496D8462EE7909F8276FEB342C3499DD07C2513A711C9ADDDFC0A40A8C8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-008000.json",
+          "sha256": "89CE395CB5B34D05947C6F9181F0EB1F5027C83447A568ACEBE7477A41A6D06C",
+          "bytes": 1073
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-008000.pcm",
+          "sha256": "D202A05089248890CDF66E9911369F0280E1FDDF6B3E5BFD5BECCE08BEFB13E1",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-008000.slowram",
+          "sha256": "EEE1903901D1561A7834EA49D3F510D21E6618D7244A99D73631707D16B37396",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-009000.bmp",
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-009000.chipram",
+          "sha256": "F00130DF323A0BCF1778FA28140A6BAD3CA53863417A7776FA269D1B93538220",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-009000.json",
+          "sha256": "347E82A4568F08E0A3A17599BDBABD2D4ED938E4421B218C4E51A321C8692CF4",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-009000.pcm",
+          "sha256": "FA124D54DE66E48BFC5A293015D2D51C31980C21CFDC57C4C1F4A2C1303650D0",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-009000.slowram",
+          "sha256": "F0CF61A9E00E5E595681FBD466C46BF8364CD07AAE36D54402910E52A1BB42B9",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-010000.bmp",
+          "sha256": "CFED7A358AA2656B5B1101CD9F482521FD040D65D734F0722CBCE91368C44F77",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-010000.chipram",
+          "sha256": "E7D61049449E94B3F2C04D8C4BCF73988036F195C99B597914D768C2184A78AC",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-010000.json",
+          "sha256": "4B0F6F0151136980E234C8EA872D9625D30D9A1B0490F437E319D2382F33774D",
+          "bytes": 1106
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-010000.pcm",
+          "sha256": "9ED5F52DC472355925BF4B8AA56836BB22E2E64073CB5D9640D37574CF3663C3",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-010000.slowram",
+          "sha256": "4668E7E6535FEBE0673154FDC9C5218CE35246575B18450CD33DF4BED80B35B0",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-011000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-011000.chipram",
+          "sha256": "4645C775CFCBF87E6AF0DA379EFC8C0224208A36FB4EC22A00E2C589DC4A39F1",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-011000.json",
+          "sha256": "7889C06B5C83DF6CDBEAED1272681A396942E1A9780EFD79FCDBFD757EA704B0",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-011000.pcm",
+          "sha256": "6DFC479DBE1178C8E5CF89A14B3FDD8B4AD7658D4DC71A5622104F77515DF34C",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-011000.slowram",
+          "sha256": "E475F08B7AB9F3FB227CC994DD73DA0E3391A61A05EA65C31EF53452A1D78C09",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-012000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-012000.chipram",
+          "sha256": "9920697FEB9FD9F5027F6B73364D8FA6B09675A89D0F6B7025D091A637FDAC8C",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-012000.json",
+          "sha256": "2E0B1AF2691D6368FC7FB8BB4DE903E8CA3AA685172E961BBE81DF44E07667AE",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-012000.pcm",
+          "sha256": "13F2BDFABC72C338A3D96220732E9E46D917435807A182F2F07C7FCD1E11F589",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-012000.slowram",
+          "sha256": "75074AF9BCEF2E5D864B72C513C701ECEC509A4BEA92BE393A4D708F941DBB92",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-013000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-013000.chipram",
+          "sha256": "FD1DC3F80353EF4E308D9067B81C58AEAE2AA588465D4F752D4101606C0B7E01",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-013000.json",
+          "sha256": "B8D92BB48463C96B5869505EE8754AA00EAB40CDBA124162540370330727AA90",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-013000.pcm",
+          "sha256": "CF2748940FBF6C9B329E9883C9FB7F1056143CE91B249F6C66D70F280C62B47D",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-013000.slowram",
+          "sha256": "3E021F11CCF0A09C47CBF27C9B1025AB2E498AEA6379C413F23EECCF5A42616C",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-014000.bmp",
+          "sha256": "AD620686FF2EE3F6317607211FD448B8BF7AA36A1CC078D55B6DF9FB6F9F8354",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-014000.chipram",
+          "sha256": "0B601127050F432776A78D41B8CF558998D0A9C9EE0100E3485CD1EFBE84BE4D",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-014000.json",
+          "sha256": "7D61C74A46893E41F96C970EF6B459CA66222C6248D197231FC557C1DBFFEA59",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-014000.pcm",
+          "sha256": "F2C47FE5480A8C984FF51810A84ACB13A1BE76F68A3F6AAFDD6C9A54317BBD77",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-014000.slowram",
+          "sha256": "755C38B1E661A5301F3AB2072D1CF16312E83BCE2F957DA86E82FF272E3A7ACD",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-015000.bmp",
+          "sha256": "80B707C305206E45A065605B170325F70138A9925F40C87AF61E04DD80B6A153",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-015000.chipram",
+          "sha256": "5AA42E1846D29E51EC769AAF91C6C97E9A89635EB7E06524DFCFDF5B9015693E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-015000.json",
+          "sha256": "3F9DC8E29D9E9453A4E8A1B0546C4ECBF3BB9561FF0782D95789A5A34D297046",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-015000.pcm",
+          "sha256": "4B79D939E6E7893F627838D5043EBE9FF1771B15E84B4538DD44C1170114E2F3",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-015000.slowram",
+          "sha256": "534E285871603639F973ED31D622F9A33B934C40D904E4AFC9BA91A649A39B5D",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-016000.bmp",
+          "sha256": "CEAB236E99C6936FD6EEF7CDEB989BCBEC164F43967F53D01DA8CCE74CDF6930",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-016000.chipram",
+          "sha256": "0CCD7B826594B76453DB38721E6B17609E42BD7AA24B603887F35ACCEBFDA1B6",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-016000.json",
+          "sha256": "AD6B921528337D15E85806914144E0101D32B293CBBE60205CF3016994B281B6",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-016000.pcm",
+          "sha256": "2443DD70907C1EC17947E64FEE0D430DB4639C19BABB6C95A2F2F9C90871B999",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-016000.slowram",
+          "sha256": "87F22C1DB2BFC53012760A7F0C20F5908CD795743D8FCA7FE026715FADC7EC2F",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-017000.bmp",
+          "sha256": "B59132855C27F9F267A5C569DE833B8F38780A7245D3306D29E3B2240303485F",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-017000.chipram",
+          "sha256": "788067128DE140ECB9AE104B498CF9864108D33F77C8B7B9EA6703AEFC78015B",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-017000.json",
+          "sha256": "D2013B38E20B38FC7615F20412BB251726416408232BFF71E9C0EA055E4E68A9",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-017000.pcm",
+          "sha256": "3D1F829A33C377902B1F78AD0D1DC1D9B8EE48E0C29600DC082DF3A0F1804652",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-017000.slowram",
+          "sha256": "A6A798442659EF87A1D8418051B802C178411634C6166AAE21748804D110800F",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-018000.bmp",
+          "sha256": "9122F6D5DDD3256808F2FAE830A434458789AD7860E7979FA155CE2FDDC12377",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-018000.chipram",
+          "sha256": "BF758E1577E3886EC106F159BE36D961F83056CCF0F620EBFF560DC4DD185206",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-018000.json",
+          "sha256": "EDF0BEFE13C5917816868271BE0CB0D6DF34B870892EC2052662A334607DF1A5",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-018000.pcm",
+          "sha256": "30F4EF4ABF938EAC00CF23EB6ADB1966FC83A2CE36FD0B3B3D6CEEE8430FCB05",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-0/frame-018000.slowram",
+          "sha256": "3867B9A4437B693C675B9CEE5858A367C2E00A0E1A7D9A1C6CEDD222B0783E56",
+          "bytes": 524288
+        }
+      ]
+    },
+    {
+      "name": "lotus-68020-2048",
+      "frames": 18000,
+      "cycle": 2557838276,
+      "pc": "00070CE8",
+      "cpuFingerprint": "0xBF2C56A0F764317B",
+      "hardwareFingerprint": "0x6843AB57B0FE7F59",
+      "outputFingerprint": "0xB4BD0373F34BB677",
+      "log": {
+        "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048.log",
+        "sha256": "D09A96BE86AEC670E95927FC6F095331B6EF562F33B254F86568E11E9A3BDA23",
+        "bytes": 21381
+      },
+      "captures": [
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.bmp",
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.chipram",
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.fastram",
+          "sha256": "5647F05EC18958947D32874EEB788FA396A05D0BAB7C1B71F112CEB7E9B31EEE",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.json",
+          "sha256": "F6A4649D4A2464CE7DC9532DD636B4B2CF550BF554013B88A02EDF8E711E9F95",
+          "bytes": 1086
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.memory.json",
+          "sha256": "211986907ABC34B2E581124C883A593C894BA06FFD0A950297CB568DB9AD3C06",
+          "bytes": 43
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-000001.slowram",
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.bmp",
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.chipram",
+          "sha256": "8BAD0324D213F73D67833469618498A7E0F57560C43EAC9863D3E9C1759C97DB",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.fastram",
+          "sha256": "ED80B17D75719A615D323A06F7A0D81438802CBA2BAE9E041A24D6FEED575D5C",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.json",
+          "sha256": "8B08FB7C02B366CDFA6F3F03D46EA6F0F749CAAFA3E26AE06125CF91FE69212C",
+          "bytes": 1071
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-001000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.bmp",
+          "sha256": "E3D46ACA8BF926735C74F52CD51A6E9979EDEBC74036B62921BA42D3BFD10304",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.chipram",
+          "sha256": "C3B7D9D808E430B0573F67CC12A9C810BB116D13B6D4AEFD47B3D69A58454340",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.fastram",
+          "sha256": "3A50901ED3A57285A1899747AB081A1C25F339C89FF7FFD955282AC38687AA0E",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.json",
+          "sha256": "477B0DB0FA71EE3B3EB7725AF2629A0F28794FFB7645A27A6ADEE372ACE28CDE",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-002000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.bmp",
+          "sha256": "E3D46ACA8BF926735C74F52CD51A6E9979EDEBC74036B62921BA42D3BFD10304",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.chipram",
+          "sha256": "C3B7D9D808E430B0573F67CC12A9C810BB116D13B6D4AEFD47B3D69A58454340",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.fastram",
+          "sha256": "309125EAD8D52A8BE5213DB92D6368A8DC28E1716E2633C0B45AFD594862BE82",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.json",
+          "sha256": "79F85B5B8B56FDE39082C45333CD262A753CA475E44287F994B44F24048B2BCA",
+          "bytes": 1070
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-003000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.chipram",
+          "sha256": "E432415BF0AB5F32BFD6E96C71C6E97D90B803B9B0BF7CD6A739656EFF0C9CCB",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.fastram",
+          "sha256": "EAEA0F50C755815E913DE74AD33BAB153AD77DA9D42380374B7451BC2F44A448",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.json",
+          "sha256": "D4C266FBE7A7F1A0D52656A56AC92CA497EACF45074DD1545308DA6088EBCC69",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-004000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.chipram",
+          "sha256": "E432415BF0AB5F32BFD6E96C71C6E97D90B803B9B0BF7CD6A739656EFF0C9CCB",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.fastram",
+          "sha256": "AE4E186335EA59A8DB2E9FE60C81E634A426F662C091F69B0E25E80430170B4F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.json",
+          "sha256": "9B15A8AA92C854D49D0422F5637F475F9A406F95FB3B555614A7507C0F65D569",
+          "bytes": 1104
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-005000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.chipram",
+          "sha256": "E432415BF0AB5F32BFD6E96C71C6E97D90B803B9B0BF7CD6A739656EFF0C9CCB",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.fastram",
+          "sha256": "643D2EEF34BEDFBAA34E67E5854B5C483DD27D6E8FF4EEBDBDACB4D9DC2B90B3",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.json",
+          "sha256": "DDEF9F9CF47B4A7B9F7EAFCA1A7E0AC3239A00C04E3DAB6830C5ACCD88ACAE24",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-006000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.chipram",
+          "sha256": "D44FFCD81316388BCA3F4979810710EC48145BE9D559866E66A969CC2E42E8F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.fastram",
+          "sha256": "18D9709C8CCD45623B74FB9DE1957AEE003EB11B43D976427B1F9F4EB86EF37F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.json",
+          "sha256": "D42264D3394A9B6D12B4C108D7DB28960CFE604B0C13236437FA8D4B2A20C23C",
+          "bytes": 1102
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.pcm",
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-007000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.bmp",
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.chipram",
+          "sha256": "D44FFCD81316388BCA3F4979810710EC48145BE9D559866E66A969CC2E42E8F2",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.fastram",
+          "sha256": "66970ED09844729C0150B4CF5E6348BF9B3FC9B1122F74148161E9CD8C70204F",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.json",
+          "sha256": "5292633A99761E1F7A9813DD8FB2AFD27C62122628F12C0076E63BDA17653FE7",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.pcm",
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-008000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.bmp",
+          "sha256": "CECECC3719C981239730595E51F2D5D615336CD2E96210762168389CB53FDFC4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.chipram",
+          "sha256": "F8F07C37F861FB8473B31A93A5FECE4457A118BCB783848EA754EA5516EB398A",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.fastram",
+          "sha256": "014C4CABDD776B1BDC587A03BFBB3EC386AF27398EBBC2A69CA8054D2E0F2033",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.json",
+          "sha256": "C8BD6DA7FBD09561B3ABB9264FF04066D867ECB8B947EF308AB9A7D8ED09AA4F",
+          "bytes": 1075
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.pcm",
+          "sha256": "F056916BC2E014664706958493A994739AD773911715E18A35C633F28500666B",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-009000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.bmp",
+          "sha256": "5ADB0109850ACAC9FBE036FFDC018C99B287EFA5A138C9E27C938DBB036CF23B",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.chipram",
+          "sha256": "5969A59634E4539BE14EE0F222430168D0B0F55CCA04E2C0E6BC2595CCA750F4",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.fastram",
+          "sha256": "755729D92C53DC3EE0B45C1CCC5F8DEE4EE1027C03BF5DE861E618F90F38C0A2",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.json",
+          "sha256": "A092DD26C03E153C4A91E900FDF018B99B9F3C8463552FC242F69966C0BFFB0F",
+          "bytes": 1076
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.pcm",
+          "sha256": "55DD9F9958C56EDAC23FECDC572CE25FDA5F69E6850B7DD0A008B5C4B6C62663",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-010000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.bmp",
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.chipram",
+          "sha256": "55D730572814049FF522E655B9592237D04C0951FFE6635F75D54FFAB5457AAB",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.fastram",
+          "sha256": "0632AEE8ED49DD0F827B6B21DE4F1CC9F2D9240624D896CF8CC5DF355CD1A5F4",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.json",
+          "sha256": "F93120F7FE13B31664261C74FF7CDA65934A2219900F44D914B232FAC217B8C7",
+          "bytes": 1077
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.pcm",
+          "sha256": "437D69B0E9E4781C8D51F350C1FBA9FC0FE6EBD8FB312DACAE3B022FEEB26FD2",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-011000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.bmp",
+          "sha256": "E26B3617C3C6A3125F41D6C922C93C62BBCD1110932EB0D7797721899BD53521",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.chipram",
+          "sha256": "AEF0ABBA460E222283D591259AEAA91FB1F1F22F99F71DD455D9A7B43F2F7DD8",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.fastram",
+          "sha256": "F63E83B25E9BFB81D5AB85A399BE77BC56B653701EA903E56BF58086EEEAB971",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.json",
+          "sha256": "DCFAF4E190F62CCC8E5BF835B4A4360196C348FF773FE02F53F185748EAD0E9B",
+          "bytes": 1103
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.pcm",
+          "sha256": "FFCB85196AB38C56DB0815A919A47EBE5C27E080EC8C31CE889FE3547FE4CC2F",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-012000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.bmp",
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.chipram",
+          "sha256": "C700B695F4AE88E57968A4CAA4EE91B068F504BA969E142AFF31C7D25A07F773",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.fastram",
+          "sha256": "571C21A1059932F44BA3FC391D796BB3D935FB2725CD5040B62A5B53A0EFF589",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.json",
+          "sha256": "8923FC53342FC767F0E888E0B029CF61F5F80176BAD2BF312925FB32CB609D55",
+          "bytes": 1077
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.pcm",
+          "sha256": "6C23E8C6883A5E21929A821F3890A188D388E733BAC14BD5B3E76DE9470D6C01",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-013000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.chipram",
+          "sha256": "407837B4E1710E7EEFB5BE064D664C541007412F5FADFCEB8B0DE3A1E259514A",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.fastram",
+          "sha256": "5325680F62B0221EBF9C5E4D7BB79136E3AA6F5FD27CF805EB4228A3ACDB2E99",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.json",
+          "sha256": "1403EDA29D78A6AE745FD36C9E1814AF55587E618A3725B67D7A41FE9FAF63C0",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.pcm",
+          "sha256": "A18BE68EBC43603E712ECAE31B7130AAFF7E99A34C63D6E2BC8F5B89BFD231C1",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-014000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.chipram",
+          "sha256": "2169294567BAEBA48EA1F7F76BDB11C2D8A43D76733640DA6976870D8DD8E7C3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.fastram",
+          "sha256": "D28156E3DBF5414D29FF916FC77E7265AD05BBAFE7D3B92FCE3B5AF3E1402B93",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.json",
+          "sha256": "E6B927E54B90DDF75FB115AEE44BAC23B89E5B1EE8947CA6E905A38AA5313B35",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.pcm",
+          "sha256": "7C0DCC5AFD03A89D17B2A14DF9D651FCC63B559523B121EA203FA770831D1208",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-015000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.chipram",
+          "sha256": "2169294567BAEBA48EA1F7F76BDB11C2D8A43D76733640DA6976870D8DD8E7C3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.fastram",
+          "sha256": "05577E267A5017E28B3B1EED3AE1B1EED5DD36E0FE3E1693627C8F82ABC4CDF1",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.json",
+          "sha256": "87952286376F37A21265796875261BDB85291FB9289815E4C5780AB69C4AE659",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.pcm",
+          "sha256": "7EA5AFED2AC0D3D670FB21E82B4A6EEC659A0C155E37D6F6E4F81321A4DC1700",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-016000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.chipram",
+          "sha256": "2169294567BAEBA48EA1F7F76BDB11C2D8A43D76733640DA6976870D8DD8E7C3",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.fastram",
+          "sha256": "E07B658E8B496069A589AC65F389E88DF56DBCAAB5AE181127389518DF9BDFDC",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.json",
+          "sha256": "034E9D0877053FF306B883A5D93ADF33613CA14AC4C47175F9AAEB7BBE290B45",
+          "bytes": 1105
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.pcm",
+          "sha256": "9EEBC75E23058318AEE457E9AFF4C7A9B42500294FDE2BE46CA4EDD6B3FC4425",
+          "bytes": 3848
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-017000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.bmp",
+          "sha256": "5BDE954D4A8B5BE50A27C074DD64231A6D67E9DAA7F6010BCFE1CD3FE06D34B4",
+          "bytes": 1136870
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.chipram",
+          "sha256": "CA4840D0CECFD80989E65FC7B1E2CEF5C3E9C7AC57BC06979DEF1F05A399E5B5",
+          "bytes": 524288
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.fastram",
+          "sha256": "939C48A8FAE0BAB9203F9980CBC306BDB74483EE799B219F5E662B9469A69FE5",
+          "bytes": 2097152
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.json",
+          "sha256": "E3B961E375A2AA7B679B6D57626BD14C832E937B5AE7AB40C7DFE860C626CDC5",
+          "bytes": 1106
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.memory.json",
+          "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+          "bytes": 46
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.pcm",
+          "sha256": "1FAD1D1F0E1F6614CA69A709BB3C75F1291DB0CF74987BEA323D0B7BAEB75FE3",
+          "bytes": 3844
+        },
+        {
+          "path": "artifacts/fast-ram-2026-09-27/lotus-68020-2048/frame-018000.slowram",
+          "sha256": "41E8CD405DA336C33868514EAC95B5D1B37030FEF5F28E49FCB98C3DDB11865E",
+          "bytes": 524288
+        }
+      ]
+    }
+  ],
+  "parity": [
+    {
+      "left": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-512",
+      "right": "artifacts/fast-ram-2026-09-27/final-boot-68020-512",
+      "identicalFiles": 14
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-1024",
+      "right": "artifacts/fast-ram-2026-09-27/final-boot-68020-1024",
+      "identicalFiles": 14
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-2048",
+      "right": "artifacts/fast-ram-2026-09-27/final-boot-68020-2048",
+      "identicalFiles": 14
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-4096",
+      "right": "artifacts/fast-ram-2026-09-27/final-boot-68020-4096",
+      "identicalFiles": 14
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/final-boot-68ec020-8192",
+      "right": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192",
+      "identicalFiles": 14
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192",
+      "right": "artifacts/fast-ram-2026-09-27/final-boot-68020-8192-scalar",
+      "identicalFiles": 14
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/lotus-68000-0",
+      "right": "artifacts/lotus3-020-cache/final-000-normal",
+      "identicalFiles": 95
+    },
+    {
+      "left": "artifacts/fast-ram-2026-09-27/lotus-68020-0",
+      "right": "artifacts/lotus3-020-cache/final-020-normal",
+      "identicalFiles": 95
+    }
+  ],
+  "nativeAllocation": {
+    "name": "native-allocation-000",
+    "frames": 2400,
+    "cycle": 340912900,
+    "pc": "00FC0F94",
+    "cpuFingerprint": "0x49EF6B066F5A4DBA",
+    "hardwareFingerprint": "0xDEE22A1D0202A072",
+    "outputFingerprint": "0xE9DA10FD264F4351",
+    "log": {
+      "path": "artifacts/fast-ram-2026-09-27/native-allocation-000.log",
+      "sha256": "0E944A6D59F9EE384896D44243B7F9C4C6D8A1CAD492E1E8142A31B4E6179EA5",
+      "bytes": 3692
+    },
+    "captures": [
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.bmp",
+        "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.chipram",
+        "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.fastram",
+        "sha256": "5647F05EC18958947D32874EEB788FA396A05D0BAB7C1B71F112CEB7E9B31EEE",
+        "bytes": 2097152
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.json",
+        "sha256": "104B3D6799EF76EEC5AF9BDA142E8163595DBC528622110098EF94036112548F",
+        "bytes": 1087
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.memory.json",
+        "sha256": "211986907ABC34B2E581124C883A593C894BA06FFD0A950297CB568DB9AD3C06",
+        "bytes": 43
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.pcm",
+        "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+        "bytes": 3844
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-000001.slowram",
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.bmp",
+        "sha256": "298E4D0E95053FCA4C5803CA3DF0B05E450659002BDFAB99FDF0F40CDD904189",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.chipram",
+        "sha256": "E0B828E9526129495424EC56C6456AB9E9030E91885ED8C5EA5C15EDD338B68B",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.fastram",
+        "sha256": "DE7F8E65ADA7D8D68E40FD0517C23D48DE622B9DD75F2E59535C2AD8F818A396",
+        "bytes": 2097152
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.json",
+        "sha256": "777413887B708069E35CE42A16FAF8341BC92433F972351BC04699DFE9D7B34D",
+        "bytes": 1095
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.memory.json",
+        "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+        "bytes": 46
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.pcm",
+        "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+        "bytes": 3848
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-001200.slowram",
+        "sha256": "EA3A667E058027D2A86F51F5C6140C2AAC7851330FBD46E4EDE94B76A6FED499",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.bmp",
+        "sha256": "298E4D0E95053FCA4C5803CA3DF0B05E450659002BDFAB99FDF0F40CDD904189",
+        "bytes": 1136870
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.chipram",
+        "sha256": "E0B828E9526129495424EC56C6456AB9E9030E91885ED8C5EA5C15EDD338B68B",
+        "bytes": 524288
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.fastram",
+        "sha256": "DE7F8E65ADA7D8D68E40FD0517C23D48DE622B9DD75F2E59535C2AD8F818A396",
+        "bytes": 2097152
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.json",
+        "sha256": "BDB9EA9B0CE6B26AD0A47F2BB40E7AC0757FADBC845601B45E0FA6954CE4C22F",
+        "bytes": 1095
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.memory.json",
+        "sha256": "C39CA77A6115E4FB9C794AF9CD92F72A91E7A30A61678E5F707B3E748CF13611",
+        "bytes": 46
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.pcm",
+        "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+        "bytes": 3844
+      },
+      {
+        "path": "artifacts/fast-ram-2026-09-27/native-allocation-000/frame-002400.slowram",
+        "sha256": "04177AE615F263BD9A02E0AA8F22074D157ABC0A2BB43866C37F49FEA3C042DF",
+        "bytes": 524288
+      }
+    ],
+    "guestMemory": {
+      "frame": 2400,
+      "execBase": 12583542,
+      "base": 2097152,
+      "bytes": 2097152,
+      "headers": [
+        {
+          "header": 12584130,
+          "attributes": 5,
+          "lower": 12584168,
+          "upper": 13101056,
+          "free": 6744,
+          "chunks": 6
+        },
+        {
+          "header": 2097152,
+          "attributes": 5,
+          "lower": 2097184,
+          "upper": 4194304,
+          "free": 1903456,
+          "chunks": 1
+        },
+        {
+          "header": 1024,
+          "attributes": 3,
+          "lower": 1056,
+          "upper": 524288,
+          "free": 457296,
+          "chunks": 1
+        }
+      ],
+      "fastMemoryRegistered": true,
+      "freeListsConsistent": true
+    },
+    "proof": {
+      "image": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\fast-ram-2026-09-27\\native-fast-proof.hdf",
+      "offset_sectors": 0,
+      "image_sha256": "3770c46fe3263dec5bcfff6e77a82b1558735f8d5d11c095bd312828283dc374",
+      "file": "fast-proof.txt",
+      "file_sha256": "bbf325b4d7a1c303bf573f7966d2e9531117a852ec5714e824ac8aedaaddc443",
+      "bytes": 39,
+      "root_block": 880,
+      "header_block": 1359,
+      "verified_data_blocks": 1
+    },
+    "fixture": {
+      "source": "artifacts\\storage-2026-09-18\\final-native2\\partition.hdf",
+      "sourceSha256": "99c4423cd81f20c0f06f8acd6c32404b2813cc63cbff9ba710d361556c93292e",
+      "output": "artifacts\\fast-ram-2026-09-27\\native-fast-proof.hdf",
+      "outputSha256": "54331e81b73ad61415db32f2937b8e7b3748f3d5b4d7e41ddc3c6826fcd28f1c",
+      "startup": "FailAt 21\nAddBuffers SYS: 1200\nAvail\nEcho >SYS:fast-proof.txt \"Copper Fast RAM native OFS persistence\"\nType SYS:fast-proof.txt\nEcho \"FAST RAM NATIVE TEST FINISHED\"\n"
+    }
+  },
+  "retainedFailures": [
+    {
+      "path": "artifacts/fast-ram-2026-09-27/boot-68000-4096.log",
+      "sha256": "CE6C953C9E690F2D1D9945E130EC97CF78868DCC0D34F8C7FEBA2CA940C85707",
+      "bytes": 5059
+    },
+    {
+      "path": "artifacts/fast-ram-2026-09-27/boot-68020-512.log",
+      "sha256": "7A1E1C4A829502C42ED15F3B3172F04DB7ECB571ECA084C1B222AAE210697CD4",
+      "bytes": 3124
+    },
+    {
+      "path": "artifacts/fast-ram-2026-09-27/hdf-020-8m-candidate.log",
+      "sha256": "9123C71CDF5478BA49422553F5A028B86E3A3C6C68329DAD540CF5061C7F562F",
+      "bytes": 3124
+    },
+    {
+      "path": "artifacts/fast-ram-2026-09-27/hdf-020-no-fast-control.log",
+      "sha256": "AFBB446643EC9239B5138A8B7DCA64E211851E74B4B9ED16240921BF05F6AC98",
+      "bytes": 3124
+    }
+  ],
+  "limits": [
+    "Unpublished development dependency; no remote push or release",
+    "020 CopperHDF indexed JSR remains unsupported with and without Fast RAM",
+    "No Zorro III, 32-bit accelerator-local RAM or additional CPU models",
+    "No full game/player-controlled racing or manual desktop acceptance",
+    "No physical expansion timing or throughput certification; no golden update"
+  ]
+}

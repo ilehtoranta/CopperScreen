@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-26",
+  "status": "SIX_NATIVE_REPLAYS_PASS",
+  "scope": "Runner ZIP-selector correction and host-only native regression tooling; engine source and hardware timing unchanged.",
+  "referenceEngineSha256": "7EE0B872B7E2F4A491FCBBC4D8BDC2BBFD577DF34A1EBB62CF4B0148018EE3E9",
+  "candidateBinaries": {
+    "Copper68k.dll": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+    "CopperDisk.dll": "2DDFD18094A34F05B328F5ADB4DF5B80F8971E5BF16384718584DC5BE10DDB28",
+    "CopperDisk.pdb": "060995C4A0E535337861788A5C52BE39FC0A5A2C9CE31639DF9EBDCB1C4361C1",
+    "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+    "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+    "CopperMod.Amiga.Lightweight.dll": "0176FA30E2F82641344D4AA58E39114737799F6BBD7FD5D6A88CF536FBC77097",
+    "CopperMod.Amiga.Lightweight.pdb": "4A6F2F69BC3385F18484944BFA7CC45A0E2DA46C749F072DC1DA068FEDABC814",
+    "CopperMod.Amiga.Lightweight.Runner.deps.json": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+    "CopperMod.Amiga.Lightweight.Runner.dll": "441F291713D9CD71F1ED598DD53E7B1E04103355E183B06ED3F04F62FCF7798E",
+    "CopperMod.Amiga.Lightweight.Runner.exe": "55874469BD82FB93D6C79FC52F0F972CEA0C58A1C4957D9B62CA874E46D0D3D5",
+    "CopperMod.Amiga.Lightweight.Runner.pdb": "2F3D7B873384145EB7EFAA77BD2AE2A95658E96898ABB820D781B1315CE23B95",
+    "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+    "CopperMod.Amiga.Lightweight.xml": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F"
+  },
+  "cases": [
+    {
+      "id": "lotus3",
+      "fieldsPerMode": 18000,
+      "checkpointsPerMode": 19,
+      "filesPerMode": 95,
+      "status": "PASS",
+      "normalScalarEqual": true,
+      "matchesReviewedBaseline": true,
+      "finalIdentity": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557703978",
+        "cpu": "0x5F5BEE5D7DFD194F",
+        "hardware": "0x9C79BFD36438BAD4",
+        "output": "0xDB03B181E11EBD9C",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "id": "desert-dream",
+      "fieldsPerMode": 72000,
+      "checkpointsPerMode": 73,
+      "filesPerMode": 365,
+      "status": "PASS",
+      "normalScalarEqual": true,
+      "matchesReviewedBaseline": true,
+      "finalIdentity": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "cycle": "10225552872",
+        "cpu": "0x8E832864BDCE9DE1",
+        "hardware": "0x6853448CF4D3F479",
+        "output": "0xAB5D94B0DEB7A7CB",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "id": "tower-assault",
+      "fieldsPerMode": 20000,
+      "checkpointsPerMode": 21,
+      "filesPerMode": 105,
+      "status": "PASS",
+      "normalScalarEqual": true,
+      "matchesReviewedBaseline": true,
+      "finalIdentity": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "20000",
+        "completed": "20000",
+        "cycle": "2833352366",
+        "cpu": "0x9A2D952C88DF8598",
+        "hardware": "0x5E1CC00BB7298773",
+        "output": "0xBFA43D736D005AA3",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "id": "alien-breed-se92",
+      "fieldsPerMode": 16000,
+      "checkpointsPerMode": 17,
+      "filesPerMode": 85,
+      "status": "PASS",
+      "normalScalarEqual": true,
+      "matchesReviewedBaseline": true,
+      "finalIdentity": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "16000",
+        "completed": "16000",
+        "cycle": "2266635956",
+        "cpu": "0x5F0D915AEFD9ECCE",
+        "hardware": "0x5F38D967492AAB23",
+        "output": "0xD6E97A0608F7374F",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "id": "supercars2",
+      "fieldsPerMode": 19000,
+      "checkpointsPerMode": 20,
+      "filesPerMode": 100,
+      "status": "PASS",
+      "normalScalarEqual": true,
+      "matchesReviewedBaseline": true,
+      "finalIdentity": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "19000",
+        "completed": "19000",
+        "cycle": "2699806028",
+        "cpu": "0x9002A2432C9186D4",
+        "hardware": "0x3BE28A07F2BE3C6E",
+        "output": "0x9FAA8E3CE3254FF4",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "id": "lemmings",
+      "fieldsPerMode": 18120,
+      "checkpointsPerMode": 20,
+      "filesPerMode": 100,
+      "status": "PASS",
+      "normalScalarEqual": true,
+      "matchesReviewedBaseline": true,
+      "finalIdentity": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "18120",
+        "completed": "18120",
+        "cycle": "2574756850",
+        "cpu": "0x505451D28DF1C053",
+        "hardware": "0x20084440BFE4BC5A",
+        "output": "0x164C4D65E1B1FA40",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    }
+  ],
+  "fieldsPerCompleteSuite": 326240,
+  "captureFilesPerMode": 850,
+  "independentRetainedCaptures": {
+    "lotus3": {
+      "directory": "artifacts/lotus3-timing/fixed-normal",
+      "matchedFiles": 54
+    },
+    "desert-dream": {
+      "directory": "artifacts/lotus3-timing/dream-normal",
+      "matchedFiles": 216
+    },
+    "alien-breed-se92": {
+      "directory": "artifacts/lotus3-timing/alien-normal",
+      "matchedFiles": 48
+    },
+    "lemmings": {
+      "directory": "artifacts\\lotus3-performance\\candidate-delayed-gameplay",
+      "matchedFiles": 2
+    }
+  },
+  "productionBuild": {
+    "command": "dotnet build CopperScreen.slnx -c Release",
+    "passed": true,
+    "warnings": 0,
+    "errors": 0
+  },
+  "tests": {
+    "engine": {
+      "total": "732",
+      "executed": "732",
+      "passed": "732",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "host": {
+      "total": "95",
+      "executed": "92",
+      "passed": "92",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "hostSkipped": 3,
+    "hostSkippedTests": [
+      "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPowerUpCapsLockAndA500ResetAreAcknowledged",
+      "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeGameplayThroughHostAdapterPreservesValidatedCpuAndOutput",
+      "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPressAndReleaseAreAcknowledgedAndGameplayContinues"
+    ],
+    "zipBefore": {
+      "total": "11",
+      "executed": "11",
+      "passed": "7",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "zipAfter": {
+      "total": "11",
+      "executed": "11",
+      "passed": "11",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "toolingPassed": 21
+  },
+  "negativeControls": [
+    {
+      "name": "negative-visual",
+      "exitCode": 1,
+      "expected": 1
+    },
+    {
+      "name": "missing-rom",
+      "exitCode": 2,
+      "expected": 2
+    },
+    {
+      "name": "wrong-rom",
+      "exitCode": 1,
+      "expected": 1
+    }
+  ],
+  "uiChecks": {
+    "hostedReportInspected": true,
+    "changedPixelViewInspected": true,
+    "negativeControlChangedRgbPixels": 127890,
+    "directFileBrowserPreview": "Unavailable: in-app browser URL policy blocks file URLs; no workaround attempted."
+  },
+  "evidence": [
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/native-regression-v1.json",
+      "sha256": "878CF820DB0D30B448C0435EEF509864FE8E3B7B85CC5F753CC2000FFE36D938",
+      "bytes": 9577
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/Workloads/native-regression-baseline-v1.json",
+      "sha256": "3A5FDA9A69D4B34B0FBD0BCFE02FD2C0371DD60E2639CB85A46D8B7F16B24035",
+      "bytes": 162458
+    },
+    {
+      "path": "scripts/native_regression.py",
+      "sha256": "B512F1DE8C35C8ED4303A6AFB2573EADAA8B1FBF96BDF18B0357411A15D36E97",
+      "bytes": 37796
+    },
+    {
+      "path": "scripts/tests/test_native_regression.py",
+      "sha256": "8F8968D4EC874CF344B25221C408E5055FEDA1AA1FD8A6B107A42505960CEF78",
+      "bytes": 16691
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/final/report.json",
+      "sha256": "5B56F4E562F86BEB251B5C4856560DD7976698D21D91114601E9BA1307097900",
+      "bytes": 329945
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/final-report/report.json",
+      "sha256": "2F4082729CCF77DB568254D007FBC047751484A43E124B80C00DF82DAC814A94",
+      "bytes": 330149
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/reference/report.json",
+      "sha256": "0622B18D4EE51E24D65DBD9CDC4370E740CD3D134BAED526AC098AE4B868A90D",
+      "bytes": 329401
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/candidate/report.json",
+      "sha256": "B67E98DCAAE7979ABA6396086DD2E251E4596651FA46FE36320598BB261C9705",
+      "bytes": 330003
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/review.json",
+      "sha256": "6CA433DADE4F244A0633A0BCC65F5771BA6A8DE28CD7039BEFF13020F142DF23",
+      "bytes": 5277
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/retained-comparisons.json",
+      "sha256": "5458192B3B9FDD054343413FB71051D69180E75B0B001787396BC7364677EB9E",
+      "bytes": 456
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/negative-controls.json",
+      "sha256": "245D13B643EDA8C20EE3578210B30AD23812BC82DC7C814BAD5F8B862B7D22EC",
+      "bytes": 241
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/tool-tests-final.log",
+      "sha256": "2D3DE9EBA01F4F997216F6E1236DD81691E87E2B6F08A125173A80A75DDE95CE",
+      "bytes": 4360
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Tests/TestResults/native-suite-engine.trx",
+      "sha256": "7D5CB0E8A1148270A683D02ADC989C7F8BC1A04BE5967DA489C1F097453364AB",
+      "bytes": 1133963
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/TestResults/native-suite-host.trx",
+      "sha256": "81DCC2352C1E12C68C1EF13C31D8124FBE4E42DC8D31CD16E1C50B1E6C2009D7",
+      "bytes": 145645
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Tests/TestResults/native-suite-zip-before.trx",
+      "sha256": "58C51524F98FF9B94B31706F118C8D2DE7BA0264E5C28A5A31660E58AC81842E",
+      "bytes": 32860
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Tests/TestResults/native-suite-zip-after.trx",
+      "sha256": "98EC2FC103D1A6C2BC46DB7EBD2139814A39DDB111DCCDB08FD71AEED8475DB9",
+      "bytes": 19393
+    }
+  ],
+  "limitations": [
+    "Bounded native regression, not physical hardware certification or full game completion.",
+    "Captured PCM covers checkpoint fields; no live listening or full audio-stream comparison.",
+    "Three optional native host input/replay tests were skipped; standalone corpus replay is separate evidence.",
+    "No throughput measurements or new performance acceptance; existing protocols and statistical dispositions unchanged.",
+    "Windows tooling tests passed locally; Linux CI is configured but has not been executed in this session.",
+    "The final full replay preceded the last report-only incomplete-state/embedded-image refinements; their final source is covered by 21 tooling tests and an authoritative offline comparison."
+  ]
+}

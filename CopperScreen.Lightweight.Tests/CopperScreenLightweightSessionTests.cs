@@ -26,6 +26,77 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
             new[] { "--profile", "lightweight-a500-kickstart13", "--engine", "Lightweight", "--rom", _rom }.Concat(extra).ToArray(),
             AppContext.BaseDirectory);
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(512)]
+    [InlineData(1024)]
+    [InlineData(2048)]
+    [InlineData(4096)]
+    [InlineData(8192)]
+    public void FastRamSizeSurvivesSavedProfileAndRestart(int kib)
+    {
+        var original = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        var draft = original.Clone();
+        draft.RealFastRamKb = kib;
+        draft.Id = "fast-ram-test";
+        Assert.Equal(kib != 0, draft.NeedsRestartComparedWith(original));
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        var path = CopperScreenProfileStore.Save(draft, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
+        Assert.Equal(kib * 1024, profile.RealFastRamSize);
+        var reloaded = CopperScreenSettingsDraft.FromProfile(profile);
+        reloaded.KickstartRomPath = _rom;
+        using var previous = new CopperScreenLightweightSession(Options());
+        previous.TogglePaused();
+        using var replacement = new CopperScreenLightweightSession(reloaded.ToStartupOptions(_directory), previous);
+        Assert.True(previous.Machine.FastRam.IsEmpty);
+        Assert.Equal(kib * 1024, replacement.Machine.FastRam.Length);
+        Assert.Null(replacement.Machine.FastRamBase); // Synthetic ROM does not configure it.
+        replacement.RenderNextFrame(replacement.Framebuffer);
+        Assert.Null(replacement.FaultMessage);
+    }
+
+    [Theory]
+    [InlineData(256, "$200000")]
+    [InlineData(3072, "$200000")]
+    [InlineData(16384, "$200000")]
+    [InlineData(2048, "$400000")]
+    public void UnsupportedFastRamRequestsRemainVisible(int kib, string address)
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.RealFastRamKb = kib;
+        draft.RealFastBase = address;
+        Assert.Contains("Fast RAM", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(draft.ToStartupOptions(_directory)));
+    }
+
+    [Theory]
+    [InlineData("AccurateM68EC020", Copper68k.M68kCpuModel.M68EC020)]
+    [InlineData("AccurateM68020", Copper68k.M68kCpuModel.M68020)]
+    public void CpuSelectionSurvivesProfileSaveAndSessionReplacement(string backendName, Copper68k.M68kCpuModel model)
+    {
+        var backend = Enum.Parse<M68kBackendKind>(backendName);
+        var originalDraft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        var draft = originalDraft.Clone();
+        draft.CpuBackend = backend;
+        draft.Id = "cpu-option-test";
+        Assert.True(draft.NeedsRestartComparedWith(originalDraft));
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        var path = CopperScreenProfileStore.Save(draft, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
+        Assert.Equal(backend, profile.CpuBackend);
+        var reloaded = CopperScreenSettingsDraft.FromProfile(profile);
+        reloaded.KickstartRomPath = _rom;
+        using var original = new CopperScreenLightweightSession(Options());
+        original.TogglePaused();
+        using var replacement = new CopperScreenLightweightSession(reloaded.ToStartupOptions(_directory), original);
+        Assert.Equal(Copper68k.M68kCpuModel.M68000, original.Machine.CpuModel);
+        Assert.Equal(model, replacement.Machine.CpuModel);
+        replacement.RenderNextFrame(replacement.Framebuffer);
+        Assert.Null(replacement.FaultMessage);
+        Assert.Equal(1, replacement.Machine.CompletedFrames);
+    }
+
     [Fact]
     public async Task SelectedZipIpfSupportsEveryDriveAndRejectsSaveAndWriteEnable()
     {

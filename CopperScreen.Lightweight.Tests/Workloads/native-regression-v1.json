@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+  "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "media": {
+    "lotus3-1": {
+      "path": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+      "archiveSha256": "C8241ACD91206A0D857CD589DA2ECDEB4084BD270E597DEE4C0EB7D7885FC30C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+      "sha256": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+      "bytes": 901120
+    },
+    "lotus3-2": {
+      "path": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+      "archiveSha256": "699D6C7A9562184F4DABA8D23FF6C4CBFD28A3E1863EBA5C764BA96D735ABD9C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+      "sha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887",
+      "bytes": 901120
+    },
+    "tower-1": {
+      "path": "Team17/AlienBreed-TowerAssault_279.zip",
+      "archiveSha256": "52DC0DBA381EAA53DC671E83993A5FDD978DF4558891003856B66C58C71879F4",
+      "entry": "AlienBreedTowerAssault_Disk1.ipf",
+      "sha256": "EC181B9C9F14D593DA2C96D751286C5A629EABCF90B66A4D7114EF2FABE245F6",
+      "bytes": 1139240
+    },
+    "tower-2": {
+      "path": "Team17/AlienBreed-TowerAssault_279.zip",
+      "archiveSha256": "52DC0DBA381EAA53DC671E83993A5FDD978DF4558891003856B66C58C71879F4",
+      "entry": "AlienBreedTowerAssault_Disk2.ipf",
+      "sha256": "256B2FBDF5242342CFB0959F5AD3B8FB837ADB418D23316B2AE7B085C5158827",
+      "bytes": 1139240
+    },
+    "alien-1": {
+      "path": "Team17/AlienBreedSpecialEdition92_615.zip",
+      "archiveSha256": "FC478A1F5ADFBC6EC56253A3C14DA48448AACF07D8B0F9781D56D837D746973F",
+      "entry": "AlienBreedSpecialEdition92_BootDisk.ipf",
+      "sha256": "B9F68CB237C20614035555AA7ECA70B1DD43B64F061B20422A025EEFDC89112D",
+      "bytes": 1049304
+    },
+    "alien-2": {
+      "path": "Team17/AlienBreedSpecialEdition92_615.zip",
+      "archiveSha256": "FC478A1F5ADFBC6EC56253A3C14DA48448AACF07D8B0F9781D56D837D746973F",
+      "entry": "AlienBreedSpecialEdition92_Disk2.ipf",
+      "sha256": "8F27F047E15788DE9D0FD6B6691D7FBB2DCEE401095A4B34DBD1BD4FC572A3EF",
+      "bytes": 1049612
+    },
+    "dream-1": {
+      "path": "Desert Dream (Kefrens).zip",
+      "archiveSha256": "0C41C82A744A2CF915082B968EF3763BF9152F19023B9340287FC593B73E7849",
+      "entry": "Desert Dream (Kefrens) A.adf",
+      "sha256": "25738C042EFDF2202E67A5BD5A40A08766384DFC31A92ED8E248D1B12E26E1E3",
+      "bytes": 901120
+    },
+    "dream-2": {
+      "path": "Desert Dream (Kefrens).zip",
+      "archiveSha256": "0C41C82A744A2CF915082B968EF3763BF9152F19023B9340287FC593B73E7849",
+      "entry": "Desert Dream (Kefrens) B.adf",
+      "sha256": "3E34D376C9805E0E64A3227B04E0D0BCE0C1531F3E90938329BF5079CD214F97",
+      "bytes": 901120
+    },
+    "supercars2-1": {
+      "path": "OK/Super Cars II (1991)(Gremlin)(Disk 1 of 2)[cr Flashtro].zip",
+      "archiveSha256": "35CFF77EE2EB63220AEEA10121E91F6BB9B3DED2661A311F0B2CA62BBA4F67CE",
+      "entry": "Super Cars II (1991)(Gremlin)(Disk 1 of 2)[cr Flashtro].adf",
+      "sha256": "4274349E02EA093579E1C5AC91A58BEE0109CBBA33AAEF2DC57C5AAC7A7E4BD6",
+      "bytes": 901120
+    },
+    "lemmings-1": {
+      "path": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "archiveSha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59",
+      "entry": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+      "sha256": "A4FDBA69017F1A760BBA3BB06C55F7E434226C498C9D22C1F627212B08D24F91",
+      "bytes": 901120
+    },
+    "lemmings-2": {
+      "path": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].zip",
+      "archiveSha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A",
+      "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+      "sha256": "1526000B96D196EFECAB9C63AA72C0CE6257649A4993141B00EAD8738FD97A65",
+      "bytes": 901120
+    }
+  },
+  "cases": [
+    {
+      "id": "lotus3",
+      "title": "Lotus III",
+      "frames": 18000,
+      "captureInterval": 1000,
+      "script": "CopperScreen.Lightweight.Tests/Workloads/corpus-lotus3.json",
+      "scriptSha256Lf": "9CE09272B91C11EA40F780B302B1F492BD932D28DE0DE45141FB9092517D26DE",
+      "bootMedia": "lotus3-1",
+      "mounts": {
+        "../../media/lotus3-disk2.adf": "lotus3-2"
+      },
+      "milestones": [
+        {
+          "frame": 11000,
+          "description": "Magnetic Fields logo after the disk-two prompt"
+        },
+        {
+          "frame": 15000,
+          "description": "One-player driving demo"
+        },
+        {
+          "frame": 17000,
+          "description": "Split-screen driving demo"
+        }
+      ],
+      "scope": "Disk-two loading and attract-mode driving demos; player-controlled racing remains unverified."
+    },
+    {
+      "id": "desert-dream",
+      "title": "Desert Dream",
+      "frames": 72000,
+      "captureInterval": 1000,
+      "script": "CopperScreen.Lightweight.Tests/Workloads/desert-dream-live-pointers.json",
+      "scriptSha256Lf": "BDBFBF8F09E53B22550C93ECDE85B215459E459C2A53699FC63847788B5DF7A7",
+      "bootMedia": "dream-1",
+      "mounts": {
+        "../../media/desert-dream-disk2.adf": "dream-2"
+      },
+      "milestones": [
+        {
+          "frame": 24000,
+          "description": "Main sequence beyond the former execution failure"
+        },
+        {
+          "frame": 52000,
+          "description": "Second-disk closing credits"
+        },
+        {
+          "frame": 72000,
+          "description": "Closing credits continue"
+        }
+      ],
+      "scope": "Both disks through the main ending; hidden parts and exact hardware timing are outside this replay."
+    },
+    {
+      "id": "tower-assault",
+      "title": "Alien Breed: Tower Assault",
+      "frames": 20000,
+      "captureInterval": 1000,
+      "script": "CopperScreen.Lightweight.Tests/Workloads/corpus-tower-assault.json",
+      "scriptSha256Lf": "28275292C6A586A59B8C89590317C24A3F3001292EFD7B7EC52AE7136681BBAB",
+      "bootMedia": "tower-1",
+      "mounts": {
+        "../../media/tower-assault-disk2.ipf": "tower-2"
+      },
+      "milestones": [
+        {
+          "frame": 9000,
+          "description": "Second-disk options menu"
+        },
+        {
+          "frame": 20000,
+          "description": "Opening level with player, HUD and terrain"
+        }
+      ],
+      "scope": "OCS identification, second-disk loading and opening-level progression; full gameplay and disk three remain unverified."
+    },
+    {
+      "id": "alien-breed-se92",
+      "title": "Alien Breed Special Edition ’92",
+      "frames": 16000,
+      "captureInterval": 1000,
+      "script": "CopperScreen.Lightweight.Tests/Workloads/alien-breed-se92-wordsync.json",
+      "scriptSha256Lf": "97035F9E3C41F247DD6EF6129EF50113ABD6B212E057BADE012A7AFF9F86856B",
+      "bootMedia": "alien-1",
+      "mounts": {
+        "../../media/alien-breed-se92-disk2.ipf": "alien-2"
+      },
+      "milestones": [
+        {
+          "frame": 4000,
+          "description": "Black transition during the boot/title sequence"
+        },
+        {
+          "frame": 9000,
+          "description": "Second-disk main menu"
+        },
+        {
+          "frame": 16000,
+          "description": "Credits sequence"
+        }
+      ],
+      "scope": "WORDSYNC boot and second-disk menu/credits; gameplay remains unverified."
+    },
+    {
+      "id": "supercars2",
+      "title": "Super Cars II",
+      "frames": 19000,
+      "captureInterval": 1000,
+      "script": "CopperScreen.Lightweight.Tests/Workloads/corpus-supercars2.json",
+      "scriptSha256Lf": "1E6A7B49DC8659E73EED9A68E2C80103DF6100E0A4C0CEE459386C961557CAE5",
+      "bootMedia": "supercars2-1",
+      "mounts": {},
+      "milestones": [
+        {
+          "frame": 16000,
+          "description": "Game options: Easy, one player, fire to accelerate"
+        },
+        {
+          "frame": 18000,
+          "description": "Race one after acceleration and steering input"
+        },
+        {
+          "frame": 19000,
+          "description": "Race one: remaining laps decreased from five to four"
+        }
+      ],
+      "scope": "CPU chip-RAM mirrors, race-one entry and bounded controls; no disk-two or full-race claim."
+    },
+    {
+      "id": "lemmings",
+      "title": "Lemmings",
+      "frames": 18120,
+      "captureInterval": 1000,
+      "script": "CopperScreen.Lightweight.Tests/Workloads/lemmings-native-delayed.json",
+      "scriptSha256Lf": "CEE121541FAB18AF317A55CC5F90BBC21917B46AA7B38383E64C70C1F229F1DD",
+      "bootMedia": "lemmings-1",
+      "mounts": {
+        "../../media/lemmings-disk2.zip": "lemmings-2"
+      },
+      "milestones": [
+        {
+          "frame": 14000,
+          "description": "Level-one entry after delayed input"
+        },
+        {
+          "frame": 18000,
+          "description": "Level-one gameplay"
+        },
+        {
+          "frame": 18120,
+          "description": "End of the retained gameplay interval"
+        }
+      ],
+      "scope": "Native two-disk boot and level-one gameplay using the separately validated delayed script; no level-completion claim."
+    }
+  ]
+}

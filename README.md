@@ -5,14 +5,14 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 
 ## Supported machine
 
-- PAL OCS A500 with a Motorola 68000.
-- 512 KiB Chip RAM and 512 KiB slow RAM.
+- PAL OCS A500 with a Motorola 68000 by default; experimental 68EC020 and 68020 choices are available in Settings.
+- 512 KiB Chip RAM and 512 KiB slow RAM, with optional 512 KiB–8 MiB Autoconfig Fast RAM.
 - Native Kickstart 1.3 ROM, supplied by the user.
 - One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery and native Kickstart 1.3 OFS boot. See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
 
-CopperStart, Legacy, ECS/AGA, accelerators and physical IDE/SCSI controllers are not supported by
+CopperStart, Legacy, ECS/AGA, other accelerator profiles and physical IDE/SCSI controllers are not supported by
 the current application. Unsupported settings are reported explicitly rather
 than silently changing the configured machine.
 
@@ -25,6 +25,15 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
+The current Fast RAM / CopperHDF development slice pins unpublished Copper68k
+`1.4.2-ocs020.54` for the 020 native boot and file-I/O instructions. Local restores use the
+exact package in `artifacts/copper68k-feed`; a clean checkout needs that candidate
+until an explicit release. The preceding `.52` is published on NuGet. The models
+remain experimental; full compatibility and physical accelerator timing are not
+certified. See the [020 CopperHDF correction](docs/engine/COPPERHDF_020_2026-09-27.md),
+[Fast RAM record](docs/engine/FAST_RAM_2026-09-27.md) and
+[preceding CPU correction and release](docs/engine/LOTUS_III_020_CACHE_2026-09-26.md).
+
 ```powershell
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
@@ -32,6 +41,11 @@ dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_1
 ```
 
 Starting without arguments opens Settings. Choose your ROM and disk image there.
+CPU changes require restarting the emulated machine. The 020 choices use the
+existing OCS/RAM/Kickstart 1.3 profile; they do not select an A1200 or AGA machine.
+Settings > Memory accepts Fast RAM sizes 0, 512, 1024, 2048, 4096 or 8192 KiB.
+Kickstart assigns the address; size changes require restarting the machine.
+The runner accepts `--fast-ram-kib` with the same sizes.
 
 ## Tests and headless execution
 
@@ -42,9 +56,14 @@ dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj
 dotnet test CopperDisk.Tests/CopperDisk.Tests.csproj -c Release --no-build --no-restore
 ```
 
-Two optional native Lemmings replay tests require local ROM and disk images.
+Optional native Lemmings replay and input tests require local ROM and disk images.
 See [native validation](docs/NATIVE_VALIDATION.md) for setup. Normal CI skips
 these tests when the media is unavailable.
+
+The [native regression suite](docs/engine/NATIVE_REGRESSION.md) runs six pinned
+game/demo replays with supplied local media, checks normal/scalar execution and
+produces an HTML report against a reviewed baseline. Missing media is reported
+as unavailable coverage. Its Python tooling tests run in CI without game media.
 
 Engine timing tests use separate diagnostic build outputs:
 

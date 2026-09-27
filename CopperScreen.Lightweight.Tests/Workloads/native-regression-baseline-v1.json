@@ -1,0 +1,4161 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed-native-regression-baseline",
+  "scope": "Bounded replay regression evidence. Matching scalar execution is a control, not independent hardware proof. Captured PCM covers checkpoint fields. Elapsed time includes diagnostics and is not a performance measurement.",
+  "sourceReportSha256": "0622B18D4EE51E24D65DBD9CDC4370E740CD3D134BAED526AC098AE4B868A90D",
+  "binaries": {
+    "Copper68k.dll": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+    "CopperDisk.dll": "2DDFD18094A34F05B328F5ADB4DF5B80F8971E5BF16384718584DC5BE10DDB28",
+    "CopperDisk.pdb": "060995C4A0E535337861788A5C52BE39FC0A5A2C9CE31639DF9EBDCB1C4361C1",
+    "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+    "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+    "CopperMod.Amiga.Lightweight.dll": "7EE0B872B7E2F4A491FCBBC4D8BDC2BBFD577DF34A1EBB62CF4B0148018EE3E9",
+    "CopperMod.Amiga.Lightweight.pdb": "4A6F2F69BC3385F18484944BFA7CC45A0E2DA46C749F072DC1DA068FEDABC814",
+    "CopperMod.Amiga.Lightweight.Runner.deps.json": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+    "CopperMod.Amiga.Lightweight.Runner.dll": "441F291713D9CD71F1ED598DD53E7B1E04103355E183B06ED3F04F62FCF7798E",
+    "CopperMod.Amiga.Lightweight.Runner.exe": "55874469BD82FB93D6C79FC52F0F972CEA0C58A1C4957D9B62CA874E46D0D3D5",
+    "CopperMod.Amiga.Lightweight.Runner.pdb": "2F3D7B873384145EB7EFAA77BD2AE2A95658E96898ABB820D781B1315CE23B95",
+    "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+    "CopperMod.Amiga.Lightweight.xml": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F"
+  },
+  "runtimeInfo": ".NET SDK:\n Version:           10.0.401\n Commit:            e34a38d2ae\n Workload version:  10.0.400-manifests.b0700452\n MSBuild version:   18.9.11+e34a38d2a\n\nRuntime Environment:\n OS Name:     Windows\n OS Version:  10.0.26200\n OS Platform: Windows\n RID:         win-x64\n Base Path:   C:\\Program Files\\dotnet\\sdk\\10.0.401\\\n\n.NET workloads installed:\n [maui-windows]\n   Installation Source: VS 18.10.12217.157\n   Manifest Version:    10.0.20/10.0.100\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.maui\\10.0.20\\WorkloadManifest.json\n   Install Type:              Msi\n\n [maccatalyst]\n   Installation Source: VS 18.10.12217.157\n   Manifest Version:    26.5.10301/10.0.100\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.maccatalyst\\26.5.10301\\WorkloadManifest.json\n   Install Type:              Msi\n\n [ios]\n   Installation Source: VS 18.10.12217.157\n   Manifest Version:    26.5.10301/10.0.100\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.ios\\26.5.10301\\WorkloadManifest.json\n   Install Type:              Msi\n\n [android]\n   Installation Source: VS 18.10.12217.157\n   Manifest Version:    36.1.69/10.0.100\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.android\\36.1.69\\WorkloadManifest.json\n   Install Type:              Msi\n\nConfigured to use workload sets when installing new manifests.\nNo workload sets are installed. Run \"dotnet workload restore\" to install a workload set.\n\nHost:\n  Version:      10.0.12\n  Architecture: x64\n  Commit:       95017c711e\n\n.NET SDKs installed:\n  10.0.401 [C:\\Program Files\\dotnet\\sdk]\n\n.NET runtimes installed:\n  Microsoft.AspNetCore.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.AspNetCore.App]\n  Microsoft.AspNetCore.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.AspNetCore.App]\n  Microsoft.NETCore.App 8.0.21 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]\n  Microsoft.NETCore.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]\n  Microsoft.NETCore.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]\n  Microsoft.WindowsDesktop.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]\n  Microsoft.WindowsDesktop.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]\n\nOther architectures found:\n  x86   [C:\\Program Files (x86)\\dotnet]\n    registered at [HKLM\\SOFTWARE\\dotnet\\Setup\\InstalledVersions\\x86\\InstallLocation]\n\nEnvironment variables:\n  Not set\n\nglobal.json file:\n  C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\global.json\n\nLearn more:\n  https://aka.ms/dotnet/info\n\nDownload .NET:\n  https://aka.ms/dotnet/download\n",
+  "cases": {
+    "lotus3": {
+      "contractSha256": "F1CF7C5E21E30A001105A47BD2A47E0FEA76D1D92B19729092CFFE62A4B8B05D",
+      "contract": {
+        "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+        "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "bootMedia": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+        "script": [
+          {
+            "frame": 3500,
+            "keyCode": 324
+          },
+          {
+            "frame": 3510,
+            "keyCode": 452
+          },
+          {
+            "frame": 5000,
+            "ejectAdf": true
+          },
+          {
+            "frame": 5100,
+            "diskPath": {
+              "media": "lotus3-2",
+              "sha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887"
+            }
+          },
+          {
+            "frame": 6500,
+            "joystickPort1": 16,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 6520
+          },
+          {
+            "frame": 8500,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 8520
+          },
+          {
+            "frame": 10500,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 10520
+          },
+          {
+            "frame": 13000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 13600,
+            "joystickPort1": 24
+          },
+          {
+            "frame": 13700,
+            "joystickPort1": 20
+          },
+          {
+            "frame": 13800,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 14800
+          }
+        ],
+        "frames": 18000,
+        "captureInterval": 1000,
+        "captureFormat": "native-boot-probe-extended-v1",
+        "wideOutput": true,
+        "drives": 1
+      },
+      "files": {
+        "frame-000001.json": {
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        "frame-000001.chipram": {
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        "frame-000001.slowram": {
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        "frame-000001.bmp": {
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        "frame-000001.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-001000.json": {
+          "sha256": "E467AF20461D6E08F1AB85FA0F7236EE87558B399DA542ABD9C582271CC2764A",
+          "bytes": 1071
+        },
+        "frame-001000.chipram": {
+          "sha256": "D0C4329E0F0D4D4FC8CC6A7BCA624D6A0812D8858FAB191DE5D247D87D37028E",
+          "bytes": 524288
+        },
+        "frame-001000.slowram": {
+          "sha256": "847FB39646DF694C16A0032E21B9AE335D9331BF1E2270E0F457CFBE084EAFCD",
+          "bytes": 524288
+        },
+        "frame-001000.bmp": {
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        "frame-001000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-002000.json": {
+          "sha256": "16491DFCA5D5D8431B9A2CBD69EEA037B16A6865744B232C61942ACED36AB163",
+          "bytes": 1071
+        },
+        "frame-002000.chipram": {
+          "sha256": "FBF8C93266E1A0FB998AEA98FEE99C92051A4D205B19C9594C1FF5203AC8B0A3",
+          "bytes": 524288
+        },
+        "frame-002000.slowram": {
+          "sha256": "ED87B742F0C2ACE0C272EA47488F66117613F3F317DEB038CA92AD572D0A826B",
+          "bytes": 524288
+        },
+        "frame-002000.bmp": {
+          "sha256": "0CDC8203F859CD8286B3D85C6A5E109C962D1EC8339752F0D041D10CCC5C560A",
+          "bytes": 1136870
+        },
+        "frame-002000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-003000.json": {
+          "sha256": "D428BC7E2DD46837C5C02428E1F168EF5E3AFC6319DAE9677A5FC510485B56E7",
+          "bytes": 1070
+        },
+        "frame-003000.chipram": {
+          "sha256": "572228E1577CB88CDE3CAC2A308040F3E922167232DDA95B0E451770D76EA214",
+          "bytes": 524288
+        },
+        "frame-003000.slowram": {
+          "sha256": "1FB566CC9F7E69AB4C404E9BCD76640F6299D1071231130A9DF9309BC723FA8F",
+          "bytes": 524288
+        },
+        "frame-003000.bmp": {
+          "sha256": "C18747180967EA5E9B18A4830F516467D49B26D3FCF7F43FD3AB577E014266D6",
+          "bytes": 1136870
+        },
+        "frame-003000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-004000.json": {
+          "sha256": "ACEB705B3F8CF877AEC031D143F28F2FE1C32200CDC207E31692B30004F78B0E",
+          "bytes": 1070
+        },
+        "frame-004000.chipram": {
+          "sha256": "3866B352BB30566F6EB5967D0A1BF0F4B9A2B10D2BD4BF7D0E58BB39116C4C78",
+          "bytes": 524288
+        },
+        "frame-004000.slowram": {
+          "sha256": "A6E98153423B748EA088342825CC8C5662C22AB0D518D5DE194054CFCF2DA23D",
+          "bytes": 524288
+        },
+        "frame-004000.bmp": {
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        "frame-004000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-005000.json": {
+          "sha256": "53E79C8828A2258D386D249F3BB0380EC4D90A8147140A535ABA118C49E5B2D1",
+          "bytes": 1104
+        },
+        "frame-005000.chipram": {
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        "frame-005000.slowram": {
+          "sha256": "AAF8AB330670E7CF2CE0282FC328DE32E63A062F7E6225254F685FFA0D0913EF",
+          "bytes": 524288
+        },
+        "frame-005000.bmp": {
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        "frame-005000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-006000.json": {
+          "sha256": "79BFF812EC675A4708C8E3CC9158A473C1383908964A6340DF910939BCF586F3",
+          "bytes": 1103
+        },
+        "frame-006000.chipram": {
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        "frame-006000.slowram": {
+          "sha256": "A8605DE9A05ED40FF4F4963C3117ECA5ED8FF1A4942AF2C93729B6E6339604D4",
+          "bytes": 524288
+        },
+        "frame-006000.bmp": {
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        "frame-006000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-007000.json": {
+          "sha256": "1CFB9D1FA5A6DD6F4CB4C7FFCA5E1EEC4E7000B8CFC31BDF7C00649B594CF38F",
+          "bytes": 1103
+        },
+        "frame-007000.chipram": {
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        "frame-007000.slowram": {
+          "sha256": "2AB64EC9398B0B0898047A64987ACF87CB6DA131596337F20AC9B9BBAC3ECE85",
+          "bytes": 524288
+        },
+        "frame-007000.bmp": {
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        "frame-007000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-008000.json": {
+          "sha256": "606B319D6E7D483B4F07886DBE23B3A6D641B3A4D44D95189673E631259D25AD",
+          "bytes": 1104
+        },
+        "frame-008000.chipram": {
+          "sha256": "641193962B20E1C33D5465B7F9F63D1357D973FEFFD9E09792639E040D5281A1",
+          "bytes": 524288
+        },
+        "frame-008000.slowram": {
+          "sha256": "17C4DA30AFBAF37649B2FB15457F166BC9B7A55791DB7D832AE9DCBEBDADDF97",
+          "bytes": 524288
+        },
+        "frame-008000.bmp": {
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        "frame-008000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-009000.json": {
+          "sha256": "5E74B7B4F737D387E34C64F07A917CB324FCD591A5F63B8AD2174A3B1687895A",
+          "bytes": 1104
+        },
+        "frame-009000.chipram": {
+          "sha256": "8A507F0DF6F71A7BF8D1932CD199F1F2A651AD731B66D2673A823B1574C53679",
+          "bytes": 524288
+        },
+        "frame-009000.slowram": {
+          "sha256": "BE9E7BA7C6B60D8CC410DCDC2DC8B7A5795939A374722C4A313A74D510794D52",
+          "bytes": 524288
+        },
+        "frame-009000.bmp": {
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        "frame-009000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-010000.json": {
+          "sha256": "D57C49B5BAB63606AD1CC379090C70CCE69700DAB0CA8B2946C0CFFE6CE73B8D",
+          "bytes": 1105
+        },
+        "frame-010000.chipram": {
+          "sha256": "2263D2E2E7E7B745C79BE0706A09BD0F6B915881DED9B4AFC46896D6562BEF09",
+          "bytes": 524288
+        },
+        "frame-010000.slowram": {
+          "sha256": "F28EB4C96B569AF8EB32391D3CB9274F8AC3B3113C4A31AF4B1111A2D7AFF241",
+          "bytes": 524288
+        },
+        "frame-010000.bmp": {
+          "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+          "bytes": 1136870
+        },
+        "frame-010000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-011000.json": {
+          "sha256": "0075DFF53282E04D74CBFB373DDFE9CB90F220C3D79C21835C93B7975030BABF",
+          "bytes": 1076
+        },
+        "frame-011000.chipram": {
+          "sha256": "762BE46860F36FFDD9583B8993A4980BE61182C1A8A8FE0D3A78680A7D880E2B",
+          "bytes": 524288
+        },
+        "frame-011000.slowram": {
+          "sha256": "CBBDB1B315C1D67221E19B098879E68C2506D237C1F17933B8BA930B3D34D7CE",
+          "bytes": 524288
+        },
+        "frame-011000.bmp": {
+          "sha256": "CECECC3719C981239730595E51F2D5D615336CD2E96210762168389CB53FDFC4",
+          "bytes": 1136870
+        },
+        "frame-011000.pcm": {
+          "sha256": "B514168A155E6A289B57F6C12DDC51C22C18F0FF1DEB6F576A22FC3FB0AA2216",
+          "bytes": 3848
+        },
+        "frame-012000.json": {
+          "sha256": "3188137C936DCF4D68E0C00CEDE29479F6CBC1EF1CF21688E4378EC00A38D8FD",
+          "bytes": 1076
+        },
+        "frame-012000.chipram": {
+          "sha256": "BAA1FA5A955D89B9228EFEDFB2AFBE785DA7BEA91BC888B2AFEDA284D63F24C7",
+          "bytes": 524288
+        },
+        "frame-012000.slowram": {
+          "sha256": "AE5961AE8A92F465A30BFF05AAF6BE69212F721206D05B62DCBDD7257E9F1E21",
+          "bytes": 524288
+        },
+        "frame-012000.bmp": {
+          "sha256": "500BE9A47C3457D4C5C69F85ECD40403EA95991CE0CB2DD404B4D298DA141DFA",
+          "bytes": 1136870
+        },
+        "frame-012000.pcm": {
+          "sha256": "FFD1B0ACC2959170F1C64300962AFFEBA4A92421325B981CB9CD87AE57B561BE",
+          "bytes": 3844
+        },
+        "frame-013000.json": {
+          "sha256": "E22CDFBE9E28BF12C796E77737877A4A21BF75E76A530C8E8CAFF635B797FD1D",
+          "bytes": 1076
+        },
+        "frame-013000.chipram": {
+          "sha256": "C0A0856DF414AD8A597FD4F2FCC950008E6CA1BCEC0BAA922E2839D5C8F70A25",
+          "bytes": 524288
+        },
+        "frame-013000.slowram": {
+          "sha256": "FF087D19BAE59C766BBCA452FC2E0DAE7F1C6F5D0AB4E5C8BE82D0D97DC609A9",
+          "bytes": 524288
+        },
+        "frame-013000.bmp": {
+          "sha256": "109383F6780EFF76BBD875A26154C4F155CB315B1391C1B5703AD7F8ADB432BC",
+          "bytes": 1136870
+        },
+        "frame-013000.pcm": {
+          "sha256": "43469F96CCA0164F33B2AF841664C37D38BB69D28309B380052FEB7D5DE3A798",
+          "bytes": 3848
+        },
+        "frame-014000.json": {
+          "sha256": "3F6C153D8A92EA32701BBFCFA86603C9426F8024699618F1BA768D93B6C555AC",
+          "bytes": 1077
+        },
+        "frame-014000.chipram": {
+          "sha256": "FDBBF4643521FAFA5F95BA9FC2E2A1B717DF68B36F0B508BF639CA6A3FEDD6A9",
+          "bytes": 524288
+        },
+        "frame-014000.slowram": {
+          "sha256": "6A726810AAFB2F13548CF70888C97F476B8BBB8B65E17E223847F521E58F7A49",
+          "bytes": 524288
+        },
+        "frame-014000.bmp": {
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        "frame-014000.pcm": {
+          "sha256": "1452F1C22534DFA4D45AE89E0038166C20C0BF3780665FAFB7A5859C5E922E54",
+          "bytes": 3844
+        },
+        "frame-015000.json": {
+          "sha256": "79DBC05EC453352C0DD36B30867283EBB2A471A47CD7DB7885C0749CBF202F94",
+          "bytes": 1105
+        },
+        "frame-015000.chipram": {
+          "sha256": "61AB51CEEF3A1BCE69AF8F0A6D524C417031A7FF557A322A022B8725CA2EC68D",
+          "bytes": 524288
+        },
+        "frame-015000.slowram": {
+          "sha256": "12C2F7794C8D924AC51C5A0315221DE8CA0656B91D1C7A6136B9C195E85047CA",
+          "bytes": 524288
+        },
+        "frame-015000.bmp": {
+          "sha256": "881B09173100B6119585B0C57C8B06946849D237333814C2A35E1639D864F4D7",
+          "bytes": 1136870
+        },
+        "frame-015000.pcm": {
+          "sha256": "8CB8A662AAA9344A826EA4F80FFEB64FE9F2B9C8E2D25CDA967BC7EC7FB9D745",
+          "bytes": 3848
+        },
+        "frame-016000.json": {
+          "sha256": "BEA23D2923F762A03C605B8C2810D2CDD59BF9497FD4C4377E7D723E5948F1B5",
+          "bytes": 1076
+        },
+        "frame-016000.chipram": {
+          "sha256": "516169997A28E25D702382C1FD211E173EC67840E3772E4344C01B1DAD436942",
+          "bytes": 524288
+        },
+        "frame-016000.slowram": {
+          "sha256": "B7CAEB5B77D59FA87D2B9B8C6CBE2AF02AAACF447F8DCAF3661562610EBBA5F2",
+          "bytes": 524288
+        },
+        "frame-016000.bmp": {
+          "sha256": "E32AEF55FB3E5E2501E3C0015BD6F05996A9422A71B19D551B72F7E772CE7697",
+          "bytes": 1136870
+        },
+        "frame-016000.pcm": {
+          "sha256": "28BF33799CD09941B66558FA55F5E4A88B3E43BBA25234D5121E45E505BD1FAA",
+          "bytes": 3844
+        },
+        "frame-017000.json": {
+          "sha256": "016492FB86F3743B3267C04A06DFE9C4DFBFDCA7BE43B44CE209BE2BACBBA020",
+          "bytes": 1105
+        },
+        "frame-017000.chipram": {
+          "sha256": "6285F852578E86B396AFA231BA09A7E39F650EE2D1EA088079BCB4675A734D91",
+          "bytes": 524288
+        },
+        "frame-017000.slowram": {
+          "sha256": "7A9423CB0ED2E86F381A7473EB25A017A0809BB1F314CD8DBCBF24BFBBB594B5",
+          "bytes": 524288
+        },
+        "frame-017000.bmp": {
+          "sha256": "64E2D3F0C539A9D162463914FE2AD05026FF5760466B3DD57966673D5AB0637A",
+          "bytes": 1136870
+        },
+        "frame-017000.pcm": {
+          "sha256": "16F16FC778F794ACB1E0A16CB6694232787496EA45F73A8E28F4AC5CEB68A2D4",
+          "bytes": 3848
+        },
+        "frame-018000.json": {
+          "sha256": "3ED7A7CE63FF7F8DBC8B128818F5E8C87EB064093CB36590F479E474920E25D0",
+          "bytes": 1076
+        },
+        "frame-018000.chipram": {
+          "sha256": "09CDF66F606DE7D75A2E64B7050003CC9FE6271808EF2A0E3CA81CC7BCFCE121",
+          "bytes": 524288
+        },
+        "frame-018000.slowram": {
+          "sha256": "7C4A0DC6555C5771EFDDB741377A138C75A83DFFD1AF5F066D7FF3723B4F6849",
+          "bytes": 524288
+        },
+        "frame-018000.bmp": {
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        "frame-018000.pcm": {
+          "sha256": "C6B06E2F8EFDE366523FE14E1FC532262CA467C677FB7DC914B8362C2A1225F7",
+          "bytes": 3848
+        }
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557703978",
+        "cpu": "0x5F5BEE5D7DFD194F",
+        "hardware": "0x9C79BFD36438BAD4",
+        "output": "0xDB03B181E11EBD9C",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "review": {
+        "frames": [
+          11000,
+          15000,
+          17000
+        ],
+        "milestones": [
+          {
+            "frame": 11000,
+            "description": "Magnetic Fields logo after the disk-two prompt"
+          },
+          {
+            "frame": 15000,
+            "description": "One-player driving demo"
+          },
+          {
+            "frame": 17000,
+            "description": "Split-screen driving demo"
+          }
+        ],
+        "evidence": [
+          "docs/engine/LOTUS_III_CPU_BUS_TIMING_2026-09-25.md",
+          "artifacts/native-regression-2026-09-26/reference/lotus3/normal"
+        ],
+        "assessment": "Visually inspected every declared milestone on the accepted 2026-09-25 engine. Disk-two loading and attract-mode driving demos; player-controlled racing remains unverified. Also matched 54 independently retained captures."
+      },
+      "milestones": [
+        {
+          "frame": 11000,
+          "description": "Magnetic Fields logo after the disk-two prompt"
+        },
+        {
+          "frame": 15000,
+          "description": "One-player driving demo"
+        },
+        {
+          "frame": 17000,
+          "description": "Split-screen driving demo"
+        }
+      ]
+    },
+    "desert-dream": {
+      "contractSha256": "2387D85478E91BE518FB57BCE4E0498CB81087C2640BA38160784CD02C0402CD",
+      "contract": {
+        "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+        "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "bootMedia": "25738C042EFDF2202E67A5BD5A40A08766384DFC31A92ED8E248D1B12E26E1E3",
+        "script": [
+          {
+            "frame": 36000,
+            "ejectAdf": true
+          },
+          {
+            "frame": 36120,
+            "diskPath": {
+              "media": "dream-2",
+              "sha256": "3E34D376C9805E0E64A3227B04E0D0BCE0C1531F3E90938329BF5079CD214F97"
+            }
+          }
+        ],
+        "frames": 72000,
+        "captureInterval": 1000,
+        "captureFormat": "native-boot-probe-extended-v1",
+        "wideOutput": true,
+        "drives": 1
+      },
+      "files": {
+        "frame-000001.json": {
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        "frame-000001.chipram": {
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        "frame-000001.slowram": {
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        "frame-000001.bmp": {
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        "frame-000001.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-001000.json": {
+          "sha256": "F99C3AA1B21EC7A885BB0170F21943228AAA309D02A0A4EBAD55EB85DE721AE6",
+          "bytes": 1107
+        },
+        "frame-001000.chipram": {
+          "sha256": "67066AC1079B66B75FFCBB698F15B46712BFF16184651399BCF722812E1958CA",
+          "bytes": 524288
+        },
+        "frame-001000.slowram": {
+          "sha256": "3F76C6D8B50CA426D0B84290C28405E7C889D6F7161D61FA169206ED3ED87B67",
+          "bytes": 524288
+        },
+        "frame-001000.bmp": {
+          "sha256": "3BD17966BD125339E20CFAE7C50A5AAED400234EEE3FC422C70BDC9F6EEE43B3",
+          "bytes": 1136870
+        },
+        "frame-001000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-002000.json": {
+          "sha256": "B80356A1A47E588A0C2211D54A8E031656AF57136D6E3443D3D00E7739EC0686",
+          "bytes": 1105
+        },
+        "frame-002000.chipram": {
+          "sha256": "89A5D654DB39BBB9C73CC26B9659C837A0EA3795F8AECDDEE8706D3071C722DF",
+          "bytes": 524288
+        },
+        "frame-002000.slowram": {
+          "sha256": "3F76C6D8B50CA426D0B84290C28405E7C889D6F7161D61FA169206ED3ED87B67",
+          "bytes": 524288
+        },
+        "frame-002000.bmp": {
+          "sha256": "506E0F723BCC02A1E24B5BBF79B9E9E72536BAC192A251B6A5BA2DC8F3D52929",
+          "bytes": 1136870
+        },
+        "frame-002000.pcm": {
+          "sha256": "E403D26A2DE5933EB48AE4F1EA37AFD0C4A58EBD0136C8C87415DB3AE65C55B8",
+          "bytes": 3844
+        },
+        "frame-003000.json": {
+          "sha256": "D2876BA4973638B9E88E940DEEE0C14FD0CA82EFD525281DD65ECC4B906727C5",
+          "bytes": 1105
+        },
+        "frame-003000.chipram": {
+          "sha256": "E96B07D24EAD8E2445C1595BADEDBB5633CE7487016C5B7F86F7D2C67858322D",
+          "bytes": 524288
+        },
+        "frame-003000.slowram": {
+          "sha256": "3F76C6D8B50CA426D0B84290C28405E7C889D6F7161D61FA169206ED3ED87B67",
+          "bytes": 524288
+        },
+        "frame-003000.bmp": {
+          "sha256": "B06386F682D5D4115F9CDB72404B1FDECDE69DCC5BBB48C5A867A8DECC2488E2",
+          "bytes": 1136870
+        },
+        "frame-003000.pcm": {
+          "sha256": "0690CE9A2DA956393AD7CC99EC5407FD8455E0A35330377C5359FCA485B4281F",
+          "bytes": 3848
+        },
+        "frame-004000.json": {
+          "sha256": "ED06D4C551B8B71F86F940AD0DDEF8DAB023EEBF2900BF06BA46ABA85211ED79",
+          "bytes": 1105
+        },
+        "frame-004000.chipram": {
+          "sha256": "8C6197305B34D3EE0B56AD167D2D9F84CD08A0B623534A3C404C1010B1476828",
+          "bytes": 524288
+        },
+        "frame-004000.slowram": {
+          "sha256": "3F76C6D8B50CA426D0B84290C28405E7C889D6F7161D61FA169206ED3ED87B67",
+          "bytes": 524288
+        },
+        "frame-004000.bmp": {
+          "sha256": "3B6DF7371D168BB576C1DB0D34F3788E568443E45A6B4EFCF3DC101184B7F490",
+          "bytes": 1136870
+        },
+        "frame-004000.pcm": {
+          "sha256": "5EC67E684FC1FC6ABCFA72F89FD351D19E62E64ED6EF09D6F9A7C72F70C680F5",
+          "bytes": 3844
+        },
+        "frame-005000.json": {
+          "sha256": "394C686344EA5D000FC9A681362F497F2FD130C423DBBB5AD417F8E607F586F5",
+          "bytes": 1106
+        },
+        "frame-005000.chipram": {
+          "sha256": "D540DA779E4D4293F64CA10A2B49B2A3AED6DF69166247DFDCAFC50A220052F4",
+          "bytes": 524288
+        },
+        "frame-005000.slowram": {
+          "sha256": "3F76C6D8B50CA426D0B84290C28405E7C889D6F7161D61FA169206ED3ED87B67",
+          "bytes": 524288
+        },
+        "frame-005000.bmp": {
+          "sha256": "AC39D123FCE58A92EFF3814FFB9273E00EF4E4878AD7BA65818E3E1FAEACED2A",
+          "bytes": 1136870
+        },
+        "frame-005000.pcm": {
+          "sha256": "0BE3899CB50B3BE99808982AF1694689538BB3C7C0740B9DCE17530658A4D9AA",
+          "bytes": 3844
+        },
+        "frame-006000.json": {
+          "sha256": "807971936A1E061B512D018F001829F0715890F26027F1A763B21C32C2CD48BD",
+          "bytes": 1077
+        },
+        "frame-006000.chipram": {
+          "sha256": "88359221F027D388E1AEA989C17C1745C5E6541113E55D4F81F9EEB25BFFACFF",
+          "bytes": 524288
+        },
+        "frame-006000.slowram": {
+          "sha256": "4C47EBC7545E7EE7851EB04455F34F9DCD0594F618025EC7FC60483A24ABEB05",
+          "bytes": 524288
+        },
+        "frame-006000.bmp": {
+          "sha256": "943C07BDB045EAB4EA14078B717736BB58C2969DBB809565C468806536506566",
+          "bytes": 1136870
+        },
+        "frame-006000.pcm": {
+          "sha256": "B99B58CD6F826D55BD8B3ACC41BC0F2413EB2E75F26A44F88B66718A69C7A8D5",
+          "bytes": 3848
+        },
+        "frame-007000.json": {
+          "sha256": "7E985E7ABD121FDEF9C36DFDA87C6822F9A73563199DEA64B960F3BECD34A5DF",
+          "bytes": 1106
+        },
+        "frame-007000.chipram": {
+          "sha256": "78031A9B46F955EE449F8F0BCC93BDF27DA12DFF19A59311718EEB7C8CE20E07",
+          "bytes": 524288
+        },
+        "frame-007000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-007000.bmp": {
+          "sha256": "6C3A7D3E368124A5814BC84E1616EDCDA2AF8A0329E9C8D68ECF04D2EE494A8F",
+          "bytes": 1136870
+        },
+        "frame-007000.pcm": {
+          "sha256": "735B9B65190A70649E73ACB9D09C994633464607F3BFC5A9EBF76DF6B64276A7",
+          "bytes": 3844
+        },
+        "frame-008000.json": {
+          "sha256": "8E48157446A10D233F335B66109DDE09ABC3A52FC3218EC613E0502ADACAE68E",
+          "bytes": 1107
+        },
+        "frame-008000.chipram": {
+          "sha256": "57A9EC68D32DC652B4991F03E77E5AD7C6AFE73747F6F57263585E2E1775F8C2",
+          "bytes": 524288
+        },
+        "frame-008000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-008000.bmp": {
+          "sha256": "5DB5A29A9C8901E2357B953996CE9F990272FA5ECEA2B64CA0BFF8DBC995D699",
+          "bytes": 1136870
+        },
+        "frame-008000.pcm": {
+          "sha256": "FD070795106C9DEACF113201B99E3FF452ED713CE675991B939367E7B7989308",
+          "bytes": 3848
+        },
+        "frame-009000.json": {
+          "sha256": "2B526D01D19EC1EDD91315BEAEB4A7616E7F187A3D7F68C18437A59ED9F5CF59",
+          "bytes": 1106
+        },
+        "frame-009000.chipram": {
+          "sha256": "17C09A5519E123B1282D9CD4EEF3EDB84586812C2600D571BC0DF96C13C694B4",
+          "bytes": 524288
+        },
+        "frame-009000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-009000.bmp": {
+          "sha256": "071C12AEAB9BE97FD9567E347A8803A31470222A8A426A4FF9B2C11AB47E2FEA",
+          "bytes": 1136870
+        },
+        "frame-009000.pcm": {
+          "sha256": "6F35B347FE1DC9E481259F390937700E429BB59F767894B7457DC8D0F1044882",
+          "bytes": 3844
+        },
+        "frame-010000.json": {
+          "sha256": "D6C30B641587902720FDCDC15F354E0ADC66A4231EF7A0DFE22FC652D55CB8CF",
+          "bytes": 1108
+        },
+        "frame-010000.chipram": {
+          "sha256": "AD34FF5B7A29D31D0E0E9E6C9046CC5BC2B9D597761A7FD4E0FADD2C0DF864B3",
+          "bytes": 524288
+        },
+        "frame-010000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-010000.bmp": {
+          "sha256": "B928C9BA6F025B8ACB7AF5B682939A9CF9FC3393E867401618FA58D0704C5500",
+          "bytes": 1136870
+        },
+        "frame-010000.pcm": {
+          "sha256": "3ECAA308AD7333D4D371CE1048EED1475B6110A98541E51E52597F0CE92B9967",
+          "bytes": 3848
+        },
+        "frame-011000.json": {
+          "sha256": "9F2F6C38F7C727A29D6F32327CC6E165C5B106E46630A25448693862AD0810C2",
+          "bytes": 1110
+        },
+        "frame-011000.chipram": {
+          "sha256": "5C83DD0D752BD3843B8EA4844E5020CFD8A771FF80F7078CE4869CF0999F60E5",
+          "bytes": 524288
+        },
+        "frame-011000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-011000.bmp": {
+          "sha256": "AFB803607735FAB0AFC84A886BD404BCAD924B7CC024500869ED16F8758B0526",
+          "bytes": 1136870
+        },
+        "frame-011000.pcm": {
+          "sha256": "77A864B7E61E5F8CCEC22269F28A8874ADFCED8FDBA76D59C7B3B74B0FA1C372",
+          "bytes": 3848
+        },
+        "frame-012000.json": {
+          "sha256": "8857CED0C33405A5951E539504602867626868F9B16BFAB0017525790D93B8AD",
+          "bytes": 1108
+        },
+        "frame-012000.chipram": {
+          "sha256": "FF48DEAF8DA51F8E13B0B6B92F3595F5B1C01074632AB61BB42373E50DD3F78A",
+          "bytes": 524288
+        },
+        "frame-012000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-012000.bmp": {
+          "sha256": "56E56FFDD72935BF7FA3408E19EEFC27735488A9049157D10DB0566D64B6D13A",
+          "bytes": 1136870
+        },
+        "frame-012000.pcm": {
+          "sha256": "7CD216E043D516A6723D32FD351D71EC132EAAE43818B97C93DBFBD36A4EDDE5",
+          "bytes": 3844
+        },
+        "frame-013000.json": {
+          "sha256": "CCDC003E70E1AC7DAF85F02C5D7496FB32C5CF4F253084D57C50FA562A97F443",
+          "bytes": 1108
+        },
+        "frame-013000.chipram": {
+          "sha256": "B7C1FF7BE28B25888A53FDF01D5F33DD4002AFD76A2B74B738F3CF2B5788B518",
+          "bytes": 524288
+        },
+        "frame-013000.slowram": {
+          "sha256": "0F04036C3D620B19606A0FC14165F7CD5D95D13EC14B4D8AB9AD55B5C19F7CCE",
+          "bytes": 524288
+        },
+        "frame-013000.bmp": {
+          "sha256": "F4B8AFE5EBEAA3BB306695E887C15DB6D94CC4A994095F9AC7C2A63492425768",
+          "bytes": 1136870
+        },
+        "frame-013000.pcm": {
+          "sha256": "FB21D24F0A84E2B2221C7679F52E83184DC4AC738242A8B48B2BF3D243735515",
+          "bytes": 3848
+        },
+        "frame-014000.json": {
+          "sha256": "D13F17B9620EC9EDBCFEBB45217A3DA7EAE9F6A8D3A04F315565CB66577A4C5E",
+          "bytes": 1079
+        },
+        "frame-014000.chipram": {
+          "sha256": "F0688AE27DE64C93C15D84CB0CCA0D3EB6E29FC30E0EA45AE10D7C523C4974E8",
+          "bytes": 524288
+        },
+        "frame-014000.slowram": {
+          "sha256": "F179F9E074DCCCDA3E253202CE8FF84F87FF4F0D987383F1E99E50FC5F03FBAF",
+          "bytes": 524288
+        },
+        "frame-014000.bmp": {
+          "sha256": "5F8370C2C7375B53D5E4BFD4D7A1EF4EBA1DE7812E91EAD92F610D3BC5E139D6",
+          "bytes": 1136870
+        },
+        "frame-014000.pcm": {
+          "sha256": "D883F28E14C303F7D67040185B5E01B28F167DA019D2AC05F0F645E592971479",
+          "bytes": 3844
+        },
+        "frame-015000.json": {
+          "sha256": "7364835BC25A1B6B5B9A5822E471315A9FE1C5EEB69BFD21825105346DFF63F6",
+          "bytes": 1108
+        },
+        "frame-015000.chipram": {
+          "sha256": "024424397B616F3D1E97D6CD46D943E680B6FC67A1C8CE0BC005E702857929CE",
+          "bytes": 524288
+        },
+        "frame-015000.slowram": {
+          "sha256": "78BC41C787FAA25D5CEC4A82BC4AB6ECB934F01497FD4DD31A331866F7D5F801",
+          "bytes": 524288
+        },
+        "frame-015000.bmp": {
+          "sha256": "8396651C6E56CE37E63FCF53ADC6968854DB6A169F1D504367BE40FF91CE5292",
+          "bytes": 1136870
+        },
+        "frame-015000.pcm": {
+          "sha256": "FA7F85339E38A7449F6650F7BB7F33301371833835793F9305D55CCBB3A9F0AC",
+          "bytes": 3844
+        },
+        "frame-016000.json": {
+          "sha256": "286384A3C85DB3832B8C8C7EAEF62D24FB138F3171AF9254FBD52B16E40D4C40",
+          "bytes": 1114
+        },
+        "frame-016000.chipram": {
+          "sha256": "CD47DFCB10F2C2FE5BEDF0888EE3C0D819317A84BFCF29808F796ED2187E5C92",
+          "bytes": 524288
+        },
+        "frame-016000.slowram": {
+          "sha256": "78BC41C787FAA25D5CEC4A82BC4AB6ECB934F01497FD4DD31A331866F7D5F801",
+          "bytes": 524288
+        },
+        "frame-016000.bmp": {
+          "sha256": "12ED36AE4565BB7ED95CC3202957697D882FB5A6727000338D14A0133601AC5F",
+          "bytes": 1136870
+        },
+        "frame-016000.pcm": {
+          "sha256": "9D95588CFA63F4103AC548853A0CCD3C96C730D51C9BC05C8EBB80AD0E36B267",
+          "bytes": 3844
+        },
+        "frame-017000.json": {
+          "sha256": "59D1855EAC0DACD1F6BDD4942D5B5E9DFA94EEB457AA6F33EC541E5D6A88A1EE",
+          "bytes": 1081
+        },
+        "frame-017000.chipram": {
+          "sha256": "461F59432C9EB9FC2346A87121A2DC5BF5415EAFB0FB980023F8EEC3885A3EC1",
+          "bytes": 524288
+        },
+        "frame-017000.slowram": {
+          "sha256": "78BC41C787FAA25D5CEC4A82BC4AB6ECB934F01497FD4DD31A331866F7D5F801",
+          "bytes": 524288
+        },
+        "frame-017000.bmp": {
+          "sha256": "5FB30F08CB8410CF090353A917C8B5FD91361AFB8FF178E63BACD593767A90A8",
+          "bytes": 1136870
+        },
+        "frame-017000.pcm": {
+          "sha256": "DAC6C080E1CF1AB696E742AB1D3A34A67B4D01D567FA8F85148F1C4BFB117B06",
+          "bytes": 3848
+        },
+        "frame-018000.json": {
+          "sha256": "8BC66D171F6166A9005F8B7B98605A94DCEEF9E05D49913B543FB3FF1C79EAB7",
+          "bytes": 1069
+        },
+        "frame-018000.chipram": {
+          "sha256": "34FF6E586CC07394460671E55AA6AE9A4222273966E0B98AFC6EC68C2ECD36AD",
+          "bytes": 524288
+        },
+        "frame-018000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-018000.bmp": {
+          "sha256": "096C5C4AB6EE649EA946F625B6480181670DC2BC95DC9F5DE538D74C9C6C0C01",
+          "bytes": 1136870
+        },
+        "frame-018000.pcm": {
+          "sha256": "F3E945877FBF41C807846C3087E4AF344EA4EA261B12190ADDAF1ECF261D3497",
+          "bytes": 3844
+        },
+        "frame-019000.json": {
+          "sha256": "F013C60BE91933892DE668534B6C0D0044F0F4E5F488FC4ABE68E865D0C3F7C6",
+          "bytes": 1105
+        },
+        "frame-019000.chipram": {
+          "sha256": "A476208630925A1EE70F8C1756BF5DCF30DE26F8B8B5A53606F87D5F9BA9F1AE",
+          "bytes": 524288
+        },
+        "frame-019000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-019000.bmp": {
+          "sha256": "5F93A07BBE94E816A197FCF2A0951BA09E7CF739851945BE414DE4CAE584340D",
+          "bytes": 1136870
+        },
+        "frame-019000.pcm": {
+          "sha256": "817ECF19F8F2FBC0A1A3A5E225925CE6C71E92E9281194F27E04CBD1ED7EA77D",
+          "bytes": 3848
+        },
+        "frame-020000.json": {
+          "sha256": "BB1922A6A034E9D8531F51BC9E8B931CDB5C06A86ECCA2226B7C9E0B45885CA4",
+          "bytes": 1110
+        },
+        "frame-020000.chipram": {
+          "sha256": "E769A65B12A7CDFB9D59E44CF2FCB45E53A3FD3601A9F117F929C82597265B02",
+          "bytes": 524288
+        },
+        "frame-020000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-020000.bmp": {
+          "sha256": "56268C0B2259CD5CFBE13C44E0B4258761B94E38E7EEB30DC94DB8B5DCFBB9EF",
+          "bytes": 1136870
+        },
+        "frame-020000.pcm": {
+          "sha256": "0C358DF95A8627C7923748CF39807F2D047BC4EDC2078E3BB54853030ADCCE73",
+          "bytes": 3844
+        },
+        "frame-021000.json": {
+          "sha256": "93510AB1B767804AA08BF0F859F17FDD346064509FBD9E7C91FF49348E51D384",
+          "bytes": 1111
+        },
+        "frame-021000.chipram": {
+          "sha256": "89DAC7321C9E6613B9979F6F6437E918B0B49E01BFB36D9D0CAEF988CC5FB65A",
+          "bytes": 524288
+        },
+        "frame-021000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-021000.bmp": {
+          "sha256": "5F02A962F58542FFDF8982B39DAB6348676D48009BCE2BEE11A07356C6D4E39C",
+          "bytes": 1136870
+        },
+        "frame-021000.pcm": {
+          "sha256": "3E70F857EC2BC79ED641C19CC75EDC0580867670B14C2FE7BB47BB9A80C3DF51",
+          "bytes": 3848
+        },
+        "frame-022000.json": {
+          "sha256": "E999B53F6762945AD3176F23A13D2940CE950EF57C1F1A00124DB7A00694F599",
+          "bytes": 1106
+        },
+        "frame-022000.chipram": {
+          "sha256": "AEB7ABFB4008D2DB04E51D05A13BD8F235CAE1500C916BD62CB5BAA61524B728",
+          "bytes": 524288
+        },
+        "frame-022000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-022000.bmp": {
+          "sha256": "51250D249DA42ACC1827CD899A02C01A6BA60C18888B6538997A344FB6D95924",
+          "bytes": 1136870
+        },
+        "frame-022000.pcm": {
+          "sha256": "85D16B62F86296DF127EC2A064AAF3F5916DC25A89E01F0F2288CEE2D3343878",
+          "bytes": 3848
+        },
+        "frame-023000.json": {
+          "sha256": "3C4D6D42A03F2A2C655BCBF2AFE24AA0E7B34D8A026ADAB07F34383B1FCF512A",
+          "bytes": 1106
+        },
+        "frame-023000.chipram": {
+          "sha256": "7FD0597C83D5D9C5539D8B854CBAF458189783C4D4D4E26C94050A94222C1EBA",
+          "bytes": 524288
+        },
+        "frame-023000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-023000.bmp": {
+          "sha256": "D6780144595906A4668CBE56167B2E582D021760141852D51A9C3DA67B7B2436",
+          "bytes": 1136870
+        },
+        "frame-023000.pcm": {
+          "sha256": "29F7CF4465BC96B5A4B4D17941341DFDC117A10879925202879C099E6087F0E0",
+          "bytes": 3844
+        },
+        "frame-024000.json": {
+          "sha256": "CD7D18F1D0B256BACA89A4D30BBF6405D7FFE791EF80319680C97F1F116A2B8E",
+          "bytes": 1111
+        },
+        "frame-024000.chipram": {
+          "sha256": "90ED6A7736E6D46D56A9E1A5B518FB4129667F1772F7359E4AAAB8532B77176F",
+          "bytes": 524288
+        },
+        "frame-024000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-024000.bmp": {
+          "sha256": "0B04221AF1AFEBEE6E563D67299C777C634F6A2A92B196005F4A8103BA5307F9",
+          "bytes": 1136870
+        },
+        "frame-024000.pcm": {
+          "sha256": "28C546898E255F2AF808F258CFCF2F28D93B2404304F7EF23754AA0D0833FD6E",
+          "bytes": 3848
+        },
+        "frame-025000.json": {
+          "sha256": "F2F5270A8F13E18630FF48809681A5F401920866D827C3356575CA54650749A3",
+          "bytes": 1111
+        },
+        "frame-025000.chipram": {
+          "sha256": "DD9233A2CC7E5B7E80534D25D4D7E6970FD344D75DC3799AB991F7B22C81650E",
+          "bytes": 524288
+        },
+        "frame-025000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-025000.bmp": {
+          "sha256": "9003FCAAB85BD236CAB6DEC0C84EBC874FCAC7AB5F3BECBEF020F522A22E0BED",
+          "bytes": 1136870
+        },
+        "frame-025000.pcm": {
+          "sha256": "9827EF4CB6D4E2786865806DA33805D46041D72737BBCC9DD3D659F8C1DA01D9",
+          "bytes": 3844
+        },
+        "frame-026000.json": {
+          "sha256": "A962E7D4DAEB3691DF54F25207961BCA33225A50FAA12F88320FAB9C7D3DE335",
+          "bytes": 1082
+        },
+        "frame-026000.chipram": {
+          "sha256": "75BD162A42DC5DB4FB28127979E55938720E411B0DC8706E4CEC1E3CCBBBDB03",
+          "bytes": 524288
+        },
+        "frame-026000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-026000.bmp": {
+          "sha256": "C9A597D427B18EEE73F78012FC0475304DD4D1AE5FA56A5C575F3E4762C04017",
+          "bytes": 1136870
+        },
+        "frame-026000.pcm": {
+          "sha256": "326196B16BFC0848622809483CCDE117A4A0FC0EC6050765F840775A8175FA9F",
+          "bytes": 3848
+        },
+        "frame-027000.json": {
+          "sha256": "9D86761E3C6C4C90675A9EF64FAA679059A0EE47E91747C22111CB049F7C44ED",
+          "bytes": 1105
+        },
+        "frame-027000.chipram": {
+          "sha256": "6FB6734E6265ABD6D9A2D36125977304117625239B437AFD1EDEC9FF1784F756",
+          "bytes": 524288
+        },
+        "frame-027000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-027000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-027000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-028000.json": {
+          "sha256": "641B531431FC18514D5B187F34F10DADB8C26B85C797CE8128D71080002A7E1C",
+          "bytes": 1105
+        },
+        "frame-028000.chipram": {
+          "sha256": "0B49EEAAA2958002A49B97539BEC4FF73DED01D0F33F2CBA5B03296187AAAAC6",
+          "bytes": 524288
+        },
+        "frame-028000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-028000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-028000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-029000.json": {
+          "sha256": "6BA953CD189304D1704CA3C82AB091E942BD5C5CC6D15FACC3F31350685AB80F",
+          "bytes": 1105
+        },
+        "frame-029000.chipram": {
+          "sha256": "C35855E22A1279895C4A43AEEEB0335108F408392B169EBE01BF126F25F09D4A",
+          "bytes": 524288
+        },
+        "frame-029000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-029000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-029000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-030000.json": {
+          "sha256": "78AF94578CF06E70457639983991BAC5131FE88291CAEAD26199BB78EF260F79",
+          "bytes": 1105
+        },
+        "frame-030000.chipram": {
+          "sha256": "B09F0D381A1376F902EC6F52EC054A223B172019D2953E4D7502AEC32B14C2AE",
+          "bytes": 524288
+        },
+        "frame-030000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-030000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-030000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-031000.json": {
+          "sha256": "D107709A0543576BDB6BC752C4DA2146F98BBF7DDBB0714AD354B50F7A6FEFF5",
+          "bytes": 1105
+        },
+        "frame-031000.chipram": {
+          "sha256": "1A498B9234B466F38C3EA07F7FC6BD1B49DE32E9FFBD8EFA77352C267A203471",
+          "bytes": 524288
+        },
+        "frame-031000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-031000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-031000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-032000.json": {
+          "sha256": "1CF6CD3D81E5FE161716E0532C5FD76F89199D516BF54DAFC8DC19090D7C4A88",
+          "bytes": 1105
+        },
+        "frame-032000.chipram": {
+          "sha256": "D602DB67A2854ED859C74D8563DDD6D39030C1B9977E417A541E11EE22510197",
+          "bytes": 524288
+        },
+        "frame-032000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-032000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-032000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-033000.json": {
+          "sha256": "0FC81E4988CB3C56CDB8C0A097F96D8123173B367751C98EC6D77941591BB48E",
+          "bytes": 1105
+        },
+        "frame-033000.chipram": {
+          "sha256": "A324475C2B128547BE039B58D8C68166AB4FEA31C1B5B1EE1B449D52B6C13D81",
+          "bytes": 524288
+        },
+        "frame-033000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-033000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-033000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-034000.json": {
+          "sha256": "D85767624F1A243F563C1BCDA437359939E41963E11C07D48B679AB524ED0E03",
+          "bytes": 1105
+        },
+        "frame-034000.chipram": {
+          "sha256": "BEDDAE35908E87FBA70A79B1575FBB9308B3DA20DD64C825555395E1DBF6677D",
+          "bytes": 524288
+        },
+        "frame-034000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-034000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-034000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-035000.json": {
+          "sha256": "489A1B7B7B7456F24C82F3A2DB1892E198AD95BE362A2D28E60DD5BCDABBDAE1",
+          "bytes": 1105
+        },
+        "frame-035000.chipram": {
+          "sha256": "D6ADB652DD99364DFB811C772E8AF7977AB7BB5DA4A0101A8A6F50976E0C94D6",
+          "bytes": 524288
+        },
+        "frame-035000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-035000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-035000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-036000.json": {
+          "sha256": "E254A7F329E596E87E00A7799CAFDFCFA8CDA5F341EE500DDAB3F27616848B99",
+          "bytes": 1105
+        },
+        "frame-036000.chipram": {
+          "sha256": "7A82CDFBC94D171E5D188B84ABB0935892503497537646780B20640D04C66885",
+          "bytes": 524288
+        },
+        "frame-036000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-036000.bmp": {
+          "sha256": "CEE6B2B9C7C6B889D3179008CDD9085B5846CC725429C06197CB08669C9B2A07",
+          "bytes": 1136870
+        },
+        "frame-036000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-037000.json": {
+          "sha256": "D08E475EFFEE8BC5303C8DA3990D9442A3AD59DFD910546E8F4EDE9E9F7BE563",
+          "bytes": 1108
+        },
+        "frame-037000.chipram": {
+          "sha256": "C04CA9BDAAE4DEC905BFE898E98D4DB2F9BE7DB2285C87688A94A83361F33AE8",
+          "bytes": 524288
+        },
+        "frame-037000.slowram": {
+          "sha256": "29893E832088AB8ED2B97E91AEB53B4452FCB73FBFD7CCA6D39A43FE05F9D6FB",
+          "bytes": 524288
+        },
+        "frame-037000.bmp": {
+          "sha256": "D52F9990CB2964A0CE06E939907C36FC4CEF79D2A9B758F9609ADD4926309E6F",
+          "bytes": 1136870
+        },
+        "frame-037000.pcm": {
+          "sha256": "024D3CA975653067E7367D5EB179005F71B6E33C6FC2CAD2C221A134C1038212",
+          "bytes": 3844
+        },
+        "frame-038000.json": {
+          "sha256": "A4BE8747809803487D414AE18FCB249BA98002CDFD0E558C924A9E872F0CB834",
+          "bytes": 1108
+        },
+        "frame-038000.chipram": {
+          "sha256": "22C8B78D33D8E65DA542C35E6B5567E2064CD6F0DF625568D33CD8E0D7009A15",
+          "bytes": 524288
+        },
+        "frame-038000.slowram": {
+          "sha256": "8F2C1A08176B5A0227F28D730C414D86DBF00A37B89D26B2D13AAA9642414B9B",
+          "bytes": 524288
+        },
+        "frame-038000.bmp": {
+          "sha256": "27E2E7A5CFD111DFB579E295E0E7A4B5B096EBA56320ED1ECF6554A7EC954602",
+          "bytes": 1136870
+        },
+        "frame-038000.pcm": {
+          "sha256": "FD308617ECC0B6896BAA375A1057EABCA94F4B8655F0344FD67F9DF03DF30855",
+          "bytes": 3848
+        },
+        "frame-039000.json": {
+          "sha256": "73F9DC0046D4F9AD7F92699BF8597E1891A0C6FAEFE28AF1CD25CFC9298F3802",
+          "bytes": 1106
+        },
+        "frame-039000.chipram": {
+          "sha256": "28BF84385354318E3DAAAD6BB2BA10956116D588ADD7EA4754DBF8D441BA5177",
+          "bytes": 524288
+        },
+        "frame-039000.slowram": {
+          "sha256": "8F2C1A08176B5A0227F28D730C414D86DBF00A37B89D26B2D13AAA9642414B9B",
+          "bytes": 524288
+        },
+        "frame-039000.bmp": {
+          "sha256": "D8297073E0C5BDA1439AC5FF6D87C4F5A591C60E104D57BEBD5C80D7B7F29EA9",
+          "bytes": 1136870
+        },
+        "frame-039000.pcm": {
+          "sha256": "E59C76B80D1361E3F5C13B5ED88549B3A76323140F16BD523C9BC1461F941EC6",
+          "bytes": 3844
+        },
+        "frame-040000.json": {
+          "sha256": "6BA30BF5F7010C00FA5E6C1C2D8326627B3891ABAD016C9BDB74F31D9449A10C",
+          "bytes": 1106
+        },
+        "frame-040000.chipram": {
+          "sha256": "3E9C630C64F9C54F1BD3000C12ED8C94D95E955AC866B838C997F091F02B1A83",
+          "bytes": 524288
+        },
+        "frame-040000.slowram": {
+          "sha256": "8F2C1A08176B5A0227F28D730C414D86DBF00A37B89D26B2D13AAA9642414B9B",
+          "bytes": 524288
+        },
+        "frame-040000.bmp": {
+          "sha256": "6E7930E9B57C993AB12B370478683F7EB634D8FFE4BB1AD635BC538CFEEDF19A",
+          "bytes": 1136870
+        },
+        "frame-040000.pcm": {
+          "sha256": "04740C96D6EF289FB080617078FF5E0EB99B4806ABF1E1FC752160BED7C8EFFA",
+          "bytes": 3848
+        },
+        "frame-041000.json": {
+          "sha256": "5D3474CD23B732A6D8CE1A1EEAA0291931723C82FF180E4D842B1099EAD687DE",
+          "bytes": 1106
+        },
+        "frame-041000.chipram": {
+          "sha256": "EB096BA074CA5F45BD5188D6486BE079EDFF79B51CDFC7883B792C5EABE5C3FE",
+          "bytes": 524288
+        },
+        "frame-041000.slowram": {
+          "sha256": "8F2C1A08176B5A0227F28D730C414D86DBF00A37B89D26B2D13AAA9642414B9B",
+          "bytes": 524288
+        },
+        "frame-041000.bmp": {
+          "sha256": "C3C9C17E2CC781482D9874F65466DB85D0BC5B753DE0364FF06425C81CABFB23",
+          "bytes": 1136870
+        },
+        "frame-041000.pcm": {
+          "sha256": "61136F2431E153955EE8C47FAC48B2C677F274364C3269F29BCC01C8223C4AB9",
+          "bytes": 3848
+        },
+        "frame-042000.json": {
+          "sha256": "642AB6303715AEF56945E550319E3FED03ACE36389D504E16EB41F330041543A",
+          "bytes": 1108
+        },
+        "frame-042000.chipram": {
+          "sha256": "50770A9FCCAEC07B382745B090C9B6257E6454136C8969FF9BE4E1C3DED102E0",
+          "bytes": 524288
+        },
+        "frame-042000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-042000.bmp": {
+          "sha256": "1CF626048A4A3B6EBC67F32C31450AB7443A6F145E7E88592377800883D5500F",
+          "bytes": 1136870
+        },
+        "frame-042000.pcm": {
+          "sha256": "187AC29F3E3247091D77511A507BD2B4E5B13665A2CD4D18EC02859E7C01ED9F",
+          "bytes": 3844
+        },
+        "frame-043000.json": {
+          "sha256": "7441513F8432A2A56F2FBC136CE8CD2A205CAE806F53AD0092EFC626DF9656F1",
+          "bytes": 1108
+        },
+        "frame-043000.chipram": {
+          "sha256": "8E0550F87034C90AC7426E522007D6F66098D45B0EAA82CD251B85C9D083DB29",
+          "bytes": 524288
+        },
+        "frame-043000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-043000.bmp": {
+          "sha256": "6DB0E12C95AD6902757749A40641F90BC3991E6747936EB8F9659672F2F3FDF3",
+          "bytes": 1136870
+        },
+        "frame-043000.pcm": {
+          "sha256": "8DC44AD63B3130407ED4DFEFAC12BDF340D77B14582D84377E5BDCCCDFABDED9",
+          "bytes": 3848
+        },
+        "frame-044000.json": {
+          "sha256": "8145E0FA4BA37E6A9AF69B7B1A8001273640F69D513BC7636317D2DB3AEEFDCD",
+          "bytes": 1112
+        },
+        "frame-044000.chipram": {
+          "sha256": "2636CCC68B9EF1963ED0C13B1DC11C1812AC405B37E99775EC8F703ABA098848",
+          "bytes": 524288
+        },
+        "frame-044000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-044000.bmp": {
+          "sha256": "5EF13BEFE78A1B1A128E8FCCDBD8A6AB6CB94327DD825F1B691D66395F7F9078",
+          "bytes": 1136870
+        },
+        "frame-044000.pcm": {
+          "sha256": "7F24D15C260DEA48F94294901E7E8BA7B449EAAEDC7AEB5C8D5AE3F88362C90E",
+          "bytes": 3844
+        },
+        "frame-045000.json": {
+          "sha256": "D7E76EC776F96584B13091D3010B5126DDE635ED6027BD36D0480405A67A4BFD",
+          "bytes": 1112
+        },
+        "frame-045000.chipram": {
+          "sha256": "A76F12989FDEFF4257AA302131E8CC7169E6054BA6685EB5D44169CBEF8556A1",
+          "bytes": 524288
+        },
+        "frame-045000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-045000.bmp": {
+          "sha256": "1CDC26EB76EDA32A73B06B6392402259B5E6B2C9FE5BCD548E8EBF24113E096F",
+          "bytes": 1136870
+        },
+        "frame-045000.pcm": {
+          "sha256": "75A6B070BC1CA25EB659303243798EEDED4E50A4E7C29B22C0ADD040BE3F56DC",
+          "bytes": 3848
+        },
+        "frame-046000.json": {
+          "sha256": "117A20A0E14469E4D249E8FBE26433B3AABF8AB5267CB3F301B7E67822EECAD5",
+          "bytes": 1108
+        },
+        "frame-046000.chipram": {
+          "sha256": "85B16245651E7E011368EDF1563CEAF322236545DC528A6F067BCFE841686A1B",
+          "bytes": 524288
+        },
+        "frame-046000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-046000.bmp": {
+          "sha256": "144CD51B34A3A88BD7A7C7090DB910DD3A50DE72D2F58A8A6D56059E22D26E1D",
+          "bytes": 1136870
+        },
+        "frame-046000.pcm": {
+          "sha256": "4D335DFB1ACB186D04711C7259046FF77D35170D8F7FA4614B6409D0231004FC",
+          "bytes": 3844
+        },
+        "frame-047000.json": {
+          "sha256": "3F2BBDBB3E44935F74197256EEB5BA4EE4DC3BA393FBA7BCCD0435E438268620",
+          "bytes": 1109
+        },
+        "frame-047000.chipram": {
+          "sha256": "0A578E1A37E941BCC04F3E88507A536A2045D37933F40C95E57E8C168D7B8E34",
+          "bytes": 524288
+        },
+        "frame-047000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-047000.bmp": {
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        "frame-047000.pcm": {
+          "sha256": "2DB5B1AD6311E17175C4D50A1ADE878A50704FC89EC408783A7534E3580DA2A6",
+          "bytes": 3844
+        },
+        "frame-048000.json": {
+          "sha256": "AA9BC15EEE17D9E815A213A18EA4FF784F39997587A3F0EAECC39368E7E365FF",
+          "bytes": 1108
+        },
+        "frame-048000.chipram": {
+          "sha256": "9752BD9EB7FA05D19C1E7FC83A42E6EBA2EDEACC0A6B490D8C273E7B07A6EFA6",
+          "bytes": 524288
+        },
+        "frame-048000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-048000.bmp": {
+          "sha256": "A6DB8DCC8D910DB562BE907D53E6A8C311D1AF958F21BDFF5816CAA17A3408EA",
+          "bytes": 1136870
+        },
+        "frame-048000.pcm": {
+          "sha256": "3D1446BEEDA27F6385740338B7865AC6301D5869C386641DB725FA2B2EAAF131",
+          "bytes": 3844
+        },
+        "frame-049000.json": {
+          "sha256": "CBA7ACDC87C5407625A3B26FD7D1C6F7EB93AFE4B200EA1D37A5E5710D032D1C",
+          "bytes": 1108
+        },
+        "frame-049000.chipram": {
+          "sha256": "C70482ECC4942093A3F7790E2FBA36D0B5BB3D1AB57DF0121C1E761E781E7A6A",
+          "bytes": 524288
+        },
+        "frame-049000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-049000.bmp": {
+          "sha256": "E9A17469E5B3145D7BB45141F1620BE5414F7515B4240A5FBD9D059583F31ABB",
+          "bytes": 1136870
+        },
+        "frame-049000.pcm": {
+          "sha256": "AA2D95850831778FC01A7C923EA03421D2B43D645AFB6FB245D404A7F6C969ED",
+          "bytes": 3844
+        },
+        "frame-050000.json": {
+          "sha256": "71971AEFF4DA12454A378E264809CD4E83F8A67DFF1992FB1AC7AE2B3A877F9A",
+          "bytes": 1108
+        },
+        "frame-050000.chipram": {
+          "sha256": "559BFCA2760FFE75C670DCEC533B199145F69B958B187B869709D432D9B9FC6E",
+          "bytes": 524288
+        },
+        "frame-050000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-050000.bmp": {
+          "sha256": "68D434294144B6563510B01E883C10166180CDD11C9AA20900742FFBC1A8FA11",
+          "bytes": 1136870
+        },
+        "frame-050000.pcm": {
+          "sha256": "7BBB5D0A0F6940F52168A12029591B42EDBB76181070A381E8B0D1F9675D42A1",
+          "bytes": 3848
+        },
+        "frame-051000.json": {
+          "sha256": "9C0E157DF4DFBD59647EB5C8D7C8C64620759233D3ED874DC86C59059DD73377",
+          "bytes": 1108
+        },
+        "frame-051000.chipram": {
+          "sha256": "361535B1BEC56A8CC1104D30B58CDC8BE5D9C11D1130ABB2C9C5A7BD1AC053D9",
+          "bytes": 524288
+        },
+        "frame-051000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-051000.bmp": {
+          "sha256": "DBA0DB7542D6BAA6C3A8F3C96323A876B5B89C14052C8600B35CE508DD16B007",
+          "bytes": 1136870
+        },
+        "frame-051000.pcm": {
+          "sha256": "7F2A440E44A69E053BA2BC0EBCCDB3CF927290B9E5901C9BBBD2D09800569DAB",
+          "bytes": 3844
+        },
+        "frame-052000.json": {
+          "sha256": "9936261CB0EB80C8F0BAFF56E612A38E4869E28B0A6FC7A778D45955CD545EF9",
+          "bytes": 1108
+        },
+        "frame-052000.chipram": {
+          "sha256": "8B047E9AA969589451004D6E0CCE8B6ABD1075005FC0DFFE54C0BAED63C7D427",
+          "bytes": 524288
+        },
+        "frame-052000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-052000.bmp": {
+          "sha256": "5062DE11E3CE3BEE5246E933695C24E8992FC74DBB870F324625D86663EA0499",
+          "bytes": 1136870
+        },
+        "frame-052000.pcm": {
+          "sha256": "0E7F5C295858FE6CE8C85D2619D72B5E75C6E9A5AF5743F6307860DD3551EB2E",
+          "bytes": 3848
+        },
+        "frame-053000.json": {
+          "sha256": "4B6E887009E98A0C6F9FC7176716C4F6DFEF809BE6B193A7E317A7DEE3D9E7A7",
+          "bytes": 1108
+        },
+        "frame-053000.chipram": {
+          "sha256": "97692B35A7814D9E4021B413A698893C877EFD0C4DAA6306E715872CAFF72561",
+          "bytes": 524288
+        },
+        "frame-053000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-053000.bmp": {
+          "sha256": "90A4CB57A34059BF503204F38E8BC2CE711B87660AD710558A59BDDE420C392D",
+          "bytes": 1136870
+        },
+        "frame-053000.pcm": {
+          "sha256": "659E594B083754546BB5A30306DEA5182A6B1A34038360F57E9A898263BEC6A0",
+          "bytes": 3844
+        },
+        "frame-054000.json": {
+          "sha256": "C62C2F3D763E2C4750BB27E5661A3EC6F0100936FB3F3E469430B33BFECEBEC6",
+          "bytes": 1108
+        },
+        "frame-054000.chipram": {
+          "sha256": "397A8F000D40B4260FC4848C14092B5A60AF9FAA6431750279A5ABB358AB2A40",
+          "bytes": 524288
+        },
+        "frame-054000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-054000.bmp": {
+          "sha256": "D54E8E91E7FE980325683083499287B05587D2E1375BC70F65242F1E00ED48DB",
+          "bytes": 1136870
+        },
+        "frame-054000.pcm": {
+          "sha256": "70279CADD1659A2F2E44E18FAF7B541F5D29B00B0D9D187334F7F5BFCF3EE256",
+          "bytes": 3848
+        },
+        "frame-055000.json": {
+          "sha256": "824ABC67CE35881A3E280DB8389031E7CC857E258BAAAA1346CA2D8BF8A89B3D",
+          "bytes": 1108
+        },
+        "frame-055000.chipram": {
+          "sha256": "83BEC2C3B203E228EDC2C48BC61905FBE2D837CA1BEEC7BCFD3590CE5B9B34D0",
+          "bytes": 524288
+        },
+        "frame-055000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-055000.bmp": {
+          "sha256": "E8EB4795C8D8EED97AE47ED74747E4E18147E67C976E0DC786964CEB00355659",
+          "bytes": 1136870
+        },
+        "frame-055000.pcm": {
+          "sha256": "B44F427A668DA1C1DCFBD6A14AE8D1B91DE5A433F9D808F6CEE16B68F9D58902",
+          "bytes": 3848
+        },
+        "frame-056000.json": {
+          "sha256": "F5D2F2DD29784724B107FC5122D02F50A509A440AE52171321D75D4ECD9F0511",
+          "bytes": 1108
+        },
+        "frame-056000.chipram": {
+          "sha256": "9A0FB974428CCD19881E8F8A21C12D0C4858368DE0CF17A0073B50EA1ED311CA",
+          "bytes": 524288
+        },
+        "frame-056000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-056000.bmp": {
+          "sha256": "40427BC6C66D96EDBDE4E2D73DFEDC7070C8E680FE3986D1523ED34D02E2C5EF",
+          "bytes": 1136870
+        },
+        "frame-056000.pcm": {
+          "sha256": "1703FCF1FD1BDEB69BB51B554F54AD045CDAF9AEA553042E6482DD05957A6C4F",
+          "bytes": 3844
+        },
+        "frame-057000.json": {
+          "sha256": "33C4177562E7B8395225702DABD2342DE9326F9407EFF16AC2D02C3431D206D2",
+          "bytes": 1108
+        },
+        "frame-057000.chipram": {
+          "sha256": "364B21A0D5DDC08A2C5BDB24F673DB282415DBE8CD4FAC55AA3D96B299E771CF",
+          "bytes": 524288
+        },
+        "frame-057000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-057000.bmp": {
+          "sha256": "51A07C3A68A1EB3897B2C2141EC999357C6A22DCB004330549F0D5742BB57126",
+          "bytes": 1136870
+        },
+        "frame-057000.pcm": {
+          "sha256": "A4B356E7B5CB9B5C6F55484A844F7F80B0F1CCC685664E639DEC8EAFDF0F1AAD",
+          "bytes": 3848
+        },
+        "frame-058000.json": {
+          "sha256": "0EAB91984FE53D83D9724413069D83498A8B183759BDFA44635BBDE2E8BEA939",
+          "bytes": 1108
+        },
+        "frame-058000.chipram": {
+          "sha256": "866280120A16ADAF175EF9089DA8A63595E95764FE0DF6B031152A4313E5F993",
+          "bytes": 524288
+        },
+        "frame-058000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-058000.bmp": {
+          "sha256": "BF2C3882D1E62AB40D5D895BEB5A15D844CC37292411C362FF7BF2730CCF9A1C",
+          "bytes": 1136870
+        },
+        "frame-058000.pcm": {
+          "sha256": "C92F562588F9184A7A511502EFCE5E0A3DE8E3C7495D9629D1B4EC7EA345583B",
+          "bytes": 3844
+        },
+        "frame-059000.json": {
+          "sha256": "1FA1D58949C7AEA7697E9807C2848767E096FBAAC41D951B9397F3357796A927",
+          "bytes": 1108
+        },
+        "frame-059000.chipram": {
+          "sha256": "6962AC8D351F8FDCAAEDE130A367E8660632398F072FFCF356DFCBC5A7759237",
+          "bytes": 524288
+        },
+        "frame-059000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-059000.bmp": {
+          "sha256": "3CF85A2796BEA55C845FCD5384782E319B1DD5AF685D5F6001078CB0530A8226",
+          "bytes": 1136870
+        },
+        "frame-059000.pcm": {
+          "sha256": "317D142DB253E565C5ED269B9A6C1EC23A8ECE81765E45E365B9CA633A8A8F64",
+          "bytes": 3848
+        },
+        "frame-060000.json": {
+          "sha256": "F7EBC2D86B8C79882A194791C30FD6AA4BDA9D2F46B77678E6013A0577792F3A",
+          "bytes": 1108
+        },
+        "frame-060000.chipram": {
+          "sha256": "01349FE00A5C2DC1078C6714BC47441B42E12B9162FCD6A100887E9577437BB7",
+          "bytes": 524288
+        },
+        "frame-060000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-060000.bmp": {
+          "sha256": "98CFB24EA2726252F1D00E3CEA44759693858FBE434E94E6AA56DE400076E1D0",
+          "bytes": 1136870
+        },
+        "frame-060000.pcm": {
+          "sha256": "347D614CA3CCEA773B2FCCC3AD25B3C034944384A81FCF9F41F523BAE6E2E0A8",
+          "bytes": 3844
+        },
+        "frame-061000.json": {
+          "sha256": "49EBFD62D09BDCE22131E23740CC47EA2DE9A7CE7FB9857AE8BCF6FD358BFFE8",
+          "bytes": 1108
+        },
+        "frame-061000.chipram": {
+          "sha256": "265B6130D146C6092FE1F1A8A4C34F06B1FDB4DF429112476365A1DA962BD0F0",
+          "bytes": 524288
+        },
+        "frame-061000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-061000.bmp": {
+          "sha256": "712C226F32D9BCA19E28886911494320AC10D3421D2E32EC893FA8CB3938ED35",
+          "bytes": 1136870
+        },
+        "frame-061000.pcm": {
+          "sha256": "C907DE949B004C423810EC4FBBF531615EE9B5BBE7F69A08971D25AF5BAA954D",
+          "bytes": 3844
+        },
+        "frame-062000.json": {
+          "sha256": "B101A01061A3209FF9FF908C8A87CCCB6A46DE966EB35A190161CBB760CAE251",
+          "bytes": 1108
+        },
+        "frame-062000.chipram": {
+          "sha256": "4FB652FF6DFD857CCDE47B7D0E097C4686E901560457195AC5731DCAC3DA03C7",
+          "bytes": 524288
+        },
+        "frame-062000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-062000.bmp": {
+          "sha256": "F471C3E308CA1C53B0531E3D7E350CCEB3F3CE5A37AC146C0D98044E9BC6F177",
+          "bytes": 1136870
+        },
+        "frame-062000.pcm": {
+          "sha256": "A9A991CF44797474961A51F47724623AC88336B1CB4DFC3E3EE12F61F4922E1E",
+          "bytes": 3848
+        },
+        "frame-063000.json": {
+          "sha256": "0E45952166CCDC88B13078781C40A3262C675D29E120D5DC77A7FD87EE810843",
+          "bytes": 1108
+        },
+        "frame-063000.chipram": {
+          "sha256": "2A9FC77D47142A45B3D1396916AEDA64B15759502E7DA1C4395115DEDBD83CDE",
+          "bytes": 524288
+        },
+        "frame-063000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-063000.bmp": {
+          "sha256": "B8D7451820039E1625654073B3E6EB3869649344822CD4CAF013DD6ACC0606D1",
+          "bytes": 1136870
+        },
+        "frame-063000.pcm": {
+          "sha256": "791AC6BF105A9701284D7BA579ADA57D18D557605D59E70B7E3DF119F0A82ADB",
+          "bytes": 3844
+        },
+        "frame-064000.json": {
+          "sha256": "6CEA2E598F8F38653F876719B07602326686AF288FC2D0FAC3F3D07133B14BE9",
+          "bytes": 1108
+        },
+        "frame-064000.chipram": {
+          "sha256": "EBD5FB4D935F3758DADE889D11471625EB74CEEA0C314E6CF12B30CE03367F83",
+          "bytes": 524288
+        },
+        "frame-064000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-064000.bmp": {
+          "sha256": "C89312AC0D0B8F69BC521D43D56B14D2B0DED640A3DDB7DD5DDC927FF1C54BCA",
+          "bytes": 1136870
+        },
+        "frame-064000.pcm": {
+          "sha256": "F7C50DFED07FE188BBD7F05167E95FF6569505B970EC1B1E83B679F08BBC2AF1",
+          "bytes": 3848
+        },
+        "frame-065000.json": {
+          "sha256": "7CCA72634F951F27F4271BBD411B3D1DC9C0EE7C1EDBD586D8E303F700376C93",
+          "bytes": 1108
+        },
+        "frame-065000.chipram": {
+          "sha256": "C319263738220E10B3D18E25310DE84F71E67312E59F5E8A15E8D677C0ECDB2D",
+          "bytes": 524288
+        },
+        "frame-065000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-065000.bmp": {
+          "sha256": "C51E7B28D2B7D6C957CCD92DA77CC128389BEE5D37DFCD7606CD17A0480B33E9",
+          "bytes": 1136870
+        },
+        "frame-065000.pcm": {
+          "sha256": "3F54F4C49EAB03EB08233CE1760779572BBCA4BA0595FEDDB2D96BE2E225C82C",
+          "bytes": 3844
+        },
+        "frame-066000.json": {
+          "sha256": "62F7410F01584F4EB1D21B6661E122D386EDC6A5917AFE5C51E4F86D567FADB3",
+          "bytes": 1108
+        },
+        "frame-066000.chipram": {
+          "sha256": "CF52EE7F12C4F68AF197465069F7A578D2CF16069AB5BC61FBDD5645973B10EE",
+          "bytes": 524288
+        },
+        "frame-066000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-066000.bmp": {
+          "sha256": "027C36CD5FAB6FB7D95BA3C000C621F188EC99DE836284D860A51AB960D77882",
+          "bytes": 1136870
+        },
+        "frame-066000.pcm": {
+          "sha256": "1A3C81C3A1E0509EFAF7637EAC6F4E326A70E288DA0493F71D0A07F789B8F8AE",
+          "bytes": 3848
+        },
+        "frame-067000.json": {
+          "sha256": "8431A2562ED820CBA425374279441E5EA89EB1FD2AAB7BA54332F3E2092DBAE0",
+          "bytes": 1108
+        },
+        "frame-067000.chipram": {
+          "sha256": "D136D996B9B5D2D1066E0D9ADCEC4EC50709897FBA17EA3E5C46D348F20B8B7A",
+          "bytes": 524288
+        },
+        "frame-067000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-067000.bmp": {
+          "sha256": "2D3286C2EA8AC7D86D019D0B415DA5787D372B00FFD545A4DA0BE36BB78A3AF6",
+          "bytes": 1136870
+        },
+        "frame-067000.pcm": {
+          "sha256": "6BA928D9BAC20BF7F2CEE97C79D156DBE373BD60955C3DFC667F4B368D02B9AD",
+          "bytes": 3848
+        },
+        "frame-068000.json": {
+          "sha256": "208AE598293613394B9B29EC2287B5BBD587E31FFA336C47E2046973F7D8296B",
+          "bytes": 1108
+        },
+        "frame-068000.chipram": {
+          "sha256": "BF0876CDED16D48E904A1640DA746BA49F0564D1C527E78ADE05824ED82CCD99",
+          "bytes": 524288
+        },
+        "frame-068000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-068000.bmp": {
+          "sha256": "DE317CF07F1AA6EB1343E582F872F6E5E8689D526FF347CC9DC8ED7D8236E3BA",
+          "bytes": 1136870
+        },
+        "frame-068000.pcm": {
+          "sha256": "5BA78030D5AEAAFF4C0D651A22F869D24E394A8D45AEC626EEE8DC2176C211BC",
+          "bytes": 3844
+        },
+        "frame-069000.json": {
+          "sha256": "A7CD36C9C202CF099B3A3B6C29E863BD6435A14E4C78C4C36D2756B6E20A8A30",
+          "bytes": 1108
+        },
+        "frame-069000.chipram": {
+          "sha256": "62A952ADAD2C524D606D4ABD7E5B968DF41DDF425872BA0ADED741FC7C29C4A7",
+          "bytes": 524288
+        },
+        "frame-069000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-069000.bmp": {
+          "sha256": "61CC2E32F192E3227822BF30A1807EB21DC668EDA5E903C3FAA95D1B2AF9B916",
+          "bytes": 1136870
+        },
+        "frame-069000.pcm": {
+          "sha256": "6606DEB5BA68963FBBA1D5350D8EC31BDFEC4E1E26BA990C1FC42F728014777E",
+          "bytes": 3848
+        },
+        "frame-070000.json": {
+          "sha256": "1F6AF1B1CCCE9598D5BF8F75E906699D5B6209442C20C67B028D0FDDBFBE40AF",
+          "bytes": 1108
+        },
+        "frame-070000.chipram": {
+          "sha256": "F2DC72A371EC8E89AE4472A331CF38B48F60BA03AEB74F21CBDADC0B68C7C2B5",
+          "bytes": 524288
+        },
+        "frame-070000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-070000.bmp": {
+          "sha256": "EFB00C8D8365798D6FEAE06FBEEFE8BAA16E0F54ED935AD6FEAADD0B413A9274",
+          "bytes": 1136870
+        },
+        "frame-070000.pcm": {
+          "sha256": "3EA4786A6CAE53AEB7B74F577A0E07EBF4ED2F358D93B959AFF25D3C6ECA4058",
+          "bytes": 3844
+        },
+        "frame-071000.json": {
+          "sha256": "0C6C3A57041C6E6EAEF845E420E835E2538F689A9552EB3B9891BF922BADE817",
+          "bytes": 1109
+        },
+        "frame-071000.chipram": {
+          "sha256": "4FD980887495A7163F8DC9630FD70DC8211440959D776CA324D10F570BB1CAD8",
+          "bytes": 524288
+        },
+        "frame-071000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-071000.bmp": {
+          "sha256": "5893FE34D3BD728A6E2D5927CDC93DFE9BA1CD4363D3D565FBA7DC9A3A94CD14",
+          "bytes": 1136870
+        },
+        "frame-071000.pcm": {
+          "sha256": "B79C3C7B157335A0EE52ACDE038C43B51F5F2CF20A5205E20B7EF6D6CC011C35",
+          "bytes": 3848
+        },
+        "frame-072000.json": {
+          "sha256": "2A54C6C12F0C5225EE54564BEA73F12C42847C830717A702D7C61EAC56B6520A",
+          "bytes": 1109
+        },
+        "frame-072000.chipram": {
+          "sha256": "941134B36DB343AB062AAD8CF7B1B049788903DB175013448E08E5F09AF4B75D",
+          "bytes": 524288
+        },
+        "frame-072000.slowram": {
+          "sha256": "5328AFC69AFF983DAB22FF8098D921FD23F2EF17EEE1F797671A5DA322B14826",
+          "bytes": 524288
+        },
+        "frame-072000.bmp": {
+          "sha256": "5DD3EDDF77D6D6F539CE5BFC0874E9C76A0B856EC156D41D3E3F2DB66804E901",
+          "bytes": 1136870
+        },
+        "frame-072000.pcm": {
+          "sha256": "D646E8950278830DB545C0D9F36ADF8A0CC3386363C84A137BB424EC665DBDC0",
+          "bytes": 3848
+        }
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "cycle": "10225552872",
+        "cpu": "0x8E832864BDCE9DE1",
+        "hardware": "0x6853448CF4D3F479",
+        "output": "0xAB5D94B0DEB7A7CB",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "review": {
+        "frames": [
+          24000,
+          52000,
+          72000
+        ],
+        "milestones": [
+          {
+            "frame": 24000,
+            "description": "Main sequence beyond the former execution failure"
+          },
+          {
+            "frame": 52000,
+            "description": "Second-disk closing credits"
+          },
+          {
+            "frame": 72000,
+            "description": "Closing credits continue"
+          }
+        ],
+        "evidence": [
+          "docs/engine/LOTUS_III_CPU_BUS_TIMING_2026-09-25.md",
+          "artifacts/native-regression-2026-09-26/reference/desert-dream/normal"
+        ],
+        "assessment": "Visually inspected every declared milestone on the accepted 2026-09-25 engine. Both disks through the main ending; hidden parts and exact hardware timing are outside this replay. Also matched 216 independently retained captures."
+      },
+      "milestones": [
+        {
+          "frame": 24000,
+          "description": "Main sequence beyond the former execution failure"
+        },
+        {
+          "frame": 52000,
+          "description": "Second-disk closing credits"
+        },
+        {
+          "frame": 72000,
+          "description": "Closing credits continue"
+        }
+      ]
+    },
+    "tower-assault": {
+      "contractSha256": "2591461A803F87902AB02BE1E56A5B529DBB0EE0E2BAC00DF01C03123E11B6C6",
+      "contract": {
+        "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+        "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "bootMedia": "EC181B9C9F14D593DA2C96D751286C5A629EABCF90B66A4D7114EF2FABE245F6",
+        "script": [
+          {
+            "frame": 3200,
+            "ejectAdf": true
+          },
+          {
+            "frame": 3300,
+            "diskPath": {
+              "media": "tower-2",
+              "sha256": "256B2FBDF5242342CFB0959F5AD3B8FB837ADB418D23316B2AE7B085C5158827"
+            }
+          },
+          {
+            "frame": 6500,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 6520
+          },
+          {
+            "frame": 8500,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 8520
+          },
+          {
+            "frame": 12100,
+            "keyCode": 325
+          },
+          {
+            "frame": 12110,
+            "keyCode": 453
+          },
+          {
+            "frame": 13000,
+            "keyCode": 324
+          },
+          {
+            "frame": 13010,
+            "keyCode": 452
+          },
+          {
+            "frame": 14000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 14020
+          },
+          {
+            "frame": 16000,
+            "joystickPort1": 1
+          },
+          {
+            "frame": 16100
+          },
+          {
+            "frame": 17000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 17020
+          }
+        ],
+        "frames": 20000,
+        "captureInterval": 1000,
+        "captureFormat": "native-boot-probe-extended-v1",
+        "wideOutput": true,
+        "drives": 1
+      },
+      "files": {
+        "frame-000001.json": {
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        "frame-000001.chipram": {
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        "frame-000001.slowram": {
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        "frame-000001.bmp": {
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        "frame-000001.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-001000.json": {
+          "sha256": "D2F2D7B3C6025F96A247FD7A2EFC345F1DCAA3E259381240CCEC350FA9081F15",
+          "bytes": 1075
+        },
+        "frame-001000.chipram": {
+          "sha256": "4C2827E727AEDD97B6A79E119D30C841B95561341E9A725C53043526EF006D17",
+          "bytes": 524288
+        },
+        "frame-001000.slowram": {
+          "sha256": "B9BBF5BE02309EF2B06BA4825C2FBE63D29AE9CE70C8756CC8DB24B957946AA8",
+          "bytes": 524288
+        },
+        "frame-001000.bmp": {
+          "sha256": "D8E0EAE4C5C70DBBB166F1425C62E9D406D753D15C70D46491C76ADAD7610CFF",
+          "bytes": 1136870
+        },
+        "frame-001000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-002000.json": {
+          "sha256": "AA5D6C502FAE9E1D8EA57A9F0AE7EF106F21B92F92825F79F6375D8F96E513E4",
+          "bytes": 1074
+        },
+        "frame-002000.chipram": {
+          "sha256": "0FCBC568709EABEE249956FB796B29942F77ABF3C3F33DE87009AF9570033042",
+          "bytes": 524288
+        },
+        "frame-002000.slowram": {
+          "sha256": "535022A7AA73F84D8D4BA7D7E75F135499A1B53D8596AFB0A4A3778BAB546A04",
+          "bytes": 524288
+        },
+        "frame-002000.bmp": {
+          "sha256": "F1F3D04F706BF40E935B785558D8D0792CDC3ECA2DF833863F08F5DD1DEEDFFC",
+          "bytes": 1136870
+        },
+        "frame-002000.pcm": {
+          "sha256": "CCDCB8C885E83A077D0D7032606A29BFF9AC752483AF92972D94DE8BE67B7EAC",
+          "bytes": 3836
+        },
+        "frame-003000.json": {
+          "sha256": "44877433F11D4BF0ABF97BA24E8632CA9DF2BAFF7DB2A426E465A8EA11B6D809",
+          "bytes": 1104
+        },
+        "frame-003000.chipram": {
+          "sha256": "FF4169A179728E768FE0FA988C2E9BD2AEDD2E001C638BFF1A7E6F7455DAC340",
+          "bytes": 524288
+        },
+        "frame-003000.slowram": {
+          "sha256": "03ACD92B8880AF1F726BCDC6E9419FB0955C4D1DCF1ABC1B0F56073AA5CAAE01",
+          "bytes": 524288
+        },
+        "frame-003000.bmp": {
+          "sha256": "AB41365FAB21D4207B33D7202E459AE6FB9B546EE147D79F48D184AE9FDE00D1",
+          "bytes": 1136870
+        },
+        "frame-003000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-004000.json": {
+          "sha256": "E11D2EAD3ADC7716D3D8A9FF62D4B4CD02A8B6574676502A0C53CC0B78474145",
+          "bytes": 1103
+        },
+        "frame-004000.chipram": {
+          "sha256": "FF4169A179728E768FE0FA988C2E9BD2AEDD2E001C638BFF1A7E6F7455DAC340",
+          "bytes": 524288
+        },
+        "frame-004000.slowram": {
+          "sha256": "03ACD92B8880AF1F726BCDC6E9419FB0955C4D1DCF1ABC1B0F56073AA5CAAE01",
+          "bytes": 524288
+        },
+        "frame-004000.bmp": {
+          "sha256": "AB41365FAB21D4207B33D7202E459AE6FB9B546EE147D79F48D184AE9FDE00D1",
+          "bytes": 1136870
+        },
+        "frame-004000.pcm": {
+          "sha256": "CCDCB8C885E83A077D0D7032606A29BFF9AC752483AF92972D94DE8BE67B7EAC",
+          "bytes": 3836
+        },
+        "frame-005000.json": {
+          "sha256": "E6B20EF1FA5CE2E3955E3999DF25E3E82644A620D01D9B8BB0D722D673940360",
+          "bytes": 1103
+        },
+        "frame-005000.chipram": {
+          "sha256": "FF4169A179728E768FE0FA988C2E9BD2AEDD2E001C638BFF1A7E6F7455DAC340",
+          "bytes": 524288
+        },
+        "frame-005000.slowram": {
+          "sha256": "03ACD92B8880AF1F726BCDC6E9419FB0955C4D1DCF1ABC1B0F56073AA5CAAE01",
+          "bytes": 524288
+        },
+        "frame-005000.bmp": {
+          "sha256": "AB41365FAB21D4207B33D7202E459AE6FB9B546EE147D79F48D184AE9FDE00D1",
+          "bytes": 1136870
+        },
+        "frame-005000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-006000.json": {
+          "sha256": "334F100907C65CAC90BC159E711E07242E2036CD4E782F9EEC69A073C2C4B041",
+          "bytes": 1103
+        },
+        "frame-006000.chipram": {
+          "sha256": "FF4169A179728E768FE0FA988C2E9BD2AEDD2E001C638BFF1A7E6F7455DAC340",
+          "bytes": 524288
+        },
+        "frame-006000.slowram": {
+          "sha256": "03ACD92B8880AF1F726BCDC6E9419FB0955C4D1DCF1ABC1B0F56073AA5CAAE01",
+          "bytes": 524288
+        },
+        "frame-006000.bmp": {
+          "sha256": "AB41365FAB21D4207B33D7202E459AE6FB9B546EE147D79F48D184AE9FDE00D1",
+          "bytes": 1136870
+        },
+        "frame-006000.pcm": {
+          "sha256": "CCDCB8C885E83A077D0D7032606A29BFF9AC752483AF92972D94DE8BE67B7EAC",
+          "bytes": 3836
+        },
+        "frame-007000.json": {
+          "sha256": "40BC32C0253475339D443F1ACCF0ED68D4F2DD037BA81416F7D42E2A37F079C4",
+          "bytes": 1103
+        },
+        "frame-007000.chipram": {
+          "sha256": "838226FBB9EADA662A5C0355BAE137A8E20BEE8E3F9798DFC950BDAB8FAB4A4E",
+          "bytes": 524288
+        },
+        "frame-007000.slowram": {
+          "sha256": "E88C9DFFC975A7948F229736F4274F155D0F53E73A387A6F0C31702E340D1AB6",
+          "bytes": 524288
+        },
+        "frame-007000.bmp": {
+          "sha256": "38188738C4F835DEB5D1B5B83EBA3A35F0BF97A7B36D713DAD9AAC7F0E00550C",
+          "bytes": 1136870
+        },
+        "frame-007000.pcm": {
+          "sha256": "BAF8B61A0F7B57508F23A28EE05D0831E135B3732C1E590860C466E047A42AB5",
+          "bytes": 3832
+        },
+        "frame-008000.json": {
+          "sha256": "E4955AD4490E97C23EF64D34F3F29408DD2A1DC831891CFC44C34ACC74957D0F",
+          "bytes": 1104
+        },
+        "frame-008000.chipram": {
+          "sha256": "42353B125C4782A4A4702DAD2E52895297A833A1B41A75EFD845F2AB14E13AB2",
+          "bytes": 524288
+        },
+        "frame-008000.slowram": {
+          "sha256": "B2028A2395C285F868FD93921571A63A5A5D198AFF100ECA111AA1E675F9F8CE",
+          "bytes": 524288
+        },
+        "frame-008000.bmp": {
+          "sha256": "E153A92AA86828CA3D241FA77BD28709BB1CF9C586CFBD456AF929520E0473A2",
+          "bytes": 1136870
+        },
+        "frame-008000.pcm": {
+          "sha256": "D55F6A30EFF6ABD92E855B7C7F2D0A9C428F42DAAE529F6F9553E79B822A6E57",
+          "bytes": 3832
+        },
+        "frame-009000.json": {
+          "sha256": "8C7DB8CDF22813AAD79A7B63AA1EB23E0EEF3D331D60C3D21DA9E51D4CA24768",
+          "bytes": 1104
+        },
+        "frame-009000.chipram": {
+          "sha256": "D2FA73A5428236B82EFE3C4119B26240CA96AF00B7C8644917B1A6CE8EB5F31A",
+          "bytes": 524288
+        },
+        "frame-009000.slowram": {
+          "sha256": "48DA95CCFB5FE50398ABF9FA1896B4B85626FE833ACC747186EE7C2F4DDBF076",
+          "bytes": 524288
+        },
+        "frame-009000.bmp": {
+          "sha256": "1EABF2A95D21713742320ADEC036FE796012A38262C77CCB6114CB9561B50735",
+          "bytes": 1136870
+        },
+        "frame-009000.pcm": {
+          "sha256": "1C6608176724C4DC42D564D584279B927FACF02B83924B5D2632F13C1BA4C14F",
+          "bytes": 3836
+        },
+        "frame-010000.json": {
+          "sha256": "477512466C69586B45F16B50BC7D978C30F766EEA2DD594D9389210C42B1AEAD",
+          "bytes": 1105
+        },
+        "frame-010000.chipram": {
+          "sha256": "D2FA73A5428236B82EFE3C4119B26240CA96AF00B7C8644917B1A6CE8EB5F31A",
+          "bytes": 524288
+        },
+        "frame-010000.slowram": {
+          "sha256": "7EBDA9A8C8ABADC9CEAEC564378EEDFCA8750185A16E48BE20CD6E76D99BD112",
+          "bytes": 524288
+        },
+        "frame-010000.bmp": {
+          "sha256": "1EABF2A95D21713742320ADEC036FE796012A38262C77CCB6114CB9561B50735",
+          "bytes": 1136870
+        },
+        "frame-010000.pcm": {
+          "sha256": "E783A67053BC5783C984DADF1B8D57AD4DA8D57F58C2E00BA31152237776D753",
+          "bytes": 3832
+        },
+        "frame-011000.json": {
+          "sha256": "94A7D561D52B9D270911B1220911AECCB8044C482909F2BC635B78210CEEB50B",
+          "bytes": 1105
+        },
+        "frame-011000.chipram": {
+          "sha256": "D2FA73A5428236B82EFE3C4119B26240CA96AF00B7C8644917B1A6CE8EB5F31A",
+          "bytes": 524288
+        },
+        "frame-011000.slowram": {
+          "sha256": "E89EE63366F9B7E752FD78722576E621A2234D2EC7136DC1879DFB3262137F6C",
+          "bytes": 524288
+        },
+        "frame-011000.bmp": {
+          "sha256": "1EABF2A95D21713742320ADEC036FE796012A38262C77CCB6114CB9561B50735",
+          "bytes": 1136870
+        },
+        "frame-011000.pcm": {
+          "sha256": "D20887E97A7CA31C0BC81BD4DF77B6FA3CA0D5944C8A27EA74D477AD15ECE3FC",
+          "bytes": 3836
+        },
+        "frame-012000.json": {
+          "sha256": "C267BE2AB4ED83275C95969024C8AE984E1A83A25B8702CA7095E25A05456FE2",
+          "bytes": 1105
+        },
+        "frame-012000.chipram": {
+          "sha256": "D2FA73A5428236B82EFE3C4119B26240CA96AF00B7C8644917B1A6CE8EB5F31A",
+          "bytes": 524288
+        },
+        "frame-012000.slowram": {
+          "sha256": "743A8223F7C16BF048711625DDCD479AF3D1F1EE1D1A30EE691CE3B87D1ED22B",
+          "bytes": 524288
+        },
+        "frame-012000.bmp": {
+          "sha256": "1EABF2A95D21713742320ADEC036FE796012A38262C77CCB6114CB9561B50735",
+          "bytes": 1136870
+        },
+        "frame-012000.pcm": {
+          "sha256": "1D20560C151A2E87F8A64DFFA0949DE281342A7C8145480BA4833BA9C6D9014C",
+          "bytes": 3832
+        },
+        "frame-013000.json": {
+          "sha256": "37E610BACE09C9382AEFBD6F3E0C2F2C89AD712134B7DB62A736BB50D9183075",
+          "bytes": 1108
+        },
+        "frame-013000.chipram": {
+          "sha256": "4C3FD28413F3E80CC4846273D11BA70B951F92A3EFFB799EA6CA016C5A644458",
+          "bytes": 524288
+        },
+        "frame-013000.slowram": {
+          "sha256": "E296382C54E02E6291AC6E057CC645BA32EF84D4FB0046A606035FF61F10F4EC",
+          "bytes": 524288
+        },
+        "frame-013000.bmp": {
+          "sha256": "F1F3D04F706BF40E935B785558D8D0792CDC3ECA2DF833863F08F5DD1DEEDFFC",
+          "bytes": 1136870
+        },
+        "frame-013000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-014000.json": {
+          "sha256": "3F2A224587BDAE7C16504C37FDB6C6DEB433F6A9373EF829014C263179C14F5B",
+          "bytes": 1107
+        },
+        "frame-014000.chipram": {
+          "sha256": "94FE0E006CF7E32C927E3699C705C9CE0914C4CF564CD281707D44AE0DE27EC9",
+          "bytes": 524288
+        },
+        "frame-014000.slowram": {
+          "sha256": "1DBDC54C8708A3547B244A21C1C14D03361DFEDC13CCEDC09E3F70E9BD2D0850",
+          "bytes": 524288
+        },
+        "frame-014000.bmp": {
+          "sha256": "F1D2B884A22E4D8A743FF5F5FA25BD0FF613B72D13971BE8A83BE62CE7B17E91",
+          "bytes": 1136870
+        },
+        "frame-014000.pcm": {
+          "sha256": "B4B542322909B5E8F6EB09A98BCCFF454BE4AAE4207D24600156D01A810FAA21",
+          "bytes": 3836
+        },
+        "frame-015000.json": {
+          "sha256": "AB36FAF8B2C213A4B1D7BF4561EC57F8F0030699BEC2765A357EA3162CBB1D85",
+          "bytes": 1107
+        },
+        "frame-015000.chipram": {
+          "sha256": "9811E31F3F4CFA28DE7D36D28B92F7B748DBC9FB5940122513E58265D37A26AF",
+          "bytes": 524288
+        },
+        "frame-015000.slowram": {
+          "sha256": "F6A73692A47EA53938CE86F3E655A8023E6C0048638532F91B9E7E67ED178E2E",
+          "bytes": 524288
+        },
+        "frame-015000.bmp": {
+          "sha256": "55C6F273AF94F077A9DE4C632F58D26A7525B14BA8860F14220F573D25BEB88D",
+          "bytes": 1136870
+        },
+        "frame-015000.pcm": {
+          "sha256": "BA39522C0268908F19409AD649F400A9F69155A8533E146B44E304CB1CA1E4D6",
+          "bytes": 3832
+        },
+        "frame-016000.json": {
+          "sha256": "6FF73569EC874F3ADC499320F4E4ACC2834FAE95368AD21975A53D6D81D547D3",
+          "bytes": 1107
+        },
+        "frame-016000.chipram": {
+          "sha256": "710314BE9CEE6F33BB4AFAAEEA652F1316FB936135EF325E01A3B2A4DBD531F0",
+          "bytes": 524288
+        },
+        "frame-016000.slowram": {
+          "sha256": "ACB0B5FA9F59FD127976DD99344D87797D483968F541CE077E2778B995E22E44",
+          "bytes": 524288
+        },
+        "frame-016000.bmp": {
+          "sha256": "D266A3240CAD969442F1F46582FBA7543FED0406BC8A25B5A4637A3385CB96A0",
+          "bytes": 1136870
+        },
+        "frame-016000.pcm": {
+          "sha256": "08CD59747C05292B94164C5D8008AEE9427BE8A1AC4341C2D4C8DF820DB3D117",
+          "bytes": 3836
+        },
+        "frame-017000.json": {
+          "sha256": "06FE242BD9721692CAC3343DEC2331441A07076403D5D7A356F47E09397FB4E9",
+          "bytes": 1107
+        },
+        "frame-017000.chipram": {
+          "sha256": "77F0F09667766BCB36192C5E597DC52B4A9DA4D967DC38EFD8A6BB9A7615BA1F",
+          "bytes": 524288
+        },
+        "frame-017000.slowram": {
+          "sha256": "7DBB57C3F8AF0EB1AB22D96AD0545C18FDF84EBFE07FDDB61FC954312FE80184",
+          "bytes": 524288
+        },
+        "frame-017000.bmp": {
+          "sha256": "C5156B31F7F887E6F232D5DE1F05E6C3D0CE72417CFFEA99A3370153E6139865",
+          "bytes": 1136870
+        },
+        "frame-017000.pcm": {
+          "sha256": "A08A1B9E2832225153D716A9F25541252EA69D0BD039A121A78C195269DBDDD2",
+          "bytes": 3832
+        },
+        "frame-018000.json": {
+          "sha256": "ACEC4A76287F7FEBF97798413FAE724492268D5196599D7AC1F7EECADC483FA9",
+          "bytes": 1107
+        },
+        "frame-018000.chipram": {
+          "sha256": "77D52FCDF409D481298C07C5FAA6C566C0DB7D63A59C79F89C185DDE004D0C72",
+          "bytes": 524288
+        },
+        "frame-018000.slowram": {
+          "sha256": "D9D0C95E5F60042A2527642509DB5582CDC20B8F4CB123B7965D83D43D5675D8",
+          "bytes": 524288
+        },
+        "frame-018000.bmp": {
+          "sha256": "0FD5AC1A1212DFCEAD31483ABEB9CFEF2442090C92378E339BFE5B0026223851",
+          "bytes": 1136870
+        },
+        "frame-018000.pcm": {
+          "sha256": "840BBC2B00286EFBE3635FE0ACB88AC8508A6DC101D14BACA61C02CB8C2C536E",
+          "bytes": 3832
+        },
+        "frame-019000.json": {
+          "sha256": "9D17BC07514F9516BB787DD6881668091038D9B446DB6A7FEEB770D8D3814836",
+          "bytes": 1107
+        },
+        "frame-019000.chipram": {
+          "sha256": "61BD3A32EE5E43FFD31FF3BB74C1AA6AB173E442683FC3A9097813D8E40B4BDF",
+          "bytes": 524288
+        },
+        "frame-019000.slowram": {
+          "sha256": "E8D8ECDF37E164BC5EC4FE9C4614FF2F65835E12404133EDF5BB456BAD4FA428",
+          "bytes": 524288
+        },
+        "frame-019000.bmp": {
+          "sha256": "3FB1F036C729CCB54194AFE8BB66BB0E6195FC6E50BA9081F80637B4822E3FD7",
+          "bytes": 1136870
+        },
+        "frame-019000.pcm": {
+          "sha256": "5580029830244A75B5ECD82988207E8AF172ECAFC00D79DA479A7A43B9C86A09",
+          "bytes": 3836
+        },
+        "frame-020000.json": {
+          "sha256": "5A70813AEB86C6CA21E7C2DEA846D008FD1697BB661C69A382F5A496F1F02EE0",
+          "bytes": 1107
+        },
+        "frame-020000.chipram": {
+          "sha256": "9F00FFCF87D22DF35BDD749D13EFA1B4B02121827833FBC5E1308837DCED310F",
+          "bytes": 524288
+        },
+        "frame-020000.slowram": {
+          "sha256": "03CA5BE78C3395B3EBC0006AC11D2F0A981B86CCA705BBB71486AA5B16F5E2A8",
+          "bytes": 524288
+        },
+        "frame-020000.bmp": {
+          "sha256": "EF5005A6EC197F274EAF1C4B815E528D1E5176CADDE0CBA4D13404FCA13D1E80",
+          "bytes": 1136870
+        },
+        "frame-020000.pcm": {
+          "sha256": "8FADA31065D596AE959363D3987A41C7B6C7322A696A83D35DE0CAE93CE4EBAF",
+          "bytes": 3832
+        }
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "20000",
+        "completed": "20000",
+        "cycle": "2833352366",
+        "cpu": "0x9A2D952C88DF8598",
+        "hardware": "0x5E1CC00BB7298773",
+        "output": "0xBFA43D736D005AA3",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "review": {
+        "frames": [
+          9000,
+          20000
+        ],
+        "milestones": [
+          {
+            "frame": 9000,
+            "description": "Second-disk options menu"
+          },
+          {
+            "frame": 20000,
+            "description": "Opening level with player, HUD and terrain"
+          }
+        ],
+        "evidence": [
+          "docs/engine/TOWER_ASSAULT_INVESTIGATION.md",
+          "artifacts/native-regression-2026-09-26/reference/tower-assault/normal"
+        ],
+        "assessment": "Visually inspected every declared milestone on the accepted 2026-09-25 engine. OCS identification, second-disk loading and opening-level progression; full gameplay and disk three remain unverified. Fresh screenshots corroborate the previously documented milestone on the accepted engine; no equality with pre-bus-correction captures is claimed."
+      },
+      "milestones": [
+        {
+          "frame": 9000,
+          "description": "Second-disk options menu"
+        },
+        {
+          "frame": 20000,
+          "description": "Opening level with player, HUD and terrain"
+        }
+      ]
+    },
+    "alien-breed-se92": {
+      "contractSha256": "CEF36CFB56C0171AF38E7792892B4BF2E780FBDA1F69677BA9AA28671B85B686",
+      "contract": {
+        "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+        "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "bootMedia": "B9F68CB237C20614035555AA7ECA70B1DD43B64F061B20422A025EEFDC89112D",
+        "script": [
+          {
+            "frame": 8000,
+            "ejectAdf": true
+          },
+          {
+            "frame": 8100,
+            "diskPath": {
+              "media": "alien-2",
+              "sha256": "8F27F047E15788DE9D0FD6B6691D7FBB2DCEE401095A4B34DBD1BD4FC572A3EF"
+            }
+          },
+          {
+            "frame": 8200,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 8220
+          },
+          {
+            "frame": 12000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 12020
+          },
+          {
+            "frame": 14000,
+            "joystickPort1": 24
+          },
+          {
+            "frame": 14300,
+            "joystickPort1": 17
+          },
+          {
+            "frame": 14600,
+            "joystickPort1": 20
+          },
+          {
+            "frame": 14900
+          }
+        ],
+        "frames": 16000,
+        "captureInterval": 1000,
+        "captureFormat": "native-boot-probe-extended-v1",
+        "wideOutput": true,
+        "drives": 1
+      },
+      "files": {
+        "frame-000001.json": {
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        "frame-000001.chipram": {
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        "frame-000001.slowram": {
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        "frame-000001.bmp": {
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        "frame-000001.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-001000.json": {
+          "sha256": "5DD0736DD29EB7AE4F10845C8BADA16FCE5842F1C762C4CA62E5F368D5FAB7B9",
+          "bytes": 1106
+        },
+        "frame-001000.chipram": {
+          "sha256": "3057E1100D4C3546FF7B6D9A6C4AB06105F7D6E00605A129BD80AE05AD3D2274",
+          "bytes": 524288
+        },
+        "frame-001000.slowram": {
+          "sha256": "03C89B5286AB56A2F8ADA2098B4E74E8F45A4A44B682423E661C965ADC39E8D8",
+          "bytes": 524288
+        },
+        "frame-001000.bmp": {
+          "sha256": "F1F3D04F706BF40E935B785558D8D0792CDC3ECA2DF833863F08F5DD1DEEDFFC",
+          "bytes": 1136870
+        },
+        "frame-001000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-002000.json": {
+          "sha256": "4203A0D9B645A5300532C57185644F68B0CFD77B031AE2E072CD76EB944598F2",
+          "bytes": 1106
+        },
+        "frame-002000.chipram": {
+          "sha256": "8F115CE71CE58C85A24DAF77BAE8B9DBDB1B2E21D28DD36C002760BEE40850DA",
+          "bytes": 524288
+        },
+        "frame-002000.slowram": {
+          "sha256": "03C89B5286AB56A2F8ADA2098B4E74E8F45A4A44B682423E661C965ADC39E8D8",
+          "bytes": 524288
+        },
+        "frame-002000.bmp": {
+          "sha256": "E7CBD86538DBB4B4E074BC2936760DEBA6A5D87813F3AC1A9DC625B989F0B1AC",
+          "bytes": 1136870
+        },
+        "frame-002000.pcm": {
+          "sha256": "CCDCB8C885E83A077D0D7032606A29BFF9AC752483AF92972D94DE8BE67B7EAC",
+          "bytes": 3836
+        },
+        "frame-003000.json": {
+          "sha256": "5F01CF3C3E3CD85FF62D638DF902433037550BC759C1CEEFA6A12CB0D5DA09CD",
+          "bytes": 1074
+        },
+        "frame-003000.chipram": {
+          "sha256": "5CD8280B3B9B11B0167592ADC17E27382F9487DAC52B23E76547C1B1DF7ABC60",
+          "bytes": 524288
+        },
+        "frame-003000.slowram": {
+          "sha256": "7B774A3D99E7DDD7F3D9810E78AE7A848FB109768777BBE571AE54954F089AFF",
+          "bytes": 524288
+        },
+        "frame-003000.bmp": {
+          "sha256": "DFC06F8361F4985964CBA3936AF668BC55A89F6A44FB1E4B1742C914A567CBE2",
+          "bytes": 1136870
+        },
+        "frame-003000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-004000.json": {
+          "sha256": "39D7085DA47AE64EBDE35AE349F2414DFEE9DC6C63E8FAD1752117A495F3169E",
+          "bytes": 1074
+        },
+        "frame-004000.chipram": {
+          "sha256": "40D802D971F85980CB157C0BACF050E6873510CD4C7A4F9A0F262CFC0441A4FC",
+          "bytes": 524288
+        },
+        "frame-004000.slowram": {
+          "sha256": "A4DF1E90D55336488DDE3B2E8CBD6360198E4D6D74A2E322E915E1561524F90A",
+          "bytes": 524288
+        },
+        "frame-004000.bmp": {
+          "sha256": "F1F3D04F706BF40E935B785558D8D0792CDC3ECA2DF833863F08F5DD1DEEDFFC",
+          "bytes": 1136870
+        },
+        "frame-004000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-005000.json": {
+          "sha256": "4EEE5D6F2FA18362B1A674523B7F89BC3F495FA5109CB730975F40EDC2FBB78C",
+          "bytes": 1107
+        },
+        "frame-005000.chipram": {
+          "sha256": "F89C55156CCAE65B7CE5C37E0792A0B27C9F275F0A2D1E43DFD9BACB8B821CE6",
+          "bytes": 524288
+        },
+        "frame-005000.slowram": {
+          "sha256": "1138A41A9E5360BF7A9658240CF3AEAF8227B82CA9C35539AE81EED4F7F0E872",
+          "bytes": 524288
+        },
+        "frame-005000.bmp": {
+          "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+          "bytes": 1136870
+        },
+        "frame-005000.pcm": {
+          "sha256": "2FE16B506DCC2CE0844ADB35A4F2F5DABE914C01CE0179432C03B8EAD3E4BD6D",
+          "bytes": 3836
+        },
+        "frame-006000.json": {
+          "sha256": "56557E724457E4F4A46BABDF151438952DA060F05306AF316D6D7A8310C55A7F",
+          "bytes": 1108
+        },
+        "frame-006000.chipram": {
+          "sha256": "283E19E6442E66E97B2E0C27048913769A6838EBBE86889ED0D950FE76CE2E61",
+          "bytes": 524288
+        },
+        "frame-006000.slowram": {
+          "sha256": "430BD27D42628FCB5390813AC69C47350BBD40AB3BA219AA8CFFD7D5B194734D",
+          "bytes": 524288
+        },
+        "frame-006000.bmp": {
+          "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+          "bytes": 1136870
+        },
+        "frame-006000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-007000.json": {
+          "sha256": "C25ABB9E9ECC4734BA221F8CCD583C11B25F80D2AEE8AAFB3EC282CDC9630939",
+          "bytes": 1108
+        },
+        "frame-007000.chipram": {
+          "sha256": "283E19E6442E66E97B2E0C27048913769A6838EBBE86889ED0D950FE76CE2E61",
+          "bytes": 524288
+        },
+        "frame-007000.slowram": {
+          "sha256": "D315A149361A09C4A0794877A425C362B09C4B3D21E826592C2187EF0E05D9BD",
+          "bytes": 524288
+        },
+        "frame-007000.bmp": {
+          "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+          "bytes": 1136870
+        },
+        "frame-007000.pcm": {
+          "sha256": "CCDCB8C885E83A077D0D7032606A29BFF9AC752483AF92972D94DE8BE67B7EAC",
+          "bytes": 3836
+        },
+        "frame-008000.json": {
+          "sha256": "4918FAABD98C5A538AA10CE76AC2459D2F5372948D2FBAD7841AFD288AA5C062",
+          "bytes": 1109
+        },
+        "frame-008000.chipram": {
+          "sha256": "A64340C1D195698065CB75B34812EA5788E07BE63029BB8DA615B26864518AE7",
+          "bytes": 524288
+        },
+        "frame-008000.slowram": {
+          "sha256": "12273C9D6637250F725C75C0541A42BF6413B692C30868CA35AA167409977866",
+          "bytes": 524288
+        },
+        "frame-008000.bmp": {
+          "sha256": "5B72C920EA3FAC71C773C54B2FA701CA2E78EEB705DA6E85461DFCCDF2CE1306",
+          "bytes": 1136870
+        },
+        "frame-008000.pcm": {
+          "sha256": "CD0BE5D97737AC0989F2DAFD999DBD5756352921BE8A1C138D5713D80AACCB64",
+          "bytes": 3832
+        },
+        "frame-009000.json": {
+          "sha256": "2EBFD013B94B5ADC70D5AAFCF11E4735F41138F2E783886D4FF923724E39795C",
+          "bytes": 1106
+        },
+        "frame-009000.chipram": {
+          "sha256": "F2EA10BBECE5D8DF4FDC7969A33D88C5A0131D0913C91E596DAFBA41B6EB94D7",
+          "bytes": 524288
+        },
+        "frame-009000.slowram": {
+          "sha256": "7142B4F24151F7DD88E17570AC18E691CDE89C6C39671AFA8F7F10E99581B1A4",
+          "bytes": 524288
+        },
+        "frame-009000.bmp": {
+          "sha256": "4FA4B1CD168ED51225FF37ADB7A2C057137C66CB4E46621EBC751092FF092B2C",
+          "bytes": 1136870
+        },
+        "frame-009000.pcm": {
+          "sha256": "E745DEA740526F06C27A2799C4E0035DBF975B3E2C101238BC8F1ABAE6ABFC8F",
+          "bytes": 3836
+        },
+        "frame-010000.json": {
+          "sha256": "1E84760B06E10655A9C81D70BA2EA83A5EFBEF3EEFA333D113B3E06160969852",
+          "bytes": 1107
+        },
+        "frame-010000.chipram": {
+          "sha256": "990BF526144BFE8F7177698A0A70E7A2B713CED5D7B562F1F25E425E946156B9",
+          "bytes": 524288
+        },
+        "frame-010000.slowram": {
+          "sha256": "96FB21CDA10032DE58FD316FE32BD041586A971C9FB227E18568723779945436",
+          "bytes": 524288
+        },
+        "frame-010000.bmp": {
+          "sha256": "1576EF55202A01933B44B8FE07A69863A724E2281AAEF6DD7BD5776374C2DE19",
+          "bytes": 1136870
+        },
+        "frame-010000.pcm": {
+          "sha256": "07A5FE9C7AB160CE154B0F1DB182A1B7FFBDED26029BA72B20679C57E42328B9",
+          "bytes": 3836
+        },
+        "frame-011000.json": {
+          "sha256": "9141EF4B6CBD45D4BDFC4053243F1CFB0896F2A1669B126AC1724DA0EBDB51CA",
+          "bytes": 1107
+        },
+        "frame-011000.chipram": {
+          "sha256": "8254112BBBCDEEB6C9BE00708255170C0945CA333C78700113305987DAB63B94",
+          "bytes": 524288
+        },
+        "frame-011000.slowram": {
+          "sha256": "9C6558585839494EF09D9BCB26E211981F7B39544B65A35F479F349306FBCA75",
+          "bytes": 524288
+        },
+        "frame-011000.bmp": {
+          "sha256": "975D3C518B0F000080CBDE32CDDBD31E28A5812211A02087C5970D7EAA7E322B",
+          "bytes": 1136870
+        },
+        "frame-011000.pcm": {
+          "sha256": "658889E6C04B951F681E7796BEF270EAAD139743CC8F07CE1ECB5C7EB15D4AF9",
+          "bytes": 3832
+        },
+        "frame-012000.json": {
+          "sha256": "3D5EFF1FE952D203A14392EC8D7365A4FF573AAB13E82343A8EDDA6B14678D82",
+          "bytes": 1107
+        },
+        "frame-012000.chipram": {
+          "sha256": "645E27D15256D5BE32CED57463ACE7BFF4CBB71C4953CC36D77C8946FCE41DED",
+          "bytes": 524288
+        },
+        "frame-012000.slowram": {
+          "sha256": "C0A08DDEFC94AD24E5D0770024196342DD0B06C2278099A711BB1DFD40F7B1BE",
+          "bytes": 524288
+        },
+        "frame-012000.bmp": {
+          "sha256": "A5DC7E5F4E0D9F4E46C65A0D7682EC196FF9AA5E7F74B6869592E133350E40BC",
+          "bytes": 1136870
+        },
+        "frame-012000.pcm": {
+          "sha256": "9044102D6261967FE055D16EBAE94FD3C96491079B9C866CC9B32ABC23A971D7",
+          "bytes": 3836
+        },
+        "frame-013000.json": {
+          "sha256": "4165B0B2895B1754B5C656D0BCE9DFEECCFBA9DC4346AC65B421A6C238CB1D5B",
+          "bytes": 1107
+        },
+        "frame-013000.chipram": {
+          "sha256": "3794F02AE531BE345998DF0F08411B88DAEB25B8DC73193F357400AEFC436FA0",
+          "bytes": 524288
+        },
+        "frame-013000.slowram": {
+          "sha256": "670EC0A0522BF0979EF27BE331C820292EB31C1E1A34E9495FDBF213556E5504",
+          "bytes": 524288
+        },
+        "frame-013000.bmp": {
+          "sha256": "C65EE8D587D52480A811C7CC794B450AA8B87D36A6A71A1C723A97C21DCEEBAA",
+          "bytes": 1136870
+        },
+        "frame-013000.pcm": {
+          "sha256": "AFAD26842EF1EDDA5D3819B570500B06232E91F0BE2CC49A5C5085642BB4FE0A",
+          "bytes": 3832
+        },
+        "frame-014000.json": {
+          "sha256": "0CAAD0D35E0E73F3B1B6F66B4063D0FBA1CA549E1EF415009883B5D5E4454637",
+          "bytes": 1107
+        },
+        "frame-014000.chipram": {
+          "sha256": "397A719EEC5AB1C6C56534BF97DCDEBF75F8E64C03CD18312E11CBFA060218DB",
+          "bytes": 524288
+        },
+        "frame-014000.slowram": {
+          "sha256": "42487C16BF115DB0DEB81587CFDEB05838B9C6F00BD5834D6D3195DC7CF1A18F",
+          "bytes": 524288
+        },
+        "frame-014000.bmp": {
+          "sha256": "4264035B42D76123652CB89E78F7A758A9076DD8987C82BFC0500096C63ECE23",
+          "bytes": 1136870
+        },
+        "frame-014000.pcm": {
+          "sha256": "E1035CFC9B13B3EC3AC6DAE42EBCDE4127F1D499313991ED12ABE27FF574A61F",
+          "bytes": 3836
+        },
+        "frame-015000.json": {
+          "sha256": "20FC5B95E4B4324896377B3AE9AD337F1F507AA441FD68027892308330F0DD8F",
+          "bytes": 1107
+        },
+        "frame-015000.chipram": {
+          "sha256": "170FFFBB188B91EA7313C434538EC078CA2BDD9CEA84BECDD28248900F726BBA",
+          "bytes": 524288
+        },
+        "frame-015000.slowram": {
+          "sha256": "C5E70CA6963F1DF9FC9E26DED8636EBCC90B908E8D07ABF7D60CEB74D79AE9EB",
+          "bytes": 524288
+        },
+        "frame-015000.bmp": {
+          "sha256": "5DC89AA464A0AF2146BEA3D2D2B9E190A3DD405913DF262E26826DE09A191A0E",
+          "bytes": 1136870
+        },
+        "frame-015000.pcm": {
+          "sha256": "DFC75DFFEE205C209A36980ECDD1F611944C6F36AEC168D710073BA5DE221FDB",
+          "bytes": 3836
+        },
+        "frame-016000.json": {
+          "sha256": "854CC43F2D3063AD4A6BEF0B2C62BBA53C19BE44A9114D543A02CDFB69A126AF",
+          "bytes": 1107
+        },
+        "frame-016000.chipram": {
+          "sha256": "5ED06D4245E2EC487A468EC53CE25C65124A8E05EC4005EBCEA84C453212966F",
+          "bytes": 524288
+        },
+        "frame-016000.slowram": {
+          "sha256": "73AC8DCFBED0ADAEBBA2110CB0C236DEF79753679099B1A076EA928F304C2E3A",
+          "bytes": 524288
+        },
+        "frame-016000.bmp": {
+          "sha256": "31C03035AC184F6ADD32C592FD0F628B2B2994BA4E50378936BC9FDCA59C0528",
+          "bytes": 1136870
+        },
+        "frame-016000.pcm": {
+          "sha256": "A46B6D96295E5C6AD279E5CBE90DFDF61AE56418E5D5820B41A58BB2CB15DC7D",
+          "bytes": 3832
+        }
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "16000",
+        "completed": "16000",
+        "cycle": "2266635956",
+        "cpu": "0x5F0D915AEFD9ECCE",
+        "hardware": "0x5F38D967492AAB23",
+        "output": "0xD6E97A0608F7374F",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "review": {
+        "frames": [
+          4000,
+          9000,
+          16000
+        ],
+        "milestones": [
+          {
+            "frame": 4000,
+            "description": "Black transition during the boot/title sequence"
+          },
+          {
+            "frame": 9000,
+            "description": "Second-disk main menu"
+          },
+          {
+            "frame": 16000,
+            "description": "Credits sequence"
+          }
+        ],
+        "evidence": [
+          "docs/engine/LOTUS_III_CPU_BUS_TIMING_2026-09-25.md",
+          "artifacts/native-regression-2026-09-26/reference/alien-breed-se92/normal"
+        ],
+        "assessment": "Visually inspected every declared milestone on the accepted 2026-09-25 engine. WORDSYNC boot and second-disk menu/credits; gameplay remains unverified. Field 4000 is a black transition, not the earlier pre-Lotus title checkpoint. Fields 9000 and 16000 verify the menu and credits. Also matched 48 independently retained captures."
+      },
+      "milestones": [
+        {
+          "frame": 4000,
+          "description": "Black transition during the boot/title sequence"
+        },
+        {
+          "frame": 9000,
+          "description": "Second-disk main menu"
+        },
+        {
+          "frame": 16000,
+          "description": "Credits sequence"
+        }
+      ]
+    },
+    "supercars2": {
+      "contractSha256": "D081C702EB46423CEA59A7A242806F7AABD884F40F19E21E5B3A274917C18D11",
+      "contract": {
+        "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+        "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "bootMedia": "4274349E02EA093579E1C5AC91A58BEE0109CBBA33AAEF2DC57C5AAC7A7E4BD6",
+        "script": [
+          {
+            "frame": 3000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 3020
+          },
+          {
+            "frame": 5000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 5020
+          },
+          {
+            "frame": 12200,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 12220
+          },
+          {
+            "frame": 14500,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 14520
+          },
+          {
+            "frame": 16000,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 16020
+          },
+          {
+            "frame": 17500,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 17900,
+            "joystickPort1": 24
+          },
+          {
+            "frame": 17960,
+            "joystickPort1": 16
+          },
+          {
+            "frame": 18500
+          }
+        ],
+        "frames": 19000,
+        "captureInterval": 1000,
+        "captureFormat": "native-boot-probe-extended-v1",
+        "wideOutput": true,
+        "drives": 1
+      },
+      "files": {
+        "frame-000001.json": {
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        "frame-000001.chipram": {
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        "frame-000001.slowram": {
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        "frame-000001.bmp": {
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        "frame-000001.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-001000.json": {
+          "sha256": "90F4420A00E0470205B37007FFDDEAB5F7F40ABE239BA5DD11313BAE0330B052",
+          "bytes": 1062
+        },
+        "frame-001000.chipram": {
+          "sha256": "D692D0E30BFE8B436F380D8F0F38F57913D981A5CBF9DC3CCC684EA6C9BBB73A",
+          "bytes": 524288
+        },
+        "frame-001000.slowram": {
+          "sha256": "C89D4C78CB0D23789168A0D80223B8D3998DC31D63E4065A5713E8D231607E66",
+          "bytes": 524288
+        },
+        "frame-001000.bmp": {
+          "sha256": "965E36AF2EAB04003FE6AF43213EA4EA7ECE1FEE2835487A31118620B5181E22",
+          "bytes": 1136870
+        },
+        "frame-001000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-002000.json": {
+          "sha256": "373874C572CDC1E6242258C505371683D2B32761F91553E114A56A35A5506DC0",
+          "bytes": 1103
+        },
+        "frame-002000.chipram": {
+          "sha256": "0908A9055C241DCBBB48F2B670A14BCAC9D7AF1FDD6791B4A88FD4A8E0C61AC4",
+          "bytes": 524288
+        },
+        "frame-002000.slowram": {
+          "sha256": "C89D4C78CB0D23789168A0D80223B8D3998DC31D63E4065A5713E8D231607E66",
+          "bytes": 524288
+        },
+        "frame-002000.bmp": {
+          "sha256": "C25B439D2C62AF045056F463D7DA09572E09A12C519BDFE36FB5680E67CE326B",
+          "bytes": 1136870
+        },
+        "frame-002000.pcm": {
+          "sha256": "830C3B3D098D03D56EDFF8231A1533E05FCE02D252DBB074CDDF642CF76E3E4B",
+          "bytes": 3844
+        },
+        "frame-003000.json": {
+          "sha256": "903D758A4A1AF7C8F5C0C561BBF189E948CC119A04918F94D48D7CF86F0E4382",
+          "bytes": 1072
+        },
+        "frame-003000.chipram": {
+          "sha256": "8E319E96170D55BA4F2B4ED29116229D5BA9A562B62D29F4B29B0319BCBBF275",
+          "bytes": 524288
+        },
+        "frame-003000.slowram": {
+          "sha256": "D17F84E2C58ED4DE4E2245099C713EB0461A442769654BD1CC2053CF80A36F8B",
+          "bytes": 524288
+        },
+        "frame-003000.bmp": {
+          "sha256": "87590BAA12BF28776BB4B72D5B55F63315E1471F0CF9560AFA0143A4B6102C68",
+          "bytes": 1136870
+        },
+        "frame-003000.pcm": {
+          "sha256": "41A4299F985599BC4BCD5DE852246E0B10A63804B54F8AAA4642AF9D03BE4810",
+          "bytes": 3848
+        },
+        "frame-004000.json": {
+          "sha256": "91C912D8A72A12432DD9C90C343187E545B07A446DD83C2E2D12A921C8A897C2",
+          "bytes": 1062
+        },
+        "frame-004000.chipram": {
+          "sha256": "97098B9973CA121E0E736B06E534B22326DA897C15258797231A4FC9F68A9B4A",
+          "bytes": 524288
+        },
+        "frame-004000.slowram": {
+          "sha256": "51714A104CE67D81A9BD5B85D6E62D440C2021DD9270BA5E77C9CA98A0A394D3",
+          "bytes": 524288
+        },
+        "frame-004000.bmp": {
+          "sha256": "87590BAA12BF28776BB4B72D5B55F63315E1471F0CF9560AFA0143A4B6102C68",
+          "bytes": 1136870
+        },
+        "frame-004000.pcm": {
+          "sha256": "A7A348E78EF315691FE99AE8FDAA4DE53F6D39746275256A163E7C79340193DD",
+          "bytes": 3844
+        },
+        "frame-005000.json": {
+          "sha256": "7C4CF59AFB6A9871702C1B9067175045CA06B85114E0C4B7352674ECF8D0B5DF",
+          "bytes": 1062
+        },
+        "frame-005000.chipram": {
+          "sha256": "18DCF17E55D43CBB412137574F106C5537CD1E4B3B7063E9FF290F6AEAEFD193",
+          "bytes": 524288
+        },
+        "frame-005000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-005000.bmp": {
+          "sha256": "87590BAA12BF28776BB4B72D5B55F63315E1471F0CF9560AFA0143A4B6102C68",
+          "bytes": 1136870
+        },
+        "frame-005000.pcm": {
+          "sha256": "9472768611BE9E8EB369217EDA7ADC6AAB8A66096CC5064E56CF4019DA7F8468",
+          "bytes": 3844
+        },
+        "frame-006000.json": {
+          "sha256": "0475BAF9EBB265BE4A99250A33CC5B4251CA6B1BFAEAA8DCB082BBAD31DA92C3",
+          "bytes": 1103
+        },
+        "frame-006000.chipram": {
+          "sha256": "FF4A538C3DE588B8D82F77211CC68F55D36503D45B652B689D3CE1D55DD9FDD7",
+          "bytes": 524288
+        },
+        "frame-006000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-006000.bmp": {
+          "sha256": "7A7FC802B825966CCB0E993305EF88D8E209DE6AE3B74E975E1973AD9B7727E0",
+          "bytes": 1136870
+        },
+        "frame-006000.pcm": {
+          "sha256": "A9CD9A97CA886E5DE80D9D0858FFAE3DD301D9F51FB82DA13C01693974877B5B",
+          "bytes": 3848
+        },
+        "frame-007000.json": {
+          "sha256": "C8B2CC57E5601752CDCE89123226573A33990ECA30307BF0996ADEA4442B23FF",
+          "bytes": 1101
+        },
+        "frame-007000.chipram": {
+          "sha256": "E84BA794E5567DDAF3012EEBD9FF9669C1B572BF7AE9804AD699D67DD48909A0",
+          "bytes": 524288
+        },
+        "frame-007000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-007000.bmp": {
+          "sha256": "F50D8E57E8697598DD45777CEDFA2C8ECB4484C5C46DF6BC9066284C7AF86C56",
+          "bytes": 1136870
+        },
+        "frame-007000.pcm": {
+          "sha256": "3166D5243151EB9A01CF9824DB7C1061A0371EB06F8EE0E77D43FAADED7996E3",
+          "bytes": 3844
+        },
+        "frame-008000.json": {
+          "sha256": "518168F5E3DE71E174F32BF9EB5EDA6BB5DB78EE731263962F62E1B6020AF9F0",
+          "bytes": 1102
+        },
+        "frame-008000.chipram": {
+          "sha256": "6AC9308AB0D2A7F64B54E53833D1DE389B3F2318F4E4AFFC5A93FC6E071C0D7D",
+          "bytes": 524288
+        },
+        "frame-008000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-008000.bmp": {
+          "sha256": "F50D8E57E8697598DD45777CEDFA2C8ECB4484C5C46DF6BC9066284C7AF86C56",
+          "bytes": 1136870
+        },
+        "frame-008000.pcm": {
+          "sha256": "9A1123F822EBFDEFED5B5003828FE7443F09573B33E9B51A9A2F9D9A81F5D633",
+          "bytes": 3848
+        },
+        "frame-009000.json": {
+          "sha256": "947952F0AC41AD22ADBBF970BD387E68E299F464D69F530F103F1915DD615EF2",
+          "bytes": 1102
+        },
+        "frame-009000.chipram": {
+          "sha256": "3FCA5AE0F99589C9439964A878012DDB8D756741B864C47F976840143FE91723",
+          "bytes": 524288
+        },
+        "frame-009000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-009000.bmp": {
+          "sha256": "F50D8E57E8697598DD45777CEDFA2C8ECB4484C5C46DF6BC9066284C7AF86C56",
+          "bytes": 1136870
+        },
+        "frame-009000.pcm": {
+          "sha256": "87D777E7CAFF37BBC699DD9B0425B61323D1439564ADA6FB7098297EF50B7920",
+          "bytes": 3844
+        },
+        "frame-010000.json": {
+          "sha256": "8CD4E6E65A1E0439FCABE386442887F9884454DDF1FEBC42B6A9DD7CBB6EFBAA",
+          "bytes": 1103
+        },
+        "frame-010000.chipram": {
+          "sha256": "237466EE4AAC863C046BD43065A38A1EFB0ED726048F6C20F6FAE84010B2AA76",
+          "bytes": 524288
+        },
+        "frame-010000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-010000.bmp": {
+          "sha256": "F50D8E57E8697598DD45777CEDFA2C8ECB4484C5C46DF6BC9066284C7AF86C56",
+          "bytes": 1136870
+        },
+        "frame-010000.pcm": {
+          "sha256": "124BFD71F4D0022B1B557A326CE10894F93C5CCD7B40C763DAE0F4ACED42B4AC",
+          "bytes": 3848
+        },
+        "frame-011000.json": {
+          "sha256": "0717F9653D6F3BF53D4472C965A90ABE7FD3A9D4741B4523257F4F013A1663BF",
+          "bytes": 1103
+        },
+        "frame-011000.chipram": {
+          "sha256": "5B16CDEB345A6A802FD6DD5F9E87D12ABD37516FF950333AC1B2EBC36FA7E683",
+          "bytes": 524288
+        },
+        "frame-011000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-011000.bmp": {
+          "sha256": "F50D8E57E8697598DD45777CEDFA2C8ECB4484C5C46DF6BC9066284C7AF86C56",
+          "bytes": 1136870
+        },
+        "frame-011000.pcm": {
+          "sha256": "8CD5C3D66391FE335890AF679DECB8847C72C94676F291F8C1527DF05290C791",
+          "bytes": 3848
+        },
+        "frame-012000.json": {
+          "sha256": "1E59C0845521B5C0922351D49B72E01F85F13A4A29B8F6BA215956064C9F903F",
+          "bytes": 1103
+        },
+        "frame-012000.chipram": {
+          "sha256": "DF207E8A49DB91E4F59F9737A62F0A59726BD1D6E4A77F448EA26D741EAA2223",
+          "bytes": 524288
+        },
+        "frame-012000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-012000.bmp": {
+          "sha256": "F50D8E57E8697598DD45777CEDFA2C8ECB4484C5C46DF6BC9066284C7AF86C56",
+          "bytes": 1136870
+        },
+        "frame-012000.pcm": {
+          "sha256": "D9D8EF0BC2C79DED755B44464769579D2A68BB8CF5FBAED3D7A642717270A41D",
+          "bytes": 3844
+        },
+        "frame-013000.json": {
+          "sha256": "AD1974B86987B3893806BF8241867F6F439775CB5380EAF4F21D1944E045F9C0",
+          "bytes": 1103
+        },
+        "frame-013000.chipram": {
+          "sha256": "B0C885640711968A99E6D2187FFEDDFB9916D1E2F8590A240A1F68CA9A98CCD6",
+          "bytes": 524288
+        },
+        "frame-013000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-013000.bmp": {
+          "sha256": "48F9EBEAE1DDB5993D0663080ED61CE25E32D2D73599F961BAF10553292175A4",
+          "bytes": 1136870
+        },
+        "frame-013000.pcm": {
+          "sha256": "C56350441D66442E728B7CEBDEEC79EE6F8697FD353152E054A30A15893593CA",
+          "bytes": 3848
+        },
+        "frame-014000.json": {
+          "sha256": "256BBD870AF43DFBE7285822514BC20DC82DFEEFCD4D4D8A05B0135F44E0F5F8",
+          "bytes": 1103
+        },
+        "frame-014000.chipram": {
+          "sha256": "2AC11337B97980A489BFD60682D5FC6C1FB29B5392EBB73240CA486DE5EE860C",
+          "bytes": 524288
+        },
+        "frame-014000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-014000.bmp": {
+          "sha256": "925C3AA18ABDB77F01360255D3DFB6899CFE4112AF29AA78C4A24285B1F8A462",
+          "bytes": 1136870
+        },
+        "frame-014000.pcm": {
+          "sha256": "0C182C33763BBC0F668E7F1FFEB5D73AFF0160922CF9607E4EB3E2D8C17EB7FD",
+          "bytes": 3844
+        },
+        "frame-015000.json": {
+          "sha256": "2E0846531AF33D20F50B17520B5384172C2A46039B7A2C39EE86B3C9D3A1788E",
+          "bytes": 1103
+        },
+        "frame-015000.chipram": {
+          "sha256": "6225072B3DC9B0B315E229F3657FDBBC5858D2F9EF63F4FA6511B52AE644E21F",
+          "bytes": 524288
+        },
+        "frame-015000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-015000.bmp": {
+          "sha256": "238E6FA5DA8C3AF25D5504562F4E0BEC9AB71DA3149D475BA65B4182F8F70EE8",
+          "bytes": 1136870
+        },
+        "frame-015000.pcm": {
+          "sha256": "A3B7442916799FAD39D11DBABE8A991393C09B40E410BDDCB4F0365E3CE4612B",
+          "bytes": 3848
+        },
+        "frame-016000.json": {
+          "sha256": "00F552680932CD215AA3D2D8CF58856AE979F3A645601D2702F0D09B20DF778B",
+          "bytes": 1104
+        },
+        "frame-016000.chipram": {
+          "sha256": "ED76C4E43BD2815CDB6123FA44BA89D1A4C027EACC72B7316AF1928C81DA70F3",
+          "bytes": 524288
+        },
+        "frame-016000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-016000.bmp": {
+          "sha256": "238E6FA5DA8C3AF25D5504562F4E0BEC9AB71DA3149D475BA65B4182F8F70EE8",
+          "bytes": 1136870
+        },
+        "frame-016000.pcm": {
+          "sha256": "93BE2B72555F54B0914CC8194F65CD008ABF0A1B49DC93D1EBB854296D5F1E26",
+          "bytes": 3844
+        },
+        "frame-017000.json": {
+          "sha256": "1D6B8DF5DDF953C98B7C699525B7209C50EB702BCBB0FEE89E2027C07EA6F585",
+          "bytes": 1105
+        },
+        "frame-017000.chipram": {
+          "sha256": "1CB1BFCA889C0B1AC2E1E4C6809BE313DF4547AC0DB99922A0B8A1EBB244AB8B",
+          "bytes": 524288
+        },
+        "frame-017000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-017000.bmp": {
+          "sha256": "C8D99051C0FDA460ACCDA59EFBD87C4941728500A448F1272BED00DD5AC929D5",
+          "bytes": 1136870
+        },
+        "frame-017000.pcm": {
+          "sha256": "36D09A8E5026FD642615470522F6195FB46FC786F9725DAF9D53DDBCF9717CAA",
+          "bytes": 3848
+        },
+        "frame-018000.json": {
+          "sha256": "3F58B3B635D6A0EB9F75C5D4FF12E4E0E81534A30C28D0A91E2798CBA73F0789",
+          "bytes": 1105
+        },
+        "frame-018000.chipram": {
+          "sha256": "9F87D9C51D1CB1A47A17D1DD777EB818751B8D98223F33948A30ACFF17F84DB9",
+          "bytes": 524288
+        },
+        "frame-018000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-018000.bmp": {
+          "sha256": "3A0B22156A49A160305DC3729BA6202C7E88874152EDDF60C90574DFFF19E0A2",
+          "bytes": 1136870
+        },
+        "frame-018000.pcm": {
+          "sha256": "F85599F81424930ED1BD3436A362569B73429C0C5D485F622B0B76D2442D5D87",
+          "bytes": 3848
+        },
+        "frame-019000.json": {
+          "sha256": "E89EB5AA30AD4BBEF2E9D4A49DFB0E10C814D156362BB13D2ECE70AD76C7CC26",
+          "bytes": 1105
+        },
+        "frame-019000.chipram": {
+          "sha256": "A741B75BFAD27A2412159B17BF3430DF7CC2429E8D735BD0A61F6A6F23C6AE4A",
+          "bytes": 524288
+        },
+        "frame-019000.slowram": {
+          "sha256": "0C79CEDD6B6FD9F04EF27E996D58FD573FB23313A53D49779D414854D9EC3A64",
+          "bytes": 524288
+        },
+        "frame-019000.bmp": {
+          "sha256": "A06CFFCDCA7F9E593550A639A22E477E67546087E7CDBBC8568354BAAD8588DC",
+          "bytes": 1136870
+        },
+        "frame-019000.pcm": {
+          "sha256": "F85757773BF3EF59457C8275B47AFE2ED83B8A9DBDCC2C9B873DDD06F1966F11",
+          "bytes": 3844
+        }
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "19000",
+        "completed": "19000",
+        "cycle": "2699806028",
+        "cpu": "0x9002A2432C9186D4",
+        "hardware": "0x3BE28A07F2BE3C6E",
+        "output": "0x9FAA8E3CE3254FF4",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "review": {
+        "frames": [
+          16000,
+          18000,
+          19000
+        ],
+        "milestones": [
+          {
+            "frame": 16000,
+            "description": "Game options: Easy, one player, fire to accelerate"
+          },
+          {
+            "frame": 18000,
+            "description": "Race one after acceleration and steering input"
+          },
+          {
+            "frame": 19000,
+            "description": "Race one: remaining laps decreased from five to four"
+          }
+        ],
+        "evidence": [
+          "docs/engine/SUPER_CARS_II_INVESTIGATION.md",
+          "artifacts/native-regression-2026-09-26/reference/supercars2/normal"
+        ],
+        "assessment": "Visually inspected every declared milestone on the accepted 2026-09-25 engine. CPU chip-RAM mirrors, race-one entry and bounded controls; no disk-two or full-race claim. Fresh screenshots corroborate the previously documented milestone on the accepted engine; no equality with pre-bus-correction captures is claimed."
+      },
+      "milestones": [
+        {
+          "frame": 16000,
+          "description": "Game options: Easy, one player, fire to accelerate"
+        },
+        {
+          "frame": 18000,
+          "description": "Race one after acceleration and steering input"
+        },
+        {
+          "frame": 19000,
+          "description": "Race one: remaining laps decreased from five to four"
+        }
+      ]
+    },
+    "lemmings": {
+      "contractSha256": "58B7D6AB8B17CA56AF7EBF44F5C150DF6A50959AF38227B90296E250C374A3A1",
+      "contract": {
+        "profile": "pal-ocs-a500-68000-512k-chip-512k-slow-ks13",
+        "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "bootMedia": "A4FDBA69017F1A760BBA3BB06C55F7E434226C498C9D22C1F627212B08D24F91",
+        "script": [
+          {
+            "frame": 600,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 606,
+            "mouseButtons": 0
+          },
+          {
+            "frame": 7200,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 7206,
+            "mouseButtons": 0
+          },
+          {
+            "frame": 8400,
+            "ejectAdf": true
+          },
+          {
+            "frame": 8460,
+            "adfPath": {
+              "media": "lemmings-2",
+              "sha256": "1526000B96D196EFECAB9C63AA72C0CE6257649A4993141B00EAD8738FD97A65"
+            }
+          },
+          {
+            "frame": 8520,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 8526,
+            "mouseButtons": 0
+          },
+          {
+            "frame": 11600,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 11604,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 11608,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 11612,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 11616,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 11620,
+            "mouseDeltaX": 35,
+            "mouseDeltaY": 75
+          },
+          {
+            "frame": 11624,
+            "mouseDeltaY": 75
+          },
+          {
+            "frame": 11630,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 11636,
+            "mouseButtons": 0
+          },
+          {
+            "frame": 13600,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 13606,
+            "mouseButtons": 0
+          }
+        ],
+        "frames": 18120,
+        "captureInterval": 1000,
+        "captureFormat": "native-boot-probe-extended-v1",
+        "wideOutput": true,
+        "drives": 1
+      },
+      "files": {
+        "frame-000001.json": {
+          "sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB",
+          "bytes": 1086
+        },
+        "frame-000001.chipram": {
+          "sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35",
+          "bytes": 524288
+        },
+        "frame-000001.slowram": {
+          "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541",
+          "bytes": 524288
+        },
+        "frame-000001.bmp": {
+          "sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24",
+          "bytes": 1136870
+        },
+        "frame-000001.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-001000.json": {
+          "sha256": "18F184538894DB2C90EA6FF019B057D35C3D85C9980A38A81E4DDC8FB213957B",
+          "bytes": 1070
+        },
+        "frame-001000.chipram": {
+          "sha256": "8B04A12F5840D1B29D2E83A82A665CFD2E3B15A414205DE7293E4614F41B0AA9",
+          "bytes": 524288
+        },
+        "frame-001000.slowram": {
+          "sha256": "E308A60B7F214036ABAE7A2DF860B18C874284E9811B89E2A50F49373AD48088",
+          "bytes": 524288
+        },
+        "frame-001000.bmp": {
+          "sha256": "13E4E4371608AE1AF81BC581470A32486923C49BE9C0F96838E90D63B630C5D2",
+          "bytes": 1136870
+        },
+        "frame-001000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-002000.json": {
+          "sha256": "1314074B0BD278BD6CAAA798E9F88DDBE97C7BAA59E7EE31D28647A17AE0E852",
+          "bytes": 1105
+        },
+        "frame-002000.chipram": {
+          "sha256": "2D507EA684FEDDBBD2E632E26E3EF9960378DE3CD5657A4F82CE317D14E51D16",
+          "bytes": 524288
+        },
+        "frame-002000.slowram": {
+          "sha256": "E308A60B7F214036ABAE7A2DF860B18C874284E9811B89E2A50F49373AD48088",
+          "bytes": 524288
+        },
+        "frame-002000.bmp": {
+          "sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE",
+          "bytes": 1136870
+        },
+        "frame-002000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-003000.json": {
+          "sha256": "08D68B8660EF53DFCB1C657A8EF3256D148CD5076BF44D130D6AD5AFEBBC6D43",
+          "bytes": 1072
+        },
+        "frame-003000.chipram": {
+          "sha256": "D8EEE6C79570A282F68C621DA740C45710944D42C5B124BAFB53AFC91FFF4E77",
+          "bytes": 524288
+        },
+        "frame-003000.slowram": {
+          "sha256": "A78F2DDE5E1EB1A3B1A758C90063520AB26F8C414C88AF7A87D57FDDF41E37AF",
+          "bytes": 524288
+        },
+        "frame-003000.bmp": {
+          "sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE",
+          "bytes": 1136870
+        },
+        "frame-003000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-004000.json": {
+          "sha256": "04061E963B8D5B795687241422748F9DC14869342E7D70F492FE95CE4ECD6D71",
+          "bytes": 1103
+        },
+        "frame-004000.chipram": {
+          "sha256": "ACCAA74909AD2AAD3CC43029913916DB2DEE6EA06C880773B9B3CD527A9F9FC5",
+          "bytes": 524288
+        },
+        "frame-004000.slowram": {
+          "sha256": "E0EFB822BAF085EB8ACE287C3FC1FB04F15DB1664268A45C55EB8FEC5ACCB9F1",
+          "bytes": 524288
+        },
+        "frame-004000.bmp": {
+          "sha256": "C9DA0172892ECE225CD9B01C88A81E6D7BB3341CAD8C2A7E2E369D756A9D09BD",
+          "bytes": 1136870
+        },
+        "frame-004000.pcm": {
+          "sha256": "176F7C92AB89AC0B8C9D6F519DA5D9A7B839C8FF3DAC37A4B5E8BEEDC993BD48",
+          "bytes": 3844
+        },
+        "frame-005000.json": {
+          "sha256": "57099739FC8F0001A4A51B1FAF288B027E3A4B096BD3E27CE8CE094209590CC4",
+          "bytes": 1104
+        },
+        "frame-005000.chipram": {
+          "sha256": "404D3630B7DB25B03DD9B33DAF29806D9EFAE7E86FE32A1C53FA1FBC1D2182DC",
+          "bytes": 524288
+        },
+        "frame-005000.slowram": {
+          "sha256": "E0EFB822BAF085EB8ACE287C3FC1FB04F15DB1664268A45C55EB8FEC5ACCB9F1",
+          "bytes": 524288
+        },
+        "frame-005000.bmp": {
+          "sha256": "F22E6B617EC33F3F5611BF0815E8DA399EA6CD2D4FC8747C33DBA9F5F2B3CD02",
+          "bytes": 1136870
+        },
+        "frame-005000.pcm": {
+          "sha256": "AAD36721AEEB002E37AFF57234683501E73D52E0FB725FA0A91C8714EF839032",
+          "bytes": 3844
+        },
+        "frame-006000.json": {
+          "sha256": "AEA1BE936C0C3C8554201153DA0E5C5EC86D562EFABEA616CDCBFB6E6BFD9E6B",
+          "bytes": 1070
+        },
+        "frame-006000.chipram": {
+          "sha256": "06937EF1ECDF42D7AC07BD969BA33741CC5ED6032EEFE2807316D6A8798D4500",
+          "bytes": 524288
+        },
+        "frame-006000.slowram": {
+          "sha256": "E0EFB822BAF085EB8ACE287C3FC1FB04F15DB1664268A45C55EB8FEC5ACCB9F1",
+          "bytes": 524288
+        },
+        "frame-006000.bmp": {
+          "sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147",
+          "bytes": 1136870
+        },
+        "frame-006000.pcm": {
+          "sha256": "F5111B9C6CB6F0FD961EA19DCAB2B41EB4BF761EC4F149CC186C167F79D2710E",
+          "bytes": 3848
+        },
+        "frame-007000.json": {
+          "sha256": "6063FC63E6C3B7333331B0859FDEBFDC5B7FB2ED42D48970E70DAE0B756D1A03",
+          "bytes": 1102
+        },
+        "frame-007000.chipram": {
+          "sha256": "428EEC5C843CCA7F07A7099D63AE836FD7CE518772175D97B276103EA7691AE4",
+          "bytes": 524288
+        },
+        "frame-007000.slowram": {
+          "sha256": "24018D5D50A6ACD19C7A2CD537FE6C4D154F43089B8DD6B19371A66C860FF1F3",
+          "bytes": 524288
+        },
+        "frame-007000.bmp": {
+          "sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB",
+          "bytes": 1136870
+        },
+        "frame-007000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-008000.json": {
+          "sha256": "5A85D6E2B9ECF03B708DB33FA7B087422B097D9367C2CE1EC29318EDB93238B1",
+          "bytes": 1103
+        },
+        "frame-008000.chipram": {
+          "sha256": "A3D8E98B5112E137BFB5E80A58FDED814366624C865F9D9D82B3BC9740C80519",
+          "bytes": 524288
+        },
+        "frame-008000.slowram": {
+          "sha256": "24018D5D50A6ACD19C7A2CD537FE6C4D154F43089B8DD6B19371A66C860FF1F3",
+          "bytes": 524288
+        },
+        "frame-008000.bmp": {
+          "sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB",
+          "bytes": 1136870
+        },
+        "frame-008000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-009000.json": {
+          "sha256": "F16530EC92F012D4416CDCF51E8C9949CCFB891E862A7B605CA068D0447FC5F1",
+          "bytes": 1106
+        },
+        "frame-009000.chipram": {
+          "sha256": "3CECB95408DF4D0C4AC8C7263523091A523BB0FBF8F1CE7E111597449B2EB59B",
+          "bytes": 524288
+        },
+        "frame-009000.slowram": {
+          "sha256": "77C9E77DC0D0F0A73EB7A0B8E8C7727773BDC0727984138DE1037B98B80F3EF8",
+          "bytes": 524288
+        },
+        "frame-009000.bmp": {
+          "sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A",
+          "bytes": 1136870
+        },
+        "frame-009000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-010000.json": {
+          "sha256": "505E2A46F48E59CB0C08AA05539E9E1BF79C9AF5BEB927D6D70C281620C15BB9",
+          "bytes": 1107
+        },
+        "frame-010000.chipram": {
+          "sha256": "09A4CB10437855A7A455FF18E6050D22E26F8FF388F731902693198CF0D45E9B",
+          "bytes": 524288
+        },
+        "frame-010000.slowram": {
+          "sha256": "EC06CFA1EFF59C1ED0A12B94AD0628713DD535814DB52C22A69051BE2C20C6BF",
+          "bytes": 524288
+        },
+        "frame-010000.bmp": {
+          "sha256": "99F1895BCDC50E4FAFDA66306F8841620DD60DFC5B35704A8AA7155FEDB32510",
+          "bytes": 1136870
+        },
+        "frame-010000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-011000.json": {
+          "sha256": "DA00869C978D52A144947AF700043F3B738123FC6547A8477414B0917E84ECF2",
+          "bytes": 1107
+        },
+        "frame-011000.chipram": {
+          "sha256": "8EF63F798752404F2625D0FDF834C9A4F9239F3E7D7C2D6E833BE06A6ADEA316",
+          "bytes": 524288
+        },
+        "frame-011000.slowram": {
+          "sha256": "EC06CFA1EFF59C1ED0A12B94AD0628713DD535814DB52C22A69051BE2C20C6BF",
+          "bytes": 524288
+        },
+        "frame-011000.bmp": {
+          "sha256": "E5C8818EADC1DC758575576D17B6991FE1B9B66F029CCAA1BFF8BD36D340A4E6",
+          "bytes": 1136870
+        },
+        "frame-011000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-012000.json": {
+          "sha256": "F1A3563D305DE8D1EF61D74CB1B5D4A03D38827F15D23E63133146A74BFFDC13",
+          "bytes": 1105
+        },
+        "frame-012000.chipram": {
+          "sha256": "F1A842B0AC2DD35E6CF6CD6A59EFECFA57FBD625AD3B3CF1BA828FC0148CF795",
+          "bytes": 524288
+        },
+        "frame-012000.slowram": {
+          "sha256": "8B10B260A7547F7AAB748D7A578039FB161D6A2A4FFA2B81322F910D0E8F1CE1",
+          "bytes": 524288
+        },
+        "frame-012000.bmp": {
+          "sha256": "99A00D8C53929A5C94034352BD403A301C04400AA6C2948A125839753BD912DD",
+          "bytes": 1136870
+        },
+        "frame-012000.pcm": {
+          "sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66",
+          "bytes": 3844
+        },
+        "frame-013000.json": {
+          "sha256": "E048CCBB066F5695C370CE7CD684FA2DDDDE0D1461343BACB7E858003C53BFDE",
+          "bytes": 1105
+        },
+        "frame-013000.chipram": {
+          "sha256": "B300F30E0CED9CFE30CC63E15B8238B445CA108A6687E08C61200AC2BA4277B7",
+          "bytes": 524288
+        },
+        "frame-013000.slowram": {
+          "sha256": "D4AC388DBD17816C5045763B76B223FB576A06C7FA53E485D87060283443F2BA",
+          "bytes": 524288
+        },
+        "frame-013000.bmp": {
+          "sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9",
+          "bytes": 1136870
+        },
+        "frame-013000.pcm": {
+          "sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0",
+          "bytes": 3848
+        },
+        "frame-014000.json": {
+          "sha256": "7C166648EEFF19F0A9C76544B3A7C378F368F9D7DB4FF9153A1D140B966B22D3",
+          "bytes": 1104
+        },
+        "frame-014000.chipram": {
+          "sha256": "FFF048DBB1C1D4D76EF5174362124D8AA93965B1FD6476AADABC7027B8B0096B",
+          "bytes": 524288
+        },
+        "frame-014000.slowram": {
+          "sha256": "0D29315385F244DE778D18BBFF4134C2375E330666DD512CE83169AFFB7178B2",
+          "bytes": 524288
+        },
+        "frame-014000.bmp": {
+          "sha256": "FEBD8D0AD2D0828E86ECFB3AC0842560DADFFE4A841811BEB5155316A05D0AC0",
+          "bytes": 1136870
+        },
+        "frame-014000.pcm": {
+          "sha256": "912AE6A2AE87E8EBC63E518060B79D0DC927ACB92D0DD4DF6A36008EB938EEE5",
+          "bytes": 3844
+        },
+        "frame-015000.json": {
+          "sha256": "3E23D8D6798336B53C3C56B28F481205EB0AA3134518963708B78DD314125D1F",
+          "bytes": 1104
+        },
+        "frame-015000.chipram": {
+          "sha256": "D02A64E6ECCF0D6DEA15F5E1E95F7E7152EA952612405C6FF46CF768B4DE22A1",
+          "bytes": 524288
+        },
+        "frame-015000.slowram": {
+          "sha256": "0D29315385F244DE778D18BBFF4134C2375E330666DD512CE83169AFFB7178B2",
+          "bytes": 524288
+        },
+        "frame-015000.bmp": {
+          "sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8",
+          "bytes": 1136870
+        },
+        "frame-015000.pcm": {
+          "sha256": "5A27F4EE44016EFDDD92DA281C2FF3573B859CB24AFA47BBD4DAFAE069A8CBBB",
+          "bytes": 3848
+        },
+        "frame-016000.json": {
+          "sha256": "9756BAFC61DCE2AE9D11B0A3FFE78061ADA043D274454621EC83F7F242C095C9",
+          "bytes": 1104
+        },
+        "frame-016000.chipram": {
+          "sha256": "BB46EA1955403D89357D02A610ED6AFD8CDD6C74290DCE24B032A6EBF37FA8E3",
+          "bytes": 524288
+        },
+        "frame-016000.slowram": {
+          "sha256": "0D29315385F244DE778D18BBFF4134C2375E330666DD512CE83169AFFB7178B2",
+          "bytes": 524288
+        },
+        "frame-016000.bmp": {
+          "sha256": "E9FCA915BC0E7C7CBFA35ECAFC4F17687241851CD944DA3E07FCBA0EA4E6CD12",
+          "bytes": 1136870
+        },
+        "frame-016000.pcm": {
+          "sha256": "3C54B7BF8A4FF7E2D5B15060AA1E45493F5B79A7E07624022D066C719305AF6A",
+          "bytes": 3844
+        },
+        "frame-017000.json": {
+          "sha256": "6E76C0D5B497C8BC5CD4B347370645ECB2285A8CF0CEABCB4E665E0AAEF25780",
+          "bytes": 1104
+        },
+        "frame-017000.chipram": {
+          "sha256": "8B23C84B6501354EDE55017743DD31FBDA4D4771F38071C266AAA8FCE7699592",
+          "bytes": 524288
+        },
+        "frame-017000.slowram": {
+          "sha256": "0D29315385F244DE778D18BBFF4134C2375E330666DD512CE83169AFFB7178B2",
+          "bytes": 524288
+        },
+        "frame-017000.bmp": {
+          "sha256": "0834E9601451E5B7C3133747C1B5C094044E683C876A76D13B4BE2BDC93398FD",
+          "bytes": 1136870
+        },
+        "frame-017000.pcm": {
+          "sha256": "0BA48AA2FD8885649CC0CD483B9D1EEFD0479C6CE2092FB66BE60D565F15125D",
+          "bytes": 3848
+        },
+        "frame-018000.json": {
+          "sha256": "8824A7007F3FF26272FD95A80924367BB714EF536B9899220BE44B2DF45DAC39",
+          "bytes": 1105
+        },
+        "frame-018000.chipram": {
+          "sha256": "F742BBD397E426C1C02679C06FAFB71CB4AC9A8489861BAFE0CB1B59C1A728BB",
+          "bytes": 524288
+        },
+        "frame-018000.slowram": {
+          "sha256": "0D29315385F244DE778D18BBFF4134C2375E330666DD512CE83169AFFB7178B2",
+          "bytes": 524288
+        },
+        "frame-018000.bmp": {
+          "sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04",
+          "bytes": 1136870
+        },
+        "frame-018000.pcm": {
+          "sha256": "11BBD2BC24025F3C99440B820910C86B551C29CC7296090E5D88253124C47D3D",
+          "bytes": 3848
+        },
+        "frame-018120.json": {
+          "sha256": "2C8E13E883D4CFC765A5DD20B8F535E2B20E91A79857C0F817AB4E99E87959C4",
+          "bytes": 1104
+        },
+        "frame-018120.chipram": {
+          "sha256": "29B28941F600E6467FE954E3373605FC3F41A1EB59CE63DE55B556439DEE9792",
+          "bytes": 524288
+        },
+        "frame-018120.slowram": {
+          "sha256": "0D29315385F244DE778D18BBFF4134C2375E330666DD512CE83169AFFB7178B2",
+          "bytes": 524288
+        },
+        "frame-018120.bmp": {
+          "sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58",
+          "bytes": 1136870
+        },
+        "frame-018120.pcm": {
+          "sha256": "4725B2C957562F43D5DB767B544820B745B91F39BDF293BC3E42F2288C61AC96",
+          "bytes": 3844
+        }
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "18120",
+        "completed": "18120",
+        "cycle": "2574756850",
+        "cpu": "0x505451D28DF1C053",
+        "hardware": "0x20084440BFE4BC5A",
+        "output": "0x164C4D65E1B1FA40",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "review": {
+        "frames": [
+          14000,
+          18000,
+          18120
+        ],
+        "milestones": [
+          {
+            "frame": 14000,
+            "description": "Level-one entry after delayed input"
+          },
+          {
+            "frame": 18000,
+            "description": "Level-one gameplay"
+          },
+          {
+            "frame": 18120,
+            "description": "End of the retained gameplay interval"
+          }
+        ],
+        "evidence": [
+          "docs/engine/LOTUS_III_PERFORMANCE_2026-09-25.md",
+          "artifacts/native-regression-2026-09-26/reference/lemmings/normal"
+        ],
+        "assessment": "Visually inspected every declared milestone on the accepted 2026-09-25 engine. Native two-disk boot and level-one gameplay using the separately validated delayed script; no level-completion claim. Also matched 2 independently retained captures."
+      },
+      "milestones": [
+        {
+          "frame": 14000,
+          "description": "Level-one entry after delayed input"
+        },
+        {
+          "frame": 18000,
+          "description": "Level-one gameplay"
+        },
+        {
+          "frame": 18120,
+          "description": "End of the retained gameplay interval"
+        }
+      ]
+    }
+  }
+}

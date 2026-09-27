@@ -22,6 +22,26 @@ boundary. Compact device state shares that clock; host UI, pacing and audio-devi
 delivery are outside emulated hardware ownership. There is no Legacy scheduler,
 requester graph or parallel device timeline to synchronize.
 
+The default 68000 reaches the machine directly. Experimental 68EC020/68020 use
+[LightweightAcceleratorBus](../../CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs)
+under the versioned `ocs-accelerator-v1` policy. Copper68k converts two native CPU
+clocks to one motherboard clock; the adapter must not convert that clock again.
+Aligned long operands use two 16-bit transfers; odd long operands use byte, word,
+byte transfers. Each transfer retains at least four motherboard clocks including
+its address/data phases, with existing contention or CIA synchronization allowed
+to extend it. All device progress remains owned by the machine.
+
+EC020 masks each transfer to 24 bits. A 68020 address above `$FFFFFF` returns
+all-one data or ignores a write while advancing time; it never aliases a device.
+This is an explicit unmapped-address policy, not accelerator autoconfiguration or
+a physical bus-error model. Cache code reads use side-effect-free RAM/ROM peeks;
+they do not strobe CIA/custom registers. Cache, exception and instruction timing
+remain bounded package policies, not accelerator-card certification. See
+[CPU options](CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md) for coverage and limits.
+The 020 instruction cache includes Chip RAM when enabled; guest code writes
+remain stale in that cache until guest invalidation. See the independent probe
+and [native cache correction](LOTUS_III_020_CACHE_2026-09-26.md).
+
 Absent OCS DENISEID readback retains one completed DMA word. Actual DMA
 transfers update it at output; untimed memory inspection does not. Readback
 consults the devices' existing completion histories, with no duplicate global
@@ -35,6 +55,18 @@ bus phase and byte contents, with no observer between the former two byte stores
 The fixed-size invariant and its boundary tests are documented in the
 [word-access optimization](DMA_WORD_ACCESS_2026-09-23.md); changing supported RAM
 sizes requires reviewing that access proof. CPU memory decoding is separate.
+
+Optional Zorro II Fast RAM is CPU-only storage in the `$200000–$9FFFFF` expansion
+window. One Autoconfig chain exposes the memory board before CopperHDF; native
+Kickstart assigns its address and links it into Exec's memory list. The virtual
+board decodes 64 KiB assignments that fit its complete bank in that window,
+including Kickstart 1.3's 4 MiB assignment at `$200000`. It remains a 16-bit
+expansion, including on the 020 bridge. Fast RAM adds no Agnus wait; CPU transfer
+clocks and the single machine clock continue normally. Code peeks and CopperHDF
+contiguous guest buffers include the configured bank. DMA helpers are unchanged.
+Reset removes assignments, preserves bytes and reopens Autoconfig. No Zorro III,
+32-bit accelerator-local memory or physical board timing is claimed. See the
+[Fast RAM validation](FAST_RAM_2026-09-27.md).
 
 Private register and palette arrays retain their original storage and expose
 checked spans with the same constant sizes used at allocation. Their readonly

@@ -1,0 +1,797 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-26",
+  "status": "LOST_EDGE_LOCALIZED_TIMING_CORRECTION_OPEN",
+  "followUpCorrection": "LOTUS_III_020_CACHE_2026-09-26.json",
+  "productionExecutionChanges": false,
+  "package": {
+    "id": "Copper68k",
+    "version": "1.4.2-ocs020.50",
+    "published": false,
+    "repository": "https://github.com/ilehtoranta/CopperMod",
+    "branch": "codex/experimental-ocs020",
+    "commit": "d4d0c8e20490110be1098a6e1a962aa109f99c51",
+    "baseCommit": "8fb826eacf8e9dc32948b482c878079448bd6e61",
+    "nupkgSha256": "73927D210B6F8897EA70597C13FB4A5C2695FF780E8FE0191E761ECFA57528FC",
+    "dllSha256": "F49268E9BA79E42C8F1CB54DD76673A3933C8E1BE5E1ECB64407A718B1E75B8D"
+  },
+  "binaries": [
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/Copper68k.dll",
+      "sha256": "F49268E9BA79E42C8F1CB54DD76673A3933C8E1BE5E1ECB64407A718B1E75B8D",
+      "bytes": 861184
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "C0C7703656826D47440572275E4CBDED4EE3E83A4549269AD402C1DAC9660FDA",
+      "bytes": 193024
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "85C33F045F3B2F39503FB5D55F116520B82461F27B7A86FA138ABE0505761BE3",
+      "bytes": 63488
+    }
+  ],
+  "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+  "media": [
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "C8241ACD91206A0D857CD589DA2ECDEB4084BD270E597DEE4C0EB7D7885FC30C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "557979CB5FA775E1FA2E2864BB4800667FB3A24B782DAA6900157FA6990D8546",
+      "bytes": 901120
+    },
+    {
+      "archive": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+      "archive_sha256": "699D6C7A9562184F4DABA8D23FF6C4CBFD28A3E1863EBA5C764BA96D735ABD9C",
+      "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+      "entry_sha256": "CDE309BE4D5D6508DDF4C825F174FF990F61552CE233999B5723939334996887",
+      "bytes": 901120
+    }
+  ],
+  "observerParity": [
+    {
+      "left": "artifacts/lotus3-020-investigation/trace-M68000/captures/frame-009000.json",
+      "right": "artifacts/cpu-options-2026-09-26/native-68000-final/lotus3/normal/frame-009000.json",
+      "sha256": "5E74B7B4F737D387E34C64F07A917CB324FCD591A5F63B8AD2174A3B1687895A"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/trace-M68000/captures/frame-009000.chipram",
+      "right": "artifacts/cpu-options-2026-09-26/native-68000-final/lotus3/normal/frame-009000.chipram",
+      "sha256": "8A507F0DF6F71A7BF8D1932CD199F1F2A651AD731B66D2673A823B1574C53679"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/trace-M68000/captures/frame-009000.bmp",
+      "right": "artifacts/cpu-options-2026-09-26/native-68000-final/lotus3/normal/frame-009000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/trace-M68020/captures/frame-010000.json",
+      "right": "artifacts/cpu-options-2026-09-26/native/lotus3-script-020-dev45/frame-010000.json",
+      "sha256": "F38FAADD1EC7283A8FF83AD8CCCF2F55CBF63DEBE3D3787A38548346A77D65BB"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/trace-M68020/captures/frame-010000.chipram",
+      "right": "artifacts/cpu-options-2026-09-26/native/lotus3-script-020-dev45/frame-010000.chipram",
+      "sha256": "2B4085770BFEBBD271BCEF80EC7F46EE974D5E69C68732A30152645F659166BC"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/trace-M68020/captures/frame-010000.bmp",
+      "right": "artifacts/cpu-options-2026-09-26/native/lotus3-script-020-dev45/frame-010000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96"
+    }
+  ],
+  "nativeEpisodes": [
+    {
+      "model": "M68000",
+      "frame": 6500,
+      "edgeConsumed": false,
+      "events": [
+        {
+          "kind": "irq",
+          "cycle": 923643632,
+          "sourcePc": "000741C0",
+          "pc": "000704A0",
+          "sr": "2304",
+          "edge": 0,
+          "timer": 2156,
+          "pins": 63,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 923644162,
+          "sourcePc": "00075C92",
+          "pc": "00075C96",
+          "sr": "2300",
+          "edge": 16,
+          "timer": 2156,
+          "pins": 63,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 923645370,
+          "sourcePc": "00070650",
+          "pc": "000741C0",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 2157,
+          "pins": 63,
+          "cacr": 0
+        },
+        {
+          "kind": "before",
+          "cycle": 923645408,
+          "sourcePc": "00069B42",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 2157,
+          "pins": 63,
+          "cacr": 0
+        }
+      ]
+    },
+    {
+      "model": "M68000",
+      "frame": 8500,
+      "edgeConsumed": false,
+      "events": [
+        {
+          "kind": "irq",
+          "cycle": 1207847632,
+          "sourcePc": "000741C0",
+          "pc": "000704A0",
+          "sr": "2304",
+          "edge": 0,
+          "timer": 4156,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 1207848162,
+          "sourcePc": "00075C92",
+          "pc": "00075C96",
+          "sr": "2300",
+          "edge": 16,
+          "timer": 4156,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 1207849326,
+          "sourcePc": "00070650",
+          "pc": "000741C0",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 4157,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "before",
+          "cycle": 1207849364,
+          "sourcePc": "00069B42",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 4157,
+          "pins": 127,
+          "cacr": 0
+        }
+      ]
+    },
+    {
+      "model": "M68000",
+      "frame": 10500,
+      "edgeConsumed": true,
+      "events": [
+        {
+          "kind": "irq",
+          "cycle": 1492051640,
+          "sourcePc": "000741AA",
+          "pc": "000704A0",
+          "sr": "2300",
+          "edge": 0,
+          "timer": 6156,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 1492052170,
+          "sourcePc": "00075C92",
+          "pc": "00075C96",
+          "sr": "2300",
+          "edge": 16,
+          "timer": 6156,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 1492053330,
+          "sourcePc": "00070650",
+          "pc": "000741AA",
+          "sr": "2000",
+          "edge": 16,
+          "timer": 6157,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "after",
+          "cycle": 1492053366,
+          "sourcePc": "000741B0",
+          "pc": "000741B6",
+          "sr": "2001",
+          "edge": 16,
+          "timer": 6157,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "before",
+          "cycle": 1492053374,
+          "sourcePc": "000741B8",
+          "pc": "000741B8",
+          "sr": "2001",
+          "edge": 16,
+          "timer": 6157,
+          "pins": 127,
+          "cacr": 0
+        },
+        {
+          "kind": "before",
+          "cycle": 1492053480,
+          "sourcePc": "00069B42",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 65524,
+          "pins": 127,
+          "cacr": 0
+        }
+      ]
+    },
+    {
+      "model": "M68020",
+      "frame": 6500,
+      "edgeConsumed": false,
+      "events": [
+        {
+          "kind": "irq",
+          "cycle": 923777970,
+          "sourcePc": "000741B6",
+          "pc": "000704A0",
+          "sr": "2305",
+          "edge": 0,
+          "timer": 2057,
+          "pins": 63,
+          "cacr": 1
+        },
+        {
+          "kind": "after",
+          "cycle": 923778534,
+          "sourcePc": "00075C92",
+          "pc": "00075C96",
+          "sr": "2300",
+          "edge": 16,
+          "timer": 2057,
+          "pins": 63,
+          "cacr": 1
+        },
+        {
+          "kind": "after",
+          "cycle": 923779910,
+          "sourcePc": "00070650",
+          "pc": "000741B6",
+          "sr": "2005",
+          "edge": 16,
+          "timer": 2058,
+          "pins": 63,
+          "cacr": 1
+        },
+        {
+          "kind": "before",
+          "cycle": 923779963,
+          "sourcePc": "00069B42",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 2058,
+          "pins": 63,
+          "cacr": 1
+        }
+      ]
+    },
+    {
+      "model": "M68020",
+      "frame": 8500,
+      "edgeConsumed": false,
+      "events": [
+        {
+          "kind": "irq",
+          "cycle": 1207981958,
+          "sourcePc": "00069B42",
+          "pc": "000704A0",
+          "sr": "2304",
+          "edge": 0,
+          "timer": 4057,
+          "pins": 127,
+          "cacr": 1
+        },
+        {
+          "kind": "after",
+          "cycle": 1207982524,
+          "sourcePc": "00075C92",
+          "pc": "00075C96",
+          "sr": "2300",
+          "edge": 16,
+          "timer": 4057,
+          "pins": 127,
+          "cacr": 1
+        },
+        {
+          "kind": "after",
+          "cycle": 1207983858,
+          "sourcePc": "00070650",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 4058,
+          "pins": 127,
+          "cacr": 1
+        },
+        {
+          "kind": "before",
+          "cycle": 1207983858,
+          "sourcePc": "00069B42",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 4058,
+          "pins": 127,
+          "cacr": 1
+        }
+      ]
+    },
+    {
+      "model": "M68020",
+      "frame": 10500,
+      "edgeConsumed": false,
+      "events": [
+        {
+          "kind": "irq",
+          "cycle": 1492185958,
+          "sourcePc": "00069B42",
+          "pc": "000704A0",
+          "sr": "2304",
+          "edge": 0,
+          "timer": 6057,
+          "pins": 127,
+          "cacr": 1
+        },
+        {
+          "kind": "after",
+          "cycle": 1492186524,
+          "sourcePc": "00075C92",
+          "pc": "00075C96",
+          "sr": "2300",
+          "edge": 16,
+          "timer": 6057,
+          "pins": 127,
+          "cacr": 1
+        },
+        {
+          "kind": "after",
+          "cycle": 1492187858,
+          "sourcePc": "00070650",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 6058,
+          "pins": 127,
+          "cacr": 1
+        },
+        {
+          "kind": "before",
+          "cycle": 1492187858,
+          "sourcePc": "00069B42",
+          "pc": "00069B42",
+          "sr": "2004",
+          "edge": 16,
+          "timer": 6058,
+          "pins": 127,
+          "cacr": 1
+        }
+      ]
+    }
+  ],
+  "observerCounterLimit": "discarded counts any nonzero edge cleared, including after consumption; counters cover traced windows only",
+  "variants": [
+    {
+      "name": "first-press-plus-one-field",
+      "model": "M68020",
+      "fields": 18000,
+      "status": "DISK_TWO_PROMPT",
+      "cycle": 2557838305,
+      "cpu": "46218413F90EF1F5",
+      "hardware": "6ABD648BEAC28248",
+      "output": "98928BB8BCB02865"
+    },
+    {
+      "name": "twenty-press-burst",
+      "model": "M68020",
+      "pressFrames": [
+        6500,
+        6505,
+        6510,
+        6515,
+        6520,
+        6525,
+        6530,
+        6535,
+        6540,
+        6545,
+        6550,
+        6555,
+        6560,
+        6565,
+        6570,
+        6575,
+        6580,
+        6585,
+        6590,
+        6595
+      ],
+      "heldFields": 2,
+      "fields": 18000,
+      "status": "DISK_TWO_PROMPT",
+      "summary": {
+        "model": "M68020",
+        "CompletedFrames": 18000,
+        "Cycle": 2557838305,
+        "pc": "000741BE",
+        "consumed": 0,
+        "discarded": 5,
+        "diskChecks": 0,
+        "irqPcs": {
+          "000741B6": 69,
+          "00069B42": 23
+        }
+      }
+    }
+  ],
+  "synthetic": [
+    {
+      "result": {
+        "mode": "normal",
+        "cpuModel": "M68000",
+        "CompletedFrames": 100,
+        "Cycle": 14210206,
+        "pc": "001108",
+        "interruptedPcs": {
+          "00110A": 50,
+          "00100A": 50
+        },
+        "consumedEdges": 50
+      },
+      "rom": {
+        "path": "artifacts/lotus3-020-investigation/synthetic-000-default/polling.rom",
+        "sha256": "B4BBF99E61796E74CA96A880080B944B68D8EE3B3BFA22BA56CE49076426373B",
+        "bytes": 524288
+      },
+      "parity": [
+        {
+          "left": "artifacts/lotus3-020-investigation/synthetic-000-default/scalar.chipram",
+          "right": "artifacts/lotus3-020-investigation/synthetic-000-default/normal.chipram",
+          "sha256": "65443394D10B0A755FB56B702253C407A5B08B320807A9342F625A45B81FB765"
+        },
+        {
+          "left": "artifacts/lotus3-020-investigation/synthetic-000-default/scalar.slowram",
+          "right": "artifacts/lotus3-020-investigation/synthetic-000-default/normal.slowram",
+          "sha256": "74C95D18DEE378FE0695EDF4AB733E61F4F39472EEAC6E7BD8657D9F7193FB46"
+        }
+      ]
+    },
+    {
+      "result": {
+        "mode": "normal",
+        "cpuModel": "M68EC020",
+        "CompletedFrames": 100,
+        "Cycle": 14210207,
+        "pc": "001118",
+        "interruptedPcs": {
+          "001100": 1,
+          "001104": 1,
+          "001108": 33,
+          "001110": 33,
+          "001000": 32
+        },
+        "consumedEdges": 35
+      },
+      "rom": {
+        "path": "artifacts/lotus3-020-investigation/synthetic-ec020/polling.rom",
+        "sha256": "B4BBF99E61796E74CA96A880080B944B68D8EE3B3BFA22BA56CE49076426373B",
+        "bytes": 524288
+      },
+      "parity": [
+        {
+          "left": "artifacts/lotus3-020-investigation/synthetic-ec020/scalar.chipram",
+          "right": "artifacts/lotus3-020-investigation/synthetic-ec020/normal.chipram",
+          "sha256": "AB1FCA78C2EAA81966460D713B31DB8BD5678B9FC847FC045DA45471FF6A5982"
+        },
+        {
+          "left": "artifacts/lotus3-020-investigation/synthetic-ec020/scalar.slowram",
+          "right": "artifacts/lotus3-020-investigation/synthetic-ec020/normal.slowram",
+          "sha256": "FD31F5F6D4B43A748E9DE4E2A549C8282400F6F23868AFF2700574C2D7B539AC"
+        }
+      ]
+    },
+    {
+      "result": {
+        "mode": "normal",
+        "cpuModel": "M68020",
+        "CompletedFrames": 100,
+        "Cycle": 14210207,
+        "pc": "001118",
+        "interruptedPcs": {
+          "001100": 1,
+          "001104": 1,
+          "001108": 33,
+          "001110": 33,
+          "001000": 32
+        },
+        "consumedEdges": 35
+      },
+      "rom": {
+        "path": "artifacts/lotus3-020-investigation/synthetic-020/polling.rom",
+        "sha256": "B4BBF99E61796E74CA96A880080B944B68D8EE3B3BFA22BA56CE49076426373B",
+        "bytes": 524288
+      },
+      "parity": [
+        {
+          "left": "artifacts/lotus3-020-investigation/synthetic-020/scalar.chipram",
+          "right": "artifacts/lotus3-020-investigation/synthetic-020/normal.chipram",
+          "sha256": "AB1FCA78C2EAA81966460D713B31DB8BD5678B9FC847FC045DA45471FF6A5982"
+        },
+        {
+          "left": "artifacts/lotus3-020-investigation/synthetic-020/scalar.slowram",
+          "right": "artifacts/lotus3-020-investigation/synthetic-020/normal.slowram",
+          "sha256": "FD31F5F6D4B43A748E9DE4E2A549C8282400F6F23868AFF2700574C2D7B539AC"
+        }
+      ]
+    }
+  ],
+  "default68000PriorRamParity": [
+    {
+      "left": "artifacts/lotus3-020-investigation/synthetic-000-default/normal.chipram",
+      "right": "artifacts/lotus3-timing/retained-probe/normal.chipram",
+      "sha256": "65443394D10B0A755FB56B702253C407A5B08B320807A9342F625A45B81FB765"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/synthetic-000-default/normal.slowram",
+      "right": "artifacts/lotus3-timing/retained-probe/normal.slowram",
+      "sha256": "74C95D18DEE378FE0695EDF4AB733E61F4F39472EEAC6E7BD8657D9F7193FB46"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/synthetic-000-default/scalar.chipram",
+      "right": "artifacts/lotus3-timing/retained-probe/scalar.chipram",
+      "sha256": "65443394D10B0A755FB56B702253C407A5B08B320807A9342F625A45B81FB765"
+    },
+    {
+      "left": "artifacts/lotus3-020-investigation/synthetic-000-default/scalar.slowram",
+      "right": "artifacts/lotus3-timing/retained-probe/scalar.slowram",
+      "sha256": "74C95D18DEE378FE0695EDF4AB733E61F4F39472EEAC6E7BD8657D9F7193FB46"
+    }
+  ],
+  "reference": {
+    "version": "WinUAE 6.0.3",
+    "executable": {
+      "path": "C:/Program Files/WinUAE/winuae64.exe",
+      "sha256": "F3E55700FD811CD543FDFEBF6C3221CFAA3D385828F110C6D3EB534C64503123",
+      "bytes": 29372368
+    },
+    "cpu": "68020",
+    "frequencyHz": 14187580,
+    "cpuCompatible": true,
+    "cpuCycleExact": true,
+    "cpuMemoryCycleExact": true,
+    "jitCacheSize": 0,
+    "profile": "PAL OCS A500, 512 KiB chip, 512 KiB slow",
+    "native": {
+      "input": "Manually timed IPC Return, disk-two insertion, joystick fire",
+      "warp": true,
+      "outcome": "PROMPT_PASSED_LATER_GAME_CODE_AND_DISK_LOADER_OBSERVED",
+      "afterFirePc": "00069CC6",
+      "laterPc": "0000069E",
+      "cacr": 1,
+      "drivingVerified": false
+    },
+    "synthetic": {
+      "warp": false,
+      "cacr": 0,
+      "interruptedPcRing": {
+        "0000100A": 61,
+        "0000100E": 3,
+        "00001100": 42,
+        "00001108": 40,
+        "0000110A": 30,
+        "00001110": 27,
+        "00001118": 53
+      },
+      "limit": "Running ring read, independent startup and duration; not synchronized hardware golden"
+    },
+    "processesClosed": true
+  },
+  "validation": {
+    "productionReleaseBuild": "PASS; zero warnings/errors",
+    "probeLockedRestore": "PASS",
+    "syntheticFields": 600,
+    "newEngineOrHostSuiteRun": false,
+    "priorSuiteRecord": "CPU_OPTIONS_IMPLEMENTATION_2026-09-26.json",
+    "performanceAcceptance": false,
+    "goldensChanged": false
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/lotus3-020-investigation/probe/Program.cs",
+      "sha256": "467ABCB1EDB39022E3365410695F0B2A65EAA320B87DFE7938A767863E99192A",
+      "bytes": 4155
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/probe/Probe.csproj",
+      "sha256": "FD86FD43EAD6CB6E322C820520F5708EEC6B12DA1D596709DD79EBF380003FD4",
+      "bytes": 1167
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/input-plus-one.json",
+      "sha256": "128AB5CF79B1DB1FB2D241B2FF812075BE89420810F142E8C6CEAE955B24634F",
+      "bytes": 952
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/input-burst.json",
+      "sha256": "1E3B6E2523D3C9185E9A10F4F9FC7F4DBDEA11D5553C73DCFE868BED2FF2AADB",
+      "bytes": 2129
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/ipc.ps1",
+      "sha256": "C5D0BF6F069EABC9902500A7ED9A246CDBC6EB95E6A51C453979CF1E4EA343DD",
+      "bytes": 780
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/polling-020.uae",
+      "sha256": "7939F94EEC3D39500D67DE0D8BA94487A3D06B156D8D8018A2504620FC9EA079",
+      "bytes": 931
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/lotus-020.uae",
+      "sha256": "DF4162A4B435B9D8D10A405C7FAE381AFE2812013AF7CFAD98AC8D21A490BD1C",
+      "bytes": 940
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/production-build.log",
+      "sha256": "9A8234C328176475BAE7B321E8D10D6A6B13ECCEBD8289CBBF4032C648F6F44B",
+      "bytes": 1555
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/probe-restore.log",
+      "sha256": "9DF71C0EFF8AE346E126463F83A58A9CD707D8333830EF7F1499756BD9282D3D",
+      "bytes": 388
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/plus-one-020.log",
+      "sha256": "5F15D4918EB25A08A6DA9C97A36E98E778856E3729EA9125194C7E1BEEAA0198",
+      "bytes": 21439
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-M68000/edges.jsonl",
+      "sha256": "302669B86B51030AB364F1B9880467A81A8D9E8E8F49788E6172B7CA965C552C",
+      "bytes": 206082
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-M68020/edges.jsonl",
+      "sha256": "56897E8D94534B007B9DC44DF6C533CB6AB4EB3275563B45D01A0407074E56BD",
+      "bytes": 203785
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-burst-020/edges.jsonl",
+      "sha256": "E4222C5F2175161DD6B38F39AAC0525A7B41FF0BF9E077F5247490BAADA5BAC2",
+      "bytes": 227941
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-M68000/summary.json",
+      "sha256": "95C5DD7CBDBB86972B3746530A8189DB8A30D3EB21CC30B86B3BEAC85470219B",
+      "bytes": 338
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-M68020/summary.json",
+      "sha256": "9A57A25EB65934EE98E058673EE3422F818F2A8DC6757304D69B4F54A33F61D2",
+      "bytes": 257
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-burst-020/summary.json",
+      "sha256": "69CFA79BD6C9D42AC5B364384EFB9BE191593EF4549AC37C13DE80099A2EAF50",
+      "bytes": 218
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-burst-020/captures/frame-018000.json",
+      "sha256": "B3B22A2CDA03A5BAD7595C3A30CBFE6DD711A0D719624D728B5E9EDBCF298979",
+      "bytes": 1103
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/trace-burst-020/captures/frame-018000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "bytes": 1136870
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/plus-one-020/frame-018000.json",
+      "sha256": "B3B22A2CDA03A5BAD7595C3A30CBFE6DD711A0D719624D728B5E9EDBCF298979",
+      "bytes": 1103
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/plus-one-020/frame-018000.bmp",
+      "sha256": "68C898FBE8956487037A8FAEFE14D941D432B3300E368AD1F5E8BAC7E1A6EA96",
+      "bytes": 1136870
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-lotus-020-after-fire.txt",
+      "sha256": "BDF60061C965F3F860310CEDE0173C6B854A6FC664727379A0EB368B32C942D0",
+      "bytes": 770
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-lotus-020-after-return.txt",
+      "sha256": "D6882DB30B2EB2B98A59E028900A1985336B78ECB885F729BEDD5C4373616234",
+      "bytes": 740
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-lotus-020-boot.txt",
+      "sha256": "984B715C52F5F3D96381B9D75A24F29E4B649BBBC44708A897A340E910372837",
+      "bytes": 868
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-lotus-020-continuation.txt",
+      "sha256": "E0C1E967D9C71AB63D055782E64037F7567586402DC610888995B405BF0BDE95",
+      "bytes": 3780
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-lotus-020-disk2-fire.txt",
+      "sha256": "239C134F7A0EA15ECA949B25E6212E51BED968C91E86191712A64AC7E88BB7CF",
+      "bytes": 250
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-lotus-020-input.txt",
+      "sha256": "FF0EB41C89FACC1ABCA4B23322844ABD8A4E7548BAF6C4DF9079567D8E72C0FA",
+      "bytes": 31
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-synthetic-020-steady.txt",
+      "sha256": "EE984D86C5A8D95E8BA1CD237AE9C85423522CE8A17FB8C8655E6F2D5D5A4506",
+      "bytes": 7662
+    },
+    {
+      "path": "artifacts/lotus3-020-investigation/winuae-synthetic-020.txt",
+      "sha256": "FC72F69AD7A5724A7B801ED4D165929665A4174A6D48298137567E8E50BE3D21",
+      "bytes": 1419
+    },
+    {
+      "path": "scripts/probes/CopperPollingTiming/Program.cs",
+      "sha256": "A07073E2BDB4088AA9C925303B447157A56F017740BBDC3AF5223B5A93628BDC",
+      "bytes": 4301
+    },
+    {
+      "path": "scripts/probes/CopperPollingTiming/packages.lock.json",
+      "sha256": "C69169300A6F078BD6D692E28194F4F29B06855C19661AB11D4C065A2702A821",
+      "bytes": 860
+    },
+    {
+      "path": "artifacts/native-regression-2026-09-26/final/lotus3/input.json",
+      "sha256": "A5FB0D22F79DAEECEFAA02E2CC2CF05BA39BF209A683DE95E5E02E4FCEB3E649",
+      "bytes": 952
+    }
+  ]
+}

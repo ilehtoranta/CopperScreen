@@ -10,6 +10,23 @@ Independent PAL OCS A500 engine: Copper68k accurate 68000, 512 KiB Chip RAM,
 and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
 
+`LightweightA500Configuration.FastRamBytes` adds optional CPU-only Zorro II RAM:
+0 (default), 512 KiB, 1, 2, 4 or 8 MiB. Native Kickstart Autoconfig assigns the
+bank within `$200000–$9FFFFF`, ahead of CopperHDF in the expansion chain.
+`FastRam` exposes read-only bytes and `FastRamBase` is null until configured.
+CPU accesses bypass Agnus contention; chipset DMA remains in Chip RAM. Both
+reset paths remove the mapping while preserving RAM contents. Size changes
+require a new machine. See [implementation, package and native evidence](../docs/engine/FAST_RAM_2026-09-27.md).
+
+`LightweightA500Configuration.CpuModel` also accepts experimental `M68EC020` and
+`M68020`. Both use two native clocks per motherboard clock and the fitted 16-bit
+OCS bus. EC020 wraps addresses at 24 bits; 68020 upper addresses remain unmapped.
+The default 68000 uses its original bus path. CPU changes require a new machine.
+See the [CPU implementation and validation record](../docs/engine/CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md)
+for the development package, timing policy and known compatibility limits.
+The [cache and decoder correction](../docs/engine/LOTUS_III_020_CACHE_2026-09-26.md)
+records the current package and subsequent native continuation checks.
+
 The fitted 512 KiB chip RAM is CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
 for the default A500 wiring and the changed native boot identity.
@@ -22,7 +39,7 @@ Electrical edge cases and broader write-only readback remain unverified.
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full
-raster and 48 kHz stereo PCM. ECS/AGA, other CPU/ROM profiles, RTC, RTG, physical
+raster and 48 kHz stereo PCM. ECS/AGA, additional CPU/ROM profiles, RTC, RTG, physical
 IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
 

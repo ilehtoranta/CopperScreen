@@ -22,11 +22,15 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var rom = CopperScreenKickstartRomArchive.ReadNative13Rom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion);
         BaseDirectory = options.BaseDirectory;
-        ProfileName = options.Profile.DisplayName + " [Lightweight]";
+        var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
+        ProfileName = options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
+            ? " [Lightweight]" : $" [Lightweight, {CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
         var configuration = new LightweightA500Configuration
             { FramebufferWidth = 908, FloppyDriveCount = options.Profile.FloppyDriveCount,
+                CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
+                FastRamBytes = options.Profile.RealFastRamSize,
                 Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition))).ToArray() };
         if (previous is not null && !previous.IsPaused) throw new InvalidOperationException("Pause before preparing a replacement machine.");
         _machine = previous?._machine.CreateRestartCandidate(configuration) ?? new(configuration);
@@ -74,14 +78,18 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var p = options.Profile;
         if (p.Chipset != AmigaChipset.OcsPal || p.ChipRamSize != 512 * 1024 ||
             p.ExpansionRamSize != 512 * 1024 || p.ExpansionRamBase != 0xC00000 ||
-            p.RealFastRamSize != 0 || p.RtgVramSize != 0 || p.RtcEnabled ||
+            p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
-            (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
+            (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020) ||
             p.KickstartSource is not (CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.KickstartRom) ||
             p.KickstartVersion != KickstartVersion.Kickstart13)
-            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC or RTG.");
+            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 or experimental 68EC020/68020 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC or RTG.");
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             throw new NotSupportedException("Choose your Kickstart 1.3 ROM in Settings > Setup, or supply --kickstart <path>.");
+        if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
+            throw new NotSupportedException("Fast RAM supports 0, 512, 1024, 2048, 4096 or 8192 KiB.");
+        if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.A500RealFastRamBase)
+            throw new NotSupportedException("Fast RAM uses guest Autoconfig; keep the assignment hint at $200000.");
         if (options.DriveDiskPaths.Skip(p.FloppyDriveCount).Any(path => path != null))
             throw new NotSupportedException("Lightweight accepts media in connected floppy drives only.");
         if (options.AgnusBusArbitration != AgnusBusArbitrationMode.Legacy ||
@@ -93,6 +101,14 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             throw new NotSupportedException("Legacy execution overrides do not apply to Lightweight.");
         ValidateInput(options.Input);
     }
+
+    private static Copper68k.M68kCpuModel GetCpuModel(M68kBackendKind backend) => backend switch
+    {
+        M68kBackendKind.AccurateM68000 => Copper68k.M68kCpuModel.M68000,
+        M68kBackendKind.AccurateM68EC020 => Copper68k.M68kCpuModel.M68EC020,
+        M68kBackendKind.AccurateM68020 => Copper68k.M68kCpuModel.M68020,
+        _ => throw new NotSupportedException($"CPU backend {backend} is unavailable in Lightweight.")
+    };
 
     private static void ValidateInput(CopperScreenInputOptions input)
     {

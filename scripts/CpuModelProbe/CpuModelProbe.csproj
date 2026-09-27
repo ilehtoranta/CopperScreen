@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- Use the existing diagnostic friend for the CPU timing contract.
+         This opt-in probe is outside the production solution and test outputs. -->
+    <AssemblyName>CopperMod.Amiga.Lightweight.Tests</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj" />
+  </ItemGroup>
+</Project>

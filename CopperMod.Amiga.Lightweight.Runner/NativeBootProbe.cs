@@ -7,18 +7,35 @@ internal sealed class NativeBootProbe
 {
     private readonly string _directory;
     private readonly bool _continueUnsupported;
+    private readonly int _interval;
+    private readonly bool _extended;
     private bool _sawUnsupported;
     private string? _lastVideoUnsupported;
+    private bool _wroteCpuProfile;
 
-    internal NativeBootProbe(string directory, bool continueUnsupported)
+    internal NativeBootProbe(string directory, bool continueUnsupported, int interval = 60, bool extended = false)
     {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(interval);
         _directory = Path.GetFullPath(directory);
         _continueUnsupported = continueUnsupported;
+        _interval = interval;
+        _extended = extended;
         Directory.CreateDirectory(_directory);
     }
 
     internal void ExecuteFrame(LightweightA500Machine machine, bool last)
     {
+        if (!_wroteCpuProfile && machine.CpuModel != Copper68k.M68kCpuModel.M68000)
+        {
+            File.WriteAllText(Path.Combine(_directory, "cpu-profile.json"), JsonSerializer.Serialize(new
+            {
+                schemaVersion = 1, cpuModel = machine.CpuModel.ToString(), experimental = true,
+                nativeClocksPerMotherboardClock = 2, motherboardBusBits = 16,
+                timingPolicy = "ocs-accelerator-v1",
+                copper68k = typeof(Copper68k.M68kCpuState).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            }));
+            _wroteCpuProfile = true;
+        }
         try { machine.ExecuteFrame(); }
         catch
         {
@@ -26,7 +43,7 @@ internal sealed class NativeBootProbe
             throw;
         }
         var videoUnsupported = Field<LightweightVideo>(machine, "_video").UnsupportedActiveFeature;
-        if (last || machine.CompletedFrames == 1 || machine.CompletedFrames % 60 == 0 ||
+        if (last || machine.CompletedFrames == 1 || machine.CompletedFrames % _interval == 0 ||
             videoUnsupported != _lastVideoUnsupported ||
             (!_sawUnsupported && machine.UnsupportedActiveFeature is not null))
             Capture(machine);
@@ -72,7 +89,20 @@ internal sealed class NativeBootProbe
         var json = JsonSerializer.Serialize(state);
         File.WriteAllText(stem + ".json", json);
         File.WriteAllBytes(stem + ".chipram", m.ChipRam.ToArray());
+        if (!m.FastRam.IsEmpty)
+        {
+            File.WriteAllBytes(stem + ".fastram", m.FastRam.ToArray());
+            File.WriteAllText(stem + ".memory.json", JsonSerializer.Serialize(new
+                { fastRamBytes = m.FastRam.Length, fastRamBase = m.FastRamBase }));
+        }
         WriteBitmap(stem + ".bmp", m.Framebuffer.Span, m.FramebufferWidth, m.FramebufferHeight);
+        if (_extended)
+        {
+            File.WriteAllBytes(stem + ".slowram", Field<byte[]>(m, "_slowRam"));
+            // Signed 16-bit little-endian interleaved stereo, one captured field.
+            using var audio = new BinaryWriter(File.Create(stem + ".pcm"));
+            foreach (var sample in m.AudioSamples.Span) audio.Write(sample);
+        }
         Console.WriteLine(json);
     }
 

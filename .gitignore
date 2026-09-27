@@ -13,3 +13,4 @@ media/
 *.ipf
 *.nupkg
 *.snupkg
+__pycache__/

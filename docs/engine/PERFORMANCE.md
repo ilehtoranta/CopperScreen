@@ -1,9 +1,11 @@
 # Lightweight performance measurements
 
 On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
-`1.4.1-locality.1` development pin. Dated comparisons below retain the package
-identity and protocol that were actually measured; they are not relabeled as
-measurements of the subsequently published package.
+`1.4.1-locality.1` development pin. The current project already pins stable
+`1.4.1`; its measured binary is recorded separately in
+[Copper68k NuGet comparison](COPPER68K_NUGET_2026-09-24.md). Older comparisons
+retain their actual package identities and are not relabeled as measurements of
+stable `1.4.1`.
 
 Correctness, host throughput and interactive compatibility are separate results.
 G6/G7 Legacy cutover is retired. Lightweight is already the active engine; ordinary
@@ -59,6 +61,23 @@ v1 is **INVALID / RERUN**: sustained package interference exceeded 25% for
 allocation, but their timing samples are excluded from acceptance. The new combined
 comparison above measures the current engine; the earlier isolated series remains
 invalid. Earlier package-specific exceptions do not apply.
+
+The stable Copper68k `1.4.1` package comparison is **VALID**, but lores and hires
+remain **INCONCLUSIVE** under the default 1% one-sided 95% upper-bound limit:
+paired frame-time changes / bounds are **+0.8521% / +1.4785%** and
+**+0.6605% / +1.9898%**. Native Lemmings is **-2.4124% / -1.0405%** and passes.
+All 36 identities match with zero measured allocation and valid host telemetry.
+The project already pins stable `1.4.1`; this release does not have a higher
+semver than the project pin. The [package-specific report](COPPER68K_NUGET_2026-09-24.md)
+records the candidate binary, paired samples and exact protocol. On 2026-09-24,
+the owner accepted the lores and hires bounds for this exact package comparison;
+the default limit remains in force for other candidates.
+
+A fresh diagnostic [Lemmings host-time profile](PROFILE_2026-09-24.md) of the
+stable Copper68k 1.4.1 package attributes 33.36% of sampled engine-thread time
+to Copper68k, 29.75% to device dispatch/inlined video, and 7.65% to blitter work.
+The largest CPU-core paths are instruction dispatch, branch/refill and prefetch.
+This is sampled managed thread-time, not hardware CPU cycles or a throughput gate.
 
 The [scoped scalar-local candidate](SCOPED_LOCALS_2026-09-24.md) removes observed
 stack-clearing instructions in the hot device dispatcher without changing device

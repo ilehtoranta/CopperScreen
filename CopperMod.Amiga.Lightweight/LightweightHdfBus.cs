@@ -7,7 +7,6 @@ namespace CopperMod.Amiga.Lightweight;
 internal sealed class LightweightHdfBus : IDisposable
 {
     private readonly LightweightA500Machine _machine;
-    private readonly AutoconfigChain _chain;
     private readonly Dictionary<uint, Action<M68kCpuState>> _callbacks = new();
     private readonly Dictionary<uint, uint> _fixedGateways = new();
     private uint _nextToken;
@@ -17,12 +16,10 @@ internal sealed class LightweightHdfBus : IDisposable
     {
         _machine = machine;
         CopperHdf = new(configurations, previous?.CopperHdf);
-        _chain = new AutoconfigChain([CopperHdf]);
     }
 
     internal void Reset()
     {
-        _chain.ResetConfiguration();
         _callbacks.Clear();
         _fixedGateways.Clear();
         _nextToken = 0;
@@ -30,10 +27,10 @@ internal sealed class LightweightHdfBus : IDisposable
     }
 
     internal byte ReadExpansionByte(uint address)
-        => _chain.TryReadByte(address, out var value) || _chain.TryReadConfiguredByte(address, out value) ? value : (byte)255;
+        => _machine.ReadExpansionByte(address);
 
     internal bool TryWriteExpansionByte(uint address, byte value)
-        => _chain.TryWriteByte(address, value) || _chain.TryWriteConfiguredByte(address, value);
+        => _machine.TryWriteExpansionByte(address, value);
 
     internal uint RegisterRelocatableHostGateway(Action<M68kCpuState> callback)
     {
@@ -103,12 +100,16 @@ public sealed partial class LightweightA500Machine
 
     internal bool IsHdfRamRange(uint address, int count)
         => count >= 0 && ((address < _chipRam.Length && (ulong)address + (uint)count <= (uint)_chipRam.Length) ||
-            (address >= 0xC00000 && (ulong)address + (uint)count <= 0xC00000u + (uint)_slowRam.Length));
+            (address >= 0xC00000 && (ulong)address + (uint)count <= 0xC00000u + (uint)_slowRam.Length) ||
+            _fastRam?.ContainsRange(address, count) == true);
 
     internal Span<byte> HdfRam(uint address, int count)
     {
         if (!IsHdfRamRange(address, count)) throw new ArgumentOutOfRangeException(nameof(address), "CopperHDF requires a contiguous guest RAM buffer.");
-        return address < _chipRam.Length ? _chipRam.AsSpan((int)address, count) : _slowRam.AsSpan((int)(address - 0xC00000), count);
+        if (address < _chipRam.Length) return _chipRam.AsSpan((int)address, count);
+        if (_fastRam is { } ram && ram.ContainsRange(address, count))
+            return ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), count);
+        return _slowRam.AsSpan((int)(address - 0xC00000), count);
     }
 
     internal byte PeekHdfByte(uint address)

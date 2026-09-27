@@ -23,7 +23,7 @@ internal static class CopperScreenAvailability
     public static bool IsChoiceAvailable(string setting, string value) => setting switch
     {
         "Engine" => value == "Lightweight",
-        "CPU backend" => value == "AccurateM68000",
+        "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020",
         "Kickstart" => value is "KickstartRom" or "Kickstart13Rom",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
@@ -35,8 +35,8 @@ internal static class CopperScreenAvailability
     public static string ChoiceLabel(string value) => value switch
     {
         "AccurateM68000" => "Motorola 68000",
-        "AccurateM68EC020" => "Motorola 68EC020",
-        "AccurateM68020" => "Motorola 68020",
+        "AccurateM68EC020" => "Motorola 68EC020 (experimental)",
+        "AccurateM68020" => "Motorola 68020 (experimental)",
         "AccurateM68030" => "Motorola 68030",
         "AccurateM68040" => "Motorola 68040",
         "JitM68040" => "Motorola 68040 (JIT)",

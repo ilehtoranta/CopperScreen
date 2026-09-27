@@ -10,6 +10,19 @@ permissions:
   contents: read
 
 jobs:
+  replay-tool-tests:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replay tooling negative controls (no ROM or game media)
+        run: python -m unittest discover -s scripts/tests -p test_native_regression.py -v
+
   build-and-test:
     runs-on: windows-latest
     steps:

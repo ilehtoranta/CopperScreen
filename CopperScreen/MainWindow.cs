@@ -1841,19 +1841,19 @@ internal sealed partial class MainWindow : Window
 		_pseudoFastRamBox = AddTextSetting(chipAndPseudoFast, "Slow RAM (KiB)");
 		_pseudoFastBaseBox = AddTextSetting(chipAndPseudoFast, "Slow RAM address");
 		var realFast = CreateSettingsGroupForm();
-		_realFastRamBox = AddTextSetting(realFast, "Autoconfig fast RAM KB");
-		_realFastBaseBox = AddTextSetting(realFast, "Autoconfig assignment hint");
+		_realFastRamBox = AddTextSetting(realFast, "Fast RAM (KiB)");
+		_realFastBaseBox = AddTextSetting(realFast, "Autoconfig address hint");
 		_rtgVramBox = AddTextSetting(realFast, "RTG VRAM MB");
 		_rtcEnabledBox = new CheckBox { Content = "Enabled" };
 		_rtcEnabledBox.IsCheckedChanged += (_, _) => ApplyRtcEnabledSetting();
 		realFast.Children.Add(CreateSettingsRow("RTC clock", _rtcEnabledBox));
 
-		foreach (var field in new[] { _chipRamBox, _pseudoFastRamBox, _pseudoFastBaseBox }) field.IsReadOnly = true;
-		foreach (var field in new Control[] { _realFastRamBox, _realFastBaseBox, _rtgVramBox, _rtcEnabledBox }) field.IsEnabled = false;
-		layout.Children.Add(SettingsNote("This build uses 512 KiB Chip RAM and 512 KiB slow RAM. Other memory configurations are not yet available."));
+		foreach (var field in new[] { _chipRamBox, _pseudoFastRamBox, _pseudoFastBaseBox, _realFastBaseBox }) field.IsReadOnly = true;
+		foreach (var field in new Control[] { _rtgVramBox, _rtcEnabledBox }) field.IsEnabled = false;
+		layout.Children.Add(SettingsNote("512 KiB Chip RAM and 512 KiB slow RAM. Fast RAM: 0, 512, 1024, 2048, 4096 or 8192 KiB. Kickstart assigns its address; changing the size requires a restart. RTC and RTG are not yet available."));
 		layout.Children.Add(CreateSettingsGroupPair(
 			CreateSettingsGroup("Amiga 500 memory", chipAndPseudoFast),
-			CreateSettingsGroup("Expansion memory and RTC · Not yet available", realFast)));
+			CreateSettingsGroup("Expansion memory and RTC", realFast)));
 
 		return CreateScrollableSettingsPage(layout);
 	}

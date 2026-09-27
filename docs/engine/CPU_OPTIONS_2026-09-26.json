@@ -1,0 +1,78 @@
+{
+  "copper68kAssemblyVersion": "1.0.0.0",
+  "copper68kSha256": "F82CA4A5FD953B0BEE31EE360212070548DB0DAA80874EEEC36DB0EFD1F1AFE1",
+  "results": [
+    {
+      "Check": "Agnus bus spacing",
+      "Model": "M68000",
+      "Passed": true,
+      "Detail": "Minimum strobe separation: 4 clocks; expected \u003E=4. Timing callbacks: 92."
+    },
+    {
+      "Check": "Address-error frame size",
+      "Model": "M68000",
+      "Passed": true,
+      "Detail": "Frame: 14 bytes; expected 14. Handler PC: 00002000."
+    },
+    {
+      "Check": "Agnus bus spacing",
+      "Model": "M68010",
+      "Passed": false,
+      "Detail": "Minimum strobe separation: 2 clocks; expected \u003E=4. Timing callbacks: 0."
+    },
+    {
+      "Check": "Address-error frame size",
+      "Model": "M68010",
+      "Passed": false,
+      "Detail": "Frame: 8 bytes; expected 58. Handler PC: 00002000."
+    },
+    {
+      "Check": "MOVE.B absolute word to address displacement",
+      "Model": "M68000",
+      "Passed": true,
+      "Detail": "Destination: 5A; expected 5A. PC: 00001006; expected 00001006."
+    },
+    {
+      "Check": "MOVE.B absolute word to address displacement",
+      "Model": "M68020",
+      "Passed": false,
+      "Detail": "Copper68k.UnsupportedM68kTimingException: Unsupported exact MC68020 timing for opcode 0x1378 at 0x00001000 in profile Ocs68020_14MHz."
+    },
+    {
+      "Check": "MOVE.B absolute word to address displacement",
+      "Model": "M68030",
+      "Passed": false,
+      "Detail": "Copper68k.UnsupportedM68kTimingException: Unsupported exact MC68030 timing for opcode 0x1378 at 0x00001000 in profile Ocs68030_14MHz."
+    },
+    {
+      "Check": "MOVE.B absolute word to address displacement",
+      "Model": "M68040",
+      "Passed": true,
+      "Detail": "Destination: 5A; expected 5A. PC: 00001006; expected 00001006."
+    },
+    {
+      "Check": "MOVE.B absolute word to address displacement",
+      "Model": "M68010",
+      "Passed": true,
+      "Detail": "Destination: 5A; expected 5A. PC: 00001006; expected 00001006."
+    },
+    {
+      "Check": "MOVE.B absolute word to address displacement",
+      "Model": "M68EC020",
+      "Passed": false,
+      "Detail": "Copper68k.UnsupportedM68kTimingException: Unsupported exact MC68020 timing for opcode 0x1378 at 0x00001000 in profile Ocs68020_14MHz."
+    },
+    {
+      "Check": "Enable instruction cache with IM68kBus only",
+      "Model": "M68020",
+      "Passed": true,
+      "Detail": "PC: 00C0100A; expected 00C0100A. CACR: 00000001."
+    },
+    {
+      "Check": "Enable instruction cache with IM68kBus only",
+      "Model": "M68EC020",
+      "Passed": false,
+      "Detail": "System.InvalidOperationException: The wrapped 68EC020 bus does not provide host code reads."
+    }
+  ]
+}

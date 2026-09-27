@@ -36,7 +36,7 @@ internal sealed partial class MainWindow
         var layout = CreateSettingsPageLayout();
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
-        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000\n512 KiB Chip RAM + 512 KiB slow RAM · up to four read-only floppy drives"));
+        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\n512 KiB Chip RAM + 512 KiB slow RAM · optional Fast RAM\nUp to four floppy drives"));
         var form = CreateSettingsGroupForm();
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose your Kickstart 1.3 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();

@@ -28,10 +28,11 @@ for the implemented four-drive read support; verification boundaries remain expl
 | DF0–DF3 | Implemented: configurable 1–4 drives, independent media/mechanics/spindle phases, shared CIA status and Paula receiver/DMA, external DD identification, host controls/status and indexed scripted swaps. Native Workbench four-drive detection/media changes exercised. | Broaden native loader verification; physical overlapping read sources remain explicitly unsupported (LWA-DISK-011). |
 | Writable floppy | Guest write DMA, protection, strict ADF export and desktop Save ADF implemented; native format/write/read/reopen exercised. | Interactive desktop save/close checks and physical FIFO/splice timing remain unverified; native and automated save/reopen evidence is retained. |
 | More floppy formats | Standard ADF and read-only IPF are integrated through DF0–DF3, ZIP selection and scripted swaps. IPF preserves raw tracks and uses a causal receiver; protected-game compatibility remains incomplete. | The CPU trace blocker is repaired; verify Thunderbolt second-disk handling and receiver physics independently. Bounded Full Contact/Beast gameplay and disk swaps are recorded. Extended ADF/SCP execution remains separate. See [storage](STORAGE.md). |
-| 68010 | Pinned Copper68k exposes M68010; Lightweight hardcodes M68000 and host CPU choices lack 68010. | Model selection, exceptions/VBR/reset/interrupt and bus-clock integration, configuration/UI, targeted CPU integration and native replay. |
-| 68EC020 / 68020 / 68030 / 68040 | Pinned Copper68k exposes interpreters; host metadata contains several later models but rejects them for Lightweight. | Per-model addressing, instruction/bus timing, interrupt boundaries and memory access. Separately scope cache/MMU/FPU behavior rather than inferring completeness from the model name. |
+| 68010 | API exists, but the [2026-09-26 probes](CPU_OPTIONS_2026-09-26.md) expose lost bus timing and an incomplete address-error frame. The model remains unavailable. | Correct the shared package, then model selection, exceptions/VBR/reset/interrupt and bus-clock integration, configuration/UI and native replay. |
+| 68EC020 / 68020 | Experimental OCS choices implemented through Copper68k, currently local development pin `1.4.2-ocs020.54` for [CopperHDF boot and native Fast RAM I/O](COPPERHDF_020_2026-09-27.md); preceding `.52` was published after bounded Lotus III validation. Chip RAM instruction caching and extended MOVE decoding are corrected. See [correction, release and validation](LOTUS_III_020_CACHE_2026-09-26.md) and [initial implementation](CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md). | Expand instruction/hardware conformance and game compatibility beyond the bounded Lotus III replay. |
+| 68030 / 68040 | Unavailable in Lightweight. Advanced CPU API presence and passing individual probes do not establish support. | Integrate per-model addressing, timing, interrupts and memory access with explicit cache/MMU/FPU scope and native validation. |
 | 68040 JIT / 68060 | Package documents opt-in 68040 JIT requiring a JIT-capable bus; Lightweight implements IM68kBus only. No M68060 model is exposed in the inspected package API. | JIT bus/snapshot/invalidation integration and parity are separate; 68060 would require CPU-package work as well as engine integration. |
-| RAM and expansion | Constructor enforces exactly 512 KiB Chip + 512 KiB slow; host rejects true Fast RAM. Addressing contains unconditional 24-bit masks and OCS pointer limits. | Supported Chip/slow/Fast RAM maps, chipset-specific DMA addressing, CPU-specific address width and expansion discovery where required. |
+| RAM and expansion | Fixed 512 KiB Chip + 512 KiB slow, plus optional 512 KiB–8 MiB CPU-only Zorro II Fast RAM. Native Autoconfig, settings, saved profiles and runner selection are implemented; see [validation](FAST_RAM_2026-09-27.md). | Broader Chip/slow layouts, Zorro III or 32-bit accelerator-local memory and their model-specific timing remain separate work. |
 | Other Kickstarts / Workbench | Host explicitly validates native KS 1.3; low-level ROM loading alone does not establish another machine profile. | ROM mapping/version validation, reset/overlay and native boot/application replay for each supported ROM/profile. Native ROM executes OS services; broad Workbench support does not require reimplementing those services in CopperStart. |
 | Hard disk / HDF | CopperHDF virtual Zorro II interface ported from pinned Legacy, with file-backed persistence, RDB/partition metadata, host settings and native OFS cold boot without DF0. | Complete storage acceptance; additional filesystems need supplied handlers. Physical IDE/SCSI and host directories are outside this milestone. See [interface/evidence](STORAGE.md). |
 | Keyboard and controllers | Keyboard startup/recovery, physical keys/Caps Lock/A500 reset and CIA serial/CNT/port modes are implemented; see [the evidence and remaining accuracy boundaries](KEYBOARD_CIA.md). Ideal paddle counters and a light-pen latch are available. Mouse is allowed on the first port only. | Verify MCU/electrical and CIA pipeline timing; configurable port routing and broader native controls coverage remain. CD32/paddles/light pen/adapters are separate peripheral scopes. |
@@ -82,8 +83,8 @@ to other previously implemented features such as drives and hard disks.
    Finish IPF protection/native compatibility and the separate 1% performance
    gate for the implemented CopperHDF/ADF/IPF candidate. Avoid tying ordinary
    storage usability to completion of AGA.
-3. **Add configurable machine resources.** Implement declared Chip/slow/Fast RAM
-   layouts and required expansion discovery, newer ROM profiles and NTSC timing.
+3. **Add configurable machine resources.** Zorro II Fast RAM is implemented. Extend
+   Chip/slow layouts, newer ROM profiles and NTSC timing.
    Integrate 68010 as the smaller CPU-model step, while retaining 68000 regressions.
 4. **Deliver an ECS profile.** Treat Agnus and Denise revisions explicitly; add
    ECS registers/modes and verify native ECS use. Some memory/timing work in step 3
@@ -117,10 +118,10 @@ A600/A1200 IDE and a host-directory filesystem are separate interfaces.
 **CPUs:** the original `Copper68k 1.4.1-boundary.1` API audit exposed M68000,
 M68010, M68EC020, M68020, M68030 and M68040. This audit verifies API availability,
 not complete core correctness. CPU fixes stay in CopperMod and arrive through a
-new pinned package when required. The current production pin is stable Copper68k
-[`1.4.1`](CPU_TRACE.md), distributed through NuGet.org. It retains the 68000 trace
-correction and validated prefetch-locality optimization, with the additional
-release optimizations recorded in CopperMod.
+new pinned package when required. The current experimental prerelease pin is
+published as [`1.4.2-ocs020.52`](LOTUS_III_020_CACHE_2026-09-26.md). Stable
+[`1.4.1`](CPU_TRACE.md) remains available on NuGet.org.
+The candidate retains its 68000 trace and prefetch-locality implementation.
 Later CPU clock rates and bus widths must map
 to the engine's single canonical timebase; do not preserve a 68000-specific
 CPU-cycle/CCK assumption merely by switching the factory argument.

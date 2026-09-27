@@ -107,25 +107,39 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         LightweightHdfBus? previousHardfiles)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
+        if (_configuration.CpuModel is not (M68kCpuModel.M68000 or M68kCpuModel.M68EC020 or M68kCpuModel.M68020))
+            throw new ArgumentException("Lightweight supports 68000 and experimental 68EC020/68020 OCS accelerators.", nameof(configuration));
         if (_configuration.FloppyDriveCount is < 1 or > 4)
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
         for (var i = 0; i < _floppies.Length; i++) _floppies[i] = new(i);
         if (_configuration.ChipRamBytes != 512 * 1024 || _configuration.SlowRamBytes != 512 * 1024)
             throw new ArgumentException("The lightweight A500 profile supports exactly 512 KiB Chip RAM and 512 KiB slow RAM.", nameof(configuration));
+        if (!LightweightFastRam.IsSupportedSize(_configuration.FastRamBytes))
+            throw new ArgumentOutOfRangeException(nameof(configuration), "Fast RAM supports 0, 512 KiB, 1, 2, 4 or 8 MiB.");
         if (_configuration.AudioSampleRate != 48_000 || _configuration.AudioChannels != 2)
             throw new ArgumentException("The lightweight A500 output supports 48 kHz stereo PCM.", nameof(configuration));
 
         _chipRam = new byte[_configuration.ChipRamBytes];
         _slowRam = new byte[_configuration.SlowRamBytes];
+        if (_configuration.FastRamBytes != 0) _fastRam = new(_configuration.FastRamBytes);
         _video = new LightweightVideo(_configuration);
-        _cpu = _cpuFactory.Create(M68kCpuModel.M68000, this);
+        _cpu = _cpuFactory.Create(_configuration.CpuModel,
+            _configuration.CpuModel == M68kCpuModel.M68000
+                ? this : new LightweightAcceleratorBus(this, _configuration.CpuModel));
         _batchCpu = (IM68kBatchCore)_cpu;
         _cpuBoundary = new LightweightCpuBoundary(this);
         _enableConservativeCpuLoopBatch = enableConservativeCpuLoopBatch;
         try
         {
             if (_configuration.Hardfiles.Count != 0) _hdf = new(this, _configuration.Hardfiles, previousHardfiles);
+            if (_fastRam is not null || _hdf is not null)
+            {
+                var boards = new List<IAutoconfigBoard>(2);
+                if (_fastRam is not null) boards.Add(_fastRam);
+                if (_hdf is not null) boards.Add(_hdf.CopperHdf);
+                _autoconfig = new(boards);
+            }
             InstallResetLoop();
             Reset();
         }
@@ -133,6 +147,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     }
 
     public M68kCpuState Cpu => _cpu.State;
+    public M68kCpuModel CpuModel => _configuration.CpuModel;
     public long Cycle => _clock.Cycle;
     public long CompletedFrames => _completedFrames;
     public int BeamLine => _clock.Line;
@@ -270,6 +285,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void Reset()
     {
         ThrowIfDisposed();
+        _autoconfig?.ResetConfiguration();
         _hdf?.Reset();
         _clock.Reset();
         _registers.Reset();
@@ -404,7 +420,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             previous == nop;
     }
 
-    private bool TryPeekInstructionWord(uint address, out ushort value)
+    internal bool TryPeekInstructionWord(uint address, out ushort value)
     {
         address &= 0x00FF_FFFFu;
         var readable =
@@ -412,6 +428,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             address + 1 < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 &&
                 address + 1 < 0x00C00000 + _slowRam.Length ||
+            _fastRam?.ContainsRange(address, 2) == true ||
             address >= RomBase && address + 1 < RomBase + _rom.Length;
         if (!readable)
         {
@@ -444,7 +461,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             if (state.Cycles <= previousCycle)
             {
                 throw new InvalidOperationException(
-                    "The 68000 core did not advance the lightweight clock.");
+                    "The CPU core did not advance the lightweight clock.");
             }
 
             AdvanceHardwareTo(state.Cycles);
@@ -727,6 +744,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         AdvanceHardwareTo(cycle);
         _clock.SetExternalSync(false, this);
+        _autoconfig?.ResetConfiguration();
         _hdf?.Reset();
         _registers.Reset();
         _copper.Reset();
@@ -1555,7 +1573,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         if (address >= RomBase && address + 1 < RomBase + _rom.Length)
             return ReadRomWord((int)(address - RomBase));
-        if (_hdf is { } hdf) return (ushort)((hdf.ReadExpansionByte(address) << 8) | hdf.ReadExpansionByte(address + 1));
+        if (_fastRam is { } ram && ram.ContainsRange(address, 2))
+            return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
+        if (_autoconfig is not null) return (ushort)((ReadExpansionByte(address) << 8) | ReadExpansionByte(address + 1));
         return 0xFFFF;
     }
 
@@ -1620,7 +1640,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return;
         }
 
-        if (address >= 0x080000 && _hdf is { } hdf && hdf.TryWriteExpansionByte(address, value)) return;
+        address &= 0x00FF_FFFFu;
+        if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
         if (IsCiaWordAccess(aligned))
             return;
@@ -1665,10 +1686,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             WriteCustomRegister((ushort)(address - CustomBase), value, cycle);
             return;
         }
-        if (_hdf is { } hdf)
+        if (_fastRam is { } ram && ram.ContainsRange(address, 2))
         {
-            hdf.TryWriteExpansionByte(address, (byte)(value >> 8));
-            hdf.TryWriteExpansionByte(address + 1, (byte)value);
+            BinaryPrimitives.WriteUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2), value);
+            return;
+        }
+        if (_autoconfig is not null)
+        {
+            TryWriteExpansionByte(address, (byte)(value >> 8));
+            TryWriteExpansionByte(address + 1, (byte)value);
         }
     }
 
