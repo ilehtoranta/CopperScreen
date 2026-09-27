@@ -115,3 +115,11 @@ rerun for this investigation.
 The remaining timing question requires an independently specified 040 execution
 and bus contract or matching hardware evidence. An arbitrary delay that makes
 the original scripted press land in the window would not resolve that question.
+
+## Subsequent architectural correction
+
+The [040 fetch follow-up](LOTUS_III_040_FETCH_2026-09-27.md) establishes separate
+MC68040UM-backed instruction-fetch defects and corrects them in local `.56`.
+The original input then passes through a driving demo without shifting a press.
+The `.55` traces, failed original replay and successful phase variant above remain
+unchanged evidence; they do not become hardware timing certification.

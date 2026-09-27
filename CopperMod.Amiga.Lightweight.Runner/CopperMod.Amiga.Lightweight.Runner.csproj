@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
-    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.4.2-ocs020.55</Copper68kBoundaryVersion>
+    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.4.2-ocs020.56</Copper68kBoundaryVersion>
   </PropertyGroup>
   <ItemGroup Condition="'$(LightweightReferencePath)' == ''">
     <ProjectReference Include="..\CopperMod.Amiga.Lightweight\CopperMod.Amiga.Lightweight.csproj" />

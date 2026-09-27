@@ -25,14 +25,16 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-The current CPU development slice pins local Copper68k `1.4.2-ocs020.55` for
-030/040 cache corrections and a separate 060 diagnostic core. A clean checkout
+The current CPU development slice pins local Copper68k `1.4.2-ocs020.56` for
+040 instruction-fetch corrections, experimental 030/040 and a separate 060 diagnostic core. A clean checkout
 needs that exact candidate in `artifacts/copper68k-feed` until explicitly released.
 The preceding `.54` is published and verified. CPU profiles remain experimental;
 physical accelerator timing and full compatibility are not certified. The 060 is
 unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
 FPU state format. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
 and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
+The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
+passes the original Lotus III input through a driving demo without changing its press timings.
 
 ```powershell
 dotnet restore CopperScreen.slnx --locked-mode

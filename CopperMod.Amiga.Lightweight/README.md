@@ -24,6 +24,11 @@ clock; 040 uses four and approximate fixed instruction timing. All use the fitte
 16-bit OCS bridge; only EC020 wraps addresses at 24 bits. The default 68000 retains
 its original bus path. CPU changes require a new machine.
 
+The 040's uncached fetches now use aligned longwords and a half-line holding
+register, including the integer fallback path. This corrects the original Lotus
+III prompt replay; speculative prefetch, pipeline overlap and full 040 timing
+remain approximate. See [the fetch correction and validation](../docs/engine/LOTUS_III_040_FETCH_2026-09-27.md).
+
 `M68060` is accepted for diagnostic callers using an eight-clock integer policy.
 It cannot boot the supported Kickstart 1.3 profile: native task frames lack the
 060's 12-byte FPU state layout. FPU arithmetic and enabled MMU operation remain

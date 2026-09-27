@@ -4,13 +4,15 @@ using System.Text.Json;
 using CopperMod.Amiga.Lightweight;
 using Copper68k;
 
-if (args.Length is < 1 or > 2) throw new ArgumentException("Provide a new output directory under artifacts and optionally 68000, 68ec020 or 68020.");
+if (args.Length is < 1 or > 2) throw new ArgumentException("Provide a new output directory under artifacts and optionally 68000, 68ec020, 68020, 68030 or 68040.");
 var cpuModel = args.Length == 1 ? M68kCpuModel.M68000 : args[1].ToLowerInvariant() switch
 {
     "68000" => M68kCpuModel.M68000,
     "68ec020" => M68kCpuModel.M68EC020,
     "68020" => M68kCpuModel.M68020,
-    _ => throw new ArgumentException("CPU must be 68000, 68ec020 or 68020.")
+    "68030" => M68kCpuModel.M68030,
+    "68040" => M68kCpuModel.M68040,
+    _ => throw new ArgumentException("CPU must be 68000, 68ec020, 68020, 68030 or 68040.")
 };
 var output = Path.GetFullPath(args[0]);
 if (Directory.Exists(output)) throw new IOException("Use a new output directory to preserve prior evidence.");

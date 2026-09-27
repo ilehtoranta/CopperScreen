@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- Local development candidate; publication requires explicit approval. -->
-    <RestoreAdditionalProjectSources Condition="Exists('$(MSBuildThisFileDirectory)artifacts/copper68k-feed/Copper68k.1.4.2-ocs020.55.nupkg')">$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)artifacts/copper68k-feed</RestoreAdditionalProjectSources>
+    <RestoreAdditionalProjectSources Condition="Exists('$(MSBuildThisFileDirectory)artifacts/copper68k-feed/Copper68k.1.4.2-ocs020.56.nupkg')">$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)artifacts/copper68k-feed</RestoreAdditionalProjectSources>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 </Project>
