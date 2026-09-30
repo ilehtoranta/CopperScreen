@@ -130,6 +130,89 @@ public sealed class Kickstart31Tests : IDisposable
 
     private static string Hash(ReadOnlySpan<byte> bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 
+    [NativeKickstart31HdTheory]
+    [InlineData(0)]
+    [InlineData(2048)]
+    public void SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions(int fastKiB)
+    {
+        var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_KICKSTART31_ROM")!;
+        var original = File.ReadAllBytes(Environment.GetEnvironmentVariable("COPPERSCREEN_WORKBENCH31_HDF")!);
+        Assert.Equal("8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee", Hash(File.ReadAllBytes(rom)));
+        Assert.Equal("19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d", Hash(original));
+        Assert.Null(ReadFfsProof(original, "ks31-hd-proof.txt"));
+        var image = Path.Combine(_directory, "disposable.hdf");
+        File.WriteAllBytes(image, original);
+        var draft = new CopperScreenSettingsDraft
+        {
+            KickstartSource = CopperScreenKickstartSource.Kickstart31Rom,
+            RomVersion = KickstartVersion.Kickstart31, KickstartRomPath = rom, RealFastRamKb = fastKiB
+        };
+        draft.HardDrives.Add(new(0, image, false, 0));
+        for (var boot = 0; boot < 2; boot++)
+        {
+            using (var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory)))
+            {
+                Assert.False(session.Machine.IsAdfMounted);
+                for (var field = 0; field < 2400; field++) session.RenderNextFrame(session.Framebuffer);
+                Assert.Null(session.FaultMessage);
+                Assert.False(session.Machine.RomOverlayEnabled);
+                // Reviewed Workbench desktop, after the hard disk's own startup script.
+                Assert.Equal("6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1",
+                    Hash(MemoryMarshal.AsBytes(session.Machine.Framebuffer.Span)));
+            }
+            var persisted = File.ReadAllBytes(image);
+            Assert.Equal("CopperHDF Kickstart 3.1 native FFS persistence\n", ReadFfsProof(persisted, "ks31-hd-proof.txt"));
+            var reopened = ReadFfsProof(persisted, "ks31-hd-reopen.txt");
+            if (boot == 0) Assert.Null(reopened);
+            else Assert.Equal("CopperHDF Kickstart 3.1 FFS reopen verified\n", reopened);
+        }
+    }
+
+    // Independent, bounded reader for this fixture's single-block root proof files.
+    private static string? ReadFfsProof(byte[] image, string name)
+    {
+        const int origin = 32 * 512, root = 880, count = 1760;
+        Assert.True(image.AsSpan(origin, 4).SequenceEqual("DOS\u0001"u8));
+        uint Read(int block, int offset) => BinaryPrimitives.ReadUInt32BigEndian(image.AsSpan(origin + block * 512 + offset));
+        void Check(int block)
+        {
+            Assert.InRange(block, 1, count - 1);
+            uint sum = 0;
+            for (var offset = 0; offset < 512; offset += 4) sum = unchecked(sum + Read(block, offset));
+            Assert.Equal(0u, sum);
+        }
+        Check(root);
+        var seen = new HashSet<int>();
+        for (var offset = 24; offset < 312; offset += 4)
+            for (var block = (int)Read(root, offset); block != 0; block = (int)Read(block, 496))
+            {
+                Assert.True(seen.Add(block), "Cyclic FFS directory chain");
+                Check(block);
+                var length = image[origin + block * 512 + 432];
+                if (System.Text.Encoding.ASCII.GetString(image, origin + block * 512 + 433, length) != name) continue;
+                Assert.Equal(0xfffffffdu, Read(block, 508));
+                Assert.Equal((uint)root, Read(block, 500));
+                Assert.Equal(1u, Read(block, 8));
+                Assert.Equal(0u, Read(block, 504));
+                var data = (int)Read(block, 308);
+                var size = (int)Read(block, 324);
+                Assert.InRange(data, 1, count - 1);
+                Assert.InRange(size, 1, 512);
+                return System.Text.Encoding.ASCII.GetString(image, origin + data * 512, size);
+            }
+        return null;
+    }
+
+    public sealed class NativeKickstart31HdTheoryAttribute : TheoryAttribute
+    {
+        public NativeKickstart31HdTheoryAttribute()
+        {
+            if (!File.Exists(Environment.GetEnvironmentVariable("COPPERSCREEN_KICKSTART31_ROM")) ||
+                !File.Exists(Environment.GetEnvironmentVariable("COPPERSCREEN_WORKBENCH31_HDF")))
+                Skip = "Supply COPPERSCREEN_KICKSTART31_ROM and a pristine COPPERSCREEN_WORKBENCH31_HDF from prepare_hdf.py for native HD boot/reopen coverage.";
+        }
+    }
+
     public sealed class NativeKickstart31TheoryAttribute : TheoryAttribute
     {
         public NativeKickstart31TheoryAttribute()

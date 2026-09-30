@@ -757,7 +757,8 @@ namespace CopperMod.Amiga.Lightweight
         {
             bus.ClearMemory(address, 0x2C);
             bus.WriteLong(address + DeviceNodeTypeOffset, 0);
-            bus.WriteLong(address + DeviceNodeLockOffset, 0xFFFF_FFFF);
+            // Native MakeDosNode leaves dn_Lock clear. DOS treats a nonzero
+            // value as a BPTR to FileLock; -1 aliases low exception vectors.
             bus.WriteLong(address + DeviceNodeStartupOffset, startup >> 2);
             bus.WriteLong(address + DeviceNodeNameOffset, dosNameBstr >> 2);
             if (fileSystem == null)

@@ -1,4 +1,4 @@
-"""Independently verify a native-written OFS proof file, without CopperDisk.
+"""Independently verify a native-written OFS or single-block FFS proof file, without CopperDisk.
 
 Usage: python verify-lightweight-ofs-proof.py image.hdf --offset-sectors 32
 The offset is zero for partition images. RDB partition offsets must come from
@@ -16,11 +16,12 @@ parser.add_argument("--offset-sectors", type=int, default=0)
 parser.add_argument("--root-block", type=int, help="Defaults to the middle block of this OFS partition")
 parser.add_argument("--name", default="hdf-proof.txt")
 parser.add_argument("--expected", default="CopperHDF native OFS persistence\n")
+parser.add_argument("--filesystem", choices=["ofs", "ffs"], default="ofs")
 args = parser.parse_args()
 image = args.image.read_bytes()
 disk = memoryview(image)[args.offset_sectors * 512:]
 assert args.offset_sectors >= 0 and len(disk) % 512 == 0
-assert bytes(disk[:4]) == b"DOS\0", "OFS is required"
+assert bytes(disk[:4]) == (b"DOS\0" if args.filesystem == "ofs" else b"DOS\1"), "Filesystem ID differs"
 count = len(disk) // 512
 
 def block(number):
@@ -56,6 +57,16 @@ assert u32(header, 500) == root_number
 number, sequence = u32(header, 16), 1
 contents = bytearray()
 seen = set()
+if args.filesystem == "ffs":
+    # FFS stores raw payload, without the OFS data-block header/checksum.
+    # This proof reader deliberately accepts only a single data block.
+    size = u32(header, 324)
+    assert 0 < size <= 512 and u32(header, 8) == 1 and u32(header, 504) == 0, "Single-block FFS proof required"
+    number = u32(header, 308)
+    assert 0 < number < count and number not in (root_number, header_number), "Invalid FFS data block"
+    contents.extend(disk[number * 512:number * 512 + size])
+    seen.add(number)
+    number = 0
 while number:
     assert number not in seen, "Cyclic file data chain"
     seen.add(number)
@@ -67,6 +78,7 @@ while number:
 assert len(contents) == u32(header, 324), "File size differs from data chain"
 assert contents == args.expected.encode("latin-1"), "Proof contents differ"
 print(json.dumps({"image": str(args.image), "offset_sectors": args.offset_sectors,
+    **({"filesystem": "ffs"} if args.filesystem == "ffs" else {}),
     "image_sha256": hashlib.sha256(image).hexdigest(), "file": args.name,
     "file_sha256": hashlib.sha256(contents).hexdigest(), "bytes": len(contents),
     "root_block": root_number, "header_block": header_number,

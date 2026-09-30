@@ -159,6 +159,15 @@ malformed/cyclic lists and impossible block sizes, write protection, invalid
 buffers/ranges, failed file replacement, reset, restart and guest QUICK/reply
 execution. Native OFS and ADF evidence is detailed in [NATIVE_VALIDATION.md](../NATIVE_VALIDATION.md#storage-extension-2026-09-18).
 
+The subsequent [Kickstart 3.1 HD record, 2026-09-30](KICKSTART_31_HD_2026-09-30.md)
+adds native Workbench 3.1 FFS/RDB cold boot with DF0 empty at 0 and 2 MiB Fast RAM,
+guest writes independently verified after disposal, and a second boot reading the
+persisted file and writing a reopen marker. It corrects CopperHDF's initial
+`DeviceNode.dn_Lock` from an invalid `-1` BPTR to zero, matching native
+`expansion.library/MakeDosNode` in both supported ROMs. The KS 1.3 OFS control
+still passes. This follow-up does not replace the frozen build/performance
+evidence above or establish a complete Workbench installation.
+
 | Supplied native IPF | Observed bounded progress | Remaining required evidence |
 | --- | --- | --- |
 | Full Contact, disks 1/2 | Disk 1 title/advertisement; explicit DF0 disk-two swap, Start Game, fight against Tong Lo, changing health and a lost round in an 18,000-field replay. | Bounded gameplay and disk-two transition verified; no claim of complete game coverage. |

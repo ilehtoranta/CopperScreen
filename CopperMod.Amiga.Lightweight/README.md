@@ -150,7 +150,9 @@ Set `Hardfiles` in `LightweightA500Configuration` before constructing the machin
 `CopperDisk.AmigaHardfileConfiguration` exposes unit/path/protection/creation size,
 Auto/RDB/Partition mode and partition metadata. Configuration changes require
 restart. CopperHDF preserves `copperhdf.device` and Legacy's virtual Zorro II board
-identity; native OFS partition and RDB cold boots without DF0 have been exercised.
+identity; native Kickstart 1.3 OFS partition/RDB cold boots and
+[Kickstart 3.1 FFS RDB boot/write/reopen](../docs/engine/KICKSTART_31_HD_2026-09-30.md)
+without DF0 have been exercised on the default 68000.
 Writable HDFs update their backing files, unlike explicit-save ADFs.
 
 The [OCS completion record](../docs/engine/OCS_COMPLETION.md) tracks current

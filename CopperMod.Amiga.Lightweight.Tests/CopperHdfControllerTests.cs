@@ -419,7 +419,9 @@ public sealed class CopperHdfControllerTests
 			Assert.Equal(deviceNode, bus.ReadLong(bootNode + 0x10));
 			Assert.Equal(0u, bus.ReadLong(deviceNode + 0x04));
 			Assert.NotEqual(0u, bus.ReadLong(deviceNode + 0x1C));
-			Assert.Equal(0xFFFF_FFFFu, bus.ReadLong(deviceNode + 0x0C));
+			// Native expansion MakeDosNode leaves dn_Lock zero in both v34 and v40.
+			// A nonzero value is a filesystem lock, not an uninitialized sentinel.
+			Assert.Equal(0u, bus.ReadLong(deviceNode + 0x0C));
 			Assert.NotEqual(0u, bus.ReadLong(deviceNode + 0x28));
 
 			var ioAddress = 0x5000u;

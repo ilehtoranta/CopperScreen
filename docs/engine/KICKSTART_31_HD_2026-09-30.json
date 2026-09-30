@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-30",
+  "scope": "Native KS 3.1 Workbench FFS/RDB HD cold boot/write/dispose/reopen, PAL OCS, 68000, DF0 empty",
+  "baseRevision": "942e00609e7e35b04c6449189e5020e3999c4012",
+  "copper68k": "1.5.0",
+  "sourceSha256": {
+    "CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs": "97f68ff659123937d66dca382bcfd9783c31d1aa008d68c6fead25884fcd664d",
+    "CopperMod.Amiga.Lightweight.Tests/CopperHdfControllerTests.cs": "b526282e18d0005d328a69b46d6d97207555d22460b6852385390a5bebb02d32",
+    "CopperScreen.Lightweight.Tests/Kickstart31Tests.cs": "21cef2425964e36890f7d519e2dd701a3fcc6f0d98fa8b07cf747e13018746ec",
+    "CopperScreen/CopperScreenLightweightSession.cs": "37c26fcd13bc4c8d97b57eaf1241fe9b8a39e262a134c0a7bc70d6ac14173b63",
+    "scripts/probes/Kickstart31/prepare_hdf.py": "baa3a047a9d1478a10ae643f9406c1301ba8f18e965a4cf2b14b1a385ab73806",
+    "scripts/verify-lightweight-ofs-proof.py": "ea197d1d811ddd6f46088546173e99e2a43acbc4545b49b572aa22848884f6a8"
+  },
+  "sourceHashFormat": "SHA-256 of UTF-8 files with CRLF normalized to LF",
+  "inputs": {
+    "rom": {
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "romBytes": 524288,
+      "romVersion": 40,
+      "romRevision": 63
+    },
+    "workbench": {
+      "label": "Workbench",
+      "archive": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].zip",
+      "archiveSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+      "member": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].adf",
+      "bytes": 901120,
+      "sha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985"
+    },
+    "fixture": {
+      "sourceSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+      "imageSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+      "bytes": 917504,
+      "partitionOffsetSectors": 32,
+      "dosType": "DOS1",
+      "rootBlock": 880,
+      "startup": "FailAt 21\nMakeDir RAM:ENV RAM:T\nAssign ENV: RAM:ENV\nAssign T: RAM:T\nVersion\nIF EXISTS SYS:ks31-hd-proof.txt\nType SYS:ks31-hd-proof.txt\nEcho >SYS:ks31-hd-reopen.txt \"CopperHDF Kickstart 3.1 FFS reopen verified\"\nELSE\nEcho >SYS:ks31-hd-proof.txt \"CopperHDF Kickstart 3.1 native FFS persistence\"\nType SYS:ks31-hd-proof.txt\nENDIF\nEcho \"HD BOOT TEST FINISHED\"\nLoadWB\n",
+      "startupHeader": 1611,
+      "startupData": 1612
+    },
+    "kickstart13ControlRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "kickstart13ControlInputHdfSha256": "54331e81b73ad61415db32f2937b8e7b3748f3d5b4d7e41ddc3c6826fcd28f1c"
+  },
+  "machine": {
+    "cpu": "M68000",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": [
+      0,
+      2048
+    ],
+    "floppyMounted": false
+  },
+  "beforeCorrection": {
+    "initialDnLock": "FFFFFFFF",
+    "nativeGuru": "80000003",
+    "addressError": {
+      "field": 154,
+      "cycle": 21923244,
+      "sourcePc": "00F81852",
+      "opcode": "2B48",
+      "vectorPc": "00F80AD0",
+      "stack": "00C02544",
+      "artifact": "trace/address-error.json",
+      "artifactSha256": "dd24f97b2238ba02d65ddf79b9dfa87e23254de0921173dd1deedd91a7a8f463"
+    },
+    "firstSoftIntListCorruption": {
+      "field": 154,
+      "sourcePc": "00F8180A",
+      "headAddress": "00C00CC2",
+      "invalidPointer": "615C615A"
+    },
+    "deviceOpenReadReached": false,
+    "controllerRegression": {
+      "passed": 21,
+      "failed": 1,
+      "skipped": 0
+    }
+  },
+  "nativeMakeDosNodeOracles": [
+    {
+      "romVersion": 34,
+      "guestLibrary": "expansion.library/MakeDosNode",
+      "returnedNode": "00C05790",
+      "fieldLongs": [
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000258",
+        "0000000A",
+        "003014CC",
+        "00000000",
+        "00000000",
+        "00300604"
+      ],
+      "dnLock": "00000000",
+      "artifact": "oracle13.json"
+    },
+    {
+      "romVersion": 40,
+      "guestLibrary": "expansion.library/MakeDosNode",
+      "returnedNode": "00C0C6C0",
+      "fieldLongs": [
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000000",
+        "00000258",
+        "0000000A",
+        "003031BC",
+        "00000000",
+        "00000000",
+        "003031D2"
+      ],
+      "dnLock": "00000000",
+      "artifact": "oracle31.json"
+    }
+  ],
+  "correction": {
+    "initialDnLock": "00000000",
+    "cpuPackageChanged": false,
+    "chipsetOrderingChanged": false,
+    "otherDeviceNodeDefaultsChanged": false
+  },
+  "artifactsDirectory": "artifacts/kickstart31-hd-2026-09-30",
+  "finalArtifactSubdirectory": "v2",
+  "checks": {
+    "productionBuild": {
+      "configuration": "Release",
+      "passed": true,
+      "warnings": 0,
+      "errors": 0
+    },
+    "engineTests": {
+      "passed": 802,
+      "failed": 0,
+      "skipped": 0,
+      "isolatedArtifacts": "artifacts/diagnostic-tests"
+    },
+    "hostTestsWithoutNativeInputs": {
+      "passed": 124,
+      "failed": 0,
+      "skippedEntries": 5,
+      "unavailableCoverage": true
+    },
+    "nativeHdHostTests": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "fastRamKiB": [
+        0,
+        2048
+      ],
+      "bootsPerCase": 2,
+      "fieldsPerBoot": 2400,
+      "suppliedHdfCopiedBeforeWrites": true
+    },
+    "runnerColdBootAndReopen": [
+      {
+        "name": "fixed-rdb-0-first",
+        "fastRamKiB": 0,
+        "exitCode": 0,
+        "inputSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+        "outputSha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+        "proof": {
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        },
+        "reopenProof": null,
+        "fields": 2400,
+        "floppyMounted": false,
+        "final": {
+          "cycle": 340953612,
+          "pc": "00F81476",
+          "overlay": false,
+          "unsupported": null,
+          "nativePixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1"
+        }
+      },
+      {
+        "name": "fixed-rdb-0-reopen",
+        "fastRamKiB": 0,
+        "exitCode": 0,
+        "inputSha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+        "outputSha256": "9cfc864c83d53ae816c319a036bdbf2fb6e4a81b3573ab60608975a22c2ce181",
+        "proof": {
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "9cfc864c83d53ae816c319a036bdbf2fb6e4a81b3573ab60608975a22c2ce181",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        },
+        "reopenProof": {
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "9cfc864c83d53ae816c319a036bdbf2fb6e4a81b3573ab60608975a22c2ce181",
+          "file": "ks31-hd-reopen.txt",
+          "file_sha256": "d0ce99e150b3702f1826045e5880123c755f714f2bf4c051cf523f49bab680df",
+          "bytes": 44,
+          "root_block": 880,
+          "header_block": 773,
+          "verified_data_blocks": 1
+        },
+        "fields": 2400,
+        "floppyMounted": false,
+        "final": {
+          "cycle": 340953612,
+          "pc": "00F81476",
+          "overlay": false,
+          "unsupported": null,
+          "nativePixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1"
+        }
+      },
+      {
+        "name": "fixed-rdb-2048-first",
+        "fastRamKiB": 2048,
+        "exitCode": 0,
+        "inputSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+        "outputSha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+        "proof": {
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        },
+        "reopenProof": null,
+        "fields": 2400,
+        "floppyMounted": false,
+        "final": {
+          "cycle": 340953382,
+          "pc": "00F81476",
+          "overlay": false,
+          "unsupported": null,
+          "nativePixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1"
+        }
+      },
+      {
+        "name": "fixed-rdb-2048-reopen",
+        "fastRamKiB": 2048,
+        "exitCode": 0,
+        "inputSha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+        "outputSha256": "cb973a26e63a9221b69c431c99b4a1ab06262f505732f303b9e4575bb48f3d08",
+        "proof": {
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "cb973a26e63a9221b69c431c99b4a1ab06262f505732f303b9e4575bb48f3d08",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        },
+        "reopenProof": {
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "cb973a26e63a9221b69c431c99b4a1ab06262f505732f303b9e4575bb48f3d08",
+          "file": "ks31-hd-reopen.txt",
+          "file_sha256": "d0ce99e150b3702f1826045e5880123c755f714f2bf4c051cf523f49bab680df",
+          "bytes": 44,
+          "root_block": 880,
+          "header_block": 773,
+          "verified_data_blocks": 1
+        },
+        "fields": 2400,
+        "floppyMounted": false,
+        "final": {
+          "cycle": 340953382,
+          "pc": "00F81476",
+          "overlay": false,
+          "unsupported": null,
+          "nativePixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1"
+        }
+      }
+    ],
+    "normalVersusScalar": {
+      "fastRamKiB": 2048,
+      "fields": 2400,
+      "capturedFiles": 35,
+      "mismatches": [],
+      "hdfSha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e"
+    },
+    "independentVerifierNegativeControls": [
+      {
+        "control": "Proof absent from pristine image",
+        "correctlyRejected": true
+      },
+      {
+        "control": "One proof data byte changed; header checksums intact",
+        "correctlyRejected": true
+      },
+      {
+        "control": "Proof header checksum corrupted",
+        "correctlyRejected": true
+      }
+    ],
+    "kickstart13OfsControl": {
+      "fields": 2400,
+      "fastRamKiB": 2048,
+      "floppyMounted": false,
+      "proof": {
+        "offset_sectors": 0,
+        "image_sha256": "3770c46fe3263dec5bcfff6e77a82b1558735f8d5d11c095bd312828283dc374",
+        "file": "fast-proof.txt",
+        "file_sha256": "bbf325b4d7a1c303bf573f7966d2e9531117a852ec5714e824ac8aedaaddc443",
+        "bytes": 39,
+        "root_block": 880,
+        "header_block": 1359,
+        "verified_data_blocks": 1
+      }
+    }
+  },
+  "performanceAcceptance": false,
+  "unverified": [
+    "Six-disk Workbench installation",
+    "Broad native application compatibility",
+    "Interactive desktop controls",
+    "Arbitrary FFS files and extension blocks",
+    "Additional filesystem handlers",
+    "Accelerator/3.1 combinations",
+    "ECS/AGA",
+    "68060 OS/FPU compatibility"
+  ],
+  "primaryReferences": [
+    "https://developer.amigaos3.net/autodocs/expansion.library/MakeDosNode.html",
+    "https://wiki.amigaos.net/wiki/AmigaDOS_Data_Structures",
+    "https://wiki.amigaos.net/wiki/SCSI_Device"
+  ]
+}
