@@ -6,10 +6,10 @@ using System.Runtime.Intrinsics.X86;
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// Direct OCS Denise output for one uncropped PAL field. The completed and
+/// Direct OCS/ECS Denise output for one uncropped field. The completed and
 /// rendering arrays are reused and exchanged at the field boundary.
 /// </summary>
-internal sealed class LightweightVideo
+internal sealed partial class LightweightVideo
 {
     internal const int PalRasterWidth =
         LightweightClock.CpuCyclesPerLine / LightweightClock.CpuCyclesPerColorClock * 2;
@@ -70,11 +70,15 @@ internal sealed class LightweightVideo
 
     internal LightweightVideo(LightweightA500Configuration configuration)
     {
-        if (configuration.FramebufferWidth != PalRasterWidth && configuration.FramebufferWidth != 2 * PalRasterWidth ||
+        _ecsAgnus = configuration.AgnusModel != LightweightAgnusModel.Mos8371;
+        _ecsDenise = configuration.DeniseModel == LightweightDeniseModel.Mos8373;
+        _ecsDisplay = _ecsAgnus || _ecsDenise;
+        if (configuration.FramebufferWidth != PalRasterWidth && configuration.FramebufferWidth != 2 * PalRasterWidth &&
+            !(_ecsDisplay && configuration.FramebufferWidth == 4 * PalRasterWidth) ||
             configuration.FramebufferHeight != PalRasterHeight)
         {
             throw new ArgumentException(
-                $"OCS output requires an uncropped 454- or 908-pixel-wide PAL raster of height {PalRasterHeight}.",
+                $"Output requires an uncropped 454/908-pixel raster (1816 also available with ECS) of initial height {PalRasterHeight}.",
                 nameof(configuration));
         }
         _outputScale = configuration.FramebufferWidth / PalRasterWidth;
@@ -86,6 +90,8 @@ internal sealed class LightweightVideo
     }
 
     internal ReadOnlyMemory<int> Framebuffer => _completed;
+    internal int FramebufferWidth { get; private set; }
+    internal int FramebufferHeight { get; private set; }
     internal long NextCycle { get; private set; }
     internal ushort EffectiveBplcon0 => _effectiveBplcon0;
     internal bool Active => _active;
@@ -141,6 +147,7 @@ internal sealed class LightweightVideo
         _active = false;
         NextCycle = long.MaxValue;
         UnsupportedActiveFeature = null;
+        ResetEcs();
     }
 
     internal void OnRegisterWrite(ushort offset, ushort value, long cycle)
@@ -153,7 +160,7 @@ internal sealed class LightweightVideo
         }
         if (offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
             LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
-            LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop)
+            LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop or LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3)
         {
             _pendingControlOffset = offset;
             _pendingControlValue = value;
@@ -172,7 +179,7 @@ internal sealed class LightweightVideo
         if (offset == LightweightRegisters.DmaconWrite ||
             offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
                 LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
-                LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop ||
+                LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop or LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3 ||
             offset is >= LightweightRegisters.BpldatFirst and <= LightweightRegisters.BpldatLast)
         {
             ActivateAfter(cycle);
@@ -210,6 +217,11 @@ internal sealed class LightweightVideo
         int completedFieldLines,
         LightweightA500Machine machine)
     {
+        if (_ecsDisplay)
+        {
+            CompleteEcsFrame(boundaryCycle, completedFieldLines, machine);
+            return;
+        }
         if (_active)
         {
             var finalRow = (completedFieldLines - 1) * PalRasterWidth;
@@ -278,6 +290,7 @@ internal sealed class LightweightVideo
                     _effectivePlaneMask = (1 << _effectivePlaneCount) - 1;
                     _effectivePlanePairMask = _effectivePlaneMask | (_effectivePlaneMask << 6);
                     UpdateUnsupportedMode();
+                    if (_ecsDisplay) machine.SetSpriteSuperHires(_ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x0040);
                     refreshRenderLine = true;
                     break;
                 case LightweightRegisters.Bplcon1:
@@ -287,6 +300,7 @@ internal sealed class LightweightVideo
                     machine.SetCollisionControl(_pendingControlValue);
                     break;
                 case LightweightRegisters.Bplcon2:
+                    if (_ecsDisplay) _ecsBplcon2 = _pendingControlValue;
                     if ((_effectiveBplcon2 & 0x7F) != (_pendingControlValue & 0x7F))
                     {
                         _effectiveBplcon2 = _pendingControlValue;
@@ -299,13 +313,24 @@ internal sealed class LightweightVideo
                     break;
                 case LightweightRegisters.Diwstrt:
                     _effectiveDiwStart = _pendingControlValue;
+                    _ecsDiwHighValid = false;
                     UpdateWindowBounds();
                     refreshRenderLine = true;
                     break;
                 case LightweightRegisters.Diwstop:
                     _effectiveDiwStop = _pendingControlValue;
+                    _ecsDiwHighValid = false;
                     UpdateWindowBounds();
                     refreshRenderLine = true;
+                    break;
+                case LightweightRegisters.Diwhigh:
+                    _ecsDiwHigh = _pendingControlValue;
+                    _ecsDiwHighValid = true;
+                    UpdateWindowBounds();
+                    refreshRenderLine = true;
+                    break;
+                case LightweightRegisters.Bplcon3:
+                    _ecsBplcon3 = _pendingControlValue;
                     break;
             }
             _pendingControlCycle = long.MaxValue;
@@ -339,6 +364,11 @@ internal sealed class LightweightVideo
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void RenderPriorPhysicalCck(LightweightA500Machine machine)
     {
+        if (_ecsDisplay)
+        {
+            RenderEcsPriorCck(machine);
+            return;
+        }
         if (!_renderCursorInitialized)
         {
             var currentHorizontal = machine.BeamColorClock;
@@ -777,7 +807,9 @@ internal sealed class LightweightVideo
         if (pendingReload != 0)
         {
             var scrolls = (int)_effectiveBplcon1;
-            if ((_effectiveBplcon0 & 0x8000) != 0)
+            if (_ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40)
+                scrolls = ((scrolls & 0x33) << 2) | 0x33;
+            else if ((_effectiveBplcon0 & 0x8000) != 0)
                 scrolls = ((scrolls & 0x77) << 1) | 0x11;
             var position = x & 15;
             if ((pendingReload & 1) != 0 && position == (scrolls & 15))
@@ -854,6 +886,16 @@ internal sealed class LightweightVideo
 
     private void UpdateWindowBounds()
     {
+        if (_ecsDisplay)
+        {
+            var window = LightweightDisplayWindow.Decode(_effectiveDiwStart, _effectiveDiwStop,
+                (ushort)(_ecsDiwHigh & 0x2727), _ecsDenise && _ecsDiwHighValid);
+            _horizontalWindowStart = window.HorizontalStart;
+            _horizontalWindowStop = window.HorizontalStop;
+            _verticalWindowStart = window.VerticalStart;
+            _verticalWindowStop = window.VerticalStop;
+            return;
+        }
         _horizontalWindowStart = _effectiveDiwStart & 0x00FF;
         _horizontalWindowStop = (_effectiveDiwStop & 0x00FF) + 0x100;
         _verticalWindowStart = (_effectiveDiwStart >> 8) & 0x00FF;
@@ -887,12 +929,14 @@ internal sealed class LightweightVideo
             ((uint)r << 16) | ((uint)g << 8) | (uint)b));
         palette[colorIndex + 32] = unchecked((int)(0xFF000000u |
             ((uint)(r >> 1) << 16) | ((uint)(g >> 1) << 8) | (uint)(b >> 1)));
+        if (_ecsDisplay) _ecsColors[colorIndex] = encoded;
     }
 
     private void UpdateUnsupportedMode()
     {
         var hires = (_effectiveBplcon0 & 0x8000) != 0;
-        var feature = hires && _outputScale != 2
+        var super = _ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40;
+        var feature = super && _outputScale < 4 ? "ECS SuperHires output (select 1816 pixels)" : hires && _outputScale < 2
             ? "OCS hires output"
             : null;
         if (feature is not null)
@@ -913,9 +957,10 @@ internal sealed class LightweightVideo
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetDecodePlaneCount(ushort bplcon0)
+    private int GetDecodePlaneCount(ushort bplcon0)
     {
         var count = (bplcon0 >> 12) & 7;
+        if (_ecsDenise && (bplcon0 & 0x8040) == 0x40) return Math.Min(count, 2);
         if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
         return Math.Min(count, MaxPlanes);
     }

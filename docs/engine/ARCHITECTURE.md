@@ -175,7 +175,23 @@ bank decoding. The 8372A internal A20 rollover behavior and electrical unfitted-
 readback are not revision-specific hardware measurements. Native KS 3.1 memory
 discovery, upper-memory DMA and unchanged default captures are recorded in
 [the Agnus evidence](AGNUS_CHIP_RAM_2026-10-01.md). This slice retains the existing
-OCS display sequencers and PAL clock geometry; full ECS display support is pending.
+OCS display sequencers when ECS controls are inactive. The subsequent
+[ECS display implementation](ECS_DISPLAY_2026-10-01.md) adds explicit 8373
+Denise, two-plane SuperHires and programmable raster geometry on the same
+canonical clock. ECS register/data inputs retain the existing CCK delay, and
+accepted DMA addresses survive later timing changes. Disk, sprite and audio
+request calendars follow the current line period; Copper opportunities follow
+the nominal counter transition. Programmable periods are HTOTAL+1 and VTOTAL+1
+(with the additional long-field line in interlace). NTSC display counters
+alternate 227/228 CCK lines unless LOLDIS is set; the fitted PAL oscillator stays
+unchanged. Output remains bounded during exceptionally long/stopped fields.
+
+Completed ECS field buffers carry their own dimensions. The host duplicates or
+weaves vertical samples, changes buffer storage at mode boundaries, and stores
+width/height/presentation geometry with each frame lease. Previously leased
+arrays are immutable until released. Host pacing follows the current output
+cadence; the standard 114-CCK/525-line Productivity presentation uses square
+native pixels after compensating for progressive vertical duplication.
 
 ## Floppy drives
 

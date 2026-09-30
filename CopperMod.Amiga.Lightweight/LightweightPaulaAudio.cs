@@ -301,7 +301,7 @@ internal sealed partial class LightweightPaulaAudio
             _manualIrqCheckCycle = long.MaxValue;
             if (_hasOutputWord && _streamInitialized)
             {
-                RequestWord(cycle);
+                RequestWord(cycle, machine);
                 return;
             }
             _hasOutputWord = false;
@@ -313,13 +313,18 @@ internal sealed partial class LightweightPaulaAudio
             _discardRequest = true;
             RecordState(LightweightPaulaAudioState.DmaStartup);
             ConsumeDelayedInterrupt(cycle, machine);
-            RequestWord(cycle);
+            RequestWord(cycle, machine);
         }
 
         internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
         {
             _beamHeld = !machine.BeamSyncRunning;
             _beamOffset = machine.BeamCycleOffset;
+            if (machine.IsEcsAgnus && _dmaInputCycle != long.MaxValue)
+            {
+                _dmaInputCycle = long.MaxValue;
+                _requestHeldForBeam = true;
+            }
             if (_beamHeld)
             {
                 _requestHeldForBeam |= _dmaInputCycle != long.MaxValue;
@@ -328,11 +333,11 @@ internal sealed partial class LightweightPaulaAudio
             else if (_requestHeldForBeam)
             {
                 _requestHeldForBeam = false;
-                RequestWord(cycle);
+                RequestWord(cycle, machine);
             }
         }
 
-        private void RequestWord(long cycle)
+        private void RequestWord(long cycle, LightweightA500Machine machine)
         {
             if (!_dmaEnabled || _hasPrefetch || _dmaInputCycle != long.MaxValue ||
                 _dmaOutputCycle != long.MaxValue || _dmaLoadCycle != long.MaxValue)
@@ -344,9 +349,9 @@ internal sealed partial class LightweightPaulaAudio
             }
             // One request uses the next channel-specific address phase. Late
             // enables never recreate an input that has already happened.
-            var lineStart = cycle - (cycle - _beamOffset) % LightweightClock.CpuCyclesPerLine;
+            var lineStart = machine.IsEcsAgnus ? machine.LineStartCycle : cycle - (cycle - _beamOffset) % LightweightClock.CpuCyclesPerLine;
             var input = lineStart + (0x0F + _index * 2) * 2;
-            if (input <= cycle) input += LightweightClock.CpuCyclesPerLine;
+            if (input <= cycle) input += machine.LineCycles;
             _dmaInputCycle = input;
         }
 
@@ -387,7 +392,7 @@ internal sealed partial class LightweightPaulaAudio
                     if (_dmaEnabled)
                     {
                         RecordState(LightweightPaulaAudioState.DmaStartupData);
-                        RequestWord(cycle);
+                        RequestWord(cycle, machine);
                     }
                 }
                 else if (_dmaEnabled && !_hasOutputWord)
@@ -415,7 +420,7 @@ internal sealed partial class LightweightPaulaAudio
             if (audio.UsesHighByteRequest(_index))
             {
                 ConsumeDelayedInterrupt(cycle, machine);
-                RequestWord(cycle);
+                RequestWord(cycle, machine);
             }
         }
 
@@ -474,7 +479,7 @@ internal sealed partial class LightweightPaulaAudio
                 if (_dmaEnabled && audio.IsPeriodAttached(_index))
                 {
                     ConsumeDelayedInterrupt(cycle, machine);
-                    RequestWord(cycle);
+                    RequestWord(cycle, machine);
                 }
                 _nextSampleCycle = cycle + GetPeriodCycles(Period);
                 if (!_dmaEnabled) BeginManualCompletionPeriod(machine);
@@ -494,7 +499,7 @@ internal sealed partial class LightweightPaulaAudio
                 {
                     // An underrun holds the low DAC byte; it does not invent
                     // a bus transfer or replay the high byte.
-                    if (audio.UsesHighByteRequest(_index)) RequestWord(cycle);
+                    if (audio.UsesHighByteRequest(_index)) RequestWord(cycle, machine);
                     _nextSampleCycle = cycle + GetPeriodCycles(Period);
                 }
                 return;

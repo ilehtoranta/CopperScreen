@@ -1,10 +1,10 @@
 # Lightweight product completion roadmap
 
-Source audit: 2026-09-17; OCS/storage status reconciled 2026-09-19; Agnus/RAM follow-up 2026-10-01. Lightweight is already the active/default execution
-engine, with bounded native PAL A500 configurations and OCS Denise. Completing
+Source audit: 2026-09-17; OCS/storage status reconciled 2026-09-19; Agnus/RAM and ECS display follow-up 2026-10-01. Lightweight is already the active/default execution
+engine, with bounded native PAL A500 configurations and OCS/ECS Denise. Completing
 the product transition requires porting/integrating capabilities, not merely enabling
-settings. Legacy ECS/AGA implementations exist, but are not wired into this independent
-engine; they should be audited for reuse before new implementation work. This roadmap proposes an implementation
+settings. Legacy ECS semantics have been audited and ported into this independent
+engine; Legacy AGA implementations remain available for the same reuse audit. This roadmap proposes an implementation
 order; it is not a claim of completed support or a new historical cutover gate.
 
 Keep the [supported profile](../../CopperMod.Amiga.Lightweight/README.md),
@@ -22,9 +22,9 @@ for the implemented four-drive read support; verification boundaries remain expl
 | OCS dual playfield | Implemented: lores/hires separation, scrolling, transparency, playfield/sprite priority, dual HAM and priority codes 5–7. See [nonstandard-mode evidence](NONSTANDARD_OCS.md). | Broaden native gameplay and physical transition coverage; see LWA-VIDEO-008. |
 | Collision detection | Implemented CLXCON/CLXDAT accumulation, grouping and CPU read-clear; focused tests and native probes exercised. | Retain the focused/native evidence and scoped performance acceptance; verify remaining physical phases. See OCS_COMPLETION.md. |
 | Remaining OCS edges | Beam-counter repositioning and external synchronization/genlock are missing. Line-mode BLTSIZE widths other than two are explicitly unsupported. Sprite/HAM/hires/CIA/disk timing edges remain documented. | Complete missing register behavior and final candidate validation; distinguish those gaps from unverified physical phases. |
-| ECS | Explicit PAL 8372A/8375 Agnus memory layouts, widened DMA pointers, chip ID, big blits and Copper danger access implemented with OCS Denise; see [native evidence](AGNUS_CHIP_RAM_2026-10-01.md). | Implement and validate remaining Agnus display/window/timing and DOFF semantics, then explicit ECS Denise/SuperHires. Generic unspecified ECS remains rejected. |
-| AGA | Not ported/integrated into Lightweight; Legacy has AGA register, palette and bitplane paths. Active output/device paths remain OCS. | Audit and port applicable Alice/Lisa semantics and tests, including fetch/palette/bitplane/sprite/HAM8 behavior, then native AGA validation. |
-| NTSC | Host rejects NTSC; engine clock geometry and Paula frequency are PAL-specific. | Machine timing configuration across beam, CIA/TOD, disk, audio and host pacing. Changing a display label is insufficient. |
+| ECS | Explicit PAL Agnus memory layouts and 8373 Denise, SuperHires palette/sprites/DMA, DIWHIGH, programmable timing/blank/sync, HHPOSW, DOFF and safe host resizing implemented. Native PAL progressive/interlaced SuperHires, programmed NTSC/640x480 and HD boot/write/reopen pass; see [ECS evidence](ECS_DISPLAY_2026-10-01.md). | Broaden stock monitor-driver/native application and physical-edge coverage. Supplied media lacks NTSC/VGA launchers. Analog genlock and A2024 remain separate; generic unspecified Agnus remains rejected. |
+| AGA | Not ported/integrated into Lightweight; Legacy has AGA register, palette and bitplane paths. Active output/device paths support OCS/ECS. | Audit and port applicable Alice/Lisa semantics and tests, including fetch/palette/bitplane/sprite/HAM8 behavior, then native AGA validation. |
+| NTSC | ECS BEAMCON0 can select alternating 227/228-CCK NTSC display counters, with DMA/TOD calendars and host cadence following them. The fitted oscillator and desktop motherboard remain PAL. | A separately declared NTSC oscillator/board profile and stock NTSC monitor-driver coverage remain open. Display-counter selection does not change physical CPU/CIA/audio clocks. |
 | DF0–DF3 | Implemented: configurable 1–4 drives, independent media/mechanics/spindle phases, shared CIA status and Paula receiver/DMA, external DD identification, host controls/status and indexed scripted swaps. Native Workbench four-drive detection/media changes exercised. | Broaden native loader verification; physical overlapping read sources remain explicitly unsupported (LWA-DISK-011). |
 | Writable floppy | Guest write DMA, protection, strict ADF export and desktop Save ADF implemented; native format/write/read/reopen exercised. | Interactive desktop save/close checks and physical FIFO/splice timing remain unverified; native and automated save/reopen evidence is retained. |
 | More floppy formats | Standard ADF and read-only IPF are integrated through DF0–DF3, ZIP selection and scripted swaps. IPF preserves raw tracks and uses a causal receiver; protected-game compatibility remains incomplete. | The CPU trace blocker is repaired; verify Thunderbolt second-disk handling and receiver physics independently. Bounded Full Contact/Beast gameplay and disk swaps are recorded. Extended ADF/SCP execution remains separate. See [storage](STORAGE.md). |
@@ -64,7 +64,7 @@ the recorded cleanup commit `30615e8317a4069e879b585049ed97ffdfecd4fe`:
 These are real implementations, not just settings enums. Their existence does not
 establish that they were ported into Lightweight or that every edge was verified.
 The active engine has no dependency on those Legacy device/renderer paths and the
-host requires PAL and OCS Denise, with explicit Agnus memory layouts. “Missing” in this inventory means missing from Lightweight,
+host requires a PAL motherboard and OCS/ECS Denise, with explicit Agnus memory layouts. “Missing” in this inventory means missing from Lightweight,
 not absent from the project's engineering history.
 
 Before ECS/AGA development, inventory Legacy implementations and their tests,
@@ -88,10 +88,11 @@ to other previously implemented features such as drives and hard disks.
    Kickstart 3.1 and explicit PAL Agnus/Chip layouts are implemented. Extend
    remaining motherboard layouts, additional ROM profiles and NTSC timing.
    Integrate 68010 as the smaller CPU-model step, while retaining 68000 regressions.
-4. **Deliver an ECS profile.** Treat Agnus and Denise revisions explicitly; add
-   ECS registers/modes and verify native ECS use. Some memory/timing work in step 3
-   naturally belongs to this implementation. An A500+-class profile and an A600-class
-   profile should not be conflated merely because both use ECS.
+4. **Broaden the delivered ECS display.** Explicit Agnus/Denise selection, ECS
+   registers/modes and bounded native use are implemented. Add supplied stock
+   monitor-driver and native application coverage, then additional board layouts.
+   An A500+-class profile and an A600-class profile should not be conflated merely
+   because both use ECS.
 5. **Deliver an AGA profile.** Integrate 68EC020/68020 CPU behavior and a declared
    memory map, then Alice/Lisa display/DMA changes and an A1200-class ROM/storage
    profile. Preserve OCS/ECS behavior with inactive-feature checks and native replays.

@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-01",
+  "baseCommit": "68c2bacb8a9d3e2031b18d0869a666eca2daa19b",
+  "legacyAuditCommit": "8fb826eacf8e9dc32948b482c878079448bd6e61",
+  "copper68k": "1.5.0",
+  "scope": "Explicit PAL motherboard; OCS 8362 / ECS 8373 Denise; ECS display counters do not change fitted PAL oscillator",
+  "sourceSha256LfNormalized": {
+    "CopperMod.Amiga.Lightweight.Runner/NativeBootProbe.cs": "917b72aa25ed121fe150fb2222087b25f7c7f543e1f83749823ed1a02e4a8f6b",
+    "CopperMod.Amiga.Lightweight.Runner/Program.cs": "113a3d684a54cc20b74a95734188b1a8b60329a482db0b4bea272fa9591a97d1",
+    "CopperMod.Amiga.Lightweight.Tests/LightweightA500MachineTests.cs": "e919aefa2ab5a76f7cb7f090bcf5741466e5c317ae92e767be4058047ef2965d",
+    "CopperMod.Amiga.Lightweight.Tests/LightweightAgnusMemoryTests.cs": "3e0d8805ba8429c957898f723467ed15e63e507c004e18438278a0ea39534163",
+    "CopperMod.Amiga.Lightweight.Tests/LightweightEcsDisplayTests.cs": "5a662ea9f095fe494e67e3539ccf3e2e1c292c57dc87865081a2474a9190313a",
+    "CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs": "725d560611b47e59fe0e2abe9291a8dd71eaa6e5d3f0e5ae00f1e50464710359",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs": "d14a33bf1ac870bc7154a7b8c515f336ab6e9042a4e031f201a6ff8a9c61a72e",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "127d617d637cb310a02f024df4ac6b792526830be679d08a4caca14e0c98c7bd",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "05753cec4a7e30f8bc628499f46b7a0d343c4b9528810d23fbf854b54632bb15",
+    "CopperMod.Amiga.Lightweight/LightweightBlitter.cs": "d23589ee41f5f096f2f00f8f3c0e597a568214227870bd592625226ead8fa9b4",
+    "CopperMod.Amiga.Lightweight/LightweightClock.cs": "cc7ad657542388027d608fe96ae33c3bf5d7aba76067f8314bcc911a6a582202",
+    "CopperMod.Amiga.Lightweight/LightweightCopper.cs": "dbbe34abf52e6152c7b658cd6f7154695a88dba4184de016b650b46375cf0aa1",
+    "CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs": "90760a819963d828b73d1bc4caf58d6bf859367d64c24af5782189b30fe1102a",
+    "CopperMod.Amiga.Lightweight/LightweightDiskDma.cs": "ece7b92a345048d6c32d43ed573cba6aee150ce4bb818e7f843d46f746dc7074",
+    "CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs": "5db8534cdf768990ab53a9631c19b055b10e7766961058d758b83f740a586a14",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs": "e3777deaed81ba6a2547d3904fdf0602148e85dad0562e367380316447da2300",
+    "CopperMod.Amiga.Lightweight/LightweightRegisters.cs": "9ee3116f8c1429435efc86500c916f008b0484eba2e4e9b26612b023b914ff06",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "b15e2b926d7052d4d6d20e2c3ad9e22e37c73a20b809a1cc9334791289767429",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.cs": "6bc67fb791f7adfa1db3e85b2066465191c84e1e1a7de8255d8ab558ad1df69e",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs": "5c8bfdaf3d22b6c3cfcd601498d22a638b0896ce6b7571a171e41f179630f78c",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.cs": "40783630af352fa3145fd62744e06ca2ea8f69fd80b167aa84ddac14ff14a417",
+    "CopperScreen.Lightweight.Tests/CopperScreenLightweightSessionTests.cs": "f087106e382098da4bf9f58cada5bca99f7b0c9ce4674e73a04a0140992dc7fe",
+    "CopperScreen.Lightweight.Tests/Kickstart31Tests.cs": "c94d62f6d637da461c50e779cb41309cec0f3bc87422980ebc6d49ab01246233",
+    "CopperScreen/CopperScreenAvailability.cs": "ea57298f98802a57226b017d7a193eb3a94d06a78758c482c0724af2ab74ec3e",
+    "CopperScreen/CopperScreenLightweightSession.cs": "519f3049095b2f85fb4830e419f4e5ab507c1c7cc07c53e3e31bc70e90194323",
+    "CopperScreen/CopperScreenPresentationGeometry.cs": "ff2842441304833086c9046bd98cd08a8fc75c34ed9200fbd7094ef63d3439c9",
+    "CopperScreen/CopperScreenRuntime.cs": "1c4c14cab86dd987632863c92c858933d9bf40ab407611a3061a170eacccbe5c",
+    "CopperScreen/MainWindow.cs": "7412d3663d9e0829a42d7f84c9e4085fc958d8ae81e9caa9ebb64857172debe3",
+    "scripts/probes/EcsDisplay/prepare_native.py": "ceaaf1cad6865d5d24c9a907b42828cb44eb571db0978d3f2253f4d9418b0102"
+  },
+  "productionAssembliesSha256": {
+    "CopperMod.Amiga.Lightweight/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll": "372c4ff0cf6c55e74a13684234eb2c02e6d43c47e65b7f1fcf4bcdf71391f180",
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll": "76342ab10cadfd766a0a9622d5c8280184606acb9c813286097f58c3767485c0",
+    "CopperScreen/bin/Release/net10.0/CopperScreen.dll": "51f9ba6a179cfdd6eafd0de486664277cd0fcffc7dfb87ace7f35b62160658d1"
+  },
+  "inputs": {
+    "kickstart31Sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+    "pristineFfsRdbSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+    "ndkFdSha256": {
+      "GRAPHICS_LIB.FD": "0ae397de97dd2ed399ae12057260681d6ff94f2680b5d5bfc1cd20ffe9a61534",
+      "INTUITION_LIB.FD": "21519fe9f3c05700529f58dc978ea073d558b4b25616936efc729d2349bd869c",
+      "DOS_LIB.FD": "a9b24c1d9fb1053955dfb28eb8dabe92eff5dbde10b952e67d6cee2a80c5c228"
+    }
+  },
+  "gates": {
+    "build": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "engine": {
+      "passed": 884,
+      "skipped": 0,
+      "artifactsPath": "artifacts/diagnostic-tests"
+    },
+    "host": {
+      "passed": 137,
+      "skipped": 5,
+      "skips": "Optional supplied-media cases; not passing replays"
+    },
+    "disk": {
+      "passed": 74,
+      "skipped": 0
+    },
+    "nativeDesktopHdMatrix": {
+      "configurations": 8,
+      "passed": 8,
+      "skipped": 0,
+      "fieldsPerBoot": 2400,
+      "bootsPerCase": 2,
+      "independentProofs": [
+        "ks31-hd-proof.txt",
+        "ks31-hd-reopen.txt"
+      ]
+    },
+    "steadyEcsEngineAllocations": {
+      "bytes": 0,
+      "warmupFields": 300,
+      "measuredFields": 20,
+      "scope": "Correctness test, not throughput acceptance"
+    },
+    "replayTools": {
+      "passed": 21,
+      "skipped": 0,
+      "scope": "Native regression tooling negative controls; no ROM/media replay"
+    }
+  },
+  "nativeControls": {
+    "runs": [
+      {
+        "name": "ocs-control",
+        "options": [
+          "--fast-ram-kib",
+          "2048"
+        ],
+        "fields": 2400,
+        "snapshotCount": 5,
+        "captureFiles": 35,
+        "hdfSha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+        "finalCycle": 340953382,
+        "finalPc": "00F81476",
+        "proof": {
+          "image": "artifacts/ecs-display-2026-10-01/release-candidate-r2/ocs-control.hdf",
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        }
+      },
+      {
+        "name": "ecs-native",
+        "options": [
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ],
+        "fields": 2400,
+        "snapshotCount": 5,
+        "captureFiles": 25,
+        "hdfSha256": "0e7483ea6acfa637132c487f5ed872683abd86b8a1a19a3445e6d8d2b1759cca",
+        "finalCycle": 340953582,
+        "finalPc": "00F81476",
+        "proof": {
+          "image": "artifacts/ecs-display-2026-10-01/release-candidate-r2/ecs-native.hdf",
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "0e7483ea6acfa637132c487f5ed872683abd86b8a1a19a3445e6d8d2b1759cca",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        }
+      },
+      {
+        "name": "ecs-native-scalar",
+        "options": [
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048",
+          "--scalar-cpu"
+        ],
+        "fields": 2400,
+        "snapshotCount": 5,
+        "captureFiles": 25,
+        "hdfSha256": "0e7483ea6acfa637132c487f5ed872683abd86b8a1a19a3445e6d8d2b1759cca",
+        "finalCycle": 340953582,
+        "finalPc": "00F81476",
+        "proof": {
+          "image": "artifacts/ecs-display-2026-10-01/release-candidate-r2/ecs-native-scalar.hdf",
+          "offset_sectors": 32,
+          "filesystem": "ffs",
+          "image_sha256": "0e7483ea6acfa637132c487f5ed872683abd86b8a1a19a3445e6d8d2b1759cca",
+          "file": "ks31-hd-proof.txt",
+          "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+          "bytes": 47,
+          "root_block": 880,
+          "header_block": 771,
+          "verified_data_blocks": 1
+        }
+      }
+    ],
+    "defaultBaseline": {
+      "left": "ocs-control",
+      "right": "artifacts/agnus-chip-ram-2026-09-30/default-current",
+      "capturedFiles": 35,
+      "mismatches": []
+    },
+    "normalVersusScalar": {
+      "files": 30,
+      "mismatches": [],
+      "manifest": {
+        "files": 30,
+        "sha256": "a6750c59176069ef86c7d8a5777c7e7322156dcbc6dbe3e2c7d155120e227e71"
+      }
+    }
+  },
+  "nativeDisplayPairs": [
+    {
+      "mode": "super",
+      "kind": "stock Intuition/graphics",
+      "fields": 2400,
+      "checkpoints": 5,
+      "requestedWidth": 1280,
+      "requestedHeight": 256,
+      "displayId": "00029020",
+      "preparation": {
+        "mode": "super",
+        "displayId": "00029020",
+        "width": 1280,
+        "height": 256,
+        "proof": "Native ECS super 1280x256 screen opened\n",
+        "hunkSha256": "61032f3059cc3de441b5a2de8c25f907a95231adcb95d8361d904307533fea60",
+        "sourceSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+        "imageSha256": "9da6b69bfe3b780de412cac33087258ae27612834c9ced15fa82993ff5d7776a"
+      },
+      "normalVersusScalar": {
+        "files": 30,
+        "mismatches": [],
+        "manifest": {
+          "files": 30,
+          "sha256": "80b7f4f6f4d7317463455062588ad7127ca987c6817b263db455e0ddc15a661f"
+        }
+      },
+      "finalCycle": 340953582,
+      "finalPc": "00F81476",
+      "width": 1816,
+      "height": 313,
+      "bplcon0": "2240",
+      "registers": {
+        "schemaVersion": 1,
+        "Cycle": 340953582,
+        "FramebufferWidth": 1816,
+        "FramebufferHeight": 313,
+        "beamcon0": "0020",
+        "htotal": 226,
+        "vtotal": 312,
+        "diwhigh": "2100",
+        "bplcon1": "0000",
+        "bplcon2": "0012",
+        "bplcon3": "0000",
+        "hbstrt": 0,
+        "hbstop": 49,
+        "vbstrt": 0,
+        "vbstop": 0
+      },
+      "proof": {
+        "offset_sectors": 32,
+        "filesystem": "ffs",
+        "image_sha256": "f8cfca788d1fc21c579c9d15ef16e688b9cb0e80d5f8fc919a621af0cfff45c1",
+        "file": "ecs-screen-proof.txt",
+        "file_sha256": "53b87ebc560953d9ebb8a51e39bb194d856f9f625058e7597211dec7588492c6",
+        "bytes": 40,
+        "root_block": 880,
+        "header_block": 774,
+        "verified_data_blocks": 1
+      },
+      "hdfSha256": "f8cfca788d1fc21c579c9d15ef16e688b9cb0e80d5f8fc919a621af0cfff45c1",
+      "bmpSha256": "43b1d07f5811b9c95c5486bea8dbe4d628c7d8e7a8f7249246ed066158dc3593",
+      "bmpPixelPayloadSha256": "a2e2984e90b782bc8956e6527ec4861bc3c098f028fa5bafaa73322925226792",
+      "localArtifacts": "artifacts/ecs-display-2026-10-01/release-candidate-r2"
+    },
+    {
+      "mode": "super-lace",
+      "kind": "stock Intuition/graphics",
+      "fields": 1200,
+      "checkpoints": 5,
+      "requestedWidth": 1280,
+      "requestedHeight": 512,
+      "displayId": "00029024",
+      "preparation": {
+        "mode": "super-lace",
+        "displayId": "00029024",
+        "width": 1280,
+        "height": 512,
+        "proof": "Native ECS super-lace 1280x512 screen opened\n",
+        "hunkSha256": "8f7262f8ed51f923276b95ee541dc982b819241cc6f65e9b34f1445d03bb5b96",
+        "sourceSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+        "imageSha256": "4798bacc706a16991727b5b0def67e279487d278da80e21659f8116da6249f55"
+      },
+      "normalVersusScalar": {
+        "files": 30,
+        "mismatches": [],
+        "manifest": {
+          "files": 30,
+          "sha256": "708e15878bff9b74513846cdc17152b3dcf5d5ef63221a5008bf979abcc3142f"
+        }
+      },
+      "finalCycle": 170204636,
+      "finalPc": "00F81476",
+      "width": 1816,
+      "height": 313,
+      "bplcon0": "2244",
+      "registers": {
+        "schemaVersion": 1,
+        "Cycle": 170204636,
+        "FramebufferWidth": 1816,
+        "FramebufferHeight": 313,
+        "beamcon0": "0020",
+        "htotal": 226,
+        "vtotal": 312,
+        "diwhigh": "2100",
+        "bplcon1": "0000",
+        "bplcon2": "0012",
+        "bplcon3": "0000",
+        "hbstrt": 0,
+        "hbstop": 49,
+        "vbstrt": 0,
+        "vbstop": 0
+      },
+      "proof": {
+        "offset_sectors": 32,
+        "filesystem": "ffs",
+        "image_sha256": "d0eb55e42e8950fb36ad5d3f4cf02e7633aa3b5f2cad2fdf40708431928ee176",
+        "file": "ecs-screen-proof.txt",
+        "file_sha256": "8d9389bba69459c43d0ff937aeca78d78562fe7b653614048d44b68edd9eab6d",
+        "bytes": 45,
+        "root_block": 880,
+        "header_block": 774,
+        "verified_data_blocks": 1
+      },
+      "hdfSha256": "d0eb55e42e8950fb36ad5d3f4cf02e7633aa3b5f2cad2fdf40708431928ee176",
+      "bmpSha256": "14d6f99791662e0eef10368ec60fe4f20d8b2f38adc5419d92f44e50a5599aea",
+      "bmpPixelPayloadSha256": "b1e790162c72a332cde87031154a6d47d212b83401d44d1379ac624cec312c91",
+      "localArtifacts": "artifacts/ecs-display-2026-10-01/release-candidate-lace-r2"
+    },
+    {
+      "mode": "programmed-ntsc-super",
+      "kind": "guest-programmed hardware",
+      "fields": 1200,
+      "checkpoints": 5,
+      "requestedWidth": 1280,
+      "requestedHeight": 200,
+      "displayId": "00029020",
+      "preparation": {
+        "mode": "programmed-ntsc-super",
+        "displayId": "00029020",
+        "width": 1280,
+        "height": 200,
+        "proof": "Native ECS programmed-ntsc-super 1280x200 screen opened\n",
+        "hunkSha256": "9b7c5611a5b76da2227b6f961ea0e6981404b0d51a604b6efa9871880b02592c",
+        "sourceSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+        "imageSha256": "321039503692a8a202882c6436446a3dd8223ad9f5a41562205caa083696b7ff"
+      },
+      "normalVersusScalar": {
+        "files": 30,
+        "mismatches": [],
+        "manifest": {
+          "files": 30,
+          "sha256": "130bcba215a16db89e4be3afd892f0352fa6305a04bf7223946c74319abac55c"
+        }
+      },
+      "finalCycle": 148105124,
+      "finalPc": "0001D9E2",
+      "width": 1824,
+      "height": 263,
+      "bplcon0": "2241",
+      "registers": {
+        "schemaVersion": 1,
+        "Cycle": 148105124,
+        "FramebufferWidth": 1824,
+        "FramebufferHeight": 263,
+        "beamcon0": "0000",
+        "htotal": 226,
+        "vtotal": 312,
+        "diwhigh": "2000",
+        "bplcon1": "0000",
+        "bplcon2": "0012",
+        "bplcon3": "0010",
+        "hbstrt": 0,
+        "hbstop": 49,
+        "vbstrt": 0,
+        "vbstop": 0
+      },
+      "proof": {
+        "offset_sectors": 32,
+        "filesystem": "ffs",
+        "image_sha256": "6f6cdb874666b31a39e26632367a48fc010a2699564ff8bbc65e1510f782589a",
+        "file": "ecs-screen-proof.txt",
+        "file_sha256": "b546043030a6bb20c609676b350f9112a45086f43a640110f7c5672122519dc7",
+        "bytes": 56,
+        "root_block": 880,
+        "header_block": 774,
+        "verified_data_blocks": 1
+      },
+      "hdfSha256": "6f6cdb874666b31a39e26632367a48fc010a2699564ff8bbc65e1510f782589a",
+      "bmpSha256": "fde84883f87e3b03c6a9e74719d7218aa946ed414cd86eac26cd7677a97abdb8",
+      "bmpPixelPayloadSha256": "861e22d284a892c8aaae1a7fe4cd897e761a19e66b4523d04de14fa928c295f9",
+      "localArtifacts": "artifacts/ecs-display-2026-10-01/release-candidate-r2"
+    },
+    {
+      "mode": "programmed-productivity",
+      "kind": "guest-programmed hardware",
+      "fields": 1200,
+      "checkpoints": 5,
+      "requestedWidth": 640,
+      "requestedHeight": 480,
+      "displayId": "00029020",
+      "preparation": {
+        "mode": "programmed-productivity",
+        "displayId": "00029020",
+        "width": 640,
+        "height": 480,
+        "proof": "Native ECS programmed-productivity 640x480 screen opened\n",
+        "hunkSha256": "64bf1f499ddc7f84b32b8e3cbd443c0b890aa35bd5089feb03c5de6161271c0d",
+        "sourceSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+        "imageSha256": "7baf9fe77fde3cc7fa9340da22f762918fcca6e0d8479dbdfca6d44e24227599"
+      },
+      "normalVersusScalar": {
+        "files": 30,
+        "mismatches": [],
+        "manifest": {
+          "files": 30,
+          "sha256": "0fc94d88fa6455ae33423731fe08ac161ea5623c4f233b6d54f3eb8053cd5c7e"
+        }
+      },
+      "finalCycle": 148157694,
+      "finalPc": "0001DA3A",
+      "width": 912,
+      "height": 525,
+      "bplcon0": "2271",
+      "registers": {
+        "schemaVersion": 1,
+        "Cycle": 148157694,
+        "FramebufferWidth": 912,
+        "FramebufferHeight": 525,
+        "beamcon0": "5B80",
+        "htotal": 113,
+        "vtotal": 524,
+        "diwhigh": "0100",
+        "bplcon1": "0000",
+        "bplcon2": "0012",
+        "bplcon3": "0010",
+        "hbstrt": 105,
+        "hbstop": 19,
+        "vbstrt": 510,
+        "vbstop": 30
+      },
+      "proof": {
+        "offset_sectors": 32,
+        "filesystem": "ffs",
+        "image_sha256": "1f02bc69aa8292f68d5a87b02e7b8e4cbd8d70b58e5c98bb1e26dfd615175280",
+        "file": "ecs-screen-proof.txt",
+        "file_sha256": "992cd161837fd2f54956e88bb177641ecd13158125c2dcab223b4bf1eda575fe",
+        "bytes": 57,
+        "root_block": 880,
+        "header_block": 774,
+        "verified_data_blocks": 1
+      },
+      "hdfSha256": "1f02bc69aa8292f68d5a87b02e7b8e4cbd8d70b58e5c98bb1e26dfd615175280",
+      "bmpSha256": "0fa8f4503c621cefa30cd0bbdcab86e34e78c4b557c02335558929ddf6cc36a4",
+      "bmpPixelPayloadSha256": "86dcc7254c55bbcad228240151f1b7836e4e4d836989d22348bfdb7a304200b5",
+      "localArtifacts": "artifacts/ecs-display-2026-10-01/release-candidate-r2"
+    }
+  ],
+  "unavailableNativeModes": [
+    {
+      "mode": "ntsc-super",
+      "displayId": "00019020",
+      "disposition": "UNAVAILABLE native monitor-launcher coverage",
+      "modeNotAvailable": "00000002",
+      "openScreenResult": "00000000",
+      "diagnosticSha256": "163e7f66d58036ccb1d0b0058d8f46e7cd639816f570e5eb32853ea73634e4cd",
+      "hdfSha256": "93a3ac0dc2d5381f9f9609227e7d8adbf6a527775c66a8340c6d0297e535a694"
+    },
+    {
+      "mode": "productivity",
+      "displayId": "00039024",
+      "disposition": "UNAVAILABLE native monitor-launcher coverage",
+      "modeNotAvailable": "FFFFFFFF",
+      "openScreenResult": "00000000",
+      "diagnosticSha256": "3414421b183188342209566fad4e0c0723070b4030630dde685ba70281e92725",
+      "hdfSha256": "7319dbb2d81583e7a695d84b885a1c592230439d0acc171391efe911e29cb3ee"
+    }
+  ],
+  "limitations": [
+    "Stock NTSC/VGA monitor launchers absent from supplied media",
+    "Analog genlock/composite pins and external synchronized image source unmodeled",
+    "A2024/UHRES external scan converter outside scope",
+    "Physical counter/write/fetch/composition edges not exhaustively certified",
+    "VHPOSW/VPOSW repositioning beyond LOF remains separate",
+    "No interactive GUI validation or formal performance acceptance"
+  ],
+  "validationLogsSha256": {
+    "build-final.log": "9e89e2f99101eedd42b7826d207e3c9306644e4d921ee4fe1f9d763897f3aa1a",
+    "engine-final.log": "5b083b85f427550dc8b655cc591dbf2dd3e8a0af91b9f0cd45b7f6522c25336b",
+    "host-final.log": "fe98164fae3f1438ffffde6733eaa05720a62f912ce2e79dee715d63ad3a9ba9",
+    "disk-final.log": "c8316398388ffbb2f66d6d28fc8665df9b0f719b48ddbdfe9a65997cce83fd5c",
+    "native-host-matrix-final.log": "75bee3fd3a1ab612152655d1c0fb393c89e6a1b019aa2e54923f039befd8e596",
+    "replay-tools-final.log": "a233dafa577575e247b7d3b0e772c5ee9a594aa668145ac14b9d7409f899874e"
+  }
+}

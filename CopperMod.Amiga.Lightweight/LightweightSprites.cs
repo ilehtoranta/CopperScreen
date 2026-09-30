@@ -49,9 +49,18 @@ internal sealed class LightweightSprites
 
     internal long NextCycle { get; private set; } = long.MaxValue;
     internal long LastRegisterInputCycle { get; private set; } = long.MinValue;
+    private bool _superHires;
+
+    internal void SetSuperHires(bool enabled)
+    {
+        if (_superHires == enabled) return;
+        _superHires = enabled;
+        _outputLine = -1;
+    }
 
     internal void Reset()
     {
+        _superHires = false;
         _collisionData = _collisionControl = 0;
         _collisionDual = false;
         _collisionPlanesEnabled = false;
@@ -877,10 +886,11 @@ internal sealed class LightweightSprites
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetHorizontalStart(in SpriteChannel state)
+    private int GetHorizontalStart(in SpriteChannel state)
         // SPRxPOS contains H8-H1 and SPRxCTL contains H0. In the uncropped
         // raster the comparator's first visible low-resolution pixel is +1.
-        => (((state.Pos & 0xFF) << 1) | (state.Ctl & 1)) + 1;
+        => ((((state.Pos & 0xFF) << 1) | (state.Ctl & 1)) + 1) * (_superHires ? 2 : 1) +
+            (_superHires && (state.Ctl & 0x10) != 0 ? 1 : 0);
 
     private struct SpriteChannel
     {

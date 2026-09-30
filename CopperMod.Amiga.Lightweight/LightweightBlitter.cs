@@ -46,6 +46,7 @@ internal sealed class LightweightBlitter
     private bool _useB;
     private bool _useC;
     private bool _useD;
+    private bool _disableOutput;
     private bool _dOnly;
     private bool _bOnly;
     private bool _requiresDma;
@@ -359,8 +360,7 @@ internal sealed class LightweightBlitter
     {
         var bltcon0 = machine.GetCustomRegister(LightweightRegisters.Bltcon0);
         var bltcon1 = machine.GetCustomRegister(LightweightRegisters.Bltcon1);
-        if (machine.IsEcsAgnus && (bltcon1 & 0x0080) != 0)
-            machine.ReportUnsupportedFeature("ECS blitter DOFF output suppression is not modeled");
+        _disableOutput = machine.IsEcsAgnus && (bltcon1 & 0x0080) != 0;
         _lineMode = (bltcon1 & Bltcon1LineMode) != 0;
         _useA = (bltcon0 & 0x0800) != 0;
         _useB = (bltcon0 & 0x0400) != 0;
@@ -639,7 +639,7 @@ internal sealed class LightweightBlitter
             case AreaChannel.D:
                 if (_useD)
                 {
-                    machine.WriteChipWordBus(address, writeValue);
+                    if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
                     _pointerD = AddPointer(_pointerD, _descending ? -2 : 2);
                     machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
                 }
@@ -692,7 +692,7 @@ internal sealed class LightweightBlitter
                         _dataC);
                     break;
                 case AreaChannel.D:
-                    machine.WriteChipWordBus(address, writeValue);
+                    if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
                     _lineLastDrawnY = _lineY;
                     break;
             }

@@ -97,6 +97,15 @@ internal sealed class NativeBootProbe
             File.WriteAllText(stem + ".memory.json", JsonSerializer.Serialize(new
                 { fastRamBytes = m.FastRam.Length, fastRamBase = m.FastRamBase }));
         }
+        if (m.DeniseModel == LightweightDeniseModel.Mos8373)
+            File.WriteAllText(Path.Combine(_directory, $"ecs-display-{m.CompletedFrames:D6}.json"), JsonSerializer.Serialize(new
+            {
+                schemaVersion = 1, m.Cycle, m.FramebufferWidth, m.FramebufferHeight,
+                beamcon0 = $"{registers.Read(0x1DC):X4}", htotal = registers.Read(0x1C0), vtotal = registers.Read(0x1C8),
+                diwhigh = $"{registers.Read(0x1E4):X4}", bplcon1 = $"{registers.Read(0x102):X4}",
+                bplcon2 = $"{registers.Read(0x104):X4}", bplcon3 = $"{registers.Read(0x106):X4}",
+                hbstrt = registers.Read(0x1C4), hbstop = registers.Read(0x1C6), vbstrt = registers.Read(0x1CC), vbstop = registers.Read(0x1CE)
+            }));
         WriteBitmap(stem + ".bmp", m.Framebuffer.Span, m.FramebufferWidth, m.FramebufferHeight);
         if (_extended)
         {

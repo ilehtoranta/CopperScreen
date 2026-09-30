@@ -48,6 +48,8 @@ internal static class CopperScreenAvailability
         "Agnus8375Pal2M" => "8375 (318069-10) · ECS PAL · up to 2 MiB",
         "EcsAgnus" => "ECS Agnus (unspecified revision)",
         "AgaAlice" => "Alice (AGA)",
+        "OcsDenise" => "8362 · OCS Denise",
+        "EcsDenise" => "8373 · ECS Denise",
         "AccurateM68000" => "Motorola 68000",
         "AccurateM68EC020" => "Motorola 68EC020 (experimental)",
         "AccurateM68020" => "Motorola 68020 (experimental)",

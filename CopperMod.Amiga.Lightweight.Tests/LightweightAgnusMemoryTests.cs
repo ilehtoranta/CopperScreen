@@ -240,12 +240,12 @@ public sealed class LightweightAgnusMemoryTests
     [InlineData(0x1DC, 0)]
     [InlineData(0x1E4, 0)]
     [InlineData(0x1E4, 0x2100)]
-    public void UnimplementedEcsDisplayModesAreReported(ushort register, ushort value)
+    public void EcsDisplayRegistersNoLongerReportUnsupportedModes(ushort register, ushort value)
     {
         using var m = Machine(LightweightAgnusModel.Mos8375Pal2M, 2048);
         Register(m, 0x1DC, 0x0020);
         Assert.Null(m.UnsupportedActiveFeature);
         Register(m, register, value);
-        Assert.NotNull(m.UnsupportedActiveFeature);
+        Assert.Null(m.UnsupportedActiveFeature);
     }
 }

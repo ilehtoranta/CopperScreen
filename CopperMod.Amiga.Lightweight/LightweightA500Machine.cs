@@ -115,9 +115,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
         for (var i = 0; i < _floppies.Length; i++) _floppies[i] = new(i);
         LightweightAgnus.ValidateMemory(_configuration.AgnusModel, _configuration.ChipRamBytes, _configuration.SlowRamBytes);
+        if (!Enum.IsDefined(_configuration.DeniseModel)) throw new ArgumentOutOfRangeException(nameof(configuration), "Select 8362 or 8373 Denise.");
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
         _copper = new(_registers.DmaAddressMask);
-        _bitplanes = new(_registers.DmaAddressMask);
+        _bitplanes = new(_registers.DmaAddressMask, IsEcsAgnus);
         _blitter = new(_registers.DmaAddressMask);
         _spriteDma = new(_registers.DmaAddressMask);
         // ECS pointer storage is separate from the physical DRAM decoder.
@@ -166,6 +167,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public M68kCpuState Cpu => _cpu.State;
     public M68kCpuModel CpuModel => _configuration.CpuModel;
     public LightweightAgnusModel AgnusModel => _configuration.AgnusModel;
+    public LightweightDeniseModel DeniseModel => _configuration.DeniseModel;
+    internal bool IsEcsDenise => DeniseModel == LightweightDeniseModel.Mos8373;
     internal bool IsEcsAgnus => _configuration.AgnusModel != LightweightAgnusModel.Mos8371;
     internal uint DmaAddressMask => _registers.DmaAddressMask;
     public long Cycle => _clock.Cycle;
@@ -177,8 +180,20 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public bool BeamSyncRunning => !_clock.SyncStopped;
     internal long BeamCycleOffset => _clock.BeamCycleOffset;
     public ReadOnlyMemory<int> Framebuffer => _video.Framebuffer;
-    public int FramebufferWidth => _configuration.FramebufferWidth;
-    public int FramebufferHeight => _configuration.FramebufferHeight;
+    public int FramebufferWidth => _video.FramebufferWidth;
+    public int FramebufferHeight => _video.FramebufferHeight;
+    internal int ColorClocksPerLine => _clock.ColorClocksPerLine;
+    internal int PreviousLineColorClocks => _clock.PreviousLineColorClocks;
+    internal int MaximumLineColorClocks => _clock.AlternatingLines ? 228 : ColorClocksPerLine;
+    internal int LineCycles => _clock.ColorClocksPerLine * 2;
+    internal long LineStartCycle => _clock.LineStartCycle;
+    internal int FieldLines => _clock.LinesThisField;
+    internal bool DiwHighValid { get; private set; }
+    internal LightweightDisplayWindow DmaDisplayWindow => LightweightDisplayWindow.Decode(
+        _registers.Read(LightweightRegisters.Diwstrt), _registers.Read(LightweightRegisters.Diwstop),
+        _registers.Read(LightweightRegisters.Diwhigh), IsEcsAgnus && DiwHighValid);
+    public double VideoVBlankHz => 7_093_790.0 / Math.Min(MaximumOutputIntervalCycles,
+        (_clock.AlternatingLines ? 455.0 : _clock.ColorClocksPerLine * 2.0) * _clock.LinesThisField);
     /// <summary>Completed field PCM, interleaved left/right; valid until the next ExecuteFrame.
     /// The sample count follows the PAL clock and can vary between fields.</summary>
     public ReadOnlyMemory<short> AudioSamples => _paula.Audio;
@@ -209,6 +224,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         => (uint)drive < (uint)_floppies.Length ? _floppies[drive] :
             throw new ArgumentOutOfRangeException(nameof(drive), "Floppy drive is not connected.");
     public bool InterlaceEnabled => (_video.EffectiveBplcon0 & 4) != 0;
+    public bool ProgrammableBeamEnabled => IsEcsAgnus && (_registers.Read(LightweightRegisters.Beamcon0) & 0x80) != 0;
     public bool AudioFilterControlEnabled =>
         ((_ciaA.ReadPortLatch(0) | ~_ciaA.ReadDataDirection(0)) & 2) == 0;
     internal long DiskSerialNextCycle => _nextDiskCycle;
@@ -287,7 +303,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
-        "ECS/AGA chipset profiles",
+        "AGA chipset profiles and A2024 external scan-converter",
         "floppy formats other than standard ADF and read-only IPF",
         "physical IDE/SCSI controllers and host-directory mounts",
         "save states",
@@ -309,6 +325,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _hdf?.Reset();
         _clock.Reset();
         _registers.Reset();
+        ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
         _blitter.Reset();
@@ -514,8 +531,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void TriggerLightPen()
     {
         if ((_video.EffectiveBplcon0 & 8) == 0 || _lightPenLatched || _clock.Line < 25) return;
-        _lightPenVpos = (ushort)((IsEcsAgnus ? 0x2000 : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & 1));
-        _lightPenVhpos = (ushort)(((_clock.Line & 255) << 8) | ((_clock.ColorClock + 4) % 227));
+        _lightPenVpos = (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? 0x2000 : 0x3000) : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & (IsEcsAgnus ? 7 : 1)));
+        _lightPenVhpos = (ushort)(((_clock.Line & 255) << 8) | ((_clock.ColorClock + 4) % _clock.ColorClocksPerLine));
         _lightPenLatched = true;
     }
 
@@ -767,6 +784,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _autoconfig?.ResetConfiguration();
         _hdf?.Reset();
         _registers.Reset();
+        ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
         _blitter.Reset();
@@ -959,9 +977,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private bool IsFollowingCckMandatoryRefresh()
     {
         var horizontal = _clock.ColorClock + 1;
-        if (horizontal ==
-            LightweightClock.CpuCyclesPerLine /
-                LightweightClock.CpuCyclesPerColorClock)
+        if (horizontal >= _clock.ColorClocksPerLine)
         {
             horizontal = 0;
         }
@@ -1132,6 +1148,25 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         => _sprites.ComposeHiresColorIndexes(line, x, firstPlayfield, secondPlayfield,
             placement, out first, out second);
 
+    internal void SetSpriteSuperHires(bool enabled) => _sprites.SetSuperHires(enabled);
+
+    /// <summary>Digital genlock blank input, sampled by ECS Denise when enabled.</summary>
+    public void SetExternalBlank(bool blank) => _video.SetExternalBlank(blank);
+
+    private void ResetEcsRegisters()
+    {
+        DiwHighValid = false;
+        if (!IsEcsAgnus) return;
+        _registers.Write(LightweightRegisters.Beamcon0, 0x20);
+        _registers.Write(LightweightRegisters.Htotal, 226);
+        _registers.Write(LightweightRegisters.Vtotal, 312);
+        _registers.Write(LightweightRegisters.Hbstrt, 0);
+        _registers.Write(LightweightRegisters.Hbstop, 49);
+        _registers.Write(LightweightRegisters.Vbstrt, 311);
+        _registers.Write(LightweightRegisters.Vbstop, 26);
+        _clock.ConfigureEcs(this);
+    }
+
     internal bool IsManualSpriteArmed(int sprite)
         => _sprites.IsManualArmed(sprite);
 
@@ -1301,7 +1336,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if ((_video.EffectiveBplcon0 & 8) != 0 && !_lightPenLatched)
         {
-            _lightPenVpos = (ushort)((IsEcsAgnus ? 0x2000 : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
+            _lightPenVpos = (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? 0x2000 : 0x3000) : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
             _lightPenVhpos = (ushort)(((_clock.LinesThisField & 255) << 8) | 4);
             _lightPenLatched = true;
         }
@@ -1318,6 +1353,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if ((_video.EffectiveBplcon0 & 0x0004) != 0)
         {
             _clock.SelectLongField(!_clock.IsLongField);
+            if (IsEcsAgnus) _clock.ConfigureEcs(this);
         }
         _bitplanes.OnFrameStart(cycle, this);
         _spriteDma.OnFrameStart(cycle, this);
@@ -1361,6 +1397,16 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _copper.OnBeamSyncChanged(cycle, this);
         _blitter.OnBeamSyncChanged(cycle, this);
         RefreshCiaInterruptCycle();
+    }
+
+    internal void OnRasterTimingChanged(long cycle)
+    {
+        _paula.OnBeamSyncChanged(cycle, this);
+        _spriteDma.OnBeamSyncChanged(cycle, this);
+        _diskDma.OnBeamSyncChanged(cycle, this);
+        _bitplanes.OnRegisterWrite(LightweightRegisters.Htotal, 0, cycle, this);
+        RefreshCiaInterruptCycle();
+        RefreshNextDeviceCycle();
     }
 
     internal bool DispatchPendingCpuInterrupt()
@@ -1581,13 +1627,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var offset = (ushort)(address - CustomBase);
             return offset switch
             {
-                LightweightRegisters.Vposr when _lightPenLatched && (_video.EffectiveBplcon0 & 8) != 0 => _lightPenVpos,
-                LightweightRegisters.Vhposr when _lightPenLatched && (_video.EffectiveBplcon0 & 8) != 0 => _lightPenVhpos,
-                LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? 0x2000 : 0) | (_clock.IsLongField ? 0x8000 : 0) |
-                    ((_clock.Line >> 8) & 1)),
+                LightweightRegisters.Vposr when ReadLatchedLightPen => _lightPenVpos,
+                LightweightRegisters.Vhposr when ReadLatchedLightPen => _lightPenVhpos,
+                LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? 0x2000 : 0x3000) : 0) | (_clock.IsLongField ? 0x8000 : 0) |
+                    ((_clock.Line >> 8) & (IsEcsAgnus ? 7 : 1))),
                 LightweightRegisters.Vhposr => (ushort)(((_clock.Line & 0xFF) << 8) |
-                    (_clock.SyncStopped ? 0 : (_clock.ColorClock + 4) % (LightweightClock.CpuCyclesPerLine /
-                        LightweightClock.CpuCyclesPerColorClock))),
+                    (_clock.SyncStopped ? 0 : (_clock.ColorClock + 4) % _clock.ColorClocksPerLine)),
                 LightweightRegisters.Dmaconr =>
                     (ushort)(_registers.Dmacon | _blitter.StatusBits),
                 LightweightRegisters.Dskbytr => _diskSerial.ReadByteStatus(_registers, _diskDma.Active),
@@ -1597,6 +1642,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 // storage at this offset: preceding-CCK DMA data, else pull-ups.
                 // Electrical decay / coincident edges remain unverified; see
                 // docs/engine/TOWER_ASSAULT_INVESTIGATION.md.
+                0x07C when IsEcsDenise => 0xFFFC,
+                LightweightRegisters.Hhposr when IsEcsAgnus => (ushort)_clock.ColorClock,
                 0x07C => ReadUndrivenCustomBus(),
                 0x00A => _controllers.ReadJoy(port1: false),
                 0x00C => _controllers.ReadJoy(port1: true),
@@ -1740,15 +1787,35 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (IsEcsAgnus && offset == LightweightRegisters.Bltcon0l)
             _registers.Write(LightweightRegisters.Bltcon0,
                 (ushort)((_registers.Read(LightweightRegisters.Bltcon0) & 0xFF00) | (value & 0xFF)));
-        if (IsEcsAgnus && offset == LightweightRegisters.Beamcon0 && value != 0x0020)
-            ReportUnsupportedFeature("ECS programmable beam/NTSC modes are not modeled; select fixed PAL BEAMCON0=$0020");
-        if (IsEcsAgnus && offset == LightweightRegisters.Diwhigh)
-            ReportUnsupportedFeature("ECS extended display windows are not modeled with this OCS Denise profile");
+        if (offset is LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop) DiwHighValid = false;
+        if (offset == LightweightRegisters.Diwhigh)
+        {
+            if (!IsEcsAgnus && !IsEcsDenise) return;
+            value &= IsEcsAgnus ? (ushort)0x2F2F : (ushort)0x2727;
+            DiwHighValid = true;
+        }
+        if (offset == LightweightRegisters.Bplcon3)
+        {
+            if (!IsEcsDenise) return;
+            value &= 0x0037;
+        }
+        if (offset is >= LightweightRegisters.Htotal and <= LightweightRegisters.Hcenter)
+        {
+            if (!IsEcsAgnus || offset == LightweightRegisters.Hhposr) return;
+            value &= offset switch
+            {
+                LightweightRegisters.Beamcon0 => (ushort)0x7FFF,
+                LightweightRegisters.Vtotal or LightweightRegisters.Vsstop or LightweightRegisters.Vbstrt or
+                    LightweightRegisters.Vbstop or LightweightRegisters.Vsstrt => (ushort)0x07FF,
+                _ => (ushort)0x01FF
+            };
+        }
         if (offset == 0x036) _controllers.WriteJoytest(value);
         if (offset == 0x034) _pots.WriteControl(value, cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
         if (offset == LightweightRegisters.Vposw)
         {
             _clock.SelectLongField((value & 0x8000) != 0);
+            if (IsEcsAgnus) _clock.ConfigureEcs(this);
             _registers.Write(offset, value);
             RefreshCiaInterruptCycle();
             return;
@@ -1764,6 +1831,25 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             ? _registers.Intreq
             : (ushort)0;
         _registers.Write(offset, value);
+
+        if (IsEcsAgnus && offset is LightweightRegisters.Beamcon0 or LightweightRegisters.Htotal or LightweightRegisters.Vtotal)
+        {
+            _clock.ConfigureEcs(this);
+            OnRasterTimingChanged(cycle);
+        }
+        if (IsEcsAgnus && offset == LightweightRegisters.Hhposw)
+        {
+            _clock.ApplyHorizontalPosition(value);
+            _copper.OnBeamSyncChanged(cycle, this);
+            _blitter.OnBeamSyncChanged(cycle, this);
+            OnRasterTimingChanged(cycle);
+        }
+        if (offset == LightweightRegisters.Diwhigh)
+        {
+            _bitplanes.OnRegisterWrite(offset, value, cycle, this);
+            _video.OnRegisterWrite(offset, value, cycle);
+        }
+        if (offset == LightweightRegisters.Bplcon3) _video.OnRegisterWrite(offset, value, cycle);
 
         var refreshDeviceCycle = true;
         if (offset >= LightweightRegisters.ColorFirst &&
@@ -1842,7 +1928,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                     _spriteDma.OnDmaconChanged(
                         previousDmacon,
                         _registers.Dmacon,
-                        cycle);
+                        cycle, this);
                     _paula.OnDmaconChanged(
                         previousDmacon,
                         _registers.Dmacon,
@@ -2023,8 +2109,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _ciaB.GetNextActiveInterruptCycle());
         _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle,
             _ciaA.GetNextTodInterruptCycle(_clock.NextFrameCycle, 0));
-        _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle,
-            _ciaB.GetNextTodInterruptCycle(_clock.NextLineCycle, LightweightClock.CpuCyclesPerLine));
+        var lineAlarm = _ciaB.GetNextTodInterruptCycle(_clock.NextLineCycle, LineCycles);
+        // NTSC alternates 227/228 CCK lines and restarts the parity each field.
+        // Revisit an enabled future alarm at the next real line boundary rather
+        // than extrapolating the current line period across that change.
+        if (_clock.AlternatingLines && lineAlarm != long.MaxValue) lineAlarm = _clock.NextLineCycle;
+        _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle, lineAlarm);
         _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle, _keyboard.NextCycle);
         // UART shares this infrequent interface deadline; idle serial hardware
         // adds no extra check to every display/device tick.

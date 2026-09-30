@@ -5,14 +5,14 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 
 ## Supported machine
 
-- PAL A500 with OCS Denise and a Motorola 68000 by default; experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
+- PAL A500 with OCS 8362 Denise and a Motorola 68000 by default; ECS 8373 Denise and experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
 - Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional 512 KiB–8 MiB Autoconfig Fast RAM is separate. See [native boot and DMA evidence](docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
 - Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
 - One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
 
-CopperStart, Legacy, full ECS display modes, AGA, other accelerator profiles and physical IDE/SCSI controllers are not supported by
+CopperStart, Legacy, AGA, A2024 external scan conversion, other accelerator profiles and physical IDE/SCSI controllers are not supported by
 the current application. Unsupported settings are reported explicitly rather
 than silently changing the configured machine.
 
@@ -59,8 +59,12 @@ The runner accepts `--fast-ram-kib` with the same sizes.
 The Memory page also selects Agnus and compatible Chip RAM sizes. The runner
 accepts `--agnus 8371|8372a|8375-318069-10`, `--chip-ram-kib 512|1024|2048`
 and `--slow-ram-kib 0|512`; unsupported combinations fail explicitly.
-Agnus and RAM changes require restarting the machine. All three choices retain
-OCS Denise and fixed PAL timing.
+Settings > Memory also selects 8362 OCS or 8373 ECS Denise; the runner accepts
+`--denise 8362|8373`. ECS display supports SuperHires, extended windows and
+programmable timing with safe output resizing. Agnus, Denise and RAM changes
+require restarting the machine. The board oscillator remains PAL; guest ECS
+counters can select NTSC geometry. See [ECS display evidence and monitor-driver
+coverage limits](docs/engine/ECS_DISPLAY_2026-10-01.md).
 
 ## Tests and headless execution
 

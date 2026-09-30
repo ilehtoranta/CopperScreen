@@ -20,6 +20,7 @@ internal readonly record struct CopperScreenPresentationGeometry(
 	// producers already translate to capture coordinates before publication.
 	public PixelRect? FullViewport { get; init; }
 	public PixelRect? StandardViewport { get; init; }
+	public double? HorizontalPixelAspectOverride { get; init; }
 
 	public static CopperScreenPresentationGeometry ForStandardRaster(bool isPal, bool superHighRes)
 		=> new(isPal ? 358 : 362, isPal ? 285 : 241, 320, isPal ? 256 : 200,
@@ -34,6 +35,7 @@ internal readonly record struct CopperScreenPresentationGeometry(
 
 	public double GetHorizontalPixelAspect(CopperScreenPixelAspectMode mode)
 	{
+		if (HorizontalPixelAspectOverride is { } pixelAspect) return pixelAspect;
 		var lcdFactor = IsSuperHighRes ? 0.5 : 1.0;
 		if (mode == CopperScreenPixelAspectMode.Lcd)
 		{

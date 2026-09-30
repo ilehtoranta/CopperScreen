@@ -11,6 +11,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     private byte _mouseButtons, _joystick0, _joystick1;
     private int _fireFrames;
     private bool _haveFrame, _audioAvailable, _faulted;
+    private int _nativeWidth, _nativeHeight;
     private readonly CopperScreenAdfImage?[] _pendingAdf = new CopperScreenAdfImage?[4];
     private readonly int[] _insertDelay = new int[4];
     private readonly string?[] _diskPaths = new string?[4];
@@ -28,7 +29,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
         var configuration = new LightweightA500Configuration
-            { FramebufferWidth = 908, FloppyDriveCount = options.Profile.FloppyDriveCount,
+            { FramebufferWidth = options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? 1816 : 908,
+                DeniseModel = options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? LightweightDeniseModel.Mos8373 : LightweightDeniseModel.Mos8362, FloppyDriveCount = options.Profile.FloppyDriveCount,
                 CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
                 AgnusModel = GetAgnusModel(options.Profile.Chipset.DmaChip),
                 ChipRamBytes = options.Profile.ChipRamSize, SlowRamBytes = options.Profile.ExpansionRamSize,
@@ -78,7 +80,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
-        if (p.Chipset.DisplayChip != DisplayChipModel.OcsDenise || p.Chipset.VideoStandard != VideoStandard.Pal ||
+        if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise) || p.Chipset.VideoStandard != VideoStandard.Pal ||
             p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
@@ -87,7 +89,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
-            throw new NotSupportedException("Lightweight supports PAL / OCS Denise / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
+            throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
         catch (ArgumentException ex) { throw new NotSupportedException(ex.Message, ex); }
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
@@ -133,11 +135,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             throw new NotSupportedException("Lightweight currently supports a mouse on port 1 only.");
     }
 
-    public int Width => 908;
-    public int Height => 626;
-    public int[] Framebuffer { get; } = new int[908 * 626];
+    public int Width => _nativeWidth;
+    public int Height => _nativeHeight * 2;
+    public int[] Framebuffer { get; private set; } = [];
     public int AudioSampleRate => 48_000;
-    public double VideoVBlankHz => 7_093_790.0 / (454 * 313);
+    public double VideoVBlankHz => _machine.VideoVBlankHz;
     internal static CopperScreenPresentationGeometry NativePresentationGeometry =>
         new(356, 285, 320, 256, 2, 2, true, false)
         {
@@ -146,7 +148,26 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             FullViewport = new(196, 52, 712, 570),
             StandardViewport = new(258, 88, 640, 512)
         };
-    public CopperScreenPresentationGeometry PresentationGeometry => NativePresentationGeometry;
+    public CopperScreenPresentationGeometry PresentationGeometry
+    {
+        get
+        {
+            if (!_machine.ProgrammableBeamEnabled && Width == 908 && Height == 626) return NativePresentationGeometry;
+            var scale = _machine.DeniseModel == LightweightDeniseModel.Mos8373 ? 4 : 2;
+            var variable = _machine.ProgrammableBeamEnabled;
+            var productivity = variable && Width == 912 && Height is 1050 or 1052 && scale == 4;
+            var pal = Height >= 626;
+            var x = variable ? 0 : 98 * scale;
+            var y = variable ? 0 : pal ? 52 : 42;
+            return new(Width / scale - x / scale, Height / 2 - y / 2,
+                Math.Min(320, Width / scale), Math.Min(pal ? 256 : 200, Height / 2), scale, 2, pal, scale == 4)
+            { // Standard 31 kHz Productivity samples are square before progressive row doubling.
+              HorizontalPixelAspectOverride = productivity ? (IsInterlaced ? 1.0 : 2.0) : null,
+              FullViewport = new(x, y, Width - x, Height - y),
+              StandardViewport = variable ? new(0, 0, Width, Height) :
+                new(129 * scale, 88, Math.Min(320 * scale, Width - 129 * scale), Math.Min(pal ? 512 : 400, Height - 88)) };
+        }
+    }
     public CopperScreenEmulatorFrameTiming LastFrameTiming => default; // No invented CPU/device timing split.
     public bool IsInterlaced { get; private set; }
     public int CompletedInterlaceField { get; private set; }
@@ -192,7 +213,18 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         // Preserve all native pixels. Vertical duplication/weaving is host presentation only.
         var interlaced = _machine.InterlaceEnabled;
         var pixels = _machine.Framebuffer.Span;
-        for (var y = 0; y < 313; y++)
+        if (_nativeWidth != _machine.FramebufferWidth || _nativeHeight != _machine.FramebufferHeight)
+        {
+            _nativeWidth = _machine.FramebufferWidth;
+            _nativeHeight = _machine.FramebufferHeight;
+            _haveFrame = false;
+        }
+        if (Framebuffer.Length != Width * Height)
+        {
+            Framebuffer = new int[Width * Height];
+            _haveFrame = false;
+        }
+        for (var y = 0; y < _machine.FramebufferHeight; y++)
         {
             var row = pixels.Slice(y * Width, Width);
             row.CopyTo(Framebuffer.AsSpan((y * 2 + (interlaced ? field : 0)) * Width, Width));
@@ -202,7 +234,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         IsInterlaced = interlaced;
         CompletedInterlaceField = field;
         _haveFrame = _audioAvailable = true;
-        if (!ReferenceEquals(destination, Framebuffer)) Framebuffer.CopyTo(destination, 0);
+        if (!ReferenceEquals(destination, Framebuffer) && destination.Length == Framebuffer.Length) Framebuffer.CopyTo(destination, 0);
         if (_fireFrames > 0 && --_fireFrames == 0) ApplyInput();
     }
 
@@ -312,6 +344,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         _fireFrames = 0;
         _haveFrame = _audioAvailable = _faulted = IsPaused = IsInterlaced = false;
         CompletedInterlaceField = 0;
+        _nativeWidth = _machine.FramebufferWidth; _nativeHeight = _machine.FramebufferHeight;
+        Framebuffer = new int[Width * Height];
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
         StatusText = "Lightweight experimental A500 — native Kickstart 1.3, ADF / read-only IPF / CopperHDF";

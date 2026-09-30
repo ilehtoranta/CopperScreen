@@ -17,16 +17,29 @@ internal sealed class LightweightClock
     internal long FrameStartCycle { get; private set; }
     internal long FrameNumber { get; private set; }
     internal int LinesThisField { get; private set; }
-    internal bool IsLongField => LinesThisField == PalLongFieldLines;
+    internal bool IsLongField => _longField;
+    internal int ColorClocksPerLine { get; private set; } = 227;
+    internal int PreviousLineColorClocks { get; private set; } = 227;
+    internal bool AlternatingLines { get; private set; }
+    internal long LineStartCycle => Cycle - ColorClock * 2 - _cpuPhase;
+    private bool _longField = true;
+    private bool _ecsGeometry;
     internal bool SyncStopped { get; private set; }
     internal long BeamCycleOffset { get; private set; }
-    internal long NextLineCycle => SyncStopped ? long.MaxValue : Cycle + CpuCyclesPerLine -
-        (ColorClock * CpuCyclesPerColorClock + _cpuPhase);
+    internal long NextLineCycle => SyncStopped ? long.MaxValue : Cycle + Math.Max(2 - _cpuPhase,
+        ColorClocksPerLine * 2 - (ColorClock * CpuCyclesPerColorClock + _cpuPhase));
     internal long NextFrameCycle
     {
         get
         {
             if (SyncStopped) return long.MaxValue;
+            if (_ecsGeometry)
+            {
+                var remaining = Math.Max(1, LinesThisField - Line);
+                var longLines = AlternatingLines ? (remaining + (Line & 1)) / 2 : 0;
+                var nominal = LineStartCycle + remaining * (long)(AlternatingLines ? 227 : ColorClocksPerLine) * 2 + longLines * 2;
+                return nominal + Math.Max(0, ColorClock * 2 + _cpuPhase - ColorClocksPerLine * 2 + 2 - _cpuPhase);
+            }
             var nominalEnd = FrameStartCycle +
                 ((long)LinesThisField * CpuCyclesPerLine);
             if (nominalEnd > Cycle)
@@ -57,10 +70,42 @@ internal sealed class LightweightClock
         _externalSync = SyncStopped = false;
         BeamCycleOffset = 0;
         _horizontalLimit = CpuCyclesPerLine / CpuCyclesPerColorClock;
+        ColorClocksPerLine = 227;
+        PreviousLineColorClocks = 227;
+        AlternatingLines = false;
+        _longField = true;
+        _ecsGeometry = false;
     }
 
     internal void SelectLongField(bool longField)
-        => LinesThisField = longField ? PalLongFieldLines : PalShortFieldLines;
+    {
+        _longField = longField;
+        if (!_ecsGeometry) LinesThisField = longField ? PalLongFieldLines : PalShortFieldLines;
+    }
+
+    internal void ConfigureEcs(LightweightA500Machine machine)
+    {
+        var beam = machine.GetCustomRegister(LightweightRegisters.Beamcon0);
+        var variable = (beam & 0x80) != 0;
+        var pal = (beam & 0x20) != 0;
+        AlternatingLines = !variable && !pal && (beam & 0x800) == 0;
+        ColorClocksPerLine = variable ? machine.GetCustomRegister(LightweightRegisters.Htotal) + 1 :
+            227 + (AlternatingLines ? Line & 1 : 0);
+        LinesThisField = variable ? machine.GetCustomRegister(LightweightRegisters.Vtotal) + 1 :
+            pal ? (_longField ? 313 : 312) : (_longField ? 263 : 262);
+        if (variable && machine.InterlaceEnabled && _longField) LinesThisField++;
+        _ecsGeometry = variable || !pal;
+        if (!SyncStopped) _horizontalLimit = ColorClocksPerLine;
+    }
+
+    internal void ApplyHorizontalPosition(int horizontal)
+    {
+        // Retained Legacy BeamClock policy: clamp the nine-bit ECS position to
+        // this line's extent. Reposition the raster without advancing owner time.
+        horizontal = Math.Clamp(horizontal, 0, ColorClocksPerLine - 1);
+        FrameStartCycle -= (horizontal - ColorClock) * CpuCyclesPerColorClock;
+        ColorClock = horizontal;
+    }
 
     internal void SetExternalSync(bool enabled, LightweightA500Machine machine)
     {
@@ -72,7 +117,7 @@ internal sealed class LightweightClock
         FrameStartCycle += heldCycles + CpuCyclesPerLine;
         BeamCycleOffset = (BeamCycleOffset + heldCycles) % CpuCyclesPerLine;
         SyncStopped = false;
-        _horizontalLimit = CpuCyclesPerLine / CpuCyclesPerColorClock;
+        _horizontalLimit = ColorClocksPerLine;
         machine.OnBeamSyncChanged(Cycle);
     }
 
@@ -142,8 +187,9 @@ internal sealed class LightweightClock
     private void CompleteColorClock(LightweightA500Machine machine)
     {
         ColorClock++;
-        if (ColorClock == _horizontalLimit)
+        if (ColorClock >= _horizontalLimit)
         {
+            PreviousLineColorClocks = ColorClocksPerLine;
             ColorClock = 0;
             if (_externalSync)
             {
@@ -165,6 +211,12 @@ internal sealed class LightweightClock
                     FrameStartCycle = Cycle;
                     FrameNumber++;
                     machine.OnFrameCompleted(Cycle);
+                }
+                if (AlternatingLines)
+                {
+                    ColorClocksPerLine = 227 + (Line & 1);
+                    _horizontalLimit = ColorClocksPerLine;
+                    machine.OnRasterTimingChanged(Cycle);
                 }
             }
             machine.CompleteOutputIfDue(Cycle);

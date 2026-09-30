@@ -38,6 +38,9 @@ internal sealed class LightweightRegisters
     internal const ushort Bltsizh = 0x05E;
     internal const ushort Beamcon0 = 0x1DC;
     internal const ushort Diwhigh = 0x1E4;
+    internal const ushort Htotal = 0x1C0, Hsstop = 0x1C2, Hbstrt = 0x1C4, Hbstop = 0x1C6;
+    internal const ushort Vtotal = 0x1C8, Vsstop = 0x1CA, Vbstrt = 0x1CC, Vbstop = 0x1CE;
+    internal const ushort Hhposw = 0x1D8, Hhposr = 0x1DA, Hsstrt = 0x1DE, Vsstrt = 0x1E0, Hcenter = 0x1E2;
     internal const ushort Bltcmod = 0x060;
     internal const ushort Bltbmod = 0x062;
     internal const ushort Bltamod = 0x064;
@@ -69,6 +72,7 @@ internal sealed class LightweightRegisters
     internal const ushort Bplcon0 = 0x100;
     internal const ushort Bplcon1 = 0x102;
     internal const ushort Bplcon2 = 0x104;
+    internal const ushort Bplcon3 = 0x106;
     internal const ushort Bpl1mod = 0x108;
     internal const ushort Bpl2mod = 0x10A;
     internal const ushort BplPointerFirst = 0x0E0;

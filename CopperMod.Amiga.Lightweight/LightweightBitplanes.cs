@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// Direct OCS low/high-resolution DDF and bitplane DMA path. One accepted address
+/// Direct OCS/ECS DDF and bitplane DMA path, including two-plane SuperHires. One accepted address
 /// is retained until the following CCK samples Chip RAM.
 /// </summary>
 internal sealed class LightweightBitplanes
@@ -16,12 +16,19 @@ internal sealed class LightweightBitplanes
     private const int DdfHardStopTargetHorizontal = 0xD8;
     private const int FetchUnitColorClocks = 8;
     private readonly uint _addressMask;
+    private readonly bool _ecs;
+    private int _ddfMask = DdfMask;
 
-    internal LightweightBitplanes(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
+    internal LightweightBitplanes(uint addressMask = 0x0007_FFFEu, bool ecs = false)
+    {
+        _addressMask = addressMask;
+        _ecs = ecs;
+    }
     // Three bits per CCK, storing plane + 1 (zero is the idle slot).
     // Lores: -1,3,5,1,-1,2,4,0; hires: 3,1,2,0,3,1,2,0.
     private const uint LowResFetchOrder = 0x3585A0;
     private const uint HighResFetchOrder = 0x2D42D4;
+    private const uint SuperHiresFetchOrder = 0x28A28A;
 
     private readonly uint[] _pointers = new uint[6];
     private readonly ushort[] _dataLatches = new ushort[6];
@@ -62,6 +69,7 @@ internal sealed class LightweightBitplanes
         Array.Clear(_dataLatches);
         _effectiveBplcon0 = 0;
         _effectivePlaneCount = 0;
+        _ddfMask = DdfMask;
         _fetchOrder = LowResFetchOrder;
         _terminalFetchOffset = 0;
         _pendingBplcon0 = 0;
@@ -169,8 +177,10 @@ internal sealed class LightweightBitplanes
             _effectiveBplcon0 = _pendingBplcon0;
             _effectivePlaneCount = GetSupportedPlaneCount(_effectiveBplcon0);
             var hires = (_effectiveBplcon0 & 0x8000) != 0;
-            _fetchOrder = hires ? HighResFetchOrder : LowResFetchOrder;
-            _terminalFetchOffset = hires ? 8 : 0;
+            var super = _ecs && (_effectiveBplcon0 & 0x8040) == 0x40;
+            _fetchOrder = super ? SuperHiresFetchOrder : hires ? HighResFetchOrder : LowResFetchOrder;
+            _terminalFetchOffset = super ? 12 : hires ? 8 : 0;
+            _ddfMask = super ? 0xFE : DdfMask;
             _pendingBplcon0Cycle = long.MaxValue;
         }
 
@@ -220,6 +230,7 @@ internal sealed class LightweightBitplanes
         int planeCount)
     {
         var horizontal = machine.BeamColorClock;
+        var hardLimits = !_ecs || (_effectiveBplcon0 & 0x20) == 0;
         if (_runActive && (!dmaEnabled || planeCount == 0))
         {
             _runActive = false;
@@ -228,7 +239,7 @@ internal sealed class LightweightBitplanes
             _completionCycle = long.MaxValue;
             _ownerLine = -1;
         }
-        if (!_startPermit && horizontal == DdfLimitReleaseHorizontal)
+        if (!_startPermit && horizontal == (hardLimits ? DdfLimitReleaseHorizontal : 0))
         {
             _startPermit = true;
         }
@@ -239,9 +250,9 @@ internal sealed class LightweightBitplanes
             {
                 if (_completionCycle == long.MaxValue)
                 {
-                    if (horizontal == (machine.DdfStop & DdfMask))
+                    if (horizontal == (machine.DdfStop & _ddfMask))
                         ArmStop(cycle, cycle);
-                    else if (horizontal == DdfHardStopCompareHorizontal)
+                    else if (hardLimits && horizontal == DdfHardStopCompareHorizontal)
                         ArmStop(cycle, cycle + LightweightClock.CpuCyclesPerColorClock);
                 }
                 // The running sequencer cannot start again at this CCK.
@@ -258,7 +269,7 @@ internal sealed class LightweightBitplanes
 
         if (_startPermit && dmaEnabled && planeCount != 0 &&
             horizontal == (machine.GetCustomRegister(
-                LightweightRegisters.Ddfstrt) & DdfMask) &&
+                LightweightRegisters.Ddfstrt) & _ddfMask) &&
             IsVerticalWindowOpen(machine))
         {
             _runActive = true;
@@ -349,6 +360,12 @@ internal sealed class LightweightBitplanes
 
     private static bool IsVerticalWindowOpen(LightweightA500Machine machine)
     {
+        if (machine.IsEcsAgnus && machine.DiwHighValid)
+        {
+            var window = machine.DmaDisplayWindow;
+            return machine.BeamLine >= window.VerticalStart && machine.BeamLine < window.VerticalStop ||
+                window.VerticalStop > 4096 && machine.BeamLine < window.VerticalStop - 4096;
+        }
         var start = machine.GetCustomRegister(LightweightRegisters.Diwstrt) >> 8;
         var stop = machine.GetCustomRegister(LightweightRegisters.Diwstop) >> 8;
         // OCS supplies V8 as the complement of V7, not from a comparison
@@ -365,13 +382,14 @@ internal sealed class LightweightBitplanes
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetSupportedPlaneCount(ushort bplcon0)
+    private int GetSupportedPlaneCount(ushort bplcon0)
     {
         var count = (bplcon0 >> 12) & 7;
+        if (_ecs && (bplcon0 & 0x8040) == 0x40) return Math.Min(count, 2);
         if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
         // OCS Agnus aliases BPU=7 to four lores DMA channels. Denise still
         // decodes the six physical data latches, including retained BPL5/6DAT.
-        return count == 7 ? 4 : count;
+        return count == 7 ? (_ecs ? 6 : 4) : count;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -396,10 +414,9 @@ internal sealed class LightweightBitplanes
     {
         var horizontal = machine.BeamColorClock;
         var target = !_startPermit
-            ? DdfLimitReleaseHorizontal
-            : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & DdfMask;
-        var colorClocksPerLine = LightweightClock.CpuCyclesPerLine /
-            LightweightClock.CpuCyclesPerColorClock;
+            ? (_ecs && (_effectiveBplcon0 & 0x20) != 0 ? 0 : DdfLimitReleaseHorizontal)
+            : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask;
+        var colorClocksPerLine = machine.ColorClocksPerLine;
         if ((uint)target >= (uint)colorClocksPerLine)
         {
             return;

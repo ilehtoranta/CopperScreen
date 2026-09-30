@@ -17,6 +17,7 @@ var exportDisks = new List<(int Drive, string Path)>();
 var scalarCpu = false;
 var cpuModel = M68kCpuModel.M68000;
 var fastRamKiB = 0;
+var deniseModel = LightweightDeniseModel.Mos8362;
 var agnusModel = LightweightAgnusModel.Mos8371;
 var chipRamKiB = 512;
 int? slowRamKiB = null;
@@ -67,6 +68,16 @@ for (var i = 0; i < args.Length; i++)
             throw new ArgumentException("--drives requires a count from 1 to 4.");
     }
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
+    else if (args[i] == "--denise")
+    {
+        if (++i >= args.Length) throw new ArgumentException("--denise requires 8362 or 8373.");
+        deniseModel = args[i].ToLowerInvariant() switch
+        {
+            "8362" or "ocs" => LightweightDeniseModel.Mos8362,
+            "8373" or "ecs" => LightweightDeniseModel.Mos8373,
+            _ => throw new ArgumentException("--denise requires 8362 or 8373.")
+        };
+    }
     else if (args[i] == "--agnus")
     {
         if (++i >= args.Length) throw new ArgumentException("--agnus requires 8371, 8372a or 8375-318069-10.");
@@ -181,11 +192,11 @@ for (var i = 0; i < extraAdfPaths.Length; i++)
 
 using var machine = new LightweightA500Machine(
     configuration: new LightweightA500Configuration
-        { FramebufferWidth = romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024,
-            AgnusModel = agnusModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024 },
+        { FramebufferWidth = deniseModel == LightweightDeniseModel.Mos8373 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024,
+            AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024 },
     enableConservativeCpuLoopBatch: !scalarCpu);
-if (agnusModel != LightweightAgnusModel.Mos8371 || chipRamKiB != 512 || slowRamKiB == 0)
-    Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise=ocs video=pal");
+if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
+    Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise={deniseModel} video=pal");
 var supportsBlitter = machine.GetType().GetProperty(
     "BlitterActive",
     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) is not null;

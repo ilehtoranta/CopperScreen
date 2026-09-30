@@ -168,7 +168,7 @@ internal sealed class LightweightCopper
         }
 
         var horizontal = machine.BeamColorClock;
-        var phase = ClassifyInput(horizontal);
+        var phase = ClassifyInput(horizontal, machine.ColorClocksPerLine);
         if (phase == CopperInputPhase.Normal)
         {
             AdvanceControlInput(cycle, machine);
@@ -392,8 +392,18 @@ internal sealed class LightweightCopper
         => offset >= ((copcon & 0x0002) == 0 ? 0x080 : ecs ? 0 : 0x040);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static CopperInputPhase ClassifyInput(int physicalHorizontal)
+    private static CopperInputPhase ClassifyInput(int physicalHorizontal, int lineLength)
     {
+        if (lineLength != 227)
+        {
+            // Legacy AgnusCopperDmaPhases: opportunities follow the nominal
+            // counter's low-bit transition, including the real line wrap.
+            var current = (physicalHorizontal + 3) % lineLength;
+            var previous = current == 0 ? lineLength - 1 : current - 1;
+            var toggled = ((previous ^ current) & 1) != 0;
+            return (current & 1) != 0 ? toggled ? CopperInputPhase.Normal : CopperInputPhase.None :
+                toggled ? CopperInputPhase.None : CopperInputPhase.WrapDummy;
+        }
         if (physicalHorizontal == 224)
         {
             return CopperInputPhase.WrapDummy;

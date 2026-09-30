@@ -82,13 +82,13 @@ internal sealed class LightweightSpriteDma
     internal void OnDmaconChanged(
         ushort previous,
         ushort current,
-        long cycle)
+        long cycle, LightweightA500Machine machine)
     {
         var wasEnabled = IsDmaEnabled(previous);
         var enabled = IsDmaEnabled(current);
         if (!wasEnabled && enabled)
         {
-            ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1));
+            ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1), machine);
         }
         else if (wasEnabled && !enabled)
         {
@@ -114,16 +114,16 @@ internal sealed class LightweightSpriteDma
         {
             // A late write changes only a future address input. It cannot
             // recreate a fixed slot that has already passed this line.
-            ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1));
+            ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1), machine);
         }
         PublishNextCycle();
     }
 
     internal void OnFrameStart(long cycle, LightweightA500Machine machine)
     {
-        _firstFieldInputCycle = cycle + FirstFieldInputOffset;
+        _firstFieldInputCycle = cycle + machine.SpriteControlReloadLine * (long)machine.LineCycles + FirstInputHorizontal * 2;
         // Prepare the next field's control reload. No sprite address input is
-        // eligible before the PAL vertical-blank reset line; pointers remain
+        // eligible before the selected vertical-blank reset line; pointers remain
         // available for CPU/Copper rewrites throughout early vertical blank.
         for (var channel = 0; channel < ChannelCount; channel++)
         {
@@ -159,7 +159,7 @@ internal sealed class LightweightSpriteDma
             if (IsDmaEnabled(machine.Dmacon))
             {
                 TryAcceptInput(cycle, machine);
-                ScheduleInputAfter(cycle);
+                ScheduleInputAfter(cycle, machine);
             }
         }
 
@@ -367,19 +367,19 @@ internal sealed class LightweightSpriteDma
         _nextInputCycle = long.MaxValue;
         if (!_beamHeld)
         {
-            _firstFieldInputCycle = (cycle & ~1L) - machine.BeamColorClock * 2 + Math.Max(0, PalControlReloadLine - machine.BeamLine) *
-                LightweightClock.CpuCyclesPerLine + FirstInputHorizontal * 2;
+            _firstFieldInputCycle = (cycle & ~1L) - machine.BeamColorClock * 2 + Math.Max(0, machine.SpriteControlReloadLine - machine.BeamLine) *
+                machine.LineCycles + FirstInputHorizontal * 2;
             if (IsDmaEnabled(machine.Dmacon))
-                ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1));
+                ScheduleInputAfter(Math.Max(cycle, _firstFieldInputCycle - 1), machine);
         }
         PublishNextCycle();
     }
 
-    private void ScheduleInputAfter(long cycle)
+    private void ScheduleInputAfter(long cycle, LightweightA500Machine machine)
     {
         if (_beamHeld) return;
         var candidate = LightweightBusArbiter.AlignToSlot(cycle + 1);
-        var horizontal = LightweightBusArbiter.GetHorizontal(candidate - _beamOffset);
+        var horizontal = machine.IsEcsAgnus ? (int)((candidate - machine.LineStartCycle) / 2 % machine.ColorClocksPerLine) : LightweightBusArbiter.GetHorizontal(candidate - _beamOffset);
         var lineStart = candidate -
             ((long)horizontal * LightweightClock.CpuCyclesPerColorClock);
         var inputHorizontal = Math.Max(horizontal, FirstInputHorizontal);
@@ -389,7 +389,7 @@ internal sealed class LightweightSpriteDma
         }
         if (inputHorizontal > LastInputHorizontal)
         {
-            lineStart += LightweightClock.CpuCyclesPerLine;
+            lineStart += machine.LineCycles;
             inputHorizontal = FirstInputHorizontal;
         }
 

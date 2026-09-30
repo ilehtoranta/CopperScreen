@@ -26,6 +26,82 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
             new[] { "--profile", "lightweight-a500-kickstart13", "--engine", "Lightweight", "--rom", _rom }.Concat(extra).ToArray(),
             AppContext.BaseDirectory);
 
+    [Fact]
+    public void ProgrammableRasterWithPalDimensionsRemainsUncropped()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.Chipset = new(DmaChipModel.Agnus8375Pal2M, DisplayChipModel.OcsDenise, VideoStandard.Pal);
+        draft.ChipRamKb = 2048; draft.PseudoFastRamKb = 0;
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        var cycle = session.Machine.Cpu.Cycles;
+        session.Machine.WriteWord(0xDFF1DC, 0x80, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
+        session.Machine.Cpu.Cycles = cycle;
+        session.RenderNextFrame(session.Framebuffer);
+        Assert.Equal(908, session.Width); Assert.Equal(626, session.Height);
+        Assert.Equal(new Avalonia.PixelRect(0, 0, 908, 626), session.PresentationGeometry.FullViewport);
+    }
+
+    [Fact]
+    public void NtscCountersPresentTheirVisibleBorderAnd200LineStandardWindow()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.Chipset = new(DmaChipModel.Agnus8375Pal2M, DisplayChipModel.EcsDenise, VideoStandard.Pal);
+        draft.ChipRamKb = 2048; draft.PseudoFastRamKb = 0;
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        var cycle = session.Machine.Cpu.Cycles;
+        session.Machine.WriteWord(0xDFF1DC, 0, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
+        session.Machine.Cpu.Cycles = cycle;
+        session.RenderNextFrame(session.Framebuffer); session.RenderNextFrame(session.Framebuffer);
+        Assert.Equal(1824, session.Width); Assert.Equal(526, session.Height);
+        Assert.False(session.PresentationGeometry.IsPal);
+        Assert.Equal(new Avalonia.PixelRect(392, 42, 1432, 484), session.PresentationGeometry.FullViewport);
+        Assert.Equal(new Avalonia.PixelRect(516, 88, 1280, 400), session.PresentationGeometry.GetCroppedViewport());
+    }
+
+    [Fact]
+    public async Task EcsModeResizePreservesAlreadyLeasedPixelsAndGeometry()
+    {
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        draft.Id = "ecs-display-test";
+        draft.Chipset = new(DmaChipModel.Agnus8375Pal2M, DisplayChipModel.EcsDenise, VideoStandard.Pal);
+        draft.ChipRamKb = 2048; draft.PseudoFastRamKb = 0;
+        var path = CopperScreenProfileStore.Save(draft, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
+        Assert.Equal(DisplayChipModel.EcsDenise, profile.Chipset.DisplayChip);
+        var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        using var runtime = CopperScreenRuntime.CreateForTests(session);
+        long seen = 0;
+        using var old = runtime.TryAcquireNextPresentationFrame(ref seen, force: true);
+        Assert.NotNull(old); Assert.Equal(1816, old.State.FramebufferWidth);
+        var oldPixels = old.Framebuffer.ToArray();
+        // Before starting the worker, the test owns this machine exclusively.
+        var cycle = session.Machine.Cpu.Cycles;
+        void Register(uint r, ushort value) => session.Machine.WriteWord(0xDFF000 + r, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
+        Register(0x1C0, 113); Register(0x1C8, 524); Register(0x1DC, 0x1B80);
+        session.Machine.Cpu.Cycles = cycle;
+        runtime.Start();
+        var deadline = DateTime.UtcNow.AddSeconds(5);
+        var resized = 0;
+        while (resized < 4 && DateTime.UtcNow < deadline)
+        {
+            using var frame = runtime.TryAcquireNextPresentationFrame(ref seen);
+            if (frame is null) { await Task.Delay(10); continue; }
+            Assert.Null(frame.State.FaultMessage);
+            Assert.Equal(frame.State.FramebufferWidth * frame.State.FramebufferHeight, frame.Framebuffer.Length);
+            if (frame.State.FramebufferWidth == 912)
+            {
+                Assert.Equal(1050, frame.State.FramebufferHeight);
+                Assert.Equal(new Avalonia.PixelRect(0, 0, 912, 1050), frame.State.PresentationGeometry.FullViewport);
+                Assert.Equal(2.0, frame.State.PresentationGeometry.GetHorizontalPixelAspect(CopperScreenPixelAspectMode.Lcd));
+                resized++;
+            }
+        }
+        runtime.Stop(); Assert.Equal(4, resized);
+        Assert.Equal(oldPixels, old.Framebuffer); Assert.Equal(1816, old.State.FramebufferWidth);
+        Assert.Equal(626, old.State.FramebufferHeight);
+        Assert.Null(runtime.CurrentState.FaultMessage);
+    }
+
     [Theory]
     [InlineData(0)]
     [InlineData(512)]

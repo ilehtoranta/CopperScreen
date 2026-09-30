@@ -131,14 +131,15 @@ public sealed class Kickstart31Tests : IDisposable
     private static string Hash(ReadOnlySpan<byte> bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 
     [NativeKickstart31HdTheory]
-    [InlineData(0, "OcsAgnus", 512, 512)]
-    [InlineData(0, "OcsAgnus", 512, 0)]
-    [InlineData(2048, "OcsAgnus", 512, 512)]
-    [InlineData(0, "Agnus8372A", 512, 512)]
-    [InlineData(0, "Agnus8372A", 1024, 0)]
-    [InlineData(0, "Agnus8375Pal2M", 1024, 0)]
-    [InlineData(0, "Agnus8375Pal2M", 2048, 0)]
-    public void SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions(int fastKiB, string agnus, int chipKiB, int slowKiB)
+    [InlineData(0, "OcsAgnus", 512, 512, "OcsDenise")]
+    [InlineData(0, "OcsAgnus", 512, 0, "OcsDenise")]
+    [InlineData(2048, "OcsAgnus", 512, 512, "OcsDenise")]
+    [InlineData(0, "Agnus8372A", 512, 512, "OcsDenise")]
+    [InlineData(0, "Agnus8372A", 1024, 0, "OcsDenise")]
+    [InlineData(0, "Agnus8375Pal2M", 1024, 0, "OcsDenise")]
+    [InlineData(0, "Agnus8375Pal2M", 2048, 0, "OcsDenise")]
+    [InlineData(0, "Agnus8375Pal2M", 2048, 0, "EcsDenise")]
+    public void SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions(int fastKiB, string agnus, int chipKiB, int slowKiB, string denise)
     {
         var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_KICKSTART31_ROM")!;
         var original = File.ReadAllBytes(Environment.GetEnvironmentVariable("COPPERSCREEN_WORKBENCH31_HDF")!);
@@ -151,7 +152,7 @@ public sealed class Kickstart31Tests : IDisposable
         {
             KickstartSource = CopperScreenKickstartSource.Kickstart31Rom,
             RomVersion = KickstartVersion.Kickstart31, KickstartRomPath = rom, RealFastRamKb = fastKiB,
-            Chipset = new(Enum.Parse<DmaChipModel>(agnus), DisplayChipModel.OcsDenise, VideoStandard.Pal),
+            Chipset = new(Enum.Parse<DmaChipModel>(agnus), Enum.Parse<DisplayChipModel>(denise), VideoStandard.Pal),
             ChipRamKb = chipKiB, PseudoFastRamKb = slowKiB
         };
         draft.HardDrives.Add(new(0, image, false, 0));
@@ -175,7 +176,8 @@ public sealed class Kickstart31Tests : IDisposable
                     Assert.Equal((uint)(chipKiB * 1024), BinaryPrimitives.ReadUInt32BigEndian(chip.Slice(header + 24)));
                 }
                 // Reviewed Workbench desktop, after the hard disk's own startup script.
-                Assert.Equal("6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1",
+                Assert.Equal(denise == "EcsDenise" ? "4a5ca369709e34dcf61fc6189d2683be8c23df44019c5e645dcce2afd4274945" :
+                    "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1",
                     Hash(MemoryMarshal.AsBytes(session.Machine.Framebuffer.Span)));
             }
             var persisted = File.ReadAllBytes(image);

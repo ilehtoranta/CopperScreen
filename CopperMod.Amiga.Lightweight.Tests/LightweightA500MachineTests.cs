@@ -424,7 +424,7 @@ public sealed class LightweightA500MachineTests
     {
         using var machine = new LightweightA500Machine();
 
-        Assert.Contains("ECS/AGA chipset profiles", LightweightA500Machine.UnsupportedFeatures);
+        Assert.Contains("AGA chipset profiles and A2024 external scan-converter", LightweightA500Machine.UnsupportedFeatures);
         Assert.False(machine.IsAdfMounted);
     }
 

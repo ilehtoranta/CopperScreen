@@ -75,6 +75,9 @@ internal readonly record struct CopperScreenState(
 	int InterlaceField)
 {
 	public string? FaultMessage { get; init; }
+	public int FramebufferWidth { get; init; }
+	public int FramebufferHeight { get; init; }
+	public CopperScreenPresentationGeometry PresentationGeometry { get; init; }
 }
 
 internal sealed class CopperScreenFrameLease : IDisposable
@@ -112,9 +115,9 @@ internal sealed class CopperScreenRuntime : IDisposable
 	private const int MaxFramesPerTick = 5;
 	private const int TargetQueuedPresentationFrames = 1;
 	private const int MaxQueuedPresentationFrames = 2;
-	private const int DisplayFrameMilliseconds = 20;
+	private double DisplayFrameMilliseconds => 1000.0 / _emulator.VideoVBlankHz;
 	private const int MaxSteadyAudioWaitMilliseconds = 5;
-	private readonly long _displayFrameStopwatchTicks;
+	private long _displayFrameStopwatchTicks;
 	private readonly ICopperScreenSession _emulator;
 	private readonly ICopperScreenAudioOutput? _audio;
 	private readonly bool _disposeAudio;
@@ -649,7 +652,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	private void Run()
 	{
-		var nextSilentFrameTime = Environment.TickCount64;
+		double nextSilentFrameTime = Environment.TickCount64;
 		while (_running)
 		{
 			ProcessCommands();
@@ -812,6 +815,8 @@ internal sealed class CopperScreenRuntime : IDisposable
 			var reservedBufferIndex = TryReservePresentationFrameBuffer(
 				presentationQueuedAudioBuffers,
 				out var reservedFrameNumber);
+			if (reservedBufferIndex >= 0 && _frameBuffers[reservedBufferIndex].Length != _emulator.Framebuffer.Length)
+				_frameBuffers[reservedBufferIndex] = new int[_emulator.Framebuffer.Length];
 			var presentationFramebuffer = reservedBufferIndex >= 0
 				? _frameBuffers[reservedBufferIndex]
 				: _emulator.Framebuffer;
@@ -820,6 +825,12 @@ internal sealed class CopperScreenRuntime : IDisposable
 			try
 			{
 				_emulator.RenderNextFrame(presentationFramebuffer);
+				_displayFrameStopwatchTicks = Math.Max(1, (long)Math.Round(Stopwatch.Frequency / _emulator.VideoVBlankHz));
+				if (reservedBufferIndex >= 0 && presentationFramebuffer.Length != _emulator.Framebuffer.Length)
+				{
+					// Only this reserved, unleased slot is replaced. Existing leases retain their pixels and geometry.
+					_frameBuffers[reservedBufferIndex] = _emulator.Framebuffer.ToArray();
+				}
 				while (_emulator.TryTakeHostClipboardText(out var clipboardText))
 					HostClipboardTextChanged?.Invoke(clipboardText);
 				while (_emulator.TryTakeHostClipboardImage(out var clipboardImage) && clipboardImage is not null)
@@ -959,6 +970,8 @@ internal sealed class CopperScreenRuntime : IDisposable
 		}
 
 		var copyStartTimestamp = Stopwatch.GetTimestamp();
+		if (_frameBuffers[nextBuffer].Length != _emulator.Framebuffer.Length)
+			_frameBuffers[nextBuffer] = new int[_emulator.Framebuffer.Length];
 		_emulator.Framebuffer.AsSpan().CopyTo(_frameBuffers[nextBuffer]);
 		_lastPublishCopyMilliseconds = Stopwatch.GetElapsedTime(copyStartTimestamp).TotalMilliseconds;
 		_lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
@@ -1093,7 +1106,12 @@ internal sealed class CopperScreenRuntime : IDisposable
 			_emulator.LastFrameTiming.DisplayMilliseconds,
 			_lastAudioFrameMilliseconds,
 			_emulator.IsInterlaced,
-			_emulator.CompletedInterlaceField) { FaultMessage = _emulator.FaultMessage };
+			_emulator.CompletedInterlaceField)
+		{
+			FaultMessage = _emulator.FaultMessage,
+			FramebufferWidth = _emulator.Width, FramebufferHeight = _emulator.Height,
+			PresentationGeometry = _emulator.PresentationGeometry
+		};
 	}
 
 	private CopperScreenDriveState[] CaptureDriveStates()

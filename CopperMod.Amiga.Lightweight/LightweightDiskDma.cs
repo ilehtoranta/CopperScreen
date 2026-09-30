@@ -79,7 +79,7 @@ internal struct LightweightDiskDma
             // HRM: the last three transmitted bits are lost. Software pads
             // writes with a spare word. Completion belongs to the serializer.
             _writeBitsRemaining = Remaining * 16 - 3;
-            if (DmaEnabled(machine)) ScheduleInput(cycle);
+            if (DmaEnabled(machine)) ScheduleInput(cycle, machine);
             RefreshNextCycle();
         }
     }
@@ -100,7 +100,7 @@ internal struct LightweightDiskDma
         if (!DmaEnabled(machine)) _inputCycle = _writeCycle = long.MaxValue;
         else
         {
-            ScheduleInput(cycle);
+            ScheduleInput(cycle, machine);
             ScheduleWrite(cycle, machine);
         }
         RefreshNextCycle();
@@ -150,7 +150,7 @@ internal struct LightweightDiskDma
                 {
                     _fifo |= (ulong)shift << (_fifoCount * 16);
                     _fifoCount++;
-                    ScheduleInput(cycle);
+                    ScheduleInput(cycle, machine);
                     RefreshNextCycle();
                 }
             }
@@ -195,7 +195,7 @@ internal struct LightweightDiskDma
                     _inputCycle = long.MaxValue;
                     machine.LatchDiskBlock(cycle);
                 }
-                if (Writing && DmaEnabled(machine)) ScheduleInput(cycle);
+                if (Writing && DmaEnabled(machine)) ScheduleInput(cycle, machine);
             }
         }
         if (cycle == _inputCycle)
@@ -217,7 +217,7 @@ internal struct LightweightDiskDma
                 // Agnus accepts an address and increments its pointer here.
                 // Later register writes cannot retarget this accepted word.
                 machine.SetDiskPointerFromDma(_pendingAddress + 2);
-                if (!Writing) ScheduleInput(cycle);
+                if (!Writing) ScheduleInput(cycle, machine);
             }
         }
         if (cycle == _writeCycle) StepWrite(cycle, machine);
@@ -232,15 +232,18 @@ internal struct LightweightDiskDma
         _beamHeld = !machine.BeamSyncRunning;
         _beamOffset = machine.BeamCycleOffset;
         _inputCycle = long.MaxValue;
-        if (!_beamHeld && DmaEnabled(machine)) ScheduleInput(cycle);
+        if (!_beamHeld && DmaEnabled(machine)) ScheduleInput(cycle, machine);
         RefreshNextCycle();
     }
 
-    private void ScheduleInput(long cycle)
+    private void ScheduleInput(long cycle, LightweightA500Machine machine)
     {
         if (_beamHeld || !Active || _inputCycle != long.MaxValue ||
             (Writing ? Remaining == 0 || _fifoCount + (_pendingCounts ? 1 : 0) >= 3 : _fifoCount == 0)) return;
-        _inputCycle = NextInputAfter(cycle - _beamOffset) + _beamOffset;
+        if (!machine.IsEcsAgnus) { _inputCycle = NextInputAfter(cycle - _beamOffset) + _beamOffset; return; }
+        var line = machine.LineStartCycle;
+        _inputCycle = line + 14 > cycle ? line + 14 : line + 18 > cycle ? line + 18 :
+            line + 22 > cycle ? line + 22 : line + machine.LineCycles + 14;
     }
 
     private void ScheduleWrite(long cycle, LightweightA500Machine machine)
@@ -259,7 +262,7 @@ internal struct LightweightDiskDma
             _writeShiftBits = 16;
             _fifo >>= 16;
             _fifoCount--;
-            ScheduleInput(cycle);
+            ScheduleInput(cycle, machine);
         }
         machine.WriteDiskBit(_writeShift >> 15, cycle, (machine.Adkcon & 0x0100) == 0);
         _writeShift <<= 1;

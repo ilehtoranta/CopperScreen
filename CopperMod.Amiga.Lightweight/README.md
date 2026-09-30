@@ -7,7 +7,7 @@ external package. The original package ID and namespace are retained for compati
 The CPU dependency is the public mainline Copper68k `1.5.0` release. See
 [package and consumer verification](../docs/engine/COPPER68K_MAINLINE_1_5_0.md).
 
-Independent PAL A500 engine with OCS Denise: Copper68k accurate 68000,
+Independent PAL A500 engine with OCS 8362 or ECS 8373 Denise: Copper68k accurate 68000,
 configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
 (v40.63), one to four standard
 880 KiB ADF/read-only IPF drives (including selected ZIP entries through the host/runner),
@@ -59,8 +59,21 @@ select one of the implemented PAL memory layouts:
 
 Construction rejects other combinations. Model/size changes require a new machine.
 ECS Agnus choices include widened DMA addressing, PAL chip identification,
-extended blitter sizes and Copper danger access. All retain OCS Denise and fixed
-PAL timing; programmable beam modes, DIWHIGH and blitter DOFF report unsupported.
+extended blitter sizes, Copper danger access and DOFF output suppression.
+`DeniseModel` selects `Mos8362` (default) or `Mos8373`. ECS display adds SuperHires,
+DIWHIGH, border/genlock controls and programmable beam, blank and sync registers.
+The desktop and runner preserve all SuperHires samples at an initial width of
+1816 pixels. `--denise 8373` selects it in the runner; Settings > Memory provides
+the separate Denise choice. Framebuffer dimensions can change after a guest mode
+switch; query width/height for each completed field. Buffers are reused at a
+stable geometry and reallocated only when its size changes. The host retains
+dimensions and geometry with each leased frame and follows the guest cadence.
+PAL is the board/oscillator selection; guest BEAMCON0 can select NTSC display
+counter geometry without changing the oscillator. Native stock PAL SuperHires
+(progressive/interlaced), guest-programmed NTSC SuperHires and a programmed
+640x480 raster have coverage. Stock NTSC/VGA monitor launchers are absent from
+the supplied media; see
+[ECS implementation and verification boundaries](../docs/engine/ECS_DISPLAY_2026-10-01.md).
 The 8375 model names a specific 2 MiB part because other 8375 variants differ.
 See [implementation, native memory discovery and verification limits](../docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
 
@@ -78,7 +91,7 @@ Electrical edge cases and broader write-only readback remain unverified.
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full
-raster and 48 kHz stereo PCM. Full ECS display modes, AGA, additional CPU/ROM profiles, RTC, RTG, physical
+raster and 48 kHz stereo PCM. AGA, A2024 external scan conversion, additional CPU/ROM profiles, RTC, RTG, physical
 IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
 
@@ -90,6 +103,10 @@ Use the public `LightweightA500Machine` API to load a ROM, mount/eject floppy
 bytes, submit input, reset and execute frames. Read `Framebuffer` and
 `AudioSamples` from their reusable buffers before executing the next frame.
 The engine is single-owner; marshal UI input onto its execution thread.
+ECS digital genlock keys are retained in framebuffer alpha; `SetExternalBlank`
+supplies a digital blank input. Physical genlock synchronization and analog
+monitor behavior remain outside the model. Programmable horizontal/vertical
+sync assertions are exposed for diagnostic callers.
 Host presentation, pacing and audio-device delivery remain outside this library.
 ERSY without an external HSYNC source now holds the beam while CPU/device time
 continues. `BeamSyncRunning` exposes that state. During lost sync, output delivery
