@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-30",
+  "scope": "Native A500 Kickstart 3.1 desktop boot; PAL OCS, 68000, 512 KiB Chip + 512 KiB slow",
+  "baseRevision": "e895b423988f7785e37f11e0752d42f7dc2126e3",
+  "copper68k": "1.5.0",
+  "sourceSha256": {
+    "CopperScreen.Lightweight.Tests/CopperScreenLightweightSessionTests.cs": "3469abef332e86b8345169084c8fd2bff5c7875691b978da6a52ff95cf0fde32",
+    "CopperScreen.Lightweight.Tests/Kickstart31Tests.cs": "0646a6c9cccf027fed778192485c4d0e4ac824d97fbd2d9443a7d2bcdbc7c60f",
+    "CopperScreen.Lightweight.Tests/SettingsWorkflowTests.cs": "f781f9e72fcffdae940a9776ef30c56ba35369142dfd56c6125f32409886c7c4",
+    "CopperScreen/CopperScreenAvailability.cs": "bf8cc20820b246534d4cc2c482a056ed37c764b068a40e7beb3de74f01ec70c6",
+    "CopperScreen/CopperScreenKickstartRomArchive.cs": "24bf8a7e01232f3e24cf0ccd8da5a3008028a08ad8dcc6db4a6d3022e473857d",
+    "CopperScreen/CopperScreenLightweightSession.cs": "37c26fcd13bc4c8d97b57eaf1241fe9b8a39e262a134c0a7bc70d6ac14173b63",
+    "CopperScreen/CopperScreenProfile.cs": "cd46c9deb666b07402cf1e79233a3c883ef206f967cff7a00a53c675520611e5",
+    "CopperScreen/MainWindow.SettingsUx.cs": "cdd714df0c7f94a22822de5db19e20af31832a0b977edc5ded41958d0991540c",
+    "CopperScreen/MainWindow.Shell.cs": "6040c43344e96ea2e596cc4c5dcc52b35676ab3874607635a71223365df81f97",
+    "CopperScreen/MainWindow.cs": "ea10804da5c2a68589a48200aa7031b03d881becb588bf0c14e45ed4fb7c7a96",
+    "CopperScreen/Profiles/a500-kickstart31-host-exec.json": "40ffe49e768db18caef901f16fef4518c0f2ec8da678a2c4f41558ac1bb1d2b6",
+    "CopperScreen/Profiles/lightweight-a500-kickstart31.json": "e39a347b3145470f506b9c4b14be5d90709a7582d85c2dcf38c66f97923ccd51"
+  },
+  "inputs": {
+    "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+    "romBytes": 524288,
+    "romVersion": 40,
+    "romRevision": 63,
+    "media": [
+      {
+        "label": "Workbench",
+        "archive": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].zip",
+        "archiveSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+        "member": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].adf",
+        "bytes": 901120,
+        "sha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985"
+      },
+      {
+        "label": "Install",
+        "archive": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 1 of 6)(Install)[!].zip",
+        "archiveSha256": "e320dbbcb2b8e34da7d3e37a2953c623c26755191a74c2512169b2e6f81f2e78",
+        "member": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 1 of 6)(Install)[!].adf",
+        "bytes": 901120,
+        "sha256": "8f54e735925d733719a321a0ddabd8fd6d1c1c3d3c0a516ed6b77dee89ac9e1e"
+      }
+    ]
+  },
+  "artifactsDirectory": "artifacts/kickstart31-2026-09-30",
+  "checks": {
+    "productionBuild": {
+      "configuration": "Release",
+      "passed": true,
+      "warnings": 0,
+      "errors": 0
+    },
+    "engineTests": {
+      "passed": 802,
+      "skipped": 0,
+      "failed": 0,
+      "isolatedArtifacts": "artifacts/diagnostic-tests"
+    },
+    "hostTestsWithoutNativeInputs": {
+      "passed": 124,
+      "skippedEntries": 4,
+      "failed": 0,
+      "unavailableCoverage": true
+    },
+    "nativeWorkbench31HostTests": {
+      "passed": 2,
+      "skipped": 0,
+      "failed": 0,
+      "fieldsPerRun": 10000,
+      "fastRamKiB": [
+        0,
+        2048
+      ]
+    },
+    "romOnly": {
+      "fields": 2500,
+      "visual": "Reviewed native v40.063 insert-disk screen",
+      "unsupported": null
+    },
+    "hostVersusRunner": [
+      {
+        "fastRamKiB": 0,
+        "filesCompared": 55,
+        "mismatches": [],
+        "nativePixelsSha256": "aae907938c788bd6f3f29521d2f3fffccc5ee4db0acc0634b19bc024080dd84f"
+      },
+      {
+        "fastRamKiB": 2048,
+        "filesCompared": 77,
+        "mismatches": [],
+        "nativePixelsSha256": "aae907938c788bd6f3f29521d2f3fffccc5ee4db0acc0634b19bc024080dd84f"
+      }
+    ],
+    "normalVersusScalar": {
+      "fastRamKiB": 2048,
+      "filesCompared": 77,
+      "mismatches": []
+    }
+  },
+  "workbenchFinal": [
+    {
+      "fastRamKiB": 0,
+      "fields": 10000,
+      "cycle": 1420928790,
+      "pc": "00F81476",
+      "cpu": "D7BCA7429FCCC260",
+      "hardware": "18FD68C296B84D17",
+      "output": "758813F715A5D5FF",
+      "unsupported": null
+    },
+    {
+      "fastRamKiB": 2048,
+      "fields": 10000,
+      "cycle": 1420928894,
+      "pc": "00F81476",
+      "cpu": "88D60A4B41B0DF08",
+      "hardware": "092BBD8F1E3E6F57",
+      "output": "C232D443E084AD18",
+      "fastRamBase": "00200000",
+      "unsupported": null
+    }
+  ],
+  "engineOrCpuExecutionChanged": false,
+  "performanceAcceptance": false,
+  "unverified": [
+    "Workbench installation",
+    "Native 3.1 hard-disk persistence",
+    "Native applications and interactive window controls",
+    "Accelerator/3.1 combinations",
+    "ECS/AGA",
+    "68060 OS/FPU compatibility"
+  ],
+  "sourceHashFormat": "SHA-256 of UTF-8 files with CRLF normalized to LF"
+}

@@ -4,6 +4,7 @@
  */
 
 using System.IO.Compression;
+using System.Buffers.Binary;
 
 namespace CopperScreen;
 
@@ -12,12 +13,25 @@ internal static class CopperScreenKickstartRomArchive
 	private const long MaximumRomImageSize = 16 * 1024 * 1024;
 	private static readonly string[] RomExtensions = [".rom", ".bin", ".kick"];
 
-	internal static byte[] ReadNative13Rom(string path, CopperScreenKickstartSource source, KickstartVersion version)
+	internal static byte[] ReadNativeRom(string path, CopperScreenKickstartSource source, KickstartVersion version)
 	{
 		var rom = ReadRomImage(path, source, version);
-		if (rom.Length != 262144 || rom[12] != 0 || rom[13] != 34)
-			throw new NotSupportedException("Choose a native 256 KiB Kickstart 1.3 (v34) ROM.");
+		var actual = IdentifyNativeVersion(rom);
+		if (actual != version ||
+			(source == CopperScreenKickstartSource.Kickstart13Rom && actual != KickstartVersion.Kickstart13) ||
+			(source == CopperScreenKickstartSource.Kickstart31Rom && actual != KickstartVersion.Kickstart31))
+			throw new NotSupportedException("The ROM does not match the selected Kickstart version. Choose Kickstart 1.3 or A500 Kickstart 3.1 in Settings.");
 		return rom;
+	}
+
+	internal static KickstartVersion IdentifyNativeVersion(ReadOnlySpan<byte> rom)
+	{
+		if (rom.Length == 262144 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 34)
+			return KickstartVersion.Kickstart13;
+		if (rom.Length == 524288 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 40 &&
+			BinaryPrimitives.ReadUInt16BigEndian(rom[14..]) == 63)
+			return KickstartVersion.Kickstart31;
+		throw new NotSupportedException("Choose native Kickstart 1.3 (256 KiB, v34) or A500/A600/A2000 Kickstart 3.1 (512 KiB, v40.63). Other machine ROMs are unavailable.");
 	}
 
 	public static byte[] ReadRomImage(

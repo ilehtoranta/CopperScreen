@@ -128,7 +128,7 @@ internal sealed partial class MainWindow
     {
         var content = new StackPanel { Spacing = 16, MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
         content.Children.Add(new TextBlock { Text = "Your Amiga starts here", FontSize = 26, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
-        content.Children.Add(new TextBlock { Text = "Choose a Kickstart 1.3 ROM and an optional disk image to start your Amiga 500.", TextWrapping = TextWrapping.Wrap, Foreground = MutedText, FontSize = 15 });
+        content.Children.Add(new TextBlock { Text = "Choose a Kickstart 1.3 or A500 3.1 ROM and an optional disk image to start your Amiga 500.", TextWrapping = TextWrapping.Wrap, Foreground = MutedText, FontSize = 15 });
         var setup = CreatePanelButton("Set up Amiga…", ShowSettingsWindow);
         MakePrimary(setup);
         setup.HorizontalAlignment = HorizontalAlignment.Left;

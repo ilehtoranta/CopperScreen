@@ -14,7 +14,8 @@ internal enum CopperScreenKickstartSource
 	CopperStart,
 	KickstartRom,
 	Kickstart13Rom,
-	DiagRom
+	DiagRom,
+	Kickstart31Rom
 }
 
 internal sealed class CopperScreenProfile
@@ -181,6 +182,7 @@ internal sealed class CopperScreenProfile
 		{
 			CopperScreenKickstartSource.CopperStart => current.ExpansionRamSize == 0 ? "vanilla-copperstart" : "expanded-copperstart",
 			CopperScreenKickstartSource.DiagRom => "expanded-diagrom",
+			CopperScreenKickstartSource.Kickstart31Rom => "lightweight-a500-kickstart31",
 			_ => current.ExpansionRamSize == 0 ? "vanilla-kickstart13" : "expanded-kickstart13"
 		};
 		return TryLoad(id, baseDirectory, out profile, out error);
@@ -468,6 +470,7 @@ internal sealed class CopperScreenProfile
 			"copperstart" => CopperScreenKickstartSource.CopperStart,
 			"kickstartrom" or "kickstart" or "rom" => CopperScreenKickstartSource.KickstartRom,
 			"kickstart13rom" or "kickstart13" => CopperScreenKickstartSource.Kickstart13Rom,
+			"kickstart31rom" or "kickstart31" => CopperScreenKickstartSource.Kickstart31Rom,
 			"diagrom" or "diagromv2" => CopperScreenKickstartSource.DiagRom,
 			_ => throw new InvalidOperationException($"Unsupported kickstart source '{source}'.")
 		};

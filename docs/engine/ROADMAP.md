@@ -34,7 +34,7 @@ for the implemented four-drive read support; verification boundaries remain expl
 | 68040 JIT | Package requires a JIT-capable bus; Lightweight does not implement it. | JIT bus/snapshot/invalidation integration and parity are separate work. |
 | 68060 | Distinct integer-focused diagnostic core implemented; desktop unavailable because native Kickstart 1.3 task/FPU frames are incompatible. | Add and validate 060-aware OS support, FPU arithmetic, MMU and remaining instruction/exception conformance. See [exact blocker](CPU_OPTIONS_030_040_060_2026-09-27.md). |
 | RAM and expansion | Fixed 512 KiB Chip + 512 KiB slow, plus optional 512 KiB–8 MiB CPU-only Zorro II Fast RAM. Native Autoconfig, settings, saved profiles and runner selection are implemented; see [validation](FAST_RAM_2026-09-27.md). | Broader Chip/slow layouts, Zorro III or 32-bit accelerator-local memory and their model-specific timing remain separate work. |
-| Other Kickstarts / Workbench | Host explicitly validates native KS 1.3; low-level ROM loading alone does not establish another machine profile. | ROM mapping/version validation, reset/overlay and native boot/application replay for each supported ROM/profile. Native ROM executes OS services; broad Workbench support does not require reimplementing those services in CopperStart. |
+| Other Kickstarts / Workbench | Native KS 1.3 and A500 KS 3.1 (512 KiB, v40.63) are available in the desktop. Default 68000 Workbench 3.1 floppy boot passes with 0 and 2 MiB Fast RAM; see [native boot evidence](KICKSTART_31_2026-09-30.md). | Broaden native application, storage and CPU/ROM combinations. Validate each additional ROM/machine profile separately. Native ROM executes OS services. |
 | Hard disk / HDF | CopperHDF virtual Zorro II interface ported from pinned Legacy, with file-backed persistence, RDB/partition metadata, host settings and native OFS cold boot without DF0. | Complete storage acceptance; additional filesystems need supplied handlers. Physical IDE/SCSI and host directories are outside this milestone. See [interface/evidence](STORAGE.md). |
 | Keyboard and controllers | Keyboard startup/recovery, physical keys/Caps Lock/A500 reset and CIA serial/CNT/port modes are implemented; see [the evidence and remaining accuracy boundaries](KEYBOARD_CIA.md). Ideal paddle counters and a light-pen latch are available. Mouse is allowed on the first port only. | Verify MCU/electrical and CIA pipeline timing; configurable port routing and broader native controls coverage remain. CD32/paddles/light pen/adapters are separate peripheral scopes. |
 | Paula serial / parallel ports | Paula UART transmit/receive, status, interrupts, break and pin API implemented. General parallel transport and CIA pin modes remain separate gaps. | Complete UART physical phase verification; add optional host transports separately. |
@@ -84,8 +84,9 @@ to other previously implemented features such as drives and hard disks.
    Finish IPF protection/native compatibility and the separate 1% performance
    gate for the implemented CopperHDF/ADF/IPF candidate. Avoid tying ordinary
    storage usability to completion of AGA.
-3. **Add configurable machine resources.** Zorro II Fast RAM is implemented. Extend
-   Chip/slow layouts, newer ROM profiles and NTSC timing.
+3. **Add configurable machine resources.** Zorro II Fast RAM and native A500
+   Kickstart 3.1 are implemented. Extend Chip/slow layouts, additional ROM profiles
+   and NTSC timing.
    Integrate 68010 as the smaller CPU-model step, while retaining 68000 regressions.
 4. **Deliver an ECS profile.** Treat Agnus and Denise revisions explicitly; add
    ECS registers/modes and verify native ECS use. Some memory/timing work in step 3

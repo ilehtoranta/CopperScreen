@@ -2408,7 +2408,7 @@ internal sealed partial class MainWindow : Window
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? "Kickstart 1.3 ROM selected.";
+			_romValidation.Text = romError ?? (draft.RomVersion == KickstartVersion.Kickstart31 ? "A500 Kickstart 3.1 ROM selected." : "Kickstart 1.3 ROM selected.");
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
 			error = unavailable ?? romError ?? string.Empty;
 			return error.Length == 0;
@@ -2559,6 +2559,7 @@ internal sealed partial class MainWindow : Window
 			draft.RomVersion = kickstartSource switch
 			{
 				CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.Kickstart13Rom => KickstartVersion.Kickstart13,
+				CopperScreenKickstartSource.Kickstart31Rom => KickstartVersion.Kickstart31,
 				CopperScreenKickstartSource.DiagRom => KickstartVersion.Kickstart20,
 				_ => draft.RomVersion
 			};
@@ -3091,6 +3092,7 @@ internal sealed partial class MainWindow : Window
 		{
 			string source when string.Equals(source, "KickstartRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.KickstartRom,
 			string source when string.Equals(source, "Kickstart13Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart13Rom,
+			string source when string.Equals(source, "Kickstart31Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart31Rom,
 			string source when string.Equals(source, "DiagRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.DiagRom,
 			_ => CopperScreenKickstartSource.CopperStart
 		};

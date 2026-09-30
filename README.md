@@ -7,7 +7,7 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 
 - PAL OCS A500 with a Motorola 68000 by default; experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
 - 512 KiB Chip RAM and 512 KiB slow RAM, with optional 512 KiB–8 MiB Autoconfig Fast RAM.
-- Native Kickstart 1.3 ROM, supplied by the user.
+- Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
 - One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery and native Kickstart 1.3 OFS boot. See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
@@ -44,8 +44,15 @@ dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_1
 ```
 
 Starting without arguments opens Settings. Choose your ROM and disk image there.
+Browse identifies native 1.3/3.1 ROMs and selects the matching Kickstart choice.
+For native 3.1 from the command line, select its profile explicitly:
+
+```powershell
+dotnet run --project CopperScreen -c Release -- --profile lightweight-a500-kickstart31 --rom "path/to/kickstart-3.1-a500.rom" "path/to/Workbench31.adf"
+```
+
 CPU changes require restarting the emulated machine. The 020 choices use the
-existing OCS/RAM/Kickstart 1.3 profile; they do not select an A1200 or AGA machine.
+existing OCS/RAM profile with the selected native ROM; they do not select an A1200 or AGA machine.
 Settings > Memory accepts Fast RAM sizes 0, 512, 1024, 2048, 4096 or 8192 KiB.
 Kickstart assigns the address; size changes require restarting the machine.
 The runner accepts `--fast-ram-kib` with the same sizes.

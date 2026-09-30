@@ -11,6 +11,11 @@ For the broader ECS/AGA, CPU, storage and host transition, see the
 [product completion roadmap](ROADMAP.md), which separates missing implementation
 from verification and integration work.
 
+Native A500 Kickstart 3.1 (v40.63) is available as of 2026-09-30, with bounded
+68000 Workbench 3.1 floppy boot and desktop-session parity at 0 and 2 MiB Fast RAM.
+See [the boot record](KICKSTART_31_2026-09-30.md). This does not resolve the 68060
+OS/FPU validation requirement or add ECS/AGA machine support.
+
 Native Lemmings gameplay, live digger assignment, disk replacement and a separate
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.
 Hired Guns menu/initial training replays and live music, sound effects and graphics

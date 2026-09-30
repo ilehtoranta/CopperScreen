@@ -25,6 +25,8 @@ internal sealed partial class MainWindow
     private string? _validatedRomPath, _romError;
     private DateTime _validatedRomWriteTime;
     private long _validatedRomLength;
+    private CopperScreenKickstartSource _validatedRomSource;
+    private KickstartVersion _validatedRomVersion;
 
     private static TextBlock SettingsNote(string text) => new()
     {
@@ -38,13 +40,13 @@ internal sealed partial class MainWindow
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
         layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\n512 KiB Chip RAM + 512 KiB slow RAM · optional Fast RAM\nUp to four floppy drives"));
         var form = CreateSettingsGroupForm();
-        _kickstartRomBox = new TextBox { PlaceholderText = "Choose your Kickstart 1.3 ROM", MinWidth = 0 };
+        _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3 or A500 3.1 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
         var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
         AutomationProperties.SetName(browse, "Browse for Kickstart ROM");
         form.Children.Add(CreateSettingsRow("Kickstart ROM", WithAction(_kickstartRomBox, browse)));
-        AutomationProperties.SetName(_kickstartRomBox, "Kickstart 1.3 ROM path");
-        _romValidation = SettingsNote("Choose a Kickstart 1.3 ROM to continue.");
+        AutomationProperties.SetName(_kickstartRomBox, "Kickstart ROM path");
+        _romValidation = SettingsNote("Choose a Kickstart 1.3 or A500 3.1 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
         _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, IPF or ZIP", MinWidth = 0 };
@@ -60,7 +62,7 @@ internal sealed partial class MainWindow
         layout.Children.Add(CreateSettingsGroup("ROM and disk", form));
 
         var options = CreateSettingsGroupForm();
-        _kickstartSourceBox = AddComboSetting(options, "Kickstart", ["Kickstart13Rom", "KickstartRom", "CopperStart", "DiagRom"]);
+        _kickstartSourceBox = AddComboSetting(options, "Kickstart", ["Kickstart13Rom", "Kickstart31Rom", "KickstartRom", "CopperStart", "DiagRom"]);
         _engineBox = AddComboSetting(options, "Engine", ["Lightweight", "Legacy"]);
         _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"]);
         options.Children.Add(SettingsNote("Greyed choices are planned and not yet available. They cannot be selected."));
@@ -287,26 +289,45 @@ internal sealed partial class MainWindow
     {
         var files = await _settingsWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = "Choose Kickstart 1.3 ROM", AllowMultiple = false,
+            Title = "Choose Kickstart 1.3 or A500 3.1 ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Kickstart ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
         var path = files.FirstOrDefault()?.TryGetLocalPath();
-        if (path != null) _kickstartRomBox.Text = path;
+        if (path == null) return;
+        _kickstartRomBox.Text = path;
+        try
+        {
+            var selectedVersion = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) switch
+            {
+                CopperScreenKickstartSource.Kickstart13Rom => KickstartVersion.Kickstart13,
+                CopperScreenKickstartSource.Kickstart31Rom => KickstartVersion.Kickstart31,
+                _ => _settingsDraft.RomVersion
+            };
+            var rom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, selectedVersion);
+            _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
+            _kickstartSourceBox.SelectedItem = _settingsDraft.RomVersion == KickstartVersion.Kickstart31 ? "Kickstart31Rom" : "Kickstart13Rom";
+            UpdateSettingsStatus();
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
+        { SetSettingsError(ex.Message); }
     }
 
     private string? ValidateSelectedRom(CopperScreenSettingsDraft draft)
     {
         var path = draft.ToStartupOptions(AppContext.BaseDirectory).KickstartRomPath;
-        if (string.IsNullOrWhiteSpace(path)) return "Choose a Kickstart 1.3 ROM to continue.";
-        if (!File.Exists(path)) return "ROM file not found. Choose an existing Kickstart 1.3 ROM.";
+        if (string.IsNullOrWhiteSpace(path)) return "Choose a Kickstart 1.3 or A500 3.1 ROM to continue.";
+        if (!File.Exists(path)) return "ROM file not found. Choose an existing Kickstart 1.3 or A500 3.1 ROM.";
         var info = new FileInfo(path);
-        if (_validatedRomPath == path && _validatedRomWriteTime == info.LastWriteTimeUtc && _validatedRomLength == info.Length) return _romError;
+        if (_validatedRomPath == path && _validatedRomWriteTime == info.LastWriteTimeUtc && _validatedRomLength == info.Length &&
+            _validatedRomSource == draft.KickstartSource && _validatedRomVersion == draft.RomVersion) return _romError;
         _validatedRomPath = path;
         _validatedRomWriteTime = info.LastWriteTimeUtc;
         _validatedRomLength = info.Length;
+        _validatedRomSource = draft.KickstartSource;
+        _validatedRomVersion = draft.RomVersion;
         try
         {
-            _ = CopperScreenKickstartRomArchive.ReadNative13Rom(path, draft.KickstartSource, draft.RomVersion);
+            _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion);
             _romError = null;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)

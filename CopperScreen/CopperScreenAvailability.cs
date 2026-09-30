@@ -24,7 +24,7 @@ internal static class CopperScreenAvailability
     {
         "Engine" => value == "Lightweight",
         "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040",
-        "Kickstart" => value is "KickstartRom" or "Kickstart13Rom",
+        "Kickstart" => value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
     };
@@ -42,7 +42,8 @@ internal static class CopperScreenAvailability
         "AccurateM68060" => "Motorola 68060 (requires 060 OS support)",
         "JitM68040" => "Motorola 68040 (JIT)",
         "Kickstart13Rom" => "Kickstart 1.3 ROM",
-        "KickstartRom" => "Native Kickstart ROM (1.3)",
+        "Kickstart31Rom" => "Kickstart 3.1 ROM (A500)",
+        "KickstartRom" => "Native Kickstart ROM (1.3 or A500 3.1)",
         "DiagRom" => "Diagnostic ROM",
         "KeyboardJoystick" => "Keyboard joystick",
         _ => value

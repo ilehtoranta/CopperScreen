@@ -8,10 +8,17 @@ The CPU dependency is the public mainline Copper68k `1.5.0` release. See
 [package and consumer verification](../docs/engine/COPPER68K_MAINLINE_1_5_0.md).
 
 Independent PAL OCS A500 engine: Copper68k accurate 68000, 512 KiB Chip RAM,
-512 KiB slow RAM, native 256 KiB Kickstart 1.3 (v34), one to four standard
+512 KiB slow RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
+(v40.63), one to four standard
 880 KiB ADF/read-only IPF drives (including selected ZIP entries through the host/runner),
 and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
+
+The desktop validates both ROM shapes and provides the `lightweight-a500-kickstart31`
+profile. The existing ROM window maps 3.1 at `$F80000` and exposes reset vectors
+through the low-memory overlay. Native ROM code executes Exec and DOS services.
+Workbench 3.1 floppy boot is verified on the default 68000 with 0 and 2 MiB Fast RAM;
+see [boot evidence and limits](../docs/engine/KICKSTART_31_2026-09-30.md).
 
 `LightweightA500Configuration.FastRamBytes` adds optional CPU-only Zorro II RAM:
 0 (default), 512 KiB, 1, 2, 4 or 8 MiB. Native Kickstart Autoconfig assigns the

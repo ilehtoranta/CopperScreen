@@ -19,7 +19,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         Validate(options);
         // Media decoding is mount-time only; none of the old execution machinery is created.
-        var rom = CopperScreenKickstartRomArchive.ReadNative13Rom(options.KickstartRomPath!,
+        var rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
@@ -81,11 +81,13 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040) ||
-            p.KickstartSource is not (CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.KickstartRom) ||
-            p.KickstartVersion != KickstartVersion.Kickstart13)
-            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 or experimental 68EC020/68020/68030/68040 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 / one to four floppy drives; no RTC or RTG. The 68060 requires 060-aware OS task/FPU support and cannot boot the current Kickstart 1.3 profile.");
+            p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom) ||
+            p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31) ||
+            (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
+            (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
+            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 or experimental 68EC020/68020/68030/68040 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
-            throw new NotSupportedException("Choose your Kickstart 1.3 ROM in Settings > Setup, or supply --kickstart <path>.");
+            throw new NotSupportedException("Choose your Kickstart 1.3 or A500 3.1 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
         if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
             throw new NotSupportedException("Fast RAM supports 0, 512, 1024, 2048, 4096 or 8192 KiB.");
         if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.A500RealFastRamBase)

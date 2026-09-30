@@ -16,6 +16,7 @@ public sealed class SettingsWorkflowTests
     [InlineData("CPU backend", "JitM68040", false)]
     [InlineData("Kickstart", "CopperStart", false)]
     [InlineData("Kickstart", "DiagRom", false)]
+    [InlineData("Kickstart", "Kickstart31Rom", true)]
     [InlineData("Connected", "1", true)]
     [InlineData("Connected", "2", true)]
     [InlineData("Connected", "3", true)]
@@ -46,6 +47,7 @@ public sealed class SettingsWorkflowTests
     {
         var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory);
         Assert.Contains(profiles, profile => profile.Id == "lightweight-a500-kickstart13" && profile.IsAvailable);
+        Assert.Contains(profiles, profile => profile.Id == "lightweight-a500-kickstart31" && profile.IsAvailable);
         var future = Assert.Single(profiles, profile => profile.Id == "expanded-m68040-jit-kickstart31-rtg");
         Assert.False(future.IsAvailable);
         Assert.Contains("Not yet available", future.ToString());

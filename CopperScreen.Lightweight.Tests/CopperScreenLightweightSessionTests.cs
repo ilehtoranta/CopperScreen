@@ -292,9 +292,9 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     {
         var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
         draft.KickstartSource = Enum.Parse<CopperScreenKickstartSource>(source);
-        draft.RomVersion = KickstartVersion.Kickstart31;
+        draft.RomVersion = KickstartVersion.Kickstart30;
         var options = draft.ToStartupOptions(_directory);
-        Assert.Equal(KickstartVersion.Kickstart31, options.Profile.KickstartVersion);
+        Assert.Equal(KickstartVersion.Kickstart30, options.Profile.KickstartVersion);
         Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(options));
     }
 
@@ -645,16 +645,16 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     [Fact]
     public void RomPickerValidationUsesTheSameFormatChecksAsStartup()
     {
-        Assert.Equal(File.ReadAllBytes(_rom), CopperScreenKickstartRomArchive.ReadNative13Rom(_rom,
+        Assert.Equal(File.ReadAllBytes(_rom), CopperScreenKickstartRomArchive.ReadNativeRom(_rom,
             CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart13));
         var wrong = Path.Combine(_directory, "wrong.rom");
         File.WriteAllBytes(wrong, new byte[1024]);
-        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNative13Rom(wrong,
+        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(wrong,
             CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart13));
         var bytes = File.ReadAllBytes(_rom);
         bytes[13] = 40;
         File.WriteAllBytes(wrong, bytes);
-        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNative13Rom(wrong,
+        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(wrong,
             CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart13));
     }
 

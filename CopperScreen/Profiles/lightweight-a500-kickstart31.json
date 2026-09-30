@@ -1,0 +1,16 @@
+{
+  "id": "lightweight-a500-kickstart31",
+  "displayName": "Lightweight A500 + Kickstart 3.1",
+  "description": "PAL OCS, 512 KiB Chip + 512 KiB slow, native A500 Kickstart 3.1 (v40.63). Supply your ROM and Workbench disks. Optional Fast RAM and CopperHDF are available in Settings.",
+  "machine": {
+    "model": "A500PAL",
+    "chipRamKb": 512,
+    "pseudoFastRamKb": 512,
+    "pseudoFastBase": "$C00000",
+    "rtcEnabled": false,
+    "floppyDriveCount": 1
+  },
+  "cpu": { "backend": "AccurateM68000" },
+  "kickstart": { "source": "Kickstart31Rom", "version": "3.1" },
+  "audio": { "floppyDriveSounds": { "enabled": false, "mode": "synthetic" } }
+}
