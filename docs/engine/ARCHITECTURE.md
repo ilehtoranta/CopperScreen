@@ -54,11 +54,14 @@ preceding-CCK/idle policy is a bounded digital model, with physical uncertaintie
 listed in the [Tower Assault record](TOWER_ASSAULT_INVESTIGATION.md).
 
 DMA RAM helpers use direct big-endian word access after masking to an even offset
-inside the constructor-enforced 512 KiB array. This preserves the same completed
-bus phase and byte contents, with no observer between the former two byte stores.
-The fixed-size invariant and its boundary tests are documented in the
-[word-access optimization](DMA_WORD_ACCESS_2026-09-23.md); changing supported RAM
-sizes requires reviewing that access proof. CPU memory decoding is separate.
+and checking the fitted bank. Validated layouts guarantee both bytes are present;
+unfitted banks return `$FFFF` and ignore writes. ECS 512 KiB Chip/512 KiB slow
+wiring permits DMA A19 to select the slow bank. No observer runs between word
+bytes and the accepted output phase is unchanged. The original fixed-size proof
+is historical [word-access evidence](DMA_WORD_ACCESS_2026-09-23.md); current bank,
+boundary and upper-address coverage is in the [Agnus record](AGNUS_CHIP_RAM_2026-10-01.md).
+CPU memory decoding is separate. Device pointer masks are fixed at construction,
+without per-transfer model selection or added execution diagnostics.
 
 Optional Zorro II Fast RAM is CPU-only storage in the `$200000–$9FFFFF` expansion
 window. One Autoconfig chain exposes the memory board before CopperHDF; native
@@ -152,15 +155,27 @@ including internal cycles after the final bus access. A CPU already beyond the
 field target must not leave hardware unable to complete that field (LWA-EXEC-001).
 Preserve refresh/contention and every CPU bus operation when simplifying waits.
 
-The supported product profile has 512 KiB Chip RAM and 512 KiB slow RAM at
-`$C00000`, native 256 KiB Kickstart 1.3 and reset overlay vectors. Slow RAM is not
-true fast RAM. Low-level API capabilities do not expand the supported host profile.
+The default product profile has PAL 8371 Agnus, OCS Denise, 512 KiB Chip RAM and
+512 KiB slow RAM at `$C00000`. Explicit 8372A supports 512 KiB or 1 MiB Chip;
+8375 part 318069-10 supports 1 or 2 MiB. These larger Chip layouts replace the
+trapdoor slow bank. The 512 KiB layouts permit 0 or 512 KiB slow RAM. Native
+Kickstart 1.3 and A500 3.1 execute with reset overlay vectors. Slow RAM is not
+true Fast RAM; optional Zorro II Fast RAM remains separate.
 
 CPU chip-memory addresses below `$200000` alias the fitted 512 KiB through
 `$07FFFF`, including instruction fetches and Agnus bus contention. This follows
 the default A500 JP2 wiring; it adds no memory capacity. See the
 [Super Cars II investigation](SUPER_CARS_II_INVESTIGATION.md) for the hardware
 basis, regression tests and the resulting Kickstart memory-probe timing change.
+
+For 1 MiB 8372A, CPU/DMA physical A20 aliases; 8375 decodes the full 2 MiB.
+With only 1 MiB fitted to 8375, the upper bank is unfitted and does not alias.
+ECS pointer registers retain a 21-bit even address independently of physical
+bank decoding. The 8372A internal A20 rollover behavior and electrical unfitted-bank
+readback are not revision-specific hardware measurements. Native KS 3.1 memory
+discovery, upper-memory DMA and unchanged default captures are recorded in
+[the Agnus evidence](AGNUS_CHIP_RAM_2026-10-01.md). This slice retains the existing
+OCS display sequencers and PAL clock geometry; full ECS display support is pending.
 
 ## Floppy drives
 

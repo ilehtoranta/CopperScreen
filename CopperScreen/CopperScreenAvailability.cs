@@ -25,6 +25,7 @@ internal static class CopperScreenAvailability
         "Engine" => value == "Lightweight",
         "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040",
         "Kickstart" => value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom",
+        "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
     };
@@ -32,8 +33,21 @@ internal static class CopperScreenAvailability
     public static bool IsControllerAvailable(int port, CopperScreenControllerKind kind)
         => port != 2 || kind != CopperScreenControllerKind.Mouse;
 
+    public static string[] ChipRamChoices(DmaChipModel model) => model switch
+    {
+        DmaChipModel.OcsAgnus => ["512"],
+        DmaChipModel.Agnus8372A => ["512", "1024"],
+        DmaChipModel.Agnus8375Pal2M => ["1024", "2048"],
+        _ => ["512", "1024", "2048"]
+    };
+
     public static string ChoiceLabel(string value) => value switch
     {
+        "OcsAgnus" => "8371 · OCS PAL · 512 KiB",
+        "Agnus8372A" => "8372A · ECS Agnus · up to 1 MiB",
+        "Agnus8375Pal2M" => "8375 (318069-10) · ECS PAL · up to 2 MiB",
+        "EcsAgnus" => "ECS Agnus (unspecified revision)",
+        "AgaAlice" => "Alice (AGA)",
         "AccurateM68000" => "Motorola 68000",
         "AccurateM68EC020" => "Motorola 68EC020 (experimental)",
         "AccurateM68020" => "Motorola 68020 (experimental)",

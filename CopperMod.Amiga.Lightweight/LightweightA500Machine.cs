@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// Independent A500 PAL OCS execution boundary.
+/// Independent A500 PAL execution boundary with OCS Denise and explicit Agnus.
 /// </summary>
 /// <remarks>
 /// This engine owns memory, the canonical clock and reusable output buffers.
@@ -26,8 +26,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     // A500 / 8371, default JP2: CPU A23 selects the expansion bank.
     // Gary decodes the low 2 MiB; A19/A20 alias the fitted 512 KiB.
     private const uint ChipRamCpuDecodeSize = 0x00200000;
-    private const uint ChipRamAddressMask = 0x0007FFFF;
-    private const uint ChipRamWordAddressMask = ChipRamAddressMask & ~1u;
+    private readonly uint _chipRamCpuAddressMask;
+    private readonly uint _chipRamDmaAddressMask;
+    private readonly bool _dmaCanAddressSlowRam;
 
     private readonly LightweightA500Configuration _configuration;
     private readonly byte[] _chipRam;
@@ -35,12 +36,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly byte[] _rom = new byte[512 * 1024];
     private readonly LightweightClock _clock = new();
     private readonly LightweightBusArbiter _busArbiter = new();
-    private readonly LightweightRegisters _registers = new();
+    private readonly LightweightRegisters _registers;
     private ushort _lastDmaBusWord;
-    private readonly LightweightCopper _copper = new();
-    private readonly LightweightBitplanes _bitplanes = new();
-    private readonly LightweightBlitter _blitter = new();
-    private readonly LightweightSpriteDma _spriteDma = new();
+    private readonly LightweightCopper _copper;
+    private readonly LightweightBitplanes _bitplanes;
+    private readonly LightweightBlitter _blitter;
+    private readonly LightweightSpriteDma _spriteDma;
     private readonly LightweightSprites _sprites = new();
     private readonly LightweightPaulaAudio _paula = new();
     private readonly LightweightPaulaSerial _serial = new();
@@ -113,8 +114,24 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
         for (var i = 0; i < _floppies.Length; i++) _floppies[i] = new(i);
-        if (_configuration.ChipRamBytes != 512 * 1024 || _configuration.SlowRamBytes != 512 * 1024)
-            throw new ArgumentException("The lightweight A500 profile supports exactly 512 KiB Chip RAM and 512 KiB slow RAM.", nameof(configuration));
+        LightweightAgnus.ValidateMemory(_configuration.AgnusModel, _configuration.ChipRamBytes, _configuration.SlowRamBytes);
+        _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
+        _copper = new(_registers.DmaAddressMask);
+        _bitplanes = new(_registers.DmaAddressMask);
+        _blitter = new(_registers.DmaAddressMask);
+        _spriteDma = new(_registers.DmaAddressMask);
+        // ECS pointer storage is separate from the physical DRAM decoder.
+        // With 512 KiB Chip, JP2 still selects CPU A23 for
+        // the second bank; DMA A19 can address a fitted slow-RAM bank directly.
+        _chipRamDmaAddressMask = _configuration.AgnusModel switch
+        {
+            LightweightAgnusModel.Mos8371 => 0x0007_FFFE,
+            LightweightAgnusModel.Mos8372A => 0x000F_FFFE,
+            _ => 0x001F_FFFE
+        };
+        _chipRamCpuAddressMask = _configuration.ChipRamBytes == 524288
+            ? 0x0007_FFFFu : _chipRamDmaAddressMask | 1u;
+        _dmaCanAddressSlowRam = IsEcsAgnus && _configuration.ChipRamBytes == 524288 && _configuration.SlowRamBytes == 524288;
         if (!LightweightFastRam.IsSupportedSize(_configuration.FastRamBytes))
             throw new ArgumentOutOfRangeException(nameof(configuration), "Fast RAM supports 0, 512 KiB, 1, 2, 4 or 8 MiB.");
         if (_configuration.AudioSampleRate != 48_000 || _configuration.AudioChannels != 2)
@@ -148,6 +165,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public M68kCpuState Cpu => _cpu.State;
     public M68kCpuModel CpuModel => _configuration.CpuModel;
+    public LightweightAgnusModel AgnusModel => _configuration.AgnusModel;
+    internal bool IsEcsAgnus => _configuration.AgnusModel != LightweightAgnusModel.Mos8371;
+    internal uint DmaAddressMask => _registers.DmaAddressMask;
     public long Cycle => _clock.Cycle;
     public long CompletedFrames => _completedFrames;
     public int BeamLine => _clock.Line;
@@ -494,7 +514,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void TriggerLightPen()
     {
         if ((_video.EffectiveBplcon0 & 8) == 0 || _lightPenLatched || _clock.Line < 25) return;
-        _lightPenVpos = (ushort)((_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & 1));
+        _lightPenVpos = (ushort)((IsEcsAgnus ? 0x2000 : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & 1));
         _lightPenVhpos = (ushort)(((_clock.Line & 255) << 8) | ((_clock.ColorClock + 4) % 227));
         _lightPenLatched = true;
     }
@@ -954,11 +974,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal ushort ReadChipWordDma(uint address)
     {
-        // Construction enforces a fixed 512 KiB array. Masked offsets are
-        // even and at most 0x7FFFE, so both bytes are always inside that array.
-        // This is a host memory load, not a change to the accepted bus phase.
+        address &= _chipRamDmaAddressMask;
+        if (address >= _chipRam.Length)
+            return _dmaCanAddressSlowRam
+                ? BinaryPrimitives.ReadUInt16BigEndian(_slowRam.AsSpan((int)address - 524288, 2))
+                : (ushort)0xFFFF;
+        // Validated banks and even addresses keep both bytes in the array.
+        // Unfitted 8375 banks are undriven; this does not alter the bus phase.
         ref var data = ref MemoryMarshal.GetArrayDataReference(_chipRam);
-        var value = Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref data, (nint)(address & ChipRamWordAddressMask)));
+        var value = Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref data, (nint)address));
         return BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value;
     }
 
@@ -986,10 +1010,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal void WriteChipWordDma(uint address, ushort value)
     {
-        // The same fixed-size/alignment proof as ReadChipWordDma covers both
-        // bytes. No observer can run between them on the single owner thread.
+        address &= _chipRamDmaAddressMask;
+        if (address >= _chipRam.Length)
+        {
+            if (_dmaCanAddressSlowRam)
+                BinaryPrimitives.WriteUInt16BigEndian(_slowRam.AsSpan((int)address - 524288, 2), value);
+            return;
+        }
         ref var data = ref MemoryMarshal.GetArrayDataReference(_chipRam);
-        Unsafe.WriteUnaligned(ref Unsafe.Add(ref data, (nint)(address & ChipRamWordAddressMask)),
+        Unsafe.WriteUnaligned(ref Unsafe.Add(ref data, (nint)address),
             BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
     }
 
@@ -1272,7 +1301,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if ((_video.EffectiveBplcon0 & 8) != 0 && !_lightPenLatched)
         {
-            _lightPenVpos = (ushort)((_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
+            _lightPenVpos = (ushort)((IsEcsAgnus ? 0x2000 : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
             _lightPenVhpos = (ushort)(((_clock.LinesThisField & 255) << 8) | 4);
             _lightPenLatched = true;
         }
@@ -1536,7 +1565,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_overlayEnabled && address + 1 < 0x400)
             return ReadRomWord(_romImageOffset + (int)address);
         if (address + 1 < ChipRamCpuDecodeSize)
-            return BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)(address & ChipRamAddressMask), 2));
+        {
+            var chipAddress = address & _chipRamCpuAddressMask;
+            return chipAddress < _chipRam.Length
+                ? BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan((int)chipAddress, 2))
+                : (ushort)0xFFFF;
+        }
         if (address >= 0x00C00000 && address + 1 < 0x00C00000 + _slowRam.Length)
         {
             var offset = (int)(address - 0x00C00000);
@@ -1549,7 +1583,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             {
                 LightweightRegisters.Vposr when _lightPenLatched && (_video.EffectiveBplcon0 & 8) != 0 => _lightPenVpos,
                 LightweightRegisters.Vhposr when _lightPenLatched && (_video.EffectiveBplcon0 & 8) != 0 => _lightPenVhpos,
-                LightweightRegisters.Vposr => (ushort)((_clock.IsLongField ? 0x8000 : 0) |
+                LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? 0x2000 : 0) | (_clock.IsLongField ? 0x8000 : 0) |
                     ((_clock.Line >> 8) & 1)),
                 LightweightRegisters.Vhposr => (ushort)(((_clock.Line & 0xFF) << 8) |
                     (_clock.SyncStopped ? 0 : (_clock.ColorClock + 4) % (LightweightClock.CpuCyclesPerLine /
@@ -1669,7 +1703,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return;
         if (address + 1 < ChipRamCpuDecodeSize)
         {
-            address &= ChipRamAddressMask;
+            address &= _chipRamCpuAddressMask;
+            if (address >= _chipRam.Length) return;
             _chipRam[address] = (byte)(value >> 8);
             _chipRam[address + 1] = (byte)value;
             return;
@@ -1702,6 +1737,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         offset &= 0x01FE;
         if (offset is LightweightRegisters.Clxdat or LightweightRegisters.Serdatr) return;
+        if (IsEcsAgnus && offset == LightweightRegisters.Bltcon0l)
+            _registers.Write(LightweightRegisters.Bltcon0,
+                (ushort)((_registers.Read(LightweightRegisters.Bltcon0) & 0xFF00) | (value & 0xFF)));
+        if (IsEcsAgnus && offset == LightweightRegisters.Beamcon0 && value != 0x0020)
+            ReportUnsupportedFeature("ECS programmable beam/NTSC modes are not modeled; select fixed PAL BEAMCON0=$0020");
+        if (IsEcsAgnus && offset == LightweightRegisters.Diwhigh)
+            ReportUnsupportedFeature("ECS extended display windows are not modeled with this OCS Denise profile");
         if (offset == 0x036) _controllers.WriteJoytest(value);
         if (offset == 0x034) _pots.WriteControl(value, cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
         if (offset == LightweightRegisters.Vposw)
@@ -1844,6 +1886,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 case LightweightRegisters.Bltcpth + 2:
                 case LightweightRegisters.Bltdpth:
                 case LightweightRegisters.Bltdpth + 2:
+                case LightweightRegisters.Bltsizv:
+                case LightweightRegisters.Bltsizh:
                 case LightweightRegisters.Bltsize:
                     _blitter.OnRegisterWrite(offset, value, cycle, this);
                     break;

@@ -1,7 +1,7 @@
 # Lightweight product completion roadmap
 
-Source audit: 2026-09-17; OCS/storage status reconciled 2026-09-19. Lightweight is already the active/default execution
-engine, but currently supports a narrow native PAL OCS A500 configuration. Completing
+Source audit: 2026-09-17; OCS/storage status reconciled 2026-09-19; Agnus/RAM follow-up 2026-10-01. Lightweight is already the active/default execution
+engine, with bounded native PAL A500 configurations and OCS Denise. Completing
 the product transition requires porting/integrating capabilities, not merely enabling
 settings. Legacy ECS/AGA implementations exist, but are not wired into this independent
 engine; they should be audited for reuse before new implementation work. This roadmap proposes an implementation
@@ -22,9 +22,9 @@ for the implemented four-drive read support; verification boundaries remain expl
 | OCS dual playfield | Implemented: lores/hires separation, scrolling, transparency, playfield/sprite priority, dual HAM and priority codes 5–7. See [nonstandard-mode evidence](NONSTANDARD_OCS.md). | Broaden native gameplay and physical transition coverage; see LWA-VIDEO-008. |
 | Collision detection | Implemented CLXCON/CLXDAT accumulation, grouping and CPU read-clear; focused tests and native probes exercised. | Retain the focused/native evidence and scoped performance acceptance; verify remaining physical phases. See OCS_COMPLETION.md. |
 | Remaining OCS edges | Beam-counter repositioning and external synchronization/genlock are missing. Line-mode BLTSIZE widths other than two are explicitly unsupported. Sprite/HAM/hires/CIA/disk timing edges remain documented. | Complete missing register behavior and final candidate validation; distinguish those gaps from unverified physical phases. |
-| ECS | Not ported/integrated into Lightweight; Legacy has ECS addressing and display/register paths. Active host explicitly rejects ECS. | Audit and port applicable Agnus/Denise semantics and tests into the single-owner engine; cover larger Chip RAM, extended windows, timing/SuperHires and big blits, then native verification. |
+| ECS | Explicit PAL 8372A/8375 Agnus memory layouts, widened DMA pointers, chip ID, big blits and Copper danger access implemented with OCS Denise; see [native evidence](AGNUS_CHIP_RAM_2026-10-01.md). | Implement and validate remaining Agnus display/window/timing and DOFF semantics, then explicit ECS Denise/SuperHires. Generic unspecified ECS remains rejected. |
 | AGA | Not ported/integrated into Lightweight; Legacy has AGA register, palette and bitplane paths. Active output/device paths remain OCS. | Audit and port applicable Alice/Lisa semantics and tests, including fetch/palette/bitplane/sprite/HAM8 behavior, then native AGA validation. |
-| NTSC | Host rejects non-OCS-PAL; engine clock geometry and Paula frequency are PAL-specific. | Machine timing configuration across beam, CIA/TOD, disk, audio and host pacing. Changing a display label is insufficient. |
+| NTSC | Host rejects NTSC; engine clock geometry and Paula frequency are PAL-specific. | Machine timing configuration across beam, CIA/TOD, disk, audio and host pacing. Changing a display label is insufficient. |
 | DF0–DF3 | Implemented: configurable 1–4 drives, independent media/mechanics/spindle phases, shared CIA status and Paula receiver/DMA, external DD identification, host controls/status and indexed scripted swaps. Native Workbench four-drive detection/media changes exercised. | Broaden native loader verification; physical overlapping read sources remain explicitly unsupported (LWA-DISK-011). |
 | Writable floppy | Guest write DMA, protection, strict ADF export and desktop Save ADF implemented; native format/write/read/reopen exercised. | Interactive desktop save/close checks and physical FIFO/splice timing remain unverified; native and automated save/reopen evidence is retained. |
 | More floppy formats | Standard ADF and read-only IPF are integrated through DF0–DF3, ZIP selection and scripted swaps. IPF preserves raw tracks and uses a causal receiver; protected-game compatibility remains incomplete. | The CPU trace blocker is repaired; verify Thunderbolt second-disk handling and receiver physics independently. Bounded Full Contact/Beast gameplay and disk swaps are recorded. Extended ADF/SCP execution remains separate. See [storage](STORAGE.md). |
@@ -33,7 +33,7 @@ for the implemented four-drive read support; verification boundaries remain expl
 | 68030 / 68040 | Experimental desktop/runner choices implemented with declared clocks and cache-control corrections; native Fast RAM/HDF I/O passes. See [validation](CPU_OPTIONS_030_040_060_2026-09-27.md). | The [040 fetch correction](LOTUS_III_040_FETCH_2026-09-27.md) passes the original Lotus script through a driving demo without shifting input. Broaden conformance; speculative prefetch, pipeline overlap and full hardware timing remain open. |
 | 68040 JIT | Package requires a JIT-capable bus; Lightweight does not implement it. | JIT bus/snapshot/invalidation integration and parity are separate work. |
 | 68060 | Distinct integer-focused diagnostic core implemented; desktop unavailable because native Kickstart 1.3 task/FPU frames are incompatible. | Add and validate 060-aware OS support, FPU arithmetic, MMU and remaining instruction/exception conformance. See [exact blocker](CPU_OPTIONS_030_040_060_2026-09-27.md). |
-| RAM and expansion | Fixed 512 KiB Chip + 512 KiB slow, plus optional 512 KiB–8 MiB CPU-only Zorro II Fast RAM. Native Autoconfig, settings, saved profiles and runner selection are implemented; see [validation](FAST_RAM_2026-09-27.md). | Broader Chip/slow layouts, Zorro III or 32-bit accelerator-local memory and their model-specific timing remain separate work. |
+| RAM and expansion | Explicit PAL Agnus with 512 KiB/1 MiB/2 MiB Chip layouts and optional slow RAM at 512 KiB, plus optional 512 KiB–8 MiB CPU-only Zorro II Fast RAM. Settings, profiles, runner, native memory discovery and persistence are implemented; see [Agnus](AGNUS_CHIP_RAM_2026-10-01.md) and [Fast RAM](FAST_RAM_2026-09-27.md) evidence. | Broader motherboard/Chip/slow layouts, Zorro III or 32-bit accelerator-local memory and their model-specific timing remain separate work. |
 | Other Kickstarts / Workbench | Native KS 1.3 and A500 KS 3.1 (512 KiB, v40.63) are available in the desktop. Default 68000 Workbench 3.1 floppy boot passes with 0 and 2 MiB Fast RAM; see [native boot evidence](KICKSTART_31_2026-09-30.md). | Broaden native application, storage and CPU/ROM combinations. Validate each additional ROM/machine profile separately. Native ROM executes OS services. |
 | Hard disk / HDF | CopperHDF virtual Zorro II interface ported from pinned Legacy, with file-backed persistence, RDB/partition metadata, host settings, native KS 1.3 OFS cold boot and [KS 3.1 FFS RDB boot/write/reopen](KICKSTART_31_HD_2026-09-30.md) without DF0. | Broaden filesystem and installed-system coverage; other filesystems need supplied handlers. Physical IDE/SCSI and host directories are outside this milestone. See [interface/evidence](STORAGE.md). |
 | Keyboard and controllers | Keyboard startup/recovery, physical keys/Caps Lock/A500 reset and CIA serial/CNT/port modes are implemented; see [the evidence and remaining accuracy boundaries](KEYBOARD_CIA.md). Ideal paddle counters and a light-pen latch are available. Mouse is allowed on the first port only. | Verify MCU/electrical and CIA pipeline timing; configurable port routing and broader native controls coverage remain. CD32/paddles/light pen/adapters are separate peripheral scopes. |
@@ -64,7 +64,7 @@ the recorded cleanup commit `30615e8317a4069e879b585049ed97ffdfecd4fe`:
 These are real implementations, not just settings enums. Their existence does not
 establish that they were ported into Lightweight or that every edge was verified.
 The active engine has no dependency on those Legacy device/renderer paths and the
-host requires OCS PAL. “Missing” in this inventory means missing from Lightweight,
+host requires PAL and OCS Denise, with explicit Agnus memory layouts. “Missing” in this inventory means missing from Lightweight,
 not absent from the project's engineering history.
 
 Before ECS/AGA development, inventory Legacy implementations and their tests,
@@ -85,8 +85,8 @@ to other previously implemented features such as drives and hard disks.
    gate for the implemented CopperHDF/ADF/IPF candidate. Avoid tying ordinary
    storage usability to completion of AGA.
 3. **Add configurable machine resources.** Zorro II Fast RAM and native A500
-   Kickstart 3.1 are implemented. Extend Chip/slow layouts, additional ROM profiles
-   and NTSC timing.
+   Kickstart 3.1 and explicit PAL Agnus/Chip layouts are implemented. Extend
+   remaining motherboard layouts, additional ROM profiles and NTSC timing.
    Integrate 68010 as the smaller CPU-model step, while retaining 68000 regressions.
 4. **Deliver an ECS profile.** Treat Agnus and Denise revisions explicitly; add
    ECS registers/modes and verify native ECS use. Some memory/timing work in step 3

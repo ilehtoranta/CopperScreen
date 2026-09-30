@@ -32,7 +32,9 @@ internal sealed class LightweightBlitter
     private const ushort Bltcon1FillCarryIn = 0x0004;
     private const ushort Bltcon1InclusiveFill = 0x0008;
     private const ushort Bltcon1ExclusiveFill = 0x0010;
-    private const uint OcsChipAddressMask = 0x0007_FFFEu;
+    private readonly uint _addressMask;
+
+    internal LightweightBlitter(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
     private const int NiceDmaGrantsBeforeYield = 3;
 
     private bool _active;
@@ -105,7 +107,7 @@ internal sealed class LightweightBlitter
     private ushort _pendingWriteValue;
     private long _pendingOutputCycle;
     private bool _deferredStart;
-    private ushort _deferredSize;
+    private int _deferredWidth, _deferredHeight;
     private long _startCycle;
 
     internal long NextCycle { get; private set; } = long.MaxValue;
@@ -195,7 +197,7 @@ internal sealed class LightweightBlitter
         _pendingWriteValue = 0;
         _pendingOutputCycle = long.MaxValue;
         _deferredStart = false;
-        _deferredSize = 0;
+        _deferredWidth = _deferredHeight = 0;
         _startCycle = long.MinValue;
         NextCycle = long.MaxValue;
         LastAcceptedInputCycle = long.MinValue;
@@ -233,7 +235,8 @@ internal sealed class LightweightBlitter
         long cycle,
         LightweightA500Machine machine)
     {
-        if (offset != LightweightRegisters.Bltsize)
+        if (offset != LightweightRegisters.Bltsize &&
+            !(machine.IsEcsAgnus && offset == LightweightRegisters.Bltsizh))
         {
             // Area DMA pointers are live registers, not a snapshot at BLTSIZE.
             // Keep any already accepted bus output's address/value intact.
@@ -263,14 +266,19 @@ internal sealed class LightweightBlitter
             return;
         }
 
+        var width = offset == LightweightRegisters.Bltsize ? value & 63 : value & 2047;
+        var height = offset == LightweightRegisters.Bltsize ? value >> 6 : machine.GetCustomRegister(LightweightRegisters.Bltsizv) & 32767;
+        if (width == 0) width = offset == LightweightRegisters.Bltsize ? 64 : 2048;
+        if (height == 0) height = offset == LightweightRegisters.Bltsize ? 1024 : 32768;
         if (_active)
         {
             _deferredStart = true;
-            _deferredSize = value;
+            _deferredWidth = width;
+            _deferredHeight = height;
             return;
         }
 
-        Start(value, cycle, machine);
+        Start(width, height, cycle, machine);
     }
 
     internal void BeginCpuRequest(long candidateCycle)
@@ -345,12 +353,14 @@ internal sealed class LightweightBlitter
             LastBusOutputCycle == cycle;
 
     private void Start(
-        ushort size,
+        int width, int height,
         long cycle,
         LightweightA500Machine machine)
     {
         var bltcon0 = machine.GetCustomRegister(LightweightRegisters.Bltcon0);
         var bltcon1 = machine.GetCustomRegister(LightweightRegisters.Bltcon1);
+        if (machine.IsEcsAgnus && (bltcon1 & 0x0080) != 0)
+            machine.ReportUnsupportedFeature("ECS blitter DOFF output suppression is not modeled");
         _lineMode = (bltcon1 & Bltcon1LineMode) != 0;
         _useA = (bltcon0 & 0x0800) != 0;
         _useB = (bltcon0 & 0x0400) != 0;
@@ -373,21 +383,13 @@ internal sealed class LightweightBlitter
         _requiresDma = _lineMode
             ? _useC
             : _useA || _useB || _useC || _useD;
-        _widthWords = size & 0x003F;
-        if (_widthWords == 0)
-        {
-            _widthWords = 64;
-        }
+        _widthWords = width;
         if (_lineMode && _widthWords != 2)
         {
             machine.ReportUnsupportedFeature(
                 "OCS line-mode BLTSIZE widths other than two are not modeled");
         }
-        _height = (size >> 6) & 0x03FF;
-        if (_height == 0)
-        {
-            _height = 1024;
-        }
+        _height = height;
 
         _minterm = (byte)bltcon0;
         _shiftA = bltcon0 >> 12;
@@ -906,10 +908,11 @@ internal sealed class LightweightBlitter
             return;
         }
 
-        var deferredSize = _deferredSize;
+        var deferredWidth = _deferredWidth;
+        var deferredHeight = _deferredHeight;
         _deferredStart = false;
-        _deferredSize = 0;
-        Start(deferredSize, cycle, machine);
+        _deferredWidth = _deferredHeight = 0;
+        Start(deferredWidth, deferredHeight, cycle, machine);
     }
 
     private ushort ComputeAreaOutput()
@@ -1037,11 +1040,11 @@ internal sealed class LightweightBlitter
             (DmaconMaster | DmaconBlitter);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint AddPointer(uint pointer, int offset)
-        => unchecked(pointer + (uint)offset) & OcsChipAddressMask;
+    private uint AddPointer(uint pointer, int offset)
+        => unchecked(pointer + (uint)offset) & _addressMask;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint AddModulo(uint pointer, short modulo, bool descending)
+    private uint AddModulo(uint pointer, short modulo, bool descending)
     {
         var evenModulo = modulo & ~1;
         return AddPointer(pointer, descending ? -evenModulo : evenModulo);

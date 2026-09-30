@@ -1,0 +1,399 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-01",
+  "scope": "Explicit PAL Agnus, 512 KiB/1 MiB/2 MiB Chip RAM, OCS Denise, fixed PAL, native 68000 boot and persistence",
+  "baseRevision": "eaf00f7aca0e971a12433c50140dab1fa8d37063",
+  "copper68k": "1.5.0",
+  "sourceHashFormat": "SHA-256 of UTF-8 files with CRLF normalized to LF",
+  "sourceSha256": {
+    "CopperMod.Amiga.Lightweight.Runner/Program.cs": "c6fa40c56f3b26a95dff1bac03839277e7d5428002479ed1085215049afd5f29",
+    "CopperMod.Amiga.Lightweight.Tests/LightweightAgnusMemoryTests.cs": "2eaa2fff5ffa0da191585c224d6904a20d137f646f8e1e5fb57c82ef7db10e18",
+    "CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs": "d0fc73dec4e0463710c72bbb0ef19b44e03d6d5fbb76f6f04fbc4af80703fb76",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "a9a610bdf137f29006954732c0c2fa1143c5703ff3dbc8e3078c592527b0f4d3",
+    "CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs": "585b894f17191982ace27b6e91208d196b7646c0b688a07709bd319b4cbae624",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "e37d32dd14aabf78cfa5d0f9e6942cb3d1380c23c4370300a02de341e7bcadca",
+    "CopperMod.Amiga.Lightweight/LightweightBlitter.cs": "a53dc403cf50d650e1ced177fee620a3d5229e374d7c41ffc57e66152e430970",
+    "CopperMod.Amiga.Lightweight/LightweightCopper.cs": "ff53a71032ce20b47cdda4cd8df071e8942080f28e7c78b43acd4a273b900f64",
+    "CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs": "97f68ff659123937d66dca382bcfd9783c31d1aa008d68c6fead25884fcd664d",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs": "df97a9b436c246b80d390cd8efdb79e4f204ba31fd30791bc4151aa879f3f972",
+    "CopperMod.Amiga.Lightweight/LightweightRegisters.cs": "39f0be0d5936c7b96b33e4ca5265ae28f86be2507a0d4fb25ce580b1ef3649c6",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "17b3231092a06db3a487300fa9f832ab72002f8c516ca74cc7f6c0a5e3a87441",
+    "CopperScreen.Lightweight.Tests/AgnusChipRamTests.cs": "e8b4015dfc28797181a384137998eec3b8acc4ffaebe15d5cb44425877faf895",
+    "CopperScreen.Lightweight.Tests/CopperScreenLightweightSessionTests.cs": "cfb9a94e73ce94a965125d1e61ca56b1020e4652a0b019eb4effe7a46282e010",
+    "CopperScreen.Lightweight.Tests/Kickstart31Tests.cs": "b14e211b4732cc668cdb85209edd148f52171e2864f348f8a4aed0efa0ff0499",
+    "CopperScreen/CopperScreenAvailability.cs": "339880ab28fab2aefaa1b4aad191052fe1f71978a992208338d91f33cd326f5d",
+    "CopperScreen/CopperScreenLightweightSession.cs": "aa5041c2c17491eb9ea544d09ef0b557ff57a6a5fbd066aa6ad14745e070801a",
+    "CopperScreen/CopperScreenMachineProfileTypes.cs": "355850a214343e816b929ee786a2b0b84189ac13bb62406d7b4a476dfb8025ee",
+    "CopperScreen/CopperScreenProfile.cs": "7c919d0493499ca8115f73c9cb31568223f58bef7679b449698e0272bfba9e84",
+    "CopperScreen/CopperScreenSettings.cs": "e23d7a1e5e790575095646f8ede8a00f04c80af31486584651ebdb6c5e11c908",
+    "CopperScreen/MainWindow.SettingsUx.cs": "637be37d0a2f66a1d2b06b50819417ca7904319d5f4fe6e93567a88becb23a91",
+    "CopperScreen/MainWindow.cs": "db3113242966445644ca6b016032658bb1326478e6e989ec7403f4ae5064d8e5",
+    "scripts/probes/Kickstart31/prepare_hdf.py": "baa3a047a9d1478a10ae643f9406c1301ba8f18e965a4cf2b14b1a385ab73806",
+    "scripts/verify-lightweight-ofs-proof.py": "ea197d1d811ddd6f46088546173e99e2a43acbc4545b49b572aa22848884f6a8"
+  },
+  "inputs": {
+    "rom": {
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "romBytes": 524288,
+      "romVersion": 40,
+      "romRevision": 63
+    },
+    "workbench": {
+      "label": "Workbench",
+      "archive": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].zip",
+      "archiveSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+      "member": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].adf",
+      "bytes": 901120,
+      "sha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985"
+    },
+    "fixture": {
+      "sourceSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+      "imageSha256": "19a78c839a20a7498df33154c3697237259b195a07f6e29059f10745c7947e9d",
+      "bytes": 917504,
+      "partitionOffsetSectors": 32,
+      "dosType": "DOS1",
+      "rootBlock": 880,
+      "startup": "FailAt 21\nMakeDir RAM:ENV RAM:T\nAssign ENV: RAM:ENV\nAssign T: RAM:T\nVersion\nIF EXISTS SYS:ks31-hd-proof.txt\nType SYS:ks31-hd-proof.txt\nEcho >SYS:ks31-hd-reopen.txt \"CopperHDF Kickstart 3.1 FFS reopen verified\"\nELSE\nEcho >SYS:ks31-hd-proof.txt \"CopperHDF Kickstart 3.1 native FFS persistence\"\nType SYS:ks31-hd-proof.txt\nENDIF\nEcho \"HD BOOT TEST FINISHED\"\nLoadWB\n",
+      "startupHeader": 1611,
+      "startupData": 1612
+    },
+    "kickstart13ControlRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "kickstart13ControlInputHdfSha256": "54331e81b73ad61415db32f2937b8e7b3748f3d5b4d7e41ddc3c6826fcd28f1c"
+  },
+  "layouts": [
+    {
+      "agnus": "8371",
+      "chipRamKiB": [
+        512
+      ],
+      "slowRamKiB": [
+        0,
+        512
+      ]
+    },
+    {
+      "agnus": "8372a",
+      "chipRamKiB": [
+        512
+      ],
+      "slowRamKiB": [
+        0,
+        512
+      ]
+    },
+    {
+      "agnus": "8372a",
+      "chipRamKiB": [
+        1024
+      ],
+      "slowRamKiB": [
+        0
+      ]
+    },
+    {
+      "agnus": "8375-318069-10",
+      "chipRamKiB": [
+        1024,
+        2048
+      ],
+      "slowRamKiB": [
+        0
+      ]
+    }
+  ],
+  "validation": {
+    "productionBuild": {
+      "configuration": "Release",
+      "warnings": 0,
+      "errors": 0
+    },
+    "diagnosticEngineTests": {
+      "total": 835,
+      "passed": 835,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "0c2b7425b2457f55af67175e1d82dfd61616e228e134d0e0489eaf123c137265"
+    },
+    "hostTests": {
+      "total": 139,
+      "passed": 134,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "ec0e81ad2656eecc87395b36b01fd1263bf533ee42458eb38ae5d7e556aa9e3e"
+    },
+    "nativeHostTests": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "5221a90184c4c31e75d893b590692e1c4f3a183d78c5d2e65ef9e26b4a758e2d",
+      "configurations": [
+        {
+          "agnus": "8371",
+          "chipRamKiB": 512,
+          "slowRamKiB": 512,
+          "fastRamKiB": 0
+        },
+        {
+          "agnus": "8371",
+          "chipRamKiB": 512,
+          "slowRamKiB": 0,
+          "fastRamKiB": 0
+        },
+        {
+          "agnus": "8371",
+          "chipRamKiB": 512,
+          "slowRamKiB": 512,
+          "fastRamKiB": 2048
+        },
+        {
+          "agnus": "8372a",
+          "chipRamKiB": 512,
+          "slowRamKiB": 512,
+          "fastRamKiB": 0
+        },
+        {
+          "agnus": "8372a",
+          "chipRamKiB": 1024,
+          "slowRamKiB": 0,
+          "fastRamKiB": 0
+        },
+        {
+          "agnus": "8375-318069-10",
+          "chipRamKiB": 1024,
+          "slowRamKiB": 0,
+          "fastRamKiB": 0
+        },
+        {
+          "agnus": "8375-318069-10",
+          "chipRamKiB": 2048,
+          "slowRamKiB": 0,
+          "fastRamKiB": 0
+        }
+      ],
+      "coldBootsPerConfiguration": 2,
+      "fieldsPerBoot": 2400,
+      "cpu": "M68000",
+      "floppyMounted": false,
+      "largerChipNativeAssertions": [
+        "ExecBase.MaxLocMem equals fitted Chip bytes",
+        "MEMF_CHIP memory-header upper bound equals fitted Chip bytes on both boots"
+      ],
+      "desktopPixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1",
+      "firstBootProofBytes": 47,
+      "secondBootReopenProofBytes": 44
+    },
+    "runnerControls": {
+      "runs": [
+        {
+          "name": "default-current",
+          "options": [
+            "--fast-ram-kib",
+            "2048"
+          ],
+          "fields": 2400,
+          "snapshotCount": 5,
+          "captureFiles": 35,
+          "hdfSha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+          "finalCycle": 340953382,
+          "finalPc": "00F81476",
+          "proof": {
+            "offset_sectors": 32,
+            "filesystem": "ffs",
+            "image_sha256": "b507421f40568dcc7443287bc36abd27cee69072d48c93a1fc78ed730887432e",
+            "file": "ks31-hd-proof.txt",
+            "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+            "bytes": 47,
+            "root_block": 880,
+            "header_block": 771,
+            "verified_data_blocks": 1
+          },
+          "captureManifestSha256": "20a537bf88b57d1216ab159ff36a404a2f003ba0e2ec7a850bdd7816d92aaf31"
+        },
+        {
+          "name": "8375-current-normal",
+          "options": [
+            "--agnus",
+            "8375-318069-10",
+            "--chip-ram-kib",
+            "2048"
+          ],
+          "fields": 2400,
+          "snapshotCount": 5,
+          "captureFiles": 25,
+          "hdfSha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+          "finalCycle": 340953542,
+          "finalPc": "00F81476",
+          "proof": {
+            "offset_sectors": 32,
+            "filesystem": "ffs",
+            "image_sha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+            "file": "ks31-hd-proof.txt",
+            "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+            "bytes": 47,
+            "root_block": 880,
+            "header_block": 771,
+            "verified_data_blocks": 1
+          },
+          "captureManifestSha256": "9c4e88acebefb2e20f04f3c9d646c481c54144b33d9d9ee5eccd42345eafd5d4"
+        },
+        {
+          "name": "8375-current-scalar",
+          "options": [
+            "--agnus",
+            "8375-318069-10",
+            "--chip-ram-kib",
+            "2048",
+            "--scalar-cpu"
+          ],
+          "fields": 2400,
+          "snapshotCount": 5,
+          "captureFiles": 25,
+          "hdfSha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+          "finalCycle": 340953542,
+          "finalPc": "00F81476",
+          "proof": {
+            "offset_sectors": 32,
+            "filesystem": "ffs",
+            "image_sha256": "f5e3952c323bb49922bd4cd34fcc6912a7283c1e4cfcc0f0480330b11db2a955",
+            "file": "ks31-hd-proof.txt",
+            "file_sha256": "81e35fef0b7605b1c68d2700faf047f463519f645e46836aa212fc6a99e95a71",
+            "bytes": 47,
+            "root_block": 880,
+            "header_block": 771,
+            "verified_data_blocks": 1
+          },
+          "captureManifestSha256": "9c4e88acebefb2e20f04f3c9d646c481c54144b33d9d9ee5eccd42345eafd5d4"
+        },
+        {
+          "name": "ks13-8372a-1024",
+          "options": [
+            "--agnus",
+            "8372a",
+            "--chip-ram-kib",
+            "1024",
+            "--fast-ram-kib",
+            "2048"
+          ],
+          "fields": 2400,
+          "snapshotCount": 5,
+          "captureFiles": 35,
+          "hdfSha256": "3770c46fe3263dec5bcfff6e77a82b1558735f8d5d11c095bd312828283dc374",
+          "finalCycle": 340912830,
+          "finalPc": "00FC0F94",
+          "proof": {
+            "offset_sectors": 0,
+            "image_sha256": "3770c46fe3263dec5bcfff6e77a82b1558735f8d5d11c095bd312828283dc374",
+            "file": "fast-proof.txt",
+            "file_sha256": "bbf325b4d7a1c303bf573f7966d2e9531117a852ec5714e824ac8aedaaddc443",
+            "bytes": 39,
+            "root_block": 880,
+            "header_block": 1359,
+            "verified_data_blocks": 1
+          },
+          "captureManifestSha256": "56e9f016b41c76e2cbf9f1fd78c83e62614916b8964fd1ce123cc1e66cd0d770"
+        },
+        {
+          "name": "ks13-8375-2048",
+          "options": [
+            "--agnus",
+            "8375-318069-10",
+            "--chip-ram-kib",
+            "2048",
+            "--fast-ram-kib",
+            "2048"
+          ],
+          "fields": 2400,
+          "snapshotCount": 5,
+          "captureFiles": 35,
+          "hdfSha256": "3770c46fe3263dec5bcfff6e77a82b1558735f8d5d11c095bd312828283dc374",
+          "finalCycle": 340912822,
+          "finalPc": "00FC0F94",
+          "proof": {
+            "offset_sectors": 0,
+            "image_sha256": "3770c46fe3263dec5bcfff6e77a82b1558735f8d5d11c095bd312828283dc374",
+            "file": "fast-proof.txt",
+            "file_sha256": "bbf325b4d7a1c303bf573f7966d2e9531117a852ec5714e824ac8aedaaddc443",
+            "bytes": 39,
+            "root_block": 880,
+            "header_block": 1359,
+            "verified_data_blocks": 1
+          },
+          "captureManifestSha256": "169d29104ac14f9d6f1a6b56d5e5c599339c9c997b91e9fb5aab93cc5f7e6122"
+        }
+      ],
+      "defaultBaseline": {
+        "left": "default-current",
+        "right": "artifacts/kickstart31-hd-2026-09-30/v2/fixed-rdb-2048-first",
+        "capturedFiles": 35,
+        "mismatches": []
+      },
+      "normalVersusScalar": {
+        "left": "8375-current-normal",
+        "right": "8375-current-scalar",
+        "capturedFiles": 25,
+        "mismatches": []
+      }
+    },
+    "nativeMemoryInspections": [
+      {
+        "name": "8372a-1024",
+        "execBase": "000014F8",
+        "maxLocMem": 1048576,
+        "memHeaders": [
+          {
+            "address": "00000400",
+            "attributes": 1795,
+            "lower": 1056,
+            "upper": 1048576,
+            "free": 792016
+          }
+        ],
+        "nativePixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1"
+      },
+      {
+        "name": "8375-2048",
+        "execBase": "000014F8",
+        "maxLocMem": 2097152,
+        "memHeaders": [
+          {
+            "address": "00000400",
+            "attributes": 1795,
+            "lower": 1056,
+            "upper": 2097152,
+            "free": 1840592
+          }
+        ],
+        "nativePixelsSha256": "6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1"
+      }
+    ],
+    "current8375MemoryInspection": {
+      "execBase": "000014F8",
+      "maxLocMem": 2097152,
+      "memHeaderUpper": 2097152
+    },
+    "interactiveAvaloniaControls": "Not manually exercised"
+  },
+  "performanceAcceptance": false,
+  "unverified": [
+    "Full ECS Denise/display modes",
+    "Programmable beam timing and DIWHIGH",
+    "Blitter DOFF",
+    "Revision-specific 8372A internal A20 pointer rollover",
+    "Electrical unfitted-bank readback",
+    "Broad game compatibility",
+    "Accelerator/RAM/ROM combinations",
+    "Additional motherboard layouts",
+    "NTSC",
+    "AGA",
+    "68060 OS/FPU support"
+  ],
+  "primaryReferences": [
+    "https://bastya.net/AmigaDevDocs/hard_c.html",
+    "https://github.com/LinuxJedi/RAMesses",
+    "https://wiki.icomp.de/wiki/Agnus",
+    "https://amiga.net.au/files/Tech_Amiga/Commodore_Amiga_500_Technical_Manual.pdf",
+    "https://d0.se/include/exec/execbase.i",
+    "https://d0.se/include/exec/memory.i"
+  ]
+}

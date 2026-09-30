@@ -131,9 +131,14 @@ public sealed class Kickstart31Tests : IDisposable
     private static string Hash(ReadOnlySpan<byte> bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 
     [NativeKickstart31HdTheory]
-    [InlineData(0)]
-    [InlineData(2048)]
-    public void SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions(int fastKiB)
+    [InlineData(0, "OcsAgnus", 512, 512)]
+    [InlineData(0, "OcsAgnus", 512, 0)]
+    [InlineData(2048, "OcsAgnus", 512, 512)]
+    [InlineData(0, "Agnus8372A", 512, 512)]
+    [InlineData(0, "Agnus8372A", 1024, 0)]
+    [InlineData(0, "Agnus8375Pal2M", 1024, 0)]
+    [InlineData(0, "Agnus8375Pal2M", 2048, 0)]
+    public void SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions(int fastKiB, string agnus, int chipKiB, int slowKiB)
     {
         var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_KICKSTART31_ROM")!;
         var original = File.ReadAllBytes(Environment.GetEnvironmentVariable("COPPERSCREEN_WORKBENCH31_HDF")!);
@@ -145,7 +150,9 @@ public sealed class Kickstart31Tests : IDisposable
         var draft = new CopperScreenSettingsDraft
         {
             KickstartSource = CopperScreenKickstartSource.Kickstart31Rom,
-            RomVersion = KickstartVersion.Kickstart31, KickstartRomPath = rom, RealFastRamKb = fastKiB
+            RomVersion = KickstartVersion.Kickstart31, KickstartRomPath = rom, RealFastRamKb = fastKiB,
+            Chipset = new(Enum.Parse<DmaChipModel>(agnus), DisplayChipModel.OcsDenise, VideoStandard.Pal),
+            ChipRamKb = chipKiB, PseudoFastRamKb = slowKiB
         };
         draft.HardDrives.Add(new(0, image, false, 0));
         for (var boot = 0; boot < 2; boot++)
@@ -156,6 +163,17 @@ public sealed class Kickstart31Tests : IDisposable
                 for (var field = 0; field < 2400; field++) session.RenderNextFrame(session.Framebuffer);
                 Assert.Null(session.FaultMessage);
                 Assert.False(session.Machine.RomOverlayEnabled);
+                if (chipKiB > 512)
+                {
+                    // Native exec.library's MaxLocMem and MEMF_CHIP header,
+                    // from the supplied ROM's own startup memory probes.
+                    var chip = session.Machine.ChipRam.Span;
+                    var exec = (int)BinaryPrimitives.ReadUInt32BigEndian(chip.Slice(4));
+                    Assert.Equal((uint)(chipKiB * 1024), BinaryPrimitives.ReadUInt32BigEndian(chip.Slice(exec + 62)));
+                    var header = (int)BinaryPrimitives.ReadUInt32BigEndian(chip.Slice(exec + 322));
+                    Assert.Equal(2, BinaryPrimitives.ReadUInt16BigEndian(chip.Slice(header + 14)) & 2);
+                    Assert.Equal((uint)(chipKiB * 1024), BinaryPrimitives.ReadUInt32BigEndian(chip.Slice(header + 24)));
+                }
                 // Reviewed Workbench desktop, after the hard disk's own startup script.
                 Assert.Equal("6d9d59261ac424a3461a96ef8e518128b5cfbbcea11e5cd69bbc61798f7a30d1",
                     Hash(MemoryMarshal.AsBytes(session.Machine.Framebuffer.Span)));

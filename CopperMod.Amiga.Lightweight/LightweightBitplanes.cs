@@ -15,7 +15,9 @@ internal sealed class LightweightBitplanes
     private const int DdfHardStopCompareHorizontal = 0xD7;
     private const int DdfHardStopTargetHorizontal = 0xD8;
     private const int FetchUnitColorClocks = 8;
-    private const uint OcsChipAddressMask = 0x0007_FFFEu;
+    private readonly uint _addressMask;
+
+    internal LightweightBitplanes(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
     // Three bits per CCK, storing plane + 1 (zero is the idle slot).
     // Lores: -1,3,5,1,-1,2,4,0; hires: 3,1,2,0,3,1,2,0.
     private const uint LowResFetchOrder = 0x3585A0;
@@ -382,7 +384,7 @@ internal sealed class LightweightBitplanes
             (DmaconMaster | DmaconBitplane);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint MaskAddress(uint address) => address & OcsChipAddressMask;
+    private uint MaskAddress(uint address) => address & _addressMask;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static long NextCckAfter(long cycle)

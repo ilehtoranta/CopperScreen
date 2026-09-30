@@ -2,7 +2,7 @@
 // Unsupported profiles remain round-trippable; these types do not execute hardware.
 namespace CopperScreen;
 
-internal enum DmaChipModel { OcsAgnus, EcsAgnus, AgaAlice }
+internal enum DmaChipModel { OcsAgnus, EcsAgnus, AgaAlice, Agnus8372A, Agnus8375Pal2M }
 internal enum DisplayChipModel { OcsDenise, EcsDenise, AgaLisa }
 internal enum VideoStandard { Pal, Ntsc }
 internal readonly record struct AmigaChipset(DmaChipModel DmaChip, DisplayChipModel DisplayChip, VideoStandard VideoStandard)

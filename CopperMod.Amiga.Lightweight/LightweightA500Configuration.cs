@@ -3,7 +3,7 @@ using Copper68k;
 
 namespace CopperMod.Amiga.Lightweight;
 
-/// <summary>Configuration for the PAL OCS machine.</summary>
+/// <summary>Configuration for the PAL machine with OCS Denise and an explicit Agnus revision.</summary>
 public sealed record LightweightA500Configuration
 {
     /// <summary>68000, or an experimental 68EC020/68020/68030/68040 OCS accelerator.
@@ -17,6 +17,8 @@ public sealed record LightweightA500Configuration
     public int FloppyDriveCount { get; init; } = 1;
     /// <summary>File-backed CopperHDF units, attached at construction. Changes require a new machine.</summary>
     public IReadOnlyList<AmigaHardfileConfiguration> Hardfiles { get; init; } = [];
+    public LightweightAgnusModel AgnusModel { get; init; } = LightweightAgnusModel.Mos8371;
+    /// <summary>Fitted Chip RAM, bounded by Agnus and the selected motherboard layout.</summary>
     public int ChipRamBytes { get; init; } = 512 * 1024;
     public int SlowRamBytes { get; init; } = 512 * 1024;
     /// <summary>Optional CPU-only Zorro II RAM: 0, 512 KiB, 1, 2, 4 or 8 MiB.

@@ -17,6 +17,9 @@ var exportDisks = new List<(int Drive, string Path)>();
 var scalarCpu = false;
 var cpuModel = M68kCpuModel.M68000;
 var fastRamKiB = 0;
+var agnusModel = LightweightAgnusModel.Mos8371;
+var chipRamKiB = 512;
+int? slowRamKiB = null;
 var syntheticRomLoop = false;
 var syntheticRomStop = false;
 var syntheticCiaTimer = false;
@@ -64,6 +67,28 @@ for (var i = 0; i < args.Length; i++)
             throw new ArgumentException("--drives requires a count from 1 to 4.");
     }
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
+    else if (args[i] == "--agnus")
+    {
+        if (++i >= args.Length) throw new ArgumentException("--agnus requires 8371, 8372a or 8375-318069-10.");
+        agnusModel = args[i].ToLowerInvariant() switch
+        {
+            "8371" => LightweightAgnusModel.Mos8371,
+            "8372a" => LightweightAgnusModel.Mos8372A,
+            "8375-318069-10" => LightweightAgnusModel.Mos8375Pal2M,
+            _ => throw new ArgumentException("--agnus requires 8371, 8372a or 8375-318069-10.")
+        };
+    }
+    else if (args[i] == "--chip-ram-kib")
+    {
+        if (++i >= args.Length || !int.TryParse(args[i], out chipRamKiB) || chipRamKiB is not (512 or 1024 or 2048))
+            throw new ArgumentException("--chip-ram-kib requires 512, 1024 or 2048; the Agnus model must support it.");
+    }
+    else if (args[i] == "--slow-ram-kib")
+    {
+        if (++i >= args.Length || !int.TryParse(args[i], out var parsedSlow) || parsedSlow is not (0 or 512))
+            throw new ArgumentException("--slow-ram-kib requires 0 or 512; larger Chip RAM layouts use 0.");
+        slowRamKiB = parsedSlow;
+    }
     else if (args[i] == "--fast-ram-kib")
     {
         if (++i >= args.Length || !int.TryParse(args[i], out fastRamKiB) ||
@@ -156,8 +181,11 @@ for (var i = 0; i < extraAdfPaths.Length; i++)
 
 using var machine = new LightweightA500Machine(
     configuration: new LightweightA500Configuration
-        { FramebufferWidth = romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024 },
+        { FramebufferWidth = romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024,
+            AgnusModel = agnusModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024 },
     enableConservativeCpuLoopBatch: !scalarCpu);
+if (agnusModel != LightweightAgnusModel.Mos8371 || chipRamKiB != 512 || slowRamKiB == 0)
+    Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise=ocs video=pal");
 var supportsBlitter = machine.GetType().GetProperty(
     "BlitterActive",
     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) is not null;

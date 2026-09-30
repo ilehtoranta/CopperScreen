@@ -38,7 +38,7 @@ internal sealed partial class MainWindow
         var layout = CreateSettingsPageLayout();
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
-        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\n512 KiB Chip RAM + 512 KiB slow RAM · optional Fast RAM\nUp to four floppy drives"));
+        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\nConfigurable Agnus and Chip RAM · optional Fast RAM\nUp to four floppy drives"));
         var form = CreateSettingsGroupForm();
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3 or A500 3.1 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
@@ -95,6 +95,26 @@ internal sealed partial class MainWindow
         _settingsDraft.DriveWriteProtected[0] = true;
         _settingsStartupError = null;
         RefreshSettingsUi();
+    }
+
+    private void SetChipRamChoices(DmaChipModel model)
+        => _chipRamBox.ItemsSource = CopperScreenAvailability.ChipRamChoices(model);
+
+    private void UpdateChipRamChoices()
+    {
+        if (_updatingSettingsUi || _agnusModelBox.SelectedItem is not string selected) return;
+        var model = Enum.Parse<DmaChipModel>(selected);
+        var previous = _chipRamBox.SelectedItem as string;
+        _updatingSettingsUi = true;
+        try
+        {
+            var choices = CopperScreenAvailability.ChipRamChoices(model);
+            _chipRamBox.ItemsSource = choices;
+            _chipRamBox.SelectedItem = choices.Contains(previous) ? previous : choices[0];
+            _pseudoFastRamBox.Text = _chipRamBox.SelectedItem is "512" ? "512" : "0";
+        }
+        finally { _updatingSettingsUi = false; }
+        MarkSettingsRestartRequired();
     }
 
     private Control CreateProfilesPage()

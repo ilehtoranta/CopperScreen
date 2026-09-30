@@ -31,7 +31,9 @@ internal sealed class LightweightSpriteDma
         FirstInputHorizontal * LightweightClock.CpuCyclesPerColorClock;
     private const int NormalLowResolutionDdfStart = 0x38;
     private const int NormalHighResolutionDdfStart = 0x3C;
-    private const uint OcsChipAddressMask = 0x0007_FFFEu;
+    private readonly uint _addressMask;
+
+    internal LightweightSpriteDma(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
 
     private readonly uint[] _pointers = new uint[ChannelCount];
     private readonly ChannelState[] _channels = new ChannelState[ChannelCount];
@@ -418,8 +420,8 @@ internal sealed class LightweightSpriteDma
             (DmaconMaster | DmaconSprite);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint MaskAddress(uint address)
-        => address & OcsChipAddressMask;
+    private uint MaskAddress(uint address)
+        => address & _addressMask;
 
     private struct ChannelState
     {

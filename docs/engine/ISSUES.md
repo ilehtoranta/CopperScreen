@@ -5,7 +5,7 @@ ERSY optimization follow-up, accepted on 2026-09-19 with a scoped hires
 performance exception recorded in [PERFORMANCE.md](PERFORMANCE.md).
 Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
-performance exceptions. Scope is the [supported PAL OCS A500 profile](../../CopperMod.Amiga.Lightweight/README.md).
+performance exceptions. Scope is the [supported PAL A500 profiles with OCS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
 For the broader ECS/AGA, CPU, storage and host transition, see the
 [product completion roadmap](ROADMAP.md), which separates missing implementation
@@ -15,8 +15,9 @@ Native A500 Kickstart 3.1 (v40.63) is available as of 2026-09-30, with bounded
 68000 Workbench 3.1 floppy boot and desktop-session parity at 0 and 2 MiB Fast RAM.
 See [the floppy boot record](KICKSTART_31_2026-09-30.md) and the subsequent
 [native FFS hard-disk boot/write/reopen correction](KICKSTART_31_HD_2026-09-30.md).
-This does not resolve the 68060
-OS/FPU validation requirement or add ECS/AGA machine support.
+The [Agnus/Chip RAM follow-up](AGNUS_CHIP_RAM_2026-10-01.md) adds explicit PAL
+8371, 8372A and 8375 (318069-10) layouts with OCS Denise. Full ECS display modes,
+AGA and the 68060 OS/FPU validation requirement remain open.
 
 Native Lemmings gameplay, live digger assignment, disk replacement and a separate
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.
@@ -68,6 +69,7 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-CPU-005 | 68040 / Lotus III disk-two prompt | Uncached instruction-fetch defects corrected; original replay passes; full 040 timing OPEN | Aligned longword fetches and a half-line holding register replace per-word fetches; integer fallback uses the same frontend. The original field-6,500 press is consumed and the unchanged replay reaches a driving demo; all 95 normal/scalar captures match. See [correction and limits](LOTUS_III_040_FETCH_2026-09-27.md). The [earlier failed replay and phase variant](LOTUS_III_040_INVESTIGATION_2026-09-27.md) remain historical evidence. Speculative prefetch, pipeline overlap and physical timing remain unverified. |
 | LWA-AUDIO-004 | CPU-fed word after DMAOFF | Fixed bounded transition | Queued AUDxDAT now survives the last DMA word and raises its manual-playback IRQ. Four discriminating channel/byte-phase cases and Thunderbolt gameplay pass. Exact physical interrupt phase remains within the audio uncertainties above. |
 | LWA-MEM-001 | True Fast RAM | Implemented; bounded native validation | Optional 512 KiB–8 MiB Zorro II RAM, guest Autoconfig, CPU-only mapping, settings and runner support. Published CPU `.54` includes `.53`'s PC-indexed LEA and the subsequent [020/EC020 native allocation and OFS proof](COPPERHDF_020_2026-09-27.md). See [initial evidence and limits](FAST_RAM_2026-09-27.md). No Zorro III or accelerator-local 32-bit RAM is enabled. |
+| LWA-MEM-002 | Explicit Agnus / configurable Chip RAM | Implemented; native boot and bounded DMA validation | PAL 8371 / 512 KiB, 8372A / 512 KiB or 1 MiB, and 8375 part 318069-10 / 1 or 2 MiB; larger Chip layouts use no slow bank. Native KS 3.1 discovers correct memory and boots/writes/reopens seven configurations. KS 1.3 OFS controls and unchanged default captures pass; see [evidence](AGNUS_CHIP_RAM_2026-10-01.md). OCS Denise/fixed PAL remain. Full ECS display, DOFF, electrical unfitted-bank readback and revision-specific 8372A internal A20 rollover are open. Generic unspecified ECS profiles remain unavailable. |
 | LWA-HDF-001 | CopperHDF integration | Implemented; bounded native OFS and FFS proof | Native KS 3.1 FFS/RDB boot/write/dispose/reopen passes at 0 and 2 MiB Fast RAM after correcting the initial DOS lock; see [evidence and limits](KICKSTART_31_HD_2026-09-30.md). Retain KS 1.3 OFS partition/RDB evidence; other filesystem handlers need supplied media. Physical IDE/SCSI and host directories are separate features. The 020 indexed-JSR blocker at `$FC4E28` and subsequent reached operand gaps are [resolved in published CPU `.54`](COPPERHDF_020_2026-09-27.md): 020/EC020 native boot and OFS I/O pass with and without Fast RAM. |
 | LWA-VIDEO-002 | Hires transitions | Unverified; OPEN | Investigate supported raster/scroll/mode-transition failures. |
 | LWA-VIDEO-005 | HAM edges | Mode implemented; edges OPEN | Establish hold reset, mid-line mode and sprite interaction phases. |

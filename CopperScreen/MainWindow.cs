@@ -130,7 +130,7 @@ internal sealed partial class MainWindow : Window
 	private TextBox _kickstartRomBox = null!;
 	private ComboBox _cpuBackendBox = null!;
 	private ComboBox _engineBox = null!;
-	private TextBox _chipRamBox = null!;
+	private ComboBox _agnusModelBox = null!, _chipRamBox = null!;
 	private TextBox _pseudoFastRamBox = null!;
 	private TextBox _pseudoFastBaseBox = null!;
 	private TextBox _realFastRamBox = null!;
@@ -1837,7 +1837,10 @@ internal sealed partial class MainWindow : Window
 		var layout = CreateSettingsPageLayout();
 
 		var chipAndPseudoFast = CreateSettingsGroupForm();
-		_chipRamBox = AddTextSetting(chipAndPseudoFast, "Chip RAM (KiB)");
+		_agnusModelBox = AddComboSetting(chipAndPseudoFast, "Agnus", ["OcsAgnus", "Agnus8372A", "Agnus8375Pal2M", "EcsAgnus", "AgaAlice"]);
+		_chipRamBox = AddComboSetting(chipAndPseudoFast, "Chip RAM (KiB)", ["512", "1024", "2048"]);
+		_agnusModelBox.SelectionChanged += (_, _) => UpdateChipRamChoices();
+		_chipRamBox.SelectionChanged += (_, _) => UpdateChipRamChoices();
 		_pseudoFastRamBox = AddTextSetting(chipAndPseudoFast, "Slow RAM (KiB)");
 		_pseudoFastBaseBox = AddTextSetting(chipAndPseudoFast, "Slow RAM address");
 		var realFast = CreateSettingsGroupForm();
@@ -1848,9 +1851,9 @@ internal sealed partial class MainWindow : Window
 		_rtcEnabledBox.IsCheckedChanged += (_, _) => ApplyRtcEnabledSetting();
 		realFast.Children.Add(CreateSettingsRow("RTC clock", _rtcEnabledBox));
 
-		foreach (var field in new[] { _chipRamBox, _pseudoFastRamBox, _pseudoFastBaseBox, _realFastBaseBox }) field.IsReadOnly = true;
+		foreach (var field in new[] { _pseudoFastRamBox, _pseudoFastBaseBox, _realFastBaseBox }) field.IsReadOnly = true;
 		foreach (var field in new Control[] { _rtgVramBox, _rtcEnabledBox }) field.IsEnabled = false;
-		layout.Children.Add(SettingsNote("512 KiB Chip RAM and 512 KiB slow RAM. Fast RAM: 0, 512, 1024, 2048, 4096 or 8192 KiB. Kickstart assigns its address; changing the size requires a restart. RTC and RTG are not yet available."));
+		layout.Children.Add(SettingsNote("Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. PAL with OCS Denise. Fast RAM: 0, 512, 1024, 2048, 4096 or 8192 KiB. Kickstart assigns its address; changing the size requires a restart. RTC and RTG are not yet available."));
 		layout.Children.Add(CreateSettingsGroupPair(
 			CreateSettingsGroup("Amiga 500 memory", chipAndPseudoFast),
 			CreateSettingsGroup("Expansion memory and RTC", realFast)));
@@ -2315,7 +2318,9 @@ internal sealed partial class MainWindow : Window
 			_kickstartRomBox.Text = _settingsDraft.KickstartRomPath ?? string.Empty;
 			_cpuBackendBox.SelectedItem = _settingsDraft.CpuBackend.ToString();
 			_engineBox.SelectedItem = _settingsDraft.Engine.ToString();
-			_chipRamBox.Text = _settingsDraft.ChipRamKb.ToString(System.Globalization.CultureInfo.InvariantCulture);
+			_agnusModelBox.SelectedItem = _settingsDraft.Chipset.DmaChip.ToString();
+			SetChipRamChoices(_settingsDraft.Chipset.DmaChip);
+			_chipRamBox.SelectedItem = _settingsDraft.ChipRamKb.ToString(System.Globalization.CultureInfo.InvariantCulture);
 			_pseudoFastRamBox.Text = _settingsDraft.PseudoFastRamKb.ToString(System.Globalization.CultureInfo.InvariantCulture);
 			_pseudoFastBaseBox.Text = _settingsDraft.PseudoFastBase;
 			_realFastRamBox.Text = _settingsDraft.RealFastRamKb.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -2573,7 +2578,8 @@ internal sealed partial class MainWindow : Window
 			"Legacy" => CopperScreenEngine.Legacy,
 			_ => throw new InvalidOperationException("Select Lightweight or Legacy as the engine.")
 		};
-		draft.ChipRamKb = ParsePositiveInt(_chipRamBox.Text, "Chip RAM (KiB)");
+		draft.Chipset = draft.Chipset with { DmaChip = Enum.Parse<DmaChipModel>(_agnusModelBox.SelectedItem as string ?? throw new InvalidOperationException("Select an Agnus model.")) };
+		draft.ChipRamKb = ParsePositiveInt(_chipRamBox.SelectedItem as string, "Chip RAM (KiB)");
 		draft.PseudoFastRamKb = ParseNonNegativeInt(_pseudoFastRamBox.Text, "Pseudo-fast RAM KB");
 		draft.PseudoFastBase = _pseudoFastBaseBox.Text?.Trim() ?? "$C00000";
 		draft.RealFastRamKb = ParseNonNegativeInt(_realFastRamBox.Text, "Autoconfig fast RAM KB");

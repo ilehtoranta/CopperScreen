@@ -30,6 +30,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var configuration = new LightweightA500Configuration
             { FramebufferWidth = 908, FloppyDriveCount = options.Profile.FloppyDriveCount,
                 CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
+                AgnusModel = GetAgnusModel(options.Profile.Chipset.DmaChip),
+                ChipRamBytes = options.Profile.ChipRamSize, SlowRamBytes = options.Profile.ExpansionRamSize,
                 FastRamBytes = options.Profile.RealFastRamSize,
                 Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition))).ToArray() };
         if (previous is not null && !previous.IsPaused) throw new InvalidOperationException("Pause before preparing a replacement machine.");
@@ -76,8 +78,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
-        if (p.Chipset != AmigaChipset.OcsPal || p.ChipRamSize != 512 * 1024 ||
-            p.ExpansionRamSize != 512 * 1024 || p.ExpansionRamBase != 0xC00000 ||
+        if (p.Chipset.DisplayChip != DisplayChipModel.OcsDenise || p.Chipset.VideoStandard != VideoStandard.Pal ||
+            p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040) ||
@@ -85,7 +87,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
-            throw new NotSupportedException("Lightweight supports PAL OCS / 68000 or experimental 68EC020/68020/68030/68040 / 512 KiB Chip + 512 KiB slow / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
+            throw new NotSupportedException("Lightweight supports PAL / OCS Denise / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
+        try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
+        catch (ArgumentException ex) { throw new NotSupportedException(ex.Message, ex); }
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             throw new NotSupportedException("Choose your Kickstart 1.3 or A500 3.1 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
         if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
@@ -103,6 +107,14 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             throw new NotSupportedException("Legacy execution overrides do not apply to Lightweight.");
         ValidateInput(options.Input);
     }
+
+    private static LightweightAgnusModel GetAgnusModel(DmaChipModel model) => model switch
+    {
+        DmaChipModel.OcsAgnus => LightweightAgnusModel.Mos8371,
+        DmaChipModel.Agnus8372A => LightweightAgnusModel.Mos8372A,
+        DmaChipModel.Agnus8375Pal2M => LightweightAgnusModel.Mos8375Pal2M,
+        _ => throw new NotSupportedException("Select an explicit supported PAL Agnus: 8371, 8372A or 8375 (318069-10).")
+    };
 
     private static Copper68k.M68kCpuModel GetCpuModel(M68kBackendKind backend) => backend switch
     {

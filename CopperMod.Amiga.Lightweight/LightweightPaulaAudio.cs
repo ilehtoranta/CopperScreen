@@ -63,12 +63,12 @@ internal sealed partial class LightweightPaulaAudio
         {
             case 0x00:
                 channel.Location =
-                    ((uint)(value & 0x0007) << 16) |
+                    ((uint)(value & (machine.DmaAddressMask >> 16)) << 16) |
                     (channel.Location & 0x0000_FFFFu);
                 break;
             case 0x02:
                 channel.Location =
-                    (channel.Location & 0x0007_0000u) |
+                    (channel.Location & (machine.DmaAddressMask & 0xFFFF_0000u)) |
                     (uint)(value & 0xFFFE);
                 break;
             case 0x04:
@@ -364,7 +364,7 @@ internal sealed partial class LightweightPaulaAudio
             if (_dmaOutputCycle == cycle)
             {
                 _pendingData = machine.ReadChipWordBus(_pendingAddress);
-                _currentAddress = (_pendingAddress + 2) & 0x0007_FFFEu;
+                _currentAddress = (_pendingAddress + 2) & machine.DmaAddressMask;
                 _remainingWords = _pendingRemainingWords;
                 if (_pendingReload && !_pendingDiscard && _hasOutputWord)
                     _delayedInterrupt = true;

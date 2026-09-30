@@ -31,7 +31,9 @@ internal sealed class LightweightCopper
 
     private const ushort DmaconMaster = 0x0200;
     private const ushort DmaconCopper = 0x0080;
-    private const uint OcsChipAddressMask = 0x0007_FFFEu;
+    private readonly uint _addressMask;
+
+    internal LightweightCopper(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
 
     private ControlStage _stage;
     private WordPurpose _pendingPurpose;
@@ -307,7 +309,7 @@ internal sealed class LightweightCopper
             }
 
             var offset = (ushort)(firstWord & 0x01FE);
-            if (!CanWriteRegister(offset, machine.GetCustomRegister(LightweightRegisters.Copcon)))
+            if (!CanWriteRegister(offset, machine.GetCustomRegister(LightweightRegisters.Copcon), machine.IsEcsAgnus))
             {
                 _stage = ControlStage.Dormant;
                 return;
@@ -383,11 +385,11 @@ internal sealed class LightweightCopper
             (DmaconMaster | DmaconCopper);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint MaskAddress(uint address) => address & OcsChipAddressMask;
+    private uint MaskAddress(uint address) => address & _addressMask;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool CanWriteRegister(ushort offset, ushort copcon)
-        => offset >= ((copcon & 0x0002) == 0 ? 0x080 : 0x040);
+    private static bool CanWriteRegister(ushort offset, ushort copcon, bool ecs)
+        => offset >= ((copcon & 0x0002) == 0 ? 0x080 : ecs ? 0 : 0x040);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static CopperInputPhase ClassifyInput(int physicalHorizontal)

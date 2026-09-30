@@ -520,7 +520,9 @@ internal sealed class CopperScreenProfile
 
 		return value.Trim().ToLowerInvariant() switch
 		{
-			"ocs" => DmaChipModel.OcsAgnus,
+			"ocs" or "8371" => DmaChipModel.OcsAgnus,
+			"8372a" => DmaChipModel.Agnus8372A,
+			"8375-318069-10" => DmaChipModel.Agnus8375Pal2M,
 			"ecs" => DmaChipModel.EcsAgnus,
 			"aga" or "alice" => DmaChipModel.AgaAlice,
 			_ => throw new InvalidOperationException($"Unsupported Agnus model '{value}'.")

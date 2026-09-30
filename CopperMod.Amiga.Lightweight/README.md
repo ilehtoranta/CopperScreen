@@ -7,8 +7,8 @@ external package. The original package ID and namespace are retained for compati
 The CPU dependency is the public mainline Copper68k `1.5.0` release. See
 [package and consumer verification](../docs/engine/COPPER68K_MAINLINE_1_5_0.md).
 
-Independent PAL OCS A500 engine: Copper68k accurate 68000, 512 KiB Chip RAM,
-512 KiB slow RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
+Independent PAL A500 engine with OCS Denise: Copper68k accurate 68000,
+configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
 (v40.63), one to four standard
 880 KiB ADF/read-only IPF drives (including selected ZIP entries through the host/runner),
 and optional file-backed CopperHDF units.
@@ -47,9 +47,28 @@ implementation and evidence](../docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.m
 the [initial bridge](../docs/engine/CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md), and
 [020 decoder/cache validation](../docs/engine/LOTUS_III_020_CACHE_2026-09-26.md).
 
-The fitted 512 KiB chip RAM is CPU-mirrored through the low 2 MiB address window,
+`LightweightA500Configuration.AgnusModel`, `ChipRamBytes` and `SlowRamBytes`
+select one of the implemented PAL memory layouts:
+
+| Agnus model | Chip RAM | Slow RAM |
+| --- | --- | --- |
+| `Mos8371` (default) | 512 KiB | 0 or 512 KiB (default) |
+| `Mos8372A` | 512 KiB | 0 or 512 KiB |
+| `Mos8372A` | 1 MiB | 0 |
+| `Mos8375Pal2M` (8375, part 318069-10) | 1 or 2 MiB | 0 |
+
+Construction rejects other combinations. Model/size changes require a new machine.
+ECS Agnus choices include widened DMA addressing, PAL chip identification,
+extended blitter sizes and Copper danger access. All retain OCS Denise and fixed
+PAL timing; programmable beam modes, DIWHIGH and blitter DOFF report unsupported.
+The 8375 model names a specific 2 MiB part because other 8375 variants differ.
+See [implementation, native memory discovery and verification limits](../docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
+
+The default 512 KiB layout remains CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
-for the default A500 wiring and the changed native boot identity.
+for the default A500 wiring and the changed native boot identity. Unfitted upper
+banks in the 1 MiB 8375 layout read `$FFFF` and ignore writes; exact electrical
+open-bus behavior is unverified.
 
 Original Denise has no chip-ID register. Its `$DFF07C` read uses the bounded
 preceding-DMA/idle bus model documented in the
@@ -59,7 +78,7 @@ Electrical edge cases and broader write-only readback remain unverified.
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full
-raster and 48 kHz stereo PCM. ECS/AGA, additional CPU/ROM profiles, RTC, RTG, physical
+raster and 48 kHz stereo PCM. Full ECS display modes, AGA, additional CPU/ROM profiles, RTC, RTG, physical
 IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
 

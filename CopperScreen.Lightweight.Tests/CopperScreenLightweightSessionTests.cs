@@ -218,7 +218,6 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     [InlineData("expanded-copperstart")]
     [InlineData("expanded-m68040-kickstart-rom")]
     [InlineData("expanded-m68040-jit-kickstart31-rtg")]
-    [InlineData("vanilla-kickstart13")]
     public void UnsupportedProfilesKeepTheirHardwareAndNeverSelectLegacyAutomatically(string id)
     {
         var options = CopperScreenStartupOptions.Parse(["--profile", id, "--rom", _rom], AppContext.BaseDirectory);
@@ -311,7 +310,6 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     }
 
     [Theory]
-    [InlineData("--profile", "vanilla-kickstart13")]
     [InlineData("--profile", "expanded-copperstart")]
     [InlineData("--cpu", "jit-m68000")]
     [InlineData("--agnus-slot-kernel", "")]

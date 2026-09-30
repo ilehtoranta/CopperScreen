@@ -383,7 +383,7 @@ internal static class CopperScreenProfileStore
 				Machine = new MachineFile
 				{
 					Model = "A500PAL",
-					Agnus = draft.Chipset.DmaChip switch { DmaChipModel.EcsAgnus => "ecs", DmaChipModel.AgaAlice => "aga", _ => "ocs" },
+					Agnus = draft.Chipset.DmaChip switch { DmaChipModel.Agnus8372A => "8372a", DmaChipModel.Agnus8375Pal2M => "8375-318069-10", DmaChipModel.EcsAgnus => "ecs", DmaChipModel.AgaAlice => "aga", _ => "8371" },
 					Denise = draft.Chipset.DisplayChip switch { DisplayChipModel.EcsDenise => "ecs", DisplayChipModel.AgaLisa => "aga", _ => "ocs" },
 					VideoStandard = draft.Chipset.VideoStandard.ToString(),
 					ChipRamKb = draft.ChipRamKb,

@@ -33,6 +33,11 @@ internal sealed class LightweightRegisters
     internal const ushort Bltapth = 0x050;
     internal const ushort Bltdpth = 0x054;
     internal const ushort Bltsize = 0x058;
+    internal const ushort Bltcon0l = 0x05A;
+    internal const ushort Bltsizv = 0x05C;
+    internal const ushort Bltsizh = 0x05E;
+    internal const ushort Beamcon0 = 0x1DC;
+    internal const ushort Diwhigh = 0x1E4;
     internal const ushort Bltcmod = 0x060;
     internal const ushort Bltbmod = 0x062;
     internal const ushort Bltamod = 0x064;
@@ -77,6 +82,15 @@ internal sealed class LightweightRegisters
     internal const ushort SpriteRegisterLast = 0x17E;
     internal const ushort ColorFirst = 0x180;
     internal const ushort ColorLast = 0x1BE;
+
+    internal uint DmaAddressMask { get; }
+    private readonly ushort _pointerHighMask;
+
+    internal LightweightRegisters(uint dmaAddressMask = 0x0007_FFFE)
+    {
+        DmaAddressMask = dmaAddressMask;
+        _pointerHighMask = (ushort)(dmaAddressMask >> 16);
+    }
 
     private const int RegisterWordCount = 0x100;
 
@@ -158,7 +172,7 @@ internal sealed class LightweightRegisters
     {
         var highOffset = secondList ? Cop2lch : Cop1lch;
         var lowOffset = secondList ? Cop2lcl : Cop1lcl;
-        return (uint)((Read(highOffset) & 0x0007) << 16) |
+        return (uint)((Read(highOffset) & _pointerHighMask) << 16) |
             (uint)(Read(lowOffset) & 0xFFFE);
     }
 
@@ -167,7 +181,7 @@ internal sealed class LightweightRegisters
         if ((uint)plane >= 8)
             return 0;
         var highOffset = (ushort)(BplPointerFirst + (plane * 4));
-        return (uint)((Read(highOffset) & 0x0007) << 16) |
+        return (uint)((Read(highOffset) & _pointerHighMask) << 16) |
             (uint)(Read((ushort)(highOffset + 2)) & 0xFFFE);
     }
 
@@ -176,20 +190,20 @@ internal sealed class LightweightRegisters
         if ((uint)sprite >= 8)
             return 0;
         var highOffset = (ushort)(SpritePointerFirst + (sprite * 4));
-        return (uint)((Read(highOffset) & 0x0007) << 16) |
+        return (uint)((Read(highOffset) & _pointerHighMask) << 16) |
             (uint)(Read((ushort)(highOffset + 2)) & 0xFFFE);
     }
 
     internal uint GetBlitterPointer(ushort highOffset)
-        => (uint)((Read(highOffset) & 0x0007) << 16) |
+        => (uint)((Read(highOffset) & _pointerHighMask) << 16) |
             (uint)(Read((ushort)(highOffset + 2)) & 0xFFFE);
 
     internal uint GetDiskPointer()
-        => (uint)((Read(Dskpth) & 7) << 16) | (uint)(Read(Dskptl) & 0xFFFE);
+        => (uint)((Read(Dskpth) & _pointerHighMask) << 16) | (uint)(Read(Dskptl) & 0xFFFE);
 
     internal void SetDiskPointerFromDma(uint pointer)
     {
-        pointer &= 0x0007_FFFE;
+        pointer &= DmaAddressMask;
         var values = Values;
         values[Dskpth >> 1] = (ushort)(pointer >> 16);
         values[Dskptl >> 1] = (ushort)pointer;
@@ -205,7 +219,7 @@ internal sealed class LightweightRegisters
 
     internal void SetBlitterPointerFromDma(ushort highOffset, uint pointer)
     {
-        pointer &= 0x0007_FFFEu;
+        pointer &= DmaAddressMask;
         var values = Values;
         values[highOffset >> 1] = (ushort)(pointer >> 16);
         values[(highOffset + 2) >> 1] = (ushort)pointer;
@@ -218,7 +232,7 @@ internal sealed class LightweightRegisters
     {
         if ((uint)plane >= 8)
             return;
-        pointer &= 0x0007_FFFEu;
+        pointer &= DmaAddressMask;
         var highIndex = (BplPointerFirst >> 1) + (plane * 2);
         var values = Values;
         values[highIndex] = (ushort)(pointer >> 16);
@@ -229,7 +243,7 @@ internal sealed class LightweightRegisters
     {
         if ((uint)sprite >= 8)
             return;
-        pointer &= 0x0007_FFFEu;
+        pointer &= DmaAddressMask;
         var highIndex = (SpritePointerFirst >> 1) + (sprite * 2);
         var values = Values;
         values[highIndex] = (ushort)(pointer >> 16);
