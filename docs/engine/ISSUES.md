@@ -21,6 +21,10 @@ The [Agnus/Chip RAM follow-up](AGNUS_CHIP_RAM_2026-10-01.md) adds explicit PAL
 SuperHires, DIWHIGH, programmable timing and DOFF. AGA, physical genlock,
 A2024 external scan conversion and the 68060 OS/FPU validation remain open.
 Stock NTSC/VGA-driver coverage needs a supplied Storage/monitor-driver fixture.
+The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final
+Fight: Enhanced — Final Edition's opening level, 2 MiB Chip RAM and ECS border
+blanking with matching normal/scalar captures and OCS Denise/1 MiB controls.
+Third-party SuperHires/programmable-raster coverage remains open.
 
 Native Lemmings gameplay, live digger assignment, disk replacement and a separate
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.

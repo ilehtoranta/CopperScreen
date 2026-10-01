@@ -74,6 +74,9 @@ counter geometry without changing the oscillator. Native stock PAL SuperHires
 640x480 raster have coverage. Stock NTSC/VGA monitor launchers are absent from
 the supplied media; see
 [ECS implementation and verification boundaries](../docs/engine/ECS_DISPLAY_2026-10-01.md).
+The [Final Fight: Enhanced native replay](../docs/engine/ECS_REQUIRED_MEDIA_2026-10-01.md)
+adds bounded opening-level coverage for 2 MiB Chip RAM and ECS border blanking,
+with OCS Denise and 1 MiB controls; it does not exercise SuperHires or programmable timing.
 The 8375 model names a specific 2 MiB part because other 8375 variants differ.
 See [implementation, native memory discovery and verification limits](../docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
 

@@ -6,6 +6,10 @@ It produces a browsable report with milestone images, logs, hashes and the first
 differing captured file. It does not certify physical hardware behavior, complete
 games, or host throughput.
 
+The separate [ECS-required Final Fight replay](ECS_REQUIRED_MEDIA_2026-10-01.md)
+uses 2 MiB Chip RAM and 8373 Denise. Its frozen input and normal/scalar evidence
+do not alter this suite's OCS profile, manifest or reviewed fingerprints.
+
 ## Run the suite
 
 Requirements: the .NET 10 SDK, Python 3.10 or newer, and the exact locally supplied

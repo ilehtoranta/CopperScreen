@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-01",
+  "validatedEngineCommit": "525f5d3126c3688e7fc30c71ccbab780938ec818",
+  "recordKind": "bounded-native-compatibility",
+  "title": "Final Fight: Enhanced \u2014 Final Edition",
+  "release": "2026-01-30",
+  "author": "Prototron",
+  "sources": {
+    "author": "https://prototron.weebly.com/final-fight-enhanced.html",
+    "development": "https://prototron.weebly.com/blog/final-fight-enhanced-final-edition-complete-breakdown",
+    "authorLinkedDistribution": "https://drive.google.com/drive/folders/1l_q1gW2zk9TcFM4LOWXCoqcdXH8I_5F9",
+    "downloadedFileId": "1MDtaqWeAt07U--SoY_pFkjNqzIOv6iy5"
+  },
+  "profile": {
+    "cpu": "68000",
+    "copper68k": "1.5.0",
+    "board": "PAL",
+    "agnus": "8375, part 318069-10",
+    "denise": "8373",
+    "chipRamBytes": 2097152,
+    "slowRamBytes": 0,
+    "fastRamBytes": 0,
+    "rom": "Kickstart 1.3 v34",
+    "floppyDrives": 2,
+    "mediaWriteProtected": true,
+    "raster": [
+      1816,
+      313
+    ]
+  },
+  "inputs": {
+    "rom": {
+      "bytes": 262144,
+      "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "upstreamArchive": {
+      "name": "Final Fight Enhanced - Final Edition.rar",
+      "bytes": 8980551,
+      "sha256": "8ff65f2670a4f52dd8eb049a88468e413817e16a05b0064f9b249ff1588e615a"
+    },
+    "media": [
+      {
+        "drive": 0,
+        "name": "disk1.adf",
+        "bytes": 901120,
+        "sha256": "b0e0c7ae1d13c4f03a87b9967d218bf07649c219c28776c916282c7151245e31"
+      },
+      {
+        "drive": 1,
+        "name": "disk2.adf",
+        "bytes": 901120,
+        "sha256": "9c271f2cbaeeecd9525d5d2afbf3cdc0a65f01663257a69ac772602fd064bfa8"
+      }
+    ],
+    "authorInstructions": {
+      "bytes": 5799,
+      "sha256": "6eb497a7553f934b382abea6c2fb690fe39bbc0c243482f665992e7554f39305"
+    },
+    "script": {
+      "path": "CopperMod.Amiga.Lightweight.Runner/Workloads/final-fight-enhanced-final-edition-ecs.json",
+      "executedScriptSha256": "29b5b5806fd7b55c74a65b05ab1ac941ee430a4fbb7cbe0448b35e2c70c67346",
+      "semanticIdentity": true,
+      "sha256LfNormalized": "c231ac49810b2146029eddb529e4260b034c2ba84cf7a7279ddc118aeedb0dce"
+    }
+  },
+  "productionAssembliesSha256": {
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/Copper68k.dll": "5df5bbd7c37e5995ef718f476db5d31a81efe41cee54861baaf2806c37155855",
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperDisk.dll": "6afaa924950f57718d3953dd938b2f0745b0fb3c247c2177ebd612f354ad9a57",
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll": "372c4ff0cf6c55e74a13684234eb2c02e6d43c47e65b7f1fcf4bcdf71391f180",
+    "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll": "76342ab10cadfd766a0a9622d5c8280184606acb9c813286097f58c3767485c0"
+  },
+  "milestones": {
+    "animatedIntro": 900,
+    "titleMenuExploratoryCapture": 6100,
+    "characterSelection": 6200,
+    "twoDiskLoading": 6400,
+    "firstStageCapturedBy": 14000,
+    "scriptedMovement": 16000,
+    "secondButtonInput": 16220,
+    "scriptedAttacks": [
+      16300,
+      18100
+    ],
+    "continueScreenCapturedBy": 18400
+  },
+  "nativeReplayPair": {
+    "final-normal": {
+      "fields": 20000,
+      "unsupported": "none",
+      "logSha256": "243220cfe4f5a9fd900d230d6211c73eae2ac2d94033bf9e5cfad3296dc16182",
+      "engineSummary": "engine=lightweight-a500 workload=image-wide cpuMode=conservative-batch warmup=0 frames=20000 completed=20000 fps=126,26 cycle=2841911066 cpu=0xFB14F78F8D266C87 hardware=0x6C617661F39AA540 output=0x3EFF5B78B408DDEA pixels=568408 audioSamples=1924 pcm=real allocated=214732096 adf=True unsupported=none",
+      "capturedFiles": 606,
+      "inventoryCanonicalJsonSha256": "6a87f8ca74965b44abe0df9239eb2fb620da1f1f09a5fee3688dfc6349d143c0"
+    },
+    "final-scalar": {
+      "fields": 20000,
+      "unsupported": "none",
+      "logSha256": "860253d25b787b330645141890e8cc368aaf2bfb87a0841b2b613844308a0d5e",
+      "engineSummary": "engine=lightweight-a500 workload=image-wide cpuMode=scalar warmup=0 frames=20000 completed=20000 fps=122,07 cycle=2841911066 cpu=0xFB14F78F8D266C87 hardware=0x6C617661F39AA540 output=0x3EFF5B78B408DDEA pixels=568408 audioSamples=1924 pcm=real allocated=214726936 adf=True unsupported=none",
+      "capturedFiles": 606,
+      "inventoryCanonicalJsonSha256": "6a87f8ca74965b44abe0df9239eb2fb620da1f1f09a5fee3688dfc6349d143c0"
+    }
+  },
+  "parity": {
+    "comparedFiles": 606,
+    "differentFiles": 0,
+    "cpuHardwareOutputAndCycleSummariesIdentical": true
+  },
+  "selectedCaptureSha256": {
+    "ecs-display-000001.json": "41187a1117a3e155ca08ca05c6f9994c921afe45d08f511ec37697b29d3a7ae7",
+    "ecs-display-001000.json": "4853664acb7d6650c5edc75604307c908839558091457f30ad9986db26051e0e",
+    "ecs-display-001200.json": "f8bc12a805b6fcf7aba85835f1c62de8271f1d9efff869f3a59d78867bdb8469",
+    "ecs-display-006000.json": "b0a1e6729dbefb409af14040c7dc7836d3de4efab4f7bd905b58fe594087fb7f",
+    "ecs-display-006200.json": "b36d61f87a1900735cc6ffa6bfcebc416ef80558e09056b9b7f9ff6d3bb61b61",
+    "ecs-display-006400.json": "1b1d1252126ffd91020f6baaf3c2cc7d53e4bd8e2dfcf14d1f347ef115bc5226",
+    "ecs-display-014000.json": "cab49037df51613a6bc14a01b5348c6829e82d973a7c12870df30ac515c0798d",
+    "ecs-display-015000.json": "9e886ca962441c2a4c6536ad46db172f1d5f6ea2b391b426e63ca12209b845c0",
+    "ecs-display-016000.json": "e5338fc3ff0510b7f9c266e1ced54694b3ee2acc17468452df27aa3869beef0f",
+    "ecs-display-016200.json": "8435dc1ab21edd4cb341523b2ae449c1ce883afc11d202e4ab4b4e2351d10cdc",
+    "ecs-display-016400.json": "7d671f8b63a0dfff8ab0930d98e70d7c29264787599819323ed80a8f3e0b4665",
+    "ecs-display-016600.json": "8696cad18a7d6d42fcf055f9f300fdc70da7681701a95e771ddd60c8a41d1c07",
+    "ecs-display-017000.json": "ac9c0628c344c30da3442b9dc43c9c207bcbac47fadfbc3e48ac1db24b506df8",
+    "ecs-display-018400.json": "789e4f782695d647fa1a2634acaa0c113c86328448dac14ec535b4fe66deaf00",
+    "ecs-display-018600.json": "1007198055749e4ed982eafafed512374d45a8a8e07f2d23023e8cbccdb08f2b",
+    "ecs-display-020000.json": "de85338e9498b0a61c4421f74f647dd9687139ad44d91c92c0bc471f4cdc4fa4",
+    "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+    "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+    "frame-000001.json": "3f172b65d79ac3191583ae121f769a00f03b415eac57f459a30e718ba55bc145",
+    "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+    "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-001000.bmp": "af5a2605488ed69d58cb1e120feec34fd27b1f9fc4c2d6b6b86fb094ea1abe80",
+    "frame-001000.chipram": "0b3f978e4121afe212ec24b490cf55efc2f311d1cdeafc557d39e9815a090a1b",
+    "frame-001000.json": "14c052a32ba363f469817a62dd1c11a702b1f54e47cfc4766d01e279639184dd",
+    "frame-001000.pcm": "610ba4ef84553c3283abba9229928fc7d11cd64518a685fa481149a8b92c4384",
+    "frame-001000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-001200.bmp": "25eaa330d822f388b315d0f3a23ae98ca57390fe4bbfa5712565e0c73612076e",
+    "frame-001200.chipram": "ca3220de31651ae45d525540c07317ea76b0f6f0f72f2db1ea1f5aad740a6a1b",
+    "frame-001200.json": "26d70ba6aad070797078dd9a8ea9448a306e5203d767d6ead6151cd66886181d",
+    "frame-001200.pcm": "7f3baef36111861cdd3efb2baf0fdc86e2b93c929c7f82f632ef707e92cb9c78",
+    "frame-001200.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-006000.bmp": "0a6cba0c1e66d06d44484a4c156284fddd56a82404eb01241c94a4f33f458a67",
+    "frame-006000.chipram": "9fd61a2957ea8faefd68829f870c9eff32995373f4d015707a6e227bfed74af8",
+    "frame-006000.json": "a1cb3622ec32abdc9a8a15c120e4f0ecbd72bf37f1f515de0faaffc3c0af4fee",
+    "frame-006000.pcm": "1d1756913289e47b6bd240bcce35217b91cd8d037538ce3103565fdc887830d5",
+    "frame-006000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-006200.bmp": "6eeed194a7ad9b877941bd25431fcdf6f288b51e481bdf2a3de4e30065bcb978",
+    "frame-006200.chipram": "fcab72e2b22b1140f0de25b8a8cb843e28878e7910ff95acc6e45a25b1787cdd",
+    "frame-006200.json": "9fae28ec90b1c97be05c0d8342e28006055773f4af55905732ecb9aeb973215c",
+    "frame-006200.pcm": "374d57487983fe9666a9dede645d62217c089d6c1e43926ca64a5286c5077f4e",
+    "frame-006200.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-006400.bmp": "dd19a4c490b976276d0b562fa24ffb928bc33ab15e5bc167c37e5dd1d48f127c",
+    "frame-006400.chipram": "5d37cc38ae8fdc1e264c7bed993a27b2146dd0bc0b421f90d2a12feeaf153d6c",
+    "frame-006400.json": "e87171540e8a5fe223598bd9f714572bd1c29a844aec9d6246e8c478e21c46d7",
+    "frame-006400.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+    "frame-006400.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-014000.bmp": "179ceca89a3613e93c56194b671d28cc9cf302db9ff58f02cdcae587a1201c72",
+    "frame-014000.chipram": "4e5d0d92e8699fc52d4df22b501e310fa361640f674047c87b5ccef6932d5909",
+    "frame-014000.json": "94f89a1193b5e4debb960d04af22f4daf0102c79617551fc7660273e6072d495",
+    "frame-014000.pcm": "0e3e6868a6bdee491894ebeba6fe4e132d6fbc321d229a164a339bc248fe1fc3",
+    "frame-014000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-015000.bmp": "e6b8a412010a8de3640e88d2a2fd9e69a8c740832d5efe3fd01dbfae3081f846",
+    "frame-015000.chipram": "f87d2e0cf977459ffa4dfeec81e2f3c0aecab2be7000ba720f4ed524fc1ca61a",
+    "frame-015000.json": "1de6509b70ad09243b8d147f687757c3d934d9d56ae05c4950c9cd01e99c38f3",
+    "frame-015000.pcm": "dee097bc3fc026e9c383ef4f5831d7aaae1ddfad3cf451c1eb168993effb2aea",
+    "frame-015000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-016000.bmp": "9186cedfb557665b0a3d960844bdc6b64f8192ada92ef06b93c08fc2302719b7",
+    "frame-016000.chipram": "a5846863851d84244094471e3bb009bf6c7ad2b6d8eefcf28c4196238a84b023",
+    "frame-016000.json": "4afc3b50bc80466c2307b1911cecd9c1589a5ca2bbec7b84fe861a31764cc2b5",
+    "frame-016000.pcm": "65092e62126aa07ff18be9a079d15682a4d4dfad34b11bcb1253e0f0a97c5fe2",
+    "frame-016000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-016200.bmp": "a4aad6039092c3137390e6ebd0a5175b84108cd78ddb188d2574476901821784",
+    "frame-016200.chipram": "77b0ce0f6f68d005aad3db6fb72dc410ceb9b3916a6036ba25a5cd376c867cfb",
+    "frame-016200.json": "6cb9642fc88ea30b2bb843469cf77986ab4a23e2dd2f373cc541498f950c49ad",
+    "frame-016200.pcm": "08371196d8793d93803861daa9cc83595c893d7de711e93393e4cc3dc35443d8",
+    "frame-016200.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-016400.bmp": "fd46db7c6cf18845f43c45278d8c0253d5fec7a180a871826a77a3dfa29d2883",
+    "frame-016400.chipram": "4ed5e00bd7d6b5aac8495b28f7fbf2437958cf3803eef8946506222aad8eaaa3",
+    "frame-016400.json": "024b171e09a5fe4c444977087d4bc141c25ec6bff73aec2e8e94c7a259b3cffb",
+    "frame-016400.pcm": "7f9e4f7b7fd47e979634eea7080a0f0307820ba66d6ba55e2b2614a31f3bc858",
+    "frame-016400.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-016600.bmp": "86ada513667e719bc9cb84e8df9b3a5869c30b07438c1ecbf352d9a00111bf3c",
+    "frame-016600.chipram": "c6189741ae73fdbf0cd88cc6e8c152209746c8080aaddaae8fee3c8409ddada8",
+    "frame-016600.json": "b414e01ff1a977a45b3914517d7fc5f4a2856353c1f8eb504fc6105bd67d3c8c",
+    "frame-016600.pcm": "f715b7700a46aa12ca520bf22cde65499b2cd9bcc1e194edd5829f6b89ce6127",
+    "frame-016600.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-017000.bmp": "68de57efb43d2d55822a1f68b4477ca37518fed2bda817a07669b384234466bb",
+    "frame-017000.chipram": "24e79f15b4280b1448eb892c88f0a043c3b83678b02b3e6b56113fd2f42d204c",
+    "frame-017000.json": "acf7d78c718e949c1e421d95f0b167972c6048b56b8c5d5022dad86429d12ead",
+    "frame-017000.pcm": "bd87faca7dc12ddd6553ea499ad2ccd39d9bd5980f650eb3328a6a07f41e883c",
+    "frame-017000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-018400.bmp": "6ae5dc0176455198e1bead9bcc18fcfbde28b1ca9500ac901676b3f8dbaef07c",
+    "frame-018400.chipram": "0a082357cbced8258ad7077ce50bb03fbb6955cf0c03f05c45c6e50ead771a92",
+    "frame-018400.json": "b871117800e35b44dd61514bef79693647f39a274092d982c58b76df33a130b5",
+    "frame-018400.pcm": "f5132ff9f700db7fa83ec186818a8312e19f8cd24d4dd88d2e6f44949091443d",
+    "frame-018400.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-018600.bmp": "f5978c134f65428611a5fd7afaf994378992e85ff370b0c4d2373e7d4004bf0d",
+    "frame-018600.chipram": "ac4c7b3acc1660adffa11e146191d00ff983821fe82bd30252f745b072239a47",
+    "frame-018600.json": "eecd3f96d6cc630a8605687ae176b1c8bb044a6da97b6726659e06d3292b92b2",
+    "frame-018600.pcm": "d611f0f6e07bf29b92a1f717daa69f8467a393716d8433b85af8cc1a784c5970",
+    "frame-018600.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frame-020000.bmp": "af58d261da500dd93f28f0b6c7573ad71a115a21d5ad1b7c034554da094f853b",
+    "frame-020000.chipram": "d52388b3608dcaa9dd8d0510e772cbede18c9523986bc02ad1c4b3cee1184b09",
+    "frame-020000.json": "531e6a1e0f79d25c501dfbd16f052ab9db26c5cb31adf5c90b64b416fcb04320",
+    "frame-020000.pcm": "2911940e4e8011ba2146c577c8abcf9d747ca757691fa485efbb62d0adc0bab4",
+    "frame-020000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "ecsEvidence": {
+    "authorRequiresEcsDenise": true,
+    "actualGameCopperBplcon0": "5201",
+    "actualGameCopperBplcon3": "0020",
+    "feature": "ECSENA and BRDRBLNK: suppress COLOR00 outside the display window",
+    "introField": 2400,
+    "matchedOcsDeniseControl": {
+      "agnus": "8375, part 318069-10",
+      "chipRamBytes": 2097152,
+      "denise": "8362",
+      "fields": 2400,
+      "cpuStateAtField2400Identical": true,
+      "raster": [
+        908,
+        313
+      ],
+      "rgbDifferencesAfter2xHorizontalNormalization": 11808,
+      "differenceScope": "border strips only; framebuffer alpha excluded",
+      "logSha256": "63795ea08633b4ae00819fbb9db5263fbcbaa4c0646e944dae24d4463955be63",
+      "executedInputScriptSha256": "e62d2e256e2fdaa58be5a88a587427927e6c74ba66f5f3616f9ee23847f6aa49",
+      "captureDirectory": "artifacts/ecs-required-2026-10-01/boot-ocs-denise",
+      "captureFileCount": 45,
+      "chipRamAtField2400Identical": true
+    },
+    "oneMiBControl": {
+      "agnus": "8375, part 318069-10",
+      "denise": "8373",
+      "chipRamBytes": 1048576,
+      "fields": 6500,
+      "result": "guest Guru 80000003:00001970; no game intro/menu",
+      "engineUnsupported": false,
+      "logSha256": "44a1ae9c1ca4ff6fce536c1993dfd34f0d63be0ba2a6ecfd55609568337d13e8",
+      "lastCaptureSha256": "5cf95b7c0ab5dfac2e8a187f676c86893164748f35e46f15e542d32fdcc5f65a",
+      "executedInputScriptSha256": "9f2205becce3cff0f6455fef2e24308d43d4d1ab52f7360c254512cdd8051585",
+      "captureDirectory": "artifacts/ecs-required-2026-10-01/gameplay-1m",
+      "captureFileCount": 84
+    }
+  },
+  "limitations": [
+    "First stage only; no completed level/full-game claim.",
+    "Only Maki and one-player path.",
+    "No guest SuperHires, programmable raster, DIWHIGH or big-blit coverage established by this title.",
+    "OCS Denise boots with 2 MiB ECS Agnus, but does not render the authored borders correctly; this is not a DENISEID boot-gate test.",
+    "Supported KS 1.3 used, not the author's recommended KS 2.05/A600 profile.",
+    "No native desktop interaction or physical-hardware comparison.",
+    "Normal/scalar agreement is consistency evidence, not a hardware oracle.",
+    "Capture-run FPS/allocation totals are not performance acceptance.",
+    "No production engine source change for this investigation."
+  ]
+}

@@ -99,6 +99,12 @@ machine from the persisted copy and verifies the guest's reopen marker.
 
 ## Verification limits
 
+The subsequent [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md)
+tests Final Fight: Enhanced — Final Edition through its opening level and
+continue screen. It supplies native 2 MiB Chip RAM and ECS border-blanking
+coverage with an OCS Denise control; it does not extend third-party coverage
+to SuperHires or programmable timing.
+
 Stock NTSC SuperHires and stock VGA Productivity are **unavailable native
 coverage** with the supplied Workbench/Install fixtures. Their monitor
 launchers are absent. The diagnostic guest reports ModeNotAvailable `$00000002`
