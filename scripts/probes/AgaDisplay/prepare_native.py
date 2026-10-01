@@ -13,11 +13,13 @@ from pathlib import Path
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('source', type=Path)
 p.add_argument('output', type=Path)
-p.add_argument('--mode', choices=['rgb24', 'ham6', 'ham8', 'programmed-dual'], default='rgb24')
+p.add_argument('--mode', choices=['rgb24', 'ham6', 'ham8', 'programmed-dual',
+                                'sprites16', 'sprites32', 'sprites32page', 'sprites64'], default='rgb24')
 p.add_argument('--ndk', type=Path, required=True, help='Directory containing supplied FD library definitions')
 a = p.parse_args()
 mode, width, height = 0x21000, 320, 256
 depth = 6 if a.mode == 'ham6' else 8
+sprite_fetch = {'sprites16': 0, 'sprites32': 1, 'sprites32page': 2, 'sprites64': 3}.get(a.mode)
 if a.mode in ('ham6', 'ham8'): mode |= 0x800
 
 def vectors(name):
@@ -80,10 +82,14 @@ for index in range(16 if a.mode == 'ham6' else 64 if a.mode == 'ham8' else 256):
 tiles = []
 for pen in range(256):
     column, row = pen % 16, pen // 16
+    if sprite_fetch is not None:
+        continue
     if a.mode == 'programmed-dual':
         raw = sum(((row >> bit & 1) << (2*bit)) | ((column >> bit & 1) << (2*bit+1)) for bit in range(4))
         for top in (16, 136): tiles.append((raw, (column*20, top+row*7, column*20+19, top+row*7+6)))
     else: tiles.append((pen & 63 if depth == 6 else pen, (column*20, 16+row*15, column*20+19, 30+row*15)))
+if sprite_fetch is not None:
+    tiles = [(0xC0, (0, 0, 319, 255))]
 for pen, bounds in tiles:
     # V39 HAM8 display Copper lists rotate the bitmap planes: graphics pens
     # keep their two command bits at 7/6, while Lisa sees them at BP2/BP1.
@@ -102,6 +108,8 @@ words(0x2204); lea('proof', 0); words(0x2408)
 proof = b'Native AGA PAL 320x256 depth 8: all 256 RGB24 colours drawn\n'
 if a.mode != 'rgb24':
     proof = f'Native AGA {a.mode} PAL 320x256 depth {depth}: encoded pixels drawn\n'.encode()
+if sprite_fetch is not None:
+    proof = f'Native AGA {a.mode} PAL 320x256 depth 8: sprite DMA data prepared\n'.encode()
 immediate(3, len(proof)); jsr(dos['Write']); words(0x2204); jsr(dos['Close'])
 if a.mode == 'programmed-dual':
     # The OS allocated/drew the eight-plane bitmap and wrote the proof. This
@@ -120,6 +128,42 @@ if a.mode == 'programmed-dual':
                  (0x1e4,0x2100), (0x092,0x38), (0x094,0xd8), (0x108,0xfff8),
                  (0x10a,0xfff8), (0x088,0), (0x096,0x8380)]: custom(r,v)
     words(0x60fe)                         # task holds mode without a privileged STOP
+if sprite_fetch is not None:
+    # Native Exec allocates and aligns the DMA data in Chip RAM. The Copper
+    # list itself is in this HUNK on the explicit no-Fast-RAM A1200 profile.
+    words(0x2c78, 4); jsr(-132); jsr(-120)  # Forbid, Disable
+    def custom(r, v):
+        words(0x33fc, v); long(0xdff000+r)
+    custom(0x096, 0x7fff); custom(0x09a, 0x7fff)
+    byte_width = 2 if sprite_fetch == 0 else 8 if sprite_fetch == 3 else 4
+    stream_bytes = byte_width * 56
+    immediate(0, stream_bytes*8+7); immediate(1, 0x10002); jsr(-198)  # AllocMem(MEMF_CHIP|CLEAR)
+    words(0x4a80); relative(0x6700, 'fail')
+    words(0x0680); long(7); words(0x0280); long(0xfffffff8); words(0x2c00,0x2440)
+    lea('sprite-0', 1); immediate(1, stream_bytes*4-1)
+    label('sprite-copy'); words(0x34d9); relative(0x51c9, 'sprite-copy')
+    lea('sprite-copper', 0)
+    for plane in range(8):
+        words(0x202b, 192+plane*4, 0x3140, plane*8+6, 0x4840, 0x3140, plane*8+2)
+    for sprite in range(8):
+        words(0x2006,0x0680); long(sprite*stream_bytes)
+        words(0x3140, 64+sprite*8+6, 0x4840, 0x3140, 64+sprite*8+2)
+    words(0x2008, 0x33c0); long(0xdff082)
+    words(0x4840, 0x33c0); long(0xdff080)
+    for r, v in [(0x100,0x0211), (0x102,0), (0x104,0x24), (0x106,0x0c40),
+                 (0x10c,0x802b), (0x1fc,3 | sprite_fetch << 2), (0x08e,0x2c81), (0x090,0x2cc1),
+                 (0x1e4,0x2100), (0x092,0x38), (0x094,0xd8), (0x108,0xfff8),
+                 (0x10a,0xfff8), (0x098,0xf000), (0x10e,0xc3), (0x088,0), (0x096,0x83a0)]: custom(r,v)
+    label('sprite-sample-field'); lea('sprite-collisions', 0)
+    for row, y in enumerate((64,80,112,128,160,176)):
+        for phase, line in [('clear', y+1), ('read', y+9)]:
+            label(f'sprite-{row}-{phase}')
+            words(0x3039); long(0xdff006); words(0x0240,0xff00,0x0c40,line << 8)
+            relative(0x6600, f'sprite-{row}-{phase}')
+            if phase == 'clear': words(0x3039); long(0xdff00e)
+            else:
+                words(0x3039); long(0xdff00e); words(0x30c0)  # native read-clear -> d0 -> proof RAM
+    relative(0x6000, 'sprite-sample-field')
 words(0x2c4d); immediate(7, 6000)
 label('wait'); jsr(gfx['WaitTOF']); words(0x5387); relative(0x6600, 'wait')
 words(0x2c4c, 0x204b); jsr(intuition['CloseScreen']); moveq(0, 0)
@@ -145,6 +189,38 @@ if a.mode == 'programmed-dual':
     # Restart pointers and priority each field, then exchange priorities at the
     # second grid. The guest chooses PF2 offset 32 and colour-address XOR 128.
     words(0x104,0x24,0xb401,0xfffe,0x104,0x64,0xffff,0xfffe)
+if sprite_fetch is not None:
+    label('sprite-copper')
+    for plane in range(8): words(0xe0+plane*4,0,0xe2+plane*4,0)
+    for sprite in range(8): words(0x120+sprite*4,0,0x122+sprite*4,0)
+    words(0x106,0x0c40,0x10e,0xc3, 0x6001,0xfffe,0x106,0x0c80,0x10e,0xc1,
+          0x9001,0xfffe,0x106,0x0cc0,0x10e,0xc2, 0xffff,0xfffe)
+    # Each stream's size is a multiple of eight bytes. The guest copies this
+    # original payload to the aligned MEMF_CHIP allocation above.
+    for sprite in range(8):
+        label(f'sprite-{sprite}')
+        for y in ((64,112,160) if sprite < 4 else (80,128,176)):
+            x = 140 + 70 * (sprite % 4 if sprite != 7 else 2)
+            fine = sprite % 4
+            pos = y << 8 | ((x-1) >> 1)
+            ctl = (y+8) << 8 | ((x-1) & 1) | ((fine & 2) << 3) | ((fine & 1) << 3) | (0x80 if sprite == 7 else 0)
+            byte_width = 2 if sprite_fetch == 0 else 8 if sprite_fetch == 3 else 4
+            for control in (pos, ctl):
+                words(control)
+                code.extend(bytes(byte_width-2))
+            for _ in range(8):
+                for plane in range(2):
+                    for word in range(byte_width // 2):
+                        pattern = 0
+                        for bit in range(16):
+                            i = word*16+bit
+                            pixel = (i + sprite + i//16) % 4
+                            pattern |= ((pixel >> plane) & 1) << (15-bit)
+                        words(pattern)
+        code.extend(bytes(byte_width*2))
+    if len(code) & 1: code.append(0)
+    code.extend(b'AGASPRCOLv1\0')
+    label('sprite-collisions'); code.extend(bytes(12))
 for offset, name in fixes: struct.pack_into('>h', code, offset, labels[name] - offset)
 while len(code) % 4: code.append(0)
 executable = struct.pack('>8I', 1011, 0, 1, 0, 0, len(code)//4, 1001, len(code)//4) + code + struct.pack('>I', 1010)

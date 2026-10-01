@@ -42,7 +42,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly LightweightBitplanes _bitplanes;
     private readonly LightweightBlitter _blitter;
     private readonly LightweightSpriteDma _spriteDma;
-    private readonly LightweightSprites _sprites = new();
+    private readonly LightweightSprites _sprites;
     private readonly LightweightPaulaAudio _paula = new();
     private readonly LightweightPaulaSerial _serial = new();
     private readonly LightweightCia _ciaA = new();
@@ -126,6 +126,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _bitplanes = new(_registers.DmaAddressMask, IsEcsAgnus, IsAga);
         _blitter = new(_registers.DmaAddressMask);
         _spriteDma = new(_registers.DmaAddressMask);
+        _sprites = new(IsAga);
         // ECS pointer storage is separate from the physical DRAM decoder.
         // With 512 KiB Chip, JP2 still selects CPU A23 for
         // the second bank; DMA A19 can address a fitted slow-RAM bank directly.
@@ -308,7 +309,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
-        "AGA enhanced sprites/collisions, palette readback, scan doubling and A2024 external scan-converter",
+        "AGA palette readback, scan doubling, CPU/Copper page-mode sprite bus residue and A2024 external scan-converter",
         "floppy formats other than standard ADF and read-only IPF",
         "physical IDE/SCSI controllers and host-directory mounts",
         "save states",
@@ -1183,11 +1184,17 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         => _sprites.ComposeDualHiresColorIndexes(line, x, firstPlacement, secondPlacement, firstCode, secondCode,
             out first, out second);
 
-    internal void ComposeAgaSpriteColorIndexes(int line, int x, int firstPlacement,
-        int secondPlacement, int firstCode, int secondCode, out int first, out int second, out int group,
-        int thirdCode, int fourthCode)
-        => _sprites.ComposeDualHiresColorIndexes(line, x, firstPlacement, secondPlacement,
-            firstCode, secondCode, out first, out second, out group, thirdCode, fourthCode);
+    internal int ComposeAgaSpritePixel(int line, int x, int placement, int code)
+        => _sprites.ComposeAgaPixel(line, x, placement, code);
+
+    internal void ConfigureAgaSprites(ushort bplcon0, ushort bplcon3, ushort bplcon4, ushort fmode)
+        => _sprites.ConfigureAga(bplcon0, bplcon3, bplcon4, fmode);
+
+    internal void OnSpriteWideOutput(int sprite, bool dataA, ulong value, int bits, long cycle)
+        => _sprites.OnAgaDmaData(sprite, dataA, value, bits, cycle);
+
+    internal void SetAgaCollisionControl(ushort value) => _sprites.SetAgaCollisionControl(value);
+    internal void ReportUnsupportedAgaSpriteWrite() => _video.ReportUnsupportedAgaSpriteWrite();
 
     internal void SetCollisionControl(ushort value) => _sprites.SetCollisionControl(value);
     internal void SetCollisionMode(bool dual, bool planesEnabled)
@@ -1859,6 +1866,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             : (ushort)0;
         _registers.Write(offset, value);
 
+        if (IsAga && offset == LightweightRegisters.Clxcon)
+            _registers.Write(LightweightRegisters.Clxcon2, 0);
+
         if (IsEcsAgnus && offset is LightweightRegisters.Beamcon0 or LightweightRegisters.Htotal or LightweightRegisters.Vtotal)
         {
             _clock.ConfigureEcs(this);
@@ -1878,7 +1888,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         if (offset is LightweightRegisters.Bplcon3 or LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2)
             _video.OnRegisterWrite(offset, value, cycle);
-        if (offset == LightweightRegisters.Fmode) _bitplanes.OnRegisterWrite(offset, value, cycle, this);
+        if (offset == LightweightRegisters.Fmode)
+        {
+            _bitplanes.OnRegisterWrite(offset, value, cycle, this);
+            _spriteDma.OnRegisterWrite(offset, cycle, this);
+        }
         if (offset is LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3 or
             LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2)
         {

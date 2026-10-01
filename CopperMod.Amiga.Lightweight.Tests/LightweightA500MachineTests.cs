@@ -424,7 +424,7 @@ public sealed class LightweightA500MachineTests
     {
         using var machine = new LightweightA500Machine();
 
-        Assert.Contains("AGA enhanced sprites/collisions, palette readback, scan doubling and A2024 external scan-converter", LightweightA500Machine.UnsupportedFeatures);
+        Assert.Contains("AGA palette readback, scan doubling, CPU/Copper page-mode sprite bus residue and A2024 external scan-converter", LightweightA500Machine.UnsupportedFeatures);
         Assert.False(machine.IsAdfMounted);
     }
 

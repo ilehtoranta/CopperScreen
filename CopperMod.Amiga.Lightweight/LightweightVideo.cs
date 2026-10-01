@@ -294,8 +294,9 @@ internal sealed partial class LightweightVideo
                     _effectivePlaneMask = (1 << _effectivePlaneCount) - 1;
                     _effectivePlanePairMask = _effectivePlaneMask | (_effectivePlaneMask << 6);
                     UpdateUnsupportedMode();
-                    if (_ecsDisplay) machine.SetSpriteSuperHires(_ecsDenise &&
-                        (!_aga || (_ecsBplcon3 & 0xC0) == 0) && (_effectiveBplcon0 & 0x8040) == 0x0040);
+                    if (_aga) machine.ConfigureAgaSprites(_effectiveBplcon0, _ecsBplcon3, _agaBplcon4, _agaFmode);
+                    if (_ecsDisplay && !_aga) machine.SetSpriteSuperHires(_ecsDenise &&
+                        (_effectiveBplcon0 & 0x8040) == 0x0040);
                     refreshRenderLine = true;
                     break;
                 case LightweightRegisters.Bplcon1:
@@ -343,21 +344,22 @@ internal sealed partial class LightweightVideo
                     if (agaOffsetChanged) UpdateAgaDualPixels();
                     if (_aga)
                     {
-                        machine.SetSpriteSuperHires((_ecsBplcon3 & 0xC0) == 0 &&
-                            (_effectiveBplcon0 & 0x8040) == 0x0040);
                         CheckAgaMode();
+                        machine.ConfigureAgaSprites(_effectiveBplcon0, _ecsBplcon3, _agaBplcon4, _agaFmode);
                     }
                     break;
                 case LightweightRegisters.Bplcon4:
                     _agaBplcon4 = _pendingControlValue;
+                    if (_aga) machine.ConfigureAgaSprites(_effectiveBplcon0, _ecsBplcon3, _agaBplcon4, _agaFmode);
                     if (_aga) CheckAgaMode();
                     break;
                 case LightweightRegisters.Fmode:
                     _agaFmode = _pendingControlValue;
+                    machine.ConfigureAgaSprites(_effectiveBplcon0, _ecsBplcon3, _agaBplcon4, _agaFmode);
                     CheckAgaMode();
                     break;
                 case LightweightRegisters.Clxcon2:
-                    if (_pendingControlValue != 0) UnsupportedActiveFeature = "AGA extended collisions (next milestone)";
+                    machine.SetAgaCollisionControl(_pendingControlValue);
                     break;
             }
             _pendingControlCycle = long.MaxValue;

@@ -22,8 +22,11 @@ SuperHires, DIWHIGH, programmable timing and DOFF. The [initial AGA profile](AGA
 adds native PAL A1200 boot and eight-plane RGB24 output. The
 [HAM/dual-playfield follow-up](AGA_HAM_DUAL_2026-10-01.md) implements HAM6/HAM8
 and two four-plane playfields in all three resolutions, with native stock HAM
-screens and a programmed DPF probe. Enhanced sprites/collisions, scan doubling,
-palette readback, combined HAM/DPF, nonstandard HAM/DPF modes, physical genlock,
+screens and a programmed DPF probe. The [sprite follow-up](AGA_SPRITES_2026-10-01.md)
+adds 16/32/64-bit DMA, 140/70/35 ns sprite output, fine positions, palette banks
+and eight-plane collisions, with original native probes. Scan doubling,
+palette readback, CPU/Copper page-mode sprite bus residue, active sprite
+resolution/fetch transitions, combined HAM/DPF, nonstandard HAM/DPF modes, physical genlock,
 A2024 external scan conversion and the 68060 OS/FPU validation remain open.
 Stock NTSC/VGA-driver coverage needs a supplied Storage/monitor-driver fixture.
 The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final

@@ -46,8 +46,17 @@ Sprites overlay the result without entering the hold. A 256-entry dual-playfield
 table maps raw odd/even-plane codes to selected palette address and the masking
 threshold of both opaque fields. BPLCON2 priority and BPLCON3 PF2OF writes update
 that table at the existing control deadline. BPLCON4 XOR follows playfield selection.
-Hires/SuperHires samples share each legacy-width sprite clock while masking its
-subpixels independently. No additional device timeline or Release allocation is added.
+Lisa [sprite composition](AGA_SPRITES_2026-10-01.md) samples every 35 ns raster
+position independently of the playfield resolution. Comparator-latched data,
+width and sample step produce 16/32/64-bit sprites at 140/70/35 ns; palette banks
+remain live controls. Attached pairs always select the odd bank. Alice captures
+sprite addresses and FMODE at the existing address-input phase, samples RAM at
+output, advances by the selected aligned stride and delivers the payload through
+the existing Lisa input deadline. CLXCON2 expands the raw collision lookup to
+eight planes; a CLXCON write resets the extension at that same input phase.
+Border sprites respect ECSENA and border blanking. No additional device timeline
+or steady Release allocation is added. Active resolution/fetch transitions and
+physical sub-CCK phases remain unverified; the retained raster phase is +1 lores pixel.
 
 EC020 masks each transfer to 24 bits. A 68020/030/040 address above `$FFFFFF` returns
 all-one data or ignores a write while advancing time; it never aliases a device.

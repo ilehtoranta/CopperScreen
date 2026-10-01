@@ -64,3 +64,30 @@ For native desktop boot and cold-reopen coverage, supply `COPPERSCREEN_A1200_ROM
 and `COPPERSCREEN_AGA_PROBE_HDF` to `Kickstart30AgaTests`. The fixture and ROM
 archive hashes are pinned in that test. Without both inputs the optional test
 is unavailable coverage. See [the initial AGA record](../../../docs/engine/AGA_INITIAL_2026-10-01.md).
+
+## Sprite widths, resolutions and collisions
+
+Prepare with `--mode sprites16`, `sprites32`, `sprites32page` or `sprites64`.
+Use the PAL A1200 profile above, 1200 fields and checkpoints every 300 fields.
+The guest opens a native depth-eight screen, fills raw planes 7/8, initializes
+RGB24 colours and writes `Native AGA <mode> PAL 320x256 depth 8: sprite DMA data prepared\n`
+to the existing DOS proof file. It then takes chipset ownership, allocates an
+aligned MEMF_CHIP buffer through native Exec and copies original sprite streams.
+The separately programmed display exercises 140/70/35 ns rows at y=64/80,
+112/128 and 160/176. All eight channels have fine positions, even/odd banks
+2/11 and playfield XOR 128. The last pair is attached with unequal fine starts.
+
+`verify_sprites.py <frame.bmp> --mode <mode> --chipram <frame.chipram>` checks
+53,376 pixels per checkpoint, including transparent bits, gaps and complete
+widths. The guest repeatedly reads CLXDAT and retains six words after the unique
+`AGASPRCOLv1` marker. Ignoring the unused high bit, expected words are
+`0067 0199 0000 0000 0060 0180`; these distinguish matching planes 7/8 from
+individual mismatches in single-playfield mode. The independent reader rejects
+missing, corrupt or duplicate proofs. The file proof establishes preceding
+native screen/DOS work; the pixels and sampled hardware words establish the
+sprite/collision result. Neither alone proves the complete run.
+
+This is an original native guest probe. Third-party games/demos, stock OS
+extended-sprite APIs, active width/resolution transitions and physical Alice/Lisa
+phases need further evidence. The pixel coordinates retain the existing +1
+lores raster phase. See [evidence and limits](../../../docs/engine/AGA_SPRITES_2026-10-01.md).

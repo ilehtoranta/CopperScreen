@@ -7,7 +7,7 @@ namespace CopperMod.Amiga.Lightweight;
 /// Compact OCS Denise sprite registers and pixel combiner. CPU, Copper and
 /// Agnus DMA all feed the same physical register latches.
 /// </summary>
-internal sealed class LightweightSprites
+internal sealed partial class LightweightSprites
 {
     private enum PendingInputKind : byte
     {
@@ -60,6 +60,7 @@ internal sealed class LightweightSprites
 
     internal void Reset()
     {
+        ResetAgaSprites();
         _superHires = false;
         _collisionData = _collisionControl = 0;
         _collisionDual = false;
@@ -552,6 +553,7 @@ internal sealed class LightweightSprites
     internal void SetCollisionControl(ushort value)
     {
         _collisionControl = value;
+        _agaCollisionControl = 0;
         _collisionSpriteEnable = (byte)(0x55 | ((value >> 11) & 2) |
             ((value >> 10) & 8) | ((value >> 9) & 32) | ((value >> 8) & 128));
         UpdateCollisionMatches();
@@ -574,6 +576,7 @@ internal sealed class LightweightSprites
 
     private void UpdateCollisionMatches()
     {
+        if (_aga) UpdateAgaCollisionMatches();
         var enabled = (_collisionControl >> 6) & 63;
         for (var code = 0; code < 64; code++)
         {
@@ -670,6 +673,7 @@ internal sealed class LightweightSprites
         if (_pendingKind == PendingInputKind.Register)
         {
             ApplyPendingRegister();
+            if (_aga) ApplyAgaRegister(machine);
             return;
         }
 
@@ -687,11 +691,13 @@ internal sealed class LightweightSprites
                 break;
             case PendingInputKind.DmaDataA:
                 state.DataA = _pendingValue;
+                if (_aga) ApplyAgaDmaData(sprite, true);
                 _armedMask |= bit;
                 machine.SetSpriteRegisterFromDma(sprite, 4, _pendingValue);
                 break;
             case PendingInputKind.DmaDataB:
                 state.DataB = _pendingValue;
+                if (_aga) ApplyAgaDmaData(sprite, false);
                 machine.SetSpriteRegisterFromDma(sprite, 6, _pendingValue);
                 break;
         }

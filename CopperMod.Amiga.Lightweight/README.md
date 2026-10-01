@@ -92,10 +92,14 @@ screen probe draws all 256 colours and persists its proof through desktop
 cold reopen. `--agnus alice --denise lisa --cpu 68ec020 --chip-ram-kib 2048
 --slow-ram-kib 0` selects it in the runner. The desktop profile is `a1200-aga-pal`.
 Empty Gayle IDE/PCMCIA identification is implemented; disk boot uses CopperHDF,
-not a physical ATA controller. Palette readback, enhanced sprites/collisions and
-scan doubling remain unavailable. Combined HAM/dual playfield and nonstandard
+not a physical ATA controller. Sprite DMA supports 16/32/64-bit widths,
+independent 140/70/35 ns resolutions, fine positions and even/odd palette banks.
+Attached pairs use the odd bank, and CLXCON2 extends collisions through planes
+7/8. See [focused and native sprite evidence](../docs/engine/AGA_SPRITES_2026-10-01.md).
+Palette readback and scan doubling remain unavailable. Combined HAM/dual playfield and nonstandard
 HAM plane counts/dual priorities are explicitly unverified. Fine positioning,
-manual wide-data writes, genlock and physical A1200 timing remain unverified.
+manual page-mode data bus residue, active resolution/fetch transitions, genlock
+and physical A1200 timing remain unverified.
 See [initial AGA evidence and limits](../docs/engine/AGA_INITIAL_2026-10-01.md).
 The [HAM and dual-playfield follow-up](../docs/engine/AGA_HAM_DUAL_2026-10-01.md)
 records native HAM6/HAM8 screens, a separately programmed dual-playfield probe,

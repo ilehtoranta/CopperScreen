@@ -96,74 +96,51 @@ internal sealed partial class LightweightVideo
         var ham = (_effectiveBplcon0 & 0x800) != 0 && (_effectivePlaneCount == 6 || _effectivePlaneCount == 8);
         var start = (line * _ecsLineClocks * 2 + x) * _outputScale;
         Span<int> codes = stackalloc int[8];
-        Span<int> sprites = stackalloc int[8];
+        Span<int> colors = stackalloc int[8];
         Span<int> placements = stackalloc int[8];
-        sprites.Fill(-1);
         for (var i = 0; i < resolution * 2; i++)
         {
             var code = codes[i] = ShiftAgaPixel(x * resolution + i, resolution);
             placements[i] = dual ? _agaDualPixels[code] >> 8 : code == 0 ? 4 : _effectiveSpritePlayfieldPlacement;
-        }
-        var spriteResolution = resolution == 4 && (_ecsBplcon3 & 0xC0) == 0 ? 2 : 1;
-        for (var i = 0; i < resolution * 2;)
-        {
-            var lowX = x + i / resolution;
-            if (InEcsWindow(line, lowX) && IsSpriteOutputEnabled(line))
-            {
-                if (resolution == 1)
-                    sprites[i] = machine.ComposeSpriteColorIndex(line, lowX, 1, placements[i], codes[i] & 63);
-                else
-                {
-                    // One sprite sample covers two or four playfield samples.
-                    // Resolve each priority separately but advance its shifter
-                    // once, including when only planes 7/8 are opaque.
-                    var count = resolution / spriteResolution;
-                    var placement = count == 4 ? Math.Max(placements[i], placements[i + 1]) : placements[i];
-                    var second = count == 4 ? Math.Max(placements[i + 2], placements[i + 3]) : placements[i + 1];
-                    machine.ComposeAgaSpriteColorIndexes(line,
-                        spriteResolution == 2 ? x * 2 + i / 2 : lowX,
-                        placement, second, codes[i] & 63, codes[i + count / 2] & 63,
-                        out var a, out var b, out var group,
-                        count == 4 ? codes[i + 1] & 63 : -1, count == 4 ? codes[i + 3] & 63 : -1);
-                    sprites[i] = a; sprites[i + count / 2] = b;
-                    if (count == 4)
-                    {
-                        // The shared 140 ns sprite sample is independently
-                        // masked at each 35 ns playfield pixel.
-                        sprites[i + 1] = a; sprites[i + 3] = b;
-                        for (var j = 0; j < 4; j++)
-                            if (group >= placements[i + j]) sprites[i + j] = -1;
-                    }
-                }
-            }
-            i += resolution == 1 ? 1 : resolution / spriteResolution;
         }
         for (var i = 0; i < resolution * 2; i++)
         {
             var lowX = x + i / resolution;
             var code = codes[i];
             var inside = InEcsWindow(line, lowX);
-            var sprite = sprites[i];
             var index = (dual ? _agaDualPixels[code] & 255 : code) ^ (_agaBplcon4 >> 8);
             var color = _agaPalette[index];
             if (ham && inside) color = DecodeAgaHam(code);
             else if (_effectivePlaneCount == 6 && !dual && !ham &&
                 (_ecsBplcon2 & 0x200) == 0 && (index & 32) != 0)
                 color = unchecked((int)0xFF000000) | ((_agaPalette[index & 31] & 0xFEFEFE) >> 1);
-            if (sprite >= 0) color = _agaPalette[(sprite & 15) | ((_agaBplcon4 & 15) << 4)];
             if (!inside)
             {
                 _hamColor = _agaPalette[0];
                 color = enabled && (_ecsBplcon3 & 0x20) != 0 ? unchecked((int)0xFF000000) : _agaPalette[0];
                 if (enabled && (_ecsBplcon3 & 0x10) == 0) color &= 0xFFFFFF;
             }
+            colors[i] = color;
+        }
+        // Sample sprites at Lisa's finest resolution independently of the
+        // playfield. HAM is decoded only once per playfield pixel above.
+        var spriteEnabled = IsSpriteOutputEnabled(line);
+        for (var sample = 0; sample < 8; sample++)
+        {
+            var i = sample * resolution / 4;
+            var lowX = x + sample / 4;
+            var inside = InEcsWindow(line, lowX);
+            var color = colors[i];
+            if (spriteEnabled && (inside || enabled && (_ecsBplcon3 & 0x22) == 2))
+            {
+                var sprite = machine.ComposeAgaSpritePixel(line, x * 4 + sample,
+                    inside ? placements[i] : 4, codes[i]);
+                if (sprite >= 0) color = _agaPalette[sprite];
+            }
             if (machine.IsRasterBlanked(line, lowX) || enabled && (_ecsBplcon3 & 1) != 0 && _externalBlank)
                 color = unchecked((int)0xFF000000);
-            var repeats = Math.Max(1, _outputScale / resolution);
-            if (_outputScale >= resolution)
-                for (var j = 0; j < repeats; j++) _rendering[start + i * repeats + j] = color;
-            else if (i % (resolution / _outputScale) == 0)
-                _rendering[start + i / (resolution / _outputScale)] = color;
+            var divisor = 4 / _outputScale;
+            if (sample % divisor == 0) _rendering[start + sample / divisor] = color;
         }
     }
 
@@ -221,9 +198,9 @@ internal sealed partial class LightweightVideo
         else if ((_effectiveBplcon0 & 0x400) != 0 && ((_ecsBplcon2 & 7) >= 5 || (_ecsBplcon2 >> 3 & 7) >= 5))
             UnsupportedActiveFeature = "AGA nonstandard dual-playfield priority (unverified)";
         else if ((_ecsBplcon2 & 0x100) != 0) UnsupportedActiveFeature = "AGA palette readback (next milestone)";
-        else if ((_agaFmode & 0xC00C) != 0) UnsupportedActiveFeature = "AGA wide sprites/scan doubling (next milestone)";
-        else if ((_agaBplcon4 & 15) != ((_agaBplcon4 >> 4) & 15)) UnsupportedActiveFeature = "AGA independent even/odd sprite palette banks (next milestone)";
-        // SPRES=01 explicitly selects the existing 140 ns sprite path.
-        else if ((_ecsBplcon3 & 0x80) != 0) UnsupportedActiveFeature = "AGA higher sprite resolution (next milestone)";
+        else if ((_agaFmode & 0xC000) != 0) UnsupportedActiveFeature = "AGA scan doubling (unverified)";
     }
+
+    internal void ReportUnsupportedAgaSpriteWrite()
+        => UnsupportedActiveFeature = "AGA CPU/Copper page-mode sprite data bus residue (unverified)";
 }

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// Compact OCS Agnus sprite DMA sequencer. Each fixed sprite slot has an
+/// Compact Agnus/Alice sprite DMA sequencer. Each fixed sprite slot has an
 /// address-input CCK and a following Chip-RAM output CCK. Accepted addresses
 /// remain physical transactions even if control or pointers change meanwhile.
 /// </summary>
@@ -43,6 +43,9 @@ internal sealed class LightweightSpriteDma
     private int _pendingChannel;
     private WordPurpose _pendingPurpose;
     private uint _pendingAddress;
+    private int _pendingFetchMode;
+    private int _fetchMode, _nextFetchMode;
+    private long _fetchModeCycle = long.MaxValue;
     private long _pendingOutputCycle;
     private bool _beamHeld;
     private long _beamOffset;
@@ -70,6 +73,8 @@ internal sealed class LightweightSpriteDma
         _pendingChannel = -1;
         _pendingPurpose = default;
         _pendingAddress = 0;
+        _fetchMode = _nextFetchMode = _pendingFetchMode = 0;
+        _fetchModeCycle = long.MaxValue;
         _pendingOutputCycle = long.MaxValue;
         NextCycle = long.MaxValue;
         LastInputCycle = long.MinValue;
@@ -102,6 +107,13 @@ internal sealed class LightweightSpriteDma
         long cycle,
         LightweightA500Machine machine)
     {
+        if (machine.IsAga && offset == LightweightRegisters.Fmode)
+        {
+            _nextFetchMode = machine.GetCustomRegister(offset) >> 2 & 3;
+            _fetchModeCycle = LightweightBusArbiter.AlignToSlot(cycle + 2);
+            PublishNextCycle();
+            return;
+        }
         if (offset < LightweightRegisters.SpritePointerFirst ||
             offset > LightweightRegisters.SpritePointerLast)
         {
@@ -147,6 +159,9 @@ internal sealed class LightweightSpriteDma
         System.Diagnostics.Debug.Assert(
             cycle == NextCycle,
             "Sprite DMA must advance at its published physical phase.");
+
+        if (_fetchModeCycle <= cycle)
+        { _fetchMode = _nextFetchMode; _fetchModeCycle = long.MaxValue; }
 
         if (_hasPendingOutput && _pendingOutputCycle == cycle)
         {
@@ -233,6 +248,7 @@ internal sealed class LightweightSpriteDma
         _pendingChannel = channel;
         _pendingPurpose = purpose;
         _pendingAddress = _pointers[channel];
+        _pendingFetchMode = _fetchMode;
         _pendingOutputCycle = outputCycle;
 #if LIGHTWEIGHT_DIAGNOSTICS
         LastInputCycle = cycle;
@@ -244,7 +260,10 @@ internal sealed class LightweightSpriteDma
         var channel = _pendingChannel;
         var purpose = _pendingPurpose;
         var address = _pendingAddress;
-        var value = machine.ReadChipWordBus(address);
+        var mode = _pendingFetchMode;
+        var bits = mode == 0 ? 16 : mode == 3 ? 64 : 32;
+        var payload = machine.IsAga ? machine.ReadAgaBitplane(address, mode) : machine.ReadChipWordBus(address);
+        var value = (ushort)(payload >> (bits - 16));
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
 
@@ -276,15 +295,18 @@ internal sealed class LightweightSpriteDma
                 break;
             case WordPurpose.DataA:
                 state.DataA = value;
-                machine.OnSpriteDmaDataAOutput(channel, value, cycle);
+                if (machine.IsAga) machine.OnSpriteWideOutput(channel, true, payload, bits, cycle);
+                else machine.OnSpriteDmaDataAOutput(channel, value, cycle);
                 break;
             case WordPurpose.DataB:
                 state.DataB = value;
-                machine.OnSpriteDmaDataBOutput(channel, value, cycle);
+                if (machine.IsAga) machine.OnSpriteWideOutput(channel, false, payload, bits, cycle);
+                else machine.OnSpriteDmaDataBOutput(channel, value, cycle);
                 break;
         }
 
-        var pointer = MaskAddress(address + 2);
+        var bytes = (uint)(bits / 8);
+        var pointer = MaskAddress(mode == 0 ? address + 2 : (address & ~(bytes - 1)) + bytes);
         _pointers[channel] = pointer;
         machine.SetSpritePointerFromDma(channel, pointer);
         LastOutputCycle = cycle;
@@ -400,9 +422,9 @@ internal sealed class LightweightSpriteDma
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void PublishNextCycle()
-        => NextCycle = Math.Min(
+        => NextCycle = Math.Min(_fetchModeCycle, Math.Min(
             _nextInputCycle,
-            _hasPendingOutput ? _pendingOutputCycle : long.MaxValue);
+            _hasPendingOutput ? _pendingOutputCycle : long.MaxValue));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int GetVerticalStart(in ChannelState state)
