@@ -4,8 +4,9 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The CPU dependency is the public mainline Copper68k `1.5.0` release. See
-[package and consumer verification](../docs/engine/COPPER68K_MAINLINE_1_5_0.md).
+The CPU dependency is the public mainline Copper68k `1.5.1` release. It adds
+the explicit A1200 EC020 profile and native ROM operand forms; see
+[AGA implementation and package verification](../docs/engine/AGA_INITIAL_2026-10-01.md).
 
 Independent PAL A500 engine with OCS 8362 or ECS 8373 Denise: Copper68k accurate 68000,
 configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
@@ -30,7 +31,7 @@ require a new machine. See [implementation, package and native evidence](../docs
 
 `LightweightA500Configuration.CpuModel` accepts experimental `M68EC020`,
 `M68020`, `M68030` and `M68040`. The 020/030 use two native clocks per motherboard
-clock; 040 uses four and approximate fixed instruction timing. All use the fitted
+clock; 040 uses four and approximate fixed instruction timing. A500 profiles use the fitted
 16-bit OCS bridge; only EC020 wraps addresses at 24 bits. The default 68000 retains
 its original bus path. CPU changes require a new machine.
 
@@ -56,6 +57,7 @@ select one of the implemented PAL memory layouts:
 | `Mos8372A` | 512 KiB | 0 or 512 KiB |
 | `Mos8372A` | 1 MiB | 0 |
 | `Mos8375Pal2M` (8375, part 318069-10) | 1 or 2 MiB | 0 |
+| `Mos8374Alice` (initial A1200) | 2 MiB | 0 |
 
 Construction rejects other combinations. Model/size changes require a new machine.
 ECS Agnus choices include widened DMA addressing, PAL chip identification,
@@ -80,6 +82,20 @@ with OCS Denise and 1 MiB controls; it does not exercise SuperHires or programma
 The 8375 model names a specific 2 MiB part because other 8375 variants differ.
 See [implementation, native memory discovery and verification limits](../docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
 
+The initial PAL A1200 profile pairs `Mos8374Alice` with `Lisa4203`, 68EC020,
+2 MiB Chip RAM and no expansion Fast RAM. It uses a bounded 32-bit Chip/ROM
+bridge and eight-plane 16/32/64-bit DMA, a banked 256-entry RGB24 palette,
+single-playfield output, EHB and palette XOR. Native A1200 Kickstart 3.0
+(39.106) reaches its disk prompt and boots CopperHDF/DOS; the original native
+screen probe draws all 256 colours and persists its proof through desktop
+cold reopen. `--agnus alice --denise lisa --cpu 68ec020 --chip-ram-kib 2048
+--slow-ram-kib 0` selects it in the runner. The desktop profile is `a1200-aga-pal`.
+Empty Gayle IDE/PCMCIA identification is implemented; disk boot uses CopperHDF,
+not a physical ATA controller. AGA HAM6/HAM8, dual playfields, palette readback,
+enhanced sprites/collisions and scan doubling remain unavailable. Fine positioning,
+manual wide-data writes, genlock and physical A1200 timing remain unverified.
+See [initial AGA evidence and limits](../docs/engine/AGA_INITIAL_2026-10-01.md).
+
 The default 512 KiB layout remains CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
 for the default A500 wiring and the changed native boot identity. Unfitted upper
@@ -94,7 +110,7 @@ Electrical edge cases and broader write-only readback remain unverified.
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full
-raster and 48 kHz stereo PCM. AGA, A2024 external scan conversion, additional CPU/ROM profiles, RTC, RTG, physical
+raster and 48 kHz stereo PCM. Full AGA compatibility, A2024 external scan conversion, additional CPU/ROM profiles, RTC, RTG, physical
 IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
 

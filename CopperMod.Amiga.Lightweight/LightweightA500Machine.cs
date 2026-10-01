@@ -116,9 +116,14 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         for (var i = 0; i < _floppies.Length; i++) _floppies[i] = new(i);
         LightweightAgnus.ValidateMemory(_configuration.AgnusModel, _configuration.ChipRamBytes, _configuration.SlowRamBytes);
         if (!Enum.IsDefined(_configuration.DeniseModel)) throw new ArgumentOutOfRangeException(nameof(configuration), "Select 8362 or 8373 Denise.");
+        if ((_configuration.AgnusModel == LightweightAgnusModel.Mos8374Alice) != (_configuration.DeniseModel == LightweightDeniseModel.Lisa4203))
+            throw new ArgumentException("Alice and Lisa require the complete A1200 configuration.", nameof(configuration));
+        if (IsAga && (_configuration.CpuModel != M68kCpuModel.M68EC020 || _configuration.FastRamBytes != 0))
+            throw new ArgumentException("The initial A1200 profile requires 68EC020 and no expansion Fast RAM.", nameof(configuration));
+        _a1200Io = IsAga ? new() : null;
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
         _copper = new(_registers.DmaAddressMask);
-        _bitplanes = new(_registers.DmaAddressMask, IsEcsAgnus);
+        _bitplanes = new(_registers.DmaAddressMask, IsEcsAgnus, IsAga);
         _blitter = new(_registers.DmaAddressMask);
         _spriteDma = new(_registers.DmaAddressMask);
         // ECS pointer storage is separate from the physical DRAM decoder.
@@ -142,9 +147,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _slowRam = new byte[_configuration.SlowRamBytes];
         if (_configuration.FastRamBytes != 0) _fastRam = new(_configuration.FastRamBytes);
         _video = new LightweightVideo(_configuration);
-        _cpu = _cpuFactory.Create(_configuration.CpuModel,
-            _configuration.CpuModel == M68kCpuModel.M68000
-                ? this : new LightweightAcceleratorBus(this, _configuration.CpuModel));
+        IM68kBus cpuBus = _configuration.CpuModel == M68kCpuModel.M68000
+            ? this : new LightweightAcceleratorBus(this, _configuration.CpuModel);
+        _cpu = IsAga ? _cpuFactory.CreateA1200Ec020(cpuBus) : _cpuFactory.Create(_configuration.CpuModel, cpuBus);
         _batchCpu = (IM68kBatchCore)_cpu;
         _cpuBoundary = new LightweightCpuBoundary(this);
         _enableConservativeCpuLoopBatch = enableConservativeCpuLoopBatch;
@@ -168,7 +173,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public M68kCpuModel CpuModel => _configuration.CpuModel;
     public LightweightAgnusModel AgnusModel => _configuration.AgnusModel;
     public LightweightDeniseModel DeniseModel => _configuration.DeniseModel;
-    internal bool IsEcsDenise => DeniseModel == LightweightDeniseModel.Mos8373;
+    internal bool IsEcsDenise => DeniseModel != LightweightDeniseModel.Mos8362;
     internal bool IsEcsAgnus => _configuration.AgnusModel != LightweightAgnusModel.Mos8371;
     internal uint DmaAddressMask => _registers.DmaAddressMask;
     public long Cycle => _clock.Cycle;
@@ -303,7 +308,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
-        "AGA chipset profiles and A2024 external scan-converter",
+        "AGA HAM6/HAM8, dual playfields, enhanced sprites/collisions and A2024 external scan-converter",
         "floppy formats other than standard ADF and read-only IPF",
         "physical IDE/SCSI controllers and host-directory mounts",
         "save states",
@@ -325,6 +330,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _hdf?.Reset();
         _clock.Reset();
         _registers.Reset();
+        _a1200Io?.Reset();
         ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
@@ -531,7 +537,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void TriggerLightPen()
     {
         if ((_video.EffectiveBplcon0 & 8) == 0 || _lightPenLatched || _clock.Line < 25) return;
-        _lightPenVpos = (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? 0x2000 : 0x3000) : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & (IsEcsAgnus ? 7 : 1)));
+        _lightPenVpos = (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? (IsAga ? 0x2300 : 0x2000) : (IsAga ? 0x3300 : 0x3000)) : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.Line >> 8) & (IsEcsAgnus ? 7 : 1)));
         _lightPenVhpos = (ushort)(((_clock.Line & 255) << 8) | ((_clock.ColorClock + 4) % _clock.ColorClocksPerLine));
         _lightPenLatched = true;
     }
@@ -784,6 +790,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _autoconfig?.ResetConfiguration();
         _hdf?.Reset();
         _registers.Reset();
+        _a1200Io?.Reset();
         ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
@@ -1157,6 +1164,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         DiwHighValid = false;
         if (!IsEcsAgnus) return;
+        if (IsAga) { _registers.Write(LightweightRegisters.Bplcon3, 0x0C00); _registers.Write(LightweightRegisters.Bplcon4, 0x0011); }
         _registers.Write(LightweightRegisters.Beamcon0, 0x20);
         _registers.Write(LightweightRegisters.Htotal, 226);
         _registers.Write(LightweightRegisters.Vtotal, 312);
@@ -1336,7 +1344,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if ((_video.EffectiveBplcon0 & 8) != 0 && !_lightPenLatched)
         {
-            _lightPenVpos = (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? 0x2000 : 0x3000) : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
+            _lightPenVpos = (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? (IsAga ? 0x2300 : 0x2000) : (IsAga ? 0x3300 : 0x3000)) : 0) | (_clock.IsLongField ? 0x8000 : 0) | ((_clock.LinesThisField >> 8) & 1));
             _lightPenVhpos = (ushort)(((_clock.LinesThisField & 255) << 8) | 4);
             _lightPenLatched = true;
         }
@@ -1629,7 +1637,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             {
                 LightweightRegisters.Vposr when ReadLatchedLightPen => _lightPenVpos,
                 LightweightRegisters.Vhposr when ReadLatchedLightPen => _lightPenVhpos,
-                LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? 0x2000 : 0x3000) : 0) | (_clock.IsLongField ? 0x8000 : 0) |
+                LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? (IsAga ? 0x2300 : 0x2000) : (IsAga ? 0x3300 : 0x3000)) : 0) | (_clock.IsLongField ? 0x8000 : 0) |
                     ((_clock.Line >> 8) & (IsEcsAgnus ? 7 : 1))),
                 LightweightRegisters.Vhposr => (ushort)(((_clock.Line & 0xFF) << 8) |
                     (_clock.SyncStopped ? 0 : (_clock.ColorClock + 4) % _clock.ColorClocksPerLine)),
@@ -1642,6 +1650,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 // storage at this offset: preceding-CCK DMA data, else pull-ups.
                 // Electrical decay / coincident edges remain unverified; see
                 // docs/engine/TOWER_ASSAULT_INVESTIGATION.md.
+                // Lisa's upper byte identifies the motherboard configuration; PAL A1200 uses 00.
+                0x07C when IsAga => 0x00F8,
                 0x07C when IsEcsDenise => 0xFFFC,
                 LightweightRegisters.Hhposr when IsEcsAgnus => (ushort)_clock.ColorClock,
                 0x07C => ReadUndrivenCustomBus(),
@@ -1656,12 +1666,14 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return ReadRomWord((int)(address - RomBase));
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
             return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return (ushort)((_a1200Io.PeekByte(address) << 8) | _a1200Io.PeekByte(address + 1));
         if (_autoconfig is not null) return (ushort)((ReadExpansionByte(address) << 8) | ReadExpansionByte(address + 1));
         return 0xFFFF;
     }
 
     private ushort ReadWordAt(uint address, long cycle)
     {
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return (ushort)((_a1200Io.ReadByte(address) << 8) | _a1200Io.ReadByte(address + 1));
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
             return _sprites.ReadCollisionData();
         StrobeCopperRead(address, cycle);
@@ -1682,6 +1694,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private byte ReadByteAt(uint address, long cycle)
     {
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return _a1200Io.ReadByte(address);
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
         {
             var collision = _sprites.ReadCollisionData();
@@ -1722,6 +1735,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
 
         address &= 0x00FF_FFFFu;
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) { _a1200Io.WriteByte(address, value); return; }
         if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
         if (IsCiaWordAccess(aligned))
@@ -1773,6 +1787,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             BinaryPrimitives.WriteUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2), value);
             return;
         }
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) { _a1200Io.WriteByte(address, (byte)(value >> 8)); _a1200Io.WriteByte(address + 1, (byte)value); return; }
         if (_autoconfig is not null)
         {
             TryWriteExpansionByte(address, (byte)(value >> 8));
@@ -1797,7 +1812,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (offset == LightweightRegisters.Bplcon3)
         {
             if (!IsEcsDenise) return;
-            value &= 0x0037;
+            value &= IsAga ? (ushort)0xFEF7 : (ushort)0x0037;
         }
         if (offset is >= LightweightRegisters.Htotal and <= LightweightRegisters.Hcenter)
         {
@@ -1809,6 +1824,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                     LightweightRegisters.Vbstop or LightweightRegisters.Vsstrt => (ushort)0x07FF,
                 _ => (ushort)0x01FF
             };
+        }
+        if (offset is LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2)
+        {
+            if (!IsAga) return;
+            if (offset == LightweightRegisters.Fmode) value &= 0xC00F;
+            if (offset == LightweightRegisters.Clxcon2) value &= 0x00C3;
         }
         if (offset == 0x036) _controllers.WriteJoytest(value);
         if (offset == 0x034) _pots.WriteControl(value, cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
@@ -1849,7 +1870,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _bitplanes.OnRegisterWrite(offset, value, cycle, this);
             _video.OnRegisterWrite(offset, value, cycle);
         }
-        if (offset == LightweightRegisters.Bplcon3) _video.OnRegisterWrite(offset, value, cycle);
+        if (offset is LightweightRegisters.Bplcon3 or LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2)
+            _video.OnRegisterWrite(offset, value, cycle);
+        if (offset == LightweightRegisters.Fmode) _bitplanes.OnRegisterWrite(offset, value, cycle, this);
+        if (offset is LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3 or
+            LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2)
+        {
+            RefreshNextDeviceCycle();
+            return;
+        }
 
         var refreshDeviceCycle = true;
         if (offset >= LightweightRegisters.ColorFirst &&
@@ -1886,7 +1915,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _bitplanes.OnRegisterWrite(offset, value, cycle, this);
         }
         else if (offset >= LightweightRegisters.BpldatFirst &&
-            offset <= LightweightRegisters.BpldatLast)
+            offset <= (IsAga ? LightweightRegisters.AgaBpldatLast : LightweightRegisters.BpldatLast))
         {
             _video.OnRegisterWrite(offset, value, cycle);
         }

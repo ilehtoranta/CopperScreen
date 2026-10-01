@@ -31,9 +31,9 @@ internal sealed class NativeBootProbe
             {
                 schemaVersion = 1, cpuModel = machine.CpuModel.ToString(), experimental = true,
                 nativeClocksPerMotherboardClock = machine.CpuModel == Copper68k.M68kCpuModel.M68060 ? 8 : machine.CpuModel == Copper68k.M68kCpuModel.M68040 ? 4 : 2,
-                motherboardBusBits = 16,
+                motherboardBusBits = machine.IsAga ? 32 : 16,
                 instructionTiming = machine.CpuModel is Copper68k.M68kCpuModel.M68040 or Copper68k.M68kCpuModel.M68060 ? "approximate-fixed" : "approximate-operand-shape",
-                timingPolicy = "ocs-accelerator-v1",
+                timingPolicy = machine.IsAga ? "a1200-initial-v1" : "ocs-accelerator-v1",
                 copper68k = typeof(Copper68k.M68kCpuState).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
             }));
             _wroteCpuProfile = true;
@@ -82,7 +82,7 @@ internal sealed class NativeBootProbe
             bplcon0 = $"{registers.Read(0x100):X4}", diwstart = $"{registers.Read(0x08E):X4}",
             diwstop = $"{registers.Read(0x090):X4}", ddfstart = $"{registers.Read(0x092):X4}",
             ddfstop = $"{registers.Read(0x094):X4}",
-            bitplanes = Enumerable.Range(0, 6).Select(p => $"{registers.GetBitplanePointer(p):X8}").ToArray(),
+            bitplanes = Enumerable.Range(0, m.IsAga ? 8 : 6).Select(p => $"{registers.GetBitplanePointer(p):X8}").ToArray(),
             modulos = new[] { registers.Read(0x108), registers.Read(0x10A) },
             unsupported = m.UnsupportedActiveFeature,
             videoUnsupported = Field<LightweightVideo>(m, "_video").UnsupportedActiveFeature,
@@ -97,7 +97,17 @@ internal sealed class NativeBootProbe
             File.WriteAllText(stem + ".memory.json", JsonSerializer.Serialize(new
                 { fastRamBytes = m.FastRam.Length, fastRamBase = m.FastRamBase }));
         }
-        if (m.DeniseModel == LightweightDeniseModel.Mos8373)
+        if (m.IsAga)
+            File.WriteAllText(Path.Combine(_directory, $"aga-display-{m.CompletedFrames:D6}.json"), JsonSerializer.Serialize(new
+            {
+                schemaVersion = 1, m.Cycle, m.FramebufferWidth, m.FramebufferHeight,
+                beamcon0 = $"{registers.Read(0x1DC):X4}", htotal = registers.Read(0x1C0), vtotal = registers.Read(0x1C8),
+                diwhigh = $"{registers.Read(0x1E4):X4}", bplcon1 = $"{registers.Read(0x102):X4}",
+                bplcon2 = $"{registers.Read(0x104):X4}", bplcon3 = $"{registers.Read(0x106):X4}",
+                bplcon4 = $"{registers.Read(0x10C):X4}", fmode = $"{registers.Read(0x1FC):X4}",
+                hbstrt = registers.Read(0x1C4), hbstop = registers.Read(0x1C6), vbstrt = registers.Read(0x1CC), vbstop = registers.Read(0x1CE)
+            }));
+        else if (m.DeniseModel == LightweightDeniseModel.Mos8373)
             File.WriteAllText(Path.Combine(_directory, $"ecs-display-{m.CompletedFrames:D6}.json"), JsonSerializer.Serialize(new
             {
                 schemaVersion = 1, m.Cycle, m.FramebufferWidth, m.FramebufferHeight,

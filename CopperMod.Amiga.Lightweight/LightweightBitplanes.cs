@@ -16,13 +16,16 @@ internal sealed class LightweightBitplanes
     private const int DdfHardStopTargetHorizontal = 0xD8;
     private const int FetchUnitColorClocks = 8;
     private readonly uint _addressMask;
-    private readonly bool _ecs;
+    private readonly bool _ecs, _aga;
+    private int _fmode, _pendingFmode, _pendingMode;
+    private long _pendingFmodeCycle = long.MaxValue;
+    private int _fetchPeriod = 8, _fetchUnit = 8, _maxFetchPlanes = 8;
     private int _ddfMask = DdfMask;
 
-    internal LightweightBitplanes(uint addressMask = 0x0007_FFFEu, bool ecs = false)
+    internal LightweightBitplanes(uint addressMask = 0x0007_FFFEu, bool ecs = false, bool aga = false)
     {
         _addressMask = addressMask;
-        _ecs = ecs;
+        _ecs = ecs; _aga = aga;
     }
     // Three bits per CCK, storing plane + 1 (zero is the idle slot).
     // Lores: -1,3,5,1,-1,2,4,0; hires: 3,1,2,0,3,1,2,0.
@@ -30,8 +33,8 @@ internal sealed class LightweightBitplanes
     private const uint HighResFetchOrder = 0x2D42D4;
     private const uint SuperHiresFetchOrder = 0x28A28A;
 
-    private readonly uint[] _pointers = new uint[6];
-    private readonly ushort[] _dataLatches = new ushort[6];
+    private readonly uint[] _pointers = new uint[8];
+    private readonly ushort[] _dataLatches = new ushort[8];
     private ushort _effectiveBplcon0;
     private int _effectivePlaneCount;
     private uint _fetchOrder;
@@ -65,6 +68,8 @@ internal sealed class LightweightBitplanes
 
     internal void Reset()
     {
+        _fmode = _pendingFmode = _pendingMode = 0; _pendingFmodeCycle = long.MaxValue;
+        _fetchPeriod = _fetchUnit = _maxFetchPlanes = 8;
         Array.Clear(_pointers);
         Array.Clear(_dataLatches);
         _effectiveBplcon0 = 0;
@@ -100,6 +105,12 @@ internal sealed class LightweightBitplanes
         long cycle,
         LightweightA500Machine machine)
     {
+        if (_aga && offset == LightweightRegisters.Fmode)
+        {
+            _pendingFmode = value & 3;
+            _pendingFmodeCycle = LightweightBusArbiter.AlignToSlot(cycle + 2);
+            Publish(_pendingFmodeCycle);
+        }
         if (offset == LightweightRegisters.DmaconWrite)
             _dmaEnabled = IsDmaEnabled(machine.Dmacon);
         if (offset == LightweightRegisters.Bplcon0)
@@ -149,7 +160,7 @@ internal sealed class LightweightBitplanes
         if (_beamStopped)
         {
             _syncStopCycle = cycle;
-            NextCycle = Math.Min(_pendingBplcon0Cycle, PendingOutputCycle);
+            NextCycle = Math.Min(_pendingFmodeCycle, Math.Min(_pendingBplcon0Cycle, PendingOutputCycle));
         }
         else
         {
@@ -172,21 +183,36 @@ internal sealed class LightweightBitplanes
             CompleteOutput(cycle, machine);
         }
 
-        if (_pendingBplcon0Cycle <= cycle)
+        var modeChanged = _pendingFmodeCycle <= cycle;
+        if (modeChanged) { _fmode = _pendingFmode; _pendingFmodeCycle = long.MaxValue; }
+        if (_pendingBplcon0Cycle <= cycle || modeChanged)
         {
-            _effectiveBplcon0 = _pendingBplcon0;
+            if (_pendingBplcon0Cycle <= cycle)
+            {
+                _effectiveBplcon0 = _pendingBplcon0;
+                _pendingBplcon0Cycle = long.MaxValue;
+            }
             _effectivePlaneCount = GetSupportedPlaneCount(_effectiveBplcon0);
             var hires = (_effectiveBplcon0 & 0x8000) != 0;
             var super = _ecs && (_effectiveBplcon0 & 0x8040) == 0x40;
             _fetchOrder = super ? SuperHiresFetchOrder : hires ? HighResFetchOrder : LowResFetchOrder;
             _terminalFetchOffset = super ? 12 : hires ? 8 : 0;
             _ddfMask = super ? 0xFE : DdfMask;
-            _pendingBplcon0Cycle = long.MaxValue;
+            if (_aga)
+            {
+                var res = super ? 2 : hires ? 1 : 0;
+                var mode = _fmode == 3 ? 2 : _fmode == 0 ? 0 : 1;
+                _fetchPeriod = (8 << mode) >> res;
+                _fetchUnit = Math.Max(8, _fetchPeriod);
+                _maxFetchPlanes = Math.Min(8, _fetchPeriod);
+                _effectivePlaneCount = GetSupportedPlaneCount(_effectiveBplcon0);
+                _terminalFetchOffset = (_fetchUnit - _fetchPeriod) * 2;
+            }
         }
 
         if (_beamStopped)
         {
-            NextCycle = Math.Min(_pendingBplcon0Cycle, PendingOutputCycle);
+            NextCycle = Math.Min(_pendingFmodeCycle, Math.Min(_pendingBplcon0Cycle, PendingOutputCycle));
             return;
         }
 
@@ -206,7 +232,7 @@ internal sealed class LightweightBitplanes
             return;
         }
 
-        NextCycle = _pendingBplcon0Cycle;
+        NextCycle = Math.Min(_pendingFmodeCycle, _pendingBplcon0Cycle);
         if (dmaEnabled && planeCount != 0)
         {
             PublishNextInactiveControlCycle(cycle, machine);
@@ -300,6 +326,13 @@ internal sealed class LightweightBitplanes
         var deltaCcks = (cycle - _sequenceOriginCycle) >> 1;
         var slot = (int)(deltaCcks & (FetchUnitColorClocks - 1));
         var plane = (int)((_fetchOrder >> (slot * 3)) & 7) - 1;
+        if (_aga)
+        {
+            slot = (int)(deltaCcks & (_fetchPeriod - 1));
+            if (slot >= _maxFetchPlanes) return;
+            var sequence = _maxFetchPlanes == 8 ? 0x15372648u : _maxFetchPlanes == 4 ? 0x1324u : 0x12u;
+            plane = (int)(sequence >> (slot * 4) & 15) - 1;
+        }
         if ((uint)plane >= (uint)planeCount)
         {
             return;
@@ -312,7 +345,7 @@ internal sealed class LightweightBitplanes
         }
 
         _hasPendingOutput = true;
-        _pendingPlane = plane;
+        _pendingPlane = plane; _pendingMode = _fmode;
         _pendingAddress = _pointers[plane];
         _pendingModulo = _terminalUnitStartCycle != long.MaxValue &&
             cycle >= _terminalUnitStartCycle + _terminalFetchOffset;
@@ -329,10 +362,13 @@ internal sealed class LightweightBitplanes
         var applyModulo = _pendingModulo;
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
-        var value = machine.ReadChipWordBus(address);
+        var bits = _pendingMode == 3 ? 64 : _pendingMode == 0 ? 16 : 32;
+        var wide = _aga ? machine.ReadAgaBitplane(address, _pendingMode) : machine.ReadChipWordBus(address);
+        var value = (ushort)(wide >> (bits - 16));
         _dataLatches[plane] = value;
-        machine.OnBitplaneDataOutput(plane, value, cycle);
-        var pointer = MaskAddress(address + 2);
+        if (_aga) machine.OnBitplaneWideOutput(plane, wide, bits, cycle);
+        else machine.OnBitplaneDataOutput(plane, value, cycle);
+        var pointer = MaskAddress(address + (uint)(_aga ? bits / 8 : 2));
         if (applyModulo)
         {
             pointer = MaskAddress(unchecked(pointer +
@@ -350,7 +386,7 @@ internal sealed class LightweightBitplanes
     private void ArmStop(long cycle, long targetCycle)
     {
         _ = cycle;
-        var unitCycles = FetchUnitColorClocks *
+        var unitCycles = (_aga ? _fetchUnit : FetchUnitColorClocks) *
             LightweightClock.CpuCyclesPerColorClock;
         var delta = Math.Max(0, targetCycle - _sequenceOriginCycle);
         var units = (delta + unitCycles - 1) / unitCycles;
@@ -385,6 +421,7 @@ internal sealed class LightweightBitplanes
     private int GetSupportedPlaneCount(ushort bplcon0)
     {
         var count = (bplcon0 >> 12) & 7;
+        if (_aga) { count |= (bplcon0 & 16) >> 1; return count <= _maxFetchPlanes ? count : 0; }
         if (_ecs && (bplcon0 & 0x8040) == 0x40) return Math.Min(count, 2);
         if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
         // OCS Agnus aliases BPU=7 to four lores DMA channels. Denise still

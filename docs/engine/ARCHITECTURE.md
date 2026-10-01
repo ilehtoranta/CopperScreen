@@ -31,6 +31,15 @@ byte transfers. Each transfer retains at least four motherboard clocks including
 its address/data phases, with existing contention or CIA synchronization allowed
 to extend it. All device progress remains owned by the machine.
 
+The initial PAL A1200 uses an explicit `CreateA1200Ec020` package profile and
+`a1200-initial-v1` host bridge. An aligned Chip/ROM longword occupies one accepted
+motherboard transfer; custom registers stay 16-bit and CIA/Gayle byte-wide.
+Unaligned operands split through the existing bus adapter. Alice bitplane DMA
+retains its accepted address and FMODE until the output phase samples RAM,
+then transfers 16/32/64 bits to Lisa. FMODE does not cancel a separately pending
+BPLCON0 update. CPU/cache and motherboard timing remain bounded approximations.
+See [initial AGA implementation and native evidence](AGA_INITIAL_2026-10-01.md).
+
 EC020 masks each transfer to 24 bits. A 68020/030/040 address above `$FFFFFF` returns
 all-one data or ignores a write while advancing time; it never aliases a device.
 This is an explicit unmapped-address policy, not accelerator autoconfiguration or

@@ -73,6 +73,7 @@ internal sealed partial class LightweightVideo
     private void RenderEcsCck(int line, int x, LightweightA500Machine machine)
     {
         if (line < 0 || line >= _ecsHeight || x < 0 || x + 1 >= _ecsLineClocks * 2) return;
+        if (_aga) { RenderAgaCck(line, x, machine); return; }
         var super = _ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40;
         var hires = (_effectiveBplcon0 & 0x8000) != 0;
         var resolution = super ? 4 : hires ? 2 : 1;

@@ -1,7 +1,7 @@
 {
   "id": "a1200-aga-pal",
   "displayName": "Amiga 1200 AGA PAL",
-  "description": "Amiga 1200 PAL with Alice/Lisa, 2 MiB chip RAM, one empty floppy drive, and a required Kickstart 3.0 ROM.",
+  "description": "Initial Amiga 1200 PAL support with Alice/Lisa, 2 MiB chip RAM, 256-colour display and required Kickstart 3.0 (39.106). HAM8, dual playfields and enhanced sprites are still being developed.",
   "machine": {
     "model": "A1200",
     "agnus": "Alice",

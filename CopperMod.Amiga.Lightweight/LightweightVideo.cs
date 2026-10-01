@@ -70,8 +70,9 @@ internal sealed partial class LightweightVideo
 
     internal LightweightVideo(LightweightA500Configuration configuration)
     {
+        _aga = configuration.DeniseModel == LightweightDeniseModel.Lisa4203;
         _ecsAgnus = configuration.AgnusModel != LightweightAgnusModel.Mos8371;
-        _ecsDenise = configuration.DeniseModel == LightweightDeniseModel.Mos8373;
+        _ecsDenise = configuration.DeniseModel != LightweightDeniseModel.Mos8362;
         _ecsDisplay = _ecsAgnus || _ecsDenise;
         if (configuration.FramebufferWidth != PalRasterWidth && configuration.FramebufferWidth != 2 * PalRasterWidth &&
             !(_ecsDisplay && configuration.FramebufferWidth == 4 * PalRasterWidth) ||
@@ -148,26 +149,28 @@ internal sealed partial class LightweightVideo
         NextCycle = long.MaxValue;
         UnsupportedActiveFeature = null;
         ResetEcs();
+        ResetAga();
     }
 
     internal void OnRegisterWrite(ushort offset, ushort value, long cycle)
     {
         if (offset is >= LightweightRegisters.ColorFirst and <= LightweightRegisters.ColorLast)
         {
-            UpdatePalette((offset - LightweightRegisters.ColorFirst) >> 1, value);
+            if (_aga) WriteAgaColor((offset - LightweightRegisters.ColorFirst) >> 1, value);
+            else UpdatePalette((offset - LightweightRegisters.ColorFirst) >> 1, value);
             ActivateAfter(cycle);
             return;
         }
         if (offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
             LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
-            LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop or LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3)
+            LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop or LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3 or LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2)
         {
             _pendingControlOffset = offset;
             _pendingControlValue = value;
             _pendingControlCycle = cycle + LightweightClock.CpuCyclesPerColorClock;
         }
         else if (offset >= LightweightRegisters.BpldatFirst &&
-            offset <= LightweightRegisters.BpldatLast &&
+            offset <= (_aga ? LightweightRegisters.AgaBpldatLast : LightweightRegisters.BpldatLast) &&
             ((offset - LightweightRegisters.BpldatFirst) & 1) == 0)
         {
             AcceptBitplaneWord(
@@ -179,8 +182,8 @@ internal sealed partial class LightweightVideo
         if (offset == LightweightRegisters.DmaconWrite ||
             offset is LightweightRegisters.Bplcon0 or LightweightRegisters.Bplcon1 or
                 LightweightRegisters.Bplcon2 or LightweightRegisters.Clxcon or
-                LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop or LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3 ||
-            offset is >= LightweightRegisters.BpldatFirst and <= LightweightRegisters.BpldatLast)
+                LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop or LightweightRegisters.Diwhigh or LightweightRegisters.Bplcon3 or LightweightRegisters.Bplcon4 or LightweightRegisters.Fmode or LightweightRegisters.Clxcon2 ||
+            offset >= LightweightRegisters.BpldatFirst && offset <= (_aga ? LightweightRegisters.AgaBpldatLast : LightweightRegisters.BpldatLast))
         {
             ActivateAfter(cycle);
         }
@@ -188,6 +191,7 @@ internal sealed partial class LightweightVideo
 
     internal void AcceptBitplaneWord(int plane, ushort value, long outputCycle)
     {
+        if (_aga) { AcceptAgaBitplane(plane, value, 16, outputCycle); return; }
         if ((uint)plane >= MaxPlanes)
         {
             return;
@@ -290,7 +294,8 @@ internal sealed partial class LightweightVideo
                     _effectivePlaneMask = (1 << _effectivePlaneCount) - 1;
                     _effectivePlanePairMask = _effectivePlaneMask | (_effectivePlaneMask << 6);
                     UpdateUnsupportedMode();
-                    if (_ecsDisplay) machine.SetSpriteSuperHires(_ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x0040);
+                    if (_ecsDisplay) machine.SetSpriteSuperHires(_ecsDenise &&
+                        (!_aga || (_ecsBplcon3 & 0xC0) == 0) && (_effectiveBplcon0 & 0x8040) == 0x0040);
                     refreshRenderLine = true;
                     break;
                 case LightweightRegisters.Bplcon1:
@@ -309,6 +314,7 @@ internal sealed partial class LightweightVideo
                     _effectiveSpritePlayfieldPlacement = Math.Min(
                         (_pendingControlValue >> 3) & 7,
                         4);
+                    if (_aga) CheckAgaMode();
                     if ((_effectiveBplcon0 & 0x0400) != 0) UpdateUnsupportedMode();
                     break;
                 case LightweightRegisters.Diwstrt:
@@ -331,6 +337,23 @@ internal sealed partial class LightweightVideo
                     break;
                 case LightweightRegisters.Bplcon3:
                     _ecsBplcon3 = _pendingControlValue;
+                    if (_aga)
+                    {
+                        machine.SetSpriteSuperHires((_ecsBplcon3 & 0xC0) == 0 &&
+                            (_effectiveBplcon0 & 0x8040) == 0x0040);
+                        CheckAgaMode();
+                    }
+                    break;
+                case LightweightRegisters.Bplcon4:
+                    _agaBplcon4 = _pendingControlValue;
+                    if (_aga) CheckAgaMode();
+                    break;
+                case LightweightRegisters.Fmode:
+                    _agaFmode = _pendingControlValue;
+                    CheckAgaMode();
+                    break;
+                case LightweightRegisters.Clxcon2:
+                    if (_pendingControlValue != 0) UnsupportedActiveFeature = "AGA extended collisions (next milestone)";
                     break;
             }
             _pendingControlCycle = long.MaxValue;
@@ -339,18 +362,22 @@ internal sealed partial class LightweightVideo
         if (_pendingDataCycle <= cycle)
         {
             var plane = _pendingDataPlane;
-            _dataLatches[plane] = _pendingDataValue;
-            if (plane == 0)
+            if (_aga) ApplyAgaData(machine);
+            else
             {
-                _intermediate[0] = _dataLatches[0];
-                _intermediate[1] = _dataLatches[1];
-                _intermediate[2] = _dataLatches[2];
-                _intermediate[3] = _dataLatches[3];
-                _intermediate[4] = _dataLatches[4];
-                _intermediate[5] = _dataLatches[5];
-                _pendingReloadParity = 3;
-                _spriteOutputEnableLine = machine.BeamLine;
-                refreshRenderLine = true;
+                _dataLatches[plane] = _pendingDataValue;
+                if (plane == 0)
+                {
+                    _intermediate[0] = _dataLatches[0];
+                    _intermediate[1] = _dataLatches[1];
+                    _intermediate[2] = _dataLatches[2];
+                    _intermediate[3] = _dataLatches[3];
+                    _intermediate[4] = _dataLatches[4];
+                    _intermediate[5] = _dataLatches[5];
+                    _pendingReloadParity = 3;
+                    _spriteOutputEnableLine = machine.BeamLine;
+                    refreshRenderLine = true;
+                }
             }
             _pendingDataCycle = long.MaxValue;
         }
@@ -913,7 +940,7 @@ internal sealed partial class LightweightVideo
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool IsSpriteOutputEnabled(int line)
     {
-        var requestedPlanes = (_effectiveBplcon0 >> 12) & 7;
+        var requestedPlanes = _aga ? _effectivePlaneCount : (_effectiveBplcon0 >> 12) & 7;
         return requestedPlanes == 0
             ? (_effectiveBplcon0 & 0x0200) == 0
             : _spriteOutputEnableLine == line;
@@ -934,6 +961,7 @@ internal sealed partial class LightweightVideo
 
     private void UpdateUnsupportedMode()
     {
+        if (_aga) CheckAgaMode();
         var hires = (_effectiveBplcon0 & 0x8000) != 0;
         var super = _ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40;
         var feature = super && _outputScale < 4 ? "ECS SuperHires output (select 1816 pixels)" : hires && _outputScale < 2
@@ -960,6 +988,7 @@ internal sealed partial class LightweightVideo
     private int GetDecodePlaneCount(ushort bplcon0)
     {
         var count = (bplcon0 >> 12) & 7;
+        if (_aga) return Math.Min(8, count | ((bplcon0 & 16) >> 1));
         if (_ecsDenise && (bplcon0 & 0x8040) == 0x40) return Math.Min(count, 2);
         if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
         return Math.Min(count, MaxPlanes);

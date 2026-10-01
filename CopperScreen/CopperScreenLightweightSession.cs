@@ -21,7 +21,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Validate(options);
         // Media decoding is mount-time only; none of the old execution machinery is created.
         var rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
-            options.Profile.KickstartSource, options.Profile.KickstartVersion);
+            options.Profile.KickstartSource, options.Profile.KickstartVersion, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
         ProfileName = options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
@@ -29,8 +29,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
         var configuration = new LightweightA500Configuration
-            { FramebufferWidth = options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? 1816 : 908,
-                DeniseModel = options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? LightweightDeniseModel.Mos8373 : LightweightDeniseModel.Mos8362, FloppyDriveCount = options.Profile.FloppyDriveCount,
+            { FramebufferWidth = options.Profile.Chipset.DisplayChip != DisplayChipModel.OcsDenise ? 1816 : 908,
+                DeniseModel = options.Profile.Chipset.DisplayChip switch { DisplayChipModel.AgaLisa => LightweightDeniseModel.Lisa4203, DisplayChipModel.EcsDenise => LightweightDeniseModel.Mos8373, _ => LightweightDeniseModel.Mos8362 }, FloppyDriveCount = options.Profile.FloppyDriveCount,
                 CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
                 AgnusModel = GetAgnusModel(options.Profile.Chipset.DmaChip),
                 ChipRamBytes = options.Profile.ChipRamSize, SlowRamBytes = options.Profile.ExpansionRamSize,
@@ -80,20 +80,25 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
-        if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise) || p.Chipset.VideoStandard != VideoStandard.Pal ||
+        var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
+        if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
+            aga && ((options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68EC020 ||
+                p.RealFastRamSize != 0 || p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))
+            throw new NotSupportedException("The initial A1200 profile requires PAL Alice/Lisa, 68EC020, 2 MiB Chip RAM, no slow/Fast RAM and native A1200 Kickstart 3.0 (39.106).");
+        if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise or DisplayChipModel.AgaLisa) || p.Chipset.VideoStandard != VideoStandard.Pal ||
             p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040) ||
             p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom) ||
-            p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31) ||
+            (!aga && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
-            throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
+            throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
         catch (ArgumentException ex) { throw new NotSupportedException(ex.Message, ex); }
         if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
-            throw new NotSupportedException("Choose your Kickstart 1.3 or A500 3.1 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
+            throw new NotSupportedException("Choose the matching Kickstart 1.3, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
         if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
             throw new NotSupportedException("Fast RAM supports 0, 512, 1024, 2048, 4096 or 8192 KiB.");
         if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.A500RealFastRamBase)
@@ -112,10 +117,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     private static LightweightAgnusModel GetAgnusModel(DmaChipModel model) => model switch
     {
+        DmaChipModel.AgaAlice => LightweightAgnusModel.Mos8374Alice,
         DmaChipModel.OcsAgnus => LightweightAgnusModel.Mos8371,
         DmaChipModel.Agnus8372A => LightweightAgnusModel.Mos8372A,
         DmaChipModel.Agnus8375Pal2M => LightweightAgnusModel.Mos8375Pal2M,
-        _ => throw new NotSupportedException("Select an explicit supported PAL Agnus: 8371, 8372A or 8375 (318069-10).")
+        _ => throw new NotSupportedException("Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.")
     };
 
     private static Copper68k.M68kCpuModel GetCpuModel(M68kBackendKind backend) => backend switch
@@ -153,7 +159,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         get
         {
             if (!_machine.ProgrammableBeamEnabled && Width == 908 && Height == 626) return NativePresentationGeometry;
-            var scale = _machine.DeniseModel == LightweightDeniseModel.Mos8373 ? 4 : 2;
+            var scale = _machine.DeniseModel != LightweightDeniseModel.Mos8362 ? 4 : 2;
             var variable = _machine.ProgrammableBeamEnabled;
             var productivity = variable && Width == 912 && Height is 1050 or 1052 && scale == 4;
             var pal = Height >= 626;
@@ -348,7 +354,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Framebuffer = new int[Width * Height];
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
-        StatusText = "Lightweight experimental A500 — native Kickstart 1.3, ADF / read-only IPF / CopperHDF";
+        StatusText = _machine.IsAga ? "Lightweight experimental A1200 — native Kickstart 3.0, initial AGA display"
+            : "Lightweight experimental A500 — native Kickstart, ADF / read-only IPF / CopperHDF";
     }
     private void ApplyInput(short dx = 0, short dy = 0)
         => _machine.SubmitInput(new((byte)(_joystick0 | (_inputOptions.IsMousePort(0) ? 0 : 128)),

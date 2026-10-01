@@ -189,7 +189,7 @@ public sealed class Kickstart31Tests : IDisposable
     }
 
     // Independent, bounded reader for this fixture's single-block root proof files.
-    private static string? ReadFfsProof(byte[] image, string name)
+    internal static string? ReadFfsProof(byte[] image, string name)
     {
         const int origin = 32 * 512, root = 880, count = 1760;
         Assert.True(image.AsSpan(origin, 4).SequenceEqual("DOS\u0001"u8));

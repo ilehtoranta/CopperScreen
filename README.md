@@ -1,6 +1,6 @@
 # CopperScreen
 
-CopperScreen is a native Amiga 500 emulator with an Avalonia desktop interface,
+CopperScreen is an Amiga emulator with an Avalonia desktop interface,
 a lightweight emulation engine, a disk-image library and a headless runner.
 
 ## Supported machine
@@ -11,8 +11,9 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 - One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
+- Initial PAL A1200 profile: Alice/Lisa, 68EC020, 2 MiB Chip RAM and native Kickstart 3.0 (39.106). Eight-plane, 256-colour RGB24 output and native CopperHDF boot/persistence are verified. HAM8, dual playfields and enhanced sprites remain next steps; see [AGA evidence and limits](docs/engine/AGA_INITIAL_2026-10-01.md).
 
-CopperStart, Legacy, AGA, A2024 external scan conversion, other accelerator profiles and physical IDE/SCSI controllers are not supported by
+CopperStart, Legacy, full AGA compatibility, A2024 external scan conversion, other accelerator profiles and physical IDE/SCSI controllers are not supported by
 the current application. Unsupported settings are reported explicitly rather
 than silently changing the configured machine.
 
@@ -25,10 +26,12 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-CopperScreen pins the public mainline [Copper68k `1.5.0`](https://www.nuget.org/packages/Copper68k/1.5.0)
+CopperScreen pins the public mainline [Copper68k `1.5.1`](https://www.nuget.org/packages/Copper68k/1.5.1)
 release for 040 instruction-fetch corrections, experimental 030/040 and a separate
 060 diagnostic core. A clean checkout restores from NuGet.org without a local
-candidate feed. See the [mainline release verification](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
+candidate feed. The explicit A1200 EC020 profile and native ROM operand forms
+are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding
+CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
 Advanced CPU profiles remain experimental;
 physical accelerator timing and full compatibility are not certified. The 060 is
 unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
@@ -44,12 +47,15 @@ dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_1
 ```
 
 Starting without arguments opens Settings. Choose your ROM and disk image there.
-Browse identifies native 1.3/3.1 ROMs and selects the matching Kickstart choice.
+Browse identifies native 1.3/3.1 ROMs and, with the A1200 profile selected,
+validates its 3.0 ROM. It selects the matching Kickstart choice.
 For native 3.1 from the command line, select its profile explicitly:
 
 ```powershell
 dotnet run --project CopperScreen -c Release -- --profile lightweight-a500-kickstart31 --rom "path/to/kickstart-3.1-a500.rom" "path/to/Workbench31.adf"
 ```
+
+Use `--profile a1200-aga-pal --rom "path/to/A1200-39.106.rom"` for the initial AGA profile.
 
 CPU changes require restarting the emulated machine. The 020 choices use the
 existing OCS/RAM profile with the selected native ROM; they do not select an A1200 or AGA machine.

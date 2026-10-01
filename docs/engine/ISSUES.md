@@ -18,13 +18,17 @@ See [the floppy boot record](KICKSTART_31_2026-09-30.md) and the subsequent
 The [Agnus/Chip RAM follow-up](AGNUS_CHIP_RAM_2026-10-01.md) adds explicit PAL
 8371, 8372A and 8375 (318069-10) layouts. The subsequent
 [ECS display record](ECS_DISPLAY_2026-10-01.md) adds explicit 8373 Denise,
-SuperHires, DIWHIGH, programmable timing and DOFF. AGA, physical genlock,
+SuperHires, DIWHIGH, programmable timing and DOFF. The [initial AGA profile](AGA_INITIAL_2026-10-01.md)
+adds native PAL A1200 boot and eight-plane RGB24 output. AGA HAM6/HAM8, dual
+playfields, enhanced sprites/collisions, scan doubling, palette readback, physical genlock,
 A2024 external scan conversion and the 68060 OS/FPU validation remain open.
 Stock NTSC/VGA-driver coverage needs a supplied Storage/monitor-driver fixture.
 The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final
 Fight: Enhanced — Final Edition's opening level, 2 MiB Chip RAM and ECS border
 blanking with matching normal/scalar captures and OCS Denise/1 MiB controls.
 Third-party SuperHires/programmable-raster coverage remains open.
+Native AGA game/demo coverage is also open. The initial AGA probe is original
+guest software using the native OS, not a third-party compatibility replay.
 
 Native Lemmings gameplay, live digger assignment, disk replacement and a separate
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.

@@ -70,23 +70,25 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
     else if (args[i] == "--denise")
     {
-        if (++i >= args.Length) throw new ArgumentException("--denise requires 8362 or 8373.");
+        if (++i >= args.Length) throw new ArgumentException("--denise requires 8362, 8373 or lisa.");
         deniseModel = args[i].ToLowerInvariant() switch
         {
             "8362" or "ocs" => LightweightDeniseModel.Mos8362,
             "8373" or "ecs" => LightweightDeniseModel.Mos8373,
-            _ => throw new ArgumentException("--denise requires 8362 or 8373.")
+            "lisa" or "4203" => LightweightDeniseModel.Lisa4203,
+            _ => throw new ArgumentException("--denise requires 8362, 8373 or lisa.")
         };
     }
     else if (args[i] == "--agnus")
     {
-        if (++i >= args.Length) throw new ArgumentException("--agnus requires 8371, 8372a or 8375-318069-10.");
+        if (++i >= args.Length) throw new ArgumentException("--agnus requires 8371, 8372a, 8375-318069-10 or alice.");
         agnusModel = args[i].ToLowerInvariant() switch
         {
             "8371" => LightweightAgnusModel.Mos8371,
             "8372a" => LightweightAgnusModel.Mos8372A,
             "8375-318069-10" => LightweightAgnusModel.Mos8375Pal2M,
-            _ => throw new ArgumentException("--agnus requires 8371, 8372a or 8375-318069-10.")
+            "alice" or "8374" => LightweightAgnusModel.Mos8374Alice,
+            _ => throw new ArgumentException("--agnus requires 8371, 8372a, 8375-318069-10 or alice.")
         };
     }
     else if (args[i] == "--chip-ram-kib")
@@ -192,7 +194,7 @@ for (var i = 0; i < extraAdfPaths.Length; i++)
 
 using var machine = new LightweightA500Machine(
     configuration: new LightweightA500Configuration
-        { FramebufferWidth = deniseModel == LightweightDeniseModel.Mos8373 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024,
+        { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024,
             AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024 },
     enableConservativeCpuLoopBatch: !scalarCpu);
 if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
@@ -306,7 +308,8 @@ for (var frame = 0; frame < frames; frame++)
     if (inputReplay) inputChecksum = ConsumeInputReplayFrame(machine, warmup + frame, inputChecksum);
 }
 stopwatch.Stop();
-if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: {(cpuModel == M68kCpuModel.M68060 ? 8 : cpuModel == M68kCpuModel.M68040 ? 4 : 2)} native clocks per motherboard clock, 16-bit OCS bus; accelerator timing is not hardware-certified.");
+if (machine.IsAga) Console.WriteLine("CPU_PROFILE experimental PAL A1200 68EC020: 2 native clocks per motherboard clock; 32-bit Chip/ROM, 16-bit custom, byte CIA/Gayle; physical timing not certified.");
+else if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: {(cpuModel == M68kCpuModel.M68060 ? 8 : cpuModel == M68kCpuModel.M68040 ? 4 : 2)} native clocks per motherboard clock, 16-bit OCS bus; accelerator timing is not hardware-certified.");
 if (bootProbe is not null) Console.WriteLine("BOOT_PROBE diagnostic run: FPS/allocation totals are not acceptance measurements; native gameplay is not verified.");
 var allocatedBytes = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
 if (inputReplay && machine.CompletedFrames != (long)warmup + frames)
@@ -377,7 +380,7 @@ if (inputReplay)
 }
 if (wideOutput) workload += "-wide";
 if (hires) workload += "-hires";
-Console.WriteLine($"engine=lightweight-a500 workload={workload}{(cpuModel == M68kCpuModel.M68000 ? string.Empty : $" cpuModel={cpuModel} timingPolicy=ocs-accelerator-v1")} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
+Console.WriteLine($"engine=lightweight-a500 workload={workload}{(cpuModel == M68kCpuModel.M68000 ? string.Empty : $" cpuModel={cpuModel} timingPolicy={(machine.IsAga ? "a1200-initial-v1" : "ocs-accelerator-v1")}")} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
 if (unsupported != "none")
     Environment.ExitCode = 2;
 // Host exports are after all timing/allocation samples and never replace the input implicitly.

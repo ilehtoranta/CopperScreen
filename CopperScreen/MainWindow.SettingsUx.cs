@@ -27,6 +27,7 @@ internal sealed partial class MainWindow
     private long _validatedRomLength;
     private CopperScreenKickstartSource _validatedRomSource;
     private KickstartVersion _validatedRomVersion;
+    private bool _validatedRomA1200;
 
     private static TextBlock SettingsNote(string text) => new()
     {
@@ -38,15 +39,15 @@ internal sealed partial class MainWindow
         var layout = CreateSettingsPageLayout();
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
-        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\nConfigurable Agnus and Chip RAM · optional Fast RAM\nUp to four floppy drives"));
+        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\nInitial Amiga 1200 PAL support is also available\nConfigurable Agnus and Chip RAM · up to four floppy drives"));
         var form = CreateSettingsGroupForm();
-        _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3 or A500 3.1 ROM", MinWidth = 0 };
+        _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
         var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
         AutomationProperties.SetName(browse, "Browse for Kickstart ROM");
         form.Children.Add(CreateSettingsRow("Kickstart ROM", WithAction(_kickstartRomBox, browse)));
         AutomationProperties.SetName(_kickstartRomBox, "Kickstart ROM path");
-        _romValidation = SettingsNote("Choose a Kickstart 1.3 or A500 3.1 ROM to continue.");
+        _romValidation = SettingsNote("Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
         _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, IPF or ZIP", MinWidth = 0 };
@@ -309,7 +310,7 @@ internal sealed partial class MainWindow
     {
         var files = await _settingsWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = "Choose Kickstart 1.3 or A500 3.1 ROM", AllowMultiple = false,
+            Title = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Kickstart ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
         var path = files.FirstOrDefault()?.TryGetLocalPath();
@@ -317,15 +318,24 @@ internal sealed partial class MainWindow
         _kickstartRomBox.Text = path;
         try
         {
-            var selectedVersion = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) switch
+            var selectedVersion = _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? KickstartVersion.Kickstart30 : ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) switch
             {
                 CopperScreenKickstartSource.Kickstart13Rom => KickstartVersion.Kickstart13,
                 CopperScreenKickstartSource.Kickstart31Rom => KickstartVersion.Kickstart31,
                 _ => _settingsDraft.RomVersion
             };
             var rom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, selectedVersion);
-            _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
-            _kickstartSourceBox.SelectedItem = _settingsDraft.RomVersion == KickstartVersion.Kickstart31 ? "Kickstart31Rom" : "Kickstart13Rom";
+            if (_settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)
+            {
+                _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart30, a1200: true);
+                _settingsDraft.RomVersion = KickstartVersion.Kickstart30;
+                _kickstartSourceBox.SelectedItem = "KickstartRom";
+            }
+            else
+            {
+                _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
+                _kickstartSourceBox.SelectedItem = _settingsDraft.RomVersion == KickstartVersion.Kickstart31 ? "Kickstart31Rom" : "Kickstart13Rom";
+            }
             UpdateSettingsStatus();
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
@@ -335,19 +345,20 @@ internal sealed partial class MainWindow
     private string? ValidateSelectedRom(CopperScreenSettingsDraft draft)
     {
         var path = draft.ToStartupOptions(AppContext.BaseDirectory).KickstartRomPath;
-        if (string.IsNullOrWhiteSpace(path)) return "Choose a Kickstart 1.3 or A500 3.1 ROM to continue.";
-        if (!File.Exists(path)) return "ROM file not found. Choose an existing Kickstart 1.3 or A500 3.1 ROM.";
+        if (string.IsNullOrWhiteSpace(path)) return "Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.";
+        if (!File.Exists(path)) return "ROM file not found. Choose an existing Kickstart 1.3, A500 3.1 or A1200 3.0 ROM.";
         var info = new FileInfo(path);
         if (_validatedRomPath == path && _validatedRomWriteTime == info.LastWriteTimeUtc && _validatedRomLength == info.Length &&
-            _validatedRomSource == draft.KickstartSource && _validatedRomVersion == draft.RomVersion) return _romError;
+            _validatedRomSource == draft.KickstartSource && _validatedRomVersion == draft.RomVersion && _validatedRomA1200 == (draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)) return _romError;
         _validatedRomPath = path;
         _validatedRomWriteTime = info.LastWriteTimeUtc;
         _validatedRomLength = info.Length;
         _validatedRomSource = draft.KickstartSource;
         _validatedRomVersion = draft.RomVersion;
+        _validatedRomA1200 = draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         try
         {
-            _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion);
+            _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
             _romError = null;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)

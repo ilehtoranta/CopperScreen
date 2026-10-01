@@ -73,6 +73,7 @@ internal sealed class LightweightRegisters
     internal const ushort Bplcon1 = 0x102;
     internal const ushort Bplcon2 = 0x104;
     internal const ushort Bplcon3 = 0x106;
+    internal const ushort Bplcon4 = 0x10C, Clxcon2 = 0x10E, Fmode = 0x1FC, AgaBpldatLast = 0x11E;
     internal const ushort Bpl1mod = 0x108;
     internal const ushort Bpl2mod = 0x10A;
     internal const ushort BplPointerFirst = 0x0E0;

@@ -2,9 +2,9 @@ using Copper68k;
 
 namespace CopperMod.Amiga.Lightweight;
 
-// Experimental OCS accelerator bridge. Copper68k already converts native CPU
+// Experimental OCS accelerator/A1200 bridge. Copper68k converts native CPU
 // clocks to the 7.09 MHz motherboard domain. All transfers below use that same
-// clock and the fitted 16-bit motherboard bus, including unaligned operands.
+// clock and the fitted motherboard bus, including split unaligned operands.
 // This is a bounded bridge policy, not a model of a particular accelerator card.
 internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpuModel model) : IM68kBus, IM68kCodeReader
 {
@@ -43,6 +43,11 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
 
     public uint ReadLong(uint address, ref long cycle, M68kBusAccessKind kind)
     {
+        if ((address & 3) == 0 && machine.HasAgaLongBus(address & _addressMask))
+        {
+            address &= _addressMask; BeginTransfer(ref cycle); var requested = cycle;
+            var value = machine.ReadAgaLong(address, ref cycle); CompleteTransfer(requested, ref cycle); return value;
+        }
         if ((address & 1) == 0)
             return ((uint)ReadWord(address, ref cycle, kind) << 16) |
                 ReadWord(unchecked(address + 2), ref cycle, kind);
@@ -77,6 +82,11 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
 
     public void WriteLong(uint address, uint value, ref long cycle, M68kBusAccessKind kind)
     {
+        if ((address & 3) == 0 && machine.HasAgaLongBus(address & _addressMask))
+        {
+            address &= _addressMask; BeginTransfer(ref cycle); var requested = cycle;
+            machine.WriteAgaLong(address, value, ref cycle); CompleteTransfer(requested, ref cycle); return;
+        }
         if ((address & 1) == 0)
         {
             WriteWord(address, (ushort)(value >> 16), ref cycle, kind);

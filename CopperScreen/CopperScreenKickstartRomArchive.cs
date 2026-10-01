@@ -13,9 +13,17 @@ internal static class CopperScreenKickstartRomArchive
 	private const long MaximumRomImageSize = 16 * 1024 * 1024;
 	private static readonly string[] RomExtensions = [".rom", ".bin", ".kick"];
 
-	internal static byte[] ReadNativeRom(string path, CopperScreenKickstartSource source, KickstartVersion version)
+	internal static byte[] ReadNativeRom(string path, CopperScreenKickstartSource source, KickstartVersion version, bool a1200 = false)
 	{
 		var rom = ReadRomImage(path, source, version);
+		if (a1200)
+		{
+			if (source != CopperScreenKickstartSource.KickstartRom || version != KickstartVersion.Kickstart30 ||
+				rom.Length != 524288 || BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(12)) != 39 ||
+				BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(14)) != 106)
+				throw new NotSupportedException("Choose an A1200 Kickstart 3.0 ROM (512 KiB, v39.106) for the initial AGA profile.");
+			return rom;
+		}
 		var actual = IdentifyNativeVersion(rom);
 		if (actual != version ||
 			(source == CopperScreenKickstartSource.Kickstart13Rom && actual != KickstartVersion.Kickstart13) ||

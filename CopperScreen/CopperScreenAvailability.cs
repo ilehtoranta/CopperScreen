@@ -25,7 +25,7 @@ internal static class CopperScreenAvailability
         "Engine" => value == "Lightweight",
         "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040",
         "Kickstart" => value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom",
-        "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M",
+        "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M" or "AgaAlice",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
     };
@@ -35,6 +35,7 @@ internal static class CopperScreenAvailability
 
     public static string[] ChipRamChoices(DmaChipModel model) => model switch
     {
+        DmaChipModel.AgaAlice => ["2048"],
         DmaChipModel.OcsAgnus => ["512"],
         DmaChipModel.Agnus8372A => ["512", "1024"],
         DmaChipModel.Agnus8375Pal2M => ["1024", "2048"],
@@ -47,7 +48,8 @@ internal static class CopperScreenAvailability
         "Agnus8372A" => "8372A · ECS Agnus · up to 1 MiB",
         "Agnus8375Pal2M" => "8375 (318069-10) · ECS PAL · up to 2 MiB",
         "EcsAgnus" => "ECS Agnus (unspecified revision)",
-        "AgaAlice" => "Alice (AGA)",
+        "AgaAlice" => "8374 · Alice · initial A1200 AGA",
+        "AgaLisa" => "4203 · Lisa · initial AGA",
         "OcsDenise" => "8362 · OCS Denise",
         "EcsDenise" => "8373 · ECS Denise",
         "AccurateM68000" => "Motorola 68000",
@@ -59,7 +61,7 @@ internal static class CopperScreenAvailability
         "JitM68040" => "Motorola 68040 (JIT)",
         "Kickstart13Rom" => "Kickstart 1.3 ROM",
         "Kickstart31Rom" => "Kickstart 3.1 ROM (A500)",
-        "KickstartRom" => "Native Kickstart ROM (1.3 or A500 3.1)",
+        "KickstartRom" => "Native Kickstart ROM (1.3, A500 3.1 or A1200 3.0)",
         "DiagRom" => "Diagnostic ROM",
         "KeyboardJoystick" => "Keyboard joystick",
         _ => value
