@@ -4,6 +4,27 @@ The public site is static HTML/CSS with progressive enhancement for the gallery.
 GitHub Pages deploys `docs/` through `.github/workflows/pages.yml`. No framework,
 package installation, analytics, external fonts or runtime API is required.
 
+## CopperDisk page
+
+`copperdisk.html` is the dedicated library landing page at
+<https://ilehtoranta.github.io/CopperScreen/copperdisk.html>, linked from the
+homepage and gallery navigation. It uses the shared `styles.css` plus scoped
+`copperdisk.css`; it needs no JavaScript or extra deployment step. The package
+icon under `assets/copperdisk-icon.png` is copied from CopperDisk's existing icon.
+The page describes decoder entry points, track fields and implementation limits.
+
+Keep IPF claims aligned with `CopperDisk/README.md` and the decoder source.
+The page explicitly distinguishes published `2.1.1-boundary.1` APIs from newer
+stored-gap decoding and density metadata in development source. Update the
+installation command and that distinction only after a new package is released.
+The install example uses published APIs. Do not claim universal protection
+compatibility from successful decoding.
+
+After edits, run `node scripts/build-website.mjs --check`, check local links and
+anchors, and inspect the page at desktop and narrow mobile widths. Library or
+emulator behavior is unchanged by website edits; no native replay or performance
+measurement is required for them.
+
 ## Add screenshots
 
 1. Add a full-size PNG and a smaller proportional thumbnail under

@@ -9,6 +9,10 @@ small API.
 
 The package targets .NET 10 and has no external runtime dependencies.
 
+[CopperDisk website and IPF API overview](https://ilehtoranta.github.io/CopperScreen/copperdisk.html)
+cover the library's track APIs, supported formats and the difference between
+published package support and current development source.
+
 The source also owns `AmigaHardfileConfiguration`/partition metadata and internal
 file-range, RDB and filesystem metadata helpers used by Lightweight CopperHDF.
 Guest device registration, boot discovery and I/O gateways remain in the engine.
