@@ -45,6 +45,7 @@ internal sealed class LightweightSpriteDma
     private uint _pendingAddress;
     private int _pendingFetchMode;
     private int _fetchMode, _nextFetchMode;
+    private bool _scanDouble, _nextScanDouble;
     private long _fetchModeCycle = long.MaxValue;
     private long _pendingOutputCycle;
     private bool _beamHeld;
@@ -74,6 +75,7 @@ internal sealed class LightweightSpriteDma
         _pendingPurpose = default;
         _pendingAddress = 0;
         _fetchMode = _nextFetchMode = _pendingFetchMode = 0;
+        _scanDouble = _nextScanDouble = false;
         _fetchModeCycle = long.MaxValue;
         _pendingOutputCycle = long.MaxValue;
         NextCycle = long.MaxValue;
@@ -110,6 +112,7 @@ internal sealed class LightweightSpriteDma
         if (machine.IsAga && offset == LightweightRegisters.Fmode)
         {
             _nextFetchMode = machine.GetCustomRegister(offset) >> 2 & 3;
+            _nextScanDouble = (machine.GetCustomRegister(offset) & 0x8000) != 0;
             _fetchModeCycle = LightweightBusArbiter.AlignToSlot(cycle + 2);
             PublishNextCycle();
             return;
@@ -161,7 +164,7 @@ internal sealed class LightweightSpriteDma
             "Sprite DMA must advance at its published physical phase.");
 
         if (_fetchModeCycle <= cycle)
-        { _fetchMode = _nextFetchMode; _fetchModeCycle = long.MaxValue; }
+        { _fetchMode = _nextFetchMode; _scanDouble = _nextScanDouble; _fetchModeCycle = long.MaxValue; }
 
         if (_hasPendingOutput && _pendingOutputCycle == cycle)
         {
@@ -231,6 +234,12 @@ internal sealed class LightweightSpriteDma
             state.Active = false;
             state.HasPendingPos = false;
         }
+
+        // SH10 becomes the per-channel scan-double enable. Only active data
+        // slots are suppressed; POS/CTL reloads at the stop still run normally.
+        // Lisa retains the full previous payload for the alternate raster row.
+        if (_scanDouble && state.Active && (state.Pos & 0x80) != 0 &&
+            ((line ^ GetVerticalStart(in state)) & 1) != 0) return;
 
         if (!TryGetPurpose(in state, line, word, out var purpose) ||
             !IsSlotAvailable(channel, word, machine))

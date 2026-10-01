@@ -30,6 +30,9 @@ internal sealed partial class LightweightVideo
     // one of eight blocks. No EHB palette aliases may overwrite entries 32..63.
     private void WriteAgaColor(int register, ushort value)
     {
+        // RDRAM changes Lisa's colour-table access direction even when the
+        // initiating CPU/Copper transaction is a write.
+        if ((_ecsBplcon2 & 0x100) != 0) return;
         var index = register + ((_ecsBplcon3 >> 13) & 7) * 32;
         if ((_ecsBplcon3 & 0x200) != 0) _agaLow[index] = (ushort)(value & 0xFFF);
         else { _agaHigh[index] = value; _agaLow[index] = (ushort)(value & 0xFFF); }
@@ -144,6 +147,13 @@ internal sealed partial class LightweightVideo
         }
     }
 
+    internal ushort ReadAgaColor(int register)
+    {
+        if ((_ecsBplcon2 & 0x100) == 0) return 0xFFFF;
+        var index = register + ((_ecsBplcon3 >> 13) & 7) * 32;
+        return (_ecsBplcon3 & 0x200) != 0 ? _agaLow[index] : (ushort)(_agaHigh[index] & 0x8FFF);
+    }
+
     private int DecodeAgaHam(int code)
     {
         var addressed = code ^ (_agaBplcon4 >> 8);
@@ -197,8 +207,6 @@ internal sealed partial class LightweightVideo
             UnsupportedActiveFeature = "AGA HAM with nonstandard plane count (unverified)";
         else if ((_effectiveBplcon0 & 0x400) != 0 && ((_ecsBplcon2 & 7) >= 5 || (_ecsBplcon2 >> 3 & 7) >= 5))
             UnsupportedActiveFeature = "AGA nonstandard dual-playfield priority (unverified)";
-        else if ((_ecsBplcon2 & 0x100) != 0) UnsupportedActiveFeature = "AGA palette readback (next milestone)";
-        else if ((_agaFmode & 0xC000) != 0) UnsupportedActiveFeature = "AGA scan doubling (unverified)";
     }
 
     internal void ReportUnsupportedAgaSpriteWrite()

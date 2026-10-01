@@ -96,7 +96,11 @@ not a physical ATA controller. Sprite DMA supports 16/32/64-bit widths,
 independent 140/70/35 ns resolutions, fine positions and even/odd palette banks.
 Attached pairs use the odd bank, and CLXCON2 extends collisions through planes
 7/8. See [focused and native sprite evidence](../docs/engine/AGA_SPRITES_2026-10-01.md).
-Palette readback and scan doubling remain unavailable. Combined HAM/dual playfield and nonstandard
+BPLCON2 RDRAM reads banked high/low palette halves and inhibits colour writes.
+FMODE BSCAN2 selects a shared modulo by DIWSTRT/beam parity; SSCAN2 reuses sprite
+data on alternate rows for channels with SH10 set. See [focused and native
+readback/scan-doubling evidence](../docs/engine/AGA_READBACK_SCAN2_2026-10-02.md).
+Combined HAM/dual playfield and nonstandard
 HAM plane counts/dual priorities are explicitly unverified. Fine positioning,
 manual page-mode data bus residue, active resolution/fetch transitions, genlock
 and physical A1200 timing remain unverified.

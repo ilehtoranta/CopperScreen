@@ -24,10 +24,13 @@ adds native PAL A1200 boot and eight-plane RGB24 output. The
 and two four-plane playfields in all three resolutions, with native stock HAM
 screens and a programmed DPF probe. The [sprite follow-up](AGA_SPRITES_2026-10-01.md)
 adds 16/32/64-bit DMA, 140/70/35 ns sprite output, fine positions, palette banks
-and eight-plane collisions, with original native probes. Scan doubling,
-palette readback, CPU/Copper page-mode sprite bus residue, active sprite
+and eight-plane collisions, with original native probes. The [palette/scan-doubling
+follow-up](AGA_READBACK_SCAN2_2026-10-02.md) adds RDRAM, BSCAN2 and SSCAN2 with
+original native guest readbacks and pixel checks. CPU/Copper page-mode sprite bus residue, active sprite
 resolution/fetch transitions, combined HAM/DPF, nonstandard HAM/DPF modes, physical genlock,
 A2024 external scan conversion and the 68060 OS/FPU validation remain open.
+Palette readback electrical bus residue, active scan-control/position rewrites
+and physical scan-doubled monitor timing also need independent hardware evidence.
 Stock NTSC/VGA-driver coverage needs a supplied Storage/monitor-driver fixture.
 The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final
 Fight: Enhanced — Final Edition's opening level, 2 MiB Chip RAM and ECS border

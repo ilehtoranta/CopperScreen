@@ -14,12 +14,15 @@ p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('source', type=Path)
 p.add_argument('output', type=Path)
 p.add_argument('--mode', choices=['rgb24', 'ham6', 'ham8', 'programmed-dual',
-                                'sprites16', 'sprites32', 'sprites32page', 'sprites64'], default='rgb24')
+                                'sprites16', 'sprites32', 'sprites32page', 'sprites64',
+                                'palette-readback', 'scan16', 'scan32', 'scan32page', 'scan64'], default='rgb24')
 p.add_argument('--ndk', type=Path, required=True, help='Directory containing supplied FD library definitions')
 a = p.parse_args()
 mode, width, height = 0x21000, 320, 256
 depth = 6 if a.mode == 'ham6' else 8
-sprite_fetch = {'sprites16': 0, 'sprites32': 1, 'sprites32page': 2, 'sprites64': 3}.get(a.mode)
+sprite_fetch = {'sprites16': 0, 'sprites32': 1, 'sprites32page': 2, 'sprites64': 3,
+                'scan16': 0, 'scan32': 1, 'scan32page': 2, 'scan64': 3}.get(a.mode)
+scan_double = a.mode.startswith('scan')
 if a.mode in ('ham6', 'ham8'): mode |= 0x800
 
 def vectors(name):
@@ -89,7 +92,7 @@ for pen in range(256):
         for top in (16, 136): tiles.append((raw, (column*20, top+row*7, column*20+19, top+row*7+6)))
     else: tiles.append((pen & 63 if depth == 6 else pen, (column*20, 16+row*15, column*20+19, 30+row*15)))
 if sprite_fetch is not None:
-    tiles = [(0xC0, (0, 0, 319, 255))]
+    tiles = [((y*17) & 255, (0,y,319,y)) for y in range(256)] if scan_double else [(0xC0, (0, 0, 319, 255))]
 for pen, bounds in tiles:
     # V39 HAM8 display Copper lists rotate the bitmap planes: graphics pens
     # keep their two command bits at 7/6, while Lisa sees them at BP2/BP1.
@@ -111,6 +114,23 @@ if a.mode != 'rgb24':
 if sprite_fetch is not None:
     proof = f'Native AGA {a.mode} PAL 320x256 depth 8: sprite DMA data prepared\n'.encode()
 immediate(3, len(proof)); jsr(dos['Write']); words(0x2204); jsr(dos['Close'])
+if a.mode == 'palette-readback':
+    words(0x2c78, 4); jsr(-132); jsr(-120)  # Forbid, Disable; stable OS Copper display remains active
+    def custom(r, v):
+        words(0x33fc, v); long(0xdff000+r)
+    # Distinct high/low values, a transparency bit in bank 7, and unused bits
+    # distinguish table readback from the most recent register-write storage.
+    custom(0x106,0xec00); custom(0x1be,0xfabc)
+    custom(0x106,0xee00); custom(0x1be,0xfdef)
+    custom(0x104,0x124); lea('palette-proof',0)
+    for bank in range(8):
+        for low in range(2):
+            custom(0x106,0xc00 | bank << 13 | low << 9)
+            custom(0x180,0xffff)  # RDRAM must suppress this attempted palette write
+            words(0x227c); long(0xdff180); moveq(2,31)
+            label(f'palette-read-{bank}-{low}')
+            words(0x3019,0x30c0); relative(0x51ca,f'palette-read-{bank}-{low}')
+    custom(0x104,0x24); custom(0x106,0xc00); words(0x60fe)
 if a.mode == 'programmed-dual':
     # The OS allocated/drew the eight-plane bitmap and wrote the proof. This
     # separately named probe then owns the chipset; it is not a stock DPF screen.
@@ -151,11 +171,12 @@ if sprite_fetch is not None:
     words(0x2008, 0x33c0); long(0xdff082)
     words(0x4840, 0x33c0); long(0xdff080)
     for r, v in [(0x100,0x0211), (0x102,0), (0x104,0x24), (0x106,0x0c40),
-                 (0x10c,0x802b), (0x1fc,3 | sprite_fetch << 2), (0x08e,0x2c81), (0x090,0x2cc1),
-                 (0x1e4,0x2100), (0x092,0x38), (0x094,0xd8), (0x108,0xfff8),
+                 (0x10c,0x802b), (0x1fc,3 | sprite_fetch << 2 | (0xc000 if scan_double else 0)), (0x08e,0x2c81), (0x090,0x2cc1),
+                 (0x1e4,0x2100), (0x092,0x38), (0x094,0xd8), (0x108,0xffd0 if scan_double else 0xfff8),
                  (0x10a,0xfff8), (0x098,0xf000), (0x10e,0xc3), (0x088,0), (0x096,0x83a0)]: custom(r,v)
-    label('sprite-sample-field'); lea('sprite-collisions', 0)
-    for row, y in enumerate((64,80,112,128,160,176)):
+    if scan_double: words(0x60fe)
+    else: label('sprite-sample-field'); lea('sprite-collisions', 0)
+    for row, y in enumerate(() if scan_double else (64,80,112,128,160,176)):
         for phase, line in [('clear', y+1), ('read', y+9)]:
             label(f'sprite-{row}-{phase}')
             words(0x3039); long(0xdff006); words(0x0240,0xff00,0x0c40,line << 8)
@@ -163,7 +184,7 @@ if sprite_fetch is not None:
             if phase == 'clear': words(0x3039); long(0xdff00e)
             else:
                 words(0x3039); long(0xdff00e); words(0x30c0)  # native read-clear -> d0 -> proof RAM
-    relative(0x6000, 'sprite-sample-field')
+    if not scan_double: relative(0x6000, 'sprite-sample-field')
 words(0x2c4d); immediate(7, 6000)
 label('wait'); jsr(gfx['WaitTOF']); words(0x5387); relative(0x6600, 'wait')
 words(0x2c4c, 0x204b); jsr(intuition['CloseScreen']); moveq(0, 0)
@@ -183,6 +204,9 @@ label('tags')
 for tag, value in [(0x80000023, width), (0x80000024, height), (0x80000025, depth),
                    (0x80000032, mode), (0x8000002d, 15), (0x80000038, 1), (0, 0)]:
     long(tag); long(value)
+if a.mode == 'palette-readback':
+    code.extend(b'AGAPALREAD1\0')  # Twelve-byte marker keeps native word stores aligned.
+    label('palette-proof'); code.extend(bytes(1024))
 if a.mode == 'programmed-dual':
     label('copper')
     for plane in range(8): words(0xe0+plane*4,0,0xe2+plane*4,0)
@@ -200,27 +224,32 @@ if sprite_fetch is not None:
     for sprite in range(8):
         label(f'sprite-{sprite}')
         for y in ((64,112,160) if sprite < 4 else (80,128,176)):
-            x = 140 + 70 * (sprite % 4 if sprite != 7 else 2)
+            if scan_double and sprite != 7: y += sprite % 2
+            x = 132+40*(sprite % 4) if scan_double else 140 + 70 * (sprite % 4 if sprite != 7 else 2)
             fine = sprite % 4
-            pos = y << 8 | ((x-1) >> 1)
+            pos = y << 8 | ((x-1) >> 1) | (0x80 if scan_double and sprite % 2 == 0 else 0)
             ctl = (y+8) << 8 | ((x-1) & 1) | ((fine & 2) << 3) | ((fine & 1) << 3) | (0x80 if sprite == 7 else 0)
             byte_width = 2 if sprite_fetch == 0 else 8 if sprite_fetch == 3 else 4
             for control in (pos, ctl):
                 words(control)
                 code.extend(bytes(byte_width-2))
-            for _ in range(8):
+            for dma_row in range(4 if scan_double and sprite % 2 == 0 else 8):
                 for plane in range(2):
                     for word in range(byte_width // 2):
                         pattern = 0
                         for bit in range(16):
                             i = word*16+bit
-                            pixel = (i + sprite + i//16) % 4
+                            pixel = (i + sprite + i//16 + (dma_row if scan_double else 0)) % 4
                             pattern |= ((pixel >> plane) & 1) << (15-bit)
                         words(pattern)
         code.extend(bytes(byte_width*2))
+        # The guest's fixed per-channel stride remains 56 payloads. Pad after
+        # the terminator, never between a control pair and its data rows.
+        code.extend(bytes(stream_bytes-(len(code)-labels[f'sprite-{sprite}'])))
     if len(code) & 1: code.append(0)
-    code.extend(b'AGASPRCOLv1\0')
-    label('sprite-collisions'); code.extend(bytes(12))
+    if not scan_double:
+        code.extend(b'AGASPRCOLv1\0')
+        label('sprite-collisions'); code.extend(bytes(12))
 for offset, name in fixes: struct.pack_into('>h', code, offset, labels[name] - offset)
 while len(code) % 4: code.append(0)
 executable = struct.pack('>8I', 1011, 0, 1, 0, 0, len(code)//4, 1001, len(code)//4) + code + struct.pack('>I', 1010)

@@ -53,7 +53,7 @@ file keep their original names. Validate native DOS I/O separately from pixels.
 See [implementation and retained evidence](../../../docs/engine/AGA_HAM_DUAL_2026-10-01.md).
 
 Synthetic pixel-checker controls run without supplied ROM or media:
-`python -m unittest discover -s scripts/tests -p test_aga_probe.py -v`.
+`python -m unittest discover -s scripts/tests -p 'test_aga*.py' -v`.
 
 `aga-diagnostic.bin` records big-endian ModeNotAvailable (ULONG), screen pointer
 (ULONG), returned width and height (UWORD each), bitmap depth (byte) and native
@@ -91,3 +91,38 @@ This is an original native guest probe. Third-party games/demos, stock OS
 extended-sprite APIs, active width/resolution transitions and physical Alice/Lisa
 phases need further evidence. The pixel coordinates retain the existing +1
 lores raster phase. See [evidence and limits](../../../docs/engine/AGA_SPRITES_2026-10-01.md).
+
+## Palette readback and scan doubling
+
+Prepare `--mode palette-readback` or one of `scan16`, `scan32`, `scan32page`,
+`scan64`. Use the same PAL A1200 profile, 1200 fields and 300-field checkpoints.
+Existing mode executables and the default fixture retain their original hashes.
+
+The readback probe opens/draws the native RGB24 screen and writes the ordinary
+encoded-pixels DOS proof. It briefly changes colour 255's high/low halves and
+transparency bit, then reads all 512 halves through native colour-register CPU
+accesses, attempting blocked colour writes with RDRAM enabled. The twelve-byte
+`AGAPALREAD1` marker precedes 512 big-endian words in Chip RAM. The OS Copper list
+restores its display palette on subsequent fields, so stable screen pixels
+remain the original RGB24 grid. Check both hardware readbacks and that grid:
+
+```powershell
+python scripts/probes/AgaDisplay/verify_readback_scan.py <frame.bmp> --mode palette-readback --chipram <frame.chipram>
+python scripts/probes/AgaDisplay/verify_capture.py <frame.bmp> --mode palette-readback
+```
+
+The scan probes write the sprite-prepared DOS proof, allocate/copy original
+streams and install a Copper list. Native Intuition supplies a bitmap of distinct
+RGB24 rows. BPL1MOD=-48 rewinds the eight planes; BPL2MOD=-8 advances the 48-byte
+DMA fetch to the next 40-byte OS row, duplicating each source row. Even sprites
+set SH10 and reuse alternate rows; odd sprites keep ordinary data DMA. Independent
+odd/even starts, all three resolutions, fetch widths, fine positions, banks and
+an aligned attached pair distinguish the sprite path from the playfield path.
+
+`verify_readback_scan.py <frame.bmp> --mode <scan-mode> --chipram <frame.chipram>`
+checks 139,000 pixels per checkpoint, including gaps, transparent data and ordinary
+sprites alongside doubled ones. It requires complete bitmap and Chip RAM files.
+Scan probes do not sample CLXDAT; the earlier sprite probes retain that coverage.
+Validate `aga-screen-proof.txt` separately with the FFS proof reader. These are
+original native PAL hardware probes, not stock VGA monitor drivers or third-party
+AGA compatibility tests. See [retained evidence and limits](../../../docs/engine/AGA_READBACK_SCAN2_2026-10-02.md).

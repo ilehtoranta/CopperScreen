@@ -309,7 +309,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
-        "AGA palette readback, scan doubling, CPU/Copper page-mode sprite bus residue and A2024 external scan-converter",
+        "AGA CPU/Copper page-mode sprite bus residue and A2024 external scan-converter",
         "floppy formats other than standard ADF and read-only IPF",
         "physical IDE/SCSI controllers and host-directory mounts",
         "save states",
@@ -1059,6 +1059,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         => unchecked((short)_registers.Read(
             (plane & 1) == 0 ? LightweightRegisters.Bpl1mod : LightweightRegisters.Bpl2mod));
 
+    internal short GetScanDoubleModulo(int line)
+        => unchecked((short)_registers.Read(
+            (((_registers.Read(LightweightRegisters.Diwstrt) >> 8) ^ line) & 1) == 0
+                ? LightweightRegisters.Bpl1mod : LightweightRegisters.Bpl2mod));
+
     internal void SetBitplanePointerFromDma(int plane, uint pointer)
         => _registers.SetBitplanePointerFromDma(plane, pointer);
 
@@ -1648,6 +1653,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var offset = (ushort)(address - CustomBase);
             return offset switch
             {
+                >= LightweightRegisters.ColorFirst and <= LightweightRegisters.ColorLast when IsAga
+                    => _video.ReadAgaColor((offset - LightweightRegisters.ColorFirst) >> 1),
                 LightweightRegisters.Vposr when ReadLatchedLightPen => _lightPenVpos,
                 LightweightRegisters.Vhposr when ReadLatchedLightPen => _lightPenVhpos,
                 LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? (IsAga ? 0x2300 : 0x2000) : (IsAga ? 0x3300 : 0x3000)) : 0) | (_clock.IsLongField ? 0x8000 : 0) |

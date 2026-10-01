@@ -12,7 +12,7 @@ from pathlib import Path
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('bitmap', type=Path)
-p.add_argument('--mode', choices=['rgb24', 'ham6', 'ham8', 'programmed-dual'], default='rgb24')
+p.add_argument('--mode', choices=['rgb24', 'ham6', 'ham8', 'programmed-dual', 'palette-readback'], default='rgb24')
 a = p.parse_args()
 b = a.bitmap.read_bytes()
 assert b[:2] == b'BM'

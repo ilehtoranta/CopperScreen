@@ -58,6 +58,18 @@ Border sprites respect ECSENA and border blanking. No additional device timeline
 or steady Release allocation is added. Active resolution/fetch transitions and
 physical sub-CCK phases remain unverified; the retained raster phase is +1 lores pixel.
 
+Lisa [palette readback and Alice scan doubling](AGA_READBACK_SCAN2_2026-10-02.md)
+share these owners and deadlines. RDRAM reads the BANK/LOCT-selected palette half
+and suppresses colour writes, including Copper writes. BSCAN2 applies BPL1MOD
+to every plane when DIWSTRT and the live vertical beam have matching parity;
+otherwise every plane uses BPL2MOD. A terminal fetch group crossing horizontal
+sync uses the beam at its modulo phase. SSCAN2 suppresses alternate active data
+slots only for sprites with SH10 set, retaining the full Lisa payload. Control
+reloads still run; the global bit removes SH10 from Lisa's horizontal comparison.
+Accepted transfers remain accepted across subsequent control changes. Focused
+phase/row-wrap checks preserve this bounded ordering contract, without certifying
+physical transition timing. No raster frequency or output clock is changed.
+
 EC020 masks each transfer to 24 bits. A 68020/030/040 address above `$FFFFFF` returns
 all-one data or ignores a write while advancing time; it never aliases a device.
 This is an explicit unmapped-address policy, not accelerator autoconfiguration or

@@ -107,7 +107,7 @@ internal sealed class LightweightBitplanes
     {
         if (_aga && offset == LightweightRegisters.Fmode)
         {
-            _pendingFmode = value & 3;
+            _pendingFmode = value & 0x4003;
             _pendingFmodeCycle = LightweightBusArbiter.AlignToSlot(cycle + 2);
             Publish(_pendingFmodeCycle);
         }
@@ -201,7 +201,8 @@ internal sealed class LightweightBitplanes
             if (_aga)
             {
                 var res = super ? 2 : hires ? 1 : 0;
-                var mode = _fmode == 3 ? 2 : _fmode == 0 ? 0 : 1;
+                var fetch = _fmode & 3;
+                var mode = fetch == 3 ? 2 : fetch == 0 ? 0 : 1;
                 _fetchPeriod = (8 << mode) >> res;
                 _fetchUnit = Math.Max(8, _fetchPeriod);
                 _maxFetchPlanes = Math.Min(8, _fetchPeriod);
@@ -362,8 +363,9 @@ internal sealed class LightweightBitplanes
         var applyModulo = _pendingModulo;
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
-        var bits = _pendingMode == 3 ? 64 : _pendingMode == 0 ? 16 : 32;
-        var wide = _aga ? machine.ReadAgaBitplane(address, _pendingMode) : machine.ReadChipWordBus(address);
+        var mode = _pendingMode & 3;
+        var bits = mode == 3 ? 64 : mode == 0 ? 16 : 32;
+        var wide = _aga ? machine.ReadAgaBitplane(address, mode) : machine.ReadChipWordBus(address);
         var value = (ushort)(wide >> (bits - 16));
         _dataLatches[plane] = value;
         if (_aga) machine.OnBitplaneWideOutput(plane, wide, bits, cycle);
@@ -371,8 +373,11 @@ internal sealed class LightweightBitplanes
         var pointer = MaskAddress(address + (uint)(_aga ? bits / 8 : 2));
         if (applyModulo)
         {
-            pointer = MaskAddress(unchecked(pointer +
-                (uint)machine.GetBitplaneModulo(plane)));
+            // A terminal group may cross horizontal sync. BSCAN2 selects
+            // by the beam at the modulo phase, not the DDF owner's row.
+            var modulo = (_pendingMode & 0x4000) != 0
+                ? machine.GetScanDoubleModulo(machine.BeamLine) : machine.GetBitplaneModulo(plane);
+            pointer = MaskAddress(unchecked(pointer + (uint)modulo));
         }
         _pointers[plane] = pointer;
         machine.SetBitplanePointerFromDma(plane, pointer);

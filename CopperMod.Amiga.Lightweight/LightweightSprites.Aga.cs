@@ -10,6 +10,7 @@ internal sealed partial class LightweightSprites
     private readonly byte[] _agaCollisionMatches;
     private ushort _agaCollisionControl, _agaBanks = 0x11;
     private int _agaStep = 4, _agaFetch;
+    private bool _agaScanDouble;
     private ulong _agaPendingPayload;
     private int _agaPendingWidth;
 
@@ -25,6 +26,7 @@ internal sealed partial class LightweightSprites
         Array.Clear(_agaChannels);
         _agaCollisionControl = 0; _agaBanks = 0x11;
         _agaStep = 4; _agaFetch = 0;
+        _agaScanDouble = false;
         _agaPendingPayload = 0; _agaPendingWidth = 16;
     }
 
@@ -35,6 +37,9 @@ internal sealed partial class LightweightSprites
             _ => (bplcon0 & 0x8040) == 0x40 ? 2 : 4 };
         _agaBanks = bplcon4;
         _agaFetch = fmode >> 2 & 3;
+        var scanDouble = (fmode & 0x8000) != 0;
+        if (_agaScanDouble != scanDouble) _dirtyMask |= 255;
+        _agaScanDouble = scanDouble;
     }
 
     internal void OnAgaDmaData(int sprite, bool dataA, ulong value, int bits, long cycle)
@@ -134,8 +139,8 @@ internal sealed partial class LightweightSprites
         UpdateAgaComparators(line, x, true);
     }
 
-    private static int AgaStart(in SpriteChannel state)
-        => ((((state.Pos & 255) << 1) | (state.Ctl & 1)) + 1) * 4 +
+    private int AgaStart(in SpriteChannel state)
+        => ((((state.Pos & (_agaScanDouble ? 127 : 255)) << 1) | (state.Ctl & 1)) + 1) * 4 +
             (state.Ctl >> 4 & 1) * 2 + (state.Ctl >> 3 & 1);
 
     private void UpdateAgaComparators(int line, int x, bool begin)

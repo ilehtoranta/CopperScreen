@@ -23,7 +23,7 @@ jobs:
       - name: Replay tooling negative controls (no ROM or game media)
         run: python -m unittest discover -s scripts/tests -p test_native_regression.py -v
       - name: AGA pixel checker controls (synthetic images only)
-        run: python -m unittest discover -s scripts/tests -p test_aga_probe.py -v
+        run: python -m unittest discover -s scripts/tests -p 'test_aga*.py' -v
 
   build-and-test:
     runs-on: windows-latest
