@@ -305,12 +305,14 @@ internal sealed partial class LightweightVideo
                     machine.SetCollisionControl(_pendingControlValue);
                     break;
                 case LightweightRegisters.Bplcon2:
+                    var agaPriorityChanged = _aga && ((_ecsBplcon2 ^ _pendingControlValue) & 0x7F) != 0;
                     if (_ecsDisplay) _ecsBplcon2 = _pendingControlValue;
                     if ((_effectiveBplcon2 & 0x7F) != (_pendingControlValue & 0x7F))
                     {
                         _effectiveBplcon2 = _pendingControlValue;
                         UpdateDualPlayfieldPixels();
                     }
+                    if (agaPriorityChanged) UpdateAgaDualPixels();
                     _effectiveSpritePlayfieldPlacement = Math.Min(
                         (_pendingControlValue >> 3) & 7,
                         4);
@@ -336,7 +338,9 @@ internal sealed partial class LightweightVideo
                     refreshRenderLine = true;
                     break;
                 case LightweightRegisters.Bplcon3:
+                    var agaOffsetChanged = _aga && ((_ecsBplcon3 ^ _pendingControlValue) & 0x1C00) != 0;
                     _ecsBplcon3 = _pendingControlValue;
+                    if (agaOffsetChanged) UpdateAgaDualPixels();
                     if (_aga)
                     {
                         machine.SetSpriteSuperHires((_ecsBplcon3 & 0xC0) == 0 &&

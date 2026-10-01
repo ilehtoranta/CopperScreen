@@ -85,16 +85,21 @@ See [implementation, native memory discovery and verification limits](../docs/en
 The initial PAL A1200 profile pairs `Mos8374Alice` with `Lisa4203`, 68EC020,
 2 MiB Chip RAM and no expansion Fast RAM. It uses a bounded 32-bit Chip/ROM
 bridge and eight-plane 16/32/64-bit DMA, a banked 256-entry RGB24 palette,
-single-playfield output, EHB and palette XOR. Native A1200 Kickstart 3.0
+single-playfield output, EHB and palette XOR. HAM6/HAM8 and two four-plane
+playfields now compose in lores, hires and SuperHires. Native A1200 Kickstart 3.0
 (39.106) reaches its disk prompt and boots CopperHDF/DOS; the original native
 screen probe draws all 256 colours and persists its proof through desktop
 cold reopen. `--agnus alice --denise lisa --cpu 68ec020 --chip-ram-kib 2048
 --slow-ram-kib 0` selects it in the runner. The desktop profile is `a1200-aga-pal`.
 Empty Gayle IDE/PCMCIA identification is implemented; disk boot uses CopperHDF,
-not a physical ATA controller. AGA HAM6/HAM8, dual playfields, palette readback,
-enhanced sprites/collisions and scan doubling remain unavailable. Fine positioning,
+not a physical ATA controller. Palette readback, enhanced sprites/collisions and
+scan doubling remain unavailable. Combined HAM/dual playfield and nonstandard
+HAM plane counts/dual priorities are explicitly unverified. Fine positioning,
 manual wide-data writes, genlock and physical A1200 timing remain unverified.
 See [initial AGA evidence and limits](../docs/engine/AGA_INITIAL_2026-10-01.md).
+The [HAM and dual-playfield follow-up](../docs/engine/AGA_HAM_DUAL_2026-10-01.md)
+records native HAM6/HAM8 screens, a separately programmed dual-playfield probe,
+independent pixel/FFS checks and unchanged OCS/ECS/initial AGA controls.
 
 The default 512 KiB layout remains CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)

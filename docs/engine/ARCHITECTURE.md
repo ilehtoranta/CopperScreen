@@ -39,6 +39,15 @@ retains its accepted address and FMODE until the output phase samples RAM,
 then transfers 16/32/64 bits to Lisa. FMODE does not cancel a separately pending
 BPLCON0 update. CPU/cache and motherboard timing remain bounded approximations.
 See [initial AGA implementation and native evidence](AGA_INITIAL_2026-10-01.md).
+Lisa's [HAM and dual-playfield compositor](AGA_HAM_DUAL_2026-10-01.md) uses the
+same accepted-data shifters. HAM8 replaces a component's high six bits and holds
+its low two; HAM6 expands a modified nibble while retaining RGB24 direct colours.
+Sprites overlay the result without entering the hold. A 256-entry dual-playfield
+table maps raw odd/even-plane codes to selected palette address and the masking
+threshold of both opaque fields. BPLCON2 priority and BPLCON3 PF2OF writes update
+that table at the existing control deadline. BPLCON4 XOR follows playfield selection.
+Hires/SuperHires samples share each legacy-width sprite clock while masking its
+subpixels independently. No additional device timeline or Release allocation is added.
 
 EC020 masks each transfer to 24 bits. A 68020/030/040 address above `$FFFFFF` returns
 all-one data or ignores a write while advancing time; it never aliases a device.

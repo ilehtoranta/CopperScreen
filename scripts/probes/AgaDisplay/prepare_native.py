@@ -13,9 +13,12 @@ from pathlib import Path
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('source', type=Path)
 p.add_argument('output', type=Path)
+p.add_argument('--mode', choices=['rgb24', 'ham6', 'ham8', 'programmed-dual'], default='rgb24')
 p.add_argument('--ndk', type=Path, required=True, help='Directory containing supplied FD library definitions')
 a = p.parse_args()
 mode, width, height = 0x21000, 320, 256
+depth = 6 if a.mode == 'ham6' else 8
+if a.mode in ('ham6', 'ham8'): mode |= 0x800
 
 def vectors(name):
     result, bias = {}, 0
@@ -67,18 +70,28 @@ for offset, value in [(12, width), (14, height)]:
     words(0x302b, offset, 0x0c40, value)    # native Screen geometry must match
     relative(0x6600, 'fail')
 words(0x2c4d)                             # GfxBase
-words(0x0c2b, 8, 189)                    # Screen.BitMap.Depth must be eight
+words(0x0c2b, depth, 189)                # validate the native bitmap depth
 relative(0x6600, 'fail')
-for index in range(256):
+for index in range(16 if a.mode == 'ham6' else 64 if a.mode == 'ham8' else 256):
     words(0x41eb, 44); immediate(0, index)
     for register, value in enumerate((index, index*37 & 255, index*73 & 255), 1):
         immediate(register, value * 0x01010101)
     jsr(gfx['SetRGB32'])
+tiles = []
 for pen in range(256):
-    words(0x43eb, 84); immediate(0, pen); jsr(gfx['SetAPen'])
-    words(0x43eb, 84)
     column, row = pen % 16, pen // 16
-    for register, value in enumerate((column*20, 16+row*15, column*20+19, 30+row*15)):
+    if a.mode == 'programmed-dual':
+        raw = sum(((row >> bit & 1) << (2*bit)) | ((column >> bit & 1) << (2*bit+1)) for bit in range(4))
+        for top in (16, 136): tiles.append((raw, (column*20, top+row*7, column*20+19, top+row*7+6)))
+    else: tiles.append((pen & 63 if depth == 6 else pen, (column*20, 16+row*15, column*20+19, 30+row*15)))
+for pen, bounds in tiles:
+    # V39 HAM8 display Copper lists rotate the bitmap planes: graphics pens
+    # keep their two command bits at 7/6, while Lisa sees them at BP2/BP1.
+    # Convert our specified raw Lisa code to the OS's logical drawing pen.
+    drawing_pen = (pen >> 2) | ((pen & 3) << 6) if a.mode == 'ham8' else pen
+    words(0x43eb, 84); immediate(0, drawing_pen); jsr(gfx['SetAPen'])
+    words(0x43eb, 84)
+    for register, value in enumerate(bounds):
         immediate(register, value)
     jsr(gfx['RectFill'])
 jsr(gfx['WaitBlit'])                       # finish drawing before proof-file I/O
@@ -87,7 +100,26 @@ words(0x2c4a); lea('proofname', 0); words(0x2208); immediate(2, 1006); jsr(dos['
 words(0x2800, 0x4a80); relative(0x6700, 'fail')
 words(0x2204); lea('proof', 0); words(0x2408)
 proof = b'Native AGA PAL 320x256 depth 8: all 256 RGB24 colours drawn\n'
+if a.mode != 'rgb24':
+    proof = f'Native AGA {a.mode} PAL 320x256 depth {depth}: encoded pixels drawn\n'.encode()
 immediate(3, len(proof)); jsr(dos['Write']); words(0x2204); jsr(dos['Close'])
+if a.mode == 'programmed-dual':
+    # The OS allocated/drew the eight-plane bitmap and wrote the proof. This
+    # separately named probe then owns the chipset; it is not a stock DPF screen.
+    words(0x2c78, 4); jsr(-132); jsr(-120)  # Forbid, Disable
+    def custom(r, v):
+        words(0x33fc, v); long(0xdff000+r)
+    custom(0x096, 0x7fff); custom(0x09a, 0x7fff)
+    lea('copper', 0)
+    for plane in range(8):
+        words(0x202b, 192+plane*4, 0x3140, plane*8+6, 0x4840, 0x3140, plane*8+2)
+    words(0x2008, 0x33c0); long(0xdff082)
+    words(0x4840, 0x33c0); long(0xdff080)
+    for r, v in [(0x100,0x0610), (0x102,0), (0x104,0x24), (0x106,0x1440),
+                 (0x10c,0x8011), (0x1fc,3), (0x08e,0x2c81), (0x090,0x2cc1),
+                 (0x1e4,0x2100), (0x092,0x38), (0x094,0xd8), (0x108,0xfff8),
+                 (0x10a,0xfff8), (0x088,0), (0x096,0x8380)]: custom(r,v)
+    words(0x60fe)                         # task holds mode without a privileged STOP
 words(0x2c4d); immediate(7, 6000)
 label('wait'); jsr(gfx['WaitTOF']); words(0x5387); relative(0x6600, 'wait')
 words(0x2c4c, 0x204b); jsr(intuition['CloseScreen']); moveq(0, 0)
@@ -104,12 +136,19 @@ label('diagnostic-name'); code.extend(b'SYS:aga-diagnostic.bin\0')
 if len(code) & 1: code.append(0)
 label('diagnostic'); code.extend(bytes(16))
 label('tags')
-for tag, value in [(0x80000023, width), (0x80000024, height), (0x80000025, 8),
+for tag, value in [(0x80000023, width), (0x80000024, height), (0x80000025, depth),
                    (0x80000032, mode), (0x8000002d, 15), (0x80000038, 1), (0, 0)]:
     long(tag); long(value)
+if a.mode == 'programmed-dual':
+    label('copper')
+    for plane in range(8): words(0xe0+plane*4,0,0xe2+plane*4,0)
+    # Restart pointers and priority each field, then exchange priorities at the
+    # second grid. The guest chooses PF2 offset 32 and colour-address XOR 128.
+    words(0x104,0x24,0xb401,0xfffe,0x104,0x64,0xffff,0xfffe)
 for offset, name in fixes: struct.pack_into('>h', code, offset, labels[name] - offset)
 while len(code) % 4: code.append(0)
 executable = struct.pack('>8I', 1011, 0, 1, 0, 0, len(code)//4, 1001, len(code)//4) + code + struct.pack('>I', 1010)
+assert len(executable) <= 72*512, 'The bounded FFS installer has no file-extension blocks'
 
 original = a.source.read_bytes()
 assert len(original) == 917504 and original[32*512:32*512+4] == b'DOS\1'
@@ -152,6 +191,6 @@ data[block*512:(block+1)*512] = payload + bytes(512-len(payload))
 put(startup*512+324, len(payload)); checksum(startup)
 image = original[:32*512] + data
 with a.output.open('xb') as f: f.write(image)
-print(json.dumps({'mode': 'aga-pal-256', 'displayId': f'{mode:08X}', 'width': width, 'height': height,
+print(json.dumps({'mode': 'aga-pal-256' if a.mode == 'rgb24' else a.mode, 'displayId': f'{mode:08X}', 'width': width, 'height': height,
                   'proof': proof.decode(), 'hunkSha256': hashlib.sha256(executable).hexdigest(),
                   'sourceSha256': hashlib.sha256(original).hexdigest(), 'imageSha256': hashlib.sha256(image).hexdigest()}, indent=2))

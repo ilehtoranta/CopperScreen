@@ -308,11 +308,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
-        "AGA HAM6/HAM8, dual playfields, enhanced sprites/collisions and A2024 external scan-converter",
+        "AGA enhanced sprites/collisions, palette readback, scan doubling and A2024 external scan-converter",
         "floppy formats other than standard ADF and read-only IPF",
         "physical IDE/SCSI controllers and host-directory mounts",
         "save states",
-        "dual-playfield HAM, HAM outside five/six-plane lores and hires BPU above four",
+        "AGA combined HAM/dual playfield, nonstandard HAM plane counts and dual-playfield priorities",
         "hires output with a 454-pixel framebuffer (select 908 for native OCS output)",
         "keyboard MCU scan/debounce and physical reset-pulse duration; CIA sub-E-clock pipeline quirks",
         "physical paddle RC tolerances, controller adapters and mouse quadrature phase",
@@ -1182,6 +1182,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         int secondPlacement, int firstCode, int secondCode, out int first, out int second)
         => _sprites.ComposeDualHiresColorIndexes(line, x, firstPlacement, secondPlacement, firstCode, secondCode,
             out first, out second);
+
+    internal void ComposeAgaSpriteColorIndexes(int line, int x, int firstPlacement,
+        int secondPlacement, int firstCode, int secondCode, out int first, out int second, out int group,
+        int thirdCode, int fourthCode)
+        => _sprites.ComposeDualHiresColorIndexes(line, x, firstPlacement, secondPlacement,
+            firstCode, secondCode, out first, out second, out group, thirdCode, fourthCode);
 
     internal void SetCollisionControl(ushort value) => _sprites.SetCollisionControl(value);
     internal void SetCollisionMode(bool dual, bool planesEnabled)

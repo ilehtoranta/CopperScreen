@@ -490,14 +490,23 @@ internal sealed class LightweightSprites
     // the existing single-playfield compositor so its hot path stays unchanged.
     internal void ComposeDualHiresColorIndexes(int line, int x, int firstPlacement,
         int secondPlacement, int firstCode, int secondCode, out int first, out int second)
+        => ComposeDualHiresColorIndexes(line, x, firstPlacement, secondPlacement,
+            firstCode, secondCode, out first, out second, out _);
+
+    internal void ComposeDualHiresColorIndexes(int line, int x, int firstPlacement,
+        int secondPlacement, int firstCode, int secondCode, out int first, out int second, out int spriteGroup,
+        int thirdCode = -1, int fourthCode = -1)
     {
         if (_outputLine != line || x <= _lastOutputX || _dirtyMask != 0)
             PrepareHiresLine(line, x, firstCode, secondCode);
+        if (thirdCode >= 0) ObservePlayfieldPair(thirdCode, fourthCode);
         if (_nextStart <= x) LatchComparatorsThrough(x);
         _lastOutputX = x;
         first = second = -1;
+        spriteGroup = -1;
         if (_shiftingMask == 0) return;
         ObserveActiveSpriteCollisions(firstCode, secondCode);
+        if (thirdCode >= 0) ObserveActiveSpriteCollisions(thirdCode, fourthCode);
         var pairs = (uint)((_shiftingMask | (_shiftingMask >> 1)) & 0x55);
         while (pairs != 0)
         {
@@ -512,6 +521,7 @@ internal sealed class LightweightSprites
                 ? ((_lineArmedMask & (1 << even)) != 0 ? a | (b << 2) : 0)
                 : (a != 0 ? a : b);
             if (pixel == 0) continue;
+            spriteGroup = group;
             var color = 16 + (attached ? pixel : group * 4 + pixel);
             if (group < firstPlacement) first = color;
             if (group < secondPlacement) second = color;

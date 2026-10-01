@@ -117,7 +117,7 @@ public sealed class LightweightAgaTests
         Assert.Equal(0x80, m.ReadByte(0xDE1000, ref c, M68kBusAccessKind.CpuDataRead));
     }
     [Theory]
-    [InlineData(0x100, 0x0810)] [InlineData(0x100, 0x0410)] [InlineData(0x1FC, 4)] [InlineData(0x106, 0x0C80)] [InlineData(0x10E, 0x40)]
+    [InlineData(0x100, 0x0C10)] [InlineData(0x100, 0x5800)] [InlineData(0x1FC, 4)] [InlineData(0x106, 0x0C80)] [InlineData(0x10E, 0x40)]
     public void ModesBeyondTheInitialMilestoneReportTheirMissingFeature(ushort register, ushort value)
     {
         using var m = Create(); Write(m, register, value); Assert.NotNull(m.UnsupportedActiveFeature);

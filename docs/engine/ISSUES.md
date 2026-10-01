@@ -19,8 +19,11 @@ The [Agnus/Chip RAM follow-up](AGNUS_CHIP_RAM_2026-10-01.md) adds explicit PAL
 8371, 8372A and 8375 (318069-10) layouts. The subsequent
 [ECS display record](ECS_DISPLAY_2026-10-01.md) adds explicit 8373 Denise,
 SuperHires, DIWHIGH, programmable timing and DOFF. The [initial AGA profile](AGA_INITIAL_2026-10-01.md)
-adds native PAL A1200 boot and eight-plane RGB24 output. AGA HAM6/HAM8, dual
-playfields, enhanced sprites/collisions, scan doubling, palette readback, physical genlock,
+adds native PAL A1200 boot and eight-plane RGB24 output. The
+[HAM/dual-playfield follow-up](AGA_HAM_DUAL_2026-10-01.md) implements HAM6/HAM8
+and two four-plane playfields in all three resolutions, with native stock HAM
+screens and a programmed DPF probe. Enhanced sprites/collisions, scan doubling,
+palette readback, combined HAM/DPF, nonstandard HAM/DPF modes, physical genlock,
 A2024 external scan conversion and the 68060 OS/FPU validation remain open.
 Stock NTSC/VGA-driver coverage needs a supplied Storage/monitor-driver fixture.
 The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final

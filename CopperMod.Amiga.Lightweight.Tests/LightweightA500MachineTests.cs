@@ -424,7 +424,7 @@ public sealed class LightweightA500MachineTests
     {
         using var machine = new LightweightA500Machine();
 
-        Assert.Contains("AGA HAM6/HAM8, dual playfields, enhanced sprites/collisions and A2024 external scan-converter", LightweightA500Machine.UnsupportedFeatures);
+        Assert.Contains("AGA enhanced sprites/collisions, palette readback, scan doubling and A2024 external scan-converter", LightweightA500Machine.UnsupportedFeatures);
         Assert.False(machine.IsAdfMounted);
     }
 
