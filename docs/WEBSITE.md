@@ -14,8 +14,8 @@ icon under `assets/copperdisk-icon.png` is copied from CopperDisk's existing ico
 The page describes decoder entry points, track fields and implementation limits.
 
 Keep IPF claims aligned with `CopperDisk/README.md` and the decoder source.
-The page explicitly distinguishes published `2.1.1-boundary.1` APIs from newer
-stored-gap decoding and density metadata in development source. Update the
+The page explicitly distinguishes published `2.1.1-boundary.1` APIs (including
+stored-gap decoding) from density metadata in development source. Update the
 installation command and that distinction only after a new package is released.
 The install example uses published APIs. Do not claim universal protection
 compatibility from successful decoding.
