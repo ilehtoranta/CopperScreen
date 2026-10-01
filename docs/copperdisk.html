@@ -55,19 +55,19 @@
         <tr><th scope="row"><code>Regions</code></th><td><code>IReadOnlyList&lt;AmigaTrackRegion&gt;</code></td><td>Feature-marked spans, with start and length expressed in bits.</td></tr>
       </tbody></table></div>
       <aside class="source-note" aria-labelledby="source-title">
-        <span class="source-label">Current source</span>
-        <div><h3 id="source-title">Density timing metadata</h3><p>The current source adds <code>IpfTrack.DensityType</code> for the SPS density selector and optional <code>CellWeights</code> for index-oriented relative bit-cell durations with a nominal weight of 1000. Hosts normalize the sum to one revolution. These properties are not present in the published <code>2.1.1-boundary.1</code> prerelease, which already supports stored IPF gap streams.</p><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/CopperDisk/README.md#ipf-decoder-notes">Decoder documentation</a></div>
+        <span class="source-label">Version 3.0.0</span>
+        <div><h3 id="source-title">Density timing metadata</h3><p><code>IpfTrack.DensityType</code> exposes the SPS density selector. Optional <code>CellWeights</code> provide index-oriented relative bit-cell durations with a nominal weight of 1000. Hosts normalize the sum to one revolution. Density timing metadata, stored IPF gap streams and weak/no-flux regions are available in the stable <code>3.0.0</code> package.</p><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/CopperDisk/README.md#ipf-decoder-notes">Decoder documentation</a></div>
       </aside>
     </section>
 
     <section class="section" id="start" aria-labelledby="start-title">
-      <div class="section-heading"><h2 id="start-title">Installation and API example</h2><a href="https://www.nuget.org/packages/CopperDisk">NuGet package</a></div>
+      <div class="section-heading"><h2 id="start-title">Installation and API example</h2><a href="https://www.nuget.org/packages/CopperDisk/3.0.0">NuGet package</a></div>
       <div class="disk-start">
         <div>
           <h3>Published package</h3>
-          <p class="muted">Use the .NET 10 SDK. This example uses APIs available in <code>2.1.1-boundary.1</code>.</p>
-          <pre><code>dotnet add package CopperDisk --version 2.1.1-boundary.1</code></pre>
-          <p class="muted">For density timing metadata, build CopperDisk from the current source and reference its project.</p>
+          <p class="muted">Use the .NET 10 SDK. The stable <code>3.0.0</code> package includes the IPF decoder and density timing metadata.</p>
+          <pre><code>dotnet add package CopperDisk --version 3.0.0</code></pre>
+          <p class="muted">Source code and the API guide are maintained in the CopperScreen repository.</p>
           <div class="link-list"><a href="https://github.com/ilehtoranta/CopperScreen/tree/main/CopperDisk">Source project</a><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/CopperDisk/README.md">API guide</a></div>
         </div>
         <div class="code-example">

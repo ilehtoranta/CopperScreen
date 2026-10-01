@@ -47,3 +47,22 @@ Published versions are immutable. Existing preview packages remain available.
 The workflow publishes CopperDisk only; it does not release the engine or CPU.
 Engine diagnostics retain their separate outputs and CI job. Native ROM/media
 replays and performance measurements are separate from package validation.
+
+## CopperDisk 3.0.0 — 2026-10-02
+
+[CopperDisk 3.0.0](https://www.nuget.org/packages/CopperDisk/3.0.0) was published
+with symbols through the restricted trusted publisher policy above. Release
+source: `2e6f6d0bbf54b8882c1ce1f77ab7f278ff0e6dd7`, tagged `copperdisk-v3.0.0`.
+The [publishing run](https://github.com/ilehtoranta/CopperScreen/actions/runs/36926993962)
+completed successfully.
+
+The production Release build and all 74 disk tests passed with no skipped disk
+tests. SDK package validation against `2.1.1-boundary.1`, the hosted validation
+run, and repository CI passed. A separate .NET 10 consumer restored `3.0.0`
+from NuGet.org, compiled the documented track/IPF APIs, and verified ADF byte
+writes, the updated sector view and wrapped encoded-track reads. The downloaded
+assembly matched the validated hosted package, and its repository metadata
+identified the release source commit.
+
+The major version retains the documented API changes from stable `2.1.0`;
+no disk decoder or emulated hardware behavior was changed for this release.

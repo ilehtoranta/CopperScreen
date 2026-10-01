@@ -14,11 +14,11 @@ icon under `assets/copperdisk-icon.png` is copied from CopperDisk's existing ico
 The page describes decoder entry points, track fields and implementation limits.
 
 Keep IPF claims aligned with `CopperDisk/README.md` and the decoder source.
-The page explicitly distinguishes published `2.1.1-boundary.1` APIs (including
-stored-gap decoding) from density metadata in development source. Update the
-installation command and that distinction only after a new package is released.
-The install example uses published APIs. Do not claim universal protection
-compatibility from successful decoding.
+The page documents the stable `3.0.0` package, including density timing metadata,
+stored-gap decoding and weak/no-flux regions. Update its installation command and
+published API claims only after a new package is released. The install example
+uses published APIs. Do not claim universal protection compatibility from
+successful decoding.
 
 After edits, run `node scripts/build-website.mjs --check`, check local links and
 anchors, and inspect the page at desktop and narrow mobile widths. Library or
