@@ -15,7 +15,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/ilehtoranta/CopperScreen</RepositoryUrl>
     <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.1</Copper68kBoundaryVersion>
-    <CopperDiskBoundaryVersion Condition="'$(CopperDiskBoundaryVersion)' == ''">2.1.1-boundary.2</CopperDiskBoundaryVersion>
+    <CopperDiskBoundaryVersion Condition="'$(CopperDiskBoundaryVersion)' == ''">3.0.0</CopperDiskBoundaryVersion>
     <LightweightDiagnostics Condition="'$(LightweightDiagnostics)' == '' and '$(Configuration)' == 'Debug'">true</LightweightDiagnostics>
     <DefineConstants Condition="'$(LightweightDiagnostics)' == 'true'">$(DefineConstants);LIGHTWEIGHT_DIAGNOSTICS</DefineConstants>
   </PropertyGroup>

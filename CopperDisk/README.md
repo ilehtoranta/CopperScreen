@@ -10,13 +10,32 @@ small API.
 The package targets .NET 10 and has no external runtime dependencies.
 
 [CopperDisk website and IPF API overview](https://ilehtoranta.github.io/CopperScreen/copperdisk.html)
-cover the library's track APIs, supported formats and the difference between
-published package support and current development source.
+documents the library's track APIs, supported formats and decoder limits.
 
 The source also owns `AmigaHardfileConfiguration`/partition metadata and internal
 file-range, RDB and filesystem metadata helpers used by Lightweight CopperHDF.
 Guest device registration, boot discovery and I/O gateways remain in the engine.
-See the [storage interface](../docs/engine/STORAGE.md).
+See the [storage interface](https://github.com/ilehtoranta/CopperScreen/blob/main/docs/engine/STORAGE.md).
+
+## Installation
+
+```shell
+dotnet add package CopperDisk --version 3.0.0
+```
+
+## Version 3.0.0
+
+This release includes IPF density selectors and per-cell timing weights, stored
+gap decoding, weak/no-flux region metadata, read-only SCP decoding, aggregate
+loader options, and hardfile configuration and partition metadata.
+
+Compared with stable 2.1.0, there are two API changes:
+
+- `AmigaEncodedTrack.WrapBitOffset` is internal. Public `ReadByteAtBit`,
+  `ReadUInt16AtBit` and `ReadUInt32AtBit` methods wrap offsets automatically.
+- Custom `IWritableAmigaSectorDiskMedia` implementations must implement
+  `TryWriteBytes(int byteOffset, ReadOnlySpan<byte> source)` in addition to track
+  writes. CopperDisk's standard ADF implementation supports both operations.
 
 ## Supported Images
 
@@ -156,10 +175,11 @@ IReadOnlyList<AmigaTrackRegion> regions = track.Regions;
 Use `AmigaEncodedTrack` when a tool needs byte-backed track helpers:
 
 ```csharp
-var encoded = new AmigaEncodedTrack(track.EncodedData, track.BitLength, track.StartBit, track.Features);
+var encoded = new AmigaEncodedTrack(
+    track.EncodedData, track.BitLength, track.StartBit, track.Features, track.Regions);
 
 ushort sync = encoded.ReadUInt16AtBit(0);
-int wrappedOffset = AmigaEncodedTrack.WrapBitOffset(-1, encoded.BitLength);
+ushort acrossTrackBoundary = encoded.ReadUInt16AtBit(-1);
 ```
 
 `Regions` preserves track spans that need special handling in an emulator host,
