@@ -36,8 +36,13 @@ The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final
 Fight: Enhanced — Final Edition's opening level, 2 MiB Chip RAM and ECS border
 blanking with matching normal/scalar captures and OCS Denise/1 MiB controls.
 Third-party SuperHires/programmable-raster coverage remains open.
-Native AGA game/demo coverage is also open. The initial AGA probe is original
-guest software using the native OS, not a third-party compatibility replay.
+Native AGA gameplay coverage remains open. The [supplied-game investigation](AGA_GAMES_2026-10-02.md)
+boots UFO: Enemy Unknown and Alien Breed 3D II: The Killing Grounds on the stock
+PAL A1200 profile. An unpublished Copper68k 1.5.2 candidate resolves the first
+native integer operand gaps; UFO's crack intro runs and accepts a mouse-click
+exit. UFO then requires full-format memory-indirect addressing, while Alien Breed
+3D II reaches a further missing SUB.L absolute-long form. Neither game has
+verified gameplay. The application remains pinned to published Copper68k 1.5.1.
 
 Native Lemmings gameplay, live digger assignment, disk replacement and a separate
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.

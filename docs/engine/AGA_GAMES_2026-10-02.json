@@ -1,0 +1,2049 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-02",
+  "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+  "scope": "Supplied AGA media native startup; neither game has verified gameplay",
+  "applicationCopper68kPin": "1.5.1",
+  "candidatePackage": {
+    "version": "1.5.2",
+    "status": "unpublished-development-candidate",
+    "publicationAuthorized": false,
+    "sourceRepository": {
+      "type": "git",
+      "url": "https://github.com/ilehtoranta/CopperMod.git",
+      "branch": "refs/heads/codex/copper68k-mainline",
+      "commit": "964e0b9a3ffa2df6d41666af6ce2bb93a4957208"
+    },
+    "nupkgSha256": "e4247db5176e8c6838c50a948e3219b2eb28213ff8d8b373368c3a714432f878",
+    "snupkgSha256": "5d0173df7d73eb71a765ed1eb5fe69cab1065f09a4a7cb256dc9272dfd6547a7",
+    "dllSha256": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+    "restoredThrough": "isolated local NuGet feed",
+    "sourceCi": {
+      "passed": true,
+      "url": "https://github.com/ilehtoranta/CopperMod/actions/runs/36973550101"
+    },
+    "siblingSourceProjectReference": false
+  },
+  "profile": {
+    "video": "PAL",
+    "cpu": "68EC020",
+    "agnus": "Alice 8374",
+    "denise": "Lisa 4203",
+    "chipKiB": 2048,
+    "slowKiB": 0,
+    "fastKiB": 0
+  },
+  "suppliedMedia": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].zip",
+      "archiveSha256": "d77cb1f2fe5c8c0adb690e13893900c0a41f1863748dd2724b5ae2f30c050cc5",
+      "entries": [
+        {
+          "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].adf",
+          "bytes": 901120,
+          "sha256": "ff62101ce56e0fc89f43262e4599cdbc9b1d73091b08e6c5df8eb049d3c865a6",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 2 of 5)(TKG)[cr Digital Corruption][m doscopy][bootable][4 Mb Program Disk].zip",
+      "archiveSha256": "ab7db6ea12a30d7d4619fd77959c68732a3ad57fbea70f3c64eb28e3bfa18855",
+      "entries": [
+        {
+          "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 2 of 5)(TKG)[cr Digital Corruption][m doscopy][bootable][4 Mb Program Disk].adf",
+          "bytes": 901120,
+          "sha256": "e27b4bdaf694c0a643a7a266cf92e4f7e423447910cabcca42ced074f6008a88",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).zip",
+      "archiveSha256": "055772b76c9fa9db5ab2d8030c1e1dc6f725692c8a761b8c1aa2699ec9d2abac",
+      "entries": [
+        {
+          "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).adf",
+          "bytes": 901120,
+          "sha256": "f8c3fa23fd1d8df8c8c154e86768edfbe29235e73cfaa0c3edbb759dad440237",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).zip",
+      "archiveSha256": "fa6a9379eb5ebe512d6c4a7a84a3fd14b3704c81efe6fa25268fa60ec65f0e0e",
+      "entries": [
+        {
+          "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).adf",
+          "bytes": 901120,
+          "sha256": "a056fc1420994f2657a9759e8b01e63f3fda8f90844f77dff78cba2e7cdac3c9",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 5 of 5)(Edit).zip",
+      "archiveSha256": "a9f0b5bc3b5d8e26bbb8a0eb86e0fce4586a35a3f3693e5a877b3b3852867ddd",
+      "entries": [
+        {
+          "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 5 of 5)(Edit).adf",
+          "bytes": 901120,
+          "sha256": "cbb4de072eead9f6ced38edccb0521c66140782d286a2a6b0cf342b8d97ebd3e",
+          "dosTypeHex": "444f5305"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+      "archiveSha256": "559e44b7795e8190d982da9a9455fa1d90c2e6e2015d1bf6813cade3e71ef741",
+      "entries": [
+        {
+          "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].adf",
+          "bytes": 901120,
+          "sha256": "5c6712491e3ac8519816390d38da5398a5c9796a399a8ea2118bfbedd0e32ac0",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+      "archiveSha256": "c2a7544724d1192deecd97d6acb8e7df20376ddf22ded4bf85f5b89d0cdc08ac",
+      "entries": [
+        {
+          "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).adf",
+          "bytes": 901120,
+          "sha256": "78d0fa5317c79501961c870112ea7bae7aeb4ce691a5cd9f0c55eebffe425cd9",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+      "archiveSha256": "c481fff906d37d36b9a26f22847b7974506ae0d7339ef529bfe360f6a1a9bb33",
+      "entries": [
+        {
+          "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).adf",
+          "bytes": 901120,
+          "sha256": "40ab0749bd918bda7f37c965294c9e59710ffe8812531227c360611b4cb32db8",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+      "archiveSha256": "f55b7c03b056910dae9182203440fb49d9e66fe93d9264595b5bd36feb4ad881",
+      "entries": [
+        {
+          "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).adf",
+          "bytes": 901120,
+          "sha256": "8e6b18c7815fe144cf7c6ebb42b3528485f54ffb1b1f9c947d5f686aa20c1dd6",
+          "dosTypeHex": "444f5301"
+        }
+      ]
+    }
+  ],
+  "input": {
+    "events": [
+      {
+        "frame": 1200,
+        "mouseButtons": 1
+      },
+      {
+        "frame": 1240,
+        "mouseButtons": 0
+      }
+    ],
+    "recordedRunInputSha256": "d08592ec86c0b90ab94c605da2f7a28bbf32e1a4b94c49fbf7c5b141f3c2bcbc",
+    "trackedEquivalentInput": "CopperScreen.Lightweight.Tests\\Workloads\\aga-ufo-intro-exit.json",
+    "trackedInputSha256": "1ac2d6d4ae33ca03fc0dcee5cd2a8d0afdccfac2b143d58720725c95fba19a09",
+    "semanticEquivalenceVerified": true
+  },
+  "public151Failures": [
+    {
+      "name": "ufo-explore",
+      "packageVersion": "1.5.1",
+      "failure": {
+        "opcode": "B388",
+        "instructionPc": "00FA1CB2"
+      },
+      "runtime": {
+        "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+        "CopperDisk.dll": "b744d15d3b3dee5bf38b4700f5442e6058908841d74b7f3586f93e1a3210d89e",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "b0a61829dc1285596714a42fd5fdf87ebd4157b9450fd5acc0c39a7c11940fa0",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "2982092d29852e26d4f0a5932098559db3c9710db7eb95ec1d58d39d8f0bdb19"
+      },
+      "exitCode": 3762504530,
+      "runRecordSha256": "658f28cd8fc0e81800ad88dd7b935d2a25a9fb1b4734c408a3fc4d484172e12a"
+    },
+    {
+      "name": "ab2-explore",
+      "packageVersion": "1.5.1",
+      "failure": {
+        "opcode": "B388",
+        "instructionPc": "00FA1CB2"
+      },
+      "runtime": {
+        "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+        "CopperDisk.dll": "b744d15d3b3dee5bf38b4700f5442e6058908841d74b7f3586f93e1a3210d89e",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "b0a61829dc1285596714a42fd5fdf87ebd4157b9450fd5acc0c39a7c11940fa0",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "2982092d29852e26d4f0a5932098559db3c9710db7eb95ec1d58d39d8f0bdb19"
+      },
+      "exitCode": 3762504530,
+      "runRecordSha256": "6e199e59eacf80e031f2952fafcb7d7392a978888aed27d3856529f2338af6a0"
+    }
+  ],
+  "runs": [
+    {
+      "name": "sealed-ufo-intro-normal",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\consumer-source\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "--disk",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+        "--drives",
+        "4",
+        "--cpu",
+        "68ec020",
+        "--agnus",
+        "alice",
+        "--denise",
+        "lisa",
+        "--chip-ram-kib",
+        "2048",
+        "--slow-ram-kib",
+        "0",
+        "--frames",
+        "4000",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\sealed-ufo-intro-normal\\capture",
+        "--boot-probe-interval",
+        "500",
+        "--boot-probe-extended",
+        "--adf1",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+        "--adf2",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+        "--adf3",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip"
+      ],
+      "media": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+          "sha256": "559e44b7795e8190d982da9a9455fa1d90c2e6e2015d1bf6813cade3e71ef741",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].adf",
+              "bytes": 901120,
+              "sha256": "5c6712491e3ac8519816390d38da5398a5c9796a399a8ea2118bfbedd0e32ac0"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+          "sha256": "c2a7544724d1192deecd97d6acb8e7df20376ddf22ded4bf85f5b89d0cdc08ac",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).adf",
+              "bytes": 901120,
+              "sha256": "78d0fa5317c79501961c870112ea7bae7aeb4ce691a5cd9f0c55eebffe425cd9"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+          "sha256": "c481fff906d37d36b9a26f22847b7974506ae0d7339ef529bfe360f6a1a9bb33",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).adf",
+              "bytes": 901120,
+              "sha256": "40ab0749bd918bda7f37c965294c9e59710ffe8812531227c360611b4cb32db8"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+          "sha256": "f55b7c03b056910dae9182203440fb49d9e66fe93d9264595b5bd36feb4ad881",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).adf",
+              "bytes": 901120,
+              "sha256": "8e6b18c7815fe144cf7c6ebb42b3528485f54ffb1b1f9c947d5f686aa20c1dd6"
+            }
+          ]
+        }
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "sha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "members": [
+          {
+            "name": "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom",
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        ]
+      },
+      "runtime": {
+        "Copper68k.dll": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+        "CopperDisk.dll": "8f881267b4bfeefb06e7b4364c8e9225b358b011ea21cdf01f68e67d45fea822",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "c050bc94075758d6580a554804699e5257e817de3ad3f174eebe0ba44dd40ae7",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "cae91e1359f05b03c7e783bfca3fff1beb3d0a35708529bbc25ee0d77af3a722"
+      },
+      "input": null,
+      "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+      "candidateCpuSourceCommit": "964e0b9",
+      "candidatePackageVersion": "1.5.2 (unpublished)",
+      "exitCode": 0,
+      "elapsedSecondsDiagnosticOnly": 67.43799999999464,
+      "runtimeUnchanged": true,
+      "finalField": 4000,
+      "finalState": {
+        "frame": 4000,
+        "cycle": 568314635,
+        "beam": [
+          1,
+          2
+        ],
+        "width": 1816,
+        "height": 313,
+        "pc": "0002C53E",
+        "sr": "0000",
+        "overlay": false,
+        "data": [
+          "00002820",
+          "000025F2",
+          "FFFFD9F0",
+          "00001003",
+          "FFFFFFFF",
+          "00000006",
+          "0000FFFF",
+          "0000005D"
+        ],
+        "address": [
+          "00032B26",
+          "00DFF040",
+          "00DFF052",
+          "00DFF056",
+          "00DFF058",
+          "0007DBDD",
+          "00DFF002",
+          "00045FB0"
+        ],
+        "dmacon": "07EF",
+        "intena": "6020",
+        "intreq": "07E8",
+        "adkcon": "0000",
+        "dsklen": "4000",
+        "copperPc": "0002E124",
+        "copperWaiting": true,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 18264,
+        "Cylinder": 27,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 27,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 18264,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 1,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 10382,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 2,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9977,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 3,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9999,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 15,
+        "ciaAPending": 2,
+        "ciaBMask": 1,
+        "ciaBPending": 0,
+        "bplcon0": "4600",
+        "diwstart": "2C81",
+        "diwstop": "2CC1",
+        "ddfstart": "0030",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "00051C06",
+          "00072070",
+          "00051C3E",
+          "00076870",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          70,
+          30
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "failure": null,
+      "captures": {
+        "aga-display-000001.json": "aa2e6bb211043b2dd8f2ae41af87b45bc2dcd349ca5d23d9f512c2fdd1be80c8",
+        "aga-display-000500.json": "eb7e84cb9854d7f28efa3639bc05d1b711b41f0b124799f1b22cd29c170e5e7e",
+        "aga-display-001000.json": "cbb24041fd58cc288c8732a0ee54125ebf5aab3df21323b478a1611ba5c92c89",
+        "aga-display-001500.json": "b2f8071d7c8895d30af7563ba3c80149175bd7d412a189a57f9f6fb0f00e25e6",
+        "aga-display-002000.json": "d135e3fdad53adde048db64ab743f7188a7c11c6c9e723accc301bd5e7b5fbe7",
+        "aga-display-002500.json": "3e8206bfe8e61071c4f7d68f921bcd0599a104fec0c3b0bfa1986a58b5f230f9",
+        "aga-display-003000.json": "51930468d76b01c83caed82a2beafc1b0dc728e0565faa047543e34bdace00c8",
+        "aga-display-003500.json": "285dda04bb4d8f8d1841a30625a68054531de0f7f82ff1e8c1977ab7583ccdec",
+        "aga-display-004000.json": "fcc733d33aafa93975a9785d718e97e8571f8d2eb7f7a4baa75700bd66c65756",
+        "cpu-profile.json": "004f4807ead23089bf3d601e9a3e5f3ba8cfbe0007ddebee2628e48dad0bf1ea",
+        "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+        "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+        "frame-000001.json": "107d0e557ad5d936a8dd7b462e2df90e4c17b8417200e03696a415242f40f0ff",
+        "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000500.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000500.chipram": "aaec5067d4a2278606ae6e13bb362e8a7e9dbaa38389f4d59d159a32fae4fcd4",
+        "frame-000500.json": "0bd6b21f91d208d18b02e2c5cec6a06107216845a66b7d1ff8d7e2f6749b786e",
+        "frame-000500.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001000.bmp": "c3a848f77cb00516f61b02af2e230c1752ce42629ada8fca5df347f7a4bbe980",
+        "frame-001000.chipram": "690999980ed35d4711389b2f4df3e848e07b4af8226669a5c2718e6f9460774c",
+        "frame-001000.json": "7b72fbf436dd54eca63ccfb9385603cba77d3ade9927ccaa55a53057eafeb1a8",
+        "frame-001000.pcm": "ac036918e35235105dd3a7533e5c598ef0b4f6c2233f0bea46e3d501a37ca806",
+        "frame-001000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001500.bmp": "11f0ee94c3f60362b35c1fcd421d8c813f07f9f9ca002ef38392758dad540e0d",
+        "frame-001500.chipram": "54b20c24c2507a9f885ad935e6c9af6c62757f5131b1d1a6f3bea688e4b69b7c",
+        "frame-001500.json": "7da25039fd7547ace158ea4ad5100381137e0f6f73f9ffdd7eef7b9df954d82f",
+        "frame-001500.pcm": "d36941576c49d0eec34027699e4a055e54ef3be44f59df991123fcac0d9f3d43",
+        "frame-001500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002000.bmp": "68896ba9e13dbf0d764c7a80f0491fa084350dd50dad92f28fcb65b494539fa8",
+        "frame-002000.chipram": "8756d3155cb79b3d742f0dd75bf828495069481fca34a81c4520c8b10fa90f28",
+        "frame-002000.json": "303c5107f8ec1ec7442148a7a6373bf0613c03230ba629ba68baa221705328ad",
+        "frame-002000.pcm": "c9d2fe478b60299f6ac15f8d9e79a7321a77dc60cc355ded3aed3b3d101d4ebe",
+        "frame-002000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002500.bmp": "cee3e1410813020979f13f79baefd83cc5c63a088617539ee62f71e66f75daf9",
+        "frame-002500.chipram": "4b26696e6f9c622e89a6db3849802a14392d7dc3a8ef9b8fa7b80023b1602716",
+        "frame-002500.json": "232aa4a03c75e166a0e56f1885fad2202180da61a9fd63462fb46f0a19f414a8",
+        "frame-002500.pcm": "d3f9f3f63633eb8e7945a6922d2aa97be29e729679be5bf005149558205b2b7c",
+        "frame-002500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-003000.bmp": "5e6135f2bc259d6c1ef7cc26be0def56c3dd284dccae09319a597d6e7f1d0b52",
+        "frame-003000.chipram": "0f0e4766085ec63853831049449a619902b392da1d794469b8bdab8cab07fb19",
+        "frame-003000.json": "52695cef3a7770a1891847e912cba68185fe77ba4e95909c4387c60765c27468",
+        "frame-003000.pcm": "c911252ae346a9a3da3c912c04f5dd929434e4584be3f77358692418a9d8b903",
+        "frame-003000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-003500.bmp": "af644eead8606dcb8b13d6656d8fe449b9c6f732cf490fbdd563f5c279ee617e",
+        "frame-003500.chipram": "3eea1bd846d9f471caae6921b349a9f19a96fd4f7321ead051b49f54a9da0b8e",
+        "frame-003500.json": "aafd6d3f8503eb8e2286f8ea00fc50a10079b0e55c5340bb15c483a7698e3c8e",
+        "frame-003500.pcm": "3c325bac364cfcccc3a7ca17242e243b42962f169379a1dbb8fa4d04af311a49",
+        "frame-003500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-004000.bmp": "10c0bf7c14b8fbf58b972bc73e9e03c6fc5710bd1dd8dfb6ae5c5f75a2617aa6",
+        "frame-004000.chipram": "b86dddfaa4afdc017d47f52b0c926214b7ab3286d096793777e11a10f53d3950",
+        "frame-004000.json": "86bec21777548ebf7394b026a626a0421ae9aa0ad6fa6e3c9cbe8ea1ef6b8e42",
+        "frame-004000.pcm": "6b16b0d20e63b6a4ebf0da7e9952a5f4892a28fef34256a717cbb0fa93b519b0",
+        "frame-004000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "runRecordSha256": "db23347c57bf997679713eaaab25a81acb547294fe809787be00d865fb601609",
+      "logSha256": "02f33cdb3379414d167ae4f777b41d69f11d15ffe6875ef23eb7054923d0fb3e"
+    },
+    {
+      "name": "sealed-ufo-intro-scalar",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\consumer-source\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "--disk",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+        "--drives",
+        "4",
+        "--cpu",
+        "68ec020",
+        "--agnus",
+        "alice",
+        "--denise",
+        "lisa",
+        "--chip-ram-kib",
+        "2048",
+        "--slow-ram-kib",
+        "0",
+        "--frames",
+        "4000",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\sealed-ufo-intro-scalar\\capture",
+        "--boot-probe-interval",
+        "500",
+        "--boot-probe-extended",
+        "--adf1",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+        "--adf2",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+        "--adf3",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+        "--scalar-cpu"
+      ],
+      "media": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+          "sha256": "559e44b7795e8190d982da9a9455fa1d90c2e6e2015d1bf6813cade3e71ef741",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].adf",
+              "bytes": 901120,
+              "sha256": "5c6712491e3ac8519816390d38da5398a5c9796a399a8ea2118bfbedd0e32ac0"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+          "sha256": "c2a7544724d1192deecd97d6acb8e7df20376ddf22ded4bf85f5b89d0cdc08ac",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).adf",
+              "bytes": 901120,
+              "sha256": "78d0fa5317c79501961c870112ea7bae7aeb4ce691a5cd9f0c55eebffe425cd9"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+          "sha256": "c481fff906d37d36b9a26f22847b7974506ae0d7339ef529bfe360f6a1a9bb33",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).adf",
+              "bytes": 901120,
+              "sha256": "40ab0749bd918bda7f37c965294c9e59710ffe8812531227c360611b4cb32db8"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+          "sha256": "f55b7c03b056910dae9182203440fb49d9e66fe93d9264595b5bd36feb4ad881",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).adf",
+              "bytes": 901120,
+              "sha256": "8e6b18c7815fe144cf7c6ebb42b3528485f54ffb1b1f9c947d5f686aa20c1dd6"
+            }
+          ]
+        }
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "sha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "members": [
+          {
+            "name": "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom",
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        ]
+      },
+      "runtime": {
+        "Copper68k.dll": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+        "CopperDisk.dll": "8f881267b4bfeefb06e7b4364c8e9225b358b011ea21cdf01f68e67d45fea822",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "c050bc94075758d6580a554804699e5257e817de3ad3f174eebe0ba44dd40ae7",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "cae91e1359f05b03c7e783bfca3fff1beb3d0a35708529bbc25ee0d77af3a722"
+      },
+      "input": null,
+      "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+      "candidateCpuSourceCommit": "964e0b9",
+      "candidatePackageVersion": "1.5.2 (unpublished)",
+      "exitCode": 0,
+      "elapsedSecondsDiagnosticOnly": 56.51600000000326,
+      "runtimeUnchanged": true,
+      "finalField": 4000,
+      "finalState": {
+        "frame": 4000,
+        "cycle": 568314635,
+        "beam": [
+          1,
+          2
+        ],
+        "width": 1816,
+        "height": 313,
+        "pc": "0002C53E",
+        "sr": "0000",
+        "overlay": false,
+        "data": [
+          "00002820",
+          "000025F2",
+          "FFFFD9F0",
+          "00001003",
+          "FFFFFFFF",
+          "00000006",
+          "0000FFFF",
+          "0000005D"
+        ],
+        "address": [
+          "00032B26",
+          "00DFF040",
+          "00DFF052",
+          "00DFF056",
+          "00DFF058",
+          "0007DBDD",
+          "00DFF002",
+          "00045FB0"
+        ],
+        "dmacon": "07EF",
+        "intena": "6020",
+        "intreq": "07E8",
+        "adkcon": "0000",
+        "dsklen": "4000",
+        "copperPc": "0002E124",
+        "copperWaiting": true,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 18264,
+        "Cylinder": 27,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 27,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 18264,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 1,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 10382,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 2,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9977,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 3,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9999,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 15,
+        "ciaAPending": 2,
+        "ciaBMask": 1,
+        "ciaBPending": 0,
+        "bplcon0": "4600",
+        "diwstart": "2C81",
+        "diwstop": "2CC1",
+        "ddfstart": "0030",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "00051C06",
+          "00072070",
+          "00051C3E",
+          "00076870",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          70,
+          30
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "failure": null,
+      "captures": {
+        "aga-display-000001.json": "aa2e6bb211043b2dd8f2ae41af87b45bc2dcd349ca5d23d9f512c2fdd1be80c8",
+        "aga-display-000500.json": "eb7e84cb9854d7f28efa3639bc05d1b711b41f0b124799f1b22cd29c170e5e7e",
+        "aga-display-001000.json": "cbb24041fd58cc288c8732a0ee54125ebf5aab3df21323b478a1611ba5c92c89",
+        "aga-display-001500.json": "b2f8071d7c8895d30af7563ba3c80149175bd7d412a189a57f9f6fb0f00e25e6",
+        "aga-display-002000.json": "d135e3fdad53adde048db64ab743f7188a7c11c6c9e723accc301bd5e7b5fbe7",
+        "aga-display-002500.json": "3e8206bfe8e61071c4f7d68f921bcd0599a104fec0c3b0bfa1986a58b5f230f9",
+        "aga-display-003000.json": "51930468d76b01c83caed82a2beafc1b0dc728e0565faa047543e34bdace00c8",
+        "aga-display-003500.json": "285dda04bb4d8f8d1841a30625a68054531de0f7f82ff1e8c1977ab7583ccdec",
+        "aga-display-004000.json": "fcc733d33aafa93975a9785d718e97e8571f8d2eb7f7a4baa75700bd66c65756",
+        "cpu-profile.json": "004f4807ead23089bf3d601e9a3e5f3ba8cfbe0007ddebee2628e48dad0bf1ea",
+        "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+        "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+        "frame-000001.json": "107d0e557ad5d936a8dd7b462e2df90e4c17b8417200e03696a415242f40f0ff",
+        "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000500.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000500.chipram": "aaec5067d4a2278606ae6e13bb362e8a7e9dbaa38389f4d59d159a32fae4fcd4",
+        "frame-000500.json": "0bd6b21f91d208d18b02e2c5cec6a06107216845a66b7d1ff8d7e2f6749b786e",
+        "frame-000500.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001000.bmp": "c3a848f77cb00516f61b02af2e230c1752ce42629ada8fca5df347f7a4bbe980",
+        "frame-001000.chipram": "690999980ed35d4711389b2f4df3e848e07b4af8226669a5c2718e6f9460774c",
+        "frame-001000.json": "7b72fbf436dd54eca63ccfb9385603cba77d3ade9927ccaa55a53057eafeb1a8",
+        "frame-001000.pcm": "ac036918e35235105dd3a7533e5c598ef0b4f6c2233f0bea46e3d501a37ca806",
+        "frame-001000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001500.bmp": "11f0ee94c3f60362b35c1fcd421d8c813f07f9f9ca002ef38392758dad540e0d",
+        "frame-001500.chipram": "54b20c24c2507a9f885ad935e6c9af6c62757f5131b1d1a6f3bea688e4b69b7c",
+        "frame-001500.json": "7da25039fd7547ace158ea4ad5100381137e0f6f73f9ffdd7eef7b9df954d82f",
+        "frame-001500.pcm": "d36941576c49d0eec34027699e4a055e54ef3be44f59df991123fcac0d9f3d43",
+        "frame-001500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002000.bmp": "68896ba9e13dbf0d764c7a80f0491fa084350dd50dad92f28fcb65b494539fa8",
+        "frame-002000.chipram": "8756d3155cb79b3d742f0dd75bf828495069481fca34a81c4520c8b10fa90f28",
+        "frame-002000.json": "303c5107f8ec1ec7442148a7a6373bf0613c03230ba629ba68baa221705328ad",
+        "frame-002000.pcm": "c9d2fe478b60299f6ac15f8d9e79a7321a77dc60cc355ded3aed3b3d101d4ebe",
+        "frame-002000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002500.bmp": "cee3e1410813020979f13f79baefd83cc5c63a088617539ee62f71e66f75daf9",
+        "frame-002500.chipram": "4b26696e6f9c622e89a6db3849802a14392d7dc3a8ef9b8fa7b80023b1602716",
+        "frame-002500.json": "232aa4a03c75e166a0e56f1885fad2202180da61a9fd63462fb46f0a19f414a8",
+        "frame-002500.pcm": "d3f9f3f63633eb8e7945a6922d2aa97be29e729679be5bf005149558205b2b7c",
+        "frame-002500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-003000.bmp": "5e6135f2bc259d6c1ef7cc26be0def56c3dd284dccae09319a597d6e7f1d0b52",
+        "frame-003000.chipram": "0f0e4766085ec63853831049449a619902b392da1d794469b8bdab8cab07fb19",
+        "frame-003000.json": "52695cef3a7770a1891847e912cba68185fe77ba4e95909c4387c60765c27468",
+        "frame-003000.pcm": "c911252ae346a9a3da3c912c04f5dd929434e4584be3f77358692418a9d8b903",
+        "frame-003000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-003500.bmp": "af644eead8606dcb8b13d6656d8fe449b9c6f732cf490fbdd563f5c279ee617e",
+        "frame-003500.chipram": "3eea1bd846d9f471caae6921b349a9f19a96fd4f7321ead051b49f54a9da0b8e",
+        "frame-003500.json": "aafd6d3f8503eb8e2286f8ea00fc50a10079b0e55c5340bb15c483a7698e3c8e",
+        "frame-003500.pcm": "3c325bac364cfcccc3a7ca17242e243b42962f169379a1dbb8fa4d04af311a49",
+        "frame-003500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-004000.bmp": "10c0bf7c14b8fbf58b972bc73e9e03c6fc5710bd1dd8dfb6ae5c5f75a2617aa6",
+        "frame-004000.chipram": "b86dddfaa4afdc017d47f52b0c926214b7ab3286d096793777e11a10f53d3950",
+        "frame-004000.json": "86bec21777548ebf7394b026a626a0421ae9aa0ad6fa6e3c9cbe8ea1ef6b8e42",
+        "frame-004000.pcm": "6b16b0d20e63b6a4ebf0da7e9952a5f4892a28fef34256a717cbb0fa93b519b0",
+        "frame-004000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "runRecordSha256": "5915a68277312f5eb2af7ae997d0e7ad5f0bf0a1c2d38f9ba741e18de4d79660",
+      "logSha256": "6d0aef0d88eddce6554497b1b1c04524b68dccd9ce3662c4ba1fa884793a7537"
+    },
+    {
+      "name": "sealed-ufo-click-normal",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\consumer-source\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "--disk",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+        "--drives",
+        "4",
+        "--cpu",
+        "68ec020",
+        "--agnus",
+        "alice",
+        "--denise",
+        "lisa",
+        "--chip-ram-kib",
+        "2048",
+        "--slow-ram-kib",
+        "0",
+        "--frames",
+        "3000",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\sealed-ufo-click-normal\\capture",
+        "--boot-probe-interval",
+        "500",
+        "--boot-probe-extended",
+        "--adf1",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+        "--adf2",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+        "--adf3",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\ufo-input-explore.json"
+      ],
+      "media": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+          "sha256": "559e44b7795e8190d982da9a9455fa1d90c2e6e2015d1bf6813cade3e71ef741",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].adf",
+              "bytes": 901120,
+              "sha256": "5c6712491e3ac8519816390d38da5398a5c9796a399a8ea2118bfbedd0e32ac0"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+          "sha256": "c2a7544724d1192deecd97d6acb8e7df20376ddf22ded4bf85f5b89d0cdc08ac",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).adf",
+              "bytes": 901120,
+              "sha256": "78d0fa5317c79501961c870112ea7bae7aeb4ce691a5cd9f0c55eebffe425cd9"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+          "sha256": "c481fff906d37d36b9a26f22847b7974506ae0d7339ef529bfe360f6a1a9bb33",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).adf",
+              "bytes": 901120,
+              "sha256": "40ab0749bd918bda7f37c965294c9e59710ffe8812531227c360611b4cb32db8"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+          "sha256": "f55b7c03b056910dae9182203440fb49d9e66fe93d9264595b5bd36feb4ad881",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).adf",
+              "bytes": 901120,
+              "sha256": "8e6b18c7815fe144cf7c6ebb42b3528485f54ffb1b1f9c947d5f686aa20c1dd6"
+            }
+          ]
+        }
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "sha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "members": [
+          {
+            "name": "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom",
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        ]
+      },
+      "runtime": {
+        "Copper68k.dll": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+        "CopperDisk.dll": "8f881267b4bfeefb06e7b4364c8e9225b358b011ea21cdf01f68e67d45fea822",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "c050bc94075758d6580a554804699e5257e817de3ad3f174eebe0ba44dd40ae7",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "cae91e1359f05b03c7e783bfca3fff1beb3d0a35708529bbc25ee0d77af3a722"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\ufo-input-explore.json",
+        "sha256": "d08592ec86c0b90ab94c605da2f7a28bbf32e1a4b94c49fbf7c5b141f3c2bcbc"
+      },
+      "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+      "candidateCpuSourceCommit": "964e0b9",
+      "candidatePackageVersion": "1.5.2 (unpublished)",
+      "exitCode": 3762504530,
+      "elapsedSecondsDiagnosticOnly": 36.312999999994645,
+      "runtimeUnchanged": true,
+      "finalField": 2286,
+      "finalState": {
+        "frame": 2286,
+        "cycle": 324852796,
+        "beam": [
+          223,
+          103
+        ],
+        "width": 1816,
+        "height": 313,
+        "pc": "000654D2",
+        "sr": "0018",
+        "overlay": false,
+        "data": [
+          "FFFFFFFF",
+          "0000FF00",
+          "0000FFFF",
+          "00001824",
+          "00000008",
+          "00000008",
+          "00008FF3",
+          "000001F4"
+        ],
+        "address": [
+          "0007F950",
+          "0007F950",
+          "00001824",
+          "00024017",
+          "00075B40",
+          "00024020",
+          "00011A14",
+          "0007A024"
+        ],
+        "dmacon": "02D0",
+        "intena": "602C",
+        "intreq": "1580",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00000CA4",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 74084,
+        "Cylinder": 40,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": true,
+        "ReadyCycle": 320978135,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": true,
+            "ReadyCycle": 320978135,
+            "DiskChanged": false,
+            "BitPosition": 74084,
+            "NextBitCycle": 324852800
+          },
+          {
+            "index": 1,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 10382,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 2,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9977,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 3,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9999,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 15,
+        "ciaAPending": 0,
+        "ciaBMask": 3,
+        "ciaBPending": 16,
+        "bplcon0": "0200",
+        "diwstart": "0181",
+        "diwstop": "0281",
+        "ddfstart": "0018",
+        "ddfstop": "0020",
+        "bitplanes": [
+          "00001C06",
+          "0007B050",
+          "00051C3E",
+          "0007F850",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": false
+      },
+      "failure": {
+        "opcode": "2034",
+        "instructionPc": "000654CE"
+      },
+      "captures": {
+        "aga-display-000001.json": "aa2e6bb211043b2dd8f2ae41af87b45bc2dcd349ca5d23d9f512c2fdd1be80c8",
+        "aga-display-000500.json": "eb7e84cb9854d7f28efa3639bc05d1b711b41f0b124799f1b22cd29c170e5e7e",
+        "aga-display-001000.json": "cbb24041fd58cc288c8732a0ee54125ebf5aab3df21323b478a1611ba5c92c89",
+        "aga-display-001500.json": "582520bcbe5f96db933b4dc462a7318851b5b70b85154c2d5d378ad9e426962b",
+        "aga-display-002000.json": "84e2ef93d871f345835209eba5e65c4722a8f78a6741b46548a1b64cdaa9b57c",
+        "aga-display-002286.json": "27657199cff02dbb65b95a8e301fe9da04965607bdcdc31c672ca7eb0d4831c9",
+        "cpu-profile.json": "004f4807ead23089bf3d601e9a3e5f3ba8cfbe0007ddebee2628e48dad0bf1ea",
+        "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+        "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+        "frame-000001.json": "107d0e557ad5d936a8dd7b462e2df90e4c17b8417200e03696a415242f40f0ff",
+        "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000500.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000500.chipram": "aaec5067d4a2278606ae6e13bb362e8a7e9dbaa38389f4d59d159a32fae4fcd4",
+        "frame-000500.json": "0bd6b21f91d208d18b02e2c5cec6a06107216845a66b7d1ff8d7e2f6749b786e",
+        "frame-000500.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001000.bmp": "c3a848f77cb00516f61b02af2e230c1752ce42629ada8fca5df347f7a4bbe980",
+        "frame-001000.chipram": "690999980ed35d4711389b2f4df3e848e07b4af8226669a5c2718e6f9460774c",
+        "frame-001000.json": "7b72fbf436dd54eca63ccfb9385603cba77d3ade9927ccaa55a53057eafeb1a8",
+        "frame-001000.pcm": "ac036918e35235105dd3a7533e5c598ef0b4f6c2233f0bea46e3d501a37ca806",
+        "frame-001000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001500.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-001500.chipram": "7b4c9d7bd6e6ca3a436ff0b2de3f5f8abcbb485d45fbc6be9e629d4facd3ef9c",
+        "frame-001500.json": "c980920d9c237915279c0294eca31ba048a1480477bbd2a0acbbbfa146afd10b",
+        "frame-001500.pcm": "cc21b29056ef6239550fbea536d4beef8b03d8668da1549962fd983c143ef125",
+        "frame-001500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002000.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-002000.chipram": "19b33b9007ba195e6e50bc0a2d9f74c55b447f9a65ad20af1136da485d134180",
+        "frame-002000.json": "dd9fdd7ac590f5fe49de9cdc72bc9c38dbb05a482f8d68e4c2754caea5f74d39",
+        "frame-002000.pcm": "cc21b29056ef6239550fbea536d4beef8b03d8668da1549962fd983c143ef125",
+        "frame-002000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002286.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-002286.chipram": "d179138e9d6d3cdd9f7b673805ea7343e91b216cad517ad576c6ae1b3a49e7a7",
+        "frame-002286.json": "5e64dd50e09a11cae3ac46d6a2e83d36a4e3bee1f1fac118e3c976bc5804ecdf",
+        "frame-002286.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-002286.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "runRecordSha256": "50500ddbd0a6d681548f4cb684fb201c9bdff153440ddef05b05dc0b3f1664b2",
+      "logSha256": "3a7996e272c9653b83de4954083f98b5c074b1a4b632a90f7370f50f8122261a"
+    },
+    {
+      "name": "sealed-ufo-click-scalar",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\consumer-source\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "--disk",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+        "--drives",
+        "4",
+        "--cpu",
+        "68ec020",
+        "--agnus",
+        "alice",
+        "--denise",
+        "lisa",
+        "--chip-ram-kib",
+        "2048",
+        "--slow-ram-kib",
+        "0",
+        "--frames",
+        "3000",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\sealed-ufo-click-scalar\\capture",
+        "--boot-probe-interval",
+        "500",
+        "--boot-probe-extended",
+        "--adf1",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+        "--adf2",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+        "--adf3",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\ufo-input-explore.json"
+      ],
+      "media": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].zip",
+          "sha256": "559e44b7795e8190d982da9a9455fa1d90c2e6e2015d1bf6813cade3e71ef741",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 1 of 4)[cr PSG].adf",
+              "bytes": 901120,
+              "sha256": "5c6712491e3ac8519816390d38da5398a5c9796a399a8ea2118bfbedd0e32ac0"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).zip",
+          "sha256": "c2a7544724d1192deecd97d6acb8e7df20376ddf22ded4bf85f5b89d0cdc08ac",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 2 of 4).adf",
+              "bytes": 901120,
+              "sha256": "78d0fa5317c79501961c870112ea7bae7aeb4ce691a5cd9f0c55eebffe425cd9"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).zip",
+          "sha256": "c481fff906d37d36b9a26f22847b7974506ae0d7339ef529bfe360f6a1a9bb33",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 3 of 4).adf",
+              "bytes": 901120,
+              "sha256": "40ab0749bd918bda7f37c965294c9e59710ffe8812531227c360611b4cb32db8"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).zip",
+          "sha256": "f55b7c03b056910dae9182203440fb49d9e66fe93d9264595b5bd36feb4ad881",
+          "members": [
+            {
+              "name": "UFO - Enemy Unknown (1994)(MicroProse)(AGA)(M3)(Disk 4 of 4).adf",
+              "bytes": 901120,
+              "sha256": "8e6b18c7815fe144cf7c6ebb42b3528485f54ffb1b1f9c947d5f686aa20c1dd6"
+            }
+          ]
+        }
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "sha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "members": [
+          {
+            "name": "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom",
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        ]
+      },
+      "runtime": {
+        "Copper68k.dll": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+        "CopperDisk.dll": "8f881267b4bfeefb06e7b4364c8e9225b358b011ea21cdf01f68e67d45fea822",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "c050bc94075758d6580a554804699e5257e817de3ad3f174eebe0ba44dd40ae7",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "cae91e1359f05b03c7e783bfca3fff1beb3d0a35708529bbc25ee0d77af3a722"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\ufo-input-explore.json",
+        "sha256": "d08592ec86c0b90ab94c605da2f7a28bbf32e1a4b94c49fbf7c5b141f3c2bcbc"
+      },
+      "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+      "candidateCpuSourceCommit": "964e0b9",
+      "candidatePackageVersion": "1.5.2 (unpublished)",
+      "exitCode": 3762504530,
+      "elapsedSecondsDiagnosticOnly": 30.28100000001723,
+      "runtimeUnchanged": true,
+      "finalField": 2286,
+      "finalState": {
+        "frame": 2286,
+        "cycle": 324852796,
+        "beam": [
+          223,
+          103
+        ],
+        "width": 1816,
+        "height": 313,
+        "pc": "000654D2",
+        "sr": "0018",
+        "overlay": false,
+        "data": [
+          "FFFFFFFF",
+          "0000FF00",
+          "0000FFFF",
+          "00001824",
+          "00000008",
+          "00000008",
+          "00008FF3",
+          "000001F4"
+        ],
+        "address": [
+          "0007F950",
+          "0007F950",
+          "00001824",
+          "00024017",
+          "00075B40",
+          "00024020",
+          "00011A14",
+          "0007A024"
+        ],
+        "dmacon": "02D0",
+        "intena": "602C",
+        "intreq": "1580",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00000CA4",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 74084,
+        "Cylinder": 40,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": true,
+        "ReadyCycle": 320978135,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": true,
+            "ReadyCycle": 320978135,
+            "DiskChanged": false,
+            "BitPosition": 74084,
+            "NextBitCycle": 324852800
+          },
+          {
+            "index": 1,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 10382,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 2,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9977,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 3,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9999,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 15,
+        "ciaAPending": 0,
+        "ciaBMask": 3,
+        "ciaBPending": 16,
+        "bplcon0": "0200",
+        "diwstart": "0181",
+        "diwstop": "0281",
+        "ddfstart": "0018",
+        "ddfstop": "0020",
+        "bitplanes": [
+          "00001C06",
+          "0007B050",
+          "00051C3E",
+          "0007F850",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": false
+      },
+      "failure": {
+        "opcode": "2034",
+        "instructionPc": "000654CE"
+      },
+      "captures": {
+        "aga-display-000001.json": "aa2e6bb211043b2dd8f2ae41af87b45bc2dcd349ca5d23d9f512c2fdd1be80c8",
+        "aga-display-000500.json": "eb7e84cb9854d7f28efa3639bc05d1b711b41f0b124799f1b22cd29c170e5e7e",
+        "aga-display-001000.json": "cbb24041fd58cc288c8732a0ee54125ebf5aab3df21323b478a1611ba5c92c89",
+        "aga-display-001500.json": "582520bcbe5f96db933b4dc462a7318851b5b70b85154c2d5d378ad9e426962b",
+        "aga-display-002000.json": "84e2ef93d871f345835209eba5e65c4722a8f78a6741b46548a1b64cdaa9b57c",
+        "aga-display-002286.json": "27657199cff02dbb65b95a8e301fe9da04965607bdcdc31c672ca7eb0d4831c9",
+        "cpu-profile.json": "004f4807ead23089bf3d601e9a3e5f3ba8cfbe0007ddebee2628e48dad0bf1ea",
+        "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+        "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+        "frame-000001.json": "107d0e557ad5d936a8dd7b462e2df90e4c17b8417200e03696a415242f40f0ff",
+        "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000500.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000500.chipram": "aaec5067d4a2278606ae6e13bb362e8a7e9dbaa38389f4d59d159a32fae4fcd4",
+        "frame-000500.json": "0bd6b21f91d208d18b02e2c5cec6a06107216845a66b7d1ff8d7e2f6749b786e",
+        "frame-000500.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001000.bmp": "c3a848f77cb00516f61b02af2e230c1752ce42629ada8fca5df347f7a4bbe980",
+        "frame-001000.chipram": "690999980ed35d4711389b2f4df3e848e07b4af8226669a5c2718e6f9460774c",
+        "frame-001000.json": "7b72fbf436dd54eca63ccfb9385603cba77d3ade9927ccaa55a53057eafeb1a8",
+        "frame-001000.pcm": "ac036918e35235105dd3a7533e5c598ef0b4f6c2233f0bea46e3d501a37ca806",
+        "frame-001000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001500.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-001500.chipram": "7b4c9d7bd6e6ca3a436ff0b2de3f5f8abcbb485d45fbc6be9e629d4facd3ef9c",
+        "frame-001500.json": "c980920d9c237915279c0294eca31ba048a1480477bbd2a0acbbbfa146afd10b",
+        "frame-001500.pcm": "cc21b29056ef6239550fbea536d4beef8b03d8668da1549962fd983c143ef125",
+        "frame-001500.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002000.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-002000.chipram": "19b33b9007ba195e6e50bc0a2d9f74c55b447f9a65ad20af1136da485d134180",
+        "frame-002000.json": "dd9fdd7ac590f5fe49de9cdc72bc9c38dbb05a482f8d68e4c2754caea5f74d39",
+        "frame-002000.pcm": "cc21b29056ef6239550fbea536d4beef8b03d8668da1549962fd983c143ef125",
+        "frame-002000.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-002286.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-002286.chipram": "d179138e9d6d3cdd9f7b673805ea7343e91b216cad517ad576c6ae1b3a49e7a7",
+        "frame-002286.json": "5e64dd50e09a11cae3ac46d6a2e83d36a4e3bee1f1fac118e3c976bc5804ecdf",
+        "frame-002286.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-002286.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "runRecordSha256": "f091d67916a2d619178408c93d1556f69da53216c940be44e68fb7b7f00ad3d9",
+      "logSha256": "a8e5a30e233fdbe8d01d1a0532afe9048f5e2b2a2d6a3d85b32ae898ccbee284"
+    },
+    {
+      "name": "sealed-ab3d2-startup-normal",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\consumer-source\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "--disk",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].zip",
+        "--drives",
+        "3",
+        "--cpu",
+        "68ec020",
+        "--agnus",
+        "alice",
+        "--denise",
+        "lisa",
+        "--chip-ram-kib",
+        "2048",
+        "--slow-ram-kib",
+        "0",
+        "--frames",
+        "2500",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\sealed-ab3d2-startup-normal\\capture",
+        "--boot-probe-interval",
+        "300",
+        "--boot-probe-extended",
+        "--adf1",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).zip",
+        "--adf2",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).zip"
+      ],
+      "media": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].zip",
+          "sha256": "d77cb1f2fe5c8c0adb690e13893900c0a41f1863748dd2724b5ae2f30c050cc5",
+          "members": [
+            {
+              "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].adf",
+              "bytes": 901120,
+              "sha256": "ff62101ce56e0fc89f43262e4599cdbc9b1d73091b08e6c5df8eb049d3c865a6"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).zip",
+          "sha256": "055772b76c9fa9db5ab2d8030c1e1dc6f725692c8a761b8c1aa2699ec9d2abac",
+          "members": [
+            {
+              "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).adf",
+              "bytes": 901120,
+              "sha256": "f8c3fa23fd1d8df8c8c154e86768edfbe29235e73cfaa0c3edbb759dad440237"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).zip",
+          "sha256": "fa6a9379eb5ebe512d6c4a7a84a3fd14b3704c81efe6fa25268fa60ec65f0e0e",
+          "members": [
+            {
+              "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).adf",
+              "bytes": 901120,
+              "sha256": "a056fc1420994f2657a9759e8b01e63f3fda8f90844f77dff78cba2e7cdac3c9"
+            }
+          ]
+        }
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "sha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "members": [
+          {
+            "name": "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom",
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        ]
+      },
+      "runtime": {
+        "Copper68k.dll": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+        "CopperDisk.dll": "8f881267b4bfeefb06e7b4364c8e9225b358b011ea21cdf01f68e67d45fea822",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "c050bc94075758d6580a554804699e5257e817de3ad3f174eebe0ba44dd40ae7",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "cae91e1359f05b03c7e783bfca3fff1beb3d0a35708529bbc25ee0d77af3a722"
+      },
+      "input": null,
+      "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+      "candidateCpuSourceCommit": "964e0b9",
+      "candidatePackageVersion": "1.5.2 (unpublished)",
+      "exitCode": 3762504530,
+      "elapsedSecondsDiagnosticOnly": 25.03200000000652,
+      "runtimeUnchanged": true,
+      "finalField": 1346,
+      "finalState": {
+        "frame": 1346,
+        "cycle": 191237312,
+        "beam": [
+          136,
+          50
+        ],
+        "width": 1816,
+        "height": 313,
+        "pc": "0003B076",
+        "sr": "2300",
+        "overlay": false,
+        "data": [
+          "001F2DE8",
+          "0000000C",
+          "00000014",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "address": [
+          "0003B04C",
+          "001D2108",
+          "00000010",
+          "00000197",
+          "001A5270",
+          "0019D070",
+          "00DFF000",
+          "001FFFB4"
+        ],
+        "dmacon": "03C1",
+        "intena": "4060",
+        "intreq": "10C8",
+        "adkcon": "0000",
+        "dsklen": "4000",
+        "copperPc": "001FA3E8",
+        "copperWaiting": true,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 6095,
+        "Cylinder": 27,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": true,
+        "ReadyCycle": 73395065,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 27,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": true,
+            "ReadyCycle": 73395065,
+            "DiskChanged": false,
+            "BitPosition": 6095,
+            "NextBitCycle": 191237322
+          },
+          {
+            "index": 1,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9947,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 2,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 10377,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 15,
+        "ciaAPending": 2,
+        "ciaBMask": 4,
+        "ciaBPending": 16,
+        "bplcon0": "0001",
+        "diwstart": "4481",
+        "diwstop": "0BC1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "001B7478",
+          "001B93B8",
+          "001BB2F8",
+          "001BD238",
+          "001BF178",
+          "001C10B8",
+          "001C2FF8",
+          "001C4F38"
+        ],
+        "modulos": [
+          65528,
+          65528
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "failure": {
+        "opcode": "90B9",
+        "instructionPc": "0003B076"
+      },
+      "captures": {
+        "aga-display-000001.json": "aa2e6bb211043b2dd8f2ae41af87b45bc2dcd349ca5d23d9f512c2fdd1be80c8",
+        "aga-display-000300.json": "afe4c146f6837a9d2086fabce881609a2de5896f251244ac9cd6afcfb5941a8f",
+        "aga-display-000600.json": "268f6ffb9bd7ea2734482f5bcc9d67f0692d5c22abeacd47fe3f18c9312d3db1",
+        "aga-display-000900.json": "6a4c078dfecf27cedb494034ab4371bb3143426c067ed53fea7702bf4b7e0e2c",
+        "aga-display-001200.json": "2d5e5f4fe1f4e04f97ed21c58a4e9f4fc27e3cfa2f97e2dc430750759a2316d9",
+        "aga-display-001346.json": "302521af1138f30f51b8d57a775d7a3f96448f3b5213e069470c52664da9d555",
+        "cpu-profile.json": "004f4807ead23089bf3d601e9a3e5f3ba8cfbe0007ddebee2628e48dad0bf1ea",
+        "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+        "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+        "frame-000001.json": "dac3de840534c67bce89e0d7a243b855a3eb3d28af5cc6a35128d6c602bb4871",
+        "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000300.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000300.chipram": "1af0fbe394e1491427c90f13e5d7cfd9f13dc59beeffce885cd9782281b7a4f5",
+        "frame-000300.json": "242401852af81f12d76af8a2bec3562a1c4cb86b89fdc7e965c37d757a1599ec",
+        "frame-000300.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000300.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000600.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000600.chipram": "e6facd46df5b601333762a531c484cdc393dfa696352728645e32e3c8d6a46b8",
+        "frame-000600.json": "d2f7b85129c6b47c6cd9ae241d3555d086970cd1b9a9927a1fa332f4a9c405f8",
+        "frame-000600.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000600.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000900.bmp": "8989eb1b18889ff4a9a32c4a0d1b9edd834fc60f91d94cfe3ac123eff322ef8a",
+        "frame-000900.chipram": "f9c4359b6716f017bde72ae7cf01099e0f954b005f7343c5dcc033a546525146",
+        "frame-000900.json": "1692e3747619742fe8e5e4bb96416c1582510b71f9f4d256820f40ba57e3911a",
+        "frame-000900.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000900.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001200.bmp": "8989eb1b18889ff4a9a32c4a0d1b9edd834fc60f91d94cfe3ac123eff322ef8a",
+        "frame-001200.chipram": "8a4553c2a064cb499436f55030539c4a6572d67e22578964a5505eca82e6280a",
+        "frame-001200.json": "6c0bfbc0751a82d813d830365c6184da7b4dcf855602f17aed79e16053cd7118",
+        "frame-001200.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-001200.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001346.bmp": "d22537a0b22a5a02c58acebb934a90ea3e779cce3e2059d228655464c44c469d",
+        "frame-001346.chipram": "0fab483fabbddf2426766d62cd16ec226aeae74e160087b673b1577b7cb6018a",
+        "frame-001346.json": "899293f2e6fc4026ae5d232e685e7a714711e320ee05f4bd6030c307e7f3dc38",
+        "frame-001346.pcm": "95a375df9687f83a92f5155004e20a021332c2218de88e1d6da311b22956fcd8",
+        "frame-001346.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "runRecordSha256": "9981da68e7e2b99559c6d8398de532dd421bd1091a019d2b74407e3a9d95245f",
+      "logSha256": "b6ab8c2078c32942551e5105de1db4c22c485f2c9f360bbe752ef40240fafe24"
+    },
+    {
+      "name": "sealed-ab3d2-startup-scalar",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\consumer-source\\CopperMod.Amiga.Lightweight.Runner\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "--disk",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].zip",
+        "--drives",
+        "3",
+        "--cpu",
+        "68ec020",
+        "--agnus",
+        "alice",
+        "--denise",
+        "lisa",
+        "--chip-ram-kib",
+        "2048",
+        "--slow-ram-kib",
+        "0",
+        "--frames",
+        "2500",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-games-2026-10-02\\sealed-ab3d2-startup-scalar\\capture",
+        "--boot-probe-interval",
+        "300",
+        "--boot-probe-extended",
+        "--adf1",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).zip",
+        "--adf2",
+        "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).zip",
+        "--scalar-cpu"
+      ],
+      "media": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].zip",
+          "sha256": "d77cb1f2fe5c8c0adb690e13893900c0a41f1863748dd2724b5ae2f30c050cc5",
+          "members": [
+            {
+              "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 1 of 5)(TKG)[cr Digital Corruption][2 Mb Program Disk].adf",
+              "bytes": 901120,
+              "sha256": "ff62101ce56e0fc89f43262e4599cdbc9b1d73091b08e6c5df8eb049d3c865a6"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).zip",
+          "sha256": "055772b76c9fa9db5ab2d8030c1e1dc6f725692c8a761b8c1aa2699ec9d2abac",
+          "members": [
+            {
+              "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 3 of 5)(TKG2).adf",
+              "bytes": 901120,
+              "sha256": "f8c3fa23fd1d8df8c8c154e86768edfbe29235e73cfaa0c3edbb759dad440237"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\TestData\\Test Images - AGA\\Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).zip",
+          "sha256": "fa6a9379eb5ebe512d6c4a7a84a3fd14b3704c81efe6fa25268fa60ec65f0e0e",
+          "members": [
+            {
+              "name": "Alien Breed 3D 2 - The Killing Grounds (1996)(Team 17 - Ocean)(AGA)(Disk 4 of 5)(SFX).adf",
+              "bytes": 901120,
+              "sha256": "a056fc1420994f2657a9759e8b01e63f3fda8f90844f77dff78cba2e7cdac3c9"
+            }
+          ]
+        }
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "sha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "members": [
+          {
+            "name": "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom",
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        ]
+      },
+      "runtime": {
+        "Copper68k.dll": "1260f1fe49aa690e6dc260de1c688f489b9e19a7242eaf3775445f6fb5d5bf8a",
+        "CopperDisk.dll": "8f881267b4bfeefb06e7b4364c8e9225b358b011ea21cdf01f68e67d45fea822",
+        "CopperFloat.dll": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235",
+        "CopperMod.Amiga.Lightweight.dll": "c050bc94075758d6580a554804699e5257e817de3ad3f174eebe0ba44dd40ae7",
+        "CopperMod.Amiga.Lightweight.Runner.dll": "cae91e1359f05b03c7e783bfca3fff1beb3d0a35708529bbc25ee0d77af3a722"
+      },
+      "input": null,
+      "consumerBaseCommit": "de7e6240798707d8508104ba84ac132ea6d00077",
+      "candidateCpuSourceCommit": "964e0b9",
+      "candidatePackageVersion": "1.5.2 (unpublished)",
+      "exitCode": 3762504530,
+      "elapsedSecondsDiagnosticOnly": 23.421999999991385,
+      "runtimeUnchanged": true,
+      "finalField": 1346,
+      "finalState": {
+        "frame": 1346,
+        "cycle": 191237312,
+        "beam": [
+          136,
+          50
+        ],
+        "width": 1816,
+        "height": 313,
+        "pc": "0003B076",
+        "sr": "2300",
+        "overlay": false,
+        "data": [
+          "001F2DE8",
+          "0000000C",
+          "00000014",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "address": [
+          "0003B04C",
+          "001D2108",
+          "00000010",
+          "00000197",
+          "001A5270",
+          "0019D070",
+          "00DFF000",
+          "001FFFB4"
+        ],
+        "dmacon": "03C1",
+        "intena": "4060",
+        "intreq": "10C8",
+        "adkcon": "0000",
+        "dsklen": "4000",
+        "copperPc": "001FA3E8",
+        "copperWaiting": true,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 6095,
+        "Cylinder": 27,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": true,
+        "ReadyCycle": 73395065,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 27,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": true,
+            "ReadyCycle": 73395065,
+            "DiskChanged": false,
+            "BitPosition": 6095,
+            "NextBitCycle": 191237322
+          },
+          {
+            "index": 1,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 9947,
+            "NextBitCycle": 9223372036854775807
+          },
+          {
+            "index": 2,
+            "Mounted": true,
+            "Cylinder": 40,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 10377,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 15,
+        "ciaAPending": 2,
+        "ciaBMask": 4,
+        "ciaBPending": 16,
+        "bplcon0": "0001",
+        "diwstart": "4481",
+        "diwstop": "0BC1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "001B7478",
+          "001B93B8",
+          "001BB2F8",
+          "001BD238",
+          "001BF178",
+          "001C10B8",
+          "001C2FF8",
+          "001C4F38"
+        ],
+        "modulos": [
+          65528,
+          65528
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "failure": {
+        "opcode": "90B9",
+        "instructionPc": "0003B076"
+      },
+      "captures": {
+        "aga-display-000001.json": "aa2e6bb211043b2dd8f2ae41af87b45bc2dcd349ca5d23d9f512c2fdd1be80c8",
+        "aga-display-000300.json": "afe4c146f6837a9d2086fabce881609a2de5896f251244ac9cd6afcfb5941a8f",
+        "aga-display-000600.json": "268f6ffb9bd7ea2734482f5bcc9d67f0692d5c22abeacd47fe3f18c9312d3db1",
+        "aga-display-000900.json": "6a4c078dfecf27cedb494034ab4371bb3143426c067ed53fea7702bf4b7e0e2c",
+        "aga-display-001200.json": "2d5e5f4fe1f4e04f97ed21c58a4e9f4fc27e3cfa2f97e2dc430750759a2316d9",
+        "aga-display-001346.json": "302521af1138f30f51b8d57a775d7a3f96448f3b5213e069470c52664da9d555",
+        "cpu-profile.json": "004f4807ead23089bf3d601e9a3e5f3ba8cfbe0007ddebee2628e48dad0bf1ea",
+        "frame-000001.bmp": "2640031432b256d31b67dde8838cf9af1c48075033f348f96af92c85f45a833f",
+        "frame-000001.chipram": "5fadedaae33ecb4ea912bcec354ddb1e07e16d37ab096c64eaabe12b961a26c5",
+        "frame-000001.json": "dac3de840534c67bce89e0d7a243b855a3eb3d28af5cc6a35128d6c602bb4871",
+        "frame-000001.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000001.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000300.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000300.chipram": "1af0fbe394e1491427c90f13e5d7cfd9f13dc59beeffce885cd9782281b7a4f5",
+        "frame-000300.json": "242401852af81f12d76af8a2bec3562a1c4cb86b89fdc7e965c37d757a1599ec",
+        "frame-000300.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000300.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000600.bmp": "785b646ffef147c644f9d1a794b1e07758b3c78ad3c361a6bb74e2adb11a1dbb",
+        "frame-000600.chipram": "e6facd46df5b601333762a531c484cdc393dfa696352728645e32e3c8d6a46b8",
+        "frame-000600.json": "d2f7b85129c6b47c6cd9ae241d3555d086970cd1b9a9927a1fa332f4a9c405f8",
+        "frame-000600.pcm": "01eca2ac88a17c467ec82dbd1e69f7dd7268b9570493929fe2a6fb6ee8b676f0",
+        "frame-000600.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-000900.bmp": "8989eb1b18889ff4a9a32c4a0d1b9edd834fc60f91d94cfe3ac123eff322ef8a",
+        "frame-000900.chipram": "f9c4359b6716f017bde72ae7cf01099e0f954b005f7343c5dcc033a546525146",
+        "frame-000900.json": "1692e3747619742fe8e5e4bb96416c1582510b71f9f4d256820f40ba57e3911a",
+        "frame-000900.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-000900.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001200.bmp": "8989eb1b18889ff4a9a32c4a0d1b9edd834fc60f91d94cfe3ac123eff322ef8a",
+        "frame-001200.chipram": "8a4553c2a064cb499436f55030539c4a6572d67e22578964a5505eca82e6280a",
+        "frame-001200.json": "6c0bfbc0751a82d813d830365c6184da7b4dcf855602f17aed79e16053cd7118",
+        "frame-001200.pcm": "6e95a12b948493e2398de7e6f7afd3176c44277b4241ee992508fb3b81da8d66",
+        "frame-001200.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "frame-001346.bmp": "d22537a0b22a5a02c58acebb934a90ea3e779cce3e2059d228655464c44c469d",
+        "frame-001346.chipram": "0fab483fabbddf2426766d62cd16ec226aeae74e160087b673b1577b7cb6018a",
+        "frame-001346.json": "899293f2e6fc4026ae5d232e685e7a714711e320ee05f4bd6030c307e7f3dc38",
+        "frame-001346.pcm": "95a375df9687f83a92f5155004e20a021332c2218de88e1d6da311b22956fcd8",
+        "frame-001346.slowram": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "runRecordSha256": "d2eeca2e8d6432d495388af01c32dce7c254627be866ed39ab5b28e6856a1744",
+      "logSha256": "6ae0b5d73300ff725d142e4f876dd825f61fdb2b49ab8d3224f020c97fae75a0"
+    }
+  ],
+  "pairs": [
+    {
+      "name": "ufo-intro",
+      "identical": true,
+      "comparedFiles": 55,
+      "differingFiles": []
+    },
+    {
+      "name": "ufo-click",
+      "identical": true,
+      "comparedFiles": 37,
+      "differingFiles": []
+    },
+    {
+      "name": "ab3d2-startup",
+      "identical": true,
+      "comparedFiles": 37,
+      "differingFiles": []
+    }
+  ],
+  "validation": {
+    "cpu": {
+      "total": 3658,
+      "executed": 3652,
+      "passed": 3652,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0,
+      "skippedUnavailable": 6,
+      "trx": "artifacts\\aga-games-2026-10-02\\cpu-tests\\cpu-all-sealed.trx",
+      "sha256": "b7f9927c79bd323e0e3d1c7bffc0f3ef29c90bf4f3c4355d44fbd69a325177d7"
+    },
+    "ahxConsumer": {
+      "total": 18,
+      "executed": 18,
+      "passed": 18,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0,
+      "skippedUnavailable": 0,
+      "trx": "artifacts\\aga-games-2026-10-02\\cpu-tests\\ahx-consumer-final.trx",
+      "sha256": "d4f7a99a8e97ee80d81aee558befefd15da3d10871bad9c63156a3c42382af18"
+    },
+    "engine": {
+      "total": 1076,
+      "executed": 1076,
+      "passed": 1076,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0,
+      "skippedUnavailable": 0,
+      "trx": "artifacts\\aga-games-2026-10-02\\consumer-tests\\engine-candidate.trx",
+      "sha256": "7d9a66de9a585b8a276d89079a9e2ce71bc9e9c2b9137705b6f9c41cb8de4f56"
+    },
+    "host": {
+      "total": 155,
+      "executed": 149,
+      "passed": 149,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0,
+      "skippedUnavailable": 6,
+      "trx": "artifacts\\aga-games-2026-10-02\\consumer-tests\\host-candidate.trx",
+      "sha256": "03e810abc3ad399af4ae0834164eba00ac96cfdabd1c3fbab53936cdd50e8502"
+    },
+    "nativeA1200DesktopTwoBoots": {
+      "total": 1,
+      "executed": 1,
+      "passed": 1,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0,
+      "skippedUnavailable": 0,
+      "trx": "artifacts\\aga-games-2026-10-02\\consumer-tests\\native-a1200-candidate.trx",
+      "sha256": "f99a15cc9fb141c7749a10aff6f03fe802f0320c1b35cfbb9874b6ee7a9a355f"
+    },
+    "disk": {
+      "total": 74,
+      "executed": 74,
+      "passed": 74,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0,
+      "skippedUnavailable": 0,
+      "trx": "artifacts\\aga-games-2026-10-02\\consumer-tests\\disk-candidate.trx",
+      "sha256": "3730a7bd0a52064fc574299931c6f8e89ecb354a2af5cdccf920a4b3485885f0"
+    }
+  },
+  "productionBuild": {
+    "passed": true,
+    "configuration": "Release",
+    "warnings": 0,
+    "errors": 0,
+    "command": [
+      "dotnet",
+      "build",
+      "CopperScreen.slnx",
+      "-c",
+      "Release",
+      "-p:Copper68kBoundaryVersion=1.5.2"
+    ],
+    "sourceExport": "consumerBaseCommit",
+    "usedIsolatedPackageFeed": true
+  },
+  "diagnosticBoundary": "Correctness only; scalar parity is not a hardware oracle; elapsed times are not throughput acceptance",
+  "remainingCpuBlockers": [
+    {
+      "game": "UFO",
+      "opcode": "2034",
+      "extension": "0162",
+      "pc": "000654CE",
+      "fullFormat": true,
+      "baseRegister": "A4",
+      "indexSuppressed": true,
+      "baseDisplacementHex": "02E0",
+      "outerDisplacementHex": "0018",
+      "addressFormula": "ReadLong(A4 + 0x02E0) + 0x0018"
+    },
+    {
+      "game": "Alien Breed 3D II",
+      "opcode": "90B9",
+      "pc": "0003B076",
+      "instruction": "SUB.L (xxx).L,D0",
+      "sourceAbsoluteAddress": "0003B236"
+    }
+  ],
+  "gameplayVerified": false,
+  "guestMediaPatched": false
+}

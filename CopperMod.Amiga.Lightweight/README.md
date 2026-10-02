@@ -108,6 +108,10 @@ See [initial AGA evidence and limits](../docs/engine/AGA_INITIAL_2026-10-01.md).
 The [HAM and dual-playfield follow-up](../docs/engine/AGA_HAM_DUAL_2026-10-01.md)
 records native HAM6/HAM8 screens, a separately programmed dual-playfield probe,
 independent pixel/FFS checks and unchanged OCS/ECS/initial AGA controls.
+The [supplied AGA-game investigation](../docs/engine/AGA_GAMES_2026-10-02.md)
+records native UFO and Alien Breed 3D II startup. Their remaining CPU blockers
+prevent gameplay acceptance; the tested 1.5.2 CPU candidate is unpublished and
+the application still pins 1.5.1.
 
 The default 512 KiB layout remains CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
