@@ -36,13 +36,16 @@ The [ECS-required media replay](ECS_REQUIRED_MEDIA_2026-10-01.md) covers Final
 Fight: Enhanced — Final Edition's opening level, 2 MiB Chip RAM and ECS border
 blanking with matching normal/scalar captures and OCS Denise/1 MiB controls.
 Third-party SuperHires/programmable-raster coverage remains open.
-Native AGA gameplay coverage remains open. The [supplied-game investigation](AGA_GAMES_2026-10-02.md)
-boots UFO: Enemy Unknown and Alien Breed 3D II: The Killing Grounds on the stock
-PAL A1200 profile. An unpublished Copper68k 1.5.2 candidate resolves the first
-native integer operand gaps; UFO's crack intro runs and accepts a mouse-click
-exit. UFO then requires full-format memory-indirect addressing, while Alien Breed
-3D II reaches a further missing SUB.L absolute-long form. Neither game has
-verified gameplay. The application remains pinned to published Copper68k 1.5.1.
+The [supplied-game follow-up](AGA_GAMEPLAY_2026-10-02.md) verifies bounded native
+UFO: Enemy Unknown strategy gameplay on the stock PAL A1200 profile: new game,
+difficulty selection, base placement/naming, advancing Geoscape and interception
+menu. Normal/scalar runs match all 139 captures through 22,000 fields. Alien
+Breed 3D II renders the opening level and responds to movement, turning and
+firing through 72,000 fields, with all 871 captures matching. Continuous visual
+stability remains open under LWA-AGA-001. The shared Copper68k 1.5.2 candidate implements full indexed effective
+addresses for admitted forms and further operand gaps reached by these games.
+It remains unpublished; the application pins public Copper68k 1.5.1. The
+[original startup failures](AGA_GAMES_2026-10-02.md) remain historical evidence.
 
 Native Lemmings gameplay, live digger assignment, disk replacement and a separate
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.
@@ -96,6 +99,7 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-MEM-001 | True Fast RAM | Implemented; bounded native validation | Optional 512 KiB–8 MiB Zorro II RAM, guest Autoconfig, CPU-only mapping, settings and runner support. Published CPU `.54` includes `.53`'s PC-indexed LEA and the subsequent [020/EC020 native allocation and OFS proof](COPPERHDF_020_2026-09-27.md). See [initial evidence and limits](FAST_RAM_2026-09-27.md). No Zorro III or accelerator-local 32-bit RAM is enabled. |
 | LWA-MEM-002 | Explicit Agnus / configurable Chip RAM | Implemented; native boot and bounded DMA validation | PAL 8371 / 512 KiB, 8372A / 512 KiB or 1 MiB, and 8375 part 318069-10 / 1 or 2 MiB; larger Chip layouts use no slow bank. Native KS 3.1 discovers correct memory and boots/writes/reopens seven configurations. KS 1.3 OFS controls and unchanged default captures pass; see [evidence](AGNUS_CHIP_RAM_2026-10-01.md). ECS display and DOFF are implemented in the [subsequent record](ECS_DISPLAY_2026-10-01.md). Electrical unfitted-bank readback and revision-specific 8372A internal A20 rollover remain unverified. Generic unspecified ECS profiles remain unavailable. |
 | LWA-ECS-001 | ECS display | Implemented; bounded native and diagnostic coverage | Explicit 8373, SuperHires palette/sprites/DMA, DIWHIGH, programmable blank/sync/beam, DOFF and safe host resizing. Native stock PAL SuperHires (progressive/interlaced), guest-programmed NTSC SuperHires, HD boot/write/reopen and programmed 640x480 have evidence. Stock NTSC/VGA monitor launchers are absent from supplied media; analog genlock, A2024 and broad silicon-edge coverage remain outside this record. See [ECS evidence](ECS_DISPLAY_2026-10-01.md). |
+| LWA-AGA-001 | Alien Breed 3D II completed-raster intermittence | Observed; cause and continuous visual stability OPEN | The 2 MiB opening level responds to movement, turning and firing. Some completed rasters omit most of the viewport or HUD in both modes; field 70,000 has the scene/HUD, while 69,500 and 72,000 are incomplete. Retain the original captures and establish guest/Copper/window/IRQ ordering against an independent reference before changing timing. See [bounded gameplay evidence](AGA_GAMEPLAY_2026-10-02.md). |
 | LWA-HDF-001 | CopperHDF integration | Implemented; bounded native OFS and FFS proof | Native KS 3.1 FFS/RDB boot/write/dispose/reopen passes at 0 and 2 MiB Fast RAM after correcting the initial DOS lock; see [evidence and limits](KICKSTART_31_HD_2026-09-30.md). Retain KS 1.3 OFS partition/RDB evidence; other filesystem handlers need supplied media. Physical IDE/SCSI and host directories are separate features. The 020 indexed-JSR blocker at `$FC4E28` and subsequent reached operand gaps are [resolved in published CPU `.54`](COPPERHDF_020_2026-09-27.md): 020/EC020 native boot and OFS I/O pass with and without Fast RAM. |
 | LWA-VIDEO-002 | Hires transitions | Unverified; OPEN | Investigate supported raster/scroll/mode-transition failures. |
 | LWA-VIDEO-005 | HAM edges | Mode implemented; edges OPEN | Establish hold reset, mid-line mode and sprite interaction phases. |
