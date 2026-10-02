@@ -117,6 +117,16 @@ movement, turning and firing; some completed rasters omit the viewport or HUD,
 so continuous visual stability remains open. These results use the unpublished 1.5.2 CPU
 candidate; the application still pins public 1.5.1.
 
+The supplied 4th Dimension demo now reaches effects with audio in both 12,000-field
+replays, with all 151 capture files identical. Kick Off 3 passes the intro,
+loads disk 2 and responds to joystick input by opening Practice options; both
+15,000-field replays match all 367 captures. Nine reached CPU operand families
+are corrected in the unpublished candidate. Some Kick Off 3 captures are blank,
+so continuous visual stability and football gameplay remain unverified.
+The application still pins public 1.5.1. See [the correction and limits](../docs/engine/AGA_ADDITIONAL_MEDIA_FIXES_2026-10-03.md),
+the retained [eight startup failures](../docs/engine/AGA_ADDITIONAL_MEDIA_2026-10-03.json)
+and LWA-CPU-006 / LWA-AGA-002 in [the issue register](../docs/engine/ISSUES.md).
+
 The default 512 KiB layout remains CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
 for the default A500 wiring and the changed native boot identity. Unfitted upper
