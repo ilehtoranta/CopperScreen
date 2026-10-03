@@ -180,6 +180,9 @@ See the [display contract](../docs/engine/ARCHITECTURE.md#dual-playfield-output)
 
 Paula UART exposes owner-thread `SetSerialReceivePin` and `SerialTransmitHigh`,
 with buffering, SERPER timing, TBE/RBF interrupts, overrun and break control.
+Paula also retains software `INTREQ` bit 14 as a level-6 request. CPU and
+Copper writes use the existing one-CCK interrupt visibility path; `INTENA`
+bit 14 remains the master gate and does not create a request by itself.
 `SetPaddlePosition` supplies ideal scan-period charge times; `TriggerLightPen`
 captures the current beam. Physical pin phases and optional host transports are
 separate from these digital models.

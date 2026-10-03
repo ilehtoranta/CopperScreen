@@ -141,7 +141,11 @@ internal sealed class LightweightRegisters
                 Intena = ApplySetClear(Intena, value, 0x7FFF);
                 break;
             case IntreqWrite:
-                Intreq = ApplySetClear(Intreq, value, 0x3FFF);
+                // Paula also latches software request bit 14 as level 6.
+                // INTENA bit 14 remains the master gate; enabling it alone
+                // never creates a request. WinUAE custom.cpp intlev and
+                // Minimig Paula independently retain this undocumented input.
+                Intreq = ApplySetClear(Intreq, value, 0x7FFF);
                 break;
             case AdkconWrite:
                 Adkcon = ApplySetClear(Adkcon, value, 0x7FFF);
@@ -274,10 +278,10 @@ internal sealed class LightweightRegisters
     internal static int GetHighestEnabledInterruptLevel(ushort intena, ushort intreq)
     {
         const ushort master = 0x4000;
-        var active = (ushort)(intena & intreq & 0x3FFF);
+        var active = (ushort)(intena & intreq & 0x7FFF);
         if ((intena & master) == 0 || active == 0)
             return 0;
-        if ((active & 0x2000) != 0)
+        if ((active & 0x6000) != 0)
             return 6;
         if ((active & 0x1800) != 0)
             return 5;

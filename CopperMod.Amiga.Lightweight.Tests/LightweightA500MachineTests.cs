@@ -466,7 +466,7 @@ public sealed class LightweightA500MachineTests
 
         Assert.Equal(0x07FF, registers.Dmacon);
         Assert.Equal(0x7FFF, registers.Intena);
-        Assert.Equal(0x3FFF, registers.Intreq);
+        Assert.Equal(0x7FFF, registers.Intreq);
     }
 
     [Fact]

@@ -81,7 +81,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private long _nextVerticalBlankLatchCycle = long.MaxValue;
     private long _nextCiaInterruptCycle = long.MaxValue;
     private long _nextInterruptPinEvaluationCycle = long.MaxValue;
-    private readonly long[] _interruptRequestVisibilityCycles = new long[14];
+    private readonly long[] _interruptRequestVisibilityCycles = new long[15];
     private long _interruptEnableVisibilityCycle = long.MaxValue;
     private ushort _cpuVisibleIntena;
     private ushort _cpuVisibleIntreq;
@@ -1507,7 +1507,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private void ScheduleInterruptRequestVisibility(ushort bits, long cycle)
     {
         cycle = Math.Max(_clock.Cycle, cycle);
-        bits &= 0x3FFF;
+        bits &= 0x7FFF;
         if (bits == 0)
             return;
         for (var bit = 0; bit < _interruptRequestVisibilityCycles.Length; bit++)

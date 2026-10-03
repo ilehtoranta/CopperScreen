@@ -194,6 +194,15 @@ including internal cycles after the final bus access. A CPU already beyond the
 field target must not leave hardware unable to complete that field (LWA-EXEC-001).
 Preserve refresh/contention and every CPU bus operation when simplifying waits.
 
+Paula's software-written `INTREQ` bit 14 is retained, read back and cleared
+independently of the ordinary request bits. It participates in level-6 priority
+while `INTENA` bit 14 enables interrupts. Enabling the master gate alone does
+not synthesize a request. CPU and Copper register writes use the existing
+one-CCK request/enable visibility scheduler, including acknowledgement; physical
+propagation is not newly certified. This undocumented behavior follows the
+independent [WinUAE controller](https://github.com/tonioni/WinUAE/blob/master/custom.cpp)
+and [Minimig controller](https://github.com/retrofun/MinimigAGA-MiST-TC64/blob/master/rtl/minimig/paula_intcontroller.v).
+
 The default product profile has PAL 8371 Agnus, OCS Denise, 512 KiB Chip RAM and
 512 KiB slow RAM at `$C00000`. Explicit 8372A supports 512 KiB or 1 MiB Chip;
 8375 part 318069-10 supports 1 or 2 MiB. These larger Chip layouts replace the
