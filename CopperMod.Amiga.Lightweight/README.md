@@ -127,6 +127,12 @@ The application still pins public 1.5.1. See [the correction and limits](../docs
 the retained [eight startup failures](../docs/engine/AGA_ADDITIONAL_MEDIA_2026-10-03.json)
 and LWA-CPU-006 / LWA-AGA-002 in [the issue register](../docs/engine/ISSUES.md).
 
+The [Brian the Lion hard-disk rip investigation](../docs/engine/BRIAN_THE_LION_2026-10-03.md)
+records native installation, title/menu progression and first jungle-level entry,
+further CPU operand forms, the short/long absolute MOVE decode correction and
+Paula software request bit 14. Visible player movement and audio remain unverified.
+This media does not establish optical CD32 or Akiko support.
+
 The default 512 KiB layout remains CPU-mirrored through the low 2 MiB address window,
 with the same Agnus bus contention. See the [memory-map correction](../docs/engine/SUPER_CARS_II_INVESTIGATION.md)
 for the default A500 wiring and the changed native boot identity. Unfitted upper

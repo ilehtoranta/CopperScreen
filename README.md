@@ -32,6 +32,8 @@ release for 040 instruction-fetch corrections, experimental 030/040 and a separa
 candidate feed. The explicit A1200 EC020 profile and native ROM operand forms
 are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding
 CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
+The [Brian the Lion investigation](docs/engine/BRIAN_THE_LION_2026-10-03.md)
+records further unpublished CPU corrections and Paula's software request bit 14.
 Advanced CPU profiles remain experimental;
 physical accelerator timing and full compatibility are not certified. The 060 is
 unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
