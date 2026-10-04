@@ -292,9 +292,15 @@ internal static class CopperScreenProfileStore
 
 		draft.Id = id;
 		var path = Path.Combine(profilesDirectory, id + ".json");
-		var file = ProfileFile.FromDraft(draft);
-		File.WriteAllText(path, JsonSerializer.Serialize(file, WriteJsonOptions));
+		SaveToPath(draft, path);
 		return path;
+	}
+
+	internal static void SaveToPath(CopperScreenSettingsDraft draft, string path)
+	{
+		var temporaryPath = path + ".tmp";
+		File.WriteAllText(temporaryPath, JsonSerializer.Serialize(ProfileFile.FromDraft(draft), WriteJsonOptions));
+		File.Move(temporaryPath, path, overwrite: true);
 	}
 
 	public static string SaveAs(CopperScreenSettingsDraft draft, string baseDirectory)

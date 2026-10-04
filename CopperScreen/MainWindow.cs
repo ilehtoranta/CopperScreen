@@ -62,7 +62,6 @@ internal sealed partial class MainWindow : Window
 	private readonly Border _benchPanel;
 	private readonly Border _debuggerPanel;
 	private readonly Border _gamepadAssignmentOverlay;
-	private readonly TextBlock _diskStatus;
 	private readonly TextBlock _ledFilterStatus;
 	private readonly TextBlock _cpuPcStatus;
 	private readonly TextBlock _lastPcStatus;
@@ -180,8 +179,9 @@ internal sealed partial class MainWindow : Window
 	private readonly CrtPhosphorComposer _crtPhosphor = new();
 	private bool _crtPhosphorAnimationQueued;
 
-	public MainWindow(string[] args)
+	public MainWindow(string[] args, CopperScreenRecentSession? recentSession = null)
 	{
+		_recentSession = recentSession ?? new(CopperScreenRecentSession.DefaultDirectory);
 		Title = "CopperScreen";
 		FontSize = 14;
 		MinWidth = 712;
@@ -191,6 +191,10 @@ internal sealed partial class MainWindow : Window
 		Focusable = true;
 		_initialStartupOptions = CopperScreenStartupOptions.Parse(args, AppContext.BaseDirectory);
 		_settingsDraft = CopperScreenSettingsDraft.FromStartupOptions(_initialStartupOptions);
+		if (args.Length == 0 && _recentSession.LoadMachine(AppContext.BaseDirectory) is { } lastMachine)
+			_settingsDraft = lastMachine;
+		_outputVolume = _recentSession.Volume;
+		_outputMuted = _recentSession.Muted;
 		_settingsStartupError = _initialStartupOptions.Error;
 		_committedSettings = _settingsDraft.Clone();
 		_presentationOptions = _settingsDraft.PresentationOptions;
@@ -213,7 +217,6 @@ internal sealed partial class MainWindow : Window
 		else
 		{
 			_latestState = CreateIdleState(_settingsDraft);
-			_settingsVisible = true;
 		}
 
 		_bench = new CopperBenchViewModel();
@@ -236,7 +239,6 @@ internal sealed partial class MainWindow : Window
 		_presenterGeometry = _runtime?.PresentationGeometry ?? _presenterGeometry;
 		ApplyPresenterGeometry();
 		ApplyPresenterViewport();
-		_diskStatus = CreateToolbarTextBlock(fontSize: 11);
 		_ledFilterStatus = CreateToolbarTextBlock(fontSize: 10, textAlignment: TextAlignment.Center);
 		_cpuPcStatus = CreateToolbarTextBlock(fontSize: 10, textAlignment: TextAlignment.Center);
 		_lastPcStatus = CreateToolbarTextBlock(fontSize: 10, textAlignment: TextAlignment.Center);
@@ -252,7 +254,7 @@ internal sealed partial class MainWindow : Window
 		_debuggerDevices = new TextBlock();
 		_benchToggleButton = CreateToolbarButton("Bench", ToggleCopperBench, "Show or hide the CopperBench overlay");
 		_pauseButton = CreateToolbarButton("Pause", TogglePause, "Pause or resume emulation");
-		_numpadModeButton = CreateToolbarButton("N:Joy", ToggleNumpadMode, "Toggle numpad between joystick emulation and Amiga numpad keys");
+		_numpadModeButton = CreateToolbarButton("Keyboard: joystick controls", ToggleNumpadMode, "Switch mapped keyboard keys between joystick controls and Amiga keys (NumLock)");
 		_fullscreenButton = CreateToolbarButton("Full", ToggleFullscreen, "Toggle fullscreen mode");
 		_overscanButton = CreateToolbarButton("Crop", ToggleOverscan, "Toggle between full overscan and cropped display");
 		_settingsButton = CreateToolbarButton("Settings", ToggleSettings, "Show emulator settings");
@@ -296,6 +298,8 @@ internal sealed partial class MainWindow : Window
 		Grid.SetRowSpan(_faultBanner, 2);
 		_root.Children.Add(_faultBanner);
 		Content = _root;
+		ConfigureDiskDrop(_presenter, 0);
+		ConfigureDiskDrop(_idlePanel, 0);
 		ApplyWindowPresentationMode();
 		RefreshCopperBenchUi();
 		RefreshDebuggerUi(_latestState.DebugSnapshot);
@@ -316,11 +320,13 @@ internal sealed partial class MainWindow : Window
 			}
 			else
 			{
-			_presenter.Focus();
+				if (_runtime != null) _presenter.Focus();
+				else _welcomeRomButton.Focus();
 			}
 
 			_runtime?.SetOutputVolume(_outputMuted ? 0 : (float)(_outputVolume / 100));
 			_runtime?.Start();
+			if (_runtime != null) RememberCurrentSession();
 			_ = QueueHostClipboardTextAsync();
 			StartGamepadHost();
 			PresentNextFrame(forceStatus: true);
@@ -882,6 +888,7 @@ internal sealed partial class MainWindow : Window
 
 		var state = frameLease.State;
 		_latestState = state;
+		UpdateDriveActivity(state);
 		RefreshDebuggerUi(state.DebugSnapshot);
 		if (state.FrameNumber != _presentedFrames)
 		{
@@ -1535,7 +1542,7 @@ internal sealed partial class MainWindow : Window
 			Foreground = Brushes.White,
 			VerticalAlignment = VerticalAlignment.Center
 		});
-		_settingsCloseButton = CreatePanelButton(_runtime == null ? "Exit" : "Cancel", HideSettings);
+		_settingsCloseButton = CreatePanelButton("Cancel", HideSettings);
 		Grid.SetColumn(_settingsCloseButton, 1);
 		header.Children.Add(_settingsCloseButton);
 		Grid.SetRow(header, 0);
@@ -1631,12 +1638,12 @@ internal sealed partial class MainWindow : Window
 			Text = "Assign Gamepad",
 			FontSize = 20,
 			FontWeight = FontWeight.SemiBold,
-			Foreground = Brushes.White,
+			Foreground = CopperScreenAppearance.Text,
 			TextAlignment = TextAlignment.Center
 		};
 		_gamepadAssignmentDetails = new TextBlock
 		{
-			Foreground = new SolidColorBrush(Color.FromRgb(210, 222, 238)),
+			Foreground = MutedText,
 			TextAlignment = TextAlignment.Center,
 			TextWrapping = TextWrapping.Wrap
 		};
@@ -1678,9 +1685,9 @@ internal sealed partial class MainWindow : Window
 
 		var card = new Border
 		{
-			CornerRadius = new CornerRadius(6),
-			Background = new SolidColorBrush(Color.FromArgb(244, 18, 22, 28)),
-			BorderBrush = new SolidColorBrush(Color.FromRgb(220, 165, 120)),
+			CornerRadius = new CornerRadius(12),
+			Background = CopperScreenAppearance.PopupSurface,
+			BorderBrush = QuietBorder,
 			BorderThickness = new Thickness(1),
 			Padding = new Thickness(18, 16),
 			HorizontalAlignment = HorizontalAlignment.Center,
@@ -1702,7 +1709,7 @@ internal sealed partial class MainWindow : Window
 	private static TextBlock CreateGamepadAssignmentPortHint()
 		=> new()
 		{
-			Foreground = Brushes.White,
+			Foreground = CopperScreenAppearance.Text,
 			TextAlignment = TextAlignment.Center,
 			TextWrapping = TextWrapping.Wrap
 		};
@@ -1710,10 +1717,8 @@ internal sealed partial class MainWindow : Window
 	private static Border WrapGamepadAssignmentHint(TextBlock text)
 		=> new()
 		{
-			Background = new SolidColorBrush(Color.FromRgb(28, 36, 48)),
-			BorderBrush = new SolidColorBrush(Color.FromRgb(70, 82, 98)),
-			BorderThickness = new Thickness(1),
-			CornerRadius = new CornerRadius(4),
+			Background = CopperScreenAppearance.ControlSurface,
+			CornerRadius = new CornerRadius(8),
 			Padding = new Thickness(10, 8),
 			MinWidth = 190,
 			Child = text
@@ -1970,13 +1975,14 @@ internal sealed partial class MainWindow : Window
 		var layout = CreateSettingsPageLayout();
 
 		var ports = CreateSettingsGroupForm();
-		_port1ControllerBox = AddComboSetting(ports, "Port 1 controller", [], markRestart: false);
+		ports.Children.Add(SettingsNote("Port 1 is usually the mouse. Most games use a joystick in Port 2. Inputs can also be changed from the main window's Inputs menu."));
+		_port1ControllerBox = AddComboSetting(ports, "Port 1 · Mouse / joystick", [], markRestart: false);
 		ConfigureControllerChoices(_port1ControllerBox, 1);
 		_port1ControllerBox.SelectionChanged += (_, _) => StageInputSettings();
-		_port2ControllerBox = AddComboSetting(ports, "Port 2 controller", [], markRestart: false);
+		_port2ControllerBox = AddComboSetting(ports, "Port 2 · Main joystick", [], markRestart: false);
 		ConfigureControllerChoices(_port2ControllerBox, 2);
 		_port2ControllerBox.SelectionChanged += (_, _) => StageInputSettings();
-		layout.Children.Add(CreateSettingsGroup("Joystick Ports", ports));
+		layout.Children.Add(CreateSettingsGroup("Input ports", ports));
 
 		var profile = CreateSettingsGroupForm();
 		_controllerProfileChooser = AddComboSetting(profile, "Edit profile", [], markRestart: false);
@@ -2155,14 +2161,18 @@ internal sealed partial class MainWindow : Window
 		ReleaseInteractiveInput();
 		if (!_settingsWindow.IsVisible) _settingsWindow.Show(this);
 		_settingsWindow.Activate();
+		UpdateSettingsStatus();
 		UpdateToolbarStatus();
 	}
 
 	private void HideSettings()
 	{
-		if (_runtime == null) { Close(); return; }
 		_settingsDraft = _committedSettings.Clone();
 		_settingsStartupError = null;
+		_masterVolumeSlider.Value = _outputVolume;
+		_masterMuteBox.IsChecked = _outputMuted;
+		RefreshSettingsUi();
+		if (_runtime == null) _latestState = CreateIdleState(_settingsDraft);
 		CloseSettingsAfterApply();
 	}
 
@@ -2306,7 +2316,7 @@ internal sealed partial class MainWindow : Window
 		_updatingSettingsUi = true;
 		try
 		{
-			_settingsCloseButton.Content = _runtime == null ? "Exit" : "Cancel";
+			_settingsCloseButton.Content = "Cancel";
 			var profilesDirectory = CopperScreenProfileStore.FindProfilesDirectory(AppContext.BaseDirectory);
 			var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory);
 			_profileDirectoryText.Text = profilesDirectory;
@@ -2378,6 +2388,7 @@ internal sealed partial class MainWindow : Window
 		{
 			_updatingSettingsUi = wasUpdating;
 		}
+		RefreshQuickInputControls();
 	}
 
 	private static void SelectControllerProfile(ComboBox combo, string profileId)
@@ -2404,6 +2415,8 @@ internal sealed partial class MainWindow : Window
 			: ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings)
 				? "Machine changes need a restart. Unsaved Amiga work will be lost."
 				: "Apply changes to this session, or Cancel to discard edits.");
+		UpdateWelcomeStatus(valid, error);
+		UpdateShellStatus(_latestState);
 	}
 
 	private bool CanStartFromSettings(out string error)
@@ -2415,7 +2428,7 @@ internal sealed partial class MainWindow : Window
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? (draft.RomVersion == KickstartVersion.Kickstart31 ? "A500 Kickstart 3.1 ROM selected." : "Kickstart 1.3 ROM selected.");
+			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental · no DOS or Workbench." : draft.RomVersion == KickstartVersion.Kickstart31 ? "A500 Kickstart 3.1 ROM selected." : "Kickstart 1.3 ROM selected.");
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
 			error = unavailable ?? romError ?? string.Empty;
 			return error.Length == 0;
@@ -2542,6 +2555,7 @@ internal sealed partial class MainWindow : Window
 			_lastSeenFrameNumber = 0;
 			_presentedFrames = 0;
 			_runtime.Start();
+			RememberCurrentSession();
 			CloseSettingsAfterApply();
 			_ = QueueHostClipboardTextAsync();
 			await _bench.RefreshAsync(_latestState.DiskPath);
@@ -2807,7 +2821,7 @@ internal sealed partial class MainWindow : Window
 	private async Task SaveDiskAdfAsync(int driveIndex)
 	{
 		if (_runtime == null) { SetSettingsError("Start the Amiga before saving a mounted disk."); return; }
-		var owner = TopLevel.GetTopLevel(_settingsWindow) ?? this;
+		var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
 		var file = await owner.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
 		{
 			Title = $"Save DF{driveIndex} as ADF",
@@ -2819,6 +2833,7 @@ internal sealed partial class MainWindow : Window
 		var result = await _runtime.SaveAdfAsync(driveIndex, path);
 		_latestState = result.State;
 		if (!result.Success) SetSettingsError(result.Message);
+		ShowDiskFeedback(result.Message, result.Success);
 		UpdateToolbarStatus();
 	}
 
@@ -3093,6 +3108,7 @@ internal sealed partial class MainWindow : Window
 		_settingsStartupError = error;
 		_settingsStatus.Text = error;
 		_settingsStatus.Foreground = new SolidColorBrush(Color.FromRgb(255, 194, 194));
+		UpdateWelcomeStatus(false, error);
 	}
 
 	private static CopperScreenKickstartSource ParseKickstartSourceSelection(object? value)
@@ -3102,6 +3118,7 @@ internal sealed partial class MainWindow : Window
 			string source when string.Equals(source, "KickstartRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.KickstartRom,
 			string source when string.Equals(source, "Kickstart13Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart13Rom,
 			string source when string.Equals(source, "Kickstart31Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart31Rom,
+			string source when string.Equals(source, "MinimalDiskBoot", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.MinimalDiskBoot,
 			string source when string.Equals(source, "DiagRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.DiagRom,
 			_ => CopperScreenKickstartSource.CopperStart
 		};
@@ -3467,15 +3484,17 @@ internal sealed partial class MainWindow : Window
 		var button = new Button
 		{
 			Content = text,
-			Foreground = Brushes.White,
-			Background = new SolidColorBrush(Color.FromRgb(34, 40, 50)),
-			BorderBrush = new SolidColorBrush(Color.FromRgb(78, 90, 108)),
+			Foreground = CopperScreenAppearance.Text,
+			Background = CopperScreenAppearance.ControlSurface,
+			BorderThickness = new Thickness(0),
+			CornerRadius = new CornerRadius(8),
 			FontSize = 14,
-			MinHeight = 34,
-			Padding = new Thickness(10, 5),
+			MinHeight = 40,
+			Padding = new Thickness(10, 7),
 			MinWidth = 0
 		};
 		AutomationProperties.SetName(button, text);
+		CopperScreenAppearance.ConfigureKeyboardFocus(button);
 		ToolTip.SetTip(button, tooltip);
 		button.Click += (_, _) => action();
 		return button;
@@ -3485,7 +3504,7 @@ internal sealed partial class MainWindow : Window
 	{
 		return new TextBlock
 		{
-			Foreground = Brushes.White,
+			Foreground = CopperScreenAppearance.Text,
 			FontFamily = FontFamily.Parse("Consolas"),
 			FontSize = fontSize,
 			TextAlignment = textAlignment,
@@ -3501,10 +3520,10 @@ internal sealed partial class MainWindow : Window
 		{
 			Width = width,
 			Height = 30,
-			Background = new SolidColorBrush(Color.FromRgb(24, 29, 36)),
-			BorderBrush = new SolidColorBrush(Color.FromRgb(58, 67, 80)),
+			Background = ToolbarInset,
+			BorderBrush = QuietBorder,
 			BorderThickness = new Thickness(1),
-			CornerRadius = new CornerRadius(3),
+			CornerRadius = new CornerRadius(6),
 			Padding = new Thickness(4, 1),
 			Child = text
 		};
@@ -3537,12 +3556,15 @@ internal sealed partial class MainWindow : Window
 		var button = new Button
 		{
 			Content = text,
-			Foreground = Brushes.White,
-			Background = new SolidColorBrush(Color.FromRgb(34, 40, 50)),
-			BorderBrush = new SolidColorBrush(Color.FromRgb(78, 90, 108)),
+			Foreground = CopperScreenAppearance.Text,
+			Background = CopperScreenAppearance.ControlSurface,
+			BorderThickness = new Thickness(0),
+			CornerRadius = new CornerRadius(8),
 			Padding = new Thickness(12, 6),
 			MinHeight = 34
 		};
+		button.MinHeight = 40;
+		CopperScreenAppearance.ConfigureKeyboardFocus(button);
 		button.Click += (_, _) => action();
 		return button;
 	}
@@ -3661,7 +3683,7 @@ internal sealed partial class MainWindow : Window
 
 	private bool BeginMouseGrab(PointerEventArgs args)
 	{
-		if (_runtime == null || _settingsVisible) return false;
+		if (_runtime == null || _settingsVisible || !_inputOptions.IsMousePort(0)) return false;
 		if (_mouseGrabActive)
 		{
 			return true;
@@ -3941,6 +3963,10 @@ internal sealed partial class MainWindow : Window
 			SetDrivePathTextSilently(driveIndex, path);
 			if (driveIndex == 0) _setupDiskBox.Text = path;
 			_latestState = CreateIdleState(_settingsDraft);
+			_recentSession.RememberDisk(path);
+			_recentSession.Save(null, _outputVolume, _outputMuted);
+			RefreshWelcomeRecentDisks();
+			UpdateSettingsStatus();
 			UpdateToolbarStatus();
 		}
 	}
@@ -3994,6 +4020,7 @@ internal sealed partial class MainWindow : Window
 				_settingsDraft.DriveDiskPaths[drive.Index] = drive.DiskPath;
 				SetDrivePathTextSilently(drive.Index, drive.DiskPath ?? string.Empty);
 			}
+			RememberCurrentSession();
 		}
 		ShowDiskFeedback(result.Message, result.Success);
 
@@ -4027,9 +4054,6 @@ internal sealed partial class MainWindow : Window
 		ApplyWindowPresentationMode();
 		_benchPanel.IsVisible = _bench.IsOverlayVisible && _visibleDebugSnapshot == null;
 		_benchToggleButton.Content = "CopperBench — Not yet available";
-		_pauseButton.Content = _latestState.IsPaused ? "Resume" : "Pause";
-		_numpadModeButton.Content = _numpadMode == NumpadInputMode.Joystick ? "Numpad: Joystick" : "Numpad: Keyboard";
-		_fullscreenButton.Content = WindowState == WindowState.FullScreen ? "Windowed" : "Fullscreen";
 		_overscanButton.Content = _showFullOverscan ? "Overscan: Full" : "Overscan: Cropped";
 		_benchPath.Text = _bench.DisplayPath;
 		RefreshEntryList();
@@ -4162,15 +4186,11 @@ internal sealed partial class MainWindow : Window
 			SetText(_faultMessage, $"Emulation stopped: {fault}\nChoose Restart to recover.");
 			if (_mouseGrabActive) ReleaseMouseGrab();
 		}
-        _pauseButton.Content = state.IsPaused ? "Resume" : "Pause";
         var primaryDrive = state.Drives.FirstOrDefault();
         _writeProtectButton.IsEnabled = primaryDrive.CanExportAdf;
         _writeProtectButton.Content = primaryDrive.HasDisk && !primaryDrive.WriteProtected ? "DF0 writable" : "DF0 read-only";
         UpdateDriveSettingsEnabled();
-		_numpadModeButton.Content = _numpadMode == NumpadInputMode.Joystick ? "Numpad: Joystick" : "Numpad: Keyboard";
-		_fullscreenButton.Content = WindowState == WindowState.FullScreen ? "Windowed" : "Fullscreen";
 		_overscanButton.Content = _showFullOverscan ? "Overscan: Full" : "Overscan: Cropped";
-		SetText(_diskStatus, state.DiskName);
 		SetText(_ledFilterStatus, state.AudioFilterEnabled ? "LED/F ON" : "LED/F OFF");
 		StyleIndicator(
 			_ledFilterBox,

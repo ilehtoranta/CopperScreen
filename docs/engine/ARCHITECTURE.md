@@ -5,6 +5,10 @@ in the standard application. The old G6/G7 cutover and completed Lightweight H-s
 procedures are [historical records](../history/amiga/README.md), not prerequisites
 for continued development.
 
+The host also offers [Minimal disk boot](MINIMAL_DISK_BOOT.md), an original guest
+bootstrap on the same machine/CPU path. It does not enable CopperStart, add host
+OS traps or change chipset execution ownership.
+
 Start with the [engine API and supported profile](../../CopperMod.Amiga.Lightweight/README.md).
 Use the [issue register](ISSUES.md) for limitations, [performance guide](PERFORMANCE.md)
 for measurements, and [root README](../../README.md) for builds and tests.

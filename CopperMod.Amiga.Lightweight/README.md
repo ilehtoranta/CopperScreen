@@ -15,6 +15,10 @@ configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A
 and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
 
+CopperScreen can also supply its original [Minimal disk boot firmware](../docs/engine/MINIMAL_DISK_BOOT.md)
+through the existing ROM/reset API. This host option adds no OS callbacks or new
+execution path to the engine.
+
 The desktop validates both ROM shapes and provides the `lightweight-a500-kickstart31`
 profile. The existing ROM window maps 3.1 at `$F80000` and exposes reset vectors
 through the low-memory overlay. Native ROM code executes Exec and DOS services.

@@ -7,6 +7,7 @@ namespace CopperScreen;
 internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 {
     private readonly LightweightA500Machine _machine;
+    private readonly CopperScreenMinimalBoot? _minimalBoot;
     private CopperScreenInputOptions _inputOptions;
     private byte _mouseButtons, _joystick0, _joystick1;
     private int _fireFrames;
@@ -20,11 +21,19 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         Validate(options);
         // Media decoding is mount-time only; none of the old execution machinery is created.
-        var rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
+        CopperScreenAdfImage? bootDisk = null;
+        byte[] rom;
+        if (options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
+        {
+            bootDisk = CopperScreenDiskImageArchive.LoadDiskImage(options.DriveDiskPaths[0]!);
+            _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0);
+            rom = _minimalBoot.Rom;
+        }
+        else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
-        ProfileName = options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
+        ProfileName = _minimalBoot != null ? "Amiga 500 · Minimal disk boot [Lightweight]" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
             ? " [Lightweight]" : $" [Lightweight, {CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
@@ -44,7 +53,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             for (var i = 0; i < _machine.FloppyDriveCount; i++)
             {
                 var path = options.DriveDiskPaths[i];
-                if (path != null) CopperScreenDiskImageArchive.LoadDiskImage(path).Mount(_machine, i);
+                if (path != null) (i == 0 && bootDisk != null ? bootDisk : CopperScreenDiskImageArchive.LoadDiskImage(path)).Mount(_machine, i);
                 _machine.SetDriveWriteProtected(i, options.DriveWriteProtected[i] ?? true);
                 _diskPaths[i] = path;
             }
@@ -80,6 +89,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
+        var minimal = p.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
+        if (minimal && (p.Chipset != new AmigaChipset(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal) || p.ChipRamSize != 524288 ||
+            (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
+            p.RealFastRamSize != 0 || options.HardDrives.Count != 0))
+            throw new NotSupportedException("Minimal disk boot currently requires a PAL OCS Amiga 500, Motorola 68000, 512 KiB Chip RAM, optional 512 KiB slow RAM and no Fast RAM or hard drives.");
         var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
             aga && ((options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68EC020 ||
@@ -90,14 +104,16 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.RtgVramSize != 0 || p.RtcEnabled ||
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040) ||
-            p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom) ||
-            (!aga && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
+            p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot) ||
+            (!aga && !minimal && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
             throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
         catch (ArgumentException ex) { throw new NotSupportedException(ex.Message, ex); }
-        if (requireRomPath && string.IsNullOrWhiteSpace(options.KickstartRomPath))
+        if (requireRomPath && minimal && string.IsNullOrWhiteSpace(options.DriveDiskPaths[0]))
+            throw new NotSupportedException("Choose a standard ADF startup disk in DF0 for minimal disk boot.");
+        if (requireRomPath && !minimal && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             throw new NotSupportedException("Choose the matching Kickstart 1.3, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
         if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
             throw new NotSupportedException("Fast RAM supports 0, 512, 1024, 2048, 4096 or 8192 KiB.");
@@ -211,6 +227,16 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         }
         var field = _machine.IsLongField ? 0 : 1;
         _machine.ExecuteFrame();
+        if (_minimalBoot is { } boot && _machine.Cpu.ProgramCounter >= boot.FaultAddress && _machine.Cpu.ProgramCounter < boot.FaultAddress + 4)
+        {
+            var address = (int)CopperScreenMinimalBoot.StateAddress;
+            var ram = _machine.ChipRam.Span;
+            CaptureFatalException(new NotSupportedException(CopperScreenMinimalBoot.DescribeFault(
+                System.Buffers.Binary.BinaryPrimitives.ReadUInt16BigEndian(ram.Slice(address, 2)),
+                System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(ram.Slice(address + 4, 4)),
+                System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(ram.Slice(address + 52, 4)))));
+            throw new NotSupportedException(StatusText);
+        }
         if (_machine.UnsupportedActiveFeature is { } feature)
         {
             CaptureFatalException(new NotSupportedException("Lightweight unsupported: " + feature));
@@ -354,7 +380,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Framebuffer = new int[Width * Height];
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
-        StatusText = _machine.IsAga ? "Lightweight experimental A1200 — native Kickstart 3.0, initial AGA display"
+        StatusText = _minimalBoot != null ? "Lightweight A500 — minimal disk boot (experimental; no DOS or Workbench)"
+            : _machine.IsAga ? "Lightweight experimental A1200 — native Kickstart 3.0, initial AGA display"
             : "Lightweight experimental A500 — native Kickstart, ADF / read-only IPF / CopperHDF";
     }
     private void ApplyInput(short dx = 0, short dy = 0)

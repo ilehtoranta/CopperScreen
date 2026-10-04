@@ -15,7 +15,8 @@ internal enum CopperScreenKickstartSource
 	KickstartRom,
 	Kickstart13Rom,
 	DiagRom,
-	Kickstart31Rom
+	Kickstart31Rom,
+	MinimalDiskBoot
 }
 
 internal sealed class CopperScreenProfile
@@ -130,7 +131,7 @@ internal sealed class CopperScreenProfile
 
 	public string? ConfigPath { get; }
 
-	public bool UsesKickstartRom => KickstartSource != CopperScreenKickstartSource.CopperStart;
+	public bool UsesKickstartRom => KickstartSource is not (CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.MinimalDiskBoot);
 
 	public bool BootsWithoutDisk => KickstartSource == CopperScreenKickstartSource.DiagRom;
 
@@ -183,6 +184,7 @@ internal sealed class CopperScreenProfile
 			CopperScreenKickstartSource.CopperStart => current.ExpansionRamSize == 0 ? "vanilla-copperstart" : "expanded-copperstart",
 			CopperScreenKickstartSource.DiagRom => "expanded-diagrom",
 			CopperScreenKickstartSource.Kickstart31Rom => "lightweight-a500-kickstart31",
+			CopperScreenKickstartSource.MinimalDiskBoot => "lightweight-a500-minimal-disk-boot",
 			_ => current.ExpansionRamSize == 0 ? "vanilla-kickstart13" : "expanded-kickstart13"
 		};
 		return TryLoad(id, baseDirectory, out profile, out error);
@@ -205,6 +207,7 @@ internal sealed class CopperScreenProfile
 		return normalized switch
 		{
 			"default" => DefaultProfileId,
+			"minimal-disk-boot" => "lightweight-a500-minimal-disk-boot",
 			"expanded" => "expanded-copperstart",
 			"vanilla" => "vanilla-copperstart",
 			"expanded-rom" or "expanded-kickstart" or "expanded-kickstart-13" => "expanded-kickstart13",
@@ -468,6 +471,7 @@ internal sealed class CopperScreenProfile
 		return source.Trim().ToLowerInvariant().Replace("-", string.Empty) switch
 		{
 			"copperstart" => CopperScreenKickstartSource.CopperStart,
+			"minimaldiskboot" or "minimal-disk-boot" => CopperScreenKickstartSource.MinimalDiskBoot,
 			"kickstartrom" or "kickstart" or "rom" => CopperScreenKickstartSource.KickstartRom,
 			"kickstart13rom" or "kickstart13" => CopperScreenKickstartSource.Kickstart13Rom,
 			"kickstart31rom" or "kickstart31" => CopperScreenKickstartSource.Kickstart31Rom,

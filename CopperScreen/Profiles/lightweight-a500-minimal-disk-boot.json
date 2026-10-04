@@ -1,0 +1,12 @@
+{
+  "id": "lightweight-a500-minimal-disk-boot",
+  "displayName": "Amiga 500 · Minimal disk boot",
+  "description": "Experimental ROM-free boot for takeover demos and games on standard ADF disks. No DOS or Workbench.",
+  "machine": {
+    "model": "A500PAL", "chipRamKb": 512, "pseudoFastRamKb": 512,
+    "pseudoFastBase": "$C00000", "rtcEnabled": false, "floppyDriveCount": 1
+  },
+  "cpu": { "backend": "AccurateM68000" },
+  "kickstart": { "source": "MinimalDiskBoot", "version": "1.3" },
+  "audio": { "floppyDriveSounds": { "enabled": true, "mode": "synthetic" } }
+}

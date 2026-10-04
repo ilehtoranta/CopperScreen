@@ -12,5 +12,5 @@
   },
   "cpu": { "backend": "AccurateM68000" },
   "kickstart": { "source": "Kickstart31Rom", "version": "3.1" },
-  "audio": { "floppyDriveSounds": { "enabled": false, "mode": "synthetic" } }
+  "audio": { "floppyDriveSounds": { "enabled": true, "mode": "synthetic" } }
 }

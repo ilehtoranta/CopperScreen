@@ -21,7 +21,7 @@ internal readonly record struct FloppyDriveAudioOptions(
 	{
 	}
 
-	public static FloppyDriveAudioOptions Default { get; } = new(false, DefaultMode, DefaultSoundPack, DefaultVolume);
+	public static FloppyDriveAudioOptions Default { get; } = new(true, DefaultMode, DefaultSoundPack, DefaultVolume);
 
 	public FloppyDriveAudioOptions WithOverrides(bool? enabled, FloppyDriveAudioMode? mode, string? soundPack, float? volume)
 	{

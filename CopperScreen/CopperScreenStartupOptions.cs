@@ -179,7 +179,7 @@ internal sealed class CopperScreenStartupOptions
 			normalizedDriveDiskPaths,
 			normalizedWriteProtected,
 			normalizedHardDrives,
-			ResolveRomPath(kickstartRomPath ?? profile.KickstartRomPath, baseDirectory),
+			profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? null : ResolveRomPath(kickstartRomPath ?? profile.KickstartRomPath, baseDirectory),
 			cpuBackendOverride,
 			copperQuiescentFastPath,
 			copperQuiescentFastPathVerify,
@@ -590,6 +590,12 @@ internal sealed class CopperScreenStartupOptions
 				continue;
 			}
 
+			if (IsOption(arg, "--minimal-disk-boot"))
+			{
+				if (!CopperScreenProfile.TryLoad("minimal-disk-boot", baseDirectory, out profile, out error)) break;
+				profileExplicit = true;
+				continue;
+			}
 			if (IsOption(arg, "--copperstart"))
 			{
 				if (!CopperScreenProfile.TryLoadWithKickstartSource(
@@ -657,7 +663,9 @@ internal sealed class CopperScreenStartupOptions
 		}
 		else if (kickstartRomPath != null && !profile.UsesKickstartRom)
 		{
-			error ??= "A Kickstart ROM path was supplied with a CopperStart profile.";
+			error ??= profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot
+				? "A Kickstart ROM path was supplied with minimal disk boot. Choose one boot method."
+				: "A Kickstart ROM path was supplied with a CopperStart profile.";
 		}
 
 		var floppyDriveAudio = profile.FloppyDriveAudio.WithOverrides(

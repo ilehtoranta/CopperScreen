@@ -9,6 +9,7 @@ music player. CopperScreen is the canonical development and release repository.
 | Component | Canonical owner / dependency |
 | --- | --- |
 | Desktop application and focused host tests | This repository |
+| Minimal disk boot firmware and its tests | This repository; [bounded bootstrap and CopperStart boundary](engine/MINIMAL_DISK_BOOT.md) |
 | Lightweight A500 engine and diagnostic timing tests | This repository |
 | Headless Lightweight runner and deterministic workload scripts | This repository |
 | CopperDisk, disk tests and package scripts | This repository; no music-player consumers were found |

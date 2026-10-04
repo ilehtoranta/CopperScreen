@@ -41,11 +41,14 @@ internal sealed partial class MainWindow
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
         layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\nInitial Amiga 1200 PAL support is also available\nConfigurable Agnus and Chip RAM · up to four floppy drives"));
         var form = CreateSettingsGroupForm();
+        _kickstartSourceBox = AddComboSetting(form, "Boot method", ["Kickstart13Rom", "Kickstart31Rom", "KickstartRom", "MinimalDiskBoot", "CopperStart", "DiagRom"]);
+        _kickstartSourceBox.SelectionChanged += (_, _) => UpdateBootMethodControls();
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
         var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
         AutomationProperties.SetName(browse, "Browse for Kickstart ROM");
-        form.Children.Add(CreateSettingsRow("Kickstart ROM", WithAction(_kickstartRomBox, browse)));
+        _bootRomRow = CreateSettingsRow("Kickstart ROM", WithAction(_kickstartRomBox, browse));
+        form.Children.Add(_bootRomRow);
         AutomationProperties.SetName(_kickstartRomBox, "Kickstart ROM path");
         _romValidation = SettingsNote("Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
@@ -60,10 +63,9 @@ internal sealed partial class MainWindow
         AutomationProperties.SetName(diskBrowse, "Browse for startup disk");
         form.Children.Add(CreateSettingsRow("Startup disk", WithAction(_setupDiskBox, diskBrowse)));
         AutomationProperties.SetName(_setupDiskBox, "Optional startup disk path");
-        layout.Children.Add(CreateSettingsGroup("ROM and disk", form));
+        layout.Children.Add(CreateSettingsGroup("Boot and disk", form));
 
         var options = CreateSettingsGroupForm();
-        _kickstartSourceBox = AddComboSetting(options, "Kickstart", ["Kickstart13Rom", "Kickstart31Rom", "KickstartRom", "CopperStart", "DiagRom"]);
         _engineBox = AddComboSetting(options, "Engine", ["Lightweight", "Legacy"]);
         _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"]);
         options.Children.Add(SettingsNote("Greyed choices are planned and not yet available. They cannot be selected."));
@@ -209,14 +211,14 @@ internal sealed partial class MainWindow
         };
         combo.ItemTemplate = new FuncDataTemplate<CopperScreenControllerProfile>((profile, _) => new TextBlock
         {
-            Text = profile == null ? string.Empty : profile.DisplayName + (CopperScreenAvailability.IsControllerAvailable(port, profile.Kind) ? "" : " — Not yet available"),
+            Text = profile == null ? string.Empty : InputChoiceName(port, profile),
             TextWrapping = TextWrapping.Wrap
         });
         combo.ContainerPrepared += (_, args) =>
         {
             if (combo.Items[args.Index] is not CopperScreenControllerProfile profile) return;
             args.Container.IsEnabled = CopperScreenAvailability.IsControllerAvailable(port, profile.Kind);
-            AutomationProperties.SetName(args.Container, profile.DisplayName + (args.Container.IsEnabled ? "" : ", not yet available"));
+            AutomationProperties.SetName(args.Container, InputChoiceName(port, profile));
         };
     }
 
@@ -308,7 +310,8 @@ internal sealed partial class MainWindow
 
     private async Task PickRomAsync()
     {
-        var files = await _settingsWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
+        var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Kickstart ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
@@ -344,6 +347,13 @@ internal sealed partial class MainWindow
 
     private string? ValidateSelectedRom(CopperScreenSettingsDraft draft)
     {
+        if (draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
+        {
+            var disk = draft.ToStartupOptions(AppContext.BaseDirectory).DriveDiskPaths[0];
+            if (string.IsNullOrWhiteSpace(disk)) return "Choose an ADF startup disk in DF0. No Kickstart ROM is needed.";
+            if (!CopperScreenDiskImageArchive.DiskPathExists(disk)) return "Startup disk not found. Choose an existing ADF disk.";
+            return ValidateMinimalBootDisk(disk);
+        }
         var path = draft.ToStartupOptions(AppContext.BaseDirectory).KickstartRomPath;
         if (string.IsNullOrWhiteSpace(path)) return "Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.";
         if (!File.Exists(path)) return "ROM file not found. Choose an existing Kickstart 1.3, A500 3.1 or A1200 3.0 ROM.";
@@ -364,6 +374,24 @@ internal sealed partial class MainWindow
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
         { _romError = ex.Message; }
         return _romError;
+    }
+
+    private string? _validatedBootDisk, _bootDiskError;
+    private DateTime _validatedBootDiskWriteTime;
+    private long _validatedBootDiskLength;
+    private string? ValidateMinimalBootDisk(string path)
+    {
+        var backing = CopperScreenDiskImageArchive.TrySplitEntryPath(path, out var archive, out _) ? archive : path;
+        var info = new FileInfo(backing);
+        if (_validatedBootDisk == path && _validatedBootDiskWriteTime == info.LastWriteTimeUtc && _validatedBootDiskLength == info.Length)
+            return _bootDiskError;
+        _validatedBootDisk = path;
+        _validatedBootDiskWriteTime = info.LastWriteTimeUtc;
+        _validatedBootDiskLength = info.Length;
+        try { CopperScreenMinimalBoot.ValidateDisk(CopperScreenDiskImageArchive.LoadDiskImage(path)); _bootDiskError = null; }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
+        { _bootDiskError = ex.Message; }
+        return _bootDiskError;
     }
 
     private async Task ApplySettingsAsync()
@@ -390,6 +418,7 @@ internal sealed partial class MainWindow
             _committedSettings = _settingsDraft.Clone();
             _committedSettings.ClearRestartRequired();
             ApplyCommittedHostSettings();
+            RememberCurrentSession();
             CloseSettingsAfterApply();
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
@@ -418,6 +447,8 @@ internal sealed partial class MainWindow
         _settingsWindow.Hide();
         _settingsStartupError = null;
         RefreshCopperBenchUi();
-        _presenter.Focus();
+        UpdateSettingsStatus();
+        if (_runtime != null) _presenter.Focus();
+        else _welcomeStart.Focus();
     }
 }

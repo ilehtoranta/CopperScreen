@@ -47,6 +47,7 @@
 
   <ItemGroup>
     <None Include="Profiles\*.json" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Firmware\MinimalDiskBoot.s" />
     <AvaloniaResource Include="Assets\CopperScreen.ico" />
   </ItemGroup>
 
