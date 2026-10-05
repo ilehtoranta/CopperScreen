@@ -18,6 +18,13 @@ boot option together is rejected. A remembered ROM path is retained for switchin
 back to native boot, together with its version metadata, but is not opened or
 passed to the minimal boot session.
 
+## Current product scope — 2026-10-05
+
+Legacy boot restoration is not required. CopperScreen's boot paths are native
+Kickstart and this bounded firmware, both on Lightweight. Full replacement-OS
+services belong to CopperStart. The [old restoration plan](../../CopperScreen/COPPERSTART_RESTORATION.md)
+is superseded; its host build errors are not unfinished minimal-boot work.
+
 ## Ownership
 
 This is a small CopperScreen boot component, not CopperStart or the former

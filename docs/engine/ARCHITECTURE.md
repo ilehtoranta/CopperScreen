@@ -434,8 +434,9 @@ have their own lifecycle; pause/reset/fault handling must not replay stale audio
 
 Unsupported hardware or execution must be reported visibly. Do not silently
 switch engines, downgrade a configured machine, bypass a stop or insert a
-title-specific behavior. Native Workbench launches disk software; optional
-[CopperStart restoration](../../CopperScreen/COPPERSTART_RESTORATION.md) is separate.
+title-specific behavior. Native Workbench launches disk software. Legacy boot
+restoration is outside the current product task; see the [retired restoration
+plan](../../CopperScreen/COPPERSTART_RESTORATION.md).
 
 ## Maintenance and evidence
 

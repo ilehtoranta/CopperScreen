@@ -459,8 +459,9 @@ the standard-ADF scope. Slow-mode input retains the approximation above.
 Keyboard/CIA digital functionality is recorded in [KEYBOARD_CIA.md](KEYBOARD_CIA.md).
 MCU and CIA physical/pipeline accuracy boundaries remain open above.
 
-CopperStart/Legacy restoration is a deferred host feature, not a timing defect or
-a dependency of Lightweight. Follow the [optional adapter boundary](../../CopperScreen/COPPERSTART_RESTORATION.md).
+Legacy boot restoration is outside the current product task, not a timing defect
+or a dependency of Lightweight. The [earlier restoration plan](../../CopperScreen/COPPERSTART_RESTORATION.md)
+is superseded; full replacement-OS work belongs to CopperStart.
 Other chipset/CPU profiles, RTC, RTG, physical IDE/SCSI controllers and save-state
 compatibility are outside current product scope.
 
