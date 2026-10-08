@@ -18,6 +18,63 @@ boot option together is rejected. A remembered ROM path is retained for switchin
 back to native boot, together with its version metadata, but is not opened or
 passed to the minimal boot session.
 
+## A1200 boot — 2026-10-08
+
+The same boot-service contract is available on the PAL A1200: 68EC020,
+Alice/Lisa, 2 MiB Chip RAM, no slow/Fast RAM or hard disks. Select the shipped
+`lightweight-a1200-minimal-disk-boot` profile (alias `a1200-minimal-disk-boot`):
+
+```powershell
+dotnet CopperScreen.dll --profile a1200-minimal-disk-boot 'C:\path\demo.adf'
+```
+
+Alternatively, select the A1200 machine in Settings and choose **Minimal disk
+boot (experimental)**. On the command line, `--profile a1200-aga-pal
+--minimal-disk-boot` also selects the A1200 boot firmware. The standalone
+`--minimal-disk-boot` option still selects the default A500.
+
+Both machines assemble the original shared source into a 256 KiB image.
+The A1200 specialization resets VBR/CACR, initializes AGA fetch/display controls,
+uses a format-zero 020 frame to enter the boot block, and reads the 020 exception
+PC at its correct stack offset. Exec's attention flags identify the 020;
+MaxLocMem and the Chip memory header describe the full 2 MiB. The limited
+Exec/graphics libraries retain version 34 and their existing bounded services;
+the firmware does not provide Kickstart 3.x libraries or DOS/Workbench.
+
+Resident services retain their A500 addresses. A second free chunk at
+`$07C000–$1FFFFF` extends the allocator without covering service state or stacks.
+FreeMem coalesces within each chunk, and trackdisk accepts reads throughout
+the 2 MiB Chip region while protecting resident services. AGA takeover code
+can use all eight bitplanes and the RGB24 palette through normal guest writes.
+Disk DMA, reset and disk-swap behavior use the existing engine execution path.
+
+Synthetic ADF tests exercise both machines' boot registers, real track reads
+across heads/cylinders, reset after disk swap, visible faults and saved settings.
+A1200-specific fixtures exercise a cleared 1 MiB allocation and reuse, reads at
+the top of Chip RAM, Supervisor/RTE return, and eight-plane RGB24 output with
+planes in the second MiB. These establish the bounded boot contract; real AGA
+game/demo compatibility and physical A1200 boot are unqualified.
+
+The 2026-10-08 Release solution build has zero warnings/errors. The full host run
+passed 206 cases with six optional native cases skipped; one existing save-lock
+test fails on Linux because replacing an open destination succeeds. That exact
+failure also reproduces on unchanged `HEAD`. CopperDisk passes all 74 tests.
+The CPU dependency is published Copper68k 1.5.3. The original absolute-memory
+MOVE/TST/CLR/ADDI/SUBI forms are retained in the shared firmware. Ten independent
+package tests check values, operand widths, flags and instruction lengths;
+nine failed with the previous 1.5.1 pin and all pass with 1.5.3. See
+[the CPU upgrade record](COPPER68K_MAINLINE_1_5_3.md).
+Neither the native ROM/media replays nor the historical A500 title checks below
+were rerun for the A1200 addition.
+
+With optimizations disabled, vasm 2.0f independently reproduces both complete
+generated streams byte for byte:
+
+| Firmware | CPU | Bytes | SHA-256 |
+| --- | --- | --- | --- |
+| A500 | 68000 | 9,302 | `79976cf227c43bc36f3afbb74ae521edb5f573aeeb11be37c25dd82a3599b688` |
+| A1200 | 68020 | 9,382 | `74eaac5b30263f14c6be4d3ff2db57fcb432988801db63773a4fd778931e7156` |
+
 ## Current product scope — 2026-10-05
 
 Legacy boot restoration is not required. CopperScreen's boot paths are native
@@ -49,7 +106,8 @@ available in the standard application.
 
 ## Supported boot contract
 
-- PAL OCS A500, 68000, 512 KiB Chip RAM, zero or 512 KiB slow RAM, no Autoconfig
+- PAL OCS A500, 68000, 512 KiB Chip RAM, zero or 512 KiB slow RAM, or the PAL
+  A1200 configuration above; no Autoconfig
   Fast RAM or hard drives. Additional connected drives remain physical devices
   that guest takeover code can operate; the shim's trackdisk service serves DF0.
 - Standard 880 KiB ADF, including a selected ZIP entry. Initial media validation
@@ -109,7 +167,7 @@ the headers, including the shim's RAM. Calling services after overwriting their
 state/vectors is unsupported. The host never attempts to restore that memory or
 turn the services off automatically. This is essential for hardware takeover.
 
-## Verification and limits
+## Original A500 verification and limits — 2026-10-04
 
 Release production solution: zero warnings/errors. Host suite: 171 passed;
 six optional native cases skipped in that ordinary run are unavailable coverage.
@@ -120,7 +178,7 @@ settings persistence, the public Exec list register ABI, CPU scope, and explicit
 Headless UI checks cover ROM-free startup, disk requirement, return to native
 boot, and settings cancellation.
 
-The complete generated instruction stream was independently assembled by vasm
+The original A500 instruction stream was independently assembled by vasm
 1.9, Motorola 68000, with optimizations disabled: all **9,274 bytes** match.
 SHA-256 of both streams:
 `16812a3b749a6eaff724a9215c76d01da04dcad5c9d32e6ca621e549ca579f68`.

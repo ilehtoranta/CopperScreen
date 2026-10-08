@@ -26,14 +26,14 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
         {
             bootDisk = CopperScreenDiskImageArchive.LoadDiskImage(options.DriveDiskPaths[0]!);
-            _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0);
+            _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
             rom = _minimalBoot.Rom;
         }
         else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
-        ProfileName = _minimalBoot != null ? "Amiga 500 · Minimal disk boot [Lightweight]" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
+        ProfileName = _minimalBoot != null ? $"Amiga {(options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "1200" : "500")} · Minimal disk boot [Lightweight]" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
             ? " [Lightweight]" : $" [Lightweight, {CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
@@ -90,15 +90,17 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
         var minimal = p.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
-        if (minimal && (p.Chipset != new AmigaChipset(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal) || p.ChipRamSize != 524288 ||
+        var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
+        if (minimal && !aga && (p.Chipset != new AmigaChipset(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal) || p.ChipRamSize != 524288 ||
             (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
             p.RealFastRamSize != 0 || options.HardDrives.Count != 0))
             throw new NotSupportedException("Minimal disk boot currently requires a PAL OCS Amiga 500, Motorola 68000, 512 KiB Chip RAM, optional 512 KiB slow RAM and no Fast RAM or hard drives.");
-        var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
             aga && ((options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68EC020 ||
-                p.RealFastRamSize != 0 || p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))
-            throw new NotSupportedException("The initial A1200 profile requires PAL Alice/Lisa, 68EC020, 2 MiB Chip RAM, no slow/Fast RAM and native A1200 Kickstart 3.0 (39.106).");
+                p.RealFastRamSize != 0 || (!minimal && (p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))))
+            throw new NotSupportedException("The initial A1200 profile requires PAL Alice/Lisa, 68EC020, 2 MiB Chip RAM, no slow/Fast RAM and native A1200 Kickstart 3.0 (39.106) or minimal disk boot.");
+        if (minimal && aga && options.HardDrives.Count != 0)
+            throw new NotSupportedException("A1200 minimal disk boot supports ADF floppy boot only; hard drives require native Kickstart.");
         if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise or DisplayChipModel.AgaLisa) || p.Chipset.VideoStandard != VideoStandard.Pal ||
             p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 || p.RtcEnabled ||

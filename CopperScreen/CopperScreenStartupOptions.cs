@@ -592,7 +592,7 @@ internal sealed class CopperScreenStartupOptions
 
 			if (IsOption(arg, "--minimal-disk-boot"))
 			{
-				if (!CopperScreenProfile.TryLoad("minimal-disk-boot", baseDirectory, out profile, out error)) break;
+				if (!CopperScreenProfile.TryLoadWithKickstartSource(profile, CopperScreenKickstartSource.MinimalDiskBoot, baseDirectory, out profile, out error)) break;
 				profileExplicit = true;
 				continue;
 			}

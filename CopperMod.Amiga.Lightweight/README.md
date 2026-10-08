@@ -4,8 +4,10 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The CPU dependency is the public mainline Copper68k `1.5.1` release. It adds
-the explicit A1200 EC020 profile and native ROM operand forms; see
+The CPU dependency is the public mainline Copper68k `1.5.3` release, including
+the 020 absolute-memory forms required by the original boot firmware; see
+[the package upgrade and regression checks](../docs/engine/COPPER68K_MAINLINE_1_5_3.md).
+The explicit A1200 EC020 profile and native ROM operand forms are recorded in
 [AGA implementation and package verification](../docs/engine/AGA_INITIAL_2026-10-01.md).
 
 Independent PAL A500 engine with OCS 8362 or ECS 8373 Denise: Copper68k accurate 68000,
@@ -118,16 +120,17 @@ retains the original native UFO and Alien Breed 3D II startup failures. Its
 game, first base, advancing strategy clock and interception menu, with matching
 normal/scalar captures. Alien Breed renders the opening level and responds to
 movement, turning and firing; some completed rasters omit the viewport or HUD,
-so continuous visual stability remains open. These results use the unpublished 1.5.2 CPU
-candidate; the application still pins public 1.5.1.
+so continuous visual stability remains open. Those dated replays used the
+then-unpublished 1.5.2 CPU candidate. The application now pins public 1.5.3;
+those media replays were not repeated for the package upgrade.
 
 The supplied 4th Dimension demo now reaches effects with audio in both 12,000-field
 replays, with all 151 capture files identical. Kick Off 3 passes the intro,
 loads disk 2 and responds to joystick input by opening Practice options; both
 15,000-field replays match all 367 captures. Nine reached CPU operand families
-are corrected in the unpublished candidate. Some Kick Off 3 captures are blank,
+were corrected in the then-unpublished candidate. Some Kick Off 3 captures are blank,
 so continuous visual stability and football gameplay remain unverified.
-The application still pins public 1.5.1. See [the correction and limits](../docs/engine/AGA_ADDITIONAL_MEDIA_FIXES_2026-10-03.md),
+The application now pins public 1.5.3. See [the correction and limits](../docs/engine/AGA_ADDITIONAL_MEDIA_FIXES_2026-10-03.md),
 the retained [eight startup failures](../docs/engine/AGA_ADDITIONAL_MEDIA_2026-10-03.json)
 and LWA-CPU-006 / LWA-AGA-002 in [the issue register](../docs/engine/ISSUES.md).
 

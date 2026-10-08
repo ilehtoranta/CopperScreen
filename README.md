@@ -8,7 +8,7 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 - PAL A500 with OCS 8362 Denise and a Motorola 68000 by default; ECS 8373 Denise and experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
 - Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional 512 KiB–8 MiB Autoconfig Fast RAM is separate. See [native boot and DMA evidence](docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
 - Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
-- Optional [Minimal disk boot](docs/engine/MINIMAL_DISK_BOOT.md): experimental ROM-free ADF bootstrap for takeover demos/games on the default PAL 68000 A500. It supplies a small boot-service surface; DOS and Workbench require native Kickstart.
+- Optional [Minimal disk boot](docs/engine/MINIMAL_DISK_BOOT.md): experimental ROM-free ADF bootstrap for takeover demos/games on the PAL 68000 A500 or 68EC020 A1200 with Alice/Lisa and 2 MiB Chip RAM. It supplies a small boot-service surface; DOS and Workbench require native Kickstart.
 - One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
 - Mouse and keyboard input, framebuffer output and stereo audio.
@@ -27,14 +27,16 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-CopperScreen pins the public mainline [Copper68k `1.5.1`](https://www.nuget.org/packages/Copper68k/1.5.1)
-release for 040 instruction-fetch corrections, experimental 030/040 and a separate
-060 diagnostic core. A clean checkout restores from NuGet.org without a local
+CopperScreen pins the public mainline [Copper68k `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3)
+release, including the 020 absolute-memory instruction forms required by A1200
+boot, preceding integer/addressing fixes and experimental advanced CPU support.
+See [the package upgrade and regression checks](docs/engine/COPPER68K_MAINLINE_1_5_3.md).
+A clean checkout restores from NuGet.org without a local
 candidate feed. The explicit A1200 EC020 profile and native ROM operand forms
 are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding
 CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
 The [Brian the Lion investigation](docs/engine/BRIAN_THE_LION_2026-10-03.md)
-records further unpublished CPU corrections and Paula's software request bit 14.
+records the then-unpublished CPU corrections and Paula's software request bit 14.
 Advanced CPU profiles remain experimental;
 physical accelerator timing and full compatibility are not certified. The 060 is
 unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its

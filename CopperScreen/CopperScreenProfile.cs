@@ -184,7 +184,7 @@ internal sealed class CopperScreenProfile
 			CopperScreenKickstartSource.CopperStart => current.ExpansionRamSize == 0 ? "vanilla-copperstart" : "expanded-copperstart",
 			CopperScreenKickstartSource.DiagRom => "expanded-diagrom",
 			CopperScreenKickstartSource.Kickstart31Rom => "lightweight-a500-kickstart31",
-			CopperScreenKickstartSource.MinimalDiskBoot => "lightweight-a500-minimal-disk-boot",
+			CopperScreenKickstartSource.MinimalDiskBoot => current.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "lightweight-a1200-minimal-disk-boot" : "lightweight-a500-minimal-disk-boot",
 			_ => current.ExpansionRamSize == 0 ? "vanilla-kickstart13" : "expanded-kickstart13"
 		};
 		return TryLoad(id, baseDirectory, out profile, out error);
@@ -208,6 +208,7 @@ internal sealed class CopperScreenProfile
 		{
 			"default" => DefaultProfileId,
 			"minimal-disk-boot" => "lightweight-a500-minimal-disk-boot",
+			"a1200-minimal-disk-boot" => "lightweight-a1200-minimal-disk-boot",
 			"expanded" => "expanded-copperstart",
 			"vanilla" => "vanilla-copperstart",
 			"expanded-rom" or "expanded-kickstart" or "expanded-kickstart-13" => "expanded-kickstart13",

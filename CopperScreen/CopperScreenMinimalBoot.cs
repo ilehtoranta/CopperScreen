@@ -8,21 +8,32 @@ internal sealed class CopperScreenMinimalBoot
     internal const uint RomBase = 0xFC0000, StateAddress = 0x75800, BootAddress = 0x6800;
     internal byte[] Rom { get; }
     internal uint FaultAddress { get; }
-    internal CopperScreenMinimalBoot(CopperScreenAdfImage disk, bool slowRam)
+    internal CopperScreenMinimalBoot(CopperScreenAdfImage disk, bool slowRam, bool a1200 = false)
     {
         ValidateDisk(disk);
         var assembler = new CopperScreenBootAssembler(RomBase);
-        var code = assembler.Assemble(BuildSource());
+        var code = assembler.Assemble(BuildSource(a1200));
         Rom = new byte[262144];
         code.CopyTo(Rom, 0);
         BinaryPrimitives.WriteUInt32BigEndian(Rom.AsSpan((int)(assembler.Symbol("slow_config") - RomBase)), slowRam ? 1u : 0u);
         FaultAddress = assembler.Symbol("fault");
     }
-    internal static string BuildSource()
+    internal static string BuildSource(bool a1200 = false)
     {
         using var stream = typeof(CopperScreenMinimalBoot).Assembly.GetManifestResourceStream("CopperScreen.Firmware.MinimalDiskBoot.s")!;
         using var reader = new StreamReader(stream);
-        var source = new StringBuilder(reader.ReadToEnd());
+        // Specialize our shared firmware before assembly. These are guest instructions,
+        // not host callbacks. Keep the 68000 path free of 020-only control registers.
+        // MOVEC D0,VBR ($4e7b,$0801) and D0,CACR ($4e7b,$0002) reset
+        // vector relocation and disable the instruction cache before RAM takeover.
+        var source = new StringBuilder($"chipphysical equ ${(a1200 ? 0x200000 : 0x80000):x}\n" +
+            $"chipupperend equ ${(a1200 ? 0x200000 : 0x7c000):x}\n" +
+            $"groupzero_pc_offset equ {(a1200 ? 2 : 10)}\n" +
+            $"cpuattention equ {(a1200 ? 3 : 0)}\n" +
+            reader.ReadToEnd()
+                .Replace("; @cpu_setup", a1200 ? "moveq #0,d0\n dc.w $4e7b,$0801\n dc.w $4e7b,$0002\n move.w #0,$dff1fc\n move.w #$0001,$dff100\n move.w #0,$dff106\n move.w #0,$dff10c" : "")
+                .Replace("; @chip_extension", a1200 ? "move.l #chipupper,chipfirst\n clr.l chipupper\n move.l #chipphysical-chipupper,chipupper+4\n addi.l #chipphysical-chipupper,chipheader+28" : "")
+                .Replace("; @boot_frame", a1200 ? "clr.w -(sp)" : ""));
         var exec = new Dictionary<int, string>
         {
             [30] = "supervisor", [120] = "disable", [126] = "enable", [132] = "forbid", [138] = "permit",
