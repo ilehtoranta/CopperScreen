@@ -7,6 +7,14 @@ Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
+The [Arte minimal-boot investigation](ARTE_MINIMAL_BOOT_CRASH_2026-10-08.md)
+reproduces SOS exception 3 after 22,008 completed fields; native Kickstart 1.3
+progresses through 40,000 fields on the same engine/media. The firmware's nonzero
+RAM location zero led an empty guest list into ROM code; initialization now clears
+that sentinel, with a discriminating regression and all 18 minimal-boot tests
+passing. Corrected minimal boot also completes 40,000 diagnostic fields with no
+captured address exception or unsupported-feature stop. The separately reported
+Avalonia/CLR termination remains open.
 For the broader ECS/AGA, CPU, storage and host transition, see the
 [product completion roadmap](ROADMAP.md), which separates missing implementation
 from verification and integration work.

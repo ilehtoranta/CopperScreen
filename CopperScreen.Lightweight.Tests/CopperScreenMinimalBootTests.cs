@@ -39,6 +39,24 @@ public sealed class CopperScreenMinimalBootTests : IDisposable
         for (var i = 0; i < frames; i++) session.RenderNextFrame(session.Framebuffer);
     }
     [Fact]
+    public void NullListTraversalTerminatesWithoutFollowingBootFirmware()
+    {
+        using var session = new CopperScreenLightweightSession(Options(Disk("""
+            lea $0,a0
+            scan:
+            move.l (a0),a0
+            tst.l (a0)
+            bne scan
+            move.l #$12345678,$800
+            loop:
+            bra loop
+            """)));
+        Run(session);
+        Assert.Equal(0u, Read(session, 0));
+        Assert.Equal(0x12345678u, Read(session, 0x800));
+        Assert.Equal(0x78000u, Read(session, 4));
+    }
+    [Fact]
     public void OriginalBootblockReceivesIoRequestAndExecAndRunsWithoutRom()
     {
         var options = Options(Disk("""

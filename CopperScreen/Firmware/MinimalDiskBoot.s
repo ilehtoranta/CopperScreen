@@ -35,6 +35,9 @@ start:
 vectors:
     move.l d0,(a0)+
     dbra d1,vectors
+    ; Reset reads SSP/PC from the ROM overlay. RAM location zero is not an
+    ; exception-handler vector; keep the native-boot null-list sentinel clear.
+    clr.l $0
     move.l #irq,$64
     move.l #irq,$68
     move.l #irq,$6c

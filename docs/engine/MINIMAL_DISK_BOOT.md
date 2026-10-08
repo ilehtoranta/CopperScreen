@@ -120,11 +120,12 @@ settings persistence, the public Exec list register ABI, CPU scope, and explicit
 Headless UI checks cover ROM-free startup, disk requirement, return to native
 boot, and settings cancellation.
 
-The complete generated instruction stream was independently assembled by vasm
+The original 2026-10-04 generated instruction stream was independently assembled by vasm
 1.9, Motorola 68000, with optimizations disabled: all **9,274 bytes** match.
 SHA-256 of both streams:
 `16812a3b749a6eaff724a9215c76d01da04dcad5c9d32e6ca621e549ca579f68`.
-This checks instruction encoding separately from execution fixtures.
+This checks that earlier instruction encoding separately from execution fixtures;
+the 2026-10-08 null-sentinel correction is not part of that frozen vasm comparison.
 
 Bounded local media checks, **3,000 output fields per title**, without input:
 
@@ -142,6 +143,19 @@ No disk bytes or loader instructions are patched. The supplied Lotus Turbo
 Challenge 2 image still raises a guest exception during its takeover startup;
 it remains incompatible/unqualified. Do not silently add title-specific patches
 or fall back to native Kickstart.
+
+The [2026-10-08 Arte follow-up](ARTE_MINIMAL_BOOT_CRASH_2026-10-08.md) reproduces
+a later SOS address exception with 22,008 completed fields under original minimal
+boot. A null-list traversal followed the handler pointer placed at RAM address
+zero into boot-ROM instructions. The firmware now clears that RAM longword,
+matching observed native Kickstart state; all 18 minimal-boot tests pass, including
+a synthetic traversal that fails before the correction. Corrected minimal boot
+and native Kickstart 1.3 each complete 40,000 diagnostic fields on the same
+engine/media with no captured address exception or unsupported-feature stop.
+The startup result above is retained within its original scope; the new replay
+is bounded sampled progression, not unlimited or hardware-certified playback.
+The separate reported Avalonia/CLR desktop termination remains unreproduced
+headlessly.
 
 Ignored local evidence is under `artifacts/minimal-boot-preview/` and
 `artifacts/ui-welcome-preview/`. ROM/media, generated firmware, captures and tool
