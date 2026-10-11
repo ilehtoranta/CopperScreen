@@ -263,8 +263,10 @@ DSKBYTR DMA status follows the active transfer, including sync wait and write
 serialization. Zero-length WORDSYNC reads complete at the qualifying match without
 RAM transfer. See [disk control edges and limits](../docs/engine/DISK_CONTROL_EDGES.md).
 Running reads preserve partial and buffered words across WORDSYNC enable changes;
-changes during the initial sync wait remain unsupported. See
-[live WORDSYNC evidence](../docs/engine/DISK_LIVE_WORDSYNC.md).
+changes during the initial sync wait retain the latched gate and input word phase.
+Only received matches with live WORDSYNC enabled realign the word boundary. See
+[initial-wait semantics and limits](../docs/engine/DISK_INITIAL_WORDSYNC.md) and
+the earlier [running-read correction](../docs/engine/DISK_LIVE_WORDSYNC.md).
 Received WORDSYNC aligns DSKBYTR byte reads even without DMA. The
 [CPU byte alignment correction](../docs/engine/DISK_BYTE_WORDSYNC_2026-09-24.md)
 passes Alien Breed SE '92's black boot and reaches its disk-two menu; exact

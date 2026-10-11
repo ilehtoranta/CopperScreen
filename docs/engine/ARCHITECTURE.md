@@ -324,8 +324,12 @@ receiver owns partial bytes, sync and slow-recovery state; one DMA FIFO owns
 accepted transfers. Disk arrivals still execute before the disk DMA phase.
 After the initial sync gate opens, ADKCON.WORDSYNC toggles preserve partial and
 buffered words; only subsequent enabled input matches realign a running read.
-Toggles while still waiting for the first sync remain explicitly unsupported.
-See [live WORDSYNC evidence and limits](DISK_LIVE_WORDSYNC.md).
+The initial gate is latched by the second DSKLEN enable strobe. Clearing WORDSYNC
+does not release it; a received match with DMA enabled opens it. Word phase keeps
+advancing while waiting, and a received match realigns it only when live WORDSYNC
+is enabled, including while DMACON pauses DMA. Register writes supply no input
+match. See [initial-wait semantics and limits](DISK_INITIAL_WORDSYNC.md) and the
+earlier [running-read correction](DISK_LIVE_WORDSYNC.md).
 Received matches with WORDSYNC enabled also realign the CPU's DSKBYTR byte
 counter independently of DMA. Register-only comparisons preserve that counter;
 already published byte data/ready state survives alignment. See

@@ -1955,7 +1955,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return;
         }
 
-        var previousAdkcon = _registers.Adkcon;
         if (offset == LightweightRegisters.AdkconWrite)
             _diskSerial.AdvanceReceiver(cycle, this);
         var previousDmacon = offset == LightweightRegisters.DmaconWrite
@@ -2087,7 +2086,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 case LightweightRegisters.AdkconWrite:
                     _paula.OnAdkconChanged(_registers.Adkcon, cycle);
                     _serial.WriteBreak((_registers.Adkcon & 0x0800) != 0);
-                    _diskDma.OnAdkconChanged(previousAdkcon, cycle, this);
+                    // WORDSYNC is sampled on received input. This write does
+                    // not change the latched start gate or buffered DMA state.
                     RefreshDiskSchedule();
                     break;
                 case LightweightRegisters.Dsksync:

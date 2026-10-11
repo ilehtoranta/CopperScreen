@@ -128,7 +128,7 @@ public sealed class LightweightDiskLiveSyncTests
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
-    public void ToggleBeforeFirstSyncStillReportsUnverifiedBehavior(int words)
+    public void ClearingWordsyncKeepsInitialGateUntilReceivedMatch(int words)
     {
         using var m = new LightweightA500Machine();
         Write(m, 0x096, 0x8210);
@@ -136,8 +136,15 @@ public sealed class LightweightDiskLiveSyncTests
         Write(m, 0x024, (ushort)(0x8000 | words));
         Write(m, 0x024, (ushort)(0x8000 | words));
         Write(m, 0x09E, 0x0400);
-        Assert.Equal("WORDSYNC enable change while disk DMA waits for first sync", m.UnsupportedActiveFeature);
+        Bits(m, 48, 0x1234);
+        Assert.Null(m.UnsupportedActiveFeature);
+        Assert.True(m.DiskDmaActive);
+        Assert.Equal(words, m.DiskDmaRemaining);
+        Assert.Equal(long.MaxValue, m.DiskDmaNextCycle);
         Assert.Equal(0, m.Intreq & 2);
+        m.ReceiveDiskBit(0x4489, true, m.Cycle);
+        Assert.Equal(words != 0, m.DiskDmaActive);
+        Assert.Equal(words == 0 ? 2 : 0, m.Intreq & 2);
     }
 
     private static LightweightA500Machine Running(int words, bool sync)
