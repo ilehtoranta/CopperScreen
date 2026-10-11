@@ -21,7 +21,11 @@ def main():
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--exploration', type=Path)
     parser.add_argument('--frames', type=int, default=34000)
+    parser.add_argument('--cpu-version', default='1.5.4-detroit-dev.2',
+                        help='Exact expected package version; historical replay version remains the default.')
     args = parser.parse_args()
+    if not args.cpu_version or '+' in args.cpu_version:
+        raise ValueError('Expected CPU package version must be explicit and exclude build metadata')
     expected_frames = [1, *range(200, args.frames + 1, 200)]
     if args.frames % 200:
         expected_frames.append(args.frames)
@@ -34,7 +38,7 @@ def main():
         if any(s['unsupported'] or s['videoUnsupported'] for s in snapshots):
             raise ValueError(f'Unsupported execution in {directory}')
         profile = json.loads((directory / 'cpu-profile.json').read_text())
-        if not profile['copper68k'].startswith('1.5.4-detroit-dev.2+'):
+        if not profile['copper68k'].startswith(args.cpu_version + '+'):
             raise ValueError('Unexpected CPU package; preserve version-specific evidence.')
         text = log.read_text()
         summaries = [line for line in text.splitlines() if line.startswith('engine=')]
@@ -74,6 +78,7 @@ def main():
         milestones[frame] = {name: normal[name] for name in names}
     result = {
         'schemaVersion': 1, 'completedFields': args.frames,
+        'expectedCpuVersion': args.cpu_version,
         'capturesPerMode': len(normal), 'captureMismatches': mismatches,
         'fingerprints': fingerprints[0], 'finalState': states[0],
         'milestoneHashes': milestones, 'allCaptureHashes': normal,
