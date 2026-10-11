@@ -348,6 +348,10 @@ internal sealed class LightweightBlitter
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool OwnsPendingOutputSlot(long cycle)
+        => _hasPendingOutput && _pendingUsesBus && _pendingOutputCycle == cycle;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool OwnsOutputSlot(long cycle)
         => (_hasPendingOutput && _pendingUsesBus &&
                 _pendingOutputCycle == cycle) ||

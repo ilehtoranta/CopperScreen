@@ -13,5 +13,6 @@
     <Using Include="Xunit" />
     <ProjectReference Include="..\CopperScreen\CopperScreen.csproj" />
     <Compile Include="../CopperMod.Amiga.Lightweight.Tests/IpfFixture.cs" Link="Fixtures/IpfFixture.cs" />
+    <Compile Include="../CopperMod.Amiga.Lightweight.Tests/DiskFormatFixture.cs" Link="Fixtures/DiskFormatFixture.cs" />
   </ItemGroup>
 </Project>

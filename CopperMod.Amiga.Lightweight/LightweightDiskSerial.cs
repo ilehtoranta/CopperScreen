@@ -44,7 +44,7 @@ internal struct LightweightDiskSerial
         if (drive.Selected && receive)
         {
             var bit = drive.ReadBit();
-            if (drive.Format == LightweightFloppyFormat.Ipf)
+            if (drive.UsesPreservedReceiver)
             {
                 if (_receiver.Active)
                 {

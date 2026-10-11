@@ -12,11 +12,15 @@ var adfPath = (string?)null;
 var extraAdfPaths = new string?[3];
 var driveCount = 1;
 var hardfiles = new List<AmigaHardfileConfiguration>();
+var hostDirectories = new List<LightweightHostDirectoryConfiguration>();
+var hostBootPriorities = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 var writableDrives = new List<int>();
 var exportDisks = new List<(int Drive, string Path)>();
 var scalarCpu = false;
 var cpuModel = M68kCpuModel.M68000;
+var cpuExecutionMode = M68kExecutionMode.Interpreter;
 var fastRamKiB = 0;
+var rtcEnabled = false;
 var deniseModel = LightweightDeniseModel.Mos8362;
 var agnusModel = LightweightAgnusModel.Mos8371;
 var chipRamKiB = 512;
@@ -52,9 +56,9 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--warmup" && i + 1 < args.Length && int.TryParse(args[++i], out var warmupFrames)) warmup = warmupFrames;
     else if (args[i] == "--rom" && i + 1 < args.Length) romPath = args[++i];
     else if (args[i] is "--adf" or "--ipf" or "--disk" && i + 1 < args.Length) adfPath = args[++i];
-    else if (args[i] is "--adf1" or "--adf2" or "--adf3" or "--ipf1" or "--ipf2" or "--ipf3" && i + 1 < args.Length)
+    else if (args[i] is "--adf1" or "--adf2" or "--adf3" or "--ipf1" or "--ipf2" or "--ipf3" or "--disk1" or "--disk2" or "--disk3" && i + 1 < args.Length)
     {
-        var drive = args[i][5] - '1';
+        var drive = args[i][^1] - '1';
         extraAdfPaths[drive] = args[++i];
     }
     else if (args[i] is "--hdf" or "--hdf-ro" && i + 1 < args.Length)
@@ -62,12 +66,26 @@ for (var i = 0; i < args.Length; i++)
         var readOnly = args[i] == "--hdf-ro";
         hardfiles.Add(new(hardfiles.Count, args[++i], readOnly));
     }
+    else if (args[i] is "--host-dir" or "--host-dir-rw")
+    {
+        var readOnly = args[i] == "--host-dir";
+        if (i + 3 >= args.Length) throw new ArgumentException("--host-dir requires device, volume and folder path.");
+        hostDirectories.Add(new(args[++i], args[++i], args[++i], readOnly));
+    }
+    else if (args[i] == "--host-dir-boot-priority")
+    {
+        if (i + 2 >= args.Length) throw new ArgumentException("--host-dir-boot-priority requires device and priority.");
+        var device = args[++i];
+        if (!int.TryParse(args[++i], out var priority) || priority is < -127 or > 127) throw new ArgumentException("Shared-folder boot priority must be from -127 to 127.");
+        hostBootPriorities[device] = priority;
+    }
     else if (args[i] == "--drives")
     {
         if (++i >= args.Length || !int.TryParse(args[i], out driveCount) || driveCount is < 1 or > 4)
             throw new ArgumentException("--drives requires a count from 1 to 4.");
     }
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
+    else if (args[i] == "--rtc") rtcEnabled = true;
     else if (args[i] == "--denise")
     {
         if (++i >= args.Length) throw new ArgumentException("--denise requires 8362, 8373 or lisa.");
@@ -105,23 +123,25 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--fast-ram-kib")
     {
         if (++i >= args.Length || !int.TryParse(args[i], out fastRamKiB) ||
-            fastRamKiB is not (0 or 512 or 1024 or 2048 or 4096 or 8192))
-            throw new ArgumentException("--fast-ram-kib requires 0, 512, 1024, 2048, 4096 or 8192.");
+            fastRamKiB < 0 || fastRamKiB > 1048576 || !LightweightA500Configuration.IsSupportedFastRamSize(fastRamKiB * 1024))
+            throw new ArgumentException("--fast-ram-kib requires 0 or a standard bank from 512 KiB to 1 GiB; CPU address-width limits also apply.");
     }
     else if (args[i] == "--cpu")
     {
-        if (++i >= args.Length) throw new ArgumentException("--cpu requires 68000, 68ec020, 68020, 68030, 68040 or 68060.");
+        if (++i >= args.Length) throw new ArgumentException("--cpu requires 68000, 68010, 68ec020, 68020, 68030, 68040 or 68060.");
         cpuModel = args[i].ToLowerInvariant() switch
         {
             "68000" or "m68000" => M68kCpuModel.M68000,
+            "68010" or "m68010" => M68kCpuModel.M68010,
             "68ec020" or "m68ec020" => M68kCpuModel.M68EC020,
             "68020" or "m68020" => M68kCpuModel.M68020,
             "68030" or "m68030" => M68kCpuModel.M68030,
             "68040" or "m68040" => M68kCpuModel.M68040,
             "68060" or "m68060" => M68kCpuModel.M68060,
-            _ => throw new ArgumentException("--cpu requires 68000, 68ec020, 68020, 68030, 68040 or 68060.")
+            _ => throw new ArgumentException("--cpu requires 68000, 68010, 68ec020, 68020, 68030, 68040 or 68060.")
         };
     }
+    else if (args[i] == "--jit") cpuExecutionMode = M68kExecutionMode.Jit;
     else if (args[i] == "--writable-drive" && i + 1 < args.Length)
         writableDrives.Add(int.Parse(args[++i]));
     else if (args[i] == "--export-adf" && i + 2 < args.Length)
@@ -156,6 +176,15 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--input-script" && i + 1 < args.Length) inputScriptPath = args[++i];
     else if (args[i] == "--probe-continue-unsupported") probeContinueUnsupported = true;
 }
+
+foreach (var (device, priority) in hostBootPriorities)
+{
+    var index = hostDirectories.FindIndex(m => m.DeviceName.Equals(device, StringComparison.OrdinalIgnoreCase));
+    if (index < 0) throw new ArgumentException($"No shared folder named {device}.");
+    hostDirectories[index] = hostDirectories[index] with { BootPriority = priority };
+}
+if (hostDirectories.Count != 0 && (romPath is null || args.Any(a => a.StartsWith("--synthetic-", StringComparison.Ordinal))))
+    throw new ArgumentException("Shared folders require a native Kickstart ROM and DOS. Synthetic boot has no DOS handler.");
 
 if ((syntheticRomLoop ? 1 : 0) + (syntheticRomStop ? 1 : 0) +
     (syntheticCiaTimer ? 1 : 0) + (syntheticCopper ? 1 : 0) +
@@ -194,11 +223,12 @@ for (var i = 0; i < extraAdfPaths.Length; i++)
 
 using var machine = new LightweightA500Machine(
     configuration: new LightweightA500Configuration
-        { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, CpuModel = cpuModel, FastRamBytes = fastRamKiB * 1024,
-            AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024 },
+        { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
+            AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled },
     enableConservativeCpuLoopBatch: !scalarCpu);
 if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
     Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise={deniseModel} video=pal");
+if (rtcEnabled) Console.WriteLine("rtc=a501 host-local-time session-offset");
 var supportsBlitter = machine.GetType().GetProperty(
     "BlitterActive",
     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) is not null;
@@ -215,9 +245,9 @@ if (syntheticRomLoop || syntheticRomStop || syntheticCiaTimer || syntheticCopper
     machine.LoadKickstart(CreateSyntheticRom(syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes || syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites || syntheticSpriteDma || syntheticPaulaManual));
 else if (romPath is not null)
     machine.LoadKickstart(ReadImage(romPath, ".rom", ".bin", ".kick"));
-if (adfPath is not null) NativeInputScript.Mount(machine, 0, ReadImage(adfPath, ".adf", ".ipf"), adfPath);
+if (adfPath is not null) NativeInputScript.Mount(machine, 0, ReadImage(adfPath, ".adf", ".adz", ".dms", ".ipf", ".scp"), adfPath);
 for (var i = 0; i < extraAdfPaths.Length; i++)
-    if (extraAdfPaths[i] is { } path) NativeInputScript.Mount(machine, i + 1, ReadImage(path, ".adf", ".ipf"), path);
+    if (extraAdfPaths[i] is { } path) NativeInputScript.Mount(machine, i + 1, ReadImage(path, ".adf", ".adz", ".dms", ".ipf", ".scp"), path);
 foreach (var drive in writableDrives) machine.SetDriveWriteProtected(drive, false);
 if (syntheticCiaTimer) ConfigureSyntheticCiaTimer(machine);
 if (syntheticCopper) ConfigureSyntheticCopper(machine);
@@ -273,7 +303,7 @@ var todStartFrame = machine.CompletedFrames;
 var bootProbe = bootProbeDirectory is null ? null : new NativeBootProbe(
     bootProbeDirectory, probeContinueUnsupported, bootProbeInterval, bootProbeExtended);
 var inputScript = inputScriptPath is null ? null : new NativeInputScript(inputScriptPath,
-    path => ReadImage(path, ".adf", ".ipf"), driveCount);
+    path => ReadImage(path, ".adf", ".adz", ".dms", ".ipf", ".scp"), driveCount);
 if (bootProbe is null && inputScript?.ChangesMediaBetween(warmup, checked(warmup + frames)) == true)
     throw new ArgumentException("Scripted media changes must precede measurement or use --boot-probe.");
 for (var frame = 0; frame < warmup; frame++)
@@ -309,7 +339,8 @@ for (var frame = 0; frame < frames; frame++)
 }
 stopwatch.Stop();
 if (machine.IsAga) Console.WriteLine("CPU_PROFILE experimental PAL A1200 68EC020: 2 native clocks per motherboard clock; 32-bit Chip/ROM, 16-bit custom, byte CIA/Gayle; physical timing not certified.");
-else if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: {(cpuModel == M68kCpuModel.M68060 ? 8 : cpuModel == M68kCpuModel.M68040 ? 4 : 2)} native clocks per motherboard clock, 16-bit OCS bus; accelerator timing is not hardware-certified.");
+else if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: {(cpuModel == M68kCpuModel.M68010 ? 1 : cpuModel == M68kCpuModel.M68060 ? 8 : cpuModel == M68kCpuModel.M68040 ? 4 : 2)} native clocks per motherboard clock, 16-bit OCS bus; physical CPU timing is not hardware-certified.");
+if (machine.JitStatistics is { } jit) Console.WriteLine($"JIT compiledTraces={jit.CompiledTraces} compiledInstructions={jit.CompiledInstructions} fallbackInstructions={jit.FallbackInstructions} invalidations={jit.Invalidations}");
 if (bootProbe is not null) Console.WriteLine("BOOT_PROBE diagnostic run: FPS/allocation totals are not acceptance measurements; native gameplay is not verified.");
 var allocatedBytes = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
 if (inputReplay && machine.CompletedFrames != (long)warmup + frames)
@@ -380,7 +411,8 @@ if (inputReplay)
 }
 if (wideOutput) workload += "-wide";
 if (hires) workload += "-hires";
-Console.WriteLine($"engine=lightweight-a500 workload={workload}{(cpuModel == M68kCpuModel.M68000 ? string.Empty : $" cpuModel={cpuModel} timingPolicy={(machine.IsAga ? "a1200-initial-v1" : "ocs-accelerator-v1")}")} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
+var timingPolicy = machine.IsAga ? cpuModel == M68kCpuModel.M68EC020 ? "a1200-initial-v1" : "a1200-accelerator-v1" : "ocs-accelerator-v1";
+Console.WriteLine($"engine=lightweight-a500 workload={workload}{(cpuModel == M68kCpuModel.M68000 ? string.Empty : $" cpuModel={cpuModel} timingPolicy={timingPolicy}")} executionMode={cpuExecutionMode} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
 if (unsupported != "none")
     Environment.ExitCode = 2;
 // Host exports are after all timing/allocation samples and never replace the input implicitly.

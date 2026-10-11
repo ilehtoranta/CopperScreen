@@ -4,14 +4,16 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The CPU dependency is the public mainline Copper68k `1.5.1` release. It adds
-the explicit A1200 EC020 profile and native ROM operand forms; see
+The published CPU baseline is Copper68k `1.5.3`. This development worktree uses
+the unpublished `1.5.4-detroit-dev.2` package from the ignored Detroit local feed.
+See [CPU support and validation](../docs/engine/CPU_SUPPORT.md). Existing published
+versions are unchanged. A1200 integration evidence is retained in
 [AGA implementation and package verification](../docs/engine/AGA_INITIAL_2026-10-01.md).
 
 Independent PAL A500 engine with OCS 8362 or ECS 8373 Denise: Copper68k accurate 68000,
 configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
-(v40.63), one to four standard
-880 KiB ADF/read-only IPF drives (including selected ZIP entries through the host/runner),
+(v40.63), one to four floppy drives with standard writable
+880 KiB ADF and read-only ADZ/DMS/extended ADF/IPF/SCP (including selected ZIP entries through the host/runner),
 and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
 
@@ -25,29 +27,39 @@ through the low-memory overlay. Native ROM code executes Exec and DOS services.
 Workbench 3.1 floppy boot is verified on the default 68000 with 0 and 2 MiB Fast RAM;
 see [boot evidence and limits](../docs/engine/KICKSTART_31_2026-09-30.md).
 
-`LightweightA500Configuration.FastRamBytes` adds optional CPU-only Zorro II RAM:
-0 (default), 512 KiB, 1, 2, 4 or 8 MiB. Native Kickstart Autoconfig assigns the
-bank within `$200000–$9FFFFF`, ahead of CopperHDF in the expansion chain.
+`LightweightA500Configuration.FastRamBytes` adds optional CPU-only Zorro II/III RAM:
+0 (default), 512 KiB, or power-of-two sizes from 1 MiB through 1 GiB. The 24-bit
+68000/68010/68EC020 limit is 8 MiB. Full 68020/030/040/060 support the larger
+Zorro III banks with native Kickstart 3.x. Native Kickstart Autoconfig assigns
+small banks within `$200000–$9FFFFF`, or large banks in 32-bit space, ahead of
+CopperHDF in the expansion chain. See [CPU/memory upgrades and native verification](../docs/engine/CPU_MEMORY_UPGRADES.md).
 `FastRam` exposes read-only bytes and `FastRamBase` is null until configured.
 CPU accesses bypass Agnus contention; chipset DMA remains in Chip RAM. Both
 reset paths remove the mapping while preserving RAM contents. Size changes
 require a new machine. See [implementation, package and native evidence](../docs/engine/FAST_RAM_2026-09-27.md).
 
-`LightweightA500Configuration.CpuModel` accepts experimental `M68EC020`,
+`LightweightA500Configuration.CpuModel` also accepts experimental `M68010`, `M68EC020`,
 `M68020`, `M68030` and `M68040`. The 020/030 use two native clocks per motherboard
 clock; 040 uses four and approximate fixed instruction timing. A500 profiles use the fitted
 16-bit OCS bridge; only EC020 wraps addresses at 24 bits. The default 68000 retains
-its original bus path. CPU changes require a new machine.
+its original bus path. The 68010 uses that motherboard path with four-clock bus
+spacing, VBR/system instructions and format-8 frames. CPU changes require a new machine.
 
 The 040's uncached fetches now use aligned longwords and a half-line holding
 register, including the integer fallback path. This corrects the original Lotus
 III prompt replay; speculative prefetch, pipeline overlap and full 040 timing
 remain approximate. See [the fetch correction and validation](../docs/engine/LOTUS_III_040_FETCH_2026-09-27.md).
 
-`M68060` is accepted for diagnostic callers using an eight-clock integer policy.
+`M68060` is accepted by engine/runner callers using an eight-clock policy.
 It cannot boot the supported Kickstart 1.3 profile: native task frames lack the
-060's 12-byte FPU state layout. FPU arithmetic and enabled MMU operation remain
-unavailable. It is explicitly unavailable in the desktop. See [030/040/060
+060's 12-byte FPU state layout. FPU arithmetic and enabled 040/060 three-level
+paging are implemented, including translated accesses, permissions and descriptor
+updates. Full access-error continuation/recovery remains incomplete. The 060 is
+unavailable in the desktop pending native 060-aware OS validation.
+`CpuExecutionMode = M68kExecutionMode.Jit` selects optional 040 JIT execution;
+MMU/transparent-translation contexts use interpreter fallback. The runner accepts
+`--cpu 68040 --jit` and reports actual compiled-instruction counts. See
+[current support and limits](../docs/engine/CPU_SUPPORT.md), [030/040/060
 implementation and evidence](../docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md),
 the [initial bridge](../docs/engine/CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md), and
 [020 decoder/cache validation](../docs/engine/LOTUS_III_020_CACHE_2026-09-26.md).
@@ -87,7 +99,9 @@ The 8375 model names a specific 2 MiB part because other 8375 variants differ.
 See [implementation, native memory discovery and verification limits](../docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
 
 The initial PAL A1200 profile pairs `Mos8374Alice` with `Lisa4203`, 68EC020,
-2 MiB Chip RAM and no expansion Fast RAM. It uses a bounded 32-bit Chip/ROM
+2 MiB Chip RAM and no expansion Fast RAM by default. Optional Fast RAM and
+68020/030/040 upgrades, including 040 JIT, are described in the
+[current model/CPU/memory choices](../docs/engine/CPU_MEMORY_UPGRADES.md). It uses a bounded 32-bit Chip/ROM
 bridge and eight-plane 16/32/64-bit DMA, a banked 256-entry RGB24 palette,
 single-playfield output, EHB and palette XOR. HAM6/HAM8 and two four-plane
 playfields now compose in lores, hires and SuperHires. Native A1200 Kickstart 3.0
@@ -119,7 +133,7 @@ game, first base, advancing strategy clock and interception menu, with matching
 normal/scalar captures. Alien Breed renders the opening level and responds to
 movement, turning and firing; some completed rasters omit the viewport or HUD,
 so continuous visual stability remains open. These results use the unpublished 1.5.2 CPU
-candidate; the application still pins public 1.5.1.
+candidate; its integer fixes are retained in Copper68k 1.5.3.
 
 The supplied 4th Dimension demo now reaches effects with audio in both 12,000-field
 replays, with all 151 capture files identical. Kick Off 3 passes the intro,
@@ -127,9 +141,23 @@ loads disk 2 and responds to joystick input by opening Practice options; both
 15,000-field replays match all 367 captures. Nine reached CPU operand families
 are corrected in the unpublished candidate. Some Kick Off 3 captures are blank,
 so continuous visual stability and football gameplay remain unverified.
-The application still pins public 1.5.1. See [the correction and limits](../docs/engine/AGA_ADDITIONAL_MEDIA_FIXES_2026-10-03.md),
+Copper68k 1.5.3 retains these fixes. See [the correction and limits](../docs/engine/AGA_ADDITIONAL_MEDIA_FIXES_2026-10-03.md),
 the retained [eight startup failures](../docs/engine/AGA_ADDITIONAL_MEDIA_2026-10-03.json)
 and LWA-CPU-006 / LWA-AGA-002 in [the issue register](../docs/engine/ISSUES.md).
+
+The [October 8 Kick Off 3 investigation](../docs/engine/KICK_OFF_3_BLANK_FIELDS_2026-10-08.md)
+reconstructs Practice selection on current source with Copper68k 1.5.3. The guest
+clears its palette for 11 transition fields, then Practice remains visible through
+field 15,000; all 907 capture files match the production scalar runner. The old
+input/captures are unavailable, so the historical blank idle capture's cause
+remains open. This does not establish football gameplay.
+
+The [Detroit AGA correction](../docs/engine/DETROIT_AGA_FIX_2026-10-08.md) fixes
+the intro's postincrement EORI blocker in the shared CPU. The unpublished local
+development package reaches interactive management and completes the first
+month on a stock PAL A1200. Both 34,000-field production modes match all 1,027
+capture files and final fingerprints. Saves and full-game completion remain
+unverified; the [original failure](../docs/engine/DETROIT_AGA_2026-10-08.md) is retained.
 
 The [Brian the Lion hard-disk rip investigation](../docs/engine/BRIAN_THE_LION_2026-10-03.md)
 records native installation, title/menu progression and first jungle-level entry,
@@ -151,9 +179,25 @@ Electrical edge cases and broader write-only readback remain unverified.
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard
 startup/recovery and physical keys, and digital-controller input; output is a full
-raster and 48 kHz stereo PCM. Full AGA compatibility, A2024 external scan conversion, additional CPU/ROM profiles, RTC, RTG, physical
+raster and 48 kHz stereo PCM. Full AGA compatibility, A2024 external scan conversion, additional CPU/ROM profiles, RTG, physical
 IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
+
+Optional `LightweightA500Configuration.RtcEnabled` ports the Legacy A501 clock
+register model at `$DC0000–$DC003F`. The default remains disabled. Settings >
+Memory > RTC clock and runner `--rtc` enable it. Host local time supplies the
+clock; guest writes adjust a session-local offset. Resets and enabled-to-enabled
+restart candidates retain that offset; independent machines start from host time.
+No battery-state file is written. `RtcNowProvider` permits reproducible callers
+without adding device ticks. See [RTC behavior and limits](../docs/engine/RTC.md).
+
+`LightweightA500Configuration.HostDirectories` defaults to empty. Existing
+directories can be mounted read-only or writable as native DOS volumes, with an
+optional −127..127 boot priority. An original 68000 handler on a separate virtual
+Autoconfig board uses request-driven owner-thread filesystem callbacks and native
+Exec/DOS processes. Metadata and Windows filename mappings live in versioned
+sidecars. Reset closes handles and registers fresh structures. See
+[shared-folder API, usage and limits](../docs/engine/HOST_DIRECTORIES.md).
 
 Native Lemmings and bounded Hired Guns sessions have recorded acceptance; this is
 not complete game compatibility or exhaustive hardware conformance. Residual
@@ -226,7 +270,7 @@ Received WORDSYNC aligns DSKBYTR byte reads even without DMA. The
 passes Alien Breed SE '92's black boot and reaches its disk-two menu; exact
 physical coincident-edge timing remains unverified.
 
-Drives start write protected. For ADF, `SetDriveWriteProtected(drive, false)` enables
+Drives start write protected. For standard ADF, `SetDriveWriteProtected(drive, false)` enables
 guest memory-to-disk DMA into the owned encoded tracks. `ExportAdf(drive)` copies
 standard sectors and rejects damaged/custom tracks that cannot be represented in
 an ordinary ADF. Export and persistence are host operations, outside emulated
@@ -234,6 +278,14 @@ execution. The desktop Floppy settings expose Read-only, Save ADF and Discard an
 eject. Changes stay in memory until saved; mounting from a ZIP never modifies the
 archive automatically. Native Workbench format/write/read and a fresh-machine
 save/reopen check have run on disposable media.
+
+`LightweightFloppyImage.Prepare(bytes, filename)` validates/decodes all supported
+floppy formats before attachment; `MountDisk(drive, prepared)` attaches them.
+`MountDisk(drive, bytes, filename)` combines the two. ADZ and DMS use the standard
+sector path; modern UAE-1ADF and compressed extended ADF retain raw track lengths
+and bytes. SCP retains CopperDisk's decoded first DD revolution and uses the
+preserved receiver; original flux intervals and multiple revolutions are not replayed.
+Only standard ADF is writable or exportable. See [format contract and validation](../docs/engine/DISK_FORMATS.md).
 
 `MountIpf(drive, bytes)` decodes preserved tracks at mount time;
 `LightweightIpfImage.Prepare` and `MountIpf(drive, prepared)` separate preparation

@@ -13,6 +13,7 @@ internal sealed partial class LightweightVideo
     private ulong _agaPendingData;
     private int _agaPendingBits = 16, _agaBits = 16;
     private ushort _agaBplcon4 = 0x11, _agaFmode;
+    private int _agaOddReloadDelay, _agaEvenReloadDelay;
 
     private void ResetAga()
     {
@@ -21,6 +22,7 @@ internal sealed partial class LightweightVideo
         Array.Clear(_agaIntermediate); Array.Clear(_agaShift);
         _agaPendingData = 0; _agaPendingBits = _agaBits = 16;
         _agaBplcon4 = 0x11; _agaFmode = 0;
+        _agaOddReloadDelay = _agaEvenReloadDelay = 0;
         if (_aga) _ecsBplcon3 = 0x0C00;
         UpdateAgaDualPixels();
     }
@@ -61,7 +63,7 @@ internal sealed partial class LightweightVideo
         }
     }
 
-    private int ShiftAgaPixel(int x, int resolution)
+    private int ShiftAgaPixel(int x)
     {
         var code = 0;
         for (var p = 0; p < 8; p++)
@@ -71,13 +73,10 @@ internal sealed partial class LightweightVideo
         }
         if (_pendingReloadParity != 0)
         {
-            var scroll = _effectiveBplcon1;
             for (var parity = 0; parity < 2; parity++)
             {
                 if ((_pendingReloadParity & (1 << parity)) == 0) continue;
-                var fine = ((scroll >> (parity * 4) & 15) << 2) |
-                    (scroll >> (8 + parity * 4) & 3) | ((scroll >> (10 + parity * 4) & 3) << 6);
-                var delay = fine * resolution / 4 + resolution - 1;
+                var delay = parity == 0 ? _agaOddReloadDelay : _agaEvenReloadDelay;
                 if ((x & (_agaBits - 1)) != (delay & (_agaBits - 1))) continue;
                 for (var p = parity; p < _effectivePlaneCount; p += 2)
                 {
@@ -88,6 +87,16 @@ internal sealed partial class LightweightVideo
             }
         }
         return code & _effectivePlaneMask;
+    }
+
+    private void UpdateAgaReloadDelays()
+    {
+        var resolution = (_effectiveBplcon0 & 0x8000) != 0 ? 2 : (_effectiveBplcon0 & 0x40) != 0 ? 4 : 1;
+        var scroll = _effectiveBplcon1;
+        var odd = ((scroll & 15) << 2) | (scroll >> 8 & 3) | ((scroll >> 10 & 3) << 6);
+        var even = ((scroll >> 4 & 15) << 2) | (scroll >> 12 & 3) | ((scroll >> 14 & 3) << 6);
+        _agaOddReloadDelay = odd * resolution / 4 + resolution - 1;
+        _agaEvenReloadDelay = even * resolution / 4 + resolution - 1;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -103,7 +112,7 @@ internal sealed partial class LightweightVideo
         Span<int> placements = stackalloc int[8];
         for (var i = 0; i < resolution * 2; i++)
         {
-            var code = codes[i] = ShiftAgaPixel(x * resolution + i, resolution);
+            var code = codes[i] = ShiftAgaPixel(x * resolution + i);
             placements[i] = dual ? _agaDualPixels[code] >> 8 : code == 0 ? 4 : _effectiveSpritePlayfieldPlacement;
         }
         for (var i = 0; i < resolution * 2; i++)

@@ -8,8 +8,7 @@ internal sealed class NativeInputScript
         short MouseDeltaY = 0, ushort KeyCode = 0, byte JoystickPort0 = 0, byte JoystickPort1 = 0,
         string? AdfPath = null, bool EjectAdf = false, int Drive = 0, string? DiskPath = null);
     private readonly Entry[] _entries;
-    private readonly byte[]?[] _media;
-    private readonly LightweightIpfImage?[] _ipf;
+    private readonly LightweightFloppyImage?[] _media;
     private int _next;
 
     internal NativeInputScript(string path, Func<string, byte[]> readAdf, int driveCount = 1)
@@ -17,8 +16,7 @@ internal sealed class NativeInputScript
         _entries = JsonSerializer.Deserialize<Entry[]>(File.ReadAllText(path),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ??
             throw new ArgumentException("Input script must be an array.");
-        _media = new byte[]?[_entries.Length];
-        _ipf = new LightweightIpfImage?[_entries.Length];
+        _media = new LightweightFloppyImage?[_entries.Length];
         var directory = Path.GetDirectoryName(Path.GetFullPath(path))!;
         for (var i = 0; i < _entries.Length; i++)
         {
@@ -41,8 +39,7 @@ internal sealed class NativeInputScript
                 var selector = mediaPath.IndexOf("#/", StringComparison.Ordinal);
                 var resolvedPath = selector < 0 ? Path.GetFullPath(mediaPath, directory) :
                     Path.GetFullPath(mediaPath[..selector], directory) + mediaPath[selector..];
-                _media[i] = readAdf(resolvedPath);
-                if (IsIpf(_media[i]!, mediaPath)) _ipf[i] = LightweightIpfImage.Prepare(_media[i]!);
+                _media[i] = LightweightFloppyImage.Prepare(readAdf(resolvedPath), mediaPath);
             }
         }
     }
@@ -57,21 +54,15 @@ internal sealed class NativeInputScript
         {
             var e = _entries[_next];
             if (e.EjectAdf) m.EjectAdf(e.Drive);
-            if (_ipf[_next] is { } ipf) m.MountIpf(e.Drive, ipf);
-            else if (_media[_next] is { } media) m.MountAdf(e.Drive, media);
+            if (_media[_next] is { } media) m.MountDisk(e.Drive, media);
             _next++;
             m.SubmitInput(new(e.JoystickPort0, e.JoystickPort1, e.MouseButtons,
                 e.MouseDeltaX, e.MouseDeltaY, e.KeyCode));
         }
     }
 
-    private static bool IsIpf(byte[] image, string path)
-        => Path.GetExtension(path).Equals(".ipf", StringComparison.OrdinalIgnoreCase) ||
-            (!Path.GetExtension(path).Equals(".adf", StringComparison.OrdinalIgnoreCase) && image.AsSpan().StartsWith("CAPS"u8));
-
     internal static void Mount(LightweightA500Machine machine, int drive, byte[] image, string path)
     {
-        if (IsIpf(image, path)) machine.MountIpf(drive, image);
-        else machine.MountAdf(drive, image);
+        machine.MountDisk(drive, image, path);
     }
 }

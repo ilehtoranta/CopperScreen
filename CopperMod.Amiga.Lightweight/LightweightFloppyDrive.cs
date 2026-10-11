@@ -35,13 +35,14 @@ internal sealed class LightweightFloppyDrive
     internal bool Mounted => _tracks is not null;
     internal LightweightFloppyFormat Format { get; private set; }
     internal bool CanWrite => Format == LightweightFloppyFormat.Adf;
+    internal bool UsesPreservedReceiver => _trackLengths is not null;
     internal bool WriteProtected
     {
-        get => Format == LightweightFloppyFormat.Ipf || _writeProtected;
+        get => Mounted && !CanWrite || _writeProtected;
         set
         {
-            if (!value && Format == LightweightFloppyFormat.Ipf)
-                throw new InvalidOperationException("IPF media is permanently read-only.");
+            if (!value && Mounted && !CanWrite)
+                throw new InvalidOperationException($"{Format} media is permanently read-only.");
             _writeProtected = value;
         }
     }
@@ -89,6 +90,15 @@ internal sealed class LightweightFloppyDrive
     }
 
     internal void MountIpf(LightweightIpfImage image)
+        => MountPreserved(image, LightweightFloppyFormat.Ipf);
+
+    internal void MountReadOnly(ReadOnlySpan<byte> image, LightweightFloppyFormat format)
+    {
+        Mount(image);
+        Format = format;
+    }
+
+    internal void MountPreserved(LightweightIpfImage image, LightweightFloppyFormat format)
     {
         ArgumentNullException.ThrowIfNull(image);
         var tracks = image.Tracks;
@@ -101,7 +111,7 @@ internal sealed class LightweightFloppyDrive
         _trackLengths = lengths;
         _unstableMasks = masks;
         _cellDeadlines = image.CellDeadlines;
-        Format = LightweightFloppyFormat.Ipf;
+        Format = format;
         SelectTrack(0, preservePhase: false);
         Array.Clear(_dirtyTracks);
         IsDirty = false;
@@ -165,7 +175,7 @@ internal sealed class LightweightFloppyDrive
             if (Mounted) DiskChanged = false;
             if ((pins & 2) != 0)
                 Cylinder = Math.Max(0, Cylinder - 1);
-            else if (Cylinder < (Format == LightweightFloppyFormat.Ipf ? 83 : 79))
+            else if (Cylinder < (UsesPreservedReceiver ? 83 : 79))
                 Cylinder++;
             // At the model's end stop, further inward pulses leave the head
             // in place. They must not halt the guest or skip a side change.
@@ -313,7 +323,7 @@ internal sealed class LightweightFloppyDrive
 
     internal byte[] ExportAdf()
     {
-        if (Format == LightweightFloppyFormat.Ipf) throw new InvalidOperationException("Preserved IPF tracks cannot be exported as standard ADF.");
+        if (Mounted && !CanWrite) throw new InvalidOperationException($"Read-only {Format} media cannot be exported as standard ADF.");
         if (_image is null || _tracks is null) throw new InvalidOperationException("No ADF is mounted.");
         var result = (byte[])_image.Clone();
         const int bytesPerTrack = 11 * 512;

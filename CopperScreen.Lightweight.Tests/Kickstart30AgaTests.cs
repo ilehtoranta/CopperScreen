@@ -43,7 +43,7 @@ public sealed class Kickstart30AgaTests : IDisposable
         Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(draft.ToStartupOptions(_directory)));
     }
     [Theory]
-    [InlineData("denise")] [InlineData("agnus")] [InlineData("cpu")] [InlineData("chip")] [InlineData("slow")] [InlineData("fast")] [InlineData("ntsc")]
+    [InlineData("denise")] [InlineData("agnus")] [InlineData("cpu")] [InlineData("chip")] [InlineData("slow")] [InlineData("ntsc")]
     public void A1200MilestoneRejectsUnvalidatedMixedLayouts(string mutation)
     {
         var draft = Draft();
@@ -54,7 +54,6 @@ public sealed class Kickstart30AgaTests : IDisposable
             case "cpu": draft.CpuBackend = M68kBackendKind.AccurateM68000; break;
             case "chip": draft.ChipRamKb = 1024; break;
             case "slow": draft.PseudoFastRamKb = 512; break;
-            case "fast": draft.RealFastRamKb = 2048; break;
             case "ntsc": draft.Chipset = draft.Chipset with { VideoStandard = VideoStandard.Ntsc }; break;
         }
         Assert.NotNull(CopperScreenAvailability.GetUnavailableReason(draft, _directory));

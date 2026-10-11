@@ -23,7 +23,7 @@ internal static class CopperScreenAvailability
     public static bool IsChoiceAvailable(string setting, string value) => setting switch
     {
         "Engine" => value == "Lightweight",
-        "CPU backend" => value is "AccurateM68000" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040",
+        "CPU backend" => value is "AccurateM68000" or "AccurateM68010" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040" or "JitM68040",
         "Kickstart" or "Boot method" => value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom" or "MinimalDiskBoot",
         "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M" or "AgaAlice",
         "Connected" => value is "1" or "2" or "3" or "4",
@@ -53,6 +53,7 @@ internal static class CopperScreenAvailability
         "OcsDenise" => "8362 · OCS Denise",
         "EcsDenise" => "8373 · ECS Denise",
         "AccurateM68000" => "Motorola 68000",
+        "AccurateM68010" => "Motorola 68010 (experimental)",
         "AccurateM68EC020" => "Motorola 68EC020 (experimental)",
         "AccurateM68020" => "Motorola 68020 (experimental)",
         "AccurateM68030" => "Motorola 68030 (experimental)",

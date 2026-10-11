@@ -147,6 +147,8 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     }
 
     [Theory]
+    [InlineData("AccurateM68010", Copper68k.M68kCpuModel.M68010)]
+    [InlineData("JitM68040", Copper68k.M68kCpuModel.M68040)]
     [InlineData("AccurateM68EC020", Copper68k.M68kCpuModel.M68EC020)]
     [InlineData("AccurateM68030", Copper68k.M68kCpuModel.M68030)]
     [InlineData("AccurateM68040", Copper68k.M68kCpuModel.M68040)]
@@ -170,6 +172,8 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         using var replacement = new CopperScreenLightweightSession(reloaded.ToStartupOptions(_directory), original);
         Assert.Equal(Copper68k.M68kCpuModel.M68000, original.Machine.CpuModel);
         Assert.Equal(model, replacement.Machine.CpuModel);
+        Assert.Equal(backend == M68kBackendKind.JitM68040 ? Copper68k.M68kExecutionMode.Jit : Copper68k.M68kExecutionMode.Interpreter,
+            replacement.Machine.CpuExecutionMode);
         replacement.RenderNextFrame(replacement.Framebuffer);
         Assert.Null(replacement.FaultMessage);
         Assert.Equal(1, replacement.Machine.CompletedFrames);
@@ -216,6 +220,57 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var failed = await runtime.InsertDriveDiskAsync(0, invalid, false);
         Assert.False(failed.Success); Assert.Equal(LightweightFloppyFormat.Ipf, failed.State.Drives[0].Format);
         Assert.Equal(original, File.ReadAllBytes(path));
+    }
+
+    [Theory]
+    [InlineData("adz", LightweightFloppyFormat.Adz)]
+    [InlineData("dms", LightweightFloppyFormat.Dms)]
+    [InlineData("adf", LightweightFloppyFormat.ExtendedAdf)]
+    [InlineData("scp", LightweightFloppyFormat.Scp)]
+    public async Task AdditionalFormatsSupportDirectZipAndPendingSwaps(string extension, LightweightFloppyFormat format)
+    {
+        var sectors = new byte[901120];
+        var bytes = extension switch
+        {
+            "adz" => CopperMod.Amiga.Lightweight.Tests.DiskFormatFixture.Adz(sectors),
+            "dms" => CopperMod.Amiga.Lightweight.Tests.DiskFormatFixture.Dms(sectors),
+            "scp" => CopperMod.Amiga.Lightweight.Tests.DiskFormatFixture.Scp(0, 80, 160),
+            _ => CopperMod.Amiga.Lightweight.Tests.DiskFormatFixture.Extended(sectors)
+        };
+        var path = Path.Combine(_directory, "disk." + extension); File.WriteAllBytes(path, bytes);
+        Assert.Contains("*." + extension, MainWindow.AmigaDiskImagePickerPatterns);
+        Assert.True(MainWindow.IsSupportedDiskDrop(path));
+        Assert.Equal(format, CopperScreenAdfImage.Load(path).Format);
+        var startupDraft = CopperScreenSettingsDraft.FromStartupOptions(Options());
+        startupDraft.DriveDiskPaths[0] = path; startupDraft.DriveWriteProtected[0] = false;
+        using (var startup = new CopperScreenLightweightSession(startupDraft.ToStartupOptions(_directory)))
+            Assert.True(startup.Machine.IsDriveWriteProtected(0));
+        var zip = Path.Combine(_directory, "disks.zip");
+        using (var archive = System.IO.Compression.ZipFile.Open(zip, System.IO.Compression.ZipArchiveMode.Create))
+        {
+            using (var stream = archive.CreateEntry("nested/disk." + extension).Open()) stream.Write(bytes);
+        }
+        Assert.Equal(format, CopperScreenAdfImage.Load(zip).Format);
+        var selected = zip + "#/nested/disk." + extension;
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options()); draft.FloppyDriveCount = 4;
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        for (var drive = 0; drive < 4; drive++)
+        {
+            Assert.True(session.InsertLoadedDisk(drive, selected, CopperScreenDiskImageArchive.LoadDiskImage(selected), true));
+            Assert.False(session.SetDriveWriteProtected(drive, false));
+        }
+        for (var i = 0; i < 26; i++) session.RenderNextFrame(session.Framebuffer);
+        for (var drive = 0; drive < 4; drive++)
+        {
+            Assert.Equal(format, session.Machine.GetDriveFormat(drive));
+            Assert.True(session.Machine.IsDriveWriteProtected(drive));
+            Assert.Throws<InvalidOperationException>(() => session.ExportAdf(drive));
+        }
+        session.TogglePaused(); using var runtime = CopperScreenRuntime.CreateForTests(session); runtime.Start();
+        var invalid = Path.Combine(_directory, "invalid." + extension); File.WriteAllBytes(invalid, new byte[8]);
+        var failed = await runtime.InsertDriveDiskAsync(0, invalid, false);
+        Assert.False(failed.Success); Assert.Equal(format, failed.State.Drives[0].Format);
+        Assert.Equal(bytes, File.ReadAllBytes(path));
     }
 
     [Fact]
@@ -292,7 +347,6 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
 
     [Theory]
     [InlineData("expanded-copperstart")]
-    [InlineData("expanded-m68040-kickstart-rom")]
     [InlineData("expanded-m68040-jit-kickstart31-rtg")]
     public void UnsupportedProfilesKeepTheirHardwareAndNeverSelectLegacyAutomatically(string id)
     {
@@ -695,7 +749,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         session.TogglePaused();
         using var current = CopperScreenRuntime.CreateForTests(session);
         current.Start();
-        var invalid = Options("--cpu", "jitm68040");
+        var invalid = Options("--cpu", "68060");
         Assert.Throws<NotSupportedException>(() => CopperScreenRuntime.CreateReplacement(current,
             () => CopperScreenRuntime.CreateForTests(CopperScreenSession.Create(invalid))));
         Assert.True(current.CurrentState.IsPaused);
@@ -792,6 +846,13 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var script = Environment.GetEnvironmentVariable("COPPERSCREEN_LIGHTWEIGHT_NATIVE_SCRIPT")!;
         using var json = System.Text.Json.JsonDocument.Parse(File.ReadAllText(script));
         var entries = json.RootElement.EnumerateArray().ToArray();
+        // Use lemmings-cpu-bus-timing-v1.json: the independently validated
+        // four-clock CPU bus correction needs the later disk/menu input sequence.
+        // Reject the old 3,600-field click before replaying its stale expectations.
+        Assert.True(entries.Length == 19 && entries[2].GetProperty("frame").GetInt32() == 7200,
+            "Native replay requires Workloads/lemmings-cpu-bus-timing-v1.json.");
+        const int warmupFields = 14520;
+        const int measuredFields = 3600;
         // Exercise the application default route, not a directly constructed adapter.
         var options = CopperScreenStartupOptions.Parse(["--rom", rom, disk], AppContext.BaseDirectory);
         using var created = CopperScreenSession.Create(options);
@@ -801,10 +862,10 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         const ulong prime = 1099511628211UL;
         var next = 0;
         var activeFields = 0;
-        for (var frame = 0; frame < 14520; frame++)
+        for (var frame = 0; frame < warmupFields + measuredFields; frame++)
         {
-            if (keyboard && frame == 7900) session.KeyDown((AmigaRawKey)0x44);
-            if (keyboard && frame == 7906) session.KeyUp((AmigaRawKey)0x44);
+            if (keyboard && frame == 11500) session.KeyDown((AmigaRawKey)0x44);
+            if (keyboard && frame == 11506) session.KeyUp((AmigaRawKey)0x44);
             while (next < entries.Length && entries[next].GetProperty("frame").GetInt32() == frame)
             {
                 var entry = entries[next++];
@@ -824,27 +885,27 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
             var frames = session.RenderAudio(audio, 48000, 2);
             Assert.False(session.IsPaused);
             Assert.False(session.IsInterlaced); // This frozen workload is progressive.
-            if (keyboard && frame == 7915)
+            if (keyboard && frame == 11515)
             {
                 // Test-only inspection keeps serial internals out of the host API.
                 var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
                 Assert.Equal(false, typeof(LightweightA500Machine).GetProperty("KeyboardWaitingForHandshake", flags)!.GetValue(session.Machine));
                 Assert.Equal(long.MaxValue, typeof(LightweightA500Machine).GetProperty("KeyboardNextCycle", flags)!.GetValue(session.Machine));
             }
-            if (frame < 10920) continue;
+            if (frame < warmupFields) continue;
             var active = false;
             for (var i = 0; i < frames * 2; i++) if (audio[i] != 0) active = true;
             if (active) activeFields++;
             output = (output ^ 284204u) * prime;
             output = (output ^ (uint)(frames * 2)) * prime;
-            var pixel = ((frame - 10920) * 131) % 284204;
+            var pixel = ((frame - warmupFields) * 131) % 284204;
             for (var i = 0; i < 257; i++)
             {
                 // Consume the adapter's output, mapped back from host doubled rows.
                 output = (output ^ (uint)session.Framebuffer[(pixel / 908) * 1816 + pixel % 908]) * prime;
                 pixel = (pixel + 557) % 284204;
             }
-            var sample = ((frame - 10920) * 17) % (frames * 2);
+            var sample = ((frame - warmupFields) * 17) % (frames * 2);
             for (var i = 0; i < 61; i++)
             {
                 output = (output ^ (ushort)(short)(audio[sample] * 32768f)) * prime;
@@ -857,17 +918,13 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         cpuHash = (cpuHash ^ (ulong)cpu.Cycles) * prime;
         foreach (var value in cpu.D) cpuHash = (cpuHash ^ value) * prime;
         foreach (var value in cpu.A) cpuHash = (cpuHash ^ value) * prime;
-        // A500 chip-RAM mirroring makes Kickstart's RAM probe exit 20 cycles
-        // earlier. The unchanged script still enters level one. The hardware
-        // basis, before/after boot trace and previous identities are retained
-        // in docs/engine/SUPER_CARS_II_INVESTIGATION.md. Frozen performance
-        // protocols retain their historical expectations.
-        Assert.Equal(2063189662, session.Machine.Cycle);
-        if (!keyboard) Assert.Equal(0x249E90223C45891FUL, cpuHash);
-        // Final-row blitter modulo corrects subsequent chained sprite/image blits.
-        // CPU/beam identities remain unchanged; prior output 45AB46F7600E1C9F
-        // and native before/after captures are retained in BLITTER_FINAL_MODULO.md.
-        Assert.Equal(0x7D31C3889FF73760UL, output);
+        // These identities were validated before timing on 2026-09-25, with
+        // scalar controls and level-one captures, for the corrected CPU bus
+        // spacing. See docs/engine/LOTUS_III_PERFORMANCE_2026-09-25.md.
+        // Earlier scripts, output identities and frozen protocols remain historical.
+        Assert.Equal(2574756850, session.Machine.Cycle);
+        if (!keyboard) Assert.Equal(0x505451D28DF1C053UL, cpuHash);
+        Assert.Equal(0x9DE548805866DC63UL, output);
         Assert.True(activeFields > 0);
         Assert.Equal(entries.Length, next);
         Assert.Null(session.Machine.UnsupportedActiveFeature);

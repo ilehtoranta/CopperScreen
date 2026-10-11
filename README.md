@@ -6,12 +6,16 @@ a lightweight emulation engine, a disk-image library and a headless runner.
 ## Supported machine
 
 - PAL A500 with OCS 8362 Denise and a Motorola 68000 by default; ECS 8373 Denise and experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
-- Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional 512 KiB–8 MiB Autoconfig Fast RAM is separate. See [native boot and DMA evidence](docs/engine/AGNUS_CHIP_RAM_2026-10-01.md).
+- Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional Autoconfig Fast RAM is separate, up to 8 MiB with 24-bit CPUs or 1 GiB with full 32-bit CPUs. See [CPU/memory configuration and native evidence](docs/engine/CPU_MEMORY_UPGRADES.md).
 - Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
 - Optional [Minimal disk boot](docs/engine/MINIMAL_DISK_BOOT.md): experimental ROM-free ADF bootstrap for takeover demos/games on the default PAL 68000 A500. It supplies a small boot-service surface; DOS and Workbench require native Kickstart.
-- One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, and read-only IPF, including selected ZIP entries. The default remains one write-protected drive.
+- One to four floppy drives (DF0–DF3): standard 880 KiB ADF with explicit Save ADF, plus read-only ADZ, DMS, modern extended ADF, IPF and SCP, including selected ZIP entries. SCP uses a decoded first revolution. See [format support and limits](docs/engine/DISK_FORMATS.md). The default remains one write-protected drive.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
+- Live [shared folders](docs/engine/HOST_DIRECTORIES.md), read-only by default, with native DOS access, optional Workbench folder boot, persistent comments/protection and reversible Windows filename mappings. Mount changes require restart; users supply the OS files.
 - Mouse and keyboard input, framebuffer output and stereo audio.
+- Optional Legacy-compatible A501 RTC, selected in Settings > Memory > RTC clock
+  or runner `--rtc`. Host local time and guest-set session offsets; see
+  [RTC behavior and limits](docs/engine/RTC.md).
 - Initial PAL A1200 profile: Alice/Lisa, 68EC020, 2 MiB Chip RAM and native Kickstart 3.0 (39.106). Eight-plane, 256-colour RGB24 output and native CopperHDF boot/persistence are verified. HAM8, dual playfields and enhanced sprites remain next steps; see [AGA evidence and limits](docs/engine/AGA_INITIAL_2026-10-01.md).
 
 CopperStart, Legacy, full AGA compatibility, A2024 external scan conversion, other accelerator profiles and physical IDE/SCSI controllers are not supported by
@@ -27,14 +31,17 @@ ROMs, operating-system files and game media are not included.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-CopperScreen pins the public mainline [Copper68k `1.5.1`](https://www.nuget.org/packages/Copper68k/1.5.1)
-release for 040 instruction-fetch corrections, experimental 030/040 and a separate
-060 diagnostic core. A clean checkout restores from NuGet.org without a local
-candidate feed. The explicit A1200 EC020 profile and native ROM operand forms
+Copper68k's published baseline is [version `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3).
+This development worktree pins the unpublished `1.5.4-detroit-dev.2` package
+from the ignored Detroit local feed. Build that package from the corrected
+CopperMod source before restoring this worktree; no sibling project reference
+is used. See
+[CPU support, validation and remaining limits](docs/engine/CPU_SUPPORT.md).
+The explicit A1200 EC020 profile and native ROM operand forms
 are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding
 CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
 The [Brian the Lion investigation](docs/engine/BRIAN_THE_LION_2026-10-03.md)
-records further unpublished CPU corrections and Paula's software request bit 14.
+records preceding CPU corrections now included in 1.5.3, and Paula's software request bit 14.
 Advanced CPU profiles remain experimental;
 physical accelerator timing and full compatibility are not certified. The 060 is
 unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
@@ -60,11 +67,21 @@ dotnet run --project CopperScreen -c Release -- --profile lightweight-a500-kicks
 
 Use `--profile a1200-aga-pal --rom "path/to/A1200-39.106.rom"` for the initial AGA profile.
 
-CPU changes require restarting the emulated machine. The 020 choices use the
-existing OCS/RAM profile with the selected native ROM; they do not select an A1200 or AGA machine.
-Settings > Memory accepts Fast RAM sizes 0, 512, 1024, 2048, 4096 or 8192 KiB.
+Storage settings include **Shared folders**. Desktop and runner accept repeatable
+`--host-dir HOST0 Exchange "path/to/folder"` (read-only) or `--host-dir-rw` with
+the same three arguments. Add `--host-dir-boot-priority HOST0 0` to boot a folder
+containing your Workbench installation. Native Kickstart is required; Minimal disk
+boot has no DOS. See [folder behavior and native verification](docs/engine/HOST_DIRECTORIES.md).
+
+The welcome screen and Settings > Setup offer Amiga 500 (default), Amiga 500
+with ECS and experimental Amiga 1200, with CPU and optional-feature controls.
+CPU changes require restarting the emulated machine and preserve the selected
+motherboard. Both A500 and A1200 support CPU upgrades and configurable Fast RAM.
+The RAM selector offers standard power-of-two sizes from 512 KiB to the CPU's
+limit: 8 MiB for 68000/68010/68EC020, or 1 GiB for full 68020/030/040.
+Banks above 8 MiB require native Kickstart 3.x; see [choices and verification limits](docs/engine/CPU_MEMORY_UPGRADES.md).
 Kickstart assigns the address; size changes require restarting the machine.
-The runner accepts `--fast-ram-kib` with the same sizes.
+The runner accepts `--fast-ram-kib` with the same sizes, up to 1048576 KiB.
 The Memory page also selects Agnus and compatible Chip RAM sizes. The runner
 accepts `--agnus 8371|8372a|8375-318069-10`, `--chip-ram-kib 512|1024|2048`
 and `--slow-ram-kib 0|512`; unsupported combinations fail explicitly.
@@ -134,7 +151,7 @@ This creates build artifacts; it does not publish a release.
 | --- | --- |
 | CopperScreen | Desktop interface, input, presentation and audio delivery. |
 | [CopperMod.Amiga.Lightweight](CopperMod.Amiga.Lightweight/README.md) | Independent A500 engine with a single execution clock. |
-| [CopperDisk](CopperDisk/README.md) | Disk-image decoding and hardfile metadata/range handling. Library floppy formats remain broader than the application's ADF/IPF support. |
+| [CopperDisk](CopperDisk/README.md) | ADF/ADZ/DMS/IPF/SCP decoding used by the engine and host, plus hardfile metadata/range handling. |
 | CopperMod.Amiga.Lightweight.Runner | Headless execution and workload measurement. |
 | [Copper68k](https://github.com/ilehtoranta/CopperMod/tree/main/Copper68k) | Shared CPU interpreter, consumed as a pinned NuGet package. |
 

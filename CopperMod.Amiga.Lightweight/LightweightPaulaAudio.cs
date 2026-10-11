@@ -22,6 +22,10 @@ internal sealed partial class LightweightPaulaAudio
     internal long LastOutputCycle { get; private set; } = long.MinValue;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool OwnsPendingOutputSlot(long cycle)
+        => PendingOutputCycle == cycle;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool OwnsOutputSlot(long cycle)
         => PendingOutputCycle == cycle || LastOutputCycle == cycle;
 

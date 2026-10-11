@@ -39,7 +39,8 @@ internal sealed partial class MainWindow
         var layout = CreateSettingsPageLayout();
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
-        layout.Children.Add(SettingsNote("Amiga 500 · PAL · Motorola 68000 by default\nInitial Amiga 1200 PAL support is also available\nConfigurable Agnus and Chip RAM · up to four floppy drives"));
+        layout.Children.Add(CreateMachineControls(welcome: false));
+        layout.Children.Add(SettingsNote("Selecting a model restores its CPU, chipset and memory defaults. Selected ROMs and disks are kept; choose a matching ROM before starting. Change memory sizes and connected drives in their settings pages."));
         var form = CreateSettingsGroupForm();
         _kickstartSourceBox = AddComboSetting(form, "Boot method", ["Kickstart13Rom", "Kickstart31Rom", "KickstartRom", "MinimalDiskBoot", "CopperStart", "DiagRom"]);
         _kickstartSourceBox.SelectionChanged += (_, _) => UpdateBootMethodControls();
@@ -53,7 +54,7 @@ internal sealed partial class MainWindow
         _romValidation = SettingsNote("Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
-        _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, IPF or ZIP", MinWidth = 0 };
+        _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, ADZ, DMS, IPF, SCP or ZIP", MinWidth = 0 };
         _setupDiskBox.TextChanged += (_, _) =>
         {
             if (_updatingSettingsUi || _drivePathBoxes[0] == null) return;
@@ -67,7 +68,12 @@ internal sealed partial class MainWindow
 
         var options = CreateSettingsGroupForm();
         _engineBox = AddComboSetting(options, "Engine", ["Lightweight", "Legacy"]);
-        _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"]);
+        _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"], markRestart: false);
+        _cpuBackendBox.SelectionChanged += (_, _) =>
+        {
+            if (_updatingSettingsUi || _updatingMachineControls || _cpuBackendBox.SelectedItem is not string selected) return;
+            EditMachine(draft => { CopperScreenMachinePresets.SetCpu(draft, Enum.Parse<M68kBackendKind>(selected)); draft.MarkRequiresRestart(); return draft; });
+        };
         options.Children.Add(SettingsNote("Greyed choices are planned and not yet available. They cannot be selected."));
         var reset = CreatePanelButton("Use supported Amiga 500 settings", UseSupportedMachine);
         options.Children.Add(reset);
@@ -114,7 +120,7 @@ internal sealed partial class MainWindow
             var choices = CopperScreenAvailability.ChipRamChoices(model);
             _chipRamBox.ItemsSource = choices;
             _chipRamBox.SelectedItem = choices.Contains(previous) ? previous : choices[0];
-            _pseudoFastRamBox.Text = _chipRamBox.SelectedItem is "512" ? "512" : "0";
+            if (_chipRamBox.SelectedItem is not "512") _pseudoFastRamBox.Text = "0";
         }
         finally { _updatingSettingsUi = false; }
         MarkSettingsRestartRequired();
@@ -169,6 +175,7 @@ internal sealed partial class MainWindow
     private void ConfigureChoices(ComboBox combo, string label)
     {
         bool Available(string value) => CopperScreenAvailability.IsChoiceAvailable(label, value) &&
+            (label != "CPU backend" || CopperScreenMachinePresets.CpuChoices(_settingsDraft).Contains(value)) &&
             (label != "Profile kind" || value != "Mouse" ||
              _controllerProfileChooser.SelectedItem is not CopperScreenControllerProfile profile ||
              !string.Equals(profile.Id, _settingsDraft.Input.Port2ProfileId, StringComparison.OrdinalIgnoreCase));

@@ -234,6 +234,43 @@ public sealed class LightweightA500MachineTests
 
         Assert.Equal((ushort)0x1234, value);
         Assert.Equal(17, cycle);
+        Assert.Equal(17, machine.Cycle);
+    }
+
+    [Theory]
+    [InlineData(0, false)]
+    [InlineData(1, false)]
+    [InlineData(2, false)]
+    [InlineData(0, true)]
+    [InlineData(1, true)]
+    [InlineData(2, true)]
+    public void NonContendedTransferStillAdvancesDevicesAcrossAField(int size, bool write)
+    {
+        using var machine = new LightweightA500Machine();
+        long cycle = LightweightClock.PalLongFieldCycles + 5;
+        const uint address = 0x00FC0100;
+        if (write)
+        {
+            if (size == 0) machine.WriteByte(address, 0x12, ref cycle, M68kBusAccessKind.CpuDataWrite);
+            else if (size == 1) machine.WriteWord(address, 0x1234, ref cycle, M68kBusAccessKind.CpuDataWrite);
+            else machine.WriteLong(address, 0x12345678, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        }
+        else
+        {
+            if (size == 0) Assert.Equal(0xFF, machine.ReadByte(address, ref cycle, M68kBusAccessKind.CpuDataRead));
+            else if (size == 1) Assert.Equal(0xFFFF, machine.ReadWord(address, ref cycle, M68kBusAccessKind.CpuDataRead));
+            else Assert.Equal(0xFFFFFFFFu, machine.ReadLong(address, ref cycle, M68kBusAccessKind.CpuDataRead));
+        }
+
+        Assert.Equal(LightweightClock.PalLongFieldCycles + 5, cycle);
+        Assert.Equal(cycle, machine.Cycle);
+        Assert.Equal(1, machine.CompletedFrames);
+        Assert.Equal(0x0020, machine.Intreq & 0x0020);
+        // A stale request cannot move the owner clock back or acquire an Agnus slot.
+        cycle = 17;
+        machine.ReadWord(address, ref cycle, M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(machine.Cycle, cycle);
+        Assert.Equal(LightweightClock.PalLongFieldCycles + 5, cycle);
     }
 
     [Fact]
@@ -539,6 +576,31 @@ public sealed class LightweightA500MachineTests
         // the written latch.
         Assert.Equal(0xFF, value);
         Assert.Equal(20, cycle);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void CiaInterruptReadAtPeripheralEdgeObservesThenClearsUnderflow(bool wordAccess)
+    {
+        using var machine = new LightweightA500Machine();
+        long cycle = 0;
+        machine.WriteByte(0x00BFD400, 3, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteByte(0x00BFD500, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteByte(0x00BFDD00, 0x81, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteByte(0x00BFDE00, 0x11, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(70, machine.NextCiaInterruptCycle);
+
+        cycle = 69;
+        var value = wordAccess
+            ? machine.ReadWord(0x00BFDD00, ref cycle, M68kBusAccessKind.CpuDataRead)
+            : machine.ReadByte(0x00BFDD00, ref cycle, M68kBusAccessKind.CpuDataRead);
+
+        Assert.Equal(wordAccess ? 0x81FF : 0x81, value);
+        Assert.Equal(70, cycle);
+        Assert.Equal(cycle, machine.Cycle);
+        Assert.Equal(0, machine.CiaBPendingInterrupts);
+        Assert.Equal(0x2000, machine.Intreq & 0x2000);
     }
 
     [Fact]

@@ -55,7 +55,8 @@ internal sealed class CopperScreenProfile
 		CopperScreenInputOptions input,
 		CopperScreenPresentationOptions presentationOptions,
 		bool autoStartWorkbenchStartupSequence,
-		string? configPath)
+        string? configPath,
+        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null)
 	{
 		Id = id;
 		DisplayName = displayName;
@@ -76,7 +77,16 @@ internal sealed class CopperScreenProfile
 		KickstartRomPath = kickstartRomPath;
 		MemoryAllocator = memoryAllocator;
 		MediaDrives = mediaDrives;
-		HardDrives = hardDrives;
+        HardDrives = hardDrives;
+        HostDirectories = hostDirectories?.ToArray() ?? [];
+        foreach (var mount in HostDirectories) mount.Validate();
+        // Auto/RDB names come from media and are checked by the replacement
+        // machine. Do not invent DH0 and reject a valid RDB with a DH7 partition.
+        var storageNames = HardDrives.Where(h => h.Mode == AmigaHardfileMountMode.Partition).Select(h => h.Partition?.DeviceName ?? $"DH{h.Unit}").ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var mount in HostDirectories)
+            if (!storageNames.Add(mount.DeviceName)) throw new ArgumentException($"Duplicate storage device name {mount.DeviceName}.");
+        if (HostDirectories.Select(m => m.VolumeName).Distinct(StringComparer.OrdinalIgnoreCase).Count() != HostDirectories.Count)
+            throw new ArgumentException("Shared folders require unique volume names.");
 		Input = input;
 		PresentationOptions = presentationOptions;
 		AutoStartWorkbenchStartupSequence = autoStartWorkbenchStartupSequence;
@@ -121,7 +131,8 @@ internal sealed class CopperScreenProfile
 
 	public IReadOnlyList<CopperScreenMediaDriveSettings> MediaDrives { get; }
 
-	public IReadOnlyList<CopperScreenHardfileSettings> HardDrives { get; }
+    public IReadOnlyList<CopperScreenHardfileSettings> HardDrives { get; }
+    public IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration> HostDirectories { get; }
 
 	public CopperScreenInputOptions Input { get; }
 
@@ -299,7 +310,7 @@ internal sealed class CopperScreenProfile
 			input,
 			presentationOptions,
 			autoStartWorkbenchStartupSequence,
-			Path.GetFullPath(path));
+            Path.GetFullPath(path), config.HostDirectories);
 	}
 
 	internal static CopperScreenProfile Create(
@@ -325,7 +336,8 @@ internal sealed class CopperScreenProfile
 		bool autoStartWorkbenchStartupSequence = true,
 		long rtgVramSize = 0,
 		AmigaChipset? chipset = null,
-		KickstartVersion kickstartVersion = KickstartVersion.Kickstart13)
+        KickstartVersion kickstartVersion = KickstartVersion.Kickstart13,
+        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null)
 	{
 		if (floppyDriveCount is < 1 or > 4)
 		{
@@ -356,7 +368,7 @@ internal sealed class CopperScreenProfile
 			input,
 			presentationOptions ?? CopperScreenPresentationOptions.Default,
 			autoStartWorkbenchStartupSequence,
-			configPath);
+            configPath, hostDirectories);
 	}
 
 	private static string? ResolveProfilePath(string specifier, string baseDirectory)
@@ -575,6 +587,7 @@ internal sealed class CopperScreenProfile
 		return backend switch
 		{
 			"interpreter" or "accurate" or "accuratem68000" or "m68000" => M68kBackendKind.AccurateM68000,
+			"accuratem68010" or "m68010" or "68010" or "010" => M68kBackendKind.AccurateM68010,
 			"accuratem68020" or "m68020" or "68020" or "020" or "ocs6802014mhz" => M68kBackendKind.AccurateM68020,
 			"accuratem68ec020" or "m68ec020" or "68ec020" or "ec020" or "020ec" => M68kBackendKind.AccurateM68EC020,
 			"accuratem68030" or "m68030" or "68030" or "030" or "ocs6803014mhz" => M68kBackendKind.AccurateM68030,
@@ -909,7 +922,8 @@ internal sealed class CopperScreenProfile
 
 		public MediaFile? Media { get; set; }
 
-		public HardDriveFile[]? HardDrives { get; set; }
+        public HardDriveFile[]? HardDrives { get; set; }
+        public CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration[]? HostDirectories { get; set; }
 
 		public InputFile? Input { get; set; }
 

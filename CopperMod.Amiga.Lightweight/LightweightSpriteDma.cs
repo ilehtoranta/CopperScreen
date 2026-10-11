@@ -157,18 +157,19 @@ internal sealed class LightweightSpriteDma
         PublishNextCycle();
     }
 
-    internal void Step(long cycle, LightweightA500Machine machine)
+    internal void Step<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         System.Diagnostics.Debug.Assert(
             cycle == NextCycle,
             "Sprite DMA must advance at its published physical phase.");
 
-        if (_fetchModeCycle <= cycle)
+        if (TPath.Aga && _fetchModeCycle <= cycle)
         { _fetchMode = _nextFetchMode; _scanDouble = _nextScanDouble; _fetchModeCycle = long.MaxValue; }
 
         if (_hasPendingOutput && _pendingOutputCycle == cycle)
         {
-            CompleteOutput(cycle, machine);
+            CompleteOutput<TPath>(cycle, machine);
         }
 
         if (_nextInputCycle == cycle)
@@ -176,13 +177,17 @@ internal sealed class LightweightSpriteDma
             _nextInputCycle = long.MaxValue;
             if (IsDmaEnabled(machine.Dmacon))
             {
-                TryAcceptInput(cycle, machine);
-                ScheduleInputAfter(cycle, machine);
+                TryAcceptInput<TPath>(cycle, machine);
+                ScheduleInputAfter<TPath>(cycle, machine);
             }
         }
 
         PublishNextCycle();
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool OwnsPendingOutputSlot(long cycle)
+        => _hasPendingOutput && _pendingOutputCycle == cycle;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool OwnsOutputSlot(long cycle)
@@ -210,7 +215,8 @@ internal sealed class LightweightSpriteDma
     internal bool IsExhausted(int channel)
         => (uint)channel < ChannelCount && _channels[channel].Exhausted;
 
-    private void TryAcceptInput(long cycle, LightweightA500Machine machine)
+    private void TryAcceptInput<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         var outputHorizontal = machine.BeamColorClock + 1;
         var relative = outputHorizontal - FirstOutputHorizontal;
@@ -238,7 +244,7 @@ internal sealed class LightweightSpriteDma
         // SH10 becomes the per-channel scan-double enable. Only active data
         // slots are suppressed; POS/CTL reloads at the stop still run normally.
         // Lisa retains the full previous payload for the alternate raster row.
-        if (_scanDouble && state.Active && (state.Pos & 0x80) != 0 &&
+        if (TPath.Aga && _scanDouble && state.Active && (state.Pos & 0x80) != 0 &&
             ((line ^ GetVerticalStart(in state)) & 1) != 0) return;
 
         if (!TryGetPurpose(in state, line, word, out var purpose) ||
@@ -257,21 +263,22 @@ internal sealed class LightweightSpriteDma
         _pendingChannel = channel;
         _pendingPurpose = purpose;
         _pendingAddress = _pointers[channel];
-        _pendingFetchMode = _fetchMode;
+        if (TPath.Aga) _pendingFetchMode = _fetchMode;
         _pendingOutputCycle = outputCycle;
 #if LIGHTWEIGHT_DIAGNOSTICS
         LastInputCycle = cycle;
 #endif
     }
 
-    private void CompleteOutput(long cycle, LightweightA500Machine machine)
+    private void CompleteOutput<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         var channel = _pendingChannel;
         var purpose = _pendingPurpose;
         var address = _pendingAddress;
-        var mode = _pendingFetchMode;
+        var mode = TPath.Aga ? _pendingFetchMode : 0;
         var bits = mode == 0 ? 16 : mode == 3 ? 64 : 32;
-        var payload = machine.IsAga ? machine.ReadAgaBitplane(address, mode) : machine.ReadChipWordBus(address);
+        var payload = TPath.Aga ? machine.ReadAgaBitplane(address, mode) : machine.ReadChipWordBus(address);
         var value = (ushort)(payload >> (bits - 16));
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
@@ -304,12 +311,12 @@ internal sealed class LightweightSpriteDma
                 break;
             case WordPurpose.DataA:
                 state.DataA = value;
-                if (machine.IsAga) machine.OnSpriteWideOutput(channel, true, payload, bits, cycle);
+                if (TPath.Aga) machine.OnSpriteWideOutput(channel, true, payload, bits, cycle);
                 else machine.OnSpriteDmaDataAOutput(channel, value, cycle);
                 break;
             case WordPurpose.DataB:
                 state.DataB = value;
-                if (machine.IsAga) machine.OnSpriteWideOutput(channel, false, payload, bits, cycle);
+                if (TPath.Aga) machine.OnSpriteWideOutput(channel, false, payload, bits, cycle);
                 else machine.OnSpriteDmaDataBOutput(channel, value, cycle);
                 break;
         }
@@ -408,9 +415,20 @@ internal sealed class LightweightSpriteDma
 
     private void ScheduleInputAfter(long cycle, LightweightA500Machine machine)
     {
+        // Register writes, sync recovery and field setup use this cold entry.
+        // The active CCK path retains its already selected fitted traits.
+        if (machine.IsEcsAgnus) ScheduleInputAfter<EcsExecutionPath>(cycle, machine);
+        else ScheduleInputAfter<OcsExecutionPath>(cycle, machine);
+    }
+
+    private void ScheduleInputAfter<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
+    {
         if (_beamHeld) return;
         var candidate = LightweightBusArbiter.AlignToSlot(cycle + 1);
-        var horizontal = machine.IsEcsAgnus ? (int)((candidate - machine.LineStartCycle) / 2 % machine.ColorClocksPerLine) : LightweightBusArbiter.GetHorizontal(candidate - _beamOffset);
+        var horizontal = TPath.EnhancedDisplay && machine.IsEcsAgnus
+            ? (int)((candidate - machine.LineStartCycle) / 2 % machine.ColorClocksPerLine)
+            : LightweightBusArbiter.GetHorizontal(candidate - _beamOffset);
         var lineStart = candidate -
             ((long)horizontal * LightweightClock.CpuCyclesPerColorClock);
         var inputHorizontal = Math.Max(horizontal, FirstInputHorizontal);
@@ -420,7 +438,7 @@ internal sealed class LightweightSpriteDma
         }
         if (inputHorizontal > LastInputHorizontal)
         {
-            lineStart += machine.LineCycles;
+            lineStart += TPath.EnhancedDisplay ? machine.LineCycles : LightweightClock.CpuCyclesPerLine;
             inputHorizontal = FirstInputHorizontal;
         }
 

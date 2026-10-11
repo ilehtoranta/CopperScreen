@@ -59,7 +59,8 @@ internal sealed class CopperScreenSettingsDraft
 
 	public bool?[] DriveWriteProtected { get; } = new bool?[4];
 
-	public List<CopperScreenHardfileSettings> HardDrives { get; } = new List<CopperScreenHardfileSettings>();
+    public List<CopperScreenHardfileSettings> HardDrives { get; } = new List<CopperScreenHardfileSettings>();
+    public List<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration> HostDirectories { get; } = [];
 
 	public bool RequiresRestart { get; private set; }
 
@@ -77,7 +78,8 @@ internal sealed class CopperScreenSettingsDraft
 			draft.DriveWriteProtected[i] = i < options.DriveWriteProtected.Length ? options.DriveWriteProtected[i] : null;
 		}
 
-		draft.HardDrives.AddRange(options.HardDrives);
+        draft.HardDrives.AddRange(options.HardDrives);
+        draft.HostDirectories.Clear(); draft.HostDirectories.AddRange(options.HostDirectories);
 
 		draft.RequiresRestart = false;
 		return draft;
@@ -116,7 +118,8 @@ internal sealed class CopperScreenSettingsDraft
 			}
 		}
 
-		draft.HardDrives.AddRange(profile.HardDrives);
+        draft.HardDrives.AddRange(profile.HardDrives);
+        draft.HostDirectories.AddRange(profile.HostDirectories);
 
 		return draft;
 	}
@@ -145,7 +148,7 @@ internal sealed class CopperScreenSettingsDraft
 			CpuBackend != active.CpuBackend || ChipRamKb != active.ChipRamKb || PseudoFastRamKb != active.PseudoFastRamKb ||
 			PseudoFastBase != active.PseudoFastBase || RealFastRamKb != active.RealFastRamKb || RealFastBase != active.RealFastBase ||
 			RtgVramMb != active.RtgVramMb || RtcEnabled != active.RtcEnabled || FloppyDriveCount != active.FloppyDriveCount ||
-			FloppyDriveAudio != active.FloppyDriveAudio || !HardDrives.SequenceEqual(active.HardDrives);
+            FloppyDriveAudio != active.FloppyDriveAudio || !HardDrives.SequenceEqual(active.HardDrives) || !HostDirectories.SequenceEqual(active.HostDirectories);
 
 	public CopperScreenStartupOptions ToStartupOptions(string baseDirectory)
 	{
@@ -189,7 +192,7 @@ internal sealed class CopperScreenSettingsDraft
 			KickstartRomPath,
 			rtgVramSize: checked((long)RtgVramMb * 1024 * 1024),
 			chipset: Chipset,
-			kickstartVersion: RomVersion);
+            kickstartVersion: RomVersion, hostDirectories: HostDirectories.ToArray());
 	}
 
 	public IReadOnlyList<CopperScreenMediaDriveSettings> CreateMediaDrives()
@@ -227,7 +230,7 @@ internal sealed class CopperScreenSettingsDraft
 		return Convert.ToUInt32(trimmed, 10);
 	}
 
-	private static string FormatAddress(uint address)
+	internal static string FormatAddress(uint address)
 		=> "$" + address.ToString("X6", System.Globalization.CultureInfo.InvariantCulture);
 }
 
@@ -373,7 +376,9 @@ internal static class CopperScreenProfileStore
 
 		public MediaFile? Media { get; set; }
 
-		public HardDriveFile[]? HardDrives { get; set; }
+        public HardDriveFile[]? HardDrives { get; set; }
+        [JsonPropertyName("hostDirectories")]
+        public CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration[]? HostDirectories { get; set; }
 
 		public InputFile? Input { get; set; }
 
@@ -452,7 +457,8 @@ internal static class CopperScreenProfileStore
 							Partition = HardDrivePartitionFile.FromMetadata(drive.Partition)
 						})
 						.ToArray(),
-				Input = IsDefaultInput(draft.Input)
+                HostDirectories = draft.HostDirectories.Count == 0 ? null : draft.HostDirectories.ToArray(),
+                Input = IsDefaultInput(draft.Input)
 					? null
 					: new InputFile
 					{

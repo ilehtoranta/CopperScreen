@@ -10,7 +10,7 @@ namespace CopperMod.Amiga.Lightweight;
 /// enter <see cref="IM68kBus"/> individually; this class does not speculate,
 /// replay accesses, or maintain a second device timeline.
 /// </remarks>
-internal sealed class LightweightCpuBoundary :
+internal class LightweightCpuBoundary :
     IM68kInstructionBoundary,
     IM68kStoppedCpuFastForwardBoundary,
     IM68kConservativeBusAccessBatchBoundary
@@ -45,7 +45,9 @@ internal sealed class LightweightCpuBoundary :
         _machine.AdvanceHardwareTo(currentCycle);
     }
 
-    public bool TryBeginBusAccessTraceBatch(
+    protected bool DispatchPendingInterrupt() => _machine.DispatchPendingCpuInterrupt();
+
+    public virtual bool TryBeginBusAccessTraceBatch(
         M68kCpuState state,
         long targetCycle,
         out long batchTargetCycle)
@@ -85,4 +87,23 @@ internal sealed class LightweightCpuBoundary :
         advancedCycles = wakeCycle - previousCycle;
         return true;
     }
+}
+
+// Only JIT exposes the pure compiled-slice contract. The 68000 interpreter's
+// existing conservative boundary and execution path remain unchanged.
+internal sealed class LightweightJitCpuBoundary(LightweightA500Machine machine)
+    : LightweightCpuBoundary(machine), IM68kPureCpuTraceBatchBoundary
+{
+    public override bool TryBeginBusAccessTraceBatch(M68kCpuState state, long targetCycle, out long batchTargetCycle)
+    {
+        var allowed = base.TryBeginBusAccessTraceBatch(state, targetCycle, out batchTargetCycle);
+        // Compiled slices may skip scalar BeforeInstruction. Accept pending
+        // interrupts here, after hardware reaches the committed CPU cycle.
+        if (DispatchPendingInterrupt()) { batchTargetCycle = state.Cycles; return false; }
+        return allowed;
+    }
+    public bool TryBeginPureCpuTraceBatch(M68kCpuState state, long targetCycle, out long batchTargetCycle)
+        => TryBeginBusAccessTraceBatch(state, targetCycle, out batchTargetCycle);
+    public void AfterPureCpuTraceBatch(long previousCycle, long currentCycle, int instructionCount)
+        => AfterBusAccessTraceBatch(previousCycle, currentCycle, instructionCount);
 }

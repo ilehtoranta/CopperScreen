@@ -6,9 +6,12 @@ On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
 retain their actual package identities and are not relabeled as measurements of
 stable `1.4.1`.
 
-The current project pins public mainline [Copper68k `1.5.0`](COPPER68K_MAINLINE_1_5_0.md).
-Its release validation covers correctness and package integration; it is not a
-new throughput acceptance measurement and does not relabel the earlier results.
+The current project pins Copper68k `1.5.1` and CopperDisk `3.0.0`. The
+[Copper68k 1.5.0 release record](COPPER68K_MAINLINE_1_5_0.md) remains historical;
+it does not measure the current pins. The current build's limited synthetic
+throughput snapshot is recorded in the
+[2026-10-03 baseline](PERFORMANCE_BASELINE_2026-10-03.md), with its native workload
+failure explained in the [follow-up investigation](PERFORMANCE_INVESTIGATION_2026-10-03.md).
 
 Correctness, host throughput and interactive compatibility are separate results.
 G6/G7 Legacy cutover is retired. Lightweight is already the active engine; ordinary
@@ -20,6 +23,144 @@ their original protocols. The separately versioned homogeneous-host protocol bel
 supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
+
+A **valid idle source-stage diagnostic** completes 66 runs under unchanged
+host-load policy v2, with matching complete identities and zero measured
+allocations. Six current runs per workload average **338.45 FPS lores**,
+**318.22 FPS hires** and **324.31 FPS native Lemmings gameplay**. With a common
+frozen runner, Copper68k 1.5.1 and CopperDisk 3.0.0, current engine source takes
+**9.6786% more lores frame time** and **5.4656% more hires frame time** than the
+pre-ECS source snapshot; individual one-sided 95% upper bounds are **+11.3194%**
+and **+6.6803%**. This diagnoses source cost and supplies a current native
+baseline. A future candidate still needs the complete three-workload retention
+comparison for the unchanged 1% gate. The earlier production-runner baseline and
+historical records remain separate. See the
+[six-round stage breakdown](PERFORMANCE_INVESTIGATION_2026-10-03.md#idle-six-round-comparison).
+
+The subsequent [chipset specialization prototype](CHIPSET_SPECIALIZATION_2026-10-03.md)
+removes inactive ECS/AGA work from inspected OCS generated code and preserves all
+checked identities. Both timing attempts are **INVALID / RERUN** because of
+active competing .NET jobs. No throughput improvement or passing 1% gate is
+claimed for that isolated experiment.
+
+The [integrated regression candidate](CHIPSET_REGRESSION_2026-10-03.md) also
+specializes Copper/sprite geometry and caches effective scroll decoding. All
+1,080 engine, 74 disk and 163 native-enabled host tests pass, with retained OCS
+identity/allocation checks and ECS/AGA capture parity. Two R1 timing attempts are
+INVALID because of sustained measured interference; the first R2 attempt is
+INVALID because of a competing build/test job. A fresh frozen R2 six-pair
+comparison completes **VALID / PASS** for all three workloads. Paired throughput
+gains are **+3.4316% lores**, **+4.2319% hires** and **+1.3155% native Lemmings**;
+one-sided 95% upper frame-time changes are **-2.2619%**, **-2.6499%** and
+**+0.0117%**, all within 1%, without an exception. All 36 samples and 1,484
+telemetry intervals pass independent verification. A separate pre-ECS attempt
+is **INVALID / RERUN** because of a competing .NET test job; all partial timings
+are excluded. The owner requests keeping the validated candidate and leaving
+pre-ECS recovery verification pending. Complete recovery of the earlier source
+cost is not claimed.
+
+The subsequent [bus and clock investigation](BUS_CLOCK_INVESTIGATION_2026-10-03.md)
+profiles the unchanged validated R2 build under reported background load.
+Complete workload identities match, but diagnostic timings are excluded.
+It identifies redundant following/current-slot ownership checks, CPU transfer
+bookkeeping and duplicated grant code as separate optimization candidates;
+at that investigation stage, none had an implemented or measured gain.
+
+The [following-slot bus prototype](BUS_PHASE_OPTIMIZATION_2026-10-04.md)
+implements the first bounded simplification without changing current-slot CPU
+queries or device timing. All 1,081 engine, 74 disk and 163 distinct host cases
+pass, with matching retained identities, zero measured allocations and 182
+ECS/AGA captured-file comparisons. Generated arbitration code loses history
+checks. This frozen standalone variant remains unmeasured; the final combined
+following-slot/CPU-transfer/grant-locality candidate passes the new comparison
+below. The earlier validated R2 gate does not transfer. The prepared
+bus-phase v1 harness compares against frozen R2 with the unchanged six-pair
+workloads and 1% upper-bound limit.
+
+The next [CPU-transfer prototype](CPU_TRANSFER_OPTIMIZATION_2026-10-04.md)
+removes redundant data-strobe clock checks and moves Agnus classification before
+CIA decoding. The selected candidate also retains the following-slot change.
+A shared fallback experiment remains separate because its captured JIT inlining
+expands several CPU callbacks. The selected candidate's overall performance
+comparison uses validated chipset R2 as reference. This frozen standalone
+variant remains unmeasured; the final combined candidate passes below;
+generated-code diagnostics and correctness replays under background load are
+excluded from throughput conclusions. The CPU-transfer v1 harness preserves
+the six-pair workloads, placement, Normal priority, full identities and host-load
+policy v2. Require a one-sided 95% upper frame-time regression bound ≤1% for
+each workload; earlier results and exceptions do not transfer.
+
+The [grant-locality candidate](GRANT_LOCALITY_2026-10-04.md) adds explicit
+inlining boundaries at the private word-grant helper and typed wait kernel,
+keeping classification/arbitration and physical wait loops shared. The
+CIA/non-contended advance also has one common fallback. Native generated code
+confirms one shared-grant call per physical word and separate typed kernels;
+code-size reductions are diagnostic evidence, not an FPS or cache-miss result.
+Its frozen grant-locality v1 comparison retains the complete three-workload
+six-pair protocol against validated chipset R2. **The combined performance gate
+passes**, with no exception. The accepted `r2/retention-v1-6/` series contains
+36 complete samples, matching independently pinned fingerprints, zero measured
+steady-state allocations and 1,407 valid telemetry intervals. Normal priority,
+CPU 2 / protected SMT pair 2–3, rechecked homogeneous AMD topology and host-load
+policy v2 remain unchanged. Runtime, capsules, inputs and harness pins verify;
+all 47 current source hashes match the frozen candidate.
+
+| Workload | Reference mean FPS | Candidate mean FPS | Paired throughput gain | One-sided 95% upper frame-time change |
+| --- | ---: | ---: | ---: | ---: |
+| Lores | 352.6633 | 353.6333 | +0.2824% | +0.7642% |
+| Hires | 328.4350 | 330.6800 | +0.6848% | +0.9947% |
+| Native Lemmings | 333.9550 | 341.5783 | +2.2646% | −0.4413% |
+
+Every unrounded upper bound is ≤1%; hires passes narrowly at
++0.9946842849830535%. Native’s negative upper frame-time bound supports a gain;
+small positive synthetic means do not independently establish speedups. The
+comparison measures all three pending optimization phases together; it does
+not isolate their contributions or establish pre-ECS recovery. Earlier
+interference/build-invalidated attempts and all 14 partial timings remain
+excluded and are preserved in the linked record. Historical evidence and the
+default 1% gate remain unchanged.
+The owner accepted this combined candidate and benchmark result on 2026-10-04;
+no exception is required or granted.
+
+The next [current-slot arbitration candidate](CURRENT_SLOT_OPTIMIZATION_2026-10-04.md)
+uses completed-output timestamps after DMA retirement in CPU grants and blitter
+fairness. Pending-aware device/following-slot queries retain their semantics.
+The OCS wait body loses eight conditional branches and 157 bytes with no added
+calls. Production build, 1,089 engine diagnostics, 74 disk tests and all 185
+frozen host cases pass. Four production and four guards-enabled retained
+replays match complete identities with zero measured allocations; all 182
+ECS/AGA capture-file hashes and six final hardfiles match. **Performance remains
+PENDING** against the owner-accepted combined grant-locality candidate, engine
+`109CD5AC…`; static code reduction and diagnostic timings do not establish an
+FPS gain. The new current-slot v1 protocol preserves six balanced pairs, complete
+workloads, topology/Normal placement, all pins, zero allocations and host-load
+policy v2. Every 95% upper regression bound must be ≤1%; earlier exceptions do
+not transfer. Other CopperSharp/Copper68k tests were active after validation.
+The fresh preflight verifies pins/topology, then is **INVALID / RERUN** due
+to another active .NET build/test job; zero throughput samples were collected.
+
+An earlier production-runner measurement supplies a **descriptive synthetic-only baseline** at
+**341.63 FPS lores** and **318.68 FPS hires**, six runs each, with matching
+complete-workload fingerprints, zero measured allocations and valid host-load
+telemetry. This is a current-build measurement, not a reference/candidate
+comparison, so the 1% regression gate was not evaluated. The original native
+sample is excluded because it used the obsolete pre-bus-correction input script.
+The follow-up current replay with `lemmings-cpu-bus-timing-v1.json` preserves the
+September 25 validated identity and gameplay screenshots exactly, with scalar
+parity and both corrected host replays passing. Its diagnostic timings are not
+a native baseline or an acceptance measurement. See the
+[baseline record](PERFORMANCE_BASELINE_2026-10-03.md) and
+[investigation](PERFORMANCE_INVESTIGATION_2026-10-03.md).
+
+The subsequent owner-requested **background exploratory comparison** completes
+all 22 runs with matching fingerprints and zero measured allocations. Current
+rates average **318.43 FPS lores**, **299.40 FPS hires** and **306.78 FPS native
+Lemmings**, two samples each. Active test/build jobs and sustained measured
+interference make these rough rates ineligible for the formal gate. Current
+synthetic rates swing roughly 14–15% between rounds; the five source snapshots
+cannot establish a causal regression under this changing load. See the
+[complete table and load record](PERFORMANCE_INVESTIGATION_2026-10-03.md#background-exploratory-follow-up).
+The earlier valid idle baseline and all historical dispositions remain unchanged.
 
 The [Lotus III CPU bus-spacing comparison](LOTUS_III_PERFORMANCE_2026-09-25.md)
 is **VALID / OWNER ACCEPTED** with a scoped exception dated 2026-09-25. Lores and hires are
@@ -517,7 +658,7 @@ The identical runner SHA256 was
 | --- | ---: | ---: | --- |
 | Lores full pipeline | +0.627% | +1.757% | INCONCLUSIVE |
 | Hires full pipeline | +0.868% | +2.706% | INCONCLUSIVE |
-| Native Lemmings gameplay | −0.316% | +0.322% | PASS |
+| Native Lemmings gameplay | âˆ’0.316% | +0.322% | PASS |
 
 These means do not show a regression above 1%, but rendering variability prevents
 certifying that ceiling. No performance waiver or global PASS is implied. The
@@ -543,9 +684,9 @@ checks. No samples were excluded from this complete series.
 
 | Workload | Paired mean frame-time change | One-sided 95% upper bound | 1% disposition |
 | --- | ---: | ---: | --- |
-| Lores full pipeline | −1.707% | −1.153% | PASS |
-| Hires full pipeline | −2.506% | −1.344% | PASS |
-| Native Lemmings gameplay | −2.100% | +1.431% | INCONCLUSIVE |
+| Lores full pipeline | âˆ’1.707% | âˆ’1.153% | PASS |
+| Hires full pipeline | âˆ’2.506% | âˆ’1.344% | PASS |
+| Native Lemmings gameplay | âˆ’2.100% | +1.431% | INCONCLUSIVE |
 
 **Accepted with a scoped native exception on 2026-09-17.** After reviewing these
 results, the owner explicitly accepted the native Lemmings +1.43% upper-bound
@@ -568,7 +709,7 @@ Profiling found most samples in the inlined device/video loop. Discarded diagnos
 trials included skipping hidden-pixel color extraction, UInt128 helper-based
 packing and an out-of-line renderer. The intermediate packed-shifter build
 `9FAD41675F947CAE91230B2CA4EE0B2B47A1522BDD9C65763BE028BE5FCB6D35`
-completed six lores pairs at −0.86% mean / +1.35% upper bound. That series was
+completed six lores pairs at âˆ’0.86% mean / +1.35% upper bound. That series was
 deliberately stopped because lores already failed; its incomplete/INVALID status
 remains under `artifacts/dual-playfield/retention-packed-phases-v1/`.
 Short diagnostics are engineering evidence, not acceptance measurements.
@@ -661,8 +802,8 @@ optimization. Acceptance was requested; no earlier exception is carried forward.
 
 | Workload | Reference mean FPS | Candidate mean FPS | Paired frame-time change | One-sided 95% upper bound | Disposition |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Lores | 375.69 | 382.88 | −1.89% | −0.39% | PASS |
-| Hires | 337.94 | 345.84 | −2.31% | +0.60% | PASS |
+| Lores | 375.69 | 382.88 | âˆ’1.89% | âˆ’0.39% | PASS |
+| Hires | 337.94 | 345.84 | âˆ’2.31% | +0.60% | PASS |
 | Native Lemmings | 255.27 | 252.57 | +1.10% | +3.05% | ACCEPTANCE_REQUIRED |
 
 Candidate ranges are 379.93–386.45, 340.29–349.37 and 238.41–257.03 FPS,
@@ -709,8 +850,8 @@ candidate in a fresh directory when concurrent tests/builds have finished.
 
 For diagnostic completeness only, the first series completed six lores and hires
 pairs before the interruption. Lores averaged 367.33 reference / 373.42 candidate
-FPS, paired frame time −1.71%, upper bound +2.19%; hires averaged 321.97 / 334.90
-FPS, paired frame time −3.90%, upper bound −1.10%. Only two native pairs completed.
+FPS, paired frame time âˆ’1.71%, upper bound +2.19%; hires averaged 321.97 / 334.90
+FPS, paired frame time âˆ’3.90%, upper bound âˆ’1.10%. Only two native pairs completed.
 **These are partial results from an invalid series, not acceptance measurements.**
 The earlier progress report's hires PASS was provisional and is superseded by the
 whole-series INVALID status. All 28 completed samples matched their complete-workload

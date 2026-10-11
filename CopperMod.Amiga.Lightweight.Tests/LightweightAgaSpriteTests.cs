@@ -191,7 +191,8 @@ public sealed class LightweightAgaSpriteTests
         m.AdvanceHardwareTo(input + 2);
         Assert.Equal(address + offset, m.SpriteDmaLastAddress);
         Assert.Equal(address + stride, m.GetLiveSpritePointer(0)); Assert.Equal(expected, m.GetSpriteDmaPos(0));
-        Assert.False(m.CanCopperOwnOutputSlot(input + 2));
+        Assert.True(m.IsHigherPriorityOutputOwned(input + 2));
+        Assert.True(m.CanCopperOwnOutputSlot(input + 4));
     }
 
     [Fact]

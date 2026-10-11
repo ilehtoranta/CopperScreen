@@ -41,10 +41,13 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             { FramebufferWidth = options.Profile.Chipset.DisplayChip != DisplayChipModel.OcsDenise ? 1816 : 908,
                 DeniseModel = options.Profile.Chipset.DisplayChip switch { DisplayChipModel.AgaLisa => LightweightDeniseModel.Lisa4203, DisplayChipModel.EcsDenise => LightweightDeniseModel.Mos8373, _ => LightweightDeniseModel.Mos8362 }, FloppyDriveCount = options.Profile.FloppyDriveCount,
                 CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
+                CpuExecutionMode = backend == M68kBackendKind.JitM68040 ? Copper68k.M68kExecutionMode.Jit : Copper68k.M68kExecutionMode.Interpreter,
                 AgnusModel = GetAgnusModel(options.Profile.Chipset.DmaChip),
                 ChipRamBytes = options.Profile.ChipRamSize, SlowRamBytes = options.Profile.ExpansionRamSize,
                 FastRamBytes = options.Profile.RealFastRamSize,
-                Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition))).ToArray() };
+                RtcEnabled = options.Profile.RtcEnabled,
+                Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition))).ToArray(),
+                HostDirectories = options.HostDirectories };
         if (previous is not null && !previous.IsPaused) throw new InvalidOperationException("Pause before preparing a replacement machine.");
         _machine = previous?._machine.CreateRestartCandidate(configuration) ?? new(configuration);
         try
@@ -54,7 +57,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             {
                 var path = options.DriveDiskPaths[i];
                 if (path != null) (i == 0 && bootDisk != null ? bootDisk : CopperScreenDiskImageArchive.LoadDiskImage(path)).Mount(_machine, i);
-                _machine.SetDriveWriteProtected(i, options.DriveWriteProtected[i] ?? true);
+                _machine.SetDriveWriteProtected(i, (_machine.IsDriveMounted(i) && !_machine.CanWriteDrive(i)) || (options.DriveWriteProtected[i] ?? true));
                 _diskPaths[i] = path;
             }
             ResetHostState();
@@ -89,36 +92,40 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
         var p = options.Profile;
+        var cpu = options.CpuBackendOverride ?? p.CpuBackend;
         var minimal = p.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
         if (minimal && (p.Chipset != new AmigaChipset(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal) || p.ChipRamSize != 524288 ||
             (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
-            p.RealFastRamSize != 0 || options.HardDrives.Count != 0))
-            throw new NotSupportedException("Minimal disk boot currently requires a PAL OCS Amiga 500, Motorola 68000, 512 KiB Chip RAM, optional 512 KiB slow RAM and no Fast RAM or hard drives.");
+            p.RealFastRamSize != 0 || options.HardDrives.Count != 0 || options.HostDirectories.Count != 0))
+            throw new NotSupportedException("Minimal disk boot currently requires a PAL OCS Amiga 500, Motorola 68000, 512 KiB Chip RAM, optional 512 KiB slow RAM and no Fast RAM, hard drives or shared folders.");
         var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
-            aga && ((options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68EC020 ||
-                p.RealFastRamSize != 0 || p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))
-            throw new NotSupportedException("The initial A1200 profile requires PAL Alice/Lisa, 68EC020, 2 MiB Chip RAM, no slow/Fast RAM and native A1200 Kickstart 3.0 (39.106).");
+            aga && (cpu is not (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
+                p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))
+            throw new NotSupportedException("A1200 requires PAL Alice/Lisa, 68EC020 or a 68020/030/040 upgrade, 2 MiB Chip RAM, no slow RAM and native A1200 Kickstart 3.0 (39.106).");
         if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise or DisplayChipModel.AgaLisa) || p.Chipset.VideoStandard != VideoStandard.Pal ||
             p.ExpansionRamBase != 0xC00000 ||
-            p.RtgVramSize != 0 || p.RtcEnabled ||
+            p.RtgVramSize != 0 ||
             p.FloppyDriveCount is < 1 or > 4 ||
-            (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040) ||
+            (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
             p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot) ||
             (!aga && !minimal && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
-            throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68EC020/68020/68030/68040 / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives; no RTC or RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
+            throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
         catch (ArgumentException ex) { throw new NotSupportedException(ex.Message, ex); }
         if (requireRomPath && minimal && string.IsNullOrWhiteSpace(options.DriveDiskPaths[0]))
             throw new NotSupportedException("Choose a standard ADF startup disk in DF0 for minimal disk boot.");
         if (requireRomPath && !minimal && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             throw new NotSupportedException("Choose the matching Kickstart 1.3, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
-        if (p.RealFastRamSize is not (0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608))
-            throw new NotSupportedException("Fast RAM supports 0, 512, 1024, 2048, 4096 or 8192 KiB.");
-        if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.A500RealFastRamBase)
-            throw new NotSupportedException("Fast RAM uses guest Autoconfig; keep the assignment hint at $200000.");
+        var maxFast = LightweightA500Configuration.MaximumFastRamBytes(GetCpuModel(cpu));
+        if (!LightweightA500Configuration.IsSupportedFastRamSize(p.RealFastRamSize) || p.RealFastRamSize > maxFast)
+            throw new NotSupportedException($"Fast RAM must use a standard size up to {maxFast / 1048576} MiB for the selected CPU.");
+        if (p.RealFastRamSize > 8388608 && p.KickstartVersion == KickstartVersion.Kickstart13)
+            throw new NotSupportedException("More than 8 MiB Fast RAM requires a full 32-bit CPU and native Kickstart 3.x Zorro III Autoconfig. Choose A500 Kickstart 3.1.");
+        if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.GetDefaultFastRamBase(p.RealFastRamSize))
+            throw new NotSupportedException("Fast RAM uses guest Autoconfig; restore the default assignment hint for its size.");
         if (options.DriveDiskPaths.Skip(p.FloppyDriveCount).Any(path => path != null))
             throw new NotSupportedException("Lightweight accepts media in connected floppy drives only.");
         if (options.AgnusBusArbitration != AgnusBusArbitrationMode.Legacy ||
@@ -140,13 +147,15 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         _ => throw new NotSupportedException("Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.")
     };
 
-    private static Copper68k.M68kCpuModel GetCpuModel(M68kBackendKind backend) => backend switch
+    internal static Copper68k.M68kCpuModel GetCpuModel(M68kBackendKind backend) => backend switch
     {
         M68kBackendKind.AccurateM68000 => Copper68k.M68kCpuModel.M68000,
+        M68kBackendKind.AccurateM68010 => Copper68k.M68kCpuModel.M68010,
         M68kBackendKind.AccurateM68EC020 => Copper68k.M68kCpuModel.M68EC020,
         M68kBackendKind.AccurateM68020 => Copper68k.M68kCpuModel.M68020,
         M68kBackendKind.AccurateM68030 => Copper68k.M68kCpuModel.M68030,
         M68kBackendKind.AccurateM68040 => Copper68k.M68kCpuModel.M68040,
+        M68kBackendKind.JitM68040 => Copper68k.M68kCpuModel.M68040,
         M68kBackendKind.AccurateM68060 => Copper68k.M68kCpuModel.M68060,
         _ => throw new NotSupportedException($"CPU backend {backend} is unavailable in Lightweight.")
     };
@@ -341,8 +350,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool SetDriveWriteProtected(int drive, bool writeProtected)
     {
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
-        if (!writeProtected && (_pendingAdf[drive]?.Format ?? _machine.GetDriveFormat(drive)) == LightweightFloppyFormat.Ipf)
-            return Reject("IPF media is permanently read-only.");
+        if (!writeProtected && (_pendingAdf[drive]?.Format ?? _machine.GetDriveFormat(drive)) is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf))
+            return Reject("This disk format is permanently read-only.");
         _machine.SetDriveWriteProtected(drive, writeProtected);
         SetStatusText($"DF{drive}: " + (writeProtected ? "write protected" : "writable in memory; use Save ADF to keep changes"));
         return true;

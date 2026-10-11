@@ -2,6 +2,23 @@ namespace CopperMod.Amiga.Lightweight;
 
 internal sealed class LightweightClock
 {
+    private readonly byte _executionPath;
+    internal LightweightClock(bool enhancedDisplay = false, bool aga = false)
+        => _executionPath = (byte)(aga ? 2 : enhancedDisplay ? 1 : 0);
+
+    internal long AdvanceToCpuGrant(long candidate, LightweightA500Machine machine)
+        => _executionPath == 0 ? AdvanceToCpuGrant<OcsExecutionPath>(candidate, machine) :
+           _executionPath == 1 ? AdvanceToCpuGrant<EcsExecutionPath>(candidate, machine) :
+           AdvanceToCpuGrant<AgaExecutionPath>(candidate, machine);
+
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal void AdvanceTo(long target, LightweightA500Machine machine)
+    {
+        if (_executionPath == 0) AdvanceTo<OcsExecutionPath>(target, machine);
+        else if (_executionPath == 1) AdvanceTo<EcsExecutionPath>(target, machine);
+        else AdvanceTo<AgaExecutionPath>(target, machine);
+    }
+
     internal const int CpuCyclesPerColorClock = 2;
     internal const int CpuCyclesPerLine = 454;
     internal const int PalShortFieldLines = 312;
@@ -124,24 +141,30 @@ internal sealed class LightweightClock
     // A pending CPU transfer uses the same physical CCK completion routine as
     // device-only advancement. Stay inside that loop while waiting instead of
     // re-entering the arbitrary-target AdvanceTo routine for every stolen slot.
-    internal long AdvanceToCpuGrant(long firstCandidate, LightweightA500Machine machine)
+    // Share one wait kernel per fitted execution path instead of copying the
+    // ownership/CCK loop into the selector and CPU grant helper.
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    internal long AdvanceToCpuGrant<TPath>(long firstCandidate, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         machine.UpdateCpuRequestCandidate(firstCandidate);
-        AdvanceTo(firstCandidate, machine);
+        AdvanceTo<TPath>(firstCandidate, machine);
         System.Diagnostics.Debug.Assert(_cpuPhase == 0);
         while (machine.IsCpuOutputOwned(Cycle))
         {
             var next = Cycle + CpuCyclesPerColorClock;
             machine.UpdateCpuRequestCandidate(next);
             Cycle = next;
-            CompleteColorClock(machine);
+            CompleteColorClock<TPath>(machine);
         }
         return Cycle;
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
-    internal void AdvanceTo(long targetCycle, LightweightA500Machine machine)
+    internal void AdvanceTo<TPath>(long targetCycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         if (targetCycle < Cycle)
             throw new InvalidOperationException("The lightweight clock cannot move backwards.");
@@ -163,7 +186,7 @@ internal sealed class LightweightClock
 
             Cycle += remaining;
             _cpuPhase = 0;
-            CompleteColorClock(machine);
+            CompleteColorClock<TPath>(machine);
         }
 
         // Canonical cycles are nonnegative and targetCycle is at least Cycle.
@@ -172,7 +195,7 @@ internal sealed class LightweightClock
         while (Cycle <= lastCompleteCckStart)
         {
             Cycle += CpuCyclesPerColorClock;
-            CompleteColorClock(machine);
+            CompleteColorClock<TPath>(machine);
         }
 
         if (Cycle < targetCycle)
@@ -184,7 +207,8 @@ internal sealed class LightweightClock
 
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private void CompleteColorClock(LightweightA500Machine machine)
+    private void CompleteColorClock<TPath>(LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         ColorClock++;
         if (ColorClock >= _horizontalLimit)
@@ -212,7 +236,7 @@ internal sealed class LightweightClock
                     FrameNumber++;
                     machine.OnFrameCompleted(Cycle);
                 }
-                if (AlternatingLines)
+                if (TPath.EnhancedDisplay && AlternatingLines)
                 {
                     ColorClocksPerLine = 227 + (Line & 1);
                     _horizontalLimit = ColorClocksPerLine;
@@ -223,7 +247,7 @@ internal sealed class LightweightClock
         }
         if (Cycle >= machine.NextDeviceCycle)
         {
-            machine.TickDevices(Cycle);
+            machine.TickDevices<TPath>(Cycle);
         }
     }
 }

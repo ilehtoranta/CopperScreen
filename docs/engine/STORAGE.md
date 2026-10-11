@@ -11,14 +11,24 @@ See [performance](PERFORMANCE.md) and [open issues](ISSUES.md).
 
 ## Media and timing contract
 
+The [2026-10-07 format integration](DISK_FORMATS.md) adds read-only ADZ, DMS,
+modern UAE-1ADF and first-revolution SCP playback. Historical compatibility and
+performance evidence below remains attached to its original candidate.
+
 | Medium | Attachment | Guest writes / persistence |
 | --- | --- | --- |
 | Standard 880 KiB ADF | DF0–DF3; direct or selected ZIP entry | Starts protected. Enabling writes changes owned encoded tracks. Save ADF explicitly exports valid sectors using atomic destination replacement. |
 | IPF | DF0–DF3; direct or selected ZIP entry | Permanently read-only. Enabling writes or exporting as ordinary ADF fails explicitly. |
+| ADZ / DMS | DF0–DF3; direct or selected ZIP entry | Read-only complete DD sectors; ADZ may also carry extended raw tracks. |
+| Modern UAE-1ADF | DF0–DF3; direct or selected ZIP entry | Read-only; exact stored raw track bytes/bit lengths, no incomplete sector reconstruction. |
+| SCP | DF0–DF3; direct or selected ZIP entry | Read-only first-revolution DD decoding; no live flux or multirevolution playback. |
 | HDF | Construction-time CopperHDF unit configuration | Writable mounts update the backing file; Update/Flush and disposal flush it. Read-only mounts reject writes. No implicit ADF-style save step. |
+| Host directory | Construction-time shared-folder configuration; separate virtual Autoconfig board | Read-only by default. Writable mounts update host files directly; close/flush/reset/disposal flush streams. Optional native folder boot. See [shared folders](HOST_DIRECTORIES.md). |
 
 `MountAdf` remains compatible. `MountIpf(drive, bytes)` and
 `MountIpf(drive, LightweightIpfImage.Prepare(bytes))` expose indexed attachment.
+`MountDisk(drive, LightweightFloppyImage.Prepare(bytes, filename))` attaches any
+supported format after validation. `--disk1` through `--disk3` are generic runner aliases.
 `GetDriveFormat`, `CanWriteDrive` and host `CanExportAdf` expose capability.
 The host/runner accept `archive.zip#/entry.ipf`; an unselected runner ZIP must
 contain exactly one supported image. Desktop ZIP selection supports disk sets.
@@ -72,7 +82,8 @@ The port starts from Legacy commit
 [`30615e8317a4069e879b585049ed97ffdfecd4fe`](https://github.com/ilehtoranta/CopperMod/tree/30615e8317a4069e879b585049ed97ffdfecd4fe).
 The device remains **`copperhdf.device`**, a 64 KiB virtual Zorro II board,
 manufacturer `$07DB`, product `$48`, diagnostic area at `$4000`. This milestone
-does not implement A600/A1200 IDE, a physical SCSI controller or host directories.
+does not implement A600/A1200 IDE or a physical SCSI controller. Host directories
+now use the separate [CopperFS board](HOST_DIRECTORIES.md).
 
 Public `CopperDisk.AmigaHardfileConfiguration` contains unit, path, read-only,
 missing-file creation size, Auto/RigidDiskBlock/Partition mode and optional DOS
@@ -83,7 +94,7 @@ Metadata meanings/defaults follow Legacy. RDB checksums, bounded lists, partitio
 environment vectors, filesystem headers and load segments are handled in CopperDisk.
 Guest registration and executable relocation stay in Lightweight.
 
-Desktop profiles and **Settings > Floppy Drives > Hard disks** expose these
+Desktop profiles and **Settings > Storage > Hard disks** expose these
 settings; applying hardware changes requires restart. Existing desktop `--hdf`
 and `--hdf-readonly` options work. The runner supports repeated `--hdf`/`--hdf-ro`
 for sequential Auto units. Custom units/modes/metadata are available through the

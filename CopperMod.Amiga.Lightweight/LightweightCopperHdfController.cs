@@ -208,9 +208,9 @@ namespace CopperMod.Amiga.Lightweight
         {
             ArgumentNullException.ThrowIfNull(bus);
             _bootstrapBus = bus;
-            WriteTrap(DiagPointOffset, bus.RegisterRelocatableHostGateway(HostDiagBootstrap));
-            WriteTrap(BootPointOffset, bus.RegisterRelocatableHostGateway(HostBootBootstrap));
-            WriteTrap(ResidentInitOffset, bus.RegisterRelocatableHostGateway(HostResidentInit));
+            WriteTrap(DiagPointOffset, bus.RegisterBootstrapGateway(HostDiagBootstrap, DiagPointOffset, () => ConfiguredBase + DiagAreaOffset, DiagAreaCopySize));
+            WriteTrap(BootPointOffset, bus.RegisterBootstrapGateway(HostBootBootstrap, BootPointOffset, () => ConfiguredBase + DiagAreaOffset, DiagAreaCopySize));
+            WriteTrap(ResidentInitOffset, bus.RegisterBootstrapGateway(HostResidentInit, ResidentInitOffset, () => ConfiguredBase + DiagAreaOffset, DiagAreaCopySize));
             _bootstrapInstalled = true;
         }
 
@@ -338,17 +338,17 @@ namespace CopperMod.Amiga.Lightweight
         private void HostDiagBootstrap(M68kCpuState state)
         {
             DiagBootstrapCalled = true;
-            var copyBase = state.A[2] & 0x00FF_FFFFu;
+            var copyBase = _bootstrapBus!.CpuAddress(state.A[2]);
             _diagCopyBase = copyBase;
-            _execBase = (state.A[6] != 0 ? state.A[6] : _bootstrapBus?.ReadLong(4) ?? 0) & 0x00FF_FFFFu;
-            _expansionBase = state.A[5] & 0x00FF_FFFFu;
-            _configDev = state.A[3] & 0x00FF_FFFFu;
+            _execBase = _bootstrapBus.CpuAddress(state.A[6] != 0 ? state.A[6] : _bootstrapBus.ReadLong(4));
+            _expansionBase = _bootstrapBus.CpuAddress(state.A[5]);
+            _configDev = _bootstrapBus.CpuAddress(state.A[3]);
             if (_bootstrapBus != null &&
                 copyBase != 0 &&
                 _bootstrapBus.IsMappedMemoryRange(copyBase, DiagAreaCopySize))
             {
                 PatchResidentPointers(_bootstrapBus, copyBase);
-                WriteBootstrapData(_bootstrapBus, copyBase, _execBase, _expansionBase, _configDev, state.A[0] & 0x00FF_FFFFu);
+                WriteBootstrapData(_bootstrapBus, copyBase, _execBase, _expansionBase, _configDev, _bootstrapBus.CpuAddress(state.A[0]));
             }
 
             state.D[0] = 1;
@@ -406,7 +406,7 @@ namespace CopperMod.Amiga.Lightweight
 
         private uint FindCopyBaseFromResidentInit(M68kCpuState state)
         {
-            var pc = state.LastInstructionProgramCounter & 0x00FF_FFFFu;
+            var pc = _bootstrapBus!.CpuAddress(state.LastInstructionProgramCounter);
             return pc >= ResidentInitOffset ? pc - ResidentInitOffset : 0;
         }
 
@@ -1397,7 +1397,7 @@ namespace CopperMod.Amiga.Lightweight
             public uint SegmentListBptr { get; }
         }
 
-        private sealed class BootMetadataAllocator
+        internal sealed class BootMetadataAllocator
         {
             private readonly LightweightHdfBus _bus;
             private readonly uint _copyEnd;

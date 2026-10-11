@@ -1,5 +1,21 @@
 # Optional native replay
 
+The [October 8 Detroit correction](engine/DETROIT_AGA_FIX_2026-10-08.md) adds
+generic postincrement EORI support in the shared CPU. With unpublished local
+`1.5.4-detroit-dev.2`, the stock PAL A1200 starts a Medium game and completes
+January 1908 into February, returning to interactive management. Both production
+normal/scalar runs complete 34,000 fields; all 1,027 capture files and final
+fingerprints match. Saves and full-game completion remain unverified. The
+[original 1.5.3 failure](engine/DETROIT_AGA_2026-10-08.md) remains historical evidence.
+
+The 2026-10-03 [chipset specialization candidate](engine/CHIPSET_REGRESSION_2026-10-03.md)
+preserves the complete native Lemmings gameplay identity in batch and scalar
+execution, with zero measured allocations. Six ECS/AGA fixture replays preserve
+182 image/state/RAM/PCM/profile files and their final hardfile hashes. All 163
+native-enabled host tests pass with the pinned inputs. These are bounded parity
+checks against existing evidence; chipset conformance limits and performance
+acceptance remain separately recorded.
+
 The [September 23 corpus](engine/NATIVE_CORPUS_2026-09-23.md) adds five games on
 the shipped locality CPU. Lotus Esprit Turbo Challenge reaches interactive racing;
 Railroad Tycoon completes disk A → B → A loading, scenario selection and map/new
@@ -121,19 +137,27 @@ Lemmings disk 1, then run:
 ```powershell
 $env:COPPERSCREEN_LIGHTWEIGHT_NATIVE_ROM = 'path/to/Kickstart_13.rom'
 $env:COPPERSCREEN_LIGHTWEIGHT_NATIVE_ADF = 'path/to/Lemmings-disk1.zip'
-$env:COPPERSCREEN_LIGHTWEIGHT_NATIVE_SCRIPT = (Resolve-Path 'CopperScreen.Lightweight.Tests/Workloads/lemmings-native-level1.json').Path
+$env:COPPERSCREEN_LIGHTWEIGHT_NATIVE_SCRIPT = (Resolve-Path 'CopperScreen.Lightweight.Tests/Workloads/lemmings-cpu-bus-timing-v1.json').Path
 dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release
 ```
 
 The workload uses the previously accepted SR-cracked Lemmings disk set. Different
 releases are not interchangeable with its frozen input and fingerprints. Each
-native test runs 14,520 fields; one also presses and releases Return during
-gameplay. Both require active audio, no reported unsupported feature, and the
-accepted pixel/audio fingerprint `C65F87325946E5DA`. The ordinary replay also
-requires CPU fingerprint `6AE7090DA8AFB7E3`, at cycle `2063321634`.
+native test runs 18,120 fields, including a 14,520-field warmup; one also presses
+and releases Return before menu selection. Both require guest keyboard
+acknowledgement where applicable, active audio, no reported unsupported feature,
+and the validated pixel/audio fingerprint `9DE548805866DC63`. The ordinary replay
+also requires CPU fingerprint `505451D28DF1C053`, at cycle `2574756850`.
 
-This portable host-test script adapts the original frozen workload's local
-disk-2 path. It contains input actions, not copyrighted game content. Runner
+These identities and the delayed input sequence were independently verified for
+the [four-clock CPU bus correction](engine/LOTUS_III_PERFORMANCE_2026-09-25.md)
+before its timing comparison. The October 3 investigation repeats that exact
+identity and both gameplay screenshots on the current production build, with
+scalar parity. The former `lemmings-native-level1.json` swaps disks too early
+with the corrected CPU timing; it remains part of historical evidence.
+
+This portable host-test script uses a repository-relative disk-2 path and the
+validated later input sequence. It contains input actions, not copyrighted game content. Runner
 exploratory scripts may still contain original-machine disk-swap paths; the
 historical performance harnesses also require a different exact script hash.
 Use the [performance guide](engine/PERFORMANCE.md) for that separate tooling gap.
