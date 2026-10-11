@@ -1,8 +1,11 @@
 # CPU support and Copper68k package scope
 
-Updated 2026-10-08. The published baseline is Copper68k `1.5.3` from NuGet.org.
-This development worktree pins the unpublished `1.5.4-detroit-dev.2` package
-for Detroit's reached `EORI.B #$9E,(A0)+` timing form. The shared CPU source
+Updated 2026-10-11. The published baseline is Copper68k `1.5.3` from NuGet.org.
+This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate.
+The merged general logical handler already supports Detroit's reached
+`EORI.B #$9E,(A0)+` form; the older dedicated path is not imported. Exact-package
+evidence is in the [candidate qualification record](COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
+The shared CPU source
 is maintained in CopperMod; no sibling project reference is used.
 The published release retains the preceding 1.5.2 integer
 corrections and was explicitly authorized for publication on 2026-10-07.

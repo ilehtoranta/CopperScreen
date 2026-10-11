@@ -1,0 +1,166 @@
+{
+  "status": "qualified-known-coverage",
+  "native": {
+    "completedFields": 34000,
+    "captureMismatches": [],
+    "inspection": {
+      "reportFrame": 28800,
+      "returnFrame": 34000,
+      "previewOnlyCropAndResample": true,
+      "returnedMonth": "February 1908",
+      "balance": 55061,
+      "company": 1,
+      "loss": 4939,
+      "canadianSales": 1250,
+      "reportMonth": "January 1908"
+    },
+    "expectedCpuVersion": "1.5.4-qualified-dev.1",
+    "media": {
+      "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip": {
+        "zipSha256": "eb63ba9ceff1ac12bb025389434946101ae71dd064b8a830e8ae8fe111c1be39",
+        "entries": {
+          "Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].rom": {
+            "bytes": 524288,
+            "sha256": "293beea59d7de4caab3e07223d66e844ad5268eb06a04f405b523a0a1543d64c"
+          }
+        }
+      },
+      "Detroit (1994)(Impressions)(AGA)(Disk 1 of 2)[h DLM].zip": {
+        "zipSha256": "e942ad9dc4a32c0671c8d36126d7b804dc8a6531157e5da3179a0d246877a6a9",
+        "entries": {
+          "Detroit (1994)(Impressions)(AGA)(Disk 1 of 2)[h DLM].adf": {
+            "bytes": 901120,
+            "sha256": "52624269bff0f5c928705273a2eee2c6d7eb27e54525be065c71a43d4409cf97"
+          }
+        }
+      },
+      "Detroit (1994)(Impressions)(AGA)(Disk 2 of 2).zip": {
+        "zipSha256": "32be6d59dbb0340b3e67fd87909a27a006149b70d5203bce7cdd34f9b2d64c7d",
+        "entries": {
+          "Detroit (1994)(Impressions)(AGA)(Disk 2 of 2).adf": {
+            "bytes": 901120,
+            "sha256": "17693d7cef7f109d9191d72c014f56213a07cb68e3fa39fa8652f0e5d78e5364"
+          }
+        }
+      }
+    },
+    "capturesPerMode": 1027,
+    "milestoneHashes": {
+      "20400": {
+        "frame-020400.bmp": "1cb2128cf8c46222fda3a4860e3f39ef20838968005831417e38b54fc85a343a",
+        "frame-020400.json": "3624699f291a7a7afbf9ae519cc05abb238f1f03d8b7f6fc810e7a492f0d676c",
+        "frame-020400.chipram": "cfb55e42114a8c135d9755edcd20462f4e1b8e0708448a4c4cf857083f66d966",
+        "frame-020400.pcm": "4915a3009e255756731c06ca3998492cb0470201aa7377a94f715d7b31b63d45"
+      },
+      "22800": {
+        "frame-022800.bmp": "d8813d77d722d2d86b6747869a8e57a8a33d8a37f45ac84c86e3ad5ac7010562",
+        "frame-022800.json": "c5d59881288177390da9de4e8ae2f640d0e963f6cd29b8e13fd3af5e4f390109",
+        "frame-022800.chipram": "02842fdc96cac4a5f9b4be7ec00836ceb2fa1ee79e4c054f9900fe966936d027",
+        "frame-022800.pcm": "1956da1bb1e6b9171efd49b03c383d0299adc7caddc0242696c1ab59fe478ccf"
+      },
+      "24400": {
+        "frame-024400.bmp": "7d539a07f449ade590c9eba861694407545b6434c2c3a7bfe808e205505eced3",
+        "frame-024400.json": "9287133b7addd0be061f1253532f4a5c1b6d8e4c7b23c34cf96d420fc2203d4a",
+        "frame-024400.chipram": "96b2ad8e716713ca200f8420de98a4af966571b23a97fcbc02b76a32f6c474ec",
+        "frame-024400.pcm": "cd1b8e6960688f5ebf8a595adec1d6dacbc9db4a5f8d76c8c842eb82ac901491"
+      },
+      "27000": {
+        "frame-027000.bmp": "2424c96ac4f43eaedbcd328304dbfd3774083dc78b68f7c78cc14fa38daf31cc",
+        "frame-027000.json": "c6e6daeabbfc26e2d0369a3d8e6a4aa28261be1e8fac7bb2eb1fd9c0fa7e4c3a",
+        "frame-027000.chipram": "888d612281a8dd26403dc0a8930962671dca42709db5bf142a0848ce4a3c99f5",
+        "frame-027000.pcm": "2bf7de75ba6435de5ed2487596e5e95521879e1c4a9df1756d2935f15fbe5386"
+      },
+      "28800": {
+        "frame-028800.bmp": "0fb6658123c17fead088423c4c413b6a1246c8ab6d272d20f998e56566b35784",
+        "frame-028800.json": "4352ae07ea14cdda1be739b6128a4941d7bdb911a5193770e33bc5a817fdf4e2",
+        "frame-028800.chipram": "4152db474a51ce0224b622629ba1ead76dbaee17108dad2cdc833598301e05ef",
+        "frame-028800.pcm": "47fc7ac4d60f3b83eef4837b6068a967d2bfe1a29fe5a816a6a0d42b5550134a"
+      },
+      "32000": {
+        "frame-032000.bmp": "0fb6658123c17fead088423c4c413b6a1246c8ab6d272d20f998e56566b35784",
+        "frame-032000.json": "02d71c5e12c325dee5cee9f3cf83e420f45ec75865f5e9aa7963bb270a585024",
+        "frame-032000.chipram": "db1029fdc1648048fe2b8eb4bdab799eeb3cd80af6a5de7774f634e52d057237",
+        "frame-032000.pcm": "b999b6af7e7a28366cda367b2faa9f95f2f6170c1114f70d50cc6c5aecdc67d9"
+      },
+      "34000": {
+        "frame-034000.bmp": "2a0e36c4bc8665183cf990c16c7730b8fd6636e6606eb2daced4a5e301a3f35c",
+        "frame-034000.json": "7553d2719115d4e2d8915b6e69341c523dfc0d0ee04d51a1a98abd4a5478965f",
+        "frame-034000.chipram": "5eb3422460ab5e42cabca6a89d9240dffac8395eb3a5e63d58542ac964631414",
+        "frame-034000.pcm": "f1f53d3084ce60945ea5b516f32363b3358201f85af9b3c3ae3c6629eb423c1c"
+      }
+    },
+    "limits": "First-month gameplay only; no save/later-gameplay, hardware timing or capture-inclusive throughput qualification",
+    "negativeControls": {
+      "wrongHistoricalVersionRejected": true,
+      "incompleteRequestedFieldsRejected": true
+    },
+    "scalarExitCode": 0,
+    "inputSha256": "62ab30a5d19b275b902d3f48052a14b19ab8cca4555a1fc2435889628f5dfae8",
+    "normalExitCode": 0,
+    "fingerprints": {
+      "cycle": "4831374177",
+      "cpu": "0x5CB29DEF489385D5",
+      "hardware": "0xD04855245C082B80",
+      "output": "0x1DB7F37A97B2D5E2"
+    }
+  },
+  "fullCpu": {
+    "passed": 5393,
+    "trxSha256": "8878a80fdb71acea7cd6838fc6d59abd34df72b6221b946227bd5630e24cb940",
+    "requiredReportGate": "passed",
+    "failed": 0,
+    "unavailableOrDeferred": 109,
+    "deterministicLogicalCases": 86663530,
+    "deterministicXunitBatches": 783,
+    "reportSummarySha256": "fe812f6de1a3215fcd491641ffba8145efddafef1b2f018d65bb63960bd955d0"
+  },
+  "consumerSourceArchiveSha256": "c4668aa944d3fedfd439b20365f140312ec51138eebe6ba8bbd509dd4a9fc96f",
+  "cpuExecutionSourceChanged": false,
+  "consumerSourceCommit": "b64fc62f86039d357a055dff61d1fd1f7832444f",
+  "regressionWitnesses": {
+    "focusedFailed": 0,
+    "mainlineSemanticPassed": 10,
+    "focusedPassed": 230,
+    "strengthenedSparseBusCases": 10
+  },
+  "schema": 1,
+  "packagePublished": false,
+  "date": "2026-10-11",
+  "oldDetroitSpecialCaseImported": false,
+  "cpuDllSha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+  "consumer": {
+    "nativeCpuPassed": 4,
+    "lockedRestorePassed": true,
+    "tests": {
+      "engine": {
+        "failed": 0,
+        "passed": 1183,
+        "trxSha256": "0b577d415515a6d71f38d78188990b7d575dc0b59e6a9907c960c0ffa1e797e5",
+        "unavailable": 7
+      },
+      "host": {
+        "failed": 0,
+        "passed": 195,
+        "trxSha256": "8a2e96b8ba14aa175749f8311480e1d8e7a81e37a76ced26e6d76534376f5eef",
+        "unavailable": 6
+      },
+      "disk": {
+        "failed": 0,
+        "passed": 74,
+        "trxSha256": "ebfbfc392feca08e6f915f8dbb8d850f364b4b9fc97a33ce5635101e38c01076",
+        "unavailable": 0
+      }
+    },
+    "nativeCpuFailed": 0,
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "byteIdenticalCpuInTestPackageRunnerAndConsumer": true,
+    "nativeCpuUnavailable": 0
+  },
+  "packageVersion": "1.5.4-qualified-dev.1",
+  "cpuSourceBase": "5b849dbff704d5a339b64a9ceb46c39b66c5b74e",
+  "packageSha256": "83fc06cb715a5a394611e0c73f4e7d5a0f5f5c171db63860b9d8458ca1e16b6d",
+  "acceptance": "known-coverage-only",
+  "deferredAreaCount": 5,
+  "roadmapComplete": false
+}
