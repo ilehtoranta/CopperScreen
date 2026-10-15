@@ -32,10 +32,13 @@ ROMs, operating-system files and game media are not included.
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
 Copper68k's published baseline is [version `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3).
-This development worktree pins the unpublished `1.5.4-detroit-dev.2` package
-from the ignored Detroit local feed. Build that package from the corrected
-CopperMod source before restoring this worktree; no sibling project reference
-is used. See
+This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate
+from the ignored `artifacts/qualified-cpu-20261011/feed` directory. Put the frozen
+package identified by the qualification record there before restoring this
+worktree; it is not yet available from NuGet.org. Rebuilt package content needs
+a new development version and regenerated locks. No sibling project reference
+is used. See the
+[candidate qualification record](docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md) and
 [CPU support, validation and remaining limits](docs/engine/CPU_SUPPORT.md).
 The explicit A1200 EC020 profile and native ROM operand forms
 are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding

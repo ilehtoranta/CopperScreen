@@ -147,8 +147,8 @@
       },
       "Copper68k": {
         "type": "Transitive",
-        "resolved": "1.5.4-detroit-dev.2",
-        "contentHash": "W3zmqCJoMsITg7S2I9nE5Mw2x/gPUjpHjGlqBhH00JGnpefGxvT3ka/+9af+OxFWMh2rJH0P7BFyAE43ajcYcw==",
+        "resolved": "1.5.4-qualified-dev.1",
+        "contentHash": "cX1a1YCickQb/ShABelA9l3j27V7L+g4MdVvTVTaquQJlIuLRR2/FZz6NXi0nprKvLsf85aNksoe1e3jfBQDZg==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
@@ -325,7 +325,7 @@
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.4-detroit-dev.2, 1.5.4-detroit-dev.2]",
+          "Copper68k": "[1.5.4-qualified-dev.1, 1.5.4-qualified-dev.1]",
           "CopperDisk": "[3.0.0, )"
         }
       },
@@ -335,7 +335,7 @@
           "Avalonia": "[12.0.3, )",
           "Avalonia.Desktop": "[12.0.3, )",
           "Avalonia.Themes.Fluent": "[12.0.3, )",
-          "Copper68k": "[1.5.4-detroit-dev.2, 1.5.4-detroit-dev.2]",
+          "Copper68k": "[1.5.4-qualified-dev.1, 1.5.4-qualified-dev.1]",
           "CopperDisk": "[3.0.0, )",
           "CopperMod.Amiga.Lightweight": "[0.1.0-preview.2, )",
           "CopperPad": "[2.0.0-preview.1, )",
