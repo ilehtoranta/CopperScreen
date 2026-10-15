@@ -20,11 +20,29 @@ normal guest instruction, DMA and hardware execution.
 
 ## Source ownership and retained component evidence
 
-The sibling repositories were inspected on 2026-10-04. CopperStart already owns
+### Standalone replacement-ROM compatibility — 2026-10-15
+
+The separate CopperStart repository now provides a native disk-boot ROM with
+bounded DOS startup and a console. Its prebuilt October 13 image was tested on
+the unchanged Lightweight engine. [The first compatibility record](COPPERSTART_COMPATIBILITY_2026-10-15.json)
+identifies the exact Lotus Turbo Challenge 2 disk, configuration, native Kickstart
+control and initial blocker: a fixed-address loader read targets unused space in
+CopperStart's bootstrap stack reservation and returns `IOERR_BADADDRESS` because
+trackdisk requires its destination to belong to an Exec memory range. Removing
+that allocator-range check in CopperStart fixes the read without moving the live
+stack. The freshly compiled ROM passes 23 native disk-boot tests; both 14,000-field
+Lotus replays reach the opening race and respond to acceleration input, with all
+355 batch/scalar capture files identical. Full-game completion remains unverified.
+The [single-title recorder](../../scripts/probes/CopperStart/replay.py)
+preserves commands, hashes and captures; it never infers compatibility from runner
+completion. This external ROM replay does not enable the old CopperStart host
+integration in the standard application.
+
+The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
-non-graphics Intuition/Workbench state and runtime orchestration. Its current
-ROM bootstrap initializes Exec memory/allocator state and diagnostics, then
-idles; it does not yet supply the application's disk boot path.
+non-graphics Intuition/Workbench state and runtime orchestration. At that
+inspection, its ROM bootstrap initialized Exec memory/allocator state and
+diagnostics, then idled; it did not yet supply a disk boot path.
 
 The complete former `CopperMod.Amiga.Emulator/CopperStart` subtree and
 `AmigaBoot.cs` have now moved into
