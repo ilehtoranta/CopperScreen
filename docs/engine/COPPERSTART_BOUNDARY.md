@@ -38,6 +38,18 @@ preserves commands, hashes and captures; it never infers compatibility from runn
 completion. This external ROM replay does not enable the old CopperStart host
 integration in the standard application.
 
+The [second compatibility record](COPPERSTART_ARTE_2026-10-16.json) covers Arte
+by Sanity on the PAL OCS A500 with 512 KiB Chip and 512 KiB slow RAM. It exposed
+a caller-built request length check, missing A501 discovery, reset disk-pin/MFM
+state, and a split Chip MemHeader that made the demo report insufficient memory.
+CopperStart fixes these in the firmware. An original boot-block control now
+reads the same DDRB, ADKCON and physical Chip extent as native Kickstart 1.3.
+All 83 focused/native tests pass. Both 40,000-field Arte replays reach credits,
+later 3D scenes and the earlier intro sequence, with all 505 batch/scalar capture
+files identical. The Lotus 2 regression preserves all 71 captured images and
+its opening-race acceleration response. This remains bounded compatibility
+evidence for the recorded variants and machine, not general OS qualification.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
