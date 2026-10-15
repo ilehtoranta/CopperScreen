@@ -68,6 +68,20 @@ def boot_receipt(path):
     return result
 
 
+def input_identity(path):
+    path = path.resolve(strict=True)
+    media = []
+    for event in json.loads(path.read_text(encoding="utf-8-sig")):
+        event = {key.lower(): value for key, value in event.items()}
+        spec = event.get("diskpath") or event.get("adfpath")
+        if spec:
+            filename, separator, selection = spec.partition("#/")
+            resolved = str((path.parent / filename).resolve(strict=True))
+            media.append({"frame": event.get("frame"), "drive": event.get("drive", 0),
+                          **media_identity(resolved + ("#/" + selection if separator else ""))})
+    return {"path": str(path), "sha256": digest(path), "media": media}
+
+
 def main():
     root = Path(__file__).resolve().parents[3]
     parser = argparse.ArgumentParser(description=__doc__)
@@ -109,8 +123,7 @@ def main():
         "binaries": {p.name: digest(p) for p in (
             runner, runner.with_name("CopperMod.Amiga.Lightweight.dll"),
             runner.with_name("Copper68k.dll"), runner.with_name("CopperDisk.dll"))},
-        "input": ({"path": str(args.input_script.resolve()),
-                   "sha256": digest(args.input_script)} if args.input_script else None),
+        "input": input_identity(args.input_script) if args.input_script else None,
         "requestedFrames": args.frames, "captureInterval": args.interval,
         "receiptInterpretation": "Private bootstrap diagnostics; takeover code may overwrite them.",
     }

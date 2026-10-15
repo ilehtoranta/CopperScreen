@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "protocol": "copperstart-native-compatibility-v1",
+  "caseId": 3,
+  "title": "Desert Dream by Kefrens",
+  "status": "bounded-main-two-disk-sequence-verified",
+  "previousCase": "COPPERSTART_ARTE_2026-10-16.json",
+  "referenceSources": [
+    {
+      "title": "Commodore/Amiga ExecBase include definition",
+      "url": "https://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node009E.html",
+      "use": "Primary layout reference: MaxLocMem is the Chip-memory end and MaxExtMem the extended-memory end or null. Checksum behavior is measured by the native boot-block control."
+    }
+  ],
+  "engineCommit": "643bfecb70b21d4607076a7fdfafe4aa6229988f",
+  "copperStartSourceBuild": {
+    "baseCommit": "12f784f986bbb524ccde4c0b6a67a8c764bd6c40",
+    "patchSha256": "1bb6ce203643104148f1273f33a30d555c6b0b0fb085b3ccce1f4232d69f6166",
+    "sources": {
+      "src/CopperStart.Exec/BootstrapCore.cs": "e3862a574bd121e2a7ecdb886db77152c0bf0502337f55bbff7acbdc4c41100f",
+      "tests/CopperStart.Exec.Tests/BootstrapTests.cs": "17d5bf57a494c06c6e4f8d09e202f586d020c32a55c59e64b41d0c4783df872b",
+      "tests/CopperStart.Floppy.Native.Tests/NativeDiskBootTests.cs": "1503e184276ce149e637bd9c3a74a64a24f41960368b22a0a77fc7f1117114aa"
+    },
+    "note": "Build exports the baseline CopperStart source plus these exact changed files. Only Exec and the native test harness are rebuilt against the frozen producer binaries in final-isolated, with BuildProjectReferences=false. Unrelated working-tree edits are excluded."
+  },
+  "engine": "CopperMod.Amiga.Lightweight",
+  "cpuPackage": "1.5.4-qualified-dev.1",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "3aa4881b39f1159e9b166a1a63477979b41846a6ccd753572e2b7bedef0e3af2",
+    "CopperMod.Amiga.Lightweight.dll": "2bc74f12165760ce5d4540e14b11350b552e81da19c8bc98ca57623eece90083",
+    "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+    "CopperDisk.dll": "8533f61ec7d385508bdf8bc220f78143fa6f8b86a47a885849f3259de36ad443"
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\Desert Dream (Kefrens).zip",
+    "sha256": "0c41c82a744a2cf915082b968ef3763bf9152f19023b9340287fc593b73e7849",
+    "entry": "Desert Dream (Kefrens) A.adf",
+    "entryBytes": 901120,
+    "entrySha256": "25738c042efdf2202e67a5bd5a40a08766384dfc31a92ed8e248d1b12e26e1e3"
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\main-input.json",
+    "sha256": "fc240ac27f11f695a38388b50c4ab8f7550e4ff5c557a5ef7ff3a79e6380b8db",
+    "media": [
+      {
+        "frame": 36120,
+        "drive": 0,
+        "path": "C:\\Data\\TestImages\\Desert Dream (Kefrens).zip",
+        "sha256": "0c41c82a744a2cf915082b968ef3763bf9152f19023b9340287fc593b73e7849",
+        "entry": "Desert Dream (Kefrens) B.adf",
+        "entryBytes": 901120,
+        "entrySha256": "3e34d376c9805e0e64a3227b04e0d0bce0c1531f3e90938329bf5079cd214f97"
+      }
+    ]
+  },
+  "inputEvents": [
+    {
+      "frame": 36000,
+      "ejectAdf": true
+    },
+    {
+      "frame": 36120,
+      "diskPath": "C:/Data/TestImages/Desert Dream (Kefrens).zip#/Desert Dream (Kefrens) B.adf"
+    }
+  ],
+  "initialFailure": {
+    "manifest": "startup-copperstart/run.json",
+    "manifestSha256": "8e5a2e9f5de68e5b4212cf40a24001179ec72154c32213d4d65c068c3846bbbd",
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-arte-2026-10-15\\matched-defaults-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "814cfc5e8f3c3b07fb3ac6b3423fc47c863edf4589582a47f0ea6bd66631a8f3"
+    },
+    "frames": 3000,
+    "captureInterval": 100,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "conservative-batch",
+      "warmup": "0",
+      "frames": "3000",
+      "completed": "3000",
+      "fps": "148,66",
+      "cycle": "426306004",
+      "cpu": "0x8985815202FC66C8",
+      "hardware": "0x021D6C9459442F56",
+      "output": "0xB0CDD9A954AEC5A3",
+      "pixels": "284204",
+      "audioSamples": "1922",
+      "pcm": "real",
+      "allocated": "17764624",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "captureFiles": 155,
+    "sampledNonSilentFields": 0,
+    "lastPc": "000002DA"
+  },
+  "nativeStartupControl": {
+    "manifest": "startup-native/run.json",
+    "manifestSha256": "3876cdc9a9eab6e79d720d767e7ae1aaa3d1b3c88841158d924aa7d40c9f540a",
+    "rom": {
+      "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+      "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "frames": 3000,
+    "captureInterval": 100,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "conservative-batch",
+      "warmup": "0",
+      "frames": "3000",
+      "completed": "3000",
+      "fps": "118,86",
+      "cycle": "426173982",
+      "cpu": "0xAD15FAC5BC0461CA",
+      "hardware": "0x509B8F182B345FAF",
+      "output": "0x3EABC1D24A2B3A52",
+      "pixels": "284204",
+      "audioSamples": "1924",
+      "pcm": "real",
+      "allocated": "17762224",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "captureFiles": 155,
+    "sampledNonSilentFields": 15,
+    "lastPc": "00060910"
+  },
+  "initialObservation": "CopperStart displays the hardware/1 MB requirement message; native Kickstart reaches the intro on the same fitted memory. Both short replays complete, demonstrating why completion alone is not a compatibility result.",
+  "memoryLimitOnlyProof": {
+    "startup": {
+      "manifest": "metadata-only-startup/run.json",
+      "manifestSha256": "5e19565f9386d6bb997f9261b7fe3e95485e25b616107cbf12f600a1ac6f57f1",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "b05223e7f3552fa69c8d1a57e3653bf9b07942d5a1830a6b7a66edf1e8392029"
+      },
+      "frames": 3000,
+      "captureInterval": 100,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "3000",
+        "completed": "3000",
+        "fps": "284,08",
+        "cycle": "426306004",
+        "cpu": "0x7BAED1067BE9EB84",
+        "hardware": "0xFB282143007EE32F",
+        "output": "0x37693474D54912A0",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "17774296",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 155,
+      "sampledNonSilentFields": 16,
+      "lastPc": "00060910"
+    },
+    "main": {
+      "manifest": "metadata-only-main/run.json",
+      "manifestSha256": "bcc9f11a79903665f1b36eec34d17d7e7825f1fbb83454b5f176b638aae2ea4a",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "b05223e7f3552fa69c8d1a57e3653bf9b07942d5a1830a6b7a66edf1e8392029"
+      },
+      "frames": 72000,
+      "captureInterval": 1000,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "fps": "266,08",
+        "cycle": "10225684436",
+        "cpu": "0x445AF57628F30E81",
+        "hardware": "0xF1225AE9A02ACE21",
+        "output": "0x73913C5E3173704A",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "allocated": "43381016",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 365,
+      "sampledNonSilentFields": 61,
+      "lastPc": "00040136"
+    },
+    "sourceBuild": {
+      "baseCommit": "12f784f986bbb524ccde4c0b6a67a8c764bd6c40",
+      "patchSha256": "17644cb8d0fd847fa735617f5c4b86827e8024f68ef7ecc8e2b17b5163f943fd",
+      "sources": {
+        "src/CopperStart.Exec/BootstrapCore.cs": "c1a4e39715b4d6b3e0a268d7d6deb2d755c617284cb594001e487f4b0696d913",
+        "tests/CopperStart.Exec.Tests/BootstrapTests.cs": "21a7c934684f1281eae166980f29c12b2be7d7f0f8b2755b15b18b684b7aabae",
+        "tests/CopperStart.Floppy.Native.Tests/NativeDiskBootTests.cs": "ff838ae0e34a15762de364eed66b4997851299784f6bd5f63ebbac4fd15aa5d7"
+      },
+      "note": "Native producer DLLs were built into native-isolated before concurrent unrelated source edits. These fixed producer inputs remain frozen for ROM compilation."
+    },
+    "note": "This interim source-built image changes MaxExtMem and checksum timing while retaining the old zero-sum checksum. It establishes the demo blocker independently of the additional checksum-convention fix. Final qualification below uses the later ROM."
+  },
+  "compatibilityFixes": [
+    {
+      "id": "CS-COMPAT-006",
+      "subsystem": "BootstrapCore ExecBase physical extended-memory limit",
+      "cause": "The allocator knows the A501 bank, but ExecBase.MaxExtMem at $4E remains zero. The loader subtracts $80000 from MaxExtMem and uses MaxLocMem-$80000 as its fallback. With 512 KiB Chip RAM the fallback is zero, so it displays the hardware requirement message.",
+      "fix": "Publish the highest detected non-Chip memory end in MaxExtMem when adding physical banks, then calculate the ExecBase checksum after memory discovery. No game recognition, media modifications or host traps.",
+      "nativeControl": "An original generated boot block reads MaxLocMem=$80000 and MaxExtMem=$C80000 under native Kickstart 1.3. The preceding CopperStart ROM reads $80000/$0; the fresh ROM reads $80000/$C80000."
+    },
+    {
+      "id": "CS-COMPAT-007",
+      "subsystem": "BootstrapCore static ExecBase checksum",
+      "cause": "The independent probe also observes a checksum sum of $FFFF under native Kickstart but zero under CopperStart. The former implementation stores the two's-complement sum.",
+      "fix": "Store the one's-complement sum after memory discovery and validate a low-word sum of $FFFF. Both portable and native-loader tests assert this convention.",
+      "scope": "The memory-limit-only image already clears the demo's hardware check. This separate ABI correction is included in the final qualified source image."
+    }
+  ],
+  "bootDefaultsControl": {
+    "generator": "scripts/probes/CopperStart/boot_defaults.py",
+    "generatorOptions": [
+      "--memory-limits"
+    ],
+    "diskSha256": "323590b581e05ee3492ad1b91beabdab10be9a92de5173f4cef8b0c21d400fa3",
+    "before": {
+      "manifest": "defaults-before/run.json",
+      "manifestSha256": "e11d7080065f4179f2f65ea907f68464e9df38575b98db27ddada4eb772250ab",
+      "marker": "54455354",
+      "maxLocMem": "00080000",
+      "maxExtMem": "00000000",
+      "rawChecksumSum16": "0000",
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconR": "1100"
+    },
+    "native": {
+      "manifest": "defaults-native/run.json",
+      "manifestSha256": "e5c0f20c6e2ae92d6e9baf70597c2591095347318304134513d767855bd5c321",
+      "marker": "54455354",
+      "maxLocMem": "00080000",
+      "maxExtMem": "00C80000",
+      "rawChecksumSum16": "FFFF",
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconR": "1100"
+    },
+    "fixed": {
+      "manifest": "defaults-fixed/run.json",
+      "manifestSha256": "484782bcd9624101055db5f650aedbdffb9bd37fc77deab4264dc742c0a4000e",
+      "marker": "54455354",
+      "maxLocMem": "00080000",
+      "maxExtMem": "00C80000",
+      "rawChecksumSum16": "FFFF",
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconR": "1100"
+    },
+    "withoutSlowRam": {
+      "native": {
+        "manifest": "defaults-native-no-slow/run.json",
+        "manifestSha256": "cd7282391f328981e3c049f2f66cec74ac3298ff302a3ae215985855f743417a",
+        "marker": "54455354",
+        "maxLocMem": "00080000",
+        "maxExtMem": "00000000",
+        "rawChecksumSum16": "FFFF",
+        "chipUpper": "0007E800",
+        "ciaBDdrb": "FF",
+        "adkconR": "1100"
+      },
+      "fixed": {
+        "manifest": "defaults-fixed-no-slow/run.json",
+        "manifestSha256": "57efe9bf066e1902ec15cb91771d0c758b37680d87493f9eb40938c19233aa1e",
+        "marker": "54455354",
+        "maxLocMem": "00080000",
+        "maxExtMem": "00000000",
+        "rawChecksumSum16": "FFFF",
+        "chipUpper": "00080000",
+        "ciaBDdrb": "FF",
+        "adkconR": "1100"
+      }
+    },
+    "checksumNote": "The final image matches the native $FFFF checksum convention, in addition to both physical memory limits.",
+    "allocatorLayoutNote": "Without slow RAM, native Kickstart reserves the top of its Chip bank by ending mh_Upper at $7E800, while CopperStart retains $80000 and represents reservations in its allocator. This control matches physical MaxLocMem/MaxExtMem and checksum, not identical allocator reservation layouts. With the fitted A501 bank, both report Chip mh_Upper=$80000."
+  },
+  "replacementRom": {
+    "path": "native-checksum-rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1",
+    "sourceBuilt": true,
+    "diagnosticPatches": false,
+    "producerManifest": "native-checksum-rom/disk-boot-test-manifest.json",
+    "producerManifestSha256": "d683a7b2c4569af028948ba15fa81d27ebee3be016df35987126c286bfb6d96e",
+    "producer": {
+      "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+      "romBytes": 524288,
+      "codeBytes": 447782,
+      "sha256": "EE645F0B8136904D12DDE0EACE1339B1010530671EEB28EBCD63D64A319620E1",
+      "inputs": [
+        {
+          "file": "CopperStart-System.dll",
+          "sha256": "1221D845998245DA82A75C16C855372C52D5CD74FF1BE1FF47B9D4A1EB099A96"
+        },
+        {
+          "file": "CopperStart.Devices.dll",
+          "sha256": "49C80B0BA21700B1FF5313392E0B97C8418B24F6003976469F91B6CAF42BBA0E"
+        },
+        {
+          "file": "CopperStart.Exec.dll",
+          "sha256": "A36C842C382504BE7D508E0366DE313AF0481BD0328301B3CB636A5418BE019A"
+        },
+        {
+          "file": "CopperStart.Dos.dll",
+          "sha256": "AE41CA77FBC4C7620276D46BD28CBF32A1BC51D05F80E421CD2BEB2442864B48"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "41A66A612B5F2712CA4EB0E8BB6AF9B1EF49C6CED477CA57FD03332B07708290"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "67FF441BDF9AAC15129D85F44D4F89698489566DC1D3607ADAD70A4CABDC3980"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "C344A8C13D14204AD77711F0E6D5BFCAB591FB642BB4F87AF2C1C87610C3B5CC"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "C9B8073A4F8557D899477CA28AC203D067ECCFE95ABF02B81BD5F0CE437F3BE1"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "CCDB3AD3C566C67FD58213A7DD80A147E522BEB622F98357206D6E2519AFDD25"
+        },
+        {
+          "file": "Copper68k.dll",
+          "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+        }
+      ]
+    }
+  },
+  "nativeTests": {
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/final-native-boot.trx",
+    "sha256": "cd18a94320d25ddc5adbc8e9bf26fb33cdeacd3d2b92b4fe549cdd49fa5cf92b"
+  },
+  "bootstrapAllocatorTests": {
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "focused-tests/focused-final.trx",
+    "sha256": "ab27992efcbbd8d40be5de6a52d7b5fe28a5eb67e426a50a01cb19040f53c5a1",
+    "harness": "focus-final/CopperStart.Exec.Tests.csproj",
+    "harnessSha256": "9c4e0f146f18b9274ab8e58c14a33a3031a49c3a4934b3710128eebcad0c5acb",
+    "note": "The five original focused test classes and two helper files are compiled from the exported baseline plus the recorded source changes, against frozen producer DLLs. This excludes concurrent unrelated source edits."
+  },
+  "nativeDosScriptConsoleRegression": {
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/final-dos-console.trx",
+    "sha256": "d24c53a72adc91dc659de0ab4d8019803ed09f3980619685b6e0c1f446220823"
+  },
+  "currentSourceIntegration": {
+    "parentCommit": "2645cb5d9504bfd3427d31c53baffcce416f7fba",
+    "solutionBuild": {
+      "command": "dotnet build CopperStart.slnx -c Release --no-restore -m:1",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "focusedTests": {
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0,
+      "trx": "test-results/current-source-focused.trx",
+      "sha256": "7e74b3df509f1712aeab4f4d3331ada161b124c665962df6801a17f964108bed"
+    },
+    "scope": "The current source including the parallel caller-data audit builds and passes these 36 semantic tests. The native ROM/media results use the separately recorded frozen baseline plus memory-limit/checksum changes, and exclude audit commit2645cb5."
+  },
+  "replays": [
+    {
+      "manifest": "main-native/run.json",
+      "manifestSha256": "33ad75c979ac7663c9fc2500a3651e0b6ffebf71d07397a2783ce6e0bce32bc9",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "frames": 72000,
+      "captureInterval": 1000,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "fps": "66,22",
+        "cycle": "10225552872",
+        "cpu": "0x8E832864BDCE9DE1",
+        "hardware": "0x6853448CF4D3F479",
+        "output": "0xAB5D94B0DEB7A7CB",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "43510520",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 365,
+      "sampledNonSilentFields": 61,
+      "lastPc": "0004013A"
+    },
+    {
+      "manifest": "main-batch/run.json",
+      "manifestSha256": "c0078c863d42246ec7a0030f1fcea7f81277c9ccee2e9bdafa4313a23e14ac15",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\native-checksum-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1"
+      },
+      "frames": 72000,
+      "captureInterval": 1000,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "fps": "203,09",
+        "cycle": "10225684436",
+        "cpu": "0x445AF57628F30E81",
+        "hardware": "0xF1225AE9A02ACE21",
+        "output": "0x73913C5E3173704A",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "allocated": "43371352",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 365,
+      "sampledNonSilentFields": 61,
+      "lastPc": "00040136"
+    },
+    {
+      "manifest": "main-scalar/run.json",
+      "manifestSha256": "a0c5785ab7cbe92f40577cfa5f965cbb462c700452ff94436effb05b48c0a310",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\native-checksum-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1"
+      },
+      "frames": 72000,
+      "captureInterval": 1000,
+      "cpuMode": "scalar",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "fps": "204,37",
+        "cycle": "10225684436",
+        "cpu": "0x445AF57628F30E81",
+        "hardware": "0xF1225AE9A02ACE21",
+        "output": "0x73913C5E3173704A",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "allocated": "43338264",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 365,
+      "sampledNonSilentFields": 61,
+      "lastPc": "00040136"
+    },
+    {
+      "manifest": "lotus-regression/run.json",
+      "manifestSha256": "0ddd2b96fbdf2a1899e534722698a643e029e5c0e3b9f6f80f5991c9a42f329a",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\native-checksum-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1"
+      },
+      "frames": 14000,
+      "captureInterval": 200,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "196,28",
+        "cycle": "1989428016",
+        "cpu": "0x8B7DF219BF2960F2",
+        "hardware": "0xA0EFAE09F0C1C7A9",
+        "output": "0x4E816355FB4F7E9D",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39335448",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "sampledNonSilentFields": 61,
+      "lastPc": "0007A112"
+    },
+    {
+      "manifest": "arte-regression/run.json",
+      "manifestSha256": "67b56cce5bd1d16b7fc29b64fbf453a2fac58c9e1e7857c61fbf689358dbed04",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desert-dream-2026-10-16\\native-checksum-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1"
+      },
+      "frames": 40000,
+      "captureInterval": 400,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "40000",
+        "completed": "40000",
+        "fps": "195,85",
+        "cycle": "5684080016",
+        "cpu": "0x0975C364A85C3B36",
+        "hardware": "0x72E91B9DFD082EDB",
+        "output": "0xD3786C3E8769AB69",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "55636400",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 505,
+      "sampledNonSilentFields": 90,
+      "lastPc": "00C0224E"
+    }
+  ],
+  "batchScalarParity": {
+    "comparedFiles": 365,
+    "identicalFiles": 365,
+    "differences": []
+  },
+  "visualMilestones": {
+    "method": "Visual inspection of decoded captures, with full captured-file batch/scalar parity checked separately.",
+    "finalDesertDream": {
+      "main-batch": {
+        "viewedFields": [
+          2000,
+          4000,
+          6000,
+          8000,
+          12000,
+          14000,
+          20000,
+          22000,
+          36000,
+          42000,
+          43000,
+          46000,
+          49000,
+          50000,
+          51000,
+          60000,
+          64000,
+          65000,
+          72000
+        ]
+      },
+      "main-scalar": {
+        "viewedFields": [
+          2000,
+          20000,
+          36000,
+          42000,
+          46000,
+          65000,
+          72000
+        ]
+      },
+      "milestones": [
+        {
+          "fields": [
+            2000,
+            4000,
+            6000,
+            12000
+          ],
+          "observation": "Kefrens intro, planet/space and Cairo/pyramid sequence."
+        },
+        {
+          "fields": [
+            20000,
+            22000
+          ],
+          "observation": "Later line figures and filled circles."
+        },
+        {
+          "fields": [
+            36000
+          ],
+          "observation": "Disk II insertion prompt before the scripted media change."
+        },
+        {
+          "fields": [
+            42000,
+            43000,
+            46000
+          ],
+          "observation": "Disk II shaded objects, picture zoom and point-wave effect."
+        },
+        {
+          "fields": [
+            49000,
+            65000,
+            72000
+          ],
+          "observation": "Closing credits and Kefrens message; credits continue at the final field."
+        }
+      ]
+    },
+    "nativeControl": {
+      "run": "main-native",
+      "viewedFields": [
+        2000,
+        3000,
+        4000,
+        6000,
+        8000,
+        10000,
+        19000,
+        20000,
+        21000,
+        22000,
+        23000,
+        24000,
+        36000,
+        42000,
+        43000,
+        44000,
+        45000,
+        46000,
+        49000,
+        50000,
+        51000,
+        52000,
+        53000,
+        54000,
+        55000,
+        56000,
+        60000,
+        72000
+      ],
+      "observation": "The native control reaches the same bounded main sequence and two-disk ending."
+    },
+    "memoryLimitOnlyControl": {
+      "run": "metadata-only-main",
+      "viewedFields": [
+        2000,
+        4000,
+        6000,
+        8000,
+        10000,
+        12000,
+        20000,
+        22000,
+        35000,
+        36000,
+        42000,
+        43000,
+        46000,
+        49000,
+        50000,
+        51000,
+        60000,
+        72000
+      ],
+      "observation": "The memory-limit fix alone clears the hardware check and reaches both disks and closing credits."
+    },
+    "lotusRegression": {
+      "run": "lotus-regression",
+      "viewedFields": [
+        8000,
+        12000,
+        12800,
+        13000,
+        13400,
+        13600,
+        14000
+      ],
+      "observation": "Car specification and opening race; speed rises from 0 MPH at12000 to35 MPH at12800. Score27270 at14000. Opening-race compatibility only."
+    },
+    "arteRegression": {
+      "run": "arte-regression",
+      "viewedFields": [
+        4000,
+        12000,
+        20000,
+        28000,
+        36000,
+        40000
+      ],
+      "observation": "Intro effects, point-wave, picture/anti-digit mode, later3D/credits, starfield and return to earlier intro imagery."
+    },
+    "audio": "Non-silent sampled PCM recorded. Listening and audio fidelity remain unassessed."
+  },
+  "regressionComparison": {
+    "lotus": {
+      "previousManifest": "artifacts/copperstart-arte-2026-10-15/lotus-final-regression/run.json",
+      "previousManifestSha256": "a86ddef6e8a3b948bc4fbec5d0d6e3b4b4f26153bc3bd413c33ff3fd73a4fd7f",
+      "comparedImages": 71,
+      "identicalImages": 71,
+      "fingerprintsMatch": {
+        "cpu": true,
+        "hardware": true,
+        "output": true
+      },
+      "comparedPcmFields": 71,
+      "identicalPcmFields": 71,
+      "changedPcmFields": []
+    },
+    "arte": {
+      "previousManifest": "artifacts/copperstart-arte-2026-10-15/source-final-batch/run.json",
+      "previousManifestSha256": "d49ec5cf4b004694d9eb634700256166ba46009d545c5eba6de4ec79cb3effaa",
+      "comparedImages": 101,
+      "identicalImages": 101,
+      "fingerprintsMatch": {
+        "cpu": true,
+        "hardware": true,
+        "output": false
+      },
+      "comparedPcmFields": 101,
+      "identicalPcmFields": 100,
+      "changedPcmFields": [
+        "frame-003200.pcm"
+      ],
+      "maximumSampledPcmDelta": 33,
+      "note": "All 101 captured images and final CPU/hardware fingerprints match the preceding ROM. The cumulative output fingerprint differs: it accumulates sampled pixels and PCM over all fields. One captured PCM field (3200) differs by at most 33 on a signed 16-bit scale; the other 100 PCM captures match. Disk-ready timing is 20 cycles earlier in the new-ROM capture states. Listening/audio fidelity is unassessed; exact cross-ROM output parity is not claimed."
+    }
+  },
+  "artifactRoot": "artifacts/copperstart-desert-dream-2026-10-16",
+  "limitations": [
+    "Qualification covers the recorded two-disk main sequence and machine; hidden parts and alternate media remain unverified.",
+    "Sampled PCM confirms non-silent output; listening and audio fidelity were not assessed.",
+    "The full portable CopperStart suite and standalone reader root were not rerun. Prior unrelated portable-suite failures remain outside this slice.",
+    "This is compatibility evidence, not host-throughput or performance acceptance."
+  ],
+  "copperStartFixCommit": "33eef25141c4f92558b2ea6e4dae3d89c5be040c"
+}

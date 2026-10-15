@@ -50,6 +50,18 @@ files identical. The Lotus 2 regression preserves all 71 captured images and
 its opening-race acceleration response. This remains bounded compatibility
 evidence for the recorded variants and machine, not general OS qualification.
 
+The [third compatibility record](COPPERSTART_DESERT_DREAM_2026-10-16.json) covers
+Desert Dream by Kefrens on the same 512 KiB Chip + 512 KiB slow PAL A500.
+Its loader reads ExecBase's physical memory limits directly; CopperStart's
+unset `MaxExtMem` produces a false hardware/1 MB rejection. Firmware now reports
+the detected extended-memory end and uses the native `$FFFF` static ExecBase
+checksum convention. All 85 focused/native tests pass. Both 72,000-field demo
+replays load disk II and reach the closing credits, with all 365 batch/scalar
+capture files identical. Lotus 2 retains its opening-race response and all 71
+images; Arte retains all 101 images and its later scenes/intro loop. The record
+discloses Arte's small sampled-PCM difference and the distinct no-slow-RAM
+allocator reservations. Secret parts and audio fidelity remain unverified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
