@@ -32,7 +32,7 @@ ROMs, operating-system files and game media are not included.
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
 Copper68k's published baseline is [version `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3).
-This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate
+This worktree pins the frozen `1.5.4-qualified-dev.1` candidate
 from the ignored `artifacts/qualified-cpu-20261011/feed` directory. Run
 `./scripts/prepare-qualified-cpu.ps1` before restoring to fetch the exact frozen
 package from its [CopperMod GitHub release](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-qualified-dev.1) and verify its qualification
