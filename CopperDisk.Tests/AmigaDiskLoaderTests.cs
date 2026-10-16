@@ -306,6 +306,49 @@ public sealed class AmigaDiskLoaderTests
         Assert.Equal(0x7E, sectorMedia.ReadSector(0, 1, 0).Span[0]);
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(4)]
+    public void FromExtendedAdfBytesAcceptsUnformattedRawTracks(int backingBytes)
+    {
+        var media = AmigaDiskLoader.FromExtendedAdfBytes(CreateExtendedAdf(
+            overrides: new ExtendedAdfTrackOverride(0, 1, new byte[backingBytes], 0)));
+        var track = media.ReadTrack(0, 0);
+        Assert.Equal(AmigaDosTrackEncoder.CreateUnformattedTrack(), track.EncodedData.ToArray());
+        Assert.False(media.HasCompleteDecodedSectorData);
+    }
+
+    [Theory]
+    [InlineData(159, true)]
+    [InlineData(161, false)]
+    [InlineData(166, true)]
+    [InlineData(168, false)]
+    public void FromExtendedAdfBytesRetainsAdditionalPhysicalTracks(int trackCount, bool raw)
+    {
+        var sectors = new byte[trackCount * ExtendedAdfNormalTrackBytes];
+        var image = raw ? CreateExtendedAdf(sectors, trackCount,
+            new ExtendedAdfTrackOverride(trackCount - 1, 1, [0x44, 0x89, 0xA0, 0], 20)) :
+            CreateExtendedAdf(sectors, trackCount);
+        var media = AmigaDiskLoader.FromExtendedAdfBytes(image);
+        var track = Assert.IsType<AmigaEncodedTrack>(media.ReadTrack((trackCount - 1) / 2, (trackCount - 1) % 2));
+        Assert.Equal(Math.Max(80, (trackCount + 1) / 2), media.Cylinders);
+        Assert.Equal(AmigaDiskGeometry.StandardAdfSize, media.SectorData.Length);
+        Assert.True((track.Features & AmigaTrackFeatures.PreservedTrackData) != 0);
+        if (raw)
+        {
+            Assert.Equal(20, track.BitLength);
+            Assert.Equal(new byte[] { 0x44, 0x89, 0xA0, 0 }, track.EncodedData.ToArray());
+        }
+        else
+        {
+            var header = ((track.ReadUInt32AtBit(0x08 * 8) & 0x55555555u) << 1) |
+                (track.ReadUInt32AtBit(0x0C * 8) & 0x55555555u);
+            Assert.Equal(0xFF00090Bu | ((uint)(trackCount - 1) << 16), header);
+        }
+        if ((trackCount & 1) != 0)
+            Assert.Equal(AmigaDosTrackEncoder.CreateUnformattedTrack(), media.ReadTrack(trackCount / 2, 1).EncodedData.ToArray());
+    }
+
     [Fact]
     public void LoadRoutesExtendedAdfByMagic()
     {
@@ -368,7 +411,7 @@ public sealed class AmigaDiskLoaderTests
             ExtendedAdfInvalidKind.OldFormat => CreateOldExtendedAdf(),
             ExtendedAdfInvalidKind.UnsupportedTrackType => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 2, [0, 0], 16)),
             ExtendedAdfInvalidKind.Multirevolution => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 1, [0, 0], 16, RevolutionMinusOne: 1)),
-            ExtendedAdfInvalidKind.WrongTrackCount => CreateExtendedAdf(trackCount: AmigaDiskGeometry.TrackCount - 1),
+            ExtendedAdfInvalidKind.WrongTrackCount => CreateExtendedAdf(trackCount: 0),
             ExtendedAdfInvalidKind.BadNormalTrackSize => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 0, [0, 0], 0)),
             ExtendedAdfInvalidKind.InvalidBitLength => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 1, [0, 0], 17)),
             ExtendedAdfInvalidKind.HighDensity => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 1, new byte[20_002], 16)),

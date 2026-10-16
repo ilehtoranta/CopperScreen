@@ -58,6 +58,12 @@ Standard ADF media is writable at the sector-image level. Extended ADF, ADZ,
 DMS, IPF, SCP, and encoded-track media are read-only, but still expose a
 best-effort decoded sector view when sectors can be recognized. Extended ADF
 support targets modern `UAE-1ADF` images; old `UAE--ADF` images are rejected.
+Modern DD images may declare 1–168 tracks, within the 84-cylinder drive limit.
+Missing tracks are unformatted, including the second head of a partial cylinder.
+Extra physical tracks
+remain available through `ReadTrack`; the decoded sector view remains the
+standard 880 KiB layout. A zero raw bit length denotes an unformatted track,
+represented using the existing synthetic gap revolution.
 
 ## Third-Party Notices
 

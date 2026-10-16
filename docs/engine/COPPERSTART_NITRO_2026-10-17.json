@@ -1,0 +1,872 @@
+{
+  "schemaVersion": 1,
+  "started": "2026-10-16",
+  "date": "2026-10-17",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Nitro (1990), supplied UAE-1ADF image",
+  "status": "boot-and-menu-fixes-verified-race-start-wait-open",
+  "previousCase": "SUPERFROG_VIEWPORT_2026-10-16.json",
+  "consumerBaseCommit": "83f72ce31bc6a5a3b81e4cbd20083106691f00c1",
+  "consumerFixCommits": [
+    "7811e1b",
+    "d7ca8a4"
+  ],
+  "producerBaseCommit": "50f8583a40d24c34a06d4bed71ab31db19d47b95",
+  "producerFixCommit": "8fb0c89",
+  "producerRegressionCommit": "8c8e53f",
+  "cpuPackage": "1.5.4-qualified-dev.1",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\Nitro (1990)(Psygnosis)[extended adf].zip",
+    "sha256": "5d6cc2705621d85f5869255057dc1f67fe939cd8677647a890e4fedbf38da4e4",
+    "entry": "Nitro (1990)(Psygnosis)[extended adf].adf",
+    "entryBytes": 1942886,
+    "entrySha256": "895c78b4d0bc07b0e9fc12b86bac6d893b84fe76173f3020f26f1c6e224891c7"
+  },
+  "mediaLayout": {
+    "declaredTracks": 166,
+    "unformattedRawTracks": 19,
+    "readOnly": true
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+    "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+    "media": []
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "ab20606713639120fc2a9d509dd703e54fd67b46ae4f0d92ff7d3a83493e92a7",
+    "CopperMod.Amiga.Lightweight.dll": "96c88e725286b3f24c5129764eb68e9c949c703ff5e16d9e3f230696e1296648",
+    "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+    "CopperDisk.dll": "b6c21324e8e8a23d12d232950bf8d373463edc3726242a16c854771ec1a5dbee"
+  },
+  "originalRom": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fresh-rom\\CopperStart-DiskBoot.rom",
+    "sha256": "f37e8e47521661a125b1c9f129fd0dc5e7584980abbaf25fc5e49066c1da78bd",
+    "codeBytes": 456528,
+    "graphicsBytes": 26098
+  },
+  "diagnosticRom": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\diagnostic-tod.rom",
+    "sha256": "4635e32ec8bae1ed856eb80ff70e19029637e89c1a23badb5714b829a634a35c"
+  },
+  "sourceBuiltRom": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+    "sha256": "5C5C0ADFBC4E12A59ECA2DD0236C40EFC633B71AB34190E88418F36BEA4FF4C9",
+    "bytes": 524288,
+    "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+    "romBytes": 524288,
+    "codeBytes": 456574,
+    "graphicsBytes": 26098,
+    "graphicsResidentAddress": 16711680,
+    "graphicsSupportedVectors": [
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -804,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -294,
+      -282,
+      -276,
+      -270,
+      -240,
+      -228,
+      -204,
+      -198,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -54,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "graphicsEntries": {
+      "-1056": 16712486,
+      "-1050": 16712488,
+      "-1044": 16712490,
+      "-1038": 16712492,
+      "-1032": 16712494,
+      "-1026": 16712496,
+      "-1020": 16712498,
+      "-1008": 16712500,
+      "-1002": 16712502,
+      "-996": 16712504,
+      "-990": 16712506,
+      "-984": 16712508,
+      "-978": 16712510,
+      "-972": 16712512,
+      "-966": 16712514,
+      "-960": 16712516,
+      "-954": 16712518,
+      "-948": 16712520,
+      "-942": 16712522,
+      "-936": 16712524,
+      "-930": 16712526,
+      "-924": 16712528,
+      "-918": 16712530,
+      "-900": 16712532,
+      "-894": 16731688,
+      "-888": 16712536,
+      "-882": 16712538,
+      "-876": 16712540,
+      "-870": 16731710,
+      "-864": 16731732,
+      "-858": 16731754,
+      "-852": 16712548,
+      "-840": 16712550,
+      "-834": 16712552,
+      "-828": 16712554,
+      "-822": 16731776,
+      "-816": 16731798,
+      "-810": 16712560,
+      "-804": 16731820,
+      "-798": 16712564,
+      "-792": 16712566,
+      "-786": 16712568,
+      "-780": 16712570,
+      "-774": 16712572,
+      "-768": 16712574,
+      "-762": 16712576,
+      "-756": 16712578,
+      "-732": 16712580,
+      "-726": 16712582,
+      "-720": 16712584,
+      "-714": 16712586,
+      "-708": 16712588,
+      "-702": 16712590,
+      "-696": 16712592,
+      "-690": 16712594,
+      "-684": 16712596,
+      "-678": 16712598,
+      "-672": 16712600,
+      "-666": 16712602,
+      "-660": 16712604,
+      "-654": 16712606,
+      "-636": 16712608,
+      "-630": 16712610,
+      "-624": 16712612,
+      "-618": 16712614,
+      "-612": 16712616,
+      "-606": 16712618,
+      "-600": 16712620,
+      "-594": 16712622,
+      "-588": 16712624,
+      "-582": 16712626,
+      "-576": 16712628,
+      "-570": 16712630,
+      "-564": 16712632,
+      "-558": 16712634,
+      "-552": 16712636,
+      "-546": 16712638,
+      "-540": 16712640,
+      "-534": 16712642,
+      "-528": 16712644,
+      "-522": 16712646,
+      "-516": 16712648,
+      "-510": 16712650,
+      "-504": 16712652,
+      "-498": 16731842,
+      "-492": 16731864,
+      "-486": 16731886,
+      "-480": 16731908,
+      "-474": 16712662,
+      "-468": 16731930,
+      "-462": 16731952,
+      "-456": 16731974,
+      "-450": 16712670,
+      "-444": 16712672,
+      "-438": 16712674,
+      "-432": 16712676,
+      "-426": 16712678,
+      "-420": 16712680,
+      "-414": 16712682,
+      "-408": 16712684,
+      "-402": 16731996,
+      "-396": 16712688,
+      "-390": 16732018,
+      "-384": 16732040,
+      "-378": 16712694,
+      "-372": 16712696,
+      "-366": 16712698,
+      "-360": 16732062,
+      "-354": 16732084,
+      "-348": 16732106,
+      "-342": 16732128,
+      "-336": 16712708,
+      "-330": 16712710,
+      "-324": 16712712,
+      "-318": 16712714,
+      "-312": 16712716,
+      "-306": 16712718,
+      "-300": 16712720,
+      "-294": 16732150,
+      "-288": 16712724,
+      "-282": 16732172,
+      "-276": 16732194,
+      "-270": 16732216,
+      "-264": 16712732,
+      "-258": 16712734,
+      "-252": 16712736,
+      "-246": 16712738,
+      "-240": 16732238,
+      "-234": 16712742,
+      "-228": 16732260,
+      "-222": 16712746,
+      "-216": 16712748,
+      "-210": 16712750,
+      "-204": 16732282,
+      "-198": 16732304,
+      "-192": 16712756,
+      "-186": 16712758,
+      "-180": 16712760,
+      "-174": 16712762,
+      "-168": 16712764,
+      "-162": 16712766,
+      "-156": 16712768,
+      "-150": 16712770,
+      "-144": 16732326,
+      "-138": 16712774,
+      "-132": 16712776,
+      "-126": 16712778,
+      "-120": 16732348,
+      "-114": 16712782,
+      "-108": 16712784,
+      "-102": 16712786,
+      "-96": 16712788,
+      "-90": 16712790,
+      "-84": 16732370,
+      "-78": 16732392,
+      "-72": 16732414,
+      "-66": 16732436,
+      "-60": 16712800,
+      "-54": 16732458,
+      "-48": 16712804,
+      "-42": 16712806,
+      "-36": 16712808,
+      "-30": 16732480,
+      "-6": 16732568,
+      "-12": 16732546,
+      "-18": 16732524,
+      "-24": 16732502
+    },
+    "compiledRomSha256": "5F48A40A15BF5607A32C047514F283CB83BF9602EDADE7282A36853629DAFD5F",
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "2EAB704C8838543399FCB6A39D799B514DA91F1441F2E2F5ACDE358C93D9DE8A"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "29069C61741916AA4DFF53AA0C0BDA29B76A1C74F4DFBF6ED61C2B51BF84D877"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "B14D11C87E76C07C3408FA5009CBA43ACB0ADAFA25AC3061AC4912140986C724"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "1A8F7A429E317A0E77FA3A726611F7F1255173A970559F17AF07DB796F11460C"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "6F18A50AC7A3828D735C8F342ED2372CF2E36081DB537475F35AF46F01832FA3"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "EB8E38B7639964480F52809626CDFAB142A454F56E5C327DFBC65ABA5DB0E425"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "A337436A89A20FD90A575D289C5B8E23EDAA52DF9ABDA54D3FC0FA872009E141"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "FD0DC4D25AFF599560B1A898308726FE6B5B45CA7CD9502C800FACEBFC974A0C"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "2784D65194376820EE68D94148D58B65675E6AF13D2B8ED631B8576579E9EF19"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "CB5F3EB036D829AEDD6F79E0393DA991D167FEF19CF60BDFDBE967F8E8B37E0B"
+      }
+    ],
+    "qualificationRoot": {
+      "file": "CopperStart-QualifiedRoot.dll",
+      "sha256": "AF53DA8E7B940969F654D800846C5D29D563A45A6041AADF09C22BF058F0CDB6",
+      "compatible": true,
+      "managedAllocationSites": 0,
+      "frameworkFeatures": 0
+    }
+  },
+  "qualificationMethod": "The corrected NativeDiskBoot.cs is compiled under a qualification namespace with the same bootstrap call sequence and selected production export bridges. The original frozen System ROM DLL supplies unchanged DOS/console/graphics-install bodies; Exec, DOS, devices, SDK, compiler and graphics emitter remain the frozen dependencies. A new complete MC68000 ROM is generated and composed. The diagnostic reset-vector patch is excluded from final qualification. Later concurrent producer edits are excluded.",
+  "provenance": {
+    "initialSourceSnapshot": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-source-snapshot.json",
+      "sha256": "810a00f783e8d8f8c2cc36b44800f8d86426f9a640b2c72c333a542ca542de2b"
+    },
+    "frozenManagedInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\frozen-managed-inputs.json",
+      "sha256": "c2c10a9b6092442176890625db4c48def88e303b6b1454364db8dd9e48af2167"
+    },
+    "correctedSource": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\rom\\CopperStart.SystemRom\\NativeDiskBoot.cs",
+      "sha256": "ef602af4d83e41f4cd86ee0d0e06401aa1915750b7f0116dd718e063289048e4"
+    },
+    "regressionSource": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeCiaBootTests.cs",
+      "sha256": "7e02e283f39c371198dd54e1fe2fc0857f59a5d3bceeda0d6fa69f349f12aaa0"
+    },
+    "qualificationSources": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fixed-root\\Program.cs",
+        "sha256": "33f2fd6cc9814d672454d1670abbec8791d3e28db524c2acb26d189153dab833"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fixed-root\\NativeDiskBoot.cs",
+        "sha256": "7550fe42040a76c40fcea724ffe9df5875a70f23ac82a9e33dfacd82b27a94d2"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fixed-root\\ProductionExports.cs",
+        "sha256": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fixed-root\\FixedRoot.csproj",
+        "sha256": "998ad7697d79a1ca5f182a270aca2a395a87703e355ec8881f8600cb2fd11754"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fixed-builder\\Program.cs",
+        "sha256": "c512b3ff1b93e8f439153ff01c56a83487c572aedce1134e9822759223664663"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fixed-builder\\FixedBuilder.csproj",
+        "sha256": "b6e420bad1b081b01b9f181e36f919d2925a5acb756264c59b09f74e51ca77a5"
+      }
+    ]
+  },
+  "runs": {
+    "native-current": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\native-current\\run.json",
+        "sha256": "0e98901595892e747a85de578c57ace6afdbdbc240bff65dcc1fa8bb82933d1f"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "70,44",
+        "cycle": "1989295982",
+        "cpu": "0x67E8599B9C83B14E",
+        "hardware": "0x147396B505F0C3AC",
+        "output": "0x88A211224E5985A3",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "39351824",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "captureFiles": 355
+    },
+    "native-final": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\native-final\\run.json",
+        "sha256": "289933db88db2ba704aed5d4ad2b97633d339e55742e458306e95424c3f5c502"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "112,77",
+        "cycle": "1989295982",
+        "cpu": "0x67E8599B9C83B14E",
+        "hardware": "0x147396B505F0C3AC",
+        "output": "0x88A211224E5985A3",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "39314704",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "captureFiles": 355
+    },
+    "native-scalar-diagnostic": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\native-scalar-diagnostic\\run.json",
+        "sha256": "e4e61d446f7d4ffe8ed984ef07526f302bcb7731300de2f54405c65e43e8b0ba"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "136,80",
+        "cycle": "1989295982",
+        "cpu": "0x67E8599B9C83B14E",
+        "hardware": "0x147396B505F0C3AC",
+        "output": "0x88A211224E5985A3",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "39381576",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "captureFiles": 355
+    },
+    "copperstart-final": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\copperstart-final\\run.json",
+        "sha256": "78ec663c57171a9167de281616c2a2bded4f9095e555e1be4007841491454b95"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "76,87",
+        "cycle": "1989428008",
+        "cpu": "0x2E251E857038D565",
+        "hardware": "0x42A67607E799BEB3",
+        "output": "0x0F4DF5C4D9B29903",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39366456",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f37e8e47521661a125b1c9f129fd0dc5e7584980abbaf25fc5e49066c1da78bd"
+      },
+      "captureFiles": 355
+    },
+    "copperstart-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\copperstart-scalar\\run.json",
+        "sha256": "7dcaaf56f08a999852065791629c8919d60303405570d8b7857e5805acb28d20"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "78,88",
+        "cycle": "1989428008",
+        "cpu": "0x2E251E857038D565",
+        "hardware": "0x42A67607E799BEB3",
+        "output": "0x0F4DF5C4D9B29903",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39378840",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f37e8e47521661a125b1c9f129fd0dc5e7584980abbaf25fc5e49066c1da78bd"
+      },
+      "captureFiles": 355
+    },
+    "copperstart-tod-diagnostic": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\copperstart-tod-diagnostic\\run.json",
+        "sha256": "215b3f08c3ac9d1400d19c89ff5f2e318c7885eb69787064d1f319d3637c7b72"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "147,64",
+        "cycle": "1989428004",
+        "cpu": "0x9FA9EEA7DBBD0ED0",
+        "hardware": "0x2254C64CC700572C",
+        "output": "0x75C397781B5D88DB",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39386928",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\diagnostic-tod.rom",
+        "sha256": "4635e32ec8bae1ed856eb80ff70e19029637e89c1a23badb5714b829a634a35c"
+      },
+      "captureFiles": 355
+    },
+    "source-nitro-batch": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-nitro-batch\\run.json",
+        "sha256": "66d7bcae4808766f325a0d7942c8c9a732e07219f82dbd542663043a221b89e4"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "144,35",
+        "cycle": "1989428004",
+        "cpu": "0x9FA9EEA7DBBD0ED0",
+        "hardware": "0x2254C64CC700572C",
+        "output": "0x75C397781B5D88DB",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39414616",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "captureFiles": 355
+    },
+    "source-nitro-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-nitro-scalar\\run.json",
+        "sha256": "c04dcd2e718460f4cffd55fe6dba33cf8e4482ec8f57183fd197946fd5ccc37f"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "144,62",
+        "cycle": "1989428004",
+        "cpu": "0x9FA9EEA7DBBD0ED0",
+        "hardware": "0x2254C64CC700572C",
+        "output": "0x75C397781B5D88DB",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39417392",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "captureFiles": 355
+    },
+    "lotus-before": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\lotus-before\\run.json",
+        "sha256": "1d85157116850f3eea8c5b79000946cc1208371082340465a5a39d81a93cab90"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "113,30",
+        "cycle": "1989428004",
+        "cpu": "0xD7EE7EEE527E9766",
+        "hardware": "0x1781D022423CACE7",
+        "output": "0x2EF1943FA11399AA",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39342400",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f37e8e47521661a125b1c9f129fd0dc5e7584980abbaf25fc5e49066c1da78bd"
+      },
+      "captureFiles": 355
+    },
+    "lotus-after": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\lotus-after\\run.json",
+        "sha256": "c767d67588f4c93679c1699081f48d817ffc4bb00904fe74d5821df5b003bf38"
+      },
+      "completedFields": 14000,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "132,95",
+        "cycle": "1989428004",
+        "cpu": "0xD7EE7EEE527E9766",
+        "hardware": "0x1781D022423CACE7",
+        "output": "0x2EF1943FA11399AA",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39393544",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "captureFiles": 355
+    }
+  },
+  "comparisons": {
+    "beforeBatchScalar": {
+      "filesCompared": 355,
+      "mismatches": []
+    },
+    "sourceBatchScalar": {
+      "filesCompared": 355,
+      "mismatches": []
+    },
+    "nativeBatchScalarBinary": {
+      "filesCompared": 284,
+      "mismatches": [],
+      "excluded": "JSON diagnostics add halted/stopped/CPU-cycle fields"
+    },
+    "lotusImages": {
+      "filesCompared": 71,
+      "mismatches": []
+    },
+    "lotusPcm": {
+      "filesCompared": 71,
+      "mismatches": []
+    }
+  },
+  "reviewedMilestones": {
+    "sourceNitro": {
+      "3000": "loading car artwork",
+      "5000": "registration menu",
+      "6000": "new-driver initials",
+      "8000": "sports car selection",
+      "9000": "city introduction",
+      "10000": "black race-start wait",
+      "14000": "same wait"
+    },
+    "lotusAfter": {
+      "4000": "title logo",
+      "6000": "crack intro",
+      "8000": "car information",
+      "10000": "Forest Course briefing",
+      "12000": "first race, zero mph",
+      "14000": "first race, 93 mph"
+    },
+    "finalNitroState": {
+      "copperstart-final": {
+        "pc": "00000866",
+        "sr": "2700"
+      },
+      "native-current": {
+        "pc": "000184B0",
+        "sr": "2004"
+      },
+      "source-nitro-batch": {
+        "pc": "000184B0",
+        "sr": "2004"
+      }
+    }
+  },
+  "tests": {
+    "disk-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\disk-before.trx",
+      "sha256": "aaaa84cf2720f004c7d90304570a77b38b1ef28a9d59642839da6bf8da368d00",
+      "passed": 0,
+      "failed": 4,
+      "notExecuted": 0,
+      "total": 4
+    },
+    "disk-complete.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\disk-complete.trx",
+      "sha256": "a68a170e85009b71bad901df6c2fcf5caee6650324582ee6a9ef090d88e4e3ca",
+      "passed": 80,
+      "failed": 0,
+      "notExecuted": 0,
+      "total": 80
+    },
+    "engine.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\engine.trx",
+      "sha256": "6fb4392c1b9f2ae9e7d5a4874a43e72c717c7bd17a3b909b98357fb80dc4ed59",
+      "passed": 1245,
+      "failed": 0,
+      "notExecuted": 0,
+      "total": 1252
+    },
+    "host.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\host.trx",
+      "sha256": "2cf5d2d0e10d3a1eb0edaf6c8c41e38da910f7745a3907a2ea7bf7fa61b36786",
+      "passed": 195,
+      "failed": 0,
+      "notExecuted": 0,
+      "total": 201
+    },
+    "cia-before-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\cia-before-final.trx",
+      "sha256": "2682419d04910e55f16de8ea250075b798e240d480d10d9c45dc592001253651",
+      "passed": 0,
+      "failed": 2,
+      "notExecuted": 0,
+      "total": 2
+    },
+    "cia-native-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\cia-native-final.trx",
+      "sha256": "1ec252c4f8ed944a9e57abd486c3d2bab9b8c8a93f0cdd3e901760de3d9c1472",
+      "passed": 2,
+      "failed": 0,
+      "notExecuted": 0,
+      "total": 2
+    },
+    "cia-diagnostic-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\cia-diagnostic-final.trx",
+      "sha256": "4cadb4fac181efd9caf4885d050f31ba060ea0cb888995200f5b4b5523516ad7",
+      "passed": 2,
+      "failed": 0,
+      "notExecuted": 0,
+      "total": 2
+    },
+    "cia-source-fixed.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\cia-source-fixed.trx",
+      "sha256": "7d941d0a8b0660dcee5b7375f9621044949a71e96ee90095d3f9d42093f6ab65",
+      "passed": 2,
+      "failed": 0,
+      "notExecuted": 0,
+      "total": 2
+    },
+    "native-fresh.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\native-fresh.trx",
+      "sha256": "11b92db17284ead54af812dcddd253d1dcb34f6c09e93509667f85192792436c",
+      "passed": 54,
+      "failed": 1,
+      "notExecuted": 0,
+      "total": 55
+    },
+    "native-source-fixed.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\test-results\\native-source-fixed.trx",
+      "sha256": "daf332b227629a7211c58029503331509499708a27231f555dc76e04318f2893",
+      "passed": 54,
+      "failed": 1,
+      "notExecuted": 0,
+      "total": 55
+    }
+  },
+  "legacyWriteExpectation": {
+    "status": "obsolete expectation retained in original TRX; corrected contract verified independently",
+    "oldExpected": "IOERR_NOCMD (-3)",
+    "actualAndDocumented": "TDERR_WriteProt (28)",
+    "before": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\write-protect-original.log",
+      "sha256": "161bf0fc707ada19b9391424777f480155ad537f29dbb0686c3c96b28c5622e4"
+    },
+    "sourceFixed": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\write-protect-source-fixed.log",
+      "sha256": "161bf0fc707ada19b9391424777f480155ad537f29dbb0686c3c96b28c5622e4"
+    },
+    "fixture": "Unmodified public native fixture method invoked with documented expected error 28; validates zero io_Actual and idle DMA too."
+  },
+  "sources": {
+    "tod": "https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_f.html",
+    "extendedAdf": "https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/disk.cpp",
+    "controls": "https://www.lemonamiga.com/doc/nitro/1151"
+  },
+  "referenceRun": {
+    "status": "unavailable",
+    "reason": "Automatic approval review rejected launching WinUAE: blocked by policy."
+  },
+  "limits": [
+    "Boot, player registration, car selection and city introduction only; no verified racing or full-game completion.",
+    "Native Kickstart and both CPU modes also reach the later vertical-blank request wait; its cause remains unresolved.",
+    "Audio activity is sampled; listening and fidelity are unassessed.",
+    "Diagnostic captures and synthetic checks are not host-throughput acceptance measurements.",
+    "No ROM, media, package publication, app artifact-contract update or host OS shim is included."
+  ]
+}

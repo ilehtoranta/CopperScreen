@@ -43,14 +43,21 @@ public static class AmigaDosTrackEncoder
             throw new ArgumentOutOfRangeException(nameof(head));
         }
 
+        Span<byte> data = stackalloc byte[AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize];
+        for (var sector = 0; sector < AmigaDiskGeometry.SectorsPerTrack; sector++)
+            disk.ReadSector(cylinder, head, sector).Span.CopyTo(data.Slice(sector * AmigaDiskGeometry.SectorSize, AmigaDiskGeometry.SectorSize));
+        return EncodeTrack(data, (cylinder * AmigaDiskGeometry.HeadCount) + head);
+    }
+
+    internal static byte[] EncodeTrack(ReadOnlySpan<byte> trackData, int trackNumber)
+    {
         var track = Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount).ToArray();
-        var trackNumber = (cylinder * AmigaDiskGeometry.HeadCount) + head;
         for (var physicalIndex = 0; physicalIndex < PhysicalSectorOrder.Length; physicalIndex++)
         {
             var sector = PhysicalSectorOrder[physicalIndex];
             var sectorsUntilGap = AmigaDiskGeometry.SectorsPerTrack - physicalIndex;
             EncodeSector(
-                disk.ReadSector(cylinder, head, sector).Span,
+                trackData.Slice(sector * AmigaDiskGeometry.SectorSize, AmigaDiskGeometry.SectorSize),
                 track.AsSpan(physicalIndex * EncodedSectorBytes, EncodedSectorBytes),
                 trackNumber,
                 sector,
