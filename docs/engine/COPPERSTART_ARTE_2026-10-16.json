@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "protocol": "copperstart-native-compatibility-v1",
+  "caseId": 2,
+  "title": "Arte by Sanity",
+  "status": "bounded-demo-loop-verified",
+  "previousCase": "COPPERSTART_COMPATIBILITY_2026-10-15.json",
+  "engineCommit": "643bfecb70b21d4607076a7fdfafe4aa6229988f",
+  "copperStartSourceCommit": "12f784f986bbb524ccde4c0b6a67a8c764bd6c40",
+  "engine": "CopperMod.Amiga.Lightweight",
+  "cpuPackage": "1.5.4-qualified-dev.1",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "3aa4881b39f1159e9b166a1a63477979b41846a6ccd753572e2b7bedef0e3af2",
+    "CopperMod.Amiga.Lightweight.dll": "2bc74f12165760ce5d4540e14b11350b552e81da19c8bc98ca57623eece90083",
+    "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+    "CopperDisk.dll": "8533f61ec7d385508bdf8bc220f78143fa6f8b86a47a885849f3259de36ad443"
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\Arte (Sanity).zip",
+    "sha256": "f09f2d661fdf4af786a28fa162ae0c687d89475bc2550ec190d33efa2927acb5",
+    "entry": "Arte (Sanity).adf",
+    "entryBytes": 901120,
+    "entrySha256": "eb7521fc1de886c69706ab0e21898a89199fb12256db40743f3ed190957e896a"
+  },
+  "input": null,
+  "initialFailure": {
+    "manifest": "startup-copperstart/run.json",
+    "manifestSha256": "34473060f0f41415a73a20cfcf23f42ec5c178ede93242a089ac14c7f88c02b5",
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-compat-2026-10-15\\fixed-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "2a671d08d1f4652b72c29789752da887fa7149d11615e864c1770d72ff67817f"
+    },
+    "frames": 3000,
+    "captureInterval": 100,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "cycle": 426306000,
+    "cpuFingerprint": "0x3D39E169F5F858AF",
+    "hardwareFingerprint": "0xB2AEDA304B779D38",
+    "outputFingerprint": "0x1F5D322734184535",
+    "sampledNonSilentFields": 0,
+    "lastPc": "F4134E73",
+    "captureFiles": 155
+  },
+  "firstFixOnly": {
+    "manifest": "source-request-only/run.json",
+    "manifestSha256": "310754832df9012d1640482d747f342b431a72abea4c1adf2ec75cd8392b114a",
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-arte-2026-10-15\\caller-request-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "abb76735682b5ea00fd6c042fcde24ed7b755297c7fbbd78a53062233175164b"
+    },
+    "frames": 3000,
+    "captureInterval": 100,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "cycle": 446805020,
+    "cpuFingerprint": "0x6A85752B739FE006",
+    "hardwareFingerprint": "0x82FA128480EB810A",
+    "outputFingerprint": "0x9C2C659B2D9119E9",
+    "sampledNonSilentFields": 0,
+    "lastPc": "00000F56",
+    "captureFiles": 155
+  },
+  "independentBootDefaultsControl": {
+    "diskSha256": "0b13bd25e76ac3bd77c4852bcd794478e6828e92de6170facdc2394c7dc70e7f",
+    "generator": "scripts/probes/CopperStart/boot_defaults.py",
+    "before": {
+      "chipUpper": "00058000",
+      "ciaBDdrb": "00",
+      "adkconAtBootEntry": "0000",
+      "manifest": "defaults-before-control/run.json",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-compat-2026-10-15\\fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "2a671d08d1f4652b72c29789752da887fa7149d11615e864c1770d72ff67817f"
+      }
+    },
+    "nativeKickstart": {
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconAtBootEntry": "1100",
+      "manifest": "defaults-native-control/run.json",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      }
+    },
+    "replacement": {
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconAtBootEntry": "1100",
+      "manifest": "defaults-source-control/run.json",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-arte-2026-10-15\\matched-defaults-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "814cfc5e8f3c3b07fb3ac6b3423fc47c863edf4589582a47f0ea6bd66631a8f3"
+      }
+    },
+    "result": "The same original generated boot block reads CIA DDRB, ADKCONR and the Chip MemHeader directly. Fresh CopperStart matches native Kickstart: FF, 1100, 80000."
+  },
+  "initialObservation": "Both 3000-field replays remain black and silent. Recorder completion is not a compatibility pass.",
+  "compatibilityFixes": [
+    {
+      "id": "CS-COMPAT-002",
+      "subsystem": "NativeTrackDiskDevice.Open",
+      "cause": "Arte builds its own request at $200 without setting mn_Length. The length gate rejects OpenDevice and clears io_Device/io_Unit.",
+      "fix": "Open unit zero without requiring an allocation-length receipt on the caller-built request.",
+      "control": "An original generated loader with mn_Length zero opens and reads 512 bytes under native Kickstart 1.3; the pre-fix ROM returns -1 with no transfer."
+    },
+    {
+      "id": "CS-COMPAT-003",
+      "subsystem": "BootstrapCore memory discovery",
+      "cause": "The fitted 512 KiB A501 bank is absent from Exec memory headers because it is outside the Autoconfig chain.",
+      "fix": "Probe independent words at $C00000/$C40000/$C7FFFC, restore their values and register the fitted bank as Public/Fast pseudo-fast memory. Set its bootstrap status flag. Absent and 256 KiB aliased probe controls do not register a 512 KiB bank."
+    },
+    {
+      "id": "CS-COMPAT-004",
+      "subsystem": "NativeTrackDiskDevice installation defaults",
+      "cause": "The reader restores reset DDRB=0 and ADKCON=0. Arte expects disk output pins and fast MFM mode to have been initialized by the ROM; drive selection and raw disk DMA consequently stall.",
+      "fix": "Initialize CIA B disk output directions and ADKCON disk mode bits during device installation. Keep transaction cleanup restoring the inherited hardware state."
+    },
+    {
+      "id": "CS-COMPAT-005",
+      "subsystem": "BootstrapCore Chip RAM MemHeader",
+      "cause": "The bootstrap stack reservation splits Chip RAM into two public headers; the first ends at $58000. Arte reads the bank extent and displays SOS $41, no memory, $781E0 bytes wanted.",
+      "fix": "Publish one physical Chip RAM bank, with mh_Upper=$80000 for the tested A500. Reserve the live stack/private arena through AllocAbs so normal allocations still exclude those areas."
+    }
+  ],
+  "replacementRom": {
+    "path": "matched-defaults-rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "codeBytes": 447954,
+    "sha256": "814CFC5E8F3C3B07FB3AC6B3423FC47C863EDF4589582A47F0EA6BD66631A8F3",
+    "sourceBuilt": true,
+    "diagnosticPatches": false,
+    "producerManifest": "matched-defaults-rom/disk-boot-test-manifest.json",
+    "producerManifestSha256": "1fc53dd185fda118e5459adc47745e8374259771e127abef209a6d8b1d72bac6",
+    "producerInputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "2CA9E07DB7E8CC2588460EC56033F7189C0B4114398C7644A9271EC0EE9912BF"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "FBB75210DEE207726F08E41F08D24EB7830CFAF69E16CD81F17AE8E753F1D46B"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "8457DF35128610DBF9A61DB8E4C1D7336ABBB1543423FBDDEF1217BAC51866A0"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "B10BD66F86B4D67B0A985743FFDDC75B6FD4507143E66D53887D7DEFB4729B7F"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "FB225301081A08ECCD841E1E48B92C6A9383B07FCCA34E25574AB72E2AE7D4B7"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "BEAEC6EB96C424F71FAFED38E527C818C512FF55D1B0AD538159008B16B0D21A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "45763C1936B229F90AE1F14FC00C0A3884FFE84B9FE22523371AADC927DA71D9"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "24850A5E52A6F309D59A66CC5C36646614D75CF1A894AFCF5EECB8595939841A"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "463DA5839DB492350EDD12C1F7CDB3D7914E7BE8CDC6E6943007F53AB632AA6A"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      }
+    ]
+  },
+  "nativeTests": {
+    "passed": 25,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/arte-matched-defaults.trx",
+    "sha256": "a82847ee4f7270e3ac2c75c9342657b7f9175f8485a486beb2658c88b1f5b70d"
+  },
+  "bootstrapAllocatorTests": {
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/arte-memory-final.trx",
+    "sha256": "ce303d0a533deeda5790d3a51e64e52886ba85dcd62dc86d599645c8cad501b2"
+  },
+  "nativeDosScriptConsoleRegression": {
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/arte-final-dos-console.trx",
+    "sha256": "0e54b5bbb22599c29fe7d5a411bcb17fdbee9e1fb7765c635ee5ab02e2d8d06a"
+  },
+  "replays": [
+    {
+      "manifest": "source-final-batch/run.json",
+      "manifestSha256": "d49ec5cf4b004694d9eb634700256166ba46009d545c5eba6de4ec79cb3effaa",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-arte-2026-10-15\\matched-defaults-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "814cfc5e8f3c3b07fb3ac6b3423fc47c863edf4589582a47f0ea6bd66631a8f3"
+      },
+      "frames": 40000,
+      "captureInterval": 400,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "cycle": 5684080016,
+      "cpuFingerprint": "0x0975C364A85C3B36",
+      "hardwareFingerprint": "0x72E91B9DFD082EDB",
+      "outputFingerprint": "0x101A97236F1CFA7C",
+      "sampledNonSilentFields": 90,
+      "lastPc": "00C0224E",
+      "captureFiles": 505
+    },
+    {
+      "manifest": "source-final-scalar/run.json",
+      "manifestSha256": "d08cd0ac97bf7d91af1abf2741e4c903165956ee94e6ad2bb8a7bf689e090a3f",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-arte-2026-10-15\\matched-defaults-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "814cfc5e8f3c3b07fb3ac6b3423fc47c863edf4589582a47f0ea6bd66631a8f3"
+      },
+      "frames": 40000,
+      "captureInterval": 400,
+      "cpuMode": "scalar",
+      "completedReplay": true,
+      "cycle": 5684080016,
+      "cpuFingerprint": "0x0975C364A85C3B36",
+      "hardwareFingerprint": "0x72E91B9DFD082EDB",
+      "outputFingerprint": "0x101A97236F1CFA7C",
+      "sampledNonSilentFields": 90,
+      "lastPc": "00C0224E",
+      "captureFiles": 505
+    }
+  ],
+  "batchScalarComparison": {
+    "allCaptureFilesIdentical": true,
+    "identicalFiles": 505,
+    "formats": [
+      "BMP",
+      "JSON",
+      "Chip RAM",
+      "slow RAM",
+      "PCM"
+    ]
+  },
+  "nativeKickstartControl": {
+    "rom": {
+      "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+      "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "replay": {
+      "manifest": "full-native/run.json",
+      "manifestSha256": "641445a724aee9f682a0cbe9f5069d6cd416aa828551716528b864443d15f052",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "frames": 40000,
+      "captureInterval": 400,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "cycle": 5683947984,
+      "cpuFingerprint": "0x2EF933B14064A903",
+      "hardwareFingerprint": "0x3EE30CA9426E56EE",
+      "outputFingerprint": "0xCAAA1C9EE08FD187",
+      "sampledNonSilentFields": 89,
+      "lastPc": "00C0272E",
+      "captureFiles": 505
+    },
+    "visualMilestones": "Opening artwork, starfield, text/effects, credits, 3D scenes and return to the intro. Different ROM startup phases mean cross-ROM byte equality is not expected."
+  },
+  "visuallyReviewedMilestones": {
+    "2800": "Sanity logo",
+    "6000": "Starfield",
+    "10000": "Animated text sequence",
+    "14000": "Shaded sphere effect",
+    "18000": "Fantasy artwork",
+    "22000": "No AGA card",
+    "24000": "Landscape with scrolling credits",
+    "28000": "Polygonal scene with credits",
+    "32000": "Textured 3D room",
+    "36000": "Return to the starfield",
+    "38800": "Sanity has invented sequence",
+    "40000": "Earlier intro text/logo/face sequence repeats"
+  },
+  "lotusRegression": {
+    "replay": {
+      "manifest": "lotus-final-regression/run.json",
+      "manifestSha256": "a86ddef6e8a3b948bc4fbec5d0d6e3b4b4f26153bc3bd413c33ff3fd73a4fd7f",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-arte-2026-10-15\\matched-defaults-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "814cfc5e8f3c3b07fb3ac6b3423fc47c863edf4589582a47f0ea6bd66631a8f3"
+      },
+      "frames": 14000,
+      "captureInterval": 200,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "cycle": 1989428016,
+      "cpuFingerprint": "0x8B7DF219BF2960F2",
+      "hardwareFingerprint": "0xA0EFAE09F0C1C7A9",
+      "outputFingerprint": "0x4E816355FB4F7E9D",
+      "sampledNonSilentFields": 61,
+      "lastPc": "0007A112",
+      "captureFiles": 355
+    },
+    "input": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-lotus2.json",
+      "sha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3"
+    },
+    "pixelCapturesIdenticalToPreviousRom": 71,
+    "finalFingerprintsMatchPreviousRom": true,
+    "observation": "Car screen at 8000, first race at 12000, 35 mph at 12800 after recorded acceleration, score 27270 at 14000. All 71 pixel captures and the final CPU/hardware/output fingerprints match the preceding ROM replay. A complete race/game remains unverified."
+  },
+  "cpuUpdateControl": {
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-compat-2026-10-15\\fixed-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "2a671d08d1f4652b72c29789752da887fa7149d11615e864c1770d72ff67817f"
+    },
+    "manifest": "../copperstart-compat-2026-10-15/lotus2-qualified-cpu-control/run.json",
+    "result": "The prior Lotus ROM on qualified-dev.1 reproduces all 355 capture files from the detroit-dev.2 replay exactly."
+  },
+  "localEvidenceRoot": "artifacts/copperstart-arte-2026-10-15",
+  "diagnosticEvidence": {
+    "replay": "full-diagnostic-bank/run.json",
+    "classification": "Manually patched own-ROM experiments isolate the gates; these are not source-built qualification images. The source-final replays above provide final evidence.",
+    "intermediateSourceImage": "final-rom and source-intermediate-startup retain the source build with ADKCON 1500. This image passed 25 boot/device tests and visibly reaches Arte artwork, but is superseded by the native-matching 1100 image above.",
+    "interruptedCompile": "The first all-fixes compile was deliberately stopped to add the slow-RAM hardware status flag; its aborted TRX is retained as interrupted-arte-final.trx, not counted as a completed test run."
+  },
+  "limits": [
+    "One supplied ADF variant, 68000 PAL OCS A500, 512 KiB Chip plus 512 KiB slow RAM, one read-only drive and a bounded 40000-field demo session. Other media and profiles are unverified.",
+    "PCM is sampled and non-silent; listening and audio fidelity are not assessed by these checks.",
+    "The 22 DOS/script/console regressions replay the fresh ROM only after validating the ROM and all ten producer input hashes. The unchanged standalone reader root was not recompiled.",
+    "The complete portable suite has known unrelated failures recorded in the previous case; this work claims only the focused passing runs listed here.",
+    "No engine timing or CPU source change, guest disk patch, host service trap, PC injection or register injection. Generated ROMs, media and captures remain ignored local artifacts.",
+    "Diagnostic runner throughput is not an acceptance measurement."
+  ]
+}

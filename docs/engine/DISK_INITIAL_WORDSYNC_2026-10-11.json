@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-11",
+  "scope": "Before/after native retention, not physical hardware or throughput acceptance.",
+  "referenceEngineSha256": "8D533D78145628140C4B92CE7F786A05251FAE9F0A702B345C76818C568197D7",
+  "candidateEngineSha256": "0978A510E212C936096AB0E7F2E1E57735D8F5B25FB9C8BB86222C857F5F0C6C",
+  "runnerAudit": {
+    "scope": "Runner method signatures, IL, locals, stack and exception regions match. Full DLL/PDB byte identities differ; no identical-binary claim.",
+    "referenceSha256": "315FF8CF6E0B13FB2676D9D5932A17025D0B6CAB6AC2B1CEA0CD2DDCE928770C",
+    "candidateSha256": "48556AA4465BC56C9C320A1416F1D7C83112B4F25ED5EF8A1ED5A390185784D5",
+    "referenceMethods": 216,
+    "candidateMethods": 216,
+    "changedMethods": 0
+  },
+  "reports": {
+    "reference": "94FF69D0F980BE52A19E4D2EDC47ECA10F7BE110C88D0534D642B7259CAC89B7",
+    "candidate": "64EA95453A045875E93AAC1DACF17CB975D2CB8E620D97644272DB80772B58AC"
+  },
+  "cases": [
+    {
+      "id": "alien-breed-se92",
+      "framesPerMode": 16000,
+      "filesPerMode": 85,
+      "status": "RETENTION_PASS",
+      "referenceHistoricalStatus": "PASS",
+      "candidateHistoricalStatus": "PASS",
+      "historicalBaselineChangesReference": 0,
+      "historicalBaselineChangesCandidate": 0,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "16000",
+        "completed": "16000",
+        "cycle": "2266635956",
+        "cpu": "0x5F0D915AEFD9ECCE",
+        "hardware": "0x5F38D967492AAB23",
+        "output": "0xD6E97A0608F7374F",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "contractSha256": "CEF36CFB56C0171AF38E7792892B4BF2E780FBDA1F69677BA9AA28671B85B686"
+    },
+    {
+      "id": "lemmings",
+      "framesPerMode": 18120,
+      "filesPerMode": 100,
+      "status": "RETENTION_PASS",
+      "referenceHistoricalStatus": "PASS",
+      "candidateHistoricalStatus": "PASS",
+      "historicalBaselineChangesReference": 0,
+      "historicalBaselineChangesCandidate": 0,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image-wide",
+        "warmup": "0",
+        "frames": "18120",
+        "completed": "18120",
+        "cycle": "2574756850",
+        "cpu": "0x505451D28DF1C053",
+        "hardware": "0x20084440BFE4BC5A",
+        "output": "0x164C4D65E1B1FA40",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "contractSha256": "58B7D6AB8B17CA56AF7EBF44F5C150DF6A50959AF38227B90296E250C374A3A1"
+    }
+  ],
+  "issue": "LWA-DISK-014",
+  "referenceSourceCommit": "b64fc62f86039d357a055dff61d1fd1f7832444f",
+  "candidateSource": "That source plus the initial-wait WORDSYNC correction; not a published package.",
+  "testEvidence": [
+    {
+      "role": "pre-change focused",
+      "path": "artifacts/wordsync-first-wait-2026-10-11/before-complete/before-complete.trx",
+      "sha256": "298D6264ECC0AF63421D02A6EE73E20A3E3CDE0EF2A7562F2D903E20E7410190",
+      "counters": {
+        "total": "72",
+        "executed": "72",
+        "passed": "13",
+        "failed": "59",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "role": "candidate engine",
+      "path": "artifacts/wordsync-first-wait-2026-10-11/engine-candidate/engine-candidate.trx",
+      "sha256": "4C4DC0C76313897DB276C2D32D3E2180A456946BD9C22A7CAD975104226753A8",
+      "counters": {
+        "total": "1248",
+        "executed": "1241",
+        "passed": "1241",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  ],
+  "productionBuild": {
+    "configuration": "Release",
+    "solution": "CopperScreen.slnx",
+    "warnings": 0,
+    "errors": 0,
+    "logSha256": "E5A467DC81209F817A7D1423494C6C2FFB10C5E64A352F08F25E429A47926BC3"
+  },
+  "focusedCases": {
+    "total": 72,
+    "candidatePassed": 72,
+    "referenceFailed": 59,
+    "referencePassed": 13,
+    "referencePhaseOrTransferFailures": 21,
+    "referenceUnsupportedGuardFailures": 38
+  },
+  "evidenceDirectory": "artifacts/wordsync-first-wait-2026-10-11",
+  "physicalTiming": "Unverified: coincident writes/input, start-phase seed, DMACON qualification, DMAL/IRQ propagation, MSBSYNC combinations and silicon revisions.",
+  "compatibilityGain": "Not demonstrated; native results establish retained reviewed behavior.",
+  "throughputAcceptance": "Not measured; capture timing is diagnostic only.",
+  "verificationScriptSha256": "74A51F73D6F706F43E00CED9ED2B5A659547FC8B17472418EDFE150DBE62F88B",
+  "runnerAuditScriptSha256": "6A4E8AAD368359FF1E3C3C624C671D3635192BCCD997F1EFD312986E47D30303"
+}

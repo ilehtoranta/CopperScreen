@@ -893,6 +893,31 @@ public sealed class LightweightBlitterTests
         Assert.Equal((ushort)0x8000, ReadWord(machine, destination));
     }
 
+    [Fact]
+    public void LineIdleOutputLeavesFollowingSlotAvailableToSprites()
+    {
+        using var machine = new LightweightA500Machine();
+        ConfigureLine(machine, DestinationD, rowStride: 0x20, bltcon1: 0x0001);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0042);
+
+        // The first retained line phase is internal; the following C read
+        // owns the bus. A completed C read must not reserve the next idle slot.
+        machine.AdvanceHardwareTo(start + 8);
+        Assert.Equal(start + 10, machine.BlitterPendingOutputCycle);
+        Assert.True(machine.CanSpriteOwnOutputSlot(start + 10));
+
+        machine.AdvanceHardwareTo(start + 10);
+        Assert.Equal(start + 12, machine.BlitterPendingOutputCycle);
+        Assert.False(machine.CanSpriteOwnOutputSlot(start + 12));
+
+        machine.AdvanceHardwareTo(start + 12);
+        Assert.Equal(start + 12, machine.BlitterLastOutputCycle);
+        Assert.True(machine.IsCpuOutputOwned(start + 12));
+        Assert.Equal(start + 14, machine.BlitterPendingOutputCycle);
+        Assert.True(machine.CanSpriteOwnOutputSlot(start + 14));
+    }
+
     private static LightweightA500Machine CreateOneWordAllChannelBlit(
         bool nasty,
         out long start)

@@ -1,5 +1,9 @@
 # Running-read WORDSYNC control — 2026-09-21
 
+The initial-sync-wait gap described below now has a bounded implementation in
+[initial-wait WORDSYNC control — 2026-10-11](DISK_INITIAL_WORDSYNC.md). The dated
+running-read evidence and performance decisions below remain historical records.
+
 This bounded correction starts from performance-accepted `c92b16b` (gallery-only
 HEAD `3e9517a`). It removes the Superfrog, F17 Challenge and Overdrive boot stops
 identified in [native batch 2](NATIVE_CORPUS_2026-09-21_BATCH2.md). Changes before

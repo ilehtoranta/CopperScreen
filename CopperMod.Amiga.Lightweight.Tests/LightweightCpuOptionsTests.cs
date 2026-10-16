@@ -14,7 +14,6 @@ public sealed class LightweightCpuOptionsTests
     }
 
     [Theory]
-    [InlineData(M68kCpuModel.M68010)]
     [InlineData((M68kCpuModel)999)]
     public void UnsupportedModelsAreRejected(M68kCpuModel model)
         => Assert.Throws<ArgumentException>(() => new LightweightA500Machine(new() { CpuModel = model }));

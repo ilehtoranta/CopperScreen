@@ -38,13 +38,13 @@ internal sealed partial class MainWindow : Window
 		"Profiles",
 		"Setup",
 		"Memory",
-		"Floppy Drives",
+		"Storage",
 		"Display",
 		"Audio",
 		"Input"
 	];
 	private readonly Button?[] _driveSaveAdfButtons = new Button?[4];
-	internal static readonly string[] AmigaDiskImagePickerPatterns = ["*.adf", "*.ipf", "*.zip"];
+	internal static readonly string[] AmigaDiskImagePickerPatterns = ["*.adf", "*.adz", "*.dms", "*.ipf", "*.scp", "*.zip"];
 	private sealed record ArchiveDiskAssignmentDialogResult(CopperScreenDriveDiskAssignment[] Assignments, int FloppyDriveCount);
 	private sealed record ArchiveEntryChoice(string Label, string? DiskPath)
 	{
@@ -1843,7 +1843,7 @@ internal sealed partial class MainWindow : Window
 
 		var chipAndPseudoFast = CreateSettingsGroupForm();
 		_agnusModelBox = AddComboSetting(chipAndPseudoFast, "Agnus", ["OcsAgnus", "Agnus8372A", "Agnus8375Pal2M", "EcsAgnus", "AgaAlice"]);
-		_deniseModelBox = AddComboSetting(chipAndPseudoFast, "Denise", ["OcsDenise", "EcsDenise"]);
+		_deniseModelBox = AddComboSetting(chipAndPseudoFast, "Denise", ["OcsDenise", "EcsDenise", "AgaLisa"]);
 		_chipRamBox = AddComboSetting(chipAndPseudoFast, "Chip RAM (KiB)", ["512", "1024", "2048"]);
 		_agnusModelBox.SelectionChanged += (_, _) => UpdateChipRamChoices();
 		_chipRamBox.SelectionChanged += (_, _) => UpdateChipRamChoices();
@@ -1858,10 +1858,10 @@ internal sealed partial class MainWindow : Window
 		realFast.Children.Add(CreateSettingsRow("RTC clock", _rtcEnabledBox));
 
 		foreach (var field in new[] { _pseudoFastRamBox, _pseudoFastBaseBox, _realFastBaseBox }) field.IsReadOnly = true;
-		foreach (var field in new Control[] { _rtgVramBox, _rtcEnabledBox }) field.IsEnabled = false;
-		layout.Children.Add(SettingsNote("Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. OCS 8362 or ECS 8373 Denise. ECS adds SuperHires and programmable display modes. Fast RAM: 0, 512, 1024, 2048, 4096 or 8192 KiB. Kickstart assigns its address; changing the size requires a restart. RTC and RTG are not yet available."));
+		_rtgVramBox.IsEnabled = false;
+		layout.Children.Add(SettingsNote("Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. Display chips: OCS Denise, ECS Denise or AGA Lisa. Fast RAM uses standard power-of-two sizes from 512 KiB to 8 MiB with 24-bit CPUs, or up to 1 GiB with full 68020/030/040 CPUs. More than 8 MiB requires Kickstart 3.x. Kickstart assigns its address; changing the size requires a restart. Optional RTC uses host local time; guest clock changes last for this session. RTG is not yet available."));
 		layout.Children.Add(CreateSettingsGroupPair(
-			CreateSettingsGroup("Amiga 500 memory", chipAndPseudoFast),
+			CreateSettingsGroup("Chipset and memory", chipAndPseudoFast),
 			CreateSettingsGroup("Expansion memory and RTC", realFast)));
 
 		return CreateScrollableSettingsPage(layout);
@@ -1945,9 +1945,10 @@ internal sealed partial class MainWindow : Window
 			driveMedia.Children.Add(CreateSettingsRow("", actions));
 		}
 
-        layout.Children.Add(SettingsNote("DF0–DF3 accept ADF and read-only IPF files, including selected entries in ZIP files. ADF writes stay in memory: use Save ADF before replacing a disk or closing the app. Changing the connected drive count requires a restart."));
+        layout.Children.Add(SettingsNote("DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. ADF writes stay in memory: use Save ADF before replacing a disk or closing the app. Changing the connected drive count requires a restart."));
         layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
         layout.Children.Add(CreateHardfileSettings());
+        layout.Children.Add(CreateSharedFolderSettings());
 		return CreateScrollableSettingsPage(layout);
 	}
 
@@ -2279,7 +2280,7 @@ internal sealed partial class MainWindow : Window
 			_drivePathBoxes[driveIndex].IsEnabled = connected;
 			_driveBrowseButtons[driveIndex].IsEnabled = connected;
             CopperScreenDriveState? drive = driveIndex < _latestState.Drives.Length ? _latestState.Drives[driveIndex] : null;
-            var ipf = drive?.Format == CopperMod.Amiga.Lightweight.LightweightFloppyFormat.Ipf;
+            var ipf = drive is { } state && IsDrivePermanentlyReadOnly(state);
             _driveWriteProtectBoxes[driveIndex].IsEnabled = connected && !ipf;
             if (_driveSaveAdfButtons[driveIndex] is { } save) save.IsEnabled = connected && drive?.CanExportAdf == true;
             if (ipf)
@@ -2348,6 +2349,7 @@ internal sealed partial class MainWindow : Window
 			UpdateDriveSettingsEnabled();
 
             RefreshHardfileSettings();
+            RefreshSharedFolderSettings();
             _floppySoundsEnabledBox.IsChecked = _settingsDraft.FloppyDriveAudio.Enabled;
 			_floppySoundModeBox.SelectedItem = _settingsDraft.FloppyDriveAudio.Mode.ToString();
 			_floppySoundPackBox.Text = _settingsDraft.FloppyDriveAudio.SoundPack;
@@ -2405,6 +2407,7 @@ internal sealed partial class MainWindow : Window
 	{
 		if (_settingsStatus == null || _updatingSettingsUi) return;
 		var valid = CanStartFromSettings(out var error);
+		UpdateMachineControls();
 		_settingsStartButton.IsEnabled = valid && !_applyingSettings;
 		_settingsStartButton.Content = _runtime == null ? "Start Amiga" : "Restart Amiga";
 		_settingsApplyButton.IsVisible = _runtime != null;
@@ -2571,6 +2574,7 @@ internal sealed partial class MainWindow : Window
     {
         var draft = _settingsDraft.Clone();
         ReadHardfileSettings(draft);
+        ReadSharedFolderSettings(draft);
 		draft.Id = _profileIdBox.Text?.Trim() ?? string.Empty;
 		draft.DisplayName = _profileNameBox.Text?.Trim() ?? string.Empty;
 		draft.Description = _profileDescriptionBox.Text?.Trim() ?? string.Empty;
@@ -2600,7 +2604,9 @@ internal sealed partial class MainWindow : Window
 		draft.PseudoFastRamKb = ParseNonNegativeInt(_pseudoFastRamBox.Text, "Pseudo-fast RAM KB");
 		draft.PseudoFastBase = _pseudoFastBaseBox.Text?.Trim() ?? "$C00000";
 		draft.RealFastRamKb = ParseNonNegativeInt(_realFastRamBox.Text, "Autoconfig fast RAM KB");
-		draft.RealFastBase = _realFastBaseBox.Text?.Trim() ?? "$200000";
+		draft.RealFastBase = draft.RealFastRamKb != _settingsDraft.RealFastRamKb && draft.RealFastRamKb <= 1048576
+			? CopperScreenSettingsDraft.FormatAddress(draft.RealFastRamKb == 0 ? 0x200000 : CopperScreenDefaults.GetDefaultFastRamBase(checked(draft.RealFastRamKb * 1024)))
+			: _realFastBaseBox.Text?.Trim() ?? "$200000";
 		draft.RtgVramMb = ParseNonNegativeInt(_rtgVramBox.Text, "RTG VRAM MB");
 		if (draft.RtgVramMb > 2048)
 		{
@@ -3129,6 +3135,7 @@ internal sealed partial class MainWindow : Window
 		{
 			string backend when string.Equals(backend, "JitM68040", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.JitM68040,
 			string backend when string.Equals(backend, "AccurateM68020", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68020,
+			string backend when string.Equals(backend, "AccurateM68010", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68010,
 			string backend when string.Equals(backend, "AccurateM68EC020", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68EC020,
 			string backend when string.Equals(backend, "AccurateM68030", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68030,
 			string backend when string.Equals(backend, "AccurateM68040", StringComparison.OrdinalIgnoreCase) => M68kBackendKind.AccurateM68040,

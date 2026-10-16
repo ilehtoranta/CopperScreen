@@ -122,7 +122,7 @@ internal sealed partial class MainWindow
         });
         _moreButton.Flyout = new Flyout { Content = more };
 
-        _browseDiskButton = CreateToolbarButton("Browse…", () => _ = OpenDiskPickerAsync(0), "Choose an ADF, IPF or ZIP archive for DF0");
+        _browseDiskButton = CreateToolbarButton("Browse…", () => _ = OpenDiskPickerAsync(0), "Choose an ADF, ADZ, DMS, IPF, SCP or ZIP archive for DF0");
         _ejectDiskButton = CreateToolbarButton("Eject", () => _ = EjectDriveDiskAsync(0), "Eject the disk from DF0");
         _previousDiskButton = CreateToolbarIconButton("Previous disk", "previous", () => _ = InsertPreviousDiskAsync(), "Previous disk in this set (Shift+F12)");
         _nextDiskButton = CreateToolbarIconButton("Next disk", "next", () => _ = InsertNextDiskAsync(), "Next disk in this set (F12)");
@@ -318,7 +318,7 @@ internal sealed partial class MainWindow
         var canChangeDisk = !_settingsVisible && !_applyingSettings && !_selectingRecentDisk;
         _browseDiskButton.IsEnabled = _primaryDiskCombo.IsEnabled = canChangeDisk;
         _ejectDiskButton.IsEnabled = (drive.HasDisk || drive.IsSwapPending) && canChangeDisk;
-        ToolTip.SetTip(_primaryDiskCombo, drive.DiskPath ?? "Choose a recent disk, use Browse, or drop an ADF, IPF or ZIP here.");
+        ToolTip.SetTip(_primaryDiskCombo, drive.DiskPath ?? "Choose a recent disk, use Browse, or drop an ADF, ADZ, DMS, IPF, SCP or ZIP here.");
         if (!string.Equals(_navigationDiskPath, state.DiskPath, StringComparison.Ordinal))
         {
             _navigationDiskPath = state.DiskPath;
@@ -338,14 +338,14 @@ internal sealed partial class MainWindow
         AutomationProperties.SetName(_muteButton, _muteButton.Content.ToString()!);
         _sessionStatus.Text = !running ? "Ready when you are" : state.FaultMessage != null ? "Stopped" : state.IsPaused ? "Paused" : "Running · " + MachineName(_committedSettings);
         _sessionStatus.Foreground = state.IsPaused ? Accent : MutedText;
-        _captureStatus.Text = !running ? "Drop an ADF, IPF or ZIP to choose a disk" : _mouseGrabActive ? "Mouse captured · F10 to release" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
+        _captureStatus.Text = !running ? "Drop an ADF, ADZ, DMS, IPF, SCP or ZIP to choose a disk" : _mouseGrabActive ? "Mouse captured · F10 to release" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
         _captureStatus.Foreground = _mouseGrabActive ? Accent : MutedText;
         UpdateInputSummary();
         _idlePanel.IsVisible = !running;
         UpdateDriveStrip(state);
     }
 
-    private static string MachineName(CopperScreenSettingsDraft draft) => draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Amiga 1200" : draft.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "Amiga 500 Plus" : "Amiga 500";
+    private static string MachineName(CopperScreenSettingsDraft draft) => CopperScreenMachinePresets.Label(CopperScreenMachinePresets.Identify(draft));
 
     private void ToggleMute()
     {

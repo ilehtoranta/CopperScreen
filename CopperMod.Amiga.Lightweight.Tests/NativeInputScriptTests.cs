@@ -5,6 +5,34 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 public sealed class NativeInputScriptTests
 {
     [Theory]
+    [InlineData("adz", LightweightFloppyFormat.Adz)]
+    [InlineData("dms", LightweightFloppyFormat.Dms)]
+    [InlineData("adf", LightweightFloppyFormat.ExtendedAdf)]
+    [InlineData("scp", LightweightFloppyFormat.Scp)]
+    [InlineData("zip", LightweightFloppyFormat.Adz)]
+    public void AdditionalMediaIsPreparedOnceAndMountedAtScriptedFrame(string extension, LightweightFloppyFormat format)
+    {
+        var path = Path.GetTempFileName();
+        try
+        {
+            File.WriteAllText(path, $"[{{\"frame\":2,\"drive\":3,\"diskPath\":\"disk.{extension}\"}}]");
+            var bytes = extension switch
+            {
+                "dms" => DiskFormatFixture.Dms(new byte[901120]),
+                "adf" => DiskFormatFixture.Extended(new byte[901120]),
+                "scp" => DiskFormatFixture.Scp(0, 80, 160),
+                _ => DiskFormatFixture.Adz(new byte[901120])
+            };
+            var reads = 0; var script = new NativeInputScript(path, _ => { reads++; return bytes; }, 4);
+            using var machine = new LightweightA500Machine(new() { FloppyDriveCount = 4 });
+            script.Apply(machine, 0); Assert.False(machine.IsDriveMounted(3));
+            script.Apply(machine, 2); Assert.Equal(format, machine.GetDriveFormat(3));
+            Assert.True(machine.IsDriveWriteProtected(3)); Assert.Equal(1, reads);
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Theory]
     [InlineData(false, "diskPath")]
     [InlineData(true, "diskPath")]
     [InlineData(false, "adfPath")]

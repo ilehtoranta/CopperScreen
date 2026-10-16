@@ -1,0 +1,2066 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "Correctness and phase guards PASS; current-slot optimization candidate; performance PENDING",
+  "reference": {
+    "description": "Owner-accepted combined grant-locality candidate",
+    "record": "GRANT_LOCALITY_2026-10-04.json",
+    "capsule": "artifacts/grant-locality-2026-10-04/r2/candidate/capsule",
+    "engineSha256": "109CD5ACDBF4C070195B138249A98F8A1F60A5CB1C3A7D797852832590D6A409"
+  },
+  "change": "Current-slot CPU arbitration and blitter fairness read only completed output cycles after DMA retirement; pending-aware device/following-slot queries retain prior behavior",
+  "sources": {
+    "CopperMod.Amiga.Lightweight/AssemblyInfo.cs": "220120098395A637162A315523D2B6A2240B89917E816307FAB883123181AE16",
+    "CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj": "1E7F7B6E02E855B710A8241C771486D0537EC3B7E112A06081B2C578787C8D51",
+    "CopperMod.Amiga.Lightweight/LightweightA1200Io.cs": "04C560F0E5F34C2D19DEF4DFF5525303C52361F2D5282524B091EAF04BA299D4",
+    "CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs": "72290820FE4AAB0829BDB374346858754E5AC42B7F93D705D660A39411D4E766",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Aga.cs": "DC5E15A16433F2FFCD8CD3916EADEEA24EE2DBEA53D37BC146C2D158B06B2F2B",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs": "8AD12803779C245824E665F8CF1B65CF1E817EB8BFC687AC297DD062E823BF70",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "F250C91A374DC157FF98BF925DD7015A0D9D24005D53AB32F26B4BF2A25C4715",
+    "CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs": "37D75DA736FAC74F4759C644B6FAC99F71306FC51A32C06C0C96B773E16EFF0C",
+    "CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs": "BE840B5CC6259EFA30C9A9E22940E1F2DCD8A29D91EB3D06697F9E739BA5B5EC",
+    "CopperMod.Amiga.Lightweight/LightweightAutoconfig.cs": "42CCC1464A0F1BBA263710509136481EDFA93E27D489D6D4D2453297E74DAB92",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "8AEFE9B4C36D878AD586FC6EBF07E32344732489692C578F7F82657EEC86A41A",
+    "CopperMod.Amiga.Lightweight/LightweightBlitter.cs": "4F544DE0F6D8446DD21C726D3E340EFC248126D8418F41F1CB5A2E55B83F0D99",
+    "CopperMod.Amiga.Lightweight/LightweightBusArbiter.cs": "6D4D469525D384697D7765C84CF4EB8A4513B9C34C739070CF1D279A70CA16EC",
+    "CopperMod.Amiga.Lightweight/LightweightCia.cs": "5CA6B61E6E3D2C59FCD8F1ACC8929FDE97A18A4B2BD7D72A99F128576CC48152",
+    "CopperMod.Amiga.Lightweight/LightweightClock.cs": "C73197E90173E0441972199FDA9F12B4ECAF06683D665F53E2C0E71DA0006365",
+    "CopperMod.Amiga.Lightweight/LightweightControllers.cs": "818E0BCF6605F370DA1AB464CB9341C479A0DC385F6AA5C2FDBB5EB46931A5DB",
+    "CopperMod.Amiga.Lightweight/LightweightCopper.cs": "28CD66E4BEC965CFEEB93B5584F01810A977EA437D59D3D2BD7909EB76D0303A",
+    "CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs": "0CEE9427B95CC9478BFD7E06D0B2888A1477C0B7B58CCFB71DD06CE30DEE245C",
+    "CopperMod.Amiga.Lightweight/LightweightCpuBoundary.cs": "C7DB5DD2FDA1658F615B8568B1551798A9A3C799F3DCB4ACC6AB55DF08CAC4AB",
+    "CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs": "5DB47E674024D18F72FCC346A0B3E278F4B883674ED06694048A3F782531B4EC",
+    "CopperMod.Amiga.Lightweight/LightweightDiskDma.cs": "9FAA34ACBFBE1D322B445FD2E4001B8F88F305968265362E5C7921E8A3B194E8",
+    "CopperMod.Amiga.Lightweight/LightweightDiskReceiver.cs": "21AB816A0F76CA00BC889E1CC5A687E533B943559F9CF25D02F5691F50D8771A",
+    "CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs": "2546AD829D1031AD04F192F16CB4A321BB05099889224B441CE93D0C673E784C",
+    "CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs": "B9F16FA8D3467C200FB06C8230A831561AD385408B57C1B04424BB068601E7A7",
+    "CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs": "D31E35C1E53CCBF60CC571F191C7F91E977A688032ADEC00DBBCDFA9611FED37",
+    "CopperMod.Amiga.Lightweight/LightweightFastRam.cs": "496EE2B97EC2C4F6FEDAAF96DAC2E2A5B0F7AD1D8221C98DE536EDD51CC82F81",
+    "CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs": "A0E8EDC1FEBF81290F173069864B5397152A60300997843616438BFFABC40DA4",
+    "CopperMod.Amiga.Lightweight/LightweightFloppyFormat.cs": "826A0C8B8AA1FF7CF95A6157C3DF24F86AF9E65385DC118DC56167553B71010F",
+    "CopperMod.Amiga.Lightweight/LightweightHdfBus.cs": "CB205F42145E4A0B10A6EECDEDDA8263EAB233BC612B0C217A93EF6E9518392E",
+    "CopperMod.Amiga.Lightweight/LightweightIpfImage.cs": "1EABBD1047B46BA6578856FF1C1974F034D9FEF9BDB0D7408CFD7EA800D9152E",
+    "CopperMod.Amiga.Lightweight/LightweightKeyboard.cs": "FED9C9E6D6288DB28773B9E4A27D2099AEB18EF4873D0A08ED33CD09C1B9358F",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs": "458BBD8434405565302B2C5B7E3F1DF1FCA7F67C30FB87869CB027DF41BE8A78",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs": "DDE8AC29EE331F8AFD688B52DF712CC672D4C9B69F5B84AC8F284C99FEDDD33D",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaSerial.cs": "13F4CD4AE0BFA57DC32C54C5684B4F10F734124DBABE815DE93843A828A5B2C8",
+    "CopperMod.Amiga.Lightweight/LightweightPotentiometers.cs": "E43C1F7BD537BB27700987A5640C8E611E79A7BB42AA29D2C95057BAFEB12C73",
+    "CopperMod.Amiga.Lightweight/LightweightRegisters.cs": "69583594D395C018893BD991ECD911C01AC8D8CFFD5315D726ABE4C7FAC7CF38",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "97CA28FFDDA858B0C7B0068B68CC040022D331C23604433E4ACCB02812192155",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.Aga.cs": "F694E3EF28961C03868BD6DC23FF2D98C308178A308D5246868B0772DA479167",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.cs": "D62E125FA6B7433579D5BCA4A930B58F7A6F55B7E4D40A40F799609240F231AB",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Aga.cs": "3D606A2C69BC3FCDB0C133CC9D09770A3C9D1CD359C1838ADA40675A0F7E518A",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs": "90ADB59D3998128D3A4D55759FC9C6F7B64C303BCC036FF2D2FD49CEADAA488F",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.cs": "012837E982EB51A27235498DFE82F1BC6C419ACF63CB4DFD6A624964D5C24B66",
+    "CopperMod.Amiga.Lightweight/README.md": "FFF5EFAC29568E74324FC9339E3ADBAE4E95040821D1ADF9F264E58C4392D8D9",
+    "CopperMod.Amiga.Lightweight/packages.lock.json": "6EE4D7589C14E4FCF73E8D731FCB6436BF2244127FE137027F93CB422A303F64",
+    "Directory.Build.props": "E5ADCA3F2EC2F649B0FBD3FB92812E95231FF28A955F22DA152FAA73746C4A35",
+    "NuGet.Config": "C5DA90F9CF0EAB3180E57E8B74D5DD134AB824D63E6330ACE75B4FDA86B153CE",
+    "global.json": "EC7D038183957F0F2DD09078668AB7866560A585B3566836E5ECD105796260F4"
+  },
+  "beforeSources": {
+    "CopperMod.Amiga.Lightweight/AssemblyInfo.cs": "220120098395A637162A315523D2B6A2240B89917E816307FAB883123181AE16",
+    "CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj": "1E7F7B6E02E855B710A8241C771486D0537EC3B7E112A06081B2C578787C8D51",
+    "CopperMod.Amiga.Lightweight/LightweightA1200Io.cs": "04C560F0E5F34C2D19DEF4DFF5525303C52361F2D5282524B091EAF04BA299D4",
+    "CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs": "72290820FE4AAB0829BDB374346858754E5AC42B7F93D705D660A39411D4E766",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Aga.cs": "DC5E15A16433F2FFCD8CD3916EADEEA24EE2DBEA53D37BC146C2D158B06B2F2B",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs": "8AD12803779C245824E665F8CF1B65CF1E817EB8BFC687AC297DD062E823BF70",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "A37440DA57C34EE585ED334B926EDFBEBF59E654940BF77134C26AFFDD7D23BC",
+    "CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs": "37D75DA736FAC74F4759C644B6FAC99F71306FC51A32C06C0C96B773E16EFF0C",
+    "CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs": "BE840B5CC6259EFA30C9A9E22940E1F2DCD8A29D91EB3D06697F9E739BA5B5EC",
+    "CopperMod.Amiga.Lightweight/LightweightAutoconfig.cs": "42CCC1464A0F1BBA263710509136481EDFA93E27D489D6D4D2453297E74DAB92",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "8AEFE9B4C36D878AD586FC6EBF07E32344732489692C578F7F82657EEC86A41A",
+    "CopperMod.Amiga.Lightweight/LightweightBlitter.cs": "4F544DE0F6D8446DD21C726D3E340EFC248126D8418F41F1CB5A2E55B83F0D99",
+    "CopperMod.Amiga.Lightweight/LightweightBusArbiter.cs": "6D4D469525D384697D7765C84CF4EB8A4513B9C34C739070CF1D279A70CA16EC",
+    "CopperMod.Amiga.Lightweight/LightweightCia.cs": "5CA6B61E6E3D2C59FCD8F1ACC8929FDE97A18A4B2BD7D72A99F128576CC48152",
+    "CopperMod.Amiga.Lightweight/LightweightClock.cs": "C73197E90173E0441972199FDA9F12B4ECAF06683D665F53E2C0E71DA0006365",
+    "CopperMod.Amiga.Lightweight/LightweightControllers.cs": "818E0BCF6605F370DA1AB464CB9341C479A0DC385F6AA5C2FDBB5EB46931A5DB",
+    "CopperMod.Amiga.Lightweight/LightweightCopper.cs": "28CD66E4BEC965CFEEB93B5584F01810A977EA437D59D3D2BD7909EB76D0303A",
+    "CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs": "0CEE9427B95CC9478BFD7E06D0B2888A1477C0B7B58CCFB71DD06CE30DEE245C",
+    "CopperMod.Amiga.Lightweight/LightweightCpuBoundary.cs": "C7DB5DD2FDA1658F615B8568B1551798A9A3C799F3DCB4ACC6AB55DF08CAC4AB",
+    "CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs": "5DB47E674024D18F72FCC346A0B3E278F4B883674ED06694048A3F782531B4EC",
+    "CopperMod.Amiga.Lightweight/LightweightDiskDma.cs": "9FAA34ACBFBE1D322B445FD2E4001B8F88F305968265362E5C7921E8A3B194E8",
+    "CopperMod.Amiga.Lightweight/LightweightDiskReceiver.cs": "21AB816A0F76CA00BC889E1CC5A687E533B943559F9CF25D02F5691F50D8771A",
+    "CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs": "2546AD829D1031AD04F192F16CB4A321BB05099889224B441CE93D0C673E784C",
+    "CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs": "B9F16FA8D3467C200FB06C8230A831561AD385408B57C1B04424BB068601E7A7",
+    "CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs": "D31E35C1E53CCBF60CC571F191C7F91E977A688032ADEC00DBBCDFA9611FED37",
+    "CopperMod.Amiga.Lightweight/LightweightFastRam.cs": "496EE2B97EC2C4F6FEDAAF96DAC2E2A5B0F7AD1D8221C98DE536EDD51CC82F81",
+    "CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs": "A0E8EDC1FEBF81290F173069864B5397152A60300997843616438BFFABC40DA4",
+    "CopperMod.Amiga.Lightweight/LightweightFloppyFormat.cs": "826A0C8B8AA1FF7CF95A6157C3DF24F86AF9E65385DC118DC56167553B71010F",
+    "CopperMod.Amiga.Lightweight/LightweightHdfBus.cs": "CB205F42145E4A0B10A6EECDEDDA8263EAB233BC612B0C217A93EF6E9518392E",
+    "CopperMod.Amiga.Lightweight/LightweightIpfImage.cs": "1EABBD1047B46BA6578856FF1C1974F034D9FEF9BDB0D7408CFD7EA800D9152E",
+    "CopperMod.Amiga.Lightweight/LightweightKeyboard.cs": "FED9C9E6D6288DB28773B9E4A27D2099AEB18EF4873D0A08ED33CD09C1B9358F",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs": "458BBD8434405565302B2C5B7E3F1DF1FCA7F67C30FB87869CB027DF41BE8A78",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs": "DDE8AC29EE331F8AFD688B52DF712CC672D4C9B69F5B84AC8F284C99FEDDD33D",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaSerial.cs": "13F4CD4AE0BFA57DC32C54C5684B4F10F734124DBABE815DE93843A828A5B2C8",
+    "CopperMod.Amiga.Lightweight/LightweightPotentiometers.cs": "E43C1F7BD537BB27700987A5640C8E611E79A7BB42AA29D2C95057BAFEB12C73",
+    "CopperMod.Amiga.Lightweight/LightweightRegisters.cs": "69583594D395C018893BD991ECD911C01AC8D8CFFD5315D726ABE4C7FAC7CF38",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "97CA28FFDDA858B0C7B0068B68CC040022D331C23604433E4ACCB02812192155",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.Aga.cs": "F694E3EF28961C03868BD6DC23FF2D98C308178A308D5246868B0772DA479167",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.cs": "D62E125FA6B7433579D5BCA4A930B58F7A6F55B7E4D40A40F799609240F231AB",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Aga.cs": "3D606A2C69BC3FCDB0C133CC9D09770A3C9D1CD359C1838ADA40675A0F7E518A",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs": "90ADB59D3998128D3A4D55759FC9C6F7B64C303BCC036FF2D2FD49CEADAA488F",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.cs": "012837E982EB51A27235498DFE82F1BC6C419ACF63CB4DFD6A624964D5C24B66",
+    "CopperMod.Amiga.Lightweight/README.md": "FFF5EFAC29568E74324FC9339E3ADBAE4E95040821D1ADF9F264E58C4392D8D9",
+    "CopperMod.Amiga.Lightweight/packages.lock.json": "6EE4D7589C14E4FCF73E8D731FCB6436BF2244127FE137027F93CB422A303F64",
+    "Directory.Build.props": "E5ADCA3F2EC2F649B0FBD3FB92812E95231FF28A955F22DA152FAA73746C4A35",
+    "NuGet.Config": "C5DA90F9CF0EAB3180E57E8B74D5DD134AB824D63E6330ACE75B4FDA86B153CE",
+    "global.json": "EC7D038183957F0F2DD09078668AB7866560A585B3566836E5ECD105796260F4"
+  },
+  "sourceCodeChanges": [
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs"
+  ],
+  "acceptedSourceDifferenceBeforeOptimization": {
+    "documentationOnly": [
+      "CopperMod.Amiga.Lightweight/README.md"
+    ],
+    "engineCodeMatchesAcceptedCandidate": true
+  },
+  "capsules": {
+    "capsule": {
+      "Copper68k.dll": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F",
+      "CopperDisk.dll": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A",
+      "CopperDisk.pdb": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+      "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "CopperMod.Amiga.Lightweight.dll": "F8F924F7C2B7F59E883DC49E46C1D3015D608C17BFABC13C28D43B4811E4BDC1",
+      "CopperMod.Amiga.Lightweight.pdb": "AD463D44BF58532414C3B7A80C3FDD55B7C9BE7B5211A74B5566EF1A07773677",
+      "CopperMod.Amiga.Lightweight.Runner.deps.json": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+      "CopperMod.Amiga.Lightweight.Runner.dll": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+      "CopperMod.Amiga.Lightweight.Runner.exe": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+      "CopperMod.Amiga.Lightweight.Runner.pdb": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+      "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "CopperMod.Amiga.Lightweight.xml": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F"
+    },
+    "modern-capsule": {
+      "Copper68k.dll": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F",
+      "CopperDisk.dll": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A",
+      "CopperDisk.pdb": "861267A6024923F5D64EA20FABB22E3CCE2C45871E84CD2F0C84751F52A6EB58",
+      "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "CopperMod.Amiga.Lightweight.dll": "F8F924F7C2B7F59E883DC49E46C1D3015D608C17BFABC13C28D43B4811E4BDC1",
+      "CopperMod.Amiga.Lightweight.pdb": "AD463D44BF58532414C3B7A80C3FDD55B7C9BE7B5211A74B5566EF1A07773677",
+      "CopperMod.Amiga.Lightweight.Runner.deps.json": "F118834298A8268674574425F7B4075B517070E2F24F32E80001C281188A6629",
+      "CopperMod.Amiga.Lightweight.Runner.dll": "6120A86EA6CA102BC9E2BF7833A70CAA97E7644B517EC1F415E67FC2125BBC53",
+      "CopperMod.Amiga.Lightweight.Runner.exe": "FE23FFD214096AA3BD2235E22D240B6C9F776CE53E9D4DEDFF3EFDCAA38087E5",
+      "CopperMod.Amiga.Lightweight.Runner.pdb": "5569A18373454964059D3FC43590AE8F922487C1F3A6915107E7A12E4D6EBC1F",
+      "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "CopperMod.Amiga.Lightweight.xml": "2676E54645C5B7FEA937018AA4F6C9358F726B6F680743293C7522B82A0F0C9F"
+    },
+    "diagnostic-capsule": {
+      "Copper68k.dll": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F",
+      "CopperDisk.dll": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A",
+      "CopperDisk.pdb": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+      "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "CopperMod.Amiga.Lightweight.dll": "ADD0CC3B28C2D9746196D856788F3473BFB55CBD783CBC7D45610EE7AF7CC7B2",
+      "CopperMod.Amiga.Lightweight.pdb": "2F9326FBEA382CA97E7F337BB655AFF6FDB2298E6B7BB043454DAC44014F8C5C",
+      "CopperMod.Amiga.Lightweight.Runner.deps.json": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+      "CopperMod.Amiga.Lightweight.Runner.dll": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+      "CopperMod.Amiga.Lightweight.Runner.exe": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+      "CopperMod.Amiga.Lightweight.Runner.pdb": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+      "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "CopperMod.Amiga.Lightweight.xml": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F"
+    }
+  },
+  "stateAdded": false,
+  "allocationAdded": false,
+  "busTimingChanged": false,
+  "deviceLoopChanged": false,
+  "profileSpecializationChanged": false,
+  "publicApiOrDependencyChanged": false,
+  "newTestsAdded": false,
+  "retirementGuards": {
+    "diagnosticsOnly": true,
+    "productionGuardMessagesAbsent": true,
+    "cpuQuery": "Blitter has no current pending bus output after owner-clock advancement",
+    "fairnessQuery": "Disk, Paula, bitplanes, sprite DMA and Copper have no pending current output after their steps",
+    "nativeReplays": [
+      {
+        "label": "lores-normal",
+        "workload": "lores",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\diagnostic-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--synthetic-paula-dma",
+          "--wide-output",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      },
+      {
+        "label": "hires-normal",
+        "workload": "hires",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\diagnostic-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--synthetic-paula-dma",
+          "--hires",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      },
+      {
+        "label": "lemmings-normal",
+        "workload": "lemmings",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\diagnostic-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+          "--warmup",
+          "14520",
+          "--frames",
+          "3600"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      },
+      {
+        "label": "lemmings-scalar",
+        "workload": "lemmings",
+        "scalar": true,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\diagnostic-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+          "--warmup",
+          "14520",
+          "--frames",
+          "3600",
+          "--scalar-cpu"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      }
+    ]
+  },
+  "correctness": {
+    "enginePassed": 1089,
+    "focusedPassed": 186,
+    "diskPassed": 74,
+    "hostPassed": 185,
+    "failed": 0,
+    "skipped": 0,
+    "rawCounters": {
+      "engine": {
+        "total": "1089",
+        "executed": "1089",
+        "passed": "1089",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focused": {
+        "total": "186",
+        "executed": "186",
+        "passed": "186",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "disk": {
+        "total": "74",
+        "executed": "74",
+        "passed": "74",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "host": {
+        "total": "185",
+        "executed": "185",
+        "passed": "185",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "accepted168HostCasesPassed": true,
+    "additionalHostCases": [
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.BadChecksumAndMissingDiskAreRejectedBeforeStartup",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.BootChoiceRoundTripsWithoutLoadingRememberedNativeRom",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.BootFailuresAreVisible(code: \"dc.w $4afc\", message: \"guest exception\")",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.BootFailuresAreVisible(code: \"rts\", message: \"boot block returned\")",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.FreeMemCoalescesAndMemoryHeaderStaysConsistent",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.LoadedSecondStageCanStillUseExecAndTrackdisk",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.OriginalBootblockReceivesIoRequestAndExecAndRunsWithoutRom",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.PublicListVectorsUseTheExecRegisterAbi",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.ReadCanFillTakeoverLoaderMemoryOutsideResidentServices(destination: 458752)",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.ReadCanFillTakeoverLoaderMemoryOutsideResidentServices(destination: 509952)",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.ResetReadsTheCurrentlyInsertedDisk",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.SupervisorCallbackReturnsToUserBootContext",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.TrackdiskReadsCrossHeadAndCylinder",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.UnqualifiedCpuIsRejected(cpu: \"AccurateM68020\")",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.UnqualifiedCpuIsRejected(cpu: \"AccurateM68040\")",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.UnsupportedServiceReportsLvoAndCallerInsteadOfReturningSuccess",
+      "CopperScreen.Tests.CopperScreenMinimalBootTests.WritesAndOverlappingReadsReportTheirBoundary"
+    ],
+    "hostInputs": {
+      "variables": {
+        "COPPERSCREEN_LIGHTWEIGHT_NATIVE_ADF": "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "COPPERSCREEN_WORKBENCH31_ADF": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-2026-09-30\\workbench.adf",
+        "COPPERSCREEN_KICKSTART31_ROM": "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+        "COPPERSCREEN_A1200_ROM": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "COPPERSCREEN_WORKBENCH31_HDF": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-hd-2026-09-30\\v2\\pristine-rdb-ffs.hdf",
+        "COPPERSCREEN_LIGHTWEIGHT_NATIVE_SCRIPT": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+        "COPPERSCREEN_LIGHTWEIGHT_NATIVE_ROM": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "COPPERSCREEN_AGA_PROBE_HDF": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-2026-10-01\\aga-final-pristine.hdf"
+      },
+      "pins": {
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-2026-10-01\\aga-final-pristine.hdf": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-hd-2026-09-30\\v2\\pristine-rdb-ffs.hdf": "19A78C839A20A7498DF33154C3697237259B195A07F6E29059F10745C7947E9D",
+        "C:\\Data\\ROM\\kickstart-3.1-a500.rom": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59",
+        "C:\\Data\\ROM\\Kickstart_13.rom": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-2026-09-30\\workbench.adf": "A8F167BAD2897E8C7F2CFE73DE7A9F8DAD10C7A5B1F78CA17F818AB17278B985"
+      }
+    },
+    "retained": [
+      {
+        "label": "lores-normal",
+        "workload": "lores",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--synthetic-paula-dma",
+          "--wide-output",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "timingDisposition": "Excluded: correctness/JIT replay; concurrent validation allowed",
+        "normalNativeUsesCapturedJitReplay": false
+      },
+      {
+        "label": "hires-normal",
+        "workload": "hires",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--synthetic-paula-dma",
+          "--hires",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "timingDisposition": "Excluded: correctness/JIT replay; concurrent validation allowed",
+        "normalNativeUsesCapturedJitReplay": false
+      },
+      {
+        "label": "lemmings-normal",
+        "workload": "lemmings",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+          "--warmup",
+          "14520",
+          "--frames",
+          "3600"
+        ],
+        "timingDisposition": "Excluded: correctness/JIT replay; concurrent validation allowed",
+        "normalNativeUsesCapturedJitReplay": true
+      },
+      {
+        "label": "lemmings-scalar",
+        "workload": "lemmings",
+        "scalar": true,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+          "--warmup",
+          "14520",
+          "--frames",
+          "3600",
+          "--scalar-cpu"
+        ],
+        "timingDisposition": "Excluded: correctness/JIT replay; concurrent validation allowed",
+        "normalNativeUsesCapturedJitReplay": false
+      }
+    ],
+    "native": [
+      {
+        "fixture": "ecs-super",
+        "scalar": false,
+        "fields": 2400,
+        "capturedFiles": 30,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "9DA6B69BFE3B780DE412CAC33087258AE27612834C9CED15FA82993FF5D7776A",
+        "finalHardfileSha256": "F8CFCA788D1FC21C579C9D15EF16E688B9CB0E80D5F8FC919A621AF0CFFF45C1",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-super-normal.hdf",
+          "--frames",
+          "2400",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-super-normal",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ]
+      },
+      {
+        "fixture": "ecs-super",
+        "scalar": true,
+        "fields": 2400,
+        "capturedFiles": 30,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "9DA6B69BFE3B780DE412CAC33087258AE27612834C9CED15FA82993FF5D7776A",
+        "finalHardfileSha256": "F8CFCA788D1FC21C579C9D15EF16E688B9CB0E80D5F8FC919A621AF0CFFF45C1",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-super-scalar.hdf",
+          "--frames",
+          "2400",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-super-scalar",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048",
+          "--scalar-cpu"
+        ]
+      },
+      {
+        "fixture": "ecs-ntsc-super",
+        "scalar": false,
+        "fields": 1200,
+        "capturedFiles": 18,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "321039503692A8A202882C6436446A3DD8223AD9F5A41562205CAA083696B7FF",
+        "finalHardfileSha256": "6F6CDB874666B31A39E26632367A48FC010A2699564FF8BBC65E1510F782589A",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-ntsc-super-normal.hdf",
+          "--frames",
+          "1200",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-ntsc-super-normal",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ]
+      },
+      {
+        "fixture": "ecs-ntsc-super",
+        "scalar": true,
+        "fields": 1200,
+        "capturedFiles": 18,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "321039503692A8A202882C6436446A3DD8223AD9F5A41562205CAA083696B7FF",
+        "finalHardfileSha256": "6F6CDB874666B31A39E26632367A48FC010A2699564FF8BBC65E1510F782589A",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-ntsc-super-scalar.hdf",
+          "--frames",
+          "1200",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\ecs-ntsc-super-scalar",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048",
+          "--scalar-cpu"
+        ]
+      },
+      {
+        "fixture": "aga-rgb24",
+        "scalar": false,
+        "fields": 3600,
+        "capturedFiles": 43,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "sourceHardfileSha256": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "finalHardfileSha256": "89B266045EB2470356AEDF209FFBC9A2E5C3C1469FDA90FC4CA39EA9527FDDFA",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\aga-rgb24-normal.hdf",
+          "--frames",
+          "3600",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\aga-rgb24-normal",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--cpu",
+          "68ec020",
+          "--agnus",
+          "alice",
+          "--denise",
+          "lisa",
+          "--chip-ram-kib",
+          "2048",
+          "--slow-ram-kib",
+          "0"
+        ]
+      },
+      {
+        "fixture": "aga-rgb24",
+        "scalar": true,
+        "fields": 3600,
+        "capturedFiles": 43,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "sourceHardfileSha256": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "finalHardfileSha256": "89B266045EB2470356AEDF209FFBC9A2E5C3C1469FDA90FC4CA39EA9527FDDFA",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\aga-rgb24-scalar.hdf",
+          "--frames",
+          "3600",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\native\\aga-rgb24-scalar",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--cpu",
+          "68ec020",
+          "--agnus",
+          "alice",
+          "--denise",
+          "lisa",
+          "--chip-ram-kib",
+          "2048",
+          "--slow-ram-kib",
+          "0",
+          "--scalar-cpu"
+        ]
+      }
+    ],
+    "capturedFileHashesMatched": 182,
+    "finalHardfilesMatched": 6,
+    "frozenHostRootFilesAndCriticalDependenciesPinnedBeforeAfter": true
+  },
+  "productionBuild": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "log": "artifacts/current-slot-optimization-2026-10-04/production-build.log"
+  },
+  "profile": {
+    "disposition": "Instrumented diagnostic samples only; all timing excluded from throughput conclusions",
+    "toolVersion": "10.0.745401",
+    "environment": {
+      "disposition": "DIAGNOSTIC ONLY: instrumented sampled profile; no throughput acceptance",
+      "timestampUtc": "2026-10-04T12:57:55.0301246Z",
+      "engine": "Accepted combined grant-locality candidate; immutable reference",
+      "runtime": "10.0.12",
+      "affinity": "Not restricted; diagnostic profile only",
+      "priority": "Normal",
+      "traceTool": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\current-slot-optimization-2026-10-04\\tools\\dotnet-trace.exe",
+      "traceToolSha256": "ADE92A1B0140E2D6CD0E670F4C240627643F1DBE9DC4696BB905EC81BF40B08F",
+      "pins": {
+        "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.dll": "109CD5ACDBF4C070195B138249A98F8A1F60A5CB1C3A7D797852832590D6A409",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\media\\lemmings-disk2.zip": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperDisk.dll": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A",
+        "C:\\Data\\ROM\\Kickstart_13.rom": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\Copper68k.dll": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F"
+      }
+    },
+    "steadyWindows": [
+      {
+        "workload": "lemmings",
+        "disposition": "DIAGNOSTIC ONLY: instrumented sampled profile; no FPS or acceptance result",
+        "thread": "Thread (84948)",
+        "windowStartMs": 74597.74560006867,
+        "windowEndMs": 81597.74560006867,
+        "sampledMilliseconds": 7000.0,
+        "intervalSlices": 705,
+        "fingerprintMatches": true,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "traceSha256": "CD191ED23F5C69C71E5704DB3E334388A00A771B84366B4A8F82F2155F7E9E66",
+        "speedscopeSha256": "D59FCB955E2518724F59A86CF7C23CD6C2E6E5FA927BD8BF9C662D7C67E03BFE",
+        "exclusive": [
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices(int64)",
+            "sampledMilliseconds": 1930.0850465057447,
+            "percent": 27.57264352151064
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceToCpuGrant(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 467.1594836074946,
+            "percent": 6.673706908678494
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 440.315094200123,
+            "percent": 6.290215631430328
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedBranch(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 343.54370682680747,
+            "percent": 4.907767240382964
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction()",
+            "sampledMilliseconds": 340.70167367551767,
+            "percent": 4.867166766793109
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.RenderHiresCck(int32,int32,int32,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 324.5163930374256,
+            "percent": 4.635948471963222
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody(int64)",
+            "sampledMilliseconds": 264.3677318557602,
+            "percent": 3.7766818836537173
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind(unsigned int16,unsigned int32,value class Copper68k.M68kOpcodePlanKind)",
+            "sampledMilliseconds": 262.12117777562526,
+            "percent": 3.7445882539375037
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchAtRetirement()",
+            "sampledMilliseconds": 204.30709444580134,
+            "percent": 2.918672777797162
+          },
+          {
+            "name": "System.Private.CoreLib.il!System.SpanHelpers.Memmove(unsigned int8&,unsigned int8&,unsigned int)",
+            "sampledMilliseconds": 200.6833938644413,
+            "percent": 2.866905626634876
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GrantCpuWord(unsigned int32,int64,int64&,int64&,bool)",
+            "sampledMilliseconds": 188.45458851469448,
+            "percent": 2.692208407352778
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedTestByteDisplacement(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 185.43680269010656,
+            "percent": 2.6490971812872366
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 157.02779540403571,
+            "percent": 2.243254220057653
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 155.5223968307546,
+            "percent": 2.221748526153637
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceTo(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 142.68700156248815,
+            "percent": 2.0383857366069735
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchOne(int64&)",
+            "sampledMilliseconds": 139.2309585968178,
+            "percent": 1.9890136942402543
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedMove(unsigned int16)",
+            "sampledMilliseconds": 125.1323980849993,
+            "percent": 1.7876056869285613
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].BranchToAndRefillTarget(unsigned int32,unsigned int32,bool,value class Copper68k.M68kBranchInterruptTransitionKind)",
+            "sampledMilliseconds": 124.80130908968567,
+            "percent": 1.7828758441383667
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.AdvanceControlInput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 120.94889328767022,
+            "percent": 1.7278413326810032
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 92.49500028837065,
+            "percent": 1.3213571469767236
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 62.38935314484115,
+            "percent": 0.8912764734977308
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteScalarFallbackQuantum(int64)",
+            "sampledMilliseconds": 61.06142508392804,
+            "percent": 0.8723060726275434
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].DecodeBranch(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 47.97619852142816,
+            "percent": 0.6853742645918308
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.ComputeAreaOutput()",
+            "sampledMilliseconds": 46.96849885863776,
+            "percent": 0.6709785551233965
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ReadByteAt(unsigned int32,int64)",
+            "sampledMilliseconds": 46.53199995117029,
+            "percent": 0.6647428564452899
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedRegisterArithmetic(unsigned int16)",
+            "sampledMilliseconds": 46.25130081176758,
+            "percent": 0.6607328687395368
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedImmediate(unsigned int16)",
+            "sampledMilliseconds": 45.04339911499119,
+            "percent": 0.6434771302141599
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposeColorIndexSlow(int32,int32,int32,int32,int32)",
+            "sampledMilliseconds": 32.119500769040314,
+            "percent": 0.4588500109862902
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.RefreshNextCycle()",
+            "sampledMilliseconds": 32.116900358581915,
+            "percent": 0.4588128622654559
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 31.80659940643818,
+            "percent": 0.4543799915205454
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedImmediateBtst(unsigned int16)",
+            "sampledMilliseconds": 31.76530102995457,
+            "percent": 0.4537900147136367
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.WriteLong(unsigned int32,unsigned int32,int64&,value class Copper68k.M68kBusAccessKind)",
+            "sampledMilliseconds": 31.08189894410316,
+            "percent": 0.44402712777290226
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].DecodeMovem(unsigned int16)",
+            "sampledMilliseconds": 30.979099046322517,
+            "percent": 0.4425585578046074
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ReadWordRaw(unsigned int32)",
+            "sampledMilliseconds": 30.89599971313146,
+            "percent": 0.4413714244733066
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCia.PulseTod(int64)",
+            "sampledMilliseconds": 30.22420024871826,
+            "percent": 0.43177428926740374
+          }
+        ],
+        "inclusive": [
+          {
+            "name": "Process64 Program (46140) Args:  --fx-version 10.0.12 C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll --rom C:\\Data\\ROM\\Kickstart_13.rom --adf \"C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip\" --input-script C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json --warmup 14520 --frames 3600 ",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "(Non-Activities)",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "Threads",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "Thread (84948)",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteFrame()",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<Main>$(class System.String[])",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "CPU_TIME",
+            "sampledMilliseconds": 6999.999583744808,
+            "percent": 99.99999405349725
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteScalarFallbackQuantum(int64)",
+            "sampledMilliseconds": 6984.096045030208,
+            "percent": 99.77280064328869
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction()",
+            "sampledMilliseconds": 6862.234398986795,
+            "percent": 98.03191998552565
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody(int64)",
+            "sampledMilliseconds": 6521.532725311277,
+            "percent": 93.16475321873254
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind(unsigned int16,unsigned int32,value class Copper68k.M68kOpcodePlanKind)",
+            "sampledMilliseconds": 4984.138561988846,
+            "percent": 71.20197945698351
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices(int64)",
+            "sampledMilliseconds": 3456.7160706771683,
+            "percent": 49.381658152530974
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GrantCpuWord(unsigned int32,int64,int64&,int64&,bool)",
+            "sampledMilliseconds": 3240.444236735493,
+            "percent": 46.29206052479276
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceToCpuGrant(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 3051.9896482207987,
+            "percent": 43.59985211743998
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedBranch(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 1939.9684041244764,
+            "percent": 27.713834344635377
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchOne(int64&)",
+            "sampledMilliseconds": 1745.3324357344973,
+            "percent": 24.93332051049282
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].BranchToAndRefillTarget(unsigned int32,unsigned int32,bool,value class Copper68k.M68kBranchInterruptTransitionKind)",
+            "sampledMilliseconds": 1548.3777967803908,
+            "percent": 22.11968281114844
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedTestByteDisplacement(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 1103.0199975463765,
+            "percent": 15.757428536376807
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedImmediateBtst(unsigned int16)",
+            "sampledMilliseconds": 1090.0735879439599,
+            "percent": 15.572479827770856
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceTo(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 998.8756869872886,
+            "percent": 14.26965267124698
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchAtRetirement()",
+            "sampledMilliseconds": 898.2391610641644,
+            "percent": 12.831988015202349
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon].ReadByte(!0,unsigned int32,int64&)",
+            "sampledMilliseconds": 480.9196925171127,
+            "percent": 6.870281321673039
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 440.315094200123,
+            "percent": 6.290215631430328
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedMove(unsigned int16)",
+            "sampledMilliseconds": 419.41589610443043,
+            "percent": 5.991655658634721
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].DecodeByOpcodeLine(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 359.32567771604226,
+            "percent": 5.133223967372032
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 343.8432936233148,
+            "percent": 4.912047051761641
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.RenderHiresCck(int32,int32,int32,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 324.5163930374256,
+            "percent": 4.635948471963222
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ResolvePlannedEa(int32,int32,value class Copper68k.M68kOperandSize,bool,bool,int32)",
+            "sampledMilliseconds": 203.26489765929,
+            "percent": 2.9037842522755715
+          },
+          {
+            "name": "System.Private.CoreLib.il!System.SpanHelpers.Memmove(unsigned int8&,unsigned int8&,unsigned int)",
+            "sampledMilliseconds": 200.6833938644413,
+            "percent": 2.866905626634876
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 183.33824643251137,
+            "percent": 2.6191178061787337
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 170.38159575042664,
+            "percent": 2.4340227964346663
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].DecodeLine4(unsigned int16,unsigned int32)",
+            "sampledMilliseconds": 139.98199632873002,
+            "percent": 1.9997428046961432
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 139.4634991470084,
+            "percent": 1.99233570210012
+          },
+          {
+            "name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].CompleteInstruction(int64)",
+            "sampledMilliseconds": 123.4823886261147,
+            "percent": 1.76403412323021
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.AdvanceControlInput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 120.94889328767022,
+            "percent": 1.7278413326810032
+          }
+        ],
+        "categories": [
+          {
+            "name": "CPU core",
+            "sampledMilliseconds": 2330.5849368454365,
+            "percent": 33.29407052636338
+          },
+          {
+            "name": "Device dispatch / inlined video",
+            "sampledMilliseconds": 1930.0850465057447,
+            "percent": 27.57264352151064
+          },
+          {
+            "name": "Clock / bus wait",
+            "sampledMilliseconds": 609.8464851699828,
+            "percent": 8.712092645285468
+          },
+          {
+            "name": "Bitplane fetch",
+            "sampledMilliseconds": 440.315094200123,
+            "percent": 6.290215631430328
+          },
+          {
+            "name": "Blitter",
+            "sampledMilliseconds": 343.8432936233148,
+            "percent": 4.912047051761641
+          },
+          {
+            "name": "Out-of-line video",
+            "sampledMilliseconds": 324.5163930374256,
+            "percent": 4.635948471963222
+          },
+          {
+            "name": "CPU bus / memory host",
+            "sampledMilliseconds": 281.00568845975795,
+            "percent": 4.014366977996542
+          },
+          {
+            "name": "Other",
+            "sampledMilliseconds": 260.78539376372646,
+            "percent": 3.7255056251960923
+          },
+          {
+            "name": "Audio",
+            "sampledMilliseconds": 202.49849610900856,
+            "percent": 2.8928356587001223
+          },
+          {
+            "name": "Copper",
+            "sampledMilliseconds": 183.33824643251137,
+            "percent": 2.6191178061787337
+          },
+          {
+            "name": "CPU host loop",
+            "sampledMilliseconds": 61.06142508392804,
+            "percent": 0.8723060726275434
+          },
+          {
+            "name": "Sprites",
+            "sampledMilliseconds": 32.119500769040314,
+            "percent": 0.4588500109862902
+          }
+        ]
+      },
+      {
+        "workload": "lores",
+        "disposition": "DIAGNOSTIC ONLY: instrumented sampled profile; no FPS or acceptance result",
+        "thread": "Thread (22980)",
+        "windowStartMs": 27494.212802655027,
+        "windowEndMs": 34494.21280265503,
+        "sampledMilliseconds": 7000.0,
+        "intervalSlices": 3444,
+        "fingerprintMatches": true,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "traceSha256": "E50BA0913D6A9E9A09AEEE7FC5309F7A1589B9904CE127F30B250336C3972F6F",
+        "speedscopeSha256": "D6AD6E5E5FD2BEE9B7CD7C0DD14B10FB762E4188292491361F105CC3B360C108",
+        "exclusive": [
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices(int64)",
+            "sampledMilliseconds": 4013.5155730073275,
+            "percent": 57.33593675724754
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 812.5176813938415,
+            "percent": 11.60739544848345
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteFrame()",
+            "sampledMilliseconds": 541.8532409204636,
+            "percent": 7.740760584578051
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.AdvanceControlInput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 292.29259496134546,
+            "percent": 4.175608499447792
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.CompleteWord(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 275.0737937059239,
+            "percent": 3.9296256243703414
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.RefreshNextCycle()",
+            "sampledMilliseconds": 169.7513956115763,
+            "percent": 2.425019937308233
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSpriteDma.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 154.60729732171967,
+            "percent": 2.208675676024567
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 132.65499755840938,
+            "percent": 1.8950713936915626
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 114.66469744015558,
+            "percent": 1.6380671062879368
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.WriteCustomRegister(unsigned int16,unsigned int16,int64)",
+            "sampledMilliseconds": 80.10593256683933,
+            "percent": 1.1443704652405617
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposeColorIndexSlow(int32,int32,int32,int32,int32)",
+            "sampledMilliseconds": 72.02609918002781,
+            "percent": 1.0289442740003973
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.EmitOutputTo(int64)",
+            "sampledMilliseconds": 50.831498091687536,
+            "percent": 0.7261642584526791
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.OnRegisterWrite(unsigned int16,unsigned int16,int64)",
+            "sampledMilliseconds": 40.210498412317975,
+            "percent": 0.5744356916045424
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposeShifterColorIndex(int32,int32,int32)",
+            "sampledMilliseconds": 38.91679789143018,
+            "percent": 0.5559542555918597
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 37.50629962445237,
+            "percent": 0.5358042803493195
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 36.813897340784024,
+            "percent": 0.5259128191540575
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteLineOutput(value class AreaChannel,bool,unsigned int32,unsigned int16,int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 34.54849938487678,
+            "percent": 0.4935499912125254
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptLinePhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 27.95289934731045,
+            "percent": 0.3993271335330064
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.BeginLine(int32,int32)",
+            "sampledMilliseconds": 18.065900059889827,
+            "percent": 0.25808428656985466
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 16.71680005111557,
+            "percent": 0.238811429301651
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ObserveActiveSpriteCollisions(int32,int32)",
+            "sampledMilliseconds": 5.875600075152761,
+            "percent": 0.08393714393075373
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposePairBoundary(int32,int32,int32,int32,int32,int32&,int32&)",
+            "sampledMilliseconds": 5.776699962236307,
+            "percent": 0.0825242851748044
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSpriteDma.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 4.179599761962891,
+            "percent": 0.059708568028041295
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ApplyPendingInterruptVisibility(int64)",
+            "sampledMilliseconds": 4.077464131929446,
+            "percent": 0.05824948759899209
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<<Main>$>g__RearmSyntheticSpriteDma|0_23(class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 3.4758809247978206,
+            "percent": 0.04965544178282601
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GetCustomRegister(unsigned int16)",
+            "sampledMilliseconds": 2.5320000648498535,
+            "percent": 0.03617142949785505
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GrantCpuWord(unsigned int32,int64,int64&,int64&,bool)",
+            "sampledMilliseconds": 2.012998833466554,
+            "percent": 0.028757126192379343
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<<Main>$>g__ExecuteMeasuredFrame|0_32(class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool,bool,bool,bool,bool,bool)",
+            "sampledMilliseconds": 2.0112694826057123,
+            "percent": 0.028732421180081603
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.RenderWindowBoundaryPair(int32,int32,int32,int32,int32,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 2.0099000930786133,
+            "percent": 0.028712858472551617
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<<Main>$>g__WriteBlitterPointer|0_30(class CopperMod.Amiga.Lightweight.LightweightA500Machine,unsigned int16,unsigned int32,int64&)",
+            "sampledMilliseconds": 1.9998630693444284,
+            "percent": 0.02856947241920612
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightKeyboard.Step(int64,class CopperMod.Amiga.Lightweight.LightweightCia,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 1.9733999967575073,
+            "percent": 0.028191428525107247
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<<Main>$>g__AccumulateOutputChecksum|0_12(class CopperMod.Amiga.Lightweight.LightweightA500Machine,unsigned int64,int32)",
+            "sampledMilliseconds": 1.7534312725074415,
+            "percent": 0.025049018178677735
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceToCpuGrant(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 1.695498459816008,
+            "percent": 0.024221406568800116
+          }
+        ],
+        "inclusive": [
+          {
+            "name": "Process64 Program (18864) Args:  --fx-version 10.0.12 C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll --synthetic-paula-dma --wide-output --warmup 600 --frames 7200 ",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "(Non-Activities)",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "Threads",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "Thread (22980)",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<Main>$(class System.String[])",
+            "sampledMilliseconds": 7000.0,
+            "percent": 100.0
+          },
+          {
+            "name": "CPU_TIME",
+            "sampledMilliseconds": 6999.968851981255,
+            "percent": 99.99955502830365
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<<Main>$>g__ExecuteMeasuredFrame|0_32(class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool,bool,bool,bool,bool,bool)",
+            "sampledMilliseconds": 6998.246568727493,
+            "percent": 99.97495098182132
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteFrame()",
+            "sampledMilliseconds": 6972.7870648229655,
+            "percent": 99.61124378318523
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices(int64)",
+            "sampledMilliseconds": 6439.2399813865595,
+            "percent": 91.98914259123656
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 831.7664815098069,
+            "percent": 11.882378307282956
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.CompleteWord(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 389.43238903464226,
+            "percent": 5.563319843352033
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.AdvanceControlInput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 292.29259496134546,
+            "percent": 4.175608499447792
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.RefreshNextCycle()",
+            "sampledMilliseconds": 169.7513956115763,
+            "percent": 2.425019937308233
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 167.20349694328615,
+            "percent": 2.388621384904088
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 165.4961955318431,
+            "percent": 2.364231364740616
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSpriteDma.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 158.78689708368256,
+            "percent": 2.268384244052608
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.WriteCustomRegister(unsigned int16,unsigned int16,int64)",
+            "sampledMilliseconds": 120.3164309791573,
+            "percent": 1.7188061568451043
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposeColorIndexSlow(int32,int32,int32,int32,int32)",
+            "sampledMilliseconds": 114.57279745044798,
+            "percent": 1.6367542492921139
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposePairBoundary(int32,int32,int32,int32,int32,int32&,int32&)",
+            "sampledMilliseconds": 82.11969775123725,
+            "percent": 1.1731385393033893
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.EmitOutputTo(int64)",
+            "sampledMilliseconds": 50.831498091687536,
+            "percent": 0.7261642584526791
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposeShifterColorIndex(int32,int32,int32)",
+            "sampledMilliseconds": 44.79239796658294,
+            "percent": 0.6398913995226134
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.RenderWindowBoundaryPair(int32,int32,int32,int32,int32,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 40.239699754525645,
+            "percent": 0.5748528536360806
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.OnRegisterWrite(unsigned int16,unsigned int16,int64)",
+            "sampledMilliseconds": 40.210498412317975,
+            "percent": 0.5744356916045424
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 37.50629962445237,
+            "percent": 0.5358042803493195
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 36.813897340784024,
+            "percent": 0.5259128191540575
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteLineOutput(value class AreaChannel,bool,unsigned int32,unsigned int16,int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 34.54849938487678,
+            "percent": 0.4935499912125254
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptLinePhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+            "sampledMilliseconds": 27.95289934731045,
+            "percent": 0.3993271335330064
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.BeginLine(int32,int32)",
+            "sampledMilliseconds": 18.065900059889827,
+            "percent": 0.25808428656985466
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 16.71680005111557,
+            "percent": 0.238811429301651
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight.Runner!Program.<<Main>$>g__RearmSyntheticSpriteDma|0_23(class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 15.393807258984452,
+            "percent": 0.21991153227120647
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GrantCpuWord(unsigned int32,int64,int64&,int64&,bool)",
+            "sampledMilliseconds": 7.9371906454107375,
+            "percent": 0.11338843779158196
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceToCpuGrant(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 5.924191811944183,
+            "percent": 0.08463131159920262
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ObserveActiveSpriteCollisions(int32,int32)",
+            "sampledMilliseconds": 5.875600075152761,
+            "percent": 0.08393714393075373
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSpriteDma.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+            "sampledMilliseconds": 4.179599761962891,
+            "percent": 0.059708568028041295
+          },
+          {
+            "name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.WriteWord(unsigned int32,unsigned int16,int64&,value class Copper68k.M68kBusAccessKind)",
+            "sampledMilliseconds": 4.077464131929446,
+            "percent": 0.05824948759899209
+          }
+        ],
+        "categories": [
+          {
+            "name": "Device dispatch / inlined video",
+            "sampledMilliseconds": 4013.5155730073275,
+            "percent": 57.33593675724754
+          },
+          {
+            "name": "Bitplane fetch",
+            "sampledMilliseconds": 829.234481444957,
+            "percent": 11.8462068777851
+          },
+          {
+            "name": "Other",
+            "sampledMilliseconds": 639.7824824300951,
+            "percent": 9.139749749001359
+          },
+          {
+            "name": "Copper",
+            "sampledMilliseconds": 567.3663886672693,
+            "percent": 8.105234123818134
+          },
+          {
+            "name": "Sprites",
+            "sampledMilliseconds": 336.9542938768718,
+            "percent": 4.8136327696695975
+          },
+          {
+            "name": "Audio",
+            "sampledMilliseconds": 335.2475911434194,
+            "percent": 4.789251302048849
+          },
+          {
+            "name": "Blitter",
+            "sampledMilliseconds": 231.97029363138063,
+            "percent": 3.3138613375911516
+          },
+          {
+            "name": "Out-of-line video",
+            "sampledMilliseconds": 42.22039850539659,
+            "percent": 0.6031485500770941
+          },
+          {
+            "name": "CPU bus / memory host",
+            "sampledMilliseconds": 2.012998833466554,
+            "percent": 0.028757126192379343
+          },
+          {
+            "name": "Clock / bus wait",
+            "sampledMilliseconds": 1.695498459816008,
+            "percent": 0.024221406568800116
+          }
+        ]
+      }
+    ],
+    "attributionLimit": "Exclusive approximate sample shares; dispatch includes rendering; inclusive CPU-wait time includes necessary devices"
+  },
+  "generatedCode": {
+    "disposition": "Generated-code diagnostic; timings excluded; branch and code size are not a throughput result",
+    "builds": {
+      "accepted": {
+        "methods": {
+          "CopperMod.Amiga.Lightweight.LightweightVideo:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 2202,
+            "staticConditionalBranches": 65,
+            "staticCalls": 17
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:GrantCpuWord(uint,long,byref,byref,bool):this": {
+            "codeBytes": 744,
+            "staticConditionalBranches": 27,
+            "staticCalls": 7
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadWord(uint,byref,int):ushort:this": {
+            "codeBytes": 608,
+            "staticConditionalBranches": 19,
+            "staticCalls": 13
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 30,
+            "staticConditionalBranches": 2,
+            "staticCalls": 0
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 1162,
+            "staticConditionalBranches": 45,
+            "staticCalls": 22
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteLong(uint,uint,byref,int):this": {
+            "codeBytes": 1887,
+            "staticConditionalBranches": 75,
+            "staticCalls": 28
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadLong(uint,byref,int):uint:this": {
+            "codeBytes": 1309,
+            "staticConditionalBranches": 45,
+            "staticCalls": 26
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteWord(uint,ushort,byref,int):this": {
+            "codeBytes": 896,
+            "staticConditionalBranches": 34,
+            "staticCalls": 15
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteByte(uint,byte,byref,int):this": {
+            "codeBytes": 1353,
+            "staticConditionalBranches": 58,
+            "staticCalls": 20
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadByte(uint,byref,int):byte:this": {
+            "codeBytes": 469,
+            "staticConditionalBranches": 13,
+            "staticCalls": 11
+          },
+          "CopperMod.Amiga.Lightweight.LightweightCopper:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 238,
+            "staticConditionalBranches": 11,
+            "staticCalls": 3
+          },
+          "CopperMod.Amiga.Lightweight.LightweightBitplanes:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 995,
+            "staticConditionalBranches": 33,
+            "staticCalls": 7
+          },
+          "CopperMod.Amiga.Lightweight.LightweightBlitter:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 408,
+            "staticConditionalBranches": 19,
+            "staticCalls": 3
+          },
+          "CopperMod.Amiga.Lightweight.LightweightDiskSerial:Step(long,CopperMod.Amiga.Lightweight.LightweightFloppyDrive,CopperMod.Amiga.Lightweight.LightweightA500Machine,bool):this": {
+            "codeBytes": 588,
+            "staticConditionalBranches": 19,
+            "staticCalls": 7
+          },
+          "CopperMod.Amiga.Lightweight.LightweightSpriteDma:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 884,
+            "staticConditionalBranches": 32,
+            "staticCalls": 3
+          },
+          "CopperMod.Amiga.Lightweight.LightweightSprites:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 54,
+            "staticConditionalBranches": 1,
+            "staticCalls": 1
+          },
+          "CopperMod.Amiga.Lightweight.LightweightPaulaAudio:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 1655,
+            "staticConditionalBranches": 57,
+            "staticCalls": 16
+          },
+          "CopperMod.Amiga.Lightweight.LightweightDiskDma:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 1067,
+            "staticConditionalBranches": 35,
+            "staticCalls": 10
+          }
+        },
+        "identityMatches": true,
+        "dumpSha256": "9D27BAD87746352BD15DE5B764AE88814503769BAD6D916646F99276EAE72755"
+      },
+      "current-slot": {
+        "methods": {
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadWord(uint,byref,int):ushort:this": {
+            "codeBytes": 608,
+            "staticConditionalBranches": 19,
+            "staticCalls": 13
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:GrantCpuWord(uint,long,byref,byref,bool):this": {
+            "codeBytes": 644,
+            "staticConditionalBranches": 25,
+            "staticCalls": 8
+          },
+          "CopperMod.Amiga.Lightweight.LightweightVideo:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 2212,
+            "staticConditionalBranches": 65,
+            "staticCalls": 17
+          },
+          "CopperMod.Amiga.Lightweight.LightweightKeyboard:Step(long,CopperMod.Amiga.Lightweight.LightweightCia,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 1991,
+            "staticConditionalBranches": 51,
+            "staticCalls": 26
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 30,
+            "staticConditionalBranches": 2,
+            "staticCalls": 0
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 1005,
+            "staticConditionalBranches": 37,
+            "staticCalls": 22
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadLong(uint,byref,int):uint:this": {
+            "codeBytes": 1300,
+            "staticConditionalBranches": 45,
+            "staticCalls": 26
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteWord(uint,ushort,byref,int):this": {
+            "codeBytes": 895,
+            "staticConditionalBranches": 34,
+            "staticCalls": 15
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteLong(uint,uint,byref,int):this": {
+            "codeBytes": 1886,
+            "staticConditionalBranches": 75,
+            "staticCalls": 28
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadByte(uint,byref,int):byte:this": {
+            "codeBytes": 469,
+            "staticConditionalBranches": 13,
+            "staticCalls": 11
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteByte(uint,byte,byref,int):this": {
+            "codeBytes": 1373,
+            "staticConditionalBranches": 58,
+            "staticCalls": 20
+          },
+          "CopperMod.Amiga.Lightweight.LightweightCopper:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 238,
+            "staticConditionalBranches": 11,
+            "staticCalls": 3
+          },
+          "CopperMod.Amiga.Lightweight.LightweightDiskSerial:Step(long,CopperMod.Amiga.Lightweight.LightweightFloppyDrive,CopperMod.Amiga.Lightweight.LightweightA500Machine,bool):this": {
+            "codeBytes": 588,
+            "staticConditionalBranches": 19,
+            "staticCalls": 7
+          },
+          "CopperMod.Amiga.Lightweight.LightweightBitplanes:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 995,
+            "staticConditionalBranches": 33,
+            "staticCalls": 7
+          },
+          "CopperMod.Amiga.Lightweight.LightweightBlitter:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 408,
+            "staticConditionalBranches": 19,
+            "staticCalls": 3
+          },
+          "CopperMod.Amiga.Lightweight.LightweightSpriteDma:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 880,
+            "staticConditionalBranches": 32,
+            "staticCalls": 3
+          },
+          "CopperMod.Amiga.Lightweight.LightweightSprites:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 54,
+            "staticConditionalBranches": 1,
+            "staticCalls": 1
+          },
+          "CopperMod.Amiga.Lightweight.LightweightPaulaAudio:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 1655,
+            "staticConditionalBranches": 57,
+            "staticCalls": 16
+          },
+          "CopperMod.Amiga.Lightweight.LightweightDiskDma:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this": {
+            "codeBytes": 1067,
+            "staticConditionalBranches": 35,
+            "staticCalls": 10
+          }
+        },
+        "identityMatches": true,
+        "dumpSha256": "1289746C0A0153A1D35FF20C411F4FD6BDC4F7F4F68318522C500A4FE97B434A"
+      }
+    },
+    "comparisons": [
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:GrantCpuWord(uint,long,byref,byref,bool):this",
+        "before": {
+          "codeBytes": 744,
+          "staticConditionalBranches": 27,
+          "staticCalls": 7
+        },
+        "after": {
+          "codeBytes": 644,
+          "staticConditionalBranches": 25,
+          "staticCalls": 8
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadByte(uint,byref,int):byte:this",
+        "before": {
+          "codeBytes": 469,
+          "staticConditionalBranches": 13,
+          "staticCalls": 11
+        },
+        "after": {
+          "codeBytes": 469,
+          "staticConditionalBranches": 13,
+          "staticCalls": 11
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadLong(uint,byref,int):uint:this",
+        "before": {
+          "codeBytes": 1309,
+          "staticConditionalBranches": 45,
+          "staticCalls": 26
+        },
+        "after": {
+          "codeBytes": 1300,
+          "staticConditionalBranches": 45,
+          "staticCalls": 26
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadWord(uint,byref,int):ushort:this",
+        "before": {
+          "codeBytes": 608,
+          "staticConditionalBranches": 19,
+          "staticCalls": 13
+        },
+        "after": {
+          "codeBytes": 608,
+          "staticConditionalBranches": 19,
+          "staticCalls": 13
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteByte(uint,byte,byref,int):this",
+        "before": {
+          "codeBytes": 1353,
+          "staticConditionalBranches": 58,
+          "staticCalls": 20
+        },
+        "after": {
+          "codeBytes": 1373,
+          "staticConditionalBranches": 58,
+          "staticCalls": 20
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteLong(uint,uint,byref,int):this",
+        "before": {
+          "codeBytes": 1887,
+          "staticConditionalBranches": 75,
+          "staticCalls": 28
+        },
+        "after": {
+          "codeBytes": 1886,
+          "staticConditionalBranches": 75,
+          "staticCalls": 28
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteWord(uint,ushort,byref,int):this",
+        "before": {
+          "codeBytes": 896,
+          "staticConditionalBranches": 34,
+          "staticCalls": 15
+        },
+        "after": {
+          "codeBytes": 895,
+          "staticConditionalBranches": 34,
+          "staticCalls": 15
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightBitplanes:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 995,
+          "staticConditionalBranches": 33,
+          "staticCalls": 7
+        },
+        "after": {
+          "codeBytes": 995,
+          "staticConditionalBranches": 33,
+          "staticCalls": 7
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightBlitter:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 408,
+          "staticConditionalBranches": 19,
+          "staticCalls": 3
+        },
+        "after": {
+          "codeBytes": 408,
+          "staticConditionalBranches": 19,
+          "staticCalls": 3
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this",
+        "before": {
+          "codeBytes": 30,
+          "staticConditionalBranches": 2,
+          "staticCalls": 0
+        },
+        "after": {
+          "codeBytes": 30,
+          "staticConditionalBranches": 2,
+          "staticCalls": 0
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this",
+        "before": {
+          "codeBytes": 1162,
+          "staticConditionalBranches": 45,
+          "staticCalls": 22
+        },
+        "after": {
+          "codeBytes": 1005,
+          "staticConditionalBranches": 37,
+          "staticCalls": 22
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightCopper:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 238,
+          "staticConditionalBranches": 11,
+          "staticCalls": 3
+        },
+        "after": {
+          "codeBytes": 238,
+          "staticConditionalBranches": 11,
+          "staticCalls": 3
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightDiskDma:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 1067,
+          "staticConditionalBranches": 35,
+          "staticCalls": 10
+        },
+        "after": {
+          "codeBytes": 1067,
+          "staticConditionalBranches": 35,
+          "staticCalls": 10
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightDiskSerial:Step(long,CopperMod.Amiga.Lightweight.LightweightFloppyDrive,CopperMod.Amiga.Lightweight.LightweightA500Machine,bool):this",
+        "before": {
+          "codeBytes": 588,
+          "staticConditionalBranches": 19,
+          "staticCalls": 7
+        },
+        "after": {
+          "codeBytes": 588,
+          "staticConditionalBranches": 19,
+          "staticCalls": 7
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightPaulaAudio:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 1655,
+          "staticConditionalBranches": 57,
+          "staticCalls": 16
+        },
+        "after": {
+          "codeBytes": 1655,
+          "staticConditionalBranches": 57,
+          "staticCalls": 16
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightSpriteDma:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 884,
+          "staticConditionalBranches": 32,
+          "staticCalls": 3
+        },
+        "after": {
+          "codeBytes": 880,
+          "staticConditionalBranches": 32,
+          "staticCalls": 3
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightSprites:Step(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 54,
+          "staticConditionalBranches": 1,
+          "staticCalls": 1
+        },
+        "after": {
+          "codeBytes": 54,
+          "staticConditionalBranches": 1,
+          "staticCalls": 1
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightVideo:Step[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this",
+        "before": {
+          "codeBytes": 2202,
+          "staticConditionalBranches": 65,
+          "staticCalls": 17
+        },
+        "after": {
+          "codeBytes": 2212,
+          "staticConditionalBranches": 65,
+          "staticCalls": 17
+        }
+      }
+    ],
+    "retirementGuardMessagesAbsentFromProductionPresentInDiagnostic": true
+  },
+  "performance": {
+    "status": "PENDING",
+    "protocol": {
+      "normalizedLogicMatchesAcceptedProtocol": true,
+      "onlyPinsTypeAndLabelsChanged": true,
+      "protocol": "scripts/run-lightweight-current-slot-comparison-v1.ps1",
+      "sha256": "3FB8C0AAE614A16B47899A282BDFEEB1C851DAC5BD8F55D5DF89091B7BE260E0"
+    },
+    "astValid": true,
+    "referenceIsAcceptedCombinedCandidate": true,
+    "pairsPerWorkload": 6,
+    "workloads": [
+      "lores",
+      "hires",
+      "native Lemmings"
+    ],
+    "oneSided95UpperFrameTimeRegressionLimitPercent": 1,
+    "previousExceptionsTransfer": false,
+    "reason": "Live preflight rejected active competing dotnet build/test; no throughput samples; quiet-window user question unanswered",
+    "allCorrectnessAndJitTimingsExcluded": true,
+    "preflight": {
+      "status": "INVALID / RERUN",
+      "evidence": "artifacts/current-slot-optimization-2026-10-04/preflight-1",
+      "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: competing test/build/benchmark: dotnet.exe[23172]",
+      "runtimeInputAndCapsulePinsVerified": true,
+      "topology": "AMD Ryzen 5 5600X, homogeneous 12 logical processors; CPU 2, protected 2 and 3",
+      "timingSamples": 0
+    }
+  },
+  "preEcsRecovery": "Pending at owner request; unchanged",
+  "artifacts": "artifacts/current-slot-optimization-2026-10-04/"
+}

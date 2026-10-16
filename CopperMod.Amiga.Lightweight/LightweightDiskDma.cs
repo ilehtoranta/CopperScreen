@@ -106,26 +106,22 @@ internal struct LightweightDiskDma
         RefreshNextCycle();
     }
 
-    internal void OnAdkconChanged(ushort previous, long cycle, LightweightA500Machine machine)
-    {
-        if (!Active || Writing || ((previous ^ machine.Adkcon) & 0x0400) == 0) return;
-        if (_waitingForSync)
-            machine.ReportUnsupportedFeature("WORDSYNC enable change while disk DMA waits for first sync");
-        // An ADKCON write neither starts a new transfer nor supplies a sync
-        // match. Preserve the partial word, FIFO and accepted RAM phase.
-        // ReceiveBit samples the live enable on subsequent input matches.
-    }
-
     internal void ReceiveBit(ushort shift, bool wordEqual, long cycle, LightweightA500Machine machine)
     {
         System.Diagnostics.Debug.Assert(Active);
         if (Writing) return;
         if (_waitingForSync)
         {
+            // DSKLEN latches the initial gate; clearing WORDSYNC does not
+            // release it. Input keeps its word phase while waiting, and only
+            // a received match with live WORDSYNC enabled realigns it.
+            _wordBits = (_wordBits + 1) & 15;
+            if (wordEqual && (machine.Adkcon & 0x0400) != 0) _wordBits = 0;
             if (wordEqual && DmaEnabled(machine))
             {
                 _waitingForSync = false;
-                _wordBits = 0; // First matching word is not transferred.
+                // The matching input is not transferred, even if it coincides
+                // with a word boundary while live alignment is disabled.
                 // Even a zero-length synchronized read must pass the start
                 // gate. It completes here without requesting a RAM word.
                 if (Remaining == 0)

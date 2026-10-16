@@ -182,6 +182,8 @@ namespace CopperMod.Amiga.Lightweight
         private bool _zorroIIHighWritten;
         private bool _zorroIILowWritten;
         private byte _zorroIIIMiddleByte;
+        private byte _zorroIIIHighByte;
+        private bool _zorroIIIHighWritten, _zorroIIIMiddleWritten;
 
         public AutoconfigChain(IReadOnlyList<IAutoconfigBoard> boards)
         {
@@ -213,7 +215,7 @@ namespace CopperMod.Amiga.Lightweight
                 return false;
             }
 
-            value = ReadIdentityByte(board.Identity, offset);
+            value = ReadIdentityByte(board.Identity, offset, address < ZorroIIIConfigBase);
             return true;
         }
 
@@ -238,7 +240,7 @@ namespace CopperMod.Amiga.Lightweight
             }
             else
             {
-                WriteZorroIIIByte(board, offset, value);
+                WriteZorroIIIByte(board, offset, value, address < ZorroIIIConfigBase);
             }
 
             return true;
@@ -349,11 +351,11 @@ namespace CopperMod.Amiga.Lightweight
             AddressMapChanged?.Invoke();
         }
 
-        private static byte ReadIdentityByte(AutoconfigIdentity identity, uint offset)
+        private static byte ReadIdentityByte(AutoconfigIdentity identity, uint offset, bool zorroIIEncoding)
         {
             int register;
             bool lowNibble;
-            if (identity.BusKind == AutoconfigBusKind.ZorroII)
+            if (identity.BusKind == AutoconfigBusKind.ZorroII || zorroIIEncoding)
             {
                 if (offset >= 0x80 || (offset & 1) != 0)
                 {
@@ -390,7 +392,15 @@ namespace CopperMod.Amiga.Lightweight
                 ? ZorroIIConfigBase
                 : ZorroIIIConfigBase;
             offset = address - baseAddress;
-            return address >= baseAddress && offset < ConfigSize;
+            if (address >= baseAddress && offset < ConfigSize) return true;
+            // Zorro III cards also present the 16-bit nibble layout at E80000.
+            // This lets A500/A1200 Kickstart 3.x discover a virtual 32-bit bank.
+            if (busKind == AutoconfigBusKind.ZorroIII)
+            {
+                offset = address - ZorroIIConfigBase;
+                return address >= ZorroIIConfigBase && offset < ConfigSize;
+            }
+            return false;
         }
 
         private void WriteZorroIIByte(IAutoconfigBoard board, uint offset, byte value)
@@ -426,8 +436,17 @@ namespace CopperMod.Amiga.Lightweight
             }
         }
 
-        private void WriteZorroIIIByte(IAutoconfigBoard board, uint offset, byte value)
+        private void WriteZorroIIIByte(IAutoconfigBoard board, uint offset, byte value, bool zorroIIEncoding)
         {
+            if (zorroIIEncoding)
+            {
+                if (offset == 0x44) { _zorroIIIHighByte = value; _zorroIIIHighWritten = true; }
+                else if (offset == 0x48) { _zorroIIIMiddleByte = value; _zorroIIIMiddleWritten = true; }
+                else return;
+                if (_zorroIIIHighWritten && _zorroIIIMiddleWritten)
+                    ConfigureCurrent(board, ((uint)_zorroIIIHighByte << 24) | ((uint)_zorroIIIMiddleByte << 16));
+                return;
+            }
             if (offset == 0x48)
             {
                 _zorroIIIMiddleByte = value;
@@ -489,6 +508,8 @@ namespace CopperMod.Amiga.Lightweight
             _zorroIIHighWritten = false;
             _zorroIILowWritten = false;
             _zorroIIIMiddleByte = 0;
+            _zorroIIIHighByte = 0;
+            _zorroIIIHighWritten = _zorroIIIMiddleWritten = false;
         }
     }
 }

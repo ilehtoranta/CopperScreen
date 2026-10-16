@@ -172,7 +172,8 @@ internal sealed class LightweightBitplanes
         }
     }
 
-    internal void Step(long cycle, LightweightA500Machine machine)
+    internal void Step<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         System.Diagnostics.Debug.Assert(
             cycle == NextCycle,
@@ -180,10 +181,10 @@ internal sealed class LightweightBitplanes
 
         if (_hasPendingOutput && _pendingOutputCycle == cycle)
         {
-            CompleteOutput(cycle, machine);
+            CompleteOutput<TPath>(cycle, machine);
         }
 
-        var modeChanged = _pendingFmodeCycle <= cycle;
+        var modeChanged = TPath.Aga && _pendingFmodeCycle <= cycle;
         if (modeChanged) { _fmode = _pendingFmode; _pendingFmodeCycle = long.MaxValue; }
         if (_pendingBplcon0Cycle <= cycle || modeChanged)
         {
@@ -192,13 +193,13 @@ internal sealed class LightweightBitplanes
                 _effectiveBplcon0 = _pendingBplcon0;
                 _pendingBplcon0Cycle = long.MaxValue;
             }
-            _effectivePlaneCount = GetSupportedPlaneCount(_effectiveBplcon0);
+            _effectivePlaneCount = GetSupportedPlaneCount<TPath>(_effectiveBplcon0);
             var hires = (_effectiveBplcon0 & 0x8000) != 0;
-            var super = _ecs && (_effectiveBplcon0 & 0x8040) == 0x40;
+            var super = (TPath.EnhancedDisplay && _ecs) && (_effectiveBplcon0 & 0x8040) == 0x40;
             _fetchOrder = super ? SuperHiresFetchOrder : hires ? HighResFetchOrder : LowResFetchOrder;
             _terminalFetchOffset = super ? 12 : hires ? 8 : 0;
             _ddfMask = super ? 0xFE : DdfMask;
-            if (_aga)
+            if (TPath.Aga)
             {
                 var res = super ? 2 : hires ? 1 : 0;
                 var fetch = _fmode & 3;
@@ -206,7 +207,7 @@ internal sealed class LightweightBitplanes
                 _fetchPeriod = (8 << mode) >> res;
                 _fetchUnit = Math.Max(8, _fetchPeriod);
                 _maxFetchPlanes = Math.Min(8, _fetchPeriod);
-                _effectivePlaneCount = GetSupportedPlaneCount(_effectiveBplcon0);
+                _effectivePlaneCount = GetSupportedPlaneCount<TPath>(_effectiveBplcon0);
                 _terminalFetchOffset = (_fetchUnit - _fetchPeriod) * 2;
             }
         }
@@ -219,8 +220,8 @@ internal sealed class LightweightBitplanes
 
         var dmaEnabled = _dmaEnabled;
         var planeCount = _effectivePlaneCount;
-        AdvanceDdfControl(cycle, machine, dmaEnabled, planeCount);
-        TryAcceptInput(cycle, machine, planeCount);
+        AdvanceDdfControl<TPath>(cycle, machine, dmaEnabled, planeCount);
+        TryAcceptInput<TPath>(cycle, machine, planeCount);
 
         if (_runActive || _hasPendingOutput)
         {
@@ -233,12 +234,16 @@ internal sealed class LightweightBitplanes
             return;
         }
 
-        NextCycle = Math.Min(_pendingFmodeCycle, _pendingBplcon0Cycle);
+        NextCycle = TPath.Aga ? Math.Min(_pendingFmodeCycle, _pendingBplcon0Cycle) : _pendingBplcon0Cycle;
         if (dmaEnabled && planeCount != 0)
         {
-            PublishNextInactiveControlCycle(cycle, machine);
+            PublishNextInactiveControlCycle<TPath>(cycle, machine);
         }
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool OwnsPendingOutputSlot(long cycle)
+        => _hasPendingOutput && _pendingOutputCycle == cycle;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool OwnsOutputSlot(long cycle)
@@ -250,14 +255,15 @@ internal sealed class LightweightBitplanes
     internal ushort GetDataLatch(int plane)
         => (uint)plane < (uint)_dataLatches.Length ? _dataLatches[plane] : (ushort)0;
 
-    private void AdvanceDdfControl(
+    private void AdvanceDdfControl<TPath>(
         long cycle,
         LightweightA500Machine machine,
         bool dmaEnabled,
         int planeCount)
+        where TPath : struct, ILightweightExecutionPath
     {
         var horizontal = machine.BeamColorClock;
-        var hardLimits = !_ecs || (_effectiveBplcon0 & 0x20) == 0;
+        var hardLimits = !(TPath.EnhancedDisplay && _ecs) || (_effectiveBplcon0 & 0x20) == 0;
         if (_runActive && (!dmaEnabled || planeCount == 0))
         {
             _runActive = false;
@@ -278,9 +284,9 @@ internal sealed class LightweightBitplanes
                 if (_completionCycle == long.MaxValue)
                 {
                     if (horizontal == (machine.DdfStop & _ddfMask))
-                        ArmStop(cycle, cycle);
+                        ArmStop<TPath>(cycle, cycle);
                     else if (hardLimits && horizontal == DdfHardStopCompareHorizontal)
-                        ArmStop(cycle, cycle + LightweightClock.CpuCyclesPerColorClock);
+                        ArmStop<TPath>(cycle, cycle + LightweightClock.CpuCyclesPerColorClock);
                 }
                 // The running sequencer cannot start again at this CCK.
                 // Keep the inactive-window tests out of its steady path.
@@ -297,7 +303,7 @@ internal sealed class LightweightBitplanes
         if (_startPermit && dmaEnabled && planeCount != 0 &&
             horizontal == (machine.GetCustomRegister(
                 LightweightRegisters.Ddfstrt) & _ddfMask) &&
-            IsVerticalWindowOpen(machine))
+            IsVerticalWindowOpen<TPath>(machine))
         {
             _runActive = true;
             _sequenceOriginCycle = cycle;
@@ -307,10 +313,11 @@ internal sealed class LightweightBitplanes
         }
     }
 
-    private void TryAcceptInput(
+    private void TryAcceptInput<TPath>(
         long cycle,
         LightweightA500Machine machine,
         int planeCount)
+        where TPath : struct, ILightweightExecutionPath
     {
         if (!_runActive)
         {
@@ -327,7 +334,7 @@ internal sealed class LightweightBitplanes
         var deltaCcks = (cycle - _sequenceOriginCycle) >> 1;
         var slot = (int)(deltaCcks & (FetchUnitColorClocks - 1));
         var plane = (int)((_fetchOrder >> (slot * 3)) & 7) - 1;
-        if (_aga)
+        if (TPath.Aga)
         {
             slot = (int)(deltaCcks & (_fetchPeriod - 1));
             if (slot >= _maxFetchPlanes) return;
@@ -346,7 +353,7 @@ internal sealed class LightweightBitplanes
         }
 
         _hasPendingOutput = true;
-        _pendingPlane = plane; _pendingMode = _fmode;
+        _pendingPlane = plane; if (TPath.Aga) _pendingMode = _fmode;
         _pendingAddress = _pointers[plane];
         _pendingModulo = _terminalUnitStartCycle != long.MaxValue &&
             cycle >= _terminalUnitStartCycle + _terminalFetchOffset;
@@ -356,26 +363,27 @@ internal sealed class LightweightBitplanes
 #endif
     }
 
-    private void CompleteOutput(long cycle, LightweightA500Machine machine)
+    private void CompleteOutput<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         var plane = _pendingPlane;
         var address = _pendingAddress;
         var applyModulo = _pendingModulo;
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
-        var mode = _pendingMode & 3;
+        var mode = TPath.Aga ? _pendingMode & 3 : 0;
         var bits = mode == 3 ? 64 : mode == 0 ? 16 : 32;
-        var wide = _aga ? machine.ReadAgaBitplane(address, mode) : machine.ReadChipWordBus(address);
+        var wide = TPath.Aga ? machine.ReadAgaBitplane(address, mode) : machine.ReadChipWordBus(address);
         var value = (ushort)(wide >> (bits - 16));
         _dataLatches[plane] = value;
-        if (_aga) machine.OnBitplaneWideOutput(plane, wide, bits, cycle);
+        if (TPath.Aga) machine.OnBitplaneWideOutput(plane, wide, bits, cycle);
         else machine.OnBitplaneDataOutput(plane, value, cycle);
-        var pointer = MaskAddress(address + (uint)(_aga ? bits / 8 : 2));
+        var pointer = MaskAddress(address + (uint)(TPath.Aga ? bits / 8 : 2));
         if (applyModulo)
         {
             // A terminal group may cross horizontal sync. BSCAN2 selects
             // by the beam at the modulo phase, not the DDF owner's row.
-            var modulo = (_pendingMode & 0x4000) != 0
+            var modulo = TPath.Aga && (_pendingMode & 0x4000) != 0
                 ? machine.GetScanDoubleModulo(machine.BeamLine) : machine.GetBitplaneModulo(plane);
             pointer = MaskAddress(unchecked(pointer + (uint)modulo));
         }
@@ -388,10 +396,11 @@ internal sealed class LightweightBitplanes
 #endif
     }
 
-    private void ArmStop(long cycle, long targetCycle)
+    private void ArmStop<TPath>(long cycle, long targetCycle)
+        where TPath : struct, ILightweightExecutionPath
     {
         _ = cycle;
-        var unitCycles = (_aga ? _fetchUnit : FetchUnitColorClocks) *
+        var unitCycles = (TPath.Aga ? _fetchUnit : FetchUnitColorClocks) *
             LightweightClock.CpuCyclesPerColorClock;
         var delta = Math.Max(0, targetCycle - _sequenceOriginCycle);
         var units = (delta + unitCycles - 1) / unitCycles;
@@ -399,7 +408,8 @@ internal sealed class LightweightBitplanes
         _completionCycle = _terminalUnitStartCycle + unitCycles;
     }
 
-    private static bool IsVerticalWindowOpen(LightweightA500Machine machine)
+    private static bool IsVerticalWindowOpen<TPath>(LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         if (machine.IsEcsAgnus && machine.DiwHighValid)
         {
@@ -423,15 +433,16 @@ internal sealed class LightweightBitplanes
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private int GetSupportedPlaneCount(ushort bplcon0)
+    private int GetSupportedPlaneCount<TPath>(ushort bplcon0)
+        where TPath : struct, ILightweightExecutionPath
     {
         var count = (bplcon0 >> 12) & 7;
-        if (_aga) { count |= (bplcon0 & 16) >> 1; return count <= _maxFetchPlanes ? count : 0; }
-        if (_ecs && (bplcon0 & 0x8040) == 0x40) return Math.Min(count, 2);
+        if (TPath.Aga) { count |= (bplcon0 & 16) >> 1; return count <= _maxFetchPlanes ? count : 0; }
+        if ((TPath.EnhancedDisplay && _ecs) && (bplcon0 & 0x8040) == 0x40) return Math.Min(count, 2);
         if ((bplcon0 & 0x8000) != 0) return count <= 4 ? count : 0;
         // OCS Agnus aliases BPU=7 to four lores DMA channels. Denise still
         // decodes the six physical data latches, including retained BPL5/6DAT.
-        return count == 7 ? (_ecs ? 6 : 4) : count;
+        return count == 7 ? ((TPath.EnhancedDisplay && _ecs) ? 6 : 4) : count;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -450,13 +461,14 @@ internal sealed class LightweightBitplanes
     private static long NextCckAfter(long cycle)
         => LightweightBusArbiter.AlignToSlot(cycle + 1);
 
-    private void PublishNextInactiveControlCycle(
+    private void PublishNextInactiveControlCycle<TPath>(
         long cycle,
         LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         var horizontal = machine.BeamColorClock;
         var target = !_startPermit
-            ? (_ecs && (_effectiveBplcon0 & 0x20) != 0 ? 0 : DdfLimitReleaseHorizontal)
+            ? ((TPath.EnhancedDisplay && _ecs) && (_effectiveBplcon0 & 0x20) != 0 ? 0 : DdfLimitReleaseHorizontal)
             : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask;
         var colorClocksPerLine = machine.ColorClocksPerLine;
         if ((uint)target >= (uint)colorClocksPerLine)

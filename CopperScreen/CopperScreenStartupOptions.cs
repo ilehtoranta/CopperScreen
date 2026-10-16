@@ -41,13 +41,15 @@ internal sealed class CopperScreenStartupOptions
 		bool deferredCpuChipInstructionFetchShadow = false,
 		bool deferredCpuChipInstructionFetchShadowConfigured = false,
 		AgnusBusArbitrationMode agnusBusArbitration = AgnusBusArbitrationMode.Legacy,
-		CopperScreenEngine engine = CopperScreenEngine.Lightweight)
+        CopperScreenEngine engine = CopperScreenEngine.Lightweight,
+        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null)
 	{
 		Profile = profile;
 		DiskPath = diskPath;
 		DriveDiskPaths = driveDiskPaths;
 		DriveWriteProtected = driveWriteProtected;
-		HardDrives = hardDrives;
+        HardDrives = hardDrives;
+        HostDirectories = (hostDirectories ?? profile.HostDirectories).Select(m => m with { Path = ResolveOptionalPath(m.Path, baseDirectory) ?? m.Path }).ToArray();
 		KickstartRomPath = kickstartRomPath;
 		CpuBackendOverride = cpuBackendOverride;
 		CopperQuiescentFastPath = copperQuiescentFastPath;
@@ -88,7 +90,8 @@ internal sealed class CopperScreenStartupOptions
 
 	public bool?[] DriveWriteProtected { get; }
 
-	public IReadOnlyList<CopperScreenHardfileSettings> HardDrives { get; }
+    public IReadOnlyList<CopperScreenHardfileSettings> HardDrives { get; }
+    public IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration> HostDirectories { get; }
 
 	public string? KickstartRomPath { get; }
 
@@ -258,7 +261,9 @@ internal sealed class CopperScreenStartupOptions
 		var deferredCpuCustomCompositionWrites = false;
 		var deferredCpuCustomCompositionWritesConfigured = false;
 		var cpuWaitSlotReference = false;
-		var hardwareSpecialization = true;
+        var hardwareSpecialization = true;
+        var hostDirectories = new List<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>();
+        var hostBootPriorities = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 		bool? floppySoundsEnabledOverride = null;
 		FloppyDriveAudioMode? floppySoundModeOverride = null;
 		string? floppySoundPackOverride = null;
@@ -273,7 +278,23 @@ internal sealed class CopperScreenStartupOptions
 				continue;
 			}
 
-			if (TryReadOptionValue(startupArgs, ref i, arg, "--engine", null, out var engineValue))
+            if (arg is "--host-dir" or "--host-dir-rw")
+            {
+                if (i + 3 >= startupArgs.Length) { error ??= "--host-dir requires device, volume and folder path."; break; }
+                var mount = new CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration(startupArgs[++i], startupArgs[++i], startupArgs[++i], arg == "--host-dir");
+                try { mount.Validate(); hostDirectories.Add(mount); } catch (ArgumentException ex) { error ??= ex.Message; }
+                continue;
+            }
+            if (arg == "--host-dir-boot-priority")
+            {
+                if (i + 2 >= startupArgs.Length) { error ??= "--host-dir-boot-priority requires device and priority."; break; }
+                var device = startupArgs[++i];
+                if (!int.TryParse(startupArgs[++i], out var priority) || priority is < -127 or > 127)
+                    error ??= "Shared-folder boot priority must be from -127 to 127.";
+                else hostBootPriorities[device] = priority;
+                continue;
+            }
+            if (TryReadOptionValue(startupArgs, ref i, arg, "--engine", null, out var engineValue))
 			{
 				engine = engineValue?.ToLowerInvariant() switch
 				{
@@ -679,6 +700,16 @@ internal sealed class CopperScreenStartupOptions
 			? NormalizeHardDrivePaths(profile.HardDrives, baseDirectory)
 			: hardDriveOverrides;
 		var resolvedKickstartRomPath = ResolveRomPath(kickstartRomPath ?? profile.KickstartRomPath, baseDirectory);
+        if (hostDirectories.Count == 0) hostDirectories.AddRange(profile.HostDirectories);
+        foreach (var (device, priority) in hostBootPriorities)
+        {
+            var index = hostDirectories.FindIndex(m => m.DeviceName.Equals(device, StringComparison.OrdinalIgnoreCase));
+            if (index < 0) error ??= $"No shared folder named {device}.";
+            else hostDirectories[index] = hostDirectories[index] with { BootPriority = priority };
+        }
+        if (hostDirectories.Select(m => m.DeviceName).Distinct(StringComparer.OrdinalIgnoreCase).Count() != hostDirectories.Count ||
+            hostDirectories.Select(m => m.VolumeName).Distinct(StringComparer.OrdinalIgnoreCase).Count() != hostDirectories.Count)
+            error ??= "Shared folders require unique device and volume names.";
 		return new CopperScreenStartupOptions(
 			profile,
 			driveDiskPaths[0],
@@ -711,7 +742,7 @@ internal sealed class CopperScreenStartupOptions
 			deferredCpuChipInstructionFetchBatchConfigured,
 			deferredCpuChipInstructionFetchShadow,
 			deferredCpuChipInstructionFetchShadowConfigured,
-			agnusBusArbitration, engine);
+            agnusBusArbitration, engine, hostDirectories);
 	}
 
 	private static string?[] CreateDriveDiskPathArray(CopperScreenProfile profile, string? diskPath, string baseDirectory)

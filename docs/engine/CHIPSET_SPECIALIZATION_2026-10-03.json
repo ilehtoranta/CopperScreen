@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "status": "ISOLATED_PROTOTYPE_CORRECTNESS_PASS_THROUGHPUT_UNVERIFIED",
+  "referenceSource": "d9beae8b88be24032221e3482942a249c03c27d3",
+  "productionEngineModified": false,
+  "cpuPackage": "1.5.1",
+  "diskVersion": "3.0.0",
+  "runtime": ".NET 10.0.12",
+  "hostCpu": "AMD Ryzen 5 5600X 6-Core Processor",
+  "localArtifactRoot": "artifacts/chipset-specialization-2026-10-03",
+  "sourceArchiveSha256": "FB9BCF90B42F96C465643C9CE79DBE66BAF82212081247F90ACD09FD2542AC5B",
+  "prototypePatchSha256": "3A66C07191AFE97C01D4020167298DCC96B267E1E6BF3C7EA0E3C12007670D1C",
+  "prototypeSourceHashes": {
+    "CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs": "F22B39A065795B2F211602D19AFD47576238974E477ADD4FB42A4DA9764FD4FD",
+    "CopperMod.Amiga.Lightweight/LightweightClock.cs": "ABA3BFE1282B39D9931086A2CFBE118BCAB7722544CB4DCF748A2D85B0A6C221",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "9D2FA21861EA14FF98530B2179A12C2684F2B568ACA0F494090B3B8FE8BC566E",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.cs": "E4142033366F20508F2149007A7EC13933BAD00C398D9A8546ED22AF72ACCE55",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs": "90ADB59D3998128D3A4D55759FC9C6F7B64C303BCC036FF2D2FD49CEADAA488F",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "5157763EA1CB1E0AD11E144C051F8921E157CEA30B2E933B3FFBEE9E84840258",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "D3E264BD0D9CD11A766C91CC69D7745DF504538128C2084A3FFF6B667A1443D9"
+  },
+  "releaseBuild": {
+    "warnings": 0,
+    "errors": 0,
+    "scope": "Isolated archived engine build; production solution not modified"
+  },
+  "diagnosticTests": {
+    "passed": 1080,
+    "failed": 0,
+    "skipped": 0,
+    "trxSha256": "B555CC0F45CE2941F64553470F63C5997A923695668AC6BB83C1B848B69FB9B5"
+  },
+  "ocsCorrectnessReplays": [
+    {
+      "workload": "lores",
+      "scalar": false,
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "identityMatches": true,
+      "measuredAllocationBytes": 0,
+      "timingDisposition": "Excluded: correctness replay under concurrent activity"
+    },
+    {
+      "workload": "hires",
+      "scalar": false,
+      "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "identityMatches": true,
+      "measuredAllocationBytes": 0,
+      "timingDisposition": "Excluded: correctness replay under concurrent activity"
+    },
+    {
+      "workload": "lemmings",
+      "scalar": false,
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+      "identityMatches": true,
+      "measuredAllocationBytes": 0,
+      "timingDisposition": "Excluded: correctness replay under concurrent activity"
+    },
+    {
+      "workload": "lemmings",
+      "scalar": true,
+      "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+      "identityMatches": true,
+      "measuredAllocationBytes": 0,
+      "timingDisposition": "Excluded: correctness replay under concurrent activity"
+    }
+  ],
+  "nativeDisplayParity": {
+    "totalRuns": 9,
+    "capturedFileComparisons": 182,
+    "fixtures": [
+      {
+        "fixture": "ecs-super",
+        "fieldsPerRun": 2400,
+        "runs": 3,
+        "filesPerRun": 30,
+        "allCapturedFilesMatch": true,
+        "finalHardfilesMatch": true,
+        "sourceHardfileSha256": "9DA6B69BFE3B780DE412CAC33087258AE27612834C9CED15FA82993FF5D7776A",
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "machineOptions": [
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ],
+        "inputScript": null,
+        "inputPolicy": "Unattended boot of prepared display fixture; bounded field count",
+        "finalCycle": 340953582,
+        "finalPc": "00F81476",
+        "finalHardfileSha256": "F8CFCA788D1FC21C579C9D15EF16E688B9CB0E80D5F8FC919A621AF0CFFF45C1"
+      },
+      {
+        "fixture": "ecs-ntsc-super",
+        "fieldsPerRun": 1200,
+        "runs": 3,
+        "filesPerRun": 18,
+        "allCapturedFilesMatch": true,
+        "finalHardfilesMatch": true,
+        "sourceHardfileSha256": "321039503692A8A202882C6436446A3DD8223AD9F5A41562205CAA083696B7FF",
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "machineOptions": [
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ],
+        "inputScript": null,
+        "inputPolicy": "Unattended boot of prepared display fixture; bounded field count",
+        "finalCycle": 148105124,
+        "finalPc": "0001D9E2",
+        "finalHardfileSha256": "6F6CDB874666B31A39E26632367A48FC010A2699564FF8BBC65E1510F782589A"
+      },
+      {
+        "fixture": "aga-rgb24",
+        "fieldsPerRun": 3600,
+        "runs": 3,
+        "filesPerRun": 43,
+        "allCapturedFilesMatch": true,
+        "finalHardfilesMatch": true,
+        "sourceHardfileSha256": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "romSha256": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "machineOptions": [
+          "--cpu",
+          "68ec020",
+          "--agnus",
+          "alice",
+          "--denise",
+          "lisa",
+          "--chip-ram-kib",
+          "2048",
+          "--slow-ram-kib",
+          "0"
+        ],
+        "inputScript": null,
+        "inputPolicy": "Unattended boot of prepared display fixture; bounded field count",
+        "finalCycle": 511473398,
+        "finalPc": "00F813A6",
+        "finalHardfileSha256": "89B266045EB2470356AEDF209FFBC9A2E5C3C1469FDA90FC4CA39EA9527FDDFA"
+      }
+    ],
+    "parityFileSha256": "A81381181B313F521B02A3CDBFF1DC8097CB7AC1917F4EBC6C00713F6F6F2BDC"
+  },
+  "jit": {
+    "referenceCodeBytes": {
+      "TickDevices": 3756,
+      "BitplaneCompleteOutput": 787,
+      "SpriteDmaCompleteOutput": 909,
+      "ClockAdvanceToCpuGrant": 1266
+    },
+    "candidate": [
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:TickDevices[CopperMod.Amiga.Lightweight.OcsExecutionPath](long):this (Tier1)",
+        "codeBytes": 3716,
+        "variableShifts": 0,
+        "hardwareWideCalls": 0
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightBitplanes:CompleteOutput[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)",
+        "codeBytes": 530,
+        "variableShifts": 0,
+        "hardwareWideCalls": 0
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightSpriteDma:CompleteOutput[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)",
+        "codeBytes": 683,
+        "variableShifts": 0,
+        "hardwareWideCalls": 0
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this (Tier1)",
+        "codeBytes": 1197,
+        "variableShifts": 0,
+        "hardwareWideCalls": 0
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this (Tier1)",
+        "codeBytes": 1131,
+        "variableShifts": 0,
+        "hardwareWideCalls": 0
+      }
+    ],
+    "disposition": "Code-generation evidence only; not throughput or total code-size proof"
+  },
+  "retainedInputHashes": [
+    {
+      "file": "Kickstart_13.rom",
+      "sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+    },
+    {
+      "file": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "sha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59"
+    },
+    {
+      "file": "lemmings-disk2.zip",
+      "sha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A"
+    },
+    {
+      "file": "lemmings-cpu-bus-timing-v1.json",
+      "sha256": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA"
+    }
+  ],
+  "frozenRetainedCapsules": [
+    {
+      "role": "reference",
+      "file": "Copper68k.dll",
+      "sha256": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F"
+    },
+    {
+      "role": "reference",
+      "file": "CopperDisk.dll",
+      "sha256": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A"
+    },
+    {
+      "role": "reference",
+      "file": "CopperFloat.dll",
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "role": "reference",
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "73FC5119409A4C21DBB3AF1093EF9A6BE73AC5538CF12A1B9F03B72AA065C1CF"
+    },
+    {
+      "role": "reference",
+      "file": "CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "sha256": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37"
+    },
+    {
+      "role": "reference",
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F"
+    },
+    {
+      "role": "reference",
+      "file": "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "role": "candidate",
+      "file": "Copper68k.dll",
+      "sha256": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperDisk.dll",
+      "sha256": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperFloat.dll",
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "D4A53167BCECE6A111F6B6CA8D0FFF571FF7785D059858314EAB3C14AA16C073"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "sha256": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    }
+  ],
+  "frozenNativeDisplayCapsules": [
+    {
+      "role": "reference",
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "6120A86EA6CA102BC9E2BF7833A70CAA97E7644B517EC1F415E67FC2125BBC53"
+    },
+    {
+      "role": "reference",
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "73FC5119409A4C21DBB3AF1093EF9A6BE73AC5538CF12A1B9F03B72AA065C1CF"
+    },
+    {
+      "role": "reference",
+      "file": "Copper68k.dll",
+      "sha256": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F"
+    },
+    {
+      "role": "reference",
+      "file": "CopperDisk.dll",
+      "sha256": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "6120A86EA6CA102BC9E2BF7833A70CAA97E7644B517EC1F415E67FC2125BBC53"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "D4A53167BCECE6A111F6B6CA8D0FFF571FF7785D059858314EAB3C14AA16C073"
+    },
+    {
+      "role": "candidate",
+      "file": "Copper68k.dll",
+      "sha256": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F"
+    },
+    {
+      "role": "candidate",
+      "file": "CopperDisk.dll",
+      "sha256": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A"
+    }
+  ],
+  "performance": {
+    "protocol": "chipset-specialization-probe-v1",
+    "protocolSha256": "5ED8DEFD9C3DD0221D508134DC1A03658A4F093FEB52CE3E70C6BA804D3148D0",
+    "hostLoadPolicy": "v2 unchanged",
+    "hostLoadPolicySha256": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6",
+    "logicalCpu": 2,
+    "smtSibling": 3,
+    "priority": "Normal",
+    "intendedPairsPerWorkload": 2,
+    "acceptanceMeasurement": false,
+    "validCandidatePairs": 0,
+    "attempts": [
+      {
+        "artifactDirectory": "performance-probe-v1",
+        "status": "INVALID / RERUN",
+        "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: competing test/build/benchmark: dotnet.exe[37544], testhost.exe[94424]"
+      },
+      {
+        "artifactDirectory": "performance-probe-retry-1",
+        "status": "INVALID / RERUN",
+        "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: competing test/build/benchmark: dotnet.exe[86116]"
+      }
+    ],
+    "speedupClaim": null,
+    "gateResult": "NOT EVALUATED",
+    "requiredDefaultOneSided95UpperRegressionPercent": 1
+  }
+}

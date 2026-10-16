@@ -6,16 +6,31 @@ namespace CopperMod.Amiga.Lightweight;
 // clocks to the 7.09 MHz motherboard domain. All transfers below use that same
 // clock and the fitted motherboard bus, including split unaligned operands.
 // This is a bounded bridge policy, not a model of a particular accelerator card.
-internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpuModel model) : IM68kBus, IM68kCodeReader
+internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpuModel model) : IM68kBus, IM68kCodeReader, IM68kJitBus, IM68kStablePhysicalAddressMap
 {
     private readonly uint _addressMask = model == M68kCpuModel.M68EC020 ? 0x00FF_FFFFu : uint.MaxValue;
+    // The existing floating-bus policy is preserved for unmapped addresses.
+    public bool IsCpuPhysicalAddressMapped(uint address, int bytes, M68kBusAccessKind kind) => true;
+    public uint CpuPhysicalAddressMapGeneration => machine.CpuMemoryMapGeneration;
+    public event Action<uint, int>? JitCodeRangeWritten
+    { add => machine.JitCodeRangeWritten += value; remove => machine.JitCodeRangeWritten -= value; }
+    public bool IsJitCodeAddress(uint address, int bytes, M68kBusAccessKind kind)
+        => machine.IsJitCodeAddress(address, bytes);
+    public bool IsJitReadOnlyCodeAddress(uint address, int bytes, M68kBusAccessKind kind)
+        => machine.IsJitCodeAddress(address, bytes, readOnly: true);
+    public ushort ReadJitCodeWord(uint address) => machine.ReadJitCodeWord(address);
+    public uint GetJitCodePageGeneration(uint address) => machine.GetJitCodePageGeneration(address);
+    public bool JitCodeRangeGenerationMatches(uint address, int bytes, uint start, uint end)
+        => machine.JitCodeRangeGenerationMatches(address, bytes, start, end);
+    public bool TryCaptureJitCodeSnapshot(uint root, int maxBytes, out M68kJitCodeSnapshot snapshot)
+        => machine.TryCaptureJitCodeSnapshot(root, maxBytes, out snapshot);
 
     // Copper68k only captures cacheable RAM/ROM through this capability.
     // Peeking never performs a CIA/custom read strobe or advances hardware.
     public ushort ReadHostWord(uint address)
     {
         address &= _addressMask;
-        return address <= 0x00FF_FFFF && machine.TryPeekInstructionWord(address, out var value) ? value : (ushort)0xFFFF;
+        return machine.TryPeekInstructionWord(address, out var value) ? value : (ushort)0xFFFF;
     }
 
     public byte ReadByte(uint address, ref long cycle, M68kBusAccessKind kind)
@@ -23,7 +38,7 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
         address &= _addressMask;
         BeginTransfer(ref cycle);
         var requested = cycle;
-        var result = address <= 0x00FF_FFFF ? machine.ReadByte(address, ref cycle, kind) : (byte)0xFF;
+        var result = address <= 0x00FF_FFFF ? machine.ReadByte(address, ref cycle, kind) : machine.ReadExpansionByte(address);
         CompleteTransfer(requested, ref cycle);
         return result;
     }
@@ -36,7 +51,8 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
         address &= _addressMask;
         BeginTransfer(ref cycle);
         var requested = cycle;
-        var result = address <= 0x00FF_FFFF ? machine.ReadWord(address, ref cycle, kind) : (ushort)0xFFFF;
+        var result = address <= 0x00FF_FFFF ? machine.ReadWord(address, ref cycle, kind)
+            : (ushort)((machine.ReadExpansionByte(address) << 8) | machine.ReadExpansionByte(address + 1));
         CompleteTransfer(requested, ref cycle);
         return result;
     }
@@ -62,6 +78,7 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
         BeginTransfer(ref cycle);
         var requested = cycle;
         if (address <= 0x00FF_FFFF) machine.WriteByte(address, value, ref cycle, kind);
+        else machine.TryWriteExpansionByte(address, value);
         CompleteTransfer(requested, ref cycle);
     }
 
@@ -77,6 +94,8 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
         BeginTransfer(ref cycle);
         var requested = cycle;
         if (address <= 0x00FF_FFFF) machine.WriteWord(address, value, ref cycle, kind);
+        else if (!machine.TryWriteExpansionWord(address, value))
+        { machine.TryWriteExpansionByte(address, (byte)(value >> 8)); machine.TryWriteExpansionByte(address + 1, (byte)value); }
         CompleteTransfer(requested, ref cycle);
     }
 
@@ -99,9 +118,9 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
     }
 
     public bool HasHostGateway(uint address)
-        => (address & _addressMask) <= 0x00FF_FFFF && machine.HasHostGateway(address & _addressMask);
+        => machine.HasHostGateway(address & _addressMask);
     public bool TryInvokeHostGateway(uint address, uint token, M68kCpuState state)
-        => (address & _addressMask) <= 0x00FF_FFFF && machine.TryInvokeHostGateway(address & _addressMask, token, state);
+        => machine.TryInvokeHostGateway(address & _addressMask, token, state);
     public void ResetExternalDevices(long cycle) => machine.ResetExternalDevices(cycle);
 
     private void BeginTransfer(ref long cycle)

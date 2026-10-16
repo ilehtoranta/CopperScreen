@@ -36,6 +36,7 @@ internal sealed partial class LightweightVideo
     private int[] _rendering;
     private ushort _effectiveBplcon0;
     private ushort _effectiveBplcon1;
+    private int _effectiveScrolls;
     private int _hamColor;
     private int _effectiveSpritePlayfieldPlacement;
     private ushort _effectiveBplcon2;
@@ -120,6 +121,7 @@ internal sealed partial class LightweightVideo
         _rendering = _bufferB;
         _effectiveBplcon0 = 0;
         _effectiveBplcon1 = 0;
+        _effectiveScrolls = 0;
         _hamColor = unchecked((int)0xFF000000);
         _effectiveSpritePlayfieldPlacement = 0;
         _effectiveBplcon2 = 0;
@@ -192,6 +194,12 @@ internal sealed partial class LightweightVideo
     internal void AcceptBitplaneWord(int plane, ushort value, long outputCycle)
     {
         if (_aga) { AcceptAgaBitplane(plane, value, 16, outputCycle); return; }
+        AcceptStandardBitplaneWord(plane, value, outputCycle);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal void AcceptStandardBitplaneWord(int plane, ushort value, long outputCycle)
+    {
         if ((uint)plane >= MaxPlanes)
         {
             return;
@@ -206,12 +214,13 @@ internal sealed partial class LightweightVideo
         => ActivateAfter(cycle);
 
     [SkipLocalsInit]
-    internal void Step(long cycle, LightweightA500Machine machine)
+    internal void Step<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         System.Diagnostics.Debug.Assert(
             cycle == NextCycle,
             "Video must advance at its published CCK.");
-        RenderPriorPhysicalCck(machine);
+        RenderPriorPhysicalCck<TPath>(machine);
         ApplyPendingInputs(cycle, machine);
         NextCycle = cycle + LightweightClock.CpuCyclesPerColorClock;
     }
@@ -289,6 +298,7 @@ internal sealed partial class LightweightVideo
             {
                 case LightweightRegisters.Bplcon0:
                     _effectiveBplcon0 = _pendingControlValue;
+                    UpdateEffectiveScrolls();
                     _effectivePlaneCount = GetDecodePlaneCount(_effectiveBplcon0);
                     machine.SetCollisionMode((_effectiveBplcon0 & 0x0400) != 0, _effectivePlaneCount != 0);
                     _effectivePlaneMask = (1 << _effectivePlaneCount) - 1;
@@ -301,6 +311,7 @@ internal sealed partial class LightweightVideo
                     break;
                 case LightweightRegisters.Bplcon1:
                     _effectiveBplcon1 = _pendingControlValue;
+                    UpdateEffectiveScrolls();
                     break;
                 case LightweightRegisters.Clxcon:
                     machine.SetCollisionControl(_pendingControlValue);
@@ -395,11 +406,12 @@ internal sealed partial class LightweightVideo
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private void RenderPriorPhysicalCck(LightweightA500Machine machine)
+    private void RenderPriorPhysicalCck<TPath>(LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
-        if (_ecsDisplay)
+        if (TPath.EnhancedDisplay)
         {
-            RenderEcsPriorCck(machine);
+            RenderEcsPriorCck<TPath>(machine);
             return;
         }
         if (!_renderCursorInitialized)
@@ -839,11 +851,7 @@ internal sealed partial class LightweightVideo
         var pendingReload = _pendingReloadParity;
         if (pendingReload != 0)
         {
-            var scrolls = (int)_effectiveBplcon1;
-            if (_ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40)
-                scrolls = ((scrolls & 0x33) << 2) | 0x33;
-            else if ((_effectiveBplcon0 & 0x8000) != 0)
-                scrolls = ((scrolls & 0x77) << 1) | 0x11;
+            var scrolls = _effectiveScrolls;
             var position = x & 15;
             if ((pendingReload & 1) != 0 && position == (scrolls & 15))
             {
@@ -915,6 +923,19 @@ internal sealed partial class LightweightVideo
         for (var bit = 0; bit < 11; bit++)
             result |= (ulong)((word >> bit) & 1) << (bit * 6);
         return result;
+    }
+
+    // Decode only when a control becomes effective. Accepted data still sets
+    // reload parity/width independently; a later FMODE never rewrites it.
+    private void UpdateEffectiveScrolls()
+    {
+        var scrolls = (int)_effectiveBplcon1;
+        if (_aga) UpdateAgaReloadDelays();
+        if (_ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40)
+            scrolls = ((scrolls & 0x33) << 2) | 0x33;
+        else if ((_effectiveBplcon0 & 0x8000) != 0)
+            scrolls = ((scrolls & 0x77) << 1) | 0x11;
+        _effectiveScrolls = scrolls;
     }
 
     private void UpdateWindowBounds()

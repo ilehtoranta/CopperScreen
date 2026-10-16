@@ -1,0 +1,1032 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "CopperStart follow-up caller-data audit and media probes",
+  "primaryCase": "North & South (1989), Captain Paranoia crack",
+  "status": "startup-fixes-verified-native-graphics-library-unavailable",
+  "previousCase": "COPPERSTART_DESERT_DREAM_2026-10-16.json",
+  "engineSourceBaseCommit": "fffdfee7bdc5147f2cefe966bea9462dd19be66d",
+  "engineProvenance": "Runner dependencies were frozen before media comparisons. Later concurrent documentation/product commits are excluded; binary hashes are the executed identity. Native tests have their own exact producer hashes.",
+  "engine": "CopperMod.Amiga.Lightweight",
+  "cpuPackage": "1.5.4-qualified-dev.1",
+  "copperStartCommit": "50f8583a40d24c34a06d4bed71ab31db19d47b95",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+    "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+    "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+    "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\North & South (1989)(Infogrames)(M5)[cr CP].zip",
+    "sha256": "45ab5d197b796b98e84a96dd01d7a37d608a7ef9c31573e984fbf176a4ea86fb",
+    "entry": "North & South (1989)(Infogrames)(M5)[cr CP].adf",
+    "entryBytes": 901120,
+    "entrySha256": "f40ad6733f0b7103a69c765f0c9be5136d84053f07e48c05675e29bbc21095db"
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\north-south-final-input.json",
+    "sha256": "680da4c06dbff9fa4c1e7510f2a15fb2c69bb164b45966803658baa6fdddfee2",
+    "media": []
+  },
+  "inputEvents": [
+    {
+      "frame": 600,
+      "mouseButtons": 1
+    },
+    {
+      "frame": 606
+    },
+    {
+      "frame": 4000,
+      "mouseButtons": 1
+    },
+    {
+      "frame": 4006
+    },
+    {
+      "frame": 10000,
+      "mouseDeltaX": 100,
+      "mouseDeltaY": 100
+    },
+    {
+      "frame": 10002,
+      "mouseDeltaX": 85,
+      "mouseDeltaY": 79
+    },
+    {
+      "frame": 10004
+    },
+    {
+      "frame": 10030,
+      "mouseButtons": 1
+    },
+    {
+      "frame": 10036
+    },
+    {
+      "frame": 14500,
+      "mouseDeltaX": -28,
+      "mouseDeltaY": -61
+    },
+    {
+      "frame": 14502
+    },
+    {
+      "frame": 14520,
+      "mouseButtons": 1
+    },
+    {
+      "frame": 14526
+    },
+    {
+      "frame": 15000,
+      "mouseDeltaX": -50,
+      "mouseDeltaY": -37
+    },
+    {
+      "frame": 15002
+    },
+    {
+      "frame": 15020,
+      "mouseButtons": 1
+    },
+    {
+      "frame": 15026
+    },
+    {
+      "frame": 16000,
+      "mouseDeltaX": 50,
+      "mouseDeltaY": -15
+    },
+    {
+      "frame": 16002
+    },
+    {
+      "frame": 16020,
+      "mouseButtons": 1
+    },
+    {
+      "frame": 16026
+    },
+    {
+      "frame": 18000,
+      "joystickPort1": 24
+    },
+    {
+      "frame": 18200
+    },
+    {
+      "frame": 18400,
+      "joystickPort1": 20
+    },
+    {
+      "frame": 18600
+    },
+    {
+      "frame": 19000,
+      "joystickPort1": 17
+    },
+    {
+      "frame": 19200
+    }
+  ],
+  "producer": {
+    "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+    "romBytes": 524288,
+    "codeBytes": 446468,
+    "sha256": "AB2E09C7673E871CA6C518375317E8CAD7AB3F60A4CDEE2424D5B4E1AEE53D48",
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "56BC1F5C75B14E22502711FDE4983BEDD110BB2E11F43B44427437880E43827C"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "F0A4F374DD11250C0103AD8543D0620D771DBB1C5D9B90AAA96BF5C385C53DC1"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "05171B010F63F1ACC49D587C2FCC468106CBE37B5F815BA89ED4D522BCE38819"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "AC2EE0A5B888C3BA82D2030498D4CB193C2B7ECE109A099382226CB6EC9A607D"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "E8D33DD987498D9677CDF61D3FFD3B11FAC381C9AEA328F1BA1B17A2C3D5CDE1"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "95471FB3C78C8588139C19F2FBECEA9CFD686EA40ED5DF3C87071778ED5D1664"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "9BC3A1836F42B0864BC285E8956EF5DD05BA89400CE0DBEEB38C37568D0876A1"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "B8D5DFA6505408063D92B519D7583CEEEB26CCFAEDD144EF39F2036D9D1A90F9"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "FCE0AFC1CF83D5109B1B19748C3C50A46FFAB6A1C406567C16BC5A52BF5826B3"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      }
+    ]
+  },
+  "copperStartBatch": {
+    "manifest": "north-south-source-final/run.json",
+    "manifestSha256": "39c5c5265b0f86c8a5a2d47fca8f25a0209fd2980f99e7717d8ea0ee8876b936",
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+      "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+    },
+    "frames": 26000,
+    "captureInterval": 400,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "conservative-batch",
+      "warmup": "0",
+      "frames": "26000",
+      "completed": "26000",
+      "cycle": "3694652000",
+      "cpu": "0xE0C0F2CDC1E14894",
+      "hardware": "0x5BE2D48230E6CB0C",
+      "output": "0x966318399740DCD1",
+      "pixels": "284204",
+      "audioSamples": "1924",
+      "pcm": "real",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "captureFiles": 330,
+    "sampledNonSilentFields": 0,
+    "lastPc": "DFD54E73"
+  },
+  "copperStartScalar": {
+    "manifest": "north-south-source-scalar/run.json",
+    "manifestSha256": "193b4fc447fe1c7bc7c923e573f81c98ae7aaf85f86339b8bb07c9e249a8aead",
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+      "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+    },
+    "frames": 26000,
+    "captureInterval": 400,
+    "cpuMode": "scalar",
+    "completedReplay": true,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "scalar",
+      "warmup": "0",
+      "frames": "26000",
+      "completed": "26000",
+      "cycle": "3694652000",
+      "cpu": "0xE0C0F2CDC1E14894",
+      "hardware": "0x5BE2D48230E6CB0C",
+      "output": "0x966318399740DCD1",
+      "pixels": "284204",
+      "audioSamples": "1924",
+      "pcm": "real",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "captureFiles": 330,
+    "sampledNonSilentFields": 0,
+    "lastPc": "DFD54E73"
+  },
+  "nativeKickstartControl": {
+    "manifest": "north-south-native-final/run.json",
+    "manifestSha256": "b59cbbffbb24e64b72834c7c0a958caac78d33d303d909df0dd23401520c56a9",
+    "rom": {
+      "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+      "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "frames": 26000,
+    "captureInterval": 400,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "conservative-batch",
+      "warmup": "0",
+      "frames": "26000",
+      "completed": "26000",
+      "cycle": "3694520016",
+      "cpu": "0x7F812BCD36FEC055",
+      "hardware": "0x29ECC0040F56EAAA",
+      "output": "0xB11DE5623C7A4002",
+      "pixels": "284204",
+      "audioSamples": "1922",
+      "pcm": "real",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "captureFiles": 330,
+    "sampledNonSilentFields": 39,
+    "lastPc": "00C15CA6"
+  },
+  "batchScalarEquality": {
+    "captureFiles": 330,
+    "allCaptureHashesEqual": true,
+    "finalCycleCpuHardwareOutputEqual": true,
+    "types": [
+      "BMP",
+      "JSON",
+      "Chip RAM",
+      "slow RAM",
+      "PCM"
+    ]
+  },
+  "visuallyReviewedMilestones": {
+    "nativeKickstart": {
+      "10000": "Setup menu",
+      "14000": "January 1864 strategy map and Gettysburg dialog",
+      "17200": "Battlefield",
+      "26000": "Battlefield after recorded controls"
+    },
+    "copperStart": "After correcting DMA startup, the loader reaches its graphics.library dependency; no menu or gameplay pass is claimed."
+  },
+  "audit": {
+    "policy": "Public Amiga compatibility takes priority over recovery from caller misuse; documented validation, allocation arithmetic and private ownership checks remain.",
+    "changes": [
+      "Streaming RawDoFmt padding and long strings/formats",
+      "Resident/KickTag and DOS/BOOPSI tag sentinel traversal",
+      "Signed LONG DOS transfer range and input-sized pattern/ReadArgs workspace",
+      "HUNK metadata and relocation scans follow actual file bounds",
+      "Retained-host stale message links, full case-sensitive names and word-aligned separate DOS packets"
+    ],
+    "nativeRomChangeRequiredForThisTitle": true,
+    "fix": "Enable DMA master and blitter before native boot-block handoff; remove the idle-DSKEN-as-busy rejection from read/motor, restoring incoming enable bits after reads. No title detection."
+  },
+  "independentControls": {
+    "nativeHandoff": {
+      "manifest": "dma-control-native/run.json",
+      "manifestSha256": "a110243a38eb935998c9d8e7162ccae3fd62fd0417e0582aa6f8e87beb00f541",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\dma-handoff-probe.adf",
+        "sha256": "f91d736db35f1b204ded550841f165dd9806941c08392c6f4e56fe25a6e9370b"
+      },
+      "completion": "54455354",
+      "handoffDmaConR": "22D0",
+      "readResult": 0,
+      "actual": 0,
+      "payload": "00000000",
+      "motorResult": 0
+    },
+    "previousHandoff": {
+      "manifest": "dma-control-before/run.json",
+      "manifestSha256": "59cb6138e9d0d38c48393bda0431b560cc8947ef7d445341768eb4a4d4a03b83",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom\\CopperStart-DiskBoot.rom",
+        "sha256": "184c1771d8e821c1bc33071669db4bcd26edc3e86911bf2c9abd001084399351"
+      },
+      "disk": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\dma-handoff-probe.adf",
+        "sha256": "f91d736db35f1b204ded550841f165dd9806941c08392c6f4e56fe25a6e9370b"
+      },
+      "completion": "54455354",
+      "handoffDmaConR": "2000",
+      "readResult": 0,
+      "actual": 0,
+      "payload": "00000000",
+      "motorResult": 0
+    },
+    "finalHandoff": {
+      "manifest": "dma-control-final/run.json",
+      "manifestSha256": "3cdfbe4c6c65a6fae54f8cb72f4098742df81c3e902930ef139086692a8ee457",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+        "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+      },
+      "disk": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\dma-handoff-probe.adf",
+        "sha256": "f91d736db35f1b204ded550841f165dd9806941c08392c6f4e56fe25a6e9370b"
+      },
+      "completion": "54455354",
+      "handoffDmaConR": "2240",
+      "readResult": 0,
+      "actual": 0,
+      "payload": "00000000",
+      "motorResult": 0
+    },
+    "nativeIdleDmaIo": {
+      "manifest": "idle-dma-io-native/run.json",
+      "manifestSha256": "871bf125a2f7279fd6a84b490ebf3701fdf723867ec1b9040646307da645e19b",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\idle-dma-io-probe.adf",
+        "sha256": "b90db57ad8ba35f1cf992d16bbb1f8463fe921e79bb28300763f71fffe1fd91d"
+      },
+      "completion": "54455354",
+      "handoffDmaConR": "22D0",
+      "readResult": 0,
+      "actual": 512,
+      "payload": "444D4132",
+      "motorResult": 0
+    },
+    "previousIdleDmaIo": {
+      "manifest": "idle-dma-io-before/run.json",
+      "manifestSha256": "1f06ff5fa849ace52b4b890d90c7614b7e9997006407eee46dc6617fa0ef18db",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom\\CopperStart-DiskBoot.rom",
+        "sha256": "184c1771d8e821c1bc33071669db4bcd26edc3e86911bf2c9abd001084399351"
+      },
+      "disk": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\idle-dma-io-probe.adf",
+        "sha256": "b90db57ad8ba35f1cf992d16bbb1f8463fe921e79bb28300763f71fffe1fd91d"
+      },
+      "completion": "54455354",
+      "handoffDmaConR": "2000",
+      "readResult": 34,
+      "actual": 0,
+      "payload": "00000000",
+      "motorResult": 34
+    },
+    "finalIdleDmaIo": {
+      "manifest": "idle-dma-io-final/run.json",
+      "manifestSha256": "d08e5b4c202c962dd4a55681a26e19c07c716684a0170a4b71c9c60b7f4480be",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+        "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+      },
+      "disk": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\idle-dma-io-probe.adf",
+        "sha256": "b90db57ad8ba35f1cf992d16bbb1f8463fe921e79bb28300763f71fffe1fd91d"
+      },
+      "completion": "54455354",
+      "handoffDmaConR": "2240",
+      "readResult": 0,
+      "actual": 512,
+      "payload": "444D4132",
+      "motorResult": 0
+    },
+    "generator": "scripts/probes/CopperStart/boot_defaults.py",
+    "generatorSha256": "640e823f76ac7fdfbe11bd488b39f288b066f706b4f7602363681423729b17c7",
+    "expectation": "Native read/motor results are zero, actual=512, payload=444D4132. The old image returns 34 for both. Final source image must match the native I/O result and DMA master/blitter bits."
+  },
+  "featureGap": {
+    "library": "graphics.library",
+    "vector": "InitRastPort, LVO -198",
+    "sdkReference": "CopperSharp68k/Sdk.Amiga/Graphics/Graphics.cs, AmigaLvo(-198)",
+    "behavior": "OpenLibrary returns zero because this native library is absent. The game assumes success and calls through A6=0 to FFFFFF3A.",
+    "diagnosticTrace": "trace.log",
+    "diagnosticTraceSha256": "69647565b26c2823e2fc7c93b012e54b7a75c6de914c9b8b8072d826f9e79afa",
+    "evidence": "A diagnostic own-ROM trampoline isolates the blitter default, then bypassing only the DSKEN check permits reads to finish. The resulting guest code opens graphics.library at string address 000405B2; the failed InitRastPort call pushes return address 0003A450 before jumping through the null base.",
+    "qualification": "The diagnostic patched images isolate causes only. Final source-ROM replays and independent probes provide the completed result."
+  },
+  "tests": [
+    {
+      "label": "Affected semantic cores",
+      "trx": "tests/CopperStart.Exec.Tests/TestResults/remaining-audit-semantic-final.trx",
+      "sha256": "294ab305b1864ef9019553a3a72c2ff60989560849c542bcf3607d1253660f5e",
+      "counters": {
+        "total": "133",
+        "executed": "133",
+        "passed": "133",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "label": "Compiled MC68000 formatter and I/O parity",
+      "trx": "tests/CopperStart.Exec.Tests/TestResults/remaining-audit-mc68000.trx",
+      "sha256": "a25f6ca193cd82933bfae1e942e1c81223746d2aa60b605d97d685e27065be8f",
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "3",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "label": "BOOPSI attributes",
+      "trx": "tests/CopperStart.Intuition.Tests/TestResults/remaining-boopsi-audit.trx",
+      "sha256": "0d42b3aaf0f0b8e371973cf45dba8aeb4d5890a5e20d169f55e28f7fafb6f499",
+      "counters": {
+        "total": "21",
+        "executed": "21",
+        "passed": "21",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "label": "Retained host messages, DOS packets and icons",
+      "trx": "host/tests/CopperStart.CopperMod.Memory.Tests/TestResults/remaining-audit-host-final.trx",
+      "sha256": "b2129f77a77716a09306cb1bba5d71129de7dd60625111d108bc09e253737d1a",
+      "counters": {
+        "total": "74",
+        "executed": "74",
+        "passed": "74",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "label": "Freshly linked native disk and standalone reader ROMs",
+      "trx": "tests/CopperStart.Floppy.Native.Tests/TestResults/audit2-native-complete.trx",
+      "sha256": "ccb832ed4d13adf855542be0ea73ea4028a68bd49c7e3a075a9ca8742e862bc4",
+      "counters": {
+        "total": "50",
+        "executed": "50",
+        "passed": "50",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "label": "Exact-ROM DOS/script/console regressions",
+      "trx": "tests/CopperStart.Floppy.Native.Tests/TestResults/audit2-native-dos-final-replay.trx",
+      "sha256": "fec45fcf6b8bc41505dc3b3c75d31f6a492d390458b1d7802a985a2f8693f0bd",
+      "counters": {
+        "total": "22",
+        "executed": "22",
+        "passed": "22",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  ],
+  "localEvidenceRoot": "artifacts/copperstart-audit2-2026-10-16",
+  "limits": [
+    "North & South uses one supplied read-only ADF variant and 26000 fields. Additional cases record their own media and bounds. All use the recorded PAL OCS 68000 A500, 512 KiB Chip plus 512 KiB slow RAM and one drive. Complete gameplay and other profiles are unverified.",
+    "Cross-ROM startup phase differences are allowed. Byte equality is asserted only between the CopperStart batch and scalar runs.",
+    "Sampled PCM activity is checked; subjective listening and audio fidelity are unverified.",
+    "The follow-up targets the previously listed caller-data candidates. Private inline ReadArgs vectors, path/AnchorPath workspace capacities and other OS limitations remain; this is not universal AmigaOS qualification.",
+    "The initial broad retained-host run was interrupted after exposing obsolete Icon preflight tests; its aborted TRX is not counted. The corrected affected suites listed here completed with no failures or skips.",
+    "The intermediate blitter-only ROM link was stopped to add the independently demonstrated idle-DSKEN correction. Its aborted TRX is not counted.",
+    "No guest disk patches, host OS traps, CPU register/PC injection or engine timing changes. ROMs, media and captures remain ignored local artifacts.",
+    "This diagnostic replay is not a host-throughput acceptance measurement."
+  ],
+  "additionalCases": {
+    "shadowOfTheBeast": {
+      "status": "blocked-by-absolute-allocation-collision",
+      "media": {
+        "path": "C:\\Data\\TestImages\\Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip",
+        "sha256": "d3361a4e71a22614de4b183d2f345ee15853e258f02fdca1114be419151fa49a",
+        "entry": "Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+        "entryBytes": 901120,
+        "entrySha256": "e37dd01757afecea04c093631f70694d68d5535459f7b7682bd7040875097ca5"
+      },
+      "sourceReplay": {
+        "manifest": "beast-source-final/run.json",
+        "manifestSha256": "ef6537a96ec2d11ba6a3cb1337625f334780c72c79fe81f3e44d647a2322dcb8",
+        "rom": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+          "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+        },
+        "frames": 6000,
+        "captureInterval": 200,
+        "cpuMode": "conservative-batch",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "conservative-batch",
+          "warmup": "0",
+          "frames": "6000",
+          "completed": "6000",
+          "cycle": "852612004",
+          "cpu": "0x82F6ACD5A609EFE5",
+          "hardware": "0x7FC7D3ED8735ED42",
+          "output": "0x5D37A60BC00D0420",
+          "pixels": "284204",
+          "audioSamples": "1924",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 155,
+        "sampledNonSilentFields": 0,
+        "lastPc": "000273D8"
+      },
+      "nativeControl": {
+        "manifest": "beast-native-final/run.json",
+        "manifestSha256": "1c093702f1490d45bd669b9de90ce84d4d4d066ecb2de098a4898ffdf13f7cc8",
+        "rom": {
+          "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "frames": 32000,
+        "captureInterval": 400,
+        "cpuMode": "conservative-batch",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "conservative-batch",
+          "warmup": "0",
+          "frames": "32000",
+          "completed": "32000",
+          "cycle": "4547131990",
+          "cpu": "0x3ADE07BA5ED16510",
+          "hardware": "0x6560CD216440193A",
+          "output": "0x37CCE5A7697758DC",
+          "pixels": "284204",
+          "audioSamples": "1924",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 405,
+        "sampledNonSilentFields": 24,
+        "lastPc": "000344F6"
+      },
+      "nativeInput": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\beast-final-input.json",
+        "sha256": "bb65dfa7de2914467cd8a5385820e5ba6f57a1b6ed6b6687f84ee67b8117c16c",
+        "media": [
+          {
+            "frame": 14120,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].zip",
+            "sha256": "f3489dd083ec23a0123b30497798f885ebafd632049bd341899f0b029d2ef88f",
+            "entry": "Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].adf",
+            "entryBytes": 901120,
+            "entrySha256": "cdd53d33b957b1eef39cf94fc68ecaa392cf58bea22774cfaaaae1d41469c930"
+          }
+        ]
+      },
+      "sourceInput": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\beast-input.json",
+        "sha256": "c8187b33d9d59a5f12228aceb109d87bf1db9c1db84df5d41bd4cc8fb81ea5c6",
+        "media": []
+      },
+      "nativeInputEvents": [
+        {
+          "frame": 3000,
+          "mouseButtons": 1
+        },
+        {
+          "frame": 3006
+        },
+        {
+          "frame": 10000,
+          "joystickPort1": 16
+        },
+        {
+          "frame": 10010
+        },
+        {
+          "frame": 14000,
+          "ejectAdf": true
+        },
+        {
+          "frame": 14120,
+          "diskPath": "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].zip"
+        },
+        {
+          "frame": 14500,
+          "joystickPort1": 16
+        },
+        {
+          "frame": 14510
+        },
+        {
+          "frame": 22000,
+          "joystickPort1": 24
+        },
+        {
+          "frame": 22200
+        },
+        {
+          "frame": 22400,
+          "joystickPort1": 4
+        },
+        {
+          "frame": 22600
+        },
+        {
+          "frame": 24000,
+          "joystickPort1": 16
+        },
+        {
+          "frame": 24200
+        },
+        {
+          "frame": 26000,
+          "joystickPort1": 24
+        },
+        {
+          "frame": 26400
+        }
+      ],
+      "allocation": {
+        "address": "0001BDE0",
+        "bytes": "0004D460",
+        "endExclusive": "00069240",
+        "result": "00000000"
+      },
+      "cause": "The requested absolute interval overlaps allocated device state, boot objects and reserved bootstrap kernel/stack space. The allocator overlap check is required; private footprint/placement needs redesign.",
+      "nativeObservation": "Crack intro, Beast title, disk II prompt, load of disk II, then disk I prompt at 20000 through 32000. Gameplay is unverified. Passing the AllocAbs branch is inferred from reaching these later boot stages.",
+      "reference": "https://developer.amigaos3.net/autodocs/exec.library/AllocAbs.html"
+    },
+    "insideTheMachine": {
+      "status": "unresolved-custom-loader-wait",
+      "media": {
+        "path": "C:\\Data\\TestImages\\DESiRE-InsideTheMachine-v1.0.1.zip",
+        "sha256": "07842172b2db35e3a5dff1b5f4669e8e27c238e4832bbdea1ca9be0df1060d96",
+        "entry": "DESiRE-InsideTheMachine.adf",
+        "entryBytes": 901120,
+        "entrySha256": "e03a8713be0ca4e0ad899553fe8cffec3c6667804190a3415809b9b7d95a6f2e"
+      },
+      "requirements": {
+        "source": "DESiRE-InsideTheMachine.nfo inside supplied archive",
+        "machine": "Amiga OCS 512k/512k"
+      },
+      "sourceReplay": {
+        "manifest": "inside-source-startup/run.json",
+        "manifestSha256": "594f3ea8d99f7b762ab465fb26c5201ba6e9be797f820362084736a7ce50adac",
+        "rom": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+          "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+        },
+        "frames": 12000,
+        "captureInterval": 200,
+        "cpuMode": "conservative-batch",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "conservative-batch",
+          "warmup": "0",
+          "frames": "12000",
+          "completed": "12000",
+          "cycle": "1705224004",
+          "cpu": "0xF6C767B025191212",
+          "hardware": "0x91142D4CA03121AC",
+          "output": "0xABE56D0B08B8C063",
+          "pixels": "284204",
+          "audioSamples": "1922",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 305,
+        "sampledNonSilentFields": 0,
+        "lastPc": "00028086"
+      },
+      "scalarReplay": {
+        "manifest": "inside-scalar-startup/run.json",
+        "manifestSha256": "c4056e622962c614e68900d20470da2f04a2291d017786697715cbe044d27005",
+        "rom": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+          "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+        },
+        "frames": 12000,
+        "captureInterval": 200,
+        "cpuMode": "scalar",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "scalar",
+          "warmup": "0",
+          "frames": "12000",
+          "completed": "12000",
+          "cycle": "1705224004",
+          "cpu": "0xF6C767B025191212",
+          "hardware": "0x91142D4CA03121AC",
+          "output": "0xABE56D0B08B8C063",
+          "pixels": "284204",
+          "audioSamples": "1922",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 305,
+        "sampledNonSilentFields": 0,
+        "lastPc": "00028086"
+      },
+      "nativeControl": {
+        "manifest": "inside-native-startup/run.json",
+        "manifestSha256": "7ebfd2096bb2a916663eea001a551da6dd2be3e80c97d87d0fedbf6c320a3034",
+        "rom": {
+          "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "frames": 12000,
+        "captureInterval": 200,
+        "cpuMode": "conservative-batch",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "conservative-batch",
+          "warmup": "0",
+          "frames": "12000",
+          "completed": "12000",
+          "cycle": "1705092052",
+          "cpu": "0xDD3DA9AA340A5163",
+          "hardware": "0x8DF32436309DE454",
+          "output": "0x898BD78826226932",
+          "pixels": "284204",
+          "audioSamples": "1922",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 305,
+        "sampledNonSilentFields": 56,
+        "lastPc": "00C304AC"
+      },
+      "batchScalarIdenticalCaptureFiles": 305,
+      "finalCycleCpuHardwareOutputEqual": true,
+      "observation": "The source ROM reaches the demo loader but stays black at 12000 fields, cylinder 0, no active disk DMA, ADKCON 0000. Wait routine at 00028086 compares the frame counter at 00029B88; it advances from 3121 at field 3600 to 11521 at field 12000. This is not a failed VBlank counter. Native control shows animated scenes and disk streaming; root cause is unresolved."
+    },
+    "arteRegression": {
+      "status": "bounded-effects-credits-and-intro-return-verified",
+      "media": {
+        "path": "C:\\Data\\TestImages\\Arte (Sanity).zip",
+        "sha256": "f09f2d661fdf4af786a28fa162ae0c687d89475bc2550ec190d33efa2927acb5",
+        "entry": "Arte (Sanity).adf",
+        "entryBytes": 901120,
+        "entrySha256": "eb7521fc1de886c69706ab0e21898a89199fb12256db40743f3ed190957e896a"
+      },
+      "sourceReplay": {
+        "manifest": "arte-source-final/run.json",
+        "manifestSha256": "4a37b43af18bf1d90ba3a304c86a48ff5606c23f7e89662cd5c701528707202a",
+        "rom": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+          "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+        },
+        "frames": 40000,
+        "captureInterval": 400,
+        "cpuMode": "conservative-batch",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "conservative-batch",
+          "warmup": "0",
+          "frames": "40000",
+          "completed": "40000",
+          "cycle": "5684080016",
+          "cpu": "0x0975C364A85C3B36",
+          "hardware": "0x72E91B9DFD082EDB",
+          "output": "0x0A1D98EB5512F4B4",
+          "pixels": "284204",
+          "audioSamples": "1924",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 505,
+        "sampledNonSilentFields": 90,
+        "lastPc": "00C0224E"
+      },
+      "scalarReplay": {
+        "manifest": "arte-source-scalar/run.json",
+        "manifestSha256": "1deee9b1a4372049c1b75eb93e0176e121b7dba02b66f18d029805cca098f7d1",
+        "rom": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom-complete\\CopperStart-DiskBoot.rom",
+          "sha256": "ab2e09c7673e871ca6c518375317e8cad7ab3f60a4cdee2424d5b4e1aee53d48"
+        },
+        "frames": 40000,
+        "captureInterval": 400,
+        "cpuMode": "scalar",
+        "completedReplay": true,
+        "summary": {
+          "engine": "lightweight-a500",
+          "workload": "image",
+          "executionMode": "Interpreter",
+          "cpuMode": "scalar",
+          "warmup": "0",
+          "frames": "40000",
+          "completed": "40000",
+          "cycle": "5684080016",
+          "cpu": "0x0975C364A85C3B36",
+          "hardware": "0x72E91B9DFD082EDB",
+          "output": "0x0A1D98EB5512F4B4",
+          "pixels": "284204",
+          "audioSamples": "1924",
+          "pcm": "real",
+          "adf": "True",
+          "unsupported": "none"
+        },
+        "captureFiles": 505,
+        "sampledNonSilentFields": 90,
+        "lastPc": "00C0224E"
+      },
+      "batchScalarIdenticalCaptureFiles": 505,
+      "finalCycleCpuHardwareOutputEqual": true,
+      "priorControlRecord": "COPPERSTART_ARTE_2026-10-16.json",
+      "reviewedMilestones": {
+        "8000": "Animated flower effect",
+        "24000": "Landscape with scrolling credits",
+        "32000": "Textured 3D room",
+        "35200": "Sanity logo/earlier intro sequence returns",
+        "40000": "Earlier text/logo/face sequence"
+      }
+    }
+  },
+  "copperStartSourceBuild": {
+    "baseCommit": "33eef25141c4f92558b2ea6e4dae3d89c5be040c",
+    "committedSource": "50f8583a40d24c34a06d4bed71ab31db19d47b95",
+    "productionSources": {
+      "rom/CopperStart.SystemRom/NativeDiskBoot.cs": "aca7dddd2aae42e998f5874810615054a95055a11bb96c6136f97f18417a25c4",
+      "src/CopperStart.Devices/NativeFloppyReader.cs": "33ba115abca08ff086fbc3eefc4c2c60125dfec44c47a3f31554bd6334d6d1cf",
+      "src/CopperStart.Devices/NativeTrackDiskDevice.cs": "ddbb962bc7097a7c58fe6494bbd0be27561987728b8abb12a82193d468632a78",
+      "src/CopperStart.Dos/DosAssignNodeAttributeCore.cs": "8ae05b02db8e76e82f3aed091decb51e3bf834150352c5c6408f22db5944ebd0",
+      "src/CopperStart.Dos/DosCliDataCore.cs": "71a858e0cbe01bb26ccbee04fd17ab6c7d2ef3b7b90e01c8af0d881de9afcf7a",
+      "src/CopperStart.Dos/DosCore.cs": "897cc8c742fc1335453b2f07dcb76dfabe2f37c60e2c983620959fffef1bd517",
+      "src/CopperStart.Dos/DosDateCore.cs": "5272d2bfb0e04fa4357b395b3313377772fd91610ac691626bcb983b4afe32e7",
+      "src/CopperStart.Dos/DosDeviceNodeAttributeCore.cs": "68845288beb435de1b976927f25b27e4ff2282f05fa822cc7798018ab5bd4bf8",
+      "src/CopperStart.Dos/DosExamine64Core.cs": "ce217f948fa4591f3dee0ca63aa3825cfbe6297965787cce63b6d606de2c37f5",
+      "src/CopperStart.Dos/DosFileSystemContextAttributeCore.cs": "1f7265b67626f51f24d95460e62e2f3329ef7e070a3a62e42379c75f6936d452",
+      "src/CopperStart.Dos/DosFormattedOutputCore.cs": "f3adc85075dd73873cd4fb3f3b6cf2f1840f6e4151ec2602c076e343d0f6a500",
+      "src/CopperStart.Dos/DosObjectCore.cs": "add35d2eaea556a3a3b9d8157eaf50a43e06df3f549c31347f78ecbcac424fe1",
+      "src/CopperStart.Dos/DosPatternCore.cs": "ef854fcbaf4cd4db7ff54bf67bd3bc7c2d0fc20f6cf6582f81701756e0a667c7",
+      "src/CopperStart.Dos/DosProcessLaunchContracts.cs": "3b864f6dd067720b07c2e47612c9eee367e092fa6d6955e4fbc855fadef2c4a3",
+      "src/CopperStart.Dos/DosSegmentListCore.cs": "f6c75a198ab66507a4e22f139d12946867f81c2e35f84161e94e98e6ad7cd7db",
+      "src/CopperStart.Dos/DosSegmentLoaderCore.cs": "5ab3c64d74a6a4b70abcbe5175635138f9fd6f46e1132b3cfbee3b5585dae8fd",
+      "src/CopperStart.Dos/DosSegmentVectorCore.cs": "289d0c2dc2b6b1c99cfe6bf2015888ba29294c0d05467f699c7b91ee94909760",
+      "src/CopperStart.Dos/DosSystemContracts.cs": "3344f85acb1fb1b24febe3cd0423082b4452d02c4fe8d2f4903dec746b9a3516",
+      "src/CopperStart.Dos/DosVolumeNodeAttributeCore.cs": "1d7e5a4e528c2766a89bd59e0adacdfc863f8898e14e1cd1752a6767c7f3657f",
+      "src/CopperStart.Exec/ExecKickDataCore.cs": "a131e4edbb45e9064451aa59bee19abed936d325f6bbd71e8c776703c6810e57",
+      "src/CopperStart.Exec/ExecRawDoFmtCore.cs": "18daf5d4883a4287218f14279448bc4adc06bc3c611b89eb88e30e580cae0793",
+      "src/CopperStart.Exec/ExecResidentCore.cs": "07096e36f2617227dd0f0d3c843b5418184c5bcb662153b381c3f123b0c986b7",
+      "src/CopperStart.Intuition/State/IntuitionBoopsiGadgetAttributesCore.cs": "8e068ee1f83db51e532ae5013f1184d9868425db28afb0198a005d9b677c8331",
+      "src/CopperStart.Intuition/State/IntuitionBoopsiImageAttributesCore.cs": "7bdfa3a47653f0d64de8b8bb67ef6d6fe66fd77f2561c60f8634f446d6402ec9"
+    },
+    "note": "The isolated producer was built from the working tree before committing these source-equivalent files. Exact producer binaries are retained and hashed in the ROM manifest. The intervening Super Cars II commit changes documentation only."
+  },
+  "initialFailure": {
+    "manifest": "north-south-copperstart-final/run.json",
+    "manifestSha256": "87519ea61d1d18a549ac1de8571be8ea5be81822ce9ca131bf7dacf977baf44e",
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\rom\\CopperStart-DiskBoot.rom",
+      "sha256": "184c1771d8e821c1bc33071669db4bcd26edc3e86911bf2c9abd001084399351"
+    },
+    "frames": 26000,
+    "captureInterval": 400,
+    "cpuMode": "conservative-batch",
+    "completedReplay": true,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "conservative-batch",
+      "warmup": "0",
+      "frames": "26000",
+      "completed": "26000",
+      "cycle": "3694652004",
+      "cpu": "0x2E6FC721BF35D6EA",
+      "hardware": "0xB296B1B092E9B852",
+      "output": "0x9F330589BDFC862D",
+      "pixels": "284204",
+      "audioSamples": "1924",
+      "pcm": "real",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "captureFiles": 330,
+    "sampledNonSilentFields": 0,
+    "lastPc": "000602E2",
+    "observation": "Crack intro is visible, then its blitter wait at 000602E2 cannot complete because BLTEN is clear. All 330 initial batch/scalar capture hashes also match."
+  },
+  "totalPassingTestCases": 303
+}

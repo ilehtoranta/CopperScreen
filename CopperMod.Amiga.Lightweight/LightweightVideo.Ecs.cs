@@ -55,12 +55,19 @@ internal sealed partial class LightweightVideo
         NextCycle = _active ? boundary + 2 : long.MaxValue;
     }
 
-    private void RenderEcsPriorCck(LightweightA500Machine machine)
+    private void RenderEcsPriorCck<TPath>(LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         var horizontal = machine.BeamColorClock - 2;
         var line = machine.BeamLine;
         if (horizontal < 0) { horizontal += machine.PreviousLineColorClocks; line--; }
-        RenderEcsCck(line, horizontal * 2, machine);
+        RenderEcsCck<TPath>(line, horizontal * 2, machine);
+    }
+
+    private void RenderEcsCck(int line, int x, LightweightA500Machine machine)
+    {
+        if (_aga) RenderEcsCck<AgaExecutionPath>(line, x, machine);
+        else RenderEcsCck<EcsExecutionPath>(line, x, machine);
     }
 
     private bool InEcsWindow(int line, int x)
@@ -70,10 +77,11 @@ internal sealed partial class LightweightVideo
             _horizontalWindowStop > 512 && x < _horizontalWindowStop - 512);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void RenderEcsCck(int line, int x, LightweightA500Machine machine)
+    private void RenderEcsCck<TPath>(int line, int x, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         if (line < 0 || line >= _ecsHeight || x < 0 || x + 1 >= _ecsLineClocks * 2) return;
-        if (_aga) { RenderAgaCck(line, x, machine); return; }
+        if (TPath.Aga) { RenderAgaCck(line, x, machine); return; }
         var super = _ecsDenise && (_effectiveBplcon0 & 0x8040) == 0x40;
         var hires = (_effectiveBplcon0 & 0x8000) != 0;
         var resolution = super ? 4 : hires ? 2 : 1;

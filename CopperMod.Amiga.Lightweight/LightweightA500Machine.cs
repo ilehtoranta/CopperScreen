@@ -34,9 +34,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly byte[] _chipRam;
     private readonly byte[] _slowRam;
     private readonly byte[] _rom = new byte[512 * 1024];
-    private readonly LightweightClock _clock = new();
+    private readonly LightweightClock _clock;
     private readonly LightweightBusArbiter _busArbiter = new();
     private readonly LightweightRegisters _registers;
+    private readonly LightweightRealTimeClock? _rtc;
     private ushort _lastDmaBusWord;
     private readonly LightweightCopper _copper;
     private readonly LightweightBitplanes _bitplanes;
@@ -105,11 +106,20 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private LightweightA500Machine(
         LightweightA500Configuration? configuration,
         bool enableConservativeCpuLoopBatch,
-        LightweightHdfBus? previousHardfiles)
+        LightweightHdfBus? previousHardfiles,
+        LightweightRealTimeClock? previousRtc = null)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
-        if (_configuration.CpuModel is not (M68kCpuModel.M68000 or M68kCpuModel.M68EC020 or M68kCpuModel.M68020 or M68kCpuModel.M68030 or M68kCpuModel.M68040 or M68kCpuModel.M68060))
-            throw new ArgumentException("Lightweight supports 68000 and experimental 68EC020/68020/68030/68040/68060 OCS accelerators.", nameof(configuration));
+        _rtc = _configuration.RtcEnabled
+            ? previousRtc?.CreateRestartClock(_configuration.RtcNowProvider) ?? new(_configuration.RtcNowProvider)
+            : null;
+        _clock = new(_configuration.AgnusModel != LightweightAgnusModel.Mos8371 ||
+            _configuration.DeniseModel != LightweightDeniseModel.Mos8362, IsAga);
+        if (_configuration.CpuModel is not (M68kCpuModel.M68000 or M68kCpuModel.M68010 or M68kCpuModel.M68EC020 or M68kCpuModel.M68020 or M68kCpuModel.M68030 or M68kCpuModel.M68040 or M68kCpuModel.M68060))
+            throw new ArgumentException("Lightweight supports 68000/68010 and experimental 68EC020/68020/68030/68040/68060 OCS accelerators.", nameof(configuration));
+        if (_configuration.CpuExecutionMode is not (M68kExecutionMode.Interpreter or M68kExecutionMode.Jit) ||
+            _configuration.CpuExecutionMode == M68kExecutionMode.Jit && _configuration.CpuModel != M68kCpuModel.M68040)
+            throw new ArgumentException("JIT execution requires the 68040 CPU model.", nameof(configuration));
         if (_configuration.FloppyDriveCount is < 1 or > 4)
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
@@ -118,8 +128,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (!Enum.IsDefined(_configuration.DeniseModel)) throw new ArgumentOutOfRangeException(nameof(configuration), "Select 8362 or 8373 Denise.");
         if ((_configuration.AgnusModel == LightweightAgnusModel.Mos8374Alice) != (_configuration.DeniseModel == LightweightDeniseModel.Lisa4203))
             throw new ArgumentException("Alice and Lisa require the complete A1200 configuration.", nameof(configuration));
-        if (IsAga && (_configuration.CpuModel != M68kCpuModel.M68EC020 || _configuration.FastRamBytes != 0))
-            throw new ArgumentException("The initial A1200 profile requires 68EC020 and no expansion Fast RAM.", nameof(configuration));
+        if (IsAga && _configuration.CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010)
+            throw new ArgumentException("A1200 requires 68EC020 or a 68020/030/040/060 upgrade.", nameof(configuration));
         _a1200Io = IsAga ? new() : null;
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
         _copper = new(_registers.DmaAddressMask);
@@ -139,8 +149,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _chipRamCpuAddressMask = _configuration.ChipRamBytes == 524288
             ? 0x0007_FFFFu : _chipRamDmaAddressMask | 1u;
         _dmaCanAddressSlowRam = IsEcsAgnus && _configuration.ChipRamBytes == 524288 && _configuration.SlowRamBytes == 524288;
-        if (!LightweightFastRam.IsSupportedSize(_configuration.FastRamBytes))
-            throw new ArgumentOutOfRangeException(nameof(configuration), "Fast RAM supports 0, 512 KiB, 1, 2, 4 or 8 MiB.");
+        if (!LightweightFastRam.IsSupportedSize(_configuration.FastRamBytes) ||
+            _configuration.FastRamBytes > LightweightA500Configuration.MaximumFastRamBytes(_configuration.CpuModel))
+            throw new ArgumentOutOfRangeException(nameof(configuration), "Fast RAM supports standard sizes up to 8 MiB for 24-bit CPUs, or 1 GiB for full 32-bit CPUs.");
         if (_configuration.AudioSampleRate != 48_000 || _configuration.AudioChannels != 2)
             throw new ArgumentException("The lightweight A500 output supports 48 kHz stereo PCM.", nameof(configuration));
 
@@ -148,20 +159,29 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _slowRam = new byte[_configuration.SlowRamBytes];
         if (_configuration.FastRamBytes != 0) _fastRam = new(_configuration.FastRamBytes);
         _video = new LightweightVideo(_configuration);
-        IM68kBus cpuBus = _configuration.CpuModel == M68kCpuModel.M68000
+        if (_configuration.CpuExecutionMode == M68kExecutionMode.Jit)
+        {
+            var pages = 65536 + (_configuration.FastRamBytes > 8388608 ? _configuration.FastRamBytes / 256 : 0);
+            _jitPageGenerations = new uint[pages]; _jitObservedPages = new bool[pages];
+        }
+        IM68kBus cpuBus = _configuration.CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010
             ? this : new LightweightAcceleratorBus(this, _configuration.CpuModel);
-        _cpu = IsAga ? _cpuFactory.CreateA1200Ec020(cpuBus) : _cpuFactory.Create(_configuration.CpuModel, cpuBus);
+        _cpu = IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020 ? _cpuFactory.CreateA1200Ec020(cpuBus) : _cpuFactory.Create(_configuration.CpuModel, cpuBus,
+            new M68kCoreOptions { ExecutionMode = _configuration.CpuExecutionMode });
         _batchCpu = (IM68kBatchCore)_cpu;
-        _cpuBoundary = new LightweightCpuBoundary(this);
+        _cpuBoundary = _configuration.CpuExecutionMode == M68kExecutionMode.Jit
+            ? new LightweightJitCpuBoundary(this) : new LightweightCpuBoundary(this);
         _enableConservativeCpuLoopBatch = enableConservativeCpuLoopBatch;
         try
         {
-            if (_configuration.Hardfiles.Count != 0) _hdf = new(this, _configuration.Hardfiles, previousHardfiles);
+            if (_configuration.Hardfiles.Count != 0 || _configuration.HostDirectories.Count != 0)
+                _hdf = new(this, _configuration.Hardfiles, previousHardfiles, _configuration.HostDirectories);
             if (_fastRam is not null || _hdf is not null)
             {
                 var boards = new List<IAutoconfigBoard>(2);
                 if (_fastRam is not null) boards.Add(_fastRam);
-                if (_hdf is not null) boards.Add(_hdf.CopperHdf);
+                if (_hdf?.CopperHdf.IsPresent == true) boards.Add(_hdf.CopperHdf);
+                if (_hdf?.HostFs is { } hostFs) boards.Add(hostFs);
                 _autoconfig = new(boards);
             }
             InstallResetLoop();
@@ -174,6 +194,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public M68kCpuModel CpuModel => _configuration.CpuModel;
     public LightweightAgnusModel AgnusModel => _configuration.AgnusModel;
     public LightweightDeniseModel DeniseModel => _configuration.DeniseModel;
+    public bool RtcEnabled => _rtc is not null;
     internal bool IsEcsDenise => DeniseModel != LightweightDeniseModel.Mos8362;
     internal bool IsEcsAgnus => _configuration.AgnusModel != LightweightAgnusModel.Mos8371;
     internal uint DmaAddressMask => _registers.DmaAddressMask;
@@ -310,8 +331,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public static IReadOnlyList<string> UnsupportedFeatures { get; } = new[]
     {
         "AGA CPU/Copper page-mode sprite bus residue and A2024 external scan-converter",
-        "floppy formats other than standard ADF and read-only IPF",
-        "physical IDE/SCSI controllers and host-directory mounts",
+        "floppy formats beyond CopperDisk DD ADF/ADZ/DMS/IPF/SCP; live flux/multirevolution playback and preserved-track writes",
+        "physical IDE/SCSI controllers",
         "save states",
         "AGA combined HAM/dual playfield, nonstandard HAM plane counts and dual-playfield priorities",
         "hires output with a 454-pixel framebuffer (select 908 for native OCS output)",
@@ -332,6 +353,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _clock.Reset();
         _registers.Reset();
         _a1200Io?.Reset();
+        _rtc?.ResetControlRegisters();
         ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
@@ -358,6 +380,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _diskDma.Reset();
         _video.Reset();
         _overlayEnabled = _romLoaded;
+        InvalidateCpuMemoryMap();
         _completedFrames = 0;
         _nextOutputCycle = MaximumOutputIntervalCycles;
         _unsynchronizedField = false;
@@ -422,7 +445,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             }
 
             if (!_enableConservativeCpuLoopBatch ||
-                !IsConservativeCpuLoopCandidate())
+                (_configuration.CpuExecutionMode != M68kExecutionMode.Jit && !IsConservativeCpuLoopCandidate()))
             {
                 ExecuteScalarFallbackQuantum(frameBoundary);
                 continue;
@@ -444,7 +467,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         const ushort nop = 0x4E71;
         const ushort branchBackOneWord = 0x60FC;
-        var programCounter = _cpu.State.ProgramCounter & 0x00FF_FFFFu;
+        var programCounter = NormalizeCpuAddress(_cpu.State.ProgramCounter);
         if (!TryPeekInstructionWord(programCounter, out var opcode))
         {
             return false;
@@ -466,6 +489,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     internal bool TryPeekInstructionWord(uint address, out ushort value)
     {
+        if (address > 0xFFFFFF)
+        {
+            if (_fastRam?.ContainsRange(address, 2) == true)
+            { value = (ushort)((ReadExpansionByte(address) << 8) | ReadExpansionByte(address + 1)); return true; }
+            value = 0; return false;
+        }
         address &= 0x00FF_FFFFu;
         var readable =
             _overlayEnabled && address + 1 < 0x400 ||
@@ -653,6 +682,24 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public void MountIpf(ReadOnlySpan<byte> image) => MountIpf(0, image);
 
+    /// <summary>Attach prepared ADF, ADZ, DMS, extended ADF, IPF or SCP media.
+    /// Only standard ADF is writable. Preparation/validation precedes replacement.</summary>
+    public void MountDisk(int drive, LightweightFloppyImage image)
+    {
+        ThrowIfDisposed();
+        ArgumentNullException.ThrowIfNull(image);
+        var floppy = GetDrive(drive);
+        if (image.Tracks is { } tracks) floppy.MountPreserved(tracks, image.Format);
+        else if (image.CanWrite) floppy.Mount(image.Sectors!);
+        else floppy.MountReadOnly(image.Sectors!, image.Format);
+        _diskSerial.OnDriveChanged(floppy, Cycle, mediaChanged: true);
+        RefreshDiskSchedule();
+        RefreshNextDeviceCycle();
+    }
+
+    public void MountDisk(int drive, ReadOnlySpan<byte> image, string name)
+        => MountDisk(drive, LightweightFloppyImage.Prepare(image, name));
+
     /// <summary>Copies current standard sectors. Rejects incomplete/custom tracks.
     /// Call on the machine owner thread; export does not change the mounted medium.</summary>
     public byte[] ExportAdf(int drive = 0) => GetDrive(drive).ExportAdf();
@@ -711,7 +758,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         _ = accessKind;
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle, byteAccess: true);
-        AdvanceHardwareTo(grantedCycle);
         var value = ReadByteAt(address, grantedCycle);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
@@ -722,7 +768,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         _ = accessKind;
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
-        AdvanceHardwareTo(grantedCycle);
         var value = ReadWordAt(address, grantedCycle);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
@@ -733,14 +778,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         _ = accessKind;
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
-        AdvanceHardwareTo(firstWordCycle);
         var high = ReadWordAt(address, firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
         var secondRequestCycle = UsesAgnusBus(address)
             ? firstWordCycle + (2 * LightweightBusArbiter.SlotCycles)
             : firstCompletedCycle;
         GrantCpuWord(address + 2, secondRequestCycle, out var secondWordCycle, out var completedCycle);
-        AdvanceHardwareTo(secondWordCycle);
         var low = ReadWordAt(address + 2, secondWordCycle);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
@@ -751,7 +794,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         _ = accessKind;
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle, byteAccess: true);
-        AdvanceHardwareTo(grantedCycle);
         WriteByteRaw(address, value, grantedCycle);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
@@ -761,7 +803,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         _ = accessKind;
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
-        AdvanceHardwareTo(grantedCycle);
         WriteWordRaw(address, value, grantedCycle);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
@@ -771,14 +812,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         _ = accessKind;
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
-        AdvanceHardwareTo(firstWordCycle);
         WriteWordRaw(address, (ushort)(value >> 16), firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
         var secondRequestCycle = UsesAgnusBus(address)
             ? firstWordCycle + (2 * LightweightBusArbiter.SlotCycles)
             : firstCompletedCycle;
         GrantCpuWord(address + 2, secondRequestCycle, out var secondWordCycle, out var completedCycle);
-        AdvanceHardwareTo(secondWordCycle);
         WriteWordRaw(address + 2, (ushort)value, secondWordCycle);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
@@ -792,6 +831,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _hdf?.Reset();
         _registers.Reset();
         _a1200Io?.Reset();
+        _rtc?.ResetControlRegisters();
         ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
@@ -813,6 +853,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _video.Reset();
         _overlayEnabled = _romLoaded;
         _nextVerticalBlankLatchCycle = long.MaxValue;
+        InvalidateCpuMemoryMap();
         _nextDeviceCycle = long.MaxValue;
         _nextCiaInterruptCycle = long.MaxValue;
         _nextInterruptPinEvaluationCycle = long.MaxValue;
@@ -829,6 +870,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         RephaseBeamDma(cycle);
     }
 
+    // Return at the data strobe on the owner clock. Agnus arbitration already
+    // advances it; CIA and non-contended transfers advance here before any effect.
+    // Keep address classification and arbitration shared by all CPU callbacks.
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
     private void GrantCpuWord(
         uint address,
         long requestedCycle,
@@ -837,20 +883,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         bool byteAccess = false)
     {
         var start = Math.Max(requestedCycle, _clock.Cycle);
-        var usesCia = byteAccess
-            ? TryDecodeCiaRegister(address, out _, out _)
-            : IsCiaWordAccess(address);
-        if (usesCia)
-        {
-            var ciaCycle = Math.Max(0, start + 1);
-            var remainder = ciaCycle % LightweightCia.CpuCyclesPerTick;
-            grantedCycle = remainder == 0
-                ? ciaCycle
-                : ciaCycle + LightweightCia.CpuCyclesPerTick - remainder;
-            completedCycle = grantedCycle;
-            return;
-        }
-
+        // Agnus regions cannot overlap either CIA byte lane. Classify the
+        // common RAM/custom path before decoding the peripheral fallback.
         if (UsesAgnusBus(address))
         {
             grantedCycle = LightweightBusArbiter.AlignToSlot(start);
@@ -867,8 +901,23 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return;
         }
 
-        grantedCycle = start;
-        completedCycle = start;
+        var usesCia = byteAccess
+            ? TryDecodeCiaRegister(address, out _, out _)
+            : IsCiaWordAccess(address);
+        if (usesCia)
+        {
+            var ciaCycle = Math.Max(0, start + 1);
+            var remainder = ciaCycle % LightweightCia.CpuCyclesPerTick;
+            grantedCycle = remainder == 0
+                ? ciaCycle
+                : ciaCycle + LightweightCia.CpuCyclesPerTick - remainder;
+        }
+        else
+        {
+            grantedCycle = start;
+        }
+        completedCycle = grantedCycle;
+        AdvanceHardwareTo(grantedCycle);
     }
 
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -877,7 +926,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal bool IsCpuOutputOwned(long cycle)
-        => IsHigherPriorityOutputOwned(cycle) || _blitter.OwnsOutputSlot(cycle);
+    {
+#if LIGHTWEIGHT_DIAGNOSTICS
+        if (_blitter.OwnsPendingOutputSlot(cycle))
+            throw new InvalidOperationException("CPU ownership queried before blitter output retired.");
+#endif
+        // CPU grants are tested after advancement has retired this CCK's DMA.
+        // A newly accepted transfer can only own a following output CCK.
+        return IsHigherPriorityOutputOwned(cycle) || _blitter.LastBusOutputCycle == cycle;
+    }
 
     private bool UsesAgnusBus(uint address)
     {
@@ -886,7 +943,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return false;
         return address < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 && address < 0x00C00000 + _slowRam.Length ||
-            address >= CustomBase && address < CustomBase + 0x200;
+            address >= CustomBase && address < CustomBase + 0x200 ||
+            _rtc is not null && LightweightRealTimeClock.ContainsAddress(address);
     }
 
     private static bool IsCiaWordAccess(uint address)
@@ -902,6 +960,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _clock.AdvanceTo(cycle, this);
     }
 
+    // Acceptance asks about the following CCK on the monotonic owner clock.
+    // Only retained pending bus transfers can own that future output slot.
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal bool CanCopperOwnOutputSlot(long outputCycle, bool normalInputPhase = false)
@@ -914,9 +974,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         System.Diagnostics.Debug.Assert(!normalInputPhase || !IsFollowingCckMandatoryRefresh());
         return (normalInputPhase || !IsFollowingCckMandatoryRefresh()) &&
             _diskDma.PendingOutputCycle != outputCycle &&
-            !_paula.OwnsOutputSlot(outputCycle) &&
-            !_bitplanes.OwnsOutputSlot(outputCycle) &&
-            !_spriteDma.OwnsOutputSlot(outputCycle);
+            !_paula.OwnsPendingOutputSlot(outputCycle) &&
+            !_bitplanes.OwnsPendingOutputSlot(outputCycle) &&
+            !_spriteDma.OwnsPendingOutputSlot(outputCycle);
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -926,7 +986,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         System.Diagnostics.Debug.Assert(
             outputCycle == _clock.Cycle + LightweightClock.CpuCyclesPerColorClock);
         return !IsFollowingCckMandatoryRefresh() &&
-            _diskDma.PendingOutputCycle != outputCycle && !_paula.OwnsOutputSlot(outputCycle);
+            _diskDma.PendingOutputCycle != outputCycle && !_paula.OwnsPendingOutputSlot(outputCycle);
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -937,10 +997,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             outputCycle == _clock.Cycle + LightweightClock.CpuCyclesPerColorClock);
         return !IsFollowingCckMandatoryRefresh() &&
             _diskDma.PendingOutputCycle != outputCycle &&
-            !_paula.OwnsOutputSlot(outputCycle) &&
-            !_bitplanes.OwnsOutputSlot(outputCycle) &&
-            !_copper.OwnsOutputSlot(outputCycle) &&
-            !_blitter.OwnsOutputSlot(outputCycle);
+            !_paula.OwnsPendingOutputSlot(outputCycle) &&
+            !_bitplanes.OwnsPendingOutputSlot(outputCycle) &&
+            !_copper.OwnsPendingOutputSlot(outputCycle) &&
+            !_blitter.OwnsPendingOutputSlot(outputCycle);
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -951,10 +1011,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         var outputCycle = inputCycle + LightweightClock.CpuCyclesPerColorClock;
         return !IsFollowingCckMandatoryRefresh() &&
             _diskDma.PendingOutputCycle != outputCycle &&
-            !_paula.OwnsOutputSlot(outputCycle) &&
-            !_bitplanes.OwnsOutputSlot(outputCycle) &&
-            !_spriteDma.OwnsOutputSlot(outputCycle) &&
-            !_copper.OwnsOutputSlot(outputCycle);
+            !_paula.OwnsPendingOutputSlot(outputCycle) &&
+            !_bitplanes.OwnsPendingOutputSlot(outputCycle) &&
+            !_spriteDma.OwnsPendingOutputSlot(outputCycle) &&
+            !_copper.OwnsPendingOutputSlot(outputCycle);
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -962,12 +1022,22 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     internal bool IsHigherPriorityOutputOwned(long outputCycle)
     {
         System.Diagnostics.Debug.Assert(outputCycle == _clock.Cycle);
+#if LIGHTWEIGHT_DIAGNOSTICS
+        if (_diskDma.PendingOutputCycle == outputCycle ||
+            _paula.OwnsPendingOutputSlot(outputCycle) ||
+            _bitplanes.OwnsPendingOutputSlot(outputCycle) ||
+            _spriteDma.OwnsPendingOutputSlot(outputCycle) ||
+            _copper.OwnsPendingOutputSlot(outputCycle))
+            throw new InvalidOperationException("Current-slot ownership queried before higher-priority outputs retired.");
+#endif
+        // Both callers follow higher-priority output retirement: the CPU wait
+        // loop after clock advancement, and blitter fairness after DMA steps.
         return IsCurrentCckMandatoryRefresh() ||
             _diskDma.LastOutputCycle == outputCycle ||
-            _paula.OwnsOutputSlot(outputCycle) ||
-            _bitplanes.OwnsOutputSlot(outputCycle) ||
-            _spriteDma.OwnsOutputSlot(outputCycle) ||
-            _copper.OwnsOutputSlot(outputCycle);
+            _paula.LastOutputCycle == outputCycle ||
+            _bitplanes.LastOutputCycle == outputCycle ||
+            _spriteDma.LastOutputCycle == outputCycle ||
+            _copper.LastOutputCycle == outputCycle;
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -1038,12 +1108,16 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (address >= _chipRam.Length)
         {
             if (_dmaCanAddressSlowRam)
+            {
                 BinaryPrimitives.WriteUInt16BigEndian(_slowRam.AsSpan((int)address - 524288, 2), value);
+                NotifyJitRamWrite(0xC00000u + address - 524288, 2);
+            }
             return;
         }
         ref var data = ref MemoryMarshal.GetArrayDataReference(_chipRam);
         Unsafe.WriteUnaligned(ref Unsafe.Add(ref data, (nint)address),
             BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
+        NotifyJitRamWrite(address, 2);
     }
 
     internal uint GetCopperListPointer(bool secondList)
@@ -1103,7 +1177,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     internal ushort BitplaneEffectiveBplcon0 => _bitplanes.EffectiveBplcon0;
 
     internal void OnBitplaneDataOutput(int plane, ushort value, long cycle)
-        => _video.AcceptBitplaneWord(plane, value, cycle);
+        => _video.AcceptStandardBitplaneWord(plane, value, cycle);
 
     internal void OnSpriteDmaControlOutput(
         int sprite,
@@ -1273,7 +1347,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     // Rendering's inlined scalar out-locals are assigned before use. Keep this
     // scope free of stackalloc or other uninitialized local storage.
     [SkipLocalsInit]
-    internal void TickDevices(long cycle)
+    internal void TickDevices<TPath>(long cycle)
+        where TPath : struct, ILightweightExecutionPath
     {
         System.Diagnostics.Debug.Assert(cycle >= _nextDeviceCycle);
 
@@ -1284,7 +1359,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
         if (cycle == _video.NextCycle)
         {
-            _video.Step(cycle, this);
+            _video.Step<TPath>(cycle, this);
         }
 
         if (cycle == _nextDiskCycle)
@@ -1312,17 +1387,17 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
         if (cycle == _bitplanes.NextCycle)
         {
-            _bitplanes.Step(cycle, this);
+            _bitplanes.Step<TPath>(cycle, this);
         }
 
         if (cycle == _spriteDma.NextCycle)
         {
-            _spriteDma.Step(cycle, this);
+            _spriteDma.Step<TPath>(cycle, this);
         }
 
         if (cycle == _copper.NextCycle)
         {
-            _copper.Step(cycle, this);
+            _copper.Step<TPath>(cycle, this);
         }
 
         if (cycle == _blitter.NextCycle)
@@ -1687,6 +1762,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
             return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
         if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return (ushort)((_a1200Io.PeekByte(address) << 8) | _a1200Io.PeekByte(address + 1));
+        if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
+        {
+            _rtc.TryReadByte(address, out var high);
+            _rtc.TryReadByte(address + 1, out var low);
+            return (ushort)((high << 8) | low);
+        }
         if (_autoconfig is not null) return (ushort)((ReadExpansionByte(address) << 8) | ReadExpansionByte(address + 1));
         return 0xFFFF;
     }
@@ -1714,6 +1795,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private byte ReadByteAt(uint address, long cycle)
     {
+        if (_rtc is not null && _rtc.TryReadByte(address, out var rtcValue)) return rtcValue;
         if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return _a1200Io.ReadByte(address);
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
         {
@@ -1755,6 +1837,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
 
         address &= 0x00FF_FFFFu;
+        if (_rtc is not null && _rtc.TryWriteByte(address, value)) return;
         if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) { _a1200Io.WriteByte(address, value); return; }
         if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
@@ -1788,6 +1871,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             if (address >= _chipRam.Length) return;
             _chipRam[address] = (byte)(value >> 8);
             _chipRam[address + 1] = (byte)value;
+            NotifyJitRamWrite(address, 2);
             return;
         }
         if (address >= 0x00C00000 && address + 1 < 0x00C00000 + _slowRam.Length)
@@ -1795,6 +1879,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var offset = (int)(address - 0x00C00000);
             _slowRam[offset] = (byte)(value >> 8);
             _slowRam[offset + 1] = (byte)value;
+            NotifyJitRamWrite(address, 2);
             return;
         }
         if (address >= CustomBase && address < CustomBase + 0x200)
@@ -1805,11 +1890,19 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
         {
             BinaryPrimitives.WriteUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2), value);
+            NotifyJitRamWrite(address, 2);
             return;
         }
         if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) { _a1200Io.WriteByte(address, (byte)(value >> 8)); _a1200Io.WriteByte(address + 1, (byte)value); return; }
+        if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
+        {
+            _rtc.TryWriteByte(address, (byte)(value >> 8));
+            _rtc.TryWriteByte(address + 1, (byte)value);
+            return;
+        }
         if (_autoconfig is not null)
         {
+            if (_autoconfig.CurrentBoard?.Identity.BusKind == AutoconfigBusKind.ZorroIII && TryWriteExpansionWord(address, value)) return;
             TryWriteExpansionByte(address, (byte)(value >> 8));
             TryWriteExpansionByte(address + 1, (byte)value);
         }
@@ -1862,7 +1955,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return;
         }
 
-        var previousAdkcon = _registers.Adkcon;
         if (offset == LightweightRegisters.AdkconWrite)
             _diskSerial.AdvanceReceiver(cycle, this);
         var previousDmacon = offset == LightweightRegisters.DmaconWrite
@@ -1994,7 +2086,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 case LightweightRegisters.AdkconWrite:
                     _paula.OnAdkconChanged(_registers.Adkcon, cycle);
                     _serial.WriteBreak((_registers.Adkcon & 0x0800) != 0);
-                    _diskDma.OnAdkconChanged(previousAdkcon, cycle, this);
+                    // WORDSYNC is sampled on received input. This write does
+                    // not change the latched start gate or buffered DMA state.
                     RefreshDiskSchedule();
                     break;
                 case LightweightRegisters.Dsksync:
@@ -2121,7 +2214,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             if (drive.Selected && drive.MotorOn && drive.Mounted)
             {
                 _selectedReaders++;
-                preserved |= drive.Format == LightweightFloppyFormat.Ipf;
+                preserved |= drive.UsesPreservedReceiver;
             }
         }
         _diskSerial.ConfigureReceiver(Cycle, preserved && _selectedReaders == 1 && !_diskDma.Writing, (Adkcon & 0x100) != 0);
@@ -2183,7 +2276,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         var latch = _ciaA.ReadPortLatch(0);
         var direction = _ciaA.ReadDataDirection(0);
         var outputPins = (byte)((latch & direction) | (0xFF & ~direction));
-        _overlayEnabled = _romLoaded && (outputPins & 1) != 0;
+        var enabled = _romLoaded && (outputPins & 1) != 0;
+        if (_overlayEnabled != enabled) { _overlayEnabled = enabled; InvalidateCpuMemoryMap(); }
     }
 
     private static bool TryDecodeCiaRegister(

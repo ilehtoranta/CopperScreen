@@ -12,7 +12,7 @@ internal sealed partial class MainWindow
 {
     private readonly CopperScreenRecentSession _recentSession;
     private Button _welcomeStart = null!, _welcomeRomButton = null!, _welcomeDiskButton = null!;
-    private TextBlock _welcomeRom = null!, _welcomeDisk = null!, _welcomeMessage = null!, _welcomeMachine = null!;
+    private TextBlock _welcomeRom = null!, _welcomeDisk = null!, _welcomeMessage = null!;
     private StackPanel _welcomeRecent = null!;
     private ComboBox _welcomeBootMethod = null!;
     private Control? _bootRomRow, _welcomeRomRow;
@@ -32,12 +32,24 @@ internal sealed partial class MainWindow
         var content = new StackPanel { Spacing = 16, MaxWidth = 570, Margin = new Thickness(32), HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
         content.Children.Add(new TextBlock { Text = "COPPERSCREEN", Foreground = Accent, FontSize = 12, FontWeight = FontWeight.SemiBold, LetterSpacing = 2 });
         content.Children.Add(new TextBlock { Text = "Start your Amiga", Foreground = CopperScreenAppearance.Text, FontSize = 32, FontWeight = FontWeight.SemiBold });
-        content.Children.Add(new TextBlock { Text = "Choose how to boot, then select a disk image.", Foreground = MutedText, FontSize = 15, TextWrapping = TextWrapping.Wrap, LineHeight = 23 });
+        content.Children.Add(new TextBlock { Text = "Choose your Amiga, how to boot, then a disk image.", Foreground = MutedText, FontSize = 15, TextWrapping = TextWrapping.Wrap, LineHeight = 23 });
         _welcomeBootMethod = new ComboBox { ItemsSource = new[] { "Kickstart ROM", "Minimal disk boot (experimental)" }, HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetName(_welcomeBootMethod, "Boot method");
+        _welcomeBootMethod.ContainerPrepared += (_, args) =>
+            args.Container.IsEnabled = args.Index != 1 || CopperScreenMachinePresets.CanUseMinimalBoot(_settingsDraft);
+        _welcomeBootMethod.DropDownOpened += (_, _) =>
+        {
+            if (_welcomeBootMethod.ContainerFromIndex(1) is Control container)
+                container.IsEnabled = CopperScreenMachinePresets.CanUseMinimalBoot(ReadSettingsDraft());
+        };
         _welcomeBootMethod.SelectionChanged += (_, _) =>
         {
             if (_updatingBootMethod || _kickstartSourceBox == null || _settingsVisible || _applyingSettings) return;
+            if (_welcomeBootMethod.SelectedIndex == 1 && !CopperScreenMachinePresets.CanUseMinimalBoot(ReadSettingsDraft()))
+            {
+                UpdateBootMethodControls();
+                return;
+            }
             _kickstartSourceBox.SelectedItem = _welcomeBootMethod.SelectedIndex == 1 ? "MinimalDiskBoot" : _welcomeNativeBootSource.ToString();
             _settingsDraft = ReadSettingsDraft();
             _committedSettings = _settingsDraft.Clone();
@@ -45,13 +57,12 @@ internal sealed partial class MainWindow
             UpdateSettingsStatus();
             UpdateToolbarStatus();
         };
-        _welcomeMachine = new TextBlock { Foreground = MutedText, FontSize = 12, TextWrapping = TextWrapping.Wrap };
         _welcomeRom = new TextBlock();
         _welcomeDisk = new TextBlock();
         _welcomeRomButton = CreatePanelButton("Choose ROM…", () => _ = ChooseWelcomeRomAsync());
         _welcomeDiskButton = CreatePanelButton("Choose disk…", () => _ = OpenDiskPickerAsync(0));
         var setup = new StackPanel { Spacing = 14 };
-        setup.Children.Add(_welcomeMachine);
+        setup.Children.Add(CreateMachineControls(welcome: true));
         setup.Children.Add(_welcomeBootMethod);
         _welcomeRomRow = WelcomeRow("1", "Kickstart ROM", _welcomeRom, _welcomeRomButton);
         setup.Children.Add(_welcomeRomRow);
@@ -72,7 +83,7 @@ internal sealed partial class MainWindow
         _welcomeRecent = new StackPanel { Spacing = 6 };
         RefreshWelcomeRecentDisks();
         content.Children.Add(_welcomeRecent);
-        return new Border { Background = CopperScreenAppearance.Background, Child = new ScrollViewer { Content = content, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled }, MinHeight = 480, MaxHeight = 580, IsVisible = _runtime == null };
+        return new Border { Background = CopperScreenAppearance.Background, Child = new ScrollViewer { Content = content, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled }, MinHeight = 480, MaxHeight = 720, IsVisible = _runtime == null };
     }
 
     private void UpdateBootMethodControls()
@@ -85,7 +96,7 @@ internal sealed partial class MainWindow
         if (_bootRomRow != null) _bootRomRow.IsVisible = !minimal;
         if (_welcomeRomRow != null) _welcomeRomRow.IsVisible = !minimal;
         if (_welcomeDiskRow != null) ((TextBlock)((Border)_welcomeDiskRow.Children[0]).Child!).Text = minimal ? "1" : "2";
-        if (_setupDiskBox != null) _setupDiskBox.PlaceholderText = minimal ? "Required · standard ADF or ZIP containing an ADF" : "Optional · ADF, IPF or ZIP";
+        if (_setupDiskBox != null) _setupDiskBox.PlaceholderText = minimal ? "Required · standard ADF or ZIP containing an ADF" : "Optional · ADF, ADZ, DMS, IPF, SCP or ZIP";
         if (_welcomeBootMethod != null)
         {
             _updatingBootMethod = true;
@@ -120,9 +131,8 @@ internal sealed partial class MainWindow
         _welcomeRom.Text = string.IsNullOrWhiteSpace(rom) ? "No ROM selected" : Path.GetFileName(rom);
         ToolTip.SetTip(_welcomeRom, rom);
         var disk = _setupDiskBox.Text;
-        _welcomeDisk.Text = string.IsNullOrWhiteSpace(disk) ? minimal ? "Required · standard ADF or ZIP containing an ADF" : "Optional · ADF, IPF or ZIP · drop a disk here" : Path.GetFileName(disk);
+        _welcomeDisk.Text = string.IsNullOrWhiteSpace(disk) ? minimal ? "Required · standard ADF or ZIP containing an ADF" : "Optional · ADF, ADZ, DMS, IPF, SCP or ZIP · drop a disk here" : Path.GetFileName(disk);
         ToolTip.SetTip(_welcomeDisk, disk);
-        _welcomeMachine.Text = MachineName(_settingsDraft) + " · " + _settingsDraft.Chipset.VideoStandard.ToString().ToUpperInvariant() + " · " + _settingsDraft.ChipRamKb + " KB Chip RAM";
         _welcomeStart.IsEnabled = valid && !_settingsVisible && !_applyingSettings;
         _welcomeStart.Content = _applyingSettings ? "Starting…" : "Start Amiga";
         _welcomeRomButton.IsEnabled = _welcomeDiskButton.IsEnabled = !_settingsVisible && !_applyingSettings;
@@ -186,7 +196,7 @@ internal sealed partial class MainWindow
         if (count == 0) panel.Children.Add(new TextBlock { Text = "No recent disks available. Use Browse to choose a disk.", Foreground = MutedText, TextWrapping = TextWrapping.Wrap });
     }
 
-    internal static bool IsSupportedDiskDrop(string? path) => path != null && Path.GetExtension(path).ToLowerInvariant() is ".adf" or ".ipf" or ".zip";
+    internal static bool IsSupportedDiskDrop(string? path) => path != null && (CopperScreenAdfImage.IsSupported(path) || Path.GetExtension(path).Equals(".zip", StringComparison.OrdinalIgnoreCase));
 
     private void ConfigureDiskDrop(Control target, int index)
     {

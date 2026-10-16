@@ -26,7 +26,16 @@ boundary. Compact device state shares that clock; host UI, pacing and audio-devi
 delivery are outside emulated hardware ownership. There is no Legacy scheduler,
 requester graph or parallel device timeline to synchronize.
 
-The default 68000 reaches the machine directly. Experimental 68EC020/68020/68030/68040 use
+The [chipset specialization candidate](CHIPSET_REGRESSION_2026-10-03.md)
+integrates shared-source OCS/ECS/AGA hot paths selected from immutable fitted
+traits at clock entry. Existing checked outputs are preserved, and its complete
+current-source retention comparison passes the 1% upper-bound gate. Live controls and accepted transfers retain their original
+phases. The ownership and timing contracts here remain unchanged. The earlier
+[isolated experiment](CHIPSET_SPECIALIZATION_2026-10-03.md) is retained separately.
+
+The default 68000 and experimental 68010 reach the machine directly. The 010
+package wrapper forwards the motherboard bus timing capability; it does not use
+an accelerator clock ratio. Experimental 68EC020/68020/68030/68040 use
 [LightweightAcceleratorBus](../../CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs)
 under the versioned `ocs-accelerator-v1` policy. Copper68k converts two native CPU
 clocks for 020/030 or four for 040 to one motherboard clock; the adapter must not convert that clock again.
@@ -38,7 +47,9 @@ to extend it. All device progress remains owned by the machine.
 The initial PAL A1200 uses an explicit `CreateA1200Ec020` package profile and
 `a1200-initial-v1` host bridge. An aligned Chip/ROM longword occupies one accepted
 motherboard transfer; custom registers stay 16-bit and CIA/Gayle byte-wide.
-Unaligned operands split through the existing bus adapter. Alice bitplane DMA
+Unaligned operands split through the existing bus adapter. A1200 CPU upgrades
+use the shared accelerator factory with this fitted AGA bus; the stock EC020
+factory is unchanged. See [CPU/memory upgrades](CPU_MEMORY_UPGRADES.md). Alice bitplane DMA
 retains its accepted address and FMODE until the output phase samples RAM,
 then transfers 16/32/64 bits to Lisa. FMODE does not cancel a separately pending
 BPLCON0 update. CPU/cache and motherboard timing remain bounded approximations.
@@ -74,10 +85,11 @@ Accepted transfers remain accepted across subsequent control changes. Focused
 phase/row-wrap checks preserve this bounded ordering contract, without certifying
 physical transition timing. No raster frequency or output clock is changed.
 
-EC020 masks each transfer to 24 bits. A 68020/030/040 address above `$FFFFFF` returns
-all-one data or ignores a write while advancing time; it never aliases a device.
-This is an explicit unmapped-address policy, not accelerator autoconfiguration or
-a physical bus-error model. Cache code reads use side-effect-free RAM/ROM peeks;
+EC020 masks each transfer to 24 bits. Full 68020/030/040/060 addresses above
+`$FFFFFF` reach an optional configured Zorro III Fast RAM bank and its Autoconfig
+aperture. Unmapped high addresses return all-one data or ignore a write while
+advancing time; they never alias a motherboard device. This is a virtual expansion
+mapping, not a physical bus-error model. Cache code reads use side-effect-free RAM/ROM peeks;
 they do not strobe CIA/custom registers. Cache, exception and instruction timing
 remain bounded package policies, not accelerator-card certification. See
 [CPU options](CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md) for coverage and limits.
@@ -85,9 +97,27 @@ The 020/030/040 instruction cache includes Chip RAM when enabled; guest code wri
 remain stale in that cache until guest invalidation. See the independent probe
 and [native cache correction](LOTUS_III_020_CACHE_2026-09-26.md).
 040 uses CACR bits 15/31 and CINV/CPUSH; cache geometry and write-back behavior
-remain approximate. The diagnostic-only 060 has an eight-clock policy, distinct
+remain approximate. The engine/runner 060 has an eight-clock policy, distinct
 integer exceptions and a single supervisor stack. It requires 060-aware OS/FPU
-task frames; see [implementation and limitations](CPU_OPTIONS_030_040_060_2026-09-27.md).
+task frames; see [current support and limitations](CPU_SUPPORT.md).
+
+040/060 MMU table walks and descriptor updates use the timed physical bus.
+Logical operands are translated with permission checks, including page crossings;
+debugger/compiler peeks do not populate ATC entries or modify descriptors.
+MOVEC TC/root changes require guest PFLUSH. Translated supervisor stacks use
+model-specific fault frames; complete fault continuation/writeback recovery is
+not implemented. Paging is not qualified for general-purpose virtual-memory OS use.
+
+Optional 040 JIT compilation captures immutable RAM/ROM bytes within a single
+256-byte page. CPU, chipset DMA, CopperHDF and host-directory writes update canonical generations
+and invalidate observed Chip RAM aliases. Reset, overlay and Autoconfig mapping
+changes invalidate code context. Guest instruction-cache retention still follows
+the package policy and guest maintenance instructions. Compiled slices stop at
+the next device-visible deadline and accept pending interrupts before starting
+another slice. Hardware remains single-owner on the canonical clock.
+MMU/transparent-translation contexts fall back to timed interpreter execution.
+Snapshot/compilation/invalidation allocation is outside the normal interpreter
+path; no new performance acceptance is claimed. See [implementation and checks](CPU_SUPPORT.md).
 
 Absent OCS DENISEID readback retains one completed DMA word. Actual DMA
 transfers update it at output; untimed memory inspection does not. Readback
@@ -107,16 +137,20 @@ CPU memory decoding is separate. Device pointer masks are fixed at construction,
 without per-transfer model selection or added execution diagnostics.
 
 Optional Zorro II Fast RAM is CPU-only storage in the `$200000–$9FFFFF` expansion
-window. One Autoconfig chain exposes the memory board before CopperHDF; native
+window. One Autoconfig chain exposes the memory board before CopperHDF and the
+optional host-directory board; native
 Kickstart assigns its address and links it into Exec's memory list. The virtual
 board decodes 64 KiB assignments that fit its complete bank in that window,
 including Kickstart 1.3's 4 MiB assignment at `$200000`. It remains a 16-bit
 expansion, including on the 020 bridge. Fast RAM adds no Agnus wait; CPU transfer
 clocks and the single machine clock continue normally. Code peeks and CopperHDF
 contiguous guest buffers include the configured bank. DMA helpers are unchanged.
-Reset removes assignments, preserves bytes and reopens Autoconfig. No Zorro III,
-32-bit accelerator-local memory or physical board timing is claimed. See the
-[Fast RAM validation](FAST_RAM_2026-09-27.md).
+Reset removes assignments, preserves bytes and reopens Autoconfig. Full 32-bit
+CPUs can fit a larger virtual Zorro III bank, 16 MiB through 1 GiB, with extended
+size encoding and both configuration apertures. High RAM code generations and
+storage buffers retain full addresses. See [CPU/memory upgrades](CPU_MEMORY_UPGRADES.md)
+and the historical [Zorro II validation](FAST_RAM_2026-09-27.md).
+Physical board timing and accelerator-local memory topology are not modeled.
 
 Private register and palette arrays retain their original storage and expose
 checked spans with the same constant sizes used at allocation. Their readonly
@@ -165,6 +199,19 @@ The CPU uses Copper68k's existing `IM68000BusCycleTiming` contract. An Agnus
 transfer completes after one CCK, while the next CPU address phase remains
 separated by the 68000's four-clock bus cycle. Data readiness and next-bus
 availability are distinct; longword accesses retain their two word grants.
+The machine's CPU-word grant returns with the canonical clock at the data
+strobe. Agnus arbitration advances that clock; CIA and non-contended accesses
+advance before their register or memory effect. Callbacks advance to completion
+after that effect. Agnus regions and CIA byte lanes are disjoint, so the common
+Agnus classification precedes peripheral decoding. See the
+[CPU-transfer bookkeeping](CPU_TRANSFER_OPTIMIZATION_2026-10-04.md).
+The private word-grant helper and the typed CPU-wait kernel have explicit
+inlining boundaries. CPU callbacks share classification/arbitration; the small
+fitted-path selector reaches one specialized wait kernel per OCS/ECS/AGA path.
+The kernel retains the same CCK completion loop and bus ownership queries.
+The complete following-slot/CPU-transfer/grant-locality candidate passes the
+retained three-workload 1% upper-bound gate. See the
+[grant-locality performance record](GRANT_LOCALITY_2026-10-04.md).
 See the [Lotus III bus-timing correction](LOTUS_III_CPU_BUS_TIMING_2026-09-25.md)
 for the failure-before regression and remaining prefetch-order limitations.
 
@@ -178,6 +225,14 @@ and the still-open genlock/beam-write scope.
 Preserve the ordering in `CompleteColorClock`, `TickDevices` and register dispatch.
 Accepted address/data operations survive line/field boundaries and relevant DMA
 disable transitions, completing with their accepted address and physical phase.
+Following-CCK acceptance queries use retained pending bus claims: completed
+outputs cannot own a future timestamp on the monotonic owner clock. Current-slot
+CPU/fairness queries use only existing completed-output cycles after due DMA
+retires. Diagnostic-only guards verify no current pending bus output remains
+at those callers; pending-aware device queries retain their semantics. See the
+[current-slot prototype and pending performance gate](CURRENT_SLOT_OPTIMIZATION_2026-10-04.md).
+See the
+[following-slot optimization and combined performance verification](BUS_PHASE_OPTIMIZATION_2026-10-04.md).
 Device-specific uncertainty about real hardware is recorded in the issue register;
 it does not justify changing implemented ordering during unrelated work.
 
@@ -248,7 +303,7 @@ native pixels after compensating for progressive vertical duplication.
 ## Floppy drives
 
 `FloppyDriveCount` connects DF0 through DF3 in order (1–4; default 1). Each drive
-owns its standard-ADF or preserved IPF tracks, cylinder, motor latch, readiness/change state and
+owns its standard sector or preserved ADF/IPF/SCP tracks, cylinder, motor latch, readiness/change state and
 nominal 300 RPM spindle phase. CIA-B PRB bits 3–6 select the drives; side, direction,
 step and motor are shared. Selected status inputs combine as active-low lines.
 External empty DD drives identify as `DRT_AMIGA` on READY with the motor off;
@@ -258,7 +313,7 @@ and [Commodore disk.resource constants](https://d0.se/include/resources/disk.i).
 
 Further inward STEP pulses at the bounded drive limit leave the head in place
 and let the guest continue; side changes and outward homing still work. The
-existing maxima remain cylinder 79 for ADF/empty drives and 83 for IPF. These
+maxima remain cylinder 79 for standard sector/empty drives and 83 for preserved tracks. These
 are model limits, not universal physical-drive measurements. See the
 [Desert Strike end-stop comparison](DESERT_STRIKE_END_STOP_2026-09-24.md).
 
@@ -269,19 +324,23 @@ receiver owns partial bytes, sync and slow-recovery state; one DMA FIFO owns
 accepted transfers. Disk arrivals still execute before the disk DMA phase.
 After the initial sync gate opens, ADKCON.WORDSYNC toggles preserve partial and
 buffered words; only subsequent enabled input matches realign a running read.
-Toggles while still waiting for the first sync remain explicitly unsupported.
-See [live WORDSYNC evidence and limits](DISK_LIVE_WORDSYNC.md).
+The initial gate is latched by the second DSKLEN enable strobe. Clearing WORDSYNC
+does not release it; a received match with DMA enabled opens it. Word phase keeps
+advancing while waiting, and a received match realigns it only when live WORDSYNC
+is enabled, including while DMACON pauses DMA. Register writes supply no input
+match. See [initial-wait semantics and limits](DISK_INITIAL_WORDSYNC.md) and the
+earlier [running-read correction](DISK_LIVE_WORDSYNC.md).
 Received matches with WORDSYNC enabled also realign the CPU's DSKBYTR byte
 counter independently of DMA. Register-only comparisons preserve that counter;
 already published byte data/ready state survives alignment. See
 [CPU byte alignment evidence and limits](DISK_BYTE_WORDSYNC_2026-09-24.md).
 The next disk event is recomputed at disk/control/media events, with no additional
 per-CCK polling or allocation. Tracks are encoded/decoded only at mount time.
-IPF geometry has an exact bit count and optional cumulative integer cell deadlines;
+Preserved IPF/extended ADF/SCP geometry has an exact bit count and optional cumulative integer cell deadlines;
 head/seek changes map elapsed spindle time into the new track. Index is independent
 of FAST/slow receiver mode. A separate causal receiver turns preserved transitions
 into recovered cells. The standard ADF path retains its compact equivalent model.
-See the [storage contract](STORAGE.md) for weak/no-flux, density and validation limits.
+See the [storage contract](STORAGE.md) and [additional formats](DISK_FORMATS.md) for weak/no-flux, density and validation limits.
 
 Multiple selection fans out controls and combines status. More than one selected,
 running, mounted read source reports unsupported: this ideal-ADF implementation
@@ -300,7 +359,7 @@ cover all four select lines with distinct-sector DMA decoding, external DD IDs,
 independent mechanics/rotation, shared receiver state, invalid indices and zero
 execution allocations. Host tests cover four-drive startup, independent swaps,
 reset, persistence and runtime command routing. These are deterministic model
-checks. Separate [native evidence](../NATIVE_VALIDATION.md#four-drive-verification-2026-09-17)
+checks. Separate [native evidence](../NATIVE_VALIDATION.md#four-drive-verification--2026-09-17)
 covers Workbench detection, a DF1 directory read and independent external-drive
 media changes; broad multi-drive game-loader verification remains open.
 
@@ -372,6 +431,17 @@ uses the existing work mask to prepare pending playfield comparisons. A lone
 eligible sprite can stop comparing after both of its playfield bits are latched;
 read-clear re-enables that work, and overlapping groups still run the full test.
 
+## Battery clock
+
+The optional [A501 RTC](RTC.md) ports Legacy's bounded register/time semantics
+without importing its bus or scheduler. Its 64-byte `$DC0000` aperture uses the
+existing Agnus CPU grants; the disabled aperture stays unmapped. The execution
+owner samples host local time only on RTC access. A guest-set offset supplies
+the battery clock independently of CPU/frame progress, with no per-cycle tick,
+event deadline or background owner. Reset restores control defaults while retaining
+the offset. A restart candidate copies offset state without sharing mutable state;
+an independent machine starts fresh. No persistent battery file is introduced.
+
 ## CopperHDF
 
 The optional virtual Zorro II board preserves the pinned Legacy CopperHDF identity
@@ -387,6 +457,16 @@ can share a backing handle until construction succeeds, so failed construction
 leaves the current mount usable. Full interface and verification: [STORAGE.md](STORAGE.md).
 
 ## Newly implemented OCS interfaces
+
+Shared folders use a separate virtual Zorro II board and an original 68000 guest
+DOS handler. The shared storage gateway registry supports both boards even with
+no HDF attached. Native Exec/DOS owns process startup, message waiting/replies and
+runtime lock allocations; synchronous host operations run on the machine owner
+only when requested. There is no filesystem polling in the clock path. Native
+BootPoint starts DOS from a boot-enabled folder. RAM writes validate full ranges
+and use existing JIT invalidation. Reset releases file/lock/enumeration state;
+failed replacement preparation preserves the active session. See
+[packet, metadata and confinement contracts](HOST_DIRECTORIES.md).
 
 Paula serial uses canonical CCK deadlines with no host callbacks or allocations.
 Its next edge shares the CIA/keyboard interface deadline, keeping an idle UART

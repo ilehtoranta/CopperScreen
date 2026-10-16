@@ -51,7 +51,7 @@ internal readonly record struct CopperScreenDriveDiskAssignment(int DriveIndex, 
 internal static class CopperScreenDiskImageArchive
 {
 	private const string ZipEntrySeparator = "#/";
-    private static readonly string[] SupportedDiskEntryExtensions = [".adf", ".ipf"];
+    private static readonly string[] SupportedDiskEntryExtensions = [".adf", ".adz", ".dms", ".ipf", ".scp"];
 
 	public static bool TryReadDiskSet(string path, out CopperScreenArchiveDiskSet? diskSet, out string? error)
 	{

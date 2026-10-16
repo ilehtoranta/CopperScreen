@@ -69,4 +69,58 @@ public sealed class LightweightIpfImage
         foreach (var value in image) seed = unchecked((seed ^ value) * 16777619);
         return new(tracks, lengths, masks, deadlines, seed);
     }
+
+    // Shared immutable track storage for additional CopperDisk formats. IPF's
+    // established density/orientation preparation above is deliberately retained.
+    internal static LightweightIpfImage PrepareTracks(
+        IReadOnlyList<(int Cylinder, int Head, IAmigaTrack Track)> source, ReadOnlySpan<byte> image)
+    {
+        if (source.Count == 0 || source.Any(t => t.Cylinder is < 0 or > 83 || t.Head is < 0 or > 1))
+            throw new NotSupportedException("Preserved media requires DD cylinders 0–83 and heads 0–1.");
+        var count = Math.Max(80, source.Max(t => t.Cylinder) + 1) * 2;
+        var tracks = new byte[count][];
+        var lengths = new int[count];
+        var masks = new byte[]?[count];
+        var deadlines = new int[]?[count];
+        var seen = new bool[count];
+        for (var i = 0; i < count; i++) { tracks[i] = new byte[12_500]; lengths[i] = 100_000; }
+        foreach (var entry in source)
+        {
+            var index = entry.Cylinder * 2 + entry.Head;
+            var track = entry.Track;
+            if (seen[index]) throw new InvalidDataException("Media contains duplicate physical tracks.");
+            seen[index] = true;
+            var bits = track.BitLength;
+            if (bits <= 0 || bits > LightweightPaulaAudio.PalCpuFrequency / 10 ||
+                (long)bits > (long)track.EncodedData.Length * 8 || track.StartBit < 0 || track.StartBit >= bits)
+                throw new NotSupportedException("Preserved track length/index is invalid or its cells are finer than one CCK.");
+            var data = new byte[(bits + 7) / 8];
+            var input = track.EncodedData.Span;
+            if (track.StartBit == 0) input[..data.Length].CopyTo(data);
+            else
+                for (var bit = 0; bit < bits; bit++)
+                {
+                    var original = (bit + track.StartBit) % bits;
+                    if ((input[original >> 3] & (0x80 >> (original & 7))) != 0)
+                        data[bit >> 3] |= (byte)(0x80 >> (bit & 7));
+                }
+            foreach (var region in track.Regions)
+            {
+                if (region.StartBit < 0 || region.BitLength < 0 || (long)region.StartBit + region.BitLength > bits)
+                    throw new InvalidDataException("Media contains an out-of-range track region.");
+                if ((region.Features & AmigaTrackFeatures.WeakData) == 0) continue;
+                for (var bit = region.StartBit; bit < region.StartBit + region.BitLength; bit++)
+                {
+                    var rotated = (bit - track.StartBit + bits) % bits;
+                    var mask = (byte)(0x80 >> (rotated & 7));
+                    masks[index] ??= new byte[data.Length];
+                    masks[index]![rotated >> 3] |= mask;
+                }
+            }
+            tracks[index] = data; lengths[index] = bits;
+        }
+        uint seed = 2166136261;
+        foreach (var value in image) seed = unchecked((seed ^ value) * 16777619);
+        return new(tracks, lengths, masks, deadlines, seed);
+    }
 }

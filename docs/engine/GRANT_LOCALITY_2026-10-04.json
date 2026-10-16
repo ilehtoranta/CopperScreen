@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "Correctness PASS; duplicated grant code removed; combined performance gate PASS",
+  "change": "NoInlining at private GrantCpuWord and typed Clock.AdvanceToCpuGrant<TPath>; one shared CIA/non-contended advance fallback. Device execution and transfer timing unchanged.",
+  "codeInspectionReference": "Frozen selected CPU-transfer R1 (DB373E35...), CPU_TRANSFER_OPTIMIZATION_2026-10-04.json",
+  "overallPerformanceReference": "Validated chipset-regression R2 (ED53DA30...), CHIPSET_REGRESSION_2026-10-03.json",
+  "selectedRevision": "Two inlining boundaries; final production build, isolated prototype binary and first-boundary experiment retained separately",
+  "sources": {
+    "CopperMod.Amiga.Lightweight/AssemblyInfo.cs": "220120098395A637162A315523D2B6A2240B89917E816307FAB883123181AE16",
+    "CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj": "1E7F7B6E02E855B710A8241C771486D0537EC3B7E112A06081B2C578787C8D51",
+    "CopperMod.Amiga.Lightweight/LightweightA1200Io.cs": "04C560F0E5F34C2D19DEF4DFF5525303C52361F2D5282524B091EAF04BA299D4",
+    "CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs": "72290820FE4AAB0829BDB374346858754E5AC42B7F93D705D660A39411D4E766",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Aga.cs": "DC5E15A16433F2FFCD8CD3916EADEEA24EE2DBEA53D37BC146C2D158B06B2F2B",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs": "8AD12803779C245824E665F8CF1B65CF1E817EB8BFC687AC297DD062E823BF70",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs": "A37440DA57C34EE585ED334B926EDFBEBF59E654940BF77134C26AFFDD7D23BC",
+    "CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs": "37D75DA736FAC74F4759C644B6FAC99F71306FC51A32C06C0C96B773E16EFF0C",
+    "CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs": "BE840B5CC6259EFA30C9A9E22940E1F2DCD8A29D91EB3D06697F9E739BA5B5EC",
+    "CopperMod.Amiga.Lightweight/LightweightAutoconfig.cs": "42CCC1464A0F1BBA263710509136481EDFA93E27D489D6D4D2453297E74DAB92",
+    "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs": "8AEFE9B4C36D878AD586FC6EBF07E32344732489692C578F7F82657EEC86A41A",
+    "CopperMod.Amiga.Lightweight/LightweightBlitter.cs": "4F544DE0F6D8446DD21C726D3E340EFC248126D8418F41F1CB5A2E55B83F0D99",
+    "CopperMod.Amiga.Lightweight/LightweightBusArbiter.cs": "6D4D469525D384697D7765C84CF4EB8A4513B9C34C739070CF1D279A70CA16EC",
+    "CopperMod.Amiga.Lightweight/LightweightCia.cs": "5CA6B61E6E3D2C59FCD8F1ACC8929FDE97A18A4B2BD7D72A99F128576CC48152",
+    "CopperMod.Amiga.Lightweight/LightweightClock.cs": "C73197E90173E0441972199FDA9F12B4ECAF06683D665F53E2C0E71DA0006365",
+    "CopperMod.Amiga.Lightweight/LightweightControllers.cs": "818E0BCF6605F370DA1AB464CB9341C479A0DC385F6AA5C2FDBB5EB46931A5DB",
+    "CopperMod.Amiga.Lightweight/LightweightCopper.cs": "28CD66E4BEC965CFEEB93B5584F01810A977EA437D59D3D2BD7909EB76D0303A",
+    "CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs": "0CEE9427B95CC9478BFD7E06D0B2888A1477C0B7B58CCFB71DD06CE30DEE245C",
+    "CopperMod.Amiga.Lightweight/LightweightCpuBoundary.cs": "C7DB5DD2FDA1658F615B8568B1551798A9A3C799F3DCB4ACC6AB55DF08CAC4AB",
+    "CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs": "5DB47E674024D18F72FCC346A0B3E278F4B883674ED06694048A3F782531B4EC",
+    "CopperMod.Amiga.Lightweight/LightweightDiskDma.cs": "9FAA34ACBFBE1D322B445FD2E4001B8F88F305968265362E5C7921E8A3B194E8",
+    "CopperMod.Amiga.Lightweight/LightweightDiskReceiver.cs": "21AB816A0F76CA00BC889E1CC5A687E533B943559F9CF25D02F5691F50D8771A",
+    "CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs": "2546AD829D1031AD04F192F16CB4A321BB05099889224B441CE93D0C673E784C",
+    "CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs": "B9F16FA8D3467C200FB06C8230A831561AD385408B57C1B04424BB068601E7A7",
+    "CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs": "D31E35C1E53CCBF60CC571F191C7F91E977A688032ADEC00DBBCDFA9611FED37",
+    "CopperMod.Amiga.Lightweight/LightweightFastRam.cs": "496EE2B97EC2C4F6FEDAAF96DAC2E2A5B0F7AD1D8221C98DE536EDD51CC82F81",
+    "CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs": "A0E8EDC1FEBF81290F173069864B5397152A60300997843616438BFFABC40DA4",
+    "CopperMod.Amiga.Lightweight/LightweightFloppyFormat.cs": "826A0C8B8AA1FF7CF95A6157C3DF24F86AF9E65385DC118DC56167553B71010F",
+    "CopperMod.Amiga.Lightweight/LightweightHdfBus.cs": "CB205F42145E4A0B10A6EECDEDDA8263EAB233BC612B0C217A93EF6E9518392E",
+    "CopperMod.Amiga.Lightweight/LightweightIpfImage.cs": "1EABBD1047B46BA6578856FF1C1974F034D9FEF9BDB0D7408CFD7EA800D9152E",
+    "CopperMod.Amiga.Lightweight/LightweightKeyboard.cs": "FED9C9E6D6288DB28773B9E4A27D2099AEB18EF4873D0A08ED33CD09C1B9358F",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs": "458BBD8434405565302B2C5B7E3F1DF1FCA7F67C30FB87869CB027DF41BE8A78",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs": "DDE8AC29EE331F8AFD688B52DF712CC672D4C9B69F5B84AC8F284C99FEDDD33D",
+    "CopperMod.Amiga.Lightweight/LightweightPaulaSerial.cs": "13F4CD4AE0BFA57DC32C54C5684B4F10F734124DBABE815DE93843A828A5B2C8",
+    "CopperMod.Amiga.Lightweight/LightweightPotentiometers.cs": "E43C1F7BD537BB27700987A5640C8E611E79A7BB42AA29D2C95057BAFEB12C73",
+    "CopperMod.Amiga.Lightweight/LightweightRegisters.cs": "69583594D395C018893BD991ECD911C01AC8D8CFFD5315D726ABE4C7FAC7CF38",
+    "CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs": "97CA28FFDDA858B0C7B0068B68CC040022D331C23604433E4ACCB02812192155",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.Aga.cs": "F694E3EF28961C03868BD6DC23FF2D98C308178A308D5246868B0772DA479167",
+    "CopperMod.Amiga.Lightweight/LightweightSprites.cs": "D62E125FA6B7433579D5BCA4A930B58F7A6F55B7E4D40A40F799609240F231AB",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Aga.cs": "3D606A2C69BC3FCDB0C133CC9D09770A3C9D1CD359C1838ADA40675A0F7E518A",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs": "90ADB59D3998128D3A4D55759FC9C6F7B64C303BCC036FF2D2FD49CEADAA488F",
+    "CopperMod.Amiga.Lightweight/LightweightVideo.cs": "012837E982EB51A27235498DFE82F1BC6C419ACF63CB4DFD6A624964D5C24B66",
+    "CopperMod.Amiga.Lightweight/README.md": "4AD542047F16C1730BD5777831A9C00E981A923DD775C99EA02C0620515A761E",
+    "CopperMod.Amiga.Lightweight/packages.lock.json": "6EE4D7589C14E4FCF73E8D731FCB6436BF2244127FE137027F93CB422A303F64",
+    "Directory.Build.props": "E5ADCA3F2EC2F649B0FBD3FB92812E95231FF28A955F22DA152FAA73746C4A35",
+    "NuGet.Config": "C5DA90F9CF0EAB3180E57E8B74D5DD134AB824D63E6330ACE75B4FDA86B153CE",
+    "global.json": "EC7D038183957F0F2DD09078668AB7866560A585B3566836E5ECD105796260F4"
+  },
+  "sourceChangesRelativeToCpuTransfer": [
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+    "CopperMod.Amiga.Lightweight/LightweightClock.cs"
+  ],
+  "capsules": {
+    "capsule": {
+      "Copper68k.dll": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F",
+      "CopperDisk.dll": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A",
+      "CopperDisk.pdb": "FCEFB2EF1D57A31FF8D6F5D78B63B1CE1E74DF989419F81536F7B97DFDC04A98",
+      "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "CopperMod.Amiga.Lightweight.dll": "109CD5ACDBF4C070195B138249A98F8A1F60A5CB1C3A7D797852832590D6A409",
+      "CopperMod.Amiga.Lightweight.pdb": "D86826B8F228A53B8FDF30BD9B4FFA1E628AFD459BDD2EB1A45F8D76CCC14671",
+      "CopperMod.Amiga.Lightweight.Runner.deps.json": "5326278D808C13F5CF0E172F63ACE6B1E309E6B63562C26CED602ECD85C71F37",
+      "CopperMod.Amiga.Lightweight.Runner.dll": "0CB162E2C067B053856956EE89883EB5728AB712B7ECE11CA41EA70F4AAD080F",
+      "CopperMod.Amiga.Lightweight.Runner.exe": "80A42AAC6340A5B93AED7791058783F2464E8A86972244406944168FF652231D",
+      "CopperMod.Amiga.Lightweight.Runner.pdb": "430F602468C17C37905EBBA894001B212388260CE6CDF35F5B46D014E5320714",
+      "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "CopperMod.Amiga.Lightweight.xml": "A8C3FE2D0ECE3CBD91F8DB833E38413F15CBC871E67D5CE1E339E698E0891B3F"
+    },
+    "modern-capsule": {
+      "Copper68k.dll": "99173918A4DA1CD5446D8F6E115E6B5C4D0A8F1C7F9173261C754988D3CBCB8F",
+      "CopperDisk.dll": "A93A9CD6F41221C0F87C841B5E513DFDE509B20F6F2E48004A0A074D5750CE2A",
+      "CopperDisk.pdb": "861267A6024923F5D64EA20FABB22E3CCE2C45871E84CD2F0C84751F52A6EB58",
+      "CopperDisk.xml": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "CopperMod.Amiga.Lightweight.dll": "109CD5ACDBF4C070195B138249A98F8A1F60A5CB1C3A7D797852832590D6A409",
+      "CopperMod.Amiga.Lightweight.pdb": "D86826B8F228A53B8FDF30BD9B4FFA1E628AFD459BDD2EB1A45F8D76CCC14671",
+      "CopperMod.Amiga.Lightweight.Runner.deps.json": "F118834298A8268674574425F7B4075B517070E2F24F32E80001C281188A6629",
+      "CopperMod.Amiga.Lightweight.Runner.dll": "6120A86EA6CA102BC9E2BF7833A70CAA97E7644B517EC1F415E67FC2125BBC53",
+      "CopperMod.Amiga.Lightweight.Runner.exe": "FE23FFD214096AA3BD2235E22D240B6C9F776CE53E9D4DEDFF3EFDCAA38087E5",
+      "CopperMod.Amiga.Lightweight.Runner.pdb": "5569A18373454964059D3FC43590AE8F922487C1F3A6915107E7A12E4D6EBC1F",
+      "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "CopperMod.Amiga.Lightweight.xml": "2676E54645C5B7FEA937018AA4F6C9358F726B6F680743293C7522B82A0F0C9F"
+    }
+  },
+  "hardwareLoopBodiesChanged": false,
+  "deviceStateAdded": false,
+  "allocationAdded": false,
+  "dependencyChanged": false,
+  "publicApiChanged": false,
+  "newTestsAdded": false,
+  "correctness": {
+    "enginePassed": 1089,
+    "diskPassed": 74,
+    "hostPassed": 168,
+    "skipped": 0,
+    "base163HostCasesAllPassed": true,
+    "additionalHostCases": [
+      "CopperScreen.Tests.CopperScreenRecentSessionTests.CorruptOrUnknownHistoryFallsBackToFirstLaunch(json: \"broken json\")",
+      "CopperScreen.Tests.CopperScreenRecentSessionTests.CorruptOrUnknownHistoryFallsBackToFirstLaunch(json: \"{\\\"Version\\\":99,\\\"Muted\\\":true,\\\"RecentDisks\\\":[\\\"\"\u00b7\u00b7\u00b7)",
+      "CopperScreen.Tests.CopperScreenRecentSessionTests.RecentDisksKeepOrderRemoveDuplicatesAndStayBounded",
+      "CopperScreen.Tests.CopperScreenRecentSessionTests.RemovedDiskDoesNotPreventLoadingTheLastMachine",
+      "CopperScreen.Tests.CopperScreenRecentSessionTests.SavedMachineAndHostPreferencesRoundTripWithoutChangingProfiles"
+    ],
+    "rawCounters": {
+      "engine.trx": {
+        "total": "1089",
+        "executed": "1089",
+        "passed": "1089",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "disk.trx": {
+        "total": "74",
+        "executed": "74",
+        "passed": "74",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "host.trx": {
+        "total": "168",
+        "executed": "168",
+        "passed": "168",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "retained": [
+      {
+        "label": "lores-normal",
+        "workload": "lores",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--synthetic-paula-dma",
+          "--wide-output",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      },
+      {
+        "label": "hires-normal",
+        "workload": "hires",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--synthetic-paula-dma",
+          "--hires",
+          "--warmup",
+          "600",
+          "--frames",
+          "7200"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      },
+      {
+        "label": "lemmings-normal",
+        "workload": "lemmings",
+        "scalar": false,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+          "--warmup",
+          "14520",
+          "--frames",
+          "3600"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      },
+      {
+        "label": "lemmings-scalar",
+        "workload": "lemmings",
+        "scalar": true,
+        "preEcs": false,
+        "identityMatches": true,
+        "measuredAllocationBytes": 0,
+        "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:/Data/ROM/Kickstart_13.rom",
+          "--adf",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+          "--input-script",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+          "--warmup",
+          "14520",
+          "--frames",
+          "3600",
+          "--scalar-cpu"
+        ],
+        "timingDisposition": "Excluded: correctness check; concurrent validation allowed"
+      }
+    ],
+    "native": [
+      {
+        "fixture": "ecs-super",
+        "scalar": false,
+        "fields": 2400,
+        "capturedFiles": 30,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "9DA6B69BFE3B780DE412CAC33087258AE27612834C9CED15FA82993FF5D7776A",
+        "finalHardfileSha256": "F8CFCA788D1FC21C579C9D15EF16E688B9CB0E80D5F8FC919A621AF0CFFF45C1",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-super-normal.hdf",
+          "--frames",
+          "2400",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-super-normal",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ]
+      },
+      {
+        "fixture": "ecs-super",
+        "scalar": true,
+        "fields": 2400,
+        "capturedFiles": 30,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "9DA6B69BFE3B780DE412CAC33087258AE27612834C9CED15FA82993FF5D7776A",
+        "finalHardfileSha256": "F8CFCA788D1FC21C579C9D15EF16E688B9CB0E80D5F8FC919A621AF0CFFF45C1",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-super-scalar.hdf",
+          "--frames",
+          "2400",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-super-scalar",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048",
+          "--scalar-cpu"
+        ]
+      },
+      {
+        "fixture": "ecs-ntsc-super",
+        "scalar": false,
+        "fields": 1200,
+        "capturedFiles": 18,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "321039503692A8A202882C6436446A3DD8223AD9F5A41562205CAA083696B7FF",
+        "finalHardfileSha256": "6F6CDB874666B31A39E26632367A48FC010A2699564FF8BBC65E1510F782589A",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-ntsc-super-normal.hdf",
+          "--frames",
+          "1200",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-ntsc-super-normal",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048"
+        ]
+      },
+      {
+        "fixture": "ecs-ntsc-super",
+        "scalar": true,
+        "fields": 1200,
+        "capturedFiles": 18,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "sourceHardfileSha256": "321039503692A8A202882C6436446A3DD8223AD9F5A41562205CAA083696B7FF",
+        "finalHardfileSha256": "6F6CDB874666B31A39E26632367A48FC010A2699564FF8BBC65E1510F782589A",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-ntsc-super-scalar.hdf",
+          "--frames",
+          "1200",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\ecs-ntsc-super-scalar",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--agnus",
+          "8375-318069-10",
+          "--denise",
+          "8373",
+          "--chip-ram-kib",
+          "2048",
+          "--scalar-cpu"
+        ]
+      },
+      {
+        "fixture": "aga-rgb24",
+        "scalar": false,
+        "fields": 3600,
+        "capturedFiles": 43,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "sourceHardfileSha256": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "finalHardfileSha256": "89B266045EB2470356AEDF209FFBC9A2E5C3C1469FDA90FC4CA39EA9527FDDFA",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\aga-rgb24-normal.hdf",
+          "--frames",
+          "3600",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\aga-rgb24-normal",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--cpu",
+          "68ec020",
+          "--agnus",
+          "alice",
+          "--denise",
+          "lisa",
+          "--chip-ram-kib",
+          "2048",
+          "--slow-ram-kib",
+          "0"
+        ]
+      },
+      {
+        "fixture": "aga-rgb24",
+        "scalar": true,
+        "fields": 3600,
+        "capturedFiles": 43,
+        "capturedFilesMatchReference": true,
+        "hardfileMatchesReference": true,
+        "romSha256": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "sourceHardfileSha256": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "finalHardfileSha256": "89B266045EB2470356AEDF209FFBC9A2E5C3C1469FDA90FC4CA39EA9527FDDFA",
+        "command": [
+          "dotnet",
+          "--fx-version",
+          "10.0.12",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\candidate\\modern-capsule\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "--rom",
+          "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+          "--hdf",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\aga-rgb24-scalar.hdf",
+          "--frames",
+          "3600",
+          "--boot-probe",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\grant-locality-2026-10-04\\r2\\native\\aga-rgb24-scalar",
+          "--boot-probe-interval",
+          "600",
+          "--boot-probe-extended",
+          "--cpu",
+          "68ec020",
+          "--agnus",
+          "alice",
+          "--denise",
+          "lisa",
+          "--chip-ram-kib",
+          "2048",
+          "--slow-ram-kib",
+          "0",
+          "--scalar-cpu"
+        ]
+      }
+    ],
+    "capturedFileComparisons": 182,
+    "hostInputs": {
+      "variables": {
+        "COPPERSCREEN_LIGHTWEIGHT_NATIVE_ROM": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "COPPERSCREEN_WORKBENCH31_HDF": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-hd-2026-09-30\\v2\\pristine-rdb-ffs.hdf",
+        "COPPERSCREEN_A1200_ROM": "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip",
+        "COPPERSCREEN_LIGHTWEIGHT_NATIVE_SCRIPT": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json",
+        "COPPERSCREEN_LIGHTWEIGHT_NATIVE_ADF": "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "COPPERSCREEN_WORKBENCH31_ADF": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-2026-09-30\\workbench.adf",
+        "COPPERSCREEN_KICKSTART31_ROM": "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+        "COPPERSCREEN_AGA_PROBE_HDF": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-2026-10-01\\aga-final-pristine.hdf"
+      },
+      "pins": {
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\aga-2026-10-01\\aga-final-pristine.hdf": "3BBAB58C135844AAD802CE937D49EC5DA26D6407303C9D9FC543FC6CC63E9C85",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-hd-2026-09-30\\v2\\pristine-rdb-ffs.hdf": "19A78C839A20A7498DF33154C3697237259B195A07F6E29059F10745C7947E9D",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\kickstart31-2026-09-30\\workbench.adf": "A8F167BAD2897E8C7F2CFE73DE7A9F8DAD10C7A5B1F78CA17F818AB17278B985",
+        "C:\\Data\\ROM\\Kickstart v3.0 r39.106 (1992-09)(Commodore)(A1200)[!].zip": "EB63BA9CEFF1AC12BB025389434946101AE71DD064B8A830E8AE8FE111C1BE39",
+        "C:\\Data\\ROM\\kickstart-3.1-a500.rom": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\lemmings-cpu-bus-timing-v1.json": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA",
+        "C:\\Data\\ROM\\Kickstart_13.rom": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+      }
+    },
+    "criticalHostEngineDependenciesPinnedBeforeAfter": true,
+    "hostOtherBinaryChanges": {}
+  },
+  "productionBuild": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "log": "production-build.log"
+  },
+  "generatedCode": {
+    "disposition": "Generated-code diagnostics; timings excluded; code size/static branches are not throughput or miss-rate evidence",
+    "builds": {
+      "cpu-transfer": {
+        "dumpSha256": "875EABE422D5BBACC8611FEB91B4C981F91A50AEF5D2CD0AE7286070606E0B25",
+        "methods": {
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadWord(uint,byref,int):ushort:this": {
+            "codeBytes": 1098,
+            "staticConditionalBranches": 43,
+            "staticCalls": 20
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:GrantCpuWord(uint,long,byref,byref,bool):this": {
+            "codeBytes": 655,
+            "staticConditionalBranches": 25,
+            "staticCalls": 9
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 1228,
+            "staticConditionalBranches": 47,
+            "staticCalls": 22
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 1162,
+            "staticConditionalBranches": 45,
+            "staticCalls": 22
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteLong(uint,uint,byref,int):this": {
+            "codeBytes": 2900,
+            "staticConditionalBranches": 123,
+            "staticCalls": 42
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadLong(uint,byref,int):uint:this": {
+            "codeBytes": 2254,
+            "staticConditionalBranches": 93,
+            "staticCalls": 40
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteWord(uint,ushort,byref,int):this": {
+            "codeBytes": 1415,
+            "staticConditionalBranches": 58,
+            "staticCalls": 22
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteByte(uint,byte,byref,int):this": {
+            "codeBytes": 2021,
+            "staticConditionalBranches": 88,
+            "staticCalls": 34
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadByte(uint,byref,int):byte:this": {
+            "codeBytes": 894,
+            "staticConditionalBranches": 30,
+            "staticCalls": 18
+          }
+        },
+        "completeIdentityMatches": true
+      },
+      "shared-grant": {
+        "dumpSha256": "CE3304DBEB5DAB8DEECAC3C9F821B3A28156B6002B483446BD0F60F42D614261",
+        "methods": {
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadWord(uint,byref,int):ushort:this": {
+            "codeBytes": 608,
+            "staticConditionalBranches": 19,
+            "staticCalls": 13
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:GrantCpuWord(uint,long,byref,byref,bool):this": {
+            "codeBytes": 644,
+            "staticConditionalBranches": 25,
+            "staticCalls": 8
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 30,
+            "staticConditionalBranches": 2,
+            "staticCalls": 0
+          },
+          "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this": {
+            "codeBytes": 1162,
+            "staticConditionalBranches": 45,
+            "staticCalls": 22
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteLong(uint,uint,byref,int):this": {
+            "codeBytes": 1883,
+            "staticConditionalBranches": 75,
+            "staticCalls": 28
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadLong(uint,byref,int):uint:this": {
+            "codeBytes": 1300,
+            "staticConditionalBranches": 45,
+            "staticCalls": 26
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteWord(uint,ushort,byref,int):this": {
+            "codeBytes": 896,
+            "staticConditionalBranches": 34,
+            "staticCalls": 15
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteByte(uint,byte,byref,int):this": {
+            "codeBytes": 1717,
+            "staticConditionalBranches": 75,
+            "staticCalls": 29
+          },
+          "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadByte(uint,byref,int):byte:this": {
+            "codeBytes": 469,
+            "staticConditionalBranches": 13,
+            "staticCalls": 11
+          }
+        },
+        "completeIdentityMatches": true
+      }
+    },
+    "comparisons": [
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:GrantCpuWord(uint,long,byref,byref,bool):this",
+        "before": {
+          "codeBytes": 655,
+          "staticConditionalBranches": 25,
+          "staticCalls": 9
+        },
+        "after": {
+          "codeBytes": 644,
+          "staticConditionalBranches": 25,
+          "staticCalls": 8
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadByte(uint,byref,int):byte:this",
+        "before": {
+          "codeBytes": 894,
+          "staticConditionalBranches": 30,
+          "staticCalls": 18
+        },
+        "after": {
+          "codeBytes": 469,
+          "staticConditionalBranches": 13,
+          "staticCalls": 11
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadLong(uint,byref,int):uint:this",
+        "before": {
+          "codeBytes": 2254,
+          "staticConditionalBranches": 93,
+          "staticCalls": 40
+        },
+        "after": {
+          "codeBytes": 1300,
+          "staticConditionalBranches": 45,
+          "staticCalls": 26
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:ReadWord(uint,byref,int):ushort:this",
+        "before": {
+          "codeBytes": 1098,
+          "staticConditionalBranches": 43,
+          "staticCalls": 20
+        },
+        "after": {
+          "codeBytes": 608,
+          "staticConditionalBranches": 19,
+          "staticCalls": 13
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteByte(uint,byte,byref,int):this",
+        "before": {
+          "codeBytes": 2021,
+          "staticConditionalBranches": 88,
+          "staticCalls": 34
+        },
+        "after": {
+          "codeBytes": 1717,
+          "staticConditionalBranches": 75,
+          "staticCalls": 29
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteLong(uint,uint,byref,int):this",
+        "before": {
+          "codeBytes": 2900,
+          "staticConditionalBranches": 123,
+          "staticCalls": 42
+        },
+        "after": {
+          "codeBytes": 1883,
+          "staticConditionalBranches": 75,
+          "staticCalls": 28
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightA500Machine:WriteWord(uint,ushort,byref,int):this",
+        "before": {
+          "codeBytes": 1415,
+          "staticConditionalBranches": 58,
+          "staticCalls": 22
+        },
+        "after": {
+          "codeBytes": 896,
+          "staticConditionalBranches": 34,
+          "staticCalls": 15
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant(long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this",
+        "before": {
+          "codeBytes": 1228,
+          "staticConditionalBranches": 47,
+          "staticCalls": 22
+        },
+        "after": {
+          "codeBytes": 30,
+          "staticConditionalBranches": 2,
+          "staticCalls": 0
+        }
+      },
+      {
+        "method": "CopperMod.Amiga.Lightweight.LightweightClock:AdvanceToCpuGrant[CopperMod.Amiga.Lightweight.OcsExecutionPath](long,CopperMod.Amiga.Lightweight.LightweightA500Machine):long:this",
+        "before": {
+          "codeBytes": 1162,
+          "staticConditionalBranches": 45,
+          "staticCalls": 22
+        },
+        "after": {
+          "codeBytes": 1162,
+          "staticConditionalBranches": 45,
+          "staticCalls": 22
+        }
+      }
+    ]
+  },
+  "codeShape": {
+    "callbackCalls": {
+      "ReadByte": {
+        "sharedGrantCalls": 1,
+        "grantWaitCopyPresent": false
+      },
+      "ReadWord": {
+        "sharedGrantCalls": 1,
+        "grantWaitCopyPresent": false
+      },
+      "ReadLong": {
+        "sharedGrantCalls": 2,
+        "grantWaitCopyPresent": false
+      },
+      "WriteByte": {
+        "sharedGrantCalls": 1,
+        "grantWaitCopyPresent": false
+      },
+      "WriteWord": {
+        "sharedGrantCalls": 1,
+        "grantWaitCopyPresent": false
+      },
+      "WriteLong": {
+        "sharedGrantCalls": 2,
+        "grantWaitCopyPresent": false
+      }
+    },
+    "helperCallsSelector": 1,
+    "kernelTargets": [
+      "CopperMod.Amiga.Lightweight.OcsExecutionPath",
+      "CopperMod.Amiga.Lightweight.AgaExecutionPath",
+      "CopperMod.Amiga.Lightweight.EcsExecutionPath"
+    ],
+    "selectorUsesTailJumps": true,
+    "sevenBodiesBeforeBytes": 11237,
+    "sevenBodiesAfterBytes": 7517,
+    "sevenBodyReductionPercent": 33.10492124232446,
+    "matchedBodyBeforeBytes": 13627,
+    "matchedBodyAfterBytes": 8709,
+    "capturedTier1MethodsBefore": 9,
+    "capturedTier1MethodsAfter": 9,
+    "nonGenericSelectorSeparatelyCapturedAfter": true,
+    "scopeLimit": "Captured bodies only; excludes outlined callees, Tier0/stubs and rest of engine/core; no throughput or miss-rate conclusion"
+  },
+  "scopeLimit": "Body sizes and static branch/call counts do not measure total engine footprint, miss rates or throughput; all diagnostic timings excluded",
+  "experiments": {
+    "firstBoundaryRecord": "artifacts/grant-locality-2026-10-04/first-boundary-record.json",
+    "firstBoundaryHostNotUsedAsFinalPinVerifiedCoverage": true,
+    "twoBoundaryIsolatedProbe": "artifacts/grant-locality-2026-10-04/r2/probe-jit/",
+    "finalJitIdentityPinnedToProductionDll": "109CD5ACDBF4C070195B138249A98F8A1F60A5CB1C3A7D797852832590D6A409",
+    "initialCodeShapeAssertionResolution": "Final helper retains a separate 30-byte selector, which tail-jumps to the three typed kernels, instead of directly calling each kernel. Code-shape check now follows that selector; engine code and timing unchanged."
+  },
+  "comparisonDocumentation": "Common runner/dependencies/XML identical to retained R2 bag; only engine DLL/PDB differ. Current generated XML is separately preserved and does not execute.",
+  "performance": {
+    "status": "PASS",
+    "reason": "Complete valid six-pair series against validated chipset R2; every one-sided 95% upper frame-time regression bound <=1%; no exception",
+    "diagnosticTimingsExcluded": true,
+    "protocol": "scripts/run-lightweight-grant-locality-comparison-v1.ps1",
+    "sha256": "8000DBA942C1EAADAA4685ACF8BA4B00E2E648A3FCA0A6D59B5B3435B72DE11A",
+    "astValid": true,
+    "logicUnchangedFrom": "CPU-transfer v1 / homogeneous-host v2 aside labels, topology type name and frozen engine pair",
+    "livePreflightPending": false,
+    "pairsPerWorkload": 6,
+    "workloads": [
+      "lores",
+      "hires",
+      "native Lemmings"
+    ],
+    "oneSided95UpperFrameTimeRegressionLimitPercent": 1,
+    "previousExceptionsTransfer": false,
+    "risks": "Hires passes narrowly. Results apply to this frozen candidate, runtime, retained workloads and validated homogeneous-host protocol; no pre-ECS recovery claim.",
+    "preflightAttempts": [
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/preflight-1/",
+        "status": "INVALID / RERUN",
+        "reason": "Sustained Package interference >=25% for 10.4828563000192 seconds",
+        "timingSamples": 0,
+        "topology": "AMD Ryzen 5 5600X, 12 homogeneous logical processors; selected CPU 2, protected 2 and 3",
+        "runtimeAndInputPins": "PASS",
+        "liveTelemetry": "Rejected by unchanged host-load policy v2",
+        "followupProcessObservation": {
+          "process": "Panthers",
+          "cpuSeconds": 12.12,
+          "observationSeconds": 5
+        }
+      },
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/preflight-2/",
+        "status": "PASS preflight only",
+        "timingSamples": 0,
+        "liveTelemetry": "Short preflight passed; does not establish a valid measured series"
+      },
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/retention-v1-1/",
+        "status": "INVALID / RERUN",
+        "reason": "Sustained Package interference >=25% for 10.4311259000096 seconds",
+        "timingSamples": 0,
+        "liveTelemetry": "Full comparison aborted during preflight under unchanged host-load policy v2"
+      },
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/retention-v1-2/",
+        "status": "INVALID / RERUN",
+        "reason": "Sustained Package interference >=25% for 10.5673524000449 seconds",
+        "timingSamples": 0,
+        "runtimeAndInputPins": "PASS",
+        "liveTelemetry": "Full comparison aborted during preflight under unchanged host-load policy v2",
+        "followupProcessObservation": {
+          "process": "Panthers",
+          "cpuSeconds": 12.06,
+          "observationSeconds": 5
+        }
+      }
+    ],
+    "timingSamplesAccepted": 36,
+    "measurementAttempts": [
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/retention-v1-3",
+        "status": "INVALID / RERUN",
+        "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: competing test/build/benchmark: dotnet.exe[94456]",
+        "completedSamplesExcluded": 13,
+        "allPartialTimingsExcluded": true,
+        "preflight": "PASS; owner reported Panthers paused",
+        "interruption": "Competing dotnet/MSBuild job detected during hires-R1 cooldown",
+        "lastTelemetry": {
+          "Seconds": 1.1943049000110477,
+          "Selected": 27.27272727272727,
+          "Sibling": 23.376623376623375,
+          "Package": 40.476190476190474,
+          "Workloads": [
+            "dotnet.exe[94456]"
+          ],
+          "Sample": "hires-R1-cooldown",
+          "OtherRunners": [
+            null
+          ]
+        },
+        "samplesSha256": "1B63A4043DED46B7637E5F406C461FC01CACF344AF2166A66D9C728BD28045A6"
+      },
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/retention-v1-4",
+        "status": "INVALID / RERUN",
+        "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: competing test/build/benchmark: dotnet.exe[48384]",
+        "completedSamplesExcluded": 1,
+        "allPartialTimingsExcluded": true,
+        "preflight": "PASS; owner reported other jobs paused",
+        "interruption": "New dotnet build detected during lores-R1 cooldown; process exited before follow-up inventory",
+        "lastTelemetry": {
+          "Seconds": 1.2128934999927878,
+          "Selected": 5.1948051948051965,
+          "Sibling": 5.1948051948051965,
+          "Package": 13.138250638250634,
+          "Workloads": [
+            "dotnet.exe[48384]"
+          ],
+          "Sample": "lores-R1-cooldown",
+          "OtherRunners": [
+            null
+          ]
+        },
+        "samplesSha256": "F7E59F003EC673C8C898A008A69AB3C943A7612861F3BB0B2D159C81B753BC31"
+      },
+      {
+        "evidence": "artifacts/grant-locality-2026-10-04/r2/retention-v1-5",
+        "status": "INVALID / RERUN",
+        "reason": "INVALID / RERUN: G6 performance INVALID / RERUN: competing test/build/benchmark: dotnet.exe[18464]",
+        "completedSamplesExcluded": 0,
+        "allPartialTimingsExcluded": true,
+        "preflight": "PASS; retried after short quiet interval",
+        "interruption": "New dotnet build detected during first lores sample, before completion",
+        "lastTelemetry": {
+          "Seconds": 1.167251800012309,
+          "Selected": 4.958381731490903,
+          "Sibling": 13.33333333333333,
+          "Package": 34.52430958873535,
+          "Workloads": [
+            "dotnet.exe[18464]"
+          ],
+          "Sample": "lores-R1",
+          "OtherRunners": [
+            null
+          ]
+        },
+        "followupInventory": "Active dotnet publish of CopperOS.Commands.Dir.csproj and CopperSharp.Compiler.Cli.dll observed; rejected PID had already exited, so no claim that these were its command line"
+      }
+    ],
+    "invalidPartialSamplesExcludedTotal": 14,
+    "acceptedSeries": {
+      "status": "VALID measured series",
+      "gatePass": true,
+      "artifactDirectory": "artifacts/grant-locality-2026-10-04/r2/retention-v1-6",
+      "protocol": "Six balanced pairs per workload; paired log frame-time ratios; t one-sided 95%, df=5, critical value 2.015048",
+      "samples": 36,
+      "completeFingerprintsMatch": true,
+      "measuredSteadyStateAllocations": 0,
+      "telemetryIntervals": 1407,
+      "maxConsecutiveAbove25PercentSeconds": {
+        "Selected": 1.3167111999937333,
+        "Sibling": 2.788784599979408,
+        "Package": 1.401191300014034
+      },
+      "normalPriorityAndCpuPlacement": "Harness live assertions; selected CPU 2, protected CPUs 2 and 3, Normal priority",
+      "capsulePinsVerified": true,
+      "currentSourceDifferencesFromFrozenCandidate": [],
+      "workloads": [
+        {
+          "workload": "lores",
+          "referenceMeanFps": 352.6633333333333,
+          "candidateMeanFps": 353.6333333333333,
+          "pairedFrameTimeChangePercent": -0.2815925838255227,
+          "pairedThroughputGainPercent": 0.28238776683455935,
+          "upperOneSided95FrameTimeChangePercent": 0.7641732952843705,
+          "gatePass": true,
+          "pairs": [
+            {
+              "pair": 1,
+              "referenceFps": 347.6,
+              "candidateFps": 354.27,
+              "frameTimeChangePercent": -1.8827447991644708
+            },
+            {
+              "pair": 2,
+              "referenceFps": 355.96,
+              "candidateFps": 355.37,
+              "frameTimeChangePercent": 0.16602414385007425
+            },
+            {
+              "pair": 3,
+              "referenceFps": 353.87,
+              "candidateFps": 353.87,
+              "frameTimeChangePercent": 0.0
+            },
+            {
+              "pair": 4,
+              "referenceFps": 345.56,
+              "candidateFps": 350.54,
+              "frameTimeChangePercent": -1.4206652593142022
+            },
+            {
+              "pair": 5,
+              "referenceFps": 358.46,
+              "candidateFps": 352.52,
+              "frameTimeChangePercent": 1.6850107795302494
+            },
+            {
+              "pair": 6,
+              "referenceFps": 354.53,
+              "candidateFps": 355.23,
+              "frameTimeChangePercent": -0.19705542887707983
+            }
+          ],
+          "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "workload": "hires",
+          "referenceMeanFps": 328.435,
+          "candidateMeanFps": 330.68,
+          "pairedFrameTimeChangePercent": -0.6801152960784248,
+          "pairedThroughputGainPercent": 0.6847725388585463,
+          "upperOneSided95FrameTimeChangePercent": 0.9946842849830535,
+          "gatePass": true,
+          "pairs": [
+            {
+              "pair": 1,
+              "referenceFps": 332.11,
+              "candidateFps": 323.3,
+              "frameTimeChangePercent": 2.725023198267862
+            },
+            {
+              "pair": 2,
+              "referenceFps": 321.5,
+              "candidateFps": 331.46,
+              "frameTimeChangePercent": -3.0048874675677295
+            },
+            {
+              "pair": 3,
+              "referenceFps": 327.53,
+              "candidateFps": 329.75,
+              "frameTimeChangePercent": -0.6732373009856074
+            },
+            {
+              "pair": 4,
+              "referenceFps": 330.5,
+              "candidateFps": 332.83,
+              "frameTimeChangePercent": -0.7000570862001565
+            },
+            {
+              "pair": 5,
+              "referenceFps": 326.13,
+              "candidateFps": 334.19,
+              "frameTimeChangePercent": -2.4118016697088462
+            },
+            {
+              "pair": 6,
+              "referenceFps": 332.84,
+              "candidateFps": 332.55,
+              "frameTimeChangePercent": 0.08720493158922427
+            }
+          ],
+          "fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+        },
+        {
+          "workload": "lemmings",
+          "referenceMeanFps": 333.955,
+          "candidateMeanFps": 341.5783333333333,
+          "pairedFrameTimeChangePercent": -2.214488242497499,
+          "pairedThroughputGainPercent": 2.2646383934556584,
+          "upperOneSided95FrameTimeChangePercent": -0.44132235257151337,
+          "gatePass": true,
+          "pairs": [
+            {
+              "pair": 1,
+              "referenceFps": 326.36,
+              "candidateFps": 325.51,
+              "frameTimeChangePercent": 0.2611286903628329
+            },
+            {
+              "pair": 2,
+              "referenceFps": 332.23,
+              "candidateFps": 336.4,
+              "frameTimeChangePercent": -1.239595719381681
+            },
+            {
+              "pair": 3,
+              "referenceFps": 328.43,
+              "candidateFps": 349.59,
+              "frameTimeChangePercent": -6.05280471409364
+            },
+            {
+              "pair": 4,
+              "referenceFps": 338.6,
+              "candidateFps": 343.89,
+              "frameTimeChangePercent": -1.5382825903631825
+            },
+            {
+              "pair": 5,
+              "referenceFps": 339.58,
+              "candidateFps": 346.8,
+              "frameTimeChangePercent": -2.081891580161488
+            },
+            {
+              "pair": 6,
+              "referenceFps": 338.53,
+              "candidateFps": 347.28,
+              "frameTimeChangePercent": -2.519580741764571
+            }
+          ],
+          "fingerprint": "engine=lightweight-a500 workload=image cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+        }
+      ],
+      "evidenceHashes": {
+        "samples.json": "54934B645709627F647ABD22C4DB794675EEBABFA1F63471716826577E67ABA5",
+        "summary.json": "0A42B89320A45E937516899B7B025D36708D396F20E4AF704E50DF6B86154D7F",
+        "telemetry.jsonl": "D9B2FADCE7BFB6408C1D8BDDDF9674B5F3ABBD7F013073A61C603104B77E926F",
+        "protocol.log": "49547EE8839EAC9CEB1F8113C47360401AE484E0AC3C731CA1086578A4A6825C"
+      },
+      "inputAndHarnessPinsVerifiedAfterRun": {
+        "scripts/run-lightweight-grant-locality-comparison-v1.ps1": "8000DBA942C1EAADAA4685ACF8BA4B00E2E648A3FCA0A6D59B5B3435B72DE11A",
+        "scripts/agnus-g6-host-load.ps1": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6",
+        "C:/Data/ROM/Kickstart_13.rom": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+        "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59",
+        "CopperScreen.Lightweight.Tests/Workloads/lemmings-cpu-bus-timing-v1.json": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA",
+        "media/lemmings-disk2.zip": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A"
+      }
+    },
+    "independentAnalysisSha256": "5ECE30323B303505C1E39BB57A70767AEA482287CCCC596BF0D0F2A15FB6A70E",
+    "analysisScript": "artifacts/grant-locality-2026-10-04/r2/analyze-retention-v1-6.py",
+    "analysisScriptSha256": "AC76A2AD9D3689738FE14020450173E3A69901D269F17A818B6587E43928B562",
+    "attributionLimit": "Combined following-slot, CPU-transfer and grant-locality candidate; individual phase gains not isolated",
+    "interpretation": "Native paired gain is supported by a negative upper frame-time bound. Small positive synthetic paired gains are not individually established as speedups by these bounds; hires passes narrowly at 0.9946842849830535%.",
+    "ownerAcceptance": {
+      "date": "2026-10-04",
+      "timezone": "Europe/Helsinki",
+      "decision": "Accepted",
+      "statement": "I accept this",
+      "candidateEngineSha256": "109CD5ACDBF4C070195B138249A98F8A1F60A5CB1C3A7D797852832590D6A409",
+      "evidenceDirectory": "artifacts/grant-locality-2026-10-04/r2/retention-v1-6",
+      "scope": "Combined following-slot, CPU-transfer and grant-locality candidate against validated chipset R2",
+      "performanceException": false,
+      "defaultUpperRegressionLimitPercent": 1
+    }
+  },
+  "preEcsRecovery": "Pending at owner request",
+  "artifacts": "artifacts/grant-locality-2026-10-04/r2/"
+}

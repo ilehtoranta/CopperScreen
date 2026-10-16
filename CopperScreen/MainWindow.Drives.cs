@@ -153,14 +153,14 @@ internal sealed partial class MainWindow
                 _driveProtectIcons[i].Stroke = locked ? CopperScreenAppearance.ProtectedText : MutedText;
                 protect.Background = locked ? ProtectedDriveBackground : Brushes.Transparent;
                 AutomationProperties.SetName(protect, $"DF{i} write protection");
-                ToolTip.SetTip(protect, ipf ? $"DF{i} · IPF disks are always write protected" : locked ? $"DF{i} · Write protection on. Click to allow writing in memory." : $"DF{i} · Write protection off. Click to protect the disk. Use Save ADF to keep changes.");
+                ToolTip.SetTip(protect, ipf ? $"DF{i} · This disk format is always write protected" : locked ? $"DF{i} · Write protection on. Click to allow writing in memory." : $"DF{i} · Write protection off. Click to protect the disk. Use Save ADF to keep changes.");
             }
         }
         finally { _updatingDriveStrip = false; }
     }
 
     private bool IsDrivePermanentlyReadOnly(CopperScreenDriveState drive) =>
-        drive.Format == LightweightFloppyFormat.Ipf || (_runtime == null && Path.GetExtension(CopperScreenDiskImageArchive.GetDisplayName(drive.DiskPath)).Equals(".ipf", StringComparison.OrdinalIgnoreCase));
+        drive.Format is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf) || (_runtime == null && Path.GetExtension(CopperScreenDiskImageArchive.GetDisplayName(drive.DiskPath)).ToLowerInvariant() is ".adz" or ".dms" or ".ipf" or ".scp");
 
     private async Task SetDriveWriteProtectionAsync(int index, bool writeProtected)
     {

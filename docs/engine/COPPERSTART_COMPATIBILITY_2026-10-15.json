@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "protocol": "copperstart-native-compatibility-v1",
+  "purpose": "Test the standalone CopperStart replacement ROM with one real title at a time on the unchanged Lightweight engine.",
+  "workflow": [
+    "Use an explicitly supplied ROM and local disk; record their hashes and the selected ZIP entry.",
+    "Run from reset with a fixed machine, bounded captures and recorded input. Use scripts/probes/CopperStart/replay.py with a fresh output directory for each run.",
+    "Record boot, loading, intro/effects, menu and input-driven gameplay separately after inspecting captures. Runner completion alone is not a compatibility pass.",
+    "For a failure, compare the same disk, configuration and input against native Kickstart; use a scalar replay and an original synthetic disk to narrow the boundary where useful.",
+    "Keep the first blocker, its evidence and the next investigation with this title before adding another title. Prefer classic-compatible service behavior over defensive checks against caller misuse: fixed-address loaders need not allocate their destinations through Exec. Resolve demonstrated live-state conflicts rather than rejecting legal caller memory. Do not patch disk contents."
+  ],
+  "repositoryCommit": "575d5cf81681c7ffa5c7d0cd40bbda6a7d16af53",
+  "engine": "CopperMod.Amiga.Lightweight",
+  "cpuPackage": "1.5.4-detroit-dev.2",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 0,
+    "fastRamKiB": 0,
+    "floppyDrives": 1,
+    "writeProtected": true,
+    "framebufferWidth": 908
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "f76f7fa6bbd7bb58db999fa77768bf367cda8c17213440bae04a71ede4d35a67",
+    "CopperMod.Amiga.Lightweight.dll": "0406a9652ded281326b32675d472631f212af2c586961b599f3858eef1dd5a47",
+    "Copper68k.dll": "5780f5084fd44e2d4732969bc0f9ce7ae7e3beffc1135ded92bc46d9b21399f2",
+    "CopperDisk.dll": "55c1f52fdbf12022abd97c22951d0c7f5ea751411a7c5d8c1c74836881ea0bba"
+  },
+  "replacementRom": {
+    "path": "../CopperStart/artifacts/native-floppy/CopperStart-DiskBoot.rom",
+    "generatedDate": "2026-10-13",
+    "bytes": 524288,
+    "sha256": "a2cacaf2b0ec0eef8212f0eb45fa6f7c0336145264e84e2f9df65239966ab332",
+    "producerManifest": "../CopperStart/artifacts/native-floppy/disk-boot-test-manifest.json",
+    "rebuiltForThisReplay": false
+  },
+  "cases": [
+    {
+      "id": 1,
+      "title": "Lotus Turbo Challenge 2",
+      "media": {
+        "path": "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip",
+        "archiveSha256": "297a528803eab78bb0b0a693353f6271387c947171ad71868279235b5a35dfa9",
+        "entry": "Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+        "entryBytes": 901120,
+        "adfSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+        "variant": "The Company crack intro, identified from the native Kickstart capture; findings apply to this disk hash."
+      },
+      "input": null,
+      "status": "bounded-opening-race-verified",
+      "milestones": {
+        "bootBlockEntered": true,
+        "secondStageLoaded": true,
+        "intro": true,
+        "menu": true,
+        "gameplay": true
+      },
+      "replacementReplay": {
+        "frames": 3000,
+        "captureInterval": 100,
+        "cpuMode": "conservative-batch",
+        "finalPc": "000516B2",
+        "finalDmacon": "0000",
+        "finalBplcon0": "0000",
+        "sampledNonSilentAudioFields": 0,
+        "cycle": 426306004,
+        "cpuFingerprint": "0x2DCBB75F92B45BC3",
+        "hardwareFingerprint": "0x620CAFACEDB06D5E",
+        "outputFingerprint": "0x1F5D322734184535",
+        "unsupported": null,
+        "visualObservation": "Black framebuffer at field 3000; no intro.",
+        "repeat": "The recorder replay reproduced the original final JSON snapshot and final fingerprints.",
+        "stage": "before-fix"
+      },
+      "scalarControl": {
+        "frames": 1000,
+        "captureInterval": 25,
+        "result": "Same blank startup failure. All snapshot fields and Chip RAM at field 1000 are byte-for-byte identical to the batch replay at field 1000.",
+        "stage": "before-fix"
+      },
+      "nativeKickstartControl": {
+        "romPath": "C:/Data/ROM/Kickstart_13.rom",
+        "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+        "frames": 3000,
+        "captureInterval": 100,
+        "cpuMode": "conservative-batch",
+        "finalPc": "00073EC6",
+        "finalDmacon": "03FF",
+        "finalBplcon0": "5200",
+        "finalAudioNonzero": true,
+        "outputFingerprint": "0xD0E61E6FFC936BF4",
+        "observation": "Field 3000 visibly shows The Company crack intro and PRESS FIRE, with non-silent PCM. No fire input or gameplay was tested."
+      },
+      "firstBlocker": {
+        "id": "CS-COMPAT-001",
+        "subsystem": "CopperStart bootstrap memory layout / native trackdisk destination validation",
+        "earlyReplay": {
+          "frames": 120,
+          "captureInterval": 1
+        },
+        "evidenceFrame": 68,
+        "control": "00020020",
+        "bootState": 5,
+        "bootStateName": "Executing",
+        "readAttempts": 1,
+        "request": "00027340",
+        "command": 2,
+        "ioError": -4,
+        "ioErrorName": "IOERR_BADADDRESS",
+        "ioActual": 0,
+        "ioLength": "00007600",
+        "ioData": "00060000",
+        "ioOffset": "000D3200",
+        "destinationEndExclusive": "00067600",
+        "observedMemHeaderRanges": [
+          {
+            "lower": "00020020",
+            "upperExclusive": "00058000"
+          },
+          {
+            "lower": "0007A020",
+            "upperExclusive": "00080000"
+          }
+        ],
+        "explanation": "The loader read falls outside both published MemHeader ranges. NativeTrackDiskDevice.ValidBuffer rejects it. BootstrapCore reserves a 128 KiB supervisor-stack range from $58000 to $78000. The loader continues into unloaded RAM; by field 70 PC is zero and repeated exceptions subsequently overwrite bootstrap diagnostics.",
+        "sourceReferences": [
+          "../CopperStart/src/CopperStart.Exec/BootstrapCore.cs:29",
+          "../CopperStart/src/CopperStart.Exec/BootstrapCore.cs:300",
+          "../CopperStart/src/CopperStart.Devices/NativeTrackDiskDevice.cs:150",
+          "../CopperStart/src/CopperStart.Devices/NativeTrackDiskDevice.cs:201"
+        ],
+        "nextStep": "Investigate a general bootstrap/resident memory layout compatible with fixed-address takeover loads, preserving live stack and service ownership. Rebuild and qualify the CopperStart ROM, then repeat this exact disk before moving to title 2.",
+        "resolution": "Resolved by removing allocator-range authorization from trackdisk caller buffers. The first load uses unused reserved space clear of the live stack; no stack relocation was required."
+      },
+      "initialStatus": "blocked-at-loader-read",
+      "initialMilestones": {
+        "bootBlockEntered": true,
+        "secondStageLoaded": false,
+        "intro": false,
+        "menu": false,
+        "gameplay": false
+      },
+      "followup": {
+        "date": "2026-10-15",
+        "fix": "NativeTrackDiskDevice.ValidBuffer now accepts non-null, non-wrapping caller addresses without an Exec MemHeader whitelist. Null/wrap and live device-workspace checks remain. No title-specific behavior or disk patch is introduced.",
+        "sourceFiles": [
+          "../CopperStart/src/CopperStart.Devices/NativeTrackDiskDevice.cs",
+          "../CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeDiskBootTests.cs",
+          "../CopperStart/Docs/NativeDiskBoot.md"
+        ],
+        "newRom": {
+          "path": "artifacts/copperstart-compat-2026-10-15/fixed-rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "codeBytes": 447518,
+          "sha256": "2A671D08D1F4652B72C29789752DA887FA7149D11615E864C1770D72FF67817F",
+          "rebuiltForThisReplay": true,
+          "manifest": "fixed-rom/disk-boot-test-manifest.json"
+        },
+        "compilerInputChangesFromOriginalImage": [
+          {
+            "file": "CopperStart.Devices.dll",
+            "before": "99384C973EB520A09F35D85F26A77E81E13846A2520EAE300A31D279B32CAB2B",
+            "after": "E8DFC5F18A1F45214700619AF6EF3707F6A3E7B4DF2F9D027AA85A9A54005680"
+          }
+        ],
+        "nativeTests": {
+          "passed": 23,
+          "failed": 0,
+          "skipped": 0,
+          "trx": "test-results/fixed-address-read.trx"
+        },
+        "fixedAddressRegression": {
+          "diskSha256": "77762acba92ffe82859e7176d990bdb7c33ce4c6ba9fe787a880921a2c09c97f",
+          "destination": "00060000",
+          "length": 30208,
+          "before": {
+            "error": -4,
+            "actual": 0
+          },
+          "after": {
+            "error": 0,
+            "actual": 30208
+          },
+          "nativeKickstart": {
+            "error": 0,
+            "actual": 30208
+          },
+          "dataComparison": "All 30208 bytes match the original generated disk after the fix and under native Kickstart."
+        },
+        "inputScript": {
+          "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-lotus2.json",
+          "sha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3"
+        },
+        "gameReplays": {
+          "framesEach": 14000,
+          "captureInterval": 200,
+          "modes": [
+            "conservative-batch",
+            "scalar"
+          ],
+          "allCaptureFilesIdentical": true,
+          "identicalCaptureFiles": 355,
+          "cycle": 1989428016,
+          "cpuFingerprint": "0x8B7DF219BF2960F2",
+          "hardwareFingerprint": "0xA0EFAE09F0C1C7A9",
+          "outputFingerprint": "0x4E816355FB4F7E9D",
+          "unsupported": null,
+          "manifests": [
+            "lotus2-fixed-input-batch/run.json",
+            "lotus2-fixed-input-scalar/run.json"
+          ]
+        },
+        "visuallyReviewedMilestones": {
+          "6000": "The Company crack intro, PRESS FIRE and non-silent PCM",
+          "8000": "Lotus Elan SE car screen following fire input",
+          "12000": "Opening race scene with SET, 1st gear and a 70-second timer",
+          "12800": "Car travelling at 35 mph after the fire button is held; score 10020 and timer 54",
+          "14000": "Race view continues after input release; score 27270 and timer 30"
+        },
+        "nativeKickstartInputControl": {
+          "frames": 14000,
+          "inputScriptSha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3",
+          "log": "lotus2-native-input-control.log",
+          "review": "native-input-control-review.json",
+          "result": "Same crack intro, car screen and opening race milestones. Different ROM startup state means cross-ROM PCM/capture byte equality is not an expectation."
+        },
+        "scope": "Verified boot, intro, menu selection, entry into the first race and acceleration/input response during this bounded replay. A complete race, full game, saves, other disk variants and other machine profiles remain unverified."
+      }
+    }
+  ],
+  "syntheticControl": {
+    "path": "../CopperStart/artifacts/native-floppy/CopperStart-SecondStage.adf",
+    "sha256": "f19d1d81feab8d3220ff09c4d04f7f5c80aa4e369a0e5bb6b1ec610467ddad0e",
+    "frames": 1000,
+    "result": "Second stage executed: $910 contains $53544732 (STG2), $908 is zero, $914 equals SysBase $1440. This is synthetic bootstrap coverage, not a real-title pass."
+  },
+  "localEvidenceRoot": "artifacts/copperstart-compat-2026-10-15",
+  "localEvidence": [
+    "recorded-lotus2-batch/run.json",
+    "recorded-lotus2-batch/runner.log",
+    "recorded-lotus2-batch/captures",
+    "lotus2-copperstart.log",
+    "lotus2-copperstart-scalar.log",
+    "lotus2-kickstart13.log",
+    "lotus2-first120.log",
+    "synthetic-second-stage.log",
+    "lotus2-copperstart-3000.png",
+    "lotus2-kickstart13-3000.png",
+    "fixed-rom/disk-boot-test-manifest.json",
+    "test-results/fixed-address-read.trx",
+    "native-validation.log",
+    "compiler-input-changes.json",
+    "fixed-address-before.log",
+    "fixed-address-after.log",
+    "fixed-address-native-control.log",
+    "lotus2-fixed-input-batch/run.json",
+    "lotus2-fixed-input-scalar/run.json",
+    "lotus2-fixed-input-batch/contact.png",
+    "lotus2-native-input-control.log",
+    "native-input-contact.png"
+  ],
+  "validation": {
+    "productionBuild": "dotnet build CopperScreen.slnx -c Release --no-restore: succeeded, zero warnings/errors",
+    "recorder": "Executed end-to-end for 3000 fields; recorded input hashes, binary hashes, command, all 155 capture hashes and bounded private receipts. Compatibility remains manually reviewed.",
+    "engineOrRomSourceChanged": false,
+    "scope": "Initial pre-fix validation. Fresh-ROM follow-up and tests are recorded on case 1."
+  },
+  "limits": [
+    "The original pre-fix replay used the October 13 image; the follow-up recompiles the ROM and passes the 23 native disk-boot/device tests. It does not rerun the complete DOS/console/reader qualification suites.",
+    "Only the supplied Lotus 2 variant and bounded opening-race interval are qualified. Complete races, game completion, saves and disk swaps remain unverified.",
+    "Native Kickstart and the original second-stage disk are controls, not successful CopperStart real-game replays.",
+    "Captures, ROMs, media and run manifests remain ignored local artifacts; only this evidence summary and the recorder are tracked.",
+    "Diagnostic FPS and allocation totals are not acceptance measurements. No historical performance evidence is replaced."
+  ],
+  "precommitValidation": {
+    "focusedPortableTests": {
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0
+    },
+    "broaderSuite": "Attempt reported failures and was stopped before completion; no full-suite pass is claimed.",
+    "cleanHeadComparison": {
+      "commit": "08303e2",
+      "cases": 47,
+      "passed": 40,
+      "failed": 7,
+      "outcomesIdentical": true,
+      "trx": [
+        "test-results/precommit-baseline-known-failures.trx",
+        "test-results/precommit-current-known-failures.trx"
+      ]
+    }
+  }
+}

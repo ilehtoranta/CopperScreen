@@ -150,7 +150,8 @@ internal sealed class LightweightCopper
         if (!_beamStopped && _dmaEnabled) ActivateAfter(cycle);
     }
 
-    internal void Step(long cycle, LightweightA500Machine machine)
+    internal void Step<TPath>(long cycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
     {
         System.Diagnostics.Debug.Assert(
             cycle == NextCycle,
@@ -168,7 +169,7 @@ internal sealed class LightweightCopper
         }
 
         var horizontal = machine.BeamColorClock;
-        var phase = ClassifyInput(horizontal, machine.ColorClocksPerLine);
+        var phase = ClassifyInput(horizontal, TPath.EnhancedDisplay ? machine.ColorClocksPerLine : 227);
         if (phase == CopperInputPhase.Normal)
         {
             AdvanceControlInput(cycle, machine);
@@ -184,6 +185,10 @@ internal sealed class LightweightCopper
                 ? cycle + LightweightClock.CpuCyclesPerColorClock
                 : long.MaxValue;
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool OwnsPendingOutputSlot(long cycle)
+        => _pendingOutputCycle == cycle;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool OwnsOutputSlot(long cycle)

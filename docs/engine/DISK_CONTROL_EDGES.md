@@ -5,8 +5,9 @@ DMA status and zero-length WORDSYNC read completion in the PAL OCS/68000 model.
 It does not complete the disk-controller timing audit.
 
 The later [live WORDSYNC correction](DISK_LIVE_WORDSYNC.md) supports toggles after
-the initial sync gate has opened. The first-sync-wait case remains unsupported;
-the original validation and performance evidence below is preserved.
+the initial sync gate has opened. [Initial-wait WORDSYNC control](DISK_INITIAL_WORDSYNC.md)
+adds bounded support for toggles before that gate opens. The original validation
+and performance evidence below is preserved, including its then-open scope gaps.
 
 ## Control changes
 

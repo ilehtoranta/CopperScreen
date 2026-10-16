@@ -1,12 +1,12 @@
 namespace CopperMod.Amiga.Lightweight;
 
-// CPU-only, 16-bit Zorro II memory. Agnus DMA never sees this storage.
+// CPU-only virtual Zorro II/III memory. Agnus DMA never sees this storage.
 internal sealed class LightweightFastRam : AutoconfigBoard
 {
     internal byte[] Memory { get; }
 
     internal static bool IsSupportedSize(int bytes)
-        => bytes is 0 or 524288 or 1048576 or 2097152 or 4194304 or 8388608;
+        => bytes == 0 || bytes >= 524288 && bytes <= 1073741824 && (bytes & (bytes - 1)) == 0;
 
     internal LightweightFastRam(int bytes) : base(CreateIdentity(bytes))
         => Memory = new byte[bytes];
@@ -14,6 +14,12 @@ internal sealed class LightweightFastRam : AutoconfigBoard
     private static AutoconfigIdentity CreateIdentity(int bytes)
     {
         if (bytes == 0 || !IsSupportedSize(bytes)) throw new ArgumentOutOfRangeException(nameof(bytes));
+        if (bytes > 8388608)
+        {
+            // Commodore extended Zorro III size table: code 0 = 16 MiB, 6 = 1 GiB.
+            var code = System.Numerics.BitOperations.Log2((uint)bytes) - 24;
+            return new(AutoconfigBusKind.ZorroIII, (byte)(0xA0 | code), 0x49, 0x30, 0x07DB, 0, 0, bytes);
+        }
         // Virtual Copper expansion identity; RAM-list and 8 MiB-space flags.
         var identity = AutoconfigIdentity.CreateIoBoard(bytes, 0x07DB, 0x49, 0);
         return identity with { Type = (byte)(identity.Type | 0x20), Flags = 0x80 };
@@ -24,6 +30,12 @@ internal sealed class LightweightFastRam : AutoconfigBoard
     protected override void ValidateConfigurationBase(uint address)
     {
         var size = (uint)Memory.Length;
+        if (Identity.BusKind == AutoconfigBusKind.ZorroIII)
+        {
+            if (address < 0x10000000 || (ulong)address + size > 0x80000000 || (address & 0xFFFFFF) != 0)
+                throw new ArgumentOutOfRangeException(nameof(address), address, "32-bit Fast RAM must fit below $80000000 on a 16 MiB Autoconfig boundary.");
+            return;
+        }
         if (address < 0x200000 || (ulong)address + size > 0xA00000 || (address & 0xFFFF) != 0)
             throw new ArgumentOutOfRangeException(nameof(address), address, "Fast RAM must fit in Zorro II memory space at a 64 KiB Autoconfig address.");
     }
@@ -48,7 +60,7 @@ public sealed partial class LightweightA500Machine
     private readonly LightweightFastRam? _fastRam;
     private readonly AutoconfigChain? _autoconfig;
 
-    /// <summary>Installed CPU-only Zorro II RAM. Read on the execution owner thread.</summary>
+    /// <summary>Installed CPU-only Zorro II/III RAM. Read on the execution owner thread.</summary>
     public ReadOnlyMemory<byte> FastRam => _fastRam?.Memory ?? ReadOnlyMemory<byte>.Empty;
     /// <summary>Guest-assigned address, or null until Autoconfig completes.</summary>
     public uint? FastRamBase => _fastRam is { IsConfigured: true } ram ? ram.ConfiguredBase : null;
@@ -59,6 +71,20 @@ public sealed partial class LightweightA500Machine
                 ? value : (byte)255;
 
     internal bool TryWriteExpansionByte(uint address, byte value)
-        => _autoconfig is { } chain &&
+    {
+        var oldBase = FastRamBase;
+        var written = _autoconfig is { } chain &&
             (chain.TryWriteByte(address, value) || chain.TryWriteConfiguredByte(address, value));
+        if (oldBase != FastRamBase) InvalidateCpuMemoryMap();
+        else if (written && _fastRam?.ContainsRange(address, 1) == true) NotifyJitRamWrite(address, 1);
+        return written;
+    }
+
+    internal bool TryWriteExpansionWord(uint address, ushort value)
+    {
+        var oldBase = FastRamBase;
+        var written = _autoconfig?.TryWriteWord(address, value) == true;
+        if (oldBase != FastRamBase) InvalidateCpuMemoryMap();
+        return written;
+    }
 }
