@@ -228,3 +228,8 @@ extra cropping or image retouching. The full image and thumbnail were inspected;
 The caption still describes attract mode. Separate controlled opening-level
 checks do not turn this particular picture into a controlled-play capture or
 establish full-game compatibility. Publishing remains the main-branch Pages workflow.
+
+The [clean-main integration](engine/SUPERFROG_MAIN_2026-10-16.json) repeats the
+attract and opening-level checks with main's published Copper68k 1.5.1 pin.
+It produces the identical field-7,320 source BMP above, verifying the replacement
+for that integration without changing the earlier development-build attribution.
