@@ -33,9 +33,12 @@ Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
 Copper68k's published baseline is [version `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3).
 This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate
-from the ignored `artifacts/qualified-cpu-20261011/feed` directory. Put the frozen
-package identified by the qualification record there before restoring this
-worktree; it is not yet available from NuGet.org. Rebuilt package content needs
+from the ignored `artifacts/qualified-cpu-20261011/feed` directory. Run
+`./scripts/prepare-qualified-cpu.ps1` before restoring to fetch the exact frozen
+package from its CopperMod development prerelease and verify its qualification
+and lock hashes. That prerelease must be explicitly approved and uploaded before
+the download path or CI is usable. An existing local package can instead be supplied
+with `-PackagePath <path-to-nupkg>`. It is not available from NuGet.org. Rebuilt package content needs
 a new development version and regenerated locks. No sibling project reference
 is used. See the
 [candidate qualification record](docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md) and
