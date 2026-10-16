@@ -198,3 +198,33 @@ full-size PNGs were visually inspected. Gallery generation checks unique titles,
 asset existence, PNG dimensions, thumbnail proportions and generated HTML;
 JavaScript syntax and local links were also checked. Earlier provenance remains
 historical evidence.
+
+## Superfrog viewport correction — 2026-10-16
+
+The September Superfrog picture contained a repeated lower playfield. The
+[viewport investigation](engine/SUPERFROG_VIEWPORT_2026-10-16.md) reproduces it
+with both native Kickstart and CopperStart and corrects a late Copper WAIT
+comparison after horizontal-counter wrap. The earlier capture and its engine
+attribution above remain historical evidence.
+
+The replacement uses the same scene from a new no-input CopperStart attract
+replay. Its exact inputs and test/capture results are in the
+[machine-readable record](engine/SUPERFROG_VIEWPORT_2026-10-16.json):
+
+| Property | Identity |
+| --- | --- |
+| Raw source BMP relative to `artifacts/` | `superfrog-viewport-2026-10-16/candidate-copperstart/captures/frame-007320.bmp` |
+| Raw source BMP SHA-256 | `A4063A8C5744392A96749AB306358EF0526AB0FFD2D89B12FB659689AC8B2A9A` |
+| Lightweight engine SHA-256 | `C7B6C5EDB7C2F20CBE036A5EA877C3390D992743AFD0AE9CBB92D1320188848C` |
+| CopperStart qualification selected for the replay | `diskboot-2026-10-16-dev.3` |
+| ROM SHA-256 | `1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444` |
+
+Reproduce only this replacement with
+`scripts/prepare-website-screenshots.ps1 -CaptureRoot artifacts -Names superfrog-attract`.
+The existing full PAL viewport and proportional thumbnail transform are
+unchanged; the ground continues through the corrected lower region without
+extra cropping or image retouching. The full image and thumbnail were inspected;
+`node scripts/build-website.mjs --check` validates all 18 gallery entries.
+The caption still describes attract mode. Separate controlled opening-level
+checks do not turn this particular picture into a controlled-play capture or
+establish full-game compatibility. Publishing remains the main-branch Pages workflow.

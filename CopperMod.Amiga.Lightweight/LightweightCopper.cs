@@ -352,8 +352,14 @@ internal sealed class LightweightCopper
 
         // VP7 is always compared. IR2 bit 15 controls BFD, not its mask.
         var mask = (ushort)(0x8000 | (secondWord & 0x7FFE));
+        // The nominal counter wraps before the physical line boundary, just
+        // as it does for Copper input opportunities. Do not compare a late
+        // WAIT/SKIP against an impossible HP beyond the fitted line length.
+        var horizontal = machine.BeamColorClock + 3;
+        if (horizontal >= machine.ColorClocksPerLine)
+            horizontal %= machine.ColorClocksPerLine;
         var beam = (ushort)(((machine.BeamLine & 0xFF) << 8) |
-            ((machine.BeamColorClock + 3) & 0x00FE));
+            (horizontal & 0x00FE));
         var target = (ushort)(firstWord & mask);
         var observed = (ushort)(beam & mask);
         return observed >= target;
