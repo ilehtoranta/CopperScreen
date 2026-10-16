@@ -39,9 +39,9 @@ internal static class ExtendedAdfDecoder
         }
 
         var trackCount = BigEndian.ReadUInt16(image, 10, "track count");
-        if (trackCount != AmigaDiskGeometry.TrackCount)
+        if (trackCount < AmigaDiskGeometry.TrackCount || trackCount > 168 || (trackCount & 1) != 0)
         {
-            throw Error($"Only standard DD UAE-1ADF images with {AmigaDiskGeometry.TrackCount} tracks are supported.");
+            throw Error("DD UAE-1ADF images require 80–84 complete cylinders (160–168 tracks).");
         }
 
         var tableLength = HeaderLength + (trackCount * TrackHeaderLength);
@@ -100,14 +100,7 @@ internal static class ExtendedAdfDecoder
                     throw Error($"Track {track} has an invalid normal-track bit length.");
                 }
             }
-            else if (type == 1)
-            {
-                if (trackBytes == 0 || trackBits == 0)
-                {
-                    throw Error($"Raw MFM track {track} must have non-empty data and a positive bit length.");
-                }
-            }
-            else
+            else if (type != 1)
             {
                 throw Error($"Unsupported UAE-1ADF track type {type} on track {track}.");
             }
@@ -131,27 +124,20 @@ internal static class ExtendedAdfDecoder
 
     private static AmigaEncodedTrack[] DecodeTracks(ReadOnlySpan<byte> image, TrackEntry[] entries)
     {
-        var sectorData = new byte[AmigaDiskGeometry.StandardAdfSize];
-        for (var track = 0; track < entries.Length; track++)
-        {
-            var entry = entries[track];
-            if (entry.Type == 0)
-            {
-                image.Slice(entry.Offset, entry.ByteLength).CopyTo(
-                    sectorData.AsSpan(track * NormalTrackDataLength, NormalTrackDataLength));
-            }
-        }
-
-        var sectorMedia = new AdfDiskMedia(sectorData);
         var tracks = new AmigaEncodedTrack[entries.Length];
         for (var track = 0; track < entries.Length; track++)
         {
             var entry = entries[track];
             if (entry.Type == 0)
             {
-                var cylinder = track / AmigaDiskGeometry.HeadCount;
-                var head = track % AmigaDiskGeometry.HeadCount;
-                tracks[track] = ToEncodedTrack(sectorMedia.ReadTrack(cylinder, head));
+                tracks[track] = AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.EncodeTrack(
+                    image.Slice(entry.Offset, entry.ByteLength), track));
+            }
+            else if (entry.BitLength == 0)
+            {
+                // UAE-1ADF uses a zero raw bit length for an unformatted track,
+                // including entries with reserved backing space.
+                tracks[track] = AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack());
             }
             else
             {
@@ -165,11 +151,6 @@ internal static class ExtendedAdfDecoder
 
         return tracks;
     }
-
-    private static AmigaEncodedTrack ToEncodedTrack(IAmigaTrack track)
-        => track is AmigaEncodedTrack encoded
-            ? encoded
-            : new AmigaEncodedTrack(track.EncodedData, track.BitLength, track.StartBit, track.Features, track.Regions);
 
     private static bool HasMagic(ReadOnlySpan<byte> image, byte b0, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7)
         => image.Length >= MagicLength &&
