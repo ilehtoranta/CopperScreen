@@ -1,0 +1,870 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "protocol": "copperstart-native-compatibility-v1",
+  "caseId": 4,
+  "title": "Super Cars II",
+  "variant": "1991 Gremlin, Flashtro disk 1",
+  "status": "bounded-first-race-verified",
+  "previousCase": "COPPERSTART_DESERT_DREAM_2026-10-16.json",
+  "engineCommit": "643bfecb70b21d4607076a7fdfafe4aa6229988f",
+  "engine": "CopperMod.Amiga.Lightweight",
+  "cpuPackage": "1.5.4-qualified-dev.1",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "3aa4881b39f1159e9b166a1a63477979b41846a6ccd753572e2b7bedef0e3af2",
+    "CopperMod.Amiga.Lightweight.dll": "2bc74f12165760ce5d4540e14b11350b552e81da19c8bc98ca57623eece90083",
+    "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+    "CopperDisk.dll": "8533f61ec7d385508bdf8bc220f78143fa6f8b86a47a885849f3259de36ad443"
+  },
+  "copperStartSourceBuild": {
+    "commit": "33eef25141c4f92558b2ea6e4dae3d89c5be040c",
+    "includesCallerDataAudit": "2645cb5d9504bfd3427d31c53baffcce416f7fba",
+    "sourceTreeCleanAtBuild": true,
+    "trackedSourceFiles": 538,
+    "sourceManifest": "source-build.json",
+    "sourceManifestSha256": "ece5defc74df9cacfef0b385a0f09325df2f695c19c5b492bf7cd8f2e784a1a9",
+    "buildCommand": "dotnet build tests/CopperStart.Floppy.Native.Tests/CopperStart.Floppy.Native.Tests.csproj -c Release --artifacts-path <case>/native-isolated",
+    "buildExitCode": 0,
+    "buildWarnings": 1,
+    "buildErrors": 0,
+    "buildWarning": "Existing CS8602 in CopperSharp.Compiler/Backend/M68kSpillAndCopy.cs:74.",
+    "note": "Fresh full managed build at clean CopperStart commit 33eef25, including audit 2645cb5 and physical memory/checksum fixes. Frozen isolated producer outputs are used for ROM compilation and native DOS regression. Concurrent source edits after the build are excluded. Compiler/SDK dependencies are the local development inputs identified by exact DLL hashes; no package was published."
+  },
+  "replacementRom": {
+    "path": "audited-rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "ced694c1acc8d1ffe13e6c5a755741da11cf9aa3b12eb6ab95571ef72cad1e83",
+    "sourceBuilt": true,
+    "diagnosticPatches": false,
+    "producerManifest": "audited-rom/disk-boot-test-manifest.json",
+    "producerManifestSha256": "54ab6d743c1e340cc21df6b125b47a02babda1ee374556960f856c8ef9ccd8ac",
+    "producer": {
+      "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+      "romBytes": 524288,
+      "codeBytes": 447342,
+      "sha256": "CED694C1ACC8D1FFE13E6C5A755741DA11CF9AA3B12EB6AB95571EF72CAD1E83",
+      "inputs": [
+        {
+          "file": "CopperStart-System.dll",
+          "sha256": "E7A342EF47FB3B17296BBB5FDFD27917549A3606EED38084E34C309DFA95A908"
+        },
+        {
+          "file": "CopperStart.Devices.dll",
+          "sha256": "52E6FD34052AFCAB165BE1FAF4BB6D4C22265722403C5FE688008CFB0F7A3DCE"
+        },
+        {
+          "file": "CopperStart.Exec.dll",
+          "sha256": "F5A14A4A7A3F7D8CB9738D2D5A070BAF77363DE922BC4DC99422EEA52C99C4D3"
+        },
+        {
+          "file": "CopperStart.Dos.dll",
+          "sha256": "18E7CD626F5876448BB4675495DD680953A4D4DF16409638A5D0A7EBCBCBF6D0"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "EDE3ADB9CD5E531A16D395404E72FFB2520810D0DB297559C62E435B124AF93F"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "85F39525545BD6C0169354FDC4CCF5021C7A5A0C1022FFB000041E67EEFF1B64"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "2E1AD64527464EFD18B5F1040F942F6703475B5B44F620E1C475012826537842"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "A693F2ED05E1E86525DA9892F529A13C54708BB79F69B2D3D8FB5311AFBDED0A"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "5E8CAF118DCB7B300052FD6DB41D89EAF7D8A36B79EC54CA9BD1BB94890661F3"
+        },
+        {
+          "file": "Copper68k.dll",
+          "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+        }
+      ]
+    },
+    "managedBuildInputs": [
+      {
+        "file": "Copper68k.dll",
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "previousSha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "changed": false
+      },
+      {
+        "file": "CopperDisk.dll",
+        "sha256": "e917ff2154099264be3f248bc98f1a23216d1b88b6273c073f67256320fe3ac7",
+        "previousSha256": "cc445b5cc499440b603f031f5628d7f2fce2869156a0ee5241017365771d1161",
+        "changed": true
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "5e8caf118dcb7b300052fd6db41d89eaf7d8a36b79ec54ca9bd1bb94890661f3",
+        "previousSha256": "ccdb3ad3c566c67fd58213a7dd80a147e522beb622f98357206d6e2519afdd25",
+        "changed": true
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "2e1ad64527464efd18b5f1040f942f6703475b5b44f620e1c475012826537842",
+        "previousSha256": "c344a8c13d14204ad77711f0e6d5bfcab591fb642bb4f87af2c1c87610c3b5cc",
+        "changed": true
+      },
+      {
+        "file": "CopperSharp.Runtime.AmigaPal.dll",
+        "sha256": "789267aeca6609e700508ec86b71bf4f3a990c5cb9ec695f53a9496180b6d10c",
+        "previousSha256": "2de693574cda31f46e2bfe5116f012e8c9836f15db0f880c69a5deab28440632",
+        "changed": true
+      },
+      {
+        "file": "CopperSharp.Runtime.Managed.dll",
+        "sha256": "6e340a4fa21b7bb71b18b338b8b85cb9b5105d5ebaf4271d7eef630a4763f217",
+        "previousSha256": "3648f3de19dd79f2495bb29816a7866d05df2398551681fe999fdc7cc917e80c",
+        "changed": true
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "ede3adb9cd5e531a16d395404e72ffb2520810d0db297559c62e435b124af93f",
+        "previousSha256": "41a66a612b5f2712ca4eb0e8bb6af9b1ef49c6ced477ca57fd03332b07708290",
+        "changed": true
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "85f39525545bd6c0169354fdc4ccf5021c7a5a0c1022ffb000041e67eeff1b64",
+        "previousSha256": "67ff441bdf9aac15129d85f44d4f89698489566dc1d3607adad70a4cabdc3980",
+        "changed": true
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "a693f2ed05e1e86525da9892f529a13c54708bb79f69b2d3d8fb5311afbded0a",
+        "previousSha256": "c9b8073a4f8557d899477ca28ac203d067eccfe95abf02b81bd5f0ce437f3be1",
+        "changed": true
+      },
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "e7a342ef47fb3b17296bbb5fdfd27917549a3606eed38084e34c309dfa95a908",
+        "previousSha256": "1221d845998245da82a75c16c855372c52d5cd74ff1be1ff47b9d4a1eb099a96",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "52e6fd34052afcab165be1faf4bb6d4c22265722403c5fe688008cfb0f7a3dce",
+        "previousSha256": "49c80b0ba21700b1ff5313392e0b97c8418b24f6003976469f91b6caf42bba0e",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "18e7cd626f5876448bb4675495dd680953a4d4df16409638a5d0a7ebcbcbf6d0",
+        "previousSha256": "ae41ca77fbc4c7620276d46bd28cbf32a1bc51d05f80e421cd2beb2442864b48",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "f5a14a4a7a3f7d8cb9738d2d5a070baf77363de922bc4dc99422eea52c99c4d3",
+        "previousSha256": "a36c842c382504be7d508e0366de313af0481bd0328301b3cb636a5418be019a",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Expansion.dll",
+        "sha256": "b9b585edd62feb28b7f656211566aafd3b3795e7a86257c4a0a47d14841c654b",
+        "previousSha256": "3a0ad7e5f1b930a4b312518b90ea6e55bafbb297e96dc4d6eff74bd191b5b111",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Floppy.Native.Tests.dll",
+        "sha256": "780fb0b08cf04903874c5600f0aec033a6b502e8340f25f75683510f002c4fb2",
+        "previousSha256": "a74e70a1bd476cf8e7e9126770e27ee3cce756a306d6f454704d759850b6433e",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "17e7d45db8e778596cd1f90bb25737ea51d3af643e14d995cb4362196dd1abc2",
+        "previousSha256": "e4e08e9d5b0ffe4b6174d35d43c13e1a8df3ad94f28acdba747a49ed4b644104",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Intuition.dll",
+        "sha256": "0bf37aaa320f04112325d586029158a3a5851eb92841e7c8647721b7fd791eae",
+        "previousSha256": "51112493a6323db321ab54eee3883bbba3018326a49b168ab7253d8aec4606be",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "38dc4ccf75301fd13ae19fb5e803f983d5a1a7bda86440c37add7235e5d744b9",
+        "previousSha256": "f6741aa101d977c1743d024657839c0c462ad28d55d61ccb1d248dc332d348f1",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Runtime.dll",
+        "sha256": "900c42a6b5f31a6437f76d44ada9b702e08464a79ca5f7caeea83c82fba06ea4",
+        "previousSha256": "bf60fd80a147f56b6744468852b92a5dc41c8f2ebe3f2addf79b090231fb1236",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "9ce9dabb91b9b9a9a400a67011fc383397ab3fe254f07fc32b77a08b4606d962",
+        "previousSha256": "ac8bc828638e04fb0cd4d77959dfb2cac0a3daf637869ea738c418ea6f0b4141",
+        "changed": true
+      },
+      {
+        "file": "CopperStart.Workbench.dll",
+        "sha256": "8534d9b6582efd99c30898bfc2c491f307e339d090f211dae9d498e9ad526277",
+        "previousSha256": "3a4969a391d6dcc5042a9841edcba1115cd7cb6d894ed79ea429aa2211345f3d",
+        "changed": true
+      }
+    ],
+    "mapSha256": "b3fb87e9ca133dd0824f07c5c02f4dd91563c0d81315745fb205cc1d6ec2c1a2",
+    "compilerSummary": [
+      "NATIVE exceptions=Yolo memory=None exception-regions=0 fatal-machine-fault-sites=0 runtime-features=0 runtime-helpers=0 external-native-targets=0 reachable-assemblies=6",
+      "METRICS artifact-bytes=524288 code-bytes=447342 rom-bytes=447342 rom-code-bytes=443674 rom-rodata-bytes=3668 initialized-ram-bytes=0 bss-bytes=0 symbols=3134 relocations=5233 loops=593 framework-features=0 managed-allocation-sites=0",
+      "PEEPHOLE mode=FixedPoint analyzed-bytes=116900546 batches=3751 rewrites=46232 rounds=11336 method-ranges=2941 converged=yes terminal-groups=1079 terminal-merged-copies=2389 terminal-inverted-branches=60 terminal-trampolines=2329 terminal-gross-bytes-removed=17000 terminal-branch-bytes-added=9788 terminal-net-bytes-saved=7188 return-condition-targets=126 return-condition-tests-removed=1125 return-condition-tests-inserted=267 return-condition-net-bytes-saved=1716 identical-method-groups=0 identical-method-thunks=0 identical-method-gross-bytes-removed=0 identical-method-jump-bytes-added=0 identical-method-net-bytes-saved=0"
+    ],
+    "reachableAssemblies": [
+      "CopperSharp.Sdk.Amiga 0.1.0.0 pkt=- mvid=ca9b4b69-beb0-4d30-99bf-7e2d8d5fc6e0 sha256=ede3adb9cd5e531a16d395404e72ffb2520810d0db297559c62e435b124af93f",
+      "CopperSharp.Sdk.Amiga.Support 0.1.0.0 pkt=- mvid=4640949a-8327-40cc-9f07-f49d7191ffdb sha256=85f39525545bd6c0169354fdc4ccf5021c7a5a0c1022ffb000041e67eeff1b64",
+      "CopperStart-System 1.0.0.0 pkt=- mvid=83284d72-40e1-4684-9b66-6b9fafab3df3 sha256=e7a342ef47fb3b17296bbb5fdfd27917549a3606eed38084e34c309dfa95a908",
+      "CopperStart.Devices 1.0.0.0 pkt=- mvid=d96185c6-1b53-4244-a0f1-af81477f9a74 sha256=52e6fd34052afcab165be1faf4bb6d4c22265722403c5fe688008cfb0f7a3dce",
+      "CopperStart.Dos 1.0.0.0 pkt=- mvid=f359e215-75ba-4b56-a0fa-e6bb5dc16614 sha256=18e7cd626f5876448bb4675495dd680953a4d4df16409638a5d0a7ebcbcbf6d0",
+      "CopperStart.Exec 1.0.0.0 pkt=- mvid=ee777b6b-5488-4609-80eb-ae4dac0a2003 sha256=f5a14a4a7a3f7d8cb9738d2d5a070baf77363de922bc4dc99422eea52c99c4d3"
+    ],
+    "reachabilityNote": "The native bootstrap links its Exec/Devices/DOS graph. Separate Utility, Icon, Layers and retained-host audit paths have the component/compiled-root evidence above; their inclusion in the source build is not a claim that this game exercises them."
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\OK\\Super Cars II (1991)(Gremlin)(Disk 1 of 2)[cr Flashtro].zip",
+    "sha256": "35cff77ee2eb63220aeea10121e91f6bb9b3ded2661a311f0b2ca62bba4f67ce",
+    "entry": "Super Cars II (1991)(Gremlin)(Disk 1 of 2)[cr Flashtro].adf",
+    "entryBytes": 901120,
+    "entrySha256": "4274349e02ea093579e1c5ac91a58bee0109cbba33aaef2dc57c5aac7a7e4bd6"
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-supercars2.json",
+    "sha256": "8aa541b76b98d3ac26e1ecdb9bf63c99ad611c0a092e3696c27f07d62ea9fb75",
+    "media": []
+  },
+  "inputEvents": [
+    {
+      "frame": 3000,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 3020
+    },
+    {
+      "frame": 5000,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 5020
+    },
+    {
+      "frame": 12200,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 12220
+    },
+    {
+      "frame": 14500,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 14520
+    },
+    {
+      "frame": 16000,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 16020
+    },
+    {
+      "frame": 17500,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 17900,
+      "joystickPort1": 24
+    },
+    {
+      "frame": 17960,
+      "joystickPort1": 16
+    },
+    {
+      "frame": 18500
+    }
+  ],
+  "compatibilityFixes": [],
+  "finding": "No additional compatibility defect was demonstrated in this bounded first-race run. The unmodified fresh audited ROM is the qualified result; no title-specific bypass or new defensive check was added.",
+  "callerDataAuditRecheck": {
+    "passed": 89,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/caller-audit-recheck.trx",
+    "sha256": "d77db80303ef1383f24990df76a14dacd4f03da30a4fc23aa810599a0900f68f",
+    "semanticCases": 82,
+    "compiledMc68000Cases": 7,
+    "filterSha256": "f3b8ad5548587e4208309d289623cf495fafbac8b2ad22108741c55eab8fbbc8",
+    "note": "The prior audit's exact selected test names were rerun with --no-build. This is separate component coverage; the frozen full-ROM producer is identified independently below."
+  },
+  "nativeBootTests": {
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/audited-native-boot.trx",
+    "sha256": "d293b18b382d8285855cf2bae565fd76b377bf96af4dd19cac1f91f3d4e5ff75"
+  },
+  "nativeDosScriptConsoleRegression": {
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "test-results/audited-dos-console.trx",
+    "sha256": "c2c100c7b2be7e99debd4eab770c8f91d145afaa79f705e4a007e6a8fe1816e2"
+  },
+  "bootDefaultsControl": {
+    "generator": "scripts/probes/CopperStart/boot_defaults.py",
+    "generatorOptions": [
+      "--memory-limits"
+    ],
+    "diskSha256": "323590b581e05ee3492ad1b91beabdab10be9a92de5173f4cef8b0c21d400fa3",
+    "audited": {
+      "manifest": "defaults-audited/run.json",
+      "manifestSha256": "f29c62dc347928e17d9dc8b2e0961d03d940c26695c332ec5c988a34253575cd",
+      "marker": "54455354",
+      "maxLocMem": "00080000",
+      "maxExtMem": "00C80000",
+      "rawChecksumSum16": "FFFF",
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconR": "1100"
+    },
+    "auditedWithoutSlowRam": {
+      "manifest": "defaults-audited-no-slow/run.json",
+      "manifestSha256": "6bf57545a48042bcf2f62ca1b061687dbf8d3955fb013f3892937087947e3ed8",
+      "marker": "54455354",
+      "maxLocMem": "00080000",
+      "maxExtMem": "00000000",
+      "rawChecksumSum16": "FFFF",
+      "chipUpper": "00080000",
+      "ciaBDdrb": "FF",
+      "adkconR": "1100"
+    },
+    "nativeReference": "COPPERSTART_DESERT_DREAM_2026-10-16.json:bootDefaultsControl",
+    "note": "Current probe reruns preserve the preceding physical-memory, DDRB, MFM and checksum fixes. The paired native controls are retained in case 3; they were not rerun for this probe here. Different no-slow-RAM allocator reservations remain disclosed there."
+  },
+  "replays": [
+    {
+      "manifest": "control-native/run.json",
+      "manifestSha256": "8fd342956d6f8b1665d1585930264d2ac1f79af250bd81cc97e83a36554bdd34",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "frames": 19000,
+      "captureInterval": 200,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "19000",
+        "completed": "19000",
+        "fps": "185,64",
+        "cycle": "2699806028",
+        "cpu": "0x9002A2432C9186D4",
+        "hardware": "0x3BE28A07F2BE3C6E",
+        "output": "0x9FAA8E3CE3254FF4",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "52862392",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 480,
+      "sampledNonSilentFields": 87,
+      "lastPc": "000756BA"
+    },
+    {
+      "manifest": "main-batch/run.json",
+      "manifestSha256": "79d1ee36e216703ba15b18d7eb3d30012d12296c6ce44a7165dbbe37c19abb7d",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-supercars2-2026-10-16\\audited-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ced694c1acc8d1ffe13e6c5a755741da11cf9aa3b12eb6ab95571ef72cad1e83"
+      },
+      "frames": 19000,
+      "captureInterval": 200,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "19000",
+        "completed": "19000",
+        "fps": "128,79",
+        "cycle": "2699938000",
+        "cpu": "0xF6E7F8252B93C96F",
+        "hardware": "0x476AF802FC63ECBB",
+        "output": "0xD50A45F1A71BE842",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "52877864",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 480,
+      "sampledNonSilentFields": 87,
+      "lastPc": "000756EC"
+    },
+    {
+      "manifest": "main-scalar/run.json",
+      "manifestSha256": "9aac9b3d80ceb485158b38ce508322dd28b8af662dccefea6011009cef220fae",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-supercars2-2026-10-16\\audited-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ced694c1acc8d1ffe13e6c5a755741da11cf9aa3b12eb6ab95571ef72cad1e83"
+      },
+      "frames": 19000,
+      "captureInterval": 200,
+      "cpuMode": "scalar",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "19000",
+        "completed": "19000",
+        "fps": "131,90",
+        "cycle": "2699938000",
+        "cpu": "0xF6E7F8252B93C96F",
+        "hardware": "0x476AF802FC63ECBB",
+        "output": "0xD50A45F1A71BE842",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "52867976",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 480,
+      "sampledNonSilentFields": 87,
+      "lastPc": "000756EC"
+    },
+    {
+      "manifest": "lotus-regression/run.json",
+      "manifestSha256": "0b6919e281aa7e88673f5c10d2ef17adfab5158f81df356ed7b7187ecf102851",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-supercars2-2026-10-16\\audited-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ced694c1acc8d1ffe13e6c5a755741da11cf9aa3b12eb6ab95571ef72cad1e83"
+      },
+      "frames": 14000,
+      "captureInterval": 200,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "126,98",
+        "cycle": "1989428016",
+        "cpu": "0x8B7DF219BF2960F2",
+        "hardware": "0xA0EFAE09F0C1C7A9",
+        "output": "0x4E816355FB4F7E9D",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39349648",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "sampledNonSilentFields": 61,
+      "lastPc": "0007A112"
+    },
+    {
+      "manifest": "arte-regression/run.json",
+      "manifestSha256": "0f4791d56d8b2a39757b26d0504c3e11eae8ebc185aca4c8e99d9b1732640418",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-supercars2-2026-10-16\\audited-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ced694c1acc8d1ffe13e6c5a755741da11cf9aa3b12eb6ab95571ef72cad1e83"
+      },
+      "frames": 40000,
+      "captureInterval": 400,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "40000",
+        "completed": "40000",
+        "fps": "137,83",
+        "cycle": "5684080016",
+        "cpu": "0x0975C364A85C3B36",
+        "hardware": "0x72E91B9DFD082EDB",
+        "output": "0x204553FC6112F4B4",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "55645416",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 505,
+      "sampledNonSilentFields": 90,
+      "lastPc": "00C0224E"
+    },
+    {
+      "manifest": "desert-dream-regression/run.json",
+      "manifestSha256": "dd8c6c36604d9bca9f398ef40fb635446618e279f1db81f34c9ce0ce6b8c5e62",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-supercars2-2026-10-16\\audited-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "ced694c1acc8d1ffe13e6c5a755741da11cf9aa3b12eb6ab95571ef72cad1e83"
+      },
+      "frames": 72000,
+      "captureInterval": 1000,
+      "cpuMode": "conservative-batch",
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "72000",
+        "completed": "72000",
+        "fps": "176,56",
+        "cycle": "10225684436",
+        "cpu": "0x445AF57628F30E81",
+        "hardware": "0xF1225AE9A02ACE21",
+        "output": "0x73913C5E3173704A",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "allocated": "43379184",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 365,
+      "sampledNonSilentFields": 61,
+      "lastPc": "00040136"
+    }
+  ],
+  "batchScalarParity": {
+    "comparedFiles": 480,
+    "identicalFiles": 480,
+    "differences": []
+  },
+  "visualMilestones": [
+    {
+      "replay": "control-native",
+      "method": "Manual review of recorded native output images and the input timeline.",
+      "milestones": [
+        {
+          "frame": 16000,
+          "observation": "Game options: Easy difficulty, one player, Fire accelerates.",
+          "bmp": "control-native/captures/frame-016000.bmp",
+          "sha256": "238e6fa5da8c3af25d5504562f4e0bec9ab71da3149d475ba65b4182f8f70ee8"
+        },
+        {
+          "frame": 16800,
+          "observation": "Easy level race 1 briefing; five laps.",
+          "bmp": "control-native/captures/frame-016800.bmp",
+          "sha256": "9f8eb6f4176dee4327a3f516cb59cb86529adedb48119e75d27f577a43e8a7bb"
+        },
+        {
+          "frame": 17400,
+          "observation": "Race has started; speed bar empty, position ninth, five laps.",
+          "bmp": "control-native/captures/frame-017400.bmp",
+          "sha256": "f6f7cd3c9cf7a4243be8f81848f274cb60281e15bb98a1ac9507108071210d0b"
+        },
+        {
+          "frame": 17800,
+          "observation": "Track viewport has advanced under held acceleration; speed bar is nonzero.",
+          "bmp": "control-native/captures/frame-017800.bmp",
+          "sha256": "a6b9794b6b33a7b4d370c4cc37c1babc95f9288d0bc425fcd2f89f5d36152d8f"
+        },
+        {
+          "frame": 18000,
+          "observation": "Race viewport progresses through the scripted right-steering interval.",
+          "bmp": "control-native/captures/frame-018000.bmp",
+          "sha256": "3a0b22156a49a160305dc3729ba6202c7e88874152eddf60c90574dfff19e0a2"
+        },
+        {
+          "frame": 18400,
+          "observation": "Race continues; remaining-lap counter is four.",
+          "bmp": "control-native/captures/frame-018400.bmp",
+          "sha256": "0601fecd7efaaa5f9bba71535ae241722010fe5b4ba2adeb235f7ab14c0d61a5"
+        },
+        {
+          "frame": 19000,
+          "observation": "First race remains active; four laps remain after acceleration release.",
+          "bmp": "control-native/captures/frame-019000.bmp",
+          "sha256": "a06cffcdca7f9e593550a639a22e477e67546087e7cdbbc8568354baad8588dc"
+        }
+      ]
+    },
+    {
+      "replay": "main-batch",
+      "method": "Manual review of recorded native output images and the input timeline.",
+      "milestones": [
+        {
+          "frame": 2000,
+          "observation": "Magnetic Fields presentation screen.",
+          "bmp": "main-batch/captures/frame-002000.bmp",
+          "sha256": "c25b439d2c62af045056f463d7da09572e09a12c519bdfe36fb5680e67ce326b"
+        },
+        {
+          "frame": 3000,
+          "observation": "Super Cars II title screen.",
+          "bmp": "main-batch/captures/frame-003000.bmp",
+          "sha256": "87590baa12bf28776bb4b72d5b55f63315e1471f0cf9560afa0143a4b6102c68"
+        },
+        {
+          "frame": 6000,
+          "observation": "Magnetic Fields games advertisement screen.",
+          "bmp": "main-batch/captures/frame-006000.bmp",
+          "sha256": "7a7fc802b825966ccb0e993305ef88d8e209de6ae3b74e975e1973ad9b7727e0"
+        },
+        {
+          "frame": 16000,
+          "observation": "Game options: Easy difficulty, one player, Fire accelerates.",
+          "bmp": "main-batch/captures/frame-016000.bmp",
+          "sha256": "238e6fa5da8c3af25d5504562f4e0bec9ab71da3149d475ba65b4182f8f70ee8"
+        },
+        {
+          "frame": 16800,
+          "observation": "Easy level race 1 briefing; five laps.",
+          "bmp": "main-batch/captures/frame-016800.bmp",
+          "sha256": "9f8eb6f4176dee4327a3f516cb59cb86529adedb48119e75d27f577a43e8a7bb"
+        },
+        {
+          "frame": 17400,
+          "observation": "Race has started; speed bar empty, position tenth, five laps.",
+          "bmp": "main-batch/captures/frame-017400.bmp",
+          "sha256": "306b83a50b5ada1e8c66a08dd1f08975e3efdec9e637a4103985830b3573aaa5"
+        },
+        {
+          "frame": 17800,
+          "observation": "Track viewport has advanced under held acceleration; speed bar is nonzero.",
+          "bmp": "main-batch/captures/frame-017800.bmp",
+          "sha256": "b411a6e87e3d792080551f2c29d2ab4bb29cfff189890a9843d4d6af99253254"
+        },
+        {
+          "frame": 18000,
+          "observation": "Race viewport progresses through the scripted right-steering interval.",
+          "bmp": "main-batch/captures/frame-018000.bmp",
+          "sha256": "e336e20ef66b57c34b8b2d8a0a71e875c5f23969edfae14b2cb90f0d6796f16a"
+        },
+        {
+          "frame": 18400,
+          "observation": "Race continues with nonzero speed; remaining-lap counter is four.",
+          "bmp": "main-batch/captures/frame-018400.bmp",
+          "sha256": "de36f580b09f090e7be7efec64954626f7fa84a829816f6e7623d54af7867a2e"
+        },
+        {
+          "frame": 18600,
+          "observation": "After the frame-18500 acceleration release, the speed bar has emptied.",
+          "bmp": "main-batch/captures/frame-018600.bmp",
+          "sha256": "81687df8e09e201a65322868ca7c398e0c51a376f3a13d851bc07c37370d1e5a"
+        },
+        {
+          "frame": 19000,
+          "observation": "First race remains active; four laps remain.",
+          "bmp": "main-batch/captures/frame-019000.bmp",
+          "sha256": "1f9967911d6eb4aebaa2b091cae67ffcfe803f7727e00c0dcb467011ba19e9ce"
+        }
+      ]
+    },
+    {
+      "replay": "lotus-regression",
+      "method": "Manual review of recorded native output images and the input timeline.",
+      "milestones": [
+        {
+          "frame": 8000,
+          "observation": "Car specification screen.",
+          "bmp": "lotus-regression/captures/frame-008000.bmp",
+          "sha256": "30044a9e18cbf2957a8b0ce059037c49230963de3c1535a53a28d6317ae4c410"
+        },
+        {
+          "frame": 12800,
+          "observation": "Opening race advances with a nonzero speed reading.",
+          "bmp": "lotus-regression/captures/frame-012800.bmp",
+          "sha256": "f3c70ceee3f239ec8e1b93137fed36a824ccf8e02d40354fa9c2e8963a870206"
+        },
+        {
+          "frame": 14000,
+          "observation": "Opening race remains active after the recorded acceleration input.",
+          "bmp": "lotus-regression/captures/frame-014000.bmp",
+          "sha256": "2546fafdc723f05fcb2b339ea336d07efa85a893344ea29fca0c1c4bd41c7c09"
+        }
+      ]
+    },
+    {
+      "replay": "arte-regression",
+      "method": "Manual review of recorded native output images and the input timeline.",
+      "milestones": [
+        {
+          "frame": 4000,
+          "observation": "Disc intro scene.",
+          "bmp": "arte-regression/captures/frame-004000.bmp",
+          "sha256": "175e4d52698902182cc1132787e4473a6ec106c665d47c7194871262bbc50c47"
+        },
+        {
+          "frame": 20000,
+          "observation": "Digitized image scene.",
+          "bmp": "arte-regression/captures/frame-020000.bmp",
+          "sha256": "00c02b3d72e96a17e0e4e2c29b1d214549832645e8929592cca4f18f6705328c"
+        },
+        {
+          "frame": 28000,
+          "observation": "Later geometric 3D scene and credits.",
+          "bmp": "arte-regression/captures/frame-028000.bmp",
+          "sha256": "4b96ab7cd8a7315909745bf02c4f0710af58ca5523ed47795f7cddedb9ad96fa"
+        },
+        {
+          "frame": 36000,
+          "observation": "Starfield scene.",
+          "bmp": "arte-regression/captures/frame-036000.bmp",
+          "sha256": "ee85885c7938f8735b239892aa674fb5f105df2cfd31f6d3460229fa2d56de1d"
+        },
+        {
+          "frame": 40000,
+          "observation": "Returns to the earlier intro scene.",
+          "bmp": "arte-regression/captures/frame-040000.bmp",
+          "sha256": "495e64636c95c1e114475797688a1d7347199a75d56de9133d0e945264bc5f4e"
+        }
+      ]
+    },
+    {
+      "replay": "desert-dream-regression",
+      "method": "Manual review of recorded native output images and the input timeline.",
+      "milestones": [
+        {
+          "frame": 2000,
+          "observation": "Kefrens presentation.",
+          "bmp": "desert-dream-regression/captures/frame-002000.bmp",
+          "sha256": "9f673908f7980cd10480ec168945e7436fa90ee9ab03b0c43415a1f1aed7c128"
+        },
+        {
+          "frame": 36000,
+          "observation": "Insert disk II prompt.",
+          "bmp": "desert-dream-regression/captures/frame-036000.bmp",
+          "sha256": "cee6b2b9c7c6b889d3179008cdd9085b5846cc725429c06197cb08669c9b2a07"
+        },
+        {
+          "frame": 42000,
+          "observation": "Disk II shader scene after the recorded disk swap.",
+          "bmp": "desert-dream-regression/captures/frame-042000.bmp",
+          "sha256": "dd59bba2138868eb7e6daf542382d3f5f2a1fcaae1de6478597f15090eb33f10"
+        },
+        {
+          "frame": 49000,
+          "observation": "Disk II credits sequence.",
+          "bmp": "desert-dream-regression/captures/frame-049000.bmp",
+          "sha256": "d641ec04cee4ce5699deff76da33ebe80913aaff9364abd31ce7a9890fdc9f60"
+        },
+        {
+          "frame": 65000,
+          "observation": "Later Kefrens message.",
+          "bmp": "desert-dream-regression/captures/frame-065000.bmp",
+          "sha256": "3af27c29d39d801e225c02a41ea847a963256d79774bbf8afc289fe0f3545176"
+        },
+        {
+          "frame": 72000,
+          "observation": "Closing credits.",
+          "bmp": "desert-dream-regression/captures/frame-072000.bmp",
+          "sha256": "5abaff2ccc6c990b6d46d25db7b0f899c06bb1cc5e96e22acca5372193e5d774"
+        }
+      ]
+    }
+  ],
+  "regressionComparison": {
+    "lotus": {
+      "previousManifest": "artifacts/copperstart-desert-dream-2026-10-16/lotus-regression/run.json",
+      "previousManifestSha256": "0ddd2b96fbdf2a1899e534722698a643e029e5c0e3b9f6f80f5991c9a42f329a",
+      "comparedImages": 71,
+      "identicalImages": 71,
+      "changedImages": [],
+      "fingerprintsMatch": {
+        "cpu": true,
+        "hardware": true,
+        "output": true
+      },
+      "comparedPcmFields": 71,
+      "identicalPcmFields": 71,
+      "changedPcmFields": [],
+      "maximumSampledPcmDelta": 0,
+      "pcmLengthChanges": []
+    },
+    "arte": {
+      "previousManifest": "artifacts/copperstart-desert-dream-2026-10-16/arte-regression/run.json",
+      "previousManifestSha256": "67b56cce5bd1d16b7fc29b64fbf453a2fac58c9e1e7857c61fbf689358dbed04",
+      "comparedImages": 101,
+      "identicalImages": 101,
+      "changedImages": [],
+      "fingerprintsMatch": {
+        "cpu": true,
+        "hardware": true,
+        "output": false
+      },
+      "comparedPcmFields": 101,
+      "identicalPcmFields": 100,
+      "changedPcmFields": [
+        "frame-003200.pcm"
+      ],
+      "maximumSampledPcmDelta": 33,
+      "pcmLengthChanges": [],
+      "note": "All 101 captured images and final CPU/hardware fingerprints match case 3. The cumulative output fingerprint differs; captured PCM field 3200 differs by at most 33 on a signed 16-bit scale, while the other 100 PCM fields match. Exact cross-ROM audio parity and audio fidelity are not claimed."
+    },
+    "desertDream": {
+      "previousManifest": "artifacts/copperstart-desert-dream-2026-10-16/main-batch/run.json",
+      "previousManifestSha256": "c0078c863d42246ec7a0030f1fcea7f81277c9ccee2e9bdafa4313a23e14ac15",
+      "comparedImages": 73,
+      "identicalImages": 73,
+      "changedImages": [],
+      "fingerprintsMatch": {
+        "cpu": true,
+        "hardware": true,
+        "output": true
+      },
+      "comparedPcmFields": 73,
+      "identicalPcmFields": 73,
+      "changedPcmFields": [],
+      "maximumSampledPcmDelta": 0,
+      "pcmLengthChanges": []
+    }
+  },
+  "artifactRoot": "artifacts/copperstart-supercars2-2026-10-16",
+  "limitations": [
+    "Qualification covers this media variant, recorded one-player easy first-race sequence and machine. Full race/game completion, two-player mode, other levels and disk 2 remain unverified.",
+    "Native control and CopperStart are reviewed for visible progression and input response. Exact cross-ROM state or audio equivalence is not implied.",
+    "Sampled PCM confirms non-silent output; listening and audio fidelity were not assessed.",
+    "The full portable suite and standalone reader root were not rerun. Retained host DOS integration is outside these native ROM tests. ROM reachability differs from the broader audit's component roots.",
+    "This is compatibility evidence, not host-throughput or performance acceptance."
+  ]
+}
