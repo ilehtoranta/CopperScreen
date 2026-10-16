@@ -39,9 +39,9 @@ internal static class ExtendedAdfDecoder
         }
 
         var trackCount = BigEndian.ReadUInt16(image, 10, "track count");
-        if (trackCount < AmigaDiskGeometry.TrackCount || trackCount > 168 || (trackCount & 1) != 0)
+        if (trackCount == 0 || trackCount > 168)
         {
-            throw Error("DD UAE-1ADF images require 80–84 complete cylinders (160–168 tracks).");
+            throw Error("DD UAE-1ADF images require 1–168 declared tracks.");
         }
 
         var tableLength = HeaderLength + (trackCount * TrackHeaderLength);
@@ -124,7 +124,7 @@ internal static class ExtendedAdfDecoder
 
     private static AmigaEncodedTrack[] DecodeTracks(ReadOnlySpan<byte> image, TrackEntry[] entries)
     {
-        var tracks = new AmigaEncodedTrack[entries.Length];
+        var tracks = new AmigaEncodedTrack[Math.Max(AmigaDiskGeometry.TrackCount, (entries.Length + 1) & ~1)];
         for (var track = 0; track < entries.Length; track++)
         {
             var entry = entries[track];
@@ -148,6 +148,9 @@ internal static class ExtendedAdfDecoder
                     AmigaTrackFeatures.PreservedTrackData);
             }
         }
+
+        for (var track = entries.Length; track < tracks.Length; track++)
+            tracks[track] = AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack());
 
         return tracks;
     }
