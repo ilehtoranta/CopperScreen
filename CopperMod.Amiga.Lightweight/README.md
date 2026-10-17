@@ -5,8 +5,9 @@ app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
 The published CPU baseline is Copper68k `1.5.3`. This development worktree uses
-the unpublished `1.5.4-qualified-dev.1` candidate from the ignored qualification feed.
-See the [candidate qualification record](../docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
+the frozen `1.5.4-nitro-dev.2` candidate from the ignored qualification feed.
+See the [Nitro timing correction and qualification](../docs/engine/NITRO_RACE_START_2026-10-17.md)
+and the [preceding candidate record](../docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
 See [CPU support and validation](../docs/engine/CPU_SUPPORT.md). Existing published
 versions are unchanged. A1200 integration evidence is retained in
 [AGA implementation and package verification](../docs/engine/AGA_INITIAL_2026-10-01.md).
