@@ -1,5 +1,9 @@
 # CopperStart: Nitro boot compatibility
 
+The later [race-start follow-up](NITRO_RACE_START_2026-10-17.md) repairs the wait
+with CPU and interrupt-sampling corrections. This record retains the original
+boot-fix ROM, package and results below.
+
 Started 2026-10-16; completed 2026-10-17. **LWA-NATIVE-011.** Nitro exposed
 two compatibility defects: CopperDisk rejected its valid extended ADF, and
 CopperStart handed control to the boot block with stopped CIA event counters.
