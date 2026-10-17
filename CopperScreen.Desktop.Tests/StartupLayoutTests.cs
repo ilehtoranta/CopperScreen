@@ -19,10 +19,10 @@ public sealed class LaunchUiFixture : IDisposable
 }
 
 [CollectionDefinition("Desktop UI", DisableParallelization = true)]
-public sealed class LaunchUiCollection { }
+public sealed class LaunchUiCollection : ICollectionFixture<LaunchUiFixture> { }
 
 [Collection("Desktop UI")]
-public sealed partial class LaunchWorkflowTests : IDisposable, IClassFixture<LaunchUiFixture>
+public sealed partial class LaunchWorkflowTests : IDisposable
 {
     private readonly LaunchUiFixture _ui;
     private readonly string _root = Path.Combine(Path.GetTempPath(), "copperscreen-launch-" + Guid.NewGuid().ToString("N"));
