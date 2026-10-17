@@ -18,7 +18,21 @@
     "sha256": "60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad",
     "dllSha256": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
     "byteIdenticalInPackageCpuTestsAppAndCapturedRunner": true,
-    "publication": "requires explicit release authorization; qualification never rebuilds or overwrites the asset"
+    "publication": {
+      "kind": "owner-approved full GitHub release",
+      "url": "https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-nitro-dev.2",
+      "publishedAt": "2026-10-17T07:35:26Z",
+      "sourceCommit": "40207be34ac08dda76dd6f4ecfa915f3f8652332",
+      "assetUrl": "https://github.com/ilehtoranta/CopperMod/releases/download/copper68k-1.5.4-nitro-dev.2/Copper68k.1.5.4-nitro-dev.2.nupkg",
+      "assetDigest": "sha256:60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad",
+      "downloadVerification": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\publication-verification\\Copper68k.1.5.4-nitro-dev.2.nupkg",
+        "sha256": "60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad"
+      },
+      "approval": "Explicit user approval on 2026-10-17: Publish full GitHub release.",
+      "nugetOrgPublished": false,
+      "rebuiltOrOverwritten": false
+    }
   },
   "packageSha256": "60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad",
   "packageRepositoryMetadata": {

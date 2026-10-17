@@ -78,7 +78,10 @@ its CPU DLL SHA-256 is
 `2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7`.
 The CPU test dependency, package payload, production app and captured runner use
 identical CPU bytes. Existing published package versions are unchanged.
-The frozen asset remains local pending explicit publication approval.
+With explicit owner approval, the unchanged asset is distributed through its
+[full GitHub release](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-nitro-dev.2).
+The downloaded package matches the frozen SHA-256; no NuGet.org publication or
+package rebuild was performed.
 
 CopperStart remains the same 524,288-byte source-built ROM, SHA-256
 `5C5C0ADFBC4E12A59ECA2DD0236C40EFC633B71AB34190E88418F36BEA4FF4C9`.
