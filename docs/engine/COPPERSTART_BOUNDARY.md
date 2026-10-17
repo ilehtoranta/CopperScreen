@@ -71,6 +71,13 @@ Nitro retains all 71 earlier screenshots. This qualifies the screenless display
 service and recorded level, with no full Intuition or full-game claim. The record
 separates the fresh native root from its frozen managed/compiler/graphics inputs.
 
+The [Apidya continuation](COPPERSTART_APIDYA_2026-10-17.md) freshly recompiles
+that Lemmings-fixed root and verifies disk one's options and input-driven opening
+stage without a new firmware change. Each 12,000-field CPU-mode pair matches all
+1,005 captured files; all 51 options-screen images match native Kickstart.
+The fresh-ROM Lemmings regression retains all 605 prior captures and its 100%
+level-one rescue. Later Apidya stages and disk two remain unverified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
