@@ -62,6 +62,15 @@ images; Arte retains all 101 images and its later scenes/intro loop. The record
 discloses Arte's small sampled-PCM difference and the distinct no-slow-RAM
 allocator reservations. Secret parts and audio fidelity remain unverified.
 
+The [Lemmings continuation](COPPERSTART_LEMMINGS_2026-10-17.md) adds a native
+empty-display Intuition library for an original intro's `RethinkDisplay` call.
+The preceding fresh ROM returned a null library base and crashed at the handoff.
+The corrected frozen-component ROM and native Kickstart both complete level one
+with 100% rescued; each 24,000-field CPU-mode pair matches all 605 captured files.
+Nitro retains all 71 earlier screenshots. This qualifies the screenless display
+service and recorded level, with no full Intuition or full-game claim. The record
+separates the fresh native root from its frozen managed/compiler/graphics inputs.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
