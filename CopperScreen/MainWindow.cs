@@ -175,6 +175,7 @@ internal sealed partial class MainWindow : Window
 	private double _lastPresenterUpdateMilliseconds;
 	private double _lastPresentationFrameMilliseconds;
 	private bool _isClosed;
+	private bool _startupLayoutCompleted;
 	private CopperScreenPresentationGeometry _presenterGeometry = new(358, 285, 320, 256, 2, 2, true, false);
 	private readonly CrtPhosphorComposer _crtPhosphor = new();
 	private bool _crtPhosphorAnimationQueued;
@@ -313,7 +314,6 @@ internal sealed partial class MainWindow : Window
 
 		Opened += (_, _) =>
 		{
-			ApplyWindowPresentationMode();
 			if (_settingsVisible)
 			{
 				ShowSettingsWindow();
@@ -411,6 +411,19 @@ internal sealed partial class MainWindow : Window
 			_gamepadHost.ControllersChanged -= OnGamepadControllersChanged;
 			_gamepadHost.Dispose();
 		};
+	}
+
+	protected override void OnResized(WindowResizedEventArgs e)
+	{
+		base.OnResized(e);
+		if (!_startupLayoutCompleted && e.Reason == WindowResizeReason.Layout && _root != null)
+		{
+			// Avalonia's first SizeToContent pass arranges against the previous
+			// client size, then resizes the native window. Finish the resulting
+			// layout here, before Show starts rendering those stale bounds.
+			_startupLayoutCompleted = true;
+			UpdateLayout();
+		}
 	}
 
 	private static CopperScreenState CreateIdleState(CopperScreenSettingsDraft draft)
