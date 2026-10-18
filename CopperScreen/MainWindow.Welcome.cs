@@ -83,7 +83,7 @@ internal sealed partial class MainWindow
         _welcomeRecent = new StackPanel { Spacing = 6 };
         RefreshWelcomeRecentDisks();
         content.Children.Add(_welcomeRecent);
-        return new Border { Background = CopperScreenAppearance.Background, Child = new ScrollViewer { Content = content, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled }, MinHeight = 480, MaxHeight = 720, IsVisible = _runtime == null };
+        return new Border { Background = CopperScreenAppearance.Background, Child = new ScrollViewer { Name = "LauncherScroll", Content = content, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled }, MinHeight = 480, MaxHeight = 720, IsVisible = _runtime == null };
     }
 
     private void UpdateBootMethodControls()

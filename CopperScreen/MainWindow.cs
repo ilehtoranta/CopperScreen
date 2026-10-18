@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2026 Ilkka Lehtoranta
  * SPDX-License-Identifier: MIT
  */
@@ -188,7 +188,11 @@ internal sealed partial class MainWindow : Window
 		MinWidth = 712;
 		Background = Surface;
 		Icon = LoadWindowIcon();
-		SizeToContent = SizeToContent.WidthAndHeight;
+		// Start with room for the content and side controls, bounded by this monitor.
+		var startupScreen = Screens.Primary;
+		Width = Math.Min(1040, startupScreen == null ? 1040 : startupScreen.WorkingArea.Width / startupScreen.Scaling - 32);
+		Height = Math.Min(760, startupScreen == null ? 760 : startupScreen.WorkingArea.Height / startupScreen.Scaling - 64);
+		SizeToContent = SizeToContent.Manual;
 		Focusable = true;
 		_initialStartupOptions = CopperScreenStartupOptions.Parse(args, AppContext.BaseDirectory);
 		_settingsDraft = CopperScreenSettingsDraft.FromStartupOptions(_initialStartupOptions);
@@ -266,6 +270,7 @@ internal sealed partial class MainWindow : Window
 		_entryList = new StackPanel { Orientation = Orientation.Vertical, Spacing = 2 };
 		_root = new Grid
 		{
+			ColumnDefinitions = new ColumnDefinitions("*,0"),
 			RowDefinitions =
 			{
 				new RowDefinition(GridLength.Auto),
@@ -314,6 +319,9 @@ internal sealed partial class MainWindow : Window
 
 		Opened += (_, _) =>
 		{
+			// Preserve user resizing, maximization and fullscreen restoration.
+			SizeToContent = SizeToContent.Manual;
+			ApplyWindowPresentationMode();
 			if (_settingsVisible)
 			{
 				ShowSettingsWindow();
@@ -416,6 +424,7 @@ internal sealed partial class MainWindow : Window
 	protected override void OnResized(WindowResizedEventArgs e)
 	{
 		base.OnResized(e);
+		if (_faultBanner != null) ApplyWindowPresentationMode();
 		if (!_startupLayoutCompleted && e.Reason == WindowResizeReason.Layout && _root != null)
 		{
 			// Avalonia's first SizeToContent pass arranges against the previous
@@ -1236,9 +1245,10 @@ internal sealed partial class MainWindow : Window
 		if (args.Key == Key.F1)
 		{
 			ReleaseMouseGrab();
-			if (WindowState == WindowState.FullScreen && !_bench.IsToolbarVisible)
+			if (!_toolbar.IsVisible)
 			{
-				_bench.ToggleToolbar();
+				if (WindowState == WindowState.FullScreen) _bench.ToggleToolbar();
+				else _windowedControlsVisible = true;
 				RefreshCopperBenchUi();
 			}
 			_moreButton.Flyout?.ShowAt(_moreButton);
@@ -1267,8 +1277,14 @@ internal sealed partial class MainWindow : Window
 			{
 				_bench.ToggleToolbar();
 			}
+			else _windowedControlsVisible = !_windowedControlsVisible;
 
 			RefreshCopperBenchUi();
+			if (!_toolbar.IsVisible)
+			{
+				if (_runtime != null) _presenter.Focus();
+				else _welcomeRomButton.Focus();
+			}
 			args.Handled = true;
 			return;
 		}
@@ -3623,44 +3639,51 @@ internal sealed partial class MainWindow : Window
 
 	private void ApplyWindowPresentationMode()
 	{
-		var fullscreen = WindowState == WindowState.FullScreen;
-		SizeToContent = fullscreen ? SizeToContent.Manual : SizeToContent.WidthAndHeight;
-		_toolbar.IsVisible = !fullscreen || _bench.IsToolbarVisible;
-		_root.RowDefinitions[1].Height = fullscreen
-			? new GridLength(1, GridUnitType.Star)
-			: GridLength.Auto;
-		_presenter.DevicePixelExactLayout = !fullscreen;
-		_presenter.HorizontalAlignment = fullscreen ? HorizontalAlignment.Stretch : HorizontalAlignment.Center;
-		_presenter.VerticalAlignment = fullscreen ? VerticalAlignment.Stretch : VerticalAlignment.Center;
-		_presenter.InvalidateMeasure();
-
-		Grid.SetRow(_toolbar, 0);
-		Grid.SetRowSpan(_toolbar, 1);
-		if (fullscreen)
+		if (_applyingShellLayout) return;
+		_applyingShellLayout = true;
+		try
 		{
-			Grid.SetRow(_presenter, 0);
-			Grid.SetRowSpan(_presenter, 3);
-			Grid.SetRow(_benchPanel, 0);
-			Grid.SetRowSpan(_benchPanel, 2);
-			_benchPanel.Margin = new Thickness(12, 78, 0, 12);
-			Grid.SetRow(_debuggerPanel, 0);
-			Grid.SetRowSpan(_debuggerPanel, 2);
-			_debuggerPanel.Margin = new Thickness(12, 78, 12, 12);
-			Grid.SetRow(_gamepadAssignmentOverlay, 0);
-			Grid.SetRowSpan(_gamepadAssignmentOverlay, 2);
-			return;
-		}
+			var fullscreen = WindowState == WindowState.FullScreen;
+			if (fullscreen) SizeToContent = SizeToContent.Manual;
+			_toolbar.IsVisible = fullscreen ? _bench.IsToolbarVisible : _windowedControlsVisible;
+			// Once sized, let the presenter fit the available area with its existing
+			// uniform scaling and pixel-aspect correction.
+			_root.RowDefinitions[1].Height = SizeToContent == SizeToContent.Manual || _runtime == null
+				? new GridLength(1, GridUnitType.Star)
+				: GridLength.Auto;
+			_presenter.DevicePixelExactLayout = SizeToContent != SizeToContent.Manual;
+			_presenter.HorizontalAlignment = HorizontalAlignment.Stretch;
+			_presenter.VerticalAlignment = VerticalAlignment.Stretch;
+			_presenter.InvalidateMeasure();
 
-		Grid.SetRow(_presenter, 1);
-		Grid.SetRowSpan(_presenter, 1);
-		Grid.SetRow(_benchPanel, 1);
-		Grid.SetRowSpan(_benchPanel, 1);
-		_benchPanel.Margin = new Thickness(12, 12, 0, 12);
-		Grid.SetRow(_debuggerPanel, 1);
-		Grid.SetRowSpan(_debuggerPanel, 1);
-		_debuggerPanel.Margin = new Thickness(12, 12, 12, 12);
-		Grid.SetRow(_gamepadAssignmentOverlay, 1);
-		Grid.SetRowSpan(_gamepadAssignmentOverlay, 1);
+			UpdateAdaptiveControlsLayout(fullscreen);
+			if (fullscreen)
+			{
+				Grid.SetRow(_presenter, 0);
+				Grid.SetRowSpan(_presenter, 3);
+				Grid.SetRow(_benchPanel, 0);
+				Grid.SetRowSpan(_benchPanel, 2);
+				_benchPanel.Margin = new Thickness(12, 78, 0, 12);
+				Grid.SetRow(_debuggerPanel, 0);
+				Grid.SetRowSpan(_debuggerPanel, 2);
+				_debuggerPanel.Margin = new Thickness(12, 78, 12, 12);
+				Grid.SetRow(_gamepadAssignmentOverlay, 0);
+				Grid.SetRowSpan(_gamepadAssignmentOverlay, 2);
+				return;
+			}
+
+			Grid.SetRow(_presenter, 1);
+			Grid.SetRowSpan(_presenter, 1);
+			Grid.SetRow(_benchPanel, 1);
+			Grid.SetRowSpan(_benchPanel, 1);
+			_benchPanel.Margin = new Thickness(12, 12, 0, 12);
+			Grid.SetRow(_debuggerPanel, 1);
+			Grid.SetRowSpan(_debuggerPanel, 1);
+			_debuggerPanel.Margin = new Thickness(12, 12, 12, 12);
+			Grid.SetRow(_gamepadAssignmentOverlay, 1);
+			Grid.SetRowSpan(_gamepadAssignmentOverlay, 1);
+		}
+		finally { _applyingShellLayout = false; }
 	}
 
 	private void ToggleOverscan()

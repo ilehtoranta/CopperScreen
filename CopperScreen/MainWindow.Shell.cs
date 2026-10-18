@@ -19,7 +19,76 @@ internal sealed partial class MainWindow
     private static readonly IBrush DriveActivity = new SolidColorBrush(Color.Parse("#9EC99C"));
     private static readonly IBrush ToolbarInset = CopperScreenAppearance.Inset;
     private static readonly IBrush CommandHover = CopperScreenAppearance.Hover;
-    private Grid _toolbarCommands = null!;
+    private WrapPanel _toolbarCommands = null!, _utilityCommands = null!;
+    private Grid _toolbarLayout = null!, _primaryMedia = null!;
+    private Border _utilitySection = null!, _diskSection = null!;
+    private StackPanel _diskContents = null!;
+    private readonly ScrollViewer _sideDiskScroll = new()
+    {
+        HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+        VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+    };
+    private Control _mediaActions = null!;
+    private bool _sideControls;
+    private bool _windowedControlsVisible = true;
+    private bool _applyingShellLayout;
+    private const double SideControlsWidth = 280;
+
+    // Prefer the side panel whenever a useful content area fits beside it.
+    // Height and picture aspect affect uniform presentation, not control placement.
+    // DIPs keep both the launcher and controls usable at higher display scaling.
+    private void UpdateAdaptiveControlsLayout(bool fullscreen)
+    {
+        var side = ClientSize.Width >= 640 + SideControlsWidth;
+        if (side != _sideControls)
+        {
+            _sideControls = side;
+            // Move the existing controls, retaining their handlers, state and flyouts.
+            _toolbarCommands.Children.Remove(_utilitySection);
+            _toolbarLayout.Children.Remove(_utilitySection);
+            _toolbarLayout.RowDefinitions = new RowDefinitions(side ? "Auto,*,Auto" : "Auto,Auto");
+            if (side)
+            {
+                Grid.SetRow(_utilitySection, 2);
+                _toolbarLayout.Children.Add(_utilitySection);
+            }
+            else _toolbarCommands.Children.Add(_utilitySection);
+            _diskSection.Child = null;
+            _sideDiskScroll.Content = null;
+            if (side)
+            {
+                _sideDiskScroll.Content = _diskContents;
+                _diskSection.Child = _sideDiskScroll;
+            }
+            else _diskSection.Child = _diskContents;
+            _utilitySection.Padding = side ? new Thickness(12) : new Thickness(0);
+            _utilitySection.BorderBrush = QuietBorder;
+            _utilitySection.BorderThickness = side ? new Thickness(0, 1, 0, 0) : new Thickness(0);
+            _inputHelpButton.Width = side ? SideControlsWidth - 24 : 140;
+            _primaryMedia.ColumnDefinitions = new ColumnDefinitions(side ? "*" : "Auto,*,Auto");
+            _primaryMedia.RowDefinitions = new RowDefinitions(side ? "Auto,Auto,Auto" : "Auto");
+            Grid.SetColumn(_primaryDiskCombo, side ? 0 : 1);
+            Grid.SetRow(_primaryDiskCombo, side ? 1 : 0);
+            Grid.SetColumn(_mediaActions, side ? 0 : 2);
+            Grid.SetRow(_mediaActions, side ? 2 : 0);
+            foreach (var tile in _driveTiles)
+            {
+                tile.Width = side ? SideControlsWidth - 24 : 136;
+                tile.Margin = side ? new Thickness(0, 0, 0, 6) : new Thickness(0, 0, 8, 0);
+            }
+        }
+
+        // Fullscreen controls overlay the same viewport, even when shown with F11.
+        _root.ColumnDefinitions[1].Width = new GridLength(side && !fullscreen && _toolbar.IsVisible ? SideControlsWidth : 0);
+        Grid.SetColumnSpan(_presenter, fullscreen ? 2 : 1);
+        Grid.SetColumn(_toolbar, side && !fullscreen ? 1 : 0);
+        Grid.SetColumnSpan(_toolbar, fullscreen ? 2 : 1);
+        Grid.SetRow(_toolbar, 0);
+        Grid.SetRowSpan(_toolbar, side ? 3 : 1);
+        _toolbar.Width = side ? SideControlsWidth : double.NaN;
+        _toolbar.HorizontalAlignment = side ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
+        _toolbar.VerticalAlignment = side ? VerticalAlignment.Stretch : VerticalAlignment.Top;
+    }
     private Control _sessionCommands = null!;
     private Button _restartButton = null!, _browseDiskButton = null!, _ejectDiskButton = null!;
     private Button _previousDiskButton = null!, _nextDiskButton = null!, _muteButton = null!, _moreButton = null!;
@@ -72,21 +141,15 @@ internal sealed partial class MainWindow
         StyleShellCommand(_pauseButton, primary: true);
         foreach (var button in new[] { _restartButton, _fullscreenButton, _volumeButton, _settingsButton, _moreButton })
             StyleShellCommand(button);
-        _toolbarCommands = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto,*,Auto"), ColumnSpacing = 20 };
-        _sessionCommands = LabelledCommandGroup("Amiga", CommandGroup(_pauseButton, _restartButton), Accent);
+        _toolbarCommands = new WrapPanel();
+        _sessionCommands = CommandGroup(_pauseButton, _restartButton);
+        _sessionCommands.Margin = new Thickness(0, 0, 12, 0);
         _toolbarCommands.Children.Add(_sessionCommands);
-        var playback = LabelledCommandGroup("Display & sound", new Border
-        {
-            Background = CopperScreenAppearance.ControlSurface,
-            CornerRadius = new CornerRadius(8),
-            Child = CommandGroup(_fullscreenButton, _volumeButton)
-        });
-        Grid.SetColumn(playback, 1);
-        _toolbarCommands.Children.Add(playback);
-        var utilities = LabelledCommandGroup("Tools", CommandGroup(_settingsButton, _moreButton));
-        utilities.Margin = new Thickness(12, 0, 0, 0);
-        Grid.SetColumn(utilities, 2);
-        _toolbarCommands.Children.Add(utilities);
+        _utilityCommands = new WrapPanel();
+        foreach (var button in new[] { _fullscreenButton, _volumeButton, _settingsButton, _moreButton })
+            _utilityCommands.Children.Add(button);
+        _utilitySection = new Border { Child = _utilityCommands };
+        _toolbarCommands.Children.Add(_utilitySection);
 
         var more = new StackPanel { Spacing = 14, Width = 370 };
         more.Children.Add(SectionLabel("Display"));
@@ -117,7 +180,7 @@ internal sealed partial class MainWindow
         more.Children.Add(SectionLabel("Keyboard shortcuts"));
         more.Children.Add(new TextBlock
         {
-            Text = "Alt+Enter   Fullscreen / window\nF10   Release the mouse\nF11   Show / hide controls in fullscreen\nF12 / Shift+F12   Next / previous disk\nNumLock   Switch keyboard joystick mode\nF1   Show this help",
+            Text = "Alt+Enter   Fullscreen / window\nF10   Release the mouse\nF11   Show / hide controls\nF12 / Shift+F12   Next / previous disk\nNumLock   Switch keyboard joystick mode\nF1   Show this help",
             Foreground = MutedText, TextWrapping = TextWrapping.Wrap, LineHeight = 24
         });
         _moreButton.Flyout = new Flyout { Content = more };
@@ -126,8 +189,14 @@ internal sealed partial class MainWindow
         _ejectDiskButton = CreateToolbarButton("Eject", () => _ = EjectDriveDiskAsync(0), "Eject the disk from DF0");
         _previousDiskButton = CreateToolbarIconButton("Previous disk", "previous", () => _ = InsertPreviousDiskAsync(), "Previous disk in this set (Shift+F12)");
         _nextDiskButton = CreateToolbarIconButton("Next disk", "next", () => _ = InsertNextDiskAsync(), "Next disk in this set (F12)");
-        var mediaActions = CommandGroup(_browseDiskButton, _ejectDiskButton, _previousDiskButton, _nextDiskButton);
-        var media = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto,*,Auto"), ColumnSpacing = 12 };
+        var mediaActions = new WrapPanel();
+        foreach (var button in new[] { _browseDiskButton, _ejectDiskButton, _previousDiskButton, _nextDiskButton })
+        {
+            button.Margin = new Thickness(0, 0, 6, 0);
+            mediaActions.Children.Add(button);
+        }
+        _mediaActions = mediaActions;
+        var media = _primaryMedia = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto,*,Auto"), ColumnSpacing = 12, RowSpacing = 8 };
         media.Children.Add(new TextBlock { Text = "DF0", Foreground = MutedText, VerticalAlignment = VerticalAlignment.Center });
         _primaryDiskCombo = new ComboBox
         {
@@ -170,22 +239,21 @@ internal sealed partial class MainWindow
 
         _mediaFeedback = new TextBlock { Foreground = MutedText, TextWrapping = TextWrapping.Wrap, IsVisible = false };
         AutomationProperties.SetName(_mediaFeedback, "Disk operation result");
-        var disks = new StackPanel { Spacing = 8 };
+        var disks = _diskContents = new StackPanel { Spacing = 8 };
         disks.Children.Add(media);
         disks.Children.Add(CreateDriveStrip());
         disks.Children.Add(_mediaFeedback);
-        var layout = new StackPanel();
-        layout.Children.Add(new Border { Padding = new Thickness(16, 12, 16, 14), Child = _toolbarCommands });
-        layout.Children.Add(new Border { Background = ToolbarInset, Padding = new Thickness(16, 10), Child = disks });
-        return new Border { Background = Surface, Child = layout };
-    }
-
-    private static StackPanel LabelledCommandGroup(string title, Control content, IBrush? titleBrush = null)
-    {
-        var group = new StackPanel { Spacing = 6, HorizontalAlignment = HorizontalAlignment.Left };
-        group.Children.Add(new TextBlock { Text = title, Foreground = titleBrush ?? MutedText, FontSize = 11, FontWeight = FontWeight.SemiBold, Margin = new Thickness(2, 0, 0, 0) });
-        group.Children.Add(content);
-        return group;
+        _toolbarLayout = new Grid { RowDefinitions = new RowDefinitions("Auto,Auto") };
+        _toolbarLayout.Children.Add(new Border { Padding = new Thickness(12, 8), Child = _toolbarCommands });
+        _diskSection = new Border
+        {
+            Background = ToolbarInset, Padding = new Thickness(12, 8), Child = disks
+        };
+        Grid.SetRow(_diskSection, 1);
+        _toolbarLayout.Children.Add(_diskSection);
+        var toolbar = new Border { Background = Surface, Child = _toolbarLayout };
+        AutomationProperties.SetName(toolbar, "Emulator controls");
+        return toolbar;
     }
 
     private void StyleShellCommand(Button button, bool primary = false)
@@ -265,25 +333,29 @@ internal sealed partial class MainWindow
         _captureStatus = new TextBlock { Foreground = MutedText, FontSize = 12, VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Right };
         _inputHelpButton = CreateToolbarButton("Inputs", RefreshInputHelp, "Choose the input for each Amiga port and view its controls");
         _inputHelpButton.FontSize = 12;
-        _inputHelpButton.MinHeight = 30;
-        _inputHelpButton.MaxWidth = 290;
+        _inputHelpButton.MinHeight = 40;
+        _inputHelpButton.Width = 140;
         _inputHelpButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
         _inputHelpLabel = new TextBlock { TextTrimming = TextTrimming.CharacterEllipsis };
-        _inputHelpButton.Content = CommandGroup(_inputHelpLabel, new Avalonia.Controls.Shapes.Path
+        var inputLabel = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto"), ColumnSpacing = 6 };
+        inputLabel.Children.Add(_inputHelpLabel);
+        var inputArrow = new Avalonia.Controls.Shapes.Path
         {
             Data = StreamGeometry.Parse("M0,0 L4,4 L8,0"), Stroke = MutedText, StrokeThickness = 1,
             Width = 8, Height = 4, VerticalAlignment = VerticalAlignment.Center
-        });
+        };
+        Grid.SetColumn(inputArrow, 1);
+        inputLabel.Children.Add(inputArrow);
+        _inputHelpButton.Content = inputLabel;
         _inputHelpButton.Padding = new Thickness(8, 4);
         _inputHelpButton.Background = Brushes.Transparent;
         _inputHelpButton.BorderThickness = new Thickness(0);
         _inputHelp = CreateInputHelp();
         _inputHelpButton.Flyout = new Flyout { Content = new ScrollViewer { Content = _inputHelp, MaxHeight = 600, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled } };
-        var row = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto,Auto,*"), ColumnSpacing = 16 };
+        _utilityCommands.Children.Insert(2, _inputHelpButton);
+        var row = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto,*"), ColumnSpacing = 16 };
         row.Children.Add(_sessionStatus);
-        Grid.SetColumn(_inputHelpButton, 1);
-        row.Children.Add(_inputHelpButton);
-        Grid.SetColumn(_captureStatus, 2);
+        Grid.SetColumn(_captureStatus, 1);
         row.Children.Add(_captureStatus);
         return new Border { Background = Surface, Padding = new Thickness(16, 7), Child = row };
     }
@@ -304,8 +376,8 @@ internal sealed partial class MainWindow
     {
         if (_sessionStatus == null) return;
         var running = _runtime != null;
+        var sessionChanged = _sessionCommands.IsVisible != running;
         _sessionCommands.IsVisible = running;
-        _toolbarCommands.ColumnSpacing = running ? 20 : 0;
         _pauseButton.IsVisible = _restartButton.IsVisible = running;
         _pauseButton.IsEnabled = running && state.FaultMessage == null && !_settingsVisible;
         _restartButton.IsEnabled = running && !_settingsVisible;
@@ -340,9 +412,12 @@ internal sealed partial class MainWindow
         _sessionStatus.Foreground = state.IsPaused ? Accent : MutedText;
         _captureStatus.Text = !running ? "Drop an ADF, ADZ, DMS, IPF, SCP or ZIP to choose a disk" : _mouseGrabActive ? "Mouse captured · F10 to release" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
         _captureStatus.Foreground = _mouseGrabActive ? Accent : MutedText;
+        if (!_toolbar.IsVisible && WindowState != WindowState.FullScreen)
+            _captureStatus.Text += " · F11 controls";
         UpdateInputSummary();
         _idlePanel.IsVisible = !running;
         UpdateDriveStrip(state);
+        if (sessionChanged) ApplyWindowPresentationMode();
     }
 
     private static string MachineName(CopperScreenSettingsDraft draft) => CopperScreenMachinePresets.Label(CopperScreenMachinePresets.Identify(draft));
