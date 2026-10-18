@@ -103,6 +103,19 @@ narrow Supervisor backport onto current main; its source CI cannot start because
 of GitHub billing limits. Later levels, saves, the full current-main ROM and
 standard-app admission remain unverified.
 
+The [Overdrive continuation](COPPERSTART_OVERDRIVE_2026-10-18.md) corrects
+bootstrap memory preference. Equal priorities made unrestricted allocations
+visit Chip before A501; the original loader's relocated code had overwritten
+a Chip free-chunk header. Native Kickstart prefers expansion RAM. Bootstrap
+Chip now has priority -10, preserving explicit Chip requests and fallback.
+The freshly compiled image retains the Alien Breed/F17/Lemmings fixes and passes
+seven guest probes. Both 46,000-field Overdrive CPU-mode pairs match all 1,155
+captures; separate coasting controls verify acceleration and steering in qualifying.
+Alien Breed retains all 181 prior images and opening movement/firing; F17 retains
+driving, Lemmings rescues 100%, and Apidya reaches opening play and its continue prompt.
+The recorded native and replacement scenarios differ, and full laps/races,
+saves, the complete moving-main ROM and standard-app admission remain unverified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
