@@ -154,6 +154,16 @@ No engine/CPU change, title-specific hook, ROM/media byte patch or host OS shim
 is introduced. Full-game completion, physical timing and throughput acceptance
 remain unverified; this remains the bounded frozen native composition.
 
+The [Lotus Turbo Challenge 2 continuation](COPPERSTART_LOTUS2_2026-10-18.md)
+retains the Major Motion repairs and separates the guest supervisor stack from
+its reset-time Chip stack. Inherited VBlank remains enabled, and interrupt frames
+no longer overwrite the loader's unpacking data. The original boot probe passes
+under Kickstart and the corrected ROM and fails on a freshly rebuilt unchanged
+baseline. Nineteen exact-ROM guest cases pass. Each 16,000-field CPU-mode pair
+matches all 805 capture files and four fingerprints; separate idle controls
+verify driving response in the opening race. The bounded native composition,
+full-viewport review, established regressions and limits are recorded explicitly.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
