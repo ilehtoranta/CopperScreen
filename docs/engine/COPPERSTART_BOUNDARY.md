@@ -175,6 +175,16 @@ probes and 19 retained exact-ROM guest cases pass without skips. Lotus 2 retains
 opening racing and Arte retains its later scenes. Later gameplay, physical NTSC,
 full moving-main qualification and standard-app admission remain unverified.
 
+The [Lotus Esprit Turbo Challenge continuation](COPPERSTART_LOTUS1_2026-10-18.md)
+freshly compiles the unchanged Miami Chase-qualified composition for the supplied
+Angels ADF labelled `[b doscopy]`. Both ROMs reach options, music selection and
+input-driven opening racing without an additional firmware correction. Each
+16,000-field normal/scalar pair matches all 805 raw captures and four execution
+fingerprints; independent idle controls verify driving response. The fresh ROM
+is byte-identical to the preceding image, and four exact-ROM frequency/stack
+probes pass with zero skips. Full laps, race completion, later tracks and other
+media remain unverified; this is bounded standalone-ROM qualification.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
