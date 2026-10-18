@@ -1,0 +1,1421 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Alien Breed, supplied SPS998 Game Disk1/2 IPF release",
+  "status": "verified-bounded-native-compatibility",
+  "previousCase": "COPPERSTART_F17_2026-10-17.json",
+  "consumerBaseCommit": "6721eaf3427b6ee90df4c913271440e231d2b85a",
+  "producerF17BaseCommit": "82ba142a2bcae4f3cfd772425cd9cfe62a4918b0",
+  "reusedSupervisorFix": "9eed3fe584549b36f0c5de175929e890ec620669",
+  "producerIntegrationCommit": "db8b8a11deec969a31a35184f8558bf7d7bf819a",
+  "producerQualificationCommit": "a897cc31a5c4de4254725897673f5bbd73c93277",
+  "mainBackportCommit": "7d21e5abfc8c8b82faf8d9ac89f839de3f030cb1",
+  "mainBackportPullRequest": "https://github.com/ilehtoranta/CopperStart/pull/8",
+  "cpuPackage": "1.5.4-nitro-dev.2",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+    "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+    "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+  },
+  "media": {
+    "disk1": {
+      "path": "C:\\Data\\TestImages\\Team17\\AlienBreed_998.zip",
+      "sha256": "f71725c4dd05ea2724dae61760c8bed2b5c9d14289ea56a719f6299ad20fa75f",
+      "entry": "AlienBreed_GameDisk1.ipf",
+      "entryBytes": 1049612,
+      "entrySha256": "8ff762f210f085b0a8f423ca31660cc7d98cf98913290013d4ef9e1a1f5da111"
+    },
+    "disk2": {
+      "frame": 4100,
+      "drive": 0,
+      "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+      "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+    },
+    "disk2ArchiveAlias": {
+      "archive": "C:\\Data\\TestImages\\Team17\\AlienBreed_998.zip",
+      "archiveSha256": "f71725c4dd05ea2724dae61760c8bed2b5c9d14289ea56a719f6299ad20fa75f",
+      "entry": "AlienBreed_GameDisk2.ipf",
+      "alias": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+      "bytes": 1043227,
+      "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+    },
+    "storyDiskUsed": false
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-alien-breed.json",
+    "sha256": "bcf7a340427698d4c17e396d9629676585b9529105b80334c33ba510d737fb0f",
+    "media": [
+      {
+        "frame": 4100,
+        "drive": 0,
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+        "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+      }
+    ]
+  },
+  "rom": {
+    "artifact": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+    },
+    "bytes": 524288,
+    "codeBytes": 459318,
+    "graphicsBytes": 26098,
+    "graphicsResidentAddress": "00FF8000",
+    "freshBuildUtc": "2026-10-17T22:53:37.4468933+00:00",
+    "compiledRom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot-compiled.rom",
+      "sha256": "9fdb5be6bad5b1f27645108cc37dd6ab46e49ccb2006ac8a239f6960246e9bdd"
+    },
+    "qualificationRoot": {
+      "file": "CopperStart-QualifiedRoot.dll",
+      "sha256": "1A1027FA779BD7C8D4B9C5765219D084E79B0A2B25DE84ED7594FD77EE9C94FD",
+      "compatible": true,
+      "managedAllocationSites": 0,
+      "frameworkFeatures": 0
+    }
+  },
+  "build": {
+    "scope": "Fresh F17/Lemmings disk root and integrated Exec, plus the source graphics installer with its private resident moved to FF8000. The four preceding root sources are unchanged. Ten other component DLLs, including System/DOS/device/SDK/compiler and the graphics composer, remain frozen. This is separate from complete current-main/MorphOS ROM or standard-app qualification.",
+    "baselineInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\fresh-build-inputs.json",
+      "sha256": "5a970176449e72f2b5747feb8cac36f87866ecc77d771fb45d8a32395a9a3ba4"
+    },
+    "integratedInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\integrated-build-inputs.json",
+      "sha256": "835c1f644c9659a28a1be9856d7e817e639a4fb5ee3f13ed24078038805e6c53"
+    },
+    "ancestralFrozenInputs": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart-System.dll",
+        "sha256": "2eab704c8838543399fcb6a39d799b514da91f1441f2e2f5acde358c93d9de8a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Exec.dll",
+        "sha256": "b14d11c87e76c07c3408fa5009cba43acb0adafa25ac3061ac4912140986c724"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Devices.dll",
+        "sha256": "29069c61741916aa4dff53aa0c0bda29b76a1c74f4dfbf6ed61c2b51bf84d877"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Dos.dll",
+        "sha256": "1a8f7a429e317a0e77fa3a726611f7f1255173a970559f17af07db796f11460c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Layers.dll",
+        "sha256": "f1f1321d1f15cce04769f3348983774da395c182ec3cc1f0c1bb7b0bb4aca14a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Intuition.dll",
+        "sha256": "dd658367052d98f972e5107cce2b81ab51491ac052f03815323d403f802d9d03"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Graphics.dll",
+        "sha256": "cb5f3eb036d829aedd6f79e0393da991d167fef19cf60bdfdbe967f8e8b37e0b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Compiler.dll",
+        "sha256": "a337436a89a20fd90a575d289c5b8e23edaa52df9abda54d3fc0fa872009e141"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Targets.Amiga.dll",
+        "sha256": "fd0dc4d25aff599560b1a898308726fe6b5b45ca7cd9502c800facebfc974a0c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Sdk.Amiga.dll",
+        "sha256": "6f18a50ac7a3828d735c8f342ed2372cf2e36081db537475f35af46f01832fa3"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "eb8e38b7639964480f52809626cdfab142a454f56e5c327dfbc65aba5db0e425"
+      }
+    ],
+    "rebuiltExec": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\integrated-components\\CopperStart.Exec.dll",
+      "sha256": "490694b19d3ca52a1123bba1847f6e862853efa2cc5ac95bfe5c6fd2bbd31b62"
+    },
+    "execSources": {
+      "src/CopperStart.Exec/AllocationDescriptor.cs": "12a664f571f3752244b28f1298e99805d22cc80fab7ebd14e788432f8f340969",
+      "src/CopperStart.Exec/BootstrapAbi.cs": "f8d77b20fec30ce2dba9476533eebfe815a1fc2e464c13fe9a785db441d6e7a6",
+      "src/CopperStart.Exec/BootstrapCore.cs": "50c39b7695beed7775ebb97ba5f3d8fd120884534a663691472a9978793919a0",
+      "src/CopperStart.Exec/ClassicPolicy.cs": "8c3404b2f5f58ecbea8bc77f095023c0d07a12ebf7ca89154c3f2e48dd8ed1db",
+      "src/CopperStart.Exec/CopperSharpRomBulkCopy.cs": "00a93beab3b10c6bf852c2ed4c4528d7a8fb2152702c20205c10b6bf97931082",
+      "src/CopperStart.Exec/CopperSharpRomInstallMemoryPlatform.cs": "3609db5c02cdbbdd2eb4a731ef091249d2a497c379793cb5b3f8fec4d8f99493",
+      "src/CopperStart.Exec/CopperSharpRomMemoryPlatform.cs": "2f10ccc4232b0bd0993449e652a5e38a26c50665128df960086d76c27e4c3016",
+      "src/CopperStart.Exec/CopperStartCpuProbePrimitives.cs": "5c37730e93ed0cee2d54a1b1c19f4a12e55b7f88491e7584e4babd5de1f42df0",
+      "src/CopperStart.Exec/CopperStartExecExtensionCore.cs": "465c6aabe1ef2b36deded527ddea264cb41f259f3bb1902317df16289bec0eab",
+      "src/CopperStart.Exec/ExecAggregateNativeRoot.cs": "9841cd99dcdc4bfd036eb7f5d9d6595efc1e4a89614e8219dac4f593baa540af",
+      "src/CopperStart.Exec/ExecCallerDataNativeRoot.cs": "860a87254fb756f68c75b7557898d85acfea4023f1574e9e591b9d52b8ea2bac",
+      "src/CopperStart.Exec/ExecCommunicationNativeRoot.cs": "5fad0092fa017fdcd788b832fb80fd9410519ee6f966c653558a33063a1cc18f",
+      "src/CopperStart.Exec/ExecCommunicationVectorFrameCore.cs": "523d71523a2afccaf3b9a3592b3ec10de80661ccfceb830d7b5afd359aaf7ed4",
+      "src/CopperStart.Exec/ExecCopyCore.cs": "40eff6ef5fd08bff4eeb20b1f96918f39ae0915e1de934ff1410d8b55d9b9e76",
+      "src/CopperStart.Exec/ExecCpuStateCore.cs": "985188610665acd1ffff6cb1e106d571a1e54b21628062b5b9ec4c17216b6de9",
+      "src/CopperStart.Exec/ExecEntryCore.cs": "fd84524ebba3facdf4b15d38bc61f3a7ca14a9919f60932f502f500d16ddc32c",
+      "src/CopperStart.Exec/ExecExtendedNativeRoot.cs": "c33144f417a99836523618a5131d9c55c27daf44c9ffe0bf3c560ad4bdf9de9d",
+      "src/CopperStart.Exec/ExecExtendedRegistryCore.cs": "40fd5040cd24637da7f30ffad2e6a2aeafd794c128e18689f75d18303e0143da",
+      "src/CopperStart.Exec/ExecExtendedVectorFrameCore.cs": "5587ca3be2263f24c463acc08920b6c6ed3bf875a677dd8d4d517b6549ac8d3e",
+      "src/CopperStart.Exec/ExecInitializationNativeRoot.cs": "624b08529a2dabd537a4e033ac794b50ea44c320b835f715788df259db005fbb",
+      "src/CopperStart.Exec/ExecInitializationVectorFrameCore.cs": "f7f7a7ff31a886cc8f6dc5b8fc917a2fadf3b3aa5ff308e8a309013be75d24bf",
+      "src/CopperStart.Exec/ExecInitStructCore.cs": "dda46018fab8e3b2d0f7637d10b446918b008a37f1001d7fa058a98de0ea0c29",
+      "src/CopperStart.Exec/ExecInterruptCore.cs": "3288093c21c7c0d25ab0a713f981d054d64acd9d5c6c7a98be86ac32c693ff09",
+      "src/CopperStart.Exec/ExecIoCore.cs": "f05c65d4a6f5f072357b363bb78384bc3dbda170e4e176c959c60b059fee020a",
+      "src/CopperStart.Exec/ExecIoNativeRoot.cs": "bfd6fa9b52c188e26946dd29a5e6400e5e1b003f819fb0eeef6bf9a0afad2934",
+      "src/CopperStart.Exec/ExecIoVectorFrameCore.cs": "b6451fd8e03ca051de6a5bde41bb1e183ca790f04ee856e73aeead0864092bb4",
+      "src/CopperStart.Exec/ExecKickDataCore.cs": "a131e4edbb45e9064451aa59bee19abed936d325f6bbd71e8c776703c6810e57",
+      "src/CopperStart.Exec/ExecLibraryExpungeCallbacks.cs": "9f37a99238e22ae800a24407f17fb1cfc982d0f0ced5f9e0180a5472628855fd",
+      "src/CopperStart.Exec/ExecLibraryVectorCore.cs": "1d5365797da21cbd5dd18d5ae17139b8982f7de0286992bb6cfbf406d1c2bc48",
+      "src/CopperStart.Exec/ExecListCore.cs": "d4b5fc7267d95ff42f6cde3979dae926b59edb3a76448bad730ec414c5b63094",
+      "src/CopperStart.Exec/ExecMakeLibraryCore.cs": "9656c4b93600e13b41dc95d99dbf0f1c878b7b0f48b5a25cd4b08798257f7db5",
+      "src/CopperStart.Exec/ExecMemoryAllocatorKind.cs": "9d6ddadb17bf6f04e2005a8ebf580f871b953d47a43cbf402f992176579eb672",
+      "src/CopperStart.Exec/ExecMemoryCore.cs": "2fe4c3012213bf50a9abecf806185b0e86cb7f5e025281aa0a7eff27a3416047",
+      "src/CopperStart.Exec/ExecMemoryCore.Inspection.cs": "ba05cdb01fcf6fae81add0c7e05defd767d2cc9538ddb67a345ae45204081cc4",
+      "src/CopperStart.Exec/ExecMemoryHandlerCallbacks.cs": "5d2e362ad2ee555e438bb76f3c4c752a3417dbe720ef3cdcbc870ce4fbd88264",
+      "src/CopperStart.Exec/ExecMemoryHandlerCore.cs": "c79ce14d25ced3106bb2098c0fdaafd6ff9b9982838911e0c09a543b912f4ade",
+      "src/CopperStart.Exec/ExecMemoryNativeRoot.cs": "4e4b70dbfef18837e0b8c4ccf67ae8720dc0335340afb27dc0c3facdc3bc8565",
+      "src/CopperStart.Exec/ExecMemoryVectorFrameCore.cs": "5e81e21be03f7ed4b7e567131d83e12ba79812104b243a476c982ed0b0d2bb16",
+      "src/CopperStart.Exec/ExecMorphOsLibraryCore.cs": "78794e5b7281de0b41408bc7b63321f145e82997ddeb85479eb931c05862f8e5",
+      "src/CopperStart.Exec/ExecMorphOsPlatformCore.cs": "d7a6824e5d9caea2488779b3db6f00c528551cf03edb52bae9d0bbd7744c7b3f",
+      "src/CopperStart.Exec/ExecMorphOsSystemCore.cs": "35c363fe4edcfb252f35d22be49a2e1cab5cb4ccf542e7d708ceae3ccdbc8523",
+      "src/CopperStart.Exec/ExecMorphOsTaskCore.cs": "55c003840621fc057a2f55d47dbd5d9b2b034ea8bf33d86822026a12170c9926",
+      "src/CopperStart.Exec/ExecMorphOsTaskCreationCore.cs": "f63564d40b25f9d3d45778730e71f24f13c102520a93ef94dc039ee53fe0c581",
+      "src/CopperStart.Exec/ExecNativeBoundaryCore.cs": "47bd5431c824dbbeaf0e54d7d3708bd77603e727c1632ae760804b7b3f16c489",
+      "src/CopperStart.Exec/ExecNativeDirectEntrypoints.g.cs": "791a66a9d83db540feed8c5efefaaed40da1670ed432dd95b2b7528bed09e7d1",
+      "src/CopperStart.Exec/ExecNativeProductionEntrypoints.cs": "80ccc81a777fc0486069d87f1deb522003aa51abbcb06565d3eb21cdb4ce5425",
+      "src/CopperStart.Exec/ExecNativeStatusVectors.cs": "e382eb5567a0fd4445fac3c537a312cba541f66033992c30c63de9a44701a8a9",
+      "src/CopperStart.Exec/ExecNativeVectorTableCore.cs": "c5107f7dd7620028917933beaacd944ba3f2a52b42406c7460d3a8b8cfb46fc0",
+      "src/CopperStart.Exec/ExecNativeVectorTableCore.Interrupts.cs": "4401457ec757c40800d506d99e131febed3e5c623a5cf3b363b5af3c8ae1b4b8",
+      "src/CopperStart.Exec/ExecPhysicalNativeRoot.cs": "d9261995d07e80af27cb528b858762afbcb073043b49f7ff065d0948e616f261",
+      "src/CopperStart.Exec/ExecPoolCore.cs": "8827851f4f29d9a1b527102a7f24449f34247f1c7cef1a258dd8f3e92d3a4e7e",
+      "src/CopperStart.Exec/ExecPortCore.cs": "38e6aaa6501f3c016170b6d8b248a5977aca7cd24e3e7d4fac92ba902416cb39",
+      "src/CopperStart.Exec/ExecRawConsoleCore.cs": "b07a9fe74ad241f02de109550f534f7ddf40419115adfe7a7e30db32a55437e8",
+      "src/CopperStart.Exec/ExecRawDoFmtCore.cs": "18daf5d4883a4287218f14279448bc4adc06bc3c611b89eb88e30e580cae0793",
+      "src/CopperStart.Exec/ExecRegistryCore.cs": "c226c95d8235ae11856fdfede9c3309e55369eb450969258e871067004206355",
+      "src/CopperStart.Exec/ExecResidentContinuationCodec.cs": "9026516e801f7cf2e646023a45c85503e28d5527510d91167e8e7d09f082afe8",
+      "src/CopperStart.Exec/ExecResidentCore.cs": "07096e36f2617227dd0f0d3c843b5418184c5bcb662153b381c3f123b0c986b7",
+      "src/CopperStart.Exec/ExecRuntimeContinuationCore.cs": "0112274ec4b3b6175b20734c078a0d518f52cab5cce4041db77a0ff5bc4d0a30",
+      "src/CopperStart.Exec/ExecRuntimeNativeRoot.cs": "5bb6b6417fe5d247af0461979b1040531afcc16522e2392f25ad402b79be333f",
+      "src/CopperStart.Exec/ExecRuntimeVectorCore.cs": "31ef34946948a27386b2549fa2a7a16af7eb20ee563b027ffe579d7f2699c3a9",
+      "src/CopperStart.Exec/ExecSchedulerCore.cs": "4c02371d2d3234c3d090d79426c674eb012e38cac92f2ef82aa286ec57ab012f",
+      "src/CopperStart.Exec/ExecSemaphoreCore.cs": "5759da0803e0f9528985a3ec9969966d3bc3abb6765dce6e6d5bf69057701a0e",
+      "src/CopperStart.Exec/ExecSemaphoreWaiter.cs": "ba53deb6754d0aa57d56b6cab5e3fee8ba4a2b486443b3707ed2de7b87f8bdaf",
+      "src/CopperStart.Exec/ExecSemaphoreWaiterCodec.cs": "6ffc2bf398d9875c994fc1980c8dd6dc14c9ff49923ac60683566840b3283d95",
+      "src/CopperStart.Exec/ExecSignalCore.cs": "f63b142b6618f073015b38bc89998a7caea927747a624a4c19e8295643f15462",
+      "src/CopperStart.Exec/ExecSignalSemaphoreCodec.cs": "ce4fbc616c536a52d5dea4a9423dece0ccff88e376e80333b3837a60088820b2",
+      "src/CopperStart.Exec/ExecTagCore.cs": "413fd63207798429671a796b1814bc14c5d7eb0132272dc50128f6738c49805a",
+      "src/CopperStart.Exec/ExecTaskContextCore.cs": "0180a8c92ab934e58dc7fc0190fa1e8d069fd473bef359225991111827abf3d4",
+      "src/CopperStart.Exec/ExecTaskCore.cs": "f8bc8f8c38d94f7883ec3ad7a1397b9915c494ec003db737f5186c035c9a4b37",
+      "src/CopperStart.Exec/ExecTaskFrame68kCodec.cs": "6ff59fb3040956474ddead01fba0215c78198ef8b4929687ef6184541c2030bd",
+      "src/CopperStart.Exec/ExecTaskInitialArgumentsCore.cs": "8bdf924967af7f425b515e0fc570f078ba75a6617fa5c2aa4b6659ba17090b58",
+      "src/CopperStart.Exec/ExecTaskLifecycleCore.cs": "e18b3f12bf502f5b9cda4aa76aedd2621ac581ec147a36eb7dacee702b2a6dd0",
+      "src/CopperStart.Exec/ExecTaskMemoryCore.cs": "996f37fc22be463e12d0609f1712a9e51947ccd020045fabcdf9b8c480de6103",
+      "src/CopperStart.Exec/ExecTaskNativeRoot.cs": "bc240fc9575ed221b1c3dd380c3904c2c84cd855916bbb359b95e0f7912d18fe",
+      "src/CopperStart.Exec/ExecTaskPoolCore.cs": "30e00465640ecc99b52acf80137b828e2a462530401c67cafd13862c4c0c5b0c",
+      "src/CopperStart.Exec/ExecTaskVectorFrameCore.cs": "7c6987116a03f0aea06457b40eabaef37c4ba88865de207d7d2345ba9b7e0d6c",
+      "src/CopperStart.Exec/ExecTrapCore.cs": "f905d887885e4f2e7c4cab1fbc3b86a109e0527e97155d1255bb90631ec59c6e",
+      "src/CopperStart.Exec/ExecVectorCore.cs": "43e8d0aff8b774c8d6dc19100b5db6795c533ee6d5ec8e269b87463e28183938",
+      "src/CopperStart.Exec/IExecBootstrapPlatform.cs": "ebc1dba35e2d85e517d9293ed119cf3fb6677191807550b3eb16b3a61a12a74a",
+      "src/CopperStart.Exec/IExecMemoryPlatform.cs": "d29ec52716371a5a250461c947c5e47c36a81a0e941fd1d2bffeef16615d7d9d",
+      "src/CopperStart.Exec/IExecMemoryPolicy.cs": "8aaac434a0137020a088c500cbdfe390c8fb415e0218d125c267946f41cb71aa",
+      "src/CopperStart.Exec/IExecRuntimePlatform.cs": "51cac51b138dd3284b35f3a53ac197066bd57dad1e898c553a7c6f8bea655adb",
+      "src/CopperStart.Exec/MemoryMath.cs": "215939a50e96a356223d3f8aa53cc4f0426c8e427554b5e2f3b66bd511a7c2e6",
+      "src/CopperStart.Exec/TlsfPolicy.cs": "a3121ce33cd4e36b403d8df03e90b248b4c5aa0fc1074711904ed79670c39647"
+    },
+    "projectedRootSources": {
+      "NativeDiskBoot.cs": "8a6ed399c71d41df7dcb0039173ad37983dfb18e7b0c73872a2f91077aefc4b6",
+      "NativeGraphicsBoot.cs": "4f9020c92dd110e3e4855935528a4026e13a2be377827af0050b3447e2527664",
+      "NativeIntuitionBoot.cs": "627ed904b1b40ada8c097405ea29142771c294eebf2ef7b3fd91ce944c9da954",
+      "ProductionExports.cs": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605",
+      "Program.cs": "201b3fee6de27dc891caa8786ea91b93430d287a8c590d70a4fe4ca9e58d8eeb"
+    },
+    "retainedComponentCount": 10,
+    "frameworkCompatible": true,
+    "managedAllocationSites": 0,
+    "frameworkFeatures": 0,
+    "builderSource": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-builder\\Program.cs",
+      "sha256": "3736923121403befb29eca393fe8502a34b254c9bb63e6340c919a141b4fb764"
+    },
+    "execBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\integrated-exec-build.log",
+      "sha256": "c42cd92cc1ffc2c5b2d75063397af106d8b721489eb10629478562de6f676951"
+    },
+    "builderBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-builder-build.log",
+      "sha256": "12136c1b557ca679013d45d334cd4555bcc8dbb36b7413a5895ac0186afba87c"
+    },
+    "romBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom-build.log",
+      "sha256": "1a9781454979ee9a2e23b579c390007fa9b23442ab301e2a2684fefb61456b84"
+    },
+    "inheritedManifestNote": "Ancestral manifest entries for CPU/engine/components describe their original build, not the current execution identities or rebuilt Exec. Actual execution binaries, all retained inputs, rebuilt Exec and fresh root are recorded here.",
+    "finalInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-build-inputs.json",
+      "sha256": "3585b4421c1dd9eae725cfd173cc52385eb6b0e07cbada9fa5a07b2e1144b132"
+    },
+    "graphicsInstallerSource": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\rom\\CopperStart.SystemRom\\NativeGraphicsBoot.cs",
+      "sha256": "df4675204b34a4b159d34d6bccd6420a83bc1e04f3593100d733d73e2bd10eb1"
+    },
+    "layoutCorrection": "The first integrated compile extended beyond FF0000 and the link guard rejected its overlap. The private graphics resident and its source installer now use FF8000. No compiled ROM/game bytes were patched; the native root was recompiled, and overlap/checksum/framework gates remain enabled."
+  },
+  "before": {
+    "freshRom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "6ad458f6e8f2823f3e978ed13ae567574b545557536c789e0ef99da9e45b51ca"
+    },
+    "manifest": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\fresh-before\\run.json",
+      "sha256": "7d7c7ec027c4f19d9dcae0f619e48af9388a338798956fe8ddd21ac9b77e6bf1"
+    },
+    "fields": 18000,
+    "runnerCompleted": true,
+    "compatibility": "FAIL: remains black after the internal SetSR follows the caller-modified trap-zero vector into unrelated data.",
+    "traceBefore": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace-before.log",
+      "sha256": "f68f796960b578c865cba4d12ad564d258806b51f3783f51e8912a37e5f276b6"
+    },
+    "traceNative": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace-native.log",
+      "sha256": "3a15527a30256dc1bbf70874ef08d8eb429b1da435f5bd258746432921aa1b83"
+    },
+    "vectorTrace": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace-vector.log",
+      "sha256": "1775244031cbe2c949051cc696ab541301f4f2522049e9a0fca82c6808b5b7d3"
+    },
+    "nativeVectorTrace": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace-native-vector.log",
+      "sha256": "f3d00c3575b16ef33aac1c9e315d5d8d612533e4db3f9fd002c68ab0e67de0c2"
+    },
+    "nativeEarlyMemory": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace-native-early.slowram",
+      "sha256": "f8bc504d3f20d68f4c43cd99d7762f5f17d7fee7e7d7fa3ae89d6e3713fb361e"
+    },
+    "firstWrongPath": {
+      "function": "AllocMem entering SetSR",
+      "allocationBytes": "00040000",
+      "requirements": "00010002",
+      "sourceAllocationCallPc": "000286F4",
+      "sourceAllocationField": 89,
+      "sourceVectorWritePc": "000285A0",
+      "sourceVectorWriteField": 88,
+      "sourceVectorBefore": "00C040AC",
+      "sourceVectorAfter": "000240AC",
+      "sourceGatePc": "00C040BE",
+      "wrongEntryPc": "000240AC",
+      "nativeAllocationCallPc": "000018BC",
+      "nativeAllocationField": 227,
+      "nativeAllocationReturnPc": "000018C0",
+      "nativeAllocationResult": "000059E8",
+      "nativeVectorWritePc": "00001768",
+      "nativeVectorWriteField": 226,
+      "nativeVectorBefore": "00FC0836",
+      "nativeVectorAfter": "00020836",
+      "nativeSupervisorEntry": "00FC08E6",
+      "nativePrivilegeVector": "00FC090E"
+    }
+  },
+  "runs": {
+    "native-pilot": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-pilot\\run.json",
+        "sha256": "35507d972b58391e0fba8f29bfeadcca39cfa377060456a75f357491d2b03d61"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-alien-breed.json",
+        "sha256": "bcf7a340427698d4c17e396d9629676585b9529105b80334c33ba510d737fb0f",
+        "media": [
+          {
+            "frame": 4100,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+            "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+          }
+        ]
+      },
+      "captureFiles": 905,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557704042",
+        "cpu": "0x0729DD8620A6C095",
+        "hardware": "0x3EEDA47BC632F4FA",
+        "output": "0x72C09784A03B8869",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "native-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-scalar\\run.json",
+        "sha256": "bc5d02d7bdb4b440ed85e788e50dd9bca0422b56c952753e4657cd406b7ce5f2"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-alien-breed.json",
+        "sha256": "bcf7a340427698d4c17e396d9629676585b9529105b80334c33ba510d737fb0f",
+        "media": [
+          {
+            "frame": 4100,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+            "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+          }
+        ]
+      },
+      "captureFiles": 905,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557704042",
+        "cpu": "0x0729DD8620A6C095",
+        "hardware": "0x3EEDA47BC632F4FA",
+        "output": "0x72C09784A03B8869",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "copperstart-final": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\run.json",
+        "sha256": "6418e17631abbca0593cf3f0cd4a34819fdb45a0abc38505e0ec6dc5462c8f07"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-alien-breed.json",
+        "sha256": "bcf7a340427698d4c17e396d9629676585b9529105b80334c33ba510d737fb0f",
+        "media": [
+          {
+            "frame": 4100,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+            "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+          }
+        ]
+      },
+      "captureFiles": 905,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557836004",
+        "cpu": "0x1C1C904BC2C9C1A7",
+        "hardware": "0xBADDDECFFB85470E",
+        "output": "0x11168E6C2D9F9FCD",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "copperstart-final-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final-scalar\\run.json",
+        "sha256": "23d35d17518685b5b097133ceec7224ee42b9ecd7711e4e2fdfd0b3297e0bf40"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-alien-breed.json",
+        "sha256": "bcf7a340427698d4c17e396d9629676585b9529105b80334c33ba510d737fb0f",
+        "media": [
+          {
+            "frame": 4100,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+            "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+          }
+        ]
+      },
+      "captureFiles": 905,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557836004",
+        "cpu": "0x1C1C904BC2C9C1A7",
+        "hardware": "0xBADDDECFFB85470E",
+        "output": "0x11168E6C2D9F9FCD",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "f17-regression": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\run.json",
+        "sha256": "34e037c0cab1f9b802f9627d457a2221d2ad3e5bd1d1c43b97ed1eb0493c1396"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-f17-race-v1.json",
+        "sha256": "6c5571630f730c975f4a3b805633139de8a1727b44ca697a935780144dce3189",
+        "media": [
+          {
+            "frame": 6120,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\corpus-f17-disk2.ipf",
+            "sha256": "59bfb9dac3179f2d4133d9ab2426906c50fea8c50e3857c7a6135d97163ac920"
+          }
+        ]
+      },
+      "captureFiles": 1305,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "26000",
+        "completed": "26000",
+        "cycle": "3683328792",
+        "cpu": "0xEDD8B02BB80B0D0C",
+        "hardware": "0xF5A5AC15A6EABDE9",
+        "output": "0x697C34F65DD18DD9",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "lemmings-regression": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\lemmings-regression\\run.json",
+        "sha256": "684f3c5e5ee0ad3d8ec93c541f62145508a308b6597ea3d913add87a0daa5dc3"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+        "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+        "media": [
+          {
+            "frame": 8460,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+            "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+            "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+            "entryBytes": 901120,
+            "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+          }
+        ]
+      },
+      "captureFiles": 605,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "cycle": "3410448010",
+        "cpu": "0xD09D0730EEB80BF2",
+        "hardware": "0xD27BBA458CA4C399",
+        "output": "0x09D46C97064FF53E",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "apidya-regression": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\apidya-regression\\run.json",
+        "sha256": "f28e8c7ca36c9f3256c3027f4c8888fb0e043f39d5721c0dc29c6c9339ce4857"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-apidya.json",
+        "sha256": "02ea15dc1e58f5609a34774cfc29c51c8b371c292907ca6d60bf36922112929e",
+        "media": []
+      },
+      "captureFiles": 1005,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "12000",
+        "completed": "12000",
+        "cycle": "1705224006",
+        "cpu": "0xF78A87577D375231",
+        "hardware": "0xEBF408C22CB7BD1D",
+        "output": "0x2A27708AC1903A15",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "native-neutral": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-neutral\\run.json",
+        "sha256": "29371065fe29e420c7c6786317097650f880294a593c8ea33170a09964ca3d7f"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-alien-breed-neutral-v1.json",
+        "sha256": "1ec6811940ab1eccee5fdbd5dc3ea6a3d2b8fab13b32b74647bde3311a064ef0",
+        "media": [
+          {
+            "frame": 4100,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+            "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+          }
+        ]
+      },
+      "captureFiles": 905,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557704056",
+        "cpu": "0x8F61221033FA7899",
+        "hardware": "0x6B95BE1793C109A0",
+        "output": "0x0FFDE66F77A4C4C9",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "copperstart-neutral": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-neutral\\run.json",
+        "sha256": "22c963ca0fb8a8b9bef419a9581cd970791bb8ada6dbdd50e8cf6f7320ac3fe5"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "f755c8a0d00b1d99fa54071e0149c111f7bb5bfce7ba58f55172ea0fd234ab62"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-alien-breed-neutral-v1.json",
+        "sha256": "1ec6811940ab1eccee5fdbd5dc3ea6a3d2b8fab13b32b74647bde3311a064ef0",
+        "media": [
+          {
+            "frame": 4100,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\alien-breed-disk2.ipf",
+            "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+          }
+        ]
+      },
+      "captureFiles": 905,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557836018",
+        "cpu": "0x4A1514B5B16D6567",
+        "hardware": "0xAD55464123AA7F08",
+        "output": "0x1332B11075D008C0",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    }
+  },
+  "comparisons": {
+    "native": {
+      "filesCompared": 905,
+      "mismatches": [],
+      "finalFingerprintsMatch": true
+    },
+    "copperstart": {
+      "filesCompared": 905,
+      "mismatches": [],
+      "finalFingerprintsMatch": true
+    },
+    "f17Previous": {
+      "previousManifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\copperstart-race\\run.json",
+        "sha256": "ab3aa3bcd8e491ebfb0cfbd905a74af623c31bfbcd59d8d3b5ea2ff3bb3176de"
+      },
+      "imagesCompared": 261,
+      "matching": 243,
+      "differences": [
+        "frame-001100.bmp",
+        "frame-001200.bmp",
+        "frame-001300.bmp",
+        "frame-002400.bmp",
+        "frame-002600.bmp",
+        "frame-003000.bmp",
+        "frame-003100.bmp",
+        "frame-003200.bmp",
+        "frame-003300.bmp",
+        "frame-003400.bmp",
+        "frame-003500.bmp",
+        "frame-003600.bmp",
+        "frame-003700.bmp",
+        "frame-003800.bmp",
+        "frame-003900.bmp",
+        "frame-004000.bmp",
+        "frame-004200.bmp",
+        "frame-021600.bmp"
+      ],
+      "interpretation": "Exec code, memory layout and boot timing changed. Cross-ROM RAM/CPU identity is not a gate; full-field images and functional outcomes are reviewed separately.",
+      "reviewedLateDifference": {
+        "old": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\copperstart-race\\captures\\frame-021600.bmp",
+          "sha256": "2e5ee8322ba8af1f290a04d37ff2381082613bf3efd6de54b90401a1a71baa79"
+        },
+        "new": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\captures\\frame-021600.bmp",
+          "sha256": "be3b8beec2f7c029157238b08cc451b3672514cb95d3edaf720dc797b44f8da4"
+        },
+        "differentPixels": 80,
+        "boundingBox": [
+          434,
+          61,
+          462,
+          73
+        ],
+        "observation": "The only differing race image is field 21600. Its 80 differing pixels lie in the lap-clock digits at x434..461,y61..72; roadway, car and speed agree. All other differences precede field 4300."
+      }
+    },
+    "lemmingsPrevious": {
+      "previousManifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\copperstart-level1\\run.json",
+        "sha256": "1316120dff2644c909c1237b3d5df6a2802f952f43d0db806cb5db036b24c696"
+      },
+      "imagesCompared": 121,
+      "matching": 83,
+      "differences": [
+        "frame-000400.bmp",
+        "frame-000600.bmp",
+        "frame-001200.bmp",
+        "frame-002000.bmp",
+        "frame-002800.bmp",
+        "frame-003000.bmp",
+        "frame-003200.bmp",
+        "frame-003400.bmp",
+        "frame-003600.bmp",
+        "frame-003800.bmp",
+        "frame-004000.bmp",
+        "frame-004200.bmp",
+        "frame-004400.bmp",
+        "frame-004600.bmp",
+        "frame-004800.bmp",
+        "frame-005000.bmp",
+        "frame-005200.bmp",
+        "frame-005400.bmp",
+        "frame-005600.bmp",
+        "frame-006000.bmp",
+        "frame-006200.bmp",
+        "frame-006400.bmp",
+        "frame-009200.bmp",
+        "frame-009400.bmp",
+        "frame-009600.bmp",
+        "frame-009800.bmp",
+        "frame-010000.bmp",
+        "frame-010200.bmp",
+        "frame-010400.bmp",
+        "frame-010800.bmp",
+        "frame-011000.bmp",
+        "frame-011200.bmp",
+        "frame-011400.bmp",
+        "frame-011600.bmp",
+        "frame-011800.bmp",
+        "frame-012000.bmp",
+        "frame-013000.bmp",
+        "frame-020000.bmp"
+      ],
+      "interpretation": "Exec code, memory layout and boot timing changed. Cross-ROM RAM/CPU identity is not a gate; full-field images and functional outcomes are reviewed separately."
+    },
+    "apidyaPrevious": {
+      "previousManifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-apidya-2026-10-17\\copperstart-final\\run.json",
+        "sha256": "3ffd49f9bb2f5fc346bbd7ed860337e618b1e22b9ed219c84a6a098ca0caae53"
+      },
+      "imagesCompared": 201,
+      "matching": 118,
+      "differences": [
+        "frame-001800.bmp",
+        "frame-002520.bmp",
+        "frame-006900.bmp",
+        "frame-006960.bmp",
+        "frame-007020.bmp",
+        "frame-007080.bmp",
+        "frame-007140.bmp",
+        "frame-007200.bmp",
+        "frame-007260.bmp",
+        "frame-007320.bmp",
+        "frame-007380.bmp",
+        "frame-007440.bmp",
+        "frame-007500.bmp",
+        "frame-007560.bmp",
+        "frame-007620.bmp",
+        "frame-007680.bmp",
+        "frame-007740.bmp",
+        "frame-007800.bmp",
+        "frame-007860.bmp",
+        "frame-007920.bmp",
+        "frame-007980.bmp",
+        "frame-008040.bmp",
+        "frame-008100.bmp",
+        "frame-008160.bmp",
+        "frame-008220.bmp",
+        "frame-008280.bmp",
+        "frame-008340.bmp",
+        "frame-008400.bmp",
+        "frame-008460.bmp",
+        "frame-008520.bmp",
+        "frame-008580.bmp",
+        "frame-008640.bmp",
+        "frame-008700.bmp",
+        "frame-008760.bmp",
+        "frame-008820.bmp",
+        "frame-008880.bmp",
+        "frame-008940.bmp",
+        "frame-009000.bmp",
+        "frame-009060.bmp",
+        "frame-009120.bmp",
+        "frame-009180.bmp",
+        "frame-009240.bmp",
+        "frame-009300.bmp",
+        "frame-009660.bmp",
+        "frame-009720.bmp",
+        "frame-009780.bmp",
+        "frame-009840.bmp",
+        "frame-009900.bmp",
+        "frame-009960.bmp",
+        "frame-010020.bmp",
+        "frame-010080.bmp",
+        "frame-010140.bmp",
+        "frame-010200.bmp",
+        "frame-010260.bmp",
+        "frame-010320.bmp",
+        "frame-010380.bmp",
+        "frame-010440.bmp",
+        "frame-010500.bmp",
+        "frame-010560.bmp",
+        "frame-010620.bmp",
+        "frame-010680.bmp",
+        "frame-010740.bmp",
+        "frame-010800.bmp",
+        "frame-010860.bmp",
+        "frame-010920.bmp",
+        "frame-010980.bmp",
+        "frame-011040.bmp",
+        "frame-011100.bmp",
+        "frame-011160.bmp",
+        "frame-011220.bmp",
+        "frame-011280.bmp",
+        "frame-011340.bmp",
+        "frame-011400.bmp",
+        "frame-011460.bmp",
+        "frame-011520.bmp",
+        "frame-011580.bmp",
+        "frame-011640.bmp",
+        "frame-011700.bmp",
+        "frame-011760.bmp",
+        "frame-011820.bmp",
+        "frame-011880.bmp",
+        "frame-011940.bmp",
+        "frame-012000.bmp"
+      ],
+      "interpretation": "Exec code, memory layout and boot timing changed. Cross-ROM RAM/CPU identity is not a gate; full-field images and functional outcomes are reviewed separately."
+    },
+    "crossRomAlienBreed": {
+      "imagesCompared": 181,
+      "matching": 162,
+      "differences": [
+        "frame-000100.bmp",
+        "frame-000200.bmp",
+        "frame-000800.bmp",
+        "frame-000900.bmp",
+        "frame-001000.bmp",
+        "frame-001100.bmp",
+        "frame-001200.bmp",
+        "frame-001300.bmp",
+        "frame-001400.bmp",
+        "frame-001500.bmp",
+        "frame-001600.bmp",
+        "frame-001700.bmp",
+        "frame-001800.bmp",
+        "frame-001900.bmp",
+        "frame-002000.bmp",
+        "frame-002100.bmp",
+        "frame-002200.bmp",
+        "frame-002300.bmp",
+        "frame-003600.bmp"
+      ],
+      "interpretation": "Compare reviewed loading, menus and input-driven gameplay milestones; no cross-ROM CPU/RAM identity claim."
+    },
+    "nativeMovement": {
+      "imagesCompared": 181,
+      "different": [
+        "frame-016100.bmp",
+        "frame-016200.bmp",
+        "frame-016300.bmp",
+        "frame-016400.bmp",
+        "frame-016500.bmp",
+        "frame-016600.bmp",
+        "frame-016700.bmp",
+        "frame-016800.bmp",
+        "frame-016900.bmp",
+        "frame-017000.bmp",
+        "frame-017100.bmp",
+        "frame-017200.bmp",
+        "frame-017300.bmp",
+        "frame-017400.bmp",
+        "frame-017500.bmp",
+        "frame-017600.bmp",
+        "frame-017700.bmp",
+        "frame-017800.bmp",
+        "frame-017900.bmp",
+        "frame-018000.bmp"
+      ],
+      "interpretation": "Identical input through the level opening; only directional bits at fields 16000,16400,16800 differ. Fire timing and media are unchanged. Reviewed post-input views distinguish movement/scrolling from firing at the starting position."
+    },
+    "copperstartMovement": {
+      "imagesCompared": 181,
+      "different": [
+        "frame-016100.bmp",
+        "frame-016200.bmp",
+        "frame-016300.bmp",
+        "frame-016400.bmp",
+        "frame-016500.bmp",
+        "frame-016600.bmp",
+        "frame-016700.bmp",
+        "frame-016800.bmp",
+        "frame-016900.bmp",
+        "frame-017000.bmp",
+        "frame-017100.bmp",
+        "frame-017200.bmp",
+        "frame-017300.bmp",
+        "frame-017400.bmp",
+        "frame-017500.bmp",
+        "frame-017600.bmp",
+        "frame-017700.bmp",
+        "frame-017800.bmp",
+        "frame-017900.bmp",
+        "frame-018000.bmp"
+      ],
+      "interpretation": "Identical input through the level opening; only directional bits at fields 16000,16400,16800 differ. Fire timing and media are unchanged. Reviewed post-input views distinguish movement/scrolling from firing at the starting position."
+    }
+  },
+  "reviewedCaptures": {
+    "fresh-before/captures/frame-018000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\fresh-before\\captures\\frame-018000.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22",
+      "observation": "Fresh F17-only ROM remains black; failed compatibility despite runner completion.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "native-pilot/captures/frame-010000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-pilot\\captures\\frame-010000.bmp",
+      "sha256": "ebbd5abb0ff2d3559e44d2058263aa642f2c1e8bcdb77cb6c602383e2e1c2f28",
+      "observation": "Native control reaches the one-player menu.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "native-pilot/captures/frame-014000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-pilot\\captures\\frame-014000.bmp",
+      "sha256": "aed2c47ab5d4fed7b43f4bce407487f6518d6f1060c99020e2728fa6604b0d69",
+      "observation": "Native level-one opening beside the Bay 2 ship.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "native-pilot/captures/frame-018000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-pilot\\captures\\frame-018000.bmp",
+      "sha256": "8092aa8d01e93309300f0ecd91d8d63bd586f1e148f3560395ec206007647e30",
+      "observation": "Native directional input scrolls into another room, with firing and ammunition response.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "native-neutral/captures/frame-018000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\native-neutral\\captures\\frame-018000.bmp",
+      "sha256": "f39b7b6a66a63c9e41b1ab67fb32b2562987f989cf680a28f49dd101c87847f6",
+      "observation": "Native fire-only control remains beside the starting ship.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-final/captures/frame-003800.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\captures\\frame-003800.bmp",
+      "sha256": "8cb112eb26f2e27dbc4e6275ef9303394febdf7f13c93eb06b27111ee7147d82",
+      "observation": "Corrected ROM reaches the Alien Breed disk-two request.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-final/captures/frame-010000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\captures\\frame-010000.bmp",
+      "sha256": "ebbd5abb0ff2d3559e44d2058263aa642f2c1e8bcdb77cb6c602383e2e1c2f28",
+      "observation": "Corrected ROM reaches the one-player menu after the original disk swap.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-final/captures/frame-013000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\captures\\frame-013000.bmp",
+      "sha256": "a4c72f4233dedf93102afdd070e15537a373896807a478cdc99d1cf7be5476aa",
+      "observation": "Mission briefing transition appears before the first level.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-final/captures/frame-014000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\captures\\frame-014000.bmp",
+      "sha256": "aed2c47ab5d4fed7b43f4bce407487f6518d6f1060c99020e2728fa6604b0d69",
+      "observation": "First level opens beside the Bay 2 ship with the full playfield and status bars.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-final/captures/frame-016500.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\captures\\frame-016500.bmp",
+      "sha256": "3af8697e45cabbf695204249295437b4064a9b97a10503c84f398a9f8da37c83",
+      "observation": "Directional/fire input scrolls the bay and produces weapon effects and ammunition response.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-final/captures/frame-018000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-final\\captures\\frame-018000.bmp",
+      "sha256": "8092aa8d01e93309300f0ecd91d8d63bd586f1e148f3560395ec206007647e30",
+      "observation": "Later directional input enters another room; level execution continues.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-neutral/captures/frame-014000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-neutral\\captures\\frame-014000.bmp",
+      "sha256": "aed2c47ab5d4fed7b43f4bce407487f6518d6f1060c99020e2728fa6604b0d69",
+      "observation": "Control shares the same level opening and starting ship.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "copperstart-neutral/captures/frame-018000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\copperstart-neutral\\captures\\frame-018000.bmp",
+      "sha256": "f39b7b6a66a63c9e41b1ab67fb32b2562987f989cf680a28f49dd101c87847f6",
+      "observation": "Fire-only control remains at the ship. Only later direction bits differ from the positive input.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "f17-regression/captures/frame-016600.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\captures\\frame-016600.bmp",
+      "sha256": "84569df5a097362abdcd3c2a92f0cb69cc63a3609e6596fa290edeaea4e6954a",
+      "observation": "Race circuit opens with the stationary car before acceleration input.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "f17-regression/captures/frame-021000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\captures\\frame-021000.bmp",
+      "sha256": "77126c2142be5f777df9d2b370700391e458957791f840b39bddaff4823523b5",
+      "observation": "Acceleration changes the speed readout and track position.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "f17-regression/captures/frame-021600.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\captures\\frame-021600.bmp",
+      "sha256": "be3b8beec2f7c029157238b08cc451b3672514cb95d3edaf720dc797b44f8da4",
+      "observation": "The only differing race screenshot has a small lap-clock digit difference; road, car and speed match the previous qualified ROM.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "f17-regression/captures/frame-022000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\captures\\frame-022000.bmp",
+      "sha256": "95dd6f367e4097a89fa7c9c3e26edcff806b6423a8531f6dca1edf17507e830e",
+      "observation": "Steering and acceleration advance the car through the circuit.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "f17-regression/captures/frame-026000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\f17-regression\\captures\\frame-026000.bmp",
+      "sha256": "d126b76e284a6ad29343bdcab9f0fb579db2ecae16bc5afcaaa426287b5bcc91",
+      "observation": "Race continues with changed road position and elapsed lap time.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "lemmings-regression/captures/frame-018400.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\lemmings-regression\\captures\\frame-018400.bmp",
+      "sha256": "ac118de187dee1214a9a897c0654e1c2ad0d927de380627b0896ff7ebd699c43",
+      "observation": "Level-one lemmings are active in the original landscape.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "lemmings-regression/captures/frame-024000.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\lemmings-regression\\captures\\frame-024000.bmp",
+      "sha256": "fa46759998317c7438ca12bb433cf0d4124504506f52efee201e4e4f47852b4f",
+      "observation": "All lemmings accounted for; result explicitly reports 100% rescued.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "apidya-regression/captures/frame-005160.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\apidya-regression\\captures\\frame-005160.bmp",
+      "sha256": "c93e8c12287f00af1d97a2a4176d3e551581c0783cdd8f1a54cddfb57c27f056",
+      "observation": "Options retain the configured normal difficulty and joystick control.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "apidya-regression/captures/frame-007200.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\apidya-regression\\captures\\frame-007200.bmp",
+      "sha256": "5673234a3cd7cc5ea6a8c64b9a8170be055322fdde10ad968dc6322f4122db86",
+      "observation": "Opening-stage reveal transition, also present at a different phase in the previous qualified image.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "apidya-regression/captures/frame-008400.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\apidya-regression\\captures\\frame-008400.bmp",
+      "sha256": "5bf120eaf2cfb81bede8d1d15e7cfaf013d3804e40b3532927ad8d205db2fc76",
+      "observation": "Opening stage runs with the player, enemies, projectiles, scrolling scenery and status display.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    },
+    "apidya-regression/captures/frame-011400.bmp": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\apidya-regression\\captures\\frame-011400.bmp",
+      "sha256": "8c7e492df237e8b9866aefbd34c9b436d6bcbae78ef35099d2ab3bd72b570cf2",
+      "observation": "Continue prompt is reached with credits remaining.",
+      "review": "Manual full-field visual inspection; CPU-mode duplicates are separately established by complete capture identity."
+    }
+  },
+  "tests": {
+    "exactRomGuestProbes": {
+      "native": {
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\native\\memory-trap.trx",
+          "sha256": "fc5d3b79b6a6aebb47a9a7429958307052ba17b68699890ce31912d3daeccd0c"
+        },
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "before": {
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\before\\memory-trap.trx",
+          "sha256": "75f1f436986b13517e7019dedd804f38057ab5ccfc4261a168e8f652c22e999d"
+        },
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "final": {
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\final\\memory-trap.trx",
+          "sha256": "e211a2c7204abe8933ee190cb7fd5f9918bf7e290c842dd90e7ccd345e5fca3c"
+        },
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    "focusedExec": {
+      "trx": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\source-exec\\exec.trx",
+        "sha256": "0fe62cfefa7bb684f64a63cc76f2baa29d09dd00e0ddd78cebe6d447840de89c"
+      },
+      "total": 38,
+      "passed": 38,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "fixtureSources": {
+      "NativeBootMemoryTests.cs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeBootMemoryTests.cs",
+        "sha256": "839b0affe3b56fb8fa0fa88f1f4a7d32e5754998e976e449c4e378bc5df99720"
+      },
+      "NativeExecInterruptBootTests.cs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeExecInterruptBootTests.cs",
+        "sha256": "f87a8eb6789d3ce8e256d191aa82cf9208b3d46c6be6fa71b8848bfd2a3cdaa8"
+      }
+    },
+    "fixtureProject": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\exact-native-fixture\\Fixture.csproj",
+      "sha256": "7bf57a3640e2de46980676feff4c983beff1bfeed6145661faad94edd93eddfd"
+    },
+    "fixtureImageLoader": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\exact-native-fixture\\NativeBootImage.cs",
+      "sha256": "ce369891b6bf5e306e12571c139b32f502935a9a877f884e5d11cab540b308c5"
+    },
+    "fixtureBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\exact-native-fixture-build.log",
+      "sha256": "51ae8f5f7736938f784dd32999fbc88d208764f238ea064802e9f0bd918598d3"
+    },
+    "fixtureBinaries": {
+      "CopperStart.Floppy.Native.Tests.dll": "5479aeb80f6cd679ad8905738558ca898389341a9b8fac7fb27db15f4cac1a8c",
+      "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+      "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+      "CopperStart.Exec.dll": "490694b19d3ca52a1123bba1847f6e862853efa2cc5ac95bfe5c6fd2bbd31b62"
+    },
+    "coverage": "Exact externally hashed ROM; original generated boot disks; present/absent A501 address/allocation probes; caller-owned trap-zero plus Supervisor, Chip allocation and native I/O. Focused source tests use separate moving compiler/SDK build outputs; media replay binaries remain frozen.",
+    "mainBackport": {
+      "trx": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\backport\\backport.trx",
+        "sha256": "aedf24a1beedfc29d4e681cec70db897f05b323b330e70e251b7c9f932025ed9"
+      },
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "romLayout": {
+      "trx": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\layout\\layout.trx",
+        "sha256": "efba5e84a27d0d2f10a8a9cd5e8db38314775a92ba187a51c2d9cec40061b3f1"
+      },
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "relocatedGraphicsGuestCalls": {
+      "trx": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\final-graphics\\graphics.trx",
+        "sha256": "a7a24281139eeadd508f6b1d9e79472ad77799e84368e7ea40edb6448f06160f"
+      },
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "graphicsFixtureSource": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeGraphicsBootTests.cs",
+      "sha256": "01c6682da86b2f9ba3f32e085c7eb319066d992b515079596186f6000a6d319f"
+    },
+    "graphicsFixtureProject": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\graphics-native-fixture\\Fixture.csproj",
+      "sha256": "505a6ad5561986b14baa5c7520027bae4230b25923703717c69e04cb222bbf4b"
+    },
+    "graphicsFixtureImageLoader": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\graphics-native-fixture\\NativeBootImage.cs",
+      "sha256": "cba4e5648b3bf9a3d24b402852acfb4fa5b7ba22329bb34edee26be7c95b2e2e"
+    },
+    "graphicsFixtureBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\graphics-native-fixture-build.log",
+      "sha256": "75d71f9e8a8549f424bcd361e8b5dd010c9dd2a9d2d9b66741b21238af2c6aaa"
+    },
+    "graphicsFixtureBinaries": {
+      "CopperStart.Floppy.Native.Tests.dll": "cf12706d7076a376441fc6cebc60feb16f2f6e4a3c94e4926558700973a04a17",
+      "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+      "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+      "CopperStart.Exec.dll": "490694b19d3ca52a1123bba1847f6e862853efa2cc5ac95bfe5c6fd2bbd31b62"
+    },
+    "precedingGraphicsGuestCalls": {
+      "trx": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\probes\\before-graphics\\graphics.trx",
+        "sha256": "67a8b4aee9381f3404b1e9ed65bad649f4b6ee89f761af3fd116f2a0956f3124"
+      },
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  },
+  "sourceBuilds": {
+    "consumerRelease": {
+      "passed": true,
+      "warnings": 0,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\consumer-build.log",
+        "sha256": "92589fff3e9f44705f8b203a65d017d96a70879c0edad94b3d26a03b470af9b0"
+      }
+    },
+    "producerRelease": {
+      "passed": true,
+      "warnings": 1,
+      "warning": "Existing sibling compiler CS8602. Source builds are separate from frozen qualification inputs.",
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\producer-build.log",
+        "sha256": "2ed76689e9b0ae3c15763693ff3aab48a6c6c6a35a683c7a70a42df0c884a0c3"
+      }
+    },
+    "execTestProject": {
+      "passed": true,
+      "warnings": 1,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\source-exec-build.log",
+        "sha256": "7721df2f93294c4b3b16ae61bcf7c24ef5695d602ca98f8035a9b9fc83c9b6ca"
+      }
+    },
+    "mainBackportRelease": {
+      "passed": true,
+      "warnings": 5,
+      "warning": "Existing compiler CS8602 and SDK selection NU1601 warnings.",
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\backport-producer-build.log",
+        "sha256": "b802ce905e5189d58d9a886e9872052b7ab39daae185b1b2088aff7a5a1efc52"
+      }
+    },
+    "mainBackportExecTests": {
+      "passed": true,
+      "warnings": 1,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\backport-exec-build.log",
+        "sha256": "4b1eb828370f8f0c044183c44e2134ae0769a61c647a8df18f370a969907f3fc"
+      }
+    },
+    "layoutTestProject": {
+      "passed": true,
+      "warnings": 1,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\layout-tests-build.log",
+        "sha256": "87319973b622a01346aca8691537ee66771dfc0a94f682233ec4c538a57cba0e"
+      }
+    }
+  },
+  "sourceTestBinaries": {
+    "CopperStart.Exec.Tests.dll": "56edc750878befc5d5a7eee5374dabe90bf1eed32ef5221fe3e0095086396495",
+    "CopperStart.Exec.dll": "88e898f0b67e4ef4a02ae1710d66739d8bb404d5e6565b794e9831948f433c47",
+    "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+    "CopperSharp.Compiler.dll": "51cb07aa1141f85e611dd5f39177f1bbe4954f9adedcdff40bf6bf28cc3aaf44",
+    "CopperSharp.Sdk.Amiga.dll": "692dc0aa7e3253a4c95572d817abe201d31143b0bce9a29c7743e5cc2aed91ec"
+  },
+  "sources": {
+    "supervisorAutodoc": "https://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node059D.html",
+    "taskTrapReference": "https://wiki.amigaos.net/wiki/Exec_Tasks",
+    "existingFixDocumentation": "https://github.com/ilehtoranta/CopperStart/blob/9eed3fe584549b36f0c5de175929e890ec620669/Docs/NativeSupervisorGate.md"
+  },
+  "exploration": {
+    "precedingRomPilot": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\preceding-rom-pilot\\run.json",
+      "sha256": "a5bd2446a97a0fdbe7607ff4daaaea55a49073ca5b66af75bf4552c6e0b1f68b"
+    },
+    "traceProgram": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace\\Program.cs",
+      "sha256": "b37e10c6c2b71e8cbc829aad1691009ca59e692dfa35b351fe2b95b8d75c2418"
+    },
+    "supersededCandidate": "The first isolated Exec candidate used the older branch source and omitted bootstrap changes already present in the frozen binary. It was stopped before producing a qualified image. Its artifacts are not successful coverage. The final image instead records the integrated committed Exec sources and all retained components.",
+    "exploratoryPatch": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\exploratory-supervisor.patch",
+      "sha256": "97240ee0d51ea514ba2c37ba125551bda4b2aacda6434d7a20977d720f1d892e"
+    },
+    "rejectedLayoutCompile": {
+      "rawCompiledImage": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\integrated-rom\\CopperStart-DiskBoot-compiled.rom",
+        "sha256": "51f2b371fdf58e27fa90ae43611af16b2674b3a47d308c692520391e95b65020"
+      },
+      "buildLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\integrated-rom-build.log",
+        "sha256": "a9c5a0c551bb6a18d5aad8ddd3c7d550aa94b969ac8c334c20556d56e1fe2ebb"
+      },
+      "interpretation": "Failed composition: code crossed the original FF0000 graphics start. No linked image or game replay from this compile qualifies."
+    }
+  },
+  "receiptMode": "--firmware native disables interpretation of private boot receipts after takeover; hashes identify the actual firmware. Guest execution is unchanged.",
+  "limits": [
+    "Bounded disk swap, menu, briefing and opening gameplay only; story disk, later levels, game completion, save/write paths and other profiles remain unverified.",
+    "Ten component DLLs remain frozen; this is not execution qualification of the complete merged producer tree, its updated graphics image, standard-app admission or installed MSIX.",
+    "No engine or CPU/package change, game/opcode/media patch, host OS shim or artifact publication.",
+    "Sampled PCM parity is not listening or audio-fidelity qualification. Correctness diagnostics are separate from throughput acceptance."
+  ],
+  "ci": {
+    "producer": {
+      "runUrl": "https://github.com/ilehtoranta/CopperStart/actions/runs/39074437869",
+      "rawStatus": "failure",
+      "coverage": "UNAVAILABLE: all 13 jobs stopped before any steps",
+      "reason": "GitHub annotation: recent account payments failed or the spending limit needs to be increased.",
+      "jobs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\source-ci-unavailable.json",
+        "sha256": "e4cd73e384fd22e574185a8b5c07cd4c8a4d827c6c8de567c09ab84005d1a680"
+      }
+    }
+  },
+  "mainBackport": {
+    "repository": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-alien-breed-fix",
+    "baseCommit": "5951d05cff7c10d29d011484c5d1e66345ec1374",
+    "emitterMatchesQualifiedSource": true,
+    "source": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-alien-breed-fix\\src\\CopperStart.Exec\\ExecNativeVectorTableCore.cs",
+      "sha256": "8f8eb219e8733a20487adbaec451e0c96b8dad9d8312f0be97d400f316f0335b"
+    },
+    "tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-alien-breed-fix\\tests\\CopperStart.Exec.Tests\\ExecNativeVectorTableCoreTests.cs",
+      "sha256": "a6c05877bea45900d6701c3e0434bf1ff41d1755954ff9e6ba0aee234aad1e26"
+    },
+    "scope": "Narrow native supervisor backport onto current main, preserving its independent task-completion bridge. Emitter source matches the qualified native branch; this does not claim a complete current-main ROM replay."
+  },
+  "correctedTrace": {
+    "log": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\trace-final.log",
+      "sha256": "39e4725c36655e2c214025f7f91bf13d3514bab6c9effe816bddf440d72290b5"
+    },
+    "trapZeroAfterCallerWrite": "00020000",
+    "chipAllocation": {
+      "bytes": "00040000",
+      "requirements": "00010002",
+      "callPc": "0000A6F4",
+      "callField": 89,
+      "returnPc": "0000A6F8",
+      "returnField": 200,
+      "result": "0000A790"
+    },
+    "followingAllocation": {
+      "bytes": "00060000",
+      "requirements": "00000000",
+      "callPc": "0000A704",
+      "returnPc": "0000A708",
+      "result": "00C07020"
+    },
+    "interpretation": "Both original loader calls return with its modified trap-zero vector intact. Addresses differ from the old F17 image because integrated bootstrap/Exec layout changed."
+  },
+  "outcomes": {
+    "alienBreed": "PASS: original game disk swap, menu, briefing and opening level movement/firing through 18000 fields; independent native/corrected fire-only controls distinguish directional response.",
+    "f17": "PASS: input-driven driving through 26000 fields.",
+    "lemmings": "PASS: 100% level-one rescue through 24000 fields.",
+    "apidya": "PASS: options, opening-stage play and continue prompt through 12000 fields.",
+    "limits": "These outcomes qualify only the recorded media, machine and native image. Later gameplay, saves, full current-main/MorphOS ROM and standard application remain unverified."
+  }
+}

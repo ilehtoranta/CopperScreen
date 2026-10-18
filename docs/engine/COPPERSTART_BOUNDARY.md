@@ -89,6 +89,20 @@ probes pass, Lemmings still rescues 100% in level one, and Apidya retains its
 opening-stage behavior. Full races, save paths and other memory layouts remain
 unverified; this is the identified frozen-component ROM, not full-OS admission.
 
+The [Alien Breed continuation](COPPERSTART_ALIEN_BREED_2026-10-18.md) exposes an
+Exec supervisor-entry conflict when the original loader changes its trap-zero
+vector. Integrating the existing privilege-based Supervisor correction with
+F17/Lemmings restores allocation and disk loading. The larger compile also
+requires moving the private graphics resident to `$FF8000`. The freshly compiled
+image passes five guest probes. Both 18,000-field Alien Breed CPU-mode pairs
+match all 905 captures; disk two, menu, briefing and opening movement/firing are
+verified, including independent fire-only controls. F17 retains driving,
+Lemmings rescues 100% in level one and Apidya reaches its opening stage/continue
+prompt. The evidence separates the frozen-component qualification image from a
+narrow Supervisor backport onto current main; its source CI cannot start because
+of GitHub billing limits. Later levels, saves, the full current-main ROM and
+standard-app admission remain unverified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
