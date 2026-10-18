@@ -134,3 +134,5 @@ additional passing cases. Raw replay manifests retain their automatic
 - [DOS reference manual](https://developer.amigaos3.net/sites/default/files/downloads/2024-10/Amiga_ROM_Kernel_Reference_Manual_DOS.pdf): directory and handler resolution.
 - [BltClear autodoc](https://d0.se/autodocs/graphics.library/BltClear): byte count and flags.
 - [Previous Thunderbolt qualification](COPPERSTART_THUNDERBOLT_2026-10-18.md).
+
+The follow-on [native Intuition qualification](COPPERSTART_INTUITION_2026-10-18.md) records the next ROM and Railroad replay. This earlier record retains its original image and outcome.
