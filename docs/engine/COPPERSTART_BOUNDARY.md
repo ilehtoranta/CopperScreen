@@ -78,6 +78,17 @@ stage without a new firmware change. Each 12,000-field CPU-mode pair matches all
 The fresh-ROM Lemmings regression retains all 605 prior captures and its 100%
 level-one rescue. Later Apidya stages and disk two remain unverified.
 
+The [F17 Challenge continuation](COPPERSTART_F17_2026-10-17.md) corrects a false
+one-megabyte memory rejection. Its loader queries `TypeOfMem($C01000)` inside
+the bootstrap reservation: native Kickstart reports RAM, while the earlier ROM
+excluded that address from its public MemHeader range. The fresh disk root
+publishes the detected A501 bank's physical lower bound without changing free
+chunks or releasing private allocations. Both 26,000-field F17 CPU-mode pairs
+match all 1,305 captures and reach input-driven racing. The fitted/absent memory
+probes pass, Lemmings still rescues 100% in level one, and Apidya retains its
+opening-stage behavior. Full races, save paths and other memory layouts remain
+unverified; this is the identified frozen-component ROM, not full-OS admission.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
