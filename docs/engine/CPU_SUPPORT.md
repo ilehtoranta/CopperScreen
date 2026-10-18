@@ -1,11 +1,14 @@
 # CPU support and Copper68k package scope
 
-Updated 2026-10-16. The NuGet.org baseline is Copper68k `1.5.3`.
-This worktree pins the frozen `1.5.4-qualified-dev.1` candidate, distributed
-through the owner-approved [GitHub release](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-qualified-dev.1), with no NuGet.org publication.
+Updated 2026-10-17. The NuGet.org baseline is Copper68k `1.5.3`.
+This worktree pins the frozen `1.5.4-nitro-dev.2` candidate, provisioned from
+its [GitHub release](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-nitro-dev.2), with no NuGet.org publication.
+It completes the required memory BTST prefetch after waited reads. Paired with
+the engine's continued low/masked IPL sampling, it repairs Nitro's race-start
+wait; see [exact-package qualification and limits](NITRO_RACE_START_2026-10-17.md).
 The merged general logical handler already supports Detroit's reached
 `EORI.B #$9E,(A0)+` form; the older dedicated path is not imported. Exact-package
-evidence is in the [candidate qualification record](COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
+evidence is retained in the [preceding candidate record](COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
 The shared CPU source
 is maintained in CopperMod; no sibling project reference is used.
 The published release retains the preceding 1.5.2 integer

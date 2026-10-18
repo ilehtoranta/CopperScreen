@@ -2,10 +2,10 @@ param([string]$PackagePath)
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
-$record = Get-Content (Join-Path $root 'docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.json') -Raw | ConvertFrom-Json
-$version = '1.5.4-qualified-dev.1'
+$record = Get-Content (Join-Path $root 'docs/engine/NITRO_RACE_START_2026-10-17.json') -Raw | ConvertFrom-Json
+$version = $record.cpuPackage.version
 $name = "Copper68k.$version.nupkg"
-$feed = Join-Path $root 'artifacts/qualified-cpu-20261011/feed'
+$feed = Join-Path $root 'artifacts/qualified-cpu-20261017/feed'
 $destination = Join-Path $feed $name
 New-Item -ItemType Directory -Path $feed -Force | Out-Null
 
