@@ -116,6 +116,19 @@ driving, Lemmings rescues 100%, and Apidya reaches opening play and its continue
 The recorded native and replacement scenarios differ, and full laps/races,
 saves, the complete moving-main ROM and standard-app admission remain unverified.
 
+The [Alien Breed Special Edition 92 continuation](COPPERSTART_ALIEN_BREED_SE92_2026-10-18.md)
+freshly compiles the Overdrive-corrected root and verifies the original two-disk
+release through menu selection, level-one briefing and opening movement/firing.
+No new firmware or engine fix is needed. Each 22,000-field native/CopperStart
+normal-versus-scalar pair matches all 555 capture files and four fingerprints;
+separate idle controls distinguish player movement from the attract sequence.
+Seven exact-ROM native guest cases preserve the preceding memory, Supervisor
+and graphics behavior. The fresh image is byte-identical to the corrected
+Overdrive ROM, retaining the applicability of its earlier regression evidence.
+Later levels, two-player play, saves, audio fidelity, physical timing and
+throughput acceptance remain unverified. This remains the bounded qualified
+native ROM, not the complete moving-main ROM or standard-app admission.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
