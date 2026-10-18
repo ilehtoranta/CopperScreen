@@ -129,6 +129,18 @@ Later levels, two-player play, saves, audio fidelity, physical timing and
 throughput acceptance remain unverified. This remains the bounded qualified
 native ROM, not the complete moving-main ROM or standard-app admission.
 
+The [Tower Assault continuation](COPPERSTART_TOWER_ASSAULT_2026-10-18.md)
+freshly compiles the same Overdrive-corrected root for the supplied original
+SPS 279 IPFs. Disk two, options, mission briefing and opening movement/firing
+work under native Kickstart and CopperStart. The positive run reaches Game Over
+after traversing the landing area; level completion is unverified. Each
+22,000-field normal/scalar pair matches all 555 capture files and four
+fingerprints, and independent idle controls distinguish player response.
+Seven exact-ROM guest cases pass with no skips. No firmware or engine fix is
+needed; the local compiler driver now generates current input metadata directly.
+Disk three, later levels, saves, two-player mode, audio fidelity, hardware timing
+and throughput acceptance remain outside this bounded qualification.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
