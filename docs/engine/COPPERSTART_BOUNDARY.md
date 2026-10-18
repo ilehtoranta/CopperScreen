@@ -164,6 +164,17 @@ matches all 805 capture files and four fingerprints; separate idle controls
 verify driving response in the opening race. The bounded native composition,
 full-viewport review, established regressions and limits are recorded explicitly.
 
+The [Miami Chase continuation](COPPERSTART_MIAMI_CHASE_2026-10-18.md) publishes
+ExecBase's video frequency fields from the existing physical PAL/NTSC probe.
+Their previous zero values sent the supplied loader down its NTSC path, skipping
+the PAL intro and leaving the game at its disk-two prompt. The fresh corrected
+Lotus 2-qualified composition reaches the intro, disk-two menu and opening play.
+Both 22,000-field CPU modes match all 555 captures; an idle control separates
+the recorded joystick response from automatic motion. The two original frequency
+probes and 19 retained exact-ROM guest cases pass without skips. Lotus 2 retains
+opening racing and Arte retains its later scenes. Later gameplay, physical NTSC,
+full moving-main qualification and standard-app admission remain unverified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
