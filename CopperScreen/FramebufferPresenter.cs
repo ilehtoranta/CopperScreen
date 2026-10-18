@@ -54,6 +54,8 @@ internal sealed class FramebufferPresenter : Control
 
 	public int PixelHeight => _height;
 
+	internal Size EffectiveSourceSize => GetEffectiveSourceSize();
+
 	public void EnsureDimensions(int width, int height)
 	{
 		if (width == _width && height == _height)
