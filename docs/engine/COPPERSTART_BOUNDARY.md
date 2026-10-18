@@ -141,6 +141,19 @@ needed; the local compiler driver now generates current input metadata directly.
 Disk three, later levels, saves, two-player mode, audio fidelity, hardware timing
 and throughput acceptance remain outside this bounded qualification.
 
+The [Major Motion continuation](COPPERSTART_MAJOR_MOTION_2026-10-18.md)
+repairs native DOS path handling, redundant sequential-read metadata fetches,
+HUNK Chip/Fast memory requirements and the inherited boot VBlank source.
+The fresh image retains the Overdrive/F17/Lemmings/Alien Breed corrections and
+passes fourteen exact-ROM guest cases. Major Motion reaches its title and
+input-driven opening play under native Kickstart and CopperStart. Each
+normal/scalar pair matches every capture and four execution fingerprints;
+independent idle controls verify steering and scoring. The separate input
+schedules and bounded opening-play coverage are explicit in the record.
+No engine/CPU change, title-specific hook, ROM/media byte patch or host OS shim
+is introduced. Full-game completion, physical timing and throughput acceptance
+remain unverified; this remains the bounded frozen native composition.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
