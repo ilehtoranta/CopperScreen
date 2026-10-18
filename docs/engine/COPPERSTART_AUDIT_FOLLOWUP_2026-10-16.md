@@ -1,5 +1,9 @@
 # CopperStart compatibility audit follow-up — 2026-10-16
 
+The subsequent [Inside the Machine continuation](COPPERSTART_INSIDE_MACHINE_2026-10-18.md)
+identifies and fixes the stopped CIA TOD counters behind the black-loader result
+below. This dated audit and its original ROM/results remain historical evidence.
+
 CopperStart commit `50f8583a40d24c34a06d4bed71ab31db19d47b95` removes the
 remaining listed public input budgets in formatting, resident/KickTag tables,
 DOS/BOOPSI tags, DOS transfers, ReadArgs, patterns and HUNK loading. Retained
