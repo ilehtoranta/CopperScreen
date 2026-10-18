@@ -185,6 +185,16 @@ is byte-identical to the preceding image, and four exact-ROM frequency/stack
 probes pass with zero skips. Full laps, race completion, later tracks and other
 media remain unverified; this is bounded standalone-ROM qualification.
 
+The [Desert Strike continuation](COPPERSTART_DESERT_STRIKE_2026-10-19.md)
+freshly compiles the unchanged Miami Chase-qualified composition and uses the
+newly supplied third disk. Both ROMs complete the disk-one/two/three/two sequence,
+reach the first campaign and respond to takeoff, near-ship flight and landing.
+No additional firmware or engine correction is needed. Each 44,000-field
+normal/scalar pair matches all 1,105 raw captures and four fingerprints;
+independent idle controls verify the flight response. Four exact-ROM frequency
+and stack/VBlank cases pass without skips. Weapons, combat, mission completion,
+later campaigns and save/load remain unverified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
