@@ -1,5 +1,7 @@
 # CopperStart: Hired Guns graphics startup and native gadget lists
 
+Follow-up: [verified Exploration Training gameplay](COPPERSTART_HIRED_GUNS_TRAINING_2026-10-19.md).
+
 2026-10-19. **Hired Guns passes its original warning and language chooser,
 draws a complete main menu and responds to F1 through New Game and Training's
 player-count menu.** Its main-menu image matches the retained Kickstart 1.3 fingerprint
