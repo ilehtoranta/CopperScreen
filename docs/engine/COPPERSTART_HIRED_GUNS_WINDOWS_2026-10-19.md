@@ -1,5 +1,7 @@
 # CopperStart: positioned windows, Boolean gadgets and Hired Guns
 
+Follow-up: [native gadget lists and verified Hired Guns graphics startup](COPPERSTART_HIRED_GUNS_GRAPHICS_2026-10-19.md).
+
 2026-10-19. The original Hired Guns warning requester now draws and accepts
 both buttons. Cancel restores the CLI; relaunching and accepting the warning
 hands control to the original game loader. The post-takeover graphics startup
