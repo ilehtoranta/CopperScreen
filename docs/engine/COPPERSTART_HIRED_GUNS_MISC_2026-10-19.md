@@ -1,5 +1,8 @@
 # CopperStart: native misc.resource and Hired Guns continuation
 
+Follow-up: [native CIA resources and the next Hired Guns window boundary](COPPERSTART_HIRED_GUNS_CIA_2026-10-19.md).
+The results below retain their original ROM identity.
+
 2026-10-19. Native `misc.resource` now passes its Kickstart 1.3 comparison.
 Hired Guns proceeds beyond its previous missing-resource error and returns to
 the CLI with **ERROR #0045 : COULD NOT OPEN CIAA.RESOURCE**. Game entry remains

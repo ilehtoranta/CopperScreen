@@ -1,0 +1,1038 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "protocol": "copperstart-hired-cia-v1",
+  "status": "PASS native CIA resource qualification; FAIL Hired Guns game entry at positioned warning window",
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "branch": "codex/copperstart-intuition-20261018",
+    "commit": "6a58b0dd71ec3b4eb70ea50aa8ec4446bdb60648",
+    "tree": "65b89daa13d0a98e9e54a70e81f80098601b79b9",
+    "clean": true,
+    "remoteTipVerified": true
+  },
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-final3/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "cb40affb0c9b0450b0e74c6a454aa2e568f82574ffd74910d9c9064854c5093a"
+  },
+  "productionRom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-production3/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "cb40affb0c9b0450b0e74c6a454aa2e568f82574ffd74910d9c9064854c5093a"
+  },
+  "productionByteParity": true,
+  "composition": {
+    "compiledRomSha256": "B833F0E978C118ABE4559551FED981E03A9374EDB3FBC2B20E5AA82E782F572E",
+    "sha256": "CB40AFFB0C9B0450B0E74C6A454AA2E568F82574FFD74910D9C9064854C5093A",
+    "graphicsBytes": 31622,
+    "ResidentAddress": 16744448,
+    "CodeAddress": 16745252,
+    "intuitionBytes": 7178,
+    "intuitionResidentAddress": 16728064,
+    "intuitionEntries": {
+      "-6": 16728782,
+      "-12": 16728798,
+      "-18": 16728818,
+      "-24": 16728834,
+      "-30": 16735046,
+      "-36": 16735048,
+      "-42": 16735050,
+      "-48": 16735052,
+      "-54": 16735054,
+      "-60": 16734170,
+      "-66": 16729678,
+      "-72": 16730992,
+      "-78": 16735062,
+      "-84": 16735064,
+      "-90": 16735066,
+      "-96": 16735068,
+      "-102": 16735070,
+      "-108": 16735072,
+      "-114": 16735074,
+      "-120": 16735076,
+      "-126": 16735078,
+      "-132": 16735080,
+      "-138": 16735082,
+      "-144": 16735084,
+      "-150": 16730642,
+      "-156": 16735088,
+      "-162": 16735090,
+      "-168": 16735092,
+      "-174": 16735094,
+      "-180": 16735096,
+      "-186": 16735098,
+      "-192": 16735100,
+      "-198": 16728886,
+      "-204": 16730268,
+      "-210": 16735106,
+      "-216": 16730004,
+      "-222": 16735110,
+      "-228": 16735112,
+      "-234": 16735114,
+      "-240": 16735116,
+      "-246": 16735118,
+      "-252": 16735120,
+      "-258": 16735122,
+      "-264": 16735124,
+      "-270": 16734156,
+      "-276": 16735128,
+      "-282": 16735130,
+      "-288": 16735132,
+      "-294": 16728850,
+      "-300": 16728866,
+      "-306": 16735138,
+      "-312": 16735140,
+      "-318": 16735142,
+      "-324": 16735144,
+      "-330": 16735146,
+      "-336": 16735148,
+      "-342": 16735150,
+      "-348": 16735152,
+      "-354": 16735154,
+      "-360": 16735156,
+      "-366": 16735158,
+      "-372": 16735160,
+      "-378": 16729510,
+      "-384": 16729568,
+      "-390": 16729554,
+      "-396": 16735168,
+      "-402": 16735170,
+      "-408": 16735172,
+      "-414": 16734988,
+      "-420": 16735016,
+      "-426": 16735178,
+      "-432": 16735180,
+      "-438": 16735182,
+      "-444": 16735184,
+      "-450": 16730806,
+      "-456": 16735188,
+      "-462": 16735190,
+      "-468": 16735192,
+      "-474": 16735194,
+      "-480": 16735196,
+      "-486": 16735198,
+      "-492": 16735200,
+      "-498": 16735202,
+      "-504": 16735204,
+      "-510": 16735206,
+      "-516": 16735208,
+      "-522": 16735210,
+      "-528": 16735212,
+      "-534": 16735214,
+      "-540": 16735216,
+      "-546": 16735218,
+      "-552": 16735220,
+      "-558": 16735222,
+      "-564": 16735224,
+      "-570": 16735226,
+      "-576": 16735228,
+      "-582": 16735230,
+      "-588": 16735232,
+      "-594": 16735234,
+      "-600": 16735236,
+      "-606": 16735238,
+      "-612": 16735240
+    },
+    "intuitionSupportedVectors": [
+      -450,
+      -420,
+      -414,
+      -390,
+      -384,
+      -378,
+      -300,
+      -294,
+      -270,
+      -216,
+      -204,
+      -198,
+      -150,
+      -72,
+      -66,
+      -60,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "SupportedVectors": [
+      -960,
+      -924,
+      -918,
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -810,
+      -804,
+      -606,
+      -576,
+      -570,
+      -564,
+      -552,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -324,
+      -318,
+      -306,
+      -300,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -246,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -48,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "Entries": {
+      "-1056": 16745254,
+      "-1050": 16745256,
+      "-1044": 16745258,
+      "-1038": 16745260,
+      "-1032": 16745262,
+      "-1026": 16745264,
+      "-1020": 16745266,
+      "-1008": 16745268,
+      "-1002": 16745270,
+      "-996": 16745272,
+      "-990": 16745274,
+      "-984": 16745276,
+      "-978": 16745278,
+      "-972": 16745280,
+      "-966": 16745282,
+      "-960": 16768760,
+      "-954": 16745286,
+      "-948": 16745288,
+      "-942": 16745290,
+      "-936": 16745292,
+      "-930": 16745294,
+      "-924": 16768782,
+      "-918": 16768804,
+      "-900": 16745300,
+      "-894": 16768826,
+      "-888": 16745304,
+      "-882": 16745306,
+      "-876": 16745308,
+      "-870": 16768848,
+      "-864": 16768870,
+      "-858": 16768892,
+      "-852": 16745316,
+      "-840": 16745318,
+      "-834": 16745320,
+      "-828": 16745322,
+      "-822": 16768914,
+      "-816": 16768936,
+      "-810": 16768958,
+      "-804": 16768980,
+      "-798": 16745332,
+      "-792": 16745334,
+      "-786": 16745336,
+      "-780": 16745338,
+      "-774": 16745340,
+      "-768": 16745342,
+      "-762": 16745344,
+      "-756": 16745346,
+      "-732": 16745348,
+      "-726": 16745350,
+      "-720": 16745352,
+      "-714": 16745354,
+      "-708": 16745356,
+      "-702": 16745358,
+      "-696": 16745360,
+      "-690": 16745362,
+      "-684": 16745364,
+      "-678": 16745366,
+      "-672": 16745368,
+      "-666": 16745370,
+      "-660": 16745372,
+      "-654": 16745374,
+      "-636": 16745376,
+      "-630": 16745378,
+      "-624": 16745380,
+      "-618": 16745382,
+      "-612": 16745384,
+      "-606": 16769002,
+      "-600": 16745388,
+      "-594": 16745390,
+      "-588": 16745392,
+      "-582": 16745394,
+      "-576": 16769024,
+      "-570": 16769046,
+      "-564": 16769068,
+      "-558": 16745402,
+      "-552": 16769090,
+      "-546": 16745406,
+      "-540": 16769112,
+      "-534": 16745410,
+      "-528": 16745412,
+      "-522": 16745414,
+      "-516": 16745416,
+      "-510": 16745418,
+      "-504": 16745420,
+      "-498": 16769134,
+      "-492": 16769156,
+      "-486": 16769178,
+      "-480": 16769200,
+      "-474": 16745430,
+      "-468": 16769222,
+      "-462": 16769244,
+      "-456": 16769266,
+      "-450": 16745438,
+      "-444": 16745440,
+      "-438": 16745442,
+      "-432": 16745444,
+      "-426": 16745446,
+      "-420": 16745448,
+      "-414": 16745450,
+      "-408": 16745452,
+      "-402": 16769288,
+      "-396": 16745456,
+      "-390": 16769310,
+      "-384": 16769332,
+      "-378": 16745462,
+      "-372": 16745464,
+      "-366": 16745466,
+      "-360": 16769354,
+      "-354": 16769376,
+      "-348": 16769398,
+      "-342": 16769420,
+      "-336": 16745476,
+      "-330": 16745478,
+      "-324": 16769442,
+      "-318": 16769464,
+      "-312": 16745484,
+      "-306": 16769486,
+      "-300": 16769508,
+      "-294": 16769530,
+      "-288": 16769552,
+      "-282": 16769574,
+      "-276": 16769596,
+      "-270": 16769618,
+      "-264": 16745500,
+      "-258": 16745502,
+      "-252": 16745504,
+      "-246": 16769640,
+      "-240": 16769662,
+      "-234": 16769684,
+      "-228": 16769706,
+      "-222": 16769728,
+      "-216": 16769750,
+      "-210": 16769772,
+      "-204": 16769794,
+      "-198": 16769816,
+      "-192": 16769838,
+      "-186": 16745526,
+      "-180": 16745528,
+      "-174": 16745530,
+      "-168": 16745532,
+      "-162": 16745534,
+      "-156": 16745536,
+      "-150": 16745538,
+      "-144": 16769860,
+      "-138": 16745542,
+      "-132": 16745544,
+      "-126": 16745546,
+      "-120": 16769882,
+      "-114": 16745550,
+      "-108": 16745552,
+      "-102": 16745554,
+      "-96": 16745556,
+      "-90": 16745558,
+      "-84": 16769904,
+      "-78": 16769926,
+      "-72": 16769948,
+      "-66": 16769970,
+      "-60": 16769992,
+      "-54": 16770014,
+      "-48": 16770036,
+      "-42": 16745574,
+      "-36": 16745576,
+      "-30": 16770058,
+      "-6": 16770146,
+      "-12": 16770124,
+      "-18": 16770102,
+      "-24": 16770080
+    },
+    "BootstrapStackSelectorAddress": 16775818,
+    "RunCommandStackBridgeAddress": 16775910,
+    "bcplBytes": 2342,
+    "bcplAddress": 16723968,
+    "miscResourceBytes": 258,
+    "miscResourceAddress": 16721920,
+    "ciaResourceBytes": 1108,
+    "ciaResourceAddress": 16736256,
+    "emitterSha256": "AE24301C8A6F87B50CDC27603D7ABFFF3D9573B62EA06A9AB9C69B607B206A24"
+  },
+  "compositionReceipt": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-production3/CopperStart-DiskBoot.graphics.json",
+    "bytes": 7874,
+    "sha256": "82b13431d00884718eb4d67d49772978ced8a9ce25084e40171f098cb6e2254e"
+  },
+  "qualificationManifest": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-final3/disk-boot-test-manifest.json",
+    "bytes": 9560,
+    "sha256": "cc8819e45830e582a563078c0abf8d115310b592043b0c6f5f6a02b7a4546361"
+  },
+  "producerInputs": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperStart-System.dll",
+      "bytes": 44544,
+      "sha256": "3d717906e7257360cb03c1a0ffd06d26091edec166d39a909c524c3d132a5af6"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperStart.Devices.dll",
+      "bytes": 95744,
+      "sha256": "54846d3325462c9a468a4a6315126e9bd83ba1972725cf16a96cf6a0f51afc27"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperStart.Exec.dll",
+      "bytes": 190976,
+      "sha256": "179a089a2386a5a234bd28062ee7f378805ef09bfad22b1b3be9b2102499b0ca"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperStart.Dos.dll",
+      "bytes": 753664,
+      "sha256": "43beec6a4df307b8c7e934a7fb6e0598f607f6268aef0547c77f4e68cc83200c"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperSharp.Sdk.Amiga.dll",
+      "bytes": 549376,
+      "sha256": "eabb73c88917b5c9554229aa6475fac9761c1e30cbda0daf4e4488eaba1fd372"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperSharp.Sdk.Amiga.Support.dll",
+      "bytes": 155648,
+      "sha256": "c42e00af0bd22fac66a6431d8669947a2c491589d1188bdeb9788809fdf57b0a"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperSharp.Compiler.dll",
+      "bytes": 2738688,
+      "sha256": "b22cd19cfd0960ae727ad18721bd419c095262bf7f5be6a52aab5f2f93adf1a2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperSharp.Targets.Amiga.dll",
+      "bytes": 42496,
+      "sha256": "fa20ba35cd9013c96442ec46903a0c0f0ecef96c852b28383e4194d5503234a1"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288256,
+      "sha256": "c72a077938c26096ebf5452f29e597ba62b219b00c78f3a7d5f2e0a38678292c"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperStart.Graphics.dll",
+      "bytes": 2436608,
+      "sha256": "352f08c245bfe9835cc576b0cb4e525f8c9904c4558b80b75ca40993e3c48006"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/final3-fixture/bin/Release/net10.0/CopperStart.Intuition.Native.dll",
+      "bytes": 65536,
+      "sha256": "8ce3d942fb5d89f8017aee8a6134677641ec1ec18076c73970fe7ab6c85d5f49"
+    }
+  ],
+  "compiledMain": {
+    "reused": false,
+    "codeBytes": 467130,
+    "image": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom/CopperStart-DiskBoot-compiled.rom",
+      "bytes": 524288,
+      "sha256": "b833f0e978c118abe4559551fed981e03a9374edb3fbc2b20e5aa82e782f572e"
+    },
+    "map": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom/CopperStart-DiskBoot.map",
+      "bytes": 6040185,
+      "sha256": "3170190b9de0feb56b86e3a19e1467d5211ccaa69695e71bffc4bb1820518b38"
+    },
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/compile-main.log",
+      "bytes": 505,
+      "sha256": "dde388ec4615061003466868ce8e57787146cabd820657e5ec9550a91f3a0c2b"
+    },
+    "test": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/tests/compile-main.trx",
+        "bytes": 3403,
+        "sha256": "c7e84f21f276a2cda162ef62399de5252fa67ba26a3ded443a902b555255eb65"
+      },
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  },
+  "build": {
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/production-final3-release.log",
+      "bytes": 3076,
+      "sha256": "7787979f4d193a0bc0800defd82a1a079b900b401d9b8676deb6e59fa6c3e444"
+    },
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "command": "dotnet build CopperStart.slnx -c Release --no-restore -m:1 -p:CopperSharp68kRoot=C:/Users/ilkle/Koodit/GIT/CopperSharp68k -p:BuildProjectReferences=false -p:UseSharedCompilation=false"
+  },
+  "tests": {
+    "exactRom": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/tests/cia-final3-native.trx",
+        "bytes": 189821,
+        "sha256": "5cc84e0a5f317f20976a8a841fb28cf40d3c42750165c19ca244b1eccce3127a"
+      },
+      "counters": {
+        "total": "106",
+        "executed": "106",
+        "passed": "106",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "nativeKickstart13Control": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/tests/cia-native-13-final.trx",
+        "bytes": 7998,
+        "sha256": "6d4a38f5b219a46a6c9719606f70abafb79b2ee13ed311a19400f0d2d76db684"
+      },
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "3",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  },
+  "nativeReferenceRom": {
+    "path": "C:/Data/ROM/Kickstart_13.rom",
+    "bytes": 262144,
+    "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "native31Control": {
+    "qualified": false,
+    "rom": {
+      "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+      "bytes": 524288,
+      "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+    },
+    "test": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/tests/cia-native-31-reference3.trx",
+        "bytes": 13840,
+        "sha256": "c622d7e1515e124d334662a6a9c4e41d8f169c29d401c0d2a470ef02055547bf"
+      },
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "1",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "note": "CIAB passes. CIAA post-RemICRVector AbleICR mask retains the selected bit; ownership reclaim succeeds. This unresolved version-specific control discrepancy is not counted as a pass. No source ROM-specific workaround."
+  },
+  "nativeResource": {
+    "address": "00FF6000",
+    "bytes": 1108,
+    "positiveBytes": 126,
+    "negativeBytes": 24,
+    "resources": [
+      "ciaa.resource",
+      "ciab.resource"
+    ],
+    "functions": [
+      "AddICRVector -6",
+      "RemICRVector -12",
+      "AbleICR -18",
+      "SetICR -24"
+    ],
+    "interruptServers": {
+      "PORTS": 3,
+      "EXTER": 13
+    },
+    "callerAdmission": "Caller-owned Interrupts, including stale Node links; no private allocation/node-link legitimacy checks",
+    "callbackRegisters": {
+      "A1": "IS_DATA",
+      "A5": "IS_CODE"
+    },
+    "pendingContract": "V36+ status visible during callback; masked pending retained"
+  },
+  "intermediateDiagnostics": {
+    "starvation": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/tests/cia-final-native.trx",
+        "bytes": 192450,
+        "sha256": "1b5fba079c06f97ee0aee9c880687eac70ab7ffcfa1dc0c9c2fd64691f9e79a0"
+      },
+      "counters": {
+        "total": "106",
+        "executed": "106",
+        "passed": "105",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "correction": "Replace heavy compiled Exec task-boundary Disable/Enable with short physical INTENA master save/mask/restore transactions",
+    "focusedCorrection": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/tests/cia-final2-focused.trx",
+        "bytes": 7926,
+        "sha256": "65b895bd8cb6adffa4a3fa6a7370aee08a6cd1c76eb6754502eeaa88df1f7d58"
+      },
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "3",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "other": "Initial native probe assumed a free timer and initial component used CPU IRQ levels as Exec server numbers; both corrected before final qualification. A concurrent fixture rebuild hit a host DLL lock; separate frozen fixtures resolved it."
+  },
+  "media": {
+    "disk": 1,
+    "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+    "archiveBytes": 782764,
+    "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+    "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+    "entryBytes": 901120,
+    "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+  },
+  "mountedDisks": [
+    1
+  ],
+  "runs": {
+    "normal": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-normal/run.json",
+        "bytes": 4835,
+        "sha256": "b80509d4e07af57dc42b34d7118b50adbcd36e16bd1632378e74b93f2b93c7ed"
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-cia-2026-10-19\\rom-final3\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\hired-cia-final3-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\input-empty.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "2000"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-final3/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "cb40affb0c9b0450b0e74c6a454aa2e568f82574ffd74910d9c9064854c5093a"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/input-empty.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "launchInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-normal/input-0.json",
+        "bytes": 25257,
+        "sha256": "e92bb41b79c57494f4d2871dc1862735515df4d7b723f46818e39a2e42414cad"
+      },
+      "typedInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-normal/typed-launch.json",
+        "bytes": 25446,
+        "sha256": "140353ec75939cc2499d80c2de1f314f1b78aac6c8c569c0f5892162f009fe64"
+      },
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-normal/segments.jsonl",
+        "bytes": 12466,
+        "sha256": "443dc034bbddccc28f5b02c1c28cdc9e99c54e5d56e9aebde0ca2915f83b6ce1"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-normal/runner.log",
+        "bytes": 133502,
+        "sha256": "2d59af5c6396fb921ea7ffaa5a4619b91a4ca2dcc8ef6d4faff2690708986968"
+      },
+      "endFrame": 12000
+    },
+    "scalar": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-scalar/run.json",
+        "bytes": 4852,
+        "sha256": "105409d8caf1c441d36d05999dfd47598359401666314f54ae108cc0e72883c4"
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-cia-2026-10-19\\rom-final3\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\hired-cia-final3-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\input-empty.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "2000",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-final3/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "cb40affb0c9b0450b0e74c6a454aa2e568f82574ffd74910d9c9064854c5093a"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/input-empty.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "launchInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-scalar/input-0.json",
+        "bytes": 25257,
+        "sha256": "e92bb41b79c57494f4d2871dc1862735515df4d7b723f46818e39a2e42414cad"
+      },
+      "typedInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-scalar/typed-launch.json",
+        "bytes": 25446,
+        "sha256": "140353ec75939cc2499d80c2de1f314f1b78aac6c8c569c0f5892162f009fe64"
+      },
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-scalar/segments.jsonl",
+        "bytes": 12466,
+        "sha256": "443dc034bbddccc28f5b02c1c28cdc9e99c54e5d56e9aebde0ca2915f83b6ce1"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-scalar/runner.log",
+        "bytes": 133502,
+        "sha256": "2d59af5c6396fb921ea7ffaa5a4619b91a4ca2dcc8ef6d4faff2690708986968"
+      },
+      "endFrame": 12000
+    }
+  },
+  "parity": {
+    "filesPerMode": 605,
+    "differences": [],
+    "missing": [],
+    "extra": [],
+    "unsupportedCaptures": 0,
+    "captureIdentities": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/capture-identities.json",
+      "bytes": 72722,
+      "sha256": "85fe604e01df3cc2ec79636f4b39ac055fac3154f44d8fc8e24a1b8270936f40"
+    },
+    "captureSetSha256": "85fe604e01df3cc2ec79636f4b39ac055fac3154f44d8fc8e24a1b8270936f40",
+    "encoding": "UTF-8 JSON sorted keys and filenames; compact separators; no trailing newline"
+  },
+  "gameObservation": {
+    "frame": 12000,
+    "image": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-cia-final3-normal/captures/frame-012000.bmp",
+      "bytes": 1136870,
+      "sha256": "7eb5722910fed43c79c4e94d7eae226a49444f410aee41b3ad639c4194d83903"
+    },
+    "reviewImage": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-cia-final3-normal-012000.png",
+      "bytes": 5240,
+      "sha256": "27204198d4d0b018208856edd5136bfdf8686bb3203940030a2e4422842827e6"
+    },
+    "result": "ERROR #0045 : STWARNKILLSYS COULD NOT OPEN WINDOW; returns to 1.SYS:> prompt",
+    "command": "c:systemtakeover CHIP 524032 EXCHIP 492500 ANY 524288 TEMP 153000 RAMDISK 170000 RELOCATE UNPACK KILLSYS CODE \"Hired Guns\" DATA \"c:SystemTakeover.dat\"\n",
+    "inputStart": 2100,
+    "gameEntered": false
+  },
+  "windowDiagnosis": {
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/window-trace.log",
+      "bytes": 257,
+      "sha256": "34fc44397b88802501a6a7a32f2687bb46f76ceb2df19e43f59d1b7f720d5c6e"
+    },
+    "source": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/window-trace/Program.cs",
+      "bytes": 2902,
+      "sha256": "450cbd6ba02c8ea502730f1260d97ad9e38ab567ba2380de474c4b7e1b373a2e"
+    },
+    "qualification": false,
+    "rom": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom-diagnostic2/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "341adc42d98e286e5b9f34fb25d0591ec40993df922d44bd93234dcf8ad441fa"
+    },
+    "method": "Separate read-only scalar instruction trace using physical keyboard input; intermediate native component image, not final replay qualification",
+    "call": {
+      "frame": 6568,
+      "left": 111,
+      "top": 25,
+      "width": 423,
+      "height": 161,
+      "idcmp": 64,
+      "flags": 267270,
+      "firstGadget": 58308,
+      "title": "Hired Guns",
+      "screen": 0,
+      "type": 1,
+      "returnedWindow": 0
+    }
+  },
+  "limits": [
+    "Positioned Intuition window borders, gadgets and interaction remain unimplemented; do not remove feature guards to fake success",
+    "workbench.task remains unavailable; physical CLI fallback is not full Workbench qualification",
+    "No Hired Guns game entry/gameplay or new native game-launch control",
+    "No new Railroad replay; previous evidence retains its own ROM identity",
+    "14 optional standalone polled-reader cases excluded, not counted as passes",
+    "Correctness diagnostics, not throughput acceptance",
+    "No ROMs, game media, build binaries or captures committed; no host OS shim or title-specific guest patch"
+  ]
+}
