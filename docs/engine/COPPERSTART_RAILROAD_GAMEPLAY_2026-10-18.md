@@ -187,7 +187,7 @@ The old-unit ROM had returned to the depot; the corrected ROM proceeds to car
 selection. The next panel takes additional loading time: the depot background
 at field 221000 is a transition, not an engine-selection failure.
 
-The final report shows a 0-4-0 Grasshopper valued at $3,000, Mail Local, and
+The final report shows a 0-4-0 Grasshopper with $3,000 annual maintenance, Mail Local, and
 Unloading/loading with zero sacks of Mail. This proves construction, engine/car
 purchase and report access. It does not establish route movement or revenue.
 The report is retained as the bounded stopping milestone.
@@ -204,3 +204,6 @@ successful construction operation from its screen-refresh behavior.
 These are bounded correctness checks, not host-throughput measurements. Saves,
 audio fidelity, a complete campaign and broader AmigaOS compatibility remain
 unqualified. ROMs, game media and local capture/build artifacts are not committed.
+
+The [2026-10-19 route continuation](COPPERSTART_RAILROAD_ROUTE_2026-10-19.md)
+verifies a two-stop schedule, train movement and London Crossing arrival.

@@ -13437,5 +13437,11 @@
     "head": "1b8313985a9e8f95165e9cd973cd231af64e8a39",
     "repository": "https://github.com/ilehtoranta/CopperStart",
     "method": "git push followed by git ls-remote --heads; remote tip equals local tested commit"
+  },
+  "reportFieldClarification": {
+    "date": "2026-10-19",
+    "field": "0-4-0 Grasshopper/$3,000",
+    "meaning": "The amount on the Train Report is annual locomotive maintenance; it is not purchase price or asset value.",
+    "purchasePrice": "The engine picker separately displays $15,000."
   }
 }
