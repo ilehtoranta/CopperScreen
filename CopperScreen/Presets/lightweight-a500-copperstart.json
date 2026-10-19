@@ -1,0 +1,15 @@
+{
+  "id": "lightweight-a500-copperstart",
+  "displayName": "A500 + CopperStart standalone ROM (experimental)",
+  "description": "Qualified standalone diskboot-2026-10-19-ffs-td64-frontend.1 ROM on Lightweight. PAL OCS, 68000, 512 KiB Chip + 512 KiB slow RAM, DD/HD DF0 and optional existing RDB/explicit FFS hard disk with TD64 offsets above 4 GiB. Choose the qualified ROM in Setup or use --copperstart --rom <path>. CopperOS is separate; old host CopperStart services remain unavailable.",
+  "machine": {
+    "model": "A500PAL",
+    "chipRamKb": 512,
+    "pseudoFastRamKb": 512,
+    "pseudoFastBase": "$C00000",
+    "rtcEnabled": false,
+    "floppyDriveCount": 1
+  },
+  "cpu": { "backend": "AccurateM68000" },
+  "kickstart": { "source": "CopperStart", "version": "1.3" }
+}

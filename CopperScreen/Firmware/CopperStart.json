@@ -1,0 +1,9 @@
+{
+  "qualificationId": "diskboot-2026-10-19-ffs-td64-frontend.1",
+  "producerCommit": "b45c2e4e50860f87e81e21d2a6e5c2a08e2631ad",
+  "bytes": 524288,
+  "sha256": "d21e5223150a8837739e08acc65af52f483b5789c077a32e071f824bc14b7a86",
+  "requirements": "PAL A500, 68000, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM, one DD/HD drive; read-only DF0 floppy boot or an owned writable CopperOS DOS1 workspace. Optional existing hard disk image on unit 0: RDB-discovered FFS/DOS1 partitions or one explicit 512-byte FFS partition, including TD64 offsets above 4 GiB. RDB boot priorities select SYS:. No RTC, Fast RAM or shared folders.",
+  "evidence": "docs/COPPERSTART_TD64_FRONTENDS_2026-10-19.md",
+  "producerSourceSnapshot": "CopperStart base commit b45c2e4e50860f87e81e21d2a6e5c2a08e2631ad plus the source hashes recorded in the full-ROM FFS dependency validation. Built with the inherited local CopperSharp Amiga SDK projects and CopperStartNativeSfsWrites=false. Native core 492808 bytes; graphics 29937 bytes at $FF89F0. TD64 is retained; the NSD retry path is excluded."
+}
