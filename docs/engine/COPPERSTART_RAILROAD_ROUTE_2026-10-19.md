@@ -1,5 +1,9 @@
 # CopperStart: Railroad Tycoon route and arrival
 
+The [rebuilt-ROM replay](COPPERSTART_BCPL_RAILROAD_2026-10-19.md) repeats this
+route after the BCPL, boot CLI and keyboard compatibility changes. This record
+retains the original route evidence and its earlier ROM identity.
+
 2026-10-19. Train #1 runs its two-stop route and arrives at London Crossing.
 The June 14, 1830 newspaper announces: **First Train Arrives in London Crossing.
 Citizens Celebrate!**

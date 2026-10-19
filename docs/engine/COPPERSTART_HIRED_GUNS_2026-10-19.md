@@ -1,5 +1,9 @@
 # CopperStart: Hired Guns startup comparison
 
+The [BCPL startup follow-up](COPPERSTART_HIRED_GUNS_BCPL_2026-10-19.md) fixes
+the Echo fault in a newer ROM and records the next open dependencies. This
+record retains the original failure and native menu control for its pinned ROM.
+
 2026-10-19. **CopperStart fails before game entry.** Kickstart 1.3 reaches the
 input-driven main menu from the same original disk. This is the next title after
 the verified [Railroad Tycoon route and arrival](COPPERSTART_RAILROAD_ROUTE_2026-10-19.md).
