@@ -13,6 +13,10 @@ ROM/media/binary identities, source, inputs, observations, capture hashes and
 limits. Source changes for this continuation are compatibility documentation;
 the two new physical-input fixtures preserve the tested path.
 
+The later [Fire Fight continuation](COPPERSTART_HIRED_GUNS_COMBAT_2026-10-20.md)
+qualifies combat and Training level completion with the same pinned ROM.
+The bounded Exploration evidence and limits below retain their original scope.
+
 ## Machine and unchanged ROM
 
 All three runs cold-reset the same PAL OCS 68000 machine: 512 KiB Chip RAM plus
