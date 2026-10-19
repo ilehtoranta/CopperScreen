@@ -1,5 +1,9 @@
 # CopperStart: Hired Guns BCPL startup follow-up
 
+The [native misc.resource continuation](COPPERSTART_HIRED_GUNS_MISC_2026-10-19.md)
+implements the next service and records the later CIAA dependency. This record
+retains the preceding ROM's results and limits.
+
 2026-10-19. The original two BCPL Echo commands now run and the boot CLI remains
 interactive after LoadWB fails. **Hired Guns still fails before CopperStart game
 entry.** Its next observed CLI blocker is `misc.resource`. The
