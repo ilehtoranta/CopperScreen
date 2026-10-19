@@ -74,3 +74,8 @@ The train carries an empty Mail Car. Route setup, movement and arrival are
 verified; freight revenue, completion of the return leg, a full campaign, saves
 and audio fidelity remain unqualified. These are correctness replays, not host
 throughput measurements. ROMs, media, local builds and captures are not committed.
+
+The next original-media comparison is [Hired Guns](COPPERSTART_HIRED_GUNS_2026-10-19.md).
+Its first CopperStart fault occurs in BCPL Echo startup before game entry;
+Kickstart 1.3 reaches the main menu. That open issue does not change the verified
+Railroad Tycoon route result.
