@@ -1,5 +1,8 @@
 # CopperStart: native CIA resources and Hired Guns continuation
 
+Follow-up: [positioned windows, Boolean gadgets and the original warning buttons](COPPERSTART_HIRED_GUNS_WINDOWS_2026-10-19.md).
+The CIA-stage results below retain their original ROM identity.
+
 2026-10-19. Native `ciaa.resource` and `ciab.resource` let the original Hired Guns
 SystemTakeover utility pass its resource-open stage. It reaches its warning-window
 request and reports **ERROR #0045 : STWARNKILLSYS COULD NOT OPEN WINDOW**, returning
