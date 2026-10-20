@@ -1,0 +1,1988 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-20",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Superfrog character visibility and continued Magic Woods gameplay",
+  "status": "FIXED: direct sprite POS/CTL programming now reaches Agnus DMA; visible character, scrolling, jump/landing, collection, damage/life loss and checkpoint respawn checked",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20",
+  "sourceBase": "4da886d67ed4faad36aee16e4f05c95eb9eed54c",
+  "sourcePatch": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/source.patch",
+    "bytes": 8725,
+    "sha256": "9ab76233f5279abe23d54458b7449a5692d7c9c79e090a1c53a43251a7714821"
+  },
+  "sourceFiles": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "bytes": 106661,
+      "sha256": "b1340247269227a3c37156d83419698b379c9daaedbd108105b3bed932938832"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs",
+      "bytes": 20000,
+      "sha256": "974fcd75bc31830c4b8b24ca1303a0f5a78bc7ebec524945ca26be028c38fdd7"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightSpriteDmaTests.cs",
+      "bytes": 20603,
+      "sha256": "7c72ae579745d59348c29599e7b8f8ce8180f11626ea31aea742e300a79600c6"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightSpriteDmaPresentationTests.cs",
+      "bytes": 13334,
+      "sha256": "9964f89d6e3005d77f6fb5313b641e9be498e7ad9b1b5fff2628100f42fc85d6"
+    }
+  ],
+  "romProducer": "b78ddc09302cd506687327be1c1434891444cc4a",
+  "romChanged": false,
+  "cause": "Shared engine fault, reproduced under both ROMs. CPU/Copper SPRxPOS/CTL writes reached Denise but not Agnus DMA. An exhausted descriptor latch retained old vertical controls and suppressed pointed pixel-data fetches.",
+  "correction": "Route CPU/Copper position/control writes into existing sprite DMA state and permit reprogramming after exhaustion. Preserve the mandatory field control reload and a pending control pair across intervening writes. No sprite data header ownership requirement or title-specific workaround.",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "df0": "Original read-only SPS 35 Disk One IPF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/Superfrog_35.zip",
+      "bytes": 2952859,
+      "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487"
+    },
+    "entries": [
+      {
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      {
+        "entry": "SuperFrog_DiskTwo.ipf",
+        "entryBytes": 1140812,
+        "entrySha256": "b2c02ca619605b9015f333982920abcd184b741507bf788970589a0337b8126d"
+      },
+      {
+        "entry": "SuperFrog_StoryDisk.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "73336668a83f5db6115cd4f59d8ed74a9212ca67bde6bab72e536a89f4d86ba7"
+      }
+    ]
+  },
+  "references": [
+    {
+      "title": "Commodore Amiga Hardware Reference Manual, chapter 4, sprite control registers and automatic DMA",
+      "url": "https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_4.html"
+    },
+    {
+      "title": "Team17 Superfrog instructions, preserved transcription; ordinary joystick controls and restart pill",
+      "url": "https://www.emuparadise.me/GameBase%20Amiga/Extras/Instructions/S/Superfrog.txt"
+    }
+  ],
+  "tests": {
+    "before": {
+      "result": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/TestResults/before.trx",
+        "bytes": 12419,
+        "sha256": "81aecbe8a61439e63f4ca108483bc1e81f5f6e58615abf460e8113f0c4747a60"
+      },
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "0",
+        "failed": "3",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "prototypeSpriteChecks": {
+      "result": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/TestResults/sprites-after.trx",
+        "bytes": 329390,
+        "sha256": "753d39ceaacd0ed36a222c66fa933aec3006c947e51f7299f49202a3c3934e2d"
+      },
+      "counters": {
+        "total": "200",
+        "executed": "200",
+        "passed": "200",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "prototypeBoundaryFailure": {
+      "result": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/TestResults/control-pair-initial.trx",
+        "bytes": 5115,
+        "sha256": "5e1d401cb116a984e962cc8a63bf00107b3742ea3aeecd697bb1c9f392ccc58b"
+      },
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "final": {
+      "result": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/TestResults/superfrog-final-engine.trx",
+        "bytes": 2043895,
+        "sha256": "f8c02ee2e6be73f64f06bc614da629a6fb7db48da8d8ebac0df3e0c7d7659048"
+      },
+      "counters": {
+        "total": "1257",
+        "executed": "1250",
+        "passed": "1250",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "note": "Final suite includes all five new cases and supersedes the overlapping focused/prototype runs. Seven optional native cases lack configured media and are unavailable coverage. No CopperStart component/ROM suite rerun for the unchanged ROM."
+  },
+  "runs": {
+    "final-normal": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\runner-final\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\final-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\initial-final.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "11000"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/initial-final.json",
+        "bytes": 263,
+        "sha256": "319369d43851d6f6668a80cb75d72b178ef2f66917e4fcb004304cfaaac0ee98"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 12200,
+      "captureFiles": 670,
+      "captureFields": [
+        1,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400,
+        2500,
+        2600,
+        2700,
+        2800,
+        2900,
+        3000,
+        3100,
+        3200,
+        3300,
+        3400,
+        3500,
+        3600,
+        3700,
+        3800,
+        3900,
+        4000,
+        4100,
+        4200,
+        4300,
+        4400,
+        4500,
+        4600,
+        4700,
+        4800,
+        4900,
+        5000,
+        5100,
+        5200,
+        5300,
+        5400,
+        5500,
+        5600,
+        5700,
+        5800,
+        5900,
+        6000,
+        6100,
+        6200,
+        6300,
+        6400,
+        6500,
+        6600,
+        6700,
+        6800,
+        6900,
+        7000,
+        7100,
+        7200,
+        7300,
+        7400,
+        7500,
+        7600,
+        7700,
+        7800,
+        7900,
+        8000,
+        8100,
+        8200,
+        8300,
+        8400,
+        8500,
+        8600,
+        8700,
+        8800,
+        8900,
+        9000,
+        9100,
+        9200,
+        9300,
+        9400,
+        9500,
+        9600,
+        9700,
+        9800,
+        9900,
+        10000,
+        10100,
+        10200,
+        10300,
+        10400,
+        10500,
+        10600,
+        10700,
+        10800,
+        10900,
+        11000,
+        11100,
+        11200,
+        11300,
+        11400,
+        11500,
+        11520,
+        11580,
+        11592,
+        11600,
+        11612,
+        11670,
+        11700,
+        11736,
+        11776,
+        11800,
+        11810,
+        11832,
+        11900,
+        12000,
+        12100,
+        12112,
+        12140,
+        12200
+      ],
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-normal/capture-manifest.json",
+        "bytes": 62181,
+        "sha256": "9bcca34fc37b24448c40201bcf632ce062dd1e4b31011e1bdd2cbfe5aeee32e2"
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 11000,
+          "target": 11100,
+          "events": [
+            {
+              "frame": 11010,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11045
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 11100,
+          "target": 11200,
+          "events": [
+            {
+              "frame": 11110,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 11130
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 11200,
+          "target": 11300,
+          "events": []
+        },
+        {
+          "revision": 3,
+          "start": 11300,
+          "target": 11400,
+          "events": [
+            {
+              "frame": 11310,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11345
+            }
+          ]
+        },
+        {
+          "revision": 4,
+          "start": 11400,
+          "target": 11500,
+          "events": [
+            {
+              "frame": 11410,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 11440
+            }
+          ]
+        },
+        {
+          "revision": 5,
+          "start": 11500,
+          "target": 11520,
+          "events": []
+        },
+        {
+          "revision": 6,
+          "start": 11520,
+          "target": 11580,
+          "events": [
+            {
+              "frame": 11522,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11557
+            }
+          ]
+        },
+        {
+          "revision": 7,
+          "start": 11580,
+          "target": 11592,
+          "events": [
+            {
+              "frame": 11582,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 8,
+          "start": 11592,
+          "target": 11612,
+          "events": []
+        },
+        {
+          "revision": 9,
+          "start": 11612,
+          "target": 11670,
+          "events": [
+            {
+              "frame": 11614
+            }
+          ]
+        },
+        {
+          "revision": 10,
+          "start": 11670,
+          "target": 11700,
+          "events": [
+            {
+              "frame": 11672,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11679
+            }
+          ]
+        },
+        {
+          "revision": 11,
+          "start": 11700,
+          "target": 11736,
+          "events": [
+            {
+              "frame": 11702,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 12,
+          "start": 11736,
+          "target": 11776,
+          "events": [
+            {
+              "frame": 11736,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11768
+            }
+          ]
+        },
+        {
+          "revision": 13,
+          "start": 11776,
+          "target": 11810,
+          "events": [
+            {
+              "frame": 11778,
+              "joystickPort1": 4
+            },
+            {
+              "frame": 11788
+            }
+          ]
+        },
+        {
+          "revision": 14,
+          "start": 11810,
+          "target": 11832,
+          "events": [
+            {
+              "frame": 11812,
+              "joystickPort1": 1
+            }
+          ]
+        },
+        {
+          "revision": 15,
+          "start": 11832,
+          "target": 11900,
+          "events": [
+            {
+              "frame": 11832
+            },
+            {
+              "frame": 11852,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11882
+            }
+          ]
+        },
+        {
+          "revision": 16,
+          "start": 11900,
+          "target": 12100,
+          "events": []
+        },
+        {
+          "revision": 17,
+          "start": 12100,
+          "target": 12112,
+          "events": [
+            {
+              "frame": 12102,
+              "joystickPort1": 16
+            }
+          ]
+        },
+        {
+          "revision": 18,
+          "start": 12112,
+          "target": 12140,
+          "events": []
+        },
+        {
+          "revision": 19,
+          "start": 12140,
+          "target": 12200,
+          "events": [
+            {
+              "frame": 12142
+            }
+          ]
+        }
+      ],
+      "nonzeroPcmSnapshots": 105,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 12200,
+        "cycle": 1728397980,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01A56",
+        "sr": "2009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000007",
+          "00000030",
+          "00003B70",
+          "00003200",
+          "00000000",
+          "0000DF2E",
+          "00000003"
+        ],
+        "address": [
+          "00C01776",
+          "00005E00",
+          "000538BE",
+          "00C2BEAA",
+          "0004F98C",
+          "00C19B88",
+          "00C10A1C",
+          "00C00F9C"
+        ],
+        "dmacon": "07FF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00006FD2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 96625,
+        "Cylinder": 49,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 49,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 96625,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 0,
+        "ciaAPending": 0,
+        "ciaBMask": 0,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2779",
+        "diwstop": "2CC7",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002D3FC",
+          "00030F6C",
+          "00034ADC",
+          "0003864C",
+          "0003C1BC",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      }
+    },
+    "final-scalar": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\runner-final\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\final-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\initial-final.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "11000",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/initial-final.json",
+        "bytes": 263,
+        "sha256": "319369d43851d6f6668a80cb75d72b178ef2f66917e4fcb004304cfaaac0ee98"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 12200,
+      "captureFiles": 670,
+      "captureFields": [
+        1,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400,
+        2500,
+        2600,
+        2700,
+        2800,
+        2900,
+        3000,
+        3100,
+        3200,
+        3300,
+        3400,
+        3500,
+        3600,
+        3700,
+        3800,
+        3900,
+        4000,
+        4100,
+        4200,
+        4300,
+        4400,
+        4500,
+        4600,
+        4700,
+        4800,
+        4900,
+        5000,
+        5100,
+        5200,
+        5300,
+        5400,
+        5500,
+        5600,
+        5700,
+        5800,
+        5900,
+        6000,
+        6100,
+        6200,
+        6300,
+        6400,
+        6500,
+        6600,
+        6700,
+        6800,
+        6900,
+        7000,
+        7100,
+        7200,
+        7300,
+        7400,
+        7500,
+        7600,
+        7700,
+        7800,
+        7900,
+        8000,
+        8100,
+        8200,
+        8300,
+        8400,
+        8500,
+        8600,
+        8700,
+        8800,
+        8900,
+        9000,
+        9100,
+        9200,
+        9300,
+        9400,
+        9500,
+        9600,
+        9700,
+        9800,
+        9900,
+        10000,
+        10100,
+        10200,
+        10300,
+        10400,
+        10500,
+        10600,
+        10700,
+        10800,
+        10900,
+        11000,
+        11100,
+        11200,
+        11300,
+        11400,
+        11500,
+        11520,
+        11580,
+        11592,
+        11600,
+        11612,
+        11670,
+        11700,
+        11736,
+        11776,
+        11800,
+        11810,
+        11832,
+        11900,
+        12000,
+        12100,
+        12112,
+        12140,
+        12200
+      ],
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-scalar/capture-manifest.json",
+        "bytes": 62181,
+        "sha256": "9bcca34fc37b24448c40201bcf632ce062dd1e4b31011e1bdd2cbfe5aeee32e2"
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 11000,
+          "target": 11100,
+          "events": [
+            {
+              "frame": 11010,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11045
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 11100,
+          "target": 11200,
+          "events": [
+            {
+              "frame": 11110,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 11130
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 11200,
+          "target": 11300,
+          "events": []
+        },
+        {
+          "revision": 3,
+          "start": 11300,
+          "target": 11400,
+          "events": [
+            {
+              "frame": 11310,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11345
+            }
+          ]
+        },
+        {
+          "revision": 4,
+          "start": 11400,
+          "target": 11500,
+          "events": [
+            {
+              "frame": 11410,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 11440
+            }
+          ]
+        },
+        {
+          "revision": 5,
+          "start": 11500,
+          "target": 11520,
+          "events": []
+        },
+        {
+          "revision": 6,
+          "start": 11520,
+          "target": 11580,
+          "events": [
+            {
+              "frame": 11522,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11557
+            }
+          ]
+        },
+        {
+          "revision": 7,
+          "start": 11580,
+          "target": 11592,
+          "events": [
+            {
+              "frame": 11582,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 8,
+          "start": 11592,
+          "target": 11612,
+          "events": []
+        },
+        {
+          "revision": 9,
+          "start": 11612,
+          "target": 11670,
+          "events": [
+            {
+              "frame": 11614
+            }
+          ]
+        },
+        {
+          "revision": 10,
+          "start": 11670,
+          "target": 11700,
+          "events": [
+            {
+              "frame": 11672,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11679
+            }
+          ]
+        },
+        {
+          "revision": 11,
+          "start": 11700,
+          "target": 11736,
+          "events": [
+            {
+              "frame": 11702,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 12,
+          "start": 11736,
+          "target": 11776,
+          "events": [
+            {
+              "frame": 11736,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11768
+            }
+          ]
+        },
+        {
+          "revision": 13,
+          "start": 11776,
+          "target": 11810,
+          "events": [
+            {
+              "frame": 11778,
+              "joystickPort1": 4
+            },
+            {
+              "frame": 11788
+            }
+          ]
+        },
+        {
+          "revision": 14,
+          "start": 11810,
+          "target": 11832,
+          "events": [
+            {
+              "frame": 11812,
+              "joystickPort1": 1
+            }
+          ]
+        },
+        {
+          "revision": 15,
+          "start": 11832,
+          "target": 11900,
+          "events": [
+            {
+              "frame": 11832
+            },
+            {
+              "frame": 11852,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11882
+            }
+          ]
+        },
+        {
+          "revision": 16,
+          "start": 11900,
+          "target": 12100,
+          "events": []
+        },
+        {
+          "revision": 17,
+          "start": 12100,
+          "target": 12112,
+          "events": [
+            {
+              "frame": 12102,
+              "joystickPort1": 16
+            }
+          ]
+        },
+        {
+          "revision": 18,
+          "start": 12112,
+          "target": 12140,
+          "events": []
+        },
+        {
+          "revision": 19,
+          "start": 12140,
+          "target": 12200,
+          "events": [
+            {
+              "frame": 12142
+            }
+          ]
+        }
+      ],
+      "nonzeroPcmSnapshots": 105,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 12200,
+        "cycle": 1728397980,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01A56",
+        "sr": "2009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000007",
+          "00000030",
+          "00003B70",
+          "00003200",
+          "00000000",
+          "0000DF2E",
+          "00000003"
+        ],
+        "address": [
+          "00C01776",
+          "00005E00",
+          "000538BE",
+          "00C2BEAA",
+          "0004F98C",
+          "00C19B88",
+          "00C10A1C",
+          "00C00F9C"
+        ],
+        "dmacon": "07FF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00006FD2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 96625,
+        "Cylinder": 49,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 49,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 96625,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 0,
+        "ciaAPending": 0,
+        "ciaBMask": 0,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2779",
+        "diwstop": "2CC7",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002D3FC",
+          "00030F6C",
+          "00034ADC",
+          "0003864C",
+          "0003C1BC",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      }
+    },
+    "final-native": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\runner-final\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\final-native",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\superfrog-character-2026-10-20\\initial-final.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "11000"
+      ],
+      "rom": {
+        "path": "C:/Data/ROM/Kickstart_13.rom",
+        "bytes": 262144,
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/initial-final.json",
+        "bytes": 263,
+        "sha256": "319369d43851d6f6668a80cb75d72b178ef2f66917e4fcb004304cfaaac0ee98"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 12200,
+      "captureFiles": 670,
+      "captureFields": [
+        1,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400,
+        2500,
+        2600,
+        2700,
+        2800,
+        2900,
+        3000,
+        3100,
+        3200,
+        3300,
+        3400,
+        3500,
+        3600,
+        3700,
+        3800,
+        3900,
+        4000,
+        4100,
+        4200,
+        4300,
+        4400,
+        4500,
+        4600,
+        4700,
+        4800,
+        4900,
+        5000,
+        5100,
+        5200,
+        5300,
+        5400,
+        5500,
+        5600,
+        5700,
+        5800,
+        5900,
+        6000,
+        6100,
+        6200,
+        6300,
+        6400,
+        6500,
+        6600,
+        6700,
+        6800,
+        6900,
+        7000,
+        7100,
+        7200,
+        7300,
+        7400,
+        7500,
+        7600,
+        7700,
+        7800,
+        7900,
+        8000,
+        8100,
+        8200,
+        8300,
+        8400,
+        8500,
+        8600,
+        8700,
+        8800,
+        8900,
+        9000,
+        9100,
+        9200,
+        9300,
+        9400,
+        9500,
+        9600,
+        9700,
+        9800,
+        9900,
+        10000,
+        10100,
+        10200,
+        10300,
+        10400,
+        10500,
+        10600,
+        10700,
+        10800,
+        10900,
+        11000,
+        11100,
+        11200,
+        11300,
+        11400,
+        11500,
+        11520,
+        11580,
+        11592,
+        11600,
+        11612,
+        11670,
+        11700,
+        11736,
+        11776,
+        11800,
+        11810,
+        11832,
+        11900,
+        12000,
+        12100,
+        12112,
+        12140,
+        12200
+      ],
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-native/capture-manifest.json",
+        "bytes": 62181,
+        "sha256": "5cfbdac373cdd6172c317710e9473195431b1baf9b6cb2cd00f6432cc452709d"
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 11000,
+          "target": 11100,
+          "events": [
+            {
+              "frame": 11010,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11045
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 11100,
+          "target": 11200,
+          "events": [
+            {
+              "frame": 11110,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 11130
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 11200,
+          "target": 11300,
+          "events": []
+        },
+        {
+          "revision": 3,
+          "start": 11300,
+          "target": 11400,
+          "events": [
+            {
+              "frame": 11310,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11345
+            }
+          ]
+        },
+        {
+          "revision": 4,
+          "start": 11400,
+          "target": 11500,
+          "events": [
+            {
+              "frame": 11410,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 11440
+            }
+          ]
+        },
+        {
+          "revision": 5,
+          "start": 11500,
+          "target": 11520,
+          "events": []
+        },
+        {
+          "revision": 6,
+          "start": 11520,
+          "target": 11580,
+          "events": [
+            {
+              "frame": 11522,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11557
+            }
+          ]
+        },
+        {
+          "revision": 7,
+          "start": 11580,
+          "target": 11592,
+          "events": [
+            {
+              "frame": 11582,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 8,
+          "start": 11592,
+          "target": 11612,
+          "events": []
+        },
+        {
+          "revision": 9,
+          "start": 11612,
+          "target": 11670,
+          "events": [
+            {
+              "frame": 11614
+            }
+          ]
+        },
+        {
+          "revision": 10,
+          "start": 11670,
+          "target": 11700,
+          "events": [
+            {
+              "frame": 11672,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11679
+            }
+          ]
+        },
+        {
+          "revision": 11,
+          "start": 11700,
+          "target": 11736,
+          "events": [
+            {
+              "frame": 11702,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 12,
+          "start": 11736,
+          "target": 11776,
+          "events": [
+            {
+              "frame": 11736,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11768
+            }
+          ]
+        },
+        {
+          "revision": 13,
+          "start": 11776,
+          "target": 11810,
+          "events": [
+            {
+              "frame": 11778,
+              "joystickPort1": 4
+            },
+            {
+              "frame": 11788
+            }
+          ]
+        },
+        {
+          "revision": 14,
+          "start": 11810,
+          "target": 11832,
+          "events": [
+            {
+              "frame": 11812,
+              "joystickPort1": 1
+            }
+          ]
+        },
+        {
+          "revision": 15,
+          "start": 11832,
+          "target": 11900,
+          "events": [
+            {
+              "frame": 11832
+            },
+            {
+              "frame": 11852,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 11882
+            }
+          ]
+        },
+        {
+          "revision": 16,
+          "start": 11900,
+          "target": 12100,
+          "events": []
+        },
+        {
+          "revision": 17,
+          "start": 12100,
+          "target": 12112,
+          "events": [
+            {
+              "frame": 12102,
+              "joystickPort1": 16
+            }
+          ]
+        },
+        {
+          "revision": 18,
+          "start": 12112,
+          "target": 12140,
+          "events": []
+        },
+        {
+          "revision": 19,
+          "start": 12140,
+          "target": 12200,
+          "events": [
+            {
+              "frame": 12142
+            }
+          ]
+        }
+      ],
+      "nonzeroPcmSnapshots": 104,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 12200,
+        "cycle": 1728294560,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01A56",
+        "sr": "2009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000007",
+          "00000030",
+          "00003B70",
+          "00003200",
+          "00000000",
+          "0000DF2E",
+          "00000003"
+        ],
+        "address": [
+          "00C01776",
+          "00005E00",
+          "000538BE",
+          "00C2BEAA",
+          "0004F98C",
+          "00C19B88",
+          "00C10A1C",
+          "00C00F9C"
+        ],
+        "dmacon": "07FF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00006FD2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 96626,
+        "Cylinder": 49,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 49,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 96626,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2779",
+        "diwstop": "2CC7",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002D3FC",
+          "00030F6C",
+          "00034ADC",
+          "0003864C",
+          "0003C1BC",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      }
+    }
+  },
+  "comparisons": {
+    "normalScalarMatchingFiles": 670,
+    "types": [
+      "full-raster BMP",
+      "CPU/hardware JSON",
+      "Chip RAM",
+      "slow RAM",
+      "PCM"
+    ],
+    "crossRom": "Fresh Kickstart 1.3 control reaches the same reviewed milestones. Scene/state differences remain; byte identity across ROMs is not claimed."
+  },
+  "builds": {
+    "production": {
+      "command": "dotnet build CopperScreen.slnx -c Release --no-restore",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0,
+      "note": "Restore uses an ignored local config pointing to the existing immutable qualified CPU package cache and nuget.org. Diagnostic outputs remain separate."
+    },
+    "liveProbe": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "limits": [
+    "No level or game completion",
+    "Disk Two, Story Disk and saving not replayed with this engine image",
+    "No weapon kill or full combat qualification; fire input after respawn does not establish a powered weapon",
+    "No new physical silicon-edge or full hardware-conformance certification",
+    "No formal throughput measurement or audio listening/fidelity assessment"
+  ],
+  "preliminaryRuns": {
+    "names": [
+      "normal",
+      "scalar",
+      "native"
+    ],
+    "completedFrames": 12000,
+    "note": "Initial fix confirms visibility, then is stopped. A newly added intervening-control-write regression failed that prototype; final runs restart from reset after preserving the control pair. These initial captures are not counted as final qualification."
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/superfrog-copperstart-visible-gameplay-v1.json",
+    "bytes": 1364,
+    "sha256": "16f589d0c2beda6ce249d92cac26098d271fa3475a9a05fe3d265a40231b6923"
+  },
+  "milestones": {
+    "11000": "Character visible under both ROMs at the level start",
+    "11100": "Walk across first log bridge; score 350",
+    "11200": "Character visible in spike-pit life-loss sequence",
+    "11300-11520": "Start-area respawn and temporary disappearance/blink; later character visible again",
+    "11592": "Visible jumping character above first spike pit",
+    "11612": "Jump and vertical camera scroll",
+    "11670": "Landed beyond first spike pit; score 650, 87 coins required",
+    "11700": "Nearby pickups disappear; score 1700",
+    "11736": "Another jump/coin and health changes from four to three units; score 1300, 86 coins required",
+    "11900": "Second spike-pit life loss",
+    "12100": "Respawn at acquired checkpoint beyond the first pit; score 1300 and 86 coins required retained",
+    "12200": "Active gameplay at checkpoint; score 1300, 86 coins required. Character temporarily absent in this snapshot after respawn; visible in other reviewed fields."
+  },
+  "beforeTrace": {
+    "trace": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/before-trace/sprite-trace.jsonl",
+      "bytes": 16827,
+      "sha256": "b47112b8f23b37df35fe80b68bc26d92da5a38b05720e1c7f6c1ce483a50a482"
+    },
+    "sources": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-probe/Program.cs",
+        "bytes": 2259,
+        "sha256": "3801af185521b010f5967cf5c352e496383b8ce48918be13de31a3e79bc43535"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-probe/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-probe/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-probe/Probe.csproj",
+        "bytes": 819,
+        "sha256": "c89edf65ee8f19e40e142b85132d502d25dc5c839cb6b0f213add586bc28b3a6"
+      }
+    ],
+    "binaries": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-runner/CopperMod.Amiga.Lightweight.Runner.dll",
+        "bytes": 53760,
+        "sha256": "25d69611a0c1f090cab38e161af45bef0f49f51a959d056ccf24bbf553223ed9"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-runner/CopperMod.Amiga.Lightweight.dll",
+        "bytes": 288256,
+        "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-runner/Copper68k.dll",
+        "bytes": 978944,
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/trace-runner/CopperDisk.dll",
+        "bytes": 105472,
+        "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+      }
+    ],
+    "interval": "Reset and original six startup input events through field 12000, then one field stepped through the existing scalar quantum using reflection. Reads private state without guest bus reads or guest-memory writes.",
+    "observation": "At line 32 Copper programs SPR0 pointer $538AC, POS $9C82, CTL $BF81. Denise reflects those controls, but Agnus retains POS $0007, CTL $FFFC, Active=false and Exhausted=true. No character data is fetched."
+  },
+  "postRespawnVisibility": {
+    "normal-12100": {
+      "chipRam": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-normal/captures/frame-012100.chipram",
+        "bytes": 524288,
+        "sha256": "0ef69f2fe0fa02ecc71cbdf814f0c8bb0cd5a3c06cca2d3943299edc62dc9010"
+      },
+      "controls": [
+        {
+          "channel": 0,
+          "copperPosInstruction": "0707C",
+          "pos": "9F88",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 272
+        },
+        {
+          "channel": 1,
+          "copperPosInstruction": "0708C",
+          "pos": "9F88",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 272
+        },
+        {
+          "channel": 2,
+          "copperPosInstruction": "0709C",
+          "pos": "9F90",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 288
+        },
+        {
+          "channel": 3,
+          "copperPosInstruction": "070AC",
+          "pos": "9F90",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 288
+        }
+      ]
+    },
+    "normal-12200": {
+      "chipRam": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-normal/captures/frame-012200.chipram",
+        "bytes": 524288,
+        "sha256": "6ef72958a08dfa674293d0743299be620663fe4efee86b56ad28499935cbf9cd"
+      },
+      "controls": [
+        {
+          "channel": 0,
+          "copperPosInstruction": "0707C",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        },
+        {
+          "channel": 1,
+          "copperPosInstruction": "0708C",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        },
+        {
+          "channel": 2,
+          "copperPosInstruction": "0709C",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        },
+        {
+          "channel": 3,
+          "copperPosInstruction": "070AC",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        }
+      ]
+    },
+    "native-12100": {
+      "chipRam": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-native/captures/frame-012100.chipram",
+        "bytes": 524288,
+        "sha256": "8223c2d4af0b808a4cc618ba3ab473e7475eb716700f2e424a9b40791e31c9c8"
+      },
+      "controls": [
+        {
+          "channel": 0,
+          "copperPosInstruction": "0707C",
+          "pos": "9F88",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 272
+        },
+        {
+          "channel": 1,
+          "copperPosInstruction": "0708C",
+          "pos": "9F88",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 272
+        },
+        {
+          "channel": 2,
+          "copperPosInstruction": "0709C",
+          "pos": "9F90",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 288
+        },
+        {
+          "channel": 3,
+          "copperPosInstruction": "070AC",
+          "pos": "9F90",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 288
+        }
+      ]
+    },
+    "native-12200": {
+      "chipRam": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/final-native/captures/frame-012200.chipram",
+        "bytes": 524288,
+        "sha256": "24ad20ae9f4aa68096aa0409bf8fb406d7c2ac7be7c85c9ea6292782e6ea3ee4"
+      },
+      "controls": [
+        {
+          "channel": 0,
+          "copperPosInstruction": "0707C",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        },
+        {
+          "channel": 1,
+          "copperPosInstruction": "0708C",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        },
+        {
+          "channel": 2,
+          "copperPosInstruction": "0709C",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        },
+        {
+          "channel": 3,
+          "copperPosInstruction": "070AC",
+          "pos": "9CE8",
+          "ctl": "BF80",
+          "encodedHorizontalStart": 464
+        }
+      ]
+    },
+    "finding": "At field 12200 the guest Copper program supplies HSTART 464/480 for all four character channels, beyond the 454-lores-pixel raster; field 12100 supplies on-screen starts. This explains the post-respawn blank snapshot independently of the repaired missing-DMA fault."
+  },
+  "probeSources": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/live-probe/Program.cs",
+      "bytes": 2404,
+      "sha256": "212ebadf2dbd6eac1f5a1fc872c5550917a955f99ec0820a099b937793da6ba7"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/live-probe/NativeInputScript.cs",
+      "bytes": 3636,
+      "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/live-probe/NativeBootProbe.cs",
+      "bytes": 8531,
+      "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/live-probe/Probe.csproj",
+      "bytes": 824,
+      "sha256": "87538d27d6209216fe934d135074a18e0ff094715998c24883e80760ce52ee19"
+    }
+  ],
+  "validation": "Evidence and workload JSON parsed; workload equals actual initial/loaded physical input; new Markdown local links resolve; published workload bytes match; staged whitespace check passed. Native media and diagnostic tests are separate coverage."
+}

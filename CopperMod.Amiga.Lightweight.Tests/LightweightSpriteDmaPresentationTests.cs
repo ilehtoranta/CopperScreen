@@ -10,6 +10,31 @@ public sealed class LightweightSpriteDmaPresentationTests
     private const int Green = unchecked((int)0xFF00FF00);
 
     [Fact]
+    public void ProgrammedPositionAfterTerminatorRendersPointedPixelData()
+    {
+        using var machine = CreateStoppedMachine();
+        const uint nullAddress = 0x5000, dataAddress = 0x6000;
+        const int x = 193, y = 50;
+        ConfigureWindow(machine);
+        WriteRegisterAndSettle(machine, Color(17), 0x00F0);
+        SetPointer(machine, 0, nullAddress);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites);
+        machine.AdvanceHardwareTo(At(26, 100));
+        SeedWord(machine, dataAddress, 0x8000);
+        SeedWord(machine, dataAddress + 2, 0);
+        SetPointer(machine, 0, dataAddress);
+        var (pos, ctl) = EncodePosition(x, y, height: 1);
+        WriteRegisterAndSettle(machine, LightweightRegisters.SpritePosFirst, pos);
+        WriteRegisterAndSettle(machine, LightweightRegisters.SpritePosFirst + 2, ctl);
+
+        machine.ExecuteFrame();
+
+        Assert.Equal(Black, Pixel(machine, x, y - 1));
+        Assert.Equal(Green, Pixel(machine, x, y));
+        Assert.Equal(Black, Pixel(machine, x + 1, y));
+    }
+
+    [Fact]
     public void CompleteDmaControlPairEntersDeniseOneCckAfterCtlOutput()
     {
         using var machine = CreateStoppedMachine();

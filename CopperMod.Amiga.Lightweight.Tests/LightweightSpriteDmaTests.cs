@@ -7,6 +7,58 @@ public sealed class LightweightSpriteDmaTests
 {
     private const ushort DmaSetMasterAndSprites = 0x8220;
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(3)]
+    [InlineData(7)]
+    public void CopperPositionWritesRestartDataDmaAfterNullControl(int channel)
+    {
+        using var machine = CreateStoppedMachine();
+        const uint nullAddress = 0x2800, dataAddress = 0x3000;
+        SetPointer(machine, channel, nullAddress, 0);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, 0);
+        machine.AdvanceHardwareTo(At(26, 100));
+        Assert.True(machine.IsSpriteDmaExhausted(channel));
+
+        // Copper supplies POS/CTL separately. The pointer starts at pixel
+        // data, not at another descriptor/header owned by the emulator.
+        SeedWord(machine, dataAddress, 0x8000);
+        SeedWord(machine, dataAddress + 2, 0x4000);
+        SetPointer(machine, channel, dataAddress, machine.Cycle);
+        var (pos, ctl) = EncodePosition(193, 50, 1);
+        var register = (ushort)(LightweightRegisters.SpritePosFirst + channel * 8);
+        WriteRegister(machine, register, pos, machine.Cycle);
+        machine.AdvanceHardwareTo(machine.Cycle + 2);
+        WriteRegister(machine, (ushort)(register + 2), ctl, machine.Cycle);
+        machine.AdvanceHardwareTo(At(50, 0x36));
+
+        Assert.Equal(pos, machine.GetSpriteDmaPos(channel));
+        Assert.Equal(ctl, machine.GetSpriteDmaCtl(channel));
+        Assert.Equal((ushort)0x8000, machine.GetSpriteDmaDataA(channel));
+        Assert.Equal((ushort)0x4000, machine.GetSpriteDmaDataB(channel));
+        Assert.Equal(dataAddress + 4, machine.GetLiveSpritePointer(channel));
+    }
+
+    [Fact]
+    public void PositionWriteBetweenControlWordsPreservesTheCtlFetch()
+    {
+        using var machine = CreateStoppedMachine();
+        const uint address = 0x2800;
+        var (pos, ctl) = EncodePosition(193, 50, 1);
+        SeedWord(machine, address, pos);
+        SeedWord(machine, address + 2, ctl);
+        SetPointer(machine, 0, address, 0);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, 0);
+        machine.AdvanceHardwareTo(At(25, 0x18));
+        WriteRegister(machine, LightweightRegisters.SpritePosFirst + 2, 0x7000, machine.Cycle);
+
+        machine.AdvanceHardwareTo(At(25, 0x1A));
+
+        Assert.Equal(ctl, machine.GetSpriteDmaCtl(0));
+        Assert.Equal((ushort)0, machine.GetSpriteDmaDataB(0));
+        Assert.Equal(address + 4, machine.GetLiveSpritePointer(0));
+    }
+
     [Fact]
     public void VerticalBlankPointerRewriteSurvivesUntilPalResetLine()
     {

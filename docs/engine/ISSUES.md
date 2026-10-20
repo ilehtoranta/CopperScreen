@@ -121,7 +121,7 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 | LWA-HDF-001 | CopperHDF integration | Implemented; bounded native OFS and FFS proof | Native KS 3.1 FFS/RDB boot/write/dispose/reopen passes at 0 and 2 MiB Fast RAM after correcting the initial DOS lock; see [evidence and limits](KICKSTART_31_HD_2026-09-30.md). Retain KS 1.3 OFS partition/RDB evidence; other filesystem handlers need supplied media. Physical IDE/SCSI and host directories are separate features. The 020 indexed-JSR blocker at `$FC4E28` and subsequent reached operand gaps are [resolved in published CPU `.54`](COPPERHDF_020_2026-09-27.md): 020/EC020 native boot and OFS I/O pass with and without Fast RAM. |
 | LWA-VIDEO-002 | Hires transitions | Unverified; OPEN | Investigate supported raster/scroll/mode-transition failures. |
 | LWA-VIDEO-005 | HAM edges | Mode implemented; edges OPEN | Establish hold reset, mid-line mode and sprite interaction phases. |
-| LWA-VIDEO-006 | Sprite sequencing edges | Early-blank corruption repaired; edges OPEN | Verify comparator reuse, manual control and stolen-slot boundaries. |
+| LWA-VIDEO-006 | Sprite sequencing edges | Early-blank and direct-position DMA faults repaired; edges OPEN | CPU/Copper POS/CTL writes update Agnus as well as Denise; Superfrog's character is visible. Verify remaining comparator, manual-data and stolen-slot boundaries. |
 | LWA-VIDEO-008 | Dual-playfield edges | Dual HAM and priority codes 5–7 modeled; physical phases OPEN | Broaden native gameplay and establish mode-write boundary expectations; see [nonstandard modes](NONSTANDARD_OCS.md). |
 | LWA-COPPER-001 | WAIT wake-up under bitplane DMA | Confirmed early colour write; repaired 2026-09-18 | WAIT wake-up now yields to higher-priority DMA. Six-plane Beast border starts at x288 instead of x272; see the [native record](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18). Other undocumented control-state edges remain unverified. |
 | LWA-CIA-001 | Board TOD pulse phase | Unverified; OPEN | Obtain board pulse-to-counter/IRQ evidence. |
@@ -315,13 +315,15 @@ VSTART/VSTOP equality/reuse, starts on the reset line, manual POS/CTL interactio
 and partial control pairs under stolen slots remain unverified. Obtain physical
 expectations before expanding or certifying the later range-based sequencer.
 
-Related observation, not yet attributed to sprite sequencing: the
-[2026-10-20 Superfrog replay](COPPERSTART_SUPERFROG_2026-10-20.md) shows score,
-camera and life/respawn responses under CopperStart and Kickstart 1.3, but the
-player character is not clearly visible in either ROM's sparse captures or
-adjacent fields 14500–14504. Character appearance remains unresolved. A wider
-visibility-state/guest display trace is needed before asserting a rendering
-defect or choosing a device regression expectation.
+The [Superfrog character follow-up](SUPERFROG_CHARACTER_2026-10-20.md) resolves
+the earlier visibility uncertainty. CPU/Copper POS/CTL writes now update
+Agnus's vertical controls and reprogram an exhausted channel, while preserving
+the mandatory field reload and a pending control pair. The character is
+visible during movement, jumping/landing, life loss and checkpoint respawn
+under both CopperStart and Kickstart 1.3. Five new cases are included in the
+1250-pass engine suite; seven optional native skips remain unavailable.
+All 670 final normal/scalar capture files match. This repairs direct-position
+DMA programming, not all manual-data or physical comparator/slot edges.
 
 ### LWA-VIDEO-008 — Dual-playfield verification boundary
 

@@ -117,14 +117,28 @@ internal sealed class LightweightSpriteDma
             PublishNextCycle();
             return;
         }
-        if (offset < LightweightRegisters.SpritePointerFirst ||
-            offset > LightweightRegisters.SpritePointerLast)
+        if (offset >= LightweightRegisters.SpritePosFirst &&
+            offset <= LightweightRegisters.SpriteRegisterLast && (offset & 7) <= 2)
+        {
+            ref var state = ref _channels[(offset - LightweightRegisters.SpritePosFirst) >> 3];
+            if ((offset & 2) == 0) state.Pos = machine.GetCustomRegister(offset);
+            else state.Ctl = machine.GetCustomRegister(offset);
+            // CPU/Copper writes program Agnus's vertical controls too. A
+            // previous terminator cannot reject a newly programmed sprite;
+            // its pointer may already address pixel data rather than a header.
+            state.Active = true;
+            state.Exhausted = false;
+        }
+        else if (offset >= LightweightRegisters.SpritePointerFirst &&
+            offset <= LightweightRegisters.SpritePointerLast)
+        {
+            var channel = (offset - LightweightRegisters.SpritePointerFirst) >> 2;
+            _pointers[channel] = machine.GetSpritePointer(channel);
+        }
+        else
         {
             return;
         }
-
-        var channel = (offset - LightweightRegisters.SpritePointerFirst) >> 2;
-        _pointers[channel] = machine.GetSpritePointer(channel);
         if (IsDmaEnabled(machine.Dmacon))
         {
             // A late write changes only a future address input. It cannot
@@ -229,12 +243,20 @@ internal sealed class LightweightSpriteDma
         var channel = relative >> 2;
         var word = (relative >> 1) & 1;
         ref var state = ref _channels[channel];
+        var line = machine.BeamLine;
+        if (word == 0 && line == machine.SpriteControlReloadLine)
+        {
+            // The field's mandatory control reload still overrides position
+            // registers written during vertical blank.
+            state.Active = false;
+            state.Exhausted = false;
+            state.HasPendingPos = false;
+        }
         if (state.Exhausted)
         {
             return;
         }
 
-        var line = machine.BeamLine;
         if (word == 0 && state.Active && line >= GetVerticalStop(in state))
         {
             state.Active = false;
@@ -340,6 +362,13 @@ internal sealed class LightweightSpriteDma
         int word,
         out WordPurpose purpose)
     {
+        // A control POS already fetched from RAM still has its matching CTL
+        // slot, even if a CPU/Copper position write occurs between the words.
+        if (word == 1 && state.HasPendingPos)
+        {
+            purpose = WordPurpose.ControlCtl;
+            return true;
+        }
         if (!state.Active)
         {
             purpose = word == 0
