@@ -1,0 +1,2286 @@
+{
+  "schemaVersion": 1,
+  "protocol": "copperstart-merged-hired-clean-firefight-v1",
+  "date": "2026-10-20",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/rom-final/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "2259a7ee830b68f2bdf5ba5884728144e2d16d7a083e0a56b99e3341fb508be8"
+  },
+  "romManifest": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/rom-final/disk-boot-test-manifest.json",
+    "bytes": 9606,
+    "sha256": "5ba3d9f596d8fcc1584c1c21f399f70357c313f38621548c2800d07f4fa60fee"
+  },
+  "manifest": {
+    "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+    "romBytes": 524288,
+    "codeBytes": 476086,
+    "graphicsBytes": 32300,
+    "graphicsResidentAddress": 16744448,
+    "graphicsSupportedVectors": [
+      -960,
+      -924,
+      -918,
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -810,
+      -804,
+      -606,
+      -576,
+      -570,
+      -564,
+      -552,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -324,
+      -318,
+      -306,
+      -300,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -246,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -48,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "graphicsEntries": {
+      "-1056": 16745254,
+      "-1050": 16745256,
+      "-1044": 16745258,
+      "-1038": 16745260,
+      "-1032": 16745262,
+      "-1026": 16745264,
+      "-1020": 16745266,
+      "-1008": 16745268,
+      "-1002": 16745270,
+      "-996": 16745272,
+      "-990": 16745274,
+      "-984": 16745276,
+      "-978": 16745278,
+      "-972": 16745280,
+      "-966": 16745282,
+      "-960": 16769438,
+      "-954": 16745286,
+      "-948": 16745288,
+      "-942": 16745290,
+      "-936": 16745292,
+      "-930": 16745294,
+      "-924": 16769460,
+      "-918": 16769482,
+      "-900": 16745300,
+      "-894": 16769504,
+      "-888": 16745304,
+      "-882": 16745306,
+      "-876": 16745308,
+      "-870": 16769526,
+      "-864": 16769548,
+      "-858": 16769570,
+      "-852": 16745316,
+      "-840": 16745318,
+      "-834": 16745320,
+      "-828": 16745322,
+      "-822": 16769592,
+      "-816": 16769614,
+      "-810": 16769636,
+      "-804": 16769658,
+      "-798": 16745332,
+      "-792": 16745334,
+      "-786": 16745336,
+      "-780": 16745338,
+      "-774": 16745340,
+      "-768": 16745342,
+      "-762": 16745344,
+      "-756": 16745346,
+      "-732": 16745348,
+      "-726": 16745350,
+      "-720": 16745352,
+      "-714": 16745354,
+      "-708": 16745356,
+      "-702": 16745358,
+      "-696": 16745360,
+      "-690": 16745362,
+      "-684": 16745364,
+      "-678": 16745366,
+      "-672": 16745368,
+      "-666": 16745370,
+      "-660": 16745372,
+      "-654": 16745374,
+      "-636": 16745376,
+      "-630": 16745378,
+      "-624": 16745380,
+      "-618": 16745382,
+      "-612": 16745384,
+      "-606": 16769680,
+      "-600": 16745388,
+      "-594": 16745390,
+      "-588": 16745392,
+      "-582": 16745394,
+      "-576": 16769702,
+      "-570": 16769724,
+      "-564": 16769746,
+      "-558": 16745402,
+      "-552": 16769768,
+      "-546": 16745406,
+      "-540": 16769790,
+      "-534": 16745410,
+      "-528": 16745412,
+      "-522": 16745414,
+      "-516": 16745416,
+      "-510": 16745418,
+      "-504": 16745420,
+      "-498": 16769812,
+      "-492": 16769834,
+      "-486": 16769856,
+      "-480": 16769878,
+      "-474": 16745430,
+      "-468": 16769900,
+      "-462": 16769922,
+      "-456": 16769944,
+      "-450": 16745438,
+      "-444": 16745440,
+      "-438": 16745442,
+      "-432": 16745444,
+      "-426": 16745446,
+      "-420": 16745448,
+      "-414": 16745450,
+      "-408": 16745452,
+      "-402": 16769966,
+      "-396": 16745456,
+      "-390": 16769988,
+      "-384": 16770010,
+      "-378": 16745462,
+      "-372": 16745464,
+      "-366": 16745466,
+      "-360": 16770032,
+      "-354": 16770054,
+      "-348": 16770076,
+      "-342": 16770098,
+      "-336": 16745476,
+      "-330": 16745478,
+      "-324": 16770120,
+      "-318": 16770142,
+      "-312": 16745484,
+      "-306": 16770164,
+      "-300": 16770186,
+      "-294": 16770208,
+      "-288": 16770230,
+      "-282": 16770252,
+      "-276": 16770274,
+      "-270": 16770296,
+      "-264": 16745500,
+      "-258": 16745502,
+      "-252": 16745504,
+      "-246": 16770318,
+      "-240": 16770340,
+      "-234": 16770362,
+      "-228": 16770384,
+      "-222": 16770406,
+      "-216": 16770428,
+      "-210": 16770450,
+      "-204": 16770472,
+      "-198": 16770494,
+      "-192": 16770516,
+      "-186": 16745526,
+      "-180": 16745528,
+      "-174": 16745530,
+      "-168": 16745532,
+      "-162": 16745534,
+      "-156": 16745536,
+      "-150": 16745538,
+      "-144": 16770538,
+      "-138": 16745542,
+      "-132": 16745544,
+      "-126": 16745546,
+      "-120": 16770560,
+      "-114": 16745550,
+      "-108": 16745552,
+      "-102": 16745554,
+      "-96": 16745556,
+      "-90": 16745558,
+      "-84": 16770582,
+      "-78": 16770604,
+      "-72": 16770626,
+      "-66": 16770648,
+      "-60": 16770670,
+      "-54": 16770692,
+      "-48": 16770714,
+      "-42": 16745574,
+      "-36": 16745576,
+      "-30": 16770736,
+      "-6": 16770824,
+      "-12": 16770802,
+      "-18": 16770780,
+      "-24": 16770758
+    },
+    "runCommandStackBridgeAddress": 16776588,
+    "compiledRomSha256": "71D1561D8FEAF4CB7E189533475A2742F093DB088E2A30617D7567262DED77C9",
+    "intuitionResidentAddress": 16732160,
+    "intuitionBytes": 10890,
+    "intuitionSupportedVectors": [
+      -450,
+      -438,
+      -432,
+      -420,
+      -414,
+      -390,
+      -384,
+      -378,
+      -300,
+      -294,
+      -276,
+      -270,
+      -228,
+      -222,
+      -216,
+      -204,
+      -198,
+      -174,
+      -168,
+      -150,
+      -114,
+      -108,
+      -72,
+      -66,
+      -60,
+      -42,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "intuitionEntries": {
+      "-6": 16732878,
+      "-12": 16732894,
+      "-18": 16732914,
+      "-24": 16732930,
+      "-30": 16742854,
+      "-36": 16742856,
+      "-42": 16736914,
+      "-48": 16742860,
+      "-54": 16742862,
+      "-60": 16741972,
+      "-66": 16733792,
+      "-72": 16735106,
+      "-78": 16742870,
+      "-84": 16742872,
+      "-90": 16742874,
+      "-96": 16742876,
+      "-102": 16742878,
+      "-108": 16736726,
+      "-114": 16736900,
+      "-120": 16742884,
+      "-126": 16742886,
+      "-132": 16742888,
+      "-138": 16742890,
+      "-144": 16742892,
+      "-150": 16734752,
+      "-156": 16742896,
+      "-162": 16742898,
+      "-168": 16737022,
+      "-174": 16737052,
+      "-180": 16742904,
+      "-186": 16742906,
+      "-192": 16742908,
+      "-198": 16732982,
+      "-204": 16734382,
+      "-210": 16742914,
+      "-216": 16734118,
+      "-222": 16736964,
+      "-228": 16737082,
+      "-234": 16742922,
+      "-240": 16742924,
+      "-246": 16742926,
+      "-252": 16742928,
+      "-258": 16742930,
+      "-264": 16742932,
+      "-270": 16741958,
+      "-276": 16738888,
+      "-282": 16742938,
+      "-288": 16742940,
+      "-294": 16732946,
+      "-300": 16732962,
+      "-306": 16742946,
+      "-312": 16742948,
+      "-318": 16742950,
+      "-324": 16742952,
+      "-330": 16742954,
+      "-336": 16742956,
+      "-342": 16742958,
+      "-348": 16742960,
+      "-354": 16742962,
+      "-360": 16742964,
+      "-366": 16742966,
+      "-372": 16742968,
+      "-378": 16733606,
+      "-384": 16733664,
+      "-390": 16733650,
+      "-396": 16742976,
+      "-402": 16742978,
+      "-408": 16742980,
+      "-414": 16742796,
+      "-420": 16742824,
+      "-426": 16742986,
+      "-432": 16737096,
+      "-438": 16738144,
+      "-444": 16742992,
+      "-450": 16734916,
+      "-456": 16742996,
+      "-462": 16742998,
+      "-468": 16743000,
+      "-474": 16743002,
+      "-480": 16743004,
+      "-486": 16743006,
+      "-492": 16743008,
+      "-498": 16743010,
+      "-504": 16743012,
+      "-510": 16743014,
+      "-516": 16743016,
+      "-522": 16743018,
+      "-528": 16743020,
+      "-534": 16743022,
+      "-540": 16743024,
+      "-546": 16743026,
+      "-552": 16743028,
+      "-558": 16743030,
+      "-564": 16743032,
+      "-570": 16743034,
+      "-576": 16743036,
+      "-582": 16743038,
+      "-588": 16743040,
+      "-594": 16743042,
+      "-600": 16743044,
+      "-606": 16743046,
+      "-612": 16743048
+    },
+    "sha256": "2259A7EE830B68F2BDF5BA5884728144E2D16D7A083E0A56B99E3341FB508BE8",
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "6D1586B4E749EEE8246F00CADEB17441F8690B4F836174138F990347182129E8"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "CA1B91FB9B7483832D9343D2C0CE7FB2C1F5BF7C6D02EBDF7203D51034D652E3"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "184DCF7CCDD94E5034E438AE0D24990950E691358935A4FFF758F2007472D9BD"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "59EE78DA3DA60E8C57F17423F9E5EB8B698E0051C35C9E6F99F0F5708B141321"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "65A2A142A310CD725AF9D3DB80E8E633F24126AF618789C93403DB4B277730D8"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "3E6383B316690D1625F8267CA5C99271711A3099626DBBED3E76035689D037EB"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "B4CDAF6B077EC401568B0163BE0760CEF886DB095E7D0BDBE3B33681873ED5F8"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "6E6456DEF192E573ACCC53DD9135BA2C6376E967A9702B14FD23F80BF0B1657E"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "C72A077938C26096EBF5452F29E597BA62B219B00C78F3A7D5F2E0A38678292C"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "88BCD5823EF3B0505C1C777B315585D7CBFDA3FBDB40E7C96881FE5039689E68"
+      },
+      {
+        "file": "CopperStart.Intuition.Native.dll",
+        "sha256": "46B5F9C512DBDF71ABB05C93F8CA5902AFA542A39E751D18248927CD3119A114"
+      }
+    ]
+  },
+  "runs": {
+    "normal": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\rom-final\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\combat-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\combat-initial.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "65000"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/rom-final/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "2259a7ee830b68f2bdf5ba5884728144e2d16d7a083e0a56b99e3341fb508be8"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-initial.json",
+        "bytes": 34806,
+        "sha256": "be85e1e18f61c620ae9d9606d6711ad5519e450ddff0ce8d826d65708ff58621"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/run.json",
+        "bytes": 4703,
+        "sha256": "d16b4dd858a2a5cd5506eb4f05fc33f05ba1cfef6cd98c82cc50e3b72422c9a0"
+      },
+      "actualCompleteInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/clean-complete-input-normal.json",
+        "bytes": 72880,
+        "sha256": "0ca5025c14271ebeb8f64f1e178dda596699e78186211ec0554ec5fa5b216a85"
+      },
+      "eventCount": 1310,
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/segments.jsonl",
+        "bytes": 24083,
+        "sha256": "bce879b32465e8c0bd9a121f27eaa9d41f4925cfda47e346284d8e30d2a4e698"
+      },
+      "segmentArtifacts": [
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-0.json",
+            "bytes": 451,
+            "sha256": "6575aef648339f83f88feeb54c72bc1a4915570378f2f0c79fde24cea57f087c"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-0.json",
+            "bytes": 807,
+            "sha256": "68b9aa7497250a0e77b857d1fce6a7495e22aff70e01cab776e11d89306176ab"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-0.json",
+            "bytes": 1080,
+            "sha256": "649f353257bd1e010ca2ec4f853f691745f6f7b068e8b02c15cf77f2c74c00e4"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-1.json",
+            "bytes": 1229,
+            "sha256": "787fb346a9af80c0ce37896a2aeb7911b3796a2813797f7c59d8419a170d1e72"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-1.json",
+            "bytes": 2119,
+            "sha256": "1337c184dddebbc47e2a23ce220e80c73876f3a44f57c420869e17e3cf5df507"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-1.json",
+            "bytes": 2747,
+            "sha256": "c72664177f3b48bd2c71445c0560ff0ae1c001777552b5277ff4ebd3745ed24b"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-2.json",
+            "bytes": 205,
+            "sha256": "957146ecf60c5846d070d0061dfbec580dce75c905b3c5f4ee372baa6d625437"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-2.json",
+            "bytes": 410,
+            "sha256": "8e1129e2a66e5d00b8760a0d655fce394b9c5754ca26bba3e91982e667fbdd9f"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-2.json",
+            "bytes": 640,
+            "sha256": "3621938d30cc3cb6f0c6af36cd3fa1163a1a74009ea726331d0d6daaa10776cc"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-3.json",
+            "bytes": 943,
+            "sha256": "812ab9fca0229ac7c9dad03b2832436dbc411afb9c9129022700126ec42e5277"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-3.json",
+            "bytes": 1668,
+            "sha256": "6e8df5373ebda08e8d901683995bbe58607ae18a5adcb0c89ed7115f8630d2eb"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-3.json",
+            "bytes": 1876,
+            "sha256": "09cc2c09fc32589922be8365ce46e69a1fa08b4c23ce33186a32baf7245cfae9"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-4.json",
+            "bytes": 817,
+            "sha256": "aeff69673f7925bb3cfadb24c7ec2ae086a6881d7f76585a1d4197faba29f61f"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-4.json",
+            "bytes": 1433,
+            "sha256": "073a20b6525cb0f8877e3321c03cf6f0fa62de01604e49a2c2341e263a7732f7"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-4.json",
+            "bytes": 1899,
+            "sha256": "523f91e3673c211b2a62641691a1290c3d90b3a58fca97c7239eef659cf35870"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-5.json",
+            "bytes": 1639,
+            "sha256": "11125b1ef4961a4c65050a75b0daad2497aa51b68024e3d23b07d4e3809baeea"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-5.json",
+            "bytes": 2779,
+            "sha256": "f5ad617ee810f5e481d4a40f90aeb50cd490682b9921577ca24e3c3d96db88a6"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-5.json",
+            "bytes": 3443,
+            "sha256": "65845e838713ea40261393112f4c90322ac8891004c18f99e85bfd678bf5a181"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-6.json",
+            "bytes": 2263,
+            "sha256": "f672421a0d763cd71edc11313e7e885d44f70994891a7a892546c3d33760692c"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-6.json",
+            "bytes": 3881,
+            "sha256": "ac1127726b4dd785c4ce9e8dced30a0c5c28e21a5816291c02db17680a15f161"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-6.json",
+            "bytes": 5056,
+            "sha256": "52b88b1255353e77ecd6d7c13e8f8d9b6310aafbf3ae927df09e5acb5593b9a6"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-7.json",
+            "bytes": 1184,
+            "sha256": "ca2c92a3a80f91639f8413bb1485290dda4d0490fdd7073378f2ffc34ae793ce"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-7.json",
+            "bytes": 2084,
+            "sha256": "7768476e7c9699dd17b79524865608c89885527701a153da494d178c6ab9beb2"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-7.json",
+            "bytes": 2295,
+            "sha256": "1e9c603664ae306df060f62aa8cf7b8c0766ad8588076a3a7266eebf3c848f83"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-8.json",
+            "bytes": 1073,
+            "sha256": "6d7a59af9bafe3cb5e1e0db1da54f92b86a456aeb022306906ed669bc6b91c30"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-8.json",
+            "bytes": 1883,
+            "sha256": "8ce8351fc325c0aa7d3106d8d90486cedffa8dcc916bea285287bf84a41aafde"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-8.json",
+            "bytes": 2139,
+            "sha256": "a1be0b765589176f5c4328173c2fc994aad2ac45e14cf4be6e5a9a49e11ef3bc"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-9.json",
+            "bytes": 1961,
+            "sha256": "4044e7da8e2a8e3542c1ba3d62a7a615a20ee10de07349f66c488bb62972dfd9"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-9.json",
+            "bytes": 3395,
+            "sha256": "65d4816d942c19d9d570865f38fe1af6d8f430737d04cfd1cf6b794edaa30851"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-9.json",
+            "bytes": 3648,
+            "sha256": "b97a5b0afbf95b00f90120c100c39bf927af7db5a33ceca090c8a155b73b6d3b"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-10.json",
+            "bytes": 136,
+            "sha256": "6c2e5b6a73765d2c825d8a7e994d444ec8995fceecd2d359d315eb70bcabb266"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-10.json",
+            "bytes": 307,
+            "sha256": "9b4a7153db2a379d624788afbc2e5ef59a9d0136d65867bda907f785c0fed378"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-10.json",
+            "bytes": 384,
+            "sha256": "cc7da3dd88640152ef05662793e912b0d5cd2afe4a8db55b411b421c44b6adba"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-11.json",
+            "bytes": 7583,
+            "sha256": "fda58b8a32490252eabae1d6c04ef0df26bf60078ec4aee2e9133d7b6b6bf2f7"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-11.json",
+            "bytes": 12740,
+            "sha256": "35a077fc62982efcc05dbf0b2d0c1a5ddeeec93991210a6f10182919b6a9d8df"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-11.json",
+            "bytes": 15393,
+            "sha256": "ecfb6515c00c3c3fcc1aab786eca0eb6aef457a0b5ec6020963a101d74677cb7"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-12.json",
+            "bytes": 131,
+            "sha256": "67e783f2dc290b000a14ab8aecdcc990600a7a3fc98c4acff3b76c429757e3a5"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-12.json",
+            "bytes": 285,
+            "sha256": "6d9e8493964f9c4ad811e0de0b8044bae3c9a5ad3d75ccf968e9f6a1dc036cc4"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-12.json",
+            "bytes": 490,
+            "sha256": "871c493b54d18f2d33450d45d3903de6a068e75ce0b75ebb6a6bf78344552bc0"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-13.json",
+            "bytes": 537,
+            "sha256": "b18c38fd54db11de5c4c64d57db899df5bbe946569c44c1d2917771443b93f67"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-13.json",
+            "bytes": 965,
+            "sha256": "1ef80d15628287bb83d024eddcb09a7387038c978b8523d6fc26784e56ba48fb"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-13.json",
+            "bytes": 1322,
+            "sha256": "d9aaa69bb0000388f2baa79ac04424900450dc5d8770a921b235d87d87000ac8"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-14.json",
+            "bytes": 2424,
+            "sha256": "dff9217700c7a52c538cd6d85ae71e7f2861183ffab62a6d201bd64d4691bd7e"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-14.json",
+            "bytes": 4190,
+            "sha256": "f410c9a03b8ada0e86ba8e695d7154c684a67462c087e0c703ae053403730342"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-14.json",
+            "bytes": 4444,
+            "sha256": "05688dec83c66ab83da841351e7c6a918ad221313c86ee190f44cfb3cf7b1009"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-15.json",
+            "bytes": 2146,
+            "sha256": "3a9c919647445537857d7eeb5ca247d0fa58641e47c4c057f02d05ff4cc4558e"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-15.json",
+            "bytes": 3699,
+            "sha256": "5268aea116c32f66f62a02f661ca31d55bdbc2b30dafc027f41448451c9653b3"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-15.json",
+            "bytes": 4108,
+            "sha256": "88121c6a5eb9ad1f1857f74112b4ff4774187c3217d85c183e633a124fc869e9"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-16.json",
+            "bytes": 500,
+            "sha256": "fe0a8ee27f8b6b8ee4d0457149e9b4559a41aca4644b8513964ccfc16684cac9"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-16.json",
+            "bytes": 914,
+            "sha256": "793e77ee6e5af6bb9da8918accfd8484d3667df4b2246c9a97296d764e6b06e4"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-16.json",
+            "bytes": 1307,
+            "sha256": "826da8a59265cd8d43999037949a034ee99a9b90cacc529918d1aa4cdc8b9aa2"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/input-17.json",
+            "bytes": 653,
+            "sha256": "202d5db59643fb6e922e86b76c6e17df63f879f4e1786056a5545f1c821bdb2d"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-17.json",
+            "bytes": 1147,
+            "sha256": "d9de2514555d6d773bcafd07bce4dc3e25c05b890c6b61fcaa77c25f1daf7fd2"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/actions-17.json",
+            "bytes": 1506,
+            "sha256": "36d9492e27c62eac6a0630a445c7a67e5eb6190c884ac97ae4c2f0c02f7bad6e"
+          }
+        }
+      ],
+      "stop": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/published-18.json",
+        "bytes": 60,
+        "sha256": "fe679a3412a2459fd483a0bc95071a62ac6d8ed04cacab2c4fc8514b70a3579a"
+      },
+      "captureIdentities": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/clean-captures-normal.json",
+        "bytes": 500634,
+        "sha256": "c46f86dca03c13def96b330c4062c3b3337da416c9ccc1507e8f9a49816c50af"
+      },
+      "endFrame": 83200,
+      "files": 4165,
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/runner.log",
+        "bytes": 923077,
+        "sha256": "3919026f8cbf9676dad0e9b6f5cb2df14451690239df24d7312e621d287459a2"
+      }
+    },
+    "scalar": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\rom-final\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\combat-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\combat-initial.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "65000",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/rom-final/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "2259a7ee830b68f2bdf5ba5884728144e2d16d7a083e0a56b99e3341fb508be8"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-initial.json",
+        "bytes": 34806,
+        "sha256": "be85e1e18f61c620ae9d9606d6711ad5519e450ddff0ce8d826d65708ff58621"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/run.json",
+        "bytes": 4720,
+        "sha256": "38d0a43d384c08f2ac024785df63bd1cd476b3eccfd12e487349795c2838d45d"
+      },
+      "actualCompleteInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/clean-complete-input-scalar.json",
+        "bytes": 72880,
+        "sha256": "0ca5025c14271ebeb8f64f1e178dda596699e78186211ec0554ec5fa5b216a85"
+      },
+      "eventCount": 1310,
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/segments.jsonl",
+        "bytes": 24083,
+        "sha256": "bce879b32465e8c0bd9a121f27eaa9d41f4925cfda47e346284d8e30d2a4e698"
+      },
+      "segmentArtifacts": [
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-0.json",
+            "bytes": 451,
+            "sha256": "6575aef648339f83f88feeb54c72bc1a4915570378f2f0c79fde24cea57f087c"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-0.json",
+            "bytes": 807,
+            "sha256": "68b9aa7497250a0e77b857d1fce6a7495e22aff70e01cab776e11d89306176ab"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-0.json",
+            "bytes": 1080,
+            "sha256": "649f353257bd1e010ca2ec4f853f691745f6f7b068e8b02c15cf77f2c74c00e4"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-1.json",
+            "bytes": 1229,
+            "sha256": "787fb346a9af80c0ce37896a2aeb7911b3796a2813797f7c59d8419a170d1e72"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-1.json",
+            "bytes": 2119,
+            "sha256": "1337c184dddebbc47e2a23ce220e80c73876f3a44f57c420869e17e3cf5df507"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-1.json",
+            "bytes": 2747,
+            "sha256": "c72664177f3b48bd2c71445c0560ff0ae1c001777552b5277ff4ebd3745ed24b"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-2.json",
+            "bytes": 205,
+            "sha256": "957146ecf60c5846d070d0061dfbec580dce75c905b3c5f4ee372baa6d625437"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-2.json",
+            "bytes": 410,
+            "sha256": "8e1129e2a66e5d00b8760a0d655fce394b9c5754ca26bba3e91982e667fbdd9f"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-2.json",
+            "bytes": 640,
+            "sha256": "3621938d30cc3cb6f0c6af36cd3fa1163a1a74009ea726331d0d6daaa10776cc"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-3.json",
+            "bytes": 943,
+            "sha256": "812ab9fca0229ac7c9dad03b2832436dbc411afb9c9129022700126ec42e5277"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-3.json",
+            "bytes": 1668,
+            "sha256": "6e8df5373ebda08e8d901683995bbe58607ae18a5adcb0c89ed7115f8630d2eb"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-3.json",
+            "bytes": 1876,
+            "sha256": "09cc2c09fc32589922be8365ce46e69a1fa08b4c23ce33186a32baf7245cfae9"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-4.json",
+            "bytes": 817,
+            "sha256": "aeff69673f7925bb3cfadb24c7ec2ae086a6881d7f76585a1d4197faba29f61f"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-4.json",
+            "bytes": 1433,
+            "sha256": "073a20b6525cb0f8877e3321c03cf6f0fa62de01604e49a2c2341e263a7732f7"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-4.json",
+            "bytes": 1899,
+            "sha256": "523f91e3673c211b2a62641691a1290c3d90b3a58fca97c7239eef659cf35870"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-5.json",
+            "bytes": 1639,
+            "sha256": "11125b1ef4961a4c65050a75b0daad2497aa51b68024e3d23b07d4e3809baeea"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-5.json",
+            "bytes": 2779,
+            "sha256": "f5ad617ee810f5e481d4a40f90aeb50cd490682b9921577ca24e3c3d96db88a6"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-5.json",
+            "bytes": 3443,
+            "sha256": "65845e838713ea40261393112f4c90322ac8891004c18f99e85bfd678bf5a181"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-6.json",
+            "bytes": 2263,
+            "sha256": "f672421a0d763cd71edc11313e7e885d44f70994891a7a892546c3d33760692c"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-6.json",
+            "bytes": 3881,
+            "sha256": "ac1127726b4dd785c4ce9e8dced30a0c5c28e21a5816291c02db17680a15f161"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-6.json",
+            "bytes": 5056,
+            "sha256": "52b88b1255353e77ecd6d7c13e8f8d9b6310aafbf3ae927df09e5acb5593b9a6"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-7.json",
+            "bytes": 1184,
+            "sha256": "ca2c92a3a80f91639f8413bb1485290dda4d0490fdd7073378f2ffc34ae793ce"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-7.json",
+            "bytes": 2084,
+            "sha256": "7768476e7c9699dd17b79524865608c89885527701a153da494d178c6ab9beb2"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-7.json",
+            "bytes": 2295,
+            "sha256": "1e9c603664ae306df060f62aa8cf7b8c0766ad8588076a3a7266eebf3c848f83"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-8.json",
+            "bytes": 1073,
+            "sha256": "6d7a59af9bafe3cb5e1e0db1da54f92b86a456aeb022306906ed669bc6b91c30"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-8.json",
+            "bytes": 1883,
+            "sha256": "8ce8351fc325c0aa7d3106d8d90486cedffa8dcc916bea285287bf84a41aafde"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-8.json",
+            "bytes": 2139,
+            "sha256": "a1be0b765589176f5c4328173c2fc994aad2ac45e14cf4be6e5a9a49e11ef3bc"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-9.json",
+            "bytes": 1961,
+            "sha256": "4044e7da8e2a8e3542c1ba3d62a7a615a20ee10de07349f66c488bb62972dfd9"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-9.json",
+            "bytes": 3395,
+            "sha256": "65d4816d942c19d9d570865f38fe1af6d8f430737d04cfd1cf6b794edaa30851"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-9.json",
+            "bytes": 3648,
+            "sha256": "b97a5b0afbf95b00f90120c100c39bf927af7db5a33ceca090c8a155b73b6d3b"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-10.json",
+            "bytes": 136,
+            "sha256": "6c2e5b6a73765d2c825d8a7e994d444ec8995fceecd2d359d315eb70bcabb266"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-10.json",
+            "bytes": 307,
+            "sha256": "9b4a7153db2a379d624788afbc2e5ef59a9d0136d65867bda907f785c0fed378"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-10.json",
+            "bytes": 384,
+            "sha256": "cc7da3dd88640152ef05662793e912b0d5cd2afe4a8db55b411b421c44b6adba"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-11.json",
+            "bytes": 7583,
+            "sha256": "fda58b8a32490252eabae1d6c04ef0df26bf60078ec4aee2e9133d7b6b6bf2f7"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-11.json",
+            "bytes": 12740,
+            "sha256": "35a077fc62982efcc05dbf0b2d0c1a5ddeeec93991210a6f10182919b6a9d8df"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-11.json",
+            "bytes": 15393,
+            "sha256": "ecfb6515c00c3c3fcc1aab786eca0eb6aef457a0b5ec6020963a101d74677cb7"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-12.json",
+            "bytes": 131,
+            "sha256": "67e783f2dc290b000a14ab8aecdcc990600a7a3fc98c4acff3b76c429757e3a5"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-12.json",
+            "bytes": 285,
+            "sha256": "6d9e8493964f9c4ad811e0de0b8044bae3c9a5ad3d75ccf968e9f6a1dc036cc4"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-12.json",
+            "bytes": 490,
+            "sha256": "871c493b54d18f2d33450d45d3903de6a068e75ce0b75ebb6a6bf78344552bc0"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-13.json",
+            "bytes": 537,
+            "sha256": "b18c38fd54db11de5c4c64d57db899df5bbe946569c44c1d2917771443b93f67"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-13.json",
+            "bytes": 965,
+            "sha256": "1ef80d15628287bb83d024eddcb09a7387038c978b8523d6fc26784e56ba48fb"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-13.json",
+            "bytes": 1322,
+            "sha256": "d9aaa69bb0000388f2baa79ac04424900450dc5d8770a921b235d87d87000ac8"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-14.json",
+            "bytes": 2424,
+            "sha256": "dff9217700c7a52c538cd6d85ae71e7f2861183ffab62a6d201bd64d4691bd7e"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-14.json",
+            "bytes": 4190,
+            "sha256": "f410c9a03b8ada0e86ba8e695d7154c684a67462c087e0c703ae053403730342"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-14.json",
+            "bytes": 4444,
+            "sha256": "05688dec83c66ab83da841351e7c6a918ad221313c86ee190f44cfb3cf7b1009"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-15.json",
+            "bytes": 2146,
+            "sha256": "3a9c919647445537857d7eeb5ca247d0fa58641e47c4c057f02d05ff4cc4558e"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-15.json",
+            "bytes": 3699,
+            "sha256": "5268aea116c32f66f62a02f661ca31d55bdbc2b30dafc027f41448451c9653b3"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-15.json",
+            "bytes": 4108,
+            "sha256": "88121c6a5eb9ad1f1857f74112b4ff4774187c3217d85c183e633a124fc869e9"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-16.json",
+            "bytes": 500,
+            "sha256": "fe0a8ee27f8b6b8ee4d0457149e9b4559a41aca4644b8513964ccfc16684cac9"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-16.json",
+            "bytes": 914,
+            "sha256": "793e77ee6e5af6bb9da8918accfd8484d3667df4b2246c9a97296d764e6b06e4"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-16.json",
+            "bytes": 1307,
+            "sha256": "826da8a59265cd8d43999037949a034ee99a9b90cacc529918d1aa4cdc8b9aa2"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/input-17.json",
+            "bytes": 653,
+            "sha256": "202d5db59643fb6e922e86b76c6e17df63f879f4e1786056a5545f1c821bdb2d"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-17.json",
+            "bytes": 1147,
+            "sha256": "d9de2514555d6d773bcafd07bce4dc3e25c05b890c6b61fcaa77c25f1daf7fd2"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/actions-17.json",
+            "bytes": 1506,
+            "sha256": "36d9492e27c62eac6a0630a445c7a67e5eb6190c884ac97ae4c2f0c02f7bad6e"
+          }
+        }
+      ],
+      "stop": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/published-18.json",
+        "bytes": 60,
+        "sha256": "fe679a3412a2459fd483a0bc95071a62ac6d8ed04cacab2c4fc8514b70a3579a"
+      },
+      "captureIdentities": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/clean-captures-scalar.json",
+        "bytes": 500634,
+        "sha256": "c46f86dca03c13def96b330c4062c3b3337da416c9ccc1507e8f9a49816c50af"
+      },
+      "endFrame": 83200,
+      "files": 4165,
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-scalar/runner.log",
+        "bytes": 923077,
+        "sha256": "3919026f8cbf9676dad0e9b6f5cb2df14451690239df24d7312e621d287459a2"
+      }
+    },
+    "native": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\combat-native",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\combat-native-initial.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "45000"
+      ],
+      "rom": {
+        "path": "C:/Data/ROM/Kickstart_13.rom",
+        "bytes": 262144,
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native-initial.json",
+        "bytes": 33952,
+        "sha256": "c848d681330ca56193cfab5fa385bf0c13a5867d3c52dfa18457a64630b78a9a"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/run.json",
+        "bytes": 4529,
+        "sha256": "3c7eebef97f10643e90e9cfcdda377fced027c41d544e2864528982d8c182398"
+      },
+      "actualCompleteInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/clean-complete-input-native.json",
+        "bytes": 71947,
+        "sha256": "c5321b8b8a3d404708443290032e3f0c96852fdfc14e9821d9efc4c8ce034dab"
+      },
+      "eventCount": 1308,
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/segments.jsonl",
+        "bytes": 24033,
+        "sha256": "127c1bda448b0725a26c408ae96b2f55d219fb2e42d170c5e48276f7e4f0deb2"
+      },
+      "segmentArtifacts": [
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-0.json",
+            "bytes": 635,
+            "sha256": "85d1a4072da68e50affe36414bf5c85cdaa0d992160c8f714ab3ab513c8864b5"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-0.json",
+            "bytes": 1109,
+            "sha256": "7b2332c1c709680d25f86d0016bd4576c5a5fe6f4b07dad615c71d0b1b2f128b"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-0.json",
+            "bytes": 1421,
+            "sha256": "7a50b4a4c54f128cf2132659a37ab266845165496ab69267b0377da4c1c380da"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-1.json",
+            "bytes": 1230,
+            "sha256": "ff93eba14c7a31a244fe45b482923209e021d7e33aa043525183cf71dc942741"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-1.json",
+            "bytes": 2120,
+            "sha256": "7095a88b5bddd0420c6940094b2596094b1f4c74a89d2f7d129bfa44ba7d6439"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-1.json",
+            "bytes": 2748,
+            "sha256": "7b19a051e679db6faf19e651253f7efdd0087228829d6e5ba0714bcf8b805211"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-2.json",
+            "bytes": 205,
+            "sha256": "48dbf4134a15e180fa61a1359bc5affd39d29410d992017e1e500e636e747cea"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-2.json",
+            "bytes": 410,
+            "sha256": "0634f737901d1da4bc5ad3a1d80bfc859b15153f9df132990f0da0a3d34fe0d8"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-2.json",
+            "bytes": 640,
+            "sha256": "92095b6d9377f1f5f2881bea4214013ecf4c4f71b46d7e397acbb29d0d34d7f6"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-3.json",
+            "bytes": 943,
+            "sha256": "670b3bec455266b70405e6d3d65038c3f00a8c2f79d47c7e77b3f959353721c6"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-3.json",
+            "bytes": 1668,
+            "sha256": "d467e8d9e041f87c09a2964d8660e8ab70471d1ec349bff1eb4922d03d945828"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-3.json",
+            "bytes": 1876,
+            "sha256": "ac3250bcf008e75b00b4cb9ecedb982b02b88544740c10f1171947771882191b"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-4.json",
+            "bytes": 817,
+            "sha256": "613b0cc90e0abf565326c541119f4bd0dd157dff1546baaaaabe238b675ee752"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-4.json",
+            "bytes": 1433,
+            "sha256": "33e9f9503978a6ad8b0ddd03c3153400370552ef6cdeae129811976e3df59248"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-4.json",
+            "bytes": 1899,
+            "sha256": "4a0f5a0d0e2bf716e8c4c73ef56f35f61eb66cd9880e98a6bd3d9ca1c0bf18c3"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-5.json",
+            "bytes": 1639,
+            "sha256": "7cec1f3dfaa4ec0b348fc63a700543ebba244e473b7ece7ffe9a295a77a9ed18"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-5.json",
+            "bytes": 2779,
+            "sha256": "e37252bce34b07de3174b8843d5c0e6622fa1be22a8bad3a09d6974725961df6"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-5.json",
+            "bytes": 3443,
+            "sha256": "58e9c6ac04184fa461609c70d6b082c4f8c116e30949328655251ccc0b317b39"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-6.json",
+            "bytes": 2263,
+            "sha256": "fced6d211ed9f2809b2a726255920a786e3dcc8c3132a658255a649ddd2c389e"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-6.json",
+            "bytes": 3881,
+            "sha256": "881bc01de0f438185a5dc4397b8e99c313cde8f218cbd83627235cf4d3621bd5"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-6.json",
+            "bytes": 5056,
+            "sha256": "cc7a620252c4dee73b917ce02262e538939452ffe355a2eaec4531bcfafb87ca"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-7.json",
+            "bytes": 1184,
+            "sha256": "89e2527cefdc7308b2c22ff980e577fad1f951bf0524b8981b7824701d1c3470"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-7.json",
+            "bytes": 2084,
+            "sha256": "b02bae3522ff4ef0d495542b13611905cee6a96129c40fec19ee30afcc87b28f"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-7.json",
+            "bytes": 2295,
+            "sha256": "b0f302115e0334704e65f8958b71d3df6cd968d5090269a70857b8981f9f7b2a"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-8.json",
+            "bytes": 1073,
+            "sha256": "aebdfbc16f9acc971ba19b59758b6c2eb62f9dd009bd86e2ccdd6b56cec82a72"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-8.json",
+            "bytes": 1883,
+            "sha256": "119065c7be84b8a8927f12cf8c887ba021b457cb78da99abdb5f98d8e446d8f1"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-8.json",
+            "bytes": 2139,
+            "sha256": "77e4e347eb15f31e1f656bbb506b97e3f292a532b8b3073e80f3e08b259f6d42"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-9.json",
+            "bytes": 1961,
+            "sha256": "a186a572a75384358e7c73556e4b8a44d3d0e4393ecf4113bbfdaeb36a13f2a1"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-9.json",
+            "bytes": 3395,
+            "sha256": "a6a8a852cd0e8ada31ceec173902cc62850742227a260bf87f687e905d369750"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-9.json",
+            "bytes": 3648,
+            "sha256": "c1a7a943d89c831fd1e4633c62cb98dba8a161bd125483be9ecceff81e1d40ac"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-10.json",
+            "bytes": 136,
+            "sha256": "09de86c4b139bcf923731e29001c1846219b1ca3d1d73fd63f81547cc36e75b1"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-10.json",
+            "bytes": 307,
+            "sha256": "b9bab02ce369571aab26be70c95b0493547aca1456ec60b9f99d1b4fbdd5ae41"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-10.json",
+            "bytes": 384,
+            "sha256": "9ad751ed3c5b920b39bd7978988b30612124f9c2d5df32a3f1d41977ebbced09"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-11.json",
+            "bytes": 7342,
+            "sha256": "d98800037081f862ba8671ec044c0fe8078c48c433abc65695406c41b4a4dbee"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-11.json",
+            "bytes": 12348,
+            "sha256": "54692568c437e10a2b1c64b4862a5c0f0766be77bee0ca069671ed43bb921714"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-11.json",
+            "bytes": 14963,
+            "sha256": "083c08c9a54809cc67ec2a0b4e9c50413e0700beee572cc395a8fca0d736df5a"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-12.json",
+            "bytes": 131,
+            "sha256": "a9495448929be808b418cf24866ab2381e506f4634cb3f2b98f3d5ff8276dce8"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-12.json",
+            "bytes": 285,
+            "sha256": "64be3355f890b5a4dc3bfb71c6b541a2ef00b9dd939bbbd3558d955712869ba3"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-12.json",
+            "bytes": 490,
+            "sha256": "12de503a1bd23091d7d696ba4c0a7550166e25ed1401b6bb92cc4d73399a95e7"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-13.json",
+            "bytes": 537,
+            "sha256": "635707b9dc6b2724c6ad9192aace314cc5cac663215d8a5142585505fe5949bf"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-13.json",
+            "bytes": 965,
+            "sha256": "ee3f6f0354a0e5665b7af37216838cc57d56a0df2a6435f41938e7b814aec107"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-13.json",
+            "bytes": 1322,
+            "sha256": "de82040f09520e6937cd3c14c70194b91143a2cfb809df196117948881ba1ba3"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-14.json",
+            "bytes": 2424,
+            "sha256": "f1d92ee96eb5448da759fd6f152fe755b68e9f838bf15cf6a30b698482716140"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-14.json",
+            "bytes": 4190,
+            "sha256": "2b096dbfcfdd635287aec907f2290a0c5ae50b738f1dac61156918f9173cfabd"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-14.json",
+            "bytes": 4444,
+            "sha256": "c8ee5ed789dd0a876da35ee5a0f85842654b764d92b09e19a6a0070be7b3e570"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-15.json",
+            "bytes": 2146,
+            "sha256": "1726046bb385b31d00c7303f4ffb301fed812ee83f1e36f655b3b32e4395b363"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-15.json",
+            "bytes": 3699,
+            "sha256": "510c459bf9966d6f73322150b9208477e4c932a7f2191a0e27236e0fbd47becc"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-15.json",
+            "bytes": 4108,
+            "sha256": "55e24f81771943ccf71c25790002b05a33e292bc0812d8fd75723c6d8ba074a6"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-16.json",
+            "bytes": 500,
+            "sha256": "baa35b69011a754825fe9b4d393eceb72f7254035c32e3dd1ddcac665fc3ff75"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-16.json",
+            "bytes": 914,
+            "sha256": "cfc5977cd4eb5fb94a2abaa894f6c2a366a870b3a253eb85a0cccfbdfcd476f6"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-16.json",
+            "bytes": 1307,
+            "sha256": "b3e9bb2ced093011380fbbda1d4f382d891c1cfe5ac0fb2d87bb5cfe27faa1d1"
+          }
+        },
+        {
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/input-17.json",
+            "bytes": 653,
+            "sha256": "d7df5ee83cac130754a357ed99f0736dec42ee403d3dd976b0d06d90ff587d00"
+          },
+          "published": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-17.json",
+            "bytes": 1147,
+            "sha256": "453125b3df76eaf9c50f0b2e598897ca0e4152af47f615876597efb2bb898ed1"
+          },
+          "actions": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/actions-17.json",
+            "bytes": 1506,
+            "sha256": "cefac275919cd35c79ee3c8baeaa42fc927747165cd0502cc0e1b83bb79e0851"
+          }
+        }
+      ],
+      "stop": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/published-18.json",
+        "bytes": 60,
+        "sha256": "fe679a3412a2459fd483a0bc95071a62ac6d8ed04cacab2c4fc8514b70a3579a"
+      },
+      "captureIdentities": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/clean-captures-native.json",
+        "bytes": 380434,
+        "sha256": "d8883fb211a73b816204b7ed250548c11ff7b2d3434d99b9b5c0ff03daffb8bc"
+      },
+      "endFrame": 63200,
+      "files": 3165,
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/runner.log",
+        "bytes": 701530,
+        "sha256": "bbb256405f5fe3db2ee62a5cde04db30cb7c5f90a4805b9636892267cd516e9a"
+      }
+    }
+  },
+  "media": [
+    {
+      "disk": 1,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+      "archiveBytes": 782764,
+      "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+    },
+    {
+      "disk": 2,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+      "archiveBytes": 770747,
+      "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+    },
+    {
+      "disk": 3,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+      "archiveBytes": 703179,
+      "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+    },
+    {
+      "disk": 4,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+      "archiveBytes": 789964,
+      "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+    },
+    {
+      "disk": 5,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+      "archiveBytes": 588807,
+      "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+    }
+  ],
+  "normalScalarAllFilesIdentical": true,
+  "normalScalarFiles": 4165,
+  "audioNonzeroSnapshots": 383,
+  "successBitmaps": {
+    "normal": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-normal/captures/frame-083200.bmp",
+      "bytes": 1136870,
+      "sha256": "8b8d70a5741359e4d5f380a239c05ed908f48b3df8f619b6ec446f301d77550a"
+    },
+    "native": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/combat-native/captures/frame-063200.bmp",
+      "bytes": 1136870,
+      "sha256": "f18264acb70ef241e8b0ead99452b3f554217f04b735ac5065076913be0ab182"
+    }
+  },
+  "successFullBitmapsMatch": false,
+  "observation": {
+    "normalCompleted": true,
+    "nativeCompleted": true,
+    "winner": "Desverger",
+    "scores": {
+      "copperStart": 93,
+      "kickstart13": 78
+    },
+    "copperStartCompletionField": 83200,
+    "nativeCompletionField": 63200,
+    "training": "Single-player Training zone 3 Fire Fight",
+    "retryCount": 1,
+    "combat": "Two first-room hostiles and exit guard defeated; first attempt dies in both ROMs, physical Ctrl-R retry completes",
+    "route": "Required key pickup and automatic gate use, teleporter, block pull/push and bridge, reloading, exit wall control and exit point",
+    "party": "Desverger reaches the exit; full-party survival not qualified",
+    "reviewedImages": [
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\review-combat-normal-083200.png",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-merged-hired-2026-10-20\\review-combat-native-063200.png"
+    ],
+    "crossRomBitmapMatch": false,
+    "scoreNote": "Separate original-game runs with observed different initial facing and combat states; scores differ. Both display mission-objective completion. No cross-ROM RAM/PCM or gameplay bitmap identity is claimed."
+  },
+  "tests": {
+    "compile-final": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0",
+      "artifact": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/test-results/compile-final.trx",
+        "bytes": 3409,
+        "sha256": "c8b263fa62e27699ec62b9aa977bcc01b09dfa9fa8e41a5b3ea7abd84dbf54dd"
+      }
+    },
+    "final-components": {
+      "total": "324",
+      "executed": "324",
+      "passed": "324",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0",
+      "artifact": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/test-results/final-components.trx",
+        "bytes": 527810,
+        "sha256": "4f072e4114d4f12a44e12cb58ddc5b5a60a97266c7c5f624f8198cdcba8991bd"
+      }
+    },
+    "final-native-rom": {
+      "total": "141",
+      "executed": "141",
+      "passed": "141",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0",
+      "artifact": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/test-results/final-native-rom.trx",
+        "bytes": 248560,
+        "sha256": "52dc6f2f0a0339e96dfb8c71edf9aba5799ee419a183d5470c5263be78695a8e"
+      }
+    }
+  },
+  "priorFreshNativeControl": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/native-control-verified.json",
+    "bytes": 4873,
+    "sha256": "efb6d734ef45121728136376d4146aa7ff1c464750d42dc85184ff31342be1a0"
+  },
+  "layoutFailure": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/layout-failure/layout.json",
+    "bytes": 767,
+    "sha256": "7a9bf98f1e9b902f09bc2c1aa09ee65e74b99da38cf28976f67e373caa72ba96"
+  },
+  "beforeEmptyDisplay": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/test-results/empty-before.trx",
+    "bytes": 10369,
+    "sha256": "87ba1edb876e4cb9d61211316a207a11309e88c2ac35eccac4bd0d11acf547c5"
+  },
+  "status": "PASS bounded rebuilt merged-ROM Training Fire Fight combat and level completion",
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "branch": "codex/copperstart-intuition-20261018",
+    "producerCommit": "e62e3468d94f532da1537db74ab237cd00798456",
+    "producerTree": "5c56139dd4fc92e7caeb365271220995ebfb53c5",
+    "clean": true,
+    "mergedSourceBase": "2eab441e09e198afd2cbce4c11e3575373c45cdf",
+    "mainMerge": "0e64392e7186e378d75abf50ac83bf1190add4d2",
+    "testDeclarationFix": "d19195e",
+    "romFullyRecompiled": true,
+    "documentationCommit": "7dd7b3e366780e9db330e949685e9407a9f43b90",
+    "remoteTipVerified": true
+  },
+  "workloads": {
+    "normal": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/hiredguns-copperstart-merged-firefight-v1.json",
+      "bytes": 72836,
+      "sha256": "74b73bb6fdc59506db82c1530c74a951501b3eec273aab0aefe7a08f94d04a6b"
+    },
+    "native": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/hiredguns-kickstart13-merged-firefight-v1.json",
+      "bytes": 71903,
+      "sha256": "881ecbb58b2d5c005cfbb0a94e45ace9b8c63e503933f839a4b81bfa1b9932e4"
+    }
+  },
+  "validation": {
+    "freshPassedCases": 466,
+    "componentCases": 324,
+    "exactRomBootCases": 142,
+    "excludedStandaloneReaderRootCases": 21,
+    "failures": 0,
+    "skipped": 0,
+    "initialMergedReleaseSolutionBuild": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/rebuild-merged.log",
+      "bytes": 3076,
+      "sha256": "7a13ea43e7ee29be0f2e2b4fc1e1501bd45a9274223492fd8211ecc4cb943d01"
+    },
+    "finalAffectedProjectAndTestLogs": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/devices-compat-build.log",
+        "bytes": 265,
+        "sha256": "a38d97118827f4504920b2d36786155ea2eccf0ad25d7e07b5ef8422ffb1c652"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/intuition-compat-build.log",
+        "bytes": 288,
+        "sha256": "17d43ee5e72e618530fd0348bfd91422b0a4b61c4b0417072e8a8a5aea9c60a4"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/graphics-compat-build.log",
+        "bytes": 271,
+        "sha256": "b53eb6db53e4c413438f9124f1f048bc9f91bfec15467386d4ecf843d98d2b15"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/system-compat-build.log",
+        "bytes": 268,
+        "sha256": "f691282318fd6e7e958955043460263aa10df1bd01edec5d0dc41b0229aaa8ff"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/fixture-compat-build.log",
+        "bytes": 245,
+        "sha256": "6c28f0618d08dd60f0a7fa0dcc89f8d895d63d3265c1c633c7f6c3995fd89ab6"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/compile-final.log",
+        "bytes": 400,
+        "sha256": "a3ba629d9ee3c11f5e9925b0e705c349fd79003bacb7a161185517fb01cca8f9"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/final-component-tests.log",
+        "bytes": 398,
+        "sha256": "7407e022e355dba580abd110ad3ed6f727f19090313e17858e4fcc5e7e384c7e"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/final-native-rom-tests.log",
+        "bytes": 403,
+        "sha256": "c1cb1c343ad147fb002fb9ceaa7acc18de76168d3b37884aa5315f65167b43ff"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/relink-check.log",
+        "bytes": 60,
+        "sha256": "7e3df36b659947900ec9ceaa0ab04de2268942698ab4308b54ebef9018979194"
+      }
+    ],
+    "independentRelinkByteIdentical": true,
+    "romCompilerInputs": [
+      {
+        "file": "Copper68k.dll",
+        "bytes": 978944,
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      },
+      {
+        "file": "CopperDisk.dll",
+        "bytes": 105472,
+        "sha256": "da822ded94841e28f8ee6e6a9f7b5d6fa8198a25665c43cfd627e171def739b5"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "bytes": 288256,
+        "sha256": "c72a077938c26096ebf5452f29e597ba62b219b00c78f3a7d5f2e0a38678292c"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "bytes": 2779136,
+        "sha256": "b4cdaf6b077ec401568b0163be0760cef886db095e7d0bdbe3b33681873ed5f8"
+      },
+      {
+        "file": "CopperSharp.Runtime.AmigaPal.dll",
+        "bytes": 23040,
+        "sha256": "1d034e58542e358cb0335367ecc01f3dc862e2755761f3627c3d5bd977048bf6"
+      },
+      {
+        "file": "CopperSharp.Runtime.Managed.dll",
+        "bytes": 97792,
+        "sha256": "10c6067f277006b473ffcd1bf4bfc90044d07000fba4032d3f73be76981a64d2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "bytes": 549376,
+        "sha256": "65a2a142a310cd725af9d3db80e8e633f24126af618789c93403db4b277730d8"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "bytes": 155648,
+        "sha256": "3e6383b316690d1625f8267ca5c99271711a3099626dbbed3e76035689d037eb"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "bytes": 42496,
+        "sha256": "6e6456def192e573accc53dd9135ba2c6376e967a9702b14fd23f80bf0b1657e"
+      },
+      {
+        "file": "CopperStart-System.dll",
+        "bytes": 75776,
+        "sha256": "6d1586b4e749eee8246f00cadeb17441f8690b4f836174138f990347182129e8"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "bytes": 127488,
+        "sha256": "ca1b91fb9b7483832d9343d2c0ce7fb2c1f5bf7c6d02ebdf7203d51034d652e3"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "bytes": 761856,
+        "sha256": "59ee78da3da60e8c57f17423f9e5eb8b698e0051c35c9e6f99f0f5708b141321"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "bytes": 194048,
+        "sha256": "184dcf7ccdd94e5034e438ae0d24990950e691358935a4fff758f2007472d9bd"
+      },
+      {
+        "file": "CopperStart.Expansion.dll",
+        "bytes": 5120,
+        "sha256": "014c5d266a52b52cc10d7ae2023d7f935cc8b7bf17cb861431da2fe6a676426d"
+      },
+      {
+        "file": "CopperStart.Floppy.Native.Tests.dll",
+        "bytes": 245248,
+        "sha256": "2f694650e85d6071f60d81086109e9639250bd080ef6111173a3c0c52b9f3259"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "bytes": 2443776,
+        "sha256": "88bcd5823ef3b0505c1c777b315585d7cbfda3fbdb40e7c96881fe5039689e68"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "bytes": 7168,
+        "sha256": "60ea1365d48f0fb517294adc37adfac49adc9ba07b5abb0ddf027d96b5d9127d"
+      },
+      {
+        "file": "CopperStart.Intuition.dll",
+        "bytes": 513536,
+        "sha256": "dbe91edc5e9a4806511fc0923fb39436813b79f6e60875742f292a637ed57c16"
+      },
+      {
+        "file": "CopperStart.Intuition.Native.dll",
+        "bytes": 89600,
+        "sha256": "46b5f9c512dbdf71abb05c93f8ca5902afa542a39e751d18248927cd3119a114"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "bytes": 350720,
+        "sha256": "17c412ba601a7449de1e3e46a5a535c2637f74c70b17ff8175342a51f165c7dd"
+      },
+      {
+        "file": "CopperStart.Runtime.dll",
+        "bytes": 5632,
+        "sha256": "9852fa90664b27ee6a97fdf55428d40f2cc4714e3c4fb2d3ffd1d56f44b61707"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "bytes": 16896,
+        "sha256": "8b4fa517216f86c0985f2b3cd34d30e5b9f6142927ad1a5e64ee805008515f2b"
+      },
+      {
+        "file": "CopperStart.Workbench.dll",
+        "bytes": 4608,
+        "sha256": "c0c73296481d15fcf544daf9a5626f4659d9839303b205d5351c6bdda5006d01"
+      }
+    ],
+    "toolchain": [
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "b4cdaf6b077ec401568b0163be0760cef886db095e7d0bdbe3b33681873ed5f8",
+        "bytes": 2779136
+      },
+      {
+        "file": "CopperSharp.Runtime.AmigaPal.dll",
+        "sha256": "1d034e58542e358cb0335367ecc01f3dc862e2755761f3627c3d5bd977048bf6",
+        "bytes": 23040
+      },
+      {
+        "file": "CopperSharp.Runtime.Managed.dll",
+        "sha256": "10c6067f277006b473ffcd1bf4bfc90044d07000fba4032d3f73be76981a64d2",
+        "bytes": 97792
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "65a2a142a310cd725af9d3db80e8e633f24126af618789c93403db4b277730d8",
+        "bytes": 549376
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "3e6383b316690d1625f8267ca5c99271711a3099626dbbed3e76035689d037eb",
+        "bytes": 155648
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "6e6456def192e573accc53dd9135ba2c6376e967a9702b14fd23f80bf0b1657e",
+        "bytes": 42496
+      }
+    ]
+  },
+  "harness": {
+    "source": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/native-live-probe/Program.cs",
+        "bytes": 2404,
+        "sha256": "212ebadf2dbd6eac1f5a1fc872c5550917a955f99ec0820a099b937793da6ba7"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/native-live-probe/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/native-live-probe/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      }
+    ],
+    "launcher": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/start-combat.py",
+      "bytes": 1633,
+      "sha256": "b9e6da775602ef20bf19a01c77d7387875dde4f36d5ef54335d27f66d9f433bf"
+    },
+    "physicalInputGenerator": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/operate.py",
+      "bytes": 2502,
+      "sha256": "936fd5c12c613eccebd843140b13e1a15c72b5694c43443b98ef1739a12d6701"
+    },
+    "verifier": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/verify-segments.py",
+      "bytes": 4700,
+      "sha256": "dd10adc000dae239045f699d14883a0c9620cc519bc15d003af2f55b3c793240"
+    },
+    "initialHeadingEvidence": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/observed-initial-headings.json",
+      "bytes": 177,
+      "sha256": "7f332af6cf924555a31bfd6f1ccd54d40e0627b511d1a5f3d84b1fe99ec4229e"
+    },
+    "mode": "Frozen single-owner Lightweight guest-ROM runner; physical keyboard/mouse/media input and read-only state snapshots"
+  },
+  "fixes": [
+    "Repack misc.resource to FF4400, BCPL to FF4600 and Intuition to FF5000; update the native boot address; keep private ROM overlap checks",
+    "Load the empty Intuition View on MCOP_NOP; RemakeDisplay handles zero screens; two emitted-code regressions fail before and pass after",
+    "Remove trackdisk read/geometry rejection based on overlap with its own allocation; fixed-address read regression now transfers the complete payload",
+    "Remove merged duplicate test field and replace compiler-only graphics-provider assumptions with a real native Intuition probe; pre-V39 RethinkDisplay D0 is undefined"
+  ],
+  "machine": {
+    "cpu": "68000",
+    "video": "PAL OCS",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "rtcEnabled": false,
+    "drives": 1,
+    "framebuffer": [
+      908,
+      313
+    ],
+    "readOnlyMedia": true,
+    "mountedDisks": [
+      1,
+      2,
+      3
+    ]
+  },
+  "progress": {
+    "initialWarmupFields": {
+      "copperStart": 65000,
+      "kickstart13": 45000
+    },
+    "initialHeadingsObserved": true,
+    "headingNormalizedThroughPhysicalTurns": true,
+    "retries": 1,
+    "exitGuardDefeatedFields": {
+      "copperStart": 82000,
+      "kickstart13": 62000
+    },
+    "exitControlFields": {
+      "copperStart": 82600,
+      "kickstart13": 62600
+    },
+    "completionFields": {
+      "copperStart": 83200,
+      "kickstart13": 63200
+    }
+  },
+  "reviewedImages": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/review-combat-normal-083200.png",
+      "bytes": 5991,
+      "sha256": "a6bf1dfb4bf6ddb420868246ac05070ef3d19000c0bf332f068fccf26d8daa9d"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-merged-hired-2026-10-20/review-combat-native-063200.png",
+      "bytes": 5987,
+      "sha256": "58ee4d20cac53632c0014757bf91079bd9a8654e7b33421343831c496f920e90"
+    }
+  ],
+  "supersededAttempts": {
+    "earlyCliTyping": "Both early runs terminated on the host key-queue guard while the merged ROM was still loading; input was delayed until an observed CLI prompt",
+    "oldTimedRoute": "The two final-* runs were deliberately stopped when different original-game initial headings made the old long route unsuitable; their planned future events are not claimed as executed",
+    "nativeBootBlockControls": "Two standalone native boot-block experiments did not reach their markers and are not used as API or gameplay success evidence"
+  },
+  "references": [
+    {
+      "title": "RethinkDisplay autodoc, return value only from V39",
+      "url": "https://developer.amigaos3.net/autodocs/intuition.library/RethinkDisplay.html"
+    },
+    {
+      "title": "Commodore graphics/view.h, MCOP_NOP",
+      "url": "https://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node05ED.html"
+    },
+    {
+      "title": "Commodore trackdisk CMD_READ autodoc",
+      "url": "https://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node0520.html"
+    },
+    {
+      "title": "Original Hired Guns manual",
+      "url": "https://www.mocagh.org/miscgame/hiredguns-manual.pdf"
+    }
+  ],
+  "limits": [
+    "Training zone 3 Fire Fight only; no campaign/full-game, saving, other Training levels, full-party survival or full Workbench qualification",
+    "Five-disk hash inventory does not qualify unused disks 4/5; only original disks 1/2/3 mounted read-only",
+    "Scores and cross-ROM gameplay bitmaps differ; observed original-game headings and combat states differ. Both complete, while all normal/scalar capture files match",
+    "21 separate standalone-reader-ROM cases excluded; not part of the 466 passing cases",
+    "Full solution built before compatibility corrections; final affected projects rebuilt, full guest ROM recompiled, independently relinked and tested afterward",
+    "Compiler/SDK are hash-pinned local development binaries; old g20 SDK lacks the new resident API. No package release or published-toolchain qualification",
+    "Nonzero PCM and execution-mode parity, not listening quality, latency, hardware conformance or host-throughput acceptance",
+    "Only 66 bytes remain between compiled code and misc.resource; future code growth still requires complete composition checks",
+    "ROMs, media, binaries, RAM/PCM, screenshots and local artifacts are not committed; only source, documentation and physical-input fixtures are published"
+  ]
+}
