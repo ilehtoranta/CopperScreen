@@ -1,0 +1,658 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-20",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Superfrog Magic Woods 1-1 completion and bonus-to-next-stage transition",
+  "status": "QUALIFIED: CopperStart 1-1 completion, bonus collection and next-stage startup; later native-ROM comparison diverges and is bounded",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20",
+  "sourceBase": "8b1fb4148d5763929e804e577d69b94d656a3768",
+  "copperStartSourceBase": "d77335d9a6976313a8d75a5ff7c086cec58805f2",
+  "romProducer": "b78ddc09302cd506687327be1c1434891444cc4a",
+  "romChanged": false,
+  "engineChanged": false,
+  "newCompatibilityCorrection": null,
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+  },
+  "nativeControlRom": {
+    "path": "C:/Data/ROM/Kickstart_13.rom",
+    "bytes": 262144,
+    "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "binaries": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+      "bytes": 52224,
+      "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288256,
+      "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperDisk.dll",
+      "bytes": 105472,
+      "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+    }
+  ],
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "df0": "Original read-only SPS 35 Disk One IPF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/Superfrog_35.zip",
+      "bytes": 2952859,
+      "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487"
+    },
+    "entries": [
+      {
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      {
+        "entry": "SuperFrog_DiskTwo.ipf",
+        "entryBytes": 1140812,
+        "entrySha256": "b2c02ca619605b9015f333982920abcd184b741507bf788970589a0337b8126d"
+      },
+      {
+        "entry": "SuperFrog_StoryDisk.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "73336668a83f5db6115cd4f59d8ed74a9212ca67bde6bab72e536a89f4d86ba7"
+      }
+    ]
+  },
+  "mountedEntry": "SuperFrog_DiskOne.ipf",
+  "ordinaryOptions": {
+    "lives": 5,
+    "difficulty": "Normal",
+    "observedLifeChoices": [
+      3,
+      5,
+      7
+    ],
+    "selectedAtField": 16890
+  },
+  "inputPolicy": "Physical joystick and keyboard only; original boot input plus all actual interactive segments. No trainer, level code, state restoration, guest-memory injection, host OS shim or disk write.",
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/superfrog-copperstart-magic-woods-completion-v1.json",
+    "bytes": 28525,
+    "sha256": "596dcea6cc655fa7e3c4ec5a4ac24bcfdbd8febaa862fbfa0b5c3402f7ff5fc0"
+  },
+  "segments": 160,
+  "events": 579,
+  "interactive": {
+    "end": 32400,
+    "segments": 160,
+    "events": 579,
+    "workload": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/superfrog-copperstart-magic-woods-completion-v1.json",
+      "bytes": 28525,
+      "sha256": "596dcea6cc655fa7e3c4ec5a4ac24bcfdbd8febaa862fbfa0b5c3402f7ff5fc0"
+    },
+    "runs": {
+      "normal": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/run.json",
+          "bytes": 2188,
+          "sha256": "55c8416c80dbc49d59cf7d3ab22fb6ba5605d1b0ff4e082c429926bc150511e8"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/runner.log",
+          "bytes": 511527,
+          "sha256": "d992f7b834d855690b710ac219de369f4200510294d8c2ff6d982e6e0d66426e"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/segments.jsonl",
+          "bytes": 25141,
+          "sha256": "1733d4f6ca5868245e63767e52023548c743f240662dc91d32a4c554f8407606"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/capture-manifest.json",
+          "bytes": 646305,
+          "sha256": "96513d989e64a80f353703083db88fca0d9258d5870099968b8c7e596c5367e6"
+        },
+        "files": 2300,
+        "snapshots": 460,
+        "nonzeroPcmSnapshots": 431,
+        "exitCode": 0
+      },
+      "scalar": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/scalar/run.json",
+          "bytes": 2205,
+          "sha256": "9975c7dfef40ceb9a6046bdf9a2f754426fd224854ab4e5c61f270911e454f82"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/scalar/runner.log",
+          "bytes": 511527,
+          "sha256": "d992f7b834d855690b710ac219de369f4200510294d8c2ff6d982e6e0d66426e"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/scalar/segments.jsonl",
+          "bytes": 25141,
+          "sha256": "1733d4f6ca5868245e63767e52023548c743f240662dc91d32a4c554f8407606"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/scalar/capture-manifest.json",
+          "bytes": 646305,
+          "sha256": "d0d822411347851a1d22bda73bc738542cf49f538d4c1e65dc73ecbc896c2fb1"
+        },
+        "files": 2300,
+        "snapshots": 460,
+        "nonzeroPcmSnapshots": 431,
+        "exitCode": 0
+      },
+      "native": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/native/run.json",
+          "bytes": 2004,
+          "sha256": "5d02cd3c7ad39c782a6c7072c15c6acbf9b9cccfe52832c39557a850115fc188"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/native/runner.log",
+          "bytes": 511962,
+          "sha256": "50181ec8d1dc22937530818d56241b0ff5acd10549dcb1e5523da280ece64207"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/native/segments.jsonl",
+          "bytes": 25141,
+          "sha256": "1733d4f6ca5868245e63767e52023548c743f240662dc91d32a4c554f8407606"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/native/capture-manifest.json",
+          "bytes": 646305,
+          "sha256": "1bdd937993833ba343b0c2aa636e040d7796aff11fa6f27a6332adfd8675a885"
+        },
+        "files": 2300,
+        "snapshots": 460,
+        "nonzeroPcmSnapshots": 430,
+        "exitCode": 0
+      }
+    },
+    "parity": {
+      "normalScalarAllFiles": true,
+      "nativeMatchingImages": 292,
+      "nativeDifferentImages": 168,
+      "startupDifferencesExpected": true,
+      "transientMenuImageDifferences": [
+        "frame-016400.bmp",
+        "frame-017800.bmp",
+        "frame-017900.bmp",
+        "frame-019100.bmp"
+      ],
+      "firstDifferentImageInCompletionAttempt": "frame-024375.bmp",
+      "lastMatchingImageBeforeGameplayDivergence": "frame-024320.bmp",
+      "nativeFinalState": "Magic Woods 1-1, one coin required; completion not reached with this same input"
+    }
+  },
+  "uninterruptedResetReplay": {
+    "normal": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/run.json",
+        "bytes": 2202,
+        "sha256": "597f5db222c38661ff77553db4b1a36d86323fc87f0a3c9411772646f9c017a0"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/runner.log",
+        "bytes": 358740,
+        "sha256": "76a91498cc77d614e0bd749eb206919eb163e3e867239ab004e05cb3fb24c787"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/capture-manifest.json",
+        "bytes": 468005,
+        "sha256": "14f0b7336a1f3f886ee6ce58883ebe899169b0ef8daf572efe4f38eb5d5c4255"
+      },
+      "files": 1625,
+      "snapshots": 325,
+      "nonzeroPcmSnapshots": 296,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "scalar": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-scalar/run.json",
+        "bytes": 2219,
+        "sha256": "0e370c9cba9be9b1adebcee2de525f66482f101c3d56cdbf4244c2c0dc090305"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-scalar/runner.log",
+        "bytes": 358740,
+        "sha256": "76a91498cc77d614e0bd749eb206919eb163e3e867239ab004e05cb3fb24c787"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-scalar/capture-manifest.json",
+        "bytes": 468005,
+        "sha256": "cdd1859b311770debb7eefe6b708b4871aa5b982f92005c8c5c7fb642336d747"
+      },
+      "files": 1625,
+      "snapshots": 325,
+      "nonzeroPcmSnapshots": 296,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "native": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-native/run.json",
+        "bytes": 2018,
+        "sha256": "7252955fbfc268c7ef282b3119e4634bc77cc20634fe99e889e7e7aa0c373e64"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-native/runner.log",
+        "bytes": 359044,
+        "sha256": "1ec0c7a0e1f2f2dd08135acd7c2b67199e0d715853c95fcd5d8e75c7f86f67db"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-native/capture-manifest.json",
+        "bytes": 468005,
+        "sha256": "5fbb97823bd9ba4c84536d05343c04951078eb45dddd0659f65fb98f15834ddf"
+      },
+      "files": 1625,
+      "snapshots": 325,
+      "nonzeroPcmSnapshots": 295,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "normalScalarAllFiles": true
+  },
+  "verificationFiles": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/verification.json",
+      "bytes": 4510,
+      "sha256": "53b11764e78f98f6c78bc4b7a7e0101302ec887b42d532e3dba69d3761a8590b"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-verification.json",
+      "bytes": 2867,
+      "sha256": "b39defa8f17e4b0d0fe367ab6d58a5f7c3d53807418853108dd0cd98dacf83e6"
+    }
+  ],
+  "tools": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/start.py",
+      "bytes": 1489,
+      "sha256": "314e3b29c3046d8805512919885974835ae71fd27e2b563926816d19316ab24f"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/step.py",
+      "bytes": 1366,
+      "sha256": "fe949f977357c03dafcd1d4d6bebd64bbf9fbf11503909a45823beaecd0b5a73"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/verify.py",
+      "bytes": 3229,
+      "sha256": "2f0863c3c77048c31f538497639b5d0762da76c01b12a97d6492fe63d1679491"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay.py",
+      "bytes": 1397,
+      "sha256": "ec00c88dbd807261fa5de9508f6e787837028205707b473d83278d135206adef"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/verify-replay.py",
+      "bytes": 1439,
+      "sha256": "4cfd337578b8ecdd8b48f6518f9dad8ede1a28bfcc993dd95a482cd5953ee611"
+    }
+  ],
+  "milestones": [
+    {
+      "field": 14000,
+      "observation": "Inherited last-life attempt: Game Over",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-014000.bmp",
+        "bytes": 1136870,
+        "sha256": "c5eec88102b5a111850e0e35389ae7ae29db915b1c8bbb8cfe2b0ad924174873"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-014000.json",
+        "bytes": 1106,
+        "sha256": "61639c2641779e9e3d5d259850866d19e85b62d51ed47cdb24b846d5f2c84f8b"
+      }
+    },
+    {
+      "field": 16000,
+      "observation": "High-score keyboard name-entry screen",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-016000.bmp",
+        "bytes": 1136870,
+        "sha256": "2d4d6ec104b2450a31dec295de1a07b5ef6ba6d871cffc640038d8c1741dbdd9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-016000.json",
+        "bytes": 1106,
+        "sha256": "e02a199ea927ca987e0c00330dfb470fa0f3f3a089ccd7a7c4c821bc2a7775a3"
+      }
+    },
+    {
+      "field": 16890,
+      "observation": "Five lives, Normal selected",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-016890.bmp",
+        "bytes": 1136870,
+        "sha256": "2f56c4a46a0827feb8c35e4702f368629d09312c61ba938229a8bb25907caa32"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-016890.json",
+        "bytes": 1106,
+        "sha256": "39524059eac65b6fe668db3a19eede2ae02ad7db724ceaf1b0bf438e735456d8"
+      }
+    },
+    {
+      "field": 19500,
+      "observation": "Retry gameplay starts",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-019500.bmp",
+        "bytes": 1136870,
+        "sha256": "ab614a87893ecc3bf866f61ee9f02c885cbb7abd37fa8166d43666fecc6d6568"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-019500.json",
+        "bytes": 1106,
+        "sha256": "71a1a515d0433458d9f1f41d8ac5a122074dfaf84008418414e45347c9333a45"
+      }
+    },
+    {
+      "field": 19860,
+      "observation": "Both opening pits cleared",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-019860.bmp",
+        "bytes": 1136870,
+        "sha256": "0a4836e8e453cbf9c7e0b8036111a162d8ccd59f169334a44a57ef2135f69e21"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-019860.json",
+        "bytes": 1106,
+        "sha256": "2497afd26ef07108f12114885421f5a4a0af2a21f7ae0ba4ff4a847544ba9ba1"
+      }
+    },
+    {
+      "field": 20580,
+      "observation": "Hill and spring coins; 64 required",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-020580.bmp",
+        "bytes": 1136870,
+        "sha256": "eff1d02d51e7f045437a12a5e8b9a2cdd5aa0263f8db052922bb1fbb0a33f695"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-020580.json",
+        "bytes": 1106,
+        "sha256": "c3f72368c816626a21b2afd6a58941774d5e5f2af14ea97f189d2a9aeeae9895"
+      }
+    },
+    {
+      "field": 21925,
+      "observation": "Hidden coin cave and spring",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-021925.bmp",
+        "bytes": 1136870,
+        "sha256": "5a26c6bc79e497b44ad124dc47551e252b85fc58e612ab5fc0138fabf38dbd9e"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-021925.json",
+        "bytes": 1106,
+        "sha256": "9f92d6d4513f0275784946aa08a8019de1dd17cdef87f319c2e89940b497b1e3"
+      }
+    },
+    {
+      "field": 23235,
+      "observation": "Spring bed and wings pickup ahead",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-023235.bmp",
+        "bytes": 1136870,
+        "sha256": "2be7cd13633036425b149601b1a5bc5aa1d4215c0fead94ecfa4e9b4fb47d60d"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-023235.json",
+        "bytes": 1106,
+        "sha256": "ecabb382f0a4d276fe35e4ed0359b383fc58ce1b59e10cad07c276f87b01ded6"
+      }
+    },
+    {
+      "field": 24375,
+      "observation": "Far tree; 17 required; first sampled gameplay image mismatch with native",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-024375.bmp",
+        "bytes": 1136870,
+        "sha256": "adfaf1bac695d5ecafbd04f912f13686ff2f98831863185ea5df497fc3466f40"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-024375.json",
+        "bytes": 1106,
+        "sha256": "21f6c6e35274229b19be6c523871b9f2cb72c898cb06187c54d5cd7a35ec0f5c"
+      }
+    },
+    {
+      "field": 27585,
+      "observation": "Two coins required",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-027585.bmp",
+        "bytes": 1136870,
+        "sha256": "ca13c4e7088a77f41c67fbb6f64f9b7b992aa682ad80a4b88ebc227edfc4a4e2"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-027585.json",
+        "bytes": 1106,
+        "sha256": "dbafac1e79d2fa4c4128ef14898dbc4788295426231175ccac5e7262af02d226"
+      }
+    },
+    {
+      "field": 28325,
+      "observation": "One coin required",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-028325.bmp",
+        "bytes": 1136870,
+        "sha256": "066584ada4ef94d77df49e7ee3b66cadbd17c46b965f7e0014925237c3979e2b"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-028325.json",
+        "bytes": 1106,
+        "sha256": "b7f4769a1cb99f14cd0f84d9e5383a39c5930cce54bba63ef00c46de7067723e"
+      }
+    },
+    {
+      "field": 28515,
+      "observation": "EXIT indicator replaces coin count",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-028515.bmp",
+        "bytes": 1136870,
+        "sha256": "7a05a583fe4002a9e1b8884164c3cb1b47e666824549984f9c5f5fd55d3ae2ee"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-028515.json",
+        "bytes": 1106,
+        "sha256": "eda38b3420f1245ed60e6b4acb87e7f354fbcafcb4fbdbf6458b5589108c1deb"
+      }
+    },
+    {
+      "field": 29670,
+      "observation": "Return across spring bed and high wall",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-029670.bmp",
+        "bytes": 1136870,
+        "sha256": "7b79e63c532f999a8f32b7f760e7c681b827050709fc7284deb9bc5f757e13d5"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-029670.json",
+        "bytes": 1106,
+        "sha256": "004f25721f5bd5c6a12424e401c9ec1e29726a69aff1d882937dc25b549a73d5"
+      }
+    },
+    {
+      "field": 29940,
+      "observation": "Open exit and ground approach",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-029940.bmp",
+        "bytes": 1136870,
+        "sha256": "e8f53c26b9925d0d513acb67a068134635951696117940ec7adf3c983fa7bcfa"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-029940.json",
+        "bytes": 1106,
+        "sha256": "28c2770e8ec4a2fab0778b8eb227cdd1672773a2cf6bbb4babb19b98677fbc59"
+      }
+    },
+    {
+      "field": 30010,
+      "observation": "WORLD 1-1 COMPLETE / SUPER BONUS AWARD",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-030010.bmp",
+        "bytes": 1136870,
+        "sha256": "7f79059ba27dec44b977c02f94fcd043570e8401f83b4ab4306d7cc00245aebb"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-030010.json",
+        "bytes": 1106,
+        "sha256": "8b877dfb331cdf99bd186c656d173f2f6fdc60d8061e24c9ae70193c5cb359d5"
+      }
+    },
+    {
+      "field": 30230,
+      "observation": "Eight credits; score 17100; COLLECT 40000",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-030230.bmp",
+        "bytes": 1136870,
+        "sha256": "63de4b3508dfd2b2c3c0fae005a6d1ce96a61fd62ef63f75cfe6dc8ca4bbafba"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-030230.json",
+        "bytes": 1106,
+        "sha256": "44649d3e111db3c9fb1cab8341596b8905fcdfe3392baf46aa9df1e27bc0f5d2"
+      }
+    },
+    {
+      "field": 30320,
+      "observation": "Bonus collected; score 57100",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-030320.bmp",
+        "bytes": 1136870,
+        "sha256": "0e14004ee7a19745fc6a2f85f8a1e8e6bc793dd9c3ed2ab7d43a54f605f09649"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-030320.json",
+        "bytes": 1106,
+        "sha256": "d930ed20a9e7d04a635a1b541533d77164e02ff43f635c3975eea78469a103d2"
+      }
+    },
+    {
+      "field": 31200,
+      "observation": "Next stage active; 60 coins required",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-031200.bmp",
+        "bytes": 1136870,
+        "sha256": "e9679388d886535ad508c156fdaff75c3f6c4c9617c7c0afba09f014b4e6681e"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-031200.json",
+        "bytes": 1106,
+        "sha256": "3bc5ec9af1b34cd85282903bad6987e7747e537abe6efdd0188845b3ee18db61"
+      }
+    },
+    {
+      "field": 32400,
+      "observation": "Next-stage idle endpoint; score 57100",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-032400.bmp",
+        "bytes": 1136870,
+        "sha256": "efa40fbe05e3b7a82bb41a0c1577e9974c0d8d62df201c3a82c84c513f5cf4ad"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/normal/captures/frame-032400.json",
+        "bytes": 1106,
+        "sha256": "9c8dfef3ef04d4a3bf54e7041ba0063e210baaf2c90ce5ad2a7490b4f4245ce1"
+      }
+    }
+  ],
+  "resetMilestones": [
+    {
+      "field": 30200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/captures/frame-030200.bmp",
+        "bytes": 1136870,
+        "sha256": "63de4b3508dfd2b2c3c0fae005a6d1ce96a61fd62ef63f75cfe6dc8ca4bbafba"
+      }
+    },
+    {
+      "field": 30300,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/captures/frame-030300.bmp",
+        "bytes": 1136870,
+        "sha256": "0e14004ee7a19745fc6a2f85f8a1e8e6bc793dd9c3ed2ab7d43a54f605f09649"
+      }
+    },
+    {
+      "field": 31200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/captures/frame-031200.bmp",
+        "bytes": 1136870,
+        "sha256": "e9679388d886535ad508c156fdaff75c3f6c4c9617c7c0afba09f014b4e6681e"
+      }
+    },
+    {
+      "field": 32400,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-completion-2026-10-20/replay-normal/captures/frame-032400.bmp",
+        "bytes": 1136870,
+        "sha256": "efa40fbe05e3b7a82bb41a0c1577e9974c0d8d62df201c3a82c84c513f5cf4ad"
+      }
+    }
+  ],
+  "nativeComparison": {
+    "scope": "All sampled gameplay BMPs from 19500 through 24320 match; menus/loading have earlier transient differences.",
+    "lastMatchingGameplaySample": 24320,
+    "firstDifferentGameplaySample": 24375,
+    "initialDifference": "Approximately 14 raster pixels of horizontal terrain offset, with the same score and required-coin count, after dense coin/speed-pill section.",
+    "preexistingStateDifferences": "CPU phase, cycle origin and retained CIA masks differ across ROMs before the terrain mismatch.",
+    "cause": "Unisolated; no ROM defect or timing correction inferred. Uninterrupted native replay matches its interactive captured states.",
+    "final": "Magic Woods 1-1 spring bed; one coin required; completion not reached by same input.",
+    "nativeCompletionQualified": false
+  },
+  "validation": {
+    "allSixExitZero": true,
+    "unsupportedAndVideoUnsupportedAtAllCaptures": null,
+    "normalScalarInteractiveFiles": 2300,
+    "normalScalarResetReplayFiles": 1625,
+    "resetMatchesInteractiveAtCommonCaptures": true,
+    "earlierBuildAnd1250CaseSuiteNotRerun": true,
+    "audio": "Nonzero PCM checked; listening and fidelity unassessed",
+    "throughputAcceptance": false
+  },
+  "limitations": [
+    "Later-stage gameplay and completion",
+    "Native Kickstart level completion and cross-ROM timing equality",
+    "Powered weapon kills and full combat",
+    "Disk Two and saving",
+    "Full Story Disk rerun",
+    "General Workbench",
+    "Broader sprite comparator, manual-data and stolen-slot silicon timing"
+  ],
+  "references": [
+    {
+      "title": "Previous sprite DMA correction and its build/test provenance",
+      "path": "SUPERFROG_CHARACTER_2026-10-20.md"
+    },
+    {
+      "title": "Preserved Team17 instructions",
+      "url": "https://www.emuparadise.me/GameBase%20Amiga/Extras/Instructions/S/Superfrog.txt"
+    }
+  ]
+}

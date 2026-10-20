@@ -1,5 +1,10 @@
 # Superfrog character visibility — 2026-10-20
 
+The later [Magic Woods 1-1 completion replay](SUPERFROG_COMPLETION_2026-10-20.md)
+extends the bounded gameplay coverage recorded below, using this same ROM and
+corrected engine. Its normal/scalar completion and native-control limits are
+reported separately.
+
 Superfrog's missing character was a shared Lightweight sprite DMA fault.
 CPU/Copper writes to SPRxPOS and SPRxCTL reached Denise's display registers,
 but did not update Agnus's vertical DMA controls. After an earlier descriptor
