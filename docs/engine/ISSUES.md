@@ -315,6 +315,14 @@ VSTART/VSTOP equality/reuse, starts on the reset line, manual POS/CTL interactio
 and partial control pairs under stolen slots remain unverified. Obtain physical
 expectations before expanding or certifying the later range-based sequencer.
 
+Related observation, not yet attributed to sprite sequencing: the
+[2026-10-20 Superfrog replay](COPPERSTART_SUPERFROG_2026-10-20.md) shows score,
+camera and life/respawn responses under CopperStart and Kickstart 1.3, but the
+player character is not clearly visible in either ROM's sparse captures or
+adjacent fields 14500–14504. Character appearance remains unresolved. A wider
+visibility-state/guest display trace is needed before asserting a rendering
+defect or choosing a device regression expectation.
+
 ### LWA-VIDEO-008 — Dual-playfield verification boundary
 
 Ordinary OCS lores/hires dual playfield is implemented, including interlaced fields,
