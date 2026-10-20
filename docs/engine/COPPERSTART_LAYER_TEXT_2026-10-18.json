@@ -1,0 +1,1382 @@
+{
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-layer-text-evidence-v1",
+  "passed": true,
+  "shipping": false,
+  "producerArtifacts": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\layer-text-20261018",
+  "machine": "PAL OCS 68000 A500: 512 KiB Chip + 512 KiB slow, no Fast RAM, one DF0; desktop display probes at 320/640 x 256 x 2",
+  "layout": {
+    "preGraphicsGapBytes": 27854,
+    "compiledCodeBytes": 463658,
+    "romBytes": 524288,
+    "residentAddress": 16744448,
+    "graphicsIncreaseBytes": 466,
+    "graphicsBytes": 31906,
+    "tailBeforeFooterBytes": 842
+  },
+  "composition": {
+    "rootManifestSha256": "CDEFA3E84ACBFAAC0F677F2622DB968F43F696BF6335F3CBB8F1AA6F9D1A89F5",
+    "originalArtifactRoot": "artifacts/compact-desktop-20261017/native",
+    "changedRootFontOrAddress": false,
+    "kind": "fresh emitter link over exact frozen C# disk root",
+    "compiledRomSha256": "2EE587B918A8E1530713170DA036B2BADD65E807EE842164346930EB1A689654",
+    "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+    "providerAssemblyInstalledInROM": false,
+    "previousCompositionRoot": "artifacts/layer-drawing-20261018/relink-v2"
+  },
+  "managedRomInputs": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "9333711473A6A08229AF61BAAC7F5A24EB899CFD981A42173F28095D6E9C328D"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "CACC2157CEF8ED44C8F8688B644986E0ED6264EA6CF47FD7EA0411E821CAFB8E"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "3C473A6C86A17447618F7271F8DA3B0DD3B7DE269E3B905F0604A45BFDFDF9A4"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperSharp.Targets.Amiga.dll",
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+    }
+  ],
+  "managedRuntimeInputCount": 142,
+  "sourceSnapshot": "source-inputs-final",
+  "sourceRecords": [
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/StandaloneBootstrapMemory.cs",
+      "sha256": "63E3A016D1961C42A4B8DFDD4A715182679DB8B3E2DCC62E2309F0282E31FF8E"
+    },
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/NativeGraphicsRomImage.cs",
+      "sha256": "174DD76AD37B533E756FA3E711AC65BFE122A3410C2490094F33FFD037C10364"
+    },
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/NativeGraphicsLinker.cs",
+      "sha256": "33BC9A4C4910BA177908413F4DAFC505361351DECD88F325C3E9649E1ACE1995"
+    },
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/GlobalUsings.cs",
+      "sha256": "1A7551776EB292DB911E30CF8E68C345B14415F57F1528A300F980444C3F0491"
+    },
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/Firmware/GraphicsLibraryImageLayout.cs",
+      "sha256": "B6BCF75CA1712D994C520F1BB7E9801B1D26DAA6E64671A1EF7BE90F3B1F1BED"
+    },
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/CopperStart.Graphics.csproj",
+      "sha256": "B1CB3B6B04CEC6CC8262EEA50F06C40D4B5D6162A27330C6F81D0CF2DA2E8627"
+    },
+    {
+      "kind": "emitter",
+      "file": "native/CopperStart.Graphics/BigEndian.cs",
+      "sha256": "113DBA3B3C8FBEB119E35F124A2E5A76C65322E9260A7FAB2F3B5D959F5C29FB"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsBitmapUtilityOperations.cs",
+      "sha256": "47DBE6190CC11F210821E2027FB3804567806B7D2B5C3C9BB2278B99844AF01A"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsBlitOperations.cs",
+      "sha256": "4CC22F893AE16EF19CE11366A18A94246FB3DF084A8515571D1FA65BD4C0A838"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsAnimationOperations.cs",
+      "sha256": "8ECB4027DC8AF0490E788EF0EAF4171CCAC85494A276DAFF31075B28741E017A"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsMonitorRegistrationAdmission.cs",
+      "sha256": "103EC0F0562C6930C2B039E720B1E408D07A29E4D2E61B76FAB0E103B0B55ECD"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorSelectors.cs",
+      "sha256": "5EB81213C3BEB0F8FD884D61EA9B2E78577B99298C41E8F358843A465DF6D290"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorPositionState.cs",
+      "sha256": "6E76EA45D7DF437570C42A6E83FEE8861E02F753127BAB2D99457B117FE39E28"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorOperations.Names.cs",
+      "sha256": "972BC1DF5012A1962BCA031B5617ABEC339723E395C2C00CE3642B1156D6331C"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorOperations.Ids.cs",
+      "sha256": "8DFD5969711278691357F8C08227CABF51F02C962C478DD2BB982CF6D4804B5A"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorOperations.cs",
+      "sha256": "B82EF0ADB8D3A9D04EEC2B8567966A96CD84702E22D5FEB66C966C686B50A829"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorInfoReadback.cs",
+      "sha256": "A43691032F772F5DF6376D1EDD4776596C49660015E939E1609B2AA81409C57C"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorInfoImage.cs",
+      "sha256": "1D8C442DD496147C6AEF87CF5364764C3D28C464BBB87D50B087FECCCE60A7F6"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMemoryFontBackend.cs",
+      "sha256": "04D241AE35A96466C690AC9D5B8B80B3E9AA42E1CCC1C433A37FDBE041A71D5A"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsLvo.cs",
+      "sha256": "BBCF59D2DB6D8B76FB6CD49D6BA3299B5B2C4407A2312D2D6A7D0CD728AF35C6"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsLibraryCore.cs",
+      "sha256": "5E4F1B1D19ECFDA3C85F6CD72D52E8CDAD23576CF645F2488809F918817C8142"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsLayouts.cs",
+      "sha256": "F1BE52C9277EEE3BE12A5A024F0AD05A9208E50D49E8AE40B325F7134D453DC3"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsGuestFontListBackend.cs",
+      "sha256": "1A9CC288DC8C120BF9AA08493ADCEC179FB1809E72F0C81402BB7F420B76B67E"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsGelsOperations.cs",
+      "sha256": "8040F121CD2190554A2998C2A07E1E20ECD7BBFA538FD2761BCB5DFE7A511FD8"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsFontOperations.cs",
+      "sha256": "BD8D45C1F1AACA8F7072E88922A970ACA7BC13055AD43E6CBADC3FF5692A2EF6"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsExtendedNodeOperations.cs",
+      "sha256": "B305B3309C674543FD81DA44FCFE0BBC36A46B40ED6125019AA8548C1204E5F5"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsDoubleBufferOperations.cs",
+      "sha256": "92F04FA886658A2CA7757AA84EC8BFCE0139B041FCE4F10BB0DDB6ABB0C48C4C"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsDisplayDatabase.cs",
+      "sha256": "59599E9D108507D924660A2856C8F6532BDD37EB83224619C970DFCD73A196A9"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsCopperOperations.cs",
+      "sha256": "3F2D6E91B9320673BD3084E70D25FF51410EA795D7D846ACBF556CD019DFDBB0"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsContracts.cs",
+      "sha256": "C68C63416B21180AD6914CB40F0FA9AA0D1CA861CA1CEA5454453FC2ED56A393"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsColorOperations.cs",
+      "sha256": "C36173968724E64DEFD5B04FA7C28D89DAE118D00918165AD12A3DAA4BE8D372"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsBlitterQueueOperations.cs",
+      "sha256": "115F84957E50901AA59879B37958182FAEDD55FFD5000DA4A5E3EFF2532AD739"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.CompactDisplay.cs",
+      "sha256": "85ABA82D0009249B4215D464E03AD0B1FA7F0D72A3C6A749964682BF9A2D2C77"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsBlitterFifoBackend.cs",
+      "sha256": "F7D1FEF0512DF5A12F6BC7F10D72C38555A89991F3F4B469862DF49358445E1F"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.CompactBitmaps.cs",
+      "sha256": "8A744489390FAC2889B219D174AD8FE0E78108E43AB06E8959D82E00C3611645"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.BranchLinker.cs",
+      "sha256": "D74FD004DD7ABC6EC036ABD304E2632CC59F57BF662764C78BAE59F6FE85206A"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsScreenPrefixOperations.cs",
+      "sha256": "9543B4B1A95078C821C072D853BF257EBFF09DF2C17CA9787028DE53BEBC4CF7"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.BlitterRelease.cs",
+      "sha256": "7978D8F3CA1CF16C5F54E15E9582C93C25F2346164D131B4F0AE56EAF7266845"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsScreenOperations.cs",
+      "sha256": "472FE89EE5F1DFC6775314D3EDB00E08C094C0324730CF109DDDC5DF9A9AA7C6"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.BlitterQueue.cs",
+      "sha256": "D4DF41CD3231E666AB07A2B3685A31035D2ABC546F14BDE606D40E4C39140A86"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsRegionOperations.cs",
+      "sha256": "365E310CB14A5B3E1FE44590BD007021D936022DDABDEAFD1CBA0F68FF399BD7"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.BlitterAlarm.cs",
+      "sha256": "0E76E702AA66202025C3A0EDB7B623ECB94E7E37CC28AE3DEF738162BE05AC30"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsRastPortAttributeOperations.cs",
+      "sha256": "FD4F5CFF2731EC80B70DBA11D3BE5952B149CE62C3A73F4117A7D8BAB0AC0667"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.Blitter.cs",
+      "sha256": "C75260E98EBAE0DC2F13BF8711A139D29174DBF5A808AAF6706CA93017040F16"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsRasterOperations.cs",
+      "sha256": "F3EC006134ABB89051C6205E557B143BE1E08EE848083EB8876C860D21CA5213"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsMonitorStateRelease.cs",
+      "sha256": "01CAF9B59FC5784BA1508AB2DB2A075835B921DCDB50B8910BB261268A3CDCAF"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsPixelArrayOperations.cs",
+      "sha256": "3CBC8883EF0BD5E112D1DC0EA067E840319D4CF3627B351CF497456BC07F2DB8"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsMonitorStatePublisher.cs",
+      "sha256": "CEFA6195C1E2DA7D8CF6823F81ECF22DAC60795A7CA46CA1BE926D444EFE7160"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsNativeMonitorTiming.cs",
+      "sha256": "5C5727BF7B2731861EF6C1F2EC27899AE34FE47D2B9DD4ED009E3050EA63E9CD"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsMonitorSpecRelease.cs",
+      "sha256": "BFEBD027F1946196E56B04C4A369AF570ECC73FA7F779355254F837040123633"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorViewPosition.cs",
+      "sha256": "E45831844E33317393330ADCEC3355F432C7D5A33683B07C28AB2AAD876D6F23"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsMonitorSpecPublisher.cs",
+      "sha256": "A2470C4F4AEEF7E038DC4661770098E7D4FE896025A00B3517845C6D7A9D996E"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsMonitorSpecInitializer.cs",
+      "sha256": "5A704F7D012C982E70BE67B286BFC208BD22CC8E5246AC9897D42E835DDAFBFD"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsMonitorSpecImage.cs",
+      "sha256": "534231A09FC8376A3B2FA649AC29FF217959759338342F3EAD90D5CBCB367768"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsFontLayout.cs",
+      "sha256": "9F94368649DF0336D75777D0122673CE34AE02E4C8F7DB5EB812BBB46406B59D"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsBlitterLayout.cs",
+      "sha256": "EAB99C3B07E49E0FEC324420C3B987A63BFADEFA87D17E70ABBCB21F919CA2C8"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.LibraryLifecycle.cs",
+      "sha256": "BFDDA178FD956F8EAC1182B3538729D9FD5F40DA283E3A733C9F03B725F11EF2"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.LayerControl.cs",
+      "sha256": "9A0DFEB13074FEE16DEDA7A3495A1E8732CF1425D046BC88F079D6E0E129878E"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsUnboundLayerBackend.cs",
+      "sha256": "36FDCAD6A162F801110158926A23C1C91EE313572AC073A111597E430860023A"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.FontMatching.cs",
+      "sha256": "585B37626AE97B4D818AF13917A0DBA1D10DEB301EA6F099C3E3F1D31AB5A7FB"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.FontLifecycle.cs",
+      "sha256": "A3C017D19ABE2DE05D6A68517EC15C1C739EB44C7A367C65EE1AE1ACE531D876"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.cs",
+      "sha256": "ED7EDDD4D8863AC78A65D137DF6CBE4D6A82C614D062B2721A8DEC76E039CF99"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.CompactRaster.cs",
+      "sha256": "24F0605B5F190292730E4D65239D6F91A9CA8DCEC664AA64D311F49201E9BA79"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.CompactLayers.cs",
+      "sha256": "588130F3EA635787A77BEAD250DE0D16BBF985B6F9E3CC23080E07086A7BD8BA"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsSpriteOperations.cs",
+      "sha256": "7176C5D41BD0D1D7B84A1ADD3620E8E150CB10C7298B34327B26D93A0B8DD72C"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/GraphicsTextOperations.cs",
+      "sha256": "F9933CA62C670BF5765BE06472F0E152166CAFEB6B37AA44B06AB70D6CF9F30D"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.MonitorState.cs",
+      "sha256": "2488F539B472B36DAF98CA5878BD886909826DC9BCD3E86A3DF15C173194138B"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.MonitorNames.cs",
+      "sha256": "FBFF1019D5867427FF2A6C01A4CA6BABEFEB38C0443F94C03C7BB878AF74847E"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.MonitorMutation.cs",
+      "sha256": "4DFA3CABD9EF472E125EB74A98F9A7905D83801F7B9458796544701CBAEB3813"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsLibraryImageBuilder.cs",
+      "sha256": "882AA7626A121A03F0800ED2BA4F4203C4FAC900DEFCF346EC0344C291926F48"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.MonitorInfo.cs",
+      "sha256": "23FA847BE8280E7F4D12B3467258B9B8B0124C96F24B50ECB3609B6F0461AF71"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.MonitorIds.cs",
+      "sha256": "EAD02833167F3AB9D021F9AC419BC070B508EB78CBAEA610E11F740E9D253CEC"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.PlanarBlitDma.cs",
+      "sha256": "9DC6FD5839D60577314E0112CE8FB530F83A3BF290BAB5E6A4116457E5330537"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.PlanarBlit.cs",
+      "sha256": "65AC6DF6400ADDC41D3CA53724CCB88E46631BC7416949ECBA3537E6188F6435"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsLibraryHunkBuilder.cs",
+      "sha256": "E577305A1AAAC67C32CC6ED8830C5AA6F452410FE08CD881DB704D3462A5CB18"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.Pens.cs",
+      "sha256": "7B2C349D84EF21B4982672B1E9DE1AC3D08C1C44B4155F9BBFD85516A985FFE9"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsLibraryInitializer.cs",
+      "sha256": "F2EB6B91044E4AD8CB5135D2C7161893551D90D95FC75694F0C8C584FD834CE9"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.Resources.cs",
+      "sha256": "3D121D0DC40CE5B4C30DB906BACF2DD4F0EC5076D798D79201D7ECEFAC2E9CB2"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsLibraryLifecycleLayout.cs",
+      "sha256": "64C05BDD8216DF0D37BB53EAF1A4F25E2B124D80F07AD331D35DEC8E625728B4"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.Standalone.cs",
+      "sha256": "651E7495715A36B8D4E0B5B1F9BCBC53F761126CCC82C83045E046914743E2A0"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.Timing.cs",
+      "sha256": "421C19EB093C39FA24221D3ADB2B968BAF0FD51FDA037EAD2D5DD11C232FC095"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsRasterBodies.VideoControl.cs",
+      "sha256": "4EF2FC7E0B57235F44E2973A502722D5C5B793767D8A2182B55A5F3F13AB6437"
+    },
+    {
+      "kind": "emitter",
+      "file": "host/CopperStart.CopperMod/CopperStart/Graphics/Portable/NativeGraphicsResourceLayout.cs",
+      "sha256": "D7FBA9FB06E4175774573EAF5F828F46BDA24EF13A486EBFB33955C41CFE96F8"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeWorkbenchStartupTests.cs",
+      "sha256": "78480FDC88C35D9030244D602D2651F3A523B24F7DC652D4C2A86D0B5B19EB8B"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeUtilityV40BootTests.cs",
+      "sha256": "5BF083931EA62C1CAB8CC28CD939126D6D706275F4E95AB53C62570E10F0BEA7"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeUtilityBootTests.cs",
+      "sha256": "665DD6EDF2DFE5DE1B194010716095D879E47A851BFD6F32E2A97C1CE7B7E792"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeStartupDriverTests.cs",
+      "sha256": "43C9D988A183E808152F62E42233BFE9E6ACBB557A5C8E250960B232F241578F"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeResidentControlTests.cs",
+      "sha256": "1680A0D150D13C972367F397914A7DB5BDED9C0EAB91F2EB259CDBC87CA220F8"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeReadArgsBootTests.cs",
+      "sha256": "33D0B281725C98AB8020F146F98DFA1B7A56E3A0D6453A1351C67A4447A3543B"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeMorphOsResidentBootTests.cs",
+      "sha256": "27D997944B6D26F7685496E142F58D40EBEC045A7C54DC0D88266B24EF8179E8"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeGraphicsBootTests.cs",
+      "sha256": "DDDE568D3B1F5B88B5084EE2D4A0091B137CF0F5C7E0A1786B1F44FB5770BD2B"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeFullShellBootTests.cs",
+      "sha256": "09CE4A4DF996664FB3FB87B5BAFAF8DCD32D80BC2FACFF751489836248655896"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeFloppyRomTests.cs",
+      "sha256": "DA887D3620FBDD3A85ACF96A4DCC4A9E272C23FA8AFFEF7DBFC51654D11F2DFF"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeFileMetadataBootTests.cs",
+      "sha256": "E7284E4AE85FF12320C7ED5ECA1F6DC40B9C88B3689AAF06C0EE20AB0EF48C1D"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeFfsWriteBootTests.cs",
+      "sha256": "48463FFB261F7956F4277FE300C0C9770A1A0B53C73973791ADF0DCD11F75D63"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeExecInterruptBootTests.cs",
+      "sha256": "1338482F34D62AADB40125F1460EA56D05319071C0216FB683A75B1F64CEAF66"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeDosErrorBootTests.cs",
+      "sha256": "F3F75EE5388DC378DAFC3174E36BC1EE79BDF4095E635FC976E950AA0EFAE900"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeDosBootTests.cs",
+      "sha256": "0306C5F771CC7123E78B071C6DCE6FDB106CA6317EC327485D352ED2070C9740"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeDiskLibraryBootTests.cs",
+      "sha256": "1B48C0908A059870C83A7B461C29B2FFC9FE55C6F9BD79BC41DAEA5B451AB25E"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeDiskBootTests.cs",
+      "sha256": "0FA8F60C4B7F937B340F786276D5FC8B53F6613B91868B912B8D4002AECF3465"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeDesktopPrerequisiteTests.cs",
+      "sha256": "C2DE3BDC57DBB3766EF25A0957C87A4D0C2B47DFBBC0D51EC4216883D4DC0F8C"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeDesktopDisplayTests.cs",
+      "sha256": "7A94E3A56F9C0DA20BC061738FEE1FFEBFD7FD31949D2D5799E8E349E7EA1007"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeCurrentDirectoryBootTests.cs",
+      "sha256": "33007B7BCFDBE4E483B729C7040CD24E97FB14AFB6C1E3887C5D54A684C53742"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeCliModuleBootTests.cs",
+      "sha256": "3911945EC67070B492E9A7A589A5071B90628E363377A1AC04CAFBA762E98E53"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeCacheBootTests.cs",
+      "sha256": "37D2B0579EFC2F519FCE6B6CAAF9C27961F2B4CDE467604F31572378D92E188D"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeBootScriptTests.cs",
+      "sha256": "14B1DB33A44FB59E3244D26AE8D75E3086FDD09A2816DF07017AC1917B8D426C"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeBootImage.cs",
+      "sha256": "C50921872B3F32FAA77D1C2B7677503A3397EFAA81598449DC21A34C4D196434"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/NativeBootConsoleTests.cs",
+      "sha256": "7993B397690DF6707C61478BD0FB27255E2617AD1B900315AB81663899FB3931"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/DosDiskImage.cs",
+      "sha256": "13A52138603AA353B27828DAE45181862E318E16DD51FD7D731E3E2DE483B5B6"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CopperStart.Floppy.Native.Tests.csproj",
+      "sha256": "706E21A0E76E6BEA5580811A1F884F4072DE9EEE2EB045A271B89014236AA0F4"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CompactLayerProviderInstructionTests.cs",
+      "sha256": "4D7779C36A586E90C8309E2E02190B8F4D64E144F08F0B62EC2D00DA2C2C8328"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CompactLayerInstructionTests.cs",
+      "sha256": "C15BD4A58B6A1FF6AB1E085AE177626A714A8EC695224C1C386780FAA4947310"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CompactGraphicsInstructionTests.cs",
+      "sha256": "EA35F93BC75C75B59313793E1C6AA933ECF00C9F6C2C013C2A1747A5AAC1E514"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CompactDisplayInstructionTests.cs",
+      "sha256": "1DE9C1FC02CE5640E6DE19FFA01E026A6CCCEFB371FDF2CD7BB78ED974C19353"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CompactBitmapInstructionTests.cs",
+      "sha256": "A9962E853E0B72915DC07462FD52240EAF002E45682B53E908B7D50B9696A079"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/BootScriptTests.cs",
+      "sha256": "23DFB8E3C70EEF90689A03FFB25901E6260E109503652D6FB9375F798164F269"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Floppy.Native.Tests/AmigaDiskFileSystemTests.cs",
+      "sha256": "AC5CC010BFC94963B71991DD9D2B4CE65D2E3A0F140B28E15DAA29278167EAAB"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "tests/CopperStart.Exec.Tests/NativeParityBus.cs",
+      "sha256": "CCA1990CEF75D45B473EBA111FBFFC47A161E67C8A1FA1BEFFDC4F41E12DCB8B"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "build/Test-CompactDesktopGraphics.ps1",
+      "sha256": "1895F63342E00AC5B7F09D748B52D9E6CC19D2EF6DA7645A550C21366AD3124B"
+    },
+    {
+      "kind": "diagnostic",
+      "file": "build/Relink-GraphicsBootRom.ps1",
+      "sha256": "15A65361CEA3A8CAC9BCF1D5BB949D14240F6BFDD1E1FB4E032F8D73731A7833"
+    },
+    {
+      "kind": "compiled-provider-not-installed-in-frozen-ROM",
+      "file": "src/CopperStart.Layers/CopperSharpNativeLayersPlatform.cs",
+      "sha256": "120197B3936A7528AA81682F9FED5ECBBACD9FE3EF26E06C984E5CD23A08EDFB"
+    },
+    {
+      "kind": "compiled-provider-not-installed-in-frozen-ROM",
+      "file": "src/CopperStart.Layers/LayersNativeProviderVectors.cs",
+      "sha256": "5CC9CF3BA3FB21BB3330DCD7E9FA6D6872B4563556E7FAAE8745DDC50FABB409"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Layers/LayersNativeGraphicsBridge.cs",
+      "sha256": "F11D1ECC77F99228424C30D3EC30F4768E15673146BB7611DDE4F49554C54DE1"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Layers/LayersGraphicsBridgeCore.cs",
+      "sha256": "2ADFBEA8114A052911C6F913C7874D31F93E002FAB27EF66A6535023C420577D"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Layers/LayersRasterCore.cs",
+      "sha256": "B820EC6CFFF01FB0B90E85B958BD2206F2952D64805FFBB8AC63BF27CC0C2ADE"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Layers/LayersRefreshCore.cs",
+      "sha256": "C5D1546A4F0DB8747020B0EA490089FA846D24D0C96A21E7E0CE16EA97E2E3AB"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Layers/LayersBitmapCore.cs",
+      "sha256": "522EC055DC797A23F627F112F6B04325BDD82421AD0FC0F6C96E63DB6EED8DA6"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Layers/LayersTaskLockCore.cs",
+      "sha256": "524E81408BA736401D979372B12140C657B14E151EAFA4C5A761CD95E87A7A90"
+    },
+    {
+      "kind": "audit-only",
+      "file": "src/CopperStart.Intuition/CopperSharpRomIntuitionPlatform.cs",
+      "sha256": "E889D3DC50BA22705B2B98BC91D6BB8771CE055D9C68A9355F55AA0CF3F1A5C4"
+    },
+    {
+      "kind": "audit-only",
+      "file": "native/CopperStart.Shell/NativeUtilityLibrary.cs",
+      "sha256": "306F4371F41116CBB854A5F1DA7F55B639DF9D28358803E0D92ED84DFFDFF03F"
+    },
+    {
+      "kind": "audit-only",
+      "file": "native/CopperStart.Shell/NativeDiskLibraries.cs",
+      "sha256": "9325D6C48A4EDFB668F2112DE026099AD901C5FCE223781845205581B26BEE9E"
+    },
+    {
+      "kind": "test",
+      "file": "tests/CopperStart.Floppy.Native.Tests/CompactLayerTextInstructionTests.cs",
+      "sha256": "25DE77FC8278D728D55B5A15016BB7C680CDA8AFA93DB1888D12FCB0B7D3E27E"
+    },
+    {
+      "kind": "audit-only",
+      "sha256": "3476D86606A7DFEB08940EFE42B90D4DC8CB39BF77FBFFD4DC8344683AF45F08",
+      "file": "src/CopperStart.Intuition/State/IntuitionRefreshCore.cs"
+    }
+  ],
+  "artifacts": [
+    {
+      "sha256": "9369858866C6B7B54F0ADE7C19CBEA02FBF3238D97D836EF3D924EAC2D4E07A3",
+      "file": "qualified-v1/qualification.json"
+    },
+    {
+      "sha256": "777AE62184910836CBFD63E730E1AFEC98B3BB484D971741621D0A86F4AB3515",
+      "file": "qualified-v1/managed-inputs.json"
+    },
+    {
+      "sha256": "F84862D5CDF2B21206B4151692B3328DCBF37C2DCEE624BB17F26C4C8B7F5931",
+      "file": "qualified-v1/results/compact-desktop.trx"
+    },
+    {
+      "sha256": "CFEBBFD738A0CA7B13B166849860C1E3DF39B0B55E141BCCA0DCE15A25C12119",
+      "file": "qualified-v1/tests.log"
+    },
+    {
+      "sha256": "5B246C9FFE97B7809BBFA834A059E862CCB2DE8F6BCD170027FC25FF4B04253E",
+      "file": "relink-v1/disk-boot-test-manifest.json"
+    },
+    {
+      "sha256": "BACA735FD8A40353F6759297EB7E9E59C00B662859411E1AB2005B11CBECAAAF",
+      "file": "relink-v1/CopperStart-DiskBoot.graphics.json"
+    },
+    {
+      "sha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "file": "relink-v1/CopperStart-DiskBoot.rom"
+    },
+    {
+      "sha256": "2EE587B918A8E1530713170DA036B2BADD65E807EE842164346930EB1A689654",
+      "file": "relink-v1/CopperStart-DiskBoot-compiled.rom"
+    },
+    {
+      "sha256": "35BF4C70CB50615968AF8EC0FD358B6184A86632E421B71F98B2BD2D78F2A466",
+      "file": "relink-v1/CopperStart-DiskBoot.map"
+    },
+    {
+      "sha256": "B5E9279B655AD80A03BBE3E2086D519C7B0C517F485E322972C52C72C010E80C",
+      "file": "source-inputs-final.json"
+    },
+    {
+      "sha256": "B336B8B96A03926C5F5A6D2EB0E73A6D5BEC6107159E0EF747DFC710E30FA14E",
+      "file": "solution-build.log"
+    },
+    {
+      "sha256": "35CC2D05D73AF9290F1717D9E7A70FD6B56B7D9C3C9F04E78B97C42A3DD63E2D",
+      "file": "qualified-v1/native/layer-provider-probe.hunk"
+    },
+    {
+      "sha256": "D9DDA485A136AE1F0EBCFFD7079D0CC7BC8652295954E0C2C4D91EDE454D05C4",
+      "file": "qualified-v1/native/layer-provider-probe.map"
+    },
+    {
+      "sha256": "8F44683E8AA99500F02AF3B89DD4AE0D27544D8C9B8DAD238E2CC81C41D987AE",
+      "file": "qualified-v1/native/desktop-prerequisite.json"
+    },
+    {
+      "sha256": "90A84EC5137AE52CF2B0424B10C9B60940F52FD64965A506D1954B5E48485104",
+      "file": "qualified-v1/native/desktop-prerequisite-persisted.adf"
+    },
+    {
+      "sha256": "9ADF7D51317D9143A0853609EC99208B1282B64D36B972FD5CE488B07BF67F28",
+      "file": "qualified-v1/native/desktop-320.json"
+    },
+    {
+      "sha256": "29877C32783639919FB59BE408E2B56D7ECAE7316E272F2DEFFCB59E6DC48515",
+      "file": "qualified-v1/native/desktop-320-cycle-1.png"
+    },
+    {
+      "sha256": "29877C32783639919FB59BE408E2B56D7ECAE7316E272F2DEFFCB59E6DC48515",
+      "file": "qualified-v1/native/desktop-320-cycle-2.png"
+    },
+    {
+      "sha256": "29877C32783639919FB59BE408E2B56D7ECAE7316E272F2DEFFCB59E6DC48515",
+      "file": "qualified-v1/native/desktop-320-cycle-3.png"
+    },
+    {
+      "sha256": "5F662AD09B378F20488DD94220E57010F3BBEA73F9F330C17C33ECDDB6D89C92",
+      "file": "qualified-v1/native/desktop-640.json"
+    },
+    {
+      "sha256": "6937D53DB27059B33E61452A4F6F2CBFAA0457CE862797BD6950C5C51D388698",
+      "file": "qualified-v1/native/desktop-640-cycle-1.png"
+    },
+    {
+      "sha256": "6937D53DB27059B33E61452A4F6F2CBFAA0457CE862797BD6950C5C51D388698",
+      "file": "qualified-v1/native/desktop-640-cycle-2.png"
+    },
+    {
+      "sha256": "6937D53DB27059B33E61452A4F6F2CBFAA0457CE862797BD6950C5C51D388698",
+      "file": "qualified-v1/native/desktop-640-cycle-3.png"
+    },
+    {
+      "sha256": "62F546D483CE1870C2AB68577878905427B813556E627D304BEBFBB7E157CED3",
+      "file": "qualified-v1/native/backing-320.json"
+    },
+    {
+      "sha256": "938928796BEAFFCA6E87BA360062468A9F42721AC4C594C8B2E790DC9B15F221",
+      "file": "qualified-v1/native/backing-320-cycle-1.png"
+    },
+    {
+      "sha256": "938928796BEAFFCA6E87BA360062468A9F42721AC4C594C8B2E790DC9B15F221",
+      "file": "qualified-v1/native/backing-320-cycle-2.png"
+    },
+    {
+      "sha256": "938928796BEAFFCA6E87BA360062468A9F42721AC4C594C8B2E790DC9B15F221",
+      "file": "qualified-v1/native/backing-320-cycle-3.png"
+    },
+    {
+      "sha256": "C108D355BCC10FDD28CBA1C39F7626C9C50F5112F02E0DD09051EB0ADB17015D",
+      "file": "qualified-v1/native/backing-640.json"
+    },
+    {
+      "sha256": "EF27F47BDC42B16C52BDF8803D75B6727F320EAC9B3AE4800CFF700FC1FB2F78",
+      "file": "qualified-v1/native/backing-640-cycle-1.png"
+    },
+    {
+      "sha256": "EF27F47BDC42B16C52BDF8803D75B6727F320EAC9B3AE4800CFF700FC1FB2F78",
+      "file": "qualified-v1/native/backing-640-cycle-2.png"
+    },
+    {
+      "sha256": "EF27F47BDC42B16C52BDF8803D75B6727F320EAC9B3AE4800CFF700FC1FB2F78",
+      "file": "qualified-v1/native/backing-640-cycle-3.png"
+    },
+    {
+      "sha256": "27E5AC11C12B5C70D5E6927413386DADB5335491FB2128595F7CD3DCBF598D98",
+      "file": "qualified-v1/native/layer-320.json"
+    },
+    {
+      "sha256": "2C904C8CEFD40FB1FC6D1A76CA4409CDBA008997F4A18B5602AE9649DEC05833",
+      "file": "qualified-v1/native/layer-320-cycle-1.png"
+    },
+    {
+      "sha256": "2C904C8CEFD40FB1FC6D1A76CA4409CDBA008997F4A18B5602AE9649DEC05833",
+      "file": "qualified-v1/native/layer-320-cycle-2.png"
+    },
+    {
+      "sha256": "2C904C8CEFD40FB1FC6D1A76CA4409CDBA008997F4A18B5602AE9649DEC05833",
+      "file": "qualified-v1/native/layer-320-cycle-3.png"
+    },
+    {
+      "sha256": "AC2BA508AD763D4DDD47886E14A086CB37DB76D4ED13C46BCB8260DE3639A9C7",
+      "file": "qualified-v1/native/layer-640.json"
+    },
+    {
+      "sha256": "50E0D12F7DA31BB685D6EB74110D70875F4A82AE77A7F3FF84E81BDFAA92DF65",
+      "file": "qualified-v1/native/layer-640-cycle-1.png"
+    },
+    {
+      "sha256": "50E0D12F7DA31BB685D6EB74110D70875F4A82AE77A7F3FF84E81BDFAA92DF65",
+      "file": "qualified-v1/native/layer-640-cycle-2.png"
+    },
+    {
+      "sha256": "50E0D12F7DA31BB685D6EB74110D70875F4A82AE77A7F3FF84E81BDFAA92DF65",
+      "file": "qualified-v1/native/layer-640-cycle-3.png"
+    },
+    {
+      "sha256": "E7AFBF824F25F47816B49C27F959457F3556E72249C2D88BA977C579587C35F7",
+      "file": "qualified-v1/native/layer-text-320.json"
+    },
+    {
+      "sha256": "902BF5BB49FA1FC4A549AF96A705D9F03916F7A2D575F9020E67CA5C40A31414",
+      "file": "qualified-v1/native/layer-text-320-cycle-1.png"
+    },
+    {
+      "sha256": "902BF5BB49FA1FC4A549AF96A705D9F03916F7A2D575F9020E67CA5C40A31414",
+      "file": "qualified-v1/native/layer-text-320-cycle-2.png"
+    },
+    {
+      "sha256": "902BF5BB49FA1FC4A549AF96A705D9F03916F7A2D575F9020E67CA5C40A31414",
+      "file": "qualified-v1/native/layer-text-320-cycle-3.png"
+    },
+    {
+      "sha256": "DA1604577D5FAEFA8CAB6805C1B0FFAA13B9F3196F127FF991382B0B1A34C4A9",
+      "file": "qualified-v1/native/layer-text-640.json"
+    },
+    {
+      "sha256": "12896BDAB8BD43D514FCB710675A486979F01B860BB11BCEF527FDC6263DB654",
+      "file": "qualified-v1/native/layer-text-640-cycle-1.png"
+    },
+    {
+      "sha256": "12896BDAB8BD43D514FCB710675A486979F01B860BB11BCEF527FDC6263DB654",
+      "file": "qualified-v1/native/layer-text-640-cycle-2.png"
+    },
+    {
+      "sha256": "12896BDAB8BD43D514FCB710675A486979F01B860BB11BCEF527FDC6263DB654",
+      "file": "qualified-v1/native/layer-text-640-cycle-3.png"
+    }
+  ],
+  "instructionCoverage": {
+    "runtimeHelpers": 0,
+    "compiledCodeDataBytes": 2308,
+    "compiledHunkBytes": 4028,
+    "emitterTextCases": 61,
+    "compiledProviderCases": 10,
+    "syntheticExec": true,
+    "frameworkFeatures": 0,
+    "installedOwnerSyntheticOnly": true,
+    "newInstructionCases": 64,
+    "managedAllocationSites": 0
+  },
+  "implemented": [
+    "Classic Simple/Smart glyph clipping through visible/concealed ClipRects with scroll translation and bitmap bounds.",
+    "One string walk and one original cursor publication, even for empty/hidden output; signed WORD count and cursor wrapping.",
+    "Proportional JAM1/default glyphs, fixed-cell JAM2/complement/inverse and plane masks; whole-string unsupported-font preflight before ownership.",
+    "Typed production Layers Text A6/A0/A1/D0-WORD call preserves incoming register frame.",
+    "Pinned authoritative CMLG owner or absent-owner public Exec semaphore, with unsupported Super cleanup."
+  ],
+  "exclusions": [
+    "No installed Utility/Layers owner in frozen ROM; compiled provider coverage is a focused HUNK with synthetic Exec.",
+    "No actual damage/update or hide/reveal refresh, native Intuition window, pointer/input owner or GUI event/reply qualification.",
+    "No full GUI closure/peak RAM fit, throughput acceptance, firmware pin change or release admission."
+  ],
+  "remaining": [
+    "Install compatible Utility/Layers and qualify native pins/startup/rollback, CallHookPkt and contended locks.",
+    "Native damage-restricted BeginUpdate/EndUpdate, partial/complete/abort, foreign clip regions and allocation rollback.",
+    "Simple redraw damage, Smart hide/reveal restore, scroll and refresh callback/continuation reentry/teardown.",
+    "SuperBitMap, NeverBackfill and richer proportional background composition.",
+    "Real Intuition BeginRefresh/EndRefresh/events/replies, first screen/window, pointer/input and display restoration.",
+    "Loaded GUI code/data/stacks/bitmap peaks/fragmentation and placement on the unchanged 512 KiB ROM / 1 MiB A500."
+  ],
+  "qualification": {
+    "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+    "romBytes": 524288,
+    "layers": [
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 320,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": true,
+        "layered": true,
+        "layeredText": false,
+        "textScope": "baseline",
+        "layerScope": "Caller-built Classic Smart Layer/ClipRects, real Exec semaphore, scroll, visible/concealed storage, zero/no/raw Hook backfill; no installed Layers owner",
+        "graphicsApis": [
+          "AllocBitMap",
+          "FreeBitMap",
+          "GetBitMapAttr",
+          "BltBitMapRastPort",
+          "EraseRect"
+        ],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 458920,
+            "totalFree": 800128,
+            "framebufferSha256": "DD28501D5938075ECE0814B454EDB0D0A423D1FDD0FE844601E3653E72603D62"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 458920,
+            "totalFree": 800128,
+            "framebufferSha256": "DD28501D5938075ECE0814B454EDB0D0A423D1FDD0FE844601E3653E72603D62"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 458920,
+            "totalFree": 800128,
+            "framebufferSha256": "DD28501D5938075ECE0814B454EDB0D0A423D1FDD0FE844601E3653E72603D62"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      },
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 640,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": true,
+        "layered": true,
+        "layeredText": false,
+        "textScope": "baseline",
+        "layerScope": "Caller-built Classic Smart Layer/ClipRects, real Exec semaphore, scroll, visible/concealed storage, zero/no/raw Hook backfill; no installed Layers owner",
+        "graphicsApis": [
+          "AllocBitMap",
+          "FreeBitMap",
+          "GetBitMapAttr",
+          "BltBitMapRastPort",
+          "EraseRect"
+        ],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 458920,
+            "totalFree": 800128,
+            "framebufferSha256": "7440365BF2784DE5FBED095120E6AB0889D21F61B0F443C084F3D16BD6621C94"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 458920,
+            "totalFree": 800128,
+            "framebufferSha256": "7440365BF2784DE5FBED095120E6AB0889D21F61B0F443C084F3D16BD6621C94"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 458920,
+            "totalFree": 800128,
+            "framebufferSha256": "7440365BF2784DE5FBED095120E6AB0889D21F61B0F443C084F3D16BD6621C94"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      }
+    ],
+    "backingStores": [
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 320,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": true,
+        "layered": false,
+        "layeredText": false,
+        "textScope": "baseline",
+        "layerScope": "unlayered",
+        "graphicsApis": [
+          "AllocBitMap",
+          "FreeBitMap",
+          "GetBitMapAttr",
+          "BltBitMapRastPort",
+          "EraseRect"
+        ],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 459432,
+            "totalFree": 801192,
+            "framebufferSha256": "25489ABBC4B1E21DAD5D6D287D5FE6E81A981DF6DCC9D25EDB45974A3F6AFC0F"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 459432,
+            "totalFree": 801192,
+            "framebufferSha256": "25489ABBC4B1E21DAD5D6D287D5FE6E81A981DF6DCC9D25EDB45974A3F6AFC0F"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 459432,
+            "totalFree": 801192,
+            "framebufferSha256": "25489ABBC4B1E21DAD5D6D287D5FE6E81A981DF6DCC9D25EDB45974A3F6AFC0F"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      },
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 640,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": true,
+        "layered": false,
+        "layeredText": false,
+        "textScope": "baseline",
+        "layerScope": "unlayered",
+        "graphicsApis": [
+          "AllocBitMap",
+          "FreeBitMap",
+          "GetBitMapAttr",
+          "BltBitMapRastPort",
+          "EraseRect"
+        ],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 459432,
+            "totalFree": 801192,
+            "framebufferSha256": "DBAEC7C1E9F986DBE048336CF3AC572788D32D34C5DB0031EFAFA27D1EA6B294"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 459432,
+            "totalFree": 801192,
+            "framebufferSha256": "DBAEC7C1E9F986DBE048336CF3AC572788D32D34C5DB0031EFAFA27D1EA6B294"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 459432,
+            "totalFree": 801192,
+            "framebufferSha256": "DBAEC7C1E9F986DBE048336CF3AC572788D32D34C5DB0031EFAFA27D1EA6B294"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      }
+    ],
+    "manifestSha256": "5B246C9FFE97B7809BBFA834A059E862CCB2DE8F6BCD170027FC25FF4B04253E",
+    "emittedInstructionTests": 253,
+    "shipping": false,
+    "layerText": [
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 320,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": true,
+        "layered": true,
+        "layeredText": true,
+        "textScope": "Fixed 8x8 JAM1; glyphs cross clips, hidden Smart string, top/right/bottom clipping, zero WORD count and checked logical cursor",
+        "layerScope": "Caller-built Classic Smart Layer/ClipRects, real Exec semaphore, scroll, visible/concealed storage, zero/no/raw Hook backfill; no installed Layers owner",
+        "graphicsApis": [
+          "AllocBitMap",
+          "FreeBitMap",
+          "GetBitMapAttr",
+          "BltBitMapRastPort",
+          "EraseRect"
+        ],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 458920,
+            "totalFree": 799888,
+            "framebufferSha256": "82392531AE96859C8DABF7D0ED79B308EF74C4A749E03F87D23DBD2FCE9D16B7"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 458920,
+            "totalFree": 799888,
+            "framebufferSha256": "82392531AE96859C8DABF7D0ED79B308EF74C4A749E03F87D23DBD2FCE9D16B7"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 458920,
+            "totalFree": 799888,
+            "framebufferSha256": "82392531AE96859C8DABF7D0ED79B308EF74C4A749E03F87D23DBD2FCE9D16B7"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      },
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 640,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": true,
+        "layered": true,
+        "layeredText": true,
+        "textScope": "Fixed 8x8 JAM1; glyphs cross clips, hidden Smart string, top/right/bottom clipping, zero WORD count and checked logical cursor",
+        "layerScope": "Caller-built Classic Smart Layer/ClipRects, real Exec semaphore, scroll, visible/concealed storage, zero/no/raw Hook backfill; no installed Layers owner",
+        "graphicsApis": [
+          "AllocBitMap",
+          "FreeBitMap",
+          "GetBitMapAttr",
+          "BltBitMapRastPort",
+          "EraseRect"
+        ],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 458920,
+            "totalFree": 799888,
+            "framebufferSha256": "ED95CDFD9AA95F5D1EB622FF00E4D48D401D6C5E76637DB9D2E8AAE5CDCBB7A9"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 458920,
+            "totalFree": 799888,
+            "framebufferSha256": "ED95CDFD9AA95F5D1EB622FF00E4D48D401D6C5E76637DB9D2E8AAE5CDCBB7A9"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 458920,
+            "totalFree": 799888,
+            "framebufferSha256": "ED95CDFD9AA95F5D1EB622FF00E4D48D401D6C5E76637DB9D2E8AAE5CDCBB7A9"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      }
+    ],
+    "protocol": "copperstart-compact-desktop-graphics-v4",
+    "filesystemSemanticTests": 15,
+    "managedInputsSha256": "777AE62184910836CBFD63E730E1AFEC98B3BB484D971741621D0A86F4AB3515",
+    "graphicsBytes": 31906,
+    "display": [
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 320,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": false,
+        "layered": false,
+        "layeredText": false,
+        "textScope": "baseline",
+        "layerScope": "unlayered",
+        "graphicsApis": [],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 438952,
+            "totalFree": 781088,
+            "framebufferSha256": "0881F1F86C44D2CC2BC9ADEA2EE5CD8816B3BA92B24DE4C8ED333AB51A53464F"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 438952,
+            "totalFree": 781088,
+            "framebufferSha256": "0881F1F86C44D2CC2BC9ADEA2EE5CD8816B3BA92B24DE4C8ED333AB51A53464F"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 438952,
+            "totalFree": 781088,
+            "framebufferSha256": "0881F1F86C44D2CC2BC9ADEA2EE5CD8816B3BA92B24DE4C8ED333AB51A53464F"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      },
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "width": 640,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "backingBitmaps": false,
+        "layered": false,
+        "layeredText": false,
+        "textScope": "baseline",
+        "layerScope": "unlayered",
+        "graphicsApis": [],
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 418472,
+            "totalFree": 760608,
+            "framebufferSha256": "002DA884F504862FE359079677EBEAC6006B2B9CB7D24A0911CA6F305794A621"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 418472,
+            "totalFree": 760608,
+            "framebufferSha256": "002DA884F504862FE359079677EBEAC6006B2B9CB7D24A0911CA6F305794A621"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 418472,
+            "totalFree": 760608,
+            "framebufferSha256": "002DA884F504862FE359079677EBEAC6006B2B9CB7D24A0911CA6F305794A621"
+          }
+        ],
+        "windowQualification": "NOT RUN: one ViewPort; no Intuition window or input owner"
+      }
+    ],
+    "nativeExecutionTests": 59,
+    "compiledCodeBytes": 463658,
+    "graphicsResidentAddress": 16744448,
+    "scope": "PAL 320/640 x 256 x 2: flat drawing, backing stores, caller-built Classic Layer clipping/backfill/text, three lifetimes per path and full 908 x 313 captures; same-ROM writable DOS/protected reboot. Compiled production provider instructions use synthetic Exec. No installed Layers refresh/Intuition window, input owner, app-pair admission or throughput result.",
+    "graphicsCompositionTests": 1,
+    "passed": true,
+    "graphicsSupportedVectors": [
+      -960,
+      -924,
+      -918,
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -810,
+      -804,
+      -606,
+      -576,
+      -570,
+      -564,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -306,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "selectedTests": 328
+  }
+}

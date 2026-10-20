@@ -26,7 +26,14 @@ internal sealed class App : Application
 	{
 		if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
 		{
+#if COPPERSCREEN_INSTALLED_TESTS
+			desktop.MainWindow = new MainWindow(Program.StartupArgs, CopperScreenInstalledProbe.ActiveSession ?? CopperScreenInstalledSoak.ActiveSession ?? CopperScreenInstalledRdbProof.ActiveSession);
+            if (CopperScreenInstalledRdbProof.ActiveSession != null) CopperScreenInstalledRdbProof.Observe((MainWindow)desktop.MainWindow);
+            else if (CopperScreenInstalledSoak.ActiveSession != null) CopperScreenInstalledSoak.Observe((MainWindow)desktop.MainWindow);
+            else CopperScreenInstalledProbe.Observe(desktop.MainWindow);
+#else
 			desktop.MainWindow = new MainWindow(Program.StartupArgs);
+#endif
 		}
 
 		base.OnFrameworkInitializationCompleted();

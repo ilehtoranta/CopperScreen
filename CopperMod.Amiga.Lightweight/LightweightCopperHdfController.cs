@@ -54,6 +54,9 @@ namespace CopperMod.Amiga.Lightweight
         private const ushort TdChangeState = 14;
         private const ushort TdProtStatus = 15;
         private const ushort TdGetNumTracks = 19;
+        private const ushort TdAddChangeInt = 20;
+        private const ushort TdRemChangeInt = 21;
+        private const ushort TdGetGeometry = 22;
         private const ushort TdRead64 = 24;
         private const ushort TdWrite64 = 25;
         private const ushort TdSeek64 = 26;
@@ -130,6 +133,7 @@ namespace CopperMod.Amiga.Lightweight
         private uint _configDev;
         private uint _deviceBase;
         private readonly Dictionary<int, uint> _unitAddresses = new Dictionary<int, uint>();
+        private readonly HashSet<uint> _changeInterruptRequests = new HashSet<uint>();
 
         public CopperHdfController(IEnumerable<AmigaHardfileConfiguration> configurations, CopperHdfController? previous = null)
             : base(AutoconfigIdentity.CreateIoBoard(
@@ -230,6 +234,7 @@ namespace CopperMod.Amiga.Lightweight
             }
 
             var command = bus.ReadWord(ioRequestAddress + IoCommandOffset);
+            hardfile.IoHook?.ObserveCommand(command);
             try
             {
                 switch (command)
@@ -268,6 +273,21 @@ namespace CopperMod.Amiga.Lightweight
                         return true;
                     case TdGetNumTracks:
                         CompleteIo(bus, ioRequestAddress, 0, (uint)Math.Min(uint.MaxValue, hardfile.SectorCount));
+                        return true;
+                    case TdGetGeometry:
+                        ExecuteGeometry(bus, ioRequestAddress, hardfile);
+                        return true;
+                    case TdAddChangeInt:
+                        // The hardfile is fixed media, but a registered change
+                        // request remains pending until TD_REMCHANGEINT.
+                        _changeInterruptRequests.Add(ioRequestAddress);
+                        CompleteIo(bus, ioRequestAddress, 0, 0);
+                        bus.WriteByte(ioRequestAddress + IoFlagsOffset,
+                            (byte)(bus.ReadByte(ioRequestAddress + IoFlagsOffset) & ~1), 0);
+                        return true;
+                    case TdRemChangeInt:
+                        _changeInterruptRequests.Remove(ioRequestAddress);
+                        CompleteIo(bus, ioRequestAddress, 0, 0);
                         return true;
                     case HdScsiCmd:
                         ExecuteScsiCommand(bus, ioRequestAddress, hardfile);
@@ -313,6 +333,7 @@ namespace CopperMod.Amiga.Lightweight
             _configDev = 0;
             _deviceBase = 0;
             _unitAddresses.Clear();
+            _changeInterruptRequests.Clear();
             DiagBootstrapCalled = false;
             BootBootstrapCalled = false;
             ResidentInitCalled = false;
@@ -524,7 +545,8 @@ namespace CopperMod.Amiga.Lightweight
             var partitions = new List<AmigaHardfilePartition>();
             foreach (var hardfile in _hardfiles.Values)
             {
-                partitions.AddRange(hardfile.GetMountablePartitions());
+                if (hardfile.ExposeBootNode)
+                    partitions.AddRange(hardfile.GetMountablePartitions());
             }
 
             return partitions;
@@ -861,6 +883,7 @@ namespace CopperMod.Amiga.Lightweight
         private void HostDeviceOpen(M68kCpuState state)
         {
             var unit = unchecked((int)state.D[0]);
+            if (_hardfiles.TryGetValue(unit, out var observed)) observed.IoHook?.ObserveOpen(unit);
             var ioRequest = state.A[1];
             if (_bootstrapBus is null || ioRequest == 0 || !_bootstrapBus.IsMappedMemoryRange(ioRequest, 0x30))
             {
@@ -939,6 +962,7 @@ namespace CopperMod.Amiga.Lightweight
             {
                 CompleteIo(bus, ioRequest, IoErrBadAddress, 0);
             }
+            if (_changeInterruptRequests.Contains(ioRequest)) return;
             if ((flags & 1) == 0)
             {
                 // The gateway's normal RTS enters this guest thunk. Exec ReplyMsg
@@ -955,6 +979,7 @@ namespace CopperMod.Amiga.Lightweight
             var ioRequest = state.A[1];
             if (bus != null && ioRequest != 0 && bus.IsMappedMemoryRange(ioRequest, 0x20))
             {
+                _changeInterruptRequests.Remove(ioRequest);
                 bus.WriteByte(ioRequest + IoErrorOffset, 0, 0);
             }
 
@@ -1079,6 +1104,35 @@ namespace CopperMod.Amiga.Lightweight
             bus.WriteWord(dataAddress + 10, 0);
             bus.WriteLong(dataAddress + 12, _diagCopyBase != 0 ? _diagCopyBase + 0x1C0 : ConfiguredBase + DiagAreaOffset + 0x1C0);
             CompleteIo(bus, ioRequestAddress, 0, 16);
+        }
+
+        private static void ExecuteGeometry(LightweightHdfBus bus, uint ioRequestAddress, AmigaHardfile hardfile)
+        {
+            const uint geometryBytes = 32;
+            var data = bus.ReadLong(ioRequestAddress + IoDataOffset);
+            var length = bus.ReadLong(ioRequestAddress + IoLengthOffset);
+            if (length < geometryBytes || data == 0 || (data & 1) != 0 ||
+                !bus.IsMappedMemoryRange(data, (int)geometryBytes))
+            {
+                CompleteIo(bus, ioRequestAddress, IoErrBadAddress, 0);
+                return;
+            }
+
+            var heads = Math.Max(1u, hardfile.Partition?.Surfaces ?? 1u);
+            var trackSectors = Math.Max(1u, hardfile.Partition?.BlocksPerTrack ?? 32u);
+            var cylinderSectors = checked(heads * trackSectors);
+            var totalSectors = (uint)Math.Min(uint.MaxValue, hardfile.SectorCount);
+            bus.WriteLong(data + 0, AmigaHardfile.SectorSize);
+            bus.WriteLong(data + 4, totalSectors);
+            bus.WriteLong(data + 8, totalSectors / cylinderSectors);
+            bus.WriteLong(data + 12, cylinderSectors);
+            bus.WriteLong(data + 16, heads);
+            bus.WriteLong(data + 20, trackSectors);
+            bus.WriteLong(data + 24, hardfile.Partition?.BufferMemoryType ?? 1u);
+            bus.WriteByte(data + 28, 0, 0); // direct-access device
+            bus.WriteByte(data + 29, 0, 0); // fixed medium
+            bus.WriteWord(data + 30, 0);
+            CompleteIo(bus, ioRequestAddress, 0, geometryBytes);
         }
 
         private static void ExecuteScsiCommand(LightweightHdfBus bus, uint ioRequestAddress, AmigaHardfile hardfile)

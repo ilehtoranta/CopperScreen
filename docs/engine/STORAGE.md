@@ -17,13 +17,17 @@ performance evidence below remains attached to its original candidate.
 
 | Medium | Attachment | Guest writes / persistence |
 | --- | --- | --- |
-| Standard 880 KiB ADF | DF0–DF3; direct or selected ZIP entry | Starts protected. Enabling writes changes owned encoded tracks. Save ADF explicitly exports valid sectors using atomic destination replacement. |
+| Standard 880 KiB DD / 1760 KiB HD ADF | DF0–DF3; direct or selected ZIP entry | Starts protected. Enabling writes changes owned encoded tracks. Save ADF explicitly exports valid sectors using atomic destination replacement. |
 | IPF | DF0–DF3; direct or selected ZIP entry | Permanently read-only. Enabling writes or exporting as ordinary ADF fails explicitly. |
-| ADZ / DMS | DF0–DF3; direct or selected ZIP entry | Read-only complete DD sectors; ADZ may also carry extended raw tracks. |
+| ADZ / DMS | DF0–DF3; direct or selected ZIP entry | Read-only complete DD sectors (DMS) or DD/HD sectors (ADZ); ADZ may also carry extended raw tracks. |
 | Modern UAE-1ADF | DF0–DF3; direct or selected ZIP entry | Read-only; exact stored raw track bytes/bit lengths, no incomplete sector reconstruction. |
 | SCP | DF0–DF3; direct or selected ZIP entry | Read-only first-revolution DD decoding; no live flux or multirevolution playback. |
 | HDF | Construction-time CopperHDF unit configuration | Writable mounts update the backing file; Update/Flush and disposal flush it. Read-only mounts reject writes. No implicit ADF-style save step. |
 | Host directory | Construction-time shared-folder configuration; separate virtual Autoconfig board | Read-only by default. Writable mounts update host files directly; close/flush/reset/disposal flush streams. Optional native folder boot. See [shared folders](HOST_DIRECTORIES.md). |
+
+HD sector media requires a configured HD mechanism and uses a nominal 150 RPM
+spindle with the existing Paula data rate; DD media uses 300 RPM. See
+[HD geometry, drive IDs and qualification](HD_FLOPPY_2026-10-18.md).
 
 `MountAdf` remains compatible. `MountIpf(drive, bytes)` and
 `MountIpf(drive, LightweightIpfImage.Prepare(bytes))` expose indexed attachment.
@@ -33,7 +37,10 @@ supported format after validation. `--disk1` through `--disk3` are generic runne
 The host/runner accept `archive.zip#/entry.ipf`; an unselected runner ZIP must
 contain exactly one supported image. Desktop ZIP selection supports disk sets.
 Runner `--disk`/`--ipf`/`--adf` select DF0; `--ipf1` through `--ipf3` and existing
-ADF aliases select external drives with `--drives 4`. Input scripts accept
+ADF aliases select external drives with `--drives 4`. Repeat `--drive-type 0 HD`
+for each HD mechanism (units 0–3; DD by default). The desktop selects these in
+Settings > Floppy Drives; profiles and the remembered last machine retain all
+four types. Changing drive types requires an Amiga restart. Input scripts accept
 `diskPath` as well as legacy `adfPath`; `drive` defaults to zero.
 
 CopperDisk decodes preserved tracks before attachment. Lightweight explicitly
@@ -44,7 +51,7 @@ DD cylinders 0–83, sides 0–1. Invalid/duplicate geometry and cell intervals 
 than one CCK are rejected before replacing the old medium. Unknown density
 profiles fail explicitly. Library metadata alone is not a compatibility claim.
 
-Each drive retains an independent nominal 300 RPM spindle. Integer per-track
+Each drive retains an independent nominal 300 RPM DD or 150 RPM HD spindle. Integer per-track
 quotient/remainder timing handles uniform tracks; variable-density tracks use
 mount-time cumulative deadlines. Seek, side and selection changes preserve
 elapsed revolution phase. Index timing is independent of ADKCON FAST/slow.
@@ -66,7 +73,7 @@ patent-derived model, **not a silicon-certified PLL**. Fast-mode transitions,
 aperture and simultaneous pulses still need hardware traces. The existing reduced
 ADF slow-mode receiver and its LWA-DISK-010 uncertainty remain separately recorded.
 
-ADF export requires all eleven checksum-valid sectors on every changed track.
+ADF export requires all eleven DD or twenty-two HD checksum-valid sectors on every changed track.
 Unrepresentable custom/damaged tracks remain in memory; export fails. Desktop
 save writes a temporary file beside the destination and replaces only on success;
 failed save retains dirty state and the previous destination. Reset retains media
@@ -96,7 +103,10 @@ Guest registration and executable relocation stay in Lightweight.
 
 Desktop profiles and **Settings > Storage > Hard disks** expose these
 settings; applying hardware changes requires restart. Existing desktop `--hdf`
-and `--hdf-readonly` options work. The runner supports repeated `--hdf`/`--hdf-ro`
+and `--hdf-readonly` options now mount read-only; `--hdf-writable` explicitly
+allows direct writes. New imports reset write permission; explicit saved profile
+choices remain intact. See [media protection and recovery](../MEDIA_PERSISTENCE.md).
+The runner supports repeated `--hdf`/`--hdf-ro`
 for sequential Auto units. Custom units/modes/metadata are available through the
 engine configuration and desktop profiles/editor, not new runner switches.
 

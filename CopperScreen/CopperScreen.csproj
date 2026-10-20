@@ -15,9 +15,18 @@
     <Authors>CopperMod contributors</Authors>
     <Description>Native Amiga 500 PAL emulator front-end backed by CopperMod.Amiga.Lightweight.</Description>
     <ApplicationIcon>Assets\CopperScreen.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <ServerGarbageCollection>false</ServerGarbageCollection>
     <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <!-- The PCM producer must meet deadlines from its first guest fields.
+         Compile app methods optimized immediately instead of running slow Tier 0
+         until promotion; framework ReadyToRun code can still use tiering. -->
+    <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
     <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.4-qualified-dev.1</Copper68kBoundaryVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CopperScreenInstalledTests)' == 'true'">
+    <DefineConstants>$(DefineConstants);COPPERSCREEN_INSTALLED_TESTS</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -46,27 +55,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Profiles\*.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Presets\*.json" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="Firmware\MinimalDiskBoot.s" />
+    <EmbeddedResource Include="Firmware\CopperStart.json" />
+    <EmbeddedResource Include="Firmware\CopperOS.json" />
+    <Compile Remove="Diagnostics\CopperOsNativeStorageProof.cs" Condition="'$(CopperScreenInstalledTests)' != 'true'" />
     <AvaloniaResource Include="Assets\CopperScreen.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="artifacts\**\*.cs" />
-    <!-- Legacy/CopperStart restoration is separate from the native host build. -->
-    <Compile Remove="CopperScreenEmulator.cs;CopperBenchViewModel.cs;CopperScreenPresentationFrame.cs" />
   </ItemGroup>
-
-  <Target Name="SetCopperStartAssemblyMetadata" BeforeTargets="GetAssemblyAttributes">
-    <Exec Command="git -C &quot;$(MSBuildProjectDirectory)&quot; rev-parse --short HEAD" ConsoleToMSBuild="true" IgnoreExitCode="true" IgnoreStandardErrorWarningFormat="true" StandardOutputImportance="Low">
-      <Output TaskParameter="ConsoleOutput" PropertyName="CopperStartGitSha" />
-    </Exec>
-    <PropertyGroup>
-      <CopperStartGitSha Condition="'$(CopperStartGitSha)' == ''">unknown</CopperStartGitSha>
-    </PropertyGroup>
-    <ItemGroup>
-      <AssemblyMetadata Include="CopperStartSha" Value="$(CopperStartGitSha)" />
-    </ItemGroup>
-  </Target>
 
 </Project>

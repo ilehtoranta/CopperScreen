@@ -1,0 +1,1666 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "clientTimezone": "Europe/Helsinki",
+  "recordedUtc": "2026-10-17T22:57:51.4875295Z",
+  "status": "COMPLETED",
+  "scope": "Two sequential full 60-minute installed sessions on the provisional current PC, native saves/reopen, audio callback and memory observations",
+  "protocol": "copperscreen-installed-soak-v1",
+  "durationAcceptance": true,
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN by owner instruction",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "performanceBaselineAcceptance": false,
+  "storeCertified": false,
+  "wackRun": false,
+  "package": {
+    "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Package30/CopperScreen-1.1.30.0-win-x64.msix",
+    "bytes": 49550731,
+    "sha256": "48ebeefebca8e44c9b9c9bf6fa487ae553ef09d9635d56192159275327f055c1"
+  },
+  "identity": {
+    "Name": "CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998",
+    "Publisher": "CN=CopperScreen Installed Tests",
+    "Version": {
+      "Major": 1,
+      "Minor": 1,
+      "Build": 30,
+      "Revision": 0,
+      "MajorRevision": 0,
+      "MinorRevision": 0
+    },
+    "Architecture": "x64",
+    "Signed": true,
+    "Diagnostic": true
+  },
+  "packageVersion": "1.1.30.0",
+  "host": {
+    "Dotnet": "10.0.401",
+    "OS": {
+      "Caption": "Microsoft Windows 11 Home",
+      "Version": "10.0.26200",
+      "BuildNumber": "26200",
+      "OSArchitecture": "64-bittinen",
+      "TotalVisibleMemorySize": 33468556
+    },
+    "Utc": "2026-10-17T17:08:10.7302644Z",
+    "Scope": "Provisional current-PC installed session observations; release budgets OPEN",
+    "CPU": {
+      "Name": "AMD Ryzen 5 5600X 6-Core Processor             ",
+      "NumberOfCores": 6,
+      "NumberOfLogicalProcessors": 12
+    },
+    "PowerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Tasapainotettu)"
+  },
+  "pipeline": {
+    "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/soak-record.json",
+    "bytes": 96878,
+    "sha256": "20d97a8533aa2f77355e7823844c1ab4191137d4e8a75c9edeb02905978decc9"
+  },
+  "cases": [
+    {
+      "elapsedSeconds": 3600.0066923,
+      "trace": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak-samples.jsonl",
+        "bytes": 2828606,
+        "sha256": "d8679c3c09fe0e955bf2fae0a4a5f59e692c88453e73888f9da5750dc94fdc5d"
+      },
+      "samples": 716,
+      "name": "copperstart",
+      "reopenedProfileFiles": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperstart\\last-machine.json": "29f30eefe2091a572eb395a9be5a9347b7605dd9c38e7d757069398e341bd7e6",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperstart\\recent-session.json": "b1a2175839ab6e6e41e4a7da38e38936858efe741365263cad611b4664f0dda3",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperstart\\Profiles\\copperstart-soak.json": "29f30eefe2091a572eb395a9be5a9347b7605dd9c38e7d757069398e341bd7e6"
+      },
+      "originalProfileFiles": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperstart\\last-machine.json": "29f30eefe2091a572eb395a9be5a9347b7605dd9c38e7d757069398e341bd7e6",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperstart\\recent-session.json": "b1a2175839ab6e6e41e4a7da38e38936858efe741365263cad611b4664f0dda3",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperstart\\Profiles\\copperstart-soak.json": "29f30eefe2091a572eb395a9be5a9347b7605dd9c38e7d757069398e341bd7e6"
+      },
+      "stateAfter": {
+        "ProfileName": "My CopperStart preview [Lightweight]",
+        "DiskName": "Lotus2.adf",
+        "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998\\Inputs\\Lotus2.adf",
+        "Cpu": {
+          "ProgramCounter": 3116,
+          "LastInstructionProgramCounter": 3122,
+          "StatusRegister": 8204
+        },
+        "Drives": [
+          {
+            "Index": 0,
+            "Connected": true,
+            "HasDisk": true,
+            "DiskName": "Lotus2.adf",
+            "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998\\Inputs\\Lotus2.adf",
+            "Cylinder": 62,
+            "Head": 1,
+            "MotorOn": true,
+            "Selected": true,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 1,
+            "CanExportAdf": true
+          },
+          {
+            "Index": 1,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 2,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 3,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          }
+        ],
+        "DebugSnapshot": null,
+        "StatusText": "Host clipboard integration is not available in Lightweight.",
+        "IsPaused": false,
+        "IsWorkbenchHandoffPending": false,
+        "IsDiskSwapPending": false,
+        "IsPrimaryFirePressed": false,
+        "AudioFilterEnabled": false,
+        "CopperBenchRequestPending": false,
+        "FramesRendered": 1,
+        "QueuedAudioBuffers": 4,
+        "FrameNumber": 191798,
+        "DroppedFrames": 42,
+        "PresentationSkippedFrames": 42,
+        "PresentationBufferDroppedFrames": 0,
+        "AudioSubmitFailures": 0,
+        "PresentationQueueDepth": 0,
+        "PresentationQueueCapacity": 1,
+        "PresentationQueueFullThrottleCount": 135,
+        "LastPublishFrameMilliseconds": 0.0062,
+        "LastPublishCopyMilliseconds": 0,
+        "LastPresentationBufferReserveMilliseconds": 0.0011,
+        "LastEmulationFrameMilliseconds": 7.0586,
+        "LastCpuFrameMilliseconds": 0,
+        "LastHardwareFrameMilliseconds": 0,
+        "LastDisplayFrameMilliseconds": 0,
+        "LastAudioFrameMilliseconds": 0.1195,
+        "IsInterlaced": false,
+        "InterlaceField": 0,
+        "FaultMessage": null,
+        "FramebufferWidth": 908,
+        "FramebufferHeight": 626,
+        "PresentationGeometry": {
+          "CaptureLowResWidth": 356,
+          "CaptureLowResHeight": 285,
+          "StandardLowResWidth": 320,
+          "StandardLowResHeight": 256,
+          "HorizontalSamplesPerLowResPixel": 2,
+          "VerticalSamplesPerLowResPixel": 2,
+          "IsPal": true,
+          "IsSuperHighRes": false,
+          "FullViewport": {
+            "X": 196,
+            "Y": 52,
+            "Width": 712,
+            "Height": 570,
+            "Position": {
+              "X": 196,
+              "Y": 52
+            },
+            "Size": {
+              "AspectRatio": 1.249122807017544,
+              "Width": 712,
+              "Height": 570
+            },
+            "Right": 908,
+            "Bottom": 622,
+            "TopLeft": {
+              "X": 196,
+              "Y": 52
+            },
+            "TopRight": {
+              "X": 908,
+              "Y": 52
+            },
+            "BottomLeft": {
+              "X": 196,
+              "Y": 622
+            },
+            "BottomRight": {
+              "X": 908,
+              "Y": 622
+            },
+            "Center": {
+              "X": 552,
+              "Y": 337
+            }
+          },
+          "StandardViewport": {
+            "X": 258,
+            "Y": 88,
+            "Width": 640,
+            "Height": 512,
+            "Position": {
+              "X": 258,
+              "Y": 88
+            },
+            "Size": {
+              "AspectRatio": 1.25,
+              "Width": 640,
+              "Height": 512
+            },
+            "Right": 898,
+            "Bottom": 600,
+            "TopLeft": {
+              "X": 258,
+              "Y": 88
+            },
+            "TopRight": {
+              "X": 898,
+              "Y": 88
+            },
+            "BottomLeft": {
+              "X": 258,
+              "Y": 600
+            },
+            "BottomRight": {
+              "X": 898,
+              "Y": 600
+            },
+            "Center": {
+              "X": 578,
+              "Y": 344
+            }
+          },
+          "HorizontalPixelAspectOverride": null
+        }
+      },
+      "hourReport": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak.json",
+        "bytes": 22256,
+        "sha256": "bb2aeeb044e039ee1ccb9e3b6d09274230ac22a858f14b54d3d4cb2ccdd26ccd"
+      },
+      "restartReport": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen.json",
+        "bytes": 20953,
+        "sha256": "04ee5430330b713d480b1a2ab49221b6a3b8619273ee5e22fbc37b0596322b20"
+      },
+      "observations": {
+        "logBytesGrowth": 1994912,
+        "gc2": 0,
+        "threadsFirst": 77,
+        "handlesLast": 897,
+        "logBytesLast": 2171318,
+        "gc0": 45,
+        "committedManagedBytesLast": 52092928,
+        "logBytesFirst": 176406,
+        "presentationBufferDroppedFrames": 0,
+        "clockChanges": [
+          {
+            "utc": "2026-10-17T21:05:08.2343212Z",
+            "monotonicStepSeconds": 5.025517499999978,
+            "previousUtc": "2026-10-17T18:05:03.1425076Z",
+            "wallStepSeconds": 10805.0918136,
+            "framesAdvanced": 248,
+            "clockAdjustmentSeconds": 10800.0662961
+          }
+        ],
+        "committedManagedBytesFirst": 47407104,
+        "presentationSkippedFrames": 15,
+        "handlesFirst": 930,
+        "observedFramesPerMonotonicSecond": 49.386612502821976,
+        "cpuSeconds": 1399.421875,
+        "gc1": 6,
+        "frameDelta": 177564,
+        "audioSubmitFailures": 0,
+        "maximumSampleGapSeconds": 5.2914078000001155,
+        "threadsLast": 73
+      },
+      "stateBefore": {
+        "ProfileName": "My CopperStart preview [Lightweight]",
+        "DiskName": "Lotus2.adf",
+        "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998\\Inputs\\Lotus2.adf",
+        "Cpu": {
+          "ProgramCounter": 12669228,
+          "LastInstructionProgramCounter": 12669224,
+          "StatusRegister": 8456
+        },
+        "Drives": [
+          {
+            "Index": 0,
+            "Connected": true,
+            "HasDisk": true,
+            "DiskName": "Lotus2.adf",
+            "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998\\Inputs\\Lotus2.adf",
+            "Cylinder": 62,
+            "Head": 1,
+            "MotorOn": true,
+            "Selected": true,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 1,
+            "CanExportAdf": true
+          },
+          {
+            "Index": 1,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 2,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 3,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          }
+        ],
+        "DebugSnapshot": null,
+        "StatusText": "Host clipboard integration is not available in Lightweight.",
+        "IsPaused": false,
+        "IsWorkbenchHandoffPending": false,
+        "IsDiskSwapPending": false,
+        "IsPrimaryFirePressed": false,
+        "AudioFilterEnabled": false,
+        "CopperBenchRequestPending": false,
+        "FramesRendered": 1,
+        "QueuedAudioBuffers": 5,
+        "FrameNumber": 14003,
+        "DroppedFrames": 27,
+        "PresentationSkippedFrames": 27,
+        "PresentationBufferDroppedFrames": 0,
+        "AudioSubmitFailures": 0,
+        "PresentationQueueDepth": 2,
+        "PresentationQueueCapacity": 1,
+        "PresentationQueueFullThrottleCount": 70,
+        "LastPublishFrameMilliseconds": 0.0046,
+        "LastPublishCopyMilliseconds": 0,
+        "LastPresentationBufferReserveMilliseconds": 0.0013,
+        "LastEmulationFrameMilliseconds": 8.3395,
+        "LastCpuFrameMilliseconds": 0,
+        "LastHardwareFrameMilliseconds": 0,
+        "LastDisplayFrameMilliseconds": 0,
+        "LastAudioFrameMilliseconds": 0.1229,
+        "IsInterlaced": false,
+        "InterlaceField": 0,
+        "FaultMessage": null,
+        "FramebufferWidth": 908,
+        "FramebufferHeight": 626,
+        "PresentationGeometry": {
+          "CaptureLowResWidth": 356,
+          "CaptureLowResHeight": 285,
+          "StandardLowResWidth": 320,
+          "StandardLowResHeight": 256,
+          "HorizontalSamplesPerLowResPixel": 2,
+          "VerticalSamplesPerLowResPixel": 2,
+          "IsPal": true,
+          "IsSuperHighRes": false,
+          "FullViewport": {
+            "X": 196,
+            "Y": 52,
+            "Width": 712,
+            "Height": 570,
+            "Position": {
+              "X": 196,
+              "Y": 52
+            },
+            "Size": {
+              "AspectRatio": 1.249122807017544,
+              "Width": 712,
+              "Height": 570
+            },
+            "Right": 908,
+            "Bottom": 622,
+            "TopLeft": {
+              "X": 196,
+              "Y": 52
+            },
+            "TopRight": {
+              "X": 908,
+              "Y": 52
+            },
+            "BottomLeft": {
+              "X": 196,
+              "Y": 622
+            },
+            "BottomRight": {
+              "X": 908,
+              "Y": 622
+            },
+            "Center": {
+              "X": 552,
+              "Y": 337
+            }
+          },
+          "StandardViewport": {
+            "X": 258,
+            "Y": 88,
+            "Width": 640,
+            "Height": 512,
+            "Position": {
+              "X": 258,
+              "Y": 88
+            },
+            "Size": {
+              "AspectRatio": 1.25,
+              "Width": 640,
+              "Height": 512
+            },
+            "Right": 898,
+            "Bottom": 600,
+            "TopLeft": {
+              "X": 258,
+              "Y": 88
+            },
+            "TopRight": {
+              "X": 898,
+              "Y": 88
+            },
+            "BottomLeft": {
+              "X": 258,
+              "Y": 600
+            },
+            "BottomRight": {
+              "X": 898,
+              "Y": 600
+            },
+            "Center": {
+              "X": 578,
+              "Y": 344
+            }
+          },
+          "HorizontalPixelAspectOverride": null
+        }
+      },
+      "nativeSaves": "Protected original/ADF export and profile/settings persistence. Title-specific native save not qualified.",
+      "audio": {
+        "starvedCallbacks": 4680,
+        "callbacks": 168682,
+        "guestFields": 177844,
+        "qualityDisposition": "Software queue starvation observed; no audio quality acceptance or physical audibility claim.",
+        "backend": "ma_backend_wasapi",
+        "requestedSampleValues": 345460736,
+        "callbackErrors": 0,
+        "consumedSampleValues": 342006866,
+        "scope": "Real WASAPI output callback; software queue starvation only. Speaker perception and OS/driver glitch telemetry unavailable.",
+        "initialized": true,
+        "guestSampleValues": 342004888,
+        "missingRequestedSampleValuesPercent": 0.9997865575090999632444481332,
+        "guestAudibleFields": 172532,
+        "missingSampleValues": 3453870,
+        "nonzeroOutputCallbacks": 162977
+      },
+      "originalAndReopenedImageSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "memory": {
+        "Samples": 716,
+        "FirstSeconds": 0.002314,
+        "LastSeconds": 3595.3896265,
+        "FrameDelta": 177564,
+        "PrivateFirst": 182079488,
+        "PrivateLast": 184688640,
+        "PrivateMin": 179990528.0,
+        "PrivateMax": 185344000.0,
+        "WorkingSetFirst": 219799552,
+        "WorkingSetLast": 174592000,
+        "WorkingSetMax": 225275904.0,
+        "ManagedFirst": 28301336,
+        "ManagedLast": 34069072,
+        "ManagedMax": 40330440.0,
+        "Budgets": "OPEN",
+        "AcceptanceDuration": true
+      }
+    },
+    {
+      "elapsedSeconds": 3600.0536633,
+      "trace": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-samples.jsonl",
+        "bytes": 2940824,
+        "sha256": "325b2769857e7b3b35bc2f2b033bdeb4344fe353e865374582043968ae9031a4"
+      },
+      "samples": 711,
+      "name": "copperos",
+      "reopenedProfileFiles": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\last-machine.json": "1de0eca45dadc02885201df6714c6830d263ce0490a39bd6f779c06187fe6a18",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\recent-session.json": "e6c244110b22a35f609522c41deb23cd4cb0cc417dfa3c949d3135515b8a13da",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\Profiles\\copperos-soak.json": "1de0eca45dadc02885201df6714c6830d263ce0490a39bd6f779c06187fe6a18"
+      },
+      "originalProfileFiles": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\last-machine.json": "1de0eca45dadc02885201df6714c6830d263ce0490a39bd6f779c06187fe6a18",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\recent-session.json": "e6c244110b22a35f609522c41deb23cd4cb0cc417dfa3c949d3135515b8a13da",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\Profiles\\copperos-soak.json": "1de0eca45dadc02885201df6714c6830d263ce0490a39bd6f779c06187fe6a18"
+      },
+      "stateAfter": {
+        "ProfileName": "CopperOS · soak [Lightweight]",
+        "DiskName": "System.adf",
+        "DiskPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\CopperOS\\Workspaces\\soak\\System.adf",
+        "Cpu": {
+          "ProgramCounter": 16486854,
+          "LastInstructionProgramCounter": 16483524,
+          "StatusRegister": 0
+        },
+        "Drives": [
+          {
+            "Index": 0,
+            "Connected": true,
+            "HasDisk": true,
+            "DiskName": "System.adf",
+            "DiskPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\CopperOS\\Workspaces\\soak\\System.adf",
+            "Cylinder": 42,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": false,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 1,
+            "CanExportAdf": true
+          },
+          {
+            "Index": 1,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 2,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 3,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          }
+        ],
+        "DebugSnapshot": null,
+        "StatusText": "Host clipboard integration is not available in Lightweight.",
+        "IsPaused": false,
+        "IsWorkbenchHandoffPending": false,
+        "IsDiskSwapPending": false,
+        "IsPrimaryFirePressed": false,
+        "AudioFilterEnabled": true,
+        "CopperBenchRequestPending": false,
+        "FramesRendered": 1,
+        "QueuedAudioBuffers": 3,
+        "FrameNumber": 178335,
+        "DroppedFrames": 50,
+        "PresentationSkippedFrames": 50,
+        "PresentationBufferDroppedFrames": 0,
+        "AudioSubmitFailures": 0,
+        "PresentationQueueDepth": 0,
+        "PresentationQueueCapacity": 1,
+        "PresentationQueueFullThrottleCount": 330,
+        "LastPublishFrameMilliseconds": 0.0043,
+        "LastPublishCopyMilliseconds": 0,
+        "LastPresentationBufferReserveMilliseconds": 0.0001,
+        "LastEmulationFrameMilliseconds": 8.7951,
+        "LastCpuFrameMilliseconds": 0,
+        "LastHardwareFrameMilliseconds": 0,
+        "LastDisplayFrameMilliseconds": 0,
+        "LastAudioFrameMilliseconds": 0.1355,
+        "IsInterlaced": false,
+        "InterlaceField": 0,
+        "FaultMessage": null,
+        "FramebufferWidth": 908,
+        "FramebufferHeight": 626,
+        "PresentationGeometry": {
+          "CaptureLowResWidth": 356,
+          "CaptureLowResHeight": 285,
+          "StandardLowResWidth": 320,
+          "StandardLowResHeight": 256,
+          "HorizontalSamplesPerLowResPixel": 2,
+          "VerticalSamplesPerLowResPixel": 2,
+          "IsPal": true,
+          "IsSuperHighRes": false,
+          "FullViewport": {
+            "X": 196,
+            "Y": 52,
+            "Width": 712,
+            "Height": 570,
+            "Position": {
+              "X": 196,
+              "Y": 52
+            },
+            "Size": {
+              "AspectRatio": 1.249122807017544,
+              "Width": 712,
+              "Height": 570
+            },
+            "Right": 908,
+            "Bottom": 622,
+            "TopLeft": {
+              "X": 196,
+              "Y": 52
+            },
+            "TopRight": {
+              "X": 908,
+              "Y": 52
+            },
+            "BottomLeft": {
+              "X": 196,
+              "Y": 622
+            },
+            "BottomRight": {
+              "X": 908,
+              "Y": 622
+            },
+            "Center": {
+              "X": 552,
+              "Y": 337
+            }
+          },
+          "StandardViewport": {
+            "X": 258,
+            "Y": 88,
+            "Width": 640,
+            "Height": 512,
+            "Position": {
+              "X": 258,
+              "Y": 88
+            },
+            "Size": {
+              "AspectRatio": 1.25,
+              "Width": 640,
+              "Height": 512
+            },
+            "Right": 898,
+            "Bottom": 600,
+            "TopLeft": {
+              "X": 258,
+              "Y": 88
+            },
+            "TopRight": {
+              "X": 898,
+              "Y": 88
+            },
+            "BottomLeft": {
+              "X": 258,
+              "Y": 600
+            },
+            "BottomRight": {
+              "X": 898,
+              "Y": 600
+            },
+            "Center": {
+              "X": 578,
+              "Y": 344
+            }
+          },
+          "HorizontalPixelAspectOverride": null
+        }
+      },
+      "hourReport": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak.json",
+        "bytes": 21349,
+        "sha256": "f9073d9df926aad890777183bcad15f1eb809f584186d8ebb3c5e216c8e8a0b9"
+      },
+      "restartReport": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen.json",
+        "bytes": 21586,
+        "sha256": "6837a2b8e59b3b9744b88bce3db52aba2298b807c738890dc7a7a3733a4cdb4e"
+      },
+      "observations": {
+        "logBytesGrowth": 1933300,
+        "gc2": 1,
+        "threadsFirst": 77,
+        "handlesLast": 886,
+        "logBytesLast": 2172492,
+        "gc0": 92,
+        "committedManagedBytesLast": 49262592,
+        "logBytesFirst": 239192,
+        "presentationBufferDroppedFrames": 0,
+        "clockChanges": [],
+        "committedManagedBytesFirst": 48574464,
+        "presentationSkippedFrames": 38,
+        "handlesFirst": 921,
+        "observedFramesPerMonotonicSecond": 43.4321494651788,
+        "cpuSeconds": 1660.25,
+        "gc1": 18,
+        "frameDelta": 156150,
+        "audioSubmitFailures": 0,
+        "maximumSampleGapSeconds": 5.943443600000137,
+        "threadsLast": 73
+      },
+      "stateBefore": {
+        "ProfileName": "CopperOS · soak [Lightweight]",
+        "DiskName": "System.adf",
+        "DiskPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\CopperOS\\Workspaces\\soak\\System.adf",
+        "Cpu": {
+          "ProgramCounter": 16493930,
+          "LastInstructionProgramCounter": 16493964,
+          "StatusRegister": 4
+        },
+        "Drives": [
+          {
+            "Index": 0,
+            "Connected": true,
+            "HasDisk": true,
+            "DiskName": "System.adf",
+            "DiskPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.d8aca67d4a834a6fa2636877e6692998_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\d8aca67d4a834a6fa2636877e6692998\\copperos\\CopperOS\\Workspaces\\soak\\System.adf",
+            "Cylinder": 42,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": false,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 1,
+            "CanExportAdf": true
+          },
+          {
+            "Index": 1,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 2,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          },
+          {
+            "Index": 3,
+            "Connected": false,
+            "HasDisk": false,
+            "DiskName": "Not connected",
+            "DiskPath": null,
+            "Cylinder": 0,
+            "Head": 0,
+            "MotorOn": false,
+            "Selected": false,
+            "WriteProtected": true,
+            "ActiveDma": false,
+            "IsSwapPending": false,
+            "HasUnsavedChanges": false,
+            "Format": 0,
+            "CanExportAdf": false
+          }
+        ],
+        "DebugSnapshot": null,
+        "StatusText": "Host clipboard integration is not available in Lightweight.",
+        "IsPaused": false,
+        "IsWorkbenchHandoffPending": false,
+        "IsDiskSwapPending": false,
+        "IsPrimaryFirePressed": false,
+        "AudioFilterEnabled": true,
+        "CopperBenchRequestPending": false,
+        "FramesRendered": 1,
+        "QueuedAudioBuffers": 3,
+        "FrameNumber": 21973,
+        "DroppedFrames": 12,
+        "PresentationSkippedFrames": 12,
+        "PresentationBufferDroppedFrames": 0,
+        "AudioSubmitFailures": 0,
+        "PresentationQueueDepth": 2,
+        "PresentationQueueCapacity": 1,
+        "PresentationQueueFullThrottleCount": 30,
+        "LastPublishFrameMilliseconds": 0.0054,
+        "LastPublishCopyMilliseconds": 0,
+        "LastPresentationBufferReserveMilliseconds": 0.0022,
+        "LastEmulationFrameMilliseconds": 7.0761,
+        "LastCpuFrameMilliseconds": 0,
+        "LastHardwareFrameMilliseconds": 0,
+        "LastDisplayFrameMilliseconds": 0,
+        "LastAudioFrameMilliseconds": 0.122,
+        "IsInterlaced": false,
+        "InterlaceField": 0,
+        "FaultMessage": null,
+        "FramebufferWidth": 908,
+        "FramebufferHeight": 626,
+        "PresentationGeometry": {
+          "CaptureLowResWidth": 356,
+          "CaptureLowResHeight": 285,
+          "StandardLowResWidth": 320,
+          "StandardLowResHeight": 256,
+          "HorizontalSamplesPerLowResPixel": 2,
+          "VerticalSamplesPerLowResPixel": 2,
+          "IsPal": true,
+          "IsSuperHighRes": false,
+          "FullViewport": {
+            "X": 196,
+            "Y": 52,
+            "Width": 712,
+            "Height": 570,
+            "Position": {
+              "X": 196,
+              "Y": 52
+            },
+            "Size": {
+              "AspectRatio": 1.249122807017544,
+              "Width": 712,
+              "Height": 570
+            },
+            "Right": 908,
+            "Bottom": 622,
+            "TopLeft": {
+              "X": 196,
+              "Y": 52
+            },
+            "TopRight": {
+              "X": 908,
+              "Y": 52
+            },
+            "BottomLeft": {
+              "X": 196,
+              "Y": 622
+            },
+            "BottomRight": {
+              "X": 908,
+              "Y": 622
+            },
+            "Center": {
+              "X": 552,
+              "Y": 337
+            }
+          },
+          "StandardViewport": {
+            "X": 258,
+            "Y": 88,
+            "Width": 640,
+            "Height": 512,
+            "Position": {
+              "X": 258,
+              "Y": 88
+            },
+            "Size": {
+              "AspectRatio": 1.25,
+              "Width": 640,
+              "Height": 512
+            },
+            "Right": 898,
+            "Bottom": 600,
+            "TopLeft": {
+              "X": 258,
+              "Y": 88
+            },
+            "TopRight": {
+              "X": 898,
+              "Y": 88
+            },
+            "BottomLeft": {
+              "X": 258,
+              "Y": 600
+            },
+            "BottomRight": {
+              "X": 898,
+              "Y": 600
+            },
+            "Center": {
+              "X": 578,
+              "Y": 344
+            }
+          },
+          "HorizontalPixelAspectOverride": null
+        }
+      },
+      "nativeSaves": "Guest create/mutate/readback, hourly persistence, versioned export and new-process native reopen.",
+      "audio": {
+        "starvedCallbacks": 37654,
+        "callbacks": 168654,
+        "guestFields": 156623,
+        "qualityDisposition": "Software queue starvation observed; no audio quality acceptance or physical audibility claim.",
+        "backend": "ma_backend_wasapi",
+        "requestedSampleValues": 345403392,
+        "callbackErrors": 0,
+        "consumedSampleValues": 301198738,
+        "scope": "Real WASAPI output callback; software queue starvation only. Speaker perception and OS/driver glitch telemetry unavailable.",
+        "initialized": true,
+        "guestSampleValues": 301195608,
+        "missingRequestedSampleValuesPercent": 12.797979123493958044280005218,
+        "guestAudibleFields": 0,
+        "missingSampleValues": 44204654,
+        "nonzeroOutputCallbacks": 0
+      },
+      "originalAndReopenedImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "memory": {
+        "Samples": 711,
+        "FirstSeconds": 0.0019765,
+        "LastSeconds": 3595.2649769,
+        "FrameDelta": 156150,
+        "PrivateFirst": 197128192,
+        "PrivateLast": 193626112,
+        "PrivateMin": 186482688.0,
+        "PrivateMax": 199254016.0,
+        "WorkingSetFirst": 233017344,
+        "WorkingSetLast": 194740224,
+        "WorkingSetMax": 236621824.0,
+        "ManagedFirst": 31339576,
+        "ManagedLast": 32596280,
+        "ManagedMax": 41311960.0,
+        "Budgets": "OPEN",
+        "AcceptanceDuration": true
+      }
+    }
+  ],
+  "exports": [
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen.copperos",
+      "bytes": 206246,
+      "sha256": "db9619a75deb75ddbaf6736e03991c09806daf3b62da5043e9396bca702913c3"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak.copperos",
+      "bytes": 206246,
+      "sha256": "c9c15cd5e32b4070b851820fb13aead1755efcc9838304752625064f90651734"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen.adf",
+      "bytes": 901120,
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak.adf",
+      "bytes": 901120,
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    }
+  ],
+  "backupChecks": [
+    {
+      "validated": true,
+      "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "metadata": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      },
+      "export": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen.copperos",
+        "bytes": 206246,
+        "sha256": "db9619a75deb75ddbaf6736e03991c09806daf3b62da5043e9396bca702913c3"
+      }
+    },
+    {
+      "validated": true,
+      "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "metadata": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      },
+      "export": {
+        "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak.copperos",
+        "bytes": 206246,
+        "sha256": "c9c15cd5e32b4070b851820fb13aead1755efcc9838304752625064f90651734"
+      }
+    }
+  ],
+  "cleanup": "Owned test registration removed; private diagnostic state, originals and exports retained in evidence.",
+  "clockIntegrity": {
+    "wallClockAdjustment": {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/wall-clock-adjustment.json",
+      "bytes": 544,
+      "sha256": "916ac6b63f57c0546e2494c75e598639ea582a9988f4d93c569d08ad4a6177a9"
+    },
+    "harnessChangedSystemClock": false,
+    "disposition": "A three-hour host wall-clock jump occurred during CopperStart. Monotonic sampling and native frame progress continued; elapsed duration uses QPC, not UTC subtraction.",
+    "durationSource": "Stopwatch/QPC"
+  },
+  "coverage": {
+    "soakToolingControls": 13,
+    "diagnosticAudioTestsPassed": 7,
+    "desktopTestsPassed": 22,
+    "productionReleaseBuild": "PASS; zero warnings/errors",
+    "hostTestsPassed": 265,
+    "desktopTestsUnavailable": 0,
+    "normalAssemblyDiagnosticIsolation": "PASS",
+    "msixToolingControls": 64,
+    "hostTestsUnavailable": 14
+  },
+  "firstPreflight": {
+    "packageVersion": "1.1.27.0",
+    "record": {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke/soak-record.json",
+      "bytes": 1096,
+      "sha256": "8b4b35d248431871fa98bc063c23a2dd506d383652649df09572a06433053bb8"
+    },
+    "status": "FAILED",
+    "disposition": "Observer visibility/pause/fault guard triggered after about 55 seconds; the initial report did not distinguish which condition. The observer then closed normally. User denied closing or pausing. No CLR/native fault found in its log or matching Windows events. Cause unresolved; not relabeled or claimed fixed."
+  },
+  "repeatedPreflight": {
+    "record": {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/soak-record.json",
+      "bytes": 49088,
+      "sha256": "0a13cc7621a97f332dd6f35f65b9367e10d41a935bbf7f5a877b5b5534cc956d"
+    },
+    "durationAcceptance": false
+  },
+  "dashboardCorrection": {
+    "diagnosis": {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/preflight28-diagnosis.json",
+      "bytes": 590,
+      "sha256": "095cf54be2ff5658386effd9b017290b66e7d355c28af4dfec424378c0cbb417"
+    },
+    "regressionControl": {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/dashboard-regression-control.json",
+      "bytes": 252,
+      "sha256": "be32d7125edda4d2d8f8e3c978997deadcb2c0cd0ae8499154e4ecd9f77cf42f"
+    },
+    "failedPreflight": {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/soak-record.json",
+      "bytes": 48395,
+      "sha256": "198e0937810f5a2148e5ff6ff7504b750768b3f456a844db14977973b9e74944"
+    },
+    "disposition": "Captured sharing failure in auxiliary dashboard replacement caused diagnostic cleanup. Best-effort dashboard fixes that observer defect; raw samples remain authoritative. The unchanged locked-file control fails against 1.1.29.0 and passes against the corrected writer. Failed preflight retained.",
+    "productionAtomicSaveBehaviorChanged": false
+  },
+  "limitations": [
+    "Provisional current-PC observations only; no frozen release budgets, minimum/reference hardware or throughput acceptance.",
+    "Lotus II after the retained opening-race sequence and a CopperOS Shell/storage session; no full-game completion, native title-specific save or continuously busy OS workload claim.",
+    "Software output callback starvation is measured. Physical audibility, OS/driver glitches and audio-device removal/recovery remain unavailable.",
+    "The early preflight observer guard failure remains unresolved; successor tracing and these completed runs do not establish its original cause.",
+    "WACK and signed update persistence records for 1.1.26.0 stay immutable; they do not certify this new diagnostic package hash.",
+    "Native Kickstart hour sessions, physical HID/focus/capture/sleep/mixed-DPI/assistive checks, shipping assets, Store acquisition and clean-machine acceptance remain release work."
+  ],
+  "historicalRecordsOverwritten": false,
+  "evidence": [
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/soak-record.json",
+      "bytes": 96878,
+      "sha256": "20d97a8533aa2f77355e7823844c1ab4191137d4e8a75c9edeb02905978decc9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Package30/package-record.json",
+      "bytes": 67680,
+      "sha256": "898f868e6d6c217c23be77911e8280b9f4bbdf8430273f66584c07f4fd077fcb"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Package30/CopperScreen-1.1.30.0-win-x64.msix",
+      "bytes": 49550731,
+      "sha256": "48ebeefebca8e44c9b9c9bf6fa487ae553ef09d9635d56192159275327f055c1"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/host.json",
+      "bytes": 599,
+      "sha256": "ee22afb87e984bf1783a702eb3408e8e4b7b3091c53b05bc4411681161c6a25e"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/final30-source.json",
+      "bytes": 26544,
+      "sha256": "a91398fd3cba3288e8154ce6cbb20a19b8d6868262da18f4be4635bf92efa5d9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/historical-evidence-before.json",
+      "bytes": 929,
+      "sha256": "f42fe8f1054fffb70ac1cda5ae376330de201a26029e7c238f7ef04956c7e3f3"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/full30-harness-inputs.json",
+      "bytes": 823,
+      "sha256": "b7c87bfb7dbe7dfbdf06fecbe844ff3a8121962dd292b62d0937ec59f9ce58db"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/payload30-verification.json",
+      "bytes": 157,
+      "sha256": "c145b78b5c1cee7e9449ec5fe6dbea1f3461374a06e4264b63c99525e1a075f2"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/signature30-verification.log",
+      "bytes": 1129,
+      "sha256": "472ed36eadff472fad2f700ed6581e0208bdc3c773771bb0c470280475a23c72"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/production30-build.log",
+      "bytes": 2745,
+      "sha256": "831e1a805f3c6fae29e1063fff14a9c49b0cf25f211fd91809faef3893a20fbd"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/production30-isolation.json",
+      "bytes": 316,
+      "sha256": "61cbe7b1912edc2718dad30e2e6f8608dccc07d3947332aaec3de00ad4c80015"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Results/desktop30.trx",
+      "bytes": 36528,
+      "sha256": "795b2247f008944a8d4d521ea141cea5a2ccae0923840545a7d2fa372b3e555b"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Results/host30.trx",
+      "bytes": 463588,
+      "sha256": "7a2a93fd8d22ed31d5c17357fa9e9dda948b00b19d105b30d6b87815bd8abfb8"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Results/audio-dashboard-restored.trx",
+      "bytes": 12712,
+      "sha256": "1c632631af9f9c5e88955f42347d013aaa8691d502859107352ad8e0d57fee37"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/soak-tooling-controls-final.log",
+      "bytes": 88,
+      "sha256": "b2afaacc047738f3752c44c90c50da4a87574ebcb5e8d1c07fd19c70019506a2"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/tooling-controls.log",
+      "bytes": 90,
+      "sha256": "058a0f4eab33c1eb4f0fe914838b591bc4d4d13fb50a4648149a60ba8c6a81c9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/first-close-windows-events.json",
+      "bytes": 696,
+      "sha256": "d9e85dd51e23ecfe9f2866b0972f950d43e28d8dcafc89218e2f5a05b00b32d0"
+    },
+    {
+      "path": "artifacts/record-p1-07-soak30.ps1",
+      "bytes": 13841,
+      "sha256": "41c77a3440d5c34a1193333731653f798ef25a308c591f3fee796e2c13eba5c0"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30Inputs/scripts/test-msix-soak.ps1",
+      "bytes": 8346,
+      "sha256": "0c24ea2ced351f119b23810fff6ab0ebae0dd0dcce93df35fec44183d8a924bb"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30Inputs/scripts/msix/CopperScreen.Msix.psm1",
+      "bytes": 14760,
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30Inputs/scripts/qualification/CopperScreen.Soak.psm1",
+      "bytes": 2454,
+      "sha256": "c2370e848d2b80e468dd4d694109352daac0fe0f2c38dab7a785677f039b4ef8"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-profile-path.txt",
+      "bytes": 202,
+      "sha256": "5387922ae2c4c713a4c2662cf172f6046ecf93cdbfab7009c85d395a5d46912f"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen-end.png",
+      "bytes": 24205,
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen-middle.png",
+      "bytes": 24205,
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen-request.json",
+      "bytes": 574,
+      "sha256": "a7d4909914eeceab987318db5c85401ed5989a91397e881d387a8fd4201c9f2a"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen-samples.jsonl",
+      "bytes": 8236,
+      "sha256": "a58ab3a769eea6b22288044820a1374526274c7744dc90b4d74563c37d86bfa6"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen-start.png",
+      "bytes": 24205,
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen-storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-reopen.json",
+      "bytes": 21586,
+      "sha256": "6837a2b8e59b3b9744b88bce3db52aba2298b807c738890dc7a7a3733a4cdb4e"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-end.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-middle.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-request.json",
+      "bytes": 574,
+      "sha256": "4bdb322877a3a14e83ea76e85ae24b065e9fd0bd48d79048d367b709677b81a2"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-samples.jsonl",
+      "bytes": 2940824,
+      "sha256": "325b2769857e7b3b35bc2f2b033bdeb4344fe353e865374582043968ae9031a4"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-start.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak-storage.txt",
+      "bytes": 2025,
+      "sha256": "1a2e0166e5a87784c16104d8ee2fa9fbc7c7a1dab664daadca45588b3650aaa9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperos-soak.json",
+      "bytes": 21349,
+      "sha256": "f9073d9df926aad890777183bcad15f1eb809f584186d8ebb3c5e216c8e8a0b9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-profile-path.txt",
+      "bytes": 208,
+      "sha256": "44b7e6b71c5998aa29733b2deeab7394aa2c90e7a1cf6a543acf67aa80f6784e"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen-end.png",
+      "bytes": 34595,
+      "sha256": "a04bf6ec27d55b18c0f514d87b6977e29d7f6d9c94bf83c62ece22479dfbc732"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen-middle.png",
+      "bytes": 36864,
+      "sha256": "e3b97025c88408c1c22233806e28f437cf8408acc998b780e5fdf285b1ff5234"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen-request.json",
+      "bytes": 577,
+      "sha256": "766ab5687885e419ce33bb63b0703f69bfe0cea0c9fe90bdec7ef2d5198d30f0"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen-samples.jsonl",
+      "bytes": 7892,
+      "sha256": "f82909ddeac0f61c7a30bb6b9c333565b3bb5afb1afabb52f6f60900a6b0d3d6"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen-start.png",
+      "bytes": 33525,
+      "sha256": "a0040bc5c90c2cb77509e87ce947dbbae4eb42a944d87079029149f9ea6e7ef3"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-reopen.json",
+      "bytes": 20953,
+      "sha256": "04ee5430330b713d480b1a2ab49221b6a3b8619273ee5e22fbc37b0596322b20"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak-end.png",
+      "bytes": 47439,
+      "sha256": "914543fb3a8d4d52de9ec7a0953f50390ad26aae8dc58a6e9e85e928107cdda0"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak-middle.png",
+      "bytes": 29011,
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak-request.json",
+      "bytes": 577,
+      "sha256": "3a48f6b4b98344bc3cd5f1ce3a20930bd48d7ad01fcbc7d0bd29397be7f5983e"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak-samples.jsonl",
+      "bytes": 2828606,
+      "sha256": "d8679c3c09fe0e955bf2fae0a4a5f59e692c88453e73888f9da5750dc94fdc5d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak-start.png",
+      "bytes": 34396,
+      "sha256": "cdab1957aeb41be437a89c763ca45a3c59655a995791452ef2b7c41e9575fdba"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/copperstart-soak.json",
+      "bytes": 22256,
+      "sha256": "bb2aeeb044e039ee1ccb9e3b6d09274230ac22a858f14b54d3d4cb2ccdd26ccd"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/external-observer.jsonl",
+      "bytes": 309480,
+      "sha256": "a733a0bb12f0694c0b69e678d5756c27ce0a95248e007745b0cebff384caafa8"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/progress.json",
+      "bytes": 651,
+      "sha256": "88c997d3358bd1afb67b9caf5c75ccb7d63d2819f646b75ba1353879f7b3d53c"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/last-machine.json",
+      "bytes": 2875,
+      "sha256": "1de0eca45dadc02885201df6714c6830d263ce0490a39bd6f779c06187fe6a18"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/recent-session.json",
+      "bytes": 283,
+      "sha256": "e6c244110b22a35f609522c41deb23cd4cb0cc417dfa3c949d3135515b8a13da"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.json",
+      "bytes": 370,
+      "sha256": "fe74de7d41b9b7193dcd5813cf0163d61a82c4565d5e216e68a8013268a9c71f"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/Logs/CopperScreen-20261018-004532-65888.log",
+      "bytes": 1097603,
+      "sha256": "5ae51ef0cb4d162103b67e1906070cd7f5b257d041117adec8e3fbace095fc2f"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/Logs/CopperScreen-20261018-015338-24968.log",
+      "bytes": 52238,
+      "sha256": "0f64a5fe09efd03aa214296f40e9ebee682b867683123290b272cb796a43d97d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/Logs/latest.log",
+      "bytes": 52238,
+      "sha256": "0f64a5fe09efd03aa214296f40e9ebee682b867683123290b272cb796a43d97d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperos/Profiles/copperos-soak.json",
+      "bytes": 2875,
+      "sha256": "1de0eca45dadc02885201df6714c6830d263ce0490a39bd6f779c06187fe6a18"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperstart/last-machine.json",
+      "bytes": 1224,
+      "sha256": "29f30eefe2091a572eb395a9be5a9347b7605dd9c38e7d757069398e341bd7e6"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperstart/recent-session.json",
+      "bytes": 188,
+      "sha256": "b1a2175839ab6e6e41e4a7da38e38936858efe741365263cad611b4664f0dda3"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperstart/Logs/CopperScreen-20261017-203435-122276.log",
+      "bytes": 1086883,
+      "sha256": "6cc868e95370242817b05129ffbe58e938b4c902928cd7a1e4aa6051761e8660"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperstart/Logs/CopperScreen-20261018-004009-61720.log",
+      "bytes": 86896,
+      "sha256": "109a4d03e1fe8cf24135e907ad736e0eddc5ed8037fdcca2943a0065ceff0823"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperstart/Logs/latest.log",
+      "bytes": 86896,
+      "sha256": "109a4d03e1fe8cf24135e907ad736e0eddc5ed8037fdcca2943a0065ceff0823"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Full30/PrivateState/copperstart/Profiles/copperstart-soak.json",
+      "bytes": 1224,
+      "sha256": "29f30eefe2091a572eb395a9be5a9347b7605dd9c38e7d757069398e341bd7e6"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke/copperstart-profile-path.txt",
+      "bytes": 208,
+      "sha256": "44b7e6b71c5998aa29733b2deeab7394aa2c90e7a1cf6a543acf67aa80f6784e"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke/copperstart-soak-request.json",
+      "bytes": 574,
+      "sha256": "7eb997cb7032bffde4892a537596fca4944f2f4dcd5915a6bf4f89a4e6e26cb0"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke/copperstart-soak.json",
+      "bytes": 2532,
+      "sha256": "71750c8c4ea2e9b407e3b05b695e79ffd193df55b4ded99e0f0c3909438f5265"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke/external-observer.jsonl",
+      "bytes": 2176,
+      "sha256": "d9f58b7ed54d31b109ca146995ad981351337bcd49c865301bcc6b13f3435709"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke/soak-record.json",
+      "bytes": 1096,
+      "sha256": "8b4b35d248431871fa98bc063c23a2dd506d383652649df09572a06433053bb8"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperos-profile-path.txt",
+      "bytes": 202,
+      "sha256": "5387922ae2c4c713a4c2662cf172f6046ecf93cdbfab7009c85d395a5d46912f"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperos-soak-request.json",
+      "bytes": 573,
+      "sha256": "26d73be7102849df3eea5a70154038d54cb31f37a52abfd8dcdd8c01417c6f06"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-profile-path.txt",
+      "bytes": 208,
+      "sha256": "44b7e6b71c5998aa29733b2deeab7394aa2c90e7a1cf6a543acf67aa80f6784e"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-reopen-request.json",
+      "bytes": 578,
+      "sha256": "54a158f14b05410d1f8c16089cd642258eb1b9a24e09ad97a5862e2da969c1fd"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-reopen-samples.jsonl",
+      "bytes": 7708,
+      "sha256": "1b659a82eb8a110a6a17a9812ba1f54192a1366a7c9994ab85b3d65bc5579122"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-reopen.json",
+      "bytes": 21918,
+      "sha256": "15669526188fc32c067f16113b927916b64bd292da665baba8e3e118180af475"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-soak-request.json",
+      "bytes": 576,
+      "sha256": "4fe7bd39eb9c6be5292646ffe7ede23694a3a986f09346ed170cbb0c9b9a89fd"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-soak-samples.jsonl",
+      "bytes": 7711,
+      "sha256": "5333df25cf187a998f9f9d4c6c64e0b8e3f8ffb59bb5de9fe77df6740a6e9bd5"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/copperstart-soak.json",
+      "bytes": 21917,
+      "sha256": "9bde7938b63c801902f4fab4ca3484fe0f5382107d0477a930e41b887f962900"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/external-observer.jsonl",
+      "bytes": 45655,
+      "sha256": "fd08c8b7bf4293a65d9f190f065148a82adb762ea0b04eb075f80e13957f85e4"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/progress.json",
+      "bytes": 420,
+      "sha256": "49d9a88bd060bbb13d6d7377979da398ae519c3d9073197c76648e2deffd3afd"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke28/soak-record.json",
+      "bytes": 48395,
+      "sha256": "198e0937810f5a2148e5ff6ff7504b750768b3f456a844db14977973b9e74944"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-profile-path.txt",
+      "bytes": 202,
+      "sha256": "5387922ae2c4c713a4c2662cf172f6046ecf93cdbfab7009c85d395a5d46912f"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-reopen-request.json",
+      "bytes": 575,
+      "sha256": "71c09eacbcecca58acf786d33fec640e8d64fc12c745fd4d7c956274663e9f02"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-reopen-samples.jsonl",
+      "bytes": 8235,
+      "sha256": "761e657a528bf7a7648557ad786e629088d5b73a090df6b3410f4d3b23efec95"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-reopen-storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-reopen.json",
+      "bytes": 21588,
+      "sha256": "662edf61042932a22b72ca2db1b3f13e06009161ca53df664c1ecdfb41508b87"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-soak-request.json",
+      "bytes": 573,
+      "sha256": "b30bc2be155ed1d28d4f1110ec480c7ec0f4f6cc1d73143434054b7678b218f4"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-soak-samples.jsonl",
+      "bytes": 8248,
+      "sha256": "874f045f49c27b0f16af2a19e66940d0651cb3a97ea4e343baa13ea4ba1c59b2"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-soak-storage.txt",
+      "bytes": 2025,
+      "sha256": "1a2e0166e5a87784c16104d8ee2fa9fbc7c7a1dab664daadca45588b3650aaa9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/copperos-soak.json",
+      "bytes": 21595,
+      "sha256": "775944b304190a17e961f3dd164692e50bef9350e3faac47a39f02b0e1983b61"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/external-observer.jsonl",
+      "bytes": 24112,
+      "sha256": "6956dcfeb45d9f733d13ce7af101cce8964a8902f24e232ba31160516876fd54"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/progress.json",
+      "bytes": 651,
+      "sha256": "7694f571f70e8053a225fd06b6302f29e6e359598fafe53b8eeee1568aa7086b"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Smoke30/soak-record.json",
+      "bytes": 49088,
+      "sha256": "0a13cc7621a97f332dd6f35f65b9367e10d41a935bbf7f5a877b5b5534cc956d"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/preflight28-diagnosis.json",
+      "bytes": 590,
+      "sha256": "095cf54be2ff5658386effd9b017290b66e7d355c28af4dfec424378c0cbb417"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/dump-session-errors28.json",
+      "bytes": 9341,
+      "sha256": "63c9326b54c787d951f7019af54c4ed5ff9f747b668df8ef5156f6a955bd4e51"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/dashboard-regression-control.json",
+      "bytes": 252,
+      "sha256": "be32d7125edda4d2d8f8e3c978997deadcb2c0cd0ae8499154e4ecd9f77cf42f"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Results/dashboard-before-control.trx",
+      "bytes": 5136,
+      "sha256": "d72d71f4787992019c5fbcc18da02097b6dcc297d6800cc2edd070ac9ae76a13"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/preflight28-stop.json",
+      "bytes": 200,
+      "sha256": "07cf473a9fa7a6201ee3efe6a7ed27f327e18d8c4898ebc3eeaa7995f8b25798"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/dashboard-lock-native-control.json",
+      "bytes": 1440,
+      "sha256": "adeece36e3dff5c75443989424a63a4f769c4c0a422e0450935f258039be7ebd"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/wall-clock-adjustment.json",
+      "bytes": 544,
+      "sha256": "916ac6b63f57c0546e2494c75e598639ea582a9988f4d93c569d08ad4a6177a9"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/date-transition-note.json",
+      "bytes": 214,
+      "sha256": "4f61b489b95d164f92e9aed3efca434bbff33db8ef713ec28d7bc672b93a75f9"
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 namespace CopperScreen;
 
 // Keep the host overlay explanatory while the CopperStart browser/launcher is absent.
-// The original implementation is retained, but excluded from this build.
+// The retired browser implementation is preserved in Git history and the legacy archive.
 internal sealed class CopperBenchViewModel
 {
-    private const string Unavailable = "CopperBench/CopperStart support is not included in this build. Boot applications through native Kickstart instead.";
+    private const string Unavailable = "The Legacy CopperBench browser is not included. Boot floppy applications with a native Kickstart ROM or the qualified standalone CopperStart ROM on Lightweight.";
     public bool IsOverlayVisible { get; private set; }
     public bool IsToolbarVisible { get; private set; } = true;
     public string DisplayPath => "CopperBench unavailable";

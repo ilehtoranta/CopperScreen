@@ -1,0 +1,105 @@
+name: MSIX installed validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_mode:
+        description: Signed MSIX install, or explicitly limited developer registration
+        type: choice
+        options: [Install, DevelopmentRegistration]
+        default: Install
+      certificate_thumbprint:
+        description: Current-user signing certificate thumbprint, already trusted by the dedicated machine
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: copperscreen-msix-installed
+  cancel-in-progress: false
+
+jobs:
+  installed:
+    # A dedicated interactive Windows 11 x64 desktop, not an arbitrary user's PC.
+    runs-on: [self-hosted, Windows, X64, copperscreen-msix]
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Prepare frozen CPU package and test identity
+        env:
+          DEPLOYMENT_MODE: ${{ inputs.deployment_mode }}
+          SIGNING_THUMBPRINT: ${{ inputs.certificate_thumbprint }}
+        run: |
+          if ($env:DEPLOYMENT_MODE -eq 'Install' -and -not $env:SIGNING_THUMBPRINT) {
+            throw 'Signed install testing needs a certificate already provisioned/trusted by the machine owner.'
+          }
+          if (-not $env:COPPERSCREEN_QUALIFIED_FEED) { throw 'Configure COPPERSCREEN_QUALIFIED_FEED on this dedicated runner; do not rebuild the frozen CPU package.' }
+          $lock = Get-Content CopperScreen/packages.lock.json -Raw | ConvertFrom-Json -AsHashtable
+          $cpu = $lock.dependencies['net10.0']['Copper68k']
+          $inputPackage = Join-Path $env:COPPERSCREEN_QUALIFIED_FEED "Copper68k.$($cpu.resolved).nupkg"
+          $hash = [Convert]::ToBase64String([Security.Cryptography.SHA512]::HashData([IO.File]::ReadAllBytes($inputPackage)))
+          if ($hash -cne $cpu.contentHash) { throw 'Frozen CPU package does not match the checked-in NuGet lock.' }
+          $feed = Join-Path $PWD 'artifacts/qualified-cpu-20261011/feed'
+          New-Item -ItemType Directory -Path $feed -Force | Out-Null
+          $destination = Join-Path $feed ([IO.Path]::GetFileName($inputPackage))
+          if (Test-Path -LiteralPath $destination) {
+            $existingHash = [Convert]::ToBase64String([Security.Cryptography.SHA512]::HashData([IO.File]::ReadAllBytes($destination)))
+            if ($existingHash -cne $cpu.contentHash) { throw 'An existing frozen package has different content; retain the evidence and investigate.' }
+          } else { Copy-Item -LiteralPath $inputPackage -Destination $destination }
+          $run = [guid]::NewGuid().ToString('N')
+          "MSIX_TEST_ID=CopperScreen.Test.$run" | Add-Content $env:GITHUB_ENV
+          "MSIX_TEST_OUTPUT=$PWD/artifacts/msix-ci/$run" | Add-Content $env:GITHUB_ENV
+      - name: Build diagnostic baseline and update
+        env:
+          SIGNING_THUMBPRINT: ${{ inputs.certificate_thumbprint }}
+        run: |
+          $common = @{ IdentityName = $env:MSIX_TEST_ID; Publisher = 'CN=CopperScreen Installed Tests'; PublisherDisplayName = 'CopperScreen installed tests'; InstalledTestBuild = $true }
+          if ($env:SIGNING_THUMBPRINT) { $common.CertificateThumbprint = $env:SIGNING_THUMBPRINT }
+          if (-not $env:COPPERSCREEN_COPPEROS_SEED -or -not $env:COPPERSCREEN_COPPERSTART_ROM) { throw 'Configure both qualified native guest artifact paths on the dedicated runner.' }
+          $common.CopperOsSeed = $env:COPPERSCREEN_COPPEROS_SEED
+          $common.CopperStartRom = $env:COPPERSCREEN_COPPERSTART_ROM
+          ./scripts/package-msix.ps1 @common -PackageVersion 1.1.3.0 -OutputDirectory "$env:MSIX_TEST_OUTPUT/Baseline"
+          ./scripts/package-msix.ps1 @common -PackageVersion 1.1.4.0 -OutputDirectory "$env:MSIX_TEST_OUTPUT/Update"
+      - name: Install, qualify CopperOS launcher, update, recover and restore
+        env:
+          DEPLOYMENT_MODE: ${{ inputs.deployment_mode }}
+        run: |
+          ./scripts/test-msix-installed.ps1 -BaselinePackage "$env:MSIX_TEST_OUTPUT/Baseline/CopperScreen-1.1.3.0-win-x64.msix" -UpdatePackage "$env:MSIX_TEST_OUTPUT/Update/CopperScreen-1.1.4.0-win-x64.msix" -DeploymentMode $env:DEPLOYMENT_MODE -MediaPersistence -LauncherLayout -OutputDirectory "$env:MSIX_TEST_OUTPUT/Installed"
+      - name: Windows App Certification Kit on the signed update
+        if: inputs.deployment_mode == 'Install'
+        run: |
+          ./scripts/test-msix-certification.ps1 -PackagePath "$env:MSIX_TEST_OUTPUT/Update/CopperScreen-1.1.4.0-win-x64.msix" -OutputDirectory "$env:MSIX_TEST_OUTPUT/Wack"
+      - name: Retain package and installed evidence
+        # Developer registration cannot establish signed-install or WACK acceptance.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: msix-installed-evidence
+          if-no-files-found: warn
+          path: |
+            artifacts/msix-ci/**/*.msix
+            artifacts/msix-ci/**/package-record.json
+            artifacts/msix-ci/**/executable.manifest.xml
+            artifacts/msix-ci/**/installed-test-record.json
+            artifacts/msix-ci/**/seed-*.json
+            artifacts/msix-ci/**/verify-*.json
+            artifacts/msix-ci/**/fresh-*.json
+            artifacts/msix-ci/**/recovery-*.json
+            artifacts/msix-ci/**/recovered-*.json
+            artifacts/msix-ci/**/media-proof-exports.json
+            artifacts/msix-ci/**/Media/**
+            artifacts/msix-ci/**/launcher-layout-*/**
+            artifacts/msix-ci/**/*.log
+            artifacts/msix-ci/**/locks/*.json
+            artifacts/msix-ci/**/Symbols/*.pdb
+            artifacts/msix-ci/**/native-storage-*/**
+            artifacts/msix-ci/**/wack-record.json
+            artifacts/msix-ci/**/wack-report.xml

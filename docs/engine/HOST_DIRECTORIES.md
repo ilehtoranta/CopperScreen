@@ -36,6 +36,12 @@ and any required libraries. A boot priority does not create an operating system.
 The application supplies an original filesystem handler and no licensed OS
 files. An installed folder can boot with all floppy and HDF media absent.
 
+A bounded [WHDLoad Hired Guns campaign replay](WHDLOAD_HIRED_GUNS_2026-10-16.md)
+checks play, a named save, F10 return to Workbench and fresh-process reload on
+the existing handler. Its fixture uses WHDLoad's standard SavePath option to
+create the old slave's save subdirectories and verifies deferred writes after
+normal exit. The record specifies the supplied inputs and exact machine profile.
+
 ## Guest and owner-thread contract
 
 A separate 64 KiB virtual Zorro II board (manufacturer `$07DB`, product `$46`,

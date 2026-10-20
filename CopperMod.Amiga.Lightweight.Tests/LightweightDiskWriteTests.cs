@@ -7,16 +7,21 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 public sealed class LightweightDiskWriteTests
 {
     [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    public void GuestDmaWritesTrackAndExportReopensWithAllSectors(int drive)
+    [InlineData(0, false)]
+    [InlineData(0, true)]
+    [InlineData(1, false)]
+    [InlineData(1, true)]
+    [InlineData(2, false)]
+    [InlineData(2, true)]
+    [InlineData(3, false)]
+    [InlineData(3, true)]
+    public void GuestDmaWritesTrackAndExportReopensWithAllSectors(int drive, bool highDensity)
     {
-        using var m = new LightweightA500Machine(new() { FloppyDriveCount = 4 });
-        var original = new byte[901120];
-        var expected = new byte[901120];
-        for (var i = 0; i < 11 * 512; i++) expected[i] = (byte)(i * 13 + 37);
+        using var m = new LightweightA500Machine(new() { FloppyDriveCount = 4,
+            FloppyDriveTypes = Enumerable.Repeat(LightweightFloppyDriveType.HighDensity, 4).ToArray() });
+        var original = new byte[highDensity ? 1802240 : 901120];
+        var expected = new byte[highDensity ? 1802240 : 901120];
+        for (var i = 0; i < (highDensity ? 22 : 11) * 512; i++) expected[i] = (byte)(i * 13 + 37);
         m.MountAdf(drive, original);
         m.SetDriveWriteProtected(drive, false);
         StartMotor(m, drive);
@@ -34,7 +39,8 @@ public sealed class LightweightDiskWriteTests
         Assert.All(original, value => Assert.Equal(0, value));
         m.Reset(); // Reset preserves the magnetic medium.
         Assert.Equal(expected, m.ExportAdf(drive));
-        using var reopened = new LightweightA500Machine();
+        using var reopened = new LightweightA500Machine(new() {
+            FloppyDriveCount = 4, FloppyDriveTypes = Enumerable.Repeat(LightweightFloppyDriveType.HighDensity, 4).ToArray() });
         reopened.MountAdf(m.ExportAdf(drive));
         Assert.Equal(expected, reopened.ExportAdf());
         Assert.Null(m.UnsupportedActiveFeature);

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "qualificationId": "copperstart-rdb-app-backup-2026-10-19.1",
+  "status": "PASS",
+  "package": {
+    "identity": "CopperScreen.Test.bf75fb2633b74fc3899eeeb5df6e6d9b",
+    "version": "1.1.48.0",
+    "sha256": "3EB5EC866A0DA62F771F33C8FB29613F07D2D8992FC9BB3F337414E6714F342E",
+    "signedLocalDiagnostic": true,
+    "developmentRegistration": false,
+    "storeCertified": false
+  },
+  "firmware": {
+    "qualificationId": "diskboot-2026-10-19-dos-large-files.1",
+    "sha256": "4054184E5CBCD93511DA0C8C86B963955E670C959343DDDF31F2C324EA03A963"
+  },
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "coverage": {
+    "hostSemanticCases": 14,
+    "desktopCases": 4,
+    "separateCompiledMc68000Cases": 0,
+    "installedProcessPhases": 8,
+    "fullRomBoots": 9,
+    "settingsExportsUsingNativePicker": 2,
+    "settingsRestoresUsingNativePicker": 2,
+    "stageCounts": {
+      "export": 4,
+      "restore": 4
+    },
+    "acceptedFailures": 0,
+    "skips": 0
+  },
+  "deployment": {
+    "FirstRegistrationRemoved": true,
+    "PrivateProofDataRemovedByWindows": true,
+    "ExternalBackupsSurvivedUninstall": true,
+    "FreshPrivateStateBeforeRestore": true,
+    "PrivateDataRetained": true,
+    "OwnedRegistrationRemoved": true
+  },
+  "results": {
+    "wholeImageBytesPreserved": true,
+    "allExportedProfileFieldsPreservedExceptRebasedDiskPaths": true,
+    "bothBootPrioritySelections": true,
+    "bothFfsVolumesReadBackAfterAppRestore": true,
+    "newPathsRememberedAcrossProcessRestart": true,
+    "guestFlushBeforeHostSaveOrDispose": true,
+    "hostSaveAdvancedCycles": false,
+    "backupFilesUnchanged": true,
+    "restoresPerformedByAppWithoutControllerFileCopy": true,
+    "actualSettingsButtonsAndWindowsDialogs": true
+  },
+  "backups": [
+    {
+      "layout": "default",
+      "backupSha256": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC",
+      "hdfSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "allConfigurationFieldsPreservedExceptRebasedDiskPath": true
+    },
+    {
+      "layout": "priority",
+      "backupSha256": "85A04541A49A6C20DBEDBAF3C20930AF4F008556B52B65A910D94C2CCDCC0D2C",
+      "hdfSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "allConfigurationFieldsPreservedExceptRebasedDiskPath": true
+    }
+  ],
+  "validation": {
+    "releaseWarnings": 0,
+    "releaseErrors": 0,
+    "diagnosticBoundary": {
+      "NormalAssemblyDiagnostic": false,
+      "InstalledAssemblyDiagnostic": true
+    },
+    "hostTrxSha256": "4702A9CF300EA256BB933D00C977A34B8BEE72BBBD9FA48867F99A39CD88F83C",
+    "desktopTrxSha256": "FB9A2D0AC6C9F07A248E811EF37DE7A02D6C285E9C54C25D5C3CC45ECEFB993C",
+    "installedRecordSha256": "BA60B720A09938833928A7F52FDC547C9094A5857E2008135353A22325BD356E",
+    "rawAuditSha256": "B7470B6E362E76CEF8F2C00231E63659D180B8CCDA6AB2092EDD22DC62CAD690"
+  },
+  "sourceBoundary": {
+    "installedPackage": "All positive installed export/restore and native readback cases use immutable version 1.1.48.0.",
+    "finalSourceOnlyDifference": "After that replay, the two UI exception filters were extended to catch FormatException and OverflowException from edited partition fields. The backup implementation and successful export/restore paths are unchanged. Final Release build and four desktop cases cover the added error handling.",
+    "earlierDesktopHarnessFailure": "The initial test searched an unopened Storage page. It now opens the actual settings page; all four final desktop cases pass."
+  },
+  "reproduction": {
+    "controller": "scripts/test-msix-rdb-app-backup.ps1",
+    "independentAudit": "scripts/qualification/audit-msix-rdb-app-backup.py",
+    "evidenceDirectory": "artifacts/rdb-backup-app-20261019/installed"
+  },
+  "scope": {
+    "externalDependenciesNotBundled": [
+      "firmware",
+      "floppy media",
+      "sound packs",
+      "shared-folder contents"
+    ],
+    "globalPreferencesNotBundled": [
+      "recent media history",
+      "master volume/mute"
+    ],
+    "powerLossDurability": false,
+    "performanceAcceptance": false,
+    "noPackageRelease": true
+  }
+}

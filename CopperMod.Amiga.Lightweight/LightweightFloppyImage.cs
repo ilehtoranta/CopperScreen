@@ -8,6 +8,8 @@ public sealed class LightweightFloppyImage
     internal byte[]? Sectors { get; }
     internal LightweightIpfImage? Tracks { get; }
     public LightweightFloppyFormat Format { get; }
+    /// <summary>Whether sector media requires a 150 RPM HD mechanism.</summary>
+    public bool IsHighDensity => Sectors?.Length == AmigaDiskGeometry.HighDensityAdfSize;
     public bool CanWrite => Format == LightweightFloppyFormat.Adf;
 
     private LightweightFloppyImage(LightweightFloppyFormat format, byte[]? sectors, LightweightIpfImage? tracks)
@@ -31,8 +33,8 @@ public sealed class LightweightFloppyImage
             return new(LightweightFloppyFormat.Scp, null, LightweightIpfImage.PrepareTracks(tracks, image));
         }
         var extended = image.StartsWith("UAE-1ADF"u8) || image.StartsWith("UAE--ADF"u8);
-        if (extension == ".adf" && !extended && image.Length != AmigaDiskGeometry.StandardAdfSize)
-            throw new NotSupportedException("ADF requires complete 880 KiB DD sectors or modern UAE-1ADF tracks.");
+        if (extension == ".adf" && !extended && image.Length != AmigaDiskGeometry.StandardAdfSize && image.Length != AmigaDiskGeometry.HighDensityAdfSize)
+            throw new NotSupportedException("ADF requires complete 880 KiB DD or 1760 KiB HD sectors or modern UAE-1ADF tracks.");
         IAmigaSectorDiskMedia media = extension switch
         {
             ".adf" when extended => AmigaDiskLoader.FromExtendedAdfBytes(image),
@@ -52,8 +54,8 @@ public sealed class LightweightFloppyImage
                     tracks.Add((cylinder, head, media.ReadTrack(cylinder, head)));
             return new(format, null, LightweightIpfImage.PrepareTracks(tracks, image));
         }
-        if (!media.HasCompleteDecodedSectorData || media.SectorData.Length != AmigaDiskGeometry.StandardAdfSize)
-            throw new NotSupportedException("Sector media must contain a complete 880 KiB DD image.");
+        if (!media.HasCompleteDecodedSectorData || (media.SectorData.Length != AmigaDiskGeometry.StandardAdfSize && media.SectorData.Length != AmigaDiskGeometry.HighDensityAdfSize))
+            throw new NotSupportedException("Sector media must contain a complete DD or HD image.");
         return new(format, media.SectorData.ToArray(), null);
     }
 }

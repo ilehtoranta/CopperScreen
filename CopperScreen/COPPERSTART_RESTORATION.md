@@ -31,27 +31,29 @@ not a gameplay or throughput benchmark.
 
 The historical `CopperMod.sln`, `CopperScreen.Tests` and Legacy benchmark
 projects include the unfinished CopperStart migration. They are not the native
-host build/test entry points. Their source is retained, not silently passed or
-deleted. The native host suite links the focused existing session, presentation
+host build/test entry points. Their source is preserved in the
+[legacy workspace archive](../archive/legacy-copperscreen-20260916/README.md).
+The native host suite links the focused existing session, presentation
 and audio tests and adds build-boundary/media checks.
 
 ## Retained historical boundary
 
-- `CopperScreenEmulator.cs` and the original `CopperBenchViewModel.cs` are
-  excluded from compilation, not erased. Do not simply re-enable them: their
-  old host types need explicit conversion to the neutral session boundary.
+- The previously excluded `CopperScreenEmulator.cs`, original
+  `CopperBenchViewModel.cs` and `CopperScreenPresentationFrame.cs` were removed
+  on 2026-10-17. Git history preserves their last local versions; the legacy
+  workspace archive retains the earlier snapshot. The unavailable CopperBench
+  UI, clipboard and service scaffolding remain for a separate cleanup.
 - `ICopperScreenSession` retains host-level input/frame/audio/control calls.
   No CPU/device execution dispatch was added. `CopperScreenAdfImage` owns
   standard 880 KiB ADF mount bytes; ZIP loading is bounded and does not extract
   arbitrary media to temporary files. Other disk formats are unsupported.
 - Clipboard BGRA payload and allocator profile metadata are host-owned types.
-  Their ownership does not depend on the retained replacement-OS sources.
+  Their ownership does not depend on the retired replacement-OS sources.
 - Filename-based disk navigation was extracted unchanged from Legacy.
 - The package-boundary follow-up also removed `CopperMod.Amiga` and
   CyberGraphics build dependencies. Profile metadata, raw-key names and standard
-  raster geometry are now host-owned. The old presentation-frame helper is
-  excluded with the Legacy emulator. These common host types remain independent
-  of the retained Legacy types.
+  raster geometry are now host-owned. These common host types remain independent
+  of the removed Legacy adapter and presentation-frame helper.
 - See `PACKAGE_BOUNDARY.md` for the historical package-extraction boundary.
   No emulator execution abstraction was added by that separation.
 

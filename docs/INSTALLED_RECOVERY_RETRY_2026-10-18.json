@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "recordedUtc": "2026-10-18T10:21:21.6039780Z",
+  "status": "UNAVAILABLE",
+  "applicationRecoveryAcceptance": false,
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "authorization": {
+    "retry": "Retry now",
+    "source": "Direct user answers in this conversation",
+    "previousPrompt": "No prompt visible"
+  },
+  "launch": {
+    "Utc": "2026-10-18T10:17:18.9099880Z",
+    "RunDirectory": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b\\EndpointProbeRetry-71f6bca7f6a644da9784959dd74b48e4",
+    "HelperSha256": "d335f407cf02f22578532a4ef84fe5660c9ba179a01262f7302a797d73db45b1",
+    "Status": "LaunchFailed",
+    "Error": "This command cannot be run due to the error: An error occurred trying to start process 'C:\\Users\\ilkle\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe' with working directory 'C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen'. Käyttäjä peruutti toiminnon."
+  },
+  "consentObservation": {
+    "sessionId": 1,
+    "cause": "Unresolved Windows consent cancellation; intentional owner cancellation is not inferred",
+    "probeChildPidCreated": false,
+    "processId": 100288
+  },
+  "restoration": {
+    "Utc": "2026-10-18T10:19:49.9505518Z",
+    "ProbeReceiptPresent": false,
+    "Endpoint": {
+      "Status": "OK",
+      "Class": "AudioEndpoint",
+      "FriendlyName": "24G42E (NVIDIA High Definition Audio)",
+      "InstanceId": "SWD\\MMDEVAPI\\{0.0.0.00000000}.{D9AADFBA-92DF-4F27-B98D-739A08DB7421}"
+    },
+    "Codec": {
+      "Status": "OK",
+      "Class": "MEDIA",
+      "FriendlyName": "NVIDIA High Definition Audio",
+      "InstanceId": "HDAUDIO\\FUNC_01&VEN_10DE&DEV_009F&SUBSYS_10438811&REV_1001\\5&3B34E842&0&0001"
+    },
+    "TestRegistrationAbsent": true,
+    "PartialJsonSha256": "cc0b8ecca7a273ab0ab40ea979bfbd9a815c4d0913bef39e17236741a37a33f7",
+    "PartialMarkdownSha256": "75c8436fbc455f2e966a3863da1be0364d61818cd4477d6dddd483a5b4e3b47f"
+  },
+  "newInstalledAppCoverage": false,
+  "originalPartialEvidenceUnchanged": true,
+  "nextStep": "Resolve Windows consent or owner-launch the same scoped probe from Administrator PowerShell, verify disabled/restored state, then resume installed tests",
+  "references": [
+    {
+      "sha256": "07cf5a4a1b7d1d334d68ec09614603bb4cba9bd7f1da2f903ebfd84fb2db2a0c",
+      "bytes": 482,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeRetry-71f6bca7f6a644da9784959dd74b48e4/config.json"
+    },
+    {
+      "sha256": "f5967d87bcdf1fb2a6d3997c8ab8683fee8c38dfbc62cd9425ea96a37216e730",
+      "bytes": 667,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeRetry-71f6bca7f6a644da9784959dd74b48e4/launch.json"
+    },
+    {
+      "sha256": "d335f407cf02f22578532a4ef84fe5660c9ba179a01262f7302a797d73db45b1",
+      "bytes": 2052,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeRetry-71f6bca7f6a644da9784959dd74b48e4/probe-recovery-endpoint.ps1"
+    },
+    {
+      "sha256": "fde60938d07a5bdfa85e0f6c7c7c179553ec4c1eeb29376c437b0fa06e9a729c",
+      "bytes": 749,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeRetry-71f6bca7f6a644da9784959dd74b48e4/restoration-verification.json"
+    },
+    {
+      "sha256": "cc0b8ecca7a273ab0ab40ea979bfbd9a815c4d0913bef39e17236741a37a33f7",
+      "bytes": 151599,
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.json"
+    },
+    {
+      "sha256": "75c8436fbc455f2e966a3863da1be0364d61818cd4477d6dddd483a5b4e3b47f",
+      "bytes": 7037,
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.md"
+    },
+    {
+      "sha256": "1b02f3ec40d5d37378ea5dd4599f5efa2a10c528a84e98f9127d564ea8414bdb",
+      "bytes": 2246,
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.md"
+    },
+    {
+      "sha256": "b4b38a92b506b63d780dbb097a4f92b68672c51509e5ad1962d550688817ae46",
+      "bytes": 1126,
+      "path": "artifacts/retry-recovery-endpoint.ps1"
+    },
+    {
+      "sha256": "d20e5426ed5b24528a712e5d6b74e1ef2cf12049ce6589317a44e211ec58073a",
+      "bytes": 2714,
+      "path": "artifacts/record-recovery-endpoint-retry.ps1"
+    }
+  ]
+}

@@ -6,6 +6,27 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class CopperHdfControllerTests
 {
+    [Fact]
+    public void OwnerFlushPersistsHardfileWritesWithoutAdvancingGuestTime()
+    {
+        var path = CreateTempPath();
+        try
+        {
+            AmigaHardfile.CreateBlank(path, 32768);
+            using (var machine = new LightweightA500Machine(new() { Hardfiles = [new(0, path)] }))
+            {
+                machine.HardfileBus!.CopperHdf.Hardfiles[0].Write(512, "saved"u8);
+                var cycle = machine.Cycle; machine.FlushPersistentStorage(); Assert.Equal(cycle, machine.Cycle);
+                using var reader = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                reader.Position = 512; var visible = new byte[5]; reader.ReadExactly(visible);
+                Assert.Equal("saved"u8.ToArray(), visible);
+            }
+            using var reopened = AmigaHardfile.Open(new(0, path, readOnly: true));
+            Assert.Equal("saved"u8.ToArray(), reopened.ReadBytes(512, 5));
+        }
+        finally { DeleteTemp(path); }
+    }
+
 	private const uint NullBlock = 0xFFFF_FFFF;
 	private const uint Dos0 = 0x444F_5300;
 	private const uint Dos6 = 0x444F_5306;

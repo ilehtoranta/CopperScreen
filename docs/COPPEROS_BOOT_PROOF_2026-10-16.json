@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "status": "bounded-native-boot-proof-passed",
+  "shipping": false,
+  "activationAllowed": false,
+  "contract": "packaging/guest/copperos-native-boot.v1.json",
+  "scope": "Source-session qualification of the original read-only native Shell boot proof on Lightweight; not complete CopperOS, installed release, commercial rights or performance qualification.",
+  "producerBases": {
+    "CopperOS": "3c82777009cb2f7268965eb7c182218a61ff42df",
+    "CopperStart": "50f8583a40d24c34a06d4bed71ab31db19d47b95",
+    "state": "Development working-tree inputs; source versions are unreleased"
+  },
+  "pair": {
+    "$schema": "copperos-native-boot.schema.json",
+    "schemaVersion": 1,
+    "contractId": "copperscreen.copperstart-copperos.native-boot-proof",
+    "contractVersion": "0.1.0-dev.1",
+    "pairId": "a500-copperos-cli-boot-proof-dev.1.50015b6fdce1",
+    "status": "native-proof-qualified",
+    "shipping": false,
+    "activationAllowed": false,
+    "inspectionContract": "packaging/guest/copperos-contract.v1.json@1.0.0-draft.1",
+    "rom": {
+      "version": "diskboot-2026-10-16-dev.3",
+      "bytes": 524288,
+      "sha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444"
+    },
+    "systemImage": {
+      "version": "0.1.0-dev.1",
+      "bytes": 901120,
+      "sha256": "40c56b2539ecaa3eb82e0cd338910d9ca6db38a5fd0b83c8072831cc0c38daa3"
+    },
+    "nativeManifestSha256": "50015b6fdce16748a3390de97718f1f870d3b50daa77aaff0e9ece66504abfa8",
+    "nativeArtifacts": {
+      "Shell-Seg": {
+        "version": "0.1.0-dev.1",
+        "bytes": 454776,
+        "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab"
+      },
+      "BootShell": {
+        "version": "0.1.0-dev.1",
+        "bytes": 5024,
+        "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416"
+      },
+      "Demo": {
+        "version": "0.1.0-dev.1",
+        "bytes": 288,
+        "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692"
+      }
+    },
+    "machine": "Lightweight PAL OCS 68000 interpreter; 512 KiB Chip + 512 KiB slow; one read-only DF0; no Fast RAM, RTC, hardfiles or host directories",
+    "bootBinding": "DOS1 bootblock -> native dos.library -> S/Startup-Sequence -> C/BootShell -> original bounded FFS/HUNK reader -> AddSegment(Shell,-1) -> CreateNewProc/CLI -> native Shell entry with DOS-owned C: path",
+    "storage": "Immutable proof image; native guest writes and writable workspace persistence are unqualified",
+    "runtimeEvidence": "docs/COPPEROS_BOOT_PROOF_2026-10-16.json",
+    "remainingGates": [
+      "native writable guest filesystem",
+      "user-owned writable workspace and restart persistence",
+      "MSIX installed boot and update persistence",
+      "complete guest memory/stack budgets and wider Shell lifetime/error coverage",
+      "commercial redistribution evidence and notices",
+      "release admission and clean offline bundled launch"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/copperos-p1-04/recovery-build/System.adf",
+      "bytes": 901120,
+      "sha256": "40c56b2539ecaa3eb82e0cd338910d9ca6db38a5fd0b83c8072831cc0c38daa3"
+    },
+    {
+      "path": "artifacts/copperos-p1-04/recovery-build/system-image.json",
+      "bytes": 5548,
+      "sha256": "937d7cf2e57b11b5d62a9d6a20c89fc0ea623ff91d2cd5fa293d1bda4c0fb654"
+    },
+    {
+      "path": "artifacts/copperos-p1-04/recovery-build/native-manifest.json",
+      "bytes": 126820,
+      "sha256": "50015b6fdce16748a3390de97718f1f870d3b50daa77aaff0e9ece66504abfa8"
+    },
+    {
+      "path": "artifacts/copperos-p1-04/rom3-candidate/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444"
+    },
+    {
+      "path": "artifacts/copperos-p1-04/rom3-candidate/compile-request.json",
+      "bytes": 118577,
+      "sha256": "3515a879f6ec428ac7a3497848ece7822fcc605bec42f038bde404ac8e4690a3"
+    },
+    {
+      "path": "artifacts/copperos-p1-04/rom3-candidate/disk-boot-test-manifest.json",
+      "bytes": 1640,
+      "sha256": "2eb57319be67bdec3d5a838710cfa3d23c2e387433b993583f9ce9452a413fba"
+    }
+  ],
+  "originalImageFiles": [
+    {
+      "path": "C/BootShell",
+      "bytes": 5024,
+      "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416",
+      "protection": 0
+    },
+    {
+      "path": "C/Demo",
+      "bytes": 288,
+      "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692",
+      "protection": 0
+    },
+    {
+      "path": "L/Shell-Seg",
+      "bytes": 454776,
+      "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab",
+      "protection": 0
+    },
+    {
+      "path": "S/Startup-Sequence",
+      "bytes": 55,
+      "sha256": "a0272e339f026ff9e6c2923f5f68e01449c12e31a6d0fec6acbb1d9763f3778b",
+      "protection": 0
+    },
+    {
+      "path": "S/CopperOS-Release.json",
+      "bytes": 510,
+      "sha256": "d5b6c4621127e6590e7b1b35e5ee0b4565b614236f03738792347a2723936991",
+      "protection": 0
+    }
+  ],
+  "staticNativeReports": [
+    {
+      "path": "artifacts/copperos-p1-04/recovery-build/Shell-Seg.hunk.compatibility.json",
+      "bytes": 2823,
+      "sha256": "3c2592a6ad0b58e892057ce2ccc726382d9cfe8b135ad3f81b6451d6c2dc9a06",
+      "artifact": "Shell-Seg",
+      "rootMethods": 8,
+      "reachableMethods": 2181,
+      "profile": "freestanding",
+      "codeBytes": 425184,
+      "zeroManagedAllocationExceptionFaultHelperAndExternalSites": true
+    },
+    {
+      "path": "artifacts/copperos-p1-04/recovery-build/BootShell.hunk.compatibility.json",
+      "bytes": 2571,
+      "sha256": "284f974aae924a2ce9a152cc3ff825adafba6f062ff18a2b428cee049d9932d9",
+      "artifact": "BootShell",
+      "rootMethods": 1,
+      "reachableMethods": 25,
+      "profile": "freestanding",
+      "codeBytes": 4860,
+      "zeroManagedAllocationExceptionFaultHelperAndExternalSites": true
+    },
+    {
+      "path": "artifacts/copperos-p1-04/recovery-build/Demo.hunk.compatibility.json",
+      "bytes": 2030,
+      "sha256": "04079f29d1cb0fff5ef1d13ff007ac8b097fe245fd2a321e44d1a6b56d899eca",
+      "artifact": "Demo",
+      "rootMethods": 1,
+      "reachableMethods": 3,
+      "profile": "freestanding",
+      "codeBytes": 228,
+      "zeroManagedAllocationExceptionFaultHelperAndExternalSites": true
+    },
+    {
+      "path": "artifacts/copperos-p1-04/rom3-candidate/CopperStart-DiskBoot.compatibility.json",
+      "bytes": 3235,
+      "sha256": "fdf0964fa22e3a025090a850d3f642ea2ad1b7410d6243457cd9f97a269b29ba",
+      "artifact": "CopperStart ROM",
+      "rootMethods": 13,
+      "reachableMethods": 3138,
+      "profile": "rom",
+      "zeroManagedAllocationExceptionFaultHelperAndExternalSites": true
+    }
+  ],
+  "inputProvenance": {
+    "osManifest": {
+      "path": "artifacts/copperos-p1-04/recovery-build/native-manifest.json",
+      "bytes": 126820,
+      "sha256": "50015b6fdce16748a3390de97718f1f870d3b50daa77aaff0e9ece66504abfa8"
+    },
+    "romCompileRequest": {
+      "path": "artifacts/copperos-p1-04/rom3-candidate/compile-request.json",
+      "bytes": 118577,
+      "sha256": "3515a879f6ec428ac7a3497848ece7822fcc605bec42f038bde404ac8e4690a3"
+    },
+    "romReachableInputs": [
+      {
+        "Name": "CopperSharp.Sdk.Amiga",
+        "Version": "0.1.0.0",
+        "PublicKeyToken": "",
+        "Mvid": "926de557-680b-4f61-96e6-4a6f2bf6db1b",
+        "Sha256": "21f395f44d04618c8473b1840ca2417be7350e6b22cc465ca147a3515f30641f"
+      },
+      {
+        "Name": "CopperSharp.Sdk.Amiga.Support",
+        "Version": "0.1.0.0",
+        "PublicKeyToken": "",
+        "Mvid": "c5c023c8-c35e-4103-8d06-ac61fb4411c8",
+        "Sha256": "21cbe226b12754ba6150c72b798f93e602cc316e8efd535758f3b16dee12823e"
+      },
+      {
+        "Name": "CopperStart-System",
+        "Version": "1.0.0.0",
+        "PublicKeyToken": "",
+        "Mvid": "abecdaed-47d4-4415-8986-1d72dc86f1a1",
+        "Sha256": "8914593c09d5e3ce494361e91889825e0fff1afe166ec0dc1a9c17f74271a6c2"
+      },
+      {
+        "Name": "CopperStart.Devices",
+        "Version": "1.0.0.0",
+        "PublicKeyToken": "",
+        "Mvid": "6ee26cf1-1ce7-4ea3-9a30-8754b0ba79ad",
+        "Sha256": "e122eb558923e132fca63016e74f9a2f65f51b8bbda1a6f335ccd9b08b8c97d3"
+      },
+      {
+        "Name": "CopperStart.Dos",
+        "Version": "1.0.0.0",
+        "PublicKeyToken": "",
+        "Mvid": "47c7e85e-8afa-416e-bdd6-0b4a4d59991f",
+        "Sha256": "2bdb7157e530f551bdb95399326c265f1d56165a99b4e31f2e8e02f8547787f8"
+      },
+      {
+        "Name": "CopperStart.Exec",
+        "Version": "1.0.0.0",
+        "PublicKeyToken": "",
+        "Mvid": "b27999fb-406e-4b4d-908b-c306cdcc2c69",
+        "Sha256": "07a7339155d94273345286b87a2e1fbb4b1977752976bbf4d06d3d8624fd3bad"
+      }
+    ],
+    "osManagedInputs": [
+      {
+        "sha256": "7d652b7f83882b61a2de8100f80fa34eac40278eb0e2e9eed0aba03448d79962",
+        "file": "CopperOS.SystemImage.NativeRoot.dll"
+      },
+      {
+        "sha256": "56568894ae50394ce0e94c17f5cc8013ad701aaee126c946d0fcea6c3c14d6a9",
+        "file": "CopperSharp.Compiler.Cli.dll"
+      },
+      {
+        "sha256": "b66782eea72fffba6c5aaa4000d7d7689ceebc0c5eef354dd2f7b7b261750eb8",
+        "file": "CopperSharp.Compiler.dll"
+      },
+      {
+        "sha256": "1a6599c05d991ca9132105b3812b5f3e8171611096ceb8e2c17651e166fa8b99",
+        "file": "CopperSharp.Runtime.AmigaPal.dll"
+      },
+      {
+        "sha256": "fca4815b8fb86a23c0a6c6f72ef27e397624ee8d8406a4bb88ba24743920c579",
+        "file": "CopperSharp.Runtime.Managed.dll"
+      },
+      {
+        "sha256": "d449350aa847f179c10cd57935fe5cedae877c7045eabd816b937d402b9143bb",
+        "file": "CopperSharp.Sdk.Amiga.dll"
+      },
+      {
+        "sha256": "6af94012248023ba70ae133dff041e46ed06fbaa5fddae81406376634e0b67f3",
+        "file": "CopperSharp.Sdk.Amiga.Support.dll"
+      },
+      {
+        "sha256": "a7cbc588ffd04602d55af9e7c708127f2cad721ce91324ebdf3d680652fa6ba5",
+        "file": "CopperSharp.Targets.Amiga.dll"
+      },
+      {
+        "sha256": "0d092bd07eede00819bdf65c58c5f3b1e48ce835ce3216c1dfd454c1f1c7ba02",
+        "file": "CopperStart.Dos.dll"
+      },
+      {
+        "sha256": "dd6587ab9ca6288d587a767b1c352a9180e205ecddd226325979012cd989a5da",
+        "file": "CopperStart.Exec.dll"
+      }
+    ]
+  },
+  "implementationSources": [
+    {
+      "path": "../CopperOS/tools/SystemImage.NativeRoot/SystemBootstrap.cs",
+      "sha256": "766a5a781fbc64d4a713b84bcb4df6b1948a8d0c7ed39b8290cc42aae16e1d85"
+    },
+    {
+      "path": "../CopperOS/tools/SystemImage.NativeRoot/SingleHunkStreamLoader.cs",
+      "sha256": "feeee892f0ca87040f0f0d34bca6ece81d47a2ac9201288497588353a6a90447"
+    },
+    {
+      "path": "../CopperOS/tools/SystemImage.NativeRoot/NativeFfsFile.cs",
+      "sha256": "594513926286856d6d260210435055d93729908e2bedf6c52c19f8a57eafadd8"
+    },
+    {
+      "path": "../CopperOS/tools/ImageBuilder/build_system_proof.ps1",
+      "sha256": "33c690b993651f535692263117e5fa2dab1eee01da13040b15eb6e3a17ea1546"
+    },
+    {
+      "path": "../CopperOS/tools/ImageBuilder/build_system_image.py",
+      "sha256": "580a6f321aec0baa8d48b1e9c3af372d8e0005ef5d0a6535df90f273a50ac20e"
+    },
+    {
+      "path": "../CopperOS/src/System/Shell/ShellTextParser.cs",
+      "sha256": "37cd0ac45b8f755e3f1c7778a4111a0eda5a18c3a1a09c4e6b6aeda38fb4a784"
+    },
+    {
+      "path": "../CopperOS/src/System/Shell/ShellScriptEngine.cs",
+      "sha256": "ec18f94a5f709c0b1cbef7fa299a45e4db33b9c0d7a0339103e4a8ab95485498"
+    },
+    {
+      "path": "../CopperStart/src/CopperStart.Devices/NativeConsoleCore.cs",
+      "sha256": "d37b0416e7df8078f63e481eb5c17f1d4c17d3af57a5a3b8bbea242adf26b108"
+    },
+    {
+      "path": "../CopperStart/src/CopperStart.Dos/DosShellNativeBridge.cs",
+      "sha256": "ba772558fd7c2f3eb260b254f8496abdb804e2eea90a4b7ab3f478cd36ce2683"
+    },
+    {
+      "path": "../CopperStart/src/CopperStart.Dos/AmigaDiskFileSystemCore.cs",
+      "sha256": "666b5bb8a301f6acf80ef7a27077e33807292d0cb0aa960c9a0ad001365c48cd"
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/CopperOsBootProofTests.cs",
+      "sha256": "49c7d093cea449853d3f90cd3cfb6f15d4f003e5be8fad54683642fe025a5a11"
+    },
+    {
+      "path": "scripts/test-copperos.ps1",
+      "sha256": "188b11bb82d85530ba2c9cc1b150c4beee99cbcdb13291a8ab0b2778b3012ed3"
+    }
+  ],
+  "runtime": {
+    "schemaVersion": 1,
+    "protocol": "copperos-native-shell-boot-v1",
+    "passed": true,
+    "shipping": false,
+    "pairId": "a500-copperos-cli-boot-proof-dev.1.50015b6fdce1",
+    "romSha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444",
+    "imageSha256": "40c56b2539ecaa3eb82e0cd338910d9ca6db38a5fd0b83c8072831cc0c38daa3",
+    "fields": 9328,
+    "machine": "PAL OCS 68000, 512 KiB Chip + 512 KiB slow, read-only DF0, Lightweight standard session",
+    "observations": [
+      "native prompt",
+      "Alias and internal command dispatch",
+      "original native Demo and return",
+      "command-error recovery"
+    ],
+    "binaries": [
+      {
+        "file": "CopperScreen.dll",
+        "sha256": "ac3da32ef58c4f310b5c859b409c3c1a1343dccbdda78e051758d141d1178eee"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "bf0b42769e0adb40bb1da662c8fcc4d8234e77108db6aec0f93f229fa07e6496"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      },
+      {
+        "file": "CopperScreen.Lightweight.Tests.dll",
+        "sha256": "83ceae05ad7bed680e23ea85bfcc91f920c266cbba0ac65da448c60e283c203a"
+      }
+    ],
+    "receipt": {
+      "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/result.json",
+      "bytes": 1229,
+      "sha256": "3541c880b3f2ca077db919b01adf319b8262f31a2dbe118b0a209e7226d635dc"
+    },
+    "freshUserProfile": true,
+    "observer": "Read-only native console bitmap and CPU/RAM diagnostics; actual keyboard events; no guest injection, host DOS calls or execution overrides",
+    "readOnlyImageUnchanged": true,
+    "captures": [
+      {
+        "label": "boot-prompt",
+        "png": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/boot-prompt.png",
+          "bytes": 30594,
+          "sha256": "b8326dc7c5bf87776dc4d61c28c966bcdf957dad72412569a144ad6f55b4eeea"
+        },
+        "transcript": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/boot-prompt.txt",
+          "bytes": 2025,
+          "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+        },
+        "state": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/boot-prompt.state.json",
+          "bytes": 155,
+          "sha256": "e81c7d5b383c5e4a1280a4f30690f7e6efdae18344a5392f67ba319eabf82020"
+        }
+      },
+      {
+        "label": "alias",
+        "png": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/alias.png",
+          "bytes": 33564,
+          "sha256": "c5c804f491750ff42b3f31ecce97e1846e3607949aa6e9f437fe5b1db7baa6c4"
+        },
+        "transcript": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/alias.txt",
+          "bytes": 2025,
+          "sha256": "3649d4e18168ecc11f79235d9a8e85846944cb8d1625a1d98fc6de8f8afdb262"
+        },
+        "state": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/alias.state.json",
+          "bytes": 161,
+          "sha256": "a6b20bbbae5ca9a96991056b655aa0f535a0a3324590157ad8b88f0dc7b625ac"
+        }
+      },
+      {
+        "label": "demo-return",
+        "png": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/demo-return.png",
+          "bytes": 37849,
+          "sha256": "9a02c721dfeb7da8dedff23c1cbfd65bda64cbbc76122a8b25de0cb40aa9cf3a"
+        },
+        "transcript": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/demo-return.txt",
+          "bytes": 2025,
+          "sha256": "e3dddb051bf0ff75a12f406658726d92ff8b93450c78e0115e872c450ab6785e"
+        },
+        "state": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/demo-return.state.json",
+          "bytes": 165,
+          "sha256": "718c2f3b1f49ce7ba7aa281c6f33c1beb4f396963456d13af679d9178bc3eba2"
+        }
+      },
+      {
+        "label": "command-error",
+        "png": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/command-error.png",
+          "bytes": 40239,
+          "sha256": "06419c9cd0aedf8890609ba949c2a3b580407d5843791b5e89fa64b5170a3918"
+        },
+        "transcript": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/command-error.txt",
+          "bytes": 2025,
+          "sha256": "22886a683c6ee9bbdb1fc6f5a617d61ec81df848857877a83f4d80e42bb28544"
+        },
+        "state": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/command-error.state.json",
+          "bytes": 171,
+          "sha256": "b774ed688ddfa3ec5b8e99adeee3ed91d797fc9091805fcc2c5c71ecaa1b925b"
+        }
+      },
+      {
+        "label": "recovery",
+        "png": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/recovery.png",
+          "bytes": 41068,
+          "sha256": "9d4b8a6e3568171bad3cae1077e586fab6fe11feb1cdceb4a7f5015d627c4582"
+        },
+        "transcript": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/recovery.txt",
+          "bytes": 2025,
+          "sha256": "96f97ec8dc8a2bd32bba256ff55e0dc80077a0973fb33fc985aacd6ca6832d71"
+        },
+        "state": {
+          "path": "artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/recovery.state.json",
+          "bytes": 169,
+          "sha256": "2d52b385b5be348b5bdce77238b20c6dde7e4bbf308c47b88d80233b13960834"
+        }
+      }
+    ]
+  },
+  "tests": {
+    "appNativeShell": {
+      "path": "artifacts/copperos-p1-04/results/system-rom3/copperos.trx",
+      "bytes": 3142,
+      "sha256": "956f901283203b1b070da1d56cf9db6cb03c2e292156f25f1e515e038d71883b",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "skipsMean": "unavailable coverage"
+    },
+    "compiledNativeRomConsoleAndDosBoot": {
+      "path": "artifacts/copperos-p1-04/results/native-rom3.trx",
+      "bytes": 30463,
+      "sha256": "fa535f8d7bac34c90a813e5386214ce3b7ed4ea0a04e883c5daa8d5df023469b",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "skipsMean": "unavailable coverage"
+    },
+    "copperStartAppAndLotus": {
+      "path": "artifacts/copperos-p1-04/copperstart-regression3/copperstart.trx",
+      "bytes": 19878,
+      "sha256": "aa886db5a13d9d7c68ff26bd3495235582ff493152ea5f49139342bdf6d9a74a",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "skipsMean": "unavailable coverage"
+    },
+    "host": {
+      "path": "artifacts/copperos-p1-04/results/host-rom3.trx",
+      "bytes": 362435,
+      "sha256": "f385904661043b1dcba0dbd059df543124018c4e97428a21a6d57600d2442df9",
+      "passed": 230,
+      "failed": 0,
+      "skipped": 9,
+      "skipsMean": "unavailable coverage"
+    },
+    "producerShell": {
+      "path": "artifacts/copperos-p1-04/results/shell-final.trx",
+      "bytes": 300452,
+      "sha256": "bf7941950825950153297f3ee1901c2911a41ff1be032c92350a6a9f3b9f56cb",
+      "passed": 200,
+      "failed": 0,
+      "skipped": 0,
+      "skipsMean": "unavailable coverage"
+    },
+    "dosShellBridgeHost": {
+      "path": "artifacts/copperos-p1-04/results/dos-shell.trx",
+      "bytes": 125361,
+      "sha256": "a668c25198aaec74df07c6bc2908b0d575390b8aaebd978224ec7130a6c06716",
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "skipsMean": "unavailable coverage"
+    },
+    "diskFilesystemHost": {
+      "path": "artifacts/copperos-p1-04/results/filesystem.trx",
+      "bytes": 12438,
+      "sha256": "00edc1be7af495f7a24617d0f95954d394ea1e062d549b9994f2de4f93e467fd",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "skipsMean": "unavailable coverage"
+    },
+    "imageSerialization": {
+      "passed": 5,
+      "nativeExecution": false
+    }
+  },
+  "productionBuilds": {
+    "CopperScreen": "Release: passed, zero warnings/errors",
+    "CopperStart": "Release isolated outputs: passed, zero warnings/errors"
+  },
+  "lotus": {
+    "receipt": {
+      "path": "artifacts/copperos-p1-04/copperstart-regression3/lotus-app/app-session.json",
+      "bytes": 4127,
+      "sha256": "2b209ec18447e212ba2a1a20f3f5cd321552c20bcc00a5f8e05553c2030722c1"
+    },
+    "fields": 14000,
+    "inputSha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3",
+    "mediaSha256": "82DC1FAF56823653CD3B0B299E179932C1FAE117B03CAE220E121D96AE8B3A06",
+    "allNinePixelMilestonesMatchPreviousDev2": true,
+    "allNineScalarComparisonsMatch": true,
+    "visualReview": [
+      "field-11000.png: race grid",
+      "field-14000.png: input-driven gameplay"
+    ],
+    "limitation": "Bounded regression only; not complete gameplay or throughput acceptance"
+  },
+  "developmentControls": {
+    "preservedRoot": "artifacts/copperos-p1-04",
+    "note": "Earlier failed diagnostic images/runs remain preserved; their results do not qualify this exact pair.",
+    "repairs": [
+      "byte-addressed packed command comparisons avoid native 68000 address errors",
+      "physical CON raw-key positions replace incorrect producer/test mapping",
+      "four-address command lookup boundary avoids overwriting live native platform context",
+      "packet FIB length-prefixed names preserve root volume and absolute command paths",
+      "interactive failure and missing-command paths return to the reader"
+    ]
+  },
+  "unavailable": {
+    "installedMsix": "Not run: signed/trusted installed pair unavailable; no machine trust or Developer Mode change",
+    "writableGuestPersistence": "Native write support unqualified",
+    "engineDiagnostics": "Not rerun: no CPU or engine source changes in this continuation",
+    "performance": "Not measured; ordinary short smoke/replay is not acceptance measurement"
+  },
+  "remainingGates": [
+    "native writable guest filesystem",
+    "user-owned writable workspace and restart persistence",
+    "MSIX installed boot and update persistence",
+    "complete guest memory/stack budgets and wider Shell lifetime/error coverage",
+    "commercial redistribution evidence and notices",
+    "release admission and clean offline bundled launch"
+  ]
+}

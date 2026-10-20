@@ -14,11 +14,47 @@ internal static class Program
 	public static void Main(string[] args)
 	{
 		StartupArgs = args ?? Array.Empty<string>();
-		CopperScreenCrashLog.Install(StartupArgs);
+#if COPPERSCREEN_INSTALLED_TESTS
+        if (StartupArgs.FirstOrDefault() == "--installed-rdb")
+        {
+            CopperScreenInstalledRdbProof.Run(StartupArgs, (session, launch) =>
+            {
+                StartupArgs = launch;
+                RunDesktop(session.DataDirectory);
+            });
+            return;
+        }
+        if (StartupArgs.FirstOrDefault() == "--installed-soak")
+        {
+            CopperScreenInstalledSoak.Run(StartupArgs, (session, launch) =>
+            {
+                StartupArgs = launch;
+                CopperScreenInstalledSoak.ActiveSession = session;
+                RunDesktop(session.DataDirectory);
+            });
+            return;
+        }
+		if (StartupArgs.FirstOrDefault() == "--installed-test")
+		{
+			CopperScreenInstalledProbe.Run(StartupArgs, session =>
+			{
+				StartupArgs = [];
+				CopperScreenInstalledProbe.ActiveSession = session;
+				RunDesktop(session.DataDirectory);
+			});
+			return;
+		}
+#endif
+		RunDesktop();
+	}
+
+	private static void RunDesktop(string? userDataDirectory = null)
+	{
+		CopperScreenCrashLog.Install(StartupArgs, userDataDirectory);
 		InstallCopperPadAssemblyResolver();
 		try
 		{
-			Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.RealTime;
+			// Keep the normal Windows priority; starting the app needs no scheduling privilege.
 			//GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
 			GCSettings.LatencyMode = GCLatencyMode.Interactive;
 			BuildAvaloniaApp().StartWithClassicDesktopLifetime(StartupArgs);

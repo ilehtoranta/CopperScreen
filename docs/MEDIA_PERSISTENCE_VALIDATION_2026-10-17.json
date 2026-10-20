@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "recordedUtc": "2026-10-16T23:30:38.4476181Z",
+  "scope": "P1-06 Lightweight media protection, host save publication, native CopperOS persistence, backup/import and recovery",
+  "status": "Implemented; bounded source qualification passed. Final shipping-package acceptance remains open.",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "performanceClaim": false,
+  "sourceHashFormat": "SHA-256 of UTF-8 source with CRLF normalized to LF",
+  "sourceSha256": {
+    "CopperScreen/CopperScreenAtomicFile.cs": "ddb505c7ad21bb2382b0600a58938a76f347a09352175b62dd356b555b4fb636",
+    "CopperScreen/CopperOsWorkspace.cs": "941522c7f0312d37dc02e7816c4b30754352092945f8a26b32b8fd7aa4688cdf",
+    "CopperScreen/CopperOsWorkspace.Recovery.cs": "a45c4215d70a8c3788e5f264e83406891081f64d069e338316a149fa7b2ebbe7",
+    "CopperScreen/CopperScreenRuntime.cs": "c1cca428128805db9daedcdad86110979ca44fae0c780398f87aca90ff54ace0",
+    "CopperScreen/CopperScreenLightweightSession.cs": "9c3c2cc0fbbcc37a0852fd47073bd441cd34d9470f990419672646582a6d4ac8",
+    "CopperScreen/CopperScreenStartupOptions.cs": "1b98f019b2f7942a3366e96ab50c3b019f0fa7ffe6d477d071c6a1f5956cd74d",
+    "CopperScreen/CopperScreenProfile.cs": "f5fcbbad8baed51355be8b925e60c5aef9bc23df4fcce76c077b1b07246ed67f",
+    "CopperScreen/MainWindow.cs": "edfe8a8625676f93fedfe9f24d0167248bda8257e1648a109d97e774e686067c",
+    "CopperScreen/MainWindow.Storage.cs": "5b80d74014867cb93bb00db1d540c0760ee4e6d41e95be8a9705f25d0a0738c9",
+    "CopperScreen/MainWindow.SharedFolders.cs": "02c30d993e4a46b1073db934c09f4a875c093cc518b32104377d28707593f23c",
+    "CopperScreen/MainWindow.Shell.cs": "8cbdd69fcf3b94bea575040d8566a8a3d25d2f0fb15d19d6916bb2deb2b9110f",
+    "CopperScreen/MainWindow.Welcome.cs": "edff7b9e7bb700b9a775814f4e133b744f86e9b83720e1b68eaf1d287dfbd7a3",
+    "CopperScreen/MainWindow.Launch.cs": "2c13b2cf0b6cca11e83963483f69c7aaa3bc1618807d6db92f17eec015dde532",
+    "CopperScreen/MainWindow.WorkspaceRecovery.cs": "25da575bbad776ee9b9e2f7e1de625d594b7d8d561c68de4ff417d8e469a9e49",
+    "CopperMod.Amiga.Lightweight/LightweightA500Machine.Storage.cs": "4cd4963b4e92467477c4ee02f67e0897085e2cb14e0dee86820d36318963e758",
+    "CopperMod.Amiga.Lightweight/LightweightHostFsController.cs": "fae5563b0ccfa04296d119656c36f4bfb85f94daeb1499ca081b23a8d44dbf0a",
+    "CopperMod.Amiga.Lightweight.Tests/CopperHdfControllerTests.cs": "1da59d13457d39a3877a68663ad6a838b23f6178654077a83d88db77c8228031",
+    "CopperMod.Amiga.Lightweight.Tests/LightweightHostPacketTests.cs": "8891b5e5094212172b0be28da05551a872d4443561cf2ad40a3b0f06aa040afe",
+    "CopperScreen.Lightweight.Tests/MediaPersistenceTests.cs": "e6afdcea0072f7ef10f0b9525c0c4555c18fb74c31904504365831001ab9e400",
+    "CopperScreen.Lightweight.Tests/CopperScreenLightweightSessionTests.cs": "d29e15fefc89eabf4c1818b12c7c1e67c6c0867ea306db72382ef8c15820785f",
+    "CopperScreen.Lightweight.Tests/CopperScreenProfileStorageTests.cs": "584de0b99c2a6eae5ad05c83fcf61cab14e0484ef12edce50e8d05fec5a88d93",
+    "CopperScreen.Lightweight.Tests/CopperOsWorkspaceTests.cs": "fc0000e9673a6ec71a52c2197cc0993cc4f27e31df35442ec34c568db0986b8a",
+    "CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj": "181683c5bd05d24c276788051c9cf2de5937f4beeb774807a329aeb86a6b7bc5",
+    "CopperScreen/Diagnostics/CopperOsNativeStorageProof.cs": "226c66b40faf979433500f1ab594b2b4309f73a1d690ce4883ad00f5bd435559",
+    "CopperScreen.Desktop.Tests/LaunchWorkflowTests.cs": "e3251c574e79ba17259a6ecc6633f18500fe93d2fa6597f7f04bb15921c0c666",
+    "CopperScreen.Storage.Probe/Program.cs": "7b0c4e5a80df77e19f64d812caf459ce71382ea24e71d4f6efc435bba06017a9",
+    "CopperScreen.Storage.Probe/CopperScreen.Storage.Probe.csproj": "c47f272eadf0b174e98b16bba29c9a9001a9b11fa22d54453f711d206ee33a78",
+    "CopperScreen.Storage.Probe/packages.lock.json": "6b4cbe438bf8b38765949e711d9f66f28ec23e2434174f0a51fa089655cd9a3b",
+    "CopperScreen.slnx": "f2493ad2ee626eb2226584e19c74dc64dd9468eda5e5f05ad996f59bd0b340a2",
+    "CopperScreen/Firmware/CopperStart.json": "9d19189392efa7c6183739e2412a956611c2e9ae445908f949f50b8e32a76068",
+    "CopperScreen/Firmware/CopperOS.json": "7bf087d57f4b8ba6429d666947ab0794d03eef4696c152304254efc7fd1a6903",
+    ".gitignore": "7b0f4c51915e1e98a35d5c0441fe93bfb69a6150262d93e0b299f577c2d14eed",
+    "docs/MEDIA_PERSISTENCE.md": "bc96b0b207ec87d8c2afd4db1d5b6ae1a54f11e4c9aa52f187ffbc6a3977ea85"
+  },
+  "build": {
+    "command": "dotnet build CopperScreen.slnx -c Release --no-restore -m:1 --artifacts-path artifacts/storage-release-build",
+    "lockedRestoreCommand": "dotnet restore CopperScreen.slnx --locked-mode -m:1",
+    "lockedRestorePassed": true,
+    "warnings": 0,
+    "errors": 0,
+    "log": "artifacts/storage-qualification/release-build.log",
+    "logSha256": "e6781aaf53159ccc47daa028c1d89ce8c1aeadb26eb7fe97cfd82473012c715f",
+    "binaries": [
+      {
+        "file": "artifacts/storage-release-build/bin/CopperScreen/release/CopperDisk.dll",
+        "sha256": "def0a5cf8b86050b25f6af3fa015ef52550ada0b0db07a2396223259c7087474"
+      },
+      {
+        "file": "artifacts/storage-release-build/bin/CopperScreen/release/CopperMod.Amiga.Lightweight.dll",
+        "sha256": "40f58d562efae8e90b25b3d7bc391f7cc0251e0aa1b628e96f0b49258b035e11"
+      },
+      {
+        "file": "artifacts/storage-release-build/bin/CopperScreen/release/CopperScreen.dll",
+        "sha256": "0baa30e412678512e0fb236dfc32bada00bb88906b559e868ea708dee7c2048e"
+      }
+    ]
+  },
+  "tests": {
+    "host": {
+      "file": "artifacts/storage-qualification/storage-host.trx",
+      "sha256": "8f44de2fdc662d6a8f05bbf607fe6522e2cb594f4ecf0739186355da36c910f5",
+      "testAssembly": "artifacts/storage-host-build/bin/CopperScreen.Lightweight.Tests/release/CopperScreen.Lightweight.Tests.dll",
+      "testAssemblySha256": "df803fbfae5e3cca178d69d9b0b047420af20b17e7b34ce4bc51077084dba4dc",
+      "passed": 263,
+      "failed": 0,
+      "unavailable": 12,
+      "total": 275,
+      "unavailableCases": [
+        "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeGameplayThroughHostAdapterPreservesValidatedCpuAndOutput",
+        "CopperScreen.Tests.CopperStartTests.QualifiedRomColdBootResetReinsertAndRestartUseStandardSession",
+        "CopperScreen.Tests.Kickstart31Tests.SuppliedNativeWorkbench31BootsThroughTheDesktopSession",
+        "CopperScreen.Tests.CopperOsStorageTests.NativeFullAndReadOnlyWorkspacesRecoverWithoutChangingData",
+        "CopperScreen.Tests.CopperStartTests.LotusOpeningRaceThroughAppSessionMatchesScalarGuestExecution",
+        "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPressAndReleaseAreAcknowledgedAndGameplayContinues",
+        "CopperScreen.Tests.CopperOsStorageTests.NativeWorkspaceCanExportAfterHostCheckpointFailure",
+        "CopperScreen.Tests.CopperOsBootProofTests.OriginalSystemBootRegistersShellAndRunsInteractiveCommandsThroughLightweight",
+        "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPowerUpCapsLockAndA500ResetAreAcknowledged",
+        "CopperScreen.Tests.CopperOsStorageTests.NativeStorageSurvivesAppRestartAndChangedPackageDirectory",
+        "CopperScreen.Tests.Kickstart30AgaTests.SuppliedNativeA1200BootsEightPlanesAndPersistsThroughDesktopReopen",
+        "CopperScreen.Tests.Kickstart31Tests.SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions"
+      ]
+    },
+    "desktop": {
+      "file": "artifacts/storage-qualification/storage-desktop.trx",
+      "sha256": "0276a25d769ffce507a7ac7d8e4f8f2463e7036a8a236e946deb7b5c78a432f3",
+      "testAssembly": "artifacts/storage-desktop-build/bin/CopperScreen.Desktop.Tests/release/CopperScreen.Desktop.Tests.dll",
+      "testAssemblySha256": "5b1857c3d277c531fada7ace6e9466a9acc5a509c541cd96f70b41560f159337",
+      "passed": 11,
+      "failed": 0,
+      "unavailable": 0,
+      "total": 11,
+      "unavailableCases": []
+    },
+    "engineStorage": {
+      "file": "artifacts/storage-qualification/storage-engine.trx",
+      "sha256": "8da6b11d060c3658dbddf969427a87875fd2899468e692bf3a9f5f821112bfb2",
+      "testAssembly": "artifacts/diagnostic-tests/bin/CopperMod.Amiga.Lightweight.Tests/release/CopperMod.Amiga.Lightweight.Tests.dll",
+      "testAssemblySha256": "246cce834714d880275e06af7a153a71a62614e4396918ffc1b72efa4fbc2dd6",
+      "passed": 41,
+      "failed": 0,
+      "unavailable": 0,
+      "total": 41,
+      "unavailableCases": []
+    },
+    "disk": {
+      "file": "artifacts/storage-qualification/storage-disk.trx",
+      "sha256": "c699587ab66568518919655c5c2177a797fbba0a6583320cfc5c3c9c0d3dab5d",
+      "testAssembly": "CopperDisk.Tests/bin/Release/net10.0/CopperDisk.Tests.dll",
+      "testAssemblySha256": "8138eb6e8f28e2f0e81ed228446b4709a4f60a0e2580e6523b9a64a734ce248a",
+      "passed": 74,
+      "failed": 0,
+      "unavailable": 0,
+      "total": 74,
+      "unavailableCases": []
+    },
+    "nativeCopperOs": {
+      "file": "artifacts/storage-qualification/storage-native.trx",
+      "sha256": "af9ee6df35e0e63c37ae0f9fdb49b2e73611ce8b703aac8b62399ba839f7b278",
+      "testAssembly": "CopperScreen.Lightweight.Tests/bin/Release/net10.0/CopperScreen.Lightweight.Tests.dll",
+      "testAssemblySha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6",
+      "passed": 3,
+      "failed": 0,
+      "unavailable": 0,
+      "total": 3,
+      "unavailableCases": []
+    }
+  },
+  "interruption": {
+    "protocol": "linked-production-snapshot-code-v1",
+    "writer": "CopperScreen.Storage.Probe",
+    "shippingHooks": false,
+    "cases": [
+      "Kill during partial staging: old primary + previous retained",
+      "Kill after Flush(true): old primary + previous retained",
+      "Kill after publication: new primary + former primary retained",
+      "Injected disk-full IOException after partial stage: cleanup + old primary retained"
+    ],
+    "filesystem": "NTFS",
+    "physicalPowerLossTested": false,
+    "actualHostQuotaExhaustionTested": false,
+    "physicalRemovableDetachTested": false,
+    "nativeGuestFullAndReadOnlyTested": true,
+    "originalSyntheticSeedUnchanged": true,
+    "reopenValidated": true
+  },
+  "nativeCopperOs": {
+    "tests": 3,
+    "boots": 7,
+    "protocol": "copperos-native-storage-v2",
+    "coverage": [
+      "native create/write/read/rename/delete/mkdir/settings",
+      "restart",
+      "changed-install-directory simulation",
+      "write-protected DOS error with unchanged image",
+      "full-volume DOS error with unchanged image",
+      "denied host checkpoint retains primary and dirty state",
+      "versioned backup export/import and native reopen/readback"
+    ],
+    "receipts": [
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/negative-replays/20261016T230025864Z/full/result.json",
+        "sha256": "10d4ce40096fe0e30b77f8c4ae003f901b6d9052dcf8f3378a9261fc7773cbd1",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": "COPPEROS STORAGE DISK FULL",
+        "readOnly": false,
+        "denyHostSaves": false,
+        "backupExported": false,
+        "backupImported": false,
+        "backupSha256": null,
+        "importedImageSha256": null,
+        "fields": 8660,
+        "imageSha256": "96d1a7a6576c5f1d5b057ed40ac963e96d6b514af11e66de58237c65fa2f5914",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      },
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/negative-replays/20261016T230025864Z/readonly/result.json",
+        "sha256": "d8b7a6946852888ac74aee1313446d7b4e63c1be2caa527aa5cb324453d9ac0e",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": "COPPEROS STORAGE WRITE PROTECTED",
+        "readOnly": true,
+        "denyHostSaves": false,
+        "backupExported": false,
+        "backupImported": false,
+        "backupSha256": null,
+        "importedImageSha256": null,
+        "fields": 8560,
+        "imageSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      },
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T230539179Z/first/result.json",
+        "sha256": "7202aa5584d0dcfe939a417ace0790cee21629130437f2d7b2458eb3c9ea08b6",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "backupExported": false,
+        "backupImported": false,
+        "backupSha256": null,
+        "importedImageSha256": null,
+        "fields": 21360,
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      },
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T230539179Z/package-update-simulation/result.json",
+        "sha256": "4113cc86937c7dfcd574d7697405b09f7a7ad709cbd5c9a068cc4a68a2c14f30",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "backupExported": false,
+        "backupImported": false,
+        "backupSha256": null,
+        "importedImageSha256": null,
+        "fields": 8960,
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      },
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T230539179Z/restart/result.json",
+        "sha256": "4113cc86937c7dfcd574d7697405b09f7a7ad709cbd5c9a068cc4a68a2c14f30",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "backupExported": false,
+        "backupImported": false,
+        "backupSha256": null,
+        "importedImageSha256": null,
+        "fields": 8960,
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      },
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T232034381Z/denied/result.json",
+        "sha256": "8f11dafb3381131a4565a9474c7b67c6ce4faf1ad25a43b6e2a646fe01f0fe9d",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": true,
+        "backupExported": true,
+        "backupImported": true,
+        "backupSha256": "1965adf4680911790a6610395b43d5436c1e2afcdb5bfe1cab13539f8817ad93",
+        "importedImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "fields": 21360,
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      },
+      {
+        "file": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T232034381Z/reopened-export/result.json",
+        "sha256": "39233a969b4ec262633fc83fd3f9f8485181dc9fca5a06e27564c9034e1a1faa",
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "backupExported": false,
+        "backupImported": false,
+        "backupSha256": null,
+        "importedImageSha256": null,
+        "fields": 8960,
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "604465e507deb8cf759513d67bf6421505c7999643ca18cf9235a9cb51ef277a"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "103b670509d68b1093c7189b0b3e3472d970135c7a6509c3a9f8cc45bf101d12"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "18337ecdaac9dddaa270916b6491825b06f5d82def8fbed2d0733912271a9ef6"
+          }
+        ]
+      }
+    ]
+  },
+  "screenshots": [
+    {
+      "file": "artifacts/storage-qualification/screens/checkpoint-confirmation.png",
+      "sha256": "30ca423a167e9170722e002f3f7909d8ad4f24f589ef688ed30ee61be7e510c4"
+    },
+    {
+      "file": "artifacts/storage-qualification/screens/copperos-ready.png",
+      "sha256": "50f6eec8b2a623c6592c0c22c80ff302db954efb79dc65a150900d7a7aa22253"
+    },
+    {
+      "file": "artifacts/storage-qualification/screens/copperos-setup.png",
+      "sha256": "6b659ae0410c388568eec3c64e6da07fac52c6c5c77fbcbfeab880b515ef91cc"
+    },
+    {
+      "file": "artifacts/storage-qualification/screens/first-run.png",
+      "sha256": "747ec9f4e5c4787916fbbfe4c9815456473c1437bb86eadea5712dee84a22fc4"
+    },
+    {
+      "file": "artifacts/storage-qualification/screens/workspace-recovered.png",
+      "sha256": "2f7ff4256678d32dec8e11a90576a46177295f8c71b254e5d4479b2f73b53a5d"
+    },
+    {
+      "file": "artifacts/storage-qualification/screens/workspace-recovery.png",
+      "sha256": "2f7ff4256678d32dec8e11a90576a46177295f8c71b254e5d4479b2f73b53a5d"
+    }
+  ],
+  "qualificationBoundaries": [
+    "Each run retains its own exact binary hashes; isolated output directories avoid replacing binaries during native replay.",
+    "The native run started before the last offline export/default-policy guards, bounded malformed-manifest read and UI-message refinements. Its exact binaries are identified by each receipt; the final solution build is separately identified.",
+    "The default host run has twelve optional unavailable cases; three CopperOS cases are qualified separately. Other optional native ROM/game/hardfile replays were not run.",
+    "Direct HDF and shared-folder flushes are qualified with device/guest DOS packet tests, not a fresh native Kickstart/Workbench replay.",
+    "Process-kill tests use synthetic DOS1 metadata images and linked production snapshot code; native Shell content persistence is a separate replay.",
+    "Root/bitmap validation is bounded admission, not comprehensive filesystem consistency or repair.",
+    "No power-loss, arbitrary filesystem transactional, physical USB removal, throughput or broad OS compatibility guarantee."
+  ],
+  "remainingReleaseGates": [
+    "Repeat signed MSIX install/update and certification on the final shipping binaries; prior records apply only to their recorded packages.",
+    "Clean-account installed native file-picker, overwrite consent, backup import/export and recovery walkthroughs.",
+    "Native Kickstart direct-write regression coverage with the separately supplied frozen OS/hardfile fixtures."
+  ],
+  "priorEvidence": [
+    "docs/COPPEROS_MSIX_VALIDATION_2026-10-17.json",
+    "docs/MSIX_WACK_VALIDATION_2026-10-17.json",
+    "docs/ONBOARDING_VALIDATION_2026-10-17.json"
+  ],
+  "historicalRecordsOverwritten": false
+}

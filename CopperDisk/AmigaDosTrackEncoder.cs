@@ -43,12 +43,14 @@ public static class AmigaDosTrackEncoder
             throw new ArgumentOutOfRangeException(nameof(head));
         }
 
-        var track = Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount).ToArray();
+        var sectors = disk.SectorData.Length / (disk.Cylinders * disk.Heads * AmigaDiskGeometry.SectorSize);
+        if (sectors is not (11 or 22)) throw new ArgumentException("AmigaDOS encoding requires 11 or 22 sectors per track.", nameof(disk));
+        var track = Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount * (sectors / 11)).ToArray();
         var trackNumber = (cylinder * AmigaDiskGeometry.HeadCount) + head;
-        for (var physicalIndex = 0; physicalIndex < PhysicalSectorOrder.Length; physicalIndex++)
+        for (var physicalIndex = 0; physicalIndex < sectors; physicalIndex++)
         {
-            var sector = PhysicalSectorOrder[physicalIndex];
-            var sectorsUntilGap = AmigaDiskGeometry.SectorsPerTrack - physicalIndex;
+            var sector = sectors == 11 ? PhysicalSectorOrder[physicalIndex] : (physicalIndex + 20) % sectors;
+            var sectorsUntilGap = sectors - physicalIndex;
             EncodeSector(
                 disk.ReadSector(cylinder, head, sector).Span,
                 track.AsSpan(physicalIndex * EncodedSectorBytes, EncodedSectorBytes),

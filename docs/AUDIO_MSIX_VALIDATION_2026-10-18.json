@@ -1,0 +1,1906 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "clientTimezone": "Europe/Helsinki",
+  "recordedUtc": "2026-10-18T07:43:44.7926911Z",
+  "status": "PASSED",
+  "scope": "Signed upgrade from retained pre-fix 1.1.30.0 payload to exact hour-qualified audio/pacing fix 1.1.31.0, with native workspace/profile/settings, media/recovery/reinstall and launcher controls",
+  "protocol": "copperscreen-installed-msix-v4",
+  "installedMsixAcceptance": true,
+  "mediaPersistenceAcceptance": true,
+  "launcherLayoutAcceptance": true,
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN by owner instruction",
+  "formalPerformanceAcceptance": false,
+  "storeCertified": false,
+  "wackRun": false,
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "sourceRebuilt": false,
+  "signing": {
+    "Subject": "CN=CopperScreen Installed Tests",
+    "HasPrivateKey": true,
+    "NotAfterUtc": "2026-10-30T21:06:30Z",
+    "PrivateKeyExported": false,
+    "TrustChanged": false,
+    "IdentityAbsent": true,
+    "Windows": "Microsoft Windows NT 10.0.26200.0",
+    "TrustedPeoplePresent": true,
+    "Thumbprint": "510C8C13859A287EFFE367DB25E2BB05E9AA34AB",
+    "PrivateStorageAbsent": true,
+    "Powershell": "7.6.5"
+  },
+  "versionPair": {
+    "updatePackage": {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Update/CopperScreen-1.1.31.0-win-x64.msix",
+      "bytes": 49552072,
+      "sha256": "640d6040998d7d5fca19207224a7cd5627f46045dc39f989e74dae24004ae01e"
+    },
+    "updateByteIdenticalToHourCandidate": true,
+    "baseline": "1.1.30.0",
+    "baselineDerivation": "Manifest identity name only changed from retained signed old package, then freshly signed. Earlier package unchanged.",
+    "update": "1.1.31.0",
+    "baselinePackage": {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Baseline/CopperScreen-1.1.30.0-win-x64.msix",
+      "bytes": 49550730,
+      "sha256": "99cd8b3cb93569e31d5d304d682a6215d2c845336a9798e9dddf4ee92d590f3b"
+    },
+    "identity": "CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229",
+    "familyReuse": "Earlier diagnostic family reused only after registration and all family-private storage verified absent."
+  },
+  "payloadVerification": [
+    {
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998\\Package30\\CopperScreen-1.1.30.0-win-x64.msix",
+      "VerifiedPayloadFiles": 266,
+      "Sha256": "48EBEEFEBCA8E44C9B9C9BF6FA487AE553EF09D9635D56192159275327F055C1"
+    },
+    {
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Package31\\CopperScreen-1.1.31.0-win-x64.msix",
+      "VerifiedPayloadFiles": 266,
+      "Sha256": "640D6040998D7D5FCA19207224A7CD5627F46045DC39F989E74DAE24004AE01E"
+    },
+    {
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Baseline\\CopperScreen-1.1.30.0-win-x64.msix",
+      "VerifiedPayloadFiles": 266,
+      "Sha256": "99CD8B3CB93569E31D5D304D682A6215D2C845336A9798E9DDDF4EE92D590F3B"
+    },
+    {
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Update\\CopperScreen-1.1.31.0-win-x64.msix",
+      "VerifiedPayloadFiles": 266,
+      "Sha256": "640D6040998D7D5FCA19207224A7CD5627F46045DC39F989E74DAE24004AE01E"
+    }
+  ],
+  "pacingBinaryProof": {
+    "OldHasSteadyVideoThrottle": true,
+    "FixedHasSteadyVideoThrottle": false,
+    "OldHasVideoDeadlineScheduler": true,
+    "FixedAppSha256": "54883C04DC9EFF2530090A167989BB69D7747398A451D02C05F9510F3234886E",
+    "FixedHasVideoDeadlineScheduler": false,
+    "OldAppSha256": "C21223347DCE9FA5D1E1BFF118418B907B2B549DE5B7277F95C9A19D255EB14E"
+  },
+  "pipeline": {
+    "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/installed-test-record.json",
+    "bytes": 63090,
+    "sha256": "f5dab7929db6d9667b5f98c37b1690b68cb19223ff7d36456cc18f4cc464673d"
+  },
+  "nativeBoots": 6,
+  "installedLayoutObservations": 18,
+  "privateHostStateFiles": 15,
+  "expectedSavedImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+  "hostPreferences": "Non-ASCII profile name, RTC, port-2 wasd-joystick, writable media choice and recent disk history, volume 37 and mute survive baseline restart and update.",
+  "phases": [
+    {
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229",
+      "process": {
+        "Id": 120968,
+        "ExitCode": 0,
+        "WaitMilliseconds": 9995,
+        "TimeoutSeconds": 30
+      },
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "seed",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\workspace.json": "8da791be0ee9722ac0d5c95ba48a77c6b9c1e7a6a88b43e7222cc72be51156e4",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\workspace.json": "19a1d87f03fe0a5c13b6958a511ded5109182cea22c5f6add9eacb4acfd7d82a"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "layout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-seed-0\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-seed-0\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-seed-0\\launcher-960x640.png"
+          }
+        ]
+      },
+      "files": {
+        "lightweight-a500-kickstart13.json": "8A8860E51ECB1E06152672E051D78452E199EC6390F3E8D3AED660F936331170",
+        "last-machine.json": "68AF831A9FAECD8A725102DE75ED9524E46A1DE4750F1246A420E5259F58A508",
+        "recent-session.json": "C78FD4A3E51C71A1567909C2DFEF436F9756F745FEBC344463D37E4D113B6507"
+      },
+      "version": "1.1.30.0",
+      "phase": "media-seed",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_1.1.30.0_x64__a0cyw3gffeccg\\",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 21360,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "c21223347dce9fa5d1e1bff118418b907b2b549de5b7277f95c9a19d255eb14e"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "5fe5906fd26a6fabf97c9c4fbad3e901220cd75139bdaab83c0513482029e42a"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "c21223347dce9fa5d1e1bff118418b907b2b549de5b7277f95c9a19d255eb14e"
+          }
+        ]
+      }
+    },
+    {
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229",
+      "process": {
+        "Id": 66552,
+        "ExitCode": 0,
+        "WaitMilliseconds": 1845,
+        "TimeoutSeconds": 30
+      },
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "verify",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\workspace.json": "8da791be0ee9722ac0d5c95ba48a77c6b9c1e7a6a88b43e7222cc72be51156e4",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\workspace.json": "19a1d87f03fe0a5c13b6958a511ded5109182cea22c5f6add9eacb4acfd7d82a"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "layout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-verify-1\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-verify-1\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-verify-1\\launcher-960x640.png"
+          }
+        ]
+      },
+      "files": {
+        "lightweight-a500-kickstart13.json": "8A8860E51ECB1E06152672E051D78452E199EC6390F3E8D3AED660F936331170",
+        "last-machine.json": "68AF831A9FAECD8A725102DE75ED9524E46A1DE4750F1246A420E5259F58A508",
+        "recent-session.json": "C78FD4A3E51C71A1567909C2DFEF436F9756F745FEBC344463D37E4D113B6507"
+      },
+      "version": "1.1.30.0",
+      "phase": "media-verify",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_1.1.30.0_x64__a0cyw3gffeccg\\",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "c21223347dce9fa5d1e1bff118418b907b2b549de5b7277f95c9a19d255eb14e"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "5fe5906fd26a6fabf97c9c4fbad3e901220cd75139bdaab83c0513482029e42a"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "c21223347dce9fa5d1e1bff118418b907b2b549de5b7277f95c9a19d255eb14e"
+          }
+        ]
+      }
+    },
+    {
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229",
+      "process": {
+        "Id": 99512,
+        "ExitCode": 0,
+        "WaitMilliseconds": 2535,
+        "TimeoutSeconds": 30
+      },
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "verify",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\workspace.json": "8da791be0ee9722ac0d5c95ba48a77c6b9c1e7a6a88b43e7222cc72be51156e4",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\workspace.json": "19a1d87f03fe0a5c13b6958a511ded5109182cea22c5f6add9eacb4acfd7d82a"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "layout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-verify-2\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-verify-2\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-verify-2\\launcher-960x640.png"
+          }
+        ]
+      },
+      "files": {
+        "lightweight-a500-kickstart13.json": "8A8860E51ECB1E06152672E051D78452E199EC6390F3E8D3AED660F936331170",
+        "last-machine.json": "68AF831A9FAECD8A725102DE75ED9524E46A1DE4750F1246A420E5259F58A508",
+        "recent-session.json": "C78FD4A3E51C71A1567909C2DFEF436F9756F745FEBC344463D37E4D113B6507"
+      },
+      "version": "1.1.31.0",
+      "phase": "media-verify",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_1.1.31.0_x64__a0cyw3gffeccg\\",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "c5e1f957194d4fccc9e1298f66a716d5487e280852c1341ae5f9cdefbd940e4f"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          }
+        ]
+      }
+    },
+    {
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229",
+      "process": {
+        "Id": 114816,
+        "ExitCode": 0,
+        "WaitMilliseconds": 2278,
+        "TimeoutSeconds": 30
+      },
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "recovery",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\workspace.json": "8da791be0ee9722ac0d5c95ba48a77c6b9c1e7a6a88b43e7222cc72be51156e4",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\workspace.json": "19a1d87f03fe0a5c13b6958a511ded5109182cea22c5f6add9eacb4acfd7d82a",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\live-recovery\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\live-recovery\\workspace.json": "3fbf3a6a0be98e4dd9110d32ca752a5ba7deb473c7ed2153b0b919014373932e"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.copperos": "05df3613b5a51824e4974bd5351523c81cdbb4bb3124c608afbd895393f82412",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "layout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-recovery-3\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-recovery-3\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-recovery-3\\launcher-960x640.png"
+          }
+        ]
+      },
+      "files": {
+        "lightweight-a500-kickstart13.json": "8A8860E51ECB1E06152672E051D78452E199EC6390F3E8D3AED660F936331170",
+        "last-machine.json": "68AF831A9FAECD8A725102DE75ED9524E46A1DE4750F1246A420E5259F58A508",
+        "recent-session.json": "C78FD4A3E51C71A1567909C2DFEF436F9756F745FEBC344463D37E4D113B6507"
+      },
+      "version": "1.1.31.0",
+      "phase": "media-recovery",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_1.1.31.0_x64__a0cyw3gffeccg\\",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": true,
+        "recoveredExport": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.adf",
+        "recoveredBackup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.copperos",
+        "recoveredWorkspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\imported-user\\CopperOS\\Workspaces\\imported\\System.adf",
+        "fields": 21360,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\RecoveryNative\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "c5e1f957194d4fccc9e1298f66a716d5487e280852c1341ae5f9cdefbd940e4f"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          }
+        ]
+      }
+    },
+    {
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229",
+      "process": {
+        "Id": 67228,
+        "ExitCode": 0,
+        "WaitMilliseconds": 2330,
+        "TimeoutSeconds": 30
+      },
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "recovered",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\workspace.json": "8da791be0ee9722ac0d5c95ba48a77c6b9c1e7a6a88b43e7222cc72be51156e4",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\workspace.json": "19a1d87f03fe0a5c13b6958a511ded5109182cea22c5f6add9eacb4acfd7d82a",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\live-recovery\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\live-recovery\\workspace.json": "3fbf3a6a0be98e4dd9110d32ca752a5ba7deb473c7ed2153b0b919014373932e"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.copperos": "05df3613b5a51824e4974bd5351523c81cdbb4bb3124c608afbd895393f82412",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\persistence\\Before-recovery-6d8419c1eda246e5aa597abd2a978e35.adf",
+        "NativeReadback": true,
+        "NativePickerWalkthrough": false
+      },
+      "layout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-recovered-4\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-recovered-4\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-recovered-4\\launcher-960x640.png"
+          }
+        ]
+      },
+      "files": {
+        "lightweight-a500-kickstart13.json": "8A8860E51ECB1E06152672E051D78452E199EC6390F3E8D3AED660F936331170",
+        "last-machine.json": "68AF831A9FAECD8A725102DE75ED9524E46A1DE4750F1246A420E5259F58A508",
+        "recent-session.json": "C78FD4A3E51C71A1567909C2DFEF436F9756F745FEBC344463D37E4D113B6507"
+      },
+      "version": "1.1.31.0",
+      "phase": "media-recovered",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_1.1.31.0_x64__a0cyw3gffeccg\\",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\live-recovery\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "c5e1f957194d4fccc9e1298f66a716d5487e280852c1341ae5f9cdefbd940e4f"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          }
+        ]
+      }
+    },
+    {
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229",
+      "process": {
+        "Id": 28132,
+        "ExitCode": 0,
+        "WaitMilliseconds": 2479,
+        "TimeoutSeconds": 30
+      },
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "fresh",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.copperos": "05df3613b5a51824e4974bd5351523c81cdbb4bb3124c608afbd895393f82412",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        },
+        "RestoredWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\restored-after-uninstall\\System.adf",
+        "RestoredImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "PackagePrivateStateWasRemoved": true,
+        "NativeReadback": true,
+        "NativePickerWalkthrough": false
+      },
+      "layout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-fresh-5\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-fresh-5\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\launcher-layout-fresh-5\\launcher-960x640.png"
+          }
+        ]
+      },
+      "files": {},
+      "version": "1.1.31.0",
+      "phase": "media-fresh",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_1.1.31.0_x64__a0cyw3gffeccg\\",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\af6f00c7f3b04b94ab921e70b62d2229\\CopperOS\\Workspaces\\restored-after-uninstall\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "c5e1f957194d4fccc9e1298f66a716d5487e280852c1341ae5f9cdefbd940e4f"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "54883c04dc9eff2530090a167989bb69d7747398a451d02c05f9510f3234886e"
+          }
+        ]
+      }
+    }
+  ],
+  "backups": [
+    {
+      "metadata": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      },
+      "imageHashVerified": true,
+      "file": {
+        "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/Media/baseline.copperos",
+        "bytes": 206246,
+        "sha256": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91"
+      }
+    },
+    {
+      "metadata": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      },
+      "imageHashVerified": true,
+      "file": {
+        "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/recovered.copperos",
+        "bytes": 206246,
+        "sha256": "05df3613b5a51824e4974bd5351523c81cdbb4bb3124c608afbd895393f82412"
+      }
+    }
+  ],
+  "toolingControlsPassed": 64,
+  "priorHourReferencesVerified": 103,
+  "collectorAudit": "An initial ancillary hash-audit attempt used the wrong JSON field and was marked INVALID. The corrected recursive audit verifies all nested references; no application phase failed.",
+  "earlierDatedFilesUnchanged": 27,
+  "cleanup": "Only diagnostic registration and family-private storage removed. External originals/exports and retained host-state snapshots survive.",
+  "limits": [
+    "Diagnostic local certificate/identity and development guest proof; no Store redistribution or production approval.",
+    "Uses exact retained candidate; subsequent working-tree changes are outside these package hashes.",
+    "No new hour-long audio measurement in this install/update run; same update hash is bound to separate completed hour evidence.",
+    "Current-monitor 100% layout observations do not certify mixed-DPI or physical audio/video quality.",
+    "Release budgets, physical desktop/device matrix, final production/Store identity and fresh exact-package WACK remain open."
+  ],
+  "references": [
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/config.json",
+      "bytes": 454,
+      "sha256": "24c42541bdbdd1697c8cf20756cea4c2d268186979a65892164d4534d4e0e601"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/controller.log",
+      "bytes": 433,
+      "sha256": "9c27bc084d5d9cd108f586aff5dcf416c5bc7cd51b2b21756b89386762330e54"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/driver.ps1",
+      "bytes": 6117,
+      "sha256": "c3d8bf5fc13137954400f48bd933851ef7d290c07673f6e0e2a1604e703750b2"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/historical-before.json",
+      "bytes": 4131,
+      "sha256": "51d82668aa2e723674250893a656a5be69ab32b5a52bd3fabfadf0105fa3d1f1"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/pacing-binary-proof.json",
+      "bytes": 345,
+      "sha256": "d103c2427172d34d9941cc99ef01edc8feb329f36fa3d857f4300e7d7736dff0"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/packaging-controls.log",
+      "bytes": 90,
+      "sha256": "058a0f4eab33c1eb4f0fe914838b591bc4d4d13fb50a4648149a60ba8c6a81c9"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/payload-verification.json",
+      "bytes": 1314,
+      "sha256": "1874b178f90ad6b421a2ab7ff186d77d38516378891cac5868ce3500484ed05b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/preflight.json",
+      "bytes": 419,
+      "sha256": "c23a0f63592ad689b412714959494dd96ce96a543a1289fb6e628a284a05f4e1"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/prior-hour-reference-verification-invalid-null-input.json",
+      "bytes": 180,
+      "sha256": "96fa5a97a0cf0b6603c18efef769d3e8a09a83b943216601028e4d21413fb319"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/prior-hour-reference-verification.json",
+      "bytes": 238,
+      "sha256": "4acfb92606a9836fd93ede47b32ed58d1c2bb3deb638b9c05c350395f040ebd3"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Baseline/CopperScreen-1.1.30.0-win-x64.msix",
+      "bytes": 49550730,
+      "sha256": "99cd8b3cb93569e31d5d304d682a6215d2c845336a9798e9dddf4ee92d590f3b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Baseline/derivation.json",
+      "bytes": 39707,
+      "sha256": "dc183297b6636ba0e5bf2b77315f3c92ce97bb6ff08146b33a53a2131404c0fc"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Baseline/packing.log",
+      "bytes": 69563,
+      "sha256": "6dfac6a9e7307a9230bbc59028ae9c3a3a3ac9bd89139a668fb68de764e0504a"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Baseline/signature-verification.log",
+      "bytes": 1139,
+      "sha256": "5afed3918796ccbae61ed8f69948a7d4cf7c75eef1459182dacf5756318f0a3f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Baseline/signing.log",
+      "bytes": 208,
+      "sha256": "66e8b037e78e65c535271c44e91e0c2cfc574e17c7063665dcb09f0d0ce38dde"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Frozen/scripts/test-msix-installed.ps1",
+      "bytes": 15541,
+      "sha256": "15656e5793f4f7ab29ab7eea0d595ffb32c5be33a27bfdfb834b6cd275b53adb"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Frozen/scripts/msix/CopperScreen.Msix.psm1",
+      "bytes": 14760,
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/fresh-5.json",
+      "bytes": 6861,
+      "sha256": "ce253cf0c1f50bbe066f14126faff31ebfb6df3fefaf76bfc99c0fce7596c70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/installed-test-record.json",
+      "bytes": 63090,
+      "sha256": "f5dab7929db6d9667b5f98c37b1690b68cb19223ff7d36456cc18f4cc464673d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/media-proof-exports.json",
+      "bytes": 5109,
+      "sha256": "0a2c62506430e466c8996b41e4d0a04bb937a385ab55e3dbca4b0e4cbdfc30ea"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/recovered-4.json",
+      "bytes": 10606,
+      "sha256": "bc7f920f1d5b555926c95967684ff4cf1088d3636fd2973edda725690d4fc352"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/recovery-3.json",
+      "bytes": 11167,
+      "sha256": "ecdf6ff97a2a4d011fc5c0461e4e6f7fde042c1ceba2d7e23ece6f47ee732c05"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/seed-0.json",
+      "bytes": 9453,
+      "sha256": "10415ac59657bf81a5dfed1563a91ebc2e614dc0301c823ac102c0f8d4a2470e"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/user-owned-original.txt",
+      "bytes": 40,
+      "sha256": "26220adb2f4db715b8e1e07fa34446d6ae774ec4fd9ff001b80e95f4433d4e22"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/verify-1.json",
+      "bytes": 9461,
+      "sha256": "917748d5393f34cf7daab44a71af4bd78a3f149062ddf66f1d9a4fcf996c698d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/verify-2.json",
+      "bytes": 9461,
+      "sha256": "d3ec579863d61631782315c598ddb7fd1e8ddbb853c7a175e7d6f33090c2cd74"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-fresh-5/launcher-1280x720.png",
+      "bytes": 47179,
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-fresh-5/launcher-800x600.png",
+      "bytes": 41034,
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-fresh-5/launcher-960x640.png",
+      "bytes": 43623,
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-recovered-4/launcher-1280x720.png",
+      "bytes": 47179,
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-recovered-4/launcher-800x600.png",
+      "bytes": 41034,
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-recovered-4/launcher-960x640.png",
+      "bytes": 43623,
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-recovery-3/launcher-1280x720.png",
+      "bytes": 47179,
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-recovery-3/launcher-800x600.png",
+      "bytes": 41034,
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-recovery-3/launcher-960x640.png",
+      "bytes": 43623,
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-seed-0/launcher-1280x720.png",
+      "bytes": 47179,
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-seed-0/launcher-800x600.png",
+      "bytes": 41034,
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-seed-0/launcher-960x640.png",
+      "bytes": 43623,
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-verify-1/launcher-1280x720.png",
+      "bytes": 47179,
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-verify-1/launcher-800x600.png",
+      "bytes": 41034,
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-verify-1/launcher-960x640.png",
+      "bytes": 43623,
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-verify-2/launcher-1280x720.png",
+      "bytes": 47179,
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-verify-2/launcher-800x600.png",
+      "bytes": 41034,
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/launcher-layout-verify-2/launcher-960x640.png",
+      "bytes": 43623,
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/Media/baseline.copperos",
+      "bytes": 206246,
+      "sha256": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/Media/invalid.copperos",
+      "bytes": 3,
+      "sha256": "039058c6f2c0cb492c533b0a4d14ef77cc0f78abccced5287d84a1a2011cfb81"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/Media/original.adf",
+      "bytes": 901120,
+      "sha256": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/Media/original.zip",
+      "bytes": 1004,
+      "sha256": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/Media/saved.adf",
+      "bytes": 901120,
+      "sha256": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/boot.chipram",
+      "bytes": 524288,
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/boot.json",
+      "bytes": 226,
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/boot.slowram",
+      "bytes": 524288,
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/boot.txt",
+      "bytes": 2025,
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/progress-5000.chipram",
+      "bytes": 524288,
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/progress-5000.json",
+      "bytes": 238,
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/progress-5000.slowram",
+      "bytes": 524288,
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/progress-5000.txt",
+      "bytes": 2025,
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/result.json",
+      "bytes": 1374,
+      "sha256": "30b4803a8512d082285bb2bc10e164ae3d48a1e99f8de2d756f008bbd115164d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/storage.chipram",
+      "bytes": 524288,
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/storage.json",
+      "bytes": 229,
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/storage.slowram",
+      "bytes": 524288,
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-fresh-5/storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/boot.chipram",
+      "bytes": 524288,
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/boot.json",
+      "bytes": 226,
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/boot.slowram",
+      "bytes": 524288,
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/boot.txt",
+      "bytes": 2025,
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/progress-5000.chipram",
+      "bytes": 524288,
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/progress-5000.json",
+      "bytes": 238,
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/progress-5000.slowram",
+      "bytes": 524288,
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/progress-5000.txt",
+      "bytes": 2025,
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/result.json",
+      "bytes": 1363,
+      "sha256": "ca86ddcf95915052d0aad37b6c9d3108d41e343a427826fb2375f67765ec3ef6"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/storage.chipram",
+      "bytes": 524288,
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/storage.json",
+      "bytes": 229,
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/storage.slowram",
+      "bytes": 524288,
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovered-4/storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/boot.chipram",
+      "bytes": 524288,
+      "sha256": "215c52b97899dbfd20f3968e44ab82c911060b407935342f46268545615b75f9"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/boot.json",
+      "bytes": 226,
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/boot.slowram",
+      "bytes": 524288,
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/boot.txt",
+      "bytes": 2025,
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-12360.chipram",
+      "bytes": 524288,
+      "sha256": "777badf1f8374436fb378f4eea0a65a0f53f1aeaa9eac2e4e2d6938d29fe696d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-12360.json",
+      "bytes": 249,
+      "sha256": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-12360.slowram",
+      "bytes": 524288,
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-12360.txt",
+      "bytes": 2025,
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-17360.chipram",
+      "bytes": 524288,
+      "sha256": "bbea6d2fb37691af68c8b22e9b87512172d634b295acb85d148bc9c90855e6b9"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-17360.json",
+      "bytes": 252,
+      "sha256": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-17360.slowram",
+      "bytes": 524288,
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-17360.txt",
+      "bytes": 2025,
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-5000.chipram",
+      "bytes": 524288,
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-5000.json",
+      "bytes": 238,
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-5000.slowram",
+      "bytes": 524288,
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/progress-5000.txt",
+      "bytes": 2025,
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/recovered.adf",
+      "bytes": 901120,
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/recovered.copperos",
+      "bytes": 206246,
+      "sha256": "05df3613b5a51824e4974bd5351523c81cdbb4bb3124c608afbd895393f82412"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/result.json",
+      "bytes": 1928,
+      "sha256": "322b37bf6e34e79af1d959654f549836765e50effbb50a03c9da7bd1ab36b459"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/storage.chipram",
+      "bytes": 524288,
+      "sha256": "5b8d63c20648c6a2b1a3032b3d3d4badcaf6ca8d7698bbf24cea8075726facbf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/storage.json",
+      "bytes": 230,
+      "sha256": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/storage.slowram",
+      "bytes": 524288,
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/storage.txt",
+      "bytes": 2025,
+      "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/imported-user/CopperOS/Workspaces/imported/System.adf",
+      "bytes": 901120,
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-recovery-3/imported-user/CopperOS/Workspaces/imported/workspace.json",
+      "bytes": 358,
+      "sha256": "3c199faba6f82f602d3e79ff6c700604aa59642f036900a38953ed4739d9cd08"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/boot.chipram",
+      "bytes": 524288,
+      "sha256": "215c52b97899dbfd20f3968e44ab82c911060b407935342f46268545615b75f9"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/boot.json",
+      "bytes": 226,
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/boot.slowram",
+      "bytes": 524288,
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/boot.txt",
+      "bytes": 2025,
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-12360.chipram",
+      "bytes": 524288,
+      "sha256": "777badf1f8374436fb378f4eea0a65a0f53f1aeaa9eac2e4e2d6938d29fe696d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-12360.json",
+      "bytes": 249,
+      "sha256": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-12360.slowram",
+      "bytes": 524288,
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-12360.txt",
+      "bytes": 2025,
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-17360.chipram",
+      "bytes": 524288,
+      "sha256": "bbea6d2fb37691af68c8b22e9b87512172d634b295acb85d148bc9c90855e6b9"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-17360.json",
+      "bytes": 252,
+      "sha256": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-17360.slowram",
+      "bytes": 524288,
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-17360.txt",
+      "bytes": 2025,
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-5000.chipram",
+      "bytes": 524288,
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-5000.json",
+      "bytes": 238,
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-5000.slowram",
+      "bytes": 524288,
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/progress-5000.txt",
+      "bytes": 2025,
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/result.json",
+      "bytes": 1363,
+      "sha256": "b1cd02c4867a3a0f5229f1749105a56b5e75234895f69040fa14803b48f2e53b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/storage.chipram",
+      "bytes": 524288,
+      "sha256": "5b8d63c20648c6a2b1a3032b3d3d4badcaf6ca8d7698bbf24cea8075726facbf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/storage.json",
+      "bytes": 230,
+      "sha256": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/storage.slowram",
+      "bytes": 524288,
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-seed-0/storage.txt",
+      "bytes": 2025,
+      "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/boot.chipram",
+      "bytes": 524288,
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/boot.json",
+      "bytes": 226,
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/boot.slowram",
+      "bytes": 524288,
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/boot.txt",
+      "bytes": 2025,
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/progress-5000.chipram",
+      "bytes": 524288,
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/progress-5000.json",
+      "bytes": 238,
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/progress-5000.slowram",
+      "bytes": 524288,
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/progress-5000.txt",
+      "bytes": 2025,
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/result.json",
+      "bytes": 1361,
+      "sha256": "e499ed42734eaa0403697807aef7e2afa6becd560cdba2f7a2e086f3c1d7e9ff"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/storage.chipram",
+      "bytes": 524288,
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/storage.json",
+      "bytes": 229,
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/storage.slowram",
+      "bytes": 524288,
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-1/storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/boot.chipram",
+      "bytes": 524288,
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/boot.json",
+      "bytes": 226,
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/boot.slowram",
+      "bytes": 524288,
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/boot.txt",
+      "bytes": 2025,
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/progress-5000.chipram",
+      "bytes": 524288,
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/progress-5000.json",
+      "bytes": 238,
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/progress-5000.slowram",
+      "bytes": 524288,
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/progress-5000.txt",
+      "bytes": 2025,
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/result.json",
+      "bytes": 1361,
+      "sha256": "20d4f2033c6d897d412725576cabafde9269dce0d7895771470fe2790b3bd25f"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/storage.chipram",
+      "bytes": 524288,
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/storage.json",
+      "bytes": 229,
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/storage.slowram",
+      "bytes": 524288,
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Installed/native-storage-verify-2/storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/fresh-5/snapshot.json",
+      "bytes": 72,
+      "sha256": "b76ecd213dbde6ef0c634d54702a199767e4a7d87866cf72268fecb16db20085"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovered-4/last-machine.json",
+      "bytes": 2465,
+      "sha256": "68af831a9faecd8a725102de75ed9524e46a1de4750f1246a420e5259f58a508"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovered-4/lightweight-a500-kickstart13.json",
+      "bytes": 2544,
+      "sha256": "8a8860e51ecb1e06152672e051d78452e199ec6390f3e8d3aed660f936331170"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovered-4/recent-session.json",
+      "bytes": 262,
+      "sha256": "c78fd4a3e51c71a1567909c2dfef436f9756f745febc344463d37e4d113b6507"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovered-4/snapshot.json",
+      "bytes": 502,
+      "sha256": "94130f457af39fddfb695f4085606bc1fa1e42b92180ba2c2a41a909e55a3010"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovery-3/last-machine.json",
+      "bytes": 2465,
+      "sha256": "68af831a9faecd8a725102de75ed9524e46a1de4750f1246a420e5259f58a508"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovery-3/lightweight-a500-kickstart13.json",
+      "bytes": 2544,
+      "sha256": "8a8860e51ecb1e06152672e051d78452e199ec6390f3e8d3aed660f936331170"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovery-3/recent-session.json",
+      "bytes": 262,
+      "sha256": "c78fd4a3e51c71a1567909c2dfef436f9756f745febc344463d37e4d113b6507"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/recovery-3/snapshot.json",
+      "bytes": 501,
+      "sha256": "22b2fbe03b9340a975f75df143f29de91a3bdd4243d4e47f969176fe172ad67d"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/seed-0/last-machine.json",
+      "bytes": 2465,
+      "sha256": "68af831a9faecd8a725102de75ed9524e46a1de4750f1246a420e5259f58a508"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/seed-0/lightweight-a500-kickstart13.json",
+      "bytes": 2544,
+      "sha256": "8a8860e51ecb1e06152672e051d78452e199ec6390f3e8d3aed660f936331170"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/seed-0/recent-session.json",
+      "bytes": 262,
+      "sha256": "c78fd4a3e51c71a1567909c2dfef436f9756f745febc344463d37e4d113b6507"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/seed-0/snapshot.json",
+      "bytes": 497,
+      "sha256": "1450daca328081c00cf267c0470b87abdfc5d2ceaf9e7741facd05545ed0217a"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-1/last-machine.json",
+      "bytes": 2465,
+      "sha256": "68af831a9faecd8a725102de75ed9524e46a1de4750f1246a420e5259f58a508"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-1/lightweight-a500-kickstart13.json",
+      "bytes": 2544,
+      "sha256": "8a8860e51ecb1e06152672e051d78452e199ec6390f3e8d3aed660f936331170"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-1/recent-session.json",
+      "bytes": 262,
+      "sha256": "c78fd4a3e51c71a1567909c2dfef436f9756f745febc344463d37e4d113b6507"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-1/snapshot.json",
+      "bytes": 499,
+      "sha256": "38a7463ab9372c6fff5e9a4eca986decf3f30a9e780678d1c0d7ceb03afa2ad7"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-2/last-machine.json",
+      "bytes": 2465,
+      "sha256": "68af831a9faecd8a725102de75ed9524e46a1de4750f1246a420e5259f58a508"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-2/lightweight-a500-kickstart13.json",
+      "bytes": 2544,
+      "sha256": "8a8860e51ecb1e06152672e051d78452e199ec6390f3e8d3aed660f936331170"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-2/recent-session.json",
+      "bytes": 262,
+      "sha256": "c78fd4a3e51c71a1567909c2dfef436f9756f745febc344463d37e4d113b6507"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/PrivateState/verify-2/snapshot.json",
+      "bytes": 499,
+      "sha256": "5a1600e1d26644e521fd4f1ae8eca092f2b69ba1eee6d7922721e83145d89887"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Update/CopperScreen-1.1.31.0-win-x64.msix",
+      "bytes": 49552072,
+      "sha256": "640d6040998d7d5fca19207224a7cd5627f46045dc39f989e74dae24004ae01e"
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Update/signature-verification.log",
+      "bytes": 1135,
+      "sha256": "522498d6a939a8e951cc4bc8364771ee5199de01d100634bb9cf333f654f3236"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Package30/package-record.json",
+      "bytes": 67680,
+      "sha256": "898f868e6d6c217c23be77911e8280b9f4bbdf8430273f66584c07f4fd077fcb"
+    },
+    {
+      "path": "artifacts/p1-07-soak-2026-10-17-d8aca67d4a834a6fa2636877e6692998/Package30/CopperScreen-1.1.30.0-win-x64.msix",
+      "bytes": 49550731,
+      "sha256": "48ebeefebca8e44c9b9c9bf6fa487ae553ef09d9635d56192159275327f055c1"
+    },
+    {
+      "path": "artifacts/p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229/Package31/package-record.json",
+      "bytes": 67681,
+      "sha256": "899a6c806477147b6076c676b26aa71724b3b062dced4bdb910c770e85a56380"
+    },
+    {
+      "path": "artifacts/p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229/Package31/CopperScreen-1.1.31.0-win-x64.msix",
+      "bytes": 49552072,
+      "sha256": "640d6040998d7d5fca19207224a7cd5627f46045dc39f989e74dae24004ae01e"
+    },
+    {
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.json",
+      "bytes": 64539,
+      "sha256": "b84ae843db91f6763c1345dbd8b32fe553037328c14817287c9c9fcb587effaa"
+    },
+    {
+      "path": "docs/INSTALLED_SESSIONS_2026-10-18.json",
+      "bytes": 68352,
+      "sha256": "965d39f46357ad8f97d332394642ede396b4033ee5fae63e5c8d942c1c9f0145"
+    },
+    {
+      "path": "artifacts/record-p1-07-audio-msix.ps1",
+      "bytes": 12458,
+      "sha256": "105eba972f20f6dfbb830229f8582f6887f9b44384920ee82407dec9ed825314"
+    },
+    {
+      "path": "scripts/tests/test-msix-tools.ps1",
+      "bytes": 11552,
+      "sha256": "5826609486ffc8ccd014a55277dedb28270055792647368d977672dff7fd0ee4"
+    }
+  ]
+}

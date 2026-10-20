@@ -36,13 +36,13 @@ public sealed class CopperScreenRecentSessionTests : IDisposable
     }
 
     [Fact]
-    public void RemovedDiskDoesNotPreventLoadingTheLastMachine()
+    public void RemovedDiskDoesNotPreventLoadingTheLastMachineAndRetainsItsRepairPath()
     {
         var draft = new CopperScreenSettingsDraft();
         draft.DriveDiskPaths[0] = Path.Combine(_directory, "removed.adf");
         var session = new CopperScreenRecentSession(_directory);
         session.Save(draft, 100, false);
-        Assert.Null(Assert.IsType<CopperScreenSettingsDraft>(session.LoadMachine(_directory)).DriveDiskPaths[0]);
+        Assert.Equal(draft.DriveDiskPaths[0], Assert.IsType<CopperScreenSettingsDraft>(session.LoadMachine(_directory)).DriveDiskPaths[0]);
     }
 
     [Fact]

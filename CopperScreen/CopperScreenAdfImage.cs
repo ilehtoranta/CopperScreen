@@ -14,11 +14,12 @@ internal sealed class CopperScreenAdfImage
     public string Name { get; }
     private LightweightFloppyImage Image { get; }
     public LightweightFloppyFormat Format => Image.Format;
+    public bool RequiresHighDensityDrive => Image.IsHighDensity;
     public bool CanWrite => Image.CanWrite;
     public static CopperScreenAdfImage FromAdfBytes(byte[] data, string name)
     {
-        if (data.Length != StandardAdfSize)
-            throw new NotSupportedException("Lightweight requires a complete standard 880 KiB ADF.");
+        if (data.Length != StandardAdfSize && data.Length != StandardAdfSize * 2)
+            throw new NotSupportedException("Lightweight requires a complete 880 KiB DD or 1760 KiB HD ADF.");
         return new((byte[])data.Clone(), name, LightweightFloppyImage.Prepare(data, "disk.adf"));
     }
     public static CopperScreenAdfImage FromBytes(byte[] data, string name)

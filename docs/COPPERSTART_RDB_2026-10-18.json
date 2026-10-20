@@ -1,0 +1,23 @@
+{
+  "protocol": "copperstart-rdb-frontends-v1",
+  "passed": true,
+  "qualificationId": "diskboot-2026-10-18-td64.1",
+  "romSha256": "199685F8AA9BEBE7D1879F12E5C7D37A88B85AB7752FCA48AF30C9CEDAC97AD0",
+  "romBytes": 524288,
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "settingsFirmwareCases": 23,
+  "headlessUiCases": 2,
+  "runnerOptionCases": 8,
+  "fullRomCases": 2,
+  "fullRomBoots": 4,
+  "compiledMc68000Cases": 0,
+  "skipped": 0,
+  "productionReleaseBuild": {
+    "succeeded": true,
+    "warnings": 0,
+    "errors": 0
+  },
+  "nativeCoverage": "Two fresh app sessions restored from persisted RDB settings and two fresh runner processes (read-only and writable); both payloads, SYS: priority, flush replies and backing-image identity checked.",
+  "producerCoverage": "Original RDB producer qualification and newer TD64 qualification are separate; final consumer replay uses TD64 superset ROM.",
+  "installedPackage": "Separate coverage"
+}

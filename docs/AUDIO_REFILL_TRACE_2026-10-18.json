@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "protocol": "copperscreen-audio-refill-eventpipe-v1",
+  "date": "2026-10-18",
+  "recordedUtc": "2026-10-18T17:46:10.3124093Z",
+  "status": "RESIDUAL_REPRODUCED_CAUSE_OPEN",
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "performanceAcceptance": "INVALID / RERUN: diagnostic profiling; no qualified host-load/placement series",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "packageSha256": "d93305ab8cd470266d72818fa1157721186f8a5fb7ee789b6df16e1d04ba3ef8",
+  "tool": "dotnet-trace 10.0.750501, local ignored tool path",
+  "traceEvent": "3.1.23",
+  "traces": [
+    {
+      "request": {
+        "DurationSeconds": 180,
+        "Profile": "dotnet-sampled-thread-time,gc-collect",
+        "AttachedUtc": "2026-10-18T17:32:49.4439981Z",
+        "Pid": 75660,
+        "PackageSha256": "d93305ab8cd470266d72818fa1157721186f8a5fb7ee789b6df16e1d04ba3ef8",
+        "ToolVersion": "10.0.750501",
+        "Acceptance": false
+      },
+      "runtimeSuspendReasons": [
+        {
+          "reason": "SuspendForGC",
+          "upperBoundTotalMilliseconds": 223.7535,
+          "upperBoundMaxMilliseconds": 189.8215,
+          "count": 6
+        },
+        {
+          "reason": "SuspendForGCPrep",
+          "upperBoundTotalMilliseconds": 0.1646,
+          "upperBoundMaxMilliseconds": 0.1646,
+          "count": 1
+        },
+        {
+          "reason": "SuspendOther",
+          "upperBoundTotalMilliseconds": 15275.764800000032,
+          "upperBoundMaxMilliseconds": 266.1047,
+          "count": 16214
+        }
+      ],
+      "historyFile": "progress-history.jsonl",
+      "exit": {
+        "ExitCode": 0,
+        "CompletedUtc": "2026-10-18T17:36:12.6821383Z"
+      },
+      "collectionCount": 7,
+      "eventsLost": 0
+    },
+    {
+      "request": {
+        "AttachedUtc": "2026-10-18T17:40:09.5556375Z",
+        "Acceptance": false,
+        "StackSampling": false,
+        "Pid": 82104,
+        "DurationSeconds": 120,
+        "Profile": "gc-collect",
+        "ToolVersion": "10.0.750501"
+      },
+      "runtimeSuspendReasons": [
+        {
+          "reason": "SuspendForGC",
+          "upperBoundTotalMilliseconds": 28.4905,
+          "upperBoundMaxMilliseconds": 18.0656,
+          "count": 3
+        }
+      ],
+      "historyFile": "gc-only-progress-history.jsonl",
+      "exit": {
+        "ExitCode": 0,
+        "CompletedUtc": "2026-10-18T17:42:11.8257800Z"
+      },
+      "collectionCount": 3,
+      "eventsLost": 0
+    }
+  ],
+  "gcOnlyObservedInterval": {
+    "firstObservedUtc": "2026-10-18T17:40:19.7813758Z",
+    "initialCumulativeMissing": 410910,
+    "finalCumulativeMissing": 410910,
+    "observation": "Coarse snapshots read after creation, not exact counter timestamps; startup precedes this interval",
+    "lastObservedUtc": "2026-10-18T17:42:10.7171480Z",
+    "missingValueIncrease": 0,
+    "firstWarmupSeconds": 25.033791,
+    "lastWarmupSeconds": 135.3858072
+  },
+  "sessions": [
+    {
+      "phase": "soak",
+      "warmupMissingValues": 2673074,
+      "measuredMissingValues": 7600,
+      "exitCode": 0,
+      "diskSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "maxActualCallbackGapMilliseconds": 407,
+      "passed": true,
+      "monotonicSeconds": 60.0382989
+    },
+    {
+      "phase": "reopen",
+      "warmupMissingValues": 410910,
+      "measuredMissingValues": 0,
+      "exitCode": 0,
+      "diskSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "maxActualCallbackGapMilliseconds": 46,
+      "passed": true,
+      "monotonicSeconds": 10.0158567
+    }
+  ],
+  "freshProcessProfileSettingsMatch": true,
+  "ownedRegistrationRemoved": true,
+  "privateStateRetained": true,
+  "limits": [
+    "Stack samples include runtime suspension and waiting threads; percentages are not kernel CPU utilization.",
+    "Profiles differ in time and process, without a controlled host-load comparison.",
+    "GC-only trace does not reproduce additional loss in its retained snapshot interval; it does not explain earlier startup or the CopperOS late gap.",
+    "No production behavior changed after signed 37; no new S3/PnP/update/WACK/hour acceptance."
+  ],
+  "references": [
+    {
+      "bytes": 380,
+      "path": "artifacts/refill-trace-9408757b/analyzer-build.log",
+      "sha256": "0ad655f85a37e17c6ddc5615b9acb1d513c61696fe451f03ae26bccf41a923c0"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/refill-trace-9408757b/controller.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 442,
+      "path": "artifacts/refill-trace-9408757b/frozen-inputs.json",
+      "sha256": "ee670d0b8fc205a060bb727c4d25d8fb8e20f214cf921c55633298efc599ed72"
+    },
+    {
+      "bytes": 74,
+      "path": "artifacts/refill-trace-9408757b/gc-only-exit.json",
+      "sha256": "0cf4f2f02dd367b295bfec8022cd5acbd4792d4364ec801f43541b7f4b29b085"
+    },
+    {
+      "bytes": 1327,
+      "path": "artifacts/refill-trace-9408757b/gc-only-pauses.json",
+      "sha256": "03f23603aa86ab622fc2a171555e9d6a84d91ac9f11d085487d6d634bd64c0f7"
+    },
+    {
+      "bytes": 21730,
+      "path": "artifacts/refill-trace-9408757b/gc-only-progress-history.jsonl",
+      "sha256": "fd4141d3e435e858ad93b7024ac10dedb87b586ce714d9640b888f7306502097"
+    },
+    {
+      "bytes": 211,
+      "path": "artifacts/refill-trace-9408757b/gc-only-request.json",
+      "sha256": "e244baad9bf8158f9d567267ab6dc68280300dd503194475c68c9908d16c04c0"
+    },
+    {
+      "bytes": 673,
+      "path": "artifacts/refill-trace-9408757b/gc-only.log",
+      "sha256": "1efa8080a1a0cd22e66ab03fb78090f355f7a4fc730c54f9e9e53651f7a86942"
+    },
+    {
+      "bytes": 10342,
+      "path": "artifacts/refill-trace-9408757b/gc-only.nettrace",
+      "sha256": "4f6cb863dba8eb2a66c86d2c3844d33a7a611f00fff111b158d72814de7cb2ea"
+    },
+    {
+      "bytes": 3045989,
+      "path": "artifacts/refill-trace-9408757b/gc-pauses.json",
+      "sha256": "31005207d484223f94daa1ac1500e0ae8cf7ccc02969b8964cad300e621703f5"
+    },
+    {
+      "bytes": 12221,
+      "path": "artifacts/refill-trace-9408757b/inclusive-methods.txt",
+      "sha256": "638d745febe1b004848234995d8bcd7d80728a339e954c304a7104a3a8b6092f"
+    },
+    {
+      "bytes": 15092518,
+      "path": "artifacts/refill-trace-9408757b/producer.nettrace",
+      "sha256": "31a916994d09ed4a4c396ef688034d0c236a14cb4d9218f60108fba7df3a5f0e"
+    },
+    {
+      "bytes": 33556946,
+      "path": "artifacts/refill-trace-9408757b/producer.nettrace.etlx",
+      "sha256": "0b231f760a6f2d55323a7695e76db8d140f4cca82118423d3a024538dbb4e3e3"
+    },
+    {
+      "bytes": 22763,
+      "path": "artifacts/refill-trace-9408757b/progress-history.jsonl",
+      "sha256": "651c64b050fbb7cf9c75cc8cc95c9e766556ef4ea2422b668f37cc6f1a159df4"
+    },
+    {
+      "bytes": 2520,
+      "path": "artifacts/refill-trace-9408757b/top-methods.txt",
+      "sha256": "5ab2e3151104a1b7521b01ee1b6a157b65096772f198413355999a0cfa93766f"
+    },
+    {
+      "bytes": 74,
+      "path": "artifacts/refill-trace-9408757b/trace-exit.json",
+      "sha256": "1b01890c96dbf18dfa26ff09be668378dc223d28a28c573bd9e5b13f46937021"
+    },
+    {
+      "bytes": 299,
+      "path": "artifacts/refill-trace-9408757b/trace-request.json",
+      "sha256": "97fcddc889100790ab5f4f00789a6419e13f47a3fd9a4f4d4c265ac32e47fd1d"
+    },
+    {
+      "bytes": 765,
+      "path": "artifacts/refill-trace-9408757b/trace.log",
+      "sha256": "eea27c63f585d4e40e0c51ffee24f422b13051674bb796ef3826e1f853224476"
+    },
+    {
+      "bytes": 8346,
+      "path": "artifacts/refill-trace-9408757b/Frozen/test-msix-soak.ps1",
+      "sha256": "0c24ea2ced351f119b23810fff6ab0ebae0dd0dcce93df35fec44183d8a924bb"
+    },
+    {
+      "bytes": 14760,
+      "path": "artifacts/refill-trace-9408757b/Frozen/msix/CopperScreen.Msix.psm1",
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3"
+    },
+    {
+      "bytes": 2454,
+      "path": "artifacts/refill-trace-9408757b/Frozen/qualification/CopperScreen.Soak.psm1",
+      "sha256": "c2370e848d2b80e468dd4d694109352daac0fe0f2c38dab7a785677f039b4ef8"
+    },
+    {
+      "bytes": 208,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-profile-path.txt",
+      "sha256": "a38cf9f4349e4b4f40d897dcf0f89e461f3498793d991ff84362f243e02143f1"
+    },
+    {
+      "bytes": 35898,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen-end.png",
+      "sha256": "3e0dbb56b636a2a991474aa89180c049c6e0e80fcd6e467cb00da09bc99dcd7a"
+    },
+    {
+      "bytes": 37380,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen-middle.png",
+      "sha256": "5368f2c3681a6267ca2d139457716b86843ff36fbc10e37839a6fc20f55b5450"
+    },
+    {
+      "bytes": 549,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen-request.json",
+      "sha256": "f4b3d42443103957559bd9a2987bacab1234d4ead4e17bc75a4b0fc1b49ce369"
+    },
+    {
+      "bytes": 8883,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen-samples.jsonl",
+      "sha256": "253b0c399b107c829425217a60ebb578573d1c78d3f32f497fd8f12864889929"
+    },
+    {
+      "bytes": 33467,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen-start.png",
+      "sha256": "d1a6baed274c414f14c30dae311d6203d78377e9cb41efd34372ada152dc2dab"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen.adf",
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    },
+    {
+      "bytes": 24009,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-reopen.json",
+      "sha256": "534657b9e9d9b81c46d8e1131d276ba8c0c26d03ea6e7baa9f4a5d9945f9dd55"
+    },
+    {
+      "bytes": 28829,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak-end.png",
+      "sha256": "35acb3b1dd412a4f631fcccb60845e6471a20f626dd6dcea919f31b289ad458f"
+    },
+    {
+      "bytes": 29011,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak-middle.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9"
+    },
+    {
+      "bytes": 547,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak-request.json",
+      "sha256": "65612b56a6bbd1f976381eedd17bd338865ed5383ff4b28ff19d870351c72f60"
+    },
+    {
+      "bytes": 53356,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak-samples.jsonl",
+      "sha256": "c11bda721eb003ab45d074ad0b4eb6d712977aa89aa53e309bf2739ddb545a3b"
+    },
+    {
+      "bytes": 33908,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak-start.png",
+      "sha256": "7461a1634ab174f9fcc33169ae34bbfc412c6fe23409c42913a3ce325195efbd"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak.adf",
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    },
+    {
+      "bytes": 24017,
+      "path": "artifacts/refill-trace-9408757b/Installed/copperstart-soak.json",
+      "sha256": "3b8773b84369c08a2af6b65b5a41ceb0f0d2123b6fc5fbe69882d72f7d69691b"
+    },
+    {
+      "bytes": 25468,
+      "path": "artifacts/refill-trace-9408757b/Installed/external-observer.jsonl",
+      "sha256": "c474066fce5ee1a6c07389e5f90c90926df100a435b9fe420c4b675360b8d1ea"
+    },
+    {
+      "bytes": 1543,
+      "path": "artifacts/refill-trace-9408757b/Installed/progress.json",
+      "sha256": "a51330d40c48738cfb99a9cf057a6c3eee1857294ab5c39010d2c7c5694b06fb"
+    },
+    {
+      "bytes": 54480,
+      "path": "artifacts/refill-trace-9408757b/Installed/soak-record.json",
+      "sha256": "ed277ea18fdfaf11204d9b7419dce8dfc9d19db380f3511f4394cb295d34ab05"
+    },
+    {
+      "bytes": 1225,
+      "path": "artifacts/refill-trace-9408757b/Installed/PrivateState/copperstart/last-machine.json",
+      "sha256": "9ad1c2e1f5a985abf8911614c8af2e07b204dc05bb2c8e489e7fb4cd5a7a42b5"
+    },
+    {
+      "bytes": 189,
+      "path": "artifacts/refill-trace-9408757b/Installed/PrivateState/copperstart/recent-session.json",
+      "sha256": "8803955b724df460c3b20b06f3e9fcb15bb7a70fdf1367d0ac4b400da074f7c0"
+    },
+    {
+      "bytes": 101948,
+      "path": "artifacts/refill-trace-9408757b/Installed/PrivateState/copperstart/Logs/CopperScreen-20261018-203257-75660.log",
+      "sha256": "a3baf4ca6e600465e75d15a0d7ece0c69304bd58c2c3b63bb384d7387a230920"
+    },
+    {
+      "bytes": 82616,
+      "path": "artifacts/refill-trace-9408757b/Installed/PrivateState/copperstart/Logs/CopperScreen-20261018-203944-82104.log",
+      "sha256": "f063fc122bfbf52e2d3b1201939b3a021315ae2738a2273513e3299c13c5fdba"
+    },
+    {
+      "bytes": 82616,
+      "path": "artifacts/refill-trace-9408757b/Installed/PrivateState/copperstart/Logs/latest.log",
+      "sha256": "f063fc122bfbf52e2d3b1201939b3a021315ae2738a2273513e3299c13c5fdba"
+    },
+    {
+      "bytes": 1225,
+      "path": "artifacts/refill-trace-9408757b/Installed/PrivateState/copperstart/Profiles/copperstart-soak.json",
+      "sha256": "9ad1c2e1f5a985abf8911614c8af2e07b204dc05bb2c8e489e7fb4cd5a7a42b5"
+    },
+    {
+      "bytes": 1293,
+      "path": "artifacts/TraceRefillAnalysis/Program.cs",
+      "sha256": "a770bd034cdf3a8152d0208df1331ac76569e060e7091502fd92ff2db02df3f5"
+    },
+    {
+      "bytes": 720,
+      "path": "artifacts/TraceRefillAnalysis/TraceRefillAnalysis.csproj",
+      "sha256": "a66305a8aee3f9c942b2d55bf4ea4ae81cabcba8fae304870f6d5efbef69546e"
+    },
+    {
+      "bytes": 12800,
+      "path": "artifacts/TraceRefillAnalysis/bin/Release/net10.0/TraceRefillAnalysis.dll",
+      "sha256": "fc3366c9f8f06a10f8d069bbbc706afe36408af9c7130f67910ace967b31cc04"
+    },
+    {
+      "bytes": 162152,
+      "path": "artifacts/audio-trace-tools/dotnet-trace.exe",
+      "sha256": "02e1b2fcbd5dc54edde08e48751eed3acd5982a4bbe57d649249a9f4f2104edf"
+    },
+    {
+      "bytes": 3218504,
+      "path": "artifacts/audio-trace-tools/.store/dotnet-trace/10.0.750501/dotnet-trace/10.0.750501/tools/net8.0/any/Microsoft.Diagnostics.Tracing.TraceEvent.dll",
+      "sha256": "7ad04f5abbd704e8bd9c7b29f9aeab951f20cdc5d5c8e701f256be52a6e8543e"
+    },
+    {
+      "bytes": 198070,
+      "path": "docs/AUDIO_DISPLAY_RECOVERY_2026-10-18.json",
+      "sha256": "0ec552b7a45fda6900d6e297c01d6deea155f9891dd100462dcc25e3f056fa17"
+    }
+  ]
+}

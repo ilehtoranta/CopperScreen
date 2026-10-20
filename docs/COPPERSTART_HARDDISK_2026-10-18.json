@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "qualificationId": "diskboot-2026-10-18-hdf.1",
+  "romSha256": "FC6511086BB86A33A04887FBF2EF1D7F82A91631853E39DB08529AD0C0314AC0",
+  "romBytes": 524288,
+  "scope": "App settings and last-machine/profile persistence; explicit DOS1 partition below 4 GiB; app and runner native readback",
+  "releaseBuild": {
+    "command": "dotnet build CopperScreen.slnx -c Release --artifacts-path artifacts/hdf-production-build",
+    "passed": true,
+    "errors": 0,
+    "warnings": 0
+  },
+  "tests": [
+    {
+      "path": "CopperScreen.Lightweight.Tests/TestResults/hdf-settings.trx",
+      "skipped": 1,
+      "passed": 68,
+      "failed": 0,
+      "sha256": "E94C04257FE9E94AF64027179FD86C3D448F6FF70BAA921DEB258EBB370EEFC2",
+      "total": 69
+    },
+    {
+      "path": "CopperScreen.Desktop.Tests/TestResults/hdf-ui.trx",
+      "skipped": 0,
+      "passed": 1,
+      "failed": 0,
+      "sha256": "0FAA3C2BB3AF2197B4C18C88759CCE8D1ECED88446A3EF3E7062C652807C9FA4",
+      "total": 1
+    },
+    {
+      "path": "CopperDisk.Tests/TestResults/hdf-geometry.trx",
+      "skipped": 0,
+      "passed": 10,
+      "failed": 0,
+      "sha256": "B86FB41C20CA64CAF28C35B91114DCD08029A677A34B5DAAC6B933617F0EC726",
+      "total": 10
+    }
+  ],
+  "runnerConfigurationChecks": {
+    "script": "scripts/tests/test-ffs-hardfile-runner.ps1",
+    "passed": 10,
+    "nativeExecution": false
+  },
+  "nativeApp": {
+    "passed": true,
+    "hardDiskFreshBoots": 2,
+    "payloadBytes": 2049,
+    "profileAndLastMachineRestored": true,
+    "readOnly": true,
+    "backingUnchanged": true,
+    "df0LifecycleTestPassed": true
+  },
+  "nativeRunner": {
+    "freshBoots": 1,
+    "frames": 1000,
+    "unsupported": null,
+    "backingUnchanged": true,
+    "branch": 2,
+    "readOnly": true,
+    "payloadBytes": 2049,
+    "passed": true,
+    "receipt": "46465357",
+    "output": "artifacts/hdf-cli-native-final",
+    "floppyMounted": false
+  },
+  "backingSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+  "appBinaries": [
+    {
+      "sha256": "BCF4F7B8675827BF58821D579414271BA039EE0D06B2840FD970B64EA4D0CE7E",
+      "path": "artifacts/hdf-settings-build/bin/CopperScreen/release/CopperScreen.dll"
+    },
+    {
+      "sha256": "CCC4AD25F0070343F95A98E1FE6FE1EB76CD6970C081B9D0F017C09470BA86DC",
+      "path": "artifacts/hdf-settings-build/bin/CopperMod.Amiga.Lightweight/release/CopperMod.Amiga.Lightweight.dll"
+    },
+    {
+      "sha256": "C15118D77ED77B53C5D537166577032A240DDCE570EBC2CFAC3A5FA50FF0DB5D",
+      "path": "artifacts/hdf-settings-build/bin/CopperDisk/release/CopperDisk.dll"
+    }
+  ],
+  "runnerBinaries": [
+    {
+      "sha256": "5AB3BC6081E1F0F5DC0E6B43C081BE278DD7EFE3237FFCA94069580512143776",
+      "path": "artifacts/hdf-runner-build/bin/CopperMod.Amiga.Lightweight.Runner/release/CopperMod.Amiga.Lightweight.Runner.dll"
+    },
+    {
+      "sha256": "B19C5E0FD1C582AF309CF67F7CB31C263EA50932E33D6E91FAE415AAB30E934C",
+      "path": "artifacts/hdf-runner-build/bin/CopperMod.Amiga.Lightweight/release/CopperMod.Amiga.Lightweight.dll"
+    },
+    {
+      "sha256": "B117ACBA46EA52E90B8084F1ECBD463C767C3D9DE8BBCCDAE0C4269CFE67BBFB",
+      "path": "artifacts/hdf-runner-build/bin/CopperDisk/release/CopperDisk.dll"
+    }
+  ],
+  "unavailable": [
+    "Optional Lotus replay: no media supplied",
+    "Installed MSIX and Store validation for this ROM pin"
+  ],
+  "producerQualification": "CopperStart artifacts/harddisk-20261018/validation.json: separate frozen 16 full-ROM cases, 20 reset boots, five compiled MC68000 cases and host filesystem/font checks"
+}

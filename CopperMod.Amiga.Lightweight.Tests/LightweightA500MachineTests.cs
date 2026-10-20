@@ -237,6 +237,26 @@ public sealed class LightweightA500MachineTests
         Assert.Equal(17, machine.Cycle);
     }
 
+    [Fact]
+    public void FixedExtensionRomMapsWithoutReplacingKickstartOrResetOverlay()
+    {
+        using var machine = new LightweightA500Machine();
+        var kickstart = new byte[0x80000];
+        WriteLong(kickstart, 0, 0x0007FFF0);
+        WriteLong(kickstart, 4, 0x00F80100);
+        kickstart[0x100] = 0x12; kickstart[0x101] = 0x34;
+        machine.LoadKickstart(kickstart);
+        var extension = new byte[0x40000];
+        extension[0x100] = 0x56; extension[0x101] = 0x78;
+        machine.LoadExtensionRom(extension);
+        long cycle = 17;
+
+        Assert.Equal((ushort)0x5678, machine.ReadWord(0x00E00100, ref cycle, M68kBusAccessKind.CpuInstructionFetch));
+        Assert.Equal((ushort)0x1234, machine.ReadWord(0x00F80100, ref cycle, M68kBusAccessKind.CpuInstructionFetch));
+        Assert.Equal((ushort)0x0007, machine.ReadWord(0, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(17, cycle);
+    }
+
     [Theory]
     [InlineData(0, false)]
     [InlineData(1, false)]

@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:copperscreen:copperos-integration-contract:1",
+  "title": "CopperStart/CopperOS v1 draft integration contract",
+  "description": "Design-time contract only. No available qualified pair or runtime activation is admitted by this schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contractId", "contractVersion", "candidatePairId", "status", "shipping", "activationAllowed", "qualifiedPair", "baselineCopperStart", "copperOs", "machine", "boot", "storage", "requiredWorkflows", "blockers", "specification", "inspectionEvidence"],
+  "properties": {
+    "$schema": {"const": "copperos-contract.schema.json"},
+    "schemaVersion": {"const": 1},
+    "contractId": {"const": "copperscreen.copperstart-copperos.a500-cli"},
+    "contractVersion": {"const": "1.0.0-draft.1"},
+    "candidatePairId": {"const": "a500-copperos-cli-dev.1"},
+    "status": {"const": "blocked"},
+    "shipping": {"const": false},
+    "activationAllowed": {"const": false},
+    "qualifiedPair": {"type": "null"},
+    "baselineCopperStart": {
+      "type": "object", "additionalProperties": false,
+      "required": ["qualificationId", "bytes", "sha256", "contract", "supportsWritableGuestFilesystem", "copperOsShellBootQualified"],
+      "properties": {
+        "qualificationId": {"const": "diskboot-2026-10-16-dev.1"},
+        "bytes": {"const": 524288},
+        "sha256": {"const": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1"},
+        "contract": {"const": "CopperScreen/Firmware/CopperStart.json"},
+        "supportsWritableGuestFilesystem": {"const": false},
+        "copperOsShellBootQualified": {"const": false}
+      }
+    },
+    "copperOs": {
+      "type": "object", "additionalProperties": false,
+      "required": ["producerVersion", "producerManifest", "systemImage", "shellSegment", "demonstration", "redistributionEvidence"],
+      "properties": {
+        "producerVersion": {"type": "null"},
+        "producerManifest": {"type": "null"},
+        "systemImage": {"type": "null"},
+        "shellSegment": {"type": "null"},
+        "demonstration": {"type": "null"},
+        "redistributionEvidence": {"type": "null"}
+      }
+    },
+    "machine": {
+      "type": "object", "additionalProperties": false,
+      "required": ["engine", "cpu", "executionMode", "video", "agnus", "denise", "chipRamBytes", "slowRamBytes", "slowRamBase", "fastRamBytes", "rtcEnabled", "floppyDriveCount", "hardfiles", "hostDirectories"],
+      "properties": {
+        "engine": {"const": "Lightweight"}, "cpu": {"const": "68000"},
+        "executionMode": {"const": "Interpreter"}, "video": {"const": "PAL"},
+        "agnus": {"const": "8371"}, "denise": {"const": "8362"},
+        "chipRamBytes": {"const": 524288}, "slowRamBytes": {"const": 524288},
+        "slowRamBase": {"const": 12582912}, "fastRamBytes": {"const": 0},
+        "rtcEnabled": {"const": false}, "floppyDriveCount": {"const": 1},
+        "hardfiles": {"const": false}, "hostDirectories": {"const": false}
+      }
+    },
+    "boot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["targetExperience", "targetSystemImageFormat", "targetSystemImageBytes", "device", "volume", "startupPath", "shellPath", "guestIdentityPath", "shellOwner", "processAndCliOwner", "startupBinding", "startupBindingDescriptor", "abiDescriptor", "minimumShellStackBytes", "peakGuestMemoryEvidence", "hostOsShimsAllowed", "legacyFallbackAllowed", "proprietaryOsFilesAllowed"],
+      "properties": {
+        "targetExperience": {"const": "native-copperos-cli"},
+        "targetSystemImageFormat": {"const": "bootable-dos1-dd-adf"},
+        "targetSystemImageBytes": {"const": 901120}, "device": {"const": "DF0"},
+        "volume": {"const": "SYS:"}, "startupPath": {"const": "S/Startup-Sequence"},
+        "shellPath": {"const": "L/Shell-Seg"}, "guestIdentityPath": {"const": "S/CopperOS-Release.json"},
+        "shellOwner": {"const": "CopperOS"}, "processAndCliOwner": {"const": "CopperStart.Dos"},
+        "startupBinding": {"const": "producer-native-dos-shell-registration"},
+        "startupBindingDescriptor": {"type": "null"}, "abiDescriptor": {"type": "null"},
+        "minimumShellStackBytes": {"type": "null"}, "peakGuestMemoryEvidence": {"type": "null"},
+        "hostOsShimsAllowed": {"const": false}, "legacyFallbackAllowed": {"const": false},
+        "proprietaryOsFilesAllowed": {"const": false}
+      }
+    },
+    "storage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target", "state", "immutableSeedLocation", "workspaceLocation", "workspaceIdentityLocation", "overwriteExistingWorkspaceOnUpdate", "upgradePolicy", "automaticGuestSaveQualified"],
+      "properties": {
+        "target": {"const": "user-owned-writable-df0-clone"},
+        "state": {"const": "blocked-native-write-support"},
+        "immutableSeedLocation": {"const": "package/GuestAssets/<pair-id>/System.adf"},
+        "workspaceLocation": {"const": "user-data/CopperOS/Workspaces/<workspace-id>/System.adf"},
+        "workspaceIdentityLocation": {"const": "user-data/CopperOS/Workspaces/<workspace-id>/workspace.json"},
+        "overwriteExistingWorkspaceOnUpdate": {"const": false},
+        "upgradePolicy": {"const": "preserve-export-then-explicit-copy-migrate"},
+        "automaticGuestSaveQualified": {"const": false}
+      }
+    },
+    "requiredWorkflows": {
+      "type": "array", "uniqueItems": true, "minItems": 10, "maxItems": 10,
+      "items": {"enum": ["offline-clean-profile-boot", "display-actual-pair-versions-and-ready-prompt", "launch-and-exit-original-demonstration", "keyboard-command-input-and-host-input-release", "create-read-rename-delete-guest-file", "persist-settings-and-file-after-close-restart", "recover-from-command-error-to-prompt", "preserve-data-after-msix-update", "reject-missing-damaged-incompatible-assets", "recover-from-read-only-full-or-damaged-workspace"]}
+    },
+    "blockers": {
+      "type": "array", "uniqueItems": true, "minItems": 7, "maxItems": 7,
+      "items": {"enum": ["OS-01-system-image-and-release-manifest", "OS-02-native-shell-segment-and-boot-binding", "OS-03-versioned-guest-abi-and-memory-budget", "OS-04-native-writes-and-workspace-persistence", "OS-05-original-demo-and-distribution-rights", "OS-06-reproducible-producer-artifacts", "OS-07-source-and-installed-pair-qualification"]}
+    },
+    "specification": {"const": "docs/COPPEROS_INTEGRATION.md"},
+    "inspectionEvidence": {"const": "docs/COPPEROS_ARTIFACTS_2026-10-16.json"}
+  }
+}

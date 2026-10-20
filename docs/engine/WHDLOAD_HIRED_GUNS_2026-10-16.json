@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-16",
+  "scope": "Native WHDLoad Hired Guns campaign on a bootable shared folder",
+  "machine": {
+    "cpu": "M68010",
+    "execution": "Interpreter, conservative batch",
+    "agnus": "Mos8375Pal2M (318069-10)",
+    "denise": "Mos8362",
+    "chipRamBytes": 2097152,
+    "slowRamBytes": 0,
+    "fastRamBytes": 8388608,
+    "kickstart": "A500 3.1 rev 40.63",
+    "workbench": "3.1 rev 40.42",
+    "storage": "writable DH0: shared directory, priority 0; no floppy/HDF"
+  },
+  "cpuPackage": "1.5.4-qualified-dev.1",
+  "whdload": "20.1 build 7190 (2026-10-13)",
+  "slave": {
+    "name": "HiredGuns.slave",
+    "version": "1.0 (2004-11-15)",
+    "bytes": 1112,
+    "sha256": "C5A0E482BABBE296B95D52B5DEBC5E7855AE8D97CB01568E2C5AC88B9CAA8216"
+  },
+  "inputs": [
+    {
+      "name": "HiredGuns.lha",
+      "bytes": 113627,
+      "sha256": "8F9BCD6D1813CCBB0911B24AAF3C4B8640465B5BC350565185D164DEB7ABAF07"
+    },
+    {
+      "name": "WHDLoad_usr_small.lha",
+      "bytes": 742252,
+      "sha256": "8B674E8E26EC106D9D4146794E20B50855A81DD33D1C2160645079C12466557F"
+    },
+    {
+      "name": "kickstart-3.1-a500.rom",
+      "bytes": 524288,
+      "sha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE"
+    },
+    {
+      "name": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+      "bytes": 782764,
+      "sha256": "3880F61D819113256FCDD887FAAD1FA0F29EA7B766B6A7642D1CB7BABD912716"
+    },
+    {
+      "name": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+      "bytes": 770747,
+      "sha256": "F33E3E6987EE3457821F89670502708B4330574215B1894FB583D487192C6CAC"
+    },
+    {
+      "name": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+      "bytes": 703179,
+      "sha256": "3BCF2FF4434B2B02FC9DF6C988E8AFA34396EFC690528E9EED7D3BC6E22E1BC7"
+    },
+    {
+      "name": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+      "bytes": 789964,
+      "sha256": "6792DEA14C8ECF63EA90F6AF51832AC755E529E543A707344BEC4C1CCEA821A3"
+    },
+    {
+      "name": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+      "bytes": 588807,
+      "sha256": "0AB9D50B8EEA834316C76A453E1C2582CD580D326E3246C9CFAB2754C3852E18"
+    },
+    {
+      "name": "Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 2 of 6)(Workbench)[!].zip",
+      "bytes": 403062,
+      "sha256": "D93611887ACF91F68F5608A5B7812F03EB16F743F40451B67C93067B04C967ED"
+    }
+  ],
+  "binaries": {
+    "Copper68k.dll": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2",
+    "CopperDisk.dll": "9456AE3F42753CCE34E06EBBB998FD352887902453F1771AD74901E678BE8923",
+    "CopperFloat.dll": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+    "CopperMod.Amiga.Lightweight.dll": "372CDC31F198332DD466718B930B32B28BF901C641CCF99CCEAC62F17463A7BA",
+    "CopperMod.Amiga.Lightweight.Runner.dll": "1D5A6588983420A8B48748B8309052626F988CF5A00B80DD71FA300D7637D96D"
+  },
+  "initialFailure": {
+    "completedFields": 28186,
+    "result": "FAIL: deferred save not persisted",
+    "dosError": 205,
+    "cause": "Missing SavedGames directory without SavePath",
+    "savedScreenAloneWasNotCountedAsPersistence": true
+  },
+  "fix": {
+    "scope": "fixture preparation and WHDLoad launch options",
+    "options": "SavePath=SYS:Saves SaveDir=HiredGuns",
+    "engineChange": false
+  },
+  "campaign": {
+    "status": "PASS",
+    "processExitCode": 0,
+    "completedFields": 18454,
+    "snapshotCount": 38,
+    "unsupported": null,
+    "nonzeroAudioSnapshots": 28,
+    "nativeReturnMarker": "WHDLoad returned successfully",
+    "whdloadErrorLogBytes": 0,
+    "slot": "COPPER",
+    "saves": {
+      "Saves\\HiredGuns\\SavedGames\\Track00": {
+        "bytes": 512,
+        "sha256": "351D2E4B69854939CC4AB1A5F2BE7A324354D1ED6B3F63CD5D55183B1B528829"
+      },
+      "Saves\\HiredGuns\\SavedGames\\Track01": {
+        "bytes": 167936,
+        "sha256": "268137F1DB464201E90FCB5B47DFF6CC399BFAD109F3C1A7C1670F92F20B6E25"
+      }
+    }
+  },
+  "reopen": {
+    "status": "PASS",
+    "observedSlot": "COPPER (native load menu at field 5000)",
+    "loadedSlot": "COPPER",
+    "loadSuccessField": 7250,
+    "restoredGameplayField": 10500,
+    "processExitCode": 0,
+    "completedFields": 12436,
+    "snapshotCount": 51,
+    "unsupported": null,
+    "nonzeroAudioSnapshots": 19,
+    "nativeReturnMarker": "WHDLoad returned successfully",
+    "whdloadErrorLogBytes": 0,
+    "saveHashesUnchangedAfterSecondQuit": true
+  },
+  "checks": {
+    "productionReleaseBuild": "PASS: isolated production artifacts, zero warnings/errors",
+    "fixturePreparation": "PASS: supplied files extracted; 183 game data files match exploratory fixture",
+    "existingOutputRefusal": "PASS",
+    "pythonSyntax": "PASS",
+    "correctedFixturePreparation": "PASS: fresh output matches replay startup and all game files; creates empty Saves base"
+  },
+  "performanceAcceptance": false,
+  "localArtifacts": "artifacts/whdload-2026-10-16/",
+  "workloads": {
+    "hiredguns-campaign.json": {
+      "sha256": "BB65DEBC7E2FCFE8F16CD15ACAA3158D5EDFBB3088FB607A14C13BD3DF6B0A85",
+      "events": 77
+    },
+    "hiredguns-reopen.json": {
+      "sha256": "63A5ABCFFB480033416E33C54E48639459F74578AB777F7A28FBC76751B07FA6",
+      "events": 12
+    }
+  },
+  "visualMilestones": {
+    "gameplayWithInput": "campaign/frame-015000.bmp",
+    "firstWorkbenchReturn": "campaign/frame-018454.bmp",
+    "persistedSlot": "reopen/frame-005000.bmp",
+    "loadSuccess": "reopen/frame-007250.bmp",
+    "restoredGameplay": "reopen/frame-010500.bmp",
+    "secondWorkbenchReturn": "reopen/frame-012436.bmp"
+  }
+}

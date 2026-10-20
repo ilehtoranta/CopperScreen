@@ -10,6 +10,20 @@ permissions:
   contents: read
 
 jobs:
+  msix-tool-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: MSIX identity, update and asset negative controls (no deployment)
+        shell: pwsh
+        run: ./scripts/tests/test-msix-tools.ps1
+      - name: Release qualification identity and telemetry controls (no performance measurement)
+        shell: pwsh
+        run: ./scripts/tests/test-qualification-tools.ps1
+      - name: Installed session duration and liveness controls (synthetic traces only)
+        shell: pwsh
+        run: ./scripts/tests/test-soak-tools.ps1
+
   replay-tool-tests:
     strategy:
       matrix:

@@ -51,6 +51,8 @@ internal interface ICopperScreenSession : IDisposable
     bool SetDriveWriteProtected(int drive, bool writeProtected);
     byte[] ExportAdf(int drive) => throw new NotSupportedException("ADF export is not exposed by this session.");
     void MarkAdfSaved(int drive) { }
+    void SavePersistentStorage() { }
+    void DiscardPersistentStorage() { }
     bool EjectDisk(int drive) => throw new NotSupportedException("Disk eject is not exposed by this session.");
     bool DiscardAndEjectDisk(int drive) => EjectDisk(drive);
     bool ConsumeCopperBenchRequest();
@@ -68,7 +70,7 @@ internal static class CopperScreenSession
     public static ICopperScreenSession Create(CopperScreenStartupOptions options, ICopperScreenSession? previous = null)
         => options.Engine switch
         {
-            CopperScreenEngine.Legacy => throw new NotSupportedException("Legacy/CopperStart support is not included in this build. Use Lightweight with native Kickstart 1.3; Legacy support will be restored separately."),
+            CopperScreenEngine.Legacy => throw new NotSupportedException("Legacy support is not included in this build. Use Lightweight with a native Kickstart ROM or the qualified standalone CopperStart ROM."),
             CopperScreenEngine.Lightweight => CreateLightweight(options, previous as CopperScreenLightweightSession),
             _ => throw new ArgumentException("--engine must be Legacy or Lightweight.")
         };
@@ -79,7 +81,7 @@ internal static class CopperScreenSession
         catch (NotSupportedException ex)
         {
             throw new NotSupportedException(ex.Message +
-                " No automatic Legacy fallback. Legacy/CopperStart support is not included in this build.", ex);
+                " No automatic Legacy fallback. Check the selected boot method, ROM and supported machine configuration.", ex);
         }
     }
 }

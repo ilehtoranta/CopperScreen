@@ -1,0 +1,1184 @@
+{
+  "protocol": "copperstart-ffs-bitmap-v1",
+  "qualificationId": "diskboot-2026-10-18-ffs-bitmap.1",
+  "rom": {
+    "qualificationId": "diskboot-2026-10-18-ffs-bitmap.1",
+    "producerCommit": "b45c2e4e50860f87e81e21d2a6e5c2a08e2631ad",
+    "bytes": 524288,
+    "sha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+    "requirements": "PAL A500, 68000, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM, one DD/HD drive; read-only DF0 floppy boot or an owned writable CopperOS DOS1 workspace. Optional existing hard disk image on unit 0: RDB-discovered FFS/DOS1 partitions or one explicit 512-byte FFS partition, including TD64 offsets above 4 GiB. RDB boot priorities select SYS:. No RTC, Fast RAM or shared folders.",
+    "evidence": "docs/COPPERSTART_FFS_BITMAP_2026-10-18.md",
+    "producerSourceSnapshot": "Recorded ffs-bitmap-20261018 producer sources: reconstructed Classic DOS profile with its original AdvanceTicks, native CopperHDF RDB/multiple FFS mounts, TD64 extents, sequential bitmap traversal and word allocation with cached page bounds. SFS recovery follows the native SFS-write profile. Core 493924 bytes; graphics 30099 bytes at $FF8A00. No NSD changes."
+  },
+  "scope": "512-byte DOS1 FFS on sparse 4.125 GiB volumes; ordinary and lower-four-GiB-full allocation; guest flush before host save; fresh protected boot; TD64; no NSD changes",
+  "fullRomCases": 31,
+  "resetRomBoots": 53,
+  "frontendCases": 9,
+  "frontendBoots": 26,
+  "hostSemanticCases": 38,
+  "compiledMc68000Cases": 5,
+  "qualificationSkips": 0,
+  "throughputAcceptance": false,
+  "groups": {
+    "hostFileSystem": {
+      "path": "CopperStart/artifacts/ffs-bitmap-20261018/host-evidence/host.trx",
+      "sha256": "a10176148a0495bc83298b40ec59afc3db009f7e4a292c9680c3894e651b180e",
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.DeviceTransfersSplitAtMaxTransferAndUseTd64BeyondFourGiB",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.OfsDataChecksumFailureCommitsOnlyVerifiedPrefix",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 512, sectorsPerBlock: 1, blocks: 3520, lowCylinder: 0)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DirectoryEnumerationReturnsAllEntriesAndThenNoMoreEntries(ffs: False)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 0)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.ReadOnlyAndFullDiskLeaveOriginalImageUntouched",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 3)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.SequentialReadVisitsEachPointerTableOnceAndRetainsVerifiedPrefixOnBadExtension(ffs: False)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.FailedBitmapWriteLeavesTheVolumeInvalid",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OfsReadsUseTheVolumeBlockSizeAndPreserveTheVerifiedPrefix(bytes: 1024, blocks: 10000)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 630000, freeStart: 617728)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ReservedAreaAndOddVolumeSizeDetermineRootAndBitmapOrigin",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CorruptHeaderAndInvalidPointerAreRejected(ffs: True)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OfsReadsUseTheVolumeBlockSizeAndPreserveTheVerifiedPrefix(bytes: 512, blocks: 3520)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DirectoryEnumerationReturnsAllEntriesAndThenNoMoreEntries(ffs: True)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.MetadataFailuresPreserveProtectionAndTransactionState",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CaseInsensitiveDirectoriesAndFileExtensionsReadStandardDisk(ffs: True)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.AllocationSkipsFourGiBOfOccupiedBlocksByBitmapWord",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.NativeFfsMutationsReopenThroughIndependentReadCoreAndRecoverAllocation",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CorruptHeaderAndInvalidPointerAreRejected(ffs: False)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 1)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.MinimumEnvironmentDoesNotRequireOptionalFieldsAndRejectsOverflow",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 1024, blocks: 20000, freeStart: 8160)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 1024, sectorsPerBlock: 1, blocks: 9000, lowCylinder: 13)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 4096, sectorsPerBlock: 1, blocks: 6000, lowCylinder: 4)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.MetadataUpdatesPreserveFileDataAndProduceReadableChecksummedHeaders",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.LargeVolumeCountReadsEachBitmapTableOnlyOnce",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.AllocationIgnoresFreePaddingBitsInTheLastBitmapWord",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.SequentialReadVisitsEachPointerTableOnceAndRetainsVerifiedPrefixOnBadExtension(ffs: True)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 110000, freeStart: 101600)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 10000, freeStart: 4064)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CaseInsensitiveDirectoriesAndFileExtensionsReadStandardDisk(ffs: False)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DeviceFailureLeavesMetadataInvalidRatherThanPublishingPartialSuccess",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.NativeFfsOverwriteTruncateAndNonemptyDirectoryRulesSurviveRemount",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 2)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.DeviceGeometryMountsAnHdVolumeAtItsActualRoot",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 512, sectorsPerBlock: 2, blocks: 12000, lowCylinder: 7)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 8404992, freeStart: 8388608)"
+      ]
+    },
+    "compiledMc68000": {
+      "path": "CopperStart/artifacts/ffs-bitmap-20261018/geometry-evidence/geometry.trx",
+      "sha256": "21c33ba9088d7a873b455a40e22b1f123b04ac184dc5ec582fd0bb2d088343cd",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 8, trackSectors: 10, low: 419430, high: 419529, count: 250, root: 125, start: 4294963200, requests: 6, write: False)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 2, trackSectors: 10, low: 7, high: 1206, count: 12000, root: 6000, start: 71680, requests: 2, write: False)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 1, trackSectors: 22, low: 0, high: 79, count: 3520, root: 1760, start: 0, requests: 1, write: False)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 8, trackSectors: 10, low: 419430, high: 419529, count: 250, root: 125, start: 4294963200, requests: 6, write: True)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 1, trackSectors: 32, low: 131076, high: 131130, count: 3520, root: 1760, start: 4295098368, requests: 1, write: True)"
+      ]
+    },
+    "largeVolumes": {
+      "path": "CopperStart/artifacts/ffs-bitmap-20261018/large-evidence/large.trx",
+      "sha256": "36bb145168b6424b3c85829d868144c936e6e01b1144552d75793d81002e3c0f",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64AllocationStressFillsLowerFourGiBAndWritesAboveIt",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64LargeVolumeBootsUpperFilesWritesFlushesAndFreshBootReads",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64LargeVolumeReadsUpperFilesFromProtectedBoot"
+      ]
+    },
+    "frontends": {
+      "path": "CopperStart/artifacts/ffs-bitmap-20261018/frontend-evidence/frontends.trx",
+      "sha256": "c24a4b3913bcaeb97a5d154a26ed6d79d4ab66c043ab3aaba79cf4998f65f65f",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.AppProtectedPristinePartitionRejectsFirstMutationWithoutChangingBacking",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.AppWritesGuestFlushHostSaveResetReplacementAndFreshBootReadback",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64AppCrossingAndAboveFourGiBWritesFlushResetAndFreshBoot",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.CommandLineWritesFlushBeforeExitRestartAndFreshProtectedBootReadback",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.CommandLineProtectedPristinePartitionRejectsWritesWithoutChangingBacking",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64RunnerCrossingAndAboveFourGiBWritesRestartAndFreshProtectedBoot"
+      ]
+    },
+    "ddHdRdb": {
+      "path": "CopperStart/artifacts/ffs-bitmap-20261018/regression-evidence/regression.trx",
+      "sha256": "2a358eeef1e386c545edbf9ef7950728056475cf79479560fc2c33c5ab15f295",
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsWritesExportAndFreshBootReadback(extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.ProtectedFfsRejectsNativeMutationWithoutChangingMedia",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 127, secondPriority: -10, firstFlags: 0, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsWritesExportAndFreshBootReadback(extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: -128, secondPriority: -127, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: True, expansion: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.DosFfsWritesSurviveMfmExportAndFreshRomBoot(extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 7, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.MultipleExplicitCopperHdfUnitsMountAndSelectBootPriority",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: -10, secondPriority: -5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.NonBootableRdbDataPartitionsMountWhenDosBootsFromFloppy",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.ProtectedRdbRejectsWritesToTheNonBootDataPartition",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.DosFfsWritesSurviveMfmExportAndFreshRomBoot(extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: True, expansion: True)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbFallsBackFromUnformattedHighPriorityFfsAndSkipsUnsupportedFileSystem",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 127, firstFlags: 1, secondFlags: 3, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: False, expansion: True)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: False, expansion: False)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 5, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBothFfsPartitionsWriteFlushAndFreshBootReadback",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 5, secondPriority: 0, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 1)"
+      ]
+    }
+  },
+  "builds": [
+    {
+      "path": "CopperStart/artifacts/ffs-bitmap-20261018/solution-build-evidence.log",
+      "sha256": "7aada1d229c6a807803f3b5b6177d59dcf1974e7f02426b6fec7edbcfd5e4f97",
+      "passed": true
+    },
+    {
+      "path": "CopperScreen/artifacts/ffs-bitmap-solution-build-final.log",
+      "sha256": "651977a8648fe494b00d64ab4273f5ffdbe9f29656ad21d32e2a3ae08d04aefe",
+      "passed": true
+    }
+  ],
+  "nativeStaticAnalysis": {
+    "codeBytes": 493924,
+    "IsCompatible": true,
+    "managedAllocationSites": [],
+    "frameworkFeatures": [],
+    "nativeCompatibility": {
+      "ExceptionMode": 1,
+      "MemoryManagement": 0,
+      "ExceptionRegionCount": 0,
+      "FatalMachineFaultSiteCount": 11,
+      "RuntimeFeatures": [],
+      "RuntimeHelpers": [],
+      "ExternalNativeTargets": [],
+      "ReachableAssemblies": [
+        {
+          "Name": "CopperSharp.Runtime.Managed",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "ba36b29d-2172-47e9-a467-36fce7a2b534",
+          "Sha256": "23d66959e20be34b0dd2f2799844a0feb9e4f4bb8dfe8151b00d251a65c0d185"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "18f91180-66b5-40ef-ac30-6c6a1e38ec7f",
+          "Sha256": "b724c9fe636bdebd41ef32be639a86a89dffeba9dc444ffcf212b3124a6bca45"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga.Support",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "33900476-804b-4c43-b75c-19b69df38015",
+          "Sha256": "24d08169105ec623af5c79cca118d94885c40cdb7f36fd5cf247db2c3943c0f9"
+        },
+        {
+          "Name": "CopperStart-System",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "ec48ad54-b915-44a1-9e7f-51ce06bb506e",
+          "Sha256": "5dac19d570f87ea06ce8ccaf7e7d7b2083de2fd406f7a08918b4558319997c63"
+        },
+        {
+          "Name": "CopperStart.Devices",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "e6ff76e3-7936-41df-b19a-299082820554",
+          "Sha256": "3a7a420ca20a035dffddef5c816f6bfcb69e37f18b2139eeb6ecc51e987c3ff3"
+        },
+        {
+          "Name": "CopperStart.Dos",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "bd48c926-9e62-48ee-98d9-b08719f309d0",
+          "Sha256": "34bdf6149d4a3667f14f32e1943c617183ca8cc10a86a2bd32bf55ad53c346ba"
+        },
+        {
+          "Name": "CopperStart.Exec",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "2237e654-7736-46bf-b7f0-c2620c14ddc2",
+          "Sha256": "1542acbc93180540642d930d47339e7bf731151b58cd112375a08e8ba514c716"
+        }
+      ],
+      "RuntimeFeatureCount": 0,
+      "RuntimeHelperCount": 0,
+      "ExternalNativeTargetCount": 0,
+      "ReachableAssemblyCount": 7
+    }
+  },
+  "reports": {
+    "td64-allocation-stress": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 2,
+        "blockCount": 8650752,
+        "savedSha256": "E14970B315AACBC05C7371728E28F0EDD8E3F398BB320E26B6661040C4D7BA97",
+        "guestFlushBeforeHostSave": true,
+        "upperStartupFiles": true,
+        "guestAddedCacheBuffers": 32,
+        "upperAllocation": true,
+        "writeSeconds": 701.3727889,
+        "execution": "app session driven at full frame boundaries without host wall-clock pacing"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "td64-large-read": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 1,
+        "blockCount": 8650752,
+        "upperFileBlocks": true,
+        "savedSha256": "7ECF23D2515561499347AD9463B00D42A7FB04515A6F8C638A57571D67E12F35",
+        "protectedBackingUnchanged": true,
+        "guestAddedCacheBuffers": 32
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "td64-large-volume": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 2,
+        "blockCount": 8650752,
+        "savedSha256": "D0119132234B5B1FA76523140BA0D14ECB9EDFD24343B7749FD55EBBDEB53611",
+        "guestFlushBeforeHostSave": true,
+        "upperStartupFiles": true,
+        "guestAddedCacheBuffers": 32,
+        "upperAllocation": false,
+        "writeSeconds": 381.0069926,
+        "execution": "app session driven at full frame boundaries without host wall-clock pacing"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "app": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "frontend": "app-runtime",
+        "boots": 4,
+        "payloadBytes": 2049,
+        "guestCmdUpdateBeforeHostSave": true,
+        "hostSaveSucceeded": true,
+        "hostSaveAdvancedCycles": false,
+        "reset": true,
+        "sessionReplacement": true,
+        "freshProtectedBoot": true,
+        "profileAndLastMachineRestored": true,
+        "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "runner": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "frontend": "command-line-process",
+        "boots": 3,
+        "payloadBytes": 2049,
+        "guestCmdUpdateBeforeExit": true,
+        "liveBackingSnapshotWithoutHostFlush": true,
+        "writableProcessRestart": true,
+        "freshProtectedBoot": true,
+        "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "runnerSha256": "0DEC1ED8A61C5CB82EA440C7C0C4F84C21780134B069F33CF132821A406215B9"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "td64-app-131068": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4294836224,
+        "Geometry": "DH0:2:32:131068:131122",
+        "guestFlushBeforeHostSave": true,
+        "lowAliasGuardUnchanged": true,
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "td64-app-131076": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4295098368,
+        "Geometry": "DH0:2:32:131076:131130",
+        "guestFlushBeforeHostSave": true,
+        "lowAliasGuardUnchanged": true,
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "td64-runner-131068": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4294836224,
+        "Geometry": "DH0:2:32:131068:131122",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "lowAliasGuardUnchanged": true
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    },
+    "td64-runner-131076": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-ffs-bitmap.1",
+      "romSha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4295098368,
+        "Geometry": "DH0:2:32:131076:131130",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "lowAliasGuardUnchanged": true
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3281A07CFB1F7B26F9A882E7739F0EE9D52737AE306C2743C0166950BE579D2B"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "E4FF4649B3C42F7C2AEE967CEB0DAE26C77B4AD83CE3D9C48476C2F25CCFB9E8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "C1F4CB89AC2D8F5ABF4D3024BB93E80BBA8DD9E6AF6B2AAFF2D6B45D38ACF6E5"
+        }
+      ]
+    }
+  },
+  "phases": {
+    "td64-allocation-stress/phase-1": {
+      "frame": 64991,
+      "cycle": 9235493188,
+      "seconds": 684.6156647,
+      "receipt": "4646535700C2DE92000000010000002400000000000008010000000000000020000004D2000000380000004E6E6F7465730000000000080100C179E4FFFFFFFF"
+    },
+    "td64-allocation-stress/phase-2": {
+      "frame": 633,
+      "cycle": 90092686,
+      "seconds": 4.0964848,
+      "receipt": "4646535700C2DE92000000020000002400000000000008010000000000000020000004D2000000380000004E6E6F7465730000000000080100C179E4FFFFFFFF"
+    },
+    "td64-large-read/phase-2": {
+      "frame": 633,
+      "cycle": 90092672,
+      "seconds": 5.6958854,
+      "receipt": "4646535700C2DE92000000020000002400000000000008010000000000000020000004D2000000380000004E6E6F7465730000000000080100C179E4FFFFFFFF"
+    },
+    "td64-large-volume/phase-1": {
+      "frame": 45425,
+      "cycle": 6455125470,
+      "seconds": 365.612313,
+      "receipt": "4646535700C2DE92000000010000002400000000000008010000000000000020000004D2000000380000004E6E6F7465730000000000080100C179E4FFFFFFFF"
+    },
+    "td64-large-volume/phase-2": {
+      "frame": 633,
+      "cycle": 90092686,
+      "seconds": 5.1494859,
+      "receipt": "4646535700C2DE92000000020000002400000000000008010000000000000020000004D2000000380000004E6E6F7465730000000000080100C179E4FFFFFFFF"
+    }
+  },
+  "sourceFiles": [
+    {
+      "path": "CopperStart/src/CopperStart.Dos/AmigaDiskFileSystemCore.cs",
+      "sha256": "3372d0e6a74f7f8c78d434ca793d94c33af86ee8e65ea201e29b7a5a2f80433c"
+    },
+    {
+      "path": "CopperStart/src/CopperStart.Dos/AmigaFfsWriteCore.cs",
+      "sha256": "955b2cc6407d683c3ff512ef80c066dd8c68f9d89199b6caa565cb6e058571f4"
+    },
+    {
+      "path": "CopperStart/src/CopperStart.Dos/NativeAmigaFileSystem.cs",
+      "sha256": "b6d83cea1e2861a3c704f28159603f4b5c8e811e37f8c11fd13d22db86f33420"
+    },
+    {
+      "path": "CopperStart/tests/CopperStart.FileSystem.Tests/VolumeGeometryTests.cs",
+      "sha256": "7bd85d886305dd7572945717e3be4d7031e8df8c015a30859968c00d12c84b25"
+    },
+    {
+      "path": "CopperStart/tests/CopperStart.Floppy.Native.Tests/FileSystemGeometryInstructionTests.cs",
+      "sha256": "f41646c3d5d55a17e91fb4c2a5baa14dc0b60071ee5359aaee6a340a8f86d596"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/CopperStartTd64Tests.cs",
+      "sha256": "c1583f42ba9c08235689727dad7315c25d1cf7b194451ee3442e8c6d778ade21"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/LargeFfsFixture.cs",
+      "sha256": "d3d2a77a236bb3cd10a48fce21f0b3e5ae238e76b732e37ea0ebc3511a092282"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/FfsHardDiskProbe.cs",
+      "sha256": "4cb95b43fa6932c3299b69bfbda55a9bcd781f9d4c2a6cf788746b12b86c9f09"
+    },
+    {
+      "path": "CopperScreen/scripts/test-copperstart-harddisk-writes.ps1",
+      "sha256": "f8a8455ace6bdd1ade30fc302101b3c98a6cb47126d909f518f623808744c6f8"
+    },
+    {
+      "path": "CopperScreen/CopperScreen/Firmware/CopperStart.json",
+      "sha256": "2f15c0b33a69532020a51389d618c912e72b50eae253323d04857ce8f5e2d5a6"
+    },
+    {
+      "path": "CopperScreen/CopperScreen/Presets/lightweight-a500-copperstart.json",
+      "sha256": "d49264a37fdbf72a9a7fed5d40a5172fddaabedf72ddf88326690fef7d6867b2"
+    }
+  ],
+  "producerInputs": {
+    "scope": "68000 PAL OCS A500; FFS bitmap cursor/word allocation; TD64 above 4 GiB; Classic frozen DOS profile; no NSD",
+    "romBytes": 524288,
+    "codeBytes": 493924,
+    "sha256": "C77E51BBBAB2D0F5EDFC12B59094707279B2D1BC44E57B585857F1B56763C23B",
+    "compiledRomSha256": "297A15829C9151429EE7EADB0DF22AF66CDB9B6D7C07D881C7BDD106CFABB78C",
+    "graphicsBytes": 30099,
+    "graphicsResidentAddress": 16747008,
+    "codeSizeOptions": {
+      "romDefaults": true
+    },
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "5DAC19D570F87EA06CE8CCAF7E7D7B2083DE2FD406F7A08918B4558319997C63"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "3A7A420CA20A035DFFDDEF5C816F6BFCB69E37F18B2139EEB6ECC51E987C3FF3"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "1542ACBC93180540642D930D47339E7BF731151B58CD112375A08E8BA514C716"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "34BDF6149D4A3667F14F32E1943C617183CA8CC10A86A2BD32BF55AD53C346BA"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "B724C9FE636BDEBD41EF32BE639A86A89DFFEBA9DC444FFCF212B3124A6BCA45"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "24D08169105EC623AF5C79CCA118D94885C40CDB7F36FD5CF247DB2C3943C0F9"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "0125DCE0C2A8D2282A3C46A6439CA7192C0C513438D8C16BA0EE117D8B35AB2E"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "226628F849B3294C6FF2FD3F27FD3410D080F20504956BFE308E1BBD1B2E925D"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "9D159DF60C9BEC373112DCBE1536EBAD11B623FA913615863ED664D2438B088D"
+      }
+    ]
+  },
+  "producerDllSha256": "70c4aaf6887e6abc71feb40f731a4e6ad8fd78cebf5e59d0bafc71982de615e8",
+  "producerSource": {
+    "path": "CopperStart/artifacts/rdb-20261018/producer/Program.cs",
+    "sha256": "bfce9e71eeefb718ac24563f7d8a38aa427ed0b3e50866a582898b72336af45c"
+  },
+  "dosSourceInputs": [
+    {
+      "path": "dos-source\\AmigaDiskFileSystemCore.cs",
+      "sha256": "3372D0E6A74F7F8C78D434CA793D94C33AF86EE8E65EA201E29B7A5A2F80433C"
+    },
+    {
+      "path": "dos-source\\AmigaFfsWriteCore.cs",
+      "sha256": "955B2CC6407D683C3FF512EF80C066DD8C68F9D89199B6CAA565CB6E058571F4"
+    },
+    {
+      "path": "dos-source\\AmigaFileSystemDeviceCore.cs",
+      "sha256": "D7A3B961C1A19F754C17869E865A6B6E84451D98E65B6FB84B262BBE6963D6EF"
+    },
+    {
+      "path": "dos-source\\AmigaGeometryMath.cs",
+      "sha256": "8C161E4D0019B9471804D74603AEEF83C962E18325E4407A83841533FE008428"
+    },
+    {
+      "path": "dos-source\\AmigaSmartFileSystemCore.cs",
+      "sha256": "3155AE101D2E311201CB7FCD7220B8537800F501AD49D3A2497E3FA32A2C511E"
+    },
+    {
+      "path": "dos-source\\AmigaSmartFileSystemNativeRecovery.cs",
+      "sha256": "BCD5D76DF8F9F71197375F9B714DAE24C2D9FBD00EEC869142BB2F52769A4633"
+    },
+    {
+      "path": "dos-source\\AmigaSmartFileSystemWriteCore.cs",
+      "sha256": "9858C4238C1D9994785E1D27CCF648A912FE4D20869FDBE910350F56F5130736"
+    },
+    {
+      "path": "dos-source\\AmigaVolumeGeometry.cs",
+      "sha256": "9F778AA5C3C05B238E4B8A379413B174F3F523661802BA5D176DB1446B5ADBB0"
+    },
+    {
+      "path": "dos-source\\AssemblyInfo.cs",
+      "sha256": "47C61BAE97C98443DA4FA2B69A37AA47917799D4710BE31F82FD1BA24F1B7025"
+    },
+    {
+      "path": "dos-source\\CopperSharpNativeDosPlatform.cs",
+      "sha256": "44F0212901779F3CE0AFCA7D63723967437E5153CBE014D91972E142979DCD0C"
+    },
+    {
+      "path": "dos-source\\CopperSharpNativeDosPlatform.Errors.cs",
+      "sha256": "3179FD0777061964038E030A184F77DCD6C8D24A63E4DCD3D8EC9BD193AF0885"
+    },
+    {
+      "path": "dos-source\\CopperSharpRomDosPlatform.cs",
+      "sha256": "18FEE4D6676EF3A1D7E7171EBB24D8A8B5C945BA66C6B13382F955623EABC5D2"
+    },
+    {
+      "path": "dos-source\\DosAbiProfile.cs",
+      "sha256": "C4F7D14C9913BAB0E83663433E42C8EAEA173102465A4531E81C5225F9220A92"
+    },
+    {
+      "path": "dos-source\\DosAssignCore.cs",
+      "sha256": "0685840AF70A6786B31F9E0F19D46959A3D23EBD6AFDEA06C674974D599E36E2"
+    },
+    {
+      "path": "dos-source\\DosAssignNodeAttributeCore.cs",
+      "sha256": "8AE05B02DB8E76E82F3AED091DECB51E3BF834150352C5C6408F22DB5944EBD0"
+    },
+    {
+      "path": "dos-source\\DosBcplGlobalVectorCore.cs",
+      "sha256": "A5C4995F500AB873AED51CE78C3E1BD86364372B4B9531B1ED6937F3B34F0439"
+    },
+    {
+      "path": "dos-source\\DosChildCliStartup.cs",
+      "sha256": "3016A8BBE9AAE2BC8D90A997E0809669ABA84E287F03714B42F082BBC9C4396F"
+    },
+    {
+      "path": "dos-source\\DosChildCompletionCore.cs",
+      "sha256": "3C4BE1D63916F0A4C2CE4F06376E4DC0EBC0F81C47B7F76B84FAFF9624989561"
+    },
+    {
+      "path": "dos-source\\DosChildCompletionRecords.cs",
+      "sha256": "59FB3619ACA6F147FC8FC0C7916EACADC30040C4BD5B3ECBF932B4DEFA2AC10E"
+    },
+    {
+      "path": "dos-source\\DosChildContinuationCore.cs",
+      "sha256": "4444E23AE87EA7EF2AF7F6DB551873433FE6531FB19E5D01D7ADA7F30D09E863"
+    },
+    {
+      "path": "dos-source\\DosChildInheritedResources.cs",
+      "sha256": "A9E16DDC0D9E17F23D7417DE8438ED3CA79EDFC5DD160B58C258537086F98B7E"
+    },
+    {
+      "path": "dos-source\\DosChildProcessLaunchCore.Create.cs",
+      "sha256": "67D8C3F62881054A1FEECC9D1A5A137EE93923A299FB155C205969CB0D254CA2"
+    },
+    {
+      "path": "dos-source\\DosChildProcessLaunchCore.cs",
+      "sha256": "A9812CC05C391C3D8446D41268783CB59BACD3376C2EF3B5A2FA020E271172C7"
+    },
+    {
+      "path": "dos-source\\DosChildProcessLaunchCore.Transaction.cs",
+      "sha256": "F2C763EACF37F2ABD070114CBE117D1A59DD5D5EB0145832A35D5B87C3A4CFED"
+    },
+    {
+      "path": "dos-source\\DosCliBstrCodec.cs",
+      "sha256": "6C2E739F713A237F36ECB6A36ECA7AA820C4D472D6C4B33980083438AAF789B8"
+    },
+    {
+      "path": "dos-source\\DosCliCore.cs",
+      "sha256": "041BE4279E5EDBE1E5C2147D054FF201535B8EC50AC9DFA684C7653AD0BD517D"
+    },
+    {
+      "path": "dos-source\\DosCliDataCore.cs",
+      "sha256": "71A858E0CBE01BB26CCBEE04FD17AB6C7D2EF3B7B90E01C8AF0D881DE9AFCF7A"
+    },
+    {
+      "path": "dos-source\\DosCliInitializationCore.cs",
+      "sha256": "A08E958DA3096A095DD3E1A9374A99EC79CEC31B1C6102D61C9D58A191A7FE94"
+    },
+    {
+      "path": "dos-source\\DosCliNativeRoot.cs",
+      "sha256": "651B098A5AE8C0496DE5A02F2D104456F3DC5279B396276646FCF54C44068F85"
+    },
+    {
+      "path": "dos-source\\DosCliRegistryCore.cs",
+      "sha256": "9687EE8AD50E6690E91764094FC66A9B02FEC543C98146F29DC79444E53D98ED"
+    },
+    {
+      "path": "dos-source\\DosCliStorageLayout.cs",
+      "sha256": "72C801DBF49562E8026EF19982882FEED0A6A6B07D753A6C13916273EDA24FAE"
+    },
+    {
+      "path": "dos-source\\DosCommandImageCore.cs",
+      "sha256": "0D0C937E332AC7B7ECE77B9F07F5AF16AA447D34B5E4306B2B5DC571E852C644"
+    },
+    {
+      "path": "dos-source\\DosCore.ChildCompletion.cs",
+      "sha256": "FD70A76ACF1BBEA5DB621FF61D47BF7EB0B4FC36944084FF13088204A5FDB96E"
+    },
+    {
+      "path": "dos-source\\DosCore.CommandPath.cs",
+      "sha256": "275918E65ACEEC5971F160807E3548213A23D966FBC1D377F53E416398F241AD"
+    },
+    {
+      "path": "dos-source\\DosCore.cs",
+      "sha256": "906B11BD0BD6D714E545E4BCF43CD8809A3B2D93C02A810410D0EBD7356D1FEF"
+    },
+    {
+      "path": "dos-source\\DosCore.PreparedChild.cs",
+      "sha256": "52E7CF2A984B216BBE9F03D6DDA968563D98A2179425781334C1164714979646"
+    },
+    {
+      "path": "dos-source\\DosCore.ProcessArgumentInput.cs",
+      "sha256": "A98CCA05F00691973C819B4AF34E97BA5411687077ABDE85C3C6532CF9EF404C"
+    },
+    {
+      "path": "dos-source\\DosCore.RunCommandInput.cs",
+      "sha256": "064EF257D52111A9601B2C06C80ACDFEBFE32AE3999DE467E9781FBF41C5EEAA"
+    },
+    {
+      "path": "dos-source\\DosCore.RunCommandRetirementInspection.cs",
+      "sha256": "2E8D4D67EFD58DB202F2F9B2F5E3B0293170C7B21C629830854386253F0430A0"
+    },
+    {
+      "path": "dos-source\\DosCore.ShellProcessContext.cs",
+      "sha256": "DB3AA0CA6FE6AACB46965EE476D6BF16FE1BB86168DE245308F00E0466B2CE7B"
+    },
+    {
+      "path": "dos-source\\DosDateCore.cs",
+      "sha256": "5272D2BFB0E04FA4357B395B3313377772FD91610AC691626BCB983B4AFE32E7"
+    },
+    {
+      "path": "dos-source\\DosDateTextCore.cs",
+      "sha256": "8438268C8521C41EDBEC82B031AAFC5F2D62C9EC58ABD3242054CA30E5F2100B"
+    },
+    {
+      "path": "dos-source\\DosDeviceNodeAttributeCore.cs",
+      "sha256": "68845288BEB435DE1B976927F25B27E4FF2282F05FA822CC7798018AB5BD4BF8"
+    },
+    {
+      "path": "dos-source\\DosDeviceProcCore.cs",
+      "sha256": "67B4145CC8C75BD361677D6D0FF93ECB1337FCD852634CFF06EB3827F1BC5B6C"
+    },
+    {
+      "path": "dos-source\\DosErrorCore.cs",
+      "sha256": "464901F97AD5054EAF4007A6850D623B1EFEADA57EF649E5873F01097D073AF1"
+    },
+    {
+      "path": "dos-source\\DosExAllHookCore.cs",
+      "sha256": "75B569ACF713106B9EDD771CA58275923AA3DF5858D12AB9E58020CC92CCA73D"
+    },
+    {
+      "path": "dos-source\\DosExamine64Core.cs",
+      "sha256": "CE217F948FA4591F3DEE0CA63AA3825CFBE6297965787CCE63B6D606DE2C37F5"
+    },
+    {
+      "path": "dos-source\\DosExitCore.cs",
+      "sha256": "AE709F2E3411DD0D4BE177E1E5B02C8BF6FC28FBB90FD786605ACCA208909BC0"
+    },
+    {
+      "path": "dos-source\\DosExpansionNodeCore.cs",
+      "sha256": "8F0485822B173898141783393A8AC021D2D40FCCBC216E2112E05E4494670D68"
+    },
+    {
+      "path": "dos-source\\DosFileInfoStrings.cs",
+      "sha256": "FF2D0B2C4440EE9AF00B51BD52AFED97FC7B87B7D509AC01B399A060CCF8E642"
+    },
+    {
+      "path": "dos-source\\DosFileSystemAttributeCore.cs",
+      "sha256": "DB0BAEA53EDAA04725F06020F88EDBD6B4B5DFE44EAB66FF6222584A68D52386"
+    },
+    {
+      "path": "dos-source\\DosFileSystemContextAttributeCore.cs",
+      "sha256": "1F7265B67626F51F24D95460E62E2F3329EF7E070A3A62E42379C75F6936D452"
+    },
+    {
+      "path": "dos-source\\DosFormattedOutputCore.cs",
+      "sha256": "F3ADC85075DD73873CD4FB3F3B6CF2F1840F6E4151EC2602C076E343D0F6A500"
+    },
+    {
+      "path": "dos-source\\DosHandlerProcessLaunchCore.cs",
+      "sha256": "FDC0564C75A38AC62940FEE1D5629D4912306910E34EBACB64595391C1EFEB96"
+    },
+    {
+      "path": "dos-source\\DosHandlerSegmentCore.cs",
+      "sha256": "A6CFA51FA0C063D48442A089BF6476E1283A9B49F177DD23B89046B43BFB9B53"
+    },
+    {
+      "path": "dos-source\\DosInternalSegmentCore.cs",
+      "sha256": "4C3B521EFC4C3E54BC3680E7576C19F7C33C59FD25E458163E58B23E3B53A9A7"
+    },
+    {
+      "path": "dos-source\\DosListCore.cs",
+      "sha256": "2ED88E1DC0FC3417DF0720AD3C89A8EE8A93806D8C2354F2DBA5444E20802A9D"
+    },
+    {
+      "path": "dos-source\\DosListWaitCore.cs",
+      "sha256": "0A78DDB24B3CB17C8D2E2A32BBE9E7AFB37ED76780262855580DD5106C9DC79D"
+    },
+    {
+      "path": "dos-source\\DosLockNativeRoot.cs",
+      "sha256": "48A3DCD29C4CB113D9F920D8A0DE9D14B5CB0EADB1727691570319A4B03E03BB"
+    },
+    {
+      "path": "dos-source\\DosMatchCore.cs",
+      "sha256": "EC336630878CF796702DD0B9B9DF06C2A214C8F875F7FE303F58387742ADD1F4"
+    },
+    {
+      "path": "dos-source\\DosMatchNativeRoot.cs",
+      "sha256": "84A8E2FE358F971A1CA0683C56D2742DEA1E3D7FE94F005EB54F65AB1B8953D7"
+    },
+    {
+      "path": "dos-source\\DosNativeDirectBoundary.cs",
+      "sha256": "2BDF1DEA5DFB579D1B20C393337411B80E7738980F413865E58C4806D217B481"
+    },
+    {
+      "path": "dos-source\\DosNativeDirectEntrypoints.g.cs",
+      "sha256": "38A2D04AFFE21447F07A2D478AF964220D3FF907D796B46E7370027545EECA99"
+    },
+    {
+      "path": "dos-source\\DosNativeDirectManagementEntrypoints.cs",
+      "sha256": "CE9CB7471EE00EC145E3B589DFC2604199DAA492962D8B80A19C1C0C2B81EDF8"
+    },
+    {
+      "path": "dos-source\\DosNativeDirectVectorCore.g.cs",
+      "sha256": "F8F73BC37CF80B4350599F89718D8F15474260A42D2C363BC3DF2E43AC729CEE"
+    },
+    {
+      "path": "dos-source\\DosNativeEntrypoints.cs",
+      "sha256": "6FA02217F94BD98886EB17CCE0CCC7F2963C31D8A38F58375E45770D14B991A2"
+    },
+    {
+      "path": "dos-source\\DosNativeInactiveHandlerResolver.cs",
+      "sha256": "A35ED1C384D28F483A0F98B9E4748C64930B1C4ED7B3CD8B6D56620757DB4BF3"
+    },
+    {
+      "path": "dos-source\\DosNativeInactiveHandlerWaitPolicy.cs",
+      "sha256": "4C1AA51A514B18ECB552A4600EBC9083A127553DEFCA6AA35093BCCA8EE7EB76"
+    },
+    {
+      "path": "dos-source\\DosNativeLibraryCore.cs",
+      "sha256": "50552B7CBFC37E603596BDB11C5F8003C4495C06315AFACD1A1EBDB9E0C5FB36"
+    },
+    {
+      "path": "dos-source\\DosNativeLibraryRoot.cs",
+      "sha256": "5C41049E36F2AD0AACECE9D430852C78C98C1F51D4D4AB5A70BBDF9E4D04FB07"
+    },
+    {
+      "path": "dos-source\\DosNativeOwnedLibraryCore.cs",
+      "sha256": "8CCF5A0188E0D4C4FACD8755DD335AB834E816F727D136B124F89AE70E0C9808"
+    },
+    {
+      "path": "dos-source\\DosNativePermanentEntrypoints.cs",
+      "sha256": "3FC3A9CEBB7F4F68B7B90B6BC9737ACB6103C5706E5780471C2F5E534ECEF515"
+    },
+    {
+      "path": "dos-source\\DosNativeProcessReturn.cs",
+      "sha256": "B4FEC50F926767E70B2918175FCCC691A1B0B6F892D92A83ED6B3630DA962E92"
+    },
+    {
+      "path": "dos-source\\DosNativeProductionRoot.cs",
+      "sha256": "34FE9959B90C5B943BF582C229A523AF2C5F26ED0902C6CF1360A884F07AE79D"
+    },
+    {
+      "path": "dos-source\\DosNativeProviderLifecycle.cs",
+      "sha256": "5F39001195C18001021AEA7AF8FE661F880457137D7669E3184D5C9F1568B6D9"
+    },
+    {
+      "path": "dos-source\\DosNativeProviderQualificationEntrypoints.cs",
+      "sha256": "08B174BCC95AF34F5665881432E38AF1E3229A879C5B5CE6F4F706775277A67F"
+    },
+    {
+      "path": "dos-source\\DosNativeProviderRecords.cs",
+      "sha256": "630F6B65D465222517E8EED176186F4B5BFF332A90B80E3C667021818C367D12"
+    },
+    {
+      "path": "dos-source\\DosNativeRoot.cs",
+      "sha256": "B826B2FE51B31E23AECA1A2491C06A7F63ED270BB1FD88E4BDD58AA7D8639C63"
+    },
+    {
+      "path": "dos-source\\DosNativeVectors.cs",
+      "sha256": "76FE60C25C68989A6A3ABE68CE02A2416B30847C197F630871D89B0A99C8305E"
+    },
+    {
+      "path": "dos-source\\DosNativeWaitRecord.cs",
+      "sha256": "DD1D9291BD856D342D2EF9ADF8B4BACAD4B90E4E93191FBA746A3CEF4B500284"
+    },
+    {
+      "path": "dos-source\\DosNotificationCore.cs",
+      "sha256": "831FC8A00767AD6F95717FBBEDCDEB386C44100B025EF79C2F264461343BBF31"
+    },
+    {
+      "path": "dos-source\\DosObjectCore.cs",
+      "sha256": "ADD35D2EAEA556A3A3B9D8157EAF50A43E06DF3F549C31347F78ECBCAC424FE1"
+    },
+    {
+      "path": "dos-source\\DosObjectRecords.cs",
+      "sha256": "B21AE588F8459E10CD81AEFD6A09658F767E3BCF20BE9307D01BB0462EDE2E58"
+    },
+    {
+      "path": "dos-source\\DosOwnedProcessTaskCore.cs",
+      "sha256": "122464A69AA6C547F74E2C630212D8B4D08DC8D7221E211E190814A2F9AFC6D5"
+    },
+    {
+      "path": "dos-source\\DosPacketCore.cs",
+      "sha256": "67BD2A14F57D05A64343E388C398391BAF7D5572D4ACFCF1CDB0D2A0A8321D6C"
+    },
+    {
+      "path": "dos-source\\DosPathCore.cs",
+      "sha256": "EC633765C3AC2F53AD8660A0E122321EDB8217A7CE52F94E4C267A3730A367FE"
+    },
+    {
+      "path": "dos-source\\DosPatternCore.cs",
+      "sha256": "EF854FCBAF4CD4DB7FF54BF67BD3BC7C2D0FC20F6CF6582F81701756E0A667C7"
+    },
+    {
+      "path": "dos-source\\DosProcessArgumentInputRecords.cs",
+      "sha256": "92C5FAE04DA5C08AC8ECE6C4D18ED58B009F1DF06C128AE6DBFEE799C4A74B09"
+    },
+    {
+      "path": "dos-source\\DosProcessCore.cs",
+      "sha256": "B06B5D8FEE8AA09ACA27364978BD607D004A167AB77BB1E81AAE986A3BA19EAE"
+    },
+    {
+      "path": "dos-source\\DosProcessImageCore.cs",
+      "sha256": "FCA2698573E814EAFF323744E5EF016F82826DB5092CE79F3339265954D727A4"
+    },
+    {
+      "path": "dos-source\\DosProcessLaunchBoundaryCore.cs",
+      "sha256": "D79A21EE832D58526F30B7BA29290DBBA1E65B7DC4CFFD4BB8D8E3FA1A45DDCC"
+    },
+    {
+      "path": "dos-source\\DosProcessLaunchContracts.cs",
+      "sha256": "3B864F6DD067720B07C2E47612C9EEE367E092FA6D6955E4FBC855FADEF2C4A3"
+    },
+    {
+      "path": "dos-source\\DosProcessLifecycleCore.cs",
+      "sha256": "7D8A3F4CB8DA9D6E5ACFFC42B97418F7DF32A53696DF6D27D61B43AF39B62399"
+    },
+    {
+      "path": "dos-source\\DosProcessMessagePortCore.cs",
+      "sha256": "311FADBB6B126E4A42E2245D31208722435BE048F7BF84F7B4F996620644EB4F"
+    },
+    {
+      "path": "dos-source\\DosProcessSegmentListArrayCore.cs",
+      "sha256": "7ED3C6CF72ECA7FE7EBE9DA8B5CE95BAC1674A0D9B7F24D23AD20F15A1A055E5"
+    },
+    {
+      "path": "dos-source\\DosProcessVectorCore.cs",
+      "sha256": "1963AD1C093368CEC7E47C523072A2342679FDC742A56040AE4D5D6929B6F6D5"
+    },
+    {
+      "path": "dos-source\\DosQueueBufferCore.cs",
+      "sha256": "DF8C3BA5848E8784D4BC5F27638594DDA16613DCD320CCBD9F81397EF49B7835"
+    },
+    {
+      "path": "dos-source\\DosQueueChannelCore.cs",
+      "sha256": "56082F9862AD642F06F873E0535CAB3A340E7285C416C6FE03D99889793E633A"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerChannelOwnerCore.cs",
+      "sha256": "DF20C7A90B82E098161CBF371FFF32B0F3796498E8350E545D2166D269F01CF1"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerFileCore.cs",
+      "sha256": "B2F8B1EB177E7859B86054EBE51B27268D925E6D0B6369513D62BEDC1995B0EE"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerIoCore.cs",
+      "sha256": "57F5ADDC62B22301C6B860BE31A7C441454A924201427E4F92FEE9EF171FF053"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerOpenCore.cs",
+      "sha256": "737332D062F8FE00DB3A7F8BDD9D7C0B24841428C66F96975197C2EC98BE1C51"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerPacketCore.cs",
+      "sha256": "2BD6FA65DE38801E971560E5757A9F26157A14D02C352091CCDB6F23D9867E0B"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerPendingRecords.cs",
+      "sha256": "4FA961DABA406D8BE7635F11882B370B005E1EF9F14C9CC63EFEBB9B353682BC"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerProcessCore.cs",
+      "sha256": "3550427B31ED4E923A3F95467286EE8A258DE8E4F12FC18A316B7F4E3562DA80"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerRegistryCore.cs",
+      "sha256": "FDCCBC571901345B7B39A77D19636B55E5C1BFE7453CC5422944D94033EFCDAF"
+    },
+    {
+      "path": "dos-source\\DosQueueHandlerTaskCore.cs",
+      "sha256": "FC201DEEB508328479A9611CB543BCD00EEFB52B2544C7C7B9CA92E41F558D1A"
+    },
+    {
+      "path": "dos-source\\DosReadLinkCore.cs",
+      "sha256": "B8F451075E7D4E0AA7491BE69C5456649C53486C9AA9FBC0F446BC74C75C6BB3"
+    },
+    {
+      "path": "dos-source\\DosRecordWaitCore.cs",
+      "sha256": "1F7099847764613B4AA08E4F28976C602C539DA4C491861A2C14DF7339ACFB64"
+    },
+    {
+      "path": "dos-source\\DosRegisterFrame.cs",
+      "sha256": "BD6F25FE91CA97AD58CF2E72C7025CF1703FEEFE3FFAB32C2784F66215BB7041"
+    },
+    {
+      "path": "dos-source\\DosRequesterPolicy.cs",
+      "sha256": "8EEE7982EB4F31118E6EC6975B8C846C3207D9EBE5B0E4905CA2276D3233D102"
+    },
+    {
+      "path": "dos-source\\DosResidentRegistryCore.cs",
+      "sha256": "4A09242F92EFBB40634D6DFC6760DA09799DF8E1F9D85458AE47716ECCA1FADF"
+    },
+    {
+      "path": "dos-source\\DosRunCommandCore.cs",
+      "sha256": "68F10A54CEDD86A7A4A093BF3820B990A68737D78D43659A9744419CF2A9FC9D"
+    },
+    {
+      "path": "dos-source\\DosRunCommandCore.RetirementInspection.cs",
+      "sha256": "F62119435CBE5EF35317403F32792F2F842ABA0FA2C03704176ABDC0E3B5A5EA"
+    },
+    {
+      "path": "dos-source\\DosRunCommandRetirementTypes.cs",
+      "sha256": "A7D3F90B3A33FCF5305CDC38C258F4BEF86E781D197DB7C9DE0F4BD29E0341C1"
+    },
+    {
+      "path": "dos-source\\DosSegmentListCore.cs",
+      "sha256": "F6C75A198AB66507A4E22F139D12946867F81C2E35F84161E94E98E6AD7CD7DB"
+    },
+    {
+      "path": "dos-source\\DosSegmentLoaderCore.cs",
+      "sha256": "9DB01B1E9FF530C3916A978490832DF306F682314F924EF01989D98618BE88E0"
+    },
+    {
+      "path": "dos-source\\DosSegmentVectorCore.cs",
+      "sha256": "289D0C2DC2B6B1C99CFE6BF2015888BA29294C0D05467F699C7B91EE94909760"
+    },
+    {
+      "path": "dos-source\\DosShellErrorCodeCursorCodec.cs",
+      "sha256": "3B21068C126748A2C9651A1E34679F01EEFC4F48F3521B6860F3470B865BE689"
+    },
+    {
+      "path": "dos-source\\DosShellForegroundWaitCore.cs",
+      "sha256": "8C8F9AE744FA37FAB55A35A7268FC2C988B813AFA64E5572392608B9B45DAC39"
+    },
+    {
+      "path": "dos-source\\DosShellNativeBridge.cs",
+      "sha256": "3B915660930D4D87C9BA4DDBAAE3330B6F983BCA64F488BDD147FCB55A2E95E2"
+    },
+    {
+      "path": "dos-source\\DosShellNativeChildContextCore.cs",
+      "sha256": "74B6995FD7188B62177A06084FEE66361A4BEB9C78958F570E65E59368D5437A"
+    },
+    {
+      "path": "dos-source\\DosShellNativeContextCore.cs",
+      "sha256": "357906A866A10909DD397282A161B741C42DD2BF8AA0AD6AFC1ED8590D0B5DFB"
+    },
+    {
+      "path": "dos-source\\DosShellPromptCore.cs",
+      "sha256": "3D417913DBA7AB0CD91111EB1D3AA61FDC576EFCDA784CC90B7A6F88FAB64379"
+    },
+    {
+      "path": "dos-source\\DosShellScriptRunnerCore.cs",
+      "sha256": "9C14E73E71BE8841B499C122BB402D08DC90191E20BF93D09AADB87E2A117C63"
+    },
+    {
+      "path": "dos-source\\DosShellStateCore.cs",
+      "sha256": "6C8368C440F38CF90339060181B988597DAA7D52079367071F27802B5BBA3472"
+    },
+    {
+      "path": "dos-source\\DosStartupScriptCore.cs",
+      "sha256": "8F20B65BF59C6E1D1A2EF499DE05289D4677C2F63E116D35169F12967497A04F"
+    },
+    {
+      "path": "dos-source\\DosStreamNativeRoot.cs",
+      "sha256": "326A3ED4F6FAA4135EA56648196C1ACC3C7B36226832E0B28C0ADDF950893A03"
+    },
+    {
+      "path": "dos-source\\DosSystemContracts.cs",
+      "sha256": "3344F85ACB1FB1B24FEBE3CD0423082B4452D02C4FE8D2F4903DEC746B9A3516"
+    },
+    {
+      "path": "dos-source\\DosSystemCore.cs",
+      "sha256": "02300DD7789645A40196DCCA68EEA87E2AB4A73C335D97617A4CDC0255FCCAA9"
+    },
+    {
+      "path": "dos-source\\DosVariableCore.cs",
+      "sha256": "55AAF7B230145162C84B00F8ED9DFF4D69DEED5F0F284FCBC9E37CB5EA9BA644"
+    },
+    {
+      "path": "dos-source\\DosVectorManifest.cs",
+      "sha256": "57417ED50E8487418583E574562B12111D5D08945718E118FC104353D390DC1B"
+    },
+    {
+      "path": "dos-source\\DosVectorRouter.cs",
+      "sha256": "72CEF9BE848869BF6779DD6099C99D8E62E391B6B3FAF9E223DB85A4AF5FE5C1"
+    },
+    {
+      "path": "dos-source\\DosVolumeNodeAttributeCore.cs",
+      "sha256": "1D7E5A4E528C2766A89BD59E0ADACDFC863F8898E14E1CD1752A6767C7F3657F"
+    },
+    {
+      "path": "dos-source\\IDosPlatform.cs",
+      "sha256": "6407EBD67CB70E6C40D59005CFDB1C64E0CB1BD7BBA666BFDB073F440F3775A9"
+    },
+    {
+      "path": "dos-source\\NativeAmigaFileSystem.cs",
+      "sha256": "9C396EA71469070BC6C16182926CC5125F0EFCE68AC0353AA9521EB5146C0EA3"
+    },
+    {
+      "path": "dos-source\\NativeFileSystemNotifications.cs",
+      "sha256": "7323DAEA0FB46FBC775A32F47C1E78AA3E3009E584D035A7AE3A536605E1C401"
+    }
+  ]
+}

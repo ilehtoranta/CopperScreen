@@ -1,0 +1,1243 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-20",
+  "clientTimezone": "Europe/Helsinki",
+  "recordedUtc": "2026-10-19T23:18:45.8938948Z",
+  "status": "COMPLETED_WITH_DISPLAY_FINDING",
+  "scope": "Two full sequential installed hours and fresh-process save/readback on unchanged signed diagnostic 1.1.43.0",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "durationAcceptance": true,
+  "softwareAudioContinuity": true,
+  "visualFindings": [
+    {
+      "file": "Installed/copperos-soak-middle.png",
+      "reviewed": true,
+      "finding": true,
+      "observation": "Guest area is blank dark blue; storage verification text visible at start is absent. Execution and audio counters continue. End capture contains the text again before the post-hour input command. Intermittent retained-render finding; physical display behavior and cause remain unassigned."
+    }
+  ],
+  "visualReview": {
+    "scope": "Manual inspection of retained application renders; no physical display/vsync acceptance",
+    "historicalComparison": {
+      "file": "artifacts/p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229/Full31/copperos-soak-middle.png",
+      "reviewed": true,
+      "observation": "Earlier signed 1.1.31.0 midpoint capture also has a blank dark-blue guest area. Historical evidence unchanged; common cause not established."
+    },
+    "observations": [
+      {
+        "file": "Installed/copperstart-soak-start.png",
+        "reviewed": true,
+        "observation": "Normal installed window, running race scene, read-only Lotus2.adf mounted"
+      },
+      {
+        "file": "Installed/copperstart-soak-middle.png",
+        "reviewed": true,
+        "observation": "Normal running window, red Lotus attract screen; visible scene differs from start"
+      },
+      {
+        "file": "Installed/copperstart-soak-end.png",
+        "reviewed": true,
+        "observation": "Normal running window and Lotus Turbo Challenge 2 title screen at the end of the hour; retained cycle differs from race and midpoint"
+      },
+      {
+        "file": "Installed/copperos-soak-start.png",
+        "reviewed": true,
+        "observation": "Native CopperOS Shell registered; STORAGE CREATED AND VERIFIED visible; System.adf attached to the owned workspace"
+      },
+      {
+        "file": "Installed/copperos-soak-middle.png",
+        "reviewed": true,
+        "finding": true,
+        "observation": "Guest area is blank dark blue; storage verification text visible at start is absent. Execution and audio counters continue. End capture contains the text again before the post-hour input command. Intermittent retained-render finding; physical display behavior and cause remain unassigned."
+      },
+      {
+        "file": "Installed/copperos-soak-end.png",
+        "reviewed": true,
+        "observation": "Native Shell text and STORAGE CREATED AND VERIFIED visible again at the end of the hour, before the post-hour storage command is submitted"
+      }
+    ]
+  },
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "formalPerformanceAcceptance": false,
+  "storeCertified": false,
+  "wackRerun": false,
+  "sourceRebuilt": false,
+  "packageVersion": "1.1.43.0",
+  "package": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-2088e734\\Package\\CopperScreen-1.1.43.0-win-x64.msix",
+    "sha256": "7A34DC3FBE845959D1EA94F1E85E5B61031E55064797A9F73A42D098319CAD02"
+  },
+  "identity": {
+    "Name": "CopperScreen.Test.40a6779884774716bfe9998be653a665",
+    "Publisher": "CN=CopperScreen Installed Tests",
+    "Version": {
+      "Major": 1,
+      "Minor": 1,
+      "Build": 43,
+      "Revision": 0,
+      "MajorRevision": 0,
+      "MinorRevision": 0
+    },
+    "Architecture": "x64",
+    "Signed": true,
+    "Diagnostic": true
+  },
+  "host": {
+    "OS": {
+      "Caption": "Microsoft Windows 11 Home",
+      "Version": "10.0.26200",
+      "BuildNumber": "26200",
+      "OSArchitecture": "64-bittinen",
+      "TotalVisibleMemorySize": 33468556
+    },
+    "PowerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Tasapainotettu)",
+    "BackgroundProcesses": [
+      {
+        "ProcessId": 18412,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 6328,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 110056,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 85356,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 101680,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 94816,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 43180,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 85684,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 77712,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 101056,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 94872,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 61576,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 58380,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 68292,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 40940,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 66188,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 118600,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 92028,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 98820,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 95328,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 119032,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 100564,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 47244,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 59812,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 116648,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "ProcessId": 107196,
+        "Name": "dotnet.exe",
+        "ExecutablePath": "C:\\Program Files\\dotnet\\dotnet.exe"
+      }
+    ],
+    "Utc": "2026-10-19T20:55:49.8835562Z",
+    "Scope": "Provisional installed sessions; release budgets OPEN; ordinary background applications allowed",
+    "CPU": {
+      "Name": "AMD Ryzen 5 5600X 6-Core Processor             ",
+      "NumberOfCores": 6,
+      "NumberOfLogicalProcessors": 12
+    }
+  },
+  "startedUtc": "2026-10-19T20:56:07.5826154Z",
+  "completedUtc": "2026-10-19T23:18:22.3276571Z",
+  "cases": [
+    {
+      "logBytesGrowth": 1988484,
+      "guestFieldsPerMonotonicSecond": 49.92096514398382,
+      "maximumSampleGapSeconds": 8.68953950000002,
+      "allWarmupHourReopenAudioCountersZero": true,
+      "clockChanges": [],
+      "handlesFirst": 928,
+      "audioTimelines": [
+        {
+          "finalCumulativeMissingValues": 0,
+          "phase": "soak",
+          "firstIncidentQpc": 0,
+          "protocol": "copperscreen-audio-owner-timeline-v1",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-hours-8d028009\\Installed\\copperstart-soak-audio-timeline.json",
+          "nativeStopped": true
+        },
+        {
+          "finalCumulativeMissingValues": 0,
+          "phase": "reopen",
+          "firstIncidentQpc": 0,
+          "protocol": "copperscreen-audio-owner-timeline-v1",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-hours-8d028009\\Installed\\copperstart-reopen-audio-timeline.json",
+          "nativeStopped": true
+        }
+      ],
+      "reopenPid": 112572,
+      "samples": 714,
+      "reopenExitCode": 0,
+      "reopenedFiles": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperstart\\last-machine.json": "0226bf09a0ceb847172c104fee0e93ac5ad0bea1ea562016d4f279db520fcc0f",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperstart\\recent-session.json": "28757f94cb2acc93d6ceeb568541d40bde649088057572972a2b891739d96e62",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperstart\\Profiles\\copperstart-soak.json": "0226bf09a0ceb847172c104fee0e93ac5ad0bea1ea562016d4f279db520fcc0f"
+      },
+      "files": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperstart\\last-machine.json": "0226bf09a0ceb847172c104fee0e93ac5ad0bea1ea562016d4f279db520fcc0f",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperstart\\recent-session.json": "28757f94cb2acc93d6ceeb568541d40bde649088057572972a2b891739d96e62",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperstart\\Profiles\\copperstart-soak.json": "0226bf09a0ceb847172c104fee0e93ac5ad0bea1ea562016d4f279db520fcc0f"
+      },
+      "reopenAudio": {
+        "output": {
+          "backend": "ma_backend_wasapi",
+          "initialized": true,
+          "clockRunning": true,
+          "needsPrefill": false,
+          "queue": {
+            "callbacks": 13656,
+            "requestedSamples": 27967488,
+            "consumedSamples": 27967488,
+            "starvedCallbacks": 0,
+            "missingSamples": 0,
+            "nonzeroCallbacks": 10314,
+            "pausedSilenceSamples": 0,
+            "discardedSampleValues": 0
+          },
+          "callbackErrors": 0,
+          "deviceState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 15,
+          "recoveryAttempts": 0,
+          "deviceReinitializations": 0,
+          "lastRecoveryResult": 0,
+          "maxCallbackGapMilliseconds": 32,
+          "nativeMessages": []
+        },
+        "guestSampleValues": 27986308,
+        "guestFields": 14553,
+        "guestAudibleFields": 10532,
+        "suppressedSampleValues": 0,
+        "multimediaScheduling": true,
+        "pacing": {
+          "protocol": "host-frame-start-gaps-v1",
+          "upperBoundsMilliseconds": [
+            1,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            80,
+            160
+          ],
+          "buckets": [
+            0,
+            16,
+            618,
+            1025,
+            5858,
+            5328,
+            864,
+            840,
+            2,
+            0,
+            1
+          ]
+        }
+      },
+      "gc2": 1,
+      "threadsFirst": 78,
+      "memory": {
+        "Samples": 714,
+        "FirstSeconds": 0.0018969,
+        "LastSeconds": 3597.8317559,
+        "FrameDelta": 169625,
+        "PrivateFirst": 191913984,
+        "PrivateLast": 193884160,
+        "PrivateMin": 187703296.0,
+        "PrivateMax": 195657728.0,
+        "WorkingSetFirst": 221069312,
+        "WorkingSetLast": 198766592,
+        "WorkingSetMax": 221581312.0,
+        "ManagedFirst": 30679368,
+        "ManagedLast": 33359296,
+        "ManagedMax": 44340088.0,
+        "Budgets": "OPEN",
+        "AcceptanceDuration": true
+      },
+      "elapsedSeconds": 3600.0505896,
+      "diskSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "hourExitCode": 0,
+      "presentationBufferDroppedFrames": 19,
+      "name": "copperstart",
+      "handlesLast": 928,
+      "hourPid": 43916,
+      "gc0": 102,
+      "presentationSkippedFrames": 0,
+      "audio": {
+        "backend": "ma_backend_wasapi",
+        "initialized": true,
+        "guestSampleValues": 345608706,
+        "guestFields": 179718,
+        "guestAudibleFields": 174181,
+        "suppressedSampleValues": 0,
+        "callbackErrors": 0,
+        "submissionFailures": 0,
+        "callbacks": 168754,
+        "requestedSamples": 345608192,
+        "consumedSamples": 345608192,
+        "starvedCallbacks": 0,
+        "missingSamples": 0,
+        "nonzeroCallbacks": 163810,
+        "pausedSilenceSamples": 0,
+        "discardedSampleValues": 0,
+        "missingRequestedPercent": 0.0,
+        "softwareCoverageAvailable": true
+      },
+      "warmupAudio": {
+        "output": {
+          "backend": "ma_backend_wasapi",
+          "initialized": true,
+          "clockRunning": true,
+          "needsPrefill": false,
+          "queue": {
+            "callbacks": 14562,
+            "requestedSamples": 29822976,
+            "consumedSamples": 29822976,
+            "starvedCallbacks": 0,
+            "missingSamples": 0,
+            "nonzeroCallbacks": 11213,
+            "pausedSilenceSamples": 0,
+            "discardedSampleValues": 0
+          },
+          "callbackErrors": 0,
+          "deviceState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 0,
+          "recoveryAttempts": 0,
+          "deviceReinitializations": 0,
+          "lastRecoveryResult": 0,
+          "maxCallbackGapMilliseconds": 46,
+          "nativeMessages": []
+        },
+        "guestSampleValues": 29840138,
+        "guestFields": 15517,
+        "guestAudibleFields": 11496,
+        "suppressedSampleValues": 0,
+        "multimediaScheduling": true,
+        "pacing": {
+          "protocol": "host-frame-start-gaps-v1",
+          "upperBoundsMilliseconds": [
+            1,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            80,
+            160
+          ],
+          "buckets": [
+            0,
+            3,
+            471,
+            1311,
+            6366,
+            5543,
+            897,
+            923,
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "pacing": [
+        {
+          "count": 0,
+          "overflow": false,
+          "upperBoundMilliseconds": 1
+        },
+        {
+          "count": 81,
+          "overflow": false,
+          "upperBoundMilliseconds": 5
+        },
+        {
+          "count": 5989,
+          "overflow": false,
+          "upperBoundMilliseconds": 10
+        },
+        {
+          "count": 14449,
+          "overflow": false,
+          "upperBoundMilliseconds": 15
+        },
+        {
+          "count": 73463,
+          "overflow": false,
+          "upperBoundMilliseconds": 20
+        },
+        {
+          "count": 64637,
+          "overflow": false,
+          "upperBoundMilliseconds": 25
+        },
+        {
+          "count": 10387,
+          "overflow": false,
+          "upperBoundMilliseconds": 30
+        },
+        {
+          "count": 10708,
+          "overflow": false,
+          "upperBoundMilliseconds": 40
+        },
+        {
+          "count": 3,
+          "overflow": false,
+          "upperBoundMilliseconds": 80
+        },
+        {
+          "count": 0,
+          "overflow": false,
+          "upperBoundMilliseconds": 160
+        },
+        {
+          "count": 0,
+          "overflow": true,
+          "upperBoundMilliseconds": null
+        }
+      ],
+      "gc1": 15,
+      "threadsLast": 78,
+      "dashboardWriteFailures": 2
+    },
+    {
+      "logBytesGrowth": 1973484,
+      "guestFieldsPerMonotonicSecond": 49.92120938145523,
+      "maximumSampleGapSeconds": 5.1676036,
+      "allWarmupHourReopenAudioCountersZero": true,
+      "clockChanges": [],
+      "handlesFirst": 907,
+      "audioTimelines": [
+        {
+          "finalCumulativeMissingValues": 0,
+          "phase": "soak",
+          "firstIncidentQpc": 0,
+          "protocol": "copperscreen-audio-owner-timeline-v1",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-hours-8d028009\\Installed\\copperos-soak-audio-timeline.json",
+          "nativeStopped": true
+        },
+        {
+          "finalCumulativeMissingValues": 0,
+          "phase": "reopen",
+          "firstIncidentQpc": 0,
+          "protocol": "copperscreen-audio-owner-timeline-v1",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-hours-8d028009\\Installed\\copperos-reopen-audio-timeline.json",
+          "nativeStopped": true
+        }
+      ],
+      "reopenPid": 89960,
+      "samples": 719,
+      "reopenExitCode": 0,
+      "reopenedFiles": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperos\\last-machine.json": "cc161240924bf6a75e5e39761ee4fee19e40f5fa50a95661926d0d0f0c400214",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperos\\recent-session.json": "1fe123ac8a02bf072638956318070ec8dd2ec5dec30f593c6c0ab2a8f51f51e2",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperos\\Profiles\\copperos-soak.json": "cc161240924bf6a75e5e39761ee4fee19e40f5fa50a95661926d0d0f0c400214"
+      },
+      "files": {
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperos\\last-machine.json": "cc161240924bf6a75e5e39761ee4fee19e40f5fa50a95661926d0d0f0c400214",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperos\\recent-session.json": "1fe123ac8a02bf072638956318070ec8dd2ec5dec30f593c6c0ab2a8f51f51e2",
+        "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\Soaks\\40a6779884774716bfe9998be653a665\\copperos\\Profiles\\copperos-soak.json": "cc161240924bf6a75e5e39761ee4fee19e40f5fa50a95661926d0d0f0c400214"
+      },
+      "reopenAudio": {
+        "output": {
+          "backend": "ma_backend_wasapi",
+          "initialized": true,
+          "clockRunning": true,
+          "needsPrefill": false,
+          "queue": {
+            "callbacks": 8692,
+            "requestedSamples": 17801216,
+            "consumedSamples": 17801216,
+            "starvedCallbacks": 0,
+            "missingSamples": 0,
+            "nonzeroCallbacks": 954,
+            "pausedSilenceSamples": 0,
+            "discardedSampleValues": 0
+          },
+          "callbackErrors": 0,
+          "deviceState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 0,
+          "recoveryAttempts": 0,
+          "deviceReinitializations": 0,
+          "lastRecoveryResult": 0,
+          "maxCallbackGapMilliseconds": 32,
+          "nativeMessages": []
+        },
+        "guestSampleValues": 17817160,
+        "guestFields": 9265,
+        "guestAudibleFields": 0,
+        "suppressedSampleValues": 0,
+        "multimediaScheduling": true,
+        "pacing": {
+          "protocol": "host-frame-start-gaps-v1",
+          "upperBoundsMilliseconds": [
+            1,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            80,
+            160
+          ],
+          "buckets": [
+            0,
+            0,
+            48,
+            1127,
+            3862,
+            3165,
+            509,
+            551,
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "gc2": 1,
+      "threadsFirst": 75,
+      "memory": {
+        "Samples": 719,
+        "FirstSeconds": 0.0015917,
+        "LastSeconds": 3599.9992622,
+        "FrameDelta": 179644,
+        "PrivateFirst": 194150400,
+        "PrivateLast": 187240448,
+        "PrivateMin": 185925632.0,
+        "PrivateMax": 194150400.0,
+        "WorkingSetFirst": 223784960,
+        "WorkingSetLast": 217681920,
+        "WorkingSetMax": 224653312.0,
+        "ManagedFirst": 30711056,
+        "ManagedLast": 29007664,
+        "ManagedMax": 46289936.0,
+        "Budgets": "OPEN",
+        "AcceptanceDuration": true
+      },
+      "elapsedSeconds": 3600.0329765,
+      "diskSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "hourExitCode": 0,
+      "presentationBufferDroppedFrames": 3,
+      "name": "copperos",
+      "handlesLast": 887,
+      "hourPid": 29792,
+      "gc0": 108,
+      "presentationSkippedFrames": 0,
+      "audio": {
+        "backend": "ma_backend_wasapi",
+        "initialized": true,
+        "guestSampleValues": 345608706,
+        "guestFields": 179718,
+        "guestAudibleFields": 0,
+        "suppressedSampleValues": 0,
+        "callbackErrors": 0,
+        "submissionFailures": 0,
+        "callbacks": 168753,
+        "requestedSamples": 345606144,
+        "consumedSamples": 345606144,
+        "starvedCallbacks": 0,
+        "missingSamples": 0,
+        "nonzeroCallbacks": 0,
+        "pausedSilenceSamples": 0,
+        "discardedSampleValues": 0,
+        "missingRequestedPercent": 0.0,
+        "softwareCoverageAvailable": true
+      },
+      "warmupAudio": {
+        "output": {
+          "backend": "ma_backend_wasapi",
+          "initialized": true,
+          "clockRunning": true,
+          "needsPrefill": false,
+          "queue": {
+            "callbacks": 19818,
+            "requestedSamples": 40587264,
+            "consumedSamples": 40587264,
+            "starvedCallbacks": 0,
+            "missingSamples": 0,
+            "nonzeroCallbacks": 3248,
+            "pausedSilenceSamples": 0,
+            "discardedSampleValues": 0
+          },
+          "callbackErrors": 0,
+          "deviceState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 0,
+          "recoveryAttempts": 0,
+          "deviceReinitializations": 0,
+          "lastRecoveryResult": 0,
+          "maxCallbackGapMilliseconds": 32,
+          "nativeMessages": []
+        },
+        "guestSampleValues": 40603512,
+        "guestFields": 21114,
+        "guestAudibleFields": 0,
+        "suppressedSampleValues": 0,
+        "multimediaScheduling": true,
+        "pacing": {
+          "protocol": "host-frame-start-gaps-v1",
+          "upperBoundsMilliseconds": [
+            1,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            80,
+            160
+          ],
+          "buckets": [
+            0,
+            0,
+            354,
+            2268,
+            8834,
+            7209,
+            1214,
+            1231,
+            2,
+            1,
+            1
+          ]
+        }
+      },
+      "pacing": [
+        {
+          "count": 0,
+          "overflow": false,
+          "upperBoundMilliseconds": 1
+        },
+        {
+          "count": 0,
+          "overflow": false,
+          "upperBoundMilliseconds": 5
+        },
+        {
+          "count": 6538,
+          "overflow": false,
+          "upperBoundMilliseconds": 10
+        },
+        {
+          "count": 14039,
+          "overflow": false,
+          "upperBoundMilliseconds": 15
+        },
+        {
+          "count": 74989,
+          "overflow": false,
+          "upperBoundMilliseconds": 20
+        },
+        {
+          "count": 63136,
+          "overflow": false,
+          "upperBoundMilliseconds": 25
+        },
+        {
+          "count": 10710,
+          "overflow": false,
+          "upperBoundMilliseconds": 30
+        },
+        {
+          "count": 10305,
+          "overflow": false,
+          "upperBoundMilliseconds": 40
+        },
+        {
+          "count": 0,
+          "overflow": false,
+          "upperBoundMilliseconds": 80
+        },
+        {
+          "count": 0,
+          "overflow": false,
+          "upperBoundMilliseconds": 160
+        },
+        {
+          "count": 0,
+          "overflow": true,
+          "upperBoundMilliseconds": null
+        }
+      ],
+      "gc1": 11,
+      "threadsLast": 73,
+      "dashboardWriteFailures": 0
+    }
+  ],
+  "backupChecks": [
+    {
+      "validated": true,
+      "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-hours-8d028009\\Installed\\copperos-soak.copperos",
+      "metadata": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      }
+    },
+    {
+      "validated": true,
+      "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-hours-8d028009\\Installed\\copperos-reopen.copperos",
+      "metadata": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      }
+    }
+  ],
+  "cleanup": "Owned registration and private family removed; snapshots, originals and exports retained",
+  "historicalRecordsOverwrittenByThisTask": false,
+  "historicalSnapshotCount": 86,
+  "concurrentHistoricalChanges": [],
+  "limits": [
+    "Provisional current PC; no formal engine throughput or numeric release budgets",
+    "CopperStart game/attract session; no full-game/high-score-save qualification",
+    "CopperOS native Shell/storage is quiet; no active-audio demonstration or busy OS workload",
+    "No physical sound quality, display/vsync, HID, sleep or audio-device recovery acceptance",
+    "No new Store identity, clean machine, separate account, acquisition or update test",
+    "Memory ranges describe these sessions; no claim that every leak is absent"
+  ],
+  "references": [
+    {
+      "path": "artifacts/audio43-2088e734/candidate-record.json",
+      "bytes": 70241,
+      "sha256": "19d007aec985f4e793828871020d938d0005ecc6c57e2876a62148dbb0e854bf"
+    },
+    {
+      "path": "artifacts/audio43-2088e734/Package/CopperScreen-1.1.43.0-win-x64.msix",
+      "bytes": 49569399,
+      "sha256": "7a34dc3fbe845959d1ea94f1e85e5b61031e55064797a9f73a42d098319cad02"
+    },
+    {
+      "path": "artifacts/audio43-2088e734/Package/package-record.json",
+      "bytes": 39706,
+      "sha256": "87ca776921c844f94b42e0c36442644702ba9ea639f7f8a6015565a6779d4336"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/backup-verification.json",
+      "bytes": 1153,
+      "sha256": "8ae9b225a8e53a03f99c341f3fa8f1d9845c7404b6bef8c88018fcd49a12ebfc"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/completion.json",
+      "bytes": 389,
+      "sha256": "034b4b2de80e4cdcaf4ee7bc00b30ec0883e4d85f41e10265874664f3c1dff4d"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/driver.ps1",
+      "bytes": 1225,
+      "sha256": "99e1a08c3f874edfc0dde88a2ae22f609965907b42d991106fe8db47decdefb3"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Frozen/docs/INSTALLED_SESSIONS.md",
+      "bytes": 8645,
+      "sha256": "d6b1713a095f98251843199f59d7a8c4bab8ed37f8a075f1de0a56e0026d7155"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Frozen/scripts/msix/CopperScreen.Msix.psm1",
+      "bytes": 14822,
+      "sha256": "bd32066ca7717ac84441d86a48001cba1c8ef043fd29ce769433955b62ececff"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Frozen/scripts/qualification/CopperScreen.Soak.psm1",
+      "bytes": 2454,
+      "sha256": "c2370e848d2b80e468dd4d694109352daac0fe0f2c38dab7a785677f039b4ef8"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Frozen/scripts/test-msix-soak.ps1",
+      "bytes": 8346,
+      "sha256": "0c24ea2ced351f119b23810fff6ab0ebae0dd0dcce93df35fec44183d8a924bb"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Frozen/scripts/tests/test-soak-tools.ps1",
+      "bytes": 2070,
+      "sha256": "8b545d84f4a2d6dbcb789cc6b287f65aecf22c9955c2cdd7cf761ec1a90faaa8"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/harness.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/host-preflight.json",
+      "bytes": 4169,
+      "sha256": "5a46d7a1a97113f8631752770cd6ca6520370c4b1822962c8e1ae2025eb28bcd"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Inputs/corpus-lotus2.json",
+      "bytes": 337,
+      "sha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Inputs/Lotus2.adf",
+      "bytes": 901120,
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/installed-state-verification.json",
+      "bytes": 5865,
+      "sha256": "b921cec90725ad58ac57723d88610a688a3c5db43104a0d4670db85b794113ae"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-profile-path.txt",
+      "bytes": 202,
+      "sha256": "f23bd1a0b5d1c975cea041635c8d8000251ddbf7f7e7829f98d8f67ca4f7876f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-audio-timeline.json",
+      "bytes": 16469243,
+      "sha256": "5e3627b474769ef1afd5a2766f741cd8054f8236855366f2b45c7af68be467fe"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-end.png",
+      "bytes": 24205,
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-middle.png",
+      "bytes": 24205,
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-request.json",
+      "bytes": 481,
+      "sha256": "f0f8b0716ecd511e1d737445751f8970deacb3cdbc8b91a451789e07f0917c5c"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-samples.jsonl",
+      "bytes": 9215,
+      "sha256": "510966691ffb107ba151d3945fedbbfcf06fe26085f69a0289ea4c574d567490"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-start.png",
+      "bytes": 24205,
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen-storage.txt",
+      "bytes": 2025,
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen.copperos",
+      "bytes": 206246,
+      "sha256": "2d59099d827e2f2e0dbad66efc9441dd60eba557e497ca465ab8f4cd932e872e"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-reopen.json",
+      "bytes": 22578,
+      "sha256": "d61b027e788f015ea48c2970e713c61d976dce3ef0c82460c2d3fb0bf55b933a"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-audio-timeline.json",
+      "bytes": 20947766,
+      "sha256": "eae251cf459473ba27a36932d3240133a1833f17b952242d053a1cae968acc02"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-end.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-middle.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-request.json",
+      "bytes": 481,
+      "sha256": "a50f8df0bf17632449d0587339b8d32c67de2096e09414a920f84800d8d4efc9"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-samples.jsonl",
+      "bytes": 3326313,
+      "sha256": "d57349c0005a876c579e2c7876f1dda6642ae280e42c7f14e2088fc6f27085a2"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-start.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak-storage.txt",
+      "bytes": 2025,
+      "sha256": "1a2e0166e5a87784c16104d8ee2fa9fbc7c7a1dab664daadca45588b3650aaa9"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak.copperos",
+      "bytes": 206246,
+      "sha256": "d8ac74315363eb20f8180004e1f6a176166b4da857e2727c558917eebf518c01"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperos-soak.json",
+      "bytes": 22605,
+      "sha256": "4d3d17172d918d3ea32b706d6d7c838657109b9ef1b464c8feeb75509907fef8"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-profile-path.txt",
+      "bytes": 208,
+      "sha256": "e3ef326069b37dc8ec1f9c1c3faa1e670cbde2bf6a0a0175e6e9db531284c65f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen-audio-timeline.json",
+      "bytes": 18338638,
+      "sha256": "7d6260d6967b0689479dccc7f6f81e8d2f422e9e8e42c7ba6ba54ed8db6062fc"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen-end.png",
+      "bytes": 38131,
+      "sha256": "f47b1f45c7d47cc144a33cc441f415d8509fec038d25cc7b06b0dffc4a14070d"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen-middle.png",
+      "bytes": 35579,
+      "sha256": "821cfa8e040e3244e5b544deb6d7cced32f79594153a7f3a528e469a577cefd0"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen-request.json",
+      "bytes": 484,
+      "sha256": "e6198412db8229177b7efff8774567c184bbf6f0a984f03b7be91718ffd94267"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen-samples.jsonl",
+      "bytes": 8740,
+      "sha256": "dc38a55b62ac74d39c9af3b587053d9126cb221d992ccb4bf9eba4407e284cf3"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen-start.png",
+      "bytes": 33585,
+      "sha256": "07624e406ee22d120c5e30ed71109b2cb3386909d03ac5f0823e38c84cff16a9"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen.adf",
+      "bytes": 901120,
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-reopen.json",
+      "bytes": 22121,
+      "sha256": "36f1ca80f91c10b3b45ee91ca0ae660f2abb54595be2f15df2668eb87cc2a005"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak-audio-timeline.json",
+      "bytes": 20974972,
+      "sha256": "aea4ff62924576e3bd9e88805248cec77c148f37185f4b2f71b4d56dde9545a6"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak-end.png",
+      "bytes": 32894,
+      "sha256": "88e810bee889927d676c249c938ff7f8ae15b856b0a7c1456a2527e5592dd1f0"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak-middle.png",
+      "bytes": 28829,
+      "sha256": "35acb3b1dd412a4f631fcccb60845e6471a20f626dd6dcea919f31b289ad458f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak-request.json",
+      "bytes": 484,
+      "sha256": "3512d50eb7f4577d717df032f98d5d2e88ed36d71894203e01728aa8f099e8db"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak-samples.jsonl",
+      "bytes": 3128130,
+      "sha256": "456ca13b8ab5d68ccb3157fd44ed4870cb0beb7fbac7787c1b9e4553e0e0da05"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak-start.png",
+      "bytes": 33899,
+      "sha256": "f2a32809597bb51716d830f904572c0d9da64967efcbc7b8fa4c25b1c628d084"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak.adf",
+      "bytes": 901120,
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/copperstart-soak.json",
+      "bytes": 22138,
+      "sha256": "c2b54d87db44424927e396c6a75e1344d9ebf22e76b4ccd6f6435f3ced5dff5b"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/external-observer.jsonl",
+      "bytes": 307907,
+      "sha256": "21367a4e05dcffed30b4a24ca1bb54e339df3f59a46a26002117fa2b873ce885"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/CopperOS/Workspaces/soak/Previous.adf",
+      "bytes": 901120,
+      "sha256": "14ec1077b47f8fc9ccaf036070bb2ed1a618995b0087b490ed8011e09735e268"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/CopperOS/Workspaces/soak/System.adf",
+      "bytes": 901120,
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.json",
+      "bytes": 370,
+      "sha256": "2d5687e36f79eb0d7dc3811fb04080d33f5c07e24228ca79377ab14ddc02af91"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/last-machine.json",
+      "bytes": 2875,
+      "sha256": "cc161240924bf6a75e5e39761ee4fee19e40f5fa50a95661926d0d0f0c400214"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/Logs/CopperScreen-20261020-010712-29792.log",
+      "bytes": 1112148,
+      "sha256": "30233064a5270ba539b72f1072423101ff0a93c15249651babbb5e516c6bb9a8"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/Logs/CopperScreen-20261020-021503-89960.log",
+      "bytes": 51825,
+      "sha256": "aed78aee5dfe8fca39436c31eefb4473749edb0e12442690d6f06ef6c8ad1c05"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/Logs/latest.log",
+      "bytes": 51825,
+      "sha256": "aed78aee5dfe8fca39436c31eefb4473749edb0e12442690d6f06ef6c8ad1c05"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/Profiles/copperos-soak.json",
+      "bytes": 2875,
+      "sha256": "cc161240924bf6a75e5e39761ee4fee19e40f5fa50a95661926d0d0f0c400214"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperos/recent-session.json",
+      "bytes": 283,
+      "sha256": "1fe123ac8a02bf072638956318070ec8dd2ec5dec30f593c6c0ab2a8f51f51e2"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperstart/last-machine.json",
+      "bytes": 1192,
+      "sha256": "0226bf09a0ceb847172c104fee0e93ac5ad0bea1ea562016d4f279db520fcc0f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperstart/Logs/CopperScreen-20261019-235628-43916.log",
+      "bytes": 1080942,
+      "sha256": "1951a13ee14e9af8406bc63598b00cec551a21029da21c09978f4a40d9ef6ee9"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperstart/Logs/CopperScreen-20261020-010205-112572.log",
+      "bytes": 82130,
+      "sha256": "2166d98a19616c50387669378ba1b0ce87a98eddec14524ab6015d89f687d324"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperstart/Logs/latest.log",
+      "bytes": 82130,
+      "sha256": "2166d98a19616c50387669378ba1b0ce87a98eddec14524ab6015d89f687d324"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperstart/Profiles/copperstart-soak.json",
+      "bytes": 1192,
+      "sha256": "0226bf09a0ceb847172c104fee0e93ac5ad0bea1ea562016d4f279db520fcc0f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/PrivateState/copperstart/recent-session.json",
+      "bytes": 156,
+      "sha256": "28757f94cb2acc93d6ceeb568541d40bde649088057572972a2b891739d96e62"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/progress.json",
+      "bytes": 1521,
+      "sha256": "092a303926a2db41f1b2f6acdbe1ade5d41b1e01a5f04f73da54bf33bd0ba111"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/Installed/soak-record.json",
+      "bytes": 101872,
+      "sha256": "ffb7e2f9eede3c9cd6e7b37f148eeacc93816348d7c0bae2e783ffa85bae4a3f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/payload-verification.json",
+      "bytes": 205,
+      "sha256": "85630b36c76cd26eb68f6144c3bb7f3c250b72b5c9d38dfa870503565a1ada4b"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/prepare.ps1",
+      "bytes": 4927,
+      "sha256": "e9e10013805621e0216e493dbb828744ec8730a476d64a4c986750b05b94367f"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/protocol-snapshot.json",
+      "bytes": 289,
+      "sha256": "da080af73ad09ce85ae12a9300737f912457382710aebeab08f944f904cbc943"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/record-evidence.ps1",
+      "bytes": 13910,
+      "sha256": "819b9d388ad1f0c4ec7313e807a36e6203cd1f722387108593b3f76957130e66"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/request.json",
+      "bytes": 20039,
+      "sha256": "84a171337d1215031e8548585e1ba27ae0df5c7dbb523724472b2c863749d6be"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/signature-verification.log",
+      "bytes": 1049,
+      "sha256": "a7633b92b779f46d086449b25adaeb3015395bbcf703460bb7c1a5723577daab"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/soak-controls.log",
+      "bytes": 88,
+      "sha256": "b2afaacc047738f3752c44c90c50da4a87574ebcb5e8d1c07fd19c70019506a2"
+    },
+    {
+      "path": "artifacts/audio43-hours-8d028009/visual-review.json",
+      "bytes": 1821,
+      "sha256": "66a3d78858a9cc614ebcc141e41ba1d63292145757ae0ff8af63524ef244e36c"
+    },
+    {
+      "path": "artifacts/p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229/Full31/copperos-soak-middle.png",
+      "bytes": 24247,
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81"
+    },
+    {
+      "path": "docs/AUDIO_MSIX_VALIDATION_2026-10-19.json",
+      "bytes": 139956,
+      "sha256": "7cb1ac95c21f6682cc39d4ba546d973d290100ba61fa5aba6ee8aff884139f5f"
+    },
+    {
+      "path": "docs/AUDIO_MSIX_VALIDATION_2026-10-19.md",
+      "bytes": 6923,
+      "sha256": "f5c9e8a08bc6583533efe3f5a9e14e65227249d61df4f0dd7b2d66e0aa9a9e30"
+    },
+    {
+      "path": "docs/AUDIO_MSIX_WACK_VALIDATION_2026-10-19.json",
+      "bytes": 489576,
+      "sha256": "f3a92a188a756af0b14d6f6fcdb9d07d13e2d7768a3a34b84646730eb2a93905"
+    },
+    {
+      "path": "docs/AUDIO_MSIX_WACK_VALIDATION_2026-10-19.md",
+      "bytes": 5236,
+      "sha256": "3d4bd12fdf0af9e1c627e25df07a5b72d40b08b000d798de12946ab0bd535b0e"
+    },
+    {
+      "path": "docs/AUDIO_WARMUP_REFILL_2026-10-19.json",
+      "bytes": 367934,
+      "sha256": "738035b2065353410bac68b9ada82f38181450cfed7d6df7cc83ff16e4aae302"
+    },
+    {
+      "path": "docs/AUDIO_WARMUP_REFILL_2026-10-19.md",
+      "bytes": 10749,
+      "sha256": "9d08e23de34073d7e37c897eb70437b472078e6e80270d74511988e446d6ff5e"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bounded original CopperOS native boot proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contractId", "contractVersion", "pairId", "status", "shipping", "activationAllowed", "inspectionContract", "rom", "systemImage", "nativeManifestSha256", "nativeArtifacts", "machine", "bootBinding", "storage", "runtimeEvidence", "remainingGates"],
+  "properties": {
+    "$schema": {"const": "copperos-native-boot.schema.json"},
+    "schemaVersion": {"const": 1},
+    "contractId": {"const": "copperscreen.copperstart-copperos.native-boot-proof"},
+    "contractVersion": {"const": "0.1.0-dev.1"},
+    "pairId": {"type": "string", "pattern": "^a500-copperos-cli-boot-proof-dev\\.1\\.[a-f0-9]{12}$"},
+    "status": {"enum": ["native-proof-qualified", "native-proof-blocked"]},
+    "shipping": {"const": false},
+    "activationAllowed": {"const": false},
+    "inspectionContract": {"const": "packaging/guest/copperos-contract.v1.json@1.0.0-draft.1"},
+    "rom": {"$ref": "#/$defs/artifact"},
+    "systemImage": {"$ref": "#/$defs/artifact"},
+    "nativeManifestSha256": {"$ref": "#/$defs/hash"},
+    "nativeArtifacts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["BootShell", "Shell-Seg", "Demo"],
+      "properties": {
+        "BootShell": {"$ref": "#/$defs/artifact"},
+        "Shell-Seg": {"$ref": "#/$defs/artifact"},
+        "Demo": {"$ref": "#/$defs/artifact"}
+      }
+    },
+    "machine": {"const": "Lightweight PAL OCS 68000 interpreter; 512 KiB Chip + 512 KiB slow; one read-only DF0; no Fast RAM, RTC, hardfiles or host directories"},
+    "bootBinding": {"const": "DOS1 bootblock -> native dos.library -> S/Startup-Sequence -> C/BootShell -> original bounded FFS/HUNK reader -> AddSegment(Shell,-1) -> CreateNewProc/CLI -> native Shell entry with DOS-owned C: path"},
+    "storage": {"const": "Immutable proof image; native guest writes and writable workspace persistence are unqualified"},
+    "runtimeEvidence": {"const": "docs/COPPEROS_BOOT_PROOF_2026-10-16.json"},
+    "remainingGates": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "artifact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "bytes", "sha256"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}

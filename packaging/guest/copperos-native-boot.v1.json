@@ -1,0 +1,51 @@
+{
+  "$schema": "copperos-native-boot.schema.json",
+  "schemaVersion": 1,
+  "contractId": "copperscreen.copperstart-copperos.native-boot-proof",
+  "contractVersion": "0.1.0-dev.1",
+  "pairId": "a500-copperos-cli-boot-proof-dev.1.50015b6fdce1",
+  "status": "native-proof-qualified",
+  "shipping": false,
+  "activationAllowed": false,
+  "inspectionContract": "packaging/guest/copperos-contract.v1.json@1.0.0-draft.1",
+  "rom": {
+    "version": "diskboot-2026-10-16-dev.3",
+    "bytes": 524288,
+    "sha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444"
+  },
+  "systemImage": {
+    "version": "0.1.0-dev.1",
+    "bytes": 901120,
+    "sha256": "40c56b2539ecaa3eb82e0cd338910d9ca6db38a5fd0b83c8072831cc0c38daa3"
+  },
+  "nativeManifestSha256": "50015b6fdce16748a3390de97718f1f870d3b50daa77aaff0e9ece66504abfa8",
+  "nativeArtifacts": {
+    "Shell-Seg": {
+      "version": "0.1.0-dev.1",
+      "bytes": 454776,
+      "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab"
+    },
+    "BootShell": {
+      "version": "0.1.0-dev.1",
+      "bytes": 5024,
+      "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416"
+    },
+    "Demo": {
+      "version": "0.1.0-dev.1",
+      "bytes": 288,
+      "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692"
+    }
+  },
+  "machine": "Lightweight PAL OCS 68000 interpreter; 512 KiB Chip + 512 KiB slow; one read-only DF0; no Fast RAM, RTC, hardfiles or host directories",
+  "bootBinding": "DOS1 bootblock -> native dos.library -> S/Startup-Sequence -> C/BootShell -> original bounded FFS/HUNK reader -> AddSegment(Shell,-1) -> CreateNewProc/CLI -> native Shell entry with DOS-owned C: path",
+  "storage": "Immutable proof image; native guest writes and writable workspace persistence are unqualified",
+  "runtimeEvidence": "docs/COPPEROS_BOOT_PROOF_2026-10-16.json",
+  "remainingGates": [
+    "native writable guest filesystem",
+    "user-owned writable workspace and restart persistence",
+    "MSIX installed boot and update persistence",
+    "complete guest memory/stack budgets and wider Shell lifetime/error coverage",
+    "commercial redistribution evidence and notices",
+    "release admission and clean offline bundled launch"
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "protocol": "copperstart-app-session-v1",
+  "status": "bounded-standard-app-opening-race-and-lifecycle-qualified",
+  "source": {
+    "repositoryCommit": "fffdfee7bdc5147f2cefe966bea9462dd19be66d",
+    "workingTreeDirty": true,
+    "sourceSha256": {
+      "CopperScreen/CopperScreenCopperStartRom.cs": "2f798db8eb241117309520cf75eba036e8cb24e8bace00155ed7b045f5ad5a52",
+      "CopperScreen/CopperScreenLightweightSession.cs": "5d77d975c3c79f03e8ffd51154afa2b0796841d48db5ff8d474cd81842aab79f",
+      "CopperScreen/CopperScreenMachinePresets.cs": "f4ae73f1f057c0700960dc8a33e15f291ced43f7ddcdd18deea7531bf0027618",
+      "CopperScreen/CopperScreenProfile.cs": "5cf1f212e947e0eff70c8d151db215a780f5d49efdc8b326fa85bd11e083e203",
+      "CopperScreen/CopperScreenAvailability.cs": "3b4b4f2b5def0fb1c18f952384399e015cd4196f48f8c410c6ae66936304d353",
+      "CopperScreen/ICopperScreenSession.cs": "f7d8d5f3bb992234df386d69d750b76ecb43e58b25133f8d3858ab1f1fb2dc0c",
+      "CopperScreen/MainWindow.Welcome.cs": "e9a0ad5210028c56c74e9583fce394169508717848a0b9c1e2a6868feb6f2f93",
+      "CopperScreen/MainWindow.SettingsUx.cs": "1ff4ee7d97711f54522c6f409c856b95f96a6c180ba5d3a1280a59c76602bad4",
+      "CopperScreen/MainWindow.cs": "31dab940894211a53687aa74ef708544545ce511091a31cc27df003601dfe608",
+      "CopperScreen/Firmware/CopperStart.json": "e6c6ff9e2335b01aae1fa36b6c2c5fb128d042193c93e6d64d769adc4f2d7aa7",
+      "CopperScreen/Presets/lightweight-a500-copperstart.json": "5ee0309f7ae724327745d57e2b52ee621d0cbfa1222811c57edc74478c9d2d21",
+      "CopperScreen.Lightweight.Tests/CopperStartTests.cs": "e011ba8051ee3528abfd4509f6b05c876b819415a955fc5caf18e44ea00784e1",
+      "CopperScreen.Lightweight.Tests/NativeCapture.cs": "61c4921812a668d3c7f51c33da1405a172c50a98e4d2ca8440e091b4992bba6f",
+      "scripts/test-copperstart.ps1": "a57f5e55779c6408bf9c60a88be081bb44dcb0f9c7b7b1664c59d425325cab07"
+    }
+  },
+  "artifactRoot": "artifacts/copperstart-p1-03/final",
+  "firmwareContract": "CopperScreen/Firmware/CopperStart.json",
+  "firmware": "diskboot-2026-10-16-dev.1",
+  "romSha256": "ee645f0b8136904d12dde0eace1339b1010530671eeb28ebcd63d64a319620e1",
+  "producerEvidence": "engine/COPPERSTART_DESERT_DREAM_2026-10-16.json",
+  "machine": {
+    "engine": "Lightweight",
+    "cpu": "68000",
+    "cpuPackage": "1.5.4-qualified-dev.1",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "rtc": false,
+    "floppyDrives": 1,
+    "writeProtected": true,
+    "hardfiles": 0,
+    "hostDirectories": 0,
+    "nativeWidth": 908,
+    "nativeHeight": 313,
+    "appWidth": 908,
+    "appHeight": 626
+  },
+  "media": {
+    "archiveSha256": "297a528803eab78bb0b0a693353f6271387c947171ad71868279235b5a35dfa9",
+    "entry": "Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+    "entryBytes": 901120,
+    "entrySha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+  },
+  "input": {
+    "path": "CopperScreen.Lightweight.Tests/Workloads/corpus-lotus2.json",
+    "sha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3",
+    "events": [
+      {
+        "frame": 6020,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 6040
+      },
+      {
+        "frame": 9020,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 9040
+      },
+      {
+        "frame": 9600,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 9620
+      },
+      {
+        "frame": 11520,
+        "joystickPort1": 1
+      },
+      {
+        "frame": 11820,
+        "joystickPort1": 9
+      },
+      {
+        "frame": 11880,
+        "joystickPort1": 5
+      },
+      {
+        "frame": 11940,
+        "joystickPort1": 1
+      },
+      {
+        "frame": 12520,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 13200
+      }
+    ]
+  },
+  "checks": {
+    "productionBuild": {
+      "command": "dotnet build CopperScreen.slnx -c Release -m:1",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "host": {
+      "path": "artifacts/copperstart-p1-03/results/host-final.trx",
+      "sha256": "121258d0728c0148ccef5a07bd0913f7b9788b20f37046057bca8a67a6213c3f",
+      "passed": 230,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "disk": {
+      "path": "artifacts/copperstart-p1-03/results/disk.trx",
+      "sha256": "edd5628229d25cd382af9fefcbeb93aeb4456d2465f8ad0da9db7ad2086c5544",
+      "passed": 74,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "copperStart": {
+      "path": "artifacts/copperstart-p1-03/final/copperstart.trx",
+      "sha256": "dbe16c37a3df0884fec46478ac500997a9eaa75e1dde55f97b655c9228003917",
+      "passed": 12,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "lifecycle": [
+      "cold DF0 boot",
+      "guest boot-block entry",
+      "guest mouse movement and mouse/joystick fire register reads",
+      "reset button",
+      "Ctrl + both Amiga keys",
+      "paused session replacement",
+      "dispose and reopen",
+      "wait without disk then insert",
+      "qualified single-ROM ZIP",
+      "personal profile and last-session boot-source/ROM-path persistence"
+    ],
+    "negativeControls": [
+      "missing ROM",
+      "wrong size",
+      "unqualified/native ROM",
+      "ambiguous ZIP",
+      "malformed ZIP",
+      "incompatible hardware",
+      "write-enabled DF0",
+      "Legacy rejected"
+    ],
+    "installedMsix": "UNAVAILABLE: no signed trusted test pair; Developer Mode off, see MSIX_VALIDATION_2026-10-16.md"
+  },
+  "replay": {
+    "manifest": "lotus-app/app-session.json",
+    "manifestSha256": "32def3f62265ca0a4dd614070170be3a295de4537be6f337eac343e1b2a3734a",
+    "fields": 14000,
+    "nonSilentFields": 9990,
+    "scalarParity": {
+      "pcm": "every field, all delivered samples",
+      "checkpoints": "PC, D/A, cycles, Chip RAM, all pixels and doubled app rows",
+      "captures": 9,
+      "allMatched": true
+    },
+    "snapshots": [
+      {
+        "field": 1,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 142102,
+        "pc": "00FC5EDA",
+        "pixelsSha256": "50dd0c66551ae309e0baceb1cc5a3bb01cfb793f73804e5fd06c8aa54c4569be",
+        "chipSha256": "D31FB2C645AB9AAC37930F0CE5590A8EDE134D69E016E8273B4EE0CC242955E9",
+        "scalarMatches": true
+      },
+      {
+        "field": 3000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 426306004,
+        "pc": "00000C32",
+        "pixelsSha256": "c9b60b34e37eb7e14719935fff0896cc38b5667ff5bfe852d23787c4791feb8b",
+        "chipSha256": "DCBD7DCD762802EE0EDFDFDF1D8EE98169D0F29CDC0D6EE95979FAFFDF20C708",
+        "scalarMatches": true
+      },
+      {
+        "field": 6000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 852612004,
+        "pc": "00C0DF54",
+        "pixelsSha256": "5d235b2457fdda434730daf3239da0b7c6df8648c6966b1428549944a984ff57",
+        "chipSha256": "29DED09A2C45973E25B8E413C772130F3A806A6869CB0D2EBC9D2BD2713DD05D",
+        "scalarMatches": true
+      },
+      {
+        "field": 9000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 1278918016,
+        "pc": "00001406",
+        "pixelsSha256": "487cff7edd758df28eb0f637ccf69676cec56f449656d8514f312351a9a691cb",
+        "chipSha256": "D9819771F3FF1ACD12D769C5A582D0B4F2620A25C6129CE07A45B10A6D5BE70D",
+        "scalarMatches": true
+      },
+      {
+        "field": 10000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 1421020000,
+        "pc": "00C10D4A",
+        "pixelsSha256": "6206defcfcecdab7211e2a6558a157d93bdd83022d11c025890fb47f61c8a0b0",
+        "chipSha256": "160354B6E43B21D5A10C1F64C9F4FE73255D647090E550C2543F06CAD4FCAABA",
+        "scalarMatches": true
+      },
+      {
+        "field": 11000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 1563122030,
+        "pc": "00C1435C",
+        "pixelsSha256": "565c35781bb6ea01e32ddaed6924d2ae0aeb6794881d8aa63ca14d112f1d3a71",
+        "chipSha256": "1D33E6B17380B4882154A322079B43E2EA63DEC99D66C421C42ADCF247A578EB",
+        "scalarMatches": true
+      },
+      {
+        "field": 12000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 1705224020,
+        "pc": "00C13682",
+        "pixelsSha256": "20f3ece97afb9bfbebc8bd091d2e77710e45026770d08e7d8ec73dfaa45ad51e",
+        "chipSha256": "D9C4B04568967DBA018DD8D2568B2CB205B3158495440F2DE63FF24866DC2970",
+        "scalarMatches": true
+      },
+      {
+        "field": 12800,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 1818905682,
+        "pc": "00C1180E",
+        "pixelsSha256": "4541d5bd8588cdc6ea87ee976b62f4b1bca5204b54108f9430095543f46726e4",
+        "chipSha256": "896D2F90ECEA400986CF9430AC804568E2EF0DE83A5395DEFD8F2BE40E8DA1A1",
+        "scalarMatches": true
+      },
+      {
+        "field": 14000,
+        "Width": 908,
+        "Height": 626,
+        "cycle": 1989428004,
+        "pc": "00C152AE",
+        "pixelsSha256": "313449e9dc3ed842da897847c849a2dc139c03dd74a81a43bf23f2483db50d0b",
+        "chipSha256": "171D32CA33D63DD73996955DC5AA6C75501E67AF0A76C65F305DBE16AFD29940",
+        "scalarMatches": true
+      }
+    ],
+    "binaries": [
+      {
+        "name": "CopperScreen.dll",
+        "sha256": "cf2ef98a0e6b7497998450f1d50ce9d123bf4703c19eb6084565a237afbe9446"
+      },
+      {
+        "name": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "c968d0d1ce98843bcc8aba71e368601ba81648520ef97c8555484e07893b46ad"
+      },
+      {
+        "name": "Copper68k.dll",
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      }
+    ],
+    "inspectedMilestones": [
+      {
+        "field": 3000,
+        "observation": "Title/loading: LOTUS TURBO CHALLENGE II."
+      },
+      {
+        "field": 6000,
+        "observation": "The Company crack intro with PRESS FIRE, before fire at 6020."
+      },
+      {
+        "field": 9000,
+        "observation": "High-score page before fire at 9020."
+      },
+      {
+        "field": 10000,
+        "observation": "Forest course selection/loading after menu input."
+      },
+      {
+        "field": 11000,
+        "observation": "Starting grid: SET, 0 MPH, timer 70."
+      },
+      {
+        "field": 12000,
+        "observation": "Opening race: 9 MPH, timer 51."
+      },
+      {
+        "field": 12800,
+        "observation": "Input-driven acceleration: 61 MPH, score 21830, timer 35."
+      },
+      {
+        "field": 14000,
+        "observation": "Continued opening race after release: 9 MPH, score 77940, timer 11."
+      }
+    ],
+    "earlierReplay": {
+      "manifest": "artifacts/copperstart-p1-03/lotus-app/app-session.json",
+      "manifestSha256": "c30befae0e3aa9c5fdb7e21b4d7bc0c9aaa88aa4263041709a703b923fbef363",
+      "allNineDecodedPngsPixelIdentical": true
+    }
+  },
+  "limitations": [
+    "Source-session validation, not an installed MSIX or Store certification result.",
+    "ROM distribution rights, controlled release inputs and producer release version remain open P0 gates.",
+    "CopperOS and broader DOS/Workbench replacement are not qualified.",
+    "Full-game completion, other titles/hardware, guest file saves and listening/audio fidelity are not claimed.",
+    "No performance measurement and no hardware/CPU execution changes."
+  ]
+}

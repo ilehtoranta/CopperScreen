@@ -1,0 +1,594 @@
+{
+  "trx": {
+    "sha256": "581FA5A60654D6D89A77D0356B52EE32E68E56D7BE4F0EFA6B1B07204330E267",
+    "file": "qualified-v1/intuition/intuition.trx"
+  },
+  "captures": [
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-320-console-after-1.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-320-console-after-2.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-320-console-after-3.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-320-console-before.png"
+    },
+    {
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65",
+      "file": "intuition-320-cycle-0.png"
+    },
+    {
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65",
+      "file": "intuition-320-cycle-1.png"
+    },
+    {
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65",
+      "file": "intuition-320-cycle-2.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-640-console-after-1.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-640-console-after-2.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-640-console-after-3.png"
+    },
+    {
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "file": "intuition-640-console-before.png"
+    },
+    {
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837",
+      "file": "intuition-640-cycle-0.png"
+    },
+    {
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837",
+      "file": "intuition-640-cycle-1.png"
+    },
+    {
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837",
+      "file": "intuition-640-cycle-2.png"
+    }
+  ],
+  "layout": {
+    "tailBeforeFooterBytes": 842,
+    "preGraphicsGapBytes": 27854,
+    "graphicsBytes": 31906,
+    "romBytes": 524288,
+    "graphicsVectors": 58,
+    "rootCodeBytes": 463658
+  },
+  "date": "2026-10-18",
+  "nativeReplayCases": 2,
+  "managedRomInputs": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "9333711473A6A08229AF61BAAC7F5A24EB899CFD981A42173F28095D6E9C328D"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "CACC2157CEF8ED44C8F8688B644986E0ED6264EA6CF47FD7EA0411E821CAFB8E"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "3C473A6C86A17447618F7271F8DA3B0DD3B7DE269E3B905F0604A45BFDFDF9A4"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperSharp.Targets.Amiga.dll",
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+    }
+  ],
+  "remaining": [
+    "BeginRefresh/EndRefresh, Layer Refresh retirement, exposed desktop/backdrop and frame repaint",
+    "IDCMP refresh/close delivery, replies, wait/wake and outstanding-event teardown",
+    "Physical keyboard/mouse, pointer, focus/activation and qualifiers/key-up/repeat",
+    "Full GUI loader/transient allocation peaks and event/input queue budget",
+    "Separate broad Intuition/IR01 and Workbench qualification"
+  ],
+  "passed": true,
+  "releaseBuild": {
+    "errors": 0,
+    "sha256": "145204EEAB0FF45F473B60BCDB406F354EBAC2FF1C0B0C1214E18CC8CA5734AE",
+    "file": "solution-build-v3.log",
+    "passed": true,
+    "warnings": 0
+  },
+  "skipped": 0,
+  "actualCompilationReplay": {
+    "skipped": 0,
+    "sha256": "C88B309D81342F99EF7DE6B524F3C871C316EF54EC201B7BF57E481C33A17B5B",
+    "file": "native-v6/intuition.trx",
+    "passed": 3
+  },
+  "appFirmwareManifest": {
+    "sha256": "22E1001D18B97AFAFE6391F4B39A1D0859BCA5967B29688320C3E00032C588F3",
+    "changed": false,
+    "file": "CopperScreen/Firmware/CopperStart.json"
+  },
+  "selectedTests": 3,
+  "retainedSource": {
+    "sha256": "A1BF53D59AD1C60A8C202337DC794638356A5D5C05921216DFC6F73F8D31FF0F",
+    "manifest": "source-final.json",
+    "count": 50
+  },
+  "machine": {
+    "fastBytes": 0,
+    "drives": 1,
+    "chipBytes": 524288,
+    "cpu": "MC68000",
+    "slowBytes": 524288,
+    "video": "PAL OCS"
+  },
+  "compilationControlCases": 1,
+  "qualification": {
+    "sha256": "2A02D05608C1FF969233D0F4EB93F76BAF4B366E436044C8D46019F1D780B7BB",
+    "file": "qualified-v1/qualification.json"
+  },
+  "protocol": "copperstart-native-intuition-startup-evidence-v1",
+  "scope": "Compact disk-loaded Intuition owner through public native Exec/DOS/Layers/graphics, minimal classic custom screen/window, pins, allocation rollback, idle/deferred expunge and console restoration; separate from IR01, Workbench, refresh/input and throughput admission",
+  "retainedControls": {
+    "rerun": false,
+    "sha256": "B303C1DEF396FBA762E14B521B86C76865AB966A97EEC48AF974D38DC36F112D",
+    "hostSemantics": 88,
+    "file": "COPPERSTART_OWNED_LAYER_UPDATES_2026-10-18.json",
+    "combinedChecks": 344
+  },
+  "shipping": false,
+  "payload": {
+    "sha256": "C4F08698F13A3433BED8CA2F1BB14807934F57B98331EE7379ECC22CE5EAB314",
+    "entry": 0,
+    "installer": 222934,
+    "codeBytes": 223628,
+    "imageBytes": 231052,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "22E31155DAF8A643F8457DC90C7293B97D11F50C89E58F90F99B570A7BE6AE8C"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "B396B505EAAE9C2E1BEAF8EFD93DB17FF7DEBA9EB970D901EB6C774B62B7BF63"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ]
+  },
+  "producerArtifacts": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\intuition-window-20261018",
+  "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+  "receipts": [
+    {
+      "width": 320,
+      "fields": 7722,
+      "pc": 12755254,
+      "romBytes": 524288,
+      "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "payloadSha256": "C4F08698F13A3433BED8CA2F1BB14807934F57B98331EE7379ECC22CE5EAB314",
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "captures": [
+        {
+          "cycle": 0,
+          "screen": 12750440,
+          "window": 12751336,
+          "layer": 12831296,
+          "chipFree": 215552,
+          "totalFree": 508056,
+          "largestChip": 182784,
+          "largestSlow": 274528
+        },
+        {
+          "cycle": 1,
+          "screen": 12750440,
+          "window": 12751336,
+          "layer": 12831296,
+          "chipFree": 215552,
+          "totalFree": 508056,
+          "largestChip": 182784,
+          "largestSlow": 274528
+        },
+        {
+          "cycle": 2,
+          "screen": 12750440,
+          "window": 12751336,
+          "layer": 12831296,
+          "chipFree": 215552,
+          "totalFree": 508056,
+          "largestChip": 182784,
+          "largestSlow": 274528
+        }
+      ],
+      "restored": 3,
+      "receipt": [
+        0,
+        1229868875,
+        14044,
+        56180,
+        12810372,
+        9280,
+        12750440,
+        12751336,
+        12750372,
+        12748526,
+        530744,
+        530744,
+        530744,
+        530744,
+        0,
+        300,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        215552,
+        508056,
+        182784,
+        274528,
+        0,
+        0,
+        0,
+        0,
+        0,
+        24,
+        12590648,
+        12595328,
+        7,
+        23,
+        0,
+        0,
+        542952,
+        542952,
+        3,
+        530744,
+        7,
+        508888,
+        508888,
+        23,
+        530744,
+        536088,
+        52,
+        536088,
+        5,
+        530744,
+        530744,
+        12590768,
+        12809520,
+        12809520,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "width": 640,
+      "fields": 7836,
+      "pc": 12755254,
+      "romBytes": 524288,
+      "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "payloadSha256": "C4F08698F13A3433BED8CA2F1BB14807934F57B98331EE7379ECC22CE5EAB314",
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "captures": [
+        {
+          "cycle": 0,
+          "screen": 12750440,
+          "window": 12751336,
+          "layer": 12831296,
+          "chipFree": 195072,
+          "totalFree": 487576,
+          "largestChip": 162304,
+          "largestSlow": 274528
+        },
+        {
+          "cycle": 1,
+          "screen": 12750440,
+          "window": 12751336,
+          "layer": 12831296,
+          "chipFree": 195072,
+          "totalFree": 487576,
+          "largestChip": 162304,
+          "largestSlow": 274528
+        },
+        {
+          "cycle": 2,
+          "screen": 12750440,
+          "window": 12751336,
+          "layer": 12831296,
+          "chipFree": 195072,
+          "totalFree": 487576,
+          "largestChip": 162304,
+          "largestSlow": 274528
+        }
+      ],
+      "restored": 3,
+      "receipt": [
+        0,
+        1229868875,
+        14044,
+        56180,
+        12810372,
+        9280,
+        12750440,
+        12751336,
+        12750372,
+        12748526,
+        530744,
+        530744,
+        530744,
+        530744,
+        0,
+        300,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        195072,
+        487576,
+        162304,
+        274528,
+        0,
+        0,
+        0,
+        0,
+        0,
+        24,
+        12590648,
+        12595328,
+        7,
+        23,
+        0,
+        0,
+        542952,
+        542952,
+        3,
+        530744,
+        7,
+        488408,
+        488408,
+        23,
+        530744,
+        536088,
+        52,
+        536088,
+        5,
+        530744,
+        530744,
+        12590768,
+        12809520,
+        12809520,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "workingTreeFollowup": {
+    "subsequentSha256": "22F2A9A2982614735EC6903942AB1D88736FFB8CAF47DEC18B75048DF73C6925",
+    "file": "native/CopperStart.DesktopProviders/NativeIntuitionLibrary.cs",
+    "scope": "Later Workbench/public-screen additions are preserved outside the qualified source snapshot.",
+    "qualifiedSha256": "1FAE3F61D36A54DF2834A85B0D507C4AED8B090407439F8520C3B0D857CCF28D"
+  },
+  "subsequentWorkingTreeBuild": {
+    "sha256": "12D7F6F74880DF928096C36A4D8B498C74B530D6804F1F3FA7F0CD3F1919EABF",
+    "scope": "Current source builds, including later Workbench additions outside the frozen native replay snapshot.",
+    "errors": 0,
+    "file": "solution-build-v4.log",
+    "passed": true,
+    "warnings": 0
+  }
+}

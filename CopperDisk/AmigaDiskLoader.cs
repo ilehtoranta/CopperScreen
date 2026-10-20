@@ -103,7 +103,7 @@ public static class AmigaDiskLoader
     /// <summary>
     /// Creates writable sector media from a standard ADF sector image.
     /// </summary>
-    /// <param name="ownedData">The 880 KiB ADF image bytes. CopperDisk takes ownership and callers must not mutate the array while the media is in use.</param>
+    /// <param name="ownedData">The 880 KiB DD or 1760 KiB HD ADF image bytes. CopperDisk takes ownership and callers must not mutate the array while the media is in use.</param>
     /// <returns>Writable Amiga sector media backed by <paramref name="ownedData"/>.</returns>
     public static IWritableAmigaSectorDiskMedia FromAdfBytes(byte[] ownedData)
     {

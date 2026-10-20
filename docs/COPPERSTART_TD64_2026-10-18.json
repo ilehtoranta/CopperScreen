@@ -1,0 +1,616 @@
+{
+  "protocol": "copperstart-td64-v1",
+  "qualificationId": "diskboot-2026-10-18-td64.1",
+  "rom": {
+    "qualificationId": "diskboot-2026-10-18-td64.1",
+    "producerCommit": "b45c2e4e50860f87e81e21d2a6e5c2a08e2631ad",
+    "bytes": 524288,
+    "sha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+    "requirements": "PAL A500, 68000, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM, one DD/HD drive; read-only DF0 floppy boot or an owned writable CopperOS DOS1 workspace. Optional existing hard disk image on unit 0: RDB-discovered FFS/DOS1 partitions or one explicit 512-byte FFS partition, including TD64 offsets above 4 GiB. RDB boot priorities select SYS:. No RTC, Fast RAM or shared folders.",
+    "evidence": "docs/COPPERSTART_TD64_2026-10-18.md",
+    "producerSourceSnapshot": "Frozen td64-20261018/native-qualified producer inputs: Classic filesystem profile, native CopperHDF RDB/multiple FFS mounts and signed boot-priority selection, TD64 partition extents, FFS flushing, DD/HD trackdisk and packed font indices at $FF8A00. Core 493716 bytes; graphics 30099 bytes. Concurrent DOS/Exec provider edits are excluded."
+  },
+  "scope": "TD64 device offsets, crossing/above-4GiB explicit FFS partitions, protected reads on a sparse 4.125GiB volume with 32 added guest cache buffers; large-volume writes unqualified; no NSD changes",
+  "fullRomCases": 47,
+  "resetRomBoots": 70,
+  "frontendCases": 7,
+  "frontendBoots": 22,
+  "hostSemanticCases": 61,
+  "compiledMc68000Cases": 5,
+  "qualificationSkips": 0,
+  "groups": {
+    "frontends": {
+      "path": "CopperStart/artifacts/td64-20261018/qualified/frontends.trx",
+      "sha256": "a4710e4d355818400e3ed6acee2b7e6f6f28b731bca3f8ad5e703facd7b16473",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.AppProtectedPristinePartitionRejectsFirstMutationWithoutChangingBacking",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64RunnerCrossingAndAboveFourGiBWritesRestartAndFreshProtectedBoot",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.CommandLineProtectedPristinePartitionRejectsWritesWithoutChangingBacking",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.AppWritesGuestFlushHostSaveResetReplacementAndFreshBootReadback",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.CommandLineWritesFlushBeforeExitRestartAndFreshProtectedBootReadback",
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64AppCrossingAndAboveFourGiBWritesFlushResetAndFreshBoot"
+      ]
+    },
+    "largeVolumeRead": {
+      "path": "CopperStart/artifacts/td64-20261018/large-read-qualified/large-read.trx",
+      "sha256": "4c0794fd9a2cbbb46704cd882f5155320302190013e0e80fd219df83a8a8eb92",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperScreen.Tests.CopperStartHardDiskWriteTests.Td64LargeVolumeReadsUpperFilesFromProtectedBoot"
+      ]
+    },
+    "ddGraphicsFont": {
+      "path": "CopperStart/artifacts/td64-20261018/regression-results/regression.trx",
+      "sha256": "9097585b41216e9a185eb3e7303eccb3ed59bdbeeef21a8447cd77ad2141b347",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: True, expansion: False)",
+        "CopperStart.Floppy.Native.Tests.NativeGraphicsBootTests.GuestOpensGraphicsInitializesCallerStorageAndAllocatesRasterThroughNativeVectors(slowRamBytes: 524288)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: True, expansion: True)",
+        "CopperStart.Floppy.Native.Tests.NativeGraphicsBootTests.GuestOpensGraphicsInitializesCallerStorageAndAllocatesRasterThroughNativeVectors(slowRamBytes: 0)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: False, expansion: False)",
+        "CopperStart.Floppy.Native.Tests.NativeGraphicsBootTests.GraphicsCompositionRejectsOverlapAndRenewsTheKickstartChecksum",
+        "CopperStart.Floppy.Native.Tests.NativeRomFontTests.SharedRomGlyphsPreserveEveryPublicTextFontCharacter",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: False, expansion: True)"
+      ]
+    },
+    "hd": {
+      "path": "CopperStart/artifacts/td64-20261018/hd-regression-results/hd.trx",
+      "sha256": "7ecbc23a2da5fe7484a1c3c41a75b346d1cb39eb59ff05408d0804137b49d3da",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: True, expansion: True)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdWritesSurviveMfmExportAndFreshRomRead(unit: 2, offset: 901120, length: 512)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: False, expansion: True)",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: True, expansion: False)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdReadsUseActualDriveAndMediaGeometry(unit: 3, offset: 1801728, length: 512)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdReadsUseActualDriveAndMediaGeometry(unit: 1, offset: 22016, length: 1024)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdWritesSurviveMfmExportAndFreshRomRead(unit: 1, offset: 22016, length: 1024)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdOfsAndFfsReadFilesAcrossExtensionTables(ffs: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsWritesExportAndFreshBootReadback(extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdOfsAndFfsReadFilesAcrossExtensionTables(ffs: True)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdReadsUseActualDriveAndMediaGeometry(unit: 0, offset: 10752, length: 1024)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsWritesExportAndFreshBootReadback(extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdWritesSurviveMfmExportAndFreshRomRead(unit: 3, offset: 1801728, length: 512)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdReportsGeometryAnd150RpmDriveType(command: 22)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdWriteProtectionLeavesTheMediumUnchanged",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdProtectedFfsRejectsFileWritesWithoutChangingMedia",
+        "CopperStart.Floppy.Native.Tests.NativeDosBootTests.FullRomHdOfsAndFfsBootStartupAndReadUpperHalfFiles(ffs: False, expansion: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsExtensionWritesExportAndFreshBootReadback",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdReportsGeometryAnd150RpmDriveType(command: 18)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdWritesSurviveMfmExportAndFreshRomRead(unit: 0, offset: 10752, length: 1024)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FullRomHdReadsUseActualDriveAndMediaGeometry(unit: 2, offset: 901120, length: 512)"
+      ]
+    },
+    "rdb": {
+      "path": "CopperStart/artifacts/td64-20261018/rdb-regression-results/rdb.trx",
+      "sha256": "c38e31f5e6f9eaf1541c385132dd40b973c2ce1c68c8615cba25d23a1d4986d7",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 5, secondPriority: 0, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 127, secondPriority: -10, firstFlags: 0, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.NonBootableRdbDataPartitionsMountWhenDosBootsFromFloppy",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 7, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.MultipleExplicitCopperHdfUnitsMountAndSelectBootPriority",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 127, firstFlags: 1, secondFlags: 3, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBothFfsPartitionsWriteFlushAndFreshBootReadback",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: -10, secondPriority: -5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 5, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbFallsBackFromUnformattedHighPriorityFfsAndSkipsUnsupportedFileSystem",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: -128, secondPriority: -127, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.ProtectedRdbRejectsWritesToTheNonBootDataPartition",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)"
+      ]
+    },
+    "compiledMc68000": {
+      "path": "CopperStart/artifacts/td64-20261018/geometry-results-fixed/ilkle_KOTIKONE_2026-10-18_20_26_36_net10.0.trx",
+      "sha256": "c33ea2b297ae0fe400bc4995a39f17457de38bb3cd0002603c63c4d7c40e82d2",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 8, trackSectors: 10, low: 419430, high: 419529, count: 250, root: 125, start: 4294963200, requests: 6, write: False)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 1, trackSectors: 32, low: 131076, high: 131130, count: 3520, root: 1760, start: 4295098368, requests: 1, write: True)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 8, trackSectors: 10, low: 419430, high: 419529, count: 250, root: 125, start: 4294963200, requests: 6, write: True)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 1, trackSectors: 22, low: 0, high: 79, count: 3520, root: 1760, start: 0, requests: 1, write: False)",
+        "CopperStart.Floppy.Native.Tests.FileSystemGeometryInstructionTests.CompiledMc68000UsesHdPartitionAndTd64Geometry(sectorsPerBlock: 2, trackSectors: 10, low: 7, high: 1206, count: 12000, root: 6000, start: 71680, requests: 2, write: False)"
+      ]
+    },
+    "hostFileSystemGeometry": {
+      "path": "CopperStart/tests/CopperStart.FileSystem.Tests/TestResults/ilkle_KOTIKONE_2026-10-18_20_21_58_net10.0.trx",
+      "sha256": "b149ef5998b6805d78b4419675bf1d00ed98d151c0491aee283951594adc5235",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 8404992, freeStart: 8388608)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OfsReadsUseTheVolumeBlockSizeAndPreserveTheVerifiedPrefix(bytes: 512, blocks: 3520)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.MinimumEnvironmentDoesNotRequireOptionalFieldsAndRejectsOverflow",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 512, sectorsPerBlock: 1, blocks: 3520, lowCylinder: 0)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.FailedBitmapWriteLeavesTheVolumeInvalid",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 110000, freeStart: 101600)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.DeviceGeometryMountsAnHdVolumeAtItsActualRoot",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 630000, freeStart: 617728)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 1024, blocks: 20000, freeStart: 8160)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 1024, sectorsPerBlock: 1, blocks: 9000, lowCylinder: 13)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ReservedAreaAndOddVolumeSizeDetermineRootAndBitmapOrigin",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 4096, sectorsPerBlock: 1, blocks: 6000, lowCylinder: 4)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OfsReadsUseTheVolumeBlockSizeAndPreserveTheVerifiedPrefix(bytes: 1024, blocks: 10000)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 512, sectorsPerBlock: 2, blocks: 12000, lowCylinder: 7)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 10000, freeStart: 4064)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.DeviceTransfersSplitAtMaxTransferAndUseTd64BeyondFourGiB"
+      ]
+    },
+    "hostPartitionGeometry": {
+      "path": "CopperScreen/CopperDisk.Tests/TestResults/ilkle_KOTIKONE_2026-10-18_20_12_06_net10.0.trx",
+      "sha256": "26c48537e14a99df31a598986c4b2e9e09d8a4da4a6c5a32d380eda4acca0309",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:1:1:0:8388606\", start: 0, length: 4294966784)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:2:32:58:4\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:1:1:0:4294967295\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:1:1:0:4294967294\", start: 0, length: 2199023255040)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:4194305:1:4294967294:4294967295\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:4294967295:4294967295:0:4294967295\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:2:32:4:262147\", start: 131072, length: 8589934592)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:2:32:-1:58\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:0:32:4:58\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:2:32:131076:131130\", start: 4295098368, length: 1802240)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:2:32:0:131071\", start: 0, length: 4294967296)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:2:32:4:58\", start: 131072, length: 1802240)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:2:32:0:4294967296\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"DH0:2:32:131068:131122\", start: 4294836224, length: 1802240)",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.InvalidOrUnaddressablePartitionIsRejected(geometry: \"DH0:2:32:4\")",
+        "CopperDisk.Tests.AmigaFfsPartitionTests.ExplicitGeometryUsesInclusiveCylindersAndByteOffsets(geometry: \"Work:2:32:4:259\", start: 131072, length: 8388608)"
+      ]
+    },
+    "hostAppSettings": {
+      "path": "CopperStart/artifacts/td64-20261018/settings-final-results/settings.trx",
+      "sha256": "b97f6907bfea6dd121b7c619a5925042f891cb662719ba1bcb9001d9f6a2de8c",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"overflow\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.Td64GeometryIsAvailableAndSurvivesSavedSettings(geometry: \"DH0:2:32:0:131071\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.CommandLineSelectsExplicitFfsWithoutAFloppy(option: \"--hdf-ffs-writable\", readOnly: False)",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"auto\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"block-count-overflow\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.ImageExtentIsCheckedBeforeRomLoading",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.ExplicitFfsGeometrySurvivesProfileCloneLastMachineAndPathNormalization(readOnly: True)",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.ExplicitFfsGeometrySurvivesProfileCloneLastMachineAndPathNormalization(readOnly: False)",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"ofs\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.Td64GeometryIsAvailableAndSurvivesSavedSettings(geometry: \"DH0:2:32:131068:131122\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.Td64GeometryIsAvailableAndSurvivesSavedSettings(geometry: \"DH0:2:32:131076:131130\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.Td64GeometryIsAvailableAndSurvivesSavedSettings(geometry: \"DH0:2:32:4:135171\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"missing-geometry\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"unit\")",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.CommandLineSelectsExplicitFfsWithoutAFloppy(option: \"--hdf-ffs\", readOnly: True)",
+        "CopperScreen.Tests.CopperScreenHardDiskSettingsTests.UnsupportedCopperStartMountsAreReportedBeforeRomLoading(change: \"multiple\")"
+      ]
+    }
+  },
+  "runnerConfigurationChecks": 11,
+  "nativeStaticAnalysis": {
+    "codeBytes": 493716,
+    "IsCompatible": true,
+    "managedAllocationSites": [],
+    "frameworkFeatures": [],
+    "nativeCompatibility": {
+      "ExceptionMode": 1,
+      "MemoryManagement": 0,
+      "ExceptionRegionCount": 0,
+      "FatalMachineFaultSiteCount": 11,
+      "RuntimeFeatures": [],
+      "RuntimeHelpers": [],
+      "ExternalNativeTargets": [],
+      "ReachableAssemblies": [
+        {
+          "Name": "CopperSharp.Runtime.Managed",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "ba36b29d-2172-47e9-a467-36fce7a2b534",
+          "Sha256": "23d66959e20be34b0dd2f2799844a0feb9e4f4bb8dfe8151b00d251a65c0d185"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "18f91180-66b5-40ef-ac30-6c6a1e38ec7f",
+          "Sha256": "b724c9fe636bdebd41ef32be639a86a89dffeba9dc444ffcf212b3124a6bca45"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga.Support",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "33900476-804b-4c43-b75c-19b69df38015",
+          "Sha256": "24d08169105ec623af5c79cca118d94885c40cdb7f36fd5cf247db2c3943c0f9"
+        },
+        {
+          "Name": "CopperStart-System",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "ec48ad54-b915-44a1-9e7f-51ce06bb506e",
+          "Sha256": "5dac19d570f87ea06ce8ccaf7e7d7b2083de2fd406f7a08918b4558319997c63"
+        },
+        {
+          "Name": "CopperStart.Devices",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "e6ff76e3-7936-41df-b19a-299082820554",
+          "Sha256": "3a7a420ca20a035dffddef5c816f6bfcb69e37f18b2139eeb6ecc51e987c3ff3"
+        },
+        {
+          "Name": "CopperStart.Dos",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "c8d7aea3-1432-49d6-8780-5f075367bd94",
+          "Sha256": "12e9720fccacedad8c7a5bf5d68a8a1d0cacbb258a78e7a7d84eb2e0f038f7b0"
+        },
+        {
+          "Name": "CopperStart.Exec",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "2237e654-7736-46bf-b7f0-c2620c14ddc2",
+          "Sha256": "1542acbc93180540642d930d47339e7bf731151b58cd112375a08e8ba514c716"
+        }
+      ],
+      "RuntimeFeatureCount": 0,
+      "RuntimeHelperCount": 0,
+      "ExternalNativeTargetCount": 0,
+      "ReachableAssemblyCount": 7
+    }
+  },
+  "reports": {
+    "app": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "frontend": "app-runtime",
+        "boots": 4,
+        "payloadBytes": 2049,
+        "guestCmdUpdateBeforeHostSave": true,
+        "hostSaveSucceeded": true,
+        "hostSaveAdvancedCycles": false,
+        "reset": true,
+        "sessionReplacement": true,
+        "freshProtectedBoot": true,
+        "profileAndLastMachineRestored": true,
+        "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3C7D5FCBFC2478CCC4BFE6C36A12F031CE12209B1C4E0EC321D61CEE8BC92A0F"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0CA32F3B86C9369732158B2011C113F3BE3C419291E94C0E9BCDACE8C16D22A8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "D499A747049A6778BC26E89788041BADABDF699A0E0B14309664708DD85585BF"
+        }
+      ]
+    },
+    "runner": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "frontend": "command-line-process",
+        "boots": 3,
+        "payloadBytes": 2049,
+        "guestCmdUpdateBeforeExit": true,
+        "liveBackingSnapshotWithoutHostFlush": true,
+        "writableProcessRestart": true,
+        "freshProtectedBoot": true,
+        "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "runnerSha256": "A858DCBDFE2ABF5C1D1A122810BADC1AF987E11B097D93331C1AC12A7BC46F46"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3C7D5FCBFC2478CCC4BFE6C36A12F031CE12209B1C4E0EC321D61CEE8BC92A0F"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0CA32F3B86C9369732158B2011C113F3BE3C419291E94C0E9BCDACE8C16D22A8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "D499A747049A6778BC26E89788041BADABDF699A0E0B14309664708DD85585BF"
+        }
+      ]
+    },
+    "td64-app-131068": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4294836224,
+        "Geometry": "DH0:2:32:131068:131122",
+        "guestFlushBeforeHostSave": true,
+        "lowAliasGuardUnchanged": true,
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3C7D5FCBFC2478CCC4BFE6C36A12F031CE12209B1C4E0EC321D61CEE8BC92A0F"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0CA32F3B86C9369732158B2011C113F3BE3C419291E94C0E9BCDACE8C16D22A8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "D499A747049A6778BC26E89788041BADABDF699A0E0B14309664708DD85585BF"
+        }
+      ]
+    },
+    "td64-app-131076": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4295098368,
+        "Geometry": "DH0:2:32:131076:131130",
+        "guestFlushBeforeHostSave": true,
+        "lowAliasGuardUnchanged": true,
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3C7D5FCBFC2478CCC4BFE6C36A12F031CE12209B1C4E0EC321D61CEE8BC92A0F"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0CA32F3B86C9369732158B2011C113F3BE3C419291E94C0E9BCDACE8C16D22A8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "D499A747049A6778BC26E89788041BADABDF699A0E0B14309664708DD85585BF"
+        }
+      ]
+    },
+    "td64-runner-131068": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4294836224,
+        "Geometry": "DH0:2:32:131068:131122",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "lowAliasGuardUnchanged": true
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3C7D5FCBFC2478CCC4BFE6C36A12F031CE12209B1C4E0EC321D61CEE8BC92A0F"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0CA32F3B86C9369732158B2011C113F3BE3C419291E94C0E9BCDACE8C16D22A8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "D499A747049A6778BC26E89788041BADABDF699A0E0B14309664708DD85585BF"
+        }
+      ]
+    },
+    "td64-runner-131076": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4295098368,
+        "Geometry": "DH0:2:32:131076:131130",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "lowAliasGuardUnchanged": true
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "3C7D5FCBFC2478CCC4BFE6C36A12F031CE12209B1C4E0EC321D61CEE8BC92A0F"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0CA32F3B86C9369732158B2011C113F3BE3C419291E94C0E9BCDACE8C16D22A8"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "D499A747049A6778BC26E89788041BADABDF699A0E0B14309664708DD85585BF"
+        }
+      ]
+    },
+    "td64-large-read": {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 1,
+        "blockCount": 8650752,
+        "upperFileBlocks": true,
+        "savedSha256": "7ECF23D2515561499347AD9463B00D42A7FB04515A6F8C638A57571D67E12F35",
+        "protectedBackingUnchanged": true,
+        "guestAddedCacheBuffers": 32
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "D70ADF0F1BC9C14489A60E499834D31702BF2DAED1CBF4C4AE1BE86844223E17"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "9C38B8180139C03555F381C233C4D706FE47BA9F972D78973614E06814423AAB"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "4800E8B70D061502F03AC173FE792EB42D3F25193BE1558E74B509F01B5606BD"
+        }
+      ]
+    }
+  },
+  "largeVolumeWrites": {
+    "qualified": false,
+    "reason": "Full-volume bitmap traversal and used-key allocation are too slow in the observed workloads; separate opt-in replay retained"
+  },
+  "allocationStress": {
+    "qualified": false,
+    "status": "Stopped after 600 seconds in first CreateDir mutation; no allocation throughput claim",
+    "observation": {
+      "frame": 66541,
+      "seconds": 600.0047194,
+      "cycle": 9455751284,
+      "pc": 16383656,
+      "receipt": "0000000000C2DEF20000000100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "guestAdditionalBuffers": 0
+  },
+  "uncachedSparseVolume": {
+    "qualified": false,
+    "status": "Stopped to investigate cache thrashing",
+    "observation": {
+      "frame": 40541,
+      "seconds": 330.0061802,
+      "cycle": 5761099292,
+      "pc": 16672878,
+      "receipt": "0000000000C2DEF20000000100000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  "sourceFiles": [
+    {
+      "path": "CopperStart/rom/CopperStart.SystemRom/NativeCopperHdfBoot.cs",
+      "sha256": "ffc630741ca1c2bc1ce76909f648c7cd5934993957cda49937fb09b2721e5b41"
+    },
+    {
+      "path": "CopperStart/tests/CopperStart.FileSystem.Tests/VolumeGeometryTests.cs",
+      "sha256": "ec855bf7ba0306231756f21de3e30c62afe067998c657479a6a04bac80ec9949"
+    },
+    {
+      "path": "CopperStart/tests/CopperStart.Floppy.Native.Tests/FileSystemGeometryInstructionTests.cs",
+      "sha256": "f41646c3d5d55a17e91fb4c2a5baa14dc0b60071ee5359aaee6a340a8f86d596"
+    },
+    {
+      "path": "CopperScreen/CopperDisk/AmigaFfsPartition.cs",
+      "sha256": "d8c7d8e672654563f9254cf1353ee11f0778b849a417e663208479065f91f808"
+    },
+    {
+      "path": "CopperScreen/CopperDisk.Tests/AmigaFfsPartitionTests.cs",
+      "sha256": "e3d26857052f7b7f5362e65931bbbedcf673da5261166d18fb2109245285d7f2"
+    },
+    {
+      "path": "CopperScreen/CopperScreen/CopperScreenHardfileSettings.cs",
+      "sha256": "213ee8713218103ede992fdd4f6d0072accd5df44677f065c74453fd2fa4d3b1"
+    },
+    {
+      "path": "CopperScreen/CopperScreen/MainWindow.Storage.cs",
+      "sha256": "80672786ed5ff0089cd16a4fb57018496b024e966d40a1acb13e281a4f2f910f"
+    },
+    {
+      "path": "CopperScreen/CopperMod.Amiga.Lightweight.Runner/Program.cs",
+      "sha256": "22f3feb1cdef92b67d7ffd3a20b484e24ddd74c884e97f9723413b6ffdf6f1a6"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/CopperScreenHardDiskSettingsTests.cs",
+      "sha256": "f54b8cefe8e6784d15199695889551b79b6b3c2fde8088a857dfb428e8a27611"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/CopperStartTd64Tests.cs",
+      "sha256": "e7b196a377c38d489204e25dc96ea5ccbaf3c546e31a9c742eaef9a4afc1b84f"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/LargeFfsFixture.cs",
+      "sha256": "d3d2a77a236bb3cd10a48fce21f0b3e5ae238e76b732e37ea0ebc3511a092282"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.Lightweight.Tests/FfsHardDiskProbe.cs",
+      "sha256": "4cb95b43fa6932c3299b69bfbda55a9bcd781f9d4c2a6cf788746b12b86c9f09"
+    },
+    {
+      "path": "CopperScreen/scripts/test-copperstart-harddisk-writes.ps1",
+      "sha256": "6a3244baa8dece4cc6a8deecc49c19152c07ffbe55733a5380eefee0920849bf"
+    }
+  ],
+  "producerManifest": {
+    "path": "CopperStart/artifacts/td64-20261018/native-qualified/disk-boot-test-manifest.json",
+    "sha256": "351addc21465c723eaa8c7c57f21e215547b85c2204c9246aeb3da546446baf4"
+  },
+  "producerSources": [
+    {
+      "path": "rom-source\\BootScriptCore.cs",
+      "sha256": "5C57287BA23139F54F14DB30CBE0A68E7DE6CED327C091C954E7F66DA1367BD0"
+    },
+    {
+      "path": "rom-source\\NativeBootConsole.cs",
+      "sha256": "67912EDDEFEAB72D754B8E055495145C2A1DF1ECD338348367449FF59C9942DB"
+    },
+    {
+      "path": "rom-source\\NativeBootMount.cs",
+      "sha256": "EF6C5D656A63BE31CB47AE8B4A37743AB544D2958308B6CF0B4A1F1EF91A7B63"
+    },
+    {
+      "path": "rom-source\\NativeBootScriptPlatform.cs",
+      "sha256": "2B70085F0AA30B01D198DC938429C6DB4D4950EBCFD27CD010030E95AC93F695"
+    },
+    {
+      "path": "rom-source\\NativeCopperHdfBoot.cs",
+      "sha256": "FFC630741CA1C2BC1CE76909F648C7CD5934993957CDA49937FB09B2721E5B41"
+    },
+    {
+      "path": "rom-source\\NativeDiskBoot.cs",
+      "sha256": "A3E8AA79D31F5D9F6E0BD1D188A1EF479C50EADF5BFA80AE9C050C3B9FA23E1A"
+    },
+    {
+      "path": "rom-source\\NativeDosBoot.cs",
+      "sha256": "D5B38851E12576EEAC0BC5E99CD43ABA162A1D63868FF563CF7F014F75FC8E0C"
+    },
+    {
+      "path": "rom-source\\NativeGraphicsBoot.cs",
+      "sha256": "C23A377927FF34D915A8C05D3E4D466FB29C59D4EB316D26C394720B6CBF7271"
+    },
+    {
+      "path": "rom-source\\ProductionCallbackExports.cs",
+      "sha256": "450C7C7395FEBB8076DCE73EBDF51E8EDBD4F6BBF89F27780791F7D92F35AAB1"
+    },
+    {
+      "path": "rom-source\\ProductionExports.cs",
+      "sha256": "C93A99066ED92C1D5313B6054ABDBD984CFD89FA394982197A0ED56242297991"
+    },
+    {
+      "path": "rom-source\\Program.cs",
+      "sha256": "C3D96C31C3F38384D25C7BD867B3A10D670CA864409F5F093259EB062F373F33"
+    }
+  ],
+  "installedPackage": "Unavailable: source app/runtime and runner builds only",
+  "releasePublished": false
+}

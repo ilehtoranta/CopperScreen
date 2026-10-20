@@ -9,8 +9,9 @@ Keep emulated hardware single-owner and release execution lightweight. A reposit
 move must not change cycle ordering, implemented hardware behavior or golden outputs.
 Current machine scope and API are in `CopperMod.Amiga.Lightweight/README.md`;
 execution contracts and unresolved edges are in `docs/engine/ARCHITECTURE.md`
-and `docs/engine/ISSUES.md`. Lightweight is the active engine; Legacy and
-CopperStart are unavailable in the standard application.
+and `docs/engine/ISSUES.md`. Lightweight is the active engine; Legacy remains
+unavailable. CopperStart uses only the qualified standalone guest ROM and bounded
+A500 configuration documented in `docs/COPPERSTART_APP.md`; do not restore host OS shims.
 
 Build the production solution with `dotnet build CopperScreen.slnx -c Release`.
 Run engine diagnostic tests separately with

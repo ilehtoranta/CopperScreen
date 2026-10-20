@@ -41,7 +41,8 @@ internal static class CopperScreenMachinePresets
         draft.CpuBackend = model == CopperScreenMachineModel.Amiga1200 ? M68kBackendKind.AccurateM68EC020 : M68kBackendKind.AccurateM68000;
         draft.RomVersion = model == CopperScreenMachineModel.Amiga1200 ? KickstartVersion.Kickstart30
             : current.RomVersion == KickstartVersion.Kickstart31 ? KickstartVersion.Kickstart31 : KickstartVersion.Kickstart13;
-        draft.KickstartSource = model == CopperScreenMachineModel.Amiga1200 ? CopperScreenKickstartSource.KickstartRom
+        draft.KickstartSource = current.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenKickstartSource.CopperStart
+            : model == CopperScreenMachineModel.Amiga1200 ? CopperScreenKickstartSource.KickstartRom
             : model == CopperScreenMachineModel.Amiga500 && current.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot && draft.HardDrives.Count == 0 && draft.HostDirectories.Count == 0
                 ? CopperScreenKickstartSource.MinimalDiskBoot
                 : draft.RomVersion == KickstartVersion.Kickstart31 ? CopperScreenKickstartSource.Kickstart31Rom : CopperScreenKickstartSource.Kickstart13Rom;
@@ -53,10 +54,11 @@ internal static class CopperScreenMachinePresets
         => draft.ChipRamKb == 512 && draft.Chipset.DmaChip is DmaChipModel.OcsAgnus or DmaChipModel.Agnus8372A;
 
     public static bool CanUseFastRam(CopperScreenSettingsDraft draft)
-        => draft.KickstartSource != CopperScreenKickstartSource.MinimalDiskBoot;
+        => draft.KickstartSource is not (CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart);
 
     public static string[] CpuChoices(CopperScreenSettingsDraft draft)
-        => Identify(draft) == CopperScreenMachineModel.Amiga1200
+        => draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? ["AccurateM68000"]
+            : Identify(draft) == CopperScreenMachineModel.Amiga1200
             ? ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"]
             : ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"];
 

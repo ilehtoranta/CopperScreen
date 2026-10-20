@@ -1,0 +1,1708 @@
+{
+  "protocol": "copperstart-ffs-overwrite-validation-v1",
+  "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+  "producer": {
+    "codeBytes": 494058,
+    "graphicsBytes": 30099,
+    "ResidentAddress": 16747008,
+    "CodeAddress": 16747812,
+    "Entries": {
+      "-1056": 16747814,
+      "-1050": 16747816,
+      "-1044": 16747818,
+      "-1038": 16747820,
+      "-1032": 16747822,
+      "-1026": 16747824,
+      "-1020": 16747826,
+      "-1008": 16747828,
+      "-1002": 16747830,
+      "-996": 16747832,
+      "-990": 16747834,
+      "-984": 16747836,
+      "-978": 16747838,
+      "-972": 16747840,
+      "-966": 16747842,
+      "-960": 16772354,
+      "-954": 16747846,
+      "-948": 16747848,
+      "-942": 16747850,
+      "-936": 16747852,
+      "-930": 16747854,
+      "-924": 16772376,
+      "-918": 16772398,
+      "-900": 16747860,
+      "-894": 16772420,
+      "-888": 16772442,
+      "-882": 16747866,
+      "-876": 16747868,
+      "-870": 16772464,
+      "-864": 16772486,
+      "-858": 16772508,
+      "-852": 16747876,
+      "-840": 16747878,
+      "-834": 16747880,
+      "-828": 16747882,
+      "-822": 16772530,
+      "-816": 16772552,
+      "-810": 16772574,
+      "-804": 16772596,
+      "-798": 16747892,
+      "-792": 16747894,
+      "-786": 16747896,
+      "-780": 16747898,
+      "-774": 16747900,
+      "-768": 16747902,
+      "-762": 16747904,
+      "-756": 16747906,
+      "-732": 16747908,
+      "-726": 16747910,
+      "-720": 16747912,
+      "-714": 16747914,
+      "-708": 16747916,
+      "-702": 16747918,
+      "-696": 16747920,
+      "-690": 16747922,
+      "-684": 16747924,
+      "-678": 16747926,
+      "-672": 16747928,
+      "-666": 16747930,
+      "-660": 16747932,
+      "-654": 16747934,
+      "-636": 16747936,
+      "-630": 16747938,
+      "-624": 16747940,
+      "-618": 16747942,
+      "-612": 16747944,
+      "-606": 16772618,
+      "-600": 16747948,
+      "-594": 16747950,
+      "-588": 16747952,
+      "-582": 16747954,
+      "-576": 16772640,
+      "-570": 16772662,
+      "-564": 16772684,
+      "-558": 16747962,
+      "-552": 16747964,
+      "-546": 16747966,
+      "-540": 16772706,
+      "-534": 16747970,
+      "-528": 16747972,
+      "-522": 16747974,
+      "-516": 16747976,
+      "-510": 16747978,
+      "-504": 16747980,
+      "-498": 16772728,
+      "-492": 16772750,
+      "-486": 16772772,
+      "-480": 16772794,
+      "-474": 16747990,
+      "-468": 16772816,
+      "-462": 16772838,
+      "-456": 16772860,
+      "-450": 16747998,
+      "-444": 16748000,
+      "-438": 16748002,
+      "-432": 16748004,
+      "-426": 16748006,
+      "-420": 16748008,
+      "-414": 16748010,
+      "-408": 16748012,
+      "-402": 16772882,
+      "-396": 16748016,
+      "-390": 16772904,
+      "-384": 16772926,
+      "-378": 16748022,
+      "-372": 16748024,
+      "-366": 16748026,
+      "-360": 16772948,
+      "-354": 16772970,
+      "-348": 16772992,
+      "-342": 16773014,
+      "-336": 16748036,
+      "-330": 16748038,
+      "-324": 16748040,
+      "-318": 16748042,
+      "-312": 16748044,
+      "-306": 16773036,
+      "-300": 16748048,
+      "-294": 16773058,
+      "-288": 16773080,
+      "-282": 16773102,
+      "-276": 16773124,
+      "-270": 16773146,
+      "-264": 16748060,
+      "-258": 16748062,
+      "-252": 16748064,
+      "-246": 16748066,
+      "-240": 16773168,
+      "-234": 16773190,
+      "-228": 16773212,
+      "-222": 16773234,
+      "-216": 16773256,
+      "-210": 16773278,
+      "-204": 16773300,
+      "-198": 16773322,
+      "-192": 16773344,
+      "-186": 16748086,
+      "-180": 16748088,
+      "-174": 16748090,
+      "-168": 16748092,
+      "-162": 16748094,
+      "-156": 16748096,
+      "-150": 16748098,
+      "-144": 16773366,
+      "-138": 16748102,
+      "-132": 16748104,
+      "-126": 16748106,
+      "-120": 16773388,
+      "-114": 16748110,
+      "-108": 16748112,
+      "-102": 16748114,
+      "-96": 16748116,
+      "-90": 16748118,
+      "-84": 16773410,
+      "-78": 16773432,
+      "-72": 16773454,
+      "-66": 16773476,
+      "-60": 16773498,
+      "-54": 16773520,
+      "-48": 16748132,
+      "-42": 16748134,
+      "-36": 16748136,
+      "-30": 16773542,
+      "-6": 16773630,
+      "-12": 16773608,
+      "-18": 16773586,
+      "-24": 16773564
+    },
+    "SupportedVectors": [
+      -960,
+      -924,
+      -918,
+      -894,
+      -888,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -810,
+      -804,
+      -606,
+      -576,
+      -570,
+      -564,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -306,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "sha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+    "compiledRomSha256": "664FB51619A02DD9F99C58736F2361701082B89915CF7A04DD6601D2C3F15FE6",
+    "inputs": [
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperDisk.dll",
+        "sha256": "E51E00AF9B7C9074E6FBCC01009103882E2CCAE2B7D351D4D1169FAB5C910606"
+      },
+      {
+        "file": "CopperFloat.dll",
+        "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254"
+      },
+      {
+        "file": "CopperOS.Shell.Dos.dll",
+        "sha256": "A8EBAC76025CC9AB4554A4580F2E31FA75DC40A3D4157646EF7DEAF8DD4C4298"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "0125DCE0C2A8D2282A3C46A6439CA7192C0C513438D8C16BA0EE117D8B35AB2E"
+      },
+      {
+        "file": "CopperSharp.Runtime.AmigaPal.dll",
+        "sha256": "F6199E62BFF6F2AA06BDCF7EBEED9167FEB0D772EC3A8187BADBA25741A12621"
+      },
+      {
+        "file": "CopperSharp.Runtime.Managed.dll",
+        "sha256": "23D66959E20BE34B0DD2F2799844A0FEB9E4F4BB8DFE8151B00D251A65C0D185"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "B724C9FE636BDEBD41EF32BE639A86A89DFFEBA9DC444FFCF212B3124A6BCA45"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "24D08169105EC623AF5C79CCA118D94885C40CDB7F36FD5CF247DB2C3943C0F9"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "226628F849B3294C6FF2FD3F27FD3410D080F20504956BFE308E1BBD1B2E925D"
+      },
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "5DAC19D570F87EA06CE8CCAF7E7D7B2083DE2FD406F7A08918B4558319997C63"
+      },
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "ADDCC2C1E240AD0F2524E2A4D0F0E61F9D073BAC5C519EEAC523EACD87E2954F"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "3A7A420CA20A035DFFDDEF5C816F6BFCB69E37F18B2139EEB6ECC51E987C3FF3"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "B5202DE131926BBBE0ADC10D14152200DCE9875EF7A453BE1EEE134B8422581F"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "1542ACBC93180540642D930D47339E7BF731151B58CD112375A08E8BA514C716"
+      },
+      {
+        "file": "CopperStart.Expansion.dll",
+        "sha256": "A8AC025A6E5C56217658BABF775775B2484D8FF76B123AC83474AD7DF3869776"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "9D159DF60C9BEC373112DCBE1536EBAD11B623FA913615863ED664D2438B088D"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "F51E6EFC8257F29C5FF65B258B20367B121C7CC63A2EE48D25CD1A70D8F909ED"
+      },
+      {
+        "file": "CopperStart.Intuition.dll",
+        "sha256": "A183D1A7E0B2C5909A78A37C956E6D06F61D9B341E361A76FE4467094DA69EE3"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "A50680FB6C39AB9EF5FA1A822F894F33A7618C4BAAF944C8ACB8877DE82FF1CB"
+      },
+      {
+        "file": "CopperStart.Runtime.dll",
+        "sha256": "9D04246222555D5D4A454DDF360358E4A0FE7563623A27A7A06E6B921D477C39"
+      },
+      {
+        "file": "CopperStart.Shell.dll",
+        "sha256": "77D9D55DC5E301C87213C0E9EA1D874EE9F2D6DCFF77DBB26DC7663EDBE1FCF7"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA10E779CEDFCE44A620994B421082EB075C70994E03638172396016FCE8290E"
+      },
+      {
+        "file": "CopperStart.Workbench.dll",
+        "sha256": "E2EEBF3D7B5FB0A616EBE116CF08EAC874A5773D93B9EF6EE8DE6D384932A838"
+      }
+    ]
+  },
+  "nativeAnalysis": {
+    "codeBytes": 494058,
+    "IsCompatible": true,
+    "managedAllocationSites": [],
+    "frameworkFeatures": [],
+    "nativeCompatibility": {
+      "ExceptionMode": 1,
+      "MemoryManagement": 0,
+      "ExceptionRegionCount": 0,
+      "FatalMachineFaultSiteCount": 11,
+      "RuntimeFeatures": [],
+      "RuntimeHelpers": [],
+      "ExternalNativeTargets": [],
+      "ReachableAssemblies": [
+        {
+          "Name": "CopperSharp.Runtime.Managed",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "ba36b29d-2172-47e9-a467-36fce7a2b534",
+          "Sha256": "23d66959e20be34b0dd2f2799844a0feb9e4f4bb8dfe8151b00d251a65c0d185"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "18f91180-66b5-40ef-ac30-6c6a1e38ec7f",
+          "Sha256": "b724c9fe636bdebd41ef32be639a86a89dffeba9dc444ffcf212b3124a6bca45"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga.Support",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "33900476-804b-4c43-b75c-19b69df38015",
+          "Sha256": "24d08169105ec623af5c79cca118d94885c40cdb7f36fd5cf247db2c3943c0f9"
+        },
+        {
+          "Name": "CopperStart-System",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "ec48ad54-b915-44a1-9e7f-51ce06bb506e",
+          "Sha256": "5dac19d570f87ea06ce8ccaf7e7d7b2083de2fd406f7a08918b4558319997c63"
+        },
+        {
+          "Name": "CopperStart.Devices",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "e6ff76e3-7936-41df-b19a-299082820554",
+          "Sha256": "3a7a420ca20a035dffddef5c816f6bfcb69e37f18b2139eeb6ecc51e987c3ff3"
+        },
+        {
+          "Name": "CopperStart.Dos",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "16667789-0fa9-4411-b3b4-7b2687be98de",
+          "Sha256": "b5202de131926bbbe0adc10d14152200dce9875ef7a453be1eee134b8422581f"
+        },
+        {
+          "Name": "CopperStart.Exec",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "2237e654-7736-46bf-b7f0-c2620c14ddc2",
+          "Sha256": "1542acbc93180540642d930d47339e7bf731151b58cd112375a08e8ba514c716"
+        }
+      ],
+      "RuntimeFeatureCount": 0,
+      "RuntimeHelperCount": 0,
+      "ExternalNativeTargetCount": 0,
+      "ReachableAssemblyCount": 7
+    }
+  },
+  "changedFrozenSourceFiles": [
+    "AmigaFfsWriteCore.cs"
+  ],
+  "expectedBaselineRegressionFailures": 3,
+  "currentProbeDifferenceFromFrozen": "using CopperSFS; added for the concurrent shared-type namespace extraction; scenario and probe bodies identical",
+  "hostCases": 62,
+  "compiledMc68000Cases": 12,
+  "compiledMc68000Scenarios": 6,
+  "fullRomCases": 41,
+  "largeFileResetBoots": 4,
+  "skips": 0,
+  "tests": [
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\host-final-results\\host.trx",
+      "sha256": "b532290373e2152f480f26043ba14a01312f29e5e572783b830ac63fcb91e7b7",
+      "passed": 52,
+      "skips": 0,
+      "tests": [
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 10000, freeStart: 4064)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DirectoryEnumerationReturnsAllEntriesAndThenNoMoreEntries(ffs: False)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OfsReadsUseTheVolumeBlockSizeAndPreserveTheVerifiedPrefix(bytes: 1024, blocks: 10000)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ShortOverwriteWorkDependsOnTheTouchedPathNotFileOrVolumeLength(bytes: 512)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ValidatingMoreDataBlocksInOneBitmapDoesNotReloadGeometryPerBlock",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.NativeFfsOverwriteTruncateAndNonemptyDirectoryRulesSurviveRemount",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.MetadataFailuresPreserveProtectionAndTransactionState",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CorruptHeaderAndInvalidPointerAreRejected(ffs: False)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 110000, freeStart: 101600)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 0)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwriteDoesNotVisitTheSuffixButGrowthAndTruncationStillValidateIt",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 8404992, freeStart: 8388608)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 3)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.NativeFfsMutationsReopenThroughIndependentReadCoreAndRecoverAllocation",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 1)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.MinimumEnvironmentDoesNotRequireOptionalFieldsAndRejectsOverflow",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 4096, sectorsPerBlock: 1, blocks: 6000, lowCylinder: 4)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CaseInsensitiveDirectoriesAndFileExtensionsReadStandardDisk(ffs: False)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.OfsDataChecksumFailureCommitsOnlyVerifiedPrefix",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.AllocationSkipsFourGiBOfOccupiedBlocksByBitmapWord",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 1024, sectorsPerBlock: 1, blocks: 9000, lowCylinder: 13)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 2)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.FailedBitmapWriteLeavesTheVolumeInvalid",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DirectoryEnumerationReturnsAllEntriesAndThenNoMoreEntries(ffs: True)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 1)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 0)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 4)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 1024, blocks: 20000, freeStart: 8160)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 3)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.MetadataUpdatesPreserveFileDataAndProduceReadableChecksummedHeaders",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.LargeVolumeCountReadsEachBitmapTableOnlyOnce",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.BitmapScanStillRejectsDamagedAllocationMetadataBeforeMutation(damage: 2)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.SequentialReadVisitsEachPointerTableOnceAndRetainsVerifiedPrefixOnBadExtension(ffs: True)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ShortOverwriteWorkDependsOnTheTouchedPathNotFileOrVolumeLength(bytes: 4096)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ReservedAreaAndOddVolumeSizeDetermineRootAndBitmapOrigin",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.ReadOnlyAndFullDiskLeaveOriginalImageUntouched",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.SequentialReadVisitsEachPointerTableOnceAndRetainsVerifiedPrefixOnBadExtension(ffs: False)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.AllocationIgnoresFreePaddingBitsInTheLastBitmapWord",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 512, sectorsPerBlock: 1, blocks: 3520, lowCylinder: 0)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.FailedOverwriteKeepsItsWrittenPrefixAndLeavesRootInvalid",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CaseInsensitiveDirectoriesAndFileExtensionsReadStandardDisk(ffs: True)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.WritesCrossBitmapAndExtensionChainsAndReleaseAllAllocatedBlocks(bytes: 512, blocks: 630000, freeStart: 617728)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.EnvironmentControlsPartitionOffsetsAndLogicalBlockSize(sectorBytes: 512, sectorsPerBlock: 2, blocks: 12000, lowCylinder: 7)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OfsReadsUseTheVolumeBlockSizeAndPreserveTheVerifiedPrefix(bytes: 512, blocks: 3520)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DeviceFailureLeavesMetadataInvalidRatherThanPublishingPartialSuccess",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 6)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.DeviceGeometryMountsAnHdVolumeAtItsActualRoot",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 7)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.DeviceTransfersSplitAtMaxTransferAndUseTd64BeyondFourGiB",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.OverwritePreflightRejectsDamageOnItsPathBeforeAnyWrite(damage: 5)",
+        "CopperStart.FileSystem.Tests.VolumeGeometryTests.ShortOverwriteWorkDependsOnTheTouchedPathNotFileOrVolumeLength(bytes: 1024)",
+        "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CorruptHeaderAndInvalidPointerAreRejected(ffs: True)"
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\instruction-final-results\\native.trx",
+      "sha256": "f7b759a8a16417a7037e1764031ea7119df5f06f5ef1ddc8f87e2ace58785e56",
+      "passed": 6,
+      "skips": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 101888, fault: 0)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 2)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 0)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 3)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 1)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 1, fault: 0)"
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\current-native-final-results\\native.trx",
+      "sha256": "6a2c387e88cd5671ac92a0505ed38c88db4850fe0987e69a01334a0f5873d356",
+      "passed": 6,
+      "skips": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 0)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 101888, fault: 0)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 1)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 2)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 1, fault: 0)",
+        "CopperStart.Floppy.Native.Tests.FfsOverwriteInstructionTests.CompiledMc68000PreflightsOnlyTheOverwritePath(position: 36863, fault: 3)"
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\large-files\\direct\\large-files.trx",
+      "sha256": "8136e4cb690781260dfeedb63df53d18d3c894472175049b48405517162546ca",
+      "passed": 1,
+      "skips": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeLargeFileBootTests.FullRomLargeFileWritesFlushAndFreshProtectedBootReads(length: 2147483712, position: 2147483632, count: 32, buffered: False)"
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\large-files\\buffered\\large-files.trx",
+      "sha256": "18d4c2761c4dd5836c7858796785820aca006191efea305f43883da96b66d18f",
+      "passed": 1,
+      "skips": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeLargeFileBootTests.FullRomLargeFileWritesFlushAndFreshProtectedBootReads(length: 4294967295, position: 4294967280, count: 15, buffered: True)"
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-results\\regression.trx",
+      "sha256": "13c935b4ea24919a3295faa2414fbd4c181d6d184baa27b4a62f6409dc66fd78",
+      "passed": 33,
+      "skips": 0,
+      "tests": [
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.LargeFfsTruncateAndDeleteReclaimDataAndExtensionBlocks(bytes: 37377, delete: False, extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.LargeFfsTruncateAndDeleteReclaimDataAndExtensionBlocks(bytes: 74241, delete: True, extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.MultipleExplicitCopperHdfUnitsMountAndSelectBootPriority",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.LargeFfsWritesCrossExtensionTablesAndSurviveFreshRomBoot(bytes: 37377, extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsWritesExportAndFreshBootReadback(extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 5, secondPriority: 0, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBothFfsPartitionsWriteFlushAndFreshBootReadback",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.LargeFfsWritesCrossExtensionTablesAndSurviveFreshRomBoot(bytes: 74241, extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.ProtectedRdbRejectsWritesToTheNonBootDataPartition",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: -128, secondPriority: -127, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.CopperHdfUnsupportedFileSystemFallsBackToEmptyFloppyDrive",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.CopperHdfFfsBootWritesFlushAndFreshBootReadback(extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.CopperHdfFfsReadsAcrossExtensionTables",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.LargeFfsTruncateAndDeleteReclaimDataAndExtensionBlocks(bytes: 37377, delete: True, extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 127, secondPriority: -10, firstFlags: 0, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.ProtectedFfsRejectsNativeMutationWithoutChangingMedia",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 5, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 5, firstFlags: 1, secondFlags: 1, rdbBlock: 7, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsWritesExportAndFreshBootReadback(extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdFfsExtensionWritesExportAndFreshBootReadback",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.NonBootableRdbDataPartitionsMountWhenDosBootsFromFloppy",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: 0, secondPriority: 127, firstFlags: 1, secondFlags: 3, rdbBlock: 0, bootIdentity: 1)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.CopperHdfFfsBootWritesFlushAndFreshBootReadback(extraCache: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.CopperHdfProtectedFfsRejectsWrites",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.DosFfsWritesSurviveMfmExportAndFreshRomBoot(extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdOfsAndFfsReadFilesAcrossExtensionTables(ffs: True)",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbFallsBackFromUnformattedHighPriorityFfsAndSkipsUnsupportedFileSystem",
+        "CopperStart.Floppy.Native.Tests.NativeRdbBootTests.RdbBootPriorityMountFlagsAndDiscoveryOrder(firstPriority: -10, secondPriority: -5, firstFlags: 1, secondFlags: 1, rdbBlock: 0, bootIdentity: 2)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdProtectedFfsRejectsFileWritesWithoutChangingMedia",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.FullRomHdOfsAndFfsReadFilesAcrossExtensionTables(ffs: False)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.LargeFfsTruncateAndDeleteReclaimDataAndExtensionBlocks(bytes: 74241, delete: False, extraCache: True)",
+        "CopperStart.Floppy.Native.Tests.NativeFfsWriteBootTests.DosFfsWritesSurviveMfmExportAndFreshRomBoot(extraCache: False)"
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\frontend-results\\frontends.trx",
+      "sha256": "5b0b3ee7775285fdda1bfd855758a987f99fff5b3ce8886dce54444710c6dbff"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\consumer-host-results\\consumer.trx",
+      "sha256": "2df0b7751d3b720b468686121f18ee4c73b5471bcd46913a4d70873845b4ce2d"
+    }
+  ],
+  "largeFiles": [
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\large-files\\native\\large-file-80000040-1acd590e04694663b3c1a37dedc2dbcc\\result.json",
+      "sha256": "f883edd4d98028fba82b539fabe2f11f1228ca929836cd504bcd767842de7091",
+      "report": {
+        "passed": true,
+        "boots": 2,
+        "length": 2147483712,
+        "position": 2147483632,
+        "count": 32,
+        "buffered": false,
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "before": "1EB6E7767E303DF7A3BDFD09F34843D82B212B9A781CADAB30CC9EF4884FD4A3",
+        "saved": "26414ED480D27C39C5501DA62E5C445D966F8651C6653387BB2C7D3CA0A03B1D",
+        "guestFlushBeforeHostDispose": true,
+        "freshProtectedBoot": true,
+        "streamBufferBytes": 0,
+        "bufferedWriteReturnedBeforeFlush": false,
+        "maxHostMinutesPerBoot": 180,
+        "maxFramesPerBoot": 2000000,
+        "blockCount": 8650752,
+        "blockBytes": 512
+      },
+      "phases": [
+        {
+          "frame": 62847,
+          "cycles": 8930826500,
+          "seconds": 469.5963097,
+          "pc": 12766398,
+          "receipt": "4C46534F00000000000000010000000E000000000000000080000040800000100084000000000200FFFFFFFF000000520000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "frame": 24363,
+          "cycles": 3462173132,
+          "seconds": 97.4439106,
+          "pc": 12766398,
+          "receipt": "4C46534F00000000000000020000000E000000000000000080000040800000100084000000000200FFFFFFFF000000500000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\large-files\\native\\large-file-FFFFFFFF-d4857debc95f4e3fa35f93a3f4aa485d\\result.json",
+      "sha256": "fb3ce4f6b0b53ae53657d9be8ef12c9a5f42a8573ee0e42ef26b8a746337b4a3",
+      "report": {
+        "passed": true,
+        "boots": 2,
+        "length": 4294967295,
+        "position": 4294967280,
+        "count": 15,
+        "buffered": true,
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "before": "86B25F47F4EC43FF425CE8D611A6A9C98DD35B2C86A65FA90D561F3A49A170B6",
+        "saved": "F12DDEBCF52DF843D68391E57D0B17F660C0B63FE92A9C3E93D3659ADA80BB7F",
+        "guestFlushBeforeHostDispose": true,
+        "freshProtectedBoot": true,
+        "streamBufferBytes": 512,
+        "bufferedWriteReturnedBeforeFlush": true,
+        "maxHostMinutesPerBoot": 180,
+        "maxFramesPerBoot": 2000000,
+        "blockCount": 8650752,
+        "blockBytes": 512
+      },
+      "phases": [
+        {
+          "frame": 123940,
+          "cycles": 17612264000,
+          "seconds": 727.4760185,
+          "pc": 12766172,
+          "receipt": "4C46534F00000000000000010000000F0000000000000000FFFFFFFFFFFFFFFF0084000000000200FFFFFFFF00000052000002000000000F0000000F0000000000000000000000000000000000000000"
+        },
+        {
+          "frame": 46979,
+          "cycles": 6675951978,
+          "seconds": 175.7264685,
+          "pc": 12766172,
+          "receipt": "4C46534F00000000000000020000000F0000000000000000FFFFFFFFFFFFFFFF0084000000000200FFFFFFFF0000005000000200000000000000000F0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ],
+  "regressionReports": [
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\copperhdf-cached.json",
+      "sha256": "55cee2499aaae47edb6b22080b025edf10586376e2cec3a8df65729dc667c8b8",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "backingSha256": "6AAA2C26E4AACBF383BC96490D764DF6118D71CC90FBD9D7646E5E6945BBB7DA",
+        "partitionStart": 131072,
+        "partitionBytes": 8388608,
+        "drive": "copperhdf.device",
+        "dosDevice": "DH0",
+        "dosType": "DOS1",
+        "flushedBeforeDispose": true,
+        "freshBootReadOnly": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\copperhdf-track.json",
+      "sha256": "6c7ecd8c2611d936aadbd5ce26c3ae9be1fe0a9af7374af9c2ac538b84a0bd81",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "backingSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "partitionStart": 131072,
+        "partitionBytes": 1802240,
+        "drive": "copperhdf.device",
+        "dosDevice": "DH0",
+        "dosType": "DOS1",
+        "flushedBeforeDispose": true,
+        "freshBootReadOnly": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-delete-37377.json",
+      "sha256": "5a6ea67d2eb153dfffc4d351a3da0e748e4b94a1d0e198def678fc967506216e",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "originalSha256": "406E203C5CF177EE9FCFC308F51F47FB0A21CA3E77D4FFC0FD721AB47EDD914E",
+        "preparedSha256": "6A74C61047499CD18AFEA7BF7DA3B56C7D231E9DEB96B370C4C72E4E4FAF3F16",
+        "persistedSha256": "4423FB95D48BB9FCFC1BAFB1DA73ECAAA5B8E093F6BEE7B2B2D973B7D74C6E2A",
+        "payloadBytes": 37377,
+        "delete": true,
+        "extraCache": false,
+        "header": 122,
+        "dataBlocks": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          196,
+          197
+        ],
+        "extensionBlocks": [
+          195
+        ],
+        "freeBeforeCreation": 1636,
+        "freeBeforeRemoval": 1560,
+        "freeAfterRemoval": 1636,
+        "freshProtectedBoot": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-delete-74241.json",
+      "sha256": "21a457ec9665c6d5ff1ac451e69103e2f7a32878678ea90dff94ad24a154db4b",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "originalSha256": "0CD6AAD000A11DDFE5510368737CF06A0F974C989714B7DBEE9358E1E3A2B784",
+        "preparedSha256": "1F96D262DDAB765FBD7FF0B8956E28040C09A1F6C6590B3CC90B66F654B1E280",
+        "persistedSha256": "5573C594BEA2AC172FCE92DA1C2909E28C6CE2BD1BE1379D2BB4D1D73D9A482C",
+        "payloadBytes": 74241,
+        "delete": true,
+        "extraCache": true,
+        "header": 122,
+        "dataBlocks": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          255,
+          256,
+          257,
+          258,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          269,
+          270
+        ],
+        "extensionBlocks": [
+          195,
+          268
+        ],
+        "freeBeforeCreation": 1636,
+        "freeBeforeRemoval": 1487,
+        "freeAfterRemoval": 1636,
+        "freshProtectedBoot": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-extension-37377.json",
+      "sha256": "a08a36fb746700bd34da7d15ff3bf0e2c9d0fe0da4dd241e085d55e34aa41984",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "originalSha256": "9C6258DC00E7E8854E02A782B1783956F7AE5CD165B52C0734087C6704461C86",
+        "persistedSha256": "A0DE545357E66B0DBA1D8DF7FA380F904E6E8D3C6C02F0577F84C39FB382ABCE",
+        "payloadBytes": 37377,
+        "dataBlocks": 74,
+        "extensionBlocks": 1,
+        "extraCache": false,
+        "overwriteOffsets": [
+          36861
+        ],
+        "overwriteBytes": 32,
+        "freshProtectedBoot": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-extension-74241.json",
+      "sha256": "f184a282d0114a3676d95a29930acdefd73f01ce141bca01d4dcd7fe8ec9850a",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "originalSha256": "A4406FA8D4838E58AEA06F0FC8C2D56FA9217A752393D61E33D9DF1AB565F952",
+        "persistedSha256": "F57869720FA04C49AEFB5FD28EF73B7105C20178A1E7B23B9FAD4ADBB9083D25",
+        "payloadBytes": 74241,
+        "dataBlocks": 146,
+        "extensionBlocks": 2,
+        "extraCache": true,
+        "overwriteOffsets": [
+          36861,
+          73725
+        ],
+        "overwriteBytes": 32,
+        "freshProtectedBoot": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-extension-read.json",
+      "sha256": "5e53e1c2c1911459102c93117ac3ac5898a8b7b56d90cf8a0e28b1a1c82a4fd9",
+      "report": {
+        "scope": "Full CopperStart ROM; PAL OCS 68000; 512 KiB Chip + 2 MiB Fast; HD DF0; native DOS/trackdisk; original synthetic media",
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "engineSha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254",
+        "originalSha256": "01677AAABD8E30A12625F540201B456AB10F662B2439FA45EFECD661B66D84CD",
+        "persistedSha256": "01677AAABD8E30A12625F540201B456AB10F662B2439FA45EFECD661B66D84CD",
+        "payloadSha256": "4CD17E6809180DF231A04DE46FA8680AACECFEF6A377EED54FE73668EB5473D3",
+        "payloadBytes": 37377,
+        "sectorCount": 3520,
+        "sectorsPerTrack": 22,
+        "rootBlock": 1760,
+        "bitmapBlock": 1761
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-extension-write.json",
+      "sha256": "7465771c2ac250342e4427553fa263c72119f610a6e91892ae82937ffa89a2d5",
+      "report": {
+        "scope": "Full CopperStart ROM; PAL OCS 68000; 512 KiB Chip + 2 MiB Fast; HD DF0; native DOS/trackdisk; original synthetic media",
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "engineSha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254",
+        "originalSha256": "6B8D1A527DE55EF13579AABAF766FB2C32CF6BA1F77C6D8CF381244B06853B83",
+        "persistedSha256": "67C8E1406B2A22395C707204C6437404F72FC5E0E983611852822096CA17A25F",
+        "payloadSha256": "4CD17E6809180DF231A04DE46FA8680AACECFEF6A377EED54FE73668EB5473D3",
+        "payloadBytes": 37377,
+        "sectorCount": 3520,
+        "sectorsPerTrack": 22,
+        "rootBlock": 1760,
+        "bitmapBlock": 1761
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-truncate-37377.json",
+      "sha256": "649bfddb6e5d583d1067992a111346140ffeef50e73b5f6bddfa3155b28ec6ff",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "originalSha256": "3BCD098AA93F492A16840646853E26F9D79BFCEDABF8B205D5F24BC70E71F86A",
+        "preparedSha256": "49DFA11C0E2155EB9547492E43ADCDA7C6DE29F1CA4E61F0730C1E50DA15EF62",
+        "persistedSha256": "DAA808CF49D9D6B5BDD9D85C3111AD845EE99ACE583762AFEE882616C9805C89",
+        "payloadBytes": 37377,
+        "delete": false,
+        "extraCache": false,
+        "header": 122,
+        "dataBlocks": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          196,
+          197
+        ],
+        "extensionBlocks": [
+          195
+        ],
+        "freeBeforeCreation": 1636,
+        "freeBeforeRemoval": 1560,
+        "freeAfterRemoval": 1635,
+        "freshProtectedBoot": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-truncate-74241.json",
+      "sha256": "8b63b09276a7543a4af2e7a582e7cbf145846436b16ca512b2e0e7d0555f926e",
+      "report": {
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "originalSha256": "58498D63FE6692F1FF05E8CC8A4108627F2CFA5DB37A6F457AAB3867D9E13268",
+        "preparedSha256": "EC42806EBCED732B74C39CD6F51E7EC786E2729D197B54BC63AE24040FFBB964",
+        "persistedSha256": "65C752C21A969331284F37694764024A5F36E7BB5BFDE2FE189D0A2CC5AD546F",
+        "payloadBytes": 74241,
+        "delete": false,
+        "extraCache": true,
+        "header": 122,
+        "dataBlocks": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          255,
+          256,
+          257,
+          258,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          269,
+          270
+        ],
+        "extensionBlocks": [
+          195,
+          268
+        ],
+        "freeBeforeCreation": 1636,
+        "freeBeforeRemoval": 1487,
+        "freeAfterRemoval": 1635,
+        "freshProtectedBoot": true
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-write-cached.json",
+      "sha256": "66f3afafde58eebfd3a1ccb8327a84eab61ccd3fe90584944d8c8b5705418322",
+      "report": {
+        "scope": "Full CopperStart ROM; PAL OCS 68000; 512 KiB Chip + 2 MiB Fast; HD DF0; native DOS/trackdisk; original synthetic media",
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "engineSha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254",
+        "originalSha256": "995F2DE3234962BF38587E11AD2A4F68C8751466DD1C6A29D7A36F5429FF5368",
+        "persistedSha256": "9ABA9D67F7016AC70AD785E2B0D704A14FE147584411DC36382F499110E8916F",
+        "payloadSha256": "F2F6F5D48BB7DDD21AE7269B626B43F869BB84D969313D6A8516B2EA2610C09E",
+        "payloadBytes": 2049,
+        "sectorCount": 3520,
+        "sectorsPerTrack": 22,
+        "rootBlock": 1760,
+        "bitmapBlock": 1761
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ffs-write-track.json",
+      "sha256": "0b00b9a7ea83de55bedafa9865a5dce6923a114f6d6bfe7e92b18ca2eac4df0c",
+      "report": {
+        "scope": "Full CopperStart ROM; PAL OCS 68000; 512 KiB Chip + 2 MiB Fast; HD DF0; native DOS/trackdisk; original synthetic media",
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "engineSha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254",
+        "originalSha256": "D5C3B949F181DC7F6EE64E07889839267A3E4E8872F44ADC949317298B2B0CD5",
+        "persistedSha256": "0BB72CE734B750A7B5F3C40AA92C351242999D6854CB3E71B6EC7E59EE2E6F5D",
+        "payloadSha256": "F2F6F5D48BB7DDD21AE7269B626B43F869BB84D969313D6A8516B2EA2610C09E",
+        "payloadBytes": 2049,
+        "sectorCount": 3520,
+        "sectorsPerTrack": 22,
+        "rootBlock": 1760,
+        "bitmapBlock": 1761
+      }
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-v2-native\\ofs-extension-read.json",
+      "sha256": "89488f03d5e9decc32cc6895b1fb4a2feed0b53191b2c15cd48a0731f03ba70e",
+      "report": {
+        "scope": "Full CopperStart ROM; PAL OCS 68000; 512 KiB Chip + 2 MiB Fast; HD DF0; native DOS/trackdisk; original synthetic media",
+        "romSha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+        "engineSha256": "71D239EF114157FBFC48CDD1CD04735F9FBCB75C62B3D4088931A34FC9E94254",
+        "originalSha256": "A750021BD6613CBEBC762595982E3CD3BA56DB19E83007FDB51077A78FF92577",
+        "persistedSha256": "A750021BD6613CBEBC762595982E3CD3BA56DB19E83007FDB51077A78FF92577",
+        "payloadSha256": "4CD17E6809180DF231A04DE46FA8680AACECFEF6A377EED54FE73668EB5473D3",
+        "payloadBytes": 37377,
+        "sectorCount": 3520,
+        "sectorsPerTrack": 22,
+        "rootBlock": 1760,
+        "bitmapBlock": 1761
+      }
+    }
+  ],
+  "sourceAndAssemblyHashes": [
+    {
+      "path": "src\\CopperStart.Dos\\AmigaFfsWriteCore.cs",
+      "sha256": "b67374bac6b5df5a8954e7a319ece4f4e32ae1d42ff8815a071a02726dfd9750"
+    },
+    {
+      "path": "tests\\CopperStart.FileSystem.Tests\\FfsOverwriteValidationTests.cs",
+      "sha256": "f7640681f76d67f4c2453cd49a7b944bd8cf2119e391ff838966f6e62e956934"
+    },
+    {
+      "path": "tests\\CopperStart.FileSystem.Tests\\VolumeGeometryTests.cs",
+      "sha256": "7a35fbff43770862fc1eb5335a13a944291644f3269a555709056d614dc99f75"
+    },
+    {
+      "path": "tests\\CopperStart.Floppy.Native.Tests\\FfsOverwriteInstructionTests.cs",
+      "sha256": "bd776865bdb03e7ffd53d9e42c88b955cc9da5dcd429d42d217b4ce32020a30f"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\dos-source\\AmigaFfsWriteCore.cs",
+      "sha256": "ad2cae9e128620fd05569cb360e0e7ba53d5f5bb436acf7751fb087cbeb2c3bd"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\instruction-project\\FfsOverwriteInstructionTests.cs",
+      "sha256": "b04404ca74f57e9e0c1ef885f503ff213e8efbc7915a82f4478740c296232f21"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\instruction-build\\bin\\FfsOverwriteReplay\\release\\FfsOverwriteReplay.dll",
+      "sha256": "d0c4533d48448588901f31ed44aff4763c546117ebe4d21303410eb2c4597d02"
+    },
+    {
+      "path": "artifacts\\dos-large-rom-20261019\\buffered-replay-runner\\LargeFileReplay.dll",
+      "sha256": "5829b676d71690847af6cc7d73fc22ec47f0b0c2431d445f9b7f2da51f7811a6"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-runner\\CopperStart.Floppy.Native.Tests.dll",
+      "sha256": "9a8d015438249c1b6ae1d16a89fc49a739dfc5140b19bc16ba9371b9e3578f2e"
+    },
+    {
+      "path": "artifacts\\dos-large-rom-20261019\\buffered-replay-runner\\CopperMod.Amiga.Lightweight.dll",
+      "sha256": "d53ec0612b21fec4c42fbd1244399746f4a3682b3cb265893d5350d036e7e905"
+    },
+    {
+      "path": "artifacts\\dos-large-rom-20261019\\buffered-replay-runner\\CopperDisk.dll",
+      "sha256": "66ad388335d0f920d912538f86fb363fa68a43c78b1118e5be063819c5cc2441"
+    },
+    {
+      "path": "artifacts\\dos-large-rom-20261019\\buffered-replay-runner\\Copper68k.dll",
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "artifacts\\dos-large-rom-20261019\\buffered-replay-runner\\CopperFloat.dll",
+      "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-runner\\CopperMod.Amiga.Lightweight.dll",
+      "sha256": "71d239ef114157fbfc48cdd1cd04735f9fbcb75c62b3d4088931a34fc9e94254"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-runner\\CopperDisk.dll",
+      "sha256": "e51e00af9b7c9074e6fbcc01009103882e2ccae2b7d351d4d1169fab5c910606"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-runner\\Copper68k.dll",
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\regression-runner\\CopperFloat.dll",
+      "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\solution-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Floppy.Native.Tests.dll",
+      "sha256": "1fc1494e4c9579f91ce58734486e58575a7aca71a3cabcef0d520724f49db064"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\solution-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Dos.dll",
+      "sha256": "698751d68ad540b4399752388d05075a2d89bb93f7963217482d3b86e2ef105e"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\solution-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSFS.Core.dll",
+      "sha256": "f0b09a111206fd87252f08ac0a8da002e7613164af6fac8c3d219e55e729f195"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\solution-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Compiler.dll",
+      "sha256": "6ef8662ce20a2022aa424f7c1747a4b4789d9b368e9e96b9d7ff5f3965d4c9a2"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\solution-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\Copper68k.dll",
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\host-build\\bin\\CopperStart.FileSystem.Tests\\release\\CopperStart.FileSystem.Tests.dll",
+      "sha256": "fdea3e4ba9f8f4c3bf80fb0027c9765549784f3fd6234a7b852921d9613e4509"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\host-build\\bin\\CopperStart.FileSystem.Tests\\release\\CopperStart.Dos.dll",
+      "sha256": "c1fafde15845c1a7fe267fb21f1910baa5efc688ab2e7570c7030f13cbd3b801"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\host-build\\bin\\CopperStart.FileSystem.Tests\\release\\CopperSFS.Core.dll",
+      "sha256": "fc3a811b909eb8216f0d7e29d6814a303e7dc774210de39c9c440599951d030b"
+    }
+  ],
+  "scope": "Classic frozen 4054184e snapshot plus FFS overwrite optimization. Shared workspace SFS/Exec changes excluded. Full-ROM replays use the previously frozen runtime and fixtures; guest executes candidate ROM. No NSD changes.",
+  "frontends": [
+    {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-19-ffs-overwrites.1",
+      "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+      "result": {
+        "passed": true,
+        "frontend": "app-runtime",
+        "boots": 4,
+        "payloadBytes": 2049,
+        "guestCmdUpdateBeforeHostSave": true,
+        "hostSaveSucceeded": true,
+        "hostSaveAdvancedCycles": false,
+        "reset": true,
+        "sessionReplacement": true,
+        "freshProtectedBoot": true,
+        "profileAndLastMachineRestored": true,
+        "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "F59CD40D3EB587719B4629B3D2C833296333D5C8A67C0A004B87AEA832BEDB03"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0C54F93C655D53BC1A1489EA3C550B6F19ABFDCDECBF3B956D08E6EC16EF8D88"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "9E1324FDC4220BA24C16CDC4F39D85D36952A1B062E07C4E2DD1876F62BB5A01"
+        }
+      ]
+    },
+    {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-19-ffs-overwrites.1",
+      "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+      "result": {
+        "passed": true,
+        "frontend": "command-line-process",
+        "boots": 3,
+        "payloadBytes": 2049,
+        "guestCmdUpdateBeforeExit": true,
+        "liveBackingSnapshotWithoutHostFlush": true,
+        "writableProcessRestart": true,
+        "freshProtectedBoot": true,
+        "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "runnerSha256": "0669A290824826A2E2ABDB63853B3672E949F48CE55BBE2668E3C80BEE697801"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "F59CD40D3EB587719B4629B3D2C833296333D5C8A67C0A004B87AEA832BEDB03"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0C54F93C655D53BC1A1489EA3C550B6F19ABFDCDECBF3B956D08E6EC16EF8D88"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "9E1324FDC4220BA24C16CDC4F39D85D36952A1B062E07C4E2DD1876F62BB5A01"
+        }
+      ]
+    },
+    {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-19-ffs-overwrites.1",
+      "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4294836224,
+        "Geometry": "DH0:2:32:131068:131122",
+        "guestFlushBeforeHostSave": true,
+        "lowAliasGuardUnchanged": true,
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "F59CD40D3EB587719B4629B3D2C833296333D5C8A67C0A004B87AEA832BEDB03"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0C54F93C655D53BC1A1489EA3C550B6F19ABFDCDECBF3B956D08E6EC16EF8D88"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "9E1324FDC4220BA24C16CDC4F39D85D36952A1B062E07C4E2DD1876F62BB5A01"
+        }
+      ]
+    },
+    {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-19-ffs-overwrites.1",
+      "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4295098368,
+        "Geometry": "DH0:2:32:131076:131130",
+        "guestFlushBeforeHostSave": true,
+        "lowAliasGuardUnchanged": true,
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "F59CD40D3EB587719B4629B3D2C833296333D5C8A67C0A004B87AEA832BEDB03"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0C54F93C655D53BC1A1489EA3C550B6F19ABFDCDECBF3B956D08E6EC16EF8D88"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "9E1324FDC4220BA24C16CDC4F39D85D36952A1B062E07C4E2DD1876F62BB5A01"
+        }
+      ]
+    },
+    {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-19-ffs-overwrites.1",
+      "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4294836224,
+        "Geometry": "DH0:2:32:131068:131122",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "lowAliasGuardUnchanged": true
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "F59CD40D3EB587719B4629B3D2C833296333D5C8A67C0A004B87AEA832BEDB03"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0C54F93C655D53BC1A1489EA3C550B6F19ABFDCDECBF3B956D08E6EC16EF8D88"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "9E1324FDC4220BA24C16CDC4F39D85D36952A1B062E07C4E2DD1876F62BB5A01"
+        }
+      ]
+    },
+    {
+      "protocol": "copperstart-frontend-hdf-writes-v1",
+      "firmware": "diskboot-2026-10-19-ffs-overwrites.1",
+      "romSha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+      "result": {
+        "passed": true,
+        "boots": 3,
+        "Start": 4295098368,
+        "Geometry": "DH0:2:32:131076:131130",
+        "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+        "lowAliasGuardUnchanged": true
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "F59CD40D3EB587719B4629B3D2C833296333D5C8A67C0A004B87AEA832BEDB03"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0C54F93C655D53BC1A1489EA3C550B6F19ABFDCDECBF3B956D08E6EC16EF8D88"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "9E1324FDC4220BA24C16CDC4F39D85D36952A1B062E07C4E2DD1876F62BB5A01"
+        }
+      ]
+    }
+  ],
+  "firmware": {
+    "qualificationId": "diskboot-2026-10-19-ffs-overwrites.1",
+    "producerCommit": "b45c2e4e50860f87e81e21d2a6e5c2a08e2631ad",
+    "bytes": 524288,
+    "sha256": "4d59a7aeb53c87709c137500bee50fc5e10dd96e833b779abd1c3d4a86c6e46d",
+    "requirements": "PAL A500, 68000, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM, one DD/HD drive; read-only DF0 floppy boot or an owned writable CopperOS DOS1 workspace. Optional existing hard disk image on unit 0: RDB-discovered FFS/DOS1 partitions or one explicit 512-byte FFS partition, including TD64 offsets above 4 GiB. RDB boot priorities select SYS:. No RTC, Fast RAM or shared folders.",
+    "evidence": "docs/COPPERSTART_FFS_OVERWRITES_2026-10-19.md",
+    "producerSourceSnapshot": "Recorded ffs-range-validation-20261019 Classic producer snapshot: validated DOS large-file snapshot plus range-limited FFS overwrite preflight, on-demand bitmap checks, shared root validity writes and hoisted table-index division. Growth and release retain whole-chain/allocation validation. Core 494058 bytes; graphics 30099 bytes at $FF8A00. TD64 retained; no NSD changes. Concurrent SFS extraction excluded."
+  },
+  "replayScheduling": [
+    {
+      "processId": 53312,
+      "before": "Normal",
+      "after": "AboveNormal",
+      "startTime": "2026-10-19T13:23:27.3612393+03:00",
+      "changedAt": "2026-10-19T13:26:04.3115673+03:00",
+      "purpose": "full-ROM correctness replay; guest cycles, not host throughput, compared"
+    },
+    {
+      "processId": 103488,
+      "before": "Normal",
+      "after": "AboveNormal",
+      "startTime": "2026-10-19T13:23:26.4861117+03:00",
+      "changedAt": "2026-10-19T13:26:04.3214289+03:00",
+      "purpose": "full-ROM correctness replay; guest cycles, not host throughput, compared"
+    },
+    {
+      "processId": 4520,
+      "before": "Normal",
+      "after": "AboveNormal",
+      "startTime": "2026-10-19T13:25:12.4753712+03:00",
+      "changedAt": "2026-10-19T13:26:04.3318526+03:00",
+      "purpose": "full-ROM correctness replay; guest cycles, not host throughput, compared"
+    }
+  ],
+  "consumerBinaries": [
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen\\release\\CopperScreen.dll",
+      "sha256": "f59cd40d3eb587719b4629b3d2c833296333d5c8a67c0a004b87aea832bedb03"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperMod.Amiga.Lightweight.Runner\\release\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "0669a290824826a2e2abdb63853b3672e949f48ce55bbe2668e3c80bee697801"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen.Lightweight.Tests\\release\\CopperScreen.Lightweight.Tests.dll",
+      "sha256": "f8e53ae62bdfa1478118fe61558cbb8b9af775cc4ad8f70c6b5b8dcbfea0789b"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen\\release\\CopperMod.Amiga.Lightweight.dll",
+      "sha256": "0c54f93c655d53bc1a1489ea3c550b6f19abfdcdecbf3b956d08e6ec16ef8d88"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen\\release\\CopperDisk.dll",
+      "sha256": "9e1324fdc4220ba24c16cdc4f39d85d36952a1b062e07c4e2dd1876f62bb5a01"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen\\release\\Copper68k.dll",
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen\\release\\CopperFloat.dll",
+      "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+    }
+  ],
+  "consumerTestSource": {
+    "path": "CopperScreen.Lightweight.Tests\\CopperStartHardDiskWriteTests.cs",
+    "sha256": "47a83a1d4eb5f11f63e9715cd17a64e2854c00175c436737a461da747de99912"
+  },
+  "buildLogs": {
+    "solution-final-audit.log": "c\\debug\\CopperStart.Layers.NativeRealDispatcherDiagnostic.dll\n  CopperSharp.Runtime.Managed -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ffs-range-validation-20261019\\solution-audit-build\\bin\\CopperSharp.Runtime.Managed\\debug\\CopperSharp.Runtime.Managed.dll\n  CopperSharp.Runtime.AmigaPal -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ffs-range-validation-20261019\\solution-audit-build\\bin\\CopperSharp.Runtime.AmigaPal\\debug\\CopperSharp.Runtime.AmigaPal.dll\n  CopperSharp.Targets.Amiga -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ffs-range-validation-20261019\\solution-audit-build\\bin\\CopperSharp.Targets.Amiga\\debug\\CopperSharp.Targets.Amiga.dll\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(13,35): error CS0246: The type or namespace name 'MorphOSResident' could not be found (are you missing a using directive or an assembly reference?) [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(14,37): error CS0246: The type or namespace name 'MorphOSResident' could not be found (are you missing a using directive or an assembly reference?) [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(14,61): error CS0103: The name 'MorphOSResident' does not exist in the current context [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(15,37): error CS0246: The type or namespace name 'MorphOSResident' could not be found (are you missing a using directive or an assembly reference?) [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(15,61): error CS0103: The name 'MorphOSResident' does not exist in the current context [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(16,42): error CS0117: 'ResidentFlags' does not contain a definition for 'Extended' [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(32,17): error CS0103: The name 'ExecMorphOSResidentCodec' does not exist in the current context [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\n  CopperOS.MuiMaster -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ffs-range-validation-20261019\\solution-audit-build\\bin\\CopperOS.MuiMaster\\debug\\CopperOS.MuiMaster.dll\n  CopperStart.Intuition.Tests -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ffs-range-validation-20261019\\solution-audit-build\\bin\\CopperStart.Intuition.Tests\\release\\CopperStart.Intuition.Tests.dll\n\nBuild FAILED.\n\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperSharp68k\\Compiler\\Backend\\M68kSpillAndCopy.cs(74,5): warning CS8602: Dereference of a possibly null reference. [C:\\Users\\ilkle\\Koodit\\GIT\\CopperSharp68k\\Compiler\\CopperSharp.Compiler.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperSharp68k\\Compiler\\Backend\\M68kSpillAndCopy.cs(74,5): warning CS8602: Dereference of a possibly null reference. [C:\\Users\\ilkle\\Koodit\\GIT\\CopperSharp68k\\Compiler\\CopperSharp.Compiler.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(13,35): error CS0246: The type or namespace name 'MorphOSResident' could not be found (are you missing a using directive or an assembly reference?) [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(14,37): error CS0246: The type or namespace name 'MorphOSResident' could not be found (are you missing a using directive or an assembly reference?) [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(14,61): error CS0103: The name 'MorphOSResident' does not exist in the current context [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(15,37): error CS0246: The type or namespace name 'MorphOSResident' could not be found (are you missing a using directive or an assembly reference?) [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(15,61): error CS0103: The name 'MorphOSResident' does not exist in the current context [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(16,42): error CS0117: 'ResidentFlags' does not contain a definition for 'Extended' [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\nC:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\MorphOsCompatibilityResidentTests.cs(32,17): error CS0103: The name 'ExecMorphOSResidentCodec' does not exist in the current context [C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\tests\\CopperStart.Exec.Tests\\CopperStart.Exec.Tests.csproj]\n    2 Warning(s)\n    7 Error(s)\n\nTime Elapsed 00:00:43.25\n",
+    "consumer-build.log": "  Determining projects to restore...\n  All projects are up-to-date for restore.\n  CopperDisk -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperDisk\\release\\CopperDisk.dll\n  CopperDisk.Tests -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperDisk.Tests\\release\\CopperDisk.Tests.dll\n  CopperMod.Amiga.Lightweight -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperMod.Amiga.Lightweight\\release\\CopperMod.Amiga.Lightweight.dll\n  CopperMod.Amiga.Lightweight.Runner -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperMod.Amiga.Lightweight.Runner\\release\\CopperMod.Amiga.Lightweight.Runner.dll\n  CopperScreen -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen\\release\\CopperScreen.dll\n  CopperScreen.Desktop.Tests -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen.Desktop.Tests\\release\\CopperScreen.Desktop.Tests.dll\n  CopperScreen.Storage.Probe -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen.Storage.Probe\\release\\CopperScreen.Storage.Probe.dll\n  CopperScreen.Lightweight.Tests -> C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\ffs-range-validation-20261019\\build\\bin\\CopperScreen.Lightweight.Tests\\release\\CopperScreen.Lightweight.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:04.83\n"
+  },
+  "buildStatus": {
+    "consumer": "passed",
+    "producerSolution": "failed-unrelated-morphos-tests"
+  }
+}

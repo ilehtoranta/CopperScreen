@@ -17,6 +17,7 @@ using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using CopperPad;
+using CopperMod.Amiga.Lightweight;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -53,6 +54,7 @@ internal sealed partial class MainWindow : Window
 
 	private long _presentedFrames;
 	private CopperScreenRuntime? _runtime;
+    private readonly CopperScreenFrameNotification _frameNotification;
 	private readonly CopperBenchViewModel _bench;
 	private readonly CopperControllerHost _gamepadHost;
 	private readonly FramebufferPresenter _presenter;
@@ -137,6 +139,7 @@ internal sealed partial class MainWindow : Window
 	private TextBox _rtgVramBox = null!;
 	private CheckBox _rtcEnabledBox = null!;
 	private ComboBox _floppyDriveCountBox = null!;
+    private readonly ComboBox[] _floppyDriveTypeBoxes = new ComboBox[4];
 	private readonly TextBox[] _drivePathBoxes = new TextBox[4];
 	private readonly Button[] _driveBrowseButtons = new Button[4];
 	private readonly CheckBox[] _driveWriteProtectBoxes = new CheckBox[4];
@@ -182,7 +185,9 @@ internal sealed partial class MainWindow : Window
 
 	public MainWindow(string[] args, CopperScreenRecentSession? recentSession = null)
 	{
+        _frameNotification = new(PostFramePresentation);
 		_recentSession = recentSession ?? new(CopperScreenRecentSession.DefaultDirectory);
+        StartupHardDiskBackupCleanup = CopperScreenHardDiskBackupCleanup.Cleanup(_recentSession.DataDirectory);
 		Title = "CopperScreen";
 		FontSize = 14;
 		MinWidth = 712;
@@ -194,13 +199,14 @@ internal sealed partial class MainWindow : Window
 		Height = Math.Min(760, startupScreen == null ? 760 : startupScreen.WorkingArea.Height / startupScreen.Scaling - 64);
 		SizeToContent = SizeToContent.Manual;
 		Focusable = true;
-		_initialStartupOptions = CopperScreenStartupOptions.Parse(args, AppContext.BaseDirectory);
+		var migrationError = CopperScreenProfileStore.MigrateLegacyProfiles(AppContext.BaseDirectory, _recentSession.DataDirectory);
+		_initialStartupOptions = CopperScreenStartupOptions.Parse(args, AppContext.BaseDirectory, userDataDirectory: _recentSession.DataDirectory);
 		_settingsDraft = CopperScreenSettingsDraft.FromStartupOptions(_initialStartupOptions);
 		if (args.Length == 0 && _recentSession.LoadMachine(AppContext.BaseDirectory) is { } lastMachine)
 			_settingsDraft = lastMachine;
 		_outputVolume = _recentSession.Volume;
 		_outputMuted = _recentSession.Muted;
-		_settingsStartupError = _initialStartupOptions.Error;
+		_settingsStartupError = _initialStartupOptions.Error ?? migrationError ?? _recentSession.LastError;
 		_committedSettings = _settingsDraft.Clone();
 		_presentationOptions = _settingsDraft.PresentationOptions;
 		_settingsPageIndex = 1;
@@ -212,7 +218,7 @@ internal sealed partial class MainWindow : Window
 				_runtime = CopperScreenRuntime.Create(_initialStartupOptions);
 				_latestState = _runtime.CurrentState;
 			}
-			catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or UnauthorizedAccessException)
+			catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or InvalidDataException or UnauthorizedAccessException)
 			{
 				_settingsStartupError = ex.Message;
 				_latestState = CreateIdleState(_settingsDraft);
@@ -370,6 +376,8 @@ internal sealed partial class MainWindow : Window
 		};
 		KeyDown += OnKeyDown;
 		KeyUp += OnKeyUp;
+		_presenter.LostFocus += (_, _) => ReleaseInteractiveInput();
+		_presenter.PointerCaptureLost += (_, _) => ReleaseInteractiveInput();
 		PropertyChanged += (_, args) =>
 		{
 			if (args.Property == WindowStateProperty)
@@ -380,6 +388,7 @@ internal sealed partial class MainWindow : Window
 		Deactivated += (_, _) => ReleaseInteractiveInput();
 		Closing += async (_, args) =>
 		{
+			if (_applyingSettings) { args.Cancel = true; return; }
 			if (!_allowDiscardOnClose && _runtime != null)
 			{
 				args.Cancel = true;
@@ -387,8 +396,24 @@ internal sealed partial class MainWindow : Window
 				_checkingDiskChanges = true;
 				try
 				{
-					var wasPaused = _runtime.CurrentState.IsPaused;
-					var state = wasPaused ? _runtime.CurrentState : (await _runtime.TogglePausedAsync()).State;
+                    var wasPaused = _runtime.CurrentState.IsPaused;
+                    if (!wasPaused) await _runtime.TogglePausedAsync();
+                    var persisted = await _runtime.SavePersistentStorageAsync();
+                    if (!persisted.Success)
+                    {
+                        SetSettingsError(persisted.Message); ShowDiskFeedback(persisted.Message, false);
+                        var workspace = CopperOsWorkspace.IsWorkspace(_committedSettings.DriveDiskPaths[0]);
+                        var recovery = workspace ? " Keep this session open and use Export workspace to save elsewhere. Discard keeps the last complete checkpoint."
+                            : " Direct hard-disk and shared-folder writes already made cannot be undone. Keep open and restore storage access, or close despite the error; unflushed changes may be lost.";
+                        if (!await ConfirmDiscardOnCloseAsync(persisted.Message + recovery, directStorage: !workspace))
+                        {
+                            if (!wasPaused) await _runtime.TogglePausedAsync();
+                            return;
+                        }
+                        await _runtime.DiscardPersistentStorageAsync();
+                        _allowDiscardOnClose = true; Close(); return;
+                    }
+					var state = _runtime.CurrentState;
 					if (state.Drives.Any(d => d.HasUnsavedChanges) && !await ConfirmDiscardOnCloseAsync())
 					{
 						if (!wasPaused) await _runtime.TogglePausedAsync();
@@ -408,12 +433,15 @@ internal sealed partial class MainWindow : Window
 		Closed += (_, _) =>
 		{
 			_isClosed = true;
+            _frameNotification.Dispose();
 			if (_runtime != null)
 			{
 				_runtime.FramePublished -= QueueFramePresentation;
 				_runtime.HostClipboardTextChanged -= PublishGuestClipboardText;
 				_runtime.HostClipboardImageChanged -= PublishGuestClipboardImage;
-				_runtime.Dispose();
+				try { _runtime.Dispose(); }
+				catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or AggregateException)
+				{ CopperScreenCrashLog.WriteException("Storage shutdown after explicit close", ex, ex); }
 			}
 
 			_gamepadHost.ControllersChanged -= OnGamepadControllersChanged;
@@ -499,7 +527,7 @@ internal sealed partial class MainWindow : Window
 			_gamepadHost.Start();
 			SyncGamepadControllers();
 		}
-		catch (Exception ex) when (ex is IOException or InvalidOperationException or TimeoutException or UnauthorizedAccessException or NotSupportedException)
+		catch (Exception ex) when (ex is IOException or InvalidDataException or InvalidOperationException or TimeoutException or UnauthorizedAccessException or NotSupportedException)
 		{
 			SetSettingsError("Gamepad scan failed: " + ex.Message);
 		}
@@ -876,7 +904,14 @@ internal sealed partial class MainWindow : Window
 			return;
 		}
 
-		Dispatcher.UIThread.Post(PresentQueuedFrame, FramePresentationPriority);
+        _frameNotification.Signal();
+	}
+
+    private void PostFramePresentation()
+    {
+        if (_isClosed) return;
+        try { Dispatcher.UIThread.Post(PresentQueuedFrame, FramePresentationPriority); }
+        catch { Interlocked.Exchange(ref _presentationQueued, 0); throw; }
 	}
 
 	private void PresentQueuedFrame()
@@ -1265,7 +1300,7 @@ internal sealed partial class MainWindow : Window
 
 		if (_mouseGrabActive && (args.Key == Key.F10 || args.PhysicalKey == PhysicalKey.F10))
 		{
-			ReleaseMouseGrab();
+			ReleaseInteractiveInput();
 			args.Handled = true;
 			return;
 		}
@@ -1298,7 +1333,7 @@ internal sealed partial class MainWindow : Window
 			return;
 		}
 
-		if (_runtime == null) return;
+		if (_runtime == null || !_presenter.IsKeyboardFocusWithin) return;
 
 		if (args.Key == Key.F12 || args.PhysicalKey == PhysicalKey.F12)
 		{
@@ -1501,36 +1536,13 @@ internal sealed partial class MainWindow : Window
 	}
 
 	private void ReleaseInteractiveInput()
-	{
-		if (_runtime == null)
-		{
-			_pressedAmigaKeys.Clear();
-			Array.Clear(_pressedJoystickActionsByPort);
-			ReleaseMouseGrab();
-			return;
-		}
-
-		foreach (var rawKey in _pressedAmigaKeys)
-		{
-			_runtime.KeyUp(rawKey);
-		}
-
-		_pressedAmigaKeys.Clear();
-		Array.Clear(_pressedJoystickActionsByPort);
-		ReleaseMouseGrab();
-		_runtime.SetMouseButtons(primaryFirePressed: false, secondFirePressed: false);
-		for (var portIndex = 0; portIndex < _pressedJoystickActionsByPort.Length; portIndex++)
-		{
-			_runtime.SetJoystickPort(
-				portIndex,
-				up: false,
-				down: false,
-				left: false,
-				right: false,
-				primaryFirePressed: false,
-				secondFirePressed: false);
-		}
-	}
+    {
+        var keys = _pressedAmigaKeys.ToArray();
+        _pressedAmigaKeys.Clear();
+        Array.Clear(_pressedJoystickActionsByPort);
+        _runtime?.ReleaseInteractiveInput(keys);
+        ReleaseMouseGrab();
+    }
 
 	private Border CreateToolbar()
 	{
@@ -1903,6 +1915,19 @@ internal sealed partial class MainWindow : Window
 		var driveOptions = CreateSettingsGroupForm();
 		_floppyDriveCountBox = AddComboSetting(driveOptions, "Connected", ["1", "2", "3", "4"], markRestart: false);
 		_floppyDriveCountBox.SelectionChanged += (_, _) => ApplyFloppyDriveCountSetting();
+        for (var driveIndex = 0; driveIndex < _floppyDriveTypeBoxes.Length; driveIndex++)
+        {
+            var index = driveIndex;
+            var typeBox = AddComboSetting(driveOptions, $"DF{driveIndex} drive", ["DD (880 KiB)", "HD (DD + 1760 KiB)"], markRestart: false);
+            AutomationProperties.SetName(typeBox, $"DF{driveIndex} drive type");
+            typeBox.SelectionChanged += (_, _) => {
+                if (_updatingSettingsUi) return;
+                _settingsDraft.FloppyDriveTypes[index] = typeBox.SelectedIndex == 1
+                    ? LightweightFloppyDriveType.HighDensity : LightweightFloppyDriveType.DoubleDensity;
+                MarkSettingsRestartRequired();
+            };
+            _floppyDriveTypeBoxes[driveIndex] = typeBox;
+        }
 		layout.Children.Add(CreateSettingsGroup("Drive Configuration", driveOptions));
 
 		var driveMedia = CreateSettingsGroupForm();
@@ -1974,7 +1999,7 @@ internal sealed partial class MainWindow : Window
 			driveMedia.Children.Add(CreateSettingsRow("", actions));
 		}
 
-        layout.Children.Add(SettingsNote("DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. ADF writes stay in memory: use Save ADF before replacing a disk or closing the app. Changing the connected drive count requires a restart."));
+        layout.Children.Add(SettingsNote("DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. ADF writes stay in memory: use Save ADF before replacing a disk or closing the app. HD drives accept both DD and HD media. Changing the connected drive count or drive type requires a restart."));
         layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
         layout.Children.Add(CreateHardfileSettings());
         layout.Children.Add(CreateSharedFolderSettings());
@@ -2266,6 +2291,7 @@ internal sealed partial class MainWindow : Window
 			return;
 		}
 
+		var previousPath = _settingsDraft.DriveDiskPaths[driveIndex];
 		var text = _drivePathBoxes[driveIndex].Text;
 		_settingsDraft.DriveDiskPaths[driveIndex] = string.IsNullOrWhiteSpace(text)
 			? null
@@ -2276,6 +2302,11 @@ internal sealed partial class MainWindow : Window
 		}
 
 		ClearSettingsStartupError();
+		if (!string.Equals(previousPath, _settingsDraft.DriveDiskPaths[driveIndex], StringComparison.OrdinalIgnoreCase))
+		{
+			_settingsDraft.DriveWriteProtected[driveIndex] = true;
+			_driveWriteProtectBoxes[driveIndex].IsChecked = true;
+		}
 		_settingsDraft.MarkRequiresRestart();
 		if (driveIndex == 0 && _setupDiskBox.Text != text) _setupDiskBox.Text = text;
 		if (_runtime == null)
@@ -2306,6 +2337,7 @@ internal sealed partial class MainWindow : Window
 		for (var driveIndex = 0; driveIndex < _drivePathBoxes.Length; driveIndex++)
 		{
 			var connected = driveIndex < _settingsDraft.FloppyDriveCount;
+            _floppyDriveTypeBoxes[driveIndex].IsEnabled = connected;
 			_drivePathBoxes[driveIndex].IsEnabled = connected;
 			_driveBrowseButtons[driveIndex].IsEnabled = connected;
             CopperScreenDriveState? drive = driveIndex < _latestState.Drives.Length ? _latestState.Drives[driveIndex] : null;
@@ -2347,11 +2379,14 @@ internal sealed partial class MainWindow : Window
 		try
 		{
 			_settingsCloseButton.Content = "Cancel";
-			var profilesDirectory = CopperScreenProfileStore.FindProfilesDirectory(AppContext.BaseDirectory);
-			var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory);
+			var profilesDirectory = CopperScreenProfileStore.GetUserProfilesDirectory(_recentSession.DataDirectory);
+			var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory, out var profileError, _recentSession.DataDirectory);
+			_settingsStartupError ??= profileError;
 			_profileDirectoryText.Text = profilesDirectory;
 			_profileList.ItemsSource = profiles.OrderByDescending(profile => profile.IsAvailable).ThenBy(profile => profile.DisplayName).ToArray();
-			_profileList.SelectedItem = profiles.FirstOrDefault(profile => string.Equals(profile.Id, _settingsDraft.Id, StringComparison.OrdinalIgnoreCase));
+			_profileList.SelectedItem = profiles.FirstOrDefault(profile => string.Equals(profile.Id, _settingsDraft.Id, StringComparison.OrdinalIgnoreCase) &&
+				string.Equals(profile.Path, _settingsDraft.SourcePath, StringComparison.OrdinalIgnoreCase))
+				?? profiles.FirstOrDefault(profile => string.Equals(profile.Id, _settingsDraft.Id, StringComparison.OrdinalIgnoreCase));
 			_profileIdBox.Text = _settingsDraft.Id;
 			_profileNameBox.Text = _settingsDraft.DisplayName;
 			_profileDescriptionBox.Text = _settingsDraft.Description;
@@ -2372,6 +2407,7 @@ internal sealed partial class MainWindow : Window
 			_floppyDriveCountBox.SelectedItem = _settingsDraft.FloppyDriveCount.ToString(System.Globalization.CultureInfo.InvariantCulture);
 			for (var driveIndex = 0; driveIndex < _drivePathBoxes.Length; driveIndex++)
 			{
+                _floppyDriveTypeBoxes[driveIndex].SelectedIndex = _settingsDraft.FloppyDriveTypes[driveIndex] == LightweightFloppyDriveType.HighDensity ? 1 : 0;
 				_drivePathBoxes[driveIndex].Text = _settingsDraft.DriveDiskPaths[driveIndex] ?? string.Empty;
 				_driveWriteProtectBoxes[driveIndex].IsChecked = _settingsDraft.DriveWriteProtected[driveIndex] ?? true;
 			}
@@ -2459,13 +2495,15 @@ internal sealed partial class MainWindow : Window
 		{
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
+			if (_runtime == null && _welcomeCopperOs && draft.KickstartSource == CopperScreenKickstartSource.CopperStart && !CopperOsWorkspace.IsWorkspace(draft.DriveDiskPaths[0]))
+			{ error = "Create or resume a CopperOS workspace before starting. A missing workspace is never replaced automatically."; return false; }
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental · no DOS or Workbench." : draft.RomVersion == KickstartVersion.Kickstart31 ? "A500 Kickstart 3.1 ROM selected." : "Kickstart 1.3 ROM selected.");
+			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Description : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental · no DOS or Workbench." : draft.RomVersion == KickstartVersion.Kickstart31 ? "A500 Kickstart 3.1 ROM selected." : "Kickstart 1.3 ROM selected.");
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
 			error = unavailable ?? romError ?? string.Empty;
 			return error.Length == 0;
 		}
-		catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or UnauthorizedAccessException or FormatException or OverflowException)
+		catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or InvalidDataException or UnauthorizedAccessException or FormatException or OverflowException or System.Text.Json.JsonException)
 		{ error = ex.Message; return false; }
 	}
 
@@ -2507,12 +2545,12 @@ internal sealed partial class MainWindow : Window
 
 		try
 		{
-			var path = CopperScreenProfileStore.Save(_settingsDraft, AppContext.BaseDirectory);
+			var path = CopperScreenProfileStore.Save(_settingsDraft, AppContext.BaseDirectory, _recentSession.DataDirectory);
 			RefreshSettingsUi();
 			_settingsStatus.Foreground = new SolidColorBrush(Color.FromRgb(206, 248, 213));
 			_settingsStatus.Text = "Saved " + path;
 		}
-		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
+		catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
 		{
 			SetSettingsError(ex.Message);
 		}
@@ -2528,12 +2566,12 @@ internal sealed partial class MainWindow : Window
 
 		try
 		{
-			var path = CopperScreenProfileStore.SaveAs(_settingsDraft, AppContext.BaseDirectory);
+			var path = CopperScreenProfileStore.SaveAs(_settingsDraft, AppContext.BaseDirectory, _recentSession.DataDirectory);
 			RefreshSettingsUi();
 			_settingsStatus.Foreground = new SolidColorBrush(Color.FromRgb(206, 248, 213));
 			_settingsStatus.Text = "Saved copy " + path;
 		}
-		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
+		catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
 		{
 			SetSettingsError(ex.Message);
 		}
@@ -2552,14 +2590,7 @@ internal sealed partial class MainWindow : Window
 			var resumePreviousOnFailure = previous != null && !previous.CurrentState.IsPaused;
 			if (previous != null)
 			{
-				var wasPaused = previous.CurrentState.IsPaused;
-				var state = wasPaused ? previous.CurrentState : (await previous.TogglePausedAsync()).State;
-				if (state.Drives.Any(d => d.HasUnsavedChanges))
-				{
-					if (!wasPaused) await previous.TogglePausedAsync();
-					SetSettingsError("Save ADF or discard and eject changed disks before restarting the Amiga.");
-					return;
-				}
+				if (!await PrepareLaunchTransitionAsync(previous)) return;
 			}
 			CopperScreenRuntime replacement;
             try { replacement = CopperScreenRuntime.Create(options, previous); }
@@ -2594,7 +2625,7 @@ internal sealed partial class MainWindow : Window
 			RefreshDebuggerUi(_latestState.DebugSnapshot);
 			PresentNextFrame(forceStatus: true);
 		}
-		catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or UnauthorizedAccessException or OverflowException)
+		catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or InvalidDataException or UnauthorizedAccessException or OverflowException)
 		{ SetSettingsError(ex.Message); }
 		finally { _applyingSettings = false; UpdateSettingsStatus(); }
 	}
@@ -2645,6 +2676,8 @@ internal sealed partial class MainWindow : Window
 		draft.FloppyDriveCount = ParseDriveCount(_floppyDriveCountBox.SelectedItem);
 		for (var driveIndex = 0; driveIndex < _drivePathBoxes.Length; driveIndex++)
 		{
+            draft.FloppyDriveTypes[driveIndex] = _floppyDriveTypeBoxes[driveIndex].SelectedIndex == 1
+                ? LightweightFloppyDriveType.HighDensity : LightweightFloppyDriveType.DoubleDensity;
 			var drivePathText = _drivePathBoxes[driveIndex].Text;
 			draft.DriveDiskPaths[driveIndex] = string.IsNullOrWhiteSpace(drivePathText)
 				? null
@@ -2856,16 +2889,19 @@ internal sealed partial class MainWindow : Window
 	private async Task SaveDiskAdfAsync(int driveIndex)
 	{
 		if (_runtime == null) { SetSettingsError("Start the Amiga before saving a mounted disk."); return; }
+        var runtime = _runtime;
 		var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
 		var file = await owner.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
 		{
 			Title = $"Save DF{driveIndex} as ADF",
 			SuggestedFileName = $"DF{driveIndex}-saved.adf",
 			DefaultExtension = "adf",
+			ShowOverwritePrompt = true,
 			FileTypeChoices = [new FilePickerFileType("Amiga disk image") { Patterns = ["*.adf"] }]
 		});
 		if (file?.TryGetLocalPath() is not { } path) return;
-		var result = await _runtime.SaveAdfAsync(driveIndex, path);
+        if (_runtime != runtime) { SetSettingsError("The session changed. Choose Save ADF again."); return; }
+		var result = await runtime.SaveAdfAsync(driveIndex, path, overwriteExisting: File.Exists(path));
 		_latestState = result.State;
 		if (!result.Success) SetSettingsError(result.Message);
 		ShowDiskFeedback(result.Message, result.Success);
@@ -2874,17 +2910,17 @@ internal sealed partial class MainWindow : Window
 
 	private bool _allowDiscardOnClose, _checkingDiskChanges;
 
-	private Task<bool> ConfirmDiscardOnCloseAsync()
+	private Task<bool> ConfirmDiscardOnCloseAsync(string? message = null, bool directStorage = false)
 	{
-		var dialog = new Window { Title = "Unsaved floppy changes", Width = 430, Height = 185,
+		var dialog = new Window { Title = message == null ? "Unsaved floppy changes" : "Storage could not be saved", Width = 460, Height = message == null ? 185 : 290,
 			CanResize = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
 		var keep = new Button { Content = "Keep open" };
-		var discard = new Button { Content = "Discard and close" };
+		var discard = new Button { Content = directStorage ? "Close despite save error" : "Discard and close" };
 		keep.Click += (_, _) => dialog.Close(false);
 		discard.Click += (_, _) => dialog.Close(true);
 		dialog.Content = new StackPanel { Margin = new Thickness(20), Spacing = 16, Children =
 		{
-			new TextBlock { Text = "Floppy disks have unsaved changes. Use Save ADF in Floppy settings to keep them.", TextWrapping = TextWrapping.Wrap },
+			new TextBlock { Text = message ?? "Floppy disks have unsaved changes. Use Save ADF in Floppy settings to keep them.", TextWrapping = TextWrapping.Wrap },
 			new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12, Children = { keep, discard } }
 		} };
 		return dialog.ShowDialog<bool>(this);
@@ -3744,9 +3780,9 @@ internal sealed partial class MainWindow : Window
 		_mouseGrabCenterFramebufferPoint = center;
 		ResetMouseTracking();
 		args.Pointer.Capture(_presenter);
-		if (!RecenterMouseGrabPointer())
+		if (args.Pointer.Captured != _presenter || !RecenterMouseGrabPointer())
 		{
-			ReleaseMouseGrab();
+			ReleaseInteractiveInput();
 			return false;
 		}
 
@@ -3755,11 +3791,10 @@ internal sealed partial class MainWindow : Window
 
 	private void ReleaseMouseGrab()
 	{
-		if (_mouseGrabPointer != null)
-		{
-			_mouseGrabPointer.Capture(null!);
-			_mouseGrabPointer = null;
-		}
+		// Clear ownership before releasing capture: Avalonia may synchronously
+		// raise PointerCaptureLost and run the complete input-release path.
+		var pointer = _mouseGrabPointer;
+		_mouseGrabPointer = null;
 
 		_mouseGrabActive = false;
 		UpdateShellStatus(_latestState);
@@ -3768,6 +3803,7 @@ internal sealed partial class MainWindow : Window
 		_mouseGrabCenterFramebufferPoint = null;
 		_mouseGrabCenterScreenPoint = null;
 		ResetMouseTracking();
+		pointer?.Capture(null!);
 	}
 
 	private static bool IsNearFramebufferPoint(Point left, Point right)
@@ -3969,40 +4005,63 @@ internal sealed partial class MainWindow : Window
 		_bench.SetStatusMessage(result.Message);
 		RefreshCopperBenchUi();
 		PresentFrame(catchUpAudio: false);
+		// Session controls reflect the completed command even when the final queued
+		// frame predates it and no more frames will arrive while paused.
+		_latestState = result.State;
+		UpdateToolbarStatus(result.State);
 	}
 
 	private async Task ResetRuntimeAsync()
 	{
-		if (_runtime == null)
+		if (_runtime == null || _applyingSettings || _checkingDiskChanges)
 		{
 			return;
 		}
 
-		var result = await _runtime.ResetAsync().ConfigureAwait(true);
-		_latestState = result.State;
-		_bench.ResetPath();
-		if (_bench.IsOverlayVisible)
+		_applyingSettings = true;
+		UpdateToolbarStatus();
+		try
 		{
-			await _bench.RefreshAsync(result.State.DiskPath).ConfigureAwait(true);
-		}
+			var wasPaused = _runtime.CurrentState.IsPaused;
+			if (!await PrepareLaunchTransitionAsync(_runtime)) return;
+			var result = await _runtime.ResetAsync().ConfigureAwait(true);
+			if (result.State.IsPaused != wasPaused) result = await _runtime.TogglePausedAsync();
+			_latestState = result.State;
+			_bench.ResetPath();
+			if (_bench.IsOverlayVisible)
+			{
+				await _bench.RefreshAsync(result.State.DiskPath).ConfigureAwait(true);
+			}
 
-		_bench.SetStatusMessage(result.Message);
-		RefreshDebuggerUi(result.State.DebugSnapshot);
-		RefreshCopperBenchUi();
-		PresentFrame(catchUpAudio: false);
+			_bench.SetStatusMessage(result.Message);
+			RefreshDebuggerUi(result.State.DebugSnapshot);
+			RefreshCopperBenchUi();
+			PresentFrame(catchUpAudio: false);
+		}
+		catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException)
+		{ SetSettingsError(ex.Message + " Keep the session open and export your disk before retrying."); }
+		finally { _applyingSettings = false; UpdateSettingsStatus(); UpdateToolbarStatus(); }
 	}
 
 	private Task InsertDiskAsync(string path)
 		=> _runtime == null ? Task.CompletedTask : CompleteDiskCommandAsync(_runtime.InsertDiskAsync(path));
 
-	private async Task InsertDriveDiskAsync(int driveIndex, string path)
+	internal async Task InsertDriveDiskAsync(int driveIndex, string path)
 	{
 		if ((uint)driveIndex >= (uint)_settingsDraft.FloppyDriveCount) return;
+		if (_runtime == null && _welcomeCopperOs)
+		{ SetSettingsError("Use Resume workspace to choose CopperOS storage, or switch to disk boot to import a disk. Your workspace is unchanged."); return; }
 		if (_runtime != null) await CompleteDiskCommandAsync(_runtime.InsertDriveDiskAsync(driveIndex, path));
 		else
 		{
+			try { _ = CopperScreenDiskImageArchive.LoadDiskImage(path); }
+			catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
+			{ SetSettingsError("Could not read the selected disk: " + ex.Message + " Choose an existing supported image or a readable archive. The previous selection is unchanged."); return; }
+			ClearSettingsStartupError();
 			_settingsDraft.DriveDiskPaths[driveIndex] = path;
 			_committedSettings.DriveDiskPaths[driveIndex] = path;
+			_settingsDraft.DriveWriteProtected[driveIndex] = _committedSettings.DriveWriteProtected[driveIndex] = true;
+			_driveWriteProtectBoxes[driveIndex].IsChecked = true;
 			SetDrivePathTextSilently(driveIndex, path);
 			if (driveIndex == 0) _setupDiskBox.Text = path;
 			_latestState = CreateIdleState(_settingsDraft);
@@ -4051,7 +4110,7 @@ internal sealed partial class MainWindow : Window
 
 		CopperScreenCommandResult result;
 		try { result = await command.ConfigureAwait(true); }
-		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
+		catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
 		{ ShowDiskFeedback(ex.Message, false); return; }
 		_latestState = result.State;
 		if (result.Success)
@@ -4061,6 +4120,7 @@ internal sealed partial class MainWindow : Window
 			{
 				_committedSettings.DriveDiskPaths[drive.Index] = drive.DiskPath;
 				_settingsDraft.DriveDiskPaths[drive.Index] = drive.DiskPath;
+				_committedSettings.DriveWriteProtected[drive.Index] = _settingsDraft.DriveWriteProtected[drive.Index] = drive.WriteProtected;
 				SetDrivePathTextSilently(drive.Index, drive.DiskPath ?? string.Empty);
 			}
 			RememberCurrentSession();

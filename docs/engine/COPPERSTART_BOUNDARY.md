@@ -5,10 +5,11 @@ bounded disk bootstrap for titles that retire the OS, in addition to its normal
 native Kickstart option. [Minimal disk boot](MINIMAL_DISK_BOOT.md) implements that
 boundary without depending on a sibling checkout or installing host traps.
 
-## Current product scope — 2026-10-05
+## Current product scope — 2026-10-16
 
 Legacy boot is not required. The [earlier restoration plan](../../CopperScreen/COPPERSTART_RESTORATION.md)
-is superseded. Native Kickstart and Minimal disk boot both use Lightweight;
+is superseded. Native Kickstart, Minimal disk boot and the
+[qualified standalone CopperStart ROM](../COPPERSTART_APP.md) use Lightweight;
 restoring `AmigaBoot`, DOS/Workbench host services, task scheduling or their old
 gateway graph is not a CopperScreen requirement.
 

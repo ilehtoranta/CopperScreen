@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "qualificationId": "copperstart-restored-rdb-writes-2026-10-19.1",
+  "status": "PASS",
+  "package": {
+    "identity": "CopperScreen.Test.e0e295f7ae2545d7b1eea604bfe87e58",
+    "version": "1.1.49.0",
+    "sha256": "B1587590A7298CEA5FB2FE2015E8B29BAC90921F206060097CA4E143FFB046A9",
+    "signedLocalDiagnostic": true,
+    "developmentRegistration": false,
+    "storeCertified": false
+  },
+  "firmware": {
+    "qualificationId": "diskboot-2026-10-19-dos-large-files.1",
+    "sha256": "4054184E5CBCD93511DA0C8C86B963955E670C959343DDDF31F2C324EA03A963"
+  },
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "preparedInputs": {
+    "default": {
+      "sourceBackupSha256": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC",
+      "sourceHdfSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "preparedHdfSha256": "9879B9AF1535D915800FC0CFD7E81D59A3688A50AA0CFAF3E0A5FA2FFA75367E",
+      "preparedBackupSha256": "F09FF047052BEFE0B9CDF8FA8783F24EFA836635FB5FEA2B43FAD72457051850",
+      "changedImageBytes": 16,
+      "nativeInstructionsChanged": false,
+      "existingSavedFilesRetained": true
+    },
+    "priority": {
+      "sourceBackupSha256": "85A04541A49A6C20DBEDBAF3C20930AF4F008556B52B65A910D94C2CCDCC0D2C",
+      "sourceHdfSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "preparedHdfSha256": "36749D40040C1F98EFB5089DAE9EFAAACCE47CABB240248A1CDC3140AAD8AD63",
+      "preparedBackupSha256": "27BA43FB27412BC23E1DF7CB61B1971A72A5F16FDE20A672F9311190DC5938EB",
+      "changedImageBytes": 16,
+      "nativeInstructionsChanged": false,
+      "existingSavedFilesRetained": true
+    }
+  },
+  "coverage": {
+    "hostSemanticCases": 15,
+    "hostFailures": 0,
+    "hostSkips": 0,
+    "separateCompiledMc68000Cases": 0,
+    "installedProcessPhases": 6,
+    "fullRomBoots": 7,
+    "settingsRestores": 4,
+    "settingsReexports": 2,
+    "failures": 0,
+    "skips": 0
+  },
+  "results": {
+    "newNativeWritesOnBothRestoredPartitions": true,
+    "bothBootPrioritySelections": true,
+    "guestFlushBeforeHostSaveOrDispose": true,
+    "hostSaveAdvancedCycles": false,
+    "resetReadback": true,
+    "processRestarts": 2,
+    "freshSettingsRestoresOfReexports": 2,
+    "originalSavedHeaderAndDataBlocksUnchanged": true,
+    "allUnrelatedBlocksUnchanged": true,
+    "reexportImageEqualsLiveGuestFlushedImage": true,
+    "freshImageEqualsReexport": true,
+    "configurationPreservedExceptRebasedDiskPaths": true,
+    "preparedInputBackupsUnchanged": true,
+    "actualButtonsAndWindowsPickers": true,
+    "hostWritesToWorkingImagesAfterRestore": false,
+    "hostDosShimsOrGuestRamPatches": false
+  },
+  "layouts": [
+    {
+      "layout": "default",
+      "inputHdfSha256": "9879B9AF1535D915800FC0CFD7E81D59A3688A50AA0CFAF3E0A5FA2FFA75367E",
+      "writtenHdfSha256": "CE4016DD370448A6FCD8292388F83F2B930F677B73067DBF4D2B6B59062B051C",
+      "reexportSha256": "2ACAF02847349033BD8279F6204C55AB68BC51AD8FE10DA0258C5AEBED6FEB11",
+      "partitions": [
+        {
+          "partition": 0,
+          "newFile": "Data/After",
+          "payloadBytes": 2049,
+          "newlyAllocatedBlocks": [
+            142,
+            143,
+            144,
+            145,
+            146,
+            147
+          ],
+          "originalSavedAndUnrelatedBlocksUnchanged": true
+        },
+        {
+          "partition": 1,
+          "newFile": "Data/After",
+          "payloadBytes": 2049,
+          "newlyAllocatedBlocks": [
+            142,
+            143,
+            144,
+            145,
+            146,
+            147
+          ],
+          "originalSavedAndUnrelatedBlocksUnchanged": true
+        }
+      ]
+    },
+    {
+      "layout": "priority",
+      "inputHdfSha256": "36749D40040C1F98EFB5089DAE9EFAAACCE47CABB240248A1CDC3140AAD8AD63",
+      "writtenHdfSha256": "04AF6A1AE757A0050CD009E0D4DC4EE250B6194976803EAAB95EFBB02E368646",
+      "reexportSha256": "3D74D63BFDF3908443330D369B7DD852054CCC2BD83802BA1DAF09693E66EA54",
+      "partitions": [
+        {
+          "partition": 0,
+          "newFile": "Data/After",
+          "payloadBytes": 2049,
+          "newlyAllocatedBlocks": [
+            142,
+            143,
+            144,
+            145,
+            146,
+            147
+          ],
+          "originalSavedAndUnrelatedBlocksUnchanged": true
+        },
+        {
+          "partition": 1,
+          "newFile": "Data/After",
+          "payloadBytes": 2049,
+          "newlyAllocatedBlocks": [
+            142,
+            143,
+            144,
+            145,
+            146,
+            147
+          ],
+          "originalSavedAndUnrelatedBlocksUnchanged": true
+        }
+      ]
+    }
+  ],
+  "cleanup": {
+    "privateEvidenceRetained": true,
+    "ownedRegistrationRemoved": true
+  },
+  "validation": {
+    "releaseBuildWarnings": 0,
+    "releaseBuildErrors": 0,
+    "hostTrxSha256": "F0CA7B60E5959E765E514E54C0E9B9FF6C2FB20842EBDB14C5C0683161D6162C",
+    "diagnosticBoundary": {
+      "InstalledAssemblyDiagnostic": true,
+      "NormalAssemblyDiagnostic": false
+    },
+    "installedRecordSha256": "92D80EE6C10A2E28A3E1021FEEEEFAFC0D904183D503C08E53353E79DF09E6F5",
+    "rawAuditSha256": "FA29E7E93DCF1C1428D936CD9A78DE115DE76411CB7C0A5784546B0F42982A6B"
+  },
+  "reproduction": {
+    "prepare": "scripts/qualification/prepare-rdb-restored-writes.py",
+    "controller": "scripts/test-msix-rdb-restored-writes.ps1",
+    "audit": "scripts/qualification/audit-msix-rdb-restored-writes.py",
+    "evidenceDirectory": "artifacts/rdb-restored-writes-20261019/installed"
+  },
+  "scope": {
+    "normalProductionBehaviorChanges": false,
+    "nativeInstructionsChanged": false,
+    "powerLossDurability": false,
+    "timingOrPerformanceAcceptance": false,
+    "uninstallReinstallRepeatedInThisContinuation": false,
+    "packageRelease": false
+  }
+}

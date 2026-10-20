@@ -1,0 +1,7153 @@
+{
+  "protocol": "copperos-native-editor-evidence-v1",
+  "recordedUtc": "2026-10-19T06:37:11.422312+00:00",
+  "shipping": false,
+  "scope": "Native functional ROM/media replays, compiled MC68000 buffer/glyph tests and separate Release builds. Latency, throughput and complete peak memory are not accepted by these results.",
+  "tests": {
+    "editor": [
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeCopperOsEditorBufferTests.CompiledBufferPreservesBytesHandlesCrLfAndRefusesOverflow",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeCopperOsEditorTests.NativeProcessEditorEditingOpenRollbackAndCleanup",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeCopperOsEditorBufferTests.OriginalGlyphsPreserveAsciiAndLatinLetterCase",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeCopperOsEditorTests.EditorIsFreestanding",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeCopperOsHomeMissingTests.MissingGuiModuleReturnsToConsoleWithoutPublishingOwners",
+        "outcome": "Passed"
+      }
+    ],
+    "input": [
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionInputTests.PhysicalInputProbeIsFreestanding",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionTextTests.NativeTextLayoutsHistoryPressureAndRollback(width: 320)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionInputTests.NativePhysicalInputPointerFocusWakeAndPressure(width: 320)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionTextTests.NativeTextLayoutsHistoryPressureAndRollback(width: 640)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionTextTests.TextApplicationIsFreestanding",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionInputTests.NativePhysicalInputPointerFocusWakeAndPressure(width: 640)",
+        "outcome": "Passed"
+      }
+    ],
+    "joined": [
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionJoinedTests.NativeSharedPortRefreshInputRepliesPressureAndRollback(width: 640)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionJoinedTests.JoinedApplicationIsFreestanding",
+        "outcome": "Passed"
+      },
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionJoinedTests.NativeSharedPortRefreshInputRepliesPressureAndRollback(width: 320)",
+        "outcome": "Passed"
+      }
+    ],
+    "romReset": [
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.ResetBootBlockLoadsAndExecutesSecondStageThroughExecDoIo",
+        "outcome": "Passed"
+      }
+    ],
+    "providerCompilation": [
+      {
+        "name": "CopperStart.Floppy.Native.Tests.NativeIntuitionStartupTests.IntuitionPayloadIsFreestanding",
+        "outcome": "Passed"
+      }
+    ],
+    "skipped": 0,
+    "mainLifetimes": 11,
+    "startupFailures": 7,
+    "missingGuiAttempts": 3,
+    "editorPixelOracles": 33,
+    "openRollbacks": 6,
+    "firstOpenRollbacks": 2
+  },
+  "profile": {
+    "romBytes": 524288,
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "romCodeBytes": 466442,
+    "graphicsBytes": 31906,
+    "graphicsResidentAddress": 16744448,
+    "romGapBytes": 25070,
+    "editorCapacity": 16384,
+    "documentBytes": 16936,
+    "documentReplacementBytes": 33872,
+    "fontBytes": 2816,
+    "filesCacheBytes": 4384,
+    "filesEntries": 32
+  },
+  "freeAfterStop": 471792,
+  "lowestSampledFreeAtDesktopWait": 293544,
+  "waitSampleScope": "Samples at Desktop Exec.Wait; excludes unsampled loader/IO/drawing transients and largest blocks. Probe veneers and the 4096-byte event trace are retained until reset and included in the stable baseline.",
+  "module": {
+    "protocol": "copperos-native-editor-v1",
+    "shipping": false,
+    "romBytes": 524288,
+    "requiredRomSha256": "C00836CDB82DCF1D48A9F85E5334FBFF87002DD85E85F6560B9844415E850247",
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "callbackVeneerBytes": 32,
+    "stackBytes": 32768,
+    "stateBytes": 256,
+    "cleanupReserve": 8192,
+    "filesWorkspaceBytes": 4384,
+    "filesNavigationPeakBytes": 8768,
+    "filesEntryCapacity": 32,
+    "filesPathBytes": 256,
+    "editorCapacity": 16384,
+    "editorDocumentBytes": 16936,
+    "editorOpenPeakBytes": 33872,
+    "editorFontBytes": 2816,
+    "imageBytes": 26416,
+    "sha256": "615EA4DF29877151412A6300457523DE12BE9EA78E1540C93A353DF021CADAAB",
+    "entry": 0,
+    "commandBytes": 652,
+    "commandSha256": "3B466FB672444DEA4D9A288C8B05177B287C5487E7DE29887FB2F34B33EBB110",
+    "providerBytes": 257312,
+    "providerSha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD",
+    "lifetime": "Home and GUI code are DOS system residents until reset; one copy per identity",
+    "inputs": [
+      {
+        "file": "CopperOS.Desktop.dll",
+        "sha256": "3C5200CBB7E4704E624B2C2FC42D1B647582A74BC056B2471F058E3D8E933C0E"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ]
+  },
+  "receipt": {
+    "protocol": "copperos-native-editor-v1",
+    "romSha256": "C00836CDB82DCF1D48A9F85E5334FBFF87002DD85E85F6560B9844415E850247",
+    "romBytes": 524288,
+    "providerSha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD",
+    "homeSha256": "615EA4DF29877151412A6300457523DE12BE9EA78E1540C93A353DF021CADAAB",
+    "homeBytes": 26416,
+    "filesWorkspaceBytes": 4384,
+    "filesEntryCapacity": 32,
+    "filesPathBytes": 256,
+    "editorCapacity": 16384,
+    "editorDocumentBytes": 16936,
+    "editorFontBytes": 2816,
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "fields": 90133,
+    "baseline": 471792,
+    "receipts": [
+      {
+        "cycle": 0,
+        "result": 0,
+        "freeBytes": 471792,
+        "freeAtWait": 317504,
+        "waitCalls": 18,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 1,
+        "result": 0,
+        "freeBytes": 471792,
+        "freeAtWait": 293544,
+        "waitCalls": 190,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 2,
+        "result": 0,
+        "freeBytes": 471792,
+        "freeAtWait": 317888,
+        "waitCalls": 1,
+        "faultCalls": 0,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 3,
+        "result": 0,
+        "freeBytes": 471792,
+        "freeAtWait": 317888,
+        "waitCalls": 2,
+        "faultCalls": 0,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 4,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 5,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 6,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 7,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 8,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 2,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 9,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 2,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 10,
+        "result": 20,
+        "freeBytes": 471792,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      }
+    ],
+    "captures": [
+      {
+        "cycle": 0,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 8891
+      },
+      {
+        "view": "FirstOpenRollback",
+        "size": 16936,
+        "error": 103,
+        "selected": 5,
+        "top": 0,
+        "fields": 16414
+      },
+      {
+        "view": "FirstOpenRollback",
+        "size": 2816,
+        "error": 103,
+        "selected": 5,
+        "top": 0,
+        "fields": 17371
+      },
+      {
+        "cycle": 0,
+        "name": "first-open-rollback-home",
+        "selected": 0,
+        "status": 0,
+        "fields": 17976
+      },
+      {
+        "cycle": 1,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 19965
+      },
+      {
+        "cycle": 1,
+        "name": "editor-startup-rollback",
+        "selected": 1,
+        "status": 2,
+        "fields": 20567
+      },
+      {
+        "cycle": 1,
+        "name": "editor-startup-rollback",
+        "selected": 1,
+        "status": 2,
+        "fields": 21176
+      },
+      {
+        "view": "Editor",
+        "name": "new",
+        "document": "Untitled",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 21601
+      },
+      {
+        "view": "Editor",
+        "name": "case",
+        "document": "Untitled",
+        "bytes": 3,
+        "sha256": "06D90109C8CCE34EC0C776950465421E176F08B831A938B3C6E76CB7BEE8790B",
+        "cursor": 3,
+        "line": 0,
+        "col": 3,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 22067
+      },
+      {
+        "view": "Editor",
+        "name": "queued-shift",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "35736409033BC4318EAAF5D345AD56A6455512978725CA950541C1534DD65679",
+        "cursor": 3,
+        "line": 0,
+        "col": 3,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 22400
+      },
+      {
+        "view": "Editor",
+        "name": "queued-control",
+        "document": "Untitled",
+        "bytes": 3,
+        "sha256": "06D90109C8CCE34EC0C776950465421E176F08B831A938B3C6E76CB7BEE8790B",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 23033
+      },
+      {
+        "view": "Editor",
+        "name": "irq-queue-recovery",
+        "document": "Untitled",
+        "bytes": 3,
+        "sha256": "06D90109C8CCE34EC0C776950465421E176F08B831A938B3C6E76CB7BEE8790B",
+        "cursor": 2,
+        "line": 0,
+        "col": 2,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 24229
+      },
+      {
+        "view": "Editor",
+        "name": "expose-refresh",
+        "document": "Untitled",
+        "bytes": 3,
+        "sha256": "06D90109C8CCE34EC0C776950465421E176F08B831A938B3C6E76CB7BEE8790B",
+        "cursor": 2,
+        "line": 0,
+        "col": 2,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 25738
+      },
+      {
+        "view": "Editor",
+        "name": "editing",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 4,
+        "line": 1,
+        "col": 5,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 26292
+      },
+      {
+        "view": "Editor",
+        "name": "line-home",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 2,
+        "line": 1,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 26461
+      },
+      {
+        "view": "Editor",
+        "name": "up-short-line",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 1,
+        "line": 0,
+        "col": 1,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 26797
+      },
+      {
+        "view": "Editor",
+        "name": "preferred-column",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 4,
+        "line": 1,
+        "col": 5,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 26968
+      },
+      {
+        "view": "Editor",
+        "name": "save-pending",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 4,
+        "line": 1,
+        "col": 5,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 1004,
+        "prompt": false,
+        "fields": 27184
+      },
+      {
+        "view": "Editor",
+        "name": "close-prompt",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 4,
+        "line": 1,
+        "col": 5,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 1004,
+        "prompt": true,
+        "fields": 27546
+      },
+      {
+        "view": "Editor",
+        "name": "close-cancel",
+        "document": "Untitled",
+        "bytes": 4,
+        "sha256": "AE108B1BF183BB24AC9BFBB973EFA1244732CF51A924E80FEC979FF6FA801026",
+        "cursor": 4,
+        "line": 1,
+        "col": 5,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 1004,
+        "prompt": false,
+        "fields": 28004
+      },
+      {
+        "view": "Editor",
+        "name": "open-mixed",
+        "document": "Mixed",
+        "bytes": 32,
+        "sha256": "4B1A27BA73D58888DD19047A76CFBB4E02CB561333F10FB8ACEC4E5AC4894DBE",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 37801
+      },
+      {
+        "view": "OpenRollback",
+        "name": "Mixed",
+        "lvo": -96,
+        "error": 103,
+        "selection": 5,
+        "top": 0,
+        "fields": 39782
+      },
+      {
+        "view": "OpenRollback",
+        "name": "Mixed",
+        "lvo": -30,
+        "error": 103,
+        "selection": 5,
+        "top": 0,
+        "fields": 42552
+      },
+      {
+        "view": "OpenRollback",
+        "name": "Full",
+        "lvo": -42,
+        "error": 103,
+        "selection": 3,
+        "top": 0,
+        "fields": 44860
+      },
+      {
+        "view": "OpenRollback",
+        "name": "Mixed",
+        "lvo": -36,
+        "error": 103,
+        "selection": 5,
+        "top": 0,
+        "fields": 47729
+      },
+      {
+        "view": "OpenRollback",
+        "name": "Binary",
+        "lvo": 0,
+        "error": 1001,
+        "selection": 1,
+        "top": 0,
+        "fields": 48919
+      },
+      {
+        "view": "OpenRollback",
+        "name": "Over",
+        "lvo": 0,
+        "error": 120,
+        "selection": 0,
+        "top": 0,
+        "fields": 52833
+      },
+      {
+        "view": "Editor",
+        "name": "short-reads",
+        "document": "Mixed",
+        "bytes": 32,
+        "sha256": "4B1A27BA73D58888DD19047A76CFBB4E02CB561333F10FB8ACEC4E5AC4894DBE",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 55807
+      },
+      {
+        "view": "Editor",
+        "name": "empty",
+        "document": "Empty",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 57381
+      },
+      {
+        "view": "Editor",
+        "name": "full",
+        "document": "Full",
+        "bytes": 16384,
+        "sha256": "1536C422C31CC98834759D7085CDA394A3510A03D78188248986A6B1A7207D03",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 61688
+      },
+      {
+        "view": "Editor",
+        "name": "full-refusal",
+        "document": "Full",
+        "bytes": 16384,
+        "sha256": "1536C422C31CC98834759D7085CDA394A3510A03D78188248986A6B1A7207D03",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 120,
+        "prompt": false,
+        "fields": 62192
+      },
+      {
+        "view": "Editor",
+        "name": "full-delete-insert",
+        "document": "Full",
+        "bytes": 16384,
+        "sha256": "8F4C37086235F6E9CBA87B30D827A90F5ED36FB927D4081CE91A0B9F58E00572",
+        "cursor": 1,
+        "line": 0,
+        "col": 1,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 62881
+      },
+      {
+        "view": "Editor",
+        "name": "lines",
+        "document": "Lines",
+        "bytes": 408,
+        "sha256": "5F7B501CAEFC6A9F040B50640723DC32F862C7507BE7C1E5C557FAA15969DAE0",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 65346
+      },
+      {
+        "view": "Editor",
+        "name": "vertical-scroll",
+        "document": "Lines",
+        "bytes": 408,
+        "sha256": "5F7B501CAEFC6A9F040B50640723DC32F862C7507BE7C1E5C557FAA15969DAE0",
+        "cursor": 408,
+        "line": 41,
+        "col": 3,
+        "top": 26,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 65817
+      },
+      {
+        "view": "Editor",
+        "name": "document-home",
+        "document": "Lines",
+        "bytes": 408,
+        "sha256": "5F7B501CAEFC6A9F040B50640723DC32F862C7507BE7C1E5C557FAA15969DAE0",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 66199
+      },
+      {
+        "view": "Editor",
+        "name": "horizontal-scroll",
+        "document": "Lines",
+        "bytes": 408,
+        "sha256": "5F7B501CAEFC6A9F040B50640723DC32F862C7507BE7C1E5C557FAA15969DAE0",
+        "cursor": 404,
+        "line": 40,
+        "col": 124,
+        "top": 25,
+        "left": 53,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 70395
+      },
+      {
+        "view": "Editor",
+        "name": "mouse-caret",
+        "document": "Lines",
+        "bytes": 408,
+        "sha256": "5F7B501CAEFC6A9F040B50640723DC32F862C7507BE7C1E5C557FAA15969DAE0",
+        "cursor": 337,
+        "line": 40,
+        "col": 57,
+        "top": 25,
+        "left": 53,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 70655
+      },
+      {
+        "view": "Editor",
+        "name": "crlf-open",
+        "document": "Mixed",
+        "bytes": 32,
+        "sha256": "4B1A27BA73D58888DD19047A76CFBB4E02CB561333F10FB8ACEC4E5AC4894DBE",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 72597
+      },
+      {
+        "view": "Editor",
+        "name": "crlf-insert",
+        "document": "Mixed",
+        "bytes": 34,
+        "sha256": "D2C9918373FFFC8E9E18B704F9F1B29DA1020C23E4D86204328EDDE9BF153A1D",
+        "cursor": 9,
+        "line": 1,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 73024
+      },
+      {
+        "view": "Editor",
+        "name": "crlf-backspace",
+        "document": "Mixed",
+        "bytes": 32,
+        "sha256": "4B1A27BA73D58888DD19047A76CFBB4E02CB561333F10FB8ACEC4E5AC4894DBE",
+        "cursor": 7,
+        "line": 0,
+        "col": 7,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 73285
+      },
+      {
+        "view": "Editor",
+        "name": "crlf-delete",
+        "document": "Mixed",
+        "bytes": 30,
+        "sha256": "C9ECA4AC1A80B4685A8E9ABF24BC115E7F1649184C7A6822334BEEF49F94A567",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 73726
+      },
+      {
+        "view": "Editor",
+        "name": "retained-document",
+        "document": "Mixed",
+        "bytes": 30,
+        "sha256": "C9ECA4AC1A80B4685A8E9ABF24BC115E7F1649184C7A6822334BEEF49F94A567",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 79416
+      },
+      {
+        "view": "Editor",
+        "name": "new-cancel",
+        "document": "Mixed",
+        "bytes": 30,
+        "sha256": "C9ECA4AC1A80B4685A8E9ABF24BC115E7F1649184C7A6822334BEEF49F94A567",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 81050
+      },
+      {
+        "view": "Editor",
+        "name": "new-rollback",
+        "document": "Mixed",
+        "bytes": 30,
+        "sha256": "C9ECA4AC1A80B4685A8E9ABF24BC115E7F1649184C7A6822334BEEF49F94A567",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 103,
+        "prompt": false,
+        "fields": 81889
+      },
+      {
+        "view": "Editor",
+        "name": "new-discard",
+        "document": "Untitled",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "cursor": 0,
+        "line": 0,
+        "col": 0,
+        "top": 0,
+        "left": 0,
+        "modified": false,
+        "error": 0,
+        "prompt": false,
+        "fields": 82679
+      },
+      {
+        "view": "Editor",
+        "name": "new-dirty",
+        "document": "Untitled",
+        "bytes": 1,
+        "sha256": "CA978112CA1BBDCAFAC231B39A23DC4DA786EFF8147C4E72B9807785AFEE48BB",
+        "cursor": 1,
+        "line": 0,
+        "col": 1,
+        "top": 0,
+        "left": 0,
+        "modified": true,
+        "error": 0,
+        "prompt": false,
+        "fields": 82836
+      },
+      {
+        "cycle": 2,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 85182
+      },
+      {
+        "cycle": 3,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 87171
+      }
+    ]
+  },
+  "joinedReceipts": [
+    {
+      "width": 320,
+      "fields": 31740,
+      "done": 1229606731,
+      "romBytes": 524288,
+      "romSha256": "C00836CDB82DCF1D48A9F85E5334FBFF87002DD85E85F6560B9844415E850247",
+      "payloadSha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD",
+      "probeSha256": "8A4E395EDE906F7D7142627714FABBCA6E3F92F12ADC4661966CEED918C2F2F8",
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "captures": [
+        {
+          "name": "ready",
+          "cycle": 0,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 0
+        },
+        {
+          "name": "pressure",
+          "cycle": 0,
+          "freeMask": 0,
+          "outstanding": 16,
+          "overflows": 1
+        },
+        {
+          "name": "failed-refresh",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "partial",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "open-update",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "recovered",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "close-rollback",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "shared-survivor",
+          "cycle": 0,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 1
+        },
+        {
+          "name": "ready",
+          "cycle": 1,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 1
+        },
+        {
+          "name": "pressure",
+          "cycle": 1,
+          "freeMask": 0,
+          "outstanding": 16,
+          "overflows": 2
+        },
+        {
+          "name": "failed-refresh",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "partial",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "open-update",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "recovered",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "close-rollback",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "shared-survivor",
+          "cycle": 1,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 2
+        },
+        {
+          "name": "ready",
+          "cycle": 2,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 2
+        },
+        {
+          "name": "pressure",
+          "cycle": 2,
+          "freeMask": 0,
+          "outstanding": 16,
+          "overflows": 3
+        },
+        {
+          "name": "failed-refresh",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "partial",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "open-update",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "recovered",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "close-rollback",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "shared-survivor",
+          "cycle": 2,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 3
+        }
+      ],
+      "trace": [
+        [
+          262144,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          524288,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          262144,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          8,
+          104,
+          16384,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          8,
+          232,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1024,
+          96,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1024,
+          80,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1024,
+          208,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          224,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          512,
+          0,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          81,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          209,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          524288,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          8,
+          104,
+          16384,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          8,
+          232,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          34,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          162,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          82,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          210,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          35,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          1024,
+          163,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          1024,
+          83,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          1024,
+          211,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          524288,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          262144,
+          0,
+          0,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          8,
+          104,
+          16384,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          8,
+          232,
+          0,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          1024,
+          96,
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          1024,
+          80,
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          1024,
+          208,
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          224,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          512,
+          0,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          81,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          209,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          524288,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          8,
+          104,
+          16384,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          8,
+          232,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          34,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          162,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          82,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          210,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          35,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          1024,
+          163,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          1024,
+          83,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          1024,
+          211,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          524288,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          262144,
+          0,
+          0,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          8,
+          104,
+          16384,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          8,
+          232,
+          0,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          1024,
+          96,
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          1024,
+          80,
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          1024,
+          208,
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          224,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          512,
+          0,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          81,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          209,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          4,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          524288,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          8,
+          104,
+          16384,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          8,
+          232,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          34,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          162,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          82,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          210,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          35,
+          0,
+          1,
+          9,
+          0,
+          2
+        ],
+        [
+          1024,
+          163,
+          0,
+          1,
+          9,
+          0,
+          2
+        ],
+        [
+          1024,
+          83,
+          0,
+          1,
+          9,
+          0,
+          2
+        ],
+        [
+          1024,
+          211,
+          0,
+          1,
+          9,
+          0,
+          2
+        ]
+      ],
+      "receipt": [
+        1229606731,
+        10,
+        2,
+        0,
+        0,
+        12814668,
+        9280,
+        12802248,
+        0,
+        0,
+        12800200,
+        437952,
+        437952,
+        472976,
+        472976,
+        12742552,
+        1024,
+        211,
+        0,
+        1,
+        0,
+        0,
+        6,
+        90,
+        93,
+        0,
+        0,
+        0,
+        0,
+        3,
+        234,
+        0,
+        0,
+        28,
+        0,
+        0,
+        0,
+        12589088,
+        179,
+        0,
+        0,
+        1,
+        12590648,
+        0,
+        0,
+        0,
+        12681792,
+        12848856,
+        0,
+        1,
+        12820184,
+        234,
+        12799620,
+        12797774,
+        12799688,
+        1,
+        0,
+        0,
+        12742504,
+        0,
+        0,
+        247660,
+        0,
+        320
+      ]
+    },
+    {
+      "width": 640,
+      "fields": 31866,
+      "done": 1229606731,
+      "romBytes": 524288,
+      "romSha256": "C00836CDB82DCF1D48A9F85E5334FBFF87002DD85E85F6560B9844415E850247",
+      "payloadSha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD",
+      "probeSha256": "8A4E395EDE906F7D7142627714FABBCA6E3F92F12ADC4661966CEED918C2F2F8",
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "captures": [
+        {
+          "name": "ready",
+          "cycle": 0,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 0
+        },
+        {
+          "name": "pressure",
+          "cycle": 0,
+          "freeMask": 0,
+          "outstanding": 16,
+          "overflows": 1
+        },
+        {
+          "name": "failed-refresh",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "partial",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "open-update",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "recovered",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "close-rollback",
+          "cycle": 0,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 1
+        },
+        {
+          "name": "shared-survivor",
+          "cycle": 0,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 1
+        },
+        {
+          "name": "ready",
+          "cycle": 1,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 1
+        },
+        {
+          "name": "pressure",
+          "cycle": 1,
+          "freeMask": 0,
+          "outstanding": 16,
+          "overflows": 2
+        },
+        {
+          "name": "failed-refresh",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "partial",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "open-update",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "recovered",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "close-rollback",
+          "cycle": 1,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 2
+        },
+        {
+          "name": "shared-survivor",
+          "cycle": 1,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 2
+        },
+        {
+          "name": "ready",
+          "cycle": 2,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 2
+        },
+        {
+          "name": "pressure",
+          "cycle": 2,
+          "freeMask": 0,
+          "outstanding": 16,
+          "overflows": 3
+        },
+        {
+          "name": "failed-refresh",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "partial",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "open-update",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "recovered",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "close-rollback",
+          "cycle": 2,
+          "freeMask": 65534,
+          "outstanding": 1,
+          "overflows": 3
+        },
+        {
+          "name": "shared-survivor",
+          "cycle": 2,
+          "freeMask": 65535,
+          "outstanding": 0,
+          "overflows": 3
+        }
+      ],
+      "trace": [
+        [
+          262144,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          524288,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          262144,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          8,
+          104,
+          16384,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          8,
+          232,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1024,
+          96,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1024,
+          80,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1024,
+          208,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          224,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          512,
+          0,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          81,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          1024,
+          209,
+          0,
+          2,
+          3,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          524288,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          8,
+          104,
+          16384,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          8,
+          232,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          34,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          162,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          82,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          210,
+          0,
+          1,
+          7,
+          0,
+          0
+        ],
+        [
+          1024,
+          35,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          1024,
+          163,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          1024,
+          83,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          1024,
+          211,
+          0,
+          1,
+          9,
+          0,
+          0
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          524288,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          262144,
+          0,
+          0,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          8,
+          104,
+          16384,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          8,
+          232,
+          0,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          1024,
+          96,
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          1024,
+          80,
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          1024,
+          208,
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          224,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          512,
+          0,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          81,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          1024,
+          209,
+          0,
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          524288,
+          0,
+          0,
+          2,
+          7,
+          0,
+          1
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          8,
+          104,
+          16384,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          8,
+          232,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          34,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          162,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          82,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          210,
+          0,
+          1,
+          7,
+          0,
+          1
+        ],
+        [
+          1024,
+          35,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          1024,
+          163,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          1024,
+          83,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          1024,
+          211,
+          0,
+          1,
+          9,
+          0,
+          1
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          524288,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          262144,
+          0,
+          0,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          8,
+          104,
+          16384,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          8,
+          232,
+          0,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          1024,
+          96,
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          1024,
+          80,
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          1024,
+          208,
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        [
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          224,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          512,
+          0,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          32,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          160,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          81,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          1024,
+          209,
+          0,
+          2,
+          3,
+          0,
+          2
+        ],
+        [
+          4,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          16,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          524288,
+          0,
+          0,
+          2,
+          7,
+          0,
+          2
+        ],
+        [
+          262144,
+          0,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          8,
+          104,
+          16384,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          8,
+          232,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          34,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          162,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          82,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          210,
+          0,
+          1,
+          7,
+          0,
+          2
+        ],
+        [
+          1024,
+          35,
+          0,
+          1,
+          9,
+          0,
+          2
+        ],
+        [
+          1024,
+          163,
+          0,
+          1,
+          9,
+          0,
+          2
+        ],
+        [
+          1024,
+          83,
+          0,
+          1,
+          9,
+          0,
+          2
+        ],
+        [
+          1024,
+          211,
+          0,
+          1,
+          9,
+          0,
+          2
+        ]
+      ],
+      "receipt": [
+        1229606731,
+        10,
+        2,
+        0,
+        0,
+        12814668,
+        9280,
+        12802248,
+        0,
+        0,
+        12800200,
+        437952,
+        437952,
+        472976,
+        472976,
+        12742552,
+        1024,
+        211,
+        0,
+        1,
+        0,
+        0,
+        6,
+        90,
+        93,
+        0,
+        0,
+        0,
+        0,
+        3,
+        228,
+        0,
+        0,
+        28,
+        0,
+        0,
+        0,
+        12589088,
+        179,
+        0,
+        0,
+        1,
+        12590648,
+        0,
+        0,
+        0,
+        12681792,
+        12848856,
+        0,
+        1,
+        12820184,
+        228,
+        12799620,
+        12797774,
+        12799688,
+        1,
+        0,
+        0,
+        12742504,
+        0,
+        0,
+        247660,
+        0,
+        640
+      ]
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "CopperOS/src/System/Desktop/DesktopCalls.cs",
+      "bytes": 7936,
+      "sha256": "DF1F354DF77083EB0DDE009B3738C35A0E13E956451D3A7F2B3ED2DA967CA428"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/DesktopMemory.cs",
+      "bytes": 2233,
+      "sha256": "98553A0A43107D575D6B35E9A26EDECD2A352F5269AFBD851B84524E2B851EFD"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/DesktopProfile.cs",
+      "bytes": 710,
+      "sha256": "29D0E18B6114CEE7A1329716F3696B05DC8F364212582E6B0095F38F074A529C"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/EditorBuffer.cs",
+      "bytes": 6644,
+      "sha256": "EFE9A1E9E8EB3C4B323B200503827366729F6DA2431EF2C5BE388C93D4A1CF2D"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/EditorFont.cs",
+      "bytes": 1853,
+      "sha256": "920E9916A5D8E7BDFF1BA8233A93864B81FCA8222A01CE9F00322BDB3D82F96D"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/EditorGlyphs.cs",
+      "bytes": 9977,
+      "sha256": "1D755751723BFAE91E66F276C2A5A60DA48602F1A80D2F1C277E35E8506E4B72"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/EditorView.cs",
+      "bytes": 12541,
+      "sha256": "2C5584589B800F3C7AA00E2E9DE5DE4D7B1F1AF3260DDCA256CFD70861E84F80"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/FilesView.cs",
+      "bytes": 11554,
+      "sha256": "7479D00802166E707FAE7CB069928146C3E0219E262614558385755495830668"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/HomeView.cs",
+      "bytes": 6791,
+      "sha256": "6C12A1CD4894CB96638492A3ED2EEC24E77B1831F94DBAB10B48962034AC27BB"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/NativeDesktopLauncher.cs",
+      "bytes": 3456,
+      "sha256": "C2FD75E1D307EFB5660D0B9BB03C4444E7A5E19411B900FAB53B9605E2D912FF"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/NativeDesktopProcess.cs",
+      "bytes": 8622,
+      "sha256": "391A81E527E283DEA06683D581FEBF4328EF61F952BC0D78EA6B9C984E7BAD1B"
+    },
+    {
+      "file": "CopperOS/tools/Desktop.Builder/DesktopImageBuilder.cs",
+      "bytes": 10206,
+      "sha256": "B9AE01B5C73F53BD6C2F1615418FCE8EF61CDEB1C90C59D6DD3EDC7C88F105E9"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/DosDiskImage.cs",
+      "bytes": 24546,
+      "sha256": "0053A29411342EACFB776334C7A51D3FC3F4AD03AC40EC192105FEE26E0E03FE"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsHomeProbe.cs",
+      "bytes": 12788,
+      "sha256": "4C8780B673309EEE5AFA258C52B1D929BCA721763AB238ACF287372D5FF6047E"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsHomeTests.cs",
+      "bytes": 27614,
+      "sha256": "69A2C307BBA500C0D3019E105EAB0F55452CCE4C5B90D2550FD6DE86733B2CE2"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsHomeMissingTests.cs",
+      "bytes": 5442,
+      "sha256": "A76FC71465CF94056E011193CF0F2F99AA31268136C42620B1B9B118DB137553"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsEditorTests.cs",
+      "bytes": 33989,
+      "sha256": "89EADBF8CB7BFC9199BAC7B53041094803416FF54AD90B8419D545039B608148"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsEditorBufferTests.cs",
+      "bytes": 6196,
+      "sha256": "5738214CAF018E4620B99DC2F68E923CD9B1C8735EEDFC53CF06363549DA6524"
+    },
+    {
+      "file": "CopperStart/rom/CopperStart.SystemRom/NativeBootConsole.cs",
+      "bytes": 16386,
+      "sha256": "E7DF0CB9B25D79E6043678DCE9A28CA264669F1D7CABDADDDF594F885F4D228B"
+    },
+    {
+      "file": "CopperStart/native/CopperStart.DesktopProviders/NativeIntuitionInput.cs",
+      "bytes": 32899,
+      "sha256": "1A26C350D7BE5333636A7297B0BEC33626F70A163F672901D4B4084EA7BDABB2"
+    },
+    {
+      "file": "CopperStart/build/Build-NativeDesktopInputRom.ps1",
+      "bytes": 9677,
+      "sha256": "10477398AC93990F2E3F2C0FB17078A582B763683C735B50B421F2F21EA24EBA"
+    },
+    {
+      "file": "CopperStart/build/Build-NativeDesktopInputProvider.ps1",
+      "bytes": 7442,
+      "sha256": "28C4424BCEC9AD961AAF23BD92B1DA3FAB867D43FA75F1C8B03582BE4F924E3D"
+    },
+    {
+      "file": "CopperStart/build/Test-NativeCopperOsEditor.ps1",
+      "bytes": 8169,
+      "sha256": "49919DB952732E72B918A7B30563BE1640E5905217BB1276F57B58A936AEA6A7"
+    },
+    {
+      "file": "CopperStart/tools/CopperStart.SystemRom.Qualification/Program.cs",
+      "bytes": 3982,
+      "sha256": "19FBBD40FC76EA8D8CE18DFC9EBD59524A88817859AAB914368A843142384282"
+    },
+    {
+      "file": "CopperStart/tools/CopperStart.SystemRom.Qualification/CopperStart.SystemRom.Qualification.csproj",
+      "bytes": 215,
+      "sha256": "1E8C310F39AD55C29493C09564CEF3C545E58E76FCB45D08378BA3E80580C67C"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "CopperScreen/artifacts/copperos-editor-consumer-build-v2.log",
+      "bytes": 1283,
+      "sha256": "188D91389297197308D79D96ECF93A666018EFBAB6FAAEC5DC3A69CF6D1C3157"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/bundle-v1/C/Desktop",
+      "bytes": 652,
+      "sha256": "3B466FB672444DEA4D9A288C8B05177B287C5487E7DE29887FB2F34B33EBB110"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/bundle-v1/Desktop.map",
+      "bytes": 110339,
+      "sha256": "896EF90398A7C491123BA1D1E8EE23D2768A7CE59916B9408F87C9A07F6583CF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/bundle-v1/L/CopperGUI",
+      "bytes": 257312,
+      "sha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/bundle-v1/L/CopperHome",
+      "bytes": 26416,
+      "sha256": "615EA4DF29877151412A6300457523DE12BE9EA78E1540C93A353DF021CADAAB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/bundle-v1/desktop.json",
+      "bytes": 1635,
+      "sha256": "1290C02638B749C906F0E898A9E47988709EA3C2510E1056AA066AFFF3D79D06"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/baseline-il.json",
+      "bytes": 392,
+      "sha256": "51FB82A8DB265AFF006ABD6976837D196C20047258D8A96CA825F7C543991621"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/irq-il.json",
+      "bytes": 1121,
+      "sha256": "3F6E7051F2366674E879948040700373B6B91C38932AD458BB3858773B7A3A6C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/qualification.json",
+      "bytes": 8123,
+      "sha256": "85BABE9C9572AD46A86043C368D13C3B1B652E14AA04DDFF3671D28FE371DF60"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/rom/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "C00836CDB82DCF1D48A9F85E5334FBFF87002DD85E85F6560B9844415E850247"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/rom/disk-boot-test-manifest.json",
+      "bytes": 6599,
+      "sha256": "C0BBB591AECA47C63E6FB1E5C0F1E55CBA835CA7A618EC53F0996D5CA98D2138"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/rom/rom-boot.trx",
+      "bytes": 3375,
+      "sha256": "16490E4296EA1D145C8B7A58232DB6778B2A35FB317C0A8E6E92E1A80B214BEB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/console-irq-v3/source-inputs.json",
+      "bytes": 11795,
+      "sha256": "6FAFA2EA9F9B8CBC0E2370DD6E99D079327533DAAA1AC2823F0911AF2D24452C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/evidence/collect.py",
+      "bytes": 9858,
+      "sha256": "2D820995487180BFB884A12AE8A2F41C7250A2B2BE9BD800A8BDF0876AECFAE9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/CopperIntuition.hunk",
+      "bytes": 257312,
+      "sha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/CopperIntuition.map",
+      "bytes": 2501296,
+      "sha256": "FF25AD5E10D9D878F61FFA83A4EC4B7319CA7241C98C35DEF7058193373146A2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/InputProbe.hunk",
+      "bytes": 5172,
+      "sha256": "DD20C7C7A5686CC0EDAAC8F355AA282C06679D08EE0146B02CB26D803C87FBD7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/InputProbe.map",
+      "bytes": 20692,
+      "sha256": "47F4AC305DBF07F7B30EE306AE5448986E508CA0347FD7A6F5CC4B2DF513CD26"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/TextProbe.hunk",
+      "bytes": 5084,
+      "sha256": "D593BEB831F536231234B550972E497D96DC41514328F34AC22A8CEB6D698CD0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/TextProbe.map",
+      "bytes": 20337,
+      "sha256": "FB0582169B4EC665CAE711B8738E4449DC45D1D1B5EC3B40D8CC83BB5B12396B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-console-after-0.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-console-after-1.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-console-after-2.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-console-before.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-0-closed.png",
+      "bytes": 9034,
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-0-focus.png",
+      "bytes": 9850,
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-0-keys.png",
+      "bytes": 9664,
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-0-pressure.png",
+      "bytes": 9802,
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-0-ready.png",
+      "bytes": 9550,
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-0-recovered.png",
+      "bytes": 9802,
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-1-closed.png",
+      "bytes": 9034,
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-1-focus.png",
+      "bytes": 9850,
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-1-keys.png",
+      "bytes": 9664,
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-1-pressure.png",
+      "bytes": 9802,
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-1-ready.png",
+      "bytes": 9550,
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-1-recovered.png",
+      "bytes": 9802,
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-2-closed.png",
+      "bytes": 9034,
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-2-focus.png",
+      "bytes": 9850,
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-2-keys.png",
+      "bytes": 9664,
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-2-pressure.png",
+      "bytes": 9802,
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-2-ready.png",
+      "bytes": 9550,
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-320-cycle-2-recovered.png",
+      "bytes": 9802,
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-console-after-0.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-console-after-1.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-console-after-2.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-console-before.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-0-closed.png",
+      "bytes": 8483,
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-0-focus.png",
+      "bytes": 9422,
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-0-keys.png",
+      "bytes": 9238,
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-0-pressure.png",
+      "bytes": 9532,
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-0-ready.png",
+      "bytes": 9174,
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-0-recovered.png",
+      "bytes": 9532,
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-1-closed.png",
+      "bytes": 8483,
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-1-focus.png",
+      "bytes": 9422,
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-1-keys.png",
+      "bytes": 9238,
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-1-pressure.png",
+      "bytes": 9532,
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-1-ready.png",
+      "bytes": 9174,
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-1-recovered.png",
+      "bytes": 9532,
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-2-closed.png",
+      "bytes": 8483,
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-2-focus.png",
+      "bytes": 9422,
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-2-keys.png",
+      "bytes": 9238,
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-2-pressure.png",
+      "bytes": 9532,
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-2-ready.png",
+      "bytes": 9174,
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-640-cycle-2-recovered.png",
+      "bytes": 9532,
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-probe.json",
+      "bytes": 900,
+      "sha256": "F925A8ABEE12A38C4D8A5C83010B836E8A76E25729EC123EA610891900CE7924"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/input-text.trx",
+      "bytes": 11047,
+      "sha256": "8DCA6C167F7BAACEB24431915E2ABD18B3C5109435902FAA45BACFA5D76E27F3"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/intuition-input-320.json",
+      "bytes": 36344,
+      "sha256": "71035A4E095EB5E205AE1BBBDEB14E080114773BE833868C4EB94C2A24FD8E6E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/intuition-input-640.json",
+      "bytes": 35622,
+      "sha256": "C1E106AD03CD700BBE80492085EABEADEE1ACF0F268961AAAFF55B2CF3559B3E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/intuition.json",
+      "bytes": 1308,
+      "sha256": "FB0E4D6E038EB5208012F449653E63C076666B07D0B41EF6432E9B8B06547313"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/text-320-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/text-320.json",
+      "bytes": 5617,
+      "sha256": "BD160E3BE3CE44D842EA09CDCBD81A6C14770BD38650B84FE98533E23AB8149C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/text-640-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/text-640.json",
+      "bytes": 5617,
+      "sha256": "3DC156253ECC2D9C93BA382787062C73074EAF375C473A8B2C51B93FAD6F0499"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/intuition/text-probe.json",
+      "bytes": 900,
+      "sha256": "333C3BADEB2C254654D5F2B3E52FF4A7F1CF8EC2F5D8C44C1F88541756596B68"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/input-regression-v1/qualification.json",
+      "bytes": 106804,
+      "sha256": "2228C5457153B6E131A304EDAA90DD4859C05578EDCCF56411BF01F20BD8B4B5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/JoinedProbe.hunk",
+      "bytes": 5788,
+      "sha256": "8A4E395EDE906F7D7142627714FABBCA6E3F92F12ADC4661966CEED918C2F2F8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/JoinedProbe.map",
+      "bytes": 25706,
+      "sha256": "0CA98F1907E1E9500386628E09BD628652819670F1FAB5CF3BD4B79F5A690483"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/intuition-joined-320.json",
+      "bytes": 25016,
+      "sha256": "A0632F01ABFE6255D243300C823F24B260F23A7AE120CCA768713677FDC37895"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/intuition-joined-640.json",
+      "bytes": 24506,
+      "sha256": "5FD06DD0A1E7E9216EE35AACB699222C231C9F83CC0D8EC92F0834EFD4B7D125"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-console-after-0.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-console-after-1.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-console-after-2.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-console-before.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-close-rollback.png",
+      "bytes": 10298,
+      "sha256": "713A946FA466393E7E97E2AAB162E2BFC80A97701B87DE639818241F4DE58A6D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-failed-refresh.png",
+      "bytes": 9825,
+      "sha256": "5CFE99843D8C4E73D32FC2B7A0BCF1C7B2389138EB107A06650B3FBCE10A3B4C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-open-update.png",
+      "bytes": 10221,
+      "sha256": "F9B50AF84C9056D71EBA806B4CA3886917B428CC499F292EB42214D4D7FE2FA7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-partial.png",
+      "bytes": 10184,
+      "sha256": "C774503EE10A990E058F339DE8811199D2F1B005B48D580D594C1FAA7E03E50E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-pressure.png",
+      "bytes": 10203,
+      "sha256": "F647D6C302B7840D0A6B5150C214634B43339958F82878DBF23E4549FBB512BF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-ready.png",
+      "bytes": 10357,
+      "sha256": "764E6927046EF726F914FA1D7F5F6AFAD24F608AA103B6F625254AAE82E0F521"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-recovered.png",
+      "bytes": 10373,
+      "sha256": "D39508041E40A1D0AFDAAAEB3D31F641A24628C8F84CAC6AF4F4B7B4C9448F7F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-0-shared-survivor.png",
+      "bytes": 9165,
+      "sha256": "B78C4388BA6B18E43B62B740FA7F29BD2E512E2164A452E7BC43D422CCF6FC11"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-close-rollback.png",
+      "bytes": 10298,
+      "sha256": "713A946FA466393E7E97E2AAB162E2BFC80A97701B87DE639818241F4DE58A6D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-failed-refresh.png",
+      "bytes": 9825,
+      "sha256": "5CFE99843D8C4E73D32FC2B7A0BCF1C7B2389138EB107A06650B3FBCE10A3B4C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-open-update.png",
+      "bytes": 10221,
+      "sha256": "F9B50AF84C9056D71EBA806B4CA3886917B428CC499F292EB42214D4D7FE2FA7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-partial.png",
+      "bytes": 10184,
+      "sha256": "C774503EE10A990E058F339DE8811199D2F1B005B48D580D594C1FAA7E03E50E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-pressure.png",
+      "bytes": 10203,
+      "sha256": "F647D6C302B7840D0A6B5150C214634B43339958F82878DBF23E4549FBB512BF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-ready.png",
+      "bytes": 10357,
+      "sha256": "764E6927046EF726F914FA1D7F5F6AFAD24F608AA103B6F625254AAE82E0F521"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-recovered.png",
+      "bytes": 10373,
+      "sha256": "D39508041E40A1D0AFDAAAEB3D31F641A24628C8F84CAC6AF4F4B7B4C9448F7F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-1-shared-survivor.png",
+      "bytes": 9165,
+      "sha256": "B78C4388BA6B18E43B62B740FA7F29BD2E512E2164A452E7BC43D422CCF6FC11"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-close-rollback.png",
+      "bytes": 10298,
+      "sha256": "713A946FA466393E7E97E2AAB162E2BFC80A97701B87DE639818241F4DE58A6D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-failed-refresh.png",
+      "bytes": 9825,
+      "sha256": "5CFE99843D8C4E73D32FC2B7A0BCF1C7B2389138EB107A06650B3FBCE10A3B4C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-open-update.png",
+      "bytes": 10221,
+      "sha256": "F9B50AF84C9056D71EBA806B4CA3886917B428CC499F292EB42214D4D7FE2FA7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-partial.png",
+      "bytes": 10184,
+      "sha256": "C774503EE10A990E058F339DE8811199D2F1B005B48D580D594C1FAA7E03E50E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-pressure.png",
+      "bytes": 10203,
+      "sha256": "F647D6C302B7840D0A6B5150C214634B43339958F82878DBF23E4549FBB512BF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-ready.png",
+      "bytes": 10357,
+      "sha256": "764E6927046EF726F914FA1D7F5F6AFAD24F608AA103B6F625254AAE82E0F521"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-recovered.png",
+      "bytes": 10373,
+      "sha256": "D39508041E40A1D0AFDAAAEB3D31F641A24628C8F84CAC6AF4F4B7B4C9448F7F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-320-cycle-2-shared-survivor.png",
+      "bytes": 9165,
+      "sha256": "B78C4388BA6B18E43B62B740FA7F29BD2E512E2164A452E7BC43D422CCF6FC11"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-console-after-0.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-console-after-1.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-console-after-2.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-console-before.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-close-rollback.png",
+      "bytes": 9692,
+      "sha256": "4DFD10EB1D9C1BC4A20BD0641B4932C13EBF93643E7DE75C5AB92D9D430580EF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-failed-refresh.png",
+      "bytes": 9558,
+      "sha256": "F6EA6527D3AA492C21B85EE74C28317314F79209DD6606D9C92CA6442D3745C5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-open-update.png",
+      "bytes": 9730,
+      "sha256": "A8E536BBFCF46D0377A68E9AD9D85FEC5D0801A70F73025473AA5024916D8D3B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-partial.png",
+      "bytes": 9733,
+      "sha256": "86D807E6F35BC9CA00DD86F935EFDBB227627C77BDF2A655F8BF14AAEA4F15B6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-pressure.png",
+      "bytes": 9853,
+      "sha256": "68C8D24AD74134C9228A1F24830C45DC655837CC8548A27CFDD5E072378A717C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-ready.png",
+      "bytes": 9857,
+      "sha256": "9D45EF1D445CBC13F6AB1E78FC7136E6FE898F0CE74B08A94EE9E82936EEB2A1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-recovered.png",
+      "bytes": 9831,
+      "sha256": "CE46844F04BB68A7E52BECB809FE6FFB8DA7DC5FEFB6B948494DC4105B5E56CA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-0-shared-survivor.png",
+      "bytes": 8757,
+      "sha256": "C76C9640DFA49459E425EA87FDB0F050D6FA408DEFB97A459977968578BD9BE9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-close-rollback.png",
+      "bytes": 9692,
+      "sha256": "4DFD10EB1D9C1BC4A20BD0641B4932C13EBF93643E7DE75C5AB92D9D430580EF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-failed-refresh.png",
+      "bytes": 9558,
+      "sha256": "F6EA6527D3AA492C21B85EE74C28317314F79209DD6606D9C92CA6442D3745C5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-open-update.png",
+      "bytes": 9730,
+      "sha256": "A8E536BBFCF46D0377A68E9AD9D85FEC5D0801A70F73025473AA5024916D8D3B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-partial.png",
+      "bytes": 9733,
+      "sha256": "86D807E6F35BC9CA00DD86F935EFDBB227627C77BDF2A655F8BF14AAEA4F15B6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-pressure.png",
+      "bytes": 9853,
+      "sha256": "68C8D24AD74134C9228A1F24830C45DC655837CC8548A27CFDD5E072378A717C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-ready.png",
+      "bytes": 9857,
+      "sha256": "9D45EF1D445CBC13F6AB1E78FC7136E6FE898F0CE74B08A94EE9E82936EEB2A1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-recovered.png",
+      "bytes": 9831,
+      "sha256": "CE46844F04BB68A7E52BECB809FE6FFB8DA7DC5FEFB6B948494DC4105B5E56CA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-1-shared-survivor.png",
+      "bytes": 8757,
+      "sha256": "C76C9640DFA49459E425EA87FDB0F050D6FA408DEFB97A459977968578BD9BE9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-close-rollback.png",
+      "bytes": 9692,
+      "sha256": "4DFD10EB1D9C1BC4A20BD0641B4932C13EBF93643E7DE75C5AB92D9D430580EF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-failed-refresh.png",
+      "bytes": 9558,
+      "sha256": "F6EA6527D3AA492C21B85EE74C28317314F79209DD6606D9C92CA6442D3745C5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-open-update.png",
+      "bytes": 9730,
+      "sha256": "A8E536BBFCF46D0377A68E9AD9D85FEC5D0801A70F73025473AA5024916D8D3B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-partial.png",
+      "bytes": 9733,
+      "sha256": "86D807E6F35BC9CA00DD86F935EFDBB227627C77BDF2A655F8BF14AAEA4F15B6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-pressure.png",
+      "bytes": 9853,
+      "sha256": "68C8D24AD74134C9228A1F24830C45DC655837CC8548A27CFDD5E072378A717C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-ready.png",
+      "bytes": 9857,
+      "sha256": "9D45EF1D445CBC13F6AB1E78FC7136E6FE898F0CE74B08A94EE9E82936EEB2A1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-recovered.png",
+      "bytes": 9831,
+      "sha256": "CE46844F04BB68A7E52BECB809FE6FFB8DA7DC5FEFB6B948494DC4105B5E56CA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-640-cycle-2-shared-survivor.png",
+      "bytes": 8757,
+      "sha256": "C76C9640DFA49459E425EA87FDB0F050D6FA408DEFB97A459977968578BD9BE9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined-probe.json",
+      "bytes": 900,
+      "sha256": "522CCBAA1D42CCA9CC1CBE8E3BE7F6E448D5A2396EA51018D0608BEBEF6D3B73"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/joined-regression-v1/joined.trx",
+      "bytes": 6342,
+      "sha256": "C8ECAC257547C7B25466C68CD5345B26C68573E42809B76D3607D761627D39E1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/production-build-final.log",
+      "bytes": 4681,
+      "sha256": "DFD84450C1CDC740BF44FA17E9604F657386F03F59A79A18FF94BCAF642338EA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/baseline-il.json",
+      "bytes": 398,
+      "sha256": "85BF947A45EEF66D355AC6DCCB26319FB3A4C698E3A0CB74A9E78DC3DE6C3BAA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/native/CopperIntuition.hunk",
+      "bytes": 257312,
+      "sha256": "5900735263A90AC53626E6103FD6B232329667AE03D78105BC74D88E2BC085FD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/native/intuition.json",
+      "bytes": 1308,
+      "sha256": "FB0E4D6E038EB5208012F449653E63C076666B07D0B41EF6432E9B8B06547313"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/native/provider.trx",
+      "bytes": 3070,
+      "sha256": "EFBF4AF59E82DFB9CAA18E23F272A9BE83451BA3EF77A297CDAD80942402B316"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/provider-il.json",
+      "bytes": 575,
+      "sha256": "C12F35FAED43AF411D262834ACFA9425482DFFE6FF2FB8077A7118D587DA8400"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/qualification.json",
+      "bytes": 1811,
+      "sha256": "E6D96654E079A7FED46C1BE05ED1520656134EF96EA66E6E87E1B6A5297C1437"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/provider-v2/source-inputs.json",
+      "bytes": 2428,
+      "sha256": "FB9DC94C59A220E71EF5501F57868F4D3F458B6A4E246A17D09CC9924A64A934"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/app/Home.csproj",
+      "bytes": 641,
+      "sha256": "6D2EA6CE996FF5D5083C233C8BFBC23A68596D1EBADCC6186ED686863273F59D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/build.log",
+      "bytes": 652,
+      "sha256": "D3F1A8CDDEE0503F17E71316B58B0FF10FF56368282B02A2A6164EA7972C3592"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperDisk.dll",
+      "bytes": 105472,
+      "sha256": "C4C4F47C41748806331A19B0A4630B10B9AADDE989A4D24F58BAA9DCE5D6D832"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperFloat.dll",
+      "bytes": 28672,
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288768,
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperOS.Desktop.dll",
+      "bytes": 34304,
+      "sha256": "B8E0AF7A146673F689F2E921CE893C6A63C7780C9F6D16CF94286FCD194FD47C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperOS.Shell.Dos.dll",
+      "bytes": 191488,
+      "sha256": "7B69708D0CEA0E3470D437336582F41314D96532E5D7622097E7A0D010E5A6F4"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperSharp.Compiler.dll",
+      "bytes": 2739200,
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperSharp.Runtime.AmigaPal.dll",
+      "bytes": 23552,
+      "sha256": "EF964C0884C261002A22A4754E64DBC7627859A4EEDD5CBF7EC91E5A2D061720"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperSharp.Runtime.Managed.dll",
+      "bytes": 98304,
+      "sha256": "F6E7A15CE4A808484FA9C93EDD4A70E612C32B9F6D0357BBF8C36C6CC7FA7D0D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperSharp.Sdk.Amiga.Support.dll",
+      "bytes": 155648,
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperSharp.Sdk.Amiga.dll",
+      "bytes": 548864,
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperSharp.Targets.Amiga.dll",
+      "bytes": 42496,
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart-System.dll",
+      "bytes": 40448,
+      "sha256": "E4B37360768071F9EC75F3226F0C7B5264A2501024AF002EFB8C63397772A6CD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.DesktopProviders.dll",
+      "bytes": 63488,
+      "sha256": "1090F3A3BAC546648CC012984E2F60B2EE25695230600A7184FF673723785CF8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Devices.dll",
+      "bytes": 100352,
+      "sha256": "BF8717BED0CC18898E4974A0E012C2F1A490CA3BDE6679180B3C4197D59DA1CB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Dos.dll",
+      "bytes": 762880,
+      "sha256": "B0A34EF0B438BD3C5A79D29719E93C016B1E200794087D5055DFC8F7EB48BFC5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Exec.dll",
+      "bytes": 187904,
+      "sha256": "56DAD5CDB11EBA0B82A96D21F4F67C0D0005D05FB46CF010B5846688CDB7D604"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Expansion.dll",
+      "bytes": 5120,
+      "sha256": "88AD9384E6E88EC028781305C78548B369F00C175D97976516EE2F9489DAE0CD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Floppy.Native.Tests.dll",
+      "bytes": 591872,
+      "sha256": "BE627460400CB8C18FD1908DCDE2FD323E4122F59682A45F551D252330E2D6E8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Graphics.dll",
+      "bytes": 2401792,
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Icon.dll",
+      "bytes": 7168,
+      "sha256": "1C0645E66F23E33979E8A3D20A612CD4DBD23DC747A40719079A8310C3E3295A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Intuition.dll",
+      "bytes": 512512,
+      "sha256": "343DC2BD3B3152CF624D082A6E71BA5A130C4EE7952AD91633BC8A7C1704AB4B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Layers.dll",
+      "bytes": 349184,
+      "sha256": "92A2E69B88E75CF6D7BD7E746D6CA1F021BFD3C23FD0373BC8B0B1AB2570EF84"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Runtime.dll",
+      "bytes": 5632,
+      "sha256": "EC2BC0A302F5EBA42AEFB2B792C732BBE8F70EF6485F8318E7167F24121F63AD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Shell.dll",
+      "bytes": 30208,
+      "sha256": "FFF828B848DBACEE4760CF323B2D4E857554B5477415A29FCC9A6F63C5D48B7B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Utility.dll",
+      "bytes": 16896,
+      "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/inputs/CopperStart.Workbench.dll",
+      "bytes": 4608,
+      "sha256": "2E0CE2A62039CFC3FC41E9621B9E560B702C024FCFFCCC135CFD87F82414DFF7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/CopperHome.hunk",
+      "bytes": 26416,
+      "sha256": "615EA4DF29877151412A6300457523DE12BE9EA78E1540C93A353DF021CADAAB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/Desktop.hunk",
+      "bytes": 652,
+      "sha256": "3B466FB672444DEA4D9A288C8B05177B287C5487E7DE29887FB2F34B33EBB110"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/Desktop.map",
+      "bytes": 110339,
+      "sha256": "896EF90398A7C491123BA1D1E8EE23D2768A7CE59916B9408F87C9A07F6583CF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/HomeProbe.hunk",
+      "bytes": 3940,
+      "sha256": "EEA8553976919180765CDA8C7EC94606EE47DACF2E9F862CC0A6DA8C16E4F197"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-case-events.json",
+      "bytes": 162,
+      "sha256": "50F3B6C8F5442780F4617C66E565FF20D8F298804CAACDB16F350ECEF8A29C9F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-case.png",
+      "bytes": 12740,
+      "sha256": "349791A103F32335A0FEE4527C69EF406AD402EBCA9AB946A62067C9C4B5DCFD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-close-cancel-events.json",
+      "bytes": 1441,
+      "sha256": "A7ECEFCEADA793F59AC9990E8BB66D128E79955A8BF4A5BD089FF8ADC0BF3BEF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-close-cancel.png",
+      "bytes": 13419,
+      "sha256": "E0AF8FF21BC768B9041810E991751E0E46576DE894E446ED173A092F79EF51C8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-close-prompt-events.json",
+      "bytes": 1400,
+      "sha256": "D7D0AB49578EADD4CC67495355901E29E21639BBF6C332D83DC6BAD950A90BD5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-close-prompt.png",
+      "bytes": 12180,
+      "sha256": "C43E09544FD45875070AD6C392E543E92E73FD6BB394D3CEA2521D791FA8A9DE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-backspace-events.json",
+      "bytes": 6238,
+      "sha256": "3CA399D2E0F8864F4C2703026466118A68B9B15BD348E94DB85FC1A91D2DCE7F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-backspace.png",
+      "bytes": 13034,
+      "sha256": "445AB4384E565549E77295DB12960A644CA058858F42F21A711C5EF8E491010C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-delete-events.json",
+      "bytes": 6358,
+      "sha256": "9364A6F9831D5307116B421DAFDA451C99DA137F3965E2AE1BF8A339BAD21FE8"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-delete.png",
+      "bytes": 13156,
+      "sha256": "F44694D4E6CAC78AB2AB089B1D960BB737594BF620E8BCF7127DCBE753CE3D1B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-insert-events.json",
+      "bytes": 6198,
+      "sha256": "EA627CCBB31A7FAE0B3082C6F49556CD15F56ABCEA768A47640FF928EE90AA35"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-insert.png",
+      "bytes": 13023,
+      "sha256": "F41E08704C184ACEABB9DF4CC7A49B37A2657F3C2674C395B4D7DF6164862481"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-open-events.json",
+      "bytes": 6079,
+      "sha256": "80AD82B637DECC3218BE42A075FC15E829982030B1299E02D447614EA5C834F3"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-crlf-open.png",
+      "bytes": 12976,
+      "sha256": "EB78FDA7E64A76834557EE088483649733E79ED6263A62961918517AF07FE872"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-document-home-events.json",
+      "bytes": 5273,
+      "sha256": "1E36634E131B73598FBB6E52BA0F4AE33BE2472F6487DF418B7E09C87B6199E1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-document-home.png",
+      "bytes": 14643,
+      "sha256": "D617A486B3F5E046C62D67DF372EF4CDA848C2C016EBFCDC99644DA285A2779E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-editing-events.json",
+      "bytes": 1053,
+      "sha256": "4DC7128E41F44416F2EB92F400507482235022B576BCABD6BCFDF41BB2512D0D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-editing.png",
+      "bytes": 12769,
+      "sha256": "443D8E712CE4BAEEDD7E517373F08131388BDCDE7E95975200A066CCA171BCF0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-empty-events.json",
+      "bytes": 4671,
+      "sha256": "B366BBA3B44CB7BB13B11078CF16690C1C9978FA2DF0007ADCAC5972679FE16E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-empty.png",
+      "bytes": 12542,
+      "sha256": "015AEB40B8B5588582CE85AD1BF4B786B5F686A989B040E04890BEC59D09EF9D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-expose-refresh-events.json",
+      "bytes": 735,
+      "sha256": "F4D9935B8D736C56E13440B1180DC90EF8F0C04EB36B60351F55365D0353D7A1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-expose-refresh.png",
+      "bytes": 12739,
+      "sha256": "97788B9FC9A8A26E9C798A1D3377122B7E09BEB49B2937A91D01EF0C62F40BA9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-first-open-rollback-16936.png",
+      "bytes": 14374,
+      "sha256": "F5033584557838A9BC86194AC4117E17B8CA20DD81B78E40C3682EAE3FE3EF7E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-first-open-rollback-2816.png",
+      "bytes": 14374,
+      "sha256": "F5033584557838A9BC86194AC4117E17B8CA20DD81B78E40C3682EAE3FE3EF7E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-font.bin",
+      "bytes": 2816,
+      "sha256": "69E79772DF7AD3651B671D0342205391C62DF88FB3B367A6D99AD5FD7C60DCE2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-full-delete-insert-events.json",
+      "bytes": 4954,
+      "sha256": "45699E501F6636254C6E562AB796443A5E449B9C6ABBBD670CF78382782F3511"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-full-delete-insert.png",
+      "bytes": 13467,
+      "sha256": "551347BB3BF8FCCE29BDDB853F56DFEE9C141357BA182231A50EDD9F76CBF1E9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-full-events.json",
+      "bytes": 4791,
+      "sha256": "567931B59D39B6A330E2F6161A1AD8EE0FE7D9798796181B315BAE796FBE39FE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-full-refusal-events.json",
+      "bytes": 4833,
+      "sha256": "1D6D9CF808D07E156BDC86D8B0898102173E06D1E89F3C14F39527C48453D79C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-full-refusal.png",
+      "bytes": 13899,
+      "sha256": "E764C4954B121699492814852492D621015D192FB64C7E7E1D1BBBFA5EF0C6D4"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-full.png",
+      "bytes": 13367,
+      "sha256": "D3E0C4162EFB01072707DEC5EA5C9566D1413F393F66CE79C5C498BD0461A9C9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-horizontal-scroll-events.json",
+      "bytes": 5807,
+      "sha256": "47AD913CBF007FEBBC0768CE406B107D1E3B8B68C6C9CBEEC00756441BF7F066"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-horizontal-scroll.png",
+      "bytes": 13251,
+      "sha256": "42F80A794D8B92C53B09BBCAD379484A3F272F2C0C009199B9EC59C0E9C80B78"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-irq-queue-recovery-events.json",
+      "bytes": 625,
+      "sha256": "D575BC7688EDC7019DB8047474451FC95E7F900F51985D16668D47ECC0D1D670"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-irq-queue-recovery.png",
+      "bytes": 12739,
+      "sha256": "97788B9FC9A8A26E9C798A1D3377122B7E09BEB49B2937A91D01EF0C62F40BA9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-line-home-events.json",
+      "bytes": 1131,
+      "sha256": "7496498DB8C702B2B601EE4D322C0137A6D38DAE6D6F53FB0D072B4CF8385B14"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-line-home.png",
+      "bytes": 12711,
+      "sha256": "85F8081FD451D1111FE7C59E20F1C39E136A6B9DF9171C8961B6F98685E47921"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-lines-events.json",
+      "bytes": 5116,
+      "sha256": "9629E97EFF603D013F1B0EA051940634C512F7C5BA26128708281D5D352D7DDB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-lines.png",
+      "bytes": 14643,
+      "sha256": "D617A486B3F5E046C62D67DF372EF4CDA848C2C016EBFCDC99644DA285A2779E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-mouse-caret-events.json",
+      "bytes": 5883,
+      "sha256": "9517BBED2D6AF8E19B63DB2D6FA77A9086AC62BF60D3F044BB5C517DE0E22518"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-mouse-caret.png",
+      "bytes": 13248,
+      "sha256": "92622CD6398B758BF8309E7C67B54A91065A24387CBE8CCF5BE2536260236F0F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-cancel-events.json",
+      "bytes": 7188,
+      "sha256": "1307F898A5B2673B826F32F00B4698C4CA6543C3C7F2205A33B18E9F602950BA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-cancel.png",
+      "bytes": 13153,
+      "sha256": "ECB3232836DEF7B5F2C7CC9106061C04833C278A25803739C77ABF49B9A9BB16"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-dirty-events.json",
+      "bytes": 7471,
+      "sha256": "AFEFD1AC7308736E4B42AD20A869CBD3F424C13176F6852ABA96906CC8D08B6D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-dirty.png",
+      "bytes": 12682,
+      "sha256": "FF7E9CCFAB16699374E5DDAA27E23F43A52E87AEDFF9FAA4E920E7883BDDB16F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-discard-events.json",
+      "bytes": 7430,
+      "sha256": "8DB2BD5E64ECA378E74C155F39C413F6C1299BD6B0FDB1FCECD82E4007B5D529"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-discard.png",
+      "bytes": 12570,
+      "sha256": "C11CB2687C06473416E42A6129FEF27E32C2BE8135A241A41CB1DAA9CC50D52C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-events.json",
+      "bytes": 166,
+      "sha256": "9A70FFCD4525CE70E68773E18F94126D61F602E516A48C40402B2AD7A23EF6B7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-rollback-events.json",
+      "bytes": 7309,
+      "sha256": "D5D07883DC9CCC710C775B7FFD2C3FAB78CD23C25E3E0F7048845E67A5128BA6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new-rollback.png",
+      "bytes": 13470,
+      "sha256": "5E2BF5B391EA0E3767E43C82B3282BAFFDF73C38A97D98C17836BD0717FE714E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-new.png",
+      "bytes": 12576,
+      "sha256": "4318A6FA812E509B99DF708B523246BBE9D746D1D6D9009E01AF2E87ADEA23E1"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-mixed-events.json",
+      "bytes": 2209,
+      "sha256": "E6BF64B6D2C01076A5C4DA4C100FE2A9BC3C919C3D362B5A6C78697965A28E82"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-mixed.png",
+      "bytes": 12998,
+      "sha256": "19EA5560AD036787D743F81FEB97C2189692911FA30F5E8D34DF8EF7B440B077"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-rollback-Binary-0.png",
+      "bytes": 14447,
+      "sha256": "FB9CEF593F481431C68A3EEDE72460BA5931129ADEBFB40C39E21FCB14A6FBB4"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-rollback-Full--42.png",
+      "bytes": 14397,
+      "sha256": "F84783CC9195065D2D34E3744E50C26190D83178548B40468157B67FF9F8D7F6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-rollback-Mixed--30.png",
+      "bytes": 14397,
+      "sha256": "F84783CC9195065D2D34E3744E50C26190D83178548B40468157B67FF9F8D7F6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-rollback-Mixed--36.png",
+      "bytes": 14397,
+      "sha256": "F84783CC9195065D2D34E3744E50C26190D83178548B40468157B67FF9F8D7F6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-rollback-Mixed--96.png",
+      "bytes": 14397,
+      "sha256": "F84783CC9195065D2D34E3744E50C26190D83178548B40468157B67FF9F8D7F6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-open-rollback-Over-0.png",
+      "bytes": 14422,
+      "sha256": "062B49C9E53DC4BBBD60C2E41567C6B10867D0DD082E3D0635DE6819C0DFDDCF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-preferred-column-events.json",
+      "bytes": 1285,
+      "sha256": "117074853751742099F02510534E861E99BA1E511667753D4FB12F0598DB3CFB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-preferred-column.png",
+      "bytes": 12769,
+      "sha256": "443D8E712CE4BAEEDD7E517373F08131388BDCDE7E95975200A066CCA171BCF0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-queued-control-events.json",
+      "bytes": 473,
+      "sha256": "C19E26558BE650ACC67C1B0BE5F4C9806B7DC2ADE7F9BC06095714CEC8E87472"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-queued-control.png",
+      "bytes": 12697,
+      "sha256": "AA2BD6D1377E96907771249646D808578900E94C5384FC872A7CC4184AC32935"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-queued-shift-events.json",
+      "bytes": 279,
+      "sha256": "4FF5E4EEA41B9FD7A2D87D4277B09DBA71B98B9E8D9674AC704B6471CF9EC444"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-queued-shift.png",
+      "bytes": 12735,
+      "sha256": "EAE34972B7AB771602DA8162463A08E3B4C1060FFDCE00F206DD8D892F182103"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-retained-document-events.json",
+      "bytes": 6949,
+      "sha256": "3B3A11F5D0F6048FFFA403EF5DF3C0E264DEAD88438764EDC6B696F2C238FD4A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-retained-document.png",
+      "bytes": 13153,
+      "sha256": "ECB3232836DEF7B5F2C7CC9106061C04833C278A25803739C77ABF49B9A9BB16"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-save-pending-events.json",
+      "bytes": 1364,
+      "sha256": "0EB245EB11B37A79A3276EFA828593A419E1E0D3CFA1FC6007CD3718FCFBE690"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-save-pending.png",
+      "bytes": 13398,
+      "sha256": "F860C8C81C944A76F38BC2C8229037358706619D8C1513AFF62044596DADF691"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-short-reads-events.json",
+      "bytes": 4551,
+      "sha256": "8930DA08B7D920C9F48EC5C6B2C4297FB0CF4C11E9E1283571384D03F800D142"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-short-reads.png",
+      "bytes": 12998,
+      "sha256": "19EA5560AD036787D743F81FEB97C2189692911FA30F5E8D34DF8EF7B440B077"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-up-short-line-events.json",
+      "bytes": 1247,
+      "sha256": "B211C7BB983CC1FBF1C99F8A4C86EF688506E9B1B5D8C5DBCD35C0CE9CC5241A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-up-short-line.png",
+      "bytes": 12750,
+      "sha256": "27EC8BAAEF666469C903D6E60B33431E81EE42D95E3F5D98578BF9C5A0C83394"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-vertical-scroll-events.json",
+      "bytes": 5194,
+      "sha256": "F482E0D3D4D1F7BB0718FAB192A23421470DD9284E9C9CD9F06454FDE2D5CE7B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor-vertical-scroll.png",
+      "bytes": 15287,
+      "sha256": "042104CE0F1345F28284D0C807DD9BD40D4A83E71A16A8368EF5542B43D37409"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor.json",
+      "bytes": 18092,
+      "sha256": "DE36163E477418D340C98B9E9729D041DEB3249E3FDC90D83D6E8DD26DD60E8C"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/editor.trx",
+      "bytes": 9204,
+      "sha256": "E43039D043A17AA0EC678452DBCFF92F8C7500010B663ED309DE350D75391B9E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-0-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-0-first-open-rollback-home.png",
+      "bytes": 16047,
+      "sha256": "F467F572BEA9801A70A5746E4DE42362EC05AC7EB1B623C3305D92CA5084A753"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-0-home.png",
+      "bytes": 16047,
+      "sha256": "F467F572BEA9801A70A5746E4DE42362EC05AC7EB1B623C3305D92CA5084A753"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-1-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-1-editor-startup-rollback.png",
+      "bytes": 16495,
+      "sha256": "1974E8AB4C7CE26437E792E410A8843ECE4A4A37410C3B39991DCE6B8B2FB805"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-1-home.png",
+      "bytes": 16047,
+      "sha256": "F467F572BEA9801A70A5746E4DE42362EC05AC7EB1B623C3305D92CA5084A753"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-10-console.png",
+      "bytes": 15173,
+      "sha256": "B84C37410B1E0DE200C9EAADF137A48B3D84110098B14DEA110C843D0366FDDF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-2-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-2-home.png",
+      "bytes": 16047,
+      "sha256": "F467F572BEA9801A70A5746E4DE42362EC05AC7EB1B623C3305D92CA5084A753"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-3-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-3-home.png",
+      "bytes": 16047,
+      "sha256": "F467F572BEA9801A70A5746E4DE42362EC05AC7EB1B623C3305D92CA5084A753"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-4-console.png",
+      "bytes": 9515,
+      "sha256": "5508251D136947C4E65FD7964940D83EBBEE5DA0D3762D0405F7C685A3C056BE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-5-console.png",
+      "bytes": 10458,
+      "sha256": "986DA2EB98A87B9EA7751727048BBC87F31724D52FACB9ABBF2CD2CDFB9C0AFD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-6-console.png",
+      "bytes": 11401,
+      "sha256": "B37AA04917EBE3626C141B42415AA8197086038E8A1857A22F00CCA869A81DCD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-7-console.png",
+      "bytes": 12344,
+      "sha256": "40DB4B7259C7EEBE3FD914D66A446581EEE24173676E12C651F013C0F6E0BDAE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-8-console.png",
+      "bytes": 13287,
+      "sha256": "991B1AC4C0A4CC9340671F73486968DBF723B159A9C8EBA19BE0046106B0B9A5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-9-console.png",
+      "bytes": 14230,
+      "sha256": "3CE0F5EA14853E502BA3D93C1B8AA4DE109F425C0D601118D32AD61D0082F33B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-missing-console.png",
+      "bytes": 11401,
+      "sha256": "B37AA04917EBE3626C141B42415AA8197086038E8A1857A22F00CCA869A81DCD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/native/home-missing.json",
+      "bytes": 307,
+      "sha256": "22B05DE6A809F7A620EDF7B2B28B2D57512FCD179503AF369C3D6253A127EF4D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/qualification.json",
+      "bytes": 19793,
+      "sha256": "30E02830FC28C896654419B010B333438C2EEEFEE4FC5FA3C4E410783676EC9E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/runtime/CopperOS.Desktop.dll",
+      "bytes": 34304,
+      "sha256": "3C5200CBB7E4704E624B2C2FC42D1B647582A74BC056B2471F058E3D8E933C0E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/runtime/CopperStart.Floppy.Native.Tests.dll",
+      "bytes": 637952,
+      "sha256": "6338D8FC8C2453D79FDB50884D62544468F6F2B7C6CD7A67DE9B8A5E49EB94C2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/source-inputs.json",
+      "bytes": 9185,
+      "sha256": "08362DF752D23554543C699C323FBB73B20538433845E75155929B15435415AD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/source/Replay.csproj",
+      "bytes": 5401,
+      "sha256": "C0E506FF48BEBE5C82CB7B647026353329A4663357F8CB3A6CCBADF5EE14CBBC"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-editor-20261019/qualified-v11/tests.log",
+      "bytes": 390,
+      "sha256": "AFE9C9F1EAF8D8230160FBE64FDB0DC4C7DDB5CF5DC33895486FE76759200D2B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-exporter/Exporter.csproj",
+      "bytes": 211,
+      "sha256": "38E201F047792DF530DB8C7D157C2B6B19D1ED2E4134DBA5DA5C59E97D3B0DA2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-exporter/Program.cs",
+      "bytes": 621,
+      "sha256": "5A369755903DEEBDFDB8EC9DB662C98849BC67BCA0B528641753E47CE42446B9"
+    }
+  ],
+  "sourceScope": "Desktop and replay sources match their snapshots. The ROM audit isolates the console overlay; the provider audit isolates two methods from its frozen baseline. The provider build verifies those modifier blocks against the live development file, which contains other development outside this profile.",
+  "remaining": [
+    "Safe Save/Save As with source-change/collision decisions",
+    "Recoverable temporary/backup replacement on actual writable DOS media under short writes, close/rename failure, full/read-only disks and interruption",
+    "Files reload and byte-exact reopen plus host persistence",
+    "Directory/startup/paint latency, memory high-water/largest blocks and sustained/100-cycle stress",
+    "Child launch/return, shipping HDF admission and workspace/update persistence"
+  ]
+}

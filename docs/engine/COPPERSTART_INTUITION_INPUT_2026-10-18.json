@@ -1,0 +1,1483 @@
+{
+  "machine": {
+    "drives": 1,
+    "chipBytes": 524288,
+    "chipset": "PAL OCS A500",
+    "cpu": "MC68000",
+    "slowBytes": 524288,
+    "fastBytes": 0
+  },
+  "managedInputs": {
+    "file": "qualified-v6/managed-inputs.json",
+    "sha256": "0E2662A648448945B849D8FCF406F43795699CDD13F1EBFD86B88F5E1567B13B"
+  },
+  "payload": {
+    "bytes": 250580,
+    "manifest": {
+      "file": "qualified-v6/intuition/intuition.json",
+      "sha256": "46AA455D0B09BD507EC2C51F6689A2FF49EB57A7FCB3FAB24BFA66849DC791F5"
+    },
+    "retainedUntilReset": true,
+    "entry": 0,
+    "inputEntry": 241910,
+    "image": {
+      "file": "qualified-v6/intuition/CopperIntuition.hunk",
+      "sha256": "A507DA057498A501BBC358F248031DE8A9801A594DF1C51B886744B422F50BF0"
+    },
+    "compilerInputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "0DBFBC36D275397AB86283CD5012F95C641511EF47D1B67DA63F79D1B85B1F7C"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "B396B505EAAE9C2E1BEAF8EFD93DB17FF7DEBA9EB970D901EB6C774B62B7BF63"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ],
+    "codeBytes": 242766
+  },
+  "tests": {
+    "actualFreestandingCompilations": 2,
+    "nativeRomMediaJourneys": 9,
+    "earlier344CheckLayersSuiteRerun": false,
+    "screenLifetimes": 27,
+    "skipped": 0,
+    "checkedPngs": 225,
+    "passed": 11,
+    "selected": 11
+  },
+  "inputReceipts": [
+    {
+      "graphicsPins": 0,
+      "done": 1229541195,
+      "frames": 14150,
+      "afterInputFree": 480184,
+      "file": {
+        "file": "qualified-v6/intuition/intuition-input-320.json",
+        "sha256": "F1048579EB188C35555C4396D78C2E91A28564FBFCE81AA73967C90A76B50598"
+      },
+      "beforeInputFree": 480184,
+      "captures": 18,
+      "counters": {
+        "repeat": 12,
+        "flagToggles": 6,
+        "inactive": 3,
+        "active": 9,
+        "buttonUp": 12,
+        "rawUp": 48,
+        "rawDown": 60,
+        "close": 6,
+        "buttonDown": 12
+      },
+      "afterScreenFree": 445160,
+      "beforeScreenFree": 445160,
+      "layersPins": 0,
+      "width": 320,
+      "utilityPins": 0,
+      "traceMessages": 207
+    },
+    {
+      "graphicsPins": 0,
+      "done": 1229541195,
+      "frames": 14261,
+      "afterInputFree": 480184,
+      "file": {
+        "file": "qualified-v6/intuition/intuition-input-640.json",
+        "sha256": "3A8F968D5E2039A4E5F826823C9B53D48362704D7AF232B1BFFA793B96EED8DB"
+      },
+      "beforeInputFree": 480184,
+      "captures": 18,
+      "counters": {
+        "repeat": 15,
+        "flagToggles": 6,
+        "inactive": 3,
+        "active": 9,
+        "buttonUp": 15,
+        "rawUp": 48,
+        "rawDown": 63,
+        "close": 6,
+        "buttonDown": 15
+      },
+      "afterScreenFree": 445160,
+      "beforeScreenFree": 445160,
+      "layersPins": 0,
+      "width": 640,
+      "utilityPins": 0,
+      "traceMessages": 211
+    }
+  ],
+  "limits": {
+    "rawRingEntries": 64,
+    "spriteChipBytes": 72,
+    "completeDesktopPeakBudgetQualified": false,
+    "measuredInputInstallationBytes": 35024,
+    "defaultRepeatBacklog": 3,
+    "defaultMouseBacklog": 5,
+    "contextBytes": 2048,
+    "mouseRingEntries": 32,
+    "notificationSlots": 16
+  },
+  "source": {
+    "files": 64,
+    "inputs": [
+      {
+        "file": "build\\Build-DesktopProviderReplayTests.ps1",
+        "sha256": "37E6B4F9EE95C6497D81AAFB21D34C12E39D277670ABD14694FECA34E135733D"
+      },
+      {
+        "file": "build\\Test-CompactDesktopGraphics.ps1",
+        "sha256": "5BD34F2C0B7736A0082C0901D9E112A6A23CD84A89E84A829C0E77F9CD9D538F"
+      },
+      {
+        "file": "build\\Test-NativeIntuitionStartup.ps1",
+        "sha256": "DB65A589D3EDB04139B4A6127177B19897A94EAE6EE784CDA23338AE0B85CB60"
+      },
+      {
+        "file": "provider\\NativeConsoleLibrary.cs",
+        "sha256": "C5F6694559FEB98476EC96B79BC261D3C8B2119D16FE67FB650A1986CC131704"
+      },
+      {
+        "file": "provider\\NativeCopperBenchClock.cs",
+        "sha256": "151766A27BA5FD2408FD2D2DA7490296DC6C3BBBF3A10AEA16FF85414BD1052C"
+      },
+      {
+        "file": "provider\\NativeCopperBenchDrawing.cs",
+        "sha256": "AB62684E874D9CAE141A750F1254BC1092DF26F32675675F830146E3C1F9A2E2"
+      },
+      {
+        "file": "provider\\NativeCopperBenchStatus.cs",
+        "sha256": "D6FA79101BDA11C54AD289818414EB30D61391FADF291AE59649E205466C6180"
+      },
+      {
+        "file": "provider\\NativeDesktopImage.cs",
+        "sha256": "D36EB1284E7F62A666B99C133654519E133F50700FC0AFACE634BA1D5CBCE1DE"
+      },
+      {
+        "file": "provider\\NativeDesktopInput.cs",
+        "sha256": "9447662DCD7DDC6842CCE8060FC1E95037E1653561D447A182EF2B0D9BF98546"
+      },
+      {
+        "file": "provider\\NativeDesktopProviders.cs",
+        "sha256": "678564D667AB42CEFB4C3FA9A68EF788FF481E8085705D5C7FBDF257BB5A2B01"
+      },
+      {
+        "file": "provider\\NativeDesktopVectors.cs",
+        "sha256": "B4C597952E7D64FBA79DBC47E03B05BA8DEA4F8BC4220318E381A00D224B71FB"
+      },
+      {
+        "file": "provider\\NativeIntuitionInput.cs",
+        "sha256": "17D2091CE32DA1B06FB0981A72E99FAFB9FB9E0117C2C2478BBC5546E9193B38"
+      },
+      {
+        "file": "provider\\NativeIntuitionLibrary.cs",
+        "sha256": "57223380097A0A0FDDEB6E7A310FFAA4FE6BCF80D506B453632EB26021FDF4C2"
+      },
+      {
+        "file": "provider\\NativeIntuitionMessages.cs",
+        "sha256": "F29C1687C027189CEB3FFBB0B1319CDD4057EB9E22C5049223130ABE24EE6746"
+      },
+      {
+        "file": "provider\\NativeIntuitionPreferences.cs",
+        "sha256": "A83B4C51E786C7A75053FD9A21E1B438DC29A74F3159221F2F22E77649F8848F"
+      },
+      {
+        "file": "provider\\NativeIntuitionRefresh.cs",
+        "sha256": "276D211683AE4B3222F9B2A3404B17E911D604723056F795C36A0BA2346A7DEA"
+      },
+      {
+        "file": "provider\\NativeSystemLibraries.cs",
+        "sha256": "DBBBEAA8FDE2A5666EEEA9EB98D1C7494D3B2A87C4E907C6CD4A17BD1FC6CD80"
+      },
+      {
+        "file": "provider\\NativeUtilityLibrary.cs",
+        "sha256": "325DE11B76009633EE43A619952EB1F85D46E291259FCDD1BBFF05ED24A04202"
+      },
+      {
+        "file": "provider\\NativeWorkbenchLibrary.cs",
+        "sha256": "7C465E214D88176BB4D782EA9CFD701BCBD195F27B8BCE3456ED60FA06FA278C"
+      },
+      {
+        "file": "provider\\Provider.csproj",
+        "sha256": "435A22A85F8FFD69E8C8727124B504E444FD4FC3142275BDFC85319910943A04"
+      },
+      {
+        "file": "replay\\AmigaDiskFileSystemTests.cs",
+        "sha256": "AC5CC010BFC94963B71991DD9D2B4CE65D2E3A0F140B28E15DAA29278167EAAB"
+      },
+      {
+        "file": "replay\\BootScriptTests.cs",
+        "sha256": "23DFB8E3C70EEF90689A03FFB25901E6260E109503652D6FB9375F798164F269"
+      },
+      {
+        "file": "replay\\CompactBitmapInstructionTests.cs",
+        "sha256": "A9962E853E0B72915DC07462FD52240EAF002E45682B53E908B7D50B9696A079"
+      },
+      {
+        "file": "replay\\CompactDisplayInstructionTests.cs",
+        "sha256": "1DE9C1FC02CE5640E6DE19FFA01E026A6CCCEFB371FDF2CD7BB78ED974C19353"
+      },
+      {
+        "file": "replay\\CompactGraphicsInstructionTests.cs",
+        "sha256": "EA35F93BC75C75B59313793E1C6AA933ECF00C9F6C2C013C2A1747A5AAC1E514"
+      },
+      {
+        "file": "replay\\CompactLayerInstructionTests.cs",
+        "sha256": "C15BD4A58B6A1FF6AB1E085AE177626A714A8EC695224C1C386780FAA4947310"
+      },
+      {
+        "file": "replay\\CompactLayerProviderInstructionTests.cs",
+        "sha256": "26E802DCC547EECDF10B497E8FF83BA1CB806A7C4B07E6403EB2FD83B372213F"
+      },
+      {
+        "file": "replay\\CompactLayerTextInstructionTests.cs",
+        "sha256": "25DE77FC8278D728D55B5A15016BB7C680CDA8AFA93DB1888D12FCB0B7D3E27E"
+      },
+      {
+        "file": "replay\\CompactUtilityProviderInstructionTests.cs",
+        "sha256": "B444472780FDDD2484444E95A54589B39AC666B6677EAB8A1667308A6805A6C2"
+      },
+      {
+        "file": "replay\\DosDiskImage.cs",
+        "sha256": "13A52138603AA353B27828DAE45181862E318E16DD51FD7D731E3E2DE483B5B6"
+      },
+      {
+        "file": "replay\\NativeBootConsoleTests.cs",
+        "sha256": "7993B397690DF6707C61478BD0FB27255E2617AD1B900315AB81663899FB3931"
+      },
+      {
+        "file": "replay\\NativeBootImage.cs",
+        "sha256": "C50921872B3F32FAA77D1C2B7677503A3397EFAA81598449DC21A34C4D196434"
+      },
+      {
+        "file": "replay\\NativeBootScriptTests.cs",
+        "sha256": "14B1DB33A44FB59E3244D26AE8D75E3086FDD09A2816DF07017AC1917B8D426C"
+      },
+      {
+        "file": "replay\\NativeCacheBootTests.cs",
+        "sha256": "37D2B0579EFC2F519FCE6B6CAAF9C27961F2B4CDE467604F31572378D92E188D"
+      },
+      {
+        "file": "replay\\NativeCliModuleBootTests.cs",
+        "sha256": "3911945EC67070B492E9A7A589A5071B90628E363377A1AC04CAFBA762E98E53"
+      },
+      {
+        "file": "replay\\NativeCurrentDirectoryBootTests.cs",
+        "sha256": "33007B7BCFDBE4E483B729C7040CD24E97FB14AFB6C1E3887C5D54A684C53742"
+      },
+      {
+        "file": "replay\\NativeDesktopDisplayTests.cs",
+        "sha256": "38F2E87502D33140C1E95C0B74F8036CC05A126AF7F3F564213C5BBAFCE7DD96"
+      },
+      {
+        "file": "replay\\NativeDesktopPrerequisiteTests.cs",
+        "sha256": "C2DE3BDC57DBB3766EF25A0957C87A4D0C2B47DFBBC0D51EC4216883D4DC0F8C"
+      },
+      {
+        "file": "replay\\NativeDesktopProviderStartupTests.cs",
+        "sha256": "85704DC69BEF3E9109A8E81CE3C9B8F243D85550162644DD5B226434EA60858E"
+      },
+      {
+        "file": "replay\\NativeDiskBootTests.cs",
+        "sha256": "0FA8F60C4B7F937B340F786276D5FC8B53F6613B91868B912B8D4002AECF3465"
+      },
+      {
+        "file": "replay\\NativeDiskLibraryBootTests.cs",
+        "sha256": "1B48C0908A059870C83A7B461C29B2FFC9FE55C6F9BD79BC41DAEA5B451AB25E"
+      },
+      {
+        "file": "replay\\NativeDosBootTests.cs",
+        "sha256": "0306C5F771CC7123E78B071C6DCE6FDB106CA6317EC327485D352ED2070C9740"
+      },
+      {
+        "file": "replay\\NativeDosErrorBootTests.cs",
+        "sha256": "F3F75EE5388DC378DAFC3174E36BC1EE79BDF4095E635FC976E950AA0EFAE900"
+      },
+      {
+        "file": "replay\\NativeExecInterruptBootTests.cs",
+        "sha256": "1338482F34D62AADB40125F1460EA56D05319071C0216FB683A75B1F64CEAF66"
+      },
+      {
+        "file": "replay\\NativeFfsWriteBootTests.cs",
+        "sha256": "48463FFB261F7956F4277FE300C0C9770A1A0B53C73973791ADF0DCD11F75D63"
+      },
+      {
+        "file": "replay\\NativeFileMetadataBootTests.cs",
+        "sha256": "E7284E4AE85FF12320C7ED5ECA1F6DC40B9C88B3689AAF06C0EE20AB0EF48C1D"
+      },
+      {
+        "file": "replay\\NativeFloppyRomTests.cs",
+        "sha256": "DA887D3620FBDD3A85ACF96A4DCC4A9E272C23FA8AFFEF7DBFC51654D11F2DFF"
+      },
+      {
+        "file": "replay\\NativeFullShellBootTests.cs",
+        "sha256": "DE47D308C54FD1E6D70E9C20BAA8E8AA37482AB251E91F70A6DA84D9D94A89DC"
+      },
+      {
+        "file": "replay\\NativeGraphicsBootTests.cs",
+        "sha256": "DDDE568D3B1F5B88B5084EE2D4A0091B137CF0F5C7E0A1786B1F44FB5770BD2B"
+      },
+      {
+        "file": "replay\\NativeIntuitionInputProbe.cs",
+        "sha256": "A7435DE53704D900C9E3956CE5316A6213CDAF9B44927FAC9D577A69F018C6AB"
+      },
+      {
+        "file": "replay\\NativeIntuitionInputTests.cs",
+        "sha256": "E636F00BFD2FBD449CF6CFBB808FB4CC0A802D1DFAF848366CA3D84439ACB2E9"
+      },
+      {
+        "file": "replay\\NativeIntuitionMessageTests.cs",
+        "sha256": "AA2101414991208B2C57037E6DE6FE9312E1B40E054487458C6751C8E8D75015"
+      },
+      {
+        "file": "replay\\NativeIntuitionRefreshTests.cs",
+        "sha256": "877DCDE4971305402AA9497AB235336CE8B8C43F60AC935860B273CF767E77F0"
+      },
+      {
+        "file": "replay\\NativeIntuitionStartupTests.cs",
+        "sha256": "2D591852ECCD110A8D22EF8BCE3709BC4DE4FD41179A33A8F5F742F3F6A947F1"
+      },
+      {
+        "file": "replay\\NativeMorphOsResidentBootTests.cs",
+        "sha256": "27D997944B6D26F7685496E142F58D40EBEC045A7C54DC0D88266B24EF8179E8"
+      },
+      {
+        "file": "replay\\NativeOwnedLayerUpdateTests.cs",
+        "sha256": "2A24AF99428EA0F32099A47182E8EE74D159618DCC66F2645B1B6A97FF125706"
+      },
+      {
+        "file": "replay\\NativeParityBus.cs",
+        "sha256": "CCA1990CEF75D45B473EBA111FBFFC47A161E67C8A1FA1BEFFDC4F41E12DCB8B"
+      },
+      {
+        "file": "replay\\NativeReadArgsBootTests.cs",
+        "sha256": "33D0B281725C98AB8020F146F98DFA1B7A56E3A0D6453A1351C67A4447A3543B"
+      },
+      {
+        "file": "replay\\NativeResidentControlTests.cs",
+        "sha256": "1680A0D150D13C972367F397914A7DB5BDED9C0EAB91F2EB259CDBC87CA220F8"
+      },
+      {
+        "file": "replay\\NativeStartupDriverTests.cs",
+        "sha256": "43C9D988A183E808152F62E42233BFE9E6ACBB557A5C8E250960B232F241578F"
+      },
+      {
+        "file": "replay\\NativeUtilityBootTests.cs",
+        "sha256": "665DD6EDF2DFE5DE1B194010716095D879E47A851BFD6F32E2A97C1CE7B7E792"
+      },
+      {
+        "file": "replay\\NativeUtilityV40BootTests.cs",
+        "sha256": "5BF083931EA62C1CAB8CC28CD939126D6D706275F4E95AB53C62570E10F0BEA7"
+      },
+      {
+        "file": "replay\\NativeWorkbenchStartupTests.cs",
+        "sha256": "78480FDC88C35D9030244D602D2651F3A523B24F7DC652D4C2A86D0B5B19EB8B"
+      },
+      {
+        "file": "replay\\Replay.csproj",
+        "sha256": "A2C41ED843488DCAD85547B062457DCA85CD29424A8621B48A7A338AC84A596E"
+      }
+    ],
+    "scope": "Exact provider-v10/replay-v16 frozen inputs; concurrent class/palette and broader Workbench work is not admitted by this record",
+    "manifest": {
+      "file": "source-qualified-v6.json",
+      "sha256": "F55ED6F4591C1C51A3333B4CFB67F9A9758A576228B50EF95F262DAE10B951C1"
+    }
+  },
+  "remaining": [
+    "Joined refresh and input in one application event loop; existing case families run independently",
+    "Keyboard layout/text translation and VANILLAKEY/dead-key scope",
+    "Host capture/release and focus-loss release",
+    "Delivered input/shared UserPort and dynamic subscription cases",
+    "Contended refresh/topology and 100-cycle stress",
+    "CopperOS Files/Editor and safe save recovery",
+    "Shell/Demo input/display handoff",
+    "Complete loader/stack/queue peak budget and exact writable ROM/OS bundle qualification"
+  ],
+  "coverage": "Physical raw key/shift/up/repeat, held-key focus transfer, REPORTMOUSE/RMBTRAP flags, all buttons, close release/cancel, coalescing, pool/ring pressure under allocation refusal, recovery and teardown at both widths",
+  "earlierAttempts": "Retained separately. Failed and superseded attempts are not counted. qualified-v4 passed an earlier source; qualified-v6 is the final selected gate.",
+  "scope": "Bounded frozen native input correctness; no shipping ROM/OS-pair admission, broader Intuition admission or throughput result",
+  "rom": {
+    "bytes": 524288,
+    "manifest": {
+      "file": "rom-v1/disk-boot-test-manifest.json",
+      "sha256": "9D865462A39223FF93136BDC98D0A00C2348D252EDB27B0438E0815B327EEC33"
+    },
+    "footerBytes": 20,
+    "rootBytes": 465206,
+    "graphicsOffset": 491520,
+    "provenance": "Retained native-desktop-20261018/console-rom-v2 compilation; System, Devices and DOS inputs differ from the earlier ROM",
+    "contiguousTailBytes": 842,
+    "image": {
+      "file": "rom-v1/CopperStart-DiskBoot.rom",
+      "sha256": "60565368B67150BC17F42D1D9135A7942AF2260D31B9306FC0B1105F026FAEDA"
+    },
+    "producerInputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "2F7052F699DF6E882C20C94C05D434B75B9E1B36AA6FD9313905EE48D01030CB"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "BF8717BED0CC18898E4974A0E012C2F1A490CA3BDE6679180B3C4197D59DA1CB"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "B0A34EF0B438BD3C5A79D29719E93C016B1E200794087D5055DFC8F7EB48BFC5"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+      }
+    ],
+    "graphicsBytes": 31906,
+    "separateGapBytes": 26306
+  },
+  "schema": "copperstart-native-intuition-input-evidence-v1",
+  "receipts": [
+    {
+      "file": "qualified-v6/intuition/intuition-320.json",
+      "sha256": "30663F4D01EF867253CF3B55C042A77F6B5CCBDF536599DDE55A5D72D4371B19"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640.json",
+      "sha256": "4EB49BD6A348861F673400B482E048A42BBFEA76D514E06E99C067DA23C48D58"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-input-320.json",
+      "sha256": "F1048579EB188C35555C4396D78C2E91A28564FBFCE81AA73967C90A76B50598"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-input-640.json",
+      "sha256": "3A8F968D5E2039A4E5F826823C9B53D48362704D7AF232B1BFFA793B96EED8DB"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-messages-320.json",
+      "sha256": "34DE9275719EB6E382916676AA8B0DC6E61C27FBB0EFC1C7C6223A73A8CE2F18"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-messages-640.json",
+      "sha256": "11720CEDEA83AA44833A3BCF47E083D701AB3B3EF64318B1A8E19B6A07B9CE0E"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-refresh-320-False.json",
+      "sha256": "BE39BBB03FE99455A49DAFC58AAE55A1DBB2882D440BBEB5DDAC58D147D4D419"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-refresh-640-False.json",
+      "sha256": "A9F492219CCD51DA06513A517C5BC69D825742D4990430EC5FC9DF1506DC4ECD"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-refresh-640-True.json",
+      "sha256": "B7D2D7D16A1906B519007D50A2674BBFA29D58AED1B37D4D02B1866692C8FBE1"
+    }
+  ],
+  "shipping": {
+    "admitted": false,
+    "changed": false,
+    "firmwarePinSha256": "22E1001D18B97AFAFE6391F4B39A1D0859BCA5967B29688320C3E00032C588F3",
+    "firmwarePin": "CopperScreen/Firmware/CopperStart.json"
+  },
+  "trx": {
+    "file": "qualified-v6/intuition/intuition.trx",
+    "sha256": "67B9956FFB3E5E6F3303FA852915B8CE7DEC39389AF354F94F746056CF5A7E0A"
+  },
+  "probe": {
+    "compilerInputs": [
+      {
+        "file": "CopperStart.Floppy.Native.Tests.dll",
+        "sha256": "7B56D27DA96E829A1C4AE9C6300EDEFB362D322E1080E16AE5F63180038D3643"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ],
+    "image": {
+      "file": "qualified-v6/intuition/InputProbe.hunk",
+      "sha256": "54CFD3AE26CE4BD2398073560B30ECAE75669F50A0C54755767444C998DA1189"
+    },
+    "manifest": {
+      "file": "qualified-v6/intuition/input-probe.json",
+      "sha256": "38537471E104868A4394ECF223FF03EDEAF6960B55CBC516036E8FB953361363"
+    }
+  },
+  "producerArtifactRoot": "CopperStart/artifacts/intuition-input-20261018",
+  "date": "2026-10-18",
+  "captures": [
+    {
+      "file": "qualified-v6/intuition/input-320-console-after-0.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-console-after-1.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-console-after-2.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-console-before.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-0-closed.png",
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-0-focus.png",
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-0-keys.png",
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-0-pressure.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-0-ready.png",
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-0-recovered.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-1-closed.png",
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-1-focus.png",
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-1-keys.png",
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-1-pressure.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-1-ready.png",
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-1-recovered.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-2-closed.png",
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-2-focus.png",
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-2-keys.png",
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-2-pressure.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-2-ready.png",
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B"
+    },
+    {
+      "file": "qualified-v6/intuition/input-320-cycle-2-recovered.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-console-after-0.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-console-after-1.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-console-after-2.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-console-before.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-0-closed.png",
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-0-focus.png",
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-0-keys.png",
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-0-pressure.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-0-ready.png",
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-0-recovered.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-1-closed.png",
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-1-focus.png",
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-1-keys.png",
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-1-pressure.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-1-ready.png",
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-1-recovered.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-2-closed.png",
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-2-focus.png",
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-2-keys.png",
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-2-pressure.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-2-ready.png",
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A"
+    },
+    {
+      "file": "qualified-v6/intuition/input-640-cycle-2-recovered.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-console-after-1.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-console-after-2.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-console-after-3.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-console-before.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-cycle-0.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-cycle-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-320-cycle-2.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-console-after-1.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-console-after-2.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-console-after-3.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-console-before.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-cycle-0.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-cycle-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/intuition-640-cycle-2.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-10.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-2.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-3.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-4.png",
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-5.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-6.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-8.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-0-stage-9.png",
+      "sha256": "C420B69DA56B8F6547D0261F07417DEA9744AD7C31C7BC9891648A741FDE7C24"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-10.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-2.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-3.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-4.png",
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-5.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-6.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-8.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-1-stage-9.png",
+      "sha256": "C420B69DA56B8F6547D0261F07417DEA9744AD7C31C7BC9891648A741FDE7C24"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-10.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-2.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-3.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-4.png",
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-5.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-6.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-7.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-8.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-320-cycle-2-stage-9.png",
+      "sha256": "C420B69DA56B8F6547D0261F07417DEA9744AD7C31C7BC9891648A741FDE7C24"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-2.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-3.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-4.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-5.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-6.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-8.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-0-stage-9.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-2.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-3.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-4.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-5.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-6.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-8.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-1-stage-9.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-2.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-3.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-4.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-5.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-6.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-7.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-8.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/messages-640-cycle-2-stage-9.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-10.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-2.png",
+      "sha256": "A44B0510F50CF27322F902FF28591C49D6F0957411A4757139446698BC218416"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-3.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-4.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-5.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-6.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-7.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-8.png",
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-0-stage-9.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-10.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-2.png",
+      "sha256": "A44B0510F50CF27322F902FF28591C49D6F0957411A4757139446698BC218416"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-3.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-4.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-5.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-6.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-7.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-8.png",
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-1-stage-9.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-1.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-10.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-2.png",
+      "sha256": "A44B0510F50CF27322F902FF28591C49D6F0957411A4757139446698BC218416"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-3.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-4.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-5.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-6.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-7.png",
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-8.png",
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-320-False-cycle-2-stage-9.png",
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-2.png",
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-3.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-4.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-5.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-6.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-7.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-8.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-0-stage-9.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-2.png",
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-3.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-4.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-5.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-6.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-7.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-8.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-1-stage-9.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-2.png",
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-3.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-4.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-5.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-6.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-7.png",
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-8.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-False-cycle-2-stage-9.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-12.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-2.png",
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-3.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-4.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-5.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-6.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-7.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-8.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-0-stage-9.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-12.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-2.png",
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-3.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-4.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-5.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-6.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-7.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-8.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-1-stage-9.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-1.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-10.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-11.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-12.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-13.png",
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-2.png",
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-3.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-4.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-5.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-6.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-7.png",
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-8.png",
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "qualified-v6/intuition/refresh-640-True-cycle-2-stage-9.png",
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    }
+  ],
+  "productionBuild": {
+    "log": {
+      "file": "solution-build-v6.log",
+      "sha256": "FF592918003C5A7B0172B2E0ECF06AD16767719E5D2FF428CE6FB57A807DA2EC"
+    },
+    "warning": "CS8602 in shared compiler M68kSpillAndCopy.cs:74",
+    "errors": 0,
+    "scope": "Current production source, separate from the frozen native input profile",
+    "warnings": 2
+  },
+  "qualification": {
+    "file": "qualified-v6/qualification.json",
+    "sha256": "232FB26ED28823CFFC58599576ED24244D327DEBCAC9E9AC048343C77527C7C6"
+  },
+  "wakeup": "VBlank records pending work; guest-native Schedule wrapper signals a real Wait-blocked worker at the cooperative console task boundary"
+}

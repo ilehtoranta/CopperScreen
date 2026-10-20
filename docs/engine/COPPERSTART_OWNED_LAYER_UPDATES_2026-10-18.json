@@ -1,0 +1,2803 @@
+{
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-owned-layer-update-evidence-v1",
+  "passed": true,
+  "shipping": false,
+  "producerArtifacts": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\owned-layer-update-20261018",
+  "scope": "Real disk-loaded owned Layers and Utility, real Exec/DOS/graphics and PAL display. Simple native uncover damage with partial/complete/empty updates and allocation abort rollback; Smart concealed drawing/restoration. No Intuition window admission or throughput measurement.",
+  "machine": {
+    "video": "PAL OCS",
+    "drives": 1,
+    "slowBytes": 524288,
+    "chipBytes": 524288,
+    "cpu": "MC68000",
+    "fastBytes": 0
+  },
+  "layout": {
+    "romBytes": 524288,
+    "graphicsBytes": 31906,
+    "tailBeforeFooterBytes": 842,
+    "preGraphicsGapBytes": 27854,
+    "compiledCodeBytes": 463658
+  },
+  "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+  "compiledRomSha256": "2EE587B918A8E1530713170DA036B2BADD65E807EE842164346930EB1A689654",
+  "managedRomInputs": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "9333711473A6A08229AF61BAAC7F5A24EB899CFD981A42173F28095D6E9C328D"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "CACC2157CEF8ED44C8F8688B644986E0ED6264EA6CF47FD7EA0411E821CAFB8E"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "3C473A6C86A17447618F7271F8DA3B0DD3B7DE269E3B905F0604A45BFDFDF9A4"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperSharp.Targets.Amiga.dll",
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+    }
+  ],
+  "providerPayload": {
+    "sha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+    "entry": 0,
+    "installer": 215526,
+    "codeBytes": 215994,
+    "imageBytes": 223116,
+    "exports": [
+      "copperstart.utility.dispatch",
+      "copperstart.layers.install-system",
+      "copperstart.layers.init-owned-system",
+      "copperstart.layers.graphics-bridge"
+    ],
+    "lifetime": "Loader retains the entire disk HUNK until reset; permanent Utility code stays live after Layers expunge.",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "B98C7F35B3CDC32D98382223E7E6EEDB6CEC76A51E33A376E1FC8FB8024C6922"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "B396B505EAAE9C2E1BEAF8EFD93DB17FF7DEBA9EB970D901EB6C774B62B7BF63"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ]
+  },
+  "tests": {
+    "nativeAllocationAborts": 18,
+    "selected": 344,
+    "compositionCases": 1,
+    "simplePartialUpdateJourneys": 6,
+    "ownedLayerLifetimes": 12,
+    "semanticBaseline": "Initial run: 85 pass, 3 stale nested/active-clip contract failures; rewritten as valid two-pass update/clip and lock-lifetime cases, then 88 pass.",
+    "compiledInstructionCases": 263,
+    "filesystemSemanticCases": 15,
+    "skipped": 0,
+    "newOwnedCaptures": 66,
+    "providerCompilationCases": 1,
+    "passed": 344,
+    "releaseBuild": "PASS: zero errors and warnings",
+    "newOwnedNativeCases": 4,
+    "nativeRomMediaCases": 64,
+    "refreshRasterLockingSemantics": 88
+  },
+  "ownedLayerUpdates": [
+    {
+      "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "romBytes": 524288,
+      "payloadSha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+      "fields": 7287,
+      "done": 1330401099,
+      "stage": 30,
+      "pc": 12754706,
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "width": 320,
+      "height": 256,
+      "depth": 2,
+      "smart": false,
+      "captures": [
+        {
+          "cycle": 1,
+          "stage": 1,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 521512,
+          "largestChip": 189904,
+          "largestSlow": 280816,
+          "bridgeLocks": 3,
+          "bridgeUnlocks": 3,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "2FA66D32359AE47E3753A4BD7527008D2B0D86DAF043548B3133244CABCAB27C"
+        },
+        {
+          "cycle": 1,
+          "stage": 2,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 520624,
+          "largestChip": 189904,
+          "largestSlow": 280984,
+          "bridgeLocks": 4,
+          "bridgeUnlocks": 4,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "5C54D98D4227BCDA0187AC8EC7E858E56646021FC1C474B33247757B902349BC"
+        },
+        {
+          "cycle": 1,
+          "stage": 3,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 4,
+          "bridgeUnlocks": 4,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D914FFCC4C97D7619A6641417EE726A0F2B29705F4A806F73EC089AA8EF6D025"
+        },
+        {
+          "cycle": 1,
+          "stage": 4,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "00FDFBC57BFE88CA0296F56F828E16CC6A23AC5337228531B19FF80D4D52B345"
+        },
+        {
+          "cycle": 1,
+          "stage": 5,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "00FDFBC57BFE88CA0296F56F828E16CC6A23AC5337228531B19FF80D4D52B345"
+        },
+        {
+          "cycle": 1,
+          "stage": 6,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 7,
+          "bridgeUnlocks": 7,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "53171C96E59DEAF0A19CC98EEDC9E462BB1070A3BDED5F65FB544258ED87E0BF"
+        },
+        {
+          "cycle": 1,
+          "stage": 7,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 8,
+          "bridgeUnlocks": 8,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "53171C96E59DEAF0A19CC98EEDC9E462BB1070A3BDED5F65FB544258ED87E0BF"
+        },
+        {
+          "cycle": 2,
+          "stage": 1,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521512,
+          "largestChip": 189904,
+          "largestSlow": 280816,
+          "bridgeLocks": 11,
+          "bridgeUnlocks": 11,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "2FA66D32359AE47E3753A4BD7527008D2B0D86DAF043548B3133244CABCAB27C"
+        },
+        {
+          "cycle": 2,
+          "stage": 2,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 520624,
+          "largestChip": 189904,
+          "largestSlow": 280984,
+          "bridgeLocks": 12,
+          "bridgeUnlocks": 12,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "5C54D98D4227BCDA0187AC8EC7E858E56646021FC1C474B33247757B902349BC"
+        },
+        {
+          "cycle": 2,
+          "stage": 3,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 12,
+          "bridgeUnlocks": 12,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "D914FFCC4C97D7619A6641417EE726A0F2B29705F4A806F73EC089AA8EF6D025"
+        },
+        {
+          "cycle": 2,
+          "stage": 4,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 14,
+          "bridgeUnlocks": 14,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "00FDFBC57BFE88CA0296F56F828E16CC6A23AC5337228531B19FF80D4D52B345"
+        },
+        {
+          "cycle": 2,
+          "stage": 5,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 14,
+          "bridgeUnlocks": 14,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "00FDFBC57BFE88CA0296F56F828E16CC6A23AC5337228531B19FF80D4D52B345"
+        },
+        {
+          "cycle": 2,
+          "stage": 6,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 15,
+          "bridgeUnlocks": 15,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "53171C96E59DEAF0A19CC98EEDC9E462BB1070A3BDED5F65FB544258ED87E0BF"
+        },
+        {
+          "cycle": 2,
+          "stage": 7,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 16,
+          "bridgeUnlocks": 16,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "53171C96E59DEAF0A19CC98EEDC9E462BB1070A3BDED5F65FB544258ED87E0BF"
+        },
+        {
+          "cycle": 3,
+          "stage": 1,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521512,
+          "largestChip": 189904,
+          "largestSlow": 280816,
+          "bridgeLocks": 19,
+          "bridgeUnlocks": 19,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "2FA66D32359AE47E3753A4BD7527008D2B0D86DAF043548B3133244CABCAB27C"
+        },
+        {
+          "cycle": 3,
+          "stage": 2,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 520624,
+          "largestChip": 189904,
+          "largestSlow": 280984,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "5C54D98D4227BCDA0187AC8EC7E858E56646021FC1C474B33247757B902349BC"
+        },
+        {
+          "cycle": 3,
+          "stage": 3,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "D914FFCC4C97D7619A6641417EE726A0F2B29705F4A806F73EC089AA8EF6D025"
+        },
+        {
+          "cycle": 3,
+          "stage": 4,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 22,
+          "bridgeUnlocks": 22,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "00FDFBC57BFE88CA0296F56F828E16CC6A23AC5337228531B19FF80D4D52B345"
+        },
+        {
+          "cycle": 3,
+          "stage": 5,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 22,
+          "bridgeUnlocks": 22,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "00FDFBC57BFE88CA0296F56F828E16CC6A23AC5337228531B19FF80D4D52B345"
+        },
+        {
+          "cycle": 3,
+          "stage": 6,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 23,
+          "bridgeUnlocks": 23,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "53171C96E59DEAF0A19CC98EEDC9E462BB1070A3BDED5F65FB544258ED87E0BF"
+        },
+        {
+          "cycle": 3,
+          "stage": 7,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 222672,
+          "totalFree": 521496,
+          "largestChip": 189904,
+          "largestSlow": 262000,
+          "bridgeLocks": 24,
+          "bridgeUnlocks": 24,
+          "failures": [
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 521496,
+              "after": 521496,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "53171C96E59DEAF0A19CC98EEDC9E462BB1070A3BDED5F65FB544258ED87E0BF"
+        }
+      ],
+      "receipt": [
+        1330401099,
+        30,
+        3,
+        0,
+        12656216,
+        12750372,
+        9280,
+        272184,
+        12742432,
+        12751184,
+        12751344,
+        14044,
+        56180,
+        292704,
+        12742368,
+        12825248,
+        12751064,
+        12845140,
+        12845152,
+        68,
+        522304,
+        522304,
+        0,
+        3,
+        12590648,
+        12743144,
+        0,
+        0,
+        222672,
+        521496,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        521496,
+        521496,
+        0,
+        1,
+        521496,
+        521496,
+        0,
+        2,
+        521496,
+        521496,
+        0,
+        3,
+        271788,
+        24,
+        24,
+        544072,
+        544072,
+        189904,
+        262000,
+        0,
+        0,
+        12748526,
+        549128,
+        0
+      ],
+      "scope": "Installed native Layers owner, real graphics/Exec/DOS; no Intuition window admission"
+    },
+    {
+      "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "romBytes": 524288,
+      "payloadSha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+      "fields": 7066,
+      "done": 1330401099,
+      "stage": 30,
+      "pc": 12752388,
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "width": 320,
+      "height": 256,
+      "depth": 2,
+      "smart": true,
+      "captures": [
+        {
+          "cycle": 1,
+          "stage": 1,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 281984,
+          "bridgeLocks": 3,
+          "bridgeUnlocks": 3,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "2FA66D32359AE47E3753A4BD7527008D2B0D86DAF043548B3133244CABCAB27C"
+        },
+        {
+          "cycle": 1,
+          "stage": 2,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222496,
+          "totalFree": 521608,
+          "largestChip": 189728,
+          "largestSlow": 282144,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "5C54D98D4227BCDA0187AC8EC7E858E56646021FC1C474B33247757B902349BC"
+        },
+        {
+          "cycle": 1,
+          "stage": 3,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 283152,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "06B72174CF1F0F38A6B53D5C67A3F7AA06F6DADCCB8B5EF978FBA60E41266D75"
+        },
+        {
+          "cycle": 1,
+          "stage": 4,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 283152,
+          "bridgeLocks": 7,
+          "bridgeUnlocks": 7,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "06B72174CF1F0F38A6B53D5C67A3F7AA06F6DADCCB8B5EF978FBA60E41266D75"
+        },
+        {
+          "cycle": 2,
+          "stage": 1,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 281984,
+          "bridgeLocks": 10,
+          "bridgeUnlocks": 10,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "2FA66D32359AE47E3753A4BD7527008D2B0D86DAF043548B3133244CABCAB27C"
+        },
+        {
+          "cycle": 2,
+          "stage": 2,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222496,
+          "totalFree": 521608,
+          "largestChip": 189728,
+          "largestSlow": 282144,
+          "bridgeLocks": 13,
+          "bridgeUnlocks": 13,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "5C54D98D4227BCDA0187AC8EC7E858E56646021FC1C474B33247757B902349BC"
+        },
+        {
+          "cycle": 2,
+          "stage": 3,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 283152,
+          "bridgeLocks": 13,
+          "bridgeUnlocks": 13,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "06B72174CF1F0F38A6B53D5C67A3F7AA06F6DADCCB8B5EF978FBA60E41266D75"
+        },
+        {
+          "cycle": 2,
+          "stage": 4,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 283152,
+          "bridgeLocks": 14,
+          "bridgeUnlocks": 14,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "06B72174CF1F0F38A6B53D5C67A3F7AA06F6DADCCB8B5EF978FBA60E41266D75"
+        },
+        {
+          "cycle": 3,
+          "stage": 1,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 281984,
+          "bridgeLocks": 17,
+          "bridgeUnlocks": 17,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "2FA66D32359AE47E3753A4BD7527008D2B0D86DAF043548B3133244CABCAB27C"
+        },
+        {
+          "cycle": 3,
+          "stage": 2,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222496,
+          "totalFree": 521608,
+          "largestChip": 189728,
+          "largestSlow": 282144,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "5C54D98D4227BCDA0187AC8EC7E858E56646021FC1C474B33247757B902349BC"
+        },
+        {
+          "cycle": 3,
+          "stage": 3,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 283152,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "06B72174CF1F0F38A6B53D5C67A3F7AA06F6DADCCB8B5EF978FBA60E41266D75"
+        },
+        {
+          "cycle": 3,
+          "stage": 4,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 222672,
+          "totalFree": 522672,
+          "largestChip": 189904,
+          "largestSlow": 283152,
+          "bridgeLocks": 21,
+          "bridgeUnlocks": 21,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "06B72174CF1F0F38A6B53D5C67A3F7AA06F6DADCCB8B5EF978FBA60E41266D75"
+        }
+      ],
+      "receipt": [
+        1330401099,
+        30,
+        3,
+        0,
+        12656216,
+        12750372,
+        9280,
+        272184,
+        12742432,
+        12823672,
+        12823832,
+        14044,
+        56180,
+        292704,
+        12742368,
+        12824048,
+        12750440,
+        12746132,
+        0,
+        0,
+        523464,
+        523464,
+        0,
+        0,
+        12590648,
+        0,
+        0,
+        0,
+        222672,
+        522672,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        271788,
+        21,
+        21,
+        545232,
+        545232,
+        189904,
+        283152,
+        0,
+        0,
+        12748526,
+        550288,
+        0
+      ],
+      "scope": "Installed native Layers owner, real graphics/Exec/DOS; no Intuition window admission"
+    },
+    {
+      "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "romBytes": 524288,
+      "payloadSha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+      "fields": 7313,
+      "done": 1330401099,
+      "stage": 30,
+      "pc": 12754706,
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "width": 640,
+      "height": 256,
+      "depth": 2,
+      "smart": false,
+      "captures": [
+        {
+          "cycle": 1,
+          "stage": 1,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 501032,
+          "largestChip": 169424,
+          "largestSlow": 280816,
+          "bridgeLocks": 3,
+          "bridgeUnlocks": 3,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "36C523B69BF448C046F94D58E3DF9A1566376F7603D0155FF71F5A479FC8936F"
+        },
+        {
+          "cycle": 1,
+          "stage": 2,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 500144,
+          "largestChip": 169424,
+          "largestSlow": 280984,
+          "bridgeLocks": 4,
+          "bridgeUnlocks": 4,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "EE5BDB6DFF108970650EE0EFA01322134B4D46A607B538BC9EBF287C580B9192"
+        },
+        {
+          "cycle": 1,
+          "stage": 3,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 4,
+          "bridgeUnlocks": 4,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "FF5CACBCF52CC97A6AC27E5B32767D00A6EF0A91A0133DB28472BB950BBFE876"
+        },
+        {
+          "cycle": 1,
+          "stage": 4,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "0994D520F5E7B7FB8698D16B60489ECE8B885C4779F719D62B0020328E567FCD"
+        },
+        {
+          "cycle": 1,
+          "stage": 5,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "0994D520F5E7B7FB8698D16B60489ECE8B885C4779F719D62B0020328E567FCD"
+        },
+        {
+          "cycle": 1,
+          "stage": 6,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 7,
+          "bridgeUnlocks": 7,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "BCE3D8AEFA0C93E6D732FC018574C853006C372039B02AB23543CD11904CAEEC"
+        },
+        {
+          "cycle": 1,
+          "stage": 7,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 8,
+          "bridgeUnlocks": 8,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "BCE3D8AEFA0C93E6D732FC018574C853006C372039B02AB23543CD11904CAEEC"
+        },
+        {
+          "cycle": 2,
+          "stage": 1,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501032,
+          "largestChip": 169424,
+          "largestSlow": 280816,
+          "bridgeLocks": 11,
+          "bridgeUnlocks": 11,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "36C523B69BF448C046F94D58E3DF9A1566376F7603D0155FF71F5A479FC8936F"
+        },
+        {
+          "cycle": 2,
+          "stage": 2,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 500144,
+          "largestChip": 169424,
+          "largestSlow": 280984,
+          "bridgeLocks": 12,
+          "bridgeUnlocks": 12,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "EE5BDB6DFF108970650EE0EFA01322134B4D46A607B538BC9EBF287C580B9192"
+        },
+        {
+          "cycle": 2,
+          "stage": 3,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 12,
+          "bridgeUnlocks": 12,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "FF5CACBCF52CC97A6AC27E5B32767D00A6EF0A91A0133DB28472BB950BBFE876"
+        },
+        {
+          "cycle": 2,
+          "stage": 4,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 14,
+          "bridgeUnlocks": 14,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "0994D520F5E7B7FB8698D16B60489ECE8B885C4779F719D62B0020328E567FCD"
+        },
+        {
+          "cycle": 2,
+          "stage": 5,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 14,
+          "bridgeUnlocks": 14,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "0994D520F5E7B7FB8698D16B60489ECE8B885C4779F719D62B0020328E567FCD"
+        },
+        {
+          "cycle": 2,
+          "stage": 6,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 15,
+          "bridgeUnlocks": 15,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "BCE3D8AEFA0C93E6D732FC018574C853006C372039B02AB23543CD11904CAEEC"
+        },
+        {
+          "cycle": 2,
+          "stage": 7,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 16,
+          "bridgeUnlocks": 16,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "BCE3D8AEFA0C93E6D732FC018574C853006C372039B02AB23543CD11904CAEEC"
+        },
+        {
+          "cycle": 3,
+          "stage": 1,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501032,
+          "largestChip": 169424,
+          "largestSlow": 280816,
+          "bridgeLocks": 19,
+          "bridgeUnlocks": 19,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "36C523B69BF448C046F94D58E3DF9A1566376F7603D0155FF71F5A479FC8936F"
+        },
+        {
+          "cycle": 3,
+          "stage": 2,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 500144,
+          "largestChip": 169424,
+          "largestSlow": 280984,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "EE5BDB6DFF108970650EE0EFA01322134B4D46A607B538BC9EBF287C580B9192"
+        },
+        {
+          "cycle": 3,
+          "stage": 3,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "FF5CACBCF52CC97A6AC27E5B32767D00A6EF0A91A0133DB28472BB950BBFE876"
+        },
+        {
+          "cycle": 3,
+          "stage": 4,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 22,
+          "bridgeUnlocks": 22,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "0994D520F5E7B7FB8698D16B60489ECE8B885C4779F719D62B0020328E567FCD"
+        },
+        {
+          "cycle": 3,
+          "stage": 5,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 22,
+          "bridgeUnlocks": 22,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "0994D520F5E7B7FB8698D16B60489ECE8B885C4779F719D62B0020328E567FCD"
+        },
+        {
+          "cycle": 3,
+          "stage": 6,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 23,
+          "bridgeUnlocks": 23,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "BCE3D8AEFA0C93E6D732FC018574C853006C372039B02AB23543CD11904CAEEC"
+        },
+        {
+          "cycle": 3,
+          "stage": 7,
+          "layer": 12751184,
+          "bitmap": 272184,
+          "cursor": 68,
+          "chipFree": 202192,
+          "totalFree": 501016,
+          "largestChip": 169424,
+          "largestSlow": 262000,
+          "bridgeLocks": 24,
+          "bridgeUnlocks": 24,
+          "failures": [
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 1
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 2
+            },
+            {
+              "before": 501016,
+              "after": 501016,
+              "result": 0,
+              "allocations": 3
+            }
+          ],
+          "framebufferSha256": "BCE3D8AEFA0C93E6D732FC018574C853006C372039B02AB23543CD11904CAEEC"
+        }
+      ],
+      "receipt": [
+        1330401099,
+        30,
+        3,
+        0,
+        12656216,
+        12750372,
+        9280,
+        272184,
+        12742432,
+        12751184,
+        12751344,
+        14044,
+        56180,
+        313184,
+        12742368,
+        12825248,
+        12751064,
+        12845140,
+        12845152,
+        68,
+        501824,
+        501824,
+        0,
+        3,
+        12590648,
+        12743144,
+        0,
+        0,
+        202192,
+        501016,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        501016,
+        501016,
+        0,
+        1,
+        501016,
+        501016,
+        0,
+        2,
+        501016,
+        501016,
+        0,
+        3,
+        271788,
+        24,
+        24,
+        544072,
+        544072,
+        169424,
+        262000,
+        0,
+        0,
+        12748526,
+        549128,
+        0
+      ],
+      "scope": "Installed native Layers owner, real graphics/Exec/DOS; no Intuition window admission"
+    },
+    {
+      "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+      "romBytes": 524288,
+      "payloadSha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+      "fields": 7093,
+      "done": 1330401099,
+      "stage": 30,
+      "pc": 12752388,
+      "chipBytes": 524288,
+      "slowBytes": 524288,
+      "fastBytes": 0,
+      "width": 640,
+      "height": 256,
+      "depth": 2,
+      "smart": true,
+      "captures": [
+        {
+          "cycle": 1,
+          "stage": 1,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 281984,
+          "bridgeLocks": 3,
+          "bridgeUnlocks": 3,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "36C523B69BF448C046F94D58E3DF9A1566376F7603D0155FF71F5A479FC8936F"
+        },
+        {
+          "cycle": 1,
+          "stage": 2,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202016,
+          "totalFree": 501128,
+          "largestChip": 169248,
+          "largestSlow": 282144,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "EE5BDB6DFF108970650EE0EFA01322134B4D46A607B538BC9EBF287C580B9192"
+        },
+        {
+          "cycle": 1,
+          "stage": 3,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 283152,
+          "bridgeLocks": 6,
+          "bridgeUnlocks": 6,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D2017CE685BCCA4A9AC6647F87DC09CC533233F1A6D2AB610A794A6ACFE0FCE1"
+        },
+        {
+          "cycle": 1,
+          "stage": 4,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 283152,
+          "bridgeLocks": 7,
+          "bridgeUnlocks": 7,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D2017CE685BCCA4A9AC6647F87DC09CC533233F1A6D2AB610A794A6ACFE0FCE1"
+        },
+        {
+          "cycle": 2,
+          "stage": 1,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 281984,
+          "bridgeLocks": 10,
+          "bridgeUnlocks": 10,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "36C523B69BF448C046F94D58E3DF9A1566376F7603D0155FF71F5A479FC8936F"
+        },
+        {
+          "cycle": 2,
+          "stage": 2,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202016,
+          "totalFree": 501128,
+          "largestChip": 169248,
+          "largestSlow": 282144,
+          "bridgeLocks": 13,
+          "bridgeUnlocks": 13,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "EE5BDB6DFF108970650EE0EFA01322134B4D46A607B538BC9EBF287C580B9192"
+        },
+        {
+          "cycle": 2,
+          "stage": 3,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 283152,
+          "bridgeLocks": 13,
+          "bridgeUnlocks": 13,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D2017CE685BCCA4A9AC6647F87DC09CC533233F1A6D2AB610A794A6ACFE0FCE1"
+        },
+        {
+          "cycle": 2,
+          "stage": 4,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 283152,
+          "bridgeLocks": 14,
+          "bridgeUnlocks": 14,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D2017CE685BCCA4A9AC6647F87DC09CC533233F1A6D2AB610A794A6ACFE0FCE1"
+        },
+        {
+          "cycle": 3,
+          "stage": 1,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 281984,
+          "bridgeLocks": 17,
+          "bridgeUnlocks": 17,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "36C523B69BF448C046F94D58E3DF9A1566376F7603D0155FF71F5A479FC8936F"
+        },
+        {
+          "cycle": 3,
+          "stage": 2,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202016,
+          "totalFree": 501128,
+          "largestChip": 169248,
+          "largestSlow": 282144,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "EE5BDB6DFF108970650EE0EFA01322134B4D46A607B538BC9EBF287C580B9192"
+        },
+        {
+          "cycle": 3,
+          "stage": 3,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 283152,
+          "bridgeLocks": 20,
+          "bridgeUnlocks": 20,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D2017CE685BCCA4A9AC6647F87DC09CC533233F1A6D2AB610A794A6ACFE0FCE1"
+        },
+        {
+          "cycle": 3,
+          "stage": 4,
+          "layer": 12823672,
+          "bitmap": 272184,
+          "cursor": 0,
+          "chipFree": 202192,
+          "totalFree": 502192,
+          "largestChip": 169424,
+          "largestSlow": 283152,
+          "bridgeLocks": 21,
+          "bridgeUnlocks": 21,
+          "failures": [
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            },
+            {
+              "before": 0,
+              "after": 0,
+              "result": 0,
+              "allocations": 0
+            }
+          ],
+          "framebufferSha256": "D2017CE685BCCA4A9AC6647F87DC09CC533233F1A6D2AB610A794A6ACFE0FCE1"
+        }
+      ],
+      "receipt": [
+        1330401099,
+        30,
+        3,
+        0,
+        12656216,
+        12750372,
+        9280,
+        272184,
+        12742432,
+        12823672,
+        12823832,
+        14044,
+        56180,
+        313184,
+        12742368,
+        12824048,
+        12750440,
+        12746132,
+        0,
+        0,
+        502984,
+        502984,
+        0,
+        0,
+        12590648,
+        0,
+        0,
+        0,
+        202192,
+        502192,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        271788,
+        21,
+        21,
+        545232,
+        545232,
+        169424,
+        283152,
+        0,
+        0,
+        12748526,
+        550288,
+        0
+      ],
+      "scope": "Installed native Layers owner, real graphics/Exec/DOS; no Intuition window admission"
+    }
+  ],
+  "capturePointMemory": {
+    "rows": [
+      {
+        "width": 320,
+        "smart": false,
+        "captures": 21,
+        "minimumChipFree": 222672,
+        "minimumTotalFree": 520624,
+        "minimumLargestChip": 189904,
+        "minimumLargestSlow": 262000,
+        "heapBeforeDisplay": 544072,
+        "heapAfterDisplay": 544072,
+        "finalGraphicsPins": 0,
+        "finalUtilityPins": 0
+      },
+      {
+        "width": 320,
+        "smart": true,
+        "captures": 12,
+        "minimumChipFree": 222496,
+        "minimumTotalFree": 521608,
+        "minimumLargestChip": 189728,
+        "minimumLargestSlow": 281984,
+        "heapBeforeDisplay": 545232,
+        "heapAfterDisplay": 545232,
+        "finalGraphicsPins": 0,
+        "finalUtilityPins": 0
+      },
+      {
+        "width": 640,
+        "smart": false,
+        "captures": 21,
+        "minimumChipFree": 202192,
+        "minimumTotalFree": 500144,
+        "minimumLargestChip": 169424,
+        "minimumLargestSlow": 262000,
+        "heapBeforeDisplay": 544072,
+        "heapAfterDisplay": 544072,
+        "finalGraphicsPins": 0,
+        "finalUtilityPins": 0
+      },
+      {
+        "width": 640,
+        "smart": true,
+        "captures": 12,
+        "minimumChipFree": 202016,
+        "minimumTotalFree": 501128,
+        "minimumLargestChip": 169248,
+        "minimumLargestSlow": 281984,
+        "heapBeforeDisplay": 545232,
+        "heapAfterDisplay": 545232,
+        "finalGraphicsPins": 0,
+        "finalUtilityPins": 0
+      }
+    ],
+    "scope": "Minima at live capture handshakes only; retained provider/probe code and 32 KiB probe stack included, no Intuition or transient peak measurements."
+  },
+  "artifacts": {
+    "semanticTrxSha256": "43B7F2430AC45D5FE796A48C50EDE59E6794435CD723C088E9962D12DD85F03D",
+    "releaseBuildLogSha256": "F1A656F8FC540D6A5C6F9F7590EBC698E6B4C070C8825D11FD8D3650ECB4AC02",
+    "trxSha256": "C880E579271618D89B9B93D3C5C476A985FDB25A0DBA87929E846793C0FD1083",
+    "managedInputsSha256": "AE63510A53CB01FDC060A2CC4C537584CF13F7A2DC2472851EDE618B8495A57F",
+    "sourceFiles": 44,
+    "sourceSnapshotSha256": "A86DF9B2B207BFEC35123912261D782E6A1D5F6706A650A281245FF325EB7958",
+    "qualificationSha256": "00C7E79282F7668B5E9B36853B22A96DAE035B2BC2691B76F5B007BACA46F99A",
+    "priorProviderSourceSnapshotSha256": "95D5731C64AEFDDC033097330BB70AD35ACD357796186B6B04BCCC7E6D15ADCB",
+    "sourceScope": "Exact replay managed sources, two edited semantic tests and build scripts; unchanged provider sources and ROM dependencies remain identified by the preceding provider evidence."
+  },
+  "visualReview": [
+    "owned-smart-640-cycle-1-stage-3.png",
+    "owned-simple-640-cycle-1-stage-4.png"
+  ],
+  "remaining": [
+    "Bind/admit native Intuition startup and installed-owner query/custody to this disk provider",
+    "Real OpenScreen/OpenWindow, decoration, rollback and display restoration",
+    "BeginRefresh/EndRefresh, Refresh flag retirement, event delivery/replies and close ownership",
+    "Physical keyboard/mouse/pointer, focus, wait/wake and outstanding-event teardown",
+    "Native disjoint damage, foreign-clip two-pass transactions, callback continuations, contention and Smart scrolling",
+    "Complete selected Intuition/GUI code closure and allocation peaks within the same 512 KiB ROM / 1 MiB A500"
+  ],
+  "shippingAppPin": {
+    "changed": false,
+    "manifestSha256": "22E1001D18B97AFAFE6391F4B39A1D0859BCA5967B29688320C3E00032C588F3"
+  }
+}

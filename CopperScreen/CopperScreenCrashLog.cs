@@ -16,7 +16,7 @@ internal static class CopperScreenCrashLog
 
 	public static string? CurrentLogPath => _logPath;
 
-	public static void Install(string[] args)
+	public static void Install(string[] args, string? userDataDirectory = null)
 	{
 		lock (Sync)
 		{
@@ -25,7 +25,7 @@ internal static class CopperScreenCrashLog
 				return;
 			}
 
-			var logDirectory = GetDefaultLogDirectory();
+			var logDirectory = Path.Combine(CopperScreenUserData.GetDirectory(userDataDirectory), "Logs");
 			Directory.CreateDirectory(logDirectory);
 			_logPath = Path.Combine(logDirectory, CreateLogFileName(DateTimeOffset.Now, Environment.ProcessId));
 			_latestLogPath = Path.Combine(logDirectory, "latest.log");
@@ -93,13 +93,7 @@ internal static class CopperScreenCrashLog
 
 	internal static string GetDefaultLogDirectory()
 	{
-		var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-		if (string.IsNullOrWhiteSpace(localAppData))
-		{
-			localAppData = AppContext.BaseDirectory;
-		}
-
-		return Path.Combine(localAppData, "CopperScreen", "Logs");
+		return Path.Combine(CopperScreenUserData.DefaultDirectory, "Logs");
 	}
 
 	internal static string CreateLogFileName(DateTimeOffset timestamp, int processId)

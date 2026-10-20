@@ -9,6 +9,13 @@ For the current source-build and test contract, use the repository
 package-only proof below are retained as historical audit evidence, not as
 current migration or release instructions.
 
+2026-10-17 cleanup: the three previously excluded Legacy host files (emulator
+adapter, CopperBench browser and presentation-frame helper) have been removed.
+Git history preserves their last local versions, and the
+[legacy workspace archive](../archive/legacy-copperscreen-20260916/README.md)
+retains the earlier snapshot. References to retained source below describe the
+historical extraction only. Unavailable UI and service scaffolding remain.
+
 ## Superseded decision and scope — 2026-09-16 (historical)
 
 Prepare CopperScreen to move into its own repository without moving or copying

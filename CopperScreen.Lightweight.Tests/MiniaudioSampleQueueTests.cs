@@ -5,6 +5,37 @@ namespace CopperScreen.Tests;
 public sealed class MiniaudioSampleQueueTests
 {
 	[Fact]
+	public void JoinedConsumerResetReleasesFullAndPartialOldAudioBeforeRepriming()
+	{
+		var queue = new MiniaudioSampleQueue(4, 2);
+		queue.TryEnqueue([1f, 2f, 3f, 4f]);
+		queue.TryEnqueue([5f, 6f, 7f, 8f]);
+		queue.Dequeue(new float[1]);
+		// This fixture has no concurrent consumer; production joins it first.
+		queue.ResetAfterConsumerStopped();
+		Assert.Equal(0, queue.QueuedBufferCount);
+		Assert.True(queue.TryEnqueue([9f, 10f]));
+		var output = new float[4];
+		queue.Dequeue(output);
+		Assert.Equal([9f, 10f, 0f, 0f], output);
+	}
+
+	[Fact]
+	public void ConsumerWakeTracksReleasedSlotsIncludingDiscardedEpochs()
+	{
+		var queue = new MiniaudioSampleQueue(4, 2);
+		Assert.True(queue.TryEnqueue([1f, 2f, 3f, 4f]));
+		Assert.False(queue.Dequeue(new float[1])); // A partial read frees no slot.
+		Assert.True(queue.Dequeue(new float[3]));
+		Assert.False(queue.Dequeue(new float[4]));
+		Assert.True(queue.TryEnqueue([5f, 6f]));
+		queue.DiscardQueuedSamples();
+		var output = new float[4];
+		Assert.True(queue.Dequeue(output));
+		Assert.Equal(new float[4], output);
+	}
+
+	[Fact]
 	public void DiscardDropsPartialAndQueuedOldAudioButKeepsNewGeneration()
 	{
 		var queue = new MiniaudioSampleQueue(4, 4);

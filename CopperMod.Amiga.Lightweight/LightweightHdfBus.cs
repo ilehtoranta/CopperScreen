@@ -142,11 +142,15 @@ public sealed partial class LightweightA500Machine
     internal byte PeekHdfByte(uint address)
     {
         if (IsHdfRamRange(address, 1)) return HdfRam(address, 1)[0];
+        if (_extensionRomLoaded && address >= ExtensionRomBase && address - ExtensionRomBase < _extensionRom.Length)
+            return _extensionRom[address - ExtensionRomBase];
         if (address >= RomBase && address - RomBase < _rom.Length) return _rom[address - RomBase];
         return _hdf?.ReadExpansionByte(address) ?? (byte)255;
     }
-    internal bool IsHdfRomRange(uint address, int count) => count >= 0 && address >= RomBase &&
-        address - RomBase <= _rom.Length && (uint)count <= _rom.Length - (address - RomBase);
+    internal bool IsHdfRomRange(uint address, int count) => count >= 0 &&
+        (_extensionRomLoaded && address >= ExtensionRomBase && address - ExtensionRomBase <= _extensionRom.Length &&
+            (uint)count <= _extensionRom.Length - (address - ExtensionRomBase) ||
+         address >= RomBase && address - RomBase <= _rom.Length && (uint)count <= _rom.Length - (address - RomBase));
 
     internal void PokeHdfByte(uint address, byte value)
     {

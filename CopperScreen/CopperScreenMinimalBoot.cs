@@ -50,7 +50,7 @@ internal sealed class CopperScreenMinimalBoot
     }
     internal static void ValidateDisk(CopperScreenAdfImage disk)
     {
-        if (disk.Format != CopperMod.Amiga.Lightweight.LightweightFloppyFormat.Adf)
+        if (disk.Format != CopperMod.Amiga.Lightweight.LightweightFloppyFormat.Adf || disk.RequiresHighDensityDrive)
             throw new NotSupportedException("Minimal disk boot requires a standard 880 KiB ADF in DF0. Use a native Kickstart ROM for IPF disks.");
         if (!disk.Data.AsSpan(0, 3).SequenceEqual("DOS"u8))
             throw new NotSupportedException("The DF0 disk has no DOS boot-block identifier. Use a native Kickstart ROM for this disk.");

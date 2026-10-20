@@ -4,6 +4,7 @@
  */
 
 using System.Text.Json;
+using CopperMod.Amiga.Lightweight;
 using System.Text.Json.Serialization;
 
 namespace CopperScreen;
@@ -22,6 +23,9 @@ internal sealed class CopperScreenSettingsDraft
 	public string DisplayName { get; set; } = "Lightweight A500 + Kickstart 1.3";
 
 	public string Description { get; set; } = string.Empty;
+
+	// Selection provenance only; never serialized into a personal profile.
+	public string? SourcePath { get; set; }
 
 	// Preserve profile fields that are not editable in the current Settings UI.
 	public AmigaChipset Chipset { get; set; } = AmigaChipset.OcsPal;
@@ -42,6 +46,7 @@ internal sealed class CopperScreenSettingsDraft
 	public bool RtcEnabled { get; set; }
 
 	public int FloppyDriveCount { get; set; } = 1;
+    public LightweightFloppyDriveType[] FloppyDriveTypes { get; } = new LightweightFloppyDriveType[4];
 
 	public M68kBackendKind CpuBackend { get; set; } = M68kBackendKind.AccurateM68000;
 
@@ -78,7 +83,7 @@ internal sealed class CopperScreenSettingsDraft
 			draft.DriveWriteProtected[i] = i < options.DriveWriteProtected.Length ? options.DriveWriteProtected[i] : null;
 		}
 
-        draft.HardDrives.AddRange(options.HardDrives);
+        draft.HardDrives.Clear(); draft.HardDrives.AddRange(options.HardDrives);
         draft.HostDirectories.Clear(); draft.HostDirectories.AddRange(options.HostDirectories);
 
 		draft.RequiresRestart = false;
@@ -92,6 +97,7 @@ internal sealed class CopperScreenSettingsDraft
 			Id = profile.Id,
 			DisplayName = profile.DisplayName,
 			Description = profile.Description,
+			SourcePath = profile.ConfigPath,
 			Chipset = profile.Chipset,
 			RomVersion = profile.KickstartVersion,
 			ChipRamKb = profile.ChipRamSize / Kilobyte,
@@ -109,6 +115,7 @@ internal sealed class CopperScreenSettingsDraft
 			Input = profile.Input,
 			PresentationOptions = profile.PresentationOptions
 		};
+        for (var i = 0; i < draft.FloppyDriveTypes.Length; i++) draft.FloppyDriveTypes[i] = profile.FloppyDriveTypes[i];
 		foreach (var drive in profile.MediaDrives)
 		{
 			if ((uint)drive.Index < (uint)draft.DriveDiskPaths.Length)
@@ -147,7 +154,7 @@ internal sealed class CopperScreenSettingsDraft
 			KickstartSource != active.KickstartSource || !string.Equals(KickstartRomPath, active.KickstartRomPath, StringComparison.Ordinal) ||
 			CpuBackend != active.CpuBackend || ChipRamKb != active.ChipRamKb || PseudoFastRamKb != active.PseudoFastRamKb ||
 			PseudoFastBase != active.PseudoFastBase || RealFastRamKb != active.RealFastRamKb || RealFastBase != active.RealFastBase ||
-			RtgVramMb != active.RtgVramMb || RtcEnabled != active.RtcEnabled || FloppyDriveCount != active.FloppyDriveCount ||
+			RtgVramMb != active.RtgVramMb || RtcEnabled != active.RtcEnabled || FloppyDriveCount != active.FloppyDriveCount || !FloppyDriveTypes.SequenceEqual(active.FloppyDriveTypes) ||
             FloppyDriveAudio != active.FloppyDriveAudio || !HardDrives.SequenceEqual(active.HardDrives) || !HostDirectories.SequenceEqual(active.HostDirectories);
 
 	public CopperScreenStartupOptions ToStartupOptions(string baseDirectory)
@@ -187,12 +194,12 @@ internal sealed class CopperScreenSettingsDraft
 			CreateMediaDrives(),
 			HardDrives.ToArray(),
 			Input,
-			configPath,
+			configPath ?? SourcePath,
 			PresentationOptions,
 			KickstartRomPath,
 			rtgVramSize: checked((long)RtgVramMb * 1024 * 1024),
 			chipset: Chipset,
-            kickstartVersion: RomVersion, hostDirectories: HostDirectories.ToArray());
+            kickstartVersion: RomVersion, hostDirectories: HostDirectories.ToArray(), floppyDriveTypes: FloppyDriveTypes);
 	}
 
 	public IReadOnlyList<CopperScreenMediaDriveSettings> CreateMediaDrives()
@@ -234,129 +241,13 @@ internal sealed class CopperScreenSettingsDraft
 		=> "$" + address.ToString("X6", System.Globalization.CultureInfo.InvariantCulture);
 }
 
-internal static class CopperScreenProfileStore
+internal static partial class CopperScreenProfileStore
 {
 	private static readonly JsonSerializerOptions WriteJsonOptions = new()
 	{
 		DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 		WriteIndented = true
 	};
-
-	public static IReadOnlyList<CopperScreenProfileSummary> ListProfiles(string baseDirectory)
-	{
-		var profilesDirectory = FindProfilesDirectory(baseDirectory);
-		if (!Directory.Exists(profilesDirectory))
-		{
-			return CreateFallbackProfileList(baseDirectory);
-		}
-
-		var profiles = new List<CopperScreenProfileSummary>();
-		foreach (var path in Directory.EnumerateFiles(profilesDirectory, "*.json").OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
-		{
-			if (CopperScreenProfile.TryLoad(path, baseDirectory, out var profile, out _))
-			{
-				var unavailable = CopperScreenAvailability.GetUnavailableReason(CopperScreenSettingsDraft.FromProfile(profile), baseDirectory);
-				profiles.Add(new CopperScreenProfileSummary(profile.Id, profile.DisplayName, path, unavailable));
-			}
-		}
-
-		AddFallbackProfileIfEmpty(profiles, baseDirectory);
-
-		return profiles;
-	}
-
-	private static IReadOnlyList<CopperScreenProfileSummary> CreateFallbackProfileList(string baseDirectory)
-	{
-		var profiles = new List<CopperScreenProfileSummary>();
-		AddFallbackProfileIfEmpty(profiles, baseDirectory);
-		return profiles;
-	}
-
-	private static void AddFallbackProfileIfEmpty(List<CopperScreenProfileSummary> profiles, string baseDirectory)
-	{
-		if (profiles.Count != 0)
-		{
-			return;
-		}
-
-		var fallback = CopperScreenProfile.LoadDefault(baseDirectory, out _);
-		profiles.Add(new CopperScreenProfileSummary(fallback.Id, fallback.DisplayName, fallback.ConfigPath ?? "Fallback default"));
-	}
-
-	public static string Save(CopperScreenSettingsDraft draft, string baseDirectory)
-	{
-		var profilesDirectory = FindProfilesDirectory(baseDirectory);
-		Directory.CreateDirectory(profilesDirectory);
-		var id = CopperScreenProfile.NormalizeProfileId(draft.Id);
-		if (string.IsNullOrWhiteSpace(id))
-		{
-			throw new InvalidOperationException("Profile id is required.");
-		}
-
-		draft.Id = id;
-		var path = Path.Combine(profilesDirectory, id + ".json");
-		SaveToPath(draft, path);
-		return path;
-	}
-
-	internal static void SaveToPath(CopperScreenSettingsDraft draft, string path)
-	{
-		var temporaryPath = path + ".tmp";
-		File.WriteAllText(temporaryPath, JsonSerializer.Serialize(ProfileFile.FromDraft(draft), WriteJsonOptions));
-		File.Move(temporaryPath, path, overwrite: true);
-	}
-
-	public static string SaveAs(CopperScreenSettingsDraft draft, string baseDirectory)
-	{
-		var profilesDirectory = FindProfilesDirectory(baseDirectory);
-		Directory.CreateDirectory(profilesDirectory);
-		var baseId = CopperScreenProfile.NormalizeProfileId(draft.Id);
-		if (string.IsNullOrWhiteSpace(baseId))
-		{
-			baseId = CopperScreenProfile.DefaultProfileId;
-		}
-
-		var candidateId = baseId.EndsWith("-copy", StringComparison.OrdinalIgnoreCase)
-			? baseId
-			: baseId + "-copy";
-		var suffix = 2;
-		while (File.Exists(Path.Combine(profilesDirectory, candidateId + ".json")))
-		{
-			candidateId = baseId + "-copy-" + suffix.ToString(System.Globalization.CultureInfo.InvariantCulture);
-			suffix++;
-		}
-
-		draft.Id = candidateId;
-		if (!draft.DisplayName.EndsWith(" Copy", StringComparison.OrdinalIgnoreCase))
-		{
-			draft.DisplayName += " Copy";
-		}
-
-		return Save(draft, baseDirectory);
-	}
-
-	public static string FindProfilesDirectory(string baseDirectory)
-	{
-		var directory = new DirectoryInfo(baseDirectory);
-		while (directory != null)
-		{
-			var direct = Path.Combine(directory.FullName, "Profiles");
-			if (Directory.Exists(direct))
-			{
-				return direct;
-			}
-
-			var project = Path.Combine(directory.FullName, "CopperScreen", "Profiles");
-			if (Directory.Exists(project))
-			{
-				return project;
-			}
-
-			directory = directory.Parent;
-		}
-
-		return Path.Combine(baseDirectory, "Profiles");
-	}
 
 	private sealed class ProfileFile
 	{
@@ -404,7 +295,8 @@ internal static class CopperScreenProfileStore
 					RealFastBase = draft.RealFastRamKb == 0 ? null : draft.RealFastBase,
 					RtgVramMb = draft.RtgVramMb == 0 ? null : draft.RtgVramMb,
 					RtcEnabled = draft.RtcEnabled,
-					FloppyDriveCount = draft.FloppyDriveCount
+					FloppyDriveCount = draft.FloppyDriveCount,
+                    FloppyDriveTypes = draft.FloppyDriveTypes.Select(type => type == LightweightFloppyDriveType.HighDensity ? "HD" : "DD").ToArray()
 				},
 				Cpu = draft.CpuBackend == M68kBackendKind.AccurateM68000 ? null : new CpuFile { Backend = draft.CpuBackend.ToString() },
 				Audio = draft.FloppyDriveAudio == FloppyDriveAudioOptions.Default
@@ -546,6 +438,7 @@ internal static class CopperScreenProfileStore
 		public bool? RtcEnabled { get; set; }
 
 		public int FloppyDriveCount { get; set; }
+        public string[]? FloppyDriveTypes { get; set; }
 	}
 
 	private sealed class CpuFile
@@ -734,7 +627,7 @@ internal static class CopperScreenProfileStore
 	}
 }
 
-internal sealed record CopperScreenProfileSummary(string Id, string DisplayName, string Path, string? UnavailableReason = null)
+internal sealed record CopperScreenProfileSummary(string Id, string DisplayName, string Path, string? UnavailableReason = null, bool IsBundled = false)
 {
 	public bool IsAvailable => UnavailableReason == null;
 	public override string ToString()

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "qualificationId": "copperstart-rdb-backup-restore-2026-10-19.1",
+  "status": "PASS",
+  "protocol": "copperscreen-installed-rdb-reinstall-v1",
+  "package": {
+    "identity": "CopperScreen.Test.5cc970f248af48fda36699d9ca2fd8af",
+    "version": "1.1.47.0",
+    "sha256": "49A70F602627997D37655C9BA180BB3EB6A6774BFBF57CDC25222EA423ED5341",
+    "signedLocalDiagnostic": true,
+    "storeCertified": false,
+    "sameExactPackageReinstalled": true
+  },
+  "inputs": {
+    "firmwareQualificationId": "diskboot-2026-10-18-ffs-bitmap.1",
+    "romSha256": "C77E51BBBAB2D0F5EDFC12B59094707279B2D1BC44E57B585857F1B56763C23B",
+    "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "defaultSavedImageSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "reversedSavedImageSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+  },
+  "coverage": {
+    "hostSemanticCases": 7,
+    "hostFailures": 0,
+    "hostSkips": 0,
+    "separateCompiledMc68000Cases": 0,
+    "installedProcessPhases": 15,
+    "fullRomBoots": 17,
+    "stageCounts": {
+      "before-uninstall": 4,
+      "restored-readback": 4,
+      "reinstalled-writes": 7
+    },
+    "freshProtectedBoots": 4,
+    "protectedWriteControls": 1,
+    "failures": 0,
+    "skips": 0
+  },
+  "deployment": {
+    "FirstRegistrationRemoved": true,
+    "PrivateProofDataRemovedByWindows": true,
+    "ExternalBackupSurvivedUninstall": true,
+    "FreshPrivateStateBeforeRestore": true,
+    "OwnedRegistrationRemoved": true,
+    "PrivateDataRetained": true
+  },
+  "results": {
+    "bothBootPrioritySelections": true,
+    "twoFfsPartitions": true,
+    "guestFlushBeforeHostSaveOrDispose": true,
+    "hostSaveAdvancedCycles": false,
+    "newNativeWritesBeforeUninstallAndAfterReinstall": true,
+    "newWriteCasesUseSeparateWorkingImages": true,
+    "restoredImagesAndSettingsUnchanged": true,
+    "allEightBackupRestoreHashesMatch": true,
+    "rawAuditPassed": true
+  },
+  "persistedFilesSha256": {
+    "default/disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "default/profile.json": "9597538AA67716513B8628B3B1BDF32D13E266FA832F4CCA2ADE5B5452C95426",
+    "default/last-machine.json": "6CEBABEC5D76315AF154A00E4569A7BDBE925A7DE7F3C1EB17EC5B556FD11E7F",
+    "default/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A",
+    "priority/disk.hdf": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+    "priority/profile.json": "665BF1509A69B91D01332BF18A7DFECF0950BEE88807567925FB7D843835B1E5",
+    "priority/last-machine.json": "21177BC41FD94BB1EF07DAEA07CE7D48BF9484E4549F29FF7E470F5E3D0E36B3",
+    "priority/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "validation": {
+    "releaseBuildWarnings": 0,
+    "releaseBuildErrors": 0,
+    "diagnosticBoundary": {
+      "NormalAssemblyDiagnostic": false,
+      "InstalledAssemblyDiagnostic": true
+    },
+    "hostTrxSha256": "9BC074B7CD9410E9C43185D0BC32FC10DC2AA4434C95274A61F3839CCA4EE398",
+    "installedRecordSha256": "D669C3B81C6BB34B175EF3EFEAFB13531FCC5F1410EDD4B0BC6D9342DEC53D45",
+    "independentAuditSha256": "553A1E2B13A9C9EBD8E0EE0575275CB6674DA7EBD201678D8348E912F61F181B"
+  },
+  "reproduction": {
+    "controller": "scripts/test-msix-rdb-reinstall.ps1",
+    "audit": "scripts/qualification/audit-msix-rdb-reinstall.py",
+    "evidenceDirectory": "artifacts/rdb-reinstall-installed-20261019/installed-accepted"
+  },
+  "scope": {
+    "backup": "Manual whole-HDF and settings copy after normal process exit, outside package storage",
+    "restore": "Same Windows user, package family and original paths",
+    "dedicatedHdfBackupButton": false,
+    "crossUserOrPathMigration": false,
+    "powerLossDurability": false,
+    "performanceAcceptance": false,
+    "productionEngineOrRomChanges": false
+  }
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "frame": 3000,
+    "keyCode": 320
+  },
+  {
+    "frame": 3006,
+    "keyCode": 448
+  },
+  {
+    "frame": 3506,
+    "keyCode": 336
+  },
+  {
+    "frame": 3512,
+    "keyCode": 464
+  },
+  {
+    "frame": 4712,
+    "keyCode": 337
+  },
+  {
+    "frame": 4718,
+    "keyCode": 465
+  },
+  {
+    "frame": 5918,
+    "keyCode": 336
+  },
+  {
+    "frame": 5924,
+    "keyCode": 464
+  },
+  {
+    "frame": 7424,
+    "keyCode": 324
+  },
+  {
+    "frame": 7430,
+    "keyCode": 452
+  },
+  {
+    "frame": 7580,
+    "keyCode": 334
+  },
+  {
+    "frame": 7586,
+    "keyCode": 462
+  },
+  {
+    "frame": 7736,
+    "keyCode": 324
+  },
+  {
+    "frame": 7742,
+    "keyCode": 452
+  },
+  {
+    "frame": 7892,
+    "keyCode": 334
+  },
+  {
+    "frame": 7898,
+    "keyCode": 462
+  },
+  {
+    "frame": 8048,
+    "keyCode": 324
+  },
+  {
+    "frame": 8054,
+    "keyCode": 452
+  },
+  {
+    "frame": 8204,
+    "keyCode": 334
+  },
+  {
+    "frame": 8210,
+    "keyCode": 462
+  },
+  {
+    "frame": 8360,
+    "keyCode": 324
+  },
+  {
+    "frame": 8366,
+    "keyCode": 452
+  },
+  {
+    "frame": 8516,
+    "keyCode": 324
+  },
+  {
+    "frame": 8522,
+    "keyCode": 452
+  },
+  {
+    "frame": 10172,
+    "keyCode": 334
+  },
+  {
+    "frame": 10192,
+    "keyCode": 462
+  },
+  {
+    "frame": 10198,
+    "keyCode": 332
+  },
+  {
+    "frame": 10218,
+    "keyCode": 460
+  },
+  {
+    "frame": 10318,
+    "keyCode": 335
+  },
+  {
+    "frame": 10328,
+    "keyCode": 463
+  },
+  {
+    "frame": 10358,
+    "keyCode": 324
+  },
+  {
+    "frame": 10364,
+    "keyCode": 452
+  },
+  {
+    "frame": 14864,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 14869,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 14874,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14879,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14884,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14889,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14894,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14899,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14904,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14909,
+    "mouseDeltaX": 10,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 14914
+  },
+  {
+    "frame": 14934,
+    "mouseDeltaX": -65
+  },
+  {
+    "frame": 14944,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 14950
+  },
+  {
+    "frame": 15100,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 15106
+  },
+  {
+    "frame": 15186,
+    "mouseDeltaX": 65,
+    "mouseDeltaY": -15
+  },
+  {
+    "frame": 15196,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 15202
+  },
+  {
+    "frame": 15352,
+    "keyCode": 355
+  },
+  {
+    "frame": 15362,
+    "keyCode": 289
+  },
+  {
+    "frame": 15368,
+    "keyCode": 417
+  },
+  {
+    "frame": 15378,
+    "keyCode": 483
+  },
+  {
+    "frame": 15528,
+    "keyCode": 338
+  },
+  {
+    "frame": 15534,
+    "keyCode": 466
+  },
+  {
+    "frame": 15934,
+    "keyCode": 336
+  },
+  {
+    "frame": 15940,
+    "keyCode": 464
+  },
+  {
+    "frame": 16040,
+    "keyCode": 307
+  },
+  {
+    "frame": 16046,
+    "keyCode": 435
+  },
+  {
+    "frame": 16056,
+    "keyCode": 280
+  },
+  {
+    "frame": 16062,
+    "keyCode": 408
+  },
+  {
+    "frame": 16072,
+    "keyCode": 281
+  },
+  {
+    "frame": 16078,
+    "keyCode": 409
+  },
+  {
+    "frame": 16088,
+    "keyCode": 281
+  },
+  {
+    "frame": 16094,
+    "keyCode": 409
+  },
+  {
+    "frame": 16104,
+    "keyCode": 274
+  },
+  {
+    "frame": 16110,
+    "keyCode": 402
+  },
+  {
+    "frame": 16120,
+    "keyCode": 275
+  },
+  {
+    "frame": 16126,
+    "keyCode": 403
+  },
+  {
+    "frame": 16136,
+    "keyCode": 324
+  },
+  {
+    "frame": 16142,
+    "keyCode": 452
+  },
+  {
+    "frame": 16842,
+    "keyCode": 320
+  },
+  {
+    "frame": 16848,
+    "keyCode": 448
+  },
+  {
+    "frame": 16948,
+    "keyCode": 345
+  },
+  {
+    "frame": 16954,
+    "keyCode": 473
+  }
+]

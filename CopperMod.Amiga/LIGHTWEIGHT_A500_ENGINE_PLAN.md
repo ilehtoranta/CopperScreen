@@ -11,5 +11,6 @@ and skills; current development guidance is maintained in these documents:
 The [original document](../docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_PLAN.md) is preserved in the
 [history archive](../docs/history/amiga/README.md), including its dated results and
 limitations. Historical G6/G7 cutover and completed H-stage instructions are not
-active development prerequisites. Lightweight is the active engine; Legacy and
-CopperStart are unavailable in the standard application.
+active development prerequisites. Lightweight is the active engine; Legacy remains
+unavailable. The [qualified standalone CopperStart scope](../docs/COPPERSTART_APP.md)
+uses the standard Lightweight application path.

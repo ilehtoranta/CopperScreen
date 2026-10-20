@@ -1,12 +1,13 @@
 # Lightweight A500 architecture
 
-Lightweight is CopperScreen's active engine. Legacy and CopperStart are unavailable
-in the standard application. The old G6/G7 cutover and completed Lightweight H-stage
+Lightweight is CopperScreen's active engine. Legacy remains unavailable.
+[Standalone CopperStart](../COPPERSTART_APP.md) runs as a qualified guest ROM
+through the same machine/reset interface. The old G6/G7 cutover and completed Lightweight H-stage
 procedures are [historical records](../history/amiga/README.md), not prerequisites
 for continued development.
 
 The host also offers [Minimal disk boot](MINIMAL_DISK_BOOT.md), an original guest
-bootstrap on the same machine/CPU path. It does not enable CopperStart, add host
+bootstrap on the same machine/CPU path. It does not add host
 OS traps or change chipset execution ownership.
 
 Start with the [engine API and supported profile](../../CopperMod.Amiga.Lightweight/README.md).
@@ -304,10 +305,15 @@ native pixels after compensating for progressive vertical duplication.
 
 `FloppyDriveCount` connects DF0 through DF3 in order (1–4; default 1). Each drive
 owns its standard sector or preserved ADF/IPF/SCP tracks, cylinder, motor latch, readiness/change state and
-nominal 300 RPM spindle phase. CIA-B PRB bits 3–6 select the drives; side, direction,
+nominal 300 RPM DD or 150 RPM HD spindle phase. Drive capability is configured
+with `FloppyDriveTypes`; only HD mechanisms accept HD sector media. CIA-B PRB bits 3–6 select the drives; side, direction,
 step and motor are shared. Selected status inputs combine as active-low lines.
 External empty DD drives identify as `DRT_AMIGA` on READY with the motor off;
-disconnected drives do not pull any input low. References:
+disconnected drives do not pull any input low. HD drives serialize raw
+`DRT_150RPM` (`$AAAAAAAA`) on READY with HD media, and `DRT_AMIGA` with DD
+media or no disk. A selected motor-on/off cycle resets the ID shift sequence;
+subsequent select edges present successive bits. DD's original internal no-ID
+behavior remains. See [HD support and qualification](HD_FLOPPY_2026-10-18.md). References:
 [Commodore Hardware Reference Manual, disk interface](https://bastya.net/AmigaDevDocs/hard_8.html)
 and [Commodore disk.resource constants](https://d0.se/include/resources/disk.i).
 
@@ -345,11 +351,15 @@ See the [storage contract](STORAGE.md) and [additional formats](DISK_FORMATS.md)
 Multiple selection fans out controls and combines status. More than one selected,
 running, mounted read source reports unsupported: this ideal-ADF implementation
 does not model overlapping physical read pulses. Standard-ADF write DMA is now
-implemented; HD media and silicon-exact analog recovery remain outside scope. See LWA-DISK-011
+implemented for DD and HD sector ADF. Silicon-exact analog recovery remains outside scope. See LWA-DISK-011
 and LWA-DISK-012 in the [issue register](ISSUES.md).
 
-In the desktop app, select **Settings > Floppy Drives > Connected** and restart to change
-drive count. Each connected drive has its own image field and live status button.
+In the desktop app, **Settings > Floppy Drives** selects the connected count
+and DD/HD mechanism for each drive; both require an Amiga restart. All four
+types persist in saved profiles and the remembered machine, including currently
+disconnected entries. Each connected drive has its own image field and live
+status button. The runner accepts repeatable `--drive-type 0 HD` options with
+`--drives` supplying the connected count; unspecified mechanisms remain DD.
 Clearing an image field and applying settings ejects that disk; ZIP disk sets can
 be assigned across connected drives. Swaps keep an independent 25-field empty
 interval per drive. Pausing holds these intervals; reset mounts pending media.
@@ -487,7 +497,7 @@ stream. MSBSYNC aligns each byte on a set MSB in the ideal receiver.
 Each mounted ADF has eagerly encoded tracks. Writes splice consecutive cells into
 this grid without allocations or sector-level shortcuts. This is an ideal-ADF
 model: analog precompensation, PLL behavior and the few-cell difference between
-nominal 300 RPM and Paula's crystal-derived write clock are not flux simulation.
+nominal 300/150 RPM and Paula's crystal-derived write clock are not flux simulation.
 Host export uses CopperDisk's checksum-checked decoder and requires all 11 sectors
 on every changed track. Invalid/custom tracks are retained in memory and export
 fails rather than silently restoring old sector data. Save uses a temporary file
@@ -511,6 +521,47 @@ The framebuffer uses beam coordinates and includes blanking. Presentation owns
 viewports, scaling and interlace composition. Do not crop or skip emulated pixels
 to hide a defect or improve benchmark FPS. Host input delivery and audio queues
 have their own lifecycle; pause/reset/fault handling must not replay stale audio.
+The desktop audio owner bounds a full-queue demand wait and services stalled
+output recovery outside native callbacks. Native sink restart, or reopening an
+invalidated device after restart fails, retains the guest machine. A valid sink
+restart can retain queued PCM. Full uninitialization joins old callbacks before
+resetting consumer indexes, discarding stale playback and priming the existing
+reserve before a new native start. With no callback clock, the owner continues
+guest fields on a bounded video clock and omits unavailable-time output. Returning
+audio never replays a backlog. Diagnostic snapshots synchronize with native lifetime;
+paused silence, active underruns, discarded PCM and unavailable-time suppression
+remain separate observations. Best-effort Windows MMCSS registration belongs to
+the desktop runtime thread and is reverted there. See the
+[host recovery contract](../INSTALLED_DISPLAY_RECOVERY.md). This adds no chipset
+clock or parallel hardware execution.
+
+With an audio output, rendered-field reservation and publication never wait for
+the UI presentation lock. Contention may drop a presentation, while the owner
+still renders the complete guest field, pixels and PCM in order. Existing leased
+pixels remain immutable. Silent execution retains its presentation backpressure.
+The window coalesces frame notifications through one reusable thread-pool work
+item, so dispatcher queue locks or platform wake signals do not execute on the
+PCM owner. The UI still presents at its existing priority; commands and guest
+hardware retain the same execution owner.
+
+Running command publication also uses nonblocking presentation locks on both
+sides of copying the current pixels. Commands still execute and return their
+captured result on the owner; UI contention can defer their visual publication
+until a subsequent field. Paused and silent publication can wait. The native
+reserve targets ten complete guest-field blocks: a retained WASAPI catch-up
+burst exhausted eight while owner work remained short, and a demand replay
+requires ten. This adds approximately 40 ms of queued PAL audio; latency and
+release budgets remain open.
+
+The desktop executable disables Quick JIT for application methods, so the PCM
+producer starts with optimized code rather than spending initial fields in a
+slower compilation tier. Framework ReadyToRun code can still participate in
+tiering. This is a desktop runtime configuration; the headless runner's retained
+measurement settings are unchanged. Diagnostic-only
+[bounded audio timelines](../AUDIO_TIMELINE.md) correlate field, command, wait and
+callback intervals without per-cycle instrumentation or stack sampling. Trace
+writers freeze before export while the owner remains alive for normal final-save
+commands; ordinary shutdown joins it afterward.
 
 Unsupported hardware or execution must be reported visibly. Do not silently
 switch engines, downgrade a configured machine, bypass a stop or insert a

@@ -198,6 +198,11 @@ public sealed class AdaptiveLayoutTests(LaunchUiFixture ui) : IDisposable
             sound.Flyout!.ShowAt(sound);
             Assert.True(sound.Flyout.IsOpen);
             sound.Flyout.Hide();
+            Click(Named<Button>(window, "Stop"));
+            await Until(() => Runtime(window) == null);
+            window.UpdateLayout();
+            Assert.Equal(1, Grid.GetColumn(toolbar));
+            Assert.Equal(new Size(1920, 1080), window.ClientSize);
         }
         finally { window.Close(); await Until(() => !window.IsVisible); }
     });

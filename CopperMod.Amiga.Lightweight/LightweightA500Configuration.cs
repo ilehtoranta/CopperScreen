@@ -16,8 +16,10 @@ public sealed record LightweightA500Configuration
     public M68kCpuModel CpuModel { get; init; } = M68kCpuModel.M68000;
     /// <summary>Optional 68040 JIT with interpreter fallback at unsupported instructions and MMU accesses.</summary>
     public M68kExecutionMode CpuExecutionMode { get; init; } = M68kExecutionMode.Interpreter;
-    /// <summary>Connected DD drives, DF0 through DF3 (1–4). Media starts write protected.</summary>
+    /// <summary>Connected drives, DF0 through DF3 (1–4). Media starts write protected.</summary>
     public int FloppyDriveCount { get; init; } = 1;
+    /// <summary>Fitted drive types in DF0–DF3 order. Unspecified connected drives are DD.</summary>
+    public IReadOnlyList<LightweightFloppyDriveType> FloppyDriveTypes { get; init; } = [];
     /// <summary>File-backed CopperHDF units, attached at construction. Changes require a new machine.</summary>
     public IReadOnlyList<AmigaHardfileConfiguration> Hardfiles { get; init; } = [];
     /// <summary>Live host-folder DOS volumes. Attach/detach requires a new machine.</summary>

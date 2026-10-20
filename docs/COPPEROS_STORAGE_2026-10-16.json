@@ -1,0 +1,3601 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "status": "bounded-native-storage-source-qualified",
+  "shipping": false,
+  "defaultActivationAllowed": false,
+  "performance": "not-measured",
+  "scope": "Native writable DOS1 and user workspace source qualification; directory-change simulation is not installed MSIX evidence. Original settings/data fixtures, not complete CopperOS preferences or general OS qualification.",
+  "pair": {
+    "$schema": "copperos-storage.schema.json",
+    "schemaVersion": 1,
+    "contractId": "copperscreen.copperstart-copperos.native-storage",
+    "contractVersion": "0.2.0-dev.1",
+    "shipping": false,
+    "defaultActivationAllowed": false,
+    "explicitDevelopmentLaunchAllowed": true,
+    "rom": {
+      "version": "diskboot-2026-10-16-dev.8",
+      "bytes": 524288,
+      "sha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9"
+    },
+    "systemImage": {
+      "version": "0.2.0-dev.1",
+      "bytes": 901120,
+      "sha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88"
+    },
+    "machine": "Lightweight PAL OCS 68000 interpreter; 512 KiB Chip + 512 KiB slow; one DF0; no Fast RAM, RTC, hardfiles, host directories or Legacy",
+    "storage": {
+      "format": 1,
+      "directory": "user-data/CopperOS/Workspaces/<id>",
+      "image": "System.adf",
+      "identity": "workspace.json",
+      "previous": "Previous.adf",
+      "lock": "workspace.lock",
+      "overwriteExistingOnUpdate": false,
+      "automaticMigration": false,
+      "seedWritable": false,
+      "checkpoint": "Owner-thread export after DMA/motor inactivity and valid DOS1 root/bitmap; flushed temporary file, atomic replace with previous image; dirty acknowledgement only after primary save"
+    },
+    "nativeApis": [
+      "DOS1 DD file creation/update/output-open truncation",
+      "public DOS Read/Write/Seek/Close",
+      "native rename/delete",
+      "CreateDir/CurrentDir/UnLock and relative child file I/O",
+      "physical trackdisk read/write and write protection"
+    ],
+    "unqualifiedApis": [
+      "SetFileSize",
+      "SetComment/SetDate/SetProtection",
+      "format",
+      "links",
+      "OFS/DOS2-5 mutations",
+      "hardfiles/host directories"
+    ],
+    "qualification": {
+      "nativeSource": "passed",
+      "installedMsix": "unavailable",
+      "performance": "not-measured"
+    },
+    "evidence": "docs/COPPEROS_STORAGE_2026-10-16.json"
+  },
+  "seedIdentity": {
+    "CompatibleWorkspaceSeeds": [],
+    "PairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+    "Sha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88"
+  },
+  "concurrentProducerSourceChanges": [
+    {
+      "producer": "CopperStart",
+      "path": "src\\CopperStart.Dos\\DosResidentRegistryCore.cs",
+      "frozenSha256": "c6b25dd1733bbdd36eb096251ba205313b41c266efe36f0e7d40c6f34a1c7103",
+      "currentSha256": "4a09242f92efbb40634d6dfc6760da09799df8e1f9d85458ae47716ecca1fadf",
+      "includedInQualifiedRom": false
+    }
+  ],
+  "producerBases": {
+    "CopperStart": "50f8583a40d24c34a06d4bed71ab31db19d47b95",
+    "CopperOS": "3c82777009cb2f7268965eb7c182218a61ff42df",
+    "state": "Unreleased working-tree inputs; frozen qualified root/Exec/compiler; concurrent graphics work excluded"
+  },
+  "romBuild": {
+    "request": {
+      "path": "artifacts/copperos-storage/rom-owned-directory/compile-request.json",
+      "bytes": 33537,
+      "sha256": "37c71a069338e64c32852bd2ac5b60dfa2f28be8a44a2ab1c78d30b5cce39682"
+    },
+    "sources": [
+      {
+        "sha256": "92c69d8a13662d45c6e3de64adf5813522eb53c375d3a977bafdefc65db9fd0d",
+        "path": "build\\Build-StorageProofRom.ps1"
+      },
+      {
+        "sha256": "e41222a24136a90139686e46d6505bcd5401242bcbd6b0a75c690a6923b767e6",
+        "path": "src\\CopperStart.Devices\\AudioDeviceCore.cs"
+      },
+      {
+        "sha256": "bc95e342893237cb96a28f72e738fc3ff24bf450dd1c6c46382602629925d961",
+        "path": "src\\CopperStart.Devices\\AudioDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "2f4fbfa0430e7865d459f88808228a15e14638123b7d1b77bb0ab35ca6516ee9",
+        "path": "src\\CopperStart.Devices\\ClipboardDeviceCore.cs"
+      },
+      {
+        "sha256": "bdaef0faef31cd5f9cc0fae71c70f5b91e2cb58491170a637d15b7803e906130",
+        "path": "src\\CopperStart.Devices\\ClipboardDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "f82f95c59e20ef47b3c2a698ecec0f6030815133eacf040d7a5f112e8cfa78a7",
+        "path": "src\\CopperStart.Devices\\ConsoleDeviceCore.cs"
+      },
+      {
+        "sha256": "b685e8099f5e119ec5f8325306f94258900cf91b3faf4d619c9a4a4b679287a6",
+        "path": "src\\CopperStart.Devices\\ConsoleDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "58e6bf18bbbf2afd4c67344d33bda77f968ee8811b422717b5be9d71e2f7be3d",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomAudioPlatform.cs"
+      },
+      {
+        "sha256": "c3372699c4ce2fcfe26f6f5cfc8917b7ae8c25844d491ed81da07f9d6904baaf",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomClipboardPlatform.cs"
+      },
+      {
+        "sha256": "0b264664a511eb69565cc210ed628f927dadca6adf9b2823657fb8ea14a1bd03",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomConsolePlatform.cs"
+      },
+      {
+        "sha256": "e1122916249b3fcece3f489d342534d360e8ba94685cd823aac797dcc9a921d3",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomGamePortPlatform.cs"
+      },
+      {
+        "sha256": "bb610a981343a539edadc2ae59eccff353c31de795728e5524e6224f45a07f41",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomInputPlatform.cs"
+      },
+      {
+        "sha256": "d059b6bb09dea941669a824050494bd9e6b4f0df58dbfba9b61a8f268913354e",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomKeyboardPlatform.cs"
+      },
+      {
+        "sha256": "544418d20774b2292dff4ce5fd960b9ca05237f62e33a1808507ff729c159b93",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomTimerPlatform.cs"
+      },
+      {
+        "sha256": "5455e2b5c73a3611e6c83b7966c38ebceb4cd36b08f3628ffed59d5f7d3e61c6",
+        "path": "src\\CopperStart.Devices\\CopperSharpRomTrackDiskPlatform.cs"
+      },
+      {
+        "sha256": "25fc9b6127f3e5e2797aba31c8edbc1e8747bd11106e52049ba05ce523c71fb0",
+        "path": "src\\CopperStart.Devices\\CopperStart.Devices.csproj"
+      },
+      {
+        "sha256": "d9b8cbd637b76d875450a8ecea57442d364eaf2b4d72c5f3d52b102a253059b4",
+        "path": "src\\CopperStart.Devices\\DeviceAggregateNativeRoot.cs"
+      },
+      {
+        "sha256": "d8f21ff7396cc884382ddf9cafc0d67eb5b14bea7a84294c6447352024751479",
+        "path": "src\\CopperStart.Devices\\GamePortDeviceCore.cs"
+      },
+      {
+        "sha256": "3e0cf5dcbe9fd81fb2d07524d4bae794f6384e1bc931800a756949b0c0de999a",
+        "path": "src\\CopperStart.Devices\\GamePortDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "454afc1ce2b2ab44f35f900ab1dce116b0c405a52cb716f62890270f03afd050",
+        "path": "src\\CopperStart.Devices\\IAudioDevicePlatform.cs"
+      },
+      {
+        "sha256": "8ec506f677fe6f2cfb2cbffab73eff5d5857b10e864f1dbf2c2f76544871bbe4",
+        "path": "src\\CopperStart.Devices\\IClipboardDevicePlatform.cs"
+      },
+      {
+        "sha256": "a16f7b934282946bc0f2e67b4bf8ded64a56c13aa0aa9032df4afe209d99851a",
+        "path": "src\\CopperStart.Devices\\IConsoleDevicePlatform.cs"
+      },
+      {
+        "sha256": "4cde3bb42fbcd7739aab9eee2222c5b1ea5c1e0981f8d4c7f406aad6581ae0df",
+        "path": "src\\CopperStart.Devices\\IGamePortDevicePlatform.cs"
+      },
+      {
+        "sha256": "6aa2b220d0df4f666dfc9dc259cf044097fb5fbd4575ea23c00a2650ad96b908",
+        "path": "src\\CopperStart.Devices\\IInputDevicePlatform.cs"
+      },
+      {
+        "sha256": "4281fd752c52380540ed8cfd3e9254bde27c97701ad508a329a3e5d6e80d3a6d",
+        "path": "src\\CopperStart.Devices\\IKeyboardDevicePlatform.cs"
+      },
+      {
+        "sha256": "23544d3f74de35a9619f0310b08edd53cac4d35a08699b563f9b8b7171c002af",
+        "path": "src\\CopperStart.Devices\\InputDeviceCore.cs"
+      },
+      {
+        "sha256": "b24edf41112b97ddcf6198bff1aa8ad7317b2ec596315107a76f9e5c40ee3ef1",
+        "path": "src\\CopperStart.Devices\\InputDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "7b21a6880dfc5d86818414de88650c8cb28af147baec02c75dce17c8d5673897",
+        "path": "src\\CopperStart.Devices\\ITimerDevicePlatform.cs"
+      },
+      {
+        "sha256": "66d1d72a91dc1a7d45d3833619e870faf185a9ba91c22a5ed138daf6f6ab91e9",
+        "path": "src\\CopperStart.Devices\\ITrackDiskDevicePlatform.cs"
+      },
+      {
+        "sha256": "c880438865102687e8d057a7057f1fc9d64ff3db7a02180c13909dc4137b03a0",
+        "path": "src\\CopperStart.Devices\\KeyboardDeviceCore.cs"
+      },
+      {
+        "sha256": "9e8f4c2cb8a6477a2f41ca13db7495a79e7b9921da52bb931ea011c17ae2a75d",
+        "path": "src\\CopperStart.Devices\\KeyboardDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "d37b0416e7df8078f63e481eb5c17f1d4c17d3af57a5a3b8bbea242adf26b108",
+        "path": "src\\CopperStart.Devices\\NativeConsoleCore.cs"
+      },
+      {
+        "sha256": "bcdb1adfbbdb87c402f8b00084e36af60e5f9e9f7ab8c4f8361c12c9af3ddd32",
+        "path": "src\\CopperStart.Devices\\NativeConsoleFont.cs"
+      },
+      {
+        "sha256": "a27e05306dc7c3971b9ed8c1e580a137f3164f00b6dbb16a85c756a49f2fb832",
+        "path": "src\\CopperStart.Devices\\NativeFloppyReader.cs"
+      },
+      {
+        "sha256": "233b9a0f39fee932acaa972dd61d67bd214e09d6e937735364406a3764eb4ecb",
+        "path": "src\\CopperStart.Devices\\NativeTrackDiskDevice.cs"
+      },
+      {
+        "sha256": "ccf96c87e9d753fa63bd6477510fda3ee422913afa68854e4f822e8c27070b52",
+        "path": "src\\CopperStart.Devices\\TimerDeviceCore.cs"
+      },
+      {
+        "sha256": "45a717ca9044fb3a99b6e0a47a5587c1866084bc8db90572f23f0f5cf883dda1",
+        "path": "src\\CopperStart.Devices\\TimerDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "9cbb42423f0be64e36230e0aa18366f13298f886fa35ae6f354a0ee5936bc726",
+        "path": "src\\CopperStart.Devices\\TrackDiskDeviceCore.cs"
+      },
+      {
+        "sha256": "6963f67733399e05d55058a37b580dd181efacc1f028322f962d320084537921",
+        "path": "src\\CopperStart.Devices\\TrackDiskDeviceNativeRoot.cs"
+      },
+      {
+        "sha256": "666b5bb8a301f6acf80ef7a27077e33807292d0cb0aa960c9a0ad001365c48cd",
+        "path": "src\\CopperStart.Dos\\AmigaDiskFileSystemCore.cs"
+      },
+      {
+        "sha256": "f2394494bdc20106b931482091a1fb1bbfe8aa4a40bbd833d6ef977686527be5",
+        "path": "src\\CopperStart.Dos\\AmigaFfsWriteCore.cs"
+      },
+      {
+        "sha256": "47c61bae97c98443da4fa2b69a37aa47917799d4710be31f82fd1ba24f1b7025",
+        "path": "src\\CopperStart.Dos\\AssemblyInfo.cs"
+      },
+      {
+        "sha256": "b5f8440d218889ed7623301f9e819a77fb87fe9bdd31be104ec94810e103591c",
+        "path": "src\\CopperStart.Dos\\CopperSharpNativeDosPlatform.cs"
+      },
+      {
+        "sha256": "18fee4d6676ef3a1d7e7171ebb24d8a8b5c945ba66c6b13382f955623eabc5d2",
+        "path": "src\\CopperStart.Dos\\CopperSharpRomDosPlatform.cs"
+      },
+      {
+        "sha256": "4ef12a6a97e5eef5cc03ea6d1339ffbb62664acf74e6ee2cd7811f4cd8a99436",
+        "path": "src\\CopperStart.Dos\\CopperStart.Dos.csproj"
+      },
+      {
+        "sha256": "c4ae72acde52b3b73f60324326bdcbfa74348f35bfe2fa974da19e13a0f842b7",
+        "path": "src\\CopperStart.Dos\\DosAbiProfile.cs"
+      },
+      {
+        "sha256": "0685840af70a6786b31f9e0f19d46959a3d23ebd6afdea06c674974d599e36e2",
+        "path": "src\\CopperStart.Dos\\DosAssignCore.cs"
+      },
+      {
+        "sha256": "8ae05b02db8e76e82f3aed091decb51e3bf834150352c5c6408f22db5944ebd0",
+        "path": "src\\CopperStart.Dos\\DosAssignNodeAttributeCore.cs"
+      },
+      {
+        "sha256": "a5c4995f500ab873aed51ce78c3e1bd86364372b4b9531b1ed6937f3b34f0439",
+        "path": "src\\CopperStart.Dos\\DosBcplGlobalVectorCore.cs"
+      },
+      {
+        "sha256": "3016a8bbe9aae2bc8d90a997e0809669aba84e287f03714b42f082bbc9c4396f",
+        "path": "src\\CopperStart.Dos\\DosChildCliStartup.cs"
+      },
+      {
+        "sha256": "3c4be1d63916f0a4c2ce4f06376e4dc0ebc0f81c47b7f76b84faff9624989561",
+        "path": "src\\CopperStart.Dos\\DosChildCompletionCore.cs"
+      },
+      {
+        "sha256": "59fb3619aca6f147fc8fc0c7916eacadc30040c4bd5b3ecbf932b4defa2ac10e",
+        "path": "src\\CopperStart.Dos\\DosChildCompletionRecords.cs"
+      },
+      {
+        "sha256": "4444e23ae87ea7ef2af7f6db551873433fe6531fb19e5d01d7ada7f30d09e863",
+        "path": "src\\CopperStart.Dos\\DosChildContinuationCore.cs"
+      },
+      {
+        "sha256": "a9e16ddc0d9e17f23d7417de8438ed3ca79edfc5dd160b58c258537086f98b7e",
+        "path": "src\\CopperStart.Dos\\DosChildInheritedResources.cs"
+      },
+      {
+        "sha256": "67d8c3f62881054a1feecc9d1a5a137ee93923a299fb155c205969cb0d254ca2",
+        "path": "src\\CopperStart.Dos\\DosChildProcessLaunchCore.Create.cs"
+      },
+      {
+        "sha256": "28b312fc2708e6551e9a5c6816ed2c20c253d31d74c4dba0adb7fb7ea47569bc",
+        "path": "src\\CopperStart.Dos\\DosChildProcessLaunchCore.cs"
+      },
+      {
+        "sha256": "f2c763eacf37f2abd070114cbe117d1a59dd5d5eb0145832a35d5b87c3a4cfed",
+        "path": "src\\CopperStart.Dos\\DosChildProcessLaunchCore.Transaction.cs"
+      },
+      {
+        "sha256": "6c2e739f713a237f36ecb6a36eca7aa820c4d472d6c4b33980083438aaf789b8",
+        "path": "src\\CopperStart.Dos\\DosCliBstrCodec.cs"
+      },
+      {
+        "sha256": "041be4279e5edbe1e5c2147d054ff201535b8ec50ac9dfa684c7653ad0bd517d",
+        "path": "src\\CopperStart.Dos\\DosCliCore.cs"
+      },
+      {
+        "sha256": "71a858e0cbe01bb26ccbee04fd17ab6c7d2ef3b7b90e01c8af0d881de9afcf7a",
+        "path": "src\\CopperStart.Dos\\DosCliDataCore.cs"
+      },
+      {
+        "sha256": "a08e958da3096a095dd3e1a9374a99ec79cec31b1c6102d61c9d58a191a7fe94",
+        "path": "src\\CopperStart.Dos\\DosCliInitializationCore.cs"
+      },
+      {
+        "sha256": "651b098a5ae8c0496de5a02f2d104456f3dc5279b396276646fcf54c44068f85",
+        "path": "src\\CopperStart.Dos\\DosCliNativeRoot.cs"
+      },
+      {
+        "sha256": "9687ee8ad50e6690e91764094fc66a9b02fec543c98146f29dc79444e53d98ed",
+        "path": "src\\CopperStart.Dos\\DosCliRegistryCore.cs"
+      },
+      {
+        "sha256": "72c801dbf49562e8026ef19982882feed0a6a6b07d753a6c13916273eda24fae",
+        "path": "src\\CopperStart.Dos\\DosCliStorageLayout.cs"
+      },
+      {
+        "sha256": "0d0c937e332ac7b7ece77b9f07f5af16aa447d34b5e4306b2b5dc571e852c644",
+        "path": "src\\CopperStart.Dos\\DosCommandImageCore.cs"
+      },
+      {
+        "sha256": "fd70a76acf1bbea5db621ff61d47bf7eb0b4fc36944084ff13088204a5fdb96e",
+        "path": "src\\CopperStart.Dos\\DosCore.ChildCompletion.cs"
+      },
+      {
+        "sha256": "275918e65aceec5971f160807e3548213a23d966fbc1d377f53e416398f241ad",
+        "path": "src\\CopperStart.Dos\\DosCore.CommandPath.cs"
+      },
+      {
+        "sha256": "7a35821e57c60ff69cdbdb7aef8c4ed63da1cd8c1daa567766cb4823c5b2aa4c",
+        "path": "src\\CopperStart.Dos\\DosCore.cs"
+      },
+      {
+        "sha256": "52e7cf2a984b216bbe9f03d6dda968563d98a2179425781334c1164714979646",
+        "path": "src\\CopperStart.Dos\\DosCore.PreparedChild.cs"
+      },
+      {
+        "sha256": "a98cca05f00691973c819b4af34e97ba5411687077abde85c3c6532cf9ef404c",
+        "path": "src\\CopperStart.Dos\\DosCore.ProcessArgumentInput.cs"
+      },
+      {
+        "sha256": "064ef257d52111a9601b2c06c80acdfebfe32ae3999de467e9781fbf41c5eeaa",
+        "path": "src\\CopperStart.Dos\\DosCore.RunCommandInput.cs"
+      },
+      {
+        "sha256": "2e8d4d67efd58db202f2f9b2f5e3b0293170c7b21c629830854386253f0430a0",
+        "path": "src\\CopperStart.Dos\\DosCore.RunCommandRetirementInspection.cs"
+      },
+      {
+        "sha256": "db3aa0ca6fe6aacb46965ee476d6bf16fe1bb86168de245308f00e0466b2ce7b",
+        "path": "src\\CopperStart.Dos\\DosCore.ShellProcessContext.cs"
+      },
+      {
+        "sha256": "5272d2bfb0e04fa4357b395b3313377772fd91610ac691626bcb983b4afe32e7",
+        "path": "src\\CopperStart.Dos\\DosDateCore.cs"
+      },
+      {
+        "sha256": "8438268c8521c41edbec82b031aafc5f2d62c9ec58abd3242054ca30e5f2100b",
+        "path": "src\\CopperStart.Dos\\DosDateTextCore.cs"
+      },
+      {
+        "sha256": "68845288beb435de1b976927f25b27e4ff2282f05fa822cc7798018ab5bd4bf8",
+        "path": "src\\CopperStart.Dos\\DosDeviceNodeAttributeCore.cs"
+      },
+      {
+        "sha256": "692eba35f829c691eedefc0e6d66fe53adc0cb27e2397999fceb1149b368a9ae",
+        "path": "src\\CopperStart.Dos\\DosDeviceProcCore.cs"
+      },
+      {
+        "sha256": "dde988d117c55bca69bb2ca2377a49c15aa5996b20d2a74930330715c63880bd",
+        "path": "src\\CopperStart.Dos\\DosErrorCore.cs"
+      },
+      {
+        "sha256": "75b569acf713106b9edd771ca58275923aa3df5858d12ab9e58020cc92cca73d",
+        "path": "src\\CopperStart.Dos\\DosExAllHookCore.cs"
+      },
+      {
+        "sha256": "ce217f948fa4591f3dee0ca63aa3825cfbe6297965787cce63b6d606de2c37f5",
+        "path": "src\\CopperStart.Dos\\DosExamine64Core.cs"
+      },
+      {
+        "sha256": "ae709f2e3411dd0d4be177e1e5b02c8bf6fc28fbb90fd786605acca208909bc0",
+        "path": "src\\CopperStart.Dos\\DosExitCore.cs"
+      },
+      {
+        "sha256": "8f0485822b173898141783393a8ac021d2d40fccbc216e2112e05e4494670d68",
+        "path": "src\\CopperStart.Dos\\DosExpansionNodeCore.cs"
+      },
+      {
+        "sha256": "db0baea53edaa04725f06020f88edbd6b4b5dfe44eab66ff6222584a68d52386",
+        "path": "src\\CopperStart.Dos\\DosFileSystemAttributeCore.cs"
+      },
+      {
+        "sha256": "1f7265b67626f51f24d95460e62e2f3329ef7e070a3a62e42379c75f6936d452",
+        "path": "src\\CopperStart.Dos\\DosFileSystemContextAttributeCore.cs"
+      },
+      {
+        "sha256": "f3adc85075dd73873cd4fb3f3b6cf2f1840f6e4151ec2602c076e343d0f6a500",
+        "path": "src\\CopperStart.Dos\\DosFormattedOutputCore.cs"
+      },
+      {
+        "sha256": "fdc0564c75a38ac62940fee1d5629d4912306910e34ebacb64595391c1efeb96",
+        "path": "src\\CopperStart.Dos\\DosHandlerProcessLaunchCore.cs"
+      },
+      {
+        "sha256": "a6cfa51fa0c063d48442a089bf6476e1283a9b49f177dd23b89046b43bfb9b53",
+        "path": "src\\CopperStart.Dos\\DosHandlerSegmentCore.cs"
+      },
+      {
+        "sha256": "4c3b521efc4c3e54bc3680e7576c19f7c33c59fd25e458163e58b23e3b53a9a7",
+        "path": "src\\CopperStart.Dos\\DosInternalSegmentCore.cs"
+      },
+      {
+        "sha256": "08b82919e69eccfd92fb33bfd661d553bb4e69815468b50bbed8a5b7517c815a",
+        "path": "src\\CopperStart.Dos\\DosListCore.cs"
+      },
+      {
+        "sha256": "0a78ddb24b3cb17c8d2e2a32bbe9e7afb37ed76780262855580dd5106c9dc79d",
+        "path": "src\\CopperStart.Dos\\DosListWaitCore.cs"
+      },
+      {
+        "sha256": "48a3dcd29c4cb113d9f920d8a0de9d14b5cb0eadb1727691570319a4b03e03bb",
+        "path": "src\\CopperStart.Dos\\DosLockNativeRoot.cs"
+      },
+      {
+        "sha256": "8f5d03165e3c4764e481d8209af05d2cabc3a3651c47ae358ec78ed45215940a",
+        "path": "src\\CopperStart.Dos\\DosMatchCore.cs"
+      },
+      {
+        "sha256": "84a8e2fe358f971a1ca0683c56d2742dea1e3d7fe94f005eb54f65ab1b8953d7",
+        "path": "src\\CopperStart.Dos\\DosMatchNativeRoot.cs"
+      },
+      {
+        "sha256": "2bdf1dea5dfb579d1b20c393337411b80e7738980f413865e58c4806d217b481",
+        "path": "src\\CopperStart.Dos\\DosNativeDirectBoundary.cs"
+      },
+      {
+        "sha256": "34e14cb8527e5615a2591272f0224fbd6f7514f5ce897be6916ee616894b1588",
+        "path": "src\\CopperStart.Dos\\DosNativeDirectEntrypoints.g.cs"
+      },
+      {
+        "sha256": "ce9cb7471ee00ec145e3b589dfc2604199daa492962d8b80a19c1c0c2b81edf8",
+        "path": "src\\CopperStart.Dos\\DosNativeDirectManagementEntrypoints.cs"
+      },
+      {
+        "sha256": "a09a1379f467508219020bb776426bf405abad35d6456c9fe61a6f3304f4107b",
+        "path": "src\\CopperStart.Dos\\DosNativeDirectVectorCore.g.cs"
+      },
+      {
+        "sha256": "6fa02217f94bd98886eb17cce0ccc7f2963c31d8a38f58375e45770d14b991a2",
+        "path": "src\\CopperStart.Dos\\DosNativeEntrypoints.cs"
+      },
+      {
+        "sha256": "a35ed1c384d28f483a0f98b9e4748c64930b1c4ed7b3cd8b6d56620757db4bf3",
+        "path": "src\\CopperStart.Dos\\DosNativeInactiveHandlerResolver.cs"
+      },
+      {
+        "sha256": "4c1aa51a514b18ecb552a4600ebc9083a127553defca6aa35093bcca8ee7eb76",
+        "path": "src\\CopperStart.Dos\\DosNativeInactiveHandlerWaitPolicy.cs"
+      },
+      {
+        "sha256": "536da1f7548bcba4e1bef38d388622d26abd8753f81e797ab8950af33fb22b36",
+        "path": "src\\CopperStart.Dos\\DosNativeLibraryCore.cs"
+      },
+      {
+        "sha256": "5c41049e36f2ad0aacece9d430852c78c98c1f51d4d4ab5a70bbdf9e4d04fb07",
+        "path": "src\\CopperStart.Dos\\DosNativeLibraryRoot.cs"
+      },
+      {
+        "sha256": "350156f1676106129cbd66707788f7e3ff3d7b950433fb5fda3e5e38088505ad",
+        "path": "src\\CopperStart.Dos\\DosNativeOwnedLibraryCore.cs"
+      },
+      {
+        "sha256": "3fc3a9cebb7f4f68b7b90b6bc9737acb6103c5706e5780471c2f5e534ecef515",
+        "path": "src\\CopperStart.Dos\\DosNativePermanentEntrypoints.cs"
+      },
+      {
+        "sha256": "b4fec50f926767e70b2918175fccc691a1b0b6f892d92a83ed6b3630da962e92",
+        "path": "src\\CopperStart.Dos\\DosNativeProcessReturn.cs"
+      },
+      {
+        "sha256": "34fe9959b90c5b943bf582c229a523af2c5f26ed0902c6cf1360a884f07ae79d",
+        "path": "src\\CopperStart.Dos\\DosNativeProductionRoot.cs"
+      },
+      {
+        "sha256": "5f39001195c18001021aea7af8fe661f880457137d7669e3184d5c9f1568b6d9",
+        "path": "src\\CopperStart.Dos\\DosNativeProviderLifecycle.cs"
+      },
+      {
+        "sha256": "08b174bcc95af34f5665881432e38af1e3229a879c5b5ce6f4f706775277a67f",
+        "path": "src\\CopperStart.Dos\\DosNativeProviderQualificationEntrypoints.cs"
+      },
+      {
+        "sha256": "630f6b65d465222517e8eed176186f4b5bff332a90b80e3c667021818c367d12",
+        "path": "src\\CopperStart.Dos\\DosNativeProviderRecords.cs"
+      },
+      {
+        "sha256": "b826b2fe51b31e23aeca1a2491c06a7f63ed270bb1fd88e4bdd58aa7d8639c63",
+        "path": "src\\CopperStart.Dos\\DosNativeRoot.cs"
+      },
+      {
+        "sha256": "859e0a740e77ab2560225ba4b9bbaa8eed2372ef1f836bb6db3fa1dce69db25b",
+        "path": "src\\CopperStart.Dos\\DosNativeVectors.cs"
+      },
+      {
+        "sha256": "dd1d9291bd856d342d2ef9adf8b4bacad4b90e4e93191fba746a3cef4b500284",
+        "path": "src\\CopperStart.Dos\\DosNativeWaitRecord.cs"
+      },
+      {
+        "sha256": "0b69014b5a8f85d6634a5c7154f4ab2075a52c824060402e6456a0c1415b8c47",
+        "path": "src\\CopperStart.Dos\\DosNotificationCore.cs"
+      },
+      {
+        "sha256": "add35d2eaea556a3a3b9d8157eaf50a43e06df3f549c31347f78ecbcac424fe1",
+        "path": "src\\CopperStart.Dos\\DosObjectCore.cs"
+      },
+      {
+        "sha256": "b21ae588f8459e10cd81aefd6a09658f767e3bcf20be9307d01bb0462ede2e58",
+        "path": "src\\CopperStart.Dos\\DosObjectRecords.cs"
+      },
+      {
+        "sha256": "122464a69aa6c547f74e2c630212d8b4d08dc8d7221e211e190814a2f9afc6d5",
+        "path": "src\\CopperStart.Dos\\DosOwnedProcessTaskCore.cs"
+      },
+      {
+        "sha256": "67bd2a14f57d05a64343e388c398391baf7d5572d4acfcf1cdb0d2a0a8321d6c",
+        "path": "src\\CopperStart.Dos\\DosPacketCore.cs"
+      },
+      {
+        "sha256": "ec633765c3ac2f53ad8660a0e122321edb8217a7ce52f94e4c267a3730a367fe",
+        "path": "src\\CopperStart.Dos\\DosPathCore.cs"
+      },
+      {
+        "sha256": "ef854fcbaf4cd4db7ff54bf67bd3bc7c2d0fc20f6cf6582f81701756e0a667c7",
+        "path": "src\\CopperStart.Dos\\DosPatternCore.cs"
+      },
+      {
+        "sha256": "92c5fae04da5c08ac8ece6c4d18ed58b009f1df06c128ae6dbfee799c4a74b09",
+        "path": "src\\CopperStart.Dos\\DosProcessArgumentInputRecords.cs"
+      },
+      {
+        "sha256": "b06b5d8fee8aa09aca27364978bd607d004a167ab77bb1e81aae986a3ba19eae",
+        "path": "src\\CopperStart.Dos\\DosProcessCore.cs"
+      },
+      {
+        "sha256": "fca2698573e814eaff323744e5ef016f82826db5092ce79f3339265954d727a4",
+        "path": "src\\CopperStart.Dos\\DosProcessImageCore.cs"
+      },
+      {
+        "sha256": "d79a21ee832d58526f30b7ba29290dbba1e65b7dc4cffd4bb8d8e3fa1a45ddcc",
+        "path": "src\\CopperStart.Dos\\DosProcessLaunchBoundaryCore.cs"
+      },
+      {
+        "sha256": "3b864f6dd067720b07c2e47612c9eee367e092fa6d6955e4fbc855fadef2c4a3",
+        "path": "src\\CopperStart.Dos\\DosProcessLaunchContracts.cs"
+      },
+      {
+        "sha256": "7d8a3f4cb8da9d6e5acffc42b97418f7df32a53696df6d27d61b43af39b62399",
+        "path": "src\\CopperStart.Dos\\DosProcessLifecycleCore.cs"
+      },
+      {
+        "sha256": "311fadbb6b126e4a42e2245d31208722435be048f7bf84f7b4f996620644eb4f",
+        "path": "src\\CopperStart.Dos\\DosProcessMessagePortCore.cs"
+      },
+      {
+        "sha256": "7ed3c6cf72eca7fe7ebe9da8b5ce95bac1674a0d9b7f24d23ad20f15a1a055e5",
+        "path": "src\\CopperStart.Dos\\DosProcessSegmentListArrayCore.cs"
+      },
+      {
+        "sha256": "1963ad1c093368cec7e47c523072a2342679fdc742a56040ae4d5d6929b6f6d5",
+        "path": "src\\CopperStart.Dos\\DosProcessVectorCore.cs"
+      },
+      {
+        "sha256": "df8c3ba5848e8784d4bc5f27638594dda16613dcd320ccbd9f81397ef49b7835",
+        "path": "src\\CopperStart.Dos\\DosQueueBufferCore.cs"
+      },
+      {
+        "sha256": "56082f9862ad642f06f873e0535cab3a340e7285c416c6fe03d99889793e633a",
+        "path": "src\\CopperStart.Dos\\DosQueueChannelCore.cs"
+      },
+      {
+        "sha256": "df20c7a90b82e098161cbf371fff32b0f3796498e8350e545d2166d269f01cf1",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerChannelOwnerCore.cs"
+      },
+      {
+        "sha256": "b2f8b1eb177e7859b86054ebe51b27268d925e6d0b6369513d62bedc1995b0ee",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerFileCore.cs"
+      },
+      {
+        "sha256": "57f5addc62b22301c6b860be31a7c441454a924201427e4f92fee9ef171ff053",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerIoCore.cs"
+      },
+      {
+        "sha256": "737332d062f8fe00db3a7f8bdd9d7c0b24841428c66f96975197c2ec98be1c51",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerOpenCore.cs"
+      },
+      {
+        "sha256": "2bd6fa65de38801e971560e5757a9f26157a14d02c352091ccdb6f23d9867e0b",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerPacketCore.cs"
+      },
+      {
+        "sha256": "4fa961daba406d8be7635f11882b370b005e1ef9f14c9cc63efebb9b353682bc",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerPendingRecords.cs"
+      },
+      {
+        "sha256": "3550427b31ed4e923a3f95467286ee8a258de8e4f12fc18a316b7f4e3562da80",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerProcessCore.cs"
+      },
+      {
+        "sha256": "fdccbc571901345b7b39a77d19636b55e5c1bfe7453cc5422944d94033efcdaf",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerRegistryCore.cs"
+      },
+      {
+        "sha256": "fc201deeb508328479a9611cb543bcd00eefb52b2544c7c7b9ca92e41f558d1a",
+        "path": "src\\CopperStart.Dos\\DosQueueHandlerTaskCore.cs"
+      },
+      {
+        "sha256": "b8f451075e7d4e0aa7491be69c5456649c53486c9aa9fbc0f446bc74c75c6bb3",
+        "path": "src\\CopperStart.Dos\\DosReadLinkCore.cs"
+      },
+      {
+        "sha256": "1f7099847764613b4aa08e4f28976c602c539da4c491861a2c14df7339acfb64",
+        "path": "src\\CopperStart.Dos\\DosRecordWaitCore.cs"
+      },
+      {
+        "sha256": "bd6f25fe91ca97ad58cf2e72c7025cf1703feefe3ffab32c2784f66215bb7041",
+        "path": "src\\CopperStart.Dos\\DosRegisterFrame.cs"
+      },
+      {
+        "sha256": "8eee7982eb4f31118e6ec6975b8c846c3207d9ebe5b0e4905ca2276d3233d102",
+        "path": "src\\CopperStart.Dos\\DosRequesterPolicy.cs"
+      },
+      {
+        "sha256": "c6b25dd1733bbdd36eb096251ba205313b41c266efe36f0e7d40c6f34a1c7103",
+        "path": "src\\CopperStart.Dos\\DosResidentRegistryCore.cs"
+      },
+      {
+        "sha256": "68f10a54cedd86a7a4a093bf3820b990a68737d78d43659a9744419cf2a9fc9d",
+        "path": "src\\CopperStart.Dos\\DosRunCommandCore.cs"
+      },
+      {
+        "sha256": "f62119435cbe5ef35317403f32792f2f842aba0fa2c03704176abdc0e3b5a5ea",
+        "path": "src\\CopperStart.Dos\\DosRunCommandCore.RetirementInspection.cs"
+      },
+      {
+        "sha256": "a7d3f90b3a33fcf5305cdc38c258f4bef86e781d197db7c9de0f4bd29e0341c1",
+        "path": "src\\CopperStart.Dos\\DosRunCommandRetirementTypes.cs"
+      },
+      {
+        "sha256": "f6c75a198ab66507a4e22f139d12946867f81c2e35f84161e94e98e6ad7cd7db",
+        "path": "src\\CopperStart.Dos\\DosSegmentListCore.cs"
+      },
+      {
+        "sha256": "5ab3c64d74a6a4b70abcbe5175635138f9fd6f46e1132b3cfbee3b5585dae8fd",
+        "path": "src\\CopperStart.Dos\\DosSegmentLoaderCore.cs"
+      },
+      {
+        "sha256": "289d0c2dc2b6b1c99cfe6bf2015888ba29294c0d05467f699c7b91ee94909760",
+        "path": "src\\CopperStart.Dos\\DosSegmentVectorCore.cs"
+      },
+      {
+        "sha256": "3b21068c126748a2c9651a1e34679f01eefc4f48f3521b6860f3470b865be689",
+        "path": "src\\CopperStart.Dos\\DosShellErrorCodeCursorCodec.cs"
+      },
+      {
+        "sha256": "8c8f9ae744fa37fab55a35a7268fc2c988b813afa64e5572392608b9b45dac39",
+        "path": "src\\CopperStart.Dos\\DosShellForegroundWaitCore.cs"
+      },
+      {
+        "sha256": "4a4605de4cd1916d9263ccb89ea3967c6cd7446edf8dbbf25452c78e4a376595",
+        "path": "src\\CopperStart.Dos\\DosShellNativeBridge.cs"
+      },
+      {
+        "sha256": "74b6995fd7188b62177a06084fee66361a4beb9c78958f570e65e59368d5437a",
+        "path": "src\\CopperStart.Dos\\DosShellNativeChildContextCore.cs"
+      },
+      {
+        "sha256": "357906a866a10909dd397282a161b741c42dd2bf8aa0ad6afc1ed8590d0b5dfb",
+        "path": "src\\CopperStart.Dos\\DosShellNativeContextCore.cs"
+      },
+      {
+        "sha256": "3d417913dba7ab0cd91111eb1d3aa61fdc576efcda784cc90b7a6f88fab64379",
+        "path": "src\\CopperStart.Dos\\DosShellPromptCore.cs"
+      },
+      {
+        "sha256": "0983838c0c65618fe771daec2316537a9160a52191cd44f06bf58044dcd02402",
+        "path": "src\\CopperStart.Dos\\DosShellScriptRunnerCore.cs"
+      },
+      {
+        "sha256": "6c8368c440f38cf90339060181b988597daa7d52079367071f27802b5bba3472",
+        "path": "src\\CopperStart.Dos\\DosShellStateCore.cs"
+      },
+      {
+        "sha256": "8f20b65bf59c6e1d1a2ef499de05289d4677c2f63e116d35169f12967497a04f",
+        "path": "src\\CopperStart.Dos\\DosStartupScriptCore.cs"
+      },
+      {
+        "sha256": "326a3ed4f6faa4135ea56648196c1acc3c7b36226832e0b28c0addf950893a03",
+        "path": "src\\CopperStart.Dos\\DosStreamNativeRoot.cs"
+      },
+      {
+        "sha256": "3344f85acb1fb1b24febe3cd0423082b4452d02c4fe8d2f4903dec746b9a3516",
+        "path": "src\\CopperStart.Dos\\DosSystemContracts.cs"
+      },
+      {
+        "sha256": "02300dd7789645a40196dcca68eea87e2ab4a73c335d97617a4cdc0255fccaa9",
+        "path": "src\\CopperStart.Dos\\DosSystemCore.cs"
+      },
+      {
+        "sha256": "991f5695b27741c6aa5fb502b4c3059baa9393722b3152c2894c30805ef7309b",
+        "path": "src\\CopperStart.Dos\\DosVariableCore.cs"
+      },
+      {
+        "sha256": "f1fc108bc07fd1c7fd8f0c3470a29d6e92009208e11ef17c2c351e841113e91a",
+        "path": "src\\CopperStart.Dos\\DosVectorManifest.cs"
+      },
+      {
+        "sha256": "ab92820d8f53f22d6667f1c61fa893dc2585a397cdc8897ca06272acad07017d",
+        "path": "src\\CopperStart.Dos\\DosVectorRouter.cs"
+      },
+      {
+        "sha256": "1d7e5a4e528c2766a89bd59e0adacdfc863f8898e14e1cd1752a6767c7f3657f",
+        "path": "src\\CopperStart.Dos\\DosVolumeNodeAttributeCore.cs"
+      },
+      {
+        "sha256": "ee0b886227f2a392eecb390726757e1b6f824f30f5943806dd281fe50388a68c",
+        "path": "src\\CopperStart.Dos\\IDosPlatform.cs"
+      },
+      {
+        "sha256": "c6cba4c21c5261d9c318896398d4fa426b143e98aa468e7767600139a8d2bd00",
+        "path": "src\\CopperStart.Dos\\NativeAmigaFileSystem.cs"
+      }
+    ],
+    "inputs": [
+      {
+        "sha256": "cb83a6751bde299fe055b9e8f175dd937f7b2cfa3126fa10de8437ff2d65bf0e",
+        "file": "CopperOS.SystemImage.NativeRoot.dll"
+      },
+      {
+        "sha256": "72e6927cb4430ba733f9a9b3cecbfe90aea0a2548dbd9622aa8cf0f3e1e2cfc2",
+        "file": "CopperSharp.Compiler.Cli.dll"
+      },
+      {
+        "sha256": "be0cf5306a49a29b650b8e20ad90e6c3b46facca9036488c063ac4ca77645c39",
+        "file": "CopperSharp.Compiler.dll"
+      },
+      {
+        "sha256": "c0f9554998f5fd6f4de8d7f238fa0780f0a8641585438acb156f6c1f2f6fa072",
+        "file": "CopperSharp.Runtime.AmigaPal.dll"
+      },
+      {
+        "sha256": "466b2efc431c1af7c2e74d257518b08a87095f5f20b0cbd9b64241443c5df560",
+        "file": "CopperSharp.Runtime.Managed.dll"
+      },
+      {
+        "sha256": "21f395f44d04618c8473b1840ca2417be7350e6b22cc465ca147a3515f30641f",
+        "file": "CopperSharp.Sdk.Amiga.dll"
+      },
+      {
+        "sha256": "21cbe226b12754ba6150c72b798f93e602cc316e8efd535758f3b16dee12823e",
+        "file": "CopperSharp.Sdk.Amiga.Support.dll"
+      },
+      {
+        "sha256": "92011c5fa185d9eaba64ca9508510eda71f93b927da704e0eaba8bbde922e68e",
+        "file": "CopperSharp.Targets.Amiga.dll"
+      },
+      {
+        "sha256": "8914593c09d5e3ce494361e91889825e0fff1afe166ec0dc1a9c17f74271a6c2",
+        "file": "CopperStart-System.dll"
+      },
+      {
+        "sha256": "e4c2fb15411fdf2bc16c607a1701a55fb0b546c1999c449ceb6fa50962b16586",
+        "file": "CopperStart.Devices.dll"
+      },
+      {
+        "sha256": "180c08da21338316d629ff526f7abb278b2aca339778c0d40b06846c4cf38d60",
+        "file": "CopperStart.Dos.dll"
+      },
+      {
+        "sha256": "07a7339155d94273345286b87a2e1fbb4b1977752976bbf4d06d3d8624fd3bad",
+        "file": "CopperStart.Exec.dll"
+      },
+      {
+        "sha256": "2753216b97aff4db0b81e3d2b3a06af953ae5bc04e211eaf9b807fc1a02befa2",
+        "file": "CopperStart.Expansion.dll"
+      },
+      {
+        "sha256": "f0a79c7a92490d819e40d138c33fddf44b95ec5cea59d32321ddce9b1278db29",
+        "file": "CopperStart.Icon.dll"
+      },
+      {
+        "sha256": "762aeba8ff9996c6a860b9d3e228c3afb577cd6cfc36cecb01e7d70629e54dee",
+        "file": "CopperStart.Intuition.dll"
+      },
+      {
+        "sha256": "52269f514e8a07716f22f7d387bd477dcdc1134b955b407ab3b42af021380714",
+        "file": "CopperStart.Layers.dll"
+      },
+      {
+        "sha256": "84010491fd136c9f2a4a439739884e56c2a37f5e0a8ecc2b78318eec36469a43",
+        "file": "CopperStart.Runtime.dll"
+      },
+      {
+        "sha256": "8c7b2b2dd5dac3d1ee574929e9ba544ebd3a81fcc39a1ba56a6af65acf8487e6",
+        "file": "CopperStart.Utility.dll"
+      },
+      {
+        "sha256": "4cc899613b87423fe4a9bf26d9b9e068dfaa25f19e143d90bb3e4cac85de9162",
+        "file": "CopperStart.Workbench.dll"
+      }
+    ],
+    "baseManifestSha256": "3515a879f6ec428ac7a3497848ece7822fcc605bec42f038bde404ac8e4690a3",
+    "staticGates": {
+      "path": "artifacts/copperos-storage/rom-owned-directory/CopperStart-DiskBoot.compatibility.json",
+      "bytes": 3235,
+      "sha256": "cbe13f90ddc3d9c3b7cba0d48692a3c57c48b25f2fd13b18926aaa5d6450df80",
+      "compatible": true,
+      "managedAllocations": 0,
+      "exceptionRegions": 0,
+      "fatalFaultSites": 0,
+      "runtimeFeatures": [],
+      "runtimeHelpers": [],
+      "externalNativeTargets": [],
+      "reachableAssemblies": [
+        {
+          "Name": "CopperSharp.Sdk.Amiga",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "926de557-680b-4f61-96e6-4a6f2bf6db1b",
+          "Sha256": "21f395f44d04618c8473b1840ca2417be7350e6b22cc465ca147a3515f30641f"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga.Support",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "c5c023c8-c35e-4103-8d06-ac61fb4411c8",
+          "Sha256": "21cbe226b12754ba6150c72b798f93e602cc316e8efd535758f3b16dee12823e"
+        },
+        {
+          "Name": "CopperStart-System",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "abecdaed-47d4-4415-8986-1d72dc86f1a1",
+          "Sha256": "8914593c09d5e3ce494361e91889825e0fff1afe166ec0dc1a9c17f74271a6c2"
+        },
+        {
+          "Name": "CopperStart.Devices",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "c786f27d-e8a5-4de6-bc20-efa0fc7d6851",
+          "Sha256": "e4c2fb15411fdf2bc16c607a1701a55fb0b546c1999c449ceb6fa50962b16586"
+        },
+        {
+          "Name": "CopperStart.Dos",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "5d0531a8-79ea-4661-ae36-80b8d15dc5a3",
+          "Sha256": "180c08da21338316d629ff526f7abb278b2aca339778c0d40b06846c4cf38d60"
+        },
+        {
+          "Name": "CopperStart.Exec",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "b27999fb-406e-4b4d-908b-c306cdcc2c69",
+          "Sha256": "07a7339155d94273345286b87a2e1fbb4b1977752976bbf4d06d3d8624fd3bad"
+        }
+      ]
+    }
+  },
+  "systemBuild": {
+    "receipt": {
+      "path": "artifacts/copperos-storage/system-proof-v5/system-image.json",
+      "bytes": 6116,
+      "sha256": "86bb24c01f6a1086cc428e193935a0180f615b76dd426d0ccbd8d3918e75ad90"
+    },
+    "manifest": {
+      "path": "artifacts/copperos-storage/system-proof-v5/native-manifest.json",
+      "bytes": 5768,
+      "sha256": "31e326e7505f49ee9d9b702c61b29bb7094538e49693144485097fa1146791ff"
+    },
+    "sources": [
+      {
+        "path": "tools\\ImageBuilder\\build_storage_proof.ps1",
+        "sha256": "24602306aa3548be236d7a96fceaed408c22f0f8fccd590f0b4f32bdaa1cb8dc"
+      },
+      {
+        "path": "tools\\ImageBuilder\\build_system_image.py",
+        "sha256": "220f281a57724a7e1fd10b4843612ef1c0bcba24f43c66400fe2beb8029db99c"
+      },
+      {
+        "path": "tools\\SystemImage.NativeRoot\\CopperOS.SystemImage.NativeRoot.csproj",
+        "sha256": "ac54b942c8fba0c41a1b475fb7ce68c7c982f76534d0a0f7786006f0ac039215"
+      },
+      {
+        "path": "tools\\SystemImage.NativeRoot\\NativeFfsFile.cs",
+        "sha256": "594513926286856d6d260210435055d93729908e2bedf6c52c19f8a57eafadd8"
+      },
+      {
+        "path": "tools\\SystemImage.NativeRoot\\SingleHunkStreamLoader.cs",
+        "sha256": "feeee892f0ca87040f0f0d34bca6ece81d47a2ac9201288497588353a6a90447"
+      },
+      {
+        "path": "tools\\SystemImage.NativeRoot\\StorageProbe.cs",
+        "sha256": "5bb67fd6c53ca19b2e18b2cbdc9e1e920d70bbdebfb6c7acab66af42d39c61f1"
+      },
+      {
+        "path": "tools\\SystemImage.NativeRoot\\SystemBootstrap.cs",
+        "sha256": "766a5a781fbc64d4a713b84bcb4df6b1948a8d0c7ed39b8290cc42aae16e1d85"
+      }
+    ],
+    "inputs": [
+      {
+        "file": "CopperOS.SystemImage.NativeRoot.dll",
+        "sha256": "85c4190fcbc4d83f1ffbb36a39833cbdc1af5e208cae526313bb2805dc8b48c6"
+      },
+      {
+        "file": "CopperSharp.Compiler.Cli.dll",
+        "sha256": "72e6927cb4430ba733f9a9b3cecbfe90aea0a2548dbd9622aa8cf0f3e1e2cfc2"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "be0cf5306a49a29b650b8e20ad90e6c3b46facca9036488c063ac4ca77645c39"
+      },
+      {
+        "file": "CopperSharp.Runtime.AmigaPal.dll",
+        "sha256": "c0f9554998f5fd6f4de8d7f238fa0780f0a8641585438acb156f6c1f2f6fa072"
+      },
+      {
+        "file": "CopperSharp.Runtime.Managed.dll",
+        "sha256": "466b2efc431c1af7c2e74d257518b08a87095f5f20b0cbd9b64241443c5df560"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "21f395f44d04618c8473b1840ca2417be7350e6b22cc465ca147a3515f30641f"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "21cbe226b12754ba6150c72b798f93e602cc316e8efd535758f3b16dee12823e"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "92011c5fa185d9eaba64ca9508510eda71f93b927da704e0eaba8bbde922e68e"
+      },
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "8914593c09d5e3ce494361e91889825e0fff1afe166ec0dc1a9c17f74271a6c2"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "e122eb558923e132fca63016e74f9a2f65f51b8bbda1a6f335ccd9b08b8c97d3"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "2bdb7157e530f551bdb95399326c265f1d56165a99b4e31f2e8e02f8547787f8"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "07a7339155d94273345286b87a2e1fbb4b1977752976bbf4d06d3d8624fd3bad"
+      },
+      {
+        "file": "CopperStart.Expansion.dll",
+        "sha256": "2753216b97aff4db0b81e3d2b3a06af953ae5bc04e211eaf9b807fc1a02befa2"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "f0a79c7a92490d819e40d138c33fddf44b95ec5cea59d32321ddce9b1278db29"
+      },
+      {
+        "file": "CopperStart.Intuition.dll",
+        "sha256": "762aeba8ff9996c6a860b9d3e228c3afb577cd6cfc36cecb01e7d70629e54dee"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "52269f514e8a07716f22f7d387bd477dcdc1134b955b407ab3b42af021380714"
+      },
+      {
+        "file": "CopperStart.Runtime.dll",
+        "sha256": "84010491fd136c9f2a4a439739884e56c2a37f5e0a8ecc2b78318eec36469a43"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "8c7b2b2dd5dac3d1ee574929e9ba544ebd3a81fcc39a1ba56a6af65acf8487e6"
+      },
+      {
+        "file": "CopperStart.Workbench.dll",
+        "sha256": "4cc899613b87423fe4a9bf26d9b9e068dfaa25f19e143d90bb3e4cac85de9162"
+      }
+    ],
+    "artifacts": [
+      {
+        "bytes": 454776,
+        "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab",
+        "report": "Shell-Seg.hunk.compatibility.json",
+        "name": "Shell-Seg",
+        "entry": "CopperOS.SystemImage.SystemBootstrap::ShellEntry",
+        "path": "Shell-Seg.hunk",
+        "reportSha256": "3c2592a6ad0b58e892057ce2ccc726382d9cfe8b135ad3f81b6451d6c2dc9a06"
+      },
+      {
+        "bytes": 5024,
+        "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416",
+        "report": "BootShell.hunk.compatibility.json",
+        "name": "BootShell",
+        "entry": "CopperOS.SystemImage.SystemBootstrap::Boot",
+        "path": "BootShell.hunk",
+        "reportSha256": "284f974aae924a2ce9a152cc3ff825adafba6f062ff18a2b428cee049d9932d9"
+      },
+      {
+        "bytes": 288,
+        "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692",
+        "report": "Demo.hunk.compatibility.json",
+        "name": "Demo",
+        "entry": "CopperOS.SystemImage.SystemBootstrap::Demonstration",
+        "path": "Demo.hunk",
+        "reportSha256": "04079f29d1cb0fff5ef1d13ff007ac8b097fe245fd2a321e44d1a6b56d899eca"
+      },
+      {
+        "entry": "CopperOS.SystemImage.StorageProbe::Entry",
+        "name": "Storage",
+        "bytes": 1976,
+        "path": "Storage.hunk",
+        "report": "Storage.hunk.compatibility.json",
+        "sha256": "bba1ca90932cd01b96aee763db246c3e6d620240475a345aecd50b21b7773fb8",
+        "reportSha256": "1ab04d9ec49fe3adb5000dc2f78d10a0789742411a6f0ab9a49f5e47d07b1e98"
+      }
+    ],
+    "staticGates": {
+      "path": "artifacts/copperos-storage/system-proof-v5/Storage.hunk.compatibility.json",
+      "bytes": 2039,
+      "sha256": "1ab04d9ec49fe3adb5000dc2f78d10a0789742411a6f0ab9a49f5e47d07b1e98",
+      "compatible": true,
+      "managedAllocations": 0,
+      "exceptionRegions": 0,
+      "fatalFaultSites": 0,
+      "runtimeFeatures": [],
+      "runtimeHelpers": [],
+      "externalNativeTargets": [],
+      "reachableAssemblies": [
+        {
+          "Name": "CopperOS.SystemImage.NativeRoot",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "24bd2d15-e4b6-42a0-82c4-9b907f394092",
+          "Sha256": "85c4190fcbc4d83f1ffbb36a39833cbdc1af5e208cae526313bb2805dc8b48c6"
+        },
+        {
+          "Name": "CopperSharp.Sdk.Amiga",
+          "Version": "0.1.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "926de557-680b-4f61-96e6-4a6f2bf6db1b",
+          "Sha256": "21f395f44d04618c8473b1840ca2417be7350e6b22cc465ca147a3515f30641f"
+        },
+        {
+          "Name": "CopperStart.Dos",
+          "Version": "1.0.0.0",
+          "PublicKeyToken": "",
+          "Mvid": "47c7e85e-8afa-416e-bdd6-0b4a4d59991f",
+          "Sha256": "2bdb7157e530f551bdb95399326c265f1d56165a99b4e31f2e8e02f8547787f8"
+        }
+      ]
+    }
+  },
+  "checks": {
+    "nativeStorage": {
+      "path": "artifacts/copperos-storage/results/native-owned/copperos-storage.trx",
+      "bytes": 5914,
+      "sha256": "b5c99d78f0330554dca0750d602518ff8df274d0896afacd26d5960927a3bc38",
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "3",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperScreen.Tests.CopperOsStorageTests.NativeFullAndReadOnlyWorkspacesRecoverWithoutChangingData",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsStorageTests.NativeStorageSurvivesAppRestartAndChangedPackageDirectory",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsStorageTests.NativeWorkspaceCanExportAfterHostCheckpointFailure",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 3,
+      "skipped": 0
+    },
+    "nativeBootConsoleDos": {
+      "path": "artifacts/copperos-storage/results/native-rom-owned.trx",
+      "bytes": 29593,
+      "sha256": "e6003468e0e0457b9f941e7c1b8ce879c200134f51a05d063740349a647e230d",
+      "counters": {
+        "total": "15",
+        "executed": "15",
+        "passed": "15",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.InvalidRootDoesNotPublishAFilesystemOrRunStartup(ffs: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.AStandardDiskWithoutStartupSequenceStillOffersAnInteractiveCli",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: False, expansion: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.WaitForCharWaitsForCookedInputAndLeavesItForTheFollowingRead",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.CorruptOfsDataReturnsVerifiedPrefixAndDosError",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.StartupCommandWritesToActualScreenAndKeyboardRunsAnotherDiskCommand(ffs: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: False, expansion: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.RawScreenModeReturnsAKeyWithoutWaitingForReturn",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.CdRejectsFilesAndEndCliClosesTheConsoleHandles",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.StartupCommandWritesToActualScreenAndKeyboardRunsAnotherDiskCommand(ffs: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.InvalidRootDoesNotPublishAFilesystemOrRunStartup(ffs: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: True, expansion: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeDosBootTests.StandardDosBootRunsStartupHunkAndReadsThroughPublicDosVectors(ffs: True, expansion: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.WaitForCharTimesOutWithoutFabricatingInput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.NativeBootConsoleTests.DiskCommandReceivesCookedKeyboardInputThroughDosRead",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 15,
+      "skipped": 0
+    },
+    "nativeBootInputs": {
+      "record": {
+        "path": "artifacts/copperos-storage/rom-owned-directory/disk-boot-test-manifest.json",
+        "bytes": 1548,
+        "sha256": "432ef737d51cc774f79f049fafb0f1211eb21fadaaa020fb062da72eedd7bf5f"
+      },
+      "inputs": {
+        "romBytes": 524288,
+        "sha256": "2B3D6D31663A9BBC5BAA68D0D8549B5079E81B8D075CE79E95B2975C01515DB9",
+        "inputs": [
+          {
+            "file": "CopperStart-System.dll",
+            "sha256": "8914593C09D5E3CE494361E91889825E0FFF1AFE166EC0DC1A9C17F74271A6C2"
+          },
+          {
+            "file": "CopperStart.Devices.dll",
+            "sha256": "E4C2FB15411FDF2BC16C607A1701A55FB0B546C1999C449CEB6FA50962B16586"
+          },
+          {
+            "file": "CopperStart.Exec.dll",
+            "sha256": "07A7339155D94273345286B87A2E1FBB4B1977752976BBF4D06D3D8624FD3BAD"
+          },
+          {
+            "file": "CopperStart.Dos.dll",
+            "sha256": "180C08DA21338316D629FF526F7ABB278B2ACA339778C0D40B06846C4CF38D60"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.dll",
+            "sha256": "21F395F44D04618C8473B1840CA2417BE7350E6B22CC465CA147A3515F30641F"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.Support.dll",
+            "sha256": "21CBE226B12754BA6150C72B798F93E602CC316E8EFD535758F3B16DEE12823E"
+          },
+          {
+            "file": "CopperSharp.Compiler.dll",
+            "sha256": "BE0CF5306A49A29B650B8E20AD90E6C3B46FACCA9036488C063AC4CA77645C39"
+          },
+          {
+            "file": "CopperSharp.Targets.Amiga.dll",
+            "sha256": "92011C5FA185D9EABA64CA9508510EDA71F93B927DA704E0EABA8BBDE922E68E"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1C700E401DDCF36F4251264A32009A96E06F651FA75B7B68B915A7727A7E1C70"
+          },
+          {
+            "file": "Copper68k.dll",
+            "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+          }
+        ]
+      }
+    },
+    "hostStorage": {
+      "path": "artifacts/copperos-storage/results/host-storage-release-final.trx",
+      "bytes": 383154,
+      "sha256": "1f137ac79f8159f9eb20c129bcab26f1c265a8901a04ba6c2b039d0d292d9a66",
+      "counters": {
+        "total": "252",
+        "executed": "240",
+        "passed": "240",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.AdditionalFormatsSupportDirectZipAndPendingSwaps(extension: \"dms\", format: Dms)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.UniformDestinationSnapsToRenderScalingDevicePixels",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MiniaudioSampleQueueTests.DequeuePreservesSamplesAcrossCallbackBoundaries",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FastRamSizeSurvivesSavedProfileAndRestart(kib: 8192)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.EveryPresetSurvivesProfileRoundTripAndPassesSessionValidation(value: 1, chipRam: 1024)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MiniaudioSampleQueueTests.RepeatedDiscardOfFullQueueRecoversWithoutStaleSamples",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.AvailabilityRejectsImpossibleOrUnspecifiedModels(model: \"Agnus8372A\", chip: 1024, slow: 512)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.ProfileAvailabilityDoesNotRequireTheUserToHaveSelectedARom",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CpuMemoryConfigurationTests.OversizedAndUnbootableRamCannotBypassValidationViaProfiles",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68040\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRecentSessionTests.CorruptOrUnknownHistoryFallsBackToFirstLaunch(json: \"{\\\"Version\\\":99,\\\"Muted\\\":true,\\\"RecentDisks\\\":[\\\"\"\u00b7\u00b7\u00b7)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedExplicitRequestsNeverFallBack(option: \"--cpu-deferred-bus-batch\", value: \"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.AvailabilityRejectsImpossibleOrUnspecifiedModels(model: \"Agnus8375Pal2M\", chip: 2048, slow: 512)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPressAndReleaseAreAcknowledgedAndGameplayContinues",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"../outside\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.ModelAndBanksSurviveSaveLoadSessionAndReset(model: \"Agnus8372A\", chip: 1024, slow: 0, serialized: \"8372a\", expected: Mos8372A)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRtcTests.ClockSelectionSurvivesProfileSaveAndSessionRestart(enabled: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.UnsupportedRomShapesAndOtherMachineRevisionsAreRejected(size: 524288, major: 40, revision: 70)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200MilestoneRejectsUnvalidatedMixedLayouts(mutation: \"cpu\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.NtscCrtPresentationGeometryUsesExpectedHorizontalPixelAspect(superHighRes: True, expected: 0,41666666666666669)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SharedFolderSettingsTests.CommandLineMountsOverrideProfilesAndRetainProtectionAndBootPriority",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.HostAndMediaChangesCanApplyButRomAndHardwareChangesNeedRestart",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.Explicit31ProfileWorksFromTheCommandLine",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FastRamSizeSurvivesSavedProfileAndRestart(kib: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.NtscCountersPresentTheirVisibleBorderAnd200LineStandardWindow",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.NamedProfileResolutionIncludesUserProfiles(specifier: \"personal\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"chip\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedExecutionStopsWithoutFallbackAndRequiresReset",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedProfilesKeepTheirHardwareAndNeverSelectLegacyAutomatically(id: \"expanded-m68040-jit-kickstart31-rtg\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SteadyAdapterExecutionDoesNotAllocate",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.UnsupportedRomShapesAndOtherMachineRevisionsAreRejected(size: 524288, major: 39, revision: 106)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedExplicitRequestsNeverFallBack(option: \"--agnus-slot-kernel\", value: \"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MiniaudioSampleQueueTests.DequeueWritesSilenceAfterQueuedAudioRunsOut",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsBootProofTests.OriginalSystemBootRegistersShellAndRunsInteractiveCommandsThroughLightweight",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileKeepsStandardFastRamAddresses(size: 8388608, address: 2097152)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SuccessfulReplacementStopsOldOwnerBeforeNewWorkerStarts",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.AlteredSeedCannotCreateAnOwnedWorkspace",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.Synthetic31SessionAndSavedProfileKeepTheSelectedVersion(source: \"Kickstart31Rom\", fastKiB: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Connected\", value: \"5\", available: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FastRamSizeSurvivesSavedProfileAndRestart(kib: 2048)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.EditingAndDiscardingADraftDoesNotChangeCommittedSettings",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPowerUpCapsLockAndA500ResetAreAcknowledged",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.FreeMemCoalescesAndMemoryHeaderStaysConsistent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileRejectsNonstandardFastRamSizes(size: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.BootFailuresAreVisible(code: \"rts\", message: \"boot block returned\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.RuntimeExportsAdfAndReportsSaveErrorsWithoutChangingMountedSource",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.TwoUserDirectoriesHaveIndependentOverridesAndPreferences",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FastRamSizeSurvivesSavedProfileAndRestart(kib: 4096)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.ModelAndBanksSurviveSaveLoadSessionAndReset(model: \"OcsAgnus\", chip: 512, slow: 512, serialized: \"8371\", expected: Mos8371)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.BootFailuresAreVisible(code: \"dc.w $4afc\", message: \"guest exception\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedRomVersionIsNotDowngradedBySettings(source: \"Kickstart13Rom\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.UniformStretchMouseMappingIgnoresHorizontalLetterbox",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.SuperHighResAspectMapsRenderedCenterBackToRawFramebufferCenter",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.ProgrammableRasterWithPalDimensionsRemainsUncropped",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.LegacyImportPreservesExistingUserProfileAndKeepsConflictingSourceSeparately",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.UniformStretchMouseMappingMapsCenterToFramebufferCenter",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MiniaudioSampleQueueTests.DiscardDropsPartialAndQueuedOldAudioButKeepsNewGeneration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.PalPresentationGeometryUsesExpectedHorizontalPixelAspect(superHighRes: True, crtCorrect: False, expected: 0,5)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"slow\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.ModelAndBanksSurviveSaveLoadSessionAndReset(model: \"Agnus8375Pal2M\", chip: 1024, slow: 0, serialized: \"8375-318069-10\", expected: Mos8375Pal2M)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68020\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Connected\", value: \"1\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedFastRamRequestsRemainVisible(kib: 2048, address: \"$400000\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.Synthetic31SessionAndSavedProfileKeepTheSelectedVersion(source: \"Kickstart31Rom\", fastKiB: 2048)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.Cpu060SelectionIsRetainedButExplainsItsOsRequirement",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"bad:name\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.PresentationViewportUsesTimingDerivedCroppedCoordinates",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200MilestoneRejectsUnvalidatedMixedLayouts(mutation: \"agnus\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CpuMemoryConfigurationTests.DowngradingTo24BitCpuClampsRamAndRestoresAutoconfigHint",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200ProfileRequiresItsOwnRomRevision(major: 40, revision: 68)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SettingsAndSavePreserveUnsupportedChipsets(dma: \"AgaAlice\", display: \"AgaLisa\", video: \"Pal\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.InvalidWorkspaceNamesNeverCreateFiles(name: \"LPT1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedProfilesKeepTheirHardwareAndNeverSelectLegacyAutomatically(id: \"expanded-copperstart\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.BootChoiceRoundTripsWithoutLoadingRememberedNativeRom",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.EcsModeResizePreservesAlreadyLeasedPixelsAndGeometry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.RuntimeRoutesExternalDriveCommandsToTheirOwnPublishedState",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.NtscCrtPresentationGeometryUsesExpectedHorizontalPixelAspect(superHighRes: False, expected: 0,83333333333333337)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.MissingDamagedNativeAndAmbiguousRomsHaveRecoveryGuidance",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.ModelAndBanksSurviveSaveLoadSessionAndReset(model: \"Agnus8375Pal2M\", chip: 2048, slow: 0, serialized: \"8375-318069-10\", expected: Mos8375Pal2M)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.EveryPresetSurvivesProfileRoundTripAndPassesSessionValidation(value: 2, chipRam: 2048)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.RomOnlyStartupCreatesLightweightWithoutChangingDefaultHardware",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.InvalidWorkspaceNamesNeverCreateFiles(name: \"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Connected\", value: \"2\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.DirtyAdfSurvivesFailedSaveResetAndRejectedReplacementThenSavesAtomically",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.UniformDestinationUsesIntegerDevicePixelScale",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.CpuSelectionSurvivesProfileSaveAndSessionReplacement(backendName: \"JitM68040\", model: M68040)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68060\", available: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FourDriveStartupAndIndependentPendingSwapsRetainCorrectPaths",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"rtc\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.DeniedUserWritesPreserveSavedProfilesAndReportRecoverableErrors",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsStorageTests.NativeWorkspaceCanExportAfterHostCheckpointFailure",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.UnclampedUniformStretchMouseMappingKeepsRelativeDeltasOutsideImage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Connected\", value: \"4\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"..\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.SeparateUsersNeverShareImagesAndDamagedMetadataDoesNotResetThem",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"C:\\\\outside\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Connected\", value: \"3\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"/outside\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileKeepsStandardFastRamAddresses(size: 536870912, address: 536870912)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.LegacyImportCopiesCustomProfilesPreservesUnknownFieldsAndFreezesRelativePaths",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.UnsupportedServiceReportsLvoAndCallerInsteadOfReturningSuccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileKeepsStandardFastRamAddresses(size: 1073741824, address: 1073741824)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.PalPresentationGeometryUsesExpectedHorizontalPixelAspect(superHighRes: False, crtCorrect: True, expected: 1,0666666666666667)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CpuMemoryConfigurationTests.EveryAvailableCpuAndMemoryChoicePassesTheSessionValidator(value: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MiniaudioSampleQueueTests.FullQueueRejectsAdditionalBuffersAndRecoversAfterRead",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.HostGainPreservesFullVolumeScalesStereoAndMutesQueuedSamples",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedExplicitRequestsNeverFallBack(option: \"--cpu\", value: \"jit-m68000\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.RuntimeUsesLightweightAudioRateAndSerializesCommands",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CpuMemoryConfigurationTests.EveryAvailableCpuAndMemoryChoicePassesTheSessionValidator(value: 2)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ReadOnlyApplicationDirectoryStillAllowsProfileAndSettingsPersistence",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68000\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"JitM68040\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.WritesAndOverlappingReadsReportTheirBoundary",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.Synthetic31SessionAndSavedProfileKeepTheSelectedVersion(source: \"KickstartRom\", fastKiB: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"fast\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.StandardAdfAndZipLoadingAndAdjacentDiskSelectionAreHostOwned",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.CopyBgraRowsPreservesDestinationStridePadding",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.UnqualifiedCpuIsRejected(cpu: \"AccurateM68040\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Engine\", value: \"Legacy\", available: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.ModelAndBanksSurviveSaveLoadSessionAndReset(model: \"OcsAgnus\", chip: 512, slow: 0, serialized: \"8371\", expected: Mos8371)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.UnqualifiedCpuIsRejected(cpu: \"AccurateM68020\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200ProfileRequiresItsOwnRomRevision(major: 34, revision: 5)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.SavingPresetCreatesPersonalOverrideWhileOriginalRemainsSelectable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.InvalidWorkspaceNamesNeverCreateFiles(name: \"CON\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.DefaultIsLightweightAndExplicitLegacyReportsUnavailable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.LotusOpeningRaceThroughAppSessionMatchesScalarGuestExecution",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.CpuSelectionSurvivesProfileSaveAndSessionReplacement(backendName: \"AccurateM68020\", model: M68020)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.AvailabilityRejectsImpossibleOrUnspecifiedModels(model: \"EcsAgnus\", chip: 1024, slow: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.PalPresentationGeometryUsesExpectedHorizontalPixelAspect(superHighRes: False, crtCorrect: False, expected: 1)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.PublicListVectorsUseTheExecRegisterAbi",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRecentSessionTests.CorruptOrUnknownHistoryFallsBackToFirstLaunch(json: \"broken json\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.NamedProfileResolutionIncludesUserProfiles(specifier: \"personal.json\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.SupervisorCallbackReturnsToUserBootContext",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.SwitchingBackFromA1200RestoresSupportedA500CpuAndRomRequirements",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.SyntheticA1200ProfileCanSaveLoadAndPresentItsNativeRaster",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.LightweightViewportsTranslateBeamCoordinatesWithoutLosingVisibleRaster",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.BadChecksumAndMissingDiskAreRejectedBeforeStartup",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileKeepsStandardFastRamAddresses(size: 16777216, address: 268435456)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.UpgradeChangesBundledDefaultsWithoutChangingPersonalProfilesOrSettings",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.ReadCanFillTakeoverLoaderMemoryOutsideResidentServices(destination: 509952)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68010\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.FreshStartupDefaultsToAmiga500",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.InterruptedTemporaryFilesAndInvalidSavesLeavePreviousProfileUsable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.CpuSelectionSurvivesProfileSaveAndSessionReplacement(backendName: \"AccurateM68EC020\", model: M68EC020)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Engine\", value: \"Lightweight\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedFastRamRequestsRemainVisible(kib: 3072, address: \"$200000\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRtcTests.ClockSelectionSurvivesProfileSaveAndSessionRestart(enabled: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRecentSessionTests.SavedMachineAndHostPreferencesRoundTripWithoutChangingProfiles",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileRejectsNonstandardFastRamSizes(size: 3145728)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.MissingRomExplainsHowToConfigureItWithoutStartingLegacy",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.SuppliedNativeA1200BootsEightPlanesAndPersistsThroughDesktopReopen",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.ResetReadsTheCurrentlyInsertedDisk",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SettingsAndSavePreserveUnsupportedChipsets(dma: \"OcsAgnus\", display: \"OcsDenise\", video: \"Ntsc\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CpuMemoryConfigurationTests.EveryAvailableCpuAndMemoryChoicePassesTheSessionValidator(value: 1)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.InvalidWorkspaceNamesNeverCreateFiles(name: \"../outside\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.NewDraftAndFallbackProfileUseNativeA500Defaults",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedExplicitRequestsNeverFallBack(option: \"--profile\", value: \"expanded-copperstart\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.AdditionalFormatsSupportDirectZipAndPendingSwaps(extension: \"adf\", format: ExtendedAdf)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"cpu\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileRejectsNonstandardFastRamSizes(size: 262144)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.MouseRemainsAvailableOnlyOnTheSupportedPort",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FastRamSizeSurvivesSavedProfileAndRestart(kib: 512)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SelectedZipIpfSupportsEveryDriveAndRejectsSaveAndWriteEnable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.ProfileCatalogRetainsUnsupportedMachinesWithAnAvailabilityReason",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.NeitherTheSelectedVersionNorAnExplicit13SourceCanSilentlyUse31",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.ModelSelectionDoesNotSubstituteProprietaryFirmware",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.CpuSelectionSurvivesProfileSaveAndSessionReplacement(backendName: \"AccurateM68040\", model: M68040)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FaultReasonSurvivesRuntimePublicationUntilReset",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SessionCopiesAllPixelsAndExactVariableLengthPcmWithoutExtraClockAdvance",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.ChangingModelsPreservesMediaAndHostSettingsWithoutMutatingCommittedMachine",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200ProfileRequiresItsOwnRomRevision(major: 40, revision: 63)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.DevicePixelExactLogicalSizeKeepsSourcePixelDimensionsOnScaledDisplays",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedFastRamRequestsRemainVisible(kib: 256, address: \"$200000\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.UniformStretchMouseMappingAddsHighResolutionCroppedViewportOrigin",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.AvailabilityRejectsImpossibleOrUnspecifiedModels(model: \"OcsAgnus\", chip: 1024, slow: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.WorkspaceAndSettingsSurviveRestartAndNewPackageSeedWithoutReplacement",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"aga\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.BrokenLegacyProfileIsKeptAndCanBeRepairedForARetry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.NullListTraversalTerminatesWithoutFollowingBootFirmware",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SharedFolderSettingsTests.MinimalDiskBootCannotUseSharedFolders",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.ZipSelectionUsesTheDeclaredVersionAndValidatesTheSelectedBytes",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.InvalidUserJsonReportsAnErrorWithoutOverwritingItOrHidingPresets",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"LPT1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.SettingsAndSavePreserveUnsupportedChipsets(dma: \"EcsAgnus\", display: \"EcsDenise\", video: \"Pal\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.ModelAndBanksSurviveSaveLoadSessionAndReset(model: \"Agnus8372A\", chip: 512, slow: 512, serialized: \"8372a\", expected: Mos8372A)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200MilestoneRejectsUnvalidatedMixedLayouts(mutation: \"ntsc\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MainWindowPresentationTests.ContinuousPresentationYieldsToInput(legacyRenderPriority: True, expectedFramesBeforeInput: 64)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Kickstart\", value: \"Kickstart31Rom\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.OptionalMemoryEligibilityTracksHardwareAndBootMethod",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.NewRuntimeMustExplicitlyAdmitOriginalWorkspaceIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.CpuSelectionSurvivesProfileSaveAndSessionReplacement(backendName: \"AccurateM68030\", model: M68030)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.PalPresentationGeometryUsesExpectedHorizontalPixelAspect(superHighRes: True, crtCorrect: True, expected: 0,53333333333333333)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.AdditionalFormatsSupportDirectZipAndPendingSwaps(extension: \"adz\", format: Adz)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.ReadCanFillTakeoverLoaderMemoryOutsideResidentServices(destination: 458752)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.SaveCopyAvoidsBundledAndUserCollisionsWithoutChangingEither",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.OriginalBootblockReceivesIoRequestAndExecAndRunsWithoutRom",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.CrtPhosphorComposerTests.CrtPhosphorStopsAtNextFieldBoundaryAndFreshFieldRestartsDecay",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68EC020\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.InputCommandsDoNotReplayMouseDeltasOnFollowingFrames",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.SavedProfilePathsStayAbsoluteWhenTheApplicationMoves",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.WritableDriveConfigurationIsAppliedAtMachineCreation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.UnsupportedRomShapesAndOtherMachineRevisionsAreRejected(size: 524288, major: 34, revision: 5)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.ExclusiveOwnershipAndFailedCheckpointKeepLastCompleteImage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.AdditionalFormatsSupportDirectZipAndPendingSwaps(extension: \"scp\", format: Scp)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.LoadedSecondStageCanStillUseExecAndTrackdisk",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.UnavailableUserDirectoryFailsClearlyAndDoesNotWriteIntoApplication",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsStorageTests.NativeFullAndReadOnlyWorkspacesRecoverWithoutChangingData",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsStorageTests.NativeStorageSurvivesAppRestartAndChangedPackageDirectory",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperOsWorkspaceTests.InvalidWorkspaceNamesNeverCreateFiles(name: \"a/b\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200MilestoneRejectsUnvalidatedMixedLayouts(mutation: \"denise\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.QualifiedRomColdBootResetReinsertAndRestartUseStandardSession",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200MilestoneRejectsUnvalidatedMixedLayouts(mutation: \"slow\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"drives\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.ReadOnlyMediaEjectRemountAndRejectedReplacementPreserveOwnership",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.MissingSyncUsesAdvertisedAudioCapacityAndKeepsSessionResponsive",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"CON\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.UnavailableBenchDoesNotLaunchGuestCode",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200ProfileRequiresItsOwnRomRevision(major: 39, revision: 105)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.RomPickerValidationUsesTheSameFormatChecksAsStartup",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"nul.json\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedFastRamRequestsRemainVisible(kib: 16384, address: \"$200000\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MainWindowPresentationTests.ContinuousPresentationYieldsToInput(legacyRenderPriority: False, expectedFramesBeforeInput: 1)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.ExplicitSelectionCreatesOnlyLightweightAndSurvivesSettingsRoundtrip",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.CpuSelectionSurvivesProfileSaveAndSessionReplacement(backendName: \"AccurateM68010\", model: M68010)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.ExplicitBootChoiceAndPersonalSettingsRetainStandaloneRom",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.UnsupportedRomShapesAndOtherMachineRevisionsAreRejected(size: 524288, major: 40, revision: 68)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.MachinePresetTests.EveryPresetSurvivesProfileRoundTripAndPassesSessionValidation(value: 0, chipRam: 512)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenMinimalBootTests.TrackdiskReadsCrossHeadAndCylinder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.AvailabilityRejectsImpossibleOrUnspecifiedModels(model: \"Agnus8372A\", chip: 2048, slow: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRecentSessionTests.RemovedDiskDoesNotPreventLoadingTheLastMachine",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.UnsupportedRomShapesAndOtherMachineRevisionsAreRejected(size: 262144, major: 40, revision: 63)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Kickstart\", value: \"DiagRom\", available: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedExplicitRequestsNeverFallBack(option: \"--engine\", value: \"typo\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.UnsupportedRomVersionIsNotDowngradedBySettings(source: \"KickstartRom\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.FramebufferPresenterTests.CopyBgraRowsCopiesTightlyPackedFrame",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRecentSessionTests.RecentDisksKeepOrderRemoveDuplicatesAndStayBounded",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"Kickstart\", value: \"CopperStart\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostAssemblyDoesNotReferenceCopperStartOrLegacyHost",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.AgnusChipRamTests.SettingsChoicesAndRestartBoundaryFollowTheHardware",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart30AgaTests.A1200MilestoneRejectsUnvalidatedMixedLayouts(mutation: \"chip\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.InvalidReplacementKeepsTheRunningSessionUsable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.MalformedStorageEntriesAreReportedWithoutCrashingTheProfileCatalog",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenProfileStorageTests.ProfileNamesCannotEscapeUserFolderOrUseWindowsDevices(id: \"..\\\\outside\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Lightweight.Tests.HostDependencyTests.HostProfileKeepsStandardFastRamAddresses(size: 524288, address: 2097152)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.Kickstart31Tests.SuppliedNativeWorkbench31BootsThroughTheDesktopSession",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.SettingsWorkflowTests.FutureChoicesHaveExplicitAvailability(setting: \"CPU backend\", value: \"AccurateM68030\", available: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeGameplayThroughHostAdapterPreservesValidatedCpuAndOutput",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenRtcTests.ExpandedLegacyRomProfileRetainsRtcCpuAndMemoryOnLightweight",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.FastRamSizeSurvivesSavedProfileAndRestart(kib: 1024)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperScreenLightweightSessionTests.DisconnectedDriveMediaIsRejectedAndDriveCountSurvivesProfileSave",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.SharedFolderSettingsTests.SharedFoldersSurviveSaveLoadCloneAndRestartComparison",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 240,
+      "skipped": 12
+    },
+    "dosTransfers": {
+      "path": "artifacts/copperos-storage/results/dos-transfer-owned.trx",
+      "bytes": 106310,
+      "sha256": "c9f28e8f6dee4ceb737b62fd6dd51a5be0675f947c0e599586b0e166b81ce9ef",
+      "counters": {
+        "total": "73",
+        "executed": "73",
+        "passed": "73",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Full_queue_reports_partial_write_then_accepts_suffix_after_read",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_task_runs_until_empty_registry_is_stopped",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_channel_owner_adds_and_retires_typed_channel",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Closing_writer_completes_its_pending_reader_with_eof",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ProviderFileHandleDescriptionIsPublishedForEveryProviderOpenPath",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Invalid_quantum_geometry_is_rejected(capacity: 0, quantumSize: 4)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Invalid_quantum_geometry_is_rejected(capacity: 8, quantumSize: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosRangeWriteTests.DirectWriteUsesSingleRangeOrByteFallbackWithExactDiagnostics(range: False, report: 3, error: 0, result: 3, position: 3, ranges: 0, bytes: 3)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Invalid_quantum_geometry_is_rejected(capacity: 10, quantumSize: 4)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_channel_owner_rolls_back_record_when_buffer_allocation_fails",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Closing_reader_requests_writer_abort_and_later_write_is_broken_pipe",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.HandlesAreDynamicAndResetReleasesEveryOwnedRecordExactlyOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.OpenReadSeekAndCloseUseGuestResidentBptrHandle",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ProviderDescriptionFailureRollsBackEveryOwnedHandlePathExactlyOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.NativeDirectoryInspectionPreservesDirectoryAndError",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_open_decoder_rejects_duplex_find_update",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosRangeWriteTests.DirectWriteUsesSingleRangeOrByteFallbackWithExactDiagnostics(range: True, report: 3, error: 0, result: 3, position: 3, ranges: 1, bytes: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_registry_looks_up_and_retires_typed_channels",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_wait_step_parks_on_typed_port_and_dispatches_arrival",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.FileSystemIdentityCallsUseDistinctProviderSemantics(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.InfoUsesTheExactPackedRecordAndBothRegisterProfiles(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadArgsFromBuffer_releases_terminated_source_and_record_after_parse_failure(input: \"\", expectedError: 116)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.LockDupAndExamineValidateExactGuestRecords",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.EveryReturnedOwnedHandleExposesTheExactPublicFileHandlePrefix",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadArgsFromBuffer_terminates_without_mutating_or_freeing_the_caller_span(alreadyTerminated: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.WaitForCharUsesConsoleCapabilityWithoutConsumingInput(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.HandlerAndAccessModesCommitOnlyAfterProviderAcceptance(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_open_packet_reports_in_use_endpoint_and_preserves_handle",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Closing_reader_breaks_its_pending_writer_without_losing_prefix_count",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_packet_step_dispatches_write_and_read_packets",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.LockDescriptionFailureUnlocksAndUnlinksWrapperExactlyOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.OpenFromLockConsumesOnlyAfterSuccessfulHandleCreation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.InvalidAndWrappedTransactionsLeaveDestinationUnchanged",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.LockNamesParentsAndComparisonUseValidatedGuestLocks",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ProcessDeathReleasesOnlyItsStateAndStandardStreams",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.ReturnedLocksExposeProviderPublicAbiButRouteThroughPrivateToken",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadArgsFromBuffer_releases_record_if_terminated_source_allocation_fails",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.FileHandlesProduceLocksNamesParentsAndAlignedMetadata",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadArgsFromBuffer_terminates_without_mutating_or_freeing_the_caller_span(alreadyTerminated: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.PathAdministrationValidatesInputsAndRoutesBothProfiles(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_file_handles_route_and_close_endpoints",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadArgsFromBuffer_releases_terminated_source_and_record_after_parse_failure(input: \"one two\", expectedError: 118)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadItemPrefixFromBuffer_preserves_the_raw_suffix_for_another_owner",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Invalid_quantum_geometry_is_rejected(capacity: 4, quantumSize: 8)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCommandInputHandleTests.OwnedCommandStreamAppendsNewlineAndEndsAtExactBoundary",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_wait_step_rejects_port_owned_by_another_task",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ConsoleAndReadArgsCrossOnlyTheirPlatformBoundaries",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_open_packet_is_decoded_into_typed_request(action: FindOutput, endpoint: Writer)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_open_packet_is_decoded_into_typed_request(action: FindInput, endpoint: Reader)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_io_request_resumes_only_the_unwritten_suffix",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.FileSystemAdministrationValidatesAndPropagatesProviderResults(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ReadArgsFromBuffer_uses_explicit_shell_argument_span_and_releases_it",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.OpenPublishesSpecificProviderFailureThroughIoErr",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_wait_step_rejects_a_non_signalling_port",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.FreeArgsAndTaskDeathReleaseOnlyOwnedRdArgsRecords",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_packet_step_preserves_partial_write_if_pending_allocation_fails",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCommandInputHandleTests.DuplicateOwnsAnIndependentBufferAndCursor",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_channel_keeps_named_buffer_state_in_guest_memory",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ClosePublishesProviderCommitFailureAfterRetiringHandle",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosLockHandleTests.ExclusiveAndStaleLocksFailWithoutChangingNameBuffer",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Reader_sees_full_quanta_and_writer_close_flushes_the_tail",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.NilHandleIsDosOwnedAndNeverCallsAProvider",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_io_packet_is_decoded_and_replied_through_typed_request",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.ExAllUsesPackedProgressiveRecordsAndOwnedControl(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_io_request_is_retained_and_resumed_after_channel_progress",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.LinksDiscriminateTargetRepresentationAndOwnerPreservesBitFields(profile: Unified)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_process_publishes_entry_and_guest_task_context",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosRangeWriteTests.DirectWriteUsesSingleRangeOrByteFallbackWithExactDiagnostics(range: True, report: 4, error: 0, result: -1, position: 0, ranges: 1, bytes: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.WriteCharsAndPutStrUseTheCurrentProcessOutput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosRangeWriteTests.DirectWriteUsesSingleRangeOrByteFallbackWithExactDiagnostics(range: True, report: 1, error: 221, result: -1, position: 1, ranges: 1, bytes: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_open_packet_resolves_channel_opens_endpoint_and_replies",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosCoreTests.IoErrCurrentDirectoryAndStandardStreamsAreIsolatedPerProcess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Exec.Tests.DosQueueBufferCoreTests.Queue_handler_packet_step_replies_to_read_after_writer_progress",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 73,
+      "skipped": 0
+    },
+    "ffsAndMfm": {
+      "path": "artifacts/copperos-storage/results/ffs-mfm-qualified.trx",
+      "bytes": 19433,
+      "sha256": "01fb15ca1b2575bdb1d0214d3e4ee4bb3b5b30a9c015723da7f686572cb3b4c0",
+      "counters": {
+        "total": "12",
+        "executed": "12",
+        "passed": "12",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.NativeFfsMutationsReopenThroughIndependentReadCoreAndRecoverAllocation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CorruptHeaderAndInvalidPointerAreRejected(ffs: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.ReadOnlyAndFullDiskLeaveOriginalImageUntouched",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DirectoryEnumerationReturnsAllEntriesAndThenNoMoreEntries(ffs: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CaseInsensitiveDirectoriesAndFileExtensionsReadStandardDisk(ffs: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CorruptHeaderAndInvalidPointerAreRejected(ffs: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DirectoryEnumerationReturnsAllEntriesAndThenNoMoreEntries(ffs: False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.FileSystem.Tests.MfmClockTests.ConstantClockEncodingMatchesAdjacentDataBitRule",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.CaseInsensitiveDirectoriesAndFileExtensionsReadStandardDisk(ffs: True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.DeviceFailureLeavesMetadataInvalidRatherThanPublishingPartialSuccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.OfsDataChecksumFailureCommitsOnlyVerifiedPrefix",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperStart.Floppy.Native.Tests.AmigaDiskFileSystemTests.NativeFfsOverwriteTruncateAndNonemptyDirectoryRulesSurviveRemount",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 12,
+      "skipped": 0
+    },
+    "readOnlyShellRegression": {
+      "path": "artifacts/copperos-storage/results/readonly-owned.trx",
+      "bytes": 3142,
+      "sha256": "f224548a173526e4b924a960d648fd733d8938d9472ba11cd9c931c7da6bd0c0",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperScreen.Tests.CopperOsBootProofTests.OriginalSystemBootRegistersShellAndRunsInteractiveCommandsThroughLightweight",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 1,
+      "skipped": 0
+    },
+    "appLifecycleAndLotus": {
+      "path": "artifacts/copperos-storage/copperstart-owned/copperstart.trx",
+      "bytes": 19782,
+      "sha256": "371cadd271c127fe9c42483bbcc5b727063e43fbf7e5e52b968aae2bcb090d29",
+      "counters": {
+        "total": "12",
+        "executed": "12",
+        "passed": "12",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "cases": [
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"slow\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"cpu\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"rtc\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"aga\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.ModelSelectionDoesNotSubstituteProprietaryFirmware",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"chip\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.QualifiedRomColdBootResetReinsertAndRestartUseStandardSession",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.ExplicitBootChoiceAndPersonalSettingsRetainStandaloneRom",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"drives\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.UnqualifiedHardwareIsRejectedBeforeRomLoading(change: \"fast\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.MissingDamagedNativeAndAmbiguousRomsHaveRecoveryGuidance",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CopperScreen.Tests.CopperStartTests.LotusOpeningRaceThroughAppSessionMatchesScalarGuestExecution",
+          "outcome": "Passed"
+        }
+      ],
+      "passed": 12,
+      "skipped": 0
+    },
+    "productionRelease": {
+      "status": "passed",
+      "path": "artifacts/copperos-storage/production-release-final.log",
+      "sha256": "4f4e017a5bc529ffc32c8ea145be1a4f40bacdae93dca92d8e2d9b7fbfde3470"
+    },
+    "imageBuilder": {
+      "status": "passed",
+      "path": "artifacts/copperos-storage/image-builder-final.log",
+      "sha256": "08c5485512d3529ef3160bb54ced6376e6640594667d4a37c092eeb316eacebf"
+    },
+    "msixTooling": {
+      "status": "passed",
+      "path": "artifacts/copperos-storage/msix-tooling-owned.log",
+      "sha256": "b05fe488f95baeaf59cfae2503cd52abeabac86b2476b4dc3a86a0a7188a4853"
+    }
+  },
+  "nativeReplays": [
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/first/result.json",
+      "bytes": 1276,
+      "sha256": "5bd426f1e99af9dbf0e3f87585ef95ea0d26fc2678034d582763c799939cfdc2",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "fields": 21360,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\storage-replays\\20261016T204558387Z\\user-data\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/first/storage.txt",
+        "bytes": 2025,
+        "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d"
+      }
+    },
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/package-update-simulation/result.json",
+      "bytes": 1274,
+      "sha256": "870303fc14173bda020a15479941561e2b89db3b95eb5c0ad079cd1a599dda29",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\storage-replays\\20261016T204558387Z\\user-data\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/package-update-simulation/storage.txt",
+        "bytes": 2025,
+        "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+      }
+    },
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/restart/result.json",
+      "bytes": 1274,
+      "sha256": "870303fc14173bda020a15479941561e2b89db3b95eb5c0ad079cd1a599dda29",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\storage-replays\\20261016T204558387Z\\user-data\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/restart/storage.txt",
+        "bytes": 2025,
+        "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+      }
+    },
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/negative-replays/20261016T204343578Z/full/result.json",
+      "bytes": 1300,
+      "sha256": "dc985a43314bb6ba2cd8e9656d3241692247986aa62a62666707295b21da0569",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": "COPPEROS STORAGE DISK FULL",
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "fields": 8660,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\negative-replays\\20261016T204343578Z\\full-user\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "96d1a7a6576c5f1d5b057ed40ac963e96d6b514af11e66de58237c65fa2f5914",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/negative-replays/20261016T204343578Z/full/storage.txt",
+        "bytes": 2025,
+        "sha256": "070157a7fe2c63cf694c74215f5134c30ed4a21112d7c5a1f79432a414b97e42"
+      }
+    },
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/negative-replays/20261016T204343578Z/readonly/result.json",
+      "bytes": 1309,
+      "sha256": "bc4fd8e84ab5c797fcc8ec47cc10583e13775c2f3cb0e1795bd5f2605bedad0c",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": "COPPEROS STORAGE WRITE PROTECTED",
+        "readOnly": true,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "fields": 8560,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\negative-replays\\20261016T204343578Z\\readonly-user\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/negative-replays/20261016T204343578Z/readonly/storage.txt",
+        "bytes": 2025,
+        "sha256": "8822a25b46526f5305f9dde31cf9e148fe4958a94123b583b19e37fa169949ff"
+      }
+    },
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T204957560Z/denied/result.json",
+      "bytes": 1420,
+      "sha256": "9813e8cfb25c05927dc138b2fb4e7564717f736d9500951040f5bdcede643b3f",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": true,
+        "recoveredExport": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\recovery-replays\\20261016T204957560Z\\denied\\recovered.adf",
+        "fields": 21360,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\recovery-replays\\20261016T204957560Z\\user\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T204957560Z/denied/storage.txt",
+        "bytes": 2025,
+        "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d"
+      }
+    },
+    {
+      "path": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T204957560Z/reopened-export/result.json",
+      "bytes": 1195,
+      "sha256": "f7339083738f8acefc49ec608ac3dbd7cc1ece7436286478547a995ea5930087",
+      "result": {
+        "protocol": "copperos-native-storage-v1",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-storage\\system-proof-v5\\recovery-replays\\20261016T204957560Z\\denied\\recovered.adf",
+        "workspacePairId": null,
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "60c8ccb6cad002d1b2dd63bedc520ed6ee40b53d87bbae2b0aef6b4c39e29fdf"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "1c700e401ddcf36f4251264a32009a96e06f651fa75b7b68b915a7727a7e1c70"
+          },
+          {
+            "file": "CopperScreen.Lightweight.Tests.dll",
+            "sha256": "85b5d271cee187829bafaa64e041f2449ee58a272efa8464b0bd4887822c9edd"
+          }
+        ]
+      },
+      "transcript": {
+        "path": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T204957560Z/reopened-export/storage.txt",
+        "bytes": 2025,
+        "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+      }
+    }
+  ],
+  "independentSavedImageReadback": [
+    {
+      "image": {
+        "path": "artifacts/copperos-storage/system-proof-v5/storage-replays/20261016T204558387Z/user-data/CopperOS/Workspaces/persistence/System.adf",
+        "bytes": 901120,
+        "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+      },
+      "verification": {
+        "originalBootChecksum": "passed",
+        "originalImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "filesystemCheckOnPrivateBootNormalizedCopy": {
+          "schema_version": 1,
+          "status": "passed",
+          "filesystem": "DOS1",
+          "block_bytes": 512,
+          "volume": "CopperOS",
+          "root_block": 880,
+          "image_bytes": 901120,
+          "image_sha256": "8aa4e74d5bd696a273ea80cfc3d8c5d27d737ce58ca81cbfb85d08a74a3b50a9",
+          "files": [
+            {
+              "installed_path": "C/BootShell",
+              "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416",
+              "bytes": 5024,
+              "amiga_protection": 0,
+              "header_block": 5,
+              "data_blocks": 10,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "C/Demo",
+              "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692",
+              "bytes": 288,
+              "amiga_protection": 0,
+              "header_block": 16,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "C/Storage",
+              "sha256": "bba1ca90932cd01b96aee763db246c3e6d620240475a345aecd50b21b7773fb8",
+              "bytes": 1976,
+              "amiga_protection": 0,
+              "header_block": 18,
+              "data_blocks": 4,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "L/Shell-Seg",
+              "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab",
+              "bytes": 454776,
+              "amiga_protection": 0,
+              "header_block": 23,
+              "data_blocks": 889,
+              "extension_blocks": [
+                96,
+                169,
+                242,
+                315,
+                388,
+                461,
+                534,
+                607,
+                680,
+                753,
+                826,
+                901
+              ],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/CopperOS-Release.json",
+              "sha256": "a88e4ed23ce135152717a58a5d02e1308e17d28e8855583467502736bb38a104",
+              "bytes": 593,
+              "amiga_protection": 0,
+              "header_block": 929,
+              "data_blocks": 2,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/Persistent-Data",
+              "sha256": "f1867900c6b7acfb4229315b48dc4195e96966a192841ceea1bbe22c83e2dbdd",
+              "bytes": 31,
+              "amiga_protection": 0,
+              "header_block": 934,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/Startup-Sequence",
+              "sha256": "a0272e339f026ff9e6c2923f5f68e01449c12e31a6d0fec6acbb1d9763f3778b",
+              "bytes": 55,
+              "amiga_protection": 0,
+              "header_block": 927,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/User-Settings",
+              "sha256": "7a88f745c20200807661c806f8dd3725a53c3ab4ace075f726c56e78efcb2bc1",
+              "bytes": 10,
+              "amiga_protection": 0,
+              "header_block": 932,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "directories": [
+            "C",
+            "L",
+            "S"
+          ],
+          "epoch_datestamp": [
+            0,
+            0,
+            0
+          ],
+          "checked_headers": 24,
+          "bitmap": {
+            "blocks": [
+              881
+            ],
+            "extension_blocks": [],
+            "allocated_blocks": 934,
+            "free_blocks": 824,
+            "exact_reachable_allocation": true
+          },
+          "shipping_qualified": false,
+          "pure_admitted": false,
+          "bootable": false,
+          "scope": "Independent exact tree/content/protection, header checksums, DOS1 lookup buckets, epoch dates, disjoint block ownership and complete bitmap allocation readback. Not OS execution, bootability, full runtime, release admission or PURE safety; free-space bytes and unused metadata padding are not certified.",
+          "reader": {
+            "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\DiskBuilder\\verify_image.py",
+            "sha256": "9c7b0e831b5fa2942245fcace55b7d22098e0797daacbc0f4933bfe6e21a18f7"
+          },
+          "inventory_reader": {
+            "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\Commands\\Inventory\\inventory.py",
+            "sha256": "2c766ecdda41648d3f0219685a386e5c65f1a49b66f37e871771d891bf8a1847"
+          }
+        },
+        "normalization": "Only reserved boot checksum [4:8] and boot code [12:1024]; filesystem bytes unmodified",
+        "runtimeQualified": false
+      }
+    },
+    {
+      "image": {
+        "path": "artifacts/copperos-storage/system-proof-v5/recovery-replays/20261016T204957560Z/denied/recovered.adf",
+        "bytes": 901120,
+        "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+      },
+      "verification": {
+        "originalBootChecksum": "passed",
+        "originalImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "filesystemCheckOnPrivateBootNormalizedCopy": {
+          "schema_version": 1,
+          "status": "passed",
+          "filesystem": "DOS1",
+          "block_bytes": 512,
+          "volume": "CopperOS",
+          "root_block": 880,
+          "image_bytes": 901120,
+          "image_sha256": "8aa4e74d5bd696a273ea80cfc3d8c5d27d737ce58ca81cbfb85d08a74a3b50a9",
+          "files": [
+            {
+              "installed_path": "C/BootShell",
+              "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416",
+              "bytes": 5024,
+              "amiga_protection": 0,
+              "header_block": 5,
+              "data_blocks": 10,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "C/Demo",
+              "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692",
+              "bytes": 288,
+              "amiga_protection": 0,
+              "header_block": 16,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "C/Storage",
+              "sha256": "bba1ca90932cd01b96aee763db246c3e6d620240475a345aecd50b21b7773fb8",
+              "bytes": 1976,
+              "amiga_protection": 0,
+              "header_block": 18,
+              "data_blocks": 4,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "L/Shell-Seg",
+              "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab",
+              "bytes": 454776,
+              "amiga_protection": 0,
+              "header_block": 23,
+              "data_blocks": 889,
+              "extension_blocks": [
+                96,
+                169,
+                242,
+                315,
+                388,
+                461,
+                534,
+                607,
+                680,
+                753,
+                826,
+                901
+              ],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/CopperOS-Release.json",
+              "sha256": "a88e4ed23ce135152717a58a5d02e1308e17d28e8855583467502736bb38a104",
+              "bytes": 593,
+              "amiga_protection": 0,
+              "header_block": 929,
+              "data_blocks": 2,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/Persistent-Data",
+              "sha256": "f1867900c6b7acfb4229315b48dc4195e96966a192841ceea1bbe22c83e2dbdd",
+              "bytes": 31,
+              "amiga_protection": 0,
+              "header_block": 934,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/Startup-Sequence",
+              "sha256": "a0272e339f026ff9e6c2923f5f68e01449c12e31a6d0fec6acbb1d9763f3778b",
+              "bytes": 55,
+              "amiga_protection": 0,
+              "header_block": 927,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "installed_path": "S/User-Settings",
+              "sha256": "7a88f745c20200807661c806f8dd3725a53c3ab4ace075f726c56e78efcb2bc1",
+              "bytes": 10,
+              "amiga_protection": 0,
+              "header_block": 932,
+              "data_blocks": 1,
+              "extension_blocks": [],
+              "datestamp": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "directories": [
+            "C",
+            "L",
+            "S"
+          ],
+          "epoch_datestamp": [
+            0,
+            0,
+            0
+          ],
+          "checked_headers": 24,
+          "bitmap": {
+            "blocks": [
+              881
+            ],
+            "extension_blocks": [],
+            "allocated_blocks": 934,
+            "free_blocks": 824,
+            "exact_reachable_allocation": true
+          },
+          "shipping_qualified": false,
+          "pure_admitted": false,
+          "bootable": false,
+          "scope": "Independent exact tree/content/protection, header checksums, DOS1 lookup buckets, epoch dates, disjoint block ownership and complete bitmap allocation readback. Not OS execution, bootability, full runtime, release admission or PURE safety; free-space bytes and unused metadata padding are not certified.",
+          "reader": {
+            "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\DiskBuilder\\verify_image.py",
+            "sha256": "9c7b0e831b5fa2942245fcace55b7d22098e0797daacbc0f4933bfe6e21a18f7"
+          },
+          "inventory_reader": {
+            "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\Commands\\Inventory\\inventory.py",
+            "sha256": "2c766ecdda41648d3f0219685a386e5c65f1a49b66f37e871771d891bf8a1847"
+          }
+        },
+        "normalization": "Only reserved boot checksum [4:8] and boot code [12:1024]; filesystem bytes unmodified",
+        "runtimeQualified": false
+      }
+    }
+  ],
+  "lotus": {
+    "record": {
+      "path": "artifacts/copperos-storage/copperstart-owned/lotus-app/app-session.json",
+      "bytes": 4127,
+      "sha256": "be3f6b47305dc709cc5d7a847fe6fb894487e5e359300ec1296e1791a719e408"
+    },
+    "inspectedMilestones": [
+      {
+        "field": 3000,
+        "image": {
+          "path": "artifacts/copperos-storage/copperstart-owned/lotus-app/field-03000.png",
+          "bytes": 27213,
+          "sha256": "c9b60b34e37eb7e14719935fff0896cc38b5667ff5bfe852d23787c4791feb8b"
+        }
+      },
+      {
+        "field": 9000,
+        "image": {
+          "path": "artifacts/copperos-storage/copperstart-owned/lotus-app/field-09000.png",
+          "bytes": 80985,
+          "sha256": "487cff7edd758df28eb0f637ccf69676cec56f449656d8514f312351a9a691cb"
+        }
+      },
+      {
+        "field": 11000,
+        "image": {
+          "path": "artifacts/copperos-storage/copperstart-owned/lotus-app/field-11000.png",
+          "bytes": 65485,
+          "sha256": "565c35781bb6ea01e32ddaed6924d2ae0aeb6794881d8aa63ca14d112f1d3a71"
+        }
+      },
+      {
+        "field": 14000,
+        "image": {
+          "path": "artifacts/copperos-storage/copperstart-owned/lotus-app/field-14000.png",
+          "bytes": 62718,
+          "sha256": "313449e9dc3ed842da897847c849a2dc139c03dd74a81a43bf23f2483db50d0b"
+        }
+      }
+    ],
+    "scope": "Bounded loading/menu/input-driven opening race; inspected images identical to preceding reviewed captures; PCM/scalar parity; no full-game, listening or performance claim"
+  },
+  "diagnosticMsixPackages": [
+    {
+      "record": {
+        "path": "artifacts/copperos-storage/msix-owned/Baseline/package-record.json",
+        "bytes": 66664,
+        "sha256": "1f82314726204be7609661296ef5ea07ce97f3c4af0b7177b27d0f2ed58de49b"
+      },
+      "package": {
+        "path": "artifacts/copperos-storage/msix-owned/Baseline/CopperScreen-1.1.7.0-win-x64.msix",
+        "bytes": 49500261,
+        "sha256": "d6274078d28c81e639d3558fe1f46c080f1c00cfee003698d1cc5f7faffc0853"
+      },
+      "identity": {
+        "Name": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 7,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": false,
+        "Diagnostic": true
+      }
+    },
+    {
+      "record": {
+        "path": "artifacts/copperos-storage/msix-owned/Update/package-record.json",
+        "bytes": 66662,
+        "sha256": "c8f1c7317c70744a7d2e2416a9e7b3b320906992eb6b134e4e7cdba32896eb44"
+      },
+      "package": {
+        "path": "artifacts/copperos-storage/msix-owned/Update/CopperScreen-1.1.8.0-win-x64.msix",
+        "bytes": 49500275,
+        "sha256": "363ab818e16cc41b221f26aa0d3099e93726bfc64265d1a43226f0dd3882dac6"
+      },
+      "identity": {
+        "Name": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 8,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": false,
+        "Diagnostic": true
+      }
+    }
+  ],
+  "installedMsix": {
+    "record": {
+      "path": "artifacts/copperos-storage/msix-owned/Installed/installed-test-record.json",
+      "bytes": 1486,
+      "sha256": "5b8251cb4d7e1418a1cfcd41360d068228558709590ecabed0aa856bdf6d79f6"
+    },
+    "status": "unavailable",
+    "reason": "System.Management.Automation.RuntimeException: Install mode requires signed packages whose publisher is trusted on this test machine. The pipeline never installs certificates or changes machine trust.",
+    "phases": 0,
+    "installedAcceptance": false,
+    "trustOrDeveloperModeChanges": false
+  },
+  "limits": [
+    "Only the current explicitly admitted seed pair; no automatic migration or reset.",
+    "Large extension-file writes tested on host filesystem core, not claimed as native runtime coverage.",
+    "Full-volume negative control reserves all bitmap blocks; not a naturally filled customer volume.",
+    "Device-fault root invalidation tested on host core; no arbitrary crash/power-loss or journal guarantee.",
+    "Host save denial tested with a read-only primary image; recovery export must not clear primary dirty state.",
+    "Wider public APIs, lifecycle/resource budgets, full preferences/UI workflows, commercial rights, bundled onboarding and actual signed MSIX update remain open."
+  ]
+}

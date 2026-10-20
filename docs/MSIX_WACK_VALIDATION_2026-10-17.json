@@ -1,0 +1,1329 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "status": "PASSED",
+  "wackOverallPass": true,
+  "requiredTestsPassed": true,
+  "allOptionalTestsPassed": false,
+  "storeCertified": false,
+  "shipping": false,
+  "scope": "Local signed x64 diagnostic and production-shape Centennial packages; no Partner Center or Store acquisition.",
+  "sourceQualification": "docs/COPPEROS_STORAGE_2026-10-16.json",
+  "earlierInstalledQualification": "docs/COPPEROS_MSIX_VALIDATION_2026-10-17.json",
+  "changes": [
+    "Embedded PerMonitorV2/asInvoker executable manifest",
+    "Published executable manifest extraction/validation and source hashing",
+    "Identity-bound, complete WACK per-test evidence; existing overall-PASS gate retained"
+  ],
+  "attempts": [
+    {
+      "package": {
+        "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\Fixed\\Update\\CopperScreen-1.1.10.0-win-x64.msix",
+        "Sha256": "BEF03946EBD71BEC3F0DC0CE0D433ECA803F3C5643A7141F592693B992A59638",
+        "Identity": {
+          "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 10,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": true
+        },
+        "SourceCommit": "726bebbdae155e968e509cf72f0d6f108cf1721f",
+        "WorkingTreeDirty": true,
+        "GuestAssets": "Hash-bound native CopperOS storage pair; diagnostic package only, no redistribution admission."
+      },
+      "packageRecord": {
+        "path": "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Update/package-record.json",
+        "bytes": 66706,
+        "sha256": "52bf64e3bdded24198107bccfda6e34af511c245114562a8aec45e7530dc27dd"
+      },
+      "harnessRecord": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/wack-record.json",
+        "bytes": 750,
+        "sha256": "144c147ea4be6bb2cde914ec7e4ce912eace29fbad81f0de9e10cbbebc7e25a5"
+      },
+      "rawReport": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/wack-report.xml",
+        "bytes": 4067085,
+        "sha256": "3ebfcdca202fae724bb4b83944e9df58e0af40861f6e1f27c161aa8d1783ac78"
+      },
+      "reportAttributes": {
+        "{http://www.w3.org/XML/1998/namespace}lang": "fi-FI",
+        "OVERALL_RESULT": "WARNING",
+        "VERSION": "10.0.26100.8249",
+        "LATEST_VERSION": "",
+        "UPDATE_DOWNLOAD_URL": "",
+        "TOOLSET_ARCHITECTURE": "x64",
+        "SecureBoot": "FALSE",
+        "APP_TYPE": "Centennial",
+        "PUBLISHER_DISPLAY_NAME": "CN=CopperScreen Installed Tests",
+        "APP_NAME": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "APP_VERSION": "1.1.10.0",
+        "OSVERSION": "10.0.26200.0",
+        "OS": "Microsoft Windows 11 Home",
+        "PER_USER_APPLICATION": "",
+        "PARTIAL_RUN": "FALSE",
+        "LCID": "1035",
+        "X64_ONLY": "TRUE",
+        "VALIDATION_TYPE": "CommandLine",
+        "ReportGenerationTime": "17.10.2026 0.28.08",
+        "ID": "1de672eb47f04727505db0b1bf658c22"
+      },
+      "status": "FAILED",
+      "requiredPassed": 12,
+      "requiredCount": 13,
+      "tests": [
+        {
+          "name": "Install signed driver and executable files",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "User account control run level",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Application count",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "App manifest",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "File association verbs",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Registry checks",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Enterprise Features",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Resource Packages",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Banned file analyzer",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Private code signing",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "App resources",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Branding",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Debug configuration",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Special use capabilities",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "ExclusiveTo attribute",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type location",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type name case-sensitivity",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type name correctness",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "General metadata correctness",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Properties",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Archive files usage",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Blocked executables",
+          "optional": "TRUE",
+          "result": "FAIL",
+          "messages": [
+            "File mscordbi.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File Avalonia.Base.dll contains a reference to a \"Launch Process\" related API System.Diagnostics.Process.Start",
+            "File coreclr.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File CopperScreen.exe contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteW",
+            "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteExW",
+            "File Avalonia.Base.dll contains a blocked executable reference to \"cmd\".",
+            "File Avalonia.Controls.dll contains a blocked executable reference to \"reg\".",
+            "File Avalonia.FreeDesktop.AtSpi.dll contains a blocked executable reference to \"reg\".",
+            "File clrjit.dll contains a blocked executable reference to \"bash\".",
+            "File CopperScreen.dll contains a blocked executable reference to \"ReG\".",
+            "File HidSharp.dll contains a blocked executable reference to \"cmd\".",
+            "File Microsoft.DiaSymReader.Native.amd64.dll contains a blocked executable reference to \"cmd\".",
+            "File Microsoft.VisualBasic.Core.dll contains a blocked executable reference to \"cdB\".",
+            "File System.Collections.Concurrent.dll contains a blocked executable reference to \"Cdb\".",
+            "File System.Net.Sockets.dll contains a blocked executable reference to \"cmd\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"CMD\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"MSBuild\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"dnX\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"CsI\".",
+            "File System.Private.Xml.dll contains a blocked executable reference to \"rEg\".",
+            "File System.Private.Xml.dll contains a blocked executable reference to \"cDB\".",
+            "File System.Reflection.Metadata.dll contains a blocked executable reference to \"Cdb\".",
+            "File System.Text.Json.dll contains a blocked executable reference to \"CDb\".",
+            "File System.Text.RegularExpressions.dll contains a blocked executable reference to \"dNX\"."
+          ]
+        },
+        {
+          "name": "Platform appropriate files",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "DPIAwarenessValidation",
+          "optional": "FALSE",
+          "result": "WARNING",
+          "messages": [
+            "File CopperScreen.exe neither has PerMonitorV2 manifested in the manifest nor calls into DPI Awareness APIs for ex: user32!SetProcessDpiAwarenessContext or user32!SetThreadDpiAwarenessContext.",
+            "The app CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.10.0_x64__a0cyw3gffeccg is not DPI Aware."
+          ]
+        }
+      ]
+    },
+    {
+      "package": {
+        "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f\\Fixed\\Diagnostic\\CopperScreen-1.1.12.0-win-x64.msix",
+        "Sha256": "1BE278958CC15FE11C6EC3DEFEE5C735E24260AF8B93CB5115F2FF9789C4BB1F",
+        "Identity": {
+          "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 12,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": true
+        },
+        "SourceCommit": "726bebbdae155e968e509cf72f0d6f108cf1721f",
+        "WorkingTreeDirty": true,
+        "GuestAssets": "Hash-bound native CopperOS storage pair; diagnostic package only, no redistribution admission."
+      },
+      "packageRecord": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/package-record.json",
+        "bytes": 66842,
+        "sha256": "3cc1990d00b8ec7aad24f7c08e4b1629d6c4b8ed63dae068de434c8a5b4a0181"
+      },
+      "harnessRecord": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi/wack-record.json",
+        "bytes": 7427,
+        "sha256": "82ac9a91c452e8808f6bbcc139adb3ce4d83aa0a08ff8106087d26270e666390"
+      },
+      "rawReport": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi/wack-report.xml",
+        "bytes": 7820065,
+        "sha256": "2d790bb7dd244c3f064f164d9967132e02b33983d509610ee755b43e59bfddf3"
+      },
+      "reportAttributes": {
+        "{http://www.w3.org/XML/1998/namespace}lang": "fi-FI",
+        "OVERALL_RESULT": "PASS",
+        "VERSION": "10.0.26100.8249",
+        "LATEST_VERSION": "",
+        "UPDATE_DOWNLOAD_URL": "",
+        "TOOLSET_ARCHITECTURE": "x64",
+        "SecureBoot": "FALSE",
+        "APP_TYPE": "Centennial",
+        "PUBLISHER_DISPLAY_NAME": "CN=CopperScreen Installed Tests",
+        "APP_NAME": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "APP_VERSION": "1.1.12.0",
+        "OSVERSION": "10.0.26200.0",
+        "OS": "Microsoft Windows 11 Home",
+        "PER_USER_APPLICATION": "",
+        "PARTIAL_RUN": "FALSE",
+        "LCID": "1035",
+        "X64_ONLY": "TRUE",
+        "VALIDATION_TYPE": "CommandLine",
+        "ReportGenerationTime": "17.10.2026 0.35.40",
+        "ID": "6d005538a395e3860a1d01326255114f"
+      },
+      "status": "PASSED",
+      "requiredPassed": 13,
+      "requiredCount": 13,
+      "tests": [
+        {
+          "name": "Install signed driver and executable files",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "User account control run level",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Application count",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "App manifest",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "File association verbs",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Registry checks",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Enterprise Features",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Resource Packages",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Banned file analyzer",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Private code signing",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "App resources",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Branding",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Debug configuration",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Special use capabilities",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "ExclusiveTo attribute",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type location",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type name case-sensitivity",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type name correctness",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "General metadata correctness",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Properties",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Archive files usage",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Blocked executables",
+          "optional": "TRUE",
+          "result": "FAIL",
+          "messages": [
+            "File mscordbi.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File Avalonia.Base.dll contains a reference to a \"Launch Process\" related API System.Diagnostics.Process.Start",
+            "File CopperScreen.exe contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteW",
+            "File coreclr.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteExW",
+            "File Avalonia.Base.dll contains a blocked executable reference to \"cmd\".",
+            "File Avalonia.Controls.dll contains a blocked executable reference to \"reg\".",
+            "File Avalonia.FreeDesktop.AtSpi.dll contains a blocked executable reference to \"reg\".",
+            "File clrjit.dll contains a blocked executable reference to \"bash\".",
+            "File CopperScreen.dll contains a blocked executable reference to \"ReG\".",
+            "File HidSharp.dll contains a blocked executable reference to \"cmd\".",
+            "File Microsoft.DiaSymReader.Native.amd64.dll contains a blocked executable reference to \"cmd\".",
+            "File Microsoft.VisualBasic.Core.dll contains a blocked executable reference to \"cdB\".",
+            "File System.Collections.Concurrent.dll contains a blocked executable reference to \"Cdb\".",
+            "File System.Net.Sockets.dll contains a blocked executable reference to \"cmd\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"CMD\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"MSBuild\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"dnX\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"CsI\".",
+            "File System.Private.Xml.dll contains a blocked executable reference to \"rEg\".",
+            "File System.Private.Xml.dll contains a blocked executable reference to \"cDB\".",
+            "File System.Reflection.Metadata.dll contains a blocked executable reference to \"Cdb\".",
+            "File System.Text.Json.dll contains a blocked executable reference to \"CDb\".",
+            "File System.Text.RegularExpressions.dll contains a blocked executable reference to \"dNX\"."
+          ]
+        },
+        {
+          "name": "Platform appropriate files",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "DPIAwarenessValidation",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        }
+      ]
+    },
+    {
+      "package": {
+        "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f\\Fixed\\Production\\CopperScreen-1.1.13.0-win-x64.msix",
+        "Sha256": "8A1F0334795A620676B165C5BD77F3CEB56ED66D9CA49D42184D9AE9A6FDD014",
+        "Identity": {
+          "Name": "CopperScreen.Wack.3d3fc2376ef940ab8cb5cc393b86fb98",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 13,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": false
+        },
+        "SourceCommit": "726bebbdae155e968e509cf72f0d6f108cf1721f",
+        "WorkingTreeDirty": true,
+        "GuestAssets": "None: native guest proof unavailable."
+      },
+      "packageRecord": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/package-record.json",
+        "bytes": 66324,
+        "sha256": "5230dba3d7c347afcfab1f20b77ff5f0c003eeeb7ead660c98ea5a3c2f5f81ed"
+      },
+      "harnessRecord": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi/wack-record.json",
+        "bytes": 7340,
+        "sha256": "2ca0e6260f262579343081e3f5a7ce2dec01cd98f5595d4410dce9dd346fc304"
+      },
+      "rawReport": {
+        "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi/wack-report.xml",
+        "bytes": 11570817,
+        "sha256": "aa3c37ef6b8ae67b81a9f9fe3ae61cfdc1123b8605d47b772467701bc86f2390"
+      },
+      "reportAttributes": {
+        "{http://www.w3.org/XML/1998/namespace}lang": "fi-FI",
+        "OVERALL_RESULT": "PASS",
+        "VERSION": "10.0.26100.8249",
+        "LATEST_VERSION": "",
+        "UPDATE_DOWNLOAD_URL": "",
+        "TOOLSET_ARCHITECTURE": "x64",
+        "SecureBoot": "FALSE",
+        "APP_TYPE": "Centennial",
+        "PUBLISHER_DISPLAY_NAME": "CN=CopperScreen Installed Tests",
+        "APP_NAME": "CopperScreen.Wack.3d3fc2376ef940ab8cb5cc393b86fb98",
+        "APP_VERSION": "1.1.13.0",
+        "OSVERSION": "10.0.26200.0",
+        "OS": "Microsoft Windows 11 Home",
+        "PER_USER_APPLICATION": "",
+        "PARTIAL_RUN": "FALSE",
+        "LCID": "1035",
+        "X64_ONLY": "TRUE",
+        "VALIDATION_TYPE": "CommandLine",
+        "ReportGenerationTime": "17.10.2026 0.42.55",
+        "ID": "9ca3c96b81a4ea78e06f14f651380e8a"
+      },
+      "status": "PASSED",
+      "requiredPassed": 13,
+      "requiredCount": 13,
+      "tests": [
+        {
+          "name": "Install signed driver and executable files",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "User account control run level",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Application count",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "App manifest",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "File association verbs",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Registry checks",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Enterprise Features",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Resource Packages",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Banned file analyzer",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Private code signing",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "App resources",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Branding",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Debug configuration",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Special use capabilities",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "ExclusiveTo attribute",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type location",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type name case-sensitivity",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Type name correctness",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "General metadata correctness",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Properties",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Archive files usage",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "Blocked executables",
+          "optional": "TRUE",
+          "result": "FAIL",
+          "messages": [
+            "File mscordbi.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File Avalonia.Base.dll contains a reference to a \"Launch Process\" related API System.Diagnostics.Process.Start",
+            "File coreclr.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File CopperScreen.exe contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteW",
+            "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+            "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteExW",
+            "File Avalonia.Base.dll contains a blocked executable reference to \"cmd\".",
+            "File Avalonia.Controls.dll contains a blocked executable reference to \"reg\".",
+            "File Avalonia.FreeDesktop.AtSpi.dll contains a blocked executable reference to \"reg\".",
+            "File clrjit.dll contains a blocked executable reference to \"bash\".",
+            "File HidSharp.dll contains a blocked executable reference to \"cmd\".",
+            "File Microsoft.DiaSymReader.Native.amd64.dll contains a blocked executable reference to \"cmd\".",
+            "File Microsoft.VisualBasic.Core.dll contains a blocked executable reference to \"cdB\".",
+            "File System.Collections.Concurrent.dll contains a blocked executable reference to \"Cdb\".",
+            "File System.Net.Sockets.dll contains a blocked executable reference to \"cmd\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"CMD\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"MSBuild\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"dnX\".",
+            "File System.Private.CoreLib.dll contains a blocked executable reference to \"CsI\".",
+            "File System.Private.Xml.dll contains a blocked executable reference to \"rEg\".",
+            "File System.Private.Xml.dll contains a blocked executable reference to \"cDB\".",
+            "File System.Reflection.Metadata.dll contains a blocked executable reference to \"Cdb\".",
+            "File System.Text.Json.dll contains a blocked executable reference to \"CDb\".",
+            "File System.Text.RegularExpressions.dll contains a blocked executable reference to \"dNX\"."
+          ]
+        },
+        {
+          "name": "Platform appropriate files",
+          "optional": "TRUE",
+          "result": "PASS",
+          "messages": []
+        },
+        {
+          "name": "DPIAwarenessValidation",
+          "optional": "FALSE",
+          "result": "PASS",
+          "messages": []
+        }
+      ]
+    }
+  ],
+  "preflight": [
+    {
+      "Kind": "Diagnostic",
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f\\Fixed\\Diagnostic\\CopperScreen-1.1.12.0-win-x64.msix",
+      "Sha256": "1BE278958CC15FE11C6EC3DEFEE5C735E24260AF8B93CB5115F2FF9789C4BB1F",
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 12,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      },
+      "SignatureVerificationExitCode": 0,
+      "ExecutableManifestSha256": "C8A8A96D69C7CBE9FDD11BC99A0375589D7D3618254B692E8696697B0FA0BE2C",
+      "DiagnosticProbe": true,
+      "ManifestSourceRecorded": true,
+      "SourceInputsMatch": true
+    },
+    {
+      "Kind": "Production",
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f\\Fixed\\Production\\CopperScreen-1.1.13.0-win-x64.msix",
+      "Sha256": "8A1F0334795A620676B165C5BD77F3CEB56ED66D9CA49D42184D9AE9A6FDD014",
+      "Identity": {
+        "Name": "CopperScreen.Wack.3d3fc2376ef940ab8cb5cc393b86fb98",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 13,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": false
+      },
+      "SignatureVerificationExitCode": 0,
+      "ExecutableManifestSha256": "C8A8A96D69C7CBE9FDD11BC99A0375589D7D3618254B692E8696697B0FA0BE2C",
+      "DiagnosticProbe": false,
+      "ManifestSourceRecorded": true,
+      "SourceInputsMatch": true
+    }
+  ],
+  "installedUpdate": {
+    "SchemaVersion": 1,
+    "Protocol": "copperscreen-installed-msix-v2",
+    "PhaseExitTimeoutSeconds": 30,
+    "RequiredProcessExitCode": 0,
+    "Status": "PASSED",
+    "DeploymentMode": "Install",
+    "InstalledMsixAcceptance": true,
+    "StoreCertified": false,
+    "NativeCopperOsStorage": "PASSED: native DOS create/write/read/rename/delete; process restart and package update readback.",
+    "Phases": [
+      {
+        "SchemaVersion": 1,
+        "Phase": "seed",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.9.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "protocol": "copperos-native-storage-v1",
+          "passed": true,
+          "reopen": false,
+          "expectedFailure": null,
+          "readOnly": false,
+          "denyHostSaves": false,
+          "recoveredExport": null,
+          "fields": 21360,
+          "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+          "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+          "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+          "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+          "engine": "Lightweight",
+          "legacy": false,
+          "hostDosCalls": false,
+          "binaries": [
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            },
+            {
+              "file": "CopperMod.Amiga.Lightweight.dll",
+              "sha256": "45791a0ccff776a91b157a230e52844f6a0e8b6325dac1c4ce26ee8cdf8e3d13"
+            },
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            }
+          ]
+        },
+        "Files": {
+          "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+          "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+          "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+        },
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true,
+        "HostProcess": {
+          "Id": 41232,
+          "ExitCode": 0,
+          "WaitMilliseconds": 2060,
+          "TimeoutSeconds": 30
+        }
+      },
+      {
+        "SchemaVersion": 1,
+        "Phase": "verify",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.9.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "protocol": "copperos-native-storage-v1",
+          "passed": true,
+          "reopen": true,
+          "expectedFailure": null,
+          "readOnly": false,
+          "denyHostSaves": false,
+          "recoveredExport": null,
+          "fields": 8960,
+          "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+          "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+          "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+          "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+          "engine": "Lightweight",
+          "legacy": false,
+          "hostDosCalls": false,
+          "binaries": [
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            },
+            {
+              "file": "CopperMod.Amiga.Lightweight.dll",
+              "sha256": "45791a0ccff776a91b157a230e52844f6a0e8b6325dac1c4ce26ee8cdf8e3d13"
+            },
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            }
+          ]
+        },
+        "Files": {
+          "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+          "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+          "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+        },
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true,
+        "HostProcess": {
+          "Id": 4760,
+          "ExitCode": 0,
+          "WaitMilliseconds": 10450,
+          "TimeoutSeconds": 30
+        }
+      },
+      {
+        "SchemaVersion": 1,
+        "Phase": "verify",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.12.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.12.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.12.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "protocol": "copperos-native-storage-v1",
+          "passed": true,
+          "reopen": true,
+          "expectedFailure": null,
+          "readOnly": false,
+          "denyHostSaves": false,
+          "recoveredExport": null,
+          "fields": 8960,
+          "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+          "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+          "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+          "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+          "engine": "Lightweight",
+          "legacy": false,
+          "hostDosCalls": false,
+          "binaries": [
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "9011e468b733332bc5013b82e607e51bb3f811fa0c21fbbed22a80c0d42c61b6"
+            },
+            {
+              "file": "CopperMod.Amiga.Lightweight.dll",
+              "sha256": "bbf7706140c670e3640a81765629d8360b3d77b4cbb67e8c4f84027e83e85731"
+            },
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "9011e468b733332bc5013b82e607e51bb3f811fa0c21fbbed22a80c0d42c61b6"
+            }
+          ]
+        },
+        "Files": {
+          "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+          "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+          "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+        },
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true,
+        "HostProcess": {
+          "Id": 27144,
+          "ExitCode": 0,
+          "WaitMilliseconds": 7384,
+          "TimeoutSeconds": 30
+        }
+      },
+      {
+        "SchemaVersion": 1,
+        "Phase": "fresh",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.12.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.12.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.12.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "status": "fresh-after-uninstall",
+          "present": false
+        },
+        "Files": {},
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true,
+        "HostProcess": {
+          "Id": 41624,
+          "ExitCode": 0,
+          "WaitMilliseconds": 2843,
+          "TimeoutSeconds": 30
+        }
+      }
+    ],
+    "Baseline": {
+      "Sha256": "2F22C530278C06AD00C85806C7F2EEA23D532207507E2C22F7AB579829B57E34",
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 9,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      }
+    },
+    "Update": {
+      "Sha256": "1BE278958CC15FE11C6EC3DEFEE5C735E24260AF8B93CB5115F2FF9789C4BB1F",
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 12,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      }
+    },
+    "Cleanup": "Test registration removed; evidence/layouts retained."
+  },
+  "earlierInstalledAttempt": {
+    "record": {
+      "SchemaVersion": 1,
+      "Status": "FAILED",
+      "DeploymentMode": "Install",
+      "InstalledMsixAcceptance": false,
+      "StoreCertified": false,
+      "NativeCopperOsStorage": "UNAVAILABLE: installed native workflow has not run",
+      "Phases": [
+        {
+          "SchemaVersion": 1,
+          "Phase": "seed",
+          "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+          "Passed": true,
+          "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg",
+          "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+          "PackageVersion": "1.1.9.0",
+          "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+          "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+          "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg\\",
+          "Elevated": false,
+          "CopperOsStorage": {
+            "protocol": "copperos-native-storage-v1",
+            "passed": true,
+            "reopen": false,
+            "expectedFailure": null,
+            "readOnly": false,
+            "denyHostSaves": false,
+            "recoveredExport": null,
+            "fields": 21360,
+            "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+            "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+            "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+            "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+            "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+            "engine": "Lightweight",
+            "legacy": false,
+            "hostDosCalls": false,
+            "binaries": [
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+              },
+              {
+                "file": "CopperMod.Amiga.Lightweight.dll",
+                "sha256": "45791a0ccff776a91b157a230e52844f6a0e8b6325dac1c4ce26ee8cdf8e3d13"
+              },
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+              }
+            ]
+          },
+          "Files": {
+            "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+            "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+            "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+          },
+          "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+          "WindowOpened": true
+        }
+      ],
+      "Baseline": {
+        "Identity": {
+          "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 9,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": true
+        },
+        "Sha256": "2F22C530278C06AD00C85806C7F2EEA23D532207507E2C22F7AB579829B57E34"
+      },
+      "Update": {
+        "Identity": {
+          "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 12,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": true
+        },
+        "Sha256": "1BE278958CC15FE11C6EC3DEFEE5C735E24260AF8B93CB5115F2FF9789C4BB1F"
+      },
+      "Error": "System.Management.Automation.RuntimeException: Installed test wrote a report but did not exit cleanly.",
+      "Cleanup": "Test registration removed; evidence/layouts retained."
+    },
+    "disposition": "FAILED: a passing restart report was written, but the process exceeded the old five-second exit allowance. Retained without relabeling; rerun uses an explicit 30-second exit bound and requires exit code zero."
+  },
+  "harnessInputs": [
+    {
+      "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/RunInputs/msix/CopperScreen.Msix.psm1",
+      "bytes": 6853,
+      "sha256": "9edc86321ee97a647287575b56e2df3a72358c3501f181efdb52946aa2d8a5c4"
+    },
+    {
+      "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/RunInputs/test-msix-certification.ps1",
+      "bytes": 4067,
+      "sha256": "4aab04b02fea72b58156d9bfba4c9e2cc1489d37859a2bda2343f8cff1bef0fd"
+    },
+    {
+      "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/RunInputsV2/msix/CopperScreen.Msix.psm1",
+      "bytes": 9096,
+      "sha256": "a844931061ef678099517fcb836bf02f09a6fabf8261d56cce7c5b301986cddd"
+    },
+    {
+      "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/RunInputsV2/test-msix-certification.ps1",
+      "bytes": 4812,
+      "sha256": "dfe8dbd2d66a239ed08d1598c3d44f70ec8f1d9f1e4ad75aca7d8ca04ca297df"
+    },
+    {
+      "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledInputsV2/msix/CopperScreen.Msix.psm1",
+      "bytes": 9852,
+      "sha256": "526b4976ebccd9625d1b3a3ba7513351a8ed5f1f01521063f5f6dd8ebadafa50"
+    },
+    {
+      "path": "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledInputsV2/test-msix-installed.ps1",
+      "bytes": 12496,
+      "sha256": "f4a0d6bf315e7229dc45e303b821033c8055cfb905c273d8ba35db9ceafb1adc"
+    }
+  ],
+  "currentSourceInputs": [
+    {
+      "path": "CopperScreen/app.manifest",
+      "bytes": 936,
+      "sha256": "68695fcc7764cb0ec20ca222d2bf90667ba3e9b2bb6ccfeff2c936e43129cfdd"
+    },
+    {
+      "path": "CopperScreen/CopperScreen.csproj",
+      "bytes": 3235,
+      "sha256": "091d30026eec6162d7ff347a55bbfe41999de161747a0722cb04b8a7984b2494"
+    },
+    {
+      "path": "scripts/package-msix.ps1",
+      "bytes": 10655,
+      "sha256": "c78c04805248d4f8303cdfc2e81e5300908b3e75c3c650b6bbe4c51018182962"
+    },
+    {
+      "path": "scripts/test-msix-certification.ps1",
+      "bytes": 4812,
+      "sha256": "dfe8dbd2d66a239ed08d1598c3d44f70ec8f1d9f1e4ad75aca7d8ca04ca297df"
+    },
+    {
+      "path": "scripts/test-msix-installed.ps1",
+      "bytes": 12496,
+      "sha256": "f4a0d6bf315e7229dc45e303b821033c8055cfb905c273d8ba35db9ceafb1adc"
+    },
+    {
+      "path": "scripts/msix/CopperScreen.Msix.psm1",
+      "bytes": 9852,
+      "sha256": "526b4976ebccd9625d1b3a3ba7513351a8ed5f1f01521063f5f6dd8ebadafa50"
+    },
+    {
+      "path": "scripts/tests/test-msix-tools.ps1",
+      "bytes": 7645,
+      "sha256": "46b8239608a3b1d3f1a5da21e5d766624d4800cf3b3bdd40b783bbaf78b68f6e"
+    },
+    {
+      "path": ".github/workflows/msix-installed.yml",
+      "bytes": 5676,
+      "sha256": "730c61e3e7afbceca0895f2517fbbbacf9ae2abb352c46047bf20063a4c31a70"
+    }
+  ],
+  "optionalFindingReview": {
+    "test": "Blocked executables",
+    "remains": "FAIL, OPTIONAL=TRUE; WACK overall PASS",
+    "assessment": "Static process-API and command-name references in the self-contained .NET/Avalonia/HidSharp payload; no blocked executable files identified. A focused CopperScreen/CopperDisk source search found no direct Process.Start/ShellExecute or cmd.exe/reg.exe/bash.exe references. This is not an exhaustive dependency-call-path proof or S-mode qualification.",
+    "executablePayload": [
+      "CopperScreen.exe",
+      "createdump.exe"
+    ],
+    "guidance": "https://learn.microsoft.com/en-us/windows/uwp/debug-test-perf/windows-desktop-bridge-app-tests",
+    "binariesPatchedOrTestsDisabled": false
+  },
+  "build": {
+    "productionRelease": "passed; zero warnings/errors",
+    "msixToolingControlsPassed": 39
+  },
+  "cleanup": {
+    "ObservedAt": "2026-10-17T00:56:33.8583075+03:00",
+    "Identities": [
+      "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+      "CopperScreen.Wack.3d3fc2376ef940ab8cb5cc393b86fb98"
+    ],
+    "RegistrationsAbsent": true,
+    "PrivateRunDirectoryAbsent": true,
+    "ExternalSyntheticOriginalSha256": "26220ADB2F4DB715B8E1E07FA34446D6AE774EC4FD9FF001B80E95F4433D4E22",
+    "DeveloperModeProperty": null,
+    "CertificateTrustRetained": true
+  },
+  "evidenceFileSha256": {
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/analysis-summary.json": "6fcac325e80f4b3c29d004ee5cf7fec92fa78935b04c5a31c51102be76e33e36",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/wack-record.json": "144c147ea4be6bb2cde914ec7e4ce912eace29fbad81f0de9e10cbbebc7e25a5",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/wack-report.xml": "3ebfcdca202fae724bb4b83944e9df58e0af40861f6e1f27c161aa8d1783ac78",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/wack-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Attempt1/wack-stdout.log": "4228d7a8b3885c09c6a6b3d47c40318a4d08cb7e9ba43ea3150495fbdf5d0772",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/attempt1-completion.json": "1fa1f598d08ee26312ee8233c5d736ed2797b2efd47e3e7eb153d0b28b39c758",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/attempt1-harness.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi/wack-record.json": "82ac9a91c452e8808f6bbcc139adb3ce4d83aa0a08ff8106087d26270e666390",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi/wack-report.xml": "2d790bb7dd244c3f064f164d9967132e02b33983d509610ee755b43e59bfddf3",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi/wack-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi/wack-stdout.log": "b8f82683350b16f529afdbeb676264920bd451e8937c84f2390450fac81baae5",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi-completion.json": "68afac2e72a620c801582999b2c8512edce9b8b6e7c730dc79f86a80d074bede",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/DiagnosticDpi-harness.log": "b7aab050eafc69864a33db94a3cf4a42e9519e6f619a7057c79d155d921af58f",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/final-cleanup.json": "bb072d0a60afda621417af45165e485c60d735967eb9fe297784c195046dcf2e",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/executable-manifest.log": "beb0abee1639448c0502ae80a899beed519dbf7812c4ecf0bdbba0f518494681",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/executable.manifest.xml": "c8a8a96d69c7cbe9fdd11bc99a0375589d7d3618254b692e8696697b0fa0be2c",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/makeappx.log": "cf73eeda86c70c0d88709d7e9082aa523978281217d346e66c0c6d5c7cbcff62",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/package-record.json": "3cc1990d00b8ec7aad24f7c08e4b1629d6c4b8ed63dae068de434c8a5b4a0181",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/publish.log": "4c1b9d7a757623b4476158395c13549d3bf1cdac7cca553b7076ed1705cdc84a",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/signature-verification.log": "d0a0334c987c7356dafd5c85dfb5d44b83d14d9fb40f0060f2ad73d82430531b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Diagnostic/signing.log": "8b30a5b10f5e4dfd639e570fc6ee70cc6bc22b4f2d245a89074d282fe35ba719",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/executable-manifest.log": "beb0abee1639448c0502ae80a899beed519dbf7812c4ecf0bdbba0f518494681",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/executable.manifest.xml": "c8a8a96d69c7cbe9fdd11bc99a0375589d7d3618254b692e8696697b0fa0be2c",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/makeappx.log": "e7468c9000b35d5b1ca662876d31859d253f1fe7a166b3f6c590945cdca6b995",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/package-record.json": "5230dba3d7c347afcfab1f20b77ff5f0c003eeeb7ead660c98ea5a3c2f5f81ed",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/publish.log": "13081f8b7ee327a8fc45d7cb4b6006166a46ce1d8849bbf8e24720b4798701b7",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/signature-verification.log": "2c9aff58e51f75f1846668048fb9acdedc55e92ee000368c0368b2a168999e8d",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/Fixed/Production/signing.log": "9766743bd6a8e15376e172b60aa751dab9b399e6ea0ead0239dc8004057356b5",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/fixed-build-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/fixed-build-stdout.log": "8230f6425a258ac4e4169dd2d748c0972e77273984350465bee6ecd436c9ae3b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/fixed-preflight.json": "de10671a99578ebe30d500a5368cbaa4f1ee91a583a3c38180b02ab1e9c9fdea",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/installed-dpi-completion.json": "e8d28c6bbbf826bc9b3b32ecd3ab6ca7cb163cb1cd4559a27be5a63f8adbe025",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/installed-dpi-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/installed-dpi-stdout.log": "eb9dd12a4d506e5e3451358d6c6e1e7d57a28addbdd81477ed73296224c188a3",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/installed-dpi-v2-completion.json": "987e927e7807b808891e3071e10be85633cc0de10cc540899ee5954b95811338",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/installed-dpi-v2-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/installed-dpi-v2-stdout.log": "bf82da59bfbb79a9c890e9917f2fa2f7cea847cc7efb27b8ed76dfd3ab67930f",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/installed-test-record.json": "176afc6f0c0ba471b420c87cef312ec0da96aa54624095edc88f6b796cf132ea",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-seed-0/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-seed-0/progress-12360.json": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-seed-0/progress-17360.json": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-seed-0/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-seed-0/result.json": "03a3bbc0962fc7c70b7a0f8f5f18d4b4304639a2e1da10e772457c51a2b0b2a9",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-seed-0/storage.json": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-verify-1/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-verify-1/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-verify-1/result.json": "0e7aefd2b6044ca1c690c0e174653e7f04e12b29de979f860a8085beb0462b98",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/native-storage-verify-1/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/seed-0.json": "5e65635d2119e702ca1d02b17c430393ee8d496f29fb30cb7575b70c58311281",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdate/verify-1.json": "a7f5011b2472daff495d8f25f86afcff5164ee9f2c4606b38d689b2ef98dba7d",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/fresh-3.json": "ec1c2cf2bc7c218423cfdd6a3723b7b229e8db5574981e50ca5bd64b9bc761e3",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/installed-test-record.json": "3f86067f9121373a2b1a870ebf6d051d34f0b11f04f9a9891b73f93177131322",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-seed-0/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-seed-0/progress-12360.json": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-seed-0/progress-17360.json": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-seed-0/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-seed-0/result.json": "03a3bbc0962fc7c70b7a0f8f5f18d4b4304639a2e1da10e772457c51a2b0b2a9",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-seed-0/storage.json": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-1/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-1/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-1/result.json": "0e7aefd2b6044ca1c690c0e174653e7f04e12b29de979f860a8085beb0462b98",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-1/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-2/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-2/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-2/result.json": "288392628f76b013b1ed79fd56693b58a7cd01f33c9b0808bce9ff8b37846449",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/native-storage-verify-2/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/seed-0.json": "5e65635d2119e702ca1d02b17c430393ee8d496f29fb30cb7575b70c58311281",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/verify-1.json": "a7f5011b2472daff495d8f25f86afcff5164ee9f2c4606b38d689b2ef98dba7d",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/InstalledDpiUpdateV2/verify-2.json": "b91cad51fd0a252bb44a1e9d0daa72e28f6214a81bb8b24919f7688d1667919b",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/production-release-dpi.log": "cf80a010c062c2d8096eb7b296bd81d55e33f56015529ba4adc00a680c554514",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/production-shape-build.log": "486841d2e4ea3d8b99f01360f1f70ffe0b7bbb04270421bd21996c8c75db73c3",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/production-shape-preflight.json": "ab8087a7d030ba0afd1a9a495c87021a94e4a19d4731589226bbfe2a4e172910",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/production-shape-request.json": "262384161370359a7974475ccca0c3effb301de554aa2f9919b26dcb9b06b264",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi/wack-record.json": "2ca0e6260f262579343081e3f5a7ce2dec01cd98f5595d4410dce9dd346fc304",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi/wack-report.xml": "aa3c37ef6b8ae67b81a9f9fe3ae61cfdc1123b8605d47b772467701bc86f2390",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi/wack-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi/wack-stdout.log": "8340408d528aa1eec3d1a49ff2a29eb3920c272333a50fbf4f287aadd19a90bf",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi-completion.json": "5ff44b50a2cbc315a1a92924d6873b539ad9ff55aa99b8b92f58d1e21cdf3dbe",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/ProductionDpi-harness.log": "9004458c6b6c10cbc898c3a30b449f5cd29f47f9655af9b9229e6e6fd8f6c7bc",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/request.json": "54cbf9960398b82c29f846b5dfeffec84d8272f128f70a1e4583abf2f89b0dad",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/tooling-controls-exit.log": "6474b60023c8312b19ecae9a4aa8d3b46efb9dde1afcfe2ac0772f488f44d4cb",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/tooling-controls-final.log": "1dd6199a58e465ded4623975eb82555ae4219a507cc9795777e12dee4e6678a4",
+    "artifacts/msix-wack-2026-10-17-3f8c119d3fa344b08144c7fc168a011f/tooling-controls.log": "86ecda828576e2eb7d6b63efdcac15ccb58cd1277028177d93d3c3acdffaedf3"
+  },
+  "limitations": [
+    "Local test publisher and existing Windows 11 Home build 26200; not final Store identity or clean-machine/account acceptance.",
+    "WACK Centennial explicitly ran without application deployment; installed native persistence has separate real activations.",
+    "One optional blocked-executable scan remains nonpassing in each fixed report; no all-tests-pass claim.",
+    "Static DPI admission does not qualify mixed-monitor DPI UX.",
+    "Production shape excludes diagnostic guest media; bundled assets, rights and onboarding remain separate release gates.",
+    "Legacy, host OS shims and performance acceptance remain outside this work."
+  ]
+}

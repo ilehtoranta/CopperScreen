@@ -1,0 +1,1501 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "recordedUtc": "2026-10-18T16:13:30.2379380Z",
+  "status": "PHYSICAL_MATRIX_PASSED_WITH_RECOVERY_FINDINGS",
+  "functionalMatrixComplete": true,
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "package": {
+    "productionRecoveryAlgorithm": "Unchanged from 1.1.34.0",
+    "sha256": "47a63049b2367a765dc3b948e24ef225685eeb3b56b0afcb20350e918e2ab762",
+    "signatureVerified": true,
+    "version": "1.1.35.0"
+  },
+  "protocol": "copperscreen-installed-recovery-v3",
+  "cases": [
+    {
+      "elevated": false,
+      "diskSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "case": "copperstart",
+      "bothProcessExitCodes": 0,
+      "installedApp": "CopperScreen.Test.29d66b7daf334d8cb16743b0e0cfed8b_1.1.35.0_x64__a0cyw3gffeccg",
+      "steps": [
+        {
+          "beforeFrame": 15920,
+          "step": "active-sleep",
+          "pausedStatePreserved": null,
+          "frames": 401,
+          "nativeMessages": [
+            "1:[WASAPI] Failed to stop internal playback device.",
+            "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+          ],
+          "missingSampleValues": 8060,
+          "deviceReinitializations": 13,
+          "hostStartedUtc": "2026-10-18T15:36:58.3874049Z",
+          "hostCompletedUtc": "2026-10-18T15:38:04.7210238Z",
+          "afterFrame": 15968,
+          "callbacks": 381,
+          "callbackAgeMilliseconds": 0,
+          "callbackErrors": 0,
+          "recoveryAttempts": 14,
+          "hostPassed": true,
+          "nativeState": "ma_device_state_started"
+        },
+        {
+          "beforeFrame": 16397,
+          "step": "paused-sleep",
+          "pausedStatePreserved": true,
+          "frames": 412,
+          "nativeMessages": [
+            "1:[WASAPI] Failed to stop internal playback device.",
+            "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to stop internal playback device."
+          ],
+          "missingSampleValues": 0,
+          "deviceReinitializations": 13,
+          "hostStartedUtc": "2026-10-18T15:43:22.7466206Z",
+          "hostCompletedUtc": "2026-10-18T15:44:09.6088026Z",
+          "afterFrame": 16397,
+          "callbacks": 388,
+          "callbackAgeMilliseconds": 16,
+          "callbackErrors": 0,
+          "recoveryAttempts": 14,
+          "hostPassed": true,
+          "nativeState": "ma_device_state_started"
+        },
+        {
+          "beforeFrame": 19967,
+          "step": "audio-device",
+          "pausedStatePreserved": null,
+          "frames": 408,
+          "nativeMessages": [
+            "1:[WASAPI] Failed to stop internal playback device.",
+            "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to stop internal playback device."
+          ],
+          "missingSampleValues": 3298,
+          "deviceReinitializations": 13,
+          "hostStartedUtc": "2026-10-18T15:45:25.1673296Z",
+          "hostCompletedUtc": "2026-10-18T15:45:40.0913274Z",
+          "afterFrame": 20958,
+          "callbacks": 383,
+          "callbackAgeMilliseconds": 15,
+          "callbackErrors": 0,
+          "recoveryAttempts": 14,
+          "hostPassed": true,
+          "nativeState": "ma_device_state_started"
+        }
+      ],
+      "nativeMessages": [
+        "1:[WASAPI] Failed to stop internal playback device.",
+        "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to stop internal playback device."
+      ],
+      "status": "PASSED",
+      "freshProcessReopen": true,
+      "profileSettingsFiles": 3,
+      "windowVisible": true,
+      "nativeControls": [
+        {
+          "callbacks": 394,
+          "deviceReinitializations": 0,
+          "frames": 373,
+          "missingSampleValues": 90480,
+          "callbackErrors": 0,
+          "label": "Baseline",
+          "recoveryAttempts": 0,
+          "nativeState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 16
+        },
+        {
+          "callbacks": 359,
+          "deviceReinitializations": 0,
+          "frames": 308,
+          "missingSampleValues": 12558,
+          "callbackErrors": 0,
+          "label": "NativeAudioRestartControl",
+          "recoveryAttempts": 1,
+          "nativeState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 15
+        },
+        {
+          "callbacks": 364,
+          "deviceReinitializations": 1,
+          "frames": 368,
+          "missingSampleValues": 17078,
+          "callbackErrors": 0,
+          "label": "NativeAudioReopenControl",
+          "recoveryAttempts": 2,
+          "nativeState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 0
+        }
+      ]
+    },
+    {
+      "elevated": false,
+      "diskSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "case": "copperos",
+      "bothProcessExitCodes": 0,
+      "installedApp": "CopperScreen.Test.29d66b7daf334d8cb16743b0e0cfed8b_1.1.35.0_x64__a0cyw3gffeccg",
+      "steps": [
+        {
+          "beforeFrame": 24021,
+          "step": "active-sleep",
+          "pausedStatePreserved": null,
+          "frames": 409,
+          "nativeMessages": [
+            "1:[WASAPI] Failed to stop internal playback device.",
+            "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+          ],
+          "missingSampleValues": 0,
+          "deviceReinitializations": 12,
+          "hostStartedUtc": "2026-10-18T15:59:31.0139676Z",
+          "hostCompletedUtc": "2026-10-18T16:00:39.3383912Z",
+          "afterFrame": 24135,
+          "callbacks": 384,
+          "callbackAgeMilliseconds": 16,
+          "callbackErrors": 0,
+          "recoveryAttempts": 13,
+          "hostPassed": true,
+          "nativeState": "ma_device_state_started"
+        },
+        {
+          "beforeFrame": 24574,
+          "step": "paused-sleep",
+          "pausedStatePreserved": true,
+          "frames": 411,
+          "nativeMessages": [
+            "1:[WASAPI] Failed to stop internal playback device.",
+            "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+          ],
+          "missingSampleValues": 0,
+          "deviceReinitializations": 12,
+          "hostStartedUtc": "2026-10-18T16:01:13.9626134Z",
+          "hostCompletedUtc": "2026-10-18T16:02:17.5233110Z",
+          "afterFrame": 24574,
+          "callbacks": 387,
+          "callbackAgeMilliseconds": 0,
+          "callbackErrors": 0,
+          "recoveryAttempts": 13,
+          "hostPassed": true,
+          "nativeState": "ma_device_state_started"
+        },
+        {
+          "beforeFrame": 39700,
+          "step": "audio-device",
+          "pausedStatePreserved": null,
+          "frames": 420,
+          "nativeMessages": [
+            "1:[WASAPI] Failed to stop internal playback device.",
+            "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+            "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+          ],
+          "missingSampleValues": 0,
+          "deviceReinitializations": 12,
+          "hostStartedUtc": "2026-10-18T16:07:24.7966047Z",
+          "hostCompletedUtc": "2026-10-18T16:07:43.0150288Z",
+          "afterFrame": 40876,
+          "callbacks": 392,
+          "callbackAgeMilliseconds": 0,
+          "callbackErrors": 0,
+          "recoveryAttempts": 13,
+          "hostPassed": true,
+          "nativeState": "ma_device_state_started"
+        }
+      ],
+      "nativeMessages": [
+        "1:[WASAPI] Failed to stop internal playback device.",
+        "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+        "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+      ],
+      "status": "PASSED",
+      "freshProcessReopen": true,
+      "profileSettingsFiles": 3,
+      "windowVisible": true,
+      "nativeControls": [
+        {
+          "callbacks": 391,
+          "deviceReinitializations": 0,
+          "frames": 415,
+          "missingSampleValues": 0,
+          "callbackErrors": 0,
+          "label": "Baseline",
+          "recoveryAttempts": 0,
+          "nativeState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 0
+        },
+        {
+          "callbacks": 359,
+          "deviceReinitializations": 0,
+          "frames": 381,
+          "missingSampleValues": 0,
+          "callbackErrors": 0,
+          "label": "NativeAudioRestartControl",
+          "recoveryAttempts": 1,
+          "nativeState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 15
+        },
+        {
+          "callbacks": 371,
+          "deviceReinitializations": 1,
+          "frames": 395,
+          "missingSampleValues": 0,
+          "callbackErrors": 0,
+          "label": "NativeAudioReopenControl",
+          "recoveryAttempts": 2,
+          "nativeState": "ma_device_state_started",
+          "callbackAgeMilliseconds": 31
+        }
+      ]
+    }
+  ],
+  "physicalAudibility": {
+    "Status": "OWNER_CONFIRMED",
+    "ReceivedUtc": "2026-10-18T15:54:06.4579628Z",
+    "PackageVersion": "1.1.35.0",
+    "Case": "copperstart",
+    "Answer": "Yes, before and after",
+    "Question": "During the CopperStart 1.1.35.0 run that just completed both sleep tests and the HDMI interruption, did you hear game/title audio before sleep and again after the final HDMI restoration, before that first window closed?",
+    "ObservedInterval": "Before first S3 and after final HDMI restoration, before the first recovery window closed",
+    "ExactListeningTimes": "Not recorded",
+    "GlitchFreeSoundQualified": false,
+    "CopperOsAudibility": "Not assessed; quiet Shell workload"
+  },
+  "scope": {
+    "fullHours": "NOT_RUN_FOR_THIS_HASH",
+    "audioQuality": "Missing samples and transient native failures retained; no glitch-free verdict",
+    "earlierFailureCause": "Unproven; earlier raw failures retained",
+    "wack": "NOT_RUN_FOR_THIS_HASH",
+    "displayWake": "One-shot ES_DISPLAY_REQUIRED with three-second settle after each S3; panel state/unlock not instrumented",
+    "update": "NOT_RUN_FOR_THIS_HASH"
+  },
+  "cleanup": {
+    "helperStopped": true,
+    "endpointRestored": true,
+    "privateStateRetained": true,
+    "ownedRegistrationAbsent": true
+  },
+  "priorDatedEvidenceUnchanged": 13,
+  "references": [
+    {
+      "sha256": "9df2ddb12c0c92085792d78bd70ab831f35fd8dd3845d0863eb35c3e0ddfcddc",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/config.json",
+      "bytes": 474
+    },
+    {
+      "sha256": "2a035334072742617cd49159b2cc7ea5d8c43113d5dc75dc18fa77b4b7d3ea22",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/controller-before-display-preparation.ps1",
+      "bytes": 13553
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/controller.log",
+      "bytes": 0
+    },
+    {
+      "sha256": "d1420a9aea898ae9bb33f2269844f49c7e7a8217ece06a5058704687c2e1235a",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/copperstart-active-sleep-timeline.json",
+      "bytes": 18462
+    },
+    {
+      "sha256": "78addb71e71149783b11b4361c2f444236d67c353651ae881ab397ddc0c329cd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/default-output-after.json",
+      "bytes": 751
+    },
+    {
+      "sha256": "ef4204c92c6c5feabfb39f34723a3d7180caa3bf4014e1da25a689ce790b6f88",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/default-output-before.json",
+      "bytes": 751
+    },
+    {
+      "sha256": "55f6869c19e3920515763c1c0c611ebcf5515f77a61cc557d771f737c5e387a0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/display-request-control.json",
+      "bytes": 256
+    },
+    {
+      "sha256": "2519f9f87b84aba3d0f24b08d6360197200b218678341b39f3b0cbbcaeeba426",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/display-resume-preparation.json",
+      "bytes": 558
+    },
+    {
+      "sha256": "f310dc7ef74a5f93b43440fee4f2b27c13b5a135b31b45cd66ddabb284ca7287",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/exports-verified.json",
+      "bytes": 1532
+    },
+    {
+      "sha256": "2483ba5ccaad6f68551337bd9a15f2afa3999cf4a77613ee2a2eb429a21b6380",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/frozen-controller-host-inputs.json",
+      "bytes": 548
+    },
+    {
+      "sha256": "15b77d0b7cf9bb9c069b2593f5eb40286a713a945404ebff3f83d843d188d82e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/go-copperos-active-sleep.json",
+      "bytes": 95
+    },
+    {
+      "sha256": "fe1dff3d8fa5a37e4275e301440bab9cbfad88ba5cff42aaa331d1d8fd7c67c9",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/go-copperos-audio-device.json",
+      "bytes": 95
+    },
+    {
+      "sha256": "c74f60f06ebfe83dafdcb2fdfa56d7f0f6a4150ff34596b66324dfb488ec6ba0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/go-copperos-paused-sleep.json",
+      "bytes": 95
+    },
+    {
+      "sha256": "02faa8ed2b7e07b9fad302ae294dcc4b4ed0b91340757c3c8f12d4a215810632",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/go-copperstart-active-sleep.json",
+      "bytes": 95
+    },
+    {
+      "sha256": "c7768fff8b64f419b2dd9c0f25e59a43c22b613037cc505ad5599f71a970b373",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/go-copperstart-audio-device.json",
+      "bytes": 95
+    },
+    {
+      "sha256": "a9d0604250aa499437aa1c50798de0e9e98b8bedfca6ca1fff9e8eed3f6f0dbd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/go-copperstart-paused-sleep.json",
+      "bytes": 95
+    },
+    {
+      "sha256": "fe4221a7d2cb48688b9f2fa3c885551ceec6a50af2b0fe3c3fc1d1c685246aa5",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/launch-preflight.json",
+      "bytes": 336
+    },
+    {
+      "sha256": "e787a1f965f24c9f7adb8d77ca938dded74e8679945cf0840a97ea2100645e4e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/owner-audibility.json",
+      "bytes": 681
+    },
+    {
+      "sha256": "e900154911a3072bb3ebdae1c6c14cb3f13b783e17a966dfc7cd1310b9c26a22",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/preparation.json",
+      "bytes": 940
+    },
+    {
+      "sha256": "eafa257a35c51ffad481cf7e1abeaf6f7ae3feb203eca0107422656af5ea0572",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/prior-dated-evidence-before.json",
+      "bytes": 2583
+    },
+    {
+      "sha256": "abe64a2899676d08f18d349d9dda4eddaaf4282734933390f1970eb3d0195986",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/prior-evidence-before.json",
+      "bytes": 1227
+    },
+    {
+      "sha256": "df0196e3f8ed6af1059daa4c11702fa4b3cdfcb0945ae93239f80216c2ba558f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/prior-failed-attempt.json",
+      "bytes": 268
+    },
+    {
+      "sha256": "e1a9f5bc99b69da5da08a961726eb4c258c12842fcea2ac4a1a2e1903fce9280",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/progress.json",
+      "bytes": 92
+    },
+    {
+      "sha256": "f5d8273ec9b141ce7621f79cf966ab703b9b745398b0b7fc0d1bdf303bbb1afb",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/recovery-record.json",
+      "bytes": 1181285
+    },
+    {
+      "sha256": "e42a1c3a28b08911ec2c22de4a16a618069a8d631829e90520a57ce1c02e4f7f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Frozen/scripts/test-msix-recovery.ps1",
+      "bytes": 14365
+    },
+    {
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Frozen/scripts/msix/CopperScreen.Msix.psm1",
+      "bytes": 14760
+    },
+    {
+      "sha256": "e7872d4c5117a0a6e92e9e22b09ca991188675768218ab97326884879f07fb6f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Frozen/scripts/qualification/Invoke-CopperScreenRecoveryHost.ps1",
+      "bytes": 7937
+    },
+    {
+      "sha256": "13e87fd7063dea486e0e08d25cd8ddc0a376fbc77d6df2a583b441e87bc634d6",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/command.json",
+      "bytes": 38
+    },
+    {
+      "sha256": "b103889c712707972d4d0e58d2469c607faf320db0ce15fc3e304eefa1340b8d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/disabled-3.json",
+      "bytes": 364
+    },
+    {
+      "sha256": "049fc68be39165c314dc22b291fde8f0fae9a4b1ffdcf3dc590e30f9a7e32be1",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/disabled-6.json",
+      "bytes": 364
+    },
+    {
+      "sha256": "2b8a69ff6a42cdb31f244921c11cd48c7a3b760dc6563a77e35f6ea4b557674b",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/lastwake-1.txt",
+      "bytes": 258
+    },
+    {
+      "sha256": "4a5c1b97999fa1ba9f5c75f3ce08e432145a4ab09d746f6d5ca5c1435bdf8be5",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/lastwake-2.txt",
+      "bytes": 374
+    },
+    {
+      "sha256": "2b8a69ff6a42cdb31f244921c11cd48c7a3b760dc6563a77e35f6ea4b557674b",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/lastwake-4.txt",
+      "bytes": 258
+    },
+    {
+      "sha256": "2b8a69ff6a42cdb31f244921c11cd48c7a3b760dc6563a77e35f6ea4b557674b",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/lastwake-5.txt",
+      "bytes": 258
+    },
+    {
+      "sha256": "ecfa4f90984f141131a34cd965ecc182c6a35ccd67ebf180658787c6ad86e358",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/power-requests-before.txt",
+      "bytes": 127
+    },
+    {
+      "sha256": "af9125d64527a10d5d9e9c960aaff29584bfd7026c3e45256afd15b348f7f6bf",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/power-states.txt",
+      "bytes": 499
+    },
+    {
+      "sha256": "59aa60aa364636ca325b1cd45c573cf4286c12059a3521c1eb93cb3bf86b2448",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/ready.json",
+      "bytes": 217
+    },
+    {
+      "sha256": "268c813e1b5715bdc48a39d7436bb115b6627c90b237690644d63c1472425c9c",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-1.json",
+      "bytes": 4078
+    },
+    {
+      "sha256": "c0a5707e46a9c8f427ae6fb57c3cfea216a02a0ca57001cdfd2701c64acfef29",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-2.json",
+      "bytes": 2260
+    },
+    {
+      "sha256": "91dbf30cd28a18ac26e7574f602b1eed9944a80f415bbed117d1c3cdfac93a78",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-3.json",
+      "bytes": 596
+    },
+    {
+      "sha256": "d11980f0ce3c90f5b90eb9de356dc9e9a27278c9355516944ee31858fcf070d5",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-4.json",
+      "bytes": 2258
+    },
+    {
+      "sha256": "b12975f978daf57ed6cd8dce20b4f1e8ab3b47464fbc94034f4819df2bc0e1fb",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-5.json",
+      "bytes": 2258
+    },
+    {
+      "sha256": "08d9c9a44ffe71d8e387a4ada6cf9a7d955b72e7afe204415a143f4bf5b9b7fd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-6.json",
+      "bytes": 596
+    },
+    {
+      "sha256": "61acf6b67c58003127038a0d04558dc0976bd222a2b38e9e4d475f77e2c5d868",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/reply-7.json",
+      "bytes": 264
+    },
+    {
+      "sha256": "421775f7e691bae6cb158987445ea3c2bd4621856099242b519f2540407c64e0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/starting-1.json",
+      "bytes": 193
+    },
+    {
+      "sha256": "8ebc8618046acef2268e7304689abe1986c2ba8548c1ce14068d730b7eb9c046",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/starting-2.json",
+      "bytes": 193
+    },
+    {
+      "sha256": "f3ecaf1e14ad9f3bef59bc2e54000e278d9ab72ce578e8ffc1352d45c74afde2",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/starting-4.json",
+      "bytes": 193
+    },
+    {
+      "sha256": "bb90f62edb58fb74a4d865b48b0a5392f685de68b9acd97d57024a63d33e9753",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/starting-5.json",
+      "bytes": 193
+    },
+    {
+      "sha256": "ee48f43cf009f354ab5625fd9387b9fcdf06db81a2f4b3fe4e9fff06964e1375",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/stopped.json",
+      "bytes": 92
+    },
+    {
+      "sha256": "27dbb03252bc02e4fb100f4ff369414f072cf5ca89451dd98dff033c2abd23ea",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Host/wake-timer-policy.txt",
+      "bytes": 736
+    },
+    {
+      "sha256": "300b645ea33e0a6bee2a5baa7c43a37b456b206af5d6ce927fdec79971837a54",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-profile-path.txt",
+      "bytes": 202
+    },
+    {
+      "sha256": "93da141fa66298de54639160b782355290b052753a64a4ba8386f538374386c4",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-command.json",
+      "bytes": 41
+    },
+    {
+      "sha256": "e743f6a539608d447863384dcd642d2457a110cfa2da2510d618757564772ca1",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-progress.json",
+      "bytes": 7487
+    },
+    {
+      "sha256": "1fad5a543ece31843caf7a76de0e71e3b74809bda1c1fa414b78ee7a643d7446",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-ready.json",
+      "bytes": 6766
+    },
+    {
+      "sha256": "af38cec06687795cc9c8144fec7137ed060ed7a8d88cb26802ed403779d55b7c",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-1.json",
+      "bytes": 7343
+    },
+    {
+      "sha256": "0c8894ecb43714751db71a65a866e44357658235fd3109d0b21ecff357ca32c0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-10.json",
+      "bytes": 7353
+    },
+    {
+      "sha256": "80b4bc7085f93d0e11f3e10ff8548b197fb7b71550f076925c77cc7f114bd9ea",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-11.json",
+      "bytes": 7350
+    },
+    {
+      "sha256": "e18bd0b1590f95ce4b4b8d4aa691cbd9eb2c6e0ac5ba9826ea0e48d30531e04a",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-12.json",
+      "bytes": 8089
+    },
+    {
+      "sha256": "d63a3c2176f95b75775e58e374d1571dd3e1db2f176a3d695d170330b40334e8",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-13.json",
+      "bytes": 8082
+    },
+    {
+      "sha256": "7c25366d9bcb4bb125bb1d45048994f84c60693651317ff39c51c51781e75d28",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-14.json",
+      "bytes": 8091
+    },
+    {
+      "sha256": "cd06eb7630a46ee5e1c0e7ef8b1d7202831d86f54c8b0f75c04891177bae2980",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-15.json",
+      "bytes": 8090
+    },
+    {
+      "sha256": "73b3e904392f628b96867defbc347f41d0de187c7081dc458ef3542e21661f1f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-16.json",
+      "bytes": 8096
+    },
+    {
+      "sha256": "9ee19a73b975d2b36d9e26618fc0a894887d746432aa99ade5f6588c36383fc0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-17.json",
+      "bytes": 8097
+    },
+    {
+      "sha256": "8de44d893df400b53d94c2e62662bc5c884143a7a8e07d005919b929a523970d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-18.json",
+      "bytes": 8091
+    },
+    {
+      "sha256": "3d8b1c5052b1876acd01815773643d4c12e8bf286ca2caa50094154ff94234c1",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-19.json",
+      "bytes": 8093
+    },
+    {
+      "sha256": "370ea427a5d20124d1e999b8f38f09816dec4a80b7776555a395832ad55fcefc",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-2.json",
+      "bytes": 7349
+    },
+    {
+      "sha256": "33ca3db53721981c61d977f449a32a1289fbcb1274bc1ea2fce3eec76f1b7148",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-20.json",
+      "bytes": 8092
+    },
+    {
+      "sha256": "318ba5caced315fda2421c03be64fcf48056fcb2c3ff295cf84cfadda3fd3dae",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-21.json",
+      "bytes": 8096
+    },
+    {
+      "sha256": "fb6d41d8c4b9427153fefbd856a592423f043169cf95343097dc6039cd03a32e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-22.json",
+      "bytes": 8097
+    },
+    {
+      "sha256": "e5f5b8a6ca379af67fef081038d9ff7c52fe2da390a489596ce473a6cdcf4854",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-23.json",
+      "bytes": 8099
+    },
+    {
+      "sha256": "e2f129670ddddacb9be9a8e66c27b25a565f719dc6250519eba078963de56a1e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-24.json",
+      "bytes": 8096
+    },
+    {
+      "sha256": "4af3d0bda0bae90be0d4381148656e313fe8abb232104c9243283b02d745fd49",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-25.json",
+      "bytes": 8097
+    },
+    {
+      "sha256": "c07d820b5b55d30aeeac1dd11ba552f1c70629fd5ab789fb8241fae69040c812",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-26.json",
+      "bytes": 8101
+    },
+    {
+      "sha256": "46e60f24dcdd806fa61c295e48cf2922629384ed0fff72a85adbae7e0f3557ac",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-27.json",
+      "bytes": 8096
+    },
+    {
+      "sha256": "36e090fd2ac072fcf5fc5864266479362390b15f9cf8540278ab7bd95d0a053c",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-3.json",
+      "bytes": 7350
+    },
+    {
+      "sha256": "0ad6e70021aecb2314de80c85e597e66900eeab50baeaeabdac5472f121643bc",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-4.json",
+      "bytes": 7358
+    },
+    {
+      "sha256": "030ec155483dc772b1b8a8056c9e701f7264e19c3f609cf4f1cf01aa0cfc8bc5",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-5.json",
+      "bytes": 7357
+    },
+    {
+      "sha256": "dcdde3b3a6b3d49b80506927dc5baf1a320516c396845f3e039af0226229b2ab",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-6.json",
+      "bytes": 7349
+    },
+    {
+      "sha256": "e3a91ea555c59184994d4a907d175cbeb1bad78841fbecc72cddbcf214fe914a",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-7.json",
+      "bytes": 7351
+    },
+    {
+      "sha256": "d94cda7299734cd0569799066542c00f9039d3c9aae28a8bfc0c5097eea985fd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-8.json",
+      "bytes": 7340
+    },
+    {
+      "sha256": "20e18181e0911e7afcb38ad9ec2d5ed6bff8549e159396b4f250a4bf0a92a598",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-recovery-reply-9.json",
+      "bytes": 7337
+    },
+    {
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen-end.png",
+      "bytes": 24205
+    },
+    {
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen-middle.png",
+      "bytes": 24205
+    },
+    {
+      "sha256": "a3e921018f60dc56a62354aea6a7ff0e144bd2ebf398345b8ee705dfff0a84d3",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen-samples.jsonl",
+      "bytes": 8883
+    },
+    {
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen-start.png",
+      "bytes": 24205
+    },
+    {
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen-storage.txt",
+      "bytes": 2025
+    },
+    {
+      "sha256": "08324380b1cee7cdfc48ecc11f7f535e4433e4b67940ad1140b90138963846ad",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen.copperos",
+      "bytes": 206246
+    },
+    {
+      "sha256": "79f460c430ad6fefcd977f62d8b8ed36107326ad44a9f97764bc7a24008eb60d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-reopen.json",
+      "bytes": 22877
+    },
+    {
+      "sha256": "5999a8deaf06192d6f3eb6755f29f99d7a05c75f0fb1069b0d755ab21d97ff3c",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-request.json",
+      "bytes": 584
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-end.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-1.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-10.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-11.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-12.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-13.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-14.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "3453110b625e204ce971b7493fb2de8fc394efe66b470fd7e0fd103a851fc283",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-15.png",
+      "bytes": 24217
+    },
+    {
+      "sha256": "a08ed81ba273c0e38f2f2557ed654ba36f36552b6d1276f32890dff71fa7a0ad",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-16.png",
+      "bytes": 24064
+    },
+    {
+      "sha256": "a08ed81ba273c0e38f2f2557ed654ba36f36552b6d1276f32890dff71fa7a0ad",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-17.png",
+      "bytes": 24064
+    },
+    {
+      "sha256": "9bcec07f79b83efae985243dc9d483559062471aad50c1812bd0b09d33c4ee98",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-18.png",
+      "bytes": 23350
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-19.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-2.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-20.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-21.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-22.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-23.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-24.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-25.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-26.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-27.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-3.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-4.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-5.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-6.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-7.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-8.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-recovery-9.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "23305fca60600bfba076a6a6a691e81c7107a8e195626d8bcab8749222408fad",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-samples.jsonl",
+      "bytes": 7511638
+    },
+    {
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-start.png",
+      "bytes": 24247
+    },
+    {
+      "sha256": "1a2e0166e5a87784c16104d8ee2fa9fbc7c7a1dab664daadca45588b3650aaa9",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak-storage.txt",
+      "bytes": 2025
+    },
+    {
+      "sha256": "55357a90af0feb1b6b7973d2deef030929b4fdfd2979a9bf25d340e79611bd93",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak.copperos",
+      "bytes": 206246
+    },
+    {
+      "sha256": "a884dda72b15abd751ba0b563c5d70e1a108f0676285c8a5a157f56c8c3add54",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperos-soak.json",
+      "bytes": 277678
+    },
+    {
+      "sha256": "a30f20f522b8b1cd45daf89fad07bd13a7b54860d1a81c9fe4ee4befa58a5541",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-profile-path.txt",
+      "bytes": 208
+    },
+    {
+      "sha256": "93da141fa66298de54639160b782355290b052753a64a4ba8386f538374386c4",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-command.json",
+      "bytes": 41
+    },
+    {
+      "sha256": "cbca120d3be3de24300e2a86aa99c9251a34487c1a61a704f9406d02db8b8f1e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-progress.json",
+      "bytes": 7430
+    },
+    {
+      "sha256": "33df6dd6e9325ada2d6e135f67bab8eed65e6463867ee21101881838f97329eb",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-ready.json",
+      "bytes": 6587
+    },
+    {
+      "sha256": "d009ecd03a851d4b53c66fbbee8b3b69fb5e09e3723cf47793019585adef35fc",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-1.json",
+      "bytes": 7176
+    },
+    {
+      "sha256": "6175a548b998c71c2badfc3ce7400824c0cd8142ca8fe27de2658fafad3da18f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-10.json",
+      "bytes": 7169
+    },
+    {
+      "sha256": "e8d0b44f5f7b38589aeeefda33e63ae0a1038703481d373683eaf2812f80fb85",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-11.json",
+      "bytes": 7173
+    },
+    {
+      "sha256": "cba7528dd79876593cf38b2b4611e0b14334cb69d0f8a6b32b0c4a3773817387",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-12.json",
+      "bytes": 7967
+    },
+    {
+      "sha256": "18075cda4168b8292b6cad5c475f2430ee4ecc09cfa3f145be3b81bc0ca430ce",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-13.json",
+      "bytes": 7965
+    },
+    {
+      "sha256": "1ff7fc1f44c07a9739fe63538f84e940d25065afdb2e68f225b193b93c7e24ab",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-14.json",
+      "bytes": 7963
+    },
+    {
+      "sha256": "63d890a032efcc6c4dc461aff22947f25905b6664261002c674861754e00ac3b",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-15.json",
+      "bytes": 7965
+    },
+    {
+      "sha256": "e91639f9bac674e6e7a35f6bc5029f1831935261fbdd73b5c3be262c292ec349",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-16.json",
+      "bytes": 7970
+    },
+    {
+      "sha256": "2323b3c174445eb5a1342caf094b1dd76f403141c26f08a77f3efed809c2f2de",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-17.json",
+      "bytes": 8036
+    },
+    {
+      "sha256": "71e9c2fff5522f6628f9847118384c2e20f38f1f33060e57f2d85eecd968d517",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-18.json",
+      "bytes": 8032
+    },
+    {
+      "sha256": "bd8b16c6c0eb6cee94ecc0ca22980058840a5ef75c90d359458e212ef98a7508",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-19.json",
+      "bytes": 8035
+    },
+    {
+      "sha256": "7aa93d1c3ad3bbb9e7c326ee3a49ca45d6a24fcfa77a3da0eb5578d0a5b416dc",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-2.json",
+      "bytes": 7177
+    },
+    {
+      "sha256": "762567d341d11a57de5c7ee3d157f9a97dd11458d93b665fff603b917a8972fe",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-20.json",
+      "bytes": 8044
+    },
+    {
+      "sha256": "63d72b30792aeb6eb8fd816290feefb47d923570b70bb78529fdbb389319bf3e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-21.json",
+      "bytes": 8034
+    },
+    {
+      "sha256": "aff3185ce352d1021815afa978b12037e01b3feef35d372150df677d1f5167ef",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-22.json",
+      "bytes": 8033
+    },
+    {
+      "sha256": "5260e2f66cd7721655d9b8df1d3b6d64b23ea7ee83e542182a37758c2ac1ff5c",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-23.json",
+      "bytes": 8043
+    },
+    {
+      "sha256": "3ac1e05d0dd9432eb8a2ba02f5420889c5d44bbeb24ddc80728835c354db5c03",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-24.json",
+      "bytes": 8043
+    },
+    {
+      "sha256": "1933c0d3853f2ae071474849156797a17cf22ec0569021da51ef135bcb8f3ecc",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-25.json",
+      "bytes": 8040
+    },
+    {
+      "sha256": "aee243db13ffac472ad1e4016bf8d06b608c174e8c2aa801157dde3aa84234d7",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-26.json",
+      "bytes": 8046
+    },
+    {
+      "sha256": "e7a34ab1602d744da75c709afeb6566df2d8f25cd081d0b7bdc00296d0de3c3e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-27.json",
+      "bytes": 8043
+    },
+    {
+      "sha256": "310049bd9a7a6a63cf293c95f0c29c910ff579f4686fc182277aa016d54c6072",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-3.json",
+      "bytes": 7176
+    },
+    {
+      "sha256": "25bda20c79967b74849df6db2083b2788f2bc64ecb8c4f00ad05d2410077ab4c",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-4.json",
+      "bytes": 7182
+    },
+    {
+      "sha256": "057394be3e20524a28eff0d96559c0488f61c58361d95b570d98cc7543e51a46",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-5.json",
+      "bytes": 7182
+    },
+    {
+      "sha256": "1a5c01a553d9c0324cba0f27bebfe908b8143f8b3ac7676ac849ce2c85ec95da",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-6.json",
+      "bytes": 7169
+    },
+    {
+      "sha256": "f48e94f44ca6685d85c30d981d6f1225313752a7116d4f8379253c0710d7174e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-7.json",
+      "bytes": 7169
+    },
+    {
+      "sha256": "b4e055854f3da887bfaf03dbd6251e5d18dfae7fc73d29b6cc46e8592f22d8f6",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-8.json",
+      "bytes": 7161
+    },
+    {
+      "sha256": "c851a14adcd42d0a1cce65e70aa518063c2da94b3a7190a0f98b863c0b0ed941",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-recovery-reply-9.json",
+      "bytes": 7154
+    },
+    {
+      "sha256": "631b06451972d67667218e931c6362c93a4272aa4c6fb20d1f588ae66110161e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-reopen-end.png",
+      "bytes": 34632
+    },
+    {
+      "sha256": "762c6f1f53a5ea10f238c4e0ceadaae02089ef4d27ba1c241d5788f8ed331336",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-reopen-middle.png",
+      "bytes": 36091
+    },
+    {
+      "sha256": "25843c98a8b6c738825e92f98cd63a8ca3050b2198ba0c7bc3d095b19688d480",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-reopen-samples.jsonl",
+      "bytes": 8537
+    },
+    {
+      "sha256": "7bd424cf403fd1d2a24054a25fc0966924ba06ca5c7d7ef46a55b6fdb946f2e5",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-reopen-start.png",
+      "bytes": 33481
+    },
+    {
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-reopen.adf",
+      "bytes": 901120
+    },
+    {
+      "sha256": "ad7e4a3d6ec4c70d898ff63329e054cda3da9a3f39c59a1dd99882da0abef518",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-reopen.json",
+      "bytes": 23540
+    },
+    {
+      "sha256": "4306b81a0b038acc14e4a28d8354de3a7d843a2136160a9999f8feb26e5b6b9a",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-request.json",
+      "bytes": 587
+    },
+    {
+      "sha256": "7818d9343b1e361f5db0e44f1a89bd5c4bdfd3524581771dae937cc12bc9fcde",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-end.png",
+      "bytes": 26565
+    },
+    {
+      "sha256": "f4e7739843bf9bc3f32a33fb2a5aac4366b098cbc1a7a66c9a258450b46e73a2",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-1.png",
+      "bytes": 34306
+    },
+    {
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-10.png",
+      "bytes": 39857
+    },
+    {
+      "sha256": "88e810bee889927d676c249c938ff7f8ae15b856b0a7c1456a2527e5592dd1f0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-11.png",
+      "bytes": 32894
+    },
+    {
+      "sha256": "88e810bee889927d676c249c938ff7f8ae15b856b0a7c1456a2527e5592dd1f0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-12.png",
+      "bytes": 32894
+    },
+    {
+      "sha256": "88e810bee889927d676c249c938ff7f8ae15b856b0a7c1456a2527e5592dd1f0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-13.png",
+      "bytes": 32894
+    },
+    {
+      "sha256": "5336501e2f450cc21d4670dad7f2e6d157340e1417cccdaa89351b7636a4b89b",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-14.png",
+      "bytes": 26664
+    },
+    {
+      "sha256": "3e00fc333681cd29197500a3551185ac4bae3aca218fc00fb1ed85598519e5a2",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-15.png",
+      "bytes": 26689
+    },
+    {
+      "sha256": "6965154e6a71acecf60f67d9a2f2e7f97193ef5fbbf3c98256adbece6e189885",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-16.png",
+      "bytes": 26902
+    },
+    {
+      "sha256": "6965154e6a71acecf60f67d9a2f2e7f97193ef5fbbf3c98256adbece6e189885",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-17.png",
+      "bytes": 26902
+    },
+    {
+      "sha256": "6ab35bea0bd6a2ecc531c08d6e8c2342548dd46b379942afa1d075b857d4b50e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-18.png",
+      "bytes": 26214
+    },
+    {
+      "sha256": "7042d0ec24701a740954892ea3ce7e89a8f0b1576902d9143f2f0e66b18cd2a4",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-19.png",
+      "bytes": 26817
+    },
+    {
+      "sha256": "fa7c00344266ff9ca8e192cac3aad30493c7d6a32abc46f521c8f88e540b16eb",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-2.png",
+      "bytes": 35918
+    },
+    {
+      "sha256": "35acb3b1dd412a4f631fcccb60845e6471a20f626dd6dcea919f31b289ad458f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-20.png",
+      "bytes": 28829
+    },
+    {
+      "sha256": "91abc382fd37ff6483ff0849078869d5c7dba01c5c61ce0ccc52e216bb06f1aa",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-21.png",
+      "bytes": 26723
+    },
+    {
+      "sha256": "d01dd6d841bbb426038ef5eef5e601727559ec12eaec163a2a0e8e8c4d1cd81e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-22.png",
+      "bytes": 26706
+    },
+    {
+      "sha256": "46a082f771a54497b2d8548b396c9fa4bb2dbfd7ccc4b5705e1a11f4c1c831e1",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-23.png",
+      "bytes": 43252
+    },
+    {
+      "sha256": "46a082f771a54497b2d8548b396c9fa4bb2dbfd7ccc4b5705e1a11f4c1c831e1",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-24.png",
+      "bytes": 43252
+    },
+    {
+      "sha256": "02248b53818010e9c9b824c0beedf77415d7442ac43f36eefc65f42b14031ea0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-25.png",
+      "bytes": 25926
+    },
+    {
+      "sha256": "67ed1c747126c1e02c66d30dffb78c2c13352c04d49ca3f3f1bfe6127d1603c4",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-26.png",
+      "bytes": 26002
+    },
+    {
+      "sha256": "7818d9343b1e361f5db0e44f1a89bd5c4bdfd3524581771dae937cc12bc9fcde",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-27.png",
+      "bytes": 26565
+    },
+    {
+      "sha256": "19ac1c8dde2cd3754caa51b8b6a85c47f0874ebb7af6732c651628520c950d5e",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-3.png",
+      "bytes": 35243
+    },
+    {
+      "sha256": "228d56f57aea347f6d26f68a10e3d8dd20bd776636e49060d3588ad7cffbf237",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-4.png",
+      "bytes": 35123
+    },
+    {
+      "sha256": "228d56f57aea347f6d26f68a10e3d8dd20bd776636e49060d3588ad7cffbf237",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-5.png",
+      "bytes": 35123
+    },
+    {
+      "sha256": "ab77618893ca49b3f22c402cc721e40501b9ccd96c77e054be4ae8b68d7ec0fe",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-6.png",
+      "bytes": 21495
+    },
+    {
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-7.png",
+      "bytes": 21555
+    },
+    {
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-8.png",
+      "bytes": 21555
+    },
+    {
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-recovery-9.png",
+      "bytes": 21555
+    },
+    {
+      "sha256": "fbeabf86bc619fe7fc81f12708ba24ac5d1a91a1cbe392b1e56d4dfe0f91a8f3",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-samples.jsonl",
+      "bytes": 8192057
+    },
+    {
+      "sha256": "e4c23d2299342326070a8abf97e9e91b11e1e9b547735db033bf38d1bd0c4300",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak-start.png",
+      "bytes": 33496
+    },
+    {
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak.adf",
+      "bytes": 901120
+    },
+    {
+      "sha256": "f41680caab12b5ca8cfd45fe94945c2d2c32ccebd02995a4b58f4e4904a72832",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/copperstart-soak.json",
+      "bytes": 274164
+    },
+    {
+      "sha256": "48d9f474e96231b28edf9fd8534257bfb71d05939d2d9fcda6b90898ddf71e3a",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/Installed/progress.json",
+      "bytes": 1296
+    },
+    {
+      "sha256": "6f975d0dd9bb062cf622b2b46be752d6458125b132209c5605755eba949f3f9d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/last-machine.json",
+      "bytes": 2875
+    },
+    {
+      "sha256": "3ba807bc77d9cefbca124700f73c03ff66ad1c6da59345b8a799c899ce6771d7",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/recent-session.json",
+      "bytes": 283
+    },
+    {
+      "sha256": "14ec1077b47f8fc9ccaf036070bb2ed1a618995b0087b490ed8011e09735e268",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/Previous.adf",
+      "bytes": 901120
+    },
+    {
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/System.adf",
+      "bytes": 901120
+    },
+    {
+      "sha256": "cd42e34db77e2b4bfdfd69d66e7259092c73e2282f304b05ed18cd49aaafc453",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.json",
+      "bytes": 370
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.lock",
+      "bytes": 0
+    },
+    {
+      "sha256": "9effe84ce2e7d6b717ae1f4a88712f47dcb7b6c57557ccd0b17e45b9f9e4d4e6",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/Logs/CopperScreen-20261018-185127-6056.log",
+      "bytes": 234909
+    },
+    {
+      "sha256": "696a86ff16a59383185acd4376b33b21bc48571ed7ba635f3fd9d5ec0b96408f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/Logs/CopperScreen-20261018-190839-83756.log",
+      "bytes": 57886
+    },
+    {
+      "sha256": "696a86ff16a59383185acd4376b33b21bc48571ed7ba635f3fd9d5ec0b96408f",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/Logs/latest.log",
+      "bytes": 57886
+    },
+    {
+      "sha256": "6f975d0dd9bb062cf622b2b46be752d6458125b132209c5605755eba949f3f9d",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperos/Profiles/copperos-soak.json",
+      "bytes": 2875
+    },
+    {
+      "sha256": "68737ba6bab30e85a0912c5149a20f3696ac414283830fd8d30a79eba5d368ed",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperstart/last-machine.json",
+      "bytes": 1225
+    },
+    {
+      "sha256": "8803955b724df460c3b20b06f3e9fcb15bb7a70fdf1367d0ac4b400da074f7c0",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperstart/recent-session.json",
+      "bytes": 189
+    },
+    {
+      "sha256": "fa6e5b6f057298bf6a9a3504b5d83b9789023357419aaa409e7c738e7a059164",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperstart/Logs/CopperScreen-20261018-183112-63120.log",
+      "bytes": 124817
+    },
+    {
+      "sha256": "cbcacb8701777c9573c908dd0b2d7fe4c5762c23c77ae3a22eac345e4b6918bf",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperstart/Logs/CopperScreen-20261018-184603-95604.log",
+      "bytes": 85817
+    },
+    {
+      "sha256": "cbcacb8701777c9573c908dd0b2d7fe4c5762c23c77ae3a22eac345e4b6918bf",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperstart/Logs/latest.log",
+      "bytes": 85817
+    },
+    {
+      "sha256": "68737ba6bab30e85a0912c5149a20f3696ac414283830fd8d30a79eba5d368ed",
+      "path": "artifacts/recovery35-7217e166/PhysicalRecovery/PrivateState/copperstart/Profiles/copperstart-soak.json",
+      "bytes": 1225
+    },
+    {
+      "sha256": "e0f964b4ba0dad4b1af422ca8794b82bb45485398aaa964dbfa2fed2afe1b79a",
+      "path": "artifacts/recovery35-7217e166/candidate-record.json",
+      "bytes": 69225
+    },
+    {
+      "sha256": "47a63049b2367a765dc3b948e24ef225685eeb3b56b0afcb20350e918e2ab762",
+      "path": "artifacts/recovery35-7217e166/Package/CopperScreen-1.1.35.0-win-x64.msix",
+      "bytes": 49558863
+    },
+    {
+      "sha256": "fd88da08d11b9784e9dfd29de3baffbe9650ff0f196c31b099994895558d5a38",
+      "path": "artifacts/recovery35-7217e166/Package/signature-verification.log",
+      "bytes": 1055
+    },
+    {
+      "sha256": "ca7c5416d49d9983310c7261be57fa498512e37c6203e38e2f0e1511c2f2bfb0",
+      "path": "artifacts/recovery35-7217e166/observer-isolation.json",
+      "bytes": 133
+    },
+    {
+      "sha256": "b698d8274e0f882412baae2f8e22e8f3385ae580d74d738c6cbd1da26fec457c",
+      "path": "artifacts/recovery35-7217e166/exports-verified.json",
+      "bytes": 1207
+    },
+    {
+      "sha256": "cc0b8ecca7a273ab0ab40ea979bfbd9a815c4d0913bef39e17236741a37a33f7",
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.json",
+      "bytes": 151599
+    },
+    {
+      "sha256": "75c8436fbc455f2e966a3863da1be0364d61818cd4477d6dddd483a5b4e3b47f",
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.md",
+      "bytes": 7037
+    },
+    {
+      "sha256": "58dc3a71c4488d0c1ea24274b933535221e999680d96f834ee9adff461077d0e",
+      "path": "docs/INSTALLED_RECOVERY_DIAGNOSTICS_2026-10-18.json",
+      "bytes": 95405
+    },
+    {
+      "sha256": "a65e6534c7901fb30220222e808e6b355f7796833b0e0cd7bc3afee64ed7e216",
+      "path": "docs/INSTALLED_RECOVERY_DIAGNOSTICS_2026-10-18.md",
+      "bytes": 7539
+    },
+    {
+      "sha256": "2d5db95d98e83b42f773791fd731c0570b6ffe8004c816af93d3fdbd36091d4f",
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.json",
+      "bytes": 109362
+    },
+    {
+      "sha256": "ddd0f1ce2f796b84e70b7f7582846099bdce50beeab9d4a5fba5998544e2fe06",
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.md",
+      "bytes": 5874
+    },
+    {
+      "sha256": "e8726aa53c9ef35681bd048251180f2fa429dc5515be1128838d1496d4aa1401",
+      "path": "docs/INSTALLED_RECOVERY_REOPEN_2026-10-18.json",
+      "bytes": 85809
+    },
+    {
+      "sha256": "e85ff765ced23aaaa29219a57ac0155288c22d83df1abde6dfafdc754f022080",
+      "path": "docs/INSTALLED_RECOVERY_REOPEN_2026-10-18.md",
+      "bytes": 5741
+    },
+    {
+      "sha256": "fdac6bf3943ac9b9428270f4e33557fe320e3784073645e072062ad5f38d188e",
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.json",
+      "bytes": 4459
+    },
+    {
+      "sha256": "1b02f3ec40d5d37378ea5dd4599f5efa2a10c528a84e98f9127d564ea8414bdb",
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.md",
+      "bytes": 2246
+    },
+    {
+      "sha256": "25a7beef5b978c9319a9847664f5becd6548d87edc81aebc7d6548966c339cac",
+      "path": "docs/INSTALLED_RECOVERY.md",
+      "bytes": 14042
+    },
+    {
+      "sha256": "ab8f974bbf2de5c882343e35c42c8b05d16df975d5021288e2c4f751fecb9bf3",
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.json",
+      "bytes": 6825
+    },
+    {
+      "sha256": "24ff6278560a3dd819d86f948608c6b84212af5d8341ab8598346b836fc969a8",
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.md",
+      "bytes": 2708
+    }
+  ]
+}

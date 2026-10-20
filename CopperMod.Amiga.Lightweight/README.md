@@ -14,9 +14,14 @@ versions are unchanged. A1200 integration evidence is retained in
 Independent PAL A500 engine with OCS 8362 or ECS 8373 Denise: Copper68k accurate 68000,
 configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
 (v40.63), one to four floppy drives with standard writable
-880 KiB ADF and read-only ADZ/DMS/extended ADF/IPF/SCP (including selected ZIP entries through the host/runner),
+880 KiB DD / 1760 KiB HD ADF and read-only ADZ/DMS/extended ADF/IPF/SCP (including selected ZIP entries through the host/runner),
 and optional file-backed CopperHDF units.
 ROMs and game media are not distributed with this package.
+
+CopperScreen also accepts a separately supplied, hash-qualified
+[standalone CopperStart ROM](../docs/COPPERSTART_APP.md) on the bounded PAL OCS
+A500 configuration. It uses this engine's existing ROM/reset/floppy interfaces;
+there is no Legacy engine dependency or host replacement OS service path.
 
 CopperScreen can also supply its original [Minimal disk boot firmware](../docs/engine/MINIMAL_DISK_BOOT.md)
 through the existing ROM/reset API. This host option adds no OS callbacks or new
@@ -251,7 +256,19 @@ CNT timer modes and PB6/PB7 timer outputs are implemented. Owner-thread
 external digital levels. Physical MCU/reset and CIA pipeline accuracy remain
 bounded; see [keyboard/CIA contracts and evidence](../docs/engine/KEYBOARD_CIA.md).
 
-Set `FloppyDriveCount = 1..4` at construction (default 1). Use
+Set `FloppyDriveCount = 1..4` at construction (default 1). Connected drives
+are DD unless their entry in `FloppyDriveTypes` is `LightweightFloppyDriveType.HighDensity`.
+For example, `FloppyDriveTypes = [LightweightFloppyDriveType.HighDensity]`
+fits an HD DF0. The desktop's Floppy Drives settings expose the same selection
+and save it in profiles and the remembered machine; changing types requires an
+Amiga restart. The runner accepts `--drive-type 0 HD`, repeatable for units 0–3,
+with `--drives` connecting external units. HD drives accept DD and HD ADF/ADZ sectors; DD drives reject HD
+attachment before replacing their current media. HD media has 22 sectors per
+track and a nominal 150 RPM spindle; DD media runs at 300 RPM in either drive.
+Paula retains its normal cell clock. Serial drive IDs report `$AAAAAAAA` with
+HD media and the DD ID with DD media or no disk. Original internal DD drives
+retain their absent ID circuit. See [HD support and qualification](../docs/engine/HD_FLOPPY_2026-10-18.md).
+Use
 `MountAdf(drive, bytes)`, `EjectAdf(drive)`, `IsDriveMounted(drive)` and
 `GetDriveState(drive)` with zero-based indices. Existing unindexed APIs refer to
 DF0. Disconnected or out-of-range indices are rejected. Each drive has separate

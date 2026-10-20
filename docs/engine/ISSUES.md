@@ -75,6 +75,8 @@ Performance is assessed separately using the [measurement guide](PERFORMANCE.md)
 
 | ID | Subsystem / subject | Category and current status | Next action or trigger |
 | --- | --- | --- | --- |
+| LWA-HOST-005 | CopperOS capture review | CLOSED — review false positive; diagnostic validation hardened | The [pixel audit and correction](../COPPEROS_CAPTURE_VALIDATION_2026-10-20.md) proves that signed 43 start/midpoint/end and signed 31 midpoint PNGs are byte-identical, each with 2,962 visible proof-text pixels; hashes match the original hour record. The earlier blank classification was an incorrect visual review. Original dated reports and images remain unchanged. Separate signed native probes compare guest framebuffer/Shell memory, session pixels, presenter and window captures. Diagnostic captures now record hashes and reject absent fixed-proof text, with positive/negative controls. No renderer or engine defect is established by the original images; physical display/pacing remains a separate open gate. |
+| LWA-HOST-004 | Installed audio producer / display-off | Warmup and blocked UI publication corrected in bounded controls; release continuity OPEN | [Low-intrusion timeline and signed 43 controls](../AUDIO_WARMUP_REFILL_2026-10-19.md) support optimized first-use JIT and keeping rendered-field PCM production independent of UI dispatch/presentation waits, including command publication. A measured WASAPI catch-up burst requires ten reserve blocks instead of eight (about 40 ms additional queued PAL audio); latency budgets remain OPEN. Both native paths and both processes have zero cumulative missing values, including 120-second native reopen follow-ups, with native save/export/readback. The original 37 CopperOS 748-value episode has no retrospective owner trace; its exact cause is unassigned. First-incident retention preserves future recurrence context; the exact 42 warmup cause remains unassigned where rolling coverage was lost. Earlier [display recovery](../AUDIO_DISPLAY_RECOVERY_2026-10-18.md) and [EventPipe observations](../AUDIO_REFILL_TRACE_2026-10-18.md) remain unchanged. [Signed 42-to-43 install/update persistence](../AUDIO_MSIX_VALIDATION_2026-10-19.md) now passes for the unchanged 43 hash, including recovery/reinstall. [Fresh exact-hash 43 WACK](../AUDIO_MSIX_WACK_VALIDATION_2026-10-19.md) reports overall PASS with all 13 required checks passing; the optional blocked-executable scan retains its 24 messages. Final production/Store-identity WACK and dependency review remain open. [Exact-hash installed hours](../INSTALLED_SESSIONS_2026-10-20.md) now complete both 3,600-second sessions and fresh-process save/readback with zero cumulative missing samples in all four timelines. Physical display/S3/PnP remain open; the separate [capture audit correction](../COPPEROS_CAPTURE_VALIDATION_2026-10-20.md) closes the mistaken blank-image finding. Sampled memory is descriptive. Loaded-host timing is INVALID / RERUN for formal performance acceptance; release budgets remain OPEN. |
 | LWA-HOST-003 | Shared folders | Native DOS folder mounts and optional boot implemented | KS1.3/3.1 folder and exchange tests, 040 JIT, metadata and confinement checks are in [the shared-folder record](HOST_DIRECTORIES.md). Hot mounting, notifications, links, ExAll, 64-bit files and equivalent non-Windows concurrent-replacement qualification remain outside this version. |
 | LWA-HOST-002 | Interlace steadiness | Blackout repaired; residual symptom OPEN / deferred | On a repeatable report, distinguish host cadence, field sequencing and inherent flicker. |
 | LWA-NATIVE-001 | North & South CP release / Copper restart with DMA off | Corrected; combined candidate accepted 2026-09-21 | Defer the DMA-disabled frame restart's pointer load until its retained bus output. Untouched CP menus/borders and four hardware-photo probe patterns now agree. Earlier release-blame inference withdrawn; see [investigation](NORTH_SOUTH_INVESTIGATION.md). Combined performance acceptance is recorded with Super Cars II. |
@@ -236,7 +238,7 @@ Retain documented following-word WORDSYNC coverage.
 
 ### LWA-DISK-008 — Ideal-ADF mechanics
 
-Standard encoded ADF tracks use nominal 300 RPM and a new motor/media run starting
+Standard encoded ADF tracks use nominal 300 RPM for DD or 150 RPM for HD and a new motor/media run starting
 at track bit zero after readiness. Insertion phase, coast-down, seek settling and
 speed variation are not fully modeled. ADF sectors are not physical flux captures.
 Inward over-seeks now clamp without stopping guest execution. Existing model
@@ -245,6 +247,11 @@ media-independent bounds remain unverified. See the
 [Desert Strike comparison](DESERT_STRIKE_END_STOP_2026-09-24.md).
 Add effects only for demonstrated supported-workload needs with bounded evidence;
 broader protection/flux support remains outside scope.
+
+HD sector ADF/ADZ, media-dependent serial drive IDs and 150 RPM index timing
+are implemented with bounded CopperStart full-ROM read/write/export/reopen
+coverage; see [HD support and qualification](HD_FLOPPY_2026-10-18.md). HD
+preserved/flux formats and physical-drive timing remain unqualified.
 
 ### LWA-DISK-010 — Recovery-window phase
 

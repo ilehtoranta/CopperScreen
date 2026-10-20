@@ -44,12 +44,14 @@ internal sealed partial class MainWindow
             var device = AddTextSetting(form, "Device name"); device.Text = mount.DeviceName;
             var volume = AddTextSetting(form, "Volume label"); volume.Text = mount.VolumeName;
             var path = AddTextSetting(form, "Host folder"); path.Text = mount.Path;
+            var readOnly = new CheckBox { Content = "Read-only (clear to allow direct changes in this folder)", IsChecked = mount.ReadOnly };
+            path.TextChanged += (_, _) => { if (path.Text != mount.Path) readOnly.IsChecked = true; };
             form.Children.Add(CreatePanelButton("Choose folder…", async () =>
             {
                 var selected = await StorageProvider.OpenFolderPickerAsync(new() { Title = "Choose shared folder", AllowMultiple = false });
-                if (selected.Count == 1) path.Text = selected[0].TryGetLocalPath();
+                if (selected.Count == 1) { path.Text = selected[0].TryGetLocalPath(); readOnly.IsChecked = true; }
             }));
-            var readOnly = new CheckBox { Content = "Read-only", IsChecked = mount.ReadOnly }; form.Children.Add(readOnly);
+            form.Children.Add(readOnly);
             var boot = new CheckBox { Content = "Boot from this folder", IsChecked = mount.BootPriority.HasValue }; form.Children.Add(boot);
             var priority = AddTextSetting(form, "Boot priority"); priority.Text = (mount.BootPriority ?? 0).ToString(); priority.IsEnabled = boot.IsChecked == true;
             boot.IsCheckedChanged += (_, _) => { priority.IsEnabled = boot.IsChecked == true; MarkSettingsRestartRequired(); };

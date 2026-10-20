@@ -1,0 +1,54 @@
+{
+  "$schema": "copperos-storage.schema.json",
+  "schemaVersion": 1,
+  "contractId": "copperscreen.copperstart-copperos.native-storage",
+  "contractVersion": "0.2.0-dev.1",
+  "shipping": false,
+  "defaultActivationAllowed": false,
+  "explicitDevelopmentLaunchAllowed": true,
+  "rom": {
+    "version": "diskboot-2026-10-16-dev.8",
+    "bytes": 524288,
+    "sha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9"
+  },
+  "systemImage": {
+    "version": "0.2.0-dev.1",
+    "bytes": 901120,
+    "sha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88"
+  },
+  "machine": "Lightweight PAL OCS 68000 interpreter; 512 KiB Chip + 512 KiB slow; one DF0; no Fast RAM, RTC, hardfiles, host directories or Legacy",
+  "storage": {
+    "format": 1,
+    "directory": "user-data/CopperOS/Workspaces/<id>",
+    "image": "System.adf",
+    "identity": "workspace.json",
+    "previous": "Previous.adf",
+    "lock": "workspace.lock",
+    "overwriteExistingOnUpdate": false,
+    "automaticMigration": false,
+    "seedWritable": false,
+    "checkpoint": "Owner-thread export after DMA/motor inactivity and valid DOS1 root/bitmap; flushed temporary file, atomic replace with previous image; dirty acknowledgement only after primary save"
+  },
+  "nativeApis": [
+    "DOS1 DD file creation/update/output-open truncation",
+    "public DOS Read/Write/Seek/Close",
+    "native rename/delete",
+    "CreateDir/CurrentDir/UnLock and relative child file I/O",
+    "physical trackdisk read/write and write protection"
+  ],
+  "unqualifiedApis": [
+    "SetFileSize",
+    "SetComment/SetDate/SetProtection",
+    "format",
+    "links",
+    "OFS/DOS2-5 mutations",
+    "hardfiles/host directories"
+  ],
+  "qualification": {
+    "nativeSource": "passed",
+    "installedMsix": "passed",
+    "performance": "not-measured"
+  },
+  "evidence": "docs/COPPEROS_STORAGE_2026-10-16.json",
+  "installedEvidence": "docs/COPPEROS_MSIX_VALIDATION_2026-10-17.json"
+}

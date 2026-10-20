@@ -91,12 +91,12 @@ public static class AmigaDosTrackDecoder
             throw new ArgumentOutOfRangeException(nameof(head));
         }
 
-        if (destinationTrackData.Length != AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize)
+        if (destinationTrackData.Length != 11 * AmigaDiskGeometry.SectorSize && destinationTrackData.Length != 22 * AmigaDiskGeometry.SectorSize)
         {
             throw new ArgumentException("Destination track data must contain exactly one AmigaDOS track.", nameof(destinationTrackData));
         }
 
-        Span<bool> decodedSectors = stackalloc bool[AmigaDiskGeometry.SectorsPerTrack];
+        Span<bool> decodedSectors = stackalloc bool[destinationTrackData.Length / AmigaDiskGeometry.SectorSize];
         var decodedSectorCount = 0;
         var encoded = ToEncodedTrack(track);
         var expectedTrackNumber = (cylinder * AmigaDiskGeometry.HeadCount) + head;
@@ -220,7 +220,7 @@ public static class AmigaDosTrackDecoder
         var trackNumber = (int)((header >> 16) & 0xFF);
         var sector = (int)((header >> 8) & 0xFF);
         if (trackNumber != expectedTrackNumber ||
-            (uint)sector >= AmigaDiskGeometry.SectorsPerTrack)
+            (uint)sector >= (uint)decodedSectors.Length)
         {
             return;
         }

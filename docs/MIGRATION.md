@@ -14,8 +14,11 @@ imported the focused test sources from the same source commit.
 The application has unconditional exact package references. There is no
 source-project fallback. The only project reference is from its focused test
 project to the app. CPU/device execution code has not changed for this move.
-Historical excluded Legacy implementation files are retained references, not
-dependencies of the active host.
+At extraction, the excluded Legacy implementation files were retained as
+references, not dependencies of the active host. The emulator adapter,
+CopperBench browser and presentation-frame helper were removed on 2026-10-17;
+Git history and the [legacy workspace archive](../archive/legacy-copperscreen-20260916/README.md)
+preserve their history.
 
 Dependency versions: Copper68k `1.4.1-boundary.1`, CopperDisk `2.1.1-boundary.1`,
 CopperMod.Amiga.Lightweight `0.1.0-preview.1`. All are verified previews, published

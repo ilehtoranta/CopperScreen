@@ -411,7 +411,7 @@ public sealed class AmigaDiskLoaderTests
     {
         var ex = Assert.Throws<AmigaDiskException>(() => AmigaDiskLoader.FromAdzBytes(Gzip([1, 2, 3])));
 
-        Assert.Contains("standard", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("880 KiB DD or 1760 KiB HD", ex.Message, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

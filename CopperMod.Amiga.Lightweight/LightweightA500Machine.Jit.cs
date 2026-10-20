@@ -41,6 +41,9 @@ public sealed partial class LightweightA500Machine
         { key = address & _chipRamCpuAddressMask; return key < _chipRam.Length; }
         if (address >= 0xC00000 && address < 0xC00000 + _slowRam.Length || _fastRam?.ContainsRange(address, 1) == true)
             return true;
+        if (_extensionRomLoaded && address >= ExtensionRomBase &&
+            address < ExtensionRomBase + _extensionRom.Length)
+        { readOnly = true; return true; }
         if (address >= RomBase && address < RomBase + _rom.Length)
         { readOnly = true; return true; }
         return false;

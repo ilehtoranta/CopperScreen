@@ -4,6 +4,7 @@
  */
 
 using System.Globalization;
+using CopperMod.Amiga.Lightweight;
 using System.Text.Json;
 using ExecMemoryAllocatorKind = CopperScreen.CopperScreenMemoryAllocator;
 
@@ -56,7 +57,8 @@ internal sealed class CopperScreenProfile
 		CopperScreenPresentationOptions presentationOptions,
 		bool autoStartWorkbenchStartupSequence,
         string? configPath,
-        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null)
+        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null,
+        IReadOnlyList<LightweightFloppyDriveType>? floppyDriveTypes = null)
 	{
 		Id = id;
 		DisplayName = displayName;
@@ -70,6 +72,12 @@ internal sealed class CopperScreenProfile
 		RtgVramSize = rtgVramSize;
 		RtcEnabled = rtcEnabled;
 		FloppyDriveCount = floppyDriveCount;
+        if (floppyDriveTypes is { Count: > 4 } || floppyDriveTypes?.Any(type => !Enum.IsDefined(type)) == true)
+            throw new InvalidOperationException("machine.floppyDriveTypes must contain up to four DD or HD drive types.");
+        var types = new LightweightFloppyDriveType[4];
+        if (floppyDriveTypes != null)
+            for (var i = 0; i < floppyDriveTypes.Count; i++) types[i] = floppyDriveTypes[i];
+        FloppyDriveTypes = Array.AsReadOnly(types);
 		CpuBackend = cpuBackend;
 		FloppyDriveAudio = floppyDriveAudio;
 		KickstartSource = kickstartSource;
@@ -116,6 +124,7 @@ internal sealed class CopperScreenProfile
 	public bool RtcEnabled { get; }
 
 	public int FloppyDriveCount { get; }
+    public IReadOnlyList<LightweightFloppyDriveType> FloppyDriveTypes { get; }
 
 	public M68kBackendKind CpuBackend { get; }
 
@@ -142,14 +151,14 @@ internal sealed class CopperScreenProfile
 
 	public string? ConfigPath { get; }
 
-	public bool UsesKickstartRom => KickstartSource is not (CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.MinimalDiskBoot);
+	public bool UsesKickstartRom => KickstartSource != CopperScreenKickstartSource.MinimalDiskBoot;
 
 	public bool BootsWithoutDisk => KickstartSource == CopperScreenKickstartSource.DiagRom;
 
 	public static CopperScreenProfile LoadDefault(string baseDirectory, out string? error,
-		string profileId = DefaultProfileId)
+		string profileId = DefaultProfileId, string? userDataDirectory = null)
 	{
-		if (TryLoad(profileId, baseDirectory, out var profile, out error))
+		if (TryLoad(profileId, baseDirectory, out var profile, out error, userDataDirectory))
 		{
 			return profile;
 		}
@@ -157,26 +166,23 @@ internal sealed class CopperScreenProfile
 		return CreateFallbackDefault();
 	}
 
-	public static bool TryLoad(string? specifier, string baseDirectory, out CopperScreenProfile profile, out string? error)
+	public static bool TryLoad(string? specifier, string baseDirectory, out CopperScreenProfile profile, out string? error, string? userDataDirectory = null)
 	{
 		profile = CreateFallbackDefault();
 		error = null;
-		var resolvedSpecifier = string.IsNullOrWhiteSpace(specifier)
-			? DefaultProfileId
-			: NormalizeProfileId(specifier);
-		var profilePath = ResolveProfilePath(resolvedSpecifier, baseDirectory);
-		if (profilePath == null)
-		{
-			error = $"CopperScreen profile '{specifier}' was not found.";
-			return false;
-		}
-
 		try
 		{
+			var resolvedSpecifier = string.IsNullOrWhiteSpace(specifier) ? DefaultProfileId : NormalizeProfileId(specifier);
+			var profilePath = ResolveProfilePath(resolvedSpecifier, baseDirectory, userDataDirectory);
+			if (profilePath == null)
+			{
+				error = $"CopperScreen profile '{specifier}' was not found.";
+				return false;
+			}
 			profile = FromJsonFile(profilePath);
 			return true;
 		}
-		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException)
+		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException or OverflowException or FormatException or NotSupportedException)
 		{
 			error = $"Could not load CopperScreen profile '{specifier}': {ex.Message}";
 			return false;
@@ -188,17 +194,17 @@ internal sealed class CopperScreenProfile
 		CopperScreenKickstartSource source,
 		string baseDirectory,
 		out CopperScreenProfile profile,
-		out string? error)
+		out string? error, string? userDataDirectory = null)
 	{
 		var id = source switch
 		{
-			CopperScreenKickstartSource.CopperStart => current.ExpansionRamSize == 0 ? "vanilla-copperstart" : "expanded-copperstart",
+			CopperScreenKickstartSource.CopperStart => "lightweight-a500-copperstart",
 			CopperScreenKickstartSource.DiagRom => "expanded-diagrom",
 			CopperScreenKickstartSource.Kickstart31Rom => "lightweight-a500-kickstart31",
 			CopperScreenKickstartSource.MinimalDiskBoot => "lightweight-a500-minimal-disk-boot",
 			_ => current.ExpansionRamSize == 0 ? "vanilla-kickstart13" : "expanded-kickstart13"
 		};
-		return TryLoad(id, baseDirectory, out profile, out error);
+		return TryLoad(id, baseDirectory, out profile, out error, userDataDirectory);
 	}
 
 	public static string NormalizeProfileId(string value)
@@ -219,6 +225,7 @@ internal sealed class CopperScreenProfile
 		{
 			"default" => DefaultProfileId,
 			"minimal-disk-boot" => "lightweight-a500-minimal-disk-boot",
+			"copperstart" => "lightweight-a500-copperstart",
 			"expanded" => "expanded-copperstart",
 			"vanilla" => "vanilla-copperstart",
 			"expanded-rom" or "expanded-kickstart" or "expanded-kickstart-13" => "expanded-kickstart13",
@@ -236,6 +243,10 @@ internal sealed class CopperScreenProfile
 		var json = File.ReadAllText(path);
 		var config = JsonSerializer.Deserialize<ProfileFile>(json, JsonOptions) ??
 			throw new InvalidOperationException("The profile file was empty.");
+		if (config.Media?.Drives?.Any(drive => drive is null) == true ||
+			config.HardDrives?.Any(drive => drive is null) == true ||
+			config.HostDirectories?.Any(folder => folder is null) == true)
+			throw new InvalidOperationException("Profile storage entries cannot be null. Remove or repair the empty entry.");
 		return FromConfig(config, path);
 	}
 
@@ -310,7 +321,7 @@ internal sealed class CopperScreenProfile
 			input,
 			presentationOptions,
 			autoStartWorkbenchStartupSequence,
-            Path.GetFullPath(path), config.HostDirectories);
+            Path.GetFullPath(path), config.HostDirectories, machine.FloppyDriveTypes?.Select(ParseFloppyDriveType).ToArray());
 	}
 
 	internal static CopperScreenProfile Create(
@@ -337,7 +348,8 @@ internal sealed class CopperScreenProfile
 		long rtgVramSize = 0,
 		AmigaChipset? chipset = null,
         KickstartVersion kickstartVersion = KickstartVersion.Kickstart13,
-        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null)
+        IReadOnlyList<CopperMod.Amiga.Lightweight.LightweightHostDirectoryConfiguration>? hostDirectories = null,
+        IReadOnlyList<LightweightFloppyDriveType>? floppyDriveTypes = null)
 	{
 		if (floppyDriveCount is < 1 or > 4)
 		{
@@ -368,12 +380,12 @@ internal sealed class CopperScreenProfile
 			input,
 			presentationOptions ?? CopperScreenPresentationOptions.Default,
 			autoStartWorkbenchStartupSequence,
-            configPath, hostDirectories);
+            configPath, hostDirectories, floppyDriveTypes);
 	}
 
-	private static string? ResolveProfilePath(string specifier, string baseDirectory)
+	private static string? ResolveProfilePath(string specifier, string baseDirectory, string? userDataDirectory)
 	{
-		foreach (var candidate in EnumerateProfilePathCandidates(specifier, baseDirectory))
+		foreach (var candidate in EnumerateProfilePathCandidates(specifier, baseDirectory, userDataDirectory))
 		{
 			if (File.Exists(candidate))
 			{
@@ -384,7 +396,7 @@ internal sealed class CopperScreenProfile
 		return null;
 	}
 
-	private static IEnumerable<string> EnumerateProfilePathCandidates(string specifier, string baseDirectory)
+	private static IEnumerable<string> EnumerateProfilePathCandidates(string specifier, string baseDirectory, string? userDataDirectory)
 	{
 		var hasExtension = Path.HasExtension(specifier);
 		var fileName = hasExtension ? specifier : specifier + ".json";
@@ -399,30 +411,27 @@ internal sealed class CopperScreenProfile
 			yield break;
 		}
 
-		yield return Path.GetFullPath(specifier);
-		if (!hasExtension)
+		// Explicit paths keep their working-directory/base-directory interpretation.
+		if (hasExtension || specifier.Contains('/') || specifier.Contains('\\'))
 		{
-			yield return Path.GetFullPath(specifier + ".json");
+			yield return Path.GetFullPath(specifier);
+			if (!hasExtension) yield return Path.GetFullPath(specifier + ".json");
+			yield return Path.GetFullPath(Path.Combine(baseDirectory, specifier));
+			if (!hasExtension) yield return Path.GetFullPath(Path.Combine(baseDirectory, specifier + ".json"));
 		}
-
-		yield return Path.GetFullPath(Path.Combine(baseDirectory, specifier));
-		if (!hasExtension)
+		if (!specifier.Contains('/') && !specifier.Contains('\\'))
 		{
-			yield return Path.GetFullPath(Path.Combine(baseDirectory, specifier + ".json"));
+			yield return Path.Combine(CopperScreenProfileStore.GetUserProfilesDirectory(userDataDirectory), fileName);
+			yield return Path.Combine(CopperScreenProfileStore.FindBundledPresetsDirectory(baseDirectory), fileName);
 		}
-
-		var directory = new DirectoryInfo(baseDirectory);
-		while (directory != null)
+		for (var directory = new DirectoryInfo(baseDirectory); directory != null; directory = directory.Parent)
 		{
 			yield return Path.Combine(directory.FullName, specifier);
-			if (!hasExtension)
-			{
-				yield return Path.Combine(directory.FullName, specifier + ".json");
-			}
-
+			if (!hasExtension) yield return Path.Combine(directory.FullName, specifier + ".json");
+			yield return Path.Combine(directory.FullName, "Presets", fileName);
+			yield return Path.Combine(directory.FullName, "CopperScreen", "Presets", fileName);
 			yield return Path.Combine(directory.FullName, "Profiles", fileName);
 			yield return Path.Combine(directory.FullName, "CopperScreen", "Profiles", fileName);
-			directory = directory.Parent;
 		}
 	}
 
@@ -875,7 +884,14 @@ internal sealed class CopperScreenProfile
 		throw new InvalidOperationException($"Unsupported floppy drive sound mode '{value}'.");
 	}
 
-	private static CopperScreenProfile CreateFallbackDefault()
+    private static LightweightFloppyDriveType ParseFloppyDriveType(string value) => value?.Trim().ToLowerInvariant() switch
+    {
+        "dd" => LightweightFloppyDriveType.DoubleDensity,
+        "hd" => LightweightFloppyDriveType.HighDensity,
+        _ => throw new InvalidOperationException("machine.floppyDriveTypes entries must be DD or HD.")
+    };
+
+	internal static CopperScreenProfile CreateFallbackDefault()
 	{
 		return new CopperScreenProfile(
 			DefaultProfileId,
@@ -962,6 +978,7 @@ internal sealed class CopperScreenProfile
 		public bool? RtcEnabled { get; set; }
 
 		public int? FloppyDriveCount { get; set; }
+        public string[]? FloppyDriveTypes { get; set; }
 	}
 
 	private sealed class CpuFile
@@ -1016,7 +1033,7 @@ internal sealed class CopperScreenProfile
 
 		public string? Path { get; set; }
 
-		public bool ReadOnly { get; set; }
+		public bool ReadOnly { get; set; } = true;
 
 		public int? SizeMb { get; set; }
 

@@ -27,7 +27,7 @@ public sealed class Kickstart30AgaTests : IDisposable
     public void SyntheticA1200ProfileCanSaveLoadAndPresentItsNativeRaster()
     {
         var draft = Draft(); Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(draft.Chipset, profile.Chipset); Assert.Equal(KickstartVersion.Kickstart30, profile.KickstartVersion);
         using var session = new CopperScreenLightweightSession(CopperScreenSettingsDraft.FromProfile(profile).ToStartupOptions(_directory));

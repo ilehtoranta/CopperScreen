@@ -1,0 +1,264 @@
+{
+  "protocol": "copperscreen-hdf-backup-cleanup-qualification-v1",
+  "date": "2026-10-20",
+  "status": "PASS",
+  "implementation": {
+    "automaticStartupAndBeforeNextOperation": true,
+    "exclusiveJournalLease": true,
+    "flushedFileIdentityRecords": true,
+    "deleteViaVerifiedHandles": true,
+    "noRecursiveRestoreCleanup": true,
+    "extendedWindowsPaths": true,
+    "untrackedLegacyFilesPreserved": true,
+    "activeAndUncertainObjectsDeferred": true
+  },
+  "hostTests": {
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "artifacts/hdf-backup-cleanup-20261020/host-tests-qualified-final/host.trx",
+    "sha256": "1A77FED30C908CACC88936F02042D26DFB8A8F8B89590B77AC1E6D78071C4B37"
+  },
+  "desktopTests": {
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "artifacts/hdf-backup-cleanup-20261020/desktop-tests-final/desktop.trx",
+    "sha256": "438082B98D00C7323B9494787D95CBB2D88254304089CA90590178E2B78BB839"
+  },
+  "compiledMc68000Cases": 0,
+  "releaseBuild": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "log": "artifacts/hdf-backup-cleanup-20261020/build-final.log"
+  },
+  "diagnosticExclusion": {
+    "ProductionHasDiagnosticEntry": false,
+    "DiagnosticHasDiagnosticEntry": true,
+    "ProductionHasBackupObserver": false,
+    "DiagnosticHasBackupObserver": true
+  },
+  "nativeAndInstalledAudit": {
+    "protocol": "copperscreen-hdf-backup-cleanup-audit-v1",
+    "passed": true,
+    "forcedTerminations": 4,
+    "automaticStartupCleanups": 4,
+    "installedProcesses": 5,
+    "fullRomBoots": 5,
+    "existingDisksSettingsBackupUnchanged": true,
+    "untrackedAndPublishedObjectsPreserved": true,
+    "interruptedArtifactsAndOwnershipRecordsRemoved": true,
+    "preCleanupCopiesIndependentlyAudited": true,
+    "freshFullRomBothPartitionsReadback": true
+  },
+  "phases": [
+    {
+      "phase": "io-export-partial",
+      "processId": 45296,
+      "startupCleanup": {
+        "Cleaned": 0,
+        "Deferred": 0
+      },
+      "forcedTermination": true,
+      "exitCode": -1,
+      "savedImageSha256": null
+    },
+    {
+      "phase": "io-export-flushed",
+      "processId": 57624,
+      "startupCleanup": {
+        "Cleaned": 1,
+        "Deferred": 0
+      },
+      "forcedTermination": true,
+      "exitCode": -1,
+      "savedImageSha256": null
+    },
+    {
+      "phase": "io-restore-partial",
+      "processId": 91584,
+      "startupCleanup": {
+        "Cleaned": 1,
+        "Deferred": 0
+      },
+      "forcedTermination": true,
+      "exitCode": -1,
+      "savedImageSha256": null
+    },
+    {
+      "phase": "io-restore-flushed",
+      "processId": 45560,
+      "startupCleanup": {
+        "Cleaned": 1,
+        "Deferred": 0
+      },
+      "forcedTermination": true,
+      "exitCode": -1,
+      "savedImageSha256": null
+    },
+    {
+      "phase": "io-recovery",
+      "processId": 79332,
+      "startupCleanup": {
+        "Cleaned": 1,
+        "Deferred": 0
+      },
+      "forcedTermination": false,
+      "exitCode": 0,
+      "savedImageSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    }
+  ],
+  "package": {
+    "identity": "CopperScreen.Test.f4d7f31a59984410a0834fac45e68b6e",
+    "version": "1.1.56.0",
+    "sha256": "3F5D5457A5C2C61022E304D2BE038133ED7EBE95DE262B10F052BF761E31D85A",
+    "signedDiagnostic": true,
+    "developmentMode": false,
+    "registrationRemoved": true,
+    "released": false
+  },
+  "firmware": {
+    "qualification": "diskboot-2026-10-19-ffs-td64-frontend.1",
+    "sha256": "D21E5223150A8837739E08ACC65AF52F483B5789C077A32E071F824BC14B7A86",
+    "pinChangedByThisTask": false
+  },
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "existingBackupSha256": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC",
+  "protectedFiles": {
+    "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "profile.json": "1C019508FD858C561E341E18B6072806DF48DE970ED2D09B012162EE2A8D6125",
+    "last-machine.json": "1C019508FD858C561E341E18B6072806DF48DE970ED2D09B012162EE2A8D6125",
+    "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "preservationSentinels": 4,
+  "evidenceRoot": "artifacts/hdf-backup-cleanup-20261020",
+  "acceptedInstalledEvidence": "installed-final",
+  "sourceFiles": [
+    {
+      "path": "CopperScreen/CopperScreenHardDiskBackupCleanup.cs",
+      "sha256": "7275965FF4B7B480FD0430059E6A9894145AF404FC94E9FFE8E680190FB6DEDA",
+      "matchesPackagedInput": true
+    },
+    {
+      "path": "CopperScreen/CopperScreenHardDiskBackup.cs",
+      "sha256": "32C15B256C810FBFE9F8D619EF1D28968C0C358AF069C36D515A983E82DD1C87",
+      "matchesPackagedInput": true
+    },
+    {
+      "path": "CopperScreen/MainWindow.cs",
+      "sha256": "2A01B663BA4F5C61D9D951B2EE98BAF129381DDB54746C41387166402764252D",
+      "matchesPackagedInput": true
+    },
+    {
+      "path": "CopperScreen/MainWindow.HardDiskBackup.cs",
+      "sha256": "051B97350C1AC3E3BA43633F94F18BFCA07CDC683F64D3DBB7CB2449244B5C06",
+      "matchesPackagedInput": true
+    },
+    {
+      "path": "CopperScreen/Diagnostics/CopperScreenInstalledRdbProof.cs",
+      "sha256": "61D78E096CFD05127074C303ED17EC22CE854D3EE38674DB4EB91C723D111506",
+      "matchesPackagedInput": true
+    },
+    {
+      "path": "CopperScreen/Diagnostics/CopperScreenInstalledBackupIo.cs",
+      "sha256": "6E1A72732FE4603DB48D36D82F9A09B274D331EDB79500D2FF8EE204132EDD19",
+      "matchesPackagedInput": true
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/HardDiskBackupCleanupTests.cs",
+      "sha256": "73C09EFE962410F1DD8B2CB799909CBE45CA6805EAFA8B0DFBD2A0B1DD4E19AE",
+      "matchesPackagedInput": null
+    },
+    {
+      "path": "CopperScreen.Desktop.Tests/HardDiskBackupFlowTests.cs",
+      "sha256": "06204E61F2AC4309C312AB9AC7DCAE8D65A3E458D61B03560D8F5F6B5E75AAF5",
+      "matchesPackagedInput": null
+    },
+    {
+      "path": "scripts/test-msix-hdf-backup-cleanup.ps1",
+      "sha256": "35E1312121A916D1B90627FB895015127EA9F514315CACBA5ACF3E926F218BB2",
+      "matchesPackagedInput": null
+    },
+    {
+      "path": "scripts/qualification/audit-hdf-backup-cleanup.py",
+      "sha256": "E191F8C54258E87E03401C6E5F6566BDFED1A0DDE6767542AFABD19AA448AF19",
+      "matchesPackagedInput": null
+    },
+    {
+      "path": "docs/COPPERSTART_APP.md",
+      "sha256": "A0150EF6B2DFA13AA28785640F97AF1A36F5F8DB0017D617CCACFDFE375FA382",
+      "matchesPackagedInput": null
+    },
+    {
+      "path": "docs/COPPERSTART_HDF_BACKUP_IO_2026-10-19.md",
+      "sha256": "0C7543A059CF404DC2B2B3C2951E41441BDE6A6112DF8BF07C2598D73C91BB46",
+      "matchesPackagedInput": null
+    },
+    {
+      "path": "docs/COPPERSTART_HDF_BACKUP_CLEANUP_2026-10-20.md",
+      "sha256": "7A04919DFB49D65235F5F60F14B21E74960106AD9A09C7F87D01C82399FBEE31",
+      "matchesPackagedInput": null
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "build-final.log",
+      "sha256": "8433EB13AB87B8978F2E366E9BB1791C08F18291393E010C9875A1F75796DE7E"
+    },
+    {
+      "path": "host-qualified-final.log",
+      "sha256": "CD1C302BB5BFA4C62166AE4F8BC3963602D69E4F798050E363D23AB87873D943"
+    },
+    {
+      "path": "desktop-final.log",
+      "sha256": "ED3156CBA32CF05C14FEB9968624D49C200954170D0D8D410273EC8D07EAEE81"
+    },
+    {
+      "path": "installed-final.log",
+      "sha256": "E6A76986646367C6A072DDA7E477380A4ED21688084760352850A30830A8A1A5"
+    },
+    {
+      "path": "diagnostic-exclusion.json",
+      "sha256": "04A132270ADCD9F61B6CA2DB8BDEDF3B6653AC6494AE5204E92072C5C67C6506"
+    },
+    {
+      "path": "failed-run-cleanup.json",
+      "sha256": "6B3F048E5787D7853611FE82254EBA7C4FC7FF31A6E4E8595CD5DD263FAE13C9"
+    },
+    {
+      "path": "installed-final/completion-audit.json",
+      "sha256": "59C17775496D4CC8BFCE9BBFC25C4CDDD25C158F3932688D102210C17DEAF1FB"
+    },
+    {
+      "path": "installed-final/installed-hdf-backup-cleanup-record.json",
+      "sha256": "9509FDFFCB725CFDD701691ACDA71012F399A43D1CE35B024A5820D877F275E5"
+    },
+    {
+      "path": "package-final/package-record.json",
+      "sha256": "C14A3E6B8E3DF4A1C06FBAAA21EA883B9FE93643CF002AF911610D7721790275"
+    },
+    {
+      "path": "package-final/publish.log",
+      "sha256": "2620AC64C91D0525671C1177762D96BD09FACF511C2912E4547C8044AE6E8340"
+    }
+  ],
+  "earlierAttempts": [
+    {
+      "packageVersion": "1.1.55.0",
+      "accepted": false,
+      "reason": "Installed restore paths exceeded MAX_PATH in native cleanup opens; cleanup deferred safely. Failed run retained separately.",
+      "registrationRemoved": true
+    },
+    {
+      "accepted": false,
+      "reason": "One host invocation omitted the RDB fixture environment variable; accepted rerun has zero skips."
+    }
+  ],
+  "limits": [
+    "Windows/NTFS process-interruption qualification; no power-loss claim.",
+    "Untracked older artifacts, invalid/incomplete identity records and uncertain objects are preserved.",
+    "Unsupported file identity queries defer automatic cleanup; other filesystems not qualified.",
+    "No new native writes, alternate boot-priority selection, Store certification or performance acceptance in this task."
+  ]
+}

@@ -6,14 +6,17 @@ internal sealed class AdfDiskMedia : IWritableAmigaSectorDiskMedia
 {
     private readonly byte[][] _encodedTracks = new byte[AmigaDiskGeometry.TrackCount][];
 
+    private readonly int _sectorsPerTrack;
+
     public AdfDiskMedia(byte[] data)
     {
-        if (data.Length != AmigaDiskGeometry.StandardAdfSize)
+        if (data.Length != AmigaDiskGeometry.StandardAdfSize && data.Length != AmigaDiskGeometry.HighDensityAdfSize)
         {
-            throw new AmigaDiskException($"Only standard {AmigaDiskGeometry.StandardAdfSize}-byte sector images are supported.");
+            throw new AmigaDiskException("ADF sector images must contain 880 KiB DD or 1760 KiB HD sectors.");
         }
 
         DataBytes = data;
+        _sectorsPerTrack = data.Length / (AmigaDiskGeometry.TrackCount * AmigaDiskGeometry.SectorSize);
     }
 
     public int Cylinders => AmigaDiskGeometry.CylinderCount;
@@ -41,9 +44,9 @@ internal sealed class AdfDiskMedia : IWritableAmigaSectorDiskMedia
     {
         ArgumentNullException.ThrowIfNull(track);
         var index = GetTrackIndex(cylinder, head);
-        var trackDataOffset = index * AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize;
+        var trackDataOffset = index * _sectorsPerTrack * AmigaDiskGeometry.SectorSize;
         var trackData = DataBytes
-            .AsSpan(trackDataOffset, AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize)
+            .AsSpan(trackDataOffset, _sectorsPerTrack * AmigaDiskGeometry.SectorSize)
             .ToArray();
         var decodedSectors = AmigaDosTrackDecoder.DecodeTrackBestEffort(track, cylinder, head, trackData);
         if (decodedSectors == 0)
@@ -70,7 +73,7 @@ internal sealed class AdfDiskMedia : IWritableAmigaSectorDiskMedia
         }
 
         source.CopyTo(DataBytes.AsSpan(byteOffset, source.Length));
-        var bytesPerTrack = AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize;
+        var bytesPerTrack = _sectorsPerTrack * AmigaDiskGeometry.SectorSize;
         var firstTrack = byteOffset / bytesPerTrack;
         var lastTrack = (byteOffset + source.Length - 1) / bytesPerTrack;
         for (var track = firstTrack; track <= lastTrack; track++)
@@ -84,7 +87,7 @@ internal sealed class AdfDiskMedia : IWritableAmigaSectorDiskMedia
 
     public ReadOnlyMemory<byte> ReadSector(int cylinder, int head, int sector)
     {
-        return ReadSector(GetLogicalSector(cylinder, head, sector));
+        return ReadSector(GetLogicalSector(cylinder, head, sector, _sectorsPerTrack));
     }
 
     public ReadOnlyMemory<byte> ReadSector(int logicalSector)
@@ -123,14 +126,14 @@ internal sealed class AdfDiskMedia : IWritableAmigaSectorDiskMedia
         return (cylinder * AmigaDiskGeometry.HeadCount) + head;
     }
 
-    internal static int GetLogicalSector(int cylinder, int head, int sector)
+    internal static int GetLogicalSector(int cylinder, int head, int sector, int sectorsPerTrack = AmigaDiskGeometry.SectorsPerTrack)
     {
         _ = GetTrackIndex(cylinder, head);
-        if (sector < 0 || sector >= AmigaDiskGeometry.SectorsPerTrack)
+        if (sector < 0 || sector >= sectorsPerTrack)
         {
             throw new ArgumentOutOfRangeException(nameof(sector));
         }
 
-        return ((cylinder * AmigaDiskGeometry.HeadCount) + head) * AmigaDiskGeometry.SectorsPerTrack + sector;
+        return ((cylinder * AmigaDiskGeometry.HeadCount) + head) * sectorsPerTrack + sector;
     }
 }

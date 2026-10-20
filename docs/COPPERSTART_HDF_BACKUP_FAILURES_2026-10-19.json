@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "qualificationId": "copperstart-hdf-backup-failures-2026-10-19.1",
+  "status": "PASS",
+  "package": {
+    "identity": "CopperScreen.Test.0278af0ff27743489112adff143a275d",
+    "version": "1.1.52.0",
+    "sha256": "15814B0C2B838882E1CD9A70EFCF95EFDFA2FC21EE32E9B4BC9065DF1F470C61",
+    "signedLocalDiagnostic": true,
+    "developmentRegistration": false,
+    "storeCertified": false,
+    "ownedRegistrationRemoved": true
+  },
+  "firmware": {
+    "qualificationId": "diskboot-2026-10-19-ffs-overwrites.1",
+    "sha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+    "pinChangedByThisTask": false
+  },
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "inputBackupSha256": {
+    "corrupt-image.copperhdf": "51BD5DB56F6E9A3BEDB49CD97DC95CCFB5053817BDAE9B8E08C8281F67C07ABA",
+    "corrupt-profile.copperhdf": "028EAAA9D7862B0081FEC30316091488329DCBE5FE5FA946F131087255073B83",
+    "truncated-archive.copperhdf": "A3EBFAB1FEA8C6A4C53F0C55D6AC11C08479AD990E6584F5BC25F7FB78F2655F",
+    "truncated-image.copperhdf": "53AD5D66A56249F0387781D4AB66E39CB588DE5B7DC7D710287C8E9146BA8F08",
+    "existing-backup.copperhdf": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC"
+  },
+  "coverage": {
+    "hostSemanticCases": 18,
+    "hostFailures": 0,
+    "hostSkips": 0,
+    "separateCompiledMc68000Cases": 0,
+    "installedProcesses": 1,
+    "fullRomBoots": 2,
+    "installedFailureCases": 9,
+    "unexpectedFailures": 0,
+    "skips": 0
+  },
+  "cases": [
+    {
+      "name": "paused-export",
+      "operation": "export",
+      "path": null,
+      "active": true,
+      "paused": true,
+      "error": "Stop the Amiga before backing up or restoring hard disks. Stop saves storage and returns to the launcher.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "paused-restore",
+      "operation": "restore",
+      "path": null,
+      "active": true,
+      "paused": true,
+      "error": "Stop the Amiga before backing up or restoring hard disks. Stop saves storage and returns to the launcher.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "running-export",
+      "operation": "export",
+      "path": null,
+      "active": true,
+      "paused": false,
+      "error": "Stop the Amiga before backing up or restoring hard disks. Stop saves storage and returns to the launcher.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "running-restore",
+      "operation": "restore",
+      "path": null,
+      "active": true,
+      "paused": false,
+      "error": "Stop the Amiga before backing up or restoring hard disks. Stop saves storage and returns to the launcher.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "corrupt-image",
+      "operation": "restore",
+      "path": "corrupt-image.copperhdf",
+      "active": false,
+      "paused": false,
+      "error": "A disk image failed its integrity check. Keep the backup and try another copy.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "corrupt-profile",
+      "operation": "restore",
+      "path": "corrupt-profile.copperhdf",
+      "active": false,
+      "paused": false,
+      "error": "The saved configuration failed its integrity check.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "truncated-archive",
+      "operation": "restore",
+      "path": "truncated-archive.copperhdf",
+      "active": false,
+      "paused": false,
+      "error": "End of Central Directory record could not be found.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "truncated-image",
+      "operation": "restore",
+      "path": "truncated-image.copperhdf",
+      "active": false,
+      "paused": false,
+      "error": "The disk image length does not match the backup.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    },
+    {
+      "name": "existing-backup",
+      "operation": "export",
+      "path": "existing-backup.copperhdf",
+      "active": false,
+      "paused": false,
+      "error": "Choose a new backup filename. Existing backups are preserved.",
+      "savedFilesUnchanged": true,
+      "inputsUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "runtimeUnchanged": true,
+      "noPublishedRestoreOrStaging": true
+    }
+  ],
+  "results": {
+    "protocol": "copperscreen-hdf-backup-failures-audit-v1",
+    "passed": true,
+    "installedFailureCases": 9,
+    "fullRomBoots": 2,
+    "cases": [
+      "paused-export",
+      "paused-restore",
+      "running-export",
+      "running-restore",
+      "corrupt-image",
+      "corrupt-profile",
+      "truncated-archive",
+      "truncated-image",
+      "existing-backup"
+    ],
+    "existingDisksAndSettingsByteIdentical": true,
+    "unsavedAndCommittedSettingsPreserved": true,
+    "activeSessionRetained": true,
+    "noPublishedRestoreOrStaging": true,
+    "existingBackupUnchanged": true,
+    "postFailureBothPartitionsReadBack": true
+  },
+  "filesBeforeFailures": {
+    "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "last-machine.json": "9BA582A884AEFF1B41212C8B2AE6ED7BE86BA3D67414F7C79DA60E7C5C5B9391",
+    "profile.json": "9BA582A884AEFF1B41212C8B2AE6ED7BE86BA3D67414F7C79DA60E7C5C5B9391",
+    "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "filesAfterFailures": {
+    "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "last-machine.json": "9BA582A884AEFF1B41212C8B2AE6ED7BE86BA3D67414F7C79DA60E7C5C5B9391",
+    "profile.json": "9BA582A884AEFF1B41212C8B2AE6ED7BE86BA3D67414F7C79DA60E7C5C5B9391",
+    "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "build": {
+    "configuration": "Release",
+    "warnings": 0,
+    "errors": 0,
+    "productionExcludesInstalledObservers": true,
+    "diagnosticIncludesObservers": true
+  },
+  "sourceSha256": {
+    "CopperScreen/Diagnostics/CopperScreenInstalledRdbProof.cs": "3679A5D73D3A81B6CCC859C96550F3C30F680FF181BA1EDEEA51A247A4C5F546",
+    "CopperScreen/Diagnostics/CopperScreenInstalledBackupFailures.cs": "E94309E65956598EF95C365BA6FF229C3F7B13A1F087DF4DCD0289608B88C6CD",
+    "CopperScreen/Diagnostics/CopperScreenRdbImageProof.cs": "0A1A49575734E8AF29A594EFEC37D10893D2AA6BCE6E01A7EABDC4ED4CA6D010",
+    "CopperScreen/CopperScreenHardDiskBackup.cs": "21A6D848D2CB16CBAA46931526CA4DDDC19979722A3E2037A0FD7E7FABC5A1CC",
+    "CopperScreen/MainWindow.HardDiskBackup.cs": "95024E13C3EC7195450865C2D9D51CF2D7FAA61EC2CD0C6164441C472D5D14C3",
+    "CopperScreen/MainWindow.Storage.cs": "894F57357A209811E58D13C0C6565581836D61D5D0B192993FC82503AE1EF8B7",
+    "CopperScreen/CopperScreenProfileStore.cs": "5578D44CC37EB63C1F0D75AFA5D70A00D77357683BC27699080D3B038533D710",
+    "CopperScreen/Firmware/CopperStart.json": "EAD2912CE7047197A2A8209A08A42BF40689523F4082D19F8497A3BE588F5B73",
+    "CopperScreen.Lightweight.Tests/HardDiskBackupTests.cs": "AB489917CB511DC1C80A287AA35C60A6833D5A9374F7D2FE3C4B1EEC3FF03B76",
+    "scripts/test-msix-hdf-backup-failures.ps1": "71434F781D66477C695EEF1EEFDB446616FE9E6D4A69D8005143AEE8AB6D556F",
+    "scripts/qualification/prepare-hdf-backup-failures.py": "CCB8A7CFEAAB1A81EC49153B21EF42C4D78AB530C11E73FC429D1C7AE75F94B8",
+    "scripts/qualification/audit-hdf-backup-failures.py": "248F8631CCAB538F2FC425CAA57460DB028A8313892FBC17BB053E65F5403C6C"
+  },
+  "evidence": {
+    "root": "artifacts/hdf-backup-failures-20261019",
+    "installed": "installed-final/installed-hdf-backup-failures-record.json",
+    "audit": "installed-final/completion-audit.json",
+    "inputs": "inputs-accepted/preparation.json",
+    "package": "package-final/package-record.json",
+    "sourceSnapshot": "source-final",
+    "sourceHashes": "source-final-sha256.json",
+    "releaseBuild": "final-build.log",
+    "hostTrx": "host-tests/host-final-fixture.trx",
+    "observerExclusion": "diagnostic-exclusion.json"
+  },
+  "excludedAttempts": [
+    "installed: log files incorrectly included in preservation baseline; disk and settings unchanged",
+    "installed-accepted: all nine failures and native readback passed, but normal restart materialized empty floppy protection defaults in last-machine.json",
+    "inputs: fixture preparation failed from reused mutable ZIP entry metadata; corrected copies are in inputs-accepted",
+    "host-final.trx: optional fixture absent; three skips, superseded by host-final-fixture.trx"
+  ],
+  "scope": {
+    "productionBackupChanges": false,
+    "nativeChanges": false,
+    "guestRamPatches": false,
+    "hostDosShims": false,
+    "powerLossDurabilityQualified": false,
+    "outOfSpaceQualified": false,
+    "performanceAcceptance": false,
+    "packageRelease": false
+  }
+}

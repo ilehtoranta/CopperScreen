@@ -1,0 +1,2342 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "recordedUtc": "2026-10-18T12:57:31.0501299Z",
+  "status": "FIX_IMPLEMENTED_INSTALLED_RERUN_PENDING",
+  "functionalMatrixComplete": false,
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "package": {
+    "pinnedCpuBinaryUnchanged": true,
+    "file": {
+      "bytes": 49557993,
+      "sha256": "e6b68cb397ca5ed1fb6f1961b94f2038061be5ba629688d9ef301b1d7f8f11d4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Signed/CopperScreen-1.1.33.0-win-x64.msix"
+    },
+    "version": "1.1.33.0",
+    "signatureVerified": true,
+    "identity": {
+      "Name": "CopperScreen.Test.29d66b7daf334d8cb16743b0e0cfed8b",
+      "Publisher": "CN=CopperScreen Installed Tests",
+      "Version": {
+        "Major": 1,
+        "Minor": 1,
+        "Build": 33,
+        "Revision": 0,
+        "MajorRevision": 0,
+        "MinorRevision": 0
+      },
+      "Architecture": "x64",
+      "Signed": true,
+      "Diagnostic": true
+    },
+    "payloadFilesVerified": 266
+  },
+  "sourceDelta": {
+    "Changed": [
+      "CopperScreen/Diagnostics/CopperScreenInstalledRecovery.cs",
+      "CopperScreen/Diagnostics/CopperScreenInstalledSoak.cs",
+      "CopperScreen/CopperScreenRuntime.cs",
+      "CopperScreen/MiniaudioAudioOutput.cs"
+    ],
+    "UnchangedInputs": 171,
+    "EngineAndDiskSourcesUnchanged": true,
+    "OriginalVersion": "1.1.32.0",
+    "CandidateVersion": "1.1.33.0"
+  },
+  "failedPreviousRun": {
+    "error": "System.Management.Automation.RuntimeException: Guest did not run after active-sleep",
+    "status": "FAILED",
+    "snapshots": [
+      {
+        "id": 3,
+        "snapshot": {
+          "utc": "2026-10-18T12:17:48.4103971Z",
+          "qpc": 697622311675,
+          "qpcFrequency": 10000000,
+          "elapsedSeconds": 24.2735043,
+          "state": {
+            "ProfileName": "My CopperStart preview [Lightweight]",
+            "DiskName": "Lotus2.adf",
+            "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+            "Cpu": {
+              "ProgramCounter": 12650820,
+              "LastInstructionProgramCounter": 12650818,
+              "StatusRegister": 8200
+            },
+            "Drives": [
+              {
+                "Index": 0,
+                "Connected": true,
+                "HasDisk": true,
+                "DiskName": "Lotus2.adf",
+                "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+                "Cylinder": 54,
+                "Head": 1,
+                "MotorOn": true,
+                "Selected": true,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 1,
+                "CanExportAdf": true
+              },
+              {
+                "Index": 1,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 2,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 3,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              }
+            ],
+            "DebugSnapshot": null,
+            "StatusText": "Host clipboard integration is not available in Lightweight.",
+            "IsPaused": false,
+            "IsWorkbenchHandoffPending": false,
+            "IsDiskSwapPending": false,
+            "IsPrimaryFirePressed": false,
+            "AudioFilterEnabled": false,
+            "CopperBenchRequestPending": false,
+            "FramesRendered": 1,
+            "QueuedAudioBuffers": 2,
+            "FrameNumber": 14694,
+            "DroppedFrames": 32,
+            "PresentationSkippedFrames": 32,
+            "PresentationBufferDroppedFrames": 0,
+            "AudioSubmitFailures": 0,
+            "PresentationQueueDepth": 2,
+            "PresentationQueueCapacity": 1,
+            "PresentationQueueFullThrottleCount": 119,
+            "LastPublishFrameMilliseconds": 0.0052,
+            "LastPublishCopyMilliseconds": 0,
+            "LastPresentationBufferReserveMilliseconds": 0,
+            "LastEmulationFrameMilliseconds": 6.0412,
+            "LastCpuFrameMilliseconds": 0,
+            "LastHardwareFrameMilliseconds": 0,
+            "LastDisplayFrameMilliseconds": 0,
+            "LastAudioFrameMilliseconds": 0.14,
+            "IsInterlaced": false,
+            "InterlaceField": 0,
+            "FaultMessage": null,
+            "FramebufferWidth": 908,
+            "FramebufferHeight": 626,
+            "PresentationGeometry": {
+              "CaptureLowResWidth": 356,
+              "CaptureLowResHeight": 285,
+              "StandardLowResWidth": 320,
+              "StandardLowResHeight": 256,
+              "HorizontalSamplesPerLowResPixel": 2,
+              "VerticalSamplesPerLowResPixel": 2,
+              "IsPal": true,
+              "IsSuperHighRes": false,
+              "FullViewport": {
+                "X": 196,
+                "Y": 52,
+                "Width": 712,
+                "Height": 570,
+                "Position": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "Size": {
+                  "AspectRatio": 1.249122807017544,
+                  "Width": 712,
+                  "Height": 570
+                },
+                "Right": 908,
+                "Bottom": 622,
+                "TopLeft": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "TopRight": {
+                  "X": 908,
+                  "Y": 52
+                },
+                "BottomLeft": {
+                  "X": 196,
+                  "Y": 622
+                },
+                "BottomRight": {
+                  "X": 908,
+                  "Y": 622
+                },
+                "Center": {
+                  "X": 552,
+                  "Y": 337
+                }
+              },
+              "StandardViewport": {
+                "X": 258,
+                "Y": 88,
+                "Width": 640,
+                "Height": 512,
+                "Position": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "Size": {
+                  "AspectRatio": 1.25,
+                  "Width": 640,
+                  "Height": 512
+                },
+                "Right": 898,
+                "Bottom": 600,
+                "TopLeft": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "TopRight": {
+                  "X": 898,
+                  "Y": 88
+                },
+                "BottomLeft": {
+                  "X": 258,
+                  "Y": 600
+                },
+                "BottomRight": {
+                  "X": 898,
+                  "Y": 600
+                },
+                "Center": {
+                  "X": 578,
+                  "Y": 344
+                }
+              },
+              "HorizontalPixelAspectOverride": null
+            }
+          },
+          "audio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "queue": {
+                "callbacks": 16114,
+                "requestedSamples": 33001472,
+                "consumedSamples": 28397844,
+                "starvedCallbacks": 3014,
+                "missingSamples": 4603628,
+                "nonzeroCallbacks": 10431
+              },
+              "callbackErrors": 0
+            },
+            "guestSampleValues": 28401690,
+            "guestFields": 14769,
+            "guestAudibleFields": 10551,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                44,
+                2375,
+                1213,
+                4239,
+                4293,
+                853,
+                854,
+                507,
+                302,
+                89
+              ]
+            }
+          },
+          "visible": true
+        }
+      },
+      {
+        "id": 4,
+        "snapshot": {
+          "utc": "2026-10-18T12:18:31.6833216Z",
+          "qpc": 698055273252,
+          "qpcFrequency": 10000000,
+          "elapsedSeconds": 67.5696619,
+          "state": {
+            "ProfileName": "My CopperStart preview [Lightweight]",
+            "DiskName": "Lotus2.adf",
+            "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+            "Cpu": {
+              "ProgramCounter": 5422,
+              "LastInstructionProgramCounter": 5420,
+              "StatusRegister": 8192
+            },
+            "Drives": [
+              {
+                "Index": 0,
+                "Connected": true,
+                "HasDisk": true,
+                "DiskName": "Lotus2.adf",
+                "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+                "Cylinder": 6,
+                "Head": 1,
+                "MotorOn": true,
+                "Selected": true,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 1,
+                "CanExportAdf": true
+              },
+              {
+                "Index": 1,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 2,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 3,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              }
+            ],
+            "DebugSnapshot": null,
+            "StatusText": "Host clipboard integration is not available in Lightweight.",
+            "IsPaused": false,
+            "IsWorkbenchHandoffPending": false,
+            "IsDiskSwapPending": false,
+            "IsPrimaryFirePressed": false,
+            "AudioFilterEnabled": false,
+            "CopperBenchRequestPending": false,
+            "FramesRendered": 1,
+            "QueuedAudioBuffers": 8,
+            "FrameNumber": 14794,
+            "DroppedFrames": 35,
+            "PresentationSkippedFrames": 35,
+            "PresentationBufferDroppedFrames": 0,
+            "AudioSubmitFailures": 0,
+            "PresentationQueueDepth": 0,
+            "PresentationQueueCapacity": 1,
+            "PresentationQueueFullThrottleCount": 120,
+            "LastPublishFrameMilliseconds": 0.0076,
+            "LastPublishCopyMilliseconds": 0,
+            "LastPresentationBufferReserveMilliseconds": 0.0001,
+            "LastEmulationFrameMilliseconds": 7.8774,
+            "LastCpuFrameMilliseconds": 0,
+            "LastHardwareFrameMilliseconds": 0,
+            "LastDisplayFrameMilliseconds": 0,
+            "LastAudioFrameMilliseconds": 0.1949,
+            "IsInterlaced": false,
+            "InterlaceField": 0,
+            "FaultMessage": null,
+            "FramebufferWidth": 908,
+            "FramebufferHeight": 626,
+            "PresentationGeometry": {
+              "CaptureLowResWidth": 356,
+              "CaptureLowResHeight": 285,
+              "StandardLowResWidth": 320,
+              "StandardLowResHeight": 256,
+              "HorizontalSamplesPerLowResPixel": 2,
+              "VerticalSamplesPerLowResPixel": 2,
+              "IsPal": true,
+              "IsSuperHighRes": false,
+              "FullViewport": {
+                "X": 196,
+                "Y": 52,
+                "Width": 712,
+                "Height": 570,
+                "Position": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "Size": {
+                  "AspectRatio": 1.249122807017544,
+                  "Width": 712,
+                  "Height": 570
+                },
+                "Right": 908,
+                "Bottom": 622,
+                "TopLeft": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "TopRight": {
+                  "X": 908,
+                  "Y": 52
+                },
+                "BottomLeft": {
+                  "X": 196,
+                  "Y": 622
+                },
+                "BottomRight": {
+                  "X": 908,
+                  "Y": 622
+                },
+                "Center": {
+                  "X": 552,
+                  "Y": 337
+                }
+              },
+              "StandardViewport": {
+                "X": 258,
+                "Y": 88,
+                "Width": 640,
+                "Height": 512,
+                "Position": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "Size": {
+                  "AspectRatio": 1.25,
+                  "Width": 640,
+                  "Height": 512
+                },
+                "Right": 898,
+                "Bottom": 600,
+                "TopLeft": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "TopRight": {
+                  "X": 898,
+                  "Y": 88
+                },
+                "BottomLeft": {
+                  "X": 258,
+                  "Y": 600
+                },
+                "BottomRight": {
+                  "X": 898,
+                  "Y": 600
+                },
+                "Center": {
+                  "X": 578,
+                  "Y": 344
+                }
+              },
+              "HorizontalPixelAspectOverride": null
+            }
+          },
+          "audio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "queue": {
+                "callbacks": 16220,
+                "requestedSamples": 33218560,
+                "consumedSamples": 28580534,
+                "starvedCallbacks": 3038,
+                "missingSamples": 4638026,
+                "nonzeroCallbacks": 10471
+              },
+              "callbackErrors": 0
+            },
+            "guestSampleValues": 28595918,
+            "guestFields": 14870,
+            "guestAudibleFields": 10551,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                44,
+                2428,
+                1224,
+                4245,
+                4301,
+                854,
+                857,
+                518,
+                308,
+                90
+              ]
+            }
+          },
+          "visible": true
+        }
+      },
+      {
+        "id": 5,
+        "snapshot": {
+          "utc": "2026-10-18T12:18:32.2329311Z",
+          "qpc": 698060769349,
+          "qpcFrequency": 10000000,
+          "elapsedSeconds": 68.1192716,
+          "state": {
+            "ProfileName": "My CopperStart preview [Lightweight]",
+            "DiskName": "Lotus2.adf",
+            "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+            "Cpu": {
+              "ProgramCounter": 5422,
+              "LastInstructionProgramCounter": 5420,
+              "StatusRegister": 8192
+            },
+            "Drives": [
+              {
+                "Index": 0,
+                "Connected": true,
+                "HasDisk": true,
+                "DiskName": "Lotus2.adf",
+                "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+                "Cylinder": 6,
+                "Head": 1,
+                "MotorOn": true,
+                "Selected": true,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 1,
+                "CanExportAdf": true
+              },
+              {
+                "Index": 1,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 2,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 3,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              }
+            ],
+            "DebugSnapshot": null,
+            "StatusText": "Host clipboard integration is not available in Lightweight.",
+            "IsPaused": false,
+            "IsWorkbenchHandoffPending": false,
+            "IsDiskSwapPending": false,
+            "IsPrimaryFirePressed": false,
+            "AudioFilterEnabled": false,
+            "CopperBenchRequestPending": false,
+            "FramesRendered": 1,
+            "QueuedAudioBuffers": 8,
+            "FrameNumber": 14794,
+            "DroppedFrames": 35,
+            "PresentationSkippedFrames": 35,
+            "PresentationBufferDroppedFrames": 0,
+            "AudioSubmitFailures": 0,
+            "PresentationQueueDepth": 0,
+            "PresentationQueueCapacity": 1,
+            "PresentationQueueFullThrottleCount": 120,
+            "LastPublishFrameMilliseconds": 0.0076,
+            "LastPublishCopyMilliseconds": 0,
+            "LastPresentationBufferReserveMilliseconds": 0.0001,
+            "LastEmulationFrameMilliseconds": 7.8774,
+            "LastCpuFrameMilliseconds": 0,
+            "LastHardwareFrameMilliseconds": 0,
+            "LastDisplayFrameMilliseconds": 0,
+            "LastAudioFrameMilliseconds": 0.1949,
+            "IsInterlaced": false,
+            "InterlaceField": 0,
+            "FaultMessage": null,
+            "FramebufferWidth": 908,
+            "FramebufferHeight": 626,
+            "PresentationGeometry": {
+              "CaptureLowResWidth": 356,
+              "CaptureLowResHeight": 285,
+              "StandardLowResWidth": 320,
+              "StandardLowResHeight": 256,
+              "HorizontalSamplesPerLowResPixel": 2,
+              "VerticalSamplesPerLowResPixel": 2,
+              "IsPal": true,
+              "IsSuperHighRes": false,
+              "FullViewport": {
+                "X": 196,
+                "Y": 52,
+                "Width": 712,
+                "Height": 570,
+                "Position": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "Size": {
+                  "AspectRatio": 1.249122807017544,
+                  "Width": 712,
+                  "Height": 570
+                },
+                "Right": 908,
+                "Bottom": 622,
+                "TopLeft": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "TopRight": {
+                  "X": 908,
+                  "Y": 52
+                },
+                "BottomLeft": {
+                  "X": 196,
+                  "Y": 622
+                },
+                "BottomRight": {
+                  "X": 908,
+                  "Y": 622
+                },
+                "Center": {
+                  "X": 552,
+                  "Y": 337
+                }
+              },
+              "StandardViewport": {
+                "X": 258,
+                "Y": 88,
+                "Width": 640,
+                "Height": 512,
+                "Position": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "Size": {
+                  "AspectRatio": 1.25,
+                  "Width": 640,
+                  "Height": 512
+                },
+                "Right": 898,
+                "Bottom": 600,
+                "TopLeft": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "TopRight": {
+                  "X": 898,
+                  "Y": 88
+                },
+                "BottomLeft": {
+                  "X": 258,
+                  "Y": 600
+                },
+                "BottomRight": {
+                  "X": 898,
+                  "Y": 600
+                },
+                "Center": {
+                  "X": 578,
+                  "Y": 344
+                }
+              },
+              "HorizontalPixelAspectOverride": null
+            }
+          },
+          "audio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "queue": {
+                "callbacks": 16220,
+                "requestedSamples": 33218560,
+                "consumedSamples": 28580534,
+                "starvedCallbacks": 3038,
+                "missingSamples": 4638026,
+                "nonzeroCallbacks": 10471
+              },
+              "callbackErrors": 0
+            },
+            "guestSampleValues": 28595918,
+            "guestFields": 14870,
+            "guestAudibleFields": 10551,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                44,
+                2428,
+                1224,
+                4245,
+                4301,
+                854,
+                857,
+                518,
+                308,
+                90
+              ]
+            }
+          },
+          "visible": true
+        }
+      },
+      {
+        "id": 6,
+        "snapshot": {
+          "utc": "2026-10-18T12:18:40.4161084Z",
+          "qpc": 698142601119,
+          "qpcFrequency": 10000000,
+          "elapsedSeconds": 76.3024486,
+          "state": {
+            "ProfileName": "My CopperStart preview [Lightweight]",
+            "DiskName": "Lotus2.adf",
+            "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+            "Cpu": {
+              "ProgramCounter": 5422,
+              "LastInstructionProgramCounter": 5420,
+              "StatusRegister": 8192
+            },
+            "Drives": [
+              {
+                "Index": 0,
+                "Connected": true,
+                "HasDisk": true,
+                "DiskName": "Lotus2.adf",
+                "DiskPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229\\Inputs\\Lotus2.adf",
+                "Cylinder": 6,
+                "Head": 1,
+                "MotorOn": true,
+                "Selected": true,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 1,
+                "CanExportAdf": true
+              },
+              {
+                "Index": 1,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 2,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              },
+              {
+                "Index": 3,
+                "Connected": false,
+                "HasDisk": false,
+                "DiskName": "Not connected",
+                "DiskPath": null,
+                "Cylinder": 0,
+                "Head": 0,
+                "MotorOn": false,
+                "Selected": false,
+                "WriteProtected": true,
+                "ActiveDma": false,
+                "IsSwapPending": false,
+                "HasUnsavedChanges": false,
+                "Format": 0,
+                "CanExportAdf": false
+              }
+            ],
+            "DebugSnapshot": null,
+            "StatusText": "Host clipboard integration is not available in Lightweight.",
+            "IsPaused": false,
+            "IsWorkbenchHandoffPending": false,
+            "IsDiskSwapPending": false,
+            "IsPrimaryFirePressed": false,
+            "AudioFilterEnabled": false,
+            "CopperBenchRequestPending": false,
+            "FramesRendered": 1,
+            "QueuedAudioBuffers": 8,
+            "FrameNumber": 14794,
+            "DroppedFrames": 35,
+            "PresentationSkippedFrames": 35,
+            "PresentationBufferDroppedFrames": 0,
+            "AudioSubmitFailures": 0,
+            "PresentationQueueDepth": 0,
+            "PresentationQueueCapacity": 1,
+            "PresentationQueueFullThrottleCount": 120,
+            "LastPublishFrameMilliseconds": 0.0076,
+            "LastPublishCopyMilliseconds": 0,
+            "LastPresentationBufferReserveMilliseconds": 0.0001,
+            "LastEmulationFrameMilliseconds": 7.8774,
+            "LastCpuFrameMilliseconds": 0,
+            "LastHardwareFrameMilliseconds": 0,
+            "LastDisplayFrameMilliseconds": 0,
+            "LastAudioFrameMilliseconds": 0.1949,
+            "IsInterlaced": false,
+            "InterlaceField": 0,
+            "FaultMessage": null,
+            "FramebufferWidth": 908,
+            "FramebufferHeight": 626,
+            "PresentationGeometry": {
+              "CaptureLowResWidth": 356,
+              "CaptureLowResHeight": 285,
+              "StandardLowResWidth": 320,
+              "StandardLowResHeight": 256,
+              "HorizontalSamplesPerLowResPixel": 2,
+              "VerticalSamplesPerLowResPixel": 2,
+              "IsPal": true,
+              "IsSuperHighRes": false,
+              "FullViewport": {
+                "X": 196,
+                "Y": 52,
+                "Width": 712,
+                "Height": 570,
+                "Position": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "Size": {
+                  "AspectRatio": 1.249122807017544,
+                  "Width": 712,
+                  "Height": 570
+                },
+                "Right": 908,
+                "Bottom": 622,
+                "TopLeft": {
+                  "X": 196,
+                  "Y": 52
+                },
+                "TopRight": {
+                  "X": 908,
+                  "Y": 52
+                },
+                "BottomLeft": {
+                  "X": 196,
+                  "Y": 622
+                },
+                "BottomRight": {
+                  "X": 908,
+                  "Y": 622
+                },
+                "Center": {
+                  "X": 552,
+                  "Y": 337
+                }
+              },
+              "StandardViewport": {
+                "X": 258,
+                "Y": 88,
+                "Width": 640,
+                "Height": 512,
+                "Position": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "Size": {
+                  "AspectRatio": 1.25,
+                  "Width": 640,
+                  "Height": 512
+                },
+                "Right": 898,
+                "Bottom": 600,
+                "TopLeft": {
+                  "X": 258,
+                  "Y": 88
+                },
+                "TopRight": {
+                  "X": 898,
+                  "Y": 88
+                },
+                "BottomLeft": {
+                  "X": 258,
+                  "Y": 600
+                },
+                "BottomRight": {
+                  "X": 898,
+                  "Y": 600
+                },
+                "Center": {
+                  "X": 578,
+                  "Y": 344
+                }
+              },
+              "HorizontalPixelAspectOverride": null
+            }
+          },
+          "audio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "queue": {
+                "callbacks": 16220,
+                "requestedSamples": 33218560,
+                "consumedSamples": 28580534,
+                "starvedCallbacks": 3038,
+                "missingSamples": 4638026,
+                "nonzeroCallbacks": 10471
+              },
+              "callbackErrors": 0
+            },
+            "guestSampleValues": 28595918,
+            "guestFields": 14870,
+            "guestAudibleFields": 10551,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                44,
+                2428,
+                1224,
+                4245,
+                4301,
+                854,
+                857,
+                518,
+                308,
+                90
+              ]
+            }
+          },
+          "visible": true
+        }
+      }
+    ],
+    "rawFile": {
+      "bytes": 26309,
+      "sha256": "94056632552f5abcee9e1def49114169989865cc6681cbfff985bd5b20ad8448",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/recovery-record.json"
+    },
+    "nativeDeviceState": "Not recorded in old candidate; precise backend/driver cause remains unproven"
+  },
+  "controls": {
+    "oldWaitLoop": {
+      "failed": 1,
+      "passed": 0,
+      "file": {
+        "bytes": 4465,
+        "sha256": "b93d2dd47f7a8e4d27837cfd0174f4d7d2529b0733765e9dd60d7b932913e302",
+        "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/recovery-stall-red.trx"
+      },
+      "skipped": 0
+    },
+    "physicalSoundForFixedCandidate": "UNAVAILABLE",
+    "nativeGuestReplayRun": false,
+    "nativeOutputRestartControlRun": false,
+    "fixedProduction": {
+      "failed": 0,
+      "passed": 8,
+      "file": {
+        "bytes": 17586,
+        "sha256": "2d23941afc3c8b833a02894a0a07d53fd0f73badf471ea032a0c60e60764667f",
+        "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/recovery-stall-green.trx"
+      },
+      "skipped": 2
+    },
+    "productionBuild": "PASS, zero warnings/errors; live workspace solution build separate from frozen candidate",
+    "packagedDiagnostic": {
+      "failed": 0,
+      "passed": 10,
+      "file": {
+        "bytes": 16147,
+        "sha256": "6f58a853e555426248bd82009b7696b41bf6aeb6f14623b6859de1f30e438ae1",
+        "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/ControlsResults/packaged-controls.trx"
+      },
+      "skipped": 0
+    }
+  },
+  "pendingState": {
+    "utc": "2026-10-18T12:57:28.8339187Z",
+    "ownedPackageRegistered": false,
+    "endpoint": {
+      "Status": "OK",
+      "Problem": 0,
+      "FriendlyName": "24G42E (NVIDIA High Definition Audio)",
+      "InstanceId": "SWD\\MMDEVAPI\\{0.0.0.00000000}.{D9AADFBA-92DF-4F27-B98D-739A08DB7421}"
+    },
+    "hostReady": false
+  },
+  "freshWackRun": false,
+  "signedUpdateValidationRun": false,
+  "storeCertified": false,
+  "oldDatedEvidenceUnchanged": true,
+  "references": [
+    {
+      "bytes": 441,
+      "sha256": "4cd4963b4e92467477c4ee02f67e0897085e2cb14e0dee86820d36318963e758",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Storage.cs"
+    },
+    {
+      "bytes": 6018,
+      "sha256": "a45c4215d70a8c3788e5f264e83406891081f64d069e338316a149fa7b2ebbe7",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperOsWorkspace.Recovery.cs"
+    },
+    {
+      "bytes": 11095,
+      "sha256": "092fc88b9752f4946fc0859fbf69b9cd1cab03b7162497dc42b51dfc67abb3ce",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperOsWorkspace.cs"
+    },
+    {
+      "bytes": 2691,
+      "sha256": "ddb505c7ad21bb2382b0600a58938a76f347a09352175b62dd356b555b4fb636",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenAtomicFile.cs"
+    },
+    {
+      "bytes": 3589,
+      "sha256": "2f798db8eb241117309520cf75eba036e8cb24e8bace00155ed7b045f5ad5a52",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenCopperStartRom.cs"
+    },
+    {
+      "bytes": 4340,
+      "sha256": "6174cc1dc7608d2a7a2caf1d43c2fc72c8ef0c687664a0ab8dc1912e8995ad30",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenLaunchWorkflow.cs"
+    },
+    {
+      "bytes": 11474,
+      "sha256": "126a04a4f8eb38f5bcfdf1bb9f4467f96a02cd1b4a2696b057b0f0403ea9ddd1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenProfileStore.cs"
+    },
+    {
+      "bytes": 2912,
+      "sha256": "3a35b8a9b1e8c7c639a714103eaf45642a67a1935ac12252e5e0a6d964f7f4f0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenUserData.cs"
+    },
+    {
+      "bytes": 10809,
+      "sha256": "f20e6fae6bf73a3429d73dc01113b43d1f2e076412c0d1a9d6c9bfe8563d0e09",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Diagnostics/CopperOsNativeStorageProof.cs"
+    },
+    {
+      "bytes": 14456,
+      "sha256": "df9e256652a051f2ff4ffc6ff5d71d314bcc103612eaecdb7d7d5a49a675e2c4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Diagnostics/CopperScreenInstalledMediaProof.cs"
+    },
+    {
+      "bytes": 15082,
+      "sha256": "8eac4f3f9f7e55b71e5df55092f46e8aba42fdb5ea6c71eced7506c927877b9a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Diagnostics/CopperScreenInstalledProbe.cs"
+    },
+    {
+      "bytes": 4445,
+      "sha256": "610c3726aceb25e5c847049dd5dbc3974998406e7c3b55739de773199427d766",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Diagnostics/CopperScreenInstalledRecovery.cs"
+    },
+    {
+      "bytes": 18757,
+      "sha256": "a18ddd8bc16de1a288534e15a478941e8759cff9bd68859a9f348e96c4655ee6",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Diagnostics/CopperScreenInstalledSoak.cs"
+    },
+    {
+      "bytes": 185,
+      "sha256": "5876d245afa84389b11e198eacde64f8bea60a65f41017b2b890b9c455838235",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Firmware/CopperOS.json"
+    },
+    {
+      "bytes": 703,
+      "sha256": "22e1001d18b97afafe6391f4b39a1d0859bca5967b29688320c3e00032c588f3",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Firmware/CopperStart.json"
+    },
+    {
+      "bytes": 2882,
+      "sha256": "2c13b2cf0b6cca11e83963483f69c7aaa3bc1618807d6db92f17eec015dde532",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Launch.cs"
+    },
+    {
+      "bytes": 5504,
+      "sha256": "25da575bbad776ee9b9e2f7e1de625d594b7d8d561c68de4ff417d8e469a9e49",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.WorkspaceRecovery.cs"
+    },
+    {
+      "bytes": 581,
+      "sha256": "a2224da8829cda9b32b0106571fd0b91020d2948f907b854e5eb6c4fbab9e02e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/a1200-aga-ntsc.json"
+    },
+    {
+      "bytes": 660,
+      "sha256": "df5ab7d20e26a2c8c2d249c42cc016bac1ee1a1c653a733da29644b1a6fba07c",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/a1200-aga-pal.json"
+    },
+    {
+      "bytes": 784,
+      "sha256": "7dd70a3eba162bcc2e084511ae151464f226eeddda8957a84ee8bc151c6572ae",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/a500-kickstart31-host-exec.json"
+    },
+    {
+      "bytes": 656,
+      "sha256": "06ea7aa3d1f7c9169183b0f7b2d351ca70492b7d28f09a0a0bf2da561ca33129",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/a500-plus-ecs-ntsc.json"
+    },
+    {
+      "bytes": 652,
+      "sha256": "5200b151b6850a7237c9e3a362c6cadddf99e395ca4dd7d17cd80e2261891f7e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/a500-plus-ecs-pal.json"
+    },
+    {
+      "bytes": 618,
+      "sha256": "2529ca6dea7dd4d2ea6b44782ce0f48444a7b0cd4c0eef4664a36985a784a2e5",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/diagnostic-hrm-copperstart.json"
+    },
+    {
+      "bytes": 569,
+      "sha256": "ff33887a87877ba7d73b423999d3857975b8eafc3d31c97347e42e50eb19c8e3",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-copperstart - singledrive.json"
+    },
+    {
+      "bytes": 569,
+      "sha256": "a3151aed803d1c2d2bb605edb14578420ecb4b83674cf69dbce1ed2bc5327edb",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-copperstart.json"
+    },
+    {
+      "bytes": 598,
+      "sha256": "d0f89d2c3658774ebf563dd0ed1b3dac59f79d7482de9acde24fe2380581f798",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-diagrom.json"
+    },
+    {
+      "bytes": 570,
+      "sha256": "7a375579c83c53e540dd45c7d664a0908ea94418b8d6b2e46d030b5fe0ae83f4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-kickstart13 - singledrive.json"
+    },
+    {
+      "bytes": 570,
+      "sha256": "c8f7115c7ed783234b9dcfae696628692384863b6544f354729aa701907ce893",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-kickstart13.json"
+    },
+    {
+      "bytes": 701,
+      "sha256": "2922bc5758a0fbfb1bb504e03b544699345425af39dffc38439aa4f6d817f767",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68020-copperstart.json"
+    },
+    {
+      "bytes": 723,
+      "sha256": "4114b4746d82b2d1deb67d8da31ee8aac1faf350ec5dc2b15bd31b6f330885ed",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68030-copperstart.json"
+    },
+    {
+      "bytes": 709,
+      "sha256": "d143ad3302a2a229f63604438e54418ac0e8033ad92ce743c899a9348487bdfb",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68040-diagrom.json"
+    },
+    {
+      "bytes": 881,
+      "sha256": "24d97135fddeb952e2870f0d36ec232dc45e067548ed7d6c780d458a4cab4eca",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart-rom.json"
+    },
+    {
+      "bytes": 1019,
+      "sha256": "9a6ff9799b0c55c630ba607268ffee5989858bc342bc299a2b585d6d00468fd2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart31-copperhdf.json"
+    },
+    {
+      "bytes": 660,
+      "sha256": "6ec846159353fe68b3a2fb9c830ef15c1ced4298a9f46f97148f1790b4bab4b0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart31-rtg.json"
+    },
+    {
+      "bytes": 811,
+      "sha256": "0ca3a3d01472fce0f05c6b16cf6673e14b099de776b8ff83293d4f7b2a4840f5",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/expanded-m68040-kickstart-rom.json"
+    },
+    {
+      "bytes": 676,
+      "sha256": "5ee0309f7ae724327745d57e2b52ee621d0cbfa1222811c57edc74478c9d2d21",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/lightweight-a500-copperstart.json"
+    },
+    {
+      "bytes": 656,
+      "sha256": "f90c7e3ec48f77ed89620dae7253e7dae01eef070ab3d7a0011d87e2fb3fcde1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/lightweight-a500-kickstart13.json"
+    },
+    {
+      "bytes": 664,
+      "sha256": "fd2d338975313ebbf375f9c767c4229548486547ac9c8894ddf21b804cfda144",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/lightweight-a500-kickstart31.json"
+    },
+    {
+      "bytes": 568,
+      "sha256": "1bb447a7d54e273195079967674443be23942fb0699f36d0ffbd92e386d69b89",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/lightweight-a500-minimal-disk-boot.json"
+    },
+    {
+      "bytes": 505,
+      "sha256": "61fcd0e3780918e4b4677cf56255f26a4a5d6b2cf51b89a861b38178a862a015",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/vanilla-copperstart.json"
+    },
+    {
+      "bytes": 506,
+      "sha256": "68802075894faeeb2199caffd378e9a159054b02d49b79bb5e57501b07cc183a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Presets/vanilla-kickstart13.json"
+    },
+    {
+      "bytes": 936,
+      "sha256": "68695fcc7764cb0ec20ca222d2bf90667ba3e9b2bb6ccfeff2c936e43129cfdd",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/app.manifest"
+    },
+    {
+      "bytes": 1723,
+      "sha256": "13df14a8894da84f415b03c5fbabccaa4b26ff1af1a4cbe6ea6c8c6d9a7454c2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/packaging/msix/AppxManifest.xml"
+    },
+    {
+      "bytes": 4707,
+      "sha256": "908931fc81a63659046f1ba2bb3746d51a8f69020e819d3f90f5abd4dee4e9be",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AdfDiskMedia.cs"
+    },
+    {
+      "bytes": 861,
+      "sha256": "149a20691a57a95ee10cf596e59613fbf7d7998f663c084afdcb1da3c91381e1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDiskException.cs"
+    },
+    {
+      "bytes": 1124,
+      "sha256": "d45092739e5bc08bc5765150a0c5dba852d7534526034468b720420ef96421d6",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDiskGeometry.cs"
+    },
+    {
+      "bytes": 691,
+      "sha256": "44926a0a09a61cd873d8d524e1c1e9b56247f262214b765eead1cdfb6a00aa60",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDiskLoadOptions.cs"
+    },
+    {
+      "bytes": 866,
+      "sha256": "b3b940c2a2cf23114a7bcc98308462436bac3b596fb9ae05770fca2194ab0afa",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDiskLoadResult.cs"
+    },
+    {
+      "bytes": 14244,
+      "sha256": "6382665838ccca1a70aa54f30ea07fa4aba4406f2d0b30ee6681565a436e5b9b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDiskLoader.cs"
+    },
+    {
+      "bytes": 7374,
+      "sha256": "b79d3288cfe226a8615b7204cd2ec48d5e4f6438ab1df44c3a68c25b4feec4b6",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDiskMedia.cs"
+    },
+    {
+      "bytes": 11883,
+      "sha256": "a4b4467cc43cf098832ec75592aa6e18414dfd11014a9f4e800aa7047915c68b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDosTrackDecoder.cs"
+    },
+    {
+      "bytes": 6575,
+      "sha256": "c43c8ce3de8a1a5d4bdfbc0dd55e739d56ae6ff3fe1fa536a0ce45d6129e0299",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaDosTrackEncoder.cs"
+    },
+    {
+      "bytes": 9330,
+      "sha256": "aa0126cee43a68da87e83d3d26480ce383245e1559ce2da32ae7212084d0fad2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaEncodedTrack.cs"
+    },
+    {
+      "bytes": 31672,
+      "sha256": "9c52a79e0d65e622341e0a897f12a9132a88bcf8c3dd1b0fdb78ce22bc65ee5a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaHardfile.cs"
+    },
+    {
+      "bytes": 1421,
+      "sha256": "c2dd9e52f8256643be4f219532db1ae084fb99629653069b040016d917ff3ee8",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AmigaTrackRegion.cs"
+    },
+    {
+      "bytes": 221,
+      "sha256": "6c77e4e5f4c05e2946a35521b0ce28a94358029dcb5290ff108146c5bf6d65d6",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/AssemblyInfo.cs"
+    },
+    {
+      "bytes": 1364,
+      "sha256": "2630ef5c92bde5ab744dc31fc5bc134bf6e7c657b857dc039132adb510f6d255",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/BigEndian.cs"
+    },
+    {
+      "bytes": 2279,
+      "sha256": "35ce42174036d251008bbbab5f9ec1360738abeaaad76d494f32760906f18f63",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/CopperDisk.csproj"
+    },
+    {
+      "bytes": 34236,
+      "sha256": "ccf7e3b7b610fe77fb946313ca3b6445f863159d4005a96d4f7b266cb2a4d69f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/DmsDecoder.cs"
+    },
+    {
+      "bytes": 7430,
+      "sha256": "3553f174ae9700300e8d98b2b799e99a557c9b6968ba2dacf64b33824f65d638",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ExtendedAdfDecoder.cs"
+    },
+    {
+      "bytes": 467,
+      "sha256": "f673f97ef9374123e33047f65a5854d549c08ddd6b4f21fac72509477afed1fb",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/IpfDecodeException.cs"
+    },
+    {
+      "bytes": 855,
+      "sha256": "decbe4202f04323e3f36653db89e2e906cf70a895fd79c5473c94dfe52852908",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/IpfDecodeOptions.cs"
+    },
+    {
+      "bytes": 30452,
+      "sha256": "be6c90e5df4836576185b2da43cba99cfa85a74d5b3f882c7ba6cbc1cd4c8a6d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/IpfDecoder.cs"
+    },
+    {
+      "bytes": 1380,
+      "sha256": "094926013836f02b36a821c34f1ae609ccf19e384a8b0730462a64942a8b29d2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/IpfDiskImage.cs"
+    },
+    {
+      "bytes": 2489,
+      "sha256": "71c929345fa9b17d2033e920695cfd17862cfa518890dc03d25d42688b4c1c67",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/IpfTrack.cs"
+    },
+    {
+      "bytes": 1040,
+      "sha256": "45c0016dc22cb79e5e22fdc06cc9b689f27d81165c04de018ba70a0d2ca937ea",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ReadOnlyAdfDiskMedia.cs"
+    },
+    {
+      "bytes": 471,
+      "sha256": "dfb9354d44e7b9b8c1c910549d4fbbfb47082ddd0e898754ed789c57370a94a0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ScpDecodeException.cs"
+    },
+    {
+      "bytes": 1159,
+      "sha256": "0e7475656a9e7b9b31a5a862d668fb1329f023ea8afdd5b469a96807e809d76c",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ScpDecodeOptions.cs"
+    },
+    {
+      "bytes": 12831,
+      "sha256": "70e03fa204622a7fd429579bbfe30b8b6050bf4dd8bb793322b58c5a7741448e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ScpDecoder.cs"
+    },
+    {
+      "bytes": 1312,
+      "sha256": "703375d8ed27ebd648a313ccaecabff7417d66b05a66b4fdd49cc3d53565d53a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ScpDiskImage.cs"
+    },
+    {
+      "bytes": 1789,
+      "sha256": "ca7b0b174026cdf674d2656b5a723aeea165d5bbd459104066aceb020d8fc659",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/ScpTrack.cs"
+    },
+    {
+      "bytes": 3352,
+      "sha256": "1b0d82c8c455b08772e0a74517d420aa18e001f6fa3e4956c00e2906c901bb71",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/TrackBackedDiskMedia.cs"
+    },
+    {
+      "bytes": 66,
+      "sha256": "a4364d81a6de2707d66fbced18fbbc926c882ab96e1d1aebbb17e871285b9d75",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/packages.lock.json"
+    },
+    {
+      "bytes": 181,
+      "sha256": "220120098395a637162a315523d2b6a2240b89917e816307fab883123181ae16",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/AssemblyInfo.cs"
+    },
+    {
+      "bytes": 2441,
+      "sha256": "51da70b6bcdd68b9141a8503dd27fd71b845ed1b1135321e8fabdd70742704d8",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj"
+    },
+    {
+      "bytes": 4045,
+      "sha256": "04c560f0e5f34c2d19def4dff5525303c52361f2d5282524b091eaf04ba299d4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA1200Io.cs"
+    },
+    {
+      "bytes": 4010,
+      "sha256": "92014e1145e8fd6bfbe32279a02f0783515680893d7eb70e654443c0d005550e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs"
+    },
+    {
+      "bytes": 2316,
+      "sha256": "dc5e15a16433f2ffcd8cd3916eadeea24ee2dbea53d37bc146c2d158b06b2f2b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Aga.cs"
+    },
+    {
+      "bytes": 2519,
+      "sha256": "8ad12803779c245824e665f8cf1b65cf1e817eb8bfc687ac297dd062e823bf70",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs"
+    },
+    {
+      "bytes": 5564,
+      "sha256": "1a2177ada30a4b4396c840caed74758aa52aad7c72ff2a3773c87d361ed52cf4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Jit.cs"
+    },
+    {
+      "bytes": 106362,
+      "sha256": "a538245dd917d064f0f4673fae0669db18d34a4141223e16ee27d4f6081002e5",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.cs"
+    },
+    {
+      "bytes": 6921,
+      "sha256": "a445e61b81ee60f96605a6af5e841b8c92dd7e2688be4a8b3cc41e6d215a1df3",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs"
+    },
+    {
+      "bytes": 1718,
+      "sha256": "be840b5cc6259efa30c9a9e22940e1f2dcd8a29d91eb3d06697f9e739ba5b5ec",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs"
+    },
+    {
+      "bytes": 15817,
+      "sha256": "71473a7fcb265ed7316279a62b6048ebf9eeca745e10d77acb4f46c3e161f1dc",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightAutoconfig.cs"
+    },
+    {
+      "bytes": 20179,
+      "sha256": "8aefe9b4c36d878ad586fc6ebf07e32344732489692c578f7f82657eec86a41a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightBitplanes.cs"
+    },
+    {
+      "bytes": 37615,
+      "sha256": "4f544de0f6d8446dd21c726d3e340efc248126d8418f41f1cb5a2e55b83f0d99",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightBlitter.cs"
+    },
+    {
+      "bytes": 1662,
+      "sha256": "6d4d469525d384697d7765c84cf4eb8a4513b9c34c739070cf1d279a70ca16ec",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightBusArbiter.cs"
+    },
+    {
+      "bytes": 22554,
+      "sha256": "5ca6b61e6e3d2c59fcd8f1acc8929fde97a18a4b2bd7d72a99f128576cc48152",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightCia.cs"
+    },
+    {
+      "bytes": 10990,
+      "sha256": "c73197e90173e0441972199fda9f12b4ecaf06683d665f53e2c0e71da0006365",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightClock.cs"
+    },
+    {
+      "bytes": 2174,
+      "sha256": "818e0bcf6605f370da1ab464cb9341c479a0dc385f6aa5c2fdbb5eb46931a5db",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightControllers.cs"
+    },
+    {
+      "bytes": 15339,
+      "sha256": "ed998714e024a6e8c89e2e06c43b3b53cb441014c9c09924ff55ecb3711911ad",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightCopper.cs"
+    },
+    {
+      "bytes": 70310,
+      "sha256": "6b3924858ef4fbc4de69f9177dd74cb040299a9c3eaea745b2127c79e1ee9b63",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs"
+    },
+    {
+      "bytes": 3887,
+      "sha256": "d0fe3276155110976812a1789b8de91233f5ade3a61694daf5ef527855380adb",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightCpuBoundary.cs"
+    },
+    {
+      "bytes": 301,
+      "sha256": "5db47e674024d18f72fcc346a0b3e278f4b883674ed06694048a3f782531b4ec",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs"
+    },
+    {
+      "bytes": 11066,
+      "sha256": "bf655e8b88837f4820f8d95d4544f558185176537f9a1e9e9204c23f5e35c4a5",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightDiskDma.cs"
+    },
+    {
+      "bytes": 3577,
+      "sha256": "21ab816a0f76ca00bc889e1cc5a687e533b943559f9cf25d02f5691f50d8771a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightDiskReceiver.cs"
+    },
+    {
+      "bytes": 4970,
+      "sha256": "5aa94cacbf2d146dac4c281e7b470e2b1a4e44c84a5c498d0bf7ebfe93cbf61e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs"
+    },
+    {
+      "bytes": 1027,
+      "sha256": "b9f16fa8d3467c200fb06c8230a831561ad385408b57c1b04424bb068601e7a7",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs"
+    },
+    {
+      "bytes": 897,
+      "sha256": "d31e35c1e53ccbf60cc571f191c7f91e977a688032adec00dbbcdfa9611fed37",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs"
+    },
+    {
+      "bytes": 4204,
+      "sha256": "4c17f39c80af27b4bf69e45a65aa3d01e2b90295d0c780d329501247c1464709",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightFastRam.cs"
+    },
+    {
+      "bytes": 13952,
+      "sha256": "1bfa551ba1dbb5d8831b37cc22c2524d3393a6a3a414f9141aa0cc3535ee6d1f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs"
+    },
+    {
+      "bytes": 218,
+      "sha256": "8e59f1f44152a515f9bf4c0c4daf37a2b127811e500f4d00040e352f9466cb78",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightFloppyFormat.cs"
+    },
+    {
+      "bytes": 3484,
+      "sha256": "1a7b8fb69a9226c5bf07f7fa6100860f7b4ee6ec56e546694e03061d42a1df52",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightFloppyImage.cs"
+    },
+    {
+      "bytes": 8166,
+      "sha256": "ee381ebace9c74c0a53a9261583dd92859ea593f7f29d110ceff951b48af98dd",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightHdfBus.cs"
+    },
+    {
+      "bytes": 18164,
+      "sha256": "d4d9592292aa33b13930bd69a88dfa9fe305d5d5f4d15023335725f9677cc4f1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightHostDirectory.cs"
+    },
+    {
+      "bytes": 1471,
+      "sha256": "6219200a33ae2527f62005daf50ad80eede67f32e3a8a640e777dc3d5732ae4c",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightHostDirectoryConfiguration.cs"
+    },
+    {
+      "bytes": 38215,
+      "sha256": "fae5563b0ccfa04296d119656c36f4bfb85f94daeb1499ca081b23a8d44dbf0a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightHostFsController.cs"
+    },
+    {
+      "bytes": 6609,
+      "sha256": "5539eaca99eb4e4b4544dad015566b190867764a2836306405d384196bd7b2b3",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightIpfImage.cs"
+    },
+    {
+      "bytes": 6875,
+      "sha256": "fed9c9e6d6288db28773b9e4a27d2099aeb18ef4873d0a08ed33cd09c1b9358f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightKeyboard.cs"
+    },
+    {
+      "bytes": 3919,
+      "sha256": "458bbd8434405565302b2c5b7e3f1df1fca7f67c30fb87869cb027df41be8a78",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs"
+    },
+    {
+      "bytes": 23359,
+      "sha256": "dde8ac29ee331f8afd688b52df712cc672d4c9b69f5b84ac8f284c99feddd33d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs"
+    },
+    {
+      "bytes": 4457,
+      "sha256": "13f4cd4ae0bfa57dc32c54c5684b4f10f734124dbabe815de93843a828a5b2c8",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightPaulaSerial.cs"
+    },
+    {
+      "bytes": 2611,
+      "sha256": "e43c1f7bd537bb27700987a5640c8e611e79a7bb42aa29d2c95057bafeb12c73",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightPotentiometers.cs"
+    },
+    {
+      "bytes": 10684,
+      "sha256": "c5b8537da0d0635aa39949001dec50e7000ef33d704eea0a76fb320f564f16cb",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightRealTimeClock.cs"
+    },
+    {
+      "bytes": 11254,
+      "sha256": "69583594d395c018893bd991ecd911c01ac8d8cffd5315d726abe4c7fac7cf38",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightRegisters.cs"
+    },
+    {
+      "bytes": 18571,
+      "sha256": "97ca28ffdda858b0c7b0068b68cc040022d331c23604433e4accb02812192155",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs"
+    },
+    {
+      "bytes": 8992,
+      "sha256": "f694e3ef28961c03868bd6dc23ff2d98c308178a308d5246868b0772da479167",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightSprites.Aga.cs"
+    },
+    {
+      "bytes": 32634,
+      "sha256": "d62e125fa6b7433579d5bca4a930b58f7a6f55b7e4d40a40f799609240f231ab",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightSprites.cs"
+    },
+    {
+      "bytes": 10247,
+      "sha256": "3d606a2c69bc3fcdb0c133cc9d09770a3c9d1cd359c1838ada40675a0f7e518a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightVideo.Aga.cs"
+    },
+    {
+      "bytes": 9228,
+      "sha256": "90adb59d3998128d3a4d55759fc9c6f7b64c303bcc036ff2d2fd49ceadaa488f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs"
+    },
+    {
+      "bytes": 41708,
+      "sha256": "012837e982eb51a27235498dfe82f1bc6c419acf63cb4dfd6a624964d5c24b66",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/LightweightVideo.cs"
+    },
+    {
+      "bytes": 708,
+      "sha256": "d42fd357db656ddae956fe4bc47470c3f16e34d2fe301ba3c48171ec7fc6a16f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperMod.Amiga.Lightweight/packages.lock.json"
+    },
+    {
+      "bytes": 9997,
+      "sha256": "affb92e700e6429f740d48596d264e7b23487728566421454d34a1101a64c76a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/AmigaHostKeyMapper.cs"
+    },
+    {
+      "bytes": 1261,
+      "sha256": "dd0ba4020e056d418036e2465930f579c7c585884728a4ee1222e836cf120959",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/App.cs"
+    },
+    {
+      "bytes": 283,
+      "sha256": "bbebfd4fb5b7dd7311bb837b62c151e2c957592b95cf744a0aa2c8e41d10c601",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/AssemblyInfo.cs"
+    },
+    {
+      "bytes": 76835,
+      "sha256": "3dd838970d4b0b4f05e8fea8a255466fe4b71a321e3e73dbf760ecbc04a25139",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Assets/CopperScreen.ico"
+    },
+    {
+      "bytes": 1874,
+      "sha256": "b9de8c901e4259d1093a519e4137182b8e3f1db313e79e387fd830ebb6123a35",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperBenchUnavailable.cs"
+    },
+    {
+      "bytes": 3030,
+      "sha256": "ae24c4a13ae20056856b8cb57db69d375dda3d73095003718a7201affddb0802",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreen.csproj"
+    },
+    {
+      "bytes": 2963,
+      "sha256": "15974fda314b09e800098db3743420c703a3d4a783745e7b27e12c8bffb60634",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenAdfImage.cs"
+    },
+    {
+      "bytes": 3829,
+      "sha256": "4f19e646e0ae265044e4788a47900b68547b2fff02979af934753a69b367d450",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenAppearance.cs"
+    },
+    {
+      "bytes": 559,
+      "sha256": "fbb5ef7006cb1f29da71ef64a21489258141541eda794cf642cacf4d1de6e21b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenAudioGain.cs"
+    },
+    {
+      "bytes": 3613,
+      "sha256": "a6ed093afb1d0c3168daf2d7641e0e1e802afff2cf68cf617bd0fa6e748de5a8",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenAvailability.cs"
+    },
+    {
+      "bytes": 9617,
+      "sha256": "09d67227087a44618be8a28ce500be0a89abd68fe7ed30044b6b297e567a8812",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenBootAssembler.cs"
+    },
+    {
+      "bytes": 4196,
+      "sha256": "3087179cd5369acd137e6b0a7f62ff692794e8ea08e6891cdfeef944e407ad22",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenCrashLog.cs"
+    },
+    {
+      "bytes": 16567,
+      "sha256": "3ed33bea49522e13cae9e390a8a855cb712104e197b2af90c54efe680ff560df",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenDebugSnapshot.cs"
+    },
+    {
+      "bytes": 10823,
+      "sha256": "8e5517b612adc5619fb8642c807e6ecaea4610ab8c53384519e89d9ecc3c5df1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenDiskImageArchive.cs"
+    },
+    {
+      "bytes": 3102,
+      "sha256": "d15531962a0e41ff85f02ad429440cd42f3f4bfbee2f62203a59ab05eef52bf0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenDiskNavigation.cs"
+    },
+    {
+      "bytes": 3561,
+      "sha256": "34e13dc1ec73e0e6e3878908996a2e2c738ce1b1dcfb0d2a127ae9355225a5be",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenGamepadInput.cs"
+    },
+    {
+      "bytes": 265,
+      "sha256": "ff559850fc329c0f0a169246f33dcdd22a305c50eb606290639ae85f6e87dabc",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenHardfileSettings.cs"
+    },
+    {
+      "bytes": 901,
+      "sha256": "b0ff7ccafa5a2d7b9f246902612bd9f18a6015c548fa5cda6ff8f83ae99c8a3d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenHostTypes.cs"
+    },
+    {
+      "bytes": 10433,
+      "sha256": "8a61c9a7efaf171383643ca821ec6798981878934d3012260798c11c95ea3eaf",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenInputOptions.cs"
+    },
+    {
+      "bytes": 5188,
+      "sha256": "cb25999c0d3fd9c16f461b984afb63b2c3d185b350b2e38ec20ad740bbd70186",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenKickstartRomArchive.cs"
+    },
+    {
+      "bytes": 34833,
+      "sha256": "f0d2c47261b2dbe2c69cf23dca12d641fc5a33812b104f15df71b2422da2c191",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenLightweightSession.cs"
+    },
+    {
+      "bytes": 5918,
+      "sha256": "f4ae73f1f057c0700960dc8a33e15f291ced43f7ddcdd18deea7531bf0027618",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenMachinePresets.cs"
+    },
+    {
+      "bytes": 4830,
+      "sha256": "c830128321c55a6d9a1658ae54c57344f63a4f4fdd993b34327fff6cbb608fa9",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenMachineProfileTypes.cs"
+    },
+    {
+      "bytes": 4705,
+      "sha256": "004f7709fe49ddea20f10d7f00a32df98bb4b9a477180241e1c45d7e80e88a0b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenMinimalBoot.cs"
+    },
+    {
+      "bytes": 1734,
+      "sha256": "b1c7316d01a76c837461a7230afd5abddcf5dbab5501efe88e1893faed2b0acc",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenPresentationGeometry.cs"
+    },
+    {
+      "bytes": 2660,
+      "sha256": "68545a8edac17095a61c9665c4a21397ec631d6089ffa67b2fe5569111aed574",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenPresentationOptions.cs"
+    },
+    {
+      "bytes": 36279,
+      "sha256": "2a4fd040f7d8e93a11d391aabda68be20ea115afd368f8e2aa4832e169703fcc",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenProfile.cs"
+    },
+    {
+      "bytes": 3764,
+      "sha256": "198cfffed6fd614a7e422842ea84717298188166c1be6f33a1793ceee4fb4f7d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenRecentSession.cs"
+    },
+    {
+      "bytes": 44862,
+      "sha256": "b5d1636096be8e106d9c23fee80dd8067b5b9649335edbf755f1ba4196b2b190",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenRuntime.cs"
+    },
+    {
+      "bytes": 20892,
+      "sha256": "249d8fc3ccd822da7b145e3ac785b4d621b5a697e2fa8001fa1332a1c7d4db1a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenSettings.cs"
+    },
+    {
+      "bytes": 34034,
+      "sha256": "c4565f756c7fc2be1726e1fbafb78f954e285d767b73d35819719d037c8afaa0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperScreenStartupOptions.cs"
+    },
+    {
+      "bytes": 246,
+      "sha256": "27112cf595747543d531ddc4f7a1d1b43e97d0cfd4c597afb799e564e13c6fef",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CopperStartMetadata.cs"
+    },
+    {
+      "bytes": 4251,
+      "sha256": "8b6de4b8d86543732aa951d95ca9b6a2387e9f2aa6927294b25e961a75f79ad7",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/CrtPhosphorComposer.cs"
+    },
+    {
+      "bytes": 21455,
+      "sha256": "629bfe8cd14d70d297fd0875d97b9937ca2e2439804e738267550e54002fcf7d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/FloppyDriveAudio.cs"
+    },
+    {
+      "bytes": 1689,
+      "sha256": "2b799209bce440aa72f1dabb954915cbd3752066cb459e94260819ad7765ac94",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/FloppyDriveAudioOptions.cs"
+    },
+    {
+      "bytes": 12573,
+      "sha256": "99f5c2ed98a210f8369683f258c780437a622be9587f104785c6b5f94d9edea1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/FramebufferPresenter.cs"
+    },
+    {
+      "bytes": 53,
+      "sha256": "2efe61d124d2af15f2be26f47717f75366fed031e66cd90122fc95e42c86e3f0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/GlobalUsings.cs"
+    },
+    {
+      "bytes": 4288,
+      "sha256": "9c3174f615424e6de99ee8991a0f4c518edf76decab4b8432051b078c7509cef",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/ICopperScreenSession.cs"
+    },
+    {
+      "bytes": 5203,
+      "sha256": "ceff5611237115954abe1031c5cd68756366ca0a5681037a81930c109f24d5f1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/InsertDiskScreenRenderer.cs"
+    },
+    {
+      "bytes": 12177,
+      "sha256": "eeb5ef9625db8468faebef3fca617af4317438afbc312e4845e60c9054d078c0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Drives.cs"
+    },
+    {
+      "bytes": 12428,
+      "sha256": "88a48e80239534c15762c9602ec029ac6b97710f7a9163f6257d8cc5fda82a72",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Input.cs"
+    },
+    {
+      "bytes": 8362,
+      "sha256": "a5a4afbdcd433912f74b850f514d739a3d604f7c2900964d0c4d721f8f552bfd",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Machine.cs"
+    },
+    {
+      "bytes": 27437,
+      "sha256": "6e84a8309fba912fe415042a4a1811973d69197f7b178093e5d301a4b2ceedcf",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.SettingsUx.cs"
+    },
+    {
+      "bytes": 5056,
+      "sha256": "02c30d993e4a46b1073db934c09f4a875c093cc518b32104377d28707593f23c",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.SharedFolders.cs"
+    },
+    {
+      "bytes": 27262,
+      "sha256": "8cbdd69fcf3b94bea575040d8566a8a3d25d2f0fb15d19d6916bb2deb2b9110f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Shell.cs"
+    },
+    {
+      "bytes": 7935,
+      "sha256": "5b80d74014867cb93bb00db1d540c0760ee4e6d41e95be8a9705f25d0a0738c9",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Storage.cs"
+    },
+    {
+      "bytes": 27010,
+      "sha256": "22b689629c28bea9b4d17608c4cd72b54ffdd73f57b16374c6822587e617ca1a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.Welcome.cs"
+    },
+    {
+      "bytes": 153671,
+      "sha256": "38445af3bbb3f7798fc1a19165e1fde652a2ba268716005a9449ea73897b1f53",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MainWindow.cs"
+    },
+    {
+      "bytes": 10439,
+      "sha256": "37af8ce7ff95e6cac80f1847efa862d74cee3a7bc2b7a0e6e2657fb366358ea0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MiniaudioAudioOutput.cs"
+    },
+    {
+      "bytes": 2138,
+      "sha256": "f17806b6488d205bd886e736c8b133fc5a8b9aa4a525188d1dafc59d5463d81a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/MiniaudioSampleDecoder.cs"
+    },
+    {
+      "bytes": 2370,
+      "sha256": "19385c384f06619e552193688330d851a2c6d587842f1427e57ca65837bf536a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Program.cs"
+    },
+    {
+      "bytes": 871,
+      "sha256": "88d25d24956620a90a0cefe33412bd576a3537ec6c2f43254e493c9392bdf0f1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/SettingsWindow.cs"
+    },
+    {
+      "bytes": 10428,
+      "sha256": "9db71ac7947ff9c724e07d7d17b5ac49b2bbdad84977b3a285f63f20524ac39e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/packages.lock.json"
+    },
+    {
+      "bytes": 131,
+      "sha256": "e5adca3f2ec2f649b0fbd3fb92812e95231ff28a955f22da152faa73746c4a35",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/Directory.Build.props"
+    },
+    {
+      "bytes": 87,
+      "sha256": "ec7d038183957f0f2dd09078668ab7866560a585b3566836e5ecd105796260f4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/global.json"
+    },
+    {
+      "bytes": 695,
+      "sha256": "9ce761d4211b1fd7ded5da1fe132aa49e40dbce2971af74d012af592500051e0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/NuGet.Config"
+    },
+    {
+      "bytes": 1089,
+      "sha256": "61e05df922ae668cc3719d961485cf0571236f055db025a7a58d89d8310a0670",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/LICENSE"
+    },
+    {
+      "bytes": 1015,
+      "sha256": "3788bf9d3405ecc9c8e01984cc315643beefc5828e04ed06fafe0ee694206a84",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/THIRD-PARTY-NOTICES.md"
+    },
+    {
+      "bytes": 373,
+      "sha256": "f3c1be3e0d56d0ee697f627def402f76a9e69b9f0c147f0eaceffda36e26b8cf",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperDisk/THIRD-PARTY-NOTICES.md"
+    },
+    {
+      "bytes": 17973,
+      "sha256": "82a75677568eab2a41ceb38cf975c580c75e27c1a252c8b0ca5d5c8aeb0449a1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/CopperScreen/Firmware/MinimalDiskBoot.s"
+    },
+    {
+      "bytes": 10655,
+      "sha256": "c78c04805248d4f8303cdfc2e81e5300908b3e75c3c650b6bbe4c51018182962",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/scripts/package-msix.ps1"
+    },
+    {
+      "bytes": 14760,
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Source/scripts/msix/CopperScreen.Msix.psm1"
+    },
+    {
+      "bytes": 588,
+      "sha256": "3392ada5145b6ae73a15618a054cc21b6885fcb88b32545e77d6413d62bcdec1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/preparation.json"
+    },
+    {
+      "bytes": 381,
+      "sha256": "9a4daf038540dac00773efb52fd6824073577301dc3ad1789dd1369399a35631",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/source-delta.json"
+    },
+    {
+      "bytes": 172,
+      "sha256": "6e9237dc7222cd88565cf4bf1b3bb34367f9373e40241eec69ad2b435a41c337",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/payload-verification.json"
+    },
+    {
+      "bytes": 323,
+      "sha256": "9f22f1f00e9bd0bd9e8c4c886b1faf050f9261dd062f712842bbb7a8e689c1ae",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/pending-state.json"
+    },
+    {
+      "bytes": 684,
+      "sha256": "03f6246471f933a6185155999f67268c3830c6312789ada2afa16e4cd6e659d2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/restore-preparation-correction.json"
+    },
+    {
+      "bytes": 434,
+      "sha256": "98a64f0a4c2053387da4250e416a9eb4e84190f7d1c95a5fb9aea307dbdda7be",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/cache-path-correction.json"
+    },
+    {
+      "bytes": 690,
+      "sha256": "778ef019efe32ad7f9e3187de58da31841b9c3a26e3ed093c7ea4757faeaf7e9",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/audio-preflight-inventory.json"
+    },
+    {
+      "bytes": 873,
+      "sha256": "6fd0dd29d7e11e0a161638c45fa390715b8c3712b05b4a2b6ea5d65a8d29907d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/packaged-controls.log"
+    },
+    {
+      "bytes": 5396,
+      "sha256": "8233202533665845365daf542a71f08a4712e69e43c53d90f5490ea6b2b6902b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33/publish.log"
+    },
+    {
+      "bytes": 120550,
+      "sha256": "9da2067499b37b922967c103f80d76c52d2eca8476b5096cc06003120a6c4c49",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Retry/publish.log"
+    },
+    {
+      "bytes": 1671,
+      "sha256": "9127a1f8fd176aeaa50b11dc662d3089cdd428baa5a3334aa17dfb3d301c5223",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Final/publish.log"
+    },
+    {
+      "bytes": 68500,
+      "sha256": "834f829c61145added858e4b2f78a42613d7fc141228fdd87beeb15deb95a7b0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Signed/package-record.json"
+    },
+    {
+      "bytes": 83113,
+      "sha256": "5ef31c3a4e9c170ffc6184a40a18448ac546f840aad62161f1fd99c97213b784",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Signed/makeappx.log"
+    },
+    {
+      "bytes": 258,
+      "sha256": "f996f69a605cc90b0b89fcf9861b8f0f356240143c7cd44136c8f46cff9bbece",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Signed/signing.log"
+    },
+    {
+      "bytes": 1239,
+      "sha256": "40beb3c01743092404eb8af454ac5cfb14fcfec34a8e27345a1b34186601dc5d",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Signed/signature-verification.log"
+    },
+    {
+      "bytes": 49557993,
+      "sha256": "e6b68cb397ca5ed1fb6f1961b94f2038061be5ba629688d9ef301b1d7f8f11d4",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/Package33Signed/CopperScreen-1.1.33.0-win-x64.msix"
+    },
+    {
+      "bytes": 2391,
+      "sha256": "514c8a7b12910d29878a823032f7475adf2111853fa71df77e5d1b12465a530d",
+      "path": "artifacts/recovery33-controls-e5a71d/Controls.csproj"
+    },
+    {
+      "bytes": 2962,
+      "sha256": "ae6eca32e0c12044c3eba55d83eed20f57e23c240432dc4d63196596cd1d2952",
+      "path": "artifacts/recovery33-controls-e5a71d/InstalledAudioTelemetryTests.cs"
+    },
+    {
+      "bytes": 2891,
+      "sha256": "cb2e0790ae26e7749086b1e2a923514c66e350e5e029db56e0438d8aee6b8069",
+      "path": "artifacts/recovery33-controls-e5a71d/MiniaudioSampleQueueTests.cs"
+    },
+    {
+      "bytes": 695,
+      "sha256": "9ce761d4211b1fd7ded5da1fe132aa49e40dbce2971af74d012af592500051e0",
+      "path": "artifacts/recovery33-controls-e5a71d/NuGet.Config"
+    },
+    {
+      "bytes": 3759,
+      "sha256": "d702ebadbb162de61b846ec6392ba25b8cbe7b6069c0ed767ac9ce33ec843d5c",
+      "path": "artifacts/recovery33-controls-e5a71d/packages.lock.json"
+    },
+    {
+      "bytes": 7867,
+      "sha256": "55a9d9b8f571dbd47aa38dc92b194ae5a8ddce1b0f3a6411dcfc3d7177d5ff5c",
+      "path": "artifacts/recovery33-controls-e5a71d/RuntimeAudioPacingTests.cs"
+    },
+    {
+      "bytes": 474,
+      "sha256": "340ef9e2786f2f13c87ac1ebf9297a03ca320be649e7d640208f44121abe25f0",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/config.json"
+    },
+    {
+      "bytes": 548,
+      "sha256": "7390aa7100644f65a8cef54dff942b806d00e2103e64bcdf42649aba3899e282",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/frozen-controller-host-inputs.json"
+    },
+    {
+      "bytes": 1084,
+      "sha256": "1ce6cd41fb030fcc70dc2f3f2aae2094b769a54f3f482780abb8f8e1ffe4612c",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/preparation.json"
+    },
+    {
+      "bytes": 1227,
+      "sha256": "abe64a2899676d08f18d349d9dda4eddaaf4282734933390f1970eb3d0195986",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/prior-evidence-before.json"
+    },
+    {
+      "bytes": 576,
+      "sha256": "4c8660a7757e6b3eb6748b379b8a891bb620408cbb38da394c4c23c30dc1667a",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/prior-failed-attempt.json"
+    },
+    {
+      "bytes": 342,
+      "sha256": "8bc7f448fff008c9a711769a2af854c785bdfc6b495da82f59128bbb5c6e92e5",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/render-endpoint-preflight.json"
+    },
+    {
+      "bytes": 12425,
+      "sha256": "e1ee49b6581d1578436b400e413b317ee92d0903f76ea3b4c76e34706b550f58",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/Frozen/scripts/test-msix-recovery.ps1"
+    },
+    {
+      "bytes": 14760,
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/Frozen/scripts/msix/CopperScreen.Msix.psm1"
+    },
+    {
+      "bytes": 7937,
+      "sha256": "e7872d4c5117a0a6e92e9e22b09ca991188675768218ab97326884879f07fb6f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFix-e5a71dab48644456a382a417189a83a4/InstalledRecovery/Frozen/scripts/qualification/Invoke-CopperScreenRecoveryHost.ps1"
+    },
+    {
+      "bytes": 17586,
+      "sha256": "2d23941afc3c8b833a02894a0a07d53fd0f73badf471ea032a0c60e60764667f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/recovery-stall-green.trx"
+    },
+    {
+      "bytes": 4465,
+      "sha256": "b93d2dd47f7a8e4d27837cfd0174f4d7d2529b0733765e9dd60d7b932913e302",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/recovery-stall-red.trx"
+    },
+    {
+      "bytes": 275,
+      "sha256": "f5abf1ca6a151e6a2611b5ce30d7c98b18f42d6d47550ae5b95326d15fd7a4f6",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/Red/assemblies.json"
+    },
+    {
+      "bytes": 781824,
+      "sha256": "a20f694df4e0705e9e880233e891c3e879cc0bb139bbfdd2d6f606b352d8554f",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/Red/CopperScreen.dll"
+    },
+    {
+      "bytes": 232448,
+      "sha256": "7c9ba16b936457d23f950b3cc66146a8ea28c98af6168af94e09c9f556d282b2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/RecoveryFixControls/Red/CopperScreen.Lightweight.Tests.dll"
+    },
+    {
+      "bytes": 1283,
+      "sha256": "97753daecdbc9b7f99863c346e1558ce7cd5b7f072cb059e137352428905101b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/recovery-fix-production-build.log"
+    },
+    {
+      "bytes": 26309,
+      "sha256": "94056632552f5abcee9e1def49114169989865cc6681cbfff985bd5b20ad8448",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/recovery-record.json"
+    },
+    {
+      "bytes": 38,
+      "sha256": "2f2166420cea403f93d605a3b895a50c9573971e188bbf4f30aed0878cd3595b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/command.json"
+    },
+    {
+      "bytes": 129,
+      "sha256": "45587ed195045fcd055cad61aa0d2ad542f2066ca8c86b82e1cf9e9ccc38819e",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/lastwake-1.txt"
+    },
+    {
+      "bytes": 127,
+      "sha256": "ecfa4f90984f141131a34cd965ecc182c6a35ccd67ebf180658787c6ad86e358",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/power-requests-before.txt"
+    },
+    {
+      "bytes": 499,
+      "sha256": "af9125d64527a10d5d9e9c960aaff29584bfd7026c3e45256afd15b348f7f6bf",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/power-states.txt"
+    },
+    {
+      "bytes": 217,
+      "sha256": "46195db95a09055fd08bb9965aff10daa89c2a4ec8cfad9989dbe45b144da169",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/ready.json"
+    },
+    {
+      "bytes": 3941,
+      "sha256": "d5cfbaad81b0973073039ac9ad974800d300efc7c5a5f7224690b85abc4eb36b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/reply-1.json"
+    },
+    {
+      "bytes": 264,
+      "sha256": "01e67f5a2b23c30d82d73298fcef4ea5f8480f4942c2fa9be73f7a29d978a1ef",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/reply-2.json"
+    },
+    {
+      "bytes": 193,
+      "sha256": "034084d46d10645755943466cbdce323fde3a0eb0c9faa902910a3bb6f4c7743",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/starting-1.json"
+    },
+    {
+      "bytes": 92,
+      "sha256": "0aea8f70aaa50e35440e135d5be7bcd8cc215eb4f06a9a52bfebff096d684d08",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/stopped.json"
+    },
+    {
+      "bytes": 736,
+      "sha256": "27dbb03252bc02e4fb100f4ff369414f072cf5ca89451dd98dff033c2abd23ea",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Host/wake-timer-policy.txt"
+    },
+    {
+      "bytes": 6948,
+      "sha256": "7a9a9a6cd026d77a648c617241ad8d7c07638350d79a62124eb66fa2ff7babb1",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Installed/copperstart-recovery-reply-1.json"
+    },
+    {
+      "bytes": 6950,
+      "sha256": "b27a9b2fce9ec927a3b5ce18ea3f6a6abc69cde7d9b846574fa4ae532976f639",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Installed/copperstart-recovery-reply-2.json"
+    },
+    {
+      "bytes": 6943,
+      "sha256": "44a5d92bdd43f5a8b2d1a897287060c4ce659b0c3f073593d18906cfc9d32617",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Installed/copperstart-recovery-reply-3.json"
+    },
+    {
+      "bytes": 6941,
+      "sha256": "e5fbbcb376de3aa4627ddf8fb01b9b1461086e9ee27ad81d46cd79e504bed77b",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Installed/copperstart-recovery-reply-4.json"
+    },
+    {
+      "bytes": 6941,
+      "sha256": "f711229593f55005d13f0aec44e4a6c3b54388b43224cbbd4533172a20f207d2",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Installed/copperstart-recovery-reply-5.json"
+    },
+    {
+      "bytes": 6941,
+      "sha256": "b36a0360de72889d713729cca8e2d71aaf8b63cf9011c8745c8ed32158f43277",
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-ae17c62bdeab450fa7e51fe2a7f8b1b4/Installed/copperstart-recovery-reply-6.json"
+    },
+    {
+      "bytes": 151599,
+      "sha256": "cc0b8ecca7a273ab0ab40ea979bfbd9a815c4d0913bef39e17236741a37a33f7",
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.json"
+    },
+    {
+      "bytes": 4459,
+      "sha256": "fdac6bf3943ac9b9428270f4e33557fe320e3784073645e072062ad5f38d188e",
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.json"
+    },
+    {
+      "bytes": 6825,
+      "sha256": "ab8f974bbf2de5c882343e35c42c8b05d16df975d5021288e2c4f751fecb9bf3",
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.json"
+    },
+    {
+      "bytes": 5874,
+      "sha256": "ddd0f1ce2f796b84e70b7f7582846099bdce50beeab9d4a5fba5998544e2fe06",
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.md"
+    },
+    {
+      "bytes": 5168,
+      "sha256": "d0cdc5522ddd9402a00f6bdeaadb2399729d266e47d47751c842a32b93313e3b",
+      "path": "artifacts/finish-recovery33-package.ps1"
+    },
+    {
+      "bytes": 8334,
+      "sha256": "17d86b1bbd36cbd65a9ad75d68a2a3769af3664502cefd292c2978bea886914d",
+      "path": "artifacts/record-recovery33-fix.ps1"
+    }
+  ]
+}

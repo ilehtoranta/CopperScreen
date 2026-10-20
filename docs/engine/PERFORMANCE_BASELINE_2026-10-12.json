@@ -1,0 +1,447 @@
+{
+  "Schema": "background-descriptive-baseline-v1",
+  "Date": "2026-10-12",
+  "Disposition": "DESCRIPTIVE_UNDER_BACKGROUND_LOAD",
+  "AcceptanceMeasurement": false,
+  "FormalGateDisposition": "NOT AN ACCEPTANCE MEASUREMENT: repeat descriptive baseline; observed host activity retained, no paired reference, confidence bound or 1% decision.",
+  "Head": "575d5cf81681c7ffa5c7d0cd40bbda6a7d16af53",
+  "UnrelatedWorkingTreeChange": [
+    " M docs/engine/PERFORMANCE.md",
+    " M scripts/probes/Detroit/analyze_gameplay.py",
+    "?? docs/engine/PERFORMANCE_BASELINE_2026-10-11.json",
+    "?? docs/engine/PERFORMANCE_BASELINE_2026-10-11.md"
+  ],
+  "PreviousSourceComparison": {
+    "Date": "2026-10-11",
+    "CapturedFiles": 81,
+    "SourceHashesMatch": true,
+    "SameSourceHead": true,
+    "DifferentFrozenCapsule": true,
+    "TimingComparisonIsCausal": false
+  },
+  "Profile": {
+    "Video": "PAL OCS",
+    "Cpu": "68000",
+    "ExecutionMode": "Interpreter",
+    "CpuLoop": "conservative-batch",
+    "Agnus": "8371",
+    "Denise": "8362",
+    "ChipRamKiB": 512,
+    "SlowRamKiB": 512,
+    "FastRamKiB": 0,
+    "FloppyDrives": 1,
+    "Rtc": false,
+    "Hardfiles": 0,
+    "HostDirectories": 0,
+    "Output": "908x313 reusable framebuffer; real stereo PCM"
+  },
+  "Build": {
+    "Command": "dotnet build CopperScreen.slnx -c Release -p:LightweightDiagnostics=false --artifacts-path artifacts/background-baseline-2026-10-12/build-output -m:1",
+    "Warnings": 0,
+    "Errors": 0,
+    "InitialAttempt": "Default-output build failed with CS2012: CopperDisk compiler output locked. Retained build.log. Isolated serial build succeeded; retained build-isolated.log.",
+    "Sdk": "10.0.401",
+    "Runtime": "Microsoft.NETCore.App 10.0.12",
+    "Copper68k": "1.5.4-detroit-dev.2",
+    "CopperDisk": "3.0.0 source project; not the NuGet binary",
+    "FrozenBinaries": [
+      {
+        "File": "Copper68k.dll",
+        "Sha256": "5780F5084FD44E2D4732969BC0F9CE7AE7E3BEFFC1135DED92BC46D9B21399F2"
+      },
+      {
+        "File": "CopperDisk.dll",
+        "Sha256": "4F94E0E92EEC96DCBBCEE4A27C40185860196796C5EEFFF774BDA87DABC57375"
+      },
+      {
+        "File": "CopperFloat.dll",
+        "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+      },
+      {
+        "File": "CopperMod.Amiga.Lightweight.dll",
+        "Sha256": "E2CBAB22F4795E39B167FE78AB1CAD61FF4B967A6520D40E950BD2E9C1F6ABC2"
+      },
+      {
+        "File": "CopperMod.Amiga.Lightweight.Runner.deps.json",
+        "Sha256": "ED1D59937BF6394E624022FFF2DCC752BDDF47E5CF08E2B66BC907DA67D5DFE4"
+      },
+      {
+        "File": "CopperMod.Amiga.Lightweight.Runner.dll",
+        "Sha256": "01E79491DEB255EDF48CDD9827D5B236D45847DEB79FBD7D0EEAF5FF9E2BF987"
+      },
+      {
+        "File": "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+        "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+      }
+    ],
+    "FilesUnchanged": true
+  },
+  "Host": {
+    "Cpu": "AMD Ryzen 5 5600X 6-Core Processor             ",
+    "OS": "Microsoft Windows NT 10.0.26200.0",
+    "Priority": "Normal",
+    "LogicalProcessor": 2,
+    "ProtectedCpus": [
+      2,
+      3
+    ],
+    "Topology": [
+      {
+        "Group": 0,
+        "Cpu": 0,
+        "Core": 0,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 1,
+        "Core": 0,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 2,
+        "Core": 2,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 3,
+        "Core": 2,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 4,
+        "Core": 4,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 5,
+        "Core": 4,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 6,
+        "Core": 6,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 7,
+        "Core": 6,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 8,
+        "Core": 8,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 9,
+        "Core": 8,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 10,
+        "Core": 10,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 11,
+        "Core": 10,
+        "Efficiency": 0
+      }
+    ],
+    "PowerPlan": [
+      "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Tasapainotettu)"
+    ]
+  },
+  "Collection": {
+    "Order": [
+      "lores-1",
+      "hires-1",
+      "lemmings-1",
+      "lemmings-2",
+      "hires-2",
+      "lores-2",
+      "hires-3",
+      "lemmings-3",
+      "lores-3"
+    ],
+    "CollectorSha256": "45ABDAFD3ED5E823E3530CEC420810B14005BB2582C483B3166A0241CCF350B0",
+    "EvidenceDirectory": "artifacts/background-baseline-2026-10-12",
+    "Inputs": [
+      {
+        "File": "Kickstart_13.rom",
+        "Sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+      },
+      {
+        "File": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "Sha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59"
+      },
+      {
+        "File": "lemmings-cpu-bus-timing-v1.json",
+        "Sha256": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA"
+      },
+      {
+        "File": "lemmings-disk2.zip",
+        "Sha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A"
+      }
+    ],
+    "InputScriptCopy": "Byte-identical copy placed at artifacts/background-baseline-2026-10-12/ so ../../media resolves to repository media/. No script events or media bytes changed.",
+    "FingerprintReference": "scripts/run-lightweight-grant-locality-comparison-v1.ps1",
+    "FingerprintNormalization": "Require executionMode=Interpreter, then remove this newly added metadata field for comparison with the pre-existing complete identities.",
+    "TelemetryIntervals": 173,
+    "TelemetryErrors": [],
+    "IntervalsWithOtherBuildTestJobs": 0,
+    "PeakPackageOtherCpuPercent": 32.99031444115072,
+    "NoSamplesDiscarded": true,
+    "NoOtherJobsPausedOrTerminated": true
+  },
+  "Verification": "Independent re-read of all nine logs, recomputation of summary, comparison with pre-existing workload identities, and before/after hashes. Matching fingerprints do not certify all hardware or game compatibility.",
+  "Summary": [
+    {
+      "Workload": "lores",
+      "Runs": 3,
+      "FpsInRunOrder": [
+        321.76,
+        323.87,
+        315.85
+      ],
+      "MeanFps": 320.49333333333334,
+      "MedianFps": 321.76,
+      "MinFps": 315.85,
+      "MaxFps": 323.87,
+      "MeanMsPerFrame": 3.1205416603883465,
+      "HistoricalIdentityMatches": true,
+      "MeasuredAllocationBytes": 0,
+      "TelemetryIntervals": 39,
+      "TelemetrySeconds": 81.8974331999998,
+      "DurationWeightedOtherCpuPercent": {
+        "Sibling": 22.666248733328068,
+        "Package": 11.81134890677869,
+        "Selected": 0.8024876657442659
+      }
+    },
+    {
+      "Workload": "hires",
+      "Runs": 3,
+      "FpsInRunOrder": [
+        298.88,
+        304.7,
+        290.01
+      ],
+      "MeanFps": 297.8633333333333,
+      "MedianFps": 298.88,
+      "MinFps": 290.01,
+      "MaxFps": 304.7,
+      "MeanMsPerFrame": 3.358632670185697,
+      "HistoricalIdentityMatches": true,
+      "MeasuredAllocationBytes": 0,
+      "TelemetryIntervals": 42,
+      "TelemetrySeconds": 87.6098312000031,
+      "DurationWeightedOtherCpuPercent": {
+        "Sibling": 23.970758578032004,
+        "Package": 11.06993415733409,
+        "Selected": 0.8424430111175321
+      }
+    },
+    {
+      "Workload": "lemmings",
+      "Runs": 3,
+      "FpsInRunOrder": [
+        298.84,
+        289.8,
+        297.22
+      ],
+      "MeanFps": 295.28666666666663,
+      "MedianFps": 297.22,
+      "MinFps": 289.8,
+      "MaxFps": 298.84,
+      "MeanMsPerFrame": 3.3871463379370037,
+      "HistoricalIdentityMatches": true,
+      "MeasuredAllocationBytes": 0,
+      "TelemetryIntervals": 92,
+      "TelemetrySeconds": 198.5249371999962,
+      "DurationWeightedOtherCpuPercent": {
+        "Sibling": 23.43142790956833,
+        "Package": 11.741310541751165,
+        "Selected": 0.9244088555649217
+      }
+    }
+  ],
+  "Samples": [
+    {
+      "Workload": "lores",
+      "Label": "lores-1",
+      "Fps": 321.76,
+      "MsPerFrame": 3.1079065141720537,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--synthetic-paula-dma",
+        "--wide-output",
+        "--warmup",
+        "600",
+        "--frames",
+        "7200"
+      ]
+    },
+    {
+      "Workload": "hires",
+      "Label": "hires-1",
+      "Fps": 298.88,
+      "MsPerFrame": 3.345824411134904,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--synthetic-paula-dma",
+        "--hires",
+        "--warmup",
+        "600",
+        "--frames",
+        "7200"
+      ]
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "lemmings-1",
+      "Fps": 298.84,
+      "MsPerFrame": 3.346272252710481,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--rom",
+        "C:/Data/ROM/Kickstart_13.rom",
+        "--adf",
+        "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\background-baseline-2026-10-12/lemmings-cpu-bus-timing-v1.json",
+        "--warmup",
+        "14520",
+        "--frames",
+        "3600"
+      ]
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "lemmings-2",
+      "Fps": 289.8,
+      "MsPerFrame": 3.4506556245686677,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--rom",
+        "C:/Data/ROM/Kickstart_13.rom",
+        "--adf",
+        "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\background-baseline-2026-10-12/lemmings-cpu-bus-timing-v1.json",
+        "--warmup",
+        "14520",
+        "--frames",
+        "3600"
+      ]
+    },
+    {
+      "Workload": "hires",
+      "Label": "hires-2",
+      "Fps": 304.7,
+      "MsPerFrame": 3.2819166393173616,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--synthetic-paula-dma",
+        "--hires",
+        "--warmup",
+        "600",
+        "--frames",
+        "7200"
+      ]
+    },
+    {
+      "Workload": "lores",
+      "Label": "lores-2",
+      "Fps": 323.87,
+      "MsPerFrame": 3.0876586284620373,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--synthetic-paula-dma",
+        "--wide-output",
+        "--warmup",
+        "600",
+        "--frames",
+        "7200"
+      ]
+    },
+    {
+      "Workload": "hires",
+      "Label": "hires-3",
+      "Fps": 290.01,
+      "MsPerFrame": 3.448156960104824,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x09554374C200BE7A output=0x342F83A04C3EBCF6 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--synthetic-paula-dma",
+        "--hires",
+        "--warmup",
+        "600",
+        "--frames",
+        "7200"
+      ]
+    },
+    {
+      "Workload": "lemmings",
+      "Label": "lemmings-3",
+      "Fps": 297.22,
+      "MsPerFrame": 3.3645111365318616,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--rom",
+        "C:/Data/ROM/Kickstart_13.rom",
+        "--adf",
+        "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\background-baseline-2026-10-12/lemmings-cpu-bus-timing-v1.json",
+        "--warmup",
+        "14520",
+        "--frames",
+        "3600"
+      ]
+    },
+    {
+      "Workload": "lores",
+      "Label": "lores-3",
+      "Fps": 315.85,
+      "MsPerFrame": 3.166059838530948,
+      "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x2F1CDAE2DDCFA737 output=0x516B826B90FE2CD7 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "HistoricalFingerprintMatches": true,
+      "RepeatIdentityMatches": true,
+      "Arguments": [
+        "--synthetic-paula-dma",
+        "--wide-output",
+        "--warmup",
+        "600",
+        "--frames",
+        "7200"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CopperOS development storage pair and workspace contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contractId", "contractVersion", "shipping", "defaultActivationAllowed", "explicitDevelopmentLaunchAllowed", "rom", "systemImage", "machine", "storage", "nativeApis", "unqualifiedApis", "qualification", "evidence"],
+  "properties": {
+    "$schema": {"const": "copperos-storage.schema.json"},
+    "schemaVersion": {"const": 1},
+    "contractId": {"const": "copperscreen.copperstart-copperos.native-storage"},
+    "contractVersion": {"const": "0.2.0-dev.1"},
+    "shipping": {"const": false},
+    "defaultActivationAllowed": {"const": false},
+    "explicitDevelopmentLaunchAllowed": {"const": true},
+    "rom": {"$ref": "#/$defs/artifact"},
+    "systemImage": {"$ref": "#/$defs/artifact"},
+    "machine": {"const": "Lightweight PAL OCS 68000 interpreter; 512 KiB Chip + 512 KiB slow; one DF0; no Fast RAM, RTC, hardfiles, host directories or Legacy"},
+    "storage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["format", "directory", "image", "identity", "previous", "lock", "overwriteExistingOnUpdate", "automaticMigration", "seedWritable", "checkpoint"],
+      "properties": {
+        "format": {"const": 1},
+        "directory": {"const": "user-data/CopperOS/Workspaces/<id>"},
+        "image": {"const": "System.adf"},
+        "identity": {"const": "workspace.json"},
+        "previous": {"const": "Previous.adf"},
+        "lock": {"const": "workspace.lock"},
+        "overwriteExistingOnUpdate": {"const": false},
+        "automaticMigration": {"const": false},
+        "seedWritable": {"const": false},
+        "checkpoint": {"const": "Owner-thread export after DMA/motor inactivity and valid DOS1 root/bitmap; flushed temporary file, atomic replace with previous image; dirty acknowledgement only after primary save"}
+      }
+    },
+    "nativeApis": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "unqualifiedApis": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "qualification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["nativeSource", "installedMsix", "performance"],
+      "properties": {
+        "nativeSource": {"enum": ["passed", "blocked"]},
+        "installedMsix": {"enum": ["passed", "unavailable"]},
+        "performance": {"const": "not-measured"}
+      }
+    },
+    "evidence": {"const": "docs/COPPEROS_STORAGE_2026-10-16.json"},
+    "installedEvidence": {"const": "docs/COPPEROS_MSIX_VALIDATION_2026-10-17.json"}
+  },
+  "allOf": [{
+    "if": {"properties": {"qualification": {"properties": {"installedMsix": {"const": "passed"}}}}},
+    "then": {"required": ["installedEvidence"]}
+  }],
+  "$defs": {
+    "artifact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "bytes", "sha256"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    }
+  }
+}

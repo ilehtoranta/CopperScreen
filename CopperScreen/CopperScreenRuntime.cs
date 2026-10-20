@@ -6,6 +6,14 @@ namespace CopperScreen;
 internal interface ICopperScreenAudioOutput : IDisposable
 {
 	int QueuedBufferCount { get; }
+	// Signaled by the consumer after freeing a slot. Commands use a separate wake.
+	WaitHandle? BufferAvailable => null;
+	// An unavailable output must not become the guest's stopped host clock.
+	bool IsClockRunning => true;
+	bool NeedsPrefill => false;
+	// Called on the runtime owner when audio demand stops arriving.
+	void RecoverIfStalled() { }
+	void SetPaused(bool paused) { if (paused) DiscardQueuedSamples(); }
 
 	bool Submit(ReadOnlySpan<float> samples);
 
@@ -109,15 +117,17 @@ internal sealed class CopperScreenRuntime : IDisposable
 {
 	private readonly int _audioSampleRate;
 	private const int AudioChannels = 2;
-	private const int AudioOutputBufferCount = 8;
-	private const int TargetQueuedAudioBuffers = 8;
+	// A retained WASAPI catch-up burst exhausted eight blocks by 2,926 stereo
+	// values while guest work stayed short. Ten blocks cover that measured demand
+	// without dropping PCM; this adds about 40 ms at the qualified PAL field rate.
+	private const int AudioOutputBufferCount = 10;
+	private const int TargetQueuedAudioBuffers = AudioOutputBufferCount;
 	private const int CriticalQueuedAudioBuffers = 2;
 	private const int MaxFramesPerTick = 5;
 	private const int TargetQueuedPresentationFrames = 1;
 	private const int MaxQueuedPresentationFrames = 2;
 	private double DisplayFrameMilliseconds => 1000.0 / _emulator.VideoVBlankHz;
-	private const int MaxSteadyAudioWaitMilliseconds = 5;
-	private long _displayFrameStopwatchTicks;
+	private readonly WaitHandle[]? _audioWaitHandles;
 	private readonly ICopperScreenSession _emulator;
 	private readonly ICopperScreenAudioOutput? _audio;
 	private readonly bool _disposeAudio;
@@ -147,7 +157,6 @@ internal sealed class CopperScreenRuntime : IDisposable
 	private CopperScreenState _latestState;
 	private bool _pendingCopperBenchRequest;
 	private bool _pausedStatePublished;
-	private long _nextSteadyAudioFrameTimestamp;
 	private double _lastPublishFrameMilliseconds;
 	private double _lastPublishCopyMilliseconds;
 	private double _lastPresentationBufferReserveMilliseconds;
@@ -159,10 +168,11 @@ internal sealed class CopperScreenRuntime : IDisposable
 	{
 		_emulator = emulator ?? throw new ArgumentNullException(nameof(emulator));
 		_audioSampleRate = emulator.AudioSampleRate;
-		_displayFrameStopwatchTicks = Math.Max(
-			1,
-			(long)Math.Round(Stopwatch.Frequency / _emulator.VideoVBlankHz));
 		_audio = audio;
+#if COPPERSCREEN_INSTALLED_TESTS
+        if (audio is MiniaudioAudioOutput native) native.DiagnosticTimeline = _diagnosticTimeline;
+#endif
+		_audioWaitHandles = audio?.BufferAvailable is { } available ? [_wake, available] : null;
 		_disposeAudio = disposeAudio;
 		_audioBuffer = new float[_emulator.AudioFramesPerAppFrame(_audioSampleRate) * AudioChannels];
 		_floppyDriveAudio = FloppyDriveAudio.TryCreate(
@@ -243,6 +253,62 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	internal static CopperScreenRuntime CreateForTests(ICopperScreenSession emulator, ICopperScreenAudioOutput? audio = null)
 		=> new CopperScreenRuntime(emulator, audio, disposeAudio: false);
+#if COPPERSCREEN_INSTALLED_TESTS
+    private readonly CopperScreenAudioTimeline _diagnosticTimeline = new();
+    private long DiagnosticMissing => (_audio as MiniaudioAudioOutput)?.DiagnosticMissingSamples ?? 0;
+    internal async Task DiagnosticWriteAudioTimelineAsync(string path)
+    {
+        var nativeStopped = false;
+        var frozen = await EnqueueAsync(_ =>
+        {
+            _diagnosticTimeline.Freeze();
+            nativeStopped = (_audio as MiniaudioAudioOutput)?.DiagnosticStop() ?? true;
+            return new CopperScreenCommandResult(true, "Audio trace writers frozen", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+        });
+        if (!frozen.Success) throw new InvalidOperationException(frozen.Message);
+        // Keep the owner alive for the window's ordinary final save/close commands.
+        CopperScreenInstalledSoak.Write(path, new { nativeStopped, timeline = _diagnosticTimeline.Export() });
+    }
+    private void DiagnosticOwnerEvent(int kind, long start, long reserved, long guestDone, long submitted,
+        long cpuStart, int before, long missingBefore, int detail, double publicationCore = -1) => _diagnosticTimeline.RecordOwner(new(
+            kind, start, reserved, guestDone, submitted, Stopwatch.GetTimestamp(), cpuStart,
+            cpuStart < 0 ? -1 : CopperScreenAudioTimeline.CpuTime(), _diagnosticGuestFields,
+            before, _audio?.QueuedBufferCount ?? 0, missingBefore, DiagnosticMissing, detail,
+            GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2), publicationCore));
+    internal Task<CopperScreenCommandResult> DiagnosticSetAudioSchedulingAsync(bool enabled) => EnqueueAsync(_ =>
+    {
+        var changed = _audioScheduling?.DiagnosticSetEnabled(enabled) == true;
+        return new CopperScreenCommandResult(changed, "Diagnostic multimedia scheduling control", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+    });
+    internal Task<CopperScreenCommandResult> DiagnosticStopAudioAsync() => EnqueueAsync(_ =>
+    {
+        var stopped = (_audio as MiniaudioAudioOutput)?.DiagnosticStop() == true;
+        return new CopperScreenCommandResult(stopped, stopped ? "Native audio sink stopped for recovery control" : "Native audio stop failed", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+    });
+    internal Task<CopperScreenCommandResult> DiagnosticCloseAudioAsync() => EnqueueAsync(_ =>
+    {
+        var closed = (_audio as MiniaudioAudioOutput)?.DiagnosticClose() == true;
+        return new CopperScreenCommandResult(closed, closed ? "Native device closed for reopen control" : "Native audio close failed", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+    });
+    private long _diagnosticGuestSampleValues, _diagnosticGuestFields, _diagnosticGuestAudibleFields;
+    private long _diagnosticSuppressedSampleValues;
+    private CopperScreenAudioScheduling? _audioScheduling;
+    private long _diagnosticPreviousFrameStart;
+    private static readonly double[] DiagnosticGapUpperBounds = [1, 5, 10, 15, 20, 25, 30, 40, 80, 160];
+    private readonly long[] _diagnosticFrameGaps = new long[11];
+    internal object DiagnosticAudio => new { output = (_audio as MiniaudioAudioOutput)?.DiagnosticSnapshot,
+        guestSampleValues = Interlocked.Read(ref _diagnosticGuestSampleValues), guestFields = Interlocked.Read(ref _diagnosticGuestFields),
+        guestAudibleFields = Interlocked.Read(ref _diagnosticGuestAudibleFields),
+        suppressedSampleValues = Interlocked.Read(ref _diagnosticSuppressedSampleValues),
+        multimediaScheduling = _audioScheduling?.IsRegistered == true,
+        pacing = new { protocol = "host-frame-start-gaps-v1", upperBoundsMilliseconds = DiagnosticGapUpperBounds,
+            buckets = Enumerable.Range(0, _diagnosticFrameGaps.Length).Select(i => Interlocked.Read(ref _diagnosticFrameGaps[i])).ToArray() } };
+    internal Task<CopperScreenCommandResult> DiagnosticObserveAsync(Action<ICopperScreenSession> observer) => EnqueueAsync(emulator =>
+    {
+        observer(emulator);
+        return new CopperScreenCommandResult(true, "Diagnostic observation", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+    });
+#endif
 
 	// Construct and validate a stopped replacement first. Only the old machine can
 	// execute until it is disposed; the caller starts the new worker afterward.
@@ -285,11 +351,6 @@ internal sealed class CopperScreenRuntime : IDisposable
 			return 0;
 		}
 
-		if (queued >= CriticalQueuedAudioBuffers)
-		{
-			return 1;
-		}
-
 		var availableBuffers = AudioOutputBufferCount - queued;
 		return Math.Clamp(TargetQueuedAudioBuffers - queued, 1, Math.Min(MaxFramesPerTick, availableBuffers));
 	}
@@ -321,9 +382,11 @@ internal sealed class CopperScreenRuntime : IDisposable
 		_running = false;
 		_wake.Set();
 		var thread = _thread;
-		if (thread != null && thread.IsAlive)
+		if (thread != null && thread.IsAlive && thread != Thread.CurrentThread)
 		{
-			thread.Join(TimeSpan.FromSeconds(2));
+            // A bounded native checkpoint can outlive two host seconds. Never
+            // dispose its machine while the execution owner is still using it.
+			thread.Join();
 		}
 	}
 
@@ -412,6 +475,16 @@ internal sealed class CopperScreenRuntime : IDisposable
 	public void KeyUp(AmigaRawKey key)
 		=> Post(emulator => emulator.KeyUp(key));
 
+    public void ReleaseInteractiveInput(AmigaRawKey[] keys)
+        => Post(session => ReleaseInteractiveInput(session, keys));
+
+    internal static void ReleaseInteractiveInput(ICopperScreenSession session, ReadOnlySpan<AmigaRawKey> keys)
+    {
+        foreach (var key in keys) session.KeyUp(key);
+        session.SetMouseButtons(false, false);
+        for (var port = 0; port < 2; port++) session.SetJoystickPort(port, false, false, false, false, false, false);
+    }
+
 	public void SetHostClipboardText(string text)
 		=> Post(emulator => emulator.QueueHostClipboardText(text));
 
@@ -446,7 +519,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 		=> EnqueueAsync(emulator =>
 		{
 			var paused = emulator.TogglePaused();
-			if (paused && emulator is CopperScreenLightweightSession) _audio?.DiscardQueuedSamples();
+			_audio?.SetPaused(paused);
 			return new CopperScreenCommandResult(true, paused ? "Paused" : "Running", CaptureState(framesRendered: 0, queuedAudioBuffers: _audio?.QueuedBufferCount ?? 0));
 		});
 
@@ -552,33 +625,67 @@ internal sealed class CopperScreenRuntime : IDisposable
 			return new CopperScreenCommandResult(ejected, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
 		});
 
-	public Task<CopperScreenCommandResult> SaveAdfAsync(int driveIndex, string path)
+    public Task<CopperScreenCommandResult> DiscardPersistentStorageAsync() => EnqueueAsync(emulator =>
+    {
+        emulator.DiscardPersistentStorage();
+        return new CopperScreenCommandResult(true, "Last complete CopperOS checkpoint retained", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+    });
+
+    public Task<CopperScreenCommandResult> SavePersistentStorageAsync() => EnqueueAsync(emulator =>
+    {
+        try { emulator.SavePersistentStorage(); return new CopperScreenCommandResult(true, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0)); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        { emulator.SetStatusText(ex.Message); return new CopperScreenCommandResult(false, ex.Message, CaptureState(0, _audio?.QueuedBufferCount ?? 0)); }
+    });
+
+    public Task<CopperScreenCommandResult> ExportWorkspaceAsync(string destination) => EnqueueAsync(emulator =>
+    {
+        try
+        {
+            if (emulator is not CopperScreenLightweightSession session) throw new NotSupportedException("Workspace export requires Lightweight.");
+            session.ExportWorkspaceBackup(destination);
+            emulator.SetStatusText("Workspace backup exported. Primary save status is unchanged.");
+            return new CopperScreenCommandResult(true, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+        }
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
+        { return new CopperScreenCommandResult(false, ex.Message, CaptureState(0, _audio?.QueuedBufferCount ?? 0)); }
+    });
+
+	public Task<CopperScreenCommandResult> SaveAdfAsync(int driveIndex, string path, bool overwriteExisting = false)
 		=> EnqueueAsync(emulator =>
 		{
-			string? temporary = null;
 			try
 			{
 				var destination = Path.GetFullPath(path);
+                if (CopperOsWorkspace.IsWorkspace(destination))
+                {
+                    if (driveIndex != 0 || emulator is not CopperScreenLightweightSession owner || !owner.OwnsWorkspacePath(destination))
+                        throw new IOException("Export to a new ADF file rather than overwriting another CopperOS workspace.");
+                    emulator.SavePersistentStorage();
+                    return new CopperScreenCommandResult(true, "Saved CopperOS workspace", CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+                }
 				if (!Path.GetExtension(destination).Equals(".adf", StringComparison.OrdinalIgnoreCase))
 					throw new ArgumentException("Choose an .adf file for the saved disk.");
+                if (CopperOsWorkspace.IsManagedDestination(destination)) throw new IOException("Export outside managed workspace folders to preserve their checkpoints and backups.");
+                var drives = CaptureState(0, _audio?.QueuedBufferCount ?? 0).Drives;
+                foreach (var drive in drives)
+                    if (drive.Index != driveIndex && drive.DiskPath is { } source &&
+                        Path.GetFullPath(source).Equals(destination, StringComparison.OrdinalIgnoreCase))
+                        throw new IOException("Choose a new file rather than overwriting another mounted disk.");
+                var workspaceExport = emulator is CopperScreenLightweightSession session && session.WorkspaceSeedPairId != null;
+                if (workspaceExport && File.Exists(destination)) throw new IOException("Export the workspace to a new file. Existing disks, seeds and backups are preserved.");
+                if (workspaceExport && emulator is CopperScreenLightweightSession ownerSession && ownerSession.IsInsideWorkspace(destination))
+                    throw new IOException("Export outside the managed workspace folder so checkpoints and backups remain protected.");
 				var bytes = emulator.ExportAdf(driveIndex);
-				temporary = destination + "." + Guid.NewGuid().ToString("N") + ".tmp";
-				File.WriteAllBytes(temporary, bytes);
-				File.Move(temporary, destination, overwrite: true);
+                CopperScreenAtomicFile.Write(destination, bytes, overwriteExisting);
 				emulator.MarkAdfSaved(driveIndex);
 				emulator.SetStatusText($"Saved DF{driveIndex}: {destination}");
 				return new CopperScreenCommandResult(true, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
 			}
-			catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
+			catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
 			{
 				emulator.SetStatusText(ex.Message);
 				return new CopperScreenCommandResult(false, ex.Message, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
-			}
-			finally
-			{
-				if (temporary != null && File.Exists(temporary))
-					try { File.Delete(temporary); }
-					catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { }
 			}
 		});
 
@@ -611,6 +718,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 			return;
 		}
 
+		if (_thread == Thread.CurrentThread) throw new InvalidOperationException("Dispose the runtime after leaving its execution thread.");
 		_disposed = true;
 		Stop();
 		try { _emulator.Dispose(); }
@@ -652,10 +760,23 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	private void Run()
 	{
+		using var scheduling = _audio == null ? null : CopperScreenAudioScheduling.TryEnter();
+#if COPPERSCREEN_INSTALLED_TESTS
+        _audioScheduling = scheduling;
+#endif
 		double nextSilentFrameTime = Environment.TickCount64;
+		var audioUnavailable = false;
 		while (_running)
 		{
 			ProcessCommands();
+#if COPPERSCREEN_INSTALLED_TESTS
+            var recoveryStart = Stopwatch.GetTimestamp();
+#endif
+			_audio?.RecoverIfStalled();
+#if COPPERSCREEN_INSTALLED_TESTS
+            if (Stopwatch.GetElapsedTime(recoveryStart).TotalMilliseconds >= 1)
+                DiagnosticOwnerEvent(4, recoveryStart, 0, 0, 0, -1, 0, DiagnosticMissing, 0);
+#endif
 
 			if (_emulator.IsPaused)
 			{
@@ -666,13 +787,22 @@ internal sealed class CopperScreenRuntime : IDisposable
 				}
 
 				_wake.WaitOne(10);
+				nextSilentFrameTime = Environment.TickCount64;
 				continue;
 			}
 
 			_pausedStatePublished = false;
-			if (_audio == null)
+			var unavailable = _audio != null && !_audio.IsClockRunning && !_audio.NeedsPrefill;
+			if (unavailable != audioUnavailable)
 			{
-				if (WaitForPresentationQueueCapacity(null))
+				// The callback owns read indexes. Epoch discard never races its reads.
+				_audio?.DiscardQueuedSamples();
+				nextSilentFrameTime = Environment.TickCount64;
+				audioUnavailable = unavailable;
+			}
+			if (_audio == null || unavailable)
+			{
+				if (_audio == null && WaitForPresentationQueueCapacity(null))
 				{
 					continue;
 				}
@@ -684,7 +814,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 					continue;
 				}
 
-				RenderFrames(1, queuedAudioBuffers: 0);
+				RenderFrames(1, queuedAudioBuffers: 0, submitAudio: !unavailable);
 				nextSilentFrameTime += DisplayFrameMilliseconds;
 				if (nextSilentFrameTime < now - DisplayFrameMilliseconds)
 				{
@@ -698,38 +828,25 @@ internal sealed class CopperScreenRuntime : IDisposable
 			var framesToRender = CalculateFramesToRender(queued, catchUpAudio: true);
 			if (framesToRender <= 0)
 			{
-				_wake.WaitOne(1);
+				if (_audioWaitHandles != null)
+				{
+#if COPPERSCREEN_INSTALLED_TESTS
+                    var waitStart = Stopwatch.GetTimestamp();
+                    var missing = DiagnosticMissing;
+#endif
+                    var waitResult = WaitHandle.WaitAny(_audioWaitHandles, 250);
+#if COPPERSCREEN_INSTALLED_TESTS
+                    DiagnosticOwnerEvent(3, waitStart, 0, 0, 0, -1, queued, missing, waitResult);
+#endif
+					if (waitResult == WaitHandle.WaitTimeout) _audio.RecoverIfStalled();
+				}
+				else _wake.WaitOne(1);
 				continue;
 			}
 
-			if (ShouldThrottleSteadyAudioRefill(queued, framesToRender))
-			{
-				var now = Stopwatch.GetTimestamp();
-				if (_nextSteadyAudioFrameTimestamp > 0 && now < _nextSteadyAudioFrameTimestamp)
-				{
-					var waitMilliseconds = CalculateSteadyAudioWaitMilliseconds(_nextSteadyAudioFrameTimestamp - now);
-					if (waitMilliseconds > 0)
-					{
-						_wake.WaitOne(waitMilliseconds);
-					}
-					else
-					{
-						Thread.Yield();
-					}
-
-					continue;
-				}
-			}
-			else
-			{
-				_nextSteadyAudioFrameTimestamp = Stopwatch.GetTimestamp();
-			}
-
+			// The sink is the host clock: restore its bounded reserve immediately.
+			// A second video deadline loses refill time after scheduler delays.
 			RenderFrames(framesToRender, queued);
-			if (ShouldThrottleSteadyAudioRefill(queued, framesToRender))
-			{
-				ScheduleNextSteadyAudioFrame();
-			}
 		}
 	}
 
@@ -737,6 +854,12 @@ internal sealed class CopperScreenRuntime : IDisposable
 	{
 		while (_commands.TryDequeue(out var command))
 		{
+#if COPPERSCREEN_INSTALLED_TESTS
+            var commandStart = Stopwatch.GetTimestamp();
+            var commandCpu = CopperScreenAudioTimeline.CpuTime();
+            var commandQueue = _audio?.QueuedBufferCount ?? 0;
+            var commandMissing = DiagnosticMissing;
+#endif
 			try
 			{
 				command.Execute(_emulator);
@@ -750,41 +873,10 @@ internal sealed class CopperScreenRuntime : IDisposable
 				var result = SetEmulatorError(ex.Message);
 				command.Completion?.TrySetResult(result);
 			}
+#if COPPERSCREEN_INSTALLED_TESTS
+            finally { DiagnosticOwnerEvent(2, commandStart, 0, 0, 0, commandCpu, commandQueue, commandMissing, 1); }
+#endif
 		}
-	}
-
-	internal static bool ShouldThrottleSteadyAudioRefill(int queuedAudioBuffers, int framesToRender)
-		=> framesToRender == 1 && queuedAudioBuffers >= CriticalQueuedAudioBuffers;
-
-	internal long SteadyAudioFrameStopwatchTicks => _displayFrameStopwatchTicks;
-
-	internal static int CalculateSteadyAudioWaitMilliseconds(long remainingStopwatchTicks)
-	{
-		if (remainingStopwatchTicks <= 0)
-		{
-			return 0;
-		}
-
-		var milliseconds = (remainingStopwatchTicks * 1000) / Stopwatch.Frequency;
-		if (milliseconds <= 0)
-		{
-			return 0;
-		}
-
-		return (int)Math.Min(MaxSteadyAudioWaitMilliseconds, milliseconds);
-	}
-
-	private void ScheduleNextSteadyAudioFrame()
-	{
-		var now = Stopwatch.GetTimestamp();
-		if (_nextSteadyAudioFrameTimestamp <= 0 ||
-				now - _nextSteadyAudioFrameTimestamp > _displayFrameStopwatchTicks)
-		{
-			_nextSteadyAudioFrameTimestamp = now + _displayFrameStopwatchTicks;
-			return;
-		}
-
-		_nextSteadyAudioFrameTimestamp += _displayFrameStopwatchTicks;
 	}
 
 	private CopperScreenCommandResult SetEmulatorError(string message)
@@ -794,10 +886,17 @@ internal sealed class CopperScreenRuntime : IDisposable
 		return new CopperScreenCommandResult(false, message, CurrentState);
 	}
 
-	private void RenderFrames(int framesToRender, int queuedAudioBuffers)
+	private void RenderFrames(int framesToRender, int queuedAudioBuffers, bool submitAudio = true)
 	{
 		for (var frame = 0; frame < framesToRender && _running; frame++)
 		{
+#if COPPERSCREEN_INSTALLED_TESTS
+            var fieldStart = Stopwatch.GetTimestamp();
+            var fieldCpu = CopperScreenAudioTimeline.CpuTime();
+            var fieldQueue = _audio?.QueuedBufferCount ?? 0;
+            var fieldMissing = DiagnosticMissing;
+            long guestDone = 0;
+#endif
 			ProcessCommands();
 			if (_emulator.IsPaused)
 			{
@@ -821,11 +920,23 @@ internal sealed class CopperScreenRuntime : IDisposable
 				? _frameBuffers[reservedBufferIndex]
 				: _emulator.Framebuffer;
 			var startTimestamp = Stopwatch.GetTimestamp();
+#if COPPERSCREEN_INSTALLED_TESTS
+            if (_diagnosticPreviousFrameStart != 0)
+            {
+                var gap = Stopwatch.GetElapsedTime(_diagnosticPreviousFrameStart, startTimestamp).TotalMilliseconds;
+                var bucket = 0;
+                while (bucket < DiagnosticGapUpperBounds.Length && gap > DiagnosticGapUpperBounds[bucket]) bucket++;
+                Interlocked.Increment(ref _diagnosticFrameGaps[bucket]);
+            }
+            _diagnosticPreviousFrameStart = startTimestamp;
+#endif
 			int audioFrames;
 			try
 			{
 				_emulator.RenderNextFrame(presentationFramebuffer);
-				_displayFrameStopwatchTicks = Math.Max(1, (long)Math.Round(Stopwatch.Frequency / _emulator.VideoVBlankHz));
+#if COPPERSCREEN_INSTALLED_TESTS
+                guestDone = Stopwatch.GetTimestamp();
+#endif
 				if (reservedBufferIndex >= 0 && presentationFramebuffer.Length != _emulator.Framebuffer.Length)
 				{
 					// Only this reserved, unleased slot is replaced. Existing leases retain their pixels and geometry.
@@ -837,6 +948,11 @@ internal sealed class CopperScreenRuntime : IDisposable
 					HostClipboardImageChanged?.Invoke(clipboardImage);
 				var audioStartTimestamp = Stopwatch.GetTimestamp();
 				audioFrames = _emulator.RenderAudio(_audioBuffer, _audioSampleRate, AudioChannels);
+#if COPPERSCREEN_INSTALLED_TESTS
+                Interlocked.Add(ref _diagnosticGuestSampleValues, audioFrames * AudioChannels);
+                Interlocked.Increment(ref _diagnosticGuestFields);
+                if (_audioBuffer.AsSpan(0, audioFrames * AudioChannels).ContainsAnyExcept(0f)) Interlocked.Increment(ref _diagnosticGuestAudibleFields);
+#endif
 				if (_audio != null && _floppyDriveAudio != null && audioFrames > 0)
 				{
 					_emulator.CaptureDriveStates(_floppyDriveAudioStates);
@@ -858,10 +974,14 @@ internal sealed class CopperScreenRuntime : IDisposable
 			}
 
 			_lastEmulationFrameMilliseconds = Stopwatch.GetElapsedTime(startTimestamp).TotalMilliseconds;
-			if (_audio != null && !_audio.Submit(_audioBuffer.AsSpan(0, audioFrames * AudioChannels)))
+			if (_audio != null && submitAudio && !_audio.Submit(_audioBuffer.AsSpan(0, audioFrames * AudioChannels)))
 			{
 				_audioSubmitFailures++;
 			}
+#if COPPERSCREEN_INSTALLED_TESTS
+            if (!submitAudio) Interlocked.Add(ref _diagnosticSuppressedSampleValues, audioFrames * AudioChannels);
+            var submitted = Stopwatch.GetTimestamp();
+#endif
 
 			if (reservedBufferIndex >= 0)
 			{
@@ -871,13 +991,28 @@ internal sealed class CopperScreenRuntime : IDisposable
 					framesRendered: 1,
 					queuedAudioBuffers: _audio?.QueuedBufferCount ?? queuedAudioBuffers);
 			}
+#if COPPERSCREEN_INSTALLED_TESTS
+            DiagnosticOwnerEvent(1, fieldStart, startTimestamp, guestDone, submitted,
+                fieldCpu, fieldQueue, fieldMissing, submitAudio ? audioFrames * AudioChannels : -audioFrames * AudioChannels,
+                reservedBufferIndex >= 0 ? _lastPublishFrameMilliseconds : -1);
+#endif
 		}
 	}
 
 	private int TryReservePresentationFrameBuffer(int queuedAudioBuffers, out long frameNumber)
 	{
 		var reserveStartTimestamp = Stopwatch.GetTimestamp();
-		lock (_presentationSync)
+        var entered = false;
+        if (_audio != null && !Monitor.TryEnter(_presentationSync))
+        {
+            _droppedFrames++; _presentationBufferDroppedFrames++;
+            frameNumber = 0;
+            _lastPresentationBufferReserveMilliseconds = Stopwatch.GetElapsedTime(reserveStartTimestamp).TotalMilliseconds;
+            return -1; // Still render the complete field and PCM into the guest framebuffer.
+        }
+        if (_audio != null) entered = true;
+        else Monitor.Enter(_presentationSync, ref entered);
+        try
 		{
 			if (ShouldReplaceQueuedPresentationFrames(queuedAudioBuffers))
 			{
@@ -910,6 +1045,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 			_lastPresentationBufferReserveMilliseconds = Stopwatch.GetElapsedTime(reserveStartTimestamp).TotalMilliseconds;
 			return bufferIndex;
 		}
+        finally { if (entered) Monitor.Exit(_presentationSync); }
 	}
 
 	private void PublishRenderedFrame(int bufferIndex, long frameNumber, int framesRendered, int queuedAudioBuffers)
@@ -918,7 +1054,16 @@ internal sealed class CopperScreenRuntime : IDisposable
 		_pendingCopperBenchRequest |= _emulator.ConsumeCopperBenchRequest();
 		_lastPublishCopyMilliseconds = 0;
 		var state = CaptureState(framesRendered, queuedAudioBuffers, _frameDriveStates[bufferIndex]);
-		lock (_presentationSync)
+        var entered = false;
+        if (_audio != null && !Monitor.TryEnter(_presentationSync))
+        {
+            _droppedFrames++; _presentationBufferDroppedFrames++;
+            _lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
+            return; // UI contention may drop presentation, never guest work or PCM.
+        }
+        if (_audio != null) entered = true;
+        else Monitor.Enter(_presentationSync, ref entered);
+        try
 		{
 			_writeBufferIndex = bufferIndex;
 			_latestBufferIndex = bufferIndex;
@@ -926,6 +1071,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 			_latestState = WithCurrentPresentationDiagnostics(state with { FrameNumber = frameNumber });
 			EnqueuePresentationFrameNoLock(new PresentationFrameEntry(bufferIndex, frameNumber, _latestState));
 		}
+        finally { if (entered) Monitor.Exit(_presentationSync); }
 
 		_lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
 		FramePublished?.Invoke();
@@ -935,9 +1081,22 @@ internal sealed class CopperScreenRuntime : IDisposable
 	{
 		var publishStartTimestamp = Stopwatch.GetTimestamp();
 		_pendingCopperBenchRequest |= _emulator.ConsumeCopperBenchRequest();
+		// Paused/silent publication can wait. Running PCM production must not wait
+		// for UI state publication, including either side of this frame copy.
+		var canWait = _audio == null || _emulator.IsPaused;
+		_lastPublishCopyMilliseconds = 0;
 		int nextBuffer;
 		long frameNumber;
-		lock (_presentationSync)
+		var entered = false;
+		if (!canWait && !Monitor.TryEnter(_presentationSync))
+		{
+			_droppedFrames++; _presentationBufferDroppedFrames++;
+			_lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
+			return;
+		}
+		if (!canWait) entered = true;
+		else Monitor.Enter(_presentationSync, ref entered);
+		try
 		{
 			if (ShouldReplaceQueuedPresentationFrames(queuedAudioBuffers))
 			{
@@ -968,6 +1127,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 			frameNumber = _latestFrameNumber + 1;
 		}
+		finally { if (entered) Monitor.Exit(_presentationSync); }
 
 		var copyStartTimestamp = Stopwatch.GetTimestamp();
 		if (_frameBuffers[nextBuffer].Length != _emulator.Framebuffer.Length)
@@ -976,7 +1136,16 @@ internal sealed class CopperScreenRuntime : IDisposable
 		_lastPublishCopyMilliseconds = Stopwatch.GetElapsedTime(copyStartTimestamp).TotalMilliseconds;
 		_lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
 		var state = CaptureState(framesRendered, queuedAudioBuffers, _frameDriveStates[nextBuffer]);
-		lock (_presentationSync)
+		entered = false;
+		if (!canWait && !Monitor.TryEnter(_presentationSync))
+		{
+			_droppedFrames++; _presentationBufferDroppedFrames++;
+			_lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
+			return;
+		}
+		if (!canWait) entered = true;
+		else Monitor.Enter(_presentationSync, ref entered);
+		try
 		{
 			_writeBufferIndex = nextBuffer;
 			_latestBufferIndex = nextBuffer;
@@ -984,7 +1153,9 @@ internal sealed class CopperScreenRuntime : IDisposable
 			_latestState = WithCurrentPresentationDiagnostics(state with { FrameNumber = frameNumber });
 			EnqueuePresentationFrameNoLock(new PresentationFrameEntry(nextBuffer, frameNumber, _latestState));
 		}
+		finally { if (entered) Monitor.Exit(_presentationSync); }
 
+		_lastPublishFrameMilliseconds = Stopwatch.GetElapsedTime(publishStartTimestamp).TotalMilliseconds;
 		FramePublished?.Invoke();
 	}
 

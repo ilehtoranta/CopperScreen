@@ -78,7 +78,7 @@ public interface IAmigaTrack
 /// Represents Amiga floppy media with a decoded AmigaDOS sector view.
 /// </summary>
 /// <remarks>
-/// The decoded sector view always uses the standard 880 KiB AmigaDOS layout. Media loaded from encoded tracks may
+/// Sector ADF media uses the 880 KiB DD or 1760 KiB HD AmigaDOS layout. Media loaded from encoded tracks may
 /// contain zero-filled sectors when a sector could not be decoded.
 /// </remarks>
 public interface IAmigaSectorDiskMedia : IAmigaDiskMedia

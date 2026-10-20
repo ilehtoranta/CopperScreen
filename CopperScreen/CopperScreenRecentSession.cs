@@ -12,7 +12,7 @@ internal sealed class CopperScreenRecentSession
 
     public CopperScreenRecentSession(string directory)
     {
-        _directory = directory;
+        _directory = CopperScreenUserData.GetDirectory(directory);
         try
         {
             if (!File.Exists(HistoryPath)) return;
@@ -23,10 +23,12 @@ internal sealed class CopperScreenRecentSession
             foreach (var path in (history.RecentDisks ?? []).Reverse()) RememberDisk(path);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException)
-        { Debug.WriteLine($"Unable to read recent session: {ex.Message}"); }
+        { LastError = $"Could not read saved preferences: {ex.Message}"; Debug.WriteLine(LastError); }
     }
 
-    public static string DefaultDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CopperScreen");
+    public static string DefaultDirectory => CopperScreenUserData.DefaultDirectory;
+    public string DataDirectory => _directory;
+    public string? LastError { get; private set; }
     private string MachinePath => Path.Combine(_directory, "last-machine.json");
     private string HistoryPath => Path.Combine(_directory, "recent-session.json");
     public double Volume { get; private set; } = 100;
@@ -35,10 +37,12 @@ internal sealed class CopperScreenRecentSession
 
     public CopperScreenSettingsDraft? LoadMachine(string baseDirectory)
     {
-        if (!File.Exists(MachinePath) || !CopperScreenProfile.TryLoad(MachinePath, baseDirectory, out var profile, out _)) return null;
+        if (!File.Exists(MachinePath)) return null;
+        if (!CopperScreenProfile.TryLoad(MachinePath, baseDirectory, out var profile, out var error, _directory))
+        { LastError = error; return null; }
         var draft = CopperScreenSettingsDraft.FromProfile(profile);
-        for (var i = 0; i < draft.DriveDiskPaths.Length; i++)
-            if (!CopperScreenDiskImageArchive.DiskPathExists(draft.DriveDiskPaths[i])) draft.DriveDiskPaths[i] = null;
+        // Retain broken paths so the launcher can explain and repair them. Clearing
+        // a missing CopperOS disk would silently turn a saved workspace into ROM-only boot.
         return draft;
     }
 
@@ -50,20 +54,28 @@ internal sealed class CopperScreenRecentSession
         if (_recentDisks.Count > MaximumRecentDisks) _recentDisks.RemoveRange(MaximumRecentDisks, _recentDisks.Count - MaximumRecentDisks);
     }
 
-    public void Save(CopperScreenSettingsDraft? machine, double volume, bool muted)
+    public void Save(CopperScreenSettingsDraft? machine, double volume, bool muted, string? baseDirectory = null)
     {
         Volume = double.IsFinite(volume) ? Math.Clamp(volume, 0, 100) : 100;
         Muted = muted;
         try
         {
             Directory.CreateDirectory(_directory);
-            if (machine != null) CopperScreenProfileStore.SaveToPath(machine, MachinePath);
-            var temporaryPath = HistoryPath + ".tmp";
-            File.WriteAllText(temporaryPath, JsonSerializer.Serialize(new History { Volume = Volume, Muted = Muted, RecentDisks = _recentDisks.ToArray() }));
-            File.Move(temporaryPath, HistoryPath, overwrite: true);
+            if (machine != null) CopperScreenProfileStore.SaveToPath(machine, MachinePath, baseDirectory: baseDirectory);
+            CopperScreenUserData.WriteAtomically(HistoryPath, JsonSerializer.Serialize(new History { Volume = Volume, Muted = Muted, RecentDisks = _recentDisks.ToArray() }));
+            LastError = null;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
-        { Debug.WriteLine($"Unable to save recent session: {ex.Message}"); }
+        { LastError = $"Could not save preferences: {ex.Message} Check your user-data folder permissions."; Debug.WriteLine(LastError); }
+    }
+
+    // Restore changes the selected machine, not volume/mute or recent floppy
+    // history. Persist this single atomic record before committing the UI draft.
+    // Let failure reach the restore transaction so it can discard its new copies.
+    internal void RememberRestoredMachine(CopperScreenSettingsDraft machine, string baseDirectory)
+    {
+        CopperScreenProfileStore.SaveToPath(machine, MachinePath, baseDirectory: baseDirectory);
+        LastError = null;
     }
 
     private sealed class History

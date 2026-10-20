@@ -1,7 +1,7 @@
 namespace CopperDisk;
 
 /// <summary>
-/// Defines the standard double-density AmigaDOS floppy geometry used by ADF sector images.
+/// Defines the standard DD AmigaDOS floppy geometry and DD/HD ADF image sizes.
 /// </summary>
 public static class AmigaDiskGeometry
 {
@@ -25,10 +25,11 @@ public static class AmigaDiskGeometry
     /// </summary>
     public const int CylinderCount = 80;
 
-    /// <summary>
-    /// The byte length of a standard 880 KiB ADF sector image.
-    /// </summary>
+    /// <summary>The byte length of a standard 880 KiB DD ADF sector image.</summary>
     public const int StandardAdfSize = CylinderCount * HeadCount * SectorsPerTrack * SectorSize;
+
+    /// <summary>The byte length of an 80-cylinder, 22-sector HD ADF.</summary>
+    public const int HighDensityAdfSize = 2 * StandardAdfSize;
 
     /// <summary>
     /// The number of physical tracks in a standard Amiga disk image.

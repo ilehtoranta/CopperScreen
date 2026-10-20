@@ -1,0 +1,3271 @@
+{
+  "schema": "copperstart-native-intuition-refresh-evidence-v1",
+  "date": "2026-10-18",
+  "scope": "Producer correctness on the bounded native A500; no app-pair admission or throughput result",
+  "producerArtifactRoot": "CopperStart/artifacts/intuition-refresh-20261018",
+  "qualification": {
+    "file": "qualified-v2/qualification.json",
+    "sha256": "A714499B27519F7A533787D49ED131307FD0C8A2204016A6F90F841C013559F6"
+  },
+  "source": {
+    "manifest": {
+      "file": "source-qualified-v2.json",
+      "sha256": "40D75587BB6A6871AC676D82321088FE309C89A3CBEA2C65D7FD24DFA92A6FB2"
+    },
+    "files": 54,
+    "inputs": [
+      {
+        "file": "build\\Build-DesktopProviderReplayTests.ps1",
+        "sha256": "F4D94A09AF931748A3ECC4A2813283BAE31F0D198505F8EFE26BE61646C001A4"
+      },
+      {
+        "file": "build\\Test-CompactDesktopGraphics.ps1",
+        "sha256": "5BD34F2C0B7736A0082C0901D9E112A6A23CD84A89E84A829C0E77F9CD9D538F"
+      },
+      {
+        "file": "build\\Test-NativeIntuitionStartup.ps1",
+        "sha256": "C52F7276FD0F36CE2C16098369743D81CA7D83BC6F75450FEA730D52B4365F43"
+      },
+      {
+        "file": "provider\\NativeDesktopImage.cs",
+        "sha256": "D36EB1284E7F62A666B99C133654519E133F50700FC0AFACE634BA1D5CBCE1DE"
+      },
+      {
+        "file": "provider\\NativeDesktopInput.cs",
+        "sha256": "B568E5D3AFDA84EB706053C61518FA0D77A8D35C4364BBC9610E7908C9D2A0CC"
+      },
+      {
+        "file": "provider\\NativeDesktopProviders.cs",
+        "sha256": "CD2840B9DAA6B976F85CC95B4028D307E4A99DEEE7E16BE781D72EE097361FB0"
+      },
+      {
+        "file": "provider\\NativeDesktopVectors.cs",
+        "sha256": "C515FF3AE6698094DEDAC03E0950873E76B19B173098DA403FD2D72F1BCB2F9E"
+      },
+      {
+        "file": "provider\\NativeIntuitionLibrary.cs",
+        "sha256": "87145124E5E8B408C4CB97094412DAD88D6C30D9CC8917A4B79C97B0A394B2B2"
+      },
+      {
+        "file": "provider\\NativeIntuitionPreferences.cs",
+        "sha256": "D5949D902D7B11A93DC8F5058FFB81FA60B0FDB9AFE2D3949613A73B525A93A2"
+      },
+      {
+        "file": "provider\\NativeIntuitionRefresh.cs",
+        "sha256": "2724061F812916D8AC32D94D67057261E1D27354B0A933E60080741ACA5CAFB4"
+      },
+      {
+        "file": "provider\\NativeUtilityLibrary.cs",
+        "sha256": "325DE11B76009633EE43A619952EB1F85D46E291259FCDD1BBFF05ED24A04202"
+      },
+      {
+        "file": "provider\\NativeWorkbenchLibrary.cs",
+        "sha256": "F4EFB10C49E62BF9863A5D9B875759A5700D36A3C145D45AE84EB93D45998119"
+      },
+      {
+        "file": "provider\\Provider.csproj",
+        "sha256": "435A22A85F8FFD69E8C8727124B504E444FD4FC3142275BDFC85319910943A04"
+      },
+      {
+        "file": "replay\\AmigaDiskFileSystemTests.cs",
+        "sha256": "AC5CC010BFC94963B71991DD9D2B4CE65D2E3A0F140B28E15DAA29278167EAAB"
+      },
+      {
+        "file": "replay\\BootScriptTests.cs",
+        "sha256": "23DFB8E3C70EEF90689A03FFB25901E6260E109503652D6FB9375F798164F269"
+      },
+      {
+        "file": "replay\\CompactBitmapInstructionTests.cs",
+        "sha256": "A9962E853E0B72915DC07462FD52240EAF002E45682B53E908B7D50B9696A079"
+      },
+      {
+        "file": "replay\\CompactDisplayInstructionTests.cs",
+        "sha256": "1DE9C1FC02CE5640E6DE19FFA01E026A6CCCEFB371FDF2CD7BB78ED974C19353"
+      },
+      {
+        "file": "replay\\CompactGraphicsInstructionTests.cs",
+        "sha256": "EA35F93BC75C75B59313793E1C6AA933ECF00C9F6C2C013C2A1747A5AAC1E514"
+      },
+      {
+        "file": "replay\\CompactLayerInstructionTests.cs",
+        "sha256": "C15BD4A58B6A1FF6AB1E085AE177626A714A8EC695224C1C386780FAA4947310"
+      },
+      {
+        "file": "replay\\CompactLayerProviderInstructionTests.cs",
+        "sha256": "26E802DCC547EECDF10B497E8FF83BA1CB806A7C4B07E6403EB2FD83B372213F"
+      },
+      {
+        "file": "replay\\CompactLayerTextInstructionTests.cs",
+        "sha256": "25DE77FC8278D728D55B5A15016BB7C680CDA8AFA93DB1888D12FCB0B7D3E27E"
+      },
+      {
+        "file": "replay\\CompactUtilityProviderInstructionTests.cs",
+        "sha256": "B444472780FDDD2484444E95A54589B39AC666B6677EAB8A1667308A6805A6C2"
+      },
+      {
+        "file": "replay\\DosDiskImage.cs",
+        "sha256": "13A52138603AA353B27828DAE45181862E318E16DD51FD7D731E3E2DE483B5B6"
+      },
+      {
+        "file": "replay\\NativeBootConsoleTests.cs",
+        "sha256": "7993B397690DF6707C61478BD0FB27255E2617AD1B900315AB81663899FB3931"
+      },
+      {
+        "file": "replay\\NativeBootImage.cs",
+        "sha256": "C50921872B3F32FAA77D1C2B7677503A3397EFAA81598449DC21A34C4D196434"
+      },
+      {
+        "file": "replay\\NativeBootScriptTests.cs",
+        "sha256": "14B1DB33A44FB59E3244D26AE8D75E3086FDD09A2816DF07017AC1917B8D426C"
+      },
+      {
+        "file": "replay\\NativeCacheBootTests.cs",
+        "sha256": "37D2B0579EFC2F519FCE6B6CAAF9C27961F2B4CDE467604F31572378D92E188D"
+      },
+      {
+        "file": "replay\\NativeCliModuleBootTests.cs",
+        "sha256": "3911945EC67070B492E9A7A589A5071B90628E363377A1AC04CAFBA762E98E53"
+      },
+      {
+        "file": "replay\\NativeCurrentDirectoryBootTests.cs",
+        "sha256": "33007B7BCFDBE4E483B729C7040CD24E97FB14AFB6C1E3887C5D54A684C53742"
+      },
+      {
+        "file": "replay\\NativeDesktopDisplayTests.cs",
+        "sha256": "38F2E87502D33140C1E95C0B74F8036CC05A126AF7F3F564213C5BBAFCE7DD96"
+      },
+      {
+        "file": "replay\\NativeDesktopPrerequisiteTests.cs",
+        "sha256": "C2DE3BDC57DBB3766EF25A0957C87A4D0C2B47DFBBC0D51EC4216883D4DC0F8C"
+      },
+      {
+        "file": "replay\\NativeDesktopProviderStartupTests.cs",
+        "sha256": "85704DC69BEF3E9109A8E81CE3C9B8F243D85550162644DD5B226434EA60858E"
+      },
+      {
+        "file": "replay\\NativeDiskBootTests.cs",
+        "sha256": "0FA8F60C4B7F937B340F786276D5FC8B53F6613B91868B912B8D4002AECF3465"
+      },
+      {
+        "file": "replay\\NativeDiskLibraryBootTests.cs",
+        "sha256": "1B48C0908A059870C83A7B461C29B2FFC9FE55C6F9BD79BC41DAEA5B451AB25E"
+      },
+      {
+        "file": "replay\\NativeDosBootTests.cs",
+        "sha256": "0306C5F771CC7123E78B071C6DCE6FDB106CA6317EC327485D352ED2070C9740"
+      },
+      {
+        "file": "replay\\NativeDosErrorBootTests.cs",
+        "sha256": "F3F75EE5388DC378DAFC3174E36BC1EE79BDF4095E635FC976E950AA0EFAE900"
+      },
+      {
+        "file": "replay\\NativeExecInterruptBootTests.cs",
+        "sha256": "1338482F34D62AADB40125F1460EA56D05319071C0216FB683A75B1F64CEAF66"
+      },
+      {
+        "file": "replay\\NativeFfsWriteBootTests.cs",
+        "sha256": "48463FFB261F7956F4277FE300C0C9770A1A0B53C73973791ADF0DCD11F75D63"
+      },
+      {
+        "file": "replay\\NativeFileMetadataBootTests.cs",
+        "sha256": "E7284E4AE85FF12320C7ED5ECA1F6DC40B9C88B3689AAF06C0EE20AB0EF48C1D"
+      },
+      {
+        "file": "replay\\NativeFloppyRomTests.cs",
+        "sha256": "DA887D3620FBDD3A85ACF96A4DCC4A9E272C23FA8AFFEF7DBFC51654D11F2DFF"
+      },
+      {
+        "file": "replay\\NativeFullShellBootTests.cs",
+        "sha256": "DE47D308C54FD1E6D70E9C20BAA8E8AA37482AB251E91F70A6DA84D9D94A89DC"
+      },
+      {
+        "file": "replay\\NativeGraphicsBootTests.cs",
+        "sha256": "DDDE568D3B1F5B88B5084EE2D4A0091B137CF0F5C7E0A1786B1F44FB5770BD2B"
+      },
+      {
+        "file": "replay\\NativeIntuitionRefreshTests.cs",
+        "sha256": "F2B9354F6DDD16E0EDF419D658E4F128AEF6D2AB26093DC6C413833CBA1D9AD8"
+      },
+      {
+        "file": "replay\\NativeIntuitionStartupTests.cs",
+        "sha256": "524AE0B7FA21476016A2F949D68EB583F867F03C77B90E57750F113FC9D0CF32"
+      },
+      {
+        "file": "replay\\NativeMorphOsResidentBootTests.cs",
+        "sha256": "27D997944B6D26F7685496E142F58D40EBEC045A7C54DC0D88266B24EF8179E8"
+      },
+      {
+        "file": "replay\\NativeOwnedLayerUpdateTests.cs",
+        "sha256": "2A24AF99428EA0F32099A47182E8EE74D159618DCC66F2645B1B6A97FF125706"
+      },
+      {
+        "file": "replay\\NativeParityBus.cs",
+        "sha256": "CCA1990CEF75D45B473EBA111FBFFC47A161E67C8A1FA1BEFFDC4F41E12DCB8B"
+      },
+      {
+        "file": "replay\\NativeReadArgsBootTests.cs",
+        "sha256": "33D0B281725C98AB8020F146F98DFA1B7A56E3A0D6453A1351C67A4447A3543B"
+      },
+      {
+        "file": "replay\\NativeResidentControlTests.cs",
+        "sha256": "1680A0D150D13C972367F397914A7DB5BDED9C0EAB91F2EB259CDBC87CA220F8"
+      },
+      {
+        "file": "replay\\NativeStartupDriverTests.cs",
+        "sha256": "43C9D988A183E808152F62E42233BFE9E6ACBB557A5C8E250960B232F241578F"
+      },
+      {
+        "file": "replay\\NativeUtilityBootTests.cs",
+        "sha256": "665DD6EDF2DFE5DE1B194010716095D879E47A851BFD6F32E2A97C1CE7B7E792"
+      },
+      {
+        "file": "replay\\NativeUtilityV40BootTests.cs",
+        "sha256": "5BF083931EA62C1CAB8CC28CD939126D6D706275F4E95AB53C62570E10F0BEA7"
+      },
+      {
+        "file": "replay\\NativeWorkbenchStartupTests.cs",
+        "sha256": "78480FDC88C35D9030244D602D2651F3A523B24F7DC652D4C2A86D0B5B19EB8B"
+      },
+      {
+        "file": "replay\\Replay.csproj",
+        "sha256": "B318AE32700958F916D3E1DBB6F45B6B795A1E4F0A8C18CBC9897437665FF112"
+      }
+    ]
+  },
+  "builds": [
+    {
+      "kind": "Latest producer Release solution build",
+      "passed": true,
+      "warnings": 0,
+      "errors": 0,
+      "log": {
+        "file": "solution-build-v3.log",
+        "sha256": "228FBC5D7CA530B4344B2CEB075D3146D90B53E397217ED1225CDDEF595D1369"
+      }
+    }
+  ],
+  "trx": {
+    "file": "qualified-v2/intuition/intuition.trx",
+    "sha256": "813A441EF6A6709191703C6EE0646B5F0D975F6F32AABED51CEC6DA609C5A70A"
+  },
+  "replayAssembly": {
+    "file": "qualified-v2/inputs/CopperStart.Floppy.Native.Tests.dll",
+    "sha256": "11586C6D652CAFD99E17487A0245C8045CF5AF29E2579B37D948E09F331A050A"
+  },
+  "managedInputs": {
+    "file": "qualified-v2/managed-inputs.json",
+    "sha256": "A6D4F973737627A9C1D4EC121FB4AC230213412D70F60C1BD8F705BB7F1F171C"
+  },
+  "nativePayload": {
+    "file": "qualified-v2/intuition/CopperIntuition.hunk",
+    "sha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652"
+  },
+  "nativeMap": {
+    "file": "qualified-v2/intuition/CopperIntuition.map",
+    "sha256": "2EABAC8A661C1075DDC320D370C864384E757CB7C564C5EC4C25095F9FDB4989"
+  },
+  "result": {
+    "selectedTests": 6,
+    "romBytes": 524288,
+    "refreshTests": 3,
+    "chipBytes": 524288,
+    "coreTests": 0,
+    "input": "NOT QUALIFIED: no physical input producer, pointer or focus journey in this entry",
+    "intuitionTests": 3,
+    "shipping": false,
+    "refresh": "Native partial/complete/empty refresh, failed drawing suppression, frame/desktop repaint and retries qualified; refresh messages remain open",
+    "fastBytes": 0,
+    "protocol": "copperstart-native-intuition-refresh-v1",
+    "receipts": [
+      {
+        "width": 320,
+        "fields": 12772,
+        "pc": 12755350,
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "payloadSha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652",
+        "chipBytes": 524288,
+        "slowBytes": 524288,
+        "fastBytes": 0,
+        "captures": [
+          {
+            "cycle": 0,
+            "screen": 12750440,
+            "window": 12751336,
+            "layer": 12832200,
+            "chipFree": 211736,
+            "totalFree": 502792,
+            "largestChip": 178968,
+            "largestSlow": 272864
+          },
+          {
+            "cycle": 1,
+            "screen": 12750440,
+            "window": 12751336,
+            "layer": 12832200,
+            "chipFree": 211736,
+            "totalFree": 502792,
+            "largestChip": 178968,
+            "largestSlow": 272864
+          },
+          {
+            "cycle": 2,
+            "screen": 12750440,
+            "window": 12751336,
+            "layer": 12832200,
+            "chipFree": 211736,
+            "totalFree": 502792,
+            "largestChip": 178968,
+            "largestSlow": 272864
+          }
+        ],
+        "restored": 3,
+        "receipt": [
+          0,
+          1229868875,
+          14044,
+          56180,
+          12810468,
+          9280,
+          12750440,
+          12751336,
+          12750372,
+          12748526,
+          526368,
+          526368,
+          526368,
+          526368,
+          0,
+          300,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          211736,
+          502792,
+          178968,
+          272864,
+          0,
+          0,
+          0,
+          0,
+          0,
+          34,
+          12590648,
+          12595328,
+          29,
+          33,
+          0,
+          0,
+          539088,
+          539088,
+          3,
+          526368,
+          29,
+          503960,
+          503960,
+          33,
+          526368,
+          532224,
+          52,
+          532224,
+          5,
+          526368,
+          526368,
+          12590768,
+          12809616,
+          12809616,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "width": 640,
+        "fields": 13201,
+        "pc": 12755350,
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "payloadSha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652",
+        "chipBytes": 524288,
+        "slowBytes": 524288,
+        "fastBytes": 0,
+        "captures": [
+          {
+            "cycle": 0,
+            "screen": 12750440,
+            "window": 12751336,
+            "layer": 12832200,
+            "chipFree": 191256,
+            "totalFree": 482312,
+            "largestChip": 158488,
+            "largestSlow": 272864
+          },
+          {
+            "cycle": 1,
+            "screen": 12750440,
+            "window": 12751336,
+            "layer": 12832200,
+            "chipFree": 191256,
+            "totalFree": 482312,
+            "largestChip": 158488,
+            "largestSlow": 272864
+          },
+          {
+            "cycle": 2,
+            "screen": 12750440,
+            "window": 12751336,
+            "layer": 12832200,
+            "chipFree": 191256,
+            "totalFree": 482312,
+            "largestChip": 158488,
+            "largestSlow": 272864
+          }
+        ],
+        "restored": 3,
+        "receipt": [
+          0,
+          1229868875,
+          14044,
+          56180,
+          12810468,
+          9280,
+          12750440,
+          12751336,
+          12750372,
+          12748526,
+          526368,
+          526368,
+          526368,
+          526368,
+          0,
+          300,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          191256,
+          482312,
+          158488,
+          272864,
+          0,
+          0,
+          0,
+          0,
+          0,
+          34,
+          12590648,
+          12595328,
+          29,
+          33,
+          0,
+          0,
+          539088,
+          539088,
+          3,
+          526368,
+          29,
+          483480,
+          483480,
+          33,
+          526368,
+          532224,
+          52,
+          532224,
+          5,
+          526368,
+          526368,
+          12590768,
+          12809616,
+          12809616,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "refreshReceipts": [
+      {
+        "width": 320,
+        "repaintFailure": false,
+        "fields": 11767,
+        "pc": 12765806,
+        "done": 1230131019,
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "payloadSha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652",
+        "chipBytes": 524288,
+        "slowBytes": 524288,
+        "fastBytes": 0,
+        "captures": [
+          {
+            "cycle": 0,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497608,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 0,
+            "damage": 0
+          },
+          {
+            "cycle": 0,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 496112,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 0,
+            "damage": 0
+          },
+          {
+            "cycle": 0,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 211736,
+            "totalFree": 498752,
+            "largestChip": 178968,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 211736,
+            "totalFree": 498752,
+            "largestChip": 178968,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497608,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 496112,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 211736,
+            "totalFree": 498752,
+            "largestChip": 178968,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 211736,
+            "totalFree": 498752,
+            "largestChip": 178968,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497608,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 496112,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 211736,
+            "totalFree": 497592,
+            "largestChip": 178968,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 211736,
+            "totalFree": 498752,
+            "largestChip": 178968,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 211736,
+            "totalFree": 498752,
+            "largestChip": 178968,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          }
+        ],
+        "receipt": [
+          1230131019,
+          13,
+          2,
+          1,
+          56180,
+          12816204,
+          9280,
+          12755120,
+          0,
+          0,
+          12756312,
+          521160,
+          498752,
+          521160,
+          12756792,
+          12825956,
+          12825968,
+          0,
+          12821208,
+          12755052,
+          12748526,
+          0,
+          1,
+          12590648,
+          3,
+          211736,
+          498752,
+          178968,
+          283400,
+          498752,
+          0,
+          0,
+          0,
+          498752,
+          498752,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "width": 640,
+        "repaintFailure": false,
+        "fields": 11884,
+        "pc": 12765806,
+        "done": 1230131019,
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "payloadSha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652",
+        "chipBytes": 524288,
+        "slowBytes": 524288,
+        "fastBytes": 0,
+        "captures": [
+          {
+            "cycle": 0,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477128,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 0,
+            "damage": 0
+          },
+          {
+            "cycle": 0,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 475632,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 0,
+            "damage": 0
+          },
+          {
+            "cycle": 0,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 478272,
+            "largestChip": 158488,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 0,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 478272,
+            "largestChip": 158488,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477128,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 475632,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 478272,
+            "largestChip": 158488,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 1,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 478272,
+            "largestChip": 158488,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477128,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 475632,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12757008,
+            "chipFree": 191256,
+            "totalFree": 477112,
+            "largestChip": 158488,
+            "largestSlow": 268240,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 478272,
+            "largestChip": 158488,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756792,
+            "damage": 12825956
+          },
+          {
+            "cycle": 2,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 478272,
+            "largestChip": 158488,
+            "largestSlow": 283400,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756792,
+            "damage": 12825956
+          }
+        ],
+        "receipt": [
+          1230131019,
+          13,
+          2,
+          1,
+          56180,
+          12816204,
+          9280,
+          12755120,
+          0,
+          0,
+          12756312,
+          521160,
+          478272,
+          521160,
+          12756792,
+          12825956,
+          12825968,
+          0,
+          12821208,
+          12755052,
+          12748526,
+          0,
+          1,
+          12590648,
+          3,
+          191256,
+          478272,
+          158488,
+          283400,
+          478272,
+          0,
+          0,
+          0,
+          478272,
+          478272,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "width": 640,
+        "repaintFailure": true,
+        "fields": 12925,
+        "pc": 12767070,
+        "done": 1230131019,
+        "romBytes": 524288,
+        "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+        "payloadSha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652",
+        "chipBytes": 524288,
+        "slowBytes": 524288,
+        "fastBytes": 0,
+        "captures": [
+          {
+            "cycle": 0,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476448,
+            "largestChip": 158488,
+            "largestSlow": 267064,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 0,
+            "damage": 0
+          },
+          {
+            "cycle": 0,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 474952,
+            "largestChip": 158488,
+            "largestSlow": 264920,
+            "failedProjection": false,
+            "allocations": 0,
+            "normalClips": 0,
+            "damage": 0
+          },
+          {
+            "cycle": 0,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 265984,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 12,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 267248,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 0,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 267248,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476448,
+            "largestChip": 158488,
+            "largestSlow": 267064,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 474952,
+            "largestChip": 158488,
+            "largestSlow": 264920,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 265984,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 12,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 267248,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 1,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 267248,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 1,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476448,
+            "largestChip": 158488,
+            "largestSlow": 267064,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 2,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 474952,
+            "largestChip": 158488,
+            "largestSlow": 264920,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 3,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 4,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 5,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 2,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 6,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": true,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 7,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 8,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 9,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 10,
+            "screen": 12755120,
+            "window": 12756016,
+            "layer": 12756968,
+            "chipFree": 191256,
+            "totalFree": 476432,
+            "largestChip": 158488,
+            "largestSlow": 265856,
+            "failedProjection": false,
+            "allocations": 3,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 11,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 265984,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 12,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 267248,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          },
+          {
+            "cycle": 2,
+            "stage": 13,
+            "screen": 12755120,
+            "window": 0,
+            "layer": 0,
+            "chipFree": 191256,
+            "totalFree": 477592,
+            "largestChip": 158488,
+            "largestSlow": 267248,
+            "failedProjection": false,
+            "allocations": 1,
+            "normalClips": 12756840,
+            "damage": 12841316
+          }
+        ],
+        "receipt": [
+          1230131019,
+          13,
+          2,
+          1,
+          56180,
+          12817564,
+          9280,
+          12755120,
+          0,
+          0,
+          12756312,
+          520480,
+          477592,
+          520480,
+          12756840,
+          12841316,
+          12841328,
+          0,
+          12756584,
+          12755052,
+          12748526,
+          0,
+          1,
+          12590648,
+          3,
+          191256,
+          477592,
+          158488,
+          267248,
+          477592,
+          0,
+          0,
+          0,
+          477592,
+          477592,
+          0,
+          0,
+          0,
+          0,
+          12752784,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "passed": true,
+    "lifetime": "The complete disk module and all its HUNK segments remain loaded until reset",
+    "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+    "payload": {
+      "sha256": "7ADCC9816C2593506A87D02B70748A4DD847A35EF8B745ACA29FEDEEC77B5652",
+      "entry": 0,
+      "installer": 226736,
+      "codeBytes": 227440,
+      "imageBytes": 234916,
+      "lifetime": "Retain the entire HUNK until reset",
+      "inputs": [
+        {
+          "file": "CopperStart.DesktopProviders.dll",
+          "sha256": "A9698ECE6AE41A23162008C0733FE9645A4DE0C06544B98B1574CA022B0CB119"
+        },
+        {
+          "file": "CopperStart.Layers.dll",
+          "sha256": "B396B505EAAE9C2E1BEAF8EFD93DB17FF7DEBA9EB970D901EB6C774B62B7BF63"
+        },
+        {
+          "file": "CopperStart.Utility.dll",
+          "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+        }
+      ]
+    },
+    "slowBytes": 524288
+  },
+  "layout": {
+    "romBytes": 524288,
+    "rootCodeBytes": 463658,
+    "rootPrefixBytes": 8,
+    "graphicsOffset": 491520,
+    "graphicsBytes": 31906,
+    "footerBytes": 20,
+    "tailBeforeFooterBytes": 842,
+    "separatePreGraphicsGapBytes": 27854
+  },
+  "coverage": {
+    "compilationControls": 1,
+    "nativeJourneys": 5,
+    "startupLifetimes": 6,
+    "refreshLifetimes": 9,
+    "refreshCaptures": 111,
+    "startupCaptures": 14,
+    "skips": 0,
+    "previousCoreChecksRerun": 0
+  },
+  "checkedRefreshMemory": [
+    {
+      "width": 320,
+      "repaintFailure": false,
+      "scope": "Minimum across checked refresh capture points; not a transient peak or full GUI budget",
+      "chipFree": 211736.0,
+      "totalFree": 496112.0,
+      "largestChip": 178968.0,
+      "largestSlow": 268240.0
+    },
+    {
+      "width": 640,
+      "repaintFailure": false,
+      "scope": "Minimum across checked refresh capture points; not a transient peak or full GUI budget",
+      "chipFree": 191256.0,
+      "totalFree": 475632.0,
+      "largestChip": 158488.0,
+      "largestSlow": 268240.0
+    },
+    {
+      "width": 640,
+      "repaintFailure": true,
+      "scope": "Minimum across checked refresh capture points; not a transient peak or full GUI budget",
+      "chipFree": 191256.0,
+      "totalFree": 474952.0,
+      "largestChip": 158488.0,
+      "largestSlow": 264920.0
+    }
+  ],
+  "captures": [
+    {
+      "file": "intuition-320-console-after-1.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-320-console-after-2.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-320-console-after-3.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-320-console-before.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-320-cycle-0.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "intuition-320-cycle-1.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "intuition-320-cycle-2.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "intuition-640-console-after-1.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-640-console-after-2.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-640-console-after-3.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-640-console-before.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "intuition-640-cycle-0.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "intuition-640-cycle-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "intuition-640-cycle-2.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-1.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-10.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-2.png",
+      "bytes": 8784,
+      "sha256": "A44B0510F50CF27322F902FF28591C49D6F0957411A4757139446698BC218416"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-3.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-4.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-5.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-6.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-7.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-8.png",
+      "bytes": 8855,
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "refresh-320-False-cycle-0-stage-9.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-1.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-10.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-2.png",
+      "bytes": 8784,
+      "sha256": "A44B0510F50CF27322F902FF28591C49D6F0957411A4757139446698BC218416"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-3.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-4.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-5.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-6.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-7.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-8.png",
+      "bytes": 8855,
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "refresh-320-False-cycle-1-stage-9.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-1.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-10.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-2.png",
+      "bytes": 8784,
+      "sha256": "A44B0510F50CF27322F902FF28591C49D6F0957411A4757139446698BC218416"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-3.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-4.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-5.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-6.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-7.png",
+      "bytes": 8769,
+      "sha256": "72BE6A0E86DF59ABFA4EB7F3DD035AD19046EEC73F1E84549CD410B300B7C1AD"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-8.png",
+      "bytes": 8855,
+      "sha256": "502D9AADBC96680D31A12C85D2E5EAD166B49CC46532138FFE91EB7C0C45D39D"
+    },
+    {
+      "file": "refresh-320-False-cycle-2-stage-9.png",
+      "bytes": 8891,
+      "sha256": "E2355759DFC584671E3D4847E3C65E7E917218F4A0A099BA14F5BDBC98ECCC65"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-10.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-2.png",
+      "bytes": 8287,
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-3.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-4.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-5.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-6.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-7.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-8.png",
+      "bytes": 8398,
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "refresh-640-False-cycle-0-stage-9.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-10.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-2.png",
+      "bytes": 8287,
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-3.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-4.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-5.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-6.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-7.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-8.png",
+      "bytes": 8398,
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "refresh-640-False-cycle-1-stage-9.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-10.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-2.png",
+      "bytes": 8287,
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-3.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-4.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-5.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-6.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-7.png",
+      "bytes": 8331,
+      "sha256": "814EB67A9D31852F1CB20C82861FBDB2A6289E6576CECD874CDA20AF57D48C65"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-8.png",
+      "bytes": 8398,
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "refresh-640-False-cycle-2-stage-9.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-10.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-12.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-2.png",
+      "bytes": 8287,
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-3.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-4.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-5.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-6.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-7.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-8.png",
+      "bytes": 8398,
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "refresh-640-True-cycle-0-stage-9.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-10.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-12.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-2.png",
+      "bytes": 8287,
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-3.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-4.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-5.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-6.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-7.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-8.png",
+      "bytes": 8398,
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "refresh-640-True-cycle-1-stage-9.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-1.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-10.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-11.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-12.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-13.png",
+      "bytes": 7139,
+      "sha256": "35E6D26F20AB52212C9E002284059D52BA1470EFEF17F9117E063A7019D17F0B"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-2.png",
+      "bytes": 8287,
+      "sha256": "2F1F4AFC1656884B02912753E95BD172DFD65FC4C2AB83E54765410D94BE5505"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-3.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-4.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-5.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-6.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-7.png",
+      "bytes": 8115,
+      "sha256": "3B897CE4EF1003BAD3AD43E31C601F0564E95DF40AFCF7EFED18AD8CB5622092"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-8.png",
+      "bytes": 8398,
+      "sha256": "754733F670F0127F69FFD793593E98061BB9938C6115612B0B6C8D7B338939BF"
+    },
+    {
+      "file": "refresh-640-True-cycle-2-stage-9.png",
+      "bytes": 8439,
+      "sha256": "EB0B3FEED67017AE8B604D8CD16829C22F1B570FF665A740D91990121FFA7837"
+    }
+  ],
+  "appFirmwareManifest": {
+    "unchanged": true,
+    "sha256": "22E1001D18B97AFAFE6391F4B39A1D0859BCA5967B29688320C3E00032C588F3"
+  },
+  "exclusions": [
+    "IDCMP refresh message production, replies and event-driven waits",
+    "Physical input, pointer and focus in this entry",
+    "Concurrent preferences and Workbench/input public APIs",
+    "Disjoint damage, native foreign clip regions and contended lock wait/resume",
+    "Smart Intuition windows, move/resize, GimmeZeroZero and SuperBitMap",
+    "Loader/transient peaks and full desktop/event/input memory budget",
+    "Shipping app ROM/OS admission and performance acceptance"
+  ]
+}

@@ -1,0 +1,992 @@
+{
+  "protocol": "copperos-native-files-evidence-v1",
+  "recordedUtc": "2026-10-18T20:14:02.545692+00:00",
+  "shipping": false,
+  "qualification": {
+    "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/qualification.json",
+    "bytes": 8265,
+    "sha256": "25016C42FEC9F24F5EDEFA896BAC33D8EA992D9072E81F9A8286768C1B0A6F74"
+  },
+  "scope": "Native functional ROM/media replays and freestanding compilation; separate production Release builds. No latency/throughput acceptance.",
+  "tests": {
+    "total": 3,
+    "passed": 3,
+    "skipped": 0,
+    "interactiveLifetimes": 4,
+    "startupFailures": 7,
+    "missingGuiAttempts": 3,
+    "dosFailureVectors": 5,
+    "filesPixelOracles": 12
+  },
+  "profile": {
+    "romBytes": 524288,
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "filesEntries": 32,
+    "visibleRows": 8,
+    "pathBytes": 256,
+    "filesCacheBytes": 4384,
+    "filesNavigationBytes": 8768
+  },
+  "freeAfterStop": 489576,
+  "lowestSampledFreeAtDesktopWait": 331176,
+  "waitSampleScope": "Samples at the public Exec.Wait vector in the Desktop task; excludes unsampled loader/IO/drawing transients and largest-block measurements.",
+  "module": {
+    "protocol": "copperos-native-files-v1",
+    "shipping": false,
+    "romBytes": 524288,
+    "requiredRomSha256": "492EF10926F73EDCF3EC7CAFC331E54A84C418924F765BA93AA4D504B20990CA",
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "callbackVeneerBytes": 32,
+    "stackBytes": 32768,
+    "stateBytes": 256,
+    "cleanupReserve": 8192,
+    "filesWorkspaceBytes": 4384,
+    "filesNavigationPeakBytes": 8768,
+    "filesEntryCapacity": 32,
+    "filesPathBytes": 256,
+    "imageBytes": 13316,
+    "sha256": "667E18BD8271C016B21BCAD1FE6536DB3A59CD60C29A76E60A7864CDC89BBAE2",
+    "entry": 0,
+    "commandBytes": 652,
+    "commandSha256": "06C82FB9A49725B4AB5AE924D43F965F1C763463C4402EA5B802910E27A8A063",
+    "providerBytes": 256972,
+    "providerSha256": "9B3352B2D8EE2A2A144FAA089C954B926A4E734CBA6EF2B4151AB8E7B4E04ABD",
+    "lifetime": "Home and GUI code are DOS system residents until reset; one copy per identity",
+    "inputs": [
+      {
+        "file": "CopperOS.Desktop.dll",
+        "sha256": "61DBD5D15ECA8AD16994F1D53EF8EEDE268B041DCB86C1D67E5313DD5273A939"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ]
+  },
+  "receipt": {
+    "protocol": "copperos-native-files-v1",
+    "romSha256": "492EF10926F73EDCF3EC7CAFC331E54A84C418924F765BA93AA4D504B20990CA",
+    "romBytes": 524288,
+    "providerSha256": "9B3352B2D8EE2A2A144FAA089C954B926A4E734CBA6EF2B4151AB8E7B4E04ABD",
+    "homeSha256": "667E18BD8271C016B21BCAD1FE6536DB3A59CD60C29A76E60A7864CDC89BBAE2",
+    "homeBytes": 13316,
+    "filesWorkspaceBytes": 4384,
+    "filesEntryCapacity": 32,
+    "filesPathBytes": 256,
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "fields": 87085,
+    "baseline": 489576,
+    "receipts": [
+      {
+        "cycle": 0,
+        "result": 0,
+        "freeBytes": 489576,
+        "freeAtWait": 335672,
+        "waitCalls": 1,
+        "faultCalls": 0,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 1,
+        "result": 0,
+        "freeBytes": 489576,
+        "freeAtWait": 331176,
+        "waitCalls": 157,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 2,
+        "result": 0,
+        "freeBytes": 489576,
+        "freeAtWait": 335672,
+        "waitCalls": 1,
+        "faultCalls": 0,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 3,
+        "result": 0,
+        "freeBytes": 489576,
+        "freeAtWait": 335672,
+        "waitCalls": 2,
+        "faultCalls": 0,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 4,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 5,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 6,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 7,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 8,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 2,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 9,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 2,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      },
+      {
+        "cycle": 10,
+        "result": 20,
+        "freeBytes": 489576,
+        "freeAtWait": 4294967295,
+        "waitCalls": 0,
+        "faultCalls": 1,
+        "port": 0,
+        "screen": 0,
+        "input": 0
+      }
+    ],
+    "captures": [
+      {
+        "cycle": 0,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 8626
+      },
+      {
+        "cycle": 1,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 10594
+      },
+      {
+        "cycle": 1,
+        "name": "exposed-refresh",
+        "selected": 0,
+        "status": 0,
+        "fields": 12001
+      },
+      {
+        "cycle": 1,
+        "name": "tab",
+        "selected": 1,
+        "status": 0,
+        "fields": 12217
+      },
+      {
+        "cycle": 1,
+        "name": "editor",
+        "selected": 1,
+        "status": 2,
+        "fields": 12303
+      },
+      {
+        "cycle": 1,
+        "name": "about",
+        "selected": 2,
+        "status": 3,
+        "fields": 12595
+      },
+      {
+        "cycle": 1,
+        "name": "dismiss",
+        "selected": 2,
+        "status": 0,
+        "fields": 12678
+      },
+      {
+        "cycle": 1,
+        "name": "files-oom-home",
+        "selected": 0,
+        "status": 1,
+        "fields": 12972
+      },
+      {
+        "view": "Files",
+        "name": "root",
+        "path": "NativeBoot:",
+        "count": 8,
+        "top": 0,
+        "selected": 1,
+        "error": 0,
+        "more": 0,
+        "fields": 17167
+      },
+      {
+        "view": "Files",
+        "name": "scroll-bottom",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 24,
+        "selected": 31,
+        "error": 0,
+        "more": 1,
+        "fields": 33785
+      },
+      {
+        "view": "Files",
+        "name": "oom-rollback",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 0,
+        "selected": 3,
+        "error": 103,
+        "more": 1,
+        "fields": 36262
+      },
+      {
+        "view": "Files",
+        "name": "dos--84-rollback",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 0,
+        "selected": 3,
+        "error": 103,
+        "more": 1,
+        "fields": 37809
+      },
+      {
+        "view": "Files",
+        "name": "dos--102-rollback",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 0,
+        "selected": 3,
+        "error": 103,
+        "more": 1,
+        "fields": 38055
+      },
+      {
+        "view": "Files",
+        "name": "dos--402-rollback",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 0,
+        "selected": 3,
+        "error": 103,
+        "more": 1,
+        "fields": 38225
+      },
+      {
+        "view": "Files",
+        "name": "dos--108-rollback",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 0,
+        "selected": 3,
+        "error": 103,
+        "more": 1,
+        "fields": 39113
+      },
+      {
+        "view": "Files",
+        "name": "dos--210-rollback",
+        "path": "NativeBoot:Browse",
+        "count": 32,
+        "top": 0,
+        "selected": 3,
+        "error": 103,
+        "more": 1,
+        "fields": 39275
+      },
+      {
+        "view": "Files",
+        "name": "empty",
+        "path": "NativeBoot:Empty",
+        "count": 0,
+        "top": 0,
+        "selected": 0,
+        "error": 0,
+        "more": 0,
+        "fields": 45286
+      },
+      {
+        "view": "Files",
+        "name": "nested",
+        "path": "NativeBoot:Nested/Sub",
+        "count": 1,
+        "top": 0,
+        "selected": 0,
+        "error": 0,
+        "more": 0,
+        "fields": 52763
+      },
+      {
+        "view": "Files",
+        "name": "exposed-refresh",
+        "path": "NativeBoot:Nested/Sub",
+        "count": 1,
+        "top": 0,
+        "selected": 0,
+        "error": 0,
+        "more": 0,
+        "fields": 62981
+      },
+      {
+        "view": "Files",
+        "name": "long-path-rollback",
+        "path": "NativeBoot:Deep/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong/LongDrawerLongDrawerLong",
+        "count": 1,
+        "top": 0,
+        "selected": 0,
+        "error": 120,
+        "more": 0,
+        "fields": 79074
+      },
+      {
+        "cycle": 1,
+        "name": "files-home",
+        "selected": 0,
+        "status": 0,
+        "fields": 79830
+      },
+      {
+        "cycle": 1,
+        "name": "mouse-about",
+        "selected": 2,
+        "status": 3,
+        "fields": 80121
+      },
+      {
+        "cycle": 2,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 82176
+      },
+      {
+        "cycle": 3,
+        "name": "home",
+        "selected": 0,
+        "status": 0,
+        "fields": 84150
+      }
+    ]
+  },
+  "sourceFiles": [
+    {
+      "file": "CopperOS/src/System/Desktop/DesktopCalls.cs",
+      "bytes": 6846,
+      "sha256": "1F3F4A8CCB8046AE16B4760E5C9340B207C62601BB12E02255E6013611117B05"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/DesktopMemory.cs",
+      "bytes": 2233,
+      "sha256": "98553A0A43107D575D6B35E9A26EDECD2A352F5269AFBD851B84524E2B851EFD"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/DesktopProfile.cs",
+      "bytes": 619,
+      "sha256": "10FFD5F3C208CACFF2D1A2B4E26BEF0A2106BFDA311BCFC1FE4A74E927310E37"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/FilesView.cs",
+      "bytes": 11247,
+      "sha256": "FF6733523C2932E84C83485B5B1A66FFBDDB50BE0CA5D90D7375D155459C2D5A"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/HomeView.cs",
+      "bytes": 6668,
+      "sha256": "2648C629E342B6054DC1EE9D42EA58D13BE19E93D939ED1BD3E5CFAFE39F1B73"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/NativeDesktopLauncher.cs",
+      "bytes": 3456,
+      "sha256": "C2FD75E1D307EFB5660D0B9BB03C4444E7A5E19411B900FAB53B9605E2D912FF"
+    },
+    {
+      "file": "CopperOS/src/System/Desktop/NativeDesktopProcess.cs",
+      "bytes": 8070,
+      "sha256": "EF57F2173226D9FCB6E135AC1DB9BD5CFFDE3E1B7F6E7AA85E0030201D0334C7"
+    },
+    {
+      "file": "CopperOS/tools/Desktop.Builder/DesktopImageBuilder.cs",
+      "bytes": 9971,
+      "sha256": "8AF14EF232F687225802BF28139DCAA6D3C98EDEEF8B9D020C2D946001FCD6EF"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/DosDiskImage.cs",
+      "bytes": 24546,
+      "sha256": "0053A29411342EACFB776334C7A51D3FC3F4AD03AC40EC192105FEE26E0E03FE"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsHomeProbe.cs",
+      "bytes": 10532,
+      "sha256": "936024BB8E9830CD73E2B6E1141434B290C5DB8DA951A7E64BD6620B48322598"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsHomeTests.cs",
+      "bytes": 27423,
+      "sha256": "04A2E813F0D73CFDC9E7A43E4880B156680E36B2C58BC334130F8584194FF6B2"
+    },
+    {
+      "file": "CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsHomeMissingTests.cs",
+      "bytes": 5442,
+      "sha256": "A76FC71465CF94056E011193CF0F2F99AA31268136C42620B1B9B118DB137553"
+    },
+    {
+      "file": "CopperStart/build/Test-NativeCopperOsFiles.ps1",
+      "bytes": 7903,
+      "sha256": "CA98B8351ACF84A5E771F327181C88DEA5527FF3BD35B77203BA7AE8F40D5A11"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/CopperHome.hunk",
+      "bytes": 13316,
+      "sha256": "667E18BD8271C016B21BCAD1FE6536DB3A59CD60C29A76E60A7864CDC89BBAE2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/Desktop.hunk",
+      "bytes": 652,
+      "sha256": "06C82FB9A49725B4AB5AE924D43F965F1C763463C4402EA5B802910E27A8A063"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/Desktop.map",
+      "bytes": 57035,
+      "sha256": "FE7DBA06F333B27510EF3278267E8DB881775C1FBDC7C5E2DAA8554B6D523826"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/fault--102.json",
+      "bytes": 115,
+      "sha256": "98B1E07077F88ED1A7A0E4D4394066383F678F3242899BDE712802469008E3DF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/fault--108.json",
+      "bytes": 115,
+      "sha256": "A9586C4A4FA612F793A77B0BF21232F8F800785997CCCAEC3E9856C6CD983945"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/fault--210.json",
+      "bytes": 115,
+      "sha256": "141E639F4631E6A2F5B634AA6BBFDE890964B9F1F9F063EB9E0DBD7DD83F2F50"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/fault--402.json",
+      "bytes": 115,
+      "sha256": "17040D5AE18BFE8C924F72CDF027209C163D2825ED22229DD592F8A01317C616"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/fault--84.json",
+      "bytes": 114,
+      "sha256": "05CC2FD8E9C984BB3F2A1191E05870E7962A5242E2772BF4696D5AE93632FFE4"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-dos--102-rollback.png",
+      "bytes": 15124,
+      "sha256": "9B728892E931EA36131BB247E94E7663762C6B1DC0FBB2A3D388282D8F38F82A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-dos--108-rollback.png",
+      "bytes": 15124,
+      "sha256": "9B728892E931EA36131BB247E94E7663762C6B1DC0FBB2A3D388282D8F38F82A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-dos--210-rollback.png",
+      "bytes": 15124,
+      "sha256": "9B728892E931EA36131BB247E94E7663762C6B1DC0FBB2A3D388282D8F38F82A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-dos--402-rollback.png",
+      "bytes": 15124,
+      "sha256": "9B728892E931EA36131BB247E94E7663762C6B1DC0FBB2A3D388282D8F38F82A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-dos--84-rollback.png",
+      "bytes": 15124,
+      "sha256": "9B728892E931EA36131BB247E94E7663762C6B1DC0FBB2A3D388282D8F38F82A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-empty.png",
+      "bytes": 12616,
+      "sha256": "A897D9C38B3CB5B763D92F7DAAA2D644873030296AB3997347B5B518963018C6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-exposed-refresh.png",
+      "bytes": 13583,
+      "sha256": "93B8283A20BAF9810DAEB7ABAD0EB6FE523106FEDCF19F6BAFA07665747CF974"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-long-path-rollback.png",
+      "bytes": 14812,
+      "sha256": "E701C0A0A7AB6A97C7A4EBA0B9A80200CEF9A4F89C56226A30E6E2814D5A8801"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-nested.png",
+      "bytes": 13583,
+      "sha256": "93B8283A20BAF9810DAEB7ABAD0EB6FE523106FEDCF19F6BAFA07665747CF974"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-oom-rollback.png",
+      "bytes": 15124,
+      "sha256": "9B728892E931EA36131BB247E94E7663762C6B1DC0FBB2A3D388282D8F38F82A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-root.png",
+      "bytes": 14483,
+      "sha256": "935F4CBB7269B4083087C1EA322A9A8EF42F89D56986AC6D8CAB8C46B85A2448"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/files-scroll-bottom.png",
+      "bytes": 15462,
+      "sha256": "0DBB4E0719A9385CCC192F7AB3F7E79AA1BA593377BD0FC3AE37A63107DEDBE7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-0-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-0-home.png",
+      "bytes": 15984,
+      "sha256": "46F828C103D6F70AB62CCC3C1E021CC4662679042A2B7B34B9D1869FE5294ADE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-about.png",
+      "bytes": 16240,
+      "sha256": "49C9F59D3DE44ECF47127D4BB1AD46299F11CD7C43805EED64719A861878D272"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-dismiss.png",
+      "bytes": 16358,
+      "sha256": "A14E3C9CD3C339BE4D3ED1B32D608259E97DB89EC3748CE1D00AB59D4570C81B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-editor.png",
+      "bytes": 16472,
+      "sha256": "10C16EF53BCAD21BFDEF7ED7E5E2C483E73FA475CBFC9EA26F6A27D066E0AF23"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-exposed-refresh.png",
+      "bytes": 15984,
+      "sha256": "46F828C103D6F70AB62CCC3C1E021CC4662679042A2B7B34B9D1869FE5294ADE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-files-home.png",
+      "bytes": 16004,
+      "sha256": "B3015F13308453717A3A6E38D5253A80E79F5F0DEB61FC643CFD16AF7AE8812A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-files-oom-home.png",
+      "bytes": 15955,
+      "sha256": "7CFD9DE43C381C6871E45C69F3D103D9730FC203240F4F577DBBA96CF232CE66"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-home.png",
+      "bytes": 15984,
+      "sha256": "46F828C103D6F70AB62CCC3C1E021CC4662679042A2B7B34B9D1869FE5294ADE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-mouse-about.png",
+      "bytes": 16157,
+      "sha256": "9126029819AE2769FAACB5374BD518FBEC1AFC06B2074A8EE4173E1D78C04245"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-1-tab.png",
+      "bytes": 16349,
+      "sha256": "6DAD0461F8241E10322C1C78F8DAD69CFD54BB9BA9057024FB5751AAB92BBC3E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-10-console.png",
+      "bytes": 15173,
+      "sha256": "B84C37410B1E0DE200C9EAADF137A48B3D84110098B14DEA110C843D0366FDDF"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-2-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-2-home.png",
+      "bytes": 15984,
+      "sha256": "46F828C103D6F70AB62CCC3C1E021CC4662679042A2B7B34B9D1869FE5294ADE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-3-console.png",
+      "bytes": 8565,
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-3-home.png",
+      "bytes": 15984,
+      "sha256": "46F828C103D6F70AB62CCC3C1E021CC4662679042A2B7B34B9D1869FE5294ADE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-4-console.png",
+      "bytes": 9515,
+      "sha256": "5508251D136947C4E65FD7964940D83EBBEE5DA0D3762D0405F7C685A3C056BE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-5-console.png",
+      "bytes": 10458,
+      "sha256": "986DA2EB98A87B9EA7751727048BBC87F31724D52FACB9ABBF2CD2CDFB9C0AFD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-6-console.png",
+      "bytes": 11401,
+      "sha256": "B37AA04917EBE3626C141B42415AA8197086038E8A1857A22F00CCA869A81DCD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-7-console.png",
+      "bytes": 12344,
+      "sha256": "40DB4B7259C7EEBE3FD914D66A446581EEE24173676E12C651F013C0F6E0BDAE"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-8-console.png",
+      "bytes": 13287,
+      "sha256": "991B1AC4C0A4CC9340671F73486968DBF723B159A9C8EBA19BE0046106B0B9A5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-9-console.png",
+      "bytes": 14230,
+      "sha256": "3CE0F5EA14853E502BA3D93C1B8AA4DE109F425C0D601118D32AD61D0082F33B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-missing-console.png",
+      "bytes": 11401,
+      "sha256": "B37AA04917EBE3626C141B42415AA8197086038E8A1857A22F00CCA869A81DCD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home-missing.json",
+      "bytes": 307,
+      "sha256": "C8F4F76B3D1F958D67FB3CF8B9AD3EB22BC102347F088EF3CCE3FE3FF80E0442"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home.json",
+      "bytes": 7433,
+      "sha256": "2E7E9B86C444C96894DA7957409B01955CC0B571EC19752B16E0DBE659A0C9C5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/home.trx",
+      "bytes": 6201,
+      "sha256": "DA112DE16F70DE2A25826A462D0182BA5B1A9AB8C76800A654C187D98F5F9424"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/native/HomeProbe.hunk",
+      "bytes": 3180,
+      "sha256": "2C88A4DCBC373E76F4845813D4C47A1D65E2BE07B820A196E850FBD5AAECBFCB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/qualification.json",
+      "bytes": 8265,
+      "sha256": "25016C42FEC9F24F5EDEFA896BAC33D8EA992D9072E81F9A8286768C1B0A6F74"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/source-inputs.json",
+      "bytes": 8371,
+      "sha256": "E69249DC7BF937D0F3A0FBD9180B38F2D05AB8515D12C23EA96A916E52FF4E66"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/build.log",
+      "bytes": 647,
+      "sha256": "F8B654ADDDDB1FFD1ADA35016B0BE73ED98B3BA534175817FFABAD9C49761634"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/tests.log",
+      "bytes": 386,
+      "sha256": "7E8BF0B825AE2CA462816BBA576082FD55B692215D138423EBFA290EFA68502A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/runtime/CopperOS.Desktop.dll",
+      "bytes": 21504,
+      "sha256": "61DBD5D15ECA8AD16994F1D53EF8EEDE268B041DCB86C1D67E5313DD5273A939"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-v3/desktop.json",
+      "bytes": 1512,
+      "sha256": "763B27A45E96BC231FD511FD2AE97CC1891EF4CD56B38290D40DF1B10B59F11F"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-v3/Desktop.map",
+      "bytes": 57035,
+      "sha256": "FE7DBA06F333B27510EF3278267E8DB881775C1FBDC7C5E2DAA8554B6D523826"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-v3/C/Desktop",
+      "bytes": 652,
+      "sha256": "06C82FB9A49725B4AB5AE924D43F965F1C763463C4402EA5B802910E27A8A063"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-v3/L/CopperGUI",
+      "bytes": 256972,
+      "sha256": "9B3352B2D8EE2A2A144FAA089C954B926A4E734CBA6EF2B4151AB8E7B4E04ABD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-v3/L/CopperHome",
+      "bytes": 13316,
+      "sha256": "667E18BD8271C016B21BCAD1FE6536DB3A59CD60C29A76E60A7864CDC89BBAE2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-home-20261018/rom-reap-v1/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "492EF10926F73EDCF3EC7CAFC331E54A84C418924F765BA93AA4D504B20990CA"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-home-20261018/rom-reap-v1/disk-boot-test-manifest.json",
+      "bytes": 6599,
+      "sha256": "3BE7AE0C61708D7604600A838EFDC5FF9F0E224DC7CD21AB112AB3646092BBA6"
+    },
+    {
+      "file": "CopperStart/artifacts/intuition-text-20261018/native-v3/intuition.json",
+      "bytes": 1308,
+      "sha256": "5F2F4FECF1DEF38D0D6C7E53F4D15D6E9D67D6B89517305A526AAAF581B560CB"
+    },
+    {
+      "file": "CopperStart/artifacts/intuition-text-20261018/native-v3/CopperIntuition.hunk",
+      "bytes": 256972,
+      "sha256": "9B3352B2D8EE2A2A144FAA089C954B926A4E734CBA6EF2B4151AB8E7B4E04ABD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/app/Home.csproj",
+      "bytes": 639,
+      "sha256": "CBD7FF4F54101221C1538B331B8897C62A550DD37BDCE85986711A56E117CCD2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/source/Replay.csproj",
+      "bytes": 5376,
+      "sha256": "E27F61752D276C32A7441DD5EBCB5E994CC131B8804BB46584372A25BB91D9A6"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/evidence/collect.py",
+      "bytes": 6530,
+      "sha256": "71A1C8153F598762DDD96B2E5D93CEB89DA02FB6C3B14C9DECCA55FDF6FA766B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-exporter/Program.cs",
+      "bytes": 621,
+      "sha256": "5A369755903DEEBDFDB8EC9DB662C98849BC67BCA0B528641753E47CE42446B9"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-exporter/Exporter.csproj",
+      "bytes": 211,
+      "sha256": "38E201F047792DF530DB8C7D157C2B6B19D1ED2E4134DBA5DA5C59E97D3B0DA2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/bundle-export-v3.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperDisk.dll",
+      "bytes": 105472,
+      "sha256": "C4C4F47C41748806331A19B0A4630B10B9AADDE989A4D24F58BAA9DCE5D6D832"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperFloat.dll",
+      "bytes": 28672,
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288768,
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperOS.Shell.Dos.dll",
+      "bytes": 191488,
+      "sha256": "7B69708D0CEA0E3470D437336582F41314D96532E5D7622097E7A0D010E5A6F4"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperSharp.Compiler.dll",
+      "bytes": 2739200,
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperSharp.Runtime.AmigaPal.dll",
+      "bytes": 23552,
+      "sha256": "EF964C0884C261002A22A4754E64DBC7627859A4EEDD5CBF7EC91E5A2D061720"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperSharp.Runtime.Managed.dll",
+      "bytes": 98304,
+      "sha256": "F6E7A15CE4A808484FA9C93EDD4A70E612C32B9F6D0357BBF8C36C6CC7FA7D0D"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperSharp.Sdk.Amiga.dll",
+      "bytes": 548864,
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperSharp.Sdk.Amiga.Support.dll",
+      "bytes": 155648,
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperSharp.Targets.Amiga.dll",
+      "bytes": 42496,
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart-System.dll",
+      "bytes": 39424,
+      "sha256": "2F7052F699DF6E882C20C94C05D434B75B9E1B36AA6FD9313905EE48D01030CB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.DesktopProviders.dll",
+      "bytes": 63488,
+      "sha256": "530BE39E6FA3E0D480C4F8F6169BF461A496D47408752F61F63C410769F9EF50"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Devices.dll",
+      "bytes": 100352,
+      "sha256": "BF8717BED0CC18898E4974A0E012C2F1A490CA3BDE6679180B3C4197D59DA1CB"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Dos.dll",
+      "bytes": 762880,
+      "sha256": "B0A34EF0B438BD3C5A79D29719E93C016B1E200794087D5055DFC8F7EB48BFC5"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Exec.dll",
+      "bytes": 187904,
+      "sha256": "56DAD5CDB11EBA0B82A96D21F4F67C0D0005D05FB46CF010B5846688CDB7D604"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Expansion.dll",
+      "bytes": 5120,
+      "sha256": "88AD9384E6E88EC028781305C78548B369F00C175D97976516EE2F9489DAE0CD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Floppy.Native.Tests.dll",
+      "bytes": 522752,
+      "sha256": "D54AF7B70273F7F304D66CB39CD85E7CEF5B8B9CF477F19854EA9470D335974A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Graphics.dll",
+      "bytes": 2401792,
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Icon.dll",
+      "bytes": 7168,
+      "sha256": "1C0645E66F23E33979E8A3D20A612CD4DBD23DC747A40719079A8310C3E3295A"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Intuition.dll",
+      "bytes": 512512,
+      "sha256": "343DC2BD3B3152CF624D082A6E71BA5A130C4EE7952AD91633BC8A7C1704AB4B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Layers.dll",
+      "bytes": 349184,
+      "sha256": "92A2E69B88E75CF6D7BD7E746D6CA1F021BFD3C23FD0373BC8B0B1AB2570EF84"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Runtime.dll",
+      "bytes": 5632,
+      "sha256": "EC2BC0A302F5EBA42AEFB2B792C732BBE8F70EF6485F8318E7167F24121F63AD"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Shell.dll",
+      "bytes": 30208,
+      "sha256": "FFF828B848DBACEE4760CF323B2D4E857554B5477415A29FCC9A6F63C5D48B7B"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Utility.dll",
+      "bytes": 16896,
+      "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/qualified-v12/inputs/CopperStart.Workbench.dll",
+      "bytes": 4608,
+      "sha256": "2E0CE2A62039CFC3FC41E9621B9E560B702C024FCFFCCC135CFD87F82414DFF7"
+    },
+    {
+      "file": "CopperStart/artifacts/copperos-files-20261018/production-build.log",
+      "bytes": 4681,
+      "sha256": "2EF2D89E83B90AEB706AC5E17FB0235DAB19D6D4E5984790965041641E9EE6F9"
+    },
+    {
+      "file": "CopperScreen/artifacts/copperos-files-consumer-build.log",
+      "bytes": 1283,
+      "sha256": "CD8E21EB0273AAC684A52D4E4E4877B768DF2793DBAFCABC6E1F52EDF7F2789C"
+    }
+  ],
+  "remaining": [
+    "Case-preserving font on the exact profile",
+    "16 KiB Editor buffer, cursor/viewport and edit commands",
+    "Files-to-Editor transactional open",
+    "Dirty-state decisions and recoverable save replacement on writable DOS media",
+    "Directory/startup/paint latency and memory high-water/largest blocks",
+    "Stress, shipping HDF pair, child launch/return and workspace/update persistence"
+  ]
+}

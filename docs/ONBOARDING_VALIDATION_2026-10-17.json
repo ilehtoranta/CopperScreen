@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "protocol": "copperscreen-onboarding-desktop-v1",
+  "date": "2026-10-17",
+  "scope": "P1-05 desktop implementation and local controls/lifecycle checks; no Store release admission",
+  "engine": "Lightweight",
+  "legacyAvailable": false,
+  "shippingPairAdmitted": false,
+  "build": {
+    "status": "passed",
+    "errors": 0,
+    "applicationAssemblySha256": "ef2aa419b9211898f78c93f74e14c04d610d0062941415c0049d490b4a3b7c36",
+    "command": "dotnet restore CopperScreen.slnx --locked-mode; dotnet build CopperScreen.slnx -c Release -m:1 --no-restore",
+    "log": "artifacts/onboarding-tests/production-build-accepted.log",
+    "warnings": 0,
+    "sha256": "4df59eedd17d13120e0e109380d9901da984e092012930967b63b9a39a410c7d"
+  },
+  "hostTests": {
+    "path": "artifacts/onboarding-tests/host-onboarding-accepted.trx",
+    "sha256": "56f0fe51a371a212daa8dee287950ed7c40436808fdae2ee8137f497cd67c15c",
+    "total": 253,
+    "passed": 241,
+    "failed": 0,
+    "unavailable": 12,
+    "unavailableCases": [
+      "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPowerUpCapsLockAndA500ResetAreAcknowledged",
+      "CopperScreen.Tests.Kickstart31Tests.SuppliedNativeWorkbench31HardDiskBootsAndPersistsAcrossDesktopSessions",
+      "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeGameplayThroughHostAdapterPreservesValidatedCpuAndOutput",
+      "CopperScreen.Tests.CopperOsStorageTests.NativeStorageSurvivesAppRestartAndChangedPackageDirectory",
+      "CopperScreen.Tests.Kickstart30AgaTests.SuppliedNativeA1200BootsEightPlanesAndPersistsThroughDesktopReopen",
+      "CopperScreen.Tests.CopperOsStorageTests.NativeWorkspaceCanExportAfterHostCheckpointFailure",
+      "CopperScreen.Tests.CopperStartTests.LotusOpeningRaceThroughAppSessionMatchesScalarGuestExecution",
+      "CopperScreen.Tests.CopperScreenLightweightSessionTests.NativeKeyboardPressAndReleaseAreAcknowledgedAndGameplayContinues",
+      "CopperScreen.Tests.CopperOsStorageTests.NativeFullAndReadOnlyWorkspacesRecoverWithoutChangingData",
+      "CopperScreen.Tests.CopperStartTests.QualifiedRomColdBootResetReinsertAndRestartUseStandardSession",
+      "CopperScreen.Tests.Kickstart31Tests.SuppliedNativeWorkbench31BootsThroughTheDesktopSession",
+      "CopperScreen.Tests.CopperOsBootProofTests.OriginalSystemBootRegistersShellAndRunsInteractiveCommandsThroughLightweight"
+    ]
+  },
+  "diskTests": {
+    "path": "artifacts/onboarding-tests/disk-onboarding.trx",
+    "sha256": "dfc4e3d1e655c7164b46d06855cf15e02e31d73af513378a8373e51066869c42",
+    "total": 74,
+    "passed": 74,
+    "failed": 0,
+    "unavailable": 0,
+    "unavailableCases": []
+  },
+  "desktopTests": {
+    "path": "artifacts/onboarding-tests/desktop-onboarding-accepted.trx",
+    "sha256": "3757428ca5411e9016eeecdd6d42a7ccfb8f33519f8e460c5d64c887c10109e5",
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "unavailable": 0,
+    "unavailableCases": []
+  },
+  "onboardingCases": [
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.DamagedWorkspaceResumeReportsRecoveryAndPreservesItsFiles",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.QualifiedWorkspaceLaunchPauseRestartStopAndResumeUseTheStandardWindow",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.SelectingCopperStartResetsUnsupportedHardwareAndKeepsTheOriginalDraftIndependent",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.WrongRomCannotCreateWorkspaceOrAlterAnExistingWorkspace",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.InvalidArchiveImportKeepsThePreviousDiskAndGivesRecoveryGuidance",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.OfflineFirstRunExplainsContentAndCopperOsCannotStartWithoutAWorkspace",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.ProductionLauncherDoesNotDiscoverDiagnosticProofMedia",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.CopperStartLaunchUsesTheQualifiedMachineAndImportedMediaAreReadOnly",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.CorruptRomArchiveInSavedProfileKeepsTheLauncherAvailableForRepair",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.LaunchWorkflowTests.MissingSavedMediaAreRetainedForRepairRatherThanSilentlyBootingAnotherEnvironment",
+      "outcome": "Passed"
+    }
+  ],
+  "pair": {
+    "copperStart": {
+      "qualificationId": "diskboot-2026-10-16-dev.8",
+      "producerCommit": "50f8583a40d24c34a06d4bed71ab31db19d47b95",
+      "bytes": 524288,
+      "sha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+      "requirements": "PAL A500, 68000, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM, read-only DF0 floppy boot; an owned CopperOS DOS1 workspace may be writable. No RTC, Fast RAM, hard disks or shared folders.",
+      "evidence": "docs/COPPEROS_STORAGE_2026-10-16.json",
+      "producerSourceSnapshot": "Qualified dev.3 root/Exec/compiler with frozen native DOS1 FFS writes, physical trackdisk writes and owned current-directory routing. Concurrent producer graphics work is excluded."
+    },
+    "copperOs": {
+      "CompatibleWorkspaceSeeds": [],
+      "PairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "Sha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88"
+    }
+  },
+  "captures": {
+    "copperos-ready.png": "5cb03ed9253e8e4907a0cb1e07e6bd5176168bccb5895a4add51941ff5f7965b",
+    "copperos-setup.png": "2199bcd6db8356fc1dfdb24fb7cac7ee8cd42d3c38b683902d840831f916b7bb",
+    "first-run.png": "747ec9f4e5c4787916fbbfe4c9815456473c1437bb86eadea5712dee84a22fc4"
+  },
+  "sources": {
+    "CopperScreen/CopperScreenLaunchWorkflow.cs": "6174cc1dc7608d2a7a2caf1d43c2fc72c8ef0c687664a0ab8dc1912e8995ad30",
+    "CopperScreen/MainWindow.Launch.cs": "8370efb5c8277de5e194c358b78c719acff7a22431b27e1d6423d645cf44adb9",
+    "CopperScreen/MainWindow.Welcome.cs": "9340b3e4078bdf8805c9a2ba740e50bc8878df51dbe36b35d4ecdd1ad0e2af17",
+    "CopperScreen/MainWindow.Shell.cs": "30771a8ecf99dd7659ba67f115d62c2c9502e5dd4350465f082d5e31612bc8b7",
+    "CopperScreen/MainWindow.cs": "a022816405ff36ded315ff4cf954d5f94893aa60d0330dee8702ea1438e6524d",
+    "CopperScreen/MainWindow.SettingsUx.cs": "6e84a8309fba912fe415042a4a1811973d69197f7b178093e5d301a4b2ceedcf",
+    "CopperScreen/CopperScreenAvailability.cs": "a6ed093afb1d0c3168daf2d7641e0e1e802afff2cf68cf617bd0fa6e748de5a8",
+    "CopperScreen/CopperScreenRecentSession.cs": "198cfffed6fd614a7e422842ea84717298188166c1be6f33a1793ceee4fb4f7d",
+    "CopperScreen/CopperOsWorkspace.cs": "c2d8cf16ea6190bf84d55788c6d545fa32a57cb248cae1beb2c7567960b59dbf",
+    "CopperScreen.Desktop.Tests/LaunchWorkflowTests.cs": "9677a1e59352f2b6a4b4ab525de95fd6a7573f612123b7edef0d021e8604bc1e",
+    "CopperScreen.Lightweight.Tests/CopperScreenRecentSessionTests.cs": "b3978f9f8776a7908883bba008161b8868a878c806aea011f395732c5bba75bb",
+    "CopperScreen.Desktop.Tests/CopperScreen.Desktop.Tests.csproj": "4d42e9f4908180cfd47ee7d7aefdf077dd0e56dc495310d8e07be52ca8ff9c55",
+    "CopperScreen.Desktop.Tests/packages.lock.json": "41514e8739c38ac1c285bb8f2db25cd1b6e1296b93cb0491cf8c3bf778e50111",
+    "CopperScreen/AssemblyInfo.cs": "bbebfd4fb5b7dd7311bb837b62c151e2c957592b95cf744a0aa2c8e41d10c601",
+    "CopperScreen.slnx": "b05a8f52190a1f5d891172833cf7406e269c7283ca0f46f94a0631edf3780edb",
+    ".github/workflows/ci.yml": "aaccca7fa168f51e335ada12d77f53ede125dac385720b756f8c1d36be4e86fb"
+  },
+  "limits": [
+    "Headless styled desktop controls and lifecycle, not native Shell/Demo qualification or throughput.",
+    "Twelve optional native ROM/media cases are unavailable in this host-suite run; earlier dated evidence remains separate.",
+    "No signed MSIX, install/update or WACK rerun for this changed UI candidate.",
+    "Shipping pair admission and clean-account offline signed-package walkthrough with real pickers, accessibility and DPI remain open."
+  ]
+}

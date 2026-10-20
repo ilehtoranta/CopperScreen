@@ -5,14 +5,19 @@ namespace CopperMod.Amiga.Lightweight;
 /// <summary>Owned floppy tracks, control pins and independent spindle.</summary>
 internal sealed class LightweightFloppyDrive
 {
-    internal LightweightFloppyDrive(int index = 0) => _selectMask = 8 << index;
+    internal LightweightFloppyDrive(int index = 0, LightweightFloppyDriveType type = LightweightFloppyDriveType.DoubleDensity)
+        => (_selectMask, _highDensityDrive) = (8 << index, type == LightweightFloppyDriveType.HighDensity);
+    private readonly bool _highDensityDrive;
+    private bool _highDensityMedia;
+    private int _idBit = -1;
+    private int RevolutionCcks => LightweightPaulaAudio.PalCpuFrequency / (_highDensityMedia ? 5 : 10);
     private readonly int _selectMask;
-    private const int RevolutionCcks = LightweightPaulaAudio.PalCpuFrequency / 10;
     private int _bitRateDenominator = 10 * LightweightDiskSerial.TrackBits;
     private int _bitWholeCcks = LightweightPaulaAudio.PalCpuFrequency / (10 * LightweightDiskSerial.TrackBits);
     private int _bitRemainder = LightweightPaulaAudio.PalCpuFrequency % (10 * LightweightDiskSerial.TrackBits);
     private int _fraction;
     internal const int StandardAdfBytes = 80 * 2 * 11 * 512;
+    internal const int HighDensityAdfBytes = StandardAdfBytes * 2;
     // Chosen drive-model spin-up time, not a universal drive timing claim.
     internal const long MotorSpinUpCycles = LightweightPaulaAudio.PalCpuFrequency / 2;
     private byte[]? _image;
@@ -62,8 +67,10 @@ internal sealed class LightweightFloppyDrive
 
     internal void Mount(ReadOnlySpan<byte> image)
     {
-        if (image.Length != StandardAdfBytes)
-            throw new ArgumentException("Floppy drives support standard 880 KiB (80-cylinder DD) ADF images only.", nameof(image));
+        if (image.Length != StandardAdfBytes && image.Length != HighDensityAdfBytes)
+            throw new ArgumentException("ADF images must contain 880 KiB DD or 1760 KiB HD sectors.", nameof(image));
+        if (image.Length == HighDensityAdfBytes && !_highDensityDrive)
+            throw new ArgumentException("HD media requires an HD drive.", nameof(image));
         // Media conversion belongs at the host boundary. A seek must never
         // allocate or invoke a lazy track decoder during emulated execution.
         var ownedImage = image.ToArray();
@@ -71,6 +78,7 @@ internal sealed class LightweightFloppyDrive
         var tracks = new byte[160][];
         for (var track = 0; track < tracks.Length; track++)
             tracks[track] = AmigaDosTrackEncoder.EncodeTrack(media, track / 2, track & 1);
+        _highDensityMedia = image.Length == HighDensityAdfBytes;
         _image = ownedImage;
         _tracks = tracks;
         Format = LightweightFloppyFormat.Adf;
@@ -105,6 +113,7 @@ internal sealed class LightweightFloppyDrive
         var lengths = image.Lengths;
         var masks = image.WeakMasks;
         var seed = image.Seed;
+        _highDensityMedia = false;
         _mediaSeed = seed ^ (uint)_selectMask;
         _image = null;
         _tracks = tracks;
@@ -121,6 +130,7 @@ internal sealed class LightweightFloppyDrive
 
     internal void Eject()
     {
+        _highDensityMedia = false;
         _image = null;
         _tracks = null;
         _trackLengths = null;
@@ -137,6 +147,7 @@ internal sealed class LightweightFloppyDrive
     internal void ResetControl()
     {
         _controlPins = 0xFF;
+        _idBit = -1;
         SelectTrack(0, preservePhase: false);
         MotorOn = false;
         ReadyCycle = long.MaxValue;
@@ -163,6 +174,10 @@ internal sealed class LightweightFloppyDrive
         {
             // MOTOR is latched on selection, not on every PRB write.
             var motor = (pins & 0x80) == 0;
+            // A selected motor-on/off cycle resets the serial ID. The first
+            // following select presents bit 31; later selects clock the ID.
+            if (motor || MotorOn) _idBit = -1;
+            else _idBit = (_idBit + 1) & 31;
             if (motor != MotorOn)
             {
                 MotorOn = motor;
@@ -191,9 +206,13 @@ internal sealed class LightweightFloppyDrive
         if (Mounted && WriteProtected) pins &= ~0x08;
         if (Cylinder == 0) pins &= ~0x10;
         if (Mounted && MotorOn && cycle >= ReadyCycle) pins &= ~0x20;
-        // External DD drives identify as DRT_AMIGA ($00000000) on /READY
-        // with the motor off, including an empty connected drive.
-        if (_selectMask != 8 && !MotorOn) pins &= ~0x20;
+        // A capable drive reports HD only with HD media inserted. The
+        // original internal DD drive has no serial-ID circuit.
+        if (!MotorOn && (_highDensityDrive || _selectMask != 8))
+        {
+            var id = _highDensityMedia ? 0xAAAAAAAAu : 0u;
+            if ((id & (1u << (31 - (_idBit & 31)))) == 0) pins &= ~0x20;
+        }
         return (byte)pins;
     }
 
@@ -255,10 +274,11 @@ internal sealed class LightweightFloppyDrive
         _currentUnstableMask = present ? _unstableMasks?[track] : null;
         var previousDeadlines = _currentDeadlines;
         _currentDeadlines = present ? _cellDeadlines?[track] : null;
-        var bits = present ? _trackLengths?[track] ?? LightweightDiskSerial.TrackBits : LightweightDiskSerial.TrackBits;
-        if (_trackBits == bits && ReferenceEquals(previousDeadlines, _currentDeadlines)) return;
+        var bits = present ? _trackLengths?[track] ?? (_currentTrack!.Length * 8) : LightweightDiskSerial.TrackBits;
+        if (_trackBits == bits && _bitRateDenominator == (_highDensityMedia ? 5 : 10) * bits &&
+            ReferenceEquals(previousDeadlines, _currentDeadlines)) return;
         _trackBits = bits;
-        _bitRateDenominator = 10 * bits;
+        _bitRateDenominator = (_highDensityMedia ? 5 : 10) * bits;
         _bitWholeCcks = LightweightPaulaAudio.PalCpuFrequency / _bitRateDenominator;
         _bitRemainder = LightweightPaulaAudio.PalCpuFrequency % _bitRateDenominator;
         if (preservePhase && NextBitCycle != long.MaxValue)
@@ -298,7 +318,7 @@ internal sealed class LightweightFloppyDrive
     }
 
     // Ideal-ADF splice: preserve consecutive emitted cells in the encoded
-    // grid. Nominal 300 RPM and Paula's 7-CCK write clock differ by a few
+    // grid. Nominal 300/150 RPM and Paula's 7-CCK write clock differ by a few
     // cells/revolution; this model does not simulate analog splice drift.
     internal void WriteBit(int bit, long cycle, bool slow)
     {
@@ -314,7 +334,7 @@ internal sealed class LightweightFloppyDrive
             var mask = 1 << (7 - (_writePosition & 7));
             ref var value = ref bytes[_writePosition >> 3];
             value = (byte)((value & ~mask) | (cell == cells - 1 && bit != 0 ? mask : 0));
-            if (++_writePosition == LightweightDiskSerial.TrackBits) _writePosition = 0;
+            if (++_writePosition == _trackBits) _writePosition = 0;
         }
         _lastWriteCycle = cycle;
         _writeTrack = track;
@@ -326,15 +346,16 @@ internal sealed class LightweightFloppyDrive
         if (Mounted && !CanWrite) throw new InvalidOperationException($"Read-only {Format} media cannot be exported as standard ADF.");
         if (_image is null || _tracks is null) throw new InvalidOperationException("No ADF is mounted.");
         var result = (byte[])_image.Clone();
-        const int bytesPerTrack = 11 * 512;
+        var sectors = _highDensityMedia ? 22 : 11;
+        var bytesPerTrack = sectors * 512;
         for (var track = 0; track < _tracks.Length; track++)
         {
             if (!_dirtyTracks[track]) continue;
             var decoded = AmigaDosTrackDecoder.DecodeTrackBestEffort(
                 AmigaEncodedTrack.FromBytes(_tracks[track]), track / 2, track & 1,
                 result.AsSpan(track * bytesPerTrack, bytesPerTrack));
-            if (decoded != 11)
-                throw new InvalidOperationException($"Track {track / 2}.{track & 1} contains {decoded}/11 valid AmigaDOS sectors; it cannot be saved as a standard ADF.");
+            if (decoded != sectors)
+                throw new InvalidOperationException($"Track {track / 2}.{track & 1} contains {decoded}/{sectors} valid AmigaDOS sectors; it cannot be saved as a standard ADF.");
         }
         return result;
     }

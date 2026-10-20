@@ -1,0 +1,459 @@
+{
+  "protocol": "copperstart-compact-desktop-graphics-v1",
+  "date": "2026-10-17",
+  "passed": true,
+  "shipping": false,
+  "producerArtifacts": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\compact-desktop-20261017",
+  "qualification": {
+    "selectedTests": 110,
+    "graphicsBytes": 29418,
+    "graphicsCompositionTests": 1,
+    "scope": "One unlayered PAL viewport, text and rectangles at 320/640 x 256 x 2, three lifetimes each, full 908 x 313 capture; same-ROM writable DOS and protected reboot. No native Intuition window, input owner, app-pair admission or throughput result.",
+    "romSha256": "F0AB800A3890BD4E53FB9606EF34F6839AEE8104856816C252B024686E2B6216",
+    "shipping": false,
+    "compiledCodeBytes": 463658,
+    "manifestSha256": "6C56DB3D343AA42BE36B6A7EA4E398DCAE01D7C8212AC84EC52536D96CD67105",
+    "emittedInstructionTests": 41,
+    "graphicsSupportedVectors": [
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -804,
+      -576,
+      -570,
+      -564,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -306,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "managedInputsSha256": "F0D267871B4131016DA6A8AE87AFD1CEE5A8C82E3D28F9608165E70D603607DB",
+    "graphicsResidentAddress": 16744448,
+    "romBytes": 524288,
+    "protocol": "copperstart-compact-desktop-graphics-v1",
+    "display": [
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "F0AB800A3890BD4E53FB9606EF34F6839AEE8104856816C252B024686E2B6216",
+        "width": 320,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 438952,
+            "totalFree": 781120,
+            "framebufferSha256": "0881F1F86C44D2CC2BC9ADEA2EE5CD8816B3BA92B24DE4C8ED333AB51A53464F"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 438952,
+            "totalFree": 781120,
+            "framebufferSha256": "0881F1F86C44D2CC2BC9ADEA2EE5CD8816B3BA92B24DE4C8ED333AB51A53464F"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 438952,
+            "totalFree": 781120,
+            "framebufferSha256": "0881F1F86C44D2CC2BC9ADEA2EE5CD8816B3BA92B24DE4C8ED333AB51A53464F"
+          }
+        ],
+        "windowQualification": "NOT RUN: unlayered drawing and one ViewPort; no Intuition window or input owner"
+      },
+      {
+        "scope": "native guest DOS HUNK, public graphics vectors, PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "romBytes": 524288,
+        "romSha256": "F0AB800A3890BD4E53FB9606EF34F6839AEE8104856816C252B024686E2B6216",
+        "width": 640,
+        "height": 256,
+        "depth": 2,
+        "framebufferWidth": 908,
+        "framebufferHeight": 313,
+        "results": [
+          {
+            "cycle": 1,
+            "chipFree": 418472,
+            "totalFree": 760640,
+            "framebufferSha256": "002DA884F504862FE359079677EBEAC6006B2B9CB7D24A0911CA6F305794A621"
+          },
+          {
+            "cycle": 2,
+            "chipFree": 418472,
+            "totalFree": 760640,
+            "framebufferSha256": "002DA884F504862FE359079677EBEAC6006B2B9CB7D24A0911CA6F305794A621"
+          },
+          {
+            "cycle": 3,
+            "chipFree": 418472,
+            "totalFree": 760640,
+            "framebufferSha256": "002DA884F504862FE359079677EBEAC6006B2B9CB7D24A0911CA6F305794A621"
+          }
+        ],
+        "windowQualification": "NOT RUN: unlayered drawing and one ViewPort; no Intuition window or input owner"
+      }
+    ],
+    "filesystemSemanticTests": 15,
+    "passed": true,
+    "nativeExecutionTests": 53
+  },
+  "layout": {
+    "graphicsResident": "0xFF8000",
+    "footerBytes": 20,
+    "romBytes": 524288,
+    "compiledRootBytes": 463658,
+    "rootToGraphicsGapBytes": 27854,
+    "tailBytes": 3330,
+    "romBase": "0xF80000",
+    "compiledPrefixBytes": 8,
+    "graphicsBytes": 29418
+  },
+  "managedRomInputs": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "9333711473A6A08229AF61BAAC7F5A24EB899CFD981A42173F28095D6E9C328D"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "CACC2157CEF8ED44C8F8688B644986E0ED6264EA6CF47FD7EA0411E821CAFB8E"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "3C473A6C86A17447618F7271F8DA3B0DD3B7DE269E3B905F0604A45BFDFDF9A4"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperSharp.Targets.Amiga.dll",
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "5223D25209BE870AC79F2657547933A5ED76AE5AC75AECACDDCF5491ACF3406E"
+    }
+  ],
+  "originalRootManifestSha256": "C82C2CF9209F33237FB2AAAB6F415EE9CD4E56243D6C518DDAD92A0AC1743527",
+  "storage": {
+    "protocol": "copperstart-desktop-prerequisite-v1",
+    "passed": true,
+    "scope": "PAL OCS 68000; 512 KiB Chip + 512 KiB slow; one DF0; public graphics and DOS vectors; physical FFS writes and fresh protected boot",
+    "romSha256": "F0AB800A3890BD4E53FB9606EF34F6839AEE8104856816C252B024686E2B6216",
+    "originalSha256": "BE77B732DDF43C0FCD28344C7B57AC8773E186F1DCF8435470DED57C7A52CF68",
+    "persistedSha256": "90A84EC5137AE52CF2B0424B10C9B60940F52FD64965A506D1954B5E48485104",
+    "phases": [
+      {
+        "phase": 1,
+        "fields": 4741,
+        "graphicsVersion": 40,
+        "graphicsOpenCount": 0,
+        "providerV40Opens": {
+          "graphics": 9280,
+          "utility": 0,
+          "layers": 0,
+          "intuition": 0
+        },
+        "libraries": [
+          {
+            "name": "graphics.library",
+            "address": 9280,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "expansion.library",
+            "address": 12612456,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "dos.library",
+            "address": 12656216,
+            "version": 51,
+            "openCount": 1
+          }
+        ],
+        "memory": [
+          {
+            "lower": 12611616,
+            "upper": 13107200,
+            "free": 360216,
+            "largest": 359456
+          },
+          {
+            "lower": 8224,
+            "upper": 524288,
+            "free": 459944,
+            "largest": 427176
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "fields": 936,
+        "graphicsVersion": 40,
+        "graphicsOpenCount": 0,
+        "providerV40Opens": {
+          "graphics": 9280,
+          "utility": 0,
+          "layers": 0,
+          "intuition": 0
+        },
+        "libraries": [
+          {
+            "name": "graphics.library",
+            "address": 9280,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "expansion.library",
+            "address": 12612456,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "dos.library",
+            "address": 12656216,
+            "version": 51,
+            "openCount": 1
+          }
+        ],
+        "memory": [
+          {
+            "lower": 12611616,
+            "upper": 13107200,
+            "free": 360104,
+            "largest": 359456
+          },
+          {
+            "lower": 8224,
+            "upper": 524288,
+            "free": 459944,
+            "largest": 427176
+          }
+        ]
+      }
+    ],
+    "desktopGraphicsSurface": [
+      {
+        "name": "InitView",
+        "lvo": -360,
+        "selected": true
+      },
+      {
+        "name": "InitVPort",
+        "lvo": -204,
+        "selected": true
+      },
+      {
+        "name": "MakeVPort",
+        "lvo": -216,
+        "selected": true
+      },
+      {
+        "name": "MrgCop",
+        "lvo": -210,
+        "selected": true
+      },
+      {
+        "name": "LoadView",
+        "lvo": -222,
+        "selected": true
+      },
+      {
+        "name": "LoadRGB4",
+        "lvo": -192,
+        "selected": true
+      },
+      {
+        "name": "SetRGB4",
+        "lvo": -288,
+        "selected": true
+      },
+      {
+        "name": "Text",
+        "lvo": -60,
+        "selected": true
+      },
+      {
+        "name": "RectFill",
+        "lvo": -306,
+        "selected": true
+      },
+      {
+        "name": "GetSprite",
+        "lvo": -408,
+        "selected": false
+      },
+      {
+        "name": "MoveSprite",
+        "lvo": -426,
+        "selected": false
+      },
+      {
+        "name": "ChangeSprite",
+        "lvo": -420,
+        "selected": false
+      },
+      {
+        "name": "FreeSprite",
+        "lvo": -414,
+        "selected": false
+      }
+    ],
+    "windowQualification": "NOT RUN: the persistence probe is not a native Intuition window journey"
+  },
+  "missingLayersGraphicsVectors": [
+    {
+      "name": "BltBitMapRastPort",
+      "lvo": -606
+    },
+    {
+      "name": "EraseRect",
+      "lvo": -810
+    },
+    {
+      "name": "AllocBitMap",
+      "lvo": -918
+    },
+    {
+      "name": "FreeBitMap",
+      "lvo": -924
+    },
+    {
+      "name": "GetBitMapAttr",
+      "lvo": -960
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "qualified-v2/qualification.json",
+      "sha256": "43F40914B3E5216865720DDEA56A34856B8BCA8F3760EC40C4C4003F10CF1A4E"
+    },
+    {
+      "path": "qualified-v2/results/compact-desktop.trx",
+      "sha256": "4FF1F65E02FCAB07896D555C90725E7A4DFEB2B92B164B0E0F26289027F24996"
+    },
+    {
+      "path": "qualified-v2/managed-inputs.json",
+      "sha256": "F0D267871B4131016DA6A8AE87AFD1CEE5A8C82E3D28F9608165E70D603607DB"
+    },
+    {
+      "path": "qualified-v2/native/desktop-prerequisite.json",
+      "sha256": "735F841B5951975A6500CDF7C09023E91643C81657EA60308D10623239FE918B"
+    },
+    {
+      "path": "qualified-v2/native/desktop-320.json",
+      "sha256": "54720C49CC5C7008277524169618F1381CB00E1CD00C743E6485556F3261C912"
+    },
+    {
+      "path": "qualified-v2/native/desktop-640.json",
+      "sha256": "C8381A7832FA3115B19B54824232C792820AE928988EB6B487FAA674EDF2C3EC"
+    },
+    {
+      "path": "qualified-v2/native/desktop-320-cycle-1.png",
+      "sha256": "29877C32783639919FB59BE408E2B56D7ECAE7316E272F2DEFFCB59E6DC48515"
+    },
+    {
+      "path": "qualified-v2/native/desktop-640-cycle-1.png",
+      "sha256": "6937D53DB27059B33E61452A4F6F2CBFAA0457CE862797BD6950C5C51D388698"
+    },
+    {
+      "path": "relink-v2/disk-boot-test-manifest.json",
+      "sha256": "6C56DB3D343AA42BE36B6A7EA4E398DCAE01D7C8212AC84EC52536D96CD67105"
+    },
+    {
+      "path": "native/disk-boot-test-manifest.json",
+      "sha256": "C82C2CF9209F33237FB2AAAB6F415EE9CD4E56243D6C518DDAD92A0AC1743527"
+    },
+    {
+      "path": "results/initial-native.trx",
+      "sha256": "BAFD9D45319B65C6F5269AC51C90F6DB8602449890E3638365A9B52C8E9098E0"
+    },
+    {
+      "path": "results/instruction-v2.trx",
+      "sha256": "B52C082DAAFD52D9064647BE974BC158616B37E8A96474A78EE979B3E14EA951"
+    },
+    {
+      "path": "graphics-source-inputs-v2.json",
+      "sha256": "AB575CDB55603D9283DECD4F7FC6924A2F48364D34B4FDA7FC9DB5E39E4E8561"
+    },
+    {
+      "path": "solution-v2-build.log",
+      "sha256": "F580AC2F65C7BC97D440FD734349CDDBD5BC2A04204A0B3E73BD9810E47B24AC"
+    }
+  ],
+  "limits": [
+    "Depth-two unlayered PAL display, fixed origin and one ViewPort; no native Intuition window or GUI input owner.",
+    "Three display lifetimes per resolution, not a full desktop/Shell/application lifetime stress qualification.",
+    "Cleanup memory holds the guest command, its stack and bitmap workspace.",
+    "Frozen C# root inputs and final emitter are identified by DLL hashes; the concurrent working checkout may contain later unrelated edits.",
+    "No app ROM/OS pair update, package publication, installed/native game acceptance or throughput measurement."
+  ]
+}

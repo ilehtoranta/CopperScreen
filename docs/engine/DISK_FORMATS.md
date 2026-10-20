@@ -15,8 +15,9 @@ following media in DF0–DF3, directly or through selected ZIP entries.
 Old `UAE--ADF`, partial/encrypted DMS, HD/non-Amiga SCP and unsupported geometry
 fail explicitly according to CopperDisk's format validation. Preserved geometry
 is limited to cylinders 0–83, heads 0–1, with no duplicate tracks or cells finer
-than one CCK. Standard sector media remains 80 cylinders, two heads, eleven
-512-byte sectors per track. Missing preserved tracks produce no flux.
+than one CCK. Standard sector media uses 80 cylinders, two heads, and eleven DD or twenty-two HD
+512-byte sectors per track. HD ADF/ADZ requires an HD mechanism configured through
+`FloppyDriveTypes`; see [HD support and qualification](HD_FLOPPY_2026-10-18.md). Missing preserved tracks produce no flux.
 
 SCP is quantized at load time to CopperDisk's nominal DD grid and first stored
 revolution. The engine retains its decoded transition bytes, including a pulse

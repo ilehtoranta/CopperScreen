@@ -34,7 +34,7 @@ public sealed class CopperScreenRtcTests : IDisposable
         draft.RtcEnabled = enabled;
         Assert.Equal(enabled, draft.NeedsRestartComparedWith(initial));
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(enabled, profile.RtcEnabled);
         var reloaded = CopperScreenSettingsDraft.FromProfile(profile);

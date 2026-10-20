@@ -3,7 +3,7 @@ using CopperDisk;
 namespace CopperMod.Amiga.Lightweight;
 
 // H6b1: ideal standard-ADF read input, not an analog Paula PLL model.
-// Nominal 300 RPM is independent of ADKCON.FAST and of drive selection.
+// Nominal 300/150 RPM is independent of ADKCON.FAST and of drive selection.
 // All external bit arrivals are sampled on the canonical clock's next CCK.
 internal struct LightweightDiskSerial
 {

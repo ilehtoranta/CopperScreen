@@ -1,0 +1,826 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "clientTimezone": "Europe/Helsinki",
+  "recordedUtc": "2026-10-18T08:30:49.6554612Z",
+  "status": "PASSED",
+  "scope": "Fresh WACK on exact signed 1.1.31.0 audio/pacing fix with earlier matching full-hour and signed old-to-fixed upgrade evidence",
+  "wackOverallPass": true,
+  "requiredTestsPassed": true,
+  "allOptionalTestsPassed": false,
+  "storeCertified": false,
+  "shipping": false,
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "sourceRebuilt": false,
+  "formalPerformanceAcceptance": false,
+  "releaseBudgets": "OPEN by owner instruction",
+  "package": {
+    "rebuilt": false,
+    "identity": {
+      "Name": "CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229",
+      "Publisher": "CN=CopperScreen Installed Tests",
+      "Version": {
+        "Major": 1,
+        "Minor": 1,
+        "Build": 31,
+        "Revision": 0,
+        "MajorRevision": 0,
+        "MinorRevision": 0
+      },
+      "Architecture": "x64",
+      "Signed": true,
+      "Diagnostic": true
+    },
+    "file": {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Update/CopperScreen-1.1.31.0-win-x64.msix",
+      "sha256": "640d6040998d7d5fca19207224a7cd5627f46045dc39f989e74dae24004ae01e",
+      "bytes": 49552072
+    },
+    "payloadChanged": false,
+    "workingTreeDirty": true,
+    "version": "1.1.31.0",
+    "sourceCommit": "2bff73028344b3b571701a9696905462f116ee99"
+  },
+  "tool": {
+    "Version": "10.0.26100.8249 (WinBuild.160101.0800)",
+    "Path": "C:\\Program Files (x86)\\Windows Kits\\10\\App Certification Kit\\appcert.exe"
+  },
+  "toolBinary": {
+    "path": "../../../../../Program Files (x86)/Windows Kits/10/App Certification Kit/appcert.exe",
+    "sha256": "92ace57869da3a630e74a39e98a0d1b62579f320a0204607e224c9be48543568",
+    "bytes": 50088
+  },
+  "host": {
+    "Windows": "Microsoft Windows NT 10.0.26200.0",
+    "WackVersion": "10.0.26100.8249 (WinBuild.160101.0800)",
+    "PowerShell": "7.6.5"
+  },
+  "startedAt": "2026-10-18T11:19:15.9780326+03:00",
+  "completedAt": "2026-10-18T11:28:08.7036608+03:00",
+  "exitCode": 0,
+  "elevated": true,
+  "report": {
+    "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/Certification/wack-report.xml",
+    "sha256": "5c9f0fabed000bad4b41f30eb9c21ab500117b8576972457b04c7baffcc05138",
+    "bytes": 22837683
+  },
+  "reportAttributes": {
+    "xml:lang": "fi-FI",
+    "OVERALL_RESULT": "PASS",
+    "VERSION": "10.0.26100.8249",
+    "LATEST_VERSION": "",
+    "UPDATE_DOWNLOAD_URL": "",
+    "TOOLSET_ARCHITECTURE": "x64",
+    "SecureBoot": "FALSE",
+    "APP_TYPE": "Centennial",
+    "PUBLISHER_DISPLAY_NAME": "CN=CopperScreen Installed Tests",
+    "APP_NAME": "CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229",
+    "APP_VERSION": "1.1.31.0",
+    "OSVERSION": "10.0.26200.0",
+    "OS": "Microsoft Windows 11 Home",
+    "PER_USER_APPLICATION": "",
+    "PARTIAL_RUN": "FALSE",
+    "LCID": "1035",
+    "X64_ONLY": "TRUE",
+    "VALIDATION_TYPE": "CommandLine",
+    "ReportGenerationTime": "18.10.2026 11.28.01",
+    "ID": "f5f7a2bc276639fe60f5b46da56db2e8"
+  },
+  "summary": {
+    "OverallResult": "PASS",
+    "AppType": "Centennial",
+    "AppName": "CopperScreen.Test.af6f00c7f3b04b94ab921e70b62d2229",
+    "AppVersion": "1.1.31.0",
+    "PartialRun": "FALSE",
+    "RequiredTestsPassed": true,
+    "TestCount": 24,
+    "Tests": [
+      {
+        "Name": "Install signed driver and executable files",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "User account control run level",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Application count",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "App manifest",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "File association verbs",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Registry checks",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Enterprise Features",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Resource Packages",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Banned file analyzer",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Private code signing",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "App resources",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Branding",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Debug configuration",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Special use capabilities",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "ExclusiveTo attribute",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Type location",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Type name case-sensitivity",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Type name correctness",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "General metadata correctness",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Properties",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Archive files usage",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "Blocked executables",
+        "Optional": "TRUE",
+        "Result": "FAIL",
+        "Messages": [
+          "File mscordbi.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+          "File Avalonia.Base.dll contains a reference to a \"Launch Process\" related API System.Diagnostics.Process.Start",
+          "File CopperScreen.exe contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteW",
+          "File coreclr.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+          "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+          "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteExW",
+          "File Avalonia.Base.dll contains a blocked executable reference to \"cmd\".",
+          "File Avalonia.Controls.dll contains a blocked executable reference to \"reg\".",
+          "File Avalonia.FreeDesktop.AtSpi.dll contains a blocked executable reference to \"reg\".",
+          "File clrjit.dll contains a blocked executable reference to \"bash\".",
+          "File HidSharp.dll contains a blocked executable reference to \"cmd\".",
+          "File Microsoft.DiaSymReader.Native.amd64.dll contains a blocked executable reference to \"cmd\".",
+          "File Microsoft.VisualBasic.Core.dll contains a blocked executable reference to \"cdB\".",
+          "File System.Collections.Concurrent.dll contains a blocked executable reference to \"Cdb\".",
+          "File System.Net.Sockets.dll contains a blocked executable reference to \"cmd\".",
+          "File System.Private.CoreLib.dll contains a blocked executable reference to \"CMD\".",
+          "File System.Private.CoreLib.dll contains a blocked executable reference to \"MSBuild\".",
+          "File System.Private.CoreLib.dll contains a blocked executable reference to \"dnX\".",
+          "File System.Private.CoreLib.dll contains a blocked executable reference to \"CsI\".",
+          "File System.Private.Xml.dll contains a blocked executable reference to \"rEg\".",
+          "File System.Private.Xml.dll contains a blocked executable reference to \"cDB\".",
+          "File System.Reflection.Metadata.dll contains a blocked executable reference to \"Cdb\".",
+          "File System.Text.Json.dll contains a blocked executable reference to \"CDb\".",
+          "File System.Text.RegularExpressions.dll contains a blocked executable reference to \"dNX\"."
+        ]
+      },
+      {
+        "Name": "Platform appropriate files",
+        "Optional": "TRUE",
+        "Result": "PASS",
+        "Messages": []
+      },
+      {
+        "Name": "DPIAwarenessValidation",
+        "Optional": "FALSE",
+        "Result": "PASS",
+        "Messages": []
+      }
+    ]
+  },
+  "counts": {
+    "total": 24,
+    "optional": 11,
+    "requiredPass": 13,
+    "required": 13,
+    "optionalFail": 1,
+    "optionalPass": 10
+  },
+  "nonpassingChecks": [
+    {
+      "Name": "Blocked executables",
+      "Optional": "TRUE",
+      "Result": "FAIL",
+      "Messages": [
+        "File mscordbi.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+        "File Avalonia.Base.dll contains a reference to a \"Launch Process\" related API System.Diagnostics.Process.Start",
+        "File CopperScreen.exe contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteW",
+        "File coreclr.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+        "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API kernel32.dll!CreateProcessW",
+        "File System.Diagnostics.Process.dll contains a reference to a \"Launch Process\" related API shell32.dll!ShellExecuteExW",
+        "File Avalonia.Base.dll contains a blocked executable reference to \"cmd\".",
+        "File Avalonia.Controls.dll contains a blocked executable reference to \"reg\".",
+        "File Avalonia.FreeDesktop.AtSpi.dll contains a blocked executable reference to \"reg\".",
+        "File clrjit.dll contains a blocked executable reference to \"bash\".",
+        "File HidSharp.dll contains a blocked executable reference to \"cmd\".",
+        "File Microsoft.DiaSymReader.Native.amd64.dll contains a blocked executable reference to \"cmd\".",
+        "File Microsoft.VisualBasic.Core.dll contains a blocked executable reference to \"cdB\".",
+        "File System.Collections.Concurrent.dll contains a blocked executable reference to \"Cdb\".",
+        "File System.Net.Sockets.dll contains a blocked executable reference to \"cmd\".",
+        "File System.Private.CoreLib.dll contains a blocked executable reference to \"CMD\".",
+        "File System.Private.CoreLib.dll contains a blocked executable reference to \"MSBuild\".",
+        "File System.Private.CoreLib.dll contains a blocked executable reference to \"dnX\".",
+        "File System.Private.CoreLib.dll contains a blocked executable reference to \"CsI\".",
+        "File System.Private.Xml.dll contains a blocked executable reference to \"rEg\".",
+        "File System.Private.Xml.dll contains a blocked executable reference to \"cDB\".",
+        "File System.Reflection.Metadata.dll contains a blocked executable reference to \"Cdb\".",
+        "File System.Text.Json.dll contains a blocked executable reference to \"CDb\".",
+        "File System.Text.RegularExpressions.dll contains a blocked executable reference to \"dNX\"."
+      ]
+    }
+  ],
+  "optionalComparison": {
+    "messagesUnchanged": true,
+    "differences": [],
+    "apphostVersionComparison": {
+      "CurrentSha256": "BC33BD40E78AD5C137C751C24FEBBD6D3BBB9B7A8CCE724C2CDEB9D5C66387B4",
+      "PreviousSha256": "8CAE4F1B7AE3EF55A2B4574ADB864977B94F95CF941BCFA9CE843B539636FA1F",
+      "PreviousFileVersion": "1.1.26.0",
+      "CurrentFileVersion": "1.1.31.0",
+      "OnlyVersionDifferenceClaimed": false
+    },
+    "components": [
+      {
+        "currentSha256": "6f9c3e0c4f1d1842657163363af99e770807005e639d3a3f944db27f3e7d6fe3",
+        "previousSha256": "6f9c3e0c4f1d1842657163363af99e770807005e639d3a3f944db27f3e7d6fe3",
+        "unchanged": true,
+        "file": "Avalonia.Base.dll"
+      },
+      {
+        "currentSha256": "9ce4a80e90f13056b803f01e284bb95dbd8cb7297ae55b1d4e941b5cc311916c",
+        "previousSha256": "9ce4a80e90f13056b803f01e284bb95dbd8cb7297ae55b1d4e941b5cc311916c",
+        "unchanged": true,
+        "file": "Avalonia.Controls.dll"
+      },
+      {
+        "currentSha256": "198f229a3d3f8853d61c7af068c8a1e1e1e959bff06e9a9f0db58f0d0aa1d8af",
+        "previousSha256": "198f229a3d3f8853d61c7af068c8a1e1e1e959bff06e9a9f0db58f0d0aa1d8af",
+        "unchanged": true,
+        "file": "Avalonia.FreeDesktop.AtSpi.dll"
+      },
+      {
+        "currentSha256": "0749d8fc8e944d0576e1bb47120f87add8f875e5cd8968995633063fc79256f6",
+        "previousSha256": "0749d8fc8e944d0576e1bb47120f87add8f875e5cd8968995633063fc79256f6",
+        "unchanged": true,
+        "file": "clrjit.dll"
+      },
+      {
+        "currentSha256": "bc33bd40e78ad5c137c751c24febbd6d3bbb9b7a8cce724c2cdeb9d5c66387b4",
+        "previousSha256": "8cae4f1b7ae3ef55a2b4574adb864977b94f95cf941bcfa9ce843b539636fa1f",
+        "unchanged": false,
+        "file": "CopperScreen.exe"
+      },
+      {
+        "currentSha256": "128aee8c62a673d64739e585e3876b61133571cec83a46240a62581d5465639b",
+        "previousSha256": "128aee8c62a673d64739e585e3876b61133571cec83a46240a62581d5465639b",
+        "unchanged": true,
+        "file": "coreclr.dll"
+      },
+      {
+        "currentSha256": "79f2bc8ddff102e6dbede84b2c211a3aea2ed675bf762fa0f02ecb65f61ee812",
+        "previousSha256": "79f2bc8ddff102e6dbede84b2c211a3aea2ed675bf762fa0f02ecb65f61ee812",
+        "unchanged": true,
+        "file": "HidSharp.dll"
+      },
+      {
+        "currentSha256": "70e4b89978ce57ef87b28f4921f3140c383b04aa96e7f3bdb3c4ebb898fd8a72",
+        "previousSha256": "70e4b89978ce57ef87b28f4921f3140c383b04aa96e7f3bdb3c4ebb898fd8a72",
+        "unchanged": true,
+        "file": "Microsoft.DiaSymReader.Native.amd64.dll"
+      },
+      {
+        "currentSha256": "2666b24eb6e295476b44abd057ea250fd5957db9c1c7adee6a223a747ddfe3d2",
+        "previousSha256": "2666b24eb6e295476b44abd057ea250fd5957db9c1c7adee6a223a747ddfe3d2",
+        "unchanged": true,
+        "file": "Microsoft.VisualBasic.Core.dll"
+      },
+      {
+        "currentSha256": "753e92805f3886221f56dcfc07191ad7ee44235bf689db0490bdf777f25e9175",
+        "previousSha256": "753e92805f3886221f56dcfc07191ad7ee44235bf689db0490bdf777f25e9175",
+        "unchanged": true,
+        "file": "mscordbi.dll"
+      },
+      {
+        "currentSha256": "082f4bc0da1141eb65111b6da633d75624adfb7bb067d7ee90c5622c8b30885b",
+        "previousSha256": "082f4bc0da1141eb65111b6da633d75624adfb7bb067d7ee90c5622c8b30885b",
+        "unchanged": true,
+        "file": "System.Collections.Concurrent.dll"
+      },
+      {
+        "currentSha256": "51a57fbe918f8b68930c090792b718fc0850ea12da869d50b97a3796af29a740",
+        "previousSha256": "51a57fbe918f8b68930c090792b718fc0850ea12da869d50b97a3796af29a740",
+        "unchanged": true,
+        "file": "System.Diagnostics.Process.dll"
+      },
+      {
+        "currentSha256": "645c56d637ce15976998119e50722a911315682ce141b4aab98874ce1b063f3a",
+        "previousSha256": "645c56d637ce15976998119e50722a911315682ce141b4aab98874ce1b063f3a",
+        "unchanged": true,
+        "file": "System.Net.Sockets.dll"
+      },
+      {
+        "currentSha256": "1125acc8106c43fc8bad2d203c4c4485df6182d292846c2fff415c1040c54678",
+        "previousSha256": "1125acc8106c43fc8bad2d203c4c4485df6182d292846c2fff415c1040c54678",
+        "unchanged": true,
+        "file": "System.Private.CoreLib.dll"
+      },
+      {
+        "currentSha256": "d71e72a7a9de324352edd281a46466b51bd0bdd2831b1573f8d3bae8bd2dd4a6",
+        "previousSha256": "d71e72a7a9de324352edd281a46466b51bd0bdd2831b1573f8d3bae8bd2dd4a6",
+        "unchanged": true,
+        "file": "System.Private.Xml.dll"
+      },
+      {
+        "currentSha256": "82973e772017944a0548e445f30757595d95fe99e1f5c4a446df8c4db04b1c18",
+        "previousSha256": "82973e772017944a0548e445f30757595d95fe99e1f5c4a446df8c4db04b1c18",
+        "unchanged": true,
+        "file": "System.Reflection.Metadata.dll"
+      },
+      {
+        "currentSha256": "fa99f413be21ed5f484a09093fe5f0beba7de3062cf9cc9f847dbf8108dba55a",
+        "previousSha256": "fa99f413be21ed5f484a09093fe5f0beba7de3062cf9cc9f847dbf8108dba55a",
+        "unchanged": true,
+        "file": "System.Text.Json.dll"
+      },
+      {
+        "currentSha256": "060bcc88a688e687ff1404b83b5fb5cf17e19ec57f33d5b8a48ab494da83c134",
+        "previousSha256": "060bcc88a688e687ff1404b83b5fb5cf17e19ec57f33d5b8a48ab494da83c134",
+        "unchanged": true,
+        "file": "System.Text.RegularExpressions.dll"
+      }
+    ],
+    "currentMessageCount": 24,
+    "previousMessageCount": 24,
+    "reference": {
+      "path": "docs/RELEASE_MSIX_WACK_VALIDATION_2026-10-17.json",
+      "sha256": "410627e192118941713dd216cde6ff166e76568625c2bdbf68365f49d025112b",
+      "bytes": 22358
+    }
+  },
+  "verification": {
+    "payload": {
+      "PackageSha256": "640d6040998d7d5fca19207224a7cd5627f46045dc39f989e74dae24004ae01e",
+      "PayloadChanged": false,
+      "VerifiedPayloadFiles": 266,
+      "Status": "PASSED"
+    },
+    "productProcessSourceScan": {
+      "Matches": [],
+      "Scope": "Frozen signed candidate source: CopperScreen and CopperDisk C#",
+      "MatchCount": 0,
+      "DependencyExecutionPathsQualified": false,
+      "SourceInputsVerified": 174
+    },
+    "toolingControlsPassed": 64,
+    "prechecks": {
+      "Host": {
+        "Windows": "Microsoft Windows NT 10.0.26200.0",
+        "WackVersion": "10.0.26100.8249 (WinBuild.160101.0800)",
+        "PowerShell": "7.6.5"
+      },
+      "PrivateDataAbsent": true,
+      "IdentityAbsent": true,
+      "NoOtherWackProcess": true,
+      "Signing": {
+        "Subject": "CN=CopperScreen Installed Tests",
+        "PrivateKeyExported": false,
+        "Thumbprint": "510C8C13859A287EFFE367DB25E2BB05E9AA34AB",
+        "TrustChanged": false,
+        "NotAfterUtc": "2026-10-30T21:06:30Z",
+        "TrustedPeoplePresent": true
+      }
+    },
+    "scriptParsing": {
+      "Passed": true,
+      "Files": 3
+    }
+  },
+  "installedEvidence": {
+    "nativeBoots": 6,
+    "rerunThisContinuation": false,
+    "protocol": "copperscreen-installed-msix-v4",
+    "installedLayoutObservations": 18,
+    "file": {
+      "path": "docs/AUDIO_MSIX_VALIDATION_2026-10-18.json",
+      "sha256": "748fe727ee048c1577dad470c0e3bb668e97fa1fe5f8a7ffe80da679b96b3dbb",
+      "bytes": 109969
+    }
+  },
+  "hourEvidence": {
+    "durationAcceptance": true,
+    "rerunThisContinuation": false,
+    "file": {
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.json",
+      "sha256": "b84ae843db91f6763c1345dbd8b32fe553037328c14817287c9c9fcb587effaa",
+      "bytes": 64539
+    }
+  },
+  "corrections": {
+    "productCodeChanged": false,
+    "runtimePayloadPatched": false,
+    "preparationFailure": {
+      "Reason": "The frozen tooling tests resolved missing repo fixtures because the copied scripts directory hierarchy was incomplete. Corrected in a separate run with all three fixtures frozen.",
+      "WackStarted": false,
+      "Status": "FAILED_PREPARATION",
+      "ProductChanged": false
+    },
+    "preparationFixed": "Frozen tooling copy now retains scripts/ hierarchy and includes app.manifest, package manifest and icon fixtures. The separate first attempt never started WACK.",
+    "checksDisabled": false,
+    "requiredFailures": 0
+  },
+  "cleanup": {
+    "familyPrivateStorageAbsent": true,
+    "harness": "Removed only the registration created during this WACK run.",
+    "externalOriginalsAndExportsStillMatch": {
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\baseline.copperos": "ce3d71c66c48278ca16b09ca033f7b1cb09c857b2f6c266931746656e5dead91",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\Media\\original.zip": "d17f29a6f6c14214e2143863a3625e5413a46ef3c4164c2f8672946110ebc85b",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704\\Installed\\native-storage-recovery-3\\recovered.copperos": "05df3613b5a51824e4974bd5351523c81cdbb4bb3124c608afbd895393f82412"
+    },
+    "registrationAbsent": true
+  },
+  "earlierDatedFilesUnchanged": 29,
+  "historicalRecordsOverwritten": false,
+  "limits": [
+    "Local diagnostic identity, existing local test certificate and development guest assets; no Store certification or shipping admission.",
+    "Kit reported without application deployment: True. Separate exact-package installed record supplies native storage/update/recovery/layout coverage.",
+    "Optional findings remain visible; product-source scan does not qualify all dependency execution paths or establish S-mode compatibility.",
+    "Final production/Store-identity WACK, shipping assets, Store acquisition/update and clean-machine/separate-account validation remain open.",
+    "Physical audio/video/devices, mixed-DPI, sleep/resume and manual recovery/picker matrix plus minimum/reference hardware and numeric release budgets remain open."
+  ],
+  "kitRanWithoutApplicationDeployment": true,
+  "references": [
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/apphost-version-comparison.json",
+      "sha256": "4c749b91cae0bd7f37c1ca7ea75f982248a149875d31e5bea774b65e163bedfb",
+      "bytes": 299
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/completion.json",
+      "sha256": "fa286869f734ced31f692c00956452461961bc06f0b76eff3d92f67d0e8e1b89",
+      "bytes": 156
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/harness.log",
+      "sha256": "7c894b8ecfb24191ea1109b3abeef7bd0dfcf86561bf1260f1782715bd2b6052",
+      "bytes": 154
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/kit-trace-capture.json",
+      "sha256": "d6fc11969d1e91b1f14faa79c042b2432a83872434f3f76b05af876e754f417e",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/launch.json",
+      "sha256": "da16f9a1fc5dfa56a9c9ba07983cf657335df46947e647873c81b4542ac579c0",
+      "bytes": 384
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/payload-verification.json",
+      "sha256": "0c1630a05ddd0e2ed0ee007d59d1cdded4d072e7df5fee5638f1f679a79b9e88",
+      "bytes": 176
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/prechecks.json",
+      "sha256": "764aee5c4be93279beeb4350c3acf9fc952bf5c5dae3e28aebb47f423af186c2",
+      "bytes": 538
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/prepare.ps1",
+      "sha256": "478ef3068de75523885cad05012e1233a394b311c35790bc8a2b5d328cb82156",
+      "bytes": 6394
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/prior-flagged-component-check.json",
+      "sha256": "76fef78c990a07cf6c6156d1f311ff9b84788139a66713f9e61f855e73fb4cf3",
+      "bytes": 4597
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/product-process-source-scan.json",
+      "sha256": "f2a405b424324c8946f487fef544365c635da0411d7cbfce30bbd0ae0be1c56d",
+      "bytes": 200
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/request.json",
+      "sha256": "d7e89308c79e7de01b8e8561792ea5b4f02a95f2e42bc060109358ba4b51edd3",
+      "bytes": 8937
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/run-wack-elevated.ps1",
+      "sha256": "005841e8aa2a7ad1d24b69e49673f1c8f76ffd4f9373b69f724aabbe51830b05",
+      "bytes": 1373
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/script-parsing.json",
+      "sha256": "e9be3c1d7975df08796b3d5b90f255086069db0a6713e2044b41a7201850078a",
+      "bytes": 39
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/signature-verification.log",
+      "sha256": "522498d6a939a8e951cc4bc8364771ee5199de01d100634bb9cf333f654f3236",
+      "bytes": 1135
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/tooling-controls.log",
+      "sha256": "058a0f4eab33c1eb4f0fe914838b591bc4d4d13fb50a4648149a60ba8c6a81c9",
+      "bytes": 90
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/Certification/wack-record.json",
+      "sha256": "1fc6280c8dac387cd8752f9896a7b87850931e56c8a4c4498ee2fa2326407fde",
+      "bytes": 7346
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/Certification/wack-report.xml",
+      "sha256": "5c9f0fabed000bad4b41f30eb9c21ab500117b8576972457b04c7baffcc05138",
+      "bytes": 22837683
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/Certification/wack-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/Certification/wack-stdout.log",
+      "sha256": "a480c34540e949e19de17d2c1fb6db2c38b2a72615666944a5b3bf131dbdaa72",
+      "bytes": 4880
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/AppCert_Trace_2610181119.txt",
+      "sha256": "ae59b5a531c61c29d093104b7e687c98725649d8febac86a0408570aaf8c7b9c",
+      "bytes": 247688
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_ApplicationCount_10182026_112650.txt",
+      "sha256": "1b34a688d5a7c7be72c3e508d4de46eecec0a8cf1cde43ae85b7b37629a40f33",
+      "bytes": 92
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_AppXManifestValidation_10182026_112649.txt",
+      "sha256": "8f9edbc734120ce9fcd77dbb6bbc20e6f91704dc5c9eb2b083bd730fcb84c37d",
+      "bytes": 2261
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_ArchiveFilesUsage_10182026_112438.txt",
+      "sha256": "d00f24a0ae197e18c60412a9ed42c835b60b0d4188211d886e52b816d733a5fc",
+      "bytes": 93
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_BrandingValidation_10182026_112654.txt",
+      "sha256": "f74c05c562895c701e724ef6117e21a1c0f022aa9e6d31c633f7f2fda00abdb6",
+      "bytes": 94
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_DebugAppCheck_10182026_112654.txt",
+      "sha256": "29f0f7250a28ebf54500d716adb4f893a0a5c70194eed64faa6cd93ad9f62169",
+      "bytes": 168355
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_DetectBlockedExes_10182026_112724.txt",
+      "sha256": "e3e2f32ff0db7d01ac72b36fd58a8cff3faa0e2dbb7134c074610a66b4175914",
+      "bytes": 5748
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_DPIAwarenessValidation_10182026_112724.txt",
+      "sha256": "0655ef7aa30faff2669ba4cdf910d688dad19dcb543305dbb8f9d487d4dc645a",
+      "bytes": 1696
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_EnterpriseFeatures_10182026_112754.txt",
+      "sha256": "cb113761f8db1711efc36ac926feadfe679cf69dfb00df2f02bb55cf26f73445",
+      "bytes": 94
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_ModernCop_10182026_112036.txt",
+      "sha256": "1c3bb1d73868eeb745ecaa2ebf45d630d177d80734d91759dffa5c3fc4d690b7",
+      "bytes": 519
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_PlatformAppropriateFiles_10182026_112640.txt",
+      "sha256": "46720c537b9693cf1ce18aa60bcb2dd6f24bda84eb14be73ed04c760fc575809",
+      "bytes": 45319
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_PrivateCodeSigning_10182026_112753.txt",
+      "sha256": "b3dd619d4a5b223f49e49207b0a9591ba0496ea97e32c31e705b4894ba70edff",
+      "bytes": 94
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_RegistryDriversServicesDDE_10182026_111938.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_RegistryFileVerb_10182026_111935.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_ResourcePackages_10182026_112036.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_SignedFiles_10182026_112037.txt",
+      "sha256": "d6961eff313007ba88ace6b21d730e1a6caaa68366b7ad6f6404f56aad7341a2",
+      "bytes": 52633
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_SpecialUseCapabilities_10182026_112037.txt",
+      "sha256": "bcd7f4f7ab94a7d4eaabde7c9fdaa44d42387ba2656745fb90aae8074be3e77a",
+      "bytes": 98
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/KitTrace/post_process_trace_UACRunLevel_10182026_112431.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/artifacts/msix-tool-tests-6fe5e1dd5072403387719aa9c19948f9/layout-capture-fixture.txt",
+      "sha256": "6817f91c00419c9895aac80ea1f70a31b16675d2508184b9e8c25f2c694a5b7a",
+      "bytes": 63
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/artifacts/msix-tool-tests-6fe5e1dd5072403387719aa9c19948f9/synthetic-reader-fixture.msix",
+      "sha256": "e13d416fa5fb592ba7f13d92f69f6294b344905ece817914914891849729228a",
+      "bytes": 965
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/artifacts/msix-tool-tests-6fe5e1dd5072403387719aa9c19948f9/Assets/Square150x150Logo.png",
+      "sha256": "f51d2f9ffac637d778e24d52bf16c32d3a07c9007d7316d2badde70050eafb1a",
+      "bytes": 21746
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/artifacts/msix-tool-tests-6fe5e1dd5072403387719aa9c19948f9/Assets/Square44x44Logo.png",
+      "sha256": "935cbc2fb743468ef1a049625016550483e9626004d29e5c8d90cf3a5c9a7307",
+      "bytes": 2799
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/artifacts/msix-tool-tests-6fe5e1dd5072403387719aa9c19948f9/Assets/StoreLogo.png",
+      "sha256": "efdb9a805cf4015b23104194f97bbc8cc918140e05292c510f72647fb224de0a",
+      "bytes": 3342
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/CopperScreen/app.manifest",
+      "sha256": "68695fcc7764cb0ec20ca222d2bf90667ba3e9b2bb6ccfeff2c936e43129cfdd",
+      "bytes": 936
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/CopperScreen/Assets/CopperScreen.ico",
+      "sha256": "3dd838970d4b0b4f05e8fea8a255466fe4b71a321e3e73dbf760ecbc04a25139",
+      "bytes": 76835
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/packaging/msix/AppxManifest.xml",
+      "sha256": "13df14a8894da84f415b03c5fbabccaa4b26ff1af1a4cbe6ea6c8c6d9a7454c2",
+      "bytes": 1723
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/scripts/test-msix-certification.ps1",
+      "sha256": "dfe8dbd2d66a239ed08d1598c3d44f70ec8f1d9f1e4ad75aca7d8ca04ca297df",
+      "bytes": 4812
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/scripts/msix/CopperScreen.Msix.psm1",
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "bytes": 14760
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-fe0f7d20f31f47ce801f2aad4d3d41e4/RunInputs/scripts/tests/test-msix-tools.ps1",
+      "sha256": "5826609486ffc8ccd014a55277dedb28270055792647368d977672dff7fd0ee4",
+      "bytes": 11552
+    },
+    {
+      "path": "artifacts/p1-07-audio-msix-2026-10-18-cfdafda4eb3f4be1b73ee4b7157de704/Update/CopperScreen-1.1.31.0-win-x64.msix",
+      "sha256": "640d6040998d7d5fca19207224a7cd5627f46045dc39f989e74dae24004ae01e",
+      "bytes": 49552072
+    },
+    {
+      "path": "artifacts/p1-07-audio-2026-10-18-af6f00c7f3b04b94ab921e70b62d2229/Package31/package-record.json",
+      "sha256": "899a6c806477147b6076c676b26aa71724b3b062dced4bdb910c770e85a56380",
+      "bytes": 67681
+    },
+    {
+      "path": "docs/AUDIO_MSIX_VALIDATION_2026-10-18.json",
+      "sha256": "748fe727ee048c1577dad470c0e3bb668e97fa1fe5f8a7ffe80da679b96b3dbb",
+      "bytes": 109969
+    },
+    {
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.json",
+      "sha256": "b84ae843db91f6763c1345dbd8b32fe553037328c14817287c9c9fcb587effaa",
+      "bytes": 64539
+    },
+    {
+      "path": "docs/RELEASE_MSIX_WACK_VALIDATION_2026-10-17.json",
+      "sha256": "410627e192118941713dd216cde6ff166e76568625c2bdbf68365f49d025112b",
+      "bytes": 22358
+    },
+    {
+      "path": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Update/package-record.json",
+      "sha256": "4b7959f350f813bbd02aee8def2642c2ddadf11bd22f4a271d62ae37dd4364f6",
+      "bytes": 67513
+    },
+    {
+      "path": "artifacts/record-p1-07-audio-wack.ps1",
+      "sha256": "39604aac6fdd2f3b543f0f414ee3705f157cc86ae62b3d10019012f401c0357c",
+      "bytes": 10996
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-0fc3ee0d2f8c43e4b59d7d263d58144a/preparation-failure.json",
+      "sha256": "4ae85afd9112cd8fa9b435a27dcf4f2554d0c80df48196beca894cbe3ef7f294",
+      "bytes": 288
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-0fc3ee0d2f8c43e4b59d7d263d58144a/prepare.ps1",
+      "sha256": "2f4a9a66c036c8a7adf2f2013fc7cf1184def08b01b4c959ac6f6a948a37a22f",
+      "bytes": 5992
+    },
+    {
+      "path": "artifacts/p1-07-audio-wack-2026-10-18-0fc3ee0d2f8c43e4b59d7d263d58144a/request.json",
+      "sha256": "0b58e75ac7e98cc0e353ea4e9a1e5fccaa7c1d5fd782095d6e7eca7e30ecdddd",
+      "bytes": 8072
+    }
+  ]
+}

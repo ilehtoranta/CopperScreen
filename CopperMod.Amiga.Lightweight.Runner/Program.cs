@@ -5,12 +5,34 @@ using CopperMod.Amiga.Lightweight;
 using CopperDisk;
 using Copper68k;
 
+if (args.Contains("--help"))
+{
+    Console.WriteLine("""
+        Lightweight runner: --rom <ROM> [--frames <count>] [--disk <ADF/IPF/SCP>]
+        --hdf-ffs <existing-image> <DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER>
+          One explicit FFS/DOS1 partition, 512-byte blocks, inclusive cylinders; TD64 supports offsets above 4 GiB.
+          Read-only by default. Use --hdf-ffs-writable to allow direct backing-file writes.
+          Example: --hdf-ffs disk.hdf DH0:2:32:4:58
+        --hdf <image> / --hdf-ro <image>: automatic RDB/OFS detection for native Kickstart.
+          The legacy --hdf runner option permits writes; --hdf-ro protects the image.
+        --hdf-rdb <existing-image>: require the image's RDB partition table; read-only by default.
+          Use --hdf-rdb-writable to allow direct writes. CopperStart mounts FFS/DOS1 partitions
+          using TD64 offsets above 4 GiB and selects the highest signed boot priority stored in the RDB.
+        --drives <1..4> --drive-type <0..3> <DD|HD>
+        --boot-probe <directory> --boot-probe-extended --boot-probe-storage
+          Optional diagnostic backing-file snapshots before disposal; observing storage does not flush it.
+        See docs/COPPERSTART_APP.md for the qualified CopperStart ROM and machine settings.
+        """);
+    return;
+}
+
 var frames = 10;
 var warmup = 0;
 var romPath = (string?)null;
 var adfPath = (string?)null;
 var extraAdfPaths = new string?[3];
 var driveCount = 1;
+var driveTypes = new Dictionary<int, LightweightFloppyDriveType>();
 var hardfiles = new List<AmigaHardfileConfiguration>();
 var hostDirectories = new List<LightweightHostDirectoryConfiguration>();
 var hostBootPriorities = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -50,6 +72,9 @@ string? inputScriptPath = null;
 var probeContinueUnsupported = false;
 var bootProbeInterval = 60;
 var bootProbeExtended = false;
+var bootProbeStorage = false;
+try
+{
 for (var i = 0; i < args.Length; i++)
 {
     if (args[i] == "--frames" && i + 1 < args.Length && int.TryParse(args[++i], out var parsed)) frames = parsed;
@@ -60,6 +85,27 @@ for (var i = 0; i < args.Length; i++)
     {
         var drive = args[i][^1] - '1';
         extraAdfPaths[drive] = args[++i];
+    }
+    else if (args[i] is "--hdf-rdb" or "--hdf-rdb-writable")
+    {
+        var readOnly = args[i] == "--hdf-rdb";
+        if (++i >= args.Length || args[i].StartsWith("--", StringComparison.Ordinal))
+            throw new ArgumentException("--hdf-rdb requires an existing RDB image path.");
+        var path = args[i];
+        AmigaRdbImage.Validate(path);
+        hardfiles.Add(new(hardfiles.Count, path, readOnly, mountMode: AmigaHardfileMountMode.RigidDiskBlock));
+    }
+    else if (args[i] is "--hdf-ffs" or "--hdf-ffs-writable")
+    {
+        var readOnly = args[i] == "--hdf-ffs";
+        if (i + 2 >= args.Length) throw new ArgumentException("--hdf-ffs requires an image path and DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER.");
+        var path = args[++i];
+        var partition = AmigaFfsPartition.ParseGeometry(args[++i]);
+        var (start, length) = AmigaFfsPartition.GetByteRange(partition);
+        var image = new FileInfo(path);
+        if (!image.Exists) throw new FileNotFoundException("Choose an existing formatted FFS image.", path);
+        if (image.Length % 512 != 0 || image.Length < start + length) throw new ArgumentException("The image must contain the entire configured FFS partition and have a size divisible by 512 bytes.");
+        hardfiles.Add(new(hardfiles.Count, path, readOnly, mountMode: AmigaHardfileMountMode.Partition, partition: partition));
     }
     else if (args[i] is "--hdf" or "--hdf-ro" && i + 1 < args.Length)
     {
@@ -83,6 +129,16 @@ for (var i = 0; i < args.Length; i++)
     {
         if (++i >= args.Length || !int.TryParse(args[i], out driveCount) || driveCount is < 1 or > 4)
             throw new ArgumentException("--drives requires a count from 1 to 4.");
+    }
+    else if (args[i] == "--drive-type")
+    {
+        if (i + 2 >= args.Length || !int.TryParse(args[++i], out var unit) || unit is < 0 or > 3)
+            throw new ArgumentException("--drive-type requires a drive number from 0 to 3 and DD or HD.");
+        driveTypes[unit] = args[++i].ToLowerInvariant() switch {
+            "dd" => LightweightFloppyDriveType.DoubleDensity,
+            "hd" => LightweightFloppyDriveType.HighDensity,
+            _ => throw new ArgumentException("--drive-type requires DD or HD.")
+        };
     }
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
     else if (args[i] == "--rtc") rtcEnabled = true;
@@ -173,9 +229,17 @@ for (var i = 0; i < args.Length; i++)
             throw new ArgumentException("--boot-probe-interval requires a positive field count.");
     }
     else if (args[i] == "--boot-probe-extended") bootProbeExtended = true;
+    else if (args[i] == "--boot-probe-storage") bootProbeStorage = true;
     else if (args[i] == "--input-script" && i + 1 < args.Length) inputScriptPath = args[++i];
     else if (args[i] == "--probe-continue-unsupported") probeContinueUnsupported = true;
 }
+
+if (args.Any(a => a is "--hdf-ffs" or "--hdf-ffs-writable") &&
+    (hardfiles.Count != 1 || romPath is null || args.Any(a => a.StartsWith("--synthetic-", StringComparison.Ordinal))))
+    throw new ArgumentException("Explicit FFS boot requires a native --rom and exactly one hard disk on unit 0.");
+if (args.Any(a => a is "--hdf-rdb" or "--hdf-rdb-writable") &&
+    (romPath is null || args.Any(a => a.StartsWith("--synthetic-", StringComparison.Ordinal))))
+    throw new ArgumentException("RDB boot requires a native --rom and no synthetic workload.");
 
 foreach (var (device, priority) in hostBootPriorities)
 {
@@ -212,23 +276,41 @@ if (inputScriptPath is not null && (romPath is null || inputReplay ||
     throw new ArgumentException("--input-script requires a native --rom and no synthetic input/workload.");
 if (probeContinueUnsupported && bootProbeDirectory is null)
     throw new ArgumentException("--probe-continue-unsupported requires --boot-probe; it cannot produce a successful benchmark.");
-if ((bootProbeExtended || bootProbeInterval != 60) && bootProbeDirectory is null)
+if ((bootProbeExtended || bootProbeStorage || bootProbeInterval != 60) && bootProbeDirectory is null)
     throw new ArgumentException("Boot probe capture options require --boot-probe.");
 if (writableDrives.Any(d => d < 0 || d >= driveCount) || exportDisks.Any(d => d.Drive < 0 || d.Drive >= driveCount))
     throw new ArgumentException("Writable/export drive must be connected.");
+if (driveTypes.Keys.Any(unit => unit >= driveCount))
+    throw new ArgumentException("--drive-type requires a connected drive; increase --drives.");
 if (syntheticPaulaDma) syntheticSpriteDma = true;
 for (var i = 0; i < extraAdfPaths.Length; i++)
     if (extraAdfPaths[i] != null && i + 1 >= driveCount)
         throw new ArgumentException($"--adf{i + 1} requires --drives {i + 2} or greater.");
+}
+catch (Exception ex) when (ex is ArgumentException or IOException or UnauthorizedAccessException or FormatException or OverflowException)
+{
+    Console.Error.WriteLine("Configuration error: " + ex.Message);
+    Environment.ExitCode = 2;
+    return;
+}
 
 using var machine = new LightweightA500Machine(
     configuration: new LightweightA500Configuration
-        { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
+        { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, FloppyDriveTypes = Enumerable.Range(0, driveCount).Select(unit => driveTypes.GetValueOrDefault(unit)).ToArray(), Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
             AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled },
     enableConservativeCpuLoopBatch: !scalarCpu);
 if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
     Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise={deniseModel} video=pal");
+if (driveTypes.Count != 0) Console.WriteLine("floppyDriveTypes=" + string.Join(",", Enumerable.Range(0, driveCount).Select(unit => $"DF{unit}:{(driveTypes.GetValueOrDefault(unit) == LightweightFloppyDriveType.HighDensity ? "HD" : "DD")}")));
 if (rtcEnabled) Console.WriteLine("rtc=a501 host-local-time session-offset");
+foreach (var hardfile in hardfiles.Where(h => h.MountMode == AmigaHardfileMountMode.Partition))
+{
+    var p = hardfile.Partition!;
+    var (start, length) = AmigaFfsPartition.GetByteRange(p);
+    Console.WriteLine($"hardDisk unit={hardfile.Unit} device={p.DeviceName} filesystem=DOS1 readOnly={hardfile.ReadOnly} startBytes={start} partitionBytes={length} heads={p.Surfaces} blocksPerTrack={p.BlocksPerTrack} firstCylinder={p.LowCylinder} lastCylinder={p.HighCylinder}");
+}
+foreach (var hardfile in hardfiles.Where(h => h.MountMode == AmigaHardfileMountMode.RigidDiskBlock))
+    Console.WriteLine($"hardDisk unit={hardfile.Unit} layout=RDB readOnly={hardfile.ReadOnly} partitions=from-image");
 var supportsBlitter = machine.GetType().GetProperty(
     "BlitterActive",
     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) is not null;
@@ -301,7 +383,7 @@ if (inputReplay) ConfigureInputReplay(machine);
 var todStartCycle = machine.Cycle;
 var todStartFrame = machine.CompletedFrames;
 var bootProbe = bootProbeDirectory is null ? null : new NativeBootProbe(
-    bootProbeDirectory, probeContinueUnsupported, bootProbeInterval, bootProbeExtended);
+    bootProbeDirectory, probeContinueUnsupported, bootProbeInterval, bootProbeExtended, bootProbeStorage ? hardfiles : null);
 var inputScript = inputScriptPath is null ? null : new NativeInputScript(inputScriptPath,
     path => ReadImage(path, ".adf", ".adz", ".dms", ".ipf", ".scp"), driveCount);
 if (bootProbe is null && inputScript?.ChangesMediaBetween(warmup, checked(warmup + frames)) == true)

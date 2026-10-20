@@ -7,6 +7,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repository = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+Import-Module (Join-Path $PSScriptRoot 'CopperScreen.Artifacts.psm1') -Force
 $output = Join-Path $repository ('artifacts/package-' + [Guid]::NewGuid().ToString('N'))
 $publish = Join-Path $output 'CopperScreen'
 $null = New-Item -ItemType Directory -Path $publish
@@ -20,4 +21,6 @@ $archive = Join-Path $output "CopperScreen-$RuntimeIdentifier.zip"
 Compress-Archive -Path "$publish/*" -DestinationPath $archive
 Get-FileHash -LiteralPath $archive -Algorithm SHA256
 Write-Host "Local package: $archive"
+$compression = Compress-CopperScreenCompletedArtifacts -RepositoryRoot $repository -Path $output
+if ($compression.Status -eq 'SKIPPED') { Write-Warning "Completed package output was not compressed: $($compression.Reason)" }
 # No release creation, remote push, deletion or credential handling.

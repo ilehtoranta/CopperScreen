@@ -15,7 +15,7 @@ public sealed class SettingsWorkflowTests
     [InlineData("CPU backend", "AccurateM68040", true)]
     [InlineData("CPU backend", "AccurateM68060", false)]
     [InlineData("CPU backend", "JitM68040", true)]
-    [InlineData("Kickstart", "CopperStart", false)]
+    [InlineData("Kickstart", "CopperStart", true)]
     [InlineData("Kickstart", "DiagRom", false)]
     [InlineData("Kickstart", "Kickstart31Rom", true)]
     [InlineData("Connected", "1", true)]
@@ -46,7 +46,7 @@ public sealed class SettingsWorkflowTests
     [Fact]
     public void ProfileCatalogRetainsUnsupportedMachinesWithAnAvailabilityReason()
     {
-        var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory);
+        var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory, Path.Combine(Path.GetTempPath(), "copperscreen-unused-" + Guid.NewGuid().ToString("N")));
         Assert.Contains(profiles, profile => profile.Id == "lightweight-a500-kickstart13" && profile.IsAvailable);
         Assert.Contains(profiles, profile => profile.Id == "lightweight-a500-kickstart31" && profile.IsAvailable);
         var future = Assert.Single(profiles, profile => profile.Id == "expanded-m68040-jit-kickstart31-rtg");

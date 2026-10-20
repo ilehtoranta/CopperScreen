@@ -1,0 +1,4678 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "recordedUtc": "2026-10-18T17:25:57.5420731Z",
+  "status": "DISPLAY_RECOVERY_PASSED_AUDIO_GAPS_REDUCED_RESIDUAL_OPEN",
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "candidates": [
+    {
+      "privateStateRetained": true,
+      "fullMatrixRequested": false,
+      "version": "1.1.36.0",
+      "ownedRegistrationAbsent": true,
+      "physicalSound": {
+        "ReceivedUtc": "2026-10-18T16:40:30.6856632Z",
+        "Answer": "Yes, before and after",
+        "Status": "OWNER_CONFIRMED",
+        "ExactListeningTimes": "Not recorded",
+        "Case": "copperstart",
+        "ObservedInterval": "Before display-off and after display-on, before first recovery window closed",
+        "PackageVersion": "1.1.36.0",
+        "GlitchFreeSoundQualified": false
+      },
+      "protocol": "copperscreen-installed-recovery-v4",
+      "signatureVerified": true,
+      "sourceInputs": 188,
+      "sha256": "71a3b8766fcbeceb02ac60c75721e02dc8901c24e428eb01fdc3ae9d1e4457af",
+      "payloadFiles": 266,
+      "exports": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio36-882c1a71\\DisplayRecovery\\Installed\\copperstart-soak.adf",
+          "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+        },
+        {
+          "entries": [
+            "System.adf",
+            "export.json"
+          ],
+          "systemAdfSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio36-882c1a71\\DisplayRecovery\\Installed\\copperos-soak.copperos",
+          "sha256": "6d962eb4f5bb1108309d02e845e1979af58165ed5bc67ea022fa5a5e3242ccae"
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio36-882c1a71\\DisplayRecovery\\Installed\\copperstart-reopen.adf",
+          "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+        },
+        {
+          "entries": [
+            "System.adf",
+            "export.json"
+          ],
+          "systemAdfSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio36-882c1a71\\DisplayRecovery\\Installed\\copperos-reopen.copperos",
+          "sha256": "3100b650fa999c1dd819f8dcb10ffc2725b0353fb3688b039a85e8012a55ac7e"
+        }
+      ],
+      "cases": [
+        {
+          "nativeReopenEarlyMissingValues": 0,
+          "nativeReopenTotalMissingValues": 8192,
+          "warmupMissingValues": 558838,
+          "reopen": {
+            "requestedSeconds": 8,
+            "suppressedValues": 55770,
+            "callbackAgeMilliseconds": 16,
+            "nativeState": "ma_device_state_started",
+            "frames": 424,
+            "callbacks": 368,
+            "missingSampleValues": 8192,
+            "discardedValues": null,
+            "label": "native-audio-reopen",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.3898128,
+            "maxCallbackGapMilliseconds": null
+          },
+          "display": {
+            "nativeClockAvailableDuringOff": false,
+            "offFrames": 412,
+            "offSuppressedValues": 794224,
+            "restored": {
+              "requestedSeconds": 8,
+              "suppressedValues": 0,
+              "callbackAgeMilliseconds": 0,
+              "nativeState": "ma_device_state_started",
+              "frames": 417,
+              "callbacks": 395,
+              "missingSampleValues": 0,
+              "discardedValues": null,
+              "label": "display-on",
+              "multimediaScheduling": true,
+              "callbackErrors": 0,
+              "snapshotSeconds": 8.4218468,
+              "maxCallbackGapMilliseconds": null
+            },
+            "changes": [
+              {
+                "Utc": "2026-10-18T16:37:25.3407049Z",
+                "State": 1
+              },
+              {
+                "Utc": "2026-10-18T16:37:25.4435214Z",
+                "State": 0
+              },
+              {
+                "Utc": "2026-10-18T16:37:35.9601968Z",
+                "State": 1
+              }
+            ]
+          },
+          "case": "copperstart",
+          "finalAudio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "clockRunning": true,
+              "queue": {
+                "callbacks": 18497,
+                "requestedSamples": 37881856,
+                "consumedSamples": 37306634,
+                "starvedCallbacks": 402,
+                "missingSamples": 575222,
+                "nonzeroCallbacks": 14277,
+                "pausedSilenceSamples": 0
+              },
+              "callbackErrors": 0,
+              "deviceState": "ma_device_state_started",
+              "callbackAgeMilliseconds": 16,
+              "recoveryAttempts": 14,
+              "deviceReinitializations": 13,
+              "lastRecoveryResult": 0,
+              "nativeMessages": [
+                "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+              ]
+            },
+            "guestSampleValues": 38497760,
+            "guestFields": 20019,
+            "guestAudibleFields": 15331,
+            "suppressedSampleValues": 1148068,
+            "multimediaScheduling": true,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                5,
+                1356,
+                1057,
+                7201,
+                7836,
+                1278,
+                1143,
+                137,
+                3,
+                2
+              ]
+            }
+          },
+          "profileSettingsFiles": 3,
+          "status": "PASSED",
+          "restart": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 0,
+            "nativeState": "ma_device_state_started",
+            "frames": 380,
+            "callbacks": 357,
+            "missingSampleValues": 0,
+            "discardedValues": null,
+            "label": "native-audio-restart",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.2647002,
+            "maxCallbackGapMilliseconds": null
+          },
+          "baseline": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 15,
+            "nativeState": "ma_device_state_started",
+            "frames": 413,
+            "callbacks": 388,
+            "missingSampleValues": 0,
+            "discardedValues": null,
+            "label": "baseline",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.2684087,
+            "maxCallbackGapMilliseconds": null
+          },
+          "elevated": false,
+          "freshProcessReadback": true,
+          "bothExitCodes": 0,
+          "packageFullName": "CopperScreen.Test.57848c4e97ef42378856166c5f4059bb_1.1.36.0_x64__a0cyw3gffeccg",
+          "schedulingComparison": [
+            {
+              "systemCpuPercent": 100.0,
+              "wallSeconds": 8.4603082,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 0,
+                "nativeState": "ma_device_state_started",
+                "frames": 414,
+                "callbacks": 391,
+                "missingSampleValues": 0,
+                "discardedValues": null,
+                "label": "normal-1",
+                "multimediaScheduling": false,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.3424512,
+                "maxCallbackGapMilliseconds": null
+              }
+            },
+            {
+              "systemCpuPercent": 100.0,
+              "wallSeconds": 8.4572149,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 0,
+                "nativeState": "ma_device_state_started",
+                "frames": 412,
+                "callbacks": 386,
+                "missingSampleValues": 0,
+                "discardedValues": null,
+                "label": "games-1",
+                "multimediaScheduling": true,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.2337916,
+                "maxCallbackGapMilliseconds": null
+              }
+            },
+            {
+              "systemCpuPercent": 96.74984596426371,
+              "wallSeconds": 8.4506443,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 0,
+                "nativeState": "ma_device_state_started",
+                "frames": 412,
+                "callbacks": 388,
+                "missingSampleValues": 0,
+                "discardedValues": null,
+                "label": "normal-2",
+                "multimediaScheduling": false,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.2779206,
+                "maxCallbackGapMilliseconds": null
+              }
+            },
+            {
+              "systemCpuPercent": 98.56841470765522,
+              "wallSeconds": 8.6551528,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 15,
+                "nativeState": "ma_device_state_started",
+                "frames": 414,
+                "callbacks": 389,
+                "missingSampleValues": 0,
+                "discardedValues": null,
+                "label": "games-2",
+                "multimediaScheduling": true,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.3069295,
+                "maxCallbackGapMilliseconds": null
+              }
+            }
+          ],
+          "visible": true,
+          "diskSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+        },
+        {
+          "nativeReopenEarlyMissingValues": 0,
+          "nativeReopenTotalMissingValues": 8192,
+          "warmupMissingValues": 270746,
+          "reopen": {
+            "requestedSeconds": 8,
+            "suppressedValues": 51924,
+            "callbackAgeMilliseconds": 0,
+            "nativeState": "ma_device_state_started",
+            "frames": 420,
+            "callbacks": 366,
+            "missingSampleValues": 8192,
+            "discardedValues": null,
+            "label": "native-audio-reopen",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.3374869,
+            "maxCallbackGapMilliseconds": null
+          },
+          "display": {
+            "nativeClockAvailableDuringOff": false,
+            "offFrames": 420,
+            "offSuppressedValues": 811532,
+            "restored": {
+              "requestedSeconds": 8,
+              "suppressedValues": 0,
+              "callbackAgeMilliseconds": 16,
+              "nativeState": "ma_device_state_started",
+              "frames": 415,
+              "callbacks": 390,
+              "missingSampleValues": 0,
+              "discardedValues": null,
+              "label": "display-on",
+              "multimediaScheduling": true,
+              "callbackErrors": 0,
+              "snapshotSeconds": 8.3236933,
+              "maxCallbackGapMilliseconds": null
+            },
+            "changes": [
+              {
+                "Utc": "2026-10-18T16:51:08.3876915Z",
+                "State": 1
+              },
+              {
+                "Utc": "2026-10-18T16:51:08.5453776Z",
+                "State": 0
+              },
+              {
+                "Utc": "2026-10-18T16:51:22.4209697Z",
+                "State": 1
+              }
+            ]
+          },
+          "case": "copperos",
+          "finalAudio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "clockRunning": true,
+              "queue": {
+                "callbacks": 23938,
+                "requestedSamples": 49025024,
+                "consumedSamples": 48715040,
+                "starvedCallbacks": 267,
+                "missingSamples": 309984,
+                "nonzeroCallbacks": 3251,
+                "pausedSilenceSamples": 0
+              },
+              "callbackErrors": 0,
+              "deviceState": "ma_device_state_started",
+              "callbackAgeMilliseconds": 15,
+              "recoveryAttempts": 17,
+              "deviceReinitializations": 16,
+              "lastRecoveryResult": 0,
+              "nativeMessages": [
+                "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+              ]
+            },
+            "guestSampleValues": 50186126,
+            "guestFields": 26097,
+            "guestAudibleFields": 0,
+            "suppressedSampleValues": 1428834,
+            "multimediaScheduling": true,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                10,
+                1808,
+                1387,
+                9572,
+                9995,
+                1644,
+                1607,
+                61,
+                6,
+                6
+              ]
+            }
+          },
+          "profileSettingsFiles": 3,
+          "status": "PASSED",
+          "restart": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 0,
+            "nativeState": "ma_device_state_started",
+            "frames": 391,
+            "callbacks": 368,
+            "missingSampleValues": 0,
+            "discardedValues": null,
+            "label": "native-audio-restart",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.4658087,
+            "maxCallbackGapMilliseconds": null
+          },
+          "baseline": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 0,
+            "nativeState": "ma_device_state_started",
+            "frames": 403,
+            "callbacks": 390,
+            "missingSampleValues": 22854,
+            "discardedValues": null,
+            "label": "baseline",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.3217323,
+            "maxCallbackGapMilliseconds": null
+          },
+          "elevated": false,
+          "freshProcessReadback": true,
+          "bothExitCodes": 0,
+          "packageFullName": "CopperScreen.Test.57848c4e97ef42378856166c5f4059bb_1.1.36.0_x64__a0cyw3gffeccg",
+          "schedulingComparison": null,
+          "visible": true,
+          "diskSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        }
+      ]
+    },
+    {
+      "privateStateRetained": true,
+      "fullMatrixRequested": false,
+      "version": "1.1.37.0",
+      "ownedRegistrationAbsent": true,
+      "physicalSound": {
+        "GlitchFreeSoundQualified": false,
+        "ObservedInterval": "Before display-off and after display-on, before the first recovery window closed",
+        "Status": "OWNER_CONFIRMED",
+        "PackageVersion": "1.1.37.0",
+        "Case": "copperstart",
+        "Answer": "Yes, before and after",
+        "ExactListeningTimes": "Not recorded",
+        "ReceivedUtc": "2026-10-18T17:07:38.5492798Z"
+      },
+      "protocol": "copperscreen-installed-recovery-v4",
+      "signatureVerified": true,
+      "sourceInputs": 188,
+      "sha256": "d93305ab8cd470266d72818fa1157721186f8a5fb7ee789b6df16e1d04ba3ef8",
+      "payloadFiles": 266,
+      "exports": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio37-f9105546\\DisplayRecovery\\Installed\\copperstart-soak.adf",
+          "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+        },
+        {
+          "entries": [
+            "System.adf",
+            "export.json"
+          ],
+          "systemAdfSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio37-f9105546\\DisplayRecovery\\Installed\\copperos-soak.copperos",
+          "sha256": "9f142adf96305f32e6acb375462d0f690888de56ab398b8bb2c4cdcc40475732"
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio37-f9105546\\DisplayRecovery\\Installed\\copperstart-reopen.adf",
+          "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+        },
+        {
+          "entries": [
+            "System.adf",
+            "export.json"
+          ],
+          "systemAdfSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio37-f9105546\\DisplayRecovery\\Installed\\copperos-reopen.copperos",
+          "sha256": "0dd4a89757d2deb3951ece261aef23186b05b05462d42c42316a5c622c3afdcb"
+        }
+      ],
+      "cases": [
+        {
+          "nativeReopenEarlyMissingValues": 0,
+          "nativeReopenTotalMissingValues": 0,
+          "warmupMissingValues": 489182,
+          "reopen": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 15,
+            "nativeState": "ma_device_state_started",
+            "frames": 422,
+            "callbacks": 395,
+            "missingSampleValues": 0,
+            "discardedValues": 0,
+            "label": "native-audio-reopen",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.4261453,
+            "maxCallbackGapMilliseconds": 1157
+          },
+          "display": {
+            "nativeClockAvailableDuringOff": false,
+            "offFrames": 407,
+            "offSuppressedValues": 782686,
+            "restored": {
+              "requestedSeconds": 8,
+              "suppressedValues": 0,
+              "callbackAgeMilliseconds": 0,
+              "nativeState": "ma_device_state_started",
+              "frames": 422,
+              "callbacks": 397,
+              "missingSampleValues": 0,
+              "discardedValues": 0,
+              "label": "display-on",
+              "multimediaScheduling": true,
+              "callbackErrors": 0,
+              "snapshotSeconds": 8.4687863,
+              "maxCallbackGapMilliseconds": 21219
+            },
+            "changes": [
+              {
+                "Utc": "2026-10-18T17:02:59.4160816Z",
+                "State": 1
+              },
+              {
+                "Utc": "2026-10-18T17:02:59.5163667Z",
+                "State": 0
+              },
+              {
+                "Utc": "2026-10-18T17:03:19.8651696Z",
+                "State": 1
+              }
+            ]
+          },
+          "case": "copperstart",
+          "finalAudio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "clockRunning": true,
+              "needsPrefill": false,
+              "queue": {
+                "callbacks": 20412,
+                "requestedSamples": 41803776,
+                "consumedSamples": 40973850,
+                "starvedCallbacks": 699,
+                "missingSamples": 829926,
+                "nonzeroCallbacks": 16084,
+                "pausedSilenceSamples": 0,
+                "discardedSampleValues": 29444
+              },
+              "callbackErrors": 0,
+              "deviceState": "ma_device_state_started",
+              "callbackAgeMilliseconds": 0,
+              "recoveryAttempts": 23,
+              "deviceReinitializations": 22,
+              "lastRecoveryResult": 0,
+              "maxCallbackGapMilliseconds": 21219,
+              "nativeMessages": [
+                "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+              ]
+            },
+            "guestSampleValues": 42934262,
+            "guestFields": 22326,
+            "guestAudibleFields": 17638,
+            "suppressedSampleValues": 1919216,
+            "multimediaScheduling": true,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                52,
+                2332,
+                1188,
+                7696,
+                7886,
+                1311,
+                1454,
+                308,
+                81,
+                18
+              ]
+            }
+          },
+          "profileSettingsFiles": 3,
+          "status": "PASSED",
+          "restart": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 16,
+            "nativeState": "ma_device_state_started",
+            "frames": 385,
+            "callbacks": 363,
+            "missingSampleValues": 0,
+            "discardedValues": 0,
+            "label": "native-audio-restart",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.4234235,
+            "maxCallbackGapMilliseconds": 1157
+          },
+          "baseline": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 0,
+            "nativeState": "ma_device_state_started",
+            "frames": 415,
+            "callbacks": 391,
+            "missingSampleValues": 0,
+            "discardedValues": 0,
+            "label": "baseline",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.3317594,
+            "maxCallbackGapMilliseconds": 47
+          },
+          "elevated": false,
+          "freshProcessReadback": true,
+          "bothExitCodes": 0,
+          "packageFullName": "CopperScreen.Test.e7af7a940bc04ed98bba2b4703944ecf_1.1.37.0_x64__a0cyw3gffeccg",
+          "schedulingComparison": [
+            {
+              "systemCpuPercent": 100.0,
+              "wallSeconds": 9.1792146,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 16,
+                "nativeState": "ma_device_state_started",
+                "frames": 370,
+                "callbacks": 400,
+                "missingSampleValues": 102370,
+                "discardedValues": 0,
+                "label": "normal-1",
+                "multimediaScheduling": false,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.5426465,
+                "maxCallbackGapMilliseconds": 47
+              }
+            },
+            {
+              "systemCpuPercent": 100.0,
+              "wallSeconds": 9.2876884,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 16,
+                "nativeState": "ma_device_state_started",
+                "frames": 421,
+                "callbacks": 394,
+                "missingSampleValues": 0,
+                "discardedValues": 0,
+                "label": "games-1",
+                "multimediaScheduling": true,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.4206334,
+                "maxCallbackGapMilliseconds": 47
+              }
+            },
+            {
+              "systemCpuPercent": 100.0,
+              "wallSeconds": 9.6221775,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 0,
+                "nativeState": "ma_device_state_started",
+                "frames": 314,
+                "callbacks": 386,
+                "missingSampleValues": 185918,
+                "discardedValues": 0,
+                "label": "normal-2",
+                "multimediaScheduling": false,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.2384559,
+                "maxCallbackGapMilliseconds": 47
+              }
+            },
+            {
+              "systemCpuPercent": 100.0,
+              "wallSeconds": 8.8016475,
+              "window": {
+                "requestedSeconds": 8,
+                "suppressedValues": 0,
+                "callbackAgeMilliseconds": 0,
+                "nativeState": "ma_device_state_started",
+                "frames": 404,
+                "callbacks": 390,
+                "missingSampleValues": 0,
+                "discardedValues": 0,
+                "label": "games-2",
+                "multimediaScheduling": true,
+                "callbackErrors": 0,
+                "snapshotSeconds": 8.3315092,
+                "maxCallbackGapMilliseconds": 47
+              }
+            }
+          ],
+          "visible": true,
+          "diskSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+        },
+        {
+          "nativeReopenEarlyMissingValues": 0,
+          "nativeReopenTotalMissingValues": 748,
+          "warmupMissingValues": 313294,
+          "reopen": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 16,
+            "nativeState": "ma_device_state_started",
+            "frames": 414,
+            "callbacks": 402,
+            "missingSampleValues": 748,
+            "discardedValues": 0,
+            "label": "native-audio-reopen",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.5705115,
+            "maxCallbackGapMilliseconds": 1078
+          },
+          "display": {
+            "nativeClockAvailableDuringOff": false,
+            "offFrames": 401,
+            "offSuppressedValues": 771148,
+            "restored": {
+              "requestedSeconds": 8,
+              "suppressedValues": 0,
+              "callbackAgeMilliseconds": 0,
+              "nativeState": "ma_device_state_started",
+              "frames": 422,
+              "callbacks": 398,
+              "missingSampleValues": 0,
+              "discardedValues": 0,
+              "label": "display-on",
+              "multimediaScheduling": true,
+              "callbackErrors": 0,
+              "snapshotSeconds": 8.4888379,
+              "maxCallbackGapMilliseconds": 22593
+            },
+            "changes": [
+              {
+                "Utc": "2026-10-18T17:18:27.6231290Z",
+                "State": 0
+              },
+              {
+                "Utc": "2026-10-18T17:18:47.0940458Z",
+                "State": 1
+              }
+            ]
+          },
+          "case": "copperos",
+          "finalAudio": {
+            "output": {
+              "backend": "ma_backend_wasapi",
+              "initialized": true,
+              "clockRunning": true,
+              "needsPrefill": false,
+              "queue": {
+                "callbacks": 27047,
+                "requestedSamples": 55392256,
+                "consumedSamples": 55070838,
+                "starvedCallbacks": 252,
+                "missingSamples": 321418,
+                "nonzeroCallbacks": 3252,
+                "pausedSilenceSamples": 0,
+                "discardedSampleValues": 28864
+              },
+              "callbackErrors": 0,
+              "deviceState": "ma_device_state_started",
+              "callbackAgeMilliseconds": 0,
+              "recoveryAttempts": 24,
+              "deviceReinitializations": 23,
+              "lastRecoveryResult": 0,
+              "maxCallbackGapMilliseconds": 22593,
+              "nativeMessages": [
+                "1:[WASAPI] Failed to start internal playback device. HRESULT = -2004287484.",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n",
+                "1:[WASAPI] Failed to retrieve IMMDevice.\n"
+              ]
+            },
+            "guestSampleValues": 57020686,
+            "guestFields": 29651,
+            "guestAudibleFields": 0,
+            "suppressedSampleValues": 1907676,
+            "multimediaScheduling": true,
+            "pacing": {
+              "protocol": "host-frame-start-gaps-v1",
+              "upperBoundsMilliseconds": [
+                1,
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                40,
+                80,
+                160
+              ],
+              "buckets": [
+                0,
+                0,
+                2429,
+                1567,
+                10674,
+                11237,
+                1710,
+                1853,
+                122,
+                40,
+                19
+              ]
+            }
+          },
+          "profileSettingsFiles": 3,
+          "status": "PASSED",
+          "restart": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 0,
+            "nativeState": "ma_device_state_started",
+            "frames": 389,
+            "callbacks": 366,
+            "missingSampleValues": 0,
+            "discardedValues": 0,
+            "label": "native-audio-restart",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.3421528,
+            "maxCallbackGapMilliseconds": 1078
+          },
+          "baseline": {
+            "requestedSeconds": 8,
+            "suppressedValues": 0,
+            "callbackAgeMilliseconds": 15,
+            "nativeState": "ma_device_state_started",
+            "frames": 418,
+            "callbacks": 392,
+            "missingSampleValues": 0,
+            "discardedValues": 0,
+            "label": "baseline",
+            "multimediaScheduling": true,
+            "callbackErrors": 0,
+            "snapshotSeconds": 8.3762142,
+            "maxCallbackGapMilliseconds": 47
+          },
+          "elevated": false,
+          "freshProcessReadback": true,
+          "bothExitCodes": 0,
+          "packageFullName": "CopperScreen.Test.e7af7a940bc04ed98bba2b4703944ecf_1.1.37.0_x64__a0cyw3gffeccg",
+          "schedulingComparison": null,
+          "visible": true,
+          "diskSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        }
+      ]
+    }
+  ],
+  "sourceBoundary": "Host audio/runtime/diagnostic/controller only; frozen engine/disk sources and pinned Copper68k unchanged",
+  "scope": {
+    "wack": "NOT_RUN_FOR_THESE_HASHES",
+    "glitchFreePhysicalSound": "NOT_QUALIFIED",
+    "archiveImportRestore": "NOT_RUN_IN_THIS_CONTINUATION",
+    "update": "NOT_RUN_FOR_THESE_HASHES",
+    "fullHourPacing": "NOT_RUN_FOR_THESE_HASHES",
+    "freshS3": "NOT_RUN_FOR_THESE_HASHES",
+    "endpointPnpCycle": "NOT_RUN_FOR_THESE_HASHES",
+    "mmcssBenefit": "1.1.37.0 paired normal/Games/normal/Games windows support reduced producer starvation in this bounded loaded-host observation; 1.1.36.0 comparison was inconclusive. No full-hour or release-budget inference."
+  },
+  "priorDatedEvidenceUnchanged": 16,
+  "references": [
+    {
+      "path": "artifacts/audio36-882c1a71/Source/Directory.Build.props",
+      "sha256": "e5adca3f2ec2f649b0fbd3fb92812e95231ff28a955f22da152faa73746c4a35",
+      "bytes": 131
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/global.json",
+      "sha256": "ec7d038183957f0f2dd09078668ab7866560a585b3566836e5ecd105796260f4",
+      "bytes": 87
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/LICENSE",
+      "sha256": "61e05df922ae668cc3719d961485cf0571236f055db025a7a58d89d8310a0670",
+      "bytes": 1089
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/NuGet.Config",
+      "sha256": "9ce761d4211b1fd7ded5da1fe132aa49e40dbce2971af74d012af592500051e0",
+      "bytes": 695
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/THIRD-PARTY-NOTICES.md",
+      "sha256": "3788bf9d3405ecc9c8e01984cc315643beefc5828e04ed06fafe0ee694206a84",
+      "bytes": 1015
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AdfDiskMedia.cs",
+      "sha256": "908931fc81a63659046f1ba2bb3746d51a8f69020e819d3f90f5abd4dee4e9be",
+      "bytes": 4707
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDiskException.cs",
+      "sha256": "149a20691a57a95ee10cf596e59613fbf7d7998f663c084afdcb1da3c91381e1",
+      "bytes": 861
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDiskGeometry.cs",
+      "sha256": "d45092739e5bc08bc5765150a0c5dba852d7534526034468b720420ef96421d6",
+      "bytes": 1124
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDiskLoader.cs",
+      "sha256": "6382665838ccca1a70aa54f30ea07fa4aba4406f2d0b30ee6681565a436e5b9b",
+      "bytes": 14244
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDiskLoadOptions.cs",
+      "sha256": "44926a0a09a61cd873d8d524e1c1e9b56247f262214b765eead1cdfb6a00aa60",
+      "bytes": 691
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDiskLoadResult.cs",
+      "sha256": "b3b940c2a2cf23114a7bcc98308462436bac3b596fb9ae05770fca2194ab0afa",
+      "bytes": 866
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDiskMedia.cs",
+      "sha256": "b79d3288cfe226a8615b7204cd2ec48d5e4f6438ab1df44c3a68c25b4feec4b6",
+      "bytes": 7374
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDosTrackDecoder.cs",
+      "sha256": "a4b4467cc43cf098832ec75592aa6e18414dfd11014a9f4e800aa7047915c68b",
+      "bytes": 11883
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaDosTrackEncoder.cs",
+      "sha256": "c43c8ce3de8a1a5d4bdfbc0dd55e739d56ae6ff3fe1fa536a0ce45d6129e0299",
+      "bytes": 6575
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaEncodedTrack.cs",
+      "sha256": "aa0126cee43a68da87e83d3d26480ce383245e1559ce2da32ae7212084d0fad2",
+      "bytes": 9330
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaHardfile.cs",
+      "sha256": "9c52a79e0d65e622341e0a897f12a9132a88bcf8c3dd1b0fdb78ce22bc65ee5a",
+      "bytes": 31672
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AmigaTrackRegion.cs",
+      "sha256": "c2dd9e52f8256643be4f219532db1ae084fb99629653069b040016d917ff3ee8",
+      "bytes": 1421
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/AssemblyInfo.cs",
+      "sha256": "6c77e4e5f4c05e2946a35521b0ce28a94358029dcb5290ff108146c5bf6d65d6",
+      "bytes": 221
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/BigEndian.cs",
+      "sha256": "2630ef5c92bde5ab744dc31fc5bc134bf6e7c657b857dc039132adb510f6d255",
+      "bytes": 1364
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/CopperDisk.csproj",
+      "sha256": "35ce42174036d251008bbbab5f9ec1360738abeaaad76d494f32760906f18f63",
+      "bytes": 2279
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/DmsDecoder.cs",
+      "sha256": "ccf7e3b7b610fe77fb946313ca3b6445f863159d4005a96d4f7b266cb2a4d69f",
+      "bytes": 34236
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ExtendedAdfDecoder.cs",
+      "sha256": "3553f174ae9700300e8d98b2b799e99a557c9b6968ba2dacf64b33824f65d638",
+      "bytes": 7430
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/IpfDecodeException.cs",
+      "sha256": "f673f97ef9374123e33047f65a5854d549c08ddd6b4f21fac72509477afed1fb",
+      "bytes": 467
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/IpfDecodeOptions.cs",
+      "sha256": "decbe4202f04323e3f36653db89e2e906cf70a895fd79c5473c94dfe52852908",
+      "bytes": 855
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/IpfDecoder.cs",
+      "sha256": "be6c90e5df4836576185b2da43cba99cfa85a74d5b3f882c7ba6cbc1cd4c8a6d",
+      "bytes": 30452
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/IpfDiskImage.cs",
+      "sha256": "094926013836f02b36a821c34f1ae609ccf19e384a8b0730462a64942a8b29d2",
+      "bytes": 1380
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/IpfTrack.cs",
+      "sha256": "71c929345fa9b17d2033e920695cfd17862cfa518890dc03d25d42688b4c1c67",
+      "bytes": 2489
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/packages.lock.json",
+      "sha256": "a4364d81a6de2707d66fbced18fbbc926c882ab96e1d1aebbb17e871285b9d75",
+      "bytes": 66
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ReadOnlyAdfDiskMedia.cs",
+      "sha256": "45c0016dc22cb79e5e22fdc06cc9b689f27d81165c04de018ba70a0d2ca937ea",
+      "bytes": 1040
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ScpDecodeException.cs",
+      "sha256": "dfb9354d44e7b9b8c1c910549d4fbbfb47082ddd0e898754ed789c57370a94a0",
+      "bytes": 471
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ScpDecodeOptions.cs",
+      "sha256": "0e7475656a9e7b9b31a5a862d668fb1329f023ea8afdd5b469a96807e809d76c",
+      "bytes": 1159
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ScpDecoder.cs",
+      "sha256": "70e03fa204622a7fd429579bbfe30b8b6050bf4dd8bb793322b58c5a7741448e",
+      "bytes": 12831
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ScpDiskImage.cs",
+      "sha256": "703375d8ed27ebd648a313ccaecabff7417d66b05a66b4fdd49cc3d53565d53a",
+      "bytes": 1312
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/ScpTrack.cs",
+      "sha256": "ca7b0b174026cdf674d2656b5a723aeea165d5bbd459104066aceb020d8fc659",
+      "bytes": 1789
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/THIRD-PARTY-NOTICES.md",
+      "sha256": "f3c1be3e0d56d0ee697f627def402f76a9e69b9f0c147f0eaceffda36e26b8cf",
+      "bytes": 373
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperDisk/TrackBackedDiskMedia.cs",
+      "sha256": "1b0d82c8c455b08772e0a74517d420aa18e001f6fa3e4956c00e2906c901bb71",
+      "bytes": 3352
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/AssemblyInfo.cs",
+      "sha256": "220120098395a637162a315523d2b6a2240b89917e816307fab883123181ae16",
+      "bytes": 181
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj",
+      "sha256": "51da70b6bcdd68b9141a8503dd27fd71b845ed1b1135321e8fabdd70742704d8",
+      "bytes": 2441
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA1200Io.cs",
+      "sha256": "04c560f0e5f34c2d19def4dff5525303c52361f2d5282524b091eaf04ba299d4",
+      "bytes": 4045
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs",
+      "sha256": "92014e1145e8fd6bfbe32279a02f0783515680893d7eb70e654443c0d005550e",
+      "bytes": 4010
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Aga.cs",
+      "sha256": "dc5e15a16433f2ffcd8cd3916eadeea24ee2dbea53d37bc146c2d158b06b2f2b",
+      "bytes": 2316
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "sha256": "a538245dd917d064f0f4673fae0669db18d34a4141223e16ee27d4f6081002e5",
+      "bytes": 106362
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs",
+      "sha256": "8ad12803779c245824e665f8cf1b65cf1e817eb8bfc687ac297dd062e823bf70",
+      "bytes": 2519
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Jit.cs",
+      "sha256": "1a2177ada30a4b4396c840caed74758aa52aad7c72ff2a3773c87d361ed52cf4",
+      "bytes": 5564
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Storage.cs",
+      "sha256": "4cd4963b4e92467477c4ee02f67e0897085e2cb14e0dee86820d36318963e758",
+      "bytes": 441
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs",
+      "sha256": "a445e61b81ee60f96605a6af5e841b8c92dd7e2688be4a8b3cc41e6d215a1df3",
+      "bytes": 6921
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs",
+      "sha256": "be840b5cc6259efa30c9a9e22940e1f2dcd8a29d91eb3d06697f9e739ba5b5ec",
+      "bytes": 1718
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightAutoconfig.cs",
+      "sha256": "71473a7fcb265ed7316279a62b6048ebf9eeca745e10d77acb4f46c3e161f1dc",
+      "bytes": 15817
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightBitplanes.cs",
+      "sha256": "8aefe9b4c36d878ad586fc6ebf07e32344732489692c578f7f82657eec86a41a",
+      "bytes": 20179
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightBlitter.cs",
+      "sha256": "4f544de0f6d8446dd21c726d3e340efc248126d8418f41f1cb5a2e55b83f0d99",
+      "bytes": 37615
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightBusArbiter.cs",
+      "sha256": "6d4d469525d384697d7765c84cf4eb8a4513b9c34c739070cf1d279a70ca16ec",
+      "bytes": 1662
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightCia.cs",
+      "sha256": "5ca6b61e6e3d2c59fcd8f1acc8929fde97a18a4b2bd7d72a99f128576cc48152",
+      "bytes": 22554
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightClock.cs",
+      "sha256": "c73197e90173e0441972199fda9f12b4ecaf06683d665f53e2c0e71da0006365",
+      "bytes": 10990
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightControllers.cs",
+      "sha256": "818e0bcf6605f370da1ab464cb9341c479a0dc385f6aa5c2fdbb5eb46931a5db",
+      "bytes": 2174
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightCopper.cs",
+      "sha256": "ed998714e024a6e8c89e2e06c43b3b53cb441014c9c09924ff55ecb3711911ad",
+      "bytes": 15339
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs",
+      "sha256": "6b3924858ef4fbc4de69f9177dd74cb040299a9c3eaea745b2127c79e1ee9b63",
+      "bytes": 70310
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightCpuBoundary.cs",
+      "sha256": "d0fe3276155110976812a1789b8de91233f5ade3a61694daf5ef527855380adb",
+      "bytes": 3887
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs",
+      "sha256": "5db47e674024d18f72fcc346a0b3e278f4b883674ed06694048a3f782531b4ec",
+      "bytes": 301
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightDiskDma.cs",
+      "sha256": "bf655e8b88837f4820f8d95d4544f558185176537f9a1e9e9204c23f5e35c4a5",
+      "bytes": 11066
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightDiskReceiver.cs",
+      "sha256": "21ab816a0f76ca00bc889e1cc5a687e533b943559f9cf25d02f5691f50d8771a",
+      "bytes": 3577
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs",
+      "sha256": "5aa94cacbf2d146dac4c281e7b470e2b1a4e44c84a5c498d0bf7ebfe93cbf61e",
+      "bytes": 4970
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs",
+      "sha256": "b9f16fa8d3467c200fb06c8230a831561ad385408b57c1b04424bb068601e7a7",
+      "bytes": 1027
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs",
+      "sha256": "d31e35c1e53ccbf60cc571f191c7f91e977a688032adec00dbbcdfa9611fed37",
+      "bytes": 897
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightFastRam.cs",
+      "sha256": "4c17f39c80af27b4bf69e45a65aa3d01e2b90295d0c780d329501247c1464709",
+      "bytes": 4204
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs",
+      "sha256": "1bfa551ba1dbb5d8831b37cc22c2524d3393a6a3a414f9141aa0cc3535ee6d1f",
+      "bytes": 13952
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightFloppyFormat.cs",
+      "sha256": "8e59f1f44152a515f9bf4c0c4daf37a2b127811e500f4d00040e352f9466cb78",
+      "bytes": 218
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightFloppyImage.cs",
+      "sha256": "1a7b8fb69a9226c5bf07f7fa6100860f7b4ee6ec56e546694e03061d42a1df52",
+      "bytes": 3484
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightHdfBus.cs",
+      "sha256": "ee381ebace9c74c0a53a9261583dd92859ea593f7f29d110ceff951b48af98dd",
+      "bytes": 8166
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightHostDirectory.cs",
+      "sha256": "d4d9592292aa33b13930bd69a88dfa9fe305d5d5f4d15023335725f9677cc4f1",
+      "bytes": 18164
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightHostDirectoryConfiguration.cs",
+      "sha256": "6219200a33ae2527f62005daf50ad80eede67f32e3a8a640e777dc3d5732ae4c",
+      "bytes": 1471
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightHostFsController.cs",
+      "sha256": "fae5563b0ccfa04296d119656c36f4bfb85f94daeb1499ca081b23a8d44dbf0a",
+      "bytes": 38215
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightIpfImage.cs",
+      "sha256": "5539eaca99eb4e4b4544dad015566b190867764a2836306405d384196bd7b2b3",
+      "bytes": 6609
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightKeyboard.cs",
+      "sha256": "fed9c9e6d6288db28773b9e4a27d2099aeb18ef4873d0a08ed33cd09c1b9358f",
+      "bytes": 6875
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs",
+      "sha256": "dde8ac29ee331f8afd688b52df712cc672d4c9b69f5b84ac8f284c99feddd33d",
+      "bytes": 23359
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs",
+      "sha256": "458bbd8434405565302b2c5b7e3f1df1fca7f67c30fb87869cb027df41be8a78",
+      "bytes": 3919
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightPaulaSerial.cs",
+      "sha256": "13f4cd4ae0bfa57dc32c54c5684b4f10f734124dbabe815de93843a828a5b2c8",
+      "bytes": 4457
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightPotentiometers.cs",
+      "sha256": "e43c1f7bd537bb27700987a5640c8e611e79a7bb42aa29d2c95057bafeb12c73",
+      "bytes": 2611
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightRealTimeClock.cs",
+      "sha256": "c5b8537da0d0635aa39949001dec50e7000ef33d704eea0a76fb320f564f16cb",
+      "bytes": 10684
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightRegisters.cs",
+      "sha256": "69583594d395c018893bd991ecd911c01ac8d8cffd5315d726abe4c7fac7cf38",
+      "bytes": 11254
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs",
+      "sha256": "97ca28ffdda858b0c7b0068b68cc040022d331c23604433e4accb02812192155",
+      "bytes": 18571
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightSprites.Aga.cs",
+      "sha256": "f694e3ef28961c03868bd6dc23ff2d98c308178a308d5246868b0772da479167",
+      "bytes": 8992
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightSprites.cs",
+      "sha256": "d62e125fa6b7433579d5bca4a930b58f7a6f55b7e4d40a40f799609240f231ab",
+      "bytes": 32634
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightVideo.Aga.cs",
+      "sha256": "3d606a2c69bc3fcdb0c133cc9d09770a3c9d1cd359c1838ada40675a0f7e518a",
+      "bytes": 10247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightVideo.cs",
+      "sha256": "012837e982eb51a27235498dfe82f1bc6c419acf63cb4dfd6a624964d5c24b66",
+      "bytes": 41708
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs",
+      "sha256": "90adb59d3998128d3a4d55759fc9c6f7b64c303bcc036ff2d2fd49ceadaa488f",
+      "bytes": 9228
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperMod.Amiga.Lightweight/packages.lock.json",
+      "sha256": "d42fd357db656ddae956fe4bc47470c3f16e34d2fe301ba3c48171ec7fc6a16f",
+      "bytes": 708
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/AmigaHostKeyMapper.cs",
+      "sha256": "affb92e700e6429f740d48596d264e7b23487728566421454d34a1101a64c76a",
+      "bytes": 9997
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/App.cs",
+      "sha256": "dd0ba4020e056d418036e2465930f579c7c585884728a4ee1222e836cf120959",
+      "bytes": 1261
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/app.manifest",
+      "sha256": "68695fcc7764cb0ec20ca222d2bf90667ba3e9b2bb6ccfeff2c936e43129cfdd",
+      "bytes": 936
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/AssemblyInfo.cs",
+      "sha256": "bbebfd4fb5b7dd7311bb837b62c151e2c957592b95cf744a0aa2c8e41d10c601",
+      "bytes": 283
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperBenchUnavailable.cs",
+      "sha256": "b9de8c901e4259d1093a519e4137182b8e3f1db313e79e387fd830ebb6123a35",
+      "bytes": 1874
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperOsWorkspace.cs",
+      "sha256": "092fc88b9752f4946fc0859fbf69b9cd1cab03b7162497dc42b51dfc67abb3ce",
+      "bytes": 11095
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperOsWorkspace.Recovery.cs",
+      "sha256": "a45c4215d70a8c3788e5f264e83406891081f64d069e338316a149fa7b2ebbe7",
+      "bytes": 6018
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreen.csproj",
+      "sha256": "ae24c4a13ae20056856b8cb57db69d375dda3d73095003718a7201affddb0802",
+      "bytes": 3030
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenAdfImage.cs",
+      "sha256": "15974fda314b09e800098db3743420c703a3d4a783745e7b27e12c8bffb60634",
+      "bytes": 2963
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenAppearance.cs",
+      "sha256": "4f19e646e0ae265044e4788a47900b68547b2fff02979af934753a69b367d450",
+      "bytes": 3829
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenAtomicFile.cs",
+      "sha256": "ddb505c7ad21bb2382b0600a58938a76f347a09352175b62dd356b555b4fb636",
+      "bytes": 2691
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenAudioGain.cs",
+      "sha256": "fbb5ef7006cb1f29da71ef64a21489258141541eda794cf642cacf4d1de6e21b",
+      "bytes": 559
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenAudioScheduling.cs",
+      "sha256": "ee8c87f2600c1d3611b69b78b098e1f51c50c708304fcfce61f021c663e3f8ea",
+      "bytes": 1806
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenAvailability.cs",
+      "sha256": "a6ed093afb1d0c3168daf2d7641e0e1e802afff2cf68cf617bd0fa6e748de5a8",
+      "bytes": 3613
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenBootAssembler.cs",
+      "sha256": "09d67227087a44618be8a28ce500be0a89abd68fe7ed30044b6b297e567a8812",
+      "bytes": 9617
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenCopperStartRom.cs",
+      "sha256": "2f798db8eb241117309520cf75eba036e8cb24e8bace00155ed7b045f5ad5a52",
+      "bytes": 3589
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenCrashLog.cs",
+      "sha256": "3087179cd5369acd137e6b0a7f62ff692794e8ea08e6891cdfeef944e407ad22",
+      "bytes": 4196
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenDebugSnapshot.cs",
+      "sha256": "3ed33bea49522e13cae9e390a8a855cb712104e197b2af90c54efe680ff560df",
+      "bytes": 16567
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenDiskImageArchive.cs",
+      "sha256": "8e5517b612adc5619fb8642c807e6ecaea4610ab8c53384519e89d9ecc3c5df1",
+      "bytes": 10823
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenDiskNavigation.cs",
+      "sha256": "d15531962a0e41ff85f02ad429440cd42f3f4bfbee2f62203a59ab05eef52bf0",
+      "bytes": 3102
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenGamepadInput.cs",
+      "sha256": "34e13dc1ec73e0e6e3878908996a2e2c738ce1b1dcfb0d2a127ae9355225a5be",
+      "bytes": 3561
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenHardfileSettings.cs",
+      "sha256": "ff559850fc329c0f0a169246f33dcdd22a305c50eb606290639ae85f6e87dabc",
+      "bytes": 265
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenHostTypes.cs",
+      "sha256": "b0ff7ccafa5a2d7b9f246902612bd9f18a6015c548fa5cda6ff8f83ae99c8a3d",
+      "bytes": 901
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenInputOptions.cs",
+      "sha256": "8a61c9a7efaf171383643ca821ec6798981878934d3012260798c11c95ea3eaf",
+      "bytes": 10433
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenKickstartRomArchive.cs",
+      "sha256": "cb25999c0d3fd9c16f461b984afb63b2c3d185b350b2e38ec20ad740bbd70186",
+      "bytes": 5188
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenLaunchWorkflow.cs",
+      "sha256": "6174cc1dc7608d2a7a2caf1d43c2fc72c8ef0c687664a0ab8dc1912e8995ad30",
+      "bytes": 4340
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenLightweightSession.cs",
+      "sha256": "f0d2c47261b2dbe2c69cf23dca12d641fc5a33812b104f15df71b2422da2c191",
+      "bytes": 34833
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenMachinePresets.cs",
+      "sha256": "f4ae73f1f057c0700960dc8a33e15f291ced43f7ddcdd18deea7531bf0027618",
+      "bytes": 5918
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenMachineProfileTypes.cs",
+      "sha256": "c830128321c55a6d9a1658ae54c57344f63a4f4fdd993b34327fff6cbb608fa9",
+      "bytes": 4830
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenMinimalBoot.cs",
+      "sha256": "004f7709fe49ddea20f10d7f00a32df98bb4b9a477180241e1c45d7e80e88a0b",
+      "bytes": 4705
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenPresentationGeometry.cs",
+      "sha256": "b1c7316d01a76c837461a7230afd5abddcf5dbab5501efe88e1893faed2b0acc",
+      "bytes": 1734
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenPresentationOptions.cs",
+      "sha256": "68545a8edac17095a61c9665c4a21397ec631d6089ffa67b2fe5569111aed574",
+      "bytes": 2660
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenProfile.cs",
+      "sha256": "2a4fd040f7d8e93a11d391aabda68be20ea115afd368f8e2aa4832e169703fcc",
+      "bytes": 36279
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenProfileStore.cs",
+      "sha256": "126a04a4f8eb38f5bcfdf1bb9f4467f96a02cd1b4a2696b057b0f0403ea9ddd1",
+      "bytes": 11474
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenRecentSession.cs",
+      "sha256": "198cfffed6fd614a7e422842ea84717298188166c1be6f33a1793ceee4fb4f7d",
+      "bytes": 3764
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenRuntime.cs",
+      "sha256": "81b2fe27239e3e58b176ed496e6980b9afa2f044ea5c31fdb71cb356fa1ae48e",
+      "bytes": 46822
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenSettings.cs",
+      "sha256": "249d8fc3ccd822da7b145e3ac785b4d621b5a697e2fa8001fa1332a1c7d4db1a",
+      "bytes": 20892
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenStartupOptions.cs",
+      "sha256": "c4565f756c7fc2be1726e1fbafb78f954e285d767b73d35819719d037c8afaa0",
+      "bytes": 34034
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperScreenUserData.cs",
+      "sha256": "3a35b8a9b1e8c7c639a714103eaf45642a67a1935ac12252e5e0a6d964f7f4f0",
+      "bytes": 2912
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CopperStartMetadata.cs",
+      "sha256": "27112cf595747543d531ddc4f7a1d1b43e97d0cfd4c597afb799e564e13c6fef",
+      "bytes": 246
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/CrtPhosphorComposer.cs",
+      "sha256": "8b6de4b8d86543732aa951d95ca9b6a2387e9f2aa6927294b25e961a75f79ad7",
+      "bytes": 4251
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/FloppyDriveAudio.cs",
+      "sha256": "629bfe8cd14d70d297fd0875d97b9937ca2e2439804e738267550e54002fcf7d",
+      "bytes": 21455
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/FloppyDriveAudioOptions.cs",
+      "sha256": "2b799209bce440aa72f1dabb954915cbd3752066cb459e94260819ad7765ac94",
+      "bytes": 1689
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/FramebufferPresenter.cs",
+      "sha256": "99f5c2ed98a210f8369683f258c780437a622be9587f104785c6b5f94d9edea1",
+      "bytes": 12573
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/GlobalUsings.cs",
+      "sha256": "2efe61d124d2af15f2be26f47717f75366fed031e66cd90122fc95e42c86e3f0",
+      "bytes": 53
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/ICopperScreenSession.cs",
+      "sha256": "9c3174f615424e6de99ee8991a0f4c518edf76decab4b8432051b078c7509cef",
+      "bytes": 4288
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/InsertDiskScreenRenderer.cs",
+      "sha256": "ceff5611237115954abe1031c5cd68756366ca0a5681037a81930c109f24d5f1",
+      "bytes": 5203
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.cs",
+      "sha256": "38445af3bbb3f7798fc1a19165e1fde652a2ba268716005a9449ea73897b1f53",
+      "bytes": 153671
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Drives.cs",
+      "sha256": "eeb5ef9625db8468faebef3fca617af4317438afbc312e4845e60c9054d078c0",
+      "bytes": 12177
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Input.cs",
+      "sha256": "88a48e80239534c15762c9602ec029ac6b97710f7a9163f6257d8cc5fda82a72",
+      "bytes": 12428
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Launch.cs",
+      "sha256": "2c13b2cf0b6cca11e83963483f69c7aaa3bc1618807d6db92f17eec015dde532",
+      "bytes": 2882
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Machine.cs",
+      "sha256": "a5a4afbdcd433912f74b850f514d739a3d604f7c2900964d0c4d721f8f552bfd",
+      "bytes": 8362
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.SettingsUx.cs",
+      "sha256": "6e84a8309fba912fe415042a4a1811973d69197f7b178093e5d301a4b2ceedcf",
+      "bytes": 27437
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.SharedFolders.cs",
+      "sha256": "02c30d993e4a46b1073db934c09f4a875c093cc518b32104377d28707593f23c",
+      "bytes": 5056
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Shell.cs",
+      "sha256": "8cbdd69fcf3b94bea575040d8566a8a3d25d2f0fb15d19d6916bb2deb2b9110f",
+      "bytes": 27262
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Storage.cs",
+      "sha256": "5b80d74014867cb93bb00db1d540c0760ee4e6d41e95be8a9705f25d0a0738c9",
+      "bytes": 7935
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.Welcome.cs",
+      "sha256": "22b689629c28bea9b4d17608c4cd72b54ffdd73f57b16374c6822587e617ca1a",
+      "bytes": 27010
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MainWindow.WorkspaceRecovery.cs",
+      "sha256": "25da575bbad776ee9b9e2f7e1de625d594b7d8d561c68de4ff417d8e469a9e49",
+      "bytes": 5504
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MiniaudioAudioOutput.cs",
+      "sha256": "fc47aadb52ab69f4ab0ed23c3f3fe0cfcda21182851d3a63cddbdee0ea64687a",
+      "bytes": 14858
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/MiniaudioSampleDecoder.cs",
+      "sha256": "f17806b6488d205bd886e736c8b133fc5a8b9aa4a525188d1dafc59d5463d81a",
+      "bytes": 2138
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/packages.lock.json",
+      "sha256": "9db71ac7947ff9c724e07d7d17b5ac49b2bbdad84977b3a285f63f20524ac39e",
+      "bytes": 10428
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Program.cs",
+      "sha256": "19385c384f06619e552193688330d851a2c6d587842f1427e57ca65837bf536a",
+      "bytes": 2370
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/SettingsWindow.cs",
+      "sha256": "88d25d24956620a90a0cefe33412bd576a3537ec6c2f43254e493c9392bdf0f1",
+      "bytes": 871
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Assets/CopperScreen.ico",
+      "sha256": "3dd838970d4b0b4f05e8fea8a255466fe4b71a321e3e73dbf760ecbc04a25139",
+      "bytes": 76835
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Diagnostics/CopperOsNativeStorageProof.cs",
+      "sha256": "f20e6fae6bf73a3429d73dc01113b43d1f2e076412c0d1a9d6c9bfe8563d0e09",
+      "bytes": 10809
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Diagnostics/CopperScreenInstalledMediaProof.cs",
+      "sha256": "df9e256652a051f2ff4ffc6ff5d71d314bcc103612eaecdb7d7d5a49a675e2c4",
+      "bytes": 14456
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Diagnostics/CopperScreenInstalledProbe.cs",
+      "sha256": "8eac4f3f9f7e55b71e5df55092f46e8aba42fdb5ea6c71eced7506c927877b9a",
+      "bytes": 15082
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Diagnostics/CopperScreenInstalledRecovery.cs",
+      "sha256": "e8d6b10371ab93291e426eaa91bf3685fd6cf96e03c186cb5e5c241d37ca3ec4",
+      "bytes": 5213
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Diagnostics/CopperScreenInstalledSoak.cs",
+      "sha256": "ba65ff0a2a3aea9c6515f9b8bc2825bcf799f18333776bc15d3f114b4ce98063",
+      "bytes": 18757
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Firmware/CopperOS.json",
+      "sha256": "5876d245afa84389b11e198eacde64f8bea60a65f41017b2b890b9c455838235",
+      "bytes": 185
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Firmware/CopperStart.json",
+      "sha256": "22e1001d18b97afafe6391f4b39a1d0859bca5967b29688320c3e00032c588f3",
+      "bytes": 703
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Firmware/MinimalDiskBoot.s",
+      "sha256": "82a75677568eab2a41ceb38cf975c580c75e27c1a252c8b0ca5d5c8aeb0449a1",
+      "bytes": 17973
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/a1200-aga-ntsc.json",
+      "sha256": "a2224da8829cda9b32b0106571fd0b91020d2948f907b854e5eb6c4fbab9e02e",
+      "bytes": 581
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/a1200-aga-pal.json",
+      "sha256": "df5ab7d20e26a2c8c2d249c42cc016bac1ee1a1c653a733da29644b1a6fba07c",
+      "bytes": 660
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/a500-kickstart31-host-exec.json",
+      "sha256": "7dd70a3eba162bcc2e084511ae151464f226eeddda8957a84ee8bc151c6572ae",
+      "bytes": 784
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/a500-plus-ecs-ntsc.json",
+      "sha256": "06ea7aa3d1f7c9169183b0f7b2d351ca70492b7d28f09a0a0bf2da561ca33129",
+      "bytes": 656
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/a500-plus-ecs-pal.json",
+      "sha256": "5200b151b6850a7237c9e3a362c6cadddf99e395ca4dd7d17cd80e2261891f7e",
+      "bytes": 652
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/diagnostic-hrm-copperstart.json",
+      "sha256": "2529ca6dea7dd4d2ea6b44782ce0f48444a7b0cd4c0eef4664a36985a784a2e5",
+      "bytes": 618
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-copperstart - singledrive.json",
+      "sha256": "ff33887a87877ba7d73b423999d3857975b8eafc3d31c97347e42e50eb19c8e3",
+      "bytes": 569
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-copperstart.json",
+      "sha256": "a3151aed803d1c2d2bb605edb14578420ecb4b83674cf69dbce1ed2bc5327edb",
+      "bytes": 569
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-diagrom.json",
+      "sha256": "d0f89d2c3658774ebf563dd0ed1b3dac59f79d7482de9acde24fe2380581f798",
+      "bytes": 598
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-kickstart13 - singledrive.json",
+      "sha256": "7a375579c83c53e540dd45c7d664a0908ea94418b8d6b2e46d030b5fe0ae83f4",
+      "bytes": 570
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-kickstart13.json",
+      "sha256": "c8f7115c7ed783234b9dcfae696628692384863b6544f354729aa701907ce893",
+      "bytes": 570
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68020-copperstart.json",
+      "sha256": "2922bc5758a0fbfb1bb504e03b544699345425af39dffc38439aa4f6d817f767",
+      "bytes": 701
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68030-copperstart.json",
+      "sha256": "4114b4746d82b2d1deb67d8da31ee8aac1faf350ec5dc2b15bd31b6f330885ed",
+      "bytes": 723
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68040-diagrom.json",
+      "sha256": "d143ad3302a2a229f63604438e54418ac0e8033ad92ce743c899a9348487bdfb",
+      "bytes": 709
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart-rom.json",
+      "sha256": "24d97135fddeb952e2870f0d36ec232dc45e067548ed7d6c780d458a4cab4eca",
+      "bytes": 881
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart31-copperhdf.json",
+      "sha256": "9a6ff9799b0c55c630ba607268ffee5989858bc342bc299a2b585d6d00468fd2",
+      "bytes": 1019
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart31-rtg.json",
+      "sha256": "6ec846159353fe68b3a2fb9c830ef15c1ced4298a9f46f97148f1790b4bab4b0",
+      "bytes": 660
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/expanded-m68040-kickstart-rom.json",
+      "sha256": "0ca3a3d01472fce0f05c6b16cf6673e14b099de776b8ff83293d4f7b2a4840f5",
+      "bytes": 811
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/lightweight-a500-copperstart.json",
+      "sha256": "5ee0309f7ae724327745d57e2b52ee621d0cbfa1222811c57edc74478c9d2d21",
+      "bytes": 676
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/lightweight-a500-kickstart13.json",
+      "sha256": "f90c7e3ec48f77ed89620dae7253e7dae01eef070ab3d7a0011d87e2fb3fcde1",
+      "bytes": 656
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/lightweight-a500-kickstart31.json",
+      "sha256": "fd2d338975313ebbf375f9c767c4229548486547ac9c8894ddf21b804cfda144",
+      "bytes": 664
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/lightweight-a500-minimal-disk-boot.json",
+      "sha256": "1bb447a7d54e273195079967674443be23942fb0699f36d0ffbd92e386d69b89",
+      "bytes": 568
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/vanilla-copperstart.json",
+      "sha256": "61fcd0e3780918e4b4677cf56255f26a4a5d6b2cf51b89a861b38178a862a015",
+      "bytes": 505
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/CopperScreen/Presets/vanilla-kickstart13.json",
+      "sha256": "68802075894faeeb2199caffd378e9a159054b02d49b79bb5e57501b07cc183a",
+      "bytes": 506
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/packaging/msix/AppxManifest.xml",
+      "sha256": "13df14a8894da84f415b03c5fbabccaa4b26ff1af1a4cbe6ea6c8c6d9a7454c2",
+      "bytes": 1723
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/packaging/packaging/msix/AppxManifest.xml",
+      "sha256": "13df14a8894da84f415b03c5fbabccaa4b26ff1af1a4cbe6ea6c8c6d9a7454c2",
+      "bytes": 1723
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/scripts/package-msix.ps1",
+      "sha256": "c78c04805248d4f8303cdfc2e81e5300908b3e75c3c650b6bbe4c51018182962",
+      "bytes": 10655
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/scripts/test-msix-recovery.ps1",
+      "sha256": "d7bb47a5e57e98b11f9ab03bef719638d36cfe09fda57f338810ff7b9139b0eb",
+      "bytes": 17703
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/scripts/msix/CopperScreen.Msix.psm1",
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "bytes": 14760
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Source/scripts/qualification/CopperScreen.DisplayRecovery.psm1",
+      "sha256": "ac2635e14127324842b62f4628690ac7f63b78ef353223d58485ad32eb5dca3d",
+      "bytes": 3055
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/config.json",
+      "sha256": "e9e1ecf3f128af472b1e566e65e43b0c9e425eb561bb7ef1e4881f8b1020544f",
+      "bytes": 231
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/controller.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/copperos-display-record.json",
+      "sha256": "9adf5de39d153fdf72baab2e98b2495a4fc61bff05cfbbae8827b104769b92be",
+      "bytes": 35723
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/copperstart-display-record.json",
+      "sha256": "f6ca217bfca08bacc2b64e7998e1baf18854dc763c33d921584372a8b9365a18",
+      "bytes": 34233
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/frozen-inputs.json",
+      "sha256": "bb4cd9cec09abb01dc6fa4ca654fb2778bf4b65721875b626b0e6da36c5c6ed0",
+      "bytes": 476
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/go-copperos-display-off.json",
+      "sha256": "3019a6312bacc7ac9f21ae6fd5211a2f870c3b2d551bd0f587220083244872f1",
+      "bytes": 95
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/go-copperstart-display-off.json",
+      "sha256": "b1f5c13bfee391e1b90b4220e57f69cb286bbef91ca7ea6f106a054bc68bc874",
+      "bytes": 95
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/owner-audibility.json",
+      "sha256": "88b3cb3d9f133a37d7ad4a1ab1b4046b15a6910e5d0ec75c1c65542f9e4324fc",
+      "bytes": 367
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/progress.json",
+      "sha256": "f3a47b3e717de29b82b1b061729f71f2cc501cf24ba6a4349173e7c0fb5ab485",
+      "bytes": 92
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/recovery-record.json",
+      "sha256": "879f70e4db688b7076bd97e3eb1d633bc3d2178b6d69940071026ddf99c442ef",
+      "bytes": 943274
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Frozen/scripts/test-msix-recovery.ps1",
+      "sha256": "d7bb47a5e57e98b11f9ab03bef719638d36cfe09fda57f338810ff7b9139b0eb",
+      "bytes": 17703
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Frozen/scripts/msix/CopperScreen.Msix.psm1",
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "bytes": 14760
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Frozen/scripts/qualification/CopperScreen.DisplayRecovery.psm1",
+      "sha256": "ac2635e14127324842b62f4628690ac7f63b78ef353223d58485ad32eb5dca3d",
+      "bytes": 3055
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-profile-path.txt",
+      "sha256": "80e179a6011d846cf7d9907029075e45ae0fa13bece55962b60a40339365d868",
+      "bytes": 202
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-command.json",
+      "sha256": "efb16861164f24c0ff3418ac2424c2b532f35a3eb9c7e76245c86bb894776aea",
+      "bytes": 41
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-progress.json",
+      "sha256": "98bc4c0f4924756221716d84b58e82c48d2875631a0b3f31ac73c08a4476484b",
+      "bytes": 7776
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-ready.json",
+      "sha256": "e3647f4e9359ac060269fb86c5fe6e8516dfd7f87119c4e28de33d1ab1c1bfe2",
+      "bytes": 6901
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-1.json",
+      "sha256": "105405ef5bfe7b95051b355fb7a38d7d983a214de374bfa003411c89b3bbe227",
+      "bytes": 7491
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-10.json",
+      "sha256": "1bdbbdd7956c7a6e8203344d9aedbcb006434528a1cbacaa58b4b99eb7b06a09",
+      "bytes": 7490
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-11.json",
+      "sha256": "8f71c5e5e3c1fe33e29cfa174dff38ec0d18d49ad3aa9c2c697dc24f15417965",
+      "bytes": 7815
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-12.json",
+      "sha256": "a028250ffbf1c7e058e18e2c7c2ede7953b6f233ba563f3aed73c3447ece9007",
+      "bytes": 8327
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-13.json",
+      "sha256": "5f0a5c29a8f0a46e862173c1b2bef3949b3b2c63b8717c50c8ceb8f354bbcf01",
+      "bytes": 8389
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-14.json",
+      "sha256": "2d0ad5ae40dcdc9d8b5b339cd6a6f1eebcb6243ba8580b031593369a19ac4ef1",
+      "bytes": 8401
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-15.json",
+      "sha256": "7975313f2e4b99d994439026433c1353922677cd8d9d57a86fc7415ccc58ac26",
+      "bytes": 8405
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-16.json",
+      "sha256": "243e955e48ddbbba847c9ca8c934736dc6680f1212f60aeb18699a58411d979a",
+      "bytes": 8399
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-2.json",
+      "sha256": "ddc1b47960cd63bb1a8c2a7dc467234b0866d3724dc7e966e7f1a4f59d5006a8",
+      "bytes": 7490
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-3.json",
+      "sha256": "ce085cf9acb0cf52836124a801430746aad1105ac076a8ad467103e195ca4ede",
+      "bytes": 7491
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-4.json",
+      "sha256": "95fa3c10fe8195d5652a905b3b46d12e85e76917f39b25a1cc5b0307f65e62b1",
+      "bytes": 7496
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-5.json",
+      "sha256": "f6baaa6e496e93e797064cda14801048ae1ffc205b955880476038a6bd0f20ba",
+      "bytes": 7493
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-6.json",
+      "sha256": "635765b2b2748213288f3ce50c7ced941a7cfacca40795457848642d932dee1e",
+      "bytes": 7493
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-7.json",
+      "sha256": "d3e9af49020e8e69acd10d16c4c3a0631a830db394670932f8a9b5eb62bf4614",
+      "bytes": 7491
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-8.json",
+      "sha256": "e3c3fe3fd9d7d7ef5d8690a3fa636106da293a0581bd4ecf9aeaac5f9fe808d0",
+      "bytes": 7479
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-recovery-reply-9.json",
+      "sha256": "bc210f42514de9a79d8f80af2cf189c9a4a0b7170d20b0ead2ff1cb9626ee762",
+      "bytes": 7483
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen-end.png",
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "bytes": 24205
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen-middle.png",
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "bytes": 24205
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen-samples.jsonl",
+      "sha256": "197c6ad8f5d8f96a85700e429a12d45583ca7c483e7af89153c4c6b2edf14241",
+      "bytes": 9071
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen-start.png",
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "bytes": 24205
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen-storage.txt",
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "bytes": 2025
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen.copperos",
+      "sha256": "3100b650fa999c1dd819f8dcb10ffc2725b0353fb3688b039a85e8012a55ac7e",
+      "bytes": 206246
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-reopen.json",
+      "sha256": "0f737ab6624b05c85e266bc3ac13c4d8a6fd2eea6b5fa0a64ca7e99b6c8e1118",
+      "bytes": 23126
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-request.json",
+      "sha256": "9b7f9600f30949f10ad9ce8a6edd73c5c8074bf728ab8cacab2684c96e93731b",
+      "bytes": 580
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-end.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-1.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-10.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-11.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-12.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-13.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-14.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-15.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-16.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-2.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-3.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-4.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-5.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-6.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-7.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-8.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-recovery-9.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-samples.jsonl",
+      "sha256": "26296912653e2ef323a2886e68c9774eb55a426936e240ffe553322cc181a733",
+      "bytes": 1577998
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-start.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak-storage.txt",
+      "sha256": "1a2e0166e5a87784c16104d8ee2fa9fbc7c7a1dab664daadca45588b3650aaa9",
+      "bytes": 2025
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak.copperos",
+      "sha256": "6d962eb4f5bb1108309d02e845e1979af58165ed5bc67ea022fa5a5e3242ccae",
+      "bytes": 206246
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperos-soak.json",
+      "sha256": "5a8577a53726a4828f2ea2e981ac0bae35d5075cd9196487383852ef0086ab11",
+      "bytes": 174848
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-profile-path.txt",
+      "sha256": "c7a411e9c1e72c5d2c5b9450f4bf76720af2133affeaa52e672b147225154a06",
+      "bytes": 208
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-command.json",
+      "sha256": "ae7c5eda9157ef7592de98c1ed3a21806f3a3d74a0ac35c45d159ee87695c592",
+      "bytes": 41
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-progress.json",
+      "sha256": "053db6a8c6d0fa01a66e7e94427552a855fd3e451b51b3f178cfbc3bc976cb08",
+      "bytes": 7420
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-ready.json",
+      "sha256": "29cc3f136ed439ce1391bb875defd95d223caf63d16548bc23df5ca3351619bc",
+      "bytes": 6713
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-1.json",
+      "sha256": "1fb6399bf524a270b4ec48a115e607ac1f55b6b87201cecffa3a2a99f9fb3e32",
+      "bytes": 7307
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-10.json",
+      "sha256": "6ff9ed9d35e85a0902eadaf014ab286d4b86b070c61855cd5a5f428890d784b4",
+      "bytes": 7310
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-11.json",
+      "sha256": "db4c40163539dbfd8a6eeb9e06f9d2a10311c4fab3b4613869ba56cff325bd33",
+      "bytes": 7310
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-12.json",
+      "sha256": "e51f1da051b25d16f90b62600714257742f63f377ea4d54f2d0aafd9a4183f2e",
+      "bytes": 7320
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-13.json",
+      "sha256": "cc54234822dd7cd25fe886253d6a6060f9ad8ed419615dd18d47fe00842fb26d",
+      "bytes": 7310
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-14.json",
+      "sha256": "e2d3e711040b59ebbdd08f02509646f50a55289070e9fc8606621bb802ad7e11",
+      "bytes": 7311
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-15.json",
+      "sha256": "611da51f69284d5422179f002d14f1961e3039adf0a5c24b9c9f8bc4b3790915",
+      "bytes": 7310
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-16.json",
+      "sha256": "8915f2c445999ce51d292057c756d453d44570cb91d4bc6f9c00add26701f3d3",
+      "bytes": 7317
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-17.json",
+      "sha256": "a1b8322493e4daea9f2b46b03336da60d067514b19b4ff5d569347bf966dc966",
+      "bytes": 7317
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-18.json",
+      "sha256": "3f8cc0b417ccc4a2f22d16611bc6278e4e4aa28f7f5ffe86d9114ff325e11b2b",
+      "bytes": 7300
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-19.json",
+      "sha256": "13150c27c539ad09155ae0fab23897ba1277f7d4ccf8f4e731bda2c06e93fe3d",
+      "bytes": 7302
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-2.json",
+      "sha256": "74e2456078e91b250da9a4d95b94b27bff316d0a2a971c0a969391608795c4dc",
+      "bytes": 7308
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-20.json",
+      "sha256": "7818d3b1046d6e8126f2eb01c6e967ad4eb7e48e7b561f092f6f26bc13b6dbeb",
+      "bytes": 7293
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-21.json",
+      "sha256": "e858e78c8878bcf1c9ee37caf9ddbe630501b92d7dc7737ec34266fdc32f6abe",
+      "bytes": 7299
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-22.json",
+      "sha256": "27f90b09d5b77178d0c1773c4bde1da5c47583f89991e68342cef1b4acf8f164",
+      "bytes": 7311
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-23.json",
+      "sha256": "50dd64e1ea40b15388917c89536551ad1c677fde4633cf1b48b9627e47153f7f",
+      "bytes": 7453
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-24.json",
+      "sha256": "c0f414980af089880fd49addc77e4afa012274d8abd6fa6b0771be9c3447005b",
+      "bytes": 7921
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-25.json",
+      "sha256": "b427b77b2e433894d88ac44f96d6a4361479a144681770e89ffce795beda5967",
+      "bytes": 8040
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-26.json",
+      "sha256": "6b53e0e3a03d078b7b8dbf71cc4193de6dd38a9a37e87371bde729680dab9075",
+      "bytes": 8039
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-27.json",
+      "sha256": "8c0c04c88de1c4eb1a7bff6dae64d57b2a31f67f4df457d2acaf98a57aaab1ac",
+      "bytes": 8041
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-28.json",
+      "sha256": "603aae28d348ebe49257afc2bbe2b1c00881d834a616d4a154d264efeabffeef",
+      "bytes": 8037
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-3.json",
+      "sha256": "22cf423a524ffd2dd3e2df70e1692b18d1b687ff363a1db38986d74959277553",
+      "bytes": 7319
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-4.json",
+      "sha256": "66f864aafe3bf3f30b00b206e933cafd8fd1a2ed0738d855fb89e2f3204369aa",
+      "bytes": 7308
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-5.json",
+      "sha256": "cef659766781c8cc4c52039343e4443fc0393b4466e3cf307d21693e9955c895",
+      "bytes": 7298
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-6.json",
+      "sha256": "d3883175bb2be6180a17f093d4c33b8c3f34b4d4e3768d9ad122f3eb46b3cb96",
+      "bytes": 7309
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-7.json",
+      "sha256": "9d94ea1ed7461ddfcb9496ba73729ebf6130db7a2613fe868c12dfe05a0e1520",
+      "bytes": 7306
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-8.json",
+      "sha256": "e590b7f9914536e47fd15b08dacea11d830b957082c1bf3bdd12cac6772d4444",
+      "bytes": 7306
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-recovery-reply-9.json",
+      "sha256": "9ce7147fdd4fdd527f1b3a915f4ecd55ae206338c4dfef6b0aa80cecc0747070",
+      "bytes": 7321
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-reopen-end.png",
+      "sha256": "d518b77dc292d7fc8eb70ea46bf74fcf526b8ca72d76c255b8d4c696c9f559cf",
+      "bytes": 36086
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-reopen-middle.png",
+      "sha256": "3201f3406fdad018927825c7c881d18b352b8125e92f179bd45caf8fffe970e8",
+      "bytes": 37386
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-reopen-samples.jsonl",
+      "sha256": "8ec9898ef5300f7132b5678a8998be5f9b1d67888475ade828f6ecf2e3d452d0",
+      "bytes": 8723
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-reopen-start.png",
+      "sha256": "6c924536d340ade34e213081c29a6f388680348eaf00115ce1daecc44713d500",
+      "bytes": 33466
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-reopen.adf",
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-reopen.json",
+      "sha256": "d10eec2ef43ab47b8cdc30d30a463cd5f5f1b7bfa14ee0473c616021382f753e",
+      "bytes": 23786
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-request.json",
+      "sha256": "8b441f2bf0869af99e85acdfee9fd12eb930d8bc30829864d2c6c80035c0bd41",
+      "bytes": 583
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-end.png",
+      "sha256": "af9e272dc624a2f75b82cd422725ada6decad932484700606822bd9d6798d13d",
+      "bytes": 26827
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-1.png",
+      "sha256": "5a4580a9d9fe54dda871e84f2513cceb761e9f1cf161f1278666c72d0d914a57",
+      "bytes": 34294
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-10.png",
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "bytes": 39857
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-11.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-12.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-13.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-14.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-15.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-16.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-17.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-18.png",
+      "sha256": "7042d0ec24701a740954892ea3ce7e89a8f0b1576902d9143f2f0e66b18cd2a4",
+      "bytes": 26817
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-19.png",
+      "sha256": "7042d0ec24701a740954892ea3ce7e89a8f0b1576902d9143f2f0e66b18cd2a4",
+      "bytes": 26817
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-2.png",
+      "sha256": "659f4511ab10a5684da5140e837ff785056986c64168762818a0cefe40425f39",
+      "bytes": 34620
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-20.png",
+      "sha256": "7042d0ec24701a740954892ea3ce7e89a8f0b1576902d9143f2f0e66b18cd2a4",
+      "bytes": 26817
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-21.png",
+      "sha256": "bd562511cb5fcc53938072b6f0b839d48eea7341c3e65a489c52117875505b4d",
+      "bytes": 26745
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-22.png",
+      "sha256": "35acb3b1dd412a4f631fcccb60845e6471a20f626dd6dcea919f31b289ad458f",
+      "bytes": 28829
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-23.png",
+      "sha256": "f1254969c35d0766fd7da7892c56ffef4bcffca172274d8bea0dc436867d17b3",
+      "bytes": 21545
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-24.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-25.png",
+      "sha256": "88e810bee889927d676c249c938ff7f8ae15b856b0a7c1456a2527e5592dd1f0",
+      "bytes": 32894
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-26.png",
+      "sha256": "3bb149e2e540297e3a814bbfa7a9dd6729d59492206bf5efe7bce77843e30146",
+      "bytes": 21584
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-27.png",
+      "sha256": "a36e49a3adff9d2a14c38914ffc6d5c60e1e738d30ba50741582c4dbb13f6564",
+      "bytes": 26756
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-28.png",
+      "sha256": "af9e272dc624a2f75b82cd422725ada6decad932484700606822bd9d6798d13d",
+      "bytes": 26827
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-3.png",
+      "sha256": "317eeff8bc37deea8ef96bd27746134ee368b87819c3800f16dabfaadd1cdc6c",
+      "bytes": 34185
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-4.png",
+      "sha256": "379979b3960cb41ca6dd9123d88f54a74508a6c8fc2379c87e15055176acf98c",
+      "bytes": 34442
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-5.png",
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "bytes": 21555
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-6.png",
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "bytes": 21555
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-7.png",
+      "sha256": "9c5799780b0a5e77e3e6ca2915aba413deb3af3c46af148033fb18963c26849e",
+      "bytes": 21504
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-8.png",
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "bytes": 39857
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-recovery-9.png",
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "bytes": 39857
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-samples.jsonl",
+      "sha256": "9834e16e0a28b3929032eb22112798954e2d5ee8b1ff52a2b1ac5d5876d8f043",
+      "bytes": 1950972
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak-start.png",
+      "sha256": "45c472bd79de2cc3791ce48fa7ef12f5f36b778a1f5b61591a03cd81ebffc816",
+      "bytes": 33577
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak.adf",
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/copperstart-soak.json",
+      "sha256": "0a0aeeed112ec41e704ad9855e1eeb73aa31519d9f5f0bfacf87eae2a52bd203",
+      "bytes": 276580
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/Installed/progress.json",
+      "sha256": "e5dd75b48be273ed48bfaf809cd3ef35b48938d26d936b283491c0fef8b082ea",
+      "bytes": 1421
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/last-machine.json",
+      "sha256": "7134e9a530d3dab72c9de1a9917441f681aff09a7f3af611dadf575548a84489",
+      "bytes": 2875
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/recent-session.json",
+      "sha256": "01c7000e6e6b82fc3814a364b18413250779c53c5fd955be7115e5b5b67403d9",
+      "bytes": 283
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/Previous.adf",
+      "sha256": "14ec1077b47f8fc9ccaf036070bb2ed1a618995b0087b490ed8011e09735e268",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/System.adf",
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.json",
+      "sha256": "382a75723aaa02908c5f03e00f3303ccd58548d1002989f6dacb5026d0c03e47",
+      "bytes": 370
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/Logs/CopperScreen-20261018-194245-57304.log",
+      "sha256": "345c29b3839fcd5a639334fdf88ccc0110e29a83b7af64c82a9b48ea119da56f",
+      "bytes": 153018
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/Logs/CopperScreen-20261018-195215-75332.log",
+      "sha256": "e1e0840309bcb24d9c632b2f3d0fadbfb5aed873cedfbf3d799c737c7c742539",
+      "bytes": 52236
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/Logs/latest.log",
+      "sha256": "e1e0840309bcb24d9c632b2f3d0fadbfb5aed873cedfbf3d799c737c7c742539",
+      "bytes": 52236
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperos/Profiles/copperos-soak.json",
+      "sha256": "7134e9a530d3dab72c9de1a9917441f681aff09a7f3af611dadf575548a84489",
+      "bytes": 2875
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperstart/last-machine.json",
+      "sha256": "ff04b30d32eff980f1ba0d36f92246e28f3c2b01db7b827a00a7d98ad838dd77",
+      "bytes": 1225
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperstart/recent-session.json",
+      "sha256": "8803955b724df460c3b20b06f3e9fcb15bb7a70fdf1367d0ac4b400da074f7c0",
+      "bytes": 189
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperstart/Logs/CopperScreen-20261018-193052-90952.log",
+      "sha256": "623444850622af6e82fd2d1a1046b2a414108ad6c1a5acb24c2b0b10ed01f427",
+      "bytes": 112946
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperstart/Logs/CopperScreen-20261018-193750-103924.log",
+      "sha256": "fbacd9320293e19c68e0a46ec61c8baef4754315f41a49dd11a2d90a7b440821",
+      "bytes": 81195
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperstart/Logs/latest.log",
+      "sha256": "fbacd9320293e19c68e0a46ec61c8baef4754315f41a49dd11a2d90a7b440821",
+      "bytes": 81195
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/DisplayRecovery/PrivateState/copperstart/Profiles/copperstart-soak.json",
+      "sha256": "ff04b30d32eff980f1ba0d36f92246e28f3c2b01db7b827a00a7d98ad838dd77",
+      "bytes": 1225
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/basis.json",
+      "sha256": "c90162275674d50785a8928bf1a9b87067a08f26f2f758a847295a818c5fe2c1",
+      "bytes": 435
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/candidate-record.json",
+      "sha256": "a6b26235966db680e36b3a04b5131e52328b1ecd5a172bc30904aeb7ddb4ace8",
+      "bytes": 69870
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/source-inputs-before.json",
+      "sha256": "2689801c71d7e0231ed4c6a4912175ac48bb659f281c5e03254aacd8b301ab1e",
+      "bytes": 28735
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/production-build.log",
+      "sha256": "ca9d4af4d2fa8498773647b822e806e76b8e742c4088c3da8c9845d5e869ada7",
+      "bytes": 1283
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/host-tests.log",
+      "sha256": "189c4657c92767bacc2b85ff80941b0b73254d2378c58192f834252df3400bc4",
+      "bytes": 460
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/HostResults/host.trx",
+      "sha256": "a77880b85c528d2f548fadee7e3e2c81336222d0006df051ac0f0b4a63dd2f12",
+      "bytes": 14593
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/before-regression.log",
+      "sha256": "e036ebc7b30140e11a2b0af6cd79e2f77bcdea5143d1bc6e0798249206860d18",
+      "bytes": 1443
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/BeforeResults/before.trx",
+      "sha256": "4443c94ff5e8e2558fa420c777893cff4cbd124d027abde206e5b043a2a475c1",
+      "bytes": 4455
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/controls.log",
+      "sha256": "76a1de698771873a93d3ee80455a873c7cc0f388da4cf40b090f19102d8f6dfc",
+      "bytes": 775
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/ControlsResults/controls.trx",
+      "sha256": "087723ee3d848552441f9e0a2565d8cf356a78fc5a7f36f68ae340bcb10a720e",
+      "bytes": 19063
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/exports-verified.json",
+      "sha256": "654287b79c7ea4d9b6558102876ef1486b82329ce9df9420c48757273291f963",
+      "bytes": 1261
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Package/CopperScreen-1.1.36.0-win-x64.msix",
+      "sha256": "71a3b8766fcbeceb02ac60c75721e02dc8901c24e428eb01fdc3ae9d1e4457af",
+      "bytes": 49560085
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Package/signature-verification.log",
+      "sha256": "5b2d438739e9c06b2e8ffc76a08d7cc0e9d469182ba4749015f689c315bf2052",
+      "bytes": 1049
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Package/publish.log",
+      "sha256": "e75e36ffc453c749e8e63cb142fd296868f15ba32d5da732dd6b95f11d6cc0b6",
+      "bytes": 1028
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Package/package-record.json",
+      "sha256": "49e1056b1e695884588063c5695b523730a8ffcaaa8407d97316bcb78dfb7b10",
+      "bytes": 39706
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Controls/Controls.csproj",
+      "sha256": "5d9881cb1bc761746e929d20319d41c9849392829e3dc279e23edd455b98a8a0",
+      "bytes": 1736
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Controls/RuntimeAudioPacingTests.cs",
+      "sha256": "953196f8d49b8aeef37c0b440663ad5b09163351321c484e7643abdd87d53c2e",
+      "bytes": 9599
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Controls/MiniaudioSampleQueueTests.cs",
+      "sha256": "cb2e0790ae26e7749086b1e2a923514c66e350e5e029db56e0438d8aee6b8069",
+      "bytes": 2891
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/Controls/InstalledAudioTelemetryTests.cs",
+      "sha256": "22aaea89859ceb5abc56705fe6386d29bcc1ff3e9ce7d0f1218ccb28a416d51a",
+      "bytes": 3818
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/source-delta.json",
+      "sha256": "c9fcdbf337b269dea90aa5aba6afc4fa08e50762da7eae0637ff30b934cbe69a",
+      "bytes": 691
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/observer-isolation.json",
+      "sha256": "53bec5b5de7e68cdd88afa9ed36fc9ee074161cb01aa9d229069211603b0cee2",
+      "bytes": 544
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/mmcss-games-task.json",
+      "sha256": "07d79136eebfe5454c478b4420286d3cee08dc83e5d93cf6f8631ce3dd4dc9f6",
+      "bytes": 139
+    },
+    {
+      "path": "artifacts/audio36-882c1a71/display-notification-control.json",
+      "sha256": "803ca9ef49c2ff159590cc6af4b03e2354cf2438740812d24519fdc187d3b91f",
+      "bytes": 252
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/Directory.Build.props",
+      "sha256": "e5adca3f2ec2f649b0fbd3fb92812e95231ff28a955f22da152faa73746c4a35",
+      "bytes": 131
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/global.json",
+      "sha256": "ec7d038183957f0f2dd09078668ab7866560a585b3566836e5ecd105796260f4",
+      "bytes": 87
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/LICENSE",
+      "sha256": "61e05df922ae668cc3719d961485cf0571236f055db025a7a58d89d8310a0670",
+      "bytes": 1089
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/NuGet.Config",
+      "sha256": "9ce761d4211b1fd7ded5da1fe132aa49e40dbce2971af74d012af592500051e0",
+      "bytes": 695
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/THIRD-PARTY-NOTICES.md",
+      "sha256": "3788bf9d3405ecc9c8e01984cc315643beefc5828e04ed06fafe0ee694206a84",
+      "bytes": 1015
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AdfDiskMedia.cs",
+      "sha256": "908931fc81a63659046f1ba2bb3746d51a8f69020e819d3f90f5abd4dee4e9be",
+      "bytes": 4707
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDiskException.cs",
+      "sha256": "149a20691a57a95ee10cf596e59613fbf7d7998f663c084afdcb1da3c91381e1",
+      "bytes": 861
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDiskGeometry.cs",
+      "sha256": "d45092739e5bc08bc5765150a0c5dba852d7534526034468b720420ef96421d6",
+      "bytes": 1124
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDiskLoader.cs",
+      "sha256": "6382665838ccca1a70aa54f30ea07fa4aba4406f2d0b30ee6681565a436e5b9b",
+      "bytes": 14244
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDiskLoadOptions.cs",
+      "sha256": "44926a0a09a61cd873d8d524e1c1e9b56247f262214b765eead1cdfb6a00aa60",
+      "bytes": 691
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDiskLoadResult.cs",
+      "sha256": "b3b940c2a2cf23114a7bcc98308462436bac3b596fb9ae05770fca2194ab0afa",
+      "bytes": 866
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDiskMedia.cs",
+      "sha256": "b79d3288cfe226a8615b7204cd2ec48d5e4f6438ab1df44c3a68c25b4feec4b6",
+      "bytes": 7374
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDosTrackDecoder.cs",
+      "sha256": "a4b4467cc43cf098832ec75592aa6e18414dfd11014a9f4e800aa7047915c68b",
+      "bytes": 11883
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaDosTrackEncoder.cs",
+      "sha256": "c43c8ce3de8a1a5d4bdfbc0dd55e739d56ae6ff3fe1fa536a0ce45d6129e0299",
+      "bytes": 6575
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaEncodedTrack.cs",
+      "sha256": "aa0126cee43a68da87e83d3d26480ce383245e1559ce2da32ae7212084d0fad2",
+      "bytes": 9330
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaHardfile.cs",
+      "sha256": "9c52a79e0d65e622341e0a897f12a9132a88bcf8c3dd1b0fdb78ce22bc65ee5a",
+      "bytes": 31672
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AmigaTrackRegion.cs",
+      "sha256": "c2dd9e52f8256643be4f219532db1ae084fb99629653069b040016d917ff3ee8",
+      "bytes": 1421
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/AssemblyInfo.cs",
+      "sha256": "6c77e4e5f4c05e2946a35521b0ce28a94358029dcb5290ff108146c5bf6d65d6",
+      "bytes": 221
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/BigEndian.cs",
+      "sha256": "2630ef5c92bde5ab744dc31fc5bc134bf6e7c657b857dc039132adb510f6d255",
+      "bytes": 1364
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/CopperDisk.csproj",
+      "sha256": "35ce42174036d251008bbbab5f9ec1360738abeaaad76d494f32760906f18f63",
+      "bytes": 2279
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/DmsDecoder.cs",
+      "sha256": "ccf7e3b7b610fe77fb946313ca3b6445f863159d4005a96d4f7b266cb2a4d69f",
+      "bytes": 34236
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ExtendedAdfDecoder.cs",
+      "sha256": "3553f174ae9700300e8d98b2b799e99a557c9b6968ba2dacf64b33824f65d638",
+      "bytes": 7430
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/IpfDecodeException.cs",
+      "sha256": "f673f97ef9374123e33047f65a5854d549c08ddd6b4f21fac72509477afed1fb",
+      "bytes": 467
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/IpfDecodeOptions.cs",
+      "sha256": "decbe4202f04323e3f36653db89e2e906cf70a895fd79c5473c94dfe52852908",
+      "bytes": 855
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/IpfDecoder.cs",
+      "sha256": "be6c90e5df4836576185b2da43cba99cfa85a74d5b3f882c7ba6cbc1cd4c8a6d",
+      "bytes": 30452
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/IpfDiskImage.cs",
+      "sha256": "094926013836f02b36a821c34f1ae609ccf19e384a8b0730462a64942a8b29d2",
+      "bytes": 1380
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/IpfTrack.cs",
+      "sha256": "71c929345fa9b17d2033e920695cfd17862cfa518890dc03d25d42688b4c1c67",
+      "bytes": 2489
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/packages.lock.json",
+      "sha256": "a4364d81a6de2707d66fbced18fbbc926c882ab96e1d1aebbb17e871285b9d75",
+      "bytes": 66
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ReadOnlyAdfDiskMedia.cs",
+      "sha256": "45c0016dc22cb79e5e22fdc06cc9b689f27d81165c04de018ba70a0d2ca937ea",
+      "bytes": 1040
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ScpDecodeException.cs",
+      "sha256": "dfb9354d44e7b9b8c1c910549d4fbbfb47082ddd0e898754ed789c57370a94a0",
+      "bytes": 471
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ScpDecodeOptions.cs",
+      "sha256": "0e7475656a9e7b9b31a5a862d668fb1329f023ea8afdd5b469a96807e809d76c",
+      "bytes": 1159
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ScpDecoder.cs",
+      "sha256": "70e03fa204622a7fd429579bbfe30b8b6050bf4dd8bb793322b58c5a7741448e",
+      "bytes": 12831
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ScpDiskImage.cs",
+      "sha256": "703375d8ed27ebd648a313ccaecabff7417d66b05a66b4fdd49cc3d53565d53a",
+      "bytes": 1312
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/ScpTrack.cs",
+      "sha256": "ca7b0b174026cdf674d2656b5a723aeea165d5bbd459104066aceb020d8fc659",
+      "bytes": 1789
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/THIRD-PARTY-NOTICES.md",
+      "sha256": "f3c1be3e0d56d0ee697f627def402f76a9e69b9f0c147f0eaceffda36e26b8cf",
+      "bytes": 373
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperDisk/TrackBackedDiskMedia.cs",
+      "sha256": "1b0d82c8c455b08772e0a74517d420aa18e001f6fa3e4956c00e2906c901bb71",
+      "bytes": 3352
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/AssemblyInfo.cs",
+      "sha256": "220120098395a637162a315523d2b6a2240b89917e816307fab883123181ae16",
+      "bytes": 181
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj",
+      "sha256": "51da70b6bcdd68b9141a8503dd27fd71b845ed1b1135321e8fabdd70742704d8",
+      "bytes": 2441
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA1200Io.cs",
+      "sha256": "04c560f0e5f34c2d19def4dff5525303c52361f2d5282524b091eaf04ba299d4",
+      "bytes": 4045
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA500Configuration.cs",
+      "sha256": "92014e1145e8fd6bfbe32279a02f0783515680893d7eb70e654443c0d005550e",
+      "bytes": 4010
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Aga.cs",
+      "sha256": "dc5e15a16433f2ffcd8cd3916eadeea24ee2dbea53d37bc146c2d158b06b2f2b",
+      "bytes": 2316
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "sha256": "a538245dd917d064f0f4673fae0669db18d34a4141223e16ee27d4f6081002e5",
+      "bytes": 106362
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Display.cs",
+      "sha256": "8ad12803779c245824e665f8cf1b65cf1e817eb8bfc687ac297dd062e823bf70",
+      "bytes": 2519
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Jit.cs",
+      "sha256": "1a2177ada30a4b4396c840caed74758aa52aad7c72ff2a3773c87d361ed52cf4",
+      "bytes": 5564
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightA500Machine.Storage.cs",
+      "sha256": "4cd4963b4e92467477c4ee02f67e0897085e2cb14e0dee86820d36318963e758",
+      "bytes": 441
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightAcceleratorBus.cs",
+      "sha256": "a445e61b81ee60f96605a6af5e841b8c92dd7e2688be4a8b3cc41e6d215a1df3",
+      "bytes": 6921
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightAgnusModel.cs",
+      "sha256": "be840b5cc6259efa30c9a9e22940e1f2dcd8a29d91eb3d06697f9e739ba5b5ec",
+      "bytes": 1718
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightAutoconfig.cs",
+      "sha256": "71473a7fcb265ed7316279a62b6048ebf9eeca745e10d77acb4f46c3e161f1dc",
+      "bytes": 15817
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightBitplanes.cs",
+      "sha256": "8aefe9b4c36d878ad586fc6ebf07e32344732489692c578f7f82657eec86a41a",
+      "bytes": 20179
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightBlitter.cs",
+      "sha256": "4f544de0f6d8446dd21c726d3e340efc248126d8418f41f1cb5a2e55b83f0d99",
+      "bytes": 37615
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightBusArbiter.cs",
+      "sha256": "6d4d469525d384697d7765c84cf4eb8a4513b9c34c739070cf1d279a70ca16ec",
+      "bytes": 1662
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightCia.cs",
+      "sha256": "5ca6b61e6e3d2c59fcd8f1acc8929fde97a18a4b2bd7d72a99f128576cc48152",
+      "bytes": 22554
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightClock.cs",
+      "sha256": "c73197e90173e0441972199fda9f12b4ecaf06683d665f53e2c0e71da0006365",
+      "bytes": 10990
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightControllers.cs",
+      "sha256": "818e0bcf6605f370da1ab464cb9341c479a0dc385f6aa5c2fdbb5eb46931a5db",
+      "bytes": 2174
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightCopper.cs",
+      "sha256": "ed998714e024a6e8c89e2e06c43b3b53cb441014c9c09924ff55ecb3711911ad",
+      "bytes": 15339
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs",
+      "sha256": "6b3924858ef4fbc4de69f9177dd74cb040299a9c3eaea745b2127c79e1ee9b63",
+      "bytes": 70310
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightCpuBoundary.cs",
+      "sha256": "d0fe3276155110976812a1789b8de91233f5ade3a61694daf5ef527855380adb",
+      "bytes": 3887
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightDeniseModel.cs",
+      "sha256": "5db47e674024d18f72fcc346a0b3e278f4b883674ed06694048a3f782531b4ec",
+      "bytes": 301
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightDiskDma.cs",
+      "sha256": "bf655e8b88837f4820f8d95d4544f558185176537f9a1e9e9204c23f5e35c4a5",
+      "bytes": 11066
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightDiskReceiver.cs",
+      "sha256": "21ab816a0f76ca00bc889e1cc5a687e533b943559f9cf25d02f5691f50d8771a",
+      "bytes": 3577
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightDiskSerial.cs",
+      "sha256": "5aa94cacbf2d146dac4c281e7b470e2b1a4e44c84a5c498d0bf7ebfe93cbf61e",
+      "bytes": 4970
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightDisplayWindow.cs",
+      "sha256": "b9f16fa8d3467c200fb06c8230a831561ad385408b57c1b04424bb068601e7a7",
+      "bytes": 1027
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightExecutionPath.cs",
+      "sha256": "d31e35c1e53ccbf60cc571f191c7f91e977a688032adec00dbbcdfa9611fed37",
+      "bytes": 897
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightFastRam.cs",
+      "sha256": "4c17f39c80af27b4bf69e45a65aa3d01e2b90295d0c780d329501247c1464709",
+      "bytes": 4204
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightFloppyDrive.cs",
+      "sha256": "1bfa551ba1dbb5d8831b37cc22c2524d3393a6a3a414f9141aa0cc3535ee6d1f",
+      "bytes": 13952
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightFloppyFormat.cs",
+      "sha256": "8e59f1f44152a515f9bf4c0c4daf37a2b127811e500f4d00040e352f9466cb78",
+      "bytes": 218
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightFloppyImage.cs",
+      "sha256": "1a7b8fb69a9226c5bf07f7fa6100860f7b4ee6ec56e546694e03061d42a1df52",
+      "bytes": 3484
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightHdfBus.cs",
+      "sha256": "ee381ebace9c74c0a53a9261583dd92859ea593f7f29d110ceff951b48af98dd",
+      "bytes": 8166
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightHostDirectory.cs",
+      "sha256": "d4d9592292aa33b13930bd69a88dfa9fe305d5d5f4d15023335725f9677cc4f1",
+      "bytes": 18164
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightHostDirectoryConfiguration.cs",
+      "sha256": "6219200a33ae2527f62005daf50ad80eede67f32e3a8a640e777dc3d5732ae4c",
+      "bytes": 1471
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightHostFsController.cs",
+      "sha256": "fae5563b0ccfa04296d119656c36f4bfb85f94daeb1499ca081b23a8d44dbf0a",
+      "bytes": 38215
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightIpfImage.cs",
+      "sha256": "5539eaca99eb4e4b4544dad015566b190867764a2836306405d384196bd7b2b3",
+      "bytes": 6609
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightKeyboard.cs",
+      "sha256": "fed9c9e6d6288db28773b9e4a27d2099aeb18ef4873d0a08ed33cd09c1b9358f",
+      "bytes": 6875
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs",
+      "sha256": "dde8ac29ee331f8afd688b52df712cc672d4c9b69f5b84ac8f284c99feddd33d",
+      "bytes": 23359
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.Output.cs",
+      "sha256": "458bbd8434405565302b2c5b7e3f1df1fca7f67c30fb87869cb027df41be8a78",
+      "bytes": 3919
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightPaulaSerial.cs",
+      "sha256": "13f4cd4ae0bfa57dc32c54c5684b4f10f734124dbabe815de93843a828a5b2c8",
+      "bytes": 4457
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightPotentiometers.cs",
+      "sha256": "e43c1f7bd537bb27700987a5640c8e611e79a7bb42aa29d2c95057bafeb12c73",
+      "bytes": 2611
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightRealTimeClock.cs",
+      "sha256": "c5b8537da0d0635aa39949001dec50e7000ef33d704eea0a76fb320f564f16cb",
+      "bytes": 10684
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightRegisters.cs",
+      "sha256": "69583594d395c018893bd991ecd911c01ac8d8cffd5315d726abe4c7fac7cf38",
+      "bytes": 11254
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs",
+      "sha256": "97ca28ffdda858b0c7b0068b68cc040022d331c23604433e4accb02812192155",
+      "bytes": 18571
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightSprites.Aga.cs",
+      "sha256": "f694e3ef28961c03868bd6dc23ff2d98c308178a308d5246868b0772da479167",
+      "bytes": 8992
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightSprites.cs",
+      "sha256": "d62e125fa6b7433579d5bca4a930b58f7a6f55b7e4d40a40f799609240f231ab",
+      "bytes": 32634
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightVideo.Aga.cs",
+      "sha256": "3d606a2c69bc3fcdb0c133cc9d09770a3c9d1cd359c1838ada40675a0f7e518a",
+      "bytes": 10247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightVideo.cs",
+      "sha256": "012837e982eb51a27235498dfe82f1bc6c419acf63cb4dfd6a624964d5c24b66",
+      "bytes": 41708
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/LightweightVideo.Ecs.cs",
+      "sha256": "90adb59d3998128d3a4d55759fc9c6f7b64c303bcc036ff2d2fd49ceadaa488f",
+      "bytes": 9228
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperMod.Amiga.Lightweight/packages.lock.json",
+      "sha256": "d42fd357db656ddae956fe4bc47470c3f16e34d2fe301ba3c48171ec7fc6a16f",
+      "bytes": 708
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/AmigaHostKeyMapper.cs",
+      "sha256": "affb92e700e6429f740d48596d264e7b23487728566421454d34a1101a64c76a",
+      "bytes": 9997
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/App.cs",
+      "sha256": "dd0ba4020e056d418036e2465930f579c7c585884728a4ee1222e836cf120959",
+      "bytes": 1261
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/app.manifest",
+      "sha256": "68695fcc7764cb0ec20ca222d2bf90667ba3e9b2bb6ccfeff2c936e43129cfdd",
+      "bytes": 936
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/AssemblyInfo.cs",
+      "sha256": "bbebfd4fb5b7dd7311bb837b62c151e2c957592b95cf744a0aa2c8e41d10c601",
+      "bytes": 283
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperBenchUnavailable.cs",
+      "sha256": "b9de8c901e4259d1093a519e4137182b8e3f1db313e79e387fd830ebb6123a35",
+      "bytes": 1874
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperOsWorkspace.cs",
+      "sha256": "092fc88b9752f4946fc0859fbf69b9cd1cab03b7162497dc42b51dfc67abb3ce",
+      "bytes": 11095
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperOsWorkspace.Recovery.cs",
+      "sha256": "a45c4215d70a8c3788e5f264e83406891081f64d069e338316a149fa7b2ebbe7",
+      "bytes": 6018
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreen.csproj",
+      "sha256": "ae24c4a13ae20056856b8cb57db69d375dda3d73095003718a7201affddb0802",
+      "bytes": 3030
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenAdfImage.cs",
+      "sha256": "15974fda314b09e800098db3743420c703a3d4a783745e7b27e12c8bffb60634",
+      "bytes": 2963
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenAppearance.cs",
+      "sha256": "4f19e646e0ae265044e4788a47900b68547b2fff02979af934753a69b367d450",
+      "bytes": 3829
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenAtomicFile.cs",
+      "sha256": "ddb505c7ad21bb2382b0600a58938a76f347a09352175b62dd356b555b4fb636",
+      "bytes": 2691
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenAudioGain.cs",
+      "sha256": "fbb5ef7006cb1f29da71ef64a21489258141541eda794cf642cacf4d1de6e21b",
+      "bytes": 559
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenAudioScheduling.cs",
+      "sha256": "ee8c87f2600c1d3611b69b78b098e1f51c50c708304fcfce61f021c663e3f8ea",
+      "bytes": 1806
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenAvailability.cs",
+      "sha256": "a6ed093afb1d0c3168daf2d7641e0e1e802afff2cf68cf617bd0fa6e748de5a8",
+      "bytes": 3613
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenBootAssembler.cs",
+      "sha256": "09d67227087a44618be8a28ce500be0a89abd68fe7ed30044b6b297e567a8812",
+      "bytes": 9617
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenCopperStartRom.cs",
+      "sha256": "2f798db8eb241117309520cf75eba036e8cb24e8bace00155ed7b045f5ad5a52",
+      "bytes": 3589
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenCrashLog.cs",
+      "sha256": "3087179cd5369acd137e6b0a7f62ff692794e8ea08e6891cdfeef944e407ad22",
+      "bytes": 4196
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenDebugSnapshot.cs",
+      "sha256": "3ed33bea49522e13cae9e390a8a855cb712104e197b2af90c54efe680ff560df",
+      "bytes": 16567
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenDiskImageArchive.cs",
+      "sha256": "8e5517b612adc5619fb8642c807e6ecaea4610ab8c53384519e89d9ecc3c5df1",
+      "bytes": 10823
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenDiskNavigation.cs",
+      "sha256": "d15531962a0e41ff85f02ad429440cd42f3f4bfbee2f62203a59ab05eef52bf0",
+      "bytes": 3102
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenGamepadInput.cs",
+      "sha256": "34e13dc1ec73e0e6e3878908996a2e2c738ce1b1dcfb0d2a127ae9355225a5be",
+      "bytes": 3561
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenHardfileSettings.cs",
+      "sha256": "ff559850fc329c0f0a169246f33dcdd22a305c50eb606290639ae85f6e87dabc",
+      "bytes": 265
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenHostTypes.cs",
+      "sha256": "b0ff7ccafa5a2d7b9f246902612bd9f18a6015c548fa5cda6ff8f83ae99c8a3d",
+      "bytes": 901
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenInputOptions.cs",
+      "sha256": "8a61c9a7efaf171383643ca821ec6798981878934d3012260798c11c95ea3eaf",
+      "bytes": 10433
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenKickstartRomArchive.cs",
+      "sha256": "cb25999c0d3fd9c16f461b984afb63b2c3d185b350b2e38ec20ad740bbd70186",
+      "bytes": 5188
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenLaunchWorkflow.cs",
+      "sha256": "6174cc1dc7608d2a7a2caf1d43c2fc72c8ef0c687664a0ab8dc1912e8995ad30",
+      "bytes": 4340
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenLightweightSession.cs",
+      "sha256": "f0d2c47261b2dbe2c69cf23dca12d641fc5a33812b104f15df71b2422da2c191",
+      "bytes": 34833
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenMachinePresets.cs",
+      "sha256": "f4ae73f1f057c0700960dc8a33e15f291ced43f7ddcdd18deea7531bf0027618",
+      "bytes": 5918
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenMachineProfileTypes.cs",
+      "sha256": "c830128321c55a6d9a1658ae54c57344f63a4f4fdd993b34327fff6cbb608fa9",
+      "bytes": 4830
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenMinimalBoot.cs",
+      "sha256": "004f7709fe49ddea20f10d7f00a32df98bb4b9a477180241e1c45d7e80e88a0b",
+      "bytes": 4705
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenPresentationGeometry.cs",
+      "sha256": "b1c7316d01a76c837461a7230afd5abddcf5dbab5501efe88e1893faed2b0acc",
+      "bytes": 1734
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenPresentationOptions.cs",
+      "sha256": "68545a8edac17095a61c9665c4a21397ec631d6089ffa67b2fe5569111aed574",
+      "bytes": 2660
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenProfile.cs",
+      "sha256": "2a4fd040f7d8e93a11d391aabda68be20ea115afd368f8e2aa4832e169703fcc",
+      "bytes": 36279
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenProfileStore.cs",
+      "sha256": "126a04a4f8eb38f5bcfdf1bb9f4467f96a02cd1b4a2696b057b0f0403ea9ddd1",
+      "bytes": 11474
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenRecentSession.cs",
+      "sha256": "198cfffed6fd614a7e422842ea84717298188166c1be6f33a1793ceee4fb4f7d",
+      "bytes": 3764
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenRuntime.cs",
+      "sha256": "3f83650da652b847442b5611352be318b6483e332c0a766dadb4ddab3bc5ec02",
+      "bytes": 46876
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenSettings.cs",
+      "sha256": "249d8fc3ccd822da7b145e3ac785b4d621b5a697e2fa8001fa1332a1c7d4db1a",
+      "bytes": 20892
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenStartupOptions.cs",
+      "sha256": "c4565f756c7fc2be1726e1fbafb78f954e285d767b73d35819719d037c8afaa0",
+      "bytes": 34034
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperScreenUserData.cs",
+      "sha256": "3a35b8a9b1e8c7c639a714103eaf45642a67a1935ac12252e5e0a6d964f7f4f0",
+      "bytes": 2912
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CopperStartMetadata.cs",
+      "sha256": "27112cf595747543d531ddc4f7a1d1b43e97d0cfd4c597afb799e564e13c6fef",
+      "bytes": 246
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/CrtPhosphorComposer.cs",
+      "sha256": "8b6de4b8d86543732aa951d95ca9b6a2387e9f2aa6927294b25e961a75f79ad7",
+      "bytes": 4251
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/FloppyDriveAudio.cs",
+      "sha256": "629bfe8cd14d70d297fd0875d97b9937ca2e2439804e738267550e54002fcf7d",
+      "bytes": 21455
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/FloppyDriveAudioOptions.cs",
+      "sha256": "2b799209bce440aa72f1dabb954915cbd3752066cb459e94260819ad7765ac94",
+      "bytes": 1689
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/FramebufferPresenter.cs",
+      "sha256": "99f5c2ed98a210f8369683f258c780437a622be9587f104785c6b5f94d9edea1",
+      "bytes": 12573
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/GlobalUsings.cs",
+      "sha256": "2efe61d124d2af15f2be26f47717f75366fed031e66cd90122fc95e42c86e3f0",
+      "bytes": 53
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/ICopperScreenSession.cs",
+      "sha256": "9c3174f615424e6de99ee8991a0f4c518edf76decab4b8432051b078c7509cef",
+      "bytes": 4288
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/InsertDiskScreenRenderer.cs",
+      "sha256": "ceff5611237115954abe1031c5cd68756366ca0a5681037a81930c109f24d5f1",
+      "bytes": 5203
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.cs",
+      "sha256": "38445af3bbb3f7798fc1a19165e1fde652a2ba268716005a9449ea73897b1f53",
+      "bytes": 153671
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Drives.cs",
+      "sha256": "eeb5ef9625db8468faebef3fca617af4317438afbc312e4845e60c9054d078c0",
+      "bytes": 12177
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Input.cs",
+      "sha256": "88a48e80239534c15762c9602ec029ac6b97710f7a9163f6257d8cc5fda82a72",
+      "bytes": 12428
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Launch.cs",
+      "sha256": "2c13b2cf0b6cca11e83963483f69c7aaa3bc1618807d6db92f17eec015dde532",
+      "bytes": 2882
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Machine.cs",
+      "sha256": "a5a4afbdcd433912f74b850f514d739a3d604f7c2900964d0c4d721f8f552bfd",
+      "bytes": 8362
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.SettingsUx.cs",
+      "sha256": "6e84a8309fba912fe415042a4a1811973d69197f7b178093e5d301a4b2ceedcf",
+      "bytes": 27437
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.SharedFolders.cs",
+      "sha256": "02c30d993e4a46b1073db934c09f4a875c093cc518b32104377d28707593f23c",
+      "bytes": 5056
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Shell.cs",
+      "sha256": "8cbdd69fcf3b94bea575040d8566a8a3d25d2f0fb15d19d6916bb2deb2b9110f",
+      "bytes": 27262
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Storage.cs",
+      "sha256": "5b80d74014867cb93bb00db1d540c0760ee4e6d41e95be8a9705f25d0a0738c9",
+      "bytes": 7935
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.Welcome.cs",
+      "sha256": "22b689629c28bea9b4d17608c4cd72b54ffdd73f57b16374c6822587e617ca1a",
+      "bytes": 27010
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MainWindow.WorkspaceRecovery.cs",
+      "sha256": "25da575bbad776ee9b9e2f7e1de625d594b7d8d561c68de4ff417d8e469a9e49",
+      "bytes": 5504
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MiniaudioAudioOutput.cs",
+      "sha256": "e9e4c49e6b46c7fdcbd47b9b40b8ee3020f7b219d1595c7e0411985226d302e2",
+      "bytes": 17488
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/MiniaudioSampleDecoder.cs",
+      "sha256": "f17806b6488d205bd886e736c8b133fc5a8b9aa4a525188d1dafc59d5463d81a",
+      "bytes": 2138
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/packages.lock.json",
+      "sha256": "9db71ac7947ff9c724e07d7d17b5ac49b2bbdad84977b3a285f63f20524ac39e",
+      "bytes": 10428
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Program.cs",
+      "sha256": "19385c384f06619e552193688330d851a2c6d587842f1427e57ca65837bf536a",
+      "bytes": 2370
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/SettingsWindow.cs",
+      "sha256": "88d25d24956620a90a0cefe33412bd576a3537ec6c2f43254e493c9392bdf0f1",
+      "bytes": 871
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Assets/CopperScreen.ico",
+      "sha256": "3dd838970d4b0b4f05e8fea8a255466fe4b71a321e3e73dbf760ecbc04a25139",
+      "bytes": 76835
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Diagnostics/CopperOsNativeStorageProof.cs",
+      "sha256": "f20e6fae6bf73a3429d73dc01113b43d1f2e076412c0d1a9d6c9bfe8563d0e09",
+      "bytes": 10809
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Diagnostics/CopperScreenInstalledMediaProof.cs",
+      "sha256": "df9e256652a051f2ff4ffc6ff5d71d314bcc103612eaecdb7d7d5a49a675e2c4",
+      "bytes": 14456
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Diagnostics/CopperScreenInstalledProbe.cs",
+      "sha256": "8eac4f3f9f7e55b71e5df55092f46e8aba42fdb5ea6c71eced7506c927877b9a",
+      "bytes": 15082
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Diagnostics/CopperScreenInstalledRecovery.cs",
+      "sha256": "e8d6b10371ab93291e426eaa91bf3685fd6cf96e03c186cb5e5c241d37ca3ec4",
+      "bytes": 5213
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Diagnostics/CopperScreenInstalledSoak.cs",
+      "sha256": "ba65ff0a2a3aea9c6515f9b8bc2825bcf799f18333776bc15d3f114b4ce98063",
+      "bytes": 18757
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Firmware/CopperOS.json",
+      "sha256": "5876d245afa84389b11e198eacde64f8bea60a65f41017b2b890b9c455838235",
+      "bytes": 185
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Firmware/CopperStart.json",
+      "sha256": "22e1001d18b97afafe6391f4b39a1d0859bca5967b29688320c3e00032c588f3",
+      "bytes": 703
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Firmware/MinimalDiskBoot.s",
+      "sha256": "82a75677568eab2a41ceb38cf975c580c75e27c1a252c8b0ca5d5c8aeb0449a1",
+      "bytes": 17973
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/a1200-aga-ntsc.json",
+      "sha256": "a2224da8829cda9b32b0106571fd0b91020d2948f907b854e5eb6c4fbab9e02e",
+      "bytes": 581
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/a1200-aga-pal.json",
+      "sha256": "df5ab7d20e26a2c8c2d249c42cc016bac1ee1a1c653a733da29644b1a6fba07c",
+      "bytes": 660
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/a500-kickstart31-host-exec.json",
+      "sha256": "7dd70a3eba162bcc2e084511ae151464f226eeddda8957a84ee8bc151c6572ae",
+      "bytes": 784
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/a500-plus-ecs-ntsc.json",
+      "sha256": "06ea7aa3d1f7c9169183b0f7b2d351ca70492b7d28f09a0a0bf2da561ca33129",
+      "bytes": 656
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/a500-plus-ecs-pal.json",
+      "sha256": "5200b151b6850a7237c9e3a362c6cadddf99e395ca4dd7d17cd80e2261891f7e",
+      "bytes": 652
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/diagnostic-hrm-copperstart.json",
+      "sha256": "2529ca6dea7dd4d2ea6b44782ce0f48444a7b0cd4c0eef4664a36985a784a2e5",
+      "bytes": 618
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-copperstart - singledrive.json",
+      "sha256": "ff33887a87877ba7d73b423999d3857975b8eafc3d31c97347e42e50eb19c8e3",
+      "bytes": 569
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-copperstart.json",
+      "sha256": "a3151aed803d1c2d2bb605edb14578420ecb4b83674cf69dbce1ed2bc5327edb",
+      "bytes": 569
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-diagrom.json",
+      "sha256": "d0f89d2c3658774ebf563dd0ed1b3dac59f79d7482de9acde24fe2380581f798",
+      "bytes": 598
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-kickstart13 - singledrive.json",
+      "sha256": "7a375579c83c53e540dd45c7d664a0908ea94418b8d6b2e46d030b5fe0ae83f4",
+      "bytes": 570
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-kickstart13.json",
+      "sha256": "c8f7115c7ed783234b9dcfae696628692384863b6544f354729aa701907ce893",
+      "bytes": 570
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68020-copperstart.json",
+      "sha256": "2922bc5758a0fbfb1bb504e03b544699345425af39dffc38439aa4f6d817f767",
+      "bytes": 701
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68030-copperstart.json",
+      "sha256": "4114b4746d82b2d1deb67d8da31ee8aac1faf350ec5dc2b15bd31b6f330885ed",
+      "bytes": 723
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68040-diagrom.json",
+      "sha256": "d143ad3302a2a229f63604438e54418ac0e8033ad92ce743c899a9348487bdfb",
+      "bytes": 709
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart-rom.json",
+      "sha256": "24d97135fddeb952e2870f0d36ec232dc45e067548ed7d6c780d458a4cab4eca",
+      "bytes": 881
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart31-copperhdf.json",
+      "sha256": "9a6ff9799b0c55c630ba607268ffee5989858bc342bc299a2b585d6d00468fd2",
+      "bytes": 1019
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68040-jit-kickstart31-rtg.json",
+      "sha256": "6ec846159353fe68b3a2fb9c830ef15c1ced4298a9f46f97148f1790b4bab4b0",
+      "bytes": 660
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/expanded-m68040-kickstart-rom.json",
+      "sha256": "0ca3a3d01472fce0f05c6b16cf6673e14b099de776b8ff83293d4f7b2a4840f5",
+      "bytes": 811
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/lightweight-a500-copperstart.json",
+      "sha256": "5ee0309f7ae724327745d57e2b52ee621d0cbfa1222811c57edc74478c9d2d21",
+      "bytes": 676
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/lightweight-a500-kickstart13.json",
+      "sha256": "f90c7e3ec48f77ed89620dae7253e7dae01eef070ab3d7a0011d87e2fb3fcde1",
+      "bytes": 656
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/lightweight-a500-kickstart31.json",
+      "sha256": "fd2d338975313ebbf375f9c767c4229548486547ac9c8894ddf21b804cfda144",
+      "bytes": 664
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/lightweight-a500-minimal-disk-boot.json",
+      "sha256": "1bb447a7d54e273195079967674443be23942fb0699f36d0ffbd92e386d69b89",
+      "bytes": 568
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/vanilla-copperstart.json",
+      "sha256": "61fcd0e3780918e4b4677cf56255f26a4a5d6b2cf51b89a861b38178a862a015",
+      "bytes": 505
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/CopperScreen/Presets/vanilla-kickstart13.json",
+      "sha256": "68802075894faeeb2199caffd378e9a159054b02d49b79bb5e57501b07cc183a",
+      "bytes": 506
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/packaging/msix/AppxManifest.xml",
+      "sha256": "13df14a8894da84f415b03c5fbabccaa4b26ff1af1a4cbe6ea6c8c6d9a7454c2",
+      "bytes": 1723
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/packaging/packaging/msix/AppxManifest.xml",
+      "sha256": "13df14a8894da84f415b03c5fbabccaa4b26ff1af1a4cbe6ea6c8c6d9a7454c2",
+      "bytes": 1723
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/scripts/package-msix.ps1",
+      "sha256": "c78c04805248d4f8303cdfc2e81e5300908b3e75c3c650b6bbe4c51018182962",
+      "bytes": 10655
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/scripts/test-msix-recovery.ps1",
+      "sha256": "d7bb47a5e57e98b11f9ab03bef719638d36cfe09fda57f338810ff7b9139b0eb",
+      "bytes": 17703
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/scripts/msix/CopperScreen.Msix.psm1",
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "bytes": 14760
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Source/scripts/qualification/CopperScreen.DisplayRecovery.psm1",
+      "sha256": "ac2635e14127324842b62f4628690ac7f63b78ef353223d58485ad32eb5dca3d",
+      "bytes": 3055
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/config.json",
+      "sha256": "a302d276a51c8f911e57d78a71d3094401f7d8452d8a1d784e2a8c99c5fac63b",
+      "bytes": 231
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/controller.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/copperos-display-record.json",
+      "sha256": "9045e6ab7df99734a9491f8599894747f3d3fbd8ada7addab59f181f2d58a4df",
+      "bytes": 37653
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/copperstart-display-record.json",
+      "sha256": "eccb74a6833c6b416ef505c87d05ec48aaaa201543cab1da5652a86ccd1c2223",
+      "bytes": 37011
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/frozen-inputs.json",
+      "sha256": "9a0a25044ddeb140090b335cff1bae27658fa5db177d48bbf63f7d3cb6565450",
+      "bytes": 484
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/go-copperos-display-off.json",
+      "sha256": "b95641aa5a1299f7f780de43ef066272d428198d35056d18a9613d6939a779c3",
+      "bytes": 95
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/go-copperstart-display-off.json",
+      "sha256": "f08854d191a631b2cf65e55bb24d5a253df69fcfc07970be2f175961c2a113b8",
+      "bytes": 95
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/launch-preflight.json",
+      "sha256": "ec9252905322fe92658d41398fa42e7de6765c9389ad57dafa69998c2aaed0e0",
+      "bytes": 219
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/owner-audibility.json",
+      "sha256": "1d6dbebbba9bbe397b0dbe7c7c40aa8672d14052985366b3399ad88360722494",
+      "bytes": 371
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/progress.json",
+      "sha256": "0397529513a611ca1290d1c82d487ff02afda280bdff9b3c526cc3a4d348a6c0",
+      "bytes": 92
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/recovery-record.json",
+      "sha256": "44a469dfdec994ee7008977072da317c6180d88515ec67fcac42954997d774b2",
+      "bytes": 968310
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Frozen/scripts/test-msix-recovery.ps1",
+      "sha256": "d7bb47a5e57e98b11f9ab03bef719638d36cfe09fda57f338810ff7b9139b0eb",
+      "bytes": 17703
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Frozen/scripts/msix/CopperScreen.Msix.psm1",
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "bytes": 14760
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Frozen/scripts/qualification/CopperScreen.DisplayRecovery.psm1",
+      "sha256": "ac2635e14127324842b62f4628690ac7f63b78ef353223d58485ad32eb5dca3d",
+      "bytes": 3055
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-profile-path.txt",
+      "sha256": "1882b275d02a8865fe0b5bf44b3d945a724a8175f816039963ce24737d1f8297",
+      "bytes": 202
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-command.json",
+      "sha256": "f24f2bff059fd4070b01190a950f448185a87eea7aa5a3c1fe3771c8b43d7889",
+      "bytes": 41
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-progress.json",
+      "sha256": "6d23ea3003804e312c1960172e0a9d6c67bdb354755b8dbf06e25626f5a7e337",
+      "bytes": 8276
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-ready.json",
+      "sha256": "38abc005f833c271e6991cf0f80da2bc0d80730be0d679e236db7a1924e2ad71",
+      "bytes": 7008
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-1.json",
+      "sha256": "4a706b57cb2cc829f13181bc6b1590498cd5bfe18686d01b1bd8d026269af6b6",
+      "bytes": 7604
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-10.json",
+      "sha256": "97b338810d9309c18d7ae3bc021a615feb2156cfe112a322f65a630480ae6257",
+      "bytes": 7616
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-11.json",
+      "sha256": "a61d35d04b5e207c8d580227216e39cfb66c8b0f14d9f606fa593686131d3efc",
+      "bytes": 8284
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-12.json",
+      "sha256": "c0e327ec80afd321af8aa536bea84064eeebc6189efcd641ea7b176c18cba448",
+      "bytes": 8742
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-13.json",
+      "sha256": "92f955f5166eed042a8955938d2bb3d940bedef0cf1a26c225271a3fe2ac7b5e",
+      "bytes": 8916
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-14.json",
+      "sha256": "3dfc2117605e4d1fb53ad843458dfd398e44772debb2721eccbc673e0b56a1f2",
+      "bytes": 8925
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-15.json",
+      "sha256": "a1c350332c55d8004b5821be9fb1e7ccc945a6a8408ad51e502675c568894a3d",
+      "bytes": 8926
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-16.json",
+      "sha256": "a07a48e700799f2f89494a10c83e0b796f25245bfb7932d3b7c92d007f43e48d",
+      "bytes": 8919
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-2.json",
+      "sha256": "76032be4437aebce40d89871b994ddce92aff1f5a827b5a252fec01a25ff37f7",
+      "bytes": 7607
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-3.json",
+      "sha256": "c9cb6000722c3b9824725f0d1c3a3b43c460e575e8142689019928db4aa823b4",
+      "bytes": 7607
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-4.json",
+      "sha256": "fb646f3f739497da565beaa15cb289f5628b5f2d6b62f553be5f5a4c5abd6ed1",
+      "bytes": 7612
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-5.json",
+      "sha256": "5ca92c7d754a1ddf69e48952cb8a9d6c6d8c05c4c29d339d1a8e5cd50ac7afd0",
+      "bytes": 7612
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-6.json",
+      "sha256": "0af97d6aeb706e3ba40003178c1cfb0def9be3350a6f06e4ad480288e2198720",
+      "bytes": 7604
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-7.json",
+      "sha256": "efc3135652e4ffdf018022821bdf3f0c54795ef0723007b24d1d9318c33baa07",
+      "bytes": 7611
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-8.json",
+      "sha256": "dcb7eaa99850d481e407a6e173515665b66eb58b627e72fbe5139c8c5a11e00c",
+      "bytes": 7619
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-recovery-reply-9.json",
+      "sha256": "726e508cefc730604b1662ce86b708f7184732bacf35619a920aa97dcd07cc92",
+      "bytes": 7612
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen-end.png",
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "bytes": 24205
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen-middle.png",
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "bytes": 24205
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen-samples.jsonl",
+      "sha256": "61dbc6aea641dd4e146ecdd84c507328474a620c19ca180f69a19b8c50974195",
+      "bytes": 9232
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen-start.png",
+      "sha256": "6d4c808bbd6fc351579ecd1dc018c2a6c67c0d5d49c6b2af003848c4cea7f77d",
+      "bytes": 24205
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen-storage.txt",
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "bytes": 2025
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen.copperos",
+      "sha256": "0dd4a89757d2deb3951ece261aef23186b05b05462d42c42316a5c622c3afdcb",
+      "bytes": 206246
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-reopen.json",
+      "sha256": "7cca1be569eaeb94086d3310d25cbc94e09f6fe9ebae1a3b37a7421a1a84b587",
+      "bytes": 23343
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-request.json",
+      "sha256": "6b248909acf0fc19c6896c04ffb03d1787465ddf1d3e4cf0141382473253851b",
+      "bytes": 580
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-end.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-1.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-10.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-11.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-12.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-13.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-14.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-15.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-16.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-2.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-3.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-4.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-5.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-6.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-7.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-8.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-recovery-9.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-samples.jsonl",
+      "sha256": "416ce60e3edc44118ceee748acf5443cab12390148cbdf1795ec0b24194e7c7e",
+      "bytes": 2443852
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-start.png",
+      "sha256": "0f5d68568db654c5b140a70cfee7b2c5c70fb4f5dcb1a0f898f2b41d7c694a81",
+      "bytes": 24247
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak-storage.txt",
+      "sha256": "1a2e0166e5a87784c16104d8ee2fa9fbc7c7a1dab664daadca45588b3650aaa9",
+      "bytes": 2025
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak.copperos",
+      "sha256": "9f142adf96305f32e6acb375462d0f690888de56ab398b8bb2c4cdcc40475732",
+      "bytes": 206246
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperos-soak.json",
+      "sha256": "b420cf4b1d5ee554787c971faa7d959e0d951649138ec070595bbdd7ef65ecd4",
+      "bytes": 180167
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-profile-path.txt",
+      "sha256": "a38cf9f4349e4b4f40d897dcf0f89e461f3498793d991ff84362f243e02143f1",
+      "bytes": 208
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-command.json",
+      "sha256": "116b8789dc082402f2a7854fe169cb8f592f956e0a9a8affa76e6dfb008c677e",
+      "bytes": 41
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-progress.json",
+      "sha256": "beb5c087c807a77fb4f800feaa3724e6f5385fe7fd72ac76e39be0d3c8f0fc82",
+      "bytes": 8032
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-ready.json",
+      "sha256": "5d0dd01e657436dcedb3e9050bdd5c7dbcd38f4c61a9c216bc9641c2d967d5b3",
+      "bytes": 6829
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-1.json",
+      "sha256": "e221b7067b115540e8ebd835de21265340bf081d6820794133393f19c145a159",
+      "bytes": 7426
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-10.json",
+      "sha256": "f159272e08322eebcdfe10a9b49352d6a746c4d286732bffccda2c88aa471e01",
+      "bytes": 7429
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-11.json",
+      "sha256": "9dc80e34baef001d270b1304dc5a739aebfa34c73e4d6b5ed5d77bf1395676f5",
+      "bytes": 7424
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-12.json",
+      "sha256": "f51b318a5f4767a4019c744f1f45f902a397ee4b95b6c9d47e084ddb46132f9d",
+      "bytes": 7439
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-13.json",
+      "sha256": "71eeb1d009f2b043d43fd226f1f97dcbed677cb712b55af3d1c18572f0e3fe1c",
+      "bytes": 7427
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-14.json",
+      "sha256": "eb7853c24ff45ad106f082b580609379549668cabbe3af661621c5bfd8d7025d",
+      "bytes": 7428
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-15.json",
+      "sha256": "7cb18892d0a42a9565493f55f3c256b4de5a2d0dbeb77aaefd7cc62491263321",
+      "bytes": 7429
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-16.json",
+      "sha256": "9f4718b92b5dd743181e37c6d459217bf6f1b10a09483da86693839e9f4247ea",
+      "bytes": 7438
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-17.json",
+      "sha256": "3c2912c22c338cbc607c089cec07bf1ddb8b75383d38a4532b19ed13f5045906",
+      "bytes": 7436
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-18.json",
+      "sha256": "7c052e74c449045da4772acbdbfdd61f55f6cdba6154d6a6557b5b33a4f9f01e",
+      "bytes": 7421
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-19.json",
+      "sha256": "3b1f6e95f18bd7208dd0e4e469e69b1616d3fd996cb6a0fc0e0f90b64057a1cb",
+      "bytes": 7422
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-2.json",
+      "sha256": "79efcf663ec537bbca05cf8bc14901c1ad96327d56bfc650cf381e104954fe2f",
+      "bytes": 7427
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-20.json",
+      "sha256": "66f07412500bc05ba10c5afdc1e346daa8c093f935331035720542f171c7f3d1",
+      "bytes": 7444
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-21.json",
+      "sha256": "be218047d738c21104d24842cadff5ef3250a90ce5bbec90122ba48e29122fa0",
+      "bytes": 7433
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-22.json",
+      "sha256": "b97e5fb8f3495aba8102df496e41517daed854a2d15874701ff6ccaa718d2c49",
+      "bytes": 7436
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-23.json",
+      "sha256": "ed1356ae417d0a41ff44f7d68fe002a486614b3207b579428a51b4a26b29bc33",
+      "bytes": 8153
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-24.json",
+      "sha256": "4674d1acb4d4f133b5121c9c20152167b57ff2b5c48fb8835821be6aa01a683e",
+      "bytes": 8616
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-25.json",
+      "sha256": "ff16ce961a08f07bd890a9a860fcec304df6c53fa5bb136aa84b74a5c2f49278",
+      "bytes": 8687
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-26.json",
+      "sha256": "122fe311543c5f7d307a6d4e1c04c46764d833de874f3944c1d67610911074d0",
+      "bytes": 8675
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-27.json",
+      "sha256": "f22e9f5f026669405969a3162216fac9adc3f0d4ced6bf4d4f0a1e6c34aa6347",
+      "bytes": 8675
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-28.json",
+      "sha256": "46d90bcf96b42245d6033ac0a47b026636915fe9b2e2e14579724d103a336bf8",
+      "bytes": 8675
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-3.json",
+      "sha256": "075fa26220adca17230ab3ef11d703b8acc1a476be7147abd832525b26607b0c",
+      "bytes": 7441
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-4.json",
+      "sha256": "09a592fd749643f4522a493388ac6b0602686732fb2b2ddbc224d786541433eb",
+      "bytes": 7428
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-5.json",
+      "sha256": "68dffa7d44fd569bc5955ec0d328f6eedf3d7131ec8b81ce69e037a403e70cfb",
+      "bytes": 7419
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-6.json",
+      "sha256": "4b527f04cb48bb4425f554b5db0c2597cb128a569006a407c335542b0bf94a02",
+      "bytes": 7436
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-7.json",
+      "sha256": "3f31a0a07e57d9e2d7153d2b11294716d6eaf7bd9c2b5ba36d3006d6353a40f7",
+      "bytes": 7427
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-8.json",
+      "sha256": "50be8f97770e9fb6ca635d29e940892aa04d59f419adb2a56265b9da85eb9d11",
+      "bytes": 7427
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-recovery-reply-9.json",
+      "sha256": "96e5dbca7c7614e23e61e4e56e22615f2b374384093a31779b52e2833ffad236",
+      "bytes": 7437
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-reopen-end.png",
+      "sha256": "08ba80d144cda02bebfa29c4885f9c97cf138e76baec0ce3febe6860a5bc349e",
+      "bytes": 35424
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-reopen-middle.png",
+      "sha256": "be98830948756839daef541fdf059558bf5094d296a9278ea642bdd301a751e4",
+      "bytes": 33786
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-reopen-samples.jsonl",
+      "sha256": "7d5be305900ed4f6094e56269512528f78a4f0cae42eed56be6012efee1150d3",
+      "bytes": 8888
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-reopen-start.png",
+      "sha256": "70baf5bed55906033f25b1e6b02897c1856ef0bc430aedbfcdf560d5f9b396ad",
+      "bytes": 33105
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-reopen.adf",
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-reopen.json",
+      "sha256": "db8d56fbe76b6e3b17e290ed2eb44e62a013cc374780df56b7a8d64002031981",
+      "bytes": 24005
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-request.json",
+      "sha256": "83abc82027ed881bb8197206951427df17af4f93fd5ed168d9ae005f90a57f17",
+      "bytes": 583
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-end.png",
+      "sha256": "f1254969c35d0766fd7da7892c56ffef4bcffca172274d8bea0dc436867d17b3",
+      "bytes": 21545
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-1.png",
+      "sha256": "3d7bcb3e9d6975b43bc8c9a81fda65345a81056a3c5967e504ccd7d624177704",
+      "bytes": 34369
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-10.png",
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "bytes": 39857
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-11.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-12.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-13.png",
+      "sha256": "2a88b434644d8092351926893d54947daa1ecfec6e3252005d613e97bc6723b9",
+      "bytes": 29011
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-14.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-15.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-16.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-17.png",
+      "sha256": "009f0f3f0a3d7332d6de1c4a1c1f933277a8cb473d6f51f70fd227193f6530e1",
+      "bytes": 32843
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-18.png",
+      "sha256": "7042d0ec24701a740954892ea3ce7e89a8f0b1576902d9143f2f0e66b18cd2a4",
+      "bytes": 26817
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-19.png",
+      "sha256": "7042d0ec24701a740954892ea3ce7e89a8f0b1576902d9143f2f0e66b18cd2a4",
+      "bytes": 26817
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-2.png",
+      "sha256": "e4b21677f59f8182f7ea4700fdc3d3ecabf23579413836b4155be6dc5fa209e0",
+      "bytes": 34239
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-20.png",
+      "sha256": "bd562511cb5fcc53938072b6f0b839d48eea7341c3e65a489c52117875505b4d",
+      "bytes": 26745
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-21.png",
+      "sha256": "bd562511cb5fcc53938072b6f0b839d48eea7341c3e65a489c52117875505b4d",
+      "bytes": 26745
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-22.png",
+      "sha256": "35acb3b1dd412a4f631fcccb60845e6471a20f626dd6dcea919f31b289ad458f",
+      "bytes": 28829
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-23.png",
+      "sha256": "3b1cb834ead34526960661e6446767715f37c21f89f39d903a6b36d7138ecdff",
+      "bytes": 43198
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-24.png",
+      "sha256": "8df64d5ed8416d02a04c66e297d59d2e300dc90ac4976724968691aa93e7017c",
+      "bytes": 26759
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-25.png",
+      "sha256": "773a4590f480a808754c33b108a373294bb3e40ed4d8c90c77f8fa2f58b4dc51",
+      "bytes": 26040
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-26.png",
+      "sha256": "ca40cac9a2c801c71eb48fe44fc4c97d81568ab2186cb01bcb67cd4647748017",
+      "bytes": 21635
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-27.png",
+      "sha256": "f1254969c35d0766fd7da7892c56ffef4bcffca172274d8bea0dc436867d17b3",
+      "bytes": 21545
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-28.png",
+      "sha256": "f1254969c35d0766fd7da7892c56ffef4bcffca172274d8bea0dc436867d17b3",
+      "bytes": 21545
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-3.png",
+      "sha256": "ca5b482ad65470fc036f42bab48993f50903803387e13a1706d641f418fe1fb9",
+      "bytes": 34435
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-4.png",
+      "sha256": "554f7646ce7dc515adb40627561d9f764104883ec40e0b029ba9e00debd03f1c",
+      "bytes": 35454
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-5.png",
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "bytes": 21555
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-6.png",
+      "sha256": "a4cbfe9baf0e7517cc520c3d826f23e1c953139ae8252d3848c69dff6b040bcd",
+      "bytes": 21555
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-7.png",
+      "sha256": "9c5799780b0a5e77e3e6ca2915aba413deb3af3c46af148033fb18963c26849e",
+      "bytes": 21504
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-8.png",
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "bytes": 39857
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-recovery-9.png",
+      "sha256": "5afe023bf55b5cd9905b9abf873bb24c695e9b549451df87577cfe721e741fdf",
+      "bytes": 39857
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-samples.jsonl",
+      "sha256": "defec9ae8656f0437079ab42c453922262a96125df550eeedea46b4ccfd1ecb6",
+      "bytes": 2808236
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak-start.png",
+      "sha256": "c6e232a367dce8ee91238825040780292882331f19e7e7512bd6f6db8ff916e5",
+      "bytes": 33496
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak.adf",
+      "sha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/copperstart-soak.json",
+      "sha256": "68526d1c36f11534186c5e17e9db09b3f7242d180e7cbff3a5d0efc26a992d83",
+      "bytes": 284808
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/Installed/progress.json",
+      "sha256": "bf967aae036dbeade3eafe868df07151e18014f2822bd8e4f978d2f51718ef07",
+      "bytes": 1529
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/last-machine.json",
+      "sha256": "e13369cfd88586083bc6a7389dddc7f6ab52e235fe526d20f7169683d906972e",
+      "bytes": 2875
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/recent-session.json",
+      "sha256": "613626fb3111cf71672be2623aca8aadfe731e0c54657289f51c936f0f11758d",
+      "bytes": 283
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/Previous.adf",
+      "sha256": "14ec1077b47f8fc9ccaf036070bb2ed1a618995b0087b490ed8011e09735e268",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/System.adf",
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "bytes": 901120
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.json",
+      "sha256": "b90ccf741acfb1f3676323b97e1708f02a5e495be94fce9818694facf148556c",
+      "bytes": 370
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/CopperOS/Workspaces/soak/workspace.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/Logs/CopperScreen-20261018-200847-106396.log",
+      "sha256": "c12630ad58c43bcd1ccd81e6f355463137d2165d8901d9a066d5e5b81ecd3155",
+      "bytes": 173234
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/Logs/CopperScreen-20261018-201941-49760.log",
+      "sha256": "f8a4f5942d7ea2a0810a896c5ce5ddb4340faf26490b1a998d64a6a619823856",
+      "bytes": 52406
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/Logs/latest.log",
+      "sha256": "f8a4f5942d7ea2a0810a896c5ce5ddb4340faf26490b1a998d64a6a619823856",
+      "bytes": 52406
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperos/Profiles/copperos-soak.json",
+      "sha256": "e13369cfd88586083bc6a7389dddc7f6ab52e235fe526d20f7169683d906972e",
+      "bytes": 2875
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperstart/last-machine.json",
+      "sha256": "9ad1c2e1f5a985abf8911614c8af2e07b204dc05bb2c8e489e7fb4cd5a7a42b5",
+      "bytes": 1225
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperstart/recent-session.json",
+      "sha256": "8803955b724df460c3b20b06f3e9fcb15bb7a70fdf1367d0ac4b400da074f7c0",
+      "bytes": 189
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperstart/Logs/CopperScreen-20261018-195546-91652.log",
+      "sha256": "f6625df4a6b3744e0dcbe932476ee59b6bdd501751df0146ee254159e1e16c48",
+      "bytes": 127002
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperstart/Logs/CopperScreen-20261018-200335-52208.log",
+      "sha256": "009be3a75010d271c02d6003f7600e9764354756a6701c4e0aedd2775e0be71d",
+      "bytes": 82510
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperstart/Logs/latest.log",
+      "sha256": "009be3a75010d271c02d6003f7600e9764354756a6701c4e0aedd2775e0be71d",
+      "bytes": 82510
+    },
+    {
+      "path": "artifacts/audio37-f9105546/DisplayRecovery/PrivateState/copperstart/Profiles/copperstart-soak.json",
+      "sha256": "9ad1c2e1f5a985abf8911614c8af2e07b204dc05bb2c8e489e7fb4cd5a7a42b5",
+      "bytes": 1225
+    },
+    {
+      "path": "artifacts/audio37-f9105546/basis.json",
+      "sha256": "db8f0644471981be5029a72ac411764d91d0f3c6ad6a067f4d09cbe69c348d84",
+      "bytes": 372
+    },
+    {
+      "path": "artifacts/audio37-f9105546/candidate-record.json",
+      "sha256": "9c2c8f8d521bffd963ddea334d8b0248c1c51ae51a8230af289a3348fdf43fd0",
+      "bytes": 69859
+    },
+    {
+      "path": "artifacts/audio37-f9105546/source-inputs-before.json",
+      "sha256": "8440268a1cad061b4384bae49417e02633f7cf20824d095eff38f9190ae06d79",
+      "bytes": 28735
+    },
+    {
+      "path": "artifacts/audio37-f9105546/production-build.log",
+      "sha256": "7ecb788aa59c6064a0590c799b88d2e6877d72d37cfd7af224fcaf97a872b8e1",
+      "bytes": 1283
+    },
+    {
+      "path": "artifacts/audio37-f9105546/host-tests.log",
+      "sha256": "07c60aff6563f04cd5faa98e59afc88f0c5bde5337ee7f0c63857a83b68490be",
+      "bytes": 463
+    },
+    {
+      "path": "artifacts/audio37-f9105546/HostResults/host.trx",
+      "sha256": "b9b06cf842024a8e780cb753b99c34ad8bd19b4d6555504165d91dda99ed9aa5",
+      "bytes": 17503
+    },
+    {
+      "path": "artifacts/audio37-f9105546/before-regression.log",
+      "sha256": "713ee84e267a8be84eda396c3ad9a869144580701f632ffe1154017e62216d44",
+      "bytes": 1560
+    },
+    {
+      "path": "artifacts/audio37-f9105546/BeforeResults/before.trx",
+      "sha256": "4fb3a81b42441a0863beb097f12d21a178791711f97a76b952e3019010e253a3",
+      "bytes": 4733
+    },
+    {
+      "path": "artifacts/audio37-f9105546/controls.log",
+      "sha256": "66370317b13803461833e4e47f5b788a3236e2759e5ebc2eaebe7e0e60c89850",
+      "bytes": 772
+    },
+    {
+      "path": "artifacts/audio37-f9105546/ControlsResults/controls.trx",
+      "sha256": "5d31f2326a09391a26d2fdc35c1cf9e0a2611931e3b6334517e51244855a8870",
+      "bytes": 23464
+    },
+    {
+      "path": "artifacts/audio37-f9105546/exports-verified.json",
+      "sha256": "2ff031a29361b25564a946b5af86857cab081fe12f65d585ca94097cd3cee0ed",
+      "bytes": 1261
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Package/CopperScreen-1.1.37.0-win-x64.msix",
+      "sha256": "d93305ab8cd470266d72818fa1157721186f8a5fb7ee789b6df16e1d04ba3ef8",
+      "bytes": 49560569
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Package/signature-verification.log",
+      "sha256": "9fc03e0c0c09c037656749d3a9a161205705433bcbe1001fd9898aa2f2644974",
+      "bytes": 1049
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Package/publish.log",
+      "sha256": "e92b5814de52421e7572038a27c079be77c18e040cc575c70fcf38d62e6e3aad",
+      "bytes": 1028
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Package/package-record.json",
+      "sha256": "6487e10a15b2892ec7e84a7a1cc4d1c2a2eb9678d6089e7373d0ad1a532cde63",
+      "bytes": 39706
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Controls/Controls.csproj",
+      "sha256": "9653805ed62436d615a354d309637d8ac166546c50169a7fc4b0f3340928ba47",
+      "bytes": 1738
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Controls/RuntimeAudioPacingTests.cs",
+      "sha256": "344fd116f4941d6123ecb972ab70c4b8420c30ca2e9d4fe802e867bd7c7136ae",
+      "bytes": 10820
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Controls/MiniaudioSampleQueueTests.cs",
+      "sha256": "53c255a313ed933ee1d9027cd5711f8da3ca48fbcddeccbd0ff78504ef89d222",
+      "bytes": 3450
+    },
+    {
+      "path": "artifacts/audio37-f9105546/Controls/InstalledAudioTelemetryTests.cs",
+      "sha256": "4347cedf65e50a02bc7368d6951ee316407e48ae5403dc602c07b35d168eb371",
+      "bytes": 4595
+    },
+    {
+      "path": "artifacts/audio37-f9105546/source-delta.json",
+      "sha256": "173b95fd2c4f15e4034f117c49ef0e41a225449b9fe47df0b13c532139a653c0",
+      "bytes": 184
+    },
+    {
+      "path": "artifacts/audio37-f9105546/observer-isolation.json",
+      "sha256": "bef0793d479e22422b4a33021a4d18aa0355390844478df5c5e53b24f0dc8096",
+      "bytes": 544
+    },
+    {
+      "path": "artifacts/audio37-f9105546/copperos-reopen-timeline.json",
+      "sha256": "ed6846ae04bf28e148f3ebae344b0e7e948b39361af1d2403e8fc8f5ea2c7227",
+      "bytes": 2712
+    },
+    {
+      "path": "artifacts/audio37-f9105546/default-output-before.json",
+      "sha256": "bac0489b0301858a4e899e05b39c113d5bb26b5ccdc1444ce5dc97a94ee68346",
+      "bytes": 751
+    },
+    {
+      "path": "artifacts/audio37-f9105546/top-thread-priorities.json",
+      "sha256": "fa2b6b1f5d6dde7ccd7ccc001f31c55d4181e85fd3840c60326c5ce5aa4e0266",
+      "bytes": 1970
+    },
+    {
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.json",
+      "sha256": "b84ae843db91f6763c1345dbd8b32fe553037328c14817287c9c9fcb587effaa",
+      "bytes": 64539
+    },
+    {
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.md",
+      "sha256": "277ceb50b4dd8682225717a26321607032c44d032f0463af504ceea809230f76",
+      "bytes": 10094
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.json",
+      "sha256": "cc0b8ecca7a273ab0ab40ea979bfbd9a815c4d0913bef39e17236741a37a33f7",
+      "bytes": 151599
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.md",
+      "sha256": "75c8436fbc455f2e966a3863da1be0364d61818cd4477d6dddd483a5b4e3b47f",
+      "bytes": 7037
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_DIAGNOSTICS_2026-10-18.json",
+      "sha256": "58dc3a71c4488d0c1ea24274b933535221e999680d96f834ee9adff461077d0e",
+      "bytes": 95405
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_DIAGNOSTICS_2026-10-18.md",
+      "sha256": "a65e6534c7901fb30220222e808e6b355f7796833b0e0cd7bc3afee64ed7e216",
+      "bytes": 7539
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.json",
+      "sha256": "2d5db95d98e83b42f773791fd731c0570b6ffe8004c816af93d3fdbd36091d4f",
+      "bytes": 109362
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.md",
+      "sha256": "ddd0f1ce2f796b84e70b7f7582846099bdce50beeab9d4a5fba5998544e2fe06",
+      "bytes": 5874
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_PHYSICAL_2026-10-18.json",
+      "sha256": "35a134f5a4ab81ee7306d1365bcc448430b21dd4c71b6b3f363e5625b954557b",
+      "bytes": 65736
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_PHYSICAL_2026-10-18.md",
+      "sha256": "a3f655830acc22be4f7f2d6a687b3b5dd0c1ae9e56c509ace119e09c6e7f275d",
+      "bytes": 6155
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_REOPEN_2026-10-18.json",
+      "sha256": "e8726aa53c9ef35681bd048251180f2fa429dc5515be1128838d1496d4aa1401",
+      "bytes": 85809
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_REOPEN_2026-10-18.md",
+      "sha256": "e85ff765ced23aaaa29219a57ac0155288c22d83df1abde6dfafdc754f022080",
+      "bytes": 5741
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.json",
+      "sha256": "fdac6bf3943ac9b9428270f4e33557fe320e3784073645e072062ad5f38d188e",
+      "bytes": 4459
+    },
+    {
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.md",
+      "sha256": "1b02f3ec40d5d37378ea5dd4599f5efa2a10c528a84e98f9127d564ea8414bdb",
+      "bytes": 2246
+    },
+    {
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.json",
+      "sha256": "ab8f974bbf2de5c882343e35c42c8b05d16df975d5021288e2c4f751fecb9bf3",
+      "bytes": 6825
+    },
+    {
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.md",
+      "sha256": "24ff6278560a3dd819d86f948608c6b84212af5d8341ab8598346b836fc969a8",
+      "bytes": 2708
+    }
+  ]
+}

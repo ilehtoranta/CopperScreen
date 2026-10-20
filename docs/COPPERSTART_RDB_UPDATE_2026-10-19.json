@@ -1,0 +1,1766 @@
+{
+  "protocol": "copperscreen-installed-rdb-update-qualification-v1",
+  "date": "2026-10-19",
+  "passed": true,
+  "coverage": {
+    "installedProcessPhases": 15,
+    "resetRomBoots": 17,
+    "hostSemanticCases": 0,
+    "compiledMc68000Cases": 0,
+    "acceptedFailures": 0,
+    "acceptedSkips": 0
+  },
+  "scope": "Exact signed baseline-to-update pair using the same package family; normal installed desktop/runtime/audio; no Store certification, arbitrary schema migration, uninstall/reinstall recovery, power-loss or performance acceptance.",
+  "baselinePackage": {
+    "sha256": "F17FBD0ABB7D3F7FFA3C9743C830D0E1B085D094ED174A919638A90380FD93B0",
+    "installed": {
+      "Family": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg",
+      "FullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg",
+      "IsDevelopmentMode": false,
+      "Location": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg",
+      "Status": "Ok"
+    },
+    "binaries": [
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperScreen.dll",
+        "sha256": "BD7D385488D4F7E1275687AED2BF2B8C01F2491776B47BC0F91675617CEE296B"
+      },
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperMod.Amiga.Lightweight.dll",
+        "sha256": "01043C33E37AFFE505B81A09989E43BDC7026B5433B4C26119C729C160A682B0"
+      },
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperDisk.dll",
+        "sha256": "3109BCA65CE9845D205A3A0FCB07E47140FE8A124BC65D7CA528DDC17F57B8FC"
+      },
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      }
+    ]
+  },
+  "updatePackage": {
+    "sha256": "0604916E9D0AAC5799895ECDAC62CC600191EB4506F82E49AA80763394807F42",
+    "installed": {
+      "Family": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg",
+      "FullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "IsDevelopmentMode": false,
+      "Location": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "Status": "Ok"
+    },
+    "binaries": [
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.dll",
+        "sha256": "D4262C451C14A0753DE6F69609F3CDA29055C63AD37D06C471713200F86DFD53"
+      },
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperMod.Amiga.Lightweight.dll",
+        "sha256": "06E499FF908721E6FF800D652522C88E470985B568F1172C56558CF662DEF2B3"
+      },
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperDisk.dll",
+        "sha256": "0E7FA6B25AD38142E9EA0AB086A59BD7FD70FECB6F77CD818C551670F8EB1477"
+      },
+      {
+        "path": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      }
+    ]
+  },
+  "deploymentObservation": {
+    "IsDevelopmentMode": false,
+    "ObservedUtc": "2026-10-19T04:41:04.2969874Z",
+    "BaselineSha256": "F17FBD0ABB7D3F7FFA3C9743C830D0E1B085D094ED174A919638A90380FD93B0",
+    "PackageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+    "PackageStatus": "Ok",
+    "InstallLocation": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+    "UpdateSha256": "0604916E9D0AAC5799895ECDAC62CC600191EB4506F82E49AA80763394807F42"
+  },
+  "packageSpecificShutdownDuringUpdate": true,
+  "beforeUpdateFiles": {
+    "default/disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "default/profile.json": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D",
+    "default/last-machine.json": "FC7B3E4DD1865DAC3C30A7EE01A42BADF0F37B1501C5739445838121F12DB8E9",
+    "default/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A",
+    "priority/disk.hdf": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+    "priority/profile.json": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7",
+    "priority/last-machine.json": "566D4B386D2417A1BDEDC52777816F061FA8B46FA94FEC3BEE5CFE390CA93A7A",
+    "priority/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "afterUpdateBeforeActivationFiles": {
+    "default/disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "default/profile.json": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D",
+    "default/last-machine.json": "FC7B3E4DD1865DAC3C30A7EE01A42BADF0F37B1501C5739445838121F12DB8E9",
+    "default/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A",
+    "priority/disk.hdf": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+    "priority/profile.json": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7",
+    "priority/last-machine.json": "566D4B386D2417A1BDEDC52777816F061FA8B46FA94FEC3BEE5CFE390CA93A7A",
+    "priority/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "afterUpdatedReadbackFiles": {
+    "default/disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "default/profile.json": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D",
+    "default/last-machine.json": "FC7B3E4DD1865DAC3C30A7EE01A42BADF0F37B1501C5739445838121F12DB8E9",
+    "default/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A",
+    "priority/disk.hdf": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+    "priority/profile.json": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7",
+    "priority/last-machine.json": "566D4B386D2417A1BDEDC52777816F061FA8B46FA94FEC3BEE5CFE390CA93A7A",
+    "priority/recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "baselineImagesAndSettingsUnchangedThroughEntireRun": true,
+  "firmware": {
+    "qualificationId": "diskboot-2026-10-18-ffs-bitmap.1",
+    "producerCommit": "b45c2e4e50860f87e81e21d2a6e5c2a08e2631ad",
+    "bytes": 524288,
+    "sha256": "c77e51bbbab2d0f5edfc12b59094707279b2d1bc44e57b585857f1b56763c23b",
+    "requirements": "PAL A500, 68000, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM, one DD/HD drive; read-only DF0 floppy boot or an owned writable CopperOS DOS1 workspace. Optional existing hard disk image on unit 0: RDB-discovered FFS/DOS1 partitions or one explicit 512-byte FFS partition, including TD64 offsets above 4 GiB. RDB boot priorities select SYS:. No RTC, Fast RAM or shared folders.",
+    "evidence": "docs/COPPERSTART_FFS_BITMAP_2026-10-18.md",
+    "producerSourceSnapshot": "Recorded ffs-bitmap-20261018 producer sources: reconstructed Classic DOS profile with its original AdvanceTicks, native CopperHDF RDB/multiple FFS mounts, TD64 extents, sequential bitmap traversal and word allocation with cached page bounds. SFS recovery follows the native SFS-write profile. Core 493924 bytes; graphics 30099 bytes at $FF8A00. No NSD changes."
+  },
+  "originalFixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "phases": [
+    {
+      "UpdateStage": "baseline",
+      "phase": "write",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\default",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 97492,
+        "ElapsedSeconds": 51.1243393,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 1,
+          "sysIdentity": 2,
+          "cycle": 126755002,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        },
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 97481990,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-reset"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": true
+    },
+    {
+      "UpdateStage": "baseline",
+      "phase": "restart",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\default",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 102980,
+        "ElapsedSeconds": 54.955651,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 98050398,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "baseline",
+      "phase": "priority-write",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\priority",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 54660,
+        "ElapsedSeconds": 39.583117,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 1,
+          "sysIdentity": 1,
+          "cycle": 126044492,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "baseline",
+      "phase": "priority-restart",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\priority",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 29864,
+        "ElapsedSeconds": 35.0372593,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 1,
+          "cycle": 97908296,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-preserved",
+      "phase": "restart",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\default",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 45408,
+        "ElapsedSeconds": 41.34187,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 97481990,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-preserved",
+      "phase": "priority-restart",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\priority",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 95344,
+        "ElapsedSeconds": 36.7854008,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 1,
+          "cycle": 98334602,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-preserved",
+      "phase": "fresh",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\default-fresh",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 67136,
+        "ElapsedSeconds": 35.8558938,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "9DEF5F0B7B25441535695ABD800B7FED77FF0C86D6E64622B8C8B89005C6AD53",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 96771480,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-preserved",
+      "phase": "priority-fresh",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\priority-fresh",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 88748,
+        "ElapsedSeconds": 28.1132796,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "59BB01CE5AFB9790AD011C703A94D87BA605DB5C91CFF0E1AE553795A80D303F",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 1,
+          "cycle": 97908296,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": null,
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "write",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-default",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 83088,
+        "ElapsedSeconds": 47.8061324,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "223A6FE334ECACE4DD06BBAE15FAF7FC1CFC339EF3C6A571E0906012EDB941E4",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 1,
+          "sysIdentity": 2,
+          "cycle": 127039206,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        },
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 97481990,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-reset"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": true
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "restart",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-default",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 74796,
+        "ElapsedSeconds": 33.2148959,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "223A6FE334ECACE4DD06BBAE15FAF7FC1CFC339EF3C6A571E0906012EDB941E4",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 98334602,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "fresh",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-default-fresh",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 39412,
+        "ElapsedSeconds": 32.2039504,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "FF1F9BFBD7F2D665C2DAF0096363057DF421DAE87D6B3342E284161F1583B84D",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "savedSha256AfterWindowClose": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 96487276,
+          "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "priority-write",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-priority",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 45200,
+        "ElapsedSeconds": 38.052931,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "550B9894A2C27BD228E48CC676B69C5CA3E7573CB24091C5B3A89E514C863CAF",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 1,
+          "sysIdentity": 1,
+          "cycle": 125618186,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "priority-restart",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-priority",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 79544,
+        "ElapsedSeconds": 37.6880477,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "550B9894A2C27BD228E48CC676B69C5CA3E7573CB24091C5B3A89E514C863CAF",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 1,
+          "cycle": 96913582,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "priority-fresh",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-priority-fresh",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 112900,
+        "ElapsedSeconds": 32.5231311,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "4AA5E636E17E0593B7E6AE6BBB3DBC222F0FF34CD467583A75FD61C5CFD1BD12",
+      "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+      "liveSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "savedSha256AfterWindowClose": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+      "guestFlushBeforeHostSave": true,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 1,
+          "cycle": 96771480,
+          "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": false
+    },
+    {
+      "UpdateStage": "updated-writes",
+      "phase": "protected",
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\ef78ae9aea114bc5a18b56220a60c510\\post-update-protected",
+      "windowOpened": true,
+      "elevated": false,
+      "engine": "Lightweight",
+      "hostDosCalls": false,
+      "HostProcess": {
+        "Executable": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.46.0_x64__a0cyw3gffeccg\\CopperScreen.exe",
+        "Id": 40700,
+        "ElapsedSeconds": 29.4623237,
+        "ExitCode": 0
+      },
+      "profileSha256Before": "6EAF2BA0DCA7712E778FBA5DBEF8C07D1011569FC4EC7FB2BCC5D0E66D73DA5D",
+      "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "liveSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "savedSha256AfterWindowClose": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+      "guestFlushBeforeHostSave": false,
+      "hostSaveAdvancedCycles": false,
+      "observations": [
+        {
+          "phase": 2,
+          "sysIdentity": 2,
+          "cycle": 88671666,
+          "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+          "snapshot": "-live"
+        }
+      ],
+      "scenario": "post-update",
+      "resetReadback": false
+    }
+  ],
+  "completionAudit": {
+    "protocol": "copperscreen-installed-rdb-update-audit-v1",
+    "passed": true,
+    "fullRomPhases": 15,
+    "resetRomBoots": 17,
+    "stageCounts": {
+      "baseline": 4,
+      "updated-preserved": 4,
+      "updated-writes": 7
+    },
+    "processIds": [
+      97492,
+      102980,
+      54660,
+      29864,
+      45408,
+      95344,
+      67136,
+      88748,
+      83088,
+      74796,
+      39412,
+      45200,
+      79544,
+      112900,
+      40700
+    ],
+    "allEightPersistedFilesUnchanged": true,
+    "bothBootSelectionsBeforeAndAfterUpdate": true,
+    "newWritesInUpdatedApp": true,
+    "freshProtectedReadbacks": 4,
+    "rawObservations": [
+      {
+        "stage": "baseline",
+        "phase": "write",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "baseline",
+        "phase": "write",
+        "snapshot": "-reset",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "baseline",
+        "phase": "restart",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "baseline",
+        "phase": "priority-write",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "baseline",
+        "phase": "priority-restart",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "updated-preserved",
+        "phase": "restart",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "updated-preserved",
+        "phase": "priority-restart",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "updated-preserved",
+        "phase": "fresh",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "updated-preserved",
+        "phase": "priority-fresh",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "write",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "write",
+        "snapshot": "-reset",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "restart",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "fresh",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "priority-write",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "priority-restart",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "priority-fresh",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "stage": "updated-writes",
+        "phase": "protected",
+        "snapshot": "-live",
+        "rawReceiptVerified": true,
+        "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE"
+      }
+    ]
+  },
+  "independentAuditScript": {
+    "path": "artifacts/rdb-update-installed-20261019/audit-update.py",
+    "sha256": "278148E2FF5055A150FB077AEF52CCB73D7C26CCF399C0A144D85023C39F5E49"
+  },
+  "productionBuild": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "log": "artifacts/rdb-update-installed-20261019/production-build.log"
+  },
+  "diagnosticBoundary": {
+    "Passed": true,
+    "UpdateAssemblySha256": "D4262C451C14A0753DE6F69609F3CDA29055C63AD37D06C471713200F86DFD53",
+    "UpdateDiagnosticContainsObservers": true,
+    "NormalProductionContainsObservers": false,
+    "ProductionAssemblySha256": "8FDF9198A6DD35A7FDD17773721FD59ACEE63E8339D6525DD2D1826401B134E1"
+  },
+  "ownedRegistrationRemoved": true,
+  "privateDataRetained": true,
+  "sources": {
+    "scope": "Relevant update-procedure sources retained after build. Exact installed binary hashes are authoritative; baseline source evidence remains with the earlier installed qualification.",
+    "sources": [
+      {
+        "path": "scripts/test-msix-rdb-update.ps1",
+        "sha256": "899D1B9F39EC88D34D2F4BD79538C98AA446E36D4ED26E80E7B0D201FB7D940F"
+      },
+      {
+        "path": "CopperScreen/Diagnostics/CopperScreenInstalledRdbProof.cs",
+        "sha256": "FC42A611B8AEC3F836A34AA4A6D6B526A5123A4F2BB8F32FDD46E36BF0268B23"
+      },
+      {
+        "path": "CopperScreen/Diagnostics/CopperScreenRdbImageProof.cs",
+        "sha256": "726B60C77B19804C9A3DEB60FB8BF713D82B3ACCD7E66E36C80CC40CD9A0042F"
+      },
+      {
+        "path": "CopperScreen/CopperScreenSettings.cs",
+        "sha256": "F76BFA139C53EE3DF3BAE63962AC26B18DDD1D278719306CEFD07B629A552962"
+      },
+      {
+        "path": "CopperScreen/Program.cs",
+        "sha256": "BD63A20C5A03260EACF394CDA997D7C8E5399DC0864DA69BA09B747B45A23393"
+      },
+      {
+        "path": "CopperScreen/App.cs",
+        "sha256": "16C00B81D612A235822A78C3DFFCEB7B1776F858364927A85C27A3DE8A8F3D86"
+      },
+      {
+        "path": "CopperScreen/CopperScreen.csproj",
+        "sha256": "EDAD2B0CFA8141864B7838CB4B9BC78188409BA6B36055D8BCAE187D2A170885"
+      },
+      {
+        "path": "CopperScreen/Firmware/CopperStart.json",
+        "sha256": "2F15C0B33A69532020A51389D618C912E72B50EAE253323D04857CE8F5E2D5A6"
+      },
+      {
+        "path": "scripts/msix/CopperScreen.Msix.psm1",
+        "sha256": "BD32066CA7717AC84441D86A48001CBA1C8EF043FD29CE769433955B62ECECFF"
+      },
+      {
+        "path": "scripts/package-msix.ps1",
+        "sha256": "BCC5500714FAA0EFC48B1A528176D5EAD5C801DDF0B35DDDCB980CA953AF9D09"
+      }
+    ]
+  },
+  "retainedArtifacts": [
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-restart-live.chipram",
+      "bytes": 524288,
+      "sha256": "9744734FADED2E0CC9B7B3E08E50E411E2536A2C6E378002FE555E568F406AD0"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-restart-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-restart-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-restart-live.slowram",
+      "bytes": 524288,
+      "sha256": "9E761D7F55D91E702C230577A01687A1DC3B0893C572CCEC3768D4F55090CFB5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-restart-request.json",
+      "bytes": 508,
+      "sha256": "A74ADF76967E5C268EA12C43B4C73453D3FD17937A67BC6B0D7178CA4F885FC3"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-restart.json",
+      "bytes": 10742,
+      "sha256": "95DE21EE1F525FD9DDDF6C742930F4A3A53B08A712BB07B758DEA261010A5B2B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-write-live.chipram",
+      "bytes": 524288,
+      "sha256": "2D754CD850170D294D0EA089AA98F0E7DA8E2AABFB16D4D368185C8EDAB69D32"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-write-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-write-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-write-live.slowram",
+      "bytes": 524288,
+      "sha256": "7036994922D38F4095760F45615B5B192DCE6E84581233EA1CB4FEC15D14E1D2"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-write-request.json",
+      "bytes": 506,
+      "sha256": "34CD675E103236E77637D35B037C6AF3795948A753399B18382D0C68693DEB2C"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/priority-write.json",
+      "bytes": 10763,
+      "sha256": "8496225EF4997352236005A22D7187800BBE7D71FEAF19C261C06567CA72AE6B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/restart-live.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/restart-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/restart-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/restart-live.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/restart-request.json",
+      "bytes": 499,
+      "sha256": "05DBB00A55B6E504FBD9880A577911836D1690450DEE3E0E741E44AE5B91C2FB"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/restart.json",
+      "bytes": 10734,
+      "sha256": "8D36C4E7B0AA376D3B0F275841F45D721BF1ACA168CC7E3FD4EB7A222E7E1F9A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-live.chipram",
+      "bytes": 524288,
+      "sha256": "561FA954C2C4F5CAB0C54CA80AAE1CA5D033C64064DDC7704B4C1208D6E6F112"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-live.slowram",
+      "bytes": 524288,
+      "sha256": "829FA1776FA0FB01B361BB58AEA7C3032F2CE640EE62180B9FDC638017FF57F8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-request.json",
+      "bytes": 497,
+      "sha256": "71D81A7FB527EE1FDDF77A68D2F6F1605839E56BD96493B3035EE9B47AAE09CE"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-reset.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-reset.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-reset.png",
+      "bytes": 21389,
+      "sha256": "888711E7BDDC0040A42E7435AD0FCEDD174FBD54DDD21BDFD7C4F26A6FD97DD8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write-reset.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/baseline/write.json",
+      "bytes": 10981,
+      "sha256": "4320365A8FA75165297D65FF9C8D30AE55ABAB85E5BE8A6A6364113B88B340A9"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/last-machine.json",
+      "bytes": 1806,
+      "sha256": "FC7B3E4DD1865DAC3C30A7EE01A42BADF0F37B1501C5739445838121F12DB8E9"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/Logs/CopperScreen-20261019-073701-97492.log",
+      "bytes": 16214,
+      "sha256": "6B87FB9D8EC03F25F4D241601CE5BE5D07E59AF0783A14D6874EE9DFDCE21CAF"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/Logs/CopperScreen-20261019-073758-102980.log",
+      "bytes": 8311,
+      "sha256": "3C49818F9C0166775E60CF7F06C1F0D815ECC225726E48D792404D945F735210"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/Logs/latest.log",
+      "bytes": 8311,
+      "sha256": "3C49818F9C0166775E60CF7F06C1F0D815ECC225726E48D792404D945F735210"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/profile.json",
+      "bytes": 1475,
+      "sha256": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/default/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/last-machine.json",
+      "bytes": 1807,
+      "sha256": "566D4B386D2417A1BDEDC52777816F061FA8B46FA94FEC3BEE5CFE390CA93A7A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/Logs/CopperScreen-20261019-073852-54660.log",
+      "bytes": 9469,
+      "sha256": "9B0319819465F1607B3646985046A1F1C7E4FC1A3AED869C841A4F8CF5408C44"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/Logs/CopperScreen-20261019-073933-29864.log",
+      "bytes": 7348,
+      "sha256": "CB18ED9B968C8A3866C8DDD36E94FCF7307EA2AD51AA819B0B20BC4E589DCF03"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/Logs/latest.log",
+      "bytes": 7348,
+      "sha256": "CB18ED9B968C8A3866C8DDD36E94FCF7307EA2AD51AA819B0B20BC4E589DCF03"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/profile.json",
+      "bytes": 1476,
+      "sha256": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/before-update-private-data/priority/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/installed-rdb-update-record.json",
+      "bytes": 193739,
+      "sha256": "A64E1E5D1F50BA8C85769F573AB273F160382D3F0D02A6545D869D71FBB00AF5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/last-machine.json",
+      "bytes": 1806,
+      "sha256": "FC7B3E4DD1865DAC3C30A7EE01A42BADF0F37B1501C5739445838121F12DB8E9"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/Logs/CopperScreen-20261019-073701-97492.log",
+      "bytes": 16214,
+      "sha256": "6B87FB9D8EC03F25F4D241601CE5BE5D07E59AF0783A14D6874EE9DFDCE21CAF"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/Logs/CopperScreen-20261019-073758-102980.log",
+      "bytes": 8311,
+      "sha256": "3C49818F9C0166775E60CF7F06C1F0D815ECC225726E48D792404D945F735210"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/Logs/CopperScreen-20261019-074018-45408.log",
+      "bytes": 8307,
+      "sha256": "1DA71EFCC2650C4D2FF025327BF0154281BDA0F40A1855CE942CA5D2E4E035FF"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/Logs/latest.log",
+      "bytes": 8307,
+      "sha256": "1DA71EFCC2650C4D2FF025327BF0154281BDA0F40A1855CE942CA5D2E4E035FF"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/profile.json",
+      "bytes": 1475,
+      "sha256": "8D73F38957472C9FA39A56E77AF9D90969F43BA704F90166E72BEFD50F41BB6D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default-fresh/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default-fresh/last-machine.json",
+      "bytes": 1480,
+      "sha256": "9DEF5F0B7B25441535695ABD800B7FED77FF0C86D6E64622B8C8B89005C6AD53"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default-fresh/Logs/CopperScreen-20261019-074139-67136.log",
+      "bytes": 7555,
+      "sha256": "34065572F6C111823DBEB6724D56B4530D2F395CEC28E1BDEA7C2A977AB32B14"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default-fresh/Logs/latest.log",
+      "bytes": 7555,
+      "sha256": "34065572F6C111823DBEB6724D56B4530D2F395CEC28E1BDEA7C2A977AB32B14"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default-fresh/profile.json",
+      "bytes": 1480,
+      "sha256": "9DEF5F0B7B25441535695ABD800B7FED77FF0C86D6E64622B8C8B89005C6AD53"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/default-fresh/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/last-machine.json",
+      "bytes": 1818,
+      "sha256": "B3861CD6A65E45B27F8C7DFFD4239298E5640964981C67E785BD03F21F7DB0C5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/Logs/CopperScreen-20261019-074244-83088.log",
+      "bytes": 16237,
+      "sha256": "AA47E4DF88B6107DBDF90E970CB33904BC0A932553EBCD097D23B81C1E6389E4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/Logs/CopperScreen-20261019-074333-74796.log",
+      "bytes": 8319,
+      "sha256": "C13C1C07BADC88FB5079A7CAE5DF81D6934EB28A901AF19C5C3DA09CA23B212D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/Logs/latest.log",
+      "bytes": 8319,
+      "sha256": "C13C1C07BADC88FB5079A7CAE5DF81D6934EB28A901AF19C5C3DA09CA23B212D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/profile.json",
+      "bytes": 1487,
+      "sha256": "223A6FE334ECACE4DD06BBAE15FAF7FC1CFC339EF3C6A571E0906012EDB941E4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default-fresh/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default-fresh/last-machine.json",
+      "bytes": 1492,
+      "sha256": "FF1F9BFBD7F2D665C2DAF0096363057DF421DAE87D6B3342E284161F1583B84D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default-fresh/Logs/CopperScreen-20261019-074410-39412.log",
+      "bytes": 7580,
+      "sha256": "3771F9DE73AC2C35D1B48B3EB1CEE4EAB3B268F5609B7A8B7669DCDF0196DB0C"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default-fresh/Logs/latest.log",
+      "bytes": 7580,
+      "sha256": "3771F9DE73AC2C35D1B48B3EB1CEE4EAB3B268F5609B7A8B7669DCDF0196DB0C"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default-fresh/profile.json",
+      "bytes": 1492,
+      "sha256": "FF1F9BFBD7F2D665C2DAF0096363057DF421DAE87D6B3342E284161F1583B84D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-default-fresh/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/last-machine.json",
+      "bytes": 1819,
+      "sha256": "3A30879FBCB437ABB053A00EFCDE108D41A4B48FF176E6BA5C84D1153B636C5D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/Logs/CopperScreen-20261019-074443-45200.log",
+      "bytes": 9496,
+      "sha256": "CD168655B5F1EB7FE47458082E9BDC0E294004EA770E8F263ECFE03E6CEA29FA"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/Logs/CopperScreen-20261019-074524-79544.log",
+      "bytes": 7360,
+      "sha256": "13528E1B3EF65A1422223B710E7EA9B4A725E1FA1F90F2FDF14A3690245214DE"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/Logs/latest.log",
+      "bytes": 7360,
+      "sha256": "13528E1B3EF65A1422223B710E7EA9B4A725E1FA1F90F2FDF14A3690245214DE"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/profile.json",
+      "bytes": 1488,
+      "sha256": "550B9894A2C27BD228E48CC676B69C5CA3E7573CB24091C5B3A89E514C863CAF"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority-fresh/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority-fresh/last-machine.json",
+      "bytes": 1493,
+      "sha256": "4AA5E636E17E0593B7E6AE6BBB3DBC222F0FF34CD467583A75FD61C5CFD1BD12"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority-fresh/Logs/CopperScreen-20261019-074603-112900.log",
+      "bytes": 7583,
+      "sha256": "8346FA6C8862F83ACA1AA92B352D3703AEF70BBDBD1B1D6340EB1FB9C81B251F"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority-fresh/Logs/latest.log",
+      "bytes": 7583,
+      "sha256": "8346FA6C8862F83ACA1AA92B352D3703AEF70BBDBD1B1D6340EB1FB9C81B251F"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority-fresh/profile.json",
+      "bytes": 1493,
+      "sha256": "4AA5E636E17E0593B7E6AE6BBB3DBC222F0FF34CD467583A75FD61C5CFD1BD12"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-priority-fresh/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-protected/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-protected/last-machine.json",
+      "bytes": 1488,
+      "sha256": "6EAF2BA0DCA7712E778FBA5DBEF8C07D1011569FC4EC7FB2BCC5D0E66D73DA5D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-protected/Logs/CopperScreen-20261019-074636-40700.log",
+      "bytes": 7571,
+      "sha256": "E9649FDEBCE78DE175704581FFC4BF381504D7273360A14BDA999946230C1BCA"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-protected/Logs/latest.log",
+      "bytes": 7571,
+      "sha256": "E9649FDEBCE78DE175704581FFC4BF381504D7273360A14BDA999946230C1BCA"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-protected/profile.json",
+      "bytes": 1488,
+      "sha256": "6EAF2BA0DCA7712E778FBA5DBEF8C07D1011569FC4EC7FB2BCC5D0E66D73DA5D"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/post-update-protected/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/last-machine.json",
+      "bytes": 1807,
+      "sha256": "566D4B386D2417A1BDEDC52777816F061FA8B46FA94FEC3BEE5CFE390CA93A7A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/Logs/CopperScreen-20261019-073852-54660.log",
+      "bytes": 9469,
+      "sha256": "9B0319819465F1607B3646985046A1F1C7E4FC1A3AED869C841A4F8CF5408C44"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/Logs/CopperScreen-20261019-073933-29864.log",
+      "bytes": 7348,
+      "sha256": "CB18ED9B968C8A3866C8DDD36E94FCF7307EA2AD51AA819B0B20BC4E589DCF03"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/Logs/CopperScreen-20261019-074100-95344.log",
+      "bytes": 8309,
+      "sha256": "16477B9B0E65716FF227BDA9699C0E39A5C4A9FEB2FCF0475D6D97FF0BAB06D4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/Logs/latest.log",
+      "bytes": 8309,
+      "sha256": "16477B9B0E65716FF227BDA9699C0E39A5C4A9FEB2FCF0475D6D97FF0BAB06D4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/profile.json",
+      "bytes": 1476,
+      "sha256": "1C05212F97C0F0DC407643F0F69BEE573414332A1B464D920A2981E1C8FF6AD7"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority-fresh/disk.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority-fresh/last-machine.json",
+      "bytes": 1481,
+      "sha256": "59BB01CE5AFB9790AD011C703A94D87BA605DB5C91CFF0E1AE553795A80D303F"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority-fresh/Logs/CopperScreen-20261019-074215-88748.log",
+      "bytes": 7557,
+      "sha256": "F595A797C08C4823150DB9997DB9EB9E5BAB4D42830789256E07E8B0A0CFFDF4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority-fresh/Logs/latest.log",
+      "bytes": 7557,
+      "sha256": "F595A797C08C4823150DB9997DB9EB9E5BAB4D42830789256E07E8B0A0CFFDF4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority-fresh/profile.json",
+      "bytes": 1481,
+      "sha256": "59BB01CE5AFB9790AD011C703A94D87BA605DB5C91CFF0E1AE553795A80D303F"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/package-private-data/priority-fresh/recent-session.json",
+      "bytes": 56,
+      "sha256": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/progress.json",
+      "bytes": 236,
+      "sha256": "E8AFB57927E8F1BE905DB1220D1B95CE213D6DA5C115EBED4AE5E627A7EE350A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/fresh-live.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/fresh-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/fresh-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/fresh-live.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/fresh-request.json",
+      "bytes": 506,
+      "sha256": "A062A597DB2DB40744B7AF4FF53D478CDC28E3D49FE514744B64283A675F32A7"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/fresh.json",
+      "bytes": 10772,
+      "sha256": "7E046D0AA869EF37373C5EBFFF2289107D755140821C7AEEC66A3102A172C3D2"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-fresh-live.chipram",
+      "bytes": 524288,
+      "sha256": "9744734FADED2E0CC9B7B3E08E50E411E2536A2C6E378002FE555E568F406AD0"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-fresh-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-fresh-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-fresh-live.slowram",
+      "bytes": 524288,
+      "sha256": "9E761D7F55D91E702C230577A01687A1DC3B0893C572CCEC3768D4F55090CFB5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-fresh-request.json",
+      "bytes": 515,
+      "sha256": "F2D2146422CC3091032783327DF9FDD7C40F658434EF89E1A4B5AADECC21C9F8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-fresh.json",
+      "bytes": 10782,
+      "sha256": "B9F6A14D96DCC2B1D951A7D83AA44555742790CA3240536B9448557B0FED5CF1"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-restart-live.chipram",
+      "bytes": 524288,
+      "sha256": "9744734FADED2E0CC9B7B3E08E50E411E2536A2C6E378002FE555E568F406AD0"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-restart-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-restart-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-restart-live.slowram",
+      "bytes": 524288,
+      "sha256": "9E761D7F55D91E702C230577A01687A1DC3B0893C572CCEC3768D4F55090CFB5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-restart-request.json",
+      "bytes": 517,
+      "sha256": "A4C9337E4C0A93F364022A56284E0314716C80ED819C2B527376C3566BEC7FA2"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-restart.json",
+      "bytes": 10764,
+      "sha256": "BFA41FA32D4DD00E5C3E06F957BD9963EBB35F8D9B095DFC8FFDB90959AE8828"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/priority-write-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/restart-live.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/restart-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/restart-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/restart-live.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/restart-request.json",
+      "bytes": 508,
+      "sha256": "5AF54F721ABE4326C253EBEEE752C934AFF0BF9CD3132C4FE59C908E4EA1C96A"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/restart.json",
+      "bytes": 10754,
+      "sha256": "01E97790A8DFD0DC42AA59BDAF8CBDDFB0C2C1DCBA0EA8FD7C7AA8C211146E64"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-preserved/write-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/fresh-live.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/fresh-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/fresh-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/fresh-live.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/fresh-request.json",
+      "bytes": 512,
+      "sha256": "BCF7532C35DDD52477E6A0B4A7B60884754D78D5CD79621381349D327C2FEB41"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/fresh.json",
+      "bytes": 10795,
+      "sha256": "7B19AE835872E7E842D58DB4D287A5084685ADCEB093D6296C79E0C3EBA2F92E"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-fresh-live.chipram",
+      "bytes": 524288,
+      "sha256": "9744734FADED2E0CC9B7B3E08E50E411E2536A2C6E378002FE555E568F406AD0"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-fresh-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-fresh-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-fresh-live.slowram",
+      "bytes": 524288,
+      "sha256": "9E761D7F55D91E702C230577A01687A1DC3B0893C572CCEC3768D4F55090CFB5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-fresh-request.json",
+      "bytes": 521,
+      "sha256": "F42776A53434F44200D48240B56BE48CA97949FBAD7EA26D1D1652B8A618C15C"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-fresh.json",
+      "bytes": 10804,
+      "sha256": "18E42A49C416324ADF76F9FB0B35F73FA6EB29A57F027BAEF50ECAE7388639D7"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-restart-live.chipram",
+      "bytes": 524288,
+      "sha256": "9744734FADED2E0CC9B7B3E08E50E411E2536A2C6E378002FE555E568F406AD0"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-restart-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-restart-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-restart-live.slowram",
+      "bytes": 524288,
+      "sha256": "9E761D7F55D91E702C230577A01687A1DC3B0893C572CCEC3768D4F55090CFB5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-restart-request.json",
+      "bytes": 523,
+      "sha256": "83EBD4C209FEFBA5F4947B97AFB53A250631AFD480C43656E0F0E317BAD9D276"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-restart.json",
+      "bytes": 10785,
+      "sha256": "F36ECBE40D54E64B84004B122EA4881A0E78C528DE94706A1DA678E9B74302A8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-write-live.chipram",
+      "bytes": 524288,
+      "sha256": "2D754CD850170D294D0EA089AA98F0E7DA8E2AABFB16D4D368185C8EDAB69D32"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-write-live.hdf",
+      "bytes": 3768320,
+      "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-write-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-write-live.slowram",
+      "bytes": 524288,
+      "sha256": "7036994922D38F4095760F45615B5B192DCE6E84581233EA1CB4FEC15D14E1D2"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-write-request.json",
+      "bytes": 521,
+      "sha256": "D9BF16A654C41556CF60A85319E60C4ED62239A52E6E7CDA13F95299CFE7DFB7"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/priority-write.json",
+      "bytes": 10800,
+      "sha256": "F7CC5AE43EAE6265312F44944B1477FAE38A3CD9FF62FED876946CA46695FDDC"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/protected-live.chipram",
+      "bytes": 524288,
+      "sha256": "378B54B4C29172A5BEBF659D90EFF2B792591AADCC51E57B5D451FBC581B7EC4"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/protected-live.hdf",
+      "bytes": 3768320,
+      "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/protected-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/protected-live.slowram",
+      "bytes": 524288,
+      "sha256": "6540F1956801B9585C75C2951575913135274DEFC49491D50F613C1F47852C64"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/protected-request.json",
+      "bytes": 516,
+      "sha256": "44A1A49EE1A3749E53FB98630EA1723BE6A9726776CB368DA79151B6366F81A8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/protected.json",
+      "bytes": 10796,
+      "sha256": "193244E17603444FC9A12F384576776978A8FE4770E6FF29723CB217A02951B7"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/restart-live.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/restart-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/restart-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/restart-live.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/restart-request.json",
+      "bytes": 514,
+      "sha256": "39E000551E9AABF7578D550C0D7CF756A6A2290E04505C4566763B5ABFAEA078"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/restart.json",
+      "bytes": 10775,
+      "sha256": "895508260305E5CF329F817C665B98B105E7E6683F4F7D9D86CFAACC0FDF98FC"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-live.chipram",
+      "bytes": 524288,
+      "sha256": "561FA954C2C4F5CAB0C54CA80AAE1CA5D033C64064DDC7704B4C1208D6E6F112"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-live.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-live.png",
+      "bytes": 21316,
+      "sha256": "8F9E08A4733BB5542924654B8B7533CA456C35D6F2A181B5A8CCEB06283EC40B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-live.slowram",
+      "bytes": 524288,
+      "sha256": "829FA1776FA0FB01B361BB58AEA7C3032F2CE640EE62180B9FDC638017FF57F8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-request.json",
+      "bytes": 512,
+      "sha256": "B58529118F17B4F8D80D5466597DB415CD242C72D9FFF3982C61719F470C661B"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-reset.chipram",
+      "bytes": 524288,
+      "sha256": "1AA8AB83AE7F37FC999E52B37464C0E7060B0C415FF40AB4257633F5597785F5"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-reset.hdf",
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-reset.png",
+      "bytes": 21389,
+      "sha256": "888711E7BDDC0040A42E7435AD0FCEDD174FBD54DDD21BDFD7C4F26A6FD97DD8"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write-reset.slowram",
+      "bytes": 524288,
+      "sha256": "CD4CA6932DB93AC25ACBE0B8399CBAD5B74EFB80B988179029104B29AEDE3901"
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-accepted/updated-writes/write.json",
+      "bytes": 11019,
+      "sha256": "D4F6EAF613A0C4D5D8C280BB96FE4F7CE0ACEBD570B31C9E40FCFA90D3308A67"
+    }
+  ],
+  "earlierRejectedAttempts": [
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed/installed-rdb-update-record.json",
+      "sha256": "40A0E502AA83909BA5504AC98219820E0E57EDABB24311BAF761010598E3CB79",
+      "status": "FAIL",
+      "error": "System.Management.Automation.RuntimeException: Activated process is not running from this WindowsApps package.",
+      "acceptedCounts": false,
+      "ownedRegistrationRemoved": true
+    },
+    {
+      "path": "artifacts/rdb-update-installed-20261019/installed-final/installed-rdb-update-record.json",
+      "sha256": "7B37BF990C1BD50657D8216EEA8495AEC99EA241A49A7EC773FA46A4A4C67DD4",
+      "status": "FAIL",
+      "error": "System.Exception: Deployment failed with HRESULT: 0x80073D02, Pakettia ei voitu asentaa, koska sen muokkaamat resurssit ovat parhaillaan k\u00e4yt\u00f6ss\u00e4.\r\n\r\nerror 0x80073D02: Unable to install because the following apps need to be closed CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg.\n\nNOTE: For additional information, look for [ActivityId] 1dd1349c-5e3f-0001-4269-38223f5edd01 in the Event Log or use the command line Get-AppPackageLog -ActivityID 1dd1349c-5e3f-0001-4269-38223f5edd01\n\r\n ---> Microsoft.Windows.Appx.PackageManager.Commands.AppxException: error 0x80073D02: Unable to install because the following apps need to be closed CopperScreen.Test.ef78ae9aea114bc5a18b56220a60c510_1.1.45.0_x64__a0cyw3gffeccg.\r\n   --- End of inner exception stack trace ---",
+      "acceptedCounts": false,
+      "ownedRegistrationRemoved": true
+    }
+  ],
+  "baselineQualification": "docs/COPPERSTART_RDB_INSTALLED_2026-10-19.json",
+  "reproduce": "scripts/test-msix-rdb-update.ps1 -BaselinePackage <signed baseline> -UpdatePackage <newer same-identity signed update> -RomPath <pinned raw ROM> -RdbFixturePath <original rdb-both-written.hdf> -OutputDirectory <new directory>"
+}

@@ -1,0 +1,673 @@
+{
+  "qualificationId": "diskboot-2026-10-18-td64.1",
+  "sysSelection": [
+    "DH1 priority +5 / DH0 -128",
+    "DH0 priority +5 / DH1 -128"
+  ],
+  "runnerBoots": 5,
+  "payloadBytesPerPartition": 2049,
+  "freshProtectedReadback": true,
+  "passed": true,
+  "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+  "machineBoots": 11,
+  "readOnlyMutationControls": 2,
+  "protocol": "copperstart-frontend-rdb-writes-v1",
+  "ffsPartitions": 2,
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "fullRomCases": 6,
+  "hostSemanticCases": 0,
+  "compiledMc68000Cases": 0,
+  "guestFlushBeforeHostSaveOrDispose": true,
+  "reset": true,
+  "processRestart": true,
+  "runnerSha256": "FDEF8799074AECA0710F4636EC5745D4DC33DE292E674C000DE96EAC05554901",
+  "sessionReplacement": true,
+  "installedPackage": "UNAVAILABLE: source app/runtime and runner only",
+  "appBoots": 6,
+  "date": "2026-10-18",
+  "failures": 0,
+  "skips": 0,
+  "productionBuild": {
+    "command": "dotnet build CopperScreen.slnx -c Release -m:1 --artifacts-path artifacts/rdb-frontend-writes-20261018/production-build",
+    "passed": true,
+    "warnings": 0,
+    "errors": 0
+  },
+  "scope": "Source application runtime and actual runner processes; no installed-package/UI replay, power-loss, hardware timing or throughput acceptance.",
+  "productionChangesRequired": false,
+  "inputs": {
+    "rom": {
+      "bytes": 524288,
+      "sha256": "199685F8AA9BEBE7D1879F12E5C7D37A88B85AB7752FCA48AF30C9CEDAC97AD0"
+    },
+    "originalRdbFixture": {
+      "bytes": 3768320,
+      "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+    }
+  },
+  "cases": [
+    {
+      "name": "CopperScreen.Tests.CopperStartRdbWriteTests.AppWritesGuestFlushHostSaveResetReplacementAndFreshBootReadback",
+      "outcome": "Passed",
+      "duration": "00:00:59.0064667"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartRdbWriteTests.CommandLineWritesFlushBeforeExitRestartAndFreshProtectedBootReadback",
+      "outcome": "Passed",
+      "duration": "00:00:38.8801052"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartRdbWriteTests.RunnerReversedBootPrioritiesSelectDh0AndWriteBothVolumes",
+      "outcome": "Passed",
+      "duration": "00:00:22.7427669"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartRdbWriteTests.AppProtectedPristinePartitionRejectsFirstMutationWithoutChangingBacking",
+      "outcome": "Passed",
+      "duration": "00:00:13.9502576"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartRdbWriteTests.CommandLineProtectedPristinePartitionRejectsWritesWithoutChangingBacking",
+      "outcome": "Passed",
+      "duration": "00:00:16.0519993"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartRdbWriteTests.AppReversedBootPrioritiesSelectDh0AndWriteBothVolumes",
+      "outcome": "Passed",
+      "duration": "00:00:19.2026958"
+    }
+  ],
+  "binaries": [
+    {
+      "frontend": "app-runtime",
+      "name": "CopperScreen.dll",
+      "sha256": "43639E67D69A851F50279227C6EACBE046DD60EF1926C8442E9C3EC80446C3BC"
+    },
+    {
+      "frontend": "app-runtime",
+      "name": "CopperScreen.Lightweight.Tests.dll",
+      "sha256": "552304233EA1CF79413BE6F78580A6CEA47E106CE9C8F2E483810F70EF3CEE93"
+    },
+    {
+      "frontend": "app-runtime",
+      "name": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "C00612DA29BD113E5766CC2CF9D59466492317110EE7CE7876DF5C81C0B73645"
+    },
+    {
+      "frontend": "app-runtime",
+      "name": "CopperDisk.dll",
+      "sha256": "997D665FF16AD24456423BBBD3A3C653B77FFF3AC5349A78AB7EB5AB0FFE970C"
+    },
+    {
+      "frontend": "app-runtime",
+      "name": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "frontend": "runner",
+      "name": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "FDEF8799074AECA0710F4636EC5745D4DC33DE292E674C000DE96EAC05554901"
+    },
+    {
+      "frontend": "runner",
+      "name": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "AF5C30B041BC264DCE0E5B27255159D42F5BCA0E3E0E35F0DDAD53B63CFF6F27"
+    },
+    {
+      "frontend": "runner",
+      "name": "CopperDisk.dll",
+      "sha256": "E314FB1C1FF13BB63FD7D565793A3E890952DCD39E439E8963EB88FE7DA83FE8"
+    },
+    {
+      "frontend": "runner",
+      "name": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    }
+  ],
+  "nativeResults": {
+    "app": {
+      "protocol": "copperstart-frontend-rdb-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "frontend": "app-runtime",
+        "boots": 4,
+        "partitions": 2,
+        "sysIdentity": 2,
+        "payloadBytesPerPartition": 2049,
+        "guestCmdUpdateBeforeHostSave": true,
+        "hostSaveSucceeded": true,
+        "hostSaveAdvancedCycles": false,
+        "reset": true,
+        "sessionReplacement": true,
+        "freshProtectedBoot": true,
+        "profileAndLastMachineRestored": true,
+        "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+        "savedSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "43639E67D69A851F50279227C6EACBE046DD60EF1926C8442E9C3EC80446C3BC"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "C00612DA29BD113E5766CC2CF9D59466492317110EE7CE7876DF5C81C0B73645"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "997D665FF16AD24456423BBBD3A3C653B77FFF3AC5349A78AB7EB5AB0FFE970C"
+        }
+      ]
+    },
+    "app-reversed-priority": {
+      "protocol": "copperstart-frontend-rdb-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 1,
+        "sysIdentity": 1,
+        "partitions": 2,
+        "guestCmdUpdateBeforeHostSave": true,
+        "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+        "savedSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "43639E67D69A851F50279227C6EACBE046DD60EF1926C8442E9C3EC80446C3BC"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "C00612DA29BD113E5766CC2CF9D59466492317110EE7CE7876DF5C81C0B73645"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "997D665FF16AD24456423BBBD3A3C653B77FFF3AC5349A78AB7EB5AB0FFE970C"
+        }
+      ]
+    },
+    "runner": {
+      "protocol": "copperstart-frontend-rdb-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "frontend": "command-line-process",
+        "boots": 3,
+        "partitions": 2,
+        "sysIdentity": 2,
+        "payloadBytesPerPartition": 2049,
+        "guestCmdUpdateBeforeExit": true,
+        "liveBackingSnapshotWithoutHostFlush": true,
+        "writableProcessRestart": true,
+        "freshProtectedBoot": true,
+        "pristineSha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE",
+        "savedSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+        "runnerSha256": "FDEF8799074AECA0710F4636EC5745D4DC33DE292E674C000DE96EAC05554901"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "43639E67D69A851F50279227C6EACBE046DD60EF1926C8442E9C3EC80446C3BC"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "C00612DA29BD113E5766CC2CF9D59466492317110EE7CE7876DF5C81C0B73645"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "997D665FF16AD24456423BBBD3A3C653B77FFF3AC5349A78AB7EB5AB0FFE970C"
+        }
+      ]
+    },
+    "runner-reversed-priority": {
+      "protocol": "copperstart-frontend-rdb-writes-v1",
+      "firmware": "diskboot-2026-10-18-td64.1",
+      "romSha256": "199685f8aa9bebe7d1879f12e5c7d37a88b85ab7752fca48af30c9cedac97ad0",
+      "result": {
+        "passed": true,
+        "boots": 1,
+        "sysIdentity": 1,
+        "partitions": 2,
+        "liveBackingSnapshotWithoutHostFlush": true,
+        "pristineSha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5",
+        "savedSha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      "binaries": [
+        {
+          "name": "CopperScreen.dll",
+          "sha256": "43639E67D69A851F50279227C6EACBE046DD60EF1926C8442E9C3EC80446C3BC"
+        },
+        {
+          "name": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "C00612DA29BD113E5766CC2CF9D59466492317110EE7CE7876DF5C81C0B73645"
+        },
+        {
+          "name": "CopperDisk.dll",
+          "sha256": "997D665FF16AD24456423BBBD3A3C653B77FFF3AC5349A78AB7EB5AB0FFE970C"
+        }
+      ]
+    }
+  },
+  "sourceSnapshot": {
+    "scope": "Selected relevant source retained after build; tested binary hashes are authoritative in the native receipts.",
+    "sources": [
+      {
+        "path": "CopperScreen.Lightweight.Tests/CopperStartRdbWriteTests.cs",
+        "sha256": "B3823D03FAF6C08D211D87B2A53CF9A9A71E2AD38336AA1E7D9A5ABC73564979"
+      },
+      {
+        "path": "CopperScreen.Lightweight.Tests/RdbFfsProbe.cs",
+        "sha256": "22AB578B3A3AA15F04CBD6767D1CA79484CC7C2067C91C853FF50B8005E58A9E"
+      },
+      {
+        "path": "CopperScreen.Lightweight.Tests/FfsHardDiskProbe.cs",
+        "sha256": "4CB95B43FA6932C3299B69BFBDA55A9BCD781F9D4C2A6CF788746B12B86C9F09"
+      },
+      {
+        "path": "CopperScreen.Lightweight.Tests/CopperScreenRdbSettingsTests.cs",
+        "sha256": "97BA59A138F8728205D812B826D24089EB5134B17D614C77EC2EB7F8B5827861"
+      },
+      {
+        "path": "scripts/test-copperstart-rdb-writes.ps1",
+        "sha256": "904A22AD47460823482E9DBADB0F803A6F98EBB9032A944547990CADCE22719B"
+      },
+      {
+        "path": "CopperScreen/Firmware/CopperStart.json",
+        "sha256": "2AB3CE80C072335C187FC015DF5E7D5DD98B4021D73B1E01D7749187D425214C"
+      },
+      {
+        "path": "CopperScreen/CopperScreenRuntime.cs",
+        "sha256": "85E93CCC3D2CD2B78B932B98483FBBFB521D1997047AF6AF8DD03068C39E92FB"
+      },
+      {
+        "path": "CopperScreen/CopperScreenLightweightSession.cs",
+        "sha256": "57E9357FBE89397C4384C63BFFFB099864FC5C19E7D8280F976196AFD3C6AC1B"
+      },
+      {
+        "path": "CopperScreen/CopperScreenHardfileSettings.cs",
+        "sha256": "213EE8713218103EDE992FDD4F6D0072ACCD5DF44677F065C74453FD2FA4D3B1"
+      },
+      {
+        "path": "CopperScreen/CopperScreenStartupOptions.cs",
+        "sha256": "272253C1B07AF7106688A7F80033F98B813D2992EC765D59840D083AE976377D"
+      },
+      {
+        "path": "CopperScreen/CopperScreenProfile.cs",
+        "sha256": "01530E0E86A9FBD348B5EC57B72A8ED720C1EB967E4228C0E8E232D110EEA9C5"
+      },
+      {
+        "path": "CopperScreen/CopperScreenProfileStore.cs",
+        "sha256": "126A04A4F8EB38F5BCFDF1BB9F4467F96A02CD1B4A2696B057B0F0403EA9DDD1"
+      },
+      {
+        "path": "CopperScreen/CopperScreenRecentSession.cs",
+        "sha256": "198CFFFED6FD614A7E422842EA84717298188166C1BE6F33A1793CEEE4FB4F7D"
+      },
+      {
+        "path": "CopperScreen/MainWindow.Storage.cs",
+        "sha256": "80672786ED5FF0089CD16A4FB57018496B024E966D40A1ACB13E281A4F2F910F"
+      },
+      {
+        "path": "CopperMod.Amiga.Lightweight.Runner/Program.cs",
+        "sha256": "22F3FEB1CDEF92B67D7FFD3A20B484E24DDD74C884E97F9723413B6FFDF6F1A6"
+      },
+      {
+        "path": "CopperMod.Amiga.Lightweight.Runner/NativeBootProbe.cs",
+        "sha256": "54FDD08412DCAA119F4C8A0010CA6E70BCEA86E59A88F3CD8C42492C506416EC"
+      },
+      {
+        "path": "CopperMod.Amiga.Lightweight/LightweightA500Machine.Storage.cs",
+        "sha256": "4CD4963B4E92467477C4EE02F67E0897085E2CB14E0DEE86820D36318963E758"
+      },
+      {
+        "path": "CopperMod.Amiga.Lightweight/LightweightCopperHdfController.cs",
+        "sha256": "6B3924858EF4FBC4DE69F9177DD74CB040299A9C3EAEA745B2127C79E1EE9B63"
+      },
+      {
+        "path": "CopperMod.Amiga.Lightweight/LightweightHdfBus.cs",
+        "sha256": "EE381EBACE9C74C0A53A9261583DD92859EA593F7F29D110CEFF951B48AF98DD"
+      },
+      {
+        "path": "CopperDisk/AmigaHardfile.cs",
+        "sha256": "9C52A79E0D65E622341E0A897F12A9132A88BCF8C3DD1B0FDB78CE22BC65EE5A"
+      },
+      {
+        "path": "CopperDisk/AmigaRdbImage.cs",
+        "sha256": "C9F75E185F3695792F52032D256A59A034B4A10E51CB75632DFA14EBCC59C2F3"
+      }
+    ]
+  },
+  "artifacts": {
+    "root": "artifacts/rdb-frontend-writes-20261018",
+    "trx": "artifacts/rdb-frontend-writes-20261018/frontend-writes.trx",
+    "native": "artifacts/rdb-frontend-writes-20261018/native",
+    "snapshots": [
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/fresh-protected-readback.chipram",
+        "bytes": 524288,
+        "sha256": "C6BBFD3DB758C796FC46ADC261D371336A4D094588EF448FE9CB1D55E0C706D2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/fresh-protected-readback.hdf",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/fresh-protected-readback.slowram",
+        "bytes": 524288,
+        "sha256": "D5DF27EC3DFE55381D2BD78DDBF5C986AA98AF037DA96163E4843F9BC1FE5B9C"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/replacement-readback.chipram",
+        "bytes": 524288,
+        "sha256": "C6BBFD3DB758C796FC46ADC261D371336A4D094588EF448FE9CB1D55E0C706D2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/replacement-readback.hdf",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/replacement-readback.slowram",
+        "bytes": 524288,
+        "sha256": "D5DF27EC3DFE55381D2BD78DDBF5C986AA98AF037DA96163E4843F9BC1FE5B9C"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/reset-readback.chipram",
+        "bytes": 524288,
+        "sha256": "C6BBFD3DB758C796FC46ADC261D371336A4D094588EF448FE9CB1D55E0C706D2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/reset-readback.hdf",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/reset-readback.slowram",
+        "bytes": 524288,
+        "sha256": "AF3C41C2F3FCEBB0F5576E231E35F2344E38FF93BA47BEAE09FBAA4D678D8458"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/result.json",
+        "bytes": 1218,
+        "sha256": "C2EFF0A316846CB95E2152D39B17F44877457C0FFC9643A15B4DEBC2E0DD1128"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/written-before-host-save.chipram",
+        "bytes": 524288,
+        "sha256": "19C2EA5F1F07C16125D5D7C302754744E87347C50F636810CFBE04115803A4F2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/written-before-host-save.hdf",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app/written-before-host-save.slowram",
+        "bytes": 524288,
+        "sha256": "9998CA7033166B7CFC6C4607AE43A62AAB3B8B4FB7E46EBD98053B3124772719"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app-reversed-priority/before-host-save.chipram",
+        "bytes": 524288,
+        "sha256": "9E2D7E80B60B84A65E2E5C0442112707969100A38A475ED440131B4FDFA26D15"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app-reversed-priority/before-host-save.hdf",
+        "bytes": 3768320,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app-reversed-priority/before-host-save.slowram",
+        "bytes": 524288,
+        "sha256": "4E72F9FCE32318CA2AE1D954427AE3A4A4EE2DCF2CD602BE1C16E713C80EA6C6"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/app-reversed-priority/result.json",
+        "bytes": 947,
+        "sha256": "C94D5BA003DF5DA590A5A25F8087D3CDBDD5F8F08444F4A4520BE8CDE4398858"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner/result.json",
+        "bytes": 1232,
+        "sha256": "59EAD788B28779A0C60253931808DCAC095729F8340D28FB1EEF1B57A9341913"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-000001.chipram",
+        "bytes": 524288,
+        "sha256": "D652EE7CC3B84B34528A2499D3001AA35CB0F0E1B63000E47F19449090B0C464"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-000001.hdf0",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-000001.json",
+        "bytes": 1088,
+        "sha256": "34B102B1B20F297E117E65B93DA6EF3157E1FE253CA2B806A8C5CB5DD671DCB5"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-000001.slowram",
+        "bytes": 524288,
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-002000.chipram",
+        "bytes": 524288,
+        "sha256": "C6BBFD3DB758C796FC46ADC261D371336A4D094588EF448FE9CB1D55E0C706D2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-002000.hdf0",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-002000.json",
+        "bytes": 1094,
+        "sha256": "E39E5809D24A1F8566312B6584049907DFC0A4FE212381B4C6857C6D8BCF9FDB"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/frame-002000.slowram",
+        "bytes": 524288,
+        "sha256": "D5DF27EC3DFE55381D2BD78DDBF5C986AA98AF037DA96163E4843F9BC1FE5B9C"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-fresh-protected/runner.log",
+        "bytes": 2685,
+        "sha256": "9EA5ADA98BB1314CCB050A69B2132ACA50186FDB235C5F49ED818D93C798C3D2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-000001.chipram",
+        "bytes": 524288,
+        "sha256": "D652EE7CC3B84B34528A2499D3001AA35CB0F0E1B63000E47F19449090B0C464"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-000001.hdf0",
+        "bytes": 3768320,
+        "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-000001.json",
+        "bytes": 1088,
+        "sha256": "34B102B1B20F297E117E65B93DA6EF3157E1FE253CA2B806A8C5CB5DD671DCB5"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-000001.slowram",
+        "bytes": 524288,
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-002000.chipram",
+        "bytes": 524288,
+        "sha256": "2CEAA7270A4293826497CB3EB3B8629AA3575010D88FC80D6C003719330A85EB"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-002000.hdf0",
+        "bytes": 3768320,
+        "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-002000.json",
+        "bytes": 1094,
+        "sha256": "E62D82995B76E55F1EE6968840198F4E2CA0AEA41C9D8E1A220A6BFD65B3220B"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/frame-002000.slowram",
+        "bytes": 524288,
+        "sha256": "E2E3A4DC8B73804E56C9662E48F4360C8A7804134E3EBA8AFDC987110E1D1900"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-protected-rejection/runner.log",
+        "bytes": 2685,
+        "sha256": "22052BE962496CE8826F08D7593666248205BE945AC51C7CEB626564FA6F4B2A"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-000001.chipram",
+        "bytes": 524288,
+        "sha256": "D652EE7CC3B84B34528A2499D3001AA35CB0F0E1B63000E47F19449090B0C464"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-000001.hdf0",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-000001.json",
+        "bytes": 1088,
+        "sha256": "34B102B1B20F297E117E65B93DA6EF3157E1FE253CA2B806A8C5CB5DD671DCB5"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-000001.slowram",
+        "bytes": 524288,
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-002000.chipram",
+        "bytes": 524288,
+        "sha256": "C6BBFD3DB758C796FC46ADC261D371336A4D094588EF448FE9CB1D55E0C706D2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-002000.hdf0",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-002000.json",
+        "bytes": 1094,
+        "sha256": "E39E5809D24A1F8566312B6584049907DFC0A4FE212381B4C6857C6D8BCF9FDB"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/frame-002000.slowram",
+        "bytes": 524288,
+        "sha256": "D5DF27EC3DFE55381D2BD78DDBF5C986AA98AF037DA96163E4843F9BC1FE5B9C"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-restart/runner.log",
+        "bytes": 2686,
+        "sha256": "70B66E51F973C310143A925E98110725E412F60BF203090301D1157F3DE0537F"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-000001.chipram",
+        "bytes": 524288,
+        "sha256": "D652EE7CC3B84B34528A2499D3001AA35CB0F0E1B63000E47F19449090B0C464"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-000001.hdf0",
+        "bytes": 3768320,
+        "sha256": "CAED1DF2F400B9217F57EA11AB96B5EDC0D0BDFDBBD7FC5DA2321E19C5B536F5"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-000001.json",
+        "bytes": 1088,
+        "sha256": "34B102B1B20F297E117E65B93DA6EF3157E1FE253CA2B806A8C5CB5DD671DCB5"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-000001.slowram",
+        "bytes": 524288,
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-003000.chipram",
+        "bytes": 524288,
+        "sha256": "9E2D7E80B60B84A65E2E5C0442112707969100A38A475ED440131B4FDFA26D15"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-003000.hdf0",
+        "bytes": 3768320,
+        "sha256": "10755D5522B1FF637DD937C6EA3E5D4B10B6A157DAB43B4A23190D59B1085617"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-003000.json",
+        "bytes": 1094,
+        "sha256": "F8F464DFA1EA989C04EC0C90C0F17120F2CA8B2CC8F0A500C70EADA8D8CDDC7C"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/frame-003000.slowram",
+        "bytes": 524288,
+        "sha256": "4E72F9FCE32318CA2AE1D954427AE3A4A4EE2DCF2CD602BE1C16E713C80EA6C6"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/result.json",
+        "bytes": 954,
+        "sha256": "240A8C905654524ED69B933616727C5AD8CE8394CEE5DA75A3E76A08B78701CA"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-reversed-priority/runner.log",
+        "bytes": 2686,
+        "sha256": "F9D7B6DB2C6E3956C510CCBF8087D1F7FA16388BEC397F87CB7E019501E81D6D"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-000001.chipram",
+        "bytes": 524288,
+        "sha256": "D652EE7CC3B84B34528A2499D3001AA35CB0F0E1B63000E47F19449090B0C464"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-000001.hdf0",
+        "bytes": 3768320,
+        "sha256": "425D4D57271143F1B438014003E25C07BE0B95A2B9F8611C7F295C9B93F286DE"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-000001.json",
+        "bytes": 1088,
+        "sha256": "34B102B1B20F297E117E65B93DA6EF3157E1FE253CA2B806A8C5CB5DD671DCB5"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-000001.slowram",
+        "bytes": 524288,
+        "sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-003000.chipram",
+        "bytes": 524288,
+        "sha256": "19C2EA5F1F07C16125D5D7C302754744E87347C50F636810CFBE04115803A4F2"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-003000.hdf0",
+        "bytes": 3768320,
+        "sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-003000.json",
+        "bytes": 1094,
+        "sha256": "F8F464DFA1EA989C04EC0C90C0F17120F2CA8B2CC8F0A500C70EADA8D8CDDC7C"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/frame-003000.slowram",
+        "bytes": 524288,
+        "sha256": "9998CA7033166B7CFC6C4607AE43A62AAB3B8B4FB7E46EBD98053B3124772719"
+      },
+      {
+        "path": "artifacts/rdb-frontend-writes-20261018/native/runner-write/runner.log",
+        "bytes": 2686,
+        "sha256": "7AF1B7CA8A816717C294AFBDC0A73906AFEEF48B1639EFF684BA6E821B7B0EE6"
+      }
+    ]
+  },
+  "reproduce": "scripts/test-copperstart-rdb-writes.ps1 -RomPath <qualified raw ROM> -RdbFixturePath <qualified rdb-both-written.hdf> -OutputDirectory <empty directory>",
+  "nativeReceiptBinaryScope": "nativeResults.*.binaries identifies the in-process test harness dependencies; the top-level binaries array records each actual app/runner dependency set separately."
+}

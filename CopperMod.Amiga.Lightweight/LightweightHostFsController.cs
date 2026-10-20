@@ -506,6 +506,10 @@ internal sealed class LightweightHostFsController : AutoconfigBoard, IDisposable
         }
         _files.Clear(); if (errors is not null) throw new AggregateException("Shared-folder shutdown failed to flush one or more files.", errors);
     }
+    internal void FlushPersistentStorage()
+    {
+        foreach (var file in _files.Values) if (file.Stream.CanWrite) file.Stream.Flush(flushToDisk: true);
+    }
     public void Dispose() => CloseFiles();
 
     private void Trap(int offset, uint token) { Word(offset, 0xFF00); Long(offset + 2, token); }

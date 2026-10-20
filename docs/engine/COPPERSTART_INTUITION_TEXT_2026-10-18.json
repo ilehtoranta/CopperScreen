@@ -1,0 +1,911 @@
+{
+  "protocol": "copperstart-desktop-text-and-host-release-v1",
+  "date": "2026-10-18",
+  "shipping": false,
+  "qualification": {
+    "file": "artifacts/intuition-text-20261018/focused-v1/qualification.json",
+    "sha256": "E8E95A34EB2C583A79351D7A499FFE5D699728B79E1268F84DB3006E200F16EB",
+    "bytes": 105144
+  },
+  "nativeTests": {
+    "total": 6,
+    "passed": 6,
+    "skipped": 0
+  },
+  "hostTests": {
+    "total": 6,
+    "passed": 6,
+    "skipped": 0
+  },
+  "nativeRomJourneys": 4,
+  "freestandingChecks": 2,
+  "screenLifetimes": 8,
+  "checkedPngs": 44,
+  "diagnosticTextPngs": 2,
+  "broaderPreOverflowProfile": {
+    "qualification": {
+      "file": "artifacts/intuition-text-20261018/qualified-v1/qualification.json",
+      "sha256": "FBF3CA32836008840A0351C02EFFB6F514CC2556F8BC6F14573C7D108AADFBE6",
+      "bytes": 244121
+    },
+    "tests": {
+      "total": 17,
+      "passed": 17,
+      "skipped": 0
+    },
+    "payload": {
+      "sha256": "68AFCA185948DE0DAFF430E1AA6D19819C94EED0825C0A6067AA1D628A320C51",
+      "entry": 0,
+      "installer": 247290,
+      "inputEntry": 247136,
+      "textEntry": 247162,
+      "codeBytes": 248448,
+      "imageBytes": 256788,
+      "lifetime": "Retain the entire HUNK until reset",
+      "inputs": [
+        {
+          "file": "CopperStart.DesktopProviders.dll",
+          "sha256": "0FC7CBDEB7F82291C47D48046A2D804FE8EDC7F04385929168176748472194C2"
+        },
+        {
+          "file": "CopperStart.Layers.dll",
+          "sha256": "92A2E69B88E75CF6D7BD7E746D6CA1F021BFD3C23FD0373BC8B0B1AB2570EF84"
+        },
+        {
+          "file": "CopperStart.Utility.dll",
+          "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+        }
+      ]
+    },
+    "checkedPngs": 281,
+    "screenLifetimes": 35
+  },
+  "romSha256": "60565368B67150BC17F42D1D9135A7942AF2260D31B9306FC0B1105F026FAEDA",
+  "romBytes": 524288,
+  "chipBytes": 524288,
+  "slowBytes": 524288,
+  "fastBytes": 0,
+  "payload": {
+    "sha256": "9B3352B2D8EE2A2A144FAA089C954B926A4E734CBA6EF2B4151AB8E7B4E04ABD",
+    "entry": 0,
+    "installer": 247474,
+    "inputEntry": 247320,
+    "textEntry": 247346,
+    "codeBytes": 248632,
+    "imageBytes": 256972,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "530BE39E6FA3E0D480C4F8F6169BF461A496D47408752F61F63C410769F9EF50"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "92A2E69B88E75CF6D7BD7E746D6CA1F021BFD3C23FD0373BC8B0B1AB2570EF84"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ]
+  },
+  "inputWorkingBytes": 35024,
+  "retainedKeymapBytes": 1808,
+  "textInputInstallBytes": 36832,
+  "text": [
+    {
+      "width": 320,
+      "fields": 8298,
+      "beforeInput": 493976,
+      "installed": 457144,
+      "afterStop": 492168,
+      "messages": 77
+    },
+    {
+      "width": 640,
+      "fields": 8337,
+      "beforeInput": 493976,
+      "installed": 457144,
+      "afterStop": 492168,
+      "messages": 77
+    }
+  ],
+  "sourceSnapshot": {
+    "file": "artifacts/intuition-text-20261018/source-v2.json",
+    "sha256": "687A3E0F7323C2D8723F02DBA7E73AB7F72B241C52AC46D9BBFE56D76B6182C6",
+    "bytes": 20416
+  },
+  "sourceFiles": 139,
+  "artifacts": [
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/.msCoverageSourceRootsMapping_CopperStart.Floppy.Native.Tests",
+      "sha256": "2429D019478C5CD03DAC59B500E2840D2A2BEF4E915EFCCCB604A10CC94C0D7D",
+      "bytes": 16506
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2",
+      "bytes": 978944
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperDisk.dll",
+      "sha256": "C4C4F47C41748806331A19B0A4630B10B9AADDE989A4D24F58BAA9DCE5D6D832",
+      "bytes": 105472
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperDisk.pdb",
+      "sha256": "8500EF0704F0B61A15303344091D688B755516EF46639513067FD179C56A5B82",
+      "bytes": 41948
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperDisk.xml",
+      "sha256": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "bytes": 49078
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperFloat.dll",
+      "sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "bytes": 28672
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5",
+      "bytes": 288768
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperMod.Amiga.Lightweight.pdb",
+      "sha256": "270AE7AA51D1B0D656E772BC81174C4BEFBC500677936B3C329ECC7B499F5AD8",
+      "bytes": 115040
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperMod.Amiga.Lightweight.xml",
+      "sha256": "5B92BADEEF2D444F191CB9E72640A98B94E3C2DB4FB2D6AE4C7DB0563A10DB9E",
+      "bytes": 20908
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperOS.Shell.Dos.dll",
+      "sha256": "7B69708D0CEA0E3470D437336582F41314D96532E5D7622097E7A0D010E5A6F4",
+      "bytes": 191488
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperOS.Shell.Dos.pdb",
+      "sha256": "73565E071C379705129EE1D9222F116A30498090ABEE10B96F5259A35C0E27CE",
+      "bytes": 83776
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperOS.Shell.Dos.xml",
+      "sha256": "EC0033A775CFCEA4DF80E47CBDBD6811D7CFE868534278DBB2B2E209764ABFAA",
+      "bytes": 73621
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Compiler.dll",
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A",
+      "bytes": 2739200
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Compiler.pdb",
+      "sha256": "4C353D46F67A328382E69D3F77BE27F58743E64C1A8C2733D307A99A516EC3B3",
+      "bytes": 643376
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Compiler.xml",
+      "sha256": "56F4D55B15C1E71C4CD50B251464FC7701D60426CB8D0E0CDDE853AD6E0A073D",
+      "bytes": 73139
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Runtime.AmigaPal.dll",
+      "sha256": "EF964C0884C261002A22A4754E64DBC7627859A4EEDD5CBF7EC91E5A2D061720",
+      "bytes": 23552
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Runtime.AmigaPal.pdb",
+      "sha256": "DCC46AD42056794683D25493F8AF743CD066C3A6F5574103526BC5F8CD0B9B1B",
+      "bytes": 23880
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Runtime.AmigaPal.xml",
+      "sha256": "13BC46577399A0BC026096A2F3012CFD31D3F588AE337D4A0745B97638BF2562",
+      "bytes": 4451
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Runtime.Managed.dll",
+      "sha256": "F6E7A15CE4A808484FA9C93EDD4A70E612C32B9F6D0357BBF8C36C6CC7FA7D0D",
+      "bytes": 98304
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Runtime.Managed.pdb",
+      "sha256": "AD1101D5A8298005FFA6B9AB69AEF6B79FF74C910BA789ACA2E0887E02C9A0C4",
+      "bytes": 66572
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Sdk.Amiga.dll",
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901",
+      "bytes": 548864
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Sdk.Amiga.pdb",
+      "sha256": "E64A063CCD04B15A78A7E6B43187E25CCE1F541C082049887786F479F70599BF",
+      "bytes": 68584
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A",
+      "bytes": 155648
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Sdk.Amiga.Support.pdb",
+      "sha256": "EB02342A4ACFFFC6119D5783FC03215DCE9029F56CCA56961F30E230BE479505",
+      "bytes": 45524
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Sdk.Amiga.xml",
+      "sha256": "31B25A17B60D608634A1486B295442FFBBE9A7D29B141C71107944A4052F3219",
+      "bytes": 509463
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Targets.Amiga.dll",
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E",
+      "bytes": 42496
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Targets.Amiga.pdb",
+      "sha256": "BD63947CD5F357A314BE8B56C0EFD8B55035AADFFEB8D67FDE4A3B77EFD9A071",
+      "bytes": 18948
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperSharp.Targets.Amiga.xml",
+      "sha256": "FC02D0A5C2ADD9D6D342A7642D704AAF39B68ABA77065AB4E75F00F3B7853AB5",
+      "bytes": 528
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart-System.dll",
+      "sha256": "2F7052F699DF6E882C20C94C05D434B75B9E1B36AA6FD9313905EE48D01030CB",
+      "bytes": 39424
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart-System.pdb",
+      "sha256": "2E040E32C5F4B3E36CE5A7E28CAE021C17BEE5EA69CE876582B58C608144D870",
+      "bytes": 26112
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.DesktopProviders.dll",
+      "sha256": "530BE39E6FA3E0D480C4F8F6169BF461A496D47408752F61F63C410769F9EF50",
+      "bytes": 63488
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.DesktopProviders.pdb",
+      "sha256": "0AF3B5DFE07AE094834C79C6F726ECA2F8F3DEED0379109BDB39B7DCCB371B11",
+      "bytes": 19192
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Devices.dll",
+      "sha256": "BF8717BED0CC18898E4974A0E012C2F1A490CA3BDE6679180B3C4197D59DA1CB",
+      "bytes": 100352
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Devices.pdb",
+      "sha256": "5448565B5B79B6C2E60FD8F9E40ACDB896F902524C5C90109B23DE3B4A6010D9",
+      "bytes": 54856
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Dos.dll",
+      "sha256": "B0A34EF0B438BD3C5A79D29719E93C016B1E200794087D5055DFC8F7EB48BFC5",
+      "bytes": 762880
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Dos.pdb",
+      "sha256": "F45B6F821647E2496CA7B65F159231ECC77339D0FAB91C7D55CD9B04C644052E",
+      "bytes": 312564
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Exec.dll",
+      "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7",
+      "bytes": 187904
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Exec.pdb",
+      "sha256": "B15EBE70A63A791B4B3B91ECC05E858A3D3036BC337158C890327CED7CF79A68",
+      "bytes": 89484
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Expansion.dll",
+      "sha256": "88AD9384E6E88EC028781305C78548B369F00C175D97976516EE2F9489DAE0CD",
+      "bytes": 5120
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Expansion.pdb",
+      "sha256": "F7E140E15BE6B57BB4F387AA0D53746046C66AC7E2411BCFF0BDFD953F868BF1",
+      "bytes": 12512
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Floppy.Native.Tests.deps.json",
+      "sha256": "146406A368E55A2393690EACCD2617793B3C2598E22CB4F142CFB1E474B93086",
+      "bytes": 26197
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Floppy.Native.Tests.dll",
+      "sha256": "D54AF7B70273F7F304D66CB39CD85E7CEF5B8B9CF477F19854EA9470D335974A",
+      "bytes": 522752
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Floppy.Native.Tests.pdb",
+      "sha256": "978C195D9CDEBCCB12EF3E5805304010B0852E36D27E09A1B0C5AAFC8478A7D3",
+      "bytes": 290632
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Floppy.Native.Tests.runtimeconfig.json",
+      "sha256": "A217D17BE0661ABF2717A26937C6E379C33542CB6F292FD3FC5A2D5113A9D6DC",
+      "bytes": 390
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Graphics.deps.json",
+      "sha256": "1686DA691292BB93687DD239DF1D07387225BC712C35367C6F5148E47912C611",
+      "bytes": 3974
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Graphics.dll",
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0",
+      "bytes": 2401792
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Graphics.exe",
+      "sha256": "E9C7324A27B6F4F974527AE27F899ADEBD10F4FEEC13C7FF20DE125D2EF4A3E3",
+      "bytes": 162816
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Graphics.pdb",
+      "sha256": "05E556A3FA798AE35B8F615C0F35FD7A143DA98376206048281BCFC1DF9F56EA",
+      "bytes": 1429956
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Graphics.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "bytes": 342
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Icon.dll",
+      "sha256": "1C0645E66F23E33979E8A3D20A612CD4DBD23DC747A40719079A8310C3E3295A",
+      "bytes": 7168
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Icon.pdb",
+      "sha256": "00ADF09016B9E07CAA9731A6869D614606DBFDADEA23C517DFECDFE6B77A3596",
+      "bytes": 13524
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Intuition.dll",
+      "sha256": "343DC2BD3B3152CF624D082A6E71BA5A130C4EE7952AD91633BC8A7C1704AB4B",
+      "bytes": 512512
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Intuition.pdb",
+      "sha256": "A830CD099875B22997063E5D8572216E48936F1B2E78F0156EEF37E9490BEB6B",
+      "bytes": 186008
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Layers.dll",
+      "sha256": "92A2E69B88E75CF6D7BD7E746D6CA1F021BFD3C23FD0373BC8B0B1AB2570EF84",
+      "bytes": 349184
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Layers.pdb",
+      "sha256": "3CC42A079C38EEAB71DF6ED6AA6DCD9ED2CBACFC20769A12CD5714D01E5D53EB",
+      "bytes": 374620
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Runtime.dll",
+      "sha256": "EC2BC0A302F5EBA42AEFB2B792C732BBE8F70EF6485F8318E7167F24121F63AD",
+      "bytes": 5632
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Runtime.pdb",
+      "sha256": "8B3DC54B39D5FF80A91A9EE4040ADF45C2A12A9EF91C7673A37C68C1E9C8BF44",
+      "bytes": 13108
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Shell.dll",
+      "sha256": "FFF828B848DBACEE4760CF323B2D4E857554B5477415A29FCC9A6F63C5D48B7B",
+      "bytes": 30208
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Shell.pdb",
+      "sha256": "90C09A59489AC3799279A57BCC2800DFFA972007F75B6D3581CFFB9F44D20E4F",
+      "bytes": 36504
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Utility.dll",
+      "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0",
+      "bytes": 16896
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Utility.pdb",
+      "sha256": "D572F7BD78A964CBE6BD0F06D31E33F52417E1C50A10BD4196D402EF3C39A6F2",
+      "bytes": 17912
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Workbench.dll",
+      "sha256": "2E0CE2A62039CFC3FC41E9621B9E560B702C024FCFFCCC135CFD87F82414DFF7",
+      "bytes": 4608
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/CopperStart.Workbench.pdb",
+      "sha256": "31F53441324C521B313DC677A837AAF28A9035EFA9795C7BB1268A7D2B0D0612",
+      "bytes": 12660
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.TestPlatform.CommunicationUtilities.dll",
+      "sha256": "E38A359AA502BB1867D6092DCA9ABA5C130DD6F9111DECEA8156AA746B2C69E6",
+      "bytes": 137776
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.TestPlatform.CoreUtilities.dll",
+      "sha256": "F6E2495C44640D8915B2AEFC938F391C970300266DA014350FF35512A448EE84",
+      "bytes": 98336
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.TestPlatform.CrossPlatEngine.dll",
+      "sha256": "D55399BC66DC5B451D60AD82662452CA4A5F735918135DFC91CA9B5E3E38A6AB",
+      "bytes": 316960
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.TestPlatform.PlatformAbstractions.dll",
+      "sha256": "7B919CE4429C3B7B8FA2C36FD641B70B2F459A30ECB7C65FD80F437673CEC930",
+      "bytes": 51232
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.TestPlatform.Utilities.dll",
+      "sha256": "01FFD64D25A4BD905AEF9594D2AA700E020273A90A77A8720AF6BEC8B4FD5444",
+      "bytes": 67104
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.VisualStudio.CodeCoverage.Shim.dll",
+      "sha256": "A753BC15F23A957F4F91A059376E4472C6BACD1503622DE4B9B2B079AD8EA289",
+      "bytes": 17464
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.VisualStudio.TestPlatform.Common.dll",
+      "sha256": "059AA2F335C3F7B14AC3FB7CAA1625BC2767581B9548E9FF53A246C7F2F94D6A",
+      "bytes": 248352
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll",
+      "sha256": "F83E38EE9020BAA42E284E2299E233070FFA86CE4B10213583F9B7C8A521BCD0",
+      "bytes": 334392
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/Newtonsoft.Json.dll",
+      "sha256": "22C649F75FCE5BE7C7CCDA8880473B634EF69ECF33F5D1AB8AD892CAF47D5A07",
+      "bytes": 712464
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/testhost.dll",
+      "sha256": "92CBDF52DB5249112F9F53F1FCDAF9F9AA3FCE467141C688A31A7FE095E4D304",
+      "bytes": 49696
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/testhost.exe",
+      "sha256": "FB63EB314F25584A532683DE7ABF4CA8A0B43103F3699F5D5D87317338EEDA76",
+      "bytes": 150576
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/xunit.abstractions.dll",
+      "sha256": "3166DC70323FB30CCF1CEDB0FE86F2AD122C46D254542342D90386EFC4C9285C",
+      "bytes": 21928
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/xunit.assert.dll",
+      "sha256": "BCD9711B22D227AC8CD4C1568E72433A0F576D2EC8AAE64AC508081892015B1D",
+      "bytes": 187088
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/xunit.core.dll",
+      "sha256": "2F7FEEEC8C6DEC7DF684C25FB80AADB292B963D09723460F03D53C5AD2088ACC",
+      "bytes": 70352
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/xunit.execution.dotnet.dll",
+      "sha256": "E70FEBE547C15F8155DB3E2D95C3BA4445A59CBC21A3E7541AB22ED49D3DCF7B",
+      "bytes": 279760
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/inputs/xunit.runner.visualstudio.testadapter.dll",
+      "sha256": "98A7395CD6ABD03D0AC8EEB82D720C24DB00602F047CA49BD6E88E77FC6D1153",
+      "bytes": 1251840
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/managed-inputs.json",
+      "sha256": "B49FD94CC478AC6FB3C0A2BB5C2D7975BB0A56E978737D79D81E82286C20876C",
+      "bytes": 10862
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/CopperIntuition.hunk",
+      "sha256": "9B3352B2D8EE2A2A144FAA089C954B926A4E734CBA6EF2B4151AB8E7B4E04ABD",
+      "bytes": 256972
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/CopperIntuition.map",
+      "sha256": "39FA65E8D18717A97F8DDEF99AC35C965A405022A53F518D074EE836F363D0E8",
+      "bytes": 2501094
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-console-after-0.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-console-after-1.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-console-after-2.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-console-before.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-0-closed.png",
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75",
+      "bytes": 9034
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-0-focus.png",
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1",
+      "bytes": 9850
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-0-keys.png",
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386",
+      "bytes": 9664
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-0-pressure.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398",
+      "bytes": 9802
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-0-ready.png",
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B",
+      "bytes": 9550
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-0-recovered.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398",
+      "bytes": 9802
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-1-closed.png",
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75",
+      "bytes": 9034
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-1-focus.png",
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1",
+      "bytes": 9850
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-1-keys.png",
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386",
+      "bytes": 9664
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-1-pressure.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398",
+      "bytes": 9802
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-1-ready.png",
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B",
+      "bytes": 9550
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-1-recovered.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398",
+      "bytes": 9802
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-2-closed.png",
+      "sha256": "340F1C47639E116A5A00FB204297EE09A315E469F296DA265D92A9672BBE5A75",
+      "bytes": 9034
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-2-focus.png",
+      "sha256": "71656169AC114647AB894FD72573B50E602231FBE8F41CFD45B2852486359BC1",
+      "bytes": 9850
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-2-keys.png",
+      "sha256": "FBDBC50A3430B4E1E76A03C2F05F65180B62870809035AE5F21CFF642506C386",
+      "bytes": 9664
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-2-pressure.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398",
+      "bytes": 9802
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-2-ready.png",
+      "sha256": "7558DB89D086CFA1B90234F6FD55B0EEA3D86C17B01B27D6DD57D68A9231AE5B",
+      "bytes": 9550
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-320-cycle-2-recovered.png",
+      "sha256": "E0068A8BE2A81EE4F643F8EA22B5FB4379F10AE18CF8451E8FAC87CE88AB9398",
+      "bytes": 9802
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-console-after-0.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-console-after-1.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-console-after-2.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-console-before.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-0-closed.png",
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5",
+      "bytes": 8483
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-0-focus.png",
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E",
+      "bytes": 9422
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-0-keys.png",
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438",
+      "bytes": 9238
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-0-pressure.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8",
+      "bytes": 9532
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-0-ready.png",
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A",
+      "bytes": 9174
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-0-recovered.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8",
+      "bytes": 9532
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-1-closed.png",
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5",
+      "bytes": 8483
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-1-focus.png",
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E",
+      "bytes": 9422
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-1-keys.png",
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438",
+      "bytes": 9238
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-1-pressure.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8",
+      "bytes": 9532
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-1-ready.png",
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A",
+      "bytes": 9174
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-1-recovered.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8",
+      "bytes": 9532
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-2-closed.png",
+      "sha256": "F78850402BF337F9D4D648BCDBB2307E6C16467DC68571A9F7F83155229C07E5",
+      "bytes": 8483
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-2-focus.png",
+      "sha256": "19DF2CFE6F377C41C738E697585A2362324DE5FB54BE56BEB13040189250069E",
+      "bytes": 9422
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-2-keys.png",
+      "sha256": "6706F7314DAA8D26213CC74BAC420DEC4C3CD354BA78A4251A19289EE567B438",
+      "bytes": 9238
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-2-pressure.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8",
+      "bytes": 9532
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-2-ready.png",
+      "sha256": "055300EB62D391219A082760C2365C3D4A3E19899294A937CA174EFD70B18C0A",
+      "bytes": 9174
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-640-cycle-2-recovered.png",
+      "sha256": "EF9E8BD6639D2734FB1C93D9EE9D0DC5AF2C4E52E6CB679293F28B4D931275C8",
+      "bytes": 9532
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-probe.json",
+      "sha256": "C334FE7832E5DDF6C5AB4A90265E7B38038C31ABCD3497F703371CD18799BADC",
+      "bytes": 900
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-progress.txt",
+      "sha256": "AA9178742AF15BA6667B8B1D1E4AEDD739BD4BE4A77154AF8E54264799C6C663",
+      "bytes": 2663
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/input-text.trx",
+      "sha256": "B4ED21FC137309B6FF3B1DF835E82F5BC63B6DC8DDD2D45FF9A48C3AF4045C6B",
+      "bytes": 10927
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/InputProbe.hunk",
+      "sha256": "54CFD3AE26CE4BD2398073560B30ECAE75669F50A0C54755767444C998DA1189",
+      "bytes": 5172
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/InputProbe.map",
+      "sha256": "A61EF0B85014A5E1FA2733CD31C11F6A556F4EBF24483D40FF44E7B4624BA4EB",
+      "bytes": 20692
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/intuition-input-320.json",
+      "sha256": "61E0CC6E18974F7C52154F2209C5CF15118FA37FE9DCA7C4BEBEC97D4C274E19",
+      "bytes": 35008
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/intuition-input-640.json",
+      "sha256": "26B4FFDD4D41C4D8EF4FB91073D4AEA6852D4715AEED9844B50A458AAAE8A578",
+      "bytes": 35622
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/intuition.json",
+      "sha256": "5F2F4FECF1DEF38D0D6C7E53F4D15D6E9D67D6B89517305A526AAAF581B560CB",
+      "bytes": 1308
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/text-320-console.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/text-320.json",
+      "sha256": "339FFD50FC907A418CA57ECC686D05D3A72E0932B75F96E58BA025346124E77B",
+      "bytes": 5617
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/text-640-console.png",
+      "sha256": "F8E8BD072B4CCCEA310FE273132FD74323792FD0868D97A809979290B2958F94",
+      "bytes": 8565
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/text-640.json",
+      "sha256": "FB864C32D66830C307695D3910A89FF84C23D787AE878F570AA44FA07BF44ACE",
+      "bytes": 5617
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/text-probe.json",
+      "sha256": "9AC21045E1EB14B36516B6F21D8A3549C9252D4D7515399A95D5938C97E8FB43",
+      "bytes": 900
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/text-progress.txt",
+      "sha256": "7E34D71386E8EA4A14B4E3DCB0501FCBBA89F023B2FC708264FB6BBF8D8010D9",
+      "bytes": 1342
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/TextProbe.hunk",
+      "sha256": "4EF5F69C424B4175B5B95EBBB091C91FC6E4D8A4FD77A8E20B825068152C5408",
+      "bytes": 5084
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/native/TextProbe.map",
+      "sha256": "D06B707851B813F99BD6BDF8EB50DED52679D3074D2BFB39AB3F864CF38752C8",
+      "bytes": 20337
+    },
+    {
+      "file": "artifacts/intuition-text-20261018/focused-v1/qualification.json",
+      "sha256": "E8E95A34EB2C583A79351D7A499FFE5D699728B79E1268F84DB3006E200F16EB",
+      "bytes": 105144
+    }
+  ],
+  "burstRegressionBeforeFix": {
+    "trx": {
+      "file": "artifacts/intuition-text-20261018/burst-before-fix/text.trx",
+      "sha256": "8F2E615177EC4D603965EF529424A825A48E49A36453D6832F370A974044386C",
+      "bytes": 4815
+    },
+    "expectedFailure": "Keyboard hardware overflow did not trigger native release recovery"
+  },
+  "producerBuild": {
+    "file": "artifacts/intuition-text-20261018/solution-build-v3.log",
+    "sha256": "E3E7555539A8088C080A9D986C7EF7B7E1157501996823EA217FB14C8DA03508",
+    "bytes": 6637
+  },
+  "consumerBuild": {
+    "file": "artifacts/copperstart-text-consumer-build-v2.log",
+    "sha256": "0C8B1D4810C3BC774117B9204C001FFD324636359A4E32E29BC57EB275E091BD",
+    "bytes": 1283
+  },
+  "hostTrx": {
+    "file": "artifacts/copperstart-text-host-tests/host-text-input.trx",
+    "sha256": "7492C33A9849283501F7F35480B583C9AA3AC72C09CE48D1CB5E0DE85940E2FB",
+    "bytes": 10485
+  },
+  "nativeCompilerRun": {
+    "file": "artifacts/intuition-text-20261018/native-v3/intuition.json",
+    "sha256": "5F2F4FECF1DEF38D0D6C7E53F4D15D6E9D67D6B89517305A526AAAF581B560CB",
+    "bytes": 1308
+  },
+  "shippingPinObserved": {
+    "file": "CopperScreen/Firmware/CopperStart.json",
+    "sha256": "1EBC5FAE88EB2362AAB0DC76ED4A2D84E11C0F830B1C2B4C40A001F6E6450460",
+    "bytes": 917,
+    "romSha256": "fc6511086bb86a33a04887fbf2ef1d7f82a91631853e39db08529ad0c0314ac0",
+    "qualificationId": "diskboot-2026-10-18-hdf.1",
+    "changedByThisWork": false
+  },
+  "limits": [
+    "Host unit coverage and native physical-release coverage do not exercise actual Windows focus/capture gestures.",
+    "Built-in US is bounded. Visible layout selection/loading and full national map coverage remain desktop work.",
+    "Extreme raw-ring overflow can lose text; recovery restores held state without retyping characters.",
+    "The separate hard-disk shipping ROM/desktop pair has not been qualified by this frozen console-ROM gate.",
+    "100-cycle desktop/child stress, complete memory peaks and actual GUI latency remain open."
+  ]
+}

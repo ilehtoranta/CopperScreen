@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "protocol": "copperstart-desktop-prerequisites-v1",
+  "status": "PASS for the combined native DOS/graphics producer base; first native window remains unavailable",
+  "source": {
+    "copperStartBaseCommit": "8b90a09096506b262756c98fd10e19e19fefde52",
+    "dirtySourceSnapshot": true,
+    "nativeSourceSnapshotSha256": "6A4C775138E51D9A088B2EAB0F1EF49E78C5BA05567A7A27D557AB3E6E8D872F",
+    "fixtureSourceSnapshotSha256": "1921DE35BD1FEFDBB4DFD013B4BB942AB2DB6D1B2EEB760D149388C14730EAD7",
+    "managedInputsSha256": "0E20A5E14E3C1EC0B8F5450B6AEC1B01A1DE26D18D68EB7F9F1033FC07AD9439",
+    "note": "Native ROM compiled from frozen managed inputs. Corrected fixtures replay the exact ROM with all original producer/SDK/compiler/engine/CPU/emitter hashes checked; no clean-commit reproduction claim."
+  },
+  "artifacts": {
+    "root": "C:/Users/ilkle/Koodit/GIT/CopperStart/artifacts/desktop-prerequisites-20261017-5b76ba8a",
+    "nativeRoot": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\desktop-prerequisites-20261017-5b76ba8a\\qualified-v3\\native",
+    "qualificationRoot": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\desktop-prerequisites-20261017-5b76ba8a\\qualified-v4",
+    "qualificationSha256": "8EBF0398C3E6077FD856374297397737BAD2FA9054C3423D29D183FDE37A2AE0",
+    "nativeManifestSha256": "5305EE409140B3234729602F51A52662C1B24D84AFD4FD23151B53C0990BEEDA",
+    "nativeProbeSha256": "4276CCBF83D6689A737146B612E7D6825C58E56168DB1D7D23C7CE3BB3ECE378",
+    "trxSha256": "97F379EA3D80DE98BBDF29D2A5B7EFA8B6003EC96E8C3D7D827415CCE83B1808"
+  },
+  "rom": {
+    "bytes": 524288,
+    "sha256": "9E143A28EB8DEAE4E821DE43D49BDB0FB47BD415EA9710A2CC4BA28F4AF484C8",
+    "compiledCodeBytes": 463658,
+    "peepholeOptimization": "FixedPoint",
+    "graphicsBytes": 26252,
+    "graphicsResidentAddress": 16744448,
+    "selectedGraphicsVectorCount": 41,
+    "gapBeforeGraphicsBytes": 27854,
+    "tailBeforeFooterBytes": 6496,
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "C403172CC0A14DE938B8FDE6003725F1F60D4C72F6462742A6CD0AC8789FAE05"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "78120E003C1F1075BB4A3B5D9AE5254A30D95756323CBBE7047EBDAF653891C3"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "1268DE83AECA4DEA5D69AD2C2B59160D5218B78E71B3A15C3BF913F166F47BFD"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "C9932DFBB9B29BBEDFC8CB7973067068BD80F81E03F5C08DA9C733A0BAF90748"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "1A9F794E03958A4974897257612C647B99B1CCFBFFB7360217B37F07AB636D65"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "57443DF33225C6BB0BF4E6FFB78C343A0F061D87270E00FF3D956D5F2E462983"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "75031C294A84CFDAA61A40EF93B4F481A82D53141D2933229B7E459F68E78284"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "A43792581A31C95EE133AA2AB97CA31174F270FC3109B21DB911F7E8F869B79B"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "BBCD2018CE022CBA60C315E9C3ED1D6FC974BA88C4C5B895C3F43D4CDA46ECBC"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "705C9FCBAC328AF8F58A7F66572F5AF0D40A540ED94EF7FADE36626967BA37F5"
+      }
+    ]
+  },
+  "checks": {
+    "selectedPassed": 67,
+    "failed": 0,
+    "skipped": 0,
+    "nativeExecution": 51,
+    "filesystemSemantics": 15,
+    "graphicsComposition": 1
+  },
+  "nativeProbe": {
+    "protocol": "copperstart-desktop-prerequisite-v1",
+    "passed": true,
+    "scope": "PAL OCS 68000; 512 KiB Chip + 512 KiB slow; one DF0; public graphics and DOS vectors; physical FFS writes and fresh protected boot",
+    "romSha256": "9E143A28EB8DEAE4E821DE43D49BDB0FB47BD415EA9710A2CC4BA28F4AF484C8",
+    "originalSha256": "BE77B732DDF43C0FCD28344C7B57AC8773E186F1DCF8435470DED57C7A52CF68",
+    "persistedSha256": "90A84EC5137AE52CF2B0424B10C9B60940F52FD64965A506D1954B5E48485104",
+    "phases": [
+      {
+        "phase": 1,
+        "fields": 4741,
+        "graphicsVersion": 40,
+        "graphicsOpenCount": 0,
+        "providerV40Opens": {
+          "graphics": 9280,
+          "utility": 0,
+          "layers": 0,
+          "intuition": 0
+        },
+        "libraries": [
+          {
+            "name": "graphics.library",
+            "address": 9280,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "expansion.library",
+            "address": 12612456,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "dos.library",
+            "address": 12656216,
+            "version": 51,
+            "openCount": 1
+          }
+        ],
+        "memory": [
+          {
+            "lower": 12611616,
+            "upper": 13107200,
+            "free": 360216,
+            "largest": 359456
+          },
+          {
+            "lower": 8224,
+            "upper": 524288,
+            "free": 459944,
+            "largest": 427176
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "fields": 936,
+        "graphicsVersion": 40,
+        "graphicsOpenCount": 0,
+        "providerV40Opens": {
+          "graphics": 9280,
+          "utility": 0,
+          "layers": 0,
+          "intuition": 0
+        },
+        "libraries": [
+          {
+            "name": "graphics.library",
+            "address": 9280,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "expansion.library",
+            "address": 12612456,
+            "version": 40,
+            "openCount": 0
+          },
+          {
+            "name": "dos.library",
+            "address": 12656216,
+            "version": 51,
+            "openCount": 1
+          }
+        ],
+        "memory": [
+          {
+            "lower": 12611616,
+            "upper": 13107200,
+            "free": 360104,
+            "largest": 359456
+          },
+          {
+            "lower": 8224,
+            "upper": 524288,
+            "free": 459944,
+            "largest": 427176
+          }
+        ]
+      }
+    ],
+    "desktopGraphicsSurface": [
+      {
+        "name": "InitView",
+        "lvo": -360,
+        "selected": true
+      },
+      {
+        "name": "InitVPort",
+        "lvo": -204,
+        "selected": true
+      },
+      {
+        "name": "MakeVPort",
+        "lvo": -216,
+        "selected": false
+      },
+      {
+        "name": "MrgCop",
+        "lvo": -210,
+        "selected": false
+      },
+      {
+        "name": "LoadView",
+        "lvo": -222,
+        "selected": false
+      },
+      {
+        "name": "LoadRGB4",
+        "lvo": -192,
+        "selected": false
+      },
+      {
+        "name": "SetRGB4",
+        "lvo": -288,
+        "selected": false
+      },
+      {
+        "name": "Text",
+        "lvo": -60,
+        "selected": false
+      },
+      {
+        "name": "RectFill",
+        "lvo": -306,
+        "selected": false
+      },
+      {
+        "name": "GetSprite",
+        "lvo": -408,
+        "selected": false
+      },
+      {
+        "name": "MoveSprite",
+        "lvo": -426,
+        "selected": false
+      },
+      {
+        "name": "ChangeSprite",
+        "lvo": -420,
+        "selected": false
+      },
+      {
+        "name": "FreeSprite",
+        "lvo": -414,
+        "selected": false
+      }
+    ],
+    "windowQualification": "NOT RUN: the persistence probe is not a native Intuition window journey"
+  },
+  "initialFailures": [
+    {
+      "case": "Graphics ROM overlap fixture",
+      "disposition": "Old hardcoded resident offset replaced with the actual linker boundary; independently reproduced before the fixture correction."
+    },
+    {
+      "case": "CMD_WRITE NoCommand expectation",
+      "disposition": "Writes are implemented. Check CMD_INVALID for NoCommand and protected CMD_WRITE for SDK TrackDiskError.WriteProtected."
+    },
+    {
+      "case": "Readback after command return",
+      "disposition": "Probe buffer belonged to an unloaded HUNK. Place readback in fixture-owned diagnostic RAM before waiting for idle."
+    }
+  ],
+  "limits": [
+    "No native Intuition window",
+    "No full CopperOS Shell or workspace-pair qualification",
+    "No native game replays",
+    "No installed package or itch update qualification",
+    "No throughput or audio fidelity measurement",
+    "No shipping activation or app ROM pin update"
+  ],
+  "builds": {
+    "copperScreenProduction": {
+      "logSha256": "4BDB65B56E43A1C44F8DBF7977A1EEAE715323B64114E49C4C1609846D446EDE",
+      "warnings": 0,
+      "passed": true,
+      "errors": 0
+    },
+    "copperStartSolution": {
+      "logSha256": "3922B368BB9B699776EC679D59F90B6AAF3B479A4FACE222F927972F9FBE9810",
+      "warnings": 2,
+      "passed": true,
+      "errors": 0
+    },
+    "nativeFixture": {
+      "logSha256": "BF3C640702756CEB763FB29D5F317CCDD9EB69383C820F81676841FBAA59B692",
+      "warnings": 0,
+      "passed": true,
+      "errors": 0
+    }
+  }
+}

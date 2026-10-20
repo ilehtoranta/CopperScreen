@@ -9,6 +9,24 @@ using System.IO;
 
 namespace CopperDisk
 {
+    /// <summary>Optional hardfile I/O hook for deterministic storage tests.
+    /// Production hardfiles use the FileStream directly when this is absent.</summary>
+    public interface IAmigaHardfileIoHook
+    {
+        /// <summary>Read bytes at an absolute hardfile offset.</summary>
+        void Read(FileStream backing, long offset, Span<byte> destination);
+        /// <summary>Write bytes at an absolute hardfile offset.</summary>
+        void Write(FileStream backing, long offset, ReadOnlySpan<byte> source);
+        /// <summary>Persist writes that must survive a power cut.</summary>
+        void Flush(FileStream backing);
+        /// <summary>False after a simulated power cut, so disposal cannot commit volatile writes.</summary>
+        bool FlushOnDispose { get; }
+        /// <summary>Observe an OpenDevice attempt without changing its result.</summary>
+        void ObserveOpen(int unit) { }
+        /// <summary>Observe a device command before it executes.</summary>
+        void ObserveCommand(ushort command) { }
+    }
+
     /// <summary>Selects RDB discovery or a partition image.</summary>
     public enum AmigaHardfileMountMode
     {
@@ -125,6 +143,12 @@ namespace CopperDisk
 
         /// <summary>Optional synthetic-partition environment overrides.</summary>
         public AmigaHardfilePartitionMetadata? Partition { get; }
+
+        /// <summary>Optional sector-level I/O hook for fault injection and tracing.</summary>
+        public IAmigaHardfileIoHook? IoHook { get; init; }
+
+        /// <summary>Expose a boot/mount node to expansion.library; manual mounts can leave this false.</summary>
+        public bool ExposeBootNode { get; init; } = true;
     }
 
     internal sealed class AmigaHardfile : IDisposable
@@ -136,6 +160,7 @@ namespace CopperDisk
             internal int References = 1;
         }
         private readonly Backing _backing;
+        private readonly IAmigaHardfileIoHook? _ioHook;
         private FileStream _stream => _backing.Stream;
         private bool _disposed;
 
@@ -145,7 +170,9 @@ namespace CopperDisk
             bool readOnly,
             AmigaHardfileMountMode mountMode,
             AmigaHardfilePartitionMetadata? partition,
-            Backing backing)
+            Backing backing,
+            IAmigaHardfileIoHook? ioHook,
+            bool exposeBootNode)
         {
             Unit = unit;
             Path = path;
@@ -153,9 +180,13 @@ namespace CopperDisk
             MountMode = mountMode;
             Partition = partition;
             _backing = backing;
+            _ioHook = ioHook;
+            ExposeBootNode = exposeBootNode;
         }
 
         public int Unit { get; }
+        internal IAmigaHardfileIoHook? IoHook => _ioHook;
+        public bool ExposeBootNode { get; }
 
         public string Path { get; }
 
@@ -200,7 +231,7 @@ namespace CopperDisk
                 configuration.ReadOnly,
                 configuration.MountMode,
                 configuration.Partition,
-                new Backing(stream));
+                new Backing(stream), configuration.IoHook, configuration.ExposeBootNode);
             try
             {
                 if (configuration.MountMode == AmigaHardfileMountMode.RigidDiskBlock && !hardfile.HasRigidDiskBlock)
@@ -222,7 +253,8 @@ namespace CopperDisk
             if (ReadOnly && !configuration.ReadOnly && !_stream.CanWrite) return Open(configuration);
             System.Threading.Interlocked.Increment(ref _backing.References);
             var replacement = new AmigaHardfile(configuration.Unit, Path, configuration.ReadOnly,
-                configuration.MountMode, configuration.Partition, _backing);
+                configuration.MountMode, configuration.Partition, _backing, configuration.IoHook,
+                configuration.ExposeBootNode);
             try
             {
                 if (configuration.MountMode == AmigaHardfileMountMode.RigidDiskBlock && !replacement.HasRigidDiskBlock)
@@ -288,6 +320,11 @@ namespace CopperDisk
         public void Read(long byteOffset, Span<byte> destination)
         {
             ValidateRange(byteOffset, destination.Length);
+            if (_ioHook is not null)
+            {
+                _ioHook.Read(_stream, byteOffset, destination);
+                return;
+            }
             _stream.Position = byteOffset;
             var total = 0;
             while (total < destination.Length)
@@ -310,6 +347,11 @@ namespace CopperDisk
             }
 
             ValidateRange(byteOffset, source.Length);
+            if (_ioHook is not null)
+            {
+                _ioHook.Write(_stream, byteOffset, source);
+                return;
+            }
             _stream.Position = byteOffset;
             _stream.Write(source);
         }
@@ -334,13 +376,16 @@ namespace CopperDisk
         }
 
         public void Flush()
-            => _stream.Flush(flushToDisk: true);
+        {
+            if (_ioHook is not null) _ioHook.Flush(_stream);
+            else _stream.Flush(flushToDisk: true);
+        }
 
         public void Dispose()
         {
             if (_disposed) return;
             _disposed = true;
-            try { if (!ReadOnly) Flush(); }
+            try { if (!ReadOnly && (_ioHook?.FlushOnDispose ?? true)) Flush(); }
             finally { if (System.Threading.Interlocked.Decrement(ref _backing.References) == 0) _stream.Dispose(); }
         }
 

@@ -6,10 +6,13 @@ On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
 retain their actual package identities and are not relabeled as measurements of
 stable `1.4.1`.
 
-The current project pins Copper68k `1.5.1` and CopperDisk `3.0.0`. The
+The current project pins Copper68k development version `1.5.4-qualified-dev.1`
+and CopperDisk `3.0.0`; the normal production build uses the local CopperDisk
+source project. The
 [Copper68k 1.5.0 release record](COPPER68K_MAINLINE_1_5_0.md) remains historical;
-it does not measure the current pins. The current build's limited synthetic
-throughput snapshot is recorded in the
+it does not measure the current pins. The earlier October snapshot is the
+[2026-10-12 repeat baseline](PERFORMANCE_BASELINE_2026-10-12.md).
+The earlier limited synthetic throughput snapshot is recorded in the
 [2026-10-03 baseline](PERFORMANCE_BASELINE_2026-10-03.md), with its native workload
 failure explained in the [follow-up investigation](PERFORMANCE_INVESTIGATION_2026-10-03.md).
 
@@ -17,12 +20,56 @@ Correctness, host throughput and interactive compatibility are separate results.
 G6/G7 Legacy cutover is retired. Lightweight is already the active engine; ordinary
 development does not repeat that cutover or the completed H-stage sequence.
 
+P1-07 adds a separately versioned
+[current-PC development baseline protocol](../RELEASE_QUALIFICATION.md#current-pc-engine-observations).
+It reuses the reviewed full-workload identities and host-load policy v2 while
+keeping descriptive engine rates separate from installed-app, 60-minute and
+minimum-hardware release budgets. Explicit loaded-host diagnostics retain
+INVALID / RERUN dispositions; historical protocols and evidence stay unchanged.
+The [2026-10-17 record](../RELEASE_QUALIFICATION_2026-10-17.md#current-pc-timing-observations)
+retains nine matching complete identities and all loaded-host timing violations;
+it supplies no release acceptance or comparison against the older baseline.
+
 This guide separates the still-useful host-load policy v2 rules from retired G6
 acceptance instructions. Historical placement and thresholds remain attached to
 their original protocols. The separately versioned homogeneous-host protocol below
 supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
+
+The [2026-10-12 execution profile](PROFILE_2026-10-12.md) completes two full
+sampled replays per workload with exact retained identities and zero allocation,
+plus three bounded optimized-code inspections. It identifies repeated ordinary
+hires preparation within a CCK and active OCS bitplane control checks as concrete
+candidate work. Heavy background CPU activity and long sampling gaps limit the
+percentages; no optimization gain or 1% gate is claimed. Sources, binaries and
+inputs remain unchanged. This diagnostic profile is separate from throughput.
+
+The [2026-10-12 repeat baseline](PERFORMANCE_BASELINE_2026-10-12.md) completes
+nine full Release runs, three per workload, averaging **320.49 FPS lores**,
+**297.86 FPS hires** and **295.29 FPS native Lemmings gameplay**. The same 81
+captured engine, runner and disk source hashes match October 11; no engine
+change was made for the repeat. The initial default-output build encountered
+a locked CopperDisk compiler output; an isolated single-worker production build
+then passed without warnings or errors. Its frozen capsule is recorded separately.
+All retained identities match, all measured thread allocations are zero, and
+captured sources, binaries and inputs remain unchanged. All 173 telemetry
+intervals are valid; no other build/test jobs are observed. Other package CPU
+activity averages roughly 11–12%, with roughly 23% SMT-sibling activity, much
+lower than October 11. This remains a **descriptive baseline**, without a paired
+reference or formal 1% acceptance decision; no historical measurement is relabeled.
+
+The owner-requested [2026-10-11 rough baseline](PERFORMANCE_BASELINE_2026-10-11.md)
+completes nine full current production Release runs while other tasks continue.
+Three runs per workload average **237.13 FPS lores**, **177.57 FPS hires** and
+**240.32 FPS native Lemmings gameplay** on the default PAL OCS/68000 profile.
+All complete retained identities match, all measured thread allocations are zero,
+and captured source, binaries and inputs remain unchanged. Other build/test jobs
+are observed throughout; measured package interference peaks at 99.46% and rates
+vary substantially. These are **descriptive loaded-host rates only**: no samples
+were discarded, no idle performance or causal regression is inferred, and no
+formal 1% acceptance decision is made. Historical protocols and the valid,
+invalid and pending records below remain unchanged.
 
 A **valid idle source-stage diagnostic** completes 66 runs under unchanged
 host-load policy v2, with matching complete identities and zero measured

@@ -1,5 +1,9 @@
 # Lightweight product completion roadmap
 
+For Microsoft Store delivery, customer workflows and planned CopperStart/CopperOS
+integration, see the [productization roadmap](../PRODUCTIZATION_ROADMAP.md).
+This engine roadmap remains the capability inventory, not a Store release checklist.
+
 Source audit: 2026-09-17; OCS/storage status reconciled 2026-09-19; Agnus/RAM and ECS display follow-up 2026-10-01. Lightweight is already the active/default execution
 engine, with bounded native PAL A500 configurations and OCS/ECS Denise. Completing
 the product transition requires porting/integrating capabilities, not merely enabling
@@ -41,14 +45,17 @@ for the implemented four-drive read support; verification boundaries remain expl
 | Paula serial / parallel ports | Paula UART transmit/receive, status, interrupts, break and pin API implemented. General parallel transport and CIA pin modes remain separate gaps. | Complete UART physical phase verification; add optional host transports separately. |
 | RTC | Optional Legacy A501 register model ported to Lightweight, settings and runner; host local time with a guest-set session offset retained through resets/restarts. Native KS3.1 read/write/leap-day/reset passes in normal/scalar modes. See [RTC](RTC.md). | Physical control-bit oscillator behavior, persistent battery files and other RTC chip models remain separate work. |
 | Save states | Explicitly listed unsupported; no full machine state format. | Versioned CPU/device/pending-transfer/media state and deterministic restore across active DMA/audio/input. Host output queues need reset after restore. |
-| RTG | Explicitly rejected; old composition code is excluded from compilation. | A separately scoped guest-visible graphics device/driver and host presentation integration. Not implied by AGA support. |
-| Host integration | Native display/audio/input are active; CopperBench/CopperStart and clipboard gateways report unavailable. | Restore required user workflows through explicit supported integration. Do not make Lightweight depend on the Legacy execution engine. |
+| RTG | Explicitly rejected; the retired Legacy host composition code has been removed. | A separately scoped guest-visible graphics device/driver and host presentation integration. Not implied by AGA support. |
+| Host integration | Native display/audio/input and [qualified standalone CopperStart ROM boot](../COPPERSTART_APP.md) are active; Legacy CopperBench and clipboard gateways remain unavailable. | Qualify CopperOS and installed workflows through explicit supported integration. Do not make Lightweight depend on the Legacy execution engine. |
 | Performance portability | Historical harnesses remain unchanged; a separate homogeneous-retention-v1 harness verifies current-host topology and retains host-load policy v2. | Use frozen same-work comparisons and the [measurement guide](PERFORMANCE.md); no inherited historical FPS claim. |
 
-Settings entries, enums, raw register storage and excluded Legacy code are not
-implementation evidence. `CopperScreen.csproj` excludes `CopperScreenEmulator.cs`,
-`CopperBenchViewModel.cs` and the old presentation helper. CopperStart's archived
-OS-service matrix must not be read as Lightweight hardware coverage.
+Settings entries, enums, raw register storage and historical Legacy code are not
+implementation evidence. The excluded Legacy emulator adapter, CopperBench browser
+and presentation-frame helper were removed on 2026-10-17. Git history and the
+[legacy workspace archive](../../archive/legacy-copperscreen-20260916/README.md)
+preserve their history. The unavailable CopperBench UI and service scaffolding
+remain in the host. CopperStart's archived OS-service matrix must not be read as
+Lightweight hardware coverage.
 
 ## Legacy implementation is the migration starting point
 

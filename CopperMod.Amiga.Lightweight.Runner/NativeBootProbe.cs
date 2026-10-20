@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Json;
 using CopperMod.Amiga.Lightweight;
+using CopperDisk;
 
 // Host-only, bounded snapshots. No CPU bus reads, engine callbacks or hot-path logging.
 internal sealed class NativeBootProbe
@@ -9,17 +10,20 @@ internal sealed class NativeBootProbe
     private readonly bool _continueUnsupported;
     private readonly int _interval;
     private readonly bool _extended;
+    private readonly IReadOnlyList<AmigaHardfileConfiguration> _hardfiles;
     private bool _sawUnsupported;
     private string? _lastVideoUnsupported;
     private bool _wroteCpuProfile;
 
-    internal NativeBootProbe(string directory, bool continueUnsupported, int interval = 60, bool extended = false)
+    internal NativeBootProbe(string directory, bool continueUnsupported, int interval = 60, bool extended = false,
+        IReadOnlyList<AmigaHardfileConfiguration>? hardfiles = null)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(interval);
         _directory = Path.GetFullPath(directory);
         _continueUnsupported = continueUnsupported;
         _interval = interval;
         _extended = extended;
+        _hardfiles = hardfiles ?? [];
         Directory.CreateDirectory(_directory);
     }
 
@@ -91,6 +95,14 @@ internal sealed class NativeBootProbe
         var json = JsonSerializer.Serialize(state);
         File.WriteAllText(stem + ".json", json);
         File.WriteAllBytes(stem + ".chipram", m.ChipRam.ToArray());
+        // Optional diagnostic observation while the machine still owns its open
+        // backing files. Do not flush: that would hide a missing guest CMD_UPDATE.
+        foreach (var disk in _hardfiles)
+        {
+            using var source = new FileStream(disk.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var destination = File.Create(stem + $".hdf{disk.Unit}");
+            source.CopyTo(destination);
+        }
         if (!m.FastRam.IsEmpty)
         {
             File.WriteAllBytes(stem + ".fastram", m.FastRam.ToArray());

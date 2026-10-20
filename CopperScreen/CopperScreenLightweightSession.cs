@@ -7,7 +7,13 @@ namespace CopperScreen;
 internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 {
     private readonly LightweightA500Machine _machine;
+    private readonly IReadOnlyList<LightweightFloppyDriveType> _driveTypes;
     private readonly CopperScreenMinimalBoot? _minimalBoot;
+    private readonly bool _copperStart;
+    private readonly CopperOsWorkspace? _workspace;
+    private int _checkpointFields;
+    private bool _disposed;
+    private bool _workspaceSaveFailed, _discardWorkspaceChanges;
     private CopperScreenInputOptions _inputOptions;
     private byte _mouseButtons, _joystick0, _joystick1;
     private int _fireFrames;
@@ -20,6 +26,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public CopperScreenLightweightSession(CopperScreenStartupOptions options, CopperScreenLightweightSession? previous = null)
     {
         Validate(options);
+        _driveTypes = options.Profile.FloppyDriveTypes;
+        _copperStart = options.Profile.KickstartSource == CopperScreenKickstartSource.CopperStart;
         // Media decoding is mount-time only; none of the old execution machinery is created.
         CopperScreenAdfImage? bootDisk = null;
         byte[] rom;
@@ -29,6 +37,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0);
             rom = _minimalBoot.Rom;
         }
+        else if (_copperStart) rom = CopperScreenCopperStartRom.Read(options.KickstartRomPath);
         else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         BaseDirectory = options.BaseDirectory;
@@ -40,6 +49,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var configuration = new LightweightA500Configuration
             { FramebufferWidth = options.Profile.Chipset.DisplayChip != DisplayChipModel.OcsDenise ? 1816 : 908,
                 DeniseModel = options.Profile.Chipset.DisplayChip switch { DisplayChipModel.AgaLisa => LightweightDeniseModel.Lisa4203, DisplayChipModel.EcsDenise => LightweightDeniseModel.Mos8373, _ => LightweightDeniseModel.Mos8362 }, FloppyDriveCount = options.Profile.FloppyDriveCount,
+                FloppyDriveTypes = _driveTypes.Take(options.Profile.FloppyDriveCount).ToArray(),
                 CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
                 CpuExecutionMode = backend == M68kBackendKind.JitM68040 ? Copper68k.M68kExecutionMode.Jit : Copper68k.M68kExecutionMode.Interpreter,
                 AgnusModel = GetAgnusModel(options.Profile.Chipset.DmaChip),
@@ -52,7 +62,23 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         _machine = previous?._machine.CreateRestartCandidate(configuration) ?? new(configuration);
         try
         {
+            if (_copperStart && CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0]))
+            {
+                if (previous?._workspace?.ImagePath.Equals(options.DriveDiskPaths[0], StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    if (previous._machine.IsDriveDirty(0) || previous._machine.DriveState is { ActiveDma: true } or { MotorOn: true })
+                        throw new InvalidOperationException("Save CopperOS changes on the running session before replacing the Amiga.");
+                    _workspace = previous._workspace.Retain();
+                }
+                else _workspace = CopperOsWorkspace.Open(options.DriveDiskPaths[0]!);
+            }
             _machine.LoadKickstart(rom);
+            if (_copperStart && !string.IsNullOrWhiteSpace(options.KickstartRomPath))
+            {
+                var companion = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(options.KickstartRomPath))!,
+                    "CopperStart-SfsExtension.rom");
+                if (File.Exists(companion)) _machine.LoadExtensionRom(File.ReadAllBytes(companion));
+            }
             for (var i = 0; i < _machine.FloppyDriveCount; i++)
             {
                 var path = options.DriveDiskPaths[i];
@@ -62,10 +88,10 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             }
             ResetHostState();
         }
-        catch { _machine.Dispose(); throw; }
+        catch { _workspace?.Dispose(); _machine.Dispose(); throw; }
     }
 
-    private static CopperDisk.AmigaHardfilePartitionMetadata? ConvertPartition(AmigaHardfilePartitionMetadata? p)
+    internal static CopperDisk.AmigaHardfilePartitionMetadata? ConvertPartition(AmigaHardfilePartitionMetadata? p)
         => p is null ? null : new()
         {
             DeviceName = p.DeviceName,
@@ -94,6 +120,16 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var p = options.Profile;
         var cpu = options.CpuBackendOverride ?? p.CpuBackend;
         var minimal = p.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
+        var copperStart = p.KickstartSource == CopperScreenKickstartSource.CopperStart;
+        if (copperStart && (p.Chipset != AmigaChipset.OcsPal || cpu != M68kBackendKind.AccurateM68000 ||
+            p.ChipRamSize != 524288 || p.ExpansionRamSize != 524288 || p.RealFastRamSize != 0 ||
+            p.FloppyDriveCount != 1 || (options.DriveWriteProtected[0] == false && !CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0])) || p.RtcEnabled || options.HardDrives.Count > 1 || options.HostDirectories.Count != 0))
+            throw new NotSupportedException("Use the A500 + CopperStart standalone ROM preset. " + CopperScreenCopperStartRom.Requirements + " Other configurations are not qualified.");
+        if (copperStart && CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0]))
+            CopperOsWorkspace.ValidateOwnership(options.DriveDiskPaths[0]!);
+        if (copperStart && options.HardDrives.Count == 1)
+            options.HardDrives[0].ValidateCopperStart(checkImage: requireRomPath);
+
         if (minimal && (p.Chipset != new AmigaChipset(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal) || p.ChipRamSize != 524288 ||
             (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
             p.RealFastRamSize != 0 || options.HardDrives.Count != 0 || options.HostDirectories.Count != 0))
@@ -108,8 +144,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.RtgVramSize != 0 ||
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
-            p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot) ||
-            (!aga && !minimal && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
+            p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart) ||
+            (!aga && !minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
             throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
@@ -118,7 +154,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (requireRomPath && minimal && string.IsNullOrWhiteSpace(options.DriveDiskPaths[0]))
             throw new NotSupportedException("Choose a standard ADF startup disk in DF0 for minimal disk boot.");
         if (requireRomPath && !minimal && string.IsNullOrWhiteSpace(options.KickstartRomPath))
-            throw new NotSupportedException("Choose the matching Kickstart 1.3, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
+            throw new NotSupportedException(copperStart ? CopperScreenCopperStartRom.Recovery : "Choose the matching Kickstart 1.3, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
         var maxFast = LightweightA500Configuration.MaximumFastRamBytes(GetCpuModel(cpu));
         if (!LightweightA500Configuration.IsSupportedFastRamSize(p.RealFastRamSize) || p.RealFastRamSize > maxFast)
             throw new NotSupportedException($"Fast RAM must use a standard size up to {maxFast / 1048576} MiB for the selected CPU.");
@@ -218,6 +254,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool IsPrimaryFirePressed => (_mouseButtons & 1) != 0 || ((_joystick0 | _joystick1) & 16) != 0 || _fireFrames > 0;
     public bool AudioFilterEnabled => _machine.AudioFilterControlEnabled;
     internal LightweightA500Machine Machine => _machine;
+    internal string? WorkspaceSeedPairId => _workspace?.PairId;
 
     public int AudioFramesPerAppFrame(int sampleRate)
         // Capacity, not a fixed sample count: a sync hold can extend a field.
@@ -231,11 +268,23 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         {
             if (_pendingAdf[i] is not { } adf || _insertDelay[i]-- > 0) continue;
             adf.Mount(_machine, i);
+            _machine.SetDriveWriteProtected(i, true);
             _pendingAdf[i] = null;
             StatusText = $"Lightweight: DF{i} inserted " + CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]);
         }
         var field = _machine.IsLongField ? 0 : 1;
         _machine.ExecuteFrame();
+        if (_workspace != null && !_discardWorkspaceChanges && ++_checkpointFields >= 50)
+        {
+            _checkpointFields = 0;
+            try
+            {
+                if (_workspace.Checkpoint(_machine) && _workspaceSaveFailed)
+                { _workspaceSaveFailed = false; SetStatusText("CopperOS workspace - changes saved automatically"); }
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            { _workspaceSaveFailed = true; SetStatusText("CopperOS changes are not saved: " + ex.Message); }
+        }
         if (_minimalBoot is { } boot && _machine.Cpu.ProgramCounter >= boot.FaultAddress && _machine.Cpu.ProgramCounter < boot.FaultAddress + 4)
         {
             var address = (int)CopperScreenMinimalBoot.StateAddress;
@@ -314,9 +363,12 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     public bool InsertLoadedDisk(int drive, string path, CopperScreenAdfImage disk, bool markChanged)
     {
+        if (_workspace != null && drive == 0) return Reject("Close this CopperOS session before changing its workspace disk.");
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
         if (disk.Format == LightweightFloppyFormat.Adf && !Path.GetExtension(disk.Name).Equals(".adf", StringComparison.OrdinalIgnoreCase))
             throw new NotSupportedException("ADF media must have an .adf filename.");
+        if (disk.RequiresHighDensityDrive && _driveTypes[drive] != LightweightFloppyDriveType.HighDensity)
+            return Reject($"DF{drive} is a DD drive. Select HD in Floppy Drives settings and restart the Amiga before inserting HD media.");
         var adf = disk; // Fully prepared by the loader before changing the existing medium.
         if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or discard and eject it before replacing the disk.");
         if (markChanged)
@@ -326,6 +378,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             _insertDelay[drive] = 25;
         }
         else { adf.Mount(_machine, drive); _pendingAdf[drive] = null; }
+        _machine.SetDriveWriteProtected(drive, true);
         _diskPaths[drive] = path;
         StatusText = $"Lightweight: DF{drive} " + (markChanged ? "swapping " : "inserted ") + CopperScreenDiskImageArchive.GetDisplayName(path);
         return true;
@@ -333,6 +386,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     public bool EjectDisk(int drive)
     {
+        if (_workspace != null && drive == 0) return Reject("Close this CopperOS session before changing its workspace disk.");
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
         if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or use Discard and eject.");
         return DiscardAndEjectDisk(drive);
@@ -340,6 +394,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     public bool DiscardAndEjectDisk(int drive)
     {
+        if (_workspace != null && drive == 0) return Reject("Close this CopperOS session before changing its workspace disk.");
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
         _pendingAdf[drive] = null;
         _machine.EjectAdf(drive);
@@ -350,6 +405,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool SetDriveWriteProtected(int drive, bool writeProtected)
     {
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
+        if (!writeProtected && _pendingAdf[drive] != null) return Reject("Wait for the disk swap to finish before enabling writes.");
+        if (_copperStart && !writeProtected && _workspace == null) return Reject("CopperStart writes require a user-owned CopperOS workspace. The seed stays read-only.");
         if (!writeProtected && (_pendingAdf[drive]?.Format ?? _machine.GetDriveFormat(drive)) is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf))
             return Reject("This disk format is permanently read-only.");
         _machine.SetDriveWriteProtected(drive, writeProtected);
@@ -357,8 +414,38 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         return true;
     }
 
-    public byte[] ExportAdf(int drive) => _machine.ExportAdf(drive);
-    public void MarkAdfSaved(int drive) => _machine.MarkAdfSaved(drive);
+    internal bool OwnsWorkspacePath(string path) => _workspace?.ImagePath.Equals(Path.GetFullPath(path), StringComparison.OrdinalIgnoreCase) == true;
+    internal void ExportWorkspaceBackup(string destination)
+    {
+        if (_workspace == null) throw new NotSupportedException("Start a CopperOS workspace before exporting a workspace backup.");
+        _workspace.ExportBackup(destination, ExportAdf(0));
+    }
+    internal bool IsInsideWorkspace(string path) => _workspace != null && Path.GetFullPath(path).StartsWith(
+        _workspace.DirectoryPath.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
+    public byte[] ExportAdf(int drive)
+    {
+        if (_workspace == null || drive != 0) return _machine.ExportAdf(drive);
+        var paused = IsPaused;
+        try
+        {
+            IsPaused = false;
+            for (var n=0;n<6000;n++)
+            {
+                if (_machine.DriveState is not ({ActiveDma:true} or {MotorOn:true}))
+                {
+                    var bytes = _machine.ExportAdf(0);
+                    try { CopperOsWorkspace.ValidateImage(bytes); return bytes; } catch (InvalidDataException) { }
+                }
+                if (_faulted) break;
+                RenderNextFrame(Framebuffer);
+            }
+            throw new IOException("CopperOS disk activity is unfinished. Keep the session open and retry after the guest finishes writing.");
+        }
+        finally { IsPaused=paused; }
+    }
+    // Exporting elsewhere must not acknowledge an unsaved primary workspace.
+    public void MarkAdfSaved(int drive) { if (_workspace == null || drive != 0) _machine.MarkAdfSaved(drive); }
+    public void DiscardPersistentStorage() { _discardWorkspaceChanges = true; } // Direct host writes already made cannot be rolled back.
     private bool Reject(string message) { SetStatusText(message); return false; }
     public void SetStatusText(string message) { if (!_faulted) StatusText = message; }
     public void CaptureFatalException(Exception exception)
@@ -389,7 +476,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Framebuffer = new int[Width * Height];
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
-        StatusText = _minimalBoot != null ? "Lightweight A500 — minimal disk boot (experimental; no DOS or Workbench)"
+        StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
+            : _minimalBoot != null ? "Lightweight A500 — minimal disk boot (experimental; no DOS or Workbench)"
+            : _copperStart ? CopperScreenCopperStartRom.Description
             : _machine.IsAga ? "Lightweight experimental A1200 — native Kickstart 3.0, initial AGA display"
             : "Lightweight experimental A500 — native Kickstart, ADF / read-only IPF / CopperHDF";
     }
@@ -425,10 +514,35 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public void KeyUp(AmigaRawKey key) => _machine.SetKeyState((byte)key, false);
     public bool ConsumeCopperBenchRequest() => false;
     public bool LaunchCopperBenchPath(string path, out string message)
-    { message = "CopperBench/CopperStart services are not available in Lightweight."; return Reject(message); }
+    { message = "Legacy CopperBench host services are unavailable. Standalone CopperStart uses guest floppy services only."; return Reject(message); }
     public void QueueHostClipboardText(string text) => SetStatusText("Host clipboard integration is not available in Lightweight.");
     public void QueueHostClipboardImage(ClipboardImage image) => SetStatusText("Host clipboard integration is not available in Lightweight.");
     public bool TryTakeHostClipboardText(out string text) { text = string.Empty; return false; }
     public bool TryTakeHostClipboardImage(out ClipboardImage? image) { image = null; return false; }
-    public void Dispose() => _machine.Dispose();
+    public void SavePersistentStorage()
+    {
+        _machine.FlushPersistentStorage();
+        if (_workspace == null) return;
+        var paused = IsPaused;
+        try
+        {
+            IsPaused = false;
+            for (var n = 0; n < 6000; n++)
+            {
+                if (_workspace.Checkpoint(_machine)) return;
+                if (_faulted) break;
+                RenderNextFrame(Framebuffer);
+            }
+            throw new IOException("CopperOS disk activity did not finish. The last complete workspace is retained; keep the app open and retry after the guest finishes writing.");
+        }
+        finally { IsPaused = paused; }
+    }
+    public void Dispose()
+    {
+        if (_disposed) return;
+        // On failure retain both machine and lease so callers can retry/export.
+        if (!_discardWorkspaceChanges) SavePersistentStorage();
+        try { _machine.Dispose(); }
+        finally { _workspace?.Dispose(); _disposed = true; }
+    }
 }

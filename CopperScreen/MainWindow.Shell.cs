@@ -93,6 +93,7 @@ internal sealed partial class MainWindow
     private Button _restartButton = null!, _browseDiskButton = null!, _ejectDiskButton = null!;
     private Button _previousDiskButton = null!, _nextDiskButton = null!, _muteButton = null!, _moreButton = null!;
     private Button _inputHelpButton = null!, _volumeButton = null!;
+    private Button _stopButton = null!, _releaseInputButton = null!, _exportWorkspaceButton = null!;
     private ComboBox _primaryDiskCombo = null!;
     private bool _updatingDiskChoices, _selectingRecentDisk;
     private string? _diskChoicesCurrentPath, _diskChoicesCurrentName;
@@ -113,7 +114,10 @@ internal sealed partial class MainWindow
 
     private Border CreateMainToolbar()
     {
-        _restartButton = CreateToolbarButton("Restart", () => _ = ResetRuntimeAsync(), "Restart the current Amiga; its unsaved work will be lost");
+        _restartButton = CreateToolbarButton("Restart", () => _ = ResetRuntimeAsync(), "Save CopperOS storage and restart the current Amiga; running programs restart");
+        _stopButton = CreateToolbarButton("Stop", () => _ = StopToLauncherAsync(), "Save CopperOS storage and return to the launcher");
+        _releaseInputButton = CreateToolbarButton("Release input", ReleaseInteractiveInput, "Release captured mouse and keys (F10)");
+        _exportWorkspaceButton = CreateToolbarButton("Export workspace…", () => _ = ExportWorkspaceBackupAsync(), "Export files and the system-pair record to a CopperOS backup outside app data");
         _muteButton = CreateToolbarButton("Mute", ToggleMute, "Mute emulator audio");
         _moreButton = CreateToolbarButton("More", () => { }, "Display, diagnostics and keyboard shortcuts (F1)");
         _volumeButton = CreateToolbarButton("Sound", () => _shellVolume.Value = _outputVolume, "Adjust volume or mute emulator audio");
@@ -142,7 +146,7 @@ internal sealed partial class MainWindow
         foreach (var button in new[] { _restartButton, _fullscreenButton, _volumeButton, _settingsButton, _moreButton })
             StyleShellCommand(button);
         _toolbarCommands = new WrapPanel();
-        _sessionCommands = CommandGroup(_pauseButton, _restartButton);
+        _sessionCommands = CommandGroup(_pauseButton, _restartButton, _stopButton);
         _sessionCommands.Margin = new Thickness(0, 0, 12, 0);
         _toolbarCommands.Children.Add(_sessionCommands);
         _utilityCommands = new WrapPanel();
@@ -152,6 +156,10 @@ internal sealed partial class MainWindow
         _toolbarCommands.Children.Add(_utilitySection);
 
         var more = new StackPanel { Spacing = 14, Width = 370 };
+        more.Children.Add(SectionLabel("Session"));
+        more.Children.Add(_releaseInputButton);
+        more.Children.Add(_exportWorkspaceButton);
+        more.Children.Add(SettingsNote(CopperScreenLaunchWorkflow.GuestHelp));
         more.Children.Add(SectionLabel("Display"));
         more.Children.Add(_overscanButton);
         var diagnostics = new StackPanel { Spacing = 8 };
@@ -375,19 +383,25 @@ internal sealed partial class MainWindow
     private void UpdateShellStatus(CopperScreenState state)
     {
         if (_sessionStatus == null) return;
+        // Frame presentation may trail a completed pause/reset command.
+        var sessionState = _runtime?.CurrentState ?? state;
         var running = _runtime != null;
         var sessionChanged = _sessionCommands.IsVisible != running;
         _sessionCommands.IsVisible = running;
         _pauseButton.IsVisible = _restartButton.IsVisible = running;
-        _pauseButton.IsEnabled = running && state.FaultMessage == null && !_settingsVisible;
-        _restartButton.IsEnabled = running && !_settingsVisible;
-        SetShellButtonLabel(_pauseButton, state.IsPaused ? "Resume" : "Pause", state.IsPaused ? "play" : "pause");
+        _pauseButton.IsEnabled = running && state.FaultMessage == null && !_settingsVisible && !_applyingSettings && !_checkingDiskChanges;
+        _restartButton.IsEnabled = _stopButton.IsEnabled = running && !_settingsVisible && !_applyingSettings && !_checkingDiskChanges;
+        var workspace = CopperOsWorkspace.IsWorkspace(_committedSettings.DriveDiskPaths[0]);
+        _exportWorkspaceButton.IsVisible = running && workspace;
+        _exportWorkspaceButton.IsEnabled = !_applyingSettings && !_checkingDiskChanges;
+        _releaseInputButton.IsEnabled = running;
+        SetShellButtonLabel(_pauseButton, sessionState.IsPaused ? "Resume" : "Pause", sessionState.IsPaused ? "play" : "pause");
         SetShellButtonLabel(_fullscreenButton, WindowState == WindowState.FullScreen ? "Windowed" : "Fullscreen", "fullscreen");
         SetShellButtonLabel(_volumeButton, _outputMuted ? "Muted" : "Sound", _outputMuted ? "muted" : "sound");
         _overscanButton.Content = _showFullOverscan ? "Overscan: Full" : "Overscan: Cropped";
         var drive = state.Drives.FirstOrDefault();
         RefreshPrimaryDiskChoices(drive);
-        var canChangeDisk = !_settingsVisible && !_applyingSettings && !_selectingRecentDisk;
+        var canChangeDisk = !_settingsVisible && !_applyingSettings && !_selectingRecentDisk && !workspace && !_welcomeCopperOs;
         _browseDiskButton.IsEnabled = _primaryDiskCombo.IsEnabled = canChangeDisk;
         _ejectDiskButton.IsEnabled = (drive.HasDisk || drive.IsSwapPending) && canChangeDisk;
         ToolTip.SetTip(_primaryDiskCombo, drive.DiskPath ?? "Choose a recent disk, use Browse, or drop an ADF, ADZ, DMS, IPF, SCP or ZIP here.");
@@ -408,9 +422,9 @@ internal sealed partial class MainWindow
         _muteButton.Content = _outputMuted ? "Unmute" : "Mute";
         _volumeButton.IsEnabled = _muteButton.IsEnabled = !_settingsVisible;
         AutomationProperties.SetName(_muteButton, _muteButton.Content.ToString()!);
-        _sessionStatus.Text = !running ? "Ready when you are" : state.FaultMessage != null ? "Stopped" : state.IsPaused ? "Paused" : "Running · " + MachineName(_committedSettings);
-        _sessionStatus.Foreground = state.IsPaused ? Accent : MutedText;
-        _captureStatus.Text = !running ? "Drop an ADF, ADZ, DMS, IPF, SCP or ZIP to choose a disk" : _mouseGrabActive ? "Mouse captured · F10 to release" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
+        _sessionStatus.Text = !running ? "Ready when you are" : sessionState.FaultMessage != null ? "Stopped" : sessionState.IsPaused ? "Paused" : "Running · " + MachineName(_committedSettings);
+        _sessionStatus.Foreground = sessionState.IsPaused ? Accent : MutedText;
+        _captureStatus.Text = !running ? "Choose a launch workflow below" : _mouseGrabActive ? "Mouse captured · F10 to release" : workspace ? "CopperOS: type Demo at the Shell prompt · F10 releases input · More for help/export" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
         _captureStatus.Foreground = _mouseGrabActive ? Accent : MutedText;
         if (!_toolbar.IsVisible && WindowState != WindowState.FullScreen)
             _captureStatus.Text += " · F11 controls";

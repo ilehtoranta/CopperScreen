@@ -38,7 +38,7 @@ public sealed class Kickstart31Tests : IDisposable
             RomVersion = KickstartVersion.Kickstart31, KickstartRomPath = Rom(), RealFastRamKb = fastKiB
         };
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var saved = CopperScreenProfileStore.Save(draft, _directory);
+        var saved = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(saved, _directory, out var profile, out var error), error);
         Assert.Equal(KickstartVersion.Kickstart31, profile.KickstartVersion);
         var loaded = CopperScreenSettingsDraft.FromProfile(profile);

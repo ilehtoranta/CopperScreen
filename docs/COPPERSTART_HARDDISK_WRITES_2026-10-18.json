@@ -1,0 +1,142 @@
+{
+  "qualificationId": "diskboot-2026-10-18-hdf.1",
+  "runnerBoots": 4,
+  "readOnlyMutationControls": 2,
+  "guestFlushBeforeHostSaveOrDispose": true,
+  "machineBoots": 9,
+  "romSha256": "fc6511086bb86a33a04887fbf2ef1d7f82a91631853e39db08529ad0c0314ac0",
+  "fixtureSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+  "compiledMc68000Cases": 0,
+  "passed": true,
+  "runnerSha256": "990E219BCE583878F3E6A37FA58D5BF2B3A939663A90B3B9BE2052E6663C72B5",
+  "fullRomCases": 4,
+  "installedPackage": "UNAVAILABLE: source app/runtime and runner only",
+  "sessionReplacement": true,
+  "hostSemanticCases": 0,
+  "appBoots": 5,
+  "freshProtectedReadback": true,
+  "reset": true,
+  "protocol": "copperstart-frontend-hdf-writes-v1",
+  "processRestart": true,
+  "schemaVersion": 1,
+  "appResult": {
+    "passed": true,
+    "frontend": "app-runtime",
+    "boots": 4,
+    "payloadBytes": 2049,
+    "guestCmdUpdateBeforeHostSave": true,
+    "hostSaveSucceeded": true,
+    "hostSaveAdvancedCycles": false,
+    "reset": true,
+    "sessionReplacement": true,
+    "freshProtectedBoot": true,
+    "profileAndLastMachineRestored": true,
+    "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+    "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046"
+  },
+  "runnerResult": {
+    "passed": true,
+    "frontend": "command-line-process",
+    "boots": 3,
+    "payloadBytes": 2049,
+    "guestCmdUpdateBeforeExit": true,
+    "liveBackingSnapshotWithoutHostFlush": true,
+    "writableProcessRestart": true,
+    "freshProtectedBoot": true,
+    "pristineSha256": "D2D23EAB4C75E5BAAADF99F5D59E0A36F7454FCDDDCA512153D96A8CD2C49F6E",
+    "savedSha256": "74E8A6F56EC6941E66AFF1B653CB13975213026526E4F16BDD8915E55A750046",
+    "runnerSha256": "990E219BCE583878F3E6A37FA58D5BF2B3A939663A90B3B9BE2052E6663C72B5"
+  },
+  "tests": [
+    {
+      "name": "CopperScreen.Tests.CopperStartHardDiskWriteTests.CommandLineWritesFlushBeforeExitRestartAndFreshProtectedBootReadback",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartHardDiskWriteTests.CommandLineProtectedPristinePartitionRejectsWritesWithoutChangingBacking",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartHardDiskWriteTests.AppWritesGuestFlushHostSaveResetReplacementAndFreshBootReadback",
+      "outcome": "Passed"
+    },
+    {
+      "name": "CopperScreen.Tests.CopperStartHardDiskWriteTests.AppProtectedPristinePartitionRejectsFirstMutationWithoutChangingBacking",
+      "outcome": "Passed"
+    }
+  ],
+  "testResults": {
+    "path": "artifacts\\hdf-frontend-writes-proof-20261018\\frontend-writes.trx",
+    "sha256": "A6AB6980082485F064727B8637162FCFFD05FD58078F1CEA8B62CA107C04F4FF"
+  },
+  "artifactDirectory": "artifacts/hdf-frontend-writes-proof-20261018",
+  "appBinaries": [
+    {
+      "path": "artifacts\\hdf-frontend-writes-proof-20261018\\build-app\\bin\\CopperScreen.Lightweight.Tests\\release\\CopperScreen.dll",
+      "sha256": "44CCF63CB8D9532172D4E13370956239711F4EBB0EFC09676AE8B5233A145345"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-proof-20261018\\build-app\\bin\\CopperScreen.Lightweight.Tests\\release\\CopperMod.Amiga.Lightweight.dll",
+      "sha256": "E589A7AE5F6E9EB9E8BE01CAB11C6C187BC2C167BBF50AB7469FB7F8B9541F99"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-proof-20261018\\build-app\\bin\\CopperScreen.Lightweight.Tests\\release\\CopperDisk.dll",
+      "sha256": "1CB679EA1838C1B94266D7D427D4300AAD46A2FD598E1FE54908A77EFD1DFE31"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-proof-20261018\\build-app\\bin\\CopperScreen.Lightweight.Tests\\release\\Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-proof-20261018\\build-app\\bin\\CopperScreen.Lightweight.Tests\\release\\CopperScreen.Lightweight.Tests.dll",
+      "sha256": "B794CC6C9D2B93019FE8512B1D9D6954BC44C940A3AA51BF97B8AC5E29016C7E"
+    }
+  ],
+  "runnerBinaries": [
+    {
+      "path": "artifacts\\hdf-frontend-writes-qualified-20261018\\build-runner\\bin\\CopperMod.Amiga.Lightweight.Runner\\release\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "990E219BCE583878F3E6A37FA58D5BF2B3A939663A90B3B9BE2052E6663C72B5"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-qualified-20261018\\build-runner\\bin\\CopperMod.Amiga.Lightweight.Runner\\release\\CopperMod.Amiga.Lightweight.dll",
+      "sha256": "658A8B4F540160C587AA039C83FDAFB09C79CF67F22EE361233A93D03B6AB76B"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-qualified-20261018\\build-runner\\bin\\CopperMod.Amiga.Lightweight.Runner\\release\\CopperDisk.dll",
+      "sha256": "3B9E33BAD33A4483600456B2ACD3B66682A684FE336F825D6171375FB1F6E7E6"
+    },
+    {
+      "path": "artifacts\\hdf-frontend-writes-qualified-20261018\\build-runner\\bin\\CopperMod.Amiga.Lightweight.Runner\\release\\Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    }
+  ],
+  "productionBuild": {
+    "errors": 0,
+    "command": "dotnet build CopperScreen.slnx -c Release --artifacts-path artifacts/hdf-write-production",
+    "warnings": 0,
+    "passed": true
+  },
+  "hostConfigurationChecks": {
+    "passed": 11,
+    "nativeExecution": false,
+    "script": "scripts/tests/test-ffs-hardfile-runner.ps1"
+  },
+  "sourceFiles": [
+    {
+      "path": "CopperScreen.Lightweight.Tests/CopperStartHardDiskWriteTests.cs",
+      "sha256": "00332220CA85F213C9280112E68119672762C668F5D0B4B3F7BCF9EC7903CC02"
+    },
+    {
+      "path": "CopperScreen.Lightweight.Tests/FfsHardDiskProbe.cs",
+      "sha256": "BB4B920749D432E02A4F8E717593DAC218BF12BFB5F4BC959DC541D68A92F1F6"
+    },
+    {
+      "path": "CopperMod.Amiga.Lightweight.Runner/NativeBootProbe.cs",
+      "sha256": "54FDD08412DCAA119F4C8A0010CA6E70BCEA86E59A88F3CD8C42492C506416EC"
+    },
+    {
+      "path": "scripts/test-copperstart-harddisk-writes.ps1",
+      "sha256": "7AB32D391AFDFF1370E79050E965469F5F0BC78C903CBB911490A8E5AE0E0C03"
+    }
+  ]
+}

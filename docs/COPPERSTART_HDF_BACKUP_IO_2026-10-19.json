@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "qualificationId": "copperstart-hdf-backup-io-2026-10-19.1",
+  "status": "PASS",
+  "package": {
+    "identity": "CopperScreen.Test.8d5788917fba4b63b1f2473277245c25",
+    "version": "1.1.54.0",
+    "sha256": "79B7B413BD09A020AA945BA1B63A29D3BEDEF11CD5EC053722EE20417FA3218A",
+    "signedLocalDiagnostic": true,
+    "developmentRegistration": false,
+    "ownedRegistrationRemoved": true,
+    "storeCertified": false
+  },
+  "firmware": {
+    "qualificationId": "diskboot-2026-10-19-ffs-overwrites.1",
+    "sha256": "4D59A7AEB53C87709C137500BEE50FC5E10DD96E833B779ABD1C3D4A86C6E46D",
+    "changed": false
+  },
+  "fixtureSha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+  "inputBackupSha256": {
+    "existing-backup.copperhdf": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC"
+  },
+  "productionFix": {
+    "problem": "Restore committed its form despite failure to save last-machine.json",
+    "atomicMachineSelectionBeforeFormCommit": true,
+    "newRestoreCopiesRemovedOnSelectionSaveFailure": true,
+    "volumeMuteAndFloppyHistoryUnchanged": true
+  },
+  "coverage": {
+    "hostSemanticCases": 19,
+    "desktopCases": 3,
+    "testFailures": 0,
+    "testSkips": 0,
+    "separateCompiledMc68000Cases": 0,
+    "acceptedInstalledProcesses": 6,
+    "fullRomBoots": 7,
+    "gracefulFailures": 5,
+    "expectedForcedTerminations": 4,
+    "unexpectedAppFailures": 0
+  },
+  "cases": [
+    {
+      "name": "export-disk-full",
+      "operation": "export",
+      "stage": "export-chunk",
+      "failure": "full",
+      "error": "There is not enough space on the disk. (diagnostic ERROR_DISK_FULL)",
+      "hresult": "80070070",
+      "hitBytes": 262144,
+      "hitPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\export-disk-full\\.hdf-backup-3114416f0b5f4a29b433576fb0f51c68.tmp",
+      "savedFilesUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "backupUnchanged": true,
+      "noPublishedOrPartialFiles": true
+    },
+    {
+      "name": "restore-disk-full",
+      "operation": "restore",
+      "stage": "restore-chunk",
+      "failure": "full",
+      "error": "There is not enough space on the disk. (diagnostic ERROR_DISK_FULL)",
+      "hresult": "80070070",
+      "hitBytes": 262144,
+      "hitPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-6a84281e62ee4ecc9a6f96cee9ada17b",
+      "savedFilesUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "backupUnchanged": true,
+      "noPublishedOrPartialFiles": true
+    },
+    {
+      "name": "export-access-denied",
+      "operation": "export",
+      "stage": "export-opening",
+      "failure": "deny",
+      "error": "Access to the path 'C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\export-access-denied\\.hdf-backup-609ba8a71b974e52b96961c545fbf9c5.tmp' is denied.",
+      "hresult": "80070005",
+      "hitBytes": 0,
+      "hitPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\export-access-denied\\.hdf-backup-609ba8a71b974e52b96961c545fbf9c5.tmp",
+      "savedFilesUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "backupUnchanged": true,
+      "noPublishedOrPartialFiles": true
+    },
+    {
+      "name": "restore-access-denied",
+      "operation": "restore",
+      "stage": "restore-opening",
+      "failure": "deny",
+      "error": "Access to the path 'C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-d788ada70af543da8bfc876b0c61214e' is denied.",
+      "hresult": "80070005",
+      "hitBytes": 0,
+      "hitPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-d788ada70af543da8bfc876b0c61214e",
+      "savedFilesUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "backupUnchanged": true,
+      "noPublishedOrPartialFiles": true
+    },
+    {
+      "name": "restore-settings-unwritable",
+      "operation": "restore",
+      "stage": "restore-flushed",
+      "failure": "settings",
+      "error": "Access to the path is denied.",
+      "hresult": "80070005",
+      "hitBytes": 0,
+      "hitPath": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-b3550b747c1e497bac8d1ae7d01dcd02",
+      "savedFilesUnchanged": true,
+      "draftUnchanged": true,
+      "committedUnchanged": true,
+      "backupUnchanged": true,
+      "noPublishedOrPartialFiles": true
+    }
+  ],
+  "interruptions": [
+    {
+      "phase": "io-export-partial",
+      "pid": 64376,
+      "exitCode": -1,
+      "barrier": {
+        "name": "io-export-partial",
+        "operation": "export",
+        "stage": "export-chunk",
+        "staged": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\io-export-partial\\.hdf-backup-b408e0b290564e7c9e8ef1587a1eed10.tmp",
+        "bytes": 262144,
+        "protectedFiles": {
+          "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "profile.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "last-machine.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+        },
+        "backupHash": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC"
+      },
+      "artifacts": [
+        {
+          "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\io-export-partial\\.hdf-backup-b408e0b290564e7c9e8ef1587a1eed10.tmp",
+          "Bytes": 263737,
+          "Sha256": "0C881CC583FC5B3B11D30909A45B9E8760454B072A649D6C1FBD4F7FF56DBFA1"
+        }
+      ]
+    },
+    {
+      "phase": "io-export-flushed",
+      "pid": 8180,
+      "exitCode": -1,
+      "barrier": {
+        "name": "io-export-flushed",
+        "operation": "export",
+        "stage": "export-flushed",
+        "staged": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\io-export-flushed\\.hdf-backup-dfbc923e11874f00a3d0c37d461c156d.tmp",
+        "bytes": 0,
+        "protectedFiles": {
+          "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "profile.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "last-machine.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+        },
+        "backupHash": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC"
+      },
+      "artifacts": [
+        {
+          "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hdf-backup-io-20261019\\inputs-final\\io-export-flushed\\.hdf-backup-dfbc923e11874f00a3d0c37d461c156d.tmp",
+          "Bytes": 3770325,
+          "Sha256": "6FE234D2A42A2D509F59B73052824D2CF845200497B1E7BE1C19464D499E519C"
+        }
+      ]
+    },
+    {
+      "phase": "io-restore-partial",
+      "pid": 79484,
+      "exitCode": -1,
+      "barrier": {
+        "name": "io-restore-partial",
+        "operation": "restore",
+        "stage": "restore-chunk",
+        "staged": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-1ab4fa19794e40eaa84898f12cf1dc1b",
+        "bytes": 262144,
+        "protectedFiles": {
+          "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "profile.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "last-machine.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+        },
+        "backupHash": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC"
+      },
+      "artifacts": [
+        {
+          "Bytes": 1844,
+          "Path": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-1ab4fa19794e40eaa84898f12cf1dc1b\\profile.json",
+          "Sha256": "652774D06DFDBDE7F42FF840095F6BEFE9709B8B33968B71BA926C2D1827B3E2"
+        },
+        {
+          "Bytes": 262144,
+          "Path": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-1ab4fa19794e40eaa84898f12cf1dc1b\\unit-0.hdf",
+          "Sha256": "B26761F050A630A8569DF8F0AB3E085BE6E0D4F5D501E58BC194223B1DDD08B9"
+        }
+      ]
+    },
+    {
+      "phase": "io-restore-flushed",
+      "pid": 37660,
+      "exitCode": -1,
+      "barrier": {
+        "name": "io-restore-flushed",
+        "operation": "restore",
+        "stage": "restore-flushed",
+        "staged": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-0bf07654f88b49b3a0fd20a28db3d9b0",
+        "bytes": 0,
+        "protectedFiles": {
+          "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+          "profile.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "last-machine.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+          "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+        },
+        "backupHash": "04C02C602A060601C986A94E90540B08DDC1528A46B42744683B4BFC8F4CCCAC"
+      },
+      "artifacts": [
+        {
+          "Bytes": 1897,
+          "Path": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-0bf07654f88b49b3a0fd20a28db3d9b0\\profile.json",
+          "Sha256": "BE4568E34B0FD811FA7732F8F6B9574CE9F3B8BD5A2F1C5BC40DC4ACA5E743E3"
+        },
+        {
+          "Bytes": 3768320,
+          "Path": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.8d5788917fba4b63b1f2473277245c25_a0cyw3gffeccg\\LocalState\\CopperScreen\\RdbProof\\8d5788917fba4b63b1f2473277245c25\\backup-io-default\\HardDiskRestores\\.restore-0bf07654f88b49b3a0fd20a28db3d9b0\\unit-0.hdf",
+          "Sha256": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368"
+        }
+      ]
+    }
+  ],
+  "results": {
+    "protocol": "copperscreen-hdf-backup-io-audit-v1",
+    "passed": true,
+    "gracefulFailures": 5,
+    "forcedTerminations": 4,
+    "installedProcesses": 6,
+    "fullRomBoots": 7,
+    "diskFullFaultInjection": true,
+    "actualWindowsAccessDenied": true,
+    "existingDisksSettingsBackupUnchanged": true,
+    "gracefulFailureStagingCleaned": true,
+    "interruptedArtifactsRemainUnpublished": true,
+    "interruptedArtifactsRetained": true,
+    "freshFullRomBothPartitionsReadback": true
+  },
+  "protectedFiles": {
+    "disk.hdf": "000A3AF5969E52B856F59DDD1D3298CC2FF71C60ADFDEF0136369228D5C2F368",
+    "profile.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+    "last-machine.json": "3C9E776B2D93795ED2B5448B0072071BA917D8424805DDE3B661018BEA8CB936",
+    "recent-session.json": "746D11E0A85D82CFDED308F8AA35C505D1AC0D7C5E8C03A6C8F5C0A1A2E9504A"
+  },
+  "build": {
+    "configuration": "Release",
+    "warnings": 0,
+    "errors": 0,
+    "diagnosticPublishCa1416Warnings": 12,
+    "productionExcludesInstalledObservers": true,
+    "diagnosticIncludesObservers": true
+  },
+  "sourceSha256": {
+    "CopperScreen/CopperScreenHardDiskBackup.cs": "76D21417054CB17B84888884F3A6F951E7FC5DD2D32E802919E91BDD2107FEAF",
+    "CopperScreen/MainWindow.HardDiskBackup.cs": "4366B9CD0F2E9C2ED52E3F5EFB15D902123D5CBD4E155849F7E941195A2C7C75",
+    "CopperScreen/CopperScreenRecentSession.cs": "296AD3964DE204A7D1AD1B1720DCD84C52D438BF2CB62E2BDEEA4F54B4D8234A",
+    "CopperScreen/Diagnostics/CopperScreenInstalledBackupIo.cs": "09348B1C7BA52E4C08B65C83F0C061C4E1EC09A0B4B849C5CB814D6C5003BE9A",
+    "CopperScreen/Diagnostics/CopperScreenInstalledRdbProof.cs": "B585957D4FBD2097F6C8AA971104AE9C6CF1B81D8DE2B5F43587516D4F6BD9EC",
+    "CopperScreen/Diagnostics/CopperScreenRdbImageProof.cs": "0A1A49575734E8AF29A594EFEC37D10893D2AA6BCE6E01A7EABDC4ED4CA6D010",
+    "CopperScreen/Firmware/CopperStart.json": "EAD2912CE7047197A2A8209A08A42BF40689523F4082D19F8497A3BE588F5B73",
+    "CopperScreen.Lightweight.Tests/HardDiskBackupTests.cs": "33EA0E9AA6F2C6DD1741BAAD972B7AFB500564CD5678B2C6DBC6E921EEB5ED8A",
+    "CopperScreen.Desktop.Tests/HardDiskBackupFlowTests.cs": "A6020166599B534DF19B5FA8AC94669F38EDCCCA2C2209CE059E049390FE85D0",
+    "scripts/test-msix-hdf-backup-io.ps1": "2DEF26F6FB9D71579BC0F961E4B7FB2F8034A10832E9228B69507B9658CE9B03",
+    "scripts/qualification/audit-hdf-backup-io.py": "A25F7C06A73169182E745BBBF1A8F55864E8FAFB5E5D7FB9C375843FE488122D"
+  },
+  "evidence": {
+    "root": "artifacts/hdf-backup-io-20261019",
+    "controller": "installed-complete/installed-hdf-backup-io-record.json",
+    "audit": "installed-complete/completion-audit.json",
+    "initialAcceptedPhases": "installed-final",
+    "inputs": "inputs-final",
+    "package": "package-final/package-record.json",
+    "sourceSnapshot": "source-final",
+    "sourceHashes": "source-final-sha256.json",
+    "releaseBuild": "final-build.log",
+    "hostTrx": "host-tests/final-host.trx",
+    "desktopTrx": "desktop-tests/final.trx",
+    "preFixRegression": "desktop-tests/before-fix.trx",
+    "observerExclusion": "diagnostic-exclusion.json"
+  },
+  "harnessCorrections": [
+    "Desktop post-fix test accepts IOException or UnauthorizedAccessException; Windows returns the latter for blocked replacement",
+    "First installed fixture repaired its owned ACLs and was replaced by explicit verified SDDL restoration",
+    "Final-package controller resumed three already completed phases after its progress write collided with a reader; immutable package/private data and exact hashes checked; writes now atomic with bounded retries"
+  ],
+  "scope": {
+    "diskFullIsDiagnosticFaultInjection": true,
+    "physicalVolumeExhaustionQualified": false,
+    "actualWindowsAccessDenied": true,
+    "actualProcessTermination": true,
+    "interruptedUnpublishedArtifactsMayRemain": true,
+    "automaticOrphanCleanup": false,
+    "powerLossDurabilityQualified": false,
+    "nativeChanges": false,
+    "guestRamPatches": false,
+    "hostDosShims": false,
+    "performanceAcceptance": false,
+    "packageRelease": false
+  }
+}

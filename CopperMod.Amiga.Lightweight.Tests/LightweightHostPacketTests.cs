@@ -7,6 +7,27 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 public sealed class LightweightHostPacketTests
 {
     [Fact]
+    public void OwnerFlushPersistsOpenGuestFilesWithoutMovingHandlesOrGuestTime()
+    {
+        using var fixture = new Fixture(); var name = fixture.Name("flush-proof");
+        Assert.Equal((-1, 0), fixture.Packet(1006, 0x8200 >> 2, 0, name));
+        var handle = fixture.Bus.ReadLong(0x8224);
+        fixture.Bus.CopyToMemory(0x8800, "first"u8); Assert.Equal((5, 0), fixture.Packet(87, handle, 0x8800, 5));
+        var cycle = fixture.Machine.Cycle; fixture.Machine.FlushPersistentStorage();
+        Assert.Equal(cycle, fixture.Machine.Cycle);
+        string ReadVisible()
+        {
+            using var stream = new FileStream(Path.Combine(fixture.Root, "flush-proof"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new StreamReader(stream); return reader.ReadToEnd();
+        }
+        Assert.Equal("first", ReadVisible());
+        fixture.Bus.CopyToMemory(0x8800, "last"u8); Assert.Equal((4, 0), fixture.Packet(87, handle, 0x8800, 4));
+        fixture.Machine.FlushPersistentStorage(); Assert.Equal(cycle, fixture.Machine.Cycle);
+        Assert.Equal("firstlast", ReadVisible());
+        Assert.Equal((-1, 0), fixture.Packet(1007, handle));
+    }
+
+    [Fact]
     public void HighRamBootstrapStringsHandlesAndFileBuffersKeepFullAddresses()
     {
         using var fixture = new Fixture(highRam: true);

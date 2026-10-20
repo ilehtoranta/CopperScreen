@@ -34,6 +34,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly byte[] _chipRam;
     private readonly byte[] _slowRam;
     private readonly byte[] _rom = new byte[512 * 1024];
+    private const uint ExtensionRomBase = 0x00E0_0000;
+    private readonly byte[] _extensionRom = new byte[256 * 1024];
+    private bool _extensionRomLoaded;
     private readonly LightweightClock _clock;
     private readonly LightweightBusArbiter _busArbiter = new();
     private readonly LightweightRegisters _registers;
@@ -123,7 +126,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_configuration.FloppyDriveCount is < 1 or > 4)
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
-        for (var i = 0; i < _floppies.Length; i++) _floppies[i] = new(i);
+        if (_configuration.FloppyDriveTypes.Count > _floppies.Length ||
+            _configuration.FloppyDriveTypes.Any(type => !Enum.IsDefined(type)))
+            throw new ArgumentException("Specify valid types for connected floppy drives only.", nameof(configuration));
+        for (var i = 0; i < _floppies.Length; i++)
+            _floppies[i] = new(i, i < _configuration.FloppyDriveTypes.Count ?
+                _configuration.FloppyDriveTypes[i] : LightweightFloppyDriveType.DoubleDensity);
         LightweightAgnus.ValidateMemory(_configuration.AgnusModel, _configuration.ChipRamBytes, _configuration.SlowRamBytes);
         if (!Enum.IsDefined(_configuration.DeniseModel)) throw new ArgumentOutOfRangeException(nameof(configuration), "Select 8362 or 8373 Denise.");
         if ((_configuration.AgnusModel == LightweightAgnusModel.Mos8374Alice) != (_configuration.DeniseModel == LightweightDeniseModel.Lisa4203))
@@ -502,6 +510,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             address >= 0x00C00000 &&
                 address + 1 < 0x00C00000 + _slowRam.Length ||
             _fastRam?.ContainsRange(address, 2) == true ||
+            _extensionRomLoaded && address >= ExtensionRomBase &&
+                address + 1 < ExtensionRomBase + _extensionRom.Length ||
             address >= RomBase && address + 1 < RomBase + _rom.Length;
         if (!readable)
         {
@@ -635,6 +645,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public bool ParallelStrobeHigh => _ciaA.PcHigh(Cycle);
     public byte ParallelOutputPins => _ciaA.ReadPort(1, _parallelInputPins, Cycle);
+    /// <summary>Optional guest parallel-port marker with the CPU and bus cycle at the write.</summary>
+    public event Action<byte, long, long>? ParallelDataWritten;
 
     public void LoadKickstart(ReadOnlySpan<byte> image, uint baseAddress = RomBase)
     {
@@ -652,7 +664,19 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _romImageLength = image.Length;
         image.CopyTo(_rom.AsSpan(_romImageOffset, image.Length));
         _romLoaded = true;
+        _extensionRomLoaded = false;
         Reset();
+    }
+
+    /// <summary>Map an optional fixed 256 KiB extension beside Kickstart.</summary>
+    public void LoadExtensionRom(ReadOnlySpan<byte> image)
+    {
+        ThrowIfDisposed();
+        if (image.Length != _extensionRom.Length)
+            throw new ArgumentException("The extension ROM must be 256 KiB.", nameof(image));
+        image.CopyTo(_extensionRom);
+        _extensionRomLoaded = true;
+        _cpuMemoryMapGeneration++;
     }
 
     public void MountAdf(ReadOnlySpan<byte> image) => MountAdf(0, image);
@@ -1757,6 +1781,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 _ => _registers.Read(offset)
             };
         }
+        if (_extensionRomLoaded && address >= ExtensionRomBase &&
+            address + 1 < ExtensionRomBase + _extensionRom.Length)
+            return BinaryPrimitives.ReadUInt16BigEndian(_extensionRom.AsSpan((int)(address - ExtensionRomBase), 2));
         if (address >= RomBase && address + 1 < RomBase + _rom.Length)
             return ReadRomWord((int)(address - RomBase));
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
@@ -2178,6 +2205,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         var cia = ciaA ? _ciaA : _ciaB;
         cia.WriteRegister(register, value, cycle, out var interruptCycle);
+        if (ciaA && register == 1)
+            ParallelDataWritten?.Invoke(value, _cpu.State.Cycles, cycle);
         HandleCiaInterrupt(ciaA, interruptCycle);
         if (ciaA && register is 0x0C or 0x0E)
         {

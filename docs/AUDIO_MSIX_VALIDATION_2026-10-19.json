@@ -1,0 +1,3089 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "dateTimeZone": "Europe/Helsinki",
+  "recordedUtc": "2026-10-19T04:44:24.5092610Z",
+  "status": "PASSED",
+  "scope": "Signed install and same-family update from retained 42 payload to exact audio-tested 43, native CopperOS workspace/profile/settings persistence, protected media, recovery/reinstall and launcher controls",
+  "protocol": "copperscreen-installed-msix-v4",
+  "installedMsixAcceptance": true,
+  "mediaPersistenceAcceptance": true,
+  "launcherLayoutAcceptance": true,
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "sourceRebuilt": false,
+  "releaseBudgets": "OPEN",
+  "releaseQualified": false,
+  "formalPerformanceAcceptance": false,
+  "storeCertified": false,
+  "wackRun": false,
+  "newAudioMeasurement": false,
+  "signing": {
+    "NotAfterUtc": "2026-10-30T21:06:30Z",
+    "PrivateStorageAbsent": true,
+    "Thumbprint": "510C8C13859A287EFFE367DB25E2BB05E9AA34AB",
+    "HasPrivateKey": true,
+    "PrivateKeyExported": false,
+    "Powershell": "7.6.5",
+    "IdentityAbsent": true,
+    "TrustedPeoplePresent": true,
+    "Windows": "Microsoft Windows NT 10.0.26200.0",
+    "TrustChanged": false,
+    "Subject": "CN=CopperScreen Installed Tests"
+  },
+  "versionPair": {
+    "baselineChange": "Manifest identity only, all other 265 payload files unchanged; newly signed",
+    "updateByteIdenticalToAudioCandidate": true,
+    "donorSha256": "81dc331555a74dd265fc063bfd12b0e8f31ad887fa0666feed0a7278916445c1",
+    "identity": "CopperScreen.Test.40a6779884774716bfe9998be653a665",
+    "updateSha256": "7a34dc3fbe845959d1ea94f1e85e5b61031e55064797a9f73a42d098319cad02",
+    "baseline": "1.1.42.0",
+    "update": "1.1.43.0",
+    "baselineSha256": "6524286f39a3143500c29d7f25b6b5435c24dcf252b5c8eafc8afb57c3ae1ad8"
+  },
+  "payloadVerification": [
+    {
+      "Sha256": "81DC331555A74DD265FC063BFD12B0E8F31AD887FA0666FEED0A7278916445C1",
+      "VerifiedPayloadFiles": 266,
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio42-5c5b4945\\Package\\CopperScreen-1.1.42.0-win-x64.msix"
+    },
+    {
+      "Sha256": "7A34DC3FBE845959D1EA94F1E85E5B61031E55064797A9F73A42D098319CAD02",
+      "VerifiedPayloadFiles": 266,
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-2088e734\\Package\\CopperScreen-1.1.43.0-win-x64.msix"
+    },
+    {
+      "Sha256": "6524286F39A3143500C29D7F25B6B5435C24DCF252B5C8EAFC8AFB57C3AE1AD8",
+      "VerifiedPayloadFiles": 266,
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Baseline\\CopperScreen-1.1.42.0-win-x64.msix"
+    },
+    {
+      "Sha256": "7A34DC3FBE845959D1EA94F1E85E5B61031E55064797A9F73A42D098319CAD02",
+      "VerifiedPayloadFiles": 266,
+      "Passed": true,
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Update\\CopperScreen-1.1.43.0-win-x64.msix"
+    }
+  ],
+  "nativeBoots": 6,
+  "installedLayoutObservations": 18,
+  "privateHostStateCopies": 15,
+  "phases": [
+    {
+      "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\CopperOS\\Workspaces\\persistence\\System.adf",
+      "renderScaling": [
+        1
+      ],
+      "userDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen",
+      "hostStateCopies": {
+        "Record": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\seed-0\\snapshot.json",
+        "Files": [
+          {
+            "Name": "lightweight-a500-kickstart13.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\Profiles\\lightweight-a500-kickstart13.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\seed-0\\lightweight-a500-kickstart13.json",
+            "Sha256": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C"
+          },
+          {
+            "Name": "last-machine.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\last-machine.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\seed-0\\last-machine.json",
+            "Sha256": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F"
+          },
+          {
+            "Name": "recent-session.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\recent-session.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\seed-0\\recent-session.json",
+            "Sha256": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+          }
+        ]
+      },
+      "launcherObservations": 3,
+      "denyHostSaves": false,
+      "reopen": false,
+      "phase": "media-seed",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.40a6779884774716bfe9998be653a665_1.1.42.0_x64__a0cyw3gffeccg\\",
+      "version": "1.1.42.0",
+      "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "process": {
+        "Id": 38432,
+        "ExitCode": 0,
+        "WaitMilliseconds": 4,
+        "TimeoutSeconds": 30
+      },
+      "nativeImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "nativeFields": 21360,
+      "packageFamilyName": "CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg",
+      "nativeBinaryHashes": [
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "5679b20f96f2413c5adad76a569f1236dcd62090faa9bf06121452a894c6aabc"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "6f4f1930c1c12dcfcf687d1277f5d3ec48437b8aaae6a5a444c0514888e09284"
+        },
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "5679b20f96f2413c5adad76a569f1236dcd62090faa9bf06121452a894c6aabc"
+        }
+      ],
+      "hostFiles": {
+        "lightweight-a500-kickstart13.json": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C",
+        "last-machine.json": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F",
+        "recent-session.json": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+      },
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665"
+    },
+    {
+      "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\CopperOS\\Workspaces\\persistence\\System.adf",
+      "renderScaling": [
+        1
+      ],
+      "userDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen",
+      "hostStateCopies": {
+        "Record": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-1\\snapshot.json",
+        "Files": [
+          {
+            "Name": "lightweight-a500-kickstart13.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\Profiles\\lightweight-a500-kickstart13.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-1\\lightweight-a500-kickstart13.json",
+            "Sha256": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C"
+          },
+          {
+            "Name": "last-machine.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\last-machine.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-1\\last-machine.json",
+            "Sha256": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F"
+          },
+          {
+            "Name": "recent-session.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\recent-session.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-1\\recent-session.json",
+            "Sha256": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+          }
+        ]
+      },
+      "launcherObservations": 3,
+      "denyHostSaves": false,
+      "reopen": true,
+      "phase": "media-verify",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.40a6779884774716bfe9998be653a665_1.1.42.0_x64__a0cyw3gffeccg\\",
+      "version": "1.1.42.0",
+      "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "process": {
+        "Id": 63152,
+        "ExitCode": 0,
+        "WaitMilliseconds": 2430,
+        "TimeoutSeconds": 30
+      },
+      "nativeImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "nativeFields": 8960,
+      "packageFamilyName": "CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg",
+      "nativeBinaryHashes": [
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "5679b20f96f2413c5adad76a569f1236dcd62090faa9bf06121452a894c6aabc"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "6f4f1930c1c12dcfcf687d1277f5d3ec48437b8aaae6a5a444c0514888e09284"
+        },
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "5679b20f96f2413c5adad76a569f1236dcd62090faa9bf06121452a894c6aabc"
+        }
+      ],
+      "hostFiles": {
+        "lightweight-a500-kickstart13.json": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C",
+        "last-machine.json": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F",
+        "recent-session.json": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+      },
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665"
+    },
+    {
+      "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\CopperOS\\Workspaces\\persistence\\System.adf",
+      "renderScaling": [
+        1
+      ],
+      "userDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen",
+      "hostStateCopies": {
+        "Record": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-2\\snapshot.json",
+        "Files": [
+          {
+            "Name": "lightweight-a500-kickstart13.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\Profiles\\lightweight-a500-kickstart13.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-2\\lightweight-a500-kickstart13.json",
+            "Sha256": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C"
+          },
+          {
+            "Name": "last-machine.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\last-machine.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-2\\last-machine.json",
+            "Sha256": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F"
+          },
+          {
+            "Name": "recent-session.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\recent-session.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\verify-2\\recent-session.json",
+            "Sha256": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+          }
+        ]
+      },
+      "launcherObservations": 3,
+      "denyHostSaves": false,
+      "reopen": true,
+      "phase": "media-verify",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.40a6779884774716bfe9998be653a665_1.1.43.0_x64__a0cyw3gffeccg\\",
+      "version": "1.1.43.0",
+      "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "process": {
+        "Id": 86224,
+        "ExitCode": 0,
+        "WaitMilliseconds": 0,
+        "TimeoutSeconds": 30
+      },
+      "nativeImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "nativeFields": 8960,
+      "packageFamilyName": "CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg",
+      "nativeBinaryHashes": [
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0636f8c0104deffacb2ef44103a433fb13b1f19e493673148b459a7a0663a740"
+        },
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        }
+      ],
+      "hostFiles": {
+        "lightweight-a500-kickstart13.json": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C",
+        "last-machine.json": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F",
+        "recent-session.json": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+      },
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665"
+    },
+    {
+      "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\RecoveryNative\\CopperOS\\Workspaces\\persistence\\System.adf",
+      "renderScaling": [
+        1
+      ],
+      "userDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen",
+      "hostStateCopies": {
+        "Record": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovery-3\\snapshot.json",
+        "Files": [
+          {
+            "Name": "lightweight-a500-kickstart13.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\Profiles\\lightweight-a500-kickstart13.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovery-3\\lightweight-a500-kickstart13.json",
+            "Sha256": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C"
+          },
+          {
+            "Name": "last-machine.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\last-machine.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovery-3\\last-machine.json",
+            "Sha256": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F"
+          },
+          {
+            "Name": "recent-session.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\recent-session.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovery-3\\recent-session.json",
+            "Sha256": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+          }
+        ]
+      },
+      "launcherObservations": 3,
+      "denyHostSaves": true,
+      "reopen": false,
+      "phase": "media-recovery",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.40a6779884774716bfe9998be653a665_1.1.43.0_x64__a0cyw3gffeccg\\",
+      "version": "1.1.43.0",
+      "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "process": {
+        "Id": 13084,
+        "ExitCode": 0,
+        "WaitMilliseconds": 7297,
+        "TimeoutSeconds": 30
+      },
+      "nativeImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "nativeFields": 21360,
+      "packageFamilyName": "CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg",
+      "nativeBinaryHashes": [
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0636f8c0104deffacb2ef44103a433fb13b1f19e493673148b459a7a0663a740"
+        },
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        }
+      ],
+      "hostFiles": {
+        "lightweight-a500-kickstart13.json": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C",
+        "last-machine.json": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F",
+        "recent-session.json": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+      },
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665"
+    },
+    {
+      "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\CopperOS\\Workspaces\\live-recovery\\System.adf",
+      "renderScaling": [
+        1
+      ],
+      "userDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen",
+      "hostStateCopies": {
+        "Record": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovered-4\\snapshot.json",
+        "Files": [
+          {
+            "Name": "lightweight-a500-kickstart13.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\Profiles\\lightweight-a500-kickstart13.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovered-4\\lightweight-a500-kickstart13.json",
+            "Sha256": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C"
+          },
+          {
+            "Name": "last-machine.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\last-machine.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovered-4\\last-machine.json",
+            "Sha256": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F"
+          },
+          {
+            "Name": "recent-session.json",
+            "Source": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\recent-session.json",
+            "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\recovered-4\\recent-session.json",
+            "Sha256": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+          }
+        ]
+      },
+      "launcherObservations": 3,
+      "denyHostSaves": false,
+      "reopen": true,
+      "phase": "media-recovered",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.40a6779884774716bfe9998be653a665_1.1.43.0_x64__a0cyw3gffeccg\\",
+      "version": "1.1.43.0",
+      "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "process": {
+        "Id": 40324,
+        "ExitCode": 0,
+        "WaitMilliseconds": 3282,
+        "TimeoutSeconds": 30
+      },
+      "nativeImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "nativeFields": 8960,
+      "packageFamilyName": "CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg",
+      "nativeBinaryHashes": [
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0636f8c0104deffacb2ef44103a433fb13b1f19e493673148b459a7a0663a740"
+        },
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        }
+      ],
+      "hostFiles": {
+        "lightweight-a500-kickstart13.json": "E9797BB5DA7781B41EAF483030E878058E92E9103F771E625F8967DA04C0912C",
+        "last-machine.json": "C7FAA2F707E129F7CFC7042AB2EE6FC738A1785A7BDBEA7E638DA03F1801778F",
+        "recent-session.json": "A70FCEFF60CF7E0B35964B52B92C08C85E9649414A2923B6DDE05C6CC7D9A493"
+      },
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665"
+    },
+    {
+      "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665\\CopperOS\\Workspaces\\restored-after-uninstall\\System.adf",
+      "renderScaling": [
+        1
+      ],
+      "userDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen",
+      "hostStateCopies": {
+        "Record": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\audio43-update-cbd23f48\\Installed\\HostState\\fresh-5\\snapshot.json",
+        "Files": []
+      },
+      "launcherObservations": 3,
+      "denyHostSaves": false,
+      "reopen": true,
+      "phase": "media-fresh",
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.40a6779884774716bfe9998be653a665_1.1.43.0_x64__a0cyw3gffeccg\\",
+      "version": "1.1.43.0",
+      "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+      "process": {
+        "Id": 66292,
+        "ExitCode": 0,
+        "WaitMilliseconds": 4667,
+        "TimeoutSeconds": 30
+      },
+      "nativeImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "nativeFields": 8960,
+      "packageFamilyName": "CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg",
+      "nativeBinaryHashes": [
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "0636f8c0104deffacb2ef44103a433fb13b1f19e493673148b459a7a0663a740"
+        },
+        {
+          "file": "CopperScreen.dll",
+          "sha256": "adcc8b84d214305446ec50ee1996ee60f5e67bf0f527b73d302333d8dade0f1a"
+        }
+      ],
+      "hostFiles": {},
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.40a6779884774716bfe9998be653a665_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\40a6779884774716bfe9998be653a665"
+    }
+  ],
+  "verifiedArchives": [
+    {
+      "manifest": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      },
+      "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "path": "artifacts\\audio43-update-cbd23f48\\Installed\\Media\\baseline.copperos",
+      "sha256": "cea9dc1accfdbeedee39bcc7d6e6b64f9c279133fe706c789c863697c33620e4"
+    },
+    {
+      "manifest": {
+        "Format": 1,
+        "SeedPairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "SeedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "ImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "Bytes": 901120
+      },
+      "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+      "path": "artifacts\\audio43-update-cbd23f48\\Installed\\native-storage-recovery-3\\recovered.copperos",
+      "sha256": "b3e35422b41ccb30c8c52329c34209177b60702a5f814c30d145be7df73419ed"
+    }
+  ],
+  "packagingToolControls": 64,
+  "priorDatedEvidenceUnchanged": 63,
+  "priorAudioDirectReferencesVerified": 1626,
+  "cleanup": "Owned diagnostic registration and family-private storage removed; external originals, exports, snapshots and transcripts retained",
+  "scopeLimits": {
+    "newFullHours": "NOT_RUN",
+    "physicalRecovery": "NOT_RUN",
+    "storeIdentity": "OPEN",
+    "wack": "NOT_RUN_FOR_THIS_HASH",
+    "minimumReferenceHardwareAndBudgets": "OPEN",
+    "physicalSound": "NOT_OBSERVED"
+  },
+  "references": [
+    {
+      "bytes": 13702,
+      "path": "docs/AMIGA_DOCUMENTATION_AUDIT_2026-09-17.md",
+      "sha256": "3fc4d64c2fba1ba5b78a3d4c59b32b9c5c3f4b0f479264d7e93217306b75373a"
+    },
+    {
+      "bytes": 198070,
+      "path": "docs/AUDIO_DISPLAY_RECOVERY_2026-10-18.json",
+      "sha256": "0ec552b7a45fda6900d6e297c01d6deea155f9891dd100462dcc25e3f056fa17"
+    },
+    {
+      "bytes": 9085,
+      "path": "docs/AUDIO_DISPLAY_RECOVERY_2026-10-18.md",
+      "sha256": "7939aea9a85271723a6200b71c49d0cf39db16bee2726457c93d34fd5e1ccc7a"
+    },
+    {
+      "bytes": 109969,
+      "path": "docs/AUDIO_MSIX_VALIDATION_2026-10-18.json",
+      "sha256": "748fe727ee048c1577dad470c0e3bb668e97fa1fe5f8a7ffe80da679b96b3dbb"
+    },
+    {
+      "bytes": 7243,
+      "path": "docs/AUDIO_MSIX_VALIDATION_2026-10-18.md",
+      "sha256": "2e4bf3f92b336945dc22340d370b9e5915306f8c169a9b4881f71ca8d43807e3"
+    },
+    {
+      "bytes": 37612,
+      "path": "docs/AUDIO_MSIX_WACK_VALIDATION_2026-10-18.json",
+      "sha256": "b3e1879b2b00c9f871f955da9a1c6658250642abce75ef86380d7116909b8fda"
+    },
+    {
+      "bytes": 6120,
+      "path": "docs/AUDIO_MSIX_WACK_VALIDATION_2026-10-18.md",
+      "sha256": "1feae7708728e822c14cb01c14ccf185ffa8ee30c0cc11fbcf29983875dcb8cf"
+    },
+    {
+      "bytes": 14754,
+      "path": "docs/AUDIO_REFILL_TRACE_2026-10-18.json",
+      "sha256": "50591083ee7b82a6b9f2ee3d7a39266e231a9aa0e2a3ca122432c8c6a25b567e"
+    },
+    {
+      "bytes": 4012,
+      "path": "docs/AUDIO_REFILL_TRACE_2026-10-18.md",
+      "sha256": "c1193191590a8933a1554fd6e70f1a9f65613723287c97458be3168cab71056d"
+    },
+    {
+      "bytes": 367934,
+      "path": "docs/AUDIO_WARMUP_REFILL_2026-10-19.json",
+      "sha256": "738035b2065353410bac68b9ada82f38181450cfed7d6df7cc83ff16e4aae302"
+    },
+    {
+      "bytes": 10749,
+      "path": "docs/AUDIO_WARMUP_REFILL_2026-10-19.md",
+      "sha256": "9d08e23de34073d7e37c897eb70437b472078e6e80270d74511988e446d6ff5e"
+    },
+    {
+      "bytes": 47245,
+      "path": "docs/COPPEROS_ARTIFACTS_2026-10-16.json",
+      "sha256": "fd87a00c573e27c90cc5d6eacefec4ed4b6fd0c235381141cabdb63d3afeda95"
+    },
+    {
+      "bytes": 23300,
+      "path": "docs/COPPEROS_BOOT_PROOF_2026-10-16.json",
+      "sha256": "83aad5b307cacdd69edb0702c456043e3655875ac1f93b44ca8274ab429bcab4"
+    },
+    {
+      "bytes": 10585,
+      "path": "docs/COPPEROS_BOOT_PROOF_2026-10-16.md",
+      "sha256": "381a9861c4e8717219c4ad3833d3fbc3b811e08abfeb976fd689c5d4afb7c195"
+    },
+    {
+      "bytes": 57173,
+      "path": "docs/COPPEROS_MSIX_VALIDATION_2026-10-17.json",
+      "sha256": "5f938f81c2e1dd8830e16b51be7c8e75483dce68e17656a6825277b69d336108"
+    },
+    {
+      "bytes": 6465,
+      "path": "docs/COPPEROS_MSIX_VALIDATION_2026-10-17.md",
+      "sha256": "5938ba186d921999833ec106146d03b6d18e42c22f4923a8ef6fba8cb719071e"
+    },
+    {
+      "bytes": 155732,
+      "path": "docs/COPPEROS_STORAGE_2026-10-16.json",
+      "sha256": "27f394c7202fd70de53e3d2d41a9de472b103caa548def54f358dac783f2b098"
+    },
+    {
+      "bytes": 54623,
+      "path": "docs/COPPERSTART_FFS_BITMAP_2026-10-18.json",
+      "sha256": "2f22705b3ce002dfaecdfa06ebf623b682aa6549ca922650091f0e0cc2d9671f"
+    },
+    {
+      "bytes": 5620,
+      "path": "docs/COPPERSTART_FFS_BITMAP_2026-10-18.md",
+      "sha256": "2b6666de7d881aba002d04c1f9a9d3403a7b9ccaef80724cefa83f0fe7606356"
+    },
+    {
+      "bytes": 3684,
+      "path": "docs/COPPERSTART_HARDDISK_2026-10-18.json",
+      "sha256": "74afcece2e4a209e74c215d32118f81cbfce7a5d3704a75d3c8ff285eee11e8b"
+    },
+    {
+      "bytes": 6534,
+      "path": "docs/COPPERSTART_HARDDISK_2026-10-18.md",
+      "sha256": "0f672eb16aff28ce9e9ca7e23ed1d9538d00519b59e962742f33ea1841205ec0"
+    },
+    {
+      "bytes": 6263,
+      "path": "docs/COPPERSTART_HARDDISK_WRITES_2026-10-18.json",
+      "sha256": "add0bad3314d48f276713099deae391534a029d819dc40b35715a12533370172"
+    },
+    {
+      "bytes": 5547,
+      "path": "docs/COPPERSTART_HARDDISK_WRITES_2026-10-18.md",
+      "sha256": "a0ba4fa72adea6345694394942654ead5a31c9e310eaf5f38d279b383c95c4fe"
+    },
+    {
+      "bytes": 1007,
+      "path": "docs/COPPERSTART_RDB_2026-10-18.json",
+      "sha256": "84ecd9f0220e4aa67e52b4162c9173cea837aaf20b30958583a5e4f2593dfe4e"
+    },
+    {
+      "bytes": 5424,
+      "path": "docs/COPPERSTART_RDB_2026-10-18.md",
+      "sha256": "ac049a051a6174217ec3ffa670ff9b383a16e260ed098215ca927b20ca8fb698"
+    },
+    {
+      "bytes": 28876,
+      "path": "docs/COPPERSTART_RDB_WRITES_2026-10-18.json",
+      "sha256": "0c86a397fabab6bc50f15d4eeed01113a0c2a90ce7a379fd21e3ca4a96eadaf6"
+    },
+    {
+      "bytes": 35775,
+      "path": "docs/COPPERSTART_TD64_2026-10-18.json",
+      "sha256": "55e47749e1ec5380342b4ce3c9365641455f46b00ec6f3dcbbfac6ac8f5c2c8e"
+    },
+    {
+      "bytes": 6747,
+      "path": "docs/COPPERSTART_TD64_2026-10-18.md",
+      "sha256": "845d243ae93512b793f53ce97cea262aab4fa369e156f30c1c8ccffd39b8a0fa"
+    },
+    {
+      "bytes": 11609,
+      "path": "docs/COPPERSTART_VALIDATION_2026-10-16.json",
+      "sha256": "53b01b0ce6e250d623c9ad20c5735a582678f9e199d0e1cf176f5b8c77c210d0"
+    },
+    {
+      "bytes": 5690,
+      "path": "docs/COPPERSTART_VALIDATION_2026-10-16.md",
+      "sha256": "806bc4c21e0650bcee4606677e1062cbf20504586de7f7c4ce073ba30394434e"
+    },
+    {
+      "bytes": 64539,
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.json",
+      "sha256": "b84ae843db91f6763c1345dbd8b32fe553037328c14817287c9c9fcb587effaa"
+    },
+    {
+      "bytes": 10094,
+      "path": "docs/INSTALLED_AUDIO_PACING_2026-10-18.md",
+      "sha256": "277ceb50b4dd8682225717a26321607032c44d032f0463af504ceea809230f76"
+    },
+    {
+      "bytes": 151599,
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.json",
+      "sha256": "cc0b8ecca7a273ab0ab40ea979bfbd9a815c4d0913bef39e17236741a37a33f7"
+    },
+    {
+      "bytes": 7037,
+      "path": "docs/INSTALLED_RECOVERY_2026-10-18.md",
+      "sha256": "75c8436fbc455f2e966a3863da1be0364d61818cd4477d6dddd483a5b4e3b47f"
+    },
+    {
+      "bytes": 95405,
+      "path": "docs/INSTALLED_RECOVERY_DIAGNOSTICS_2026-10-18.json",
+      "sha256": "58dc3a71c4488d0c1ea24274b933535221e999680d96f834ee9adff461077d0e"
+    },
+    {
+      "bytes": 7539,
+      "path": "docs/INSTALLED_RECOVERY_DIAGNOSTICS_2026-10-18.md",
+      "sha256": "a65e6534c7901fb30220222e808e6b355f7796833b0e0cd7bc3afee64ed7e216"
+    },
+    {
+      "bytes": 109362,
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.json",
+      "sha256": "2d5db95d98e83b42f773791fd731c0570b6ffe8004c816af93d3fdbd36091d4f"
+    },
+    {
+      "bytes": 5874,
+      "path": "docs/INSTALLED_RECOVERY_FIX_2026-10-18.md",
+      "sha256": "ddd0f1ce2f796b84e70b7f7582846099bdce50beeab9d4a5fba5998544e2fe06"
+    },
+    {
+      "bytes": 65736,
+      "path": "docs/INSTALLED_RECOVERY_PHYSICAL_2026-10-18.json",
+      "sha256": "35a134f5a4ab81ee7306d1365bcc448430b21dd4c71b6b3f363e5625b954557b"
+    },
+    {
+      "bytes": 6155,
+      "path": "docs/INSTALLED_RECOVERY_PHYSICAL_2026-10-18.md",
+      "sha256": "a3f655830acc22be4f7f2d6a687b3b5dd0c1ae9e56c509ace119e09c6e7f275d"
+    },
+    {
+      "bytes": 85809,
+      "path": "docs/INSTALLED_RECOVERY_REOPEN_2026-10-18.json",
+      "sha256": "e8726aa53c9ef35681bd048251180f2fa429dc5515be1128838d1496d4aa1401"
+    },
+    {
+      "bytes": 5741,
+      "path": "docs/INSTALLED_RECOVERY_REOPEN_2026-10-18.md",
+      "sha256": "e85ff765ced23aaaa29219a57ac0155288c22d83df1abde6dfafdc754f022080"
+    },
+    {
+      "bytes": 4459,
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.json",
+      "sha256": "fdac6bf3943ac9b9428270f4e33557fe320e3784073645e072062ad5f38d188e"
+    },
+    {
+      "bytes": 2246,
+      "path": "docs/INSTALLED_RECOVERY_RETRY_2026-10-18.md",
+      "sha256": "1b02f3ec40d5d37378ea5dd4599f5efa2a10c528a84e98f9127d564ea8414bdb"
+    },
+    {
+      "bytes": 68352,
+      "path": "docs/INSTALLED_SESSIONS_2026-10-18.json",
+      "sha256": "965d39f46357ad8f97d332394642ede396b4033ee5fae63e5c8d942c1c9f0145"
+    },
+    {
+      "bytes": 10504,
+      "path": "docs/INSTALLED_SESSIONS_2026-10-18.md",
+      "sha256": "4930f2f9800b0239981b25f82defc5b7f76953270c3df88337c88435cc267676"
+    },
+    {
+      "bytes": 68977,
+      "path": "docs/MEDIA_MSIX_VALIDATION_2026-10-17.json",
+      "sha256": "7434e768f60bf12a03ea4ba80a888c56c70ee94cb7ba4dddf94a2722d811cadc"
+    },
+    {
+      "bytes": 7312,
+      "path": "docs/MEDIA_MSIX_VALIDATION_2026-10-17.md",
+      "sha256": "2590070a9d6e0287ed3b17750a4f639bfa584aa932e4c4bdf8d4780ad1a07585"
+    },
+    {
+      "bytes": 19893,
+      "path": "docs/MEDIA_MSIX_WACK_VALIDATION_2026-10-17.json",
+      "sha256": "69f31bfaca8ffe904c191758917c61f8104ce329c2895789e62b36c84556b124"
+    },
+    {
+      "bytes": 5181,
+      "path": "docs/MEDIA_MSIX_WACK_VALIDATION_2026-10-17.md",
+      "sha256": "320aa6ff1b5b415dc14026e60120ea63aba31c4902be318dd2e2e163e02a17b4"
+    },
+    {
+      "bytes": 23750,
+      "path": "docs/MEDIA_PERSISTENCE_VALIDATION_2026-10-17.json",
+      "sha256": "3b4334dd40b17d337c9676233c3468c014f52ad191ed52469de5408f84dbd930"
+    },
+    {
+      "bytes": 4709,
+      "path": "docs/MSIX_VALIDATION_2026-10-16.md",
+      "sha256": "6fd1df03629b70cb3262009955b4efb52894bde54ec8b1e3f171a68d54d9feb2"
+    },
+    {
+      "bytes": 67567,
+      "path": "docs/MSIX_WACK_VALIDATION_2026-10-17.json",
+      "sha256": "72a05d044532e1ecb44286ab789a5e4ddbd350b82a99e7e73b9039473a8ccaed"
+    },
+    {
+      "bytes": 6831,
+      "path": "docs/MSIX_WACK_VALIDATION_2026-10-17.md",
+      "sha256": "e4395f4883188e018c549d6bcf19a6b6f0b1cbf04eca4041a88b81fe2289f3a8"
+    },
+    {
+      "bytes": 8323,
+      "path": "docs/ONBOARDING_VALIDATION_2026-10-17.json",
+      "sha256": "dc393d9b1315bd945635451d199da851bd9e16b6311af8c398e71ec6df400ead"
+    },
+    {
+      "bytes": 6825,
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.json",
+      "sha256": "ab8f974bbf2de5c882343e35c42c8b05d16df975d5021288e2c4f751fecb9bf3"
+    },
+    {
+      "bytes": 2708,
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.md",
+      "sha256": "24ff6278560a3dd819d86f948608c6b84212af5d8341ab8598346b836fc969a8"
+    },
+    {
+      "bytes": 89497,
+      "path": "docs/RELEASE_MSIX_VALIDATION_2026-10-17.json",
+      "sha256": "8831dd53cd0cdcabb825566a4586a7cc79d6e1257f886e55f5b036c11ede9f23"
+    },
+    {
+      "bytes": 5942,
+      "path": "docs/RELEASE_MSIX_VALIDATION_2026-10-17.md",
+      "sha256": "d6ecb18ade9772ad22dbd884701c890350d73b1e02ae92f3307425afca753e77"
+    },
+    {
+      "bytes": 22358,
+      "path": "docs/RELEASE_MSIX_WACK_VALIDATION_2026-10-17.json",
+      "sha256": "410627e192118941713dd216cde6ff166e76568625c2bdbf68365f49d025112b"
+    },
+    {
+      "bytes": 5402,
+      "path": "docs/RELEASE_MSIX_WACK_VALIDATION_2026-10-17.md",
+      "sha256": "d55142c7eaf1a812a536f604b4f2d986e00cbd920f46595661aa37641fa74ece"
+    },
+    {
+      "bytes": 506372,
+      "path": "docs/RELEASE_QUALIFICATION_2026-10-17.json",
+      "sha256": "4fedf242d1395033c9f197c5c6e9e09fa471251b775cdf7181a95670b594544c"
+    },
+    {
+      "bytes": 8930,
+      "path": "docs/RELEASE_QUALIFICATION_2026-10-17.md",
+      "sha256": "4cc2dea659acfdd82bc4989b4cd8ad5277f8afc5ca72301f5c8be7eac4556c5a"
+    },
+    {
+      "bytes": 507,
+      "path": "artifacts/audio43-update-cbd23f48/config.json",
+      "sha256": "c3820ab38481748443c512255dc006039bf57bfb50a5ea350527f0ee761fa714"
+    },
+    {
+      "bytes": 1360,
+      "path": "artifacts/audio43-update-cbd23f48/controller.log",
+      "sha256": "f8f5414f78c4a198415664a64201336d79081f8da654024bc40b067bc99a0e68"
+    },
+    {
+      "bytes": 6669,
+      "path": "artifacts/audio43-update-cbd23f48/driver.ps1",
+      "sha256": "b595020a38e022a5bf57528a4baf36bf762706c11defba099d7b95f9ae4599b6"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/audio43-update-cbd23f48/evidence-collector-invalid-historical-assumption.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 310,
+      "path": "artifacts/audio43-update-cbd23f48/frozen-inputs.json",
+      "sha256": "8476b91c711ee32a3d7bc265b59b80b4a2d9b861a7b04197f3719f58577e9b0f"
+    },
+    {
+      "bytes": 9796,
+      "path": "artifacts/audio43-update-cbd23f48/historical-before.json",
+      "sha256": "dbdc88604a6389b923ef19d2a49da2f38fcba609020b47aa447f5e2eafa83189"
+    },
+    {
+      "bytes": 774,
+      "path": "artifacts/audio43-update-cbd23f48/historical-changes-v2.json",
+      "sha256": "1f407ca0a89e104ab8ff6173cd83eb61be160d88a09e6f5ba8c0762aa4fa50d5"
+    },
+    {
+      "bytes": 441,
+      "path": "artifacts/audio43-update-cbd23f48/historical-changes.json",
+      "sha256": "9ef6adcf722ad57bab0a85cc6258f768ac9e982ef657de21003da135472ef137"
+    },
+    {
+      "bytes": 90,
+      "path": "artifacts/audio43-update-cbd23f48/packaging-controls.log",
+      "sha256": "058a0f4eab33c1eb4f0fe914838b591bc4d4d13fb50a4648149a60ba8c6a81c9"
+    },
+    {
+      "bytes": 1159,
+      "path": "artifacts/audio43-update-cbd23f48/payload-verification.json",
+      "sha256": "3e65fd95047148b074e7d398ff810b87688aab9f930ba8c824e1d54b0e2e15c2"
+    },
+    {
+      "bytes": 419,
+      "path": "artifacts/audio43-update-cbd23f48/preflight.json",
+      "sha256": "e1c208a410b3608df50d2bf47e429627b4321d3b4212ce732048971e55954631"
+    },
+    {
+      "bytes": 254,
+      "path": "artifacts/audio43-update-cbd23f48/prior-audio-reference-verification.json",
+      "sha256": "9284102164c7d53abd474d3ba2f6b8fe9edb066030dcfe047b2d9f054f770525"
+    },
+    {
+      "bytes": 839,
+      "path": "artifacts/audio43-update-cbd23f48/visual-review.json",
+      "sha256": "38a844a26d47058017008d266cd6636c0dba83e643ba12551ce0940094a28954"
+    },
+    {
+      "bytes": 49568797,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/CopperScreen-1.1.42.0-win-x64.msix",
+      "sha256": "6524286f39a3143500c29d7f25b6b5435c24dcf252b5c8eafc8afb57c3ae1ad8"
+    },
+    {
+      "bytes": 39627,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/derivation.json",
+      "sha256": "22aca9bb1bfab75d669d0cdbfd6b3320ba08c5ed40c4ea62e899c6a845d95639"
+    },
+    {
+      "bytes": 59536,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/packing.log",
+      "sha256": "72291719656730a939af15ab62f75eecaa4591b7fb052786b2d4b7bf9f292a65"
+    },
+    {
+      "bytes": 1065,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/signature-verification.log",
+      "sha256": "3f6abe97436cf666a4dddaa8ddadd8f582229f6dcb230b79424e9b18d1963bac"
+    },
+    {
+      "bytes": 171,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/signing.log",
+      "sha256": "7b19793a2584a1cb4826a7740a9e17e62d9abc0d207a5a731354acbca8c92374"
+    },
+    {
+      "bytes": 1748,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/AppxManifest.xml",
+      "sha256": "6c0693d9651715341dcc028cd6b4143c9a4dce5002c75e44c4ab5f943626b68d"
+    },
+    {
+      "bytes": 5426176,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/av_libglesv2.dll",
+      "sha256": "9b203e40323b49dad29546a52b8b67d200bba8ff4cab9709a79cede23ba847d4"
+    },
+    {
+      "bytes": 2259456,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Base.dll",
+      "sha256": "6f9c3e0c4f1d1842657163363af99e770807005e639d3a3f944db27f3e7d6fe3"
+    },
+    {
+      "bytes": 1301504,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Controls.dll",
+      "sha256": "9ce4a80e90f13056b803f01e284bb95dbd8cb7297ae55b1d4e941b5cc311916c"
+    },
+    {
+      "bytes": 215552,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.DesignerSupport.dll",
+      "sha256": "b29d7bad096ff2a9f831db6aab503517877a1971a7861d1472f4ce786b301184"
+    },
+    {
+      "bytes": 15360,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Desktop.dll",
+      "sha256": "b76e5548a3aa7f4a16c2ac3bbeaf32454470db0e3d6bac37fb8994559cf7119f"
+    },
+    {
+      "bytes": 243200,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Dialogs.dll",
+      "sha256": "bf4332e8b0224f71d9840d2cccf409dc33d6863a2d2e98d6b41c6b862b7bd601"
+    },
+    {
+      "bytes": 4096,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.dll",
+      "sha256": "5df56a306e1b164ccf62bfd7b19bd6041c67b0820ebe5cf8b542fcd5988ad9c2"
+    },
+    {
+      "bytes": 560128,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.FreeDesktop.AtSpi.dll",
+      "sha256": "198f229a3d3f8853d61c7af068c8a1e1e1e959bff06e9a9f0db58f0d0aa1d8af"
+    },
+    {
+      "bytes": 201216,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.FreeDesktop.dll",
+      "sha256": "e4feb389b0d882f2bcc013928eb23365a5459d8c26e68bc7428ae85b793cc2b6"
+    },
+    {
+      "bytes": 22016,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.HarfBuzz.dll",
+      "sha256": "be71d00740e2e76d8347961aff32e18d67818971018229fe2aae643c64de08dc"
+    },
+    {
+      "bytes": 45568,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Markup.dll",
+      "sha256": "cd78ef38ca98e61524d882b9e9af994142d4cb5e795402890d1314c88a86f446"
+    },
+    {
+      "bytes": 74752,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Markup.Xaml.dll",
+      "sha256": "522f25845d8e19388d1a3832ad2c1721c55a9af277c42264f9fa4f468e958160"
+    },
+    {
+      "bytes": 15360,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Metal.dll",
+      "sha256": "f9b318a0782af9d325e1b56eb9042667247af1432b3fdc1eaadc93b3ba7326b6"
+    },
+    {
+      "bytes": 15360,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.MicroCom.dll",
+      "sha256": "035f78d800d027ea2bfae147bfe0f3621c71cb81a98fead72c9c21ce249d5de7"
+    },
+    {
+      "bytes": 343040,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Native.dll",
+      "sha256": "c402089a7ad936cd757db847abcb7149a4836001ebf515027cbc0e29bc58d224"
+    },
+    {
+      "bytes": 116736,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.OpenGL.dll",
+      "sha256": "339444a17b1639bea477c82dd3ff4ff83620c25b01a9b8a1061e63c84291fdb2"
+    },
+    {
+      "bytes": 75776,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Remote.Protocol.dll",
+      "sha256": "12a97e9c715c4bcb7c6ea661951141826b218f12b182e0bb3295676c8f24a78e"
+    },
+    {
+      "bytes": 123904,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Skia.dll",
+      "sha256": "1a76e530c5db742104d5a5532b11e36aa826d2221fe925978598bb62c1a068fc"
+    },
+    {
+      "bytes": 712704,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Themes.Fluent.dll",
+      "sha256": "51bbae40524c0917e7c071093c11c9156b0ba26b2b8bfbf9e24bd098469c5cc1"
+    },
+    {
+      "bytes": 190976,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Vulkan.dll",
+      "sha256": "ee3fc13211edef4e84102a3d725964f76a4a5479be51d419e995a404b188e5c7"
+    },
+    {
+      "bytes": 123904,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Win32.Automation.dll",
+      "sha256": "1093644b6ef7179913f7a6daabf4fde9a6a1792ce91ab41f2602146dd57de6eb"
+    },
+    {
+      "bytes": 932864,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.Win32.dll",
+      "sha256": "11fc4fa83f954ea6a13dc1df53a5abcb9781a2a810060bf024b03cdcb13e9697"
+    },
+    {
+      "bytes": 372224,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Avalonia.X11.dll",
+      "sha256": "c3313f066e92b6bcbcbc804735eebbfc66185cd334e182359197b53ea1ddd06f"
+    },
+    {
+      "bytes": 317736,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/clretwrc.dll",
+      "sha256": "7a2186201c87bbc597a1b8b26facd88e68f03be4c4a4211fd65cc6595c72e45b"
+    },
+    {
+      "bytes": 674088,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/clrgc.dll",
+      "sha256": "65e2f97d263824bfb9f75f92e66ebd22229aaf3a5faddef9345811d856c8840e"
+    },
+    {
+      "bytes": 711464,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/clrgcexp.dll",
+      "sha256": "23a8050ec68542989b6da6cc906a90faf8a14e6416fd2871a260b781b1c374ae"
+    },
+    {
+      "bytes": 2092328,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/clrjit.dll",
+      "sha256": "0749d8fc8e944d0576e1bb47120f87add8f875e5cd8968995633063fc79256f6"
+    },
+    {
+      "bytes": 978944,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Copper68k.dll",
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "bytes": 373,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperDisk-THIRD-PARTY-NOTICES.md",
+      "sha256": "f3c1be3e0d56d0ee697f627def402f76a9e69b9f0c147f0eaceffda36e26b8cf"
+    },
+    {
+      "bytes": 105984,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperDisk.dll",
+      "sha256": "118a873e6704e23d124e445ae24143d3bded8198e750e9c42cb690bc274f8c11"
+    },
+    {
+      "bytes": 49078,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperDisk.xml",
+      "sha256": "b5e21b2026216bfe4ef67d71790ee83daf38c9e524307f1af23abc4260098d69"
+    },
+    {
+      "bytes": 28672,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperFloat.dll",
+      "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+    },
+    {
+      "bytes": 289280,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperMod.Amiga.Lightweight.dll",
+      "sha256": "6f4f1930c1c12dcfcf687d1277f5d3ec48437b8aaae6a5a444c0514888e09284"
+    },
+    {
+      "bytes": 20908,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperMod.Amiga.Lightweight.xml",
+      "sha256": "5b92badeef2d444f191cb9e72640a98b94e3c2db4fb2d6ae4c7db0563a10db9e"
+    },
+    {
+      "bytes": 45568,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperPad.dll",
+      "sha256": "90888ad8abcba0f456731f23f5be8ed14ad8f5ecacbb1b0b61d9dcc259f9ce87"
+    },
+    {
+      "bytes": 676352,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperPad.HidSharp.dll",
+      "sha256": "678492f5e70dc5a7f686ea5dc05f76f66280de5a4e5cbd82b38a69cdd3aaef20"
+    },
+    {
+      "bytes": 46713,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperScreen.deps.json",
+      "sha256": "355017c6f2b875f6b3f4e3201a3ff74d1e25c7613a7bff57d4b698ec6ef38972"
+    },
+    {
+      "bytes": 925696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperScreen.dll",
+      "sha256": "5679b20f96f2413c5adad76a569f1236dcd62090faa9bf06121452a894c6aabc"
+    },
+    {
+      "bytes": 240640,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperScreen.exe",
+      "sha256": "049c01abd2f4af902f47af20a28efc512ea554bc7a686271aaf07519b5989512"
+    },
+    {
+      "bytes": 504,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/CopperScreen.runtimeconfig.json",
+      "sha256": "da5a7451d13dda6d61411c7bebf35816939dd0fc072fba1c4e9a2eb5251187c3"
+    },
+    {
+      "bytes": 4614992,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/coreclr.dll",
+      "sha256": "128aee8c62a673d64739e585e3876b61133571cec83a46240a62581d5465639b"
+    },
+    {
+      "bytes": 71552,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/createdump.exe",
+      "sha256": "315307159925d33eb604186a512901d080ecfc4cd8b8198030a7d398c6af2b0b"
+    },
+    {
+      "bytes": 122400,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/HarfBuzzSharp.dll",
+      "sha256": "55e72ac23263f8e12484f3435e02ec22fac9eff6e6d169bb0a8c246be6b99d29"
+    },
+    {
+      "bytes": 239616,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/HidSharp.dll",
+      "sha256": "79f2bc8ddff102e6dbede84b2c211a3aea2ed675bf762fa0f02ecb65f61ee812"
+    },
+    {
+      "bytes": 379688,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/hostfxr.dll",
+      "sha256": "838591885c5396fb0588a3aedc2f3e841d3afc67570868b1bce615264005a44c"
+    },
+    {
+      "bytes": 378664,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/hostpolicy.dll",
+      "sha256": "e92a2e71eeeaf7c574e905935b3e3724ef29bade44317659dbe06f505e99dbe0"
+    },
+    {
+      "bytes": 6144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/HotPathGuard.Abstractions.dll",
+      "sha256": "5d66b939ca907c34d59282fa6937b0afe711e75b871b7e288a529011d0ece5d2"
+    },
+    {
+      "bytes": 98,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/installed-test-build.json",
+      "sha256": "4086d915cba73ed48d7cad54f1f2e4da24c22107d53a90ed5acd95b5d4a0e9bd"
+    },
+    {
+      "bytes": 1816088,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/libHarfBuzzSharp.dll",
+      "sha256": "145ade963eba427027d5e1381db5d51a0ef9e98e9fef9efbfa6074ca20da246f"
+    },
+    {
+      "bytes": 11628576,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/libSkiaSharp.dll",
+      "sha256": "6d6eca64ec333daed78858a637b54c545aa01558204b8e2ae8870692acada127"
+    },
+    {
+      "bytes": 1089,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/LICENSE",
+      "sha256": "61e05df922ae668cc3719d961485cf0571236f055db025a7a58d89d8310a0670"
+    },
+    {
+      "bytes": 16384,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/MicroCom.Runtime.dll",
+      "sha256": "2e0a43be3d123dae5aa8a7f1082fd3f1c2a8d842f6c513deac526daed620e318"
+    },
+    {
+      "bytes": 980776,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Microsoft.CSharp.dll",
+      "sha256": "2000912f2fc52e0c64ed893d79f4e7b143502540fb7170b5ae5fcea7099ba431"
+    },
+    {
+      "bytes": 2377016,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Microsoft.DiaSymReader.Native.amd64.dll",
+      "sha256": "70e4b89978ce57ef87b28f4921f3140c383b04aa96e7f3bdb3c4ebb898fd8a72"
+    },
+    {
+      "bytes": 1193768,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Microsoft.VisualBasic.Core.dll",
+      "sha256": "2666b24eb6e295476b44abd057ea250fd5957db9c1c7adee6a223a747ddfe3d2"
+    },
+    {
+      "bytes": 17192,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Microsoft.VisualBasic.dll",
+      "sha256": "e192508adde6a758138a5a8e28998dccb64e7f45eaf30d8ab3564f87749028b1"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Microsoft.Win32.Primitives.dll",
+      "sha256": "6c21472b0ae2f9b484a97614fad5485a22f18f9f19ee1adb9ceb3ed8ddb072d7"
+    },
+    {
+      "bytes": 116520,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Microsoft.Win32.Registry.dll",
+      "sha256": "76849cfde4369f3ae93e28261fe5e1010dbf1332f7da95c98543cba9b03961c0"
+    },
+    {
+      "bytes": 124928,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Miniaudio-CS.dll",
+      "sha256": "62c32ea516cd2a8c5a2b4ecc4aaaf857d83d7486f1a3aaf2502585fc51d4acdc"
+    },
+    {
+      "bytes": 688128,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/miniaudio.dll",
+      "sha256": "2af909bb313acec732bb4f58e3ee8ad50b0c5c33044613a9b79cc397f5242e1a"
+    },
+    {
+      "bytes": 1356640,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/mscordaccore_amd64_amd64_10.0.1226.42308.dll",
+      "sha256": "86c29a7b945525135de16c3dcb71e3b8517848c459cbb21395b352d4e6bba09c"
+    },
+    {
+      "bytes": 1356640,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/mscordaccore.dll",
+      "sha256": "86c29a7b945525135de16c3dcb71e3b8517848c459cbb21395b352d4e6bba09c"
+    },
+    {
+      "bytes": 1237888,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/mscordbi.dll",
+      "sha256": "753e92805f3886221f56dcfc07191ad7ee44235bf689db0490bdf777f25e9175"
+    },
+    {
+      "bytes": 59728,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/mscorlib.dll",
+      "sha256": "b698595367a7d4fa57ccacab73751fde0bb8f2415345c62cdfe7ced890da2c0c"
+    },
+    {
+      "bytes": 133968,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/mscorrc.dll",
+      "sha256": "f0d8c7491d4659a4c5a4c00615255a60e05634f311162c2775a51e03c070c9e0"
+    },
+    {
+      "bytes": 536344,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/msquic.dll",
+      "sha256": "b7158d427b01c70483bb3d80c5211e387dd98e9471c8a70e4484d449de9157e8"
+    },
+    {
+      "bytes": 100648,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/netstandard.dll",
+      "sha256": "3dc81dbc9dacd28261632c94410859eda24c2db50cd6c14309cbb2a434b50c57"
+    },
+    {
+      "bytes": 490016,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/SkiaSharp.dll",
+      "sha256": "a833abae87ff3d13ff660b1f9d92027885b90395647479437eb9d262fad6d4ab"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.AppContext.dll",
+      "sha256": "d9dd9fa44e019f27172d6b2662e2b6038f48c270912ac8aae53d4d909da7e9be"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Buffers.dll",
+      "sha256": "a1a35f5524e2f831d08ca55f702fbddcb8c6dfecd264f0f563d81a1c8b8280bd"
+    },
+    {
+      "bytes": 231248,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Collections.Concurrent.dll",
+      "sha256": "082f4bc0da1141eb65111b6da633d75624adfb7bb067d7ee90c5622c8b30885b"
+    },
+    {
+      "bytes": 296744,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Collections.dll",
+      "sha256": "df6f2037eabee28100184e92f7536427ba2f086c1110629804d466b124bc4d54"
+    },
+    {
+      "bytes": 976680,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Collections.Immutable.dll",
+      "sha256": "b527dd7b2beb82c22aa39787298cbeb33f3eac9eb9b83a0f0271353421db28db"
+    },
+    {
+      "bytes": 104232,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Collections.NonGeneric.dll",
+      "sha256": "aa4d5216d066c91cb489f63c6cbfcaf1f47b6e74e070db45639d3460454fc60b"
+    },
+    {
+      "bytes": 104272,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Collections.Specialized.dll",
+      "sha256": "e31af1f866e880844e027be59f545b9a6b34108e0b0680ebe3fbc19a53070819"
+    },
+    {
+      "bytes": 198480,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ComponentModel.Annotations.dll",
+      "sha256": "e3be2d35d81e6475c64110cfc099895b71df22c8b46a18c2d7c76a913b8ba903"
+    },
+    {
+      "bytes": 16720,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ComponentModel.DataAnnotations.dll",
+      "sha256": "d40e8c7062e6b9ce11ba83eab3d26be0eec8066b99970ea88b8e87fb75f411bd"
+    },
+    {
+      "bytes": 30544,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ComponentModel.dll",
+      "sha256": "e3b6f75864ee944898540937c1f300e04f44a1b2729516f0bbf948589a8b14b2"
+    },
+    {
+      "bytes": 46888,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ComponentModel.EventBasedAsync.dll",
+      "sha256": "cc84fe814ef5e58271d83193e328f8ec220efd4696d90af9a7c4690c10451495"
+    },
+    {
+      "bytes": 79656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ComponentModel.Primitives.dll",
+      "sha256": "1e2451184c287409ea25acde3c90f25950bf34d16458a6e52a94ca4292434f62"
+    },
+    {
+      "bytes": 767784,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ComponentModel.TypeConverter.dll",
+      "sha256": "10dae312a6697718f8ce3dfcdb17d6ae4b74687c765d74d50de8a8e69e08f5e7"
+    },
+    {
+      "bytes": 19240,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Configuration.dll",
+      "sha256": "3952a72e1f18774f16952b46c20e80ed2bc601a06eca01f33fa924c738022a9c"
+    },
+    {
+      "bytes": 169808,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Console.dll",
+      "sha256": "3b85daf02a3d9ed99b84bb1c639fe8b1ced46d8d157fa56f525f6b8c5be43b3e"
+    },
+    {
+      "bytes": 23336,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Core.dll",
+      "sha256": "ac23faf1b37fa49f1b117baad951a65609e799a6e669a6df06d3552677e0c086"
+    },
+    {
+      "bytes": 2770728,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Data.Common.dll",
+      "sha256": "66bdd62047ee460e2ce2c33d15dd1173ac97997b2745864a905179594f821acc"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Data.DataSetExtensions.dll",
+      "sha256": "aeeae0755c8c7f6747765cdf82fa43182e320e97f2035e3a0a19f21905e6c113"
+    },
+    {
+      "bytes": 25424,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Data.dll",
+      "sha256": "49f52958a2a6e461d0fd7a47e54a199eb263c69ecfcc0fc684b73b5918ebf466"
+    },
+    {
+      "bytes": 16208,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.Contracts.dll",
+      "sha256": "6c05cacd9b61b08ae75f2d783cc402b0b5fc848e3d68c29c10b93897cc083e8b"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.Debug.dll",
+      "sha256": "8b160ffe7518588bf64e13c01c6dcb2ef504d64f38bbf0f198d31e7b698db92c"
+    },
+    {
+      "bytes": 501544,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.DiagnosticSource.dll",
+      "sha256": "6267c1bd1bdf2bdd4b5748b885b0adcda10f18697adfea8488a19a009ad44fdb"
+    },
+    {
+      "bytes": 46928,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.FileVersionInfo.dll",
+      "sha256": "e94f158142e93834dec3100bde3313935517d549ff36c65819a06d3104dec427"
+    },
+    {
+      "bytes": 329552,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.Process.dll",
+      "sha256": "51a57fbe918f8b68930c090792b718fc0850ea12da869d50b97a3796af29a740"
+    },
+    {
+      "bytes": 46888,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.StackTrace.dll",
+      "sha256": "8f6397c1e2ba9b8b8bfa317962151b5035049ce8d6b3575e5027a0d0eeacc797"
+    },
+    {
+      "bytes": 67368,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.TextWriterTraceListener.dll",
+      "sha256": "1bf165cee916a854e1150f489e4348ce94755359d5fcdcc0bc2bbbe6a7102bdd"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.Tools.dll",
+      "sha256": "841c5e2b6c171fa9aaff0fc6295f3fbc93dc5dcab44118b62f1c942bb674aff2"
+    },
+    {
+      "bytes": 141096,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.TraceSource.dll",
+      "sha256": "8445c7f1bbaae6cffde60e2c9a8753faaa5100255fbe31d0a1927d9d9bb7f194"
+    },
+    {
+      "bytes": 16208,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Diagnostics.Tracing.dll",
+      "sha256": "9563d5eec35f94d13a5e62eaa9535dbe0e9ea474f055da132fb8af46b0b01263"
+    },
+    {
+      "bytes": 50472,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.dll",
+      "sha256": "ef135f0bda0c41e142fdbd67b93e5aa7911916cb250f7df302f4151a3bbfa380"
+    },
+    {
+      "bytes": 20304,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Drawing.dll",
+      "sha256": "585a8da9952d715f8de7a7b1879b59d68ff8608b92f6ed1c5f0e1d251180d3c6"
+    },
+    {
+      "bytes": 132944,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Drawing.Primitives.dll",
+      "sha256": "17585b32ca91bac8ccff2ef1c6ddf62ee9ea5efc552928c3a9d1b868394246e9"
+    },
+    {
+      "bytes": 16168,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Dynamic.Runtime.dll",
+      "sha256": "c0eac30c791db8c1a2b50b61c50d029f4ddd0eadfdd35433745001688a3e7466"
+    },
+    {
+      "bytes": 239440,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Formats.Asn1.dll",
+      "sha256": "a163fe5f96d1689f1bc1ac531b38c3aba95792ac7dd52231d325d658947fbcfd"
+    },
+    {
+      "bytes": 272168,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Formats.Tar.dll",
+      "sha256": "44c9984f269a158915195fd32007f22c3bb692dcfeb933cda8ea45a3ac6cd1ce"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Globalization.Calendars.dll",
+      "sha256": "e0f3f3f6e4acc7b6755782fed5cb075ecf70beee4fc5d404579ae99bc0883ef2"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Globalization.dll",
+      "sha256": "66902cffd057673b4b77aa68faf80d33ffa4c94510e61db2a067943cc53b7702"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Globalization.Extensions.dll",
+      "sha256": "be0390557cc72078a7217cf94fd44b9ab66aa30838c00a92aa78c62469c44aa0"
+    },
+    {
+      "bytes": 83752,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Compression.Brotli.dll",
+      "sha256": "0a59a95787ee15784d73079fdd5dc555b78659a6c560b6cbbf0d7452e638df89"
+    },
+    {
+      "bytes": 419624,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Compression.dll",
+      "sha256": "c942747f84b730887090f5e0cf86d164c0ee402e524dce2750e06a6df48513fb"
+    },
+    {
+      "bytes": 15184,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Compression.FileSystem.dll",
+      "sha256": "4aeec2c0189f73ba8122f05c0d759008ddae1a8873b167cc8a558d53f2af80e1"
+    },
+    {
+      "bytes": 937256,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Compression.Native.dll",
+      "sha256": "4d174b78aa8b3516c7e3cec0355dfe9ae570894055c377d2e5565d077a9a7a1e"
+    },
+    {
+      "bytes": 100176,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Compression.ZipFile.dll",
+      "sha256": "2da76eb281740be485b5637da8c60fe0ce12bc2848d1a1a81ce144fa74313e18"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.dll",
+      "sha256": "388400ccb189b819d6ec5f1ef70710a39641d93ed5b870fc9324866b75dfb78b"
+    },
+    {
+      "bytes": 104232,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.FileSystem.AccessControl.dll",
+      "sha256": "f7f9ed6cdab35274711e9345266784ec332ae8040db184d141c70e7941fbbec5"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.FileSystem.dll",
+      "sha256": "c251f33b29382c47b773d907463edd9fe978a06e39efd5670ef3b3b1d4f8c2b7"
+    },
+    {
+      "bytes": 55120,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.FileSystem.DriveInfo.dll",
+      "sha256": "0a7f3dd2fb6147a3fc046aeac8501d764effe5a3d8cfa56d2b244aa50b874b98"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.FileSystem.Primitives.dll",
+      "sha256": "d3b21b8b38e48c6b4d1cb5cfe9adfe4abad7b3353601febd3c7e4027f9ef9c6b"
+    },
+    {
+      "bytes": 87848,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.FileSystem.Watcher.dll",
+      "sha256": "8ab1704e4bd171056ec5a11e886d5199d05a641c6d0233c53d4766bf30328dd3"
+    },
+    {
+      "bytes": 87848,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.IsolatedStorage.dll",
+      "sha256": "2272a8bde18ed0e7c9e54ece9b849b9be76c90b978909d2b2fc94cf0ccbce427"
+    },
+    {
+      "bytes": 83752,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.MemoryMappedFiles.dll",
+      "sha256": "6e8b281ecb2f0f5e7aad3980f61d8812caa6b37884737f542f95410a76663e0e"
+    },
+    {
+      "bytes": 190248,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Pipelines.dll",
+      "sha256": "ee9f0fd6c659f50799afd103c6ed9c5e408967e28dfa059bddf4b0a3fd2557dd"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Pipes.AccessControl.dll",
+      "sha256": "1102f25a6e88f2fae81e4cd3628d8ef826f847b9c9b6a4d32ff8b37e0300da35"
+    },
+    {
+      "bytes": 165712,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.Pipes.dll",
+      "sha256": "3804f9992861122e60990b0765d0b50b33cdc2e4d89d26d9dbf8641d1d0134a2"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.IO.UnmanagedMemoryStream.dll",
+      "sha256": "ad6a5f859589e1951103a00f45566da079cf87bd8b03f0c6ad985a6f39f19c5a"
+    },
+    {
+      "bytes": 1292072,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Linq.AsyncEnumerable.dll",
+      "sha256": "925208e8ac40ac3f7b988aba6ccbbb58adac38ad1876a7d97ee137be6c21a653"
+    },
+    {
+      "bytes": 698192,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Linq.dll",
+      "sha256": "284d38945b6e92e847129bd28af458b19818d0f2181f79882888ab2003f4c519"
+    },
+    {
+      "bytes": 3639080,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Linq.Expressions.dll",
+      "sha256": "8830f4a6a6982f53cfbb54f992858ee36b4994a6ff6e6078c39627e77bef282f"
+    },
+    {
+      "bytes": 775976,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Linq.Parallel.dll",
+      "sha256": "aa6068e3d8f6b2e492cc63dcaad6b02942edbae445cb2b88c24f1850b25c49f5"
+    },
+    {
+      "bytes": 182056,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Linq.Queryable.dll",
+      "sha256": "b3b3a9c1b87a51dacd46a3f9ec392c5d05e449152d44d6bd495df0994350e2fa"
+    },
+    {
+      "bytes": 161576,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Memory.dll",
+      "sha256": "f8f9d38efd6b0de30954d6bf1f353e9617bfb36d3d245c013a3b12be9f6bd88a"
+    },
+    {
+      "bytes": 17192,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.dll",
+      "sha256": "481b38c912f8779b3510cd00f079e45096ea22b6defdaab66780d5ac3ae6986a"
+    },
+    {
+      "bytes": 1746768,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Http.dll",
+      "sha256": "b98ed0cb80dd54c33fc049f33af5448710752155bbd5cc8cbcd932e01f066801"
+    },
+    {
+      "bytes": 128848,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Http.Json.dll",
+      "sha256": "a9fe81ba3c048f9977e0099800eefd570a49be723c555725da57ba797c92b4e0"
+    },
+    {
+      "bytes": 534312,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.HttpListener.dll",
+      "sha256": "3dfe11fb30c5f84c911d9562be6c2037113cd8976ef2def3550ac415ae58955b"
+    },
+    {
+      "bytes": 481064,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Mail.dll",
+      "sha256": "b585a55ee67c80d7f02a84d50d626d279c7aa77fd3e38206b434bd20c181eedc"
+    },
+    {
+      "bytes": 124712,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.NameResolution.dll",
+      "sha256": "e786c0940f5322f0ad6e8e34e7b582e5b050df0fb2230329325307e61bfd994c"
+    },
+    {
+      "bytes": 157520,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.NetworkInformation.dll",
+      "sha256": "7e8791833eb2d0aea77b119fed3cab8bf501f6a553155cc1c4e5b1c02f65593b"
+    },
+    {
+      "bytes": 91984,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Ping.dll",
+      "sha256": "06bb307343db955a312634d00ba5e097cf5168a901284437592c28d780804e33"
+    },
+    {
+      "bytes": 210728,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Primitives.dll",
+      "sha256": "4dbb41a178ef013a898327152eccd146228dd2eb83859b9bb36078333b41f0f1"
+    },
+    {
+      "bytes": 358224,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Quic.dll",
+      "sha256": "af5b52cdee62d014af677c411530a3fde5c1c368adecb8f83dcfe9246e8bbe73"
+    },
+    {
+      "bytes": 374568,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Requests.dll",
+      "sha256": "ed82d9d0b7942b2b02c5744a4591fbe2316879618adfc5660c9f111f814155f2"
+    },
+    {
+      "bytes": 665424,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Security.dll",
+      "sha256": "a78bd713e807729f15b0e085c67fd6cbfefa85736a2618512d4ff1212759eba5"
+    },
+    {
+      "bytes": 83752,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.ServerSentEvents.dll",
+      "sha256": "c0b1944020d0e5688b90fba9f29209e367674e29d2020f700c302994d5417eda"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.ServicePoint.dll",
+      "sha256": "84fa83cd96e62fda02991b8a8e99fa1c7b3ac08807b04f7486a896cfe6b4a760"
+    },
+    {
+      "bytes": 530216,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.Sockets.dll",
+      "sha256": "645c56d637ce15976998119e50722a911315682ce141b4aab98874ce1b063f3a"
+    },
+    {
+      "bytes": 165672,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.WebClient.dll",
+      "sha256": "defa7bbf90c77ed01d6add53f678e4adfbcf97f3b1152affec06e652d327f1a2"
+    },
+    {
+      "bytes": 63312,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.WebHeaderCollection.dll",
+      "sha256": "74d66f776b4c15936a7b887f47ceb8bf277dbe82e71a78dd3ea5d02502b081e7"
+    },
+    {
+      "bytes": 42832,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.WebProxy.dll",
+      "sha256": "408e3daabb3f42b4f1b72a1e1def38f12ba58eb9d23dca620086819cf7484195"
+    },
+    {
+      "bytes": 104232,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.WebSockets.Client.dll",
+      "sha256": "f308a69b9ee1ac982f53d1d94374f4972a7e3c700742901ff7c2bbfb570019d2"
+    },
+    {
+      "bytes": 243496,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Net.WebSockets.dll",
+      "sha256": "c014a074d408c71011e26eac69be85003a852cfe115e8608bb5d4fd70536eb2e"
+    },
+    {
+      "bytes": 15184,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Numerics.dll",
+      "sha256": "35adc9360421b3b7a3d50399cb2c651c160158d7e8c302907acbce5f61f4a4f7"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Numerics.Vectors.dll",
+      "sha256": "a9a980ee33ed0c798a5e1960c4557521f465ac9e0987dfd2c3049d53b1f2fa5a"
+    },
+    {
+      "bytes": 79656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ObjectModel.dll",
+      "sha256": "2179bb19f335b4fcacd0994ad2ccfdac6840deff09c7889debfe9dbb5b88a3e6"
+    },
+    {
+      "bytes": 16033576,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Private.CoreLib.dll",
+      "sha256": "1125acc8106c43fc8bad2d203c4c4485df6182d292846c2fff415c1040c54678"
+    },
+    {
+      "bytes": 2062120,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Private.DataContractSerialization.dll",
+      "sha256": "8c07a5333c4e938cad8ac8f24b5965121bc0622442a352cbe81c58f17c2349a8"
+    },
+    {
+      "bytes": 255824,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Private.Uri.dll",
+      "sha256": "b15c84d2120e1ec9612c66ba59bc3d7e67d841e2bce7b7d0478cb212537539b4"
+    },
+    {
+      "bytes": 7788328,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Private.Xml.dll",
+      "sha256": "d71e72a7a9de324352edd281a46466b51bd0bdd2831b1573f8d3bae8bd2dd4a6"
+    },
+    {
+      "bytes": 390952,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Private.Xml.Linq.dll",
+      "sha256": "c832b73de9783e6929ca5ff4863fc313e13ef7cfb5965c52587c4f77f6e037a7"
+    },
+    {
+      "bytes": 75600,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.DispatchProxy.dll",
+      "sha256": "bf93a361c0bba8497889c9f7713add5968ba39394f9e6bda27e86294c6c43560"
+    },
+    {
+      "bytes": 16168,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.dll",
+      "sha256": "95059346d6271dd6d0322cc321e5fb8cceab662f550c67aee7615059e41739bb"
+    },
+    {
+      "bytes": 309032,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.Emit.dll",
+      "sha256": "09059981bbeea0fdc5df589be5d7e3937d57e22bec4d78ceb492c587926fc238"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.Emit.ILGeneration.dll",
+      "sha256": "6b42ddd05b0ca1c7342d73ea9f401fe588044215d65c67b756deb780f0894a26"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.Emit.Lightweight.dll",
+      "sha256": "d2724a2b7b46146877ec1f6e400c49ea05f84bdd31f3bba52ae139ee68a4f779"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.Extensions.dll",
+      "sha256": "ceb1b81e1eb488d87bd43d16dc54450b2a78e0b653c44c988aae2a20abc162bc"
+    },
+    {
+      "bytes": 1156904,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.Metadata.dll",
+      "sha256": "82973e772017944a0548e445f30757595d95fe99e1f5c4a446df8c4db04b1c18"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.Primitives.dll",
+      "sha256": "c2bbd885d03da5e880667c228ac1f56a5f3a72ea37d43f010ada000adc33da28"
+    },
+    {
+      "bytes": 42792,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Reflection.TypeExtensions.dll",
+      "sha256": "7cac73ed746ce05a4a2f1e61dd52d41322ecc6ba84cfec463380f49487031459"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Resources.Reader.dll",
+      "sha256": "20bdb5d302b5e28f6042c9f281cfa3ae2f2358544cc40783052fe5abf6aa859b"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Resources.ResourceManager.dll",
+      "sha256": "f709eb5cf16e26679782784c428825019785fcc7085562092425d4999bece03d"
+    },
+    {
+      "bytes": 50984,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Resources.Writer.dll",
+      "sha256": "684836486b9ba2817efa3099118860d259fd16db0c4c0533d42cad8c6c165b62"
+    },
+    {
+      "bytes": 15184,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.CompilerServices.Unsafe.dll",
+      "sha256": "6e685ec0477b21a688cd38bfcafc673888cdf186c99df3c96fab352e96d6fdc8"
+    },
+    {
+      "bytes": 30504,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.CompilerServices.VisualC.dll",
+      "sha256": "5fd85d3d7b47a921bdf48bf938c6615a49a4a3d493e1ea199f1b997c709618f4"
+    },
+    {
+      "bytes": 44840,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.dll",
+      "sha256": "76be53624f64b23d0249dfa0bbe85390086de7c44bfd490642ea86c6faaf44af"
+    },
+    {
+      "bytes": 17704,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Extensions.dll",
+      "sha256": "3d7b517d4fd89ee58c53e0f642cc9be42e7a8669b51a85e861dafe118067cbfd"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Handles.dll",
+      "sha256": "985457a3e6a67e96a445ee0fb69b2d58bcdadc4c964253fb63e2d5061a36b050"
+    },
+    {
+      "bytes": 112464,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.InteropServices.dll",
+      "sha256": "e5eb1679f3579c9141e2bb9dbdce62624a623f38d299805cc1de07bacd21841f"
+    },
+    {
+      "bytes": 50984,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.InteropServices.JavaScript.dll",
+      "sha256": "5ba32bcde2d72362db2d6e02763ece79fa35bc878b50493e956ce594307e997f"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.InteropServices.RuntimeInformation.dll",
+      "sha256": "c26d9f94329422bd000f28f6c65fdc162bf9397a6d29e418a189d4ca49c5c3ec"
+    },
+    {
+      "bytes": 17192,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Intrinsics.dll",
+      "sha256": "b07694ec91f3a200acf0f8b37c6ce5fcf05126a9198ae156d839fa5ca8439dc5"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Loader.dll",
+      "sha256": "9b9b2a4f0358d9146e76178ddb87d019be380c78baa7dac853493d45df089f03"
+    },
+    {
+      "bytes": 354128,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Numerics.dll",
+      "sha256": "8ac94fb810c092a9297a903762e79a75ae07d7229d0721540c391f86d3d5d220"
+    },
+    {
+      "bytes": 17192,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Serialization.dll",
+      "sha256": "d565fc261ca98cbd14833821f777860291e8a0f775de7aee91778a9f6647f6f4"
+    },
+    {
+      "bytes": 124712,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Serialization.Formatters.dll",
+      "sha256": "5e8e957c6b7a63132555ede5bcf5fe6a59934c83300e28074ec6e9845ecdd17f"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Serialization.Json.dll",
+      "sha256": "2fd71e3545dab4fc89b3fe54d13a1142f26a0cf187ebe375b3f7fa210fcb2596"
+    },
+    {
+      "bytes": 38696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Serialization.Primitives.dll",
+      "sha256": "f96093940e64d8eead98c86de9773d3c9d12c2b033bc6b1312ac88398303fdf3"
+    },
+    {
+      "bytes": 16680,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Runtime.Serialization.Xml.dll",
+      "sha256": "eedb66ea2cd1a26cc45a46d6631209ccbec959af82208872a93b3ae52f189222"
+    },
+    {
+      "bytes": 227112,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.AccessControl.dll",
+      "sha256": "cdc304f9ddb32023adb8db8953e56711c9b64462e4341d0b62e87ccd19dc7b10"
+    },
+    {
+      "bytes": 100176,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Claims.dll",
+      "sha256": "c53c8a7e95d8296f951872fdd2e6334d11c20bffd4322f1a088773bf9dcaa3c2"
+    },
+    {
+      "bytes": 17232,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.Algorithms.dll",
+      "sha256": "eb99ae7dbe058a1b015aba6769ce1f65155b7ff51ff9a7203fcf6d7cdea5fef7"
+    },
+    {
+      "bytes": 16168,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.Cng.dll",
+      "sha256": "7319f97896d92a7d0729cf28dc6c4d1f797c1520b656ee01a780eec726ec2c16"
+    },
+    {
+      "bytes": 16208,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.Csp.dll",
+      "sha256": "4002af141e9cb29875b677841adf64a9681e5672c2595492dcbc161460d4e121"
+    },
+    {
+      "bytes": 2549544,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.dll",
+      "sha256": "e0a839a540e47343b53a936b32d91599a3470005228d50fd0b896f8bbdcc65b0"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.Encoding.dll",
+      "sha256": "994494aec7760f40fade2264aa7c13eebae36360f0b1399a7134bb19c9d58fda"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.OpenSsl.dll",
+      "sha256": "1a8902bbad1b577a98bec62a8472105dc1e9a253e390f69fbe3d167e93206968"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.Primitives.dll",
+      "sha256": "194cccea9354bb248e44c954b5373f9069163f8f21524b3ee4b3185fe436bc15"
+    },
+    {
+      "bytes": 16680,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Cryptography.X509Certificates.dll",
+      "sha256": "7439c3b90bc2ee49a9275b28ed29052b4d48b45999ac1b7d25593033b1bb8dd6"
+    },
+    {
+      "bytes": 18256,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.dll",
+      "sha256": "d8efd304765e859369698efef9b3ca707defa8e142721fe5605d7a2de7d38375"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Principal.dll",
+      "sha256": "1d3e351058be3a33214b23b308fe57f78cd6fd4d8fad448fc84cbbe7376129f9"
+    },
+    {
+      "bytes": 178000,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.Principal.Windows.dll",
+      "sha256": "2311a3f92971de918943573dfb66e04e25c1d543663951eb24e8eb1a0dcd4251"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Security.SecureString.dll",
+      "sha256": "73aac97072b7deefa4de9647bf822162224f1452ad467841b989ff89d4d94595"
+    },
+    {
+      "bytes": 16680,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ServiceModel.Web.dll",
+      "sha256": "ce91013ee3a9a9d69a85e258f7749e6ece488295d7cb66f7c1079f2e8678fc5e"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ServiceProcess.dll",
+      "sha256": "63fc498c9d04e3c4345dfdb8016ad0639d54562dd7d8c707c072792c854df944"
+    },
+    {
+      "bytes": 862032,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Text.Encoding.CodePages.dll",
+      "sha256": "226e216e33c94ef7594bdffe670ba4dc5907151c113cb41ac9e9d570227e1765"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Text.Encoding.dll",
+      "sha256": "5e347db6b4f9b2746d50e1ac85be2d9cc7dc4038fde98ac4295bc7030c83cda9"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Text.Encoding.Extensions.dll",
+      "sha256": "8f51b9535db64fe027a40d6076200b1a6b0889bf05f62bb8e68c3eb083c7f113"
+    },
+    {
+      "bytes": 124752,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Text.Encodings.Web.dll",
+      "sha256": "d20431f20d992e71a4e82e5f25c822474e2f4097d8527972d3d78ea1f26e47c3"
+    },
+    {
+      "bytes": 1890128,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Text.Json.dll",
+      "sha256": "fa99f413be21ed5f484a09093fe5f0beba7de3062cf9cc9f847dbf8108dba55a"
+    },
+    {
+      "bytes": 1034064,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Text.RegularExpressions.dll",
+      "sha256": "060bcc88a688e687ff1404b83b5fb5cf17e19ec57f33d5b8a48ab494da83c134"
+    },
+    {
+      "bytes": 75560,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.AccessControl.dll",
+      "sha256": "66d618b5522b3e4f7a3c7f2bd872fc378fa6f9bbdca3636854eb1a8cb948e631"
+    },
+    {
+      "bytes": 157480,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Channels.dll",
+      "sha256": "afc5deb3c32b3f64bced2025d0b01b316d41b691ebc6ccb1a2ec445ad4c15e39"
+    },
+    {
+      "bytes": 83792,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.dll",
+      "sha256": "6c32ed1bf8067e4169e8feddd15e6489b89d19d1c7aae1520a551b57745d0a60"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Overlapped.dll",
+      "sha256": "89fde15f8e520c4bcbc6cbfdceba2baed8670cdf52399a4cd7a21c6efb276c1a"
+    },
+    {
+      "bytes": 472872,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Tasks.Dataflow.dll",
+      "sha256": "a895b0c73d3a1afc4d89c1d9e445ed447af12864c25aad2c4cb7398ff50aa934"
+    },
+    {
+      "bytes": 16680,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Tasks.dll",
+      "sha256": "f80b21f7dae04377b73945456cabe25e2ab1f4b564095aed546c2aa571644567"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Tasks.Extensions.dll",
+      "sha256": "f148e3a1414b7c2763ae21529ad79ad759f7cfd3c885256b64b0d2209dec2613"
+    },
+    {
+      "bytes": 132904,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Tasks.Parallel.dll",
+      "sha256": "6fa359bdbebb56be96339f244ed41658afcead5e010074da470df1115d1e7699"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Thread.dll",
+      "sha256": "ce71949bb1ea67b686e799128582015ebf8758f1107e59e43f342ece3f662930"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.ThreadPool.dll",
+      "sha256": "58fbc6c4b9c72087152fd0f0670a527098c00b0c19ba8d0979d3ca5ce07c6936"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Threading.Timer.dll",
+      "sha256": "9e4620846572f49aeb476aa99405071b4bbd0df4323e4e232787ed73642b1ee5"
+    },
+    {
+      "bytes": 16720,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Transactions.dll",
+      "sha256": "56abfca0350c111d077b3d86a2469ea3da4fccc1871f7c51a8b4fdb664bb0ede"
+    },
+    {
+      "bytes": 640808,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Transactions.Local.dll",
+      "sha256": "8d0283a311a16333ffb6f966d9765e4d8b866777ad99291a93b30db349a15bc4"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.ValueTuple.dll",
+      "sha256": "07a5347f6a597e5e0d72109efa1a525697e8c3f74fb0029005500f8ebbf9187a"
+    },
+    {
+      "bytes": 15144,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Web.dll",
+      "sha256": "bc260b3db247ad9a6e4a82a275da85c3691a41272cc745cb7eaefcf1f31cc817"
+    },
+    {
+      "bytes": 63272,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Web.HttpUtility.dll",
+      "sha256": "2cedef51b0a2c2b84240583339ecf2422c650e3388aa46f3494160b93b673887"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Windows.dll",
+      "sha256": "716eee98ceee87d38f0b301224462f8442aa793f4b1b9c3ffac315753320ab37"
+    },
+    {
+      "bytes": 23376,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.dll",
+      "sha256": "277a84ba155fe7808a514f32694a8157ec9f0eeeef00ef9643e5250004054ff0"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.Linq.dll",
+      "sha256": "ae04903b25717fa4695e7e63489091f0d461e791e0bd264c6c85250d668f540d"
+    },
+    {
+      "bytes": 21840,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.ReaderWriter.dll",
+      "sha256": "8e48fed4d12bcffff01e8059caafb564697275797d2f5ec6823fdd82b87fe938"
+    },
+    {
+      "bytes": 16208,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.Serialization.dll",
+      "sha256": "489694401c60905cb6dca8ef0bf738cb609cd45b337126a01c825b913086ba43"
+    },
+    {
+      "bytes": 15696,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.XDocument.dll",
+      "sha256": "3ff858607de5146051498a7124ef983bea280d86e165f993516c6c26af81cfb5"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.XmlDocument.dll",
+      "sha256": "a50b9b3a03596e36e73e7a7d54f4d018e8dcfaa7fe79e8cf900af8838ef3ec36"
+    },
+    {
+      "bytes": 17744,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.XmlSerializer.dll",
+      "sha256": "0b7d057c2b5b2272e8d4096a755edfd96f3cf03ab9aaa3fef54b462bf48d517e"
+    },
+    {
+      "bytes": 15656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.XPath.dll",
+      "sha256": "c817b11c58d95fa942fbc62a4cfa8219e16dafa5641eb004cb2be424028ed5d8"
+    },
+    {
+      "bytes": 30504,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/System.Xml.XPath.XDocument.dll",
+      "sha256": "5bcd27a7e93515b745993f6dda51391033883cb8a1a8a2e3dad5caed3548f0da"
+    },
+    {
+      "bytes": 1015,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/THIRD-PARTY-NOTICES.md",
+      "sha256": "3788bf9d3405ecc9c8e01984cc315643beefc5828e04ed06fafe0ee694206a84"
+    },
+    {
+      "bytes": 219136,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Tmds.DBus.Protocol.dll",
+      "sha256": "31ebefac6d09694780328414e9d677159590a601991beb36b0aa8f26e9bc121b"
+    },
+    {
+      "bytes": 16208,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/WindowsBase.dll",
+      "sha256": "0ec46a38f29a234b9a4d0ae9364c8322f661a47c831c5b948f2787b7ca12dbbd"
+    },
+    {
+      "bytes": 21746,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Assets/Square150x150Logo.png",
+      "sha256": "f51d2f9ffac637d778e24d52bf16c32d3a07c9007d7316d2badde70050eafb1a"
+    },
+    {
+      "bytes": 2799,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Assets/Square44x44Logo.png",
+      "sha256": "935cbc2fb743468ef1a049625016550483e9626004d29e5c8d90cf3a5c9a7307"
+    },
+    {
+      "bytes": 3342,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Assets/StoreLogo.png",
+      "sha256": "efdb9a805cf4015b23104194f97bbc8cc918140e05292c510f72647fb224de0a"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Diagnostics/GuestProof/CopperStart-DiskBoot.rom",
+      "sha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Diagnostics/GuestProof/System.adf",
+      "sha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88"
+    },
+    {
+      "bytes": 581,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/a1200-aga-ntsc.json",
+      "sha256": "a2224da8829cda9b32b0106571fd0b91020d2948f907b854e5eb6c4fbab9e02e"
+    },
+    {
+      "bytes": 660,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/a1200-aga-pal.json",
+      "sha256": "df5ab7d20e26a2c8c2d249c42cc016bac1ee1a1c653a733da29644b1a6fba07c"
+    },
+    {
+      "bytes": 784,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/a500-kickstart31-host-exec.json",
+      "sha256": "7dd70a3eba162bcc2e084511ae151464f226eeddda8957a84ee8bc151c6572ae"
+    },
+    {
+      "bytes": 656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/a500-plus-ecs-ntsc.json",
+      "sha256": "06ea7aa3d1f7c9169183b0f7b2d351ca70492b7d28f09a0a0bf2da561ca33129"
+    },
+    {
+      "bytes": 652,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/a500-plus-ecs-pal.json",
+      "sha256": "5200b151b6850a7237c9e3a362c6cadddf99e395ca4dd7d17cd80e2261891f7e"
+    },
+    {
+      "bytes": 618,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/diagnostic-hrm-copperstart.json",
+      "sha256": "2529ca6dea7dd4d2ea6b44782ce0f48444a7b0cd4c0eef4664a36985a784a2e5"
+    },
+    {
+      "bytes": 569,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-copperstart - singledrive.json",
+      "sha256": "ff33887a87877ba7d73b423999d3857975b8eafc3d31c97347e42e50eb19c8e3"
+    },
+    {
+      "bytes": 569,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-copperstart.json",
+      "sha256": "a3151aed803d1c2d2bb605edb14578420ecb4b83674cf69dbce1ed2bc5327edb"
+    },
+    {
+      "bytes": 598,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-diagrom.json",
+      "sha256": "d0f89d2c3658774ebf563dd0ed1b3dac59f79d7482de9acde24fe2380581f798"
+    },
+    {
+      "bytes": 570,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-kickstart13 - singledrive.json",
+      "sha256": "7a375579c83c53e540dd45c7d664a0908ea94418b8d6b2e46d030b5fe0ae83f4"
+    },
+    {
+      "bytes": 570,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-kickstart13.json",
+      "sha256": "c8f7115c7ed783234b9dcfae696628692384863b6544f354729aa701907ce893"
+    },
+    {
+      "bytes": 701,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68020-copperstart.json",
+      "sha256": "2922bc5758a0fbfb1bb504e03b544699345425af39dffc38439aa4f6d817f767"
+    },
+    {
+      "bytes": 723,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68030-copperstart.json",
+      "sha256": "4114b4746d82b2d1deb67d8da31ee8aac1faf350ec5dc2b15bd31b6f330885ed"
+    },
+    {
+      "bytes": 709,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68040-diagrom.json",
+      "sha256": "d143ad3302a2a229f63604438e54418ac0e8033ad92ce743c899a9348487bdfb"
+    },
+    {
+      "bytes": 881,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68040-jit-kickstart-rom.json",
+      "sha256": "24d97135fddeb952e2870f0d36ec232dc45e067548ed7d6c780d458a4cab4eca"
+    },
+    {
+      "bytes": 1019,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68040-jit-kickstart31-copperhdf.json",
+      "sha256": "9a6ff9799b0c55c630ba607268ffee5989858bc342bc299a2b585d6d00468fd2"
+    },
+    {
+      "bytes": 660,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68040-jit-kickstart31-rtg.json",
+      "sha256": "6ec846159353fe68b3a2fb9c830ef15c1ced4298a9f46f97148f1790b4bab4b0"
+    },
+    {
+      "bytes": 811,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/expanded-m68040-kickstart-rom.json",
+      "sha256": "0ca3a3d01472fce0f05c6b16cf6673e14b099de776b8ff83293d4f7b2a4840f5"
+    },
+    {
+      "bytes": 676,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/lightweight-a500-copperstart.json",
+      "sha256": "5ee0309f7ae724327745d57e2b52ee621d0cbfa1222811c57edc74478c9d2d21"
+    },
+    {
+      "bytes": 656,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/lightweight-a500-kickstart13.json",
+      "sha256": "f90c7e3ec48f77ed89620dae7253e7dae01eef070ab3d7a0011d87e2fb3fcde1"
+    },
+    {
+      "bytes": 664,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/lightweight-a500-kickstart31.json",
+      "sha256": "fd2d338975313ebbf375f9c767c4229548486547ac9c8894ddf21b804cfda144"
+    },
+    {
+      "bytes": 568,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/lightweight-a500-minimal-disk-boot.json",
+      "sha256": "1bb447a7d54e273195079967674443be23942fb0699f36d0ffbd92e386d69b89"
+    },
+    {
+      "bytes": 505,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/vanilla-copperstart.json",
+      "sha256": "61fcd0e3780918e4b4677cf56255f26a4a5d6b2cf51b89a861b38178a862a015"
+    },
+    {
+      "bytes": 506,
+      "path": "artifacts/audio43-update-cbd23f48/Baseline/Layout/Presets/vanilla-kickstart13.json",
+      "sha256": "68802075894faeeb2199caffd378e9a159054b02d49b79bb5e57501b07cc183a"
+    },
+    {
+      "bytes": 17312,
+      "path": "artifacts/audio43-update-cbd23f48/Frozen/scripts/test-msix-installed.ps1",
+      "sha256": "0159ebcbce0c116a5b35cb0996a0c8c4f25fa9427b72911b405ecc2a4084751a"
+    },
+    {
+      "bytes": 14822,
+      "path": "artifacts/audio43-update-cbd23f48/Frozen/scripts/msix/CopperScreen.Msix.psm1",
+      "sha256": "bd32066ca7717ac84441d86a48001cba1c8ef043fd29ce769433955b62ececff"
+    },
+    {
+      "bytes": 6699,
+      "path": "artifacts/audio43-update-cbd23f48/HistoricalObserved/COPPERSTART_RDB_WRITES_2026-10-18.md",
+      "sha256": "126916c0ee4be9cb30867b7a1b77076075685e9ed5759f17f704b5131a591c5a"
+    },
+    {
+      "bytes": 6528,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/fresh-5.json",
+      "sha256": "2c656202a8aab2088a56fc598a824789c2561131b5e3153ee1e89fc656a0f6a8"
+    },
+    {
+      "bytes": 70806,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/installed-test-record.json",
+      "sha256": "495878e5a7c4e2f41ebf0ad5e6048fc69515e8462e7e05af972e1254cce86139"
+    },
+    {
+      "bytes": 4850,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/media-proof-exports.json",
+      "sha256": "9cc53c4cd484b23d27208f07146e570b184df4005a7f0c0f5fcf112628d15fb4"
+    },
+    {
+      "bytes": 10236,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/recovered-4.json",
+      "sha256": "d570cece22321579a36b8a6d13c77f3a15b9f4e8902d28751e7c3eb88fafb745"
+    },
+    {
+      "bytes": 10686,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/recovery-3.json",
+      "sha256": "8474f0fde75ec21c1ae9b0484c468688ba1acf84b7319fbc94b9673f2fa9e83b"
+    },
+    {
+      "bytes": 9157,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/seed-0.json",
+      "sha256": "00b4786e4d22264b286ce23e527b6994f0735e04dacc3c2b172baf29f1f7f6f2"
+    },
+    {
+      "bytes": 40,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/user-owned-original.txt",
+      "sha256": "26220adb2f4db715b8e1e07fa34446d6ae774ec4fd9ff001b80e95f4433d4e22"
+    },
+    {
+      "bytes": 9165,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/verify-1.json",
+      "sha256": "c7d73011d459a52f45c6cb87cd528b55d57624a3bc140f4e68def79060d21dba"
+    },
+    {
+      "bytes": 9165,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/verify-2.json",
+      "sha256": "64eb6dff26652baf4162298e0ba2a82165cf5d03fe686cdf9c09f0b395260fb1"
+    },
+    {
+      "bytes": 364,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/fresh-5/snapshot.json",
+      "sha256": "f22048ca4cf3efe15f2a435c61c3b9af0c944a55fb8933667be5d3aa4464b0e5"
+    },
+    {
+      "bytes": 2465,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovered-4/last-machine.json",
+      "sha256": "c7faa2f707e129f7cfc7042ab2ee6fc738a1785a7bdbea7e638da03f1801778f"
+    },
+    {
+      "bytes": 2544,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovered-4/lightweight-a500-kickstart13.json",
+      "sha256": "e9797bb5da7781b41eaf483030e878058e92e9103f771e625f8967da04c0912c"
+    },
+    {
+      "bytes": 262,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovered-4/recent-session.json",
+      "sha256": "a70fceff60cf7e0b35964b52b92c08c85e9649414a2923b6dde05c6cc7d9a493"
+    },
+    {
+      "bytes": 1968,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovered-4/snapshot.json",
+      "sha256": "c0d5a61ed68f92bafb6b0a0f90e3da65b85f032bdcebcb91338ec9572b519c1b"
+    },
+    {
+      "bytes": 2465,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovery-3/last-machine.json",
+      "sha256": "c7faa2f707e129f7cfc7042ab2ee6fc738a1785a7bdbea7e638da03f1801778f"
+    },
+    {
+      "bytes": 2544,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovery-3/lightweight-a500-kickstart13.json",
+      "sha256": "e9797bb5da7781b41eaf483030e878058e92e9103f771e625f8967da04c0912c"
+    },
+    {
+      "bytes": 262,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovery-3/recent-session.json",
+      "sha256": "a70fceff60cf7e0b35964b52b92c08c85e9649414a2923b6dde05c6cc7d9a493"
+    },
+    {
+      "bytes": 1964,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/recovery-3/snapshot.json",
+      "sha256": "7b2541d2535c0b0057679b142b228b4a5f77fc528a451f05e2d0f900a12c0a8d"
+    },
+    {
+      "bytes": 2465,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/seed-0/last-machine.json",
+      "sha256": "c7faa2f707e129f7cfc7042ab2ee6fc738a1785a7bdbea7e638da03f1801778f"
+    },
+    {
+      "bytes": 2544,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/seed-0/lightweight-a500-kickstart13.json",
+      "sha256": "e9797bb5da7781b41eaf483030e878058e92e9103f771e625f8967da04c0912c"
+    },
+    {
+      "bytes": 262,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/seed-0/recent-session.json",
+      "sha256": "a70fceff60cf7e0b35964b52b92c08c85e9649414a2923b6dde05c6cc7d9a493"
+    },
+    {
+      "bytes": 1948,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/seed-0/snapshot.json",
+      "sha256": "17d8666569f057d802bcd8516befcda4b3956e05d04bdedfb497c96d0aca5165"
+    },
+    {
+      "bytes": 2465,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-1/last-machine.json",
+      "sha256": "c7faa2f707e129f7cfc7042ab2ee6fc738a1785a7bdbea7e638da03f1801778f"
+    },
+    {
+      "bytes": 2544,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-1/lightweight-a500-kickstart13.json",
+      "sha256": "e9797bb5da7781b41eaf483030e878058e92e9103f771e625f8967da04c0912c"
+    },
+    {
+      "bytes": 262,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-1/recent-session.json",
+      "sha256": "a70fceff60cf7e0b35964b52b92c08c85e9649414a2923b6dde05c6cc7d9a493"
+    },
+    {
+      "bytes": 1956,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-1/snapshot.json",
+      "sha256": "cf417e1146d10f0e3ed03914fe23f35c26d0c040d86eb2b07632b4336155d3f4"
+    },
+    {
+      "bytes": 2465,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-2/last-machine.json",
+      "sha256": "c7faa2f707e129f7cfc7042ab2ee6fc738a1785a7bdbea7e638da03f1801778f"
+    },
+    {
+      "bytes": 2544,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-2/lightweight-a500-kickstart13.json",
+      "sha256": "e9797bb5da7781b41eaf483030e878058e92e9103f771e625f8967da04c0912c"
+    },
+    {
+      "bytes": 262,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-2/recent-session.json",
+      "sha256": "a70fceff60cf7e0b35964b52b92c08c85e9649414a2923b6dde05c6cc7d9a493"
+    },
+    {
+      "bytes": 1956,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/HostState/verify-2/snapshot.json",
+      "sha256": "e9ec65988c6f440099b20815314d8d3d3c1b4879dd17bdd8a0fc72408f946aca"
+    },
+    {
+      "bytes": 47179,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-fresh-5/launcher-1280x720.png",
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "bytes": 41034,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-fresh-5/launcher-800x600.png",
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "bytes": 43623,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-fresh-5/launcher-960x640.png",
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "bytes": 47179,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-recovered-4/launcher-1280x720.png",
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "bytes": 41034,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-recovered-4/launcher-800x600.png",
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "bytes": 43623,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-recovered-4/launcher-960x640.png",
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "bytes": 47179,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-recovery-3/launcher-1280x720.png",
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "bytes": 41034,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-recovery-3/launcher-800x600.png",
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "bytes": 43623,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-recovery-3/launcher-960x640.png",
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "bytes": 47179,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-seed-0/launcher-1280x720.png",
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "bytes": 41034,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-seed-0/launcher-800x600.png",
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "bytes": 43623,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-seed-0/launcher-960x640.png",
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "bytes": 47179,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-verify-1/launcher-1280x720.png",
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "bytes": 41034,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-verify-1/launcher-800x600.png",
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "bytes": 43623,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-verify-1/launcher-960x640.png",
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "bytes": 47179,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-verify-2/launcher-1280x720.png",
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d"
+    },
+    {
+      "bytes": 41034,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-verify-2/launcher-800x600.png",
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477"
+    },
+    {
+      "bytes": 43623,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/launcher-layout-verify-2/launcher-960x640.png",
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21"
+    },
+    {
+      "bytes": 206246,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/Media/baseline.copperos",
+      "sha256": "cea9dc1accfdbeedee39bcc7d6e6b64f9c279133fe706c789c863697c33620e4"
+    },
+    {
+      "bytes": 3,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/Media/invalid.copperos",
+      "sha256": "039058c6f2c0cb492c533b0a4d14ef77cc0f78abccced5287d84a1a2011cfb81"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/Media/original.adf",
+      "sha256": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0"
+    },
+    {
+      "bytes": 1004,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/Media/original.zip",
+      "sha256": "d4b3df785c38e4c10db577eef798a4badec60b821c12b6398b412c7c06952bed"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/Media/saved.adf",
+      "sha256": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/boot.chipram",
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "bytes": 226,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/boot.json",
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/boot.slowram",
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/boot.txt",
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/progress-5000.chipram",
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "bytes": 238,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/progress-5000.json",
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/progress-5000.slowram",
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/progress-5000.txt",
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "bytes": 1374,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/result.json",
+      "sha256": "75630cda3991a5b3828fd9ba94fd83e28eaadae9e59f106aeed9f9911b9687a4"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/storage.chipram",
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/storage.json",
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/storage.slowram",
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-fresh-5/storage.txt",
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/boot.chipram",
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "bytes": 226,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/boot.json",
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/boot.slowram",
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/boot.txt",
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/progress-5000.chipram",
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "bytes": 238,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/progress-5000.json",
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/progress-5000.slowram",
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/progress-5000.txt",
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "bytes": 1363,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/result.json",
+      "sha256": "99454e6fb8d92ebb2d59e8185583d5214344007f9a3737e209f48742fea60fd9"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/storage.chipram",
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/storage.json",
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/storage.slowram",
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovered-4/storage.txt",
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/boot.chipram",
+      "sha256": "215c52b97899dbfd20f3968e44ab82c911060b407935342f46268545615b75f9"
+    },
+    {
+      "bytes": 226,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/boot.json",
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/boot.slowram",
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/boot.txt",
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-12360.chipram",
+      "sha256": "777badf1f8374436fb378f4eea0a65a0f53f1aeaa9eac2e4e2d6938d29fe696d"
+    },
+    {
+      "bytes": 249,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-12360.json",
+      "sha256": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-12360.slowram",
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-12360.txt",
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-17360.chipram",
+      "sha256": "bbea6d2fb37691af68c8b22e9b87512172d634b295acb85d148bc9c90855e6b9"
+    },
+    {
+      "bytes": 252,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-17360.json",
+      "sha256": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-17360.slowram",
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-17360.txt",
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-5000.chipram",
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "bytes": 238,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-5000.json",
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-5000.slowram",
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/progress-5000.txt",
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/recovered.adf",
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+    },
+    {
+      "bytes": 206246,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/recovered.copperos",
+      "sha256": "b3e35422b41ccb30c8c52329c34209177b60702a5f814c30d145be7df73419ed"
+    },
+    {
+      "bytes": 1817,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/result.json",
+      "sha256": "382598a281408c168993d43c566e97ee27f7994a86f7167e2c0f697ef3af9fc2"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/storage.chipram",
+      "sha256": "5b8d63c20648c6a2b1a3032b3d3d4badcaf6ca8d7698bbf24cea8075726facbf"
+    },
+    {
+      "bytes": 230,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/storage.json",
+      "sha256": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/storage.slowram",
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/storage.txt",
+      "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d"
+    },
+    {
+      "bytes": 901120,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/imported-user/CopperOS/Workspaces/imported/System.adf",
+      "sha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+    },
+    {
+      "bytes": 321,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-recovery-3/imported-user/CopperOS/Workspaces/imported/workspace.json",
+      "sha256": "2a5b97262d3d2ede35b917aee7b0194c77d00efa9aaa4756a20565c111fa1871"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/boot.chipram",
+      "sha256": "215c52b97899dbfd20f3968e44ab82c911060b407935342f46268545615b75f9"
+    },
+    {
+      "bytes": 226,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/boot.json",
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/boot.slowram",
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/boot.txt",
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-12360.chipram",
+      "sha256": "777badf1f8374436fb378f4eea0a65a0f53f1aeaa9eac2e4e2d6938d29fe696d"
+    },
+    {
+      "bytes": 249,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-12360.json",
+      "sha256": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-12360.slowram",
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-12360.txt",
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-17360.chipram",
+      "sha256": "bbea6d2fb37691af68c8b22e9b87512172d634b295acb85d148bc9c90855e6b9"
+    },
+    {
+      "bytes": 252,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-17360.json",
+      "sha256": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-17360.slowram",
+      "sha256": "a932d7202ebe0b3d7abf59d34695f8512eec3ea36c8144bb60ac311cd75e5d84"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-17360.txt",
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-5000.chipram",
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "bytes": 238,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-5000.json",
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-5000.slowram",
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/progress-5000.txt",
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "bytes": 1363,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/result.json",
+      "sha256": "c71c5162f237d9df9caf14561654494b15eb0544903032f22fde5b0629b65c37"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/storage.chipram",
+      "sha256": "5b8d63c20648c6a2b1a3032b3d3d4badcaf6ca8d7698bbf24cea8075726facbf"
+    },
+    {
+      "bytes": 230,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/storage.json",
+      "sha256": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/storage.slowram",
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-seed-0/storage.txt",
+      "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/boot.chipram",
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "bytes": 226,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/boot.json",
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/boot.slowram",
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/boot.txt",
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/progress-5000.chipram",
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "bytes": 238,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/progress-5000.json",
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/progress-5000.slowram",
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/progress-5000.txt",
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "bytes": 1361,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/result.json",
+      "sha256": "29bff0d1318b7d2bbf21aec46979bee50f5778a40ec23f8385137cead95c077a"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/storage.chipram",
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/storage.json",
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/storage.slowram",
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-1/storage.txt",
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/boot.chipram",
+      "sha256": "fe324921fb312c65d916cabe033bf939265ba6ed46edd7b314eebcaec3e509c8"
+    },
+    {
+      "bytes": 226,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/boot.json",
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/boot.slowram",
+      "sha256": "62ce2a67ea4a2baeac1eccd6848fcd81c591aceb14f7f382d1667f9e05843589"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/boot.txt",
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/progress-5000.chipram",
+      "sha256": "9a1e5f2ae2cf5b353a1d4914c275180faf187a3fba5f98fb4f4a5096da07b051"
+    },
+    {
+      "bytes": 238,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/progress-5000.json",
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/progress-5000.slowram",
+      "sha256": "e7c42331d8565d41f4dffe89091b2173b88fa4851f29b312ea92ad272fd6f36f"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/progress-5000.txt",
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092"
+    },
+    {
+      "bytes": 1361,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/result.json",
+      "sha256": "8beaaac33e80593fdc7812ff76ece0103ac0ef95480857ef1e47f1773c56e6f4"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/storage.chipram",
+      "sha256": "a4ce971e2f2c1ffb5a963d74ad98792272c893eb9d2cd4ef4b7c9d82c317673e"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/storage.json",
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe"
+    },
+    {
+      "bytes": 524288,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/storage.slowram",
+      "sha256": "f0dd983e4ae9a4334b58319c26aafea7aade4c89523ae5a5bedf59e53165e1cf"
+    },
+    {
+      "bytes": 2025,
+      "path": "artifacts/audio43-update-cbd23f48/Installed/native-storage-verify-2/storage.txt",
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565"
+    },
+    {
+      "bytes": 417,
+      "path": "artifacts/audio43-update-cbd23f48/Recorder/inputs.json",
+      "sha256": "064715bd1a908e9adeb7f7aae7a2a4c0c69130a8e92a482d062f74d0d7e9dd59"
+    },
+    {
+      "bytes": 10731,
+      "path": "artifacts/audio43-update-cbd23f48/Recorder/record-audio43-msix.ps1",
+      "sha256": "da2355abf32c71df7a7bc2b86e6e79d8b4fc342182aef8075d4d43ddd05b72ed"
+    },
+    {
+      "bytes": 2704,
+      "path": "artifacts/audio43-update-cbd23f48/Recorder/update-audio43-msix-guides.ps1",
+      "sha256": "efda323edddcc037a69d8a9c1d9c0c510ae7ace2977c497be8af69ed6e093487"
+    },
+    {
+      "bytes": 7227,
+      "path": "artifacts/audio43-update-cbd23f48/Recorder/write-audio43-msix-report.ps1",
+      "sha256": "d734bfe523210ce566da159ee148c65ab1220a7941cba47bfeb520102f3ec269"
+    },
+    {
+      "bytes": 423,
+      "path": "artifacts/audio43-update-cbd23f48/RecorderV2/inputs.json",
+      "sha256": "eabf8c84a6d899310326455046afa0074ccdb5759cec60101f72c695af9e40ac"
+    },
+    {
+      "bytes": 11734,
+      "path": "artifacts/audio43-update-cbd23f48/RecorderV2/record-audio43-msix-v2.ps1",
+      "sha256": "2d5ac355e9c0bf7174506803f4fbd6cb1d5b52ee29a5c1451c5808bc1c7bb5de"
+    },
+    {
+      "bytes": 2704,
+      "path": "artifacts/audio43-update-cbd23f48/RecorderV2/update-audio43-msix-guides.ps1",
+      "sha256": "efda323edddcc037a69d8a9c1d9c0c510ae7ace2977c497be8af69ed6e093487"
+    },
+    {
+      "bytes": 7679,
+      "path": "artifacts/audio43-update-cbd23f48/RecorderV2/write-audio43-msix-report-v2.ps1",
+      "sha256": "413777432815d85a7d3072f2596015a4180bc51d8c4bb6bf0fda27fa2a179740"
+    },
+    {
+      "bytes": 49569399,
+      "path": "artifacts/audio43-update-cbd23f48/Update/CopperScreen-1.1.43.0-win-x64.msix",
+      "sha256": "7a34dc3fbe845959d1ea94f1e85e5b61031e55064797a9f73a42d098319cad02"
+    },
+    {
+      "bytes": 1061,
+      "path": "artifacts/audio43-update-cbd23f48/Update/signature-verification.log",
+      "sha256": "b4fcfcf54271dfbe2d4b2544c16d7cf8a58b2854a7ca1a8966ebb46c70e3c2a2"
+    },
+    {
+      "bytes": 39706,
+      "path": "artifacts/audio42-5c5b4945/Package/package-record.json",
+      "sha256": "c79f5e84d5b6cd0bf9b6e65c49658cf28542efcc8c437ae4810016da485df1da"
+    },
+    {
+      "bytes": 39706,
+      "path": "artifacts/audio43-2088e734/Package/package-record.json",
+      "sha256": "87ca776921c844f94b42e0c36442644702ba9ea639f7f8a6015565a6779d4336"
+    },
+    {
+      "bytes": 70241,
+      "path": "artifacts/audio43-2088e734/candidate-record.json",
+      "sha256": "19d007aec985f4e793828871020d938d0005ecc6c57e2876a62148dbb0e854bf"
+    },
+    {
+      "bytes": 49568808,
+      "path": "artifacts/audio42-5c5b4945/Package/CopperScreen-1.1.42.0-win-x64.msix",
+      "sha256": "81dc331555a74dd265fc063bfd12b0e8f31ad887fa0666feed0a7278916445c1"
+    },
+    {
+      "bytes": 49569399,
+      "path": "artifacts/audio43-2088e734/Package/CopperScreen-1.1.43.0-win-x64.msix",
+      "sha256": "7a34dc3fbe845959d1ea94f1e85e5b61031e55064797a9f73a42d098319cad02"
+    }
+  ],
+  "historicalSnapshotCount": 64,
+  "concurrentUnrelatedDatedChanges": {
+    "SnapshotCount": 64,
+    "Changed": [
+      {
+        "BeforeSha256": "268ADF7FC8E81A7F4B6C3C3A254ED6A701C9E1A41F4385FB51029EF92D3834D8",
+        "Path": "docs\\COPPERSTART_RDB_WRITES_2026-10-18.md",
+        "CurrentSha256": "126916C0EE4BE9CB30867B7A1B77076075685E9ED5759F17F704B5131A591C5A"
+      }
+    ],
+    "ChangedCount": 1,
+    "CollectorStatus": "INVALID ancillary all-history-unchanged assumption; installed protocol remains PASSED",
+    "ObservedUtc": "2026-10-19T04:43:28.042435Z",
+    "ObservedCopy": {
+      "Sha256": "126916C0EE4BE9CB30867B7A1B77076075685E9ED5759F17F704B5131A591C5A",
+      "Scope": "Unrelated RDB note changed during this run; snapshot retained, source left untouched",
+      "Path": "HistoricalObserved/COPPERSTART_RDB_WRITES_2026-10-18.md"
+    }
+  },
+  "ancillaryCollector": "First collector rejected its overbroad all-history-unchanged assumption. Retained INVALID log and original collector; revised audit retains unrelated RDB change without overwriting it. No installed phase failed."
+}

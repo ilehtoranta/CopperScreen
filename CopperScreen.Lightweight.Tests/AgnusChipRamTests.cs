@@ -35,7 +35,7 @@ public sealed class AgnusChipRamTests : IDisposable
             KickstartSource = CopperScreenKickstartSource.Kickstart31Rom, RomVersion = KickstartVersion.Kickstart31
         };
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         using var json = JsonDocument.Parse(File.ReadAllText(path));
         Assert.Equal(serialized, json.RootElement.GetProperty("Machine").GetProperty("Agnus").GetString());
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);

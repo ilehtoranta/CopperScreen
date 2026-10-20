@@ -211,9 +211,9 @@ internal sealed class CopperScreenStartupOptions
 			agnusBusArbitration, engine);
 	}
 
-	public static CopperScreenStartupOptions Default(string baseDirectory)
+	public static CopperScreenStartupOptions Default(string baseDirectory, string? userDataDirectory = null)
 	{
-		var profile = CopperScreenProfile.LoadDefault(baseDirectory, out var error);
+		var profile = CopperScreenProfile.LoadDefault(baseDirectory, out var error, userDataDirectory: userDataDirectory);
 		var driveDiskPaths = CreateDriveDiskPathArray(profile, null, baseDirectory);
 		return FromSettings(
 			profile,
@@ -229,16 +229,17 @@ internal sealed class CopperScreenStartupOptions
 	}
 
 	public static CopperScreenStartupOptions Parse(string[]? args, string baseDirectory,
-		CopperScreenEngine defaultEngine = CopperScreenEngine.Lightweight)
+		CopperScreenEngine defaultEngine = CopperScreenEngine.Lightweight, string? userDataDirectory = null)
 	{
 		var startupArgs = args ?? Array.Empty<string>();
 		// Direct Legacy APIs retain their historical profile; application startup
 		// always defaults to Lightweight, regardless of the requested hardware.
 		var profile = CopperScreenProfile.LoadDefault(baseDirectory, out var defaultProfileError,
-			defaultEngine == CopperScreenEngine.Legacy ? "expanded-m68040-kickstart-rom" : CopperScreenProfile.DefaultProfileId);
+			defaultEngine == CopperScreenEngine.Legacy ? "expanded-m68040-kickstart-rom" : CopperScreenProfile.DefaultProfileId, userDataDirectory);
 		var error = defaultProfileError;
 		var profileExplicit = false;
 		string? diskPath = null;
+        string? copperOsSeed = null, copperOsWorkspace = null;
 		string? kickstartRomPath = null;
 		M68kBackendKind? cpuBackendOverride = null;
 		var copperQuiescentFastPath = false;
@@ -278,6 +279,13 @@ internal sealed class CopperScreenStartupOptions
 				continue;
 			}
 
+            if (arg is "--copperos" or "--copperos-workspace")
+            {
+                if (i + 1 >= startupArgs.Length) { error ??= arg + " requires a value."; break; }
+                if (arg == "--copperos") copperOsSeed = startupArgs[++i];
+                else copperOsWorkspace = startupArgs[++i];
+                continue;
+            }
             if (arg is "--host-dir" or "--host-dir-rw")
             {
                 if (i + 3 >= startupArgs.Length) { error ??= "--host-dir requires device, volume and folder path."; break; }
@@ -307,7 +315,7 @@ internal sealed class CopperScreenStartupOptions
 
 			if (TryReadOptionValue(startupArgs, ref i, arg, "--profile", "-p", out var profileValue))
 			{
-				if (!CopperScreenProfile.TryLoad(profileValue, baseDirectory, out profile, out var profileError))
+				if (!CopperScreenProfile.TryLoad(profileValue, baseDirectory, out profile, out var profileError, userDataDirectory))
 				{
 					error ??= profileError;
 				}
@@ -569,13 +577,36 @@ internal sealed class CopperScreenStartupOptions
 				continue;
 			}
 
+            if (TryReadOptionValue(startupArgs, ref i, arg, "--hdf-rdb", null, out var rdbPath) ||
+                TryReadOptionValue(startupArgs, ref i, arg, "--hdf-rdb-writable", null, out rdbPath))
+            {
+                if (string.IsNullOrWhiteSpace(rdbPath) || rdbPath.StartsWith("--", StringComparison.Ordinal))
+                { error ??= "--hdf-rdb requires an existing RDB image path."; continue; }
+                hardDriveOverrides.Add(new(hardDriveOverrides.Count,
+                    ResolveOptionalPath(rdbPath, baseDirectory) ?? rdbPath,
+                    !arg.StartsWith("--hdf-rdb-writable", StringComparison.OrdinalIgnoreCase), 0,
+                    AmigaHardfileMountMode.RigidDiskBlock));
+                continue;
+            }
+            if (arg is "--hdf-ffs" or "--hdf-ffs-writable")
+            {
+                if (i + 2 >= startupArgs.Length) { error ??= arg + " requires an image path and DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER."; break; }
+                var path = startupArgs[++i];
+                var geometry = startupArgs[++i];
+                try { hardDriveOverrides.Add(CopperScreenHardfileSettings.Ffs(hardDriveOverrides.Count,
+                    ResolveOptionalPath(path, baseDirectory) ?? path, arg != "--hdf-ffs-writable", geometry)); }
+                catch (ArgumentException ex) { error ??= ex.Message; }
+                continue;
+            }
 			if (TryReadOptionValue(startupArgs, ref i, arg, "--hdf", null, out var hardfileValue) ||
-				TryReadOptionValue(startupArgs, ref i, arg, "--hardfile", null, out hardfileValue))
+				TryReadOptionValue(startupArgs, ref i, arg, "--hardfile", null, out hardfileValue) ||
+                TryReadOptionValue(startupArgs, ref i, arg, "--hdf-writable", null, out hardfileValue) ||
+                TryReadOptionValue(startupArgs, ref i, arg, "--hardfile-writable", null, out hardfileValue))
 			{
 				hardDriveOverrides.Add(new CopperScreenHardfileSettings(
 					hardDriveOverrides.Count,
 					ResolveOptionalPath(hardfileValue, baseDirectory) ?? hardfileValue,
-					ReadOnly: false,
+					ReadOnly: arg.StartsWith("--hdf-writable", StringComparison.OrdinalIgnoreCase) || arg.StartsWith("--hardfile-writable", StringComparison.OrdinalIgnoreCase) ? false : true,
 					CreateSizeBytes: 0));
 				continue;
 			}
@@ -598,7 +629,7 @@ internal sealed class CopperScreenStartupOptions
 					CopperScreenKickstartSource.Kickstart13Rom,
 					baseDirectory,
 					out profile,
-					out var profileError))
+					out var profileError, userDataDirectory))
 				{
 					error ??= profileError;
 				}
@@ -613,7 +644,7 @@ internal sealed class CopperScreenStartupOptions
 
 			if (IsOption(arg, "--minimal-disk-boot"))
 			{
-				if (!CopperScreenProfile.TryLoad("minimal-disk-boot", baseDirectory, out profile, out error)) break;
+				if (!CopperScreenProfile.TryLoad("minimal-disk-boot", baseDirectory, out profile, out error, userDataDirectory)) break;
 				profileExplicit = true;
 				continue;
 			}
@@ -624,7 +655,7 @@ internal sealed class CopperScreenStartupOptions
 					CopperScreenKickstartSource.CopperStart,
 					baseDirectory,
 					out profile,
-					out var profileError))
+					out var profileError, userDataDirectory))
 				{
 					error ??= profileError;
 				}
@@ -647,7 +678,7 @@ internal sealed class CopperScreenStartupOptions
 			// by file associations and launchers.  Resolve profiles before media so a
 			// JSON profile is not silently discarded as an unsupported disk image.
 			if (!profileExplicit &&
-				CopperScreenProfile.TryLoad(arg, baseDirectory, out var positionalProfile, out _))
+				CopperScreenProfile.TryLoad(arg, baseDirectory, out var positionalProfile, out _, userDataDirectory))
 			{
 				profile = positionalProfile;
 				profileExplicit = true;
@@ -673,7 +704,7 @@ internal sealed class CopperScreenStartupOptions
 				CopperScreenKickstartSource.Kickstart13Rom,
 				baseDirectory,
 				out profile,
-				out var profileError))
+				out var profileError, userDataDirectory))
 			{
 				error ??= profileError;
 			}
@@ -689,6 +720,23 @@ internal sealed class CopperScreenStartupOptions
 				: "A Kickstart ROM path was supplied with a CopperStart profile.";
 		}
 
+        var managedCopperOs = copperOsSeed != null || copperOsWorkspace != null;
+        if (managedCopperOs)
+        {
+            try
+            {
+                if (engine != CopperScreenEngine.Lightweight) throw new NotSupportedException("CopperOS storage requires Lightweight.");
+                if (!CopperScreenProfile.TryLoadWithKickstartSource(profile, CopperScreenKickstartSource.CopperStart,
+                    baseDirectory, out profile, out var osProfileError, userDataDirectory)) throw new InvalidOperationException(osProfileError);
+                if (error == defaultProfileError) error = null;
+                if (error == null) diskPath = CopperOsWorkspace.Prepare(CopperScreenUserData.GetDirectory(userDataDirectory),
+                    copperOsWorkspace ?? "default", copperOsSeed == null ? null : Path.GetFullPath(copperOsSeed));
+                profileExplicit = true;
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or System.Text.Json.JsonException)
+            { error ??= ex.Message; }
+        }
+
 		var floppyDriveAudio = profile.FloppyDriveAudio.WithOverrides(
 			floppySoundsEnabledOverride,
 			floppySoundModeOverride,
@@ -696,6 +744,7 @@ internal sealed class CopperScreenStartupOptions
 			floppySoundVolumeOverride);
 		var driveDiskPaths = CreateDriveDiskPathArray(profile, diskPath, baseDirectory);
 		var driveWriteProtected = CreateDriveWriteProtectedArray(profile);
+        if (managedCopperOs) driveWriteProtected[0] = false;
 		var hardDrives = hardDriveOverrides.Count == 0
 			? NormalizeHardDrivePaths(profile.HardDrives, baseDirectory)
 			: hardDriveOverrides;
@@ -925,7 +974,7 @@ internal sealed class CopperScreenStartupOptions
 		return resolved != null && CopperScreenDiskImageArchive.DiskPathExists(resolved) ? resolved : null;
 	}
 
-	private static string? ResolveOptionalPath(string? path, string baseDirectory)
+	internal static string? ResolveOptionalPath(string? path, string baseDirectory)
 	{
 		if (string.IsNullOrWhiteSpace(path))
 		{

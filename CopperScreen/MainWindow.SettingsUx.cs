@@ -47,13 +47,14 @@ internal sealed partial class MainWindow
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
         var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
-        AutomationProperties.SetName(browse, "Browse for Kickstart ROM");
-        _bootRomRow = CreateSettingsRow("Kickstart ROM", WithAction(_kickstartRomBox, browse));
+        AutomationProperties.SetName(browse, "Browse for boot ROM");
+        _bootRomRow = CreateSettingsRow("Boot ROM", WithAction(_kickstartRomBox, browse));
         form.Children.Add(_bootRomRow);
-        AutomationProperties.SetName(_kickstartRomBox, "Kickstart ROM path");
+        AutomationProperties.SetName(_kickstartRomBox, "Boot ROM path");
         _romValidation = SettingsNote("Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
+        form.Children.Add(SettingsNote(CopperScreenCopperStartRom.Description));
         _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, ADZ, DMS, IPF, SCP or ZIP", MinWidth = 0 };
         _setupDiskBox.TextChanged += (_, _) =>
         {
@@ -129,7 +130,7 @@ internal sealed partial class MainWindow
     private Control CreateProfilesPage()
     {
         var layout = CreateSettingsPageLayout();
-        layout.Children.Add(SettingsNote("Choose a profile, then Load profile. Machines that are not yet available remain listed but cannot be selected."));
+        layout.Children.Add(SettingsNote("Choose a profile, then Load profile. Saving a preset creates a personal profile and keeps the bundled original. Unavailable machines cannot be selected."));
         _profileDirectoryText = SettingsNote(string.Empty);
         _profileList = new ListBox
         {
@@ -139,7 +140,7 @@ internal sealed partial class MainWindow
                 if (profile == null) return new TextBlock();
                 var item = new StackPanel { Spacing = 3, Margin = new Thickness(4) };
                 item.Children.Add(new TextBlock { Text = profile.DisplayName, TextWrapping = TextWrapping.Wrap, FontWeight = FontWeight.SemiBold });
-                item.Children.Add(new TextBlock { Text = profile.IsAvailable ? "Available" : "Not yet available", Foreground = MutedText, FontSize = 12 });
+                item.Children.Add(new TextBlock { Text = profile.IsAvailable ? (profile.IsBundled ? "Bundled preset" : "Personal profile") : "Not yet available", Foreground = MutedText, FontSize = 12 });
                 ToolTip.SetTip(item, profile.UnavailableReason ?? profile.Path);
                 return item;
             })
@@ -168,7 +169,7 @@ internal sealed partial class MainWindow
         _profileDescriptionBox.MinHeight = 64;
         _profileIdBox = AddTextSetting(metadata, "File name");
         layout.Children.Add(CreateSettingsGroup("Profile details", metadata));
-        layout.Children.Add(new Expander { Header = "Profile folder", Content = _profileDirectoryText });
+        layout.Children.Add(new Expander { Header = "Personal profile folder", Content = _profileDirectoryText });
         return CreateScrollableSettingsPage(layout);
     }
 
@@ -317,17 +318,25 @@ internal sealed partial class MainWindow
 
     private async Task PickRomAsync()
     {
+        var copperStart = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) == CopperScreenKickstartSource.CopperStart;
         var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
         var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
-            FileTypeFilter = [new FilePickerFileType("Kickstart ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
+            Title = copperStart ? "Choose qualified CopperStart standalone ROM" : "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
+            FileTypeFilter = [new FilePickerFileType("Boot ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
         var path = files.FirstOrDefault()?.TryGetLocalPath();
         if (path == null) return;
         _kickstartRomBox.Text = path;
         try
         {
+            if (copperStart)
+            {
+                _ = CopperScreenCopperStartRom.Read(path);
+                ClearSettingsStartupError();
+                UpdateSettingsStatus();
+                return;
+            }
             var selectedVersion = _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? KickstartVersion.Kickstart30 : ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) switch
             {
                 CopperScreenKickstartSource.Kickstart13Rom => KickstartVersion.Kickstart13,
@@ -348,7 +357,7 @@ internal sealed partial class MainWindow
             }
             UpdateSettingsStatus();
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
         { SetSettingsError(ex.Message); }
     }
 
@@ -362,8 +371,8 @@ internal sealed partial class MainWindow
             return ValidateMinimalBootDisk(disk);
         }
         var path = draft.ToStartupOptions(AppContext.BaseDirectory).KickstartRomPath;
-        if (string.IsNullOrWhiteSpace(path)) return "Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.";
-        if (!File.Exists(path)) return "ROM file not found. Choose an existing Kickstart 1.3, A500 3.1 or A1200 3.0 ROM.";
+        if (string.IsNullOrWhiteSpace(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Recovery : "Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.";
+        if (!File.Exists(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "ROM file not found. " + CopperScreenCopperStartRom.Recovery : "ROM file not found. Choose an existing Kickstart 1.3, A500 3.1 or A1200 3.0 ROM.";
         var info = new FileInfo(path);
         if (_validatedRomPath == path && _validatedRomWriteTime == info.LastWriteTimeUtc && _validatedRomLength == info.Length &&
             _validatedRomSource == draft.KickstartSource && _validatedRomVersion == draft.RomVersion && _validatedRomA1200 == (draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)) return _romError;
@@ -375,10 +384,11 @@ internal sealed partial class MainWindow
         _validatedRomA1200 = draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         try
         {
-            _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
+            _ = draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Read(path)
+                : CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
             _romError = null;
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
         { _romError = ex.Message; }
         return _romError;
     }
@@ -396,7 +406,7 @@ internal sealed partial class MainWindow
         _validatedBootDiskWriteTime = info.LastWriteTimeUtc;
         _validatedBootDiskLength = info.Length;
         try { CopperScreenMinimalBoot.ValidateDisk(CopperScreenDiskImageArchive.LoadDiskImage(path)); _bootDiskError = null; }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
         { _bootDiskError = ex.Message; }
         return _bootDiskError;
     }
@@ -428,7 +438,7 @@ internal sealed partial class MainWindow
             RememberCurrentSession();
             CloseSettingsAfterApply();
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
         { SetSettingsError(ex.Message); }
         finally { _applyingSettings = false; UpdateSettingsStatus(); }
     }

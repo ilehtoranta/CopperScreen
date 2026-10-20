@@ -1,0 +1,908 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "purpose": "P1-04 signed diagnostic MSIX install/restart/update/uninstall/reinstall validation",
+  "status": "PASSED",
+  "installedMsixAcceptance": true,
+  "storeCertified": false,
+  "sourceQualification": "docs/COPPEROS_STORAGE_2026-10-16.json",
+  "localArtifactDirectory": "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07",
+  "signing": {
+    "SchemaVersion": 1,
+    "CreatedAt": "2026-10-17T00:06:33.9514326+03:00",
+    "RunDirectory": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07",
+    "UserAuthorizedCreationAndTrust": true,
+    "Subject": "CN=CopperScreen Installed Tests",
+    "Thumbprint": "510C8C13859A287EFFE367DB25E2BB05E9AA34AB",
+    "NotBefore": "2026-10-16T23:56:33+03:00",
+    "NotAfter": "2026-10-30T23:06:30+02:00",
+    "PrivateKeyStore": "CurrentUser/My",
+    "PrivateKeyExported": false,
+    "TrustStore": "LocalMachine/TrustedPeople",
+    "PublicCertificate": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\CopperScreen-InstalledTests.cer",
+    "Trusted": true,
+    "TrustError": "Käyttö estetty. (0x80070005 (E_ACCESSDENIED))",
+    "TrustProvisionedAt": "2026-10-17T00:08:17.4396143+03:00"
+  },
+  "trustProvisioning": {
+    "Thumbprint": "510C8C13859A287EFFE367DB25E2BB05E9AA34AB",
+    "Store": "LocalMachine/TrustedPeople",
+    "Trusted": true
+  },
+  "host": {
+    "ObservedAt": "2026-10-17T00:12:23.9880364+03:00",
+    "OS": "Microsoft Windows 11 Home",
+    "Version": "10.0.26200",
+    "Build": "26200",
+    "OSArchitecture": "64-bittinen",
+    "Interactive": true,
+    "SessionId": 1,
+    "Elevated": false,
+    "DeveloperModeProperty": null
+  },
+  "packages": [
+    {
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\Fixed\\Baseline\\CopperScreen-1.1.9.0-win-x64.msix",
+      "Sha256": "2F22C530278C06AD00C85806C7F2EEA23D532207507E2C22F7AB579829B57E34",
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 9,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      },
+      "SourceCommit": "726bebbdae155e968e509cf72f0d6f108cf1721f",
+      "WorkingTreeDirty": true,
+      "DotnetSdk": "10.0.401",
+      "MakeAppx": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\makeappx.exe",
+      "GuestAssets": "Hash-bound native CopperOS storage pair; diagnostic package only, no redistribution admission."
+    },
+    {
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\Fixed\\Update\\CopperScreen-1.1.10.0-win-x64.msix",
+      "Sha256": "BEF03946EBD71BEC3F0DC0CE0D433ECA803F3C5643A7141F592693B992A59638",
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 10,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      },
+      "SourceCommit": "726bebbdae155e968e509cf72f0d6f108cf1721f",
+      "WorkingTreeDirty": true,
+      "DotnetSdk": "10.0.401",
+      "MakeAppx": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\makeappx.exe",
+      "GuestAssets": "Hash-bound native CopperOS storage pair; diagnostic package only, no redistribution admission."
+    }
+  ],
+  "signatureVerification": [
+    {
+      "Phase": "Baseline",
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\Fixed\\Baseline\\CopperScreen-1.1.9.0-win-x64.msix",
+      "Sha256": "2F22C530278C06AD00C85806C7F2EEA23D532207507E2C22F7AB579829B57E34",
+      "SignatureVerificationExitCode": 0
+    },
+    {
+      "Phase": "Update",
+      "Package": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\Fixed\\Update\\CopperScreen-1.1.10.0-win-x64.msix",
+      "Sha256": "BEF03946EBD71BEC3F0DC0CE0D433ECA803F3C5643A7141F592693B992A59638",
+      "SignatureVerificationExitCode": 0
+    }
+  ],
+  "payloadVerification": [
+    {
+      "Phase": "Baseline",
+      "PayloadFiles": 266,
+      "AllPayloadHashesMatch": true,
+      "RomSha256": "2B3D6D31663A9BBC5BAA68D0D8549B5079E81B8D075CE79E95B2975C01515DB9",
+      "SeedSha256": "40E8D29C6A29B419FE117B62C61BD65828B1484B01086897404CDA791B60CD88",
+      "SourceInputsMatch": true
+    },
+    {
+      "Phase": "Update",
+      "PayloadFiles": 266,
+      "AllPayloadHashesMatch": true,
+      "RomSha256": "2B3D6D31663A9BBC5BAA68D0D8549B5079E81B8D075CE79E95B2975C01515DB9",
+      "SeedSha256": "40E8D29C6A29B419FE117B62C61BD65828B1484B01086897404CDA791B60CD88",
+      "SourceInputsMatch": true
+    }
+  ],
+  "validationSourceInputs": [
+    {
+      "Path": "scripts/package-msix.ps1",
+      "Sha256": "5D58AD30F2E639EDAF57CD9CFA038D83FFCE299F74D4E32B4EC9E4158D732183"
+    },
+    {
+      "Path": "scripts/test-msix-installed.ps1",
+      "Sha256": "8A50C668526230B9072BD2BB74CD49C9723A49D38F5BCC99B99270C8614EFAE2"
+    },
+    {
+      "Path": "scripts/msix/CopperScreen.Msix.psm1",
+      "Sha256": "9EDC86321EE97A647287575B56E2DF3A72358C3501F181EFDB52946AA2D8A5C4"
+    },
+    {
+      "Path": "CopperScreen/CopperScreenUserData.cs",
+      "Sha256": "3A35B8A9B1E8C7C639A714103EAF45642A67A1935AC12252E5E0A6D964F7F4F0"
+    },
+    {
+      "Path": "CopperScreen/Diagnostics/CopperScreenInstalledProbe.cs",
+      "Sha256": "906D75BC5BCBF49354BF3621593F2428D3BE59918434CE484DD04CC63D4DCF37"
+    }
+  ],
+  "firstSignedAttempt": {
+    "disposition": "FAILED; native persistence passed, but reinstall exposed shared portable AppData retention. Preserved without relabeling.",
+    "pipeline": {
+      "SchemaVersion": 1,
+      "Status": "FAILED",
+      "DeploymentMode": "Install",
+      "InstalledMsixAcceptance": false,
+      "StoreCertified": false,
+      "NativeCopperOsStorage": "PASSED: native DOS create/write/read/rename/delete; process restart and package update readback.",
+      "Phases": [
+        {
+          "SchemaVersion": 1,
+          "Phase": "seed",
+          "RunId": "6317c696d7a44c1f8d0101d3561d7371",
+          "Passed": true,
+          "PackageFullName": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.7.0_x64__a0cyw3gffeccg",
+          "PackageVersion": "1.1.7.0",
+          "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371",
+          "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.7.0_x64__a0cyw3gffeccg\\",
+          "Elevated": false,
+          "CopperOsStorage": {
+            "protocol": "copperos-native-storage-v1",
+            "passed": true,
+            "reopen": false,
+            "expectedFailure": null,
+            "readOnly": false,
+            "denyHostSaves": false,
+            "recoveredExport": null,
+            "fields": 21360,
+            "workspace": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371\\CopperOS\\Workspaces\\persistence\\System.adf",
+            "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+            "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+            "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+            "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+            "engine": "Lightweight",
+            "legacy": false,
+            "hostDosCalls": false,
+            "binaries": [
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "57356d2bb13c7eb29eea23a53dd1f90ac5c3e649fdd34101158dfd04ccf001bf"
+              },
+              {
+                "file": "CopperMod.Amiga.Lightweight.dll",
+                "sha256": "c292294af034c3aac033c3dbe7aa874c2ff77816d243346fa0b928bc2fe7fb9f"
+              },
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "57356d2bb13c7eb29eea23a53dd1f90ac5c3e649fdd34101158dfd04ccf001bf"
+              }
+            ]
+          },
+          "Files": {
+            "lightweight-a500-kickstart13.json": "9E25C11791E772DA97738D0936D0BE6066DB2AF92A21C27652F43CC6E0B1EBFC",
+            "last-machine.json": "79616C9E1F464BE3C8CC628832AF4F02E4065605712E9C2D0EE435450EC48FA4",
+            "recent-session.json": "2BDFCF89BFB9B93F1CF088BDF20DB6AB432E9B6288931A78881B20CE584754F1"
+          },
+          "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+          "WindowOpened": true
+        },
+        {
+          "SchemaVersion": 1,
+          "Phase": "verify",
+          "RunId": "6317c696d7a44c1f8d0101d3561d7371",
+          "Passed": true,
+          "PackageFullName": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.7.0_x64__a0cyw3gffeccg",
+          "PackageVersion": "1.1.7.0",
+          "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371",
+          "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.7.0_x64__a0cyw3gffeccg\\",
+          "Elevated": false,
+          "CopperOsStorage": {
+            "protocol": "copperos-native-storage-v1",
+            "passed": true,
+            "reopen": true,
+            "expectedFailure": null,
+            "readOnly": false,
+            "denyHostSaves": false,
+            "recoveredExport": null,
+            "fields": 8960,
+            "workspace": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371\\CopperOS\\Workspaces\\persistence\\System.adf",
+            "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+            "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+            "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+            "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+            "engine": "Lightweight",
+            "legacy": false,
+            "hostDosCalls": false,
+            "binaries": [
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "57356d2bb13c7eb29eea23a53dd1f90ac5c3e649fdd34101158dfd04ccf001bf"
+              },
+              {
+                "file": "CopperMod.Amiga.Lightweight.dll",
+                "sha256": "c292294af034c3aac033c3dbe7aa874c2ff77816d243346fa0b928bc2fe7fb9f"
+              },
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "57356d2bb13c7eb29eea23a53dd1f90ac5c3e649fdd34101158dfd04ccf001bf"
+              }
+            ]
+          },
+          "Files": {
+            "lightweight-a500-kickstart13.json": "9E25C11791E772DA97738D0936D0BE6066DB2AF92A21C27652F43CC6E0B1EBFC",
+            "last-machine.json": "79616C9E1F464BE3C8CC628832AF4F02E4065605712E9C2D0EE435450EC48FA4",
+            "recent-session.json": "2BDFCF89BFB9B93F1CF088BDF20DB6AB432E9B6288931A78881B20CE584754F1"
+          },
+          "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+          "WindowOpened": true
+        },
+        {
+          "SchemaVersion": 1,
+          "Phase": "verify",
+          "RunId": "6317c696d7a44c1f8d0101d3561d7371",
+          "Passed": true,
+          "PackageFullName": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.8.0_x64__a0cyw3gffeccg",
+          "PackageVersion": "1.1.8.0",
+          "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371",
+          "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.8.0_x64__a0cyw3gffeccg\\",
+          "Elevated": false,
+          "CopperOsStorage": {
+            "protocol": "copperos-native-storage-v1",
+            "passed": true,
+            "reopen": true,
+            "expectedFailure": null,
+            "readOnly": false,
+            "denyHostSaves": false,
+            "recoveredExport": null,
+            "fields": 8960,
+            "workspace": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371\\CopperOS\\Workspaces\\persistence\\System.adf",
+            "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+            "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+            "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+            "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+            "engine": "Lightweight",
+            "legacy": false,
+            "hostDosCalls": false,
+            "binaries": [
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "2bfa24b82b45bf1d193571d5477b3e38223103d13a3a2297b5865f5ab67829f0"
+              },
+              {
+                "file": "CopperMod.Amiga.Lightweight.dll",
+                "sha256": "2164530c52cfbe32fa6e567cf8928df40454a5e04dd196a7159f6fbaebcdf746"
+              },
+              {
+                "file": "CopperScreen.dll",
+                "sha256": "2bfa24b82b45bf1d193571d5477b3e38223103d13a3a2297b5865f5ab67829f0"
+              }
+            ]
+          },
+          "Files": {
+            "lightweight-a500-kickstart13.json": "9E25C11791E772DA97738D0936D0BE6066DB2AF92A21C27652F43CC6E0B1EBFC",
+            "last-machine.json": "79616C9E1F464BE3C8CC628832AF4F02E4065605712E9C2D0EE435450EC48FA4",
+            "recent-session.json": "2BDFCF89BFB9B93F1CF088BDF20DB6AB432E9B6288931A78881B20CE584754F1"
+          },
+          "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+          "WindowOpened": true
+        },
+        {
+          "SchemaVersion": 1,
+          "Phase": "fresh",
+          "RunId": "6317c696d7a44c1f8d0101d3561d7371",
+          "Passed": false,
+          "PackageFullName": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.8.0_x64__a0cyw3gffeccg",
+          "PackageVersion": "1.1.8.0",
+          "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371",
+          "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371_1.1.8.0_x64__a0cyw3gffeccg\\",
+          "Elevated": false,
+          "Error": "System.InvalidOperationException: Expected clean package-private profile/settings data.\r\n   at CopperScreen.CopperScreenInstalledProbe.Require(Boolean condition, String message)\r\n   at CopperScreen.CopperScreenInstalledProbe.Run(String[] args, Action`1 showWindow)"
+        }
+      ],
+      "Baseline": {
+        "Sha256": "CABC4E311E5CA4B82777AB4E07F5EBD48BF849F26D92C9133BC0751FD85F94EC",
+        "Identity": {
+          "Name": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 7,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": true
+        }
+      },
+      "Update": {
+        "Sha256": "A20A78D54DEC8CD4573B21958A0AB83D8ADD0536AE44D424CF71B9B512A896F7",
+        "Identity": {
+          "Name": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371",
+          "Publisher": "CN=CopperScreen Installed Tests",
+          "Version": {
+            "Major": 1,
+            "Minor": 1,
+            "Build": 8,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+          },
+          "Architecture": "x64",
+          "Signed": true,
+          "Diagnostic": true
+        }
+      },
+      "Error": "System.Management.Automation.RuntimeException: Installed phase 'fresh' failed: System.InvalidOperationException: Expected clean package-private profile/settings data.\r\n   at CopperScreen.CopperScreenInstalledProbe.Require(Boolean condition, String message)\r\n   at CopperScreen.CopperScreenInstalledProbe.Run(String[] args, Action`1 showWindow)",
+      "Cleanup": "Test registration removed; evidence/layouts retained."
+    },
+    "diagnosticDataRetention": {
+      "OriginalPath": "C:\\Users\\ilkle\\AppData\\Local\\CopperScreen\\InstalledTests\\6317c696d7a44c1f8d0101d3561d7371",
+      "RetainedPath": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07\\retained-unvirtualized-data",
+      "DiagnosticIdentity": "CopperScreen.Test.6317c696d7a44c1f8d0101d3561d7371",
+      "Reason": "Preserve failed uninstall evidence without leaving synthetic run data in shared user storage",
+      "SourceAbsent": true
+    }
+  },
+  "independentFilesystem": {
+    "originalBootChecksum": "passed",
+    "originalImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+    "filesystemCheckOnPrivateBootNormalizedCopy": {
+      "schema_version": 1,
+      "status": "passed",
+      "filesystem": "DOS1",
+      "block_bytes": 512,
+      "volume": "CopperOS",
+      "root_block": 880,
+      "image_bytes": 901120,
+      "image_sha256": "8aa4e74d5bd696a273ea80cfc3d8c5d27d737ce58ca81cbfb85d08a74a3b50a9",
+      "files": [
+        {
+          "installed_path": "C/BootShell",
+          "sha256": "434f5d805c4cb4c45ef4119af0461992229ff40eb79b43c101ee891b4646e416",
+          "bytes": 5024,
+          "amiga_protection": 0,
+          "header_block": 5,
+          "data_blocks": 10,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "C/Demo",
+          "sha256": "e177f7dfa1f220062e06ed88830ec4b4eea37fb56c45824ab73324bbab2db692",
+          "bytes": 288,
+          "amiga_protection": 0,
+          "header_block": 16,
+          "data_blocks": 1,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "C/Storage",
+          "sha256": "bba1ca90932cd01b96aee763db246c3e6d620240475a345aecd50b21b7773fb8",
+          "bytes": 1976,
+          "amiga_protection": 0,
+          "header_block": 18,
+          "data_blocks": 4,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "L/Shell-Seg",
+          "sha256": "cd7a3c131377597327fb68ae4a54d531aac66b5a313b4899d8c60eff526e84ab",
+          "bytes": 454776,
+          "amiga_protection": 0,
+          "header_block": 23,
+          "data_blocks": 889,
+          "extension_blocks": [
+            96,
+            169,
+            242,
+            315,
+            388,
+            461,
+            534,
+            607,
+            680,
+            753,
+            826,
+            901
+          ],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "S/CopperOS-Release.json",
+          "sha256": "a88e4ed23ce135152717a58a5d02e1308e17d28e8855583467502736bb38a104",
+          "bytes": 593,
+          "amiga_protection": 0,
+          "header_block": 929,
+          "data_blocks": 2,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "S/Persistent-Data",
+          "sha256": "f1867900c6b7acfb4229315b48dc4195e96966a192841ceea1bbe22c83e2dbdd",
+          "bytes": 31,
+          "amiga_protection": 0,
+          "header_block": 934,
+          "data_blocks": 1,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "S/Startup-Sequence",
+          "sha256": "a0272e339f026ff9e6c2923f5f68e01449c12e31a6d0fec6acbb1d9763f3778b",
+          "bytes": 55,
+          "amiga_protection": 0,
+          "header_block": 927,
+          "data_blocks": 1,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "installed_path": "S/User-Settings",
+          "sha256": "7a88f745c20200807661c806f8dd3725a53c3ab4ace075f726c56e78efcb2bc1",
+          "bytes": 10,
+          "amiga_protection": 0,
+          "header_block": 932,
+          "data_blocks": 1,
+          "extension_blocks": [],
+          "datestamp": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "directories": [
+        "C",
+        "L",
+        "S"
+      ],
+      "epoch_datestamp": [
+        0,
+        0,
+        0
+      ],
+      "checked_headers": 24,
+      "bitmap": {
+        "blocks": [
+          881
+        ],
+        "extension_blocks": [],
+        "allocated_blocks": 934,
+        "free_blocks": 824,
+        "exact_reachable_allocation": true
+      },
+      "shipping_qualified": false,
+      "pure_admitted": false,
+      "bootable": false,
+      "scope": "Independent exact tree/content/protection, header checksums, DOS1 lookup buckets, epoch dates, disjoint block ownership and complete bitmap allocation readback. Not OS execution, bootability, full runtime, release admission or PURE safety; free-space bytes and unused metadata padding are not certified.",
+      "reader": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\DiskBuilder\\verify_image.py",
+        "sha256": "9c7b0e831b5fa2942245fcace55b7d22098e0797daacbc0f4933bfe6e21a18f7"
+      },
+      "inventory_reader": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\Commands\\Inventory\\inventory.py",
+        "sha256": "2c766ecdda41648d3f0219685a386e5c65f1a49b66f37e871771d891bf8a1847"
+      }
+    },
+    "normalization": "Only reserved boot checksum [4:8] and boot code [12:1024]; filesystem bytes unmodified",
+    "runtimeQualified": false,
+    "verifier": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperOS\\tools\\ImageBuilder\\build_system_image.py",
+      "sha256": "220f281a57724a7e1fd10b4843612ef1c0bcba24f43c66400fe2beb8029db99c"
+    }
+  },
+  "pipeline": {
+    "SchemaVersion": 1,
+    "Status": "PASSED",
+    "DeploymentMode": "Install",
+    "InstalledMsixAcceptance": true,
+    "StoreCertified": false,
+    "NativeCopperOsStorage": "PASSED: native DOS create/write/read/rename/delete; process restart and package update readback.",
+    "Phases": [
+      {
+        "SchemaVersion": 1,
+        "Phase": "seed",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.9.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "protocol": "copperos-native-storage-v1",
+          "passed": true,
+          "reopen": false,
+          "expectedFailure": null,
+          "readOnly": false,
+          "denyHostSaves": false,
+          "recoveredExport": null,
+          "fields": 21360,
+          "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+          "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+          "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+          "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+          "engine": "Lightweight",
+          "legacy": false,
+          "hostDosCalls": false,
+          "binaries": [
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            },
+            {
+              "file": "CopperMod.Amiga.Lightweight.dll",
+              "sha256": "45791a0ccff776a91b157a230e52844f6a0e8b6325dac1c4ce26ee8cdf8e3d13"
+            },
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            }
+          ]
+        },
+        "Files": {
+          "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+          "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+          "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+        },
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true
+      },
+      {
+        "SchemaVersion": 1,
+        "Phase": "verify",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.9.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.9.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "protocol": "copperos-native-storage-v1",
+          "passed": true,
+          "reopen": true,
+          "expectedFailure": null,
+          "readOnly": false,
+          "denyHostSaves": false,
+          "recoveredExport": null,
+          "fields": 8960,
+          "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+          "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+          "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+          "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+          "engine": "Lightweight",
+          "legacy": false,
+          "hostDosCalls": false,
+          "binaries": [
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            },
+            {
+              "file": "CopperMod.Amiga.Lightweight.dll",
+              "sha256": "45791a0ccff776a91b157a230e52844f6a0e8b6325dac1c4ce26ee8cdf8e3d13"
+            },
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "ac4a343fba8e6b212a39752f0f0d8ecaca4fd3cb049d266abc172560621815c5"
+            }
+          ]
+        },
+        "Files": {
+          "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+          "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+          "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+        },
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true
+      },
+      {
+        "SchemaVersion": 1,
+        "Phase": "verify",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.10.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.10.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.10.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "protocol": "copperos-native-storage-v1",
+          "passed": true,
+          "reopen": true,
+          "expectedFailure": null,
+          "readOnly": false,
+          "denyHostSaves": false,
+          "recoveredExport": null,
+          "fields": 8960,
+          "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3\\CopperOS\\Workspaces\\persistence\\System.adf",
+          "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+          "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+          "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+          "engine": "Lightweight",
+          "legacy": false,
+          "hostDosCalls": false,
+          "binaries": [
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "a4ee0760b5dc734009b742e3dbe5bbd09701b72e4d63ebe4f91736521de7a170"
+            },
+            {
+              "file": "CopperMod.Amiga.Lightweight.dll",
+              "sha256": "e243d3fd773e58d818d7cba3f7dd8ec4611b63d99045af0d5b7b0dfb1b867e8c"
+            },
+            {
+              "file": "CopperScreen.dll",
+              "sha256": "a4ee0760b5dc734009b742e3dbe5bbd09701b72e4d63ebe4f91736521de7a170"
+            }
+          ]
+        },
+        "Files": {
+          "lightweight-a500-kickstart13.json": "69BA08D23878A5F1D29313524B6207BFE59C31E2B0EFB28E8F239A07301DEF18",
+          "last-machine.json": "5D99C8BA305F8B690D56094C8BCC98750668A98FA3EC7FA4CCD66EEE8C3D59CA",
+          "recent-session.json": "B99CC9A08A81F0EA53D42B5E07D155C877D0FA4A2A2549D497F33B49F8436B87"
+        },
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true
+      },
+      {
+        "SchemaVersion": 1,
+        "Phase": "fresh",
+        "RunId": "0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Passed": true,
+        "PackageFullName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.10.0_x64__a0cyw3gffeccg",
+        "PackageFamilyName": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg",
+        "PackageVersion": "1.1.10.0",
+        "UserDataRoot": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen",
+        "UserDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "InstallDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3_1.1.10.0_x64__a0cyw3gffeccg\\",
+        "Elevated": false,
+        "CopperOsStorage": {
+          "status": "fresh-after-uninstall",
+          "present": false
+        },
+        "Files": {},
+        "PresetHash": "71DDE82BD07B8C9819FE208EFBC94D7C156750DE8939FCA9AA1B66D55F7C767E",
+        "WindowOpened": true
+      }
+    ],
+    "Baseline": {
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 9,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      },
+      "Sha256": "2F22C530278C06AD00C85806C7F2EEA23D532207507E2C22F7AB579829B57E34"
+    },
+    "Update": {
+      "Identity": {
+        "Name": "CopperScreen.Test.0ec4c2e7adf54d4bb7b271cbff72c5f3",
+        "Publisher": "CN=CopperScreen Installed Tests",
+        "Version": {
+          "Major": 1,
+          "Minor": 1,
+          "Build": 10,
+          "Revision": 0,
+          "MajorRevision": 0,
+          "MinorRevision": 0
+        },
+        "Architecture": "x64",
+        "Signed": true,
+        "Diagnostic": true
+      },
+      "Sha256": "BEF03946EBD71BEC3F0DC0CE0D433ECA803F3C5643A7141F592693B992A59638"
+    },
+    "Cleanup": "Test registration removed; evidence/layouts retained."
+  },
+  "checks": {
+    "signedInstallNotDeveloperRegistration": true,
+    "allFourAppWindowsOpenedNonElevated": true,
+    "profileSettingsAndHistoryBytesUnchangedAcrossRestartAndUpdate": true,
+    "bundledPresetsUnchanged": true,
+    "nativeBoots": 3,
+    "workspacePathPairAndFullImageUnchangedAcrossRestartAndUpdate": true,
+    "savedImageMatchesIndependentlyVerifiedSourceQualification": true,
+    "packageDirectoryChangedOnUpdate": true,
+    "originalSeedAndRomUnchanged": true,
+    "privateProfilesAndWorkspaceAbsentAfterUninstallReinstall": true,
+    "externalUserContentPreserved": true,
+    "explicitPackageFamilyLocalStateUsed": true,
+    "productionDiagnosticProbeAbsent": true,
+    "hostTestsPassed": 241,
+    "hostTestsSkippedOptionalNative": 12,
+    "msixToolingControlsPassed": 22,
+    "developerModeChanged": false,
+    "legacy": false,
+    "hostDosCalls": false
+  },
+  "evidenceFileSha256": {
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Baseline/signature-verification.log": "16bd607b99d514a5a1414db945f8bcb0361ca33988039a58ded6afb725031945",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Baseline/signed-package-record.json": "ffe87ad220d14e658d69270d2ef2395624cb23e683f928c9e126f244a941f626",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Baseline/signing.log": "a15c62625a62f045601bbc0eab96ff31e22c7dd819bf55e856605c1761543cd5",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Baseline/unsigned-source-record.json": "1f82314726204be7609661296ef5ea07ce97f3c4af0b7177b27d0f2ed58de49b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/baseline-deployment-observation.json": "150a9603bb9df0539159d347db0e6e03fa766426930c6db2b5b8ce6e7c0dbbdb",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/baseline-workspace-identity.json": "7d002e38369917a557b5200194cb2583de1ac2fee19f55f511b04a63dbba8a61",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/diff-check.log": "dc56bb499215be206e0cb9eebd218a49d601d301a0b998b962226deb1202a114",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/failed-run-data-cleanup.json": "11fa857fef8722086b77c897a93019b1ffff0a7bf036cb1857020ea38148970a",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/final-cleanup-observation.json": "3504c982a2f933000788b19f15babf9099622981c6b26eac6654211a9c96be81",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Baseline/makeappx.log": "d3210f403dd3525c06c4716e7cb084338f273b158aaa4979d8914349748d6e7e",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Baseline/package-record.json": "148a8eb5803493ee47c55ddb534dec841afd6458c2ee11b78bc4f978c29c46c0",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Baseline/publish.log": "c7b7fa0ebc60b0ecc02a12ebcd0f6aa5c0a6135d023aa5abd12e40dfaec0f1d4",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Baseline/signature-verification.log": "732127b9730f0eefc12c7063c431370c4826a5bdd4fe83ad91096878dee80e78",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Baseline/signing.log": "a95f126d40a7b979e4acd8f4716ea6d3fa4cf93e6b2113fdacbd4d8fa59f1104",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/fresh-3.json": "568266f5f749d4a730f33568d25504f16e451b65b62ef91eb334f4fd94add1ff",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/installed-test-record.json": "986b8e6204fdaa4770e80340ea106a2430bb04f3fcc658603ad3befdeb04e0fa",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/boot.txt": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/progress-12360.json": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/progress-12360.txt": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/progress-17360.json": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/progress-17360.txt": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/progress-5000.txt": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/result.json": "03a3bbc0962fc7c70b7a0f8f5f18d4b4304639a2e1da10e772457c51a2b0b2a9",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/storage.json": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-seed-0/storage.txt": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/boot.txt": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/progress-5000.txt": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/result.json": "0e7aefd2b6044ca1c690c0e174653e7f04e12b29de979f860a8085beb0462b98",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-1/storage.txt": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/boot.txt": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/progress-5000.txt": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/result.json": "ea57c0be104ae5a7fbc5fa8df2b8c24ae8efb57220bd09967ac3ff8bfb48d01d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/native-storage-verify-2/storage.txt": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/seed-0.json": "5e65635d2119e702ca1d02b17c430393ee8d496f29fb30cb7575b70c58311281",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/user-owned-original.txt": "26220adb2f4db715b8e1e07fa34446d6ae774ec4fd9ff001b80e95f4433d4e22",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/verify-1.json": "a7f5011b2472daff495d8f25f86afcff5164ee9f2c4606b38d689b2ef98dba7d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Installed/verify-2.json": "a63ab0981591a12ab89fcb051d1c4b6429f68d1722d5e9b9b244f4da764caad9",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Update/makeappx.log": "8a61030b6dbf34b26c3bee30c9acc04563e9d6a7f19f2e52a8e33663870d13f0",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Update/package-record.json": "52bf64e3bdded24198107bccfda6e34af511c245114562a8aec45e7530dc27dd",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Update/publish.log": "162440d4006c1bdd2417a3e3145791ac4129ed1d2a125bee5174ac529d06ddf2",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Update/signature-verification.log": "300f09950c1e99cca1410d8ae996b91778d1654e4a0aceef9103038812cd25cd",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Fixed/Update/signing.log": "67ddae9a20ee0b6091b035454f8319326c76f982fc5cf4cda705d2de4042d71e",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-baseline-deployment-observation.json": "4dcb96a4dbd13fc0d89b3e3109db83626c9f8a8fd27e9405ed3bbbf20ca569df",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-independent-installed-filesystem.json": "03149df6ee2a453c05303b486cf8e40a98373ef61036e1e2ce8488092a9bef6b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-installed-pipeline.log": "0ea8831bbcba6990704c748568ac2f09f62387af12d59c96d87b3c630dd3384d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-package-inputs.json": "fb8ee6b7d538fea15ccfafd58d601a5e2040199b89bc5994ce0fe850ca8b0936",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-payload-verification.json": "2911f275dcc340152552128e890bc27f78042c0d08a25ba1bb7050109339c60e",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-signature-verification.json": "e5c8ff48ae3ec22b689b851891ccf0b5f43a3a57a1596890747e5a32e9fc61ac",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-update-deployment-observation.json": "a7a33ef70ca3f6029331bbbc2a14c12da91c83dd3e7329d63db9dde6c1c15d27",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/fixed-validation-source-inputs.json": "fa4acb5c185c408d3008fcb42ceefd148ecc28a90f8a9a6c4426d70f6892402a",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/host-context.json": "a7f158feaaa03b4414bfcf636cdad1c2b1075365ee89e14a110610742f33c79d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/host-tests-fixed.log": "66bd854c8bc7c47b8fe4b631f927b59385f20a282b548e9a6dcadc8d8114d4d1",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/independent-installed-filesystem.json": "03149df6ee2a453c05303b486cf8e40a98373ef61036e1e2ce8488092a9bef6b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/fresh-3.json": "880bfcc31ddf03361fd5569c53c87aa51c9fa6d162a6034f26f10857001daf4e",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/installed-test-record.json": "a34dd48504be857f9c21e9197dd6af19956a6381ef3c9231863f295cbf85061a",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/boot.txt": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/progress-12360.json": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/progress-12360.txt": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/progress-17360.json": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/progress-17360.txt": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/progress-5000.txt": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/result.json": "ce755096e3d156835a5c2c7047dd8080cd5798a5bea4e5a5c4cb0d997d84f61c",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/storage.json": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-seed-0/storage.txt": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/boot.txt": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/progress-5000.txt": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/result.json": "b9ae27a69c64ee70331fd8dbe0f18e0fe9fc7bf47823808b2dd659b7851218cb",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-1/storage.txt": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/boot.json": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/boot.txt": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/progress-5000.json": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/progress-5000.txt": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/result.json": "8ac4e4e5448d5d7f6194f833617e72c91c4876a51b22d9f50ff8d3139dc09c23",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/storage.json": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/native-storage-verify-2/storage.txt": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/seed-0.json": "b911e2b9ee7c109dd118962bc801352a6dad1c00b255b5ce0f0c7fce4c1ad522",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/user-owned-original.txt": "26220adb2f4db715b8e1e07fa34446d6ae774ec4fd9ff001b80e95f4433d4e22",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/verify-1.json": "ad17540cb3b863a0555c685392804c87090ae9ed529fdc4152ae5498e82273c4",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Installed/verify-2.json": "310663af081ddfe258e90044ec5af2022ef75bed67f3f4d9d8b40dea9d0bd38d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/installed-pipeline.log": "29a85a67e5b8301872bf34e876615e6366f87330bb1f4063b39b5af533f5b2b5",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/package-baseline-fixed.log": "927749bf2b5640aaae1bbe3d5e8f71eef2f281927bb462cf561d7508920da497",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/package-update-fixed.log": "927749bf2b5640aaae1bbe3d5e8f71eef2f281927bb462cf561d7508920da497",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/production-release-fixed.log": "e1eee95f9d51ea54a8dfd747e3fc104bc2924d6f7b50a1d56da2a9f05f350734",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/production-separation.json": "b3c9ec38a02b9d37ed66c15e9b35e3faa6722d8a1b853132f6abd5a61ad33d8a",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/results/host-package-storage.trx": "d379946b54a628c346f1c9c514c71d854acbcc64416200c88f27b457220ae27a",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/signed-payload-verification.json": "249656f1b8eab57203ae906c6229a89d89d8bbad790b34ebc7eb62c0fd945e54",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/signing-setup.json": "38a846ec2d7957bad03f75e626449f916fd354b8472da8ba97ff48736ef8536d",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/trust-result.json": "8aedd0bbfbcc5ea54f850b529a362f20953c220ae28dd15b02192794f033d9ad",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Update/signature-verification.log": "12e464a79bbfcccd1bdfe9a5884518cafbef282fb13e1996513f74fd429206f2",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Update/signed-package-record.json": "a03b8dda4c95fab3267b419f3fbd7a2d289471bd684969a95cc3268c1a060755",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Update/signing.log": "8c246694f23e90b13cf4269e40ff3c0c3bf089bd4583afc40ef02884e0e4cd84",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/Update/unsigned-source-record.json": "c8f1c7317c70744a7d2e2416a9e7b3b320906992eb6b134e4e7cdba32896eb44",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/update-deployment-observation.json": "b3b94a38880fd048efdae9f05bc87bb257bda44d9c383016f72197c15d9b8053",
+    "artifacts/copperos-msix-signed-2026-10-17-725100b56ba14c7fb68f8a66187ecd07/workspace-baseline-observation.json": "adda85883a09b5760286df1785d4ef1bc33835fead976711fb1ccbccc8f41244"
+  },
+  "limitations": [
+    "Local self-signed diagnostic identity; no Partner Center or Store acquisition/update validation.",
+    "WACK was not run; no Store certification or shipping admission.",
+    "Existing user workstation, not clean-machine or separate-Windows-account acceptance.",
+    "Uninstall removes package-private user data; external user work remains separate.",
+    "Guest settings/data command fixture; wider CopperOS UI, ABI, resource and application matrix remain open.",
+    "No performance measurement, Legacy engine or host OS shims.",
+    "Signing certificate is local, non-exportable, short-lived and not a release credential."
+  ]
+}

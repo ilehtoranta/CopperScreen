@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "recordedUtc": "2026-10-18T10:40:48.0357404Z",
+  "status": "PASS",
+  "scope": "Scoped Windows HDMI render-endpoint disable/restore method only",
+  "applicationRecoveryAcceptance": false,
+  "installedMatrixComplete": false,
+  "releaseQualified": false,
+  "releaseBudgets": "OPEN",
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "ownerLaunch": true,
+  "receipt": {
+    "Protocol": "host-endpoint-method-probe",
+    "ApplicationRecoveryAcceptance": false,
+    "Before": {
+      "Status": "OK",
+      "Class": "AudioEndpoint",
+      "FriendlyName": "24G42E (NVIDIA High Definition Audio)",
+      "InstanceId": "SWD\\MMDEVAPI\\{0.0.0.00000000}.{D9AADFBA-92DF-4F27-B98D-739A08DB7421}"
+    },
+    "StartedUtc": "2026-10-18T10:36:20.1134530Z",
+    "Method": "Disable-PnpDevice",
+    "During": {
+      "Status": "Error",
+      "Problem": 22,
+      "InstanceId": "SWD\\MMDEVAPI\\{0.0.0.00000000}.{D9AADFBA-92DF-4F27-B98D-739A08DB7421}"
+    },
+    "Disabled": true,
+    "After": {
+      "Status": "OK",
+      "Problem": 0,
+      "InstanceId": "SWD\\MMDEVAPI\\{0.0.0.00000000}.{D9AADFBA-92DF-4F27-B98D-739A08DB7421}"
+    },
+    "Restored": true,
+    "CompletedUtc": "2026-10-18T10:36:24.8715835Z"
+  },
+  "restoration": {
+    "Utc": "2026-10-18T10:40:47.5398651Z",
+    "Devices": [
+      {
+        "Status": "OK",
+        "Class": "AudioEndpoint",
+        "FriendlyName": "24G42E (NVIDIA High Definition Audio)",
+        "InstanceId": "SWD\\MMDEVAPI\\{0.0.0.00000000}.{D9AADFBA-92DF-4F27-B98D-739A08DB7421}"
+      },
+      {
+        "Status": "OK",
+        "Class": "MEDIA",
+        "FriendlyName": "NVIDIA High Definition Audio",
+        "InstanceId": "HDAUDIO\\FUNC_01&VEN_10DE&DEV_009F&SUBSYS_10438811&REV_1001\\5&3B34E842&0&0001"
+      }
+    ],
+    "HostReady": false,
+    "DiagnosticRegistrationAbsent": true
+  },
+  "earlierDatedEvidenceUnchanged": true,
+  "preparedInstalledRun": {
+    "physicalSoundObservationGate": true,
+    "cases": [
+      "copperstart",
+      "copperos"
+    ],
+    "packageSha256": "aaefced0ea003e8ea74a9a8a98b1e0de858d2af1bb56c9671043fd8344555e6d",
+    "version": "1.1.32.0",
+    "signedUpdateRun": false,
+    "applicationCodeChanged": false,
+    "directory": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381",
+    "freshWackRun": false,
+    "hostMethodGuard": "Require PnP problem 22 before disabled receipt"
+  },
+  "references": [
+    {
+      "sha256": "07cf5a4a1b7d1d334d68ec09614603bb4cba9bd7f1da2f903ebfd84fb2db2a0c",
+      "bytes": 482,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeManual-88f37646ed8044c28f1c024113ed88c6/config.json"
+    },
+    {
+      "sha256": "3847f158f2726f45fa24ad2a7925828560e427b0124205b058ec2bec9a7a32dd",
+      "bytes": 1030,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeManual-88f37646ed8044c28f1c024113ed88c6/endpoint-method-probe.json"
+    },
+    {
+      "sha256": "d335f407cf02f22578532a4ef84fe5660c9ba179a01262f7302a797d73db45b1",
+      "bytes": 2052,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointProbeManual-88f37646ed8044c28f1c024113ed88c6/probe-recovery-endpoint.ps1"
+    },
+    {
+      "sha256": "fc3e761fd4153a499b4c754d7ba1d0eb9f5cc9633340eb9ff505b7804cd2d4fe",
+      "bytes": 474,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/config.json"
+    },
+    {
+      "sha256": "3847f158f2726f45fa24ad2a7925828560e427b0124205b058ec2bec9a7a32dd",
+      "bytes": 1030,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/endpoint-method-probe.json"
+    },
+    {
+      "sha256": "5a5d6e07cc20422e68c25c8fbff54faa9aecd798260325d8eb70e076995e9dfc",
+      "bytes": 738,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/preparation.json"
+    },
+    {
+      "sha256": "500ad1e7c3b4bf0a5112c859ddc4cf063f959c938aa3e63fa66e955bfc574634",
+      "bytes": 921,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/prior-evidence-before.json"
+    },
+    {
+      "sha256": "d6d3da83c6c6abc0638de647662749d01e1b6aa4950ca12f2c0a9e39c55273c9",
+      "bytes": 548,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/frozen-controller-host-inputs.json"
+    },
+    {
+      "sha256": "1d8be80681d90666d0d11e3288155eabf45777077d44e8e7869830cfeefba331",
+      "bytes": 581,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/endpoint-restoration.json"
+    },
+    {
+      "sha256": "545462d74202b1c56ef292dba4fd6cee6f2db54f738dd09b3804a07f7073cf6b",
+      "bytes": 11759,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/Frozen/scripts/test-msix-recovery.ps1"
+    },
+    {
+      "sha256": "38a7138e11be642093ef28e4277fe66bb14811a86ba23a38cff1861fee3e6fb3",
+      "bytes": 14760,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/Frozen/scripts/msix/CopperScreen.Msix.psm1"
+    },
+    {
+      "sha256": "e7872d4c5117a0a6e92e9e22b09ca991188675768218ab97326884879f07fb6f",
+      "bytes": 7937,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/EndpointInstalled-3ef2e455aa3d4c16a3554a9bfe9a4381/Frozen/scripts/qualification/Invoke-CopperScreenRecoveryHost.ps1"
+    },
+    {
+      "sha256": "aaefced0ea003e8ea74a9a8a98b1e0de858d2af1bb56c9671043fd8344555e6d",
+      "bytes": 49556806,
+      "path": "artifacts/p1-07-recovery-2026-10-18-29d66b7daf334d8cb16743b0e0cfed8b/Package32/CopperScreen-1.1.32.0-win-x64.msix"
+    },
+    {
+      "sha256": "068ad3e98514dcac62a7a355c94109a82ac02e5cff8c211e4045875a9ce72314",
+      "bytes": 1219,
+      "path": "artifacts/start-recovery-host.ps1"
+    },
+    {
+      "sha256": "24ff6278560a3dd819d86f948608c6b84212af5d8341ab8598346b836fc969a8",
+      "bytes": 2708,
+      "path": "docs/RECOVERY_ENDPOINT_PROBE_2026-10-18.md"
+    },
+    {
+      "sha256": "6d225cdfd1589bc1230fa589d2823baa4df2829d13ccb0c7401f83e32c199f2d",
+      "bytes": 4125,
+      "path": "artifacts/record-recovery-endpoint-method.ps1"
+    }
+  ]
+}

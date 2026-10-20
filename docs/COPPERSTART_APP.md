@@ -184,4 +184,9 @@ settings and a fresh full-ROM readback of both partitions.
 covers injected disk-full errors, real unwritable destinations/settings, four
 forced terminations and fresh native readback. Restore now saves machine selection
 before committing its form and rolls back new copies if that save fails.
-Forced termination can leave unpublished temporary files.
+Interrupted copies created by current builds have an ownership journal and are
+automatically cleaned at the next startup or backup/restore. Active operations,
+published objects and untracked older files are preserved. The
+[automatic cleanup qualification](COPPERSTART_HDF_BACKUP_CLEANUP_2026-10-20.md)
+covers four forced interruptions, long installed-app paths, preserved originals
+and fresh full-ROM readback of both partitions.

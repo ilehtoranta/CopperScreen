@@ -1,0 +1,1458 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "clientTimezone": "Europe/Helsinki",
+  "recordedUtc": "2026-10-17T16:35:21.7326389Z",
+  "status": "PASSED",
+  "releaseQualified": false,
+  "scope": "P1-07 launcher layout fix in signed local diagnostic MSIX install/update with CopperOS workspace, profiles/settings, media and backup/recovery persistence",
+  "protocol": "copperscreen-installed-msix-v4",
+  "installedMsixAcceptance": true,
+  "mediaPersistenceAcceptance": true,
+  "launcherLayoutAcceptance": true,
+  "storeCertified": false,
+  "wackRun": false,
+  "engine": "Lightweight",
+  "legacyRestored": false,
+  "hostDosShimsAdded": false,
+  "performanceMeasurement": false,
+  "releaseBudgets": "OPEN by owner instruction",
+  "signing": {
+    "TrustChanged": false,
+    "Powershell": "7.6.5",
+    "PrivateKeyExported": false,
+    "HasPrivateKey": true,
+    "NotAfterUtc": "2026-10-30T21:06:30Z",
+    "Windows": "Microsoft Windows NT 10.0.26200.0",
+    "Thumbprint": "510C8C13859A287EFFE367DB25E2BB05E9AA34AB",
+    "Subject": "CN=CopperScreen Installed Tests",
+    "TrustedPeoplePresent": true
+  },
+  "versionPair": {
+    "baseline": "1.1.25.0",
+    "baselineSha256": "d97faf52c1c0124cbfd89aebe3b68579cbd13af04a8dc590f9294f8655665a28",
+    "bothContainLauncherFix": true,
+    "identity": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a",
+    "update": "1.1.26.0",
+    "updateSha256": "4a930e9cd6724983fc682f87a1d7fb4d77cfd8313a95e4552ab6f88e21227a01"
+  },
+  "payloadVerification": [
+    {
+      "VerifiedPayloadFiles": 266,
+      "Package": "Baseline",
+      "Result": "PASSED",
+      "ExtraPackagingEntries": 3,
+      "PackageSha256": "D97FAF52C1C0124CBFD89AEBE3B68579CBD13AF04A8DC590F9294F8655665A28"
+    },
+    {
+      "VerifiedPayloadFiles": 266,
+      "Package": "Update",
+      "Result": "PASSED",
+      "ExtraPackagingEntries": 3,
+      "PackageSha256": "4A930E9CD6724983FC682F87A1D7FB4D77CFD8313A95E4552AB6F88E21227A01"
+    }
+  ],
+  "pipeline": {
+    "sha256": "6aee4f9249da4592de5390ab26395223befb0760c38b99aef8e3bac498fc7bad",
+    "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/installed-test-record.json"
+  },
+  "phaseTimeoutSeconds": 900,
+  "phaseExitTimeoutSeconds": 30,
+  "nativeBoots": 6,
+  "expectedSavedImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+  "installedLayoutObservations": 18,
+  "phases": [
+    {
+      "launcherLayout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-seed-0\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-seed-0\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-seed-0\\launcher-960x640.png"
+          }
+        ]
+      },
+      "windowOpened": true,
+      "elevated": false,
+      "packageVersion": "1.1.25.0",
+      "processExit": {
+        "Id": 44972,
+        "ExitCode": 0,
+        "WaitMilliseconds": 4,
+        "TimeoutSeconds": 30
+      },
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.25.0_x64__a0cyw3gffeccg\\",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a",
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "seed",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.zip": "73aea8ade7ddfe23e3f6218661c7afe2a13df923b50425319d3e32cb1f0f81ec"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\workspace.json": "de2ce6c026f260462a7116b1f11e40c9f602515565416f2a164ab9b1cd502e9c",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\workspace.json": "5b5cf862b2c2d0316d9c58eb100a81a570f7296573f34887fe1d8548eadd5889"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos": "11c41dc26f3384a174e8f690de87a9fbfc7b1ea0c80ccd2d211704071b41d558"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "packageFamilyName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg",
+      "phase": "media-seed",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 21360,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "63bcbe28c78ebced0650d5522b301c1b2c1c60dfc64044294480f87a188a3bb0"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "dc6dad393aa65b22cedb7c84490777b31d9e4c4ee5f1c73370810b510a1068b8"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "63bcbe28c78ebced0650d5522b301c1b2c1c60dfc64044294480f87a188a3bb0"
+          }
+        ]
+      },
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.25.0_x64__a0cyw3gffeccg",
+      "profileSettingsFiles": {
+        "lightweight-a500-kickstart13.json": "E55F1E2B6C392D9A48BA117426AEBDD63D46EC1172B190B43BDDBEB6C583B44B",
+        "last-machine.json": "BD6F30318B826188664F18637E849A300581E4D62213990FD9E95153C42278F9",
+        "recent-session.json": "A16DD4DC3287339BB9CD847703B1E22B22D567916ADDC983D90708853B8DA713"
+      }
+    },
+    {
+      "launcherLayout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-verify-1\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-verify-1\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-verify-1\\launcher-960x640.png"
+          }
+        ]
+      },
+      "windowOpened": true,
+      "elevated": false,
+      "packageVersion": "1.1.25.0",
+      "processExit": {
+        "Id": 112668,
+        "ExitCode": 0,
+        "WaitMilliseconds": 1,
+        "TimeoutSeconds": 30
+      },
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.25.0_x64__a0cyw3gffeccg\\",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a",
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "verify",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.zip": "73aea8ade7ddfe23e3f6218661c7afe2a13df923b50425319d3e32cb1f0f81ec"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\workspace.json": "de2ce6c026f260462a7116b1f11e40c9f602515565416f2a164ab9b1cd502e9c",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\workspace.json": "5b5cf862b2c2d0316d9c58eb100a81a570f7296573f34887fe1d8548eadd5889"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos": "11c41dc26f3384a174e8f690de87a9fbfc7b1ea0c80ccd2d211704071b41d558"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "packageFamilyName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg",
+      "phase": "media-verify",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "63bcbe28c78ebced0650d5522b301c1b2c1c60dfc64044294480f87a188a3bb0"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "dc6dad393aa65b22cedb7c84490777b31d9e4c4ee5f1c73370810b510a1068b8"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "63bcbe28c78ebced0650d5522b301c1b2c1c60dfc64044294480f87a188a3bb0"
+          }
+        ]
+      },
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.25.0_x64__a0cyw3gffeccg",
+      "profileSettingsFiles": {
+        "lightweight-a500-kickstart13.json": "E55F1E2B6C392D9A48BA117426AEBDD63D46EC1172B190B43BDDBEB6C583B44B",
+        "last-machine.json": "BD6F30318B826188664F18637E849A300581E4D62213990FD9E95153C42278F9",
+        "recent-session.json": "A16DD4DC3287339BB9CD847703B1E22B22D567916ADDC983D90708853B8DA713"
+      }
+    },
+    {
+      "launcherLayout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-verify-2\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-verify-2\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-verify-2\\launcher-960x640.png"
+          }
+        ]
+      },
+      "windowOpened": true,
+      "elevated": false,
+      "packageVersion": "1.1.26.0",
+      "processExit": {
+        "Id": 95888,
+        "ExitCode": 0,
+        "WaitMilliseconds": 0,
+        "TimeoutSeconds": 30
+      },
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg\\",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a",
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "verify",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.zip": "73aea8ade7ddfe23e3f6218661c7afe2a13df923b50425319d3e32cb1f0f81ec"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\workspace.json": "de2ce6c026f260462a7116b1f11e40c9f602515565416f2a164ab9b1cd502e9c",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\workspace.json": "5b5cf862b2c2d0316d9c58eb100a81a570f7296573f34887fe1d8548eadd5889"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos": "11c41dc26f3384a174e8f690de87a9fbfc7b1ea0c80ccd2d211704071b41d558"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "packageFamilyName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg",
+      "phase": "media-verify",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "5cefbb78bb2fc6b85fd02542447fdcadcbe1508ec70ddf38bb52a5f0f9892756"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          }
+        ]
+      },
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg",
+      "profileSettingsFiles": {
+        "lightweight-a500-kickstart13.json": "E55F1E2B6C392D9A48BA117426AEBDD63D46EC1172B190B43BDDBEB6C583B44B",
+        "last-machine.json": "BD6F30318B826188664F18637E849A300581E4D62213990FD9E95153C42278F9",
+        "recent-session.json": "A16DD4DC3287339BB9CD847703B1E22B22D567916ADDC983D90708853B8DA713"
+      }
+    },
+    {
+      "launcherLayout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-recovery-3\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-recovery-3\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-recovery-3\\launcher-960x640.png"
+          }
+        ]
+      },
+      "windowOpened": true,
+      "elevated": false,
+      "packageVersion": "1.1.26.0",
+      "processExit": {
+        "Id": 33644,
+        "ExitCode": 0,
+        "WaitMilliseconds": 70,
+        "TimeoutSeconds": 30
+      },
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg\\",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a",
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "recovery",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.zip": "73aea8ade7ddfe23e3f6218661c7afe2a13df923b50425319d3e32cb1f0f81ec"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\workspace.json": "de2ce6c026f260462a7116b1f11e40c9f602515565416f2a164ab9b1cd502e9c",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\workspace.json": "5b5cf862b2c2d0316d9c58eb100a81a570f7296573f34887fe1d8548eadd5889",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\live-recovery\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\live-recovery\\workspace.json": "a9c5e2376f3e0ebfe85c6e3493988865d77e76c57cce9b8c183ceb9b753996ae"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos": "11c41dc26f3384a174e8f690de87a9fbfc7b1ea0c80ccd2d211704071b41d558",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.copperos": "32d88a4555af73ba888a51e816d57f0bef08ebaf2fef84f67ce52b698c8422e9",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf",
+        "NativeReadback": false,
+        "NativePickerWalkthrough": false
+      },
+      "packageFamilyName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg",
+      "phase": "media-recovery",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": false,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": true,
+        "recoveredExport": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.adf",
+        "recoveredBackup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.copperos",
+        "recoveredWorkspace": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\imported-user\\CopperOS\\Workspaces\\imported\\System.adf",
+        "fields": 21360,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\RecoveryNative\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "5cefbb78bb2fc6b85fd02542447fdcadcbe1508ec70ddf38bb52a5f0f9892756"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          }
+        ]
+      },
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg",
+      "profileSettingsFiles": {
+        "lightweight-a500-kickstart13.json": "E55F1E2B6C392D9A48BA117426AEBDD63D46EC1172B190B43BDDBEB6C583B44B",
+        "last-machine.json": "BD6F30318B826188664F18637E849A300581E4D62213990FD9E95153C42278F9",
+        "recent-session.json": "A16DD4DC3287339BB9CD847703B1E22B22D567916ADDC983D90708853B8DA713"
+      }
+    },
+    {
+      "launcherLayout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-recovered-4\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-recovered-4\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-recovered-4\\launcher-960x640.png"
+          }
+        ]
+      },
+      "windowOpened": true,
+      "elevated": false,
+      "packageVersion": "1.1.26.0",
+      "processExit": {
+        "Id": 82012,
+        "ExitCode": 0,
+        "WaitMilliseconds": 0,
+        "TimeoutSeconds": 30
+      },
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg\\",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a",
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "recovered",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.zip": "73aea8ade7ddfe23e3f6218661c7afe2a13df923b50425319d3e32cb1f0f81ec"
+        },
+        "PersistentFiles": {
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\media-fixture.rom": "2835c5c5656b5e88c8226199bbe8b74ed1b10b19a25844a9d6c91886c5af46f6",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Previous.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf": "9b1d41aad2f6250efb9e9037556b771087e0001562b23845ba46554139404464",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\workspace.json": "de2ce6c026f260462a7116b1f11e40c9f602515565416f2a164ab9b1cd502e9c",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\workspace.json": "5b5cf862b2c2d0316d9c58eb100a81a570f7296573f34887fe1d8548eadd5889",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\live-recovery\\System.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+          "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\live-recovery\\workspace.json": "a9c5e2376f3e0ebfe85c6e3493988865d77e76c57cce9b8c183ceb9b753996ae"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos": "11c41dc26f3384a174e8f690de87a9fbfc7b1ea0c80ccd2d211704071b41d558",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.copperos": "32d88a4555af73ba888a51e816d57f0bef08ebaf2fef84f67ce52b698c8422e9",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        },
+        "Backup": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos",
+        "Workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\System.adf",
+        "ImportedWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\backup-import\\System.adf",
+        "PreservedImage": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\persistence\\Before-recovery-7e7bc78128c04a8bad4e649a960c34db.adf",
+        "NativeReadback": true,
+        "NativePickerWalkthrough": false
+      },
+      "packageFamilyName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg",
+      "phase": "media-recovered",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\live-recovery\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "5cefbb78bb2fc6b85fd02542447fdcadcbe1508ec70ddf38bb52a5f0f9892756"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          }
+        ]
+      },
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg",
+      "profileSettingsFiles": {
+        "lightweight-a500-kickstart13.json": "E55F1E2B6C392D9A48BA117426AEBDD63D46EC1172B190B43BDDBEB6C583B44B",
+        "last-machine.json": "BD6F30318B826188664F18637E849A300581E4D62213990FD9E95153C42278F9",
+        "recent-session.json": "A16DD4DC3287339BB9CD847703B1E22B22D567916ADDC983D90708853B8DA713"
+      }
+    },
+    {
+      "launcherLayout": {
+        "protocol": "copperscreen-installed-launcher-layout-v1",
+        "passed": true,
+        "bootMethod": "CopperOS",
+        "cases": [
+          {
+            "requestedWidth": 800,
+            "requestedHeight": 600,
+            "clientWidth": 800,
+            "clientHeight": 600,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 800,
+            "viewportHeight": 363,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 640,
+            "targetX": 220,
+            "targetY": 516,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 323,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-fresh-5\\launcher-800x600.png"
+          },
+          {
+            "requestedWidth": 1280,
+            "requestedHeight": 720,
+            "clientWidth": 1280,
+            "clientHeight": 720,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 1280,
+            "viewportHeight": 483,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 552,
+            "targetX": 460,
+            "targetY": 604,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 411,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-fresh-5\\launcher-1280x720.png"
+          },
+          {
+            "requestedWidth": 960,
+            "requestedHeight": 640,
+            "clientWidth": 960,
+            "clientHeight": 640,
+            "renderScaling": 1,
+            "viewportX": 0,
+            "viewportY": 193,
+            "viewportWidth": 960,
+            "viewportHeight": 403,
+            "extentWidth": 631,
+            "extentHeight": 1035,
+            "offsetY": 600,
+            "targetX": 300,
+            "targetY": 556,
+            "targetWidth": 141,
+            "targetHeight": 40,
+            "targetInScrollY": 363,
+            "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\launcher-layout-fresh-5\\launcher-960x640.png"
+          }
+        ]
+      },
+      "windowOpened": true,
+      "elevated": false,
+      "packageVersion": "1.1.26.0",
+      "processExit": {
+        "Id": 97916,
+        "ExitCode": 0,
+        "WaitMilliseconds": 0,
+        "TimeoutSeconds": 30
+      },
+      "installDirectory": "C:\\Program Files\\WindowsApps\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg\\",
+      "userDataDirectory": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a",
+      "media": {
+        "Protocol": "copperscreen-installed-media-v1",
+        "Passed": true,
+        "Phase": "fresh",
+        "Originals": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.adf": "df62f37da18a38aea318c9312b32b445901c0f16934f25259f758a50277bf7f0",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\original.zip": "73aea8ade7ddfe23e3f6218661c7afe2a13df923b50425319d3e32cb1f0f81ec"
+        },
+        "Exports": {
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\saved.adf": "6c001ba8d63a63e9b86a687c7e53700415c4a15a2dca84a9e081dd8ceb4cec1c",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\Media\\baseline.copperos": "11c41dc26f3384a174e8f690de87a9fbfc7b1ea0c80ccd2d211704071b41d558",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.copperos": "32d88a4555af73ba888a51e816d57f0bef08ebaf2fef84f67ce52b698c8422e9",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\Installed\\native-storage-recovery-3\\recovered.adf": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0"
+        },
+        "RestoredWorkspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\restored-after-uninstall\\System.adf",
+        "RestoredImageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "PackagePrivateStateWasRemoved": true,
+        "NativeReadback": true,
+        "NativePickerWalkthrough": false
+      },
+      "packageFamilyName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg",
+      "phase": "media-fresh",
+      "native": {
+        "protocol": "copperos-native-storage-v2",
+        "passed": true,
+        "reopen": true,
+        "expectedFailure": null,
+        "readOnly": false,
+        "denyHostSaves": false,
+        "recoveredExport": null,
+        "recoveredBackup": null,
+        "recoveredWorkspace": null,
+        "fields": 8960,
+        "workspace": "C:\\Users\\ilkle\\AppData\\Local\\Packages\\CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_a0cyw3gffeccg\\LocalState\\CopperScreen\\InstalledTests\\37654a7e355b4dafab059fac783ecb6a\\CopperOS\\Workspaces\\restored-after-uninstall\\System.adf",
+        "workspacePairId": "a500-copperos-cli-boot-proof-dev.1.31e326e7505f",
+        "imageSha256": "e58ea8d751039e5ddfc6ee77f72e705ba48ed4b75a8df96de87a926dc8f84bb0",
+        "seedSha256": "40e8d29c6a29b419fe117b62c61bd65828b1484b01086897404cda791b60cd88",
+        "romSha256": "2b3d6d31663a9bbc5baa68d0d8549b5079e81b8d075ce79e95b2975c01515db9",
+        "engine": "Lightweight",
+        "legacy": false,
+        "hostDosCalls": false,
+        "binaries": [
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          },
+          {
+            "file": "CopperMod.Amiga.Lightweight.dll",
+            "sha256": "5cefbb78bb2fc6b85fd02542447fdcadcbe1508ec70ddf38bb52a5f0f9892756"
+          },
+          {
+            "file": "CopperScreen.dll",
+            "sha256": "1701fe8acab74189c70b67a0384ee36772ee5544f4cfe1819d506406e6fa9bed"
+          }
+        ]
+      },
+      "passed": true,
+      "packageFullName": "CopperScreen.Test.37654a7e355b4dafab059fac783ecb6a_1.1.26.0_x64__a0cyw3gffeccg",
+      "profileSettingsFiles": {}
+    }
+  ],
+  "cleanup": {
+    "result": "Test registration removed; evidence/layouts retained.",
+    "diagnosticDataDirectoryAbsent": true,
+    "registrationAbsent": true,
+    "externalOriginalsAndExportsRetained": true
+  },
+  "verification": {
+    "productionReleaseBuild": {
+      "sha256": "58cedae41c7bbd855e3b711ea1e2d2fe38ea34d6a9b8bd1b2bdea027df9ee8c5",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/production-build.log"
+    },
+    "hostTests": {
+      "passed": 265,
+      "report": {
+        "sha256": "4f759b2928d4d99e1166f831f4960fd1bb7a0ab4e80149db57a738c597ed974e",
+        "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/results/host.trx"
+      },
+      "failed": 0,
+      "unavailable": 12
+    },
+    "productionDiagnosticIsolation": {
+      "DiagnosticTypesPresent": false,
+      "Sha256": "9690C96E8147E4CE9FDDAE6D13290522D1D314CA62F50E76DC3C5F226C996BF5",
+      "Assembly": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a\\production-build\\bin\\CopperScreen\\release\\CopperScreen.dll"
+    },
+    "desktopWithQualifiedGuestPair": {
+      "passed": 22,
+      "report": {
+        "sha256": "59022a31c2e88658cedb8fbc915e7ffd6a174cd3b230df690a66db6149c4c172",
+        "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/results/desktop-qualified.trx"
+      },
+      "failed": 0,
+      "unavailable": 0
+    },
+    "toolingControls": 64,
+    "desktopWithoutGuestInputs": {
+      "passed": 19,
+      "report": {
+        "sha256": "317f1f17041e380ce96e23aecb0854fc20916295d9fddfdfac7da832120d5dd9",
+        "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/results/desktop.trx"
+      },
+      "failed": 0,
+      "unavailable": 3
+    }
+  },
+  "sourceSnapshot": {
+    "sha256": "805b635ee51c72b4e8f968b4d50c6fcf7bbd00678ca0dd6dc86a3f8dfe94773b",
+    "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/source-before.json"
+  },
+  "sourceCopiesDirectory": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/RunInputs/Source",
+  "historicalRecordsUnchanged": [
+    {
+      "sha256": "4fedf242d1395033c9f197c5c6e9e09fa471251b775cdf7181a95670b594544c",
+      "file": "docs/RELEASE_QUALIFICATION_2026-10-17.json"
+    },
+    {
+      "sha256": "4cc2dea659acfdd82bc4989b4cd8ad5277f8afc5ca72301f5c8be7eac4556c5a",
+      "file": "docs/RELEASE_QUALIFICATION_2026-10-17.md"
+    },
+    {
+      "sha256": "7434e768f60bf12a03ea4ba80a888c56c70ee94cb7ba4dddf94a2722d811cadc",
+      "file": "docs/MEDIA_MSIX_VALIDATION_2026-10-17.json"
+    },
+    {
+      "sha256": "2590070a9d6e0287ed3b17750a4f639bfa584aa932e4c4bdf8d4780ad1a07585",
+      "file": "docs/MEDIA_MSIX_VALIDATION_2026-10-17.md"
+    },
+    {
+      "sha256": "69f31bfaca8ffe904c191758917c61f8104ce329c2895789e62b36c84556b124",
+      "file": "docs/MEDIA_MSIX_WACK_VALIDATION_2026-10-17.json"
+    },
+    {
+      "sha256": "320aa6ff1b5b415dc14026e60120ea63aba31c4902be318dd2e2e163e02a17b4",
+      "file": "docs/MEDIA_MSIX_WACK_VALIDATION_2026-10-17.md"
+    }
+  ],
+  "evidence": [
+    {
+      "sha256": "124e0027a0558725ff7d56c4c5caf4ce141e69e1352db95ef24cf1ef3556e3ae",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/fresh-5.json"
+    },
+    {
+      "sha256": "6aee4f9249da4592de5390ab26395223befb0760c38b99aef8e3bac498fc7bad",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/installed-test-record.json"
+    },
+    {
+      "sha256": "0894527dd0a8f3daed89008ebc74a4e88c83ff07252f6852218945c33a1b272b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/media-proof-exports.json"
+    },
+    {
+      "sha256": "fb1d4113032b90ba71dcef4a691996e349246baf4266b5e7752eafd1325a63f9",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/recovered-4.json"
+    },
+    {
+      "sha256": "fb7aa828e334909b0cab73f305aae56f55c74a89e3f11b65eac984e421fb2959",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/recovery-3.json"
+    },
+    {
+      "sha256": "1cce64202e67654e22e6007f7b4d60e6ffe3d60ff959c3934c1fdea5e4bd21c9",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/seed-0.json"
+    },
+    {
+      "sha256": "26220adb2f4db715b8e1e07fa34446d6ae774ec4fd9ff001b80e95f4433d4e22",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/user-owned-original.txt"
+    },
+    {
+      "sha256": "acf2faa3da2e3214b85259643cc2fbc9ca0c19da57de0efa1f92e55cf5e18d29",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/verify-1.json"
+    },
+    {
+      "sha256": "24d3725a0aefda03d37753e5115e2ceb7d705c37a48ccb49a0b0147b4a38bcc7",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/verify-2.json"
+    },
+    {
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-fresh-5/launcher-1280x720.png"
+    },
+    {
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-fresh-5/launcher-800x600.png"
+    },
+    {
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-fresh-5/launcher-960x640.png"
+    },
+    {
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-recovered-4/launcher-1280x720.png"
+    },
+    {
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-recovered-4/launcher-800x600.png"
+    },
+    {
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-recovered-4/launcher-960x640.png"
+    },
+    {
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-recovery-3/launcher-1280x720.png"
+    },
+    {
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-recovery-3/launcher-800x600.png"
+    },
+    {
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-recovery-3/launcher-960x640.png"
+    },
+    {
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-seed-0/launcher-1280x720.png"
+    },
+    {
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-seed-0/launcher-800x600.png"
+    },
+    {
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-seed-0/launcher-960x640.png"
+    },
+    {
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-verify-1/launcher-1280x720.png"
+    },
+    {
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-verify-1/launcher-800x600.png"
+    },
+    {
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-verify-1/launcher-960x640.png"
+    },
+    {
+      "sha256": "8b9a2cdd5f551a42ca9cac994a3ea151288030d9d6a27b5084ee726a5373f70d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-verify-2/launcher-1280x720.png"
+    },
+    {
+      "sha256": "06a5f0ae6a2ea6ef9589d417ae9174e5cb01431f877ef3adb4eb660132778477",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-verify-2/launcher-800x600.png"
+    },
+    {
+      "sha256": "9429ffe208e4772b3a7a92ddf45033652d980ccc7b3568d1fd66b8aa626b4f21",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/launcher-layout-verify-2/launcher-960x640.png"
+    },
+    {
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/boot.json"
+    },
+    {
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/boot.txt"
+    },
+    {
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/progress-5000.json"
+    },
+    {
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/progress-5000.txt"
+    },
+    {
+      "sha256": "df23f9c58f3e8f17cce92df76aefbcc5cd9ac05c48840fa8e6b87b782f5f93f3",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/result.json"
+    },
+    {
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/storage.json"
+    },
+    {
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-fresh-5/storage.txt"
+    },
+    {
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/boot.json"
+    },
+    {
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/boot.txt"
+    },
+    {
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/progress-5000.json"
+    },
+    {
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/progress-5000.txt"
+    },
+    {
+      "sha256": "88f26c52efe7bdae141ba5dd983003355ac4c63fa12bc09577a17c3a77247062",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/result.json"
+    },
+    {
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/storage.json"
+    },
+    {
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovered-4/storage.txt"
+    },
+    {
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/boot.json"
+    },
+    {
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/boot.txt"
+    },
+    {
+      "sha256": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/progress-12360.json"
+    },
+    {
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/progress-12360.txt"
+    },
+    {
+      "sha256": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/progress-17360.json"
+    },
+    {
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/progress-17360.txt"
+    },
+    {
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/progress-5000.json"
+    },
+    {
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/progress-5000.txt"
+    },
+    {
+      "sha256": "dc559db757b4d4880446f3d67ee5aa8167cdd83cb66cae4de4d78fe58b494aaa",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/result.json"
+    },
+    {
+      "sha256": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/storage.json"
+    },
+    {
+      "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/storage.txt"
+    },
+    {
+      "sha256": "cd5f9580e25032fe909887f6b1fb87c1886781a3ce7e5196d83618e9f1fb0bba",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-recovery-3/imported-user/CopperOS/Workspaces/imported/workspace.json"
+    },
+    {
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/boot.json"
+    },
+    {
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/boot.txt"
+    },
+    {
+      "sha256": "9ded3ced7ff6dbac7d8fc3c0bf423d36a1bc10f50ab8c8ea68b4f478cb310096",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/progress-12360.json"
+    },
+    {
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/progress-12360.txt"
+    },
+    {
+      "sha256": "a6c5eaca3a8ac8f2f16609975bbd5390346b1a60ff77e33bc5b1c193c0f20314",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/progress-17360.json"
+    },
+    {
+      "sha256": "af5c991d91a23e6036fc9d8302780ca450113abc6df562e1276768baecfc5983",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/progress-17360.txt"
+    },
+    {
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/progress-5000.json"
+    },
+    {
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/progress-5000.txt"
+    },
+    {
+      "sha256": "b02e7e97ed8facfb7d38125b706c0082099d0f7b87224c568b7cafc780f55f83",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/result.json"
+    },
+    {
+      "sha256": "864ffb2761cd06ea693ea3d3036019f95e464309b1d6727ba91a903af791d380",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/storage.json"
+    },
+    {
+      "sha256": "267459a883491f6b673cbb626eb7c8ce6d5c2e67a1106bbc248a85a8dc11a95d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-seed-0/storage.txt"
+    },
+    {
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/boot.json"
+    },
+    {
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/boot.txt"
+    },
+    {
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/progress-5000.json"
+    },
+    {
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/progress-5000.txt"
+    },
+    {
+      "sha256": "5aa56bfb3cd1d008b752f8c5ca2b70955c7e27c0b9d17dabb5006c1d2ca80978",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/result.json"
+    },
+    {
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/storage.json"
+    },
+    {
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-1/storage.txt"
+    },
+    {
+      "sha256": "ba8c2ee2633da5f8a2d183566287f93231becd1761580a5bd7039582d602bd51",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/boot.json"
+    },
+    {
+      "sha256": "54df543364a7f1ef3f447674f25eaabf43fff1f9004f3175710379ce7aa29bcf",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/boot.txt"
+    },
+    {
+      "sha256": "574ba1f0bc3019e10cc0ef279b7a22eafdfac57cd8f4390cf2616c4a566ddb0b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/progress-5000.json"
+    },
+    {
+      "sha256": "14449fed093f37cda3a66c380fc12c504f2042f062e848847d51d395bbe4f092",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/progress-5000.txt"
+    },
+    {
+      "sha256": "6d91f3421073eeb43ccc5fd3f6fc3e9051767d9120ef0734b9699e56fca4a32d",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/result.json"
+    },
+    {
+      "sha256": "d3b7593481447d3d3c21e990acc301f4df312651dcc1a131d759f5f0f739adfe",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/storage.json"
+    },
+    {
+      "sha256": "de2a5af853a1bd4f74882a1e9adc3c8826be47ead338c021fe7634017fbcd565",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Installed/native-storage-verify-2/storage.txt"
+    },
+    {
+      "sha256": "4c5e4e75d64fe1f1ed179bd05f02361676daddc27e66f623175809d2f9987868",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Baseline/package-record.json"
+    },
+    {
+      "sha256": "bed8351ccb0fc07a5acf60abcf18bed600e139c8b9eaf2b118dceac325e5b699",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Baseline/signature-verification.log"
+    },
+    {
+      "sha256": "fcfb31379cc2491f45abbc808cded48beb6881c50823d83f46753c34b1db607f",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Baseline/publish.log"
+    },
+    {
+      "sha256": "882d01266072060d95d930bef1651974d657f99363ed7c698050835ccf420dd5",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Baseline/signing.log"
+    },
+    {
+      "sha256": "c8a8a96d69c7cbe9fdd11bc99a0375589d7d3618254b692e8696697b0fa0be2c",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Baseline/executable.manifest.xml"
+    },
+    {
+      "sha256": "4b7959f350f813bbd02aee8def2642c2ddadf11bd22f4a271d62ae37dd4364f6",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Update/package-record.json"
+    },
+    {
+      "sha256": "8d7d20aa71c219e5bdee6eb850a6f16a08529d400c80a425c9a366e1a8d7a5e2",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Update/signature-verification.log"
+    },
+    {
+      "sha256": "e3a435498674beb185e37c352fcd43c568a381f962daa514a1add019ba3403d8",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Update/publish.log"
+    },
+    {
+      "sha256": "e865c7fb619aa29a6c58ac0883ad79498f8a73c76671774f88fa968a9d3f98b2",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Update/signing.log"
+    },
+    {
+      "sha256": "c8a8a96d69c7cbe9fdd11bc99a0375589d7d3618254b692e8696697b0fa0be2c",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/Update/executable.manifest.xml"
+    },
+    {
+      "sha256": "1f43d08275edc07bcc005e075b2b5a3aeac459e1b56833658bdbfd076910f292",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/run-config.json"
+    },
+    {
+      "sha256": "93fbf061856056f789b11e6c67882c9cbb175382c398b7df155ba3bced7c4d00",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/host-signing.json"
+    },
+    {
+      "sha256": "a09ead7d68ca7a4e927e1169334cb2383146cbed3890bdef66a5780345a87174",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/payload-verification.json"
+    },
+    {
+      "sha256": "805b635ee51c72b4e8f968b4d50c6fcf7bbd00678ca0dd6dc86a3f8dfe94773b",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/source-before.json"
+    },
+    {
+      "sha256": "40d8d8dc4b4989b83db6df6f3eac464e20f72da39c339abc1b2946f8751213b7",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/workflow-snapshot.json"
+    },
+    {
+      "sha256": "97f4cc9ef0a02a988ea15860e717d014cbcd2f94a945f80c66ce216df278399a",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/frozen-source-verification.json"
+    },
+    {
+      "sha256": "b00b9383949adff27f889f93ac8be97d339a5ad1d277e0874516633f353246a4",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/script-parsing.json"
+    },
+    {
+      "sha256": "ce95e3a1836da96f1f4f046be2a0664a386cbc6d20b36a18ed028180085a95f4",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/production-isolation.json"
+    },
+    {
+      "sha256": "058a0f4eab33c1eb4f0fe914838b591bc4d4d13fb50a4648149a60ba8c6a81c9",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/tooling-controls.log"
+    },
+    {
+      "sha256": "58cedae41c7bbd855e3b711ea1e2d2fe38ea34d6a9b8bd1b2bdea027df9ee8c5",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/production-build.log"
+    },
+    {
+      "sha256": "e35738b4f1853c53460017cadb73987ee0f4dd6002589dd4c70c5b848c99fd20",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/desktop-tests.log"
+    },
+    {
+      "sha256": "95d9e49c93ff03026aa02d57bb1a42de4841773fbc238aa9af256ff8624b2910",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/desktop-qualified.log"
+    },
+    {
+      "sha256": "65659840dc16e3eb806c088400ac9d83dd7852c5c1c231491bdd4a9c0eed998e",
+      "file": "artifacts/p1-07-msix-signed-2026-10-17-37654a7e355b4dafab059fac783ecb6a/host-tests.log"
+    }
+  ],
+  "limitations": [
+    "Local trusted self-signed diagnostic identity; no Partner Center acquisition, Store certification or shipping-asset admission.",
+    "Installed layout uses the empty-workspace view at the actual current monitor scale; disabled Start/Save controls are measured for visibility, not clicked. Mixed-DPI transitions, other monitors, assistive tools and manual file-picker/recovery UI remain unqualified.",
+    "No fresh WACK for these package hashes. Earlier WACK results remain tied to their recorded P1-06 packages.",
+    "No installed 60-minute sessions, physical HID/audio/sleep checks, valid performance acceptance or frozen minimum/reference hardware and budgets.",
+    "Optional host-suite native media checks remain unavailable in that invocation; six installed native CopperOS boots and the guest-enabled desktop suite are separate coverage.",
+    "No ROM/system image, private key, MSIX or local artifact was committed or published."
+  ]
+}

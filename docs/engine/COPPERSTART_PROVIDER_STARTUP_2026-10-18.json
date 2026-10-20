@@ -1,0 +1,309 @@
+{
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-provider-startup-evidence-v1",
+  "passed": true,
+  "shipping": false,
+  "producerArtifacts": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\desktop-providers-20261018",
+  "scope": "Native disk-loaded Utility V40 and owned Layers V52 on the exact combined graphics/writable-DOS ROM. Retained boot HUNK; no host OS provider shims. Damage/update refresh and Intuition window remain unqualified.",
+  "machine": {
+    "video": "PAL OCS",
+    "slowBytes": 524288,
+    "chipBytes": 524288,
+    "cpu": "MC68000",
+    "fastBytes": 0,
+    "drives": 1
+  },
+  "layout": {
+    "romBytes": 524288,
+    "graphicsBytes": 31906,
+    "tailBeforeFooterBytes": 842,
+    "preGraphicsGapBytes": 27854,
+    "compiledCodeBytes": 463658
+  },
+  "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+  "compiledRomSha256": "2EE587B918A8E1530713170DA036B2BADD65E807EE842164346930EB1A689654",
+  "managedRomInputs": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "9333711473A6A08229AF61BAAC7F5A24EB899CFD981A42173F28095D6E9C328D"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "CACC2157CEF8ED44C8F8688B644986E0ED6264EA6CF47FD7EA0411E821CAFB8E"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "5FB65C3BC1E2F30D9DDD45820F79CEFE7F8A263FF4490C89A836F0FE2488E9C7"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "3C473A6C86A17447618F7271F8DA3B0DD3B7DE269E3B905F0604A45BFDFDF9A4"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+    },
+    {
+      "file": "CopperSharp.Targets.Amiga.dll",
+      "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "CE33BCBB5FBB19EBA053EBDA3C1B12BC7449B210CF46432447EE7DAB021FC2E5"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "833555D74801625998D242408F4CFBA9002BF5189EE3C199AC72FE0DBFD33DD0"
+    }
+  ],
+  "providerPayload": {
+    "sha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+    "entry": 0,
+    "installer": 215526,
+    "codeBytes": 215994,
+    "imageBytes": 223116,
+    "exports": [
+      "copperstart.utility.dispatch",
+      "copperstart.layers.install-system",
+      "copperstart.layers.init-owned-system",
+      "copperstart.layers.graphics-bridge"
+    ],
+    "lifetime": "Loader retains the entire disk HUNK until reset; permanent Utility code stays live after Layers expunge.",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "B98C7F35B3CDC32D98382223E7E6EEDB6CEC76A51E33A376E1FC8FB8024C6922"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "B396B505EAAE9C2E1BEAF8EFD93DB17FF7DEBA9EB970D901EB6C774B62B7BF63"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "43997EBCA480A1D69F164304F57A2E73068F579696FE1D99C2A7CA71BE43BEB0"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "C0F01787814C70DDB98558ED83E1DBF7A8D420831E5F2F490AE1CDE03EEB8901"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "DE24905235E05CCFBE3BA6ECB9D6E080792913246E33B2518C360FDAAB96A48A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "FA30D43A4B4004EBA878141D44EB2707A507738A431E2CB8F345D10355E1528A"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "F07B9B65F13A998A1880512C69335056A7B08B3532D6FFF4A6F2FFBFAAE58E5E"
+      }
+    ]
+  },
+  "providerStartup": {
+    "scope": "Native disk-loaded Utility/owned Layers on exact combined ROM, real Exec/DOS; boot HUNK retained until reset",
+    "romSha256": "DE0C6C8BE7395788081EF26E9B50FCC01DB912FD2BFA8A7924A7230F4979133F",
+    "romBytes": 524288,
+    "payloadSha256": "220FFE6B6C959B1112CC5FA75D088743FF1FBFE484961C125BB53655BF190EA8",
+    "CodeBytes": 215994,
+    "chipBytes": 524288,
+    "slowBytes": 524288,
+    "fastBytes": 0,
+    "fields": 5327,
+    "stage": 21,
+    "done": 1347571531,
+    "pc": 12756028,
+    "segment": 14044,
+    "code": 56180,
+    "utility": 12748526,
+    "hookResult": 3134984190,
+    "rows": [
+      {
+        "scenario": 0,
+        "before": 550224,
+        "after": 550224,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12656216,
+        "tailAfter": 12656216
+      },
+      {
+        "scenario": 1,
+        "before": 550224,
+        "after": 550224,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12656216,
+        "tailAfter": 12656216
+      },
+      {
+        "scenario": 2,
+        "before": 550224,
+        "after": 550224,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12656216,
+        "tailAfter": 12656216
+      },
+      {
+        "scenario": 3,
+        "before": 550224,
+        "after": 550224,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12656216,
+        "tailAfter": 12656216
+      },
+      {
+        "scenario": 4,
+        "before": 550224,
+        "after": 550224,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12656216,
+        "tailAfter": 12656216
+      },
+      {
+        "scenario": 5,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      },
+      {
+        "scenario": 6,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      },
+      {
+        "scenario": 7,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      },
+      {
+        "scenario": 8,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      },
+      {
+        "scenario": 9,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      },
+      {
+        "scenario": 10,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      },
+      {
+        "scenario": 11,
+        "before": 548416,
+        "after": 548416,
+        "result": 0,
+        "graphicsPins": 0,
+        "utilityPins": 0,
+        "tailBefore": 12748526,
+        "tailAfter": 12748526
+      }
+    ],
+    "chipFree": 243920,
+    "totalFree": 548416,
+    "largestChip": 211152,
+    "largestSlow": 301640,
+    "state": 12805640,
+    "root": 12807688,
+    "bridgeMagic": 1129139271,
+    "graphicsBase": 9280,
+    "utilityBase": 12748526,
+    "layersVersion": 52,
+    "stateMagic": 1280196948,
+    "rootMagic": 1129077074,
+    "refresh": "NOT RUN: no damage/update or native Intuition screen/window admission"
+  },
+  "tests": {
+    "hostProviderSemantics": 27,
+    "reservedExecRegression": "Old provider failed 2 valid cases in the 5-case red subset; all 7 final cases pass in the combined run.",
+    "providerCompilationCases": 1,
+    "compositionCases": 1,
+    "combinedPassed": 340,
+    "releaseBuild": "PASS: 0 errors, 0 warnings",
+    "combinedSkipped": 0,
+    "fileSystemSemanticCases": 15,
+    "compiledInstructionCases": 263,
+    "nativeRomMediaCases": 60,
+    "combinedTotal": 340
+  },
+  "artifacts": {
+    "sourceScope": "Exact selected Layers build-v3, provider primary build-v4, replay-final-v1 sources and build scripts; other frozen ROM/SDK/Utility inputs identified by DLL hash.",
+    "managedInputsSha256": "FB6108BB232ACA23076CFDE835EF9CCBB70D9C2FD10E864C93397BE6BA04E34D",
+    "trxSha256": "2CF69C48DE41ED27F43CA01069213B5B6024B7AE72E7BED919014B378CD82E47",
+    "qualificationSha256": "D2CDB90857164AC3B2F2D95DED4431A93CE05FB3D4D7DF36C61CF79D087CB458",
+    "sourceFiles": 113,
+    "sourceSnapshotSha256": "95D5731C64AEFDDC033097330BB70AD35ACD357796186B6B04BCCC7E6D15ADCB"
+  },
+  "memory": {
+    "totalFree": 548416,
+    "largestSlow": 301640,
+    "point": "After Layers retirement; provider segment, permanent Utility, loader stack and DOS remain resident. These are not live-window or peak-load headroom measurements.",
+    "utilityRetainedAllocationBytes": 1808,
+    "probeStackBytes": 32768,
+    "chipFree": 243920,
+    "largestChip": 211152
+  },
+  "remaining": [
+    "Owned Simple/Smart Layer creation and text/rectangle drawing through the installed CMLG owner",
+    "Native damage-restricted BeginUpdate/EndUpdate, complete/partial/abort/rollback and foreign clips",
+    "Simple uncover redraw, Smart backing restoration/scroll and native callback continuation/wait lifetimes",
+    "Intuition screen/window, refresh events/replies, pointer/input, close/reopen and display restoration",
+    "Complete GUI code/stack/bitmap peak and allocation-pressure measurements within the existing RAM banks"
+  ],
+  "shippingAppPin": {
+    "changed": false,
+    "manifestSha256": "22E1001D18B97AFAFE6391F4B39A1D0859BCA5967B29688320C3E00032C588F3"
+  }
+}

@@ -51,6 +51,16 @@ internal sealed class FramebufferPresenter : Control
 	}
 
 	public int PixelWidth => _width;
+#if COPPERSCREEN_INSTALLED_TESTS
+    internal int[] DiagnosticCopyFrontPixels()
+    {
+        var pixels = new int[_width * _height];
+        using var fb = _bitmaps[_frontBitmapIndex].Lock();
+        for (var y = 0; y < _height; y++)
+            Marshal.Copy(fb.Address + y * fb.RowBytes, pixels, y * _width, _width);
+        return pixels;
+    }
+#endif
 
 	public int PixelHeight => _height;
 

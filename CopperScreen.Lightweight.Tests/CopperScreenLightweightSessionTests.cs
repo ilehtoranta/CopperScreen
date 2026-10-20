@@ -65,7 +65,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         draft.Id = "ecs-display-test";
         draft.Chipset = new(DmaChipModel.Agnus8375Pal2M, DisplayChipModel.EcsDenise, VideoStandard.Pal);
         draft.ChipRamKb = 2048; draft.PseudoFastRamKb = 0;
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(DisplayChipModel.EcsDenise, profile.Chipset.DisplayChip);
         var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
@@ -117,7 +117,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         draft.Id = "fast-ram-test";
         Assert.Equal(kib != 0, draft.NeedsRestartComparedWith(original));
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(kib * 1024, profile.RealFastRamSize);
         var reloaded = CopperScreenSettingsDraft.FromProfile(profile);
@@ -162,7 +162,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         draft.Id = "cpu-option-test";
         Assert.True(draft.NeedsRestartComparedWith(originalDraft));
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(backend, profile.CpuBackend);
         var reloaded = CopperScreenSettingsDraft.FromProfile(profile);
@@ -186,7 +186,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var draft = CopperScreenSettingsDraft.FromStartupOptions(options);
         Assert.Equal(M68kBackendKind.AccurateM68060, draft.CpuBackend);
         Assert.Contains("060-aware OS", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(M68kBackendKind.AccurateM68060, profile.CpuBackend);
         Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(options));
@@ -278,8 +278,13 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     {
         var session = new CopperScreenLightweightSession(Options());
         var bytes = new byte[901120];
-        Assert.True(session.InsertLoadedDisk("original.zip", CopperScreenAdfImage.FromAdfBytes(bytes, "disk.adf"), false));
+        var originalPath = Path.Combine(_directory, "original.zip");
+        using (var archive = System.IO.Compression.ZipFile.Open(originalPath, System.IO.Compression.ZipArchiveMode.Create))
+        { using var entry = archive.CreateEntry("disk.adf").Open(); entry.Write(bytes); }
+        var originalArchive = File.ReadAllBytes(originalPath);
+        Assert.True(session.InsertLoadedDisk(originalPath, CopperScreenDiskImageArchive.LoadDiskImage(originalPath), false));
         session.SetDriveWriteProtected(0, false);
+        bytes[128] = 37; // Actual guest change; the imported archive must remain untouched.
         var machine = session.Machine;
         void WriteByte(uint address, byte value) { var cycle = machine.Cpu.Cycles; machine.WriteByte(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
         void WriteWord(uint address, ushort value) { var cycle = machine.Cpu.Cycles; machine.WriteWord(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
@@ -299,9 +304,12 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         session.TogglePaused();
         using var runtime = CopperScreenRuntime.CreateForTests(session); runtime.Start();
         var destination = Path.Combine(_directory, "saved.adf"); File.WriteAllBytes(destination, [1, 2, 3]);
+        var refused = await runtime.SaveAdfAsync(0, destination);
+        Assert.False(refused.Success); Assert.True(refused.State.Drives[0].HasUnsavedChanges);
+        Assert.Equal(new byte[] { 1, 2, 3 }, File.ReadAllBytes(destination));
         using (var locked = new FileStream(destination, FileMode.Open, FileAccess.Read, FileShare.None))
         {
-            var failed = await runtime.SaveAdfAsync(0, destination);
+            var failed = await runtime.SaveAdfAsync(0, destination, overwriteExisting: true);
             Assert.False(failed.Success); Assert.True(failed.State.Drives[0].HasUnsavedChanges);
         }
         Assert.Equal(new byte[] { 1, 2, 3 }, File.ReadAllBytes(destination));
@@ -310,9 +318,10 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.Throws<InvalidOperationException>(() => CopperScreenRuntime.CreateReplacement(runtime, () => throw new Exception("Must not construct a replacement")));
         var reset = await runtime.ResetAsync(); Assert.True(reset.State.Drives[0].HasUnsavedChanges);
         await runtime.TogglePausedAsync();
-        var saved = await runtime.SaveAdfAsync(0, destination);
+        var saved = await runtime.SaveAdfAsync(0, destination, overwriteExisting: true);
         Assert.True(saved.Success, saved.Message); Assert.False(saved.State.Drives[0].HasUnsavedChanges);
-        Assert.Equal(bytes, File.ReadAllBytes(destination)); Assert.Equal("original.zip", saved.State.DiskPath);
+        Assert.Equal(bytes, File.ReadAllBytes(destination)); Assert.Equal(originalPath, saved.State.DiskPath);
+        Assert.Equal(originalArchive, File.ReadAllBytes(originalPath));
         using var reopened = new CopperScreenLightweightSession(Options(destination));
         Assert.Equal(bytes, reopened.ExportAdf(0));
     }
@@ -327,7 +336,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.True(defaults.HardwareSpecialization);
         var options = Options("--engine", "Legacy");
         var error = Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(options));
-        Assert.Contains("Legacy/CopperStart support is not included", error.Message);
+        Assert.Contains("Legacy support is not included", error.Message);
         var roundtrip = CopperScreenSettingsDraft.FromStartupOptions(options).ToStartupOptions(AppContext.BaseDirectory);
         Assert.Equal(CopperScreenEngine.Legacy, roundtrip.Engine);
     }
@@ -351,9 +360,6 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     public void UnsupportedProfilesKeepTheirHardwareAndNeverSelectLegacyAutomatically(string id)
     {
         var options = CopperScreenStartupOptions.Parse(["--profile", id, "--rom", _rom], AppContext.BaseDirectory);
-        // CopperStart with --rom is a parser error; don't obscure the routing check.
-        if (id == "expanded-copperstart")
-            options = CopperScreenStartupOptions.Parse(["--profile", id], AppContext.BaseDirectory);
         Assert.Equal(id, options.Profile.Id);
         Assert.Equal(CopperScreenEngine.Lightweight, options.Engine);
         var roundtrip = CopperScreenSettingsDraft.FromStartupOptions(options).ToStartupOptions(AppContext.BaseDirectory);
@@ -364,7 +370,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.Equal(options.Profile.FloppyDriveCount, roundtrip.Profile.FloppyDriveCount);
         var error = Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(roundtrip));
         Assert.Contains("No automatic Legacy fallback", error.Message);
-        Assert.Contains("Legacy/CopperStart support is not included", error.Message);
+        Assert.Contains("Check the selected boot method", error.Message);
     }
 
     [Fact]
@@ -391,7 +397,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.Equal(draft.Chipset, options.Profile.Chipset);
         Assert.Equal(KickstartVersion.Kickstart31, options.Profile.KickstartVersion);
         Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(options));
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var reloaded, out var error), error);
         Assert.Equal(draft.Chipset, reloaded.Chipset);
         Assert.Equal(KickstartVersion.Kickstart31, reloaded.KickstartVersion);
@@ -679,7 +685,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         CopperScreenLightweightSession.Validate(draft.ToStartupOptions(_directory));
         draft.DriveDiskPaths[3] = null;
         draft.Id = "four-drive-test";
-        var path = CopperScreenProfileStore.Save(draft, _directory);
+        var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error), error);
         Assert.Equal(4, loaded.FloppyDriveCount);
     }
@@ -709,10 +715,30 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.False(ejected.State.Drives[2].HasDisk);
     }
 
+    [Fact]
+    public async Task NewMediaNeverInheritsWritePermissionAndCannotReplaceAnotherMountedOriginal()
+    {
+        var first = Path.Combine(_directory, "first.adf"); var second = Path.Combine(_directory, "second.adf");
+        File.WriteAllBytes(first, new byte[901120]); var secondBytes = new byte[901120]; secondBytes[42] = 37; File.WriteAllBytes(second, secondBytes);
+        var draft = CopperScreenSettingsDraft.FromStartupOptions(Options()); draft.FloppyDriveCount = 2;
+        var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        Assert.True(session.InsertLoadedDisk(0, first, CopperScreenAdfImage.Load(first), false));
+        Assert.True(session.SetDriveWriteProtected(0, false));
+        Assert.True(session.InsertLoadedDisk(0, second, CopperScreenAdfImage.Load(second), true));
+        Assert.True(session.Machine.IsDriveWriteProtected(0)); Assert.False(session.SetDriveWriteProtected(0, false));
+        for (var i = 0; i < 27; i++) session.RenderNextFrame(session.Framebuffer);
+        Assert.True(session.Machine.IsDriveWriteProtected(0)); Assert.True(session.SetDriveWriteProtected(0, false));
+        Assert.True(session.InsertLoadedDisk(1, first, CopperScreenAdfImage.Load(first), false));
+        session.TogglePaused(); using var runtime = CopperScreenRuntime.CreateForTests(session); runtime.Start();
+        var result = await runtime.SaveAdfAsync(0, first, overwriteExisting: true);
+        Assert.False(result.Success); Assert.Contains("another mounted disk", result.Message);
+        Assert.Equal(new byte[901120], File.ReadAllBytes(first)); Assert.Equal(secondBytes, File.ReadAllBytes(second));
+    }
+
     private sealed class AudioSink : ICopperScreenAudioOutput
     {
         public int Submissions, LastSampleCount, DiscardCount;
-        public int QueuedBufferCount => Math.Min(8, Volatile.Read(ref Submissions));
+        public int QueuedBufferCount => Math.Min(10, Volatile.Read(ref Submissions));
         public bool Submit(ReadOnlySpan<float> samples)
         { LastSampleCount = samples.Length; Interlocked.Increment(ref Submissions); return true; }
         public void Dispose() { }
