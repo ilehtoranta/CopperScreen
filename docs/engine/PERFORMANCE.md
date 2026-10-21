@@ -1356,3 +1356,35 @@ The [owner acceptance](KEYBOARD_CIA.md#owner-acceptance-2026-09-20) applies only
 engine `D79290B6BD3ED08B5797DC89DC69F77A41E6D5B58935844DCEC85906BBE5890A`
 against this recorded reference. It does not relabel the measured results as
 passes or waive remaining keyboard/CIA hardware-accuracy boundaries.
+
+## CopperOS guest latency and heap protocol
+
+The [2026-10-20 desktop study](COPPERSTART_COPPEROS_MEASUREMENTS_2026-10-20.md)
+uses separately versioned `copperos-guest-latency-heap-v1`: exact ROM/program/
+producer hashes, integer modeled guest cycles, an instrumented 1 MiB A500
+journey and read-only heap inspection. A 10,000-field preflight and all 134,317
+fields of its full paired journey match the public-frame control, including RAM,
+display/audio, registers and clock. Loader/stack/normal-queue peaks and largest
+free blocks are recorded, with all eleven post-stop heaps returning to the same
+geometry. Fixture overhead is retained.
+
+These are guest operation intervals and guest heap results. They do not measure
+host FPS, physical A500 performance or installed keyboard-to-photon response,
+and do not reuse or weaken the historical host protocols above. Native I/O and
+drawing latency remain blockers; queue-pressure maxima, 100-cycle/sustained use,
+installed budgets and shipping admission remain separate gates.
+
+The [track-cache comparison](COPPERSTART_COPPEROS_TRACK_CACHE_2026-10-20.md)
+repeats that guest protocol with unchanged program/probe bytes and a qualified
+512 KiB cache ROM. Its preflight and all 125,714 paired fields pass. Replacement
+intervals improve by 14.8% for 33 bytes and 10.7% for 16 KiB, while all heap minima
+are unchanged. Startup/read/paint intervals show no material improvement.
+These remain modeled guest observations with retained probe overhead; no host
+throughput protocol, placement requirement or historical result is changed.
+
+The [MFM follow-up](COPPERSTART_COPPEROS_MFM_2026-10-20.md) repeats that same
+guest protocol after the encoder-only ROM change. All 105,586 paired fields
+match; 33-byte / 16 KiB replacements improve by 31.0% / 31.1% relative
+to the track-cache record, with all heap minima unchanged. Isolated encoder
+cycle counts are separate from full-save observations. Historical host protocols,
+placement, expected fingerprints and earlier evidence remain unchanged.

@@ -308,11 +308,31 @@ before shipping. Do not commit generated ROMs, native libraries, images or media
    now qualifies private directory cursors, bitmap-word work and internal sector
    copies with all nine original-fixture Editor/Save/recovery checks passing.
    Individual DOS calls still block.
-   Next measure startup/repaint/disk latency and complete loader/stack/queue memory
-   peaks and largest free blocks. Add bounded Files mutation/paging beyond the
+   The [guest latency/heap study](engine/COPPERSTART_COPPEROS_MEASUREMENTS_2026-10-20.md)
+   now records isolated routine intervals and heap peaks for one instrumented
+   journey, with 134,317 fields of passive/control parity and stable post-stop
+   geometry. Lowest free is 218,696 bytes; the lowest largest block is 96,040.
+   Modeled guest Home repaint is 10.8 seconds and a 16 KiB replacement is about
+   18.4 minutes. Prioritize native disk I/O and planar drawing, preserving
+   physical write/Close order, clipping, rollback and the same memory bounds.
+   The [bounded track-cache follow-up](engine/COPPERSTART_COPPEROS_TRACK_CACHE_2026-10-20.md)
+   now reduces 33-byte / 16 KiB replacements by 14.8% / 10.7%, preserving all heap
+   minima and 125,714 fields of control parity. The 16 KiB replacement still takes
+   about 16.4 modeled minutes; Home repaint remains 10.8 seconds. Continue native
+   I/O and drawing work before more features. The development pair advances;
+   the app firmware pin and shipping admission remain unchanged.
+   The [native MFM follow-up](engine/COPPERSTART_COPPEROS_MFM_2026-10-20.md)
+   now reduces replacements further to 214.1 seconds for 33 bytes and
+   679.9 seconds for 16 KiB (31.0% / 31.1% below the cache result),
+   with unchanged heap minima and 105,586 paired fields matching. Physical
+   write/Close ordering and failure rollback still pass. Home repaint remains
+   about 10.8 modeled seconds; continue planar drawing and remaining native I/O
+   work before adding features. Shipping firmware admission remains unchanged.
+   Broader queue-pressure peaks and installed response measurements remain open.
+   Then add bounded Files mutation/paging beyond the
    current 32-entry cache and qualify sustained stress. Shell/Demo children must
    fit the 1 MiB budget; the existing full Shell requires extra RAM.
-   Functional native replay does not complete these release measurements.
+   The instrumented guest study does not complete installed or release measurements.
 5. CopperScreen: freeze and qualify the new ROM/OS pair, workspace compatibility,
    restart/update persistence and the itch.io ZIP journey. Preserve the current
    app firmware pin until that separate admission succeeds.
