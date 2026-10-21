@@ -237,8 +237,10 @@ public sealed class LightweightA500MachineTests
         Assert.Equal(17, machine.Cycle);
     }
 
-    [Fact]
-    public void FixedExtensionRomMapsWithoutReplacingKickstartOrResetOverlay()
+    [Theory]
+    [InlineData(0x40000)]
+    [InlineData(0x80000)]
+    public void FixedExtensionRomMapsWithoutReplacingKickstartOrResetOverlay(int extensionBytes)
     {
         using var machine = new LightweightA500Machine();
         var kickstart = new byte[0x80000];
@@ -246,12 +248,15 @@ public sealed class LightweightA500MachineTests
         WriteLong(kickstart, 4, 0x00F80100);
         kickstart[0x100] = 0x12; kickstart[0x101] = 0x34;
         machine.LoadKickstart(kickstart);
-        var extension = new byte[0x40000];
+        var extension = new byte[extensionBytes];
         extension[0x100] = 0x56; extension[0x101] = 0x78;
+        if (extensionBytes == 0x80000) { extension[0x60000] = 0x9A; extension[0x60001] = 0xBC; }
         machine.LoadExtensionRom(extension);
         long cycle = 17;
 
         Assert.Equal((ushort)0x5678, machine.ReadWord(0x00E00100, ref cycle, M68kBusAccessKind.CpuInstructionFetch));
+        Assert.Equal((ushort)(extensionBytes == 0x80000 ? 0x9ABC : 0xFFFF),
+            machine.ReadWord(0x00E60000, ref cycle, M68kBusAccessKind.CpuInstructionFetch));
         Assert.Equal((ushort)0x1234, machine.ReadWord(0x00F80100, ref cycle, M68kBusAccessKind.CpuInstructionFetch));
         Assert.Equal((ushort)0x0007, machine.ReadWord(0, ref cycle, M68kBusAccessKind.CpuDataRead));
         Assert.Equal(17, cycle);

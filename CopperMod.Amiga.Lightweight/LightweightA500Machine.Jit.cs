@@ -42,7 +42,7 @@ public sealed partial class LightweightA500Machine
         if (address >= 0xC00000 && address < 0xC00000 + _slowRam.Length || _fastRam?.ContainsRange(address, 1) == true)
             return true;
         if (_extensionRomLoaded && address >= ExtensionRomBase &&
-            address < ExtensionRomBase + _extensionRom.Length)
+            address < ExtensionRomBase + _extensionRomImageLength)
         { readOnly = true; return true; }
         if (address >= RomBase && address < RomBase + _rom.Length)
         { readOnly = true; return true; }

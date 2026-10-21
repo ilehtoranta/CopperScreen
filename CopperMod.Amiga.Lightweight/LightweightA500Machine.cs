@@ -35,8 +35,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly byte[] _slowRam;
     private readonly byte[] _rom = new byte[512 * 1024];
     private const uint ExtensionRomBase = 0x00E0_0000;
-    private readonly byte[] _extensionRom = new byte[256 * 1024];
+    private readonly byte[] _extensionRom = new byte[512 * 1024];
     private bool _extensionRomLoaded;
+    private int _extensionRomImageLength;
     private readonly LightweightClock _clock;
     private readonly LightweightBusArbiter _busArbiter = new();
     private readonly LightweightRegisters _registers;
@@ -511,7 +512,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 address + 1 < 0x00C00000 + _slowRam.Length ||
             _fastRam?.ContainsRange(address, 2) == true ||
             _extensionRomLoaded && address >= ExtensionRomBase &&
-                address + 1 < ExtensionRomBase + _extensionRom.Length ||
+                address + 1 < ExtensionRomBase + _extensionRomImageLength ||
             address >= RomBase && address + 1 < RomBase + _rom.Length;
         if (!readable)
         {
@@ -665,16 +666,18 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         image.CopyTo(_rom.AsSpan(_romImageOffset, image.Length));
         _romLoaded = true;
         _extensionRomLoaded = false;
+        _extensionRomImageLength = 0;
         Reset();
     }
 
-    /// <summary>Map an optional fixed 256 KiB extension beside Kickstart.</summary>
+    /// <summary>Map an optional 256 KiB or 512 KiB extension beside Kickstart.</summary>
     public void LoadExtensionRom(ReadOnlySpan<byte> image)
     {
         ThrowIfDisposed();
-        if (image.Length != _extensionRom.Length)
-            throw new ArgumentException("The extension ROM must be 256 KiB.", nameof(image));
+        if (image.Length is not (0x40000 or 0x80000))
+            throw new ArgumentException("The extension ROM must be 256 KiB or 512 KiB.", nameof(image));
         image.CopyTo(_extensionRom);
+        _extensionRomImageLength = image.Length;
         _extensionRomLoaded = true;
         _cpuMemoryMapGeneration++;
     }
@@ -1782,7 +1785,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             };
         }
         if (_extensionRomLoaded && address >= ExtensionRomBase &&
-            address + 1 < ExtensionRomBase + _extensionRom.Length)
+            address + 1 < ExtensionRomBase + _extensionRomImageLength)
             return BinaryPrimitives.ReadUInt16BigEndian(_extensionRom.AsSpan((int)(address - ExtensionRomBase), 2));
         if (address >= RomBase && address + 1 < RomBase + _rom.Length)
             return ReadRomWord((int)(address - RomBase));
