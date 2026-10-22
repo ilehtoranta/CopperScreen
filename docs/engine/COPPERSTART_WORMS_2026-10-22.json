@@ -1189,5 +1189,7 @@
     "byteIdenticalToRecordedInitialInput": true
   },
   "sourceAnnotationHead": "a32bac5f807d4a483864e2e8ad3302c7b94bba06",
-  "sourceAnnotationNote": "The two follow-up commits only correct BCPL Process-field comments/docs; ROM behavior and the frozen producer DLLs are unchanged."
+  "sourceAnnotationNote": "The two follow-up commits only correct BCPL Process-field comments/docs; ROM behavior and the frozen producer DLLs are unchanged.",
+  "followUp": "COPPERSTART_WORMS_GAMEPLAY_2026-10-22.json",
+  "transcriptionCorrection": "The native 1.3 prompt was misread as Table A, row 32, column C. Fresh full-raster captures and a visual code-booklet lookup establish Table C, row 32, column C (418). The historical loader failure and ROM evidence are preserved."
 }

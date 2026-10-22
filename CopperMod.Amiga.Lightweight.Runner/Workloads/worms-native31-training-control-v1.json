@@ -1,0 +1,377 @@
+[
+  {
+    "frame": 5002,
+    "keyCode": 264
+  },
+  {
+    "frame": 5004,
+    "keyCode": 392
+  },
+  {
+    "frame": 5012,
+    "keyCode": 266
+  },
+  {
+    "frame": 5014,
+    "keyCode": 394
+  },
+  {
+    "frame": 5102,
+    "keyCode": 259
+  },
+  {
+    "frame": 5104,
+    "keyCode": 387
+  },
+  {
+    "frame": 5202,
+    "keyCode": 324
+  },
+  {
+    "frame": 5204,
+    "keyCode": 452
+  },
+  {
+    "frame": 7002,
+    "keyCode": 320
+  },
+  {
+    "frame": 7004,
+    "keyCode": 448
+  },
+  {
+    "frame": 7012,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 7018,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 8002,
+    "keyCode": 324
+  },
+  {
+    "frame": 8004,
+    "keyCode": 452
+  },
+  {
+    "frame": 8502,
+    "mouseDeltaX": 40
+  },
+  {
+    "frame": 8503,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 8506,
+    "mouseDeltaX": 40
+  },
+  {
+    "frame": 8507,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 8510,
+    "mouseDeltaX": 40
+  },
+  {
+    "frame": 8511,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 8602,
+    "mouseDeltaX": -40
+  },
+  {
+    "frame": 8603,
+    "mouseDeltaY": -40
+  },
+  {
+    "frame": 8702,
+    "mouseDeltaX": -40
+  },
+  {
+    "frame": 8703,
+    "mouseDeltaY": -40
+  },
+  {
+    "frame": 8706,
+    "mouseDeltaX": -20
+  },
+  {
+    "frame": 8707,
+    "mouseDeltaY": -40
+  },
+  {
+    "frame": 8710,
+    "mouseDeltaY": -10
+  },
+  {
+    "frame": 8802,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 8812,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 9302,
+    "mouseDeltaX": -25
+  },
+  {
+    "frame": 9303,
+    "mouseDeltaY": -5
+  },
+  {
+    "frame": 9350,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 9380,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 9502,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 9540
+  },
+  {
+    "frame": 9602,
+    "keyCode": 324
+  },
+  {
+    "frame": 9606,
+    "keyCode": 452
+  },
+  {
+    "frame": 9650,
+    "mouseButtons": 2
+  },
+  {
+    "frame": 9680,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 9802,
+    "keyCode": 320
+  },
+  {
+    "frame": 9812,
+    "keyCode": 448
+  },
+  {
+    "frame": 9850,
+    "keyCode": 336
+  },
+  {
+    "frame": 9855,
+    "keyCode": 464
+  },
+  {
+    "frame": 10002,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10008,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 10014,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10020,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 10100,
+    "mouseDeltaX": -15
+  },
+  {
+    "frame": 10101,
+    "mouseDeltaY": 10
+  },
+  {
+    "frame": 10200,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10208,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 10214,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10220,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 10402,
+    "mouseDeltaY": 10
+  },
+  {
+    "frame": 10450,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10458,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 10464,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 10472,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11002,
+    "mouseDeltaX": 15
+  },
+  {
+    "frame": 11003,
+    "mouseDeltaY": 5
+  },
+  {
+    "frame": 11100,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11300,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11402,
+    "mouseDeltaX": -80
+  },
+  {
+    "frame": 11403,
+    "mouseDeltaY": 3
+  },
+  {
+    "frame": 11500,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11520,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11602,
+    "mouseDeltaY": 8
+  },
+  {
+    "frame": 11700,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11720,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11802,
+    "mouseDeltaX": 55
+  },
+  {
+    "frame": 11803,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 11806,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 11900,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11920,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 12502,
+    "mouseDeltaY": 10
+  },
+  {
+    "frame": 12600,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 12620,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 13502,
+    "mouseDeltaX": 15
+  },
+  {
+    "frame": 13503,
+    "mouseDeltaY": -40
+  },
+  {
+    "frame": 13600,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 13620,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 14202,
+    "mouseDeltaX": -60
+  },
+  {
+    "frame": 14203,
+    "mouseDeltaY": -45
+  },
+  {
+    "frame": 14300,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 14320,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 14702,
+    "mouseDeltaX": 60
+  },
+  {
+    "frame": 14703,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 14706,
+    "mouseDeltaY": 40
+  },
+  {
+    "frame": 14800,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 14820,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 15702,
+    "keyCode": 334
+  },
+  {
+    "frame": 15732,
+    "keyCode": 462
+  },
+  {
+    "frame": 15802,
+    "keyCode": 320
+  },
+  {
+    "frame": 15832,
+    "keyCode": 448
+  }
+]

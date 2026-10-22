@@ -1,5 +1,7 @@
 # CopperStart original Worms loader audit — 2026-10-22
 
+Historical result for ROM `3e4680b...`. The [RAM and gameplay follow-up](COPPERSTART_WORMS_GAMEPLAY_2026-10-22.md) records the subsequent fixes and later ROM replays. It also corrects the native prompt transcription below from Table A to Table C.
+
 **Worms remains incompatible at its main executable loader.** The rebuilt ROM
 now runs the Ocean and Team17 intros from the supplied original SPS 230 Disk 1,
 but its main `LoadSeg` fails with `ERROR_NO_FREE_STORE`. Copy protection, menus,
