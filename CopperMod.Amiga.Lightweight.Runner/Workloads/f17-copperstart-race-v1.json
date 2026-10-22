@@ -1,0 +1,151 @@
+[
+  {
+    "frame": 5002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 5022
+  },
+  {
+    "frame": 5202,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 5222,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 7002,
+    "ejectAdf": true
+  },
+  {
+    "frame": 7202,
+    "diskPath": "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk2.ipf"
+  },
+  {
+    "frame": 10002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 10022
+  },
+  {
+    "frame": 13002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 13022
+  },
+  {
+    "frame": 15002,
+    "joystickPort1": 8
+  },
+  {
+    "frame": 15014
+  },
+  {
+    "frame": 15032,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 15044
+  },
+  {
+    "frame": 15402,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 15422
+  },
+  {
+    "frame": 18002,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 18402,
+    "joystickPort1": 17
+  },
+  {
+    "frame": 18422,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 19002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 19402,
+    "joystickPort1": 20
+  },
+  {
+    "frame": 19422,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 19602,
+    "joystickPort1": 24
+  },
+  {
+    "frame": 19612,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 19802,
+    "joystickPort1": 2
+  },
+  {
+    "frame": 19902
+  },
+  {
+    "frame": 20002,
+    "keyCode": 281
+  },
+  {
+    "frame": 20004,
+    "keyCode": 409
+  },
+  {
+    "frame": 20402,
+    "keyCode": 281
+  },
+  {
+    "frame": 20404,
+    "keyCode": 409
+  },
+  {
+    "frame": 20412,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 20802,
+    "keyCode": 279
+  },
+  {
+    "frame": 20804,
+    "keyCode": 407
+  },
+  {
+    "frame": 20812,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 21002,
+    "keyCode": 279
+  },
+  {
+    "frame": 21004,
+    "keyCode": 407
+  },
+  {
+    "frame": 21012,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 21202,
+    "keyCode": 325
+  },
+  {
+    "frame": 21204,
+    "keyCode": 453
+  }
+]

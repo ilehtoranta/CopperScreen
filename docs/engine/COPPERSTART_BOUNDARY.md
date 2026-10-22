@@ -20,6 +20,16 @@ normal guest instruction, DMA and hardware execution.
 
 ## Source ownership and retained component evidence
 
+### Standalone replacement-ROM follow-up — 2026-10-23
+
+The [F17 Challenge replay](COPPERSTART_F17_2026-10-23.md) uses the current
+standalone CopperStart ROM and the engine's
+[sprite/audio DMA correction](WORMS_SPRITE_DMA_2026-10-22.md). Original IPFs
+reach Disk 2 loading and the South Africa race, with acceleration, steering,
+collision response, braking, pause/resume, HUD toggling and race exit checked.
+No additional ROM or engine change was needed. This is bounded opening-race
+compatibility, without a lap or championship completion claim.
+
 ### Standalone replacement-ROM compatibility — 2026-10-15
 
 The separate CopperStart repository now provides a native disk-boot ROM with
