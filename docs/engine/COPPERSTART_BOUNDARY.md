@@ -22,6 +22,12 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM compatibility — 2026-10-15
 
+The [2026-10-22 YEET qualification](COPPERSTART_YEET_2026-10-22.md) adds a pinned
+fresh-ROM menu/prologue replay and producer fixes for packed public hunks,
+native input/library services, stack lifetimes and direct display takeover.
+Its source PR requires integration with concurrently merged producer changes;
+the record does not qualify moving main or puzzle gameplay.
+
 The separate CopperStart repository now provides a native disk-boot ROM with
 bounded DOS startup and a console. Its prebuilt October 13 image was tested on
 the unchanged Lightweight engine. [The first compatibility record](COPPERSTART_COMPATIBILITY_2026-10-15.json)

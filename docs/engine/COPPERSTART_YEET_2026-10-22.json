@@ -1,0 +1,1224 @@
+{
+  "schemaVersion": 1,
+  "title": "YEET 1.0.4",
+  "date": "2026-10-22",
+  "disposition": "bounded-startup-menu-and-prologue-pass",
+  "limits": [
+    "Puzzle boards, world-map selection and game completion remain unverified.",
+    "Three NativeDiskBoot assertions also fail on unchanged source baseline ac0e78a and remain recorded failures.",
+    "Source PR 17 needs integration and requalification against the concurrent main merge 67590f5.",
+    "Diagnostic replays establish no host-throughput acceptance."
+  ],
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "baseline": "ac0e78a7334bb19be42b856c5e8ed252f4ddc781",
+    "candidate": "1520f304be7624e81eacf5d2810ffaf612cb2385",
+    "pullRequest": "https://github.com/ilehtoranta/CopperStart/pull/17",
+    "compiler": "d99e717607c02e72fa7567b3170834f21976dc44"
+  },
+  "rom": {
+    "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+    "romBytes": 524288,
+    "codeBytes": 476484,
+    "compatible": true,
+    "managedAllocationSites": 0,
+    "frameworkFeatures": 0,
+    "graphicsBytes": 32378,
+    "graphicsResidentAddress": 16744448,
+    "graphicsSupportedVectors": [
+      -960,
+      -924,
+      -918,
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -810,
+      -804,
+      -606,
+      -576,
+      -570,
+      -564,
+      -552,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -324,
+      -318,
+      -306,
+      -300,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -246,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -48,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "graphicsEntries": {
+      "-1056": 16745254,
+      "-1050": 16745256,
+      "-1044": 16745258,
+      "-1038": 16745260,
+      "-1032": 16745262,
+      "-1026": 16745264,
+      "-1020": 16745266,
+      "-1008": 16745268,
+      "-1002": 16745270,
+      "-996": 16745272,
+      "-990": 16745274,
+      "-984": 16745276,
+      "-978": 16745278,
+      "-972": 16745280,
+      "-966": 16745282,
+      "-960": 16769438,
+      "-954": 16745286,
+      "-948": 16745288,
+      "-942": 16745290,
+      "-936": 16745292,
+      "-930": 16745294,
+      "-924": 16769460,
+      "-918": 16769482,
+      "-900": 16745300,
+      "-894": 16769504,
+      "-888": 16745304,
+      "-882": 16745306,
+      "-876": 16745308,
+      "-870": 16769526,
+      "-864": 16769548,
+      "-858": 16769570,
+      "-852": 16745316,
+      "-840": 16745318,
+      "-834": 16745320,
+      "-828": 16745322,
+      "-822": 16769592,
+      "-816": 16769614,
+      "-810": 16769636,
+      "-804": 16769658,
+      "-798": 16745332,
+      "-792": 16745334,
+      "-786": 16745336,
+      "-780": 16745338,
+      "-774": 16745340,
+      "-768": 16745342,
+      "-762": 16745344,
+      "-756": 16745346,
+      "-732": 16745348,
+      "-726": 16745350,
+      "-720": 16745352,
+      "-714": 16745354,
+      "-708": 16745356,
+      "-702": 16745358,
+      "-696": 16745360,
+      "-690": 16745362,
+      "-684": 16745364,
+      "-678": 16745366,
+      "-672": 16745368,
+      "-666": 16745370,
+      "-660": 16745372,
+      "-654": 16745374,
+      "-636": 16745376,
+      "-630": 16745378,
+      "-624": 16745380,
+      "-618": 16745382,
+      "-612": 16745384,
+      "-606": 16769680,
+      "-600": 16745388,
+      "-594": 16745390,
+      "-588": 16745392,
+      "-582": 16745394,
+      "-576": 16769702,
+      "-570": 16769724,
+      "-564": 16769746,
+      "-558": 16745402,
+      "-552": 16769768,
+      "-546": 16745406,
+      "-540": 16769790,
+      "-534": 16745410,
+      "-528": 16745412,
+      "-522": 16745414,
+      "-516": 16745416,
+      "-510": 16745418,
+      "-504": 16745420,
+      "-498": 16769812,
+      "-492": 16769834,
+      "-486": 16769856,
+      "-480": 16769878,
+      "-474": 16745430,
+      "-468": 16769900,
+      "-462": 16769922,
+      "-456": 16769944,
+      "-450": 16745438,
+      "-444": 16745440,
+      "-438": 16745442,
+      "-432": 16745444,
+      "-426": 16745446,
+      "-420": 16745448,
+      "-414": 16745450,
+      "-408": 16745452,
+      "-402": 16769966,
+      "-396": 16745456,
+      "-390": 16769988,
+      "-384": 16770010,
+      "-378": 16745462,
+      "-372": 16745464,
+      "-366": 16745466,
+      "-360": 16770032,
+      "-354": 16770054,
+      "-348": 16770076,
+      "-342": 16770098,
+      "-336": 16745476,
+      "-330": 16745478,
+      "-324": 16770120,
+      "-318": 16770142,
+      "-312": 16745484,
+      "-306": 16770164,
+      "-300": 16770186,
+      "-294": 16770208,
+      "-288": 16770230,
+      "-282": 16770252,
+      "-276": 16770274,
+      "-270": 16770296,
+      "-264": 16745500,
+      "-258": 16745502,
+      "-252": 16745504,
+      "-246": 16770318,
+      "-240": 16770340,
+      "-234": 16770362,
+      "-228": 16770384,
+      "-222": 16770406,
+      "-216": 16770428,
+      "-210": 16770450,
+      "-204": 16770472,
+      "-198": 16770494,
+      "-192": 16770516,
+      "-186": 16745526,
+      "-180": 16745528,
+      "-174": 16745530,
+      "-168": 16745532,
+      "-162": 16745534,
+      "-156": 16745536,
+      "-150": 16745538,
+      "-144": 16770538,
+      "-138": 16745542,
+      "-132": 16745544,
+      "-126": 16745546,
+      "-120": 16770560,
+      "-114": 16745550,
+      "-108": 16745552,
+      "-102": 16745554,
+      "-96": 16745556,
+      "-90": 16745558,
+      "-84": 16770582,
+      "-78": 16770604,
+      "-72": 16770626,
+      "-66": 16770648,
+      "-60": 16770670,
+      "-54": 16770692,
+      "-48": 16770714,
+      "-42": 16745574,
+      "-36": 16745576,
+      "-30": 16770736,
+      "-6": 16770824,
+      "-12": 16770802,
+      "-18": 16770780,
+      "-24": 16770758
+    },
+    "runCommandStackBridgeAddress": 16776590,
+    "compiledRomSha256": "083CED9A4AFBBD9ECBC05C74AF7009478DC62033ED799AE800FA12D4DFEE6E24",
+    "intuitionResidentAddress": 16732288,
+    "intuitionBytes": 10814,
+    "intuitionSupportedVectors": [
+      -450,
+      -438,
+      -432,
+      -426,
+      -420,
+      -414,
+      -390,
+      -384,
+      -378,
+      -300,
+      -294,
+      -276,
+      -270,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -174,
+      -168,
+      -150,
+      -114,
+      -108,
+      -78,
+      -72,
+      -66,
+      -60,
+      -42,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "intuitionEntries": {
+      "-6": 16733000,
+      "-12": 16733014,
+      "-18": 16733028,
+      "-24": 16733038,
+      "-30": 16742906,
+      "-36": 16742908,
+      "-42": 16736880,
+      "-48": 16742912,
+      "-54": 16742914,
+      "-60": 16742104,
+      "-66": 16734010,
+      "-72": 16735238,
+      "-78": 16733186,
+      "-84": 16742924,
+      "-90": 16742926,
+      "-96": 16742928,
+      "-102": 16742930,
+      "-108": 16736700,
+      "-114": 16736868,
+      "-120": 16742936,
+      "-126": 16742938,
+      "-132": 16742940,
+      "-138": 16742942,
+      "-144": 16742944,
+      "-150": 16734916,
+      "-156": 16742948,
+      "-162": 16742950,
+      "-168": 16736974,
+      "-174": 16736998,
+      "-180": 16742956,
+      "-186": 16742958,
+      "-192": 16742960,
+      "-198": 16733280,
+      "-204": 16734562,
+      "-210": 16733160,
+      "-216": 16734308,
+      "-222": 16736924,
+      "-228": 16737022,
+      "-234": 16742974,
+      "-240": 16742976,
+      "-246": 16742978,
+      "-252": 16742980,
+      "-258": 16742982,
+      "-264": 16742984,
+      "-270": 16742092,
+      "-276": 16738692,
+      "-282": 16742990,
+      "-288": 16742992,
+      "-294": 16733048,
+      "-300": 16733062,
+      "-306": 16742998,
+      "-312": 16743000,
+      "-318": 16743002,
+      "-324": 16743004,
+      "-330": 16743006,
+      "-336": 16743008,
+      "-342": 16743010,
+      "-348": 16743012,
+      "-354": 16743014,
+      "-360": 16743016,
+      "-366": 16743018,
+      "-372": 16743020,
+      "-378": 16733852,
+      "-384": 16733906,
+      "-390": 16733894,
+      "-396": 16743028,
+      "-402": 16743030,
+      "-408": 16743032,
+      "-414": 16742850,
+      "-420": 16742872,
+      "-426": 16733080,
+      "-432": 16737032,
+      "-438": 16738002,
+      "-444": 16743044,
+      "-450": 16735058,
+      "-456": 16743048,
+      "-462": 16743050,
+      "-468": 16743052,
+      "-474": 16743054,
+      "-480": 16743056,
+      "-486": 16743058,
+      "-492": 16743060,
+      "-498": 16743062,
+      "-504": 16743064,
+      "-510": 16743066,
+      "-516": 16743068,
+      "-522": 16743070,
+      "-528": 16743072,
+      "-534": 16743074,
+      "-540": 16743076,
+      "-546": 16743078,
+      "-552": 16743080,
+      "-558": 16743082,
+      "-564": 16743084,
+      "-570": 16743086,
+      "-576": 16743088,
+      "-582": 16743090,
+      "-588": 16743092,
+      "-594": 16743094,
+      "-600": 16743096,
+      "-606": 16743098,
+      "-612": 16743100
+    },
+    "sha256": "083392F3A7C176EAAB681F02BDBA47567A269C3285055970581FCE528443D2AF",
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "00D01A6C66842C8615101BEE285FD0C46877C7EE50696A765FEB138EEA58148B"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "D8FDD4D6F6790F9069C30662958197CD413C814A2D7DBF63B00A38D3F9F88164"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "12D5F13491F16468BAC3C3324625D00BF4DC76725EB7D14DE1A7CAE1D80260D4"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "8E2CE85633BDCEF9D9E55E1CA82E6B0CCCF297E3286EF97EC148495B11EC1E80"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "A5F1F24C3052B2CC4165BFE0168FDC4B657A070F95D258508A2ADC939F154226"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "AF415A9F83C04DED86CD31EE1401E4C6A0269779972ECBF1A2714BC2E77EEFEF"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "1D74DAF1969A58A2D144A0DA4739FCD8549C901239B65289BCED6A5AAE2D51BE"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0F0144656F7180E41DAAD533778A2A979F67C21DDDF518E12275E2B2531C3A12"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "ADF2ECA8E11956E9EF0CB44215E9C5E884E20C9B317BDBFC0F33369C084BAC62"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "3D7DACDFE4431F46FE614659E1CDEA72A7CD9CC64C63F0134F0FD1F29A818288"
+      },
+      {
+        "file": "CopperStart.Intuition.Native.dll",
+        "sha256": "B6FD93A7184444E859256FBD790EAD4FB734F9369B553DF300B930BA1356CF4C"
+      }
+    ],
+    "composition": "Fresh CIL compile plus standard native graphics/Intuition linker; no hand patch",
+    "nativeLinkUtc": "2026-10-22T17:06:34.506835+00:00"
+  },
+  "priorFreshMiamiComposition": {
+    "source": "9a911bb9887d130e1b72360fab65c132bcaeee16",
+    "sha256": "13BE91C7056B79AC57089AB0553353B4C693EC4ACDBA77E4A7D4289C1FC6777B",
+    "freshBuildUtc": "2026-10-22T15:20:58.704999+00:00",
+    "result": "Does not reach YEET startup; moving source baseline then reports DOS BadHunk 235."
+  },
+  "runs": {
+    "final-play": {
+      "manifest": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-play\\run.json",
+      "manifestSha256": "9aa361f962830395379880daafe036473e08777182710c5f5f491b89f7076e19",
+      "frames": 18000,
+      "captureInterval": 200,
+      "completedReplay": true,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\qualified-final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "083392f3a7c176eaab681f02bdba47567a269c3285055970581fce528443d2af"
+      },
+      "media": {
+        "path": "C:\\Data\\TestImages\\yeet.adf",
+        "sha256": "fe52fc8bac2d0d24620bd425023bfc839160a5b5bbd423a9891508098653d2a8"
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+        "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+        "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+        "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-yeet-20261022\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-yeet-prologue-v1.json",
+        "sha256": "572e8cdd3a13e9d46de828b3243371bdbc11037afce2ade5f332de0956fa0496",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "files": 455,
+      "captureSetSha256": "61a857d70dd5a66febf6c8501c190a028fe9d37fc0b4f9e1af715e5152cd7f7e",
+      "fingerprints": {
+        "cycle": "2557836026",
+        "cpu": "0x2C762B85D08232A8",
+        "hardware": "0x7C6F63CE8A67ED07",
+        "output": "0x37635D621FA4C61E"
+      },
+      "reviewedImages": {
+        "frame-000001.bmp": "3fe7c52f12ec7debea1caaf422e968055f974127935a12df80391af775807a24",
+        "frame-002800.bmp": "9f9e22a13212f6675bcaae27d51279c7602f7b81d18ff81e3995b64e89a04cb6",
+        "frame-006400.bmp": "10212f1d923fc71b51b1f9dae0f792c91a1e8dc524a23d5eea91160d6dc74c78",
+        "frame-009200.bmp": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9",
+        "frame-010200.bmp": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf",
+        "frame-011400.bmp": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9",
+        "frame-012200.bmp": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac",
+        "frame-014200.bmp": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28",
+        "frame-016000.bmp": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9",
+        "frame-018000.bmp": "aadccb6f8c78ece419e0fccf42e85c672a5931ff334dd74dde2f85f373f39f56"
+      }
+    },
+    "final-play-scalar": {
+      "manifest": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-play-scalar\\run.json",
+      "manifestSha256": "893d693f8d06dcc3cf68d46b5d29b938e10c472372d23d7d24d12fd0b7f2797c",
+      "frames": 18000,
+      "captureInterval": 200,
+      "completedReplay": true,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\qualified-final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "083392f3a7c176eaab681f02bdba47567a269c3285055970581fce528443d2af"
+      },
+      "media": {
+        "path": "C:\\Data\\TestImages\\yeet.adf",
+        "sha256": "fe52fc8bac2d0d24620bd425023bfc839160a5b5bbd423a9891508098653d2a8"
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+        "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+        "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+        "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-yeet-20261022\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-yeet-prologue-v1.json",
+        "sha256": "572e8cdd3a13e9d46de828b3243371bdbc11037afce2ade5f332de0956fa0496",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "files": 455,
+      "captureSetSha256": "61a857d70dd5a66febf6c8501c190a028fe9d37fc0b4f9e1af715e5152cd7f7e",
+      "fingerprints": {
+        "cycle": "2557836026",
+        "cpu": "0x2C762B85D08232A8",
+        "hardware": "0x7C6F63CE8A67ED07",
+        "output": "0x37635D621FA4C61E"
+      },
+      "reviewedImages": {
+        "frame-000001.bmp": "3fe7c52f12ec7debea1caaf422e968055f974127935a12df80391af775807a24",
+        "frame-002800.bmp": "9f9e22a13212f6675bcaae27d51279c7602f7b81d18ff81e3995b64e89a04cb6",
+        "frame-006400.bmp": "10212f1d923fc71b51b1f9dae0f792c91a1e8dc524a23d5eea91160d6dc74c78",
+        "frame-009200.bmp": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9",
+        "frame-010200.bmp": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf",
+        "frame-011400.bmp": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9",
+        "frame-012200.bmp": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac",
+        "frame-014200.bmp": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28",
+        "frame-016000.bmp": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9",
+        "frame-018000.bmp": "aadccb6f8c78ece419e0fccf42e85c672a5931ff334dd74dde2f85f373f39f56"
+      }
+    },
+    "final-idle": {
+      "manifest": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-idle\\run.json",
+      "manifestSha256": "0ddfc2894e8d7c68c939fd8088a3e39ad5dd1720932b346419a499bf10651ade",
+      "frames": 18000,
+      "captureInterval": 200,
+      "completedReplay": true,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\qualified-final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "083392f3a7c176eaab681f02bdba47567a269c3285055970581fce528443d2af"
+      },
+      "media": {
+        "path": "C:\\Data\\TestImages\\yeet.adf",
+        "sha256": "fe52fc8bac2d0d24620bd425023bfc839160a5b5bbd423a9891508098653d2a8"
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+        "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+        "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+        "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\idle-input.json",
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "files": 455,
+      "captureSetSha256": "083051e92b597e4cf9e67bfc84a75736b90044444605943161d6ad40ef3221be",
+      "fingerprints": {
+        "cycle": "2557836004",
+        "cpu": "0x743B7F736102431E",
+        "hardware": "0x4990F90A35725B53",
+        "output": "0x7BB9EB61FD1FABC1"
+      },
+      "reviewedImages": {
+        "frame-000001.bmp": "3fe7c52f12ec7debea1caaf422e968055f974127935a12df80391af775807a24",
+        "frame-002800.bmp": "9f9e22a13212f6675bcaae27d51279c7602f7b81d18ff81e3995b64e89a04cb6",
+        "frame-006400.bmp": "10212f1d923fc71b51b1f9dae0f792c91a1e8dc524a23d5eea91160d6dc74c78",
+        "frame-009200.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-010200.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-011400.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-012200.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-014200.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-016000.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-018000.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+      }
+    },
+    "native-canonical": {
+      "manifest": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\native-canonical\\run.json",
+      "manifestSha256": "459e39de4934ae4da7838c14ed3e5220c669d41e5abc8100fcee5d6426911196",
+      "frames": 18000,
+      "captureInterval": 200,
+      "completedReplay": true,
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "media": {
+        "path": "C:\\Data\\TestImages\\yeet.adf",
+        "sha256": "fe52fc8bac2d0d24620bd425023bfc839160a5b5bbd423a9891508098653d2a8"
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+        "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+        "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+        "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-yeet-20261022\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-yeet-prologue-v1.json",
+        "sha256": "572e8cdd3a13e9d46de828b3243371bdbc11037afce2ade5f332de0956fa0496",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "files": 455,
+      "captureSetSha256": "0bd9f4a528fcb2a5f1884970dedb50861ffa5a7c74d1a658b2db367845b5f1e4",
+      "fingerprints": {
+        "cycle": "2557704064",
+        "cpu": "0xD81ADA923CEB6E9C",
+        "hardware": "0xEE1AD97F2CEA607B",
+        "output": "0xC4A9850372937CF2"
+      },
+      "reviewedImages": {
+        "frame-000001.bmp": "3fe7c52f12ec7debea1caaf422e968055f974127935a12df80391af775807a24",
+        "frame-002800.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-006400.bmp": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+        "frame-009200.bmp": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9",
+        "frame-010200.bmp": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac",
+        "frame-011400.bmp": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28",
+        "frame-012200.bmp": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28",
+        "frame-014200.bmp": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9",
+        "frame-016000.bmp": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a",
+        "frame-018000.bmp": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+      }
+    }
+  },
+  "comparisons": {
+    "normalScalarFiles": 455,
+    "normalScalarDifferentFiles": [],
+    "normalScalarFingerprintsMatch": true,
+    "idleMatchingPrefixFiles": 230,
+    "firstIdleDifferentFile": "frame-009200.bmp",
+    "wholeNativeImageMatches": [
+      [
+        "frame-000001.bmp",
+        "frame-000001.bmp"
+      ],
+      [
+        "frame-003800.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-004000.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-004200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-004400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-004600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-004800.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-005000.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-005200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-005400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-005600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-005800.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-006000.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-006200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-006400.bmp",
+        "frame-002200.bmp"
+      ],
+      [
+        "frame-006600.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-006800.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-007000.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-007200.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-007400.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-007600.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-007800.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-008000.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-008200.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-008400.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-008600.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-008800.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-009000.bmp",
+        "frame-006400.bmp"
+      ],
+      [
+        "frame-009200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-009400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-009600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-010000.bmp",
+        "frame-009000.bmp"
+      ],
+      [
+        "frame-010200.bmp",
+        "frame-009000.bmp"
+      ],
+      [
+        "frame-010400.bmp",
+        "frame-009000.bmp"
+      ],
+      [
+        "frame-010600.bmp",
+        "frame-009000.bmp"
+      ],
+      [
+        "frame-010800.bmp",
+        "frame-009000.bmp"
+      ],
+      [
+        "frame-011000.bmp",
+        "frame-009000.bmp"
+      ],
+      [
+        "frame-011200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-011400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-011600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-011800.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-012000.bmp",
+        "frame-011000.bmp"
+      ],
+      [
+        "frame-012200.bmp",
+        "frame-011000.bmp"
+      ],
+      [
+        "frame-012400.bmp",
+        "frame-011000.bmp"
+      ],
+      [
+        "frame-012600.bmp",
+        "frame-011000.bmp"
+      ],
+      [
+        "frame-012800.bmp",
+        "frame-011000.bmp"
+      ],
+      [
+        "frame-013000.bmp",
+        "frame-011000.bmp"
+      ],
+      [
+        "frame-013200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-013400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-013600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-013800.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-014200.bmp",
+        "frame-013000.bmp"
+      ],
+      [
+        "frame-014400.bmp",
+        "frame-013000.bmp"
+      ],
+      [
+        "frame-014600.bmp",
+        "frame-013000.bmp"
+      ],
+      [
+        "frame-014800.bmp",
+        "frame-013000.bmp"
+      ],
+      [
+        "frame-015000.bmp",
+        "frame-013000.bmp"
+      ],
+      [
+        "frame-015200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-015400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-015600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-015800.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-016000.bmp",
+        "frame-015000.bmp"
+      ],
+      [
+        "frame-016200.bmp",
+        "frame-015000.bmp"
+      ],
+      [
+        "frame-016400.bmp",
+        "frame-015000.bmp"
+      ],
+      [
+        "frame-016600.bmp",
+        "frame-015000.bmp"
+      ],
+      [
+        "frame-016800.bmp",
+        "frame-015000.bmp"
+      ],
+      [
+        "frame-017000.bmp",
+        "frame-015000.bmp"
+      ],
+      [
+        "frame-017200.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-017400.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-017600.bmp",
+        "frame-015800.bmp"
+      ],
+      [
+        "frame-017800.bmp",
+        "frame-015600.bmp"
+      ],
+      [
+        "frame-018000.bmp",
+        "frame-015600.bmp"
+      ]
+    ]
+  },
+  "tests": {
+    "final-all-focused-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-all-focused-tests\\ilkle_KOTIKONE_2026-10-22_20_15_03_net10.0.trx",
+      "sha256": "45a51431a31565cb4ce545821e6f63e954bfd88ac21278237ec7528dc49d2be0",
+      "counts": {
+        "total": "68",
+        "executed": "68",
+        "passed": "68",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    "final-complete-regression-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-complete-regression-tests\\ilkle_KOTIKONE_2026-10-22_20_15_07_net10.0.trx",
+      "sha256": "28393e24e12f977473eed9dbabbfcf5382726024a492e4fbc4f7df812b05d764",
+      "counts": {
+        "total": "98",
+        "executed": "98",
+        "passed": "95",
+        "failed": "3",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": [
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FixedAddressReadOutsideAllocatorHeadersTransfersTheRequestedBytes(destination: 65536, length: 512)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.BootLoaderCanOpenIntuitionAndRestoreEmptyDisplay(graphicsProvider: False)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.BootLoaderCanOpenIntuitionAndRestoreEmptyDisplay(graphicsProvider: True)"
+      ]
+    },
+    "final-display-regression-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-display-regression-tests\\ilkle_KOTIKONE_2026-10-22_20_11_46_net10.0.trx",
+      "sha256": "7ffbc112c9750983b396e93413b6506d1f6cf258d7f25459ddf25637e84453c8",
+      "counts": {
+        "total": "20",
+        "executed": "20",
+        "passed": "20",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    "native-device-final-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\native-device-final-tests\\result.trx",
+      "sha256": "ed62fde65b8afe74cc8a455fad281e6aac4886f5dfc72169f661cf7eaf8d74fa",
+      "counts": {
+        "total": "4",
+        "executed": "4",
+        "passed": "4",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    "native-final-exec-screen-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\native-final-exec-screen-tests\\ilkle_KOTIKONE_2026-10-22_19_47_16_net10.0.trx",
+      "sha256": "aea4f87bf197b3921789f57c95f23b402dc4abee023c74c7ee2fb111bf6c84e9",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    "native-null-view-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\native-null-view-tests\\ilkle_KOTIKONE_2026-10-22_20_03_46_net10.0.trx",
+      "sha256": "1d1776ba7b5d511533f38fed941d7c2b8c78eb54313b7b6907dd4fe76ba83aff",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    "baseline-existing-intuition-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\baseline-existing-intuition-tests\\ilkle_KOTIKONE_2026-10-22_19_36_16_net10.0.trx",
+      "sha256": "d76bfb5b7cd07136a809fa67d8e60ddfa30ee5db52b57f717d64ce4b33843dcf",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "0",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": [
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.BootLoaderCanOpenIntuitionAndRestoreEmptyDisplay(graphicsProvider: True)",
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.BootLoaderCanOpenIntuitionAndRestoreEmptyDisplay(graphicsProvider: False)"
+      ]
+    },
+    "baseline-fixed-read-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\baseline-fixed-read-tests\\ilkle_KOTIKONE_2026-10-22_19_39_47_net10.0.trx",
+      "sha256": "067837ab8b0e8a976da6fc4d13e6777094794083acc98cf5459060d2c8908809",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "1",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": [
+        "CopperStart.Floppy.Native.Tests.NativeDiskBootTests.FixedAddressReadOutsideAllocatorHeadersTransfersTheRequestedBytes(destination: 65536, length: 512)"
+      ]
+    },
+    "final-frequency-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-frequency-tests\\ilkle_KOTIKONE_2026-10-22_20_19_21_net10.0.trx",
+      "sha256": "77c19099b3f5d4c2382fdee7094046c5e7d1ebf26676d37f674056bfb7225ff4",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "final-stack-tests": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-yeet-2026-10-22\\final-stack-tests\\ilkle_KOTIKONE_2026-10-22_20_19_24_net10.0.trx",
+      "sha256": "f95ade3f193abe370efa53687b6c48f160f0df4275b82097efaaeb025791f579",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  }
+}
