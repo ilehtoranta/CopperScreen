@@ -325,6 +325,15 @@ under both CopperStart and Kickstart 1.3. Five new cases are included in the
 All 670 final normal/scalar capture files match. This repairs direct-position
 DMA programming, not all manual-data or physical comparator/slot edges.
 
+The [Worms DMA follow-up](WORMS_SPRITE_DMA_2026-10-22.md) corrects the fixed
+sprite and audio slot phase against HRM Figure 6-9 and removes a conservative
+DDF/channel cap in favor of actual physical slot ownership. Worms' stale
+sprite-6 data/stop words caused the reported blue bars; the audio correction
+also preserves Superfrog's character rendering. Five discriminating new cases
+are included in the 1255-pass engine suite, with seven optional native skips
+still unavailable. This bounds ordinary audio/sprite/early-DDF interaction;
+the comparator, partial-control and undocumented edges above remain open.
+
 ### LWA-VIDEO-008 — Dual-playfield verification boundary
 
 Ordinary OCS lores/hires dual playfield is implemented, including interlaced fields,

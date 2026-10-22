@@ -30,7 +30,7 @@ public sealed class LightweightSpriteDmaTests
         WriteRegister(machine, register, pos, machine.Cycle);
         machine.AdvanceHardwareTo(machine.Cycle + 2);
         WriteRegister(machine, (ushort)(register + 2), ctl, machine.Cycle);
-        machine.AdvanceHardwareTo(At(50, 0x36));
+        machine.AdvanceHardwareTo(At(50, 0x34));
 
         Assert.Equal(pos, machine.GetSpriteDmaPos(channel));
         Assert.Equal(ctl, machine.GetSpriteDmaCtl(channel));
@@ -49,10 +49,10 @@ public sealed class LightweightSpriteDmaTests
         SeedWord(machine, address + 2, ctl);
         SetPointer(machine, 0, address, 0);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, 0);
-        machine.AdvanceHardwareTo(At(25, 0x18));
+        machine.AdvanceHardwareTo(At(25, 0x16));
         WriteRegister(machine, LightweightRegisters.SpritePosFirst + 2, 0x7000, machine.Cycle);
 
-        machine.AdvanceHardwareTo(At(25, 0x1A));
+        machine.AdvanceHardwareTo(At(25, 0x18));
 
         Assert.Equal(ctl, machine.GetSpriteDmaCtl(0));
         Assert.Equal((ushort)0, machine.GetSpriteDmaDataB(0));
@@ -75,12 +75,12 @@ public sealed class LightweightSpriteDmaTests
         // has an illegal line-zero CTL request in flight.
         machine.AdvanceHardwareTo(At(0, 0x21));
         SetPointer(machine, 2, nullAddress, machine.Cycle);
-        Assert.Equal(At(25, 0x17), machine.SpriteDmaNextCycle);
-        machine.AdvanceHardwareTo(At(25, 0x17) - 1);
+        Assert.Equal(At(25, 0x15), machine.SpriteDmaNextCycle);
+        machine.AdvanceHardwareTo(At(25, 0x15) - 1);
         Assert.Equal(nullAddress, machine.GetLiveSpritePointer(2));
         Assert.Equal(long.MinValue, machine.SpriteDmaLastOutputCycle);
 
-        machine.AdvanceHardwareTo(At(25, 0x1F));
+        machine.AdvanceHardwareTo(At(25, 0x1D));
         Assert.Equal(nullAddress, machine.SpriteDmaPendingAddress);
         machine.AdvanceHardwareTo(At(25, 0x22));
         Assert.Equal(nullAddress + 4, machine.GetLiveSpritePointer(2));
@@ -105,11 +105,11 @@ public sealed class LightweightSpriteDmaTests
         machine.AdvanceHardwareTo(At(lines, 0));
         var priorOutput = machine.SpriteDmaLastOutputCycle;
         SetPointer(machine, 0, address, machine.Cycle);
-        Assert.Equal(At(lines + 25, 0x17), machine.SpriteDmaNextCycle);
-        machine.AdvanceHardwareTo(At(lines + 25, 0x17) - 1);
+        Assert.Equal(At(lines + 25, 0x15), machine.SpriteDmaNextCycle);
+        machine.AdvanceHardwareTo(At(lines + 25, 0x15) - 1);
         Assert.Equal(address, machine.GetLiveSpritePointer(0));
         Assert.Equal(priorOutput, machine.SpriteDmaLastOutputCycle);
-        machine.AdvanceHardwareTo(At(lines + 25, 0x1A));
+        machine.AdvanceHardwareTo(At(lines + 25, 0x18));
         Assert.Equal(address + 4, machine.GetLiveSpritePointer(0));
         Assert.Equal(pos, machine.GetSpriteDmaPos(0));
         Assert.Equal(ctl, machine.GetSpriteDmaCtl(0));
@@ -125,16 +125,16 @@ public sealed class LightweightSpriteDmaTests
         SetPointer(machine, 0, address, 0);
         machine.AdvanceHardwareTo(At(24, 100));
         WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, machine.Cycle);
-        machine.AdvanceHardwareTo(At(25, 0x17) - 1);
+        machine.AdvanceHardwareTo(At(25, 0x15) - 1);
         Assert.Equal(long.MinValue, machine.SpriteDmaLastInputCycle);
-        machine.AdvanceHardwareTo(At(25, 0x17));
+        machine.AdvanceHardwareTo(At(25, 0x15));
         Assert.Equal(address, machine.SpriteDmaPendingAddress);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x0020, machine.Cycle);
-        machine.AdvanceHardwareTo(At(25, 0x18));
+        machine.AdvanceHardwareTo(At(25, 0x16));
         Assert.Equal(address + 2, machine.GetLiveSpritePointer(0));
         Assert.Equal((ushort)0xFE00, machine.GetSpriteDmaPos(0));
-        machine.AdvanceHardwareTo(At(26, 0x36));
-        Assert.Equal(At(25, 0x18), machine.SpriteDmaLastOutputCycle);
+        machine.AdvanceHardwareTo(At(26, 0x34));
+        Assert.Equal(At(25, 0x16), machine.SpriteDmaLastOutputCycle);
     }
 
     [Theory]
@@ -147,15 +147,15 @@ public sealed class LightweightSpriteDmaTests
         const uint address = 0x3000;
         SeedWord(machine, address, 0xFE00);
         SeedWord(machine, address + 2, 0xFF00);
-        var enableCycle = At(25, 0x17) + offset;
+        var enableCycle = At(25, 0x15) + offset;
         machine.AdvanceHardwareTo(enableCycle);
         SetPointer(machine, 0, address, enableCycle);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, enableCycle);
-        machine.AdvanceHardwareTo(At(firstLine, 0x17) - 1);
+        machine.AdvanceHardwareTo(At(firstLine, 0x15) - 1);
         Assert.Equal(address, machine.GetLiveSpritePointer(0));
-        machine.AdvanceHardwareTo(At(firstLine, 0x17));
+        machine.AdvanceHardwareTo(At(firstLine, 0x15));
         Assert.Equal(address, machine.SpriteDmaPendingAddress);
-        machine.AdvanceHardwareTo(At(firstLine, 0x18));
+        machine.AdvanceHardwareTo(At(firstLine, 0x16));
         Assert.Equal(address + 2, machine.GetLiveSpritePointer(0));
     }
 
@@ -167,15 +167,15 @@ public sealed class LightweightSpriteDmaTests
         long start = 0;
         foreach (var lines in new[] { 312, 313, 312 })
         {
-            Assert.Equal(start + At(25, 0x17), machine.SpriteDmaNextCycle);
+            Assert.Equal(start + At(25, 0x15), machine.SpriteDmaNextCycle);
             WriteRegister(machine, LightweightRegisters.Vposw, lines == 313 ? (ushort)0x8000 : (ushort)0, start);
             start += At(lines, 0);
             machine.AdvanceHardwareTo(start);
         }
-        Assert.Equal(start + At(25, 0x17), machine.SpriteDmaNextCycle);
+        Assert.Equal(start + At(25, 0x15), machine.SpriteDmaNextCycle);
         machine.Reset();
         WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, 0);
-        Assert.Equal(At(25, 0x17), machine.SpriteDmaNextCycle);
+        Assert.Equal(At(25, 0x15), machine.SpriteDmaNextCycle);
     }
 
     [Theory]
@@ -196,7 +196,7 @@ public sealed class LightweightSpriteDmaTests
         SeedWord(machine, address + 2, 0xFF00);
         SetPointer(machine, 0, address, resetCycle);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, DmaSetMasterAndSprites, resetCycle);
-        var firstInput = fieldStart + At(firstLine, 0x17);
+        var firstInput = fieldStart + At(firstLine, 0x15);
         Assert.Equal(firstInput, machine.SpriteDmaNextCycle);
         machine.AdvanceHardwareTo(firstInput - 1);
         Assert.Equal(address, machine.GetLiveSpritePointer(0));
@@ -224,7 +224,7 @@ public sealed class LightweightSpriteDmaTests
             var address = 0x2000u + (uint)(channel * 0x20);
             for (var word = 0; word < 2; word++)
             {
-                var horizontal = 0x18 + (channel * 4) + (word * 2);
+                var horizontal = 0x16 + (channel * 4) + (word * 2);
                 machine.AdvanceHardwareTo(At(line: 25, horizontal));
 
                 Assert.Equal(At(25, horizontal - 1), machine.SpriteDmaLastInputCycle);
@@ -256,13 +256,13 @@ public sealed class LightweightSpriteDmaTests
 
         var enableCycle = At(25, 100);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x8200, enableCycle);
-        machine.AdvanceHardwareTo(At(26, 0x17) - 1);
+        machine.AdvanceHardwareTo(At(26, 0x15) - 1);
         Assert.Equal(long.MinValue, machine.SpriteDmaLastInputCycle);
 
-        machine.AdvanceHardwareTo(At(26, 0x17));
-        Assert.Equal(At(26, 0x17), machine.SpriteDmaLastInputCycle);
-        Assert.Equal(At(26, 0x18), machine.SpriteDmaPendingOutputCycle);
-        machine.AdvanceHardwareTo(At(26, 0x18));
+        machine.AdvanceHardwareTo(At(26, 0x15));
+        Assert.Equal(At(26, 0x15), machine.SpriteDmaLastInputCycle);
+        Assert.Equal(At(26, 0x16), machine.SpriteDmaPendingOutputCycle);
+        machine.AdvanceHardwareTo(At(26, 0x16));
         Assert.Equal(address, machine.SpriteDmaLastAddress);
     }
 
@@ -279,19 +279,19 @@ public sealed class LightweightSpriteDmaTests
         WriteRegister(machine, LightweightRegisters.DmaconWrite,
             DmaSetMasterAndSprites, cycle: 0);
 
-        machine.AdvanceHardwareTo(At(25, 0x17));
+        machine.AdvanceHardwareTo(At(25, 0x15));
         Assert.Equal(firstAddress, machine.SpriteDmaPendingAddress);
-        Assert.Equal(At(25, 0x18), machine.SpriteDmaPendingOutputCycle);
+        Assert.Equal(At(25, 0x16), machine.SpriteDmaPendingOutputCycle);
 
-        machine.AdvanceHardwareTo(At(25, 0x17) + 1);
+        machine.AdvanceHardwareTo(At(25, 0x15) + 1);
         SetPointer(machine, channel: 0, replacementAddress, machine.Cycle);
-        machine.AdvanceHardwareTo(At(25, 0x18));
+        machine.AdvanceHardwareTo(At(25, 0x16));
         Assert.Equal(firstAddress, machine.SpriteDmaLastAddress);
         Assert.Equal(firstAddress + 2, machine.GetLiveSpritePointer(0));
 
-        machine.AdvanceHardwareTo(At(25, 0x18) + 1);
+        machine.AdvanceHardwareTo(At(25, 0x16) + 1);
         SetPointer(machine, channel: 0, replacementAddress, machine.Cycle);
-        machine.AdvanceHardwareTo(At(25, 0x1A));
+        machine.AdvanceHardwareTo(At(25, 0x18));
         Assert.Equal(replacementAddress, machine.SpriteDmaLastAddress);
         Assert.Equal(replacementAddress + 2, machine.GetLiveSpritePointer(0));
         Assert.Equal(pos, machine.GetSpriteDmaPos(0));
@@ -316,40 +316,39 @@ public sealed class LightweightSpriteDmaTests
         WriteRegister(machine, LightweightRegisters.DmaconWrite,
             DmaSetMasterAndSprites, cycle: 0);
 
-        machine.AdvanceHardwareTo(At(25, 0x1A));
+        machine.AdvanceHardwareTo(At(25, 0x18));
         Assert.True(machine.IsSpriteDmaActive(0));
         Assert.Equal(address + 4, machine.GetLiveSpritePointer(0));
 
-        machine.AdvanceHardwareTo(At(26, 0x36));
-        Assert.Equal(At(25, 0x36), machine.SpriteDmaLastOutputCycle);
+        machine.AdvanceHardwareTo(At(26, 0x34));
+        Assert.Equal(At(25, 0x34), machine.SpriteDmaLastOutputCycle);
         Assert.Equal(address + 4, machine.GetLiveSpritePointer(0));
 
-        machine.AdvanceHardwareTo(At(27, 0x1A));
+        machine.AdvanceHardwareTo(At(27, 0x18));
         Assert.Equal((ushort)0xA001, machine.GetSpriteDmaDataA(0));
         Assert.Equal((ushort)0xB001, machine.GetSpriteDmaDataB(0));
         Assert.Equal(address + 8, machine.GetLiveSpritePointer(0));
 
-        machine.AdvanceHardwareTo(At(28, 0x1A));
+        machine.AdvanceHardwareTo(At(28, 0x18));
         Assert.Equal((ushort)0xA002, machine.GetSpriteDmaDataA(0));
         Assert.Equal((ushort)0xB002, machine.GetSpriteDmaDataB(0));
         Assert.Equal(address + 12, machine.GetLiveSpritePointer(0));
 
-        machine.AdvanceHardwareTo(At(29, 0x1A));
+        machine.AdvanceHardwareTo(At(29, 0x18));
         Assert.True(machine.IsSpriteDmaExhausted(0));
         Assert.False(machine.IsSpriteDmaActive(0));
         Assert.Equal(address + 16, machine.GetLiveSpritePointer(0));
     }
 
     [Theory]
-    [InlineData(0x18, 0, true)]
-    [InlineData(0x1C, 1, false)]
-    [InlineData(0x20, 2, false)]
-    [InlineData(0x30, 7, false)]
-    [InlineData(0x38, 8, false)]
-    public void EarlyLowResolutionDdfStealsOnlyItsDocumentedSpriteSuffix(
+    [InlineData(0x18, 1)]
+    [InlineData(0x1C, 2)]
+    [InlineData(0x20, 3)]
+    [InlineData(0x30, 7)]
+    [InlineData(0x38, 8)]
+    public void EarlyLowResolutionDdfStealsOnlyOverlappingSpriteSlots(
         int ddfStart,
-        int fullyAvailableChannels,
-        bool spriteZeroPosOnly)
+        int fullyAvailableChannels)
     {
         using var machine = CreateStoppedMachine();
         for (var channel = 0; channel < 8; channel++)
@@ -361,21 +360,19 @@ public sealed class LightweightSpriteDmaTests
             SetPointer(machine, channel, address, cycle: 0);
         }
 
-        WriteRegister(machine, LightweightRegisters.Bplcon0, 0x1000, cycle: 0);
+        WriteRegister(machine, LightweightRegisters.Bplcon0, 0x6000, cycle: 0);
         WriteRegister(machine, LightweightRegisters.Ddfstrt, (ushort)ddfStart, cycle: 0);
         WriteRegister(machine, LightweightRegisters.Diwstrt, 0x0000, cycle: 0);
         WriteRegister(machine, LightweightRegisters.Diwstop, 0x0100, cycle: 0);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x8320, cycle: 0);
-        machine.AdvanceHardwareTo(At(25, 0x36));
+        machine.AdvanceHardwareTo(At(25, 0x34));
 
         for (var channel = 0; channel < 8; channel++)
         {
             var initial = 0x3800u + (uint)(channel * 0x20);
             var expectedAdvance = channel < fullyAvailableChannels
                 ? 4u
-                : spriteZeroPosOnly && channel == 0
-                    ? 2u
-                    : 0u;
+                : 0u;
             Assert.Equal(initial + expectedAdvance,
                 machine.GetLiveSpritePointer(channel));
         }
@@ -392,11 +389,11 @@ public sealed class LightweightSpriteDmaTests
         SetPointer(machine, channel: 0, address, cycle: 0);
         WriteRegister(machine, LightweightRegisters.DmaconWrite,
             DmaSetMasterAndSprites, cycle: 0);
-        machine.AdvanceHardwareTo(At(25, 0x17));
+        machine.AdvanceHardwareTo(At(25, 0x15));
 
-        var outputCycle = At(25, 0x18);
+        var outputCycle = At(25, 0x16);
         Assert.False(machine.CanCopperOwnOutputSlot(outputCycle));
-        Assert.False(machine.CanBlitterAdvanceControl(At(25, 0x17)));
+        Assert.False(machine.CanBlitterAdvanceControl(At(25, 0x15)));
 
         long cpuCycle = outputCycle;
         _ = machine.ReadWord(
@@ -404,8 +401,8 @@ public sealed class LightweightSpriteDmaTests
             ref cpuCycle,
             M68kBusAccessKind.CpuDataRead);
 
-        Assert.Equal(At(25, 0x1A), cpuCycle);
-        Assert.Equal(At(25, 0x1A), machine.SpriteDmaLastOutputCycle);
+        Assert.Equal(At(25, 0x18), cpuCycle);
+        Assert.Equal(At(25, 0x18), machine.SpriteDmaLastOutputCycle);
         Assert.Equal(address + 2, machine.SpriteDmaLastAddress);
     }
 

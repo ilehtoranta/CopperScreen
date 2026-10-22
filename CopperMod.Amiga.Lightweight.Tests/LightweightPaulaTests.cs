@@ -186,7 +186,7 @@ public sealed class LightweightPaulaTests
 
         Assert.Null(machine.UnsupportedActiveFeature);
         Assert.True(machine.GetPaulaChannelSnapshot(0).DmaEnabled);
-        Assert.Equal(30, machine.GetPaulaChannelSnapshot(0).DmaInputCycle);
+        Assert.Equal(26, machine.GetPaulaChannelSnapshot(0).DmaInputCycle);
     }
 
     private static void WriteRegister(

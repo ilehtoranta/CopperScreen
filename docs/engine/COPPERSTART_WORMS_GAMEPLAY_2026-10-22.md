@@ -213,6 +213,10 @@ the native Kickstart 3.1 control. It remains unresolved; these replays do not
 establish artifact-free rendering. Game completion, multiplayer, saves and
 original disks 2/3 are outside this check.
 
+The subsequent [sprite DMA follow-up](WORMS_SPRITE_DMA_2026-10-22.md) fixes
+the blue bars in the shared engine. The preceding results and binary hashes
+remain evidence for this earlier ROM qualification.
+
 Both executions exit zero after field 107200. All **5375 capture files** match
 byte for byte, covering 1075 captured fields with state, both RAM banks, raster
 and PCM. No snapshot reports

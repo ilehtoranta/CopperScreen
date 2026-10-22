@@ -182,7 +182,7 @@ public sealed class LightweightAgaSpriteTests
         using var m = Create(); const uint address = 0x50000;
         Write(m, 0x1FC, (ushort)(mode << 2));
         Write(m, 0x120, 5); Write(m, 0x122, (ushort)offset); Write(m, 0x096, 0x8220);
-        var input = 25 * 454 + 0x17 * 2; m.AdvanceHardwareTo(input);
+        var input = 25 * 454 + 0x15 * 2; m.AdvanceHardwareTo(input);
         m.WriteCustomRegisterFromCopper(0x122, 0x1000, input);
         m.WriteCustomRegisterFromCopper(0x1FC, 0, input);
         m.WriteChipWordDma(address, 0x1234); m.WriteChipWordDma(address + 2, 0xABCD);

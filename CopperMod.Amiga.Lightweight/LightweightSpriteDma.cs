@@ -21,16 +21,16 @@ internal sealed class LightweightSpriteDma
     private const int PalControlReloadLine = 25;
     private const ushort DmaconMaster = 0x0200;
     private const ushort DmaconSprite = 0x0020;
-    private const ushort DmaconBitplane = 0x0100;
-    private const int FirstOutputHorizontal = 0x18;
-    private const int LastOutputHorizontal = 0x36;
+    // HRM figure 6-9 places sprite 0 at $15/$17 through sprite 7 at
+    // $31/$33. As with bitplanes, this owner's RAM output follows its
+    // address-input CCK. Sprite 6 must finish before a $30 bitplane run.
+    private const int FirstOutputHorizontal = 0x16;
+    private const int LastOutputHorizontal = 0x34;
     private const int FirstInputHorizontal = FirstOutputHorizontal - 1;
     private const int LastInputHorizontal = LastOutputHorizontal - 1;
     private const long FirstFieldInputOffset =
         PalControlReloadLine * LightweightClock.CpuCyclesPerLine +
         FirstInputHorizontal * LightweightClock.CpuCyclesPerColorClock;
-    private const int NormalLowResolutionDdfStart = 0x38;
-    private const int NormalHighResolutionDdfStart = 0x3C;
     private readonly uint _addressMask;
 
     internal LightweightSpriteDma(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
@@ -269,8 +269,7 @@ internal sealed class LightweightSpriteDma
         if (TPath.Aga && _scanDouble && state.Active && (state.Pos & 0x80) != 0 &&
             ((line ^ GetVerticalStart(in state)) & 1) != 0) return;
 
-        if (!TryGetPurpose(in state, line, word, out var purpose) ||
-            !IsSlotAvailable(channel, word, machine))
+        if (!TryGetPurpose(in state, line, word, out var purpose))
         {
             return;
         }
@@ -385,46 +384,6 @@ internal sealed class LightweightSpriteDma
 
         purpose = word == 0 ? WordPurpose.DataA : WordPurpose.DataB;
         return true;
-    }
-
-    private static bool IsSlotAvailable(
-        int channel,
-        int word,
-        LightweightA500Machine machine)
-    {
-        var bplcon0 = machine.BitplaneEffectiveBplcon0;
-        var planeCount = (bplcon0 >> 12) & 7;
-        if (planeCount == 0 ||
-            (machine.Dmacon & (DmaconMaster | DmaconBitplane)) !=
-                (DmaconMaster | DmaconBitplane))
-        {
-            return true;
-        }
-
-        var ddfStart = machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & 0x00FC;
-        var normalStart = (bplcon0 & 0x8000) == 0
-            ? NormalLowResolutionDdfStart
-            : NormalHighResolutionDdfStart;
-        if (ddfStart >= normalStart)
-        {
-            return true;
-        }
-
-        // With the earliest low-resolution start the first sprite's POS slot
-        // remains, while its CTL slot and every later channel are stolen.
-        if ((bplcon0 & 0x8000) == 0 && ddfStart <= 0x18 && channel == 0)
-        {
-            return word == 0;
-        }
-
-        var usableChannels = ddfStart switch
-        {
-            <= 0x18 => 0,
-            <= 0x1C => 1,
-            >= 0x30 => 7,
-            _ => Math.Clamp(((ddfStart - 0x1C) / 4) + 1, 1, 7)
-        };
-        return channel < usableChannels;
     }
 
     internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
