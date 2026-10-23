@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Alien Breed Special Edition 92 original two-disk boot and Deck One Intex gameplay",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23",
+  "copperScreenSourceBase": "810f220f65e4648d2ce87748b1e57474ec0abed6",
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "engineProvenance": "docs/engine/WORMS_SPRITE_DMA_2026-10-22.json",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "read-only original Alien Breed SE92 Boot Disk, then Disk 2",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip",
+      "bytes": 1572721,
+      "sha256": "fc478a1f5adfbc6ec56253a3c14da48448aacf07d8b0f9781d56d837d746973f"
+    },
+    "entries": [
+      {
+        "entry": "AlienBreedSpecialEdition92_BootDisk.ipf",
+        "bytes": 1049304,
+        "sha256": "b9f68cb237c20614035555aa7eca70b1dd43b64f061b20422a025eefdc89112d",
+        "sha1": "00138605a3ac8499f238179a274ec212e881965e"
+      },
+      {
+        "entry": "AlienBreedSpecialEdition92_Disk2.ipf",
+        "bytes": 1049612,
+        "sha256": "8f27f047e15788de9d0fd6b6691d7fbb2dcee401095a4b34dbd1bd4fc572a3ef",
+        "sha1": "206b14d03335ca81d37e730b9fa0dde0e9c96738"
+      }
+    ]
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/alien-breed-se92-copperstart-intex-v1.json",
+    "bytes": 4909,
+    "sha256": "fc2a131d0f7d04bafb11849cd4e01b20242301ffb43d7b081ea8a544db0139cd"
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf",
+          "24000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/complete-input.json",
+          "bytes": 4909,
+          "sha256": "fc2a131d0f7d04bafb11849cd4e01b20242301ffb43d7b081ea8a544db0139cd"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/qualified/normal/runner.log",
+        "bytes": 266170,
+        "sha256": "cd43bf86d11f849ab786db2e6308dc06540fb8b164dd5f2e22b72f16b5633a9d"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf",
+          "24000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/complete-input.json",
+          "bytes": 4909,
+          "sha256": "fc2a131d0f7d04bafb11849cd4e01b20242301ffb43d7b081ea8a544db0139cd"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 266170,
+        "sha256": "cd43bf86d11f849ab786db2e6308dc06540fb8b164dd5f2e22b72f16b5633a9d"
+      }
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\qualified\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf",
+          "24000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/complete-input.json",
+          "bytes": 4909,
+          "sha256": "fc2a131d0f7d04bafb11849cd4e01b20242301ffb43d7b081ea8a544db0139cd"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/qualified/native31/runner.log",
+        "bytes": 266314,
+        "sha256": "8d76717783f608c19237c07cfe004d8bbf278c56ab0ed1d1b0026754f19a790e"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 1205,
+      "fields": 241,
+      "lastField": 24000,
+      "unsupported": [],
+      "nonzeroPcmFields": 182,
+      "manifestSha256": "adaf5b5f109dd7570afbac1e749c13d3e007d72f20f18e613fcb394aea8ca049"
+    },
+    "scalar": {
+      "files": 1205,
+      "fields": 241,
+      "lastField": 24000,
+      "unsupported": [],
+      "nonzeroPcmFields": 182,
+      "manifestSha256": "adaf5b5f109dd7570afbac1e749c13d3e007d72f20f18e613fcb394aea8ca049"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native31": {
+      "files": 1205,
+      "fields": 241,
+      "lastField": 24000,
+      "unsupported": [],
+      "nonzeroPcmFields": 183,
+      "manifestSha256": "5969f469422759a1c0f6d73e13f7664cc071e3f1b465f053ad0f328289610d77"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/discovery/normal/runner.log",
+        "bytes": 266707,
+        "sha256": "1bee7e489a0e440c66fe18df7cbb32782f3402a9f5b03ad40165a4339c13107c"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 266707,
+        "sha256": "1bee7e489a0e440c66fe18df7cbb32782f3402a9f5b03ad40165a4339c13107c"
+      }
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\discovery\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-se92-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/AlienBreedSpecialEdition92_615.zip#/AlienBreedSpecialEdition92_BootDisk.ipf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-se92-2026-10-23/discovery/native31/runner.log",
+        "bytes": 266851,
+        "sha256": "714df994d07856f2305ea045d6817f222b6e17e06906bb83250ece425d8fc15a"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 1205,
+      "identical": true
+    },
+    "scalar": {
+      "files": 1205,
+      "identical": true
+    },
+    "native31": {
+      "files": 1205,
+      "identical": true
+    }
+  },
+  "harness": {
+    "purpose": "Functional media replay; not a throughput harness",
+    "unchangedFrom": "docs/engine/COPPERSTART_F17_2026-10-23.json",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "buildRerun": false,
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "productionAndRomUnchanged": true,
+    "productionBuildRerun": false,
+    "engineTestsRerun": false,
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true
+  },
+  "controlReference": {
+    "url": "https://www.lemonamiga.com/doc/alien-breed-special-edition-1992/49",
+    "description": "Preserved manual; joystick movement/fire, Space terminal entry and Escape to menu"
+  },
+  "mediaAdmissionReference": "https://github.com/mamedev/mame/blob/master/hash/amigaocs_flop.xml",
+  "observations": {
+    "disk2Prompt": 5000,
+    "ejectBootDisk": 5002,
+    "insertDisk2": 5202,
+    "acknowledgeDisk2": 5402,
+    "title": 7000,
+    "mainMenu": 9000,
+    "deckOneBriefing": 10000,
+    "shuttleBayGameplay": 12000,
+    "firingAndScrolling": 13100,
+    "keyPickup": 14300,
+    "ammunitionPickup": 14500,
+    "openedBayDoor": 15400,
+    "terminalContact": 16000,
+    "intexMainMenu": 16800,
+    "intexMissionObjectives": 17400,
+    "returnToGameplay": 18400,
+    "bayJunction": 18900,
+    "storageEnemiesAndHealthLoss": 19600,
+    "continuedFiringAndContact": 20100,
+    "escapeToMenu": 22000,
+    "skipAttractBackToMenu": 24000
+  },
+  "excludedCandidate": {
+    "title": "Alien Breed II SPS 44 is AGA media, not OCS SPS 278",
+    "status": "UNAVAILABLE for this bounded A500 profile; not a successful replay",
+    "media": {
+      "archive": {
+        "path": "C:/Data/TestImages/Team17/AlienBreedII-TheHorrorContinues_44.zip",
+        "bytes": 2970275,
+        "sha256": "84a72aa14aafdbbd6867921f7fc8e9fc436138c5ec6bc0f3b51fb265b8db475d"
+      },
+      "entries": [
+        {
+          "entry": "AlienBreed2_Disk2.ipf",
+          "bytes": 1140380,
+          "sha256": "0d987f512eb3693a18073677a7dffd695523879324de2cbe43b9c0d8a19bfb4c",
+          "sha1": "343204fed87783ff300f045d1cee5e741d44dbb9"
+        },
+        {
+          "entry": "AlienBreed2_Disk3.ipf",
+          "bytes": 1140380,
+          "sha256": "8587efa16646883614aa4bc4aa3170dd58c828201f3219532eeae351bbf0a7d4",
+          "sha1": "9c89c6dc3b723c2e71742bc41770ca0ee0616514"
+        },
+        {
+          "entry": "AlienBreed2_Disk1.ipf",
+          "bytes": 1139240,
+          "sha256": "09d156cbf31b06826c885cc982439cb8d9f9294524b5a0046ffd3fb02abb369c",
+          "sha1": "2be4018fd32b0f0e53ee8f42eb46fafedc177cd4"
+        }
+      ]
+    },
+    "identityReference": "https://github.com/mamedev/mame/blob/master/hash/amigaaga_flop.xml",
+    "publisherManual": "https://evercade.info/wp-content/uploads/2023/03/Alien-Breed-II.pdf",
+    "runs": [
+      {
+        "profile": "CopperStart normal",
+        "completedField": 8000,
+        "pc": "000FF338",
+        "state": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/normal/captures/frame-008000.json",
+          "bytes": 1106,
+          "sha256": "00ef71d670241c494ba8e6f0331de18db9ac09e7ff4a4df42a42c2cb3166e202"
+        },
+        "runRecord": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/normal/run.json",
+          "bytes": 2510,
+          "sha256": "caf1369bfc7bcd385457bccf0cdf73bda3dc6fd5680f333cf5809180371f28a5"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/normal/runner.log",
+          "bytes": 89462,
+          "sha256": "6bd98f766f5d1b10317e4d0082e7a2e7ce691162a29f56d343c80b126c1a589f"
+        },
+        "hostExitCode": 0,
+        "gameplayPass": false
+      },
+      {
+        "profile": "CopperStart scalar",
+        "completedField": 8000,
+        "pc": "000FF338",
+        "state": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/scalar/captures/frame-008000.json",
+          "bytes": 1106,
+          "sha256": "00ef71d670241c494ba8e6f0331de18db9ac09e7ff4a4df42a42c2cb3166e202"
+        },
+        "runRecord": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/scalar/run.json",
+          "bytes": 2527,
+          "sha256": "6a3a54655577a4e279c625159ca7aadaa92e9b619b27fc5f4f508631b0a8a7c4"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/scalar/runner.log",
+          "bytes": 89462,
+          "sha256": "6bd98f766f5d1b10317e4d0082e7a2e7ce691162a29f56d343c80b126c1a589f"
+        },
+        "hostExitCode": 0,
+        "gameplayPass": false
+      },
+      {
+        "profile": "Kickstart 3.1",
+        "completedField": 8000,
+        "pc": "000FF338",
+        "state": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/native31/captures/frame-008000.json",
+          "bytes": 1107,
+          "sha256": "1779a36d5f72e46df4814d2967da14c3a9f198cf0ead1e2ddd70bdfadc58f077"
+        },
+        "runRecord": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/native31/run.json",
+          "bytes": 2320,
+          "sha256": "5ef734c1f84c06e87c308dadf39596bc3d1e851e76be951ee7aac396e7b8ca45"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/discovery/native31/runner.log",
+          "bytes": 89521,
+          "sha256": "9461280bf64465304cfe87f2b25a7c4acaa70f160ef1583238b8611a61cfc3ca"
+        },
+        "hostExitCode": 0,
+        "gameplayPass": false
+      },
+      {
+        "profile": "Kickstart 1.3",
+        "completedField": 5000,
+        "pc": "000FF338",
+        "state": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/reference13/captures/frame-005000.json",
+          "bytes": 1106,
+          "sha256": "4617dfe604426118a6795869ffff8b6f6e53adcb2ab3f2a6e8ec280f033682a6"
+        },
+        "runRecord": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/reference13/run.json",
+          "bytes": 2297,
+          "sha256": "cd8677a2d66dc69b9dfe6a9b48262786c12fc8cddfb5ca8171220af72c734a0c"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/reference13/runner.log",
+          "bytes": 56258,
+          "sha256": "5bb624e17e403f010a8d7ecafd97a409c2c88e74dc27e78311a43a441c2c8c43"
+        },
+        "hostExitCode": 0,
+        "gameplayPass": false
+      }
+    ],
+    "diagnosticTrace": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/hunk-trace.log",
+      "bytes": 14929,
+      "sha256": "01a947c75d5d8a782c3931f25f675acd2673b56d137b045832d3957302762bc0"
+    },
+    "diagnosticSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace/Program.cs",
+        "bytes": 2021,
+        "sha256": "1e73beefc338c5b1e47bd28aa7890722081ff209a7e317684053310007b78814"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace/Trace.csproj",
+        "bytes": 536,
+        "sha256": "e0694149fe8633f477c9d624512517a579f840324c425e1ae78f3d8e70367da7"
+      }
+    ],
+    "finding": "BSS zero-initialization overwrites aliased loader code on the undersized OCS machine; no OS argument rejection or CPU defect established",
+    "correctAgaProfileTested": false,
+    "diagnosticCommand": [
+      "dotnet",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-ii-2026-10-23\\trace-runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-ii-2026-10-23",
+      "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom"
+    ],
+    "diagnosticBinaries": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace-runner/CopperMod.Amiga.Lightweight.Runner.dll",
+        "bytes": 9728,
+        "sha256": "18d36dcdbcefa06aeb92b927c5a33eb6f87dadb3dd27d38f25ba8776b1ea4e53"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace-runner/CopperMod.Amiga.Lightweight.dll",
+        "bytes": 288256,
+        "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace-runner/Copper68k.dll",
+        "bytes": 978944,
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace-runner/CopperDisk.dll",
+        "bytes": 105472,
+        "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alien-breed-ii-2026-10-23/trace-runner/CopperFloat.dll",
+        "bytes": 28672,
+        "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+      }
+    ]
+  },
+  "limits": [
+    "Opening Deck One only; no level completion or campaign progression claim",
+    "Native Kickstart comparison is on the same emulator, not a physical hardware oracle",
+    "Nonzero PCM is sample presence, not listening or fidelity",
+    "Two-player, saving, other levels and full weapon/shop coverage unqualified",
+    "No host throughput or complete hardware timing acceptance claim"
+  ]
+}

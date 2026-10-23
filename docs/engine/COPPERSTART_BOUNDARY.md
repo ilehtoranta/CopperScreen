@@ -22,6 +22,13 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Alien Breed SE92 replay](COPPERSTART_ALIEN_BREED_SE92_2026-10-23.md)
+adds original SPS 615 disk swapping, Deck One movement/fire, pickups, doors,
+the Intex mission-objective round trip and storage-area enemy contact.
+No additional ROM or engine correction was established. The same record
+identifies supplied Alien Breed II SPS 44 as AGA media, unavailable for the
+bounded A500 profile; it is not counted as a successful replay.
+
 The [Overdrive replay](COPPERSTART_OVERDRIVE_2026-10-23.md) adds original
 two-IPF Arcade boot, driving, pause/resume, race abort and both physical disk
 swaps back to the main menu. No additional ROM or engine change was needed.
