@@ -76,6 +76,14 @@ performance workloads and acceptance records are unchanged.
 
 ## Status and next work
 
+The [Nitro follow-up](COPPERSTART_NITRO_2026-10-23.md) corrects admission of its
+166-track extended ADF and zero-bit raw entries in CopperDisk, then fixes an
+independently traced memory-BTST IPL sample phase in shared Copper68k. Both
+CopperStart and native Kickstart 1.3 reach human-driver selection and bounded
+first-race acceleration/steering. The ROM and engine hardware source remain
+unchanged. Race completion, later tracks, multiplayer and other releases remain
+unqualified; historical performance protocols are unchanged.
+
 Confirmed bugs contradict a supported contract; unverified behavior records an
 assumption requiring evidence; unsupported features are implementation gaps.
 Missing hardware proof is not itself a demonstrated bug or a blanket blocker.

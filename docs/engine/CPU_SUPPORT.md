@@ -1,13 +1,16 @@
 # CPU support and Copper68k package scope
 
-Updated 2026-10-11. The published baseline is Copper68k `1.5.3` from NuGet.org.
-This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate.
+Updated 2026-10-23. This development worktree pins unpublished Copper68k
+`1.5.5-nitro.1`, from CopperMod commit `25dae803fa8476d601acc5c0af9bbac8ed98138f`.
+It corrects memory BTST interrupt sampling before the operand read; the
+[Nitro record](COPPERSTART_NITRO_2026-10-23.md) retains package identity and consumer checks.
+The October 11 worktree used unpublished `1.5.4-qualified-dev.1`.
 The merged general logical handler already supports Detroit's reached
 `EORI.B #$9E,(A0)+` form; the older dedicated path is not imported. Exact-package
 evidence is in the [candidate qualification record](COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
 The shared CPU source
 is maintained in CopperMod; no sibling project reference is used.
-The published release retains the preceding 1.5.2 integer
+The previously recorded published 1.5.3 release retains the preceding 1.5.2 integer
 corrections and was explicitly authorized for publication on 2026-10-07.
 Advanced CPU features retain the experimental scope below.
 
@@ -104,11 +107,12 @@ dotnet build CopperScreen.slnx -c Release
 ```
 
 The October 7 published baseline used NuGet.org alone. The current development
-configuration additionally uses `artifacts/detroit-fix-2026-10-08/feed`; local
-packages are ignored and never committed. Build the corrected CopperMod
-`Copper68k/Copper68k.csproj` with `dotnet pack -c Release -o` targeting that
-absolute feed path before a fresh restore. This is local development, with no
-package publication. Locks retain the development package's content identity.
+configuration additionally uses `artifacts/qualified-cpu-20261011/feed`; local
+packages are ignored and never committed. The Nitro record identifies the
+CopperMod source commit and locally packed `1.5.5-nitro.1` package used here.
+Supply that exact package to the local feed before a locked restore; a fresh
+pack must be verified against its recorded content identity. This is local
+development, with no package publication. Locks retain that content identity.
 Published versions remain immutable; further CPU changes require a new version.
 
 ## Verification on 2026-10-07

@@ -69,6 +69,21 @@ public static class AmigaDosTrackEncoder
         return Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount).ToArray();
     }
 
+    // UAE normal-track entries carry one track's sectors, including any extra
+    // cylinder. Use their physical track number in the AmigaDOS headers.
+    internal static byte[] EncodeTrack(ReadOnlySpan<byte> sectors, int trackNumber)
+    {
+        var track = CreateUnformattedTrack();
+        for (var physicalIndex = 0; physicalIndex < PhysicalSectorOrder.Length; physicalIndex++)
+        {
+            var sector = PhysicalSectorOrder[physicalIndex];
+            EncodeSector(sectors.Slice(sector * AmigaDiskGeometry.SectorSize, AmigaDiskGeometry.SectorSize),
+                track.AsSpan(physicalIndex * EncodedSectorBytes, EncodedSectorBytes),
+                trackNumber, sector, AmigaDiskGeometry.SectorsPerTrack - physicalIndex);
+        }
+        return track;
+    }
+
     private static void EncodeSector(ReadOnlySpan<byte> source, Span<byte> destination, int trackNumber, int sector, int sectorsUntilGap)
     {
         destination.Fill(0xAA);

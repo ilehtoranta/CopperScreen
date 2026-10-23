@@ -22,6 +22,13 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Nitro replay](COPPERSTART_NITRO_2026-10-23.md) adds supplied 166-track
+extended-ADF boot, human-driver name/car selection and first-race acceleration
+and steering. CopperDisk now preserves additional cylinders and admits empty
+raw tracks; the shared Copper68k development package corrects memory BTST's IPL
+sample phase. Both CopperStart and native Kickstart 1.3 reach gameplay. The ROM
+is unchanged. Race completion, later tracks and multiplayer remain unqualified.
+
 The [Lemmings replay](COPPERSTART_LEMMINGS_2026-10-23.md) adds supplied Skid
 Row two-ADF boot, disk swapping, mouse-controlled Fun 1 gameplay, P pause/resume,
 live digger assignment and terrain removal, 100% rescue completion and

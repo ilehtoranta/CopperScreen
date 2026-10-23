@@ -14,16 +14,15 @@ public static class AmigaDosTrackDecoder
 {
     private const ushort SyncWord = 0x4489;
     private const uint MfmDataMask = 0x5555_5555;
-    private const int TrackCount = AmigaDiskGeometry.CylinderCount * AmigaDiskGeometry.HeadCount;
     private const int EncodedSectorBytesAfterSync = 0x43C;
     private const int EncodedSectorBitsAfterSync = EncodedSectorBytesAfterSync * 8;
 
     /// <summary>
     /// Decodes a full disk of encoded track bytes into an AmigaDOS sector image.
     /// </summary>
-    /// <param name="ownedTrackBytes">Exactly <see cref="AmigaDiskGeometry.TrackCount"/> encoded track byte arrays. Null entries are treated as unformatted tracks.</param>
+    /// <param name="ownedTrackBytes">One to 168 encoded track byte arrays. Null entries are treated as unformatted tracks.</param>
     /// <param name="hasCompleteDecodedSectorData">Set to <see langword="true"/> when every sector was decoded.</param>
-    /// <returns>A decoded 880 KiB sector image. Missing sectors are zero-filled.</returns>
+    /// <returns>A sector image covering the supplied tracks. Missing sectors are zero-filled.</returns>
     public static byte[] DecodeBestEffort(IReadOnlyList<byte[]?> ownedTrackBytes, out bool hasCompleteDecodedSectorData)
     {
         ArgumentNullException.ThrowIfNull(ownedTrackBytes);
@@ -40,20 +39,20 @@ public static class AmigaDosTrackDecoder
     /// Decodes a full disk of encoded tracks into an AmigaDOS sector image.
     /// </summary>
     /// <typeparam name="T">The encoded track type.</typeparam>
-    /// <param name="encodedTracks">Exactly <see cref="AmigaDiskGeometry.TrackCount"/> encoded tracks.</param>
+    /// <param name="encodedTracks">One to 168 encoded tracks.</param>
     /// <param name="hasCompleteDecodedSectorData">Set to <see langword="true"/> when every sector was decoded.</param>
-    /// <returns>A decoded 880 KiB sector image. Missing sectors are zero-filled.</returns>
+    /// <returns>A sector image covering the supplied tracks. Missing sectors are zero-filled.</returns>
     public static byte[] DecodeBestEffort<T>(IReadOnlyList<T> encodedTracks, out bool hasCompleteDecodedSectorData)
         where T : IAmigaTrack
     {
         ArgumentNullException.ThrowIfNull(encodedTracks);
-        if (encodedTracks.Count != TrackCount)
+        if (encodedTracks.Count is 0 or > AmigaDiskGeometry.MaximumPreservedTrackCount)
         {
-            throw new ArgumentException($"Exactly {TrackCount} encoded tracks are required.", nameof(encodedTracks));
+            throw new ArgumentException($"Between 1 and {AmigaDiskGeometry.MaximumPreservedTrackCount} encoded tracks are required.", nameof(encodedTracks));
         }
 
-        var data = new byte[AmigaDiskGeometry.StandardAdfSize];
-        var decodedSectors = new bool[TrackCount * AmigaDiskGeometry.SectorsPerTrack];
+        var data = new byte[encodedTracks.Count * AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize];
+        var decodedSectors = new bool[encodedTracks.Count * AmigaDiskGeometry.SectorsPerTrack];
         var decodedSectorCount = 0;
         for (var trackNumber = 0; trackNumber < encodedTracks.Count; trackNumber++)
         {
@@ -81,7 +80,7 @@ public static class AmigaDosTrackDecoder
     public static int DecodeTrackBestEffort(IAmigaTrack track, int cylinder, int head, Span<byte> destinationTrackData)
     {
         ArgumentNullException.ThrowIfNull(track);
-        if (cylinder < 0 || cylinder >= AmigaDiskGeometry.CylinderCount)
+        if (cylinder < 0 || cylinder >= AmigaDiskGeometry.MaximumPreservedTrackCount / AmigaDiskGeometry.HeadCount)
         {
             throw new ArgumentOutOfRangeException(nameof(cylinder));
         }
@@ -160,7 +159,6 @@ public static class AmigaDosTrackDecoder
         var trackNumber = (int)((header >> 16) & 0xFF);
         var sector = (int)((header >> 8) & 0xFF);
         if (trackNumber != expectedTrackNumber ||
-            (uint)trackNumber >= TrackCount ||
             (uint)sector >= AmigaDiskGeometry.SectorsPerTrack)
         {
             return;
