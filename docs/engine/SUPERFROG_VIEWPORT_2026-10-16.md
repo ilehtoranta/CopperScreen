@@ -81,5 +81,22 @@ with rows doubled to 712×570 and a proportional 356×285 thumbnail. There is no
 additional crop, retouching or recoloring. The caption still says attract mode.
 The reproduction script and [website provenance](../WEBSITE.md) identify the new
 source; the historical September capture retains its original attribution.
-Gallery generation validates all 18 entries. The replacement is included on
-this development branch; GitHub Pages deployment follows the main-branch workflow.
+Gallery generation validates all 18 entries. GitHub Pages deployment follows
+the main-branch workflow.
+
+## Clean main integration
+
+The focused integration onto main base `a4e80b6` preserves main's published
+Copper68k **1.5.1** pin. The [separate integration record](SUPERFROG_MAIN_2026-10-16.json)
+identifies its fresh clean-checkout binaries and replays; the development-branch
+CPU version and original results above retain their own provenance.
+
+The clean Release build has zero warnings/errors. Engine tests report **1,084
+passed**, host tests **172 passed / six optional native skips**, and disk tests
+**74 passed**, with no failures. The optional skips are unavailable coverage.
+The 8,000-field CopperStart batch/scalar replays match all **675** captures.
+Both 12,000-field opening-level replays, under CopperStart and native Kickstart,
+retain the reviewed menu, movement, collection and jump responses. All 135
+attract images and all 101 images in each gameplay replay are identical to the
+original corrected captures. The field-7,320 website source BMP is byte-for-byte
+identical, so the prepared image and thumbnail also represent the main candidate.

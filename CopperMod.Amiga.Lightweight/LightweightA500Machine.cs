@@ -1512,13 +1512,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     internal bool DispatchPendingCpuInterrupt()
     {
-        if (_interruptPinLevel <= 0)
-            return false;
-
         var interruptMask = (_cpu.State.StatusRegister >> 8) & 0x07;
-        if (_interruptPinLevel <= interruptMask)
-            return false;
-
+        // IPL sampling continues while a request is masked or inactive. Skipping
+        // those samples leaves the previous request latched in the CPU and can
+        // recognize a later assertion before its own setup window has elapsed.
         var recognition = _cpu as IM68000InterruptRecognition;
         if (recognition != null &&
             !recognition.HasRecognizedInterrupt(
@@ -1528,6 +1525,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         {
             return false;
         }
+
+        if (_interruptPinLevel <= 0 || _interruptPinLevel <= interruptMask)
+            return false;
 
         _cpu.RequestInterrupt(
             _interruptPinLevel,

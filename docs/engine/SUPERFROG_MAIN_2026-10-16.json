@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "status": "focused-main-integration-verified",
+  "mainBaseCommit": "a4e80b68a7b58e6c12b940b9d786b2ac73757965",
+  "fixCandidateCommit": "da8bb0702c0cd425db7b2aed622ae8922c37d715",
+  "originalFixCommit": "726bebbdae155e968e509cf72f0d6f108cf1721f",
+  "cpuPackage": "1.5.1",
+  "packageSource": "https://api.nuget.org/v3/index.json",
+  "sourceCoreSha256": "9841553f91f38f697c12a34ce29cecc3addb7b7693caef6abfe3616146ab82fc",
+  "productionBuild": {
+    "command": "dotnet build CopperScreen.slnx -c Release",
+    "cleanCheckout": true,
+    "warnings": 0,
+    "errors": 0,
+    "exitCode": 0
+  },
+  "tests": {
+    "engine": {
+      "trx": "test-results/superfrog-main-engine.trx",
+      "sha256": "1a6d0431bd7b159d54fd00127e095ba6cc63faea0ee5f7552cd556114ee49d84",
+      "passed": 1084,
+      "failed": 0,
+      "skipped": 0
+    },
+    "host": {
+      "trx": "test-results/superfrog-main-host.trx",
+      "sha256": "469d6694f1b3a69a0e4d373bd9d3db2f329422106384357433eac0f33f5bc06a",
+      "passed": 172,
+      "failed": 0,
+      "skipped": 6
+    },
+    "disk": {
+      "trx": "test-results/superfrog-main-disk.trx",
+      "sha256": "6be3a3a505cc33cf94be84e068624844b5bb729dc69057f9b5065eaaa9f12cd3",
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "replays": [
+    {
+      "name": "attract-copperstart",
+      "manifest": "attract-copperstart/run.json",
+      "manifestSha256": "f1d147327a4621a92397f33da547eb962bbb164541509e8e3ad6127d304ac745",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-p1-04\\rom3-candidate\\CopperStart-DiskBoot.rom",
+        "sha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\Superfrog_35.zip",
+        "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487",
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      "input": null,
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "411e593ca79c267e93e7c919ed5e82ec826b83f7915e74f444ff376f67f8f464",
+        "CopperMod.Amiga.Lightweight.dll": "d898416e2908b8dacd98806144509be7eca4a41871c360f53b4822a53b8fb924",
+        "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+        "CopperDisk.dll": "5ab487154134ef57473fbefef687142c01d37788d0bcfb31d485ed381428e693"
+      },
+      "fields": 8000,
+      "interval": 60,
+      "captureFiles": 675,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "8000",
+        "completed": "8000",
+        "fps": "147,59",
+        "cycle": "1136603532",
+        "cpu": "0x06082E763E543BEB",
+        "hardware": "0x09ECDEC140F50454",
+        "output": "0x786DC0CA4ADDB24A",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "74029272",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "name": "attract-scalar",
+      "manifest": "attract-scalar/run.json",
+      "manifestSha256": "dc7436e303799bb2067978da006e7696d497f36353f24d46bed69ede61c15f7a",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-p1-04\\rom3-candidate\\CopperStart-DiskBoot.rom",
+        "sha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\Superfrog_35.zip",
+        "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487",
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      "input": null,
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "411e593ca79c267e93e7c919ed5e82ec826b83f7915e74f444ff376f67f8f464",
+        "CopperMod.Amiga.Lightweight.dll": "d898416e2908b8dacd98806144509be7eca4a41871c360f53b4822a53b8fb924",
+        "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+        "CopperDisk.dll": "5ab487154134ef57473fbefef687142c01d37788d0bcfb31d485ed381428e693"
+      },
+      "fields": 8000,
+      "interval": 60,
+      "captureFiles": 675,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "8000",
+        "completed": "8000",
+        "fps": "147,53",
+        "cycle": "1136603532",
+        "cpu": "0x06082E763E543BEB",
+        "hardware": "0x09ECDEC140F50454",
+        "output": "0x786DC0CA4ADDB24A",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "allocated": "74023032",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "name": "gameplay-copperstart",
+      "manifest": "gameplay-copperstart/run.json",
+      "manifestSha256": "6f2a18acfa822d4e8d7275d8fad13ea15beee1e5455f155a02cc5faa85119888",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperos-p1-04\\rom3-candidate\\CopperStart-DiskBoot.rom",
+        "sha256": "1950255822e4d4571dc9d96d510c792d57d3c801fb11568f20155527fc3de444"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\Superfrog_35.zip",
+        "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487",
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-superfrog-gameplay.json",
+        "sha256": "6597e41407309cc6e7f2f740080edd511aeac3403b064810e975b1b6d78d1a20",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "411e593ca79c267e93e7c919ed5e82ec826b83f7915e74f444ff376f67f8f464",
+        "CopperMod.Amiga.Lightweight.dll": "d898416e2908b8dacd98806144509be7eca4a41871c360f53b4822a53b8fb924",
+        "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+        "CopperDisk.dll": "5ab487154134ef57473fbefef687142c01d37788d0bcfb31d485ed381428e693"
+      },
+      "fields": 12000,
+      "interval": 120,
+      "captureFiles": 505,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "12000",
+        "completed": "12000",
+        "fps": "180,89",
+        "cycle": "1705011532",
+        "cpu": "0xB741F5100A05127D",
+        "hardware": "0x75287DE40241483A",
+        "output": "0x7D1FF4981E70DA39",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "55559008",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    {
+      "name": "gameplay-native",
+      "manifest": "gameplay-native/run.json",
+      "manifestSha256": "f370193fff73a0b42a40276e3fdf870779c01d5181dadb52602cc03bbf539dfa",
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\Superfrog_35.zip",
+        "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487",
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-superfrog-gameplay.json",
+        "sha256": "6597e41407309cc6e7f2f740080edd511aeac3403b064810e975b1b6d78d1a20",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "411e593ca79c267e93e7c919ed5e82ec826b83f7915e74f444ff376f67f8f464",
+        "CopperMod.Amiga.Lightweight.dll": "d898416e2908b8dacd98806144509be7eca4a41871c360f53b4822a53b8fb924",
+        "Copper68k.dll": "99173918a4da1cd5446d8f6e115e6b5c4d0a8f1c7f9173261c754988d3cbcb8f",
+        "CopperDisk.dll": "5ab487154134ef57473fbefef687142c01d37788d0bcfb31d485ed381428e693"
+      },
+      "fields": 12000,
+      "interval": 120,
+      "captureFiles": 505,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "12000",
+        "completed": "12000",
+        "fps": "185,18",
+        "cycle": "1699964974",
+        "cpu": "0xBC832B6EC08EB1C7",
+        "hardware": "0xE5D439B4BACD0671",
+        "output": "0x48C1151B309791A4",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "allocated": "55581680",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    }
+  ],
+  "batchScalarParity": {
+    "comparedFiles": 675,
+    "identicalFiles": 675,
+    "differences": []
+  },
+  "originalQualificationImageComparison": {
+    "attract-copperstart": {
+      "referenceManifest": "artifacts/superfrog-viewport-2026-10-16/candidate-copperstart/run.json",
+      "imagesCompared": 135,
+      "identicalImages": 135
+    },
+    "gameplay-copperstart": {
+      "referenceManifest": "artifacts/superfrog-viewport-2026-10-16/gameplay-probe/run.json",
+      "imagesCompared": 101,
+      "identicalImages": 101
+    },
+    "gameplay-native": {
+      "referenceManifest": "artifacts/superfrog-viewport-2026-10-16/gameplay-native/run.json",
+      "imagesCompared": 101,
+      "identicalImages": 101
+    }
+  },
+  "website": {
+    "sourceBmpSha256": "a4063a8c5744392a96749ab306358ef0526ab0ffd2d89b12fb659689ac8b2a9a",
+    "imageMatchesOriginalCorrectedCapture": true
+  },
+  "artifactRoot": "artifacts/superfrog-main-2026-10-16",
+  "scope": "Fresh clean-main validation with the existing published CPU pin. Original development-branch results retain their own hashes and source context. Host optional native skips are unavailable coverage. Same PAL OCS 68000/512+512 KiB read-only Superfrog disk-one fixture and CopperStart dev.3/native Kickstart controls. Bounded opening-level input and attract viewport only; no full-game, disk-two, audio-fidelity or formal throughput qualification."
+}

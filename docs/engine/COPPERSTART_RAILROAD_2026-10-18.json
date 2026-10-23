@@ -1,0 +1,2258 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Railroad Tycoon v855.01, original two-disk ADF",
+  "status": "PARTIAL: DOS startup and menu corrected; game fails at missing native intuition.library; gameplay unqualified",
+  "publishedBranch": "codex/copperstart-railroad-20261018",
+  "artifactRoot": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18",
+  "sourceBase": "185430afc13cbe98dd349f9972788b68b99bd592",
+  "copperStartCommit": "ffdeb9ab1d3a28e84fd299b7900d3714cb050705",
+  "rom": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+  },
+  "compositionManifest": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\disk-boot-test-manifest.json",
+    "bytes": 6428,
+    "sha256": "4fcb533daeee2d01d36b7d304f13661130a8e56168c586685b077e284f057988",
+    "data": {
+      "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+      "romBytes": 524288,
+      "codeBytes": 462852,
+      "graphicsBytes": 26868,
+      "graphicsResidentAddress": 16744448,
+      "graphicsSupportedVectors": [
+        -894,
+        -870,
+        -864,
+        -858,
+        -822,
+        -816,
+        -804,
+        -498,
+        -492,
+        -486,
+        -480,
+        -468,
+        -462,
+        -456,
+        -402,
+        -390,
+        -384,
+        -360,
+        -354,
+        -348,
+        -342,
+        -300,
+        -294,
+        -282,
+        -276,
+        -270,
+        -240,
+        -228,
+        -204,
+        -198,
+        -144,
+        -120,
+        -84,
+        -78,
+        -72,
+        -66,
+        -54,
+        -30,
+        -24,
+        -18,
+        -12,
+        -6
+      ],
+      "graphicsEntries": {
+        "-1056": 16745254,
+        "-1050": 16745256,
+        "-1044": 16745258,
+        "-1038": 16745260,
+        "-1032": 16745262,
+        "-1026": 16745264,
+        "-1020": 16745266,
+        "-1008": 16745268,
+        "-1002": 16745270,
+        "-996": 16745272,
+        "-990": 16745274,
+        "-984": 16745276,
+        "-978": 16745278,
+        "-972": 16745280,
+        "-966": 16745282,
+        "-960": 16745284,
+        "-954": 16745286,
+        "-948": 16745288,
+        "-942": 16745290,
+        "-936": 16745292,
+        "-930": 16745294,
+        "-924": 16745296,
+        "-918": 16745298,
+        "-900": 16745300,
+        "-894": 16764530,
+        "-888": 16745304,
+        "-882": 16745306,
+        "-876": 16745308,
+        "-870": 16764552,
+        "-864": 16764574,
+        "-858": 16764596,
+        "-852": 16745316,
+        "-840": 16745318,
+        "-834": 16745320,
+        "-828": 16745322,
+        "-822": 16764618,
+        "-816": 16764640,
+        "-810": 16745328,
+        "-804": 16764662,
+        "-798": 16745332,
+        "-792": 16745334,
+        "-786": 16745336,
+        "-780": 16745338,
+        "-774": 16745340,
+        "-768": 16745342,
+        "-762": 16745344,
+        "-756": 16745346,
+        "-732": 16745348,
+        "-726": 16745350,
+        "-720": 16745352,
+        "-714": 16745354,
+        "-708": 16745356,
+        "-702": 16745358,
+        "-696": 16745360,
+        "-690": 16745362,
+        "-684": 16745364,
+        "-678": 16745366,
+        "-672": 16745368,
+        "-666": 16745370,
+        "-660": 16745372,
+        "-654": 16745374,
+        "-636": 16745376,
+        "-630": 16745378,
+        "-624": 16745380,
+        "-618": 16745382,
+        "-612": 16745384,
+        "-606": 16745386,
+        "-600": 16745388,
+        "-594": 16745390,
+        "-588": 16745392,
+        "-582": 16745394,
+        "-576": 16745396,
+        "-570": 16745398,
+        "-564": 16745400,
+        "-558": 16745402,
+        "-552": 16745404,
+        "-546": 16745406,
+        "-540": 16745408,
+        "-534": 16745410,
+        "-528": 16745412,
+        "-522": 16745414,
+        "-516": 16745416,
+        "-510": 16745418,
+        "-504": 16745420,
+        "-498": 16764684,
+        "-492": 16764706,
+        "-486": 16764728,
+        "-480": 16764750,
+        "-474": 16745430,
+        "-468": 16764772,
+        "-462": 16764794,
+        "-456": 16764816,
+        "-450": 16745438,
+        "-444": 16745440,
+        "-438": 16745442,
+        "-432": 16745444,
+        "-426": 16745446,
+        "-420": 16745448,
+        "-414": 16745450,
+        "-408": 16745452,
+        "-402": 16764838,
+        "-396": 16745456,
+        "-390": 16764860,
+        "-384": 16764882,
+        "-378": 16745462,
+        "-372": 16745464,
+        "-366": 16745466,
+        "-360": 16764904,
+        "-354": 16764926,
+        "-348": 16764948,
+        "-342": 16764970,
+        "-336": 16745476,
+        "-330": 16745478,
+        "-324": 16745480,
+        "-318": 16745482,
+        "-312": 16745484,
+        "-306": 16745486,
+        "-300": 16764992,
+        "-294": 16765014,
+        "-288": 16745492,
+        "-282": 16765036,
+        "-276": 16765058,
+        "-270": 16765080,
+        "-264": 16745500,
+        "-258": 16745502,
+        "-252": 16745504,
+        "-246": 16745506,
+        "-240": 16765102,
+        "-234": 16745510,
+        "-228": 16765124,
+        "-222": 16745514,
+        "-216": 16745516,
+        "-210": 16745518,
+        "-204": 16765146,
+        "-198": 16765168,
+        "-192": 16745524,
+        "-186": 16745526,
+        "-180": 16745528,
+        "-174": 16745530,
+        "-168": 16745532,
+        "-162": 16745534,
+        "-156": 16745536,
+        "-150": 16745538,
+        "-144": 16765190,
+        "-138": 16745542,
+        "-132": 16745544,
+        "-126": 16745546,
+        "-120": 16765212,
+        "-114": 16745550,
+        "-108": 16745552,
+        "-102": 16745554,
+        "-96": 16745556,
+        "-90": 16745558,
+        "-84": 16765234,
+        "-78": 16765256,
+        "-72": 16765278,
+        "-66": 16765300,
+        "-60": 16745568,
+        "-54": 16765322,
+        "-48": 16745572,
+        "-42": 16745574,
+        "-36": 16745576,
+        "-30": 16765344,
+        "-6": 16765432,
+        "-12": 16765410,
+        "-18": 16765388,
+        "-24": 16765366
+      },
+      "runCommandStackBridgeAddress": 16771156,
+      "compiledRomSha256": "997E4C3090FBB81BC9BE038DCBFC3B90C8A458584007750681CC3342B1763682",
+      "sha256": "CE38802911F61D58A4EFD7C074B48F0C3F386A1198E2786E87E13AD7075A7D60",
+      "inputs": [
+        {
+          "file": "CopperStart-System.dll",
+          "sha256": "007D5954A47CC254D159B22C42680205F89E1CC2A873F69C882E99E1B6C36C02"
+        },
+        {
+          "file": "CopperStart.Devices.dll",
+          "sha256": "226AFC7AB9454DFE850727F4AEDD86D0D0B00FB276631F26B2D09C4A116A52F3"
+        },
+        {
+          "file": "CopperStart.Exec.dll",
+          "sha256": "3544F7D169107E3ABD5DCEEBA2CB77CAA8DF262F270F591CEE4F6387CAF42568"
+        },
+        {
+          "file": "CopperStart.Dos.dll",
+          "sha256": "A25B6A945D57718A9A469F560B3BEA76A448537C0D9835606812B1FB3A376F59"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "EABB73C88917B5C9554229AA6475FAC9761C1E30CBDA0DAF4E4488EABA1FD372"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "C42E00AF0BD22FAC66A6431D8669947A2C491589D1188BDEB9788809FDF57B0A"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "B22CD19CFD0960AE727AD18721BD419C095262BF7F5BE6A52AAB5F2F93ADF1A2"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "FA20BA35CD9013C96442EC46903A0C0F0ECEF96C852B28383E4194D5503234A1"
+        },
+        {
+          "file": "CopperMod.Amiga.Lightweight.dll",
+          "sha256": "C72A077938C26096EBF5452F29E597BA62B219B00C78F3A7D5F2E0A38678292C"
+        },
+        {
+          "file": "Copper68k.dll",
+          "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+        },
+        {
+          "file": "CopperStart.Graphics.dll",
+          "sha256": "02B7A7CD8FD7C37F551F712ACAB8543FC3072223F05C2B904CE651C3382B5348"
+        }
+      ]
+    }
+  },
+  "sourceSnapshot": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-source-snapshot.json",
+    "bytes": 248128,
+    "sha256": "a146e9f049b99ba710b72d2d114e2b37903736cd08e9482877cda8a45daf7e6e"
+  },
+  "sourceArchive": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-source-snapshot.zip",
+    "bytes": 4996175,
+    "sha256": "f9e92d3c5296a94aacc4c0776d15868de066c7497b4bf345240a55b31b7c6998"
+  },
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "sourceChanges": [
+    "internal Path with live CLI lock chain and guest RAM filesystem",
+    "non-destructive CurrentDir query and relative handler resolution",
+    "leading HUNK metadata, payload-tag attributes and header allocation flags",
+    "bounded streaming LoadSeg workspace and sequential filesystem metadata reuse",
+    "public command stack size at 4(SP) with separate private recovery word",
+    "shell program name and cli_Module before RunCommand",
+    "pr_ConsoleTask, current-console name and RAW input",
+    "standalone BltClear ULONG count, row and fill-word flags"
+  ],
+  "inputProtocol": {
+    "original": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json",
+      "bytes": 1387,
+      "sha256": "3b64c359729fb7d625c4aff113d994ca1a850a9aaa5660b54c3929abe40ecbb2"
+    },
+    "delayed": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+      "bytes": 1393,
+      "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a"
+    },
+    "change": "All events shifted by exactly 16000 fields; no guest/media modification; native controls use both original and delayed inputs"
+  },
+  "runs": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-preflight\\run.json",
+      "bytes": 35969,
+      "sha256": "3632075d2214f50d4892d6b7638a5ad6c2c6ab2e0cc5501e780367ae1100e626",
+      "role": "preceding 98BAD185 ROM, original input",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-inside-machine-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "36000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-preflight\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-inside-machine-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "sha256": "98bad185b36ac86cb8b5f83590dea113ec0182c04f286bee7cafdcc2bd755291"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json",
+        "sha256": "3b64c359729fb7d625c4aff113d994ca1a850a9aaa5660b54c3929abe40ecbb2",
+        "media": [
+          {
+            "frame": 6600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 22700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 36000,
+      "exitCode": 3762504530,
+      "completedReplay": false,
+      "summary": null,
+      "captureFrameCount": 54,
+      "captureFileCount": 270,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-scalar-preflight\\run.json",
+      "bytes": 35997,
+      "sha256": "14e51051d270583f49e47e62621da8604d8c98b48bf9484830d4c05c69d3c9a3",
+      "role": "preceding ROM scalar consistency",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-inside-machine-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "36000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-scalar-preflight\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-inside-machine-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "sha256": "98bad185b36ac86cb8b5f83590dea113ec0182c04f286bee7cafdcc2bd755291"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json",
+        "sha256": "3b64c359729fb7d625c4aff113d994ca1a850a9aaa5660b54c3929abe40ecbb2",
+        "media": [
+          {
+            "frame": 6600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 22700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 36000,
+      "exitCode": 3762504530,
+      "completedReplay": false,
+      "summary": null,
+      "captureFrameCount": 54,
+      "captureFileCount": 270,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-preflight\\run.json",
+      "bytes": 48322,
+      "sha256": "4b3f7dee2a11f51ecd791195ff52de498960721c8ed98c0044e169832235b0d5",
+      "role": "Kickstart 1.3 control, original input",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "36000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-preflight\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-input.json",
+        "sha256": "3b64c359729fb7d625c4aff113d994ca1a850a9aaa5660b54c3929abe40ecbb2",
+        "media": [
+          {
+            "frame": 6600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 22700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 36000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "36000",
+        "completed": "36000",
+        "fps": "76,40",
+        "cycle": "5115539982",
+        "cpu": "0xE633BCCBB110D3B4",
+        "hardware": "0xEC1EA0C2CB68119C",
+        "output": "0x5947B3460D6FC2EE",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "56212128",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 91,
+      "captureFileCount": 455,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-delayed\\run.json",
+      "bytes": 87021,
+      "sha256": "7e7922d7ba84e28cde191bbbce8d235db1c03b89264e5780dd2485ba88db6dc9",
+      "role": "Kickstart 1.3 control, all events delayed",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "56000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-delayed\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 56000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "56000",
+        "completed": "56000",
+        "fps": "223,48",
+        "cycle": "7957579982",
+        "cpu": "0xAA0A586749CBFA74",
+        "hardware": "0x7941ED173BA9099C",
+        "output": "0xF2DF8E75D047AEAE",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "83089120",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 141,
+      "captureFileCount": 705,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-final\\run.json",
+      "bytes": 61123,
+      "sha256": "a119822a788960bd5eadfad63315b5acf9c4710465ef7996be199f166fffa5e1",
+      "role": "EA0B9E22 intermediate failure; not final",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "56000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-final\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "sha256": "ea0b9e22490ccf5211e2affd8df7e8c2c156ec5fbd71a9c49b4b8d105f0d7e88"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 56000,
+      "exitCode": 3762504530,
+      "completedReplay": false,
+      "summary": null,
+      "captureFrameCount": 94,
+      "captureFileCount": 470,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-scalar-final\\run.json",
+      "bytes": 61151,
+      "sha256": "01476c0b500756d1f7e518e327b47316e76a5ea7d524b5422cf826af5a187ec4",
+      "role": "EA0B9E22 intermediate scalar failure",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "56000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-scalar-final\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-final\\CopperStart-DiskBoot.rom",
+        "sha256": "ea0b9e22490ccf5211e2affd8df7e8c2c156ec5fbd71a9c49b4b8d105f0d7e88"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 56000,
+      "exitCode": 3762504530,
+      "completedReplay": false,
+      "summary": null,
+      "captureFrameCount": 94,
+      "captureFileCount": 470,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-fixed\\run.json",
+      "bytes": 31262,
+      "sha256": "01143a3395de0d64e1bf3edcded7357a7a441c3f2d2b355ba3ba2983ec047f15",
+      "role": "corrected CLI ROM preflight, before first delayed event",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "16000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-fixed\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 16000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "16000",
+        "completed": "16000",
+        "fps": "148,88",
+        "cycle": "2273632002",
+        "cpu": "0x46673D8A10882162",
+        "hardware": "0x55CE356FD69C6B97",
+        "output": "0x9873ED8676DC9D51",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "23119040",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 41,
+      "captureFileCount": 205,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-fixed-scalar\\run.json",
+      "bytes": 31278,
+      "sha256": "7da14762045ee71bd2f2019f9428e78a755e1ac79c3ccdd3afe19309930740a7",
+      "role": "corrected CLI ROM scalar preflight",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "16000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-fixed-scalar\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 16000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "16000",
+        "completed": "16000",
+        "fps": "151,96",
+        "cycle": "2273632002",
+        "cpu": "0x46673D8A10882162",
+        "hardware": "0x55CE356FD69C6B97",
+        "output": "0x9873ED8676DC9D51",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "23124704",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 41,
+      "captureFileCount": 205,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-game\\run.json",
+      "bytes": 97161,
+      "sha256": "28eb3a59d67c6cf4cfe211474c6d7f4d4285d51ec4b9e429020e0505b3f93db7",
+      "role": "corrected ROM 56000-field normal replay; game remains unqualified",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "56000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-game\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 56000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "56000",
+        "completed": "56000",
+        "fps": "238,30",
+        "cycle": "7957712010",
+        "cpu": "0x694575FC553F50C7",
+        "hardware": "0x41605918A1A6440F",
+        "output": "0x9FA42D5E094F0173",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "83068264",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 141,
+      "captureFileCount": 705,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-game-scalar\\run.json",
+      "bytes": 97177,
+      "sha256": "1523ea0f27afd781d8f56dc4dd63cb8dc213eda7d340185e0fb407cf36baa581",
+      "role": "corrected ROM 56000-field scalar replay; game remains unqualified",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip#/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "--frames",
+        "56000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-cli-game-scalar\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+        "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+        "entryBytes": 901120,
+        "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\railroad-delayed-input.json",
+        "sha256": "02bb40f5a43de5213bb61ac73968dd8fd460ceabb354534c975661525ce90c5a",
+        "media": [
+          {
+            "frame": 22600,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+            "sha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+            "entryBytes": 901120,
+            "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+          },
+          {
+            "frame": 38700,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+            "sha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+            "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+            "entryBytes": 901120,
+            "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+          }
+        ]
+      },
+      "requestedFrames": 56000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "56000",
+        "completed": "56000",
+        "fps": "228,61",
+        "cycle": "7957712010",
+        "cpu": "0x694575FC553F50C7",
+        "hardware": "0x41605918A1A6440F",
+        "output": "0x9FA42D5E094F0173",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "83081096",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 141,
+      "captureFileCount": 705,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\inside-regression-cli\\run.json",
+      "bytes": 29921,
+      "sha256": "dac65e5b3e85ce62e459d8b51e61871d6173f615f72a4827af86e5fd5c20513d",
+      "role": "retained Inside the Machine regression",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\DESiRE-InsideTheMachine-v1.0.1.zip#/DESiRE-InsideTheMachine.adf",
+        "--frames",
+        "18000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\inside-regression-cli\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\DESiRE-InsideTheMachine-v1.0.1.zip",
+        "sha256": "07842172b2db35e3a5dff1b5f4669e8e27c238e4832bbdea1ca9be0df1060d96",
+        "entry": "DESiRE-InsideTheMachine.adf",
+        "entryBytes": 901120,
+        "entrySha256": "e03a8713be0ca4e0ad899553fe8cffec3c6667804190a3415809b9b7d95a6f2e"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": null,
+      "requestedFrames": 18000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "fps": "163,99",
+        "cycle": "2557836004",
+        "cpu": "0x9264F8FAAF081263",
+        "hardware": "0xE592ADCFCB86009E",
+        "output": "0xF2D17EA8DDFE9E85",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "25880696",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 46,
+      "captureFileCount": 230,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\full-contact-regression-cli\\run.json",
+      "bytes": 40238,
+      "sha256": "d6981ca29368a6687cefcc15d66b54a1afe1195f983a97f4b79fc0d10842c841",
+      "role": "retained Full Contact regression",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+        "--frames",
+        "24000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\full-contact-regression-cli\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-18\\full-contact-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip",
+        "sha256": "03684bb88a926c8857545af8c0a37b53ab6babc820a50417f36db4fc97e41671",
+        "entry": "Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+        "entryBytes": 901120,
+        "entrySha256": "e45d6ff196c54aee35419421836373ec0efb91dbcecb2b388b678f86be2fba44"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-18\\full-contact-input.json",
+        "sha256": "6b39cf55f32e4eec46ca6c808840662f9c471597f350ab4b2517778ef9d77258",
+        "media": [
+          {
+            "frame": 12450,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].zip",
+            "sha256": "0e6fbf00c3b829c09f2ed095cbcae66cc7e94408da1cfe97e82195aae749d1ef",
+            "entry": "Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].adf",
+            "entryBytes": 901120,
+            "entrySha256": "a211f7d6722cba13ad8f5b6ddc64f15764b22e769bbca27a103ab361571f57dd"
+          }
+        ]
+      },
+      "requestedFrames": 24000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "fps": "185,86",
+        "cycle": "3401962782",
+        "cpu": "0xA8FDF152C766B747",
+        "hardware": "0x500A21218C8A041E",
+        "output": "0x9C479138AE0DF275",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "allocated": "36887896",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 61,
+      "captureFileCount": 305,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\lotus3-regression-cli\\run.json",
+      "bytes": 51542,
+      "sha256": "1b4e493cf95f0dcb3307b270e950be4ce772bfc7f63ed7fdf6834b4dde69554e",
+      "role": "retained Lotus III regression",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+        "--frames",
+        "32000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\lotus3-regression-cli\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-18\\lotus3-race-input.json"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+        "sha256": "c8241acd91206a0d857cd589da2ecdeb4084bd270e597dee4c0eb7d7885fc30c",
+        "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+        "entryBytes": 901120,
+        "entrySha256": "557979cb5fa775e1fa2e2864bb4800667fb3a24b782daa6900157fa6990d8546"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-18\\lotus3-race-input.json",
+        "sha256": "258c872fe24a35da6355497cb4a507b9c32e7b9ca00400cf698e92af0347306c",
+        "media": [
+          {
+            "frame": 5100,
+            "drive": 0,
+            "path": "C:\\Data\\TestImages\\Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+            "sha256": "699d6c7a9562184f4daba8d23ff6c4cbfd28a3e1863eba5c764ba96d735abd9c",
+            "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+            "entryBytes": 901120,
+            "entrySha256": "cde309be4d5d6508ddf4c825f174ff990f61552ce233999b5723939334996887"
+          }
+        ]
+      },
+      "requestedFrames": 32000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "32000",
+        "completed": "32000",
+        "fps": "188,82",
+        "cycle": "4547264000",
+        "cpu": "0xC6F8A6D085137755",
+        "hardware": "0xA25E6963CDF61C70",
+        "output": "0xA812E4D2CD28E1F1",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "47668688",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 81,
+      "captureFileCount": 405,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\arte-regression-cli\\run.json",
+      "bytes": 62134,
+      "sha256": "be78267b0c2d47195e0a7b6b9cfdb4cb3afd85a8f28b60c554e7e7f6b99bb1b1",
+      "role": "retained Arte regression",
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-audit2-2026-10-16\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Arte (Sanity).zip#/Arte (Sanity).adf",
+        "--frames",
+        "40000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\arte-regression-cli\\captures",
+        "--boot-probe-interval",
+        "400",
+        "--boot-probe-extended"
+      ],
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed\\CopperStart-DiskBoot.rom",
+        "sha256": "ce38802911f61d58a4efd7c074b48f0c3f386a1198e2786e87e13ad7075a7d60"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Arte (Sanity).zip",
+        "sha256": "f09f2d661fdf4af786a28fa162ae0c687d89475bc2550ec190d33efa2927acb5",
+        "entry": "Arte (Sanity).adf",
+        "entryBytes": 901120,
+        "entrySha256": "eb7521fc1de886c69706ab0e21898a89199fb12256db40743f3ed190957e896a"
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "binaries": {
+        "CopperMod.Amiga.Lightweight.Runner.dll": "67a54cc522249fc7da76bf813017facf281c47c1ce5d1054d7710a26a37cbaec",
+        "CopperMod.Amiga.Lightweight.dll": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+        "Copper68k.dll": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+        "CopperDisk.dll": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+      },
+      "input": null,
+      "requestedFrames": 40000,
+      "exitCode": 0,
+      "completedReplay": true,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "40000",
+        "completed": "40000",
+        "fps": "218,16",
+        "cycle": "5684080002",
+        "cpu": "0xEB9DCAE23AB8A9AE",
+        "hardware": "0x0EFF401978136A7A",
+        "output": "0x42FEA5723D49FDA8",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "55667080",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFrameCount": 101,
+      "captureFileCount": 505,
+      "review": "See Markdown milestones; automatic raw classification remains unreviewed"
+    }
+  ],
+  "tests": {
+    "native-cli-fixed.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\native-cli-fixed.trx",
+      "bytes": 155021,
+      "sha256": "903d81dd20522b189ad6b657b8d8055e69227e1fcffcad6a8fe1524f0b7d7c6c",
+      "counters": {
+        "total": "87",
+        "executed": "87",
+        "passed": "87",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "cli-metadata-before-corrected.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\cli-metadata-before-corrected.trx",
+      "bytes": 8678,
+      "sha256": "8a671d3d65e662122ca9c0d901c7e4fbae0ce826e8e66187307d8dd936c99d81",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "0",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "native-final-corrected.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\native-final-corrected.trx",
+      "bytes": 152715,
+      "sha256": "4ed46166f9e03b33c1d02589f774c8d0ebfbf2bc7c3e2854935cd0ad49b112b0",
+      "counters": {
+        "total": "86",
+        "executed": "86",
+        "passed": "86",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "run-command-semantic-final-source.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\run-command-semantic-final-source.trx",
+      "bytes": 146888,
+      "sha256": "ee797f8536060f5da3362b1f74cfb644cbace12b76cfcc7ee6a966435c2f2bb5",
+      "counters": {
+        "total": "90",
+        "executed": "90",
+        "passed": "90",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "stream-directory-semantic-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\stream-directory-semantic-final.trx",
+      "bytes": 53641,
+      "sha256": "2f1d862d078206260fd7ad4a25a786b2ff0cf419c8b5404774368c555ce027cb",
+      "counters": {
+        "total": "33",
+        "executed": "33",
+        "passed": "33",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "console-alias-semantic-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\console-alias-semantic-final.trx",
+      "bytes": 73590,
+      "sha256": "c6cc7fe4ba34400ad2012f2c4aa9123471bf388be8323c68d269fa3261e79fd2",
+      "counters": {
+        "total": "46",
+        "executed": "46",
+        "passed": "46",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "filesystem-seeks-after.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\filesystem-seeks-after.trx",
+      "bytes": 15600,
+      "sha256": "ae5a7fe81d4a7ab841716977a92fee715161076927d88f4bf2139056a037504d",
+      "counters": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "filesystem-seeks-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\filesystem-seeks-before.trx",
+      "bytes": 8844,
+      "sha256": "2ab3f99873ebbac5e5f9054cee49a55ed37b5879ee11a1108135f9647f5cd733",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "0",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "hunk-memory-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\hunk-memory-before.trx",
+      "bytes": 4955,
+      "sha256": "35f4de0ff2a51455212d2a31d03017deb80a0ff23b1332cd030cbb682dbb0829",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "hunk-flags-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\hunk-flags-before.trx",
+      "bytes": 10176,
+      "sha256": "f454caf1978426d7aff91559202cdf7a0e6484ca65e29df78f8271f87ec251a0",
+      "counters": {
+        "total": "3",
+        "executed": "3",
+        "passed": "1",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "hunk-leading-metadata-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\hunk-leading-metadata-before.trx",
+      "bytes": 4913,
+      "sha256": "e25365db53a9c6a9aa0295f0894386552533ce77ee047ecbf5a1e09d15f7c127",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "chip-placement-before-corrected.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\chip-placement-before-corrected.trx",
+      "bytes": 6772,
+      "sha256": "7a73d3c1b3340c0598c0170d863f4a7227d6e7ced76e732389f8a0edb7acfc7f",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "1",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "stack-abi-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\stack-abi-before.trx",
+      "bytes": 4945,
+      "sha256": "a73001f86fb59cb2ef4c3070a383bd9de033f878bb3ac83aaf36319eb312499d",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "path-before-corrected.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\path-before-corrected.trx",
+      "bytes": 16362,
+      "sha256": "95de865840a273d85514be382b7d855452c87dff7d13e39e215c8ca60b2e23da",
+      "counters": {
+        "total": "4",
+        "executed": "4",
+        "passed": "0",
+        "failed": "4",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "console-alias-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\console-alias-before.trx",
+      "bytes": 8736,
+      "sha256": "a5c44cd5f75d560032bd1f9a8f1ef28bce1d8f5bfded37c7112c3893271139c6",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "0",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "bltclear-native-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\bltclear-native-before.trx",
+      "bytes": 9580,
+      "sha256": "39e4b9425acbab2ed2d86a2586a066116382dc6c803e21c89a258aeeeffb47f4",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "0",
+        "failed": "2",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "bltclear-native-after-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\bltclear-native-after-final.trx",
+      "bytes": 5217,
+      "sha256": "c974c27c96a1f259d4c85a4e4a8466dc720022b4f7f0ba0b604dacc36af791e7",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "run-command-input-68000-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\run-command-input-68000-final.trx",
+      "bytes": 20267,
+      "sha256": "bed8ee22c3b921927c24121f93396ea022c85e466bcf54e853c0704798f90e7e",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "run-command-input-020040-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests\\run-command-input-020040-final.trx",
+      "bytes": 38915,
+      "sha256": "d9642d5f0910998168c5e570fc17770b35c2492027ecc7f3c8c306bd9af71407",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  },
+  "builds": {
+    "rom-cli-fixed-build.log": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed-build.log",
+      "bytes": 738,
+      "sha256": "458cf889cb2445a5059e0379117b949a11e57f7a2d32e08a07d9aa1666ade4cb"
+    },
+    "copperstart-release-cli.log": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperstart-release-cli.log",
+      "bytes": 4975,
+      "sha256": "e1a416353b08012a8031ee289d76a11aa41abef266703aaeb6c0f38e1c433936"
+    },
+    "copperscreen-release-final-restored.log": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\copperscreen-release-final-restored.log",
+      "bytes": 2330,
+      "sha256": "8ff85c1a59bf9f7bbc3235a7e746c28ccd53495de0315787902fc54229a49aad"
+    }
+  },
+  "remainingScope": "Native intuition.library is not published by this standalone ROM. At field 20006 the game requests version zero and receives NULL, then returns to the CLI. No credits/map/newspaper/gameplay qualification with CopperStart; disk-change integration and later APIs remain unverified.",
+  "sourceReferences": [
+    "https://www.pagetable.com/docs/amigados_tripos/amigados_manual.pdf",
+    "https://wiki.amigaos.net/wiki/Writing_a_UserShell",
+    "https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference",
+    "https://developer.amigaos3.net/sites/default/files/downloads/2024-10/Amiga_ROM_Kernel_Reference_Manual_DOS.pdf",
+    "https://d0.se/autodocs/graphics.library/BltClear"
+  ],
+  "traceEvidence": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-name-trace.log",
+      "bytes": 4940,
+      "sha256": "bffb26d173651abfbc61593aa05058ad4465f1338cf98cde2567c4cd466d65cb"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-name-trace\\Program.cs",
+      "bytes": 3377,
+      "sha256": "e59021a225da0417c5d53219d227e44e5313cf673b0b6848171958066e33f709"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-name-trace-chip.bin",
+      "bytes": 524288,
+      "sha256": "83642b499d74878485c6cae68c00e778ddaa9623ce32595421074f276c06a378"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-name-trace-slow.bin",
+      "bytes": 524288,
+      "sha256": "a353c6a8a17bd0d44b6bdd5b4f0c91ca919e280fb3ed13080ab8c165e9da21bf"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-fixed-trace.log",
+      "bytes": 2271,
+      "sha256": "92ceef691824c3d8ab2ed64fbccf20d3d9612b9e73e8cb9209718ed2d594d839"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-fixed-trace\\Program.cs",
+      "bytes": 3448,
+      "sha256": "c315ba373c40e360f6fbef963f55651a4135cd61b4d700f0e1cf6128b6e423a0"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-menu-trace.log",
+      "bytes": 2679,
+      "sha256": "66f37b5e40aa92f555943a3b82d285748d528f023829b8ca7a9823f933219c0f"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-menu-trace\\Program.cs",
+      "bytes": 3791,
+      "sha256": "6e1f573daf63ee269261a301e00b74d12f4e698fd15d189f1e54cd5538037ed3"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-menu-trace-chip.bin",
+      "bytes": 524288,
+      "sha256": "44150b5d56eeec82484779a59026ccc47ad95c186eb579d59f010971f3a73244"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\cli-menu-trace-slow.bin",
+      "bytes": 524288,
+      "sha256": "c2208dd6ad1997bbc09b9215935e6408dc584190108d439c97327061b5969285"
+    }
+  ],
+  "coverageNotes": [
+    "Native fixture engine is C72A0779; media runner engine is 5A69574F; both retain F445A7D2 CPU. Exact hashes are in manifests.",
+    "Native exact-ROM suite excludes 14 standalone polled-reader cases; no fresh pass claim for them.",
+    "Host semantic, compiled CPU fixture, native ROM and real-media runs are distinct and overlapping coverage is not summed.",
+    "No CPU or chipset changes, host OS shims, commercial ROM/media commits or package release.",
+    "Native delayed raw report used the receipt label copperstart; its actual ROM hash and command identify the Kickstart control. This label only selects receipt interpretation."
+  ],
+  "modeParity": {
+    "frames": 56000,
+    "captureFilesCompared": 705,
+    "allCaptureFilesEqual": true,
+    "finalFingerprints": {
+      "cycle": "7957712010",
+      "cpu": "0x694575FC553F50C7",
+      "hardware": "0x41605918A1A6440F",
+      "output": "0x9FA42D5E094F0173",
+      "completed": "56000"
+    },
+    "interpretation": "Consistency only; both modes encounter missing Intuition and do not reach gameplay"
+  },
+  "producerProjects": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\dos-producer\\Producer.csproj",
+      "bytes": 4411,
+      "sha256": "bb98246ecb6126654ed3e29b2e7bc88b0aa39b94eceaf570924c0c89acd068fb"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\system-producer\\Producer.csproj",
+      "bytes": 4608,
+      "sha256": "b76409f5663d661122ebd9572c7f3bde028283aeb451185277ee95fde7ff1b32"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-producer\\Producer.csproj",
+      "bytes": 2711,
+      "sha256": "5c43a30c52b7bfde784d6427da8b7fa1ab1c5bbe2432a1177d6ec26db83a76a9"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-cli-fixed\\Fixture.csproj",
+      "bytes": 6578,
+      "sha256": "a23329c83cc3bf18a6b95da5b7e722e3d89fad339a9c5dd6d667adb26088ceca"
+    }
+  ],
+  "checkedSourceArchive": {
+    "files": 1249,
+    "sha256": "f9e92d3c5296a94aacc4c0776d15868de066c7497b4bf345240a55b31b7c6998"
+  },
+  "nativeFixtureCommand": [
+    "dotnet",
+    "vstest",
+    "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-cli-fixed\\bin\\Release\\net10.0\\CopperStart.Floppy.Native.Tests.dll",
+    "--TestCaseFilter:FullyQualifiedName!~NativeFloppyRomTests",
+    "--Logger:trx;LogFileName=native-cli-fixed.trx",
+    "--ResultsDirectory:C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\tests"
+  ],
+  "nativeFixtureEnvironment": {
+    "COPPERSTART_REPLAY_BOOT_ARTIFACT_ROOT": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed"
+  },
+  "romBuildCommand": [
+    "dotnet",
+    "test",
+    "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\native-cli-fixed\\Fixture.csproj",
+    "-c",
+    "Release",
+    "-p:RestoreConfigFile=C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-2026-10-17\\restore.config",
+    "--filter",
+    "FullyQualifiedName~ResetBootBlockLoadsAndExecutesSecondStageThroughExecDoIo"
+  ],
+  "romBuildEnvironment": {
+    "COPPERSTART_FLOPPY_ARTIFACT_ROOT": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-railroad-2026-10-18\\rom-cli-fixed"
+  },
+  "retainedMediaReview": {
+    "inside-regression-cli": {
+      "4000": "portrait",
+      "8000": "effects",
+      "12000": "3D",
+      "18000": "DESiRE logo"
+    },
+    "full-contact-regression-cli": {
+      "8000": "title",
+      "16000": "fight",
+      "24000": "health loss/fallen fighter"
+    },
+    "lotus3-regression-cli": {
+      "8000": "disk-two prompt",
+      "24000": "music selection",
+      "28000": "race",
+      "30000": "speed 051 kph / score 1320",
+      "31200": "result, score 1330"
+    },
+    "arte-regression-cli": {
+      "8000": "effects",
+      "22000": "credits",
+      "32000": "textured corridor",
+      "40000": "artist page"
+    }
+  },
+  "railroadReview": {
+    "copperstart": {
+      "12000": "mouse/keyboard selection menu",
+      "16000": "waiting for choice",
+      "20400": "ONE MOMENT PLEASE then CLI; unqualified",
+      "56000": "CLI remains; no gameplay"
+    },
+    "nativeOriginal": {
+      "4000": "selection menu",
+      "6000": "disk-B prompt",
+      "12000": "credits",
+      "24000": "generated Eastern USA map",
+      "36000": "Rail News Weekly"
+    },
+    "nativeDelayed": {
+      "20000": "selection menu",
+      "22000": "disk-B prompt",
+      "28000": "credits",
+      "40000": "generated Eastern USA map",
+      "52000": "Rail News Weekly",
+      "56000": "Rail News Weekly"
+    }
+  }
+}

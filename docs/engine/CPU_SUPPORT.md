@@ -107,7 +107,7 @@ dotnet build CopperScreen.slnx -c Release
 ```
 
 The October 7 published baseline used NuGet.org alone. The current development
-configuration additionally uses `artifacts/qualified-cpu-20261011/feed`; local
+configuration additionally uses `artifacts/qualified-cpu-20261017/feed`; local
 packages are ignored and never committed. The Nitro record identifies the
 CopperMod source commit and locally packed `1.5.5-nitro.1` package used here.
 Supply that exact package to the local feed before a locked restore; a fresh

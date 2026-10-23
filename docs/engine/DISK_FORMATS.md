@@ -8,7 +8,7 @@ following media in DF0–DF3, directly or through selected ZIP entries.
 | Standard 880 KiB ADF | Canonical DD sector encoding; existing compact receiver | Optional in-memory writes and explicit Save ADF |
 | ADZ | CopperDisk gzip decoding of standard or modern extended ADF | Read-only |
 | DMS | CopperDisk complete, unencrypted DD archive decoding | Read-only |
-| Modern extended ADF (`UAE-1ADF`) | CopperDisk normal/raw tracks; raw bytes and exact bit lengths retained | Read-only |
+| Modern extended ADF (`UAE-1ADF`) | CopperDisk normal/raw tracks, up to 84 cylinders; raw bytes and exact bit lengths retained; omitted tracks and zero raw bit lengths mean unformatted | Read-only |
 | IPF | Existing preserved track/index/density/weak-region preparation | Read-only |
 | SCP | CopperDisk first-revolution Amiga DD decoding; preserved receiver | Read-only |
 

@@ -1,0 +1,2205 @@
+{
+  "schemaVersion": 1,
+  "title": "YEET 1.0.4: main integration and first puzzle gameplay",
+  "date": "2026-10-23",
+  "disposition": "bounded-first-trial-gameplay-pass",
+  "limits": [
+    "Later rounds, levels and game completion are not qualified.",
+    "Diagnostic compatibility evidence; no host-throughput acceptance.",
+    "Frozen game runner and native guest-probe engine/CPU hashes are recorded separately."
+  ],
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "candidate": "b06ec24669a9623d288e1e9395f13959d51743f3",
+    "integratedMain": "67590f5edd8ef2f95217fd9ab0cc98d57e7b4065",
+    "mergeCommit": "efafc9376c9ad9ac85d003df7652ad8012a3f061",
+    "compiler": "d99e717607c02e72fa7567b3170834f21976dc44",
+    "pullRequest": "https://github.com/ilehtoranta/CopperStart/pull/17"
+  },
+  "rom": {
+    "scope": "68000 PAL OCS A500; native DF0; custom boot blocks, DOS0/DOS1 startup, native CON and interactive boot CLI; optional 512 KiB slow RAM bounce test",
+    "romBytes": 524288,
+    "codeBytes": 478988,
+    "compatible": true,
+    "managedAllocationSites": 0,
+    "frameworkFeatures": 0,
+    "graphicsBytes": 30666,
+    "graphicsResidentAddress": 16746432,
+    "graphicsSupportedVectors": [
+      -960,
+      -924,
+      -918,
+      -894,
+      -870,
+      -864,
+      -858,
+      -822,
+      -816,
+      -810,
+      -804,
+      -606,
+      -576,
+      -570,
+      -564,
+      -552,
+      -540,
+      -498,
+      -492,
+      -486,
+      -480,
+      -468,
+      -462,
+      -456,
+      -402,
+      -390,
+      -384,
+      -360,
+      -354,
+      -348,
+      -342,
+      -324,
+      -318,
+      -306,
+      -300,
+      -294,
+      -288,
+      -282,
+      -276,
+      -270,
+      -246,
+      -240,
+      -234,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -192,
+      -144,
+      -120,
+      -84,
+      -78,
+      -72,
+      -66,
+      -60,
+      -54,
+      -48,
+      -30,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "graphicsEntries": {
+      "-1056": 16747238,
+      "-1050": 16747240,
+      "-1044": 16747242,
+      "-1038": 16747244,
+      "-1032": 16747246,
+      "-1026": 16747248,
+      "-1020": 16747250,
+      "-1008": 16747252,
+      "-1002": 16747254,
+      "-996": 16747256,
+      "-990": 16747258,
+      "-984": 16747260,
+      "-978": 16747262,
+      "-972": 16747264,
+      "-966": 16747266,
+      "-960": 16770568,
+      "-954": 16747270,
+      "-948": 16747272,
+      "-942": 16747274,
+      "-936": 16747276,
+      "-930": 16747278,
+      "-924": 16770590,
+      "-918": 16770612,
+      "-900": 16747284,
+      "-894": 16770634,
+      "-888": 16747288,
+      "-882": 16747290,
+      "-876": 16747292,
+      "-870": 16770656,
+      "-864": 16770678,
+      "-858": 16770700,
+      "-852": 16747300,
+      "-840": 16747302,
+      "-834": 16747304,
+      "-828": 16747306,
+      "-822": 16770722,
+      "-816": 16770744,
+      "-810": 16770766,
+      "-804": 16770788,
+      "-798": 16747316,
+      "-792": 16747318,
+      "-786": 16747320,
+      "-780": 16747322,
+      "-774": 16747324,
+      "-768": 16747326,
+      "-762": 16747328,
+      "-756": 16747330,
+      "-732": 16747332,
+      "-726": 16747334,
+      "-720": 16747336,
+      "-714": 16747338,
+      "-708": 16747340,
+      "-702": 16747342,
+      "-696": 16747344,
+      "-690": 16747346,
+      "-684": 16747348,
+      "-678": 16747350,
+      "-672": 16747352,
+      "-666": 16747354,
+      "-660": 16747356,
+      "-654": 16747358,
+      "-636": 16747360,
+      "-630": 16747362,
+      "-624": 16747364,
+      "-618": 16747366,
+      "-612": 16747368,
+      "-606": 16770810,
+      "-600": 16747372,
+      "-594": 16747374,
+      "-588": 16747376,
+      "-582": 16747378,
+      "-576": 16770832,
+      "-570": 16770854,
+      "-564": 16770876,
+      "-558": 16747386,
+      "-552": 16770898,
+      "-546": 16747390,
+      "-540": 16770920,
+      "-534": 16747394,
+      "-528": 16747396,
+      "-522": 16747398,
+      "-516": 16747400,
+      "-510": 16747402,
+      "-504": 16747404,
+      "-498": 16770942,
+      "-492": 16770964,
+      "-486": 16770986,
+      "-480": 16771008,
+      "-474": 16747414,
+      "-468": 16771030,
+      "-462": 16771052,
+      "-456": 16771074,
+      "-450": 16747422,
+      "-444": 16747424,
+      "-438": 16747426,
+      "-432": 16747428,
+      "-426": 16747430,
+      "-420": 16747432,
+      "-414": 16747434,
+      "-408": 16747436,
+      "-402": 16771096,
+      "-396": 16747440,
+      "-390": 16771118,
+      "-384": 16771140,
+      "-378": 16747446,
+      "-372": 16747448,
+      "-366": 16747450,
+      "-360": 16771162,
+      "-354": 16771184,
+      "-348": 16771206,
+      "-342": 16771228,
+      "-336": 16747460,
+      "-330": 16747462,
+      "-324": 16771250,
+      "-318": 16771272,
+      "-312": 16747468,
+      "-306": 16771294,
+      "-300": 16771316,
+      "-294": 16771338,
+      "-288": 16771360,
+      "-282": 16771382,
+      "-276": 16771404,
+      "-270": 16771426,
+      "-264": 16747484,
+      "-258": 16747486,
+      "-252": 16747488,
+      "-246": 16771448,
+      "-240": 16771470,
+      "-234": 16771492,
+      "-228": 16771514,
+      "-222": 16771536,
+      "-216": 16771558,
+      "-210": 16771580,
+      "-204": 16771602,
+      "-198": 16771624,
+      "-192": 16771646,
+      "-186": 16747510,
+      "-180": 16747512,
+      "-174": 16747514,
+      "-168": 16747516,
+      "-162": 16747518,
+      "-156": 16747520,
+      "-150": 16747522,
+      "-144": 16771668,
+      "-138": 16747526,
+      "-132": 16747528,
+      "-126": 16747530,
+      "-120": 16771690,
+      "-114": 16747534,
+      "-108": 16747536,
+      "-102": 16747538,
+      "-96": 16747540,
+      "-90": 16747542,
+      "-84": 16771712,
+      "-78": 16771734,
+      "-72": 16771756,
+      "-66": 16771778,
+      "-60": 16771800,
+      "-54": 16771822,
+      "-48": 16771844,
+      "-42": 16747558,
+      "-36": 16747560,
+      "-30": 16771866,
+      "-6": 16771954,
+      "-12": 16771932,
+      "-18": 16771910,
+      "-24": 16771888
+    },
+    "runCommandStackBridgeAddress": 16776938,
+    "compiledRomSha256": "6E32EDB308D062783F6C432ED876E9D2EA838AA3D14ED5B0423A732F8B993908",
+    "intuitionResidentAddress": 16734144,
+    "intuitionBytes": 10988,
+    "intuitionSupportedVectors": [
+      -450,
+      -438,
+      -432,
+      -426,
+      -420,
+      -414,
+      -390,
+      -384,
+      -378,
+      -300,
+      -294,
+      -276,
+      -270,
+      -252,
+      -246,
+      -228,
+      -222,
+      -216,
+      -210,
+      -204,
+      -198,
+      -174,
+      -168,
+      -162,
+      -150,
+      -114,
+      -108,
+      -78,
+      -72,
+      -66,
+      -60,
+      -42,
+      -24,
+      -18,
+      -12,
+      -6
+    ],
+    "intuitionEntries": {
+      "-6": 16734856,
+      "-12": 16734870,
+      "-18": 16734884,
+      "-24": 16734894,
+      "-30": 16744936,
+      "-36": 16744938,
+      "-42": 16738910,
+      "-48": 16744942,
+      "-54": 16744944,
+      "-60": 16744134,
+      "-66": 16736040,
+      "-72": 16737268,
+      "-78": 16735042,
+      "-84": 16744954,
+      "-90": 16744956,
+      "-96": 16744958,
+      "-102": 16744960,
+      "-108": 16738730,
+      "-114": 16738898,
+      "-120": 16744966,
+      "-126": 16744968,
+      "-132": 16744970,
+      "-138": 16744972,
+      "-144": 16744974,
+      "-150": 16736946,
+      "-156": 16744978,
+      "-162": 16735816,
+      "-168": 16739004,
+      "-174": 16739028,
+      "-180": 16744986,
+      "-186": 16744988,
+      "-192": 16744990,
+      "-198": 16735136,
+      "-204": 16736592,
+      "-210": 16735016,
+      "-216": 16736338,
+      "-222": 16738954,
+      "-228": 16739052,
+      "-234": 16745004,
+      "-240": 16745006,
+      "-246": 16735718,
+      "-252": 16735708,
+      "-258": 16745012,
+      "-264": 16745014,
+      "-270": 16744122,
+      "-276": 16740722,
+      "-282": 16745020,
+      "-288": 16745022,
+      "-294": 16734904,
+      "-300": 16734918,
+      "-306": 16745028,
+      "-312": 16745030,
+      "-318": 16745032,
+      "-324": 16745034,
+      "-330": 16745036,
+      "-336": 16745038,
+      "-342": 16745040,
+      "-348": 16745042,
+      "-354": 16745044,
+      "-360": 16745046,
+      "-366": 16745048,
+      "-372": 16745050,
+      "-378": 16735864,
+      "-384": 16735918,
+      "-390": 16735906,
+      "-396": 16745058,
+      "-402": 16745060,
+      "-408": 16745062,
+      "-414": 16744880,
+      "-420": 16744902,
+      "-426": 16734936,
+      "-432": 16739062,
+      "-438": 16740032,
+      "-444": 16745074,
+      "-450": 16737088,
+      "-456": 16745078,
+      "-462": 16745080,
+      "-468": 16745082,
+      "-474": 16745084,
+      "-480": 16745086,
+      "-486": 16745088,
+      "-492": 16745090,
+      "-498": 16745092,
+      "-504": 16745094,
+      "-510": 16745096,
+      "-516": 16745098,
+      "-522": 16745100,
+      "-528": 16745102,
+      "-534": 16745104,
+      "-540": 16745106,
+      "-546": 16745108,
+      "-552": 16745110,
+      "-558": 16745112,
+      "-564": 16745114,
+      "-570": 16745116,
+      "-576": 16745118,
+      "-582": 16745120,
+      "-588": 16745122,
+      "-594": 16745124,
+      "-600": 16745126,
+      "-606": 16745128,
+      "-612": 16745130
+    },
+    "sha256": "4DDF1698647AA4B4E2C193E8268F5FA17A5AD6F6521AA86D5C38A657368CD997",
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "73780B0F69FAB11CC398223C5CABA0592175D680CFEB292946CCAB4C14A31064"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "89F5D9057BE2B7C6B863A8843212BD6D8C781DFE9F935E368AFF4CEEEFF38C76"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "6EB6733980E8376D5827402DCB84CCE5A03E759FDA9CD45F2245AD59180FAA49"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "AC4CE283B78B78CEA5C4DAE5161D5C1B58EAAFD3D0D444D104EDD119080B3F76"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "6DB1C1CF11FC4650AEB7B431633B020D52B40E7AEBB4B93D9B8394FAAB192792"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "74A38C05393424C04DFCF1B701E8BF8DC723A0F26BC3DFEBC8BDC40AB2A98778"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "DD1DA69668D7524960594BD124FF7BC07037F75EA2328A495884373255BEDCEC"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0F0144656F7180E41DAAD533778A2A979F67C21DDDF518E12275E2B2531C3A12"
+      },
+      {
+        "file": "CopperMod.Amiga.Lightweight.dll",
+        "sha256": "ADF2ECA8E11956E9EF0CB44215E9C5E884E20C9B317BDBFC0F33369C084BAC62"
+      },
+      {
+        "file": "Copper68k.dll",
+        "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "060D3E83C2CD9C082DEE4C1497A42753E1B55A10B7377FAB2C25CFFCA63E3D49"
+      },
+      {
+        "file": "CopperStart.Intuition.Native.dll",
+        "sha256": "779BBDDF88A3A44569D374223449E34F01B5A1AF75774B147029133D46D39E89"
+      }
+    ]
+  },
+  "romBuild": {
+    "rawRomSha256": "6e32edb308d062783f6c432ed876e9d2ea838aa3d14ed5b0423a732f8b993908",
+    "manifestSha256": "49d462c1063c717d9e9ba476bef490bf0b879f905898172cd65b1f6d9885ea20",
+    "sourceBuildLogSha256": "f30e7e22eb7eed3ef8cd5ed86deb7af730ade60e357341240ea17ccf72f75958",
+    "composition": "Fresh full CIL compilation followed by standard native linker; no hand patches."
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\yeet.adf",
+    "sha256": "fe52fc8bac2d0d24620bd425023bfc839160a5b5bbd423a9891508098653d2a8"
+  },
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "canonicalExecutionBinaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+    "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+    "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+  },
+  "input": {
+    "repositoryPath": "CopperScreen.Lightweight.Tests/Workloads/copperstart-yeet-gameplay-v1.json",
+    "sha256": "5aa4026bea5ad56c8d3a41fd9010c314c87e3cec5dd7ec97e4ae6a1870600903",
+    "events": [
+      {
+        "frame": 30000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 30020
+      },
+      {
+        "frame": 32000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 32020
+      },
+      {
+        "frame": 34000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 34020
+      },
+      {
+        "frame": 36000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 36020
+      },
+      {
+        "frame": 38000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 38020
+      },
+      {
+        "frame": 40000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 40020
+      },
+      {
+        "frame": 42000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 42020
+      },
+      {
+        "frame": 44000,
+        "joystickPort1": 8
+      },
+      {
+        "frame": 44047
+      },
+      {
+        "frame": 44067,
+        "joystickPort1": 2
+      },
+      {
+        "frame": 44087
+      },
+      {
+        "frame": 44107,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 44111
+      },
+      {
+        "frame": 45311,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 45315
+      },
+      {
+        "frame": 52000,
+        "joystickPort1": 1
+      },
+      {
+        "frame": 52002
+      },
+      {
+        "frame": 52022,
+        "joystickPort1": 4
+      },
+      {
+        "frame": 52024
+      },
+      {
+        "frame": 52044,
+        "joystickPort1": 8
+      },
+      {
+        "frame": 52046
+      },
+      {
+        "frame": 52066,
+        "joystickPort1": 8
+      },
+      {
+        "frame": 52068
+      },
+      {
+        "frame": 52088,
+        "joystickPort1": 2
+      },
+      {
+        "frame": 52090
+      },
+      {
+        "frame": 52110,
+        "joystickPort1": 24
+      },
+      {
+        "frame": 52112
+      },
+      {
+        "frame": 52312,
+        "joystickPort1": 32
+      },
+      {
+        "frame": 52314
+      }
+    ]
+  },
+  "runs": [
+    {
+      "artifact": "final-gameplay",
+      "runManifestSha256": "108fecf76fad7504d907c5f94bcae4f41e1331a8864f8d721b2807806651075a",
+      "romSha256": "4ddf1698647aa4b4e2c193e8268f5fa17a5ad6f6521aa86d5c38a657368cd997",
+      "inputSha256": "29d4be4c9e59ff9c8e7eb9921a425363b2c9d05658d569b14b085d612de2679d",
+      "completedReplay": true,
+      "frames": "49000",
+      "captureCheckpoints": 246,
+      "captureFiles": 1230,
+      "captureSetSha256": "5f5130262b456f1c2a1b320092057262a61ed636c65c763ff00ab67329eea8b0",
+      "fingerprints": {
+        "cycle": "6962998018",
+        "cpu": "0xBC592210DD377EA0",
+        "hardware": "0x0CBB1B73F68FD35A",
+        "output": "0x1C4C770820201CB3"
+      },
+      "cpuMode": "conservative-batch",
+      "unsupported": "none"
+    },
+    {
+      "artifact": "final-gameplay-scalar",
+      "runManifestSha256": "29ca050ff08264ace011d26928d4a7cb513204a74d05bec0470c0814a8e7b7a1",
+      "romSha256": "4ddf1698647aa4b4e2c193e8268f5fa17a5ad6f6521aa86d5c38a657368cd997",
+      "inputSha256": "29d4be4c9e59ff9c8e7eb9921a425363b2c9d05658d569b14b085d612de2679d",
+      "completedReplay": true,
+      "frames": "49000",
+      "captureCheckpoints": 246,
+      "captureFiles": 1230,
+      "captureSetSha256": "5f5130262b456f1c2a1b320092057262a61ed636c65c763ff00ab67329eea8b0",
+      "fingerprints": {
+        "cycle": "6962998018",
+        "cpu": "0xBC592210DD377EA0",
+        "hardware": "0x0CBB1B73F68FD35A",
+        "output": "0x1C4C770820201CB3"
+      },
+      "cpuMode": "scalar",
+      "unsupported": "none"
+    },
+    {
+      "artifact": "interaction-gameplay",
+      "runManifestSha256": "87fb6befbf9e0408c640a2dcd6ee100ea2568a33b2b7a74c7e39e157fa961ae5",
+      "romSha256": "4ddf1698647aa4b4e2c193e8268f5fa17a5ad6f6521aa86d5c38a657368cd997",
+      "inputSha256": "5aa4026bea5ad56c8d3a41fd9010c314c87e3cec5dd7ec97e4ae6a1870600903",
+      "completedReplay": true,
+      "frames": "53000",
+      "captureCheckpoints": 266,
+      "captureFiles": 1330,
+      "captureSetSha256": "cabe8887cde553a570a25b27cb793a287bd77ce6c8ff9ee58a4e76c4225664ed",
+      "fingerprints": {
+        "cycle": "7531406022",
+        "cpu": "0xFD03152ABB518764",
+        "hardware": "0xF5B1AD4FEB35C5A0",
+        "output": "0xBD253EA108AB7EEF"
+      },
+      "cpuMode": "conservative-batch",
+      "unsupported": "none"
+    },
+    {
+      "artifact": "interaction-native",
+      "runManifestSha256": "079bd87fb3359802f52de3929e23c21f63bf1bf43424273e258c5a57be65e65c",
+      "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+      "inputSha256": "5aa4026bea5ad56c8d3a41fd9010c314c87e3cec5dd7ec97e4ae6a1870600903",
+      "completedReplay": true,
+      "frames": "53000",
+      "captureCheckpoints": 266,
+      "captureFiles": 1330,
+      "captureSetSha256": "900553fbf3332b4ff9d3f9a297ead040d83dd440a9975f23c92a87ebbdbc4d9a",
+      "fingerprints": {
+        "cycle": "7531274056",
+        "cpu": "0x2422FA3205A0FFD4",
+        "hardware": "0xB22C8FAB9EC75666",
+        "output": "0xF0ED022313D7E14C"
+      },
+      "cpuMode": "conservative-batch",
+      "unsupported": "none"
+    }
+  ],
+  "normalScalarComparison": {
+    "scope": "Boot and first-board load; the old board gesture arrived during loading.",
+    "inputSha256": "29d4be4c9e59ff9c8e7eb9921a425363b2c9d05658d569b14b085d612de2679d",
+    "inputEvents": [
+      {
+        "frame": 30000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 30020
+      },
+      {
+        "frame": 32000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 32020
+      },
+      {
+        "frame": 34000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 34020
+      },
+      {
+        "frame": 36000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 36020
+      },
+      {
+        "frame": 38000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 38020
+      },
+      {
+        "frame": 40000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 40020
+      },
+      {
+        "frame": 42000,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 42020
+      },
+      {
+        "frame": 44000,
+        "joystickPort1": 8
+      },
+      {
+        "frame": 44047
+      },
+      {
+        "frame": 44067,
+        "joystickPort1": 2
+      },
+      {
+        "frame": 44087
+      },
+      {
+        "frame": 44107,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 44111
+      },
+      {
+        "frame": 45311,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 45315
+      },
+      {
+        "frame": 48000,
+        "joystickPort1": 1
+      },
+      {
+        "frame": 48002
+      },
+      {
+        "frame": 48022,
+        "joystickPort1": 4
+      },
+      {
+        "frame": 48024
+      },
+      {
+        "frame": 48044,
+        "joystickPort1": 8
+      },
+      {
+        "frame": 48046
+      },
+      {
+        "frame": 48066,
+        "joystickPort1": 8
+      },
+      {
+        "frame": 48068
+      },
+      {
+        "frame": 48088,
+        "joystickPort1": 2
+      },
+      {
+        "frame": 48090
+      },
+      {
+        "frame": 48110,
+        "joystickPort1": 24
+      },
+      {
+        "frame": 48112
+      },
+      {
+        "frame": 48312,
+        "joystickPort1": 32
+      },
+      {
+        "frame": 48314
+      }
+    ],
+    "captureCheckpoints": 246,
+    "filesCompared": 1230,
+    "differentFiles": [],
+    "fingerprintsMatch": true,
+    "fingerprints": {
+      "cycle": "6962998018",
+      "cpu": "0xBC592210DD377EA0",
+      "hardware": "0x0CBB1B73F68FD35A",
+      "output": "0x1C4C770820201CB3"
+    }
+  },
+  "interactionComparison": {
+    "frames": 53000,
+    "inputSha256": "5aa4026bea5ad56c8d3a41fd9010c314c87e3cec5dd7ec97e4ae6a1870600903",
+    "normalOnly": true,
+    "nativeControl": "interaction-native"
+  },
+  "completeBmpMatchesToNative": [
+    {
+      "candidate": "frame-000001.bmp",
+      "native": "frame-000001.bmp",
+      "sha256": "3fe7c52f12ec7debea1caaf422e968055f974127935a12df80391af775807a24"
+    },
+    {
+      "candidate": "frame-000200.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-022200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-022400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-022600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-022800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-023000.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-023200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-023400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-023600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-023800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-024000.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-024200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-024400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-024600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-024800.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-025000.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-025200.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-025400.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-025600.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-025800.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-026000.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-026200.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-026400.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-026600.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-026800.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-027000.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-027200.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-027400.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-027600.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-027800.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-028000.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-028200.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-028400.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-028600.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-028800.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-029000.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-029200.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-029400.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-029600.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-029800.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-030000.bmp",
+      "native": "frame-002400.bmp",
+      "sha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41"
+    },
+    {
+      "candidate": "frame-030200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-030400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-030600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-030800.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-031000.bmp",
+      "native": "frame-030400.bmp",
+      "sha256": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf"
+    },
+    {
+      "candidate": "frame-031200.bmp",
+      "native": "frame-030400.bmp",
+      "sha256": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf"
+    },
+    {
+      "candidate": "frame-031400.bmp",
+      "native": "frame-030400.bmp",
+      "sha256": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf"
+    },
+    {
+      "candidate": "frame-031600.bmp",
+      "native": "frame-030400.bmp",
+      "sha256": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf"
+    },
+    {
+      "candidate": "frame-031800.bmp",
+      "native": "frame-030400.bmp",
+      "sha256": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf"
+    },
+    {
+      "candidate": "frame-032000.bmp",
+      "native": "frame-030400.bmp",
+      "sha256": "4c1aac97029737da32bf672d4fa1e50a9942370212babc2f97943dea094d04cf"
+    },
+    {
+      "candidate": "frame-032200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-032400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-032600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-032800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-033000.bmp",
+      "native": "frame-032400.bmp",
+      "sha256": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac"
+    },
+    {
+      "candidate": "frame-033200.bmp",
+      "native": "frame-032400.bmp",
+      "sha256": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac"
+    },
+    {
+      "candidate": "frame-033400.bmp",
+      "native": "frame-032400.bmp",
+      "sha256": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac"
+    },
+    {
+      "candidate": "frame-033600.bmp",
+      "native": "frame-032400.bmp",
+      "sha256": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac"
+    },
+    {
+      "candidate": "frame-033800.bmp",
+      "native": "frame-032400.bmp",
+      "sha256": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac"
+    },
+    {
+      "candidate": "frame-034000.bmp",
+      "native": "frame-032400.bmp",
+      "sha256": "07fc33fe2e9d17e3ed2f37eab82763d5203c7bddd9690a5be5b77128f3767cac"
+    },
+    {
+      "candidate": "frame-034200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-034400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-034600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-034800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-035000.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-035200.bmp",
+      "native": "frame-034400.bmp",
+      "sha256": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28"
+    },
+    {
+      "candidate": "frame-035400.bmp",
+      "native": "frame-034400.bmp",
+      "sha256": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28"
+    },
+    {
+      "candidate": "frame-035600.bmp",
+      "native": "frame-034400.bmp",
+      "sha256": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28"
+    },
+    {
+      "candidate": "frame-035800.bmp",
+      "native": "frame-034400.bmp",
+      "sha256": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28"
+    },
+    {
+      "candidate": "frame-036000.bmp",
+      "native": "frame-034400.bmp",
+      "sha256": "d725d905d50508edfca0e620f63b78b62aadb447a10d59a48a02502160abef28"
+    },
+    {
+      "candidate": "frame-036200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-036400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-036600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-036800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-037000.bmp",
+      "native": "frame-036400.bmp",
+      "sha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9"
+    },
+    {
+      "candidate": "frame-037200.bmp",
+      "native": "frame-036400.bmp",
+      "sha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9"
+    },
+    {
+      "candidate": "frame-037400.bmp",
+      "native": "frame-036400.bmp",
+      "sha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9"
+    },
+    {
+      "candidate": "frame-037600.bmp",
+      "native": "frame-036400.bmp",
+      "sha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9"
+    },
+    {
+      "candidate": "frame-037800.bmp",
+      "native": "frame-036400.bmp",
+      "sha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9"
+    },
+    {
+      "candidate": "frame-038000.bmp",
+      "native": "frame-036400.bmp",
+      "sha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9"
+    },
+    {
+      "candidate": "frame-038200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-038400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-038600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-038800.bmp",
+      "native": "frame-038400.bmp",
+      "sha256": "aadccb6f8c78ece419e0fccf42e85c672a5931ff334dd74dde2f85f373f39f56"
+    },
+    {
+      "candidate": "frame-039000.bmp",
+      "native": "frame-038400.bmp",
+      "sha256": "aadccb6f8c78ece419e0fccf42e85c672a5931ff334dd74dde2f85f373f39f56"
+    },
+    {
+      "candidate": "frame-039200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-039400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-039600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-039800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-040000.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-040200.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-040400.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-040600.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-040800.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-041000.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-041200.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-041400.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-041600.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-041800.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-042000.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-042200.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-042400.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-042600.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-042800.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-043000.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-043200.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-043400.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-043600.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-043800.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-044000.bmp",
+      "native": "frame-039000.bmp",
+      "sha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a"
+    },
+    {
+      "candidate": "frame-044200.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-044400.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-044600.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-044800.bmp",
+      "native": "frame-044400.bmp",
+      "sha256": "e80518b843c2d4686217dec0961fae747b8a953478c4eb55508f44f8b4969819"
+    },
+    {
+      "candidate": "frame-045000.bmp",
+      "native": "frame-044400.bmp",
+      "sha256": "e80518b843c2d4686217dec0961fae747b8a953478c4eb55508f44f8b4969819"
+    },
+    {
+      "candidate": "frame-045200.bmp",
+      "native": "frame-044400.bmp",
+      "sha256": "e80518b843c2d4686217dec0961fae747b8a953478c4eb55508f44f8b4969819"
+    },
+    {
+      "candidate": "frame-045400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-045600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-045800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-046000.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-046200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-046400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-046600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-046800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-047000.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-047200.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-047400.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-047600.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-047800.bmp",
+      "native": "frame-001400.bmp",
+      "sha256": "9db66b4a4810255acca23cbd1579e3cf12ef4bf91b950638c196096011cc61b9"
+    },
+    {
+      "candidate": "frame-048000.bmp",
+      "native": "frame-044200.bmp",
+      "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+    },
+    {
+      "candidate": "frame-048200.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-048400.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-048600.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-048800.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-049000.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-049200.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-049400.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-049600.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-049800.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-050000.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-050200.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-050400.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-050600.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-050800.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-051000.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-051200.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-051400.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-051600.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-051800.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-052000.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-052200.bmp",
+      "native": "frame-052200.bmp",
+      "sha256": "bf9fc4a7ed4b45c6ad3cbfaeba6dc4fa8b49bd854033cc486171895de022da50"
+    },
+    {
+      "candidate": "frame-052400.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-052600.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-052800.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    },
+    {
+      "candidate": "frame-053000.bmp",
+      "native": "frame-045800.bmp",
+      "sha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300"
+    }
+  ],
+  "reviewedStages": [
+    {
+      "frame": 29600,
+      "observation": "menu before the first fire input",
+      "candidateBmpSha256": "c53fe375872804c8d9e79db852cd4b6fa7d1073bca9cbcf093b658961c72eb41",
+      "matchingNativeCaptures": [
+        "frame-002400.bmp",
+        "frame-002600.bmp",
+        "frame-002800.bmp",
+        "frame-003000.bmp",
+        "frame-003200.bmp",
+        "frame-003400.bmp",
+        "frame-003600.bmp",
+        "frame-003800.bmp",
+        "frame-004000.bmp",
+        "frame-004200.bmp",
+        "frame-004400.bmp",
+        "frame-004600.bmp",
+        "frame-004800.bmp",
+        "frame-005000.bmp",
+        "frame-005200.bmp",
+        "frame-005400.bmp",
+        "frame-005600.bmp",
+        "frame-005800.bmp",
+        "frame-006000.bmp",
+        "frame-006200.bmp",
+        "frame-006400.bmp",
+        "frame-006600.bmp",
+        "frame-006800.bmp",
+        "frame-007000.bmp",
+        "frame-007200.bmp",
+        "frame-007400.bmp",
+        "frame-007600.bmp",
+        "frame-007800.bmp",
+        "frame-008000.bmp",
+        "frame-008200.bmp",
+        "frame-008400.bmp",
+        "frame-008600.bmp",
+        "frame-008800.bmp",
+        "frame-009000.bmp",
+        "frame-009200.bmp",
+        "frame-009400.bmp",
+        "frame-009600.bmp",
+        "frame-009800.bmp",
+        "frame-010000.bmp",
+        "frame-010200.bmp",
+        "frame-010400.bmp",
+        "frame-010600.bmp",
+        "frame-010800.bmp",
+        "frame-011000.bmp",
+        "frame-011200.bmp",
+        "frame-011400.bmp",
+        "frame-011600.bmp",
+        "frame-011800.bmp",
+        "frame-012000.bmp",
+        "frame-012200.bmp",
+        "frame-012400.bmp",
+        "frame-012600.bmp",
+        "frame-012800.bmp",
+        "frame-013000.bmp",
+        "frame-013200.bmp",
+        "frame-013400.bmp",
+        "frame-013600.bmp",
+        "frame-013800.bmp",
+        "frame-014000.bmp",
+        "frame-014200.bmp",
+        "frame-014400.bmp",
+        "frame-014600.bmp",
+        "frame-014800.bmp",
+        "frame-015000.bmp",
+        "frame-015200.bmp",
+        "frame-015400.bmp",
+        "frame-015600.bmp",
+        "frame-015800.bmp",
+        "frame-016000.bmp",
+        "frame-016200.bmp",
+        "frame-016400.bmp",
+        "frame-016600.bmp",
+        "frame-016800.bmp",
+        "frame-017000.bmp",
+        "frame-017200.bmp",
+        "frame-017400.bmp",
+        "frame-017600.bmp",
+        "frame-017800.bmp",
+        "frame-018000.bmp",
+        "frame-018200.bmp",
+        "frame-018400.bmp",
+        "frame-018600.bmp",
+        "frame-018800.bmp",
+        "frame-019000.bmp",
+        "frame-019200.bmp",
+        "frame-019400.bmp",
+        "frame-019600.bmp",
+        "frame-019800.bmp",
+        "frame-020000.bmp",
+        "frame-020200.bmp",
+        "frame-020400.bmp",
+        "frame-020600.bmp",
+        "frame-020800.bmp",
+        "frame-021000.bmp",
+        "frame-021200.bmp",
+        "frame-021400.bmp",
+        "frame-021600.bmp",
+        "frame-021800.bmp",
+        "frame-022000.bmp",
+        "frame-022200.bmp",
+        "frame-022400.bmp",
+        "frame-022600.bmp",
+        "frame-022800.bmp",
+        "frame-023000.bmp",
+        "frame-023200.bmp",
+        "frame-023400.bmp",
+        "frame-023600.bmp",
+        "frame-023800.bmp",
+        "frame-024000.bmp",
+        "frame-024200.bmp",
+        "frame-024400.bmp",
+        "frame-024600.bmp",
+        "frame-024800.bmp",
+        "frame-025000.bmp",
+        "frame-025200.bmp",
+        "frame-025400.bmp",
+        "frame-025600.bmp",
+        "frame-025800.bmp",
+        "frame-026000.bmp",
+        "frame-026200.bmp",
+        "frame-026400.bmp",
+        "frame-026600.bmp",
+        "frame-026800.bmp",
+        "frame-027000.bmp",
+        "frame-027200.bmp",
+        "frame-027400.bmp",
+        "frame-027600.bmp",
+        "frame-027800.bmp",
+        "frame-028000.bmp",
+        "frame-028200.bmp",
+        "frame-028400.bmp",
+        "frame-028600.bmp",
+        "frame-028800.bmp",
+        "frame-029000.bmp",
+        "frame-029200.bmp",
+        "frame-029400.bmp",
+        "frame-029600.bmp",
+        "frame-029800.bmp",
+        "frame-030000.bmp"
+      ]
+    },
+    {
+      "frame": 38000,
+      "observation": "prologue",
+      "candidateBmpSha256": "f02c8cfb3cd6f947fb9aac56d925dc22a691b6db2f0ac086bfe61048b2b485c9",
+      "matchingNativeCaptures": [
+        "frame-036400.bmp",
+        "frame-036600.bmp",
+        "frame-036800.bmp",
+        "frame-037000.bmp",
+        "frame-037200.bmp",
+        "frame-037400.bmp",
+        "frame-037600.bmp",
+        "frame-037800.bmp",
+        "frame-038000.bmp"
+      ]
+    },
+    {
+      "frame": 44000,
+      "observation": "world map",
+      "candidateBmpSha256": "4e3cb5beefe0043f634f4a7a39a02979fa368673026c00332b2f071598c85f5a",
+      "matchingNativeCaptures": [
+        "frame-039000.bmp",
+        "frame-039200.bmp",
+        "frame-039400.bmp",
+        "frame-039600.bmp",
+        "frame-039800.bmp",
+        "frame-040000.bmp",
+        "frame-040200.bmp",
+        "frame-040400.bmp",
+        "frame-040600.bmp",
+        "frame-040800.bmp",
+        "frame-041000.bmp",
+        "frame-041200.bmp",
+        "frame-041400.bmp",
+        "frame-041600.bmp",
+        "frame-041800.bmp",
+        "frame-042000.bmp",
+        "frame-042200.bmp",
+        "frame-042400.bmp",
+        "frame-042600.bmp",
+        "frame-042800.bmp",
+        "frame-043000.bmp",
+        "frame-043200.bmp",
+        "frame-043400.bmp",
+        "frame-043600.bmp",
+        "frame-043800.bmp",
+        "frame-044000.bmp"
+      ]
+    },
+    {
+      "frame": 45000,
+      "observation": "Rune Trial introduction",
+      "candidateBmpSha256": "e80518b843c2d4686217dec0961fae747b8a953478c4eb55508f44f8b4969819",
+      "matchingNativeCaptures": [
+        "frame-044400.bmp",
+        "frame-044600.bmp",
+        "frame-044800.bmp",
+        "frame-045000.bmp",
+        "frame-045200.bmp"
+      ]
+    },
+    {
+      "frame": 52000,
+      "observation": "round 1/3 with three runes and moves 0",
+      "candidateBmpSha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300",
+      "matchingNativeCaptures": [
+        "frame-045800.bmp",
+        "frame-046000.bmp",
+        "frame-046200.bmp",
+        "frame-046400.bmp",
+        "frame-046600.bmp",
+        "frame-046800.bmp",
+        "frame-047000.bmp",
+        "frame-047200.bmp",
+        "frame-047400.bmp",
+        "frame-047600.bmp",
+        "frame-047800.bmp",
+        "frame-048000.bmp",
+        "frame-048200.bmp",
+        "frame-048400.bmp",
+        "frame-048600.bmp",
+        "frame-048800.bmp",
+        "frame-049000.bmp",
+        "frame-049200.bmp",
+        "frame-049400.bmp",
+        "frame-049600.bmp",
+        "frame-049800.bmp",
+        "frame-050000.bmp",
+        "frame-050200.bmp",
+        "frame-050400.bmp",
+        "frame-050600.bmp",
+        "frame-050800.bmp",
+        "frame-051000.bmp",
+        "frame-051200.bmp",
+        "frame-051400.bmp",
+        "frame-051600.bmp",
+        "frame-051800.bmp",
+        "frame-052000.bmp",
+        "frame-052400.bmp",
+        "frame-052600.bmp",
+        "frame-052800.bmp",
+        "frame-053000.bmp"
+      ]
+    },
+    {
+      "frame": 52200,
+      "observation": "after rune push: two runes and moves 1",
+      "candidateBmpSha256": "bf9fc4a7ed4b45c6ad3cbfaeba6dc4fa8b49bd854033cc486171895de022da50",
+      "matchingNativeCaptures": [
+        "frame-052200.bmp"
+      ]
+    },
+    {
+      "frame": 52600,
+      "observation": "after reset: three runes and moves 0",
+      "candidateBmpSha256": "db0e513d2d912c704de4a306111d0bab3d8b485fb51effecb0c8a33df4485300",
+      "matchingNativeCaptures": [
+        "frame-045800.bmp",
+        "frame-046000.bmp",
+        "frame-046200.bmp",
+        "frame-046400.bmp",
+        "frame-046600.bmp",
+        "frame-046800.bmp",
+        "frame-047000.bmp",
+        "frame-047200.bmp",
+        "frame-047400.bmp",
+        "frame-047600.bmp",
+        "frame-047800.bmp",
+        "frame-048000.bmp",
+        "frame-048200.bmp",
+        "frame-048400.bmp",
+        "frame-048600.bmp",
+        "frame-048800.bmp",
+        "frame-049000.bmp",
+        "frame-049200.bmp",
+        "frame-049400.bmp",
+        "frame-049600.bmp",
+        "frame-049800.bmp",
+        "frame-050000.bmp",
+        "frame-050200.bmp",
+        "frame-050400.bmp",
+        "frame-050600.bmp",
+        "frame-050800.bmp",
+        "frame-051000.bmp",
+        "frame-051200.bmp",
+        "frame-051400.bmp",
+        "frame-051600.bmp",
+        "frame-051800.bmp",
+        "frame-052000.bmp",
+        "frame-052400.bmp",
+        "frame-052600.bmp",
+        "frame-052800.bmp",
+        "frame-053000.bmp"
+      ]
+    }
+  ],
+  "preWorkbenchFailure": {
+    "romSha256": "2ef5b2fd4f9f8cabf48fad33f1fb36bf498bbf516af4386f884c201342d0f9e0",
+    "completedReplay": true,
+    "compatibility": "FAIL at first trial selection, not a successful gameplay replay",
+    "normalScalar": {
+      "captureFiles": 1230,
+      "differentFiles": [],
+      "fingerprintsMatch": true
+    },
+    "trace": {
+      "firstFailureField": 44130,
+      "allocationBytes": 9840,
+      "allocationFlags": "MEMF_CHIP",
+      "return": 0,
+      "chipFreeBytes": 17448,
+      "largestChipChunkBytes": 7584,
+      "followingRuntimeError": "TRAP #0 to uninstalled vector; later invalid PC is secondary"
+    },
+    "traceSha256": "5bf7c384becb2d761402a489cac394d9fed58d0a5288e591d127a006e67770d0"
+  },
+  "preWorkspaceFailure": {
+    "romSha256": "11f48272aef3d590bccf25d0cef2852d919cb12f37d1c1e28e51fd5a793d05e4",
+    "compatibility": "FAIL while loading first puzzle board, after a successful trial introduction",
+    "firstFailureField": 47980,
+    "allocationBytes": 41008,
+    "allocationFlags": "MEMF_CHIP | MEMF_CLEAR",
+    "chipFreeBytes": 50840,
+    "largestChipChunkBytes": 37160,
+    "normalScalarDifferentFiles": [],
+    "traceSha256": "084217dca462d16101bca9d9f76c0e520194ec4e1305986ee1dfe92a415acf30"
+  },
+  "probeTestRecords": [
+    {
+      "artifact": "integrated-focused-tests/ilkle_KOTIKONE_2026-10-22_22_56_33_net10.0.trx",
+      "sha256": "e9c398949e6d91d0ef95443eda8274a3d40e99b45b5c86b0d18cadbe04e15a72",
+      "role": "focused semantic regression",
+      "counters": {
+        "total": "70",
+        "executed": "70",
+        "passed": "70",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "workspace-rom-tests/ilkle_KOTIKONE_2026-10-23_00_00_52_net10.0.trx",
+      "sha256": "53fe76a8e70b74dcf0bc89f2b06ef6fe19da1212183a34cc51263d8d79d00297",
+      "role": "fresh full ROM compilation and boot",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "final-gameplay-tests/ilkle_KOTIKONE_2026-10-23_00_01_48_net10.0.trx",
+      "sha256": "d0912c47e382cabb279de1543f4c0b90aced638bec08fa0f61744bdbb4386e57",
+      "role": "final firmware/component selection",
+      "counters": {
+        "total": "282",
+        "executed": "282",
+        "passed": "282",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "final-gameplay-frequency-tests/ilkle_KOTIKONE_2026-10-23_00_03_47_net10.0.trx",
+      "sha256": "bfb70eea5556f99ed97c3b3f16d7ffe70078df67c84c3e759abc3ec13960e966",
+      "role": "retained Miami Chase frequency",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "final-gameplay-stack-tests/ilkle_KOTIKONE_2026-10-23_00_03_52_net10.0.trx",
+      "sha256": "9f622443435385477a0d66a33bd0fc2259f3cafb6aaa91da9ddd8162f4cd9f05",
+      "role": "retained Lotus 2 stack",
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "native-direct-copper-tests-2/ilkle_KOTIKONE_2026-10-22_23_18_47_net10.0.trx",
+      "sha256": "5887c7dd48c28c357387ad6f4040a7e5fb2a4958d0833790adaaba45b4b916c0",
+      "role": "native reference for direct Copper takeover",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "before-direct-copper-tests-2/ilkle_KOTIKONE_2026-10-22_23_18_50_net10.0.trx",
+      "sha256": "1114971ec42c7bac2dc0a76b4f89ad87d8c802d94c2f4ca27c1c2b64315da2b7",
+      "role": "expected pre-fix direct Copper failure",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "native-boot-workbench-tests/ilkle_KOTIKONE_2026-10-22_23_34_57_net10.0.trx",
+      "sha256": "fd71c5ec48a7ee96a0eab84d04c82c9ea0fffa2b5095fbda7d91de855154d2f4",
+      "role": "native reference for Workbench screen reuse",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "before-boot-workbench-tests/ilkle_KOTIKONE_2026-10-22_23_35_16_net10.0.trx",
+      "sha256": "195fb22d433291c907b2c2772ab6875a83e87306ba752d9d20170fb2f49ade9e",
+      "role": "expected pre-fix Workbench reuse failure",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "artifact": "integrated-before-exec-tests/ilkle_KOTIKONE_2026-10-22_23_10_37_net10.0.trx",
+      "sha256": "4d8eadb841d174c60bcfbcdc815753339fa031d83c3cddd140b3d78a012614a3",
+      "role": "expected pre-fix Exec open failure",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  ],
+  "validation": {
+    "sourceReleaseBuild": "pass with four existing SDK preview resolution NU1601 warnings",
+    "fixtureBuild": "pass with one expected MSB3246 for the frozen native DLL reference",
+    "nativeRootCompatibility": true,
+    "managedAllocationSites": 0,
+    "frameworkFeatures": 0
+  }
+}

@@ -1,0 +1,1299 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Alien Breed Tower Assault original supplied SPS279 IPF release",
+  "status": "verified-bounded-native-compatibility",
+  "previousCase": "COPPERSTART_ALIEN_BREED_SE92_2026-10-18.json",
+  "consumerBaseCommit": "a06b65a2a7e01a611a11e4217ca3d0a4733f4e01",
+  "producerQualificationCommit": "84525a27cb625d03b59be803d2988c6b5bfc5a16",
+  "cpuPackage": "1.5.4-nitro-dev.2",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+    "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+    "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+  },
+  "media": {
+    "archive": {
+      "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+      "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4"
+    },
+    "disk2Alias": {
+      "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+      "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+    }
+  },
+  "build": {
+    "scope": "Fresh native root compiled using five unchanged root sources and eleven retained Overdrive-corrected component DLLs, frozen compiler/SDK and graphics composer. Manifest generated from current verified inputs rather than inherited historical tables. Bounded PAL OCS 68000, 512 KiB Chip plus 512 KiB A501. No complete moving-main ROM or standard-app admission claim.",
+    "sourceLineage": "Overdrive 84525a2 (Chip priority -10, A501 priority 0), Alien Breed a897cc3 / db8b8a1; includes F17, Lemmings and caller-owned trap-zero compatibility, graphics installer FF8000.",
+    "priorEvidence": {
+      "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\docs\\engine\\COPPERSTART_ALIEN_BREED_SE92_2026-10-18.json",
+      "sha256": "92f82d33641671fc2d63bc0d299eea6b8871927e722f9fdcc6c2737f18767eb1"
+    },
+    "inputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\build-inputs.json",
+      "sha256": "5ed3beae19038f461cd6511872ef569bbe60047dbf7c2dcab18f8c0018d16cdc"
+    },
+    "rootSources": {
+      "NativeDiskBoot.cs": "8a6ed399c71d41df7dcb0039173ad37983dfb18e7b0c73872a2f91077aefc4b6",
+      "NativeGraphicsBoot.cs": "4f9020c92dd110e3e4855935528a4026e13a2be377827af0050b3447e2527664",
+      "NativeIntuitionBoot.cs": "627ed904b1b40ada8c097405ea29142771c294eebf2ef7b3fd91ce944c9da954",
+      "ProductionExports.cs": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605",
+      "Program.cs": "201b3fee6de27dc891caa8786ea91b93430d287a8c590d70a4fe4ca9e58d8eeb"
+    },
+    "components": {
+      "CopperSharp.Compiler.dll": "a337436a89a20fd90a575d289c5b8e23edaa52df9abda54d3fc0fa872009e141",
+      "CopperSharp.Sdk.Amiga.dll": "6f18a50ac7a3828d735c8f342ed2372cf2e36081db537475f35af46f01832fa3",
+      "CopperSharp.Sdk.Amiga.Support.dll": "eb8e38b7639964480f52809626cdfab142a454f56e5c327dfbc65aba5db0e425",
+      "CopperSharp.Targets.Amiga.dll": "fd0dc4d25aff599560b1a898308726fe6b5b45ca7cd9502c800facebfc974a0c",
+      "CopperStart-System.dll": "2eab704c8838543399fcb6a39d799b514da91f1441f2e2f5acde358c93d9de8a",
+      "CopperStart.Devices.dll": "29069c61741916aa4dff53aa0c0bda29b76a1c74f4dfbf6ed61c2b51bf84d877",
+      "CopperStart.Dos.dll": "1a8f7a429e317a0e77fa3a726611f7f1255173a970559f17af07db796f11460c",
+      "CopperStart.Exec.dll": "84b668a77639bebebfe6e0302d8c557eac43652caae16be7ead24fdac158abe8",
+      "CopperStart.Graphics.dll": "cb5f3eb036d829aedd6f79e0393da991d167fef19cf60bdfdbe967f8e8b37e0b",
+      "CopperStart.Intuition.dll": "dd658367052d98f972e5107cce2b81ab51491ac052f03815323d403f802d9d03",
+      "CopperStart.Layers.dll": "f1f1321d1f15cce04769f3348983774da395c182ec3cc1f0c1bb7b0bb4aca14a"
+    },
+    "files": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\FixedRoot.csproj",
+        "sha256": "35a509db584f2a3922d4c4224ede3ecbe0fd5d34d4e5aeb6b378cde7a014b194"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\NativeDiskBoot.cs",
+        "sha256": "8a6ed399c71d41df7dcb0039173ad37983dfb18e7b0c73872a2f91077aefc4b6"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\NativeGraphicsBoot.cs",
+        "sha256": "4f9020c92dd110e3e4855935528a4026e13a2be377827af0050b3447e2527664"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\NativeIntuitionBoot.cs",
+        "sha256": "627ed904b1b40ada8c097405ea29142771c294eebf2ef7b3fd91ce944c9da954"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\ProductionExports.cs",
+        "sha256": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\Program.cs",
+        "sha256": "201b3fee6de27dc891caa8786ea91b93430d287a8c590d70a4fe4ca9e58d8eeb"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\builder\\FixedBuilder.csproj",
+        "sha256": "765bf600361648a71446c2ce46a68060feae72c3d2426245ec451b1f165c87a6"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\builder\\Program.cs",
+        "sha256": "808cfde3c0c24f9fdd25296b13141232c7d8b8206d9fc51bf177d3727347a081"
+      }
+    ],
+    "managedBuildCommand": "dotnet build builder/FixedBuilder.csproj -c Release --configfile C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\NuGet.config",
+    "managedBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\managed-build.log",
+      "sha256": "15cf323b671f3eaa5d6a515e54eaf746fac1ae12967ce2008b1c17f8ac9fa9c4"
+    },
+    "nativeCompileCommand": "dotnet builder/bin/Release/net10.0/FixedBuilder.dll fresh-rom components build-inputs.json",
+    "nativeCompileLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-build.log",
+      "sha256": "96d942f80c8f03e1dae15ebb0aa56fc4fa0713435609443b1af1d3e2f5b10f18"
+    },
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "5ca306b3a7ece26a366adc90e487fc384276a5463c22c3ce6b98aa4a118764d0"
+    },
+    "compiledImage": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot-compiled.rom",
+      "sha256": "bb368f6b91d273d041b4fedc82d137beb5959a0a298869287cc79e205a745888"
+    },
+    "manifest": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\disk-boot-test-manifest.json",
+      "sha256": "7d288d34e2ff03a6807ffca3c04cdd09bc499cbad99ad18944f212c31a83998a"
+    },
+    "freshBuildUtc": "2026-10-18T12:51:22.9589033+00:00",
+    "codeBytes": 459374,
+    "graphicsBytes": 26098,
+    "graphicsResidentAddress": "00FF8000",
+    "qualificationRoot": {
+      "file": "CopperStart-QualifiedRoot.dll",
+      "sha256": "7B99BD982CD12205FC1A51A2F86D9715778C02E780662E3CFF1D2AEDF1321FA1",
+      "compatible": true,
+      "managedAllocationSites": 0,
+      "frameworkFeatures": 0
+    },
+    "identicalToOverdriveCorrectedRom": true,
+    "qualifiedProducerSources": {
+      "src/CopperStart.Exec/BootstrapCore.cs": "a21f8eb53c2ec8d1153bfce2a504bd1199c002ae4d9030bade1527d2fd54fc10",
+      "tests/CopperStart.Floppy.Native.Tests/NativeBootMemoryTests.cs": "839b0affe3b56fb8fa0fa88f1f4a7d32e5754998e976e449c4e378bc5df99720",
+      "tests/CopperStart.Floppy.Native.Tests/NativeExecInterruptBootTests.cs": "f87a8eb6789d3ce8e256d191aa82cf9208b3d46c6be6fa71b8848bfd2a3cdaa8",
+      "tests/CopperStart.Floppy.Native.Tests/NativeAllocationOrderBootTests.cs": "d2f36ca31a45b5725c4b07051f69dd9d8f76704ef96e400f5d61acbad00437db",
+      "tests/CopperStart.Floppy.Native.Tests/NativeGraphicsBootTests.cs": "01c6682da86b2f9ba3f32e085c7eb319066d992b515079596186f6000a6d319f"
+    },
+    "workingDirectory": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18",
+    "rootAssembly": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\root\\bin\\Release\\net10.0\\CopperStart-QualifiedRoot.dll",
+      "sha256": "7b99bd982cd12205fc1a51a2f86d9715778c02e780662e3cff1d2aedf1321fa1"
+    },
+    "builderAssembly": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\builder\\bin\\Release\\net10.0\\FixedBuilder.dll",
+      "sha256": "8e905081fbb5b239ca6b91338865dc555106d3a17655c930ad99ee017cb2c451"
+    },
+    "map": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.map",
+      "sha256": "d7e0e1aff5b9e923c0df0a03d8522dc3e81514b494d442d5fe50e0a56c6b3ca3"
+    },
+    "resolvedBuilderInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\builder-loaded-inputs.json",
+      "sha256": "63e4772090b70bf4c7e60cbdefd934e59b0153607d2ff2af919c55e22450e6be"
+    },
+    "manifestScope": "Generated directly from the current verified build-inputs.json and actual output, without inherited inputs or graphics-entry tables. This supersedes the former qualification driver metadata, with the same guest root and native compilation flags."
+  },
+  "runs": {
+    "native-level1": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\run.json",
+        "sha256": "6ce366688f26f8b5aa71908cb4121bb632cfd89bef16d304a47fe189986a2211"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\runner.log",
+        "sha256": "419ab838d4033bee14e4aadfa1f86b7d68a94a998697e804aab2f043959b70dc"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+        "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4",
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json",
+        "sha256": "c0319026d475126dc5b193aef126321b7dd756dc99baad090c6366deaa5f6a69",
+        "media": [
+          {
+            "frame": 3300,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+            "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+          }
+        ]
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+        "--frames",
+        "22000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json"
+      ],
+      "checkpoints": 111,
+      "captureFiles": 555,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "22000",
+        "completed": "22000",
+        "cycle": "3116648412",
+        "cpu": "0xBB5DCBD82B2457C7",
+        "hardware": "0xE41F8B4304E7ACF2",
+        "output": "0x99ADE4DDDBF25DBA",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "native-level1-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1-scalar\\run.json",
+        "sha256": "f7a9c94d503aff6e1c50c659f191d4a92a08873537e051e2497e4948bfd1a687"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1-scalar\\runner.log",
+        "sha256": "45498d5081dae98d734e99df69ae861f81b8b7659c78d33b40803fec82ac6371"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+        "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4",
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json",
+        "sha256": "c0319026d475126dc5b193aef126321b7dd756dc99baad090c6366deaa5f6a69",
+        "media": [
+          {
+            "frame": 3300,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+            "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+          }
+        ]
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+        "--frames",
+        "22000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1-scalar\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json"
+      ],
+      "checkpoints": 111,
+      "captureFiles": 555,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "22000",
+        "completed": "22000",
+        "cycle": "3116648412",
+        "cpu": "0xBB5DCBD82B2457C7",
+        "hardware": "0xE41F8B4304E7ACF2",
+        "output": "0x99ADE4DDDBF25DBA",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "native-idle": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\run.json",
+        "sha256": "694fa86bd5629f61e0995f752446e43836bba86655d7c6df4991fc7d782c8819"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\runner.log",
+        "sha256": "407941db8a5107100eee3224d71a7a26eb36018cc234ace60c7a85f36a855a97"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+        "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4",
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-idle-v1.json",
+        "sha256": "da51aa362eab944abced96c23b3978c4146ef397b780303bde59e661545ceb44",
+        "media": [
+          {
+            "frame": 3300,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+            "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+          }
+        ]
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+        "--frames",
+        "22000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-idle-v1.json"
+      ],
+      "checkpoints": 111,
+      "captureFiles": 555,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "22000",
+        "completed": "22000",
+        "cycle": "3116648412",
+        "cpu": "0x257AD9BF4B308B94",
+        "hardware": "0xE41F8B4304E7ACF2",
+        "output": "0x88184E42E32EE7B7",
+        "pixels": "284204",
+        "audioSamples": "1918",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "copperstart-level1": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\run.json",
+        "sha256": "d7a6d088a027b11b5343127dd3d1bc00bf07231b0f022844eac52b612e371beb"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\runner.log",
+        "sha256": "37091224fca5a68bf834e15150dce958d853e5107200ebb9864aed1c4e11b7c8"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5ca306b3a7ece26a366adc90e487fc384276a5463c22c3ce6b98aa4a118764d0"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+        "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4",
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json",
+        "sha256": "c0319026d475126dc5b193aef126321b7dd756dc99baad090c6366deaa5f6a69",
+        "media": [
+          {
+            "frame": 3300,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+            "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+          }
+        ]
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+        "--frames",
+        "22000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json"
+      ],
+      "checkpoints": 111,
+      "captureFiles": 555,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "22000",
+        "completed": "22000",
+        "cycle": "3116771294",
+        "cpu": "0x50ED4BAD929F84D5",
+        "hardware": "0x5FA7323761EABE7E",
+        "output": "0x762CB82727D4BB42",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "copperstart-level1-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1-scalar\\run.json",
+        "sha256": "c078226ab0bbef7329045c9e66f8367736394801930b398e0bd7ed7caae8afab"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1-scalar\\runner.log",
+        "sha256": "6d0b5bfd16bf2f61608e0862a5f02b99ebf093a49595f6164dfec14926d8690f"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5ca306b3a7ece26a366adc90e487fc384276a5463c22c3ce6b98aa4a118764d0"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+        "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4",
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json",
+        "sha256": "c0319026d475126dc5b193aef126321b7dd756dc99baad090c6366deaa5f6a69",
+        "media": [
+          {
+            "frame": 3300,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+            "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+          }
+        ]
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+        "--frames",
+        "22000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1-scalar\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-level1-v1.json"
+      ],
+      "checkpoints": 111,
+      "captureFiles": 555,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "22000",
+        "completed": "22000",
+        "cycle": "3116771294",
+        "cpu": "0x50ED4BAD929F84D5",
+        "hardware": "0x5FA7323761EABE7E",
+        "output": "0x762CB82727D4BB42",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "copperstart-idle": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\run.json",
+        "sha256": "f56d9ded77d0a9d7dc5dd3d06f4d076d9da876e512ae8f94b2ae1e2c4310ca8a"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\runner.log",
+        "sha256": "63e4cbe3dcfb176f97125a61b68fea0da1e1fbdb42cbdc5e16bd245158fdec54"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5ca306b3a7ece26a366adc90e487fc384276a5463c22c3ce6b98aa4a118764d0"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip",
+        "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4",
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-idle-v1.json",
+        "sha256": "da51aa362eab944abced96c23b3978c4146ef397b780303bde59e661545ceb44",
+        "media": [
+          {
+            "frame": 3300,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\tower-assault-disk2.ipf",
+            "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827"
+          }
+        ]
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+        "--frames",
+        "22000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-tower-assault-idle-v1.json"
+      ],
+      "checkpoints": 111,
+      "captureFiles": 555,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "22000",
+        "completed": "22000",
+        "cycle": "3116771294",
+        "cpu": "0x1DB4FB7C27435822",
+        "hardware": "0x5FA7323761EABE7E",
+        "output": "0x4863B1B908FF5C7A",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    }
+  },
+  "comparisons": {
+    "modePairs": [
+      {
+        "normal": "native-level1",
+        "scalar": "native-level1-scalar",
+        "identicalCaptureFiles": 555,
+        "checkpoints": 111,
+        "fingerprints": {
+          "cpu": "0xBB5DCBD82B2457C7",
+          "hardware": "0xE41F8B4304E7ACF2",
+          "output": "0x99ADE4DDDBF25DBA",
+          "cycle": "3116648412"
+        }
+      },
+      {
+        "normal": "copperstart-level1",
+        "scalar": "copperstart-level1-scalar",
+        "identicalCaptureFiles": 555,
+        "checkpoints": 111,
+        "fingerprints": {
+          "cpu": "0x50ED4BAD929F84D5",
+          "hardware": "0x5FA7323761EABE7E",
+          "output": "0x762CB82727D4BB42",
+          "cycle": "3116771294"
+        }
+      }
+    ],
+    "inputControls": [
+      {
+        "positive": "native-level1",
+        "idle": "native-idle",
+        "identicalPrefixFiles": 400,
+        "firstInputDifferenceField": 16000,
+        "firstDifferentBmp": 16200,
+        "differentBmpCount": 30,
+        "differentBmpFields": [
+          16200,
+          16400,
+          16600,
+          16800,
+          17000,
+          17200,
+          17400,
+          17600,
+          17800,
+          18000,
+          18200,
+          18400,
+          18600,
+          18800,
+          19000,
+          19200,
+          19400,
+          19600,
+          19800,
+          20000,
+          20200,
+          20400,
+          20600,
+          20800,
+          21000,
+          21200,
+          21400,
+          21600,
+          21800,
+          22000
+        ]
+      },
+      {
+        "positive": "copperstart-level1",
+        "idle": "copperstart-idle",
+        "identicalPrefixFiles": 400,
+        "firstInputDifferenceField": 16000,
+        "firstDifferentBmp": 16200,
+        "differentBmpCount": 30,
+        "differentBmpFields": [
+          16200,
+          16400,
+          16600,
+          16800,
+          17000,
+          17200,
+          17400,
+          17600,
+          17800,
+          18000,
+          18200,
+          18400,
+          18600,
+          18800,
+          19000,
+          19200,
+          19400,
+          19600,
+          19800,
+          20000,
+          20200,
+          20400,
+          20600,
+          20800,
+          21000,
+          21200,
+          21400,
+          21600,
+          21800,
+          22000
+        ]
+      }
+    ],
+    "crossRomScreenshotComparison": {
+      "identicalBmpCount": 109,
+      "identicalRgbImageCount": 109,
+      "differentRgbImageFields": [
+        200,
+        400
+      ],
+      "total": 111,
+      "identityRequired": false,
+      "method": "Full-viewport RGB comparison after decoding 32-bit BI_RGB BMP. Retain raw file hashes separately; the fourth stored byte is unused BGRX, not visible alpha. This decoding does not weaken complete raw-file equality for either CPU-mode pair.",
+      "rgbDifferenceDetails": [
+        {
+          "field": 200,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 400,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        }
+      ]
+    }
+  },
+  "nativeGuestProbes": {
+    "exactRomSha256": "5CA306B3A7ECE26A366ADC90E487FC384276A5463C22C3CE6B98AA4A118764D0",
+    "fixtureProjects": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-overdrive-2026-10-18\\exact-native-fixture\\Fixture.csproj",
+        "sha256": "7a17b412450e8c9683aee4ffde27a01d229de40473213418c88c4fc02e7154ba"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\graphics-native-fixture\\Fixture.csproj",
+        "sha256": "505a6ad5561986b14baa5c7520027bae4230b25923703717c69e04cb222bbf4b"
+      }
+    ],
+    "fixtureAssemblies": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-overdrive-2026-10-18\\exact-native-fixture\\bin\\Release\\net10.0\\CopperStart.Floppy.Native.Tests.dll",
+        "sha256": "243ca80c029cf49b83c0d5b927b36c04f62f771c12dbdd04d14ef481214cfff4"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\graphics-native-fixture\\bin\\Release\\net10.0\\CopperStart.Floppy.Native.Tests.dll",
+        "sha256": "cf12706d7076a376441fc6cebc60feb16f2f6e4a3c94e4926558700973a04a17"
+      }
+    ],
+    "harness": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\probe.py",
+      "sha256": "8b5286d4ffbce472d03c88453c0d4e201721fc589221d8ba7fe5d3838692bc5b"
+    },
+    "groups": [
+      {
+        "group": "exec-memory",
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\probes\\exec-memory\\exec-memory.trx",
+          "sha256": "3e5cf54a32d07006d8a041b83ab54e41dbc9b38950ad1045675e05005c4c996b"
+        },
+        "log": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\probe-exec-memory.log",
+          "sha256": "65f4a6e6b85f1c60b4490a3e7d975af1ffc85d2773111dd94021d5913058d299"
+        }
+      },
+      {
+        "group": "graphics",
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\probes\\graphics\\graphics.trx",
+          "sha256": "b33976736be5e51a7df89a6a4156eb61ee87711c001e4d6c25d9cc217a95892f"
+        },
+        "log": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\probe-graphics.log",
+          "sha256": "a65b497f70acd7a4b35d39a7718dba60c498b4703367cf90739a07eb5d7c580f"
+        }
+      }
+    ],
+    "sourceFiles": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-overdrive-2026-10-18\\exact-native-fixture\\NativeBootImage.cs",
+        "sha256": "ce369891b6bf5e306e12571c139b32f502935a9a877f884e5d11cab540b308c5"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-alien-breed-2026-10-18\\graphics-native-fixture\\NativeBootImage.cs",
+        "sha256": "cba4e5648b3bf9a3d24b402852acfb4fa5b7ba22329bb34edee26be7c95b2e2e"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeBootMemoryTests.cs",
+        "sha256": "839b0affe3b56fb8fa0fa88f1f4a7d32e5754998e976e449c4e378bc5df99720"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeExecInterruptBootTests.cs",
+        "sha256": "f87a8eb6789d3ce8e256d191aa82cf9208b3d46c6be6fa71b8848bfd2a3cdaa8"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeAllocationOrderBootTests.cs",
+        "sha256": "d2f36ca31a45b5725c4b07051f69dd9d8f76704ef96e400f5d61acbad00437db"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeGraphicsBootTests.cs",
+        "sha256": "01c6682da86b2f9ba3f32e085c7eb319066d992b515079596186f6000a6d319f"
+      }
+    ]
+  },
+  "reviewedCaptures": [
+    {
+      "run": "native-level1",
+      "frame": 3000,
+      "observation": "Matching second disk requested.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-003000.bmp",
+        "sha256": "ab41365fab21d4207b33d7202e459ae6fb9b546ee147d79f48d184ae9fde00d1"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 9000,
+      "observation": "Options screen after disk-two loading.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-009000.bmp",
+        "sha256": "1eabf2a95d21713742320adec036fe796012a38262c77ccb6114cb9561b50735"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 13800,
+      "observation": "Crash Landing Site mission briefing.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-013800.bmp",
+        "sha256": "f1d2b884a22e4d8a743ff5f5fa25bd0ff613b72d13971be8a83be62ce7b17e91"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 15000,
+      "observation": "Landing area at level start.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-015000.bmp",
+        "sha256": "55c6f273af94f077a9de4c632f58d26a7525b14ba8860f14220f573d25beb88d"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 16200,
+      "observation": "Initial upward movement changes view.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-016200.bmp",
+        "sha256": "647904affdeb2886aac19fb03cc0d4905a1cba1591a145249afd33327a572830"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 18400,
+      "observation": "Extended movement/firing response.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-018400.bmp",
+        "sha256": "3f5f3bef480bf8242e2c7414d9cf3b1cab7e3b06f18c0a77b931a9e102916703"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 18800,
+      "observation": "Leftward movement and firing response.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-018800.bmp",
+        "sha256": "1bdc848de050d67cb50873e6fe31715fcb3b1b350a9617161599da37802ce2a9"
+      }
+    },
+    {
+      "run": "native-level1",
+      "frame": 22000,
+      "observation": "Game-over screen after opening play.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-022000.bmp",
+        "sha256": "e81a18b2b7c2a4ffaaf6b9f511f8c165d4c7973ca481de4caa4ff3fcb95f16b1"
+      }
+    },
+    {
+      "run": "native-idle",
+      "frame": 18800,
+      "observation": "Idle control stays by the landing site.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\captures\\frame-018800.bmp",
+        "sha256": "315a7c725a3c8721b1dc1a76ba03027d49974ad287a3677a5c67fc91b4d65b94"
+      }
+    },
+    {
+      "run": "native-idle",
+      "frame": 22000,
+      "observation": "Idle control retains the initial area.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\captures\\frame-022000.bmp",
+        "sha256": "cf8695883ba80ee5bedfbebaf87eea07ced457043d56863a7faa5dc70fd96a67"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 3000,
+      "observation": "Matching second disk requested.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-003000.bmp",
+        "sha256": "ab41365fab21d4207b33d7202e459ae6fb9b546ee147d79f48d184ae9fde00d1"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 9000,
+      "observation": "Options screen after disk-two loading.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-009000.bmp",
+        "sha256": "1eabf2a95d21713742320adec036fe796012a38262c77ccb6114cb9561b50735"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 13800,
+      "observation": "Crash Landing Site mission briefing.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-013800.bmp",
+        "sha256": "f1d2b884a22e4d8a743ff5f5fa25bd0ff613b72d13971be8a83be62ce7b17e91"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 15000,
+      "observation": "Landing area at level start.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-015000.bmp",
+        "sha256": "55c6f273af94f077a9de4c632f58d26a7525b14ba8860f14220f573d25beb88d"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 16200,
+      "observation": "Initial upward movement changes view.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-016200.bmp",
+        "sha256": "647904affdeb2886aac19fb03cc0d4905a1cba1591a145249afd33327a572830"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 18400,
+      "observation": "Extended movement/firing response.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-018400.bmp",
+        "sha256": "3f5f3bef480bf8242e2c7414d9cf3b1cab7e3b06f18c0a77b931a9e102916703"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 18800,
+      "observation": "Leftward movement and firing response.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-018800.bmp",
+        "sha256": "1bdc848de050d67cb50873e6fe31715fcb3b1b350a9617161599da37802ce2a9"
+      }
+    },
+    {
+      "run": "copperstart-level1",
+      "frame": 22000,
+      "observation": "Game-over screen after opening play.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-022000.bmp",
+        "sha256": "e81a18b2b7c2a4ffaaf6b9f511f8c165d4c7973ca481de4caa4ff3fcb95f16b1"
+      }
+    },
+    {
+      "run": "copperstart-idle",
+      "frame": 18800,
+      "observation": "Idle control stays by the landing site.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\captures\\frame-018800.bmp",
+        "sha256": "315a7c725a3c8721b1dc1a76ba03027d49974ad287a3677a5c67fc91b4d65b94"
+      }
+    },
+    {
+      "run": "copperstart-idle",
+      "frame": 22000,
+      "observation": "Idle control retains the initial area.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\captures\\frame-022000.bmp",
+        "sha256": "cf8695883ba80ee5bedfbebaf87eea07ced457043d56863a7faa5dc70fd96a67"
+      }
+    }
+  ],
+  "outcome": {
+    "qualification": "bounded-input-driven-opening-level",
+    "milestones": [
+      "boot and disk-two request",
+      "matching disk-two loading",
+      "options/menu interaction",
+      "opening mission briefing",
+      "level-one movement/firing with world scrolling",
+      "idle control distinguishes player input"
+    ],
+    "newCompatibilityFailure": false,
+    "sourceFixRequired": false,
+    "guestChecksRemoved": false,
+    "terminalPositiveState": "game-over after opening play, not level completion"
+  },
+  "validation": {
+    "consumerBuild": {
+      "command": "dotnet build CopperScreen.slnx -c Release",
+      "exitCode": 0,
+      "warnings": 0,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\consumer-build.log",
+        "sha256": "ae2262cb2b5d27f1796b299c6290d92632cc88511ab4d3d4b5a589763737a6a8"
+      }
+    },
+    "replayToolControls": {
+      "command": "python -m unittest discover -s scripts/tests -p test_native_regression.py -v",
+      "passed": 21,
+      "failed": 0,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\replay-tool-tests.log",
+        "sha256": "ca16ad5fdead84d436f0bfcda2a10457892c0a610ce0a9bde494a76687ac36f8"
+      }
+    }
+  },
+  "references": [
+    {
+      "path": "docs/engine/TOWER_ASSAULT_INVESTIGATION.md",
+      "purpose": "Earlier native profile, original disk-two identity and controls; historical hardware/performance evidence stays separate."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/previous-versions/dd183376(v=vs.85)",
+      "purpose": "32-bit BI_RGB BMP stores unused high byte; full-image decoded RGB comparison is separate from raw BMP hashes."
+    }
+  ],
+  "limits": [
+    "Opening level only; disk three, level completion, later levels, save/load paths and two-player mode are unverified.",
+    "No physical hardware timing, throughput acceptance or audio fidelity qualification.",
+    "PAL OCS 68000, 512 KiB Chip plus 512 KiB A501, one drive only.",
+    "Native root freshly compiled from five retained sources and eleven frozen Overdrive-corrected component inputs; not a full moving-main/MorphOS build or standard-app admission.",
+    "Cross-ROM screenshot/state identity is not an acceptance gate. CPU-mode pairs require complete capture and fingerprint equality for their own ROM."
+  ],
+  "qaSheets": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\copperstart-boot-menu.png",
+      "sha256": "adc9fdcb1b30ce2313594917a652e876f21991abcfe26026391ec6786bcbc221",
+      "sourceFrames": [
+        {
+          "run": "copperstart-level1",
+          "field": 3000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-003000.bmp",
+          "sha256": "ab41365fab21d4207b33d7202e459ae6fb9b546ee147d79f48d184ae9fde00d1"
+        },
+        {
+          "run": "copperstart-level1",
+          "field": 9000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-009000.bmp",
+          "sha256": "1eabf2a95d21713742320adec036fe796012a38262c77ccb6114cb9561b50735"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\copperstart-briefing-start.png",
+      "sha256": "32dda5ef243bcbb04205c084f1dbbbef9c18d536f6b86969d211d0b530c29423",
+      "sourceFrames": [
+        {
+          "run": "copperstart-level1",
+          "field": 13800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-013800.bmp",
+          "sha256": "f1d2b884a22e4d8a743ff5f5fa25bd0ff613b72d13971be8a83be62ce7b17e91"
+        },
+        {
+          "run": "copperstart-level1",
+          "field": 15000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-015000.bmp",
+          "sha256": "55c6f273af94f077a9de4c632f58d26a7525b14ba8860f14220f573d25beb88d"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\copperstart-final-control.png",
+      "sha256": "e9a11e307922cfae790bd04566422e5868bd0ff90fd814e0fbe6b17f0a27819f",
+      "sourceFrames": [
+        {
+          "run": "copperstart-level1",
+          "field": 22000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-022000.bmp",
+          "sha256": "e81a18b2b7c2a4ffaaf6b9f511f8c165d4c7973ca481de4caa4ff3fcb95f16b1"
+        },
+        {
+          "run": "copperstart-idle",
+          "field": 22000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\captures\\frame-022000.bmp",
+          "sha256": "cf8695883ba80ee5bedfbebaf87eea07ced457043d56863a7faa5dc70fd96a67"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\copperstart-movement-control.png",
+      "sha256": "a8c9e9ba0274dd5d643fb229e24f3651c3ca810484422007c1859737f0470628",
+      "sourceFrames": [
+        {
+          "run": "copperstart-level1",
+          "field": 18800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-018800.bmp",
+          "sha256": "1bdc848de050d67cb50873e6fe31715fcb3b1b350a9617161599da37802ce2a9"
+        },
+        {
+          "run": "copperstart-idle",
+          "field": 18800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-idle\\captures\\frame-018800.bmp",
+          "sha256": "315a7c725a3c8721b1dc1a76ba03027d49974ad287a3677a5c67fc91b4d65b94"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\copperstart-movement-fire.png",
+      "sha256": "2a52564d31f8e3ad0407add47629b0d2c351b078cd92af2fa7bbf8e80e83cf64",
+      "sourceFrames": [
+        {
+          "run": "copperstart-level1",
+          "field": 16200,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-016200.bmp",
+          "sha256": "647904affdeb2886aac19fb03cc0d4905a1cba1591a145249afd33327a572830"
+        },
+        {
+          "run": "copperstart-level1",
+          "field": 18400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\copperstart-level1\\captures\\frame-018400.bmp",
+          "sha256": "3f5f3bef480bf8242e2c7414d9cf3b1cab7e3b06f18c0a77b931a9e102916703"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-boot-menu.png",
+      "sha256": "9b5c538d1fbc067ae06f867c2c129ea11a72056130fbc0fba300b7b36e7cc6ce",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 3000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-003000.bmp",
+          "sha256": "ab41365fab21d4207b33d7202e459ae6fb9b546ee147d79f48d184ae9fde00d1"
+        },
+        {
+          "run": "native-level1",
+          "field": 9000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-009000.bmp",
+          "sha256": "1eabf2a95d21713742320adec036fe796012a38262c77ccb6114cb9561b50735"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-briefing-start.png",
+      "sha256": "99c14ca69dbd4b1c6a754aab90900892d5cedcc5adfb79c8d5c72c6cf560346d",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 13400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-013400.bmp",
+          "sha256": "afab151bd1c7272650a052e171a32ce899ddd38ce26350c89e9e2cdfc4267cf3"
+        },
+        {
+          "run": "native-level1",
+          "field": 15000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-015000.bmp",
+          "sha256": "55c6f273af94f077a9de4c632f58d26a7525b14ba8860f14220f573d25beb88d"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-extended-response.png",
+      "sha256": "da18f988df690a2ee0801e761230abfafd83a62271d3bb74464195e664a35b4d",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 18400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-018400.bmp",
+          "sha256": "3f5f3bef480bf8242e2c7414d9cf3b1cab7e3b06f18c0a77b931a9e102916703"
+        },
+        {
+          "run": "native-level1",
+          "field": 18800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-018800.bmp",
+          "sha256": "1bdc848de050d67cb50873e6fe31715fcb3b1b350a9617161599da37802ce2a9"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-final-control.png",
+      "sha256": "30474baa5e4e7e2fb71ef5095289febc5cfa68d99ed7775c0d7f15036a61fcc8",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 22000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-022000.bmp",
+          "sha256": "e81a18b2b7c2a4ffaaf6b9f511f8c165d4c7973ca481de4caa4ff3fcb95f16b1"
+        },
+        {
+          "run": "native-idle",
+          "field": 22000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\captures\\frame-022000.bmp",
+          "sha256": "cf8695883ba80ee5bedfbebaf87eea07ced457043d56863a7faa5dc70fd96a67"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-initial-response.png",
+      "sha256": "48bd60d7b413996d7d6dce77bec9b0c06b416bd323da9d18e10087c08713ec5a",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 16200,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-016200.bmp",
+          "sha256": "647904affdeb2886aac19fb03cc0d4905a1cba1591a145249afd33327a572830"
+        },
+        {
+          "run": "native-idle",
+          "field": 16200,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\captures\\frame-016200.bmp",
+          "sha256": "6567650a3a1fc02a82ba94fde4fd104823ba4514b8b990c0edaa6ddb44f2662f"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-mission-transition.png",
+      "sha256": "aebf4832a4610406931df44cc4f718d25ae0ff5b03860651a031cb72a4af7561",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 13800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-013800.bmp",
+          "sha256": "f1d2b884a22e4d8a743ff5f5fa25bd0ff613b72d13971be8a83be62ce7b17e91"
+        },
+        {
+          "run": "native-level1",
+          "field": 14000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-014000.bmp",
+          "sha256": "f1d2b884a22e4d8a743ff5f5fa25bd0ff613b72d13971be8a83be62ce7b17e91"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa\\native-movement-control.png",
+      "sha256": "8f4e5f27190643b90e035e53e965cf14bb725e3624ade7098992f81876c9caa8",
+      "sourceFrames": [
+        {
+          "run": "native-level1",
+          "field": 18800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-level1\\captures\\frame-018800.bmp",
+          "sha256": "1bdc848de050d67cb50873e6fe31715fcb3b1b350a9617161599da37802ce2a9"
+        },
+        {
+          "run": "native-idle",
+          "field": 18800,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\native-idle\\captures\\frame-018800.bmp",
+          "sha256": "315a7c725a3c8721b1dc1a76ba03027d49974ad287a3677a5c67fc91b4d65b94"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    }
+  ],
+  "qaDecoder": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-18\\qa_sheet.py",
+    "sha256": "db093c0eea41d2dee7c48f5c85cb150cc74ee4153a3cf06a7eef0050d9f102e4"
+  },
+  "replayReceiptMode": "Both images use replay.py --firmware native solely to avoid interpreting CopperStart-private bootstrap receipts after guest takeover. The actual --rom path/hash selects the executed ROM; this argument does not select another execution engine or replace the guest firmware."
+}

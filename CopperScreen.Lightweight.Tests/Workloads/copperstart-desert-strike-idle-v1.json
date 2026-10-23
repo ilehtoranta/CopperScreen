@@ -1,0 +1,82 @@
+[
+  {
+    "frame": 1200,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 1206
+  },
+  {
+    "frame": 8000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 8012
+  },
+  {
+    "frame": 12000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 12012
+  },
+  {
+    "frame": 16000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 16012
+  },
+  {
+    "frame": 18000,
+    "ejectAdf": true
+  },
+  {
+    "frame": 18120,
+    "diskPath": "../../media/copperstart-desert-strike-disk2.adf"
+  },
+  {
+    "frame": 20000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 20012
+  },
+  {
+    "frame": 22000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 22012
+  },
+  {
+    "frame": 26000,
+    "ejectAdf": true
+  },
+  {
+    "frame": 26120,
+    "diskPath": "../../media/copperstart-desert-strike-disk3.adf"
+  },
+  {
+    "frame": 28000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 28020
+  },
+  {
+    "frame": 30000,
+    "ejectAdf": true
+  },
+  {
+    "frame": 30120,
+    "diskPath": "../../media/copperstart-desert-strike-disk2.adf"
+  },
+  {
+    "frame": 32000,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 32020
+  }
+]

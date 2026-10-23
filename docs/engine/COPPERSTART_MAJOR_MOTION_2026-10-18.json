@@ -1,0 +1,3644 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Major Motion (1988, Microdeal), supplied OFS ADF",
+  "status": "verified-bounded-native-compatibility",
+  "previousCase": "COPPERSTART_TOWER_ASSAULT_2026-10-18.json",
+  "consumerBaseCommit": "93a7e77ec7c12f5c71ddc9b09216ae220a0607be",
+  "producerQualificationCommit": "297c3c7e66c239ee10cb1c42da5eea67f355e8db",
+  "producerQualificationBase": "84525a27cb625d03b59be803d2988c6b5bfc5a16",
+  "mainSourceCommit": "ec6851aa2bc1b4e919069c168a13bb54f813ba61",
+  "mainSourcePullRequest": "https://github.com/ilehtoranta/CopperStart/pull/10",
+  "cpuPackage": "1.5.4-nitro-dev.2",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+    "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+    "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+    "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+    "entries": [
+      {
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "sha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e",
+        "bytes": 901120
+      }
+    ]
+  },
+  "build": {
+    "scope": "Fresh native compilation of retained Overdrive-corrected composition with rebuilt qualified DOS component and updated NativeDiskBoot.cs. The other four root sources, other ten component DLLs, compiler/SDK, compilation options and FF8000 graphics composer remain frozen. Includes relative-path/CWD, sequential metadata reads, HUNK Chip/Fast allocation flags and native boot VBlank enable. PAL OCS68000,512KiBChip+512KiBA501, one drive; bounded standalone guest ROM qualification.",
+    "sourceLineage": "Overdrive 84525a2 (Chip priority -10, A501 priority 0), Alien Breed a897cc3 / db8b8a1; includes F17, Lemmings and caller-owned trap-zero compatibility, graphics installer FF8000.; 297c3c7e66c239ee10cb1c42da5eea67f355e8db DOS, memory-class and boot-interrupt compatibility corrections.",
+    "baselineInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\build-inputs.json",
+      "sha256": "99a75be4ec7a31943996be38d515ef434f0d695d4d903f1b974ecaed5cbe8ba4"
+    },
+    "correctedInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-build-inputs.json",
+      "sha256": "1ac1f93039504618734fa00940e4dcef6985bc8eddcda2e7fa2396a0e6bce56d"
+    },
+    "rootSources": {
+      "NativeDiskBoot.cs": "62f88969c1c8c7ff6977ad321a6b2f6d4a465fc38e7d13f2d66e6cf721ca65ec",
+      "NativeGraphicsBoot.cs": "4f9020c92dd110e3e4855935528a4026e13a2be377827af0050b3447e2527664",
+      "NativeIntuitionBoot.cs": "627ed904b1b40ada8c097405ea29142771c294eebf2ef7b3fd91ce944c9da954",
+      "ProductionExports.cs": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605",
+      "Program.cs": "201b3fee6de27dc891caa8786ea91b93430d287a8c590d70a4fe4ca9e58d8eeb"
+    },
+    "baselineComponents": {
+      "CopperSharp.Compiler.dll": "a337436a89a20fd90a575d289c5b8e23edaa52df9abda54d3fc0fa872009e141",
+      "CopperSharp.Sdk.Amiga.dll": "6f18a50ac7a3828d735c8f342ed2372cf2e36081db537475f35af46f01832fa3",
+      "CopperSharp.Sdk.Amiga.Support.dll": "eb8e38b7639964480f52809626cdfab142a454f56e5c327dfbc65aba5db0e425",
+      "CopperSharp.Targets.Amiga.dll": "fd0dc4d25aff599560b1a898308726fe6b5b45ca7cd9502c800facebfc974a0c",
+      "CopperStart-System.dll": "2eab704c8838543399fcb6a39d799b514da91f1441f2e2f5acde358c93d9de8a",
+      "CopperStart.Devices.dll": "29069c61741916aa4dff53aa0c0bda29b76a1c74f4dfbf6ed61c2b51bf84d877",
+      "CopperStart.Dos.dll": "1a8f7a429e317a0e77fa3a726611f7f1255173a970559f17af07db796f11460c",
+      "CopperStart.Exec.dll": "84b668a77639bebebfe6e0302d8c557eac43652caae16be7ead24fdac158abe8",
+      "CopperStart.Graphics.dll": "cb5f3eb036d829aedd6f79e0393da991d167fef19cf60bdfdbe967f8e8b37e0b",
+      "CopperStart.Intuition.dll": "dd658367052d98f972e5107cce2b81ab51491ac052f03815323d403f802d9d03",
+      "CopperStart.Layers.dll": "f1f1321d1f15cce04769f3348983774da395c182ec3cc1f0c1bb7b0bb4aca14a"
+    },
+    "components": {
+      "CopperSharp.Compiler.dll": "a337436a89a20fd90a575d289c5b8e23edaa52df9abda54d3fc0fa872009e141",
+      "CopperSharp.Sdk.Amiga.dll": "6f18a50ac7a3828d735c8f342ed2372cf2e36081db537475f35af46f01832fa3",
+      "CopperSharp.Sdk.Amiga.Support.dll": "eb8e38b7639964480f52809626cdfab142a454f56e5c327dfbc65aba5db0e425",
+      "CopperSharp.Targets.Amiga.dll": "fd0dc4d25aff599560b1a898308726fe6b5b45ca7cd9502c800facebfc974a0c",
+      "CopperStart-System.dll": "2eab704c8838543399fcb6a39d799b514da91f1441f2e2f5acde358c93d9de8a",
+      "CopperStart.Devices.dll": "29069c61741916aa4dff53aa0c0bda29b76a1c74f4dfbf6ed61c2b51bf84d877",
+      "CopperStart.Dos.dll": "89474bd57e497d7b35f93f17f63866e60a8735b60a9411066de25b5ea69cdaa8",
+      "CopperStart.Exec.dll": "84b668a77639bebebfe6e0302d8c557eac43652caae16be7ead24fdac158abe8",
+      "CopperStart.Graphics.dll": "cb5f3eb036d829aedd6f79e0393da991d167fef19cf60bdfdbe967f8e8b37e0b",
+      "CopperStart.Intuition.dll": "dd658367052d98f972e5107cce2b81ab51491ac052f03815323d403f802d9d03",
+      "CopperStart.Layers.dll": "f1f1321d1f15cce04769f3348983774da395c182ec3cc1f0c1bb7b0bb4aca14a"
+    },
+    "correctedDosSources": {
+      "AmigaDiskFileSystemCore.cs": "4d4d736dbe93d308c5d0f4cc6f017642efba91cdf9f270b99ca3fca592f652b9",
+      "AssemblyInfo.cs": "47c61bae97c98443da4fa2b69a37aa47917799d4710be31f82fd1ba24f1b7025",
+      "CopperSharpNativeDosPlatform.cs": "ecc479a34ceb0066c5fb01cf31b5ee252509c6e923a4b797fd8a77660a739828",
+      "CopperSharpRomDosPlatform.cs": "f9bc0a327dbfb1e12416aa0affbcf8069b6e7fb8358ed959668cb4e21cb37e39",
+      "DosAbiProfile.cs": "c4ae72acde52b3b73f60324326bdcbfa74348f35bfe2fa974da19e13a0f842b7",
+      "DosAssignCore.cs": "0685840af70a6786b31f9e0f19d46959a3d23ebd6afdea06c674974d599e36e2",
+      "DosAssignNodeAttributeCore.cs": "8ae05b02db8e76e82f3aed091decb51e3bf834150352c5c6408f22db5944ebd0",
+      "DosBcplGlobalVectorCore.cs": "a5c4995f500ab873aed51ce78c3e1bd86364372b4b9531b1ed6937f3b34f0439",
+      "DosChildCliStartup.cs": "3016a8bbe9aae2bc8d90a997e0809669aba84e287f03714b42f082bbc9c4396f",
+      "DosChildCompletionCore.cs": "3c4be1d63916f0a4c2ce4f06376e4dc0ebc0f81c47b7f76b84faff9624989561",
+      "DosChildCompletionRecords.cs": "59fb3619aca6f147fc8fc0c7916eacadc30040c4bd5b3ecbf932b4defa2ac10e",
+      "DosChildContinuationCore.cs": "4444e23ae87ea7ef2af7f6db551873433fe6531fb19e5d01d7ada7f30d09e863",
+      "DosChildInheritedResources.cs": "a9e16ddc0d9e17f23d7417de8438ed3ca79edfc5dd160b58c258537086f98b7e",
+      "DosChildProcessLaunchCore.Create.cs": "67d8c3f62881054a1feecc9d1a5a137ee93923a299fb155c205969cb0d254ca2",
+      "DosChildProcessLaunchCore.cs": "28b312fc2708e6551e9a5c6816ed2c20c253d31d74c4dba0adb7fb7ea47569bc",
+      "DosChildProcessLaunchCore.Transaction.cs": "f2c763eacf37f2abd070114cbe117d1a59dd5d5eb0145832a35d5b87c3a4cfed",
+      "DosCliBstrCodec.cs": "6c2e739f713a237f36ecb6a36eca7aa820c4d472d6c4b33980083438aaf789b8",
+      "DosCliCore.cs": "041be4279e5edbe1e5c2147d054ff201535b8ec50ac9dfa684c7653ad0bd517d",
+      "DosCliDataCore.cs": "71a858e0cbe01bb26ccbee04fd17ab6c7d2ef3b7b90e01c8af0d881de9afcf7a",
+      "DosCliInitializationCore.cs": "a08e958da3096a095dd3e1a9374a99ec79cec31b1c6102d61c9d58a191a7fe94",
+      "DosCliNativeRoot.cs": "651b098a5ae8c0496de5a02f2d104456f3dc5279b396276646fcf54c44068f85",
+      "DosCliRegistryCore.cs": "9687ee8ad50e6690e91764094fc66a9b02fec543c98146f29dc79444e53d98ed",
+      "DosCliStorageLayout.cs": "72c801dbf49562e8026ef19982882feed0a6a6b07d753a6c13916273eda24fae",
+      "DosCommandImageCore.cs": "0d0c937e332ac7b7ece77b9f07f5af16aa447d34b5e4306b2b5dc571e852c644",
+      "DosCore.ChildCompletion.cs": "fd70a76acf1bbea5db621ff61d47bf7eb0b4fc36944084ff13088204a5fdb96e",
+      "DosCore.CommandPath.cs": "275918e65aceec5971f160807e3548213a23d966fbc1d377f53e416398f241ad",
+      "DosCore.cs": "244eaeb3dce1dcb64fee02a73fa7519ab0fb56920e2830d88ebfb03c937e9236",
+      "DosCore.PreparedChild.cs": "52e7cf2a984b216bbe9f03d6dda968563d98a2179425781334c1164714979646",
+      "DosCore.ProcessArgumentInput.cs": "a98cca05f00691973c819b4af34e97ba5411687077abde85c3c6532cf9ef404c",
+      "DosCore.RunCommandInput.cs": "064ef257d52111a9601b2c06c80acdfebfe32ae3999de467e9781fbf41c5eeaa",
+      "DosCore.RunCommandRetirementInspection.cs": "2e8d4d67efd58db202f2f9b2f5e3b0293170c7b21c629830854386253f0430a0",
+      "DosCore.ShellProcessContext.cs": "db3aa0ca6fe6aacb46965ee476d6bf16fe1bb86168de245308f00e0466b2ce7b",
+      "DosDateCore.cs": "5272d2bfb0e04fa4357b395b3313377772fd91610ac691626bcb983b4afe32e7",
+      "DosDateTextCore.cs": "8438268c8521c41edbec82b031aafc5f2d62c9ec58abd3242054ca30e5f2100b",
+      "DosDeviceNodeAttributeCore.cs": "68845288beb435de1b976927f25b27e4ff2282f05fa822cc7798018ab5bd4bf8",
+      "DosDeviceProcCore.cs": "d4cb7b17871e6e29128aff0c8b83753b76acdbfad43587e4c97d89a4a848defe",
+      "DosErrorCore.cs": "dde988d117c55bca69bb2ca2377a49c15aa5996b20d2a74930330715c63880bd",
+      "DosExAllHookCore.cs": "75b569acf713106b9edd771ca58275923aa3df5858d12ab9e58020cc92cca73d",
+      "DosExamine64Core.cs": "ce217f948fa4591f3dee0ca63aa3825cfbe6297965787cce63b6d606de2c37f5",
+      "DosExitCore.cs": "ae709f2e3411dd0d4be177e1e5b02c8bf6fc28fbb90fd786605acca208909bc0",
+      "DosExpansionNodeCore.cs": "8f0485822b173898141783393a8ac021d2d40fccbc216e2112e05e4494670d68",
+      "DosFileSystemAttributeCore.cs": "db0baea53edaa04725f06020f88edbd6b4b5dfe44eab66ff6222584a68d52386",
+      "DosFileSystemContextAttributeCore.cs": "1f7265b67626f51f24d95460e62e2f3329ef7e070a3a62e42379c75f6936d452",
+      "DosFormattedOutputCore.cs": "f3adc85075dd73873cd4fb3f3b6cf2f1840f6e4151ec2602c076e343d0f6a500",
+      "DosHandlerProcessLaunchCore.cs": "fdc0564c75a38ac62940fee1d5629d4912306910e34ebacb64595391c1efeb96",
+      "DosHandlerSegmentCore.cs": "a6cfa51fa0c063d48442a089bf6476e1283a9b49f177dd23b89046b43bfb9b53",
+      "DosInternalSegmentCore.cs": "4c3b521efc4c3e54bc3680e7576c19f7c33c59fd25e458163e58b23e3b53a9a7",
+      "DosListCore.cs": "08b82919e69eccfd92fb33bfd661d553bb4e69815468b50bbed8a5b7517c815a",
+      "DosListWaitCore.cs": "0a78ddb24b3cb17c8d2e2a32bbe9e7afb37ed76780262855580dd5106c9dc79d",
+      "DosLockNativeRoot.cs": "48a3dcd29c4cb113d9f920d8a0de9d14b5cb0eadb1727691570319a4b03e03bb",
+      "DosMatchCore.cs": "8f5d03165e3c4764e481d8209af05d2cabc3a3651c47ae358ec78ed45215940a",
+      "DosMatchNativeRoot.cs": "84a8e2fe358f971a1ca0683c56d2742dea1e3d7fe94f005eb54f65ab1b8953d7",
+      "DosNativeDirectBoundary.cs": "2bdf1dea5dfb579d1b20c393337411b80e7738980f413865e58c4806d217b481",
+      "DosNativeDirectEntrypoints.g.cs": "34e14cb8527e5615a2591272f0224fbd6f7514f5ce897be6916ee616894b1588",
+      "DosNativeDirectManagementEntrypoints.cs": "ce9cb7471ee00ec145e3b589dfc2604199daa492962d8b80a19c1c0c2b81edf8",
+      "DosNativeDirectVectorCore.g.cs": "a09a1379f467508219020bb776426bf405abad35d6456c9fe61a6f3304f4107b",
+      "DosNativeEntrypoints.cs": "6fa02217f94bd98886eb17cce0ccc7f2963c31d8a38f58375e45770d14b991a2",
+      "DosNativeInactiveHandlerResolver.cs": "a35ed1c384d28f483a0f98b9e4748c64930b1c4ed7b3cd8b6d56620757db4bf3",
+      "DosNativeInactiveHandlerWaitPolicy.cs": "4c1aa51a514b18ecb552a4600ebc9083a127553defca6aa35093bcca8ee7eb76",
+      "DosNativeLibraryCore.cs": "536da1f7548bcba4e1bef38d388622d26abd8753f81e797ab8950af33fb22b36",
+      "DosNativeLibraryRoot.cs": "5c41049e36f2ad0aacece9d430852c78c98c1f51d4d4ab5a70bbdf9e4d04fb07",
+      "DosNativeOwnedLibraryCore.cs": "350156f1676106129cbd66707788f7e3ff3d7b950433fb5fda3e5e38088505ad",
+      "DosNativePermanentEntrypoints.cs": "c6280e443bba710fce94a1e32fc0af797f2f7644e97fa95420ff130f17bb3055",
+      "DosNativeProcessReturn.cs": "b4fec50f926767e70b2918175fccc691a1b0b6f892d92a83ed6b3630da962e92",
+      "DosNativeProductionRoot.cs": "34fe9959b90c5b943bf582c229a523af2c5f26ed0902c6cf1360a884f07ae79d",
+      "DosNativeProviderLifecycle.cs": "5f39001195c18001021aea7af8fe661f880457137d7669e3184d5c9f1568b6d9",
+      "DosNativeProviderQualificationEntrypoints.cs": "08b174bcc95af34f5665881432e38af1e3229a879c5b5ce6f4f706775277a67f",
+      "DosNativeProviderRecords.cs": "630f6b65d465222517e8eed176186f4b5bff332a90b80e3c667021818c367d12",
+      "DosNativeRoot.cs": "b826b2fe51b31e23aeca1a2491c06a7f63ed270bb1fd88e4bdd58aa7d8639c63",
+      "DosNativeVectors.cs": "859e0a740e77ab2560225ba4b9bbaa8eed2372ef1f836bb6db3fa1dce69db25b",
+      "DosNativeWaitRecord.cs": "dd1d9291bd856d342d2ef9adf8b4bacad4b90e4e93191fba746a3cef4b500284",
+      "DosNotificationCore.cs": "0b69014b5a8f85d6634a5c7154f4ab2075a52c824060402e6456a0c1415b8c47",
+      "DosObjectCore.cs": "add35d2eaea556a3a3b9d8157eaf50a43e06df3f549c31347f78ecbcac424fe1",
+      "DosObjectRecords.cs": "b21ae588f8459e10cd81aefd6a09658f767e3bcf20be9307d01bb0462ede2e58",
+      "DosOwnedProcessTaskCore.cs": "122464a69aa6c547f74e2c630212d8b4d08dc8d7221e211e190814a2f9afc6d5",
+      "DosPacketCore.cs": "67bd2a14f57d05a64343e388c398391baf7d5572d4acfcf1cdb0d2a0a8321d6c",
+      "DosPathCore.cs": "ec633765c3ac2f53ad8660a0e122321edb8217a7ce52f94e4c267a3730a367fe",
+      "DosPatternCore.cs": "ef854fcbaf4cd4db7ff54bf67bd3bc7c2d0fc20f6cf6582f81701756e0a667c7",
+      "DosProcessArgumentInputRecords.cs": "92c5fae04da5c08ac8ece6c4d18ed58b009f1df06c128ae6dbfee799c4a74b09",
+      "DosProcessCore.cs": "b06b5d8fee8aa09aca27364978bd607d004a167ab77bb1e81aae986a3ba19eae",
+      "DosProcessImageCore.cs": "fca2698573e814eaff323744e5ef016f82826db5092ce79f3339265954d727a4",
+      "DosProcessLaunchBoundaryCore.cs": "d79a21ee832d58526f30b7ba29290dbba1e65b7dc4cffd4bb8d8e3fa1a45ddcc",
+      "DosProcessLaunchContracts.cs": "3b864f6dd067720b07c2e47612c9eee367e092fa6d6955e4fbc855fadef2c4a3",
+      "DosProcessLifecycleCore.cs": "7d8a3f4cb8da9d6e5acffc42b97418f7df32a53696df6d27d61b43af39b62399",
+      "DosProcessMessagePortCore.cs": "311fadbb6b126e4a42e2245d31208722435be048f7bf84f7b4f996620644eb4f",
+      "DosProcessSegmentListArrayCore.cs": "7ed3c6cf72eca7fe7ebe9da8b5ce95bac1674a0d9b7f24d23ad20f15a1a055e5",
+      "DosProcessVectorCore.cs": "1963ad1c093368cec7e47c523072a2342679fdc742a56040ae4d5d6929b6f6d5",
+      "DosQueueBufferCore.cs": "df8c3ba5848e8784d4bc5f27638594dda16613dcd320ccbd9f81397ef49b7835",
+      "DosQueueChannelCore.cs": "56082f9862ad642f06f873e0535cab3a340e7285c416c6fe03d99889793e633a",
+      "DosQueueHandlerChannelOwnerCore.cs": "df20c7a90b82e098161cbf371fff32b0f3796498e8350e545d2166d269f01cf1",
+      "DosQueueHandlerFileCore.cs": "b2f8b1eb177e7859b86054ebe51b27268d925e6d0b6369513d62bedc1995b0ee",
+      "DosQueueHandlerIoCore.cs": "57f5addc62b22301c6b860be31a7c441454a924201427e4f92fee9ef171ff053",
+      "DosQueueHandlerOpenCore.cs": "737332d062f8fe00db3a7f8bdd9d7c0b24841428c66f96975197c2ec98be1c51",
+      "DosQueueHandlerPacketCore.cs": "2bd6fa65de38801e971560e5757a9f26157a14d02c352091ccdb6f23d9867e0b",
+      "DosQueueHandlerPendingRecords.cs": "4fa961daba406d8be7635f11882b370b005e1ef9f14c9cc63efebb9b353682bc",
+      "DosQueueHandlerProcessCore.cs": "3550427b31ed4e923a3f95467286ee8a258de8e4f12fc18a316b7f4e3562da80",
+      "DosQueueHandlerRegistryCore.cs": "fdccbc571901345b7b39a77d19636b55e5c1bfe7453cc5422944d94033efcdaf",
+      "DosQueueHandlerTaskCore.cs": "fc201deeb508328479a9611cb543bcd00eefb52b2544c7c7b9ca92e41f558d1a",
+      "DosReadLinkCore.cs": "b8f451075e7d4e0aa7491be69c5456649c53486c9aa9fbc0f446bc74c75c6bb3",
+      "DosRecordWaitCore.cs": "1f7099847764613b4aa08e4f28976c602c539da4c491861a2c14df7339acfb64",
+      "DosRegisterFrame.cs": "bd6f25fe91ca97ad58cf2e72c7025cf1703feefe3ffab32c2784f66215bb7041",
+      "DosRequesterPolicy.cs": "8eee7982eb4f31118e6ec6975b8c846c3207d9ebe5b0e4905ca2276d3233d102",
+      "DosResidentRegistryCore.cs": "bc098225eae19726fcd22d46d31bba7d0de9ce28ea3e4b3b677f8a4c8494cc29",
+      "DosRunCommandCore.cs": "68f10a54cedd86a7a4a093bf3820b990a68737d78d43659a9744419cf2a9fc9d",
+      "DosRunCommandCore.RetirementInspection.cs": "f62119435cbe5ef35317403f32792f2f842aba0fa2c03704176abdc0e3b5a5ea",
+      "DosRunCommandRetirementTypes.cs": "a7d3f90b3a33fcf5305cdc38c258f4bef86e781d197db7c9de0f4bd29e0341c1",
+      "DosSegmentListCore.cs": "f6c75a198ab66507a4e22f139d12946867f81c2e35f84161e94e98e6ad7cd7db",
+      "DosSegmentLoaderCore.cs": "67298a7767555fe31d4361b1284188351b3a5d5c2070b5033ad76bd9ec799215",
+      "DosSegmentVectorCore.cs": "289d0c2dc2b6b1c99cfe6bf2015888ba29294c0d05467f699c7b91ee94909760",
+      "DosShellErrorCodeCursorCodec.cs": "3b21068c126748a2c9651a1e34679f01eefc4f48f3521b6860f3470b865be689",
+      "DosShellForegroundWaitCore.cs": "8c8f9ae744fa37fab55a35a7268fc2c988b813afa64e5572392608b9b45dac39",
+      "DosShellNativeBridge.cs": "4603eb85fb09a6f3978fce56bb2f0cc71d8eaa9b2b64e80ce76a9c34b6c5cb66",
+      "DosShellNativeChildContextCore.cs": "74b6995fd7188b62177a06084fee66361a4beb9c78958f570e65e59368d5437a",
+      "DosShellNativeContextCore.cs": "357906a866a10909dd397282a161b741c42dd2bf8aa0ad6afc1ed8590d0b5dfb",
+      "DosShellPromptCore.cs": "3d417913dba7ab0cd91111eb1d3aa61fdc576efcda784cc90b7a6f88fab64379",
+      "DosShellScriptRunnerCore.cs": "0983838c0c65618fe771daec2316537a9160a52191cd44f06bf58044dcd02402",
+      "DosShellStateCore.cs": "6c8368c440f38cf90339060181b988597daa7d52079367071f27802b5bba3472",
+      "DosStartupScriptCore.cs": "8f20b65bf59c6e1d1a2ef499de05289d4677c2f63e116d35169f12967497a04f",
+      "DosStreamNativeRoot.cs": "326a3ed4f6faa4135ea56648196c1acc3c7b36226832e0b28c0addf950893a03",
+      "DosSystemContracts.cs": "3344f85acb1fb1b24febe3cd0423082b4452d02c4fe8d2f4903dec746b9a3516",
+      "DosSystemCore.cs": "02300dd7789645a40196dcca68eea87e2ab4a73c335d97617a4cdc0255fccaa9",
+      "DosVariableCore.cs": "991f5695b27741c6aa5fb502b4c3059baa9393722b3152c2894c30805ef7309b",
+      "DosVectorManifest.cs": "f1fc108bc07fd1c7fd8f0c3470a29d6e92009208e11ef17c2c351e841113e91a",
+      "DosVectorRouter.cs": "ab92820d8f53f22d6667f1c61fa893dc2585a397cdc8897ca06272acad07017d",
+      "DosVolumeNodeAttributeCore.cs": "1d7e5a4e528c2766a89bd59e0adacdfc863f8898e14e1cd1752a6767c7f3657f",
+      "IDosPlatform.cs": "dc0e7f2b498e6d5abb7547a7c0204dab797b905064d73f2dbe82519d2f2c6b64",
+      "NativeAmigaFileSystem.cs": "136a635896bc33a3c5d23e2a484b602d02f34489808c874a77f2e763db828052"
+    },
+    "baseline": {
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5ca306b3a7ece26a366adc90e487fc384276a5463c22c3ce6b98aa4a118764d0"
+      },
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-rom\\disk-boot-test-manifest.json",
+        "sha256": "1bc6050cac3bf77d5a192a84530fde41bba6663fed4af9248c71b2ea251912a7"
+      },
+      "freshBuildUtc": "2026-10-18T14:09:33.1489623+00:00",
+      "codeBytes": 459374,
+      "qualificationRoot": {
+        "file": "CopperStart-QualifiedRoot.dll",
+        "sha256": "F2D9DFC2C6E602BBF4580529FF7142798CF83B42553F925C60B1E85D699EDAA4",
+        "compatible": true,
+        "managedAllocationSites": 0,
+        "frameworkFeatures": 0
+      },
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-rom-build.log",
+        "sha256": "96d942f80c8f03e1dae15ebb0aa56fc4fa0713435609443b1af1d3e2f5b10f18"
+      }
+    },
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "9f938923b7e58df756d6eb6e7a6e50c7a5bc901efa8fb6f7ab3aba5d2277290c"
+    },
+    "compiledImage": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot-compiled.rom",
+      "sha256": "bef1c5f9727bd5a2a0e27c1a4e5fcd53f130a0d4a3b237c1b73e733810ab6fa9"
+    },
+    "manifest": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\disk-boot-test-manifest.json",
+      "sha256": "1a0c907ac09f7ab5c90412b9d824e5124ce9a312c8c3ba496efd99a6470635e6"
+    },
+    "map": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.map",
+      "sha256": "b85faac3bebd7b9704d23ac0106ba4a6a0cc88e79d588fbddba3d49d392d1a66"
+    },
+    "freshBuildUtc": "2026-10-18T16:40:20.555176+00:00",
+    "codeBytes": 451192,
+    "graphicsBytes": 26098,
+    "graphicsResidentAddress": "00FF8000",
+    "qualificationRoot": {
+      "file": "CopperStart-QualifiedRoot.dll",
+      "sha256": "8F84F8CAFE2B9D30B28E4247FCB3A16172D6C50BE6281DEC286038F2ED7B42B9",
+      "compatible": true,
+      "managedAllocationSites": 0,
+      "frameworkFeatures": 0
+    },
+    "resolvedBuilderInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-builder-loaded-inputs.json",
+      "sha256": "0201e603343eba68a778bea4bf330134cb83fd8492e714d073eceba57307a5dd"
+    },
+    "nativeCompileCommand": "dotnet qualified-builder/bin/Release/net10.0/FixedBuilder.dll final-rom qualified-components qualified-build-inputs.json",
+    "nativeCompileLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom-build.log",
+      "sha256": "9cbeb23f4ce2b90e7c2f052b4b4cd16e42bae71115c77a4821b03a1a3119d5ae"
+    },
+    "managedBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-builder-build.log",
+      "sha256": "982803c7a1d6160062fa4ed2c438e1fe17e6fdc3a6d6f187865502f3d538af90"
+    },
+    "dosComponentBuildLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos-build.log",
+      "sha256": "7b5bd91d4b60c48a30cd42cf81e7183b4f558a1ee0e5a6e8056e6041d0995e0b"
+    },
+    "files": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-root\\FixedRoot.csproj",
+        "sha256": "fc4fcc9add8ed42bd681576f2387ce21f67548c308691ede3ef20bdb13d1fca3"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-root\\NativeDiskBoot.cs",
+        "sha256": "62f88969c1c8c7ff6977ad321a6b2f6d4a465fc38e7d13f2d66e6cf721ca65ec"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-root\\NativeGraphicsBoot.cs",
+        "sha256": "4f9020c92dd110e3e4855935528a4026e13a2be377827af0050b3447e2527664"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-root\\NativeIntuitionBoot.cs",
+        "sha256": "627ed904b1b40ada8c097405ea29142771c294eebf2ef7b3fd91ce944c9da954"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-root\\ProductionExports.cs",
+        "sha256": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-root\\Program.cs",
+        "sha256": "201b3fee6de27dc891caa8786ea91b93430d287a8c590d70a4fe4ca9e58d8eeb"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-builder\\FixedBuilder.csproj",
+        "sha256": "1b23758a3609ec3f8216378197f8c821229f582a356316f6b5521e359a3377d2"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-builder\\Program.cs",
+        "sha256": "808cfde3c0c24f9fdd25296b13141232c7d8b8206d9fc51bf177d3727347a081"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\AmigaDiskFileSystemCore.cs",
+        "sha256": "4d4d736dbe93d308c5d0f4cc6f017642efba91cdf9f270b99ca3fca592f652b9"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\AssemblyInfo.cs",
+        "sha256": "47c61bae97c98443da4fa2b69a37aa47917799d4710be31f82fd1ba24f1b7025"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\CopperSharpNativeDosPlatform.cs",
+        "sha256": "ecc479a34ceb0066c5fb01cf31b5ee252509c6e923a4b797fd8a77660a739828"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\CopperSharpRomDosPlatform.cs",
+        "sha256": "f9bc0a327dbfb1e12416aa0affbcf8069b6e7fb8358ed959668cb4e21cb37e39"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosAbiProfile.cs",
+        "sha256": "c4ae72acde52b3b73f60324326bdcbfa74348f35bfe2fa974da19e13a0f842b7"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosAssignCore.cs",
+        "sha256": "0685840af70a6786b31f9e0f19d46959a3d23ebd6afdea06c674974d599e36e2"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosAssignNodeAttributeCore.cs",
+        "sha256": "8ae05b02db8e76e82f3aed091decb51e3bf834150352c5c6408f22db5944ebd0"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosBcplGlobalVectorCore.cs",
+        "sha256": "a5c4995f500ab873aed51ce78c3e1bd86364372b4b9531b1ed6937f3b34f0439"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildCliStartup.cs",
+        "sha256": "3016a8bbe9aae2bc8d90a997e0809669aba84e287f03714b42f082bbc9c4396f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildCompletionCore.cs",
+        "sha256": "3c4be1d63916f0a4c2ce4f06376e4dc0ebc0f81c47b7f76b84faff9624989561"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildCompletionRecords.cs",
+        "sha256": "59fb3619aca6f147fc8fc0c7916eacadc30040c4bd5b3ecbf932b4defa2ac10e"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildContinuationCore.cs",
+        "sha256": "4444e23ae87ea7ef2af7f6db551873433fe6531fb19e5d01d7ada7f30d09e863"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildInheritedResources.cs",
+        "sha256": "a9e16ddc0d9e17f23d7417de8438ed3ca79edfc5dd160b58c258537086f98b7e"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildProcessLaunchCore.Create.cs",
+        "sha256": "67d8c3f62881054a1feecc9d1a5a137ee93923a299fb155c205969cb0d254ca2"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildProcessLaunchCore.cs",
+        "sha256": "28b312fc2708e6551e9a5c6816ed2c20c253d31d74c4dba0adb7fb7ea47569bc"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosChildProcessLaunchCore.Transaction.cs",
+        "sha256": "f2c763eacf37f2abd070114cbe117d1a59dd5d5eb0145832a35d5b87c3a4cfed"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliBstrCodec.cs",
+        "sha256": "6c2e739f713a237f36ecb6a36eca7aa820c4d472d6c4b33980083438aaf789b8"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliCore.cs",
+        "sha256": "041be4279e5edbe1e5c2147d054ff201535b8ec50ac9dfa684c7653ad0bd517d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliDataCore.cs",
+        "sha256": "71a858e0cbe01bb26ccbee04fd17ab6c7d2ef3b7b90e01c8af0d881de9afcf7a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliInitializationCore.cs",
+        "sha256": "a08e958da3096a095dd3e1a9374a99ec79cec31b1c6102d61c9d58a191a7fe94"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliNativeRoot.cs",
+        "sha256": "651b098a5ae8c0496de5a02f2d104456f3dc5279b396276646fcf54c44068f85"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliRegistryCore.cs",
+        "sha256": "9687ee8ad50e6690e91764094fc66a9b02fec543c98146f29dc79444e53d98ed"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCliStorageLayout.cs",
+        "sha256": "72c801dbf49562e8026ef19982882feed0a6a6b07d753a6c13916273eda24fae"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCommandImageCore.cs",
+        "sha256": "0d0c937e332ac7b7ece77b9f07f5af16aa447d34b5e4306b2b5dc571e852c644"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.ChildCompletion.cs",
+        "sha256": "fd70a76acf1bbea5db621ff61d47bf7eb0b4fc36944084ff13088204a5fdb96e"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.CommandPath.cs",
+        "sha256": "275918e65aceec5971f160807e3548213a23d966fbc1d377f53e416398f241ad"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.cs",
+        "sha256": "244eaeb3dce1dcb64fee02a73fa7519ab0fb56920e2830d88ebfb03c937e9236"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.PreparedChild.cs",
+        "sha256": "52e7cf2a984b216bbe9f03d6dda968563d98a2179425781334c1164714979646"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.ProcessArgumentInput.cs",
+        "sha256": "a98cca05f00691973c819b4af34e97ba5411687077abde85c3c6532cf9ef404c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.RunCommandInput.cs",
+        "sha256": "064ef257d52111a9601b2c06c80acdfebfe32ae3999de467e9781fbf41c5eeaa"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.RunCommandRetirementInspection.cs",
+        "sha256": "2e8d4d67efd58db202f2f9b2f5e3b0293170c7b21c629830854386253f0430a0"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosCore.ShellProcessContext.cs",
+        "sha256": "db3aa0ca6fe6aacb46965ee476d6bf16fe1bb86168de245308f00e0466b2ce7b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosDateCore.cs",
+        "sha256": "5272d2bfb0e04fa4357b395b3313377772fd91610ac691626bcb983b4afe32e7"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosDateTextCore.cs",
+        "sha256": "8438268c8521c41edbec82b031aafc5f2d62c9ec58abd3242054ca30e5f2100b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosDeviceNodeAttributeCore.cs",
+        "sha256": "68845288beb435de1b976927f25b27e4ff2282f05fa822cc7798018ab5bd4bf8"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosDeviceProcCore.cs",
+        "sha256": "d4cb7b17871e6e29128aff0c8b83753b76acdbfad43587e4c97d89a4a848defe"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosErrorCore.cs",
+        "sha256": "dde988d117c55bca69bb2ca2377a49c15aa5996b20d2a74930330715c63880bd"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosExAllHookCore.cs",
+        "sha256": "75b569acf713106b9edd771ca58275923aa3df5858d12ab9e58020cc92cca73d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosExamine64Core.cs",
+        "sha256": "ce217f948fa4591f3dee0ca63aa3825cfbe6297965787cce63b6d606de2c37f5"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosExitCore.cs",
+        "sha256": "ae709f2e3411dd0d4be177e1e5b02c8bf6fc28fbb90fd786605acca208909bc0"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosExpansionNodeCore.cs",
+        "sha256": "8f0485822b173898141783393a8ac021d2d40fccbc216e2112e05e4494670d68"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosFileSystemAttributeCore.cs",
+        "sha256": "db0baea53edaa04725f06020f88edbd6b4b5dfe44eab66ff6222584a68d52386"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosFileSystemContextAttributeCore.cs",
+        "sha256": "1f7265b67626f51f24d95460e62e2f3329ef7e070a3a62e42379c75f6936d452"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosFormattedOutputCore.cs",
+        "sha256": "f3adc85075dd73873cd4fb3f3b6cf2f1840f6e4151ec2602c076e343d0f6a500"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosHandlerProcessLaunchCore.cs",
+        "sha256": "fdc0564c75a38ac62940fee1d5629d4912306910e34ebacb64595391c1efeb96"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosHandlerSegmentCore.cs",
+        "sha256": "a6cfa51fa0c063d48442a089bf6476e1283a9b49f177dd23b89046b43bfb9b53"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosInternalSegmentCore.cs",
+        "sha256": "4c3b521efc4c3e54bc3680e7576c19f7c33c59fd25e458163e58b23e3b53a9a7"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosListCore.cs",
+        "sha256": "08b82919e69eccfd92fb33bfd661d553bb4e69815468b50bbed8a5b7517c815a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosListWaitCore.cs",
+        "sha256": "0a78ddb24b3cb17c8d2e2a32bbe9e7afb37ed76780262855580dd5106c9dc79d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosLockNativeRoot.cs",
+        "sha256": "48a3dcd29c4cb113d9f920d8a0de9d14b5cb0eadb1727691570319a4b03e03bb"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosMatchCore.cs",
+        "sha256": "8f5d03165e3c4764e481d8209af05d2cabc3a3651c47ae358ec78ed45215940a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosMatchNativeRoot.cs",
+        "sha256": "84a8e2fe358f971a1ca0683c56d2742dea1e3d7fe94f005eb54f65ab1b8953d7"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeDirectBoundary.cs",
+        "sha256": "2bdf1dea5dfb579d1b20c393337411b80e7738980f413865e58c4806d217b481"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeDirectEntrypoints.g.cs",
+        "sha256": "34e14cb8527e5615a2591272f0224fbd6f7514f5ce897be6916ee616894b1588"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeDirectManagementEntrypoints.cs",
+        "sha256": "ce9cb7471ee00ec145e3b589dfc2604199daa492962d8b80a19c1c0c2b81edf8"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeDirectVectorCore.g.cs",
+        "sha256": "a09a1379f467508219020bb776426bf405abad35d6456c9fe61a6f3304f4107b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeEntrypoints.cs",
+        "sha256": "6fa02217f94bd98886eb17cce0ccc7f2963c31d8a38f58375e45770d14b991a2"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeInactiveHandlerResolver.cs",
+        "sha256": "a35ed1c384d28f483a0f98b9e4748c64930b1c4ed7b3cd8b6d56620757db4bf3"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeInactiveHandlerWaitPolicy.cs",
+        "sha256": "4c1aa51a514b18ecb552a4600ebc9083a127553defca6aa35093bcca8ee7eb76"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeLibraryCore.cs",
+        "sha256": "536da1f7548bcba4e1bef38d388622d26abd8753f81e797ab8950af33fb22b36"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeLibraryRoot.cs",
+        "sha256": "5c41049e36f2ad0aacece9d430852c78c98c1f51d4d4ab5a70bbdf9e4d04fb07"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeOwnedLibraryCore.cs",
+        "sha256": "350156f1676106129cbd66707788f7e3ff3d7b950433fb5fda3e5e38088505ad"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativePermanentEntrypoints.cs",
+        "sha256": "c6280e443bba710fce94a1e32fc0af797f2f7644e97fa95420ff130f17bb3055"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeProcessReturn.cs",
+        "sha256": "b4fec50f926767e70b2918175fccc691a1b0b6f892d92a83ed6b3630da962e92"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeProductionRoot.cs",
+        "sha256": "34fe9959b90c5b943bf582c229a523af2c5f26ed0902c6cf1360a884f07ae79d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeProviderLifecycle.cs",
+        "sha256": "5f39001195c18001021aea7af8fe661f880457137d7669e3184d5c9f1568b6d9"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeProviderQualificationEntrypoints.cs",
+        "sha256": "08b174bcc95af34f5665881432e38af1e3229a879c5b5ce6f4f706775277a67f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeProviderRecords.cs",
+        "sha256": "630f6b65d465222517e8eed176186f4b5bff332a90b80e3c667021818c367d12"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeRoot.cs",
+        "sha256": "b826b2fe51b31e23aeca1a2491c06a7f63ed270bb1fd88e4bdd58aa7d8639c63"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeVectors.cs",
+        "sha256": "859e0a740e77ab2560225ba4b9bbaa8eed2372ef1f836bb6db3fa1dce69db25b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNativeWaitRecord.cs",
+        "sha256": "dd1d9291bd856d342d2ef9adf8b4bacad4b90e4e93191fba746a3cef4b500284"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosNotificationCore.cs",
+        "sha256": "0b69014b5a8f85d6634a5c7154f4ab2075a52c824060402e6456a0c1415b8c47"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosObjectCore.cs",
+        "sha256": "add35d2eaea556a3a3b9d8157eaf50a43e06df3f549c31347f78ecbcac424fe1"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosObjectRecords.cs",
+        "sha256": "b21ae588f8459e10cd81aefd6a09658f767e3bcf20be9307d01bb0462ede2e58"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosOwnedProcessTaskCore.cs",
+        "sha256": "122464a69aa6c547f74e2c630212d8b4d08dc8d7221e211e190814a2f9afc6d5"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosPacketCore.cs",
+        "sha256": "67bd2a14f57d05a64343e388c398391baf7d5572d4acfcf1cdb0d2a0a8321d6c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosPathCore.cs",
+        "sha256": "ec633765c3ac2f53ad8660a0e122321edb8217a7ce52f94e4c267a3730a367fe"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosPatternCore.cs",
+        "sha256": "ef854fcbaf4cd4db7ff54bf67bd3bc7c2d0fc20f6cf6582f81701756e0a667c7"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessArgumentInputRecords.cs",
+        "sha256": "92c5fae04da5c08ac8ece6c4d18ed58b009f1df06c128ae6dbfee799c4a74b09"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessCore.cs",
+        "sha256": "b06b5d8fee8aa09aca27364978bd607d004a167ab77bb1e81aae986a3ba19eae"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessImageCore.cs",
+        "sha256": "fca2698573e814eaff323744e5ef016f82826db5092ce79f3339265954d727a4"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessLaunchBoundaryCore.cs",
+        "sha256": "d79a21ee832d58526f30b7ba29290dbba1e65b7dc4cffd4bb8d8e3fa1a45ddcc"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessLaunchContracts.cs",
+        "sha256": "3b864f6dd067720b07c2e47612c9eee367e092fa6d6955e4fbc855fadef2c4a3"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessLifecycleCore.cs",
+        "sha256": "7d8a3f4cb8da9d6e5acffc42b97418f7df32a53696df6d27d61b43af39b62399"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessMessagePortCore.cs",
+        "sha256": "311fadbb6b126e4a42e2245d31208722435be048f7bf84f7b4f996620644eb4f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessSegmentListArrayCore.cs",
+        "sha256": "7ed3c6cf72eca7fe7ebe9da8b5ce95bac1674a0d9b7f24d23ad20f15a1a055e5"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosProcessVectorCore.cs",
+        "sha256": "1963ad1c093368cec7e47c523072a2342679fdc742a56040ae4d5d6929b6f6d5"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueBufferCore.cs",
+        "sha256": "df8c3ba5848e8784d4bc5f27638594dda16613dcd320ccbd9f81397ef49b7835"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueChannelCore.cs",
+        "sha256": "56082f9862ad642f06f873e0535cab3a340e7285c416c6fe03d99889793e633a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerChannelOwnerCore.cs",
+        "sha256": "df20c7a90b82e098161cbf371fff32b0f3796498e8350e545d2166d269f01cf1"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerFileCore.cs",
+        "sha256": "b2f8b1eb177e7859b86054ebe51b27268d925e6d0b6369513d62bedc1995b0ee"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerIoCore.cs",
+        "sha256": "57f5addc62b22301c6b860be31a7c441454a924201427e4f92fee9ef171ff053"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerOpenCore.cs",
+        "sha256": "737332d062f8fe00db3a7f8bdd9d7c0b24841428c66f96975197c2ec98be1c51"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerPacketCore.cs",
+        "sha256": "2bd6fa65de38801e971560e5757a9f26157a14d02c352091ccdb6f23d9867e0b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerPendingRecords.cs",
+        "sha256": "4fa961daba406d8be7635f11882b370b005e1ef9f14c9cc63efebb9b353682bc"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerProcessCore.cs",
+        "sha256": "3550427b31ed4e923a3f95467286ee8a258de8e4f12fc18a316b7f4e3562da80"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerRegistryCore.cs",
+        "sha256": "fdccbc571901345b7b39a77d19636b55e5c1bfe7453cc5422944d94033efcdaf"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosQueueHandlerTaskCore.cs",
+        "sha256": "fc201deeb508328479a9611cb543bcd00eefb52b2544c7c7b9ca92e41f558d1a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosReadLinkCore.cs",
+        "sha256": "b8f451075e7d4e0aa7491be69c5456649c53486c9aa9fbc0f446bc74c75c6bb3"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosRecordWaitCore.cs",
+        "sha256": "1f7099847764613b4aa08e4f28976c602c539da4c491861a2c14df7339acfb64"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosRegisterFrame.cs",
+        "sha256": "bd6f25fe91ca97ad58cf2e72c7025cf1703feefe3ffab32c2784f66215bb7041"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosRequesterPolicy.cs",
+        "sha256": "8eee7982eb4f31118e6ec6975b8c846c3207d9ebe5b0e4905ca2276d3233d102"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosResidentRegistryCore.cs",
+        "sha256": "bc098225eae19726fcd22d46d31bba7d0de9ce28ea3e4b3b677f8a4c8494cc29"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosRunCommandCore.cs",
+        "sha256": "68f10a54cedd86a7a4a093bf3820b990a68737d78d43659a9744419cf2a9fc9d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosRunCommandCore.RetirementInspection.cs",
+        "sha256": "f62119435cbe5ef35317403f32792f2f842aba0fa2c03704176abdc0e3b5a5ea"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosRunCommandRetirementTypes.cs",
+        "sha256": "a7d3f90b3a33fcf5305cdc38c258f4bef86e781d197db7c9de0f4bd29e0341c1"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosSegmentListCore.cs",
+        "sha256": "f6c75a198ab66507a4e22f139d12946867f81c2e35f84161e94e98e6ad7cd7db"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosSegmentLoaderCore.cs",
+        "sha256": "67298a7767555fe31d4361b1284188351b3a5d5c2070b5033ad76bd9ec799215"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosSegmentVectorCore.cs",
+        "sha256": "289d0c2dc2b6b1c99cfe6bf2015888ba29294c0d05467f699c7b91ee94909760"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellErrorCodeCursorCodec.cs",
+        "sha256": "3b21068c126748a2c9651a1e34679f01eefc4f48f3521b6860f3470b865be689"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellForegroundWaitCore.cs",
+        "sha256": "8c8f9ae744fa37fab55a35a7268fc2c988b813afa64e5572392608b9b45dac39"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellNativeBridge.cs",
+        "sha256": "4603eb85fb09a6f3978fce56bb2f0cc71d8eaa9b2b64e80ce76a9c34b6c5cb66"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellNativeChildContextCore.cs",
+        "sha256": "74b6995fd7188b62177a06084fee66361a4beb9c78958f570e65e59368d5437a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellNativeContextCore.cs",
+        "sha256": "357906a866a10909dd397282a161b741c42dd2bf8aa0ad6afc1ed8590d0b5dfb"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellPromptCore.cs",
+        "sha256": "3d417913dba7ab0cd91111eb1d3aa61fdc576efcda784cc90b7a6f88fab64379"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellScriptRunnerCore.cs",
+        "sha256": "0983838c0c65618fe771daec2316537a9160a52191cd44f06bf58044dcd02402"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosShellStateCore.cs",
+        "sha256": "6c8368c440f38cf90339060181b988597daa7d52079367071f27802b5bba3472"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosStartupScriptCore.cs",
+        "sha256": "8f20b65bf59c6e1d1a2ef499de05289d4677c2f63e116d35169f12967497a04f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosStreamNativeRoot.cs",
+        "sha256": "326a3ed4f6faa4135ea56648196c1acc3c7b36226832e0b28c0addf950893a03"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosSystemContracts.cs",
+        "sha256": "3344f85acb1fb1b24febe3cd0423082b4452d02c4fe8d2f4903dec746b9a3516"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosSystemCore.cs",
+        "sha256": "02300dd7789645a40196dcca68eea87e2ab4a73c335d97617a4cdc0255fccaa9"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosVariableCore.cs",
+        "sha256": "991f5695b27741c6aa5fb502b4c3059baa9393722b3152c2894c30805ef7309b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosVectorManifest.cs",
+        "sha256": "f1fc108bc07fd1c7fd8f0c3470a29d6e92009208e11ef17c2c351e841113e91a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosVectorRouter.cs",
+        "sha256": "ab92820d8f53f22d6667f1c61fa893dc2585a397cdc8897ca06272acad07017d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\DosVolumeNodeAttributeCore.cs",
+        "sha256": "1d7e5a4e528c2766a89bd59e0adacdfc863f8898e14e1cd1752a6767c7f3657f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\FixedDos.csproj",
+        "sha256": "2f71a72a0cc683d9484061370bb8d948afe81c040e7682bc512dc17494e50d35"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\IDosPlatform.cs",
+        "sha256": "dc0e7f2b498e6d5abb7547a7c0204dab797b905064d73f2dbe82519d2f2c6b64"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-dos\\NativeAmigaFileSystem.cs",
+        "sha256": "136a635896bc33a3c5d23e2a484b602d02f34489808c874a77f2e763db828052"
+      }
+    ],
+    "manifestProvenanceNote": "The final manifest is generated directly from qualified-build-inputs.json with its accurate frozen-composition scope, actual qualified production commit, five root-source hashes and eleven actual component hashes. The separate baseline and intermediate manifests retain their own original identities.",
+    "productionCodeCommit": "297c3c7e66c239ee10cb1c42da5eea67f355e8db",
+    "rootSourceChanges": [
+      "NativeDiskBoot.cs"
+    ],
+    "interruptedBuild": {
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\boot-rom-build.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "inputs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\boot-build-inputs.json",
+        "sha256": "0e34f0d320b024545e02057c2ffd3132005d9aa2a248c388b4b9808ee9ac6e8f"
+      },
+      "note": "VBlank-only candidate compile deliberately interrupted after discovering ignored HUNK memory flags. No qualified ROM was produced or used from this attempt."
+    }
+  },
+  "runs": {
+    "native-driving": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\run.json",
+        "sha256": "3897c27cf331bb28aa0c9c3d4c5793a7dba2232d6e0c1819ca2127c084d60320"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\runner.log",
+        "sha256": "55fb567ee25a11858fb599eec151563cc10afa6f616fb95c71cba4554fdb2caa"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+        "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "entryBytes": 901120,
+        "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-major-motion.json",
+        "sha256": "a934bb82cf0c0497efc45cdb0bc7c8ae5e8b8fdb0c763e8faeb2ed632b4ba605",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+        "--frames",
+        "10000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures",
+        "--boot-probe-interval",
+        "100",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-major-motion.json"
+      ],
+      "requestedFrames": 10000,
+      "captureInterval": 100,
+      "checkpoints": 101,
+      "captureFiles": 505,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "10000",
+        "completed": "10000",
+        "cycle": "1420888042",
+        "cpu": "0xFDF5BE2C9E0D14F5",
+        "hardware": "0x963081AEC36294DA",
+        "output": "0x4312C26018CBBA75",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "native-driving-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving-scalar\\run.json",
+        "sha256": "cc202f39a717bfa4c8e0bfe35eb78b58e0f57d66acea0d0516b5eb842069d52a"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving-scalar\\runner.log",
+        "sha256": "4da2096bf0757724940105a4764480afe3e8d218eeaf332e6de2c8dc121d41d1"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+        "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "entryBytes": 901120,
+        "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-major-motion.json",
+        "sha256": "a934bb82cf0c0497efc45cdb0bc7c8ae5e8b8fdb0c763e8faeb2ed632b4ba605",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+        "--frames",
+        "10000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving-scalar\\captures",
+        "--boot-probe-interval",
+        "100",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-major-motion.json"
+      ],
+      "requestedFrames": 10000,
+      "captureInterval": 100,
+      "checkpoints": 101,
+      "captureFiles": 505,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "10000",
+        "completed": "10000",
+        "cycle": "1420888042",
+        "cpu": "0xFDF5BE2C9E0D14F5",
+        "hardware": "0x963081AEC36294DA",
+        "output": "0x4312C26018CBBA75",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "native-idle": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\run.json",
+        "sha256": "e14c00b54a02462ef11a96946493e8e092b40af730b72fb91ec220a6828bf200"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\runner.log",
+        "sha256": "6d6f983fa11ced924203032e122b39b0442c7ea92cca087b7989ceb770752114"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+        "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "entryBytes": 901120,
+        "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-idle-v1.json",
+        "sha256": "d6bb7c4d7eccb6c1b4429cf72806d4e40efb155cfeb18b7e7f14d54d657ac2a3",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+        "--frames",
+        "10000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\captures",
+        "--boot-probe-interval",
+        "100",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-idle-v1.json"
+      ],
+      "requestedFrames": 10000,
+      "captureInterval": 100,
+      "checkpoints": 101,
+      "captureFiles": 505,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "10000",
+        "completed": "10000",
+        "cycle": "1420888056",
+        "cpu": "0x9C1236EFACA37D65",
+        "hardware": "0x76D44A53E5CC0F8F",
+        "output": "0x06AD8262569F8AE0",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "qualified-copperstart-driving": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\run.json",
+        "sha256": "a58310ddd170c674ad4e4fd7236a7a91fa01eea819d4c09d64a4221a7eddad3e"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\runner.log",
+        "sha256": "7905b103c46ceba4aed6f9f85778b7b3756c4167d1aaf45d6c42a6e28512c615"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "9f938923b7e58df756d6eb6e7a6e50c7a5bc901efa8fb6f7ab3aba5d2277290c"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+        "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "entryBytes": 901120,
+        "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-driving-v1.json",
+        "sha256": "35a8e786978d43a2dead0c1e207a97de35b3b67af25aae4f90a67b6f66d4ec0b",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+        "--frames",
+        "18000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures",
+        "--boot-probe-interval",
+        "100",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-driving-v1.json"
+      ],
+      "requestedFrames": 18000,
+      "captureInterval": 100,
+      "checkpoints": 181,
+      "captureFiles": 905,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557836022",
+        "cpu": "0xEB51C8430A099069",
+        "hardware": "0xCA6131C66AFEF31B",
+        "output": "0xD0D4EEA493AF372B",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "qualified-copperstart-driving-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving-scalar\\run.json",
+        "sha256": "65ba64ed88f8f065dc1b40af0109bf5c6d9478909d9cb92c2c502443c92d3bf5"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving-scalar\\runner.log",
+        "sha256": "833d3dd1ce976b23952c4a11443691eeca9f7867e8c5b59538d2cb3de57d3c94"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "9f938923b7e58df756d6eb6e7a6e50c7a5bc901efa8fb6f7ab3aba5d2277290c"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+        "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "entryBytes": 901120,
+        "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-driving-v1.json",
+        "sha256": "35a8e786978d43a2dead0c1e207a97de35b3b67af25aae4f90a67b6f66d4ec0b",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+        "--frames",
+        "18000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving-scalar\\captures",
+        "--boot-probe-interval",
+        "100",
+        "--boot-probe-extended",
+        "--scalar-cpu",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-driving-v1.json"
+      ],
+      "requestedFrames": 18000,
+      "captureInterval": 100,
+      "checkpoints": 181,
+      "captureFiles": 905,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557836022",
+        "cpu": "0xEB51C8430A099069",
+        "hardware": "0xCA6131C66AFEF31B",
+        "output": "0xD0D4EEA493AF372B",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "qualified-copperstart-idle": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-idle\\run.json",
+        "sha256": "a33a932ea77786e8f1a52a5a1ffc8f45578da4e046af225faf55b982a1bab905"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-idle\\runner.log",
+        "sha256": "0be841c54387ec45b3ae17cd22760104193e88099c78c589b839dc7ef3b7a459"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "9f938923b7e58df756d6eb6e7a6e50c7a5bc901efa8fb6f7ab3aba5d2277290c"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+        "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "entryBytes": 901120,
+        "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-delayed-idle-v1.json",
+        "sha256": "bca5b8db2eef53a3b7f6eb1487df25e46e3a1596e0fadb385c29ddfff1cc393d",
+        "media": []
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+        "--frames",
+        "18000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-idle\\captures",
+        "--boot-probe-interval",
+        "100",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-major-motion-delayed-idle-v1.json"
+      ],
+      "requestedFrames": 18000,
+      "captureInterval": 100,
+      "checkpoints": 181,
+      "captureFiles": 905,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "18000",
+        "completed": "18000",
+        "cycle": "2557836000",
+        "cpu": "0x7338E6B2C85A5B59",
+        "hardware": "0x27256C4168B7A3D2",
+        "output": "0x6D656D680D518D81",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    }
+  },
+  "comparisons": {
+    "modePairs": [
+      {
+        "normal": "native-driving",
+        "scalar": "native-driving-scalar",
+        "identicalCaptureFiles": 505,
+        "checkpoints": 101,
+        "fingerprints": {
+          "cpu": "0xFDF5BE2C9E0D14F5",
+          "hardware": "0x963081AEC36294DA",
+          "output": "0x4312C26018CBBA75",
+          "cycle": "1420888042"
+        }
+      },
+      {
+        "normal": "qualified-copperstart-driving",
+        "scalar": "qualified-copperstart-driving-scalar",
+        "identicalCaptureFiles": 905,
+        "checkpoints": 181,
+        "fingerprints": {
+          "cpu": "0xEB51C8430A099069",
+          "hardware": "0xCA6131C66AFEF31B",
+          "output": "0xD0D4EEA493AF372B",
+          "cycle": "2557836022"
+        }
+      }
+    ],
+    "inputControls": [
+      {
+        "positive": "native-driving",
+        "idle": "native-idle",
+        "identicalPrefixFiles": 300,
+        "firstInputDifferenceField": 6000,
+        "firstDifferentBmp": 6100,
+        "differentBmpCount": 40,
+        "differentBmpFields": [
+          6100,
+          6200,
+          6300,
+          6400,
+          6500,
+          6600,
+          6700,
+          6800,
+          6900,
+          7000,
+          7100,
+          7200,
+          7300,
+          7400,
+          7500,
+          7600,
+          7700,
+          7800,
+          7900,
+          8000,
+          8100,
+          8200,
+          8300,
+          8400,
+          8500,
+          8600,
+          8700,
+          8800,
+          8900,
+          9000,
+          9100,
+          9200,
+          9300,
+          9400,
+          9500,
+          9600,
+          9700,
+          9800,
+          9900,
+          10000
+        ]
+      },
+      {
+        "positive": "qualified-copperstart-driving",
+        "idle": "qualified-copperstart-idle",
+        "identicalPrefixFiles": 705,
+        "firstInputDifferenceField": 14100,
+        "firstDifferentBmp": 14200,
+        "differentBmpCount": 39,
+        "differentBmpFields": [
+          14200,
+          14300,
+          14400,
+          14500,
+          14600,
+          14700,
+          14800,
+          14900,
+          15000,
+          15100,
+          15200,
+          15300,
+          15400,
+          15500,
+          15600,
+          15700,
+          15800,
+          15900,
+          16000,
+          16100,
+          16200,
+          16300,
+          16400,
+          16500,
+          16600,
+          16700,
+          16800,
+          16900,
+          17000,
+          17100,
+          17200,
+          17300,
+          17400,
+          17500,
+          17600,
+          17700,
+          17800,
+          17900,
+          18000
+        ]
+      }
+    ],
+    "crossRomScreenshotComparison": {
+      "identicalBmpCount": 14,
+      "identicalRgbImageCount": 14,
+      "differentRgbImageFields": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400,
+        2500,
+        2600,
+        2700,
+        2800,
+        2900,
+        3000,
+        3100,
+        3200,
+        3300,
+        3400,
+        3500,
+        3600,
+        5000,
+        5100,
+        5200,
+        5300,
+        5400,
+        5500,
+        5600,
+        5700,
+        5800,
+        5900,
+        6000,
+        6100,
+        6200,
+        6300,
+        6400,
+        6500,
+        6600,
+        6700,
+        6800,
+        6900,
+        7000,
+        7100,
+        7200,
+        7300,
+        7400,
+        7500,
+        7600,
+        7700,
+        7800,
+        7900,
+        8000,
+        8100,
+        8200,
+        8300,
+        8400,
+        8500,
+        8600,
+        8700,
+        8800,
+        8900,
+        9000,
+        9100,
+        9200,
+        9300,
+        9400,
+        9500,
+        9600,
+        9700,
+        9800,
+        9900,
+        10000
+      ],
+      "total": 101,
+      "identityRequired": false,
+      "method": "Full-viewport RGB comparison after decoding 32-bit BI_RGB BMP. Retain raw file hashes separately; the fourth stored byte is unused BGRX, not visible alpha. This decoding does not weaken complete raw-file equality for either CPU-mode pair.",
+      "rgbDifferenceDetails": [
+        {
+          "field": 100,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 200,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 300,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 400,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 500,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 600,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 700,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 800,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 900,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1000,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1100,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1200,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1300,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1400,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1500,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1600,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1700,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1800,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 1900,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2000,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2100,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2200,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2300,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2400,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2500,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2600,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2700,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2800,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 2900,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3000,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3100,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3200,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3300,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3400,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3500,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 3600,
+          "fullImageDifferenceBounds": [
+            196,
+            26,
+            908,
+            311
+          ],
+          "differentRgbPixels": 202920
+        },
+        {
+          "field": 5000,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127868
+        },
+        {
+          "field": 5100,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127684
+        },
+        {
+          "field": 5200,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127804
+        },
+        {
+          "field": 5300,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127822
+        },
+        {
+          "field": 5400,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127816
+        },
+        {
+          "field": 5500,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127822
+        },
+        {
+          "field": 5600,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127822
+        },
+        {
+          "field": 5700,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127822
+        },
+        {
+          "field": 5800,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127812
+        },
+        {
+          "field": 5900,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127822
+        },
+        {
+          "field": 6000,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127814
+        },
+        {
+          "field": 6100,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127836
+        },
+        {
+          "field": 6200,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127866
+        },
+        {
+          "field": 6300,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127620
+        },
+        {
+          "field": 6400,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127580
+        },
+        {
+          "field": 6500,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127516
+        },
+        {
+          "field": 6600,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127822
+        },
+        {
+          "field": 6700,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127600
+        },
+        {
+          "field": 6800,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127492
+        },
+        {
+          "field": 6900,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127390
+        },
+        {
+          "field": 7000,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127218
+        },
+        {
+          "field": 7100,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127228
+        },
+        {
+          "field": 7200,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127014
+        },
+        {
+          "field": 7300,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127322
+        },
+        {
+          "field": 7400,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127252
+        },
+        {
+          "field": 7500,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127280
+        },
+        {
+          "field": 7600,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127532
+        },
+        {
+          "field": 7700,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127872
+        },
+        {
+          "field": 7800,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127910
+        },
+        {
+          "field": 7900,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127854
+        },
+        {
+          "field": 8000,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127932
+        },
+        {
+          "field": 8100,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127524
+        },
+        {
+          "field": 8200,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127820
+        },
+        {
+          "field": 8300,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127776
+        },
+        {
+          "field": 8400,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 8500,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 8600,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 8700,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127994
+        },
+        {
+          "field": 8800,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127994
+        },
+        {
+          "field": 8900,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9000,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9100,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9200,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9300,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9400,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9500,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9600,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9700,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9800,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 9900,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        },
+        {
+          "field": 10000,
+          "fullImageDifferenceBounds": [
+            258,
+            44,
+            898,
+            244
+          ],
+          "differentRgbPixels": 127996
+        }
+      ],
+      "note": "Only shared absolute capture fields are compared here. Native inputs begin at4900/6000; CopperStart uses the same events shifted by8100 fields in a separate conservative schedule. This comparison is descriptive, not gameplay phase alignment."
+    }
+  },
+  "freshBeforeReplay": {
+    "manifest": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-before\\run.json",
+      "sha256": "c6a4965ff2e9b4fcc8d0d922e77ef580b4bccabcb061ca17bd6a153728fc705d"
+    },
+    "runnerLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-before\\runner.log",
+      "sha256": "69c86029e6e2c91b0a75b0de3b329511d4fb502541dfb6d08021ea81085337bf"
+    },
+    "rom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "5ca306b3a7ece26a366adc90e487fc384276a5463c22c3ce6b98aa4a118764d0"
+    },
+    "disk": {
+      "path": "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip",
+      "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef",
+      "entry": "Major Motion (1988)(Microdeal).adf",
+      "entryBytes": 901120,
+      "entrySha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+    },
+    "input": {
+      "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-major-motion.json",
+      "sha256": "a934bb82cf0c0497efc45cdb0bc7c8ae5e8b8fdb0c763e8faeb2ed632b4ba605",
+      "media": []
+    },
+    "machine": {
+      "cpu": "68000",
+      "agnus": "8371",
+      "denise": "8362",
+      "video": "PAL",
+      "chipRamKiB": 512,
+      "slowRamKiB": 512,
+      "fastRamKiB": 0,
+      "drives": 1
+    },
+    "command": [
+      "dotnet",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "--rom",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-rom\\CopperStart-DiskBoot.rom",
+      "--disk",
+      "C:\\Data\\TestImages\\OK\\Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+      "--frames",
+      "1000",
+      "--slow-ram-kib",
+      "512",
+      "--boot-probe",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fresh-before\\captures",
+      "--boot-probe-interval",
+      "100",
+      "--boot-probe-extended",
+      "--input-script",
+      "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-major-motion.json"
+    ],
+    "requestedFrames": 1000,
+    "captureInterval": 100,
+    "checkpoints": 11,
+    "captureFiles": 55,
+    "summary": {
+      "engine": "lightweight-a500",
+      "workload": "image",
+      "executionMode": "Interpreter",
+      "cpuMode": "conservative-batch",
+      "warmup": "0",
+      "frames": "1000",
+      "completed": "1000",
+      "cycle": "142102002",
+      "cpu": "0x2A82D720F468E2F2",
+      "hardware": "0xDD2A6D703FD80D87",
+      "output": "0x431F4C18003B88A1",
+      "pixels": "284204",
+      "audioSamples": "1922",
+      "pcm": "real",
+      "adf": "True",
+      "unsupported": "none"
+    },
+    "completedReplay": true
+  },
+  "nativeGuestProbes": {
+    "exactCorrectedRomSha256": "9F938923B7E58DF756D6EB6E7A6E50C7A5BC901EFA8FB6F7AB3ABA5D2277290C",
+    "groups": {
+      "execMemoryTrap": {
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\qualified-exec-memory\\qualified-exec-memory.trx",
+          "sha256": "377ca4edb60f1c14f882211fa76900dadbd66b2c90bba1d98d1c6acecce7f36d"
+        }
+      },
+      "graphicsCallerStorage": {
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\qualified-graphics\\qualified-graphics.trx",
+          "sha256": "e0af6be859f877d811245bfb2fc3718b729947be87369a78e66ddce0d59e6d27"
+        }
+      },
+      "relativeDosBefore": {
+        "passed": 0,
+        "failed": 4,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\fresh-relative-before\\relative.trx",
+          "sha256": "1a3c28b58b63c325319f0bd6f76936415bc186b4986fb81097ae14855f0dc212"
+        }
+      },
+      "relativeDosAfter": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\relative-qualified-current\\relative.trx",
+          "sha256": "5c129d58b6d2e6618d75cb5cca734499e923777f9542696e4d9bb2ab04cc25cd"
+        }
+      },
+      "nativeKickstartOfsOracle": {
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\relative-native-ofs-final\\relative.trx",
+          "sha256": "b93613f41b9a5bfff1d34bd0657ea8a7252074784057ed3961999a757cb84e6a"
+        }
+      },
+      "qualifiedHostBefore": {
+        "passed": 0,
+        "failed": 4,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\host-relative-before.trx",
+          "sha256": "c9729ded4f1efadedc23738f0503cefcbdcdeebc97b2e51f13d5630c4e5547fa"
+        }
+      },
+      "qualifiedHostAfter": {
+        "passed": 55,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\host-dos-final\\host-dos-final.trx",
+          "sha256": "66aae877dcabae12d562b4bbe0cecd6608c0be8db2a1275b613af892b61582d6"
+        }
+      },
+      "mainHostBefore": {
+        "passed": 2,
+        "failed": 2,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\backport-before\\backport-before.trx",
+          "sha256": "da5a3dc34cab2651db7c56bfeed04b4ed8ddee12ddb9105c62e95fb9b035ad09"
+        }
+      },
+      "mainHostAfter": {
+        "passed": 56,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\backport-final\\backport-final.trx",
+          "sha256": "cda4226aa86d8a5ac559081a95f0864d2e91690eb0cd87b36e33dbb542e67a2c"
+        }
+      },
+      "filesystemBefore": {
+        "passed": 0,
+        "failed": 2,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\fs-before\\fs-before.trx",
+          "sha256": "46db573c90705df99caf890f9c717dfd65094d12929be4ecc22b5344c4d7f5bf"
+        }
+      },
+      "filesystemAfter": {
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\fs-qualified-final\\filesystem.trx",
+          "sha256": "6422e965f5e753b80b24103f624710b17b7187c69c6ebb95e94f81b8714fe479"
+        }
+      },
+      "filesystemMain": {
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\fs-main-final\\filesystem.trx",
+          "sha256": "d06e0ae416b25c6b9e07a347cb5bc075faa12e5f35ea3f1fc146acfffa5430a2"
+        }
+      },
+      "bootVBlankBefore": {
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\vblank-before\\vblank.trx",
+          "sha256": "1e8ac87d9eaf4d103ca248147e38cdabcc4dd34681b7d97d5838cac83031adfe"
+        }
+      },
+      "bootVBlankAfter": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\vblank-qualified\\vblank.trx",
+          "sha256": "5bcc630135524324d13427e25f5f055b39c5cd5da60099afb20d5f4b73ce045f"
+        }
+      },
+      "bootVBlankNativeOracle": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\vblank-native\\vblank.trx",
+          "sha256": "0da8d3c69948983e22f8a77f0d1549837764f027e5901ef5d3bcbd8030c6e339"
+        }
+      },
+      "hunkMemoryBefore": {
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\hunk-before\\hunk.trx",
+          "sha256": "14df7a777003738cbeb9155179261843775e0541bb3a42fbc039d9a6772a5da5"
+        }
+      },
+      "hunkMemoryAfter": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\hunk-qualified\\hunk.trx",
+          "sha256": "62a4d034816707230f7e60b6cae43e6c59a01e1d290300c5ffd019d1d8803d06"
+        }
+      },
+      "hunkMemoryNativeOracle": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\hunk-native\\hunk.trx",
+          "sha256": "0eadd3e328189ce674b760e87e17d3df57f19bf369b4159174f32dad9526ac7e"
+        }
+      },
+      "qualifiedLoaderHost": {
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\segments-after\\segments.trx",
+          "sha256": "1521a7dd150df334c540b84954fe410e2fb8e62710e789bc5d0ad21cda265905"
+        }
+      },
+      "qualifiedCurrentHost": {
+        "passed": 70,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\source-qualified\\source-qualified.trx",
+          "sha256": "9a7f6f40f7fc64fc3db0763dd89da61db28987ba4753656511cb01c0abbd61cc"
+        }
+      },
+      "mainCurrentHost": {
+        "passed": 75,
+        "failed": 0,
+        "skipped": 0,
+        "trx": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probes\\main-qualified\\main-qualified.trx",
+          "sha256": "fd21bfd7efbc64052f8a6b6d193f8efd82e45f7b9acfed15593058dab80ce5ec"
+        }
+      }
+    },
+    "fixtureProject": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\relative-qualified-fixture\\Fixture.csproj",
+      "sha256": "64856d5521aba472e08b13696e23d379e20da244b4a70883a921b784576a5793"
+    },
+    "fixtureAssembly": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\relative-qualified-fixture\\bin\\Release\\net10.0\\CopperStart.Floppy.Native.Tests.dll",
+      "sha256": "7f1c34953539e0f19df911738e858a53f2692e0b1522ff51749a696e9282592d"
+    },
+    "generatedSources": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\DosDiskImage.cs",
+        "sha256": "cd852efe0366afcb190945fd5f2fcc0389a45b997e8ad2b3cb9f5986b741740f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeRelativeDosBootTests.cs",
+        "sha256": "3801f9e7db2bb1f4d3ea311d5dad2b65e0eb31467152b5c1926d2f63b911a4de"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeBootVBlankTakeoverTests.cs",
+        "sha256": "bbbaf80954754076e4eba7d1e6bf619cf3920e271137670eeca9bdc99f13a48d"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeHunkMemoryBootTests.cs",
+        "sha256": "7d579be787ea441cc92b44572cb5e0bbf87153d8ed3d3e8675b9f5e19d95ec99"
+      }
+    ],
+    "harnesses": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\probe-qualified.py",
+        "sha256": "6b40ca14309fbb61a95b188a5819cbfa5443028147da6b1e800b6bf4a0e937d4"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\run_relative.py",
+        "sha256": "f68c3e68106b9671c6925c897f70758f3cfb69379f780363480ab48f9f63575c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\run_case.py",
+        "sha256": "1032e002ee6943c9d095889c91305ad0fd3a5944d39cef3f6920d54f2fd005bf"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\run_qualified_regression.py",
+        "sha256": "24dcd8233e303cfa95f4ed631a3fe94ec8b693316650063e537f5f5e378ae5b4"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\run_vblank.py",
+        "sha256": "24b6690964106441599b7d2881c91c24138c9f4afd915cdadfc0f40d57b8f31f"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\run_hunk.py",
+        "sha256": "748033d59d6e7ddc56ba8898de7b01b1838d9922b8f26bf842043a27a970a3db"
+      }
+    ],
+    "exactRomGuestCaseCount": 14,
+    "additionalFixtureInputs": {
+      "vblank-fixture": {
+        "project": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\vblank-fixture\\Fixture.csproj",
+          "sha256": "52566890949da54780984ad7c7aef2be9f54f2cc9744251a2f274741b7a38fe3"
+        },
+        "assembly": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\vblank-fixture\\bin\\Release\\net10.0\\CopperStart.Floppy.Native.Tests.dll",
+          "sha256": "84d6d896722f8ce11dcdf27437baaf36fee47843c206448e74ccd71ef3a2da79"
+        },
+        "romHashLoader": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\vblank-fixture\\NativeBootImage.cs",
+          "sha256": "ce369891b6bf5e306e12571c139b32f502935a9a877f884e5d11cab540b308c5"
+        }
+      },
+      "hunk-fixture": {
+        "project": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\hunk-fixture\\Fixture.csproj",
+          "sha256": "4d4cb47ae75b3992869c929b0b58f487ece986316d568e17841c5dedd4b98947"
+        },
+        "assembly": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\hunk-fixture\\bin\\Release\\net10.0\\CopperStart.Floppy.Native.Tests.dll",
+          "sha256": "e8487a9b76aae1555dc6768e01124459ad0baa1dd74fc191f45f2d179511a094"
+        },
+        "romHashLoader": {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\hunk-fixture\\NativeBootImage.cs",
+          "sha256": "ce369891b6bf5e306e12571c139b32f502935a9a877f884e5d11cab540b308c5"
+        }
+      }
+    }
+  },
+  "regressions": {
+    "qualified-overdrive-regression": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\run.json",
+        "sha256": "26b46231d8848db506c9a376b76e822dd19a206b09bbcd5bd93a376797897050"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\runner.log",
+        "sha256": "a5b97869adb40447d776f9729c34ff564cbe139863fc4de1d3f40a757f06f27b"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "9f938923b7e58df756d6eb6e7a6e50c7a5bc901efa8fb6f7ab3aba5d2277290c"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Team17\\downloads_overdrive_IPFs.zip",
+        "sha256": "6bbb7f240851620aa74d136df58115d8a55703a097d4001a24d5f5c15e5018e1",
+        "entry": "Overdrive_Disk1.ipf",
+        "entryBytes": 1139240,
+        "entrySha256": "0ecd634d62d49b109558128e51f11a5895fba90030906c199b3e4bb047f73e57"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-overdrive-qualifying-v2.json",
+        "sha256": "b463bd1e7de2293a3c9b71a576ad5fc1e7db7cfb0efab71390d52b917e1c5cae",
+        "media": [
+          {
+            "frame": 12120,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\corpus-overdrive-disk2.ipf",
+            "sha256": "1819b1b46a80cf08fae2c2960ca22dd5715e688342ae2fe304fe6d253cb74327"
+          }
+        ]
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Team17\\downloads_overdrive_IPFs.zip#/Overdrive_Disk1.ipf",
+        "--frames",
+        "46000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-overdrive-qualifying-v2.json"
+      ],
+      "requestedFrames": 46000,
+      "captureInterval": 200,
+      "checkpoints": 231,
+      "captureFiles": 1155,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "46000",
+        "completed": "46000",
+        "cycle": "6516164866",
+        "cpu": "0xB55B5075BF655D8E",
+        "hardware": "0x4C00D7EFFC062E9D",
+        "output": "0xFD824ADCE4176932",
+        "pixels": "284204",
+        "audioSamples": "1916",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    },
+    "qualified-lemmings-regression": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\run.json",
+        "sha256": "2f1b992209a640410b5137bef263a0f96d76f54ac3ac4199f886c49c70ee8552"
+      },
+      "runnerLog": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\runner.log",
+        "sha256": "338614781777a3e0a513b2582e9d652f1c8b0be7a55b32af93ad94e6be01cb38"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "9f938923b7e58df756d6eb6e7a6e50c7a5bc901efa8fb6f7ab3aba5d2277290c"
+      },
+      "disk": {
+        "path": "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+        "sha256": "5fc56b436722688ba37836e273a3a1c84d724235a91b39272768ff3e4cac0a59",
+        "entry": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+        "entryBytes": 901120,
+        "entrySha256": "a4fdba69017f1a760bba3bb06c55f7e434226c498c9d22c1f627212b08d24f91"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+        "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+        "media": [
+          {
+            "frame": 8460,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+            "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+            "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+            "entryBytes": 901120,
+            "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+          }
+        ]
+      },
+      "machine": {
+        "cpu": "68000",
+        "agnus": "8371",
+        "denise": "8362",
+        "video": "PAL",
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-17\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "--rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-rom\\CopperStart-DiskBoot.rom",
+        "--disk",
+        "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+        "--frames",
+        "24000",
+        "--slow-ram-kib",
+        "512",
+        "--boot-probe",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\captures",
+        "--boot-probe-interval",
+        "200",
+        "--boot-probe-extended",
+        "--input-script",
+        "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json"
+      ],
+      "requestedFrames": 24000,
+      "captureInterval": 200,
+      "checkpoints": 121,
+      "captureFiles": 605,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "cycle": "3410448010",
+        "cpu": "0xD09D0730EEB80BF2",
+        "hardware": "0xD27BBA458CA4C399",
+        "output": "0x4151B1CABDBC8380",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "completedReplay": true
+    }
+  },
+  "reviewedCaptures": [
+    {
+      "run": "native-driving",
+      "field": 4000,
+      "observation": "Complete original title image.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-004000.bmp",
+        "sha256": "46c03e00c4d6753226c0630f0ed8b5b63efe570ef65cc39a12ba5ec9bb2c5f65"
+      }
+    },
+    {
+      "run": "native-driving",
+      "field": 6600,
+      "observation": "Input-driven opening play: car steered left, traffic and score141.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-006600.bmp",
+        "sha256": "33094ea55e137324950546baee52165c4df4ce09e9380fbc0f0ed07e96ef0db7"
+      }
+    },
+    {
+      "run": "native-driving",
+      "field": 8500,
+      "observation": "High-score screen after loss of lives; recorded score455; no level completion.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-008500.bmp",
+        "sha256": "cc7a57c124ce66d50e3936d31af7b30fc8ad911ede7cfed96945ab7bb17660cb"
+      }
+    },
+    {
+      "run": "native-idle",
+      "field": 6600,
+      "observation": "Same game start, no later driving input; car remains centered and score0.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\captures\\frame-006600.bmp",
+        "sha256": "ea17256a11e5ac556f162a5cac1eed3f90a397519638528b4bd82a2d8638395e"
+      }
+    },
+    {
+      "run": "qualified-copperstart-driving",
+      "field": 4400,
+      "observation": "Complete title image with matching native layout; no crop or viewport workaround.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-004400.bmp",
+        "sha256": "46c03e00c4d6753226c0630f0ed8b5b63efe570ef65cc39a12ba5ec9bb2c5f65"
+      }
+    },
+    {
+      "run": "qualified-copperstart-driving",
+      "field": 13500,
+      "observation": "One-player game started; full road, HUD and traffic.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-013500.bmp",
+        "sha256": "aa2910b5e1a0ac90c99368abe73629501af1072e76f45f021e3584479e4cb69c"
+      }
+    },
+    {
+      "run": "qualified-copperstart-driving",
+      "field": 14700,
+      "observation": "Driving input steers player left; traffic/world movement and score18.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-014700.bmp",
+        "sha256": "a9b7625a83847348be9b95c6a77cd7551b04c2e3dc5bba5320b56beab8df7b67"
+      }
+    },
+    {
+      "run": "qualified-copperstart-driving",
+      "field": 15500,
+      "observation": "High-score screen after loss of lives; score35.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-015500.bmp",
+        "sha256": "947c44b566a5ebf21811b164e80c3506a12b0ee796a2936f63e4a80816cbe35d"
+      }
+    },
+    {
+      "run": "qualified-copperstart-driving",
+      "field": 17000,
+      "observation": "High-score/name-entry screen persists; no level completion.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-017000.bmp",
+        "sha256": "fd19cc258348e7e1d2a660e8663e4e0f74aaafe2e5216ec692966ff0b3fe6370"
+      }
+    },
+    {
+      "run": "qualified-copperstart-idle",
+      "field": 14700,
+      "observation": "Same loading/start sequence without driving; car and traffic differ from positive run, score0.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-idle\\captures\\frame-014700.bmp",
+        "sha256": "5ff91583fb67edba0d4101da1722b10e7fc87b77b618cff85a5ff6776c626371"
+      }
+    },
+    {
+      "run": "qualified-overdrive-regression",
+      "field": 32000,
+      "observation": "Qualifying track loaded; car stationary before acceleration events.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-032000.bmp",
+        "sha256": "137bcc83c57aecf9797feac3e2cfc5c92db27ae1b9e0c0ff3c5e4f5de6863db0"
+      }
+    },
+    {
+      "run": "qualified-overdrive-regression",
+      "field": 40000,
+      "observation": "Track/start area before the retained driving sequence.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-040000.bmp",
+        "sha256": "f6e0a24ffff405913848d33045524ab3e380e811fe602d5ea65b56652a2e1191"
+      }
+    },
+    {
+      "run": "qualified-overdrive-regression",
+      "field": 40600,
+      "observation": "Acceleration moves the car/world beyond the start area.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-040600.bmp",
+        "sha256": "55b15ced4413bde7fd67818928d46a5e6e18a89e23fe7ef690ddcda0fe0320c4"
+      }
+    },
+    {
+      "run": "qualified-overdrive-regression",
+      "field": 41400,
+      "observation": "Retained steering turns the car and scrolls the track; no full lap/race completion claim.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-041400.bmp",
+        "sha256": "82eeea5bab1eac1b8f0ec526171a5301b9781c521322a37eb8bae9dc55745ae5"
+      }
+    },
+    {
+      "run": "qualified-lemmings-regression",
+      "field": 18000,
+      "observation": "Level-one walkers and active gameplay; release/skill HUD and exit visible.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\captures\\frame-018000.bmp",
+        "sha256": "07545aca62c363af2dd935a1a49ef18509c71af2a931a7240328ae5d078a295e"
+      }
+    },
+    {
+      "run": "qualified-lemmings-regression",
+      "field": 22000,
+      "observation": "All lemmings accounted for; needed10%, rescued100%; result screen visible.",
+      "image": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\captures\\frame-022000.bmp",
+        "sha256": "fa46759998317c7438ca12bb433cf0d4124504506f52efee201e4e4f47852b4f"
+      }
+    }
+  ],
+  "qaSheets": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-driving-preview.jpg",
+      "sha256": "416c681d8448deff0181ae0873e785d1ea07dbeb8f1a97d5deffc2bda1b006cd",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 13500,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-013500.bmp",
+          "sha256": "aa2910b5e1a0ac90c99368abe73629501af1072e76f45f021e3584479e4cb69c"
+        },
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 14700,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-014700.bmp",
+          "sha256": "a9b7625a83847348be9b95c6a77cd7551b04c2e3dc5bba5320b56beab8df7b67"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-input-pair.jpg",
+      "sha256": "3edc677e4356501bd50078e79e91efd928730ecf47374bd1aabee68b1346ad29",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 14700,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-014700.bmp",
+          "sha256": "a9b7625a83847348be9b95c6a77cd7551b04c2e3dc5bba5320b56beab8df7b67"
+        },
+        {
+          "run": "qualified-copperstart-idle",
+          "field": 14700,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-idle\\captures\\frame-014700.bmp",
+          "sha256": "5ff91583fb67edba0d4101da1722b10e7fc87b77b618cff85a5ff6776c626371"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-late-play.jpg",
+      "sha256": "a01ff35bc579d0d6abd10f53afe58c8ea2a2ca0e31c921298b1c01aa2db050c3",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 15500,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-015500.bmp",
+          "sha256": "947c44b566a5ebf21811b164e80c3506a12b0ee796a2936f63e4a80816cbe35d"
+        },
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 17000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-017000.bmp",
+          "sha256": "fd19cc258348e7e1d2a660e8663e4e0f74aaafe2e5216ec692966ff0b3fe6370"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-lemmings-result.jpg",
+      "sha256": "4ed5029bfb23309a054088f13b56a97c6d6c91104b36c37a4deba95430d188b7",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-lemmings-regression",
+          "field": 18000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\captures\\frame-018000.bmp",
+          "sha256": "07545aca62c363af2dd935a1a49ef18509c71af2a931a7240328ae5d078a295e"
+        },
+        {
+          "run": "qualified-lemmings-regression",
+          "field": 22000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-lemmings-regression\\captures\\frame-022000.bmp",
+          "sha256": "fa46759998317c7438ca12bb433cf0d4124504506f52efee201e4e4f47852b4f"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-native-play.jpg",
+      "sha256": "019b962238bdfb7febd39c810b2f4251a34413bf6d333d2499f71c821162fd17",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "native-driving",
+          "field": 6600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-006600.bmp",
+          "sha256": "33094ea55e137324950546baee52165c4df4ce09e9380fbc0f0ed07e96ef0db7"
+        },
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 14700,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-014700.bmp",
+          "sha256": "a9b7625a83847348be9b95c6a77cd7551b04c2e3dc5bba5320b56beab8df7b67"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-overdrive-driving.jpg",
+      "sha256": "441a6d70fb0fd37d5cb6d735fa61b725370f5ee558806f96804bd819d8ae32e6",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-overdrive-regression",
+          "field": 40600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-040600.bmp",
+          "sha256": "55b15ced4413bde7fd67818928d46a5e6e18a89e23fe7ef690ddcda0fe0320c4"
+        },
+        {
+          "run": "qualified-overdrive-regression",
+          "field": 41400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-041400.bmp",
+          "sha256": "82eeea5bab1eac1b8f0ec526171a5301b9781c521322a37eb8bae9dc55745ae5"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-overdrive-play.jpg",
+      "sha256": "aa547977a65f8a8874e4a789fa2190c72b184b72459aa22b56164156a2b832cb",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-overdrive-regression",
+          "field": 32000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-032000.bmp",
+          "sha256": "137bcc83c57aecf9797feac3e2cfc5c92db27ae1b9e0c0ff3c5e4f5de6863db0"
+        },
+        {
+          "run": "qualified-overdrive-regression",
+          "field": 40000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-overdrive-regression\\captures\\frame-040000.bmp",
+          "sha256": "f6e0a24ffff405913848d33045524ab3e380e811fe602d5ea65b56652a2e1191"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\qualified-title-preview.jpg",
+      "sha256": "6ddd92769d9a5f8bd4f4ca9db768708a7e6362417b69d975a0f1f65b8df71d69",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "qualified-copperstart-driving",
+          "field": 4400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qualified-copperstart-driving\\captures\\frame-004400.bmp",
+          "sha256": "46c03e00c4d6753226c0630f0ed8b5b63efe570ef65cc39a12ba5ec9bb2c5f65"
+        },
+        {
+          "run": "native-driving",
+          "field": 4400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-004400.bmp",
+          "sha256": "46c03e00c4d6753226c0630f0ed8b5b63efe570ef65cc39a12ba5ec9bb2c5f65"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\native-pair.jpg",
+      "sha256": "b006d6c7772f3d2e84ef99d638ff295d6be3c15f728a9967ed8daebcb0f7c573",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "native-driving",
+          "field": 6600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-006600.bmp",
+          "sha256": "33094ea55e137324950546baee52165c4df4ce09e9380fbc0f0ed07e96ef0db7"
+        },
+        {
+          "run": "native-idle",
+          "field": 6600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\captures\\frame-006600.bmp",
+          "sha256": "ea17256a11e5ac556f162a5cac1eed3f90a397519638528b4bd82a2d8638395e"
+        }
+      ]
+    }
+  ],
+  "qaDecoders": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa_sheet.py",
+      "sha256": "db093c0eea41d2dee7c48f5c85cb150cc74ee4153a3cf06a7eef0050d9f102e4"
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa_jpeg.py",
+      "sha256": "f739148e6800654cd95265c53e7bdd7f9ccb5cb9642defb98a7d4b6588d74f9a"
+    }
+  ],
+  "sourceFix": {
+    "qualified": "Select relative-path handler from the current-directory lock, use the default filesystem only without a directory, replace the internal CurrentDir(NULL) exchange with a non-mutating read, and retain each validated metadata table during a sequential read. Honor HUNK Chip/Fast memory requirements, and hand off native boot with VBlank running under Exec.",
+    "main": "Basic selection/read repairs already exist in main. Its narrow additional fix returns zero base lock for leading-colon paths while retaining the current filesystem port. It also contains the shared sequential metadata-read correction. Includes the same HUNK memory-class and boot VBlank fixes.",
+    "titleSpecificBehavior": false,
+    "romOrMediaBytePatches": false,
+    "hostOsShims": false,
+    "guestDefensiveChecksAdded": false
+  },
+  "validation": {
+    "consumerReleaseBuild": {
+      "exitCode": 0,
+      "warnings": 0,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\consumer-build.log",
+        "sha256": "0f32a04b687e58ef2fdaa1afd24127772fcdddb8f106599a5aeebfca4faf2f32"
+      }
+    },
+    "qualifiedReleaseBuild": {
+      "exitCode": 0,
+      "warnings": 1,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\source-qualified-release.log",
+        "sha256": "fa3e87171524b405b3f3d7a86b296bb0a853d843cd945741b69aca84be28a9dc"
+      }
+    },
+    "mainReleaseBuild": {
+      "exitCode": 0,
+      "warnings": 4,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\main-qualified-release.log",
+        "sha256": "9fa25ef5144890d7054abf7c57c703fb8b4f292a92a8dc1476444196e87478fa"
+      }
+    },
+    "sourceCi": {
+      "commit": "ec6851aa2bc1b4e919069c168a13bb54f813ba61",
+      "run": "https://github.com/ilehtoranta/CopperStart/actions/runs/39142031068",
+      "platformConclusion": "failure",
+      "coverageStatus": "unavailable-account-billing-limit",
+      "jobsWithZeroExecutedSteps": 13,
+      "testsRan": false,
+      "annotations": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\source-ci-ec685-annotations.json",
+        "sha256": "8bb57b4411a82ac90cf8b53f962dd44c81b60905cab5e028224e330d406e35c9"
+      },
+      "jobs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\source-ci-ec685-jobs.json",
+        "sha256": "b9d03ce9a9d6243e95869066364cda2915a7c283e2c3613ead07308408f8b329"
+      }
+    },
+    "replayToolControls": {
+      "status": "passed",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "command": [
+        "C:/Users/ilkle/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_native_regression.py",
+        "-v"
+      ],
+      "cwd": "C:/Users/ilkle/.codex/worktrees/copperstart-next-game/CopperScreen",
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\replay-tool-controls-qualified.log",
+        "sha256": "158c0dd15100a5135ee4d712d08db90834809a45d87e882ffb0bbd71524616fe"
+      },
+      "priorAttempts": [
+        {
+          "passed": 20,
+          "failed": 1,
+          "skipped": 0,
+          "log": {
+            "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\replay-tool-tests.log",
+            "sha256": "d084afbff103d878b71b16ef6f1b90bcbf650c2065d8728b0528d7806bcbe876"
+          },
+          "observation": "Child did not emit started before the existing0.3second wall timeout. Retained as failed earlier attempts; test source unchanged for latest passing run."
+        },
+        {
+          "passed": 20,
+          "failed": 1,
+          "skipped": 0,
+          "log": {
+            "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\replay-tool-tests-final.log",
+            "sha256": "78625de6554ca2322b9293f765870b893ec54238cbabc2d263e5fdfefa277069"
+          },
+          "observation": "Child did not emit started before the existing0.3second wall timeout. Retained as failed earlier attempts; test source unchanged for latest passing run."
+        }
+      ]
+    }
+  },
+  "references": [
+    {
+      "url": "https://developer.amigaos3.net/autodocs/dos.library/CurrentDir.html",
+      "purpose": "CurrentDir exchanges the directory; passing null is not a query."
+    },
+    {
+      "url": "https://wiki.amigaos.net/wiki/AmigaDOS_Data_Structures",
+      "purpose": "pr_FileSystemTask provides the default filesystem when pr_CurrentDir is null."
+    },
+    {
+      "url": "https://developer.amigaos3.net/sites/default/files/downloads/2024-10/Amiga_ROM_Kernel_Reference_Manual_DOS.pdf#page=119",
+      "purpose": "Section8.2.1: DevProc port/base-lock pair and a zero lock denoting that filesystem root."
+    },
+    {
+      "path": "docs/engine/NATIVE_CORPUS_2026-09-21.md",
+      "purpose": "Earlier native Major Motion input-driven opening play, separate engine/performance scope."
+    }
+  ],
+  "replayReceiptMode": "--firmware native only suppresses interpretation of CopperStart-private receipts after takeover. Each actual --rom path/hash selects the guest firmware; execution always uses the unchanged frozen engine and CPU.",
+  "limits": [
+    "Recorded opening play only; no full-game completion, later stages, all weapons, two-player mode or saves qualification.",
+    "Original-media replays and generated native probes are separate coverage. Native Kickstart1.3 OFS oracle covers two RAM layouts; its FFS trial was unavailable boot coverage, not a successful oracle.",
+    "No physical hardware timing, throughput acceptance or audio fidelity qualification.",
+    "Five retained root sources with NativeDiskBoot changed for VBlank, and a frozen component composition with one rebuilt DOS DLL; no complete moving-main/MorphOS or standard-application admission.",
+    "CPU-mode pairs require full capture/fingerprint equality for their own ROM. Cross-ROM CPU/RAM/screenshot equality is not an acceptance gate."
+  ],
+  "failureDiagnosis": {
+    "freshBaselineFacts": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\failure-facts.json",
+      "sha256": "4aaada2986543e313b89700aaa1d17516256c65b4222ccbf51a7d39da4246d45"
+    },
+    "intermediateRom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fixed-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "a928f7409cbd21e3f5d46f78a2a5e62bc91f9ff5299607ffda5042d6c687dbda"
+    },
+    "intermediateManifest": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fixed-rom\\disk-boot-test-manifest.json",
+      "sha256": "66edb6fff32eb313bc6dd6dcc288c8fcfe188b28fba041e53dd4aa6bfb80e58f"
+    },
+    "intermediateTenThousandFieldReplay": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\copperstart-driving\\run.json",
+      "sha256": "aa975f6f74753847708a11243031f5871ca22667e19662c1872e24c8e14d07ff"
+    },
+    "intermediateThirtyThousandFieldReplay": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\copperstart-delayed-exploration\\run.json",
+      "sha256": "facaa89dbe77bc70b8d71eb195ea63b35a6e39c1cd0225800921ba3c5f3487bb"
+    },
+    "largeReadBeforeLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fs-before.log",
+      "sha256": "b9d193c6a1ec2a1cceca4cb2bb96c31db2d34a0695ab5b84e5fe69db2fb3ac82"
+    },
+    "largeReadAfterLog": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\fs-after.log",
+      "sha256": "a0a60c285987cb53b6d707a4c5f5b58334f4ad2e163faa26fdfa3b73cd704478"
+    },
+    "note": "The directory-only intermediate image passed seven existing guest probes and four new relative-DOS cases, but its original-media loader remained busy in repeated track reads. It is not final gameplay qualification. The filesystem change retains validated metadata for a Read; no device or chipset behavior is changed.",
+    "directoryAndReadOnlyImage": {
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "694cb638ed1ee52a1399cb8a3430c29badff3413ddc87d275ea6f64caed26213"
+      },
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-rom\\disk-boot-test-manifest.json",
+        "sha256": "6c719624298d09298ef38b416ed6ed2aa36a215eb12c2ac1b30b91195dad48c9"
+      },
+      "replay": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-copperstart-driving\\run.json",
+        "sha256": "d24bcec9b054205f7dfd3d4648ca7024759219f38d4496a7a162c123d70bae72"
+      },
+      "facts": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\game-end-facts.log",
+        "sha256": "fdae21d4c2ec358c0385cbcfdc7212a1fe5282a098056906076c18a167b317d0"
+      },
+      "interruptIntervention": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\irq-details.log",
+        "sha256": "e46013efcb12e4d4fa4bd70803de049c38299f5c8d1f3fe7f4fa5d83a0d55f9a"
+      },
+      "note": "The directory and metadata-read image loads the game but stalls at its level-3 handoff with VBlank disabled. A diagnostic one-time enable reaches its own frame loop, then exposes its Chip-marked hunks residing in A501 RAM. This is not gameplay qualification and the intervention is not used by any final replay."
+    }
+  },
+  "diagnosticQaSheets": [
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\corrected-first.jpg",
+      "sha256": "0d1ca108f23833677492fa1490bae438521fdf5ee4ad87f079cdc91531570a34",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "copperstart-driving",
+          "field": 1000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\copperstart-driving\\captures\\frame-001000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        },
+        {
+          "run": "copperstart-driving",
+          "field": 5000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\copperstart-driving\\captures\\frame-005000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\final-loading.jpg",
+      "sha256": "045615d03f513a07552f9050d9ce0e7f5e75032f2889ab7a568d2ceeac77c7ed",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "final-copperstart-driving",
+          "field": 2000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-copperstart-driving\\captures\\frame-002000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        },
+        {
+          "run": "final-copperstart-driving",
+          "field": 4000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-copperstart-driving\\captures\\frame-004000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\final-preflight.jpg",
+      "sha256": "f855361c6f6f37ddab76f6454ef9148616abfce93283cda0c604c6be47b35c45",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "final-copperstart-driving",
+          "field": 9000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-copperstart-driving\\captures\\frame-009000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        },
+        {
+          "run": "final-copperstart-driving",
+          "field": 10000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-copperstart-driving\\captures\\frame-010000.bmp",
+          "sha256": "3188e86c3454fcfe56eaa416edbacb27c8f33e1886d7afabc2054b1528b5cea2"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\initial.png",
+      "sha256": "fd4a06a093dc0a6ce8781d6b18d39ae5789332efadaf0e039a042bf7a56c0885",
+      "sourceFrames": [
+        {
+          "run": "native-exploration",
+          "field": 4000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-exploration\\captures\\frame-004000.bmp",
+          "sha256": "46c03e00c4d6753226c0630f0ed8b5b63efe570ef65cc39a12ba5ec9bb2c5f65"
+        },
+        {
+          "run": "native-exploration",
+          "field": 6000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-exploration\\captures\\frame-006000.bmp",
+          "sha256": "3b610fc2bb8f9555b0731124497aaedce76ef33ebefc12c85c3bfbc3a5736d7d"
+        },
+        {
+          "run": "preceding-pilot",
+          "field": 4000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\preceding-pilot\\captures\\frame-004000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\loading-check.jpg",
+      "sha256": "462f39939d62c2f03516e80ae61da98be4b966777968d0cebe628e9572fbbe09",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "copperstart-delayed-exploration",
+          "field": 10000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\copperstart-delayed-exploration\\captures\\frame-010000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        },
+        {
+          "run": "copperstart-delayed-exploration",
+          "field": 12000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\copperstart-delayed-exploration\\captures\\frame-012000.bmp",
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\native-controls.png",
+      "sha256": "154a32bbe12b9d8096ceed8575cab3d8f72d910f8033e570ad25379f013b3ed8",
+      "sourceFrames": [
+        {
+          "run": "native-driving",
+          "field": 6600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-006600.bmp",
+          "sha256": "33094ea55e137324950546baee52165c4df4ce09e9380fbc0f0ed07e96ef0db7"
+        },
+        {
+          "run": "native-idle",
+          "field": 6600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\captures\\frame-006600.bmp",
+          "sha256": "ea17256a11e5ac556f162a5cac1eed3f90a397519638528b4bd82a2d8638395e"
+        },
+        {
+          "run": "native-driving",
+          "field": 7400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-driving\\captures\\frame-007400.bmp",
+          "sha256": "6cc07ffffb7a4e13960b64ee590d8beb662ae777e11c9913bae3c921ef487aea"
+        },
+        {
+          "run": "native-idle",
+          "field": 7400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-idle\\captures\\frame-007400.bmp",
+          "sha256": "09c9bd87531f1583df14af56e0330e207f36306af9195d96518d297af0d27b35"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\native-driving.png",
+      "sha256": "c317569b4674200b1c7486e2316553dc4c2fc7a329a9f40a436845ae912dfa70",
+      "sourceFrames": [
+        {
+          "run": "native-exploration",
+          "field": 5000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-exploration\\captures\\frame-005000.bmp",
+          "sha256": "b0f7e8f2007d877de4419263850079dfd66dd891fc62311cb3cc126543bfcadc"
+        },
+        {
+          "run": "native-exploration",
+          "field": 6600,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-exploration\\captures\\frame-006600.bmp",
+          "sha256": "33094ea55e137324950546baee52165c4df4ce09e9380fbc0f0ed07e96ef0db7"
+        },
+        {
+          "run": "native-exploration",
+          "field": 7400,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-exploration\\captures\\frame-007400.bmp",
+          "sha256": "6cc07ffffb7a4e13960b64ee590d8beb662ae777e11c9913bae3c921ef487aea"
+        },
+        {
+          "run": "native-exploration",
+          "field": 8500,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\native-exploration\\captures\\frame-008500.bmp",
+          "sha256": "cc7a57c124ce66d50e3936d31af7b30fc8ad911ede7cfed96945ab7bb17660cb"
+        }
+      ],
+      "method": "Decode full 32-bit BI_RGB images to RGB, concatenate at original dimensions with labels; no source capture change, crop or resize."
+    },
+    {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\qa\\regression-reference.jpg",
+      "sha256": "d1a2d53bffe487eca32150fcc54b927242f3db394377bde208f49948f0754bfc",
+      "method": "JPEG viewing copy at original full viewport dimensions, no crop or scaling; lossy format used only for manual review. Raw BMPs and lossless RGB comparisons remain authoritative.",
+      "sourceFrames": [
+        {
+          "run": "final-overdrive-regression",
+          "field": 40000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-overdrive-regression\\captures\\frame-040000.bmp",
+          "sha256": "f6e0a24ffff405913848d33045524ab3e380e811fe602d5ea65b56652a2e1191"
+        },
+        {
+          "run": "final-lemmings-regression",
+          "field": 22000,
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-18\\final-lemmings-regression\\captures\\frame-022000.bmp",
+          "sha256": "fa46759998317c7438ca12bb433cf0d4124504506f52efee201e4e4f47852b4f"
+        }
+      ]
+    }
+  ],
+  "inputTiming": {
+    "native": {
+      "key1Field": 4900,
+      "controlForkField": 6000,
+      "fields": 10000
+    },
+    "copperstart": {
+      "key1Field": 13000,
+      "controlForkField": 14100,
+      "fields": 18000
+    },
+    "note": "Identical event sequence shifted8100 fields in a separate conservative schedule. No loading-speed claim. Each CPU-mode pair and idle control uses its own ROM and exact common timing; cross-ROM visual comparisons are descriptive."
+  }
+}
