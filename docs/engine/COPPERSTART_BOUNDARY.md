@@ -22,6 +22,11 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Overdrive replay](COPPERSTART_OVERDRIVE_2026-10-23.md) adds original
+two-IPF Arcade boot, driving, pause/resume, race abort and both physical disk
+swaps back to the main menu. No additional ROM or engine change was needed.
+This covers the opening race controls, without a completed lap or race claim.
+
 The [F17 Challenge replay](COPPERSTART_F17_2026-10-23.md) uses the current
 standalone CopperStart ROM and the engine's
 [sprite/audio DMA correction](WORMS_SPRITE_DMA_2026-10-22.md). Original IPFs
