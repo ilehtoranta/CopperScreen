@@ -295,6 +295,15 @@ Campaign completion, fort/train sequences and protected original media remain
 unverified. Runtime binaries are freshly built from the merged source rather
 than reusing the preceding Desert Strike runtime.
 
+The [Full Contact combat continuation](COPPERSTART_FULL_CONTACT_2026-10-24.md)
+uses an independently recomposed, byte-identical North & South ROM. Attacks,
+Up recovery after a knockdown, defeat, Top Ten and Play Again into another
+Tong Lo fight are verified. No additional firmware or engine fix was established.
+The matched Escape control fails under both CopperStart and native Kickstart 1.3;
+it remains unsuccessful coverage. Winning the first opponent and later stages
+remain unqualified. Complete normal/scalar captures and independent reset replays
+are recorded separately from the retained production build and engine tests.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
