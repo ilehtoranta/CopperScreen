@@ -234,9 +234,9 @@ public sealed class LightweightPaulaOutputTests
     }
 
     [Theory]
-    [InlineData(0x8010, 1392)] // Period-only requests at low byte, h15 of line 3.
-    [InlineData(0x8001, 938)]  // Volume attachment requests at high byte.
-    [InlineData(0x8011, 938)]  // Combined preserves high-byte request.
+    [InlineData(0x8010, 1388)] // Period-only requests at low byte, h13 of line 3.
+    [InlineData(0x8001, 934)]  // Volume attachment requests at high byte.
+    [InlineData(0x8011, 934)]  // Combined preserves high-byte request.
     public void DmaAttachmentUsesTheCorrespondingDataRequestPhase(ushort adk, long nextInput)
     {
         using var m = new LightweightA500Machine();
@@ -246,11 +246,11 @@ public sealed class LightweightPaulaOutputTests
         m.WriteChipWordDma(0x2002, 32);
         Write(m, 0x09E, adk, 0);
         Write(m, 0x096, 0x8201, 0);
-        m.AdvanceHardwareTo(488);
+        m.AdvanceHardwareTo(484);
         if (adk == 0x8010)
         {
             Assert.Equal(long.MaxValue, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
-            m.AdvanceHardwareTo(1288);
+            m.AdvanceHardwareTo(1284);
         }
         Assert.Equal(nextInput, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
     }

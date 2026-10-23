@@ -39,9 +39,9 @@ internal static class ExtendedAdfDecoder
         }
 
         var trackCount = BigEndian.ReadUInt16(image, 10, "track count");
-        if (trackCount == 0 || trackCount > 168)
+        if (trackCount is 0 or > AmigaDiskGeometry.MaximumPreservedTrackCount)
         {
-            throw Error("DD UAE-1ADF images require 1–168 declared tracks.");
+            throw Error($"DD UAE-1ADF images require 1–{AmigaDiskGeometry.MaximumPreservedTrackCount} tracks.");
         }
 
         var tableLength = HeaderLength + (trackCount * TrackHeaderLength);
@@ -124,7 +124,7 @@ internal static class ExtendedAdfDecoder
 
     private static AmigaEncodedTrack[] DecodeTracks(ReadOnlySpan<byte> image, TrackEntry[] entries)
     {
-        var tracks = new AmigaEncodedTrack[Math.Max(AmigaDiskGeometry.TrackCount, (entries.Length + 1) & ~1)];
+        var tracks = new AmigaEncodedTrack[entries.Length];
         for (var track = 0; track < entries.Length; track++)
         {
             var entry = entries[track];
@@ -135,9 +135,9 @@ internal static class ExtendedAdfDecoder
             }
             else if (entry.BitLength == 0)
             {
-                // UAE-1ADF uses a zero raw bit length for an unformatted track,
-                // including entries with reserved backing space.
-                tracks[track] = AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack());
+                // UAE-1ADF uses zero raw bits for an unformatted track. As in
+                // UAE's PAL DD fallback, expose one zero-filled revolution.
+                tracks[track] = AmigaEncodedTrack.FromBytes(new byte[AmigaDosTrackEncoder.EncodedTrackByteCount]);
             }
             else
             {
@@ -148,9 +148,6 @@ internal static class ExtendedAdfDecoder
                     AmigaTrackFeatures.PreservedTrackData);
             }
         }
-
-        for (var track = entries.Length; track < tracks.Length; track++)
-            tracks[track] = AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack());
 
         return tracks;
     }

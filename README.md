@@ -32,15 +32,17 @@ ROMs, operating-system files and game media are not included.
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
 Copper68k's published baseline is [version `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3).
-This worktree pins the frozen `1.5.4-nitro-dev.2` candidate
+This worktree pins the unpublished `1.5.5-nitro.1` candidate
 from the ignored `artifacts/qualified-cpu-20261017/feed` directory. Run
-`./scripts/prepare-qualified-cpu.ps1` before restoring to fetch the exact frozen
-package from its [CopperMod GitHub release](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-nitro-dev.2) and verify its qualification
-and lock hashes. An existing local package can instead be supplied
-with `-PackagePath <path-to-nupkg>`. It is not available from NuGet.org. Rebuilt package content needs
+`./scripts/prepare-qualified-cpu.ps1 -PackagePath <path-to-qualified-nupkg>`
+before restoring to verify its qualification and lock hashes and populate the feed.
+The script can also reuse an existing verified feed or local package-cache copy.
+The package is not publicly distributed, so a clean checkout or CI agent needs
+the exact qualified package supplied separately; the preceding public
+`1.5.4-nitro-dev.2` candidate cannot replace it. Rebuilt package content needs
 a new development version and regenerated locks. No sibling project reference
 is used. See the
-[Nitro compatibility qualification](docs/engine/NITRO_RACE_START_2026-10-17.md), the
+[Nitro compatibility qualification](docs/engine/COPPERSTART_NITRO_2026-10-23.md), the
 [preceding candidate record](docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md) and
 [CPU support, validation and remaining limits](docs/engine/CPU_SUPPORT.md).
 The explicit A1200 EC020 profile and native ROM operand forms

@@ -1,0 +1,813 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Alien Breed physical disk handoff, first-deck completion, bounded second-deck play and menu restart",
+  "status": "QUALIFIED: first deck completed under CopperStart and native Kickstart; second-deck play, high-score/menu and new-game restart observed. No new ROM/engine correction isolated.",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21",
+  "sourceBase": "0547c00d137269f0ed6b84103a2b815a11497398",
+  "engineCodeBaseline": "8b1fb4148d5763929e804e577d69b94d656a3768",
+  "copperStartSourceBase": "9fb3f34e8fb3ad43c1287cc164df0d1ef98d62d9",
+  "romProducer": "b78ddc09302cd506687327be1c1434891444cc4a",
+  "romChanged": false,
+  "engineChanged": false,
+  "newCompatibilityCorrection": null,
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+  },
+  "nativeControlRom": {
+    "path": "C:/Data/ROM/Kickstart_13.rom",
+    "bytes": 262144,
+    "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "binaries": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+      "bytes": 52224,
+      "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288256,
+      "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperDisk.dll",
+      "bytes": 105472,
+      "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+    }
+  ],
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "df0": "Read-only original SPS 998 Game Disk One, physically ejected and replaced with Game Disk Two",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/AlienBreed_998.zip",
+      "bytes": 2433696,
+      "sha256": "f71725c4dd05ea2724dae61760c8bed2b5c9d14289ea56a719f6299ad20fa75f"
+    },
+    "entries": [
+      {
+        "entry": "AlienBreed_GameDisk1.ipf",
+        "bytes": 1049612,
+        "sha256": "8ff762f210f085b0a8f423ca31660cc7d98cf98913290013d4ef9e1a1f5da111"
+      },
+      {
+        "entry": "AlienBreed_GameDisk2.ipf",
+        "bytes": 1043227,
+        "sha256": "e9393b3f2d89f5a9e5d22443cff369e21b98f7cbcfe900fab9cac1f92ff82712"
+      },
+      {
+        "entry": "AlienBreed_StoryDisk.ipf",
+        "bytes": 1049612,
+        "sha256": "6f8c4ce329d88aced10f1794ae2a58e12b263fd702880909814ba355632b6be4"
+      }
+    ]
+  },
+  "qualifiedMediaEntries": [
+    "AlienBreed_GameDisk1.ipf",
+    "AlienBreed_GameDisk2.ipf"
+  ],
+  "unrunMediaEntries": [
+    "AlienBreed_StoryDisk.ipf"
+  ],
+  "options": {
+    "players": 1,
+    "shareCredits": false
+  },
+  "inputPolicy": "Ordinary physical joystick, keyboard and drive input only. No trainer, level code, state restoration, guest-memory patch, host OS shim or disk write.",
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/alienbreed-copperstart-first-deck-v1.json",
+    "bytes": 3473,
+    "sha256": "dd2873e84a10107c4bdaae3cd6b17942fc61658a92dfdbc1b077ced64c6d79ed"
+  },
+  "segments": 32,
+  "events": 76,
+  "mediaEvents": {
+    "eject": {
+      "frame": 5003,
+      "ejectAdf": true
+    },
+    "insert": {
+      "frame": 5053,
+      "diskPath": "C:/Data/TestImages/Team17/AlienBreed_998.zip#/AlienBreed_GameDisk2.ipf"
+    }
+  },
+  "interactive": {
+    "end": 21200,
+    "segments": 32,
+    "events": 76,
+    "workload": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/alienbreed-copperstart-first-deck-v1.json",
+      "bytes": 3473,
+      "sha256": "dd2873e84a10107c4bdaae3cd6b17942fc61658a92dfdbc1b077ced64c6d79ed"
+    },
+    "runs": {
+      "normal": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/run.json",
+          "bytes": 2195,
+          "sha256": "dd145c0776e824479225f0d25fc8056ce547889831e08d14b7d558989937c232"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/runner.log",
+          "bytes": 246773,
+          "sha256": "ea7802e8c6c4fc122e0267a157c43525b5ff55d199b4058bb4ffbb06020e8a43"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/segments.jsonl",
+          "bytes": 3815,
+          "sha256": "c22e5571f93fa4072f5843b68f080bd35a6df923b36ad389f1929d9bc830acf3"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/capture-manifest.json",
+          "bytes": 315550,
+          "sha256": "6031a784cc0bfd952853adfadc59cbe44d5a732cc1feedefd000bb5cbfe67f5b"
+        },
+        "files": 1115,
+        "snapshots": 223,
+        "nonzeroPcmSnapshots": 127,
+        "exitCode": 0
+      },
+      "scalar": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/scalar/run.json",
+          "bytes": 2212,
+          "sha256": "01f4d66bd91fd1e2ea550fbc38efd1ebc9912608f8effeec17b8893463d7fb8e"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/scalar/runner.log",
+          "bytes": 246773,
+          "sha256": "ea7802e8c6c4fc122e0267a157c43525b5ff55d199b4058bb4ffbb06020e8a43"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/scalar/segments.jsonl",
+          "bytes": 3815,
+          "sha256": "c22e5571f93fa4072f5843b68f080bd35a6df923b36ad389f1929d9bc830acf3"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/scalar/capture-manifest.json",
+          "bytes": 315550,
+          "sha256": "202bda33081b128e2c8c1c81e92fcd20d8ff1d0809d8ecea113622f45a6a0c36"
+        },
+        "files": 1115,
+        "snapshots": 223,
+        "nonzeroPcmSnapshots": 127,
+        "exitCode": 0
+      },
+      "native": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/run.json",
+          "bytes": 2011,
+          "sha256": "fd96bda645d1c572c2f91e70d6986e0f22e820d119b0c2a29da29084765fc494"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/runner.log",
+          "bytes": 246735,
+          "sha256": "fe66a720b802823f6bf07a0ff4713da290e6683ff9f2c814c61e7c14f50fd54f"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/segments.jsonl",
+          "bytes": 3815,
+          "sha256": "c22e5571f93fa4072f5843b68f080bd35a6df923b36ad389f1929d9bc830acf3"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/capture-manifest.json",
+          "bytes": 315550,
+          "sha256": "c70f67942f931bce37c85dfba0e49ca7ad36ddd26c98a20b6c2dcb26810f4af2"
+        },
+        "files": 1115,
+        "snapshots": 223,
+        "nonzeroPcmSnapshots": 127,
+        "exitCode": 0
+      }
+    },
+    "parity": {
+      "normalScalarAllFiles": true,
+      "nativeMatchingImages": 175,
+      "nativeDifferentImages": 48,
+      "firstDifferentGameplayImageAfter14000": "frame-014400.bmp",
+      "crossRomPixelEqualityClaimed": false
+    }
+  },
+  "uninterruptedResetReplay": {
+    "normal": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/run.json",
+        "bytes": 2212,
+        "sha256": "2826eb02c301ec0c1849211140259dc36cf33e05e815b175ec5b6c4236ebf9c8"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/runner.log",
+        "bytes": 235006,
+        "sha256": "97438019c0d61f6212a55be54747e70156a5c6a73b1d6f1d64911683232436ff"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/capture-manifest.json",
+        "bytes": 308855,
+        "sha256": "d910607d71328b89031ae6f0e7e265baf769ac405f2d06b1029492b8c0ec0a58"
+      },
+      "files": 1065,
+      "snapshots": 213,
+      "nonzeroPcmSnapshots": 118,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "scalar": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-scalar/run.json",
+        "bytes": 2229,
+        "sha256": "bcee75456701918e5fc1815361db092ac423083b8a1ba91c4df68ac6abdd2835"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-scalar/runner.log",
+        "bytes": 235006,
+        "sha256": "97438019c0d61f6212a55be54747e70156a5c6a73b1d6f1d64911683232436ff"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-scalar/capture-manifest.json",
+        "bytes": 308855,
+        "sha256": "c753d89a57163724c40843eb75b394aa102d0319000fea79e5079ea29a52c568"
+      },
+      "files": 1065,
+      "snapshots": 213,
+      "nonzeroPcmSnapshots": 118,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "native": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-native/run.json",
+        "bytes": 2028,
+        "sha256": "ec0c8709b72d0fb75946a55507cb1ea8ff3c27628e897cf262803fc87e0a9cc4"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-native/runner.log",
+        "bytes": 234967,
+        "sha256": "2a4417e0d3a6650e4ef0437f8490972fcad22697e80d83d3120752d13ebf9913"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-native/capture-manifest.json",
+        "bytes": 308855,
+        "sha256": "8e0ca1b3e57898c5a7b74e6c77f96fd28351afec2ed3294ac1562cd43d956ad6"
+      },
+      "files": 1065,
+      "snapshots": 213,
+      "nonzeroPcmSnapshots": 118,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "normalScalarAllFiles": true
+  },
+  "verificationFiles": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/verification.json",
+      "bytes": 4185,
+      "sha256": "7b1f2f89ed2a537f59eb50d19ee45f44ea548c9cc688837e10d93c0c32cf5649"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-verification.json",
+      "bytes": 2885,
+      "sha256": "9955fb3cba744ec01de995cb9b48d358a1f022ecb79f00133b94275d51efc8e7"
+    }
+  ],
+  "tools": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/start.py",
+      "bytes": 1509,
+      "sha256": "a4b7a156a236dc514e8f73b9c1d3879a7299a77dcccae24c2ae46402cb535a37"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/step.py",
+      "bytes": 1689,
+      "sha256": "3289793235b4282ef5491914c5c4cbe2938a8427edfbbcdcf01701a32d91044a"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/verify.py",
+      "bytes": 3032,
+      "sha256": "6bf40d5c23c403b2cc909ff9b6234ab08e333c29e55ee03083635aade00a59a5"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay.py",
+      "bytes": 1420,
+      "sha256": "588049d51b72e801cf55b3fa2488e5e45a3a2b2a8d3632a43beb912024eb94b5"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/verify-replay.py",
+      "bytes": 1463,
+      "sha256": "bab786054aea0b1ee222f0c9094dbceae64c3249d562301fe3a5492476a96345"
+    }
+  ],
+  "milestones": [
+    {
+      "field": 5001,
+      "observation": "Game Disk Two request",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-005001.bmp",
+        "bytes": 1136870,
+        "sha256": "8cb112eb26f2e27dbc4e6275ef9303394febdf7f13c93eb06b27111ee7147d82"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-005001.json",
+        "bytes": 1105,
+        "sha256": "fb33014dfd81a7cf35047191a602cd0c7c73a0131f0c64e0d6d8da2130b90973"
+      }
+    },
+    {
+      "field": 11000,
+      "observation": "Animated title after physical disk swap and fire",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-011000.bmp",
+        "bytes": 1136870,
+        "sha256": "f13887a1c0784e0fec07d0b3646ff53e56862650478163979b98383f7e23e639"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-011000.json",
+        "bytes": 1104,
+        "sha256": "8cc8660c4e0a592ea32c60b7eb12932f48ca31058f0e3f975856775bef18f567"
+      }
+    },
+    {
+      "field": 11200,
+      "observation": "One-player menu, Share Credits Off",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-011200.bmp",
+        "bytes": 1136870,
+        "sha256": "572821e5af5fdb24d6e082675a156a446da59eae94331931202c48b3fff08458"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-011200.json",
+        "bytes": 1104,
+        "sha256": "766052d7252f6346f13a06c2010643ab3274e280c8f4aad23e5057df1eea6bc9"
+      }
+    },
+    {
+      "field": 12500,
+      "observation": "Level 1 landing bay, player and HUD",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-012500.bmp",
+        "bytes": 1136870,
+        "sha256": "c1ddc5716b4f61b5f9bf91856f208017e459762f2073fde47e7206ad4940e67a"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-012500.json",
+        "bytes": 1114,
+        "sha256": "1c6514c924e42395cb7f91ea72c6847a9ad6b13988dab11fe9df81a83a14e33b"
+      }
+    },
+    {
+      "field": 14000,
+      "observation": "First-deck gameplay before movement",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014000.bmp",
+        "bytes": 1136870,
+        "sha256": "c1ddc5716b4f61b5f9bf91856f208017e459762f2073fde47e7206ad4940e67a"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014000.json",
+        "bytes": 1114,
+        "sha256": "01c79c8738f3adab8727c57cf8ba963437741568770fefaa7d2cc48007e1ba32"
+      }
+    },
+    {
+      "field": 14360,
+      "observation": "Door/passage traversal and scrolling",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014360.bmp",
+        "bytes": 1136870,
+        "sha256": "b6758a71228e4381df2d72d12e1b8febb92d5740a1459a67034e384f0e8fd65f"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014360.json",
+        "bytes": 1114,
+        "sha256": "af01920521c62c116baa26fed59b580713ecf92b1c3aac31af78c136fdd541f7"
+      }
+    },
+    {
+      "field": 14450,
+      "observation": "Approaching aliens in corridor",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014450.bmp",
+        "bytes": 1136870,
+        "sha256": "e75fce4e767c3c94a91eb033f52d0804f25118c737802297eafabfbdace9719d"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014450.json",
+        "bytes": 1115,
+        "sha256": "aa926674808404d60892226a5f4c5228434bfb0308a346391623bef9ee179556"
+      }
+    },
+    {
+      "field": 14520,
+      "observation": "Visible fired projectile and alien encounter",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014520.bmp",
+        "bytes": 1136870,
+        "sha256": "44d05c0f9796f064fcd024c840babbda80a2723eca5eb1689ccb203defd8de06"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014520.json",
+        "bytes": 1114,
+        "sha256": "65609b62ea73bcb6f99e03b9e276523aba32960d5cb17bda1a31d476cd0a0cef"
+      }
+    },
+    {
+      "field": 14700,
+      "observation": "Marked DECK LIFT, reduced energy and key supply",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014700.bmp",
+        "bytes": 1136870,
+        "sha256": "c842cb7b91f60757bc2b460176f385302667551c025a21db7fccd44d4cc7b063"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014700.json",
+        "bytes": 1114,
+        "sha256": "80962e3a240f12d241a19a3c3a328c7c62ba6646ccd386fd011c343534fbf8ac"
+      }
+    },
+    {
+      "field": 14820,
+      "observation": "Lift/loading transition",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014820.bmp",
+        "bytes": 1136870,
+        "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-014820.json",
+        "bytes": 1114,
+        "sha256": "06768a91a20b60d56abedc4d260035aae093d1acebb579a90204831594c0e6db"
+      }
+    },
+    {
+      "field": 15200,
+      "observation": "MISSION BRIEFING LEVEL 2",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-015200.bmp",
+        "bytes": 1136870,
+        "sha256": "4385983dab774f2c18178666bef3ee3961da08c6bd966f77bc4bf401cf2106a9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-015200.json",
+        "bytes": 1106,
+        "sha256": "aa8610bda8bc9d455c20a05e8945d318e3762cd8ea8736558dc23743421b92af"
+      }
+    },
+    {
+      "field": 15400,
+      "observation": "Level 2 briefing remains visible",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-015400.bmp",
+        "bytes": 1136870,
+        "sha256": "4385983dab774f2c18178666bef3ee3961da08c6bd966f77bc4bf401cf2106a9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-015400.json",
+        "bytes": 1077,
+        "sha256": "14d234f908a1fa70993816cab2ef2a6eea1b92e361efd8e2165f039f5c030823"
+      }
+    },
+    {
+      "field": 15600,
+      "observation": "Level 2 briefing",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-015600.bmp",
+        "bytes": 1136870,
+        "sha256": "4385983dab774f2c18178666bef3ee3961da08c6bd966f77bc4bf401cf2106a9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-015600.json",
+        "bytes": 1074,
+        "sha256": "88aca5a11f58859115247f3b3ed8912d418e4514bc6ca8721e2b1be0663b4573"
+      }
+    },
+    {
+      "field": 16800,
+      "observation": "Second-deck blue lift, checkerboard floor and ZONE 1",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-016800.bmp",
+        "bytes": 1136870,
+        "sha256": "1466d31e7374a8b2df56d164ec8bef273a0cdf971a4cebe5d094ed6d5614b01a"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-016800.json",
+        "bytes": 1114,
+        "sha256": "953cb217a03538a9bafb5fae8e70e71de265646c5c17b29de7b4df4e50bc0e1c"
+      }
+    },
+    {
+      "field": 17000,
+      "observation": "Second-deck movement, firing and door interaction",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-017000.bmp",
+        "bytes": 1136870,
+        "sha256": "a7f7e67392802f5a441955cb5b8e9feeb96117c87ffcf9e1c4228d28b9693e3a"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-017000.json",
+        "bytes": 1114,
+        "sha256": "d1997913215b2e6057400ad9db625e169c8660ec5fc9a3f5f8b3cb64f54be436"
+      }
+    },
+    {
+      "field": 19300,
+      "observation": "High-score name-entry prompt after Escape",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-019300.bmp",
+        "bytes": 1136870,
+        "sha256": "5db429bb5a4642913fc7ceac44227d64a84a70a1987e98c8965df249151f39ae"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-019300.json",
+        "bytes": 1104,
+        "sha256": "f644bb254620611fd409c60d58d58c64247501022057f53ad74a4ff04d434968"
+      }
+    },
+    {
+      "field": 20050,
+      "observation": "Joystick character selection changes current letter",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-020050.bmp",
+        "bytes": 1136870,
+        "sha256": "1e9b50e0e39266583beb3921d2c4156b592f67a89a76a614e026d6c319a7b681"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-020050.json",
+        "bytes": 1103,
+        "sha256": "2cf95f386f0fe1d44f08932dac13221678e500154fd887d42d86857d7f4522e2"
+      }
+    },
+    {
+      "field": 20600,
+      "observation": "Returned main menu",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-020600.bmp",
+        "bytes": 1136870,
+        "sha256": "c394683f43a0fc1c9e1851a2265bccfdd3ea7517a732ddd3856b17fd650e0cf9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-020600.json",
+        "bytes": 1105,
+        "sha256": "58b1330d34754ae7389340e36c32e60998756dca6cedf3ef65ac6bcc0259579a"
+      }
+    },
+    {
+      "field": 21200,
+      "observation": "New MISSION BRIEFING LEVEL 1",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-021200.bmp",
+        "bytes": 1136870,
+        "sha256": "dc71cc8efc72ca600fc614636b69d4cbf83b019c6edbef95d0d9c56540bbe2e2"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/normal/captures/frame-021200.json",
+        "bytes": 1067,
+        "sha256": "25a1de7c8b8a025a79142f0d3e234d62d13d545634c40cb2c8dd0b75c9835d1b"
+      }
+    }
+  ],
+  "nativeMilestones": [
+    {
+      "field": 5001,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-005001.bmp",
+        "bytes": 1136870,
+        "sha256": "8cb112eb26f2e27dbc4e6275ef9303394febdf7f13c93eb06b27111ee7147d82"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-005001.json",
+        "bytes": 1106,
+        "sha256": "b16e1c8d23cb15e5e1ed9c7c8821acb68a49a6e8849ac3b1afa7502179b8b7e4"
+      }
+    },
+    {
+      "field": 11200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-011200.bmp",
+        "bytes": 1136870,
+        "sha256": "572821e5af5fdb24d6e082675a156a446da59eae94331931202c48b3fff08458"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-011200.json",
+        "bytes": 1104,
+        "sha256": "c7d65dee7fc007c052d0510360bff870f417a598dddc20c3e2e1301a2b2a2d09"
+      }
+    },
+    {
+      "field": 14000,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-014000.bmp",
+        "bytes": 1136870,
+        "sha256": "c1ddc5716b4f61b5f9bf91856f208017e459762f2073fde47e7206ad4940e67a"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-014000.json",
+        "bytes": 1114,
+        "sha256": "876ffd2a99a8fd3537fb83267132fe6ee7dffe6d5beaee6932a2ca82f11de335"
+      }
+    },
+    {
+      "field": 15400,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-015400.bmp",
+        "bytes": 1136870,
+        "sha256": "4385983dab774f2c18178666bef3ee3961da08c6bd966f77bc4bf401cf2106a9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-015400.json",
+        "bytes": 1075,
+        "sha256": "edf343dd50f9cd9cac0ecd75cdfde3b0b9b74135c421e8224251e877d2bbe6a1"
+      }
+    },
+    {
+      "field": 16800,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-016800.bmp",
+        "bytes": 1136870,
+        "sha256": "370d2c310aade84d854e785aae5a4885088102c8b974f83f2761a31839dfac72"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-016800.json",
+        "bytes": 1114,
+        "sha256": "f9de4b1c95ec20e231d1e3460241e1c1f5307e7fd4655cc1fcbd7d5aa9598e03"
+      }
+    },
+    {
+      "field": 17000,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-017000.bmp",
+        "bytes": 1136870,
+        "sha256": "e8135f155970eb4eda1af3d3b05e0aba407f965d64ab3116af207a8b17d8e087"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-017000.json",
+        "bytes": 1114,
+        "sha256": "8157854a0998182abc0075f248e1fa96fef54b7e1e54e2f040c8c5a91072e10c"
+      }
+    },
+    {
+      "field": 19300,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-019300.bmp",
+        "bytes": 1136870,
+        "sha256": "5db429bb5a4642913fc7ceac44227d64a84a70a1987e98c8965df249151f39ae"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-019300.json",
+        "bytes": 1104,
+        "sha256": "5a4c33a49f27bc71d5184dcff45b572a798e565e1575a772f3bf38042bdbef6b"
+      }
+    },
+    {
+      "field": 20600,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-020600.bmp",
+        "bytes": 1136870,
+        "sha256": "acea81c4d015074b7271c66dfd8ba8f222543188e761370ea9df4b4863535d30"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-020600.json",
+        "bytes": 1105,
+        "sha256": "f157d618ef6cbee76ef27c550cd4aecfdc431d90c774d76249a6feedfe3271d8"
+      }
+    },
+    {
+      "field": 21200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-021200.bmp",
+        "bytes": 1136870,
+        "sha256": "dc71cc8efc72ca600fc614636b69d4cbf83b019c6edbef95d0d9c56540bbe2e2"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/native/captures/frame-021200.json",
+        "bytes": 1067,
+        "sha256": "382652a0cd0565606f3226fa452cff18c5107b8be268e65e652e6c175ebfdc59"
+      }
+    }
+  ],
+  "resetMilestones": [
+    {
+      "field": 5000,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-005000.bmp",
+        "bytes": 1136870,
+        "sha256": "8cb112eb26f2e27dbc4e6275ef9303394febdf7f13c93eb06b27111ee7147d82"
+      }
+    },
+    {
+      "field": 11000,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-011000.bmp",
+        "bytes": 1136870,
+        "sha256": "f13887a1c0784e0fec07d0b3646ff53e56862650478163979b98383f7e23e639"
+      }
+    },
+    {
+      "field": 12500,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-012500.bmp",
+        "bytes": 1136870,
+        "sha256": "c1ddc5716b4f61b5f9bf91856f208017e459762f2073fde47e7206ad4940e67a"
+      }
+    },
+    {
+      "field": 15400,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-015400.bmp",
+        "bytes": 1136870,
+        "sha256": "4385983dab774f2c18178666bef3ee3961da08c6bd966f77bc4bf401cf2106a9"
+      }
+    },
+    {
+      "field": 16800,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-016800.bmp",
+        "bytes": 1136870,
+        "sha256": "1466d31e7374a8b2df56d164ec8bef273a0cdf971a4cebe5d094ed6d5614b01a"
+      }
+    },
+    {
+      "field": 19300,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-019300.bmp",
+        "bytes": 1136870,
+        "sha256": "5db429bb5a4642913fc7ceac44227d64a84a70a1987e98c8965df249151f39ae"
+      }
+    },
+    {
+      "field": 20600,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-020600.bmp",
+        "bytes": 1136870,
+        "sha256": "c394683f43a0fc1c9e1851a2265bccfdd3ea7517a732ddd3856b17fd650e0cf9"
+      }
+    },
+    {
+      "field": 21200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-alienbreed-2026-10-21/replay-normal/captures/frame-021200.bmp",
+        "bytes": 1136870,
+        "sha256": "dc71cc8efc72ca600fc614636b69d4cbf83b019c6edbef95d0d9c56540bbe2e2"
+      }
+    }
+  ],
+  "nativeComparison": {
+    "functionalMilestones": "Disk request/handoff, title/menu, first-deck lift completion, explicit Level 2 briefing, second-deck play, Escape/high-score input, menu return and new Level 1 briefing reached",
+    "firstSampledGameplayImageDifferenceAfter14000": 14400,
+    "crossRomPixelOrTimingEqualityClaimed": false,
+    "difference": "Later enemy/animation/input phases differ; cause not isolated as a ROM or engine defect. Each ROM reset replay matches its own interactive captures."
+  },
+  "validation": {
+    "allSixExitZero": true,
+    "normalScalarInteractiveFiles": 1115,
+    "normalScalarResetReplayFiles": 1065,
+    "resetMatchesInteractiveAtCommonCaptures": true,
+    "allCapturedUnsupportedAndVideoUnsupportedFlagsNull": true,
+    "productionBuildAndDiagnosticSuiteRerun": false,
+    "audio": "Nonzero PCM checked; listening and fidelity unassessed",
+    "throughputAcceptance": false
+  },
+  "limitations": [
+    "Second/later-deck completion and full combat",
+    "Intex transactions and map purchase",
+    "Additional weapons",
+    "Persistent saving/high-score table viewing",
+    "Two-player mode",
+    "Story Disk",
+    "General Workbench",
+    "Cross-ROM timing equivalence and broader sprite hardware edges"
+  ],
+  "references": [
+    {
+      "title": "Preserved Team17 Alien Breed manual",
+      "url": "https://www.emuparadise.me/GameBase%20Amiga/Extras/Instructions/A/Alien%20Breed.txt"
+    },
+    {
+      "title": "Level-one route guidance; ordinary lift route only, no codes/trainers",
+      "url": "https://www.lemonamiga.com/doc/alien-breed/48"
+    },
+    {
+      "title": "Previous sprite DMA correction and build/test provenance",
+      "path": "SUPERFROG_CHARACTER_2026-10-20.md"
+    }
+  ]
+}

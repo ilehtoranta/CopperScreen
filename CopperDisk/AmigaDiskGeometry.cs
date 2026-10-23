@@ -5,6 +5,9 @@ namespace CopperDisk;
 /// </summary>
 public static class AmigaDiskGeometry
 {
+    // Preserved media may include the extra cylinders reachable by DD drives.
+    internal const int MaximumPreservedTrackCount = 84 * 2;
+
     /// <summary>
     /// The number of bytes in one AmigaDOS sector.
     /// </summary>

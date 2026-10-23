@@ -1,0 +1,1174 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Worms sprite DMA and gameplay follow-up",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22",
+  "copperScreenSourceBase": "258e01c4dbadf1693326726a45e12b63cdac88a9",
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": true,
+  "sourcePatch": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/qualified-source.patch",
+    "bytes": 48027,
+    "sha256": "84158627bad906145a359ce9c9fbe5cc2a28856729849d31c15fbde6be640241"
+  },
+  "changedSourceFiles": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightAgaReadbackScanTests.cs",
+      "bytes": 11066,
+      "sha256": "4dc486b92dbfb5e55960b14b6ee26fdafe76e1d4a596e52daaf9677fc7b262af"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightAgaSpriteTests.cs",
+      "bytes": 11084,
+      "sha256": "ab7bfba533fb8832e9a60143dc13c9d8fe0f8c30132e46a0da27a5cb6b6ee8a6"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightBeamSyncTests.cs",
+      "bytes": 12490,
+      "sha256": "8bb4da4735e6b28102caa073b30ab8d9499202e281e6f7f355581cf21a87719b"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightEcsDisplayTests.cs",
+      "bytes": 14941,
+      "sha256": "79cef68e8b10a13cd839138c35526967ddf2fa35044581e1c8d2861dbb79cd5f"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightOcsIdentificationTests.cs",
+      "bytes": 8969,
+      "sha256": "87ad59a8a710ad98116c8cd89a2d6bec019b1b0d60e3eb0b0be20ff72bb4256e"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightPaulaDmaTests.cs",
+      "bytes": 13943,
+      "sha256": "7d85b02b6cd5b986b5d3ecdd57f0f7fbebf5a7c5c2ae7f44e91dcadef77774b8"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightPaulaOutputTests.cs",
+      "bytes": 13204,
+      "sha256": "6bb755d11b2eef28286ba33d871b362be667ebe67832d0b2e4d0cb035528686f"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightPaulaTests.cs",
+      "bytes": 8182,
+      "sha256": "3566099b65d97e30c476a7f515d9538f8d6bb9a0feadc3e4c2e9533f96daa62d"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightSpriteDmaPresentationTests.cs",
+      "bytes": 16093,
+      "sha256": "a30866c8a9a55a652b4cc07ba14ef73be451192e6c90915a51cfe4722efae1e0"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/LightweightSpriteDmaTests.cs",
+      "bytes": 20450,
+      "sha256": "2c2fcd1a9b161ed895c77f0a737d5e76edc084ff9d6f38ee7f58917df6d33ff2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight/LightweightPaulaAudio.cs",
+      "bytes": 23505,
+      "sha256": "aa792460117151563faf75081091562b265683e409bb937331b6235267a31a21"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight/LightweightSpriteDma.cs",
+      "bytes": 18690,
+      "sha256": "cbbd4e7f6b65844a7b9c5e476feaccb0fc76264c34a5bf060b721658ce9231ff"
+    }
+  ],
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "read-only original Worms Disk 1 IPF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/Worms_230.zip",
+      "bytes": 1930271,
+      "sha256": "31b9983aa74270fb39ef4c08483dfb79da4d9b8ac006a7600e07d2876c2d091f"
+    },
+    "entries": [
+      {
+        "entry": "Worms_Disk1of3.ipf",
+        "bytes": 1049180,
+        "sha256": "abde449d92eaa8fc0daa054c734f5bca2e01422734e1488142f8e813b9cc1606"
+      },
+      {
+        "entry": "Worms_Disk2of3.ipf",
+        "bytes": 1049180,
+        "sha256": "4283fc4e175166a05f7468ae3e2d9514f56f6554c2c77f6e063eef5037aec57a"
+      },
+      {
+        "entry": "Worms_Disk3of3.ipf",
+        "bytes": 1049180,
+        "sha256": "58c531a44938bb3a1ab432f771f78c06eefea6036ea80f2658369f5879cb3a70"
+      }
+    ]
+  },
+  "additionalRuntimeDependency": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperFloat.dll",
+    "bytes": 28672,
+    "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-replay\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-complete-input.json",
+          "C:/Data/TestImages/Team17/Worms_230.zip#/Worms_Disk1of3.ipf",
+          "116200"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/worms-complete-input.json",
+          "bytes": 5929,
+          "sha256": "68e681fe91170cd489d92b6c7d78c96b1090f9555e61bb81704bab39b1965356"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          }
+        ],
+        "exitCode": 0
+      },
+      "segments": []
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-replay\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-complete-input.json",
+          "C:/Data/TestImages/Team17/Worms_230.zip#/Worms_Disk1of3.ipf",
+          "116200",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/worms-complete-input.json",
+          "bytes": 5929,
+          "sha256": "68e681fe91170cd489d92b6c7d78c96b1090f9555e61bb81704bab39b1965356"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          }
+        ],
+        "exitCode": 0
+      },
+      "segments": []
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-final\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\evidence-publish\\CopperMod.Amiga.Lightweight.Runner\\Workloads\\worms-native31-training-control-v1.json",
+          "C:/Data/TestImages/Team17/Worms_230.zip#/Worms_Disk1of3.ipf",
+          "17500"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/worms-native31-training-control-v1.json",
+          "bytes": 5054,
+          "sha256": "b097fdddc2b6199c4b2e19bf94052edb80ffcc5d6445bb46c12a2de802b58db1"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          }
+        ],
+        "exitCode": 0
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 17500,
+          "target": 20500,
+          "events": [
+            {
+              "frame": 17502,
+              "keyCode": 335
+            },
+            {
+              "frame": 17506,
+              "keyCode": 463
+            },
+            {
+              "frame": 17602,
+              "keyCode": 320
+            },
+            {
+              "frame": 17642,
+              "keyCode": 448
+            }
+          ]
+        }
+      ]
+    },
+    "captures": {
+      "normal": {
+        "files": 5815,
+        "fields": 1163,
+        "lastField": 116200,
+        "unsupported": [],
+        "nonzeroPcmFields": 1,
+        "manifestSha256": "3000e08f1163b476c0e8cba2d19e34600b305682d63ff5c28436c1041acb561a"
+      },
+      "scalar": {
+        "files": 5815,
+        "fields": 1163,
+        "lastField": 116200,
+        "unsupported": [],
+        "nonzeroPcmFields": 1,
+        "manifestSha256": "3000e08f1163b476c0e8cba2d19e34600b305682d63ff5c28436c1041acb561a"
+      },
+      "identical": true,
+      "mismatches": [],
+      "native31": {
+        "files": 1030,
+        "fields": 206,
+        "lastField": 20500,
+        "unsupported": [],
+        "nonzeroPcmFields": 1,
+        "manifestSha256": "ea8503417e943d9fd784766f8990b888f26c82783f75a816ed5239ad26d22cfa"
+      }
+    }
+  },
+  "workloads": {
+    "copperStart": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/worms-copperstart-training-sprite-dma-v1.json",
+      "bytes": 5929,
+      "sha256": "68e681fe91170cd489d92b6c7d78c96b1090f9555e61bb81704bab39b1965356"
+    },
+    "native31": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/worms-native31-training-sprite-dma-v1.json",
+      "bytes": 5262,
+      "sha256": "a7098c6460d5a9a1e8b67e602ff36e00546db106cc2785835f04257af6a1b496"
+    }
+  },
+  "interactiveDiscovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-final\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\evidence-publish\\CopperMod.Amiga.Lightweight.Runner\\Workloads\\worms-copperstart-training-v1.json",
+          "C:/Data/TestImages/Team17/Worms_230.zip#/Worms_Disk1of3.ipf",
+          "107200"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/worms-copperstart-training-v1.json",
+          "bytes": 1905,
+          "sha256": "707aeed169dfb2116fc648cb1c90b2829ae8a61ba0270f5334620fc966742889"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          }
+        ],
+        "exitCode": 0
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 107200,
+          "target": 107400,
+          "events": [
+            {
+              "frame": 107202,
+              "keyCode": 320
+            },
+            {
+              "frame": 107204,
+              "keyCode": 448
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 107400,
+          "target": 107600,
+          "events": [
+            {
+              "frame": 107402,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 107420,
+              "mouseButtons": 0
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 107600,
+          "target": 109000,
+          "events": [
+            {
+              "frame": 107602,
+              "mouseDeltaX": 24
+            },
+            {
+              "frame": 107603,
+              "mouseDeltaY": -110
+            },
+            {
+              "frame": 107620,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 107630,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 108002,
+              "mouseDeltaY": 72
+            },
+            {
+              "frame": 108020,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 108030,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 108402,
+              "mouseDeltaX": -64
+            },
+            {
+              "frame": 108403,
+              "mouseDeltaY": -41
+            },
+            {
+              "frame": 108420,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 108430,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 108602,
+              "mouseDeltaX": 40
+            },
+            {
+              "frame": 108603,
+              "mouseDeltaY": 79
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "start": 109000,
+          "target": 109200,
+          "events": [
+            {
+              "frame": 109002,
+              "keyCode": 325
+            },
+            {
+              "frame": 109004,
+              "keyCode": 453
+            }
+          ]
+        },
+        {
+          "revision": 4,
+          "start": 109200,
+          "target": 110600,
+          "events": [
+            {
+              "frame": 109202,
+              "mouseDeltaX": -120
+            },
+            {
+              "frame": 109203,
+              "mouseDeltaY": -120
+            },
+            {
+              "frame": 109204,
+              "mouseDeltaX": -120
+            },
+            {
+              "frame": 109205,
+              "mouseDeltaY": -120
+            },
+            {
+              "frame": 109206,
+              "mouseDeltaX": -120
+            },
+            {
+              "frame": 109207,
+              "mouseDeltaY": -120
+            },
+            {
+              "frame": 109210,
+              "mouseDeltaX": 80
+            },
+            {
+              "frame": 109211,
+              "mouseDeltaX": 100
+            },
+            {
+              "frame": 109212,
+              "mouseDeltaY": 118
+            },
+            {
+              "frame": 109320,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 109330,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 109602,
+              "mouseDeltaY": 72
+            },
+            {
+              "frame": 109620,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 109630,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 110002,
+              "mouseDeltaX": -64
+            },
+            {
+              "frame": 110003,
+              "mouseDeltaY": -41
+            },
+            {
+              "frame": 110020,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 110030,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 110202,
+              "mouseDeltaX": 40
+            },
+            {
+              "frame": 110203,
+              "mouseDeltaY": 79
+            }
+          ]
+        },
+        {
+          "revision": 5,
+          "start": 110600,
+          "target": 110800,
+          "events": [
+            {
+              "frame": 110602,
+              "mouseDeltaY": -18
+            },
+            {
+              "frame": 110620,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 110630,
+              "mouseButtons": 0
+            }
+          ]
+        },
+        {
+          "revision": 6,
+          "start": 110800,
+          "target": 111000,
+          "events": [
+            {
+              "frame": 110802,
+              "mouseDeltaY": -10
+            },
+            {
+              "frame": 110820,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 110830,
+              "mouseButtons": 0
+            }
+          ]
+        },
+        {
+          "revision": 7,
+          "start": 111000,
+          "target": 111200,
+          "events": [
+            {
+              "frame": 111002,
+              "mouseButtons": 2
+            },
+            {
+              "frame": 111020,
+              "mouseButtons": 0
+            }
+          ]
+        },
+        {
+          "revision": 8,
+          "start": 111200,
+          "target": 111400,
+          "events": [
+            {
+              "frame": 111202,
+              "mouseDeltaY": 16
+            },
+            {
+              "frame": 111220,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 111230,
+              "mouseButtons": 0
+            }
+          ]
+        },
+        {
+          "revision": 9,
+          "start": 111400,
+          "target": 112800,
+          "events": [
+            {
+              "frame": 111402,
+              "mouseDeltaY": -112
+            },
+            {
+              "frame": 111420,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 111430,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 111802,
+              "mouseDeltaY": 72
+            },
+            {
+              "frame": 111820,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 111830,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 112202,
+              "mouseDeltaX": -115
+            },
+            {
+              "frame": 112203,
+              "mouseDeltaY": -40
+            },
+            {
+              "frame": 112220,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 112230,
+              "mouseButtons": 0
+            },
+            {
+              "frame": 112402,
+              "mouseDeltaX": 120
+            },
+            {
+              "frame": 112403,
+              "mouseDeltaY": 80
+            }
+          ]
+        },
+        {
+          "revision": 10,
+          "start": 112800,
+          "target": 115000,
+          "events": [
+            {
+              "frame": 112802,
+              "mouseButtons": 1
+            },
+            {
+              "frame": 112820,
+              "mouseButtons": 0
+            }
+          ]
+        },
+        {
+          "revision": 11,
+          "start": 115000,
+          "target": 115200,
+          "events": [
+            {
+              "frame": 115002,
+              "keyCode": 337
+            },
+            {
+              "frame": 115004,
+              "keyCode": 465
+            },
+            {
+              "frame": 115012,
+              "keyCode": 332
+            },
+            {
+              "frame": 115032,
+              "keyCode": 460
+            }
+          ]
+        },
+        {
+          "revision": 12,
+          "start": 115200,
+          "target": 115266,
+          "events": [
+            {
+              "frame": 115202,
+              "keyCode": 320
+            },
+            {
+              "frame": 115262,
+              "keyCode": 448
+            }
+          ]
+        },
+        {
+          "revision": 13,
+          "start": 115266,
+          "target": 115400,
+          "events": []
+        },
+        {
+          "revision": 14,
+          "start": 115400,
+          "target": 115420,
+          "events": []
+        },
+        {
+          "revision": 15,
+          "start": 115420,
+          "target": 115700,
+          "events": []
+        },
+        {
+          "revision": 16,
+          "start": 115700,
+          "target": 115864,
+          "events": [
+            {
+              "frame": 115702,
+              "keyCode": 320
+            },
+            {
+              "frame": 115710,
+              "keyCode": 448
+            }
+          ]
+        },
+        {
+          "revision": 17,
+          "start": 115864,
+          "target": 116200,
+          "events": []
+        }
+      ]
+    },
+    "scalarRun": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\worms-final\\scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\evidence-publish\\CopperMod.Amiga.Lightweight.Runner\\Workloads\\worms-copperstart-training-v1.json",
+        "C:/Data/TestImages/Team17/Worms_230.zip#/Worms_Disk1of3.ipf",
+        "107200",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/worms-copperstart-training-v1.json",
+        "bytes": 1905,
+        "sha256": "707aeed169dfb2116fc648cb1c90b2829ae8a61ba0270f5334620fc966742889"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+        }
+      ],
+      "exitCode": 3762504530
+    },
+    "captures": {
+      "normal": {
+        "files": 5830,
+        "fields": 1166,
+        "lastField": 116200,
+        "unsupported": [],
+        "nonzeroPcmFields": 1,
+        "manifestSha256": "ee7065f3825d5bd2a06344c71e1a60a4bc297f69a72c7fa3b039243c64c8c663"
+      },
+      "scalar": {
+        "files": 5785,
+        "fields": 1157,
+        "lastField": 115420,
+        "unsupported": [],
+        "nonzeroPcmFields": 1,
+        "manifestSha256": "7be184772abe2671f11dede2b9ff41350f9da7ff0bf91d05bf6113fbf411a211"
+      },
+      "identical": false,
+      "mismatches": [],
+      "native31": {
+        "files": 1030,
+        "fields": 206,
+        "lastField": 20500,
+        "unsupported": [],
+        "nonzeroPcmFields": 1,
+        "manifestSha256": "ea8503417e943d9fd784766f8990b888f26c82783f75a816ed5239ad26d22cfa"
+      }
+    },
+    "scalarStopField": 115420,
+    "scalarFailure": "Frozen harness IOException opening interactive control.json during Windows replacement; not an emulated failure",
+    "finalReplayUsesAllInputsAndExitControlWrittenBeforeLaunch": true,
+    "replayComparison": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/replay-discovery-comparison.json",
+      "bytes": 60,
+      "sha256": "f468918994a5fd382acd30b4df9ff502805dcb1b260ffc9f67886766e4b531ab"
+    }
+  },
+  "superfrogRegression": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\superfrog-final\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\evidence-publish\\CopperMod.Amiga.Lightweight.Runner\\Workloads\\superfrog-copperstart-visible-gameplay-v1.json",
+          "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+          "12200"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/superfrog-copperstart-visible-gameplay-v1.json",
+          "bytes": 1364,
+          "sha256": "16f589d0c2beda6ce249d92cac26098d271fa3475a9a05fe3d265a40231b6923"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          }
+        ],
+        "exitCode": 0
+      },
+      "segments": []
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\runner-qualified\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\worms-blue-artifact-2026-10-22\\superfrog-final\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\evidence-publish\\CopperMod.Amiga.Lightweight.Runner\\Workloads\\superfrog-copperstart-visible-gameplay-v1.json",
+          "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+          "12200",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/superfrog-copperstart-visible-gameplay-v1.json",
+          "bytes": 1364,
+          "sha256": "16f589d0c2beda6ce249d92cac26098d271fa3475a9a05fe3d265a40231b6923"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-qualified/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          }
+        ],
+        "exitCode": 0
+      },
+      "segments": []
+    },
+    "captures": {
+      "normal": {
+        "files": 615,
+        "fields": 123,
+        "lastField": 12200,
+        "unsupported": [],
+        "nonzeroPcmFields": 94,
+        "manifestSha256": "b8bca3984a1763e2f5c1a90bea43f6305095c280234a6c7c6d2368f55106be18"
+      },
+      "scalar": {
+        "files": 615,
+        "fields": 123,
+        "lastField": 12200,
+        "unsupported": [],
+        "nonzeroPcmFields": 94,
+        "manifestSha256": "b8bca3984a1763e2f5c1a90bea43f6305095c280234a6c7c6d2368f55106be18"
+      },
+      "identical": true,
+      "mismatches": []
+    }
+  },
+  "tests": {
+    "workingDirectory": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish",
+    "productionBuild": {
+      "command": [
+        "dotnet",
+        "build",
+        "CopperScreen.slnx",
+        "-c",
+        "Release",
+        "--artifacts-path",
+        "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/production-v2"
+      ],
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/production-v2.log",
+        "bytes": 2658,
+        "sha256": "d67d4cb84059fdc4a8435881a77b3ed373a677f3e4a4f9f9d7249089b410d57b"
+      },
+      "warnings": 0,
+      "errors": 0
+    },
+    "fullEngine": {
+      "command": [
+        "dotnet",
+        "test",
+        "CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj",
+        "-c",
+        "Release",
+        "--artifacts-path",
+        "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/after-tests",
+        "--logger",
+        "trx",
+        "--results-directory",
+        "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/full-qualified-results"
+      ],
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/full-qualified.log",
+        "bytes": 3269,
+        "sha256": "3ba35948551d8da97a312470509132a4de0bbe3229a40326c72aed0df2128630"
+      },
+      "trx": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/full-qualified-results/ilkle_KOTIKONE_2026-10-22_23_16_20_net10.0.trx",
+        "bytes": 2039535,
+        "sha256": "71cccdc82a49ba6858be3b71a6e788f5ed6357efefe9f7042f3a73d0ef683b7f"
+      },
+      "counters": {
+        "total": "1262",
+        "executed": "1255",
+        "passed": "1255",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "skippedResults": 7
+    },
+    "focusedAudioAndNewSprite": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/audio-updated.log",
+        "bytes": 1219,
+        "sha256": "84321754b6487b02c55f2d9f1739554fbe095419279248a50bd6946aec18a8b1"
+      },
+      "passed": 93,
+      "failed": 0,
+      "skipped": 0
+    },
+    "beforeSprite": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/before-tests.log",
+        "bytes": 6096,
+        "sha256": "344105d5a912208f451e67a930b20e787fa1fa5cc40fd80de120415f1a48472f"
+      },
+      "failed": 4
+    },
+    "beforeAudio": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/audio-before.log",
+        "bytes": 2170,
+        "sha256": "7732b12d471dbc831e976c50fb8b28079fa9d3a7847bb0d87ae06147df56762b"
+      },
+      "passed": 4,
+      "failed": 1
+    },
+    "countsOverlap": true
+  },
+  "diagnosticTraces": {
+    "summary": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/trace-summary.json",
+      "bytes": 25333,
+      "sha256": "910c0bdcd964c9ba4791ec3312dff548cc1a70e4e835ace2846147620eecd9f2"
+    },
+    "before": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/trace-native31/sprites.jsonl",
+      "bytes": 496400,
+      "sha256": "93d721a13e55bf8153e54bb583df459a849914b1622b10ed94baeccda3c212f1"
+    },
+    "after": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/trace-native31-final/sprites.jsonl",
+      "bytes": 512177,
+      "sha256": "e6c1a027c4b64556d8f71aefe4d06542f8cf7146b33fb1af92af1a41c7a9066c"
+    },
+    "beforeEngine": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288256,
+      "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+    },
+    "spriteOnlyEngine": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/runner-live/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288256,
+      "sha256": "4ab1bbf9ce1d0ab5f60072a95b64f9f04747d742dc90925f615e77be11f4992f"
+    },
+    "superfrogIntermediate": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/trace-superfrog-v1/sprites.jsonl",
+      "bytes": 634366,
+      "sha256": "f5139d61892381bea7b9e7805ed9359cc032f0f1a5bc8cc8f2ae576ebe8e99c8"
+    },
+    "superfrogFinal": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/trace-superfrog-final/sprites.jsonl",
+      "bytes": 626899,
+      "sha256": "0718598b3b993bfe9c4b8f1a9df5f8efa0756dcc6682651cd44b8a6be1ab1c6d"
+    },
+    "beforeObserverSource": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/probe/Program.cs",
+      "bytes": 3728,
+      "sha256": "6b402171585df320c8f6321a0f0ee85f6469407f2db8fa9e93b4862e7271952e"
+    },
+    "beforeObserverBinary": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/probe/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+      "bytes": 24576,
+      "sha256": "8e677f567149a9b2f7ebac9815bbe2a1f101d2871c3c8387f0cdf462c7d6bd3f"
+    },
+    "observerSource": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/probe-after/Program.cs",
+      "bytes": 3871,
+      "sha256": "b2955fcb13296df51d4a2a2d1637f284506aab97841d05f7536fcdb204a7152e"
+    },
+    "observerBinary": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/probe-qualified/CopperMod.Amiga.Lightweight.Runner.dll",
+      "bytes": 24576,
+      "sha256": "dfaa1a8ce42ed20bc3820114a082bf3196d50fdbe94221c5b972d4f34cd066af"
+    }
+  },
+  "primaryReference": {
+    "url": "https://www.ikod.se/wp-content/uploads/2020/08/Amiga_Hardware_Reference_Manual_3rd_Edition.pdf",
+    "printedPage": 195,
+    "pdfPageIndex": 209,
+    "figure": "6-9",
+    "local": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/hardware-reference-3rd.pdf",
+      "bytes": 32462933,
+      "sha256": "edcf9528eccb1f6143d9d8854ad7eb09756abe59f5722e4c6b964f4ff844d2ba"
+    }
+  },
+  "excluded": {
+    "positionalBenchmarkCli": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/final",
+    "spriteOnlyMedia": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/replay-v1",
+    "spriteOnlySuperfrog": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/superfrog-v1",
+    "interactiveScalarPartial": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/worms-blue-artifact-2026-10-22/worms-final/scalar",
+    "abortedDiagnosticAttempts": [
+      "trace-native31-after",
+      "trace-native31-paired-after",
+      "trace-native31-v2"
+    ]
+  },
+  "limits": [
+    "Bounded PAL OCS compatibility, not complete silicon timing",
+    "Optional skipped native tests are unavailable coverage",
+    "PCM presence, not fidelity",
+    "No throughput acceptance measurement",
+    "Comparator/control edges in LWA-VIDEO-006 remain open",
+    "No game completion, multiplayer, saves, disks 2/3 qualification"
+  ]
+}

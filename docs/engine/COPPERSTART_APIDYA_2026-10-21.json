@@ -1,0 +1,851 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Apidya illustrated opening, Normal meadow combat, Game Over and Continue",
+  "status": "BOUNDED QUALIFICATION: opening combat and continued play; no new ROM/engine correction isolated; stage completion and Disk Two handoff unqualified",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21",
+  "sourceBase": "447ca6427b9c20ae4073f611d4cf0e996ca32a55",
+  "engineCodeBaseline": "8b1fb4148d5763929e804e577d69b94d656a3768",
+  "copperStartSourceBase": "9040c119a23c7857d8b3b92ee074d0939abf7d80",
+  "romProducer": "b78ddc09302cd506687327be1c1434891444cc4a",
+  "romChanged": false,
+  "engineChanged": false,
+  "newCompatibilityCorrection": null,
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+  },
+  "nativeControlRom": {
+    "path": "C:/Data/ROM/Kickstart_13.rom",
+    "bytes": 262144,
+    "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "binaries": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+      "bytes": 52224,
+      "sha256": "9cd230f6246bbf0be96c5e6d1e43ddc7767746df7ac77c461356eb68abb4b1c5"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 288256,
+      "sha256": "9dfa51ccc81f9407fbb757b27967b1b2de4aa18fcba5a16d5ad0b8db2a97bcc2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-character-2026-10-20/runner-final/CopperDisk.dll",
+      "bytes": 105472,
+      "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+    }
+  ],
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "df0": "Original read-only SPS 764 Disk One IPF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/Apidya_764.zip",
+      "bytes": 1730462,
+      "sha256": "0746708b2567366c0ffb61b4561763f82ed6cb3569603aa72a9f722071db3fd4"
+    },
+    "entries": [
+      {
+        "entry": "Apidya_Disk1.ipf",
+        "bytes": 1083927,
+        "sha256": "ec929d838efb9e4682db923e47b4541526942f27513c14072b1cb193a7cd3498"
+      },
+      {
+        "entry": "Apidya_Disk2.ipf",
+        "bytes": 1091372,
+        "sha256": "bf6898c6bb08a18b17394278422955d20373d786abc04b3a7249837941bdafde"
+      }
+    ]
+  },
+  "mountedEntry": "Apidya_Disk1.ipf",
+  "options": {
+    "difficulty": "Normal",
+    "lives": 5,
+    "teamMode": "No",
+    "extraSelect": "Auto",
+    "control": "Joystick",
+    "defaultsChanged": false
+  },
+  "inputPolicy": "Ordinary physical joystick input only; no trainer, level code, state restoration, guest-memory injection, host OS shim or disk write.",
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/apidya-copperstart-meadow-combat-v1.json",
+    "bytes": 11893,
+    "sha256": "6d5985c56630ee5408eeac3136f06bae9ed3f09339535323c76134add8f19621"
+  },
+  "segments": 11,
+  "events": 270,
+  "interactive": {
+    "end": 9180,
+    "segments": 11,
+    "events": 270,
+    "workload": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/apidya-copperstart-meadow-combat-v1.json",
+      "bytes": 11893,
+      "sha256": "6d5985c56630ee5408eeac3136f06bae9ed3f09339535323c76134add8f19621"
+    },
+    "runs": {
+      "normal": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/run.json",
+          "bytes": 2205,
+          "sha256": "0af09dc13aef080b50e7c238e3b5c4169e0b2be82ddb458e14a0a21911399da6"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/runner.log",
+          "bytes": 105683,
+          "sha256": "d041ce4ed2fbb8bbcb0642054118706c77315d03c438b5b8bce8a3d93a5643c6"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/segments.jsonl",
+          "bytes": 7219,
+          "sha256": "4677d7787229bdbec1b16377f4c827cfecc34f809abba38d2cb1b6e92af8788e"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/capture-manifest.json",
+          "bytes": 138725,
+          "sha256": "e85bb93e04a66b9f37936614a587861ed53cc48c4112457370c866b23d4b81e0"
+        },
+        "files": 480,
+        "snapshots": 96,
+        "nonzeroPcmSnapshots": 73,
+        "exitCode": 0
+      },
+      "scalar": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/scalar/run.json",
+          "bytes": 2222,
+          "sha256": "481da988c7d18d08083f0cd5efab2e06550bb2f1a9340a1f2cd6e00511e15a28"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/scalar/runner.log",
+          "bytes": 105683,
+          "sha256": "d041ce4ed2fbb8bbcb0642054118706c77315d03c438b5b8bce8a3d93a5643c6"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/scalar/segments.jsonl",
+          "bytes": 7219,
+          "sha256": "4677d7787229bdbec1b16377f4c827cfecc34f809abba38d2cb1b6e92af8788e"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/scalar/capture-manifest.json",
+          "bytes": 138725,
+          "sha256": "366e8a6438dfba9f39fbec8ac2d85f4b86b8d89e07afa34a3f96a91b0fc62c11"
+        },
+        "files": 480,
+        "snapshots": 96,
+        "nonzeroPcmSnapshots": 73,
+        "exitCode": 0
+      },
+      "native": {
+        "run": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/run.json",
+          "bytes": 2021,
+          "sha256": "e5f80847cf004b2024bb2a1dc7aef34e8ad48484a530cbdfcc8009032032f94f"
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/runner.log",
+          "bytes": 105758,
+          "sha256": "471f2b93cd2622c728f8f76afeb7e92746dc501828f6f8652f6d69687f5f5ff0"
+        },
+        "segments": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/segments.jsonl",
+          "bytes": 7219,
+          "sha256": "4677d7787229bdbec1b16377f4c827cfecc34f809abba38d2cb1b6e92af8788e"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/capture-manifest.json",
+          "bytes": 138725,
+          "sha256": "ed59bc8e75240027f163246ed685d8ed740f3451d0ada3f5e8ecc458dc51ea4e"
+        },
+        "files": 480,
+        "snapshots": 96,
+        "nonzeroPcmSnapshots": 70,
+        "exitCode": 0
+      }
+    },
+    "parity": {
+      "normalScalarAllFiles": true,
+      "nativeMatchingImages": 27,
+      "nativeDifferentImages": 69,
+      "firstDifferentImageAfter5500": "frame-006100.bmp",
+      "crossRomPixelEqualityClaimed": false
+    }
+  },
+  "uninterruptedResetReplay": {
+    "normal": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/run.json",
+        "bytes": 2220,
+        "sha256": "2fa0ea3e6a0a9905c6fa8dc1862d1b844ec45639f3cb3ebbced8574430a956f2"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/runner.log",
+        "bytes": 102151,
+        "sha256": "2eca03caf245c71eb2cfcf0601b057eddeb42c241ec8503a8700206337c11112"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/capture-manifest.json",
+        "bytes": 137645,
+        "sha256": "ebb61b34df11832df83d4a82ea3ebb6f164824f2c78c20ba9f135f1eb5d924c1"
+      },
+      "files": 465,
+      "snapshots": 93,
+      "nonzeroPcmSnapshots": 70,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "scalar": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-scalar/run.json",
+        "bytes": 2237,
+        "sha256": "e25a0c97add3b4e3ba9d9f27832cea67481b389655de232288d5e506db392502"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-scalar/runner.log",
+        "bytes": 102151,
+        "sha256": "2eca03caf245c71eb2cfcf0601b057eddeb42c241ec8503a8700206337c11112"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-scalar/capture-manifest.json",
+        "bytes": 137645,
+        "sha256": "2b93872d54ca45d1b4e0a9f888ced6e32114bccdb2f122695c30b81995767a6c"
+      },
+      "files": 465,
+      "snapshots": 93,
+      "nonzeroPcmSnapshots": 70,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "native": {
+      "run": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-native/run.json",
+        "bytes": 2036,
+        "sha256": "2bd7f769cbea8fa1c96c99c3f527b8cf480794841c3b0174384f69b1c99d6542"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-native/runner.log",
+        "bytes": 102226,
+        "sha256": "c10640d2d83ee07ccd3edd12d072fd0e8ced2f1adfaa95c6daac77d66ebfa93f"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-native/capture-manifest.json",
+        "bytes": 137645,
+        "sha256": "c7cdb892b632445fcb2a100703142b789e82b7667e0c0aabb9539fca0b758ac1"
+      },
+      "files": 465,
+      "snapshots": 93,
+      "nonzeroPcmSnapshots": 67,
+      "matchesInteractiveAtEveryCommonCapture": true,
+      "exitCode": 0
+    },
+    "normalScalarAllFiles": true
+  },
+  "verificationFiles": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/verification.json",
+      "bytes": 4238,
+      "sha256": "f7c0a51b5ec90d40a2fe0adbb08c8389ee3f1a2e74c4a4f6a7d7a546f28f207b"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/replay-verification.json",
+      "bytes": 2930,
+      "sha256": "6692fad0eab7ac4845fddfbfaa02e9cfdfaafb0a1eb8995bea37c3cdab4f225a"
+    }
+  ],
+  "tools": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/start.py",
+      "bytes": 1505,
+      "sha256": "c72e61de916ade1d341a58b189e0bb146c5338e5f71f18862483ab09bed524d5"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/step.py",
+      "bytes": 1665,
+      "sha256": "6f87adc51c2cbfafe9b3a40b09eb2628deda2a85392a91fb89c34ba50d88948f"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/verify.py",
+      "bytes": 2960,
+      "sha256": "4f7b5ddb68a8ac2a2ca7238757686eebd37e953cec4bdd76e2f9edff6a6d2e14"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/replay.py",
+      "bytes": 1405,
+      "sha256": "33c76d6b73631d4fdc3ac446c9d50973c69bd09b8eb57c11c7d8dccb0b942d1b"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/verify-replay.py",
+      "bytes": 1454,
+      "sha256": "3ee9f7aa122d09478454ce5cbea777a9dcc2fe7cf3cbe3cbd3914e00883d6dde"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disasm.py",
+      "bytes": 467,
+      "sha256": "fb669d42cac837c1e581a9407170271319b9d5aaf527446abd7da75c485e7e29"
+    }
+  ],
+  "milestones": [
+    {
+      "field": 5000,
+      "observation": "Illustrated-story text",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005000.bmp",
+        "bytes": 1136870,
+        "sha256": "b85efdbf003fceb53e9436044a2fcb8d04a4822c9c8487fd5908a3c862572bdd"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005000.json",
+        "bytes": 1105,
+        "sha256": "853e14d8cf7a0562ccadb4ac646e15971a97c3eca0181de6c40bdcd7bcb186cf"
+      }
+    },
+    {
+      "field": 5100,
+      "observation": "Title / PUSH START BUTTON",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005100.bmp",
+        "bytes": 1136870,
+        "sha256": "4117389234fd76b871bfb1f174ee34594e29e49dfce6b1a22f2f86378bc6216e"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005100.json",
+        "bytes": 1104,
+        "sha256": "680ef087691cd9d899b5f02719eeff899555f41839bc6a5d114671b95833f1c7"
+      }
+    },
+    {
+      "field": 5200,
+      "observation": "Normal, five lives, No team mode, Auto extra select and Joystick options",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005200.bmp",
+        "bytes": 1136870,
+        "sha256": "c93e8c12287f00af1d97a2a4176d3e551581c0783cdd8f1a54cddfb57c27f056"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005200.json",
+        "bytes": 1105,
+        "sha256": "cc27e57ba84e5657cd1a9dd918d0701742ad2ec189d7fc002a19729b9e1957cb"
+      }
+    },
+    {
+      "field": 5600,
+      "observation": "Black loading transition",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005600.bmp",
+        "bytes": 1136870,
+        "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-005600.json",
+        "bytes": 1073,
+        "sha256": "c49199cf075b9b7644874f18f0b8f3d5f11a719e4c93f6080f47302f7c85889b"
+      }
+    },
+    {
+      "field": 6500,
+      "observation": "Opening meadow, ready sequence, shot and score 60",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-006500.bmp",
+        "bytes": 1136870,
+        "sha256": "c25dd31cdeba6f46affa298337fb35285267afe52a4530580d7a87ad42720c4e"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-006500.json",
+        "bytes": 1107,
+        "sha256": "c9931f73eb9c0ffeb90e8b8c1b90c0421c304d08a1ad5679c4b13252af061818"
+      }
+    },
+    {
+      "field": 6700,
+      "observation": "Combat score 180",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-006700.bmp",
+        "bytes": 1136870,
+        "sha256": "a53b0589089e3f7e219e364e14279d8d184984fad6de757a893c3c28c12f9ca7"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-006700.json",
+        "bytes": 1104,
+        "sha256": "b267e7cdb874e61cc69c528c09e6606c0db940d2563b543cd4d5132eb0a69127"
+      }
+    },
+    {
+      "field": 6820,
+      "observation": "Player near bottom after vertical input, shot-charge glow",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-006820.bmp",
+        "bytes": 1136870,
+        "sha256": "984c1a937dea9f292afe8badfd10e20be8ba50fb25e7f62f421d1be5657c3923"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-006820.json",
+        "bytes": 1107,
+        "sha256": "7c3bc085ad0f8bb65b28245885a48ccf63b609cfb74ebd4fd5924fcfc40a55f6"
+      }
+    },
+    {
+      "field": 7230,
+      "observation": "Meadow combat score 300",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-007230.bmp",
+        "bytes": 1136870,
+        "sha256": "72b5c481a8bc9b0b9146b189d6dddedfb9da58f6a1359bb3c84521eef55df873"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-007230.json",
+        "bytes": 1105,
+        "sha256": "f774f67c27e17f7e8124afdc7b3e8312627ad387ec4af7381439ffc94bfc0039"
+      }
+    },
+    {
+      "field": 7640,
+      "observation": "Life-loss/transition effect, score 480",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-007640.bmp",
+        "bytes": 1136870,
+        "sha256": "ab59895926053849f44d241cf519b71fdcb9861d05c5a73cc881965757c0f307"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-007640.json",
+        "bytes": 1105,
+        "sha256": "fb9bb9b561f189ce29bdee34ad634afad2dbf241587f980778c38f2aea4347fd"
+      }
+    },
+    {
+      "field": 8000,
+      "observation": "GAME OVER PLAYER ONE, score 480",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-008000.bmp",
+        "bytes": 1136870,
+        "sha256": "4908e551275aa82655206e35144be284345d9d0213b4ed1fb7aaf47f137c97ff"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-008000.json",
+        "bytes": 1107,
+        "sha256": "38e3c655a7da6978b31a24bcf0c54dd2b05278c93532970ba803f85a5995a894"
+      }
+    },
+    {
+      "field": 8600,
+      "observation": "CONTINUE YES NO, three credits, Yes selected",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-008600.bmp",
+        "bytes": 1136870,
+        "sha256": "21d8513c959356d619870cecf31f0e704f8a213a7a042b8d73a3fa8655a10cf5"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-008600.json",
+        "bytes": 1106,
+        "sha256": "5cd29f518afc24ef6f6ee85f0cfb1b3bfd833e39a8c8cc7d2a6ae902bee0eec2"
+      }
+    },
+    {
+      "field": 8800,
+      "observation": "Accepted continue loading transition",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-008800.bmp",
+        "bytes": 1136870,
+        "sha256": "6f194f52ea09442dfa7a0e805bef96f7e85b9fab675f183bd8013d866ff7f6fa"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-008800.json",
+        "bytes": 1076,
+        "sha256": "e199878fcc449b50804426bedfc335b214c953cd0e437c1947e1b71b3a0874b5"
+      }
+    },
+    {
+      "field": 9100,
+      "observation": "Restarted meadow combat, score 40",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-009100.bmp",
+        "bytes": 1136870,
+        "sha256": "be27353926b63447690acb96627fdf23e14a80224a2b3a81091d6a73a28ef325"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-009100.json",
+        "bytes": 1108,
+        "sha256": "ca7f796b38550262551886bf79c2874f0112333bcb359debd27e7f8b1397ae31"
+      }
+    },
+    {
+      "field": 9180,
+      "observation": "Continued gameplay endpoint, score 40; projectiles visible",
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-009180.bmp",
+        "bytes": 1136870,
+        "sha256": "f8613120dc7138502b80f3c0d07d58deaaa3e9609e2e532516335c83a6ec2587"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/normal/captures/frame-009180.json",
+        "bytes": 1105,
+        "sha256": "f118f2beb8a319a49ca6855a86ee6cdb68286b45bf0413ba4810573fe1ca0882"
+      }
+    }
+  ],
+  "nativeMilestones": [
+    {
+      "field": 5100,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-005100.bmp",
+        "bytes": 1136870,
+        "sha256": "a4939cc5f544475490612de70c4b7ec9a1ce30e8c1500f9594369401b7c5a50c"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-005100.json",
+        "bytes": 1104,
+        "sha256": "f587a7fd7a7598fe245533512c6f534a9982c5d2ea04eb565b4aefcb0849d11e"
+      }
+    },
+    {
+      "field": 5200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-005200.bmp",
+        "bytes": 1136870,
+        "sha256": "c93e8c12287f00af1d97a2a4176d3e551581c0783cdd8f1a54cddfb57c27f056"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-005200.json",
+        "bytes": 1105,
+        "sha256": "ce2103777e81c144260254a757f111b2f0c270ab1b6750b14d6bdb76fb21e6ef"
+      }
+    },
+    {
+      "field": 6500,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-006500.bmp",
+        "bytes": 1136870,
+        "sha256": "2cdc6a2fca4a1e93c2140667d8d3ec3ed2f02972513ab01325d52cccbdc7d9b7"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-006500.json",
+        "bytes": 1107,
+        "sha256": "22f253748b119ccf9d38b402d094c6ba7d19937589e4eba40b081910ca50282b"
+      }
+    },
+    {
+      "field": 8000,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-008000.bmp",
+        "bytes": 1136870,
+        "sha256": "967a8ea6db6e287fa5f45126eec03c8f2c5ea3d27fc90b1d72924c696b31ab60"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-008000.json",
+        "bytes": 1108,
+        "sha256": "ef31ef1e8abc6f43cea268cdc90d242b5d04be383a901ebcef80a6527c62a2b5"
+      }
+    },
+    {
+      "field": 8600,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-008600.bmp",
+        "bytes": 1136870,
+        "sha256": "21dee179db454013e74329b43490f141d063f1e87a09c48390fb3bf9c002d189"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-008600.json",
+        "bytes": 1107,
+        "sha256": "254c6ddfedf8aacb9a743914c982eb5d9da94e2160268f2bc261f3f0ccc40f37"
+      }
+    },
+    {
+      "field": 9100,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-009100.bmp",
+        "bytes": 1136870,
+        "sha256": "bc9e9a293e81d6cd0f471ee52f582741248bbf675907d78ba56a6202d05d4979"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-009100.json",
+        "bytes": 1105,
+        "sha256": "99b0788f840fcbc1b8a89970cfe30b2ead7f7df07a8b3ac858516a2c3b055891"
+      }
+    },
+    {
+      "field": 9180,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-009180.bmp",
+        "bytes": 1136870,
+        "sha256": "fcca59894c6ff8fa57abb75e2d8b3fd8af223081eb830949c8444135ae0687aa"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/native/captures/frame-009180.json",
+        "bytes": 1107,
+        "sha256": "0d856a22a53dd6a0e66fcfe4c19390bfd67ba400e87f7a236e2b7f1475bcb9c2"
+      }
+    }
+  ],
+  "resetMilestones": [
+    {
+      "field": 5100,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/captures/frame-005100.bmp",
+        "bytes": 1136870,
+        "sha256": "4117389234fd76b871bfb1f174ee34594e29e49dfce6b1a22f2f86378bc6216e"
+      }
+    },
+    {
+      "field": 5200,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/captures/frame-005200.bmp",
+        "bytes": 1136870,
+        "sha256": "c93e8c12287f00af1d97a2a4176d3e551581c0783cdd8f1a54cddfb57c27f056"
+      }
+    },
+    {
+      "field": 6500,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/captures/frame-006500.bmp",
+        "bytes": 1136870,
+        "sha256": "c25dd31cdeba6f46affa298337fb35285267afe52a4530580d7a87ad42720c4e"
+      }
+    },
+    {
+      "field": 8000,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/captures/frame-008000.bmp",
+        "bytes": 1136870,
+        "sha256": "4908e551275aa82655206e35144be284345d9d0213b4ed1fb7aaf47f137c97ff"
+      }
+    },
+    {
+      "field": 8600,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/captures/frame-008600.bmp",
+        "bytes": 1136870,
+        "sha256": "21d8513c959356d619870cecf31f0e704f8a213a7a042b8d73a3fa8655a10cf5"
+      }
+    },
+    {
+      "field": 9100,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/qualified/replay-normal/captures/frame-009100.bmp",
+        "bytes": 1136870,
+        "sha256": "be27353926b63447690acb96627fdf23e14a80224a2b3a81091d6a73a28ef325"
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "scope": "Exploratory story/title inputs and first meadow attempt; not final qualification",
+      "end": 29200,
+      "runs": [
+        {
+          "mode": "normal",
+          "run": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/normal/run.json",
+            "bytes": 2171,
+            "sha256": "c557a841791d02036d881c2c182e91f39f4abf14d5d2abe05873604055460d99"
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/normal/runner.log",
+            "bytes": 325219,
+            "sha256": "f8c36d878da7b8790589315d7f3e028fee1fe24ee5f44346c2b2fd741d5d4398"
+          },
+          "segments": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/normal/segments.jsonl",
+            "bytes": 1567,
+            "sha256": "fdafad4153596913194289bc6c8eac3eb303663fbf8344edca45b8deda07996f"
+          },
+          "endpointImage": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/normal/captures/frame-029200.bmp",
+            "bytes": 1136870,
+            "sha256": "e83ac391005f025d6936aa1df956a0f7c281b4e71ee6399f193ecafe8fab0fff"
+          }
+        },
+        {
+          "mode": "scalar",
+          "run": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/scalar/run.json",
+            "bytes": 2188,
+            "sha256": "00c11836507b12c679ebaf5bc8b2329bf881b66f0f3fa41ab66e77cf2c374f4e"
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/scalar/runner.log",
+            "bytes": 325219,
+            "sha256": "f8c36d878da7b8790589315d7f3e028fee1fe24ee5f44346c2b2fd741d5d4398"
+          },
+          "segments": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/scalar/segments.jsonl",
+            "bytes": 1567,
+            "sha256": "fdafad4153596913194289bc6c8eac3eb303663fbf8344edca45b8deda07996f"
+          },
+          "endpointImage": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/scalar/captures/frame-029200.bmp",
+            "bytes": 1136870,
+            "sha256": "e83ac391005f025d6936aa1df956a0f7c281b4e71ee6399f193ecafe8fab0fff"
+          }
+        },
+        {
+          "mode": "native",
+          "run": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/native/run.json",
+            "bytes": 1987,
+            "sha256": "36879aa8adb462f904b14a10e7e425c4f97a13b0dce461bdf948ad678d1366c9"
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/native/runner.log",
+            "bytes": 325223,
+            "sha256": "80f949a71dfd412b5b14e8ee863d9ee47919e202df8765b8238675ac8f7444a1"
+          },
+          "segments": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/native/segments.jsonl",
+            "bytes": 1567,
+            "sha256": "fdafad4153596913194289bc6c8eac3eb303663fbf8344edca45b8deda07996f"
+          },
+          "endpointImage": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/native/captures/frame-029200.bmp",
+            "bytes": 1136870,
+            "sha256": "ffd880fa6743ca97a1d6f8efbd4e347ffc15050078085a497fcd28644afba291"
+          }
+        }
+      ]
+    },
+    {
+      "scope": "Disk Two cold boot, no game reached; not successful Disk Two coverage",
+      "end": 5001,
+      "runs": [
+        {
+          "mode": "normal",
+          "run": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/normal/run.json",
+            "bytes": 2203,
+            "sha256": "9d9f6f7b13a146962d2b213318b82f9a2621e5cac079f88f67ac7f7192ea5a78"
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/normal/runner.log",
+            "bytes": 55674,
+            "sha256": "fb48c75d7ac8b0acea72b95c575772819338e1d932de432eecd4d0e2151c6e69"
+          },
+          "segments": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/normal/segments.jsonl",
+            "bytes": 54,
+            "sha256": "6c9ff67ff5b1001632ab0cbb05ace0534f7b06cb462e1915cdf8eac2484741ab"
+          },
+          "endpointImage": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/normal/captures/frame-005001.bmp",
+            "bytes": 1136870,
+            "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+          }
+        },
+        {
+          "mode": "scalar",
+          "run": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/scalar/run.json",
+            "bytes": 2220,
+            "sha256": "f68893e753d42bd623e94327c815af773d18cf81ef08e1c8f15c571a06b1ecf9"
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/scalar/runner.log",
+            "bytes": 55674,
+            "sha256": "fb48c75d7ac8b0acea72b95c575772819338e1d932de432eecd4d0e2151c6e69"
+          },
+          "segments": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/scalar/segments.jsonl",
+            "bytes": 54,
+            "sha256": "6c9ff67ff5b1001632ab0cbb05ace0534f7b06cb462e1915cdf8eac2484741ab"
+          },
+          "endpointImage": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/scalar/captures/frame-005001.bmp",
+            "bytes": 1136870,
+            "sha256": "965e36af2eab04003fe6af43213ea4ea7ece1fee2835487a31118620b5181e22"
+          }
+        },
+        {
+          "mode": "native",
+          "run": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/native/run.json",
+            "bytes": 2019,
+            "sha256": "e0334709165aec30ab7fd73d4dffcbf416c1879a96f766806f833319e9fa17cd"
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/native/runner.log",
+            "bytes": 57469,
+            "sha256": "226fc34ebb90f246da3e79bda77820e6e0e5e54aa33833462bdb624ca2532ed3"
+          },
+          "segments": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/native/segments.jsonl",
+            "bytes": 54,
+            "sha256": "6c9ff67ff5b1001632ab0cbb05ace0534f7b06cb462e1915cdf8eac2484741ab"
+          },
+          "endpointImage": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-apidya-2026-10-21/disk2boot/native/captures/frame-005001.bmp",
+            "bytes": 1136870,
+            "sha256": "8e524170c5f074dc04c55ceb3c4f87d24b217e10bdbd9ac4a8b5f66c31d8d5a7"
+          }
+        }
+      ]
+    }
+  ],
+  "explorationNotes": [
+    "Fire returns story to title; a second fire at the title starts the game. Earlier long waits missed the title and reentered attract story; read-only guest handler inspection at C16-CC8 resolved input timing without changing code or memory.",
+    "The host wait for exploratory field 24500 timed out while a separate cold-boot control was running. All three runs later paused at 24500, with no input/emulation changes.",
+    "Diagnostic disassembly uses local capstone 5.0.9 only; it is not a runtime or repository dependency."
+  ],
+  "nativeComparison": {
+    "functionalMilestones": "Title/options, meadow shooting/enemy hits/life loss, Game Over, three-credit Continue and resumed play reached",
+    "firstSampledImageDifferenceAfter5500": 6100,
+    "crossRomPixelOrTimingEqualityClaimed": false,
+    "gameOverScores": {
+      "copperStart": 480,
+      "native": 460
+    },
+    "endpointScores": {
+      "copperStart": 40,
+      "native": 60
+    },
+    "difference": "Enemy/shot phase and score differences; cause not isolated as a ROM or engine defect. Each ROM replay matches its own interactive state."
+  },
+  "validation": {
+    "allSixQualificationAndRepeatExitZero": true,
+    "allSixExploratoryExitZero": true,
+    "normalScalarInteractiveFiles": 480,
+    "normalScalarResetReplayFiles": 465,
+    "resetMatchesInteractiveAtCommonCaptures": true,
+    "allCapturedUnsupportedAndVideoUnsupportedFlagsNull": true,
+    "productionBuildAndDiagnosticSuiteRerun": false,
+    "audio": "Nonzero PCM checked; listening and fidelity unassessed",
+    "throughputAcceptance": false
+  },
+  "limitations": [
+    "Power-up collection/selection and fully charged weapon timing",
+    "Stage or boss completion and later gameplay",
+    "Disk Two handoff",
+    "Saving",
+    "Simultaneous players",
+    "Full intro/story completion",
+    "General Workbench",
+    "Cross-ROM timing equivalence and broader sprite hardware edges"
+  ],
+  "references": [
+    {
+      "title": "Preserved Apidya manual",
+      "url": "https://www.lemonamiga.com/doc/apidya/82"
+    },
+    {
+      "title": "Previous sprite DMA correction and build/test provenance",
+      "path": "SUPERFROG_CHARACTER_2026-10-20.md"
+    }
+  ]
+}

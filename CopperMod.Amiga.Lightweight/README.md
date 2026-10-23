@@ -4,10 +4,11 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The published CPU baseline is Copper68k `1.5.3`. This development worktree uses
-the frozen `1.5.4-nitro-dev.2` candidate from the ignored qualification feed.
-See the [Nitro timing correction and qualification](../docs/engine/NITRO_RACE_START_2026-10-17.md)
-and the [preceding candidate record](../docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
+This development worktree uses unpublished Copper68k `1.5.5-nitro.1` from the
+ignored qualification feed. Its memory BTST interrupt sampling correction and
+exact source/package identities are in the [Nitro record](../docs/engine/COPPERSTART_NITRO_2026-10-23.md).
+The [preceding candidate record](../docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md)
+retains its original package and validation scope.
 See [CPU support and validation](../docs/engine/CPU_SUPPORT.md). Existing published
 versions are unchanged. A1200 integration evidence is retained in
 [AGA implementation and package verification](../docs/engine/AGA_INITIAL_2026-10-01.md).

@@ -20,6 +20,76 @@ normal guest instruction, DMA and hardware execution.
 
 ## Source ownership and retained component evidence
 
+### Standalone replacement-ROM follow-up — 2026-10-23
+
+The [Nitro replay](COPPERSTART_NITRO_2026-10-23.md) adds supplied 166-track
+extended-ADF boot, human-driver name/car selection and first-race acceleration
+and steering. CopperDisk now preserves additional cylinders and admits empty
+raw tracks; the shared Copper68k development package corrects memory BTST's IPL
+sample phase. Both CopperStart and native Kickstart 1.3 reach gameplay. The ROM
+is unchanged. Race completion, later tracks and multiplayer remain unqualified.
+
+The [Lemmings replay](COPPERSTART_LEMMINGS_2026-10-23.md) adds supplied Skid
+Row two-ADF boot, disk swapping, mouse-controlled Fun 1 gameplay, P pause/resume,
+live digger assignment and terrain removal, 100% rescue completion and
+progression to the Fun 2 briefing. Native Kickstart 1.3 uses the same physical
+inputs. No ROM or engine correction was established. Later gameplay and
+pristine original media remain unqualified; historical performance inputs
+are unchanged.
+
+The [Lotus III replay](COPPERSTART_LOTUS3_2026-10-23.md) adds supplied
+FLT / Crack Inc two-ADF boot, disk swapping and player-controlled one-player
+Arcade racing with automatic gears, steering, braking, F10 pause/resume,
+a Turbo Zone and timeout through scores back to setup. Native Kickstart
+1.3 needs one extra Fire pair before aligned setup; later input is shared.
+No new ROM or engine correction was established. Original-media behavior,
+later stages and successful race completion remain unqualified.
+
+The [Lotus Esprit Turbo Challenge replay](COPPERSTART_LOTUS1_2026-10-23.md)
+adds supplied Angels `[b doscopy]` ADF boot, options, soundtrack selection,
+normal and alternative driving controls, automatic gears, braking and Escape
+back to the presentation before restarting. No ROM or engine correction was
+established. Original-media behavior, pause and lap/race completion remain
+unqualified.
+
+The [Major Motion replay](COPPERSTART_MAJOR_MOTION_2026-10-23.md) adds supplied
+single-ADF DOS boot, one-player driving/fire, pause/resume, mission abort and
+restart, and sound toggling against a clean Kickstart 1.3 reference. No ROM or
+engine correction was established. Slow CopperStart loading, a separate
+Kickstart 3.1 graphics failure and incomplete mission coverage remain explicit.
+
+The [Miami Chase replay](COPPERSTART_MIAMI_CHASE_2026-10-23.md) adds supplied
+mixed-release ADF disk swapping, one-player street gameplay, driving/fire,
+police-stop dialogue, radar, pause/resume and return to the main menu.
+No new ROM or engine correction was established. Pristine original-media
+protection behavior and mission completion remain unqualified.
+
+The [Tower Assault replay](COPPERSTART_TOWER_ASSAULT_2026-10-23.md) adds
+original SPS 279 disk swapping, crash-site traversal, movement/fire,
+pause/resume, PDC messages and entry into Civilian Zone 1 with indoor gameplay.
+No new ROM or engine correction was established. Zone completion, later
+progression and the unverified map/statistics functions remain explicit limits.
+
+The [Alien Breed SE92 replay](COPPERSTART_ALIEN_BREED_SE92_2026-10-23.md)
+adds original SPS 615 disk swapping, Deck One movement/fire, pickups, doors,
+the Intex mission-objective round trip and storage-area enemy contact.
+No additional ROM or engine correction was established. The same record
+identifies supplied Alien Breed II SPS 44 as AGA media, unavailable for the
+bounded A500 profile; it is not counted as a successful replay.
+
+The [Overdrive replay](COPPERSTART_OVERDRIVE_2026-10-23.md) adds original
+two-IPF Arcade boot, driving, pause/resume, race abort and both physical disk
+swaps back to the main menu. No additional ROM or engine change was needed.
+This covers the opening race controls, without a completed lap or race claim.
+
+The [F17 Challenge replay](COPPERSTART_F17_2026-10-23.md) uses the current
+standalone CopperStart ROM and the engine's
+[sprite/audio DMA correction](WORMS_SPRITE_DMA_2026-10-22.md). Original IPFs
+reach Disk 2 loading and the South Africa race, with acceleration, steering,
+collision response, braking, pause/resume, HUD toggling and race exit checked.
+No additional ROM or engine change was needed. This is bounded opening-race
+compatibility, without a lap or championship completion claim.
+
 ### Standalone replacement-ROM compatibility — 2026-10-15
 
 The [2026-10-23 YEET gameplay qualification](COPPERSTART_YEET_GAMEPLAY_2026-10-23.md)

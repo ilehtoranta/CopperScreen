@@ -90,9 +90,9 @@ public sealed class LightweightEcsDisplayTests
         m.WriteChipWordDma(0x2000, 0xFE00); m.WriteChipWordDma(0x2002, 0xFF00);
         Write(m, 0x120, 0); Write(m, 0x122, 0x2000); Write(m, 0x096, 0x8220);
         var lineStart = reload * 454L + (beam == 0 ? (reload / 2) * 2 : 0);
-        m.AdvanceHardwareTo(lineStart + 0x17 * 2 - 1);
+        m.AdvanceHardwareTo(lineStart + 0x15 * 2 - 1);
         Assert.Equal(0x2000u, m.GetLiveSpritePointer(0));
-        m.AdvanceHardwareTo(lineStart + 0x1A * 2);
+        m.AdvanceHardwareTo(lineStart + 0x18 * 2);
         Assert.Equal(0x2004u, m.GetLiveSpritePointer(0));
         Assert.Equal((ushort)0xFE00, m.GetSpriteDmaPos(0));
         m.ExecuteFrame(); m.ExecuteFrame();

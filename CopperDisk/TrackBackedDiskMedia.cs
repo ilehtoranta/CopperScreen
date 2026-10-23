@@ -10,22 +10,18 @@ internal sealed class TrackBackedDiskMedia : IAmigaSectorDiskMedia, IAmigaPreser
     public TrackBackedDiskMedia(IReadOnlyList<IAmigaTrack> encodedTracks)
     {
         _encodedTracks = BuildTrackSet(encodedTracks);
-        DataBytes = AmigaDosTrackDecoder.DecodeBestEffort(SectorTracks(), out var hasCompleteDecodedSectorData);
+        DataBytes = AmigaDosTrackDecoder.DecodeBestEffort(_encodedTracks, out var hasCompleteDecodedSectorData);
         HasCompleteDecodedSectorData = hasCompleteDecodedSectorData;
     }
 
     public TrackBackedDiskMedia(IReadOnlyList<AmigaEncodedTrack> encodedTracks)
     {
         _encodedTracks = BuildTrackSet(encodedTracks);
-        DataBytes = AmigaDosTrackDecoder.DecodeBestEffort(SectorTracks(), out var hasCompleteDecodedSectorData);
+        DataBytes = AmigaDosTrackDecoder.DecodeBestEffort(_encodedTracks, out var hasCompleteDecodedSectorData);
         HasCompleteDecodedSectorData = hasCompleteDecodedSectorData;
     }
 
     public int Cylinders => _encodedTracks.Length / AmigaDiskGeometry.HeadCount;
-
-    // The public decoded sector view remains the standard 880 KiB layout.
-    private AmigaEncodedTrack[] SectorTracks() => _encodedTracks.Length == AmigaDiskGeometry.TrackCount
-        ? _encodedTracks : _encodedTracks[..AmigaDiskGeometry.TrackCount];
 
     public int Heads => AmigaDiskGeometry.HeadCount;
 
@@ -39,17 +35,16 @@ internal sealed class TrackBackedDiskMedia : IAmigaSectorDiskMedia, IAmigaPreser
 
     public IAmigaTrack ReadTrack(int cylinder, int head)
     {
-        if ((uint)cylinder >= Cylinders)
-            throw new ArgumentOutOfRangeException(nameof(cylinder));
-        if ((uint)head >= Heads)
-            throw new ArgumentOutOfRangeException(nameof(head));
-        var index = cylinder * Heads + head;
+        var index = GetTrackIndex(cylinder, head);
         return _encodedTracks[index];
     }
 
     public ReadOnlyMemory<byte> ReadSector(int cylinder, int head, int sector)
     {
-        return ReadSector(AdfDiskMedia.GetLogicalSector(cylinder, head, sector));
+        var track = GetTrackIndex(cylinder, head);
+        if ((uint)sector >= AmigaDiskGeometry.SectorsPerTrack)
+            throw new ArgumentOutOfRangeException(nameof(sector));
+        return ReadSector(track * AmigaDiskGeometry.SectorsPerTrack + sector);
     }
 
     public ReadOnlyMemory<byte> ReadSector(int logicalSector)
@@ -77,12 +72,12 @@ internal sealed class TrackBackedDiskMedia : IAmigaSectorDiskMedia, IAmigaPreser
         where T : IAmigaTrack
     {
         ArgumentNullException.ThrowIfNull(encodedTracks);
-        if (encodedTracks.Count < AmigaDiskGeometry.TrackCount || encodedTracks.Count > 168 || (encodedTracks.Count & 1) != 0)
+        if (encodedTracks.Count is 0 or > AmigaDiskGeometry.MaximumPreservedTrackCount)
         {
-            throw new ArgumentException("80–84 complete cylinders (160–168 tracks) are required.", nameof(encodedTracks));
+            throw new ArgumentException($"Between 1 and {AmigaDiskGeometry.MaximumPreservedTrackCount} encoded tracks are required.", nameof(encodedTracks));
         }
 
-        var tracks = new AmigaEncodedTrack[encodedTracks.Count];
+        var tracks = new AmigaEncodedTrack[(encodedTracks.Count + 1) / 2 * 2];
         for (var index = 0; index < encodedTracks.Count; index++)
         {
             var track = encodedTracks[index];
@@ -94,6 +89,16 @@ internal sealed class TrackBackedDiskMedia : IAmigaSectorDiskMedia, IAmigaPreser
                 track.Regions);
         }
 
+        if (tracks.Length != encodedTracks.Count)
+            tracks[^1] = AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack());
+
         return tracks;
+    }
+
+    private int GetTrackIndex(int cylinder, int head)
+    {
+        if ((uint)cylinder >= Cylinders) throw new ArgumentOutOfRangeException(nameof(cylinder));
+        if ((uint)head >= Heads) throw new ArgumentOutOfRangeException(nameof(head));
+        return cylinder * Heads + head;
     }
 }

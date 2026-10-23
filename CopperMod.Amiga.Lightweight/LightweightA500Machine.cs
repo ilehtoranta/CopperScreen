@@ -2018,6 +2018,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         else if (offset >= LightweightRegisters.SpritePosFirst &&
             offset <= LightweightRegisters.SpriteRegisterLast)
         {
+            if ((offset & 7) <= 2)
+            {
+                _spriteDma.OnRegisterWrite(offset, cycle, this);
+            }
             if (_sprites.OnRegisterWrite(offset, value, cycle))
             {
                 _video.ActivateForSprite(cycle);

@@ -4,9 +4,9 @@
     "net10.0": {
       "Copper68k": {
         "type": "Direct",
-        "requested": "[1.5.4-nitro-dev.2, 1.5.4-nitro-dev.2]",
-        "resolved": "1.5.4-nitro-dev.2",
-        "contentHash": "opfPF6O7tFxtHZ5nVZDofFfRKucLo5aF/eD8VEHEf2p33xzSPwPjUPMi59eZbnixrvupFUFpk/XEHsbRrAIXaQ==",
+        "requested": "[1.5.5-nitro.1, 1.5.5-nitro.1]",
+        "resolved": "1.5.5-nitro.1",
+        "contentHash": "+XAs4WFCb+vi8YJwtUv9QXa+z5Vt/dhPXcqmvB5i8cQDsLV6o2JvjO2WfAW1cRvVLZmgk2zR0ZPOiXy7XESLzw==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
@@ -22,8 +22,8 @@
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.4-nitro-dev.2, 1.5.4-nitro-dev.2]",
-          "CopperDisk": "[3.0.0, )"
+          "Copper68k": "[1.5.5-nitro.1, 1.5.5-nitro.1]",
+          "CopperDisk": "[3.0.1-dev.1, )"
         }
       }
     }

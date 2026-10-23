@@ -1,0 +1,931 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Nitro supplied extended ADF: disk admission, memory BTST IPL correction and first-race driving",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23",
+  "copperScreenSourceBase": "7b7c9cb4ae22441fa6e4ae04f741b694fde39a39",
+  "qualifiedSourceFiles": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk.Tests/AmigaDiskLoaderTests.cs",
+      "bytes": 42389,
+      "sha256": "3ac3f9b96859cc4fae55e192fbfb8003cc80471b4850641916e09660e23efca2"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/AmigaDiskGeometry.cs",
+      "bytes": 1267,
+      "sha256": "9c8931389325a9f266b54d7619a03ed1f19763a3a27e4f41bd1a517467cef98e"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/AmigaDiskLoader.cs",
+      "bytes": 14170,
+      "sha256": "cbb72e7f84c54072f130e8ebf020d57222aa22d9c4bf48fb23a35b00fa2b04ba"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/AmigaDosTrackDecoder.cs",
+      "bytes": 11868,
+      "sha256": "c5c29dc27e85e40920fbb26a56319db6e227cec6010d8517227aae15bfbe2905"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/AmigaDosTrackEncoder.cs",
+      "bytes": 7370,
+      "sha256": "cebd2c72bb515206ddaf32da7c09b89b29cc21e91204499ae3d2c18d2f65c900"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/CopperDisk.csproj",
+      "bytes": 2166,
+      "sha256": "748e252164f4c03131e512bdbe087def87f4f0a08935adecf9eb7c8040d17cfd"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/ExtendedAdfDecoder.cs",
+      "bytes": 6742,
+      "sha256": "efb81eea94a9e01d62af51cb5433001088e7dcd02edd00d46f538bb1655c7cb3"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperDisk/TrackBackedDiskMedia.cs",
+      "bytes": 4052,
+      "sha256": "19ec750bec60b0ca484eb1c34612301dc02e96debbabad48d608cddba6701cb8"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/CopperMod.Amiga.Lightweight.Runner.csproj",
+      "bytes": 890,
+      "sha256": "884867a0e2e228f5cada0a37174a6621705d60ad5a3a3632abb4ad21e4923b8e"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/packages.lock.json",
+      "bytes": 901,
+      "sha256": "431a05e267dd1573cccb9d9fc4196cb9ac9446bc45bd84c0c20f7bfd2c6c913a"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/packages.lock.json",
+      "bytes": 4537,
+      "sha256": "82dc3007a7334ced0dcbbc62ed2084f8b087bf21da328f4d5f98130eac258dff"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj",
+      "bytes": 2439,
+      "sha256": "3ce89e65d0444e1f6286619b3fde36b0ea09ef05303356669800c3ac1492f1b4"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight/packages.lock.json",
+      "bytes": 684,
+      "sha256": "009485b77d328cc7d9fbaaabf8facb48ed853450924b08bd71d42aff0ab3fa26"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperScreen.Desktop.Tests/packages.lock.json",
+      "bytes": 14745,
+      "sha256": "99030782d898c1fcf54628620e1b1cc90582df601abf8f2b25bf8a6f5fe95a87"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperScreen.Lightweight.Tests/packages.lock.json",
+      "bytes": 14047,
+      "sha256": "2779189094d0f4568ef9b39cf6fe8016644c2e8bf8dd26734307dbd986217531"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperScreen/CopperScreen.csproj",
+      "bytes": 3388,
+      "sha256": "c0e7d73c8929b90279ae934c95c9e5bd279d9926af0e222a52c10ecd2932af83"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperScreen/packages.lock.json",
+      "bytes": 10394,
+      "sha256": "517833b48e81a1904fbece5dd3fb49a13df34f4a962f0a5282ce59d8d32761ce"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Tests/ExtendedAdfCylinderTests.cs",
+      "bytes": 1559,
+      "sha256": "dd3493d2d778e6b731ef803b5772078a04b65f36474785f195ac729bbb949d73"
+    }
+  ],
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineHardwareSourceChanged": false,
+  "engineBinaryChanged": true,
+  "copperDiskChanged": true,
+  "copper68kSourceCommit": "25dae803fa8476d601acc5c0af9bbac8ed98138f",
+  "cpuPackages": [
+    {
+      "package": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/cpu-feed/Copper68k.1.5.5-nitro.1.nupkg",
+        "bytes": 374399,
+        "sha256": "f9fe63280d0d0bab89b798a80fe5af50d1fd5a5ba9ea58a59fbc83d8404f4dd8"
+      },
+      "version": "1.5.5-nitro.1",
+      "dllSha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a",
+      "published": false
+    },
+    {
+      "package": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/disk-feed/CopperDisk.3.0.1-dev.1.nupkg",
+        "bytes": 66059,
+        "sha256": "6434b47af0e435cfd1f8a70e22362e4f9e989a8521f1d54aec2e18c5e97228cb"
+      },
+      "version": "3.0.1-dev.1",
+      "dllSha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37",
+      "published": false
+    }
+  ],
+  "cpuLock": {
+    "type": "Direct",
+    "requested": "[1.5.5-nitro.1, 1.5.5-nitro.1]",
+    "resolved": "1.5.5-nitro.1",
+    "contentHash": "+XAs4WFCb+vi8YJwtUv9QXa+z5Vt/dhPXcqmvB5i8cQDsLV6o2JvjO2WfAW1cRvVLZmgk2zR0ZPOiXy7XESLzw==",
+    "dependencies": {
+      "CopperFloat": "[1.0.0]"
+    }
+  },
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0, supplied Nitro extended ADF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip",
+      "bytes": 1072509,
+      "sha256": "5d6cc2705621d85f5869255057dc1f67fe939cd8677647a890e4fedbf38da4e4"
+    },
+    "entries": [
+      {
+        "entry": "Nitro (1990)(Psygnosis)[extended adf].adf",
+        "bytes": 1942886,
+        "sha256": "895c78b4d0bc07b0e9fc12b86bac6d893b84fe76173f3020f26f1c6e224891c7"
+      }
+    ],
+    "physicalTracks": 166,
+    "zeroByteZeroBitRawTracks": [
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165
+    ],
+    "nonemptyTracksUnmodified": true,
+    "admission": "Supplied extended ADF only; other releases and protection behavior are not qualified"
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/nitro-copperstart-race1-v1.json",
+    "bytes": 1031,
+    "sha256": "9590669097a05f54e31405772b8d7bb624ec87ffcfee5fbcd9be5dd7f5e57012"
+  },
+  "inputEvents": 18,
+  "identicalPhysicalInputAcrossAllRuns": true,
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\runner-final\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip#/Nitro (1990)(Psygnosis)[extended adf].adf",
+          "10000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/complete-input.json",
+          "bytes": 1031,
+          "sha256": "9590669097a05f54e31405772b8d7bb624ec87ffcfee5fbcd9be5dd7f5e57012"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/qualified/normal/runner.log",
+        "bytes": 110651,
+        "sha256": "a295eaa9e46ad16790e40dd901ad7fa28963b2b390d35e3e3ed6330cde95da85"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/qualified/normal/capture-manifest.json",
+        "bytes": 75349,
+        "sha256": "204fc88ba803a4053861609eee5d241985376540c2ff9faf7c10a4f7c0e46b31"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\runner-final\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip#/Nitro (1990)(Psygnosis)[extended adf].adf",
+          "10000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/complete-input.json",
+          "bytes": 1031,
+          "sha256": "9590669097a05f54e31405772b8d7bb624ec87ffcfee5fbcd9be5dd7f5e57012"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 110651,
+        "sha256": "a295eaa9e46ad16790e40dd901ad7fa28963b2b390d35e3e3ed6330cde95da85"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/qualified/scalar/capture-manifest.json",
+        "bytes": 75349,
+        "sha256": "204fc88ba803a4053861609eee5d241985376540c2ff9faf7c10a4f7c0e46b31"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\runner-final\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip#/Nitro (1990)(Psygnosis)[extended adf].adf",
+          "10000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/complete-input.json",
+          "bytes": 1031,
+          "sha256": "9590669097a05f54e31405772b8d7bb624ec87ffcfee5fbcd9be5dd7f5e57012"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-final/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/qualified/native13/runner.log",
+        "bytes": 110822,
+        "sha256": "80e6204e092b6678341908ae0882a57abbbe14dc59591d5eda343ab09efb077d"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/qualified/native13/capture-manifest.json",
+        "bytes": 75349,
+        "sha256": "8a54661c6bec13cd57c08be1b6343f3946d786bfdce6e800d1bab1b72d09c1ce"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 505,
+      "fields": 101,
+      "lastField": 10000,
+      "unsupported": [],
+      "nonzeroPcmFields": 48,
+      "manifestSha256": "204fc88ba803a4053861609eee5d241985376540c2ff9faf7c10a4f7c0e46b31"
+    },
+    "scalar": {
+      "files": 505,
+      "fields": 101,
+      "lastField": 10000,
+      "unsupported": [],
+      "nonzeroPcmFields": 48,
+      "manifestSha256": "204fc88ba803a4053861609eee5d241985376540c2ff9faf7c10a4f7c0e46b31"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native13": {
+      "files": 505,
+      "fields": 101,
+      "lastField": 10000,
+      "unsupported": [],
+      "nonzeroPcmFields": 48,
+      "manifestSha256": "8a54661c6bec13cd57c08be1b6343f3946d786bfdce6e800d1bab1b72d09c1ce"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\runner-btst\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\btst-discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip#/Nitro (1990)(Psygnosis)[extended adf].adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "3f22416a6c088a1949736eb9282b04f3c4160f8c09cffb440700974086744883"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "dd352c884edcb49c68766dc18cdf24349c8fe816bd27580bb319af2c61d5fb35"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/discovery/normal/runner.log",
+        "bytes": 110746,
+        "sha256": "541974a8af31f726bc0001f91b00a562cf13c2ff0c4911e44c52bf5ec91acff6"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/discovery/normal/capture-manifest.json",
+        "bytes": 75349,
+        "sha256": "204fc88ba803a4053861609eee5d241985376540c2ff9faf7c10a4f7c0e46b31"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\runner-btst\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\btst-discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip#/Nitro (1990)(Psygnosis)[extended adf].adf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "3f22416a6c088a1949736eb9282b04f3c4160f8c09cffb440700974086744883"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "dd352c884edcb49c68766dc18cdf24349c8fe816bd27580bb319af2c61d5fb35"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 110746,
+        "sha256": "541974a8af31f726bc0001f91b00a562cf13c2ff0c4911e44c52bf5ec91acff6"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/discovery/scalar/capture-manifest.json",
+        "bytes": 75349,
+        "sha256": "204fc88ba803a4053861609eee5d241985376540c2ff9faf7c10a4f7c0e46b31"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\runner-btst\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\btst-discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Nitro (1990)(Psygnosis)[extended adf].zip#/Nitro (1990)(Psygnosis)[extended adf].adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "3f22416a6c088a1949736eb9282b04f3c4160f8c09cffb440700974086744883"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "dd352c884edcb49c68766dc18cdf24349c8fe816bd27580bb319af2c61d5fb35"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/runner-btst/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/discovery/native13/runner.log",
+        "bytes": 110917,
+        "sha256": "3f09aaf5d8272f6d35f3854925b3ab3ceaf085850e4dd342852ee3f7e032f3f2"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/discovery/native13/capture-manifest.json",
+        "bytes": 75349,
+        "sha256": "8a54661c6bec13cd57c08be1b6343f3946d786bfdce6e800d1bab1b72d09c1ce"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 505,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches the independently hashed discovery manifest"
+    },
+    "scalar": {
+      "files": 505,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches the independently hashed discovery manifest"
+    },
+    "native13": {
+      "files": 505,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches the independently hashed discovery manifest"
+    }
+  },
+  "harness": {
+    "purpose": "Functional replay; no throughput measurement",
+    "unchangedFrom": "docs/engine/COPPERSTART_F17_2026-10-23.json",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "buildRerun": false,
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "productionBuild": {
+      "command": "dotnet build CopperScreen.slnx -c Release --no-restore",
+      "warnings": 0,
+      "errors": 0,
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/final-production-build.log",
+        "bytes": 1471,
+        "sha256": "2e32cd232e653fd04218933c84d66deb5704ea579dc6f932ffbac3ae80a2f2df"
+      }
+    },
+    "lockedRestore": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/locked-restore.log",
+      "bytes": 1279,
+      "sha256": "0c5a88a7766ed9fe26c2d3d63e51f36a8a5ce40dda67f04b307cc510a454a3a6"
+    },
+    "tests": {
+      "disk": {
+        "command": "dotnet test CopperDisk.Tests/CopperDisk.Tests.csproj -c Release --no-build",
+        "failed": 0,
+        "passed": 81,
+        "unavailable": 0,
+        "total": 81,
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/final-disk-tests.log",
+          "bytes": 376,
+          "sha256": "1159c7799ea39a738b969cf5c1c940c7aebf0c10cc1c1401a14a0eba38ada589"
+        }
+      },
+      "engine": {
+        "command": "dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --artifacts-path artifacts/diagnostic-tests",
+        "failed": 0,
+        "passed": 1256,
+        "unavailable": 7,
+        "total": 1263,
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/final-engine-tests.log",
+          "bytes": 3629,
+          "sha256": "7bd25bb9b2f23fc47782be9f680051b64737b013b163bcc22214a6a63d7f18ea"
+        }
+      },
+      "host": {
+        "command": "dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release --no-build",
+        "failed": 0,
+        "passed": 195,
+        "unavailable": 6,
+        "total": 201,
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/final-host-tests.log",
+          "bytes": 2051,
+          "sha256": "d2517a462d1e172a478ee1e94c550891b9898456921dddc75651f22754b5a23f"
+        }
+      },
+      "desktop": {
+        "command": "dotnet test CopperScreen.Desktop.Tests/CopperScreen.Desktop.Tests.csproj -c Release --no-build",
+        "failed": 0,
+        "passed": 10,
+        "unavailable": 0,
+        "total": 10,
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/final-desktop-tests.log",
+          "bytes": 407,
+          "sha256": "869c11b4af8f17116a7ee84edc5841ec994e82b1c8ef4f5dbb913f395fb7b068"
+        }
+      },
+      "cpuFocused": {
+        "command": "dotnet test Copper68k.Tests/Copper68k.Tests.csproj -c Release --filter FullyQualifiedName~M68000BtstPrefetchTests",
+        "failed": 0,
+        "passed": 24,
+        "unavailable": 0,
+        "total": 24,
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/btst-after-tests.log",
+          "bytes": 782,
+          "sha256": "572a6530fb266301c285dbf1bf58638c31110ae86f52d6edc35ddccfa69706ed"
+        }
+      },
+      "cpuScoped": {
+        "command": "dotnet test Copper68k.Tests/Copper68k.Tests.csproj -c Release --no-restore --filter 'FullyQualifiedName!~Copper68k.Tests.Synthetic'",
+        "failed": 0,
+        "passed": 4475,
+        "unavailable": 19,
+        "total": 4494,
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/cpu-scoped-tests.log",
+          "bytes": 5486,
+          "sha256": "60ebbed9ca2a96a98b87d3828162029c510d7f447e0f6071b2504304ff43533a"
+        }
+      }
+    },
+    "cpuScopedBinary": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/copper68k-source/Copper68k.Tests/bin/Release/net10.0/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+    },
+    "cpuFullAttempt": {
+      "command": "dotnet test Copper68k.Tests/Copper68k.Tests.csproj -c Release --no-restore",
+      "disposition": "INTERRUPTED / unavailable; not a passing full suite",
+      "reason": "Intentionally stopped the extra broad architectural-matrix run after 12m56s; bounded non-synthetic CPU tests, affected engine suite and native replays are the completed development checks",
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/cpu-tests.log",
+        "bytes": 19788,
+        "sha256": "f344dbca0472e4fcc2543201ba6d87a35370f60d631e2b54ace2c7d9de3aeb91"
+      }
+    },
+    "cpuPackLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/cpu-pack.log",
+      "bytes": 542,
+      "sha256": "453970671867721802d61318e81be1ecac92d0212597746244561264408d6b98"
+    },
+    "diskPackLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/disk-pack.log",
+      "bytes": 305,
+      "sha256": "1348814f36e458ec551ec53a3a4c6edb92c4435ed899a97024f470f2bc579c87"
+    },
+    "packagePublication": false,
+    "existingPerformanceInputsUnchanged": true,
+    "fullArchitecturalReportReleaseGateClaim": false
+  },
+  "reproduction": {
+    "originalMountRejection": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/rejected-160-track-limit/normal/runner.log",
+        "bytes": 1505,
+        "sha256": "9a3b5f56f538807e6f3d33c639a805bc2042a1427674b94ad5e9e5f7289fbc16"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/rejected-160-track-limit/scalar/runner.log",
+        "bytes": 1505,
+        "sha256": "9a3b5f56f538807e6f3d33c639a805bc2042a1427674b94ad5e9e5f7289fbc16"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/rejected-160-track-limit/native13/runner.log",
+        "bytes": 1505,
+        "sha256": "9a3b5f56f538807e6f3d33c639a805bc2042a1427674b94ad5e9e5f7289fbc16"
+      }
+    ],
+    "emptyRawRejection": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/rejected-zero-bit-raw/normal/runner.log",
+        "bytes": 898,
+        "sha256": "6ea663bd18c07a494e56c3f4cf12dfdb6dde3aa1e30df153bdbf094c32e0e510"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/rejected-zero-bit-raw/scalar/runner.log",
+        "bytes": 898,
+        "sha256": "6ea663bd18c07a494e56c3f4cf12dfdb6dde3aa1e30df153bdbf094c32e0e510"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/rejected-zero-bit-raw/native13/runner.log",
+        "bytes": 898,
+        "sha256": "6ea663bd18c07a494e56c3f4cf12dfdb6dde3aa1e30df153bdbf094c32e0e510"
+      }
+    ],
+    "diskOnlyStalledRuns": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/disk-only-discovery/normal/runner.log",
+        "bytes": 127508,
+        "sha256": "85ba6719d351cde95719f5e9fdd1e8bd23f66dfe422ef366de61838ad5797518"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/disk-only-discovery/scalar/runner.log",
+        "bytes": 127508,
+        "sha256": "85ba6719d351cde95719f5e9fdd1e8bd23f66dfe422ef366de61838ad5797518"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/disk-only-discovery/native13/runner.log",
+        "bytes": 127702,
+        "sha256": "191fadcf518b3b6aa99a3bcfe413353e3638e7eb5204e49d0ec33a3d7fe691d2"
+      }
+    ],
+    "instructionTrace": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/trace.log",
+      "bytes": 21628,
+      "sha256": "f851ce4db67fa5d1e95e2d44165c2cc85b0ee71cfc3d8847f2bce8377202e404"
+    },
+    "focusedCpuBeforeFix": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/btst-before-tests.log",
+      "bytes": 26036,
+      "sha256": "f0395c4e903c52d119a0695c069dd9d09e6ba9364f57568403a08ce9da1f15f3"
+    },
+    "emptyRawBeforeFix": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/empty-raw-before-tests.log",
+      "bytes": 3629,
+      "sha256": "7c3c699442e1597f49080a937f6eb8809999eddfdbd5a2951ba799411574a8f2"
+    },
+    "notes": [
+      "Original admission fails before guest execution under either ROM",
+      "Disk-only candidate stalls in BTST.B #5,$DFF01F / BEQ at 0x184A8/0x184B0 under both ROMs",
+      "An early investigative joystick-0 fire lacked the host joystick-mode bit. Correct-mode fire still reproduced the disk-only stall. All final workload events use the correct mode",
+      "Sampling inactive IPL pins at every engine boundary did not resolve the failure and was reverted; that experiment is not qualified"
+    ]
+  },
+  "diagnosticReference": {
+    "binary": {
+      "path": "C:/Program Files/WinUAE/winuae64.exe",
+      "bytes": 29372368,
+      "sha256": "f3e55700fd811cd543fdfebf6c3221cfaa3d385828f110c6d3eb534c64503123"
+    },
+    "version": "6.0.3",
+    "configuration": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/reference.uae",
+      "bytes": 631,
+      "sha256": "7f3a5f568bbaab289353bb976b9ee1e9f31fbcc9abd77984d6b174ca1562ad7a"
+    },
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-nitro-2026-10-23/winuae-reference.log",
+      "bytes": 12022,
+      "sha256": "20491b1121150342ef6c70aa9e34206e7178a0f90ca71f3ae2eed653613afc50"
+    },
+    "use": "Native 1.3 diagnostic; not field-matched qualification or physical hardware evidence",
+    "stoppedAfterUse": true
+  },
+  "references": [
+    {
+      "url": "https://github.com/tonioni/WinUAE/blob/master/disk.cpp",
+      "purpose": "UAE-1ADF variable track count and zero-bit raw-track fallback"
+    },
+    {
+      "url": "https://github.com/tonioni/WinUAE/blob/master/cpuemu_13.cpp",
+      "purpose": "CE000 immediate absolute-long and dynamic memory BTST sample IPL before operand read; final prefetch follows"
+    },
+    {
+      "url": "https://db.hfsplay.fr/files/2019/07/31/Manual_DE_ENG_FR_IT_l1JPE5W.pdf",
+      "purpose": "Publisher controls: fire to join, initials/car selection, fire acceleration and left/right steering"
+    }
+  ],
+  "observations": [
+    {
+      "fields": [
+        5000
+      ],
+      "milestone": "Player selection, all computer drivers"
+    },
+    {
+      "fields": [
+        5500,
+        6000
+      ],
+      "milestone": "Joystick-0 human driver joined, name entry active"
+    },
+    {
+      "fields": [
+        6500,
+        7000
+      ],
+      "milestone": "Initials confirmed and racing-car selection"
+    },
+    {
+      "fields": [
+        8000
+      ],
+      "milestone": "First-location skyline/loading presentation"
+    },
+    {
+      "fields": [
+        9000
+      ],
+      "milestone": "First race with visible player/AI cars and gas counter"
+    },
+    {
+      "fields": [
+        9300,
+        9500,
+        9700,
+        10000
+      ],
+      "milestone": "Physical fire acceleration, left/right steering, camera movement, fire release and gas consumption"
+    }
+  ],
+  "limits": [
+    "First-race bounded driving only; race/lap completion, later tracks, multiplayer, saving and other releases unqualified",
+    "Cross-ROM race positions differ at the same completed field; no cross-ROM raster identity claim",
+    "Nonzero PCM is sample presence, not listening or fidelity",
+    "Native Kickstart on the same emulator and the unmatched WinUAE diagnostic are not physical hardware oracles",
+    "No throughput result or complete hardware timing acceptance; historical workloads, fingerprints and dispositions unchanged",
+    "Full CPU architectural-matrix run intentionally interrupted and unavailable; completed scoped CPU suite excludes Synthetic namespace. Local pack follows source commit and final native replays load the exact packaged DLL"
+  ]
+}

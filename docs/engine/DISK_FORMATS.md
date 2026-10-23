@@ -18,6 +18,13 @@ is limited to cylinders 0–83, heads 0–1, with no duplicate tracks or cells f
 than one CCK. Standard sector media remains 80 cylinders, two heads, eleven
 512-byte sectors per track. Missing preserved tracks produce no flux.
 
+The [Nitro follow-up](COPPERSTART_NITRO_2026-10-23.md) removes CopperDisk's
+fixed 160-track restriction for UAE-1ADF/encoded media within that existing
+84-cylinder range. Normal entries beyond cylinder 79 retain their physical
+AmigaDOS headers; odd final track counts leave the absent head unformatted.
+Zero-bit raw entries represent unwritten tracks and use a zero-filled PAL DD
+revolution. Nonempty raw streams retain their stored bytes and bit lengths.
+
 SCP is quantized at load time to CopperDisk's nominal DD grid and first stored
 revolution. The engine retains its decoded transition bytes, including a pulse
 terminating a long no-flux gap. It does not replay original interval timing,

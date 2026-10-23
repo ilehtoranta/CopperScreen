@@ -23,6 +23,16 @@ See the [storage interface](https://github.com/ilehtoranta/CopperScreen/blob/mai
 dotnet add package CopperDisk --version 3.0.0
 ```
 
+## Development source: 3.0.1-dev.1
+
+Read-only UAE-1ADF and encoded-track media accept one to 168 physical tracks
+(up to 84 DD cylinders). Extra raw tracks retain their stored bits, and normal
+tracks beyond cylinder 79 decode with their physical AmigaDOS track numbers.
+An absent final head is unformatted. Zero-bit raw UAE entries become a
+zero-filled PAL DD revolution, including entries with no allocated bytes.
+This source version is not published;
+the stable 3.0.0 package remains unchanged.
+
 ## Version 3.0.0
 
 This release includes IPF density selectors and per-cell timing weights, stored
@@ -60,10 +70,9 @@ best-effort decoded sector view when sectors can be recognized. Extended ADF
 support targets modern `UAE-1ADF` images; old `UAE--ADF` images are rejected.
 Modern DD images may declare 1–168 tracks, within the 84-cylinder drive limit.
 Missing tracks are unformatted, including the second head of a partial cylinder.
-Extra physical tracks
-remain available through `ReadTrack`; the decoded sector view remains the
-standard 880 KiB layout. A zero raw bit length denotes an unformatted track,
-represented using the existing synthetic gap revolution.
+Extra physical tracks remain available through `ReadTrack` and the best-effort
+decoded sector view covers all supplied cylinders. A zero raw bit length
+denotes an unformatted track, represented using a zero-filled PAL DD revolution.
 
 ## Third-Party Notices
 
@@ -142,7 +151,9 @@ if (loaded.Media is IAmigaSectorDiskMedia sectors)
 }
 ```
 
-`SectorData` is always the standard 880 KiB AmigaDOS sector image layout.
+`SectorData` uses the standard AmigaDOS sector layout, with 11 sectors per
+physical track. Standard ADF remains 880 KiB; preserved track-backed media
+covers its supplied cylinders, including a zero-filled absent final head.
 Missing or unreadable sectors are zero-filled and
 `HasCompleteDecodedSectorData` reports whether every sector was decoded.
 
@@ -193,8 +204,8 @@ including weak data, flux-capture origin, approximate index materialization, and
 no-flux intervals. Region start and length are expressed in bit offsets within
 the encoded track.
 
-`FromEncodedTracks` accepts exactly `AmigaDiskGeometry.TrackCount` tracks.
-`FromEncodedTrackBytes` accepts exactly the same number of byte arrays and treats
+`FromEncodedTracks` accepts one to 168 tracks, in cylinder/head order.
+`FromEncodedTrackBytes` accepts the same range of byte arrays and treats
 `null` entries as unformatted tracks:
 
 ```csharp
@@ -281,5 +292,5 @@ tools, and import/export paths that need raw floppy-controller streams rather
 than a filesystem-level API.
 
 They do not validate Amiga filesystems. The decoder scans for standard sector
-headers and checksums, returns a best-effort 880 KiB sector image, and leaves
+headers and checksums, returns a best-effort sector image for the supplied tracks, and leaves
 unreadable sectors zero-filled.
