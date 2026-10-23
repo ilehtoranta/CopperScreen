@@ -22,6 +22,13 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Lotus Esprit Turbo Challenge replay](COPPERSTART_LOTUS1_2026-10-23.md)
+adds supplied Angels `[b doscopy]` ADF boot, options, soundtrack selection,
+normal and alternative driving controls, automatic gears, braking and Escape
+back to the presentation before restarting. No ROM or engine correction was
+established. Original-media behavior, pause and lap/race completion remain
+unqualified.
+
 The [Major Motion replay](COPPERSTART_MAJOR_MOTION_2026-10-23.md) adds supplied
 single-ADF DOS boot, one-player driving/fire, pause/resume, mission abort and
 restart, and sound toggling against a clean Kickstart 1.3 reference. No ROM or
