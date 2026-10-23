@@ -22,6 +22,14 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Lemmings replay](COPPERSTART_LEMMINGS_2026-10-23.md) adds supplied Skid
+Row two-ADF boot, disk swapping, mouse-controlled Fun 1 gameplay, P pause/resume,
+live digger assignment and terrain removal, 100% rescue completion and
+progression to the Fun 2 briefing. Native Kickstart 1.3 uses the same physical
+inputs. No ROM or engine correction was established. Later gameplay and
+pristine original media remain unqualified; historical performance inputs
+are unchanged.
+
 The [Lotus III replay](COPPERSTART_LOTUS3_2026-10-23.md) adds supplied
 FLT / Crack Inc two-ADF boot, disk swapping and player-controlled one-player
 Arcade racing with automatic gears, steering, braking, F10 pause/resume,

@@ -66,6 +66,14 @@ preserves scope and the one-off performance waiver. These checks are not pending
 merely because an earlier paragraph in the [historical register](../history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md)
 said so.
 
+The [CopperStart/native Kickstart 1.3 Lemmings follow-up](COPPERSTART_LEMMINGS_2026-10-23.md)
+adds supplied Skid Row ADF boot and disk swapping, P pause/resume, live digger
+assignment and terrain removal, Fun 1 completion with 100% rescued, and the
+Fun 2 briefing. Normal/scalar captures match and each final reset replay
+matches its discovery run. No ROM or engine correction was established;
+later levels and pristine original media remain unqualified. Historical
+performance workloads and acceptance records are unchanged.
+
 ## Status and next work
 
 Confirmed bugs contradict a supported contract; unverified behavior records an
