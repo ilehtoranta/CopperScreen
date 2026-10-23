@@ -283,6 +283,18 @@ and stack/VBlank cases pass without skips. That record does not qualify weapons,
 combat, mission completion, later campaigns or save/load. The [October 23 follow-up](COPPERSTART_DESERT_STRIKE_2026-10-23.md)
 adds coastal flight and demonstrated chain-gun/Hydra use with the later ROM/runtime.
 
+The [North & South CP continuation](COPPERSTART_NORTH_SOUTH_2026-10-23.md)
+corrects inherited sprite priority in native graphics startup. Its original
+opaque-plane/sprite probe passes with Kickstart 1.3, fails with the old ROM,
+and passes with the rebuilt ROM. The pointer is visible in the language,
+menu and map screens. Bounded 1861 play includes army movement, turn changes,
+pitched battle, unit selection and retreat. The ROM now has SHA-256
+`fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7`;
+the compiled guest root is retained and the native composition rebuilt.
+Campaign completion, fort/train sequences and protected original media remain
+unverified. Runtime binaries are freshly built from the merged source rather
+than reusing the preceding Desert Strike runtime.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that

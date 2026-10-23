@@ -1,0 +1,308 @@
+[
+  {
+    "frame": 5002,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 5022
+  },
+  {
+    "frame": 8002,
+    "mouseDeltaX": 100,
+    "mouseDeltaY": 175
+  },
+  {
+    "frame": 8022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 8042
+  },
+  {
+    "frame": 9502,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 9522,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11002,
+    "mouseDeltaY": 100
+  },
+  {
+    "frame": 11022,
+    "mouseDeltaY": 75
+  },
+  {
+    "frame": 11042,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11062,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 11602,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 11622,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 13002,
+    "mouseDeltaX": 88,
+    "mouseDeltaY": 10
+  },
+  {
+    "frame": 13022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 13042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 14502,
+    "mouseDeltaX": -29,
+    "mouseDeltaY": -60
+  },
+  {
+    "frame": 14522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 14542,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 15002,
+    "mouseDeltaX": 112,
+    "mouseDeltaY": -74
+  },
+  {
+    "frame": 15022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 15042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 15502,
+    "mouseDeltaX": -26,
+    "mouseDeltaY": 15
+  },
+  {
+    "frame": 15522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 15542,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 16002,
+    "mouseDeltaX": -60,
+    "mouseDeltaY": 120
+  },
+  {
+    "frame": 16022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 16042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 18002,
+    "mouseDeltaX": 53,
+    "mouseDeltaY": -120
+  },
+  {
+    "frame": 18022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 18042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 18502,
+    "mouseDeltaX": -32,
+    "mouseDeltaY": 42
+  },
+  {
+    "frame": 18522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 18542,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 20002,
+    "mouseDeltaX": -21,
+    "mouseDeltaY": 83
+  },
+  {
+    "frame": 20022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 20042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 23002,
+    "mouseDeltaX": 53,
+    "mouseDeltaY": -125
+  },
+  {
+    "frame": 23022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 23042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 23502,
+    "mouseDeltaX": -14,
+    "mouseDeltaY": 27
+  },
+  {
+    "frame": 23522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 23542,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 25002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 25122
+  },
+  {
+    "frame": 25202,
+    "keyCode": 352
+  },
+  {
+    "frame": 25212,
+    "keyCode": 480
+  },
+  {
+    "frame": 25222,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 25232
+  },
+  {
+    "frame": 25302,
+    "keyCode": 352
+  },
+  {
+    "frame": 25312,
+    "keyCode": 480
+  },
+  {
+    "frame": 25332,
+    "joystickPort1": 2
+  },
+  {
+    "frame": 25432,
+    "joystickPort1": 8
+  },
+  {
+    "frame": 25512
+  },
+  {
+    "frame": 25522,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 25532
+  },
+  {
+    "frame": 25552,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 25562
+  },
+  {
+    "frame": 25582,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 25592
+  },
+  {
+    "frame": 25612,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 25622
+  },
+  {
+    "frame": 26002,
+    "keyCode": 353
+  },
+  {
+    "frame": 26012,
+    "keyCode": 481
+  },
+  {
+    "frame": 26102,
+    "keyCode": 320
+  },
+  {
+    "frame": 26142,
+    "keyCode": 448
+  },
+  {
+    "frame": 26202,
+    "keyCode": 353
+  },
+  {
+    "frame": 26212,
+    "keyCode": 481
+  },
+  {
+    "frame": 26302,
+    "keyCode": 332
+  },
+  {
+    "frame": 26362,
+    "keyCode": 460
+  },
+  {
+    "frame": 26402,
+    "keyCode": 334
+  },
+  {
+    "frame": 26462,
+    "keyCode": 462
+  },
+  {
+    "frame": 26502,
+    "keyCode": 320
+  },
+  {
+    "frame": 26512,
+    "keyCode": 448
+  },
+  {
+    "frame": 26602,
+    "keyCode": 353
+  },
+  {
+    "frame": 26642,
+    "keyCode": 481
+  }
+]

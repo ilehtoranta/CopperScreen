@@ -1,0 +1,1013 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "completedDate": "2026-10-24",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "North & South supplied CP ADF: corrected mouse visibility and 1861 opening gameplay",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23",
+  "copperScreenSourceBase": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+  "copperStartProducer": "0057fb9c38d82d38122ddf69a4aa960573beedd7",
+  "compiledGuestRootProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+  },
+  "previousRom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": true,
+  "engineChanged": false,
+  "copper68kChanged": false,
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0, supplied North & South CP standard ADF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "1": {
+      "path": "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip",
+      "bytes": 673517,
+      "sha256": "45ab5d197b796b98e84a96dd01d7a37d608a7ef9c31573e984fbf176a4ea86fb",
+      "entries": [
+        {
+          "entry": "North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "bytes": 901120,
+          "sha256": "f40ad6733f0b7103a69c765f0c9be5136d84053f07e48c05675e29bbc21095db"
+        }
+      ],
+      "selector": "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf"
+    }
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/north-south-copperstart-1861-v1.json",
+    "bytes": 4120,
+    "sha256": "d0c28155806ed310078c61d616e747c339d5426d5bccdb745048281085b97d93"
+  },
+  "inputEvents": 71,
+  "nativeWorkload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/north-south-kickstart13-1861-v1.json",
+    "bytes": 4203,
+    "sha256": "8f17fc115026a8a74b181798bf803dbeb3ff630804afc4bdbeb5693d0f14137b"
+  },
+  "nativeInputEvents": 76,
+  "identicalPhysicalInputAcrossAllRuns": false,
+  "inputTiming": "Different boot/menu/turn field timing under the two ROMs; identical normal/scalar CopperStart input",
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "40000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/complete-input.json",
+          "bytes": 4120,
+          "sha256": "d0c28155806ed310078c61d616e747c339d5426d5bccdb745048281085b97d93"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/qualified/normal/runner.log",
+        "bytes": 438401,
+        "sha256": "266ba2180013ee04ad433a3206c495a873f1a47622bc6658ff4df69c6ec5a516"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/qualified/normal/capture-manifest.json",
+        "bytes": 299149,
+        "sha256": "838d1b36cf7be1efe9570889301ae5780c826808d805a53606e3b3b907e76a85"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "40000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/complete-input.json",
+          "bytes": 4120,
+          "sha256": "d0c28155806ed310078c61d616e747c339d5426d5bccdb745048281085b97d93"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 438401,
+        "sha256": "266ba2180013ee04ad433a3206c495a873f1a47622bc6658ff4df69c6ec5a516"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/qualified/scalar/capture-manifest.json",
+        "bytes": 299149,
+        "sha256": "838d1b36cf7be1efe9570889301ae5780c826808d805a53606e3b3b907e76a85"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\native13-complete-input.json",
+          "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "40000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/native13-complete-input.json",
+          "bytes": 4203,
+          "sha256": "8f17fc115026a8a74b181798bf803dbeb3ff630804afc4bdbeb5693d0f14137b"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/qualified/native13/runner.log",
+        "bytes": 441352,
+        "sha256": "8d65c2c59720188c4eecef8d0a929139fe730748e61c1ddcee79bddca49a0582"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/qualified/native13/capture-manifest.json",
+        "bytes": 299149,
+        "sha256": "73950444e5c0f7be9ee9ce8f62185f613bbd9f9207fbe24481b93f34f5167c6b"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 2005,
+      "fields": 401,
+      "lastField": 40000,
+      "unsupported": [],
+      "nonzeroPcmFields": 115,
+      "manifestSha256": "838d1b36cf7be1efe9570889301ae5780c826808d805a53606e3b3b907e76a85"
+    },
+    "scalar": {
+      "files": 2005,
+      "fields": 401,
+      "lastField": 40000,
+      "unsupported": [],
+      "nonzeroPcmFields": 115,
+      "manifestSha256": "838d1b36cf7be1efe9570889301ae5780c826808d805a53606e3b3b907e76a85"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native13": {
+      "files": 2005,
+      "fields": 401,
+      "lastField": 40000,
+      "unsupported": [],
+      "nonzeroPcmFields": 139,
+      "manifestSha256": "73950444e5c0f7be9ee9ce8f62185f613bbd9f9207fbe24481b93f34f5167c6b"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\fixed-initial-normal.json",
+          "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "28000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/fixed-initial-normal.json",
+          "bytes": 1946,
+          "sha256": "5f55c0130a615700f4a485914b5aecd0f36b95f028f2b439012ccde8397eb955"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/discovery/normal/runner.log",
+        "bytes": 438561,
+        "sha256": "f7d5a8526a93ed40973394134ad3049de0994dfea7e32a8f5a390a91d9e1117c"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/discovery/normal/capture-manifest.json",
+        "bytes": 299149,
+        "sha256": "838d1b36cf7be1efe9570889301ae5780c826808d805a53606e3b3b907e76a85"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\fixed-initial-scalar.json",
+          "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "28000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/fixed-initial-scalar.json",
+          "bytes": 1946,
+          "sha256": "5f55c0130a615700f4a485914b5aecd0f36b95f028f2b439012ccde8397eb955"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 438561,
+        "sha256": "f7d5a8526a93ed40973394134ad3049de0994dfea7e32a8f5a390a91d9e1117c"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/discovery/scalar/capture-manifest.json",
+        "bytes": 299149,
+        "sha256": "838d1b36cf7be1efe9570889301ae5780c826808d805a53606e3b3b907e76a85"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\fixed-initial-native13.json",
+          "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+          "18000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/fixed-initial-native13.json",
+          "bytes": 1644,
+          "sha256": "7c5cd83bd5047fcef317944459d213fae283d52ae03ad4e7da9e2e6aaabd5d85"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/discovery/native13/runner.log",
+        "bytes": 441532,
+        "sha256": "06f000147a64549dcf2d5dd7d6284b3171aeafc7e9d6783e0f48bd4e3b2638ce"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/discovery/native13/capture-manifest.json",
+        "bytes": 299149,
+        "sha256": "73950444e5c0f7be9ee9ce8f62185f613bbd9f9207fbe24481b93f34f5167c6b"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 2005,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches its independently hashed discovery manifest"
+    },
+    "scalar": {
+      "files": 2005,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches its independently hashed discovery manifest"
+    },
+    "native13": {
+      "files": 2005,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches its independently hashed discovery manifest"
+    }
+  },
+  "harness": {
+    "purpose": "Functional native-media replay; not a throughput harness",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "harnessRebuilt": false,
+    "engineAndDiskFreshlyBuiltFrom": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "productionBuild": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/production-build.log",
+        "bytes": 2749,
+        "sha256": "aa2d4d513ef0a75bceace2a0587a7e987d65585dfbaa5df84860d935501a28b7"
+      },
+      "warnings": 0,
+      "errors": 0
+    },
+    "engineTests": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/engine-tests.log",
+        "bytes": 3240,
+        "sha256": "6519698d07395bc97366baf3c020d85d6e163101f9f5c09e987d3e590b61c400"
+      },
+      "passed": 1258,
+      "failed": 0,
+      "optionalUnavailable": 7
+    },
+    "diskTests": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/disk-tests.log",
+        "bytes": 800,
+        "sha256": "1a10adbd48154d130ddcae1da4fd892faf3965ce0a9490011c061cd8a47ee08d"
+      },
+      "passed": 85,
+      "failed": 0,
+      "skipped": 0
+    },
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true,
+    "existingPerformanceWorkloadsUnchanged": true
+  },
+  "controlReference": {
+    "url": "https://device.report/m/7d309c94f415a97b95d134eff4acd4894c226d542198b3f4f21a98fe3b1936aa",
+    "description": "Preserved publisher instruction guide: menu, strategic map, joystick controls, Shift unit selection and battle firing."
+  },
+  "observations": [
+    {
+      "copperStartFields": [
+        19000,
+        23500,
+        27000
+      ],
+      "observation": "Visible mouse pointer in language screen, English menu and strategic map after native graphics BPLCON2 startup correction."
+    },
+    {
+      "copperStartFields": [
+        28000
+      ],
+      "observation": "Pennsylvania army selected: 6 infantry, 3 cavalry, 1 cannon; January 1861."
+    },
+    {
+      "copperStartFields": [
+        29000,
+        30000,
+        31000,
+        34000
+      ],
+      "observation": "Army moves west; date-band clicks advance through February to March; computer movements and supply animation complete."
+    },
+    {
+      "copperStartFields": [
+        36000,
+        36300,
+        36400,
+        37000
+      ],
+      "observation": "River-and-bridge pitched battle with both forces and animated projectiles. Right Shift changes artillery selection to cavalry and infantry; Space and cursor keys exercise battle controls. Initial joystick and Left Shift trials do not establish player artillery firing."
+    },
+    {
+      "copperStartFields": [
+        39000,
+        40000
+      ],
+      "observation": "Escape returns to March map. Surviving Northern army selected at 40000: 6 infantry, 2 cavalry, 0 cannon."
+    },
+    {
+      "native13Fields": [
+        13000,
+        14500,
+        15000,
+        15500,
+        16000,
+        18000,
+        23000
+      ],
+      "observation": "Same default English/1861 human-North menu, history dialog, selected Pennsylvania army, westward movement and turn changes through March."
+    },
+    {
+      "native13Fields": [
+        25000,
+        25300,
+        26100,
+        26300,
+        27000,
+        40000
+      ],
+      "observation": "Same battle landscape; Right Shift selects cavalry, Space/cursor inputs applied. Battle ends in defeat by 27000, returning to March map; normal map interaction remains active through 40000. Unit positions and battle outcomes are not asserted equal to CopperStart."
+    }
+  ],
+  "findings": [
+    {
+      "status": "fixed",
+      "owner": "CopperStart native graphics initialization",
+      "issue": "Invisible pointer behind opaque playfield when BPLCON2 inherits zero.",
+      "change": "Initialize BPLCON2 to 0x0024 once, matching observed native Kickstart 1.3 handoff. Later guest writes retain authority.",
+      "evidence": "Original opaque red plane/white sprite probe: native 1.3 passes, prior CopperStart fails, rebuilt ROM passes; visible game pointer after recomposition."
+    },
+    {
+      "status": "diagnosed, no code change",
+      "issue": "Long blank loading interval",
+      "evidence": "ROM advances through 512-byte reads with motor restart and re-home; game subsequently boots. Not counted as a hang or a throughput measurement."
+    },
+    {
+      "status": "input error, no code change",
+      "issue": "175-count vertical mouse move wraps signed 8-bit guest delta.",
+      "change": "Split physical movement into smaller events. Earlier oversized trial remains in the complete replay."
+    },
+    {
+      "status": "not established as game defect",
+      "issue": "Intuition global coordinates remain stationary without an open screen.",
+      "evidence": "Game updates its own cursor using direct mouse hardware. No Intuition behavior or palette change is included."
+    }
+  ],
+  "limits": [
+    "Full campaign completion, battle victory, deliberate enemy destruction and artillery aiming remain unqualified.",
+    "Fort/train sequences, other years, disasters, two-player controls, save/load and protected original media remain unqualified.",
+    "Native Kickstart 1.3 uses the same engine; its battle outcome differs. Neither replay is a physical hardware timing oracle.",
+    "PCM sample presence is captured; listening and audio fidelity are not qualified.",
+    "Only the native graphics composition is rebuilt. The exact prior compiled C# guest root is retained; no fresh full producer solution build is claimed.",
+    "Historical native/performance workloads and fingerprints are unchanged. This is a functional replay, not a throughput acceptance measurement.",
+    "Exploratory automatic-demo, malformed diagnostic and incorrect-raster-assertion attempts are retained locally and excluded from final qualification."
+  ],
+  "romBuild": {
+    "compiledRoot": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot-compiled.rom",
+      "bytes": 524288,
+      "sha256": "425040c8b209dd2437342328855b2f9841c16faeb184aa1d8edfc12a529dc2ae"
+    },
+    "compiledRootRebuilt": false,
+    "compiledCodeBytes": 476276,
+    "nativeGraphicsBytes": 28826,
+    "emitter": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/source/native/CopperStart.Graphics/bin/Release/net10.0/CopperStart.Graphics.dll",
+      "bytes": 2450432,
+      "sha256": "1e9652121e48ef75e8c3507ca6c05934ed3e4b8e1461bd165193296019915ee0"
+    },
+    "emitterBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/graphics-build.log",
+      "bytes": 271,
+      "sha256": "ddcc2f64b2f202e203f0d4643723fb9278f0a2d91f709a3c34b7f9d4ff54f679"
+    },
+    "linkLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom-link.log",
+      "bytes": 60,
+      "sha256": "c36d75a8c9cf6c46baf1bd2990a1ff3f911d03b7da0da490323f8f58a590ed84"
+    },
+    "composition": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.graphics.json",
+      "bytes": 8049,
+      "sha256": "962595ca4460508afda321d3c2d9a0938120271accabc9abeed57e9821b7d29e"
+    },
+    "independentLinkLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom-relink.log",
+      "bytes": 60,
+      "sha256": "c36d75a8c9cf6c46baf1bd2990a1ff3f911d03b7da0da490323f8f58a590ed84"
+    },
+    "independentImage": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/independent.rom",
+      "bytes": 524288,
+      "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+    },
+    "identicalIndependentRecomposition": true
+  },
+  "regression": {
+    "source": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/source/tests/CopperStart.Floppy.Native.Tests/NativeBootSpritePriorityTests.cs",
+      "bytes": 3553,
+      "sha256": "691c8addc3418e264f66314d79803911061a473d17272be4335b06b565c3dc59"
+    },
+    "fixture": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/fixture/Fixture.csproj",
+      "bytes": 6059,
+      "sha256": "40aba1455372aadfeabae11d9c0ea3cbb675151d41a218513b13ef8bc775912e"
+    },
+    "loader": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/fixture/NativeBootImage.cs",
+      "bytes": 886,
+      "sha256": "07b0584d4f12fac3e85cf8a74532473e1287f6c2096f41b609200ce4bd91e185"
+    },
+    "originalBootDisk": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/InheritedSpritePriority.adf",
+      "bytes": 901120,
+      "sha256": "2c200b264669c23640fe1892243edda0b2d5496711b5a10988bc6e79a0626840"
+    },
+    "expected": "White sprite pixels above opaque red playfield, without guest BPLCON2 programming",
+    "native13": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/sprite-native13-final.log",
+        "bytes": 626,
+        "sha256": "518649683ed05ce3eebaaf53dda899ee3088301917ade074c451e300ddf2e6e7"
+      },
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "before": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/sprite-before-final.log",
+        "bytes": 1266,
+        "sha256": "d32aaf52354c7375bd2d807cde2b9579f8af2e73ac0634f917e72abfcb1a010f"
+      },
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "actual": "Red playfield at the expected white sprite pixels"
+    },
+    "after": {
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom-focused.log",
+        "bytes": 626,
+        "sha256": "0a30ae1175259eba34ed74ad6901cd48c13a7138d29b1778c39e373f646027ef"
+      },
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "earlierDiagnosticErrors": "Initial fixture setup used stale engine reference paths; early raster assertions sampled the wrong horizontal location. These attempts are retained locally and excluded from native/before/after qualification.",
+    "loaderScope": "Retained compiled guest root and exact SHA-verified ROM; current frozen runtime. Does not claim fresh C# root compilation or the unavailable full producer solution build."
+  },
+  "beforeFix": {
+    "summary": {
+      "normal": {
+        "files": 1405,
+        "fields": 281,
+        "lastField": 28000,
+        "unsupported": [],
+        "nonzeroPcmFields": 104,
+        "manifestSha256": "51fe9bad95e5c21df1841bdf50f8935d84aae2ed1ca051a7a9c1063a7825d1c4"
+      },
+      "scalar": {
+        "files": 1405,
+        "fields": 281,
+        "lastField": 28000,
+        "unsupported": [],
+        "nonzeroPcmFields": 104,
+        "manifestSha256": "51fe9bad95e5c21df1841bdf50f8935d84aae2ed1ca051a7a9c1063a7825d1c4"
+      },
+      "identical": true,
+      "mismatches": [],
+      "native13": {
+        "files": 905,
+        "fields": 181,
+        "lastField": 18000,
+        "unsupported": [],
+        "nonzeroPcmFields": 116,
+        "manifestSha256": "f0357cdfa2654694436161675bf411bae750b578a1ff83214ddb824d3ec32622"
+      }
+    },
+    "runs": {
+      "normal": {
+        "run": {
+          "command": [
+            "dotnet",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\discovery\\normal",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\initial-normal.json",
+            "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+            "19500"
+          ],
+          "rom": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+            "bytes": 524288,
+            "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+          },
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/initial-normal.json",
+            "bytes": 256,
+            "sha256": "a906c0d37836eef3bfd3c40c934e53c71b1ed057b21bbd095793c9df0ac44e0b"
+          },
+          "binaries": [
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+              "bytes": 52224,
+              "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+              "bytes": 288256,
+              "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+              "bytes": 978944,
+              "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+              "bytes": 105472,
+              "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+              "bytes": 28672,
+              "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+            }
+          ],
+          "exitCode": 0
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/before-fix/normal/runner.log",
+          "bytes": 305764,
+          "sha256": "75db0e5b1332e6a99146c09ee195e421eb69d9d2effe50c2ec44b94651c97a3c"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/before-fix/normal/capture-manifest.json",
+          "bytes": 209629,
+          "sha256": "51fe9bad95e5c21df1841bdf50f8935d84aae2ed1ca051a7a9c1063a7825d1c4"
+        }
+      },
+      "scalar": {
+        "run": {
+          "command": [
+            "dotnet",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\discovery\\scalar",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\initial-scalar.json",
+            "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+            "19500",
+            "--scalar"
+          ],
+          "rom": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+            "bytes": 524288,
+            "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+          },
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/initial-scalar.json",
+            "bytes": 256,
+            "sha256": "a906c0d37836eef3bfd3c40c934e53c71b1ed057b21bbd095793c9df0ac44e0b"
+          },
+          "binaries": [
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+              "bytes": 52224,
+              "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+              "bytes": 288256,
+              "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+              "bytes": 978944,
+              "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+              "bytes": 105472,
+              "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+              "bytes": 28672,
+              "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+            }
+          ],
+          "exitCode": 0
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/before-fix/scalar/runner.log",
+          "bytes": 305764,
+          "sha256": "75db0e5b1332e6a99146c09ee195e421eb69d9d2effe50c2ec44b94651c97a3c"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/before-fix/scalar/capture-manifest.json",
+          "bytes": 209629,
+          "sha256": "51fe9bad95e5c21df1841bdf50f8935d84aae2ed1ca051a7a9c1063a7825d1c4"
+        }
+      },
+      "native13": {
+        "run": {
+          "command": [
+            "dotnet",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+            "C:\\Data\\ROM\\Kickstart_13.rom",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\discovery\\native13",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\initial-native13.json",
+            "C:/Data/TestImages/North & South (1989)(Infogrames)(M5)[cr CP].zip#/North & South (1989)(Infogrames)(M5)[cr CP].adf",
+            "9500"
+          ],
+          "rom": {
+            "path": "C:/Data/ROM/Kickstart_13.rom",
+            "bytes": 262144,
+            "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+          },
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/initial-native13.json",
+            "bytes": 253,
+            "sha256": "6c666064b8637a9d967153a8c7e8a0c65b65cb7afd0c152f36ada8da5c6f9a5a"
+          },
+          "binaries": [
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+              "bytes": 52224,
+              "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+              "bytes": 288256,
+              "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/Copper68k.dll",
+              "bytes": 978944,
+              "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperDisk.dll",
+              "bytes": 105472,
+              "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/runner/CopperFloat.dll",
+              "bytes": 28672,
+              "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+            }
+          ],
+          "exitCode": 0
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/before-fix/native13/runner.log",
+          "bytes": 198132,
+          "sha256": "b87867a799eb3c35cac5534d7071180a0a087c6ea7a310fb09576f67f75fd2cc"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/before-fix/native13/capture-manifest.json",
+          "bytes": 135029,
+          "sha256": "f0357cdfa2654694436161675bf411bae750b578a1ff83214ddb824d3ec32622"
+        }
+      }
+    }
+  },
+  "pointerComparison": {
+    "record": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/pointer-comparison.json",
+      "bytes": 480,
+      "sha256": "9c05d1d09fe72c0e6a38f722492ad4042398c6cc9cb86fb62e8b6573991f4b9b"
+    },
+    "observations": {
+      "19000": {
+        "differentPixels": 194,
+        "bounds": [
+          458,
+          44,
+          479,
+          59
+        ]
+      },
+      "23500": {
+        "differentPixels": 154,
+        "bounds": [
+          634,
+          229,
+          655,
+          243
+        ]
+      },
+      "27000": {
+        "differentPixels": 194,
+        "bounds": [
+          410,
+          114,
+          431,
+          129
+        ]
+      },
+      "28000": {
+        "differentPixels": 182,
+        "bounds": [
+          800,
+          95,
+          821,
+          110
+        ]
+      }
+    },
+    "scope": "Pixel differences only within the cursor bounds; no assertion of before/after CPU-state identity."
+  }
+}
