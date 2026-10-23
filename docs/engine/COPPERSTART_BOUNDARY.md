@@ -22,6 +22,14 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Desert Strike follow-up](COPPERSTART_DESERT_STRIKE_2026-10-23.md) uses the
+later rebuilt ROM and frozen Nitro-qualified runtime for three-ADF startup,
+Air Superiority coastal flight, turning, chain-gun/Hydra use and map/status/mission
+interaction. It extends the earlier opening-flight/landing record; all three
+final reset runs match discovery and normal/scalar outputs match through 38000
+fields. No new correction was established. Enemy destruction, rescue and
+objective/campaign completion remain unqualified.
+
 The [Nitro replay](COPPERSTART_NITRO_2026-10-23.md) adds supplied 166-track
 extended-ADF boot, human-driver name/car selection and first-race acceleration
 and steering. CopperDisk now preserves additional cylinders and admits empty
@@ -271,8 +279,9 @@ reach the first campaign and respond to takeoff, near-ship flight and landing.
 No additional firmware or engine correction is needed. Each 44,000-field
 normal/scalar pair matches all 1,105 raw captures and four fingerprints;
 independent idle controls verify the flight response. Four exact-ROM frequency
-and stack/VBlank cases pass without skips. Weapons, combat, mission completion,
-later campaigns and save/load remain unverified.
+and stack/VBlank cases pass without skips. That record does not qualify weapons,
+combat, mission completion, later campaigns or save/load. The [October 23 follow-up](COPPERSTART_DESERT_STRIKE_2026-10-23.md)
+adds coastal flight and demonstrated chain-gun/Hydra use with the later ROM/runtime.
 
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,

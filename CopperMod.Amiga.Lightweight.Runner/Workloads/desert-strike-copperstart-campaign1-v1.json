@@ -1,0 +1,234 @@
+[
+  {
+    "frame": 5002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 5012
+  },
+  {
+    "frame": 9002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 9012
+  },
+  {
+    "frame": 12002,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 12012,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 13002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 13012
+  },
+  {
+    "frame": 14002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 14012
+  },
+  {
+    "frame": 15002,
+    "ejectAdf": true
+  },
+  {
+    "frame": 15122,
+    "diskPath": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf"
+  },
+  {
+    "frame": 19002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 19012
+  },
+  {
+    "frame": 21002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 21012
+  },
+  {
+    "frame": 24002,
+    "ejectAdf": true
+  },
+  {
+    "frame": 24122,
+    "diskPath": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 3 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 3 of 3).adf"
+  },
+  {
+    "frame": 28002,
+    "ejectAdf": true
+  },
+  {
+    "frame": 28122,
+    "diskPath": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf"
+  },
+  {
+    "frame": 32002,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 32202
+  },
+  {
+    "frame": 32302,
+    "keyCode": 345
+  },
+  {
+    "frame": 32312,
+    "keyCode": 473
+  },
+  {
+    "frame": 32602,
+    "mouseDeltaX": 90,
+    "mouseDeltaY": 110
+  },
+  {
+    "frame": 32612,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 32622,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 32802,
+    "mouseDeltaX": 100
+  },
+  {
+    "frame": 32812,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 32822,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 33002,
+    "keyCode": 345
+  },
+  {
+    "frame": 33012,
+    "keyCode": 473
+  },
+  {
+    "frame": 33102,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 33112
+  },
+  {
+    "frame": 33202,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 33702
+  },
+  {
+    "frame": 33802,
+    "joystickPort1": 17
+  },
+  {
+    "frame": 34402
+  },
+  {
+    "frame": 34422,
+    "keyCode": 345
+  },
+  {
+    "frame": 34432,
+    "keyCode": 473
+  },
+  {
+    "frame": 34602,
+    "keyCode": 345
+  },
+  {
+    "frame": 34612,
+    "keyCode": 473
+  },
+  {
+    "frame": 34652,
+    "joystickPort0": 145
+  },
+  {
+    "frame": 35152,
+    "joystickPort0": 128
+  },
+  {
+    "frame": 35162,
+    "keyCode": 345
+  },
+  {
+    "frame": 35172,
+    "keyCode": 473
+  },
+  {
+    "frame": 35602,
+    "keyCode": 345
+  },
+  {
+    "frame": 35612,
+    "keyCode": 473
+  },
+  {
+    "frame": 35802,
+    "joystickPort1": 17
+  },
+  {
+    "frame": 36002,
+    "joystickPort1": 2
+  },
+  {
+    "frame": 36502
+  },
+  {
+    "frame": 36602,
+    "joystickPort1": 8
+  },
+  {
+    "frame": 36662,
+    "joystickPort1": 1
+  },
+  {
+    "frame": 37162,
+    "joystickPort1": 17
+  },
+  {
+    "frame": 37362
+  },
+  {
+    "frame": 37402,
+    "keyCode": 320
+  },
+  {
+    "frame": 37412,
+    "keyCode": 448
+  },
+  {
+    "frame": 37422,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 37722
+  },
+  {
+    "frame": 37742,
+    "keyCode": 345
+  },
+  {
+    "frame": 37752,
+    "keyCode": 473
+  }
+]

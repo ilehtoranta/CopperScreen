@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Desert Strike supplied three-ADF set: Air Superiority mission loading and bounded gameplay",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23",
+  "copperScreenSourceBase": "d9bfc96b4c1f6bc9eb96969ac8a3f9d156a3bf5e",
+  "evidenceCheckoutHeadAtRecord": "77a6be9946fafc3673f07c819378cfab0cbfa41e",
+  "concurrentMergeReplayed": false,
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "copper68kChanged": false,
+  "retainedBinaryProvenance": "docs/engine/COPPERSTART_NITRO_2026-10-23.json",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0, supplied Desert Strike disks 1, 2, 3, then 2 again",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "1": {
+      "path": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip",
+      "bytes": 768610,
+      "sha256": "5112c18f10a7bb39fa518bcd50ce07453d066479e2233b5a10277624562b3151",
+      "entries": [
+        {
+          "entry": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "bytes": 901120,
+          "sha256": "6a961cc2aac90fd39ba8d8c1eb3020517aac201a05b00c34448834be52fd7f02"
+        }
+      ],
+      "selector": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf"
+    },
+    "2": {
+      "path": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).zip",
+      "bytes": 867767,
+      "sha256": "13ee029113463f60f052d125aa05ab45566e40af319f2ac1d354c992cb8726e3",
+      "entries": [
+        {
+          "entry": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf",
+          "bytes": 901120,
+          "sha256": "7ceb60b1fb3a9683dda55f4184410a31885d7fd79c5f37616bd7c0ad634662c6"
+        }
+      ],
+      "selector": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 2 of 3).adf"
+    },
+    "3": {
+      "path": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 3 of 3).zip",
+      "bytes": 827247,
+      "sha256": "915c7bf46a440f2bac2010a27893adf5e6d55bdc0601aa5cc07d15fc5c86fbff",
+      "entries": [
+        {
+          "entry": "Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 3 of 3).adf",
+          "bytes": 901120,
+          "sha256": "76912e3cdfc26724ebcf77faff3e1dd2c119eaa93b54135b3df5f0268b9ad2b5"
+        }
+      ],
+      "selector": "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 3 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 3 of 3).adf"
+    }
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/desert-strike-copperstart-campaign1-v1.json",
+    "bytes": 3556,
+    "sha256": "06400c2dedfb3084304ba143a3320363559ce6c0b3afc6952c71da59034c2587"
+  },
+  "inputEvents": 61,
+  "identicalPhysicalInputAcrossAllRuns": true,
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "38000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/complete-input.json",
+          "bytes": 3556,
+          "sha256": "06400c2dedfb3084304ba143a3320363559ce6c0b3afc6952c71da59034c2587"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/qualified/normal/runner.log",
+        "bytes": 420211,
+        "sha256": "4a0af409796d0515784eb61dcf0f510c7fd7f6c99072522be129009bde3c4044"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/qualified/normal/capture-manifest.json",
+        "bytes": 284229,
+        "sha256": "810202ac1b109319dcfac879cc9642f4a3260c5531a5d485fe72d4cb2e96cd25"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "38000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/complete-input.json",
+          "bytes": 3556,
+          "sha256": "06400c2dedfb3084304ba143a3320363559ce6c0b3afc6952c71da59034c2587"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 420211,
+        "sha256": "4a0af409796d0515784eb61dcf0f510c7fd7f6c99072522be129009bde3c4044"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/qualified/scalar/capture-manifest.json",
+        "bytes": 284229,
+        "sha256": "810202ac1b109319dcfac879cc9642f4a3260c5531a5d485fe72d4cb2e96cd25"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "38000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/complete-input.json",
+          "bytes": 3556,
+          "sha256": "06400c2dedfb3084304ba143a3320363559ce6c0b3afc6952c71da59034c2587"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/qualified/native13/runner.log",
+        "bytes": 420274,
+        "sha256": "1b4ef64f722a7509d31f891e6c18fdeeb882bb18d2098c1302ebff6fa3baaa35"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/qualified/native13/capture-manifest.json",
+        "bytes": 284229,
+        "sha256": "9986a29a54ede75eea173bfe0708264fe899b3c4e7352b8916e6fc5c0b81e081"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 1905,
+      "fields": 381,
+      "lastField": 38000,
+      "unsupported": [],
+      "nonzeroPcmFields": 231,
+      "manifestSha256": "810202ac1b109319dcfac879cc9642f4a3260c5531a5d485fe72d4cb2e96cd25"
+    },
+    "scalar": {
+      "files": 1905,
+      "fields": 381,
+      "lastField": 38000,
+      "unsupported": [],
+      "nonzeroPcmFields": 231,
+      "manifestSha256": "810202ac1b109319dcfac879cc9642f4a3260c5531a5d485fe72d4cb2e96cd25"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native13": {
+      "files": 1905,
+      "fields": 381,
+      "lastField": 38000,
+      "unsupported": [],
+      "nonzeroPcmFields": 234,
+      "manifestSha256": "9986a29a54ede75eea173bfe0708264fe899b3c4e7352b8916e6fc5c0b81e081"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/discovery/normal/runner.log",
+        "bytes": 420589,
+        "sha256": "5d506e606daff9b558066536beb5b071fa5fbbb4901c1e150f6256ba8b1eb7ee"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/discovery/normal/capture-manifest.json",
+        "bytes": 284229,
+        "sha256": "810202ac1b109319dcfac879cc9642f4a3260c5531a5d485fe72d4cb2e96cd25"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 420589,
+        "sha256": "5d506e606daff9b558066536beb5b071fa5fbbb4901c1e150f6256ba8b1eb7ee"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/discovery/scalar/capture-manifest.json",
+        "bytes": 284229,
+        "sha256": "810202ac1b109319dcfac879cc9642f4a3260c5531a5d485fe72d4cb2e96cd25"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-desertstrike-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).zip#/Desert Strike - Return to the Gulf (1993)(Electronic Arts)(Disk 1 of 3).adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "c9cdcbfff1d8aec134c3cbbd1e13cebc9dcc93e118a7c7a9a82d4691346fd323"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "9a6ac6c4bc4f07383d73e7d6a64a8c1597d84ae8c16f0e7b71969167d0e9ab37"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/discovery/native13/runner.log",
+        "bytes": 420652,
+        "sha256": "028e1503a093be878156e5992438cfd7b2ecad322e29d82ad02f81d4850fad15"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/discovery/native13/capture-manifest.json",
+        "bytes": 284229,
+        "sha256": "9986a29a54ede75eea173bfe0708264fe899b3c4e7352b8916e6fc5c0b81e081"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 1905,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches its independently hashed discovery manifest"
+    },
+    "scalar": {
+      "files": 1905,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches its independently hashed discovery manifest"
+    },
+    "native13": {
+      "files": 1905,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches its independently hashed discovery manifest"
+    }
+  },
+  "harness": {
+    "purpose": "Functional native-media replay; not a throughput harness",
+    "unchangedFrom": "docs/engine/COPPERSTART_NITRO_2026-10-23.json",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "buildRerun": false,
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "qualifiedRuntimeAndRomUnchanged": true,
+    "productionSourceAdvancedConcurrently": true,
+    "concurrentSourceMergeReplayed": false,
+    "productionBuildRerun": false,
+    "engineTestsRerun": false,
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true,
+    "existingPerformanceWorkloadsUnchanged": true
+  },
+  "controlReference": {
+    "url": "https://openretro.org/file/b7466131a063d2c4f2d24ef88570bd234d27437e/Manual.pdf",
+    "description": "Preserved publisher Amiga manual: disk swapping, main menu/campaign selection, joystick flight/fire, Space weapon change, F10/0 map and paused map functions."
+  },
+  "observations": [
+    {
+      "fields": [
+        1000,
+        3000,
+        5000
+      ],
+      "milestone": "Electronic Arts logo, Desert Strike title and animated Apache introduction"
+    },
+    {
+      "fields": [
+        8000,
+        10000,
+        11000
+      ],
+      "milestone": "Animated story scenes and coherent text"
+    },
+    {
+      "fields": [
+        13000,
+        14000
+      ],
+      "milestone": "Disk-two prompt after the mouse click at 12002"
+    },
+    {
+      "fields": [
+        17000,
+        18000
+      ],
+      "milestone": "Main menu after DF0 replacement with disk two; default Big Dave, joystick, sound on and movies on"
+    },
+    {
+      "fields": [
+        21000
+      ],
+      "milestone": "Air Superiority briefing after campaign selection"
+    },
+    {
+      "fields": [
+        22000,
+        23000
+      ],
+      "milestone": "Disk-three prompt after dismissing the briefing"
+    },
+    {
+      "fields": [
+        26000,
+        27000
+      ],
+      "milestone": "Apache loading illustration, followed by another disk-two prompt"
+    },
+    {
+      "fields": [
+        30000,
+        31000,
+        32000
+      ],
+      "milestone": "Mission world with Apache on the frigate and animated sea; takeoff is not yet established"
+    },
+    {
+      "fields": [
+        32600
+      ],
+      "milestone": "F10 opens the radar-sites map; guns 1178, Hydras 38, Hellfires 8, lives 3, load 0, fuel 100, power 600 and score 0"
+    },
+    {
+      "fields": [
+        32800
+      ],
+      "milestone": "Mouse-selected status panel shows campaign objectives"
+    },
+    {
+      "fields": [
+        33000
+      ],
+      "milestone": "Mouse-selected mission panel shows radar-site image, armour and objective text"
+    },
+    {
+      "fields": [
+        33400,
+        33800,
+        34200,
+        35000
+      ],
+      "milestone": "Earlier forward/fire and alternate-port input trials leave the Apache on the frigate; no flight or weapon-use success claimed for these trials"
+    },
+    {
+      "fields": [
+        36400,
+        36600
+      ],
+      "milestone": "Reverse flight at 36002 clears the frigate; visible airborne Apache and shadow over the sea"
+    },
+    {
+      "fields": [
+        37000,
+        37400
+      ],
+      "milestone": "Right turn and forward flight reach the coast; the chain gun is fired during approach"
+    },
+    {
+      "fields": [
+        37600
+      ],
+      "milestone": "Space selects Hydras; on-screen Hydras Armed message during firing"
+    },
+    {
+      "fields": [
+        38000
+      ],
+      "milestone": "F10 returns to the mission panel; guns 1161, Hydras 37, Hellfires 8, fuel 89, power 600, lives 3, load 0 and score 0"
+    }
+  ],
+  "findings": [
+    "No new CopperStart, CPU, disk or engine correction established. The unchanged rebuilt ROM and Nitro-qualified runtime reach bounded mission gameplay.",
+    "All three supplied ADFs are used through normal read-only DF0 replacements: disk 1 to 2, 2 to 3, then 3 back to 2. No guest-memory patch or state restoration.",
+    "Early forward/fire inputs left the helicopter on the frigate. A read-only canonical CPU trace confirms that the guest received input 0x41. Reverse flight at 36002 clears the deck and permits departure. This is not treated as a replacement-ROM input failure.",
+    "WinUAE 6.0.3 with native Kickstart 1.3 and the same ADF set reproduces the landed start, then departs with reverse flight. This separate interactive diagnostic is not a field-matched replay or physical hardware proof.",
+    "Live F10 map entry/exit, mouse selection of status/mission panels, visible helicopter and shadow, scenery scrolling, turning, chain-gun consumption, Space weapon selection and Hydra consumption work under both ROMs.",
+    "The final map shows fuel 89, power 600, guns 1161, Hydras 37 and Hellfires 8. Enemy destruction, rescue and objective completion are not established."
+  ],
+  "limits": [
+    "Supplied unlabeled three-ADF set only; archive labels do not establish pristine original-media or protection qualification.",
+    "Bounded Air Superiority mission loading and initial flight/weapons/map interactions only. Combat kills, rescue, landing/refuelling, objective or campaign completion, later campaigns and password reload remain unqualified.",
+    "No Hellfire launch, alternate co-pilot, mouse/keyboard flight control or every sound/movie setting qualified.",
+    "Nonzero PCM is sample presence, not listening or audio-fidelity verification.",
+    "Native Kickstart comparisons use the same engine; the separate WinUAE diagnostic is unmatched and neither is a physical hardware oracle.",
+    "No host-throughput measurement, full hardware-timing claim or change to historical performance inputs, fingerprints or acceptance dispositions."
+  ],
+  "diagnostics": {
+    "inputTrace": {
+      "source": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/trace/Program.cs",
+          "bytes": 1724,
+          "sha256": "4eb8b6427e7a27ca750d29fd0abe622729bc8b4d6ea9ae16f33a74868f78afe1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/trace/Trace.csproj",
+          "bytes": 820,
+          "sha256": "9af99bc0d8be775dfd5435725fcfbfabd69bf13735aa04c9aef33af3fb0cad8b"
+        }
+      ],
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/trace-input.json",
+        "bytes": 2131,
+        "sha256": "04b675b9678c4aa65f5fa4c03c7949527725c6f12616a6e88a46ba5d049bda0b"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/trace.log",
+        "bytes": 4331,
+        "sha256": "fdac72a78f9120e3c6c20199f584b8d7b490062122b34d5a73eb8348abf397f1"
+      },
+      "description": "Native 1.3 reset replay to 36000 followed by three fields of canonical scalar instruction stepping; read-only register/RAM observations confirm input 0x41 reaches the guest while still on the frigate. Not the qualification harness."
+    },
+    "reference": {
+      "binary": {
+        "path": "C:/Program Files/WinUAE/winuae64.exe",
+        "bytes": 29372368,
+        "sha256": "f3e55700fd811cd543fdfebf6c3221cfaa3d385828f110c6d3eb534c64503123"
+      },
+      "version": "6.0.3",
+      "configuration": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/reference.uae",
+        "bytes": 675,
+        "sha256": "672681c535f803aaddedb35edb705ec01a834dface19ace6028f7bddf5dcbe22"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-desertstrike-2026-10-23/winuae-reference.log",
+        "bytes": 26674,
+        "sha256": "95fbf2ae292c9ad95005dcd5827aba161acbf0f983ac3d1dcb98048f503549e8"
+      },
+      "description": "Interactive native 1.3 diagnostic with the same three ADFs: forward input leaves the Apache on the frigate; reverse flight departs and reaches land. No field-matched input or raster comparison.",
+      "notes": [
+        "One startup IPC attempt preceded pipe availability and did not send its event; warp was sent again after startup",
+        "Three unrecognized presentation/pause configuration entries are visible in the log; they are not treated as applied settings",
+        "No guest memory writes or state restore; owned reference process closed after use"
+      ],
+      "stoppedAfterUse": true
+    }
+  }
+}
