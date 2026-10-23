@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Tower Assault SPS 279 original disk swap, crash-site play and Civilian Zone 1 transition",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23",
+  "copperScreenSourceBase": "08b2a061bd24fb6058b785d444a157a44a5f7af3",
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "engineProvenance": "docs/engine/WORMS_SPRITE_DMA_2026-10-22.json",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "read-only original Tower Assault Disk 1, then Disk 2; Disk 3 remains unmounted",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip",
+      "bytes": 2938707,
+      "sha256": "52dc0dba381eaa53dc671e83993a5fdd978df4558891003856b66c58c71879f4"
+    },
+    "entries": [
+      {
+        "entry": "AlienBreedTowerAssault_Disk1.ipf",
+        "bytes": 1139240,
+        "sha256": "ec181b9c9f14d593da2c96d751286c5a629eabcf90b66a4d7114ef2fabe245f6",
+        "sha1": "87c21306c4cded3dbe4c173b2cc6b116f6475aee"
+      },
+      {
+        "entry": "AlienBreedTowerAssault_Disk2.ipf",
+        "bytes": 1139240,
+        "sha256": "256b2fbdf5242342cfb0959f5ad3b8fb837adb418d23316b2ae7b085c5158827",
+        "sha1": "a7ef1a3b854c7487852cf1316ccb57363db2ce05"
+      },
+      {
+        "entry": "AlienBreedTowerAssault_Disk3.ipf",
+        "bytes": 1140380,
+        "sha256": "9c32244beb84dbb3e9b1a8fc4dc1497596136800ba6a61719b627da1432c1faf",
+        "sha1": "d816de95d7ffff76b3d72e5e28b6648fad0ca4d3"
+      }
+    ]
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/tower-assault-copperstart-civilian-v1.json",
+    "bytes": 2923,
+    "sha256": "c18b7e5fc358a0d195c1892b90023e540f51692bd011045db22750fc05e7f643"
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+          "28000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/complete-input.json",
+          "bytes": 2923,
+          "sha256": "c18b7e5fc358a0d195c1892b90023e540f51692bd011045db22750fc05e7f643"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/qualified/normal/runner.log",
+        "bytes": 310343,
+        "sha256": "6c30cb5a18bc0356cfae64b9b89eae173203295a5bcae09faf061d1f84c99377"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+          "28000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/complete-input.json",
+          "bytes": 2923,
+          "sha256": "c18b7e5fc358a0d195c1892b90023e540f51692bd011045db22750fc05e7f643"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 310343,
+        "sha256": "6c30cb5a18bc0356cfae64b9b89eae173203295a5bcae09faf061d1f84c99377"
+      }
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\qualified\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+          "28000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/complete-input.json",
+          "bytes": 2923,
+          "sha256": "c18b7e5fc358a0d195c1892b90023e540f51692bd011045db22750fc05e7f643"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/qualified/native31/runner.log",
+        "bytes": 310653,
+        "sha256": "11a625c7aaa6291a6c0f412894811250d22e4519077ae7ef0a78ae7eb0638e5b"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 1405,
+      "fields": 281,
+      "lastField": 28000,
+      "unsupported": [],
+      "nonzeroPcmFields": 188,
+      "manifestSha256": "cf0cf6f780150ba12debd5ca0dd23bd7ca8fd963635a1cc749b23fa7bbe132f5"
+    },
+    "scalar": {
+      "files": 1405,
+      "fields": 281,
+      "lastField": 28000,
+      "unsupported": [],
+      "nonzeroPcmFields": 188,
+      "manifestSha256": "cf0cf6f780150ba12debd5ca0dd23bd7ca8fd963635a1cc749b23fa7bbe132f5"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native31": {
+      "files": 1405,
+      "fields": 281,
+      "lastField": 28000,
+      "unsupported": [],
+      "nonzeroPcmFields": 188,
+      "manifestSha256": "720c5bb5103eba90c1cd81799cdd717d57f1898b88b220a2de997e60a700cf87"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/discovery/normal/runner.log",
+        "bytes": 310821,
+        "sha256": "4786aab1ed2d38f01ae9a1981d665690f5a0a7497a79b7a446659c0c1274a571"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 310821,
+        "sha256": "4786aab1ed2d38f01ae9a1981d665690f5a0a7497a79b7a446659c0c1274a571"
+      }
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\discovery\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-tower-assault-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/AlienBreed-TowerAssault_279.zip#/AlienBreedTowerAssault_Disk1.ipf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-tower-assault-2026-10-23/discovery/native31/runner.log",
+        "bytes": 311131,
+        "sha256": "30fc61070b0637f970aa7b5ef794d717733458d702683fda3f2f0c92cdbb4dea"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 1405,
+      "identical": true
+    },
+    "scalar": {
+      "files": 1405,
+      "identical": true
+    },
+    "native31": {
+      "files": 1405,
+      "identical": true
+    }
+  },
+  "harness": {
+    "purpose": "Functional media replay; not a throughput harness",
+    "unchangedFrom": "docs/engine/COPPERSTART_F17_2026-10-23.json",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "buildRerun": false,
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "productionAndRomUnchanged": true,
+    "productionBuildRerun": false,
+    "engineTestsRerun": false,
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true,
+    "pauseRasterIdentical": [
+      17800,
+      18000
+    ]
+  },
+  "controlReference": {
+    "url": "https://www.lemonamiga.com/doc/alien-breed-tower-assault/50",
+    "description": "Preserved manual; 1 MiB Amiga, automatic chipset detection, movement/fire, pause and PDC controls"
+  },
+  "mediaAdmissionReference": "https://github.com/mamedev/mame/blob/master/hash/amigaocs_flop.xml",
+  "observations": {
+    "disk2Prompt": 4000,
+    "ejectDisk1": 5002,
+    "insertDisk2": 5202,
+    "titleHighScores": 10000,
+    "keyboardControls": 11000,
+    "options": 13000,
+    "crashLandingBriefing": 15000,
+    "crashSiteGameplay": 16000,
+    "movementAndPickups": 17200,
+    "mapKeyNoVisibleMapInOutdoorState": [
+      17400,
+      17600
+    ],
+    "pause": [
+      17800,
+      18000
+    ],
+    "resumeAndFire": 18100,
+    "firstFencePassed": 18700,
+    "civilianFacilityPdcMessage": 19500,
+    "pdcReturnToGameplay": 20000,
+    "civilianZone1Briefing": 23000,
+    "postSwapContinueFire": 8002,
+    "civilianZone1Gameplay": 25000,
+    "civilianZone1Pdc": 25700,
+    "indoorMovementAndFire": 26200,
+    "submittedSReopensCurrentPdc": 26500,
+    "continuedIndoorGameplay": 28000
+  },
+  "limits": [
+    "Civilian Zone 1 completion and later campaign progression unqualified",
+    "Disk 3 and AGA behavior unqualified",
+    "M did not display a map in the tested outdoor state under either ROM; hand-map coverage unqualified",
+    "Two-player, saving and full shop/weapon coverage unqualified",
+    "Nonzero PCM is sample presence, not listening or fidelity",
+    "Native Kickstart comparison is on the same emulator, not a physical hardware oracle",
+    "No host throughput or complete hardware timing acceptance claim",
+    "Submitted S reopened the current PDC text under both ROMs; statistics-screen and full keyboard mapping coverage unqualified"
+  ]
+}

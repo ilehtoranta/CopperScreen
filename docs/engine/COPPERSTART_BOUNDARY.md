@@ -22,6 +22,12 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Tower Assault replay](COPPERSTART_TOWER_ASSAULT_2026-10-23.md) adds
+original SPS 279 disk swapping, crash-site traversal, movement/fire,
+pause/resume, PDC messages and entry into Civilian Zone 1 with indoor gameplay.
+No new ROM or engine correction was established. Zone completion, later
+progression and the unverified map/statistics functions remain explicit limits.
+
 The [Alien Breed SE92 replay](COPPERSTART_ALIEN_BREED_SE92_2026-10-23.md)
 adds original SPS 615 disk swapping, Deck One movement/fire, pickups, doors,
 the Intex mission-objective round trip and storage-area enemy contact.
