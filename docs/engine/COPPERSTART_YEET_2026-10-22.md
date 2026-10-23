@@ -1,5 +1,7 @@
 # YEET: packed startup and prologue
 
+The [subsequent main integration and first-puzzle qualification](COPPERSTART_YEET_GAMEPLAY_2026-10-23.md) supersedes the integration/gameplay limits below. This record preserves the original pinned candidate and its results.
+
 YEET 1.0.4 now boots, displays its menu and advances through the prologue on a
 fresh 512 KiB CopperStart ROM containing the Miami Chase fix. The idle control
 stays at the menu. Puzzle boards, map selection and game completion remain

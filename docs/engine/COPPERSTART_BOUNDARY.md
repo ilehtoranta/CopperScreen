@@ -22,11 +22,14 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM compatibility — 2026-10-15
 
-The [2026-10-22 YEET qualification](COPPERSTART_YEET_2026-10-22.md) adds a pinned
-fresh-ROM menu/prologue replay and producer fixes for packed public hunks,
-native input/library services, stack lifetimes and direct display takeover.
-Its source PR requires integration with concurrently merged producer changes;
-the record does not qualify moving main or puzzle gameplay.
+The [2026-10-23 YEET gameplay qualification](COPPERSTART_YEET_GAMEPLAY_2026-10-23.md)
+integrates the producer's main changes and verifies the first puzzle board,
+rune push and reset. It retains the packed public-hunk and native service
+corrections, fixes direct Copper takeover and reuses the boot Workbench screen,
+and preserves Chip storage by giving CPU-only shell workspaces ordinary public
+memory. Later rounds and levels remain unverified. The
+[earlier prologue record](COPPERSTART_YEET_2026-10-22.md) retains its original
+candidate and evidence.
 
 The separate CopperStart repository now provides a native disk-boot ROM with
 bounded DOS startup and a console. Its prebuilt October 13 image was tested on
