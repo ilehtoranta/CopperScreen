@@ -1,0 +1,633 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Major Motion supplied ADF: DOS boot, one-player driving/fire, pause, mission abort/restart and sound toggle",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23",
+  "copperScreenSourceBase": "38ecb3812b6aa3110864cd6eefa3295cad272539",
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "engineProvenance": "docs/engine/WORMS_SPRITE_DMA_2026-10-22.json",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only supplied Major Motion ADF; no swaps",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip",
+      "bytes": 186306,
+      "sha256": "7edaca73abe7381c987e90d01f1a8d9954e40636b0fe1ce6c30e9d37eae325ef"
+    },
+    "entries": [
+      {
+        "entry": "Major Motion (1988)(Microdeal).adf",
+        "bytes": 901120,
+        "sha256": "3dba00f0525c3599ed530c359469ff4e6d7555cda3b752d2d95e84aa02fd756e"
+      }
+    ],
+    "admission": "Supplied single ADF; same identity as the earlier native corpus. Filename alone does not certify pristine original protection behavior."
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/major-motion-copperstart-play-v1.json",
+    "bytes": 1493,
+    "sha256": "3494271df36564f79897290bc52bb0136774e645613508f3fbe07a0958fa5769"
+  },
+  "inputEvents": 29,
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "42400"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/complete-input.json",
+          "bytes": 1493,
+          "sha256": "3494271df36564f79897290bc52bb0136774e645613508f3fbe07a0958fa5769"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/qualified/normal/runner.log",
+        "bytes": 464436,
+        "sha256": "95a2fc2ce70ea010f3bb36e0e6c7a7add194e4fa917e1205ea11fcb66f65d2a3"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "42400",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/complete-input.json",
+          "bytes": 1493,
+          "sha256": "3494271df36564f79897290bc52bb0136774e645613508f3fbe07a0958fa5769"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 464436,
+        "sha256": "95a2fc2ce70ea010f3bb36e0e6c7a7add194e4fa917e1205ea11fcb66f65d2a3"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "42400"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/complete-input.json",
+          "bytes": 1493,
+          "sha256": "3494271df36564f79897290bc52bb0136774e645613508f3fbe07a0958fa5769"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/qualified/native13/runner.log",
+        "bytes": 469519,
+        "sha256": "02acbe306aae3143ac3e10367c152f56df9a190b04d456fd54decd5cf00e0ff7"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 2125,
+      "fields": 425,
+      "lastField": 42400,
+      "unsupported": [],
+      "nonzeroPcmFields": 174,
+      "manifestSha256": "80d700cec9578952ed90c5a167025d20b2d6e54e5dbb4aa02d84207650e4cbf6"
+    },
+    "scalar": {
+      "files": 2125,
+      "fields": 425,
+      "lastField": 42400,
+      "unsupported": [],
+      "nonzeroPcmFields": 174,
+      "manifestSha256": "80d700cec9578952ed90c5a167025d20b2d6e54e5dbb4aa02d84207650e4cbf6"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native13": {
+      "files": 2125,
+      "fields": 425,
+      "lastField": 42400,
+      "unsupported": [],
+      "nonzeroPcmFields": 382,
+      "manifestSha256": "60789158b482a6b2dc97b3f0d176c6c1188ea21ed24a36472dbf781090ea0fc9"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\initial.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/discovery/normal/runner.log",
+        "bytes": 464675,
+        "sha256": "43d9c078b4bb797b470b9f69176257e4747d39366711ee8769e32cf73b3a9051"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\initial.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 464675,
+        "sha256": "43d9c078b4bb797b470b9f69176257e4747d39366711ee8769e32cf73b3a9051"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\initial.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/discovery/native13/runner.log",
+        "bytes": 469758,
+        "sha256": "c3a8f1033952bd4f1163ba7b7c0569b35f8ddeaa31c40f86b61ff9476c2c0425"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 2125,
+      "identical": true
+    },
+    "scalar": {
+      "files": 2125,
+      "identical": true
+    },
+    "native13": {
+      "files": 2125,
+      "identical": true
+    }
+  },
+  "harness": {
+    "purpose": "Functional media replay; not a throughput harness",
+    "unchangedFrom": "docs/engine/COPPERSTART_F17_2026-10-23.json",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "buildRerun": false,
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "productionAndRomUnchanged": true,
+    "productionBuildRerun": false,
+    "engineTestsRerun": false,
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true,
+    "pauseRasterIdentical": [
+      39400,
+      39600
+    ],
+    "pauseRasterSha256": {
+      "normal": "3a5c0f4a2d80a902b439776586c9a6de65751359aed6ac5648b6d6796c14a826",
+      "scalar": "3a5c0f4a2d80a902b439776586c9a6de65751359aed6ac5648b6d6796c14a826",
+      "native13": "7a49909ff73ae634e5a038a82362cd596a12df305810129093c989ff74f6b8f0"
+    },
+    "muteSampleFields": [
+      41600,
+      41800
+    ],
+    "unmuteNonzeroPcmField": 42000
+  },
+  "controlReference": {
+    "url": "https://www.lemonamiga.com/doc/major-motion/1039",
+    "description": "Preserved manual: joystick movement/fire, F2 pause, double-F1 abort and F3 sound toggle"
+  },
+  "observations": {
+    "loadingProgress": [
+      {
+        "field": 5000,
+        "fileHeaderBlock": 881,
+        "fileBytes": 102680,
+        "filePosition": 45056
+      },
+      {
+        "field": 16000,
+        "fileHeaderBlock": 881,
+        "fileBytes": 102680,
+        "filePosition": 96256
+      }
+    ],
+    "copperStartCleanTitle": 25000,
+    "native13CleanTitle": 5000,
+    "onePlayerKey": 36002,
+    "streetGameplay": 38000,
+    "leftMouseFire": 38002,
+    "accelerateAndFire": [
+      38402,
+      38802
+    ],
+    "leftSteering": [
+      38802,
+      38952
+    ],
+    "rightSteering": [
+      38952,
+      39102
+    ],
+    "pause": [
+      39400,
+      39600
+    ],
+    "resume": 39602,
+    "brake": [
+      39622,
+      39822
+    ],
+    "abortKeys": [
+      39832,
+      40032
+    ],
+    "titleAfterAbort": 40400,
+    "restartOnePlayer": 40402,
+    "restartedGameplay": 41400,
+    "mute": 41402,
+    "unmute": 41802,
+    "visibleMachineGunShots": 42000,
+    "continuedGameplay": 42400
+  },
+  "native31Diagnostic": {
+    "run": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\discovery\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-major-motion-2026-10-23\\initial.json",
+          "C:/Data/TestImages/OK/Major Motion (1988)(Microdeal).zip#/Major Motion (1988)(Microdeal).adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-major-motion-2026-10-23/discovery/native31/runner.log",
+        "bytes": 400412,
+        "sha256": "89330cc6500f2a219222f29fb0d43067dd898c583480b91853e2c88fc6058840"
+      }
+    },
+    "captures": {
+      "files": 1805,
+      "fields": 361,
+      "lastField": 36000,
+      "unsupported": [],
+      "nonzeroPcmFields": 331,
+      "manifestSha256": "1185583b10e71ed5c3a1b9a53da7377c5a10ad7d52d0e5dbb21c9d92ee878981"
+    },
+    "qualification": "Diagnostic only; no input through field 36000. Title/attract graphics are corrupt on this profile. Cause not assigned to ROM, game or engine; not used as the clean visual control.",
+    "reviewedFields": [
+      3000,
+      5000,
+      7000,
+      16000,
+      24000
+    ]
+  },
+  "limits": [
+    "Opening missions only; no complete route, mission or full-game completion claim",
+    "CopperStart loading is substantially slower than Kickstart 1.3; this is a remaining guest loading-performance limitation, not a boot hang",
+    "Pristine original media and protection behavior remain unqualified",
+    "Weapon-truck boarding/upgrades, additional weapons, water sections, two-player mode, key reassignment and persistent saving remain unqualified",
+    "Kickstart 3.1 graphics corruption remains unresolved and separate from the clean CopperStart/Kickstart 1.3 replay",
+    "Nonzero PCM is sample presence, not listening or fidelity",
+    "Native Kickstart comparison is on the same emulator, not a physical hardware oracle",
+    "No host throughput or complete hardware timing acceptance claim"
+  ]
+}

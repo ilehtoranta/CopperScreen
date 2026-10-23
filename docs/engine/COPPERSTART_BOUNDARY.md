@@ -22,6 +22,12 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Major Motion replay](COPPERSTART_MAJOR_MOTION_2026-10-23.md) adds supplied
+single-ADF DOS boot, one-player driving/fire, pause/resume, mission abort and
+restart, and sound toggling against a clean Kickstart 1.3 reference. No ROM or
+engine correction was established. Slow CopperStart loading, a separate
+Kickstart 3.1 graphics failure and incomplete mission coverage remain explicit.
+
 The [Miami Chase replay](COPPERSTART_MIAMI_CHASE_2026-10-23.md) adds supplied
 mixed-release ADF disk swapping, one-player street gameplay, driving/fire,
 police-stop dialogue, radar, pause/resume and return to the main menu.
