@@ -43,7 +43,7 @@ saved-game load, guest-state restoration or disk swap is used.
 | 12400 | Held Up increases speed and advances automatic gears; the road and scenery scroll. |
 | 12600, 12800 | Right/left steering changes car/road alignment; roadside contact and speed reduction are visible. |
 | 13200 | Back braking reduces the MPH display to zero. |
-| 13800, 14000 | Motion continues after a short F10 tap. This does not establish pause. |
+| 13800, 14000 | Motion continues after a short Help tap (raw `$5F`). This does not establish pause. |
 | 14600, 14800 | Motion also continues after a short P tap; pause remains unqualified under both ROMs. |
 | 16000 | Escape returns to the car presentation. |
 | 17000, 17600 | Re-entry through the instructions and options; Easy/one player/computerised gears are retained. |
@@ -59,11 +59,17 @@ braking, versus alternative Fire and Fire-with-Back. That screen states that
 manual gear-change combinations have no effect with computerised gears
 selected; manual gear behavior is not qualified here.
 
-F10 and P are retained as attempted inputs, without counting them as
+Help and P are retained as attempted inputs, without counting them as
 successful pause checks or assigning a CopperStart-specific defect. Escape
 works in both ROMs. Later speeds, race positions and collision phases differ
 between the ROMs, so cross-ROM image/state equality is not claimed. Neither
 attempt completes a lap or race.
+
+The Lotus III follow-up corrected the original F10 label: the recorded raw
+key `$5F` is Help; F10 is `$59` in the host's
+[Amiga raw-key mapping](../../CopperScreen/CopperScreenMachineProfileTypes.cs). The
+executed workload and all historical capture hashes are unchanged. F10 was
+not exercised in this Lotus Esprit Turbo Challenge replay.
 
 ## Verification and provenance
 

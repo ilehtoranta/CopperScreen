@@ -496,8 +496,8 @@
     "normalSteering": 12600,
     "roadsideContact": 12800,
     "normalBrakeStop": 13200,
-    "f10Tap": 13602,
-    "continuedMotionAfterF10": [
+    "helpTap": 13602,
+    "continuedMotionAfterHelp": [
       13800,
       14000
     ],
@@ -519,7 +519,7 @@
   },
   "limits": [
     "Supplied [cr Angels][b doscopy] ADF only; pristine original media and protection behavior remain unqualified",
-    "Short F10 and P taps did not establish a paused state under either ROM; pause remains unqualified",
+    "Short Help (raw 0x5F) and P taps did not establish a paused state under either ROM; pause remains unqualified. The original F10 label was corrected during the Lotus III follow-up; actual inputs and capture hashes are unchanged. F10 (raw 0x59) was not exercised in this replay.",
     "No completed lap, race, championship or Lotus License claim",
     "Later circuits, practice, manual gear changes, mouse controls, two-player mode, pit/refuelling behavior and persistent saving remain unqualified",
     "Later race positions, speeds and collision phases differ between ROMs; cross-ROM pixel/state equality is not claimed",

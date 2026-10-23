@@ -22,6 +22,14 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Lotus III replay](COPPERSTART_LOTUS3_2026-10-23.md) adds supplied
+FLT / Crack Inc two-ADF boot, disk swapping and player-controlled one-player
+Arcade racing with automatic gears, steering, braking, F10 pause/resume,
+a Turbo Zone and timeout through scores back to setup. Native Kickstart
+1.3 needs one extra Fire pair before aligned setup; later input is shared.
+No new ROM or engine correction was established. Original-media behavior,
+later stages and successful race completion remain unqualified.
+
 The [Lotus Esprit Turbo Challenge replay](COPPERSTART_LOTUS1_2026-10-23.md)
 adds supplied Angels `[b doscopy]` ADF boot, options, soundtrack selection,
 normal and alternative driving controls, automatic gears, braking and Escape
