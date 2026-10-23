@@ -22,6 +22,12 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Miami Chase replay](COPPERSTART_MIAMI_CHASE_2026-10-23.md) adds supplied
+mixed-release ADF disk swapping, one-player street gameplay, driving/fire,
+police-stop dialogue, radar, pause/resume and return to the main menu.
+No new ROM or engine correction was established. Pristine original-media
+protection behavior and mission completion remain unqualified.
+
 The [Tower Assault replay](COPPERSTART_TOWER_ASSAULT_2026-10-23.md) adds
 original SPS 279 disk swapping, crash-site traversal, movement/fire,
 pause/resume, PDC messages and entry into Civilian Zone 1 with indoor gameplay.
