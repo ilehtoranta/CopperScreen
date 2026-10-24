@@ -1,0 +1,979 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Lotus Turbo Challenge2: opening checkpoint, password-selected Night Course and pause/resume",
+  "status": "PASS for bounded checkpoint1 and password-selected Night Course; natural course completion unqualified",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24",
+  "copperScreenEvidenceParent": "efe0b0063b552d57eba0fb8121a8d35c12361367",
+  "runtimeSource": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+  "runtimeRebuilt": false,
+  "copperStartProducer": "0057fb9c38d82d38122ddf69a4aa960573beedd7",
+  "compiledGuestRootProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+  },
+  "romRebuiltThisTurn": false,
+  "retainedRebuiltRom": true,
+  "romChanged": false,
+  "engineChanged": false,
+  "cpuChanged": false,
+  "firmwareFixEstablished": false,
+  "retainedProducerQualification": {
+    "record": "COPPERSTART_FULL_CONTACT_2026-10-24.json",
+    "file": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json",
+      "bytes": 68465,
+      "sha256": "5502ecb1b3ff77b99177c159e70ae9790c556fd0ea651c67ce3ffcdc38f30db3"
+    },
+    "independentImage": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/independent.rom",
+      "bytes": 524288,
+      "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+    },
+    "validChecksumChecked": true,
+    "identicalImageChecked": true
+  },
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0; supplied Lotus2 single standard ADF",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "1": {
+      "path": "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip",
+      "bytes": 825200,
+      "sha256": "297a528803eab78bb0b0a693353f6271387c947171ad71868279235b5a35dfa9",
+      "entry": "Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+      "selector": "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+      "imageBytes": 901120,
+      "imageSha256": "82dc1faf56823653cd3b0b299e179932c1fae117b03cae220e121d96ae8b3a06"
+    }
+  },
+  "workloads": {
+    "normal": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/lotus2-copperstart-checkpoint-night-v1.json",
+        "bytes": 25819,
+        "sha256": "f9e09b4f9ec3cb5ae6076d68d083ecaf0ddf8f53d69164f9f25301ba5461b506"
+      },
+      "events": 500,
+      "exactQualifiedInputBytes": true
+    },
+    "native13": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/lotus2-kickstart13-checkpoint-night-v1.json",
+        "bytes": 25236,
+        "sha256": "bb05d9b495dff1373dfb33b7da7fdecf8971ff31a4da5234d9150f7bfa8efbe8"
+      },
+      "events": 489,
+      "exactQualifiedInputBytes": true
+    }
+  },
+  "harness": {
+    "purpose": "Functional diagnostic native-media replay; no throughput measurement",
+    "captureEveryFields": 25,
+    "buildCommand": [
+      "dotnet",
+      "build",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\harness25\\Harness.csproj",
+      "-c",
+      "Release",
+      "-o",
+      "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25"
+    ],
+    "buildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25-build.log",
+      "bytes": 408,
+      "sha256": "88731438cef1e7af15176d603201d277756805899a822f8735becedc29015494"
+    },
+    "warnings": 0,
+    "errors": 0,
+    "sources": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/Harness.csproj",
+        "bytes": 717,
+        "sha256": "a262313399f4a844608ad86010fc33c877d9978d86ccef440eaeb51564bbe657"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/Program.cs",
+        "bytes": 2509,
+        "sha256": "016ba8c268ed39b3a28233b9e626f3353719874676c48fbf002d8c0372e2b636"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      }
+    ],
+    "onlyHostCodeChangeFromRetainedHarness": "NativeBootProbe capture interval100 to25",
+    "runtimeAndCpuBytesUnchanged": true,
+    "commonPrefixVerification": {
+      "throughField": 11800,
+      "filesPerRom": 595,
+      "roms": [
+        "normal",
+        "native13"
+      ],
+      "result": "All common filenames/bytes/SHA-256 match the original100-field-cadence prefix, including BMP/state/RAM/PCM. Later driving inputs differ."
+    },
+    "completeInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\complete-normal.json",
+          "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+          "23500"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/complete-normal.json",
+          "bytes": 25819,
+          "sha256": "f9e09b4f9ec3cb5ae6076d68d083ecaf0ddf8f53d69164f9f25301ba5461b506"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/runner.log",
+        "bytes": 1029134,
+        "sha256": "b63bae8e7938fd9f8c1b69eb1ae1884763f4d324ecab3c149f7d418dbb872d97"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/capture-manifest.json",
+        "bytes": 701989,
+        "sha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\complete-normal.json",
+          "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+          "23500",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/complete-normal.json",
+          "bytes": 25819,
+          "sha256": "f9e09b4f9ec3cb5ae6076d68d083ecaf0ddf8f53d69164f9f25301ba5461b506"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/scalar/runner.log",
+        "bytes": 1029134,
+        "sha256": "b63bae8e7938fd9f8c1b69eb1ae1884763f4d324ecab3c149f7d418dbb872d97"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/scalar/capture-manifest.json",
+        "bytes": 701989,
+        "sha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\complete-native13.json",
+          "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+          "23500"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/complete-native13.json",
+          "bytes": 25236,
+          "sha256": "bb05d9b495dff1373dfb33b7da7fdecf8971ff31a4da5234d9150f7bfa8efbe8"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/runner.log",
+        "bytes": 1029233,
+        "sha256": "99b2c4e74b1316da9607168edc6199839cada48973abc56920d64b5b27fd4e2f"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/capture-manifest.json",
+        "bytes": 701989,
+        "sha256": "0924d42485d1632f260ad074e312c7dd633bac560358ecedf8897f6c485d7086"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 4705,
+      "fields": 941,
+      "lastField": 23500,
+      "unsupported": [],
+      "nonzeroPcmFields": 746,
+      "manifestSha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191",
+      "pauseBmpSha256": "91d40d5b5389ea9b21aead8f95f2c3774d516703c1b33738e10fc4335ec0653a",
+      "resumeBmpSha256": "3714ad28399e06951cc9e964ab6c113598417256a80c5ca5f31887176eb092ba",
+      "identicalPrefixFilesAcrossCaptureCadences": 595
+    },
+    "scalar": {
+      "files": 4705,
+      "fields": 941,
+      "lastField": 23500,
+      "unsupported": [],
+      "nonzeroPcmFields": 746,
+      "manifestSha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191"
+    },
+    "native13": {
+      "files": 4705,
+      "fields": 941,
+      "lastField": 23500,
+      "unsupported": [],
+      "nonzeroPcmFields": 751,
+      "manifestSha256": "0924d42485d1632f260ad074e312c7dd633bac560358ecedf8897f6c485d7086",
+      "pauseBmpSha256": "667036eb08cee59b4312e318e6918cb6ab958f82c96b359c56730c5d16b51efc",
+      "resumeBmpSha256": "262488585d9b7372649d7fe8cf569cc59f9a2121b05f4d1594be80586c433acc",
+      "identicalPrefixFilesAcrossCaptureCadences": 595
+    },
+    "exploration-normal": {
+      "files": 4705,
+      "fields": 941,
+      "lastField": 23500,
+      "unsupported": [],
+      "nonzeroPcmFields": 746,
+      "manifestSha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191"
+    },
+    "exploration-native13": {
+      "files": 4705,
+      "fields": 941,
+      "lastField": 23500,
+      "unsupported": [],
+      "nonzeroPcmFields": 751,
+      "manifestSha256": "0924d42485d1632f260ad074e312c7dd633bac560358ecedf8897f6c485d7086"
+    }
+  },
+  "cpuModeComparison": {
+    "identicalFiles": 4705,
+    "identicalManifest": true,
+    "normalScalarSha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191"
+  },
+  "resetReplayMatchesExploration": {
+    "normal": true,
+    "native13": true,
+    "scalar": "Independent reset using exact normal input; matches all normal files"
+  },
+  "exploration": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\fine2\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\pilot-initial.json",
+          "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+          "11800"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/pilot-initial.json",
+          "bytes": 840,
+          "sha256": "e96982d83168800dab0c43fec0227a78300f5c9240d56d71bdab6f0bd26d91c0"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine2/normal/runner.log",
+        "bytes": 1034254,
+        "sha256": "393767097017c83778d3427e1ed3ab46808f63a7a2421e0160f0e2555a088aec"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine2/normal/capture-manifest.json",
+        "bytes": 701989,
+        "sha256": "e8a391f0e881cdb1d820040e5b6aa356a677e15c955809afdb9f33f880588191"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\fine2\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\pilot-initial.json",
+          "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+          "11800"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/pilot-initial.json",
+          "bytes": 840,
+          "sha256": "e96982d83168800dab0c43fec0227a78300f5c9240d56d71bdab6f0bd26d91c0"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine2/native13/runner.log",
+        "bytes": 1034353,
+        "sha256": "d79eed5a2b0f5a99d518addd0058d0264c41d0544be404a1c30bf5f6e2fbfa50"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine2/native13/capture-manifest.json",
+        "bytes": 701989,
+        "sha256": "0924d42485d1632f260ad074e312c7dd633bac560358ecedf8897f6c485d7086"
+      }
+    }
+  },
+  "inputTiming": "Each ROM has its own steering/menu trace; normal/scalar CopperStart inputs are identical. No cross-ROM trajectory or pixel equality claim.",
+  "physicalInputDriver": {
+    "source": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/drive25.py",
+      "bytes": 2335,
+      "sha256": "25a73d6afc2e866e1307da985acccb3c7a018e873ec8f80cc4e2e35d8af14d2f"
+    },
+    "events": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine2-steering.jsonl",
+      "bytes": 139863,
+      "sha256": "4908700f63884cd8280015f2229c1281363ac607b5b1c27ab294e13f3be3eca2"
+    },
+    "scope": "Reads rendered BMP road colors and submits joystick holds. No guest-memory writes, CPU/register edits or media changes. Final qualification replays frozen events without this adaptive driver."
+  },
+  "observations": [
+    {
+      "kind": "normal",
+      "fields": [
+        9500,
+        9800,
+        11800,
+        14000
+      ],
+      "result": "Options, automatic gears, fire acceleration, steering and traffic",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-009500.bmp",
+          "bytes": 1136870,
+          "sha256": "f4f9b83dfb4c08810cbce049c2cd67cb688cd3c5dfc6fc688741759d2eb1a7e5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-009800.bmp",
+          "bytes": 1136870,
+          "sha256": "c63f120fe3582747d04eb254d5dc8a900ebafe265c959e29c031115fd818bf45"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-011800.bmp",
+          "bytes": 1136870,
+          "sha256": "b728e132722d2a29d4baff307b151d0fb9d699fc6828c9911d95dbab3609e005"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-014000.bmp",
+          "bytes": 1136870,
+          "sha256": "db2577b111f9b0b50d6daa65ea1e1a43fca4a28ef71fd59c955ec0cfb45564e1"
+        }
+      ]
+    },
+    {
+      "kind": "normal",
+      "fields": [
+        14500,
+        14525
+      ],
+      "result": "First checkpoint; timer08 to42",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-014500.bmp",
+          "bytes": 1136870,
+          "sha256": "9b8a97d6b4ce6cbee7ef80a9a4a0ae2f74c3d41a1dfd8e45161f216f3671e3a8"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-014525.bmp",
+          "bytes": 1136870,
+          "sha256": "6e06abcba84aeae045a6aa534d82e7349d4b82f4a39676a4f9f50dc5cc3da356"
+        }
+      ]
+    },
+    {
+      "kind": "native13",
+      "fields": [
+        14350,
+        14475
+      ],
+      "result": "First checkpoint; timer11 to43",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-014350.bmp",
+          "bytes": 1136870,
+          "sha256": "6b80014ce8e1d480ff7c5a34c339bc722480e78212b8138da17d78cf451ccdcc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-014475.bmp",
+          "bytes": 1136870,
+          "sha256": "84fc1808f933d88dfec0d91fe37c1b697dc81b8e0110de98b00ad19ff9409c97"
+        }
+      ]
+    },
+    {
+      "kind": "normal",
+      "fields": [
+        16500,
+        17500,
+        18000
+      ],
+      "result": "Timeout before checkpoint2, Game Over and high scores",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-016500.bmp",
+          "bytes": 1136870,
+          "sha256": "a77d330166d6e4849736717b5ed786448ef8971fda1227815bdfda47cc2376fd"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-017500.bmp",
+          "bytes": 1136870,
+          "sha256": "4546244bfa0ae568a5304b24c43681290c1d9cf0220446a8bf772a4b8b881194"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-018000.bmp",
+          "bytes": 1136870,
+          "sha256": "ca98590f10262edcd85220ccaa1735c2f3016066f49232993681a7855d40aa74"
+        }
+      ]
+    },
+    {
+      "kind": "normal",
+      "fields": [
+        20100,
+        20500,
+        21500,
+        22000,
+        22500
+      ],
+      "result": "TWILIGHT typed in menu, accepted Night Course, briefing and driving",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-020100.bmp",
+          "bytes": 1136870,
+          "sha256": "adb98eb4c8fbf108af255d003c3e0e21b694e048479a5d5cd0836a994d9742ae"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-020500.bmp",
+          "bytes": 1136870,
+          "sha256": "92d428060542b184cc0a0f0bbc77aa04ae0371fc865661b8ff2a53a28b9dd825"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-021500.bmp",
+          "bytes": 1136870,
+          "sha256": "92d428060542b184cc0a0f0bbc77aa04ae0371fc865661b8ff2a53a28b9dd825"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022000.bmp",
+          "bytes": 1136870,
+          "sha256": "752bcf643f3a16355401e8c0c831d0b3594b5b4ebd396f49496802575baf04d2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022500.bmp",
+          "bytes": 1136870,
+          "sha256": "d7591c27d6b1ee61a3d693b685f7e5daec8315496d65d727be251e373f589784"
+        }
+      ]
+    },
+    {
+      "kind": "native13",
+      "fields": [
+        20500,
+        21500,
+        22000,
+        22500
+      ],
+      "result": "Password-selected Night Course and driving",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-020500.bmp",
+          "bytes": 1136870,
+          "sha256": "92d428060542b184cc0a0f0bbc77aa04ae0371fc865661b8ff2a53a28b9dd825"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-021500.bmp",
+          "bytes": 1136870,
+          "sha256": "92d428060542b184cc0a0f0bbc77aa04ae0371fc865661b8ff2a53a28b9dd825"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022000.bmp",
+          "bytes": 1136870,
+          "sha256": "a89214dca8d7a3baae9016b108e70218b31e9f623d8e6b576a922fa6372d8a3b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022500.bmp",
+          "bytes": 1136870,
+          "sha256": "aa668726c264218f99d918ed959c57d608cdcbddb7d3f90164c8368d48f3ac14"
+        }
+      ]
+    },
+    {
+      "kind": "normal",
+      "fields": [
+        22550,
+        22575,
+        22600,
+        22625,
+        22750,
+        23500
+      ],
+      "result": "Four identical complete pause rasters; resumed driving",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022550.bmp",
+          "bytes": 1136870,
+          "sha256": "91d40d5b5389ea9b21aead8f95f2c3774d516703c1b33738e10fc4335ec0653a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022575.bmp",
+          "bytes": 1136870,
+          "sha256": "91d40d5b5389ea9b21aead8f95f2c3774d516703c1b33738e10fc4335ec0653a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022600.bmp",
+          "bytes": 1136870,
+          "sha256": "91d40d5b5389ea9b21aead8f95f2c3774d516703c1b33738e10fc4335ec0653a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022625.bmp",
+          "bytes": 1136870,
+          "sha256": "91d40d5b5389ea9b21aead8f95f2c3774d516703c1b33738e10fc4335ec0653a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-022750.bmp",
+          "bytes": 1136870,
+          "sha256": "889d1b78d64ef52c6e53471b3005534209b9f8410abeaef37d30944a14dfb7d0"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/normal/captures/frame-023500.bmp",
+          "bytes": 1136870,
+          "sha256": "3714ad28399e06951cc9e964ab6c113598417256a80c5ca5f31887176eb092ba"
+        }
+      ]
+    },
+    {
+      "kind": "native13",
+      "fields": [
+        22550,
+        22575,
+        22600,
+        22625,
+        22750,
+        23500
+      ],
+      "result": "Four identical complete pause rasters; resumed driving",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022550.bmp",
+          "bytes": 1136870,
+          "sha256": "667036eb08cee59b4312e318e6918cb6ab958f82c96b359c56730c5d16b51efc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022575.bmp",
+          "bytes": 1136870,
+          "sha256": "667036eb08cee59b4312e318e6918cb6ab958f82c96b359c56730c5d16b51efc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022600.bmp",
+          "bytes": 1136870,
+          "sha256": "667036eb08cee59b4312e318e6918cb6ab958f82c96b359c56730c5d16b51efc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022625.bmp",
+          "bytes": 1136870,
+          "sha256": "667036eb08cee59b4312e318e6918cb6ab958f82c96b359c56730c5d16b51efc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-022750.bmp",
+          "bytes": 1136870,
+          "sha256": "b96714f9a95f7df602c66feee06918abd2179432ffb94c4e560009a74d8df2f9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/qualified/native13/captures/frame-023500.bmp",
+          "bytes": 1136870,
+          "sha256": "262488585d9b7372649d7fe8cf569cc59f9a2121b05f4d1594be80586c433acc"
+        }
+      ]
+    }
+  ],
+  "progress": {
+    "openingCheckpointsReached": 1,
+    "naturalCoursesCompleted": 0,
+    "openingOutcome": "Out of time before checkpoint2",
+    "nightEntry": "Regular password field with TWILIGHT; separate from natural progression",
+    "nightScope": "Briefing, countdown, bounded driving, F10 pause/resume",
+    "pauseFrames": [
+      22550,
+      22575,
+      22600,
+      22625
+    ],
+    "pauseWholeBmpIdenticalWithinEachRom": true,
+    "resumeWholeBmpChanges": true
+  },
+  "unsuccessfulAttempts": [
+    {
+      "directory": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/discovery",
+      "scope": "100-field cadence and coarse steering",
+      "outcome": "Both ROMs time out before checkpoint1; no firmware failure established"
+    },
+    {
+      "directory": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/pilot",
+      "scope": "50-field steering",
+      "outcome": "Both reach checkpoint1 and time out before checkpoint2; supporting exploration"
+    },
+    {
+      "directory": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine",
+      "scope": "First25-field attempt",
+      "outcome": "UNAVAILABLE continuation: host validation stops at11900 because release event equals excluded segment endpoint. Rejected segment not executed; corrected duration cap22 in retry.",
+      "runs": {
+        "normal": {
+          "run": {
+            "command": [
+              "dotnet",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\fine\\normal",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\pilot-initial.json",
+              "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+              "11800"
+            ],
+            "rom": {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/CopperStart-DiskBoot.rom",
+              "bytes": 524288,
+              "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+            },
+            "input": {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/pilot-initial.json",
+              "bytes": 840,
+              "sha256": "e96982d83168800dab0c43fec0227a78300f5c9240d56d71bdab6f0bd26d91c0"
+            },
+            "binaries": [
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+                "bytes": 52224,
+                "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+                "bytes": 288256,
+                "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+                "bytes": 978944,
+                "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+                "bytes": 105472,
+                "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+                "bytes": 28672,
+                "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+              }
+            ],
+            "exitCode": 3762504530
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine/normal/runner.log",
+            "bytes": 519067,
+            "sha256": "b4afb2398ddd87af5a0005016b0c512aea34d13f55d33cb6ff124a58712848d4"
+          },
+          "rejectedControl": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine/normal/control.json",
+            "bytes": 196,
+            "sha256": "3e166b450f3bbd28ee88d9234f06fb171a8d884bddc61a35c33492410e6cd029"
+          }
+        },
+        "native13": {
+          "run": {
+            "command": [
+              "dotnet",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\runner25\\CopperMod.Amiga.Lightweight.Runner.dll",
+              "C:\\Data\\ROM\\Kickstart_13.rom",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\fine\\native13",
+              "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus2-gameplay-2026-10-24\\pilot-initial.json",
+              "C:/Data/TestImages/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).zip#/Lotus Turbo Challenge 2 (Magnetic Fields + Gremlin).adf",
+              "11800"
+            ],
+            "rom": {
+              "path": "C:/Data/ROM/Kickstart_13.rom",
+              "bytes": 262144,
+              "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+            },
+            "input": {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/pilot-initial.json",
+              "bytes": 840,
+              "sha256": "e96982d83168800dab0c43fec0227a78300f5c9240d56d71bdab6f0bd26d91c0"
+            },
+            "binaries": [
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.Runner.dll",
+                "bytes": 52224,
+                "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperMod.Amiga.Lightweight.dll",
+                "bytes": 288256,
+                "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/Copper68k.dll",
+                "bytes": 978944,
+                "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperDisk.dll",
+                "bytes": 105472,
+                "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+              },
+              {
+                "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/runner25/CopperFloat.dll",
+                "bytes": 28672,
+                "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+              }
+            ],
+            "exitCode": 3762504530
+          },
+          "log": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine/native13/runner.log",
+            "bytes": 519204,
+            "sha256": "6d7bc1431cd0a56af49bf0309ebf407f925d45589dcf6bb9894d21908d3f25aa"
+          },
+          "rejectedControl": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/fine/native13/control.json",
+            "bytes": 196,
+            "sha256": "3e166b450f3bbd28ee88d9234f06fb171a8d884bddc61a35c33492410e6cd029"
+          }
+        }
+      }
+    }
+  ],
+  "checks": {
+    "verification": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/verification.json",
+      "bytes": 1657,
+      "sha256": "c287a02c83cf9bda04787b387969bab2bad8122e69da81d1ca8358118251966a"
+    },
+    "verifier": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/verify.py",
+      "bytes": 2680,
+      "sha256": "08cb678c1ae89a67b5ac9bffbc2411c8f0ad3a10b61b7b0694b6551cbfcbc53b"
+    },
+    "harnessBuild": true,
+    "identitiesAndInputOrdering": true,
+    "romChecksum": true,
+    "captureComparison": true,
+    "pauseResume": true,
+    "documentationLinks": true,
+    "retainedBuildAndUnitTests": {
+      "freshlyRerun": false,
+      "record": "COPPERSTART_FULL_CONTACT_2026-10-24.json",
+      "scope": "Producer/runtime source unchanged. Prior production/engine/disk/native-test results remain separate evidence. No new suite pass claimed."
+    }
+  },
+  "references": [
+    {
+      "url": "https://www.lemonamiga.com/doc/lotus-turbo-challenge-2/1025",
+      "description": "Preserved publisher manual: automatic gears, acceleration selection, password field and F10 pause"
+    },
+    {
+      "url": "https://openretro.org/amiga/lotus-turbo-challenge-2",
+      "description": "Password input source. Actual game acceptance and Night Course rendering verified independently in this replay."
+    }
+  ],
+  "limits": [
+    "Checkpoint2, natural opening-course completion and a natural Night Course handoff unqualified",
+    "Night Course entered with ordinary passwordTWILIGHT; no claim of earned progress",
+    "Later courses, manual gears, multiplayer and link mode unqualified",
+    "Supplied standard ADF; original-protection behavior unqualified",
+    "Nonzero PCM is sample presence, not listening/audio fidelity",
+    "Same-engine native1.3 control is supporting compatibility evidence, not independent physical hardware timing proof",
+    "No installed-app/MSIX admission or throughput claim",
+    "ROM/media/raw captures/build outputs remain local; no package publication"
+  ]
+}

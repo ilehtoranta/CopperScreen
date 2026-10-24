@@ -304,6 +304,15 @@ it remains unsuccessful coverage. Winning the first opponent and later stages
 remain unqualified. Complete normal/scalar captures and independent reset replays
 are recorded separately from the retained production build and engine tests.
 
+The [Lotus 2 gameplay continuation](COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.md)
+crosses the opening checkpoint using automatic gears and sustained physical
+input. Both ROMs later time out before checkpoint two. The game separately
+accepts the typed TWILIGHT password, loads the Night Course and supports bounded
+driving and F10 pause/resume. All 4705 normal/scalar capture files match, with
+independent reset replays retaining the explored normal/native outcomes. No
+additional firmware or engine fix was established. Natural course completion
+and a natural Night Course handoff remain unqualified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
