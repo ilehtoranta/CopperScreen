@@ -45,6 +45,14 @@ inputs. No ROM or engine correction was established. Later gameplay and
 pristine original media remain unqualified; historical performance inputs
 are unchanged.
 
+The [Lemmings Fun 2 continuation](COPPERSTART_LEMMINGS_FUN2_2026-10-25.md)
+repeats Fun 1 with the current rebuilt ROM, assigns all ten Floaters and
+completes Fun 2 with 100% rescued before reaching Fun 3's briefing. P
+pause/resume and live umbrella descent are checked. Both ROMs use identical
+physical inputs; all 4325 normal/scalar capture files match. No new ROM or
+engine correction was established. Fun 3 gameplay and later levels remain
+unqualified.
+
 The [Lotus III replay](COPPERSTART_LOTUS3_2026-10-23.md) adds supplied
 FLT / Crack Inc two-ADF boot, disk swapping and player-controlled one-player
 Arcade racing with automatic gears, steering, braking, F10 pause/resume,

@@ -1,0 +1,956 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Lemmings: Fun2 live Floater assignment,100% rescue and Fun3 briefing",
+  "status": "PASS for Fun2 completion with100% rescued and Fun3 briefing; Fun3 gameplay unqualified",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25",
+  "copperScreenEvidenceParent": "c9dc6ae4a23759ae4304993d1482b6bf2f57dd57",
+  "runtimeSource": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+  "runtimeRebuilt": false,
+  "copperStartProducer": "0057fb9c38d82d38122ddf69a4aa960573beedd7",
+  "compiledGuestRootProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+  },
+  "romRebuiltThisTurn": false,
+  "retainedRebuiltRom": true,
+  "romChanged": false,
+  "engineChanged": false,
+  "cpuChanged": false,
+  "firmwareFixEstablished": false,
+  "publicAdmissionChecksChanged": false,
+  "retainedProducerQualification": {
+    "record": "COPPERSTART_FULL_CONTACT_2026-10-24.json",
+    "file": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json",
+      "bytes": 68465,
+      "sha256": "5502ecb1b3ff77b99177c159e70ae9790c556fd0ea651c67ce3ffcdc38f30db3"
+    },
+    "independentImage": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/independent.rom",
+      "bytes": 524288,
+      "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+    },
+    "validChecksumChecked": true,
+    "identicalImageChecked": true
+  },
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0; supplied SkidRow two-ADF release",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "1": {
+      "path": "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "bytes": 607191,
+      "sha256": "5fc56b436722688ba37836e273a3a1c84d724235a91b39272768ff3e4cac0a59",
+      "entry": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+      "selector": "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+      "imageBytes": 901120,
+      "imageSha256": "a4fdba69017f1a760bba3bb06c55f7e434226c498c9d22c1f627212b08d24f91"
+    },
+    "2": {
+      "path": "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].zip",
+      "bytes": 767037,
+      "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+      "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+      "selector": "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+      "imageBytes": 901120,
+      "imageSha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+    }
+  },
+  "workload": {
+    "file": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/lemmings-copperstart-fun2-v1.json",
+      "bytes": 17388,
+      "sha256": "e9301326e85526a1b5ce905f229964fe1fca37ce9a5c4ae9aaa99656fe0f3518"
+    },
+    "events": 329,
+    "sharedBy": [
+      "normal",
+      "scalar",
+      "native13"
+    ],
+    "exactQualifiedInputBytes": true
+  },
+  "harness": {
+    "purpose": "Functional native-media diagnostic; no throughput measurement",
+    "captureEveryFields": 25,
+    "rebuiltThisTurn": false,
+    "retainedRecord": "COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.json",
+    "sources": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/Harness.csproj",
+        "bytes": 717,
+        "sha256": "a262313399f4a844608ad86010fc33c877d9978d86ccef440eaeb51564bbe657"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/Program.cs",
+        "bytes": 2509,
+        "sha256": "016ba8c268ed39b3a28233b9e626f3353719874676c48fbf002d8c0372e2b636"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/harness25/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      }
+    ],
+    "allFiveBinariesIdenticalToRetainedLotus2Harness": true,
+    "previousCadencePrefixCheck": "Retained Lotus2 evidence, not a new cadence-prefix comparison in this continuation",
+    "completeInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\complete-normal.json",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+          "21600"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/complete-normal.json",
+          "bytes": 17388,
+          "sha256": "e9301326e85526a1b5ce905f229964fe1fca37ce9a5c4ae9aaa99656fe0f3518"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/runner.log",
+        "bytes": 949906,
+        "sha256": "a09c6bcee26713d447e74dc72960b0762a3a09b5cda9289c220f890af00facbf"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/capture-manifest.json",
+        "bytes": 645293,
+        "sha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\complete-normal.json",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+          "21600",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/complete-normal.json",
+          "bytes": 17388,
+          "sha256": "e9301326e85526a1b5ce905f229964fe1fca37ce9a5c4ae9aaa99656fe0f3518"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/scalar/runner.log",
+        "bytes": 949906,
+        "sha256": "a09c6bcee26713d447e74dc72960b0762a3a09b5cda9289c220f890af00facbf"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/scalar/capture-manifest.json",
+        "bytes": 645293,
+        "sha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\complete-native13.json",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+          "21600"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/complete-native13.json",
+          "bytes": 17388,
+          "sha256": "e9301326e85526a1b5ce905f229964fe1fca37ce9a5c4ae9aaa99656fe0f3518"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/runner.log",
+        "bytes": 949077,
+        "sha256": "0b5e97ecf30c89c45843f67b4d2337eeb04535ee2fa11acd3bfe68529c03477a"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/capture-manifest.json",
+        "bytes": 645293,
+        "sha256": "0d4e551fc07167cf24f3e95cf035db5da09231131496e7f0f2fb9ada63db3e18"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 4325,
+      "fields": 865,
+      "lastField": 21600,
+      "unsupported": [],
+      "nonzeroPcmFields": 267,
+      "manifestSha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b",
+      "pauseBmpSha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5",
+      "resumeBmpSha256": "a82e57ffae35090f575c37172d5e0778b3d92f33e65c659246a255c3f83b8be5"
+    },
+    "scalar": {
+      "files": 4325,
+      "fields": 865,
+      "lastField": 21600,
+      "unsupported": [],
+      "nonzeroPcmFields": 267,
+      "manifestSha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b",
+      "pauseBmpSha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5",
+      "resumeBmpSha256": "a82e57ffae35090f575c37172d5e0778b3d92f33e65c659246a255c3f83b8be5"
+    },
+    "native13": {
+      "files": 4325,
+      "fields": 865,
+      "lastField": 21600,
+      "unsupported": [],
+      "nonzeroPcmFields": 269,
+      "manifestSha256": "0d4e551fc07167cf24f3e95cf035db5da09231131496e7f0f2fb9ada63db3e18",
+      "pauseBmpSha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5",
+      "resumeBmpSha256": "a82e57ffae35090f575c37172d5e0778b3d92f33e65c659246a255c3f83b8be5"
+    },
+    "exploration-normal": {
+      "files": 4325,
+      "fields": 865,
+      "lastField": 21600,
+      "unsupported": [],
+      "nonzeroPcmFields": 267,
+      "manifestSha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b"
+    },
+    "exploration-native13": {
+      "files": 4325,
+      "fields": 865,
+      "lastField": 21600,
+      "unsupported": [],
+      "nonzeroPcmFields": 269,
+      "manifestSha256": "0d4e551fc07167cf24f3e95cf035db5da09231131496e7f0f2fb9ada63db3e18"
+    },
+    "reviewedNativeMilestones": [
+      {
+        "field": 16600,
+        "identicalBmp": true
+      },
+      {
+        "field": 16800,
+        "identicalBmp": false
+      },
+      {
+        "field": 16950,
+        "identicalBmp": true
+      },
+      {
+        "field": 17200,
+        "identicalBmp": true
+      },
+      {
+        "field": 17400,
+        "identicalBmp": true
+      },
+      {
+        "field": 18000,
+        "identicalBmp": true
+      },
+      {
+        "field": 18400,
+        "identicalBmp": true
+      },
+      {
+        "field": 19000,
+        "identicalBmp": true
+      },
+      {
+        "field": 21600,
+        "identicalBmp": true
+      }
+    ],
+    "pauseFields": [
+      16825,
+      16850,
+      16875,
+      16900
+    ]
+  },
+  "cpuModeComparison": {
+    "identicalFiles": 4325,
+    "identicalManifest": true,
+    "normalScalarSha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b"
+  },
+  "exploration": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\initial.json",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+          "16600"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/initial.json",
+          "bytes": 2986,
+          "sha256": "444ebf275b84a4e25dbe619fc33a4030ca6dd4ab31b7f0bb3d4cee10bae64d71"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/discovery/normal/runner.log",
+        "bytes": 950046,
+        "sha256": "152df813443e3d62aaff4de0c408955109b452e42a2c690db3f8354ae65e46fb"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/discovery/normal/capture-manifest.json",
+        "bytes": 645293,
+        "sha256": "244acb6fa928641c76de6f670e5d54aead982aa16353436688c9d24f21fb728b"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-fun2-2026-10-25\\initial.json",
+          "C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip#/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+          "16600"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/initial.json",
+          "bytes": 2986,
+          "sha256": "444ebf275b84a4e25dbe619fc33a4030ca6dd4ab31b7f0bb3d4cee10bae64d71"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "5e4a91ce812d96bf404d187f37fdf7d27d8b892895a8aab7edf8088e965d9ab4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/discovery/native13/runner.log",
+        "bytes": 949217,
+        "sha256": "90832f7a90eb6d4f7f2b3358e9364d6512e96edcdf7faaa5962e455aba5acd58"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/discovery/native13/capture-manifest.json",
+        "bytes": 645293,
+        "sha256": "0d4e551fc07167cf24f3e95cf035db5da09231131496e7f0f2fb9ada63db3e18"
+      }
+    }
+  },
+  "resetReplayMatchesExploration": {
+    "normal": true,
+    "native13": true,
+    "scalar": "Independent reset using exact shared input; all normal files match"
+  },
+  "inputTiming": "Identical complete physical input bytes under all three runs; no cross-ROM CPU/hardware trajectory equality claim.",
+  "physicalInputDriver": {
+    "source": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/pulses.py",
+      "bytes": 823,
+      "sha256": "58f4164d559e3d05b90eb59b67d1e1f5a4800fafc83b8c769046633741050797"
+    },
+    "mouseClickPulses": 130,
+    "fieldsPerDown": 4,
+    "fieldsPerUp": 4,
+    "assignmentInterval": [
+      16958,
+      18000
+    ],
+    "scope": "Fixed screen point near hatch, selected from rendered view; physical mouse input only, no guest-memory reads or writes. Qualification replays frozen events without executing this driver."
+  },
+  "observations": [
+    {
+      "fields": [
+        14000,
+        14500
+      ],
+      "result": "Fun1 repeated with100% rescued",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-014000.bmp",
+            "bytes": 1136870,
+            "sha256": "73c5b293cee66c54a67423fcc8f9e825304f82e879a8b196dbcb0e75dd7391a4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-014500.bmp",
+            "bytes": 1136870,
+            "sha256": "73c5b293cee66c54a67423fcc8f9e825304f82e879a8b196dbcb0e75dd7391a4"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-014000.bmp",
+            "bytes": 1136870,
+            "sha256": "73c5b293cee66c54a67423fcc8f9e825304f82e879a8b196dbcb0e75dd7391a4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-014500.bmp",
+            "bytes": 1136870,
+            "sha256": "73c5b293cee66c54a67423fcc8f9e825304f82e879a8b196dbcb0e75dd7391a4"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        16600
+      ],
+      "result": "Fun2 briefing: ten lemmings,10% rescue target,release rate50,five minutes",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016600.bmp",
+            "bytes": 1136870,
+            "sha256": "c806831694813d0b4cc039adb21155fe86485070e38cee1e6eee1b93c225d015"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016600.bmp",
+            "bytes": 1136870,
+            "sha256": "c806831694813d0b4cc039adb21155fe86485070e38cee1e6eee1b93c225d015"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        16800
+      ],
+      "result": "Fun2 gameplay,OUT1,timer4:57",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016800.bmp",
+            "bytes": 1136870,
+            "sha256": "2e29b6ce35fe09b4cf458789931071617d6d23dfa8e7d1986fab99fefb18f5a1"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016800.bmp",
+            "bytes": 1136870,
+            "sha256": "0fde4ed9a5ab0e3faae0a0750c3f7724336d47738ed87d008b84b1570a836d69"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        16825,
+        16850,
+        16875,
+        16900
+      ],
+      "result": "P pause: four complete BMPs identical within each ROM",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016825.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016850.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016875.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016900.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016825.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016850.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016875.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016900.bmp",
+            "bytes": 1136870,
+            "sha256": "f66fdcc85d3f1e898ddd86661c6feb9a1ba195855613d768589e3ed8d2f3ecf5"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        16950,
+        17200
+      ],
+      "result": "Resumed Floater selection and live assignments; stock10 to7,OUT4",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-016950.bmp",
+            "bytes": 1136870,
+            "sha256": "df39e329c8e47e2b7dd4f2488a132cc06fb1c6e8caa9c1f6c048956cea66a583"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-017200.bmp",
+            "bytes": 1136870,
+            "sha256": "a82e57ffae35090f575c37172d5e0778b3d92f33e65c659246a255c3f83b8be5"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-016950.bmp",
+            "bytes": 1136870,
+            "sha256": "df39e329c8e47e2b7dd4f2488a132cc06fb1c6e8caa9c1f6c048956cea66a583"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-017200.bmp",
+            "bytes": 1136870,
+            "sha256": "a82e57ffae35090f575c37172d5e0778b3d92f33e65c659246a255c3f83b8be5"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        17400,
+        17600,
+        17800,
+        18000
+      ],
+      "result": "Umbrella descent; all ten Floaters assigned;IN30% at18000",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-017400.bmp",
+            "bytes": 1136870,
+            "sha256": "381bfa3fe83b5d5f9a1e2c6070095e35274e7b9a66f00a8b241a8e2505703e42"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-017600.bmp",
+            "bytes": 1136870,
+            "sha256": "6a7ede63376de6ed97597b95fe3f040135bc90b9a91c560da647fa4bb08ccd60"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-017800.bmp",
+            "bytes": 1136870,
+            "sha256": "a9fe3073fc9fb48ec04909ef19c1336b5cb05e29ea352304df4d15b20e069264"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-018000.bmp",
+            "bytes": 1136870,
+            "sha256": "5e30cebf7842d994519f09ef95f0e3c857ad13fccdeef18df6560c1834a1d8eb"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-017400.bmp",
+            "bytes": 1136870,
+            "sha256": "381bfa3fe83b5d5f9a1e2c6070095e35274e7b9a66f00a8b241a8e2505703e42"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-017600.bmp",
+            "bytes": 1136870,
+            "sha256": "6a7ede63376de6ed97597b95fe3f040135bc90b9a91c560da647fa4bb08ccd60"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-017800.bmp",
+            "bytes": 1136870,
+            "sha256": "a9fe3073fc9fb48ec04909ef19c1336b5cb05e29ea352304df4d15b20e069264"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-018000.bmp",
+            "bytes": 1136870,
+            "sha256": "5e30cebf7842d994519f09ef95f0e3c857ad13fccdeef18df6560c1834a1d8eb"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        18400
+      ],
+      "result": "IN80%,OUT2",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-018400.bmp",
+            "bytes": 1136870,
+            "sha256": "9c39374183aee67d693a762cb7d29b56b4eafbc4fa5581282a7ce70f9af6125c"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-018400.bmp",
+            "bytes": 1136870,
+            "sha256": "9c39374183aee67d693a762cb7d29b56b4eafbc4fa5581282a7ce70f9af6125c"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        19000,
+        20000
+      ],
+      "result": "All accounted for:10% needed,100% rescued,success message and level3 code",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-019000.bmp",
+            "bytes": 1136870,
+            "sha256": "60c3d92d3ef67c35a525555106fa830d51f600d0ca1f834c0ea64439095fe142"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-020000.bmp",
+            "bytes": 1136870,
+            "sha256": "60c3d92d3ef67c35a525555106fa830d51f600d0ca1f834c0ea64439095fe142"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-019000.bmp",
+            "bytes": 1136870,
+            "sha256": "60c3d92d3ef67c35a525555106fa830d51f600d0ca1f834c0ea64439095fe142"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-020000.bmp",
+            "bytes": 1136870,
+            "sha256": "60c3d92d3ef67c35a525555106fa830d51f600d0ca1f834c0ea64439095fe142"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        21600
+      ],
+      "result": "Ordinary continue reaches Fun3 Tailor-made for blockers briefing; no Fun3 gameplay",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/normal/captures/frame-021600.bmp",
+            "bytes": 1136870,
+            "sha256": "6deea76e5291cfa94bb2f5824e127d429e6a24288c13aa3d253b76710c920128"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/qualified/native13/captures/frame-021600.bmp",
+            "bytes": 1136870,
+            "sha256": "6deea76e5291cfa94bb2f5824e127d429e6a24288c13aa3d253b76710c920128"
+          }
+        ]
+      }
+    }
+  ],
+  "progress": {
+    "fun1RescuedPercent": 100,
+    "fun2FloaterAssignments": 10,
+    "fun2RescuedPercent": 100,
+    "fun2Completed": true,
+    "fun3Briefing": true,
+    "fun3Gameplay": false,
+    "pauseResume": true,
+    "pauseFields": [
+      16825,
+      16850,
+      16875,
+      16900
+    ]
+  },
+  "reviewedCrossRomBmpComparison": {
+    "samples": [
+      {
+        "field": 16600,
+        "identicalBmp": true
+      },
+      {
+        "field": 16800,
+        "identicalBmp": false
+      },
+      {
+        "field": 16950,
+        "identicalBmp": true
+      },
+      {
+        "field": 17200,
+        "identicalBmp": true
+      },
+      {
+        "field": 17400,
+        "identicalBmp": true
+      },
+      {
+        "field": 18000,
+        "identicalBmp": true
+      },
+      {
+        "field": 18400,
+        "identicalBmp": true
+      },
+      {
+        "field": 19000,
+        "identicalBmp": true
+      },
+      {
+        "field": 21600,
+        "identicalBmp": true
+      }
+    ],
+    "identicalCount": 8,
+    "scope": "Eight of nine milestone BMPs match. Gameplay-start16800 differs; both show first release and later reviewed milestones agree. No complete cross-ROM output equality claim.",
+    "review": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/native-reviewed-milestones.png",
+      "bytes": 294333,
+      "sha256": "4097e6625be37c3dae17623329ba684e8f276d49fbf3e9728798ee2983f8f11a"
+    }
+  },
+  "unsuccessfulAttempts": [],
+  "checks": {
+    "verification": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/verification.json",
+      "bytes": 2436,
+      "sha256": "199d077cd31c90aa8c3411c0a5d4f221d7b285d41219634426e4fb597a217902"
+    },
+    "verifier": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/verify.py",
+      "bytes": 2928,
+      "sha256": "627b49efcb1116012daba4977fa01b0af285740d5f010c5f44b4b0ca678486e2"
+    },
+    "recorder": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lemmings-fun2-2026-10-25/record.py",
+      "bytes": 9297,
+      "sha256": "e0e35b9c038b10623e760a7d302e05d37a1ed2dddfb4e56b372b96871b253595"
+    },
+    "identitiesAndInputOrdering": true,
+    "romChecksum": true,
+    "captureComparison": true,
+    "pauseResume": true,
+    "documentationLinks": true,
+    "retainedBuildAndUnitTests": {
+      "freshlyRerun": false,
+      "record": "COPPERSTART_FULL_CONTACT_2026-10-24.json",
+      "scope": "Unchanged producer/runtime source; prior production, engine, disk and native-ROM tests remain separate evidence. No new suite pass claimed."
+    }
+  },
+  "references": [
+    {
+      "url": "https://www.dosdays.co.uk/media/games/lemmings/Lemmings%20-%20Manual.pdf",
+      "description": "Preserved publisher manual,Amiga sections: mouse skill selection/assignment,Floater and P pause"
+    },
+    {
+      "url": "https://lemmings.fandom.com/wiki/Only_floaters_can_survive_this",
+      "description": "Supporting level route; actual briefing/count/rescue result verified in native replays."
+    }
+  ],
+  "limits": [
+    "Fun3 gameplay,later levels/ratings,other skills,two-player mode and persistent save/password reload unqualified",
+    "Supplied crack ADFs; pristine original protection unqualified",
+    "Sampled nonzero PCM is sample presence,not audio fidelity",
+    "Same-engine native1.3 control is supporting compatibility evidence,not physical hardware timing proof",
+    "No installed-app admission or throughput claim; historical performance protocols/fingerprints unchanged",
+    "ROM/media/raw captures/build outputs stay local; no package publication"
+  ]
+}
