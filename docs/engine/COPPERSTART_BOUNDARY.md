@@ -313,6 +313,14 @@ independent reset replays retaining the explored normal/native outcomes. No
 additional firmware or engine fix was established. Natural course completion
 and a natural Night Course handoff remain unqualified.
 
+The [Shadow of the Beast underground continuation](COPPERSTART_BEAST_UNDERGROUND_2026-10-24.md)
+opens the tree entrance, loads the underground area, descends two ladders and
+reaches the green-creature corridor and death sequence with the current rebuilt
+ROM. Native Kickstart 1.3 reaches the same bounded milestones. All 2755
+normal/scalar capture files match, and independent reset replays retain the
+explored outcomes. No additional firmware or engine fix was established.
+Area completion, later areas and effective pause/resume remain unqualified.
+
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,
 non-graphics Intuition/Workbench state and runtime orchestration. At that
