@@ -8,7 +8,7 @@ following media in DF0–DF3, directly or through selected ZIP entries.
 | Standard 880 KiB ADF | Canonical DD sector encoding; existing compact receiver | Optional in-memory writes and explicit Save ADF |
 | ADZ | CopperDisk gzip decoding of standard or modern extended ADF | Read-only |
 | DMS | CopperDisk complete, unencrypted DD archive decoding | Read-only |
-| Modern extended ADF (`UAE-1ADF`) | CopperDisk normal/raw tracks; raw bytes and exact bit lengths retained | Read-only |
+| Modern extended ADF (`UAE-1ADF`) | CopperDisk normal/raw tracks, up to 84 cylinders; raw bytes and exact bit lengths retained; omitted tracks and zero raw bit lengths mean unformatted | Read-only |
 | IPF | Existing preserved track/index/density/weak-region preparation | Read-only |
 | SCP | CopperDisk first-revolution Amiga DD decoding; preserved receiver | Read-only |
 
@@ -18,6 +18,13 @@ is limited to cylinders 0–83, heads 0–1, with no duplicate tracks or cells f
 than one CCK. Standard sector media uses 80 cylinders, two heads, and eleven DD or twenty-two HD
 512-byte sectors per track. HD ADF/ADZ requires an HD mechanism configured through
 `FloppyDriveTypes`; see [HD support and qualification](HD_FLOPPY_2026-10-18.md). Missing preserved tracks produce no flux.
+
+The [Nitro follow-up](COPPERSTART_NITRO_2026-10-23.md) removes CopperDisk's
+fixed 160-track restriction for UAE-1ADF/encoded media within that existing
+84-cylinder range. Normal entries beyond cylinder 79 retain their physical
+AmigaDOS headers; odd final track counts leave the absent head unformatted.
+Zero-bit raw entries represent unwritten tracks and use a zero-filled PAL DD
+revolution. Nonempty raw streams retain their stored bytes and bit lengths.
 
 SCP is quantized at load time to CopperDisk's nominal DD grid and first stored
 revolution. The engine retains its decoded transition bytes, including a pulse

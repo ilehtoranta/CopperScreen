@@ -1,0 +1,520 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "F17 Challenge original two-disk boot and opening-race controls",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23",
+  "copperScreenSourceBase": "4b71596195a96c4cbbb1abe7a3e673588d8fbc9f",
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "engineProvenance": "docs/engine/WORMS_SPRITE_DMA_2026-10-22.json",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "read-only original F17 Challenge Disk 1, then Disk 2",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/F17Challenge_1703.zip",
+      "bytes": 1947438,
+      "sha256": "63d94e701f09d156a556770b3c61c95f305b617704e39e116018ca709e5a6b1e"
+    },
+    "entries": [
+      {
+        "entry": "F17Challenge_Disk1.ipf",
+        "bytes": 1139672,
+        "sha256": "20eca43aa6cbb865fe982d5284c519e07ceb3aec520abe3d42baa3c88832f2ef"
+      },
+      {
+        "entry": "F17Challenge_Disk2.ipf",
+        "bytes": 1139672,
+        "sha256": "59bfb9dac3179f2d4133d9ab2426906c50fea8c50e3857c7a6135d97163ac920"
+      }
+    ]
+  },
+  "workload": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/f17-copperstart-race-v1.json",
+    "bytes": 2045,
+    "sha256": "5bfd55eb562aad0b76f6b57a02f0adbd992b6d27adb269ccc47034ba3bddd19a"
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk1.ipf",
+          "23000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/complete-input.json",
+          "bytes": 2045,
+          "sha256": "5bfd55eb562aad0b76f6b57a02f0adbd992b6d27adb269ccc47034ba3bddd19a"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/qualified/normal/runner.log",
+        "bytes": 254739,
+        "sha256": "c702a46ceffca75330a04353ff745d6107f7d6096b30dc35e5ccfceae54e2b5c"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk1.ipf",
+          "23000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/complete-input.json",
+          "bytes": 2045,
+          "sha256": "5bfd55eb562aad0b76f6b57a02f0adbd992b6d27adb269ccc47034ba3bddd19a"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 254739,
+        "sha256": "c702a46ceffca75330a04353ff745d6107f7d6096b30dc35e5ccfceae54e2b5c"
+      }
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\qualified\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk1.ipf",
+          "23000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/complete-input.json",
+          "bytes": 2045,
+          "sha256": "5bfd55eb562aad0b76f6b57a02f0adbd992b6d27adb269ccc47034ba3bddd19a"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/qualified/native31/runner.log",
+        "bytes": 254720,
+        "sha256": "11c52225685d26a1d5c21c68e41c50f58c59636c64493e409408855a20e4c7ca"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 1155,
+      "fields": 231,
+      "lastField": 23000,
+      "unsupported": [],
+      "nonzeroPcmFields": 129,
+      "manifestSha256": "1cb2b5b678d2e3e8d61f2c6c150a65880ddb7399500d4e860a9677374967cd82"
+    },
+    "scalar": {
+      "files": 1155,
+      "fields": 231,
+      "lastField": 23000,
+      "unsupported": [],
+      "nonzeroPcmFields": 129,
+      "manifestSha256": "1cb2b5b678d2e3e8d61f2c6c150a65880ddb7399500d4e860a9677374967cd82"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native31": {
+      "files": 1155,
+      "fields": 231,
+      "lastField": 23000,
+      "unsupported": [],
+      "nonzeroPcmFields": 129,
+      "manifestSha256": "4cdc6949c7585c8fe5e1b0a3ce35d67b1b21c441d5d1931e282a50520dac1560"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk1.ipf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/discovery/normal/runner.log",
+        "bytes": 255117,
+        "sha256": "26eda8b99f3d4906cf6d85197ec203c4775dcb746cd2f15267d0d472bacf66fd"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk1.ipf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 255117,
+        "sha256": "26eda8b99f3d4906cf6d85197ec203c4775dcb746cd2f15267d0d472bacf66fd"
+      }
+    },
+    "native31": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\kickstart-3.1-a500.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\discovery\\native31",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-f17-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Team17/F17Challenge_1703.zip#/F17Challenge_Disk1.ipf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+          "bytes": 524288,
+          "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/discovery/native31/runner.log",
+        "bytes": 255098,
+        "sha256": "c5ce55140a5f995c1b32127acf11b46616a8c1c6b3c1ee0a4879e86060c15abc"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 1155,
+      "identical": true
+    },
+    "scalar": {
+      "files": 1155,
+      "identical": true
+    },
+    "native31": {
+      "files": 1155,
+      "identical": true
+    }
+  },
+  "harness": {
+    "purpose": "Functional media replay; not a throughput harness",
+    "source": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "buildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "warnings": 0,
+    "errors": 0,
+    "change": "Only host control-file reader retries IOException after Windows replacement; guest execution and validation unchanged",
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "hostHarnessBuild": true,
+    "productionAndRomUnchanged": true,
+    "productionBuildRerun": false,
+    "engineTestsRerun": false,
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true,
+    "pauseRasterIdentical": [
+      20200,
+      20400
+    ]
+  },
+  "primaryControlReference": {
+    "url": "https://www.lemonamiga.com/doc/f17-challenge/598",
+    "description": "Preserved publisher manual transcription; controls and menu structure"
+  },
+  "observations": {
+    "disk2Prompt": 7000,
+    "ejectDisk1": 7002,
+    "insertDisk2": 7202,
+    "acknowledgeDisk2": 10002,
+    "mainMenu": 13000,
+    "worldChampionshipSouthAfrica": 15000,
+    "raceBriefing": 15400,
+    "stationaryGrid": 18000,
+    "accelerationSpeed273KmhGear5": 19400,
+    "steeringAndCollision": 19600,
+    "brakedToStop": 20000,
+    "pause": [
+      20200,
+      20400
+    ],
+    "resume": 20800,
+    "hudHidden": 21000,
+    "hudRestored": 21200,
+    "abortedRaceResults": 23000
+  },
+  "limits": [
+    "Opening South Africa race is deliberately aborted with Escape",
+    "No completed lap, race win or championship completion claim",
+    "Later circuits, rain, pit repair, saves and progression unqualified",
+    "Nonzero PCM is sample presence, not listening or fidelity",
+    "Native Kickstart comparison is on the same emulator, not a physical hardware oracle",
+    "No host throughput or complete hardware timing acceptance claim"
+  ]
+}

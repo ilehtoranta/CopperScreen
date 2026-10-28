@@ -45,14 +45,24 @@ public static class AmigaDosTrackEncoder
 
         var sectors = disk.SectorData.Length / (disk.Cylinders * disk.Heads * AmigaDiskGeometry.SectorSize);
         if (sectors is not (11 or 22)) throw new ArgumentException("AmigaDOS encoding requires 11 or 22 sectors per track.", nameof(disk));
+        Span<byte> data = stackalloc byte[sectors * AmigaDiskGeometry.SectorSize];
+        for (var sector = 0; sector < sectors; sector++)
+            disk.ReadSector(cylinder, head, sector).Span.CopyTo(data.Slice(sector * AmigaDiskGeometry.SectorSize, AmigaDiskGeometry.SectorSize));
+        return EncodeTrack(data, (cylinder * AmigaDiskGeometry.HeadCount) + head);
+    }
+
+    internal static byte[] EncodeTrack(ReadOnlySpan<byte> trackData, int trackNumber)
+    {
+        var sectors = trackData.Length / AmigaDiskGeometry.SectorSize;
+        if (trackData.Length != sectors * AmigaDiskGeometry.SectorSize || sectors is not (11 or 22))
+            throw new ArgumentException("AmigaDOS encoding requires 11 or 22 complete sectors.", nameof(trackData));
         var track = Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount * (sectors / 11)).ToArray();
-        var trackNumber = (cylinder * AmigaDiskGeometry.HeadCount) + head;
         for (var physicalIndex = 0; physicalIndex < sectors; physicalIndex++)
         {
             var sector = sectors == 11 ? PhysicalSectorOrder[physicalIndex] : (physicalIndex + 20) % sectors;
             var sectorsUntilGap = sectors - physicalIndex;
             EncodeSector(
-                disk.ReadSector(cylinder, head, sector).Span,
+                trackData.Slice(sector * AmigaDiskGeometry.SectorSize, AmigaDiskGeometry.SectorSize),
                 track.AsSpan(physicalIndex * EncodedSectorBytes, EncodedSectorBytes),
                 trackNumber,
                 sector,

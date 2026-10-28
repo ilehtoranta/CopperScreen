@@ -22,7 +22,7 @@
         "type": "Project",
         "dependencies": {
           "Copper68k": "[1.5.4, 1.5.4]",
-          "CopperDisk": "[3.0.0, )"
+          "CopperDisk": "[3.0.1-dev.1, )"
         }
       }
     }

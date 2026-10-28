@@ -226,7 +226,7 @@ public static class AmigaDiskLoader
     /// <summary>
     /// Creates sector media from encoded track streams.
     /// </summary>
-    /// <param name="tracks">Exactly <see cref="AmigaDiskGeometry.TrackCount"/> encoded tracks. Track data is retained as read-only media backing.</param>
+    /// <param name="tracks">One to 168 encoded tracks, retained as read-only media backing. An absent final head is unformatted.</param>
     /// <returns>Read-only Amiga sector media backed by the supplied tracks.</returns>
     public static IAmigaSectorDiskMedia FromEncodedTracks(IReadOnlyList<IAmigaTrack> tracks)
     {
@@ -236,7 +236,7 @@ public static class AmigaDiskLoader
     /// <summary>
     /// Creates sector media from encoded track streams.
     /// </summary>
-    /// <param name="tracks">Exactly <see cref="AmigaDiskGeometry.TrackCount"/> encoded tracks. Track data is retained as read-only media backing.</param>
+    /// <param name="tracks">One to 168 encoded tracks, retained as read-only media backing. An absent final head is unformatted.</param>
     /// <returns>Read-only Amiga sector media backed by the supplied tracks.</returns>
     public static IAmigaSectorDiskMedia FromEncodedTracks(IReadOnlyList<AmigaEncodedTrack> tracks)
     {
@@ -247,7 +247,7 @@ public static class AmigaDiskLoader
     /// Creates sector media from owned encoded track byte arrays.
     /// </summary>
     /// <param name="ownedTrackBytes">
-    /// Exactly <see cref="AmigaDiskGeometry.TrackCount"/> encoded tracks. CopperDisk takes ownership of non-null arrays;
+    /// One to 168 encoded tracks. CopperDisk takes ownership of non-null arrays;
     /// callers must not mutate them while the media is in use. Null entries are treated as unformatted tracks.
     /// </param>
     /// <returns>Read-only Amiga sector media backed by the supplied track bytes.</returns>

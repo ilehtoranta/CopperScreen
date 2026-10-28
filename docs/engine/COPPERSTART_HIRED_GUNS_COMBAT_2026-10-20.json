@@ -1,0 +1,2143 @@
+{
+  "schemaVersion": 1,
+  "protocol": "copperstart-hired-firefight-v1",
+  "date": "2026-10-20",
+  "started": "2026-10-19",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/rom-1/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "94ebb5161e593cfcc40e5de18780101e3c9cc5c70e0a467381b9ac3f111eaca5"
+  },
+  "runs": {
+    "normal": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-graphics-2026-10-19\\rom-1\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\hired-combat-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-combat-2026-10-19\\copperstart-initial.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "51000"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/rom-1/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "94ebb5161e593cfcc40e5de18780101e3c9cc5c70e0a467381b9ac3f111eaca5"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/copperstart-initial.json",
+        "bytes": 34198,
+        "sha256": "fcbc3ad8081194deba0afd7128245582c974dae21a5796fbebb19205ca905546"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/run.json",
+        "bytes": 4878,
+        "sha256": "b79077ccbececf787016e35ffc67756aaad002fef335caacc50b9bfcf258faae"
+      },
+      "physicalInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/complete-input-normal.json",
+        "bytes": 164470,
+        "sha256": "6cf2e7087291c6ebbe5560cc25499c1f815e6572f1bafccf59aa8d6cbdd98068"
+      },
+      "scripts": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-0.json",
+          "bytes": 130,
+          "sha256": "a7d2e34f2f68be82156d747c6b80656691b2ac13caacfb48ea9846705f8dd9d1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-1.json",
+          "bytes": 522,
+          "sha256": "cd2a741acf52d71b5a9983e03169cfb915fac71dc58406c46d37797f7cbb0001"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-2.json",
+          "bytes": 881,
+          "sha256": "7bbcdb3b8788a35a6ed15dca7214f3a36066a6cc9dd3d10efeaa113c758e9a82"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-3.json",
+          "bytes": 1010,
+          "sha256": "6a25ec3da558b6749151f614803acb0d6ceab2db5efa7c5ceb643de1031c34aa"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-4.json",
+          "bytes": 68,
+          "sha256": "57cad8b499032603c0d17d2c670f369594a1654242d765f51009429fcae3401d"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-5.json",
+          "bytes": 822,
+          "sha256": "86fbb3ed8c1535402ba583fca089a8b97f0c6eb2bddce26b4e6b1e3c8fca73f1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-6.json",
+          "bytes": 130,
+          "sha256": "de7b5eea3196e69853d85d98fc820a7a195559524223e3a65d8cc4aac0af5f7e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-7.json",
+          "bytes": 1324,
+          "sha256": "ef9c48f0d0bb542fd6aa63250843fac012a1ae701a04b15363bd63899ef3222e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-8.json",
+          "bytes": 539,
+          "sha256": "edc357d3f21f1e74205434d01065ba9c4c240998d03098babff84d3d885354c4"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-9.json",
+          "bytes": 1363,
+          "sha256": "cbddc5f206d6ece0b93f6e8a83fced45f313405dd3ba1c743568eb8e3976a4a4"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-10.json",
+          "bytes": 540,
+          "sha256": "6944d8584488fa446872af4a2db649d01c2e35f5e50f6aefb4ca4246f358dda7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-11.json",
+          "bytes": 668,
+          "sha256": "2c22baf269c9fecdbcf67dffaca29dd5d69358e6ee68d5850eaa8a911fcdaa83"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-12.json",
+          "bytes": 1716,
+          "sha256": "13b8b592bf2992d7ffcd79e232df755b61904ff32edf772e6fb1406b4e57475a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-13.json",
+          "bytes": 2163,
+          "sha256": "61fc064b3ef6cebb327481ca18301a5370208611a41a7dbdca71639c611479f9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-14.json",
+          "bytes": 801,
+          "sha256": "d7680a1f720ff64a7674966f3d4d4c2348bcba51841e566cc30880f66b842892"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-15.json",
+          "bytes": 1905,
+          "sha256": "9dbe680ce4370ce0ab5d6d131cf54159a497de4e4459669f943fe90bd1754e4e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-16.json",
+          "bytes": 728,
+          "sha256": "4a302c2d96a2ad66fff039858ec0d2e62a9f6e26bc3e3a4096f1db29ae14c2b9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-17.json",
+          "bytes": 1901,
+          "sha256": "d50cd0b5892c693f9a8e7c704a593694433757c48ffb049564daacb123b4fe7f"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-18.json",
+          "bytes": 452,
+          "sha256": "3d5b6d5406507a8f02365ef696e8c279a0fe792e27d5a9e4e8ec8aaaa84c0d9b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-19.json",
+          "bytes": 222,
+          "sha256": "4cfda456f96e7f200d787a3a1751a980190967c2a08e049997bdee17b462e0cd"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-20.json",
+          "bytes": 129,
+          "sha256": "9b5b89beb65bc33931cee5d1bca7e7f48871547ef7a99906a026591668ed2ae5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-21.json",
+          "bytes": 204,
+          "sha256": "74a7bef3c6702240eb30e137b69ee086920e5f803294f6fb135653bb40cca850"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-22.json",
+          "bytes": 336,
+          "sha256": "1d4bc2caf65205dc19babbf54bb450a242e19751726080bb5d0cee45443903bb"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-23.json",
+          "bytes": 1623,
+          "sha256": "80f8ec0a1d3e3907f20fe6d12fde7d6dca89bab0b56abd3df465a96e642e2ab7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-24.json",
+          "bytes": 130,
+          "sha256": "aa6bb374e2990de9e580bf21ab5e6ef529b1985462b891d2505dbb36f2b2188a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-25.json",
+          "bytes": 2418,
+          "sha256": "418a4a7ad9301b8a639c8b548964c2682e6d8a9bfbf9d0f927738151e13a5151"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-26.json",
+          "bytes": 2790,
+          "sha256": "e08f0c467daa2209d3a7320d283c216e7727e8c40a90f63f3047af88b4e90bb3"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-27.json",
+          "bytes": 1082,
+          "sha256": "a11b34e9a0bfa7cabc2451e27e926de3642c5c05450593b354087b0e90d2e8a9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-28.json",
+          "bytes": 262,
+          "sha256": "cbcc7b7085420f594aa23ec00e4e65977a19adaecef9009b38a2e7dc57932b13"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-29.json",
+          "bytes": 136,
+          "sha256": "ff4042878c5bebb4f550d2ce052f0cce304e3506406bb51e719a133d6ac93478"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-30.json",
+          "bytes": 6239,
+          "sha256": "bf7adda4e01fe9fd26d6d4da67fbe8c102d388a92a36b26851c77bdaf5009f08"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-31.json",
+          "bytes": 1285,
+          "sha256": "d54d114fee2c372962f82f44a48f6e5f32222026194552e43e6086e1ea2ad146"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-32.json",
+          "bytes": 129,
+          "sha256": "99614d349dffe79dc98bf17a525e4e96874f56c112ba8750a562e2ae5d458bc9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-33.json",
+          "bytes": 259,
+          "sha256": "456fb17301bab9f28f41ddc88adf3558745a79dbf7068a78a72386e76fc87e30"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-34.json",
+          "bytes": 1754,
+          "sha256": "98abf7943bd81405d171666f9cb5875aefa0d45b2f16546af671bb4d34b83223"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-35.json",
+          "bytes": 1133,
+          "sha256": "0b08da4091f399325072bdc340d7e140b65ca14890fc75cf74ecd82a7de387af"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-36.json",
+          "bytes": 262,
+          "sha256": "6f77726dc75ba31844c47504de7c2ef6f4d845f1e7015364ab8bdb75013311c1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-37.json",
+          "bytes": 136,
+          "sha256": "fce3b983b0f18b22240335077bd42cba7ba2f4b0c033d2db1a68666254bf0541"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-38.json",
+          "bytes": 6298,
+          "sha256": "40845719e26f2f692e6b2dd078265781933ef9b2065f60df5e89574e47ea0175"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-39.json",
+          "bytes": 1135,
+          "sha256": "1d268cea1843ae017ec67a4d0455e057f71b794f2cad18e3716d8449bc0ff19c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-40.json",
+          "bytes": 2549,
+          "sha256": "e47638d640a020ae2044cf2f787581aba9becd8ced0ecf92583dfada40dd5e59"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-41.json",
+          "bytes": 1732,
+          "sha256": "a368ac913d8bd7b8f3dc65726e02a67165edf5b5eb3d4102972423d5e95b4c5c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-42.json",
+          "bytes": 550,
+          "sha256": "9526ad1b2dd0f7bf7d08162d0262109344e1b76325bbfa632e3c4ad3caf9bce2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-43.json",
+          "bytes": 2765,
+          "sha256": "4625f88b2f1170827244d73b942d2c43ffc9031c106baeffc136f1acb392e471"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-44.json",
+          "bytes": 4494,
+          "sha256": "49cd154353b0e559e7cbb956fa70126654d732e1f60983a72eea4de8a4cd19a7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-45.json",
+          "bytes": 140,
+          "sha256": "491aef98fab89ad5fc6180b1ddfbdcd2b33e32aada4feba7229969cf598ba7cb"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-46.json",
+          "bytes": 6457,
+          "sha256": "2f76e912e5ec4f233bf4c052b592833456a81fa962311bd773ae215355136a6e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-47.json",
+          "bytes": 191,
+          "sha256": "719f5033d163813af4056afb054d3626f1b23cfaddd07fedd2cef9de189a12dd"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-48.json",
+          "bytes": 1434,
+          "sha256": "7233cf0228cfc205faf30b5fef49a29d3b626b69b4fa0d6f29716912716f2227"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-49.json",
+          "bytes": 5350,
+          "sha256": "0b8cd291d063123872a0defe2b8859784315f58f1172942a46998c45dbb6e4bf"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-50.json",
+          "bytes": 140,
+          "sha256": "740a790b467c797009278a94e0d6be4c6143cecf38b785dbf8a940e853965321"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-51.json",
+          "bytes": 3622,
+          "sha256": "3f665d0743e33261cec705bff8dac426966dfa7ee130de65ae186b7000770bf0"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-52.json",
+          "bytes": 2350,
+          "sha256": "c5e51ce202d96a85ffbf739472099172fba7ae25bd7703d49bf9cec0834a7708"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-53.json",
+          "bytes": 1160,
+          "sha256": "0ad8e592219fba9df0225b251de244e9bb9e4db061ef381ff5cbd22d4d2678c8"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-54.json",
+          "bytes": 6109,
+          "sha256": "0140e16568a85a178fa4c36964db7ade9b023dfe8ed32a71eabb462da73f03bc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-55.json",
+          "bytes": 76,
+          "sha256": "bf150716c7d2e883de8168a706c537ed9e2b834dcfe7466e9d5ffdcfb91ed53b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-56.json",
+          "bytes": 1824,
+          "sha256": "2328080e24318c69f51d3d0398fed9a7d326757f909462b6416c085e2d3f2b45"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-57.json",
+          "bytes": 1520,
+          "sha256": "9600266235c903ca38e7ae5b7714bf5e25233fca2a4d57d55061621cab4a56ca"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-58.json",
+          "bytes": 493,
+          "sha256": "a0375adb4a9fbf8ed4df0df79056b64cd711d5ef2789e8cbd2f13f2b1f232f56"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/input-59.json",
+          "bytes": 536,
+          "sha256": "9e3ba54b633cd9c4aee859c7398cf33152df6604e1dd3fb71d9615b5d6ff1d6f"
+        }
+      ],
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/segments.jsonl",
+        "bytes": 83020,
+        "sha256": "3896f68c968cb2a0b2c412233bdbd32c7956759571dd8660a6bee4ad3084a1b0"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/runner.log",
+        "bytes": 1460444,
+        "sha256": "58c3619da8419286218336da42bd5b77f496b7e10e513112f07b4a28c649d966"
+      },
+      "stop": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/published-60.json",
+        "bytes": 62,
+        "sha256": "06d113ee344c2cf7da2b10ae6ef4d92a224dbe19b8061368be4f2fe27a0c11cd"
+      },
+      "endFrame": 131200
+    },
+    "scalar": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-graphics-2026-10-19\\rom-1\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\hired-combat-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-combat-2026-10-19\\copperstart-initial.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "51000",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/rom-1/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "94ebb5161e593cfcc40e5de18780101e3c9cc5c70e0a467381b9ac3f111eaca5"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/copperstart-initial.json",
+        "bytes": 34198,
+        "sha256": "fcbc3ad8081194deba0afd7128245582c974dae21a5796fbebb19205ca905546"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/run.json",
+        "bytes": 4895,
+        "sha256": "9918da36d213903cd51d77a374626dfc64bfd99295b893d4c6d1a1cc5cee3964"
+      },
+      "physicalInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/complete-input-scalar.json",
+        "bytes": 164470,
+        "sha256": "6cf2e7087291c6ebbe5560cc25499c1f815e6572f1bafccf59aa8d6cbdd98068"
+      },
+      "scripts": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-0.json",
+          "bytes": 130,
+          "sha256": "a7d2e34f2f68be82156d747c6b80656691b2ac13caacfb48ea9846705f8dd9d1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-1.json",
+          "bytes": 522,
+          "sha256": "cd2a741acf52d71b5a9983e03169cfb915fac71dc58406c46d37797f7cbb0001"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-2.json",
+          "bytes": 881,
+          "sha256": "7bbcdb3b8788a35a6ed15dca7214f3a36066a6cc9dd3d10efeaa113c758e9a82"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-3.json",
+          "bytes": 1010,
+          "sha256": "6a25ec3da558b6749151f614803acb0d6ceab2db5efa7c5ceb643de1031c34aa"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-4.json",
+          "bytes": 68,
+          "sha256": "57cad8b499032603c0d17d2c670f369594a1654242d765f51009429fcae3401d"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-5.json",
+          "bytes": 822,
+          "sha256": "86fbb3ed8c1535402ba583fca089a8b97f0c6eb2bddce26b4e6b1e3c8fca73f1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-6.json",
+          "bytes": 130,
+          "sha256": "de7b5eea3196e69853d85d98fc820a7a195559524223e3a65d8cc4aac0af5f7e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-7.json",
+          "bytes": 1324,
+          "sha256": "ef9c48f0d0bb542fd6aa63250843fac012a1ae701a04b15363bd63899ef3222e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-8.json",
+          "bytes": 539,
+          "sha256": "edc357d3f21f1e74205434d01065ba9c4c240998d03098babff84d3d885354c4"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-9.json",
+          "bytes": 1363,
+          "sha256": "cbddc5f206d6ece0b93f6e8a83fced45f313405dd3ba1c743568eb8e3976a4a4"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-10.json",
+          "bytes": 540,
+          "sha256": "6944d8584488fa446872af4a2db649d01c2e35f5e50f6aefb4ca4246f358dda7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-11.json",
+          "bytes": 668,
+          "sha256": "2c22baf269c9fecdbcf67dffaca29dd5d69358e6ee68d5850eaa8a911fcdaa83"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-12.json",
+          "bytes": 1716,
+          "sha256": "13b8b592bf2992d7ffcd79e232df755b61904ff32edf772e6fb1406b4e57475a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-13.json",
+          "bytes": 2163,
+          "sha256": "61fc064b3ef6cebb327481ca18301a5370208611a41a7dbdca71639c611479f9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-14.json",
+          "bytes": 801,
+          "sha256": "d7680a1f720ff64a7674966f3d4d4c2348bcba51841e566cc30880f66b842892"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-15.json",
+          "bytes": 1905,
+          "sha256": "9dbe680ce4370ce0ab5d6d131cf54159a497de4e4459669f943fe90bd1754e4e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-16.json",
+          "bytes": 728,
+          "sha256": "4a302c2d96a2ad66fff039858ec0d2e62a9f6e26bc3e3a4096f1db29ae14c2b9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-17.json",
+          "bytes": 1901,
+          "sha256": "d50cd0b5892c693f9a8e7c704a593694433757c48ffb049564daacb123b4fe7f"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-18.json",
+          "bytes": 452,
+          "sha256": "3d5b6d5406507a8f02365ef696e8c279a0fe792e27d5a9e4e8ec8aaaa84c0d9b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-19.json",
+          "bytes": 222,
+          "sha256": "4cfda456f96e7f200d787a3a1751a980190967c2a08e049997bdee17b462e0cd"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-20.json",
+          "bytes": 129,
+          "sha256": "9b5b89beb65bc33931cee5d1bca7e7f48871547ef7a99906a026591668ed2ae5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-21.json",
+          "bytes": 204,
+          "sha256": "74a7bef3c6702240eb30e137b69ee086920e5f803294f6fb135653bb40cca850"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-22.json",
+          "bytes": 336,
+          "sha256": "1d4bc2caf65205dc19babbf54bb450a242e19751726080bb5d0cee45443903bb"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-23.json",
+          "bytes": 1623,
+          "sha256": "80f8ec0a1d3e3907f20fe6d12fde7d6dca89bab0b56abd3df465a96e642e2ab7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-24.json",
+          "bytes": 130,
+          "sha256": "aa6bb374e2990de9e580bf21ab5e6ef529b1985462b891d2505dbb36f2b2188a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-25.json",
+          "bytes": 2418,
+          "sha256": "418a4a7ad9301b8a639c8b548964c2682e6d8a9bfbf9d0f927738151e13a5151"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-26.json",
+          "bytes": 2790,
+          "sha256": "e08f0c467daa2209d3a7320d283c216e7727e8c40a90f63f3047af88b4e90bb3"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-27.json",
+          "bytes": 1082,
+          "sha256": "a11b34e9a0bfa7cabc2451e27e926de3642c5c05450593b354087b0e90d2e8a9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-28.json",
+          "bytes": 262,
+          "sha256": "cbcc7b7085420f594aa23ec00e4e65977a19adaecef9009b38a2e7dc57932b13"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-29.json",
+          "bytes": 136,
+          "sha256": "ff4042878c5bebb4f550d2ce052f0cce304e3506406bb51e719a133d6ac93478"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-30.json",
+          "bytes": 6239,
+          "sha256": "bf7adda4e01fe9fd26d6d4da67fbe8c102d388a92a36b26851c77bdaf5009f08"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-31.json",
+          "bytes": 1285,
+          "sha256": "d54d114fee2c372962f82f44a48f6e5f32222026194552e43e6086e1ea2ad146"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-32.json",
+          "bytes": 129,
+          "sha256": "99614d349dffe79dc98bf17a525e4e96874f56c112ba8750a562e2ae5d458bc9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-33.json",
+          "bytes": 259,
+          "sha256": "456fb17301bab9f28f41ddc88adf3558745a79dbf7068a78a72386e76fc87e30"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-34.json",
+          "bytes": 1754,
+          "sha256": "98abf7943bd81405d171666f9cb5875aefa0d45b2f16546af671bb4d34b83223"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-35.json",
+          "bytes": 1133,
+          "sha256": "0b08da4091f399325072bdc340d7e140b65ca14890fc75cf74ecd82a7de387af"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-36.json",
+          "bytes": 262,
+          "sha256": "6f77726dc75ba31844c47504de7c2ef6f4d845f1e7015364ab8bdb75013311c1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-37.json",
+          "bytes": 136,
+          "sha256": "fce3b983b0f18b22240335077bd42cba7ba2f4b0c033d2db1a68666254bf0541"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-38.json",
+          "bytes": 6298,
+          "sha256": "40845719e26f2f692e6b2dd078265781933ef9b2065f60df5e89574e47ea0175"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-39.json",
+          "bytes": 1135,
+          "sha256": "1d268cea1843ae017ec67a4d0455e057f71b794f2cad18e3716d8449bc0ff19c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-40.json",
+          "bytes": 2549,
+          "sha256": "e47638d640a020ae2044cf2f787581aba9becd8ced0ecf92583dfada40dd5e59"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-41.json",
+          "bytes": 1732,
+          "sha256": "a368ac913d8bd7b8f3dc65726e02a67165edf5b5eb3d4102972423d5e95b4c5c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-42.json",
+          "bytes": 550,
+          "sha256": "9526ad1b2dd0f7bf7d08162d0262109344e1b76325bbfa632e3c4ad3caf9bce2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-43.json",
+          "bytes": 2765,
+          "sha256": "4625f88b2f1170827244d73b942d2c43ffc9031c106baeffc136f1acb392e471"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-44.json",
+          "bytes": 4494,
+          "sha256": "49cd154353b0e559e7cbb956fa70126654d732e1f60983a72eea4de8a4cd19a7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-45.json",
+          "bytes": 140,
+          "sha256": "491aef98fab89ad5fc6180b1ddfbdcd2b33e32aada4feba7229969cf598ba7cb"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-46.json",
+          "bytes": 6457,
+          "sha256": "2f76e912e5ec4f233bf4c052b592833456a81fa962311bd773ae215355136a6e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-47.json",
+          "bytes": 191,
+          "sha256": "719f5033d163813af4056afb054d3626f1b23cfaddd07fedd2cef9de189a12dd"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-48.json",
+          "bytes": 1434,
+          "sha256": "7233cf0228cfc205faf30b5fef49a29d3b626b69b4fa0d6f29716912716f2227"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-49.json",
+          "bytes": 5350,
+          "sha256": "0b8cd291d063123872a0defe2b8859784315f58f1172942a46998c45dbb6e4bf"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-50.json",
+          "bytes": 140,
+          "sha256": "740a790b467c797009278a94e0d6be4c6143cecf38b785dbf8a940e853965321"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-51.json",
+          "bytes": 3622,
+          "sha256": "3f665d0743e33261cec705bff8dac426966dfa7ee130de65ae186b7000770bf0"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-52.json",
+          "bytes": 2350,
+          "sha256": "c5e51ce202d96a85ffbf739472099172fba7ae25bd7703d49bf9cec0834a7708"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-53.json",
+          "bytes": 1160,
+          "sha256": "0ad8e592219fba9df0225b251de244e9bb9e4db061ef381ff5cbd22d4d2678c8"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-54.json",
+          "bytes": 6109,
+          "sha256": "0140e16568a85a178fa4c36964db7ade9b023dfe8ed32a71eabb462da73f03bc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-55.json",
+          "bytes": 76,
+          "sha256": "bf150716c7d2e883de8168a706c537ed9e2b834dcfe7466e9d5ffdcfb91ed53b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-56.json",
+          "bytes": 1824,
+          "sha256": "2328080e24318c69f51d3d0398fed9a7d326757f909462b6416c085e2d3f2b45"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-57.json",
+          "bytes": 1520,
+          "sha256": "9600266235c903ca38e7ae5b7714bf5e25233fca2a4d57d55061621cab4a56ca"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-58.json",
+          "bytes": 493,
+          "sha256": "a0375adb4a9fbf8ed4df0df79056b64cd711d5ef2789e8cbd2f13f2b1f232f56"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/input-59.json",
+          "bytes": 536,
+          "sha256": "9e3ba54b633cd9c4aee859c7398cf33152df6604e1dd3fb71d9615b5d6ff1d6f"
+        }
+      ],
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/segments.jsonl",
+        "bytes": 83020,
+        "sha256": "3896f68c968cb2a0b2c412233bdbd32c7956759571dd8660a6bee4ad3084a1b0"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/runner.log",
+        "bytes": 1460444,
+        "sha256": "58c3619da8419286218336da42bd5b77f496b7e10e513112f07b4a28c649d966"
+      },
+      "stop": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-scalar/published-60.json",
+        "bytes": 62,
+        "sha256": "06d113ee344c2cf7da2b10ae6ef4d92a224dbe19b8061368be4f2fe27a0c11cd"
+      },
+      "endFrame": 131200
+    },
+    "native": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\runner-frozen\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\hired-combat-native",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-combat-2026-10-19\\native-initial.json",
+        "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip#/Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+        "45000"
+      ],
+      "rom": {
+        "path": "C:/Data/ROM/Kickstart_13.rom",
+        "bytes": 262144,
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/native-initial.json",
+        "bytes": 33952,
+        "sha256": "c848d681330ca56193cfab5fa385bf0c13a5867d3c52dfa18457a64630b78a9a"
+      },
+      "media": [
+        {
+          "disk": 1,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+          "archiveBytes": 782764,
+          "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+        },
+        {
+          "disk": 2,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+          "archiveBytes": 770747,
+          "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+        },
+        {
+          "disk": 3,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+          "archiveBytes": 703179,
+          "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+        },
+        {
+          "disk": 4,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+          "archiveBytes": 789964,
+          "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+        },
+        {
+          "disk": 5,
+          "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+          "archiveBytes": 588807,
+          "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+          "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+          "entryBytes": 901120,
+          "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+        }
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "c7c08bfe898dd64a5aa20dc55d0fd62f2b1bd0dbd81611c3a29a21c4d1d259ea"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/runner-frozen/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/run.json",
+        "bytes": 4684,
+        "sha256": "6522d9f73603d328529c0a7ddcf5f4e6e57127630de5300b10235661e6d4ee4d"
+      },
+      "physicalInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/complete-input-native.json",
+        "bytes": 164261,
+        "sha256": "46e2f6fbf82471731616679d1c2730563f9a98a4d99da75df98185bd3bf50426"
+      },
+      "scripts": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-0.json",
+          "bytes": 188,
+          "sha256": "c81e84b8a54224cc397d43a9eb1d597a590e7c3f0a0cc3b5e3e249f4e4d65bb9"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-1.json",
+          "bytes": 522,
+          "sha256": "939c43b99459c2d079102f5ba2f4a4e9a4664dd83cd32cfc341578845852395a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-2.json",
+          "bytes": 881,
+          "sha256": "4c683c48547dc38f012898b97452b52b736f31d99db11be3de33354eae2488d5"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-3.json",
+          "bytes": 1010,
+          "sha256": "1e0be28bcb82cb787b0252d7745172524c89e67cc512aa9d9fc2a4a4fafe4063"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-4.json",
+          "bytes": 68,
+          "sha256": "a4756b6974b23a78d17887dc7f8af9273c552fb94baba9f16e357cbfa7bb66c1"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-5.json",
+          "bytes": 822,
+          "sha256": "a4ba910db243c3b6a97c033015dab668122e05284b736530ca3030d64c7eed2c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-6.json",
+          "bytes": 130,
+          "sha256": "c6b0921cf25e687ebbba4b31a45e6c5b5fa0a7687c35a2446a8a602c8cf9b8ae"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-7.json",
+          "bytes": 1324,
+          "sha256": "b649e8a7e1f648aecaf289293b439408a732d4f84ff0a2b0dbac77e76c3e6f80"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-8.json",
+          "bytes": 539,
+          "sha256": "a09dfc5b8e9816efd887c1eea91bbb3c853d64c93db7f9c8de0ab68973ac051c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-9.json",
+          "bytes": 1363,
+          "sha256": "d7c838c98a5c68c4deeac9de6fe82ccbf15e2f30793615687b506c7de14df7e7"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-10.json",
+          "bytes": 540,
+          "sha256": "973320b4c75acf68ddd2434c044541ea8ed72c0f29c4c33d0edcbcc02e262746"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-11.json",
+          "bytes": 668,
+          "sha256": "0e7f8e27fd588cf54bbb66fd3511f8adbd70b7bd4e58811bca3485e632135b1e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-12.json",
+          "bytes": 1716,
+          "sha256": "20b8ae75156e3d2a34f3aaeceae64849fae82046674271e97b58e32bd7d2b64f"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-13.json",
+          "bytes": 2163,
+          "sha256": "bcb7ab8854938544aa3cda78585658bcde3b876f4f845f22f264d59bcdc0be4c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-14.json",
+          "bytes": 801,
+          "sha256": "064ce11f1ba07dfe89428f102b16767728f9032e25c215b52be2b1faea17764c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-15.json",
+          "bytes": 1905,
+          "sha256": "9e36fe3371634967619d237c5880d79228bfe5f8e2c93cdeccc5e543cc320682"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-16.json",
+          "bytes": 728,
+          "sha256": "f240d10cfb4fe5ca47cc46705a7c73fec6a74d58fc4c4f53254440585906f9dc"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-17.json",
+          "bytes": 1901,
+          "sha256": "027649073eb8da65e1c37a3c13be429af67c0bd573c8802080a50040a7e7a915"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-18.json",
+          "bytes": 452,
+          "sha256": "25d789fb5a1902abeb2a0bbded9bb3643294c9ee0f8222e1a5deb1b382cbd464"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-19.json",
+          "bytes": 222,
+          "sha256": "4bd0d1d49230478c037d0b9ca957a13ffd3e79b598e3c45056a9d87c535ee618"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-20.json",
+          "bytes": 129,
+          "sha256": "1aeb252b0253548cd8ebaff49cf661c4590e411e3836b2d8417fef21f2375cbb"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-21.json",
+          "bytes": 204,
+          "sha256": "81d3437df41ca78b2190286f37dea3c15639c8187162d0411c01a2ee3e9cef95"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-22.json",
+          "bytes": 336,
+          "sha256": "42cef96f092291c9ff8cd0302ec2029700fa8e2c662ce0212655a0ec6fd303c2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-23.json",
+          "bytes": 1623,
+          "sha256": "5187734418d971f02e877cbd1b362bc1f5e2d9ad2bf20f6c8acb28f994d2c881"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-24.json",
+          "bytes": 130,
+          "sha256": "33f1834c9a017747c95b0f89ddf5883ffcd29c004d15fd29145a6c1fb4088fca"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-25.json",
+          "bytes": 2418,
+          "sha256": "4891fd74c7a0831cdc5ead6419c60872102852eb0d0149af95b0052fe2a7b84e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-26.json",
+          "bytes": 2790,
+          "sha256": "e5ce81978ae50b6acfea750c3f4c2684dc0f55c7df8eb3e24283b7b2ee9f761f"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-27.json",
+          "bytes": 1082,
+          "sha256": "edbcdd36b7f295779b155269bfcb1bf37ab2eb2752d3bf3ef5acd3673e866700"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-28.json",
+          "bytes": 262,
+          "sha256": "eb075fac540fe816091b6731c5616ced37caa182cb21ac87ace6f965a3253e36"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-29.json",
+          "bytes": 136,
+          "sha256": "5f77a31421375a5158d72a95a2594a7c62059928008c9d811ecf2edf4befc1be"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-30.json",
+          "bytes": 6298,
+          "sha256": "dca1e45b0ed0da92a81a37ced9eceb857e45dcd5b97f751e8c8157a472810a48"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-31.json",
+          "bytes": 1285,
+          "sha256": "d81c9030108c77f601538dd148c1f6c23775e55ddbe401e6cb6e2dd6dd2f9515"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-32.json",
+          "bytes": 129,
+          "sha256": "0b5cd83a7d6cf65b81cd29cd26a291cc18a572e70e18e88d3ca85ac00b1a4421"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-33.json",
+          "bytes": 259,
+          "sha256": "a8574f337f73d932615cfb4898f8a094bb6618dfc1e3f9b562cb4d84f2ebfc8d"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-34.json",
+          "bytes": 1754,
+          "sha256": "d163dc278018827bc48523e918f0729805a62b0fd9f57ce4225230bd1e11a34a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-35.json",
+          "bytes": 1133,
+          "sha256": "4f1a7ec867256132e422ea3e1074d33e1cf1163e578f4ade58aa948f746b7049"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-36.json",
+          "bytes": 262,
+          "sha256": "b5ebebb6c47a7ad52eb962a81a11950cd902237e620519a6e95dae8f3e35d570"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-37.json",
+          "bytes": 136,
+          "sha256": "4c9dc7d89d1ea2fccd00d4441689cdee83c2d5749a81a7659aecdeee13be137d"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-38.json",
+          "bytes": 6298,
+          "sha256": "b879fe2926f16d0bc067f575a3bc928f556fb906d8729f41bfbc2f9e51f18118"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-39.json",
+          "bytes": 1135,
+          "sha256": "062a2dc84be1309b2e318268fbec766535a606e95f2ed26c1ef892714d5f9861"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-40.json",
+          "bytes": 2549,
+          "sha256": "1ba826e0da27a14a5227265882ff28649f7f01844427c62338f4c5970ee7a235"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-41.json",
+          "bytes": 1689,
+          "sha256": "7e985d868f29ab583c217cd4d1a7c9df9919ba4be172e3fab0469fd9cd371add"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-42.json",
+          "bytes": 537,
+          "sha256": "ae8fad6b363d8811724d19b74be3b16e06b347c96bbe7170e76fd656888b054b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-43.json",
+          "bytes": 2698,
+          "sha256": "0f8e09eeadcba72d1bf67319a3cfee6a97bd4a9d7161b4e06d69a308d155e07a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-44.json",
+          "bytes": 4491,
+          "sha256": "4ee1caec158981334a04c82710e4db4add89134e07b132e031e686ecc75bfc31"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-45.json",
+          "bytes": 140,
+          "sha256": "f79cbb4932fad7fee8b8892e2954d7f5c9cc569dbd692d299eb4508c3968193b"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-46.json",
+          "bytes": 6457,
+          "sha256": "0bec731903ddce31b38e9d977560ccc09b805d458c4516c33402706a310ebebf"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-47.json",
+          "bytes": 191,
+          "sha256": "f4bae46b6580aa84ef50b0feb48fc894d5bc0062d54f4c1330d6f788e023c5ff"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-48.json",
+          "bytes": 1434,
+          "sha256": "e432a4d3d379f2b248456411c2bcdc87c919f5769fa5ae6e788eccab03705640"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-49.json",
+          "bytes": 5350,
+          "sha256": "0cd1350f07fef890bd8ba9a053b2ca8203085c04467be0c6f43c2d7547400f28"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-50.json",
+          "bytes": 140,
+          "sha256": "644659bb4e75886eb91ed4401bb0d3887e1cc57cb85d8d2b8f198f2e3d809164"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-51.json",
+          "bytes": 3622,
+          "sha256": "7a186fc4bc3dbf417ea237f8f1a41b2e71535ec765f465c9342d466fa6f8e6dd"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-52.json",
+          "bytes": 2350,
+          "sha256": "10d8f8d496dd5cad0725961a4bf5e9e01a542f045cdc93cee8264eac1ac966bf"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-53.json",
+          "bytes": 1160,
+          "sha256": "2475b915ac4a6b2231d039ef694e8097ca216d4b26ce3c2036630f32dfce8d81"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-54.json",
+          "bytes": 6109,
+          "sha256": "b7849d54c4eef07ee741adc0ccdee0f2368de14da785d46f897b572aefd90648"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-55.json",
+          "bytes": 76,
+          "sha256": "ccb39773ab89fb595d638b3f7c5301cece1c0e5c6ee890edf91d86da1e5895ae"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-56.json",
+          "bytes": 1824,
+          "sha256": "71d8605b573d6a8f2201bc54da58a96fb2e8d0b6c93927eeaada3c23d4d5fb2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-57.json",
+          "bytes": 1520,
+          "sha256": "bd621dc52f5bf81583dac2f033cbf0929d1be6d5f648db205159e093c888657f"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-58.json",
+          "bytes": 493,
+          "sha256": "77c0119914f6d794d4a98a4a4c22fa6fae3bc42070e7c6961a77c29fae0d85ab"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/input-59.json",
+          "bytes": 536,
+          "sha256": "6fc15d711a23dc368c4058f4308bc062850caea51c547ab5a2f8a68ab84df7e5"
+        }
+      ],
+      "segments": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/segments.jsonl",
+        "bytes": 82991,
+        "sha256": "48f5687a266998f22608ed0f8100e47d8a7ff263f48dcc6bef0cdf9cf4ed5f3d"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/runner.log",
+        "bytes": 1394160,
+        "sha256": "bd36aa77f8c71a194c87963a2ca1c0b437a0e0093446d2177c72f46386909533"
+      },
+      "stop": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/published-60.json",
+        "bytes": 62,
+        "sha256": "06d113ee344c2cf7da2b10ae6ef4d92a224dbe19b8061368be4f2fe27a0c11cd"
+      },
+      "endFrame": 125200
+    }
+  },
+  "workloads": {
+    "normal": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/hiredguns-copperstart-firefight-v1.json",
+      "bytes": 164426,
+      "sha256": "935a350aa7896a99fc0822117c2fad15c8554ff10ce03af21cddfc030e06383b"
+    },
+    "native": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/hiredguns-kickstart13-firefight-cli-v1.json",
+      "bytes": 164217,
+      "sha256": "62412ddaa93d9d1e8a502660d0b78686ec6e9032a12be64c2a57abfa8bf902bd"
+    }
+  },
+  "eventCounts": {
+    "normal": 2837,
+    "scalar": 2837,
+    "native": 2838
+  },
+  "media": [
+    {
+      "disk": 1,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).zip",
+      "archiveBytes": 782764,
+      "archiveSha256": "3880f61d819113256fcdd887faad1fa0f29ea7b766b6a7642d1cb7babd912716",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 1 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "be9bb4b5a4bf2bd4854746c717a3087aa4436ae41f369405654b9267e58173b9"
+    },
+    {
+      "disk": 2,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).zip",
+      "archiveBytes": 770747,
+      "archiveSha256": "f33e3e6987ee3457821f89670502708b4330574215b1894fb583d487192c6cac",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 2 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "9f48e0bdd7b064b3c20850ad2cade87b920f0f19ab64b0ec1219837e1816c2e9"
+    },
+    {
+      "disk": 3,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).zip",
+      "archiveBytes": 703179,
+      "archiveSha256": "3bcf2ff4434b2b02fc9df6c988e8afa34396efc690528e9eed7d3bc6e22e1bc7",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 3 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "764ed85003fad7df665fb72eb953127e65b2c07531581b9ba302489de918c888"
+    },
+    {
+      "disk": 4,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).zip",
+      "archiveBytes": 789964,
+      "archiveSha256": "6792dea14c8ecf63ea90f6af51832ac755e529e543a707344bec4c1ccea821a3",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 4 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "e5641c5ee99f0b58f492cb140961bd9925cd36d8dc01595f5abce35fd73e76d8"
+    },
+    {
+      "disk": 5,
+      "path": "C:\\Data\\TestImages\\Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).zip",
+      "archiveBytes": 588807,
+      "archiveSha256": "0ab9d50b8eea834316c76a453e1c2582cd580d326e3246c9cfab2754c3852e18",
+      "entry": "Hired Guns v1.08.39.25 (1993-09-24)(Psygnosis)(M5)(Disk 5 of 5).adf",
+      "entryBytes": 901120,
+      "entrySha256": "5c0715821de8ed6d66c04b4dc2216c4a37535014bfb43f8cc61989ffb81f7b3b"
+    }
+  ],
+  "mountedDisks": [
+    1,
+    2,
+    3
+  ],
+  "parity": {
+    "filesPerMode": 6565,
+    "differences": [],
+    "captureIdentities": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/capture-identities.json",
+      "bytes": 789114,
+      "sha256": "8e08538bb34f5d0f13d09a6553c790cbd30385aa78821b8837072d76957b3ac3"
+    },
+    "captureSetSha256": "8e08538bb34f5d0f13d09a6553c790cbd30385aa78821b8837072d76957b3ac3",
+    "encoding": "UTF-8 sorted filenames and keys; compact separators; no trailing newline",
+    "audioNonzeroSnapshots": 991
+  },
+  "nativeCaptureFiles": 6265,
+  "previousPrefix": {
+    "normal": {
+      "files": 1505,
+      "endFrame": 30000,
+      "allByteIdentical": true
+    },
+    "native": {
+      "files": 1205,
+      "endFrame": 24000,
+      "allByteIdentical": true
+    }
+  },
+  "nativeBitmapControls": [
+    {
+      "stage": "Inventory before equipping",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-051300.bmp",
+        "bytes": 1136870,
+        "sha256": "01271e7ae412059b50b9b738272890d29e0da1a9f0b5619b6538dbf96c09468c"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-045300.bmp",
+        "bytes": 1136870,
+        "sha256": "01271e7ae412059b50b9b738272890d29e0da1a9f0b5619b6538dbf96c09468c"
+      },
+      "exactFullBitmapMatch": true
+    },
+    {
+      "stage": "First exit sign and party split",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-063300.bmp",
+        "bytes": 1136870,
+        "sha256": "788e79b508fdb60cbe4effb70b4a1e9c0407c3c3e48a9711e47c0783b03c9a51"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-057300.bmp",
+        "bytes": 1136870,
+        "sha256": "788e79b508fdb60cbe4effb70b4a1e9c0407c3c3e48a9711e47c0783b03c9a51"
+      },
+      "exactFullBitmapMatch": true
+    },
+    {
+      "stage": "Friendly-fire death",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-066000.bmp",
+        "bytes": 1136870,
+        "sha256": "b4aeedd9ce6a1380136c07b068d0682d54d10c987c088457c9fe0e66cb90d287"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-060000.bmp",
+        "bytes": 1136870,
+        "sha256": "b4aeedd9ce6a1380136c07b068d0682d54d10c987c088457c9fe0e66cb90d287"
+      },
+      "exactFullBitmapMatch": true
+    },
+    {
+      "stage": "Restarted Training",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-094200.bmp",
+        "bytes": 1136870,
+        "sha256": "c058a8fd78d6422d4c0ff838fa18d9af58f3a32ce9ac11ead759e2841da8c08a"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-088200.bmp",
+        "bytes": 1136870,
+        "sha256": "c058a8fd78d6422d4c0ff838fa18d9af58f3a32ce9ac11ead759e2841da8c08a"
+      },
+      "exactFullBitmapMatch": true
+    },
+    {
+      "stage": "Required key collected",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-114100.bmp",
+        "bytes": 1136870,
+        "sha256": "dc980b91f2272be2e03f0c2aadb8e3523b9e2d6444a4de399f38a77aa468a987"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-108100.bmp",
+        "bytes": 1136870,
+        "sha256": "dc980b91f2272be2e03f0c2aadb8e3523b9e2d6444a4de399f38a77aa468a987"
+      },
+      "exactFullBitmapMatch": true
+    },
+    {
+      "stage": "Armed combat continuation",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-124400.bmp",
+        "bytes": 1136870,
+        "sha256": "a48a99d2bcb3292fa0bba7ca05deb31691baeab28412be899b0c8c0b2f516aff"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-118400.bmp",
+        "bytes": 1136870,
+        "sha256": "a48a99d2bcb3292fa0bba7ca05deb31691baeab28412be899b0c8c0b2f516aff"
+      },
+      "exactFullBitmapMatch": true
+    },
+    {
+      "stage": "Final reviewed checkpoint",
+      "copperStart": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-131200.bmp",
+        "bytes": 1136870,
+        "sha256": "74aa6fb1abf2a9a531566c90ece3f256a222f6804d1f83cd9c6438edc8b46105"
+      },
+      "kickstart13": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-125200.bmp",
+        "bytes": 1136870,
+        "sha256": "74aa6fb1abf2a9a531566c90ece3f256a222f6804d1f83cd9c6438edc8b46105"
+      },
+      "exactFullBitmapMatch": true
+    }
+  ],
+  "audioObservations": [
+    {
+      "frame": 67200,
+      "pcm": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-067200.pcm",
+        "bytes": 3848,
+        "sha256": "cde81907468b308a39c1090b2f1f58aa083c959fe9d6b1ad71999c12c09ef8e8"
+      },
+      "samples": 1924,
+      "nonzeroSamples": 1899,
+      "peak": 4032
+    },
+    {
+      "frame": 67800,
+      "pcm": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-067800.pcm",
+        "bytes": 3848,
+        "sha256": "7caf53886680fce8b3bb96d1230a27daab62bcd1ae118d3215cb788a0fcc351a"
+      },
+      "samples": 1924,
+      "nonzeroSamples": 955,
+      "peak": 6300
+    },
+    {
+      "frame": 124400,
+      "pcm": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-124400.pcm",
+        "bytes": 3848,
+        "sha256": "a59269627643e64cf1becfe9b03d1f3a72035304af5fe15c200ca838a53d8e1e"
+      },
+      "samples": 1924,
+      "nonzeroSamples": 958,
+      "peak": 7560
+    }
+  ],
+  "status": "PASS bounded single-player Training zone 3 Fire Fight combat and level completion",
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "branch": "codex/copperstart-intuition-20261018",
+    "commit": "2eab441e09e198afd2cbce4c11e3575373c45cdf",
+    "tree": "d0f9e9347f62e9b07973fac73bba4324aeda072e",
+    "clean": true,
+    "remoteTipVerified": true,
+    "changes": "Compatibility documentation only for this continuation",
+    "replayStartCommit": "3231f24dd6abae56e7d479893a4cdde9c33c659a",
+    "separateMergeDuringReplay": "0e64392e7186e378d75abf50ac83bf1190add4d2",
+    "mergedSourceRomRebuiltOrQualified": false
+  },
+  "romProducer": {
+    "commit": "23faf28236ef6f2987956207e93f849b89779bfe",
+    "romUnchanged": true,
+    "previousQualification": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/docs/engine/COPPERSTART_HIRED_GUNS_TRAINING_2026-10-19.json",
+      "bytes": 57825,
+      "sha256": "368acbc6ea45e8d624673df8c0e3946a56e88bd3e3c08da232da84d382b51517"
+    },
+    "productionRom": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/rom-production/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "94ebb5161e593cfcc40e5de18780101e3c9cc5c70e0a467381b9ac3f111eaca5"
+    },
+    "compositionReceipt": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/rom-production/CopperStart-DiskBoot.graphics.json",
+      "bytes": 7984,
+      "sha256": "80be1d0076ece866cae734c2aee320b7642c8b5a66957aaf2155763e5753148a"
+    },
+    "qualificationManifest": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/rom-1/disk-boot-test-manifest.json",
+      "bytes": 9672,
+      "sha256": "51f95e7f309c052088d78c6f6729dfe6405e9ec8cae7bc4f85ebbf79c82d066c"
+    },
+    "producerInputs": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperStart-System.dll",
+        "bytes": 44544,
+        "sha256": "3d717906e7257360cb03c1a0ffd06d26091edec166d39a909c524c3d132a5af6"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperStart.Devices.dll",
+        "bytes": 95744,
+        "sha256": "54846d3325462c9a468a4a6315126e9bd83ba1972725cf16a96cf6a0f51afc27"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperStart.Exec.dll",
+        "bytes": 190976,
+        "sha256": "179a089a2386a5a234bd28062ee7f378805ef09bfad22b1b3be9b2102499b0ca"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperStart.Dos.dll",
+        "bytes": 753664,
+        "sha256": "43beec6a4df307b8c7e934a7fb6e0598f607f6268aef0547c77f4e68cc83200c"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperSharp.Sdk.Amiga.dll",
+        "bytes": 549376,
+        "sha256": "eabb73c88917b5c9554229aa6475fac9761c1e30cbda0daf4e4488eaba1fd372"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperSharp.Sdk.Amiga.Support.dll",
+        "bytes": 155648,
+        "sha256": "c42e00af0bd22fac66a6431d8669947a2c491589d1188bdeb9788809fdf57b0a"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperSharp.Compiler.dll",
+        "bytes": 2738688,
+        "sha256": "b22cd19cfd0960ae727ad18721bd419c095262bf7f5be6a52aab5f2f93adf1a2"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperSharp.Targets.Amiga.dll",
+        "bytes": 42496,
+        "sha256": "fa20ba35cd9013c96442ec46903a0c0f0ecef96c852b28383e4194d5503234a1"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+        "bytes": 288256,
+        "sha256": "c72a077938c26096ebf5452f29e597ba62b219b00c78f3a7d5f2e0a38678292c"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/Copper68k.dll",
+        "bytes": 978944,
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperStart.Graphics.dll",
+        "bytes": 2440704,
+        "sha256": "d76b5eec19e68af5fa43325d4c6449ceb853b258ae47b42b271140e243d15993"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-graphics-2026-10-19/fixture-1/bin/Release/net10.0/CopperStart.Intuition.Native.dll",
+        "bytes": 89600,
+        "sha256": "c6799675a6aac8bfdf60dbc567eda59a06a1596b82eeffbb80b4682ca9126342"
+      }
+    ],
+    "compiledMain": {
+      "reused": true,
+      "sourceCommit": "6a58b0dd71ec3b4eb70ea50aa8ec4446bdb60648",
+      "codeBytes": 467130,
+      "image": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-cia-2026-10-19/rom/CopperStart-DiskBoot-compiled.rom",
+        "bytes": 524288,
+        "sha256": "b833f0e978c118abe4559551fed981e03a9374edb3fbc2b20e5aa82e782f572e"
+      },
+      "note": "Only native Intuition emitter changed. Fresh unlinked main body from the CIA continuation; no fresh main compilation claimed."
+    }
+  },
+  "validation": {
+    "freshFullRomMediaRuns": 3,
+    "freshUnitTests": 0,
+    "freshBuild": false,
+    "previousUnitCases": {
+      "passed": 110,
+      "classification": "Prior exact-ROM graphics/startup qualification; not rerun or relabelled as fresh"
+    },
+    "checks": [
+      "All normal/scalar capture files match",
+      "All captured unsupported/video-unsupported flags are null",
+      "Native completion BMP matches the complete raster",
+      "Actual loaded segments match saved published revisions and portable ordered event streams",
+      "Original media archive and extracted ADF hashes match",
+      "Frozen ROM, input and binary identities match; all runs exit zero",
+      "Documentation links/instructions, JSON/event equivalence, artifact identities and Git checks"
+    ]
+  },
+  "replayHarness": {
+    "source": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/native-live-probe/Program.cs",
+        "bytes": 2404,
+        "sha256": "212ebadf2dbd6eac1f5a1fc872c5550917a955f99ec0820a099b937793da6ba7"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/native-live-probe/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/native-live-probe/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      }
+    ],
+    "launcher": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/start.py",
+      "bytes": 1668,
+      "sha256": "7a7f4cd85800058e81e146f147016f48ca44a2156ee55a52c739542b043dc7fb"
+    },
+    "controlPublisher": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/publish.py",
+      "bytes": 862,
+      "sha256": "07c35a21a686d1508b077a54637ef66d3adc462f97f50163121606cda594b335"
+    },
+    "verifier": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/verify.py",
+      "bytes": 5670,
+      "sha256": "260568aabd4c52450ac458f07de88a2236fb737d399ad17c31cbd9ecfec3c9e9"
+    },
+    "mode": "Frozen single-owner Lightweight guest-ROM runner, physical keyboard/mouse/media events and read-only RAM/hardware snapshots; no guest memory/register injection or host OS implementation"
+  },
+  "controls": {
+    "reference": "Original Kickstart 1.3, same original media and frozen CPU/hardware binaries; physical Ctrl-D then original SystemTakeover CLI",
+    "mouse": "Read-only game H/V words at C2369E/C236A0 guide signed physical JOY0DAT deltas. Bounded packets and button edges only.",
+    "key": "Read-only original-game observations locate item 75 at world [12,16,10]. Physical right-click pickup adds it to the carried inventory; approaching the final gate consumes it. The missing key, inventory choices, facing on retries and hostile deaths reproduce with Kickstart.",
+    "inputGenerator": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/actions.py",
+      "bytes": 1385,
+      "sha256": "a60ea0a2e29c19e2cac59faa5506abde2ada14fa35b9ee4cba134e57036a4b54"
+    },
+    "fasterInputGenerator": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-combat-2026-10-19/actions-fast.py",
+      "bytes": 1397,
+      "sha256": "fb90a09428f34931bedcdd2a29babea71de15ce6fb6908a32278fcae3097ede5"
+    }
+  },
+  "fixtures": {
+    "copperStartEvents": 2837,
+    "nativeEvents": 2838,
+    "normalScalarEventsIdentical": true,
+    "includesExplorationAndFourInGameRetries": true,
+    "portableMedia": "ZIP basenames and unchanged ADF entries relative to the input JSON; place beside the supplied disk 2/3 ZIPs, boot disk 1 separately. Only path spelling differs from actual loaded absolute selectors. End at 131200 CopperStart / 125200 Kickstart fields."
+  },
+  "reviewedFrames": {
+    "normal": {
+      "51000": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-051000.bmp",
+          "bytes": 1136870,
+          "sha256": "92450188d5523cd0f351d92a5ac2899f91f6181304e1ebfa8a659eca77d1f3da"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-051000.png",
+          "bytes": 50133,
+          "sha256": "b3381570018ca98da202229df7380d6fa03644142345f6513ff7a0588856e86b"
+        }
+      },
+      "51300": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-051300.bmp",
+          "bytes": 1136870,
+          "sha256": "01271e7ae412059b50b9b738272890d29e0da1a9f0b5619b6538dbf96c09468c"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-051300.png",
+          "bytes": 45404,
+          "sha256": "cd98f0464ae85529d0c26fbd5b04d091d316da8b206d3f2cd067cb5443691b38"
+        }
+      },
+      "66000": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-066000.bmp",
+          "bytes": 1136870,
+          "sha256": "b4aeedd9ce6a1380136c07b068d0682d54d10c987c088457c9fe0e66cb90d287"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-066000.png",
+          "bytes": 34401,
+          "sha256": "a99fa71a4effc6ef18d2341f7199b9459a47a58592b64d1f2996493a936846eb"
+        }
+      },
+      "67200": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-067200.bmp",
+          "bytes": 1136870,
+          "sha256": "f5e216f6995ba915792b138de610527bb6a1250826f187b638d54f952bb2694c"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-067200.png",
+          "bytes": 35066,
+          "sha256": "4d33e2c7cf6fd29e7f7c7f2a121f6742e917941871ca13a36735fdb3be2aef40"
+        }
+      },
+      "67800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-067800.bmp",
+          "bytes": 1136870,
+          "sha256": "87cab65865dd43a396b3be6c269128540f139edcaa9c851b75c6d72e119f7655"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-067800.png",
+          "bytes": 35098,
+          "sha256": "eedffdfd1d0f766b88561d045afe57cad9fa068c5b166970f997f77d8654f0ff"
+        }
+      },
+      "84900": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-084900.bmp",
+          "bytes": 1136870,
+          "sha256": "f21ad8f94420bff666944678fa523d22f7632474f7fb14813c7b14ed26b6c475"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-084900.png",
+          "bytes": 49496,
+          "sha256": "c55551c8e3c716d00c2aa5e8054a8206afaf8e12578f71504e85134e2ecfbf28"
+        }
+      },
+      "89700": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-089700.bmp",
+          "bytes": 1136870,
+          "sha256": "9fb0335d73d8554385ca9f6f60db439511a678ad4ccc0dc8581c055a1f35d324"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-089700.png",
+          "bytes": 33555,
+          "sha256": "94b65a510a7bca1f492db9e1eb4877095fec6c3d2708b6ac85e2eb954c1df9fc"
+        }
+      },
+      "92700": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-092700.bmp",
+          "bytes": 1136870,
+          "sha256": "b22bd1b07970a53d6eb88dcf90b4894375a4dbd5f948829fef9c2180a199eccd"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-092700.png",
+          "bytes": 16320,
+          "sha256": "8ed65e2f0046545bb8cc4cba75523cb61ba02421ac1a22455eedae1fbe7e02d9"
+        }
+      },
+      "114100": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-114100.bmp",
+          "bytes": 1136870,
+          "sha256": "dc980b91f2272be2e03f0c2aadb8e3523b9e2d6444a4de399f38a77aa468a987"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-114100.png",
+          "bytes": 42908,
+          "sha256": "904ec7e584e60e1a295dc2a6ccf9d7ea2dbb1031921f337d37ed28f6c63459a2"
+        }
+      },
+      "118800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-118800.bmp",
+          "bytes": 1136870,
+          "sha256": "8ae8741ba84320bf8af9cb642958e0483dc8e08a7145971183254708442d4be5"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-118800.png",
+          "bytes": 5761,
+          "sha256": "119a2a4727fba1db6b981cdcefa0d0726d89cd8a4ed576730c5cb43e0602fa7a"
+        }
+      },
+      "123700": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-123700.bmp",
+          "bytes": 1136870,
+          "sha256": "a52923fa59f2b229dce244f01491f0aee7a9867f4dfc1c2e182bd40ebbd4459b"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-123700.png",
+          "bytes": 47786,
+          "sha256": "fea124681405e0dda6eb4ca2833501b622f131e2e2f5a04c311be57a08907773"
+        }
+      },
+      "124400": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-124400.bmp",
+          "bytes": 1136870,
+          "sha256": "a48a99d2bcb3292fa0bba7ca05deb31691baeab28412be899b0c8c0b2f516aff"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-124400.png",
+          "bytes": 48932,
+          "sha256": "c59a1c1e56bfcd193dd80a4d2697a57753999e825bca466f87f8f5b9748e1924"
+        }
+      },
+      "128800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-128800.bmp",
+          "bytes": 1136870,
+          "sha256": "8b7744ebedca482d17319845eb736165592ba1ff75c1ad936a53412ee1bc05ec"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-128800.png",
+          "bytes": 30360,
+          "sha256": "4a0630cdabdd339d0fb09bfa7a7648e42e105517a3c1fb14f2cca6bb826fc480"
+        }
+      },
+      "129800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-129800.bmp",
+          "bytes": 1136870,
+          "sha256": "1ea72f9012b07f020e8e31e10faf02dd3b2c0e57fbed09981efd0a15bde9f309"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-129800.png",
+          "bytes": 15831,
+          "sha256": "ba260ba8c454e33e168600bdab2065f0ea2926897e068dc4a6fb05a7bf0b2cc2"
+        }
+      },
+      "130500": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-130500.bmp",
+          "bytes": 1136870,
+          "sha256": "27bf27ac73b5cea14cdbdcf73cf19ea6fd715ef1171057b6165e179b350f86b7"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-130500.png",
+          "bytes": 15994,
+          "sha256": "49d9a7a06c7514015024701612c9fd09f7b1950df15999dc1112b8bb69358a1a"
+        }
+      },
+      "131200": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-normal/captures/frame-131200.bmp",
+          "bytes": 1136870,
+          "sha256": "74aa6fb1abf2a9a531566c90ece3f256a222f6804d1f83cd9c6438edc8b46105"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-normal-131200.png",
+          "bytes": 5990,
+          "sha256": "b6343ec64d7ad84965cc6e23cc79b3e361995be415937fe76eeb1b806ac3621f"
+        }
+      }
+    },
+    "native": {
+      "45000": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-045000.bmp",
+          "bytes": 1136870,
+          "sha256": "5e6f009e4c58add0daa25b13122ca457a89f6f8fde0a19f4fe48a81454e3bd26"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-045000.png",
+          "bytes": 50010,
+          "sha256": "59117c0e330f74d723b3886156caaafb0639482066ce76118cecb08039b7e620"
+        }
+      },
+      "45300": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-045300.bmp",
+          "bytes": 1136870,
+          "sha256": "01271e7ae412059b50b9b738272890d29e0da1a9f0b5619b6538dbf96c09468c"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-045300.png",
+          "bytes": 45404,
+          "sha256": "cd98f0464ae85529d0c26fbd5b04d091d316da8b206d3f2cd067cb5443691b38"
+        }
+      },
+      "60000": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-060000.bmp",
+          "bytes": 1136870,
+          "sha256": "b4aeedd9ce6a1380136c07b068d0682d54d10c987c088457c9fe0e66cb90d287"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-060000.png",
+          "bytes": 34401,
+          "sha256": "a99fa71a4effc6ef18d2341f7199b9459a47a58592b64d1f2996493a936846eb"
+        }
+      },
+      "61200": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-061200.bmp",
+          "bytes": 1136870,
+          "sha256": "5f0938be9350bfeca9538e49020b31ccb9e0e90724ee02814ad40e1ddde25f67"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-061200.png",
+          "bytes": 35318,
+          "sha256": "038539368311e2378d5993a436d61957c2e7a2a440fe1631c8c1a619e5f9120c"
+        }
+      },
+      "61800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-061800.bmp",
+          "bytes": 1136870,
+          "sha256": "7744d046bfdd644ceb9dcf07dfb56ff709c6bc2f740c41ee4d0e0f35ae7846b3"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-061800.png",
+          "bytes": 35256,
+          "sha256": "7b07bcdbabc20d9b14de37bafecbc71b3d7137b96e452a39c485cb44cf543999"
+        }
+      },
+      "78900": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-078900.bmp",
+          "bytes": 1136870,
+          "sha256": "f65bac57203ce40b50eeb5e7feb0e719c42827e6eab870086412506ce8c7505b"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-078900.png",
+          "bytes": 49664,
+          "sha256": "98a9fddf1237460846f516d8e78da484c835270c363dfbfd57c7149054541e8d"
+        }
+      },
+      "83700": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-083700.bmp",
+          "bytes": 1136870,
+          "sha256": "dedd7b07b91beaa4519ea7fdb4c8d47abb63013b578c238c757560e530e7be2d"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-083700.png",
+          "bytes": 43925,
+          "sha256": "cc7d49288bbce86c5040fd8f4537e3936a8ec2383bfa4c64793648cc1688579f"
+        }
+      },
+      "86700": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-086700.bmp",
+          "bytes": 1136870,
+          "sha256": "f75c6b00112c096f6e6a8a5b626efccb05ad53d5a6e0824f9395854fb5cb2c71"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-086700.png",
+          "bytes": 16901,
+          "sha256": "e4c92e8d6b3d1ee767dfb2a1f1219df4e08ee9e99e9ffa4d1a6ad9a26d069c75"
+        }
+      },
+      "108100": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-108100.bmp",
+          "bytes": 1136870,
+          "sha256": "dc980b91f2272be2e03f0c2aadb8e3523b9e2d6444a4de399f38a77aa468a987"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-108100.png",
+          "bytes": 42908,
+          "sha256": "904ec7e584e60e1a295dc2a6ccf9d7ea2dbb1031921f337d37ed28f6c63459a2"
+        }
+      },
+      "112800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-112800.bmp",
+          "bytes": 1136870,
+          "sha256": "8ae8741ba84320bf8af9cb642958e0483dc8e08a7145971183254708442d4be5"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-112800.png",
+          "bytes": 5761,
+          "sha256": "119a2a4727fba1db6b981cdcefa0d0726d89cd8a4ed576730c5cb43e0602fa7a"
+        }
+      },
+      "117700": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-117700.bmp",
+          "bytes": 1136870,
+          "sha256": "a52923fa59f2b229dce244f01491f0aee7a9867f4dfc1c2e182bd40ebbd4459b"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-117700.png",
+          "bytes": 47786,
+          "sha256": "fea124681405e0dda6eb4ca2833501b622f131e2e2f5a04c311be57a08907773"
+        }
+      },
+      "118400": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-118400.bmp",
+          "bytes": 1136870,
+          "sha256": "a48a99d2bcb3292fa0bba7ca05deb31691baeab28412be899b0c8c0b2f516aff"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-118400.png",
+          "bytes": 48932,
+          "sha256": "c59a1c1e56bfcd193dd80a4d2697a57753999e825bca466f87f8f5b9748e1924"
+        }
+      },
+      "122800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-122800.bmp",
+          "bytes": 1136870,
+          "sha256": "8b7744ebedca482d17319845eb736165592ba1ff75c1ad936a53412ee1bc05ec"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-122800.png",
+          "bytes": 30360,
+          "sha256": "4a0630cdabdd339d0fb09bfa7a7648e42e105517a3c1fb14f2cca6bb826fc480"
+        }
+      },
+      "123800": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-123800.bmp",
+          "bytes": 1136870,
+          "sha256": "1ea72f9012b07f020e8e31e10faf02dd3b2c0e57fbed09981efd0a15bde9f309"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-123800.png",
+          "bytes": 15831,
+          "sha256": "ba260ba8c454e33e168600bdab2065f0ea2926897e068dc4a6fb05a7bf0b2cc2"
+        }
+      },
+      "124500": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-124500.bmp",
+          "bytes": 1136870,
+          "sha256": "27bf27ac73b5cea14cdbdcf73cf19ea6fd715ef1171057b6165e179b350f86b7"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-124500.png",
+          "bytes": 15994,
+          "sha256": "49d9a7a06c7514015024701612c9fd09f7b1950df15999dc1112b8bb69358a1a"
+        }
+      },
+      "125200": {
+        "bitmap": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/hired-combat-native/captures/frame-125200.bmp",
+          "bytes": 1136870,
+          "sha256": "74aa6fb1abf2a9a531566c90ece3f256a222f6804d1f83cd9c6438edc8b46105"
+        },
+        "review": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/review-hired-combat-native-125200.png",
+          "bytes": 5990,
+          "sha256": "b6343ec64d7ad84965cc6e23cc79b3e361995be415937fe76eeb1b806ac3621f"
+        }
+      }
+    }
+  },
+  "observation": {
+    "status": "PASS bounded single-player Training zone 3 Fire Fight combat and level completion",
+    "trainingCombatQualified": true,
+    "trainingLevelCompletionQualified": true,
+    "campaignOrFullGameCompletionQualified": false,
+    "winner": "Desverger",
+    "winnerScore": 94,
+    "completionFields": {
+      "copperStart": 131200,
+      "kickstart13": 125200
+    },
+    "successBitmapSha256": "74aa6fb1abf2a9a531566c90ece3f256a222f6804d1f83cd9c6438edc8b46105",
+    "partySurvival": "One survivor; the other three characters are MIA. Training briefing states the first participant to reach the exit wins.",
+    "retries": 4,
+    "compatibilityFixRequired": false,
+    "actions": [
+      "Cold original CLI launch, English chooser, Training Fire Fight and four-character selection",
+      "Original read-only DF0 disk 1/2/3 transitions",
+      "Weapon selection, reloading, hostile attacks and kills, friendly-fire death and game-over screen",
+      "Four physical Ctrl-R retries; initial facing and relative mouse position are observed rather than assumed",
+      "Key pickup in the combat room, automatic key use at the locked gate, teleporting, block pull/push and gap crossing",
+      "Exit-room guard defeat, exit control and exit point",
+      "Original Tesseract Battle Systems mission-objective-completed screen"
+    ]
+  },
+  "references": [
+    {
+      "title": "Original Hired Guns game manual: Training and keys/access wafers",
+      "url": "https://www.mocagh.org/miscgame/hiredguns-manual.pdf"
+    }
+  ],
+  "limits": [
+    "Single-player Training zone 3 Fire Fight, completed with one survivor; not complete-party survival, campaign/full game, other Training levels, saving, or later disk qualification",
+    "Original disks 1/2/3 are mounted; five-disk identity inventory does not qualify disks 4/5",
+    "Replay includes route exploration, deaths and four documented in-game retries; physical events are preserved rather than replaced by an unexecuted shorter route",
+    "Pinned producer ROM only; separate later source merge was not rebuilt or qualified",
+    "Original CLI launch, not full Workbench support; workbench.task remains unavailable",
+    "Cross-ROM exact bitmap identity applies to the explicitly listed checkpoints; cross-ROM RAM/PCM identity is not claimed",
+    "Nonzero PCM and normal/scalar parity, not a fresh listening/audio-quality/latency test",
+    "No fresh compilation or component/native-unit suite; earlier 110-case coverage remains prior evidence",
+    "Existing modal-window/display bounds and separate CIA Kickstart 3.1 removal-mask discrepancy remain unchanged",
+    "Correctness diagnostics, not hardware conformance or host-throughput acceptance",
+    "ROMs, media, binaries, images, captures and extracted game/source analysis remain local; committed changes are documentation and physical-input fixtures"
+  ]
+}

@@ -1,0 +1,1470 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "issue": "LWA-NATIVE-011",
+  "title": "Nitro remaining race-start wait",
+  "status": "repaired-bounded-controlled-first-race",
+  "protocol": "copperstart-native-compatibility-v1",
+  "previousCase": "COPPERSTART_NITRO_2026-10-17.json",
+  "consumerBaseCommit": "0236b3a170ea2fe65fcc90013dceb66436ead356",
+  "consumerInterruptFixCommit": "c0c0b9e0b0b66f5a813cea19a818825dc0e56c3e",
+  "cpuPackage": {
+    "version": "1.5.4-nitro-dev.2",
+    "sourceBase": "624e8054043a99f579abce5c97c21c9da4ae11ae",
+    "sourceFixCommit": "56272ebcf9a0544362a9b7740baec75c1f20c37b",
+    "sourceVersionCommit": "40207be34ac08dda76dd6f4ecfa915f3f8652332",
+    "flagOrderCommit": "40207be34ac08dda76dd6f4ecfa915f3f8652332",
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\feed\\Copper68k.1.5.4-nitro-dev.2.nupkg",
+    "sha256": "60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad",
+    "dllSha256": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "byteIdenticalInPackageCpuTestsAppAndCapturedRunner": true,
+    "publication": {
+      "kind": "owner-approved full GitHub release",
+      "url": "https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-nitro-dev.2",
+      "publishedAt": "2026-10-17T07:35:26Z",
+      "sourceCommit": "40207be34ac08dda76dd6f4ecfa915f3f8652332",
+      "assetUrl": "https://github.com/ilehtoranta/CopperMod/releases/download/copper68k-1.5.4-nitro-dev.2/Copper68k.1.5.4-nitro-dev.2.nupkg",
+      "assetDigest": "sha256:60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad",
+      "downloadVerification": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\publication-verification\\Copper68k.1.5.4-nitro-dev.2.nupkg",
+        "sha256": "60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad"
+      },
+      "approval": "Explicit user approval on 2026-10-17: Publish full GitHub release.",
+      "nugetOrgPublished": false,
+      "rebuiltOrOverwritten": false
+    }
+  },
+  "packageSha256": "60f9fb3bbde26d73b5bd27980c2fdb775b156f1a83e8c9e84786add3523002ad",
+  "packageRepositoryMetadata": {
+    "type": "git",
+    "url": "https://github.com/ilehtoranta/CopperMod.git",
+    "branch": "refs/heads/codex/nitro-prefetch-20261017",
+    "commit": "40207be34ac08dda76dd6f4ecfa915f3f8652332"
+  },
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "media": {
+    "path": "C:\\Data\\TestImages\\Nitro (1990)(Psygnosis)[extended adf].zip",
+    "sha256": "5d6cc2705621d85f5869255057dc1f67fe939cd8677647a890e4fedbf38da4e4",
+    "entry": "Nitro (1990)(Psygnosis)[extended adf].adf",
+    "entryBytes": 1942886,
+    "entrySha256": "895c78b4d0bc07b0e9fc12b86bac6d893b84fe76173f3020f26f1c6e224891c7"
+  },
+  "rom": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+    "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+  },
+  "nativeControlRom": {
+    "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+    "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+    "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+    "media": []
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "edd5dc8bd50b5e23718eafc3905a187fa625f72c864b4f45cc9843a1a043ec8d",
+    "CopperMod.Amiga.Lightweight.dll": "95388987b686643331e211cdf89f1d6984db43ceba3ea9ee1c7faa8e12d8fbed",
+    "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "CopperDisk.dll": "01754f0f57da516b2ff5207685c2a81f0c8464d5edf6ac736cc62c44a4ffe525"
+  },
+  "runs": {
+    "native-batch": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\native-batch\\run.json",
+        "sha256": "b2da74e05ecab4d7866f430404d01109f071e052fbaeddbf94207154c9cdaad5"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "42,46",
+        "cycle": "1989296064",
+        "cpu": "0x3D704434811A4BC6",
+        "hardware": "0xC70FD153C488F3E6",
+        "output": "0x848983B43E440BF5",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39531104",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+        "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+        "media": []
+      }
+    },
+    "native-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\native-scalar\\run.json",
+        "sha256": "6244e6c16d24503f31a0e2304828dca063ff17011321f022aad462cbf35b947f"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "45,49",
+        "cycle": "1989296064",
+        "cpu": "0x3D704434811A4BC6",
+        "hardware": "0xC70FD153C488F3E6",
+        "output": "0x848983B43E440BF5",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39549752",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+        "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+        "media": []
+      }
+    },
+    "copperstart-batch": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\run.json",
+        "sha256": "eb7b9e5d3845cbdee371bb3a9efe434259e999b0587391d0cf1f28486ee73878"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "46,67",
+        "cycle": "1989428000",
+        "cpu": "0x91DF401B41FEEB69",
+        "hardware": "0x5D580707269ADD63",
+        "output": "0x05A7AE41403D57E0",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39549544",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+        "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+        "media": []
+      }
+    },
+    "copperstart-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-scalar\\run.json",
+        "sha256": "df4f49591f829436bed752961e0f545b3aeb44429f589409045ac49c2242aa5e"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "46,57",
+        "cycle": "1989428000",
+        "cpu": "0x91DF401B41FEEB69",
+        "hardware": "0x5D580707269ADD63",
+        "output": "0x05A7AE41403D57E0",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39544912",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+        "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+        "media": []
+      }
+    },
+    "copperstart-neutral": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-neutral\\run.json",
+        "sha256": "c78962e7856084eed8190ea9fd957bac1adb4f8db45666126432b08227524005"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "45,67",
+        "cycle": "1989428000",
+        "cpu": "0x3E1AD2FC6494F0DA",
+        "hardware": "0xFFC30284D9FE2773",
+        "output": "0xBD14FB475687F9CA",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39568616",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\nitro-neutral.json",
+        "sha256": "9bc693604be28ca57b11e3e1ad16c7744135ac9aed19b8a506ee59362940299f",
+        "media": []
+      }
+    },
+    "lotus-batch": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\lotus-batch\\run.json",
+        "sha256": "f43933ca5a25eee07c6aaff6a20863b073e321dc05549e3cac3f390bff0d6fc1"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "45,22",
+        "cycle": "1989428000",
+        "cpu": "0x797C89352916A2D2",
+        "hardware": "0xA8E83FEF6CF4BEEF",
+        "output": "0x78CEFF3A8A272C09",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39506944",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-lotus2.json",
+        "sha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3",
+        "media": []
+      }
+    },
+    "lotus-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\lotus-scalar\\run.json",
+        "sha256": "3e2582411c6cf6fac5a277f8cb52fc259cb88109e548d2415e89a5f51be9cdff"
+      },
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "fps": "44,91",
+        "cycle": "1989428000",
+        "cpu": "0x797C89352916A2D2",
+        "hardware": "0xA8E83FEF6CF4BEEF",
+        "output": "0x78CEFF3A8A272C09",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "allocated": "39551296",
+        "adf": "True",
+        "unsupported": "none"
+      },
+      "captureFiles": 355,
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-fixed-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-lotus2.json",
+        "sha256": "b54d47135be66b7949a3c5fc10daad342801789570ce27799c6ed7cb15768fd3",
+        "media": []
+      }
+    }
+  },
+  "comparisons": {
+    "native": {
+      "filesCompared": 355,
+      "mismatches": []
+    },
+    "copperstart": {
+      "filesCompared": 355,
+      "mismatches": []
+    },
+    "lotus": {
+      "filesCompared": 355,
+      "mismatches": []
+    }
+  },
+  "drivingControl": {
+    "script": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\nitro-neutral.json",
+      "sha256": "9bc693604be28ca57b11e3e1ad16c7744135ac9aed19b8a506ee59362940299f"
+    },
+    "method": "Retain selection events through field 8200; omit subsequent driving input.",
+    "identicalCaptureFilesThroughField11000": 280,
+    "firstDifferentImage": "frame-011200.bmp",
+    "differentImages": [
+      "frame-011200.bmp",
+      "frame-011400.bmp",
+      "frame-011600.bmp",
+      "frame-011800.bmp",
+      "frame-012000.bmp",
+      "frame-012200.bmp",
+      "frame-012400.bmp",
+      "frame-012600.bmp",
+      "frame-012800.bmp",
+      "frame-013000.bmp",
+      "frame-013200.bmp",
+      "frame-013400.bmp",
+      "frame-013600.bmp",
+      "frame-013800.bmp",
+      "frame-014000.bmp"
+    ]
+  },
+  "reviewedCaptures": [
+    {
+      "frame": 10000,
+      "observation": "First-race starting grid, cars and traffic lights",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\captures\\frame-010000.bmp",
+      "sha256": "7736fdae45b47430871186e2b237f3653a77da30c0192d182e1d8677063de25f"
+    },
+    {
+      "frame": 11000,
+      "observation": "Starting position immediately before scripted driving",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\captures\\frame-011000.bmp",
+      "sha256": "d7ea6f1b32cb06785526b3b1d1e07c30a57702a41f9bb4fb34dfc85fe331a544"
+    },
+    {
+      "frame": 12000,
+      "observation": "Player car has moved and the city camera has scrolled",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\captures\\frame-012000.bmp",
+      "sha256": "71499eb30c664bb2d0c90968aade284d73fb03db5d5eade0b651a543811544df"
+    },
+    {
+      "frame": 13000,
+      "observation": "Different player position after steering and acceleration input",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\captures\\frame-013000.bmp",
+      "sha256": "cdc4433713751d4560dabf22505a6d9f24830c24eb773c8ae1b8170374922536"
+    },
+    {
+      "frame": 14000,
+      "observation": "First race continues after driving input is released",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\captures\\frame-014000.bmp",
+      "sha256": "c65ff5a9905b6db988cdc20e9790daeecf6a581d002941cee0f51eba16ea92a4"
+    },
+    {
+      "frame": 14000,
+      "observation": "No-driving comparison; player remains near the starting grid",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-neutral\\captures\\frame-014000.bmp",
+      "sha256": "51cdb8081599d01537a1a96fcad3bb8a941abc825ba2d48e4c626c3818c7f2cc"
+    },
+    {
+      "frame": 12000,
+      "observation": "Native Kickstart control also enters racing",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\native-batch\\captures\\frame-012000.bmp",
+      "sha256": "35d708588560678f63a3a25d2c1102e62ebd95b0287560ebac494101b5758064"
+    },
+    {
+      "frame": 14000,
+      "observation": "Lotus 2 first Forest Course race",
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\lotus-batch\\captures\\frame-014000.bmp",
+      "sha256": "ce522f40e52df48502e001dbd6987e0ebfadf577eeeb51e8bb427f5740da210b"
+    }
+  ],
+  "tests": {
+    "btst-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\btst-before.trx",
+      "sha256": "7e62d1d7d11b9720e612e8845f0b7933dfb2fe074ef6494085cf4a58791d2000",
+      "passed": 12,
+      "failed": 12,
+      "executed": 24,
+      "total": 24,
+      "skipped": 0
+    },
+    "btst-after.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\btst-after.trx",
+      "sha256": "e3b29b8b2ad2dd4b08a7150e5c81ad091cc75d14615896ae76cfa9456da14486",
+      "passed": 24,
+      "failed": 0,
+      "executed": 24,
+      "total": 24,
+      "skipped": 0
+    },
+    "btst-flag-order-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\btst-flag-order-before.trx",
+      "sha256": "f4e215fd42bffeb344d6f575b1f0a0cb5042aa9340fb4c7c478d9de3fbd952f6",
+      "passed": 0,
+      "failed": 24,
+      "executed": 24,
+      "total": 24,
+      "skipped": 0
+    },
+    "btst-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\btst-final.trx",
+      "sha256": "8fe288b0dcbabc0691bf08e2cfc541ebce93cbffab54c5651b80197b7435b9f0",
+      "passed": 24,
+      "failed": 0,
+      "executed": 24,
+      "total": 24,
+      "skipped": 0
+    },
+    "interrupt-sampling-before.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\interrupt-sampling-before.trx",
+      "sha256": "fac45da4bfc39610f32bc69aa178878b9e9e761d9b5cb94b2311f0dcdcdd2938",
+      "passed": 0,
+      "failed": 2,
+      "executed": 2,
+      "total": 2,
+      "skipped": 0
+    },
+    "interrupt-sampling-after.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\interrupt-sampling-after.trx",
+      "sha256": "777688e48bf82da9513e0b4ada5cb95171cd19d41a3980ffd2dec68d35a2104c",
+      "passed": 2,
+      "failed": 0,
+      "executed": 2,
+      "total": 2,
+      "skipped": 0
+    },
+    "engine-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\engine-final.trx",
+      "sha256": "acb1deb28236c845acc1054a97439b03f550af124d35a60530614159df07ce21",
+      "passed": 1247,
+      "failed": 0,
+      "executed": 1247,
+      "total": 1254,
+      "skipped": 7
+    },
+    "host-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\host-final.trx",
+      "sha256": "943f105faf6866917d0c6cb33cec53a27730a15b9df125e96aa800633d881c91",
+      "passed": 195,
+      "failed": 0,
+      "executed": 195,
+      "total": 201,
+      "skipped": 6
+    },
+    "cia-final.trx": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\tests\\cia-final.trx",
+      "sha256": "a846144242c12ac9eea80658a18e67659426ada16eee727a7bf525c4f7e1de74",
+      "passed": 2,
+      "failed": 0,
+      "executed": 2,
+      "total": 2,
+      "skipped": 0
+    }
+  },
+  "finalArtifactAudit": {
+    "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final-audit.json",
+    "sha256": "b65d7185145df6eeea4409a7992f41321fc4d3100cda69d92cd69ae8cbc77be3"
+  },
+  "sourceCi": {
+    "conclusion": "success",
+    "headSha": "40207be34ac08dda76dd6f4ecfa915f3f8652332",
+    "jobs": [
+      {
+        "completedAt": "2026-10-16T23:52:35Z",
+        "conclusion": "success",
+        "databaseId": 117226535369,
+        "name": "build-and-test",
+        "startedAt": "2026-10-16T22:32:08Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-16T22:32:12Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-16T22:32:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:32:19Z",
+            "conclusion": "success",
+            "name": "Check out",
+            "number": 2,
+            "startedAt": "2026-10-16T22:32:12Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:32:52Z",
+            "conclusion": "success",
+            "name": "Set up .NET",
+            "number": 3,
+            "startedAt": "2026-10-16T22:32:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:33:23Z",
+            "conclusion": "success",
+            "name": "Pack Copper68k NuGet",
+            "number": 4,
+            "startedAt": "2026-10-16T22:32:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:48:42Z",
+            "conclusion": "success",
+            "name": "Test Copper68k",
+            "number": 5,
+            "startedAt": "2026-10-16T22:33:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:51:52Z",
+            "conclusion": "success",
+            "name": "Require accepted synthetic coverage and report deferred qualification",
+            "number": 6,
+            "startedAt": "2026-10-16T23:48:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:52:09Z",
+            "conclusion": "success",
+            "name": "Upload synthetic architectural coverage",
+            "number": 7,
+            "startedAt": "2026-10-16T23:51:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:52:31Z",
+            "conclusion": "success",
+            "name": "Test AHX shared Amiga dependency",
+            "number": 8,
+            "startedAt": "2026-10-16T23:52:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:52:31Z",
+            "conclusion": "success",
+            "name": "Post Set up .NET",
+            "number": 15,
+            "startedAt": "2026-10-16T23:52:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:52:34Z",
+            "conclusion": "success",
+            "name": "Post Check out",
+            "number": 16,
+            "startedAt": "2026-10-16T23:52:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T23:52:34Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 17,
+            "startedAt": "2026-10-16T23:52:34Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ilehtoranta/CopperMod/actions/runs/38976324951/job/117226535369"
+      },
+      {
+        "completedAt": "2026-10-16T22:33:29Z",
+        "conclusion": "success",
+        "databaseId": 117226535639,
+        "name": "sid-core",
+        "startedAt": "2026-10-16T22:32:08Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-16T22:32:10Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-16T22:32:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:32:18Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "startedAt": "2026-10-16T22:32:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:32:57Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-dotnet@v4",
+            "number": 3,
+            "startedAt": "2026-10-16T22:32:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:33:26Z",
+            "conclusion": "success",
+            "name": "Test SID digital timing and sampling",
+            "number": 4,
+            "startedAt": "2026-10-16T22:32:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:33:27Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@v4",
+            "number": 5,
+            "startedAt": "2026-10-16T22:33:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:33:27Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-dotnet@v4",
+            "number": 9,
+            "startedAt": "2026-10-16T22:33:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:33:29Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 10,
+            "startedAt": "2026-10-16T22:33:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-16T22:33:29Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-16T22:33:29Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ilehtoranta/CopperMod/actions/runs/38976324951/job/117226535639"
+      },
+      {
+        "completedAt": "2026-10-16T22:32:07Z",
+        "conclusion": "skipped",
+        "databaseId": 117226536993,
+        "name": "sid-accuracy",
+        "startedAt": "2026-10-16T22:32:07Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/ilehtoranta/CopperMod/actions/runs/38976324951/job/117226536993"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/ilehtoranta/CopperMod/actions/runs/38976324951"
+  },
+  "syntheticGate": {
+    "m68040AccessDoubleFaultScope": {
+      "dispatchCcr": [
+        0,
+        31
+      ],
+      "translationEnabled": false,
+      "recovery": "External reset, including restored host entry; interrupt, task/subroutine entry and halted batches remain inactive",
+      "faults": "Every byte of format-7 stack/vector; later handler validation refaults; warmed RTE fallback and compiled B/W/L operand read/write side exits",
+      "banks": [
+        "ISP",
+        "MSP"
+      ],
+      "undefined": "Partial stack write order, contents and exact SP",
+      "batches": 5,
+      "engines": [
+        "accurate",
+        "classic",
+        "V2"
+      ],
+      "remaining": "Internal restoration, other handler-entry paths and general architectural access-fault restart",
+      "logicalCases": 106656,
+      "directCcr": "all 32"
+    },
+    "unavailableReferenceCoverage": "External audits not requested/executed",
+    "seeded": null,
+    "controlGate": "passing",
+    "m68040ChainedOddScope": {
+      "referenceCommand": "scripts/test-copper68k-040-rte-handoff.ps1",
+      "referenceScope": "Untouched generated WinUAE 040 RTE and cputest SR helper handoff; documented frame/S-bit composition",
+      "forms": "0/2/3",
+      "logicalCases": 1244160,
+      "qualified": "One/two throwaways, all banks/user M aliases, independent trace epochs, CCR, SR provenance, consumed stacks, frame reads and format-2 address-error image",
+      "remaining": "Format7 continuations/foreign context, full reference exception entry and hardware qualification",
+      "batches": 4,
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ]
+    },
+    "m68040RteRepairScope": {
+      "forms": "0/2/3, invalid 4/15 repaired to 0, normal/CM/CT/CU/CP49",
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ],
+      "phases": [
+        "fault entry",
+        "three original-frame repair stores",
+        "explicit incoming-trace clear",
+        "handler return",
+        "original RTE retry",
+        "optional pending return",
+        "following instruction"
+      ],
+      "translationEnabled": false,
+      "restoredBanks": [
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "incomingTrace": "All three direct; T1 for each chained read byte",
+      "batches": 2,
+      "chainedCcr": [
+        0,
+        31
+      ],
+      "faultTailBanks": [
+        "ISP",
+        "MSP"
+      ],
+      "remaining": "Internal restoration, mixed-epoch trace provenance and other real access faults; normal/CM preserved-trace and user-tail repair are qualified separately",
+      "logicalCases": 912384,
+      "directCcr": "all 32"
+    },
+    "m68040MixedEpochThrowawayScope": {
+      "banks": [
+        "user",
+        "user-M",
+        "ISP",
+        "MSP"
+      ],
+      "outsideRoadmap": "FPU arithmetic, enabled-MMU operation and physical timing",
+      "structuralCcr": [
+        0,
+        31
+      ],
+      "secondThrowaway": [
+        0,
+        32768,
+        16384
+      ],
+      "instructionCacheEnabled": false,
+      "canonicalCcr": "all 32",
+      "logicalCases": 9792000,
+      "incoming": [
+        0,
+        32768,
+        16384
+      ],
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "qualified": "Successful one/two-throwaway chains independently vary instruction, first/second throwaway and restored trace; final SR selects exception bank, pending CT/CU/CP49-55 wins, CM survives an RTE completion trace and following MOVEM/trace return/BRA; all stack banks, guarded memory, original pending vectors and preserved FPU registers checked",
+      "remaining": "Mixed epochs during validation faults, handler repair/retry, internal restoration and chained odd-PC saved-SR provenance; data restart/context transfer and broader qualification remain required",
+      "firstThrowaway": [
+        0,
+        32768,
+        16384
+      ],
+      "translationEnabled": false,
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ]
+    },
+    "m68040UserTailScope": {
+      "initialBanks": [
+        "ISP",
+        "MSP"
+      ],
+      "authority": "Composition of MC68040UM 2.2.2.1, 8.1, 8.2.1/5, 8.4.2 and 8.4.6.7; software qualification, no executed hardware reference",
+      "instructionCacheEnabled": false,
+      "forms": "0/2/3, invalid 4/15, normal/CM/CT/CU/CP49",
+      "middleBanks": [
+        "none",
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "logicalCases": 1687040,
+      "ccr": "all 32 canonical SR reads, 0/31 structural reads",
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "remaining": "Internal restoration faults, mixed-epoch trace provenance, physical bus-order/timing and hardware observation of composed user-tail fault behavior",
+      "translationEnabled": false,
+      "userM": [
+        0,
+        1
+      ],
+      "qualified": "Live intermediate SR, supervisor exception stack selected by M, user-data TM=1, preserved USP frame and committed throwaways, bare return followed by privilege violation, executed seven-store repair with fresh throwaway bridge and following trace/continuation"
+    },
+    "cacheInstructionEncodingScope": "Every F4xx opcode, all CCRs and both privilege states across eight profiles; scope zero is illegal on 040/060, including neither-cache forms, before privilege effects. Empty fixture caches qualify architectural state and exception outcomes, not physical invalidation, writeback, bus faults or timing",
+    "arithmeticGate": "passing",
+    "m68040RtePhysicalValidationScope": {
+      "phases": [
+        "fault entry",
+        "handler return"
+      ],
+      "banks": [
+        "ISP",
+        "MSP"
+      ],
+      "vbr": [
+        0,
+        65536
+      ],
+      "undefined": "EA and invalid writeback/push data; SSW X",
+      "logicalCases": 223872,
+      "alignment": [
+        0,
+        1
+      ],
+      "faults": "Each byte of SR/PC/format/SSW/continuation-EA reads; 14 direct/one/two-throwaway supervisor paths",
+      "batches": 2,
+      "trace": [
+        0,
+        32768,
+        16384
+      ],
+      "remaining": "Internal-restoration/double faults, other instruction faults and software writeback handlers; user-tail validation is qualified separately",
+      "chainedCcr": [
+        0,
+        31
+      ],
+      "translationEnabled": false,
+      "directCcr": "all 32"
+    },
+    "m68040RteSoftwareTraceScope": {
+      "structuralIncoming": [
+        32768
+      ],
+      "instructionCacheEnabled": false,
+      "forms": [
+        "CU-linear",
+        "CU-flow",
+        "CP49",
+        "CP50",
+        "CP51",
+        "CP52",
+        "CP53",
+        "CP54",
+        "CP55"
+      ],
+      "logicalCases": 8232960,
+      "ccr": "all 32 canonical, 0/31 every validation-read byte",
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "restoredBanks": [
+        "user",
+        "user-M",
+        "ISP",
+        "MSP"
+      ],
+      "remaining": "Actual FPU emulation and hardware execution remain outside this integer fixture; mixed-epoch provenance, internal restoration and hardware/physical qualification",
+      "canonicalIncoming": [
+        0,
+        32768,
+        16384
+      ],
+      "qualified": "Executed integer handler inspects saved T1/T0, advances emulated CU PC, converts format/address, reads vector 9 and directly calls software trace service; trace handler preserves or clears saved trace and really returns; hardware exception counter does not change for software calls",
+      "translationEnabled": false,
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ]
+    },
+    "m68040BatchFaultScope": {
+      "architectural": "Supervisor RTE validation, physical operand-read and unbuffered self-branch format-7 frames, and fatal second-fault halt",
+      "translationEnabled": false,
+      "paths": [
+        "cold",
+        "cached",
+        "model-specific cached",
+        "self-branch cached"
+      ],
+      "policy": "Scalar/batch bus order and machine/native cycle equality",
+      "batches": 2,
+      "limits": [
+        "instruction cap",
+        "boundary denial",
+        "cycle deadline"
+      ],
+      "remaining": "General data format-7 restart, other entry paths and internal-restoration faults",
+      "logicalCases": 139392,
+      "qualification": "Dedicated discovery enumerates independent combinations; BatchFault scope proves four delivery paths, count, callback and retry defects"
+    },
+    "m68040UserTailTraceScope": {
+      "initialBanks": [
+        "ISP",
+        "MSP"
+      ],
+      "ccr": "all 32 canonical, 0/31 every validation-read byte",
+      "structuralIncoming": [
+        32768
+      ],
+      "instructionCacheEnabled": false,
+      "restoredBanks": [
+        "user",
+        "user-M",
+        "ISP",
+        "MSP"
+      ],
+      "middleBanks": [
+        "none",
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "logicalCases": 8752128,
+      "forms": "0/2/3, invalid 4/15, normal/CM/CT/CU/CP49-55",
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "remaining": "mixed-epoch trace provenance, internal restoration and hardware/physical qualification",
+      "canonicalIncoming": [
+        0,
+        32768,
+        16384
+      ],
+      "qualified": "Seven real stores preserve incoming trace while adding S only to the access return; fresh supervisor throwaway restores user SR, original RTE completion traces independently of restored bits, CT/CU/CP priority suppresses extra trace; handler return, following flow/MOVEM and all stack banks checked",
+      "translationEnabled": false,
+      "userM": [
+        0,
+        1
+      ],
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ]
+    },
+    "m68040UserTailSoftwareTraceScope": {
+      "middleBanks": [
+        "none",
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "outsideRoadmap": "FPU arithmetic and enabled-MMU operation",
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "translationEnabled": false,
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ],
+      "initialBanks": [
+        "ISP",
+        "MSP"
+      ],
+      "forms": [
+        "CU-linear",
+        "CU-flow",
+        "CP49",
+        "CP50",
+        "CP51",
+        "CP52",
+        "CP53",
+        "CP54",
+        "CP55"
+      ],
+      "remaining": "Mixed-epoch provenance, internal restoration, CP context transfer and hardware/physical qualification",
+      "canonicalIncoming": [
+        0,
+        32768,
+        16384
+      ],
+      "structuralIncoming": [
+        32768
+      ],
+      "userM": [
+        0,
+        1
+      ],
+      "restoredBanks": [
+        "user",
+        "user-M",
+        "ISP",
+        "MSP"
+      ],
+      "qualified": "Seven real user-tail repair stores retain trace; pending CU/CP preserves original event; integer handler tests repaired saved T1/T0, adjusts supplied CU completion PC, converts frame, reads vector 9, calls via stack/RTS, writes marker once when eligible, optionally clears saved trace and really returns; following BRA checks resumed hardware tracing without new hardware exception provenance during software service",
+      "logicalCases": 15423488,
+      "instructionCacheEnabled": false,
+      "batches": 4,
+      "ccr": "all 32 canonical, 0/31 every validation-read byte"
+    },
+    "m68040HandlerPrefetchScope": {
+      "qualified": "Four-long access-error entry window, every entry byte, odd handler addresses, retained data, flow/host/task/map invalidation and later instruction faults; denied cold boundaries perform no CPU fetch/state change",
+      "batches": 8,
+      "logicalCases": 457728,
+      "remaining": "Other exception-entry paths, host-reader/compiled fetch provenance, enabled caches/MMU, ordinary speculative deferral and physical timing",
+      "bus": "Physical map with no host code reader, including stable-map generation",
+      "routes": [
+        "accurate scalar",
+        "accurate batch"
+      ]
+    },
+    "m68010WordMoveRestartGate": "passing",
+    "m68040RteUserMasterScope": {
+      "forms": [
+        "format0",
+        "format2",
+        "format3",
+        "invalid4",
+        "invalid15",
+        "normal",
+        "CM",
+        "CT",
+        "CU",
+        "CP49"
+      ],
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ],
+      "translationEnabled": false,
+      "qualified": "User execution retains USP; synchronous completion trace, pending conversion and following trace select MSP while preserving M; all three stack banks, saved SR/PC/EA, pending consumption and handler returns checked",
+      "incoming": [
+        0,
+        32768,
+        16384
+      ],
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "restoredSr": "S=0,M=1",
+      "ccr": "all 32 canonical, 0/31 each validation-read byte",
+      "remaining": "mixed-epoch provenance, internal restoration",
+      "logicalCases": 1517952,
+      "instructionCacheEnabled": false
+    },
+    "m68040RteCpVectorsScope": {
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ],
+      "translationEnabled": false,
+      "restoredBanks": [
+        "user",
+        "user-M",
+        "ISP",
+        "MSP"
+      ],
+      "incoming": [
+        0,
+        32768,
+        16384
+      ],
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "vectors": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "batches": 4,
+      "qualified": "Original CP vector survives validation faults, three repair stores and incoming trace; format-3 saved SR/PC/EA, pending-context consumption, all stack banks, FPU register preservation, handler return and following traced BRA checked",
+      "ccr": "all 32 canonical, 0/31 every validation-read byte",
+      "remaining": "mixed-epoch provenance, context transfer and internal restoration",
+      "logicalCases": 4866048,
+      "instructionCacheEnabled": false
+    },
+    "m68040MixedEpochFaultScope": {
+      "qualified": "Independent incoming/first/second trace states; all banks and user M aliases; canonical final trace/CCR and structural every validation-read byte; last committed SR, bare handler return, user privilege failure and retained original pending vector",
+      "remaining": "Executed mixed-epoch repair/retry, original instruction trace suspension/resumption, internal restoration and hardware capture",
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "logicalCases": 7666560
+    },
+    "timing": "Semantic gate; timing policy and physical qualification remain separate",
+    "qualificationScope": {
+      "policySha256": "0d86f932dee5290bb2d341129f56bf528bb06a3ee2819851ca7a2c71135a4b06",
+      "policy": {
+        "schema": 1,
+        "approvalDate": "2026-10-09",
+        "acceptance": "known-coverage-only",
+        "approvedModels": [
+          "68000",
+          "68010",
+          "68EC020",
+          "68020",
+          "68030",
+          "68040",
+          "68060",
+          "A1200"
+        ],
+        "approvedCoverage": [
+          "Required milestone 1-5 integer semantic matrices and defined architectural exceptions",
+          "Pinned passing reference selections with their recorded exclusions and limitations",
+          "Verified mutation witnesses and mapped instruction-test consolidation",
+          "Promoted context-copy ownership fix and its ordinary regression",
+          "Qualified same-CPU-source standard and native consumer checks"
+        ],
+        "deferred": [
+          {
+            "id": "010-invalid-format-rte-ccr",
+            "status": "deferred",
+            "reason": "Software references disagree on CCR after rejected RTE formats; an independent expectation remains unresolved.",
+            "optIn": "COPPER68K_RUN_010_RTE_FORMAT_DISCOVERY=1",
+            "record": "docs/COPPER68K_REFERENCE_QUALIFICATION.md"
+          },
+          {
+            "id": "060-ordinary-stop-new-user-sr",
+            "status": "deferred",
+            "reason": "Ordinary STOP with a new S-clear SR disagrees with an undocumented software-reference rule.",
+            "optIn": "COPPER68K_RUN_060_STOP_DISCOVERY=1",
+            "record": "docs/COPPER68K_REFERENCE_QUALIFICATION.md"
+          },
+          {
+            "id": "030-040-disputed-trace-boundaries",
+            "status": "deferred",
+            "reason": "Original trace provenance across fault, repair and retry has unresolved independent expectations; software agreement is not hardware evidence.",
+            "optIn": "scripts/test-copper68k-030-return-trace-reference.ps1; COPPER68K_RUN_040_MIXED_RETRY_DISCOVERY=1",
+            "record": "docs/COPPER68K_MILESTONE6_COMPLETION_AUDIT.md"
+          },
+          {
+            "id": "broader-architectural-restoration",
+            "status": "deferred",
+            "reason": "The 480-case broader inventory, original-frame construction, partial transfers, repair/refault, foreign frames and wider trace/interrupt protocols remain unqualified. Known bounded fixtures do not complete them.",
+            "optIn": "COPPER68K_RUN_040_ACCESS_FRAME_AUDIT=1; scripts/test-copper68k-040-access-frames.ps1",
+            "record": "docs/COPPER68K_MILESTONE6_COMPLETION_AUDIT.md"
+          },
+          {
+            "id": "other-private-continuation-candidates",
+            "status": "deferred",
+            "reason": "Only the context-copy fix was approved for production. Other private continuation formats and candidates are not production qualification.",
+            "optIn": "scripts/test-copper68k-030-memory-destination-reference.py",
+            "record": "docs/COPPER68K_REFERENCE_QUALIFICATION.md"
+          }
+        ],
+        "rules": [
+          "Deferred coverage is visible and nonblocking for acceptance of known coverage; it is never counted as passing.",
+          "No legal case is removed from the required milestone 1-5 matrices.",
+          "An explicitly requested discovery or reference audit still fails on mismatches, unsupported execution, missing fixtures or empty selections.",
+          "Historical failing evidence and deferred discovery fixtures remain retained.",
+          "Deferral does not authorize importing another private candidate or publishing a package."
+        ],
+        "outsideRoadmap": [
+          "FPU arithmetic",
+          "enabled MMU operation",
+          "physical pipeline/cache qualification",
+          "OS compatibility"
+        ]
+      }
+    },
+    "unavailableSystemCoverage": [
+      "010 non-MOVE/external bus-fault restart and 020/030 internal restart",
+      "020/030 coprocessor midinstruction restoration",
+      "040 access-fault CP context transfer, detailed frame-validation/fault entry and writeback-handler qualification",
+      "External BKPT replacement responder",
+      "Physical MOVES function-code spaces and LPSTOP CPU-space broadcast",
+      "060 HALT debug-port restart, PULSE PST pins and debug pipeline commands"
+    ],
+    "schema": 1,
+    "deterministicLogicalCases": 86663530,
+    "m68040DisabledMmuInstructionGate": "passing",
+    "m68040MmuInstructionScope": {
+      "enabledMmu": "Mainline three-level 040/060 paging and selective PFLUSH retained; enabled-MMU operation is outside this synthetic qualification gate",
+      "translationEnabled": false,
+      "globalRegisterField": "canonical zero",
+      "undefined": "Disabled PTEST MMUSR; DFC 0/3/4/7",
+      "dfc": [
+        1,
+        2,
+        5,
+        6
+      ]
+    },
+    "m68040AccessFrameScope": "Synthetic normal/CT/CM/CU/CP returns with original pending vectors, every legal MOVEM word and full-index structure, one/two throwaways selecting all stacks, successful mixed-epoch chains and validation fault capture, direct odd-PC returns, supervisor-stack physical RTE validation fault entry/handler return, executed repair/retry after committed supervisor throwaways, and manual-derived user-tail fault/privilege/bridge repair; chained odd-PC saved-SR provenance, internal-restoration faults, mixed-epoch repair/retry and original trace suspension/resumption, CP context transfer, other real fault entry and physical timing remain unqualified",
+    "m68010Format8StructureGate": "passing",
+    "externalReferences": [],
+    "m68010Format8Scope": "58-byte address-error frame, reserved holes, version validation and tail probe, alignment double-fault halt/reset; marked private word/long-MOVE/MOVEA images resume pending word cycles without replay; non-MOVE/foreign restart/input state, external BERR, RMW and physical timing remain unqualified",
+    "m68040RteRetryTraceScope": {
+      "qualified": "Three original-frame repair stores leave saved access SR untouched; handler return restores incoming trace; successful original RTE triggers T1/T0 trace with restored SR/PC; trace-handler return and following instruction retain MOVEM EA and stack selection",
+      "ccr": "all 32 canonical, 0/31 every chained read byte",
+      "instructionCacheEnabled": false,
+      "restoredBanks": [
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "forms": "0/2/3, invalid 4/15 repaired to 0, normal/CM",
+      "logicalCases": 2729088,
+      "incoming": [
+        0,
+        32768,
+        16384
+      ],
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "faultTailBanks": [
+        "ISP",
+        "MSP"
+      ],
+      "remaining": "mixed trace values within consumed throwaways, internal restoration and hardware/physical timing",
+      "translationEnabled": false,
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ]
+    },
+    "logicalGate": "passing",
+    "m68000DoubleFaultScope": "Address-error entry/handler faults; reset-only recovery; external BERR/reset-vector faults unavailable through the current public bus API",
+    "approvedCoverageGate": "passing",
+    "moveGate": "passing",
+    "transferGate": "passing",
+    "m68060LowPowerStopScope": "Every unrecognized second opcode word in both privilege modes; fixed encoding, status, CCR and incoming trace cases across all profiles. Opcode-PC exception frames follow MC68060UM 8.2.4/5; physical broadcast, pins and ordinary STOP S-clear software disagreement remain unqualified",
+    "m68000AddressErrorDoubleFaultGate": "passing",
+    "roadmapComplete": false,
+    "m68040RtePendingTraceScope": {
+      "qualified": "Three original-frame stores preserve access SR; returned incoming trace cannot create an extra RTE trace on pending conversion; saved SR/PC/EA, format/vector, pending consumption, handler return and following traced BRA are checked",
+      "instructionCacheEnabled": false,
+      "forms": "CT/CU/CP49",
+      "ccr": "all 32 canonical, 0/31 each validation-read byte",
+      "logicalCases": 1824768,
+      "incoming": [
+        0,
+        32768,
+        16384
+      ],
+      "routes": [
+        "accurate scalar",
+        "one-instruction batch"
+      ],
+      "batches": 4,
+      "faultTailBanks": [
+        "ISP",
+        "MSP"
+      ],
+      "remaining": "mixed-epoch provenance, internal restoration and physical/hardware qualification",
+      "translationEnabled": false,
+      "restoredBanks": [
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "restoredTrace": [
+        0,
+        32768,
+        16384
+      ]
+    },
+    "deterministicXunitBatches": 783,
+    "m68040InstructionFaultScope": {
+      "phases": [
+        "fault entry",
+        "handler return",
+        "restart",
+        "following"
+      ],
+      "trace": "All defined incoming states for frame/return; restart trace zero",
+      "banks": [
+        "user",
+        "ISP",
+        "MSP"
+      ],
+      "translationEnabled": false,
+      "engine": "accurate public factory plus cached self-branch batch",
+      "fields": "Format7 SR, executing PC distinct from prefetch FA, RW/SIZE/TM and invalid writebacks",
+      "batches": 2,
+      "forms": [
+        "opcode",
+        "extension-low",
+        "next-opcode",
+        "self-branch"
+      ],
+      "ccr": "all 32",
+      "remaining": "Data writebacks/restart, speculative prefetch deferral, compiled instruction-fault PC provenance, cache-enabled fetches and physical timing",
+      "logicalCases": 116736,
+      "instructionCacheEnabled": false
+    }
+  },
+  "fullCpuSuite": {
+    "source": "Completed source CI Release build of commit 40207be34ac08dda76dd6f4ecfa915f3f8652332. The frozen package is exercised by the local focused CPU tests and native/consumer qualification.",
+    "passed": 5417,
+    "failed": 0,
+    "skipped": 109,
+    "total": 5526,
+    "log": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final-source-ci.log",
+      "sha256": "c162b300302283ab3c80eb222153c6b70d15ef8a71544e1bc95890dbd458d074"
+    },
+    "validatedSummary": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\source-ci-coverage\\summary.json",
+      "sha256": "0ee8181a569f3d1e9108583c83bbc380b8ace21fe103c14ed28e362810d7811f"
+    },
+    "ahxSharedDependency": {
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "localFullCpuDuplicate": {
+    "status": "cancelled after the same full suite and report gate passed in source CI",
+    "result": "Incomplete local coverage; no local full-suite pass claimed.",
+    "log": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\cpu-final-complete.log",
+      "sha256": "df4a63f1b8813eafd988242c6a064c6a28c12168b1fe18e6948252943b7ca531"
+    },
+    "partialReportFiles": 970
+  },
+  "before": {
+    "record": "COPPERSTART_NITRO_2026-10-17.json",
+    "sameRomReplay": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\source-nitro-batch\\run.json",
+      "sha256": "66d7bcae4808766f325a0d7942c8c9a732e07219f82dbd542663043a221b89e4"
+    },
+    "originalWaitPc": "000184B0",
+    "originalWaitSr": "2004",
+    "adapterOnlyTrace": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\source-trace-candidate.log",
+      "sha256": "b879eb8ee851d4baf8c8c1e23c271816b39eeee582b62c5c9de502bdf7684ef6"
+    },
+    "adapterOnlyResult": "Same wait remains; a final BTST prefetch correction is also required."
+  },
+  "independentComparison": {
+    "cpu": "Moira",
+    "revision": "ce28239b0507ebfe1bf2ad2b9c9252dc2f2cc031",
+    "configuration": {
+      "preciseTiming": true,
+      "mimicMusashi": false,
+      "disassembler": false
+    },
+    "method": "After 9998 unchanged fields, copy D0-D7/A0-A7, PC and SR and prime prefetch from unchanged RAM at current PC. CPU-internal IPL history starts independently. All memory effects, arbitration, device clocks and pins still belong to the same live Lightweight machine.",
+    "result": "Returns from the poll to 0001834C within two fields. Supporting diagnostic comparison; final replays use Copper68k throughout.",
+    "trace": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\moira-shared-board.log",
+      "sha256": "5711fd438005536e2a178cd662ffefa7cd60b38ca8ddb712a45e40ab944ed9ba"
+    },
+    "microBefore": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\micro-btst-before.log",
+      "sha256": "3199e13161e11ba9ec292aa3b789b614cd2cefa9c1c0ebdf5c5d2f16664a280f"
+    },
+    "microReference": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\micro-btst-reference.log",
+      "sha256": "894779d00e320d3565ea5a55d38a0444ef1e70b27d27f7fe45caaaa67b9711c4"
+    },
+    "sources": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\MoiraProbe.cpp",
+        "sha256": "046e000e3d780503cff21f95d35d74b9f9419a46c746bc9c0a54a8ee362419be"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\trace\\MicroTest.cs",
+        "sha256": "ec6365c9813dc54e1be32567b1b49315f11ce9ce6437802ff3725d039d62b48b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\trace\\Program.cs",
+        "sha256": "807b34628c02c6d867ed9398f54f7deeebbdd8c2f4eaa3b60d40907c9a3de3d2"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\prepare_trace.py",
+        "sha256": "c8ca5325ceb6bc5032490d4e70ed5105243f86937a9f383a7215206a8fa00a98"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\Moira\\Moira\\MoiraConfig.h",
+        "sha256": "33f5f558759107edc93dab60f4ee2e4120a218028ef5630023b018a626fc9a30"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\MoiraProbe.dll",
+        "sha256": "c49010d1f40255e67fdce6f77abe2c4924637d2fc3c7f703d2e965eb77c86d0e"
+      }
+    ]
+  },
+  "sources": {
+    "interruptMaskAndBoundaries": "https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf",
+    "moiraBtst": "https://github.com/dirkwhoffmann/Moira/blob/ce28239b0507ebfe1bf2ad2b9c9252dc2f2cc031/Moira/MoiraExec_cpp.h",
+    "ce000Btst": "https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/gencpu.cpp"
+  },
+  "supersededValidation": {
+    "firstLocalFullCpuRun": "The dev.1 full-suite run was cancelled after the final flag-order correction superseded it; no completed/pass claim is made for that run.",
+    "firstCpuCiRun": {
+      "id": 38974999784,
+      "status": "cancelled as superseded"
+    },
+    "finalCpuCiRunId": 38976324951
+  },
+  "limits": [
+    "No completed race, lap or game is claimed.",
+    "Audio activity and sampled PCM comparison only; listening/fidelity unassessed.",
+    "No physical timing certification or formal host-throughput measurement.",
+    "The previous frozen producer stale CMD_WRITE assertion remains documented separately.",
+    "WinUAE execution remains unavailable after its earlier launch was rejected by automatic approval review as blocked by policy; no launch workaround was attempted."
+  ]
+}

@@ -21,16 +21,16 @@ internal sealed class LightweightSpriteDma
     private const int PalControlReloadLine = 25;
     private const ushort DmaconMaster = 0x0200;
     private const ushort DmaconSprite = 0x0020;
-    private const ushort DmaconBitplane = 0x0100;
-    private const int FirstOutputHorizontal = 0x18;
-    private const int LastOutputHorizontal = 0x36;
+    // HRM figure 6-9 places sprite 0 at $15/$17 through sprite 7 at
+    // $31/$33. As with bitplanes, this owner's RAM output follows its
+    // address-input CCK. Sprite 6 must finish before a $30 bitplane run.
+    private const int FirstOutputHorizontal = 0x16;
+    private const int LastOutputHorizontal = 0x34;
     private const int FirstInputHorizontal = FirstOutputHorizontal - 1;
     private const int LastInputHorizontal = LastOutputHorizontal - 1;
     private const long FirstFieldInputOffset =
         PalControlReloadLine * LightweightClock.CpuCyclesPerLine +
         FirstInputHorizontal * LightweightClock.CpuCyclesPerColorClock;
-    private const int NormalLowResolutionDdfStart = 0x38;
-    private const int NormalHighResolutionDdfStart = 0x3C;
     private readonly uint _addressMask;
 
     internal LightweightSpriteDma(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
@@ -117,14 +117,28 @@ internal sealed class LightweightSpriteDma
             PublishNextCycle();
             return;
         }
-        if (offset < LightweightRegisters.SpritePointerFirst ||
-            offset > LightweightRegisters.SpritePointerLast)
+        if (offset >= LightweightRegisters.SpritePosFirst &&
+            offset <= LightweightRegisters.SpriteRegisterLast && (offset & 7) <= 2)
+        {
+            ref var state = ref _channels[(offset - LightweightRegisters.SpritePosFirst) >> 3];
+            if ((offset & 2) == 0) state.Pos = machine.GetCustomRegister(offset);
+            else state.Ctl = machine.GetCustomRegister(offset);
+            // CPU/Copper writes program Agnus's vertical controls too. A
+            // previous terminator cannot reject a newly programmed sprite;
+            // its pointer may already address pixel data rather than a header.
+            state.Active = true;
+            state.Exhausted = false;
+        }
+        else if (offset >= LightweightRegisters.SpritePointerFirst &&
+            offset <= LightweightRegisters.SpritePointerLast)
+        {
+            var channel = (offset - LightweightRegisters.SpritePointerFirst) >> 2;
+            _pointers[channel] = machine.GetSpritePointer(channel);
+        }
+        else
         {
             return;
         }
-
-        var channel = (offset - LightweightRegisters.SpritePointerFirst) >> 2;
-        _pointers[channel] = machine.GetSpritePointer(channel);
         if (IsDmaEnabled(machine.Dmacon))
         {
             // A late write changes only a future address input. It cannot
@@ -229,12 +243,20 @@ internal sealed class LightweightSpriteDma
         var channel = relative >> 2;
         var word = (relative >> 1) & 1;
         ref var state = ref _channels[channel];
+        var line = machine.BeamLine;
+        if (word == 0 && line == machine.SpriteControlReloadLine)
+        {
+            // The field's mandatory control reload still overrides position
+            // registers written during vertical blank.
+            state.Active = false;
+            state.Exhausted = false;
+            state.HasPendingPos = false;
+        }
         if (state.Exhausted)
         {
             return;
         }
 
-        var line = machine.BeamLine;
         if (word == 0 && state.Active && line >= GetVerticalStop(in state))
         {
             state.Active = false;
@@ -247,8 +269,7 @@ internal sealed class LightweightSpriteDma
         if (TPath.Aga && _scanDouble && state.Active && (state.Pos & 0x80) != 0 &&
             ((line ^ GetVerticalStart(in state)) & 1) != 0) return;
 
-        if (!TryGetPurpose(in state, line, word, out var purpose) ||
-            !IsSlotAvailable(channel, word, machine))
+        if (!TryGetPurpose(in state, line, word, out var purpose))
         {
             return;
         }
@@ -340,6 +361,13 @@ internal sealed class LightweightSpriteDma
         int word,
         out WordPurpose purpose)
     {
+        // A control POS already fetched from RAM still has its matching CTL
+        // slot, even if a CPU/Copper position write occurs between the words.
+        if (word == 1 && state.HasPendingPos)
+        {
+            purpose = WordPurpose.ControlCtl;
+            return true;
+        }
         if (!state.Active)
         {
             purpose = word == 0
@@ -356,46 +384,6 @@ internal sealed class LightweightSpriteDma
 
         purpose = word == 0 ? WordPurpose.DataA : WordPurpose.DataB;
         return true;
-    }
-
-    private static bool IsSlotAvailable(
-        int channel,
-        int word,
-        LightweightA500Machine machine)
-    {
-        var bplcon0 = machine.BitplaneEffectiveBplcon0;
-        var planeCount = (bplcon0 >> 12) & 7;
-        if (planeCount == 0 ||
-            (machine.Dmacon & (DmaconMaster | DmaconBitplane)) !=
-                (DmaconMaster | DmaconBitplane))
-        {
-            return true;
-        }
-
-        var ddfStart = machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & 0x00FC;
-        var normalStart = (bplcon0 & 0x8000) == 0
-            ? NormalLowResolutionDdfStart
-            : NormalHighResolutionDdfStart;
-        if (ddfStart >= normalStart)
-        {
-            return true;
-        }
-
-        // With the earliest low-resolution start the first sprite's POS slot
-        // remains, while its CTL slot and every later channel are stolen.
-        if ((bplcon0 & 0x8000) == 0 && ddfStart <= 0x18 && channel == 0)
-        {
-            return word == 0;
-        }
-
-        var usableChannels = ddfStart switch
-        {
-            <= 0x18 => 0,
-            <= 0x1C => 1,
-            >= 0x30 => 7,
-            _ => Math.Clamp(((ddfStart - 0x1C) / 4) + 1, 1, 7)
-        };
-        return channel < usableChannels;
     }
 
     internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)

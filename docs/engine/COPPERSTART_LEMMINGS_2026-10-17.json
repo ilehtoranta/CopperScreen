@@ -1,0 +1,536 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "issue": "LWA-NATIVE-012",
+  "title": "Lemmings (1991), supplied Spreadpoint/SR two-disk release",
+  "status": "first-level-complete-100-percent-rescued",
+  "protocol": "copperstart-native-compatibility-v1",
+  "previousCase": "NITRO_RACE_START_2026-10-17.json",
+  "consumerBaseCommit": "fff010212251d63528dc19ad035a44b335aa0ff7",
+  "producerBaseCommit": "fe571786e28d5f5920168963d3ca665148bf540e",
+  "producerFixCommit": "244e2e969dea613cc078ec9a63d0fef32012333c",
+  "producerPullRequest": "https://github.com/ilehtoranta/CopperStart/pull/5",
+  "cpuPackage": "1.5.4-nitro-dev.2",
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1
+  },
+  "binaries": {
+    "CopperMod.Amiga.Lightweight.Runner.dll": "d99a4614353a1947fe4f9e73f2b9f47163e7e581250b667c8b14fee29be02437",
+    "CopperMod.Amiga.Lightweight.dll": "b425188cfe466bdb376350e8b7e1d0d4de0dd446fc53ed9120f4ab2b933c07ea",
+    "Copper68k.dll": "2ebd2cddde164249d968bd4f43502284d617a7074222ab6638233fda517fe2e7",
+    "CopperDisk.dll": "52eab8b8958a87b91546ff9ae9c8d209d7b88188991958c4a1f14a15fb630c30"
+  },
+  "media": {
+    "disk1": {
+      "path": "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "sha256": "5fc56b436722688ba37836e273a3a1c84d724235a91b39272768ff3e4cac0a59",
+      "entry": "Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].adf",
+      "entryBytes": 901120,
+      "entrySha256": "a4fdba69017f1a760bba3bb06c55f7e434226c498c9d22c1f627212b08d24f91"
+    },
+    "disk2": {
+      "frame": 8460,
+      "drive": 0,
+      "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+      "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+      "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+      "entryBytes": 901120,
+      "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+    }
+  },
+  "input": {
+    "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+    "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+    "media": [
+      {
+        "frame": 8460,
+        "drive": 0,
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+        "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+        "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+        "entryBytes": 901120,
+        "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+      }
+    ]
+  },
+  "rom": {
+    "artifact": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\candidate-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "05936f0470b0ca1a425a527d073436544baf185d5a2af4a06f26d5d815961e6a"
+    },
+    "bytes": 524288,
+    "codeBytes": 457216,
+    "graphicsBytes": 26098,
+    "graphicsResidentAddress": "00FF0000",
+    "freshBuildUtc": "2026-10-17T16:21:35.1949659+00:00",
+    "compiledRom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\candidate-rom\\CopperStart-DiskBoot-compiled.rom",
+      "sha256": "41e0f5ec4c409b7882d9c7d1b1cbb0a6208c4b5ac2f25d5150f770a6a635a6f9"
+    },
+    "qualificationRoot": {
+      "file": "CopperStart-QualifiedRoot.dll",
+      "sha256": "5FEB308AD70FEED64E4944E64EE86B739E6634632586DDCDFDAB441CDA576B56",
+      "compatible": true,
+      "managedAllocationSites": 0,
+      "frameworkFeatures": 0
+    }
+  },
+  "build": {
+    "scope": "Fresh native root from disk-boot and Intuition sources over the preceding frozen managed Exec/DOS/device, SDK/compiler and native graphics components. Not a clean full-tree producer build.",
+    "baselineInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\fresh-build-inputs.json",
+      "sha256": "f8b35ed305b284f967a7543b489a323bc2fbb2d4e21dab60beb8434b3e4f11c8"
+    },
+    "candidateInputs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\candidate-build-inputs.json",
+      "sha256": "50ae78b5fe31a7bc8501dc4232db579efc117b7ae66f1d6c137641a6ad677fad"
+    },
+    "frozenInputs": [
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart-System.dll",
+        "sha256": "2eab704c8838543399fcb6a39d799b514da91f1441f2e2f5acde358c93d9de8a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Exec.dll",
+        "sha256": "b14d11c87e76c07c3408fa5009cba43acb0adafa25ac3061ac4912140986c724"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Devices.dll",
+        "sha256": "29069c61741916aa4dff53aa0c0bda29b76a1c74f4dfbf6ed61c2b51bf84d877"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Dos.dll",
+        "sha256": "1a8f7a429e317a0e77fa3a726611f7f1255173a970559f17af07db796f11460c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Layers.dll",
+        "sha256": "f1f1321d1f15cce04769f3348983774da395c182ec3cc1f0c1bb7b0bb4aca14a"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Intuition.dll",
+        "sha256": "dd658367052d98f972e5107cce2b81ab51491ac052f03815323d403f802d9d03"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Graphics.dll",
+        "sha256": "cb5f3eb036d829aedd6f79e0393da991d167fef19cf60bdfdbe967f8e8b37e0b"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Compiler.dll",
+        "sha256": "a337436a89a20fd90a575d289c5b8e23edaa52df9abda54d3fc0fa872009e141"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Targets.Amiga.dll",
+        "sha256": "fd0dc4d25aff599560b1a898308726fe6b5b45ca7cd9502c800facebfc974a0c"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Sdk.Amiga.dll",
+        "sha256": "6f18a50ac7a3828d735c8f342ed2372cf2e36081db537475f35af46f01832fa3"
+      },
+      {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-build\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "eb8e38b7639964480f52809626cdfab142a454f56e5c327dfbc65aba5db0e425"
+      }
+    ],
+    "priorSourceSnapshot": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-nitro-2026-10-16\\producer-source-snapshot.json",
+      "sha256": "810a00f783e8d8f8c2cc36b44800f8d86426f9a640b2c72c333a542ca542de2b"
+    },
+    "sourceFiles": {
+      "rom/CopperStart.SystemRom/NativeDiskBoot.cs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\rom\\CopperStart.SystemRom\\NativeDiskBoot.cs",
+        "sha256": "5bd0daae5c77b248eedd51530edb77b029f7e752f7a0680d19a3f914169d780e"
+      },
+      "rom/CopperStart.SystemRom/NativeIntuitionBoot.cs": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\rom\\CopperStart.SystemRom\\NativeIntuitionBoot.cs",
+        "sha256": "181c7ff05c1df71677e0ad3ae121a534ec90e738f475d28fc8e6710b98f61243"
+      }
+    },
+    "projectedRootSources": {
+      "NativeDiskBoot.cs": "895c4589677f72bada05e48495409d30e131089fb3a6cc013177d30bc7e19fcf",
+      "NativeIntuitionBoot.cs": "181c7ff05c1df71677e0ad3ae121a534ec90e738f475d28fc8e6710b98f61243",
+      "ProductionExports.cs": "4676aebee2145403cfb883fbb9120ad11ec04a445f4ca54a04d05674ca2a4605",
+      "Program.cs": "201b3fee6de27dc891caa8786ea91b93430d287a8c590d70a4fe4ca9e58d8eeb"
+    },
+    "frameworkCompatible": true,
+    "managedAllocationSites": 0,
+    "frameworkFeatures": 0,
+    "inheritedManifestNote": "Only the fresh root/build fields and frozen graphics identity are current. The builder retains an ancestral manifest; its historical engine/CPU inputs are not the execution binaries for these replays."
+  },
+  "before": {
+    "freshRom": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\fresh-rom\\CopperStart-DiskBoot.rom",
+      "sha256": "5c5c0adfbc4e12a59eca2dd0236c40efc633b71ab34190e88418f36bea4ff4c9"
+    },
+    "manifest": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\copperstart-fresh-before\\run.json",
+      "sha256": "9a8d18150c781db7c75473f7fae91ec148f634e8da8c952df2e7450b3e564c40"
+    },
+    "requestedFields": 1000,
+    "completedRunner": true,
+    "compatibility": "FAIL: null intuition.library base, call through -390(A6), PC DFD54E73 / A7 00000008",
+    "trace": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\trace-preflight.log",
+      "sha256": "b8edb92aea8a877aa6cee6378f94a6e0787a0158eefb458b68dc6ec128ab8771"
+    },
+    "firstBadCall": {
+      "callField": 600,
+      "returnField": 601,
+      "callPc": "00030398",
+      "nameAddress": "000303AC",
+      "name": "intuition.library",
+      "minimumVersion": 0,
+      "returnedBase": "00000000",
+      "nextTarget": "FFFFFE7A"
+    }
+  },
+  "runs": {
+    "native-level1": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\native-level1\\run.json",
+        "sha256": "d9c720c280e5d33a99f0c9387e26eb2120201ae5463c025677cbae64543dcf04"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+        "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+        "media": [
+          {
+            "frame": 8460,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+            "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+            "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+            "entryBytes": 901120,
+            "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+          }
+        ]
+      },
+      "completedReplay": true,
+      "captureFiles": 605,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "cycle": "3410316042",
+        "cpu": "0xC59BDDA28B167A06",
+        "hardware": "0x578968BED1662068",
+        "output": "0x20D2392F682C5F74",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "native-level1-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\native-level1-scalar\\run.json",
+        "sha256": "1ed17445badbc5ad4d6e312a00fc4b1db881760a2a7cccf6161d07783c37ee26"
+      },
+      "rom": {
+        "path": "C:\\Data\\ROM\\Kickstart_13.rom",
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+        "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+        "media": [
+          {
+            "frame": 8460,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+            "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+            "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+            "entryBytes": 901120,
+            "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+          }
+        ]
+      },
+      "completedReplay": true,
+      "captureFiles": 605,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "cycle": "3410316042",
+        "cpu": "0xC59BDDA28B167A06",
+        "hardware": "0x578968BED1662068",
+        "output": "0x20D2392F682C5F74",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "copperstart-level1": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\copperstart-level1\\run.json",
+        "sha256": "1316120dff2644c909c1237b3d5df6a2802f952f43d0db806cb5db036b24c696"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\candidate-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "05936f0470b0ca1a425a527d073436544baf185d5a2af4a06f26d5d815961e6a"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+        "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+        "media": [
+          {
+            "frame": 8460,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+            "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+            "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+            "entryBytes": 901120,
+            "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+          }
+        ]
+      },
+      "completedReplay": true,
+      "captureFiles": 605,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "cycle": "3410448016",
+        "cpu": "0x9B0DBD017180C2B4",
+        "hardware": "0x5C734AD21C85CC60",
+        "output": "0xD5E1640F432DFB41",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "copperstart-level1-scalar": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\copperstart-level1-scalar\\run.json",
+        "sha256": "3a3937ee807e3837d49be3e314cf5061ef36e701467ed8737c26951e62af09c0"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\candidate-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "05936f0470b0ca1a425a527d073436544baf185d5a2af4a06f26d5d815961e6a"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\copperstart-lemmings-level1-v1.json",
+        "sha256": "6a3810cf31703f9525c66e2d181e19cf903a70abb1d69034c65a3836048cf6ed",
+        "media": [
+          {
+            "frame": 8460,
+            "drive": 0,
+            "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\media\\lemmings-disk2.zip",
+            "sha256": "0c1cb9c49cbc29b56d2f974a90c510752e256148f8e8cc10cfbd026db73dea1a",
+            "entry": "Lemmings (1991)(Psygnosis)(Disk 2 of 2)[cr SR].adf",
+            "entryBytes": 901120,
+            "entrySha256": "1526000b96d196efecab9c63aa72c0ce6257649a4993141b00ead8738fd97a65"
+          }
+        ]
+      },
+      "completedReplay": true,
+      "captureFiles": 605,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "scalar",
+        "warmup": "0",
+        "frames": "24000",
+        "completed": "24000",
+        "cycle": "3410448016",
+        "cpu": "0x9B0DBD017180C2B4",
+        "hardware": "0x5C734AD21C85CC60",
+        "output": "0xD5E1640F432DFB41",
+        "pixels": "284204",
+        "audioSamples": "1922",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    },
+    "nitro-regression": {
+      "manifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\nitro-regression\\run.json",
+        "sha256": "6dc93bda2cf6f5e5d848852cc71959ccede7bc84fe890646d9d8a2127a09b2cf"
+      },
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\candidate-rom\\CopperStart-DiskBoot.rom",
+        "sha256": "05936f0470b0ca1a425a527d073436544baf185d5a2af4a06f26d5d815961e6a"
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\.codex\\worktrees\\copperstart-next-game\\CopperScreen\\CopperScreen.Lightweight.Tests\\Workloads\\corpus-nitro.json",
+        "sha256": "b4dbc2ae6db0d600db87e71b8bb06d624674844d821be222b061de50c5c32a50",
+        "media": []
+      },
+      "completedReplay": true,
+      "captureFiles": 355,
+      "summary": {
+        "engine": "lightweight-a500",
+        "workload": "image",
+        "executionMode": "Interpreter",
+        "cpuMode": "conservative-batch",
+        "warmup": "0",
+        "frames": "14000",
+        "completed": "14000",
+        "cycle": "1989428000",
+        "cpu": "0x91DF401B41FEEB69",
+        "hardware": "0x5D580707269ADD63",
+        "output": "0x05A7AE41403D57E0",
+        "pixels": "284204",
+        "audioSamples": "1924",
+        "pcm": "real",
+        "adf": "True",
+        "unsupported": "none"
+      }
+    }
+  },
+  "comparisons": {
+    "native": {
+      "filesCompared": 605,
+      "mismatches": []
+    },
+    "copperstart": {
+      "filesCompared": 605,
+      "mismatches": []
+    },
+    "crossRomImages": {
+      "compared": 61,
+      "matching": 58,
+      "differences": [
+        "frame-012000.bmp",
+        "frame-013000.bmp",
+        "frame-020000.bmp"
+      ],
+      "review": "Menu, level-briefing and results animation, scrolling text and blinking prompt phases differ at these three fields; sampled gameplay images match. No claim of identical cross-ROM CPU/RAM state.",
+      "gameplayImagesCompared": 30,
+      "gameplayImageMismatches": []
+    },
+    "nitroRegression": {
+      "previousManifest": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\nitro-race-2026-10-17\\final\\copperstart-batch\\run.json",
+        "sha256": "eb7b9e5d3845cbdee371bb3a9efe434259e999b0587391d0cf1f28486ee73878"
+      },
+      "imagesCompared": 71,
+      "mismatches": [],
+      "freshScalarReplay": false
+    }
+  },
+  "reviewedCaptures": {
+    "native-level1": [
+      8000,
+      12000,
+      13000,
+      16000,
+      18400,
+      20000,
+      24000
+    ],
+    "copperstart-level1": [
+      8000,
+      12000,
+      13000,
+      16000,
+      18400,
+      20000,
+      22000,
+      24000
+    ],
+    "nitro-regression": [
+      14000
+    ]
+  },
+  "tests": {
+    "consumerReleaseBuild": {
+      "passed": true,
+      "warnings": 0,
+      "errors": 0,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\consumer-build.log",
+        "sha256": "5ebbd8299be4b7ce12ca5979b12116f5b824917df25547ec880594130175249f"
+      }
+    },
+    "producerReleaseBuild": {
+      "passed": true,
+      "warnings": 1,
+      "errors": 0,
+      "warning": "Existing CS8602 in the sibling compiler; these moving source-build dependencies are separate from the frozen ROM inputs.",
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\producer-build.log",
+        "sha256": "035d26c95cb6a07f8d0d81f63820d4fcaf430d486c01d2bf5ced62e156ba705b"
+      }
+    },
+    "finalNativeTestProjectBuild": {
+      "passed": true,
+      "warnings": 0,
+      "errors": 0,
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\floppy-test-final-build.log",
+        "sha256": "af748cb112201c9f0db85746f629125b316695e3c8d0888a8dce3c885e06dd9c"
+      }
+    },
+    "compilerOnlyNativeCases": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "fixtureRevision": "Initial two-provider fixture before the explicit stopped-Copper list and complete callee-register captures were added. Native implementation source is unchanged.",
+      "trx": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\focused-tests\\intuition-display.trx",
+        "sha256": "1a7948b2ffbb580b2e191bd64c80e81507b717809acf98bb762b3749db79b97c"
+      }
+    },
+    "qualifiedRomNativeFixture": {
+      "passed": 2,
+      "failed": 0,
+      "sourceTestFile": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart-nitro-cia\\tests\\CopperStart.Floppy.Native.Tests\\NativeDiskBootTests.cs",
+        "sha256": "9e6eb9010fa54d5d58cea70383a9ee51cd792882db40b593aed43aaff09038eb"
+      },
+      "log": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\probe-after.log",
+        "sha256": "aa8c42ecb2a9e9746af8dfedbd90c70b52cfc3df1d7a55eba093ad7fd164827a"
+      },
+      "coverage": "Latest original generated guest disk fixture: missing/present graphics provider, D2-D7/A2-A6 and SP, active View, display DMA cancellation, preserved master/blitter DMA, balanced library counts.",
+      "setup": "The qualification root installs real graphics. Only in this synthetic ABI machine its node name is hidden before the original fixture optionally registers a synthetic graphics base. No ROM bytes or real game/media replay is patched."
+    }
+  },
+  "producerCi": {
+    "run": "https://github.com/ilehtoranta/CopperStart/actions/runs/39062505913",
+    "coverage": "UNAVAILABLE: all 13 jobs have zero steps; GitHub prevented their start with an account-level restriction annotation. This is not a successful CI run.",
+    "jobs": {
+      "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lemmings-2026-10-17\\producer-ci-jobs.json",
+      "sha256": "dde5c28085609398f191035422eb2104babbe5f4ad6ff16af0cc15d618519dc8"
+    }
+  },
+  "receiptMode": "--firmware native disables private boot receipt interpretation after takeover. The ROM hashes above identify CopperStart and native Kickstart separately; guest execution is not changed.",
+  "limits": [
+    "First Fun level only; full game, other difficulty modes and two-player unverified.",
+    "Bounded empty-display Intuition library only; general screen/window/task/gadget services remain unimplemented.",
+    "Sampled PCM parity is not listening/fidelity qualification.",
+    "Fresh frozen-component ROM qualification, not current full producer tree or standard-app/MSIX firmware admission.",
+    "Correctness replays only; no host throughput acceptance.",
+    "ROMs, media, generated disk/captures and packages are not committed or published."
+  ]
+}

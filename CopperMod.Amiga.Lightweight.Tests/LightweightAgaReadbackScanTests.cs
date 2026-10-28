@@ -117,7 +117,7 @@ public sealed class LightweightAgaReadbackScanTests
         m.WriteChipWordDma(0x50004, 0x1111); m.WriteChipWordDma(0x50006, 0x2222);
         m.WriteChipWordDma(0x50008, 0x3333); m.WriteChipWordDma(0x5000A, 0x4444);
         Write(m, 0x120, 5); Write(m, 0x122, 0); Write(m, 0x096, 0x8220);
-        var input = 45*454L+0x17*2; m.AdvanceHardwareTo(input);
+        var input = 45*454L+0x15*2; m.AdvanceHardwareTo(input);
         m.WriteCustomRegisterFromCopper(0x1FC, 0x8000, input); m.AdvanceHardwareTo(input+10);
         Assert.Equal(0x3333, m.GetSpriteDmaDataA(0)); Assert.Equal(0x2222, m.GetSpriteDmaDataB(0));
         Assert.Equal(0x5000Au, m.GetLiveSpritePointer(0)); Assert.Null(m.UnsupportedActiveFeature);

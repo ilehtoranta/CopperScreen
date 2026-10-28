@@ -1,0 +1,1446 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-20",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Superfrog SPS 35 bounded gameplay and story-to-game disk handoff",
+  "status": "PASS for recorded startup, Magic Woods 1-1 movement/jumping/collection and story disk handoff; broader game coverage unqualified",
+  "copperStartCommit": "b78ddc09302cd506687327be1c1434891444cc4a",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20",
+  "media": {
+    "archive": {
+      "path": "C:/Data/TestImages/Team17/Superfrog_35.zip",
+      "bytes": 2952859,
+      "sha256": "1d80c4dac028b5389fd2db82b4f99179e93ef7bf7a19bde66c6af94ec18e7487"
+    },
+    "entries": [
+      {
+        "entry": "SuperFrog_DiskOne.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "92ada1f19abe94cdd848dcdb84b8bec20428ac9db221f94f8c06e0fec9a557a5"
+      },
+      {
+        "entry": "SuperFrog_DiskTwo.ipf",
+        "entryBytes": 1140812,
+        "entrySha256": "b2c02ca619605b9015f333982920abcd184b741507bf788970589a0337b8126d"
+      },
+      {
+        "entry": "SuperFrog_StoryDisk.ipf",
+        "entryBytes": 1139672,
+        "entrySha256": "73336668a83f5db6115cd4f59d8ed74a9212ca67bde6bab72e536a89f4d86ba7"
+      }
+    ]
+  },
+  "machine": {
+    "cpu": "68000",
+    "chipset": "PAL OCS",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "drives": "one read-only DF0",
+    "rtc": false,
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "implementationChange": "None. Existing rebuilt ROM reused without modification; no new defensive argument checks, host OS shims, game recognition or guest-memory injection.",
+  "engineProvenance": {
+    "record": "SUPERFROG_VIEWPORT_2026-10-16",
+    "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/superfrog-viewport-2026-10-16",
+    "sourceBase": "0d0724a67365ba90cdc512a33085be85378e76d2",
+    "sourceFile": "CopperMod.Amiga.Lightweight/LightweightCopper.cs",
+    "sourceSha256": "ed998714e024a6e8c89e2e06c43b3b53cb441014c9c09924ff55ecb3711911ad",
+    "patchSha256": "85a098101389cbb2055d61625d937f458ca08c9dbe7ca2f5e1ec5be87b77d0f2",
+    "explanation": "Retained qualified candidate binaries include the existing Copper horizontal-position line-wrap fix. A live-control probe was rebuilt against these exact binaries; no engine or CPU source was changed here."
+  },
+  "preliminaryRuns": {
+    "names": [
+      "normal",
+      "scalar",
+      "native",
+      "story-normal",
+      "story-scalar",
+      "story-native"
+    ],
+    "disposition": "Diagnostic only; reused older Hired Guns runner predates LWA-VIDEO-010. Repeated bottom strip appeared under both ROMs. Stopped and restarted from reset with corrected retained engine. Not counted as final visual qualification."
+  },
+  "buildsAndTests": {
+    "liveProbe": "Release build passed, zero warnings/errors; exact support and source identities below",
+    "rom": "Unchanged image independently re-linked and tested in preceding Xenon 2 qualification. No new ROM compilation or component/engine suite rerun in this docs-only qualification.",
+    "throughput": "Not measured; these are bounded compatibility replays, not throughput or full hardware-conformance acceptance."
+  },
+  "limits": [
+    "No level completion or combat/weapon qualification",
+    "Disk Two supplied and hashed but not mounted",
+    "Story opening and prompt checked; fire skips the remaining film",
+    "Saving, other worlds, full game and general Workbench unqualified",
+    "PCM presence checked; listening and sound fidelity unassessed",
+    "Player character appearance unresolved under both ROMs in sampled and adjacent fields; no full character/sprite-rendering qualification"
+  ],
+  "runs": {
+    "play-normal": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\play-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-play.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "14500"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/initial-play.json",
+        "bytes": 349,
+        "sha256": "ee77e1f3500b2738a49854edaa483c143039aa215e78be0870d74a19e3dcd1c1"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 15200,
+      "captures": 153,
+      "captureFiles": 765,
+      "captureManifestSha256": "aa40eb4c5f57b9a0752cb4ffb528b44f6842f1dfb6c89a94c43b90919100ac08",
+      "captureManifestAlgorithm": "SHA256 of UTF-8 sorted filename + space + lowercase SHA256 + LF for all capture files",
+      "nonzeroPcmSnapshots": 124,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 15200,
+        "cycle": 2153341980,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01A56",
+        "sr": "2009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000000",
+          "00000004",
+          "00003B70",
+          "00003200",
+          "00000000",
+          "0000DFFE",
+          "00000000"
+        ],
+        "address": [
+          "00C01776",
+          "00005E0A",
+          "000538BE",
+          "00C2BEAA",
+          "0004F98C",
+          "00C19B88",
+          "00C10A1C",
+          "00C00F9C"
+        ],
+        "dmacon": "07F7",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00006FD2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 96625,
+        "Cylinder": 49,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 49,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 96625,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 0,
+        "ciaAPending": 0,
+        "ciaBMask": 0,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2779",
+        "diwstop": "2CC7",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002D3E2",
+          "00030F52",
+          "00034AC2",
+          "00038632",
+          "0003C1A2",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 14500,
+          "target": 14600,
+          "events": [
+            {
+              "frame": 14510,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 14540
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 14600,
+          "target": 14700,
+          "events": [
+            {
+              "frame": 14680,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 14700,
+          "target": 14800,
+          "events": [
+            {
+              "frame": 14710
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "start": 14800,
+          "target": 15200,
+          "events": [
+            {
+              "frame": 14820,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 14850
+            },
+            {
+              "frame": 15020,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 15040
+            }
+          ]
+        }
+      ]
+    },
+    "play-scalar": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\play-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-play.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "14500",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/initial-play.json",
+        "bytes": 349,
+        "sha256": "ee77e1f3500b2738a49854edaa483c143039aa215e78be0870d74a19e3dcd1c1"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 15200,
+      "captures": 153,
+      "captureFiles": 765,
+      "captureManifestSha256": "aa40eb4c5f57b9a0752cb4ffb528b44f6842f1dfb6c89a94c43b90919100ac08",
+      "captureManifestAlgorithm": "SHA256 of UTF-8 sorted filename + space + lowercase SHA256 + LF for all capture files",
+      "nonzeroPcmSnapshots": 124,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 15200,
+        "cycle": 2153341980,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01A56",
+        "sr": "2009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000000",
+          "00000004",
+          "00003B70",
+          "00003200",
+          "00000000",
+          "0000DFFE",
+          "00000000"
+        ],
+        "address": [
+          "00C01776",
+          "00005E0A",
+          "000538BE",
+          "00C2BEAA",
+          "0004F98C",
+          "00C19B88",
+          "00C10A1C",
+          "00C00F9C"
+        ],
+        "dmacon": "07F7",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00006FD2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 96625,
+        "Cylinder": 49,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 49,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 96625,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 0,
+        "ciaAPending": 0,
+        "ciaBMask": 0,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2779",
+        "diwstop": "2CC7",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002D3E2",
+          "00030F52",
+          "00034AC2",
+          "00038632",
+          "0003C1A2",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 14500,
+          "target": 14600,
+          "events": [
+            {
+              "frame": 14510,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 14540
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 14600,
+          "target": 14700,
+          "events": [
+            {
+              "frame": 14680,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 14700,
+          "target": 14800,
+          "events": [
+            {
+              "frame": 14710
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "start": 14800,
+          "target": 15200,
+          "events": [
+            {
+              "frame": 14820,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 14850
+            },
+            {
+              "frame": 15020,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 15040
+            }
+          ]
+        }
+      ]
+    },
+    "play-native": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\play-native",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-play.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "14500"
+      ],
+      "rom": {
+        "path": "C:/Data/ROM/Kickstart_13.rom",
+        "bytes": 262144,
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/initial-play.json",
+        "bytes": 349,
+        "sha256": "ee77e1f3500b2738a49854edaa483c143039aa215e78be0870d74a19e3dcd1c1"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 15200,
+      "captures": 153,
+      "captureFiles": 765,
+      "captureManifestSha256": "b889a9c989305dcc9385b1c9d716a59abe53b937f95a8a74cd34baed52e48340",
+      "captureManifestAlgorithm": "SHA256 of UTF-8 sorted filename + space + lowercase SHA256 + LF for all capture files",
+      "nonzeroPcmSnapshots": 123,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 15200,
+        "cycle": 2153238560,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C01A56",
+        "sr": "2009",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000000",
+          "00000004",
+          "00003B70",
+          "00003200",
+          "00000000",
+          "0000DFFE",
+          "00000000"
+        ],
+        "address": [
+          "00C01776",
+          "00005E0A",
+          "000538BE",
+          "00C2BEAA",
+          "0004F98C",
+          "00C19B88",
+          "00C10A1C",
+          "00C00F9C"
+        ],
+        "dmacon": "07F7",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "00006FD2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 96626,
+        "Cylinder": 49,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 49,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 96626,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2779",
+        "diwstop": "2CC7",
+        "ddfstart": "0028",
+        "ddfstop": "00D8",
+        "bitplanes": [
+          "0002D3E2",
+          "00030F52",
+          "00034AC2",
+          "00038632",
+          "0003C1A2",
+          "00000000"
+        ],
+        "modulos": [
+          2,
+          2
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 14500,
+          "target": 14600,
+          "events": [
+            {
+              "frame": 14510,
+              "joystickPort1": 8
+            },
+            {
+              "frame": 14540
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 14600,
+          "target": 14700,
+          "events": [
+            {
+              "frame": 14680,
+              "joystickPort1": 9
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 14700,
+          "target": 14800,
+          "events": [
+            {
+              "frame": 14710
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "start": 14800,
+          "target": 15200,
+          "events": [
+            {
+              "frame": 14820,
+              "joystickPort1": 9
+            },
+            {
+              "frame": 14850
+            },
+            {
+              "frame": 15020,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 15040
+            }
+          ]
+        }
+      ]
+    },
+    "story-fixed-normal": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\story-fixed-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-story-fixed.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_StoryDisk.ipf",
+        "5000"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/initial-story-fixed.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 13000,
+      "captures": 131,
+      "captureFiles": 655,
+      "captureManifestSha256": "2cfd26f82b26c63f6e0e7dd3e7f7d529a809f2469f583ef5bc8cfd3ea80e0b7f",
+      "captureManifestAlgorithm": "SHA256 of UTF-8 sorted filename + space + lowercase SHA256 + LF for all capture files",
+      "nonzeroPcmSnapshots": 97,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 13000,
+        "cycle": 1842183546,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C031C6",
+        "sr": "2001",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000033",
+          "0000001D",
+          "00000000",
+          "00000000",
+          "00000014",
+          "00000000",
+          "00000008"
+        ],
+        "address": [
+          "00023224",
+          "000231FC",
+          "00C386A7",
+          "00025A60",
+          "00C1696A",
+          "00000000",
+          "00C16778",
+          "00C00F9C"
+        ],
+        "dmacon": "07FF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "000073F2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 31709,
+        "Cylinder": 29,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 29,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 31709,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 0,
+        "ciaAPending": 0,
+        "ciaBMask": 0,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2C81",
+        "diwstop": "2CC1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "0001A5FC",
+          "0001D2FC",
+          "0001FFFC",
+          "00022CFC",
+          "000259FC",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 5000,
+          "target": 7000,
+          "events": [
+            {
+              "frame": 5020,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 5040
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 7000,
+          "target": 11000,
+          "events": [
+            {
+              "frame": 7020,
+              "ejectAdf": true
+            },
+            {
+              "frame": 7200,
+              "diskPath": "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf"
+            },
+            {
+              "frame": 7220,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 7240
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 11000,
+          "target": 13000,
+          "events": []
+        }
+      ]
+    },
+    "story-fixed-scalar": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\story-fixed-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-story-fixed.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_StoryDisk.ipf",
+        "5000",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/initial-story-fixed.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 13000,
+      "captures": 131,
+      "captureFiles": 655,
+      "captureManifestSha256": "2cfd26f82b26c63f6e0e7dd3e7f7d529a809f2469f583ef5bc8cfd3ea80e0b7f",
+      "captureManifestAlgorithm": "SHA256 of UTF-8 sorted filename + space + lowercase SHA256 + LF for all capture files",
+      "nonzeroPcmSnapshots": 97,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 13000,
+        "cycle": 1842183546,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C031C6",
+        "sr": "2001",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000033",
+          "0000001D",
+          "00000000",
+          "00000000",
+          "00000014",
+          "00000000",
+          "00000008"
+        ],
+        "address": [
+          "00023224",
+          "000231FC",
+          "00C386A7",
+          "00025A60",
+          "00C1696A",
+          "00000000",
+          "00C16778",
+          "00C00F9C"
+        ],
+        "dmacon": "07FF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "000073F2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 31709,
+        "Cylinder": 29,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 29,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 31709,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 0,
+        "ciaAPending": 0,
+        "ciaBMask": 0,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2C81",
+        "diwstop": "2CC1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "0001A5FC",
+          "0001D2FC",
+          "0001FFFC",
+          "00022CFC",
+          "000259FC",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 5000,
+          "target": 7000,
+          "events": [
+            {
+              "frame": 5020,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 5040
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 7000,
+          "target": 11000,
+          "events": [
+            {
+              "frame": 7020,
+              "ejectAdf": true
+            },
+            {
+              "frame": 7200,
+              "diskPath": "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf"
+            },
+            {
+              "frame": 7220,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 7240
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 11000,
+          "target": 13000,
+          "events": []
+        }
+      ]
+    },
+    "story-fixed-native": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\story-fixed-native",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-story-fixed.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_StoryDisk.ipf",
+        "5000"
+      ],
+      "rom": {
+        "path": "C:/Data/ROM/Kickstart_13.rom",
+        "bytes": 262144,
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/initial-story-fixed.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "exitCode": 0,
+      "completedFrames": 13000,
+      "captures": 131,
+      "captureFiles": 655,
+      "captureManifestSha256": "5cc7d47ff355656bfa8089a37a2dd72ee1fe68df734d8045cf29aa10475b76a7",
+      "captureManifestAlgorithm": "SHA256 of UTF-8 sorted filename + space + lowercase SHA256 + LF for all capture files",
+      "nonzeroPcmSnapshots": 97,
+      "unsupportedSnapshots": 0,
+      "videoUnsupportedSnapshots": 0,
+      "finalState": {
+        "frame": 13000,
+        "cycle": 1842077402,
+        "beam": [
+          0,
+          2
+        ],
+        "width": 908,
+        "height": 313,
+        "pc": "00C031C6",
+        "sr": "2001",
+        "overlay": false,
+        "data": [
+          "00000000",
+          "00000033",
+          "0000001D",
+          "00000000",
+          "00000000",
+          "00000014",
+          "0000FFFF",
+          "00000008"
+        ],
+        "address": [
+          "00023224",
+          "000231FC",
+          "00C386A7",
+          "00025A60",
+          "00C1696A",
+          "00000000",
+          "00C16778",
+          "00C00F9C"
+        ],
+        "dmacon": "07FF",
+        "intena": "4030",
+        "intreq": "17E0",
+        "adkcon": "1100",
+        "dsklen": "4000",
+        "copperPc": "000073F2",
+        "copperWaiting": false,
+        "blitterBusy": false,
+        "diskActive": false,
+        "diskRemaining": 0,
+        "diskBit": 31708,
+        "Cylinder": 29,
+        "Head": 0,
+        "Selected": false,
+        "MotorOn": false,
+        "ReadyCycle": 9223372036854775807,
+        "drives": [
+          {
+            "index": 0,
+            "Mounted": true,
+            "Cylinder": 29,
+            "Head": 0,
+            "Selected": false,
+            "MotorOn": false,
+            "ReadyCycle": 9223372036854775807,
+            "DiskChanged": false,
+            "BitPosition": 31708,
+            "NextBitCycle": 9223372036854775807
+          }
+        ],
+        "ciaAMask": 10,
+        "ciaAPending": 0,
+        "ciaBMask": 4,
+        "ciaBPending": 17,
+        "bplcon0": "5200",
+        "diwstart": "2C81",
+        "diwstop": "2CC1",
+        "ddfstart": "0038",
+        "ddfstop": "00D0",
+        "bitplanes": [
+          "0001A5FC",
+          "0001D2FC",
+          "0001FFFC",
+          "00022CFC",
+          "000259FC",
+          "00000000"
+        ],
+        "modulos": [
+          0,
+          0
+        ],
+        "unsupported": null,
+        "videoUnsupported": null,
+        "audioNonzero": true
+      },
+      "segments": [
+        {
+          "revision": 0,
+          "start": 5000,
+          "target": 7000,
+          "events": [
+            {
+              "frame": 5020,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 5040
+            }
+          ]
+        },
+        {
+          "revision": 1,
+          "start": 7000,
+          "target": 11000,
+          "events": [
+            {
+              "frame": 7020,
+              "ejectAdf": true
+            },
+            {
+              "frame": 7200,
+              "diskPath": "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf"
+            },
+            {
+              "frame": 7220,
+              "joystickPort1": 16
+            },
+            {
+              "frame": 7240
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "start": 11000,
+          "target": 13000,
+          "events": []
+        }
+      ]
+    }
+  },
+  "comparisons": {
+    "play": {
+      "fieldsPerMode": 15200,
+      "normalScalarMatchingFiles": 765,
+      "types": [
+        "full-raster BMP",
+        "CPU/hardware JSON",
+        "Chip RAM",
+        "slow RAM",
+        "PCM"
+      ],
+      "crossRom": "Same bounded visual milestones reached; timing and state differ. Cross-ROM byte identity not required or claimed.",
+      "bootMedia": "SuperFrog_DiskOne.ipf",
+      "workload": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/superfrog-copperstart-gameplay-v1.json",
+        "bytes": 700,
+        "sha256": "ea93754e74152553bc807fcaf120063b47a6645d7edda1749b2cf8d0feb6d9e9"
+      }
+    },
+    "story-fixed": {
+      "fieldsPerMode": 13000,
+      "normalScalarMatchingFiles": 655,
+      "types": [
+        "full-raster BMP",
+        "CPU/hardware JSON",
+        "Chip RAM",
+        "slow RAM",
+        "PCM"
+      ],
+      "crossRom": "Same bounded visual milestones reached; timing and state differ. Cross-ROM byte identity not required or claimed.",
+      "bootMedia": "SuperFrog_StoryDisk.ipf",
+      "workload": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/superfrog-copperstart-story-handoff-v1.json",
+        "bytes": 346,
+        "sha256": "93790fb5cd47ed7208fd6e9556abf401a15604c4508c50a19429d96c3e70587f"
+      }
+    }
+  },
+  "probeSources": [
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/live-probe/Probe.csproj",
+      "bytes": 819,
+      "sha256": "c89edf65ee8f19e40e142b85132d502d25dc5c839cb6b0f213add586bc28b3a6"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/live-probe/Program.cs",
+      "bytes": 2404,
+      "sha256": "212ebadf2dbd6eac1f5a1fc872c5550917a955f99ec0820a099b937793da6ba7"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/live-probe/NativeBootProbe.cs",
+      "bytes": 8531,
+      "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+    },
+    {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/live-probe/NativeInputScript.cs",
+      "bytes": 3636,
+      "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+    }
+  ],
+  "milestones": {
+    "play": {
+      "6000": "Superfrog menu",
+      "9000": "Loading Magic Woods",
+      "10000": "Progress/world map",
+      "12000": "Magic Woods 1-1 active",
+      "14600": "Right movement, scrolling and score 200",
+      "14700": "Up/right input changes camera vertically/horizontally",
+      "14800": "Score 250; HUD life icons decrease from two to one near spike pit",
+      "14900": "Starting terrain returns after life loss; no level completion",
+      "15200": "Further camera movement; score 250 retained"
+    },
+    "story-fixed": {
+      "3000": "Prince and princess opening animation",
+      "5000": "Witch text",
+      "7000": "Insert Disk 1 and press fire, after skip",
+      "7020": "Physical DF0 ejection",
+      "7200": "Physical Disk One insertion",
+      "7220": "Fire press",
+      "7240": "Fire release",
+      "11000": "Game features screen loaded from Disk One",
+      "13000": "Game credits"
+    }
+  },
+  "adjacentFieldDiagnostics": [
+    {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-xenon2-2026-10-20\\rom-qualified\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\adjacent-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-play.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "14500"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-xenon2-2026-10-20/rom-qualified/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "83dea4b22e4db14358900eeb9f31ffc1eaf4607470b3d7c162919cf60df35826"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "purpose": "Adjacent-field character-visibility diagnostic; not the canonical gameplay replay",
+      "exitCode": 0,
+      "capturesReviewed": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-normal/captures/frame-014500.bmp",
+          "bytes": 1136870,
+          "sha256": "32fee206b0f1655fb9749c7787571f6fa2b8548367dfc4a3e8330ca32b8a31b3"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-normal/captures/frame-014501.bmp",
+          "bytes": 1136870,
+          "sha256": "9abc5ebc5140564a57bbd86004dc8f8d6ec22a5efeba211a8aa3fc20d4f4d371"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-normal/captures/frame-014502.bmp",
+          "bytes": 1136870,
+          "sha256": "9abc5ebc5140564a57bbd86004dc8f8d6ec22a5efeba211a8aa3fc20d4f4d371"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-normal/captures/frame-014503.bmp",
+          "bytes": 1136870,
+          "sha256": "6ccaafc6d6081f67a54d4173238ad554ec1529ab2bba0597a11f129b5519c62e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-normal/captures/frame-014504.bmp",
+          "bytes": 1136870,
+          "sha256": "6ccaafc6d6081f67a54d4173238ad554ec1529ab2bba0597a11f129b5519c62e"
+        }
+      ]
+    },
+    {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\runner-corrected\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Data\\ROM\\Kickstart_13.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\adjacent-native",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-superfrog-2026-10-20\\initial-play.json",
+        "C:/Data/TestImages/Team17/Superfrog_35.zip#/SuperFrog_DiskOne.ipf",
+        "14500"
+      ],
+      "rom": {
+        "path": "C:/Data/ROM/Kickstart_13.rom",
+        "bytes": 262144,
+        "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "ca19a7aed853a4393b08d57991f577f73d56c6907dc47e083d80ae3fa7cdda2e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "c7b6c5edb7c2f20cbe036a5ea877c3390d992743afd0ae9cbb92d1320188848c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/runner-corrected/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "d12859a172db1d6eae9d6b35a42fc01fd20525afdd368b482dd67fbca337317f"
+        }
+      ],
+      "purpose": "Adjacent-field character-visibility diagnostic; not the canonical gameplay replay",
+      "exitCode": 0,
+      "capturesReviewed": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-native/captures/frame-014500.bmp",
+          "bytes": 1136870,
+          "sha256": "32fee206b0f1655fb9749c7787571f6fa2b8548367dfc4a3e8330ca32b8a31b3"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-native/captures/frame-014501.bmp",
+          "bytes": 1136870,
+          "sha256": "9abc5ebc5140564a57bbd86004dc8f8d6ec22a5efeba211a8aa3fc20d4f4d371"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-native/captures/frame-014502.bmp",
+          "bytes": 1136870,
+          "sha256": "9abc5ebc5140564a57bbd86004dc8f8d6ec22a5efeba211a8aa3fc20d4f4d371"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-native/captures/frame-014503.bmp",
+          "bytes": 1136870,
+          "sha256": "6ccaafc6d6081f67a54d4173238ad554ec1529ab2bba0597a11f129b5519c62e"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-superfrog-2026-10-20/adjacent-native/captures/frame-014504.bmp",
+          "bytes": 1136870,
+          "sha256": "6ccaafc6d6081f67a54d4173238ad554ec1529ab2bba0597a11f129b5519c62e"
+        }
+      ]
+    }
+  ],
+  "adjacentFieldFinding": "Character not clearly visible in either ROM at fields 14500-14504. These fields do not distinguish animation/visibility state from a shared rendering limitation. Character appearance remains unresolved; no CopperStart-specific divergence demonstrated. Separate from canonical normal/scalar comparison.",
+  "documentationValidation": "New Markdown local links resolved, evidence/workload JSON parsed, canonical workloads equal actual loaded events, published copies byte-identical, git diff --check passed. No broad emulator/component suites rerun for documentation-only changes."
+}

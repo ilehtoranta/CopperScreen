@@ -345,7 +345,7 @@
         "type": "Project",
         "dependencies": {
           "Copper68k": "[1.5.4, 1.5.4]",
-          "CopperDisk": "[3.0.0, )"
+          "CopperDisk": "[3.0.1-dev.1, )"
         }
       },
       "copperscreen": {
@@ -355,7 +355,7 @@
           "Avalonia.Desktop": "[12.0.3, )",
           "Avalonia.Themes.Fluent": "[12.0.3, )",
           "Copper68k": "[1.5.4, 1.5.4]",
-          "CopperDisk": "[3.0.0, )",
+          "CopperDisk": "[3.0.1-dev.1, )",
           "CopperMod.Amiga.Lightweight": "[0.1.0-preview.2, )",
           "CopperPad": "[2.0.0-preview.2, )",
           "CopperPad.HidSharp": "[2.0.0-preview.2, )",

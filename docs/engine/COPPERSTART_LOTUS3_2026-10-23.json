@@ -1,0 +1,616 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Lotus III supplied FLT / Crack Inc ADFs: one-player Arcade driving, F10 pause/resume and timeout return to setup",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23",
+  "copperScreenSourceBase": "8eb5e54ca0fa820dda2a4b6ef4e69ee65869fb23",
+  "copperStartProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "engineProvenance": "docs/engine/WORMS_SPRITE_DMA_2026-10-22.json",
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0; Lotus III disk 1 ejected at 6002 and disk 2 mounted at 6202",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "disks": [
+      {
+        "disk": 1,
+        "archive": {
+          "path": "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip",
+          "bytes": 754935,
+          "sha256": "c8241acd91206a0d857cd589da2ecdeb4084bd270e597dee4c0eb7d7885fc30c"
+        },
+        "entries": [
+          {
+            "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+            "bytes": 901120,
+            "sha256": "557979cb5fa775e1fa2e2864bb4800667fb3a24b782daa6900157fa6990d8546"
+          }
+        ]
+      },
+      {
+        "disk": 2,
+        "archive": {
+          "path": "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].zip",
+          "bytes": 871792,
+          "sha256": "699d6c7a9562184f4daba8d23ff6c4cbfd28a3e1863eba5c764ba96d735abd9c"
+        },
+        "entries": [
+          {
+            "entry": "Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 2 of 2)[cr FLT - Crack Inc].adf",
+            "bytes": 901120,
+            "sha256": "cde309be4d5d6508ddf4c825f174ff990f61552ce233999b5723939334996887"
+          }
+        ]
+      }
+    ],
+    "admission": "Supplied FLT / Crack Inc cracked two-ADF release. Not pristine original-media protection qualification."
+  },
+  "workloads": {
+    "copperStart": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/lotus3-copperstart-driving-v1.json",
+      "bytes": 2405,
+      "sha256": "ae8c965a00c6aced4bdca3a434c37b39016a214d5b8c80c813fab98edfd31155",
+      "events": 46
+    },
+    "kickstart13": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/lotus3-kickstart13-driving-v1.json",
+      "bytes": 2493,
+      "sha256": "0d291278259c1de863bd755b9d31c370c6f246d899743fa245643233f58b6fbf",
+      "events": 48
+    }
+  },
+  "inputDifference": {
+    "extraNative13Events": [
+      {
+        "frame": 11502,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 11522
+      }
+    ],
+    "reason": "Additional Fire exits the later native attract-demo phase; all inputs from setup at field 12000 onward are identical"
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+          "23200"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/complete-input.json",
+          "bytes": 2405,
+          "sha256": "ae8c965a00c6aced4bdca3a434c37b39016a214d5b8c80c813fab98edfd31155"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/qualified/normal/runner.log",
+        "bytes": 253524,
+        "sha256": "83b02bdd9b0e72426f9723be986b572a4f934914f08d3550131151e6f89a421c"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\complete-input.json",
+          "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+          "23200",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/complete-input.json",
+          "bytes": 2405,
+          "sha256": "ae8c965a00c6aced4bdca3a434c37b39016a214d5b8c80c813fab98edfd31155"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/qualified/scalar/runner.log",
+        "bytes": 253524,
+        "sha256": "83b02bdd9b0e72426f9723be986b572a4f934914f08d3550131151e6f89a421c"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\complete-native-input.json",
+          "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+          "23200"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/complete-native-input.json",
+          "bytes": 2493,
+          "sha256": "0d291278259c1de863bd755b9d31c370c6f246d899743fa245643233f58b6fbf"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/qualified/native13/runner.log",
+        "bytes": 253765,
+        "sha256": "cd1b14dc50baf6c3df7d1df5391bcd0a68417dc57978cba459ae1e385bec476a"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 1165,
+      "fields": 233,
+      "lastField": 23200,
+      "unsupported": [],
+      "nonzeroPcmFields": 143,
+      "manifestSha256": "85d6259c1f6aa166299de3c592096b18222dfd6f8a0da3de413f9ade61718078"
+    },
+    "scalar": {
+      "files": 1165,
+      "fields": 233,
+      "lastField": 23200,
+      "unsupported": [],
+      "nonzeroPcmFields": 143,
+      "manifestSha256": "85d6259c1f6aa166299de3c592096b18222dfd6f8a0da3de413f9ade61718078"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native13": {
+      "files": 1165,
+      "fields": 233,
+      "lastField": 23200,
+      "unsupported": [],
+      "nonzeroPcmFields": 123,
+      "manifestSha256": "8e3c7b3bca808d0ee23e3d68342fee2f07887d86d5345f8d9e87206bccd6a5f4"
+    }
+  },
+  "discovery": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/discovery/normal/runner.log",
+        "bytes": 253901,
+        "sha256": "c7395989aeb32d1861ed1dfc27e95baf663c302426c13928bfcaf3eb6d8d1a86"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-worms-gameplay-2026-10-22\\rom-boot-public\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\discovery\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+          "5000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "476f9d1d0afd61316a4e47b21d00e45d65ff54b2730296653629d10857c5c721"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/discovery/scalar/runner.log",
+        "bytes": 253901,
+        "sha256": "c7395989aeb32d1861ed1dfc27e95baf663c302426c13928bfcaf3eb6d8d1a86"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-lotus3-2026-10-23\\initial.json",
+          "C:/Data/TestImages/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].zip#/Lotus III - The Ultimate Challenge (1992)(Gremlin)(Disk 1 of 2)[cr FLT - Crack Inc].adf",
+          "5000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/initial.json",
+          "bytes": 4,
+          "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "4c6a6129ae498031ac2bb321bcbb33b90ba2d766068edf7a36b2a2e27d4c81ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "833b5958c11d400bbd954bec5b17d49938e71558b68e35a73ab4be0322681bfa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus3-2026-10-23/discovery/native13/runner.log",
+        "bytes": 254142,
+        "sha256": "6bbcb18a1c9b59ed706f760bb694a96cb403a3e2cf0ccca79b48e1dac31f0e68"
+      }
+    }
+  },
+  "resetReplayMatchesDiscovery": {
+    "normal": {
+      "files": 1165,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches the independently hashed discovery manifest"
+    },
+    "scalar": {
+      "files": 1165,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches the independently hashed discovery manifest"
+    },
+    "native13": {
+      "files": 1165,
+      "identical": true,
+      "method": "Every filename, size and SHA-256 matches the independently hashed discovery manifest"
+    }
+  },
+  "pauseRasterChecks": {
+    "normal": {
+      "identicalRasterFields": [
+        18700,
+        18800,
+        18900,
+        19000
+      ],
+      "sha256": "a99b9000d9ba29236394dd004c49b66769a945b80a5464331493740965b23c2c",
+      "resumedRasterDiffersAt": 19200
+    },
+    "scalar": {
+      "identicalRasterFields": [
+        18700,
+        18800,
+        18900,
+        19000
+      ],
+      "sha256": "a99b9000d9ba29236394dd004c49b66769a945b80a5464331493740965b23c2c",
+      "resumedRasterDiffersAt": 19200
+    },
+    "native13": {
+      "identicalRasterFields": [
+        18700,
+        18800,
+        18900,
+        19000
+      ],
+      "sha256": "55e01dd9ffc4f970fcb9a074dea6d38df4318e5764f2cbdabeb07386616a857b",
+      "resumedRasterDiffersAt": 19200
+    }
+  },
+  "harness": {
+    "purpose": "Functional media replay; not a throughput harness",
+    "unchangedFrom": "docs/engine/COPPERSTART_F17_2026-10-23.json",
+    "retainedSource": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+        "bytes": 796,
+        "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+      }
+    ],
+    "retainedBuildLog": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+      "bytes": 376,
+      "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+    },
+    "buildRerun": false,
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "checks": {
+    "productionAndRomUnchanged": true,
+    "productionBuildRerun": false,
+    "engineTestsRerun": false,
+    "documentationAndInputChecks": true,
+    "allSnapshotsUnsupportedNull": true
+  },
+  "controlReference": {
+    "url": "https://www.lemonamiga.com/doc/lotus-3-the-ultimate-challenge/1024",
+    "description": "Preserved Amiga manual transcription: setup, car/music selection, Fire acceleration, steering, Back braking and timed Arcade play. F10 behavior is established by captured PAUSED text, frozen rasters/timer and resumed gameplay."
+  },
+  "observations": {
+    "crackedWordScreen": 5000,
+    "returnWithoutWord": 5002,
+    "disk2Prompt": 6000,
+    "diskSwap": [
+      6002,
+      6202
+    ],
+    "promptFire": 6502,
+    "copperStartCreditsWhileNativePrompt": 8500,
+    "repeatedFire": 8502,
+    "copperStartAttractDemo": 10000,
+    "extraNativeMenuFire": 11502,
+    "alignedSetup": 12000,
+    "onePlayerArcadeAutomaticFireAcceleration": 12100,
+    "carSelectionM200": 13000,
+    "musicSelection": [
+      14500,
+      15000
+    ],
+    "firstRaceZeroKmh": 17000,
+    "fireAccelerationAndAutomaticGears": 17400,
+    "rightSteering": 17500,
+    "leftSteering": 17700,
+    "fireAndBackBrakingTo14Kmh": 18200,
+    "backOnlyStill14Kmh": 18400,
+    "reacceleration": 18600,
+    "f10PauseTap": 18602,
+    "paused": [
+      18700,
+      18800,
+      18900,
+      19000
+    ],
+    "f10ResumeTap": 19002,
+    "resumed": 19200,
+    "turboZone": 19400,
+    "timer02": 20600,
+    "timer00": 20700,
+    "outOfTime": 20800,
+    "currentScores": 21400,
+    "highScores": 22600,
+    "returnToSetupWithRetainedOptions": 23200
+  },
+  "findings": [
+    "No new CopperStart or engine correction established; native guest execution and compatibility behavior retained",
+    "Disk-two prompt consumed the first Fire under CopperStart and a repeated Fire under native Kickstart 1.3. The existing generic CPU bus-spacing correction is retained; polling-edge loss is not a new CopperStart-specific defect",
+    "The earlier Lotus Esprit Turbo Challenge record misnamed raw 0x5F as F10. Its description is corrected to Help; historical executed inputs and capture hashes remain unchanged. Current Lotus III uses actual F10 raw 0x59"
+  ],
+  "limits": [
+    "Supplied cracked ADF release only; pristine original media and protection behavior remain unqualified",
+    "Opening one-player Arcade race, selected M200 and automatic gears only; later stages, completed races/championships, other cars, manual gears, split-screen, RECS construction/codes and persistent saving remain unqualified",
+    "Brake input reduced speed to 14 km/h under both ROMs; a zero-speed brake stop is not claimed",
+    "Native1.3 needs one additional Fire pair before setup; no identical cross-ROM input claim for the whole boot. All input from field 12000 onward is shared",
+    "Later car/road phases, speed and scores differ between ROMs; cross-ROM pixel/state equality is not claimed",
+    "Nonzero PCM is sample presence, not listening or fidelity",
+    "Native Kickstart comparison is on the same emulator, not a physical hardware oracle",
+    "No host throughput or complete hardware timing acceptance claim"
+  ]
+}

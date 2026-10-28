@@ -9,7 +9,7 @@
     <Title>CopperDisk</Title>
     <Authors>Ilkka Lehtoranta</Authors>
     <Description>Managed Amiga ADF, extended ADF, ADZ, DMS, IPF, and SCP disk image library.</Description>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>3.0.1-dev.1</PackageVersion>
     <Version>$(PackageVersion)</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://ilehtoranta.github.io/CopperScreen/copperdisk.html</PackageProjectUrl>
@@ -18,7 +18,7 @@
     <PackageTags>amiga;emulation;adf;adz;dms;ipf;scp;flux;disk</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>copperdisk-icon.png</PackageIcon>
-    <PackageReleaseNotes>Stable 3.0.0: managed IPF decoding with density selectors, per-cell timing weights, stored gap streams and weak/no-flux regions; read-only SCP decoding; aggregate loader options; hardfile configuration and partition metadata. Compared with stable 2.1.0, AmigaEncodedTrack.WrapBitOffset is internal and custom IWritableAmigaSectorDiskMedia implementations must provide TryWriteBytes. Standard ADF synthetic revolutions remain 6334 MFM words.</PackageReleaseNotes>
+    <PackageReleaseNotes>Development source: read-only UAE-1ADF and encoded-track media support up to 84 DD cylinders, preserving additional raw tracks and decoding normal tracks beyond cylinder 79. Zero-bit raw entries expose a zero-filled PAL DD revolution. Not a published release. Standard ADF synthetic revolutions remain 6334 MFM words.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>

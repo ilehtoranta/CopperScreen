@@ -124,11 +124,11 @@ public sealed class LightweightBeamSyncTests
         Assert.Equal(0x2002u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
         Assert.Equal(long.MaxValue, m.GetPaulaChannelSnapshot(channel).DmaInputCycle);
         Write(m, 0x100, 0);
-        var input = 1000 + 30 + 4 * channel;
+        var input = 1000 + 26 + 4 * channel;
         Assert.Equal(input, m.GetPaulaChannelSnapshot(channel).DmaInputCycle);
         m.AdvanceHardwareTo(input + 2);
         Assert.Equal(0x2004u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
-        Assert.Equal(16 + channel * 2, m.BeamColorClock);
+        Assert.Equal(14 + channel * 2, m.BeamColorClock);
     }
 
     [Fact]
@@ -142,13 +142,13 @@ public sealed class LightweightBeamSyncTests
         Assert.Equal(1000, m.Cycle);
         Write(m, 0xA4, 1);
         Write(m, 0x96, 0x8201);
-        Assert.Equal(1030, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
+        Assert.Equal(1026, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
         m.AdvanceHardwareTo(1454);
         Assert.Equal(1, m.BeamLine);
         m.Reset();
         Assert.Equal(0, m.Cycle);
         Write(m, 0x96, 0x8201);
-        Assert.Equal(30, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
+        Assert.Equal(26, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
     }
 
     [Fact]
@@ -159,7 +159,7 @@ public sealed class LightweightBeamSyncTests
         m.AdvanceHardwareTo(1001);
         Write(m, 0x100, 0);
         Write(m, 0x96, 0x8201);
-        Assert.Equal(1030, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
+        Assert.Equal(1026, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
         m.AdvanceHardwareTo(1454);
         Assert.Equal(1, m.BeamLine);
         Assert.Equal(0, m.BeamColorClock);
@@ -173,9 +173,9 @@ public sealed class LightweightBeamSyncTests
         Write(m, 0xA2, 0x2000);
         Write(m, 0xA4, 2);
         Write(m, 0x96, 0x8201);
-        m.AdvanceHardwareTo(30);
+        m.AdvanceHardwareTo(26);
         Write(m, 0x100, 2);
-        m.AdvanceHardwareTo(32);
+        m.AdvanceHardwareTo(28);
         Assert.Equal((ushort)0xCAFE, m.GetPaulaChannelSnapshot(0).PendingData);
         Assert.Equal(0x2002u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         Assert.True(m.BeamSyncRunning);
@@ -214,11 +214,11 @@ public sealed class LightweightBeamSyncTests
         Assert.Equal(0x10000u, m.GetDiskPointer());
         var resume = m.Cycle;
         Write(m, 0x100, 0);
-        Assert.Equal(resume + 46, m.SpriteDmaNextCycle);
+        Assert.Equal(resume + 42, m.SpriteDmaNextCycle);
         m.AdvanceHardwareTo(resume + 14);
         Assert.Equal(0x10002u, m.GetDiskPointer());
-        m.AdvanceHardwareTo(resume + 48);
-        Assert.Equal(resume + 48, m.SpriteDmaLastOutputCycle);
+        m.AdvanceHardwareTo(resume + 44);
+        Assert.Equal(resume + 44, m.SpriteDmaLastOutputCycle);
         Assert.Equal(0, m.SpriteDmaLastChannel);
     }
 

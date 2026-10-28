@@ -1,0 +1,3287 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "protocol": "copperstart-railroad-route-v1",
+  "title": "Railroad Tycoon v855.01: two-stop route and train arrival",
+  "status": "PASS bounded route setup, running train and London Crossing arrival",
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "branch": "codex/copperstart-intuition-20261018",
+    "commit": "1b8313985a9e8f95165e9cd973cd231af64e8a39",
+    "tree": "8c9a28e24a55997140a4ecf68a87a4ed218f2497",
+    "clean": true,
+    "remoteTipVerified": true,
+    "codeChangesForThisContinuation": false
+  },
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/rom-mouse-final/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "334cd0e9d2ad25410ab449f79e42e2b254e8085dbbf94e2d89c86f4db8b24d13"
+  },
+  "compositionReceipt": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/rom-mouse-final/CopperStart-DiskBoot.graphics.json",
+    "bytes": 7695,
+    "sha256": "2a1a8893eaaa110a076e9b62d99290695c7f65c259e7bb227e0f562d70b774fd"
+  },
+  "qualificationManifest": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/rom-mouse-final/disk-boot-test-manifest.json",
+    "bytes": 10371,
+    "sha256": "16444781e36aac78d5fc2f10b6c0fdc38faf8cbfeb9272260ce43e9748670bbd"
+  },
+  "buildAndUnitScope": {
+    "romRebuiltDuringThisContinuation": false,
+    "note": "Reused the exact rebuilt and qualified native ROM from the preceding gameplay work. No guest source or emulator changes were needed for this route; prior solution build, 311 component cases and 98 exact-ROM cases are retained prior evidence, not fresh results.",
+    "priorProductionParity": {
+      "qualification": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/rom-mouse-final/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "334cd0e9d2ad25410ab449f79e42e2b254e8085dbbf94e2d89c86f4db8b24d13"
+      },
+      "production": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/rom-mouse-final-production/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "334cd0e9d2ad25410ab449f79e42e2b254e8085dbbf94e2d89c86f4db8b24d13"
+      },
+      "byteIdentical": true,
+      "productionEmitters": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/source/native/CopperStart.Graphics/bin/Release/net10.0/CopperStart.Graphics.dll",
+          "bytes": 2409984,
+          "sha256": "7239f36347ae40b6c7a4a72d7baf0cf4d4b4708cbe05a63e5473a1ca96220e1f"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/source/native/CopperStart.Intuition/bin/Release/net10.0/CopperStart.Intuition.Native.dll",
+          "bytes": 58368,
+          "sha256": "4538305f821f044a04a2f3f9e00d3d803c10b30390269ee21bdab39bd2617a1e"
+        }
+      ]
+    },
+    "priorTests": [
+      {
+        "kind": "311 emitted graphics/Intuition component cases; no failures/skips",
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/tests/instruction-mouse-final.trx",
+        "bytes": 502217,
+        "sha256": "b635a0763d011cd2a8b0b61c427242baae2c85dba4651c7688c18a0b1867d796",
+        "counters": "<Counters total=\"311\" executed=\"311\" passed=\"311\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" />"
+      },
+      {
+        "kind": "98 exact-ROM reset/media cases including native mouse units and VBlank scheduling; no failures/skips",
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/tests/native-mouse-final.trx",
+        "bytes": 176525,
+        "sha256": "2c3c3a9995bde51f3c6e4d0d3ee80a9f8fa7ab34166eea1649c9acc82edb62bc",
+        "counters": "<Counters total=\"98\" executed=\"98\" passed=\"98\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" />"
+      }
+    ]
+  },
+  "media": [
+    {
+      "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+      "archiveSha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+      "lastWriteTimeUtc": "2026-06-16T07:09:04+00:00",
+      "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+      "entryBytes": 901120,
+      "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+    },
+    {
+      "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+      "archiveSha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+      "lastWriteTimeUtc": "2026-06-16T07:09:08+00:00",
+      "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+      "entryBytes": 901120,
+      "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+    }
+  ],
+  "machine": {
+    "cpu": "68000",
+    "agnus": "8371",
+    "denise": "8362",
+    "video": "PAL",
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "fastRamKiB": 0,
+    "drives": 1,
+    "rtcEnabled": false,
+    "framebufferWidth": 908
+  },
+  "method": "Whole-machine reset, original read-only media and physical input/media APIs only. Diagnostic pauses occur between frames. Guest data is inspected read-only; no guest RAM/register writes, title patches or host OS service shims.",
+  "prefix": {
+    "normal": {
+      "left": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-mouse-final-normal",
+      "right": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal",
+      "files": 1215,
+      "missing": [],
+      "extra": [],
+      "differences": []
+    },
+    "scalar": {
+      "left": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-mouse-final-scalar",
+      "right": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-scalar",
+      "files": 1215,
+      "missing": [],
+      "extra": [],
+      "differences": []
+    }
+  },
+  "normal": {
+    "classification": "PASS bounded route setup, train movement and London Crossing arrival",
+    "run": {
+      "kind": "normal",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\rom-mouse-final\\CopperStart-DiskBoot.rom",
+        "sha256": "334cd0e9d2ad25410ab449f79e42e2b254e8085dbbf94e2d89c86f4db8b24d13",
+        "bytes": 524288
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-postworld-input.json",
+        "sha256": "95b83fafb0b16deaa5fca9e783799605f4575fc0417816d78b32bda399030aed",
+        "bytes": 1605
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\rom-mouse-final\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-route-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-postworld-input.json"
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "framebufferWidth": 908,
+        "drives": 1,
+        "rtcEnabled": false
+      },
+      "binaries": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "sha256": "a176baa10a915e7377ca237a76f29ff7a14442905020e325e0b17fe6d5b2fb73",
+          "bytes": 52224
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.dll",
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+          "bytes": 288256
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\Copper68k.dll",
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+          "bytes": 978944
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperDisk.dll",
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d",
+          "bytes": 105472
+        }
+      ],
+      "classification": "unreviewed interactive diagnostic replay",
+      "exitCode": 0
+    },
+    "metadata": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/run.json",
+      "bytes": 2631,
+      "sha256": "1631aefd313ba40ba4a9bd43a85e0199653db05b49c28537d411356f062dce66"
+    },
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/runner.log",
+      "bytes": 425931,
+      "sha256": "a3b73539e78f0185598239d67b6b1b174cf8a2867917da8e8df824a1179084e8"
+    },
+    "segments": [
+      {
+        "revision": 1,
+        "start": 160000,
+        "target": 242000,
+        "events": [
+          {
+            "frame": 160100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 160120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 160140,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 160160,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 162100,
+            "keyCode": 324
+          },
+          {
+            "frame": 162110,
+            "keyCode": 452
+          },
+          {
+            "frame": 170100,
+            "keyCode": 333
+          },
+          {
+            "frame": 170110,
+            "keyCode": 461
+          },
+          {
+            "frame": 170300,
+            "keyCode": 333
+          },
+          {
+            "frame": 170310,
+            "keyCode": 461
+          },
+          {
+            "frame": 171100,
+            "keyCode": 324
+          },
+          {
+            "frame": 171110,
+            "keyCode": 452
+          },
+          {
+            "frame": 174100,
+            "keyCode": 324
+          },
+          {
+            "frame": 174110,
+            "keyCode": 452
+          },
+          {
+            "frame": 177100,
+            "keyCode": 292
+          },
+          {
+            "frame": 177110,
+            "keyCode": 420
+          },
+          {
+            "frame": 178100,
+            "keyCode": 339
+          },
+          {
+            "frame": 178110,
+            "keyCode": 467
+          },
+          {
+            "frame": 181100,
+            "keyCode": 292
+          },
+          {
+            "frame": 181110,
+            "keyCode": 420
+          },
+          {
+            "frame": 182100,
+            "keyCode": 333
+          },
+          {
+            "frame": 182110,
+            "keyCode": 461
+          },
+          {
+            "frame": 182300,
+            "keyCode": 324
+          },
+          {
+            "frame": 182310,
+            "keyCode": 452
+          },
+          {
+            "frame": 183100,
+            "keyCode": 332
+          },
+          {
+            "frame": 183110,
+            "keyCode": 460
+          },
+          {
+            "frame": 183300,
+            "keyCode": 324
+          },
+          {
+            "frame": 183310,
+            "keyCode": 452
+          },
+          {
+            "frame": 184100,
+            "keyCode": 339
+          },
+          {
+            "frame": 184110,
+            "keyCode": 467
+          },
+          {
+            "frame": 192100,
+            "keyCode": 352
+          },
+          {
+            "frame": 192120,
+            "keyCode": 303
+          },
+          {
+            "frame": 192130,
+            "keyCode": 431
+          },
+          {
+            "frame": 192140,
+            "keyCode": 480
+          },
+          {
+            "frame": 193100,
+            "keyCode": 343
+          },
+          {
+            "frame": 193110,
+            "keyCode": 471
+          },
+          {
+            "frame": 194100,
+            "keyCode": 333
+          },
+          {
+            "frame": 194110,
+            "keyCode": 461
+          },
+          {
+            "frame": 194300,
+            "keyCode": 333
+          },
+          {
+            "frame": 194310,
+            "keyCode": 461
+          },
+          {
+            "frame": 194500,
+            "keyCode": 324
+          },
+          {
+            "frame": 194510,
+            "keyCode": 452
+          },
+          {
+            "frame": 202100,
+            "keyCode": 324
+          },
+          {
+            "frame": 202110,
+            "keyCode": 452
+          },
+          {
+            "frame": 205100,
+            "keyCode": 342
+          },
+          {
+            "frame": 205110,
+            "keyCode": 470
+          },
+          {
+            "frame": 213100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -84
+          },
+          {
+            "frame": 213120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -84
+          },
+          {
+            "frame": 213140,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 213160,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 213200,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 213210
+          },
+          {
+            "frame": 231100,
+            "keyCode": 333
+          },
+          {
+            "frame": 231110,
+            "keyCode": 461
+          },
+          {
+            "frame": 231300,
+            "keyCode": 324
+          },
+          {
+            "frame": 231310,
+            "keyCode": 452
+          },
+          {
+            "frame": 239100,
+            "keyCode": 324
+          },
+          {
+            "frame": 239110,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 2,
+        "start": 242000,
+        "target": 247000,
+        "events": [
+          {
+            "frame": 242100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 242120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 40
+          },
+          {
+            "frame": 242140,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 242160,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 242200,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 242210
+          },
+          {
+            "frame": 243100,
+            "keyCode": 339
+          },
+          {
+            "frame": 243110,
+            "keyCode": 467
+          }
+        ]
+      },
+      {
+        "revision": 3,
+        "start": 247000,
+        "target": 252000,
+        "events": []
+      },
+      {
+        "revision": 4,
+        "start": 252000,
+        "target": 253000,
+        "events": [
+          {
+            "frame": 252100,
+            "keyCode": 292
+          },
+          {
+            "frame": 252110,
+            "keyCode": 420
+          }
+        ]
+      },
+      {
+        "revision": 5,
+        "start": 253000,
+        "target": 254000,
+        "events": [
+          {
+            "frame": 253100,
+            "keyCode": 333
+          },
+          {
+            "frame": 253110,
+            "keyCode": 461
+          },
+          {
+            "frame": 253300,
+            "keyCode": 324
+          },
+          {
+            "frame": 253310,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 6,
+        "start": 254000,
+        "target": 255000,
+        "events": [
+          {
+            "frame": 254100,
+            "keyCode": 332
+          },
+          {
+            "frame": 254110,
+            "keyCode": 460
+          }
+        ]
+      },
+      {
+        "revision": 7,
+        "start": 255000,
+        "target": 256000,
+        "events": [
+          {
+            "frame": 255100,
+            "keyCode": 332
+          },
+          {
+            "frame": 255110,
+            "keyCode": 460
+          }
+        ]
+      },
+      {
+        "revision": 8,
+        "start": 256000,
+        "target": 265000,
+        "events": [
+          {
+            "frame": 256100,
+            "keyCode": 324
+          },
+          {
+            "frame": 256110,
+            "keyCode": 452
+          },
+          {
+            "frame": 257100,
+            "keyCode": 337
+          },
+          {
+            "frame": 257110,
+            "keyCode": 465
+          }
+        ]
+      },
+      {
+        "revision": 9,
+        "start": 265000,
+        "target": 274000,
+        "events": [
+          {
+            "frame": 265100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 265120,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 265140,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 265160,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 56
+          },
+          {
+            "frame": 265180,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265200,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265220,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265240,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265260,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265280,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265300,
+            "mouseDeltaX": -8,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265340,
+            "keyCode": 339
+          },
+          {
+            "frame": 265350,
+            "keyCode": 467
+          }
+        ]
+      },
+      {
+        "revision": 10,
+        "start": 274000,
+        "target": 280000,
+        "events": []
+      },
+      {
+        "revision": 11,
+        "start": 280000,
+        "target": 283000,
+        "events": [
+          {
+            "frame": 280100,
+            "keyCode": 352
+          },
+          {
+            "frame": 280200,
+            "keyCode": 303
+          },
+          {
+            "frame": 280210,
+            "keyCode": 431
+          },
+          {
+            "frame": 280700,
+            "keyCode": 303
+          },
+          {
+            "frame": 280710,
+            "keyCode": 431
+          },
+          {
+            "frame": 281200,
+            "keyCode": 303
+          },
+          {
+            "frame": 281210,
+            "keyCode": 431
+          },
+          {
+            "frame": 281700,
+            "keyCode": 303
+          },
+          {
+            "frame": 281710,
+            "keyCode": 431
+          },
+          {
+            "frame": 282000,
+            "keyCode": 480
+          },
+          {
+            "frame": 282500,
+            "keyCode": 343
+          },
+          {
+            "frame": 282510,
+            "keyCode": 471
+          }
+        ]
+      },
+      {
+        "revision": 12,
+        "start": 283000,
+        "target": 292000,
+        "events": [
+          {
+            "frame": 283100,
+            "keyCode": 333
+          },
+          {
+            "frame": 283110,
+            "keyCode": 461
+          },
+          {
+            "frame": 283300,
+            "keyCode": 333
+          },
+          {
+            "frame": 283310,
+            "keyCode": 461
+          },
+          {
+            "frame": 283500,
+            "keyCode": 324
+          },
+          {
+            "frame": 283510,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 13,
+        "start": 292000,
+        "target": 300000,
+        "events": [
+          {
+            "frame": 292100,
+            "keyCode": 324
+          },
+          {
+            "frame": 292110,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 14,
+        "start": 300000,
+        "target": 302000,
+        "events": [
+          {
+            "frame": 300100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 300120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -76
+          },
+          {
+            "frame": 300140,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300160,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300180,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300200,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300220,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300240,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300260,
+            "mouseDeltaX": 56,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300300,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 300310
+          }
+        ]
+      },
+      {
+        "revision": 15,
+        "start": 302000,
+        "target": 304000,
+        "events": [
+          {
+            "frame": 302100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 302120,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 302140,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 302160,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 36
+          },
+          {
+            "frame": 302180,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302200,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302220,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302240,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302260,
+            "mouseDeltaX": -88,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302300,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 302310
+          }
+        ]
+      },
+      {
+        "revision": 16,
+        "start": 304000,
+        "target": 305000,
+        "events": [
+          {
+            "frame": 304100,
+            "keyCode": 303
+          },
+          {
+            "frame": 304110,
+            "keyCode": 431
+          }
+        ]
+      },
+      {
+        "revision": 17,
+        "start": 305000,
+        "target": 307000,
+        "events": [
+          {
+            "frame": 305100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 305120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 305140,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -88
+          },
+          {
+            "frame": 305160,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 305180,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 305200,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 305220,
+            "mouseDeltaX": 40,
+            "mouseDeltaY": 0
+          }
+        ]
+      },
+      {
+        "revision": 18,
+        "start": 307000,
+        "target": 308000,
+        "events": [
+          {
+            "frame": 307100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 80
+          },
+          {
+            "frame": 307120,
+            "mouseDeltaX": -76,
+            "mouseDeltaY": 0
+          }
+        ]
+      },
+      {
+        "revision": 19,
+        "start": 308000,
+        "target": 311000,
+        "events": [
+          {
+            "frame": 308100,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 308110
+          },
+          {
+            "frame": 309100,
+            "mouseButtons": 2
+          },
+          {
+            "frame": 309110
+          }
+        ]
+      },
+      {
+        "revision": 20,
+        "start": 311000,
+        "target": 312000,
+        "events": [
+          {
+            "frame": 311100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 311120,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 311140,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 8
+          },
+          {
+            "frame": 311160,
+            "mouseDeltaX": -84,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 311200,
+            "mouseButtons": 2
+          },
+          {
+            "frame": 311210
+          }
+        ]
+      },
+      {
+        "revision": 21,
+        "start": 312000,
+        "target": 313000,
+        "events": [
+          {
+            "frame": 312100,
+            "keyCode": 292
+          },
+          {
+            "frame": 312110,
+            "keyCode": 420
+          },
+          {
+            "frame": 312300,
+            "keyCode": 333
+          },
+          {
+            "frame": 312310,
+            "keyCode": 461
+          },
+          {
+            "frame": 312500,
+            "keyCode": 324
+          },
+          {
+            "frame": 312510,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 22,
+        "start": 313000,
+        "target": 314000,
+        "events": [
+          {
+            "frame": 313100,
+            "keyCode": 333
+          },
+          {
+            "frame": 313110,
+            "keyCode": 461
+          }
+        ]
+      },
+      {
+        "revision": 23,
+        "start": 314000,
+        "target": 314200,
+        "events": [
+          {
+            "frame": 314100,
+            "keyCode": 324
+          },
+          {
+            "frame": 314110,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 24,
+        "start": 314200,
+        "target": 314300,
+        "events": []
+      },
+      {
+        "revision": 25,
+        "start": 314300,
+        "target": 314400,
+        "events": []
+      },
+      {
+        "revision": 26,
+        "start": 314400,
+        "target": 314500,
+        "events": []
+      },
+      {
+        "revision": 27,
+        "start": 314500,
+        "target": 314600,
+        "events": []
+      },
+      {
+        "revision": 28,
+        "start": 314600,
+        "target": 314700,
+        "events": []
+      },
+      {
+        "revision": 29,
+        "start": 314700,
+        "target": 314800,
+        "events": []
+      },
+      {
+        "revision": 30,
+        "start": 314800,
+        "target": 314900,
+        "events": []
+      },
+      {
+        "revision": 31,
+        "start": 314900,
+        "target": 315000,
+        "events": []
+      },
+      {
+        "revision": 32,
+        "start": 315000,
+        "target": 315100,
+        "events": []
+      },
+      {
+        "revision": 33,
+        "start": 315100,
+        "target": 315200,
+        "events": []
+      },
+      {
+        "revision": 34,
+        "start": 315200,
+        "target": 315300,
+        "events": []
+      },
+      {
+        "revision": 35,
+        "start": 315300,
+        "target": 315400,
+        "events": []
+      },
+      {
+        "revision": 36,
+        "start": 315400,
+        "target": 315500,
+        "events": []
+      },
+      {
+        "revision": 37,
+        "start": 315500,
+        "target": 315600,
+        "events": []
+      },
+      {
+        "revision": 38,
+        "start": 315600,
+        "target": 315700,
+        "events": []
+      },
+      {
+        "revision": 39,
+        "start": 315700,
+        "target": 315800,
+        "events": []
+      },
+      {
+        "revision": 40,
+        "start": 315800,
+        "target": 315900,
+        "events": []
+      },
+      {
+        "revision": 41,
+        "start": 315900,
+        "target": 316000,
+        "events": []
+      },
+      {
+        "revision": 42,
+        "start": 316000,
+        "target": 316100,
+        "events": []
+      },
+      {
+        "revision": 43,
+        "start": 316100,
+        "target": 316200,
+        "events": []
+      },
+      {
+        "revision": 44,
+        "start": 316200,
+        "target": 316300,
+        "events": []
+      },
+      {
+        "revision": 45,
+        "start": 316300,
+        "target": 316400,
+        "events": []
+      },
+      {
+        "revision": 46,
+        "start": 316400,
+        "target": 316500,
+        "events": []
+      },
+      {
+        "revision": 47,
+        "start": 316500,
+        "target": 316600,
+        "events": []
+      },
+      {
+        "revision": 48,
+        "start": 316600,
+        "target": 316700,
+        "events": []
+      },
+      {
+        "revision": 49,
+        "start": 316700,
+        "target": 316800,
+        "events": []
+      },
+      {
+        "revision": 50,
+        "start": 316800,
+        "target": 316900,
+        "events": []
+      },
+      {
+        "revision": 51,
+        "start": 316900,
+        "target": 317000,
+        "events": []
+      },
+      {
+        "revision": 52,
+        "start": 317000,
+        "target": 317100,
+        "events": []
+      },
+      {
+        "revision": 53,
+        "start": 317100,
+        "target": 317200,
+        "events": []
+      },
+      {
+        "revision": 54,
+        "start": 317200,
+        "target": 317300,
+        "events": []
+      },
+      {
+        "revision": 55,
+        "start": 317300,
+        "target": 317400,
+        "events": []
+      },
+      {
+        "revision": 56,
+        "start": 317400,
+        "target": 317500,
+        "events": []
+      },
+      {
+        "revision": 57,
+        "start": 317500,
+        "target": 317600,
+        "events": []
+      },
+      {
+        "revision": 58,
+        "start": 317600,
+        "target": 317700,
+        "events": []
+      },
+      {
+        "revision": 59,
+        "start": 317700,
+        "target": 317800,
+        "events": []
+      },
+      {
+        "revision": 60,
+        "start": 317800,
+        "target": 317900,
+        "events": []
+      },
+      {
+        "revision": 61,
+        "start": 317900,
+        "target": 318000,
+        "events": []
+      },
+      {
+        "revision": 62,
+        "start": 318000,
+        "target": 318100,
+        "events": []
+      },
+      {
+        "revision": 63,
+        "start": 318100,
+        "target": 318200,
+        "events": []
+      },
+      {
+        "revision": 64,
+        "start": 318200,
+        "target": 318300,
+        "events": []
+      },
+      {
+        "revision": 65,
+        "start": 318300,
+        "target": 318400,
+        "events": []
+      },
+      {
+        "revision": 66,
+        "start": 318400,
+        "target": 318500,
+        "events": []
+      },
+      {
+        "revision": 67,
+        "start": 318500,
+        "target": 318600,
+        "events": []
+      },
+      {
+        "revision": 68,
+        "start": 318600,
+        "target": 318700,
+        "events": []
+      },
+      {
+        "revision": 69,
+        "start": 318700,
+        "target": 318800,
+        "events": []
+      },
+      {
+        "revision": 70,
+        "start": 318800,
+        "target": 318900,
+        "events": []
+      },
+      {
+        "revision": 71,
+        "start": 318900,
+        "target": 319000,
+        "events": []
+      },
+      {
+        "revision": 72,
+        "start": 319000,
+        "target": 319100,
+        "events": []
+      },
+      {
+        "revision": 73,
+        "start": 319100,
+        "target": 319200,
+        "events": []
+      },
+      {
+        "revision": 74,
+        "start": 319200,
+        "target": 319300,
+        "events": []
+      },
+      {
+        "revision": 75,
+        "start": 319300,
+        "target": 319400,
+        "events": []
+      },
+      {
+        "revision": 76,
+        "start": 319400,
+        "target": 319500,
+        "events": []
+      },
+      {
+        "revision": 77,
+        "start": 319500,
+        "target": 319600,
+        "events": []
+      },
+      {
+        "revision": 78,
+        "start": 319600,
+        "target": 319700,
+        "events": []
+      },
+      {
+        "revision": 79,
+        "start": 319700,
+        "target": 319800,
+        "events": []
+      },
+      {
+        "revision": 80,
+        "start": 319800,
+        "target": 319900,
+        "events": []
+      },
+      {
+        "revision": 81,
+        "start": 319900,
+        "target": 320000,
+        "events": []
+      },
+      {
+        "revision": 82,
+        "start": 320000,
+        "target": 320100,
+        "events": []
+      },
+      {
+        "revision": 83,
+        "start": 320100,
+        "target": 320200,
+        "events": []
+      },
+      {
+        "revision": 84,
+        "start": 320200,
+        "target": 320300,
+        "events": []
+      },
+      {
+        "revision": 85,
+        "start": 320300,
+        "target": 320400,
+        "events": []
+      },
+      {
+        "revision": 86,
+        "start": 320400,
+        "target": 320500,
+        "events": []
+      },
+      {
+        "revision": 87,
+        "start": 320500,
+        "target": 320600,
+        "events": []
+      },
+      {
+        "revision": 88,
+        "start": 320600,
+        "target": 320700,
+        "events": []
+      },
+      {
+        "revision": 89,
+        "start": 320700,
+        "target": 320800,
+        "events": []
+      },
+      {
+        "revision": 90,
+        "start": 320800,
+        "target": 320900,
+        "events": []
+      },
+      {
+        "revision": 91,
+        "start": 320900,
+        "target": 321000,
+        "events": []
+      }
+    ],
+    "combinedInput": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal-combined-input.json",
+      "bytes": 10887,
+      "sha256": "14dbf33dc2293f2c66a08f040b29ae8239397bf6bda43f17674bea8f3480910b"
+    },
+    "captureFiles": 1920,
+    "captureFrames": 384,
+    "captureSetSha256": "23242afd70ce58ec59f1b7784bbd6a1790fa15e453628f0535606a6b7686d6c0",
+    "captureManifest": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal-capture-identities.json",
+      "bytes": 493826,
+      "sha256": "fe99fb044f01c1adb1673db811354ac140f5eaf07f44663c2dde0d2be092d540"
+    },
+    "final": {
+      "frame": 321000,
+      "cycle": 45614742022,
+      "beam": [
+        0,
+        11
+      ],
+      "width": 908,
+      "height": 313,
+      "pc": "00C4FC82",
+      "sr": "0008",
+      "overlay": false,
+      "data": [
+        "0000FFFF",
+        "FFFFFFFF",
+        "00000000",
+        "00000004",
+        "00000008",
+        "00000000",
+        "00000080",
+        "00000050"
+      ],
+      "address": [
+        "00C2BD98",
+        "00C2BDB0",
+        "00C3848E",
+        "00C3B74E",
+        "00C6DB94",
+        "00C310BE",
+        "00C3A714",
+        "00C31096"
+      ],
+      "dmacon": "03E0",
+      "intena": "4020",
+      "intreq": "17E0",
+      "adkcon": "1100",
+      "dsklen": "4000",
+      "copperPc": "00052EB6",
+      "copperWaiting": false,
+      "blitterBusy": false,
+      "diskActive": false,
+      "diskRemaining": 0,
+      "diskBit": 57426,
+      "Cylinder": 17,
+      "Head": 0,
+      "Selected": false,
+      "MotorOn": false,
+      "ReadyCycle": 9223372036854776000,
+      "drives": [
+        {
+          "index": 0,
+          "Mounted": true,
+          "Cylinder": 17,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854776000,
+          "DiskChanged": false,
+          "BitPosition": 57426,
+          "NextBitCycle": 9223372036854776000
+        }
+      ],
+      "ciaAMask": 0,
+      "ciaAPending": 0,
+      "ciaBMask": 0,
+      "ciaBPending": 20,
+      "bplcon0": "5200",
+      "diwstart": "2C81",
+      "diwstop": "F4C1",
+      "ddfstart": "0038",
+      "ddfstop": "00D0",
+      "bitplanes": [
+        "0002DB6A",
+        "0002FABA",
+        "00031A0A",
+        "0003395A",
+        "000358AA",
+        "00000000"
+      ],
+      "modulos": [
+        0,
+        0
+      ],
+      "unsupported": null,
+      "videoUnsupported": null,
+      "audioNonzero": false
+    },
+    "unsupported": []
+  },
+  "scalar": {
+    "classification": "PASS bounded route setup, train movement and London Crossing arrival",
+    "run": {
+      "kind": "scalar",
+      "rom": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\rom-mouse-final\\CopperStart-DiskBoot.rom",
+        "sha256": "334cd0e9d2ad25410ab449f79e42e2b254e8085dbbf94e2d89c86f4db8b24d13",
+        "bytes": 524288
+      },
+      "input": {
+        "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-postworld-input.json",
+        "sha256": "95b83fafb0b16deaa5fca9e783799605f4575fc0417816d78b32bda399030aed",
+        "bytes": 1605
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\rom-mouse-final\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-route-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-postworld-input.json",
+        "--scalar"
+      ],
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "fastRamKiB": 0,
+        "framebufferWidth": 908,
+        "drives": 1,
+        "rtcEnabled": false
+      },
+      "binaries": [
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "sha256": "a176baa10a915e7377ca237a76f29ff7a14442905020e325e0b17fe6d5b2fb73",
+          "bytes": 52224
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.dll",
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048",
+          "bytes": 288256
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\Copper68k.dll",
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2",
+          "bytes": 978944
+        },
+        {
+          "path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\postworld-live-probe\\bin\\Release\\net10.0\\CopperDisk.dll",
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d",
+          "bytes": 105472
+        }
+      ],
+      "classification": "unreviewed interactive diagnostic replay",
+      "exitCode": 0
+    },
+    "metadata": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-scalar/run.json",
+      "bytes": 2648,
+      "sha256": "b79b55663494b312e30584ccc52630fb4328eaae642f66d8b6474ab2e4a82353"
+    },
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-scalar/runner.log",
+      "bytes": 425931,
+      "sha256": "a3b73539e78f0185598239d67b6b1b174cf8a2867917da8e8df824a1179084e8"
+    },
+    "segments": [
+      {
+        "revision": 1,
+        "start": 160000,
+        "target": 242000,
+        "events": [
+          {
+            "frame": 160100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 160120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 160140,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 160160,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 162100,
+            "keyCode": 324
+          },
+          {
+            "frame": 162110,
+            "keyCode": 452
+          },
+          {
+            "frame": 170100,
+            "keyCode": 333
+          },
+          {
+            "frame": 170110,
+            "keyCode": 461
+          },
+          {
+            "frame": 170300,
+            "keyCode": 333
+          },
+          {
+            "frame": 170310,
+            "keyCode": 461
+          },
+          {
+            "frame": 171100,
+            "keyCode": 324
+          },
+          {
+            "frame": 171110,
+            "keyCode": 452
+          },
+          {
+            "frame": 174100,
+            "keyCode": 324
+          },
+          {
+            "frame": 174110,
+            "keyCode": 452
+          },
+          {
+            "frame": 177100,
+            "keyCode": 292
+          },
+          {
+            "frame": 177110,
+            "keyCode": 420
+          },
+          {
+            "frame": 178100,
+            "keyCode": 339
+          },
+          {
+            "frame": 178110,
+            "keyCode": 467
+          },
+          {
+            "frame": 181100,
+            "keyCode": 292
+          },
+          {
+            "frame": 181110,
+            "keyCode": 420
+          },
+          {
+            "frame": 182100,
+            "keyCode": 333
+          },
+          {
+            "frame": 182110,
+            "keyCode": 461
+          },
+          {
+            "frame": 182300,
+            "keyCode": 324
+          },
+          {
+            "frame": 182310,
+            "keyCode": 452
+          },
+          {
+            "frame": 183100,
+            "keyCode": 332
+          },
+          {
+            "frame": 183110,
+            "keyCode": 460
+          },
+          {
+            "frame": 183300,
+            "keyCode": 324
+          },
+          {
+            "frame": 183310,
+            "keyCode": 452
+          },
+          {
+            "frame": 184100,
+            "keyCode": 339
+          },
+          {
+            "frame": 184110,
+            "keyCode": 467
+          },
+          {
+            "frame": 192100,
+            "keyCode": 352
+          },
+          {
+            "frame": 192120,
+            "keyCode": 303
+          },
+          {
+            "frame": 192130,
+            "keyCode": 431
+          },
+          {
+            "frame": 192140,
+            "keyCode": 480
+          },
+          {
+            "frame": 193100,
+            "keyCode": 343
+          },
+          {
+            "frame": 193110,
+            "keyCode": 471
+          },
+          {
+            "frame": 194100,
+            "keyCode": 333
+          },
+          {
+            "frame": 194110,
+            "keyCode": 461
+          },
+          {
+            "frame": 194300,
+            "keyCode": 333
+          },
+          {
+            "frame": 194310,
+            "keyCode": 461
+          },
+          {
+            "frame": 194500,
+            "keyCode": 324
+          },
+          {
+            "frame": 194510,
+            "keyCode": 452
+          },
+          {
+            "frame": 202100,
+            "keyCode": 324
+          },
+          {
+            "frame": 202110,
+            "keyCode": 452
+          },
+          {
+            "frame": 205100,
+            "keyCode": 342
+          },
+          {
+            "frame": 205110,
+            "keyCode": 470
+          },
+          {
+            "frame": 213100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -84
+          },
+          {
+            "frame": 213120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -84
+          },
+          {
+            "frame": 213140,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 213160,
+            "mouseDeltaX": 100
+          },
+          {
+            "frame": 213200,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 213210
+          },
+          {
+            "frame": 231100,
+            "keyCode": 333
+          },
+          {
+            "frame": 231110,
+            "keyCode": 461
+          },
+          {
+            "frame": 231300,
+            "keyCode": 324
+          },
+          {
+            "frame": 231310,
+            "keyCode": 452
+          },
+          {
+            "frame": 239100,
+            "keyCode": 324
+          },
+          {
+            "frame": 239110,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 2,
+        "start": 242000,
+        "target": 247000,
+        "events": [
+          {
+            "frame": 242100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 242120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 40
+          },
+          {
+            "frame": 242140,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 242160,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 242200,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 242210
+          },
+          {
+            "frame": 243100,
+            "keyCode": 339
+          },
+          {
+            "frame": 243110,
+            "keyCode": 467
+          }
+        ]
+      },
+      {
+        "revision": 3,
+        "start": 247000,
+        "target": 252000,
+        "events": []
+      },
+      {
+        "revision": 4,
+        "start": 252000,
+        "target": 253000,
+        "events": [
+          {
+            "frame": 252100,
+            "keyCode": 292
+          },
+          {
+            "frame": 252110,
+            "keyCode": 420
+          }
+        ]
+      },
+      {
+        "revision": 5,
+        "start": 253000,
+        "target": 254000,
+        "events": [
+          {
+            "frame": 253100,
+            "keyCode": 333
+          },
+          {
+            "frame": 253110,
+            "keyCode": 461
+          },
+          {
+            "frame": 253300,
+            "keyCode": 324
+          },
+          {
+            "frame": 253310,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 6,
+        "start": 254000,
+        "target": 255000,
+        "events": [
+          {
+            "frame": 254100,
+            "keyCode": 332
+          },
+          {
+            "frame": 254110,
+            "keyCode": 460
+          }
+        ]
+      },
+      {
+        "revision": 7,
+        "start": 255000,
+        "target": 256000,
+        "events": [
+          {
+            "frame": 255100,
+            "keyCode": 332
+          },
+          {
+            "frame": 255110,
+            "keyCode": 460
+          }
+        ]
+      },
+      {
+        "revision": 8,
+        "start": 256000,
+        "target": 265000,
+        "events": [
+          {
+            "frame": 256100,
+            "keyCode": 324
+          },
+          {
+            "frame": 256110,
+            "keyCode": 452
+          },
+          {
+            "frame": 257100,
+            "keyCode": 337
+          },
+          {
+            "frame": 257110,
+            "keyCode": 465
+          }
+        ]
+      },
+      {
+        "revision": 9,
+        "start": 265000,
+        "target": 274000,
+        "events": [
+          {
+            "frame": 265100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 265120,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 265140,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 265160,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 56
+          },
+          {
+            "frame": 265180,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265200,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265220,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265240,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265260,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265280,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265300,
+            "mouseDeltaX": -8,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 265340,
+            "keyCode": 339
+          },
+          {
+            "frame": 265350,
+            "keyCode": 467
+          }
+        ]
+      },
+      {
+        "revision": 10,
+        "start": 274000,
+        "target": 280000,
+        "events": []
+      },
+      {
+        "revision": 11,
+        "start": 280000,
+        "target": 283000,
+        "events": [
+          {
+            "frame": 280100,
+            "keyCode": 352
+          },
+          {
+            "frame": 280200,
+            "keyCode": 303
+          },
+          {
+            "frame": 280210,
+            "keyCode": 431
+          },
+          {
+            "frame": 280700,
+            "keyCode": 303
+          },
+          {
+            "frame": 280710,
+            "keyCode": 431
+          },
+          {
+            "frame": 281200,
+            "keyCode": 303
+          },
+          {
+            "frame": 281210,
+            "keyCode": 431
+          },
+          {
+            "frame": 281700,
+            "keyCode": 303
+          },
+          {
+            "frame": 281710,
+            "keyCode": 431
+          },
+          {
+            "frame": 282000,
+            "keyCode": 480
+          },
+          {
+            "frame": 282500,
+            "keyCode": 343
+          },
+          {
+            "frame": 282510,
+            "keyCode": 471
+          }
+        ]
+      },
+      {
+        "revision": 12,
+        "start": 283000,
+        "target": 292000,
+        "events": [
+          {
+            "frame": 283100,
+            "keyCode": 333
+          },
+          {
+            "frame": 283110,
+            "keyCode": 461
+          },
+          {
+            "frame": 283300,
+            "keyCode": 333
+          },
+          {
+            "frame": 283310,
+            "keyCode": 461
+          },
+          {
+            "frame": 283500,
+            "keyCode": 324
+          },
+          {
+            "frame": 283510,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 13,
+        "start": 292000,
+        "target": 300000,
+        "events": [
+          {
+            "frame": 292100,
+            "keyCode": 324
+          },
+          {
+            "frame": 292110,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 14,
+        "start": 300000,
+        "target": 302000,
+        "events": [
+          {
+            "frame": 300100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 300120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -76
+          },
+          {
+            "frame": 300140,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300160,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300180,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300200,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300220,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300240,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300260,
+            "mouseDeltaX": 56,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 300300,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 300310
+          }
+        ]
+      },
+      {
+        "revision": 15,
+        "start": 302000,
+        "target": 304000,
+        "events": [
+          {
+            "frame": 302100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 302120,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 302140,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 302160,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 36
+          },
+          {
+            "frame": 302180,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302200,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302220,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302240,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302260,
+            "mouseDeltaX": -88,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 302300,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 302310
+          }
+        ]
+      },
+      {
+        "revision": 16,
+        "start": 304000,
+        "target": 305000,
+        "events": [
+          {
+            "frame": 304100,
+            "keyCode": 303
+          },
+          {
+            "frame": 304110,
+            "keyCode": 431
+          }
+        ]
+      },
+      {
+        "revision": 17,
+        "start": 305000,
+        "target": 307000,
+        "events": [
+          {
+            "frame": 305100,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 305120,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -100
+          },
+          {
+            "frame": 305140,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": -88
+          },
+          {
+            "frame": 305160,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 305180,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 305200,
+            "mouseDeltaX": 100,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 305220,
+            "mouseDeltaX": 40,
+            "mouseDeltaY": 0
+          }
+        ]
+      },
+      {
+        "revision": 18,
+        "start": 307000,
+        "target": 308000,
+        "events": [
+          {
+            "frame": 307100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 80
+          },
+          {
+            "frame": 307120,
+            "mouseDeltaX": -76,
+            "mouseDeltaY": 0
+          }
+        ]
+      },
+      {
+        "revision": 19,
+        "start": 308000,
+        "target": 311000,
+        "events": [
+          {
+            "frame": 308100,
+            "mouseButtons": 1
+          },
+          {
+            "frame": 308110
+          },
+          {
+            "frame": 309100,
+            "mouseButtons": 2
+          },
+          {
+            "frame": 309110
+          }
+        ]
+      },
+      {
+        "revision": 20,
+        "start": 311000,
+        "target": 312000,
+        "events": [
+          {
+            "frame": 311100,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 311120,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 100
+          },
+          {
+            "frame": 311140,
+            "mouseDeltaX": -100,
+            "mouseDeltaY": 8
+          },
+          {
+            "frame": 311160,
+            "mouseDeltaX": -84,
+            "mouseDeltaY": 0
+          },
+          {
+            "frame": 311200,
+            "mouseButtons": 2
+          },
+          {
+            "frame": 311210
+          }
+        ]
+      },
+      {
+        "revision": 21,
+        "start": 312000,
+        "target": 313000,
+        "events": [
+          {
+            "frame": 312100,
+            "keyCode": 292
+          },
+          {
+            "frame": 312110,
+            "keyCode": 420
+          },
+          {
+            "frame": 312300,
+            "keyCode": 333
+          },
+          {
+            "frame": 312310,
+            "keyCode": 461
+          },
+          {
+            "frame": 312500,
+            "keyCode": 324
+          },
+          {
+            "frame": 312510,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 22,
+        "start": 313000,
+        "target": 314000,
+        "events": [
+          {
+            "frame": 313100,
+            "keyCode": 333
+          },
+          {
+            "frame": 313110,
+            "keyCode": 461
+          }
+        ]
+      },
+      {
+        "revision": 23,
+        "start": 314000,
+        "target": 314200,
+        "events": [
+          {
+            "frame": 314100,
+            "keyCode": 324
+          },
+          {
+            "frame": 314110,
+            "keyCode": 452
+          }
+        ]
+      },
+      {
+        "revision": 24,
+        "start": 314200,
+        "target": 314300,
+        "events": []
+      },
+      {
+        "revision": 25,
+        "start": 314300,
+        "target": 314400,
+        "events": []
+      },
+      {
+        "revision": 26,
+        "start": 314400,
+        "target": 314500,
+        "events": []
+      },
+      {
+        "revision": 27,
+        "start": 314500,
+        "target": 314600,
+        "events": []
+      },
+      {
+        "revision": 28,
+        "start": 314600,
+        "target": 314700,
+        "events": []
+      },
+      {
+        "revision": 29,
+        "start": 314700,
+        "target": 314800,
+        "events": []
+      },
+      {
+        "revision": 30,
+        "start": 314800,
+        "target": 314900,
+        "events": []
+      },
+      {
+        "revision": 31,
+        "start": 314900,
+        "target": 315000,
+        "events": []
+      },
+      {
+        "revision": 32,
+        "start": 315000,
+        "target": 315100,
+        "events": []
+      },
+      {
+        "revision": 33,
+        "start": 315100,
+        "target": 315200,
+        "events": []
+      },
+      {
+        "revision": 34,
+        "start": 315200,
+        "target": 315300,
+        "events": []
+      },
+      {
+        "revision": 35,
+        "start": 315300,
+        "target": 315400,
+        "events": []
+      },
+      {
+        "revision": 36,
+        "start": 315400,
+        "target": 315500,
+        "events": []
+      },
+      {
+        "revision": 37,
+        "start": 315500,
+        "target": 315600,
+        "events": []
+      },
+      {
+        "revision": 38,
+        "start": 315600,
+        "target": 315700,
+        "events": []
+      },
+      {
+        "revision": 39,
+        "start": 315700,
+        "target": 315800,
+        "events": []
+      },
+      {
+        "revision": 40,
+        "start": 315800,
+        "target": 315900,
+        "events": []
+      },
+      {
+        "revision": 41,
+        "start": 315900,
+        "target": 316000,
+        "events": []
+      },
+      {
+        "revision": 42,
+        "start": 316000,
+        "target": 316100,
+        "events": []
+      },
+      {
+        "revision": 43,
+        "start": 316100,
+        "target": 316200,
+        "events": []
+      },
+      {
+        "revision": 44,
+        "start": 316200,
+        "target": 316300,
+        "events": []
+      },
+      {
+        "revision": 45,
+        "start": 316300,
+        "target": 316400,
+        "events": []
+      },
+      {
+        "revision": 46,
+        "start": 316400,
+        "target": 316500,
+        "events": []
+      },
+      {
+        "revision": 47,
+        "start": 316500,
+        "target": 316600,
+        "events": []
+      },
+      {
+        "revision": 48,
+        "start": 316600,
+        "target": 316700,
+        "events": []
+      },
+      {
+        "revision": 49,
+        "start": 316700,
+        "target": 316800,
+        "events": []
+      },
+      {
+        "revision": 50,
+        "start": 316800,
+        "target": 316900,
+        "events": []
+      },
+      {
+        "revision": 51,
+        "start": 316900,
+        "target": 317000,
+        "events": []
+      },
+      {
+        "revision": 52,
+        "start": 317000,
+        "target": 317100,
+        "events": []
+      },
+      {
+        "revision": 53,
+        "start": 317100,
+        "target": 317200,
+        "events": []
+      },
+      {
+        "revision": 54,
+        "start": 317200,
+        "target": 317300,
+        "events": []
+      },
+      {
+        "revision": 55,
+        "start": 317300,
+        "target": 317400,
+        "events": []
+      },
+      {
+        "revision": 56,
+        "start": 317400,
+        "target": 317500,
+        "events": []
+      },
+      {
+        "revision": 57,
+        "start": 317500,
+        "target": 317600,
+        "events": []
+      },
+      {
+        "revision": 58,
+        "start": 317600,
+        "target": 317700,
+        "events": []
+      },
+      {
+        "revision": 59,
+        "start": 317700,
+        "target": 317800,
+        "events": []
+      },
+      {
+        "revision": 60,
+        "start": 317800,
+        "target": 317900,
+        "events": []
+      },
+      {
+        "revision": 61,
+        "start": 317900,
+        "target": 318000,
+        "events": []
+      },
+      {
+        "revision": 62,
+        "start": 318000,
+        "target": 318100,
+        "events": []
+      },
+      {
+        "revision": 63,
+        "start": 318100,
+        "target": 318200,
+        "events": []
+      },
+      {
+        "revision": 64,
+        "start": 318200,
+        "target": 318300,
+        "events": []
+      },
+      {
+        "revision": 65,
+        "start": 318300,
+        "target": 318400,
+        "events": []
+      },
+      {
+        "revision": 66,
+        "start": 318400,
+        "target": 318500,
+        "events": []
+      },
+      {
+        "revision": 67,
+        "start": 318500,
+        "target": 318600,
+        "events": []
+      },
+      {
+        "revision": 68,
+        "start": 318600,
+        "target": 318700,
+        "events": []
+      },
+      {
+        "revision": 69,
+        "start": 318700,
+        "target": 318800,
+        "events": []
+      },
+      {
+        "revision": 70,
+        "start": 318800,
+        "target": 318900,
+        "events": []
+      },
+      {
+        "revision": 71,
+        "start": 318900,
+        "target": 319000,
+        "events": []
+      },
+      {
+        "revision": 72,
+        "start": 319000,
+        "target": 319100,
+        "events": []
+      },
+      {
+        "revision": 73,
+        "start": 319100,
+        "target": 319200,
+        "events": []
+      },
+      {
+        "revision": 74,
+        "start": 319200,
+        "target": 319300,
+        "events": []
+      },
+      {
+        "revision": 75,
+        "start": 319300,
+        "target": 319400,
+        "events": []
+      },
+      {
+        "revision": 76,
+        "start": 319400,
+        "target": 319500,
+        "events": []
+      },
+      {
+        "revision": 77,
+        "start": 319500,
+        "target": 319600,
+        "events": []
+      },
+      {
+        "revision": 78,
+        "start": 319600,
+        "target": 319700,
+        "events": []
+      },
+      {
+        "revision": 79,
+        "start": 319700,
+        "target": 319800,
+        "events": []
+      },
+      {
+        "revision": 80,
+        "start": 319800,
+        "target": 319900,
+        "events": []
+      },
+      {
+        "revision": 81,
+        "start": 319900,
+        "target": 320000,
+        "events": []
+      },
+      {
+        "revision": 82,
+        "start": 320000,
+        "target": 320100,
+        "events": []
+      },
+      {
+        "revision": 83,
+        "start": 320100,
+        "target": 320200,
+        "events": []
+      },
+      {
+        "revision": 84,
+        "start": 320200,
+        "target": 320300,
+        "events": []
+      },
+      {
+        "revision": 85,
+        "start": 320300,
+        "target": 320400,
+        "events": []
+      },
+      {
+        "revision": 86,
+        "start": 320400,
+        "target": 320500,
+        "events": []
+      },
+      {
+        "revision": 87,
+        "start": 320500,
+        "target": 320600,
+        "events": []
+      },
+      {
+        "revision": 88,
+        "start": 320600,
+        "target": 320700,
+        "events": []
+      },
+      {
+        "revision": 89,
+        "start": 320700,
+        "target": 320800,
+        "events": []
+      },
+      {
+        "revision": 90,
+        "start": 320800,
+        "target": 320900,
+        "events": []
+      },
+      {
+        "revision": 91,
+        "start": 320900,
+        "target": 321000,
+        "events": []
+      }
+    ],
+    "combinedInput": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-scalar-combined-input.json",
+      "bytes": 10887,
+      "sha256": "14dbf33dc2293f2c66a08f040b29ae8239397bf6bda43f17674bea8f3480910b"
+    },
+    "captureFiles": 1920,
+    "captureFrames": 384,
+    "captureSetSha256": "23242afd70ce58ec59f1b7784bbd6a1790fa15e453628f0535606a6b7686d6c0",
+    "captureManifest": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-scalar-capture-identities.json",
+      "bytes": 493826,
+      "sha256": "9aa51abeb09b92f31125ff21e06b402be9d9749369dbc50aee94ae594adef1e2"
+    },
+    "final": {
+      "frame": 321000,
+      "cycle": 45614742022,
+      "beam": [
+        0,
+        11
+      ],
+      "width": 908,
+      "height": 313,
+      "pc": "00C4FC82",
+      "sr": "0008",
+      "overlay": false,
+      "data": [
+        "0000FFFF",
+        "FFFFFFFF",
+        "00000000",
+        "00000004",
+        "00000008",
+        "00000000",
+        "00000080",
+        "00000050"
+      ],
+      "address": [
+        "00C2BD98",
+        "00C2BDB0",
+        "00C3848E",
+        "00C3B74E",
+        "00C6DB94",
+        "00C310BE",
+        "00C3A714",
+        "00C31096"
+      ],
+      "dmacon": "03E0",
+      "intena": "4020",
+      "intreq": "17E0",
+      "adkcon": "1100",
+      "dsklen": "4000",
+      "copperPc": "00052EB6",
+      "copperWaiting": false,
+      "blitterBusy": false,
+      "diskActive": false,
+      "diskRemaining": 0,
+      "diskBit": 57426,
+      "Cylinder": 17,
+      "Head": 0,
+      "Selected": false,
+      "MotorOn": false,
+      "ReadyCycle": 9223372036854776000,
+      "drives": [
+        {
+          "index": 0,
+          "Mounted": true,
+          "Cylinder": 17,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854776000,
+          "DiskChanged": false,
+          "BitPosition": 57426,
+          "NextBitCycle": 9223372036854776000
+        }
+      ],
+      "ciaAMask": 0,
+      "ciaAPending": 0,
+      "ciaBMask": 0,
+      "ciaBPending": 20,
+      "bplcon0": "5200",
+      "diwstart": "2C81",
+      "diwstop": "F4C1",
+      "ddfstart": "0038",
+      "ddfstop": "00D0",
+      "bitplanes": [
+        "0002DB6A",
+        "0002FABA",
+        "00031A0A",
+        "0003395A",
+        "000358AA",
+        "00000000"
+      ],
+      "modulos": [
+        0,
+        0
+      ],
+      "unsupported": null,
+      "videoUnsupported": null,
+      "audioNonzero": false
+    },
+    "unsupported": []
+  },
+  "parity": {
+    "left": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal",
+    "right": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-scalar",
+    "files": 1920,
+    "missing": [],
+    "extra": [],
+    "differences": []
+  },
+  "reviewed": [
+    {
+      "frame": 131000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-131000.bmp",
+        "bytes": 1136870,
+        "sha256": "d3ad1ac867efa438d90daa294ada68381885121cc9fd87659b5c042a150b6562"
+      }
+    },
+    {
+      "frame": 252000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-252000.bmp",
+        "bytes": 1136870,
+        "sha256": "efb458466213e382eab52b5a191c0270b6ce3c654e7d46a6a7fe41234ed3da8d"
+      }
+    },
+    {
+      "frame": 265000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-265000.bmp",
+        "bytes": 1136870,
+        "sha256": "02069b50074d464e3752f4296573416b628a4fc265fd30f3c0ecfa753d022ece"
+      }
+    },
+    {
+      "frame": 280000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-280000.bmp",
+        "bytes": 1136870,
+        "sha256": "46305aa01a2f34768734b81f0324f59fd1bb5f8727d8e1b7a239caed53034a78"
+      }
+    },
+    {
+      "frame": 283000,
+      "review": "Scalar image reviewed; identical normal capture verified by complete parity",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-283000.bmp",
+        "bytes": 1136870,
+        "sha256": "51b4f055bedea0a7636b71b1f7c3afb5caf458324c08df9c7d9c83f5ff67b879"
+      }
+    },
+    {
+      "frame": 292000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-292000.bmp",
+        "bytes": 1136870,
+        "sha256": "dd509aecb13e93d7e952a877bbd1f9a4423d282f537c3e318ef7de8aa07e90e0"
+      }
+    },
+    {
+      "frame": 300000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-300000.bmp",
+        "bytes": 1136870,
+        "sha256": "ed784650cb6c4b108bb2f88edca61edb56edf77b308c96b8a878d970f5fbf913"
+      }
+    },
+    {
+      "frame": 302000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-302000.bmp",
+        "bytes": 1136870,
+        "sha256": "4570cf193223ce060987a71935196275856e9f5346e56834256da0b8ba63ec89"
+      }
+    },
+    {
+      "frame": 308000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-308000.bmp",
+        "bytes": 1136870,
+        "sha256": "5f472813904b81029ded0931a954f049c315850ddb85c3e70577e65a1e96f01a"
+      }
+    },
+    {
+      "frame": 311000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-311000.bmp",
+        "bytes": 1136870,
+        "sha256": "a116224a8357ec08af0e861b6d22380264669fbff09be318cc1b07879ef5f204"
+      }
+    },
+    {
+      "frame": 313000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-313000.bmp",
+        "bytes": 1136870,
+        "sha256": "93372d5397033ca0a004fc8c22af650de2f5b2738a9bfe009314e8b8a583061a"
+      }
+    },
+    {
+      "frame": 314200,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-314200.bmp",
+        "bytes": 1136870,
+        "sha256": "eaf1cfc3e543d07e70edbcdf77f5b0c9f29126e373a14a11e26ef4d56531cdb0"
+      }
+    },
+    {
+      "frame": 315000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-315000.bmp",
+        "bytes": 1136870,
+        "sha256": "c5e718eed275d7a8d62aa061a243ab5d17db0b488dab0805978dc77d2c5c6d43"
+      }
+    },
+    {
+      "frame": 317000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-317000.bmp",
+        "bytes": 1136870,
+        "sha256": "f7952f7cd3f6df3655a37bd5cde641c27361c8a736eb4e5cc02db2781ec01e3f"
+      }
+    },
+    {
+      "frame": 319000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-319000.bmp",
+        "bytes": 1136870,
+        "sha256": "866314d9ffd08f5b6e78a567eaa5f403d8770259cf464822a9e19aba8579004a"
+      }
+    },
+    {
+      "frame": 320000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-320000.bmp",
+        "bytes": 1136870,
+        "sha256": "dd2148139d6f2e0c0487b15c6a4bab1ba0b3cf30aee182e87689cc64bbed0c8f"
+      }
+    },
+    {
+      "frame": 321000,
+      "review": "Image reviewed",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-321000.bmp",
+        "bytes": 1136870,
+        "sha256": "a1305a2bcc8bfceb7df671b236a1414c1e32a4e9956abf6f7ba3837735ff6251"
+      }
+    }
+  ],
+  "construction": {
+    "line": "Four eastward Shift+KP6 construction inputs from London Junction",
+    "stations": [
+      {
+        "name": "London Junction",
+        "x": 101,
+        "y": 42
+      },
+      {
+        "name": "London Crossing",
+        "x": 105,
+        "y": 42
+      }
+    ],
+    "stationCoordinates": {
+      "address": "00C39D8E",
+      "recordBytes": 24,
+      "method": "Read-only inspection of the two active records, corroborated by the station reports"
+    },
+    "cash": [
+      {
+        "frame": 280000,
+        "address": "00C3E0E4",
+        "unit": "thousands",
+        "value": 829
+      },
+      {
+        "frame": 283000,
+        "address": "00C3E0E4",
+        "unit": "thousands",
+        "value": 801
+      },
+      {
+        "frame": 292000,
+        "address": "00C3E0E4",
+        "unit": "thousands",
+        "value": 751
+      }
+    ],
+    "secondDepotReport": {
+      "name": "London Crossing",
+      "type": "Depot",
+      "frame": 292000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-292000.bmp",
+        "bytes": 1136870,
+        "sha256": "dd509aecb13e93d7e952a877bbd1f9a4423d282f537c3e318ef7de8aa07e90e0"
+      }
+    }
+  },
+  "schedule": {
+    "frame": 311000,
+    "stops": [
+      "London Junction",
+      "London Crossing"
+    ],
+    "bmp": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-311000.bmp",
+      "bytes": 1136870,
+      "sha256": "a116224a8357ec08af0e861b6d22380264669fbff09be318cc1b07879ef5f204"
+    }
+  },
+  "run": {
+    "speed": "Slow",
+    "speedMenuFrozenReviewedAt": 313000,
+    "runInputFrame": 314100,
+    "movement": {
+      "frames": [
+        314200,
+        315000
+      ],
+      "observation": "The locomotive/car position changes along the connected track after selecting Slow, with no further physical input or camera changes.",
+      "images": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-314200.bmp",
+          "bytes": 1136870,
+          "sha256": "eaf1cfc3e543d07e70edbcdf77f5b0c9f29126e373a14a11e26ef4d56531cdb0"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-315000.bmp",
+          "bytes": 1136870,
+          "sha256": "c5e718eed275d7a8d62aa061a243ab5d17db0b488dab0805978dc77d2c5c6d43"
+        }
+      ]
+    },
+    "arrival": {
+      "frame": 321000,
+      "date": "June 14, 1830",
+      "headline": "First Train Arrives in London Crossing. Citizens Celebrate!",
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-321000.bmp",
+        "bytes": 1136870,
+        "sha256": "a1305a2bcc8bfceb7df671b236a1414c1e32a4e9956abf6f7ba3837735ff6251"
+      }
+    },
+    "cargo": "Mail Car, zero sacks of Mail",
+    "incomeQualified": false
+  },
+  "normalTransitions": {
+    "mapZoom": "F4 centers the display on the pointer. Area view was used to locate the existing line before extending it.",
+    "redraw": "Incomplete, shifted and black intermediate redraw frames were allowed to settle; later complete images establish progression. They are not classified as firmware failures.",
+    "arrivalPaper": "At 320000 only the newspaper header was drawn; the complete 321000 image announces arrival at London Crossing."
+  },
+  "reportFieldCorrection": {
+    "field": "0-4-0 Grasshopper/$3,000",
+    "meaning": "Annual locomotive maintenance, not asset value or purchase price. The picker separately displays the $15,000 purchase price.",
+    "reference": "https://www.bestoldgames.net/download/games/railroad-tycoon-deluxe/railroad-tycoon-deluxe-dos-manual.pdf"
+  },
+  "limitations": [
+    "Bounded correctness replay, not host-throughput acceptance or complete hardware conformance",
+    "A two-stop empty-Mail-Car journey and arrival are verified; freight revenue, return-leg completion, later campaign, saving and audio fidelity remain unqualified",
+    "No new native-Kickstart route replay or new unit-suite result is claimed",
+    "ROMs, media, local builds, RAM dumps and capture files are not committed"
+  ]
+}

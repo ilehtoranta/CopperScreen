@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "protocol": "copperstart-bcpl-railroad-v1",
+  "title": "Railroad Tycoon full route replay after native BCPL and console compatibility fixes",
+  "status": "PASS bounded construction, route, train movement and London Crossing arrival",
+  "source": {
+    "repository": "https://github.com/ilehtoranta/CopperStart",
+    "branch": "codex/copperstart-intuition-20261018",
+    "commit": "403e684d114a06c70301673bcbac876cc551a4bf",
+    "tree": "a2300b907e5ddc31e10c10c81de52545088c8814",
+    "clean": true,
+    "remoteTipVerified": true
+  },
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/rom-final/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "7f0c04308f3429fa396e778a4c1913d2148e0077f5bc02817d9f40569e6ccddf"
+  },
+  "productionRom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/rom-final-production/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "7f0c04308f3429fa396e778a4c1913d2148e0077f5bc02817d9f40569e6ccddf"
+  },
+  "productionByteParity": true,
+  "compositionReceipt": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/rom-final-production/CopperStart-DiskBoot.graphics.json",
+    "bytes": 7745,
+    "sha256": "d8e71c11d9140a8d8032493973f52cee1a2baaaac9fecc89a30874b63c18f35d"
+  },
+  "qualificationManifest": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/rom-final/disk-boot-test-manifest.json",
+    "bytes": 9496,
+    "sha256": "3a739fd5d3c1b44d461299147fc3ee74eafe94a28dd376d625445563bf81aff5"
+  },
+  "producerInputs": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "0AF57705B561ECD06E6EB449A1ED04C5859ECAB5EC53C4CB5AC31EF3E60A949D"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "54846D3325462C9A468A4A6315126E9BD83BA1972725CF16A96CF6A0F51AFC27"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "179A089A2386A5A234BD28062EE7F378805EF09BFAD22B1B3BE9B2102499B0CA"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "43BEEC6A4DF307B8C7E934A7FB6E0598F607F6268AEF0547C77F4E68CC83200C"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "EABB73C88917B5C9554229AA6475FAC9761C1E30CBDA0DAF4E4488EABA1FD372"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "C42E00AF0BD22FAC66A6431D8669947A2C491589D1188BDEB9788809FDF57B0A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "B22CD19CFD0960AE727AD18721BD419C095262BF7F5BE6A52AAB5F2F93ADF1A2"
+    },
+    {
+      "file": "CopperSharp.Targets.Amiga.dll",
+      "sha256": "FA20BA35CD9013C96442EC46903A0C0F0ECEF96C852B28383E4194D5503234A1"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "C72A077938C26096EBF5452F29E597BA62B219B00C78F3A7D5F2E0A38678292C"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "F445A7D289CF6545C46731A0D94E59E7C8C56B189A0C43768F4009874C0CB6F2"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "12A5A6DE550D906C2FF7AB5A7F01151ECD35B4567C5241976A8250B4E8615495"
+    },
+    {
+      "file": "CopperStart.Intuition.Native.dll",
+      "sha256": "C9EE1B58C09AE70C3B98E9B6530F2207AEDB9661D356E5F1AC8256524A08E10D"
+    }
+  ],
+  "producerInputValidation": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/final-input-validation.json",
+    "bytes": 4531,
+    "sha256": "b3f35b0dcfdfa6caadb1a89194253c7d3f1329d21122b59633308dedbecdb191"
+  },
+  "allTwelveProducerInputsMatch": true,
+  "testHarness": {
+    "project": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/compile-final/Fixture.csproj",
+      "bytes": 7869,
+      "sha256": "2da8a1fdd20f8a553a1fa07ab105a33a1d1e9d86db4c97d9f32a640cf14886bf"
+    },
+    "binaries": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/compile-final/bin/Release/net10.0/CopperStart.Floppy.Native.Tests.dll",
+        "bytes": 145920,
+        "sha256": "9cf6676aaaa87da1b7e9bf739c8c07f81844a114016968b81a5d861dacce35ae"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/compile-final/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+        "bytes": 288256,
+        "sha256": "c72a077938c26096ebf5452f29e597ba62b219b00c78f3a7d5f2e0a38678292c"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/compile-final/bin/Release/net10.0/Copper68k.dll",
+        "bytes": 978944,
+        "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/compile-final/bin/Release/net10.0/CopperDisk.dll",
+        "bytes": 105472,
+        "sha256": "da822ded94841e28f8ee6e6a9f7b5d6fa8198a25665c43cfd627e171def739b5"
+      }
+    ],
+    "note": "Exact-ROM test engine is pinned separately from the real-media engine; hashes are not interchangeable."
+  },
+  "mediaHarness": {
+    "source": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/Program.cs",
+      "bytes": 1120,
+      "sha256": "7f6016334140dcd99174c1ea544b1fe1bae887c4544abed484ab81043e0be840"
+    },
+    "project": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/Trace.csproj",
+      "bytes": 654,
+      "sha256": "3375576c7fc27d392705ab095f5bc5075425d5d297bfac9b1d7e878b0d2b1129"
+    }
+  },
+  "releaseBuild": {
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/production-final-release.log",
+      "bytes": 3076,
+      "sha256": "a127f33d81a9947553effb86e24f4e6f61e899be9f948d8ca45bfb5a7c827060"
+    },
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "command": "dotnet build CopperStart.slnx -c Release --no-restore -m:1 -p:CopperSharp68kRoot=C:/Users/ilkle/Koodit/GIT/CopperSharp68k -p:BuildProjectReferences=false -p:UseSharedCompilation=false"
+  },
+  "tests": {
+    "finalRom": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/tests/rom-final-native.trx",
+        "bytes": 181607,
+        "sha256": "955a92677d7ed9e43c7aad3d77b8c68516cc875cb59914855cd5f419e396b6cd"
+      },
+      "counters": {
+        "total": "102",
+        "executed": "102",
+        "passed": "102",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "consoleSemantic": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/tests/console-map-final.trx",
+        "bytes": 15212,
+        "sha256": "195cb817ca9f32d62ae4b64a2a7670e9d406748acce3bf9c6094fd7037b23c81"
+      },
+      "counters": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "compileMain": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/tests/compile-final.trx",
+        "bytes": 3417,
+        "sha256": "f1aeecea28ca41bbe59896062bd4187c375d9dc2a31e07a4dc72a58dd5540698"
+      },
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "nativeBcplOfs": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/tests/bcpl-reference4.trx",
+        "bytes": 3603,
+        "sha256": "110b2fbffe76780ccd67796b8a5c491b9f4cff889681fb0e8c59c168bca1d7d9"
+      },
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "nativeFailureCli": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/tests/startup-failure-reference.trx",
+        "bytes": 3325,
+        "sha256": "f00418abaf0e151a5633e700ac9c035c2b8a790ec938b7e4edd0b170ec6deb2d"
+      },
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    "nativeKeyboard": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/tests/keyboard-reference2.trx",
+        "bytes": 3393,
+        "sha256": "3bb3d83f163521325763f31d079f29170c3ddf486096dd482df310f40572184f"
+      },
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  },
+  "unavailableCoverage": [
+    "14 optional standalone polled-reader cases excluded from the exact-ROM selection",
+    "Native Kickstart 1.3 FFS control unavailable without a filesystem handler; only the authored OFS control is qualified"
+  ],
+  "method": "Cold reset, original read-only disks, recorded physical mouse/keyboard and media swaps; no guest RAM/register injection, executable patch or host OS shim.",
+  "media": [
+    {
+      "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+      "archiveSha256": "c384879077d23ce9617d148f5f27ba9f5b3aa80c781335bc74591985dd07cac4",
+      "lastWriteTimeUtc": "2026-06-16T07:09:04+00:00",
+      "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].adf",
+      "entryBytes": 901120,
+      "entrySha256": "00482409cdc483b1d03304f393794efb5f073262b5461291c6a11a80f456472e"
+    },
+    {
+      "path": "C:\\Data\\TestImages\\Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).zip",
+      "archiveSha256": "72eace1e0d439b03a2d9731fbb314fc99a3c49f2bbe3c4a85898178edb144616",
+      "lastWriteTimeUtc": "2026-06-16T07:09:08+00:00",
+      "entry": "Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 2 of 2).adf",
+      "entryBytes": 901120,
+      "entrySha256": "98f3785835abe74af58d9b375a89bc2000acd5e8ad963da0a6b0a33107e74c72"
+    }
+  ],
+  "machine": {
+    "chipRamKiB": 512,
+    "slowRamKiB": 512,
+    "drives": 1,
+    "rtcEnabled": false,
+    "framebufferWidth": 908
+  },
+  "runs": {
+    "normal": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/run.json",
+        "bytes": 2930,
+        "sha256": "accc91f0dde6be95b75c47ff0ee0b1b2162f4c06618a7912265db826df3abb9f"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/runner.log",
+        "bytes": 423923,
+        "sha256": "11491d72c975665ce46f77bfb7f654ca3d57bdd93b22e1329b01ebdfd2fffe64"
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\railroad-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\rom-final\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\railroad-final-normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-route-normal-combined-input.json",
+        "C:/Data/TestImages/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\railroad-checkpoints.json"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/rom-final/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "7f0c04308f3429fa396e778a4c1913d2148e0077f5bc02817d9f40569e6ccddf"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal-combined-input.json",
+        "bytes": 10887,
+        "sha256": "14dbf33dc2293f2c66a08f040b29ae8239397bf6bda43f17674bea8f3480910b"
+      },
+      "checkpoints": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-checkpoints.json",
+        "bytes": 2959,
+        "sha256": "3665c1e518a512518ab78a6cd24d2cb131987bde4e7f7eff04d45a860fd36781"
+      },
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 49152,
+          "sha256": "ed74dbab18d5f6652e04006509f1e4215cc99d2c5b63a85677564f4144f33730"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0
+    },
+    "scalar": {
+      "receipt": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-scalar/run.json",
+        "bytes": 2947,
+        "sha256": "40131bf92beebdbf29aa4672aa0b6230d8c031e3f2fcda95c1ea1a48f4c31450"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-scalar/runner.log",
+        "bytes": 423923,
+        "sha256": "11491d72c975665ce46f77bfb7f654ca3d57bdd93b22e1329b01ebdfd2fffe64"
+      },
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\railroad-probe\\bin\\Release\\net10.0\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\rom-final\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\railroad-final-scalar",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-intuition-2026-10-18\\railroad-route-normal-combined-input.json",
+        "C:/Data/TestImages/Railroad Tycoon v855.01 (1991)(MicroProse)(Disk 1 of 2)[cp manual code].zip",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-hired-guns-2026-10-19\\railroad-checkpoints.json",
+        "--scalar"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/rom-final/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "7f0c04308f3429fa396e778a4c1913d2148e0077f5bc02817d9f40569e6ccddf"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal-combined-input.json",
+        "bytes": 10887,
+        "sha256": "14dbf33dc2293f2c66a08f040b29ae8239397bf6bda43f17674bea8f3480910b"
+      },
+      "checkpoints": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-checkpoints.json",
+        "bytes": 2959,
+        "sha256": "3665c1e518a512518ab78a6cd24d2cb131987bde4e7f7eff04d45a860fd36781"
+      },
+      "machine": {
+        "chipRamKiB": 512,
+        "slowRamKiB": 512,
+        "drives": 1,
+        "rtcEnabled": false,
+        "framebufferWidth": 908
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 49152,
+          "sha256": "ed74dbab18d5f6652e04006509f1e4215cc99d2c5b63a85677564f4144f33730"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5a69574fa91fff7b03945999cbd10ad794c8da6c13a64e19f412420348c4e048"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "f445a7d289cf6545c46731a0d94e59e7c8c56b189a0c43768f4009874c0cb6f2"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-probe/bin/Release/net10.0/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "335b64cd74c9d916773fc6c463c13711c700d5a3b5994b20ce3d353ec52c7d7d"
+        }
+      ],
+      "exitCode": 0
+    }
+  },
+  "parity": {
+    "filesPerMode": 1920,
+    "differences": [],
+    "missing": [],
+    "extra": [],
+    "unsupportedCaptures": 0,
+    "captureSetSha256": "49fd38258769b09156f6ab7c00d25adb23188474dc25bc519066b915c48a1e16",
+    "captureSetEncoding": "UTF-8 JSON sorted keys and filenames; compact separators; no trailing newline",
+    "captureIdentities": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-capture-identities.json",
+      "bytes": 230785,
+      "sha256": "49fd38258769b09156f6ab7c00d25adb23188474dc25bc519066b915c48a1e16"
+    }
+  },
+  "reviewed": [
+    {
+      "frame": 194000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-194000.bmp",
+        "bytes": 1136870,
+        "sha256": "35204dd1f40a37e71c5443f6c16d9c224f1d8849d22ffb00ee076b96d245d4a9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-194000.json",
+        "bytes": 1109,
+        "sha256": "5a792de951e5edfb1ed63a977e3e44a41abfde8b54df83f4f91bc3b29d39add2"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-194000.bmp",
+        "bytes": 1136870,
+        "sha256": "35204dd1f40a37e71c5443f6c16d9c224f1d8849d22ffb00ee076b96d245d4a9"
+      },
+      "priorImageByteIdentical": true
+    },
+    {
+      "frame": 202000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-202000.bmp",
+        "bytes": 1136870,
+        "sha256": "a0c1907079afd9a77b8fb1ce48a6704adfdd718c7c38488b34f881433f8ac145"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-202000.json",
+        "bytes": 1109,
+        "sha256": "244137f2d1946a93518301fb9237d8a0808eb2e1c4942d6c07f7fb28f05b57a7"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-202000.bmp",
+        "bytes": 1136870,
+        "sha256": "a0c1907079afd9a77b8fb1ce48a6704adfdd718c7c38488b34f881433f8ac145"
+      },
+      "priorImageByteIdentical": true
+    },
+    {
+      "frame": 242000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-242000.bmp",
+        "bytes": 1136870,
+        "sha256": "23cb8bffcb5d9903851652d22d7e2523736870156e52ffae9849e12ee7c7f5bd"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-242000.json",
+        "bytes": 1109,
+        "sha256": "1f37b3863e68a773b3aa8323732f51b61b2a0a6f710e294504e075fbd18db414"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-242000.bmp",
+        "bytes": 1136870,
+        "sha256": "23cb8bffcb5d9903851652d22d7e2523736870156e52ffae9849e12ee7c7f5bd"
+      },
+      "priorImageByteIdentical": true
+    },
+    {
+      "frame": 292000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-292000.bmp",
+        "bytes": 1136870,
+        "sha256": "dd509aecb13e93d7e952a877bbd1f9a4423d282f537c3e318ef7de8aa07e90e0"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-292000.json",
+        "bytes": 1109,
+        "sha256": "fdc879400e53fe9175a9ce7428a04d8e1761c9fa51a08a97bc6817a5db8e4dd1"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-292000.bmp",
+        "bytes": 1136870,
+        "sha256": "dd509aecb13e93d7e952a877bbd1f9a4423d282f537c3e318ef7de8aa07e90e0"
+      },
+      "priorImageByteIdentical": true
+    },
+    {
+      "frame": 300000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-300000.bmp",
+        "bytes": 1136870,
+        "sha256": "26065046b975731b1d180975984fdcc8a3a55bf3f5c9605a31828fefa9e32d49"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-300000.json",
+        "bytes": 1110,
+        "sha256": "31d4c40da14b528bcc7456343c8178d41052bae56eeee237ad3efa725d9f581a"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-300000.bmp",
+        "bytes": 1136870,
+        "sha256": "ed784650cb6c4b108bb2f88edca61edb56edf77b308c96b8a878d970f5fbf913"
+      },
+      "priorImageByteIdentical": false
+    },
+    {
+      "frame": 311000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-311000.bmp",
+        "bytes": 1136870,
+        "sha256": "a116224a8357ec08af0e861b6d22380264669fbff09be318cc1b07879ef5f204"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-311000.json",
+        "bytes": 1109,
+        "sha256": "a18735e9974475e28ff995077724edb44ba50b31e7a8c5744a29f4d70b6cd09e"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-311000.bmp",
+        "bytes": 1136870,
+        "sha256": "a116224a8357ec08af0e861b6d22380264669fbff09be318cc1b07879ef5f204"
+      },
+      "priorImageByteIdentical": true
+    },
+    {
+      "frame": 313000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-313000.bmp",
+        "bytes": 1136870,
+        "sha256": "23a417a14433356bc92ad222b197fa0fcaf4adbc9ca29437323720f7a1093e0b"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-313000.json",
+        "bytes": 1109,
+        "sha256": "714f4b5595a0972eac722c9de17c1f9ff7d53657f4ecbc66df87df27beb950a7"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-313000.bmp",
+        "bytes": 1136870,
+        "sha256": "93372d5397033ca0a004fc8c22af650de2f5b2738a9bfe009314e8b8a583061a"
+      },
+      "priorImageByteIdentical": false
+    },
+    {
+      "frame": 314200,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-314200.bmp",
+        "bytes": 1136870,
+        "sha256": "4ef4c0f3a25320d992283c3cd37aa928f0580a98ba2fd72e8cf1ef15f7428523"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-314200.json",
+        "bytes": 1110,
+        "sha256": "8ef1071f8860a44b96b6061bd2a4feec58ab47053ecb8c0d1dbe168cbdc5c182"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-314200.bmp",
+        "bytes": 1136870,
+        "sha256": "eaf1cfc3e543d07e70edbcdf77f5b0c9f29126e373a14a11e26ef4d56531cdb0"
+      },
+      "priorImageByteIdentical": false
+    },
+    {
+      "frame": 315000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-315000.bmp",
+        "bytes": 1136870,
+        "sha256": "0e27940ab8bd2cce54ad1c582fec5ed0adb8a346cfbd27c74204f24833a28b27"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-315000.json",
+        "bytes": 1110,
+        "sha256": "f1e06211b9881d0b24c554f50a31e267c49000ae1c7a32300cd4a39ead3869ad"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-315000.bmp",
+        "bytes": 1136870,
+        "sha256": "c5e718eed275d7a8d62aa061a243ab5d17db0b488dab0805978dc77d2c5c6d43"
+      },
+      "priorImageByteIdentical": false
+    },
+    {
+      "frame": 319000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-319000.bmp",
+        "bytes": 1136870,
+        "sha256": "3d980020d197ab814d0e1f20cc23ffcc1c7b7bae18e3fbb3a56080f921c45647"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-319000.json",
+        "bytes": 1109,
+        "sha256": "4c8aa7322612ca7731a2ebb803bc9a35d9cc4209605c351d573824f71b427b3b"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-319000.bmp",
+        "bytes": 1136870,
+        "sha256": "866314d9ffd08f5b6e78a567eaa5f403d8770259cf464822a9e19aba8579004a"
+      },
+      "priorImageByteIdentical": false
+    },
+    {
+      "frame": 321000,
+      "bmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-321000.bmp",
+        "bytes": 1136870,
+        "sha256": "35a2ddadce50f2d82ab0cf6a3ad217bf5d7d14620fc3b5fdce8c2c35d0a79af9"
+      },
+      "state": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-hired-guns-2026-10-19/railroad-final-normal/captures/frame-321000.json",
+        "bytes": 1110,
+        "sha256": "f94e38ced799851861e3dd279ec940b90af310703fcd7442628e257c04d99d8d"
+      },
+      "priorReviewedBmp": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/railroad-route-normal/captures/frame-321000.bmp",
+        "bytes": 1136870,
+        "sha256": "a1305a2bcc8bfceb7df671b236a1414c1e32a4e9956abf6f7ba3837735ff6251"
+      },
+      "priorImageByteIdentical": false
+    }
+  ],
+  "route": {
+    "stations": [
+      "London Junction",
+      "London Crossing"
+    ],
+    "coordinates": [
+      [
+        101,
+        42
+      ],
+      [
+        105,
+        42
+      ]
+    ],
+    "scheduleFrame": 311000,
+    "speed": "Slow",
+    "runInputFrame": 314100,
+    "movementFrames": [
+      314200,
+      315000,
+      319000
+    ],
+    "arrivalFrame": 321000,
+    "arrivalDate": "June 14, 1830",
+    "headline": "First Train Arrives in London Crossing. Citizens Celebrate!",
+    "cargo": "Empty Mail Car",
+    "incomeQualified": false
+  },
+  "limitations": [
+    "Bounded correctness replay; no host-throughput acceptance claim",
+    "No new native Kickstart route replay",
+    "Freight revenue, return leg, campaign, saves and audio fidelity remain unqualified",
+    "BCPL runtime is partial; Workbench task and misc.resource remain missing for Hired Guns",
+    "ROMs, media, local binaries and captures are not committed"
+  ]
+}

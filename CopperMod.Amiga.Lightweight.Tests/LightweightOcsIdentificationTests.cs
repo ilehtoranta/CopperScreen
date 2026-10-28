@@ -32,9 +32,9 @@ public sealed class LightweightOcsIdentificationTests
     public void PrecedingAudioDmaWordReachesCpuWithoutChangingReadTiming(int channel, ushort data)
     {
         using var machine = AudioDma(channel, data);
-        long cycle = 34 + channel * 4;
+        long cycle = 30 + channel * 4;
         Assert.Equal(data, machine.ReadWord(DeniseId, ref cycle, M68kBusAccessKind.CpuDataRead));
-        Assert.Equal(36 + channel * 4, cycle);
+        Assert.Equal(32 + channel * 4, cycle);
         Assert.Equal(0xFFFF, machine.ReadWord(DeniseId, ref cycle, M68kBusAccessKind.CpuDataRead));
     }
 
@@ -44,7 +44,7 @@ public sealed class LightweightOcsIdentificationTests
     public void ByteReadSelectsCorrectLaneOfPrecedingDmaWord(uint lane, byte expected)
     {
         using var machine = AudioDma(0, 0x1268);
-        long cycle = 34;
+        long cycle = 30;
         Assert.Equal(expected, machine.ReadByte(DeniseId + lane, ref cycle, M68kBusAccessKind.CpuDataRead));
     }
 
@@ -52,10 +52,10 @@ public sealed class LightweightOcsIdentificationTests
     public void DiagnosticMemoryAccessDoesNotOverwriteDrivenDmaWord()
     {
         using var machine = AudioDma(0, 0x1268);
-        machine.AdvanceHardwareTo(32);
+        machine.AdvanceHardwareTo(28);
         machine.WriteChipWordDma(0x1000, 0xCAFE);
         Assert.Equal(0xCAFE, machine.ReadChipWordDma(0x1000));
-        long cycle = 34;
+        long cycle = 30;
         Assert.Equal(0x1268, machine.ReadWord(DeniseId, ref cycle, M68kBusAccessKind.CpuDataRead));
     }
 
@@ -65,22 +65,22 @@ public sealed class LightweightOcsIdentificationTests
     public void ResetDiscardsOldDmaSample(bool external)
     {
         using var machine = AudioDma(0, 0x1268);
-        machine.AdvanceHardwareTo(32);
-        if (external) machine.ResetExternalDevices(32);
+        machine.AdvanceHardwareTo(28);
+        if (external) machine.ResetExternalDevices(28);
         else machine.Reset();
-        long cycle = 34;
+        long cycle = 30;
         Assert.Equal(0xFFFF, machine.ReadWord(DeniseId, ref cycle, M68kBusAccessKind.CpuDataRead));
     }
 
     [Theory]
-    [InlineData(28, 0xFFFF)]
-    [InlineData(31, 0x1268)]
+    [InlineData(24, 0xFFFF)]
+    [InlineData(27, 0x1268)]
     public void OnlyCompletedAcceptedDmaDrivesBus(long disableCycle, ushort expected)
     {
         using var machine = AudioDma(0, 0x1268);
         machine.AdvanceHardwareTo(disableCycle);
         machine.WriteCustomRegisterFromCopper(0x096, 1, disableCycle);
-        long cycle = 34;
+        long cycle = 30;
         Assert.Equal(expected, machine.ReadWord(DeniseId, ref cycle, M68kBusAccessKind.CpuDataRead));
     }
 

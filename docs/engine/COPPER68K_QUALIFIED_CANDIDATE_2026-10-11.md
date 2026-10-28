@@ -66,3 +66,13 @@ compatibility result; synthetic integer coverage is not physical timing, FPU,
 enabled-MMU or general OS qualification. Publication remains a separate,
 explicitly authorized release step. No package, ROM, media or native capture
 is committed.
+
+## Distribution approved 2026-10-16
+
+The owner subsequently approved distributing the existing frozen package as a
+full [GitHub release](https://github.com/ilehtoranta/CopperMod/releases/tag/copper68k-1.5.4-qualified-dev.1).
+The package retains version `1.5.4-qualified-dev.1` and SHA-256
+`83fc06cb715a5a394611e0c73f4e7d5a0f5f5c171db63860b9d8458ca1e16b6d`;
+it has not been rebuilt or published to NuGet.org. The original dated evidence
+and its scope remain unchanged. `scripts/prepare-qualified-cpu.ps1` fetches this
+asset and verifies its qualification and NuGet lock hashes before restoring.

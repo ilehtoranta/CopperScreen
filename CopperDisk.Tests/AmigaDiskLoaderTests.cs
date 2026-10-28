@@ -113,9 +113,9 @@ public sealed class AmigaDiskLoaderTests
     }
 
     [Fact]
-    public void FromEncodedTracksRequiresFullTrackSet()
+    public void FromEncodedTracksRejectsEmptyTrackSet()
     {
-        var tracks = new[] { AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack()) };
+        var tracks = Array.Empty<AmigaEncodedTrack>();
 
         Assert.Throws<ArgumentException>(() => AmigaDiskLoader.FromEncodedTracks(tracks));
     }
@@ -306,6 +306,91 @@ public sealed class AmigaDiskLoaderTests
         Assert.Equal(0x7E, sectorMedia.ReadSector(0, 1, 0).Span[0]);
     }
 
+    [Theory]
+    [InlineData(159, true)]
+    [InlineData(161, false)]
+    [InlineData(166, true)]
+    [InlineData(168, false)]
+    public void FromExtendedAdfBytesRetainsAdditionalPhysicalTracks(int trackCount, bool raw)
+    {
+        var sectors = new byte[trackCount * ExtendedAdfNormalTrackBytes];
+        var image = raw ? CreateExtendedAdf(sectors, trackCount,
+            new ExtendedAdfTrackOverride(trackCount - 1, 1, [0x44, 0x89, 0xA0, 0], 20)) :
+            CreateExtendedAdf(sectors, trackCount);
+        var media = AmigaDiskLoader.FromExtendedAdfBytes(image);
+        var track = Assert.IsType<AmigaEncodedTrack>(media.ReadTrack((trackCount - 1) / 2, (trackCount - 1) % 2));
+        Assert.Equal((trackCount + 1) / 2, media.Cylinders);
+        Assert.Equal(((trackCount + 1) / 2 * 2) * ExtendedAdfNormalTrackBytes, media.SectorData.Length);
+        Assert.True((track.Features & AmigaTrackFeatures.PreservedTrackData) != 0);
+        if (raw)
+        {
+            Assert.Equal(20, track.BitLength);
+            Assert.Equal(new byte[] { 0x44, 0x89, 0xA0, 0 }, track.EncodedData.ToArray());
+        }
+        else
+        {
+            var header = ((track.ReadUInt32AtBit(0x08 * 8) & 0x55555555u) << 1) |
+                (track.ReadUInt32AtBit(0x0C * 8) & 0x55555555u);
+            Assert.Equal(0xFF00090Bu | ((uint)(trackCount - 1) << 16), header);
+        }
+        if ((trackCount & 1) != 0)
+            Assert.Equal(AmigaDosTrackEncoder.CreateUnformattedTrack(), media.ReadTrack(trackCount / 2, 1).EncodedData.ToArray());
+    }
+
+    [Theory]
+    [InlineData(162)]
+    [InlineData(164)]
+    [InlineData(166)]
+    [InlineData(168)]
+    public void FromExtendedAdfBytesPreservesRawAndNormalTracksBeyondCylinder79(int trackCount)
+    {
+        var data = new byte[trackCount * ExtendedAdfNormalTrackBytes];
+        data[^ExtendedAdfNormalTrackBytes] = 0xA5;
+        data[^1] = 0x5A;
+        var raw = new byte[] { 0x44, 0x89, 0xA0, 0x00 };
+        var media = AmigaDiskLoader.FromExtendedAdfBytes(CreateExtendedAdf(data, trackCount,
+            new ExtendedAdfTrackOverride(160, 1, raw, BitLength: 20)));
+
+        Assert.Equal(trackCount / 2, media.Cylinders);
+        Assert.Equal(trackCount * ExtendedAdfNormalTrackBytes, media.SectorData.Length);
+        Assert.False(media.HasCompleteDecodedSectorData);
+        var preserved = media.ReadTrack(80, 0);
+        Assert.Equal(20, preserved.BitLength);
+        Assert.Equal(raw, preserved.EncodedData.ToArray());
+        Assert.Equal(0xA5, media.ReadSector(media.Cylinders - 1, 1, 0).Span[0]);
+        Assert.Equal(0x5A, media.ReadSector(media.Cylinders - 1, 1, 10).Span[^1]);
+        Assert.True((media.ReadTrack(media.Cylinders - 1, 1).Features & AmigaTrackFeatures.PreservedTrackData) != 0);
+    }
+
+    [Fact]
+    public void FromExtendedAdfBytesRetainsAnOddFinalTrackAndLeavesMissingHeadUnformatted()
+    {
+        const int trackCount = 165;
+        var data = new byte[trackCount * ExtendedAdfNormalTrackBytes];
+        data[^ExtendedAdfNormalTrackBytes] = 0x7E;
+        var media = AmigaDiskLoader.FromExtendedAdfBytes(CreateExtendedAdf(data, trackCount: trackCount));
+
+        Assert.Equal(83, media.Cylinders);
+        Assert.Equal(0x7E, media.ReadSector(82, 0, 0).Span[0]);
+        Assert.False(media.HasCompleteDecodedSectorData);
+        Assert.Equal(AmigaDosTrackEncoder.CreateUnformattedTrack(), media.ReadTrack(82, 1).EncodedData.ToArray());
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(4)]
+    public void FromExtendedAdfBytesLoadsZeroBitRawEntryAsUnformatted(int allocatedBytes)
+    {
+        var media = AmigaDiskLoader.FromExtendedAdfBytes(CreateExtendedAdf(overrides:
+            new ExtendedAdfTrackOverride(147, 1, Enumerable.Repeat((byte)0xFF, allocatedBytes).ToArray(), 0)));
+        var track = media.ReadTrack(73, 1);
+
+        Assert.False(media.HasCompleteDecodedSectorData);
+        Assert.Equal(101344, track.BitLength);
+        Assert.Equal(new byte[12668], track.EncodedData.ToArray());
+        Assert.Equal(new byte[512], media.ReadSector(73, 1, 0).ToArray());
+    }
+
     [Fact]
     public void LoadRoutesExtendedAdfByMagic()
     {
@@ -368,7 +453,7 @@ public sealed class AmigaDiskLoaderTests
             ExtendedAdfInvalidKind.OldFormat => CreateOldExtendedAdf(),
             ExtendedAdfInvalidKind.UnsupportedTrackType => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 2, [0, 0], 16)),
             ExtendedAdfInvalidKind.Multirevolution => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 1, [0, 0], 16, RevolutionMinusOne: 1)),
-            ExtendedAdfInvalidKind.WrongTrackCount => CreateExtendedAdf(trackCount: AmigaDiskGeometry.TrackCount - 1),
+            ExtendedAdfInvalidKind.WrongTrackCount => CreateExtendedAdf(trackCount: 169),
             ExtendedAdfInvalidKind.BadNormalTrackSize => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 0, [0, 0], 0)),
             ExtendedAdfInvalidKind.InvalidBitLength => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 1, [0, 0], 17)),
             ExtendedAdfInvalidKind.HighDensity => CreateExtendedAdf(overrides: new ExtendedAdfTrackOverride(0, 1, new byte[20_002], 16)),
@@ -579,7 +664,7 @@ public sealed class AmigaDiskLoaderTests
         int trackCount,
         params ExtendedAdfTrackOverride[] overrides)
     {
-        adf ??= CreateStandardAdf();
+        adf ??= trackCount <= AmigaDiskGeometry.TrackCount ? CreateStandardAdf() : new byte[trackCount * ExtendedAdfNormalTrackBytes];
         var overrideByTrack = overrides.ToDictionary(item => item.Track);
         var trackData = new byte[trackCount][];
         var trackTypes = new byte[trackCount];
