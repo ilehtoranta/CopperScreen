@@ -3,11 +3,43 @@
 CopperScreen is an Amiga emulator with an Avalonia desktop interface,
 a lightweight emulation engine, a disk-image library and a headless runner.
 
+The start screen offers **Amiga 500**, **Amiga 500+**, **Amiga 1200**, and
+**Amiga 1200 with CopperOS HDF**. It explains each ROM requirement and lets
+native Kickstart start without a floppy disk. CopperOS includes its CopperStart
+A1200 ROM and 8 MiB FFS HDF. Selecting it creates a personal writable disk on
+first use and reuses that disk thereafter. See [ROM and HDF setup](docs/COPPERSTART_APP.md).
+Each native Amiga model remembers its own selected Kickstart ROM across model
+switches and app restarts. Choosing another valid ROM updates only that model's default.
+Selected floppy and hard disks are also remembered per model, including empty
+drives, drive types and write protection.
+The last selected model is saved immediately, so reopening the app restores its
+ROM and disks even if emulation was never started.
+Each model also restores its full saved configuration, including CPU, RAM,
+chipset, RTC, input, display and drive settings. Complete Configure Amiga edits
+are saved automatically, including when closing without starting emulation.
+The Close button and settings window's close control keep edits. Partially typed
+invalid fields keep the most recent complete configuration.
+While running, input, display, volume/mute and floppy media changes apply
+immediately. Hardware, ROM, hard-disk/shared-folder mounts and floppy sound
+configuration show a restart notice listing the pending changes. Live settings
+continue to apply while hardware changes await Restart Amiga.
+After closing Settings, a main-screen notice lists pending changes and provides
+a Restart Amiga button to apply them. It clears after restarting or reverting them.
+The toolbar Restart button applies the same pending settings. With no pending
+changes, it resets the current Amiga configuration.
+Restart preserves whether the Amiga was paused or running, including when
+either restart button applies pending settings.
+Revert pending changes restores the running configuration without restarting,
+keeps changes already applied live, and updates the saved configuration.
+The same Revert pending changes button is available inside Settings and keeps
+the settings window open while restoring the running configuration.
+
 ## Supported machine
 
 - PAL A500 with OCS 8362 Denise and a Motorola 68000 by default; ECS 8373 Denise and experimental 68EC020, 68020, 68030 and 68040 choices are available in Settings.
 - Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional Autoconfig Fast RAM is separate, up to 8 MiB with 24-bit CPUs or 1 GiB with full 32-bit CPUs. See [CPU/memory configuration and native evidence](docs/engine/CPU_MEMORY_UPGRADES.md).
 - Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
+- PAL A500+ with native Kickstart 2.04 (v37.175), existing ECS hardware, 1 MiB Chip RAM and RTC: choose Amiga 500+ or use the `a500-plus-ecs-pal` profile. See [setup and native boot evidence](docs/engine/KICKSTART_204_2026-10-21.md).
 - Optional [Minimal disk boot](docs/engine/MINIMAL_DISK_BOOT.md): experimental ROM-free ADF bootstrap for takeover demos/games on the default PAL 68000 A500. It supplies a small boot-service surface; DOS and Workbench require native Kickstart.
 - Explicit [CopperStart standalone ROM](docs/COPPERSTART_APP.md) boot on Lightweight: qualified experimental PAL OCS 68000 A500, 512 KiB Chip + 512 KiB slow RAM and read-only DF0 by default. Supply the matching versioned ROM; explicitly admitted CopperOS workspaces can be writable.
 - One to four floppy drives (DF0–DF3): 880 KiB DD / 1760 KiB HD ADF with explicit Save ADF, plus read-only ADZ, DMS, modern extended ADF, IPF and SCP, including selected ZIP entries. SCP uses a decoded first revolution. See [format support and limits](docs/engine/DISK_FORMATS.md). The default remains one write-protected drive. Select DD or HD per drive in **Settings > Floppy Drives** and restart the Amiga. Drive types are saved in profiles and the remembered last machine. The runner accepts repeatable `--drive-type 0 HD` (units 0–3; `DD` is the default); connect external units with `--drives`.
@@ -27,20 +59,19 @@ than silently changing the configured machine.
 Compatibility and timing accuracy are still being developed. Known limitations,
 including residual interlace instability, are recorded in the
 [engine issue register](docs/engine/ISSUES.md).
-ROMs, operating-system files and game media are not included.
+Native Kickstart ROMs, Workbench and game media are not included. The original
+CopperStart A1200 ROM and CopperOS desktop HDF are bundled with the application.
+The CopperOS option starts the native Home/Files/Editor desktop directly.
 
 ## Build and run
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-Copper68k's published baseline is [version `1.5.3`](https://www.nuget.org/packages/Copper68k/1.5.3).
-This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate
-from the ignored `artifacts/qualified-cpu-20261011/feed` directory. Put the frozen
-package identified by the qualification record there before restoring this
-worktree; it is not yet available from NuGet.org. Rebuilt package content needs
-a new development version and regenerated locks. No sibling project reference
-is used. See the
-[candidate qualification record](docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md) and
+Copper68k is pinned to published [version `1.5.4`](https://www.nuget.org/packages/Copper68k/1.5.4).
+Normal restore uses NuGet.org and requires no private qualification feed or
+sibling project reference. Package locks retain the public package identity;
+published package versions remain immutable. See the
+[release and consumer record](docs/engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md) and
 [CPU support, validation and remaining limits](docs/engine/CPU_SUPPORT.md).
 The explicit A1200 EC020 profile and native ROM operand forms
 are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding
@@ -56,12 +87,22 @@ The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
 passes the original Lotus III input through a driving demo without changing its press timings.
 
 ```powershell
+./scripts/prepare-copperos-bundle.ps1 -CopperStartA1200Rom "path/to/CopperStart-A1200.rom" -CopperOsHdf "path/to/CopperOS.hdf"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
 ```
 
-Starting without arguments opens Settings. Choose your ROM and disk image there.
+Bundle preparation is a developer build step using the qualified producer outputs;
+it is not an end-user setup step. Inputs are hash checked and staged under ignored
+`artifacts/copperos-bundle`, then embedded in build and publish outputs. CI can
+set `CopperOsBundleDirectory` to an equivalent staged directory. Missing or
+unqualified inputs fail the build. Media binaries are not committed.
+The [desktop HDF recipe and verification](docs/COPPEROS_DESKTOP_A1200.md) identify
+the native desktop payloads, reproducible composition command and workspace migration.
+
+Starting without arguments opens the start screen. Native Amiga choices ask for
+your Kickstart ROM; CopperOS needs no file selection.
 Browse identifies native 1.3/3.1 ROMs and, with the A1200 profile selected,
 validates its 3.0 ROM. It selects the matching Kickstart choice.
 For native 3.1 from the command line, select its profile explicitly:

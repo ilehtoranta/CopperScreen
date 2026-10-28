@@ -9,26 +9,102 @@ namespace CopperScreen.Tests;
 
 public sealed class CopperOsBootProofTests
 {
+    [CopperOsHdfProofFact(a1200: true)]
+    public void A1200ReadOnlyHdfBootsAndReportsWriteProtection()
+    {
+        var root = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_HDF_PROOF")!;
+        RunProof(root, Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_A1200_ROM")!,
+            Path.Combine(root, "CopperOS.hdf"), "hdf-image.json", hardfile: true, a1200: true);
+    }
+
+    [CopperOsHdfProofFact(a1200: true)]
+    public void A1200HdfBootWritesAndReadsAfterColdReopen()
+    {
+        var root = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_HDF_PROOF")!;
+        var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_A1200_ROM")!;
+        Assert.Equal(1048576, CopperScreenCopperStartRom.Read(rom, a1200: true).Length);
+        Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(rom));
+        var output = Path.Combine(root, "a1200-proof", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(output);
+        var disk = Path.Combine(output, "CopperOS.hdf");
+        File.Copy(Path.Combine(root, "CopperOS.hdf"), disk);
+        RunProof(root, rom, disk, "hdf-image.json", hardfile: true, writable: true, a1200: true);
+        var written = Hash(disk);
+        RunProof(root, rom, disk, "hdf-image.json", hardfile: true, writable: true, reopened: true, a1200: true);
+        Assert.Equal(written, Hash(disk));
+    }
+
     [CopperOsProofFact]
     public void OriginalSystemBootRegistersShellAndRunsInteractiveCommandsThroughLightweight()
     {
         var root = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_PROOF")!;
         var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_ROM")!;
-        var disk = Path.Combine(root, "System.adf");
-        using var receipt = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "system-image.json")));
+        RunProof(root, rom, Path.Combine(root, "System.adf"), "system-image.json");
+    }
+
+    [CopperOsHdfProofFact]
+    public void HdfOnlyBootWritesFilesAndReadsThemAfterColdReopen()
+    {
+        var root = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_HDF_PROOF")!;
+        var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_ROM")!;
+        var output = Path.Combine(root, "hdf-proof", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(output);
+        var disk = Path.Combine(output, "CopperOS.hdf");
+        File.Copy(Path.Combine(root, "CopperOS.hdf"), disk);
+        RunProof(root, rom, disk, "hdf-image.json", hardfile: true, writable: true);
+        var writtenHash = Hash(disk);
+        // RunProof disposes the entire session; this boot has no guest RAM or
+        // filesystem cache from the writing session.
+        RunProof(root, rom, disk, "hdf-image.json", hardfile: true, writable: true, reopened: true);
+        Assert.Equal(writtenHash, Hash(disk));
+    }
+
+    [CopperOsHdfProofFact]
+    public void ReadOnlyHdfBootsAndReportsNativeWriteProtectionWithoutChangingImage()
+    {
+        var root = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_HDF_PROOF")!;
+        RunProof(root, Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_ROM")!,
+            Path.Combine(root, "CopperOS.hdf"), "hdf-image.json", hardfile: true);
+    }
+
+    private static void RunProof(string root, string rom, string disk, string receiptName,
+        bool hardfile = false, bool writable = false, bool reopened = false, bool a1200 = false)
+    {
+        using var receipt = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, receiptName)));
         Assert.Equal("original-system-boot-proof", receipt.RootElement.GetProperty("kind").GetString());
         Assert.False(receipt.RootElement.GetProperty("shipping").GetBoolean());
-        Assert.Equal(receipt.RootElement.GetProperty("sha256").GetString(), Hash(disk));
-        var output = Path.Combine(root, "app-proof", DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffZ"));
+        var initialHash = Hash(disk);
+        if (!reopened) Assert.Equal(receipt.RootElement.GetProperty("sha256").GetString(), initialHash);
+        var output = Path.Combine(root, "app-proof", DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffZ") +
+            (a1200 ? "-a1200" : "") + (hardfile ? writable ? reopened ? "-hdf-reopen" : "-hdf-write" : "-hdf-readonly" : "-adf"));
         Directory.CreateDirectory(output);
         var userData = Path.Combine(output, "user-data");
         Directory.CreateDirectory(userData);
-        var options = CopperScreenStartupOptions.Parse(["--copperstart", "--rom", rom, disk], AppContext.BaseDirectory,
+        string[] args = hardfile ? ["--copperstart", "--rom", rom,
+            writable ? "--hdf-ffs-writable" : "--hdf-ffs", disk, "DH0:2:32:0:255"] : ["--copperstart", "--rom", rom, disk];
+        var options = CopperScreenStartupOptions.Parse(args, AppContext.BaseDirectory,
             userDataDirectory: userData);
         Assert.Null(options.Error);
+        if (a1200)
+        {
+            var draft = CopperScreenMachinePresets.Apply(CopperScreenSettingsDraft.FromStartupOptions(options), CopperScreenMachineModel.Amiga1200);
+            options = draft.ToStartupOptions(AppContext.BaseDirectory);
+        }
         using var created = CopperScreenSession.Create(options);
         var session = Assert.IsType<CopperScreenLightweightSession>(created);
+        if (hardfile)
+        {
+            Assert.Null(session.DiskPath);
+            Assert.False(session.Machine.IsDriveMounted(0));
+            Assert.Equal((a1200 ? 2048 : 512) * 1024, session.Machine.ChipRam.Length);
+            Assert.Equal(a1200, session.Machine.IsAga);
+            Assert.Equal(a1200 ? M68kCpuModel.M68EC020 : M68kCpuModel.M68000, session.Machine.CpuModel);
+            Assert.Single(options.HardDrives);
+            // Also leave a normal, reusable app profile alongside the evidence.
+            CopperScreenProfileStore.SaveToPath(CopperScreenSettingsDraft.FromStartupOptions(options), Path.Combine(output, "profile.json"));
+        }
         var slow = (byte[])session.Machine.GetType().GetField("_slowRam", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(session.Machine)!;
+        Assert.Equal(a1200 ? 0 : 512 * 1024, slow.Length);
         var fields = 0;
         uint nativeControl = 0;
         byte Read(uint address) => address < session.Machine.ChipRam.Length ? session.Machine.ChipRam.Span[(int)address]
@@ -69,6 +145,7 @@ public sealed class CopperOsBootProofTests
             {
                 session.RenderNextFrame(session.Framebuffer); fields++;
                 Assert.False(session.IsPaused); Assert.Null(session.FaultMessage);
+                Assert.Null(session.Machine.UnsupportedActiveFeature);
                 if (nativeControl != 0 && Long(0x880) != nativeControl)
                 { Capture("memory-corruption"); Assert.Fail("Native diagnostic receipt was overwritten during Shell input."); }
             }
@@ -81,13 +158,18 @@ public sealed class CopperOsBootProofTests
                 Run(100);
                 if (nativeControl == 0 && Screen().Contains("FAILED", StringComparison.Ordinal))
                 { Capture(label + "-failed"); Assert.Fail("Native bootstrap failed:\n" + Screen()); }
-                if ((n + 100) % 10000 == 0) Capture(label + "-" + fields);
+                if ((n + 100) % 10000 == 0 || n == 900) Capture(label + "-" + fields);
             }
             Capture(label);
             Assert.True(Present(), "Native console did not display " + value + ":\n" + Screen());
         }
         void Type(string line)
         {
+            // Command output can be visible before the following prompt is
+            // fully drawn. Wait for the native Shell to finish it before keys.
+            bool Ready() => Screen().Split('\n').LastOrDefault(row => !string.IsNullOrWhiteSpace(row))?.Trim() == "2.>";
+            for (var n = 0; n < 3000 && !Ready(); n += 20) Run(20);
+            Assert.True(Ready(), "Native Shell did not finish its prompt before input:\n" + Screen());
             foreach (var c in line)
             {
                 var key = c == ' ' ? AmigaRawKey.Space : Enum.Parse<AmigaRawKey>(char.ToUpperInvariant(c).ToString());
@@ -111,21 +193,53 @@ public sealed class CopperOsBootProofTests
         Type("why"); WaitFor("OBJECT NOT FOUND", "command-error", 3000);
         Type("echo recovery"); WaitFor("RECOVERY", "recovery", 3000, exactLine: true);
         Assert.Contains(">", Screen());
+        if (hardfile)
+        {
+            Type("storage");
+            WaitFor(writable ? reopened ? "COPPEROS STORAGE REOPEN VERIFIED" : "COPPEROS STORAGE CREATED AND VERIFIED"
+                : "COPPEROS STORAGE WRITE PROTECTED", "storage", 10000);
+            Type("echo storage returned");
+            WaitFor("STORAGE RETURNED", "storage-return", 3000, exactLine: true);
+            session.SavePersistentStorage();
+            if (writable && !reopened) Assert.NotEqual(initialHash, Hash(disk));
+            else Assert.Equal(initialHash, Hash(disk));
+        }
+        if (a1200 && !writable)
+        {
+            nativeControl = 0;
+            session.Reset();
+            Run(1000);
+            WaitFor(">", "reset-prompt", 30000);
+            Type("echo after reset");
+            WaitFor("AFTER RESET", "reset-command", 3000, exactLine: true);
+            Assert.Equal(initialHash, Hash(disk));
+        }
         Assert.False(session.Machine.IsDriveDirty(0));
-        Assert.Equal(receipt.RootElement.GetProperty("sha256").GetString(), Hash(disk));
+        if (!hardfile) Assert.Equal(initialHash, Hash(disk));
         File.WriteAllText(Path.Combine(output, "result.json"), JsonSerializer.Serialize(new
         {
-            schemaVersion = 1, protocol = "copperos-native-shell-boot-v1", passed = true, shipping = false,
+            schemaVersion = 1, protocol = hardfile ? "copperos-native-hdf-boot-v1" : "copperos-native-shell-boot-v1", passed = true, shipping = false,
             pairId = receipt.RootElement.GetProperty("pairId").GetString(),
-            romSha256 = Hash(rom), imageSha256 = Hash(disk), fields,
-            machine = "PAL OCS 68000, 512 KiB Chip + 512 KiB slow, read-only DF0, Lightweight standard session",
+            romSha256 = Hash(rom), initialImageSha256 = initialHash, imageSha256 = Hash(disk), fields,
+            hardfile, writable, reopened, imagePath = disk,
+            machine = a1200 ? "PAL Alice/Lisa 68EC020, 2 MiB Chip, no slow/Fast RAM, Lightweight standard session"
+                : "PAL OCS 68000, 512 KiB Chip + 512 KiB slow, Lightweight standard session",
+            a1200, resetVerified = a1200 && !writable,
+            media = hardfile ? "8 MiB FFS DH0, no floppy" : "read-only DF0",
+            storageObservation = !hardfile ? "not exercised" : !writable ? "native write protection; image unchanged"
+                : reopened ? "settings and data read after full session disposal" : "settings/data, rename/delete, relative child and directory operations",
             observations = new[] { "native prompt", "Alias and internal command dispatch", "original native Demo and return", "command-error recovery" },
             binaries = new[] { typeof(CopperScreenSession).Assembly.Location, session.Machine.GetType().Assembly.Location,
                 typeof(M68kCoreFactory).Assembly.Location, typeof(CopperOsBootProofTests).Assembly.Location }
                 .Select(path => new { file = Path.GetFileName(path), sha256 = Hash(path) })
         }, new JsonSerializerOptions { WriteIndented = true }));
     }
-    private static string Hash(string file) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(file))).ToLowerInvariant();
+    private static string Hash(string file)
+    {
+        // A live HDF retains its writable backing handle until session disposal.
+        using var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+    }
     // Original native console's packed 8x8 glyphs, interpreted from its bitmap.
     private static readonly Dictionary<ulong, char> Glyphs = new()
     {
@@ -144,6 +258,15 @@ public sealed class CopperOsBootProofTests
         [0x3e02040810203e00UL]='Z',[0x00000000000c0c00UL]='.',[0x000c0c000c0c0000UL]=':',
         [0x0000003e00000000UL]='-',[0x0202040810202000UL]='/',[0x2010080408102000UL]='>'
     };
+}
+public sealed class CopperOsHdfProofFactAttribute : FactAttribute
+{
+    public CopperOsHdfProofFactAttribute(bool a1200 = false)
+    {
+        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_HDF_PROOF")) ||
+            string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(a1200 ? "COPPERSCREEN_COPPERSTART_A1200_ROM" : "COPPERSCREEN_COPPERSTART_ROM")))
+            Skip = "Original CopperOS HDF proof and qualified ROM not supplied; native coverage unavailable.";
+    }
 }
 public sealed class CopperOsProofFactAttribute : FactAttribute
 {

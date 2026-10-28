@@ -11,8 +11,7 @@ internal static class CopperScreenAvailability
         {
             if (draft.Engine != CopperScreenEngine.Lightweight)
                 return "Legacy engine is not available. Use Lightweight; CopperStart requires its standalone ROM.";
-            CopperScreenLightweightSession.Validate(draft.ToStartupOptions(baseDirectory), requireRomPath: false);
-            return null;
+            return CopperScreenLightweightSession.GetValidationError(draft.ToStartupOptions(baseDirectory), requireRomPath: false);
         }
         catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or FormatException or OverflowException or IOException or InvalidDataException or UnauthorizedAccessException or System.Text.Json.JsonException)
         {
@@ -64,7 +63,7 @@ internal static class CopperScreenAvailability
         "MinimalDiskBoot" => "Minimal disk boot (experimental)",
         "CopperStart" => "CopperStart standalone ROM (experimental)",
         "Kickstart31Rom" => "Kickstart 3.1 ROM (A500)",
-        "KickstartRom" => "Native Kickstart ROM (1.3, A500 3.1 or A1200 3.0)",
+        "KickstartRom" => "Native Kickstart ROM (1.3, A500+ 2.04, A500 3.1 or A1200 3.0)",
         "DiagRom" => "Diagnostic ROM",
         "KeyboardJoystick" => "Keyboard joystick",
         _ => value

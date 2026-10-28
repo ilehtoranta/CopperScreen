@@ -103,6 +103,54 @@ public sealed class CopperStartTests : IDisposable
         Assert.Contains("read-only DF0", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
     }
 
+    private CopperScreenSettingsDraft A1200HdfDraft()
+    {
+        var options = CopperScreenStartupOptions.Parse(["--copperstart", "--rom", "a1200.rom",
+            "--hdf-ffs-writable", "CopperOS.hdf", "DH0:2:32:0:255"], AppContext.BaseDirectory,
+            userDataDirectory: _directory);
+        Assert.Null(options.Error);
+        return CopperScreenMachinePresets.Apply(CopperScreenSettingsDraft.FromStartupOptions(options), CopperScreenMachineModel.Amiga1200);
+    }
+
+    [Fact]
+    public void A1200HdfProfilePreservesFirmwareAndMediaAcrossSaveAndReload()
+    {
+        var draft = A1200HdfDraft();
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        Assert.Equal(new[] { "AccurateM68EC020" }, CopperScreenMachinePresets.CpuChoices(draft));
+        Assert.Equal(new[] { 0 }, CopperScreenMachinePresets.FastRamChoices(draft));
+        var path = CopperScreenProfileStore.Save(draft, AppContext.BaseDirectory, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error, _directory), error);
+        var restored = CopperScreenSettingsDraft.FromProfile(loaded);
+        Assert.Equal(CopperScreenKickstartSource.CopperStart, restored.KickstartSource);
+        Assert.Equal(draft.KickstartRomPath, restored.KickstartRomPath);
+        Assert.Equal(draft.HardDrives, restored.HardDrives);
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(restored, _directory));
+        Assert.NotEqual(CopperScreenCopperStartRom.Recovery, CopperScreenCopperStartRom.RecoveryFor(true));
+        Assert.Contains(CopperScreenCopperStartRom.RecoveryFor(true),
+            Assert.Throws<FileNotFoundException>(() => CopperScreenCopperStartRom.Read(null, a1200: true)).Message);
+    }
+
+    [Theory]
+    [InlineData("cpu")]
+    [InlineData("slow")]
+    [InlineData("fast")]
+    [InlineData("floppy")]
+    [InlineData("no-hdf")]
+    public void A1200CopperStartRejectsUnqualifiedConfigurations(string change)
+    {
+        var draft = A1200HdfDraft();
+        switch (change)
+        {
+            case "cpu": draft.CpuBackend = M68kBackendKind.AccurateM68030; break;
+            case "slow": draft.PseudoFastRamKb = 512; break;
+            case "fast": draft.RealFastRamKb = 512; break;
+            case "floppy": draft.DriveDiskPaths[0] = "boot.adf"; break;
+            case "no-hdf": draft.HardDrives.Clear(); break;
+        }
+        Assert.Contains("CopperStart standalone ROM preset", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+    }
+
     private static void Run(CopperScreenLightweightSession session, int fields)
     {
         for (var i = 0; i < fields; i++) session.RenderNextFrame(session.Framebuffer);

@@ -1,5 +1,12 @@
 # Optional native replay
 
+The [Copper68k 1.5.4 release](engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md)
+repeats Detroit's first month with the exact public NuGet binary: both
+34,000-field modes complete and all 1,027 capture files match, also retaining
+the qualified candidate's gameplay milestone identities. Four explicitly enabled
+native CPU boot cases pass, including actual 68040 JIT execution. Optional skips
+and baseline desktop timeouts remain separately recorded.
+
 The [October 8 Detroit correction](engine/DETROIT_AGA_FIX_2026-10-08.md) adds
 generic postincrement EORI support in the shared CPU. With unpublished local
 `1.5.4-detroit-dev.2`, the stock PAL A1200 starts a Medium game and completes

@@ -1,13 +1,12 @@
 # Detroit AGA native startup probe
 
-## Current qualification candidate
+## Current stable package
 
-The current worktree pins unpublished `1.5.4-qualified-dev.1`. Its general
-logical handler already supports the Detroit EORI operand. The package and
-same-binary CPU/consumer validation are recorded in the
-[candidate qualification record](../../../docs/engine/COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
-With the frozen package in the qualification feed, set `$Rom`, `$Disk1` and
-`$Disk2` to the same media described below, then run:
+The current worktree pins published `1.5.4` from NuGet.org. Its general logical
+handler supports the Detroit EORI operand; no private feed is needed. Package
+identities and checks are in the
+[release record](../../../docs/engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md).
+Set `$Rom`, `$Disk1` and `$Disk2` to the same media described below, then run:
 
 ```powershell
 dotnet build CopperScreen.slnx -c Release
@@ -16,9 +15,9 @@ $gameArgs = @('--rom', $Rom, '--disk', $Disk1, '--disk1', $Disk2,
     '--chip-ram-kib', '2048', '--slow-ram-kib', '0', '--frames', '34000',
     '--boot-probe-interval', '200', '--boot-probe-extended',
     '--input-script', 'scripts/probes/Detroit/gameplay-input.json')
-dotnet CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll @gameArgs --boot-probe artifacts/qualified-detroit-normal > artifacts/qualified-detroit-normal.log 2>&1
-dotnet CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll @gameArgs --scalar-cpu --boot-probe artifacts/qualified-detroit-scalar > artifacts/qualified-detroit-scalar.log 2>&1
-python scripts/probes/Detroit/analyze_gameplay.py --normal artifacts/qualified-detroit-normal --scalar artifacts/qualified-detroit-scalar --normal-log artifacts/qualified-detroit-normal.log --scalar-log artifacts/qualified-detroit-scalar.log --cpu-version 1.5.4-qualified-dev.1 --output artifacts/qualified-detroit-summary.json
+dotnet CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll @gameArgs --boot-probe artifacts/stable-detroit-normal > artifacts/stable-detroit-normal.log 2>&1
+dotnet CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll @gameArgs --scalar-cpu --boot-probe artifacts/stable-detroit-scalar > artifacts/stable-detroit-scalar.log 2>&1
+python scripts/probes/Detroit/analyze_gameplay.py --normal artifacts/stable-detroit-normal --scalar artifacts/stable-detroit-scalar --normal-log artifacts/stable-detroit-normal.log --scalar-log artifacts/stable-detroit-scalar.log --cpu-version 1.5.4 --output artifacts/stable-detroit-summary.json
 ```
 
 Use fresh output directories. The input script and 34,000-field scope are

@@ -171,6 +171,23 @@ internal sealed class CopperScreenSettingsDraft
 			baseDirectory, engine: Engine);
 	}
 
+    public string RestartChangeSummary(CopperScreenSettingsDraft active)
+    {
+        var changes = new List<string>();
+        if (Engine != active.Engine) changes.Add("engine");
+        if (Chipset != active.Chipset) changes.Add("chipset");
+        if (CpuBackend != active.CpuBackend) changes.Add("CPU");
+        if (ChipRamKb != active.ChipRamKb || PseudoFastRamKb != active.PseudoFastRamKb || PseudoFastBase != active.PseudoFastBase || RealFastRamKb != active.RealFastRamKb || RealFastBase != active.RealFastBase) changes.Add("RAM");
+        if (RomVersion != active.RomVersion || KickstartSource != active.KickstartSource || KickstartRomPath != active.KickstartRomPath) changes.Add("ROM");
+        if (RtgVramMb != active.RtgVramMb) changes.Add("RTG");
+        if (RtcEnabled != active.RtcEnabled) changes.Add("RTC");
+        if (FloppyDriveCount != active.FloppyDriveCount || !FloppyDriveTypes.SequenceEqual(active.FloppyDriveTypes)) changes.Add("floppy hardware");
+        if (FloppyDriveAudio != active.FloppyDriveAudio) changes.Add("floppy sounds");
+        if (!HardDrives.SequenceEqual(active.HardDrives)) changes.Add("hard disks");
+        if (!HostDirectories.SequenceEqual(active.HostDirectories)) changes.Add("shared folders");
+        return string.Join(", ", changes);
+    }
+
 	public CopperScreenProfile ToProfile(string? configPath = null)
 	{
 		var realFastRamSize = checked(RealFastRamKb * Kilobyte);
@@ -316,7 +333,7 @@ internal static partial class CopperScreenProfileStore
 					Source = draft.KickstartSource.ToString(),
 					Version = draft.RomVersion switch
 					{
-						KickstartVersion.Kickstart20 => "2.0",
+						KickstartVersion.Kickstart20 => "2.04",
 						KickstartVersion.Kickstart30 => "3.0",
 						KickstartVersion.Kickstart31 => "3.1",
 						_ => "1.3"

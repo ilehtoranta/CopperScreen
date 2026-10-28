@@ -131,7 +131,10 @@ $record = [ordered]@{
     SourceInputs = @(& git -C $repository ls-files --cached --others --exclude-standard -- CopperScreen CopperDisk CopperMod.Amiga.Lightweight packaging/msix |
         Where-Object { $_ -match '\.(cs|csproj|json|ico|xml|manifest)$' -and (Test-Path -LiteralPath (Join-Path $repository $_) -PathType Leaf) } |
         ForEach-Object { @{ Path = $_; Sha256 = (Get-FileHash -LiteralPath (Join-Path $repository $_) -Algorithm SHA256).Hash } })
-    GuestAssets = $(if ($nativeGuestProof) { 'Hash-bound native CopperOS storage pair; diagnostic package only, no redistribution admission.' } else { 'None: native guest proof unavailable.' })
+    GuestAssets = 'Embedded qualified CopperStart A1200 ROM and CopperOS HDF; personal writable HDF created on first selection.'
+    BundledCopperStart = Get-Content (Join-Path $repository 'CopperScreen/Firmware/CopperStartA1200.json') -Raw | ConvertFrom-Json
+    BundledCopperOs = Get-Content (Join-Path $repository 'CopperScreen/Firmware/CopperOsA1200.json') -Raw | ConvertFrom-Json
+    DiagnosticA500GuestAssets = $nativeGuestProof
 }
 $record | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $output 'package-record.json') -Encoding utf8
 $compression = Compress-CopperScreenCompletedArtifacts -RepositoryRoot $repository -Path $output

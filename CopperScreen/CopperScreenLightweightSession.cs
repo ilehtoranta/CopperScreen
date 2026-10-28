@@ -37,7 +37,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0);
             rom = _minimalBoot.Rom;
         }
-        else if (_copperStart) rom = CopperScreenCopperStartRom.Read(options.KickstartRomPath);
+        else if (_copperStart) rom = CopperScreenCopperStartRom.Read(options.KickstartRomPath, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!,
             options.Profile.KickstartSource, options.Profile.KickstartVersion, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         BaseDirectory = options.BaseDirectory;
@@ -72,8 +72,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
                 }
                 else _workspace = CopperOsWorkspace.Open(options.DriveDiskPaths[0]!);
             }
-            _machine.LoadKickstart(rom);
-            if (_copperStart && !string.IsNullOrWhiteSpace(options.KickstartRomPath))
+            var integratedExtension = _copperStart && _machine.IsAga;
+            _machine.LoadKickstart(integratedExtension ? rom.AsSpan(524288) : rom);
+            if (integratedExtension)
+                _machine.LoadExtensionRom(rom.AsSpan(0, 524288));
+            else if (_copperStart && !string.IsNullOrWhiteSpace(options.KickstartRomPath))
             {
                 var romDirectory = Path.GetDirectoryName(Path.GetFullPath(options.KickstartRomPath))!;
                 foreach (var name in new[] { "CopperStart-SfsExtension.rom", "CopperStart-DesktopExtension.rom" })
@@ -122,14 +125,26 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     internal static void Validate(CopperScreenStartupOptions options, bool requireRomPath = true)
     {
         if (options.Error != null) throw new ArgumentException(options.Error);
+        if (GetValidationError(options, requireRomPath) is { } error) throw new NotSupportedException(error);
+    }
+
+    // Preset menus ask this for unsupported configurations during ordinary refreshes.
+    // Keep the same checks as launch validation without throwing for expected choices.
+    internal static string? GetValidationError(CopperScreenStartupOptions options, bool requireRomPath = true)
+    {
+        if (options.Error != null) return options.Error;
         var p = options.Profile;
         var cpu = options.CpuBackendOverride ?? p.CpuBackend;
         var minimal = p.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
         var copperStart = p.KickstartSource == CopperScreenKickstartSource.CopperStart;
-        if (copperStart && (p.Chipset != AmigaChipset.OcsPal || cpu != M68kBackendKind.AccurateM68000 ||
-            p.ChipRamSize != 524288 || p.ExpansionRamSize != 524288 || p.RealFastRamSize != 0 ||
+        var copperStartA1200 = p.Chipset == new AmigaChipset(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal) &&
+            cpu == M68kBackendKind.AccurateM68EC020 && p.ChipRamSize == 2097152 && p.ExpansionRamSize == 0 &&
+            options.HardDrives.Count == 1 && options.DriveDiskPaths.All(path => path == null);
+        var copperStartA500 = p.Chipset == AmigaChipset.OcsPal && cpu == M68kBackendKind.AccurateM68000 &&
+            p.ChipRamSize == 524288 && p.ExpansionRamSize == 524288;
+        if (copperStart && ((!copperStartA500 && !copperStartA1200) || p.RealFastRamSize != 0 ||
             p.FloppyDriveCount != 1 || (options.DriveWriteProtected[0] == false && !CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0])) || p.RtcEnabled || options.HardDrives.Count > 1 || options.HostDirectories.Count != 0))
-            throw new NotSupportedException("Use the A500 + CopperStart standalone ROM preset. " + CopperScreenCopperStartRom.Requirements + " Other configurations are not qualified.");
+            return "Use the A500 + CopperStart standalone ROM preset, or PAL A1200 with 68EC020, 2 MiB Chip RAM and one CopperOS HDF with empty floppy drives. " + CopperScreenCopperStartRom.Requirements + " Other configurations are not qualified.";
         if (copperStart && CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0]))
             CopperOsWorkspace.ValidateOwnership(options.DriveDiskPaths[0]!);
         if (copperStart && options.HardDrives.Count == 1)
@@ -138,45 +153,48 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (minimal && (p.Chipset != new AmigaChipset(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal) || p.ChipRamSize != 524288 ||
             (options.CpuBackendOverride ?? p.CpuBackend) != M68kBackendKind.AccurateM68000 ||
             p.RealFastRamSize != 0 || options.HardDrives.Count != 0 || options.HostDirectories.Count != 0))
-            throw new NotSupportedException("Minimal disk boot currently requires a PAL OCS Amiga 500, Motorola 68000, 512 KiB Chip RAM, optional 512 KiB slow RAM and no Fast RAM, hard drives or shared folders.");
+            return "Minimal disk boot currently requires a PAL OCS Amiga 500, Motorola 68000, 512 KiB Chip RAM, optional 512 KiB slow RAM and no Fast RAM, hard drives or shared folders.";
         var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
             aga && (cpu is not (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
-                p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))
-            throw new NotSupportedException("A1200 requires PAL Alice/Lisa, 68EC020 or a 68020/030/040 upgrade, 2 MiB Chip RAM, no slow RAM and native A1200 Kickstart 3.0 (39.106).");
+                (!copperStart && (p.KickstartSource != CopperScreenKickstartSource.KickstartRom || p.KickstartVersion != KickstartVersion.Kickstart30))))
+            return "A1200 requires PAL Alice/Lisa, 68EC020 or a 68020/030/040 upgrade, 2 MiB Chip RAM, no slow RAM and native A1200 Kickstart 3.0 (39.106).";
         if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise or DisplayChipModel.AgaLisa) || p.Chipset.VideoStandard != VideoStandard.Pal ||
             p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 ||
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
             p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart) ||
-            (!aga && !minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart31)) ||
+            (!aga && !minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart20 or KickstartVersion.Kickstart31)) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart13Rom && p.KickstartVersion != KickstartVersion.Kickstart13) ||
             (p.KickstartSource == CopperScreenKickstartSource.Kickstart31Rom && p.KickstartVersion != KickstartVersion.Kickstart31))
-            throw new NotSupportedException("Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3 or A500 3.1 / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.");
+            return "Lightweight supports PAL / OCS or ECS Denise, or the initial A1200 Alice/Lisa profile / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / native Kickstart 1.3, A500+ 2.04 or A500 3.1 / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.";
+        if (p.Chipset.DmaChip is not (DmaChipModel.OcsAgnus or DmaChipModel.Agnus8372A or DmaChipModel.Agnus8375Pal2M or DmaChipModel.AgaAlice))
+            return "Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.";
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
-        catch (ArgumentException ex) { throw new NotSupportedException(ex.Message, ex); }
+        catch (ArgumentException ex) { return ex.Message; }
         if (requireRomPath && minimal && string.IsNullOrWhiteSpace(options.DriveDiskPaths[0]))
-            throw new NotSupportedException("Choose a standard ADF startup disk in DF0 for minimal disk boot.");
+            return "Choose a standard ADF startup disk in DF0 for minimal disk boot.";
         if (requireRomPath && !minimal && string.IsNullOrWhiteSpace(options.KickstartRomPath))
-            throw new NotSupportedException(copperStart ? CopperScreenCopperStartRom.Recovery : "Choose the matching Kickstart 1.3, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.");
+            return copperStart ? CopperScreenCopperStartRom.RecoveryFor(aga) : "Choose the matching Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.";
         var maxFast = LightweightA500Configuration.MaximumFastRamBytes(GetCpuModel(cpu));
         if (!LightweightA500Configuration.IsSupportedFastRamSize(p.RealFastRamSize) || p.RealFastRamSize > maxFast)
-            throw new NotSupportedException($"Fast RAM must use a standard size up to {maxFast / 1048576} MiB for the selected CPU.");
-        if (p.RealFastRamSize > 8388608 && p.KickstartVersion == KickstartVersion.Kickstart13)
-            throw new NotSupportedException("More than 8 MiB Fast RAM requires a full 32-bit CPU and native Kickstart 3.x Zorro III Autoconfig. Choose A500 Kickstart 3.1.");
+            return $"Fast RAM must use a standard size up to {maxFast / 1048576} MiB for the selected CPU.";
+        if (p.RealFastRamSize > 8388608 && p.KickstartVersion is not (KickstartVersion.Kickstart30 or KickstartVersion.Kickstart31))
+            return "More than 8 MiB Fast RAM requires a full 32-bit CPU and native Kickstart 3.x Zorro III Autoconfig. Choose A500 Kickstart 3.1.";
         if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.GetDefaultFastRamBase(p.RealFastRamSize))
-            throw new NotSupportedException("Fast RAM uses guest Autoconfig; restore the default assignment hint for its size.");
+            return "Fast RAM uses guest Autoconfig; restore the default assignment hint for its size.";
         if (options.DriveDiskPaths.Skip(p.FloppyDriveCount).Any(path => path != null))
-            throw new NotSupportedException("Lightweight accepts media in connected floppy drives only.");
+            return "Lightweight accepts media in connected floppy drives only.";
         if (options.AgnusBusArbitration != AgnusBusArbitrationMode.Legacy ||
             options.CopperQuiescentFastPath || options.CopperQuiescentFastPathVerify || options.CopperQuiescentDiagnostics ||
             options.DeferredCpuBusBatchConfigured || options.DeferredCpuChipWriteJournalConfigured ||
             options.DeferredCpuChipReadSegmentsConfigured || options.DeferredCpuChipInstructionFetchBatchConfigured ||
             options.DeferredCpuChipInstructionFetchShadowConfigured || options.DeferredCpuCustomPointerWritesConfigured ||
             options.DeferredCpuCustomCompositionWritesConfigured || options.CpuWaitSlotReference || !options.HardwareSpecialization)
-            throw new NotSupportedException("Legacy execution overrides do not apply to Lightweight.");
-        ValidateInput(options.Input);
+            return "Legacy execution overrides do not apply to Lightweight.";
+        if (options.Input.IsMousePort(1)) return "Lightweight currently supports a mouse on port 1 only.";
+        return null;
     }
 
     private static LightweightAgnusModel GetAgnusModel(DmaChipModel model) => model switch
@@ -483,7 +501,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         ApplyInput();
         StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
             : _minimalBoot != null ? "Lightweight A500 — minimal disk boot (experimental; no DOS or Workbench)"
-            : _copperStart ? CopperScreenCopperStartRom.Description
+            : _copperStart ? CopperScreenCopperStartRom.DescriptionFor(_machine.IsAga)
             : _machine.IsAga ? "Lightweight experimental A1200 — native Kickstart 3.0, initial AGA display"
             : "Lightweight experimental A500 — native Kickstart, ADF / read-only IPF / CopperHDF";
     }

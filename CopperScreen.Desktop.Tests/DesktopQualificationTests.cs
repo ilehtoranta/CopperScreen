@@ -64,22 +64,31 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
         var window = Running();
         try
         {
-            window.Focus();
+            var presenter = window.GetLogicalDescendants().OfType<FramebufferPresenter>().Single();
+            Assert.True(presenter.Focus());
+            Assert.True(presenter.IsKeyboardFocusWithin);
             Press(window, Key.NumPad5, RawInputModifiers.None, PhysicalKey.NumPad5);
             await Until(() => Runtime(window).CurrentState.IsPrimaryFirePressed);
-            if (loseFocus) ((Action?)typeof(IWindowBaseImpl).GetProperty("Deactivated")!.GetValue(window.PlatformImpl))?.Invoke();
+            if (loseFocus)
+            {
+                var deactivate = Assert.IsType<Action>(typeof(IWindowBaseImpl).GetProperty("Deactivated")!.GetValue(window.PlatformImpl));
+                deactivate();
+            }
             else
             {
                 var more = Named<Button>(window, "More");
-                more.Flyout!.ShowAt(more);
                 var content = Assert.IsAssignableFrom<Control>(Assert.IsType<Flyout>(more.Flyout).Content);
+                // Invoke the command while input is still held. Opening the flyout can
+                // move focus off the display and release it before the command runs.
+                Assert.True(presenter.IsKeyboardFocusWithin);
+                Assert.True(Runtime(window).CurrentState.IsPrimaryFirePressed);
                 Click(content.GetLogicalDescendants().OfType<Button>().Single(b => AutomationProperties.GetName(b) == "Release input"));
-                more.Flyout.Hide();
             }
             await Until(() => !Runtime(window).CurrentState.IsPrimaryFirePressed);
             Assert.Null(Runtime(window).CurrentState.FaultMessage);
             // A new key-down must work after release, even though the first key-up was lost.
-            window.Focus();
+            Assert.True(presenter.Focus());
+            Assert.True(presenter.IsKeyboardFocusWithin);
             Press(window, Key.NumPad5, RawInputModifiers.None, PhysicalKey.NumPad5);
             await Until(() => Runtime(window).CurrentState.IsPrimaryFirePressed);
             Release(window, Key.NumPad5, RawInputModifiers.None, PhysicalKey.NumPad5);
@@ -119,7 +128,7 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            var boot = Named<ComboBox>(window, "Boot method");
+            var boot = Named<ComboBox>(window, "Start configuration");
             boot.Focus();
             Press(window, Key.Down); Release(window, Key.Down);
             Assert.Equal(1, boot.SelectedIndex);
@@ -148,7 +157,8 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
         {
             window.SetRenderScaling(scale);
             window.SizeToContent = SizeToContent.Manual; window.Width = width; window.Height = height;
-            Named<ComboBox>(window, "Boot method").SelectedIndex = 3;
+            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            window.GetLogicalDescendants().OfType<Expander>().Single(e => e.Header is "Saved launch profiles").IsExpanded = true;
             await Task.Delay(50); // Platform resize/scaling notifications arrive after the property setters.
             window.UpdateLayout();
             var scroll = window.GetLogicalDescendants().OfType<ScrollViewer>().Single(s => s.Name == "LauncherScroll");

@@ -42,6 +42,9 @@ internal static partial class CopperScreenProfileStore
 
         void AddDirectory(string directory, bool bundled)
         {
+            // A fresh installation has no personal Profiles directory yet.
+            // Preserve errors for paths blocked by a file, as in the catch below.
+            if (!Directory.Exists(directory) && !File.Exists(directory) && !File.Exists(Path.GetDirectoryName(directory))) return;
             try
             {
                 foreach (var path in Directory.GetFiles(directory, "*.json").Order(StringComparer.OrdinalIgnoreCase))

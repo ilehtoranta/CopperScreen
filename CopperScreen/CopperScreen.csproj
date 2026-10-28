@@ -22,7 +22,8 @@
          Compile app methods optimized immediately instead of running slow Tier 0
          until promotion; framework ReadyToRun code can still use tiering. -->
     <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
-    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.4-qualified-dev.1</Copper68kBoundaryVersion>
+    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.4</Copper68kBoundaryVersion>
+    <CopperOsBundleDirectory Condition="'$(CopperOsBundleDirectory)' == ''">$(MSBuildProjectDirectory)/../artifacts/copperos-bundle</CopperOsBundleDirectory>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(CopperScreenInstalledTests)' == 'true'">
@@ -41,8 +42,8 @@
     <PackageReference Include="Avalonia" Version="12.0.3" />
     <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3" />
-    <PackageReference Include="CopperPad" Version="2.0.0-preview.1" />
-    <PackageReference Include="CopperPad.HidSharp" Version="2.0.0-preview.1" />
+    <PackageReference Include="CopperPad" Version="2.0.0-preview.2" />
+    <PackageReference Include="CopperPad.HidSharp" Version="2.0.0-preview.2" />
     <PackageReference Include="HotPathGuard.Abstractions" Version="0.1.0" />
     <PackageReference Include="HotPathGuard.Analyzers" Version="0.1.0" PrivateAssets="all" />
     <PackageReference Include="Miniaudio-CS" Version="1.0.4" />
@@ -56,12 +57,30 @@
 
   <ItemGroup>
     <None Include="Presets\*.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Firmware/CopperStart-LICENSE.txt" Link="CopperStart-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="Firmware\MinimalDiskBoot.s" />
+    <EmbeddedResource Include="Firmware\CopperStartA1200.json" LogicalName="CopperScreen.Firmware.CopperStartA1200.json" />
     <EmbeddedResource Include="Firmware\CopperStart.json" />
     <EmbeddedResource Include="Firmware\CopperOS.json" />
+    <EmbeddedResource Include="Firmware\CopperOsA1200.json" LogicalName="CopperScreen.Firmware.CopperOsA1200.json" />
+    <EmbeddedResource Include="$(CopperOsBundleDirectory)/CopperStart-A1200.rom" LogicalName="CopperScreen.Bundled.CopperStart-A1200.rom" />
+    <EmbeddedResource Include="$(CopperOsBundleDirectory)/CopperOS.hdf" LogicalName="CopperScreen.Bundled.CopperOS.hdf" />
     <Compile Remove="Diagnostics\CopperOsNativeStorageProof.cs" Condition="'$(CopperScreenInstalledTests)' != 'true'" />
     <AvaloniaResource Include="Assets\CopperScreen.ico" />
   </ItemGroup>
+
+  <Target Name="RequireCopperOsBundle" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(CopperOsBundleDirectory)/CopperStart-A1200.rom') Or !Exists('$(CopperOsBundleDirectory)/CopperOS.hdf')"
+           Text="Stage the qualified CopperOS bundle using scripts/prepare-copperos-bundle.ps1 -CopperStartA1200Rom &lt;rom&gt; -CopperOsHdf &lt;hdf&gt;, or set CopperOsBundleDirectory to the staged directory." />
+    <ItemGroup>
+      <_CopperOsBundleInput Include="$(CopperOsBundleDirectory)/CopperStart-A1200.rom" ExpectedHash="8DED0B1EC8C1A3B6F03CDD7FFC645369AE9D464EC735588A4C147AF3248FE1B2" />
+      <_CopperOsBundleInput Include="$(CopperOsBundleDirectory)/CopperOS.hdf" ExpectedHash="DC597FA79C5479D43E98ABDEDFCB885056F9C22AFFA161126FF1B27C39C3CFA7" />
+    </ItemGroup>
+    <GetFileHash Files="@(_CopperOsBundleInput)" Algorithm="SHA256">
+      <Output TaskParameter="Items" ItemName="_CopperOsBundleHash" />
+    </GetFileHash>
+    <Error Condition="'%(_CopperOsBundleHash.FileHash)' != '%(_CopperOsBundleHash.ExpectedHash)'" Text="Unqualified CopperOS bundle input: %(_CopperOsBundleHash.Identity). Run scripts/prepare-copperos-bundle.ps1 with the qualified files." />
+  </Target>
 
   <ItemGroup>
     <Compile Remove="artifacts\**\*.cs" />

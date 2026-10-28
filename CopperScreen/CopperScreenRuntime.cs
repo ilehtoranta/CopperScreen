@@ -137,6 +137,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 	private readonly CopperScreenDriveState[] _floppyDriveAudioStates = new CopperScreenDriveState[4];
 	private readonly ConcurrentQueue<CopperScreenCommand> _commands = new ConcurrentQueue<CopperScreenCommand>();
 	private readonly AutoResetEvent _wake = new AutoResetEvent(false);
+	private readonly object _commandSync = new();
 	private readonly object _presentationSync = new object();
 	private readonly int[][] _frameBuffers;
 	private readonly CopperScreenDriveState[][] _frameDriveStates;
@@ -360,7 +361,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 			? MaxQueuedPresentationFrames
 			: TargetQueuedPresentationFrames;
 
-	public void Start()
+	public void Start(bool? paused = null)
 	{
 		ObjectDisposedException.ThrowIf(_disposed, this);
 		if (_running)
@@ -368,6 +369,14 @@ internal sealed class CopperScreenRuntime : IDisposable
 			return;
 		}
 
+		// Set the initial pause state before transferring the session to its
+		// worker, so a paused replacement cannot execute even one guest frame.
+		if (paused.HasValue)
+		{
+			if (_emulator.IsPaused != paused.Value) _emulator.TogglePaused();
+			_audio?.SetPaused(_emulator.IsPaused);
+			PublishCurrentFrame(framesRendered: 0, queuedAudioBuffers: _audio?.QueuedBufferCount ?? 0);
+		}
 		_running = true;
 		_thread = new Thread(Run)
 		{
@@ -379,8 +388,12 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	public void Stop()
 	{
-		_running = false;
-		_wake.Set();
+		lock (_commandSync)
+		{
+			if (_disposed) return;
+			_running = false;
+			_wake.Set();
+		}
 		var thread = _thread;
 		if (thread != null && thread.IsAlive && thread != Thread.CurrentThread)
 		{
@@ -407,7 +420,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 				_frameBuffers[entry.BufferIndex].AsSpan().CopyTo(destination);
 				state = WithCurrentPresentationDiagnostics(entry.State);
 				lastSeenFrameNumber = entry.FrameNumber;
-				_wake.Set();
+				WakeForPresentation();
 				return true;
 			}
 
@@ -440,7 +453,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 				_frameBufferLeaseCounts[entry.BufferIndex]++;
 				lastSeenFrameNumber = entry.FrameNumber;
-				_wake.Set();
+				WakeForPresentation();
 				return new CopperScreenFrameLease(
 					this,
 					entry.BufferIndex,
@@ -523,10 +536,15 @@ internal sealed class CopperScreenRuntime : IDisposable
 			return new CopperScreenCommandResult(true, paused ? "Paused" : "Running", CaptureState(framesRendered: 0, queuedAudioBuffers: _audio?.QueuedBufferCount ?? 0));
 		});
 
-	public Task<CopperScreenCommandResult> ResetAsync()
+	public Task<CopperScreenCommandResult> ResetAsync(bool? paused = null)
 		=> EnqueueAsync(emulator =>
 		{
 			emulator.Reset();
+			if (paused.HasValue)
+			{
+				if (emulator.IsPaused != paused.Value) emulator.TogglePaused();
+				_audio?.SetPaused(emulator.IsPaused);
+			}
 			if (emulator is CopperScreenLightweightSession) _audio?.DiscardQueuedSamples();
 			return new CopperScreenCommandResult(true, "Reset", CaptureState(framesRendered: 0, queuedAudioBuffers: _audio?.QueuedBufferCount ?? 0));
 		});
@@ -713,14 +731,17 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	public void Dispose()
 	{
-		if (_disposed)
+		lock (_commandSync)
 		{
-			return;
+			if (_disposed) return;
+			if (_thread == Thread.CurrentThread) throw new InvalidOperationException("Dispose the runtime after leaving its execution thread.");
+			_disposed = true;
+			_running = false;
+			_wake.Set();
 		}
-
-		if (_thread == Thread.CurrentThread) throw new InvalidOperationException("Dispose the runtime after leaving its execution thread.");
-		_disposed = true;
-		Stop();
+		_thread?.Join();
+		while (_commands.TryDequeue(out var command))
+			command.Completion?.TrySetResult(StoppedCommandResult());
 		try { _emulator.Dispose(); }
 		finally
 		{
@@ -739,23 +760,44 @@ internal sealed class CopperScreenRuntime : IDisposable
 
 	private void Post(Action<ICopperScreenSession> action, bool publishAfterExecute = false)
 	{
-		_commands.Enqueue(new CopperScreenCommand(action, null, publishAfterExecute));
-		_wake.Set();
+		lock (_commandSync)
+		{
+			if (_disposed) return;
+			_commands.Enqueue(new CopperScreenCommand(action, null, publishAfterExecute));
+			_wake.Set();
+		}
+	}
+
+	private CopperScreenCommandResult StoppedCommandResult() => new(false, "The Amiga has stopped.", CurrentState);
+
+	private void WakeForPresentation()
+	{
+		lock (_commandSync)
+		{
+			if (!_disposed) _wake.Set();
+		}
 	}
 
 	private Task<CopperScreenCommandResult> EnqueueAsync(Func<ICopperScreenSession, CopperScreenCommandResult> action)
 	{
-		var completion = new TaskCompletionSource<CopperScreenCommandResult>(TaskCreationOptions.RunContinuationsAsynchronously);
-		_commands.Enqueue(new CopperScreenCommand(
-			emulator =>
+		lock (_commandSync)
+		{
+			if (!_disposed)
 			{
-				var result = action(emulator);
-				completion.TrySetResult(result);
-			},
-			completion,
-			publishAfterExecute: true));
-		_wake.Set();
-		return completion.Task;
+				var completion = new TaskCompletionSource<CopperScreenCommandResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+				_commands.Enqueue(new CopperScreenCommand(
+					emulator =>
+					{
+						var result = action(emulator);
+						completion.TrySetResult(result);
+					},
+					completion,
+					publishAfterExecute: true));
+				_wake.Set();
+				return completion.Task;
+			}
+		}
+		return Task.FromResult(StoppedCommandResult());
 	}
 
 	private void Run()
@@ -1236,7 +1278,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 			_frameBufferLeaseCounts[bufferIndex]--;
 		}
 
-		_wake.Set();
+		WakeForPresentation();
 	}
 
 	private CopperScreenState CaptureState(int framesRendered, int queuedAudioBuffers)

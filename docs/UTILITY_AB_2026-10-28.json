@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "protocol": "amiga-utilities-a500-exploratory-v2",
+  "collection": "amiga-utilities-v1",
+  "configuration": "PAL 68000 interpreter, conservative-batch, OCS 8371/8362, 512 KiB Chip + 512 KiB slow, no Fast/RTC/host directories, one protected DD DF0",
+  "status": "EXPLORATORY_DEVELOPMENT_ROM_COMPARISON_COMPLETED",
+  "consumerGitHead": "c82d37a3561550d11751966e750f4e60756e3b93",
+  "consumerWorkingTreeDirty": true,
+  "binaries": [
+    {
+      "sha256": "1ce5cbc0c0df39ce3f9d50183115f4f226d0e7262cec45ddcbd46aea8097c9b4",
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll"
+    },
+    {
+      "sha256": "993928d18c8ca0c12d16f3ac45ee0eac7fa89f999b053ab1ee0e66157688961b",
+      "file": "CopperMod.Amiga.Lightweight.dll"
+    },
+    {
+      "sha256": "ff3a73b2dd2a62329be1fcdad1eab8ca3a62d95f73bcfc03a4b87bd25955837a",
+      "file": "Copper68k.dll"
+    },
+    {
+      "sha256": "c5a3deb60dd087aa3d33a3d398310d53306d9965a46e4e9ba068b20b06887a93",
+      "file": "CopperDisk.dll"
+    }
+  ],
+  "consumerReleaseBuild": "PASSED: zero warnings/errors",
+  "copperStartRom": {
+    "romBytes": 524288,
+    "sha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
+    "checksum": "0xffffffff",
+    "buildManifest": "artifacts\\utility-ab\\2026-10-28\\copperstart-rebuild\\disk-boot-manifest.json",
+    "status": "DEVELOPMENT_REBUILD; APP_FIRMWARE_PIN_UNCHANGED",
+    "rootBytes": 487450,
+    "graphicsBytes": 26123,
+    "graphicsPlacementHeadroomBytes": 10686,
+    "compatibilityValidator": "PASSED",
+    "publishedOrAdoptedByApp": false
+  },
+  "nativeRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "execution": {
+    "completedRuns": 8,
+    "fieldsPerRun": 7200,
+    "unsupportedStops": 0,
+    "allMediaUnchanged": true
+  },
+  "outcomes": [
+    {
+      "utility": "protracker-23f",
+      "native": "EDITOR_NOTE_ENTRY_SEQUENCER_PLAY_STOP_OBSERVED",
+      "copperstart": "STARTUP_GAP_NO_EDITOR; INPUT_FREE_16000_FIELD_CONTROL_ALSO_FAILS",
+      "startupDiagnosis": "MISSING_INTUITION_LIBRARY; NULL_BASE_OPENSCREEN_CALL_AT_FIELD_7368",
+      "analysisDocument": "docs/PROTRACKER_STARTUP_2026-10-28.md",
+      "followUpFixDocument": "docs/PROTRACKER_FIX_2026-10-28.md",
+      "followUpFixStatus": "SEPARATE_DEVELOPMENT_ROM_EDITOR_NOTES_PLAY_STOP_POINTER_SCENARIO_FIXED",
+      "staticFollowOnRequirement": "Optional native Intuition OpenScreen rejects ProTracker's 12-pixel screen; provider-loaded replay not performed.",
+      "limits": "No sample/module playback or save/readback qualification.",
+      "diskSha256": "38898d61f5b96971be4946761ac3101181d01e40c33512453d39eb76dca60a3a",
+      "inputScript": "utilities-protracker-editor-v1.json",
+      "inputScriptSha256": "254b1fb9dcf7f9c1abf0e86f6ae9ead30a4ef77499d0a18ad10a073313c774b2",
+      "allRunsCompleted": true,
+      "allMediaUnchanged": true,
+      "lastPc": {
+        "native": "00FC0F94",
+        "development-copperstart": "00F8708E"
+      }
+    },
+    {
+      "utility": "xcopy-521",
+      "native": "BOOT_MENU_AND_F1_DOSCOPY_LAUNCH_OBSERVED",
+      "copperstart": "STARTUP_GAP_WHITE_SCREEN_BEFORE_F1_NO_MENU",
+      "limits": "No disk read/check sweep, copying, formatting or Cyclone hardware test.",
+      "diskSha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde",
+      "inputScript": "utilities-xcopy-launch-v1.json",
+      "inputScriptSha256": "87286b93715b7abc88fda11c6db1e73daee533cd3702bf902025fc5f3e368487",
+      "allRunsCompleted": true,
+      "allMediaUnchanged": true,
+      "lastPc": {
+        "native": "00C0C516",
+        "development-copperstart": "0000A88A"
+      }
+    },
+    {
+      "utility": "amiga-test-kit",
+      "native": "SELECTED_MENU_AUDIO_MUTE_RESTORE_OBSERVED",
+      "copperstart": "SELECTED_MENU_AUDIO_MUTE_RESTORE_OBSERVED",
+      "limits": "Static labels disappear in both ROM runs; no full test suite or physical reference.",
+      "diskSha256": "abe7426c93619a7bb61ce10e3e66a4747fcaf22acd1d1876310033faa700ad28",
+      "inputScript": "utilities-testkit-audio-v2.json",
+      "inputScriptSha256": "88687422b8e118f8709e67620bc283c6e6ece85672d78417930fbc9b3469d243",
+      "allRunsCompleted": true,
+      "allMediaUnchanged": true,
+      "lastPc": {
+        "native": "000011B8",
+        "development-copperstart": "000011B8"
+      }
+    },
+    {
+      "utility": "sysinfo-44",
+      "native": "INITIAL_SCREEN_OBSERVED; MOUSE_CLICK_ENDS_BLACK_UNRESOLVED",
+      "copperstart": "STARTUP_GAP_NO_SYSINFO_SCREEN_BY_7200",
+      "limits": "Successful Speed selection/benchmark/quit not established.",
+      "diskSha256": "77e64513b230b2dceb8012fc747ac6b0fba2c0297b662dfac30ee1e11599830c",
+      "inputScript": "utilities-sysinfo-speed-v2.json",
+      "inputScriptSha256": "539de45599b6cf5b6f5133e42dc5882c9337319af243ff3e44cd7d0608a95a78",
+      "allRunsCompleted": true,
+      "allMediaUnchanged": true,
+      "lastPc": {
+        "native": "00FC0F94",
+        "development-copperstart": "00C041F2"
+      }
+    }
+  ],
+  "testkitSelectedImages": [
+    {
+      "frame": 3000,
+      "testkitFramebuffersByteIdentical": true
+    },
+    {
+      "frame": 3100,
+      "testkitFramebuffersByteIdentical": true
+    },
+    {
+      "frame": 3800,
+      "testkitFramebuffersByteIdentical": true
+    },
+    {
+      "frame": 4000,
+      "testkitFramebuffersByteIdentical": true
+    },
+    {
+      "frame": 4200,
+      "testkitFramebuffersByteIdentical": true
+    },
+    {
+      "frame": 7200,
+      "testkitFramebuffersByteIdentical": true
+    }
+  ],
+  "nativeReproduction": [
+    {
+      "utility": "protracker-23f",
+      "priorNativeCapturesByteIdentical": true,
+      "filesCompared": 365
+    },
+    {
+      "utility": "xcopy-521",
+      "priorNativeCapturesByteIdentical": true,
+      "filesCompared": 365
+    },
+    {
+      "utility": "amiga-test-kit",
+      "priorNativeCapturesByteIdentical": true,
+      "filesCompared": 365
+    },
+    {
+      "utility": "sysinfo-44",
+      "priorNativeCapturesByteIdentical": true,
+      "filesCompared": 365
+    }
+  ],
+  "testkitAudio": [
+    {
+      "rom": "native",
+      "samples": [
+        {
+          "frame": 3000,
+          "leftRms": 0.0,
+          "rightRms": 0.0,
+          "nonzeroSamples": 0
+        },
+        {
+          "frame": 3100,
+          "leftRms": 9420.723337950103,
+          "rightRms": 2807.1205561673764,
+          "nonzeroSamples": 1921
+        },
+        {
+          "frame": 3800,
+          "leftRms": 3708.1097227854807,
+          "rightRms": 0.0,
+          "nonzeroSamples": 962
+        },
+        {
+          "frame": 4000,
+          "leftRms": 0.0,
+          "rightRms": 0.0,
+          "nonzeroSamples": 0
+        },
+        {
+          "frame": 4200,
+          "leftRms": 2155.273661300011,
+          "rightRms": 2357.439335680501,
+          "nonzeroSamples": 1870
+        },
+        {
+          "frame": 7200,
+          "leftRms": 11508.33725560619,
+          "rightRms": 3389.491034655863,
+          "nonzeroSamples": 1924
+        }
+      ]
+    },
+    {
+      "rom": "development-copperstart",
+      "samples": [
+        {
+          "frame": 3000,
+          "leftRms": 0.0,
+          "rightRms": 0.0,
+          "nonzeroSamples": 0
+        },
+        {
+          "frame": 3100,
+          "leftRms": 9421.229104293554,
+          "rightRms": 2805.671288995534,
+          "nonzeroSamples": 1922
+        },
+        {
+          "frame": 3800,
+          "leftRms": 3709.670533168271,
+          "rightRms": 0.0,
+          "nonzeroSamples": 962
+        },
+        {
+          "frame": 4000,
+          "leftRms": 0.0,
+          "rightRms": 0.0,
+          "nonzeroSamples": 0
+        },
+        {
+          "frame": 4200,
+          "leftRms": 2155.5401544829447,
+          "rightRms": 2357.739242087605,
+          "nonzeroSamples": 1870
+        },
+        {
+          "frame": 7200,
+          "leftRms": 11509.024406119977,
+          "rightRms": 3389.1393637351543,
+          "nonzeroSamples": 1924
+        }
+      ]
+    }
+  ],
+  "evidenceRoot": "artifacts/utility-ab/2026-10-28",
+  "scope": "Exploratory runner diagnostics. Not app UI, hardware conformance, full utility qualification or host performance acceptance.",
+  "otherEightUtilities": "NOT RUN",
+  "firmwarePinChanged": false
+}

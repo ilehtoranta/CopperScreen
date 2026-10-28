@@ -147,8 +147,8 @@
       },
       "Copper68k": {
         "type": "Transitive",
-        "resolved": "1.5.4-qualified-dev.1",
-        "contentHash": "cX1a1YCickQb/ShABelA9l3j27V7L+g4MdVvTVTaquQJlIuLRR2/FZz6NXi0nprKvLsf85aNksoe1e3jfBQDZg==",
+        "resolved": "1.5.4",
+        "contentHash": "k23LflcKNLuTVGK4mJxHhPPcx15ThxwFKWnWhItUK9obPpYKo9jAOqYBc/8SCxiueVkJFUVUcVWlgINbeTaaxg==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
@@ -160,15 +160,15 @@
       },
       "CopperPad": {
         "type": "Transitive",
-        "resolved": "2.0.0-preview.1",
-        "contentHash": "mu0TOvbIb0kKEj44g0he+KM5/uPuIH7an9HmUVp5nOSyLxqA7GHiO8NwIojNc6pNNRDQtVNhL3RK/DcXG3a0ww=="
+        "resolved": "2.0.0-preview.2",
+        "contentHash": "6HW5xMEQxFS7fVRfQk/Q6ccoZPZ6RFfH0W41qCqCe2/sRjwL+WSdrUiGA+198djzl99MzuH7j5Kz8Rk2ssIPKA=="
       },
       "CopperPad.HidSharp": {
         "type": "Transitive",
-        "resolved": "2.0.0-preview.1",
-        "contentHash": "Y17B7pSMmG1rVIQUaZlCcL6bSz8w5yW4VpwxKSPAFs7SeoPMct73Ma7qSoG5YH+FA28Debr+uWQeHbkilhj2Cw==",
+        "resolved": "2.0.0-preview.2",
+        "contentHash": "LbSlwBvpI4w0AzC6nTCjnSXNwbN+CNT6IwjtoHvDk+YUf2fO20TghCzJzsB1rtSKu3jWcvtXAcVB0twaHcTAgQ==",
         "dependencies": {
-          "CopperPad": "2.0.0-preview.1",
+          "CopperPad": "2.0.0-preview.2",
           "HidSharp": "2.6.4"
         }
       },
@@ -325,7 +325,7 @@
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.4-qualified-dev.1, 1.5.4-qualified-dev.1]",
+          "Copper68k": "[1.5.4, 1.5.4]",
           "CopperDisk": "[3.0.0, )"
         }
       },
@@ -335,11 +335,11 @@
           "Avalonia": "[12.0.3, )",
           "Avalonia.Desktop": "[12.0.3, )",
           "Avalonia.Themes.Fluent": "[12.0.3, )",
-          "Copper68k": "[1.5.4-qualified-dev.1, 1.5.4-qualified-dev.1]",
+          "Copper68k": "[1.5.4, 1.5.4]",
           "CopperDisk": "[3.0.0, )",
           "CopperMod.Amiga.Lightweight": "[0.1.0-preview.2, )",
-          "CopperPad": "[2.0.0-preview.1, )",
-          "CopperPad.HidSharp": "[2.0.0-preview.1, )",
+          "CopperPad": "[2.0.0-preview.2, )",
+          "CopperPad.HidSharp": "[2.0.0-preview.2, )",
           "HotPathGuard.Abstractions": "[0.1.0, )",
           "Miniaudio-CS": "[1.0.4, )"
         }

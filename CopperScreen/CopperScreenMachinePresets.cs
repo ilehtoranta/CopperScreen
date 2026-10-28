@@ -8,8 +8,8 @@ internal static class CopperScreenMachinePresets
     public static string Label(CopperScreenMachineModel model) => model switch
     {
         CopperScreenMachineModel.Amiga500 => "Amiga 500",
-        CopperScreenMachineModel.Amiga500Ecs => "Amiga 500 with ECS",
-        CopperScreenMachineModel.Amiga1200 => "Amiga 1200 (experimental)",
+        CopperScreenMachineModel.Amiga500Ecs => "Amiga 500+",
+        CopperScreenMachineModel.Amiga1200 => "Amiga 1200",
         _ => throw new ArgumentOutOfRangeException(nameof(model))
     };
 
@@ -40,11 +40,12 @@ internal static class CopperScreenMachinePresets
         draft.RtcEnabled = model == CopperScreenMachineModel.Amiga500Ecs;
         draft.CpuBackend = model == CopperScreenMachineModel.Amiga1200 ? M68kBackendKind.AccurateM68EC020 : M68kBackendKind.AccurateM68000;
         draft.RomVersion = model == CopperScreenMachineModel.Amiga1200 ? KickstartVersion.Kickstart30
-            : current.RomVersion == KickstartVersion.Kickstart31 ? KickstartVersion.Kickstart31 : KickstartVersion.Kickstart13;
+            : current.RomVersion is KickstartVersion.Kickstart20 or KickstartVersion.Kickstart31 ? current.RomVersion : KickstartVersion.Kickstart13;
         draft.KickstartSource = current.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenKickstartSource.CopperStart
             : model == CopperScreenMachineModel.Amiga1200 ? CopperScreenKickstartSource.KickstartRom
             : model == CopperScreenMachineModel.Amiga500 && current.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot && draft.HardDrives.Count == 0 && draft.HostDirectories.Count == 0
                 ? CopperScreenKickstartSource.MinimalDiskBoot
+                : draft.RomVersion == KickstartVersion.Kickstart20 ? CopperScreenKickstartSource.KickstartRom
                 : draft.RomVersion == KickstartVersion.Kickstart31 ? CopperScreenKickstartSource.Kickstart31Rom : CopperScreenKickstartSource.Kickstart13Rom;
         draft.MarkRequiresRestart();
         return draft;
@@ -57,7 +58,7 @@ internal static class CopperScreenMachinePresets
         => draft.KickstartSource is not (CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart);
 
     public static string[] CpuChoices(CopperScreenSettingsDraft draft)
-        => draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? ["AccurateM68000"]
+        => draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? Identify(draft) == CopperScreenMachineModel.Amiga1200 ? ["AccurateM68EC020"] : ["AccurateM68000"]
             : Identify(draft) == CopperScreenMachineModel.Amiga1200
             ? ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"]
             : ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"];

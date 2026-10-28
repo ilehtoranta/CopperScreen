@@ -35,7 +35,7 @@ public sealed partial class LaunchWorkflowTests
         .OfType<Button>().Single(c => c.Content is string value && value == label);
 
     [Fact]
-    public Task OfflineFirstRunExplainsContentAndCopperOsCannotStartWithoutAWorkspace() => Ui(() =>
+    public Task OfflineFirstRunOffersFourMachinesAndCopperOsNeedsNoFiles() => Ui(() =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root));
         window.Show();
@@ -44,13 +44,13 @@ public sealed partial class LaunchWorkflowTests
             Assert.Contains(window.GetLogicalDescendants().OfType<TextBlock>(), t => t.Text == CopperScreenLaunchWorkflow.ContentGuidance);
             Assert.False(Button(window, "Start Amiga").IsEnabled);
             Capture(window, "first-run");
-            Named<ComboBox>(window, "Boot method").SelectedIndex = 3;
-            Assert.True(Button(window, "Create workspace…").IsVisible);
-            Assert.False(Button(window, "Start CopperOS").IsEnabled);
+            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            Assert.True(Button(window, "Start CopperOS").IsEnabled);
+            Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
+            Assert.False(Button(window, "Choose disk…").IsEffectivelyVisible);
+            Assert.Contains("included", Named<TextBlock>(window, "ROM requirements").Text);
             Capture(window, "copperos-setup");
-            Click(Button(window, "Create workspace…"));
-            Assert.Contains("CopperStart ROM is missing", Named<TextBlock>(window, "Startup guidance").Text);
-            Assert.False(Directory.Exists(Path.Combine(_root, "CopperOS")));
+            Assert.True(File.Exists(Assert.Single(MenuDraft(window).HardDrives).Path));
         }
         finally { window.Close(); }
     });
@@ -64,8 +64,8 @@ public sealed partial class LaunchWorkflowTests
         window.Show();
         try
         {
-            Named<ComboBox>(window, "Boot method").SelectedIndex = 2;
-            Assert.False(Button(window, "Start CopperStart").IsEnabled);
+            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Button(window, "Configure Amiga…").RaiseEvent(new RoutedEventArgs(Avalonia.Controls.Button.ClickEvent));
             // Configuration opens normally after selecting the bounded preview.
             Assert.Equal(2048, original.ChipRamKb);
@@ -148,8 +148,8 @@ public sealed partial class LaunchWorkflowTests
         {
             Assert.False(Button(window, "Start Amiga").IsEnabled);
             Assert.False(string.IsNullOrWhiteSpace(Named<TextBlock>(window, "Startup guidance").Text));
-            Named<ComboBox>(window, "Boot method").SelectedIndex = 2;
-            Assert.False(Button(window, "Start CopperStart").IsEnabled);
+            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Assert.Equal("broken archive", File.ReadAllText(zip));
         }
         finally { window.Close(); }
@@ -191,7 +191,7 @@ public sealed partial class LaunchWorkflowTests
         window.Show();
         try
         {
-            Assert.Equal(3, Named<ComboBox>(window, "Boot method").SelectedIndex);
+            Assert.Equal(-1, Named<ComboBox>(window, "Start configuration").SelectedIndex);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Capture(window, "copperos-ready");
             Click(Button(window, "Start CopperOS"));

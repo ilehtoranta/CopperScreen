@@ -27,6 +27,19 @@ namespace CopperDisk
         void ObserveCommand(ushort command) { }
     }
 
+    /// <summary>Optional explicit discard provider, also usable by deterministic
+    /// fault backends. Ordinary hardfiles do not advertise discard without one.
+    /// Discard may destroy a prefix before failing and must order before later I/O.</summary>
+    public interface IAmigaHardfileDiscardIoHook : IAmigaHardfileIoHook
+    {
+        /// <summary>Whether manual discard can be sent to this backing store.</summary>
+        bool SupportsDiscard { get; }
+        /// <summary>Maximum 512-byte sectors in one request, greater than zero.</summary>
+        uint MaximumDiscardSectors { get; }
+        /// <summary>Discard an aligned byte range; no implicit shutdown flush.</summary>
+        void Discard(FileStream backing, long offset, int bytes);
+    }
+
     /// <summary>Selects RDB discovery or a partition image.</summary>
     public enum AmigaHardfileMountMode
     {
@@ -199,6 +212,20 @@ namespace CopperDisk
         public long Length => _stream.Length;
 
         public long SectorCount => Length / SectorSize;
+
+        internal bool SupportsDiscard => !ReadOnly && _ioHook is IAmigaHardfileDiscardIoHook
+            { SupportsDiscard: true, MaximumDiscardSectors: > 0 };
+        internal uint MaximumDiscardSectors => SupportsDiscard
+            ? Math.Min(((IAmigaHardfileDiscardIoHook)_ioHook!).MaximumDiscardSectors, int.MaxValue / SectorSize) : 0;
+
+        internal void Discard(long byteOffset, int bytes)
+        {
+            if (ReadOnly) throw new UnauthorizedAccessException("The hardfile is read-only.");
+            ValidateRange(byteOffset, bytes);
+            if (!SupportsDiscard || byteOffset % SectorSize != 0 || bytes <= 0 || bytes % SectorSize != 0 ||
+                bytes / SectorSize > MaximumDiscardSectors) throw new ArgumentOutOfRangeException(nameof(bytes));
+            ((IAmigaHardfileDiscardIoHook)_ioHook!).Discard(_stream, byteOffset, bytes);
+        }
 
         public bool HasRigidDiskBlock => AmigaRigidDiskBlock.TryFind(this, out _);
 

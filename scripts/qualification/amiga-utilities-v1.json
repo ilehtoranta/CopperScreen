@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "collectionId": "amiga-utilities-v1",
+  "reviewedDate": "2026-10-28",
+  "purpose": "Local manual compatibility and CopperStart/native Kickstart A/B exploration. Acquisition is not compatibility evidence.",
+  "executionStatus": "paired-development-rom-explored",
+  "applications": [
+    {
+      "id": "protracker-23f",
+      "name": "ProTracker",
+      "version": "2.3F (2026-05-09 build)",
+      "sourceUrl": "https://16-bits.org/other.php",
+      "rights": "Author-provided free download; no explicit redistribution licence found in this binary archive. Keep original; do not infer the desktop pt2-clone licence.",
+      "requirements": "Replayed on PAL OCS 68000, 512 KiB Chip + 512 KiB slow. Native editor observed; development CopperStart startup gap recorded.",
+      "lane": "a500-candidate",
+      "scenario": "Create a short four-channel pattern with a generated/owned sample; play, stop, edit loop points, switch disk operations, then repeat from cold boot. Capture PCM, pattern position, GUI and saved MOD if writes are admitted.",
+      "executionStatus": "paired-development-rom-explored",
+      "assets": [
+        {
+          "file": "originals/PT23F.LHA",
+          "url": "https://16-bits.org/PT23F.LHA",
+          "bytes": 121971,
+          "sha256": "c341adc8318cd19a295bae21ffa597f22ff7a9559369604669c80eabea23d5d0",
+          "retrievedUtc": "2026-10-26T22:37:50.2067849Z"
+        },
+        {
+          "file": "originals/PT23F.ADF",
+          "url": "https://16-bits.org/PT23F.ADF",
+          "bytes": 901120,
+          "sha256": "38898d61f5b96971be4946761ac3101181d01e40c33512453d39eb76dca60a3a",
+          "retrievedUtc": "2026-10-26T22:37:50.5321546Z"
+        }
+      ],
+      "observation": {
+        "boot": "OBSERVED_EDITOR",
+        "interaction": "OBSERVED_NOTE_ENTRY_AND_SEQUENCER_PLAY_STOP",
+        "limit": "No sample/module playback or save/readback tested.",
+        "referenceRom": "Kickstart 1.3",
+        "machine": "PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "evidenceDocument": "docs/UTILITY_VALIDATION_2026-10-27.md"
+      },
+      "pairedObservation": {
+        "native": "EDITOR_NOTE_ENTRY_SEQUENCER_PLAY_STOP_OBSERVED",
+        "copperstart": "STARTUP_GAP_NO_EDITOR; INPUT_FREE_16000_FIELD_CONTROL_ALSO_FAILS",
+        "startupDiagnosis": "MISSING_INTUITION_LIBRARY; NULL_BASE_OPENSCREEN_CALL_AT_FIELD_7368",
+        "analysisDocument": "docs/PROTRACKER_STARTUP_2026-10-28.md",
+        "followUpFixDocument": "docs/PROTRACKER_FIX_2026-10-28.md",
+        "followUpFixStatus": "SEPARATE_DEVELOPMENT_ROM_EDITOR_NOTES_PLAY_STOP_POINTER_SCENARIO_FIXED",
+        "limits": "No sample/module playback or save/readback qualification.",
+        "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
+        "qualification": "Development diagnostic only; app firmware pin unchanged",
+        "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      }
+    },
+    {
+      "id": "xcopy-521",
+      "name": "X-Copy",
+      "version": "5.21 English (1991-11-17), Cyclone 9.11 disk",
+      "sourceUrl": "https://jope.fi/xcopy/masterdisk.html",
+      "rights": "Private non-commercial use only; no commercial/government use; unchanged files may be distributed only entirely free of charge, never bundled with paid products.",
+      "licenseUrl": "https://jope.fi/xcopy/xcopy_license.txt",
+      "requirements": "A500 candidate from authorised original master ADF. Begin with read/check operations. Cyclone external hardware is a separate unsupported prerequisite.",
+      "lane": "a500-candidate",
+      "scenario": "Boot and check a known generated standard DD disk; seek/read both sides, report sectors and errors. Copy/format requires a separate admitted writable disposable target and drive configuration.",
+      "executionStatus": "paired-development-rom-explored",
+      "assets": [
+        {
+          "file": "originals/xcopy_v5.21_en_1991-11-17_c911.zip",
+          "url": "https://jope.fi/xcopy/zip/xcopy_v5.21_en_1991-11-17_c911.zip",
+          "bytes": 333110,
+          "sha256": "48c9862d5023ada0be38303f36acc4bac7bfdcd574f5278a2020e07da4a431c9",
+          "retrievedUtc": "2026-10-26T22:37:50.8415191Z"
+        }
+      ],
+      "observation": {
+        "boot": "OBSERVED_BOOT_MENU",
+        "interaction": "OBSERVED_F1_APPLICATION_LAUNCH",
+        "limit": "No disk check/copy/format or Cyclone hardware operation tested.",
+        "referenceRom": "Kickstart 1.3",
+        "machine": "PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "evidenceDocument": "docs/UTILITY_VALIDATION_2026-10-27.md"
+      },
+      "pairedObservation": {
+        "native": "BOOT_MENU_AND_F1_DOSCOPY_LAUNCH_OBSERVED",
+        "copperstart": "STARTUP_GAP_WHITE_SCREEN_BEFORE_F1_NO_MENU",
+        "limits": "No disk read/check sweep, copying, formatting or Cyclone hardware test.",
+        "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
+        "qualification": "Development diagnostic only; app firmware pin unchanged",
+        "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      }
+    },
+    {
+      "id": "amiga-test-kit",
+      "name": "Amiga Test Kit",
+      "version": "1.21",
+      "sourceUrl": "https://github.com/keirf/amiga-stuff/releases/tag/testkit-v1.21",
+      "rights": "Upstream source is public domain / Unlicense.",
+      "licenseUrl": "https://github.com/keirf/amiga-stuff/blob/testkit-v1.21/COPYING",
+      "requirements": "Bootable ADF and guest executable included. Begin on the bounded A500 machine; external peripherals require separate fixtures.",
+      "lane": "a500-candidate",
+      "scenario": "Exercise video test cards, audio channels, memory, keyboard, mouse/joystick and CIA tests. Record individual subtest outcomes. Hardware takeover limits OS-API coverage.",
+      "executionStatus": "paired-development-rom-explored",
+      "assets": [
+        {
+          "file": "originals/AmigaTestKit-1.21.zip",
+          "url": "https://github.com/keirf/amiga-stuff/releases/download/testkit-v1.21/AmigaTestKit-1.21.zip",
+          "bytes": 198645,
+          "sha256": "0c609dc991394ba9f1831496e61ce40c74993a581d8a20541ba291d601fcb959",
+          "retrievedUtc": "2026-10-26T22:37:51.6953518Z"
+        }
+      ],
+      "observation": {
+        "boot": "OBSERVED_MAIN_MENU",
+        "interaction": "OBSERVED_AUDIO_CHANNEL_MUTE_AND_RESTORE",
+        "limit": "Static-label rendering anomaly during toggles remains unresolved. No full test suite or hardware reference.",
+        "referenceRom": "Kickstart 1.3",
+        "machine": "PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "evidenceDocument": "docs/UTILITY_VALIDATION_2026-10-27.md"
+      },
+      "pairedObservation": {
+        "native": "SELECTED_MENU_AUDIO_MUTE_RESTORE_OBSERVED",
+        "copperstart": "SELECTED_MENU_AUDIO_MUTE_RESTORE_OBSERVED",
+        "limits": "Static labels disappear in both ROM runs; no full test suite or physical reference.",
+        "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
+        "qualification": "Development diagnostic only; app firmware pin unchanged",
+        "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      }
+    },
+    {
+      "id": "sysinfo-44",
+      "name": "SysInfo",
+      "version": "4.4",
+      "sourceUrl": "https://sysinfo.d0.se/",
+      "rights": "Donation-supported distribution; no-profit redistribution with unchanged documentation/icons. Supplied official ADF has its own bundled components; keep it intact.",
+      "licenseUrl": "https://sysinfo.d0.se/guide/copyrights",
+      "requirements": "Classic 68k and Kickstart 1.x candidate; no FPU in the A500 pair. Keep the official ADF separate from a controlled executable installation.",
+      "lane": "a500-candidate",
+      "scenario": "Inspect CPU/chipset, memory and library/device enumeration; scroll before and after speed test and quit/relaunch. Treat reported speed as guest behaviour, not host acceptance throughput.",
+      "executionStatus": "paired-development-rom-explored",
+      "assets": [
+        {
+          "file": "originals/sysinfo_4.4.lha",
+          "url": "https://download.d0.se/pub/sysinfo_4.4.lha",
+          "bytes": 55323,
+          "sha256": "9b86be2368b1b0f62977fba9341f8c0c17267a01ffd1ce9acb22707f6908272b",
+          "retrievedUtc": "2026-10-26T22:37:51.8309101Z"
+        },
+        {
+          "file": "originals/sysinfo_4.4.adf",
+          "url": "https://download.d0.se/pub/sysinfo_4.4.adf",
+          "bytes": 901120,
+          "sha256": "77e64513b230b2dceb8012fc747ac6b0fba2c0297b662dfac30ee1e11599830c",
+          "retrievedUtc": "2026-10-26T22:37:51.9967638Z"
+        }
+      ],
+      "observation": {
+        "boot": "OBSERVED_MAIN_SCREEN",
+        "interaction": "UNRESOLVED_BLACK_DISPLAY_AFTER_EXPLORATORY_MOUSE_CLICK",
+        "limit": "Successful Speed selection/benchmark/quit not established.",
+        "referenceRom": "Kickstart 1.3",
+        "machine": "PAL OCS 68000, 512 KiB Chip + 512 KiB slow",
+        "evidenceDocument": "docs/UTILITY_VALIDATION_2026-10-27.md"
+      },
+      "pairedObservation": {
+        "native": "INITIAL_SCREEN_OBSERVED; MOUSE_CLICK_ENDS_BLACK_UNRESOLVED",
+        "copperstart": "STARTUP_GAP_NO_SYSINFO_SCREEN_BY_7200",
+        "limits": "Successful Speed selection/benchmark/quit not established.",
+        "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
+        "qualification": "Development diagnostic only; app firmware pin unchanged",
+        "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      }
+    },
+    {
+      "id": "ppmore-18a",
+      "name": "PPMore",
+      "version": "1.8a",
+      "sourceUrl": "https://aminet.net/package/text/show/PPMore18a",
+      "rights": "Freeware for non-commercial use; preserve documentation. Coverdisk/diskmagazine distribution of PowerPacker utilities/libraries requires permission.",
+      "requirements": "Older AmigaOS candidate; reqtools.library and powerpacker.library required and absent from this archive. PPShow includes versions, but compatibility with this older viewer is unverified.",
+      "lane": "a500-prerequisites",
+      "scenario": "Load fixed ASCII text, page/scroll/search, resize the window, open/cancel requester and quit/relaunch. Pin the two library versions before A/B.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/PPMore18a.lha",
+          "url": "https://aminet.net/text/show/PPMore18a.lha",
+          "bytes": 14027,
+          "sha256": "6cd4c726f2013381e4844b6582116aa28d972610bc84fc51db44ecc5b0a63c52",
+          "retrievedUtc": "2026-10-26T22:37:52.4313045Z"
+        }
+      ]
+    },
+    {
+      "id": "personal-paint-71c",
+      "name": "Personal Paint",
+      "version": "7.1c complimentary edition",
+      "sourceUrl": "https://www.amigaforever.com/classic/download/",
+      "rights": "Private, non-commercial, non-profit use only; archive publication/redistribution requires prior written licence from Cloanto or A-EON.",
+      "requirements": "Included manual section 1.2: at least 2 MiB RAM, preferably 1 MiB Chip; Kickstart 1.2+ with Workbench 1.3 libraries. Outside the qualified 1 MiB A500 CopperStart profile.",
+      "lane": "expanded-machine",
+      "scenario": "Draw/fill, select/copy/rotate brush, change palette, undo/redo, open/cancel requester, load and save an original ILBM and reopen after cold boot. Record hardware blitter versus software blitter settings.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/PPaint.lha",
+          "url": "https://cdn.cloanto.com/pub/amiga/PPaint.lha",
+          "bytes": 3151297,
+          "sha256": "2e20ea41001c4db0db5cd6a6505ed6c9708eea1aaccd6688e33ccd03334c51ff",
+          "retrievedUtc": "2026-10-26T22:37:54.0023824Z"
+        }
+      ]
+    },
+    {
+      "id": "ppshow-40",
+      "name": "PPShow",
+      "version": "4.0",
+      "sourceUrl": "https://aminet.net/package/gfx/show/PPShow40",
+      "rights": "Non-commercial freeware; preserve the complete unmodified distribution.",
+      "requirements": "Kickstart and Workbench 2.0+; bundled reqtools.library and powerpacker.library. DataTypes optional on supporting OS.",
+      "lane": "os2-plus",
+      "scenario": "Show an original ILBM, cycle palette and play a small generated ANIM5. Test requester cancellation and return to desktop; do not require DataTypes for the initial case.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/PPShow40.lha",
+          "url": "https://aminet.net/gfx/show/PPShow40.lha",
+          "bytes": 81395,
+          "sha256": "66383bf59b4842f140f86455a20c535c4ebf2d9996138218b06b7a7cc205bdf3",
+          "retrievedUtc": "2026-10-26T22:37:52.2328079Z"
+        }
+      ]
+    },
+    {
+      "id": "diskmaster-v37",
+      "name": "DiskMaster 2",
+      "version": "2.5.30a (V37 build)",
+      "sourceUrl": "https://aminet.net/package/util/dir/DiskMasterV37",
+      "rights": "No-profit distribution of complete package; PD collectors/magazines require permission. Keep as local testing input.",
+      "requirements": "Readme says Kickstart V37+; Aminet Architecture field says AmigaOS >=2.1. Verify exact guest libraries before choosing an OS 2.04 reference. ReqTools required.",
+      "lane": "os2-plus",
+      "scenario": "List two directories, sort, create/rename/copy/delete original scratch files, cancel requesters and reopen. Compare file bytes and directory state after a cold reboot.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/DiskMasterV37.lha",
+          "url": "https://aminet.net/util/dir/DiskMasterV37.lha",
+          "bytes": 252312,
+          "sha256": "d1a440c52909bf3f040e204daf6b670c9663e61db17ab277f1bd3c11ef3e67bd",
+          "retrievedUtc": "2026-10-26T22:37:54.2792352Z"
+        }
+      ]
+    },
+    {
+      "id": "muchmore-46",
+      "name": "MuchMore",
+      "version": "4.6",
+      "sourceUrl": "https://aminet.net/package/text/show/muchmore46",
+      "rights": "Non-commercial use; commercial use/distribution requires author's written permission. Preserve author credit.",
+      "requirements": "AmigaOS 2.04+; optional XPK support needs its libraries. Start with plain text. Included WBInfo helper requires Kickstart 3.0+.",
+      "lane": "os2-plus",
+      "scenario": "Open deterministic long plain text, soft-scroll, search, change font/style, reopen requester and quit. Exercise window redraw while another window overlaps.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/muchmore46.lha",
+          "url": "https://aminet.net/text/show/muchmore46.lha",
+          "bytes": 98888,
+          "sha256": "12062ff0e0f1d0cecbd36c94f8205c29e9111ec11d9d429f8b481b66e96f52b7",
+          "retrievedUtc": "2026-10-26T22:37:54.5208774Z"
+        }
+      ]
+    },
+    {
+      "id": "memcheck-12",
+      "name": "MemCheck",
+      "version": "1.2 (37.13)",
+      "sourceUrl": "https://aminet.net/package/util/moni/MemCheck12",
+      "rights": "Freely distributable; bundling with commercial software requires written permission.",
+      "requirements": "Kickstart 2.04+; destructive memory subtests should run in a disposable guest session.",
+      "lane": "os2-plus",
+      "scenario": "Run allocated-memory test first, record tested address ranges and error counts. Segment test writes across memory segments; use a fresh guest and reset afterwards.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/MemCheck12.lha",
+          "url": "https://aminet.net/util/moni/MemCheck12.lha",
+          "bytes": 6669,
+          "sha256": "673ab7134f643e11c440ad7480ebf5f3238788d65c028a20d8f23de2f93f3383",
+          "retrievedUtc": "2026-10-26T22:37:54.6924450Z"
+        }
+      ]
+    },
+    {
+      "id": "lha-215",
+      "name": "Amiga LhA",
+      "version": "2.15",
+      "sourceUrl": "https://aminet.net/package/util/arc/lha",
+      "rights": "Included manual releases the complete version free with no registration required; retain original archive and manual.",
+      "requirements": "Kickstart 2.0+ per included manual; >=512 KiB RAM, 1 MiB recommended. Choose lha_68k for 68000; lha.run is an Amiga self-extractor, not a Windows program.",
+      "lane": "os2-plus",
+      "scenario": "List/test/extract a small owned archive, create another from known scratch files, extract on a fresh boot and compare file bytes, names and protection bits. Use a bounded buffer size.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/lha.run",
+          "url": "https://aminet.net/util/arc/lha.run",
+          "bytes": 173803,
+          "sha256": "76bae515264fcc3e1c69058ff03a4bcb096152a732cf19fdb03cceee18932497",
+          "retrievedUtc": "2026-10-26T22:37:52.6709175Z"
+        }
+      ]
+    },
+    {
+      "id": "deluxepaint-v-demo",
+      "name": "DeluxePaint V demo",
+      "version": "5.0b9 (1994-08-12)",
+      "sourceUrl": "https://aminet.net/package/gfx/edit/DPaintV",
+      "rights": "EA readme explicitly allows free distribution of this demo, excluding commercial distribution. This is not the full commercial application.",
+      "requirements": "Guest OS/RAM prerequisites need verification. Readme specifies floppy use and required root Libs/Fonts; do not assume an HDF installation works. Non-AGA low-res 16-colour mode is provided.",
+      "lane": "demo-prerequisites",
+      "scenario": "Draw/fill and use brushes/palette in supported low-res mode, load provided artwork, open/cancel menus/requesters. Save, Print, Delete and Copy are disabled by design; do not score them as emulator failures.",
+      "executionStatus": "not-run",
+      "assets": [
+        {
+          "file": "originals/DPaintV.lha",
+          "url": "https://aminet.net/gfx/edit/DPaintV.lha",
+          "bytes": 391795,
+          "sha256": "9e8a31c13c9cb69046376968ef05a43c2e3cc298e14fb7698cf04f97b7cb4091",
+          "retrievedUtc": "2026-10-26T22:37:55.0103979Z"
+        }
+      ]
+    }
+  ],
+  "readyImages": [
+    {
+      "applicationId": "amiga-test-kit",
+      "archive": "originals/AmigaTestKit-1.21.zip",
+      "member": "AmigaTestKit-1.21/AmigaTestKit.adf",
+      "file": "ready/AmigaTestKit-1.21/AmigaTestKit.adf",
+      "bytes": 901120,
+      "sha256": "abe7426c93619a7bb61ce10e3e66a4747fcaf22acd1d1876310033faa700ad28"
+    },
+    {
+      "applicationId": "xcopy-521",
+      "archive": "originals/xcopy_v5.21_en_1991-11-17_c911.zip",
+      "member": "xcopy_v5.21_en_1991-11-17_c911.adf",
+      "file": "ready/xcopy_v5.21_en_1991-11-17_c911/xcopy_v5.21_en_1991-11-17_c911.adf",
+      "bytes": 901120,
+      "sha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde"
+    }
+  ],
+  "latestEvidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+}

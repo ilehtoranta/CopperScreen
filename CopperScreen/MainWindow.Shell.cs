@@ -114,7 +114,7 @@ internal sealed partial class MainWindow
 
     private Border CreateMainToolbar()
     {
-        _restartButton = CreateToolbarButton("Restart", () => _ = ResetRuntimeAsync(), "Save CopperOS storage and restart the current Amiga; running programs restart");
+        _restartButton = CreateToolbarButton("Restart", () => _ = RestartAmigaAsync(), "Restart the Amiga and apply pending settings; running programs restart");
         _stopButton = CreateToolbarButton("Stop", () => _ = StopToLauncherAsync(), "Save CopperOS storage and return to the launcher");
         _releaseInputButton = CreateToolbarButton("Release input", ReleaseInteractiveInput, "Release captured mouse and keys (F10)");
         _exportWorkspaceButton = CreateToolbarButton("Export workspace…", () => _ = ExportWorkspaceBackupAsync(), "Export files and the system-pair record to a CopperOS backup outside app data");
@@ -386,11 +386,14 @@ internal sealed partial class MainWindow
         // Frame presentation may trail a completed pause/reset command.
         var sessionState = _runtime?.CurrentState ?? state;
         var running = _runtime != null;
+        if (!running && _restartNotice != null) _restartNotice.IsVisible = false;
         var sessionChanged = _sessionCommands.IsVisible != running;
         _sessionCommands.IsVisible = running;
         _pauseButton.IsVisible = _restartButton.IsVisible = running;
         _pauseButton.IsEnabled = running && state.FaultMessage == null && !_settingsVisible && !_applyingSettings && !_checkingDiskChanges;
         _restartButton.IsEnabled = _stopButton.IsEnabled = running && !_settingsVisible && !_applyingSettings && !_checkingDiskChanges;
+        if (running && _settingsDraft.NeedsRestartComparedWith(_committedSettings))
+            _restartButton.IsEnabled &= _restartNoticeButton != null && _restartNoticeButton.IsEnabled;
         var workspace = CopperOsWorkspace.IsWorkspace(_committedSettings.DriveDiskPaths[0]);
         _exportWorkspaceButton.IsVisible = running && workspace;
         _exportWorkspaceButton.IsEnabled = !_applyingSettings && !_checkingDiskChanges;
@@ -401,7 +404,8 @@ internal sealed partial class MainWindow
         _overscanButton.Content = _showFullOverscan ? "Overscan: Full" : "Overscan: Cropped";
         var drive = state.Drives.FirstOrDefault();
         RefreshPrimaryDiskChoices(drive);
-        var canChangeDisk = !_settingsVisible && !_applyingSettings && !_selectingRecentDisk && !workspace && !_welcomeCopperOs;
+        var canChangeDisk = !_settingsVisible && !_applyingSettings && !_selectingRecentDisk && !workspace && !_welcomeCopperOs
+            && CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) != 3;
         _browseDiskButton.IsEnabled = _primaryDiskCombo.IsEnabled = canChangeDisk;
         _ejectDiskButton.IsEnabled = (drive.HasDisk || drive.IsSwapPending) && canChangeDisk;
         ToolTip.SetTip(_primaryDiskCombo, drive.DiskPath ?? "Choose a recent disk, use Browse, or drop an ADF, ADZ, DMS, IPF, SCP or ZIP here.");
@@ -520,6 +524,7 @@ internal sealed partial class MainWindow
             SetDrivePathTextSilently(index, string.Empty);
             if (index == 0) _setupDiskBox.Text = string.Empty;
             _latestState = CreateIdleState(_settingsDraft);
+            RememberCurrentSession();
             UpdateSettingsStatus();
             UpdateToolbarStatus();
         }

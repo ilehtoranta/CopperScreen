@@ -28,7 +28,7 @@ internal static class CopperScreenKickstartRomArchive
 		if (actual != version ||
 			(source == CopperScreenKickstartSource.Kickstart13Rom && actual != KickstartVersion.Kickstart13) ||
 			(source == CopperScreenKickstartSource.Kickstart31Rom && actual != KickstartVersion.Kickstart31))
-			throw new NotSupportedException("The ROM does not match the selected Kickstart version. Choose Kickstart 1.3 or A500 Kickstart 3.1 in Settings.");
+			throw new NotSupportedException("The ROM does not match the selected Kickstart version. Choose Kickstart 1.3, A500+ Kickstart 2.04 or A500 Kickstart 3.1 in Settings.");
 		return rom;
 	}
 
@@ -36,10 +36,13 @@ internal static class CopperScreenKickstartRomArchive
 	{
 		if (rom.Length == 262144 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 34)
 			return KickstartVersion.Kickstart13;
+		if (rom.Length == 524288 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 37 &&
+			BinaryPrimitives.ReadUInt16BigEndian(rom[14..]) == 175)
+			return KickstartVersion.Kickstart20;
 		if (rom.Length == 524288 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 40 &&
 			BinaryPrimitives.ReadUInt16BigEndian(rom[14..]) == 63)
 			return KickstartVersion.Kickstart31;
-		throw new NotSupportedException("Choose native Kickstart 1.3 (256 KiB, v34) or A500/A600/A2000 Kickstart 3.1 (512 KiB, v40.63). Other machine ROMs are unavailable.");
+		throw new NotSupportedException("Choose native Kickstart 1.3 (256 KiB, v34), A500+ Kickstart 2.04 (512 KiB, v37.175) or A500/A600/A2000 Kickstart 3.1 (512 KiB, v40.63). Other machine ROMs are unavailable.");
 	}
 
 	public static byte[] ReadRomImage(
@@ -125,7 +128,7 @@ internal static class CopperScreenKickstartRomArchive
 		var versionToken = version switch
 		{
 			KickstartVersion.Kickstart13 => new[] { "13", "130", "1.3" },
-			KickstartVersion.Kickstart20 => new[] { "20", "200", "2.0" },
+			KickstartVersion.Kickstart20 => new[] { "204", "2.04", "37.175", "20", "200", "2.0" },
 			KickstartVersion.Kickstart30 => new[] { "30", "300", "3.0" },
 			KickstartVersion.Kickstart31 => new[] { "31", "310", "3.1" },
 			_ => Array.Empty<string>()
@@ -134,6 +137,11 @@ internal static class CopperScreenKickstartRomArchive
 		{
 			score += 50;
 		}
+		// Prefer the supported A500+ release over another 2.0x ROM in a collection.
+		// The selected bytes still have to pass the version/revision validation.
+		if (version == KickstartVersion.Kickstart20 &&
+			(normalized.Contains("204", StringComparison.OrdinalIgnoreCase) || normalized.Contains("37175", StringComparison.OrdinalIgnoreCase)))
+			score += 50;
 
 		return score;
 	}

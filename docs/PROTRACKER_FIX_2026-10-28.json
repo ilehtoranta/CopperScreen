@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "status": "SELECTED_PROTRACKER_SCENARIO_FIXED_DEVELOPMENT_ROM",
+  "configuration": "PAL OCS 8371/8362, MC68000 interpreter/conservative-batch, 512 KiB Chip + 512 KiB slow, no Fast/RTC/host directories, protected DD DF0",
+  "producerGitHead": "e01ac58d0446544eeadb3d829d2d1c859ef5babd",
+  "producerWorkingTreeDirty": true,
+  "rom": {
+    "file": "artifacts/protracker-fix-2026-10-28/rom-qualified-scenario/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "f5cebe65428c1c47df5d0954df52ae70fae768f83590b96ae967675c93e6d3c0",
+    "checksum": "ffffffff",
+    "compiledRootBytes": 492334,
+    "graphicsBytes": 26207,
+    "graphicsResident": "00FF9800",
+    "placementHeadroomBytes": 5322,
+    "compatibilityReport": "PASSED",
+    "appPinChanged": false
+  },
+  "nativeRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "diskSha256": "38898d61f5b96971be4946761ac3101181d01e40c33512453d39eb76dca60a3a",
+  "mediaUnchanged": true,
+  "inputScript": "utilities-protracker-editor-v2.json",
+  "inputScriptSha256": "7029e2156967c166e406f962900d5d99aad5370bcfb2d12ac02375a0e435ca94",
+  "completedFieldsPerProTrackerRun": 11000,
+  "unsupportedStops": 0,
+  "observations": {
+    "editor": true,
+    "firstPattern1024BytesMatch": true,
+    "playModeMatchesAtFields": [
+      9400,
+      9500
+    ],
+    "stopModeMatchesAtField": 9700,
+    "mouseOutwardMatchesAtField": 10100,
+    "mouseReturnMatchesAtFields": [
+      10500,
+      11000
+    ],
+    "pointerVisible": true
+  },
+  "tests": {
+    "focusedNativeAndInstructionTestsPassed": 8,
+    "standaloneImageIdentityCasesPassed": 3,
+    "extendedImageIdentityCasesFailed": 4,
+    "broaderCompactMaxPenCase": "FAILED_PEN_ZERO_EXPECTATION",
+    "consumerReleaseBuild": "PASSED_ZERO_WARNINGS_ERRORS",
+    "fullProducerSolutionBuild": "BLOCKED_COPPEROS_SHELL_COMPILE_ERRORS",
+    "ordinaryNativeTestProject": "BLOCKED_COPPEROS_SHELL_AND_NATIVEINPUTPOLLING_BUILD_ERRORS",
+    "isolatedFocusedHarness": true
+  },
+  "testKit": {
+    "fields": 7200,
+    "selectedCompleteFramebuffersMatchNative": [
+      3000,
+      3100,
+      3800,
+      4000,
+      4200,
+      7200
+    ],
+    "audioMuteRestoreObserved": true,
+    "pcmBitIdentityClaimed": false
+  },
+  "apiCalls": [
+    {
+      "api": "OpenLibrary",
+      "name": "dos.library",
+      "result": "00C0C108",
+      "field": 7370
+    },
+    {
+      "api": "OpenLibrary",
+      "name": "graphics.library",
+      "result": "00002440",
+      "field": 7370
+    },
+    {
+      "api": "OpenLibrary",
+      "name": "intuition.library",
+      "result": "00C07564",
+      "field": 7370
+    },
+    {
+      "api": "OpenScreen",
+      "name": "intuition.library",
+      "result": "00C17968",
+      "field": 7371
+    },
+    {
+      "api": "OpenResource",
+      "name": "ciab.resource",
+      "result": "00C08078",
+      "field": 7801
+    },
+    {
+      "api": "OpenDevice",
+      "name": "input.device",
+      "result": "00000000",
+      "field": 7801
+    },
+    {
+      "api": "OpenDevice",
+      "name": "timer.device",
+      "result": "FFFFFFFF",
+      "field": 7802
+    },
+    {
+      "api": "OpenDevice",
+      "name": "timer.device",
+      "result": "FFFFFFFF",
+      "field": 7803
+    }
+  ],
+  "engineSha256": "993928d18c8ca0c12d16f3ac45ee0eac7fa89f999b053ab1ee0e66157688961b",
+  "cpuSha256": "ff3a73b2dd2a62329be1fcdad1eab8ca3a62d95f73bcfc03a4b87bd25955837a",
+  "evidenceRoot": "artifacts/protracker-fix-2026-10-28",
+  "limits": [
+    "No sample/module audio qualification",
+    "No disk writes",
+    "No quit/desktop restoration qualification",
+    "No full GUI qualification",
+    "timer.device remains unavailable",
+    "Not performance acceptance"
+  ]
+}

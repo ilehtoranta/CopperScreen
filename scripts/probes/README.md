@@ -59,3 +59,19 @@ reported interval. Normal OS file caching applies. This measures synchronous
 gateway service, not complete guest FPS, physical drive speed or retained-workload
 acceptance. Record placement/host conditions and keep its result separate from
 the unchanged retention protocol.
+
+## Utility compatibility collection
+
+The [Amiga utility collection](../../docs/UTILITY_TEST_CORPUS.md) supplies pinned
+downloads and manual scenarios for CopperStart/native Kickstart A/B exploration.
+Run `./scripts/get-utility-test-media.ps1` from the repository root to collect the
+inputs under ignored `media/utilities/`, or add `-VerifyOnly` to check them.
+Acquisition is not a native replay or performance acceptance result.
+The [initial native exploration](../../docs/UTILITY_VALIDATION_2026-10-27.md)
+records the four ADF scenarios, audio controls, unresolved visual observations
+and missing/oversize CopperStart ROM blocker. Use
+`./scripts/test-utility-boot.ps1 -NativeRomPath <ROM> -OutputDirectory <new-directory>`
+to reproduce the diagnostic captures.
+The [2026-10-28 paired follow-up](../../docs/UTILITY_AB_2026-10-28.md) rebuilds
+the fixed-size Classic ROM, records both ROMs' outcomes and resolves the earlier
+ROM-size blocker for this diagnostic comparison.

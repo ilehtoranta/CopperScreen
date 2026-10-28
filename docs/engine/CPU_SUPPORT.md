@@ -1,14 +1,14 @@
 # CPU support and Copper68k package scope
 
-Updated 2026-10-11. The published baseline is Copper68k `1.5.3` from NuGet.org.
-This development worktree pins the unpublished `1.5.4-qualified-dev.1` candidate.
-The merged general logical handler already supports Detroit's reached
-`EORI.B #$9E,(A0)+` form; the older dedicated path is not imported. Exact-package
-evidence is in the [candidate qualification record](COPPER68K_QUALIFIED_CANDIDATE_2026-10-11.md).
+Updated 2026-10-23. The published baseline and current pin are Copper68k `1.5.4`
+from NuGet.org. It retains the qualified integer suite, general logical handler
+including Detroit's reached `EORI.B #$9E,(A0)+`, and the merged memory BTST
+prefetch correction. No private qualification feed is required. Publication and
+exact-package checks are in the [release record](COPPER68K_1_5_4_RELEASE_2026-10-22.md).
 The shared CPU source
 is maintained in CopperMod; no sibling project reference is used.
-The published release retains the preceding 1.5.2 integer
-corrections and was explicitly authorized for publication on 2026-10-07.
+The preceding `1.5.3` release retained the earlier 1.5.2 integer corrections and
+was authorized on 2026-10-07; publication of `1.5.4` was authorized on 2026-10-22.
 Advanced CPU features retain the experimental scope below.
 
 ## Availability and scope
@@ -103,12 +103,9 @@ dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release
 ```
 
-The October 7 published baseline used NuGet.org alone. The current development
-configuration additionally uses `artifacts/detroit-fix-2026-10-08/feed`; local
-packages are ignored and never committed. Build the corrected CopperMod
-`Copper68k/Copper68k.csproj` with `dotnet pack -c Release -o` targeting that
-absolute feed path before a fresh restore. This is local development, with no
-package publication. Locks retain the development package's content identity.
+Normal configuration uses NuGet.org alone. Locks retain the published `1.5.4`
+package's content identity; no local feed, repacking or sibling source reference
+is needed. Earlier ignored development packages remain historical evidence.
 Published versions remain immutable; further CPU changes require a new version.
 
 ## Verification on 2026-10-07

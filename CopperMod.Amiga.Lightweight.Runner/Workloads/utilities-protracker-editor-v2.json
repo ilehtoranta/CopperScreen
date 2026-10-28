@@ -1,0 +1,16 @@
+[
+  { "frame": 9000, "keyCode": 320 },
+  { "frame": 9006, "keyCode": 448 },
+  { "frame": 9060, "keyCode": 305 },
+  { "frame": 9066, "keyCode": 433 },
+  { "frame": 9120, "keyCode": 306 },
+  { "frame": 9126, "keyCode": 434 },
+  { "frame": 9180, "keyCode": 307 },
+  { "frame": 9186, "keyCode": 435 },
+  { "frame": 9300, "keyCode": 357 },
+  { "frame": 9306, "keyCode": 485 },
+  { "frame": 9600, "keyCode": 320 },
+  { "frame": 9606, "keyCode": 448 },
+  { "frame": 10000, "mouseDeltaX": 16, "mouseDeltaY": 16 },
+  { "frame": 10400, "mouseDeltaX": -16, "mouseDeltaY": -16 }
+]

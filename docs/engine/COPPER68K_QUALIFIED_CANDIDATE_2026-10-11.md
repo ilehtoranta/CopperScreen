@@ -1,5 +1,9 @@
 # Copper68k qualification candidate
 
+This is the historical development-candidate record. Current builds consume
+published `1.5.4`; see the [stable release record](COPPER68K_1_5_4_RELEASE_2026-10-22.md).
+The candidate's identities and results below retain their original scope.
+
 `1.5.4-qualified-dev.1` is an unpublished candidate built from CopperMod mainline
 `5b849dbff704d5a339b64a9ceb46c39b66c5b74e`, which includes the approved synthetic
 suite from PR #21. It passes the approved known-coverage gates; publication is

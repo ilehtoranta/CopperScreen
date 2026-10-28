@@ -1,0 +1,23 @@
+{
+  "SeedId": "copperos-a1200-desktop-2026-10-26-exec-preemption.10",
+  "Bytes": 8388608,
+  "Sha256": "dc597fa79c5479d43e98abdedfcb885056f9c22affa161126ff1b27c39c3cfa7",
+  "Startup": "C:Desktop",
+  "Files": [
+    {
+      "Path": "C/Desktop",
+      "Bytes": 652,
+      "Sha256": "e65f035777175b707be457ba58b833c27849918243de2bb2210c532ac10b328a"
+    },
+    {
+      "Path": "L/CopperHome",
+      "Bytes": 41500,
+      "Sha256": "9bae9c1537ec95e7dbc4d8dc71318042e00b6918875542412b9ae7e293fe42a2"
+    },
+    {
+      "Path": "L/CopperGUI",
+      "Bytes": 257312,
+      "Sha256": "bed9a6606772887e3fa0a8f15be3ea8e297d330f395cfa9cb686a49f2791f615"
+    }
+  ]
+}

@@ -31,7 +31,7 @@ internal sealed class SettingsWindow : Window
 
 	private void OnClosing(object? sender, WindowClosingEventArgs args)
 	{
-		if (AllowClose)
+		if (AllowClose || args.CloseReason is WindowCloseReason.OwnerWindowClosing or WindowCloseReason.ApplicationShutdown or WindowCloseReason.OSShutdown)
 		{
 			return;
 		}

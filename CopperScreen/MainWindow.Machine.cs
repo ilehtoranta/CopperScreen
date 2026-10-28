@@ -37,7 +37,14 @@ internal sealed partial class MainWindow
         model.SelectionChanged += (_, _) =>
         {
             if (_updatingMachineControls || _updatingSettingsUi || _applyingSettings || model.SelectedItem is not CopperScreenMachineModel selected) return;
-            EditMachine(draft => CopperScreenMachinePresets.Apply(draft, selected));
+            EditMachine(draft =>
+            {
+                _recentSession.RememberKickstart(draft, AppContext.BaseDirectory);
+                _recentSession.RememberDisks(draft, AppContext.BaseDirectory);
+                _recentSession.RememberConfiguration(draft, AppContext.BaseDirectory);
+                return _recentSession.RestoreDisks(_recentSession.RestoreKickstart(
+                    _recentSession.RestoreConfiguration(CopperScreenMachinePresets.Apply(draft, selected), AppContext.BaseDirectory)));
+            });
         };
         cpu.SelectionChanged += (_, _) =>
         {
@@ -92,7 +99,7 @@ internal sealed partial class MainWindow
             RefreshSettingsUi();
             UpdateToolbarStatus();
         }
-        catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or FormatException or OverflowException)
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or FormatException or OverflowException)
         { SetSettingsError(ex.Message); }
     }
 

@@ -1171,6 +1171,11 @@ namespace CopperMod.Amiga.Lightweight
                     CompleteIo(bus, ioRequestAddress, 0, 0);
                     return;
                 case 0x12: // INQUIRY
+                    if ((bus.ReadByte(commandAddress + 1) & 1) != 0)
+                    {
+                        ExecuteScsiVpd(bus, ioRequestAddress, scsiIoAddress, commandAddress, dataAddress, dataLength, hardfile);
+                        return;
+                    }
                     WriteScsiInquiry(bus, dataAddress, dataLength);
                     bus.WriteLong(scsiIoAddress + 0x08, (uint)Math.Min(dataLength, 36));
                     CompleteIo(bus, ioRequestAddress, 0, 0);
@@ -1179,6 +1184,20 @@ namespace CopperMod.Amiga.Lightweight
                     WriteReadCapacity(bus, dataAddress, dataLength, hardfile);
                     bus.WriteLong(scsiIoAddress + 0x08, 8);
                     CompleteIo(bus, ioRequestAddress, 0, 0);
+                    return;
+                case 0x9E: // READ CAPACITY(16), service action 10h
+                    if (commandLength < 16 || (bus.ReadByte(commandAddress + 1) & 31) != 0x10 || dataLength < 32)
+                    { CompleteIo(bus, ioRequestAddress, IoErrBadLength, 0); return; }
+                    var capacity = new byte[32];
+                    System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(capacity, (ulong)Math.Max(0, hardfile.SectorCount - 1));
+                    System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(capacity.AsSpan(8), AmigaHardfile.SectorSize);
+                    if (hardfile.SupportsDiscard) capacity[14] = 0x80; // LBPME; do not promise zero reads.
+                    bus.CopyToMemory(dataAddress, capacity);
+                    bus.WriteLong(scsiIoAddress + 8, 32);
+                    CompleteIo(bus, ioRequestAddress, 0, 0);
+                    return;
+                case 0x42: // UNMAP; the provider is deliberately opt-in.
+                    ExecuteScsiUnmap(bus, ioRequestAddress, scsiIoAddress, commandAddress, commandLength, dataAddress, dataLength, hardfile);
                     return;
                 default:
                     CompleteIo(bus, ioRequestAddress, IoErrUnsupported, 0);
@@ -1201,6 +1220,63 @@ namespace CopperMod.Amiga.Lightweight
             WriteAscii(buffer, 16, 16, "CopperHDF");
             WriteAscii(buffer, 32, 4, "0001");
             bus.CopyToMemory(dataAddress, buffer.AsSpan(0, Math.Min(dataLength, 36)));
+        }
+
+        private static void ExecuteScsiVpd(LightweightHdfBus bus, uint request, uint scsi,
+            uint cdb, uint data, int length, AmigaHardfile hardfile)
+        {
+            var page = bus.ReadByte(cdb + 2);
+            if (page is not (0xB0 or 0xB2)) { CompleteIo(bus, request, IoErrUnsupported, 0); return; }
+            var reply = new byte[page == 0xB0 ? 64 : 8];
+            reply[1] = page; reply[3] = (byte)(reply.Length - 4);
+            if (hardfile.SupportsDiscard)
+            {
+                if (page == 0xB2) reply[5] = 0x80; // LBPU
+                else
+                {
+                    System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(reply.AsSpan(20), hardfile.MaximumDiscardSectors);
+                    System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(reply.AsSpan(24), 1);
+                }
+            }
+            var allocation = (bus.ReadByte(cdb + 3) << 8) | bus.ReadByte(cdb + 4);
+            var actual = Math.Min(length, Math.Min(allocation, reply.Length));
+            bus.CopyToMemory(data, reply.AsSpan(0, actual));
+            bus.WriteLong(scsi + 8, (uint)actual);
+            CompleteIo(bus, request, 0, 0);
+        }
+
+        private static void ExecuteScsiUnmap(LightweightHdfBus bus, uint request, uint scsi, uint cdb,
+            int commandLength, uint data, int length, AmigaHardfile hardfile)
+        {
+            if (!hardfile.SupportsDiscard) { CompleteIo(bus, request, IoErrUnsupported, 0); return; }
+            if (commandLength < 10 || (bus.ReadByte(cdb + 1) & 1) != 0)
+            { CompleteIo(bus, request, IoErrBadLength, 0); return; }
+            var parameterBytes = (bus.ReadByte(cdb + 7) << 8) | bus.ReadByte(cdb + 8);
+            if (parameterBytes == 0) { CompleteIo(bus, request, 0, 0); return; }
+            if (parameterBytes < 8 || parameterBytes > length)
+            { CompleteIo(bus, request, IoErrBadLength, 0); return; }
+            var descriptorBytes = bus.ReadWord(data + 2);
+            var descriptors = descriptorBytes / 16; // A trailing partial descriptor is ignored (SBC-3).
+            if (descriptorBytes > parameterBytes - 8 || descriptors > 1)
+            { CompleteIo(bus, request, IoErrBadLength, 0); return; }
+            for (var index = 0; index < descriptors; index++)
+            {
+                var at = data + 8 + (uint)index * 16;
+                var lba = ((ulong)bus.ReadLong(at) << 32) | bus.ReadLong(at + 4);
+                var count = bus.ReadLong(at + 8);
+                if (count > hardfile.MaximumDiscardSectors || lba > (ulong)hardfile.SectorCount ||
+                    count > (ulong)hardfile.SectorCount - lba)
+                { CompleteIo(bus, request, IoErrBadLength, 0); return; }
+            }
+            for (var index = 0; index < descriptors; index++)
+            {
+                var at = data + 8 + (uint)index * 16;
+                var lba = ((ulong)bus.ReadLong(at) << 32) | bus.ReadLong(at + 4);
+                var count = bus.ReadLong(at + 8);
+                if (count != 0) hardfile.Discard(checked((long)(lba * 512)), checked((int)(count * 512)));
+            }
+            bus.WriteLong(scsi + 8, (uint)parameterBytes);
+            CompleteIo(bus, request, 0, 0);
         }
 
         private static void WriteReadCapacity(LightweightHdfBus bus, uint dataAddress, int dataLength, AmigaHardfile hardfile)

@@ -1,7 +1,34 @@
 # CopperStart standalone ROM in CopperScreen
 
-The standard app offers **CopperStart standalone ROM (experimental)** on
-Lightweight. Select it on the welcome screen, or load **A500 + CopperStart
+The start screen offers **Amiga 500**, **Amiga 500+**, **Amiga 1200**, and
+**Amiga 1200 with CopperOS HDF**. The native choices require Kickstart 1.3,
+2.04 (v37.175), and A1200 3.0 (v39.106), respectively. Floppy disks are optional;
+with no boot media, native Kickstart shows its insert-disk screen.
+
+For CopperOS, select **Amiga 1200 with CopperOS HDF** and press **Start CopperOS**.
+The qualified **CopperStart A1200 ROM (1 MiB)** and **8 MiB CopperOS FFS HDF**
+are embedded in the application. The HDF starts the native **CopperOS Desktop**
+with Home, Files, Editor and About. Allow around 40 seconds for startup at full
+emulation speed. No ROM, HDF or ADF picker is needed.
+The launcher creates `CopperOS/A1200-Desktop/CopperOS.hdf` in the user's app-data
+directory once, mounts it writable with `DH0:2:32:0:255`, and reuses it across
+launches, reselection and updates. The embedded seed is immutable. An existing
+workspace with a missing disk reports recovery guidance instead of replacing
+it. Saved custom profiles retain their own paths and write settings; advanced
+storage controls remain in Configure Amiga.
+
+The earlier app-created Shell proof workspace under `CopperOS/A1200` is retained
+with all user edits. Its saved launcher configuration switches to the separate
+desktop workspace on reopen or reselection. Explicit custom disks/profiles stay
+unchanged. See [desktop image and native A1200 verification](COPPEROS_DESKTOP_A1200.md).
+
+Developer builds stage the two qualified outputs with
+`scripts/prepare-copperos-bundle.ps1`; see the README. Their SHA-256 identities
+are pinned in `Firmware/CopperStartA1200.json`, `Firmware/CopperOsA1200.json`
+and the build gate. Normal publish/MSIX outputs carry the embedded bundle;
+diagnostic-only A500 floppy assets remain separate.
+
+For the older A500 CopperStart setup, load **A500 + CopperStart
 standalone ROM (experimental)** in Settings > Profiles. In Setup, choose the
 qualified ROM and a startup disk or an RDB/explicit FFS hard disk. Without a hard disk,
 a missing floppy leaves the ROM waiting for DF0;
@@ -19,6 +46,13 @@ explicit source and ROM path in the user-data directory. Keep the supplied ROM
 in a stable user-owned folder when updating the installed app.
 
 ## Qualified artifact and machine
+
+The following contract is the existing A500 qualification. A1200 CopperOS HDF
+boot uses a [separate ROM and machine contract](COPPEROS_HDF_A1200_2026-10-22.md).
+The fourth start-screen choice selects this A1200 configuration. Existing
+custom profiles, including A500 floppy workspaces, remain loadable; their
+selector shows **Saved custom configuration** rather than silently converting
+them into an A1200 setup.
 
 The embedded [artifact contract](../CopperScreen/Firmware/CopperStart.json) pins:
 
@@ -130,8 +164,10 @@ Successful replay completion alone is not a title qualification or performance r
 
 ## Release boundaries
 
-ROMs and media are not bundled by this change. Distribution rights, a producer
-release version and controlled package inputs remain P0 release dependencies.
+The A1200 CopperStart/CopperOS pair is now bundled using the pinned development
+artifacts. Native Kickstart, Workbench and game media remain user supplied.
+This does not publish a package or turn the development qualification into a
+producer release.
 General DOS compatibility, full-game completion, audio listening/fidelity,
 other titles and hardware are unverified by this bounded slice. CopperOS native
 storage has its own [contract and qualification](COPPEROS_STORAGE.md). Existing producer evidence for Arte and Desert Dream retains its

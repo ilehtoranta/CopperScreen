@@ -204,9 +204,17 @@ internal sealed partial class MainWindow : Window
 		_settingsDraft = CopperScreenSettingsDraft.FromStartupOptions(_initialStartupOptions);
 		if (args.Length == 0 && _recentSession.LoadMachine(AppContext.BaseDirectory) is { } lastMachine)
 			_settingsDraft = lastMachine;
+		if (args.Length == 0)
+			_settingsDraft = _recentSession.RestoreDisks(_recentSession.RestoreKickstart(_settingsDraft), clearIfMissing: false);
 		_outputVolume = _recentSession.Volume;
 		_outputMuted = _recentSession.Muted;
 		_settingsStartupError = _initialStartupOptions.Error ?? migrationError ?? _recentSession.LastError;
+		if (args.Length == 0)
+		{
+			try { _settingsDraft = CopperScreenBundledCopperOs.PrepareForLaunch(_settingsDraft, _recentSession.DataDirectory); }
+			catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
+			{ _settingsStartupError = ex.Message; }
+		}
 		_committedSettings = _settingsDraft.Clone();
 		_presentationOptions = _settingsDraft.PresentationOptions;
 		_settingsPageIndex = 1;
@@ -300,6 +308,7 @@ internal sealed partial class MainWindow : Window
 		_root.Children.Add(_debuggerPanel);
 		_root.Children.Add(_toolbar);
 		_root.Children.Add(_gamepadAssignmentOverlay);
+		_root.Children.Add(CreateRestartNotice());
 		_faultBanner = new Border
 		{
 			Child = _faultMessage, IsVisible = false, IsHitTestVisible = false,
@@ -388,11 +397,12 @@ internal sealed partial class MainWindow : Window
 		Deactivated += (_, _) => ReleaseInteractiveInput();
 		Closing += async (_, args) =>
 		{
+			if (_checkingDiskChanges) { args.Cancel = true; return; }
 			if (_applyingSettings) { args.Cancel = true; return; }
+			RememberSettingsEdits();
 			if (!_allowDiscardOnClose && _runtime != null)
 			{
 				args.Cancel = true;
-				if (_checkingDiskChanges) return;
 				_checkingDiskChanges = true;
 				try
 				{
@@ -411,7 +421,7 @@ internal sealed partial class MainWindow : Window
                             return;
                         }
                         await _runtime.DiscardPersistentStorageAsync();
-                        _allowDiscardOnClose = true; Close(); return;
+                        await CompleteShutdownAsync(); return;
                     }
 					var state = _runtime.CurrentState;
 					if (state.Drives.Any(d => d.HasUnsavedChanges) && !await ConfirmDiscardOnCloseAsync())
@@ -419,9 +429,16 @@ internal sealed partial class MainWindow : Window
 						if (!wasPaused) await _runtime.TogglePausedAsync();
 						return;
 					}
-					_allowDiscardOnClose = true;
-					Close();
+					await CompleteShutdownAsync();
 				}
+				finally { _checkingDiskChanges = false; }
+				return;
+			}
+			if (!_allowDiscardOnClose && _gamepadHost.GetControllers().Count > 0)
+			{
+				args.Cancel = true;
+				_checkingDiskChanges = true;
+				try { await CompleteShutdownAsync(); }
 				finally { _checkingDiskChanges = false; }
 				return;
 			}
@@ -434,12 +451,13 @@ internal sealed partial class MainWindow : Window
 		{
 			_isClosed = true;
             _frameNotification.Dispose();
-			if (_runtime != null)
+			if (_runtime is { } runtime)
 			{
-				_runtime.FramePublished -= QueueFramePresentation;
-				_runtime.HostClipboardTextChanged -= PublishGuestClipboardText;
-				_runtime.HostClipboardImageChanged -= PublishGuestClipboardImage;
-				try { _runtime.Dispose(); }
+				_runtime = null;
+				runtime.FramePublished -= QueueFramePresentation;
+				runtime.HostClipboardTextChanged -= PublishGuestClipboardText;
+				runtime.HostClipboardImageChanged -= PublishGuestClipboardImage;
+				try { runtime.Dispose(); }
 				catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or AggregateException)
 				{ CopperScreenCrashLog.WriteException("Storage shutdown after explicit close", ex, ex); }
 			}
@@ -536,6 +554,7 @@ internal sealed partial class MainWindow : Window
 	private void OnGamepadControllersChanged(object? sender, CopperControllersChangedEventArgs args)
 		=> Dispatcher.UIThread.Post(() =>
 		{
+			if (_isClosed) return;
 			try
 			{
 				SyncGamepadControllers();
@@ -673,6 +692,7 @@ internal sealed partial class MainWindow : Window
 	[HotPath]
 	private void QueueGamepadInput()
 	{
+		if (_isClosed) return;
 		lock (_gamepadInputGate)
 		{
 			if (_gamepadInputPostQueued)
@@ -688,6 +708,7 @@ internal sealed partial class MainWindow : Window
 
 	private void ApplyPendingGamepadInputs()
 	{
+		if (_isClosed) return;
 		lock (_gamepadInputGate)
 		{
 			_gamepadInputPostQueued = false;
@@ -1198,6 +1219,7 @@ internal sealed partial class MainWindow : Window
 	private void PublishGuestClipboardText(string text)
 		=> Dispatcher.UIThread.Post(async () =>
 		{
+			if (_isClosed) return;
 			var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
 			if (clipboard == null) return;
 			try { await clipboard.SetTextAsync(text); }
@@ -1207,6 +1229,7 @@ internal sealed partial class MainWindow : Window
 	private void PublishGuestClipboardImage(ClipboardImage image)
 		=> Dispatcher.UIThread.Post(async () =>
 		{
+			if (_isClosed) return;
 			var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
 			if (clipboard == null) return;
 			try
@@ -1219,7 +1242,8 @@ internal sealed partial class MainWindow : Window
 
 	private async Task QueueHostClipboardTextAsync()
 	{
-		if (_runtime == null) return;
+		var runtime = _runtime;
+		if (_isClosed || runtime == null) return;
 		var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
 		if (clipboard == null) return;
 		try
@@ -1227,11 +1251,12 @@ internal sealed partial class MainWindow : Window
 			var bitmap = await clipboard.TryGetBitmapAsync();
 			if (bitmap != null)
 			{
-				using (bitmap) _runtime.SetHostClipboardImage(ReadClipboardBitmap(bitmap));
+				using (bitmap)
+					if (!_isClosed && _runtime == runtime) runtime.SetHostClipboardImage(ReadClipboardBitmap(bitmap));
 				return;
 			}
 			var text = await clipboard.TryGetTextAsync();
-			if (text != null) _runtime.SetHostClipboardText(text);
+			if (text != null && !_isClosed && _runtime == runtime) runtime.SetHostClipboardText(text);
 		}
 		catch (Exception ex) { Debug.WriteLine($"Unable to read host clipboard: {ex.Message}"); }
 	}
@@ -1583,7 +1608,7 @@ internal sealed partial class MainWindow : Window
 			Foreground = Brushes.White,
 			VerticalAlignment = VerticalAlignment.Center
 		});
-		_settingsCloseButton = CreatePanelButton("Cancel", HideSettings);
+		_settingsCloseButton = CreatePanelButton("Close", HideSettings);
 		Grid.SetColumn(_settingsCloseButton, 1);
 		header.Children.Add(_settingsCloseButton);
 		Grid.SetRow(header, 0);
@@ -1648,8 +1673,9 @@ internal sealed partial class MainWindow : Window
 			Spacing = 6,
 			HorizontalAlignment = HorizontalAlignment.Right
 		};
-		_settingsApplyButton = CreatePanelButton("Apply", () => _ = ApplySettingsAsync());
-		buttons.Children.Add(_settingsApplyButton);
+		_settingsRevertButton = CreatePanelButton("Revert pending changes", RevertPendingChanges);
+		AutomationProperties.SetName(_settingsRevertButton, "Revert pending changes in Settings");
+		buttons.Children.Add(_settingsRevertButton);
 		_settingsStartButton = CreatePanelButton("Start Amiga", () => _ = StartRuntimeFromSettingsAsync());
 		MakePrimary(_settingsStartButton);
 		buttons.Children.Add(_settingsStartButton);
@@ -2207,7 +2233,6 @@ internal sealed partial class MainWindow : Window
 	{
 		if (!_settingsVisible)
 		{
-			_settingsDraft = _committedSettings.Clone();
 			_masterVolumeSlider.Value = _outputVolume;
 			_masterMuteBox.IsChecked = _outputMuted;
 			RefreshSettingsUi();
@@ -2222,10 +2247,13 @@ internal sealed partial class MainWindow : Window
 
 	private void HideSettings()
 	{
-		_settingsDraft = _committedSettings.Clone();
-		_settingsStartupError = null;
-		_masterVolumeSlider.Value = _outputVolume;
-		_masterMuteBox.IsChecked = _outputMuted;
+		_outputVolume = _masterVolumeSlider.Value;
+		_outputMuted = _masterMuteBox.IsChecked == true;
+		_runtime?.SetOutputVolume(_outputMuted ? 0 : (float)(_outputVolume / 100));
+		RememberSettingsEdits();
+		if (!TryApplySettingsFromUi(out _) && _lastAutoSavedDraft != null)
+			_settingsDraft = _lastAutoSavedDraft.Clone();
+		if (_runtime == null) _committedSettings = _settingsDraft.Clone();
 		RefreshSettingsUi();
 		if (_runtime == null) _latestState = CreateIdleState(_settingsDraft);
 		CloseSettingsAfterApply();
@@ -2378,7 +2406,7 @@ internal sealed partial class MainWindow : Window
 		_updatingSettingsUi = true;
 		try
 		{
-			_settingsCloseButton.Content = "Cancel";
+			_settingsCloseButton.Content = "Close";
 			var profilesDirectory = CopperScreenProfileStore.GetUserProfilesDirectory(_recentSession.DataDirectory);
 			var profiles = CopperScreenProfileStore.ListProfiles(AppContext.BaseDirectory, out var profileError, _recentSession.DataDirectory);
 			_settingsStartupError ??= profileError;
@@ -2471,19 +2499,27 @@ internal sealed partial class MainWindow : Window
 	private void UpdateSettingsStatus()
 	{
 		if (_settingsStatus == null || _updatingSettingsUi) return;
+		RememberSettingsEdits();
+		ApplyLiveSettings();
 		var valid = CanStartFromSettings(out var error);
+		_settingsRevertButton.IsVisible = _runtime != null;
+		var pendingSettings = false;
+		try { pendingSettings = ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings); }
+		catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException or FormatException or OverflowException or System.Text.Json.JsonException) { pendingSettings = true; }
+		_settingsRevertButton.IsEnabled = _runtime != null && pendingSettings && !_applyingSettings && !_checkingDiskChanges && !_applyingLiveMedia;
 		UpdateMachineControls();
 		_settingsStartButton.IsEnabled = valid && !_applyingSettings;
 		_settingsStartButton.Content = _runtime == null ? "Start Amiga" : "Restart Amiga";
-		_settingsApplyButton.IsVisible = _runtime != null;
-		_settingsApplyButton.IsEnabled = valid && !_applyingSettings && !ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings);
 		_settingsStatus.Foreground = valid && _settingsStartupError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
+		if (valid && _settingsStartupError == null && _runtime != null && ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings))
+			_settingsStatus.Foreground = new SolidColorBrush(Color.Parse("#FFC477"));
 		_settingsStatus.Text = _settingsStartupError ?? (!valid ? error : _runtime == null
-			? "Ready to start your Amiga."
+			? "Settings saved. Changes take effect when you start the Amiga."
 			: ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings)
-				? "Machine changes need a restart. Unsaved Amiga work will be lost."
-				: "Apply changes to this session, or Cancel to discard edits.");
+				? "Restart Amiga required: " + ReadSettingsDraft().RestartChangeSummary(_committedSettings) + ". Other changes apply immediately. Settings saved."
+				: "Changes apply immediately. Settings saved.");
 		UpdateWelcomeStatus(valid, error);
+		UpdateRestartNotice(valid);
 		UpdateShellStatus(_latestState);
 	}
 
@@ -2495,11 +2531,17 @@ internal sealed partial class MainWindow : Window
 		{
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
-			if (_runtime == null && _welcomeCopperOs && draft.KickstartSource == CopperScreenKickstartSource.CopperStart && !CopperOsWorkspace.IsWorkspace(draft.DriveDiskPaths[0]))
-			{ error = "Create or resume a CopperOS workspace before starting. A missing workspace is never replaced automatically."; return false; }
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Description : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental · no DOS or Workbench." : draft.RomVersion == KickstartVersion.Kickstart31 ? "A500 Kickstart 3.1 ROM selected." : "Kickstart 1.3 ROM selected.");
+			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.DescriptionFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental · no DOS or Workbench." : draft.RomVersion switch
+            {
+                KickstartVersion.Kickstart20 => "A500+ Kickstart 2.04 ROM selected.",
+                KickstartVersion.Kickstart30 => "A1200 Kickstart 3.0 ROM selected.",
+                KickstartVersion.Kickstart31 => "A500 Kickstart 3.1 ROM selected.",
+                _ => "Kickstart 1.3 ROM selected."
+            });
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
+			if (unavailable == null && romError == null && draft.KickstartSource == CopperScreenKickstartSource.CopperStart && draft.HardDrives.Count == 1)
+				draft.ToStartupOptions(AppContext.BaseDirectory).HardDrives[0].ValidateCopperStart(checkImage: true);
 			error = unavailable ?? romError ?? string.Empty;
 			return error.Length == 0;
 		}
@@ -2587,7 +2629,8 @@ internal sealed partial class MainWindow : Window
 		{
 			var options = _settingsDraft.ToStartupOptions(AppContext.BaseDirectory);
 			var previous = _runtime;
-			var resumePreviousOnFailure = previous != null && !previous.CurrentState.IsPaused;
+			var wasPaused = previous?.CurrentState.IsPaused ?? false;
+			var resumePreviousOnFailure = previous != null && !wasPaused;
 			if (previous != null)
 			{
 				if (!await PrepareLaunchTransitionAsync(previous)) return;
@@ -2617,7 +2660,8 @@ internal sealed partial class MainWindow : Window
 			_latestState = _runtime.CurrentState;
 			_lastSeenFrameNumber = 0;
 			_presentedFrames = 0;
-			_runtime.Start();
+			_runtime.Start(paused: wasPaused);
+			_latestState = _runtime.CurrentState;
 			RememberCurrentSession();
 			CloseSettingsAfterApply();
 			_ = QueueHostClipboardTextAsync();
@@ -4024,7 +4068,7 @@ internal sealed partial class MainWindow : Window
 		{
 			var wasPaused = _runtime.CurrentState.IsPaused;
 			if (!await PrepareLaunchTransitionAsync(_runtime)) return;
-			var result = await _runtime.ResetAsync().ConfigureAwait(true);
+			var result = await _runtime.ResetAsync(paused: wasPaused).ConfigureAwait(true);
 			if (result.State.IsPaused != wasPaused) result = await _runtime.TogglePausedAsync();
 			_latestState = result.State;
 			_bench.ResetPath();
@@ -4066,7 +4110,7 @@ internal sealed partial class MainWindow : Window
 			if (driveIndex == 0) _setupDiskBox.Text = path;
 			_latestState = CreateIdleState(_settingsDraft);
 			_recentSession.RememberDisk(path);
-			_recentSession.Save(null, _outputVolume, _outputMuted);
+			RememberCurrentSession();
 			RefreshWelcomeRecentDisks();
 			UpdateSettingsStatus();
 			UpdateToolbarStatus();

@@ -7,6 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
+using System.Text.Json;
 
 namespace CopperScreen;
 
@@ -18,7 +19,7 @@ internal sealed partial class MainWindow
     private TextBlock _romValidation = null!;
     private Slider _masterVolumeSlider = null!;
     private CheckBox _masterMuteBox = null!;
-    private Button _settingsApplyButton = null!;
+    private Button _settingsRevertButton = null!;
     private readonly TextBlock[] _bindingLabels = new TextBlock[6];
     private readonly Button[] _bindingButtons = new Button[6];
     private bool _applyingSettings;
@@ -28,6 +29,110 @@ internal sealed partial class MainWindow
     private CopperScreenKickstartSource _validatedRomSource;
     private KickstartVersion _validatedRomVersion;
     private bool _validatedRomA1200;
+    private string? _lastAutoSavedSettings;
+    private CopperScreenSettingsDraft? _lastAutoSavedDraft;
+    private bool _applyingLiveMedia;
+    private string? _lastLiveMediaRequest;
+
+    private void ApplyLiveSettings()
+    {
+        if (!_settingsVisible || _updatingSettingsUi || _applyingSettings) return;
+        try
+        {
+            var draft = ReadSettingsDraft();
+            _outputVolume = _masterVolumeSlider.Value;
+            _outputMuted = _masterMuteBox.IsChecked == true;
+            _runtime?.SetOutputVolume(_outputMuted ? 0 : (float)(_outputVolume / 100));
+            if (JsonSerializer.Serialize(draft.Input) != JsonSerializer.Serialize(_committedSettings.Input))
+            {
+                _inputOptions = draft.Input;
+                _committedSettings.Input = draft.Input;
+                _runtime?.SetInputOptions(draft.Input);
+                RebuildGamepadPortBindings();
+                ApplyCurrentGamepadSnapshots();
+            }
+            if (draft.PresentationOptions != _committedSettings.PresentationOptions)
+            {
+                _presentationOptions = draft.PresentationOptions;
+                _committedSettings.PresentationOptions = draft.PresentationOptions;
+                _runtime?.SetPresentationOptions(draft.PresentationOptions);
+                if (_presentationOptions.LacedMode != CopperScreenLacedPresentationMode.CrtPhosphor) DisableCrtPhosphorPresentation();
+                ApplyPresenterGeometry();
+            }
+            if (_runtime != null && !_applyingLiveMedia && CopperScreenLaunchWorkflow.StartChoice(draft) == CopperScreenLaunchWorkflow.StartChoice(_committedSettings))
+            {
+                var request = JsonSerializer.Serialize(new { draft.DriveDiskPaths, draft.DriveWriteProtected, draft.FloppyDriveCount });
+                if (request != _lastLiveMediaRequest)
+                {
+                    _lastLiveMediaRequest = request;
+                    _ = ApplyLiveMediaAsync(draft);
+                }
+            }
+        }
+        catch (Exception ex) when (ex is InvalidOperationException or ArgumentException or FormatException or OverflowException) { }
+    }
+
+    private async Task ApplyLiveMediaAsync(CopperScreenSettingsDraft draft)
+    {
+        var runtime = _runtime;
+        if (runtime == null) return;
+        _applyingLiveMedia = true;
+        try
+        {
+            for (var i = 0; i < Math.Min(draft.FloppyDriveCount, _committedSettings.FloppyDriveCount); i++)
+            {
+                var state = runtime.CurrentState.Drives[i];
+                if (state.DiskPath != draft.DriveDiskPaths[i])
+                {
+                    var result = string.IsNullOrWhiteSpace(draft.DriveDiskPaths[i])
+                        ? await runtime.EjectDiskAsync(i) : await runtime.InsertDriveDiskAsync(i, draft.DriveDiskPaths[i]!);
+                    if (!result.Success) { SetSettingsError(result.Message); return; }
+                    state = result.State.Drives[i];
+                }
+                if (draft.DriveWriteProtected[i] is { } writeProtected && state.WriteProtected != writeProtected)
+                {
+                    var result = await runtime.SetDriveWriteProtectedAsync(i, writeProtected);
+                    if (!result.Success) { SetSettingsError(result.Message); return; }
+                }
+                if (_runtime != runtime) return;
+                _committedSettings.DriveDiskPaths[i] = draft.DriveDiskPaths[i];
+                _committedSettings.DriveWriteProtected[i] = draft.DriveWriteProtected[i];
+            }
+        }
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
+        { SetSettingsError(ex.Message); }
+        catch (OperationCanceledException) when (_isClosed || _runtime != runtime) { }
+        finally
+        {
+            _applyingLiveMedia = false;
+            if (!_isClosed && _runtime == runtime) UpdateSettingsStatus();
+        }
+    }
+
+    private void RememberSettingsEdits()
+    {
+        if (!_settingsVisible || _updatingSettingsUi || _applyingSettings) return;
+        try
+        {
+            var draft = ReadSettingsDraft();
+            var serialized = CopperScreenProfileStore.Serialize(draft, AppContext.BaseDirectory);
+            var volume = _masterVolumeSlider.Value;
+            var muted = _masterMuteBox.IsChecked == true;
+            if (serialized == _lastAutoSavedSettings && volume == _recentSession.Volume && muted == _recentSession.Muted) return;
+            _recentSession.Save(draft, volume, muted, AppContext.BaseDirectory);
+            if (_recentSession.LastError is { } error) _settingsStartupError = error;
+            else
+            {
+                _lastAutoSavedSettings = serialized;
+                _lastAutoSavedDraft = draft.Clone();
+            }
+        }
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or FormatException or OverflowException)
+        {
+            // A partially typed number/address is not a complete configuration.
+            // Keep the most recent complete edit until the field can be read.
+        }
+    }
 
     private static TextBlock SettingsNote(string text) => new()
     {
@@ -40,21 +145,21 @@ internal sealed partial class MainWindow
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
         layout.Children.Add(CreateMachineControls(welcome: false));
-        layout.Children.Add(SettingsNote("Selecting a model restores its CPU, chipset and memory defaults. Selected ROMs and disks are kept; choose a matching ROM before starting. Change memory sizes and connected drives in their settings pages."));
+        layout.Children.Add(SettingsNote("Selecting a model restores its saved configuration. Changes are saved automatically. Change memory sizes and connected drives in their settings pages."));
         var form = CreateSettingsGroupForm();
         _kickstartSourceBox = AddComboSetting(form, "Boot method", ["Kickstart13Rom", "Kickstart31Rom", "KickstartRom", "MinimalDiskBoot", "CopperStart", "DiagRom"]);
         _kickstartSourceBox.SelectionChanged += (_, _) => UpdateBootMethodControls();
-        _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", MinWidth = 0 };
+        _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
         var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
         AutomationProperties.SetName(browse, "Browse for boot ROM");
         _bootRomRow = CreateSettingsRow("Boot ROM", WithAction(_kickstartRomBox, browse));
         form.Children.Add(_bootRomRow);
         AutomationProperties.SetName(_kickstartRomBox, "Boot ROM path");
-        _romValidation = SettingsNote("Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.");
+        _romValidation = SettingsNote("Choose a Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM to continue.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
-        form.Children.Add(SettingsNote(CopperScreenCopperStartRom.Description));
+        form.Children.Add(SettingsNote("CopperStart requires the separately qualified ROM for the selected Amiga model. A1200 uses a CopperOS FFS HDF with empty floppy drives; no Fast RAM, RTC or shared folders."));
         _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, ADZ, DMS, IPF, SCP or ZIP", MinWidth = 0 };
         _setupDiskBox.TextChanged += (_, _) =>
         {
@@ -238,11 +343,12 @@ internal sealed partial class MainWindow
         var level = new TextBlock { Text = $"{_outputVolume:0}%", VerticalAlignment = VerticalAlignment.Center, MinWidth = 44 };
         _masterVolumeSlider.PropertyChanged += (_, args) =>
         {
-            if (args.Property == Slider.ValueProperty) level.Text = $"{_masterVolumeSlider.Value:0}%";
+            if (args.Property == Slider.ValueProperty) { level.Text = $"{_masterVolumeSlider.Value:0}%"; UpdateSettingsStatus(); }
         };
         AutomationProperties.SetName(_masterVolumeSlider, "Emulator playback volume");
         playback.Children.Add(CreateSettingsRow("Emulator volume", WithAction(_masterVolumeSlider, level)));
         _masterMuteBox = new CheckBox { Content = "Mute emulator audio", IsChecked = _outputMuted };
+        _masterMuteBox.IsCheckedChanged += (_, _) => UpdateSettingsStatus();
         playback.Children.Add(_masterMuteBox);
         playback.Children.Add(SettingsNote("Playback volume applies to this app session and does not change the Amiga's audio output."));
         layout.Children.Add(CreateSettingsGroup("Playback", playback));
@@ -322,7 +428,7 @@ internal sealed partial class MainWindow
         var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
         var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = copperStart ? "Choose qualified CopperStart standalone ROM" : "Choose Kickstart 1.3, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
+            Title = copperStart ? _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Choose CopperStart A1200 ROM (1 MiB)" : "Choose qualified CopperStart A500 ROM" : "Choose Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Boot ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
         var path = files.FirstOrDefault()?.TryGetLocalPath();
@@ -332,7 +438,17 @@ internal sealed partial class MainWindow
         {
             if (copperStart)
             {
-                _ = CopperScreenCopperStartRom.Read(path);
+                _ = CopperScreenCopperStartRom.Read(path, _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
+                ClearSettingsStartupError();
+                UpdateSettingsStatus();
+                return;
+            }
+            if (!_settingsVisible)
+            {
+                // The start selector owns the model/version. A picker must not
+                // silently turn an A500+ selection into Kickstart 1.3.
+                _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, _settingsDraft.KickstartSource,
+                    _settingsDraft.RomVersion, _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
                 ClearSettingsStartupError();
                 UpdateSettingsStatus();
                 return;
@@ -353,7 +469,12 @@ internal sealed partial class MainWindow
             else
             {
                 _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
-                _kickstartSourceBox.SelectedItem = _settingsDraft.RomVersion == KickstartVersion.Kickstart31 ? "Kickstart31Rom" : "Kickstart13Rom";
+                _kickstartSourceBox.SelectedItem = _settingsDraft.RomVersion switch
+                {
+                    KickstartVersion.Kickstart20 => "KickstartRom",
+                    KickstartVersion.Kickstart31 => "Kickstart31Rom",
+                    _ => "Kickstart13Rom"
+                };
             }
             UpdateSettingsStatus();
         }
@@ -371,8 +492,8 @@ internal sealed partial class MainWindow
             return ValidateMinimalBootDisk(disk);
         }
         var path = draft.ToStartupOptions(AppContext.BaseDirectory).KickstartRomPath;
-        if (string.IsNullOrWhiteSpace(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Recovery : "Choose a Kickstart 1.3, A500 3.1 or A1200 3.0 ROM to continue.";
-        if (!File.Exists(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "ROM file not found. " + CopperScreenCopperStartRom.Recovery : "ROM file not found. Choose an existing Kickstart 1.3, A500 3.1 or A1200 3.0 ROM.";
+        if (string.IsNullOrWhiteSpace(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.RecoveryFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : "Choose a Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM to continue.";
+        if (!File.Exists(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "ROM file not found. " + CopperScreenCopperStartRom.RecoveryFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : "ROM file not found. Choose an existing Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM.";
         var info = new FileInfo(path);
         if (_validatedRomPath == path && _validatedRomWriteTime == info.LastWriteTimeUtc && _validatedRomLength == info.Length &&
             _validatedRomSource == draft.KickstartSource && _validatedRomVersion == draft.RomVersion && _validatedRomA1200 == (draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)) return _romError;
@@ -384,7 +505,7 @@ internal sealed partial class MainWindow
         _validatedRomA1200 = draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         try
         {
-            _ = draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Read(path)
+            _ = draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Read(path, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)
                 : CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
             _romError = null;
         }
@@ -409,38 +530,6 @@ internal sealed partial class MainWindow
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
         { _bootDiskError = ex.Message; }
         return _bootDiskError;
-    }
-
-    private async Task ApplySettingsAsync()
-    {
-        if (_runtime == null || _applyingSettings) return;
-        if (!TryApplySettingsFromUi(out var error)) { SetSettingsError(error); return; }
-        if (_settingsDraft.NeedsRestartComparedWith(_committedSettings))
-        { SetSettingsError("Use Restart Amiga to apply machine changes."); return; }
-        _applyingSettings = true;
-        UpdateSettingsStatus();
-        try
-        {
-            CopperScreenLightweightSession.Validate(_settingsDraft.ToStartupOptions(AppContext.BaseDirectory));
-            for (var i = 0; i < _settingsDraft.FloppyDriveCount; i++)
-            {
-                var disk = _settingsDraft.DriveDiskPaths[i];
-                if (string.Equals(disk, _latestState.Drives[i].DiskPath, StringComparison.Ordinal)) continue;
-                var result = string.IsNullOrWhiteSpace(disk) ? await _runtime.EjectDiskAsync(i) : await _runtime.InsertDriveDiskAsync(i, disk);
-                if (!result.Success) { SetSettingsError(result.Message); return; }
-                _latestState = result.State;
-                _settingsDraft.DriveDiskPaths[i] = result.State.Drives[i].DiskPath;
-                ShowDiskFeedback(result.Message, true);
-            }
-            _committedSettings = _settingsDraft.Clone();
-            _committedSettings.ClearRestartRequired();
-            ApplyCommittedHostSettings();
-            RememberCurrentSession();
-            CloseSettingsAfterApply();
-        }
-        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException)
-        { SetSettingsError(ex.Message); }
-        finally { _applyingSettings = false; UpdateSettingsStatus(); }
     }
 
     private void ApplyCommittedHostSettings()

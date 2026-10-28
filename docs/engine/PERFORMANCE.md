@@ -6,7 +6,7 @@ On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
 retain their actual package identities and are not relabeled as measurements of
 stable `1.4.1`.
 
-The current project pins Copper68k development version `1.5.4-qualified-dev.1`
+The current project pins published Copper68k version `1.5.4`
 and CopperDisk `3.0.0`; the normal production build uses the local CopperDisk
 source project. The
 [Copper68k 1.5.0 release record](COPPER68K_MAINLINE_1_5_0.md) remains historical;

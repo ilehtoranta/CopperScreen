@@ -14,5 +14,7 @@ See [CopperDisk's notices](CopperDisk/THIRD-PARTY-NOTICES.md) for its media-deco
 components. Native runtime dependencies are supplied by the corresponding NuGet
 packages. Packaging an application does not change their license obligations.
 
-No Kickstart ROM, Amiga operating-system distribution or game image is supplied
-or licensed by this repository.
+The application includes the original CopperStart A1200 boot ROM and CopperOS
+HDF pinned by the firmware manifests. CopperStart is MIT licensed; its license
+is included as `CopperStart-LICENSE.txt`. Native Kickstart ROMs, Commodore
+Workbench distributions and game images are not supplied or licensed here.
