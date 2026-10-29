@@ -66,7 +66,7 @@ hardware configuration for the native Kickstart 1.3 reference. These are
 | [X-Copy 5.21 English, 1991-11-17](https://jope.fi/xcopy/masterdisk.html) | `ready/xcopy_v5.21_en_1991-11-17_c911/xcopy_v5.21_en_1991-11-17_c911.adf` | Boot, then check a generated standard DD disk: track seeks, both sides, sector/error reporting, cancel/restart. |
 | [Amiga Test Kit 1.21](https://github.com/keirf/amiga-stuff/releases/tag/testkit-v1.21) | `ready/AmigaTestKit-1.21/AmigaTestKit.adf`; executable also in original ZIP | Video cards, audio channels, memory, keyboard, mouse/joystick and CIA tests; record each subtest separately. |
 | [SysInfo 4.4](https://sysinfo.d0.se/) | `originals/sysinfo_4.4.adf`; original LHA also retained | Enumerate chipset/CPU, memory, libraries and devices; scroll, run speed test, scroll again and quit/relaunch. |
-| [PPMore 1.8a](https://aminet.net/package/text/show/PPMore18a) | Archive only; needs `reqtools.library` and `powerpacker.library`, absent from this archive | View fixed ASCII text, page/search, resize, open/cancel requester and quit. Pin compatible libraries before testing. |
+| [PPMore 1.8a](https://aminet.net/package/text/show/PPMore18a) | Original archive plus a controlled local installation with ReqTools 38.385's 1.3 build and pinned PowerPacker library; [startup evidence](UTILITY_PPMORE_STARTUP_2026-10-30.json) | View fixed ASCII text, page/search, resize, open/cancel requester and quit. Record each verified scope separately. |
 
 The four ADFs come directly from the author/authorised archive, or are extracted
 unchanged from its ZIP. They are not rebuilt boot disks. Their bundled startup
@@ -74,10 +74,13 @@ files and dependencies are part of their identities. To isolate an application
 from its boot environment later, make a separately identified installation of
 its executable and dependencies on legally supplied guest system media.
 
-PPMore's older release is a prerequisite-investigation candidate. The collected
-PPShow archive supplies versions of its two libraries, but compatibility with
-PPMore 1.8a is not established. A missing library is unavailable coverage, not
-an emulator failure.
+PPMore's controlled installation uses ReqTools 38.385 from Fish 794's `libs13`
+directory and PPShow's bundled PowerPacker library. PPShow's ReqTools build
+requires 2.0+. The fixed ASCII reader is verified under native 1.3; CopperStart's
+recovery CLI leaves the command-name BSTR empty, and PPMore's C startup then
+overwrites its Process. The [startup receipt](UTILITY_PPMORE_STARTUP_2026-10-30.json)
+records that first failure and the pending source correction. Reader controls
+and packed files remain unverified.
 
 X-Copy is especially useful for disk DMA, MFM, sync, drive selection and CIA
 behaviour. Begin with read/check operations and standard DD media. Its disk also

@@ -22,6 +22,11 @@ using var m = new LightweightA500Machine(new LightweightA500Configuration
 var rom = File.ReadAllBytes(args[0]);
 m.LoadKickstart(rom); m.MountAdf(0, File.ReadAllBytes(args[1]));
 var start = int.Parse(args[3]); var end = int.Parse(args[4]);
+var watchText = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_WATCH_ADDRESS");
+uint? watchAddress = string.IsNullOrWhiteSpace(watchText) ? null : Convert.ToUInt32(watchText, 16);
+var watchExpected = watchAddress.HasValue
+    ? Convert.ToByte(Environment.GetEnvironmentVariable("COPPERSTART_PROBE_WATCH_BYTE") ?? throw new ArgumentException("WATCH_BYTE is required"), 16)
+    : (byte)0;
 var flags = BindingFlags.Instance | BindingFlags.NonPublic;
 var type = m.GetType();
 var core = (IM68kCore)type.GetField("_cpu", flags)!.GetValue(m)!;
@@ -89,11 +94,15 @@ Entry Snapshot(string kind)
 void Keep(string kind) { ring[count++ % ring.Length] = Snapshot(kind); }
 void Check(string kind)
 {
+    if (watchAddress is uint watched && ReadByte(watched) != watchExpected)
+    { Keep("WATCH_BYTE_CHANGED"); stop = true; reason = "WATCH_BYTE_CHANGED"; }
     if (!Stack(m.Cpu.A[7]) || !Stack(m.Cpu.SupervisorStackPointer)) { Keep(kind); stop = true; reason = kind; }
     var pc = m.Cpu.ProgramCounter;
     if (pc < 0x1000 || !peek(pc, out _)) { Keep("LOW_OR_UNPEEKABLE_PC"); stop = true; reason = "LOW_OR_UNPEEKABLE_PC"; }
 }
 for (var frame = 0; frame < start; frame++) m.ExecuteFrame();
+if (watchAddress is uint initialWatch && ReadByte(initialWatch) != watchExpected)
+{ Keep("WATCH_ALREADY_CHANGED_AT_START"); stop = true; reason = "WATCH_ALREADY_CHANGED_AT_START"; }
 Console.WriteLine($"Trace starts field={m.CompletedFrames} PC={m.Cpu.ProgramCounter:X8}");
 while (m.CompletedFrames < end && !stop)
 {
@@ -127,6 +136,7 @@ var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => r
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     configuration="PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow, one protected DF0", startField=start,endField=end,
+    watchAddress, watchExpected,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());
 File.WriteAllBytes(Path.Combine(output,"slowram.bin"),slow);

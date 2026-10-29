@@ -17,7 +17,7 @@ marking the collection complete.
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
-| 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
+| 5 | PPMore 1.8a | IN PROGRESS: native reader verified; recovery CLI omits command name and its C startup overwrites the Process | [Startup receipt](UTILITY_PPMORE_STARTUP_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |

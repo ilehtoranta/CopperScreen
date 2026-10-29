@@ -182,7 +182,7 @@
       "requirements": "Classic 68k and Kickstart 1.x candidate; no FPU in the A500 pair. Keep the official ADF separate from a controlled executable installation.",
       "lane": "a500-candidate",
       "scenario": "Inspect CPU/chipset, memory and library/device enumeration; scroll before and after speed test and quit/relaunch. Treat reported speed as guest behaviour, not host acceptance throughput.",
-      "executionStatus": "sequential-startup-investigation",
+      "executionStatus": "sequential-main-verified-both-with-guest-prerequisites",
       "assets": [
         {
           "file": "originals/sysinfo_4.4.lha",
@@ -216,12 +216,12 @@
         "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
       },
       "latestVerification": {
-        "date": "2026-10-29",
-        "status": "INITIAL_COMMAND_RETURN_FIXED_MAIN_SCREEN_STILL_FAILS",
-        "producerCommit": "a58bca7053d775d92819d3b04e267b01cc3ba209",
-        "copperStartRomSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
-        "receipt": "docs/UTILITY_SYSINFO_STARTUP_2026-10-29.json",
-        "scope": "Native 1.3 main screen verified. First CopperStart C-command exit fixed; later screen/window failure persists through 36000 fields. No main-screen pass."
+        "date": "2026-10-30",
+        "status": "VERIFIED_MAIN_SCREEN_BOTH_ROMS_WITH_EXPLICIT_GUEST_PREREQUISITE",
+        "producerCommit": "f65cf7645a53d15b997e1c16979ae1493f445ea2",
+        "copperStartRomSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+        "receipt": "docs/UTILITY_SYSINFO_MAIN_2026-10-30.json",
+        "scope": "Actual chipset main screens inspected under both ROMs on a controlled disk with unchanged utility code; CopperStart stable through 32000 fields. Controls and benchmarks unverified."
       }
     },
     {
@@ -230,10 +230,10 @@
       "version": "1.8a",
       "sourceUrl": "https://aminet.net/package/text/show/PPMore18a",
       "rights": "Freeware for non-commercial use; preserve documentation. Coverdisk/diskmagazine distribution of PowerPacker utilities/libraries requires permission.",
-      "requirements": "Older AmigaOS candidate; reqtools.library and powerpacker.library required and absent from this archive. PPShow includes versions, but compatibility with this older viewer is unverified.",
+      "requirements": "Requires reqtools.library V37+ and powerpacker.library V33+, absent from this archive. The controlled native 1.3 reader uses ReqTools 38.385's libs13 build from Fish 794 and PPShow's bundled PowerPacker library; PPShow's ReqTools build requires 2.0+.",
       "lane": "a500-prerequisites",
       "scenario": "Load fixed ASCII text, page/scroll/search, resize the window, open/cancel requester and quit/relaunch. Pin the two library versions before A/B.",
-      "executionStatus": "not-run",
+      "executionStatus": "sequential-native-reader-verified-copperstart-startup-failure",
       "assets": [
         {
           "file": "originals/PPMore18a.lha",
@@ -242,7 +242,13 @@
           "sha256": "6cd4c726f2013381e4844b6582116aa28d972610bc84fc51db44ecc5b0a63c52",
           "retrievedUtc": "2026-10-26T22:37:52.4313045Z"
         }
-      ]
+      ],
+      "latestVerification": {
+        "date": "2026-10-30",
+        "status": "CLI_COMMAND_NAME_FIX_PENDING_FULL_ROM",
+        "receipt": "docs/UTILITY_PPMORE_STARTUP_2026-10-30.json",
+        "scope": "Native 1.3 reader verified through 12000 fields. CopperStart startup's argv[0] copy overwrites its Process because the recovery CLI command name is empty. No CopperStart reader pass."
+      }
     },
     {
       "id": "personal-paint-71c",

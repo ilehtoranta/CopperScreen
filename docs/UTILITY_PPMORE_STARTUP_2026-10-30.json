@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "utilityId": "ppmore-18a",
+  "status": "CLI_COMMAND_NAME_FIX_PENDING_FULL_ROM",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow; protected DD DF0; no Fast/RTC/host directories",
+  "controlledDisk": {
+    "sha256": "d4962fcc46174985c6f23cfac87bc2dfa6be63b6a4840f1352ced2ddbd36ba00",
+    "baseSysInfoDiskSha256": "77e64513b230b2dceb8012fc747ac6b0fba2c0297b662dfac30ee1e11599830c",
+    "ppmoreProgramSha256": "6b0af8040f83e20f792324163b6750e5a2ca58341cfd39058186f3c288e737da",
+    "providerSha256": "d922b42c0712b48b4a49a9e487dcaf25a875d4ab87655c9bf7077605ec8b89fe",
+    "fixtureLines": 82,
+    "freeBlocks": 121,
+    "recipe": "scripts/probes/UtilityStartup/prepare_ppmore_desktop.py",
+    "reqtools": {
+      "version": "38.385 (23.11.92), Kickstart 1.3 build",
+      "bytes": 39000,
+      "sha256": "305b2db13afc88ae61ccb9649dc24e5867a7263ddd2a249a71ad67e9a2000e08",
+      "source": "https://ftp.fau.de/aminet/misc/fish/fish-0794.lha",
+      "archiveSha256": "50c0355d2a34e69df41ad6b8bbea11ef282e6160e5b12782bd2f1118a15eb6bc",
+      "member": "ReqTools/libs13/reqtools.library",
+      "distributionDocumentationPreserved": true
+    },
+    "powerpacker": {
+      "bytes": 6128,
+      "sha256": "3f17ca541ec190bd2bdb899bb10ec150908c9e55bca3fac4237426c343d49819",
+      "archive": "media/utilities/originals/PPShow40.lha",
+      "member": "PPShow/libs/powerpacker.library"
+    },
+    "scope": "Local controlled guest installation; original archives and PPMore executable preserved; PPShow's 2.0-only ReqTools library is not used"
+  },
+  "native13": {
+    "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "completedFields": 12000,
+    "readerInspectedAtField": 7000,
+    "readerRgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03",
+    "finalRgbIdenticalToInspectedReader": true,
+    "scope": "Main reader, expected fixture title, line count and visible text; inputs not exercised"
+  },
+  "copperStartBefore": {
+    "romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+    "completedFields": 32000,
+    "unsupported": null,
+    "mainReader": false,
+    "firstProcessTypeOverwrite": {"field": 17554, "cycle": 2494528930, "address": "00C10540", "instructionPc": "00C15DD4", "instruction": "MOVE.B (A1,D2.W),1(A0,D2.W)", "d2": "FFFFC6F7", "a0": "00C13E48"},
+    "cause": "Recovery CLI leaves cli_CommandName empty; PPMore's native C startup underflows its argv[0] DBRA copy count before opening ReqTools",
+    "trace": "artifacts/utility-sequential-2026-10-30/ppmore/first-process-overwrite-v1"
+  },
+  "focusedBeforeTest": {"name": "NativeCliProgramNameTests", "native13Passed": 1, "copperStartFailed": 1, "skipped": 0, "copperStartNames": ["", ""], "argumentBytes": 7},
+  "unresolvedCoverage": ["Source-built CLI correction and focused after cases", "PPMore reader under CopperStart", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
+  "firmwarePinChangedByThisWork": false
+}

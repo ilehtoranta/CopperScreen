@@ -28,6 +28,12 @@ Exec OpenDevice, DoIO and Wait observations include calls still pending at the
 stop, allowing a later device/startup wait to be separated from a library fault.
 Execution does not establish application correctness merely by reaching END_FIELD.
 
+For a bounded first-write diagnosis, set `COPPERSTART_PROBE_WATCH_ADDRESS` and
+`COPPERSTART_PROBE_WATCH_BYTE` to hexadecimal values. At START_FIELD the byte
+must still have its expected value. The probe stops and retains its instruction
+ring on the first observed change. This is a host diagnostic watch, not an
+emulated memory validity rule; it is disabled when the variables are absent.
+
 `prepare_sysinfo_desktop.py` creates a separately identified controlled SysInfo
 disk. It requires `amitools` on the Python import path, the original collected
 ADF, and native provider/`CopperGui` outputs from CopperStart's
@@ -36,6 +42,21 @@ only two guest HUNK files and the prerequisite invocation in Startup-Sequence.
 Its JSON receipt records input/output hashes and every changed disk path.
 Neither creating the disk nor passing the provider test establishes that
 SysInfo reaches its main screen; inspect the native replay separately.
+
+`prepare_ppmore_desktop.py` builds a separately identified PPMore reader disk
+from the collected SysInfo boot disk and the same guest GUI module. It keeps
+PPMore's executable unchanged, installs the Kickstart 1.3 ReqTools 38.385 build
+from `ReqTools/libs13/reqtools.library` in the preserved
+[Fish 794 archive](https://ftp.fau.de/aminet/misc/fish/fish-0794.lha), and pins
+PPShow's bundled PowerPacker library. PPShow's ReqTools library requires 2.0+
+and is not used for this test. Original archives and distribution documentation
+remain local; generated disks are local test installations.
+
+The reader opens an original, fixed 82-line ASCII fixture. The script writes a
+sidecar with every installed file's bytes/hash, archive hashes, provider inputs
+and startup sequence. It requires `amitools` and `lhafile`. Pass `--base`,
+`--ppmore`, `--ppshow`, `--reqtools`, `--provider-root` and a new `--output` path.
+Disk creation alone does not establish a successful PPMore replay.
 
 ```powershell
 python scripts/probes/UtilityStartup/prepare_sysinfo_desktop.py `
