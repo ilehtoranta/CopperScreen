@@ -14,7 +14,7 @@ marking the collection complete.
 | Order | Utility | Current-source status | Evidence |
 | --- | --- | --- | --- |
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
-| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | IN PROGRESS: shell launch fixed; application waits for a CIA timer | [Latest receipt](UTILITY_XCOPY_SHELL_2026-10-29.json) |
+| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | PENDING | Not yet verified in this sequence |
 | 4 | SysInfo 4.4 | PENDING | Not yet verified in this sequence |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
@@ -106,3 +106,44 @@ set. The independent font checks cover every original glyph and the default cell
 The [latest receipt](UTILITY_XCOPY_SHELL_2026-10-29.json) and
 [producer note](https://github.com/ilehtoranta/CopperStart/blob/6122489bcdb8aa4a97c021bdd7d7c5348559defa/Docs/NativeRecoveryCli20261029.md)
 preserve the inputs, checks, remaining failures and limits.
+
+### Disk resource follow-up: main screen verified
+
+The bounded startup trace identifies an earlier divergence: X-Copy's
+`OpenResource("disk.resource")` returns zero. Its fallback runs before the
+program installs its own interrupt vectors, leading to the later timer wait.
+Producer commit `1d971eceb8eeeb207cf04b442474c0fb13aa0208` publishes the native
+identification record and `GetUnitID`. It also preserves the original internal
+DD drive's special ID behaviour, checked against Kickstart 1.3. Shared disk
+ownership APIs remain unsupported.
+
+The final standalone ROM is 524,288 bytes, SHA-256
+`a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003`,
+checksum `$FFFFFFFF`. Removing replaced graphics constructors and compacting
+the pen table saves 492 bytes. The resident at `$FF9E08` leaves 66 bytes before
+graphics and 16 before the checksum. Both production solutions build, and all
+19 selected native identification/CLI/keyboard/console/font/graphics cases pass
+without skips. The native identification control and five compiled drive
+geometry/motor cases pass separately.
+
+Both original-media X-Copy runs complete 12,000 fields with the unchanged F1
+workload and display DOSCOPY, with RAM selected and DF0 available as source and
+target. The screens were inspected; their pre-launch menu pixels match exactly.
+The main screens have different free-memory counters. This verifies startup and
+the main screen; disk check/copy/format and Cyclone remain unverified.
+
+ProTracker completes another 26,000-field regression with the unchanged v3
+workload. The main editor was inspected, and its complete pattern and sequencer
+mode match all eight native-reference checkpoints.
+
+The broader compact graphics fixtures retain the same 109 failing cases under
+both the prior and changed emitter (143 pass in each). They remain open, along
+with the earlier two full-ROM takeover probe failures. A separate pixel
+reference fixture calls OS 3.0 AllocBitMap, so its failed Kickstart 1.3 attempt
+is unavailable reference coverage. These are not counted in the 19 passing
+selected cases. See the [receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json)
+and [producer note](https://github.com/ilehtoranta/CopperStart/blob/1d971eceb8eeeb207cf04b442474c0fb13aa0208/Docs/NativeDiskIdentification20261029.md).
+
+ProTracker and X-Copy now meet the sequence's main-screen requirement. The next
+utility is Amiga Test Kit. The remaining ten and the final current-source sweep
+are still pending; the overall collection goal and app firmware pin are unchanged.

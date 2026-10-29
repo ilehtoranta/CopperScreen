@@ -3,9 +3,9 @@
 Collected 2026-10-27; latest testing 2026-10-29. Collection ID: `amiga-utilities-v1`.
 
 The [sequential current-source checks](UTILITY_SEQUENTIAL_2026-10-29.md) verify
-ProTracker's main editor and selected inputs under both ROMs. X-Copy's boot menu
-now matches the native ROM and its shell launch works, but the application waits
-for a CIA timer before reaching DOSCOPY. The remaining utilities are pending in
+ProTracker's main editor and selected inputs under both ROMs. X-Copy now reaches
+its DOSCOPY main screen under both ROMs; disk operations remain unverified.
+The remaining ten utilities are pending in
 that sequence; older exploratory results below retain their recorded inputs and scope.
 
 This is a local collection for manual emulation checks and CopperStart versus

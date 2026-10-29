@@ -58,6 +58,15 @@
         "romSha256": "096e4c1a49d01bc94e1f3e25da38b3f141e97992cd69f38e39bc8f3e0e883d71",
         "completedFieldsPerRom": 26000,
         "scope": "Main editor, note pattern, play/stop and mouse parity. Not full application qualification."
+      },
+      "latestRegression": {
+        "date": "2026-10-29",
+        "producerCommit": "1d971eceb8eeeb207cf04b442474c0fb13aa0208",
+        "copperStartRomSha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
+        "receipt": "docs/UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json",
+        "completedFields": 26000,
+        "checkpointsMatchingNative": 8,
+        "scope": "Main editor and pattern/play-stop regression; no nonempty sample playback or disk-write qualification."
       }
     },
     {
@@ -70,7 +79,7 @@
       "requirements": "A500 candidate from authorised original master ADF. Begin with read/check operations. Cyclone external hardware is a separate unsupported prerequisite.",
       "lane": "a500-candidate",
       "scenario": "Boot and check a known generated standard DD disk; seek/read both sides, report sectors and errors. Copy/format requires a separate admitted writable disposable target and drive configuration.",
-      "executionStatus": "paired-development-rom-explored",
+      "executionStatus": "main-screen-verified-both-roms",
       "assets": [
         {
           "file": "originals/xcopy_v5.21_en_1991-11-17_c911.zip",
@@ -98,11 +107,12 @@
       },
       "latestVerification": {
         "date": "2026-10-29",
-        "status": "GUEST_COMMAND_LAUNCH_FIXED_APPLICATION_WAITS_FOR_CIA_TIMER",
-        "copperStartRomSha256": "2a0bbf8cc7aa217be21bb222d9cc1c4fd69012c122b495e653b106be932b662c",
+        "status": "MAIN_SCREEN_VERIFIED_BOTH_ROMS",
+        "producerCommit": "1d971eceb8eeeb207cf04b442474c0fb13aa0208",
+        "copperStartRomSha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
         "evidenceDocument": "docs/UTILITY_SEQUENTIAL_2026-10-29.md",
-        "receipt": "docs/UTILITY_XCOPY_SHELL_2026-10-29.json",
-        "limits": "Development ROM; app pin unchanged. X-Copy DOSCOPY screen, disk checks/copy/format and Cyclone remain unverified. No nonempty ProTracker sample playback or throughput acceptance claimed."
+        "receipt": "docs/UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json",
+        "limits": "Development ROM; app pin unchanged. Main screen only; disk checks/copy/format and Cyclone remain unverified."
       }
     },
     {

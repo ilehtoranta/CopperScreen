@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "utilityId": "xcopy-521",
+  "status": "MAIN_SCREEN_VERIFIED_BOTH_ROMS",
+  "producerCommit": "1d971eceb8eeeb207cf04b442474c0fb13aa0208",
+  "consumerEngineCommit": "b9f26ed8093f470d15e969beeb45b3ac6f361fab",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow, one protected DD DF0; no Fast/RTC/host directories",
+  "rom": {
+    "bytes": 524288,
+    "sha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
+    "checksum": "ffffffff",
+    "compiledRootBytes": 499134,
+    "graphicsBytes": 25044,
+    "graphicsResident": "00FF9E08",
+    "rootGapBytes": 66,
+    "checksumGapBytes": 16
+  },
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/1d971eceb8eeeb207cf04b442474c0fb13aa0208/Docs/NativeDiskIdentification20261029.md",
+  "romBuildManifest": {
+    "extensionRom": null,
+    "scope": "68000 PAL OCS A500; native DD/HD DF0 or CopperHDF explicit/RDB FFS partitions with TD64 offsets and signed boot priorities; native graphics, DOS, CON and optional L:CopperShell",
+    "storageQualification": false,
+    "entryPoint": "CopperStart.SystemRom.Program::BootstrapEntry",
+    "a1200": false,
+    "romBytes": 524288,
+    "inputs": [
+      {
+        "sha256": "8ACB0884C1F66A1EA60F4135EAB5766588456213017337F29282832733A79238",
+        "file": "CopperStart-System.dll"
+      },
+      {
+        "sha256": "04BB4FE6D4A353599663F8AA9A3DD419CC74B2CEACB7B83822D2F9F1EB3ED8B8",
+        "file": "CopperStart.Exec.dll"
+      },
+      {
+        "sha256": "F300F420CFD72CD20DB1EB0B4A47DE308E40182FE6C99AFAA499BC64C7A4E479",
+        "file": "CopperStart.Devices.dll"
+      },
+      {
+        "sha256": "D48B80A0007E3A58109F4C0B51FDB2C84D58520388EB3A83538D2486FA561D50",
+        "file": "CopperStart.Dos.dll"
+      },
+      {
+        "sha256": "63A1CBA87F993172E2BA8E8E88117E66932023F9C25C325EC016292A9069E4F0",
+        "file": "CopperSFS.Core.dll"
+      },
+      {
+        "sha256": "D7ADBF00756F2FD2665386AE0DD95282F1767E230BC51249A439C7A0CB922695",
+        "file": "CopperSharp.Sdk.Amiga.dll"
+      },
+      {
+        "sha256": "E88515004C9EDA94866D620D97EE1F00F9DBA25AB432B99A96FBC3A2EE3AAE78",
+        "file": "CopperSharp.Sdk.Amiga.Support.dll"
+      },
+      {
+        "sha256": "94C71F2C151702B14B4C037A24393A15C25E1727E0C15C2DC7390F671FA7E203",
+        "file": "CopperSharp.Compiler.dll"
+      },
+      {
+        "sha256": "8BF0BE25850CA56ED2DFBA5C28CE2E1A53EFB44446A3B61B7A7125860DB94E10",
+        "file": "CopperStart.Graphics.dll"
+      }
+    ],
+    "fileSystemProfile": "Classic",
+    "sha256": "A71247DB3C4AA88D9B4A46C2B4F0157ACBF7136CAC1A8B50ECB80E88D9F19003"
+  },
+  "previousReceipt": "UTILITY_XCOPY_SHELL_2026-10-29.json",
+  "firstDivergence": {
+    "previousRomSha256": "2a0bbf8cc7aa217be21bb222d9cc1c4fd69012c122b495e653b106be932b662c",
+    "openResourceCallPc": "00C1CCCA",
+    "resource": "disk.resource",
+    "result": 0,
+    "fallbackBranchPc": "00C1CCD0",
+    "observation": "Missing resource bypasses the application interrupt-vector setup before the timer wait."
+  },
+  "originalMediaSha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde",
+  "workload": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json",
+  "nativeRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "runs": [
+    {
+      "side": "CopperStart",
+      "directory": "artifacts\\utility-sequential-2026-10-29\\xcopy-disk-id-final",
+      "completedFields": 12000,
+      "snapshots": 121,
+      "mainApplicationObserved": true,
+      "screen": "X-Copy 5.21 DOSCOPY, RAM device, DF0 source and target selected",
+      "screenVisuallyInspected": true,
+      "finalRgbSha256": "f8d01622feb0f7d46721e34b492d7f719ea7ce532a54a1c0218d20107ce2a01b",
+      "finalPc": "00C1E43E",
+      "reportedUnsupported": false
+    },
+    {
+      "side": "Kickstart 1.3",
+      "directory": "artifacts\\utility-sequential-2026-10-29\\xcopy-kick13-disk-id",
+      "completedFields": 12000,
+      "snapshots": 121,
+      "mainApplicationObserved": true,
+      "screen": "X-Copy 5.21 DOSCOPY, RAM device, DF0 source and target selected",
+      "screenVisuallyInspected": true,
+      "finalRgbSha256": "72d5533c1698efe49af8ce3716e4a8bf7d007f6dc660ff637f1eb224454e70e8",
+      "finalPc": "00C0C516",
+      "reportedUnsupported": false
+    }
+  ],
+  "bootMenu": {
+    "field": 2900,
+    "bothRomPixelsEqual": true,
+    "rgbSha256": "030ac677ad3b847d2e8f6dd6b6d7b090e15a2a3b48096ebd23ca6c663d26b560"
+  },
+  "selectedNativeTests": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "producerLog": "artifacts/xcopy-disk-id-final-native-tests.log",
+    "identificationKickstart13ControlPassed": 1,
+    "compiledGeometryAndMotorCasesPassed": 5,
+    "penCacheCombinations": 648
+  },
+  "existingGraphicsFailures": {
+    "baseline": {
+      "total": 252,
+      "passed": 143,
+      "failed": 109
+    },
+    "changed": {
+      "total": 252,
+      "passed": 143,
+      "failed": 109
+    },
+    "sameFailureNames": true,
+    "failureNamesSha256": "8d4a82a59a176cc2f8f4d483ddf07b10b49f76064bca53ae4e3c72750ab6c891",
+    "referencePixelProbe": {
+      "rom": "Kickstart 1.3",
+      "result": "failed",
+      "limit": "Fixture invokes AllocBitMap (-918), an OS 3.0 API; this is unavailable reference coverage for 1.3."
+    },
+    "earlierFullRomTakeoverProbeFailures": 2
+  },
+  "builds": {
+    "CopperStartRelease": "PASS (11 existing warnings)",
+    "CopperScreenRelease": "PASS"
+  },
+  "protrackerRegression": {
+    "directory": "artifacts\\utility-sequential-2026-10-29\\protracker-disk-id-final",
+    "completedFields": 26000,
+    "snapshots": 261,
+    "mainEditorVisuallyInspected": true,
+    "patternBytesComparedPerCheckpoint": 1024,
+    "copperStartSlowRamOffsets": {
+      "pattern": "00043F14",
+      "runMode": "0002BD28"
+    },
+    "nativeSlowRamOffsets": {
+      "pattern": "000329B4",
+      "runMode": "0001DB38"
+    },
+    "nativeReferenceDirectory": "artifacts\\utility-sequential-2026-10-29\\protracker-kick13-final",
+    "checkpoints": [
+      {
+        "field": 23900,
+        "patternSha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24200,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24400,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "70617470",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24500,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "70617470",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24700,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 25100,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 25500,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 26000,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      }
+    ]
+  },
+  "limits": "Main screen and selected ProTracker interactions only. Disk ownership/copy/check/format, Cyclone hardware, nonempty sample playback and host throughput remain unqualified. Development ROM; app firmware pin unchanged. Ten utilities remain pending in the sequential current-source checks."
+}
