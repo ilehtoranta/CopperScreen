@@ -14,7 +14,7 @@ marking the collection complete.
 | Order | Utility | Current-source status | Evidence |
 | --- | --- | --- | --- |
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
-| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | IN PROGRESS: boot menu fixed; application launch still fails | [Receipt](UTILITY_XCOPY_2026-10-29.json) |
+| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | IN PROGRESS: shell launch fixed; application waits for a CIA timer | [Latest receipt](UTILITY_XCOPY_SHELL_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | PENDING | Not yet verified in this sequence |
 | 4 | SysInfo 4.4 | PENDING | Not yet verified in this sequence |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
@@ -82,3 +82,27 @@ additional regression check.
 
 The remaining ten utilities have not been tested in this sequence. The full
 collection goal remains open, and the app firmware pin is unchanged.
+
+### Recovery CLI follow-up
+
+Producer commit `6122489bcdb8aa4a97c021bdd7d7c5348559defa` registers the recovery
+CLI for native command launches and reads its command string line by line.
+The standalone ROM also reuses its original console glyph source for the public
+font and packs the graphics header to fit. Its SHA-256 is
+`2a0bbf8cc7aa217be21bb222d9cc1c4fd69012c122b495e653b106be932b662c`.
+Fourteen selected native launcher, keyboard and font tests pass; the command
+fixtures also pass under Kickstart 1.3 and fail under the preceding CopperStart
+ROM. All 44 compatibility-report validator cases pass.
+
+X-Copy now starts and displays **Loading XCopyPro**, but its 12,000-field run
+waits for a CIA-B timer flag at `$C1D094` and never reaches DOSCOPY. Continue this
+startup investigation before advancing. The boot menu still matches native
+pixels. ProTracker completes another 26,000-field run; its main editor was
+inspected and its pattern/mode match all eight native-reference checkpoints.
+
+Two existing graphics takeover probe cases fail under both the previous and
+current ROM. They remain open and are not counted in the passing launcher/font
+set. The independent font checks cover every original glyph and the default cell.
+The [latest receipt](UTILITY_XCOPY_SHELL_2026-10-29.json) and
+[producer note](https://github.com/ilehtoranta/CopperStart/blob/6122489bcdb8aa4a97c021bdd7d7c5348559defa/Docs/NativeRecoveryCli20261029.md)
+preserve the inputs, checks, remaining failures and limits.

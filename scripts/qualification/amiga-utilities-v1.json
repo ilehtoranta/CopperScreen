@@ -98,11 +98,11 @@
       },
       "latestVerification": {
         "date": "2026-10-29",
-        "status": "BOOT_MENU_FIXED_MAIN_APPLICATION_NOT_VERIFIED",
-        "copperStartRomSha256": "8ec53c897f37b6b68b0bd7d0b038b238c33c5230cfd09d81189711c189e02601",
+        "status": "GUEST_COMMAND_LAUNCH_FIXED_APPLICATION_WAITS_FOR_CIA_TIMER",
+        "copperStartRomSha256": "2a0bbf8cc7aa217be21bb222d9cc1c4fd69012c122b495e653b106be932b662c",
         "evidenceDocument": "docs/UTILITY_SEQUENTIAL_2026-10-29.md",
-        "receipt": "docs/UTILITY_XCOPY_2026-10-29.json",
-        "limits": "Development rebuild; app pin unchanged. No X-Copy disk check/copy/format or Cyclone test. No ProTracker nonempty sample/audio test. No throughput claim."
+        "receipt": "docs/UTILITY_XCOPY_SHELL_2026-10-29.json",
+        "limits": "Development ROM; app pin unchanged. X-Copy DOSCOPY screen, disk checks/copy/format and Cyclone remain unverified. No nonempty ProTracker sample playback or throughput acceptance claimed."
       }
     },
     {

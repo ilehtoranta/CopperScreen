@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "utilityId": "xcopy-521",
+  "status": "GUEST_COMMAND_LAUNCH_FIXED_APPLICATION_WAITS_FOR_CIA_TIMER",
+  "producerCommit": "6122489bcdb8aa4a97c021bdd7d7c5348559defa",
+  "consumerEngineCommit": "cabc581bb2544bacffe05fda9e652ba8aaa3397c",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow, one protected DD DF0; no Fast/RTC/host directories",
+  "rom": {
+    "bytes": 524288,
+    "sha256": "2a0bbf8cc7aa217be21bb222d9cc1c4fd69012c122b495e653b106be932b662c",
+    "checksum": "ffffffff",
+    "compiledRootBytes": 498616,
+    "graphicsBytes": 25536,
+    "graphicsResident": "00FF9C28",
+    "rootGapBytes": 104,
+    "checksumGapBytes": 4
+  },
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/6122489bcdb8aa4a97c021bdd7d7c5348559defa/Docs/NativeRecoveryCli20261029.md",
+  "previousReceipt": "UTILITY_XCOPY_2026-10-29.json",
+  "workload": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json",
+  "originalMediaSha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde",
+  "applicationRun": {
+    "directory": "artifacts\\utility-sequential-2026-10-29\\xcopy-recovery-lines-main",
+    "completedFields": 12000,
+    "snapshots": 121,
+    "mainApplicationObserved": false,
+    "screen": "Loading XCopyPro. Please wait..",
+    "pc": "00C1D094",
+    "waitFlagAddress": "00C21D7C",
+    "waitFlagValue": "ff",
+    "ciaBHardwareMask": 1,
+    "ciaResourceEnabledShadow": 0,
+    "ciaResourceOwnerSlots": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "note": "A complete diagnostic capture and no unsupported-feature stop are not a successful application run."
+  },
+  "reference": {
+    "receipt": "UTILITY_XCOPY_2026-10-29.json",
+    "kickstart13DoscopyAlreadyObserved": true,
+    "newNativeReplayClaimed": false
+  },
+  "nativeRegression": {
+    "selected": 14,
+    "passed": 14,
+    "skipped": 0,
+    "log": "artifacts\\utility-sequential-2026-10-29\\xcopy-recovery-lines-tests.log",
+    "fontGlyphCells": 225,
+    "fontRowsPerCell": 8,
+    "fontSlowRamConfigurations": [
+      0,
+      524288
+    ],
+    "compatibilityValidatorCasesPassed": 44
+  },
+  "executeControlFixtures": {
+    "kickstart13Passed": 2,
+    "previousCopperStartFailedToExecuteCommands": 2,
+    "source": "NativeRecoveryCliExecuteTests",
+    "localRunSha256": "63c3616e49ec1a46da10b5fd57277cf1ad91b41083346ee361e65c392d1a58be",
+    "localEndCliSha256": "642198ff18c68943f3a7b80b2360b5ab9df85d738b0c3dec12462473929583a0"
+  },
+  "knownSeparateFailure": "Both GuestOpensGraphicsInitializesCallerStorageAndAllocatesRasterThroughNativeVectors takeover cases fail under the previous 8ec53c89 ROM and the current image; they are excluded from the 14 passing launcher/font checks and remain open.",
+  "protrackerRegression": {
+    "directory": "artifacts\\utility-sequential-2026-10-29\\protracker-recovery-cli",
+    "completedFields": 26000,
+    "snapshots": 261,
+    "mainScreenInspected": true,
+    "matches": [
+      {
+        "field": 23900,
+        "patternSha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24200,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24400,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "70617470",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24500,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "70617470",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 24700,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 25100,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 25500,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      },
+      {
+        "field": 26000,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "mode": "00000000",
+        "matchesNativeReference": true
+      }
+    ]
+  },
+  "limits": "Development ROM; app pin unchanged. X-Copy DOSCOPY screen, disk checks/copy/format and Cyclone remain unverified. No nonempty ProTracker sample playback or throughput acceptance claimed."
+}
