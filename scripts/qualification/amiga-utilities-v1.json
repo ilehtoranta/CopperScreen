@@ -61,12 +61,10 @@
       },
       "latestRegression": {
         "date": "2026-10-29",
-        "producerCommit": "1d971eceb8eeeb207cf04b442474c0fb13aa0208",
-        "copperStartRomSha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
-        "receipt": "docs/UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json",
-        "completedFields": 26000,
-        "checkpointsMatchingNative": 8,
-        "scope": "Main editor and pattern/play-stop regression; no nonempty sample playback or disk-write qualification."
+        "producerCommit": "a58bca7053d775d92819d3b04e267b01cc3ba209",
+        "copperStartRomSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
+        "receipt": "docs/UTILITY_SYSINFO_STARTUP_2026-10-29.json",
+        "scope": "Editor and all eight native pattern/play-stop checkpoints verified after 26000 fields."
       }
     },
     {
@@ -113,6 +111,13 @@
         "evidenceDocument": "docs/UTILITY_SEQUENTIAL_2026-10-29.md",
         "receipt": "docs/UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json",
         "limits": "Development ROM; app pin unchanged. Main screen only; disk checks/copy/format and Cyclone remain unverified."
+      },
+      "latestRegression": {
+        "date": "2026-10-29",
+        "producerCommit": "a58bca7053d775d92819d3b04e267b01cc3ba209",
+        "copperStartRomSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
+        "receipt": "docs/UTILITY_SYSINFO_STARTUP_2026-10-29.json",
+        "scope": "DOSCOPY main screen inspected after 12000 fields."
       }
     },
     {
@@ -158,6 +163,13 @@
         "copperStartRomSha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
         "receipt": "docs/UTILITY_TESTKIT_2026-10-29.json",
         "scope": "Main menu, individual channel mute and F7 restore; earlier missing-label interpretation contradicted by raw pixels. No full subtest suite."
+      },
+      "latestRegression": {
+        "date": "2026-10-29",
+        "producerCommit": "a58bca7053d775d92819d3b04e267b01cc3ba209",
+        "copperStartRomSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
+        "receipt": "docs/UTILITY_SYSINFO_STARTUP_2026-10-29.json",
+        "scope": "Main menu and selected audio frames match native 1.3 through 7200 fields."
       }
     },
     {
@@ -170,7 +182,7 @@
       "requirements": "Classic 68k and Kickstart 1.x candidate; no FPU in the A500 pair. Keep the official ADF separate from a controlled executable installation.",
       "lane": "a500-candidate",
       "scenario": "Inspect CPU/chipset, memory and library/device enumeration; scroll before and after speed test and quit/relaunch. Treat reported speed as guest behaviour, not host acceptance throughput.",
-      "executionStatus": "paired-development-rom-explored",
+      "executionStatus": "sequential-startup-investigation",
       "assets": [
         {
           "file": "originals/sysinfo_4.4.lha",
@@ -202,6 +214,14 @@
         "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
         "qualification": "Development diagnostic only; app firmware pin unchanged",
         "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      },
+      "latestVerification": {
+        "date": "2026-10-29",
+        "status": "INITIAL_COMMAND_RETURN_FIXED_MAIN_SCREEN_STILL_FAILS",
+        "producerCommit": "a58bca7053d775d92819d3b04e267b01cc3ba209",
+        "copperStartRomSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
+        "receipt": "docs/UTILITY_SYSINFO_STARTUP_2026-10-29.json",
+        "scope": "Native 1.3 main screen verified. First CopperStart C-command exit fixed; later screen/window failure persists through 36000 fields. No main-screen pass."
       }
     },
     {

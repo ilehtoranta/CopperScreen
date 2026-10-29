@@ -6,8 +6,8 @@ The [sequential current-source checks](UTILITY_SEQUENTIAL_2026-10-29.md) verify
 ProTracker's main editor and selected inputs under both ROMs. X-Copy now reaches
 its DOSCOPY main screen under both ROMs; disk operations remain unverified.
 Amiga Test Kit's main menu and selected audio controls are also verified.
-The remaining nine utilities are pending in
-that sequence; older exploratory results below retain their recorded inputs and scope.
+SysInfo's startup investigation remains open, with eight later utilities pending
+in that sequence; older exploratory results below retain their recorded inputs and scope.
 
 This is a local collection for manual emulation checks and CopperStart versus
 native Kickstart comparisons: **12 utilities, 14 original downloads, four ADFs

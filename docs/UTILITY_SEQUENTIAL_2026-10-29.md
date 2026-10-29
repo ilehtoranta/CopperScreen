@@ -16,7 +16,7 @@ marking the collection complete.
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
-| 4 | SysInfo 4.4 | PENDING | Not yet verified in this sequence |
+| 4 | SysInfo 4.4 | IN PROGRESS: initial command exit fixed; later screen/window startup failure | [Receipt](UTILITY_SYSINFO_STARTUP_2026-10-29.json) |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
@@ -167,3 +167,42 @@ for that observation. The [receipt](UTILITY_TESTKIT_2026-10-29.json) records
 pixel hashes, regions and per-channel PCM RMS.
 
 The next utility is SysInfo. Nine utilities and the final sweep remain pending.
+
+## SysInfo startup investigation
+
+An input-free native Kickstart 1.3 run reaches the information screen and
+completes 7,200 fields. CopperStart initially fails in the preceding disk
+startup command `C:SetPatch_1.38`: its C cleanup reads a zero `pr_ReturnAddr`
+and moves SP to `$FFFFFFF4` at field 2,125. This happens before SysInfo starts.
+
+Producer commit `a58bca7053d775d92819d3b04e267b01cc3ba209` publishes the command's
+public stack-size word and DOS return frame, restores the parent frame across
+nested launches, and reserves the additional metadata without consuming the
+requested stack. The authored exit/nested fixtures pass under both native 1.3
+and the new ROM and fail under the preceding CopperStart image. All 90 focused
+core/compiled-callback tests and 20 selected native guest/instruction cases pass.
+The production producer solution builds.
+
+The 524,288-byte development ROM is SHA-256
+`7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde`,
+checksum `$FFFFFFFF`. The 499,138-byte compiled root is followed by a 50-byte
+guest continuation at `$FF9DCA`; 12 free bytes remain before graphics at
+`$FF9E08`, and 16 before the checksum. The app firmware pin is unchanged.
+
+The original disk now gets past that first failure. A 36,000-field run still
+does **not** reach SysInfo's main screen. At field 10,772 it requests a
+640x256, three-plane screen with modes `$9020` and type `$118F`; Classic
+Intuition rejects it. Its error cleanup then calls ActivateWindow beyond the
+current library image. Separate native screen probes accept the request:
+Kickstart 1.3 preserves legacy mode flags, while native A500 Kickstart 3.1
+coerces it to available OCS hires. Continue screen coercion and real window
+support before advancing. A completed diagnostic run is not an application pass.
+
+The new ROM retains all three prior results: ProTracker's editor and eight
+native pattern/sequencer checkpoints after 26,000 fields, X-Copy's DOSCOPY
+screen after 12,000 fields, and six matching Test Kit main/audio framebuffers
+through 7,200 fields. Screens were inspected. The
+[receipt](UTILITY_SYSINFO_STARTUP_2026-10-29.json) and
+[producer note](https://github.com/ilehtoranta/CopperStart/blob/a58bca7053d775d92819d3b04e267b01cc3ba209/Docs/NativeCommandReturnFrame20261029.md)
+record the remaining failure and bounds. SysInfo, the eight later utilities
+and the final source sweep remain open.
