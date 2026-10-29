@@ -27,7 +27,9 @@ public sealed partial class LaunchWorkflowTests
             Click(Button(window, "Start Amiga"));
             await Until(() => Named<Button>(window, "Pause").IsEnabled);
             var original = SettingsField<CopperScreenRuntime>(window, "_runtime");
-            if (paused) await original.TogglePausedAsync();
+            if (paused) Assert.True((await original.TogglePausedAsync()).State.IsPaused);
+            // Command completion precedes publication of the runtime snapshot.
+            await Until(() => original.CurrentState.IsPaused == paused);
             Assert.Equal(paused, original.CurrentState.IsPaused);
             Assert.False(Named<Border>(window, "Pending restart notice").IsVisible);
             void EditHardware(string cpu, string ram)
@@ -94,6 +96,7 @@ public sealed partial class LaunchWorkflowTests
             Assert.Equal(M68kBackendKind.AccurateM68010, SettingsField<CopperScreenSettingsDraft>(window, "_committedSettings").CpuBackend);
             Assert.Equal(2048, SettingsField<CopperScreenSettingsDraft>(window, "_committedSettings").RealFastRamKb);
             var applied = SettingsField<CopperScreenRuntime>(window, "_runtime");
+            await Until(() => applied.CurrentState.IsPaused == paused);
             Assert.Equal(paused, applied.CurrentState.IsPaused);
             if (paused)
             {
@@ -104,6 +107,7 @@ public sealed partial class LaunchWorkflowTests
             Click(Named<Button>(window, "Restart"));
             await Until(() => !SettingsField<bool>(window, "_applyingSettings"));
             Assert.Same(applied, SettingsField<CopperScreenRuntime>(window, "_runtime"));
+            await Until(() => applied.CurrentState.IsPaused == paused);
             Assert.Equal(paused, applied.CurrentState.IsPaused);
             Assert.False(notice.IsVisible);
             Click(Button(window, "Configure Amiga…"));

@@ -907,7 +907,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 				command.Execute(_emulator);
 				if (command.PublishAfterExecute)
 				{
-					PublishCurrentFrame(framesRendered: 0, queuedAudioBuffers: _audio?.QueuedBufferCount ?? 0);
+					PublishCurrentFrame(framesRendered: 0, queuedAudioBuffers: _audio?.QueuedBufferCount ?? 0, replaceQueuedFrames: true);
 				}
 			}
 			catch (Exception ex)
@@ -1119,7 +1119,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 		FramePublished?.Invoke();
 	}
 
-	private void PublishCurrentFrame(int framesRendered, int queuedAudioBuffers)
+	private void PublishCurrentFrame(int framesRendered, int queuedAudioBuffers, bool replaceQueuedFrames = false)
 	{
 		var publishStartTimestamp = Stopwatch.GetTimestamp();
 		_pendingCopperBenchRequest |= _emulator.ConsumeCopperBenchRequest();
@@ -1140,7 +1140,9 @@ internal sealed class CopperScreenRuntime : IDisposable
 		else Monitor.Enter(_presentationSync, ref entered);
 		try
 		{
-			if (ShouldReplaceQueuedPresentationFrames(queuedAudioBuffers))
+			// A control command must publish its new state even with a full video
+			// queue. Pausing can otherwise leave no later guest frame to retry it.
+			if (replaceQueuedFrames || ShouldReplaceQueuedPresentationFrames(queuedAudioBuffers))
 			{
 				var queueCapacity = GetPublishPresentationQueueCapacity(queuedAudioBuffers);
 				while (_presentationQueueCount >= queueCapacity && TryDropOldestPresentationFrameNoLock())

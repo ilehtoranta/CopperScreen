@@ -4,6 +4,24 @@ namespace CopperScreen.Tests;
 
 public sealed class RuntimeAudioPacingTests
 {
+    [Fact]
+    public async Task PausePublishesStateWhenPresentationAndAudioQueuesAreFull()
+    {
+        using var sink = new ControlledSink();
+        var session = new ControlledSession(50);
+        using var runtime = CopperScreenRuntime.CreateForTests(session, sink);
+        runtime.Start();
+        Assert.True(sink.Full.Wait(TimeSpan.FromSeconds(5)));
+        Assert.Equal(2, runtime.CurrentState.PresentationQueueDepth);
+        var result = await runtime.TogglePausedAsync().WaitAsync(TimeSpan.FromSeconds(5));
+        Assert.True(result.Success);
+        Assert.True(result.State.IsPaused);
+        Assert.True(SpinWait.SpinUntil(() => runtime.CurrentState.IsPaused, TimeSpan.FromSeconds(5)),
+            "A full video queue stranded the pause snapshot with no further guest frame to publish it.");
+        Assert.Equal(Reserve, session.Fields);
+        Assert.Equal(Reserve, sink.QueuedBufferCount);
+    }
+
     private static int Reserve => (int)typeof(CopperScreenRuntime).GetField("AudioOutputBufferCount",
         System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)!.GetRawConstantValue()!;
     [Theory]
