@@ -89,7 +89,7 @@ public sealed partial class CopperOsGraphicsDmaTests
         internal void TextRepeat(int count,bool rom)
         {
             Ram.Slice(0xB0800,count).Fill(32);
-            if(rom)Long(TextFont+34,0xE7F000);
+            if(rom)Long(TextFont+34,RomFontAddress);
         }
         internal void TextSetup(int x,int baseline,int layout)
         {

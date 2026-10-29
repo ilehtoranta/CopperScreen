@@ -22,7 +22,7 @@ public sealed class CopperOsBootProofTests
     {
         var root = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPEROS_HDF_PROOF")!;
         var rom = Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_A1200_ROM")!;
-        Assert.Equal(1048576, CopperScreenCopperStartRom.Read(rom, a1200: true).Length);
+        Assert.Equal(524288, CopperScreenCopperStartRom.Read(rom, a1200: true).Length);
         Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(rom));
         var output = Path.Combine(root, "a1200-proof", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(output);

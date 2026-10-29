@@ -6,10 +6,11 @@ The start screen offers **Amiga 500**, **Amiga 500+**, **Amiga 1200**, and
 with no boot media, native Kickstart shows its insert-disk screen.
 
 For CopperOS, select **Amiga 1200 with CopperOS HDF** and press **Start CopperOS**.
-The qualified **CopperStart A1200 ROM (1 MiB)** and **8 MiB CopperOS FFS HDF**
+The qualified **CopperStart A1200 ROM (512 KiB)** and **8 MiB CopperOS FFS HDF**
 are embedded in the application. The HDF starts the native **CopperOS Desktop**
-with Home, Files, Editor and About. Allow around 40 seconds for startup at full
-emulation speed. No ROM, HDF or ADF picker is needed.
+with Home, Files, Editor and About. No ROM, HDF or ADF picker is needed.
+The current [single-bank qualification](COPPEROS_SINGLE_BANK_2026-10-29.md)
+records exact size, native call comparisons and the remaining cold-boot regression.
 The launcher creates `CopperOS/A1200-Desktop/CopperOS.hdf` in the user's app-data
 directory once, mounts it writable with `DH0:2:32:0:255`, and reuses it across
 launches, reselection and updates. The embedded seed is immutable. An existing

@@ -95,6 +95,7 @@ public sealed partial class CopperOsGraphicsDmaTests
         private readonly Action<long> advance;
         private readonly Func<bool> busy;
         internal bool SawBlitter;
+        internal uint RomFontAddress;
         private Span<byte> Ram=>MemoryMarshal.AsMemory(machine.ChipRam).Span;
         internal Fixture(M68kCpuModel model)
         {
@@ -106,11 +107,16 @@ public sealed partial class CopperOsGraphicsDmaTests
             using var buffer=new MemoryStream(); stream.CopyTo(buffer);
             var path=Environment.GetEnvironmentVariable("COPPERSCREEN_GRAPHICS_DMA_ROM");
             var rom=path==null?buffer.ToArray():File.ReadAllBytes(path);
+            var combined=rom.Length==1048576;
+            Assert.True(combined || rom.Length==524288);
             // Test-only ROM font outside emitted code. DMA must stage this
             // source into Chip RAM rather than use a ROM address on channel B.
+            RomFontAddress=combined?0xE7F000u:0xF81000u;
+            var fontOffset=combined?0x7F000:0x1000;
             for(var slot=0;slot<4;slot++)for(var row=0;row<8;row++)
-                rom[0x7F000+row*8+slot]=TextInk(slot==3?(byte)1:(byte)(slot+32),row);
-            machine.LoadKickstart(rom.AsSpan(524288)); machine.LoadExtensionRom(rom.AsSpan(0,524288));
+                rom[fontOffset+row*8+slot]=TextInk(slot==3?(byte)1:(byte)(slot+32),row);
+            machine.LoadKickstart(rom.AsSpan(combined?524288:0));
+            if(combined) machine.LoadExtensionRom(rom.AsSpan(0,524288));
             var clock=machine.Cycle;
             machine.WriteByte(0xBFE201,1,ref clock,default);
             machine.WriteByte(0xBFE001,0,ref clock,default);
@@ -121,12 +127,27 @@ public sealed partial class CopperOsGraphicsDmaTests
             busy=machine.GetType().GetProperty("BlitterBusy",flags)!.GetMethod!.CreateDelegate<Func<bool>>(machine);
             Long(4,Exec); Long(Exec+62,(uint)machine.ChipRam.Length); Long(Gfx+0x1A4,Exec);
             Word(Gfx+0x10,1200); Word(Gfx+0x12,512); // ReadExecBase supported; synthetic gate has no private owner
+            int RomOffset(uint address)=>address is >=0xF80000 and <0x1000000
+                ?checked((int)(address-0xF80000))+(combined?524288:0)
+                :combined && address is >=0xE00000 and <0xE80000?checked((int)(address-0xE00000)):-1;
+            uint RomLong(int offset)=>BinaryPrimitives.ReadUInt32BigEndian(rom.AsSpan(offset,4));
+            var residents=Enumerable.Range(0,(rom.Length-26)/2).Select(n=>n*2).Where(offset=>
+            {
+                if(BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(offset,2))!=0x4AFC ||
+                    RomOffset(RomLong(offset+2))!=offset) return false;
+                var name=RomOffset(RomLong(offset+14));
+                return name>=0 && name<=rom.Length-17 && rom.AsSpan(name,17).SequenceEqual("graphics.library\0"u8);
+            }).ToArray();
+            var resident=Assert.Single(residents);
+            var table=RomLong(RomOffset(RomLong(resident+22))+4);
+            var tableOffset=RomOffset(table);
+            Assert.Equal(0xFFFF,BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(tableOffset,2)));
             for(var slot=0;slot<200;slot++)
             {
-                var relative=BinaryPrimitives.ReadInt16BigEndian(rom.AsSpan(0x60062+slot*2,2));
+                var relative=BinaryPrimitives.ReadInt16BigEndian(rom.AsSpan(tableOffset+2+slot*2,2));
                 if(relative==-1) break;
                 var vector=Gfx-(uint)((slot+1)*6);
-                Word(vector,0x4EF9); Long(vector+2,unchecked(0xE60060u+(uint)relative));
+                Word(vector,0x4EF9); Long(vector+2,unchecked(table+(uint)relative));
             }
             machine.WriteWord(0xDFF096,0x8240,ref clock,default);
         }

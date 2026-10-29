@@ -24,7 +24,9 @@ using var machine = new LightweightA500Machine(new LightweightA500Configuration
 try
 {
 var rom = File.ReadAllBytes(args[0]);
-machine.LoadKickstart(rom.AsSpan(524288)); machine.LoadExtensionRom(rom.AsSpan(0, 524288));
+if (rom.Length is not (524288 or 1048576)) throw new InvalidDataException("Expected a 512 KiB reset ROM or retained 1 MiB combined ROM.");
+machine.LoadKickstart(rom.AsSpan(rom.Length == 1048576 ? 524288 : 0));
+if (rom.Length == 1048576) machine.LoadExtensionRom(rom.AsSpan(0, 524288));
 machine.SubmitInput(new(0,0,0,0,0,0));
 const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
 var type = machine.GetType();
@@ -100,7 +102,9 @@ for (var at=0;at<rom.Length-8;at+=2)
     var ea=op & 63; var mode=ea>>3;
     var extension=mode is 0 or 1 or 2 or 3 or 4 ? 0 : mode is 5 or 6 || ea is 56 or 58 or 59 or 60 ? 2 : 4;
     if (BinaryPrimitives.ReadUInt32BigEndian(rom.AsSpan(at+2+extension,4))==0xDFF058)
-        blitterStarts.Add((uint)(at<524288?0xE00000+at:0xF80000+at-524288));
+        blitterStarts.Add((uint)(rom.Length == 1048576
+            ? at < 524288 ? 0xE00000 + at : 0xF80000 + at - 524288
+            : 0xF80000 + at));
 }
 var blitterLaunches = new Dictionary<string,int>();
 var unmappedPages = new long[65536];
@@ -230,6 +234,8 @@ var result=new
     hot=symbols.Select((s,i)=>new{s.Address,s.Size,s.Name,cycles=cycles[i],instructions=instructions[i],seconds=cycles[i]/7093790.0}).OrderByDescending(p=>p.cycles).Take(60),
     inputs=args.Take(7).Select(p=>new{path=p,sha256=Hash(File.ReadAllBytes(p))}),
     graphicsMap=args.Length >= 10 ? new{path=args[9],sha256=Hash(File.ReadAllBytes(args[9]))} : null,
+    displayRegisters=new[]{0x02,0x80,0x82,0x8E,0x90,0x92,0x94,0xE0,0xE2,0xE4,0xE6,0x100,0x102,0x108,0x10A,0x180,0x182,0x184,0x186}
+        .ToDictionary(offset=>offset.ToString("X3"),offset=>custom((ushort)offset).ToString("X4")),
     state=new{pc=machine.Cpu.ProgramCounter,sr=machine.Cpu.StatusRegister,d=machine.Cpu.D,a=machine.Cpu.A,
         chip=Hash(machine.ChipRam.Span), pixels=Hash(System.Runtime.InteropServices.MemoryMarshal.AsBytes(machine.Framebuffer.Span)),
         audio=Hash(System.Runtime.InteropServices.MemoryMarshal.AsBytes(machine.AudioSamples.Span))}
@@ -245,6 +251,12 @@ catch(Exception)
     File.WriteAllBytes(Path.Combine(args[7],"failed-chip.bin"),machine.ChipRam.ToArray());
     Console.Error.WriteLine($"Failure state: PC={machine.Cpu.ProgramCounter:X8}, SR={machine.Cpu.StatusRegister:X4}, SP={machine.Cpu.A[7]:X8}, Exec={BinaryPrimitives.ReadUInt32BigEndian(machine.ChipRam.Span.Slice(4,4)):X8}, cycle={machine.Cycle}");
     throw;
+}
+finally
+{
+    File.WriteAllBytes(Path.Combine(args[7],"chip.bin"),machine.ChipRam.ToArray());
+    CopperScreen.Tests.NativeCapture.WritePng(Path.Combine(args[7],"desktop.png"),
+        machine.Framebuffer.Span,machine.FramebufferWidth,machine.FramebufferHeight);
 }
 
 sealed class Module(string path,string map)

@@ -72,11 +72,11 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
                 }
                 else _workspace = CopperOsWorkspace.Open(options.DriveDiskPaths[0]!);
             }
-            var integratedExtension = _copperStart && _machine.IsAga;
+            var integratedExtension = _copperStart && _machine.IsAga && rom.Length == 1048576;
             _machine.LoadKickstart(integratedExtension ? rom.AsSpan(524288) : rom);
             if (integratedExtension)
                 _machine.LoadExtensionRom(rom.AsSpan(0, 524288));
-            else if (_copperStart && !string.IsNullOrWhiteSpace(options.KickstartRomPath))
+            else if (_copperStart && !_machine.IsAga && !string.IsNullOrWhiteSpace(options.KickstartRomPath))
             {
                 var romDirectory = Path.GetDirectoryName(Path.GetFullPath(options.KickstartRomPath))!;
                 foreach (var name in new[] { "CopperStart-SfsExtension.rom", "CopperStart-DesktopExtension.rom" })

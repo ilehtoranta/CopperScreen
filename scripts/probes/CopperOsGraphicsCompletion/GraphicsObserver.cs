@@ -28,8 +28,8 @@ sealed class GraphicsObserver
         }
     }
     private byte B(uint p)=>p<machine.ChipRam.Length?machine.ChipRam.Span[(int)p]:
-        p is >=0xE00000 and <0xE80000?rom[p-0xE00000]:
-        p is >=0xF80000 and <0x1000000?rom[524288+p-0xF80000]:(byte)0;
+        rom.Length == 1048576 && p is >=0xE00000 and <0xE80000?rom[p-0xE00000]:
+        p is >=0xF80000 and <0x1000000?rom[(rom.Length == 1048576 ? 524288u : 0u)+p-0xF80000]:(byte)0;
     private ushort W(uint p)=>(ushort)(B(p)<<8|B(p+1));
     private uint L(uint p)=>(uint)W(p)<<16|W(p+2);
     private string Name(uint p)

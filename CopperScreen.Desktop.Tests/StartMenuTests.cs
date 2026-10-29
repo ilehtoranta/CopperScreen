@@ -105,7 +105,7 @@ public sealed partial class LaunchWorkflowTests
         File.WriteAllBytes(draft.KickstartRomPath, [0]);
         var updated = CopperScreenBundledCopperOs.PrepareForLaunch(draft, _root);
         Assert.NotEqual(draft.KickstartRomPath, updated.KickstartRomPath);
-        Assert.Equal(1048576, CopperScreenCopperStartRom.Read(updated.KickstartRomPath, a1200: true).Length);
+        Assert.Equal(524288, CopperScreenCopperStartRom.Read(updated.KickstartRomPath, a1200: true).Length);
         Assert.Equal(disk, updated.HardDrives.Single());
         Assert.Equal(bytes, File.ReadAllBytes(image));
         Assert.Equal(new byte[] { 0 }, File.ReadAllBytes(draft.KickstartRomPath));
@@ -155,7 +155,7 @@ public sealed partial class LaunchWorkflowTests
         using (var stream = File.OpenWrite(image)) { stream.Position = stream.Length - 1; stream.WriteByte(0x5A); }
         File.WriteAllBytes(draft.KickstartRomPath!, [0]);
         var repaired = CopperScreenBundledCopperOs.Prepare(draft, _root);
-        Assert.Equal(1048576, CopperScreenCopperStartRom.Read(repaired.KickstartRomPath, a1200: true).Length);
+        Assert.Equal(524288, CopperScreenCopperStartRom.Read(repaired.KickstartRomPath, a1200: true).Length);
         Assert.Equal(0x5A, File.ReadAllBytes(image)[^1]);
     }
 
