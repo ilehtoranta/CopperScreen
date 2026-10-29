@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "utilityId": "amiga-test-kit",
+  "version": "1.21",
+  "status": "MAIN_SCREEN_AND_SELECTED_AUDIO_CONTROLS_VERIFIED_BOTH_ROMS",
+  "producerCommit": "1d971eceb8eeeb207cf04b442474c0fb13aa0208",
+  "consumerEngineCommit": "6841fb8484a14e15a91639e871d11a9c7b104c69",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow, protected DD DF0; no Fast/RTC/host directories",
+  "copperStartRomSha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
+  "nativeRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "diskSha256": "abe7426c93619a7bb61ce10e3e66a4747fcaf22acd1d1876310033faa700ad28",
+  "workload": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-testkit-audio-v2.json",
+  "workloadSha256": "88687422b8e118f8709e67620bc283c6e6ece85672d78417930fbc9b3469d243",
+  "runs": [
+    {
+      "side": "CopperStart",
+      "directory": "artifacts\\utility-sequential-2026-10-29\\testkit-copperstart",
+      "completedFields": 7200,
+      "snapshots": 73,
+      "mainScreenVisuallyInspected": true,
+      "audioScreenVisuallyInspected": true,
+      "reportedUnsupported": false
+    },
+    {
+      "side": "Kickstart 1.3",
+      "directory": "artifacts\\utility-sequential-2026-10-29\\testkit-kick13",
+      "completedFields": 7200,
+      "snapshots": 73,
+      "mainScreenVisuallyInspected": true,
+      "audioScreenVisuallyInspected": true,
+      "reportedUnsupported": false
+    }
+  ],
+  "checkpoints": [
+    {
+      "field": 2900,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "ed4a2709d3ed5c960049cb4298fc7c5fbf1dbb54a41859fa53aa159c8d45070e",
+        "ed4a2709d3ed5c960049cb4298fc7c5fbf1dbb54a41859fa53aa159c8d45070e"
+      ],
+      "rms": {
+        "testkit-copperstart": [
+          0.0,
+          0.0
+        ],
+        "testkit-kick13": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "field": 3000,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "ed4a2709d3ed5c960049cb4298fc7c5fbf1dbb54a41859fa53aa159c8d45070e",
+        "ed4a2709d3ed5c960049cb4298fc7c5fbf1dbb54a41859fa53aa159c8d45070e"
+      ],
+      "rms": {
+        "testkit-copperstart": [
+          0.0,
+          0.0
+        ],
+        "testkit-kick13": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "field": 3100,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+        "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490"
+      ],
+      "staticAudioLabelsUnchanged": true,
+      "staticAudioLabelsRgbSha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86",
+      "rms": {
+        "testkit-copperstart": [
+          9421.42,
+          2805.35
+        ],
+        "testkit-kick13": [
+          9420.9,
+          2806.55
+        ]
+      }
+    },
+    {
+      "field": 3800,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "cf80374a43fba591aad052571b1fdbdfc099ed9215ce7955eb7300956737e07f",
+        "cf80374a43fba591aad052571b1fdbdfc099ed9215ce7955eb7300956737e07f"
+      ],
+      "staticAudioLabelsUnchanged": true,
+      "staticAudioLabelsRgbSha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86",
+      "rms": {
+        "testkit-copperstart": [
+          3710.29,
+          0.0
+        ],
+        "testkit-kick13": [
+          3708.58,
+          0.0
+        ]
+      }
+    },
+    {
+      "field": 4000,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "645a6e06ed83a68815c6e94ca68617da46fb0a074af9a1a31be49d15ca17d221",
+        "645a6e06ed83a68815c6e94ca68617da46fb0a074af9a1a31be49d15ca17d221"
+      ],
+      "staticAudioLabelsUnchanged": true,
+      "staticAudioLabelsRgbSha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86",
+      "rms": {
+        "testkit-copperstart": [
+          0.0,
+          0.0
+        ],
+        "testkit-kick13": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "field": 4200,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+        "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490"
+      ],
+      "staticAudioLabelsUnchanged": true,
+      "staticAudioLabelsRgbSha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86",
+      "rms": {
+        "testkit-copperstart": [
+          2155.63,
+          2357.99
+        ],
+        "testkit-kick13": [
+          2155.22,
+          2357.47
+        ]
+      }
+    },
+    {
+      "field": 7200,
+      "rgbEqual": true,
+      "rgbSha256": [
+        "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+        "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490"
+      ],
+      "staticAudioLabelsUnchanged": true,
+      "staticAudioLabelsRgbSha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86",
+      "rms": {
+        "testkit-copperstart": [
+          11509.41,
+          3388.98
+        ],
+        "testkit-kick13": [
+          11508.47,
+          3389.57
+        ]
+      }
+    }
+  ],
+  "labelCorrection": {
+    "earlierInterpretation": "Static labels disappear during channel toggles under both ROMs.",
+    "result": "CONTRADICTED_BY_RAW_CAPTURE_PIXELS",
+    "staticLabelRegion": [
+      430,
+      105,
+      575,
+      178
+    ],
+    "currentAndEarlierRegionRgbSha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86",
+    "fields": [
+      3100,
+      3800,
+      4000,
+      4200,
+      7200
+    ],
+    "wholeCurrentScreenEqualAfterMaskingStatusIndicators": true,
+    "inclusiveStatusRectangle": [
+      590,
+      105,
+      635,
+      151
+    ],
+    "maskedRgbSha256": "8f5e7e5ec14522e963acffec8795659f464ce499629d6303d2d1ee6356d69cc4",
+    "earlierRawEvidence": [
+      {
+        "directory": "artifacts\\utility-ab\\2026-10-28\\native-actions-v2\\native-testkit",
+        "staticLabels": [
+          {
+            "field": 3100,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 3800,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 4000,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 4200,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 7200,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          }
+        ]
+      },
+      {
+        "directory": "artifacts\\utility-ab\\2026-10-28\\copperstart-actions-v2\\development-copperstart-testkit",
+        "staticLabels": [
+          {
+            "field": 3100,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 3800,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 4000,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 4200,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          },
+          {
+            "field": 7200,
+            "sha256": "a149b1d5366c393700daeccb465167cc8fca06a69b4b9d5911b94f75aa99ba86"
+          }
+        ]
+      }
+    ],
+    "note": "Earlier source captures remain unchanged. Preview interpretation was wrong; no rendering code fix is justified by these captures."
+  },
+  "limits": "Main menu and selected audio controls only; no complete Test Kit subtest suite, physical Amiga comparison, bit-identical PCM claim or throughput acceptance. App firmware pin unchanged."
+}

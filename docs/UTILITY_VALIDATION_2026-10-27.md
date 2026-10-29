@@ -40,6 +40,11 @@ licences and prerequisites.
 | Amiga Test Kit 1.21 | Main menu appears; F5 opens Audio. Channel toggles produce stereo, then left-only output, all-off silence and restored stereo. | Static labels disappear during the toggle sequence while ON/OFF fields continue updating: unresolved rendering observation. No complete memory/CIA/video/floppy/peripheral suite was run. The menu's ROM identification text is not treated as a ROM-verification oracle. |
 | SysInfo 4.4 | Main screen enumerates Kickstart/libraries, 68000, OCS/STD Denise and installed memory. | The exploratory mouse/click sequence ends in a black display. It does not establish that the intended Speed control was selected, nor a successful benchmark or quit. Cause remains unresolved. |
 
+**2026-10-29 follow-up:** the missing-label interpretation is retracted after
+checking raw capture pixels. Static labels remain unchanged through the audio
+toggles; see the [pixel-based follow-up](UTILITY_TESTKIT_2026-10-29.json).
+
+
 All four initial 3,000-field boot observations and the four 4,200-field v1 action
 runs completed without an engine unsupported-feature stop. A completed runner
 process is not an application-operation pass. SysInfo's extended 7,200-field

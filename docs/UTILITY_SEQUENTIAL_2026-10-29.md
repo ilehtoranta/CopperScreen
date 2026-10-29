@@ -15,7 +15,7 @@ marking the collection complete.
 | --- | --- | --- | --- |
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
-| 3 | Amiga Test Kit 1.21 | PENDING | Not yet verified in this sequence |
+| 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | PENDING | Not yet verified in this sequence |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
@@ -147,3 +147,23 @@ and [producer note](https://github.com/ilehtoranta/CopperStart/blob/1d971eceb8ee
 ProTracker and X-Copy now meet the sequence's main-screen requirement. The next
 utility is Amiga Test Kit. The remaining ten and the final current-source sweep
 are still pending; the overall collection goal and app firmware pin are unchanged.
+
+## Amiga Test Kit result
+
+Both 7,200-field runs reach the main menu with the current standalone ROM and
+native Kickstart 1.3. The unchanged v2 audio workload opens F5 Audio, disables
+the four channels individually, then restores them with F7. The reviewed main
+and audio screens match pixel for pixel across ROMs. Captured PCM follows
+stereo, left-only, silence and restored stereo on both. The main menu and audio
+states were inspected; this does not qualify the entire diagnostic suite.
+
+The earlier report that static labels disappear is contradicted by raw pixels
+in both the current and original 2026-10-28 captures. At fields 3,100, 3,800,
+4,000, 4,200 and 7,200, the static-label crop is unchanged. Masking only the
+channel ON/OFF indicators also leaves the entire current audio framebuffer
+identical across those fields. The earlier preview interpretation was wrong;
+the original captures and fingerprints are preserved. No engine fix is needed
+for that observation. The [receipt](UTILITY_TESTKIT_2026-10-29.json) records
+pixel hashes, regions and per-channel PCM RMS.
+
+The next utility is SysInfo. Nine utilities and the final sweep remain pending.

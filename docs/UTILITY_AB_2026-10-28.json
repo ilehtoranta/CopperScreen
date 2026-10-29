@@ -247,5 +247,13 @@
   "evidenceRoot": "artifacts/utility-ab/2026-10-28",
   "scope": "Exploratory runner diagnostics. Not app UI, hardware conformance, full utility qualification or host performance acceptance.",
   "otherEightUtilities": "NOT RUN",
-  "firmwarePinChanged": false
+  "firmwarePinChanged": false,
+  "laterCorrections": [
+    {
+      "date": "2026-10-29",
+      "subject": "Test Kit static labels",
+      "correction": "The missing-label interpretation is contradicted by original raw capture pixels. Static labels remain unchanged during toggles. Original execution evidence and hashes remain unchanged.",
+      "receipt": "UTILITY_TESTKIT_2026-10-29.json"
+    }
+  ]
 }

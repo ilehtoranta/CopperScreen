@@ -125,7 +125,7 @@
       "requirements": "Bootable ADF and guest executable included. Begin on the bounded A500 machine; external peripherals require separate fixtures.",
       "lane": "a500-candidate",
       "scenario": "Exercise video test cards, audio channels, memory, keyboard, mouse/joystick and CIA tests. Record individual subtest outcomes. Hardware takeover limits OS-API coverage.",
-      "executionStatus": "paired-development-rom-explored",
+      "executionStatus": "main-screen-and-selected-audio-controls-verified-both-roms",
       "assets": [
         {
           "file": "originals/AmigaTestKit-1.21.zip",
@@ -150,6 +150,14 @@
         "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
         "qualification": "Development diagnostic only; app firmware pin unchanged",
         "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      },
+      "latestVerification": {
+        "date": "2026-10-29",
+        "status": "MAIN_SCREEN_AND_SELECTED_AUDIO_CONTROLS_VERIFIED_BOTH_ROMS",
+        "producerCommit": "1d971eceb8eeeb207cf04b442474c0fb13aa0208",
+        "copperStartRomSha256": "a71247db3c4aa88d9b4a46c2b4f0157acbf7136cac1a8b50ecb80e88d9f19003",
+        "receipt": "docs/UTILITY_TESTKIT_2026-10-29.json",
+        "scope": "Main menu, individual channel mute and F7 restore; earlier missing-label interpretation contradicted by raw pixels. No full subtest suite."
       }
     },
     {

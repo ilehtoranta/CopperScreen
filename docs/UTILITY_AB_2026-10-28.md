@@ -59,6 +59,12 @@ Test Kit's static labels disappear during the channel-toggle sequence under
 have identical complete framebuffers across the pair, including that behaviour.
 This does not isolate a CopperStart defect or establish real-Amiga correctness.
 
+**2026-10-29 correction:** the missing-label interpretation above was wrong.
+Rechecking the original raw captures confirms unchanged static-label pixels
+through the audio toggles, as do the current-source runs. See the
+[pixel evidence and current result](UTILITY_TESTKIT_2026-10-29.json). Original
+captures, hashes and dated execution results remain unchanged.
+
 | Test Kit field / requested state | Native left/right RMS | CopperStart left/right RMS |
 | --- | ---: | ---: |
 | 3,100 / all channels enabled | 9420.72 / 2807.12 | 9421.23 / 2805.67 |
