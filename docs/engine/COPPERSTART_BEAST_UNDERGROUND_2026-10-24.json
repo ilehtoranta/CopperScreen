@@ -1,0 +1,1189 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Shadow of the Beast PNA: tree entrance, two underground ladder descents and death sequence",
+  "status": "PASS for bounded underground entry and play; area completion and pause/resume unqualified",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24",
+  "copperScreenEvidenceParent": "9a7f254478fc0ea29523b966eede7ae481f56f45",
+  "runtimeSource": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+  "runtimeRebuilt": false,
+  "copperStartProducer": "0057fb9c38d82d38122ddf69a4aa960573beedd7",
+  "compiledGuestRootProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+  },
+  "romRebuiltThisTurn": false,
+  "retainedRebuiltRom": true,
+  "romChanged": false,
+  "engineChanged": false,
+  "cpuChanged": false,
+  "firmwareFixEstablished": false,
+  "publicAdmissionChecksChanged": false,
+  "retainedProducerQualification": {
+    "record": "COPPERSTART_FULL_CONTACT_2026-10-24.json",
+    "file": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json",
+      "bytes": 68465,
+      "sha256": "5502ecb1b3ff77b99177c159e70ae9790c556fd0ea651c67ce3ffcdc38f30db3"
+    },
+    "independentImage": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-lotus2-gameplay-2026-10-24/rom/independent.rom",
+      "bytes": 524288,
+      "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+    },
+    "validChecksumChecked": true,
+    "identicalImageChecked": true
+  },
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0; supplied two-disk PNA ADF release",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "1": {
+      "path": "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip",
+      "bytes": 673727,
+      "sha256": "d3361a4e71a22614de4b183d2f345ee15853e258f02fdca1114be419151fa49a",
+      "entry": "Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+      "selector": "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+      "imageBytes": 901120,
+      "imageSha256": "e37dd01757afecea04c093631f70694d68d5535459f7b7682bd7040875097ca5"
+    },
+    "2": {
+      "path": "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].zip",
+      "bytes": 751983,
+      "sha256": "f3489dd083ec23a0123b30497798f885ebafd632049bd341899f0b029d2ef88f",
+      "entry": "Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].adf",
+      "selector": "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 2 of 2)[cr PNA].adf",
+      "imageBytes": 901120,
+      "imageSha256": "cdd53d33b957b1eef39cf94fc68ecaa392cf58bea22774cfaaaae1d41469c930"
+    }
+  },
+  "workloads": {
+    "normal": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/beast-copperstart-underground-v1.json",
+        "bytes": 5126,
+        "sha256": "5bd68f075e4575917229538029218a6b9f77f991dec0a7641cfe36191d245e01"
+      },
+      "events": 105,
+      "exactQualifiedInputBytes": true
+    },
+    "native13": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/beast-kickstart13-underground-v1.json",
+        "bytes": 5046,
+        "sha256": "f2ecf6307d0cd3f1d4c36d95ae83bdc9cacf30a8d70d580a5a2600581b0b1d8c"
+      },
+      "events": 103,
+      "exactQualifiedInputBytes": true
+    }
+  },
+  "harness": {
+    "purpose": "Functional native-media diagnostic; no throughput measurement",
+    "captureEveryFields": 100,
+    "rebuiltThisTurn": false,
+    "sources": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      }
+    ],
+    "allFiveBinariesIdenticalToRetainedFullContactHarness": true,
+    "completeInputAndExitControlWrittenBeforeProcessCreation": true
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\complete-normal.json",
+          "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+          "55000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/complete-normal.json",
+          "bytes": 5126,
+          "sha256": "5bd68f075e4575917229538029218a6b9f77f991dec0a7641cfe36191d245e01"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/runner.log",
+        "bytes": 604810,
+        "sha256": "1ee98bf4c8d45d479bba50ab63e3dd0407ea4dcbd7a8ee991f31a1f655a6cd80"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/capture-manifest.json",
+        "bytes": 411049,
+        "sha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\complete-normal.json",
+          "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+          "55000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/complete-normal.json",
+          "bytes": 5126,
+          "sha256": "5bd68f075e4575917229538029218a6b9f77f991dec0a7641cfe36191d245e01"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/scalar/runner.log",
+        "bytes": 604810,
+        "sha256": "1ee98bf4c8d45d479bba50ab63e3dd0407ea4dcbd7a8ee991f31a1f655a6cd80"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/scalar/capture-manifest.json",
+        "bytes": 411049,
+        "sha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\complete-native13.json",
+          "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+          "55000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/complete-native13.json",
+          "bytes": 5046,
+          "sha256": "f2ecf6307d0cd3f1d4c36d95ae83bdc9cacf30a8d70d580a5a2600581b0b1d8c"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/runner.log",
+        "bytes": 605261,
+        "sha256": "78bc0b91df97708ca3f3673b3249c7eba767176a4af36fccd0a0a6ee70c6b625"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/capture-manifest.json",
+        "bytes": 411049,
+        "sha256": "0fbbb263833c0e1623e5a4c245fbc1f89a06171ea60a1ad6faf8e4d9dd094d84"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 2755,
+      "fields": 551,
+      "lastField": 55000,
+      "unsupported": [],
+      "nonzeroPcmFields": 312,
+      "manifestSha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+    },
+    "scalar": {
+      "files": 2755,
+      "fields": 551,
+      "lastField": 55000,
+      "unsupported": [],
+      "nonzeroPcmFields": 312,
+      "manifestSha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+    },
+    "native13": {
+      "files": 2755,
+      "fields": 551,
+      "lastField": 55000,
+      "unsupported": [],
+      "nonzeroPcmFields": 335,
+      "manifestSha256": "0fbbb263833c0e1623e5a4c245fbc1f89a06171ea60a1ad6faf8e4d9dd094d84"
+    },
+    "exploration-normal": {
+      "files": 2755,
+      "fields": 551,
+      "lastField": 55000,
+      "unsupported": [],
+      "nonzeroPcmFields": 312,
+      "manifestSha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+    },
+    "exploration-native13": {
+      "files": 2755,
+      "fields": 551,
+      "lastField": 55000,
+      "unsupported": [],
+      "nonzeroPcmFields": 335,
+      "manifestSha256": "0fbbb263833c0e1623e5a4c245fbc1f89a06171ea60a1ad6faf8e4d9dd094d84"
+    },
+    "reviewedNativeMilestones": {
+      "fields": [
+        48700,
+        50500,
+        51000,
+        51200,
+        51400,
+        51600,
+        51800,
+        52000,
+        52600,
+        54000,
+        55000
+      ],
+      "identicalBmpCount": 11,
+      "review": "8d2cead23b19133a6e42e7ac7b759773e2174b5ab2377f94f6484e3bd9c9c9ff"
+    }
+  },
+  "cpuModeComparison": {
+    "identicalFiles": 2755,
+    "identicalManifest": true,
+    "normalScalarSha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+  },
+  "exploration": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\discovery\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\initial.json",
+          "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+          "32000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/initial.json",
+          "bytes": 1456,
+          "sha256": "091b5740ad913b54774796b0e53680d99e9cc23e0a3b9698e5e3ac6f7b011f80"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/discovery/normal/runner.log",
+        "bytes": 605490,
+        "sha256": "19e1bee9f1f54216a7dd810392923a754f3a7a98073ecb0474ee1db26a516172"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/discovery/normal/capture-manifest.json",
+        "bytes": 411049,
+        "sha256": "778251f1c5ca3c169fd1b3e2a6b8da942116d62a9694151cd17a0a9b1e3d0b9a"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\discovery\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-beast-underground-2026-10-24\\initial.json",
+          "C:/Data/TestImages/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].zip#/Shadow of the Beast (1989)(Psygnosis)(Disk 1 of 2)[cr PNA].adf",
+          "32000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/initial.json",
+          "bytes": 1456,
+          "sha256": "091b5740ad913b54774796b0e53680d99e9cc23e0a3b9698e5e3ac6f7b011f80"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/discovery/native13/runner.log",
+        "bytes": 605941,
+        "sha256": "2796040ac3693dbe11280d2207073b2683314351b3cf823b1d8f37a21eeb0721"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/discovery/native13/capture-manifest.json",
+        "bytes": 411049,
+        "sha256": "0fbbb263833c0e1623e5a4c245fbc1f89a06171ea60a1ad6faf8e4d9dd094d84"
+      }
+    }
+  },
+  "resetReplayMatchesExploration": {
+    "normal": true,
+    "native13": true,
+    "scalar": "Independent reset using exact normal input; all normal files match"
+  },
+  "inputTiming": "The native trace omits the normal left hold at32800-32990. Later ordinary restart and prompted disk swaps are retained. No assertion of equal CPU trajectories between ROMs.",
+  "observations": [
+    {
+      "fields": [
+        14000,
+        17000,
+        20000,
+        24000
+      ],
+      "result": "Three prompted disk changes and outdoor WELCOME",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-014000.bmp",
+            "bytes": 1136870,
+            "sha256": "c6ac88808f08ce4bb74c0d09757d6a492d867d8548b8706fb8018cd246567c55"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-017000.bmp",
+            "bytes": 1136870,
+            "sha256": "e46ae68cb44abceee6412c324523756d50e3a083c8aaa4517544e1537bdeee9e"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-020000.bmp",
+            "bytes": 1136870,
+            "sha256": "c6ac88808f08ce4bb74c0d09757d6a492d867d8548b8706fb8018cd246567c55"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-024000.bmp",
+            "bytes": 1136870,
+            "sha256": "84c44d6714cc3e994fb5cde6916d55ae2c664e37d54e9b011fbd56b05a41b1c5"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-014000.bmp",
+            "bytes": 1136870,
+            "sha256": "c6ac88808f08ce4bb74c0d09757d6a492d867d8548b8706fb8018cd246567c55"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-017000.bmp",
+            "bytes": 1136870,
+            "sha256": "e46ae68cb44abceee6412c324523756d50e3a083c8aaa4517544e1537bdeee9e"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-020000.bmp",
+            "bytes": 1136870,
+            "sha256": "c6ac88808f08ce4bb74c0d09757d6a492d867d8548b8706fb8018cd246567c55"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-024000.bmp",
+            "bytes": 1136870,
+            "sha256": "84c44d6714cc3e994fb5cde6916d55ae2c664e37d54e9b011fbd56b05a41b1c5"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        33400,
+        33900
+      ],
+      "result": "First exploratory entrance approach jumps past the doorway",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-033400.bmp",
+            "bytes": 1136870,
+            "sha256": "582273750d7a1ab98e837512a141c149a720fd12eb57d16759c1a71a34e30644"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-033900.bmp",
+            "bytes": 1136870,
+            "sha256": "5d91da8a9b1c4b3c1d92ffc1f059ade2c68bfc98ff78bd3862b24840f8a14c40"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-033400.bmp",
+            "bytes": 1136870,
+            "sha256": "ae7d2a7b865c35223da205c58174d882a32b9d502f828ebd23bc5dc822997eaf"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-033900.bmp",
+            "bytes": 1136870,
+            "sha256": "a3d677106a2dee1594f57daeecf3a4fab63cb19adae232f18a6691032408da8e"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        35000,
+        37500,
+        40000
+      ],
+      "result": "Escape restart: death artwork, Disk1 and Disk2 prompts",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-035000.bmp",
+            "bytes": 1136870,
+            "sha256": "9000f5d9f8c531f3a39e8d9941597e35dc886eefa797813c5604f0eeb170f1ac"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-037500.bmp",
+            "bytes": 1136870,
+            "sha256": "e46ae68cb44abceee6412c324523756d50e3a083c8aaa4517544e1537bdeee9e"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-040000.bmp",
+            "bytes": 1136870,
+            "sha256": "c6ac88808f08ce4bb74c0d09757d6a492d867d8548b8706fb8018cd246567c55"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-035000.bmp",
+            "bytes": 1136870,
+            "sha256": "9000f5d9f8c531f3a39e8d9941597e35dc886eefa797813c5604f0eeb170f1ac"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-037500.bmp",
+            "bytes": 1136870,
+            "sha256": "e46ae68cb44abceee6412c324523756d50e3a083c8aaa4517544e1537bdeee9e"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-040000.bmp",
+            "bytes": 1136870,
+            "sha256": "c6ac88808f08ce4bb74c0d09757d6a492d867d8548b8706fb8018cd246567c55"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        44000,
+        44600,
+        46000,
+        47200
+      ],
+      "result": "Title/story screens and return to outdoor play",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-044000.bmp",
+            "bytes": 1136870,
+            "sha256": "dbebe6fa987fd8f6200a13f77b3c73c4225f3b1e0e579a3545a7543a33aac45f"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-044600.bmp",
+            "bytes": 1136870,
+            "sha256": "468c0825be825545def784b412b52b7d3626222dbb804313d8dd327b9095764a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-046000.bmp",
+            "bytes": 1136870,
+            "sha256": "1ebd4ba084fb11ea22fac08029567a4efefc65f42add2160156017c50fd718c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-047200.bmp",
+            "bytes": 1136870,
+            "sha256": "32fd61006f922e62d00c4bb4bb7e4beb0a5a7276149241e3ee6c160594602384"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-044000.bmp",
+            "bytes": 1136870,
+            "sha256": "dbebe6fa987fd8f6200a13f77b3c73c4225f3b1e0e579a3545a7543a33aac45f"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-044600.bmp",
+            "bytes": 1136870,
+            "sha256": "468c0825be825545def784b412b52b7d3626222dbb804313d8dd327b9095764a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-046000.bmp",
+            "bytes": 1136870,
+            "sha256": "1ebd4ba084fb11ea22fac08029567a4efefc65f42add2160156017c50fd718c5"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-047200.bmp",
+            "bytes": 1136870,
+            "sha256": "32fd61006f922e62d00c4bb4bb7e4beb0a5a7276149241e3ee6c160594602384"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        48400,
+        48500,
+        48600,
+        48700
+      ],
+      "result": "Grounded alignment and Up: IT OPENS",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-048400.bmp",
+            "bytes": 1136870,
+            "sha256": "f1551062a0dec93c48cc8873a907228261f1709813a6e56ed448e7aed07fa698"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-048500.bmp",
+            "bytes": 1136870,
+            "sha256": "7510e52a3d16e824d9c7e5a57b630f1f0b6b0e61c25177eec79e5ad863fc34ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-048600.bmp",
+            "bytes": 1136870,
+            "sha256": "cf1a6866895090b705e53d70d44c55eb8a0169a6114b231f6ee343542b99df84"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-048700.bmp",
+            "bytes": 1136870,
+            "sha256": "16b6c804d0fb9d20212524ece1c1c0403a616a83fc2d75a6f29df7c53f9f68f3"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-048400.bmp",
+            "bytes": 1136870,
+            "sha256": "f1551062a0dec93c48cc8873a907228261f1709813a6e56ed448e7aed07fa698"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-048500.bmp",
+            "bytes": 1136870,
+            "sha256": "7510e52a3d16e824d9c7e5a57b630f1f0b6b0e61c25177eec79e5ad863fc34ff"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-048600.bmp",
+            "bytes": 1136870,
+            "sha256": "cf1a6866895090b705e53d70d44c55eb8a0169a6114b231f6ee343542b99df84"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-048700.bmp",
+            "bytes": 1136870,
+            "sha256": "16b6c804d0fb9d20212524ece1c1c0403a616a83fc2d75a6f29df7c53f9f68f3"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        49200,
+        49500,
+        50000
+      ],
+      "result": "Staircase transition artwork/text and loading",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-049200.bmp",
+            "bytes": 1136870,
+            "sha256": "156fc74263162ee87a91425e8c6ab72c1041b96b26da98785accbe69d512baad"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-049500.bmp",
+            "bytes": 1136870,
+            "sha256": "8aa0c22219488734335b2b1bead1c5a54524d10533c3f77f2df93135d7a24237"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-050000.bmp",
+            "bytes": 1136870,
+            "sha256": "7c7af6ebaab0dee667238e0007a8548f7f4aa8c4fae1707fb013f3f353857c78"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-049200.bmp",
+            "bytes": 1136870,
+            "sha256": "156fc74263162ee87a91425e8c6ab72c1041b96b26da98785accbe69d512baad"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-049500.bmp",
+            "bytes": 1136870,
+            "sha256": "8aa0c22219488734335b2b1bead1c5a54524d10533c3f77f2df93135d7a24237"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-050000.bmp",
+            "bytes": 1136870,
+            "sha256": "7c7af6ebaab0dee667238e0007a8548f7f4aa8c4fae1707fb013f3f353857c78"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        50500,
+        51000,
+        51100
+      ],
+      "result": "Underground attack poses, walking and horizontal scroll",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-050500.bmp",
+            "bytes": 1136870,
+            "sha256": "3e71bb3bb3650e85b870cbfe8696850bfe1bef3d821985bb5383d7be1d6a2962"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051000.bmp",
+            "bytes": 1136870,
+            "sha256": "5d3d09a7c229566b407ff6bcbeb918587bf315b7c0d05927c53bde0264a7476f"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051100.bmp",
+            "bytes": 1136870,
+            "sha256": "e9461eb17465c6987d7baa701465730c45b7b08ccf30c05dfa06470773815329"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-050500.bmp",
+            "bytes": 1136870,
+            "sha256": "3e71bb3bb3650e85b870cbfe8696850bfe1bef3d821985bb5383d7be1d6a2962"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051000.bmp",
+            "bytes": 1136870,
+            "sha256": "5d3d09a7c229566b407ff6bcbeb918587bf315b7c0d05927c53bde0264a7476f"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051100.bmp",
+            "bytes": 1136870,
+            "sha256": "e9461eb17465c6987d7baa701465730c45b7b08ccf30c05dfa06470773815329"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        51200,
+        51300,
+        51400
+      ],
+      "result": "First ladder descent and vertical scrolling",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051200.bmp",
+            "bytes": 1136870,
+            "sha256": "797872c89565d2b733aea031d687ca3284edbdaf27c680e6de6e33ad244c27bd"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051300.bmp",
+            "bytes": 1136870,
+            "sha256": "c9b3af1f46d5f490c362928fca712981186611e46aa118b7044403e548273342"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051400.bmp",
+            "bytes": 1136870,
+            "sha256": "af30125f666352cf6a0aba82f13d370da1a5688bc1034906daae06f22d38a424"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051200.bmp",
+            "bytes": 1136870,
+            "sha256": "797872c89565d2b733aea031d687ca3284edbdaf27c680e6de6e33ad244c27bd"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051300.bmp",
+            "bytes": 1136870,
+            "sha256": "c9b3af1f46d5f490c362928fca712981186611e46aa118b7044403e548273342"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051400.bmp",
+            "bytes": 1136870,
+            "sha256": "af30125f666352cf6a0aba82f13d370da1a5688bc1034906daae06f22d38a424"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        51500,
+        51600,
+        51700,
+        51800
+      ],
+      "result": "Left movement and second ladder descent",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051500.bmp",
+            "bytes": 1136870,
+            "sha256": "869737997695e28756df95b059ae35db0a2a223b7613d0d893038cac870b49f4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051600.bmp",
+            "bytes": 1136870,
+            "sha256": "cc170217d319ef4eeba1c89bf237058506521cd7595cd20107b9418ab4a94fc8"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051700.bmp",
+            "bytes": 1136870,
+            "sha256": "660d498fd0d76fedda25a04a30b85ddfb87e35d72926fa8d535a3d9618b2ea20"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051800.bmp",
+            "bytes": 1136870,
+            "sha256": "6262d26da4f6157faf82d1314dd90dfcba28f5e3708ca0fe9ebb7f1645adecbd"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051500.bmp",
+            "bytes": 1136870,
+            "sha256": "869737997695e28756df95b059ae35db0a2a223b7613d0d893038cac870b49f4"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051600.bmp",
+            "bytes": 1136870,
+            "sha256": "cc170217d319ef4eeba1c89bf237058506521cd7595cd20107b9418ab4a94fc8"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051700.bmp",
+            "bytes": 1136870,
+            "sha256": "660d498fd0d76fedda25a04a30b85ddfb87e35d72926fa8d535a3d9618b2ea20"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051800.bmp",
+            "bytes": 1136870,
+            "sha256": "6262d26da4f6157faf82d1314dd90dfcba28f5e3708ca0fe9ebb7f1645adecbd"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        51900,
+        52000,
+        52200,
+        52600,
+        52700
+      ],
+      "result": "Green-creature corridor, attacks, jump/crouching-attack attempts; no successful kill claimed",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051900.bmp",
+            "bytes": 1136870,
+            "sha256": "117093abe9e109be78edaa4aed5353e9610c66752f944aa9e2d83d5996cb0f5a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-052000.bmp",
+            "bytes": 1136870,
+            "sha256": "69e0c671c50b62386012901c3b9a0c6c91738f87906517e09155afda96f22660"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-052200.bmp",
+            "bytes": 1136870,
+            "sha256": "18628e32a78421eebeafc552658fd9224d6b05dad7c5478d6a173b019aee22fa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-052600.bmp",
+            "bytes": 1136870,
+            "sha256": "58537d3137e494acd08c96fb1bfd433e40ff2656b35774d3b860a5a25a18eb9f"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-052700.bmp",
+            "bytes": 1136870,
+            "sha256": "85564a85ff01a6260cc19a9736aa82b0d51b978141136e6acd85fde08f6d2416"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051900.bmp",
+            "bytes": 1136870,
+            "sha256": "117093abe9e109be78edaa4aed5353e9610c66752f944aa9e2d83d5996cb0f5a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-052000.bmp",
+            "bytes": 1136870,
+            "sha256": "69e0c671c50b62386012901c3b9a0c6c91738f87906517e09155afda96f22660"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-052200.bmp",
+            "bytes": 1136870,
+            "sha256": "18628e32a78421eebeafc552658fd9224d6b05dad7c5478d6a173b019aee22fa"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-052600.bmp",
+            "bytes": 1136870,
+            "sha256": "58537d3137e494acd08c96fb1bfd433e40ff2656b35774d3b860a5a25a18eb9f"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-052700.bmp",
+            "bytes": 1136870,
+            "sha256": "85564a85ff01a6260cc19a9736aa82b0d51b978141136e6acd85fde08f6d2416"
+          }
+        ]
+      }
+    },
+    {
+      "fields": [
+        52800,
+        52900,
+        54000,
+        55000
+      ],
+      "result": "Health exhausted and death artwork; pause/resume not qualified",
+      "images": {
+        "normal": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-052800.bmp",
+            "bytes": 1136870,
+            "sha256": "85564a85ff01a6260cc19a9736aa82b0d51b978141136e6acd85fde08f6d2416"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-052900.bmp",
+            "bytes": 1136870,
+            "sha256": "85564a85ff01a6260cc19a9736aa82b0d51b978141136e6acd85fde08f6d2416"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-054000.bmp",
+            "bytes": 1136870,
+            "sha256": "9000f5d9f8c531f3a39e8d9941597e35dc886eefa797813c5604f0eeb170f1ac"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-055000.bmp",
+            "bytes": 1136870,
+            "sha256": "9000f5d9f8c531f3a39e8d9941597e35dc886eefa797813c5604f0eeb170f1ac"
+          }
+        ],
+        "native13": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-052800.bmp",
+            "bytes": 1136870,
+            "sha256": "85564a85ff01a6260cc19a9736aa82b0d51b978141136e6acd85fde08f6d2416"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-052900.bmp",
+            "bytes": 1136870,
+            "sha256": "85564a85ff01a6260cc19a9736aa82b0d51b978141136e6acd85fde08f6d2416"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-054000.bmp",
+            "bytes": 1136870,
+            "sha256": "9000f5d9f8c531f3a39e8d9941597e35dc886eefa797813c5604f0eeb170f1ac"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-055000.bmp",
+            "bytes": 1136870,
+            "sha256": "9000f5d9f8c531f3a39e8d9941597e35dc886eefa797813c5604f0eeb170f1ac"
+          }
+        ]
+      }
+    }
+  ],
+  "progress": {
+    "treeEntrance": true,
+    "undergroundLoaded": true,
+    "ladderDescents": 2,
+    "creatureCorridorReached": true,
+    "successfulCreatureKillsQualified": 0,
+    "areaCompleted": false,
+    "ending": "Health exhausted, death artwork loaded",
+    "pauseResumeQualified": false
+  },
+  "unsuccessfulAttempts": [
+    {
+      "fields": [
+        33300,
+        33900
+      ],
+      "outcome": "Held Up/left jumped past entrance; retried after ordinary Escape/reload, no state restore"
+    },
+    {
+      "fields": [
+        52700,
+        52920
+      ],
+      "outcome": "P/fire probe overlaps health exhaustion and death; identical stills do not qualify pause/resume"
+    }
+  ],
+  "previewObservation": {
+    "description": "Some native previews appeared black/partial. Stored field51000 BMP is complete when reopened as RGB PNG and byte-identical to normal. No ROM/engine patch justified.",
+    "source": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/pixelcheck.py",
+      "bytes": 372,
+      "sha256": "4ec6daa5588fc8005f743eab970dffbc2d80dca62616dd88d4a614a05d85304a"
+    },
+    "samples": [
+      {
+        "field": 32700,
+        "normal": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-032700.bmp",
+          "bytes": 1136870,
+          "sha256": "ab10f988027c69454fcfdda668e44155afd7d64901bce38e42c654b745a25c5c"
+        },
+        "native13": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-032700.bmp",
+          "bytes": 1136870,
+          "sha256": "ab10f988027c69454fcfdda668e44155afd7d64901bce38e42c654b745a25c5c"
+        },
+        "identical": true
+      },
+      {
+        "field": 48500,
+        "normal": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-048500.bmp",
+          "bytes": 1136870,
+          "sha256": "7510e52a3d16e824d9c7e5a57b630f1f0b6b0e61c25177eec79e5ad863fc34ff"
+        },
+        "native13": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-048500.bmp",
+          "bytes": 1136870,
+          "sha256": "7510e52a3d16e824d9c7e5a57b630f1f0b6b0e61c25177eec79e5ad863fc34ff"
+        },
+        "identical": true
+      },
+      {
+        "field": 49200,
+        "normal": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-049200.bmp",
+          "bytes": 1136870,
+          "sha256": "156fc74263162ee87a91425e8c6ab72c1041b96b26da98785accbe69d512baad"
+        },
+        "native13": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-049200.bmp",
+          "bytes": 1136870,
+          "sha256": "156fc74263162ee87a91425e8c6ab72c1041b96b26da98785accbe69d512baad"
+        },
+        "identical": true
+      },
+      {
+        "field": 51000,
+        "normal": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/normal/captures/frame-051000.bmp",
+          "bytes": 1136870,
+          "sha256": "5d3d09a7c229566b407ff6bcbeb918587bf315b7c0d05927c53bde0264a7476f"
+        },
+        "native13": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/qualified/native13/captures/frame-051000.bmp",
+          "bytes": 1136870,
+          "sha256": "5d3d09a7c229566b407ff6bcbeb918587bf315b7c0d05927c53bde0264a7476f"
+        },
+        "identical": true
+      }
+    ]
+  },
+  "checks": {
+    "verification": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/verification.json",
+      "bytes": 1510,
+      "sha256": "6a5511c77fa1009ca270223dd9451e23861d914364749837490dde6794ad5553"
+    },
+    "verifier": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/verify.py",
+      "bytes": 2519,
+      "sha256": "6255b5ded7337beb6641591a00c77118c7003b54b226cf0d30617fd552250114"
+    },
+    "recorder": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-beast-underground-2026-10-24/record.py",
+      "bytes": 9282,
+      "sha256": "333d99449eb8b443886d3cf5a47117c4fddedeea3cfd12e9d2dfd81b38e15a51"
+    },
+    "identitiesAndInputOrdering": true,
+    "romChecksum": true,
+    "captureComparison": true,
+    "documentationLinks": true,
+    "retainedBuildAndUnitTests": {
+      "freshlyRerun": false,
+      "record": "COPPERSTART_FULL_CONTACT_2026-10-24.json",
+      "scope": "Unchanged producer/runtime source; retained production, engine, disk and native-ROM tests are not fresh suite passes here."
+    }
+  },
+  "references": [
+    {
+      "url": "https://www.lemonamiga.com/doc/shadow-of-the-beast/1426",
+      "description": "Preserved publisher manual: Up entrance, ladder directions, attacks and Escape restart"
+    },
+    {
+      "url": "https://www.lemonamiga.com/doc/shadow-of-the-beast/1427",
+      "description": "Supporting route to red-arrow tree and first two ladders. Actual milestones verified in native replays."
+    }
+  ],
+  "limits": [
+    "Underground completion, keys, weapon acquisition, boss, castle, later areas and complete game unqualified",
+    "Attack/jump inputs and creature encounters exercised; no successful kill or effective pause/resume claimed",
+    "Supplied crack ADFs; original protection unqualified",
+    "Sampled nonzero PCM is sample presence, not audio fidelity",
+    "Same-engine native1.3 control is supporting compatibility evidence, not physical hardware timing proof",
+    "No installed-app admission or throughput claim",
+    "ROM/media/raw captures/build outputs stay local; no package publication"
+  ]
+}

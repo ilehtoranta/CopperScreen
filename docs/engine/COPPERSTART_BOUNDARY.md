@@ -23,6 +23,14 @@ normal guest instruction, DMA and hardware execution.
 
 ### Standalone replacement-ROM follow-up — 2026-10-23
 
+The [Desert Strike follow-up](COPPERSTART_DESERT_STRIKE_2026-10-23.md) uses the
+later rebuilt ROM and frozen Nitro-qualified runtime for three-ADF startup,
+Air Superiority coastal flight, turning, chain-gun/Hydra use and map/status/mission
+interaction. It extends the earlier opening-flight/landing record; all three
+final reset runs match discovery and normal/scalar outputs match through 38000
+fields. No new correction was established. Enemy destruction, rescue and
+objective/campaign completion remain unqualified.
+
 The [Nitro replay](COPPERSTART_NITRO_2026-10-23.md) adds supplied 166-track
 extended-ADF boot, human-driver name/car selection and first-race acceleration
 and steering. CopperDisk now preserves additional cylinders and admits empty
@@ -37,6 +45,14 @@ progression to the Fun 2 briefing. Native Kickstart 1.3 uses the same physical
 inputs. No ROM or engine correction was established. Later gameplay and
 pristine original media remain unqualified; historical performance inputs
 are unchanged.
+
+The [Lemmings Fun 2 continuation](COPPERSTART_LEMMINGS_FUN2_2026-10-25.md)
+repeats Fun 1 with the current rebuilt ROM, assigns all ten Floaters and
+completes Fun 2 with 100% rescued before reaching Fun 3's briefing. P
+pause/resume and live umbrella descent are checked. Both ROMs use identical
+physical inputs; all 4325 normal/scalar capture files match. No new ROM or
+engine correction was established. Fun 3 gameplay and later levels remain
+unqualified.
 
 The [Lotus III replay](COPPERSTART_LOTUS3_2026-10-23.md) adds supplied
 FLT / Crack Inc two-ADF boot, disk swapping and player-controlled one-player
@@ -272,8 +288,47 @@ reach the first campaign and respond to takeoff, near-ship flight and landing.
 No additional firmware or engine correction is needed. Each 44,000-field
 normal/scalar pair matches all 1,105 raw captures and four fingerprints;
 independent idle controls verify the flight response. Four exact-ROM frequency
-and stack/VBlank cases pass without skips. Weapons, combat, mission completion,
-later campaigns and save/load remain unverified.
+and stack/VBlank cases pass without skips. That record does not qualify weapons,
+combat, mission completion, later campaigns or save/load. The [October 23 follow-up](COPPERSTART_DESERT_STRIKE_2026-10-23.md)
+adds coastal flight and demonstrated chain-gun/Hydra use with the later ROM/runtime.
+
+The [North & South CP continuation](COPPERSTART_NORTH_SOUTH_2026-10-23.md)
+corrects inherited sprite priority in native graphics startup. Its original
+opaque-plane/sprite probe passes with Kickstart 1.3, fails with the old ROM,
+and passes with the rebuilt ROM. The pointer is visible in the language,
+menu and map screens. Bounded 1861 play includes army movement, turn changes,
+pitched battle, unit selection and retreat. The ROM now has SHA-256
+`fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7`;
+the compiled guest root is retained and the native composition rebuilt.
+Campaign completion, fort/train sequences and protected original media remain
+unverified. Runtime binaries are freshly built from the merged source rather
+than reusing the preceding Desert Strike runtime.
+
+The [Full Contact combat continuation](COPPERSTART_FULL_CONTACT_2026-10-24.md)
+uses an independently recomposed, byte-identical North & South ROM. Attacks,
+Up recovery after a knockdown, defeat, Top Ten and Play Again into another
+Tong Lo fight are verified. No additional firmware or engine fix was established.
+The matched Escape control fails under both CopperStart and native Kickstart 1.3;
+it remains unsuccessful coverage. Winning the first opponent and later stages
+remain unqualified. Complete normal/scalar captures and independent reset replays
+are recorded separately from the retained production build and engine tests.
+
+The [Lotus 2 gameplay continuation](COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.md)
+crosses the opening checkpoint using automatic gears and sustained physical
+input. Both ROMs later time out before checkpoint two. The game separately
+accepts the typed TWILIGHT password, loads the Night Course and supports bounded
+driving and F10 pause/resume. All 4705 normal/scalar capture files match, with
+independent reset replays retaining the explored normal/native outcomes. No
+additional firmware or engine fix was established. Natural course completion
+and a natural Night Course handoff remain unqualified.
+
+The [Shadow of the Beast underground continuation](COPPERSTART_BEAST_UNDERGROUND_2026-10-24.md)
+opens the tree entrance, loads the underground area, descends two ladders and
+reaches the green-creature corridor and death sequence with the current rebuilt
+ROM. Native Kickstart 1.3 reaches the same bounded milestones. All 2755
+normal/scalar capture files match, and independent reset replays retain the
+explored outcomes. No additional firmware or engine fix was established.
+Area completion, later areas and effective pause/resume remain unqualified.
 
 The sibling repositories were inspected on 2026-10-04. CopperStart already owned
 portable Exec, Devices, DOS compatibility, Utility, Expansion, Icon,

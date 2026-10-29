@@ -1,0 +1,296 @@
+[
+  {
+    "frame": 5002,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 5022
+  },
+  {
+    "frame": 18502,
+    "mouseDeltaX": 100,
+    "mouseDeltaY": 175
+  },
+  {
+    "frame": 18522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 18542
+  },
+  {
+    "frame": 19502,
+    "mouseDeltaY": 100
+  },
+  {
+    "frame": 19522,
+    "mouseDeltaY": 75
+  },
+  {
+    "frame": 19542,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 19562,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 20502,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 20522,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 22002,
+    "mouseDeltaX": 88,
+    "mouseDeltaY": 10
+  },
+  {
+    "frame": 22022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 22042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 23502,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 23522,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 24002,
+    "keyCode": 320
+  },
+  {
+    "frame": 24012,
+    "keyCode": 448
+  },
+  {
+    "frame": 24102,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 24122,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 24142,
+    "mouseDeltaX": -100,
+    "mouseDeltaY": -100
+  },
+  {
+    "frame": 24202,
+    "mouseDeltaX": 100,
+    "mouseDeltaY": 100
+  },
+  {
+    "frame": 24222,
+    "mouseDeltaX": 88,
+    "mouseDeltaY": 85
+  },
+  {
+    "frame": 24242,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 24262,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 27002,
+    "mouseDeltaX": -29,
+    "mouseDeltaY": -60
+  },
+  {
+    "frame": 27022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 27042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 27502,
+    "mouseDeltaX": 112,
+    "mouseDeltaY": 41
+  },
+  {
+    "frame": 27522,
+    "mouseDeltaX": 112
+  },
+  {
+    "frame": 27542,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 27562,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 28002,
+    "mouseDeltaX": -26,
+    "mouseDeltaY": 15
+  },
+  {
+    "frame": 28022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 28042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 28502,
+    "mouseDeltaX": -60,
+    "mouseDeltaY": 120
+  },
+  {
+    "frame": 28522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 28542,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 31002,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 31022,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 34002,
+    "mouseDeltaX": 53,
+    "mouseDeltaY": -125
+  },
+  {
+    "frame": 34022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 34042,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 34502,
+    "mouseDeltaX": -14,
+    "mouseDeltaY": 27
+  },
+  {
+    "frame": 34522,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 34542,
+    "mouseButtons": 0
+  },
+  {
+    "frame": 36002,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 36122
+  },
+  {
+    "frame": 36202,
+    "keyCode": 352
+  },
+  {
+    "frame": 36212,
+    "keyCode": 480
+  },
+  {
+    "frame": 36222,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 36232
+  },
+  {
+    "frame": 36302,
+    "keyCode": 353
+  },
+  {
+    "frame": 36312,
+    "keyCode": 481
+  },
+  {
+    "frame": 36402,
+    "keyCode": 320
+  },
+  {
+    "frame": 36442,
+    "keyCode": 448
+  },
+  {
+    "frame": 36502,
+    "keyCode": 353
+  },
+  {
+    "frame": 36512,
+    "keyCode": 481
+  },
+  {
+    "frame": 36602,
+    "keyCode": 332
+  },
+  {
+    "frame": 36662,
+    "keyCode": 460
+  },
+  {
+    "frame": 36702,
+    "keyCode": 334
+  },
+  {
+    "frame": 36762,
+    "keyCode": 462
+  },
+  {
+    "frame": 36802,
+    "keyCode": 320
+  },
+  {
+    "frame": 36812,
+    "keyCode": 448
+  },
+  {
+    "frame": 37002,
+    "keyCode": 321
+  },
+  {
+    "frame": 37012,
+    "keyCode": 449
+  },
+  {
+    "frame": 38002,
+    "keyCode": 325
+  },
+  {
+    "frame": 38012,
+    "keyCode": 453
+  },
+  {
+    "frame": 39002,
+    "mouseDeltaX": -81,
+    "mouseDeltaY": 65
+  },
+  {
+    "frame": 39022,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 39042,
+    "mouseButtons": 0
+  }
+]

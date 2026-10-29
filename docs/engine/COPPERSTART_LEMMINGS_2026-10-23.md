@@ -95,7 +95,11 @@ the [historical readiness record](../history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1
 It does not modify the historical performance workloads, intervals,
 fingerprints or acceptance dispositions. No throughput result is claimed.
 
-Fun 2 gameplay/completion, later levels/ratings, every skill, two-player
-mode, persistent saving/password reload and pristine original media remain
-unqualified. Native Kickstart on this engine is not a physical hardware
+The [October 25 Fun 2 continuation](COPPERSTART_LEMMINGS_FUN2_2026-10-25.md)
+uses the later rebuilt ROM, assigns all ten Floaters, completes Fun 2 with 100%
+rescued and advances to Fun 3's briefing. Fun 3 gameplay remains unqualified.
+
+This original replay did not qualify Fun 2 gameplay/completion, later
+levels/ratings, every skill, two-player mode, persistent saving/password reload
+or pristine original media. Native Kickstart on this engine is not a physical hardware
 oracle; the replay does not establish complete hardware timing correctness.

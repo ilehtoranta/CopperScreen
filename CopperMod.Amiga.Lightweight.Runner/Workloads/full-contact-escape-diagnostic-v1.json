@@ -1,0 +1,55 @@
+[
+  {
+    "frame": 3600,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 3606
+  },
+  {
+    "frame": 8000,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 8020
+  },
+  {
+    "frame": 12400,
+    "ejectAdf": true
+  },
+  {
+    "frame": 12450,
+    "diskPath": "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].adf"
+  },
+  {
+    "frame": 12500,
+    "joystickPort1": 16,
+    "mouseButtons": 1
+  },
+  {
+    "frame": 12520
+  },
+  {
+    "frame": 13700,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 13720
+  },
+  {
+    "frame": 15100,
+    "joystickPort1": 16
+  },
+  {
+    "frame": 15120
+  },
+  {
+    "keyCode": 325,
+    "frame": 16200
+  },
+  {
+    "keyCode": 453,
+    "frame": 16220
+  }
+]

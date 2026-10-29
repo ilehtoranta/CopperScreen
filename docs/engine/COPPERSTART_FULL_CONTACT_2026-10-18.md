@@ -6,6 +6,11 @@ against Tong Lo through 24,000 PAL fields. Normal and scalar CPU modes produce
 identical capture files and final fingerprints. This is bounded compatibility
 evidence; complete-game progression and audio quality remain unverified.
 
+The [October 24 combat continuation](COPPERSTART_FULL_CONTACT_2026-10-24.md)
+adds input-discriminated attacks, knockdown recovery, defeat, Top Ten and
+Play Again with the later rebuilt ROM. It separately records the unsuccessful
+Escape path under both ROMs; winning the first opponent remains unqualified.
+
 Source: CopperStart commit
 [`55f39525acb1ecebf60e04267907d2d74e6b2aee`](https://github.com/ilehtoranta/CopperStart/commit/55f39525acb1ecebf60e04267907d2d74e6b2aee),
 branch `codex/copperstart-full-contact-20261018`, based on `9eed3fe`.

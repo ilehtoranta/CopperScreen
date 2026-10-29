@@ -93,5 +93,10 @@ linked by the normal composition path.
 The source fix is [CopperStart 9eed3fe](https://github.com/ilehtoranta/CopperStart/commit/9eed3fe584549b36f0c5de175929e890ec620669),
 published on `codex/copperstart-beast-20261017`.
 
+The [October 24 underground continuation](COPPERSTART_BEAST_UNDERGROUND_2026-10-24.md)
+uses the later rebuilt ROM to open the tree entrance, load the underground area,
+descend two ladders and reach the green-creature corridor and death sequence.
+It does not establish completion of that area or a complete game.
+
 Artifacts, ROMs, licensed firmware and game media stay local. The source change
 and this evidence are committed separately in their owning repositories.

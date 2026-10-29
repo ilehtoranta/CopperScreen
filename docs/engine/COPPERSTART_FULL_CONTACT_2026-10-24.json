@@ -1,0 +1,1783 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "protocol": "copperstart-native-compatibility-v1",
+  "title": "Full Contact Fairlight ADF: combat, knockdown recovery, defeat and restart",
+  "status": "PASS for bounded combat/defeat/restart; beating Tong Lo and successful Escape exit unqualified",
+  "artifactRoot": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24",
+  "copperScreenEvidenceParent": "71dbe03b52a90c9191008e4f6c7c2d97d26968c6",
+  "runtimeSource": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+  "runtimeRebuilt": false,
+  "copperStartProducer": "0057fb9c38d82d38122ddf69a4aa960573beedd7",
+  "compiledGuestRootProducer": "cf7c9b54aefea723b018bd68e10e829e67684250",
+  "rom": {
+    "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom/CopperStart-DiskBoot.rom",
+    "bytes": 524288,
+    "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+  },
+  "romChanged": false,
+  "engineChanged": false,
+  "cpuChanged": false,
+  "firmwareFixEstablished": false,
+  "composition": {
+    "compiledRoot": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-worms-gameplay-2026-10-22/rom-boot-public/CopperStart-DiskBoot-compiled.rom",
+      "bytes": 524288,
+      "sha256": "425040c8b209dd2437342328855b2f9841c16faeb184aa1d8edfc12a529dc2ae"
+    },
+    "compiledRootRebuilt": false,
+    "compiledCodeBytes": 476276,
+    "emitter": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/source/native/CopperStart.Graphics/bin/Release/net10.0/CopperStart.Graphics.dll",
+      "bytes": 2450432,
+      "sha256": "baf22dd73bdbd143e4d64e184c87f1c75b7728f7ed3e9409d6a3dfa422e2bd73"
+    },
+    "emitterBuild": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/final-graphics-build.log",
+      "bytes": 271,
+      "sha256": "f0a96987a8793c0a34ca54b4d34df2111210071fc3664cdd10094fc8d9c3ec39"
+    },
+    "emitterBuildCommand": [
+      "dotnet",
+      "build",
+      "native/CopperStart.Graphics/CopperStart.Graphics.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:BuildProjectReferences=false"
+    ],
+    "emitterBuildCwd": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/source",
+    "link": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/final-rom-link.log",
+      "bytes": 60,
+      "sha256": "c36d75a8c9cf6c46baf1bd2990a1ff3f911d03b7da0da490323f8f58a590ed84"
+    },
+    "metadata": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom/CopperStart-DiskBoot.graphics.json",
+      "bytes": 8049,
+      "sha256": "bd95878990b09a00a4ec866213c1dc7ff9db622ea2a089b014c91b94d49bbdae"
+    },
+    "independentLink": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/independent-rom-link.log",
+      "bytes": 60,
+      "sha256": "c36d75a8c9cf6c46baf1bd2990a1ff3f911d03b7da0da490323f8f58a590ed84"
+    },
+    "independentRom": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom/independent.rom",
+      "bytes": 524288,
+      "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+    },
+    "validRomChecksum": true,
+    "independentlyReproduced": true,
+    "byteIdenticalToPrecedingRom": true
+  },
+  "machine": {
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS",
+    "agnus": "MOS 8371",
+    "denise": "MOS 8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 0,
+    "rtc": false,
+    "drives": 1,
+    "df0": "one read-only DF0; supplied Full Contact Fairlight standard ADFs",
+    "framebuffer": [
+      908,
+      313
+    ]
+  },
+  "media": {
+    "1": {
+      "path": "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip",
+      "bytes": 679959,
+      "sha256": "03684bb88a926c8857545af8c0a37b53ab6babc820a50417f36db4fc97e41671",
+      "entry": "Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+      "selector": "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+      "imageBytes": 901120,
+      "imageSha256": "e45d6ff196c54aee35419421836373ec0efb91dbcecb2b388b678f86be2fba44"
+    },
+    "2": {
+      "path": "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].zip",
+      "bytes": 824662,
+      "sha256": "0e6fbf00c3b829c09f2ed095cbcae66cc7e94408da1cfe97e82195aae749d1ef",
+      "entry": "Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].adf",
+      "selector": "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].adf",
+      "imageBytes": 901120,
+      "imageSha256": "a211f7d6722cba13ad8f5b6ddc64f15764b22e769bbca27a103ab361571f57dd"
+    }
+  },
+  "workloads": {
+    "full-contact-copperstart-combat-v1.json": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/full-contact-copperstart-combat-v1.json",
+        "bytes": 1731,
+        "sha256": "ee09e044374f1b674643ecde44d862f331cf69d41d2b852678431cc12fc02dcc"
+      },
+      "events": 34,
+      "localReplayInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/complete-input.json",
+        "bytes": 1862,
+        "sha256": "be9a5f6ab17ce558640a92f6fb7f333a7ff38dd825aedde7ce33017106e672d9"
+      },
+      "identicalParsedEvents": true,
+      "normalization": "Committed UTF-8/LF; local qualification input has its separately recorded byte identity"
+    },
+    "full-contact-kickstart13-combat-v1.json": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/full-contact-kickstart13-combat-v1.json",
+        "bytes": 1755,
+        "sha256": "a60f3ebfc4769ab28bf7f5ca785aa0ea48b22a30b3a1e023e691dad0eebb0901"
+      },
+      "events": 34,
+      "localReplayInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/native13-complete-input.json",
+        "bytes": 1887,
+        "sha256": "d99517542339c9115e8b382e8f02b0a5ef22d9684db22910cacac21afd78949f"
+      },
+      "identicalParsedEvents": true,
+      "normalization": "Committed UTF-8/LF; local qualification input has its separately recorded byte identity"
+    },
+    "full-contact-escape-diagnostic-v1.json": {
+      "file": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-intuition-2026-10-18/evidence-publish/CopperMod.Amiga.Lightweight.Runner/Workloads/full-contact-escape-diagnostic-v1.json",
+        "bytes": 769,
+        "sha256": "873d8b9db8ae3eddc37a835a218e5d8f4d5b9abc9be3eeb8c5a3c6edaf29e0b8"
+      },
+      "events": 14,
+      "localReplayInput": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape-input.json",
+        "bytes": 824,
+        "sha256": "46867d4700135aa0ba4151274d4e24a5cbda5029a75e35fe41a1aca78face834"
+      },
+      "identicalParsedEvents": true,
+      "normalization": "Committed UTF-8/LF; local qualification input has its separately recorded byte identity"
+    }
+  },
+  "harness": {
+    "purpose": "Functional guest-ROM/media replay, not a throughput harness",
+    "retained": {
+      "purpose": "Functional native-media replay; not a throughput harness",
+      "retainedSource": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+          "bytes": 8531,
+          "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+          "bytes": 3636,
+          "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+          "bytes": 2510,
+          "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Probe.csproj",
+          "bytes": 796,
+          "sha256": "0bbc55150e5b99540b5f77b664064926e8e47a85b352b29a6733a532ef7fbc33"
+        }
+      ],
+      "retainedBuildLog": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness-build.log",
+        "bytes": 376,
+        "sha256": "09b6f67990ae7b7affc86e73a25e1e028174ac1c139024f7a08b418ef2816a8d"
+      },
+      "harnessRebuilt": false,
+      "engineAndDiskFreshlyBuiltFrom": "29bc8635fe33ae9e267846ade511e9b368f7158d",
+      "finalInputAndExitControlWrittenBeforeProcessCreation": true
+    },
+    "finalInputAndExitControlWrittenBeforeProcessCreation": true,
+    "source": [
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/Program.cs",
+        "bytes": 2510,
+        "sha256": "5dfe24904b9db7bc2773cfc73d6296acfee198da53cd56482a8f7f13fa69b4c0"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeBootProbe.cs",
+        "bytes": 8531,
+        "sha256": "74e54477005512d66a35aac0189a8a232ba595f87e7dd05033cfdc512b6c06d8"
+      },
+      {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-f17-2026-10-23/harness/NativeInputScript.cs",
+        "bytes": 3636,
+        "sha256": "e5e36e1a3a8f8c7fa145481d442cce4ead764a59095d0fe16b71b8da62d3f617"
+      }
+    ]
+  },
+  "qualification": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\qualified\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\complete-input.json",
+          "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+          "32000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/complete-input.json",
+          "bytes": 1862,
+          "sha256": "be9a5f6ab17ce558640a92f6fb7f333a7ff38dd825aedde7ce33017106e672d9"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/qualified/normal/runner.log",
+        "bytes": 352867,
+        "sha256": "36982410cb3ef096d4b724192fb4190a2ae1eb481251e5b8b2a071841ab4e879"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/qualified/normal/capture-manifest.json",
+        "bytes": 239469,
+        "sha256": "3f06d64d71b6bd440ae102a9909d31f387bd1e0b90c17558f2598e24af32c366"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\qualified\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\complete-input.json",
+          "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+          "32000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/complete-input.json",
+          "bytes": 1862,
+          "sha256": "be9a5f6ab17ce558640a92f6fb7f333a7ff38dd825aedde7ce33017106e672d9"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/qualified/scalar/runner.log",
+        "bytes": 352867,
+        "sha256": "36982410cb3ef096d4b724192fb4190a2ae1eb481251e5b8b2a071841ab4e879"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/qualified/scalar/capture-manifest.json",
+        "bytes": 239469,
+        "sha256": "3f06d64d71b6bd440ae102a9909d31f387bd1e0b90c17558f2598e24af32c366"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\qualified\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\native13-complete-input.json",
+          "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+          "32000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/native13-complete-input.json",
+          "bytes": 1887,
+          "sha256": "d99517542339c9115e8b382e8f02b0a5ef22d9684db22910cacac21afd78949f"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/qualified/native13/runner.log",
+        "bytes": 353514,
+        "sha256": "3f3a06b313848e6aa03570ba407dbebdea92fbf55ea34f6b22d20ac3e67a3d2c"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/qualified/native13/capture-manifest.json",
+        "bytes": 239469,
+        "sha256": "efbef90ace7efb0a3fb31c517ca91370782c40c4bd2904537190540fa44a1ac6"
+      }
+    }
+  },
+  "captures": {
+    "normal": {
+      "files": 1605,
+      "fields": 321,
+      "lastField": 32000,
+      "unsupported": [],
+      "nonzeroPcmFields": 267,
+      "manifestSha256": "3f06d64d71b6bd440ae102a9909d31f387bd1e0b90c17558f2598e24af32c366"
+    },
+    "scalar": {
+      "files": 1605,
+      "fields": 321,
+      "lastField": 32000,
+      "unsupported": [],
+      "nonzeroPcmFields": 267,
+      "manifestSha256": "3f06d64d71b6bd440ae102a9909d31f387bd1e0b90c17558f2598e24af32c366"
+    },
+    "identical": true,
+    "mismatches": [],
+    "native13": {
+      "files": 1605,
+      "fields": 321,
+      "lastField": 32000,
+      "unsupported": [],
+      "nonzeroPcmFields": 265,
+      "manifestSha256": "efbef90ace7efb0a3fb31c517ca91370782c40c4bd2904537190540fa44a1ac6"
+    }
+  },
+  "combatExploration": {
+    "normal": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\combat\\normal",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\combat-initial.json",
+          "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+          "20000"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat-initial.json",
+          "bytes": 1032,
+          "sha256": "111211b278aee7d1356f2cd2f79a22edcd3db6c836004b3449a104971dda2d12"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat/normal/runner.log",
+        "bytes": 352927,
+        "sha256": "7415ae3900e76ec1268cd3a6c64d1120e78fa35e95fe946639d9f44521e61b82"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat/normal/capture-manifest.json",
+        "bytes": 239469,
+        "sha256": "3f06d64d71b6bd440ae102a9909d31f387bd1e0b90c17558f2598e24af32c366"
+      }
+    },
+    "scalar": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\combat\\scalar",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\combat-initial.json",
+          "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+          "20000",
+          "--scalar"
+        ],
+        "rom": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+          "bytes": 524288,
+          "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat-initial.json",
+          "bytes": 1032,
+          "sha256": "111211b278aee7d1356f2cd2f79a22edcd3db6c836004b3449a104971dda2d12"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat/scalar/runner.log",
+        "bytes": 352927,
+        "sha256": "7415ae3900e76ec1268cd3a6c64d1120e78fa35e95fe946639d9f44521e61b82"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat/scalar/capture-manifest.json",
+        "bytes": 239469,
+        "sha256": "3f06d64d71b6bd440ae102a9909d31f387bd1e0b90c17558f2598e24af32c366"
+      }
+    },
+    "native13": {
+      "run": {
+        "command": [
+          "dotnet",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+          "C:\\Data\\ROM\\Kickstart_13.rom",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\combat\\native13",
+          "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\combat-initial.json",
+          "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+          "20000"
+        ],
+        "rom": {
+          "path": "C:/Data/ROM/Kickstart_13.rom",
+          "bytes": 262144,
+          "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+        },
+        "input": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat-initial.json",
+          "bytes": 1032,
+          "sha256": "111211b278aee7d1356f2cd2f79a22edcd3db6c836004b3449a104971dda2d12"
+        },
+        "binaries": [
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+            "bytes": 52224,
+            "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+            "bytes": 288256,
+            "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+            "bytes": 978944,
+            "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+            "bytes": 105472,
+            "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+          },
+          {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+            "bytes": 28672,
+            "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+          }
+        ],
+        "exitCode": 0
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat/native13/runner.log",
+        "bytes": 353574,
+        "sha256": "b5bc3d6306ad8528287fd98bec479377e310987ea94d1b9972466845fcd339a8"
+      },
+      "manifest": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/combat/native13/capture-manifest.json",
+        "bytes": 239469,
+        "sha256": "efbef90ace7efb0a3fb31c517ca91370782c40c4bd2904537190540fa44a1ac6"
+      }
+    }
+  },
+  "resetReplayMatchesExploration": {
+    "allThree": true,
+    "method": "Each complete filename/size/SHA-256 manifest equals its corresponding independent exploratory combat manifest"
+  },
+  "inputTiming": "Initial combat input is common; later native inputs follow its different observed match phase. Normal/scalar CopperStart inputs are identical.",
+  "idleControl": {
+    "run": {
+      "command": [
+        "dotnet",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\idle\\normal",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\initial.json",
+        "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+        "20000"
+      ],
+      "rom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+        "bytes": 524288,
+        "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+      },
+      "input": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/initial.json",
+        "bytes": 718,
+        "sha256": "f698f2fe3b5aba2c968ba5c9977411ab0467eee8633756d81a0887b309511e32"
+      },
+      "binaries": [
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+          "bytes": 52224,
+          "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+          "bytes": 288256,
+          "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+          "bytes": 978944,
+          "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+          "bytes": 105472,
+          "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+        },
+        {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+          "bytes": 28672,
+          "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+        }
+      ],
+      "exitCode": 0
+    },
+    "log": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/idle/normal/runner.log",
+      "bytes": 220552,
+      "sha256": "f044a0579dc753507c524fc9ede38eff291e079a97132b7bcf42708fad4f1ffb"
+    },
+    "manifest": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/idle/normal/capture-manifest.json",
+      "bytes": 149949,
+      "sha256": "553ce55947667a2b299c0abb47c9b4ee30578f671b5d6bc214f05d8eb3cbd396"
+    },
+    "captures": {
+      "files": 1005,
+      "fields": 201,
+      "lastField": 20000,
+      "unsupported": [],
+      "nonzeroPcmFields": 167,
+      "manifestSha256": "553ce55947667a2b299c0abb47c9b4ee30578f671b5d6bc214f05d8eb3cbd396"
+    },
+    "scope": "Same startup through15120, no subsequent combat commands; opponent health remains192"
+  },
+  "inputResponse": {
+    "record": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/input-response.json",
+      "bytes": 9762,
+      "sha256": "f876a446468100f01d2a6351df2d2d26062b81c1a2d9ab12177c575ac2e7d46c"
+    },
+    "observations": [
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 16000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 168,
+            "action": 0,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 2,
+            "end": 0,
+            "x": 371,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 17000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 70,
+            "action": 18,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 3,
+            "end": 0,
+            "x": 332,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 17100,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 60,
+            "action": 0,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 1,
+            "end": 0,
+            "x": 146,
+            "y": 55
+          }
+        ]
+      },
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 17200,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 58,
+            "action": 0,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 3,
+            "end": 0,
+            "x": 263,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 18000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 30,
+            "action": 21,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 1,
+            "end": 0,
+            "x": 104,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 18500,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 30,
+            "action": 21,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 1,
+            "end": 0,
+            "x": 92,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "idle",
+        "kind": "normal",
+        "field": 20000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 30,
+            "action": 21,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 2,
+            "end": 0,
+            "x": 74,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 16000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 170,
+            "action": 12,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 190,
+            "action": 11,
+            "end": 0,
+            "x": 333,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 17000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 138,
+            "action": 21,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 190,
+            "action": 2,
+            "end": 0,
+            "x": 65,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 17100,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 138,
+            "action": 1,
+            "end": 0,
+            "x": 298,
+            "y": 109
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 190,
+            "action": 0,
+            "end": 0,
+            "x": 263,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 17200,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 118,
+            "action": 1,
+            "end": 0,
+            "x": 298,
+            "y": 63
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 190,
+            "action": 0,
+            "end": 0,
+            "x": 332,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 18000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 80,
+            "action": 21,
+            "end": 0,
+            "x": 320,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 184,
+            "action": 2,
+            "end": 0,
+            "x": 153,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 18500,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 80,
+            "action": 21,
+            "end": 0,
+            "x": 320,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 184,
+            "action": 2,
+            "end": 0,
+            "x": 165,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "normal",
+        "field": 20000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 192,
+            "action": 0,
+            "end": 0,
+            "x": 320,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 192,
+            "action": 0,
+            "end": 0,
+            "x": 152,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 16000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 170,
+            "action": 12,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 190,
+            "action": 11,
+            "end": 0,
+            "x": 333,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 17000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 106,
+            "action": 12,
+            "end": 0,
+            "x": 298,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 188,
+            "action": 2,
+            "end": 0,
+            "x": 348,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 17100,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 106,
+            "action": 1,
+            "end": 0,
+            "x": 298,
+            "y": 15
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 188,
+            "action": 2,
+            "end": 0,
+            "x": 423,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 17200,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 86,
+            "action": 1,
+            "end": 0,
+            "x": 298,
+            "y": 9
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 188,
+            "action": 0,
+            "end": 0,
+            "x": 263,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 18000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 54,
+            "action": 21,
+            "end": 0,
+            "x": 287,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 186,
+            "action": 1,
+            "end": 0,
+            "x": 116,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 18500,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 54,
+            "action": 21,
+            "end": 0,
+            "x": 287,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 186,
+            "action": 1,
+            "end": 0,
+            "x": 104,
+            "y": 114
+          }
+        ]
+      },
+      {
+        "cohort": "combat",
+        "kind": "native13",
+        "field": 20000,
+        "actors": [
+          {
+            "label": "player",
+            "address": "0x67958",
+            "health": 34,
+            "action": 21,
+            "end": 0,
+            "x": 287,
+            "y": 114
+          },
+          {
+            "label": "opponent",
+            "address": "0x67e54",
+            "health": 186,
+            "action": 1,
+            "end": 0,
+            "x": 55,
+            "y": 114
+          }
+        ]
+      }
+    ],
+    "scope": "Read-only game-specific RAM observations reviewed with guest instructions and full rasters"
+  },
+  "observations": [
+    {
+      "fields": [
+        3200,
+        5600,
+        7200
+      ],
+      "result": "Fairlight intro, intact HAM story photograph and title sequence"
+    },
+    {
+      "fields": [
+        12400,
+        12450,
+        16000
+      ],
+      "result": "Physical disk-two handoff and first Tong Lo fight"
+    },
+    {
+      "fields": [
+        16000
+      ],
+      "result": "Both ROMs player health170/opponent190; idle CopperStart opponent192. Direction/fire attack response"
+    },
+    {
+      "fields": [
+        17000,
+        17100,
+        17200
+      ],
+      "result": "CopperStart action21/down changes to action1 after Up; Y114 to109 to63, visible recovery/jump"
+    },
+    {
+      "fields": [
+        18500,
+        20000
+      ],
+      "result": "CopperStart further combat, defeat and another attempt; health resets192"
+    },
+    {
+      "fields": [
+        24000,
+        25000,
+        26000,
+        28000
+      ],
+      "result": "CopperStart match loss, Game Over, Top Ten and restart choices"
+    },
+    {
+      "fields": [
+        28100,
+        29000,
+        30000,
+        31000,
+        32000
+      ],
+      "result": "CopperStart Play Again, Tong Lo portrait/introduction, fresh combat"
+    },
+    {
+      "kind": "native13",
+      "fields": [
+        29000,
+        30000,
+        32000
+      ],
+      "result": "Native Game Over, restart choices, Exit to Menus and title menu"
+    }
+  ],
+  "escapeDiagnostic": {
+    "input": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape-input.json",
+      "bytes": 824,
+      "sha256": "46867d4700135aa0ba4151274d4e24a5cbda5029a75e35fe41a1aca78face834"
+    },
+    "events": [
+      {
+        "frame": 3600,
+        "mouseButtons": 1
+      },
+      {
+        "frame": 3606
+      },
+      {
+        "frame": 8000,
+        "joystickPort1": 16,
+        "mouseButtons": 1
+      },
+      {
+        "frame": 8020
+      },
+      {
+        "frame": 12400,
+        "ejectAdf": true
+      },
+      {
+        "frame": 12450,
+        "diskPath": "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 2 of 2)[cr FLT].adf"
+      },
+      {
+        "frame": 12500,
+        "joystickPort1": 16,
+        "mouseButtons": 1
+      },
+      {
+        "frame": 12520
+      },
+      {
+        "frame": 13700,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 13720
+      },
+      {
+        "frame": 15100,
+        "joystickPort1": 16
+      },
+      {
+        "frame": 15120
+      },
+      {
+        "keyCode": 325,
+        "frame": 16200
+      },
+      {
+        "keyCode": 453,
+        "frame": 16220
+      }
+    ],
+    "runs": {
+      "normal": {
+        "run": {
+          "command": [
+            "dotnet",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-north-south-2026-10-23\\rom\\CopperStart-DiskBoot.rom",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\escape\\normal",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\escape-input.json",
+            "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+            "18000"
+          ],
+          "rom": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-north-south-2026-10-23/rom/CopperStart-DiskBoot.rom",
+            "bytes": 524288,
+            "sha256": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+          },
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape-input.json",
+            "bytes": 824,
+            "sha256": "46867d4700135aa0ba4151274d4e24a5cbda5029a75e35fe41a1aca78face834"
+          },
+          "binaries": [
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+              "bytes": 52224,
+              "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+              "bytes": 288256,
+              "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+              "bytes": 978944,
+              "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+              "bytes": 105472,
+              "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+              "bytes": 28672,
+              "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+            }
+          ],
+          "exitCode": 0
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape/normal/runner.log",
+          "bytes": 198586,
+          "sha256": "cef5a11639f871ffe0f376e0fdc56154f5713233457e00ddbb7d284f0fe44d0d"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape/normal/capture-manifest.json",
+          "bytes": 135029,
+          "sha256": "6d505c8741050c05ef6529178b171fe875812ee80461b877f5cc107075f96eaf"
+        },
+        "captures": {
+          "files": 905,
+          "fields": 181,
+          "lastField": 18000,
+          "unsupported": [],
+          "nonzeroPcmFields": 154,
+          "manifestSha256": "6d505c8741050c05ef6529178b171fe875812ee80461b877f5cc107075f96eaf"
+        },
+        "finalState": {
+          "frame": 18000,
+          "cycle": 2562509476,
+          "beam": [
+            233,
+            0
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "230842B5",
+          "sr": "2308",
+          "overlay": false,
+          "data": [
+            "000000FF",
+            "20202020",
+            "00000023",
+            "00003E80",
+            "00006630",
+            "00001345",
+            "00026D25",
+            "0012AFFE"
+          ],
+          "address": [
+            "00000000",
+            "00FF7CBC",
+            "000729F2",
+            "00072B4A",
+            "000732AA",
+            "00072B4A",
+            "00C01442",
+            "FE08001E"
+          ],
+          "dmacon": "07E3",
+          "intena": "4020",
+          "intreq": "3309",
+          "adkcon": "7E80",
+          "dsklen": "4FEF",
+          "copperPc": "0007FFFE",
+          "copperWaiting": false,
+          "blitterBusy": true,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 86330,
+          "Cylinder": 6,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 6,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 86330,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 31,
+          "ciaAPending": 10,
+          "ciaBMask": 31,
+          "ciaBPending": 17,
+          "bplcon0": "4FEF",
+          "diwstart": "001C",
+          "diwstop": "42AF",
+          "ddfstart": "FFFF",
+          "ddfstop": "2308",
+          "bitplanes": [
+            "0007FFFE",
+            "0000001C",
+            "00072308",
+            "0007FE80",
+            "0006001C",
+            "0007FFFE"
+          ],
+          "modulos": [
+            17071,
+            65535
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": true
+        },
+        "outcome": "UNSUCCESSFUL EXIT; not a passing gameplay replay"
+      },
+      "native13": {
+        "run": {
+          "command": [
+            "dotnet",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\runner\\CopperMod.Amiga.Lightweight.Runner.dll",
+            "C:\\Data\\ROM\\Kickstart_13.rom",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\escape\\native13",
+            "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\escape-input.json",
+            "C:/Data/TestImages/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].zip#/Full Contact (1991)(Team 17)(Disk 1 of 2)[cr FLT].adf",
+            "18000"
+          ],
+          "rom": {
+            "path": "C:/Data/ROM/Kickstart_13.rom",
+            "bytes": 262144,
+            "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+          },
+          "input": {
+            "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape-input.json",
+            "bytes": 824,
+            "sha256": "46867d4700135aa0ba4151274d4e24a5cbda5029a75e35fe41a1aca78face834"
+          },
+          "binaries": [
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.Runner.dll",
+              "bytes": 52224,
+              "sha256": "b577a537444c050ea49f029b334bba4184b7b9c2d1c28c387de8d3d15cf2f795"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperMod.Amiga.Lightweight.dll",
+              "bytes": 288256,
+              "sha256": "5e41465825bc29745b097fd19bff30d7952e55968a1caa5650a844077bff1f21"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/Copper68k.dll",
+              "bytes": 978944,
+              "sha256": "5fa79c7b8bd4705c8caa3bb736b7dfce5d53e356bff027e2bdc511e8408a2a2a"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperDisk.dll",
+              "bytes": 105472,
+              "sha256": "6a98ded5be3f2b517c34f0f2e58d4493b349cba4309b69b73135b2f58800223c"
+            },
+            {
+              "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/runner/CopperFloat.dll",
+              "bytes": 28672,
+              "sha256": "4dcca673e38589763d9488dd38c34034780944d4da9bfda943a34dc1a64ad235"
+            }
+          ],
+          "exitCode": 0
+        },
+        "log": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape/native13/runner.log",
+          "bytes": 198599,
+          "sha256": "178e56e0813aee7a9f45180de3802da7b977d6993b8db11185705f33911d36f6"
+        },
+        "manifest": {
+          "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/escape/native13/capture-manifest.json",
+          "bytes": 135029,
+          "sha256": "60333ed8206071fd9baa93d16d8707a159a9fb476aa61a5bae626cf1d9c5d296"
+        },
+        "captures": {
+          "files": 905,
+          "fields": 181,
+          "lastField": 18000,
+          "unsupported": [],
+          "nonzeroPcmFields": 141,
+          "manifestSha256": "60333ed8206071fd9baa93d16d8707a159a9fb476aa61a5bae626cf1d9c5d296"
+        },
+        "finalState": {
+          "frame": 18000,
+          "cycle": 2552463222,
+          "beam": [
+            0,
+            12
+          ],
+          "width": 908,
+          "height": 313,
+          "pc": "00FDFF64",
+          "sr": "0004",
+          "overlay": false,
+          "data": [
+            "00000000",
+            "00000001",
+            "00000028",
+            "00002350",
+            "00000001",
+            "00000000",
+            "00000027",
+            "00C01570"
+          ],
+          "address": [
+            "00BFE001",
+            "00C01384",
+            "00C014DB",
+            "00C03D24",
+            "00C014B5",
+            "00C0145C",
+            "00C03D24",
+            "00C01360"
+          ],
+          "dmacon": "03D0",
+          "intena": "602C",
+          "intreq": "0060",
+          "adkcon": "0000",
+          "dsklen": "4000",
+          "copperPc": "0000042C",
+          "copperWaiting": false,
+          "blitterBusy": false,
+          "diskActive": false,
+          "diskRemaining": 0,
+          "diskBit": 0,
+          "Cylinder": 7,
+          "Head": 0,
+          "Selected": false,
+          "MotorOn": false,
+          "ReadyCycle": 9223372036854775807,
+          "drives": [
+            {
+              "index": 0,
+              "Mounted": true,
+              "Cylinder": 7,
+              "Head": 0,
+              "Selected": false,
+              "MotorOn": false,
+              "ReadyCycle": 9223372036854775807,
+              "DiskChanged": false,
+              "BitPosition": 0,
+              "NextBitCycle": 9223372036854775807
+            }
+          ],
+          "ciaAMask": 10,
+          "ciaAPending": 0,
+          "ciaBMask": 4,
+          "ciaBPending": 0,
+          "bplcon0": "0200",
+          "diwstart": "0581",
+          "diwstop": "40C1",
+          "ddfstart": "003C",
+          "ddfstop": "00D0",
+          "bitplanes": [
+            "00000000",
+            "00000000",
+            "00000000",
+            "00000000",
+            "00000000",
+            "00000000"
+          ],
+          "modulos": [
+            0,
+            0
+          ],
+          "unsupported": null,
+          "videoUnsupported": null,
+          "audioNonzero": false
+        },
+        "outcome": "UNSUCCESSFUL EXIT; not a passing gameplay replay"
+      }
+    },
+    "scope": "Escape at16200 during combat fails under both ROMs; not a successful exit or proof of a CopperStart-specific defect",
+    "guru": "00000004.00C01570 under native1.3",
+    "trace": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/trace-normal.log",
+      "bytes": 333486,
+      "sha256": "d9bf5316b8b8ab650c36eb96a429d73736192894ef184412fef50909ce0a0045"
+    },
+    "traceSource": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/trace/Program.cs",
+      "bytes": 2449,
+      "sha256": "c8af1d97d42274d8cd240162137e9b0f7391939616d3b9d98a347e322fea0aa8"
+    },
+    "traceInput": {
+      "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/trace-input.json",
+      "bytes": 1176,
+      "sha256": "4d2f4d5a529a41f8063fe9180c6777c81ad10140d2fb981f309345328f06f624"
+    },
+    "finding": "CopperStart CloseLibrary returns; game RTS at6437C pops0 from7FC18. Earlier native trace started after native had already left combat, so it was not a discriminating same-phase comparison."
+  },
+  "excludedExperiments": [
+    {
+      "candidateRom": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/zero-candidate.rom",
+        "bytes": 524288,
+        "sha256": "b3b35d7a2af7a976bb3a3097c2211277abd11b9a04c1ee5de604d23e51dcb1b5"
+      },
+      "metadata": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/zero-candidate.graphics.json",
+        "bytes": 8049,
+        "sha256": "07fb04826333f9d4cd241a16b36d4bbaaf66fd87a7a0d7c6263b26e8fd8bf7b7"
+      },
+      "outcome": "Discarded RAM0-clear experiment did not resolve fallen pose; no final source/ROM change"
+    },
+    {
+      "diagnostic": "Temporary CloseLibrary(NULL) with arbitrary D0",
+      "existingCopperStartLog": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/close-before.log",
+        "bytes": 628,
+        "sha256": "15d42b6e300567e337cf08f9b04d582fb83b03bb167aaa748932729d817ae10f"
+      },
+      "native13Log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/close-native13.log",
+        "bytes": 1966,
+        "sha256": "61e312b4a71f4fe49f2c020af5da7db4c5a6476e7998b1dfc351cebbd8bdf1ec"
+      },
+      "outcome": "Existing CopperStart passed, native1.3 failed. Not a regression expectation: autodoc only guarantees NULL fromV36. Temporary test removed."
+    },
+    {
+      "exploration": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/discovery",
+      "outcome": "Mistook waiting-for-Up pose for a hang; Escape later failed. This is excluded from passing gameplay qualification."
+    }
+  ],
+  "checks": {
+    "nativeEmitterRelease": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "nativeRomFocused": {
+      "command": [
+        "dotnet",
+        "test",
+        "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\copperstart-full-contact-2026-10-24\\fixture\\Fixture.csproj",
+        "-c",
+        "Release",
+        "--filter",
+        "FullyQualifiedName~NativeBootSpritePriorityTests|FullyQualifiedName~NativeGraphicsBootTests|FullyQualifiedName~NativeIntuitionBootTests|FullyQualifiedName~NativeBootMemoryTests"
+      ],
+      "environment": {
+        "COPPERSTART_EXACT_ROM": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom/CopperStart-DiskBoot.rom",
+        "COPPERSTART_EXACT_ROM_SHA": "fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7"
+      },
+      "log": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/rom-focused.log",
+        "bytes": 628,
+        "sha256": "1ad678dfe4767cc73b88373437ba4e3c3c7ca5303369c3ae780e18f4c0fa168b"
+      },
+      "fixture": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/fixture/Fixture.csproj",
+        "bytes": 6059,
+        "sha256": "40aba1455372aadfeabae11d9c0ea3cbb675151d41a218513b13ef8bc775912e"
+      },
+      "loader": {
+        "path": "C:/Users/ilkle/Koodit/GIT/CopperScreen/artifacts/copperstart-full-contact-2026-10-24/fixture/NativeBootImage.cs",
+        "bytes": 886,
+        "sha256": "07b0584d4f12fac3e85cf8a74532473e1287f6c2096f41b609200ce4bd91e185"
+      },
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "retainedProductionAndEngineChecks": {
+      "freshlyRerun": false,
+      "record": "COPPERSTART_NORTH_SOUTH_2026-10-23.json",
+      "reason": "Evidence/workloads only; unchanged runtime source and exact frozen binaries"
+    },
+    "documentationAndInputChecks": true
+  },
+  "references": [
+    {
+      "url": "https://evercade.info/wp-content/uploads/2023/03/Full-Contact-Manual-ENG.pdf",
+      "description": "Preserved Team17 manual: controls, options and attract mode"
+    },
+    {
+      "url": "https://d0.se/autodocs/exec.library/CloseLibrary",
+      "description": "Exec autodoc: NULL library safety beginsV36"
+    }
+  ],
+  "limits": [
+    "No Tong Lo victory or subsequent opponent, training/bonus stage or full-game completion",
+    "Tournament and two-player unqualified",
+    "Escape exit unsuccessful under both ROMs for this supplied release",
+    "Cracked standard ADFs; no original-protection certification",
+    "Nonzero PCM is sample presence, not audio fidelity",
+    "Standalone bounded A500 replay; no standard-app/installed-MSIX admission claim",
+    "Not hardware conformance or throughput acceptance",
+    "Retained compiled guest root, not a freshly compiled full producer solution",
+    "No ROM/media/artifacts/packages committed or published"
+  ]
+}

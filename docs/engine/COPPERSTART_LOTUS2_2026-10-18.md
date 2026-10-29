@@ -5,6 +5,11 @@ opening race with a fresh CopperStart ROM containing the Major Motion fixes.
 The [evidence record](COPPERSTART_LOTUS2_2026-10-18.json) binds the exact ROM,
 unchanged supplied media, execution binaries, input scripts, probes and images.
 
+The [October 24 gameplay continuation](COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.md)
+crosses the first checkpoint with the later rebuilt ROM, then separately uses
+the game's password field to load the Night Course and exercise pause/resume.
+Natural course completion and the second checkpoint remain unqualified.
+
 The machine is a PAL OCS A500: 68000, 8371 Agnus, 8362 Denise, 512 KiB Chip RAM,
 512 KiB A501 RAM, no additional Fast RAM and one DF0 drive. The supplied archive
 contains one complete 901,120-byte ADF. No media bytes are changed.

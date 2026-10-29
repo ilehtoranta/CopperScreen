@@ -1,5 +1,10 @@
 # North & South display investigation — 2026-09-20
 
+The later [CopperStart continuation](COPPERSTART_NORTH_SOUTH_2026-10-23.md)
+corrects the ROM's inherited sprite priority and extends coverage into 1861
+army movement, pitched battle and retreat. That separate ROM/runtime replay
+does not replace this record's original menu or performance evidence.
+
 ## Correction after the real-machine report
 
 **A Copper restart defect is now reproduced and corrected in the candidate.**
