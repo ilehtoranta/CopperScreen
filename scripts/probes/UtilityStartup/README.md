@@ -28,5 +28,22 @@ Exec OpenDevice, DoIO and Wait observations include calls still pending at the
 stop, allowing a later device/startup wait to be separated from a library fault.
 Execution does not establish application correctness merely by reaching END_FIELD.
 
+`prepare_sysinfo_desktop.py` creates a separately identified controlled SysInfo
+disk. It requires `amitools` on the Python import path, the original collected
+ADF, and native provider/`CopperGui` outputs from CopperStart's
+`NativeClassicDesktopUpgradeTests`. It preserves the utility program and adds
+only two guest HUNK files and the prerequisite invocation in Startup-Sequence.
+Its JSON receipt records input/output hashes and every changed disk path.
+Neither creating the disk nor passing the provider test establishes that
+SysInfo reaches its main screen; inspect the native replay separately.
+
+```powershell
+python scripts/probes/UtilityStartup/prepare_sysinfo_desktop.py `
+  --original media/utilities/originals/sysinfo_4.4.adf `
+  --provider-root path/to/native-provider `
+  --installer path/to/native-provider/CopperGui `
+  --output artifacts/sysinfo-with-native-gui.adf
+```
+
 The [ProTracker investigation](../../../docs/PROTRACKER_STARTUP_2026-10-28.md)
 records paired API evidence and native RAM equivalence against the normal runner.

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "utilityId": "sysinfo-44",
+  "status": "GUI_AND_PALETTE_FIXES_COMMITTED_MAIN_NOT_VERIFIED",
+  "producerCommit": "b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2/Docs/NativeSysInfoGui20261029.md",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow; protected DD DF0; no Fast/RTC/host directories",
+  "baseRomSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
+  "nativeGuiTest": {
+    "name": "DiskProviderRetiresIdleClassicOwnerAndOpensLegacyHiresWindow",
+    "passed": 1,
+    "skipped": 0,
+    "providerSha256": "5c38eca95c6dd346aeac7b5d0607ddfb3802c42df72b9c8feac86c6f62e3c5ef",
+    "providerCodeBytes": 393864,
+    "providerHunkBytes": 411248,
+    "scope": "Real idle-owner replacement, physical input installation, screen/window/Layer ownership, OCS mode coercion and close; not application UI correctness"
+  },
+  "loadRgb4": {
+    "callField": 25260,
+    "d0": "00030008",
+    "vector": -192,
+    "abi": "d0:16, WORD count",
+    "autodoc": "https://d0.se/autodocs/graphics.library/LoadRGB4",
+    "beforeCases": {
+      "failed": 4,
+      "passed": 0
+    },
+    "afterCases": {
+      "passed": 4,
+      "skipped": 0
+    },
+    "nativeControls": [
+      {
+        "rom": "Kickstart 1.3",
+        "passed": 1
+      },
+      {
+        "rom": "A500 Kickstart 3.1",
+        "passed": 1
+      }
+    ],
+    "scope": "ColorMap words, untouched entries, allocation cleanup and callee registers; does not establish complete display behavior"
+  },
+  "native31OriginalDiskControl": {
+    "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+    "diskSha256": "77e64513b230b2dceb8012fc747ac6b0fba2c0297b662dfac30ee1e11599830c",
+    "frames": 12000,
+    "snapshots": 61,
+    "mainScreen": {
+      "frame": 12000,
+      "bmpSha256": "e1443677efcdda117c3e0f0f910c6838a44f434e3d6b45814aaa0ca0f1654ca9",
+      "rgbSha256": "605a8b936680305e4a757d9dcd1e6671f3ee59770d84904801731f07dab9585f"
+    },
+    "scope": "Original disk main information screen inspected; input controls and speed measurement unverified"
+  },
+  "controlledDisk": {
+    "sha256": "c89bbad680a1fbdb9f507f43be7e4027d0521a71538eecf272e8becac73e8c1d",
+    "originalSha256": "77e64513b230b2dceb8012fc747ac6b0fba2c0297b662dfac30ee1e11599830c",
+    "utilityProgramSha256": "65f36c3bda05b4133314ff05c272499fbbf50be6b94434c40babfc8c9083cf02",
+    "changes": [
+      "C/Intuition",
+      "C/CopperGui",
+      "S/Startup-Sequence"
+    ],
+    "providerSha256": "5c38eca95c6dd346aeac7b5d0607ddfb3802c42df72b9c8feac86c6f62e3c5ef",
+    "freeBlocks": 113,
+    "native13Main": {
+      "fields": 12000,
+      "rgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff",
+      "inspected": true
+    },
+    "scope": "Recorded initial installer variant, native success path; later source retention correction and new display-database composition require their own replay"
+  },
+  "diagnosticRom": {
+    "kind": "diagnostic-only-in-place-ABI-isolation",
+    "baseSha256": "7d443d60e1001365a845f16bc7f02b58b066be16ab7a71878a86fe3470584dde",
+    "sha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+    "address": "0xffd500",
+    "before": "2e000c8700000020",
+    "after": "7e003e000c470020",
+    "sourceCorrection": "LoadRGB4: MOVEQ #0,D7; MOVE.W D0,D7; CMPI.W #32,D7",
+    "qualification": "Not a current-source full-ROM build; only isolates this ABI correction"
+  },
+  "nextFailure": {
+    "field": 25671,
+    "pc": "00FF9FBE",
+    "vector": -726,
+    "api": "graphics.library/FindDisplayInfo",
+    "modeId": "00008000",
+    "result": "ILLEGAL then null exception vector; no main screen",
+    "trace": "artifacts/utility-sequential-2026-10-29/sysinfo-gui-rgb-next-invalid"
+  },
+  "sourceBuild": {
+    "solution": "CopperStart.slnx",
+    "configuration": "Release",
+    "errors": 0,
+    "warnings": 4
+  },
+  "unresolvedCoverage": [
+    "SysInfo main screen",
+    "Full committed-source ROM replay",
+    "Eight later utilities and final sweep",
+    "Concurrent restored TextLength whole-count fixture fails (six of seven selected exploratory graphics cases passed)"
+  ],
+  "firmwarePinChanged": false
+}

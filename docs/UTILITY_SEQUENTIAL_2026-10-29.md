@@ -16,7 +16,7 @@ marking the collection complete.
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
-| 4 | SysInfo 4.4 | IN PROGRESS: initial command exit fixed; later screen/window startup failure | [Receipt](UTILITY_SYSINFO_STARTUP_2026-10-29.json) |
+| 4 | SysInfo 4.4 | IN PROGRESS: native GUI prerequisite and palette ABI fixed; later display-database fault | [Latest receipt](UTILITY_SYSINFO_GUI_2026-10-29.json) |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
@@ -206,3 +206,34 @@ through 7,200 fields. Screens were inspected. The
 [producer note](https://github.com/ilehtoranta/CopperStart/blob/a58bca7053d775d92819d3b04e267b01cc3ba209/Docs/NativeCommandReturnFrame20261029.md)
 record the remaining failure and bounds. SysInfo, the eight later utilities
 and the final source sweep remain open.
+
+## SysInfo native GUI and palette follow-up
+
+Producer commit `b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2` lets the existing
+disk-loaded native GUI retire the idle Classic screen owner and coerces legacy
+hires requests to the available OCS mode. Its native guest test passes, opening
+and closing a real screen, window and Layer with physical input installed.
+The generated prerequisite loader retains the whole native module until reset,
+including partial initialization that has published graphics callbacks.
+
+SysInfo then reaches `LoadRGB4` with `$00030008` in D0: the low WORD requests
+eight colors. Treating the full register as the count faults. All four new
+instruction cases fail before the WORD correction and pass afterward. An
+independent guest palette probe passes under both native 1.3 and A500 3.1.
+The producer solution builds; the separately recorded concurrent TextLength
+fixture failure is not counted as a successful graphics suite.
+
+The original disk's information screen is also verified under native A500
+Kickstart 3.1 after 12,000 fields. A controlled prerequisite installation keeps
+the SysInfo program unchanged and reaches its main screen under native 1.3.
+Its startup skips installation when native Intuition already provides the GUI.
+
+A diagnostic-only eight-byte correction to the preceding CopperStart ROM gets
+past LoadRGB4, then faults in `FindDisplayInfo` at field 25,671. The existing
+native display database needs to join the disk prerequisite. That diagnostic
+is not a current-source ROM build, and SysInfo still has no verified CopperStart
+main screen. Continue this utility; eight later utilities and the final sweep
+remain pending. The [receipt](UTILITY_SYSINFO_GUI_2026-10-29.json) and
+[producer note](https://github.com/ilehtoranta/CopperStart/blob/b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2/Docs/NativeSysInfoGui20261029.md)
+separate the passing component checks, native application controls and remaining
+failure. The firmware pin is unchanged.
