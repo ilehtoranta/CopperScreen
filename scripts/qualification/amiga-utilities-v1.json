@@ -95,6 +95,14 @@
         "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
         "qualification": "Development diagnostic only; app firmware pin unchanged",
         "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      },
+      "latestVerification": {
+        "date": "2026-10-29",
+        "status": "BOOT_MENU_FIXED_MAIN_APPLICATION_NOT_VERIFIED",
+        "copperStartRomSha256": "8ec53c897f37b6b68b0bd7d0b038b238c33c5230cfd09d81189711c189e02601",
+        "evidenceDocument": "docs/UTILITY_SEQUENTIAL_2026-10-29.md",
+        "receipt": "docs/UTILITY_XCOPY_2026-10-29.json",
+        "limits": "Development rebuild; app pin unchanged. No X-Copy disk check/copy/format or Cyclone test. No ProTracker nonempty sample/audio test. No throughput claim."
       }
     },
     {

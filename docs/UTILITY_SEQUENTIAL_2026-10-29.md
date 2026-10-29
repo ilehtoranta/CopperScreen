@@ -14,7 +14,7 @@ marking the collection complete.
 | Order | Utility | Current-source status | Evidence |
 | --- | --- | --- | --- |
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
-| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | PENDING | Not yet verified in this sequence |
+| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | IN PROGRESS: boot menu fixed; application launch still fails | [Receipt](UTILITY_XCOPY_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | PENDING | Not yet verified in this sequence |
 | 4 | SysInfo 4.4 | PENDING | Not yet verified in this sequence |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
@@ -54,5 +54,31 @@ nonempty sample playback, disk operations, every GUI control or host throughput.
 The app firmware pin is unchanged. Local raw build/replay captures are under
 `artifacts/utility-sequential-2026-10-29/`; ROMs, media and captures remain ignored.
 
-X-Copy is next. The remaining eleven utilities have not been verified in this
-sequence, and the full collection goal remains open.
+## X-Copy investigation
+
+Kickstart 1.3 reaches X-Copy's DOSCOPY application after F1. CopperStart initially
+showed a corrupted boot menu and ignored F1. Producer commit
+`d35c48e99abab79f9e739d93a5af30c7f34ec488` establishes the boot-time display-fetch
+default and keyboard acknowledgement before DOS starts. The corrected menu at
+field 2,900 matches the native ROM's pixels exactly, and F1 exits the menu.
+All ten selected native boot/console tests pass. The source-built development
+ROM is SHA-256 `8ec53c897f37b6b68b0bd7d0b038b238c33c5230cfd09d81189711c189e02601`.
+The [producer note](https://github.com/ilehtoranta/CopperStart/blob/d35c48e99abab79f9e739d93a5af30c7f34ec488/Docs/NativeBootTakeover20261029.md)
+records the implementation, ROM layout and remaining failure.
+
+The bundled CliMenu program calls DOS Execute to launch XCopyPro and Endcli.
+The recovery CLI lacks a registered Shell/CLI resident, so shell acquisition
+fails with error 205. Startup continues to SetMap, whose missing keymap resource
+leads to an unsupported requester. The 7,200-field corrected-ROM replay still
+crashes and does **not** verify the X-Copy application. Continue with ordinary
+guest shell execution and repeat this original-media test before advancing.
+
+ProTracker also completes a 26,000-field regression replay under this ROM. Its
+complete pattern and sequencer mode match all eight earlier checkpoints. Seven
+screens match the previous CopperStart replay exactly; the field-24,500 playback
+screen differs. The final editor was inspected. The earlier receipt remains
+unchanged, and the [X-Copy receipt](UTILITY_XCOPY_2026-10-29.json) records this
+additional regression check.
+
+The remaining ten utilities have not been tested in this sequence. The full
+collection goal remains open, and the app firmware pin is unchanged.

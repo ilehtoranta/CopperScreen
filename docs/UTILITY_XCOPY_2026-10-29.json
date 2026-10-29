@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "utilityId": "xcopy-521",
+  "status": "BOOT_MENU_FIXED_MAIN_APPLICATION_NOT_VERIFIED",
+  "producerCommit": "d35c48e99abab79f9e739d93a5af30c7f34ec488",
+  "consumerEngineCommit": "e66eed451653e2c0071558955d3f323c1314b2ca",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative-batch, 512 KiB Chip + 512 KiB slow, no Fast/RTC/host directories, one protected DD DF0",
+  "rom": {
+    "bytes": 524288,
+    "sha256": "8ec53c897f37b6b68b0bd7d0b038b238c33c5230cfd09d81189711c189e02601",
+    "checksum": "ffffffff",
+    "compiledRootBytes": 497892,
+    "graphicsResident": "00FF98F0",
+    "graphicsBytes": 26363,
+    "rootGapBytes": 4,
+    "checksumGapBytes": 1
+  },
+  "controlRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "media": {
+    "path": "media/utilities/ready/xcopy_v5.21_en_1991-11-17_c911/xcopy_v5.21_en_1991-11-17_c911.adf",
+    "sha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde",
+    "originalUnmodified": true
+  },
+  "workload": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json",
+  "runs": [
+    {
+      "side": "kick13",
+      "directory": "artifacts\\utility-sequential-2026-10-29\\xcopy-kick13",
+      "fields": 7200,
+      "snapshots": 73,
+      "mainApplicationObserved": true
+    },
+    {
+      "side": "copperstart",
+      "directory": "artifacts\\utility-sequential-2026-10-29\\xcopy-copperstart-boot-fixed",
+      "fields": 7200,
+      "snapshots": 73,
+      "bootMenuObserved": true,
+      "mainApplicationObserved": false,
+      "finalPc": "261F241F",
+      "limit": "Runner completion and absence of unsupported-feature reports do not qualify this crashing application."
+    }
+  ],
+  "bootMenuComparison": {
+    "field": 2900,
+    "pixelsEqual": true,
+    "rgbSha256": "030ac677ad3b847d2e8f6dd6b6d7b090e15a2a3b48096ebd23ca6c663d26b560"
+  },
+  "nativeTests": {
+    "selected": 10,
+    "passed": 10,
+    "skipped": 0,
+    "newBootPollingCasePassesKick13": true,
+    "newBootPollingCaseFailsPreviousCopperStart": true,
+    "log": "artifacts\\utility-sequential-2026-10-29\\xcopy-boot-receiver-tests-final.log"
+  },
+  "protrackerRegression": {
+    "directory": "artifacts\\utility-sequential-2026-10-29\\protracker-boot-receiver",
+    "fields": 26000,
+    "snapshots": 261,
+    "mainScreenInspected": true,
+    "checkpoints": [
+      {
+        "field": 23900,
+        "patternSha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "00000000",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      },
+      {
+        "field": 24200,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "00000000",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      },
+      {
+        "field": 24400,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "70617470",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      },
+      {
+        "field": 24500,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "70617470",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": false
+      },
+      {
+        "field": 24700,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "00000000",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      },
+      {
+        "field": 25100,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "00000000",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      },
+      {
+        "field": 25500,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "00000000",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      },
+      {
+        "field": 26000,
+        "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+        "patternMatchesPreviousBothRomEvidence": true,
+        "runMode": "00000000",
+        "runModeMatchesPreviousBothRomEvidence": true,
+        "pixelsMatchPreviousCopperStart": true
+      }
+    ]
+  },
+  "remainingLaunchFailure": "CliMenu uses DOS Execute for XCopyPro followed by Endcli. Recovery CLI has no registered Shell/CLI resident; acquisition returns false twice with ObjectNotFound 205. Startup falls through to SetMap, then fails through the unsupported AutoRequest vector after missing keymap.resource.",
+  "limits": "Development rebuild; app pin unchanged. No X-Copy disk check/copy/format or Cyclone test. No ProTracker nonempty sample/audio test. No throughput claim.",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/d35c48e99abab79f9e739d93a5af30c7f34ec488/Docs/NativeBootTakeover20261029.md"
+}
