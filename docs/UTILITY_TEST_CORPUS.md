@@ -1,6 +1,11 @@
 # Amiga utility test collection
 
-Collected 2026-10-27; latest testing 2026-10-28. Collection ID: `amiga-utilities-v1`.
+Collected 2026-10-27; latest testing 2026-10-29. Collection ID: `amiga-utilities-v1`.
+
+The [sequential current-source checks](UTILITY_SEQUENTIAL_2026-10-29.md) verify
+ProTracker's main editor and selected inputs under both ROMs. The remaining
+utilities are pending in that sequence; older exploratory results below retain
+their recorded inputs and scope.
 
 This is a local collection for manual emulation checks and CopperStart versus
 native Kickstart comparisons: **12 utilities, 14 original downloads, four ADFs

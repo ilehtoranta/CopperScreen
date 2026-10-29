@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "collectionId": "amiga-utilities-v1",
-  "reviewedDate": "2026-10-28",
+  "reviewedDate": "2026-10-29",
   "purpose": "Local manual compatibility and CopperStart/native Kickstart A/B exploration. Acquisition is not compatibility evidence.",
-  "executionStatus": "paired-development-rom-explored",
+  "executionStatus": "sequential-verification-in-progress",
   "applications": [
     {
       "id": "protracker-23f",
@@ -11,10 +11,10 @@
       "version": "2.3F (2026-05-09 build)",
       "sourceUrl": "https://16-bits.org/other.php",
       "rights": "Author-provided free download; no explicit redistribution licence found in this binary archive. Keep original; do not infer the desktop pt2-clone licence.",
-      "requirements": "Replayed on PAL OCS 68000, 512 KiB Chip + 512 KiB slow. Native editor observed; development CopperStart startup gap recorded.",
+      "requirements": "Verified on PAL OCS 68000, 512 KiB Chip + 512 KiB slow. Both main editors and selected inputs are observed; see latestVerification for the exact development ROM and scope.",
       "lane": "a500-candidate",
       "scenario": "Create a short four-channel pattern with a generated/owned sample; play, stop, edit loop points, switch disk operations, then repeat from cold boot. Capture PCM, pattern position, GUI and saved MOD if writes are admitted.",
-      "executionStatus": "paired-development-rom-explored",
+      "executionStatus": "main-screen-and-selected-inputs-verified",
       "assets": [
         {
           "file": "originals/PT23F.LHA",
@@ -50,6 +50,14 @@
         "copperStartRomSha256": "6d8468bb6bd8b0c5b221be865af619f1e4683f4af8085272a689e8e80bd4c181",
         "qualification": "Development diagnostic only; app firmware pin unchanged",
         "evidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+      },
+      "latestVerification": {
+        "date": "2026-10-29",
+        "receipt": "docs/UTILITY_PROTRACKER_2026-10-29.json",
+        "producerCommit": "1db841a090dac5b4105a5f05ed7cf7679de95647",
+        "romSha256": "096e4c1a49d01bc94e1f3e25da38b3f141e97992cd69f38e39bc8f3e0e883d71",
+        "completedFieldsPerRom": 26000,
+        "scope": "Main editor, note pattern, play/stop and mouse parity. Not full application qualification."
       }
     },
     {

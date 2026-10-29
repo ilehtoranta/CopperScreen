@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "utilityId": "protracker-23f",
+  "status": "MAIN_SCREEN_AND_SELECTED_INPUTS_VERIFIED_BOTH_ROMS",
+  "producerCommit": "1db841a090dac5b4105a5f05ed7cf7679de95647",
+  "consumerEngineCommit": "337f65bdbfb0630a4cef9503e05e886a9e6f84fe",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative-batch, 512 KiB Chip + 512 KiB slow, no Fast/RTC/host directories, one protected DD DF0",
+  "rom": {
+    "bytes": 524288,
+    "sha256": "096e4c1a49d01bc94e1f3e25da38b3f141e97992cd69f38e39bc8f3e0e883d71",
+    "checksum": "ffffffff",
+    "compiledRootBytes": 497840,
+    "graphicsBytes": 26363,
+    "graphicsResident": "00FF98E0",
+    "rootGapBytes": 40,
+    "checksumGapBytes": 17
+  },
+  "romBuildManifest": {
+    "entryPoint": "CopperStart.SystemRom.Program::BootstrapEntry",
+    "inputs": [
+      {
+        "sha256": "7BB8C65D818BB23456C7A216D5CA31E774D4B76B717FEA4012D94137FC9F6BD5",
+        "file": "CopperStart-System.dll"
+      },
+      {
+        "sha256": "23308EDD810124EF761EF1A1B6EB06DDE441A83AF2776E6C57CCB68F3EAD33F3",
+        "file": "CopperStart.Exec.dll"
+      },
+      {
+        "sha256": "79997763FF4593BF2BAD398CFF5C656D72FE236723EA2DDE8D0A8F24799A6AE5",
+        "file": "CopperStart.Devices.dll"
+      },
+      {
+        "sha256": "D92F4B7E6403C55EAE71183AF382862DC52F012E242265338D4306E5CF03F4CC",
+        "file": "CopperStart.Dos.dll"
+      },
+      {
+        "sha256": "63A1CBA87F993172E2BA8E8E88117E66932023F9C25C325EC016292A9069E4F0",
+        "file": "CopperSFS.Core.dll"
+      },
+      {
+        "sha256": "D7ADBF00756F2FD2665386AE0DD95282F1767E230BC51249A439C7A0CB922695",
+        "file": "CopperSharp.Sdk.Amiga.dll"
+      },
+      {
+        "sha256": "E88515004C9EDA94866D620D97EE1F00F9DBA25AB432B99A96FBC3A2EE3AAE78",
+        "file": "CopperSharp.Sdk.Amiga.Support.dll"
+      },
+      {
+        "sha256": "94C71F2C151702B14B4C037A24393A15C25E1727E0C15C2DC7390F671FA7E203",
+        "file": "CopperSharp.Compiler.dll"
+      },
+      {
+        "sha256": "3C406DD29E041731C0F05BC7BB5524BBC5D17BF39ABFFD916FB86D47CF71329A",
+        "file": "CopperStart.Graphics.dll"
+      }
+    ],
+    "romBytes": 524288,
+    "storageQualification": false,
+    "sha256": "096E4C1A49D01BC94E1F3E25DA38B3F141E97992CD69F38E39BC8F3E0E883D71",
+    "extensionRom": null,
+    "a1200": false,
+    "scope": "68000 PAL OCS A500; native DD/HD DF0 or CopperHDF explicit/RDB FFS partitions with TD64 offsets and signed boot priorities; native graphics, DOS, CON and optional L:CopperShell",
+    "fileSystemProfile": "Classic"
+  },
+  "nativeRomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "diskSha256": "38898d61f5b96971be4946761ac3101181d01e40c33512453d39eb76dca60a3a",
+  "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-protracker-editor-v3.json",
+  "inputScriptSha256": "abfff3ac95aa815257d8ade151ed0e128ad7dc1c1db095155a05e31bcc5c4aea",
+  "actionsShiftedFromV2ByFields": 15000,
+  "actionsBeginAtField": 24000,
+  "observedCopperStartMainScreenIntervalFields": [
+    21000,
+    22000
+  ],
+  "runs": [
+    {
+      "side": "protracker-kick13-final",
+      "completedFields": 26000,
+      "snapshotCount": 261,
+      "reportedUnsupported": false,
+      "mainScreenVisuallyInspected": true,
+      "finalScreenSha256": "413d8407ac0c7d737d6c4de01a4d0c4f40f5ff42080562c48f943670ddf785b3",
+      "captureDirectory": "artifacts\\utility-sequential-2026-10-29\\protracker-kick13-final"
+    },
+    {
+      "side": "protracker-copperstart-final",
+      "completedFields": 26000,
+      "snapshotCount": 261,
+      "reportedUnsupported": false,
+      "mainScreenVisuallyInspected": true,
+      "finalScreenSha256": "02d17c0b18f1f53eb5aa56842838adc238ca8ef6f773b24abeea5e0b70c08b1a",
+      "captureDirectory": "artifacts\\utility-sequential-2026-10-29\\protracker-copperstart-final"
+    }
+  ],
+  "matchedCheckpoints": [
+    {
+      "field": 23900,
+      "patternBytesCompared": 1024,
+      "patternSha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "mode": "stopped",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    },
+    {
+      "field": 24200,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "stopped",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    },
+    {
+      "field": 24400,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "pattern-play",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    },
+    {
+      "field": 24500,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "pattern-play",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    },
+    {
+      "field": 24700,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "stopped",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    },
+    {
+      "field": 25100,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "stopped",
+      "mouseX": 11,
+      "mouseY": 11,
+      "matched": true
+    },
+    {
+      "field": 25500,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "stopped",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    },
+    {
+      "field": 26000,
+      "patternBytesCompared": 1024,
+      "patternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "mode": "stopped",
+      "mouseX": 0,
+      "mouseY": 0,
+      "matched": true
+    }
+  ],
+  "selectedTests": {
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0
+  },
+  "releaseBuild": {
+    "errors": 0,
+    "warnings": 7
+  },
+  "appPinChanged": false,
+  "limitations": [
+    "Slow cold startup remains; not a throughput acceptance measurement.",
+    "No nonempty sample playback, disk save/reload or complete GUI qualification.",
+    "Local producer uses existing uncommitted sibling SDK/OS inputs; clean CI reproduction is not claimed.",
+    "Other utilities remain pending in the sequential queue."
+  ],
+  "runnerInputs": [
+    {
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "786bd4393b7c197e1e31643a7566179311f812ef1f008ccaf08edf26a8972901"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "c9e1810c89ba85f6538af7972ae8e769c38d38d94507214cd8d6025207fbf47f"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "ff3a73b2dd2a62329be1fcdad1eab8ca3a62d95f73bcfc03a4b87bd25955837a"
+    },
+    {
+      "file": "CopperDisk.dll",
+      "sha256": "11069875b45bd1af3e26efe75f6c815ce9a1db554b885e15d9d1718f0e3de277"
+    }
+  ]
+}
