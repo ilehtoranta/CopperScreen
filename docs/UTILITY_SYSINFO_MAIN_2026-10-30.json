@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "utilityId": "sysinfo-44",
+  "status": "VERIFIED_MAIN_SCREEN_BOTH_ROMS_WITH_EXPLICIT_GUEST_PREREQUISITE",
+  "producerCommit": "f65cf7645a53d15b997e1c16979ae1493f445ea2",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/f65cf7645a53d15b997e1c16979ae1493f445ea2/Docs/NativeSysInfoGui20261029.md",
+  "romSourceCommit": "b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2",
+  "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow; protected DD DF0; no Fast/RTC/host directories",
+  "sourceRom": {
+    "sha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+    "bytes": 524288,
+    "checksum": "FFFFFFFF",
+    "compiledRootBytes": 499138,
+    "graphicsBytes": 25044,
+    "sfsCommit": "662562bb86ea77a0e4dfb68e405a6b668278b885",
+    "scope": "Isolated archive of committed ROM source, excluding concurrent ROM-layout changes; byte-identical to the earlier diagnostic correction"
+  },
+  "controlledDisk": {
+    "sha256": "c42144add11c872079be8583fb038cc011bdedd701b3dc4275811c90d321c750",
+    "originalSha256": "77e64513b230b2dceb8012fc747ac6b0fba2c0297b662dfac30ee1e11599830c",
+    "utilityProgramSha256": "65f36c3bda05b4133314ff05c272499fbbf50be6b94434c40babfc8c9083cf02",
+    "changes": ["C/Intuition", "C/CopperGui", "S/Startup-Sequence"],
+    "providerSha256": "d922b42c0712b48b4a49a9e487dcaf25a875d4ab87655c9bf7077605ec8b89fe",
+    "providerCodeBytes": 304356,
+    "providerHunkBytes": 317296,
+    "providerBuildInputHashesVerified": 8,
+    "freeBlocks": 307,
+    "prerequisites": ["Native GUI and physical input", "Display database", "Missing low-vector task traps", "Startup Copper lists and VBlank service"],
+    "lifetime": "Retain complete guest-loaded module and published resources until reset; skip installation on native Intuition >=34"
+  },
+  "copperStartReplay": {
+    "completedFields": 32000,
+    "unsupported": null,
+    "actualChipsetFramebufferInspected": true,
+    "width": 908,
+    "height": 313,
+    "stableCaptureFields": [24000, 25000, 26000, 27000, 28000, 29000, 30000, 31000, 32000],
+    "rgbSha256": "b99a584f22b83a455e2a4191c57b623d1821e15c61652ca1c5ea3058a909a82f",
+    "localOutput": "artifacts/utility-sequential-2026-10-29/sysinfo-graphics-bootstrap-source"
+  },
+  "native13Replay": {
+    "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "completedFields": 12000,
+    "unsupported": null,
+    "actualChipsetFramebufferInspected": true,
+    "rgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff",
+    "localOutput": "artifacts/utility-sequential-2026-10-29/sysinfo-graphics-bootstrap-kick13"
+  },
+  "focusedTests": {
+    "chipsetRectangle": {"passed": 1, "skipped": 0, "whitePixels": 128, "settleFields": 4, "adjacentGrayChecked": true},
+    "taskTraps": {"passed": 2, "skipped": 0, "vectorsPerRom": [11, 4, 34], "scope": "Exact frame PC, trap number, saved/user SR, handler supervisor SR, D0/A0 and restored SP under CopperStart and Kickstart 1.3"},
+    "solutionBuild": {"configuration": "Release", "errors": 0, "warnings": 12}
+  },
+  "scope": "Main information screen under both ROMs using the same controlled disk. Actual framebuffer output, not reconstructed plane RAM. Different ROM/library versions are visible; cross-ROM pixel identity is not asserted.",
+  "unresolvedCoverage": ["SysInfo buttons, benchmarks and device operations", "Default null task trap handler, bus/address frames and accelerated/VBR configurations", "Eight later utilities and final collection sweep", "Concurrent TextLength exploratory fixture failure remains separate"],
+  "firmwarePinChangedByThisWork": false,
+  "previousEvidence": "UTILITY_SYSINFO_GUI_2026-10-29.json"
+}

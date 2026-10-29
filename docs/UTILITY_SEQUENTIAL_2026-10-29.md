@@ -16,7 +16,7 @@ marking the collection complete.
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
-| 4 | SysInfo 4.4 | IN PROGRESS: native GUI prerequisite and palette ABI fixed; later display-database fault | [Latest receipt](UTILITY_SYSINFO_GUI_2026-10-29.json) |
+| 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | PENDING | Not yet verified in this sequence |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
@@ -237,3 +237,27 @@ remain pending. The [receipt](UTILITY_SYSINFO_GUI_2026-10-29.json) and
 [producer note](https://github.com/ilehtoranta/CopperStart/blob/b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2/Docs/NativeSysInfoGui20261029.md)
 separate the passing component checks, native application controls and remaining
 failure. The firmware pin is unchanged.
+
+### Main screen verified — 2026-10-30
+
+The display database, native task trap delivery and missing startup Copper/VBlank
+service are now composed into the disk-loaded GUI prerequisite. The controlled
+v5 disk preserves the original SysInfo executable. Actual chipset framebuffer
+captures show the main information screen under both CopperStart and Kickstart
+1.3. CopperStart completes 32,000 fields; its captures from fields 24,000 through
+32,000 are pixel-identical. Native 1.3 completes 12,000 fields. Different
+ROM/library versions are visible; cross-ROM pixel identity is not asserted.
+
+The standalone ROM was rebuilt from an isolated archive of producer commit
+`b907b7b3e8f9dccad4b957852fd6ba1faf35bbb2`. Its full source-built bytes match
+the preceding palette diagnostic image. The guest prerequisite is a separate
+source checkpoint; concurrent ROM-layout work is excluded. The rectangle
+regression checks 128 white pixels and an adjacent gray pixel after four
+fields. Trap cases check real F-line, illegal opcode and TRAP #2 frames under
+both ROMs, retaining the native module until reset.
+
+The [new receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) records exact inputs,
+hashes, build and test scope. Earlier failed replays remain historical evidence.
+SysInfo controls and benchmarks, the eight later utilities and the final
+collection sweep remain unverified. This work does not change the app firmware
+pin or qualify host performance.
