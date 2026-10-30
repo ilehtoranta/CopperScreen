@@ -1,0 +1,128 @@
+{
+  "status": "Personal Paint remains current. Next missing API identified and independently characterized; no production VideoControl correction or CopperStart editor pass yet. Later utilities and final source sweep remain open.",
+  "producerControlCommit": "85004104d3525ae5882b40debcff34e60c535155",
+  "producerTestSourceSha256": "beeb390754809f06e1011c33591d82bec02051cff0a1fdc59a82f5de1d3d4ca6",
+  "firstFault": {
+    "traceSha256": "324f9a2bedf1a11849d9fd7822694914356b3f2519016710e2f64dd5cd5a4abd",
+    "romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+    "hdfSha256": "45ad4a78295b84264ee6b206ab4a5d86b89a7e11b1543292d4f162b225ead3cb",
+    "field": 24152,
+    "cycle": 3432180974,
+    "callerPc": "0x002E646E",
+    "graphicsBase": "0x00220460",
+    "vectorLvo": -708,
+    "api": "VideoControl",
+    "vectorAddress": "0x0022019C",
+    "target": "0x00FF9FBE",
+    "targetOpcode": "0x4AFC ILLEGAL",
+    "colorMap": "0x003E8478",
+    "colorMapType": 1,
+    "viewPortExtra": "0x003E8340",
+    "tags": [
+      {
+        "tag": "0x80000013 VTAG_VIEWPORTEXTRA_GET",
+        "data": 0
+      },
+      {
+        "tag": "TAG_DONE",
+        "data": 0
+      }
+    ],
+    "reason": "LOW_OR_UNPEEKABLE_PC",
+    "lastPc": "0x00000000"
+  },
+  "applicationProfile": "PAL MC68000 OCS interpreter; 512 KiB Chip +512 KiB slow +2 MiB Fast; read-only FFS DH0:1:32:0:1023; fixed guest Shell and original Workbench libraries retained",
+  "nativeControl": {
+    "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+    "profile": "PAL MC68000 OCS; 512 KiB Chip +512 KiB slow; authored boot block, no DOS or GUI provider",
+    "result": "6 passed, 0 failed, 0 skipped; 198 VideoControl calls",
+    "logSha256": "4dac545d8989a385781ba0ef013b10149cbe81b29a03913fc133746dd5ed317b",
+    "cases": [
+      {
+        "artifact": "video-control-False-False-False.json",
+        "sha256": "bc24b10f674a8b4bf490f6be2fa1634091a843080b294c0c70d36ebd4a33b21d",
+        "callerOwned": false,
+        "legacyMap": false,
+        "nonzeroQueryData": false,
+        "fields": 191,
+        "calls": 33
+      },
+      {
+        "artifact": "video-control-False-True-False.json",
+        "sha256": "f194efc4640e9356ff6ec5e0a6e175d99061c59c38786d0bc990b71d9eab1ef0",
+        "callerOwned": false,
+        "legacyMap": false,
+        "nonzeroQueryData": true,
+        "fields": 191,
+        "calls": 33
+      },
+      {
+        "artifact": "video-control-True-False-False.json",
+        "sha256": "7b049c907ee10d7587436c86c017473518c07b0432ab88ced881b3676a5246be",
+        "callerOwned": true,
+        "legacyMap": false,
+        "nonzeroQueryData": false,
+        "fields": 191,
+        "calls": 33
+      },
+      {
+        "artifact": "video-control-True-False-True.json",
+        "sha256": "7c1581f429f019d4fdd2c97ed9807b44cb6d9248f096463e1c7cb9f049386900",
+        "callerOwned": true,
+        "legacyMap": true,
+        "nonzeroQueryData": false,
+        "fields": 191,
+        "calls": 33
+      },
+      {
+        "artifact": "video-control-True-True-False.json",
+        "sha256": "c1613b6a2b2c2a34f3858be9c7e53afb7d6e5d69f7f342aedf361575a838d16f",
+        "callerOwned": true,
+        "legacyMap": false,
+        "nonzeroQueryData": true,
+        "fields": 191,
+        "calls": 33
+      },
+      {
+        "artifact": "video-control-True-True-True.json",
+        "sha256": "2d2aed8fee7aa8bbf5eecab5bb4993a79d58b92f5d6783f5f2af3c8443134723",
+        "callerOwned": true,
+        "legacyMap": true,
+        "nonzeroQueryData": true,
+        "fields": 191,
+        "calls": 33
+      }
+    ],
+    "observations": [
+      "ViewPortExtra GET rewrites tag to SET and copies the non-null public field into ti_Data",
+      "ChromaKey GET rewrites tag to SET/CLR and clears ti_Data",
+      "BitPlaneKey/BorderBlank/BorderNoTrans/Batch/UserClip GET retain ti_Data while rewriting tag",
+      "BorderSprite remains disabled on OCS and GET retains ti_Data",
+      "FullPalette GET always rewrites to SET, ti_Data FFFFFFFF or 0"
+    ],
+    "sourceBuild": "Release test project: zero errors, one existing warning"
+  },
+  "copperStartBefore": {
+    "selectedCases": 1,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "completionMarker": false,
+    "field": 78,
+    "pc": 0,
+    "logSha256": "3a4e7943d2ba422f3ac7ae34a37b8fb4806306ae5969c6a0317b44689a78c220",
+    "artifactSha256": "e495bbefd86ca69ed1c9b19e2e46213fdb2366a5630e162d69dd9e9df91d7700"
+  },
+  "earlierDiagnostics": [
+    "v27/v28 native assertions exposed differences from retained reference expectations; corrected against original ROM results, not replacement behavior",
+    "v30 replacement observation used a boot-RAM mailbox that conflicted with ROM-owned data and raised a host read exception; not used as API failure evidence",
+    "v31 publishes a private Exec resource; host lookup containment does not add guest API admission checks"
+  ],
+  "coverageLimits": [
+    "No replacement pass or production VideoControl implementation",
+    "No complete VideoControl tag/mode/coercion/static-batch execution qualification",
+    "No actual genlock/border-sprite hardware-output or other chipset-profile claim",
+    "Default absent explicit reference ROM means skipped/unavailable coverage, not a pass",
+    "No performance acceptance or app firmware pin change"
+  ]
+}

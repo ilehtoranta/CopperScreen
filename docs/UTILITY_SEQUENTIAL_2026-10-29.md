@@ -437,3 +437,27 @@ The original Workbench BCPL Assign failure also remains independently open.
 The [diskfont receipt](UTILITY_PPAINT_DISKFONT_2026-10-30.json) preserves all
 scoped passes, earlier fixture failures, new image identities and remaining
 application limits. Personal Paint remains current; no later utility has advanced.
+
+### Personal Paint next failure: missing VideoControl — 2026-10-30
+
+The late-startup trace catches the next fault at field 24,152: PPaint calls
+graphics.library VideoControl (LVO -708) with VTAG_VIEWPORTEXTRA_GET, and the
+pinned compact ROM routes that vector to ILLEGAL. Its CM_TYPE_V1 ColorMap has
+a non-null ViewPortExtra. The subsequent PC/stack corruption is downstream of
+that missing API, not evidence of an emulated instruction-timing failure.
+
+Producer main commit `85004104d3525ae5882b40debcff34e60c535155` records a native
+ROM control for this API. Six cases (198 calls) pass under original Kickstart
+3.1 on PAL OCS, including allocated and caller-owned maps, caller-owned legacy
+maps, non-null pointer queries and non-zero flag-query data. A selected case
+fails on the pinned CopperStart ROM without its completion marker. The initial
+boot-mailbox observer conflicted with ROM-owned RAM; the final probe publishes
+through a private Exec resource and distinguishes that observer issue from the
+guest API failure.
+
+The native flag rewrites differ from the retained portable implementation;
+copying that implementation unchanged would not satisfy the control. This is
+completed characterization, not production VideoControl support or an editor
+pass. The [VideoControl receipt](UTILITY_PPAINT_VIDEOCONTROL_2026-10-30.json)
+pins the trace, native cases, before-fix failure and coverage limits. The API
+correction, Personal Paint editor, later utilities and final sweep remain open.
