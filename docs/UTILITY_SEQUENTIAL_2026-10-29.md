@@ -17,7 +17,7 @@ marking the collection complete.
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
-| 5 | PPMore 1.8a | IN PROGRESS: native reader verified; CopperStart opens its window with 2 MiB, then console unit 0 fails; 1 MiB memory failure retained | [Startup receipt](UTILITY_PPMORE_STARTUP_2026-10-30.json) |
+| 5 | PPMore 1.8a | IN PROGRESS: reader retained with explicit 2 MiB profile; footer controls absent; original 1 MiB lane still fails | [Latest receipt](UTILITY_PPMORE_TEXT_LENGTH_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
@@ -282,3 +282,28 @@ The [window-console receipt](UTILITY_PPMORE_WINDOW_CONSOLE_2026-10-30.json)
 records exact inputs, profiles, component passes and application failure.
 PPMore remains the current utility; later utilities and the final sweep remain
 pending. The application firmware pin is unchanged.
+
+### PPMore reader retained with text measurement — 2026-10-30
+
+Producer commit `d89b64a841e76516a0f070eb16d1f645fa980ff2` implements IntuiTextLength
+and installs native graphics TextLength when that vector is missing. The
+measurement probe passes against CopperStart and native 1.3, including a
+proportional font, spacing/kerning, an adjacent caller-owned TextAttr, default
+glyphs, WORD count handling and balanced font ownership. Window-console and
+desktop regressions pass with the same generated module, and the solution builds.
+
+The final controlled disk retains the unchanged PPMore program and libraries.
+With the explicit 2 MiB diagnostic profile, CopperStart now displays the reader's
+82-line title and fixture text through 40,000 fields. Captures from fields
+32,000 through 40,000 are pixel-identical. Native 1.3 retains its reader through
+12,000 fields. SysInfo's separate original-profile regression still reaches
+its main information screen through 32,000 fields.
+
+PPMore remains in progress: the original 1 MiB lane has no reader at 40,000
+fields, and the CopperStart reader lacks the footer control strip visible
+under native 1.3. Navigation is unverified. The new
+[text-length receipt](UTILITY_PPMORE_TEXT_LENGTH_2026-10-30.json) records those
+limits, exact inputs, component passes and retained failed-candidate evidence.
+The public OpenFont adjacency defect is also recorded separately; the new
+IntuiTextLength uses its own attribute snapshot. Later utilities and the final
+collection sweep remain pending. No app firmware pin or performance result changes.
