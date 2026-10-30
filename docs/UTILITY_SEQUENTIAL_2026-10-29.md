@@ -412,3 +412,28 @@ The external probe adds explicit read-only HDF modes and a versioned 3 MiB
 correctness profile, preserving existing ADF invocations. Its Release build
 passes with zero warnings/errors. No production engine or ROM behavior changed.
 Personal Paint remains current; later utilities and the final sweep remain open.
+
+### Personal Paint diskfont loader correction — 2026-10-30
+
+CopperStart main commit `373939a586dc816d13cd4a63fa474e00d99db16b` fixes the
+guest Shell disk-library loader's assumption that InitResident returns a base.
+Diskfont 34.37 publishes a valid library but returns 1. The loader now resolves
+the resident's public name in Exec's list before patching Close/Expunge.
+The former field-3,124 fault is eliminated: the trace opens diskfont successfully
+at field 3,125 and proceeds through Personal Paint's own I/O libraries.
+
+The final authored OFS control checks AUTOINIT and direct initialization returning
+1, including signature calls, version rejection, full-path reuse and Close
+counts. Both cases pass under native Kickstart 1.3 and CopperStart, without
+skips. The initial native fixture lacked explicit public library metadata;
+its failures remain recorded and the corrected fixture passes independently.
+The corrected Shell compiles freestanding and the isolated Release solution
+build has zero errors and seven warnings. The ten compiler inputs are pinned.
+
+This is a completed loader correction, not a paint editor pass. The new
+40,000-field run eventually corrupts guest PC/stack state without displaying
+the editor. A late-startup instruction trace is investigating the next failure.
+The original Workbench BCPL Assign failure also remains independently open.
+The [diskfont receipt](UTILITY_PPAINT_DISKFONT_2026-10-30.json) preserves all
+scoped passes, earlier fixture failures, new image identities and remaining
+application limits. Personal Paint remains current; no later utility has advanced.

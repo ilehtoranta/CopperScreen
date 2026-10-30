@@ -1,0 +1,132 @@
+{
+  "scope": "Completed guest disk-library loader correction; Personal Paint editor remains unverified under CopperStart. No later utility has been advanced.",
+  "producerMainCommit": "373939a586dc816d13cd4a63fa474e00d99db16b",
+  "priorPinnedRomSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+  "sourceCorrection": "Ignore raw InitResident return as a library pointer; resolve published RT_NAME in Exec library list before installing Close/Expunge hooks.",
+  "faultBefore": {
+    "artifact": "setfunction-input-v16",
+    "frame": 3124,
+    "libraryArgument": 1,
+    "vectorOffset": -18,
+    "publishedDiskfontBase": "0x002E3E40",
+    "traceSha256": "3b020fb0c9045f08e52470218ea7e0e15d7a8e39793c1e1fe12b06c2b8755520"
+  },
+  "shell": {
+    "bytes": 334844,
+    "manifest": {
+      "sha256": "E9295B56C3F0F9DA67AF8C50F6170D8868CF77EBDE4F506832007464E79D5F20",
+      "peepholeOptimization": "FixedPoint",
+      "codeSizeOptimizations": true,
+      "dosClient": {
+        "originalDosSha256": "9B2DD54FDE8662C416F6A79E2476ABF0D1D16B5A91AED6DE32C02D8996BBB2C5",
+        "serviceVersion": 2,
+        "path": "client/CopperStart.Dos.dll"
+      },
+      "inputs": [
+        {
+          "file": "CopperStart.Shell.dll",
+          "sha256": "3C317F0A0C3121EE3FF1FACCB11E6D7DA7D461F0F58E102F039C8CB55ACAC3A5"
+        },
+        {
+          "file": "CopperOS.Shell.Dos.dll",
+          "sha256": "411B65A1CDD07EA01C0751020C413DA8D4BC303BAEF925564021D8F887228FF1"
+        },
+        {
+          "file": "CopperStart.Dos.dll",
+          "sha256": "76DFB70CBF81832B2C0441EA56FA58A353101058279D4884AB0CB3C570F09F39"
+        },
+        {
+          "file": "CopperStart.Exec.dll",
+          "sha256": "029BBC2EB243D05C0521B84EC7F99A58F20E0F395B99038D767F462D60C63BBA"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "DB2BF54D6AEB3E2E51676E019D30FB0EBD6F7133FF4E5AF46E1B1C55B64512B6"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "8005DBBB183B4382057518440F15F21F58CDF5A5FA0AA586AD38039D49FC4A02"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "D4EEC3AC834B33F018398CDB5C30D2EAFD5F1DA5D9C75EB81C7021429E647113"
+        },
+        {
+          "file": "CopperStart.Utility.dll",
+          "sha256": "45744EC43BF662BB28E359D6AE04FED116921888EB2A4B2F990575C4C4A28DC1"
+        },
+        {
+          "file": "CopperStart.Icon.dll",
+          "sha256": "6EB9561013BCDAA4FD514B115F695C7F9EEB49BD1330DDF97A9711D5204BA327"
+        },
+        {
+          "file": "CopperSFS.Core.dll",
+          "sha256": "A56F05867540D28F69D06013230492C6D0496D73DB93C9EA661380CCB0ED4F7A"
+        }
+      ]
+    }
+  },
+  "nativeControl": {
+    "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "ofsTests": "2 passed, 0 failed, 0 skipped; 9 seconds",
+    "logSha256": "14d60361b053e2ffb6a2ee24887ca5907dfe85f20dd0505e07420c9e019c747b"
+  },
+  "copperStartControl": {
+    "ofsTests": "2 passed, 0 failed, 0 skipped; 5m14s",
+    "logSha256": "5306ab5e17d0e798eb3a0713095ceac198b54f083aa4f200b35f7b28c00033cc"
+  },
+  "testContract": [
+    "AUTOINIT and direct initializer publishing a library then returning 1",
+    "Library pointer/version/revision, callable vector signature",
+    "Higher minimum version rejected, full-path reuse",
+    "Open count2 then two Close calls returning count0"
+  ],
+  "earlierFixtures": {
+    "oldCopperStartShell": "AUTOINIT passed; direct initializer failed with guest-state corruption",
+    "nativeFfsAttempt": "Stopped: unsuitable boot setup, no compatibility verdict",
+    "nativeOfsInitialFixture": "Both failed; metadata incomplete for native1.3. Final fixture explicitly initializes metadata and both pass."
+  },
+  "builds": {
+    "shellCompilation": "1 passed, no skipped cases; freestanding, zero managed allocations/runtime helpers/features/external targets/fatal sites",
+    "isolatedSolution": "Release build: zero errors, seven warnings; excludes concurrent source changes",
+    "shellCompileLogSha256": "e5b8937147de2fd7cf87592fdb7ce8595df377d2e042e79e3dbae1c7424a7892",
+    "solutionBuildLogSha256": "163c56573b66c182373de4ad81a8c2f96368b997adf24347d92f37814fb6a23c"
+  },
+  "application": {
+    "hdfSha256": "45ad4a78295b84264ee6b206ab4a5d86b89a7e11b1543292d4f162b225ead3cb",
+    "logicalFiles": 580,
+    "profile": "PAL MC68000 OCS interpreter, 512 KiB Chip +512 KiB slow +2 MiB Fast, read-only FFS DH0:1:32:0:1023",
+    "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPaint/PPaint\n",
+    "traceAfterFix": "fixed-loader-trace-v23",
+    "traceSha256": "95587e7fac73d78d2f92f5d60c8fb119d1ed987c5b666995d7522c589723a095",
+    "diskfontOpenFrame": 3125,
+    "diskfontBase": "0x002E3E70",
+    "laterLibraries": "Personal request/I/O/blitter libraries loaded; not an editor pass",
+    "runs": [
+      {
+        "artifact": "copperstart-fixed-loader-v22",
+        "fields": 16000,
+        "pc": "00FED052",
+        "sp": "0038C5D4",
+        "rgbSha256": "e06743e2190e59efc4ab4ed85f7381c387fd74f7111ad98fdcb7139ecea0a049",
+        "logSha256": "3d30536dbe39d149870a603ad525df01db3b4953c3c4aca5b93b4752eee3c0d7",
+        "verdict": "No editor verified; final40000 capture has corrupted PC and stack"
+      },
+      {
+        "artifact": "copperstart-fixed-loader-v24",
+        "fields": 40000,
+        "pc": "38354E75",
+        "sp": "00000008",
+        "rgbSha256": "edb4699a4ada2a5a5d39cde52582b0fa9c5b103054a6c4b52b07313606a715e0",
+        "logSha256": "be6a5f4cab0caaad5a4619f308c15f78f3326b07bcd45d62e43e93d85d5c875f",
+        "verdict": "No editor verified; final40000 capture has corrupted PC and stack"
+      }
+    ]
+  },
+  "limitations": [
+    "Original pinned ROM unchanged; no app firmware pin update",
+    "Later PPaint failure unresolved; broad paint operations and performance unverified",
+    "Original Workbench BCPL Assign failure remains separate; direct launch avoids it for this diagnostic",
+    "Source corrected in isolated pre-integration snapshot; integration retains separate already committed graphics change; no full ROM qualification of combined main claimed"
+  ]
+}

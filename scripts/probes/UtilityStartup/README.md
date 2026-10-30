@@ -144,3 +144,10 @@ both modes open media read-only. Existing five/six-argument ADF invocations
 retain their profiles. These are correctness diagnostics, not throughput
 acceptance protocols. The [Personal Paint control receipt](../../../docs/UTILITY_PPAINT_CONTROL_2026-10-30.json)
 records native editor evidence and both unresolved CopperStart failures.
+
+`COPPERSTART_PROBE_STOP_SET_FUNCTION=1` records the guest registers and stops
+at an observed Exec `JSR d16(A6)` SetFunction call. Without that switch the
+same call inputs are recorded and execution continues. This observation covers
+that instruction form, not arbitrary indirect/tail calls. The diskfont case
+shows why caller-side evidence matters: the Shell passed InitResident's success
+value 1 as a library base even though diskfont had published a valid library.

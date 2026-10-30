@@ -77,6 +77,7 @@ var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Ver
 var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue;
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
+var stopSetFunction = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_SET_FUNCTION") == "1";
 void ObserveCall()
 {
     var c=m.Cpu;
@@ -85,6 +86,13 @@ void ObserveCall()
     { Keep("ILLEGAL_INSTRUCTION"); stop=true; reason="ILLEGAL_INSTRUCTION"; return; }
     if(op!=0x4eae) return;
     var displacement=unchecked((short)ext);
+    if(c.A[6]==Read(4) && displacement == -420)
+    {
+        calls.Add(new {Api="SetFunctionInput",Library="exec.library",frame=m.CompletedFrames,
+            entryCycle=c.Cycles,callPc=c.ProgramCounter,libraryBase=c.A[1],offset=c.A[0],newFunction=c.D[0],
+            addressRegisters=c.A.ToArray(),dataRegisters=c.D.ToArray()});
+        if(stopSetFunction) { Keep("SET_FUNCTION_INPUT"); stop=true; reason="SET_FUNCTION_INPUT"; return; }
+    }
     if(c.A[6]==Read(4) && displacement is -552 or -408)
         pending.Add(("OpenLibrary",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],displacement==-408?0:c.D[0],c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement == -498)
@@ -194,7 +202,7 @@ File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
-    watchAddress, watchExpected, stopFailedDevice, stopIllegal,
+    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());
 File.WriteAllBytes(Path.Combine(output,"slowram.bin"),slow);
