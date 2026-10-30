@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-30",
+  "utility": "Personal Paint 7.1c complimentary edition",
+  "status": "IN PROGRESS: missing native Workbench prerequisite; main screen unverified",
+  "recipe": "scripts/probes/UtilityStartup/prepare_ppaint_hdf.py",
+  "archiveSha256": "2e20ea41001c4db0db5cd6a6505ed6c9708eea1aaccd6688e33ccd03334c51ff",
+  "programSha256": "2d679078651141c0590ee0991fcc7b8741ebc42b091fe71ae162737d694c8fa8",
+  "hardfileSha256": "a2f5d273b058c0d9dbab9669256999c90051bd0bee5b3d3785abc2e51152182f",
+  "filesystem": "16 MiB OFS raw partition; automatic native hardfile detection; read-only backing file in both runs",
+  "installedFiles": 401,
+  "preparationCoverage": "All 401 installed files read back byte-for-byte. Optional system-file import verified with an existing OFS fixture in ADF and single-ADF ZIP forms; 422 identical file payloads. This fixture is not Workbench and was not used as an application control.",
+  "manualRequirements": "Archive H/7/0/4/0002 section 1.2: any Amiga with at least 2 MiB RAM; 1 MiB Chip preferred; 512 KiB Chip supported with resource limits; Kickstart 1.2+ and Workbench libraries.",
+  "profile": "Explicit diagnostic a500-ocs-3m-v1: PAL MC68000 interpreter, OCS 8371/8362, 512 KiB Chip + 512 KiB slow + 2 MiB AutoConfig Fast; one read-only hardfile, no floppy image, no RTC or host directories",
+  "native13": {
+    "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "completedFields": 12000,
+    "hardfileBooted": true,
+    "programLaunched": true,
+    "mainScreenVerified": false,
+    "message": "Can't open version 0 of mathtrans.library",
+    "returnCode": 20,
+    "rgbSha256": "e59970f69bc41beef567fe696ac43fd9fdec867a07481295247c319c69795fdd",
+    "verdict": "Application control unavailable until user-supplied Workbench library prerequisites are installed; not an emulator compatibility failure"
+  },
+  "copperStart": {
+    "romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+    "completedFields": 40000,
+    "mainScreenVerified": false,
+    "finalPc": "00FCC134",
+    "rgbSha256": "ab2b5d2cf418392c06710e21db8020ec0fba18b6d804e158e2afa2c13808fdc0",
+    "verdict": "No hardfile startup/display observed on this frozen Classic floppy ROM; storage-profile/bootstrap compatibility remains to be investigated, not a paint-application result"
+  },
+  "provider": {
+    "sha256": "6669969B733FBB516C021E92DB12A6B4E378765CBE502A2B606764DC34D2FAD5",
+    "entry": 0,
+    "installer": 308106,
+    "inputEntry": 307932,
+    "textEntry": 307956,
+    "classicEntry": 307980,
+    "codeBytes": 311200,
+    "imageBytes": 324980,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "4A2EC44DBA0B3146EE42E7845FA2C103D2701242FF21686E51DDD0BF88AAEB43"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "AE870256FA022D553B4FE9852F6A88B1AD4F3079F1082F4DC1B64185953D1D07"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "AB052F1F2CE22805BEA8FBE0BB8D070061834A73828A486A77548F3F1B856A30"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "F5DA52372E28858D2142EC48A4517B16100EBBEB7060119583BEA6EB8333CAFA"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D27FAB3C474F29D3F5F1ECBEADBCEB99177BE169BAB8F7A752D7098B15FE9C9C"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "988B95148B8D1CAD04D94E51B546886BD5D8A32AA07611723A678F0B151A00AA"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "745FEFDA2F6A472E98C7184622FBBB1F0B5BD6D207FB1F97C2383B73EE8E07EC"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0BA749A9902F5241AD9A183B44314CC118CCA2BDFA86BD15F87D4CAD5E47D900"
+      }
+    ]
+  },
+  "shell": {
+    "sha256": "49E21C944A3DF70C9270935C8344ED95C50401443C73335F98D066AF950B2BD1",
+    "peepholeOptimization": "FixedPoint",
+    "codeSizeOptimizations": true,
+    "dosClient": {
+      "originalDosSha256": "61D5BFBA22C508B1281139591F40427BF1B998E30DF1E848CB3787F3C7A4276F",
+      "serviceVersion": 2,
+      "path": "client/CopperStart.Dos.dll"
+    },
+    "inputs": [
+      {
+        "file": "CopperStart.Shell.dll",
+        "sha256": "C68F1DB59265B1B8FD03778E7387B445FF6291D9CF452E8B2C3C71E3EEF33374"
+      },
+      {
+        "file": "CopperOS.Shell.Dos.dll",
+        "sha256": "35F6267C1974CD3A17E910943C78A8281DE88342F47E3B3F313995A3ECE97D14"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "C7C0CB89D5504726222AC2C3BFA3709F9FEA07264C4228DE04626D649CC28B53"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "6B831E4125DAEB43468D3824CD37EB2330AA18D967A830A203A41A33FCE03706"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D4AEBCDE6440015FD8DB839D856955818407FF5321F3061311189EF7D5715D27"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "FE120E89003D9B17B8636BFD63A3696D9F1C5BF89F871ED2230A72BD00F26030"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "35D706810A3371536D0893FE034127404CA90A126F23845513B750BECE86E233"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "CEACD42DE3F2D1D43380A17D22E413EB14346749C65567CCEB37F105419134C2"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "1D04DF6DEFEE1E5861539E2AFA5E4294F2001B9FEBE955D0CE6AE672A4C76EC2"
+      },
+      {
+        "file": "CopperSFS.Core.dll",
+        "sha256": "DADE8BC1747592BE91ECE87848713AB0720E4C11FC5DCD3A3411F6CDBFB10D8F"
+      }
+    ]
+  },
+  "mediaUnchanged": true,
+  "pending": [
+    "User Workbench 1.3 ADF/ZIP or its system library directory; question pending.",
+    "Repeat native control with actual system prerequisites.",
+    "Resolve CopperStart storage/bootstrap profile, then trace actual paint startup.",
+    "Main screen, input/drawing, file operations and later utilities remain unverified."
+  ],
+  "scope": "No ROM/media/build artifacts or system libraries committed; no host OS shims, firmware pin, package publication or performance acceptance changes.",
+  "localEvidence": "artifacts/utility-sequential-2026-10-30/ppaint/"
+}

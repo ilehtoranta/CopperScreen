@@ -18,7 +18,7 @@ marking the collection complete.
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
-| 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
+| 6 | Personal Paint 7.1c complimentary edition | IN PROGRESS: native hardfile launches program; Workbench mathtrans.library missing; CopperStart hardfile bootstrap unresolved | [Startup receipt](UTILITY_PPAINT_STARTUP_2026-10-30.json) |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
@@ -333,3 +333,25 @@ search, packed files, requesters and resize input remain unverified.
 The [main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) records exact
 inputs, scoped passes and failures. Proceed to Personal Paint; the remaining
 utilities and final source sweep remain open. The app firmware pin is unchanged.
+
+### Personal Paint prerequisites and hardfile control — 2026-10-30
+
+The included manual requires at least 2 MiB RAM and Workbench libraries in
+addition to Kickstart. The 685,000-byte program plus guest prerequisites does
+not fit a single DD disk. A new local recipe installs the complete unchanged
+archive, its libraries and the pinned GUI/Shell into a read-only 16 MiB OFS
+hardfile. All 401 files read back byte-for-byte. Its optional system-file import
+also checks ADF/ZIP byte equivalence and Amiga's case-insensitive paths using
+an existing OFS fixture; that fixture is not a Workbench or paint control.
+
+Native Kickstart 1.3 cold-boots the hardfile on the explicit 3 MiB diagnostic
+profile, launches PPaint and reports missing `mathtrans.library`, returning 20.
+The actual Workbench 1.3 inputs used by earlier tests are missing locally; their
+location has been requested. This is unavailable application-control coverage,
+not a paint screen or emulator failure. CopperStart's frozen Classic floppy ROM
+does not show hardfile startup within 40,000 fields; its storage/bootstrap
+profile needs separate investigation before interpreting application behavior.
+
+The [startup receipt](UTILITY_PPAINT_STARTUP_2026-10-30.json) records identities,
+profiles, prerequisite failures and pending work. Personal Paint remains current;
+later utilities and the final sweep remain pending. No firmware pin changes.

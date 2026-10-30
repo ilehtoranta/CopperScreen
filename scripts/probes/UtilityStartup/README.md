@@ -98,3 +98,19 @@ python scripts/probes/UtilityStartup/prepare_sysinfo_desktop.py `
 
 The [ProTracker investigation](../../../docs/PROTRACKER_STARTUP_2026-10-28.md)
 records paired API evidence and native RAM equivalence against the normal runner.
+
+`prepare_ppaint_hdf.py` creates a new local 16 MiB OFS hardfile containing the
+complete pinned Personal Paint 7.1c archive, its libraries in `Libs:`, and the
+same manifest-checked native GUI/Shell prerequisites. Pass `--archive`, `--base`
+(the collected SysInfo OFS disk supplies standard boot code), `--provider-root`,
+`--shell-root`, and a new `--output` path. Every file is read back byte-for-byte;
+the sidecar records each file's hash and origin. Never redistribute this image.
+
+Optional `--workbench` accepts a user-supplied Workbench 1.3 ADF or ZIP containing
+one ADF. Its files are installed before the controlled startup is written.
+Amiga path collisions are resolved case-insensitively. Without this input, the
+image is only a prerequisite diagnostic: native 1.3 launches PPaint but exits
+because `mathtrans.library` is missing. That is unavailable application-control
+coverage, not an emulator regression or a passing paint screen. Use `--hdf-ro`
+when replaying the image and record an explicit expanded RAM profile; the
+manual requires at least 2 MiB. The original 1 MiB lane is not adequate.
