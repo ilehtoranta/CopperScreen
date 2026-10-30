@@ -54,7 +54,7 @@ string Name(uint a)
     return Encoding.ASCII.GetString(bytes.ToArray());
 }
 var ring = new Entry[512]; long count = 0; bool stop = false; string reason = "END_FIELD";
-var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request)>();
+var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
 var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue;
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 void ObserveCall()
@@ -64,18 +64,29 @@ void ObserveCall()
     if(op!=0x4eae) return;
     var displacement=unchecked((short)ext);
     if(c.A[6]==Read(4) && displacement is -552 or -408)
-        pending.Add(("OpenLibrary",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],displacement==-408?0:c.D[0],c.Cycles,0));
+        pending.Add(("OpenLibrary",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],displacement==-408?0:c.D[0],c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement == -498)
-        pending.Add(("OpenResource",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0));
+        pending.Add(("OpenResource",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    else if(c.A[6]==Read(4) && displacement is -198 or -684)
+        pending.Add((displacement == -198 ? "AllocMem" : "AllocVec",$"D0={c.D[0]:X8},D1={c.D[1]:X8}",
+            c.ProgramCounter+4,c.A[7],c.A[6],c.D[1],c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement is -444 or -456 or -318)
         pending.Add((displacement == -444 ? "OpenDevice" : displacement == -456 ? "DoIO" : "Wait",
-            displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,displacement == -318 ? 0 : c.A[1]));
+            displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,displacement == -318 ? 0 : c.A[1],null));
     else if(displacement==-198 && c.A[6]==intuitionBase)
-        pending.Add(("OpenScreen","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0));
+        pending.Add(("OpenScreen","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    else if(displacement==-204 && c.A[6]==intuitionBase)
+    {
+        calls.Add(new {Api="OpenWindowInput",Library="intuition.library",callPc=c.ProgramCounter,
+            entryCycle=c.Cycles,frame=m.CompletedFrames,address=c.A[0],
+            bytes=Convert.ToHexString(Enumerable.Range(0,48).Select(i=>ReadByte(c.A[0]+(uint)i)).ToArray())});
+        pending.Add(("OpenWindow","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    }
     else if(c.A[6]==dosBase && displacement is -30 or -42 or -48)
         pending.Add((displacement == -30 ? "DOS.Open" : displacement == -42 ? "DOS.Read" : "DOS.Write",
             displacement == -30 ? Name(c.D[1]) : $"D1={c.D[1]:X8},D2={c.D[2]:X8},D3={c.D[3]:X8}",
-            c.ProgramCounter+4,c.A[7],c.A[6],c.D[2],c.Cycles,0));
+            c.ProgramCounter+4,c.A[7],c.A[6],c.D[2],c.Cycles,0,
+            displacement == -48 ? Encoding.Latin1.GetString(Enumerable.Range(0,(int)Math.Min(c.D[3],128u)).Select(i=>ReadByte(c.D[2]+(uint)i)).ToArray()) : null));
     if(c.A[6]==0 && displacement<0)
     { Keep("NULL_BASE_VECTOR_CALL"); stop=true; reason="NULL_BASE_VECTOR_CALL"; }
 }
@@ -86,7 +97,7 @@ void ObserveReturn()
     {
         var p=pending[i]; if(c.ProgramCounter!=p.Pc || c.A[7]!=p.Sp) continue;
         calls.Add(new {p.Api,p.Library,version=p.Version,callPc=p.Pc-4,entryCycle=p.Cycle,returnCycle=c.Cycles,result=c.D[0],baseAddress=p.A6,frame=m.CompletedFrames,
-            ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31)});
+            ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31),writePrefix=p.Text});
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
         if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
         if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
@@ -110,6 +121,15 @@ void Check(string kind)
     if (pc < 0x1000 || !peek(pc, out _)) { Keep("LOW_OR_UNPEEKABLE_PC"); stop = true; reason = "LOW_OR_UNPEEKABLE_PC"; }
 }
 for (var frame = 0; frame < start; frame++) m.ExecuteFrame();
+// A late trace may start after these libraries were opened. Discover their
+// public bases without issuing guest calls or advancing emulated time.
+var seenLibraries = new HashSet<uint>();
+for (var node = Read(Read(4) + 378); node != 0 && Read(node) != 0 && seenLibraries.Add(node); node = Read(node))
+{
+    var libraryName = Name(Read(node + 10));
+    if (libraryName == "dos.library") dosBase = node;
+    if (libraryName == "intuition.library") intuitionBase = node;
+}
 if (watchAddress is uint initialWatch && ReadByte(initialWatch) != watchExpected)
 { Keep("WATCH_ALREADY_CHANGED_AT_START"); stop = true; reason = "WATCH_ALREADY_CHANGED_AT_START"; }
 Console.WriteLine($"Trace starts field={m.CompletedFrames} PC={m.Cpu.ProgramCounter:X8}");

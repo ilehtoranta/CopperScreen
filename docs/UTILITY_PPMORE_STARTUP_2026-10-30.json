@@ -96,6 +96,19 @@
     "sysInfoRegression": {"diskSha256": "9bb4b7a48661ad7d5678ed0723226ac666d93f84fadc190e970e81d52bc3f599", "fields": 32000, "mainScreenInspectedAt": 31000, "finalPixelsIdentical": true, "rgbSha256": "59f73d9cd1b2fc509de467e6d8646c203f7fd83028f10fc351336a08c5ee94a2", "unsupported": null, "scope": "Main information screen with the updated guest GUI prerequisite; controls untested"},
     "scope": "The missing console prerequisite is corrected; PPMore is still unverified under CopperStart. No native ROM or host-throughput acceptance claim."
   },
-  "unresolvedCoverage": ["Recovery CLI correction needs a fitting ROM that passes native utility regressions", "PPMore reader under CopperStart after the console prerequisite fix", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
+  "readerWindowFailure": {
+    "diskSha256": "28d67937ce40ab51100abd1e922bee08cbaff388f447f0ee8eff0d5b41c66f11",
+    "copperStartTrace": "artifacts/utility-sequential-2026-10-30/ppmore/window-error-v4",
+    "native13Trace": "artifacts/utility-sequential-2026-10-30/ppmore/window-native13-v4",
+    "loadingWindow": {"copperStartOpened": true, "native13Opened": true},
+    "readerRequest": {"left": 0, "top": 0, "width": 640, "height": 256, "flags": "0003102F", "screenType": 1, "superBitmap": false, "gimmeZeroZero": false},
+    "copperStart": {"requestField": 30066, "returnedField": 30088, "result": 0, "idcmp": "000C066A", "errorText": "Can't open window !", "errorField": 30090},
+    "native13": {"requestField": 818, "returnedField": 835, "result": "00C15360", "idcmp": "000C0668"},
+    "failedAllocation": {"trace": "artifacts/utility-sequential-2026-10-30/ppmore/window-allocation-v5", "field": 30083, "entryCycle": 4274839008, "returnCycle": 4274886068, "api": "AllocMem", "bytes": 41008, "flags": "00000003", "memory": "Public | Chip", "result": 0},
+    "postCleanupHeap": {"chipFreeBytes": 39248, "largestChipChunk": 12288, "slowFreeBytes": 2232, "largestSlowChunk": 1224, "scope": "After the failed program returns; not the exact allocation-time totals"},
+    "diagnosticShellPolicyMismatch": "NativeFullShellBootTests used ROM-only size options for a HUNK; Build-Shell.ps1 already selects the general HUNK size policy. A production-policy Shell build and replay are pending.",
+    "lateTraceLimitation": "error-text-v3 began after library opens and observed neither DOS nor Intuition calls. window-error-v4 discovers their public bases at trace start and captures the error/window calls. The earlier trace is not positive evidence for those APIs."
+  },
+  "unresolvedCoverage": ["Recovery CLI correction needs a fitting ROM that passes native utility regressions", "Production-policy Shell build and PPMore replay on the original 1 MiB profile", "PPMore reader under CopperStart", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
   "firmwarePinChangedByThisWork": false
 }

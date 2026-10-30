@@ -17,7 +17,7 @@ and the scalar loop's interrupt sampling. It is coupled to those internal APIs.
 
 A bounded 512-entry host trace records recent instructions and interrupt events.
 The probe observes `JSR d16(A6)` Exec OpenLibrary/OldOpenLibrary returns and
-Intuition OpenScreen returns, then stops before negative-vector calls with a
+Intuition OpenScreen/OpenWindow returns, then stops before negative-vector calls with a
 null A6. Low stacks (below `$400`), stacks outside the configured RAM ranges,
 and low/unpeekable PCs also stop diagnosis. These are heuristic stopping
 conditions, not new emulated hardware faults or general Amiga validity rules.
@@ -33,6 +33,13 @@ retain the original IORequest address and its io_Error byte on return. Set
 `COPPERSTART_PROBE_STOP_FAILED_DEVICE=1` to stop immediately after an observed
 OpenDevice returns a nonzero D0, before the guest's error cleanup. The default
 continues tracing. This diagnostic switch does not change the device result.
+
+At START_FIELD the probe also discovers DOS and Intuition bases from Exec's
+public library list, so a late trace can observe libraries opened earlier.
+OpenWindow observations retain the caller's 48-byte NewWindow before the call.
+AllocMem/AllocVec observations record size, flags and result. DOS Write retains
+up to 128 bytes at entry as `writePrefix`, before guest cleanup can free them.
+These snapshots use diagnostic peeks and do not advance emulated time.
 
 For a bounded first-write diagnosis, set `COPPERSTART_PROBE_WATCH_ADDRESS` and
 `COPPERSTART_PROBE_WATCH_BYTE` to hexadecimal values. At START_FIELD the byte
