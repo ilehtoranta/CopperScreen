@@ -1,0 +1,214 @@
+{
+  "status": "Personal Paint remains current; bar-layer correction qualified and pushed. CopperStart still fails before the editor; SetMouseQueue is the next missing API. Later utilities and final source sweep remain open.",
+  "producerMainCommit": "331e0c924fab877641475b36da296c1a67016ebf",
+  "provider": {
+    "sha256": "D4FF541A77DA6CDBE20AB5EA4A14585EB1F648A8539FC1E7F7D4EEDCC1CBD5C5",
+    "entry": 0,
+    "installer": 312432,
+    "inputEntry": 312260,
+    "textEntry": 312284,
+    "classicEntry": 312308,
+    "codeBytes": 315860,
+    "imageBytes": 330144,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "9C2F45A329C31D24D135D06C48CDDE520C2068FBFF96FE8DAD374FCCE7DA2EAB"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "52456F51041303F2A5B417153675D96FE4C7ACE7B99EAC02B9EA0B7376B12E68"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "isolatedCompilerInputs": "Seven unchanged hashes from the prior qualified module; only DesktopProviders.dll changes. All eight final hashes rechecked.",
+  "native13": {
+    "passed": 2,
+    "skipped": 0,
+    "cases": [
+      {
+        "artifact": "native13-screen-bar-v46\\screen-bar-000F.json",
+        "sha256": "927e05afe30135474c70c7e40a29a48d59491fe00f3e6db49c2f11a2b649c981",
+        "fields": 219,
+        "screenType": "0xf",
+        "barHeight": 11,
+        "bounds": [
+          0,
+          0,
+          639,
+          11
+        ],
+        "closeReturnRecorded": 0
+      },
+      {
+        "artifact": "native13-screen-bar-v46\\screen-bar-408F.json",
+        "sha256": "9e03584bce3e76ac214eb197acda2e3bbcee766e886964d599e77e4c05a3c324",
+        "fields": 219,
+        "screenType": "0x408f",
+        "barHeight": 11,
+        "bounds": [
+          0,
+          0,
+          639,
+          11
+        ],
+        "closeReturnRecorded": 0
+      }
+    ]
+  },
+  "native31": {
+    "passed": 2,
+    "skipped": 0,
+    "cases": [
+      {
+        "artifact": "native31-screen-bar-v46\\screen-bar-000F.json",
+        "sha256": "d7418ffd5e14a07c805f64bc53eae9c062910e5cae1b1b939a2875f15428ddca",
+        "fields": 217,
+        "screenType": "0xf",
+        "barHeight": 11,
+        "bounds": [
+          0,
+          0,
+          639,
+          11
+        ],
+        "closeReturnRecorded": 1
+      },
+      {
+        "artifact": "native31-screen-bar-v46\\screen-bar-408F.json",
+        "sha256": "760a92ccf995e2cc475207fdb5e0161291413ab8bbbc1986476b51c5c4e04f28",
+        "fields": 217,
+        "screenType": "0x408f",
+        "barHeight": 11,
+        "bounds": [
+          0,
+          0,
+          639,
+          11
+        ],
+        "closeReturnRecorded": 1
+      }
+    ]
+  },
+  "copperStart": {
+    "passed": 2,
+    "skipped": 0,
+    "cases": [
+      {
+        "artifact": "bar-ordinary-v50\\screen-bar-000F.json",
+        "sha256": "327ed2ad659cc9318c19845507d2ec7addf5eb90bb00dc146dea1494e3b35338",
+        "fields": 24425,
+        "screenType": "0xf",
+        "barHeight": 10,
+        "bounds": [
+          0,
+          0,
+          639,
+          10
+        ],
+        "closeReturnRecorded": 1
+      },
+      {
+        "artifact": "bar-behind-v50\\screen-bar-408F.json",
+        "sha256": "684e459285d53a4bbe5fa2242d007f84f2482c93b61242b0f761cad73c81b7f8",
+        "fields": 24425,
+        "screenType": "0x408f",
+        "barHeight": 10,
+        "bounds": [
+          0,
+          0,
+          639,
+          10
+        ],
+        "closeReturnRecorded": 1
+      }
+    ]
+  },
+  "before": {
+    "fields": 24427,
+    "barLayer": 0,
+    "completed": true,
+    "assertion": "Non-null Screen.BarLayer fails",
+    "sha256": "c02cf9dd40b485b24081ea89e9b86b8190a2bdddb94291fb4250f8f164ae51a9"
+  },
+  "regressions": {
+    "timer": "1 passed, 0 skipped",
+    "consoleFooter": "1 passed, 0 skipped; original 1 MiB profile",
+    "classicUpgradeWindow": "1 passed, 0 skipped; original 1 MiB profile, rendered capture and window/screen closure",
+    "genericOwnership": "FAIL before and after at installer stage 150, before any screen opens; supplies no window-ownership coverage for this ROM",
+    "genericBeforeSha256": "f075b00ea58b5f2e9fd6c0b3bcc7736380275f728b95557b2d24849627e7e237",
+    "genericAfterSha256": "0c6432c0cc4bb2f61dfd70dd5993b39b4aba67db93630cd9545e8aac8a4a8c4e"
+  },
+  "builds": {
+    "solution": "Release: 0 errors, 19 warnings",
+    "frozenGui": "Freestanding: no managed allocations, runtime features/helpers, external native targets or fatal sites",
+    "freshCompilerArtifact": "Freestanding compile passed but 383908-byte image has generated-size passes absent; retained unqualified, does not replace frozen comparison"
+  },
+  "application": {
+    "profile": "PAL MC68000 OCS interpreter, 512 KiB Chip +512 KiB slow +2 MiB Fast; read-only HDF; direct launch",
+    "files": 580,
+    "logicalFilesIdentical": true,
+    "ofsSha256": "06dc42685fcab71b9fdf2fea6013985384f34f3a77265cc3fe30041b1cc6e10d",
+    "ffsSha256": "f4f93714ad52d7f7cdf6670d0e04709109390e0e6a27b612a9908f460ef8cdad",
+    "native13": {
+      "fields": 8000,
+      "editorVisible": true,
+      "enterFrame": 5000,
+      "rgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da"
+    },
+    "copperStart": {
+      "fields": 32000,
+      "editorVisible": false,
+      "scheduledEnterFrame": 28000,
+      "inputQualification": "No input pass: first fault precedes the scheduled input.",
+      "rgbSha256": "edb4699a4ada2a5a5d39cde52582b0fa9c5b103054a6c4b52b07313606a715e0"
+    }
+  },
+  "nextFailure": {
+    "traceSha256": "e906d1d42d37b178bb04f3ef84e263e773473bb31a68b3b50c543526eb93b042",
+    "reason": "LOW_OR_UNPEEKABLE_PC",
+    "field": 24588,
+    "helperWindow": "Now opens successfully at Top=11, field 24587",
+    "api": "Intuition.SetMouseQueue",
+    "lvo": -498,
+    "callPc": "0x002e835c",
+    "library": "0x002e2564",
+    "window": "0x003ea8a0",
+    "requestedLimit": 50,
+    "illegalTarget": "0x002e36f2",
+    "opcode": "0x4AFC",
+    "scope": "Identified, not implemented or qualified. Next correction must honor the queue limit and reply lifecycle, not merely return success."
+  },
+  "limits": [
+    "Original BCPL Assign startup remains a separate failure.",
+    "Default-font equivalence and the native 1.3/3.1 CloseScreen return convention are not asserted by the bar-layer probe.",
+    "No complete editor or input pass on CopperStart.",
+    "No throughput acceptance measurement.",
+    "ROMs/media/libraries/build artifacts stay local."
+  ]
+}

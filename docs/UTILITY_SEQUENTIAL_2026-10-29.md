@@ -500,3 +500,33 @@ The [prerequisite receipt](UTILITY_PPAINT_CLASSIC_PREREQUISITES_2026-10-30.json)
 preserves scoped results, image/module identities and application limits.
 Personal Paint remains current; later utilities and the final source sweep
 remain open. These are correctness runs, not throughput acceptance measurements.
+
+### Personal Paint screen bar-layer correction — 2026-10-31
+
+CopperStart main commit `331e0c924fab877641475b36da296c1a67016ebf` publishes
+the real title/status layer as Screen.BarLayer and gives it title-bar bounds.
+Private ownership and cleanup remain separate from the public pointer. Native
+1.3 and 3.1 each pass two authored cases; both replacement cases pass as well.
+They check inclusive bounds, LayerInfo membership and the RastPort backlink.
+The dedicated Classic upgrade/window, timer and console footer regressions pass.
+The generic ownership fixture fails identically at installer stage 150 with
+the previous and corrected modules, before opening any screen; it contributes
+no window-ownership coverage for this ROM.
+
+Seven compiler inputs remain byte-identical to the previous qualified module;
+only DesktopProviders.dll changes. The corrected HUNK passes freestanding checks
+and grows by 60 image bytes. The isolated Release solution builds with zero
+errors and 19 warnings. A larger artifact from changed compiler inputs is
+retained unqualified, separately from this frozen comparison.
+
+The new native 1.3 replay still reaches its editor with the earlier RGB hash.
+CopperStart remains a failure: the helper window now opens at Top=11, but the
+next call, Intuition.SetMouseQueue(window, 50), reaches the unimplemented -498
+vector and ILLEGAL at field 24,588. This predates the scheduled Return input
+at field 28,000, so neither an editor pass nor an input pass is recorded.
+The next correction must implement the queue limit and reply lifecycle.
+
+The [bar-layer receipt](UTILITY_PPAINT_BARLAYER_2026-10-31.json) preserves the
+native/replacement cases, prior fixture failures, module/media identities and
+the next fault. Personal Paint remains current. Later utilities and the final
+source sweep remain open; no throughput acceptance result is claimed.
