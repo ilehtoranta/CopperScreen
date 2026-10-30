@@ -461,3 +461,42 @@ completed characterization, not production VideoControl support or an editor
 pass. The [VideoControl receipt](UTILITY_PPAINT_VIDEOCONTROL_2026-10-30.json)
 pins the trace, native cases, before-fix failure and coverage limits. The API
 correction, Personal Paint editor, later utilities and final sweep remain open.
+
+### Personal Paint classic VideoControl and timer corrections — 2026-10-30
+
+CopperStart main commit `72193edc0d28b8433a21503a313327829d79e550` supplies the
+characterized VideoControl controls through the guest GUI provider. The expanded
+native 3.1 control passes all six cases (408 calls); the corrected replacement
+passes allocated, caller-owned V1 and caller-owned V39 cases (204 calls), without
+skips. The compact ColorMap factory receives the OCS sprite/base defaults exposed
+by those queries. Foreign factories and implemented vectors retain ownership.
+
+The first candidate removes the ILLEGAL failure but exposes repeated failed
+timer.device opens from DOS DateStamp. The classic GUI installer now publishes
+the existing queued native timer provider and rolls back a new device on later
+installation failure. A V1.3-compatible authored probe passes under original
+Kickstart 1.3, fails OpenDevice on the preceding GUI module, and passes on the
+corrected module: a queued 100 ms request completes, system time advances by
+140 ms and DateStamp by eight ticks. This does not qualify every timer unit or
+its precision. The original 1 MiB console footer/glyph regression also passes.
+
+The corrected GUI compiles freestanding, its eight input hashes are rechecked,
+and the isolated Release solution build has zero errors and nine warnings.
+The matched OFS/FFS images contain 580 identical logical files. A fresh native
+1.3 replay reaches the unobstructed editor and matches the earlier RGB hash.
+CopperStart still has no visible editor after 40,000 fields. Its two Screen
+records contain a front 320×200 one-plane startup screen and a hidden 640×256
+three-plane screen with only initialized background/title-border pixels.
+Hidden bitmap contents are not a visible main-screen pass. The new bounded
+trace shows that PPaint explicitly returns the startup screen to the front
+after a helper OpenWindow fails. That request has Top=-9,087 and Height=1;
+the native 1.3 counterpart has Top=10 and opens successfully. PPaint's newer
+system path derives Top from Screen.BarLayer.Bounds.MaxY, but the replacement
+leaves the public BarLayer pointer null. The next investigation is the missing
+bar layer, not permissive handling of the resulting invalid window coordinate.
+The original BCPL Assign lane remains a separate failure.
+
+The [prerequisite receipt](UTILITY_PPAINT_CLASSIC_PREREQUISITES_2026-10-30.json)
+preserves scoped results, image/module identities and application limits.
+Personal Paint remains current; later utilities and the final source sweep
+remain open. These are correctness runs, not throughput acceptance measurements.

@@ -1,0 +1,257 @@
+{
+  "status": "Personal Paint remains current. Classic VideoControl and timer publication corrections qualified and pushed; CopperStart still has no visible editor after 40000 fields. Later utilities and final source sweep remain open.",
+  "producerMainCommit": "72193edc0d28b8433a21503a313327829d79e550",
+  "provider": {
+    "sha256": "F25F27E0358D2BF0C08A0F400A9EC831966DA844FD7B7464D641DEC20DA1DEED",
+    "entry": 0,
+    "installer": 312396,
+    "inputEntry": 312222,
+    "textEntry": 312246,
+    "classicEntry": 312270,
+    "codeBytes": 315824,
+    "imageBytes": 330084,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "D6D22AD1F7D2F801B923C3B6FE87DCDCAC7ED56951A1809EAEB2CFCF75CE3E26"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "52456F51041303F2A5B417153675D96FE4C7ACE7B99EAC02B9EA0B7376B12E68"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "nativeVideoControl": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "calls": 408,
+    "cases": [
+      {
+        "artifact": "native31-video-fields-v40\\video-control-False-False-False.json",
+        "sha256": "b78b4d1b9da612ba2f9f932b3c421a7eca9497ea16ece8dfc0caca5261f3badd",
+        "fields": 191,
+        "calls": 68,
+        "callerOwned": false,
+        "legacyMap": false,
+        "nonzeroQueryData": false
+      },
+      {
+        "artifact": "native31-video-fields-v40\\video-control-False-True-False.json",
+        "sha256": "8cde184fb274005ce0c3bd2ea3100c1a89a5f17deaaafdf8bfaf38bbff007b0a",
+        "fields": 191,
+        "calls": 68,
+        "callerOwned": false,
+        "legacyMap": false,
+        "nonzeroQueryData": true
+      },
+      {
+        "artifact": "native31-video-fields-v40\\video-control-True-False-False.json",
+        "sha256": "67357c7be6c4932831299c91b36e78f5c48e98483ca2af73beec5fbf395ecf31",
+        "fields": 191,
+        "calls": 68,
+        "callerOwned": true,
+        "legacyMap": false,
+        "nonzeroQueryData": false
+      },
+      {
+        "artifact": "native31-video-fields-v40\\video-control-True-False-True.json",
+        "sha256": "6e05eb06e9de396578cf866985d97d6d0d2fe16e54574db5753725a0158afca6",
+        "fields": 191,
+        "calls": 68,
+        "callerOwned": true,
+        "legacyMap": true,
+        "nonzeroQueryData": false
+      },
+      {
+        "artifact": "native31-video-fields-v40\\video-control-True-True-False.json",
+        "sha256": "a3ca92c93670fd19fc29c4eb588b64c3a6b0eb8490f65ba7caecbff179f39f41",
+        "fields": 191,
+        "calls": 68,
+        "callerOwned": true,
+        "legacyMap": false,
+        "nonzeroQueryData": true
+      },
+      {
+        "artifact": "native31-video-fields-v40\\video-control-True-True-True.json",
+        "sha256": "651c994982906a6d4d98c1c42c6d152069af9eb7d72fa1d216300eea351ce5d3",
+        "fields": 191,
+        "calls": 68,
+        "callerOwned": true,
+        "legacyMap": true,
+        "nonzeroQueryData": true
+      }
+    ]
+  },
+  "copperStartVideoControl": {
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "calls": 204,
+    "cases": [
+      {
+        "artifact": "copperstart-video-owned-v42\\video-control-False-True-False.json",
+        "sha256": "bf2e8be18359bc1ff5029787f212ff10a43064d35fce4fa1438bd635db4216f0",
+        "fields": 24376,
+        "calls": 68,
+        "callerOwned": false,
+        "legacyMap": false,
+        "nonzeroQueryData": true
+      },
+      {
+        "artifact": "copperstart-video-caller-v1-v42\\video-control-True-True-True.json",
+        "sha256": "b2eeee172b91816b5194a81662b0552494f99bb4e98e0e591cb5744e56c7783c",
+        "fields": 24376,
+        "calls": 68,
+        "callerOwned": true,
+        "legacyMap": true,
+        "nonzeroQueryData": true
+      },
+      {
+        "artifact": "copperstart-video-caller-v39-v42\\video-control-True-True-False.json",
+        "sha256": "80bba0a65d7517a24f09df6ed6053ec8443cb3faa3dafb7e8eda0183372ffe47",
+        "fields": 24376,
+        "calls": 68,
+        "callerOwned": true,
+        "legacyMap": false,
+        "nonzeroQueryData": true
+      }
+    ]
+  },
+  "timer": {
+    "reference13": {
+      "fields": 424,
+      "openStatus": 0,
+      "completionMagic": "0x54494d45",
+      "timeBefore": 6140068,
+      "timeAfter": 6240071,
+      "stampBefore": 307,
+      "stampAfter": 312
+    },
+    "before": {
+      "fields": 23945,
+      "openStatus": 4294967295,
+      "completionMagic": "0x54494d45",
+      "timeBefore": 0,
+      "timeAfter": 0,
+      "stampBefore": 0,
+      "stampAfter": 0
+    },
+    "after": {
+      "fields": 24373,
+      "openStatus": 0,
+      "completionMagic": "0x54494d45",
+      "timeBefore": 1480000,
+      "timeAfter": 1620000,
+      "stampBefore": 74,
+      "stampAfter": 82
+    }
+  },
+  "regression": "WindowConsolePreservesBottomRelativeGadgetInSizingBorder: 1 passed, 0 failed, 0 skipped, original 1 MiB profile",
+  "builds": {
+    "gui": "Freestanding compile passed; no managed allocation sites, runtime features/helpers, external native targets or fatal sites",
+    "solution": "Release: 0 errors, 9 warnings",
+    "compilerInputs": "All 8 hashes rechecked against the qualification output directory"
+  },
+  "application": {
+    "profile": "PAL MC68000 OCS interpreter, 512 KiB Chip +512 KiB slow +2 MiB Fast; read-only HDF, direct-launch startup",
+    "files": 580,
+    "logicalFilesIdentical": true,
+    "ofsSha256": "c2beab9dfec468f3ad70a80409a675d5252d8fa0397775b608851ff81ec34be1",
+    "ffsSha256": "05abb777589cb9887157fa576ff725afd694d0af947a08d5f378c264a1bb225f",
+    "native13": {
+      "fields": 8000,
+      "editorVisible": true,
+      "returnKeyFrame": 5000,
+      "rgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da"
+    },
+    "copperStart": {
+      "fields": 40000,
+      "editorVisible": false,
+      "rgbSha256": "edb4699a4ada2a5a5d39cde52582b0fa9c5b103054a6c4b52b07313606a715e0",
+      "screens": [
+        {
+          "address": "0x003e1fd0",
+          "width": 320,
+          "height": 200,
+          "depth": 1,
+          "front": true
+        },
+        {
+          "address": "0x003e9f40",
+          "width": 640,
+          "height": 256,
+          "depth": 3,
+          "front": false
+        }
+      ],
+      "nextInvestigation": "Missing public Screen.BarLayer. PPaint derives a helper window top coordinate from its bounds; do not weaken OpenWindow fitting based on the resulting invalid coordinate."
+    }
+  },
+  "limits": [
+    "Original Workbench BCPL Assign startup remains a separate failure; direct launch is explicit.",
+    "Not all VideoControl tags, rendered effects, timer units/commands or ColorMap factory semantics are qualified.",
+    "Native 3.1 characterizes VideoControl; native 1.3 controls the application and timer.",
+    "Correctness replays are not host throughput acceptance measurements.",
+    "ROMs, libraries, media and build artifacts remain local."
+  ],
+  "nextFailure": {
+    "copperStartTraceSha256": "f66241cc9343754bd3a24c5f00965622d64367e2b0ab874bedc2875e6c2eebc6",
+    "native13TraceSha256": "127d7ff6212631a169dc18a9cc3d34986f986e897aee7179deb091e93de7dde9",
+    "replacement": {
+      "openWindowField": 24508,
+      "left": 0,
+      "top": -9087,
+      "width": 640,
+      "height": 1,
+      "result": 0,
+      "screen": "0x003e9f40",
+      "barLayer": 0,
+      "screenToFrontField": 24535,
+      "returnedToStartupScreen": "0x003e1fd0"
+    },
+    "native13": {
+      "openWindowField": 3631,
+      "left": 0,
+      "top": 10,
+      "width": 640,
+      "height": 1,
+      "result": "0x0028bb58",
+      "screen": "0x0028aa70",
+      "barLayer": "0x0028ad58",
+      "barBounds": [
+        0,
+        0,
+        639,
+        10
+      ]
+    },
+    "instructionEvidence": "PPaint helper at 0x002e66d0 takes its newer-system path through Screen.BarLayer (+334), reads Layer.Bounds.MaxY (+22), adds one, and stores the helper NewWindow.Top. Null BarLayer reads unrelated low RAM. Native 1.3 takes its older font-height path.",
+    "scope": "Missing BarLayer identified, not yet implemented or qualified. Native 3.1 authored control is the next check. Screen ordering itself follows the explicit application call after OpenWindow failure."
+  }
+}

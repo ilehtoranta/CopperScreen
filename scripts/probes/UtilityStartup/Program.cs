@@ -105,8 +105,13 @@ void ObserveCall()
     else if(c.A[6]==Read(4) && displacement is -444 or -456 or -318)
         pending.Add((displacement == -444 ? "OpenDevice" : displacement == -456 ? "DoIO" : "Wait",
             displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,displacement == -318 ? 0 : c.A[1],null));
-    else if(displacement==-198 && c.A[6]==intuitionBase)
+    else if(displacement is -198 or -612 && c.A[6]==intuitionBase)
+    {
+        calls.Add(new {Api="OpenScreenInput",Library="intuition.library",callPc=c.ProgramCounter,
+            entryCycle=c.Cycles,frame=m.CompletedFrames,address=c.A[0],tags=c.A[1],lvo=displacement,
+            bytes=Convert.ToHexString(Enumerable.Range(0,36).Select(i=>ReadByte(c.A[0]+(uint)i)).ToArray())});
         pending.Add(("OpenScreen","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    }
     else if(displacement==-204 && c.A[6]==intuitionBase)
     {
         calls.Add(new {Api="OpenWindowInput",Library="intuition.library",callPc=c.ProgramCounter,
@@ -116,6 +121,13 @@ void ObserveCall()
     }
     else if(displacement==-72 && c.A[6]==intuitionBase)
         pending.Add(("CloseWindow",$"A0={c.A[0]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    else if(c.A[6]==intuitionBase && displacement is -66 or -246 or -252 or -450)
+    {
+        var api=displacement switch {-66=>"CloseScreen",-246=>"ScreenToBack",-252=>"ScreenToFront",_=>"ActivateWindow"};
+        calls.Add(new {Api=api+"Input",Library="intuition.library",callPc=c.ProgramCounter,
+            entryCycle=c.Cycles,frame=m.CompletedFrames,address=c.A[0],front=Read(intuitionBase+60),active=Read(intuitionBase+52)});
+        pending.Add((api,"intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    }
     else if(c.A[6]==dosBase && displacement is -30 or -42 or -48)
         pending.Add((displacement == -30 ? "DOS.Open" : displacement == -42 ? "DOS.Read" : "DOS.Write",
             displacement == -30 ? Name(c.D[1]) : $"D1={c.D[1]:X8},D2={c.D[2]:X8},D3={c.D[3]:X8}",
@@ -133,7 +145,8 @@ void ObserveReturn()
         if(p.Api=="GetMsg" && c.D[0]==0) { pending.RemoveAt(i); break; }
         calls.Add(new {p.Api,p.Library,version=p.Version,callPc=p.Pc-4,entryCycle=p.Cycle,returnCycle=c.Cycles,result=c.D[0],baseAddress=p.A6,frame=m.CompletedFrames,
             ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31),writePrefix=p.Text,
-            messagePrefix=p.Api=="GetMsg" ? Convert.ToHexString(Enumerable.Range(0,52).Select(n=>ReadByte(c.D[0]+(uint)n)).ToArray()) : null});
+            messagePrefix=p.Api=="GetMsg" ? Convert.ToHexString(Enumerable.Range(0,52).Select(n=>ReadByte(c.D[0]+(uint)n)).ToArray()) : null,
+            intuitionFront=p.A6==intuitionBase ? Read(intuitionBase+60) : 0, intuitionActive=p.A6==intuitionBase ? Read(intuitionBase+52) : 0});
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
         if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
         if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
