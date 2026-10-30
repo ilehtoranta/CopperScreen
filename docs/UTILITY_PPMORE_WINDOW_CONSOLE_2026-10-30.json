@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-30",
+  "utility": "PPMore 1.8a",
+  "status": "NOT VERIFIED; next missing API identified",
+  "producerCommit": "096407055061bbbf655ed93d3f6cd085c48fd991",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/096407055061bbbf655ed93d3f6cd085c48fd991/Docs/NativeWindowConsole20261030.md",
+  "romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+  "native13RomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "diskSha256": "fa9b1ad5f292ee79454171365dcbb9aacde61490c87859ac9530646af9cd6594",
+  "provider": {
+    "sha256": "B16D10587F630E87A5F98D298E98E5EFB7BBBF5A83F165D6EF10A55C5E7C70B5",
+    "entry": 0,
+    "installer": 307456,
+    "inputEntry": 307282,
+    "textEntry": 307306,
+    "classicEntry": 307330,
+    "codeBytes": 310540,
+    "imageBytes": 324192,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "A51494D0E1DE3317425C5CBCAAC1DAFACE6D02E2EA23C1CFAFF1F99C578511B7"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "097BE3F209E18D35DBA2E90B78739D260900BAD02315EED22D1CBE4682A1AEC9"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "018015E663A13923D90ECA3925B3BF67F2FCD6C11B3E765DF8182BB8CE814787"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "C03FE78818DAFE4DF03840DFD6967895CF7EB2CAE1F445109226155F18A9282D"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D27FAB3C474F29D3F5F1ECBEADBCEB99177BE169BAB8F7A752D7098B15FE9C9C"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "988B95148B8D1CAD04D94E51B546886BD5D8A32AA07611723A678F0B151A00AA"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "745FEFDA2F6A472E98C7184622FBBB1F0B5BD6D207FB1F97C2383B73EE8E07EC"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0BA749A9902F5241AD9A183B44314CC118CCA2BDFA86BD15F87D4CAD5E47D900"
+      }
+    ]
+  },
+  "shell": {
+    "sha256": "49E21C944A3DF70C9270935C8344ED95C50401443C73335F98D066AF950B2BD1",
+    "peepholeOptimization": "FixedPoint",
+    "codeSizeOptimizations": true,
+    "dosClient": {
+      "originalDosSha256": "61D5BFBA22C508B1281139591F40427BF1B998E30DF1E848CB3787F3C7A4276F",
+      "serviceVersion": 2,
+      "path": "client/CopperStart.Dos.dll"
+    },
+    "inputs": [
+      {
+        "file": "CopperStart.Shell.dll",
+        "sha256": "C68F1DB59265B1B8FD03778E7387B445FF6291D9CF452E8B2C3C71E3EEF33374"
+      },
+      {
+        "file": "CopperOS.Shell.Dos.dll",
+        "sha256": "35F6267C1974CD3A17E910943C78A8281DE88342F47E3B3F313995A3ECE97D14"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "C7C0CB89D5504726222AC2C3BFA3709F9FEA07264C4228DE04626D649CC28B53"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "6B831E4125DAEB43468D3824CD37EB2330AA18D967A830A203A41A33FCE03706"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D4AEBCDE6440015FD8DB839D856955818407FF5321F3061311189EF7D5715D27"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "FE120E89003D9B17B8636BFD63A3696D9F1C5BF89F871ED2230A72BD00F26030"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "35D706810A3371536D0893FE034127404CA90A126F23845513B750BECE86E233"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "CEACD42DE3F2D1D43380A17D22E413EB14346749C65567CCEB37F105419134C2"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "1D04DF6DEFEE1E5861539E2AFA5E4294F2001B9FEBE955D0CE6AE672A4C76EC2"
+      },
+      {
+        "file": "CopperSFS.Core.dll",
+        "sha256": "DADE8BC1747592BE91ECE87848713AB0720E4C11FC5DCD3A3411F6CDBFB10D8F"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "C/Intuition",
+      "bytes": 324192,
+      "sha256": "b16d10587f630e87a5f98d298e98e5efb7bbbf5a83f165d6ef10a55c5e7c70b5"
+    },
+    {
+      "path": "C/CopperGui",
+      "bytes": 232,
+      "sha256": "a3b7514b7436b16c8bdb5af16a8f3d949a8825ee642985b926cf2b65ee4a1d7c"
+    },
+    {
+      "path": "C/PPMore",
+      "bytes": 10984,
+      "sha256": "6b0af8040f83e20f792324163b6750e5a2ca58341cfd39058186f3c288e737da"
+    },
+    {
+      "path": "Docs/PPMore.doc",
+      "bytes": 15779,
+      "sha256": "25ff5fd8d82c86258e294db0ea8b126f191def939b6c3c98818b57464c03521c"
+    },
+    {
+      "path": "Docs/ReqTools-DISTRIBUTION",
+      "bytes": 7961,
+      "sha256": "d418e2da330aa3e10ca916e428c50d46bb18e049653d374b5953f5c5ef03fb6d"
+    },
+    {
+      "path": "Libs/reqtools.library",
+      "bytes": 39000,
+      "sha256": "305b2db13afc88ae61ccb9649dc24e5867a7263ddd2a249a71ad67e9a2000e08"
+    },
+    {
+      "path": "Libs/powerpacker.library",
+      "bytes": 6128,
+      "sha256": "3f17ca541ec190bd2bdb899bb10ec150908c9e55bca3fac4237426c343d49819"
+    },
+    {
+      "path": "fixture.txt",
+      "bytes": 5633,
+      "sha256": "c9717c253dd259121612258ff2e43f87b8ef4bd4af65af276e80d663cab9dd96"
+    },
+    {
+      "path": "L/CopperShell",
+      "bytes": 334760,
+      "sha256": "49e21c944a3df70c9270935c8344ed95c50401443c73335f98d066af950b2bd1"
+    }
+  ],
+  "profile": "a500-ocs-2m-v1: PAL MC68000 interpreter, 512 KiB Chip + 512 KiB slow + 1 MiB AutoConfig Fast, protected DF0",
+  "native13": {
+    "completedFields": 12000,
+    "mainScreen": "Listing of SYS:fixture.txt (82 lines), expected ASCII fixture and reader controls visually inspected",
+    "rgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03"
+  },
+  "copperStart": {
+    "completedFields": 40000,
+    "readerVerified": false,
+    "readerOpenField": 29433,
+    "consoleUnitZeroOpenField": 29435,
+    "consoleOpenResult": 0,
+    "stoppedTraceField": 31344,
+    "callPc": "002E1344",
+    "vector": -330,
+    "api": "intuition.library/IntuiTextLength",
+    "rejectionPc": "002DD8E2",
+    "result": "Provider rejection trap followed by lost execution; no retained main screen"
+  },
+  "coverage": {
+    "updatedWindowConsoleNative": "PASS: actual font pixels, split CSI positioning, inverse text, IO byte accounting and close; no skipped cases",
+    "classicDesktopUpgradeNative": "PASS",
+    "native13WindowConsoleControl": "PASS",
+    "previousProviderWindowConsole": "FAIL at valid unit-zero OpenDevice, expected before-fix control",
+    "compiledGui": "zero runtime features/helpers/external native targets/fatal machine-fault sites",
+    "releaseSolution": "PASS, 4 warnings, 0 errors; initial fresh-output diagnostic DLL copy failure retained separately"
+  },
+  "sysInfoRegression": {
+    "profile": "original 1 MiB (512 KiB Chip + 512 KiB slow)",
+    "completedFields": 32000,
+    "mainScreenVisuallyInspected": true,
+    "diskSha256": "14edde31c14a569a07f7ddb2f39c7bfce421e42ff5693bac3b4babf946595235",
+    "rgbSha256": "d02881a646242a5b6dc025d348f2f35bf29b91fe53c94b4a0050283709b4b06c"
+  },
+  "limits": [
+    "Expanded RAM is a separate diagnostic profile; original 1 MiB PPMore memory failure remains unresolved.",
+    "Window output is bounded; input, cursor rendering, maps and snip compatibility are incomplete.",
+    "No ROM/app firmware update, source package publication, media redistribution or performance qualification.",
+    "Remaining utilities and final collection sweep remain pending."
+  ],
+  "localEvidence": "artifacts/utility-sequential-2026-10-30/ppmore/*v10*; producer artifacts/ppmore-console-isolated/window-console-*"
+}

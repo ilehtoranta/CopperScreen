@@ -261,3 +261,24 @@ hashes, build and test scope. Earlier failed replays remain historical evidence.
 SysInfo controls and benchmarks, the eight later utilities and the final
 collection sweep remain unverified. This work does not change the app firmware
 pin or qualify host performance.
+
+### PPMore window-console output — 2026-10-30
+
+Producer commit `096407055061bbbf655ed93d3f6cd085c48fd991` implements native
+console unit 0 output. Its caller-owned IOStdReq regression passes under both
+CopperStart and Kickstart 1.3, checking real glyph pixels, split cursor-position
+sequences, inverse text, byte accounting and cleanup. The existing desktop
+upgrade regression and SysInfo's 32,000-field main-screen replay also pass.
+Concurrent ROM/A1200 and copy-kernel changes are excluded from the commit.
+
+On the separate 2 MiB diagnostic profile, PPMore now opens its reader Window
+and console device successfully. It then calls the unimplemented Intuition
+`IntuiTextLength` vector at -330 and reaches the provider's rejection trap at
+field 31,344. The 40,000-field ordinary replay loses execution; no retained
+reader is verified. Native Kickstart 1.3 retains the expected 82-line reader
+through 12,000 fields. The original 1 MiB memory failure remains unresolved.
+
+The [window-console receipt](UTILITY_PPMORE_WINDOW_CONSOLE_2026-10-30.json)
+records exact inputs, profiles, component passes and application failure.
+PPMore remains the current utility; later utilities and the final sweep remain
+pending. The application firmware pin is unchanged.
