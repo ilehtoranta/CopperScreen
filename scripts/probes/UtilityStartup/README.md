@@ -99,12 +99,26 @@ python scripts/probes/UtilityStartup/prepare_sysinfo_desktop.py `
 The [ProTracker investigation](../../../docs/PROTRACKER_STARTUP_2026-10-28.md)
 records paired API evidence and native RAM equivalence against the normal runner.
 
-`prepare_ppaint_hdf.py` creates a new local 16 MiB OFS hardfile containing the
+`prepare_ppaint_hdf.py` creates a new local 16 MiB hardfile containing the
 complete pinned Personal Paint 7.1c archive, its libraries in `Libs:`, and the
 same manifest-checked native GUI/Shell prerequisites. Pass `--archive`, `--base`
 (the collected SysInfo OFS disk supplies standard boot code), `--provider-root`,
 `--shell-root`, and a new `--output` path. Every file is read back byte-for-byte;
 the sidecar records each file's hash and origin. Never redistribute this image.
+
+`--filesystem ofs` is the default native 1.3 setup. CopperStart's archived
+NativeCopperHdfBoot selects DOS1/FFS hardfiles, so its setup uses
+`--filesystem ffs` and the read-only runner arguments
+`--hdf-ffs image.hdf DH0:1:32:0:1023`. OFS and FFS twins retain identical logical
+files; their disk bytes and boot filesystem are separately identified. An OFS
+image not selected by CopperStart is a setup mismatch, not a paint-code fault.
+
+Optional `--math-root` installs `MathFfpNative` and `CopperFfp` from the qualified
+producer `NativeMathFfpModuleTests` output, checking `mathffp.json`. This reuses
+the existing native FFP kernel and retains its guest-loaded code until reset.
+The installer preserves an existing native library. Both ROMs still need the
+actual Workbench `mathtrans.library` before the paint main-screen control can
+be evaluated; the FFP component test is not a paint-application pass.
 
 Optional `--workbench` accepts a user-supplied Workbench 1.3 ADF or ZIP containing
 one ADF. Its files are installed before the controlled startup is written.

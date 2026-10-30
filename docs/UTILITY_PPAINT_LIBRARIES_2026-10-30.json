@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-30",
+  "utility": "Personal Paint 7.1c",
+  "status": "IN PROGRESS: missing Workbench mathtrans.library; main screen unverified",
+  "producerCommit": "fd596cd86ea263986a7811c4f859a1b7ce4cc45d",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/fd596cd86ea263986a7811c4f859a1b7ce4cc45d/Docs/NativeFfpModule20261030.md",
+  "profile": "a500-ocs-3m-v1: PAL MC68000 interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB AutoConfig Fast; one read-only 16 MiB hardfile, no floppy image, RTC or host directories",
+  "archiveSha256": "2e20ea41001c4db0db5cd6a6505ed6c9708eea1aaccd6688e33ccd03334c51ff",
+  "programSha256": "2d679078651141c0590ee0991fcc7b8741ebc42b091fe71ae162737d694c8fa8",
+  "native13": {
+    "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "filesystem": "DOS0/OFS",
+    "hardfileSha256": "44cecb5cd305041087e65f27415bb60bad8530f663b2a6e7365d87cedb09135d",
+    "completedFields": 12000,
+    "programLaunched": true,
+    "mainScreenVerified": false,
+    "message": "Can't open version 0 of mathtrans.library",
+    "returnCode": 20,
+    "rgbSha256": "e59970f69bc41beef567fe696ac43fd9fdec867a07481295247c319c69795fdd"
+  },
+  "copperStart": {
+    "romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+    "filesystem": "DOS1/FFS",
+    "geometry": "DH0:1:32:0:1023",
+    "hardfileSha256": "12df2841edbaa3b74a0c885955425fbf8734e893f3c9bd41ab6728a05e3890ee",
+    "completedFields": 12000,
+    "programLaunched": true,
+    "mainScreenVerified": false,
+    "message": "Can't open version 0 of mathtrans.library",
+    "rgbSha256": "18ea209668f57526928d0418e58f04bc89e94db33f532bd4d626ac39a9c4e69e"
+  },
+  "logicalFilesIdentical": true,
+  "fileCount": 403,
+  "filePayloadManifestSha256": "7ea7eec7c8e485cf91957c72f2b1ad959ba8c50e5d8e55c9c271cf4244f74509",
+  "backingFilesUnchanged": true,
+  "ffp": {
+    "sha256": "506FB64C3C4D7BC8F41A870F267AE526176CE221311D6FDF66D554CD72CC8E20",
+    "installerSha256": "702CF9381D53BB1FF6D976E8674EBC14CC057092B761AD298A739227375D34FE",
+    "kernelSha256": "B3B458D5B4952AD95927E6C149BB78C37BC48B78D41BDEC3ADD49A27205EEB21",
+    "kernelBytes": 1052,
+    "cases": 51,
+    "lifetime": "Retain the entire guest module until reset; installer never UnLoadSegs it",
+    "emitterSha256": "B22FB0EEE8309480F3C70D6316FE18A98A6B2CCF6C42D59ACD1F69653C37DF57"
+  },
+  "ffpCoverage": "2 native tests PASS, no skips; 51 existing arithmetic result and N/Z/V cases per ROM after installer command returns; native 1.3 keeps independent ROM library",
+  "releaseSolution": "PASS: 7 warnings, 0 errors; packaging uses existing kernel, no arithmetic or ROM source change",
+  "provider": {
+    "sha256": "6669969B733FBB516C021E92DB12A6B4E378765CBE502A2B606764DC34D2FAD5",
+    "entry": 0,
+    "installer": 308106,
+    "inputEntry": 307932,
+    "textEntry": 307956,
+    "classicEntry": 307980,
+    "codeBytes": 311200,
+    "imageBytes": 324980,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "4A2EC44DBA0B3146EE42E7845FA2C103D2701242FF21686E51DDD0BF88AAEB43"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "AE870256FA022D553B4FE9852F6A88B1AD4F3079F1082F4DC1B64185953D1D07"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "AB052F1F2CE22805BEA8FBE0BB8D070061834A73828A486A77548F3F1B856A30"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "F5DA52372E28858D2142EC48A4517B16100EBBEB7060119583BEA6EB8333CAFA"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D27FAB3C474F29D3F5F1ECBEADBCEB99177BE169BAB8F7A752D7098B15FE9C9C"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "988B95148B8D1CAD04D94E51B546886BD5D8A32AA07611723A678F0B151A00AA"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "745FEFDA2F6A472E98C7184622FBBB1F0B5BD6D207FB1F97C2383B73EE8E07EC"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0BA749A9902F5241AD9A183B44314CC118CCA2BDFA86BD15F87D4CAD5E47D900"
+      }
+    ]
+  },
+  "shell": {
+    "sha256": "49E21C944A3DF70C9270935C8344ED95C50401443C73335F98D066AF950B2BD1",
+    "peepholeOptimization": "FixedPoint",
+    "codeSizeOptimizations": true,
+    "dosClient": {
+      "originalDosSha256": "61D5BFBA22C508B1281139591F40427BF1B998E30DF1E848CB3787F3C7A4276F",
+      "serviceVersion": 2,
+      "path": "client/CopperStart.Dos.dll"
+    },
+    "inputs": [
+      {
+        "file": "CopperStart.Shell.dll",
+        "sha256": "C68F1DB59265B1B8FD03778E7387B445FF6291D9CF452E8B2C3C71E3EEF33374"
+      },
+      {
+        "file": "CopperOS.Shell.Dos.dll",
+        "sha256": "35F6267C1974CD3A17E910943C78A8281DE88342F47E3B3F313995A3ECE97D14"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "C7C0CB89D5504726222AC2C3BFA3709F9FEA07264C4228DE04626D649CC28B53"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "6B831E4125DAEB43468D3824CD37EB2330AA18D967A830A203A41A33FCE03706"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D4AEBCDE6440015FD8DB839D856955818407FF5321F3061311189EF7D5715D27"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "FE120E89003D9B17B8636BFD63A3696D9F1C5BF89F871ED2230A72BD00F26030"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "35D706810A3371536D0893FE034127404CA90A126F23845513B750BECE86E233"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "CEACD42DE3F2D1D43380A17D22E413EB14346749C65567CCEB37F105419134C2"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "1D04DF6DEFEE1E5861539E2AFA5E4294F2001B9FEBE955D0CE6AE672A4C76EC2"
+      },
+      {
+        "file": "CopperSFS.Core.dll",
+        "sha256": "DADE8BC1747592BE91ECE87848713AB0720E4C11FC5DCD3A3411F6CDBFB10D8F"
+      }
+    ]
+  },
+  "storageFinding": "Pinned NativeCopperHdfBoot.Mountable accepts 0x444F5301; initial OFS non-boot was an unsupported format setup. FFS twin boots and launches program.",
+  "pending": [
+    "User-supplied Workbench 1.3 image or system library directory; question remains pending.",
+    "Repeat native and CopperStart application controls with complete prerequisites.",
+    "All paint main-screen, drawing, input and file-operation checks remain unverified.",
+    "Later utilities and final source sweep remain open."
+  ],
+  "limits": [
+    "Successful boot and FFP component checks are not paint application passes.",
+    "OFS and FFS boot filesystem bytes differ explicitly; all 403 guest file payloads match.",
+    "Expanded diagnostic profile does not update app firmware qualification.",
+    "No ROM, media, generated module, system library, firmware pin, package publication or performance acceptance change."
+  ],
+  "localEvidence": "artifacts/utility-sequential-2026-10-30/ppaint/*v2* and *v3*; producer artifacts/ppmore-console-isolated/ffp-module-*"
+}

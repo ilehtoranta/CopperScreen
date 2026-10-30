@@ -18,7 +18,7 @@ marking the collection complete.
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
-| 6 | Personal Paint 7.1c complimentary edition | IN PROGRESS: native hardfile launches program; Workbench mathtrans.library missing; CopperStart hardfile bootstrap unresolved | [Startup receipt](UTILITY_PPAINT_STARTUP_2026-10-30.json) |
+| 6 | Personal Paint 7.1c complimentary edition | IN PROGRESS: both ROMs launch program with recorded filesystem/FFP prerequisites; Workbench mathtrans.library missing | [Library prerequisite receipt](UTILITY_PPAINT_LIBRARIES_2026-10-30.json) |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
@@ -355,3 +355,26 @@ profile needs separate investigation before interpreting application behavior.
 The [startup receipt](UTILITY_PPAINT_STARTUP_2026-10-30.json) records identities,
 profiles, prerequisite failures and pending work. Personal Paint remains current;
 later utilities and the final sweep remain pending. No firmware pin changes.
+
+### Personal Paint storage setup and native FFP prerequisite — 2026-10-30
+
+The archived source establishes why the initial CopperStart hardfile did not
+boot: NativeCopperHdfBoot accepts DOS1/FFS partitions, while that image was
+DOS0/OFS. An FFS twin with byte-identical guest files boots and launches PPaint
+using the documented read-only partition geometry. No engine or ROM fix is
+needed for this format mismatch; the original failed setup remains recorded.
+
+PPaint then reports missing mathffp.library. Producer commit
+`fd596cd86ea263986a7811c4f859a1b7ce4cc45d` packages the existing native FFP kernel
+as an explicit guest-loaded prerequisite. After the installer returns, all 51
+existing result and N/Z/V cases pass under CopperStart and under the independent
+native 1.3 ROM library. The installer leaves an existing library in place and
+retains its separately loaded module until reset. The standalone ROM is unchanged.
+
+The controlled OFS/FFS pair now has 403 identical logical files. Both ROMs launch
+the original PPaint program and stop at the same missing mathtrans.library
+prerequisite. Workbench 1.3 inputs remain unavailable; the collected utility
+archives contain no replacement system library. This is not a verified paint
+screen. The [new receipt](UTILITY_PPAINT_LIBRARIES_2026-10-30.json) records exact
+profiles, file equality, FFP component passes and remaining coverage limits.
+Personal Paint remains current; later utilities and the final sweep remain open.

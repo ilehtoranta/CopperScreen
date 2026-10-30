@@ -1,4 +1,4 @@
-"""Create a local OFS Personal Paint installation; never redistribute the image.
+"""Create a local Personal Paint installation; never redistribute the image.
 
 Requires amitools and lhafile. Optional Workbench files must be user supplied.
 Without Workbench this is a prerequisite diagnostic, not a complete control.
@@ -26,7 +26,10 @@ def main():
     parser.add_argument('--base', type=Path, required=True, help='Pinned SysInfo OFS disk supplies standard boot code')
     parser.add_argument('--provider-root', type=Path, required=True)
     parser.add_argument('--shell-root', type=Path, required=True)
+    parser.add_argument('--math-root', type=Path, help='Qualified native FFP module/installer and mathffp.json')
     parser.add_argument('--workbench', type=Path, help='User-supplied Workbench 1.3 ADF or single-ADF ZIP')
+    parser.add_argument('--filesystem', choices=('ofs', 'ffs'), default='ofs',
+                        help='OFS for native 1.3; FFS for CopperStart hardfile bootstrap')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
@@ -88,6 +91,16 @@ def main():
     add('C/CopperGui', (args.provider_root / 'CopperGui').read_bytes(), 'native GUI installer')
     add('L/CopperShell', shell_image, 'native Shell manifest')
     startup = b'C:CopperGui\n'
+    math = None
+    if args.math_root:
+        math = json.loads((args.math_root / 'mathffp.json').read_text(encoding='utf-8-sig'))
+        module = (args.math_root / 'MathFfpNative').read_bytes()
+        loader = (args.math_root / 'CopperFfp').read_bytes()
+        if sha(module) != math['sha256'].lower() or sha(loader) != math['installerSha256'].lower():
+            raise ValueError('FFP prerequisite manifest mismatch')
+        add('C/MathFfpNative', module, 'qualified guest FFP module')
+        add('C/CopperFfp', loader, 'qualified guest FFP installer')
+        startup += b'C:CopperFfp\n'
     if args.workbench:
         startup += b'Assign PPaint: SYS:PPaint\nCD PPaint:\nPPaint\n'
     else:
@@ -97,7 +110,8 @@ def main():
     device = BlkDevFactory().create(str(args.output), force=False, options={'size': 16 * 1024 * 1024})
     volume = ADFSVolume(device)
     try:
-        volume.create(FSString('PPaintControl'), dos_type=0x444F5300, boot_code=base[12:1024])
+        volume.create(FSString('PPaintControl'), dos_type=0x444F5300 if args.filesystem == 'ofs' else 0x444F5301,
+                      boot_code=base[12:1024])
         unique_directories = {p.casefold(): p for p in sorted(directories)}
         for directory in sorted(unique_directories.values(), key=lambda p: (p.count('/'), p)):
             volume.create_dir(FSString(directory))
@@ -108,8 +122,10 @@ def main():
         free = volume.get_free_blocks()
     finally:
         volume.close(); device.close()
-    receipt = {'kind': 'controlled-personal-paint-ofs-installation', 'sha256': sha(args.output.read_bytes()),
+    receipt = {'kind': 'controlled-personal-paint-installation', 'filesystem': args.filesystem,
+               'sha256': sha(args.output.read_bytes()),
                'archiveSha256': sha(archive), 'baseSha256': sha(base), 'provider': provider, 'shell': shell,
+               'mathFfp': math,
                'workbenchSha256': sha(args.workbench.read_bytes()) if args.workbench else None,
                'startup': startup.decode('ascii'), 'freeBlocks': free,
                'files': [{'path': path, 'bytes': len(data), 'sha256': sha(data), 'origin': origins[path]}
