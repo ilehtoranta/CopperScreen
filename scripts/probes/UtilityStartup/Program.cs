@@ -9,18 +9,21 @@ using CopperMod.Amiga.Lightweight;
 // External diagnostic only. Preserve the production scalar interrupt sampling
 // and hardware advancement. Low stacks/PCs and null-base vector calls are
 // diagnostic stopping conditions, not additional emulated hardware faults.
-if (args.Length != 5) throw new ArgumentException("ROM ADF output start-field end-field");
+if (args.Length is not (5 or 6)) throw new ArgumentException("ROM ADF output start-field end-field [a500-ocs-1m-v1|a500-ocs-2m-v1]");
+var profile = args.Length == 6 ? args[5] : "a500-ocs-1m-v1";
+var fastBytes = profile switch { "a500-ocs-1m-v1" => 0, "a500-ocs-2m-v1" => 1048576,
+    _ => throw new ArgumentException("Unknown diagnostic machine profile") };
 var output = Path.GetFullPath(args[2]);
 if (Directory.Exists(output)) throw new ArgumentException("Use a new output directory");
 Directory.CreateDirectory(output);
 using var m = new LightweightA500Machine(new LightweightA500Configuration
 {
-    ChipRamBytes=524288, SlowRamBytes=524288, FastRamBytes=0,
+    ChipRamBytes=524288, SlowRamBytes=524288, FastRamBytes=fastBytes,
     CpuModel=M68kCpuModel.M68000, AgnusModel=LightweightAgnusModel.Mos8371,
     DeniseModel=LightweightDeniseModel.Mos8362
 });
 var rom = File.ReadAllBytes(args[0]);
-m.LoadKickstart(rom); m.MountAdf(0, File.ReadAllBytes(args[1]));
+m.LoadKickstart(rom); m.MountAdf(0, File.ReadAllBytes(args[1])); m.SetDriveWriteProtected(0,true);
 var start = int.Parse(args[3]); var end = int.Parse(args[4]);
 var watchText = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_WATCH_ADDRESS");
 uint? watchAddress = string.IsNullOrWhiteSpace(watchText) ? null : Convert.ToUInt32(watchText, 16);
@@ -41,11 +44,15 @@ uint Read(uint a)
     a &= 0xffffff;
     if (a <= m.ChipRam.Length - 4) return BinaryPrimitives.ReadUInt32BigEndian(m.ChipRam.Span.Slice((int)a, 4));
     if (a >= 0xc00000 && a - 0xc00000 <= slow.Length - 4) return BinaryPrimitives.ReadUInt32BigEndian(slow.AsSpan((int)(a-0xc00000),4));
+    if (m.FastRamBase is uint fast && a >= fast && a - fast <= m.FastRam.Length - 4)
+        return BinaryPrimitives.ReadUInt32BigEndian(m.FastRam.Span.Slice((int)(a-fast),4));
     return 0;
 }
-bool Stack(uint sp) => sp >= 0x400 && sp <= 0x80000 || sp >= 0xc00004 && sp <= 0xc80000;
+bool Stack(uint sp) => sp >= 0x400 && sp <= 0x80000 || sp >= 0xc00004 && sp <= 0xc80000 ||
+    m.FastRamBase is uint fast && sp >= fast+4 && sp-fast <= m.FastRam.Length;
 byte ReadByte(uint a) => a<m.ChipRam.Length ? m.ChipRam.Span[(int)a] :
     a>=0xc00000 && a<0xc80000 ? slow[a-0xc00000] :
+    m.FastRamBase is uint fast && a>=fast && a-fast<m.FastRam.Length ? m.FastRam.Span[(int)(a-fast)] :
     a>=0x1000000-rom.Length && a<0x1000000 ? rom[a-(0x1000000-rom.Length)] : (byte)0;
 string Name(uint a)
 {
@@ -57,10 +64,13 @@ var ring = new Entry[512]; long count = 0; bool stop = false; string reason = "E
 var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
 var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue;
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
+var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
 void ObserveCall()
 {
     var c=m.Cpu;
     peek(c.ProgramCounter,out var op); peek(c.ProgramCounter+2,out var ext);
+    if(stopIllegal && op==0x4AFC)
+    { Keep("ILLEGAL_INSTRUCTION"); stop=true; reason="ILLEGAL_INSTRUCTION"; return; }
     if(op!=0x4eae) return;
     var displacement=unchecked((short)ext);
     if(c.A[6]==Read(4) && displacement is -552 or -408)
@@ -70,6 +80,8 @@ void ObserveCall()
     else if(c.A[6]==Read(4) && displacement is -198 or -684)
         pending.Add((displacement == -198 ? "AllocMem" : "AllocVec",$"D0={c.D[0]:X8},D1={c.D[1]:X8}",
             c.ProgramCounter+4,c.A[7],c.A[6],c.D[1],c.Cycles,0,null));
+    else if(c.A[6]==Read(4) && displacement==-372)
+        pending.Add(("GetMsg",$"A0={c.A[0]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement is -444 or -456 or -318)
         pending.Add((displacement == -444 ? "OpenDevice" : displacement == -456 ? "DoIO" : "Wait",
             displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,displacement == -318 ? 0 : c.A[1],null));
@@ -82,6 +94,8 @@ void ObserveCall()
             bytes=Convert.ToHexString(Enumerable.Range(0,48).Select(i=>ReadByte(c.A[0]+(uint)i)).ToArray())});
         pending.Add(("OpenWindow","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
     }
+    else if(displacement==-72 && c.A[6]==intuitionBase)
+        pending.Add(("CloseWindow",$"A0={c.A[0]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
     else if(c.A[6]==dosBase && displacement is -30 or -42 or -48)
         pending.Add((displacement == -30 ? "DOS.Open" : displacement == -42 ? "DOS.Read" : "DOS.Write",
             displacement == -30 ? Name(c.D[1]) : $"D1={c.D[1]:X8},D2={c.D[2]:X8},D3={c.D[3]:X8}",
@@ -96,8 +110,10 @@ void ObserveReturn()
     for(var i=pending.Count-1;i>=0;i--)
     {
         var p=pending[i]; if(c.ProgramCounter!=p.Pc || c.A[7]!=p.Sp) continue;
+        if(p.Api=="GetMsg" && c.D[0]==0) { pending.RemoveAt(i); break; }
         calls.Add(new {p.Api,p.Library,version=p.Version,callPc=p.Pc-4,entryCycle=p.Cycle,returnCycle=c.Cycles,result=c.D[0],baseAddress=p.A6,frame=m.CompletedFrames,
-            ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31),writePrefix=p.Text});
+            ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31),writePrefix=p.Text,
+            messagePrefix=p.Api=="GetMsg" ? Convert.ToHexString(Enumerable.Range(0,52).Select(n=>ReadByte(c.D[0]+(uint)n)).ToArray()) : null});
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
         if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
         if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
@@ -164,11 +180,13 @@ while (m.CompletedFrames < end && !stop)
 var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => ring[(Math.Max(0,count-ring.Length)+i)%ring.Length]).ToArray();
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
-    configuration="PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow, one protected DF0", startField=start,endField=end,
-    watchAddress, watchExpected, stopFailedDevice,
+    profile, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, one protected DF0",
+    fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
+    watchAddress, watchExpected, stopFailedDevice, stopIllegal,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());
 File.WriteAllBytes(Path.Combine(output,"slowram.bin"),slow);
+if (!m.FastRam.IsEmpty) File.WriteAllBytes(Path.Combine(output,"fastram.bin"),m.FastRam.ToArray());
 Console.WriteLine($"{reason} field={m.CompletedFrames} cycle={m.Cycle} PC={m.Cpu.ProgramCounter:X8} SP={m.Cpu.A[7]:X8}; {output}");
 
 delegate bool PeekWord(uint address,out ushort word);

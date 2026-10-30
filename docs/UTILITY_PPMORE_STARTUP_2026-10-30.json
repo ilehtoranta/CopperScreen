@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-30",
   "utilityId": "ppmore-18a",
-  "status": "CLASSIC_CONSOLE_PREREQUISITE_FIXED_READER_PENDING",
+  "status": "WINDOW_CONSOLE_UNIT_UNIMPLEMENTED",
   "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow; protected DD DF0; no Fast/RTC/host directories",
   "controlledDisk": {
     "sha256": "d4962fcc46174985c6f23cfac87bc2dfa6be63b6a4840f1352ced2ddbd36ba00",
@@ -109,6 +109,83 @@
     "diagnosticShellPolicyMismatch": "NativeFullShellBootTests used ROM-only size options for a HUNK; Build-Shell.ps1 already selects the general HUNK size policy. A production-policy Shell build and replay are pending.",
     "lateTraceLimitation": "error-text-v3 began after library opens and observed neither DOS nor Intuition calls. window-error-v4 discovers their public bases at trace start and captures the error/window calls. The earlier trace is not positive evidence for those APIs."
   },
-  "unresolvedCoverage": ["Recovery CLI correction needs a fitting ROM that passes native utility regressions", "Production-policy Shell build and PPMore replay on the original 1 MiB profile", "PPMore reader under CopperStart", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
+  "productionPolicyShellReplay": {
+    "shellSha256": "49e21c944a3df70c9270935c8344ed95c50401443c73335f98d066af950b2bd1",
+    "shellBytes": 334760,
+    "diskSha256": "cb5d5b69d663c09fec8c9e28c7b0a1ec1b3c2521317df9ff84b6103b20b4aa12",
+    "freeDiskBlocks": 203,
+    "codeSizePolicy": "The same sixteen general HUNK passes selected by CopperStart build/Build-Shell.ps1",
+    "exactTenCompilerInputsRetained": "../CopperStart/artifacts/ppmore-console-isolated/production-shell-inputs",
+    "sizeComparisonScope": "The earlier diagnostic Shell was 373384 bytes. Compiler/SDK inputs also differ; this is not an isolated policy-effect measurement.",
+    "nativeTests": {
+      "shellCompileAndOneMiBScriptPassed": 2,
+      "additionalExecuteCompileAndFfsScriptPassed": 2,
+      "additionalOfsScriptFailed": 1,
+      "skipped": 0,
+      "ofsFailure": "Timed out before the expected script/probe completion; baseline comparison and diagnosis remain pending",
+      "fixtureChangesCommitted": false
+    },
+    "releaseSolutionBuild": {
+      "errors": 0,
+      "warnings": 7
+    },
+    "originalOneMiB": {
+      "copperStartFields": 40000,
+      "mainReader": false,
+      "visible": "Blank desktop; retained console bitmap reads CAN'T OPEN WINDOW !",
+      "rgbSha256": "06237c7ecd11d137d331823e6b7aa2451206c4de6c2677bb9d9c316778503489",
+      "postCleanupChipFreeBytes": 63672,
+      "postCleanupLargestChipChunk": 32768
+    },
+    "twoMiBDiagnostic": {
+      "profile": "a500-ocs-2m-v1",
+      "configuration": "PAL MC68000 interpreter, OCS 8371/8362, 512 KiB Chip + 512 KiB slow + 1 MiB AutoConfig Fast at 00200000; protected DD DF0; no RTC or host directories",
+      "native13": {
+        "fields": 12000,
+        "mainReader": true,
+        "rgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03"
+      },
+      "copperStart": {
+        "fields": 40000,
+        "mainReader": false,
+        "rgbSha256": "06237c7ecd11d137d331823e6b7aa2451206c4de6c2677bb9d9c316778503489"
+      },
+      "readerWindowOpened": {
+        "requestField": 28270,
+        "returnField": 28342,
+        "result": "002EEB60"
+      },
+      "nextFailure": {
+        "api": "OpenDevice",
+        "device": "console.device",
+        "unit": 0,
+        "field": 28342,
+        "callPc": "002E09A2",
+        "ioRequest": "002D90A0",
+        "resultD0": "FFFFFFFF",
+        "ioError": 255
+      },
+      "native13StandardConsoleControl": {
+        "unit": 0,
+        "field": 840,
+        "resultD0": 0,
+        "ioError": 0
+      },
+      "explicitReaderWindowClose": {
+        "window": "002EEB60",
+        "field": 28383,
+        "callPc": "002DF9C2"
+      },
+      "illegalInstructionObservedAfterOpening": false,
+      "cause": "NativeConsoleLibrary implements CONU_LIBRARY (-1) but rejects the ordinary window console unit 0. PPMore closes its successfully opened window after that failure.",
+      "traces": [
+        "artifacts/utility-sequential-2026-10-30/ppmore/startup-2m-v8",
+        "artifacts/utility-sequential-2026-10-30/ppmore/after-window-2m-v9",
+        "artifacts/utility-sequential-2026-10-30/ppmore/native-2m-probe-v8"
+      ],
+      "scope": "Separate diagnostic; not a replacement or successful relabeling of the failed 1 MiB replay"
+    }
+  },
+  "unresolvedCoverage": ["Implement and qualify the standard window console service, including real text output", "PPMore reader under CopperStart", "Original 1 MiB RAM limitation with guest services", "OFS Shell/Execute failure baseline comparison", "Recovery CLI correction needs a fitting ROM that passes native utility regressions", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
   "firmwarePinChangedByThisWork": false
 }
