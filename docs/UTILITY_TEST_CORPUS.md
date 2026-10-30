@@ -76,11 +76,13 @@ its executable and dependencies on legally supplied guest system media.
 
 PPMore's controlled installation uses ReqTools 38.385 from Fish 794's `libs13`
 directory and PPShow's bundled PowerPacker library. PPShow's ReqTools build
-requires 2.0+. The fixed ASCII reader is verified under native 1.3; CopperStart's
-recovery CLI leaves the command-name BSTR empty, and PPMore's C startup then
-overwrites its Process. The [startup receipt](UTILITY_PPMORE_STARTUP_2026-10-30.json)
-records that first failure and the pending source correction. Reader controls
-and packed files remain unverified.
+requires 2.0+. The fixed ASCII reader and footer now reach their main screen
+under both ROMs using the pinned native guest GUI and Shell prerequisites in
+the explicit 2 MiB diagnostic profile. The original 1 MiB lane still fails;
+the [main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) preserves that
+scope. The [startup receipt](UTILITY_PPMORE_STARTUP_2026-10-30.json) retains
+the earlier empty recovery-CLI command-name failure; the controlled guest Shell
+publishes a valid name. Navigation, requesters and packed files remain unverified.
 
 X-Copy is especially useful for disk DMA, MFM, sync, drive selection and CIA
 behaviour. Begin with read/check operations and standard DD media. Its disk also

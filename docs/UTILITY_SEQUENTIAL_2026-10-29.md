@@ -17,7 +17,7 @@ marking the collection complete.
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
-| 5 | PPMore 1.8a | IN PROGRESS: reader retained with explicit 2 MiB profile; footer controls absent; original 1 MiB lane still fails | [Latest receipt](UTILITY_PPMORE_TEXT_LENGTH_2026-10-30.json) |
+| 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | PENDING | Not yet verified in this sequence |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
@@ -307,3 +307,29 @@ limits, exact inputs, component passes and retained failed-candidate evidence.
 The public OpenFont adjacency defect is also recorded separately; the new
 IntuiTextLength uses its own attribute snapshot. Later utilities and the final
 collection sweep remain pending. No app firmware pin or performance result changes.
+
+### PPMore expanded-profile main screen verified — 2026-10-30
+
+Producer commit `d9bc581681cf4550a472bf4d6f59956e79870946` reserves the classic
+ten-pixel bottom sizing border requested by PPMore. The preceding provider
+reported two pixels, allowing console output to erase the footer gadgets.
+The new native regression fails on that provider and passes on native 1.3 and
+the corrected provider, checking actual footer glyph pixels after console I/O.
+Text measurement and desktop upgrade regressions also pass; no cases are skipped.
+
+The final controlled disk displays the reader's 82-line title, fixture text and
+all seven footer labels under both ROMs. CopperStart's nine captures from fields
+32,000 through 40,000 are pixel-identical; the final screen was inspected.
+Native 1.3 completes 12,000 fields. SysInfo's original-profile regression still
+reaches its information screen through 32,000 fields.
+
+This meets the main-screen criterion only in the recorded expanded diagnostic
+profile: 512 KiB Chip, 512 KiB slow and 1 MiB AutoConfig Fast RAM, with the pinned
+guest GUI, Shell and library prerequisites. The original 1 MiB lane is also
+rerun on the final disk and still fails to display a reader at 40,000 fields.
+It is retained as a failure, not counted as an expanded-profile pass. Navigation,
+search, packed files, requesters and resize input remain unverified.
+
+The [main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) records exact
+inputs, scoped passes and failures. Proceed to Personal Paint; the remaining
+utilities and final source sweep remain open. The app firmware pin is unchanged.

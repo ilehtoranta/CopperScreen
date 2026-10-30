@@ -1,0 +1,220 @@
+{
+  "date": "2026-10-30",
+  "utility": "PPMore 1.8a",
+  "status": "VERIFIED: expanded-profile main reader and footer under both ROMs; original 1 MiB lane remains failed",
+  "producerCommit": "d9bc581681cf4550a472bf4d6f59956e79870946",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/d9bc581681cf4550a472bf4d6f59956e79870946/Docs/NativeSizingBorder20261030.md",
+  "romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54",
+  "native13RomSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "diskSha256": "83d99f017f6a18c5ea7c4e5d79d92a32512bdc4bc281fd6a8a6c0673b294376a",
+  "provider": {
+    "sha256": "6669969B733FBB516C021E92DB12A6B4E378765CBE502A2B606764DC34D2FAD5",
+    "entry": 0,
+    "installer": 308106,
+    "inputEntry": 307932,
+    "textEntry": 307956,
+    "classicEntry": 307980,
+    "codeBytes": 311200,
+    "imageBytes": 324980,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "4A2EC44DBA0B3146EE42E7845FA2C103D2701242FF21686E51DDD0BF88AAEB43"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "AE870256FA022D553B4FE9852F6A88B1AD4F3079F1082F4DC1B64185953D1D07"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "AB052F1F2CE22805BEA8FBE0BB8D070061834A73828A486A77548F3F1B856A30"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "F5DA52372E28858D2142EC48A4517B16100EBBEB7060119583BEA6EB8333CAFA"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D27FAB3C474F29D3F5F1ECBEADBCEB99177BE169BAB8F7A752D7098B15FE9C9C"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "988B95148B8D1CAD04D94E51B546886BD5D8A32AA07611723A678F0B151A00AA"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "745FEFDA2F6A472E98C7184622FBBB1F0B5BD6D207FB1F97C2383B73EE8E07EC"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0BA749A9902F5241AD9A183B44314CC118CCA2BDFA86BD15F87D4CAD5E47D900"
+      }
+    ]
+  },
+  "shell": {
+    "sha256": "49E21C944A3DF70C9270935C8344ED95C50401443C73335F98D066AF950B2BD1",
+    "peepholeOptimization": "FixedPoint",
+    "codeSizeOptimizations": true,
+    "dosClient": {
+      "originalDosSha256": "61D5BFBA22C508B1281139591F40427BF1B998E30DF1E848CB3787F3C7A4276F",
+      "serviceVersion": 2,
+      "path": "client/CopperStart.Dos.dll"
+    },
+    "inputs": [
+      {
+        "file": "CopperStart.Shell.dll",
+        "sha256": "C68F1DB59265B1B8FD03778E7387B445FF6291D9CF452E8B2C3C71E3EEF33374"
+      },
+      {
+        "file": "CopperOS.Shell.Dos.dll",
+        "sha256": "35F6267C1974CD3A17E910943C78A8281DE88342F47E3B3F313995A3ECE97D14"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "C7C0CB89D5504726222AC2C3BFA3709F9FEA07264C4228DE04626D649CC28B53"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "6B831E4125DAEB43468D3824CD37EB2330AA18D967A830A203A41A33FCE03706"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "D4AEBCDE6440015FD8DB839D856955818407FF5321F3061311189EF7D5715D27"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "FE120E89003D9B17B8636BFD63A3696D9F1C5BF89F871ED2230A72BD00F26030"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "35D706810A3371536D0893FE034127404CA90A126F23845513B750BECE86E233"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "CEACD42DE3F2D1D43380A17D22E413EB14346749C65567CCEB37F105419134C2"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "1D04DF6DEFEE1E5861539E2AFA5E4294F2001B9FEBE955D0CE6AE672A4C76EC2"
+      },
+      {
+        "file": "CopperSFS.Core.dll",
+        "sha256": "DADE8BC1747592BE91ECE87848713AB0720E4C11FC5DCD3A3411F6CDBFB10D8F"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "C/Intuition",
+      "bytes": 324980,
+      "sha256": "6669969b733fbb516c021e92db12a6b4e378765cbe502a2b606764dc34d2fad5"
+    },
+    {
+      "path": "C/CopperGui",
+      "bytes": 232,
+      "sha256": "dc43e5f27d295e0bbf8705c143eb6bbe000fa1a6ac25e3fb1d8c420d79dbed54"
+    },
+    {
+      "path": "C/PPMore",
+      "bytes": 10984,
+      "sha256": "6b0af8040f83e20f792324163b6750e5a2ca58341cfd39058186f3c288e737da"
+    },
+    {
+      "path": "Docs/PPMore.doc",
+      "bytes": 15779,
+      "sha256": "25ff5fd8d82c86258e294db0ea8b126f191def939b6c3c98818b57464c03521c"
+    },
+    {
+      "path": "Docs/ReqTools-DISTRIBUTION",
+      "bytes": 7961,
+      "sha256": "d418e2da330aa3e10ca916e428c50d46bb18e049653d374b5953f5c5ef03fb6d"
+    },
+    {
+      "path": "Libs/reqtools.library",
+      "bytes": 39000,
+      "sha256": "305b2db13afc88ae61ccb9649dc24e5867a7263ddd2a249a71ad67e9a2000e08"
+    },
+    {
+      "path": "Libs/powerpacker.library",
+      "bytes": 6128,
+      "sha256": "3f17ca541ec190bd2bdb899bb10ec150908c9e55bca3fac4237426c343d49819"
+    },
+    {
+      "path": "fixture.txt",
+      "bytes": 5633,
+      "sha256": "c9717c253dd259121612258ff2e43f87b8ef4bd4af65af276e80d663cab9dd96"
+    },
+    {
+      "path": "L/CopperShell",
+      "bytes": 334760,
+      "sha256": "49e21c944a3df70c9270935c8344ed95c50401443c73335f98d066af950b2bd1"
+    }
+  ],
+  "profile": "a500-ocs-2m-v1: PAL MC68000 interpreter, OCS 8371/8362, 512 KiB Chip + 512 KiB slow + 1 MiB AutoConfig Fast; one protected DF0, no RTC or host directories",
+  "guestPrerequisites": "Pinned disk-loaded GUI, native Shell, ReqTools 38.385 libs13 and PowerPacker V36; original program and 82-line ASCII fixture unchanged",
+  "copperStart": {
+    "completedFields": 40000,
+    "readerAndFooterVisuallyInspected": true,
+    "title": "Listing of SYS:fixture.txt (82 lines)",
+    "footerLabels": [
+      "Next Page",
+      "Prev Page",
+      "Next Line",
+      "Prev Line",
+      "Goto n%",
+      "Print File",
+      "Quit"
+    ],
+    "windowBorderBottom": 10,
+    "pixelIdenticalFields": [
+      32000,
+      33000,
+      34000,
+      35000,
+      36000,
+      37000,
+      38000,
+      39000,
+      40000
+    ],
+    "rgbSha256": "fd3d9d8856240a0e2d036c08925dc776e88727808515909596df5909da0f42fd"
+  },
+  "native13": {
+    "completedFields": 12000,
+    "mainReaderVerified": true,
+    "windowBorderBottom": 10,
+    "rgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03"
+  },
+  "originalLane": {
+    "profile": "a500-ocs-1m-v1: 512 KiB Chip + 512 KiB slow, no Fast",
+    "completedFields": 40000,
+    "readerVerified": false,
+    "status": "FAIL: no reader on final controlled disk",
+    "rgbSha256": "06237c7ecd11d137d331823e6b7aa2451206c4de6c2677bb9d9c316778503489",
+    "scope": "Retains original failure. Earlier allocation traces are historical evidence; no new allocation trace is claimed for this module."
+  },
+  "regression": {
+    "newNative13Case": "PASS: public border and exact footer glyph pixels after console output",
+    "previousCopperStartProvider": "FAIL as expected: border expected 10, actual 2",
+    "finalCopperStartCases": "3 PASS, 0 skipped: footer pixels, text metrics, Classic desktop upgrade",
+    "releaseSolution": "PASS: 4 warnings, 0 errors",
+    "compiledGui": "zero runtime features/helpers, external native targets and fatal machine-fault sites"
+  },
+  "sysInfoRegression": {
+    "profile": "original 1 MiB",
+    "completedFields": 32000,
+    "mainScreenVisuallyInspected": true,
+    "diskSha256": "59408c81b353368c6897918def605bca839fbe09330b50a28447d6976a5d81b7",
+    "rgbSha256": "812e63398cd153721dbcf49fd7feb2c44a795f3b39420d0d4b3af2f745d712fe"
+  },
+  "limits": [
+    "Only the expanded-profile main-screen criterion passes; this is not an original-profile or app firmware qualification.",
+    "Navigation, search, requester behavior, packed files, resize input and printing remain unverified.",
+    "System fonts/palettes differ; cross-ROM pixel identity is not asserted.",
+    "Public OpenFont adjacency defect remains recorded in the preceding receipt.",
+    "No ROM/media/build artifacts, firmware pin, package publication or host-throughput acceptance changes.",
+    "Later utilities and final source sweep remain pending."
+  ],
+  "localEvidence": "artifacts/utility-sequential-2026-10-30/ppmore/*v16*; producer artifacts/ppmore-console-isolated/footer-*"
+}
