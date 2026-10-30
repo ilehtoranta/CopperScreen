@@ -33,6 +33,8 @@ def main():
     parser.add_argument("--ppshow", type=Path, required=True)
     parser.add_argument("--reqtools", type=Path, required=True)
     parser.add_argument("--provider-root", type=Path, required=True)
+    parser.add_argument("--shell-root", type=Path,
+                        help="Use a minimal disk with the native guest Shell and its disk-library loader")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     inputs = [
@@ -62,24 +64,39 @@ def main():
         "Libs/powerpacker.library": show.read("PPShow\\libs\\powerpacker.library"),
         "fixture.txt": fixture.encode("ascii"),
     }
+    shell_manifest = None
+    if args.shell_root:
+        shell_manifest = json.loads((args.shell_root / "shell-manifest.json").read_text(encoding="utf-8-sig"))
+        files["L/CopperShell"] = checked(args.shell_root / "CopperShell", shell_manifest["sha256"].lower())
     if args.output.exists():
         raise FileExistsError("Preserve earlier controlled disks")
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(args.base, args.output)
-    device = BlkDevFactory().open(str(args.output))
+    if args.shell_root:
+        device = BlkDevFactory().create(str(args.output))
+    else:
+        shutil.copyfile(args.base, args.output)
+        device = BlkDevFactory().open(str(args.output))
     volume = ADFSVolume(device)
     try:
-        volume.open()
-        volume.create_dir(FSString("Docs"))
-        original_startup = bytes(volume.read_file(FSString("S/Startup-Sequence")))
-        startup = original_startup.replace(b"SYS:SysInfo/SysInfo", b"C:CopperGui\nC:PPMore SYS:fixture.txt")
-        if startup == original_startup:
-            raise ValueError("Unexpected base startup")
+        if args.shell_root:
+            volume.create(FSString("PPMoreControl"), dos_type=0x444F5300,
+                          boot_code=args.base.read_bytes()[12:1024])
+            for directory in ("C", "L", "Libs", "Docs", "S"):
+                volume.create_dir(FSString(directory))
+            startup = b"C:CopperGui\nC:PPMore SYS:fixture.txt\n"
+        else:
+            volume.open()
+            volume.create_dir(FSString("Docs"))
+            original_startup = bytes(volume.read_file(FSString("S/Startup-Sequence")))
+            startup = original_startup.replace(b"SYS:SysInfo/SysInfo", b"C:CopperGui\nC:PPMore SYS:fixture.txt")
+            if startup == original_startup:
+                raise ValueError("Unexpected base startup")
         for name, data in files.items():
             volume.write_file(data, FSString(name))
             if bytes(volume.read_file(FSString(name))) != data:
                 raise ValueError(f"Guest file differs: {name}")
-        volume.delete(FSString("S/Startup-Sequence"))
+        if not args.shell_root:
+            volume.delete(FSString("S/Startup-Sequence"))
         volume.write_file(startup, FSString("S/Startup-Sequence"))
         free = volume.get_free_blocks()
     finally:
@@ -95,6 +112,9 @@ def main():
         "reqtoolsMember": "ReqTools/libs13/reqtools.library",
         "scope": "Controlled local installation; no execution verdict",
     }
+    if shell_manifest:
+        receipt["kind"] = "controlled-ppmore-native-shell-reader"
+        receipt["shell"] = shell_manifest
     Path(str(args.output) + ".json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"sha256": receipt["sha256"], "freeBlocks": free}))
 

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-30",
   "utilityId": "ppmore-18a",
-  "status": "CLI_COMMAND_NAME_FIX_PENDING_FULL_ROM",
+  "status": "CLASSIC_CONSOLE_PREREQUISITE_FIXED_READER_PENDING",
   "machine": "PAL OCS 8371/8362, MC68000 interpreter/conservative batch, 512 KiB Chip + 512 KiB slow; protected DD DF0; no Fast/RTC/host directories",
   "controlledDisk": {
     "sha256": "d4962fcc46174985c6f23cfac87bc2dfa6be63b6a4840f1352ced2ddbd36ba00",
@@ -74,6 +74,28 @@
     "firstObservedDeviceFailure": {"api": "OpenDevice", "name": "console.device", "unit": -1, "resultD0": "FFFFFFFF", "ioError": 0, "field": 28614, "cycle": 4066248004, "callPc": "00061320", "ioRequest": "00C7BD38", "trace": "artifacts/utility-sequential-2026-10-30/ppmore/first-device-failure-v1"},
     "interpretation": "The existing guest Shell can load both disk libraries. PPMore still does not reach its reader; the next captured failure is the console library-unit open. Root cause remains under investigation."
   },
-  "unresolvedCoverage": ["CLI correction needs a fitting ROM that passes native utility regressions", "Qualify the disk-library loader prerequisite", "Investigate the console.device library-unit open failure", "PPMore reader under CopperStart", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
+  "classicConsolePrerequisite": {
+    "producerCommit": "5209854c9d2f16961db34daddbcb54c53d9d5180",
+    "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/5209854c9d2f16961db34daddbcb54c53d9d5180/Docs/NativeClassicConsole20261030.md",
+    "cause": "No console.device in the captured Exec device list; only input.device and trackdisk.device are present. Exec returns failure without calling a console Open routine.",
+    "fix": "ClassicDesktopEntry publishes the existing console library-unit provider and rolls back its newly created owner if GUI startup fails",
+    "isolatedSourceBase": "f65cf7645a53d15b997e1c16979ae1493f445ea2",
+    "copperOsSource": "8db1db25055f65658339429c1793fdd6811d0987",
+    "releaseBuild": {"errors": 0, "warnings": 9, "sdk": "local CopperSharp", "scope": "Isolated source solution build; first packaged-SDK attempt failed and is retained separately"},
+    "focusedNativeRegression": {"beforeFailed": 1, "afterPassed": 1, "skipped": 0, "beforeOpenDevice": "FFFFFFFF", "afterOpenDevice": "00000000", "afterDevice": "00C15758", "afterCloseOpenCount": 0, "afterDone": true, "screenWindowAndPhysicalPixelsPassed": true},
+    "native13ConsoleControl": {"passed": 1, "skipped": 0, "scope": "Library-unit open and raw-key translation without a Window or mn_Length admission"},
+    "providerSha256": "ca82445550648d946aac7dd0521f17f80b1d855082cd61c784a5a3065958f94b",
+    "providerBytes": 318332,
+    "shellRecompiledFromIsolatedSource": true,
+    "shellSha256": "e7539b2a806ff22545003da13e7a8a68d043546e4f38da133a4b056e7dbf9a4f",
+    "shellFreestandingCompilePassed": 1,
+    "readerDiskSha256": "28d67937ce40ab51100abd1e922bee08cbaff388f447f0ee8eff0d5b41c66f11",
+    "recipe": "scripts/probes/UtilityStartup/prepare_ppmore_desktop.py --shell-root",
+    "native13Reader": {"fields": 12000, "mainReader": true, "expectedTitleLinesAndTextInspected": true, "rgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03"},
+    "copperStartReader": {"romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54", "fields": 40000, "mainReader": false, "visible": "LOADING... only", "unsupported": null, "rgbSha256": "2b1abd9ff08fe31ae2c1473acf9563b41fefb55bca9dc2ebbd6a249faebf1c62"},
+    "sysInfoRegression": {"diskSha256": "9bb4b7a48661ad7d5678ed0723226ac666d93f84fadc190e970e81d52bc3f599", "fields": 32000, "mainScreenInspectedAt": 31000, "finalPixelsIdentical": true, "rgbSha256": "59f73d9cd1b2fc509de467e6d8646c203f7fd83028f10fc351336a08c5ee94a2", "unsupported": null, "scope": "Main information screen with the updated guest GUI prerequisite; controls untested"},
+    "scope": "The missing console prerequisite is corrected; PPMore is still unverified under CopperStart. No native ROM or host-throughput acceptance claim."
+  },
+  "unresolvedCoverage": ["Recovery CLI correction needs a fitting ROM that passes native utility regressions", "PPMore reader under CopperStart after the console prerequisite fix", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
   "firmwarePinChangedByThisWork": false
 }

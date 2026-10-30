@@ -64,6 +64,14 @@ and startup sequence. It requires `amitools` and `lhafile`. Pass `--base`,
 `--ppmore`, `--ppshow`, `--reqtools`, `--provider-root` and a new `--output` path.
 Disk creation alone does not establish a successful PPMore replay.
 
+Optional `--shell-root` points to the native Shell test's `shell/` output,
+containing `CopperShell` and `shell-manifest.json`. This creates a minimal OFS
+disk, retains the base disk's boot code, and adds `L:CopperShell` so CopperStart
+uses the existing guest Shell and its disk-library loader. The receipt pins
+the Shell and compiler inputs alongside the GUI inputs. Kickstart 1.3 uses its
+normal DOS startup on the same disk. Both guest paths still require replay
+verification; the presence of the prerequisites does not establish a reader.
+
 ```powershell
 python scripts/probes/UtilityStartup/prepare_sysinfo_desktop.py `
   --original media/utilities/originals/sysinfo_4.4.adf `
