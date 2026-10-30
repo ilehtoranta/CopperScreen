@@ -530,3 +530,33 @@ The [bar-layer receipt](UTILITY_PPAINT_BARLAYER_2026-10-31.json) preserves the
 native/replacement cases, prior fixture failures, module/media identities and
 the next fault. Personal Paint remains current. Later utilities and the final
 source sweep remain open; no throughput acceptance result is claimed.
+
+### Personal Paint mouse-queue correction — 2026-10-31
+
+CopperStart main commit `b146ba4f24b42b0fcc93d9fbeb648058016e1fe0` implements
+SetMouseQueue and WA_MouseQueue initialization, and connects the limit to
+native input delivery. The existing message pool remains the fast path;
+overflow records are allocated by the GUI task and retained until reply.
+Other event classes can use overflow too, so a full mouse queue does not
+consume keyboard delivery capacity. IRQ capture remains allocation-free.
+
+Two native 3.1 cases and both replacement cases pass without skips. Each
+checks seven setter results and thirteen delivery observations, including
+limits 1/0/50, taken-but-unreplied messages retaining credit, discarded motion,
+two 50-message waves, and independent raw-key delivery at full mouse capacity.
+The timer, original 1 MiB Classic upgrade/window, and console footer regressions
+also pass. The isolated Release solution builds with zero errors and four
+warnings; the GUI passes freestanding checks with seven frozen compiler inputs
+unchanged and only DesktopProviders.dll updated.
+
+The fresh native 1.3 application control reaches the editor with its earlier
+RGB hash. CopperStart still fails before field 25,000, before the scheduled
+Return input at field 28,000. The new first-fault trace identifies the next
+missing API: graphics.library BltTemplate (-36) reaches ILLEGAL at field
+24,856. Neither an editor pass nor successful application input is recorded.
+The original BCPL Assign lane also remains separately failed.
+
+The [mouse-queue receipt](UTILITY_PPAINT_MOUSEQUEUE_2026-10-31.json) preserves
+the native/replacement checks, module/media identities and application limits.
+Personal Paint remains current. Later utilities and the final source sweep
+remain open; these runs are not throughput acceptance measurements.

@@ -1,0 +1,447 @@
+{
+  "status": "Personal Paint remains current; SetMouseQueue delivery/reply behavior qualified and pushed. Next missing API is graphics.library BltTemplate (-36), identified at field 24856. CopperStart editor, later utilities and final source sweep remain open.",
+  "producerMainCommit": "b146ba4f24b42b0fcc93d9fbeb648058016e1fe0",
+  "provider": {
+    "sha256": "AA7E7C23331DF127C346F1317B1206E2CA5978957D2564F324B68FD99639BA78",
+    "entry": 0,
+    "installer": 313976,
+    "inputEntry": 313804,
+    "textEntry": 313828,
+    "classicEntry": 313852,
+    "codeBytes": 317400,
+    "imageBytes": 331772,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "4532D608E2F16ADAF39BF836E9FDA1DA2A020D0D3227C48A4CDB03E8796D09FB"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "52456F51041303F2A5B417153675D96FE4C7ACE7B99EAC02B9EA0B7376B12E68"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "compilerInputs": "Seven unchanged frozen input hashes; only DesktopProviders.dll changes. All eight final hashes rechecked.",
+  "native31": {
+    "passed": 2,
+    "skipped": 0,
+    "cases": [
+      {
+        "artifact": "native31-mouse-flow-v59\\mouse-queue-False.json",
+        "sha256": "b67bed6179b51f1bab64efc0a8f7b069545c8f48a4aa3f11efc9766c01cc605c",
+        "tagged": false,
+        "fields": 1205,
+        "scalarResults": [
+          5,
+          50,
+          1,
+          0,
+          4294967295,
+          0,
+          50
+        ],
+        "observations": [
+          {
+            "name": "limit-one",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "taken-unreplied-still-consumes-credit",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "dropped-motion-not-resurrected",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "reply-restores-credit",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "zero-disables-motion-messages",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-0",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "keyboard-independent-of-full-mouse-queue",
+            "actual": 2,
+            "expected": 2
+          },
+          {
+            "name": "fifty-unreplied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-1",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "fifty-unreplied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "credit-after-overflow-replies",
+            "actual": 1,
+            "expected": 1
+          }
+        ]
+      },
+      {
+        "artifact": "native31-mouse-flow-v59\\mouse-queue-True.json",
+        "sha256": "127f32ff7345bc036c95704ea6e102ed96f8d24625006c20d915509a4a42fb89",
+        "tagged": true,
+        "fields": 1205,
+        "scalarResults": [
+          12,
+          50,
+          1,
+          0,
+          4294967295,
+          0,
+          50
+        ],
+        "observations": [
+          {
+            "name": "limit-one",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "taken-unreplied-still-consumes-credit",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "dropped-motion-not-resurrected",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "reply-restores-credit",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "zero-disables-motion-messages",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-0",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "keyboard-independent-of-full-mouse-queue",
+            "actual": 2,
+            "expected": 2
+          },
+          {
+            "name": "fifty-unreplied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-1",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "fifty-unreplied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "credit-after-overflow-replies",
+            "actual": 1,
+            "expected": 1
+          }
+        ]
+      }
+    ]
+  },
+  "copperStart": {
+    "passed": 2,
+    "skipped": 0,
+    "cases": [
+      {
+        "artifact": "flow-ordinary-v60\\mouse-queue-False.json",
+        "sha256": "84573eca4d1d4632f89339b902d0808392c98a8167967b538fab00e7dabb68c4",
+        "tagged": false,
+        "fields": 26522,
+        "scalarResults": [
+          5,
+          50,
+          1,
+          0,
+          4294967295,
+          0,
+          50
+        ],
+        "observations": [
+          {
+            "name": "limit-one",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "taken-unreplied-still-consumes-credit",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "dropped-motion-not-resurrected",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "reply-restores-credit",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "zero-disables-motion-messages",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-0",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "keyboard-independent-of-full-mouse-queue",
+            "actual": 2,
+            "expected": 2
+          },
+          {
+            "name": "fifty-unreplied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-1",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "fifty-unreplied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "credit-after-overflow-replies",
+            "actual": 1,
+            "expected": 1
+          }
+        ]
+      },
+      {
+        "artifact": "flow-tagged-v60\\mouse-queue-True.json",
+        "sha256": "f8a313b58544ee18654bbc70aed4c54edc7ac64c10086e7ac65ee1246bf41c9e",
+        "tagged": true,
+        "fields": 26522,
+        "scalarResults": [
+          12,
+          50,
+          1,
+          0,
+          4294967295,
+          0,
+          50
+        ],
+        "observations": [
+          {
+            "name": "limit-one",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "taken-unreplied-still-consumes-credit",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "dropped-motion-not-resurrected",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "reply-restores-credit",
+            "actual": 1,
+            "expected": 1
+          },
+          {
+            "name": "zero-disables-motion-messages",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-0",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "keyboard-independent-of-full-mouse-queue",
+            "actual": 2,
+            "expected": 2
+          },
+          {
+            "name": "fifty-unreplied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-0",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-wave-1",
+            "actual": 50,
+            "expected": 50
+          },
+          {
+            "name": "fifty-unreplied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "fifty-replied-wave-1",
+            "actual": 0,
+            "expected": 0
+          },
+          {
+            "name": "credit-after-overflow-replies",
+            "actual": 1,
+            "expected": 1
+          }
+        ]
+      }
+    ]
+  },
+  "regressions": {
+    "timer": "1 passed, 0 skipped",
+    "classicWindow": "1 passed, 0 skipped, original 1 MiB profile",
+    "consoleFooter": "1 passed, 0 skipped, original 1 MiB profile"
+  },
+  "build": {
+    "solution": "Release: 0 errors, 4 warnings",
+    "gui": "Freestanding: no managed allocations, runtime features/helpers, external native targets or fatal sites"
+  },
+  "application": {
+    "files": 580,
+    "logicalFilesIdentical": true,
+    "ofsSha256": "0272f6cb1bfbe6cca94d6179be1dcca2879480531130b73d8da9237212884b29",
+    "ffsSha256": "e96df8a0c7b5cbd584089da0e8a1e97787d2f15cf3f3d7f0a8cd206c6443466c",
+    "profile": "PAL MC68000 OCS interpreter, 512 KiB Chip +512 KiB slow +2 MiB Fast; read-only HDF, direct launch",
+    "native13": {
+      "fields": 8000,
+      "editorVisible": true,
+      "enterFrame": 5000,
+      "rgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da"
+    },
+    "copperStart": {
+      "fields": 32000,
+      "editorVisible": false,
+      "firstInvalidSnapshot": 25000,
+      "scheduledEnterFrame": 28000,
+      "inputQualification": "No successful application input: invalid PC before scheduled Return.",
+      "rgbSha256": "c6c44edf2636824cd3897ee85eb685d2ed8818aa546be2f19fc9bce33434aab5"
+    }
+  },
+  "limits": [
+    "Initial null-window and one-count-motion experiments are fixture evidence, not conformance results or justification for new public guards.",
+    "Conformance covers actual OS-created windows, sampled setter arguments and physical-input delivery/reply sequences.",
+    "Application editor remains unavailable on CopperStart; original BCPL Assign lane remains separately failed.",
+    "No throughput acceptance measurement.",
+    "ROMs/media/libraries/build artifacts remain local."
+  ],
+  "nextFailure": {
+    "traceSha256": "53f3a73dd4dae2845a99f968ac033a76401dfc197a5632b65a1797414e5fe90e",
+    "reason": "ILLEGAL_INSTRUCTION",
+    "field": 24856,
+    "api": "graphics.library.BltTemplate",
+    "lvo": -36,
+    "callPc": "0x002f9ca0",
+    "library": "0x00220460",
+    "source": "0x00023030",
+    "rastPort": "0x003fd410",
+    "sourceX": 0,
+    "sourceBytesPerRow": 6,
+    "destX": 0,
+    "destY": 12,
+    "width": 48,
+    "height": "D5 not captured by this version of the ring; inspect caller before implementation",
+    "illegalTarget": "0x00ff9fbe",
+    "opcode": "0x4AFC",
+    "scope": "Identified, not implemented or qualified. No main-screen pass."
+  }
+}
