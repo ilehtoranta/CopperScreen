@@ -378,3 +378,37 @@ archives contain no replacement system library. This is not a verified paint
 screen. The [new receipt](UTILITY_PPAINT_LIBRARIES_2026-10-30.json) records exact
 profiles, file equality, FFP component passes and remaining coverage limits.
 Personal Paint remains current; later utilities and the final sweep remain open.
+
+### Personal Paint native editor control and CopperOS mathtrans — 2026-10-30
+
+A Workbench 1.3 ZIP is now available in the local TestImages directory. Its
+system libraries remove the earlier prerequisite blocker. The complete
+installation has 580 byte-identical logical files across the OFS/FFS pair.
+Kickstart 1.3 reaches Personal Paint's editor and a Memory save mode requester.
+Replacing only mathtrans.library with the frozen CopperOS development 68000
+build produces the same editor/requester pixels. Return dismisses the requester
+and leaves an unobstructed editor. This establishes the native startup control,
+not mathtrans conformance or paint-operation coverage.
+
+The library recipe now checks the CopperOS manifest's CPU, name, byte length
+and SHA-256. CopperOS's source was untracked when frozen; the receipt retains
+binary and compiler input hashes without claiming release qualification.
+The original Worms IPF also yields diskfont 34.37 and confirms the earlier
+recovered mathtrans binary's provenance. Installing diskfont alone progresses
+native startup to a missing icon.library error; the complete Workbench input
+is used for the application control.
+
+CopperStart still fails before reaching the editor. The original Workbench
+startup first fails in the BCPL Assign command at field 2,181, independently
+of PPaint. An explicit direct-launch setup retains that failed lane and avoids
+Assign/CD; native 1.3 still reaches its editor. CopperStart's direct-launch
+instruction trace then catches a separate fault at field 3,124 in Exec
+SetFunction, with a library parameter of 1 and vector offset -18. The origin
+of that invalid argument remains unresolved; adding a pointer guard is not a
+justified fix. Both failures and the native passes are retained in the
+[control receipt](UTILITY_PPAINT_CONTROL_2026-10-30.json).
+
+The external probe adds explicit read-only HDF modes and a versioned 3 MiB
+correctness profile, preserving existing ADF invocations. Its Release build
+passes with zero warnings/errors. No production engine or ROM behavior changed.
+Personal Paint remains current; later utilities and the final sweep remain open.

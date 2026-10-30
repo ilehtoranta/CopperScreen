@@ -116,15 +116,31 @@ image not selected by CopperStart is a setup mismatch, not a paint-code fault.
 Optional `--math-root` installs `MathFfpNative` and `CopperFfp` from the qualified
 producer `NativeMathFfpModuleTests` output, checking `mathffp.json`. This reuses
 the existing native FFP kernel and retains its guest-loaded code until reset.
-The installer preserves an existing native library. Both ROMs still need the
-actual Workbench `mathtrans.library` before the paint main-screen control can
-be evaluated; the FFP component test is not a paint-application pass.
+The installer preserves an existing native library. The FFP component test
+is not a paint-application pass.
+
+Optional `--mathtrans-root` installs CopperOS's development 68000
+`mathtrans.library`. The recipe checks its CPU, name, image length and SHA-256
+against `mathtrans.library.json` and records the manifest. Freeze both files
+before use if another build is active. This is an explicit test prerequisite,
+not a claim of full mathtrans compatibility. Optional `--diskfont` installs an
+unchanged user-supplied HUNK library and records its file hash.
 
 Optional `--workbench` accepts a user-supplied Workbench 1.3 ADF or ZIP containing
 one ADF. Its files are installed before the controlled startup is written.
-Amiga path collisions are resolved case-insensitively. Without this input, the
-image is only a prerequisite diagnostic: native 1.3 launches PPaint but exits
-because `mathtrans.library` is missing. That is unavailable application-control
-coverage, not an emulator regression or a passing paint screen. Use `--hdf-ro`
+Amiga path collisions are resolved case-insensitively. Without complete system
+libraries, the image is only a prerequisite diagnostic; an error requester is
+not a paint-screen pass. `--direct-launch` uses `SYS:PPaint/PPaint` with the same
+installed files, avoiding the Workbench Assign/CD startup sequence. Preserve
+the original sequence's result separately: Workbench 1.3's BCPL Assign fails
+under the pinned CopperStart ROM before PPaint starts. Use `--hdf-ro`
 when replaying the image and record an explicit expanded RAM profile; the
 manual requires at least 2 MiB. The original 1 MiB lane is not adequate.
+
+The external instruction probe also accepts `a500-ocs-3m-v1` (512 KiB Chip,
+512 KiB slow, 2 MiB Fast) and an optional seventh argument `hdf-ro` or
+`hdf-ffs`. The latter uses the explicit `DH0:1:32:0:1023` partition geometry;
+both modes open media read-only. Existing five/six-argument ADF invocations
+retain their profiles. These are correctness diagnostics, not throughput
+acceptance protocols. The [Personal Paint control receipt](../../../docs/UTILITY_PPAINT_CONTROL_2026-10-30.json)
+records native editor evidence and both unresolved CopperStart failures.

@@ -27,6 +27,11 @@ def main():
     parser.add_argument('--provider-root', type=Path, required=True)
     parser.add_argument('--shell-root', type=Path, required=True)
     parser.add_argument('--math-root', type=Path, help='Qualified native FFP module/installer and mathffp.json')
+    parser.add_argument('--mathtrans-root', type=Path,
+                        help='CopperOS 68000 development mathtrans.library and matching library JSON manifest')
+    parser.add_argument('--diskfont', type=Path, help='User-supplied native diskfont.library; installed unchanged')
+    parser.add_argument('--direct-launch', action='store_true',
+                        help='Launch SYS:PPaint/PPaint directly instead of Workbench Assign/CD commands')
     parser.add_argument('--workbench', type=Path, help='User-supplied Workbench 1.3 ADF or single-ADF ZIP')
     parser.add_argument('--filesystem', choices=('ofs', 'ffs'), default='ofs',
                         help='OFS for native 1.3; FFS for CopperStart hardfile bootstrap')
@@ -101,7 +106,20 @@ def main():
         add('C/MathFfpNative', module, 'qualified guest FFP module')
         add('C/CopperFfp', loader, 'qualified guest FFP installer')
         startup += b'C:CopperFfp\n'
-    if args.workbench:
+    mathtrans = None
+    if args.mathtrans_root:
+        mathtrans = json.loads((args.mathtrans_root / 'mathtrans.library.json').read_text(encoding='utf-8-sig'))
+        library = (args.mathtrans_root / 'mathtrans.library').read_bytes()
+        if (mathtrans['Cpu'] != '68000' or mathtrans['Name'] != 'mathtrans.library'
+                or len(library) != mathtrans['ImageBytes'] or sha(library) != mathtrans['Sha256'].lower()):
+            raise ValueError('68000 mathtrans prerequisite manifest mismatch')
+        add('Libs/mathtrans.library', library, 'CopperOS development mathtrans manifest; compatibility unqualified')
+    if args.diskfont:
+        library = args.diskfont.read_bytes()
+        if library[:4] != b'\x00\x00\x03\xf3':
+            raise ValueError('diskfont prerequisite must be a HUNK library')
+        add('Libs/diskfont.library', library, 'user-supplied native diskfont.library')
+    if args.workbench and not args.direct_launch:
         startup += b'Assign PPaint: SYS:PPaint\nCD PPaint:\nPPaint\n'
     else:
         startup += b'SYS:PPaint/PPaint\n'
@@ -126,6 +144,7 @@ def main():
                'sha256': sha(args.output.read_bytes()),
                'archiveSha256': sha(archive), 'baseSha256': sha(base), 'provider': provider, 'shell': shell,
                'mathFfp': math,
+               'mathTrans': mathtrans,
                'workbenchSha256': sha(args.workbench.read_bytes()) if args.workbench else None,
                'startup': startup.decode('ascii'), 'freeBlocks': free,
                'files': [{'path': path, 'bytes': len(data), 'sha256': sha(data), 'origin': origins[path]}

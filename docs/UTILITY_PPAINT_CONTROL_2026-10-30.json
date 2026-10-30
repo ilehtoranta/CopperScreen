@@ -1,0 +1,231 @@
+{
+  "scope": "Personal Paint remains current. Native editor control established; CopperStart editor NOT verified. Later utilities and final source sweep pending. No performance or full mathtrans conformance claim.",
+  "profile": "PAL MC68000 OCS interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB AutoConfig Fast; read-only OFS native13 / FFS CopperStart DH0:1:32:0:1023",
+  "roms": {
+    "kickstart13": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "copperstart": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54"
+  },
+  "workbench": {
+    "source": "C:/Data/TestImages/Workbench v1.3 rev 34.20 (1988)(Commodore)(A500-A2000)(Disk 1 of 2)(Workbench)[m].zip",
+    "sha256": "5fa3b92e8bf18e5e5db8cb5e9c58d407a67af2c892b2e31e2913fe7af0baec1b",
+    "logicalFilesWithPPaint": 580
+  },
+  "copperOsMathtrans": {
+    "Format": "single-code-hunk-development-library",
+    "Cpu": "68000",
+    "PeepholeOptimization": "Disabled",
+    "Name": "mathtrans.library",
+    "Version": 40,
+    "Revision": 1,
+    "PositiveBytes": 46,
+    "NegativeBytes": 126,
+    "ImageBytes": 7460,
+    "CodeBytes": 7216,
+    "Sha256": "878614E8240672F561DD92932F0B2649D9E01BE4D7D81196FD1F6ADEEFB82C05",
+    "Layout": {
+      "Resident": 4,
+      "AutoInit": 32,
+      "FunctionTable": 48,
+      "Name": 136,
+      "IdString": 154,
+      "CompiledCode": 188,
+      "EndMarker": 7210
+    },
+    "Exports": {
+      "copperos.mathtrans.Close": 4644,
+      "copperos.mathtrans.Expunge": 4682,
+      "copperos.mathtrans.Init": 4556,
+      "copperos.mathtrans.Open": 4606,
+      "copperos.mathtrans.Reserved": 4720,
+      "copperos.mathtrans.SPAcos": 7018,
+      "copperos.mathtrans.SPAsin": 6922,
+      "copperos.mathtrans.SPAtan": 5578,
+      "copperos.mathtrans.SPCos": 5770,
+      "copperos.mathtrans.SPCosh": 6154,
+      "copperos.mathtrans.SPExp": 6346,
+      "copperos.mathtrans.SPFieee": 6826,
+      "copperos.mathtrans.SPLog": 6442,
+      "copperos.mathtrans.SPLog10": 7114,
+      "copperos.mathtrans.SPPow": 6538,
+      "copperos.mathtrans.SPSin": 5674,
+      "copperos.mathtrans.SPSincos": 5962,
+      "copperos.mathtrans.SPSinh": 6058,
+      "copperos.mathtrans.SPSqrt": 6634,
+      "copperos.mathtrans.SPTan": 5866,
+      "copperos.mathtrans.SPTanh": 6250,
+      "copperos.mathtrans.SPTieee": 6730
+    },
+    "RelocationCount": 48,
+    "InputSha256": {
+      "CopperOS.MathTrans.LibraryBuilder.dll": "5657FFD84DF383F2392A4520721FEB509B07769EAD8F03F53F5F8E4CC6322DD7",
+      "CopperOS.MathTrans.dll": "06469251A00235792102BCA8D83DAC5B2E4382179306C1E9EF230526E771A1B2",
+      "CopperSharp.Compiler.dll": "94C71F2C151702B14B4C037A24393A15C25E1727E0C15C2DC7390F671FA7E203",
+      "CopperSharp.Runtime.AmigaPal.dll": "65EFD6D8FFFD50C227F63D82C69E9F3D22128A394E9FA227CCAAFC219C11ACEC",
+      "CopperSharp.Runtime.Managed.dll": "666DD92E5D69E776E7D551104A0EC8B2D2FBB8CCA5F1825E200C70F9DC0A41B5",
+      "CopperSharp.Sdk.Amiga.Support.dll": "E88515004C9EDA94866D620D97EE1F00F9DBA25AB432B99A96FBC3A2EE3AAE78",
+      "CopperSharp.Sdk.Amiga.dll": "D7ADBF00756F2FD2665386AE0DD95282F1767E230BC51249A439C7A0CB922695",
+      "CopperSharp.Targets.Amiga.dll": "02FF013561B80BF7C4CA1E8C361971CC213B5A0C6DEBB01A5F2D00155B6EDCFF"
+    }
+  },
+  "recoveredLibraryProvenance": {
+    "source": "C:/Data/TestImages/Team17/Worms_230.zip/Worms_Disk1of3.ipf",
+    "zipSha256": "31b9983aa74270fb39ef4c08483dfb79da4d9b8ac006a7600e07d2876c2d091f",
+    "ipfSha256": "abde449d92eaa8fc0daa054c734f5bca2e01422734e1488142f8e813b9cc1606",
+    "decoderCompleteSectorData": true,
+    "diskfontSha256": "fcc73ffe9ad54d8625bf6dc53314b06771a90f0d3bb9e310438efdcb2d1bf1d0",
+    "mathtransSha256": "e0fac048fb68b56f1f4eeab36f2680f08de94d6511b67f487edccc4b880c3055",
+    "mathtransMatchesEarlierAnalysisBin": true
+  },
+  "imagesReadOnlyAndHashesRechecked": {
+    "ofs-copperos-mathtrans-v5.hdf": "bae510b6e42c27d565d87ac2030b70c1816bd30c1c44cde5f24b56f5c1b58f81",
+    "ffs-copperos-mathtrans-v5.hdf": "870f8c9f198a45f5b443d1d2e0f1dae0e6efff775759b90aac9cee2718e59731",
+    "ofs-copperos-mathtrans-diskfont-v6.hdf": "ca7c731e95a86631947fc074354b5c8be04e52f3b3bb93455094db0745ec0e58",
+    "ffs-copperos-mathtrans-diskfont-v6.hdf": "b92f0817b806dd94dc4278dea5f0534c9fa4f25f81da54dfaa3e59dd1310cc5a",
+    "workbench-ofs-v8.hdf": "37a7b8434a957e51dd674a06b57a6af0540755fff190bc71406b5451fcd7da15",
+    "workbench-ffs-v8.hdf": "2870e44269a533d9b2624eae8347f8ca9b1175e6b69f8c271da80d34df8098a8",
+    "workbench-copperos-ofs-v10.hdf": "301f75eef733698427c9d0bfcc72a491b0694dc77ea37a82cd04d35f507783c9",
+    "workbench-direct-ofs-v11.hdf": "684005e7552692e2c7fcc42a11a1719bb9dddbef179ec832069f7d8bc386e21f",
+    "workbench-direct-ffs-v11.hdf": "6ccdf97fd76f7e191f76c2f8354beef96b7609439fa72a0aa7469fac351a7982"
+  },
+  "results": [
+    {
+      "artifact": "kick13-copperos-mathtrans-v5",
+      "fields": 12000,
+      "verdict": "Missing diskfont.library version 34; no editor",
+      "finalPc": "00FD4256",
+      "rgbSha256": "a1d9c179b711a7b359df0c34654a0c7cef5ad108744729789951cea28112016c",
+      "logSha256": "eb92c09aab2b3b43205539d95a6a225889ef7378a5f2cc92e2584b99bab2be22"
+    },
+    {
+      "artifact": "copperstart-copperos-mathtrans-v5",
+      "fields": 16000,
+      "verdict": "Missing diskfont.library version 34; no editor",
+      "finalPc": "0020420E",
+      "rgbSha256": "7ece8276ba75962dddb30601058696b52f4480897f7d1377547232fd0297a8f8",
+      "logSha256": "01997bd33149f9fda7d00fa6e74f343a226894a000b95fedd430a5a0a30d017b"
+    },
+    {
+      "artifact": "kick13-mathtrans-diskfont-v6",
+      "fields": 16000,
+      "verdict": "Missing icon.library version 33; no editor",
+      "finalPc": "00FD4256",
+      "rgbSha256": "cea23084f763894d0a2ba4567bcec9c0dfd17f7af23eda4f20f367cc4586f05f",
+      "logSha256": "fb9d30786e5bbbd3c13a4cf67e8917e97cff3f9914e9f196a352cd1f4d4e265d"
+    },
+    {
+      "artifact": "copperstart-mathtrans-diskfont-v6",
+      "fields": 24000,
+      "verdict": "Corrupted display; no editor",
+      "finalPc": "231500DF",
+      "rgbSha256": "ef074766a6e1dbd092b5947f98483dbb7ac77fb8bf66627794d588c0ee8d3c20",
+      "logSha256": "d8cb192d9c62b08306f754170d36be0d4dc2b3d2671addda903aedf0cfa5e18a"
+    },
+    {
+      "artifact": "kick13-workbench-v8",
+      "fields": 20000,
+      "verdict": "Editor with Memory save mode requester; original Workbench mathtrans",
+      "finalPc": "00FC0F94",
+      "rgbSha256": "e0833f44a883012f4155c614dc299118375a8aeed5a13719225c2a9d14a987be",
+      "logSha256": "38679f7a23ea2cb80a9615c5bd78ba5cfdd10ab8cf3b21b6055f05f5d63b4040"
+    },
+    {
+      "artifact": "copperstart-workbench-v8",
+      "fields": 30000,
+      "verdict": "FAIL before PPaint: BCPL Assign startup",
+      "finalPc": "230A65D0",
+      "rgbSha256": "0333f2f034c1e655a82fa971104e6baa3ae7de64727c57efdc41ef278387abe2",
+      "logSha256": "f8c23f1e015d2ffd33e34aa88178dfc7819b4ff369c93a6d7a816c2cb2593128"
+    },
+    {
+      "artifact": "kick13-workbench-copperos-v10",
+      "fields": 8000,
+      "verdict": "Editor with Memory save mode requester; CopperOS mathtrans",
+      "finalPc": "00FC0F94",
+      "rgbSha256": "e0833f44a883012f4155c614dc299118375a8aeed5a13719225c2a9d14a987be",
+      "logSha256": "ecd1c4fdd1e91a249a292389249339a4340d6ef41ee18133aeea5c27f412d29c"
+    },
+    {
+      "artifact": "kick13-copperos-dismiss-v14",
+      "fields": 7000,
+      "verdict": "Native control PASS: requester dismissed by Return, unobstructed editor",
+      "finalPc": "00FC0F94",
+      "rgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da",
+      "logSha256": "0b2f55847d2f1df0e84d186d86134da618296d03ac67831656cbb9f5997aa89a"
+    },
+    {
+      "artifact": "kick13-workbench-direct-v11",
+      "fields": 12000,
+      "verdict": "Editor with requester; direct launch",
+      "finalPc": "00FC0F94",
+      "rgbSha256": "e0833f44a883012f4155c614dc299118375a8aeed5a13719225c2a9d14a987be",
+      "logSha256": "c4bef4c0fec43257fb9521953245628fc938c369408279d1f87c7a5acb22a43b"
+    },
+    {
+      "artifact": "copperstart-workbench-direct-v11",
+      "fields": 20000,
+      "verdict": "FAIL: guest fault before editor; direct launch",
+      "finalPc": "231500DF",
+      "rgbSha256": "07bfd16d7296cd071f0021fe1e2e42e7db5427e7689bea133e3f8de5ef60958d",
+      "logSha256": "8ad01342d267ce5f940a686ad52d07d74855f9f95dbe95de001e36b546e01f81"
+    }
+  ],
+  "traces": [
+    {
+      "artifact": "workbench-trace-v9",
+      "sha256": "c613500e4505dcf2fc8152824c2f7e1671a22ec58a564b6d7a05a66b36302094",
+      "reason": "LOW_OR_UNPEEKABLE_PC",
+      "field": 2181,
+      "cycle": 310055294,
+      "lastPc": "0x0",
+      "profile": "a500-ocs-3m-v1",
+      "mediaMode": "hdf-ffs"
+    },
+    {
+      "artifact": "native-copperos-trace-v12",
+      "sha256": "a8cedac4739f96cae912d8120594c0c26af8abbf9a90e6b53bddc18c8c6b54f5",
+      "reason": "END_FIELD",
+      "field": 5000,
+      "cycle": 710378018,
+      "lastPc": "0xfc0f90",
+      "profile": "a500-ocs-3m-v1",
+      "mediaMode": "hdf-ro"
+    },
+    {
+      "artifact": "direct-trace-v13",
+      "sha256": "ac0fe8ac5961fab8252775aee334f66706edbcbeb4ce99b7577fd8d5fb4ed6c2",
+      "reason": "LOW_OR_UNPEEKABLE_PC",
+      "field": 3124,
+      "cycle": 444042168,
+      "lastPc": "0x0",
+      "profile": "a500-ocs-3m-v1",
+      "mediaMode": "hdf-ffs"
+    }
+  ],
+  "input": [
+    {
+      "frame": 5000,
+      "keyCode": 324
+    },
+    {
+      "frame": 5004,
+      "keyCode": 452
+    }
+  ],
+  "firstFaultEvidence": {
+    "assign": "Field 2181 executes C/Assign bytes at file offset36, JSR A5 enters data; eventual PC0. Not PPaint.",
+    "direct": "Field3124 enters ExecLibraryVectorCore.SetFunction; A1 library parameter1, function offset-18; MOVE.W 16(A0),D0 at 0x00FEBD84 faults on odd address. Source of invalid parameter remains under investigation."
+  },
+  "validation": [
+    "Probe Release build: zero errors, zero warnings",
+    "OFS/FFS recipe v7: 405 identical logical files, every file read back",
+    "Workbench OFS/FFS v8: 580 identical logical files, every file read back",
+    "Original and CopperOS mathtrans native editor/requester RGB hashes equal",
+    "Final --direct-launch recipe v15: 580 files read back, direct startup recorded; logical file hashes equal v11"
+  ],
+  "limitations": [
+    "CopperOS source and builder were untracked when frozen; binary and compiler input hashes recorded, no release qualification",
+    "PPaint drawing, file I/O, menus and numerical accuracy unverified",
+    "CopperStart no editor pass, including direct-launch lane"
+  ],
+  "recipeDirectFfsSha256": "1867f194b1657e3943b32486216f7e1e4db1f20eec770fb0122ceca44806b9ab"
+}

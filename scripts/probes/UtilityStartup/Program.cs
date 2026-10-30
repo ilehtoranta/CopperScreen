@@ -4,14 +4,24 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using Copper68k;
+using CopperDisk;
 using CopperMod.Amiga.Lightweight;
 
 // External diagnostic only. Preserve the production scalar interrupt sampling
 // and hardware advancement. Low stacks/PCs and null-base vector calls are
 // diagnostic stopping conditions, not additional emulated hardware faults.
-if (args.Length is not (5 or 6)) throw new ArgumentException("ROM ADF output start-field end-field [a500-ocs-1m-v1|a500-ocs-2m-v1]");
-var profile = args.Length == 6 ? args[5] : "a500-ocs-1m-v1";
-var fastBytes = profile switch { "a500-ocs-1m-v1" => 0, "a500-ocs-2m-v1" => 1048576,
+if (args.Length is not (5 or 6 or 7)) throw new ArgumentException("ROM media output start-field end-field [a500-ocs-1m-v1|a500-ocs-2m-v1|a500-ocs-3m-v1] [adf|hdf-ro|hdf-ffs]");
+var profile = args.Length >= 6 ? args[5] : "a500-ocs-1m-v1";
+var mediaMode = args.Length == 7 ? args[6] : "adf";
+var hardfiles = mediaMode switch
+{
+    "adf" => Array.Empty<AmigaHardfileConfiguration>(),
+    "hdf-ro" => new[] { new AmigaHardfileConfiguration(0, args[1], true) },
+    "hdf-ffs" => new[] { new AmigaHardfileConfiguration(0, args[1], true,
+        mountMode: AmigaHardfileMountMode.Partition, partition: AmigaFfsPartition.ParseGeometry("DH0:1:32:0:1023")) },
+    _ => throw new ArgumentException("Unknown diagnostic media mode")
+};
+var fastBytes = profile switch { "a500-ocs-1m-v1" => 0, "a500-ocs-2m-v1" => 1048576, "a500-ocs-3m-v1" => 2097152,
     _ => throw new ArgumentException("Unknown diagnostic machine profile") };
 var output = Path.GetFullPath(args[2]);
 if (Directory.Exists(output)) throw new ArgumentException("Use a new output directory");
@@ -19,11 +29,13 @@ Directory.CreateDirectory(output);
 using var m = new LightweightA500Machine(new LightweightA500Configuration
 {
     ChipRamBytes=524288, SlowRamBytes=524288, FastRamBytes=fastBytes,
+    Hardfiles=hardfiles,
     CpuModel=M68kCpuModel.M68000, AgnusModel=LightweightAgnusModel.Mos8371,
     DeniseModel=LightweightDeniseModel.Mos8362
 });
 var rom = File.ReadAllBytes(args[0]);
-m.LoadKickstart(rom); m.MountAdf(0, File.ReadAllBytes(args[1])); m.SetDriveWriteProtected(0,true);
+m.LoadKickstart(rom);
+if (mediaMode == "adf") { m.MountAdf(0, File.ReadAllBytes(args[1])); m.SetDriveWriteProtected(0,true); }
 var start = int.Parse(args[3]); var end = int.Parse(args[4]);
 var watchText = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_WATCH_ADDRESS");
 uint? watchAddress = string.IsNullOrWhiteSpace(watchText) ? null : Convert.ToUInt32(watchText, 16);
@@ -180,7 +192,7 @@ while (m.CompletedFrames < end && !stop)
 var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => ring[(Math.Max(0,count-ring.Length)+i)%ring.Length]).ToArray();
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
-    profile, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, one protected DF0",
+    profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
     watchAddress, watchExpected, stopFailedDevice, stopIllegal,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
