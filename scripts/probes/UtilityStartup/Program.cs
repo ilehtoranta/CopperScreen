@@ -54,8 +54,9 @@ string Name(uint a)
     return Encoding.ASCII.GetString(bytes.ToArray());
 }
 var ring = new Entry[512]; long count = 0; bool stop = false; string reason = "END_FIELD";
-var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle)>();
-var calls=new List<object>(); uint intuitionBase=uint.MaxValue;
+var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request)>();
+var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue;
+var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 void ObserveCall()
 {
     var c=m.Cpu;
@@ -63,14 +64,18 @@ void ObserveCall()
     if(op!=0x4eae) return;
     var displacement=unchecked((short)ext);
     if(c.A[6]==Read(4) && displacement is -552 or -408)
-        pending.Add(("OpenLibrary",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],displacement==-408?0:c.D[0],c.Cycles));
+        pending.Add(("OpenLibrary",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],displacement==-408?0:c.D[0],c.Cycles,0));
     else if(c.A[6]==Read(4) && displacement == -498)
-        pending.Add(("OpenResource",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles));
+        pending.Add(("OpenResource",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0));
     else if(c.A[6]==Read(4) && displacement is -444 or -456 or -318)
         pending.Add((displacement == -444 ? "OpenDevice" : displacement == -456 ? "DoIO" : "Wait",
-            displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles));
+            displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,displacement == -318 ? 0 : c.A[1]));
     else if(displacement==-198 && c.A[6]==intuitionBase)
-        pending.Add(("OpenScreen","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles));
+        pending.Add(("OpenScreen","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0));
+    else if(c.A[6]==dosBase && displacement is -30 or -42 or -48)
+        pending.Add((displacement == -30 ? "DOS.Open" : displacement == -42 ? "DOS.Read" : "DOS.Write",
+            displacement == -30 ? Name(c.D[1]) : $"D1={c.D[1]:X8},D2={c.D[2]:X8},D3={c.D[3]:X8}",
+            c.ProgramCounter+4,c.A[7],c.A[6],c.D[2],c.Cycles,0));
     if(c.A[6]==0 && displacement<0)
     { Keep("NULL_BASE_VECTOR_CALL"); stop=true; reason="NULL_BASE_VECTOR_CALL"; }
 }
@@ -80,8 +85,12 @@ void ObserveReturn()
     for(var i=pending.Count-1;i>=0;i--)
     {
         var p=pending[i]; if(c.ProgramCounter!=p.Pc || c.A[7]!=p.Sp) continue;
-        calls.Add(new {p.Api,p.Library,version=p.Version,callPc=p.Pc-4,entryCycle=p.Cycle,returnCycle=c.Cycles,result=c.D[0],baseAddress=p.A6,frame=m.CompletedFrames});
+        calls.Add(new {p.Api,p.Library,version=p.Version,callPc=p.Pc-4,entryCycle=p.Cycle,returnCycle=c.Cycles,result=c.D[0],baseAddress=p.A6,frame=m.CompletedFrames,
+            ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31)});
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
+        if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
+        if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
+        { Keep("OPEN_DEVICE_FAILED"); stop=true; reason="OPEN_DEVICE_FAILED"; }
         pending.RemoveAt(i); break;
     }
 }
@@ -136,8 +145,8 @@ var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => r
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     configuration="PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow, one protected DF0", startField=start,endField=end,
-    watchAddress, watchExpected,
-    calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle}),entries },new JsonSerializerOptions { WriteIndented=true }));
+    watchAddress, watchExpected, stopFailedDevice,
+    calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());
 File.WriteAllBytes(Path.Combine(output,"slowram.bin"),slow);
 Console.WriteLine($"{reason} field={m.CompletedFrames} cycle={m.Cycle} PC={m.Cpu.ProgramCounter:X8} SP={m.Cpu.A[7]:X8}; {output}");

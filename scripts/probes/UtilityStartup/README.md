@@ -28,6 +28,12 @@ Exec OpenDevice, DoIO and Wait observations include calls still pending at the
 stop, allowing a later device/startup wait to be separated from a library fault.
 Execution does not establish application correctness merely by reaching END_FIELD.
 
+DOS Open/Read/Write observations include their returned D0; device observations
+retain the original IORequest address and its io_Error byte on return. Set
+`COPPERSTART_PROBE_STOP_FAILED_DEVICE=1` to stop immediately after an observed
+OpenDevice returns a nonzero D0, before the guest's error cleanup. The default
+continues tracing. This diagnostic switch does not change the device result.
+
 For a bounded first-write diagnosis, set `COPPERSTART_PROBE_WATCH_ADDRESS` and
 `COPPERSTART_PROBE_WATCH_BYTE` to hexadecimal values. At START_FIELD the byte
 must still have its expected value. The probe stops and retains its instruction

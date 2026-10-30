@@ -47,6 +47,33 @@
     "trace": "artifacts/utility-sequential-2026-10-30/ppmore/first-process-overwrite-v1"
   },
   "focusedBeforeTest": {"name": "NativeCliProgramNameTests", "native13Passed": 1, "copperStartFailed": 1, "skipped": 0, "copperStartNames": ["", ""], "argumentBytes": 7},
-  "unresolvedCoverage": ["Source-built CLI correction and focused after cases", "PPMore reader under CopperStart", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
+  "independentLibraryControl": {
+    "probeSha256": "b8f86b54069e689b67984b59b1e5858fb70636da8362ccf39318390f2d22eabd",
+    "diskSha256": "2a52a952112e525c9b7fcdd7c228c858be3f156fd98e156247d80f2a005d52fe",
+    "native13": {"fields": 9000, "done": true, "reqtoolsOpened": true, "reqtoolsVersion": 38, "powerpackerOpened": true, "powerpackerVersion": 36},
+    "copperStart": {"fields": 19000, "done": true, "reqtoolsOpened": false, "powerpackerOpened": false},
+    "windowPointerBeforeAndAfter": 0,
+    "requesterPolicy": "Temporarily set the Process pr_WindowPtr to -1 for optional preferences, then restore it. The initial native probe waits at an ENV: requester and is not counted as passing coverage.",
+    "scope": "Separate general disk-library gap; PPMore's first observed application failure is still the empty CLI command name"
+  },
+  "cliFixNativeBuilds": [
+    {"variant": "managed-SetProgramName", "result": "GRAPHICS_COMPOSITION_FAILED", "codeEnd": 499538, "graphicsStart": 499208},
+    {"variant": "native-DOS-vector-SetProgramName", "result": "GRAPHICS_COMPOSITION_FAILED", "codeEnd": 499478, "graphicsStart": 499208},
+    {"variant": "general-size-policy", "result": "ROM_SIZE_EXCEEDED", "linkedBytes": 525054, "maximumBytes": 524260},
+    {"variant": "existing-copy-provider-minimum-64", "result": "REJECTED_AFTER_NATIVE_REGRESSIONS", "romSha256": "4e71054a4b7850a839f94fe77df8ec873475e42f00d198ab576a3c2cd56c0d17", "bytes": 524288, "checksum": "FFFFFFFF", "focusedTestsPassed": 5, "focusedTestsSkipped": 0, "copyProviderTestsPassed": 38, "sysInfoFinalField": 32000, "sysInfoFinalPc": "2E887400", "sysInfoFinalSp": "D43BD8A8", "sysInfoOverlay": true, "scope": "Fits and passes focused tests but corrupts SysInfo replay; production optimization removed, firmware pin unchanged"}
+  ],
+  "existingGuestShellDiagnostic": {
+    "scope": "Separate diagnostic using the existing native guest Shell; not an adopted prerequisite or a qualified source closure",
+    "shellSha256": "e7539b2a806ff22545003da13e7a8a68d043546e4f38da133a4b056e7dbf9a4f",
+    "shellBytes": 373384,
+    "shellManifest": "../CopperStart/artifacts/ppmore-full-shell-diagnostic/native/shell/shell-manifest.json",
+    "libraryDiskSha256": "5a7c4002838d75713d64556a256a22e9261fe19bd05e9296bb5ace472cd86a35",
+    "readerDiskSha256": "938084b416ccf9c5dd45b85d09663e78381340ca2c72f9728b975ffcce8f4647",
+    "native13": {"fields": 12000, "reqtoolsVersion": 38, "powerpackerVersion": 36, "mainReader": true},
+    "copperStart": {"romSha256": "812e600ebcbcddc9fb31a1515a8045583dbd32ccf5378ebeb0543e24ef209f54", "fields": 60000, "reqtoolsVersion": 38, "powerpackerVersion": 36, "mainReader": false},
+    "firstObservedDeviceFailure": {"api": "OpenDevice", "name": "console.device", "unit": -1, "resultD0": "FFFFFFFF", "ioError": 0, "field": 28614, "cycle": 4066248004, "callPc": "00061320", "ioRequest": "00C7BD38", "trace": "artifacts/utility-sequential-2026-10-30/ppmore/first-device-failure-v1"},
+    "interpretation": "The existing guest Shell can load both disk libraries. PPMore still does not reach its reader; the next captured failure is the console library-unit open. Root cause remains under investigation."
+  },
+  "unresolvedCoverage": ["CLI correction needs a fitting ROM that passes native utility regressions", "Qualify the disk-library loader prerequisite", "Investigate the console.device library-unit open failure", "PPMore reader under CopperStart", "Reader inputs, packed files and requesters", "Later seven utilities and final collection sweep"],
   "firmwarePinChangedByThisWork": false
 }
