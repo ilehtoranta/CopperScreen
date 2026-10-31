@@ -1,4 +1,4 @@
-# Sequential utility verification — 2026-10-29
+# Sequential utility verification â€” 2026-10-29
 
 Work through the collected utilities individually. Verify the main screen
 (or basic invocation for a command-line utility), investigate and fix failures,
@@ -238,7 +238,7 @@ remain pending. The [receipt](UTILITY_SYSINFO_GUI_2026-10-29.json) and
 separate the passing component checks, native application controls and remaining
 failure. The firmware pin is unchanged.
 
-### Main screen verified — 2026-10-30
+### Main screen verified â€” 2026-10-30
 
 The display database, native task trap delivery and missing startup Copper/VBlank
 service are now composed into the disk-loaded GUI prerequisite. The controlled
@@ -262,7 +262,7 @@ SysInfo controls and benchmarks, the eight later utilities and the final
 collection sweep remain unverified. This work does not change the app firmware
 pin or qualify host performance.
 
-### PPMore window-console output — 2026-10-30
+### PPMore window-console output â€” 2026-10-30
 
 Producer commit `096407055061bbbf655ed93d3f6cd085c48fd991` implements native
 console unit 0 output. Its caller-owned IOStdReq regression passes under both
@@ -283,7 +283,7 @@ records exact inputs, profiles, component passes and application failure.
 PPMore remains the current utility; later utilities and the final sweep remain
 pending. The application firmware pin is unchanged.
 
-### PPMore reader retained with text measurement — 2026-10-30
+### PPMore reader retained with text measurement â€” 2026-10-30
 
 Producer commit `d89b64a841e76516a0f070eb16d1f645fa980ff2` implements IntuiTextLength
 and installs native graphics TextLength when that vector is missing. The
@@ -308,7 +308,7 @@ The public OpenFont adjacency defect is also recorded separately; the new
 IntuiTextLength uses its own attribute snapshot. Later utilities and the final
 collection sweep remain pending. No app firmware pin or performance result changes.
 
-### PPMore expanded-profile main screen verified — 2026-10-30
+### PPMore expanded-profile main screen verified â€” 2026-10-30
 
 Producer commit `d9bc581681cf4550a472bf4d6f59956e79870946` reserves the classic
 ten-pixel bottom sizing border requested by PPMore. The preceding provider
@@ -334,7 +334,7 @@ The [main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) records exact
 inputs, scoped passes and failures. Proceed to Personal Paint; the remaining
 utilities and final source sweep remain open. The app firmware pin is unchanged.
 
-### Personal Paint prerequisites and hardfile control — 2026-10-30
+### Personal Paint prerequisites and hardfile control â€” 2026-10-30
 
 The included manual requires at least 2 MiB RAM and Workbench libraries in
 addition to Kickstart. The 685,000-byte program plus guest prerequisites does
@@ -356,7 +356,7 @@ The [startup receipt](UTILITY_PPAINT_STARTUP_2026-10-30.json) records identities
 profiles, prerequisite failures and pending work. Personal Paint remains current;
 later utilities and the final sweep remain pending. No firmware pin changes.
 
-### Personal Paint storage setup and native FFP prerequisite — 2026-10-30
+### Personal Paint storage setup and native FFP prerequisite â€” 2026-10-30
 
 The archived source establishes why the initial CopperStart hardfile did not
 boot: NativeCopperHdfBoot accepts DOS1/FFS partitions, while that image was
@@ -379,7 +379,7 @@ screen. The [new receipt](UTILITY_PPAINT_LIBRARIES_2026-10-30.json) records exac
 profiles, file equality, FFP component passes and remaining coverage limits.
 Personal Paint remains current; later utilities and the final sweep remain open.
 
-### Personal Paint native editor control and CopperOS mathtrans — 2026-10-30
+### Personal Paint native editor control and CopperOS mathtrans â€” 2026-10-30
 
 A Workbench 1.3 ZIP is now available in the local TestImages directory. Its
 system libraries remove the earlier prerequisite blocker. The complete
@@ -413,7 +413,7 @@ correctness profile, preserving existing ADF invocations. Its Release build
 passes with zero warnings/errors. No production engine or ROM behavior changed.
 Personal Paint remains current; later utilities and the final sweep remain open.
 
-### Personal Paint diskfont loader correction — 2026-10-30
+### Personal Paint diskfont loader correction â€” 2026-10-30
 
 CopperStart main commit `373939a586dc816d13cd4a63fa474e00d99db16b` fixes the
 guest Shell disk-library loader's assumption that InitResident returns a base.
@@ -438,7 +438,7 @@ The [diskfont receipt](UTILITY_PPAINT_DISKFONT_2026-10-30.json) preserves all
 scoped passes, earlier fixture failures, new image identities and remaining
 application limits. Personal Paint remains current; no later utility has advanced.
 
-### Personal Paint next failure: missing VideoControl — 2026-10-30
+### Personal Paint next failure: missing VideoControl â€” 2026-10-30
 
 The late-startup trace catches the next fault at field 24,152: PPaint calls
 graphics.library VideoControl (LVO -708) with VTAG_VIEWPORTEXTRA_GET, and the
@@ -462,7 +462,7 @@ pass. The [VideoControl receipt](UTILITY_PPAINT_VIDEOCONTROL_2026-10-30.json)
 pins the trace, native cases, before-fix failure and coverage limits. The API
 correction, Personal Paint editor, later utilities and final sweep remain open.
 
-### Personal Paint classic VideoControl and timer corrections — 2026-10-30
+### Personal Paint classic VideoControl and timer corrections â€” 2026-10-30
 
 CopperStart main commit `72193edc0d28b8433a21503a313327829d79e550` supplies the
 characterized VideoControl controls through the guest GUI provider. The expanded
@@ -485,7 +485,7 @@ and the isolated Release solution build has zero errors and nine warnings.
 The matched OFS/FFS images contain 580 identical logical files. A fresh native
 1.3 replay reaches the unobstructed editor and matches the earlier RGB hash.
 CopperStart still has no visible editor after 40,000 fields. Its two Screen
-records contain a front 320×200 one-plane startup screen and a hidden 640×256
+records contain a front 320Ã—200 one-plane startup screen and a hidden 640Ã—256
 three-plane screen with only initialized background/title-border pixels.
 Hidden bitmap contents are not a visible main-screen pass. The new bounded
 trace shows that PPaint explicitly returns the startup screen to the front
@@ -501,7 +501,7 @@ preserves scoped results, image/module identities and application limits.
 Personal Paint remains current; later utilities and the final source sweep
 remain open. These are correctness runs, not throughput acceptance measurements.
 
-### Personal Paint screen bar-layer correction — 2026-10-31
+### Personal Paint screen bar-layer correction â€” 2026-10-31
 
 CopperStart main commit `331e0c924fab877641475b36da296c1a67016ebf` publishes
 the real title/status layer as Screen.BarLayer and gives it title-bar bounds.
@@ -531,7 +531,7 @@ native/replacement cases, prior fixture failures, module/media identities and
 the next fault. Personal Paint remains current. Later utilities and the final
 source sweep remain open; no throughput acceptance result is claimed.
 
-### Personal Paint mouse-queue correction — 2026-10-31
+### Personal Paint mouse-queue correction â€” 2026-10-31
 
 CopperStart main commit `b146ba4f24b42b0fcc93d9fbeb648058016e1fe0` implements
 SetMouseQueue and WA_MouseQueue initialization, and connects the limit to
@@ -722,3 +722,22 @@ image-display reference; the original Classic fault remains preserved.
 The [palette receipt](UTILITY_PPSHOW_PALETTE_2026-10-31.json) records source,
 ROM, dependency, build and runtime identities. PPShow remains current until
 Classic ROM integration and an inspected viewer replay are complete.
+
+
+### PPShow Classic palette fit, FindColor and next layer failure
+
+CopperStart main commits `ba520ff` and `a91a3dc` fit the compact palette and
+FindColor entries into the original Classic ROM reservation. Native controls
+also corrected the initialized RastPort extent and AskSoftStyle's line-fit
+condition. Ten focused tests pass without skips against native V40, generated
+code and the installed candidate. The candidate still uses frozen compiler
+output/dependencies; final current-source/toolchain qualification is pending.
+
+The corrected GUI loader is recorded in the [loader receipt](UTILITY_PPSHOW_LOADER_2026-10-31.json).
+ReadArgs succeeds. PPShow now opens its screen, then CreateUpfrontHookLayer
+returns zero for the window's (0,0)-(319,199) bounds and flags 66. The prior
+screen-bar layer succeeds. An 8,000-field preceding-candidate replay shows a
+gray display after cleanup, not the ILBM fixture. The bounded corrected-ROM
+trace stops at that failed layer call. The [FindColor receipt](UTILITY_PPSHOW_FINDCOLOR_2026-10-31.json)
+records identities, native controls and the current failure. PPShow remains
+current, with later utilities and the final source sweep pending.

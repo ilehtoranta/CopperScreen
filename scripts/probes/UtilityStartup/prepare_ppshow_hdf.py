@@ -49,6 +49,8 @@ def main():
                         help='Privately supplied Workbench 2.0+ ADF/ZIP providing Libs/iffparse.library')
     parser.add_argument('--native-env', action='store_true',
                         help='Native-ROM diagnostic: create ENV and run the retained Workbench Assign command')
+    parser.add_argument('--gui-loader', type=Path,
+                        help='Canonical CopperGui loader with a matching .json receipt for this base provider')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
@@ -108,6 +110,17 @@ def main():
             if path.startswith('PPShow/libs/'):
                 add('Libs/' + path.rsplit('/', 1)[1], content, 'bundled PPShow prerequisite: ' + entry.filename)
         add('fixtures/control.ilbm', control_ilbm(), 'original deterministic 320x200 three-plane color bars with white border')
+        gui_loader = None
+        if args.gui_loader:
+            gui_loader = json.loads(Path(str(args.gui_loader) + '.json').read_text(encoding='utf-8-sig'))
+            loader = args.gui_loader.read_bytes()
+            if (gui_loader['kind'] != 'canonical-CopperGui-native-loader'
+                    or gui_loader['sha256'].lower() != sha(loader)
+                    or gui_loader['bytes'] != len(loader)
+                    or gui_loader['classicEntry'] != base['provider']['classicEntry']
+                    or gui_loader['providerSha256'].lower() != base['provider']['sha256'].lower()):
+                raise ValueError('Canonical GUI loader/provider receipt mismatch')
+            add('C/CopperGui', loader, 'canonical native GUI loader receipt; missing-provider creation enabled')
         workbench = None
         if args.workbench:
             source = args.workbench.read_bytes()
@@ -147,6 +160,7 @@ def main():
                'sha256': sha(args.output.read_bytes()), 'startup': startup.decode(),
                'provider': base['provider'], 'shell': base['shell'], 'mathFfp': base['mathFfp'],
                'workbenchDependency': workbench,
+               'guiLoader': gui_loader,
                'changedPaths': changed, 'files': sorted(files.values(), key=lambda f: f['path']),
                'scope': 'Private preparation and complete byte readback only. PPShow requires OS 2.0+; native 1.3 is not a positive reference.'}
     Path(str(args.output) + '.json').write_text(json.dumps(receipt, indent=2) + '\n')

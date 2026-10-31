@@ -1,0 +1,67 @@
+{
+  "utility": "PPShow 4.0",
+  "status": "IN PROGRESS: FindColor corrected and pushed; CreateUpfrontHookLayer returns zero; main screen unverified",
+  "producerCommit": "a91a3dc29f4f1b7f5e8e650eda02746a08255858",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/a91a3dc29f4f1b7f5e8e650eda02746a08255858/Docs/NativeFindColor20261031.md",
+  "candidate": {
+    "path": "..\\CopperStart\\artifacts\\ppshow-classic-emitter-v52\\candidate.rom",
+    "sha256": "a88909e72878a3a04e26303647a3d58eaa6875a905f064cf0e1497cd873a7eda",
+    "bytes": 524288,
+    "graphicsBytes": 24996,
+    "supportedVectors": 74,
+    "footerHeadroomBytes": 72,
+    "provenance": "Original qualified Classic compiler output and frozen emitter dependencies plus source graphics fixes; not a current whole-source toolchain build"
+  },
+  "media": {
+    "path": "artifacts\\utility-sequential-2026-10-31\\ppshow\\ppshow-ffs-v18.hdf",
+    "sha256": "5924332c6e231a60cfff9523ea7bbce26991a6c7148405a0fad6b1f9d338c9f6",
+    "guiLoader": "693d7f5d54137e7516a4d7c4c6b978668bb53eba2bc121a387c4e52ff25d119c",
+    "guiPayload": "cb0c85b243e0408bafc032a95e11922c7150e8264c4903d67353419c0c1e82d1"
+  },
+  "controls": {
+    "log": "../CopperStart/artifacts/ppshow-graphics-v54.log",
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "Native V40 / generated / installed FindColor: 1440 searches each, all map types, sharing endpoint, negative limits, ties, full buffers and callee preservation",
+      "Native V40 / generated / installed AskSoftStyle: no font, seven styles, line-fit condition",
+      "Fixed-profile SetChipRev equivalence with retained body: 36 cases",
+      "Leaf results, open counts, callee preservation",
+      "Previously added palette and public constructor comparisons"
+    ],
+    "native13": "Constructor fixture setup failed before public API execution; unavailable coverage"
+  },
+  "currentFault": {
+    "trace": "artifacts\\utility-sequential-2026-10-31\\ppshow\\copperstart-layer-v53\\trace.json",
+    "reason": "CREATE_LAYER_FAILED",
+    "field": 3749,
+    "cycle": 532810738,
+    "lvo": -186,
+    "bounds": [
+      0,
+      0,
+      319,
+      199
+    ],
+    "flags": 66,
+    "result": 0,
+    "note": "OpenScreen succeeds; the following window layer fails. Prior screen-bar layer succeeds."
+  },
+  "priorCandidateReplay": {
+    "path": "artifacts\\utility-sequential-2026-10-31\\ppshow\\copperstart-findcolor-screen-v51",
+    "candidateVersion": "v48",
+    "fields": 8000,
+    "visual": "Gray display after PPShow screen closes; no fixture display. Not a passing main screen."
+  },
+  "validation": {
+    "productionBuild": "consumer-build-v55.log: Release solution succeeds, 0 warnings/errors",
+    "performance": "Correctness diagnostic only; no throughput acceptance claim"
+  },
+  "remaining": [
+    "Investigate failing window layer",
+    "Verify CopperStart fixture display",
+    "Commit and push completed fixes before utility eight",
+    "Finish remaining utilities and final current-source/current-toolchain sweep"
+  ]
+}

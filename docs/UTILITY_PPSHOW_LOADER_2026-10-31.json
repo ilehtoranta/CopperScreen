@@ -1,0 +1,237 @@
+{
+  "utility": "PPShow 4.0",
+  "status": "IN PROGRESS: GUI loader corrected and pushed; original Classic ROM palette fit and CopperStart viewer display pending",
+  "producerCommit": "465ce4910908c052c2b17743a7dafa70d270547f",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/465ce4910908c052c2b17743a7dafa70d270547f/Docs/NativeGuiLoader20261031.md",
+  "loader": {
+    "bytes": 232,
+    "sha256": "693d7f5d54137e7516a4d7c4c6b978668bb53eba2bc121a387c4e52ff25d119c",
+    "providerSha256": "cb0c85b243e0408bafc032a95e11922c7150e8264c4903d67353419c0c1e82d1",
+    "sourceMethod": "NativeClassicDesktopUpgradeTests.Installer",
+    "kind": "canonical-CopperGui-native-loader",
+    "scope": "Create a missing Intuition provider or upgrade the Classic owner; native version >=34 bypass remains",
+    "classicEntry": 314554,
+    "sourceSha256": "eac2097917e536365a59e91f915241608b34916e2e8018ace995bc42804b9dce"
+  },
+  "guiPayload": {
+    "sha256": "cb0c85b243e0408bafc032a95e11922c7150e8264c4903d67353419c0c1e82d1",
+    "allEightFrozenCompilerInputsMatch": true,
+    "inputHashes": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "7E02D1A1685C4D03594F35BE00CD0BBB072DAA1E5B3463D0AAD9C8D1B05BD3E6"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "361EBECE7909DC22DBF9A62CA05B8A46E1292B99C407DE33598C792D183D5562"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "preparedImages": [
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-ofs-v18.hdf",
+      "sha256": "f635f386e7d9fd9bcc66d5a631d843b39c27a79db59496627d52436f7c42334d",
+      "files": 593,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "allFilesByteReadbackVerified": true
+    },
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-ffs-v18.hdf",
+      "sha256": "5924332c6e231a60cfff9523ea7bbce26991a6c7148405a0fad6b1f9d338c9f6",
+      "files": 593,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "allFilesByteReadbackVerified": true
+    },
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-env-ofs-v20.hdf",
+      "sha256": "6f1a37108103fdad743496027c973682e18bcfb863b6c704f4e2cd8fa3f4e190",
+      "files": 593,
+      "startup": "C:Assign ENV: SYS:ENV\nC:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "allFilesByteReadbackVerified": true
+    }
+  ],
+  "controls": {
+    "classicUpgradeTimer": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/loader-classic-timer-v19.log",
+      "sha256": "be6c2ff4104eadd723f856814ae5f1c058c0f9b9056af07fef5a494157ad318d",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppmore-console-isolated\\ppshow-loader-frozen-v18\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Floppy.Native.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 2 m 45 s - CopperStart.Floppy.Native.Tests.dll (net10.0)"
+      ]
+    },
+    "missingProviderTimer": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/loader-missing-provider-timer-v28.log",
+      "sha256": "21fb56c7e6becfd62a3f71464a44574e1546b8e3150efc916942fb4bcf7597cb",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppmore-console-isolated\\ppshow-loader-frozen-v18\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Floppy.Native.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 2 m 12 s - CopperStart.Floppy.Native.Tests.dll (net10.0)"
+      ]
+    },
+    "inputNative13": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/input-native13-v27.log",
+      "sha256": "9fd09618cc919ce59001caa513dcb9f519dde66eeb351850ef520135fabe24c3",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppmore-console-isolated\\ppshow-loader-frozen-v18\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Floppy.Native.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 1 s - CopperStart.Floppy.Native.Tests.dll (net10.0)"
+      ]
+    },
+    "inputNative31": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/input-native31-v27.log",
+      "sha256": "5ec86cd18d518c80911f482d6860f60e970eea6d281358860409df7a106cb9a2",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppmore-console-isolated\\ppshow-loader-frozen-v18\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Floppy.Native.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 2 s - CopperStart.Floppy.Native.Tests.dll (net10.0)"
+      ]
+    },
+    "inputExistingClassic": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/input-classic-v27.log",
+      "sha256": "9fd09618cc919ce59001caa513dcb9f519dde66eeb351850ef520135fabe24c3",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppmore-console-isolated\\ppshow-loader-frozen-v18\\bin\\CopperStart.Floppy.Native.Tests\\release\\CopperStart.Floppy.Native.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 1 s - CopperStart.Floppy.Native.Tests.dll (net10.0)"
+      ]
+    },
+    "result": "Five controls pass, zero skips: queued timer/DateStamp on Classic and absent-provider profiles, caller-owned input handler on native 1.3, native 3.1 and existing Classic",
+    "harnessCorrection": "Earlier input-native*-v25 controls failed because the original fixture lacked a real reply port. Corrected control allocates signal port and IOStdReq, provides lengths, counts only the priority-100 injected raw key, removes the handler and frees resources. Old failures remain failures."
+  },
+  "native31": {
+    "replay": "kick31-env-v20",
+    "fields": 8000,
+    "result": "ILBM fixture display visually verified; native ENV assignment retained separately",
+    "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb"
+  },
+  "alternateProfileDiagnosis": {
+    "initialTrace": "copperstart-startup-v17",
+    "correction": "Startup did execute: C:CopperGui rejected the absent Intuition provider. Earlier CLI-only interpretation was incomplete.",
+    "afterLoaderTrace": "copperstart-readargs-v22",
+    "traceSha256": "e718e2479f113f3c72dfb8e232224b828e98c007d9c2b0bc41f0d9d9728ced01",
+    "romSha256": "FCC223A0517A5D4A76B1333EEEBDA5274576284F72D5293E006D8C6CE49308AF",
+    "diskSha256": "5924332C6E231A60CFFF9523EA7BBCE26991A6C7148405A0FAD6B1F9D338C9F6",
+    "ReadArgs": {
+      "result": 2685476,
+      "frame": 2359,
+      "scope": "Arguments parsed successfully; no failed-ReadArgs stop occurred"
+    },
+    "firstApplicationFailure": {
+      "Api": "OpenDevice",
+      "Library": "input.device",
+      "version": 0,
+      "callPc": 3041954,
+      "entryCycle": 385839156,
+      "returnCycle": 385846312,
+      "result": 4294967295,
+      "baseAddress": 2102336,
+      "frame": 2715,
+      "ioRequest": 2684768,
+      "ioError": 0,
+      "writePrefix": null,
+      "messagePrefix": null,
+      "intuitionFront": 0,
+      "intuitionActive": 0
+    },
+    "applicationResult": 20,
+    "result": "PPShow launches and opens its libraries, then fails input.device before opening a picture screen. This alternate core omits the device; the existing qualified Classic input control passes."
+  },
+  "inputCandidateRejected": {
+    "managedBuild": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/input-rom-managed-v24.log",
+      "sha256": "352c9459424a489fbd306bb4ff28e892742c3d41d7b92b74e11c8a44898a6e03",
+      "tail": [
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:01.26"
+      ]
+    },
+    "nativeCompile": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/input-rom-native-v24.log",
+      "sha256": "18c3fe79367fc8d9154249591f6da57374b1944dd2b28c3a09d354ec0749f479",
+      "tail": [
+        "Wrote framework compatibility report for 1 reachable members to 'C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-input-rom-v24\\candidate.compatibility.json'.",
+        "Wrote 524288 bytes for M68000 to 'C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-input-rom-v24\\candidate.rom' (entry $00FDE870)."
+      ]
+    },
+    "composition": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/input-rom-compose-v24.log",
+      "sha256": "01357e084e9f5426d1466ec7e31534086191f8dbc933c616423738e705f6e7b3",
+      "tail": [
+        "Unhandled exception. System.InvalidOperationException: Native graphics and compiled ROM ranges overlap or exceed the ROM: codeEnd=510652, graphics=[498688,523766), checksum=524268.",
+        "   at CopperStart.Graphics.NativeGraphicsRomImage.LinkInto(Byte[] rom, Int32 compiledCodeBytes, Boolean installClassicCommandEntry) in C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-palette-frozen-v13\\Graphics\\NativeGraphicsRomImage.cs:line 278",
+        "   at CopperStart.Graphics.NativeGraphicsLinker.Main(String[] args) in C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-palette-frozen-v13\\Graphics\\NativeGraphicsLinker.cs:line 54"
+      ]
+    },
+    "compiledCodeBytes": 510644,
+    "compiledCodeEnd": 510652,
+    "fixedGraphicsStart": 498688,
+    "graphicsEnd": 523766,
+    "checksumFooterStart": 524268,
+    "result": "FAILED ROM composition. Raw compiler output is not a usable linked image, has no installed-device pass and must not replace an app pin.",
+    "scope": "Current captured system sources and managed interfaces, frozen native compiler, tentative input changes; not a reproduction of the prior frozen core.",
+    "inputsManifestSha256": "3aaca511d35b5f7f9265165a805bf56f165f50c0d261f763cab95d96c0070701",
+    "tentativeSourcePatch": "../CopperStart/artifacts/ppshow-input-unqualified-v24.patch",
+    "tentativeSourcePatchSha256": "f3fe2d6051e38c5cdd697ae18a32e4897ae988746accc365dad5458cbba4e54d",
+    "sourceDisposition": "Preserved privately and removed from the commit worktree; no tentative input implementation or unrelated producer prerequisite was committed."
+  },
+  "diagnosticProbe": {
+    "build": {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/readargs-probe-build-v22.log",
+      "sha256": "c08aa576f84cc73e64bb76895614423287daa7ef732177003c6b8edb04db3866",
+      "tail": [
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:01.34"
+      ]
+    },
+    "change": "Records observed JSR d16(A6) DOS ReadArgs template, input registers, buffers and result. Optional failed-ReadArgs stop is diagnostic only; the failure-stop branch was not exercised by PPShow.",
+    "settings": {
+      "pcMin": 3035136,
+      "pcMax": 3080192,
+      "ringSize": 65536,
+      "stopFailedReadArgs": true
+    },
+    "executedInstructions": 9679117
+  },
+  "next": "Retain the qualified Classic lane, which already has input.device. Investigate compact graphics packing for the palette routine without removing supported API behavior, then replay PPShow. Later utilities and final current-source/toolchain sweep remain pending.",
+  "limitations": [
+    "No CopperStart PPShow main-screen pass",
+    "No newly qualified Classic ROM, app firmware pin or publication",
+    "Native Kickstart 1.3 remains unsupported by PPShow; its input control is separate coverage",
+    "Correctness diagnostics only; no throughput acceptance"
+  ],
+  "followUp": "UTILITY_PPSHOW_FINDCOLOR_2026-10-31.json: Classic graphics fit and FindColor corrected; window layer failure remains"
+}

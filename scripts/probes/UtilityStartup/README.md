@@ -189,4 +189,18 @@ creates an empty ENV directory and prepends `C:Assign ENV: SYS:ENV` using the
 retained system command. The original Workbench 1.3 Assign lane has a recorded
 CopperStart failure; do not silently apply this switch to the CopperStart pair.
 The [PPShow receipt](../../../docs/UTILITY_PPSHOW_2026-10-31.json) records the
-native display and unresolved CopperStart SetRGB32CM fault.
+native display and original CopperStart SetRGB32CM fault. Later findings are
+recorded in the [FindColor receipt](../../../docs/UTILITY_PPSHOW_FINDCOLOR_2026-10-31.json).
+
+`COPPERSTART_PROBE_STOP_FAILED_READARGS=1` stops an observed DOS.ReadArgs
+return of NULL. The trace includes the template, option-buffer arguments and
+return; observation covers JSR d16(A6). PPShow returns a nonzero argument object,
+so the failure-stop branch has not been exercised by this workload.
+
+`prepare_ppshow_hdf.py --gui-loader` accepts a canonical CopperGui loader with
+its adjacent JSON receipt. It verifies kind, length, SHA-256, Classic entry and
+GUI payload identity before replacing C/CopperGui. This supports the corrected
+missing-provider installation path while retaining the same compiled GUI HUNK.
+The [loader receipt](../../../docs/UTILITY_PPSHOW_LOADER_2026-10-31.json) records
+native display and both Classic/missing-provider timer controls. Alternate ROM
+input-device failure and failed ROM builds are diagnostic evidence only.

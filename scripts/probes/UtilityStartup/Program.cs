@@ -84,6 +84,7 @@ var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STO
 var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
 var stopSetFunction = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_SET_FUNCTION") == "1";
 var stopFailedLayer = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_LAYER") == "1";
+var stopFailedReadArgs = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_READARGS") == "1";
 void ObserveCall()
 {
     var c=m.Cpu;
@@ -141,6 +142,14 @@ void ObserveCall()
             entryCycle=c.Cycles,frame=m.CompletedFrames,address=c.A[0],front=Read(intuitionBase+60),active=Read(intuitionBase+52)});
         pending.Add((api,"intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
     }
+    else if(c.A[6]==dosBase && displacement == -798)
+    {
+        calls.Add(new {Api="DOS.ReadArgsInput",Library="dos.library",frame=m.CompletedFrames,
+            callPc=c.ProgramCounter,entryCycle=c.Cycles,template=Name(c.D[1]),
+            templateAddress=c.D[1],array=c.D[2],rdArgs=c.D[3],
+            addressRegisters=c.A.ToArray(),dataRegisters=c.D.ToArray()});
+        pending.Add(("DOS.ReadArgs",Name(c.D[1]),c.ProgramCounter+4,c.A[7],c.A[6],c.D[2],c.Cycles,0,null));
+    }
     else if(c.A[6]==dosBase && displacement is -30 or -42 or -48)
         pending.Add((displacement == -30 ? "DOS.Open" : displacement == -42 ? "DOS.Read" : "DOS.Write",
             displacement == -30 ? Name(c.D[1]) : $"D1={c.D[1]:X8},D2={c.D[2]:X8},D3={c.D[3]:X8}",
@@ -165,6 +174,8 @@ void ObserveReturn()
         if(p.Library=="layers.library" && p.Api=="OpenLibrary") layersBase=c.D[0];
         if(stopFailedLayer && p.Api=="CreateLayer" && c.D[0]==0)
         { Keep("CREATE_LAYER_FAILED"); stop=true; reason="CREATE_LAYER_FAILED"; }
+        if(stopFailedReadArgs && p.Api=="DOS.ReadArgs" && c.D[0]==0)
+        { Keep("READARGS_FAILED"); stop=true; reason="READARGS_FAILED"; }
         if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
         { Keep("OPEN_DEVICE_FAILED"); stop=true; reason="OPEN_DEVICE_FAILED"; }
         pending.RemoveAt(i); break;
@@ -237,7 +248,7 @@ File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
-    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, ringSize,
+    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, ringSize,
     recordPcMin, recordPcMax, executedInstructions,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());
