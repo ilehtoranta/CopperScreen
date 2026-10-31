@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "status": "IN PROGRESS",
+  "scope": "Repeat all12 main-screen/basic-invocation checks against a common current source/compiler graph; retained native references remain separately identified. No formal throughput result.",
+  "producerCommit": "b07353c",
+  "consumerCommit": "af77cd7",
+  "consumerBuild": {
+    "command": "dotnet build CopperScreen.slnx -c Release",
+    "log": "artifacts/utility-sequential-2026-10-31/final-consumer-build-v122.log",
+    "warnings": 0,
+    "errors": 0
+  },
+  "runnerInputs": [
+    {
+      "file": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "sha256": "42c0998089e8298f9ce68ab4b8b3a54123ce730df3d6d032a11f1a0fa0c8fbd6"
+    },
+    {
+      "file": "CopperMod.Amiga.Lightweight.dll",
+      "sha256": "97c6aca454cd92d6a45c1ef026f3bc38c595f270a5508273dd7bf40017b448ed"
+    },
+    {
+      "file": "Copper68k.dll",
+      "sha256": "ff3a73b2dd2a62329be1fcdad1eab8ca3a62d95f73bcfc03a4b87bd25955837a"
+    },
+    {
+      "file": "CopperDisk.dll",
+      "sha256": "baff24be65c0023adfda277fe9d7f6e45aff73695346c8334ad7f16aec0649ae"
+    }
+  ],
+  "romAttempts": [
+    {
+      "run": "utility-final-rom-v120",
+      "status": "CANCELED",
+      "reason": "Generic native test binary defaults to Full SFS; stopped after inspecting project profile. No qualification result."
+    },
+    {
+      "run": "utility-final-classic-rom-v121",
+      "status": "COMPOSITION_FAILED",
+      "profile": "Classic standalone A500,512KiB,no extension",
+      "buildCommand": "Build-DiskBootRom.ps1 -FileSystemProfile Classic",
+      "rawBytes": 524288,
+      "codeEnd": 500520,
+      "graphicsStart": 497664,
+      "graphicsEnd": 524102,
+      "overlapBytes": 2856,
+      "notes": "Fresh source compiles;3 existing unused-variable warnings in DOS. Graphics emitter builds with0 warnings/errors. Raw ROM is not a runnable combined candidate."
+    },
+    {
+      "run": "utility-final-size-candidate-v124",
+      "status": "INVALID_CONFIGURATION",
+      "reason": "Compiler rejects combining CodeSizeOptimizations and RomSizeOptimizations before compilation."
+    },
+    {
+      "run": "utility-final-size-candidate-v125",
+      "status": "COMPILATION_FAILED",
+      "scope": "Same frozen fresh-source v121 inputs; explicit CodeSizeOptions selection instead of mutually exclusive RomSizeOptions. Experimental until linked and natively replayed.",
+      "reason": "NativeClassicInput.DeliverMouse: Add cannot use address source A0 with data destination; experimental broad size policy did not emit a ROM."
+    },
+    {
+      "run": "utility-final-size-candidate-v126",
+      "status": "RUNNING",
+      "scope": "Same v121 frozen source inputs; CodeSizeOptions baseline passes plus shared arithmetic; excludes four extra SSA/size-selection passes from the failed candidate. No ROM qualification yet."
+    }
+  ],
+  "gui": {
+    "run": "utility-final-gui-v123",
+    "profile": "Classic source graph",
+    "status": "PAYLOAD_COMPILE_PASSED",
+    "executed": 1,
+    "passed": 1,
+    "runtimeQualification": false,
+    "compileDuration": "2m16s"
+  },
+  "utilities": [
+    {
+      "order": 1,
+      "utility": "ProTracker2.3F",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 2,
+      "utility": "X-Copy5.21",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 3,
+      "utility": "AmigaTestKit1.21",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 4,
+      "utility": "SysInfo4.4",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 5,
+      "utility": "PPMore1.8a",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 6,
+      "utility": "PersonalPaint7.1c",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 7,
+      "utility": "PPShow4.0",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 8,
+      "utility": "DiskMaster2V37",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 9,
+      "utility": "MuchMore4.6",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 10,
+      "utility": "MemCheck1.2",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 11,
+      "utility": "LhA2.15",
+      "finalReplayStatus": "PENDING"
+    },
+    {
+      "order": 12,
+      "utility": "DeluxePaintVdemo5.0b9",
+      "finalReplayStatus": "PENDING"
+    }
+  ],
+  "romInputAssemblies": [
+    {
+      "file": "CopperSFS.Core.dll",
+      "sha256": "a297255b880f361ec1c4990354b097ec16ddbd9aa3ab687e748b53a5b9632223"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "745ff7b7f749db56c3cbe91817e4e6cf480c53fddae048f52687bb894f2c4f70"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "e0851ab194b0db8c789a69fc7a341ef4f1632b4b21284a7256d4f06c7e1a1989"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "b8b13ac30038270142944688539fa3a70cf6699ae3ebaa58bb0268a945096c4a"
+    },
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "653db5ad57130b973d211ab2c5d0f0576cc78fc6618a3707b2f1364601617541"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "3fdb7fa1469e3e9c0db3bb96f8a4def59f522b802a4d79e8cbb6790a49f0a4e8"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "56f0bf928365f5a167652ef5b0f2ae2b0f8fc5365fc276faf695b7fe1fe6ebe1"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
+    }
+  ]
+}

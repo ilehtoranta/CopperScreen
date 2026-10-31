@@ -985,3 +985,12 @@ and moved away at41000. The stroke crop is black before drawing, then contains
 qualifies the requested main screen and basic drawing, alongside the retained
 native Kickstart3.1 control. Demo-disabled Save/Print/Delete/Copy are not tested.
 The final fresh-source collection sweep remains outstanding.
+
+Final collection sweep, 2026-10-31: the production CopperScreen Release build
+passes with zero warnings or errors. The current Classic GUI payload also
+compiles successfully. A fresh standalone Classic A500 ROM compiles, but its
+current graphics composition fails by2856 bytes (codeEnd500520 versus graphics
+start497664). This is not a runnable combined image. A separate size-policy
+candidate is under investigation; no final utility replay is claimed yet.
+See the [final sweep receipt](UTILITY_FINAL_SWEEP_2026-10-31.json) for the
+current source identities, unsuccessful configurations and pending cases.
