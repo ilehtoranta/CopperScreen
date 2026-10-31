@@ -560,3 +560,30 @@ The [mouse-queue receipt](UTILITY_PPAINT_MOUSEQUEUE_2026-10-31.json) preserves
 the native/replacement checks, module/media identities and application limits.
 Personal Paint remains current. Later utilities and the final source sweep
 remain open; these runs are not throughput acceptance measurements.
+
+
+### Personal Paint BltTemplate qualification, 2026-10-31
+
+CopperStart main commit `0354f432a3218876a07bc6316c0ac2c52483e103` implements
+BltTemplate through the guest graphics extension. Source bit phase, row stride,
+partial bytes, drawing modes, pens, plane masks and layer storage are honored.
+Each of native Kickstart 1.3, native 3.1 and CopperStart passes 72 cases, with
+identical output for unlayered ports, scrolled smart-refresh layers and scrolled
+superbitmap layers. All cases compare complete storage including untouched
+rows, masked planes, clipped edges and off-viewport pixels. No tests are skipped.
+The timer, original 1 MiB Classic window lifecycle and console footer
+regressions pass. The native module passes freestanding checks; its seven
+frozen compiler inputs remain unchanged and all eight manifest hashes match.
+The isolated Release solution builds with zero errors and nine warnings.
+
+A fresh native 1.3 replay reaches the editor with the previous RGB hash.
+The CopperStart replay now draws the toolbar and palette at field 25,000, then
+fails before scheduled input. The first-fault trace identifies layered SetRast
+(-234) at field 25,449: ROM entry 0x00ffb5d4 branches to ILLEGAL 0x00ffbf42.
+The extension's existing signature recognizer rejects this entry's register-save
+prefix. This is the next investigation; a CopperStart editor pass remains
+unverified. Later utilities and the final source sweep remain pending.
+
+The [BltTemplate receipt](UTILITY_PPAINT_BLTTEMPLATE_2026-10-31.json) records
+the module and media identities, native/replacement comparisons and next fault.
+These are correctness diagnostics, not throughput acceptance measurements.
