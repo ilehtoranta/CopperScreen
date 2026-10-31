@@ -266,12 +266,77 @@
     "workerTask": "0x295B50",
     "callerTask": "0x231230",
     "source": "NativeDiskLibraries.Open copies only current-directory lock at request32; Worker runs LoadSeg without caller program-directory lock",
-    "next": "copperstart-library-home-v60:40000-field replay running with source-built Shell and complete unchanged29 demo files",
+    "next": "copperstart-library-home-v60 terminal40000 fields; cyan display,invalid PC0x220941D7 by30000; editor not reached. First-fault probe v62 running to distinguish initialization/caller failure.",
     "beforeRegression": "dpaint-library-home-before-v57:1 native test executed and failed at zero public OpenLibrary result,frame1435",
     "afterRegression": "dpaint-library-home-after-v58:2 executed,2 passed (direct PROGDIR file and worker library open); no skips",
     "producerCommit": "CopperStart 8e526bc pushed origin/main",
     "build": "dpaint-library-home-solution-v61:build succeeds,1 compiler CS8602 warning,0 errors",
     "hdfSha256": "72087f7365267b078859256957c6c35839d7d055e5e01f750ac9129be418a332",
     "adfSha256": "968f2ac7b4815688c9ba426c93b5744c18c9a7943d0c21f359be2227c44db290"
+  },
+  "latestFault": {
+    "runtime": "copperstart-library-home-v60",
+    "field": 40000,
+    "pc": "0x220941D7",
+    "sr": "0x2304",
+    "rgbSha256": "66dacb147562f49e0e1179c5523c69ee6b660264864f19e1a17b3f8f30e99240",
+    "inspection": "Solid cyan visible area,identical at30000 and40000; no utility pass",
+    "probe": "dpblit-first-fault-v62 terminal ILLEGAL_INSTRUCTION at field28661,cycle4072920730"
+  },
+  "writeMaskDependency": {
+    "trace": "dpblit-first-fault-v62",
+    "dpblitOpen": {
+      "result": 3717884,
+      "field": 26758
+    },
+    "firstFault": {
+      "field": 28661,
+      "cycle": 4072920730,
+      "graphicsBase": 2229344,
+      "vectorAddress": 2228360,
+      "lvo": -984,
+      "api": "SetWriteMask",
+      "arguments": {
+        "A0RastPort": 3692296,
+        "D0Mask": 16777215
+      },
+      "trapPc": 16752574
+    },
+    "source": "NativeDesktopGraphics has no SetWriteMask extension; compact ROM vector points at deliberate ILLEGAL stub",
+    "autodoc": "https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/graphics.html#SetWriteMask",
+    "contract": "V39 per-bit RastPort write mask,ULONG success result; unsupported devices return0. Planar implementation stores low mask byte.",
+    "candidate": "NativeDesktopGraphics slot39 installs -984 only when missing,stores Mask at RastPort24,returns1. NativeClassicDesktopUpgradeTests checks success,byte truncation and restored-mask rendering.",
+    "nativeRegression": "dpaint-write-mask-v63:1 native test executed,1 passed,10m1s; checks0xFFFFFFF9 truncation to0xF9,nonzero success,and all-plane drawing after restore",
+    "payloadSha256": "cea8fa791eb3e67e7565cc58c6f4dfe98551a67c426eb9ec793d14c1c1077767",
+    "payloadBytes": 367196,
+    "nextReplay": {
+      "run": "copperstart-write-mask-v65",
+      "fields": 40000,
+      "status": "terminal40000 fields; grey screen,no editor. Hidden boot console shows1.DPAINTV_DEMO prompt and CLI return code0; application exited instead of waiting. No main-screen pass.",
+      "hdfSha256": "23c15c6916a1d137e0c1e8e4e4fe9e002fa3adfe0976f5e0e5c8116837777fe0",
+      "adfSha256": "bab75e2410cda042828a1fb912fd758d17caab146e3e7b567c013ed26b4e778e",
+      "rgbSha256": "a5bb9ef4b080212b15dd97ce7f0d7faa3727caf659a953ce7671288b7cb92443"
+    },
+    "sourceBuild": "dpaint-write-mask-solution-v66:0 warnings,0 errors",
+    "producerCommit": "CopperStart 0abcd45 pushed origin/main",
+    "nextInvestigation": "startup-wait-v67 terminalEND_FIELD31000:custom font HUNK loaded,thenapplicationcleanup. gui-return-v68 running27700..29000 captures indirect public Intuition and diskfont/font vectors."
+  },
+  "startupExit": {
+    "trace": "startup-wait-v67",
+    "status": "END_FIELD31000",
+    "font": "PROGDIR:fonts/dpaint/8 LoadSeg succeeds at28564,result971513",
+    "shellPrompt": "1.DPAINTV_DEMO:>",
+    "cliAddress": "0x2323BC",
+    "cliReturnCode": 0,
+    "consoleBitmap": "privateframe040000 CHIP bitmap0xBA70,640x200; only Shell prompt rendered",
+    "scope": "Return code0 and no active GUI window do not establish utility success"
+  },
+  "guiReturnCapture": {
+    "run": "gui-return-v68",
+    "status": "END_FIELD29000",
+    "font": "OpenDiskFont(PROGDIR:fonts/dpaint.font,8) returns0x3B4C22 at28565; custom font load succeeds",
+    "window": "No public OpenWindow/OpenScreen vector entered in capture; normal font opens continue before cleanup",
+    "next": "gadtools-return-v69,28550..28700,stop on failed CreateGadget/CreateContext/GetVisualInfo; public NewObject calls also captured; running",
+    "diagnosticScope": "External instruction observer only; no production engine changes"
   }
 }

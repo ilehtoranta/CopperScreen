@@ -24,7 +24,7 @@ marking the collection complete.
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
 | 11 | Amiga LhA 2.15 | VERIFIED MINIMUM:5-member CRC test and CLI return; default4KiB command stack stays in bounds | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
-| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | IN PROGRESS | Native 3.1 editor/drawing verified; CopperStart passes DF0/FFP/Workbench prerequisites; bundled PROGDIR library fails |
+| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | IN PROGRESS | Native 3.1 editor/drawing verified; CopperStart loads dependencies/custom font, then exits before editor; dialog setup under investigation |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
 OCS 8371/8362, 512 KiB Chip and 512 KiB slow RAM, no Fast RAM, RTC or host
@@ -924,3 +924,13 @@ also carries and duplicates the caller's home lock for that worker, then restore
 its context. The new library-open regression fails before this change and both
 program-directory regressions pass afterward (2 executed, no skips). DPaint
 replay `copperstart-library-home-v60` is pending; no editor pass is inferred.
+
+The library-context fixes let DPaint open its bundled dpblit library. The next
+first-fault capture stops at graphics SetWriteMask (-984). CopperStart `0abcd45`
+adds the missing Classic planar vector. Its native upgrade regression passes,
+including a high-bit mask argument, byte result and drawing after restoring
+all planes; the producer solution builds with no warnings or errors. The next
+40000-field run avoids that fault but returns to the Shell before the editor.
+The hidden console bitmap confirms the prompt, rather than an application wait.
+A public-vector capture confirms the custom dpaint font opens successfully;
+dialog setup is the current investigation. Utility12 remains IN PROGRESS.
