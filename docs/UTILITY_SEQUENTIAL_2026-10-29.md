@@ -20,7 +20,7 @@ marking the collection complete.
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
 | 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
-| 8 | DiskMaster 2 2.5.30a (V37 build) | IN PROGRESS | Native 3.1 main verified; CopperStart frame-refresh fixed; panes visible but listings absent; [receipt](UTILITY_DISKMASTER_STARTUP_2026-10-31.json) |
+| 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
 | 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
@@ -799,3 +799,12 @@ entries or command labels. It remains unverified. The latest saved guest loop
 reads Window.GZZHeight (+114) as zero before subtracting 12 and dividing by the
 font height. Inner-dimension initialization is the next investigation; no later
 utility has started.
+
+Producer main `a0d6888` publishes GZZWidth/GZZHeight at open and successful
+resize for ordinary windows. The native reference and corrected provider pass
+all three framed/borderless/sizing controls; the old provider fails all three.
+DiskMaster now displays the SYS file listing, full commands and RAM contents.
+Frames 8000 and 10000 are identical. The PPShow fixture regression retains its
+qualified hash. The [main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json)
+records inputs and scope; file operations and final current-toolchain checks
+remain unverified. MuchMore 4.6 is next.
