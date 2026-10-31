@@ -588,7 +588,51 @@
     {
       "order": 7,
       "utility": "PPShow4.0",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "ILBM_VIEWER_MAIN_VERIFIED_COPPERSTART_AND_NATIVE31",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppshow-copperstart-v180",
+          "completedFields": 40000,
+          "imageAndBorderVisuallyInspected": true,
+          "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick31",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppshow-kick31-v180",
+          "completedFields": 8000,
+          "imageAndBorderVisuallyInspected": true,
+          "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb",
+          "unsupportedReported": false
+        }
+      ],
+      "comparison": {
+        "differenceBoundingBox": [
+          258,
+          44,
+          278,
+          60
+        ],
+        "differentPixels": 186,
+        "scope": "Fixture and white border agree; difference confined to top-left pointer."
+      },
+      "guiProvider": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+      "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; read-only HDF",
+      "limitations": "OS2+ utility; no native1.3 positive coverage. Pointer equivalence, other formats and viewer commands unqualified.",
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-ppshow-ffs-v179.hdf",
+          "sha256": "691bea616dc67f067ff72e80cf7cfbfe2d957d71ea9cab848bb7de2f6153a54d",
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-ppshow-ofs-v179.hdf",
+          "sha256": "4a60afd441fe931cdd54c24d001a8d15a84ed4e88cfd697293ea7f1f57123bd1",
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "startupDifference": "Native-only C:Assign ENV: SYS:ENV retained from the earlier fixture."
     },
     {
       "order": 8,
@@ -650,7 +694,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Six refreshed utilities verified. Continue with PPShow using v174 GUI;6 final replay rows remain pending. Recheck earlier GUI-dependent rows against final payload during completion audit.",
+  "nextInvestigation": "Seven refreshed utilities verified. Continue with DiskMaster;5 final replay rows remain pending. Earlier GUI-dependent rows retain their exact payload identities for completion audit.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
