@@ -719,7 +719,41 @@
     {
       "order": 10,
       "utility": "MemCheck1.2",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "ADDRESSONLY_ZERO_ERRORS_AND_CLI_VERIFIED_BOTH_ROMS",
+      "invocation": "SYS:memcheck/MemCheck ADDRESSONLY",
+      "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; read-only HDF",
+      "guiProvider": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-memcheck-copperstart-v186",
+          "completedFields": 12000,
+          "addressTestFinishedZeroErrorsAndPromptVisuallyInspected": true,
+          "rgbSha256": "c56144a077b83e4f8c1d1578f4e13109b185bd23a2b70d637dca40ed8c1e31af",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick31",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-memcheck-kick31-v186",
+          "completedFields": 8000,
+          "addressTestFinishedZeroErrorsAndPromptVisuallyInspected": true,
+          "rgbSha256": "cda3df2dbb2f1b5fb18e5b22580e8764fd64d598db641318aafacdce3f8a05ca",
+          "unsupportedReported": false
+        }
+      ],
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-memcheck-ffs-v185.hdf",
+          "sha256": "2c994c5289509d8e5f6f2f8f9807b655971888710056617934244e4bd601f7f4",
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-memcheck-ofs-v185.hdf",
+          "sha256": "ac2bfefa116e3e96c7311150f708ca88dde61533e631b0f1c850f4984a580bd6",
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "limitations": "Selected ADDRESSONLY invocation only; full default memory-test phases are not qualified. Available block counts differ with OS/prerequisite allocations."
     },
     {
       "order": 11,
@@ -766,7 +800,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Nine refreshed utilities verified. Continue with MemCheck;3 final replay rows remain pending, then completion audit and earlier GUI-dependent rechecks.",
+  "nextInvestigation": "Ten refreshed utilities verified. Continue with LhA;2 final replay rows remain pending, then completion audit and earlier GUI-dependent rechecks.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
