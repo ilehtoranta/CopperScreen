@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "IN PROGRESS",
   "scope": "Repeat all12 main-screen/basic-invocation checks against a common current source/compiler graph; retained native references remain separately identified. No formal throughput result.",
-  "producerCommit": "eaeffe7",
+  "producerCommit": "0f07cc2",
   "consumerCommit": "af77cd7",
   "consumerBuild": {
     "command": "dotnet build CopperScreen.slnx -c Release",
@@ -124,13 +124,13 @@
     }
   ],
   "gui": {
-    "run": "utility-final-gui-v123",
-    "profile": "Classic source graph",
-    "status": "PAYLOAD_COMPILE_PASSED",
-    "executed": 1,
-    "passed": 1,
-    "runtimeQualification": "SysInfo main screen on refreshed Classic ROM; payload also byte-identical to retained qualified DPaint v116.",
-    "compileDuration": "2m16s"
+    "run": "utility-appicon-gui-v174",
+    "status": "COMPILED_AND_PPAINT_REPLAY_VERIFIED",
+    "sha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+    "codeBytes": 353164,
+    "imageBytes": 369760,
+    "sourceCommit": "0f07cc2",
+    "runtimeQualification": "PPaint editor and requester dismissal on v140 Classic ROM; earlier GUI-dependent replay rows retain their own payload identities."
   },
   "utilities": [
     {
@@ -436,7 +436,7 @@
     {
       "order": 6,
       "utility": "PersonalPaint7.1c",
-      "finalReplayStatus": "REGRESSION_UNDER_REPAIR",
+      "finalReplayStatus": "MAIN_EDITOR_AND_REQUESTER_DISMISSAL_VERIFIED_BOTH_ROMS",
       "profile": "PAL OCS MC68000,512KiB Chip+512KiB slow+2048KiB Fast; read-only hardfile",
       "failedReplay": "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-v152",
       "nativePositive": "artifacts/utility-sequential-2026-10-31/final-ppaint-kick13-v152",
@@ -510,7 +510,80 @@
         "finalPc": "220AB816",
         "finalBplcon0": "0000",
         "nextTrace": "artifacts/utility-sequential-2026-10-31/ppaint-dismiss-fault-v171"
-      }
+      },
+      "repairCommits": [
+        "eaeffe7",
+        "0f07cc2"
+      ],
+      "dismissalFault": {
+        "directory": "artifacts/utility-sequential-2026-10-31/ppaint-dismiss-fault-v171",
+        "field": 35379,
+        "library": "workbench.library",
+        "vector": -60,
+        "api": "AddAppIconA",
+        "pc": "002EF398",
+        "cause": "Workbench library present but closed; API was rejected instead of returning documented NULL"
+      },
+      "olderRomDismissalControl": {
+        "directory": "artifacts/utility-sequential-2026-10-31/ppaint-oldrom-dismiss-control-v172",
+        "verdict": "Also fails after dismissal with current GUI, isolating the Workbench prerequisite regression from ROM core."
+      },
+      "appIconReference": {
+        "log": "../CopperStart/utility-appicon-default-reference-v177.log",
+        "receipt": "../CopperStart/artifacts/utility-appicon-default-reference-v177/appicon-closed-reference.json",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "fixture": "Native default project icon with nonzero render/dimensions, message port, WB closed; result NULL"
+      },
+      "appIconTests": {
+        "log": "../CopperStart/utility-appicon-after-v174.log",
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      },
+      "solution": {
+        "log": "../CopperStart/utility-appicon-solution-v178.log",
+        "warnings": 6,
+        "errors": 0
+      },
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-v176",
+          "completedFields": 42000,
+          "mainEditorVisuallyInspected": true,
+          "requesterDismissed": true,
+          "inputField": 35000,
+          "unsupportedReported": false,
+          "finalRgbSha256": "3a022dba408c8dfacd6f40bbaa151425140b15b3e0caa1d3cc0241249ef67057"
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppaint-kick13-v176",
+          "completedFields": 8000,
+          "mainEditorVisuallyInspected": true,
+          "requesterDismissed": true,
+          "inputField": 5000,
+          "unsupportedReported": false,
+          "finalRgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da"
+        }
+      ],
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-ppaint-ffs-v175.hdf",
+          "sha256": "32039a56331c72b6d6c85be9cb0469c8df1ffb58232e16565d89957ebd9cc4ac",
+          "files": 580,
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-ppaint-ofs-v175.hdf",
+          "sha256": "a6a07fb59a5a2f1663d039cf758c746af61440af5b53b82bdf742554698065eb",
+          "files": 580,
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "limitations": "Main editor and requester dismissal only; drawing/menu commands, native pixel parity and running-desktop AppIcons are not qualified."
     },
     {
       "order": 7,
@@ -577,7 +650,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Keep PPaint current. Inspect requester-dismissal trace v171 after the committed pixel upgrade; repair and qualify the remaining failure before proceeding to PPShow.",
+  "nextInvestigation": "Six refreshed utilities verified. Continue with PPShow using v174 GUI;6 final replay rows remain pending. Recheck earlier GUI-dependent rows against final payload during completion audit.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",

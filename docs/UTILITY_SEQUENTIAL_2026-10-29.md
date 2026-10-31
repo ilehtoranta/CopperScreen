@@ -1045,3 +1045,20 @@ through34000 fields, with both vectors pointing into the guest module. Return at
 35000 exposes a further failure, so PPaint remains current and unqualified in
 this final sweep. Requester-dismissal trace v171 is pending. Later utilities
 have not been started.
+
+PPaint final refresh is now verified. The second failure after Return was
+workbench.library/AddAppIconA: the newly published prerequisite library rejected
+the call while Workbench was closed. A native Kickstart3.1 control with a valid
+default icon and message port returns NULL in that state. CopperStart `0f07cc2`
+implements that closed-desktop result while retaining the existing unsupported
+running-desktop path. Four selected checks pass with no skips; the strengthened
+native default-icon control also passes. The Release solution builds with6
+warnings and0 errors.
+
+Final replay `final-ppaint-copperstart-v176` dismisses the requester at35000 and
+retains the full editor through42000 fields. Its RGB hash exactly matches the
+earlier qualified PPaint capture; native Kickstart1.3 reaches the editor as well.
+Drawing/menu commands and native pixel parity remain unqualified. Both the
+pixel-upgrade and closed-Workbench fixes are pushed before PPShow. Six final
+replay rows remain pending; the completion audit will recheck prior GUI-dependent
+rows against the final payload where needed.
