@@ -268,3 +268,21 @@ DOS public-vector entry/return observation covers indirect callers separately
 from the A6-relative call observer. It records the actual caller return PC,
 file metadata and before/after read prefixes/hashes (capped at256KiB and labeled
 with the hashed byte count). These observer reads do not advance emulated time.
+
+`COPPERSTART_PROBE_INPUT` accepts the runner's ordered JSON input script. The
+observer reuses `NativeInputScript` and applies entries at the same field
+boundaries, including the unobserved startup period. Its receipt records the
+script hash. This permits bounded captures of faults after a requester click.
+
+`prepare_frame_image_probe.py` emits a native public BOOPSI command and installs
+it on a verified private boot HDF. Sixteen cases cover the four frame types,
+recessed state and specified versus calculated geometry. Drawing captures use
+public Graphics calls and WaitBlit before copying the planar bitmap. The
+`--filled`, `--null-draw-info` and `--odd` variants retain distinct fixtures.
+`inspect_frame_image_probe.py --reference` compares public object geometry and
+captured pixels against a separately executed native ROM fixture. Local object
+addresses are reported but excluded from equality checks.
+
+`prepare_dpaint_media.py` keeps the complete original demo on its own floppy by
+default. `--demo-on-hdf` adds a separately labeled diagnostic copy; successful
+HDF execution does not qualify the original-floppy lane.

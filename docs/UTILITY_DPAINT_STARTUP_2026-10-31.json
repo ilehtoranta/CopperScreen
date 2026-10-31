@@ -1,6 +1,6 @@
 {
   "utility": "DeluxePaint V demo5.0b9 (1994-08-12)",
-  "status": "IN PROGRESS: native Kickstart3.1 reaches editor and draws a stroke. CopperStart DF0 filesystem mount omission identified; source fix and regression are under ROM-layout qualification.",
+  "status": "VERIFIED MINIMUM: native Kickstart3.1 and CopperStart reach the32-color editor. Native persistent drawing verified; CopperStart scripted stroke differs and remains under investigation. Final fresh-source collection sweep pending.",
   "archive": {
     "path": "media/utilities/originals/DPaintV.lha",
     "sha256": "9e8a31c13c9cb69046376968ef05a43c2e3cc298e14fb7698cf04f97b7cb4091",
@@ -388,5 +388,61 @@
     "useReplay": "copperstart-use-v96:45000 fields terminal; scripted Use at35100 causes corrupted execution by40000 (PC231C2319). Not a pass.",
     "next": "use-first-fault-v97: bounded observer with same input script; investigate earliest fault after Use",
     "debugLane": "prepare_dpaint_media --demo-on-hdf copies complete original demo to SYS:Utilities for separate diagnostics; no floppy qualification inferred"
+  },
+  "patternFillDependency": {
+    "trace": "use-first-fault-v98",
+    "field": 36064,
+    "cycle": 5124832986,
+    "trapPc": "0xFFBE66",
+    "publicApi": "graphics.library RectFill(-306)",
+    "graphicsBase": "0x220460",
+    "publicEntry": "0xFFD9EC",
+    "bareBody": "0xFFB5AC",
+    "rastPort": "0x385F80",
+    "areaPattern": "0x382642",
+    "rectangle": [
+      296,
+      11,
+      319,
+      30
+    ],
+    "cause": "Retained direct layer veneer bypasses desktop extension recognition; bare compact body traps on nonzero RastPort.AreaPtr. Existing native pattern renderer is therefore not installed.",
+    "beforeRegression": "dpaint-pattern-before-v99:1 native instruction test executed,1 failed; retained entry is not recognized",
+    "afterRegression": "dpaint-pattern-after-v100:3 executed,3 passed,no skips; retained trap recognized,capable and foreign providers preserved; pattern rendering covers both compiler optimization modes",
+    "candidate": "Recognize exact retained direct veneer, OwnBlitter/WaitBlit prologue and AreaPtr trap; install existing pattern renderer",
+    "next": "copperstart-pattern-use-v103:45000 fields terminal; editor/tool palette reached,16-color fallback requester",
+    "payloadCompile": "dpaint-pattern-provider-v101:IntuitionPayloadIsFreestanding,1 executed,1 passed,1m53s",
+    "sourceBuild": "dpaint-pattern-solution-v104:0 warnings,0 errors",
+    "providerSha256": "a993163ff1af2c591a4927af53dcf5acc5997e1fd612bbff699c81cd8d965297",
+    "hdfSha256": "e0eeacd4a655e816a8fc554e40325ece47d6f34b22f765a25ba8859f4551dabf",
+    "adfSha256": "d65e35bce9f73e838ae161af5725350cceee34dbbfdfa98ae56343eb19724a85",
+    "producerCommit": "CopperStart cf9f959 pushed origin/main",
+    "drawReplay": "copperstart-pattern-draw-v105:45000 fields; Proceed dismissed,editor remains responsive to pointer motion; no visible persistent stroke from first scripted draw,so drawing not yet qualified"
+  },
+  "screenDepthDependency": {
+    "before": "use-first-fault-v97 shows OpenScreenTagList SA_Depth5 returns0 then SA_Depth4 succeeds; DPaint reports insufficient memory although allocation was never attempted",
+    "source": "NativeIntuitionLibrary.OpenScreen rejects depth>4 for every resolution; native display database advertises normal LORES maxdepth5",
+    "candidate": "Admit normal LORES depth5 while preserving HIRES maxdepth4 and all other mode/geometry restrictions",
+    "nativeRegression": "dpaint-depth-instruction-v106:13 executed,13 passed,no skips;4 depth-admission outcomes plus9 existing screen allocation/failure/stack cases",
+    "next": "Investigate drawing input delivery; no persistent stroke pass inferred from reaching editor",
+    "producerCommit": "CopperStart 303b456 pushed origin/main",
+    "payloadCompile": "dpaint-depth-provider-v107:1 native payload test executed,1 passed,1m50s",
+    "sourceBuild": "dpaint-depth-solution-v110:0 warnings,0 errors",
+    "replay": {
+      "run": "copperstart-depth-draw-v109",
+      "fields": 45000,
+      "pc": "0020420E",
+      "bplcon0": "5200",
+      "unsupported": null,
+      "rgbSha256": "0201421b21a476018914721ded2be77d04bc8381257bbcb56ff7400a02d08f09",
+      "inspection": "Main editor and32-color palette; no memory requester. Scripted drawing produces no native-like persistent stroke.",
+      "inputScriptSha256": "869de09b7ca517efb87cd45075083bb853f21e49aec0c121a11dc5fec5c1ff80"
+    },
+    "inputs": {
+      "romSha256": "d307f189516bedf080777a4a44b018039a346ba25254b6afffddc819f572eec8",
+      "hdfSha256": "602713a342cc586ab775d306ea276dc37c27426f32f6046ca94ac39cd754ed95",
+      "adfSha256": "ffaf4ed40e0027f5d4fd50d7b85ff6d35187dfbfe646317c23165fb5a716b6e0",
+      "providerSha256": "ffbb7a4a31ec60cd484f3796e1bda7f62babf14d3196acfd4f3840ced6af2c79"
+    }
   }
 }

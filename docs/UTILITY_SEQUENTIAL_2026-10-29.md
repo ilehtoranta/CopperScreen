@@ -24,7 +24,7 @@ marking the collection complete.
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
 | 11 | Amiga LhA 2.15 | VERIFIED MINIMUM:5-member CRC test and CLI return; default4KiB command stack stays in bounds | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
-| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | IN PROGRESS | Native 3.1 editor/drawing verified; CopperStart loads dependencies/custom font, then exits before editor; dialog setup under investigation |
+| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | VERIFIED MINIMUM:32-color editor on native3.1/CopperStart; drawing differs on CopperStart and remains under investigation; final source sweep pending | [Startup receipt](UTILITY_DPAINT_STARTUP_2026-10-31.json) |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
 OCS 8371/8362, 512 KiB Chip and 512 KiB slow RAM, no Fast RAM, RTC or host
@@ -948,3 +948,24 @@ Original-floppy replay `copperstart-frameclass-v89` now reaches a populated
 Screen Format chooser (PAL STANDARD+, 320x256). Clicking Use in
 `copperstart-use-v96` causes corrupted execution before the editor. The next
 bounded trace follows that click. Deluxe Paint remains IN PROGRESS.
+
+The first post-Use trap is a patterned RectFill at field36064. CopperStart
+`cf9f959` recognizes the retained ROM's direct layer veneer and installs the
+existing native pattern renderer. Its recognition regression fails before the
+fix; all three pattern instruction tests pass afterward. The freshly compiled
+GUI and complete producer solution also pass their checks. The original-floppy
+replay reaches the editor and tool palette, then falls back to16 colors with a
+memory requester. Dismissing it works; a persistent drawing stroke is not yet
+verified. The next identified issue is Intuition's unconditional four-plane
+screen limit, despite its display database advertising32-color LORES modes.
+The corrected resolution-dependent admission passes13 native instruction cases.
+
+CopperStart `303b456` admits normal OCS low-resolution depth5 while retaining
+the depth4 high-resolution limit. The screen instruction suite passes all13
+cases, the fresh native GUI payload compiles, and the full producer solution
+builds with zero warnings or errors. Original-floppy replay
+`copperstart-depth-draw-v109` completes45000 fields at BPLCON0=$5200 and shows
+the full32-color editor without the memory requester. This establishes the
+requested main-screen minimum. CopperStart's scripted stroke still differs
+from the persistent line in native `kick31-draw-v15`; drawing is not certified.
+The final fresh-source sweep of the collection remains pending.
