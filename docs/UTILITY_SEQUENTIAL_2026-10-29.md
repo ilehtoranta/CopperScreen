@@ -11,20 +11,26 @@ been inspected. Missing prerequisites do not count as a successful utility run.
 After the fixes, repeat the main-screen checks against the final source before
 marking the collection complete.
 
-| Order | Utility | Latest runtime status | Evidence |
+Final sweep complete, 2026-10-31: all12 utilities meet the requested main-screen
+or basic-command minimum. The [final receipt](UTILITY_FINAL_SWEEP_2026-10-31.json)
+records24 current replays, exact inputs/arguments, final GUI rechecks and the
+completion audit. The detailed sections and per-utility links below retain the
+investigation history; they do not override that final result.
+
+| Order | Utility | Final verified minimum | Earlier detailed evidence |
 | --- | --- | --- | --- |
-| 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
-| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
-| 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
-| 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
-| 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
-| 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
-| 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
-| 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
-| 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
-| 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
-| 11 | Amiga LhA 2.15 | VERIFIED MINIMUM:5-member CRC test and CLI return; default4KiB command stack stays in bounds | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
-| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | VERIFIED MINIMUM:32-color editor and persistent drawing stroke on native3.1/CopperStart; final source sweep pending | [Startup receipt](UTILITY_DPAINT_STARTUP_2026-10-31.json) |
+| 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: Editor and entered-note pattern; native1.3/CopperStart | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
+| 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
+| 3 | Amiga Test Kit 1.21 | VERIFIED: Main menu and selected audio controls;8 pixel-matched checkpoints | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
+| 4 | SysInfo 4.4 | VERIFIED: Main screen; fonts/reported details differ; speed/report accuracy unqualified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
+| 5 | PPMore 1.8a | VERIFIED: Reader and footer;1MiB Fast RAM (2MiB total); font/spacing differences | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
+| 6 | Personal Paint 7.1c complimentary edition | VERIFIED: Main editor and requester dismissal;2MiB Fast RAM; editing/menu commands unqualified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
+| 7 | PPShow 4.0 | VERIFIED: ILBM fixture and border; native3.1/CopperStart; only pointer pixels differ | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
+| 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED: Three populated panes and About dismissal; native3.1/CopperStart; file operations unqualified | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
+| 9 | MuchMore 4.6 | VERIFIED: Text reader and Space scroll/pause; native3.1/CopperStart; font/scroll-distance differences | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
+| 10 | MemCheck 1.2 (37.13) | VERIFIED: ADDRESSONLY completes with0 errors and CLI prompt; full default phases unqualified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
+| 11 | Amiga LhA 2.15 | VERIFIED: Five-member archive CRC test succeeds and returns to CLI; extraction/creation unqualified | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
+| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | VERIFIED: 32-color demo editor and persistent drawing; disabled demo features remain unavailable | [Startup receipt](UTILITY_DPAINT_STARTUP_2026-10-31.json) |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
 OCS 8371/8362, 512 KiB Chip and 512 KiB slow RAM, no Fast RAM, RTC or host
@@ -1062,3 +1068,30 @@ Drawing/menu commands and native pixel parity remain unqualified. Both the
 pixel-upgrade and closed-Workbench fixes are pushed before PPShow. Six final
 replay rows remain pending; the completion audit will recheck prior GUI-dependent
 rows against the final payload where needed.
+
+Final completion audit: the tested standalone512KiB A500 ROM is
+`adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3`,
+with checksumFFFFFFFF and114 bytes before graphics. The final guest GUI payload
+is recorded as `utility-appicon-gui-v174`; every GUI-dependent row uses it.
+SysInfo and PPMore were repeated after the PPaint fixes. Both native reference
+ROM hashes, all current media/image hashes and the unchanged runner/engine
+inputs have been checked. Replays use explicit documented memory/prerequisite
+profiles and protected media. The stored arguments are historical: select a
+fresh output directory when repeating a run.
+
+CopperStart source fixes `226d94b`, `eaeffe7` and `0f07cc2` are on main. The
+producer Release solution builds with6 warnings and0 errors; the consumer
+production build has0 warnings and0 errors, and its runtime source is unchanged.
+The focused DOS suite has1346 passes and one optional skip. Three native write
+failures reproduce on unchanged source, and a sibling-path source test is
+unavailable in the detached layout; none is relabeled passing coverage.
+Selected GUI/native controls pass without skips. These results establish the
+requested startup/basic-operation minimum, not complete emulator or utility
+conformance. No ROM/media is committed, no firmware pin is updated, and no
+host-throughput acceptance result is claimed.
+
+The qualification is pinned to the recorded utility-source builds. Concurrent
+CopperStart commit `6e8fcec` added raster/desktop changes during the final audit;
+those later changes were not replayed in this pass. The utility fixes remain
+ancestors of main. A documentation-only follow-up was integrated as `3be5c64`
+without replacing that concurrent work.

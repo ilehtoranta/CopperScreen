@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "status": "12_REFRESHED_MINIMUMS_VERIFIED_AUDIT_PENDING",
-  "scope": "Repeat all12 main-screen/basic-invocation checks against a common current source/compiler graph; retained native references remain separately identified. No formal throughput result.",
+  "status": "COMPLETE_REQUESTED_MAIN_SCREEN_AND_BASIC_INVOCATION_SCOPE",
+  "scope": "Completed sequential startup/basic-invocation verification of all12 utilities against the recorded standalone A500 ROM and final utility GUI payload, with native1.3/native3.1 references and separately recorded guest prerequisites. Qualification is pinned to the tested source commits, not unrelated concurrent changes. No formal throughput or complete feature-conformance claim.",
   "producerCommit": "0f07cc2",
   "consumerCommit": "af77cd7",
   "consumerBuild": {
@@ -125,12 +125,46 @@
   ],
   "gui": {
     "run": "utility-appicon-gui-v174",
-    "status": "COMPILED_AND_PPAINT_REPLAY_VERIFIED",
+    "status": "COMPILED_AND_ALL9_GUI_DEPENDENT_UTILITIES_VERIFIED",
     "sha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
     "codeBytes": 353164,
     "imageBytes": 369760,
     "sourceCommit": "0f07cc2",
-    "runtimeQualification": "PPaint editor and requester dismissal on v140 Classic ROM; earlier GUI-dependent replay rows retain their own payload identities."
+    "runtimeQualification": "PPaint editor and requester dismissal on v140 Classic ROM; earlier GUI-dependent replay rows retain their own payload identities.",
+    "buildInputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "492EDAA88BC9285FF01F5D22BE2D394BCBE4F644DC7561ECC40312B8DA73DEF3"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "23A94F79D19671CC6288869ECB8A5A58764D5A162CC3CFE10899C5F399BC4455"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "09D5C4354678FEADFD2EB818DDE5CB095D3A6D658152C4BF645E6E706C178885"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "0F1D430974D8CFAED99BC56325F04D65B59FB32C8CB81D0C7889BAB57481B898"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "E0851AB194B0DB8C789A69FC7A341EF4F1632B4B21284A7256D4F06C7E1A1989"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "B8B13AC30038270142944688539FA3A70CF6699AE3EBAA58BB0268A945096C4A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "745FF7B7F749DB56C3CBE91817E4E6CF480C53FDDAE048F52687BB894F2C4F70"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "0215CCEBC0317E7B62C3C62DE3CA1D3B5AE9F3260637008FF1D97F803B02921D"
+      }
+    ]
   },
   "utilities": [
     {
@@ -146,7 +180,97 @@
       "nativePatternAddress": "00C329B4",
       "mainScreensVisuallyInspected": true,
       "unsupportedReported": false,
-      "mediaUnchanged": true
+      "mediaUnchanged": true,
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-protracker-copperstart-v142",
+          "completedFields": 26000,
+          "mainScreenVisuallyInspected": true,
+          "exitCode": 0,
+          "finalPc": "00C0420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-protracker-editor-v3.json",
+          "inputScriptSha256": "abfff3ac95aa815257d8ade151ed0e128ad7dc1c1db095155a05e31bcc5c4aea",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--disk",
+            "media/utilities/originals/PT23F.ADF",
+            "--frames",
+            "26000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-protracker-copperstart-v142",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-protracker-editor-v3.json"
+          ],
+          "finalRgbSha256": "5a04ee921ce86a16a2250aba4087b1960b12a4d504402fff9450c59f051be7b8"
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-protracker-kick13-v138",
+          "completedFields": 26000,
+          "mainScreenVisuallyInspected": true,
+          "exitCode": 0,
+          "finalPc": "00FC0F94",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-protracker-editor-v3.json",
+          "inputScriptSha256": "abfff3ac95aa815257d8ade151ed0e128ad7dc1c1db095155a05e31bcc5c4aea",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--disk",
+            "media/utilities/originals/PT23F.ADF",
+            "--frames",
+            "26000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-protracker-kick13-v138",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-protracker-editor-v3.json"
+          ],
+          "finalRgbSha256": "b753c58fb181e768592776aa3c4350b1628740a253e88dc5debeda195e13d947"
+        }
+      ],
+      "media": [
+        {
+          "path": "media/utilities/originals/PT23F.ADF",
+          "sha256": "38898d61f5b96971be4946761ac3101181d01e40c33512453d39eb76dca60a3a"
+        }
+      ]
     },
     {
       "order": 2,
@@ -161,7 +285,42 @@
           "mainScreenVisuallyInspected": true,
           "finalRgbSha256": "bcd7b1ecdbeeb588dcf674e8403bace6ffd540f9bf6644e68185aa3c5389845a",
           "unsupported": null,
-          "videoUnsupported": null
+          "videoUnsupported": null,
+          "completedFields": 12000,
+          "exitCode": 0,
+          "finalPc": "00C1E43E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json",
+          "inputScriptSha256": "87286b93715b7abc88fda11c6db1e73daee533cd3702bf902025fc5f3e368487",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--disk",
+            "media/utilities/ready/xcopy_v5.21_en_1991-11-17_c911/xcopy_v5.21_en_1991-11-17_c911.adf",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-xcopy-copperstart-v143",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json"
+          ]
         },
         {
           "side": "kick13",
@@ -169,11 +328,52 @@
           "mainScreenVisuallyInspected": true,
           "finalRgbSha256": "72d5533c1698efe49af8ce3716e4a8bf7d007f6dc660ff637f1eb224454e70e8",
           "unsupported": null,
-          "videoUnsupported": null
+          "videoUnsupported": null,
+          "completedFields": 12000,
+          "exitCode": 0,
+          "finalPc": "00C0C516",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json",
+          "inputScriptSha256": "87286b93715b7abc88fda11c6db1e73daee533cd3702bf902025fc5f3e368487",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--disk",
+            "media/utilities/ready/xcopy_v5.21_en_1991-11-17_c911/xcopy_v5.21_en_1991-11-17_c911.adf",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-xcopy-kick13-v143",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-xcopy-launch-v1.json"
+          ]
         }
       ],
       "mediaSha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde",
-      "limitations": "Copy/format operations not qualified."
+      "limitations": "Copy/format operations not qualified.",
+      "media": [
+        {
+          "path": "media/utilities/ready/xcopy_v5.21_en_1991-11-17_c911/xcopy_v5.21_en_1991-11-17_c911.adf",
+          "sha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde"
+        }
+      ]
     },
     {
       "order": 3,
@@ -362,16 +562,94 @@
         {
           "side": "copperstart",
           "directory": "artifacts/utility-sequential-2026-10-31/final-testkit-copperstart-v144",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "completedFields": 7200,
+          "exitCode": 0,
+          "finalPc": "000011B8",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-testkit-audio-v2.json",
+          "inputScriptSha256": "88687422b8e118f8709e67620bc283c6e6ece85672d78417930fbc9b3469d243",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--disk",
+            "media/utilities/ready/AmigaTestKit-1.21/AmigaTestKit.adf",
+            "--frames",
+            "7200",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-testkit-copperstart-v144",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "100",
+            "--input-script",
+            "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-testkit-audio-v2.json"
+          ],
+          "finalRgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490"
         },
         {
           "side": "kick13",
           "directory": "artifacts/utility-sequential-2026-10-31/final-testkit-kick13-v144",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "completedFields": 7200,
+          "exitCode": 0,
+          "finalPc": "000011B8",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "inputScript": "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-testkit-audio-v2.json",
+          "inputScriptSha256": "88687422b8e118f8709e67620bc283c6e6ece85672d78417930fbc9b3469d243",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--disk",
+            "media/utilities/ready/AmigaTestKit-1.21/AmigaTestKit.adf",
+            "--frames",
+            "7200",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-testkit-kick13-v144",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "100",
+            "--input-script",
+            "CopperMod.Amiga.Lightweight.Runner/Workloads/utilities-testkit-audio-v2.json"
+          ],
+          "finalRgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490"
         }
       ],
       "mediaSha256": "abe7426c93619a7bb61ce10e3e66a4747fcaf22acd1d1876310033faa700ad28",
-      "limitations": "Selected menu/audio controls only; not a complete hardware diagnostic qualification."
+      "limitations": "Selected menu/audio controls only; not a complete hardware diagnostic qualification.",
+      "media": [
+        {
+          "path": "media/utilities/ready/AmigaTestKit-1.21/AmigaTestKit.adf",
+          "sha256": "abe7426c93619a7bb61ce10e3e66a4747fcaf22acd1d1876310033faa700ad28"
+        }
+      ]
     },
     {
       "order": 4,
@@ -388,7 +666,37 @@
           "completedFields": 40000,
           "mainScreenVisuallyInspected": true,
           "unsupportedReported": false,
-          "finalRgbSha256": "5e296904570573b25b9d3e4cda5a7f318a628c2496fb28182750756775cd4691"
+          "finalRgbSha256": "5e296904570573b25b9d3e4cda5a7f318a628c2496fb28182750756775cd4691",
+          "exitCode": 0,
+          "finalPc": "00C0420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--disk",
+            "artifacts/utility-sequential-2026-10-31/final-sysinfo-gui-v191.adf",
+            "--frames",
+            "40000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-sysinfo-copperstart-v192",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ]
         },
         {
           "side": "kick13",
@@ -396,7 +704,37 @@
           "completedFields": 12000,
           "mainScreenVisuallyInspected": true,
           "unsupportedReported": false,
-          "finalRgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff"
+          "finalRgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff",
+          "exitCode": 0,
+          "finalPc": "00FC0F94",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--disk",
+            "artifacts/utility-sequential-2026-10-31/final-sysinfo-gui-v191.adf",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "0",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-sysinfo-kick13-v192",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ]
         }
       ],
       "limitations": "Main-screen startup only. Font and reported system details differ; speed/report accuracy and complete GUI interactions not qualified.",
@@ -425,21 +763,131 @@
       "order": 5,
       "utility": "PPMore1.8a",
       "finalReplayStatus": "MAIN_READER_AND_FOOTER_VERIFIED_BOTH_ROMS",
-      "controlledDisk": "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v147.adf",
-      "controlledDiskSha256": "938edf60c953ad0043dea9975c4a0c204f5cd845973d1e9493f378d5cb0a1a24",
+      "controlledDisk": "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v193.adf",
+      "controlledDiskSha256": "0ca163c9451fc18a17f9cba517b6692cb194bfe99c88c1edde708404054c9c62",
       "recipe": "scripts/probes/UtilityStartup/refresh_utility_gui.py",
-      "recipeBase": "artifacts/utility-sequential-2026-10-30/ppmore/footer-final-v16.adf",
-      "recipeBaseSha256": "83d99f017f6a18c5ea7c4e5d79d92a32512bdc4bc281fd6a8a6c0673b294376a",
+      "recipeBase": "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v147.adf",
+      "recipeBaseSha256": "938edf60c953ad0043dea9975c4a0c204f5cd845973d1e9493f378d5cb0a1a24",
       "profile": "PAL OCS MC68000,512KiB Chip+512KiB slow+1024KiB Fast; protected DF0; no host directories",
-      "guiProviderSha256": "a2c6b33eca4ed4e75d3e0d539d9e4b236255a554942892115d6fb73006384d54",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
       "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppmore-copperstart-v194",
+          "completedFields": 45000,
+          "readerAndFooterVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "fd3d9d8856240a0e2d036c08925dc776e88727808515909596df5909da0f42fd",
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--disk",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v193.adf",
+            "--frames",
+            "45000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "1024",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-copperstart-v194",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ]
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppmore-kick13-v194",
+          "completedFields": 12000,
+          "readerAndFooterVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03",
+          "exitCode": 0,
+          "finalPc": "00FC0F94",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--disk",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v193.adf",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "1024",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-kick13-v194",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ]
+        }
+      ],
+      "limitations": "Reader startup and navigation footer only. Font/line spacing differ from native; no complete interaction or print qualification.",
+      "nonGuiGuestFilesUnchanged": true,
+      "earlierRuns": [
         {
           "side": "copperstart",
           "directory": "artifacts/utility-sequential-2026-10-31/final-ppmore-copperstart-v148",
           "completedFields": 45000,
           "readerAndFooterVisuallyInspected": true,
           "unsupportedReported": false,
-          "finalRgbSha256": "fd3d9d8856240a0e2d036c08925dc776e88727808515909596df5909da0f42fd"
+          "finalRgbSha256": "fd3d9d8856240a0e2d036c08925dc776e88727808515909596df5909da0f42fd",
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--disk",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v147.adf",
+            "--frames",
+            "45000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "1024",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-copperstart-v148",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ]
         },
         {
           "side": "kick13",
@@ -447,11 +895,43 @@
           "completedFields": 12000,
           "readerAndFooterVisuallyInspected": true,
           "unsupportedReported": false,
-          "finalRgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03"
+          "finalRgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03",
+          "exitCode": 0,
+          "finalPc": "00FC0F94",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--disk",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v147.adf",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "1024",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppmore-kick13-v148",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ]
         }
       ],
-      "limitations": "Reader startup and navigation footer only. Font/line spacing differ from native; no complete interaction or print qualification.",
-      "nonGuiGuestFilesUnchanged": true
+      "earlierControlledDisk": "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v147.adf",
+      "finalGuiRegression": "v194 complete; final payload recheck",
+      "originalRecipeBase": "artifacts/utility-sequential-2026-10-30/ppmore/footer-final-v16.adf",
+      "originalRecipeBaseSha256": "83d99f017f6a18c5ea7c4e5d79d92a32512bdc4bc281fd6a8a6c0673b294376a"
     },
     {
       "order": 6,
@@ -576,7 +1056,40 @@
           "requesterDismissed": true,
           "inputField": 35000,
           "unsupportedReported": false,
-          "finalRgbSha256": "3a022dba408c8dfacd6f40bbaa151425140b15b3e0caa1d3cc0241249ef67057"
+          "finalRgbSha256": "3a022dba408c8dfacd6f40bbaa151425140b15b3e0caa1d3cc0241249ef67057",
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScript": "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-input-v152.json",
+          "inputScriptSha256": "2f0a3974c3a116545ad1f9cc81a56d036e503e60224513545988cd010c034be7",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-ppaint-ffs-v175.hdf",
+            "DH0:1:32:0:1023",
+            "--frames",
+            "42000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-v176",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-input-v152.json"
+          ]
         },
         {
           "side": "kick13",
@@ -586,7 +1099,39 @@
           "requesterDismissed": true,
           "inputField": 5000,
           "unsupportedReported": false,
-          "finalRgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da"
+          "finalRgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da",
+          "exitCode": 0,
+          "finalPc": "00FC0F94",
+          "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+          "inputScript": "artifacts/utility-sequential-2026-10-31/final-ppaint-kick13-input-v152.json",
+          "inputScriptSha256": "b4cd2917b60a6e8891c32634b6c334c41ee2b8e97eb57ce6901b156888e404f4",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/Kickstart_13.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-ppaint-ofs-v175.hdf",
+            "--frames",
+            "8000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppaint-kick13-v176",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/final-ppaint-kick13-input-v152.json"
+          ]
         }
       ],
       "media": [
@@ -603,7 +1148,8 @@
           "onlyGuiFilesChanged": true
         }
       ],
-      "limitations": "Main editor and requester dismissal only; drawing/menu commands, native pixel parity and running-desktop AppIcons are not qualified."
+      "limitations": "Main editor and requester dismissal only; drawing/menu commands, native pixel parity and running-desktop AppIcons are not qualified.",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     },
     {
       "order": 7,
@@ -616,7 +1162,37 @@
           "completedFields": 40000,
           "imageAndBorderVisuallyInspected": true,
           "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-ppshow-ffs-v179.hdf",
+            "DH0:1:32:0:1023",
+            "--frames",
+            "40000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppshow-copperstart-v180",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ],
+          "finalRgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
         },
         {
           "side": "kick31",
@@ -624,7 +1200,36 @@
           "completedFields": 8000,
           "imageAndBorderVisuallyInspected": true,
           "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00F81476",
+          "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/kickstart-3.1-a500.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-ppshow-ofs-v179.hdf",
+            "--frames",
+            "8000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-ppshow-kick31-v180",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ],
+          "finalRgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb"
         }
       ],
       "comparison": {
@@ -652,7 +1257,8 @@
           "onlyGuiFilesChanged": true
         }
       ],
-      "startupDifference": "Native-only C:Assign ENV: SYS:ENV retained from the earlier fixture."
+      "startupDifference": "Native-only C:Assign ENV: SYS:ENV retained from the earlier fixture.",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     },
     {
       "order": 8,
@@ -668,7 +1274,40 @@
           "aboutDismissalInputField": 16000,
           "threePopulatedPanesVisuallyInspected": true,
           "finalRgbSha256": "c46498a3c1a31e5b092213c8a34419bfd9b30da895d54eacf05f0dc142720fb2",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00FCBA86",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScript": "artifacts/utility-sequential-2026-10-31/final-diskmaster-copperstart-input-v182.json",
+          "inputScriptSha256": "dffa4d2499b9e6f3ba18c74b6cdc89a4b51fce534bb72d7dcf70445ce5a63f38",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-diskmaster-ffs-v181.hdf",
+            "DH0:1:32:0:1023",
+            "--frames",
+            "20000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-diskmaster-copperstart-v182",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/final-diskmaster-copperstart-input-v182.json"
+          ]
         },
         {
           "side": "kick31",
@@ -677,7 +1316,39 @@
           "aboutDismissalInputField": 6000,
           "threePopulatedPanesVisuallyInspected": true,
           "finalRgbSha256": "4022ec020429c05c1ad7270bdaa3ca935393b622c382663cf9218dd50439038f",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00F81476",
+          "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+          "inputScript": "artifacts/utility-sequential-2026-10-31/final-diskmaster-kick31-input-v182.json",
+          "inputScriptSha256": "a39bb403764361ecbabed0a28db76604623b0792efa630c125c9449315d6bfec",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/kickstart-3.1-a500.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-diskmaster-ofs-v181.hdf",
+            "--frames",
+            "10000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-diskmaster-kick31-v182",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/final-diskmaster-kick31-input-v182.json"
+          ]
         }
       ],
       "media": [
@@ -693,7 +1364,8 @@
         }
       ],
       "limitations": "OS V37+ utility; no native1.3 positive claim. Fonts, title and colors differ; file operations and pixel parity are not qualified.",
-      "prerequisites": "Complete package, guest GUI/FFP/Shell; retained private relocated GadTools for CopperStart. Native reference selects original resident libraries and retains ENV setup."
+      "prerequisites": "Complete package, guest GUI/FFP/Shell; retained private relocated GadTools for CopperStart. Native reference selects original resident libraries and retains ENV setup.",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     },
     {
       "order": 9,
@@ -709,7 +1381,41 @@
           "beforeAndAfterScrollVisuallyInspected": true,
           "beforeRgbSha256": "1fbd380c85eebde20c9ff68a917073e8a9086f5f48eb395aba2f3aa4e11def1f",
           "afterRgbSha256": "b9af4650004e2266c1ce92f20b0c9c00c74a3f20f9993d0b4ac24a0680f9e202",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScript": "artifacts/utility-sequential-2026-10-31/final-muchmore-input-v184.json",
+          "inputScriptSha256": "b42f914252d37f0520bc35bd74c3a904b240b899f574924628c0cc4f7429ff57",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-muchmore-ffs-v183.hdf",
+            "DH0:1:32:0:1023",
+            "--frames",
+            "16000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-muchmore-copperstart-v184",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/final-muchmore-input-v184.json"
+          ],
+          "finalRgbSha256": "b9af4650004e2266c1ce92f20b0c9c00c74a3f20f9993d0b4ac24a0680f9e202"
         },
         {
           "side": "kick31",
@@ -718,7 +1424,40 @@
           "beforeAndAfterScrollVisuallyInspected": true,
           "beforeRgbSha256": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
           "afterRgbSha256": "74c89055c073054db947c4e7654d7f1f1fa9af56d99adcf187a2e25a09237e51",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00F81476",
+          "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+          "inputScript": "artifacts/utility-sequential-2026-10-31/final-muchmore-input-v184.json",
+          "inputScriptSha256": "b42f914252d37f0520bc35bd74c3a904b240b899f574924628c0cc4f7429ff57",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/kickstart-3.1-a500.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-muchmore-ofs-v183.hdf",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-muchmore-kick31-v184",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/final-muchmore-input-v184.json"
+          ],
+          "finalRgbSha256": "74c89055c073054db947c4e7654d7f1f1fa9af56d99adcf187a2e25a09237e51"
         }
       ],
       "media": [
@@ -734,7 +1473,8 @@
         }
       ],
       "inputScript": "artifacts/utility-sequential-2026-10-31/final-muchmore-input-v184.json",
-      "limitations": "Fonts and scroll distance differ; no pixel parity or exact line-count/scroll-distance qualification."
+      "limitations": "Fonts and scroll distance differ; no pixel parity or exact line-count/scroll-distance qualification.",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     },
     {
       "order": 10,
@@ -750,7 +1490,37 @@
           "completedFields": 12000,
           "addressTestFinishedZeroErrorsAndPromptVisuallyInspected": true,
           "rgbSha256": "c56144a077b83e4f8c1d1578f4e13109b185bd23a2b70d637dca40ed8c1e31af",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-memcheck-ffs-v185.hdf",
+            "DH0:1:32:0:1023",
+            "--frames",
+            "12000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-memcheck-copperstart-v186",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ],
+          "finalRgbSha256": "c56144a077b83e4f8c1d1578f4e13109b185bd23a2b70d637dca40ed8c1e31af"
         },
         {
           "side": "kick31",
@@ -758,7 +1528,36 @@
           "completedFields": 8000,
           "addressTestFinishedZeroErrorsAndPromptVisuallyInspected": true,
           "rgbSha256": "cda3df2dbb2f1b5fb18e5b22580e8764fd64d598db641318aafacdce3f8a05ca",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00F81476",
+          "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/kickstart-3.1-a500.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-memcheck-ofs-v185.hdf",
+            "--frames",
+            "8000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-memcheck-kick31-v186",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ],
+          "finalRgbSha256": "cda3df2dbb2f1b5fb18e5b22580e8764fd64d598db641318aafacdce3f8a05ca"
         }
       ],
       "media": [
@@ -774,7 +1573,8 @@
         }
       ],
       "limitations": "Selected ADDRESSONLY invocation only; full default memory-test phases are not qualified. Available block counts differ with OS/prerequisite allocations.",
-      "requirementsSource": "media/utilities/inspection/MemCheck12-docs.json: Kickstart2.04+"
+      "requirementsSource": "media/utilities/inspection/MemCheck12-docs.json: Kickstart2.04+",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     },
     {
       "order": 11,
@@ -790,7 +1590,37 @@
           "completedFields": 14000,
           "fiveFilesOkOperationSuccessfulAndPromptVisuallyInspected": true,
           "rgbSha256": "fd6be908b56e5f203c7f270a7545c55a83d1cfe003561bb98fba783e9fed3ed8",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "0020420E",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-lha-ffs-v187.hdf",
+            "DH0:1:32:0:1023",
+            "--frames",
+            "14000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-lha-copperstart-v188",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ],
+          "finalRgbSha256": "fd6be908b56e5f203c7f270a7545c55a83d1cfe003561bb98fba783e9fed3ed8"
         },
         {
           "side": "kick31",
@@ -798,7 +1628,36 @@
           "completedFields": 10000,
           "fiveFilesOkOperationSuccessfulAndPromptVisuallyInspected": true,
           "rgbSha256": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00F81476",
+          "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/kickstart-3.1-a500.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-lha-ofs-v187.hdf",
+            "--frames",
+            "10000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-lha-kick31-v188",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000"
+          ],
+          "finalRgbSha256": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4"
         }
       ],
       "media": [
@@ -814,7 +1673,8 @@
         }
       ],
       "limitations": "CRC test only; extraction, creation and complete archiver behavior unqualified. Native1.3 is outside the documented Kickstart2.0+ requirement.",
-      "requirementsSource": "media/utilities/inspection/lha-docs.json"
+      "requirementsSource": "media/utilities/inspection/lha-docs.json",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     },
     {
       "order": 12,
@@ -830,7 +1690,44 @@
           "mainEditorAndDrawingVisuallyInspected": true,
           "inputScript": "artifacts/utility-sequential-2026-10-31/dpaint/copperstart-depth-draw-v109.json",
           "rgbSha256": "ceb5cf70ddf2a771d90efb233d415b496566328ea53abf1444e745eb7c81abd7",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00FECB24",
+          "romSha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+          "inputScriptSha256": "869de09b7ca517efb87cd45075083bb853f21e49aec0c121a11dc5fec5c1ff80",
+          "arguments": [
+            "--rom",
+            "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+            "--hdf-ffs",
+            "artifacts/utility-sequential-2026-10-31/final-dpaint-ffs-v189.hdf",
+            "DH0:1:32:0:1023",
+            "--adf",
+            "artifacts/utility-sequential-2026-10-31/dpaint/demo-report-mouse-ofs-v117.adf",
+            "--frames",
+            "45000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-dpaint-copperstart-v190",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/dpaint/copperstart-depth-draw-v109.json"
+          ],
+          "finalRgbSha256": "ceb5cf70ddf2a771d90efb233d415b496566328ea53abf1444e745eb7c81abd7"
         },
         {
           "side": "kick31",
@@ -839,7 +1736,43 @@
           "mainEditorAndDrawingVisuallyInspected": true,
           "inputScript": "artifacts/utility-sequential-2026-10-31/dpaint/native-draw-v15.json",
           "rgbSha256": "16e3acea5e93a7ac7f489c2b7afa3f1eafd4d12799b7c90f232f90919d7a7b66",
-          "unsupportedReported": false
+          "unsupportedReported": false,
+          "exitCode": 0,
+          "finalPc": "00F81476",
+          "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+          "inputScriptSha256": "eb1296acdcb302352426c3cc6be4570d6806d218c5533b23d340ae0be5052a30",
+          "arguments": [
+            "--rom",
+            "C:/Data/ROM/kickstart-3.1-a500.rom",
+            "--hdf-ro",
+            "artifacts/utility-sequential-2026-10-31/final-dpaint-ofs-v189.hdf",
+            "--adf",
+            "artifacts/utility-sequential-2026-10-31/dpaint/demo-report-mouse-ofs-v117.adf",
+            "--frames",
+            "20000",
+            "--cpu",
+            "68000",
+            "--chip-ram-kib",
+            "512",
+            "--slow-ram-kib",
+            "512",
+            "--fast-ram-kib",
+            "2048",
+            "--agnus",
+            "8371",
+            "--denise",
+            "8362",
+            "--drives",
+            "1",
+            "--boot-probe",
+            "artifacts/utility-sequential-2026-10-31/final-dpaint-kick31-v190",
+            "--boot-probe-extended",
+            "--boot-probe-interval",
+            "1000",
+            "--input-script",
+            "artifacts/utility-sequential-2026-10-31/dpaint/native-draw-v15.json"
+          ],
+          "finalRgbSha256": "16e3acea5e93a7ac7f489c2b7afa3f1eafd4d12799b7c90f232f90919d7a7b66"
         }
       ],
       "media": [
@@ -881,44 +1814,11 @@
         "releasedAtField": 40200,
         "pointerMovedAwayAtField": 41000
       },
-      "limitations": "Demo-disabled Save/Print/Delete/Copy are intentionally unavailable. Full drawing/menu coverage and whole-screen pixel parity are not qualified."
+      "limitations": "Demo-disabled Save/Print/Delete/Copy are intentionally unavailable. Full drawing/menu coverage and whole-screen pixel parity are not qualified.",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df"
     }
   ],
-  "romInputAssemblies": [
-    {
-      "file": "CopperSFS.Core.dll",
-      "sha256": "a297255b880f361ec1c4990354b097ec16ddbd9aa3ab687e748b53a5b9632223"
-    },
-    {
-      "file": "CopperSharp.Compiler.dll",
-      "sha256": "745ff7b7f749db56c3cbe91817e4e6cf480c53fddae048f52687bb894f2c4f70"
-    },
-    {
-      "file": "CopperSharp.Sdk.Amiga.dll",
-      "sha256": "e0851ab194b0db8c789a69fc7a341ef4f1632b4b21284a7256d4f06c7e1a1989"
-    },
-    {
-      "file": "CopperSharp.Sdk.Amiga.Support.dll",
-      "sha256": "b8b13ac30038270142944688539fa3a70cf6699ae3ebaa58bb0268a945096c4a"
-    },
-    {
-      "file": "CopperStart-System.dll",
-      "sha256": "653db5ad57130b973d211ab2c5d0f0576cc78fc6618a3707b2f1364601617541"
-    },
-    {
-      "file": "CopperStart.Devices.dll",
-      "sha256": "3fdb7fa1469e3e9c0db3bb96f8a4def59f522b802a4d79e8cbb6790a49f0a4e8"
-    },
-    {
-      "file": "CopperStart.Dos.dll",
-      "sha256": "56f0bf928365f5a167652ef5b0f2ae2b0f8fc5365fc276faf695b7fe1fe6ebe1"
-    },
-    {
-      "file": "CopperStart.Exec.dll",
-      "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
-    }
-  ],
-  "nextInvestigation": "All12 minimums verified; final-GUI SysInfo recheck passed. Complete final-GUI PPMore recheck, then completion audit.",
+  "nextInvestigation": null,
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
@@ -1033,8 +1933,220 @@
   },
   "producerSolutionBuild": {
     "command": "dotnet build CopperStart.slnx -c Release -m:1, explicit local dependency roots",
+    "log": "../CopperStart/utility-appicon-solution-v178.log",
+    "warnings": 6,
+    "errors": 0
+  },
+  "baselineRomInputAssemblies": [
+    {
+      "file": "CopperSFS.Core.dll",
+      "sha256": "a297255b880f361ec1c4990354b097ec16ddbd9aa3ab687e748b53a5b9632223"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "745ff7b7f749db56c3cbe91817e4e6cf480c53fddae048f52687bb894f2c4f70"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "e0851ab194b0db8c789a69fc7a341ef4f1632b4b21284a7256d4f06c7e1a1989"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "b8b13ac30038270142944688539fa3a70cf6699ae3ebaa58bb0268a945096c4a"
+    },
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "653db5ad57130b973d211ab2c5d0f0576cc78fc6618a3707b2f1364601617541"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "3fdb7fa1469e3e9c0db3bb96f8a4def59f522b802a4d79e8cbb6790a49f0a4e8"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "56f0bf928365f5a167652ef5b0f2ae2b0f8fc5365fc276faf695b7fe1fe6ebe1"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
+    }
+  ],
+  "romInputAssemblies": [
+    {
+      "file": "CopperStart-System.dll",
+      "sha256": "3EF11BE37EA80CF26A0216BE14CA08CD9911B1A84CEB9B0C19D100EAE67F820F"
+    },
+    {
+      "file": "CopperStart.Exec.dll",
+      "sha256": "B94CB7EF7885F85441ACCC2EF10326A0F73DFD8102654169E79648030F139F3C"
+    },
+    {
+      "file": "CopperStart.Devices.dll",
+      "sha256": "3FDB7FA1469E3E9C0DB3BB96F8A4DEF59F522B802A4D79E8CBB6790A49F0A4E8"
+    },
+    {
+      "file": "CopperStart.Dos.dll",
+      "sha256": "AE16BD9651B382D3DB3A15C16C222C42D7AF9376FD22DF019909A45D548A56CC"
+    },
+    {
+      "file": "CopperSFS.Core.dll",
+      "sha256": "A297255B880F361EC1C4990354B097EC16DDBD9AA3AB687E748B53A5B9632223"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.dll",
+      "sha256": "E0851AB194B0DB8C789A69FC7A341EF4F1632B4B21284A7256D4F06C7E1A1989"
+    },
+    {
+      "file": "CopperSharp.Sdk.Amiga.Support.dll",
+      "sha256": "B8B13AC30038270142944688539FA3A70CF6699AE3EBAA58BB0268A945096C4A"
+    },
+    {
+      "file": "CopperSharp.Compiler.dll",
+      "sha256": "745FF7B7F749DB56C3CBE91817E4E6CF480C53FDDAE048F52687BB894F2C4F70"
+    },
+    {
+      "file": "CopperStart.Graphics.dll",
+      "sha256": "FF5BA7CFFBD750964BA958D1BF9720F6E9AC7F5FD5A2D0831D664A86F01FF816"
+    }
+  ],
+  "referenceRoms": [
+    {
+      "side": "kick13",
+      "path": "C:/Data/ROM/Kickstart_13.rom",
+      "bytes": 262144,
+      "sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    {
+      "side": "kick31",
+      "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+      "bytes": 524288,
+      "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+    }
+  ],
+  "priorProducerSolutionBuild": {
+    "command": "dotnet build CopperStart.slnx -c Release -m:1, explicit local dependency roots",
     "log": "../CopperStart/utility-private-snapshots-solution-v149.log",
     "warnings": 10,
     "errors": 0
+  },
+  "completionAudit": {
+    "requirements": "All12 main screens/basic CLI invocations reached; failures investigated and fixes pushed before advancing; final source replay and GUI rechecks completed. Correctness scope only.",
+    "runtimeRows": [
+      {
+        "order": 1,
+        "utility": "ProTracker2.3F",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 2,
+        "utility": "X-Copy5.21",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 3,
+        "utility": "AmigaTestKit1.21",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 4,
+        "utility": "SysInfo4.4",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 5,
+        "utility": "PPMore1.8a",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 6,
+        "utility": "PersonalPaint7.1c",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 7,
+        "utility": "PPShow4.0",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 8,
+        "utility": "DiskMaster2V37",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 9,
+        "utility": "MuchMore4.6",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 10,
+        "utility": "MemCheck1.2",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 11,
+        "utility": "LhA2.15",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      },
+      {
+        "order": 12,
+        "utility": "DeluxePaintVdemo5.0b9",
+        "currentRuns": 2,
+        "result": "VERIFIED",
+        "captureImageAndMediaHashesChecked": true
+      }
+    ],
+    "currentReplayCount": 24,
+    "finalGuiRechecks": [
+      "SysInfo v192",
+      "PPMore v194"
+    ],
+    "runnerRomGuiAndMediaHashesVerified": true,
+    "compiledRomChecksum": "ffffffff",
+    "buildLogsInspected": true,
+    "sourceFixCommits": [
+      "226d94b",
+      "eaeffe7",
+      "0f07cc2"
+    ],
+    "remoteMainAncestryVerified": true,
+    "pendingUtilityRows": 0,
+    "replayNote": "Stored arguments describe original runs. Choose a fresh output directory when replaying.",
+    "coverageLimits": [
+      "Native1.3 where supported; documented OS2+ requirements use native3.1.",
+      "Explicit Fast RAM and guest prerequisite profiles recorded per utility.",
+      "Selected startup/basic operations only; rendering/reporting/scroll differences and untested operations remain documented.",
+      "One optional DOS test skipped; three native direct-write tests reproduce failures on unchanged source; source-location test unavailable in detached layout.",
+      "No host-throughput acceptance measurement, firmware-pin update or ROM/media redistribution.",
+      "Concurrent raster/desktop commit6e8fcec is not part of these recorded builds or replay claims."
+    ],
+    "inspectedAtUtc": "2026-10-31 15:59:13 UTC",
+    "concurrentMainAdvance": {
+      "commit": "6e8fcec",
+      "subject": "Implement compact raster drawing and qualify ROM replay controls",
+      "scope": "Concurrent native raster/desktop changes published during final audit; outside this utility-only qualification. All utility fix commits remain ancestors of main.",
+      "documentationIntegrationCommit": "3be5c64"
+    }
   }
 }
