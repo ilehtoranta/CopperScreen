@@ -237,3 +237,10 @@ accepts a compiled Shell and matching V2 client manifest. Every final file is
 still read back; installation is not a main-screen verdict. The
 [DiskMaster receipt](../../../docs/UTILITY_DISKMASTER_STARTUP_2026-10-31.json)
 records the current missing frame-refresh API.
+
+`prepare_muchmore_hdf.py` installs the complete pinned MuchMore 4.6 archive and
+an authored 120-numbered-line plain-text fixture on a verified base image.
+It supports the same explicit native ENV setup and qualified Shell replacement
+as the DiskMaster preparation. Complete file readback is preparation evidence;
+the [startup receipt](../../../docs/UTILITY_MUCHMORE_STARTUP_2026-10-31.json)
+records the native text display and CopperStart's rejected tall screen.

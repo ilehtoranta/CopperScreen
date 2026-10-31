@@ -1,0 +1,77 @@
+{
+  "utility": "MuchMore 4.6",
+  "status": "IN PROGRESS: native 3.1 text reader verified; CopperStart rejects requested 640x512 scrollable screen, main reader unverified",
+  "archiveSha256": "12062ff0e0f1d0cecbd36c94f8205c29e9111ec11d9d429f8b481b66e96f52b7",
+  "preparation": "Complete original archive retained, including bundled source; authored 120-numbered-line plain text fixture; complete file readback",
+  "profile": "PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB Fast; protected media",
+  "romSha256": "174a7ebabec8cefb28897bcf3e3eb53361270e11f45c96863601dbb39bb65c7b",
+  "producerHead": "a0d6888c1a54aba2289a37720461233564000b7b",
+  "media": {
+    "muchmore-ffs-v1.hdf": {
+      "sha256": "a4fef18d7cbf8c9f923645918878adad60e9ae53c63e3ae4851e5c15efb72163",
+      "files": 648,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:muchmore46/MuchMore SYS:fixtures/muchmore/control.txt\n",
+      "provider": "4BB09A4ACB2337D01B378F75DD0F579112E851DBAB754C601B9D17633736A66C",
+      "shell": "5294E58B9115545E4A64B6E92E06A6B666E153982C2B4777D74FBC381B896FAF"
+    },
+    "muchmore-env-ofs-v1.hdf": {
+      "sha256": "fc67fb1a95b0f7cb1ed17f4d9f157822021419a3d0314c4cc4b2442cf8cfc38c",
+      "files": 648,
+      "startup": "C:Assign ENV: SYS:ENV\nC:CopperGui\nC:CopperFfp\nSYS:muchmore46/MuchMore SYS:fixtures/muchmore/control.txt\n",
+      "provider": "0A506ED3B585120A8BB230AFD826A46FE715805D338F55ABD92914539DB290A3",
+      "shell": "E9295B56C3F0F9DA67AF8C50F6170D8868CF77EBDE4F506832007464E79D5F20"
+    }
+  },
+  "native31": {
+    "run": "kick31-v2",
+    "fields": 8000,
+    "inspection": "Text fixture header and numbered lines 001 through 021 visible",
+    "rgb": {
+      "frame-004000": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
+      "frame-006000": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
+      "frame-008000": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8"
+    },
+    "scope": "OS 2.04+ application; native 1.3 is not a positive reference"
+  },
+  "copperStart": {
+    "run": "copperstart-v2",
+    "fields": 10000,
+    "inspection": "Blank custom screen, reader absent",
+    "rgb": {
+      "frame-004000": "a5bb9ef4b080212b15dd97ce7f0d7faa3727caf659a953ce7671288b7cb92443",
+      "frame-006000": "a5bb9ef4b080212b15dd97ce7f0d7faa3727caf659a953ce7671288b7cb92443",
+      "frame-008000": "a5bb9ef4b080212b15dd97ce7f0d7faa3727caf659a953ce7671288b7cb92443",
+      "frame-010000": "a5bb9ef4b080212b15dd97ce7f0d7faa3727caf659a953ce7671288b7cb92443"
+    }
+  },
+  "diagnosis": {
+    "run": "copperstart-screen-v4",
+    "reason": "TARGET_PC",
+    "field": 2737,
+    "cycle": 389058190,
+    "pc": "002EA920",
+    "d0": 0,
+    "tagPointer": "002EE070",
+    "tags": {
+      "SA_Left": 0,
+      "SA_Top": 0,
+      "SA_Width": 640,
+      "SA_Height": 512,
+      "SA_Depth": 2,
+      "SA_DisplayID": "00008000",
+      "SA_Interleaved": 0,
+      "SA_Overscan": 1,
+      "SA_Quiet": "FFFFFFFF"
+    },
+    "source": "native/CopperStart.DesktopProviders/NativeIntuitionLibrary.cs: OpenScreen admission rejects height >283 and bottom past beam312",
+    "bundledSource": "muchmore46/Src/MuchMore.mod doubles height when DisplayInfo reports draggable mode and scroll mode is not3; default invocation retained",
+    "fullStartupTrace": "copperstart-startup-v3: no illegal instruction, OpenScreen returns zero twice at fields2737/2739, application emits error and does not display reader"
+  },
+  "remaining": [
+    "Implement and independently validate native-compatible tall screen and viewport behavior; do not substitute alternate scroll-mode flags for the default utility replay",
+    "Replay MuchMore against corrected provider and inspect text",
+    "Navigation/search/scrolling not qualified",
+    "Frozen inputs; final current-source/current-toolchain sweep required",
+    "Correctness diagnostics only, no throughput acceptance"
+  ]
+}

@@ -21,7 +21,7 @@ marking the collection complete.
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
 | 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
-| 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
+| 9 | MuchMore 4.6 | IN PROGRESS: native 3.1 text reader visible; CopperStart rejects 640x512 screen | [Startup receipt](UTILITY_MUCHMORE_STARTUP_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
 | 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
 | 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
@@ -808,3 +808,16 @@ Frames 8000 and 10000 are identical. The PPShow fixture regression retains its
 qualified hash. The [main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json)
 records inputs and scope; file operations and final current-toolchain checks
 remain unverified. MuchMore 4.6 is next.
+
+### MuchMore 4.6 default scrolling screen
+
+The complete pinned archive and deterministic text fixture are installed and
+read back. Native 3.1 displays the header and numbered text lines. CopperStart
+shows no reader. A target-PC capture after OpenScreenTagList at field 2737
+confirms a null result for a 640x512 two-plane hires screen at (0,0). The
+bundled source doubles its height for draggable display modes and default soft
+scrolling. The native provider currently rejects heights above 283 and requires
+the complete bitmap height to fit its physical display bounds. This failure is
+preserved in the [startup receipt](UTILITY_MUCHMORE_STARTUP_2026-10-31.json).
+Tall-screen/viewport behavior is next; no alternate scroll-mode workaround or
+MuchMore success is claimed. MemCheck, LhA and Deluxe Paint remain pending.
