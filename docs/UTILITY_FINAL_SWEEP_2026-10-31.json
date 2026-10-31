@@ -753,12 +753,48 @@
           "onlyGuiFilesChanged": true
         }
       ],
-      "limitations": "Selected ADDRESSONLY invocation only; full default memory-test phases are not qualified. Available block counts differ with OS/prerequisite allocations."
+      "limitations": "Selected ADDRESSONLY invocation only; full default memory-test phases are not qualified. Available block counts differ with OS/prerequisite allocations.",
+      "requirementsSource": "media/utilities/inspection/MemCheck12-docs.json: Kickstart2.04+"
     },
     {
       "order": 11,
       "utility": "LhA2.15",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "FIVE_ARCHIVE_CRC_CHECKS_AND_CLI_VERIFIED_BOTH_ROMS",
+      "invocation": "SYS:LhA/lha_68k t SYS:fixtures/lha/distribution.lha",
+      "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; read-only HDF",
+      "guiProvider": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-lha-copperstart-v188",
+          "completedFields": 14000,
+          "fiveFilesOkOperationSuccessfulAndPromptVisuallyInspected": true,
+          "rgbSha256": "fd6be908b56e5f203c7f270a7545c55a83d1cfe003561bb98fba783e9fed3ed8",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick31",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-lha-kick31-v188",
+          "completedFields": 10000,
+          "fiveFilesOkOperationSuccessfulAndPromptVisuallyInspected": true,
+          "rgbSha256": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4",
+          "unsupportedReported": false
+        }
+      ],
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-lha-ffs-v187.hdf",
+          "sha256": "65ca9196c3c8a594c26108db6ca2f913a2afe47f88e7637b5d6d03a630ede908",
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-lha-ofs-v187.hdf",
+          "sha256": "5678fc959e45c1756ca35269f46bb284ca10303e33eb91a0ddac25c538f5f73f",
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "limitations": "CRC test only; extraction, creation and complete archiver behavior unqualified. Native1.3 is outside the documented Kickstart2.0+ requirement.",
+      "requirementsSource": "media/utilities/inspection/lha-docs.json"
     },
     {
       "order": 12,
@@ -800,7 +836,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Ten refreshed utilities verified. Continue with LhA;2 final replay rows remain pending, then completion audit and earlier GUI-dependent rechecks.",
+  "nextInvestigation": "Eleven refreshed utilities verified. Continue with DeluxePaintVdemo;1 final replay row remains pending, then completion audit and earlier GUI-dependent rechecks.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
