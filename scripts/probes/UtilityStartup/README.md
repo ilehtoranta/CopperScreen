@@ -219,3 +219,21 @@ native controls and application replay; image preparation is not qualification.
 The [PPShow main-screen receipt](../../../docs/UTILITY_PPSHOW_MAIN_2026-10-31.json)
 records the completed minimum ILBM display and concealed Smart-hook correction.
 Earlier receipts retain the original failures; they are not relabeled passes.
+
+`prepare_diskmaster_hdf.py` installs the complete pinned DiskMaster V37 archive
+on a base HDF with a matching full-file manifest. It preserves the base system
+files, adds two original text fixtures, replaces only the launch sequence,
+and reads back every final file. `--native-env` labels the retained native ENV
+assignment explicitly. Preparation and optional request libraries do not prove
+that the main application or its file operations work.
+
+`extract_gadtools_guest_library.py --rom ROM --output FILE` creates a private
+relocatable GadTools 40.4 HUNK from the pinned supplied Kickstart 3.1 image.
+It validates the source/output hashes and internal relocations and retains the
+split metadata in a JSON sidecar. Requires amitools and its bundled splitdata.
+The module and ROM stay local. `prepare_diskmaster_hdf.py --gadtools FILE`
+checks that receipt before installing Libs/gadtools.library. `--shell-root DIR`
+accepts a compiled Shell and matching V2 client manifest. Every final file is
+still read back; installation is not a main-screen verdict. The
+[DiskMaster receipt](../../../docs/UTILITY_DISKMASTER_STARTUP_2026-10-31.json)
+records the current missing frame-refresh API.

@@ -10,7 +10,7 @@
     "bytes": 524288,
     "profile": "PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB Fast",
     "graphicsBytes": 24996,
-    "footerHeadroomBytes": 72,
+    "footerHeadroomBytes": 64,
     "provenance": "Original qualified Classic compiler output plus corrected source graphics emitter; frozen dependencies, not final current-source/toolchain ROM"
   },
   "provider": {
@@ -228,5 +228,6 @@
     "Frozen compiler output and dependency graph; final current-source/current-toolchain sweep remains mandatory",
     "Correctness replay, not throughput acceptance"
   ],
-  "nextUtility": "DiskMaster 2 2.5.30a V37"
+  "nextUtility": "DiskMaster 2 2.5.30a V37",
+  "headroomCorrection": "Earlier text reported 72 bytes in error; 524268 - (499208 + 24996) = 64. ROM bytes and recorded runtime outcomes are unchanged."
 }

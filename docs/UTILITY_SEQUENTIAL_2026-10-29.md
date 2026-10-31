@@ -6,12 +6,12 @@ and commit and push each fix before advancing to the next utility. Previous
 [collection and A/B evidence](UTILITY_TEST_CORPUS.md) retains its original inputs
 and scope.
 
-A row remains pending until its current-source runtime evidence has been
-inspected. Missing prerequisites do not count as a successful utility run.
+A row remains pending until its runtime evidence and input provenance have
+been inspected. Missing prerequisites do not count as a successful utility run.
 After the fixes, repeat the main-screen checks against the final source before
 marking the collection complete.
 
-| Order | Utility | Current-source status | Evidence |
+| Order | Utility | Latest runtime status | Evidence |
 | --- | --- | --- | --- |
 | 1 | ProTracker 2.3F (2026-05-09 build) | VERIFIED: main editor and selected inputs, both ROMs | [Receipt](UTILITY_PROTRACKER_2026-10-29.json) |
 | 2 | X-Copy 5.21 English (1991-11-17), Cyclone 9.11 disk | VERIFIED: DOSCOPY main screen, both ROMs; disk operations unverified | [Latest receipt](UTILITY_XCOPY_DISK_RESOURCE_2026-10-29.json) |
@@ -19,8 +19,8 @@ marking the collection complete.
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
-| 7 | PPShow 4.0 | IN PROGRESS: native 3.1 displays ILBM; SetRGB32CM component fixed; Classic ROM fit/startup and viewer replay pending | [Latest palette receipt](UTILITY_PPSHOW_PALETTE_2026-10-31.json) |
-| 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
+| 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
+| 8 | DiskMaster 2 2.5.30a (V37 build) | IN PROGRESS | Native 3.1 main verified; CopperStart next fault is RefreshWindowFrame; [receipt](UTILITY_DISKMASTER_STARTUP_2026-10-31.json) |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
 | 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
@@ -767,3 +767,26 @@ minimum viewer check, not its commands, other image formats or throughput.
 The ROM/compiler dependency graph remains frozen and final current-source /
 current-toolchain qualification is still pending. DiskMaster 2 is next; no
 later utility is marked complete by these PPShow results.
+
+
+### DiskMaster V37 startup and compact relocation correction
+
+Native Kickstart 3.1 displays DiskMaster's three-pane interface. Return at
+fields 6,000/6,004 dismisses About and exposes the SYS directory listing.
+CopperStart initially lacks GadTools. A private relocatable 40.4 module from
+the supplied native ROM exposes the rejected V37 short relocation tag 0x3F7.
+CopperStart main `fb2bd72` accepts that tag; all 32 loader core tests pass, and
+an authored native LoadSeg control passes on native 3.1 and the corrected ROM.
+The older CopperStart ROM fails that same control.
+
+Main commit `205d3e6` packs the unchanged command bridge into verified ROM tail
+padding and routes Shell disk-library loading through installed DOS vectors.
+The corrected ROM remains 512 KiB; PPShow retains its previous image hash.
+The current source solution builds with zero errors and seven warnings.
+Frozen input provenance remains distinct from final current-toolchain coverage.
+
+GadTools now opens at fields 2,456/2,459. The next actual call is missing
+intuition.library RefreshWindowFrame (LVO -456), which traps at field 2,798.
+The [startup receipt](UTILITY_DISKMASTER_STARTUP_2026-10-31.json) records media,
+ROM, native controls, module provenance, successful opens and the next fault.
+DiskMaster remains current; MuchMore has not started.

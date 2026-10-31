@@ -1,0 +1,233 @@
+{
+  "utility": "DiskMaster 2 2.5.30a V37 (2005-07-16)",
+  "status": "IN PROGRESS: native 3.1 main verified; CopperStart loads GadTools after loader fixes, then traps at RefreshWindowFrame; main screen unverified",
+  "archive": {
+    "file": "media/utilities/originals/DiskMasterV37.lha",
+    "sha256": "d1a440c52909bf3f040e204daf6b670c9663e61db17ab277f1bd3c11ef3e67bd",
+    "scope": "Complete original package retained; all final guest files read back and hashed"
+  },
+  "producerCommits": [
+    "fb2bd72cf350d945544d1cb5b5fd640f8e10763b",
+    "205d3e6bd5eb985735c6283a02d83223baeea854"
+  ],
+  "producerNotes": [
+    "https://github.com/ilehtoranta/CopperStart/blob/205d3e6bd5eb985735c6283a02d83223baeea854/Docs/NativeCompactLoadSeg20261031.md",
+    "https://github.com/ilehtoranta/CopperStart/blob/205d3e6bd5eb985735c6283a02d83223baeea854/Docs/NativeCommandPacking20261031.md",
+    "https://github.com/ilehtoranta/CopperStart/blob/205d3e6bd5eb985735c6283a02d83223baeea854/Docs/NativeDiskLibraryDosBoundary20261031.md"
+  ],
+  "profile": "PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB Fast; protected media",
+  "rom": {
+    "path": "..\\CopperStart\\artifacts\\diskmaster-classic-emitter-v14\\candidate.rom",
+    "sha256": "174a7ebabec8cefb28897bcf3e3eb53361270e11f45c96863601dbb39bb65c7b",
+    "bytes": 524288,
+    "compiledCoreBytes": 499170,
+    "graphicsBytes": 24996,
+    "graphicsResident": "00FF9E08",
+    "commandBridge": "00FFFFAC",
+    "bridgeEnd": "00FFFFE0",
+    "checksum": "00FFFFEC",
+    "finalPaddingBytes": 12,
+    "provenance": "Frozen original Classic System/Exec/Devices/SFS/SDK/compiler plus one changed DOS method; corrected source graphics emitter with tail command bridge. Final current-source/current-toolchain sweep pending"
+  },
+  "shell": {
+    "sha256": "5294E58B9115545E4A64B6E92E06A6B666E153982C2B4777D74FBC381B896FAF",
+    "peepholeOptimization": "FixedPoint",
+    "codeSizeOptimizations": true,
+    "dosClient": {
+      "originalDosSha256": "76DFB70CBF81832B2C0441EA56FA58A353101058279D4884AB0CB3C570F09F39",
+      "serviceVersion": 2,
+      "path": "client/CopperStart.Dos.dll"
+    },
+    "inputs": [
+      {
+        "file": "CopperStart.Shell.dll",
+        "sha256": "66AB945678AA08F060731F215086F8FB3F94B96695E979FF7AE9D9181501A876"
+      },
+      {
+        "file": "CopperOS.Shell.Dos.dll",
+        "sha256": "411B65A1CDD07EA01C0751020C413DA8D4BC303BAEF925564021D8F887228FF1"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "76DFB70CBF81832B2C0441EA56FA58A353101058279D4884AB0CB3C570F09F39"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "029BBC2EB243D05C0521B84EC7F99A58F20E0F395B99038D767F462D60C63BBA"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "DB2BF54D6AEB3E2E51676E019D30FB0EBD6F7133FF4E5AF46E1B1C55B64512B6"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "8005DBBB183B4382057518440F15F21F58CDF5A5FA0AA586AD38039D49FC4A02"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "D4EEC3AC834B33F018398CDB5C30D2EAFD5F1DA5D9C75EB81C7021429E647113"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "45744EC43BF662BB28E359D6AE04FED116921888EB2A4B2F990575C4C4A28DC1"
+      },
+      {
+        "file": "CopperStart.Icon.dll",
+        "sha256": "6EB9561013BCDAA4FD514B115F695C7F9EEB49BD1330DDF97A9711D5204BA327"
+      },
+      {
+        "file": "CopperSFS.Core.dll",
+        "sha256": "A56F05867540D28F69D06013230492C6D0496D73DB93C9EA661380CCB0ED4F7A"
+      }
+    ]
+  },
+  "shellCompilerHostNote": "Compilation host binds the unchanged client assembly as CopperStart.Dos to avoid provider/client identity collision. The legacy originalDosSha256 field consequently reports the client hash; the original qualified client derives from provider 9b2dd54fde8662c416f6a79e2476abf0d1d16b5a91aed6de32c02d8996bbb2c5. Native compiler input hashes are listed independently.",
+  "gadtoolsDependency": {
+    "kind": "private-kickstart-library-module",
+    "name": "gadtools.library",
+    "moduleName": "gadtools.library_40.4",
+    "bytes": 23572,
+    "sha256": "93a1b6ad5737665f43606cd13269df8f03921f1b3a96a15aa1e623e34b67f590",
+    "sourceRomSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+    "romMatch": "Kickstart 40.63 (A500/A600/A2000)",
+    "moduleOffset": 428644,
+    "moduleBytes": 23444,
+    "relocations": [
+      2,
+      6,
+      14,
+      18,
+      22,
+      74,
+      82,
+      228,
+      1456,
+      1838,
+      3342,
+      3718,
+      4386,
+      4780,
+      5086,
+      5878,
+      5894,
+      7724,
+      7950,
+      9590,
+      12536,
+      15844,
+      17078,
+      17118,
+      19206,
+      22844,
+      23356,
+      23388,
+      23392,
+      23396,
+      23400,
+      23404,
+      23408,
+      23412,
+      23416,
+      23420,
+      23424,
+      23432,
+      23436,
+      23440
+    ],
+    "fixes": [
+      [
+        6,
+        23444
+      ]
+    ],
+    "patchesApplied": false,
+    "scope": "Private relocated guest library dependency; not runtime qualification",
+    "tool": "amitools RomSplitter/BinFmtHunk with bundled Remus splitdata",
+    "toolSource": "https://github.com/cnvogelg/amitools/blob/main/amitools/rom/romsplitter.py"
+  },
+  "media": [
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\diskmaster\\diskmaster-ffs-v1.hdf",
+      "sha256": "e87d0ae3eb2660d52ea14eef44625b880e7aa0765ca2a7c9980f7eda532ac865",
+      "files": 683,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:DiskMaster2/DiskMaster2\n"
+    },
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\diskmaster\\diskmaster-env-ofs-v1.hdf",
+      "sha256": "2ff0ff885153041cdb5f73080a76ece86f160886f8093cc848a961400dafed0a",
+      "files": 683,
+      "startup": "C:Assign ENV: SYS:ENV\nC:CopperGui\nC:CopperFfp\nSYS:DiskMaster2/DiskMaster2\n"
+    },
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\diskmaster\\diskmaster-gadtools-ffs-v4.hdf",
+      "sha256": "e65afc0437c02477f081e05c3b3fb0dad188ea5f8d50e10adda8471b7e8d77d1",
+      "files": 684,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:DiskMaster2/DiskMaster2\n"
+    },
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\diskmaster\\diskmaster-shell-ffs-v24.hdf",
+      "sha256": "3047996a15ee145a74295959f8fb241a2130e0dbbbdf19fcd579ac1e2dc81631",
+      "files": 684,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:DiskMaster2/DiskMaster2\n"
+    }
+  ],
+  "native31": {
+    "run": "kick31-v3",
+    "fields": 8000,
+    "mainScreen": "Inspected: left SYS directory, center command pane, right RAM directory. About requester dismissed with Return at 6000/6004.",
+    "rgbSha256": "7bd4bea0ae2a94458efcded1b0a0a5e25ef03db9e61305c9a5da4b85ac9fb894",
+    "startupDifference": "Explicit native Assign ENV setup; same retained guest GUI and FFP loaders, native resident libraries selected",
+    "kickstart13": "Guide states OS V37 requirement; no native 1.3 positive claim"
+  },
+  "initialFailures": [
+    {
+      "trace": "copperstart-startup-v2",
+      "cause": "OpenLibrary gadtools.library V37 returns zero at field 2410"
+    },
+    {
+      "trace": "copperstart-gadtools-v4",
+      "cause": "Supplied native module uses V37 compact tag 0x3F7 rejected by old loader"
+    },
+    {
+      "trace": "copperstart-gadtools-v15",
+      "cause": "Corrected public LoadSeg passes but the old Shell still embeds its own parser"
+    }
+  ],
+  "completedControls": {
+    "hostLoader": "32 passed, zero failed/skipped; before-fix 1015 case fails while 1020 passes",
+    "nativeLoadSeg": "Native 3.1 passes; preceding CopperStart returns FAIL; corrected installed ROM passes with relocated 0x12345678 and UnLoadSeg",
+    "packing": "Three host tests pass; original core produces byte-identical a88909e72878a3a04e26303647a3d58eaa6875a905f064cf0e1497cd873a7eda ROM",
+    "ppshowRegression": "Fields 4000/6000/8000 retain eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be RGB",
+    "sourceBaselines": "3376 DOS bodies unchanged before one-method correction; 137 Shell bodies unchanged before two-method correction",
+    "sourceBuild": "Release solution: 0 errors, 7 warnings"
+  },
+  "currentTrace": {
+    "path": "artifacts\\utility-sequential-2026-10-31\\diskmaster\\copperstart-shell-v24\\trace.json",
+    "reason": "ILLEGAL_INSTRUCTION",
+    "field": 2798,
+    "cycle": 397649996,
+    "call": "intuition.library RefreshWindowFrame",
+    "lvo": -456,
+    "caller": "002F34C2",
+    "base": "002E2DA4",
+    "vector": "002E2BDC",
+    "unsupportedTarget": "002E3E8A",
+    "gadtoolsOpens": [
+      {
+        "field": 2456,
+        "base": 2684608
+      },
+      {
+        "field": 2459,
+        "base": 2684608
+      }
+    ]
+  },
+  "remaining": [
+    "Implement and qualify RefreshWindowFrame",
+    "Verify CopperStart main interface",
+    "Commit and push completed fixes before advancing to MuchMore",
+    "Finish remaining utilities and final current-source/current-toolchain sweep"
+  ],
+  "performance": "Correctness diagnostics only; no throughput acceptance claim"
+}

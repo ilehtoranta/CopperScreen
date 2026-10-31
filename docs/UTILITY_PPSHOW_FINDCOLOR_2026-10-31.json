@@ -9,7 +9,7 @@
     "bytes": 524288,
     "graphicsBytes": 24996,
     "supportedVectors": 74,
-    "footerHeadroomBytes": 72,
+    "footerHeadroomBytes": 64,
     "provenance": "Original qualified Classic compiler output and frozen emitter dependencies plus source graphics fixes; not a current whole-source toolchain build"
   },
   "media": {
@@ -64,5 +64,6 @@
     "Commit and push completed fixes before utility eight",
     "Finish remaining utilities and final current-source/current-toolchain sweep"
   ],
-  "followUp": "UTILITY_PPSHOW_MAIN_2026-10-31.json: minimum ILBM viewer verified with corrected concealed Smart-hook staging"
+  "followUp": "UTILITY_PPSHOW_MAIN_2026-10-31.json: minimum ILBM viewer verified with corrected concealed Smart-hook staging",
+  "headroomCorrection": "Earlier text reported 72 bytes in error; 524268 - (499208 + 24996) = 64. ROM bytes and recorded runtime outcomes are unchanged."
 }
