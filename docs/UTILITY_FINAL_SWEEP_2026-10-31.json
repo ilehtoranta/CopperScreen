@@ -404,7 +404,34 @@
     {
       "order": 5,
       "utility": "PPMore1.8a",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "MAIN_READER_AND_FOOTER_VERIFIED_BOTH_ROMS",
+      "controlledDisk": "artifacts/utility-sequential-2026-10-31/final-ppmore-gui-v147.adf",
+      "controlledDiskSha256": "938edf60c953ad0043dea9975c4a0c204f5cd845973d1e9493f378d5cb0a1a24",
+      "recipe": "scripts/probes/UtilityStartup/refresh_utility_gui.py",
+      "recipeBase": "artifacts/utility-sequential-2026-10-30/ppmore/footer-final-v16.adf",
+      "recipeBaseSha256": "83d99f017f6a18c5ea7c4e5d79d92a32512bdc4bc281fd6a8a6c0673b294376a",
+      "profile": "PAL OCS MC68000,512KiB Chip+512KiB slow+1024KiB Fast; protected DF0; no host directories",
+      "guiProviderSha256": "a2c6b33eca4ed4e75d3e0d539d9e4b236255a554942892115d6fb73006384d54",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppmore-copperstart-v148",
+          "completedFields": 45000,
+          "readerAndFooterVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "fd3d9d8856240a0e2d036c08925dc776e88727808515909596df5909da0f42fd"
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-ppmore-kick13-v148",
+          "completedFields": 12000,
+          "readerAndFooterVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "cd623906d22bf3b88a7f17aff273189db4ae7eefb91811ec253cdcf851eedc03"
+        }
+      ],
+      "limitations": "Reader startup and navigation footer only. Font/line spacing differ from native; no complete interaction or print qualification.",
+      "nonGuiGuestFilesUnchanged": true
     },
     {
       "order": 6,
@@ -476,7 +503,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Four refreshed utilities verified. Continue with PPMore;8 final replay rows remain pending.",
+  "nextInvestigation": "Five refreshed utilities verified and producer solution build passed. Continue with PPaint;7 final replay rows remain pending.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
@@ -588,5 +615,11 @@
         "sha256": "FF5BA7CFFBD750964BA958D1BF9720F6E9AC7F5FD5A2D0831D664A86F01FF816"
       }
     ]
+  },
+  "producerSolutionBuild": {
+    "command": "dotnet build CopperStart.slnx -c Release -m:1, explicit local dependency roots",
+    "log": "../CopperStart/utility-private-snapshots-solution-v149.log",
+    "warnings": 10,
+    "errors": 0
   }
 }

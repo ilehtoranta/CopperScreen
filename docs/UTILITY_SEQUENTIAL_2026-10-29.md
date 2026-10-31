@@ -1022,3 +1022,15 @@ ProTracker refreshes `final-protracker-kick13-v138` and
 `final-protracker-copperstart-v142` both complete26000 fields and show the editor.
 Their1024-byte final pattern hashes match exactly. The source fix is pushed to
 main before proceeding to X-Copy. The other11 final replay rows remain pending.
+
+Final sweep continuation: X-Copy reaches DOSCOPY on both ROMs after12000
+fields; copy/format operations remain unqualified. Test Kit completes7200
+fields on each ROM, with pixel equality at eight selected menu/audio captures
+and corresponding channel-muting behavior. SysInfo reaches its main screen
+with the current guest GUI payload on both ROMs; font and reporting differences
+remain outside this startup qualification. PPMore opens the82-line fixture and
+navigation footer on its documented1MiB Fast RAM profile; font/line-spacing
+parity is not claimed. The GUI refresh recipe verifies every non-GUI guest file
+is unchanged. The final producer solution Release build passes. Five refreshed
+utilities are verified; PPaint, PPShow, DiskMaster, MuchMore, MemCheck, LhA and
+DPaint remain pending in the final sweep.
