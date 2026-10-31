@@ -23,7 +23,7 @@ marking the collection complete.
 | 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
-| 11 | Amiga LhA 2.15 | IN PROGRESS: native3.1 tests5files; corrected CopperStart fixture enters member testing, completion pending | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
+| 11 | Amiga LhA 2.15 | VERIFIED MINIMUM:5-member CRC test and CLI return; default4KiB command stack stays in bounds | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
 | 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
@@ -873,8 +873,24 @@ Shell and installed those bytes as the archive. Native DOS read the prepared
 file correctly. The old inputs are invalid CRC-test inputs and remain preserved.
 
 The script now keeps archive and Shell bytes separate and independently checks
-the installed fixture against the pinned167691-byte payload. The corrected
-CopperStart run enters testing LhA.guide but has not established completion at
-10000fields. LhA remains current; DeluxePaint and final current-toolchain checks
-remain pending. The [receipt](UTILITY_LHA_STARTUP_2026-10-31.json) retains the
-historical conclusion and its explicit correction.
+the installed fixture against the pinned 167691-byte payload. The corrected
+input exposed a DOS packet-path stack overflow. It first prevented Wait from
+switching tasks, then corrupted the saved Shell stack pointer. CopperStart
+commit `f1ea3b2` uses scalar packet/port fields and releases private-record
+copies before nested Exec calls. Validation, allocation-free release storage,
+cancellation and Forbid/Permit boundaries remain intact.
+
+The retained 512 KiB A500 ROM now tests all five members successfully and
+returns to the CLI. A capture over fields 2000–6000 observes 16,020,080 selected
+task instructions with 56 bytes of minimum command-stack headroom. The packet
+method's local frame falls from 472 to 160 bytes. All 21 focused native
+release/signal/Close tests pass, including 15 internal Close outcomes. The
+current-toolchain Write suite still has the same eight failing cases as its
+unchanged-source control. PPShow retains its exact qualified image hash.
+The separate Echo failure persists; it is not presented as fixed.
+
+The final fresh-source sweep remains pending: current main compiles a raw ROM
+but graphics composition overlaps by 3176 bytes. Fresh-source Shell and GUI
+payload compilation checks both pass. DeluxePaint is next after this utility
+fix and evidence are pushed. The [receipt](UTILITY_LHA_STARTUP_2026-10-31.json)
+retains the invalid-input correction and the intermediate failed candidates.

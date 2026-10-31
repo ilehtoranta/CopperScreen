@@ -78,6 +78,13 @@ uint? recordPcMin = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_PC_MIN
 uint? recordPcMax = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_PC_MAX") is { Length: > 0 } maxPc ? Convert.ToUInt32(maxPc, 16) : null;
 uint? stopPc = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_PC") is { Length: > 0 } targetPc ? Convert.ToUInt32(targetPc, 16) : null;
 uint? stopPcD0 = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_PC_D0") is { Length: > 0 } targetD0 ? Convert.ToUInt32(targetD0, 16) : null;
+// Optional task-specific stack-floor capture; task identity excludes other
+// runnable tasks and the supervisor stack from this diagnostic condition.
+// Limit capture to the 4 KiB immediately below the selected stack: dispatch
+// publishes ThisTask before leaving the outgoing task's distant stack.
+uint? stopStackTask = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STACK_TASK") is { Length: > 0 } taskText ? Convert.ToUInt32(taskText,16) : null;
+uint? stopStackFloor = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STACK_FLOOR") is { Length: > 0 } floorText ? Convert.ToUInt32(floorText,16) : null;
+long stackCaptureChecks=0; uint minimumCapturedStack=uint.MaxValue;
 long executedInstructions = 0;
 var ring = new Entry[ringSize]; long count = 0; bool stop = false; string reason = "END_FIELD";
 var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
@@ -91,6 +98,14 @@ var stopFailedReadArgs = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_S
 void ObserveCall()
 {
     var c=m.Cpu;
+    if (stopStackTask is uint task && stopStackFloor is uint floor && (c.StatusRegister & 0x2000)==0 &&
+        Read(Read(4)+276)==task && Read(task+58)==floor && c.A[7]<=Read(task+62) &&
+        (c.A[7]>=floor || floor-c.A[7]<=4096))
+    {
+        stackCaptureChecks++; minimumCapturedStack=Math.Min(minimumCapturedStack,c.A[7]);
+        if(c.A[7]<floor)
+        { Keep("TASK_STACK_BELOW_FLOOR"); stop=true; reason="TASK_STACK_BELOW_FLOOR"; return; }
+    }
     if (stopPc == c.ProgramCounter && (stopPcD0 is null || stopPcD0 == c.D[0]))
     { Keep("TARGET_PC"); stop=true; reason="TARGET_PC"; return; }
     peek(c.ProgramCounter,out var op); peek(c.ProgramCounter+2,out var ext);
@@ -101,14 +116,16 @@ void ObserveCall()
     if(op==0x4ef9 && c.ProgramCounter<dosBase && dosBase-c.ProgramCounter<=1000 && (dosBase-c.ProgramCounter)%6==0)
     {
         var vector = unchecked((int)c.ProgramCounter-(int)dosBase);
-        var api = vector switch { -30=>"DOS.Open", -42=>"DOS.Read", -84=>"DOS.Lock", -102=>"DOS.Examine", -108=>"DOS.ExNext",
+        var api = vector switch { -30=>"DOS.Open", -42=>"DOS.Read", -48=>"DOS.Write", -84=>"DOS.Lock", -102=>"DOS.Examine", -108=>"DOS.ExNext",
             -390=>"DOS.ExamineFH", -822=>"DOS.MatchFirst", -828=>"DOS.MatchNext", -834=>"DOS.MatchEnd", _=>null };
         if(api is not null)
         {
             calls.Add(new { Api=api+"VectorInput", Library="dos.library", frame=m.CompletedFrames, entryCycle=c.Cycles,
-                vectorPc=c.ProgramCounter, vector, callerReturnPc=Read(c.A[7]), d1=c.D[1], d2=c.D[2], d3=c.D[3],
+                vectorPc=c.ProgramCounter, vector, callerReturnPc=Read(c.A[7]), callerSp=c.A[7], statusRegister=c.StatusRegister,
+                task=Read(Read(4)+276), stackLower=Read(Read(Read(4)+276)+58), stackUpper=Read(Read(Read(4)+276)+62),
+                d1=c.D[1], d2=c.D[2], d3=c.D[3],
                 name=vector is -30 or -84 or -822 ? Name(c.D[1]) : null,
-                inputDataPrefix=vector != -42 ? null : Convert.ToHexString(Enumerable.Range(0,(int)Math.Min(c.D[3],32u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray()),
+                inputDataPrefix=vector is not (-42 or -48) ? null : Convert.ToHexString(Enumerable.Range(0,(int)Math.Min(c.D[3],32u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray()),
                 inputHashedBytes=vector != -42 ? 0 : Math.Min(c.D[3],262144u),
                 inputDataSha256=vector != -42 ? null : Convert.ToHexString(SHA256.HashData(Enumerable.Range(0,(int)Math.Min(c.D[3],262144u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray())) });
             var record=vector is -102 or -108 or -390 or -822 ? c.D[2] : vector is -828 or -834 ? c.D[1] : 0;
@@ -314,7 +331,7 @@ File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
-    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, ringSize, stopPc, stopPcD0,
+    watchAddress, watchExpected, stopStackTask, stopStackFloor, stackCaptureWindowBytes=4096, stackCaptureChecks, minimumCapturedStack=stackCaptureChecks==0?(uint?)null:minimumCapturedStack, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, ringSize, stopPc, stopPcD0,
     recordPcMin, recordPcMax, executedInstructions,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());

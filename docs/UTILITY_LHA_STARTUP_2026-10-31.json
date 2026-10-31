@@ -1,6 +1,6 @@
 {
   "utility": "LhA2.15 /lha_68k",
-  "status": "SUPERSEDED DIAGNOSIS: original CopperStart fixture contains Shell bytes due preparation-variable reuse; DOS reading those bytes is correct. Corrected input replay is in progress.",
+  "status": "VERIFIED MINIMUM: unchanged 5-member CRC test completes and returns to CLI on native Kickstart3.1 and the corrected CopperStart A500 ROM. Qualified CopperStart run retains the frozen dependency/compiler lane; fresh-source sweep remains pending.",
   "archive": {
     "file": "media/utilities/originals/lha.run",
     "sha256": "76bae515264fcc3e1c69058ff03a4bcb096152a732cf19fdb03cceee18932497",
@@ -11,7 +11,7 @@
     "scope": "Complete5-file distribution retained; invoke only68000 executable; original compressed payload is the CRC-test input"
   },
   "profile": "PAL OCS68000 interpreter,512KiB Chip+512KiB slow+2MiB Fast, protected media",
-  "romSha256": "174a7ebabec8cefb28897bcf3e3eb53361270e11f45c96863601dbb39bb65c7b",
+  "romSha256": "fc7d8392d7c4fbda24810540a166abbe88e3f2740eb754ee2cc9a82535041837",
   "native31": {
     "run": "kick31-v2",
     "fields": 10000,
@@ -355,10 +355,10 @@
     "historicalConclusion": "The requested archive is found and opened, but metadata/data come from CopperShell. Input buffer begins zero; read changes it to the exact Shell prefix, so this is not a no-copy/stale-buffer result. Native file/provider selection is next to investigate. No root-cause fix yet."
   },
   "remaining": [
-    "Fix incorrect native DOS file selection/provider contents, then replay original CRC test",
     "Extraction, creation and permission preservation unverified",
-    "Native1.3 outside documented OS2.0+ requirement",
-    "Frozen compiler/dependency graph; final current-source/current-toolchain sweep required",
+    "Native Kickstart1.3 is outside the documented OS2.0+ requirement",
+    "Fresh-source/current-toolchain sweep pending: current main ROM composition overlaps graphics by3176 bytes despite successful raw compilation; fresh Shell and GUI payload checks pass",
+    "Independent Echo failure remains unresolved; current-toolchain Write suite has8 pre-existing failing internal cases",
     "Correctness diagnostic only; no throughput acceptance claim"
   ],
   "correction": {
@@ -368,5 +368,187 @@
     "correctedMediaSha256": "b0b7bcc90a874e495f260f14c934510907f6f0626787fdddf9823f011b27d9a6",
     "replay": "copperstart-corrected-v12: banner and first member testing visible at10000fields; complete CRC-test success not yet established",
     "oldInputs": "Preserved unchanged as invalid test-input evidence"
+  },
+  "packetStackDiagnosis": {
+    "evidence": "copperstart-write-stack-v16; corrected archive fixture unchanged",
+    "writeEntry": {
+      "field": 2780,
+      "cycle": 395179824,
+      "callerSp": 3113228,
+      "stackLower": 3112160,
+      "stackUpper": 3116268,
+      "availableBytes": 1068,
+      "bytesToWrite": 13
+    },
+    "waitEntry": {
+      "field": 2781,
+      "cycle": 395286492,
+      "pc": "FAA404",
+      "sp": 3112304,
+      "availableBytes": 144,
+      "signalMask": 2
+    },
+    "pendingPacket": {
+      "action": 87,
+      "meaning": "Write",
+      "bytes": 13,
+      "data": "CR, CSI 14C, two spaces, 108948",
+      "destinationPort": "0022C00C",
+      "destinationTask": "0022BFB0",
+      "destinationTaskState": "Ready"
+    },
+    "conclusion": "DOS packet call stack crosses tc_SPLower before Exec SaveBridge can save the blocked task. SaveBridge rejects; SendNativePacket retries Wait with zero result and handler remains ready. Correct archive Read is established separately; this is not the superseded fixture-selection diagnosis.",
+    "candidate": "Selected v47 source committed and pushed to CopperStart main as f1ea3b26380f65618b81ab25f6f4581c04312d23; v48 composed ROM qualified by v52/v53 replays.",
+    "checks": {
+      "sourceSolution": "Build succeeded: 0 errors, 7 warnings",
+      "normalizedIl": "3376 methods before/after; only SendNativePacket changed",
+      "currentToolchainPacketWrite": {
+        "filter": "DosNativeDirectWriteTests.M68000UsesCheckedUnbufferedWriteOutcomes",
+        "candidate": "7 passed, 8 failed out of 15 internal cases; outer test failed",
+        "unchangedSourceControl": "same 7 passed, 8 failed; same failing case names",
+        "baselineArtifact": "CopperStart/artifacts/lha-packet-baseline-current-v21/tests/M68000/result.json",
+        "failedCases": [
+          "write-success-prior-error",
+          "write-one-byte-zero",
+          "write-one-byte-invalid-count",
+          "write-first-of-three-error",
+          "write-one-prefix-zero",
+          "write-two-prefix-error",
+          "write-prefix-error-then-retry",
+          "write-byte-allocation-failure"
+        ],
+        "scope": "Pre-existing current-toolchain failures retained; this is not a passing packet-write qualification."
+      },
+      "normalizedIlV27": "3376 methods before,3378 after; SendNativePacket changed and SendNativePacketCore/SendNativeReleasePacket added; no other method changes",
+      "currentToolchainPacketWriteV27": "Same 7 passing and 8 failing internal cases as unchanged-source control; current-toolchain packet suite remains failing, no new case failures.",
+      "currentToolchainPacketWriteV35": "Same 7 passing and 8 failing cases as unchanged-source control; suite remains failing; no candidate-specific case regression observed.",
+      "v42ProductionSourceSolution": "Build succeeded,0 warnings,0 errors",
+      "v42PacketReleaseAndClose": {
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0,
+        "artifactRoot": "CopperStart/artifacts/lha-packet-release-tests-v46",
+        "coverage": "Native production DOS release allocation failure/cancellation, signal exhaustion/borrowed process-signal handling, invalid signal rejection, and MC68000 buffered Close outcomes; Exec/handler fixtures, not full-ROM replay",
+        "closeInternalCases": {
+          "expectedCases": 15,
+          "executedCases": 15,
+          "passed": 15,
+          "failed": 0,
+          "nativeCloseEntries": 15,
+          "nativeCloseReturns": 15,
+          "instructions": 3097118
+        }
+      },
+      "v42CurrentToolchainWrite": "Same7 passing/8 failing cases as unchanged-source control; suite remains failing, not a passing gate.",
+      "v47FocusedChecks": "21 release/signal/Close tests pass; current-toolchain Write test remains same7/8 internal outcomes as unchanged-source control. Combined22 tests:21 pass,1 fail,0 skip."
+    },
+    "candidateV18": {
+      "romSha256": "614bc0c641e4f56a8f9fdd72ab68157c2a422b06742fa2884b6cc799a07af0b1",
+      "methodFrameBefore": 472,
+      "methodFrameAfter": 300,
+      "run": "copperstart-stack-fix-v23",
+      "beforeReturnCapture": "copperstart-before-return-v25/frame-003788.bmp",
+      "observation": "All 5 files tested; all files OK; Operation successful. Guest crashes afterward during RunCommand stack restore; no CLI return.",
+      "firstFault": "copperstart-stack-fault-v24: field3789 cycle538531220, PC00204200, SP00FC535E",
+      "stackFloorControl": "copperstart-stack-floor-v26: task0022D0B0 crosses floor002F7CE0 in ExecPortCore.EnqueueMessage at field2750, cycle390780780, PC00FCBA5E, SP002F7CDE",
+      "qualification": "FAIL: reduction insufficient; no utility pass claimed"
+    },
+    "returnPointerWatch": {
+      "run": "copperstart-return-pointer-watch-v30",
+      "address": "002F7C89",
+      "expectedByte": "28",
+      "field": 2750,
+      "cycle": 390894452,
+      "pc": "00FC4F38",
+      "sp": "002F7C88",
+      "writer": "BSR from TlsfPolicy.BlockSpan to ReadBlockSize pushes return address 00FC5362 over the saved Shell stack pointer",
+      "conclusion": "The later RunCommand restoration fault is caused by stack underflow corrupting its saved pointer, not a successful return."
+    },
+    "candidateV28": {
+      "methodFrameBytes": 124,
+      "wrapperFrameBytes": 0,
+      "releaseOnlyWorkspaceBytes": 108,
+      "compile": "524288-byte raw ROM generated; composition rejected",
+      "codeEnd": 499306,
+      "graphicsStart": 499208,
+      "overlapBytes": 98,
+      "scope": "Retained frozen compiler/dependency graph; raw ROM was not run. Checking current source/toolchain build separately."
+    },
+    "currentSourceBuild": {
+      "artifactRoot": "CopperStart/artifacts/lha-current-source-rom-v33",
+      "log": "CopperStart/artifacts/lha-current-source-rom-v33.log",
+      "command": "Build-DiskBootRom.ps1 -CopperSharpRoot C:/Users/ilkle/Koodit/GIT/CopperSharp68k -ArtifactRoot C:/Users/ilkle/Koodit/GIT/CopperStart/artifacts/lha-current-source-rom-v33",
+      "status": "FAIL: managed/ROM compilation completed, but native graphics composition rejected overlap",
+      "codeEnd": 500840,
+      "graphicsStart": 497664,
+      "graphicsEnd": 524102,
+      "overlapBytes": 3176
+    },
+    "currentSourceProviders": {
+      "artifactRoot": "CopperStart/artifacts/lha-current-providers-v34",
+      "tests": "IntuitionPayloadIsFreestanding; FullShellCompilesWithoutManagedRuntime",
+      "result": "2 passed, 0 failed, 0 skipped",
+      "scope": "Fresh source/compiler payload compilation checks only; no fresh-ROM utility replay qualified"
+    },
+    "candidateV36": {
+      "romSha256": "0aa1f5699995f3c2a22588a0b6e3ae096809cb26b3b9d9ff342979997e9d98fc",
+      "frameBytes": 228,
+      "runtime": "copperstart-stack-fix-v40: all5 files tested/all files OK/Operation successful/CLI at10000 fields",
+      "stackCheck": "copperstart-stack-floor-v41: declared stack crossed at field2747, cycle390492924, PC00FCE840, SP002F7CDE",
+      "qualification": "CRC and CLI pass, stack integrity fails; not final-qualified",
+      "supersededStackCheck": "v39 stopped during task-dispatch metadata/old-stack transition and does not prove a command-stack overrun. v41 limits capture to the4KiB immediately below the selected command stack."
+    },
+    "candidateV43": {
+      "frameBytes": 168,
+      "codeEnd": 499222,
+      "graphicsStart": 499208,
+      "composition": "FAIL:14-byte overlap; raw ROM not run"
+    }
+  },
+  "previousRomSha256": "174a7ebabec8cefb28897bcf3e3eb53361270e11f45c96863601dbb39bb65c7b",
+  "qualifiedReplay": {
+    "producerCommit": "f1ea3b26380f65618b81ab25f6f4581c04312d23",
+    "rom": "CopperStart/artifacts/lha-packet-stack-rom-v48/candidate.rom",
+    "romSha256": "fc7d8392d7c4fbda24810540a166abbe88e3f2740eb754ee2cc9a82535041837",
+    "romBytes": 524288,
+    "media": "lha-corrected-ffs-v11.hdf",
+    "mediaSha256": "b0b7bcc90a874e495f260f14c934510907f6f0626787fdddf9823f011b27d9a6",
+    "run": "copperstart-qualified-v53",
+    "fields": 10000,
+    "inspection": "Five files tested, all files OK, Operation successful, CLI prompt; same original archive and default4096-byte command stack",
+    "finalRgbSha256": "fd6be908b56e5f203c7f270a7545c55a83d1cfe003561bb98fba783e9fed3ed8",
+    "stackCapture": {
+      "run": "copperstart-stack-floor-v52",
+      "startField": 2000,
+      "endField": 6000,
+      "reason": "END_FIELD",
+      "task": "0022D0B0",
+      "stackLower": "002F7CE0",
+      "minimumSp": "002F7D18",
+      "minimumHeadroomBytes": 56,
+      "observedInstructions": 16020080,
+      "matchingDosWriteInputs": 37,
+      "scope": "Selected user task while its declared command stack is active; excludes supervisor/distant task-transition stacks; records the4KiB window below its lower bound"
+    },
+    "packetMethodFrameBytesBefore": 472,
+    "packetMethodFrameBytesAfter": 160,
+    "packetMethodSavedRegistersBytesAfter": 36,
+    "managedAllocationSites": 0,
+    "sourceSolution": "lha-packet-stack-solution-v50.log:0 warnings,0 errors",
+    "focusedNativeTests": "21 release/signal/Close tests pass; Close contains15 successful internal outcomes; Write retains same7 pass/8 fail internal cases as unchanged-source control",
+    "ppshowRegression": {
+      "run": "ppshow-regression-v55",
+      "field": 14000,
+      "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be",
+      "result": "Exact qualified display hash retained"
+    },
+    "echoControl": {
+      "run": "echo-regression-v56",
+      "field": 6000,
+      "pc": "007DEC68",
+      "result": "Existing independent Echo failure persists; no success claimed"
+    },
+    "rendering": "Existing uppercase font and trailing CSI-space-p renders P; no exact native-ROM text-rendering equivalence claimed",
+    "scope": "Minimum real-utility correctness replay, not comprehensive archiver coverage or a host-throughput acceptance measurement"
   }
 }
