@@ -148,7 +148,7 @@
   },
   "remaining": [
     "Qualify DPaint editor/basic drawing under CopperStart after program-directory handling",
-    "Commit/push any completed Shell source correction and native regression",
+    "Record final DPaint replay result and commit its evidence",
     "Final current-source/compiler sweep remains pending; no host-throughput claim"
   ],
   "nativeEditor": {
@@ -248,6 +248,30 @@
     "result": 0,
     "snapshot": "Shell process 0x231230,pr_HomeDir at188 is0; bundled dpblit3408bytes has resident tag; all29 original demo files independently read back",
     "source": "CopperOS DosShellNativeForegroundCore.Execute does not set a program-directory lock around RunCommand",
-    "regression": "HdfShellResolvesProgramDirectoryFromExecutableLocation: command in C:,current SYS:Data,reads C:Sibling through PROGDIR:,before run v51 active"
+    "regression": "HdfShellResolvesProgramDirectoryFromExecutableLocation: command in C:,current SYS:Data,reads C:Sibling through PROGDIR:,before run v51 active",
+    "beforeRegression": "dpaint-progdir-before-v51:1 test executed,failed at zero PROGDIR lock,frame1385",
+    "afterRegression": "dpaint-progdir-after-v52:1 native test executed,1 passed,54 seconds; executable C:HomeProbe reads C:Sibling through PROGDIR while current directory is SYS:Data",
+    "shellCommit": "CopperOS 9159cf0 pushed origin/main",
+    "testCommit": "CopperStart 44ec7bb pushed origin/main",
+    "shellSha256": "61dcd5cde2dbe7950f69f479d3bc5c135427d2dced540a83e01ff738eadddee9",
+    "nextRun": "copperstart-progdir-v54:30000 fields terminal; original dpblit requester persists despite caller home lock being set. PNG preview was misleading; RGB data and fresh JPEG confirm requester.",
+    "nextHdfSha256": "a682ec921f230fb594b14c8217d5b4a36d5228fd7326e280fd6a313858615e4c",
+    "nextAdfSha256": "8cb7a69762fb740a18c219fa43184ddbd9c2e9084926c7850a749c608665f473"
+  },
+  "libraryWorkerHomeDependency": {
+    "trace": "dpblit-load-v55",
+    "stop": "OPEN_LIBRARY_FAILED",
+    "field": 26002,
+    "loadSeg": "PROGDIR:libs/dpblit.library,frame25992 to25998,result0",
+    "workerTask": "0x295B50",
+    "callerTask": "0x231230",
+    "source": "NativeDiskLibraries.Open copies only current-directory lock at request32; Worker runs LoadSeg without caller program-directory lock",
+    "next": "copperstart-library-home-v60:40000-field replay running with source-built Shell and complete unchanged29 demo files",
+    "beforeRegression": "dpaint-library-home-before-v57:1 native test executed and failed at zero public OpenLibrary result,frame1435",
+    "afterRegression": "dpaint-library-home-after-v58:2 executed,2 passed (direct PROGDIR file and worker library open); no skips",
+    "producerCommit": "CopperStart 8e526bc pushed origin/main",
+    "build": "dpaint-library-home-solution-v61:build succeeds,1 compiler CS8602 warning,0 errors",
+    "hdfSha256": "72087f7365267b078859256957c6c35839d7d055e5e01f750ac9129be418a332",
+    "adfSha256": "968f2ac7b4815688c9ba426c93b5744c18c9a7943d0c21f359be2227c44db290"
   }
 }

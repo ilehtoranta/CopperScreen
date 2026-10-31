@@ -914,3 +914,13 @@ public Workbench opening and its previous window/display checks. DPaint now
 requests `PROGDIR:libs/dpblit.library` unsuccessfully. A bounded trace stops on
 that failed public OpenLibrary at field 25748; the foreground process has no
 program-directory lock. The Shell program-directory regression is in progress.
+
+The program-directory file regression fails before CopperOS `9159cf0` and passes
+after it. Foreground commands now borrow their executable's parent directory
+and restore the previous process home after returning. CopperStart `44ec7bb`
+contains this native regression. DPaint still failed because disk-library opens
+run on a worker that copied only the current directory. CopperStart `8e526bc`
+also carries and duplicates the caller's home lock for that worker, then restores
+its context. The new library-open regression fails before this change and both
+program-directory regressions pass afterward (2 executed, no skips). DPaint
+replay `copperstart-library-home-v60` is pending; no editor pass is inferred.

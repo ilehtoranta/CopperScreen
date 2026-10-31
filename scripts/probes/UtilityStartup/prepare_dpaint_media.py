@@ -43,6 +43,7 @@ def main():
     parser.add_argument('--native-env', action='store_true')
     parser.add_argument('--native-ffp', type=Path, help='CopperStart disk-loaded FFP module test output directory')
     parser.add_argument('--gui-provider', type=Path, help='Native GUI payload and matching canonical CopperGui loader receipts')
+    parser.add_argument('--shell-provider', type=Path, help='Native Shell payload directory with shell-manifest.json')
     parser.add_argument('--workbench-31', type=Path, help='Private pinned Workbench3.1 ZIP providing standard OS libraries')
     args = parser.parse_args()
     for output in (args.output_adf, args.output_hdf):
@@ -127,6 +128,13 @@ def main():
             libraries['C/' + name] = data
         startup = b'C:CopperFfp\n' + startup
     gui = None
+    shell = None
+    if args.shell_provider:
+        shell = json.loads((args.shell_provider / 'shell-manifest.json').read_text(encoding='utf-8-sig'))
+        data = (args.shell_provider / 'CopperShell').read_bytes()
+        if sha(data) != shell['sha256'].lower() or shell['dosClient']['serviceVersion'] != 2:
+            raise ValueError('Shell payload or DOS client service receipt mismatch')
+        libraries['L/CopperShell'] = data
     if args.gui_provider:
         gui = json.loads((args.gui_provider / 'intuition.json').read_text(encoding='utf-8-sig'))
         loader = json.loads((args.gui_provider / 'CopperGui.json').read_text(encoding='utf-8-sig'))
@@ -152,7 +160,8 @@ def main():
         for path, data in libraries.items():
             put(volume, path, data, replace=True)
             files[path.casefold()] = {'path': path, 'bytes': len(data), 'sha256': sha(data),
-                                      'origin': ('CopperStart native GUI prerequisite' if args.gui_provider and path in
+                                      'origin': ('CopperOS native Shell prerequisite' if args.shell_provider and path == 'L/CopperShell' else
+                                                 'CopperStart native GUI prerequisite' if args.gui_provider and path in
                                                  ('C/Intuition', 'C/CopperGui') else
                                                  'CopperStart native FFP prerequisite' if path in
                                                  ('C/CopperFfp', 'C/MathFfpNative') else
@@ -171,6 +180,7 @@ def main():
                    sha256=sha(args.output_hdf.read_bytes()), startup=startup.decode(), workbench31=workbench,
                    nativeFfp=ffp,
                    guiProvider=gui,
+                   shellProvider=shell,
                    files=sorted(files.values(), key=lambda item: item['path']),
                    demoFloppy={'volume': 'DPaintV_demo', 'sha256': sha(args.output_adf.read_bytes()),
                                'bytes': args.output_adf.stat().st_size, 'filesystem': 'DOS0 OFS',

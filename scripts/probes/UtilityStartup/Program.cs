@@ -127,6 +127,7 @@ void ObserveCall()
     {
         var vector = unchecked((int)c.ProgramCounter-(int)dosBase);
         var api = vector switch { -30=>"DOS.Open", -42=>"DOS.Read", -48=>"DOS.Write", -84=>"DOS.Lock", -102=>"DOS.Examine", -108=>"DOS.ExNext",
+            -132=>"DOS.IoErr", -150=>"DOS.LoadSeg", -156=>"DOS.UnLoadSeg",
             -390=>"DOS.ExamineFH", -822=>"DOS.MatchFirst", -828=>"DOS.MatchNext", -834=>"DOS.MatchEnd", _=>null };
         if(api is not null)
         {
@@ -134,7 +135,7 @@ void ObserveCall()
                 vectorPc=c.ProgramCounter, vector, callerReturnPc=Read(c.A[7]), callerSp=c.A[7], statusRegister=c.StatusRegister,
                 task=Read(Read(4)+276), stackLower=Read(Read(Read(4)+276)+58), stackUpper=Read(Read(Read(4)+276)+62),
                 d1=c.D[1], d2=c.D[2], d3=c.D[3],
-                name=vector is -30 or -84 or -822 ? Name(c.D[1]) : null,
+                name=vector is -30 or -84 or -150 or -822 ? Name(c.D[1]) : null,
                 inputDataPrefix=vector is not (-42 or -48) ? null : Convert.ToHexString(Enumerable.Range(0,(int)Math.Min(c.D[3],32u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray()),
                 inputHashedBytes=vector != -42 ? 0 : Math.Min(c.D[3],262144u),
                 inputDataSha256=vector != -42 ? null : Convert.ToHexString(SHA256.HashData(Enumerable.Range(0,(int)Math.Min(c.D[3],262144u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray())) });
