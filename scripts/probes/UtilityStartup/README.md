@@ -244,3 +244,7 @@ It supports the same explicit native ENV setup and qualified Shell replacement
 as the DiskMaster preparation. Complete file readback is preparation evidence;
 the [startup receipt](../../../docs/UTILITY_MUCHMORE_STARTUP_2026-10-31.json)
 records the native text display and CopperStart's rejected tall screen.
+
+The external startup observer records MakeVPort, MrgCop and LoadView call/return
+boundaries with the requested and active View and Copper-list pointers. This
+is bounded diagnostic observation and does not change production execution.

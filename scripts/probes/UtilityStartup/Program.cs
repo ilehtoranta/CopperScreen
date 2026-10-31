@@ -81,7 +81,7 @@ uint? stopPcD0 = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_PC_D
 long executedInstructions = 0;
 var ring = new Entry[ringSize]; long count = 0; bool stop = false; string reason = "END_FIELD";
 var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
-var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue, layersBase=uint.MaxValue;
+var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue, layersBase=uint.MaxValue, graphicsBase=uint.MaxValue;
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
 var stopSetFunction = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_SET_FUNCTION") == "1";
@@ -116,6 +116,17 @@ void ObserveCall()
     else if(c.A[6]==Read(4) && displacement is -444 or -456 or -318)
         pending.Add((displacement == -444 ? "OpenDevice" : displacement == -456 ? "DoIO" : "Wait",
             displacement == -444 ? Name(c.A[0]) : $"A1={c.A[1]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,displacement == -318 ? 0 : c.A[1],null));
+    else if(c.A[6]==graphicsBase && displacement is -210 or -216 or -222)
+    {
+        var api = displacement == -210 ? "Graphics.MrgCop" : displacement == -216 ? "Graphics.MakeVPort" : "Graphics.LoadView";
+        var view = displacement == -216 ? c.A[0] : c.A[1];
+        calls.Add(new { Api=api+"Input", Library="graphics.library", callPc=c.ProgramCounter,
+            entryCycle=c.Cycles, frame=m.CompletedFrames, view, activeView=Read(graphicsBase+34),
+            cpr=Read(view+4), cprStart=Read(Read(view+4)+4),
+            viewport=Read(view), viewportHeight=ReadByte(Read(view)+26)*256+ReadByte(Read(view)+27),
+            addressRegisters=c.A.ToArray() });
+        pending.Add((api,"graphics.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,view,null));
+    }
     else if(displacement is -198 or -612 && c.A[6]==intuitionBase)
     {
         calls.Add(new {Api="OpenScreenInput",Library="intuition.library",callPc=c.ProgramCounter,
@@ -173,6 +184,11 @@ void ObserveReturn()
             ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31),writePrefix=p.Text,
             messagePrefix=p.Api=="GetMsg" ? Convert.ToHexString(Enumerable.Range(0,52).Select(n=>ReadByte(c.D[0]+(uint)n)).ToArray()) : null,
             intuitionFront=p.A6==intuitionBase ? Read(intuitionBase+60) : 0, intuitionActive=p.A6==intuitionBase ? Read(intuitionBase+52) : 0});
+        if(p.Api is "Graphics.MrgCop" or "Graphics.MakeVPort" or "Graphics.LoadView")
+            calls.Add(new { Api=p.Api+"DisplayReturn", Library="graphics.library", frame=m.CompletedFrames,
+                returnCycle=c.Cycles, result=c.D[0], view=p.Request, activeView=Read(p.A6+34),
+                cpr=Read(p.Request+4), cprStart=Read(Read(p.Request+4)+4) });
+        if(p.Library=="graphics.library" && p.Api=="OpenLibrary") graphicsBase=c.D[0];
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
         if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
         if(p.Library=="layers.library" && p.Api=="OpenLibrary") layersBase=c.D[0];
@@ -215,6 +231,7 @@ for (var node = Read(Read(4) + 378); node != 0 && Read(node) != 0 && seenLibrari
     if (libraryName == "dos.library") dosBase = node;
     if (libraryName == "intuition.library") intuitionBase = node;
     if (libraryName == "layers.library") layersBase = node;
+    if (libraryName == "graphics.library") graphicsBase = node;
 }
 if (watchAddress is uint initialWatch && ReadByte(initialWatch) != watchExpected)
 { Keep("WATCH_ALREADY_CHANGED_AT_START"); stop = true; reason = "WATCH_ALREADY_CHANGED_AT_START"; }

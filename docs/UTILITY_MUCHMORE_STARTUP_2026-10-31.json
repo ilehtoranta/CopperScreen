@@ -1,6 +1,6 @@
 {
   "utility": "MuchMore 4.6",
-  "status": "IN PROGRESS: native 3.1 text reader verified; CopperStart rejects requested 640x512 scrollable screen, main reader unverified",
+  "status": "IN PROGRESS: native reader visible; CopperStart tall screen fixed, next fault is graphics.library ScrollVPort (-588)",
   "archiveSha256": "12062ff0e0f1d0cecbd36c94f8205c29e9111ec11d9d429f8b481b66e96f52b7",
   "preparation": "Complete original archive retained, including bundled source; authored 120-numbered-line plain text fixture; complete file readback",
   "profile": "PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB Fast; protected media",
@@ -73,5 +73,156 @@
     "Navigation/search/scrolling not qualified",
     "Frozen inputs; final current-source/current-toolchain sweep required",
     "Correctness diagnostics only, no throughput acceptance"
-  ]
+  ],
+  "tallScreen": {
+    "producerCommit": "188ec4a",
+    "note": "https://github.com/ilehtoranta/CopperStart/blob/188ec4a/Docs/NativeTallScreen20261031.md",
+    "provider": {
+      "sha256": "FD3F383B4CABFE08762A4FD5582C9FB0E63050A5A78477336C3FF5151B96DAF3",
+      "entry": 0,
+      "installer": 315514,
+      "inputEntry": 315342,
+      "textEntry": 315366,
+      "classicEntry": 315390,
+      "codeBytes": 318940,
+      "imageBytes": 333484,
+      "lifetime": "Retain the entire HUNK until reset",
+      "inputs": [
+        {
+          "file": "CopperStart.DesktopProviders.dll",
+          "sha256": "1B5D0C05E33E0F4F75E727DFB532155D0291D6F029A030BEEB2C7E81DAC06A9B"
+        },
+        {
+          "file": "CopperStart.Layers.dll",
+          "sha256": "14039091900EE855B674576ED5A8806D99C4FDAE7D0DC2378E2CA40C8DCAB94A"
+        },
+        {
+          "file": "CopperStart.Utility.dll",
+          "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+        },
+        {
+          "file": "CopperStart.Exec.dll",
+          "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+        }
+      ]
+    },
+    "mediaSha256": "24bf7f94cdd00c4c6c2e249c44e54bcdb1e48ad9dc0ae09c3c26cf984565df54",
+    "nativeControl": {
+      "provider": "",
+      "receipt": 21480,
+      "CompletedFrames": 232,
+      "pc": 12630106,
+      "stagePixels": [
+        -16777216,
+        -1
+      ],
+      "clipPixels": [
+        -16777216,
+        -1,
+        -1,
+        -5592406
+      ],
+      "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+      "values": [
+        12586068,
+        12616814,
+        134217920,
+        3093037056,
+        0,
+        12631784,
+        0,
+        0,
+        512,
+        512,
+        512,
+        256,
+        256,
+        512,
+        0,
+        1413565516,
+        2,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "correctedControl": {
+      "provider": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\utility-sequential-2026-10-31\\muchmore\\tall-provider-native-v14",
+      "receipt": 63968,
+      "CompletedFrames": 25800,
+      "pc": 2289230,
+      "stagePixels": [
+        -16777216,
+        -1
+      ],
+      "clipPixels": [
+        -16777216,
+        -5592406,
+        -1,
+        -5592406
+      ],
+      "romSha256": "174A7EBABEC8CEFB28897BCF3E3EB53361270E11F45C96863601DBB39BB65C7B",
+      "values": [
+        2102676,
+        2635168,
+        134217762,
+        3998220288,
+        0,
+        2288160,
+        0,
+        0,
+        512,
+        512,
+        512,
+        256,
+        256,
+        512,
+        0,
+        1413565516,
+        2,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "oldControl": {
+      "run": "tall-old-provider-v15",
+      "field": 24777,
+      "result": "Null screen; FAIL marker; earlier control version before explicit OSCAN_TEXT and edge sample addition"
+    },
+    "initialBelowClipDifference": "Native white versus CopperStart gray at row260 before height-changing MakeScreen. Both gray there after height256; no full pixel-equivalence claim.",
+    "sourceBuild": "Current Release solution succeeds, zero errors, four warnings",
+    "ppshowRegression": "Exact qualified RGB hash eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be at4000/6000/8000",
+    "nextFault": {
+      "run": "copperstart-tall-v27",
+      "field": 3246,
+      "cycle": 461390314,
+      "pc": "00FF9FBE",
+      "caller": "002E726E",
+      "library": "graphics.library",
+      "lvo": -588,
+      "api": "ScrollVPort"
+    },
+    "scope": "Frozen compiler graph; MuchMore reader not verified; later utilities and final current-source/toolchain sweep pending"
+  }
 }

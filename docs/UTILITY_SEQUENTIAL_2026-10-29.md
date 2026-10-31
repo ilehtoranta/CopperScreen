@@ -21,7 +21,7 @@ marking the collection complete.
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
 | 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
-| 9 | MuchMore 4.6 | IN PROGRESS: native 3.1 text reader visible; CopperStart rejects 640x512 screen | [Startup receipt](UTILITY_MUCHMORE_STARTUP_2026-10-31.json) |
+| 9 | MuchMore 4.6 | IN PROGRESS: native 3.1 text reader visible; CopperStart tall screen fixed; ScrollVPort fault | [Startup receipt](UTILITY_MUCHMORE_STARTUP_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
 | 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
 | 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
@@ -821,3 +821,11 @@ the complete bitmap height to fit its physical display bounds. This failure is
 preserved in the [startup receipt](UTILITY_MUCHMORE_STARTUP_2026-10-31.json).
 Tall-screen/viewport behavior is next; no alternate scroll-mode workaround or
 MuchMore success is claimed. MemCheck, LhA and Deluxe Paint remain pending.
+
+Producer main `188ec4a` admits the virtual bitmap and compiles its visible slice,
+retaining bitmap ownership and public dimensions. A native-reference control
+verifies 512-row allocation,256-row visible height and vertical raster-offset
+rebuild. CopperStart passes it; the older provider returns a null screen.
+PPShow retains its qualified image hash. The initial below-text-clip sample
+difference is recorded explicitly. MuchMore next traps at ScrollVPort (-588),
+field3246; the reader remains unverified and MemCheck has not begun.
