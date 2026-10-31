@@ -377,11 +377,30 @@
       "order": 4,
       "utility": "SysInfo4.4",
       "finalReplayStatus": "MAIN_SCREEN_VERIFIED_BOTH_ROMS",
-      "controlledDisk": "artifacts/utility-sequential-2026-10-31/final-sysinfo-gui-v145.adf",
-      "controlledDiskSha256": "8747040f7019b91b8b9a89d1ad7264dcba7f49de7af9cb088eb6676170157b4f",
+      "controlledDisk": "artifacts/utility-sequential-2026-10-31/final-sysinfo-gui-v191.adf",
+      "controlledDiskSha256": "cb136d4835e89d2076e1cfc8fe66875073cc57866c1e8b9c589eb517a7ee06bc",
       "programSha256": "65f36c3bda05b4133314ff05c272499fbbf50be6b94434c40babfc8c9083cf02",
-      "guiProviderSha256": "a2c6b33eca4ed4e75d3e0d539d9e4b236255a554942892115d6fb73006384d54",
+      "guiProviderSha256": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
       "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-sysinfo-copperstart-v192",
+          "completedFields": 40000,
+          "mainScreenVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "5e296904570573b25b9d3e4cda5a7f318a628c2496fb28182750756775cd4691"
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-sysinfo-kick13-v192",
+          "completedFields": 12000,
+          "mainScreenVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff"
+        }
+      ],
+      "limitations": "Main-screen startup only. Font and reported system details differ; speed/report accuracy and complete GUI interactions not qualified.",
+      "earlierRuns": [
         {
           "side": "copperstart",
           "directory": "artifacts/utility-sequential-2026-10-31/final-sysinfo-copperstart-v146",
@@ -399,7 +418,8 @@
           "finalRgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff"
         }
       ],
-      "limitations": "Main-screen startup only. Font and reported system details differ; speed/report accuracy and complete GUI interactions not qualified."
+      "earlierControlledDisk": "artifacts/utility-sequential-2026-10-31/final-sysinfo-gui-v145.adf",
+      "finalGuiRegression": "v192 complete; final payload recheck"
     },
     {
       "order": 5,
@@ -898,7 +918,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "All12 final replay rows verified. Recheck SysInfo and PPMore with the final v174 GUI, then audit runtime receipts, media/binary hashes, required builds and remote commits before completion.",
+  "nextInvestigation": "All12 minimums verified; final-GUI SysInfo recheck passed. Complete final-GUI PPMore recheck, then completion audit.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
