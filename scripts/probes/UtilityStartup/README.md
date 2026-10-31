@@ -1,6 +1,6 @@
 # Utility startup diagnostic
 
-Standalone, input-free PAL A500 probe for observing guest library startup.
+Standalone PAL A500 probe for observing guest startup and scripted interactions.
 Uses the repository Lightweight engine and its pinned Copper68k dependency;
 it is not part of the production solution.
 
@@ -9,10 +9,12 @@ dotnet run --project scripts/probes/UtilityStartup -c Release -- ROM ADF OUTPUT 
 ```
 
 All five arguments are required. Output must be a new directory. An optional
-sixth argument selects `a500-ocs-1m-v1` (default) or `a500-ocs-2m-v1`.
-Both use MC68000 interpreter, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM,
+sixth argument selects `a500-ocs-1m-v1` (default), `a500-ocs-2m-v1`, or
+`a500-ocs-3m-v1`. An optional seventh selects `adf` (default), `hdf-ro`, or
+`hdf-ffs`; the last uses partition geometry `DH0:1:32:0:1023`.
+All profiles use MC68000 interpreter, OCS 8371/8362, 512 KiB Chip + 512 KiB slow RAM,
 no host directories, and one protected DF0. The 2 MiB profile adds 1 MiB of
-AutoConfig Fast RAM. Its trace records the profile, Fast RAM base and size,
+AutoConfig Fast RAM; the 3 MiB profile adds 2 MiB. The trace records the profile, Fast RAM base and size,
 and includes `fastram.bin`. Memory/stack peeks cover the selected Fast bank.
 The profiles are separate diagnostic inputs. Before START_FIELD,
 execution uses ordinary `ExecuteFrame`. Afterwards the probe invokes existing

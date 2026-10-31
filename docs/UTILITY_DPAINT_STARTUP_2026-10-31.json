@@ -1,6 +1,6 @@
 {
   "utility": "DeluxePaint V demo5.0b9 (1994-08-12)",
-  "status": "VERIFIED MINIMUM: native Kickstart3.1 and CopperStart reach the32-color editor. Native persistent drawing verified; CopperStart scripted stroke differs and remains under investigation. Final fresh-source collection sweep pending.",
+  "status": "VERIFIED MINIMUM: native Kickstart3.1 and CopperStart reach the32-color editor and draw a persistent stroke. Final fresh-source collection sweep pending; disabled demo features are outside scope.",
   "archive": {
     "path": "media/utilities/originals/DPaintV.lha",
     "sha256": "9e8a31c13c9cb69046376968ef05a43c2e3cc298e14fb7698cf04f97b7cb4091",
@@ -424,7 +424,7 @@
     "source": "NativeIntuitionLibrary.OpenScreen rejects depth>4 for every resolution; native display database advertises normal LORES maxdepth5",
     "candidate": "Admit normal LORES depth5 while preserving HIRES maxdepth4 and all other mode/geometry restrictions",
     "nativeRegression": "dpaint-depth-instruction-v106:13 executed,13 passed,no skips;4 depth-admission outcomes plus9 existing screen allocation/failure/stack cases",
-    "next": "Investigate drawing input delivery; no persistent stroke pass inferred from reaching editor",
+    "next": "Resolved drawing dependency by b07353c; see reportMouseDependency",
     "producerCommit": "CopperStart 303b456 pushed origin/main",
     "payloadCompile": "dpaint-depth-provider-v107:1 native payload test executed,1 passed,1m50s",
     "sourceBuild": "dpaint-depth-solution-v110:0 warnings,0 errors",
@@ -443,6 +443,62 @@
       "hdfSha256": "602713a342cc586ab775d306ea276dc37c27426f32f6046ca94ac39cd754ed95",
       "adfSha256": "ffaf4ed40e0027f5d4fd50d7b85ff6d35187dfbfe646317c23165fb5a716b6e0",
       "providerSha256": "ffbb7a4a31ec60cd484f3796e1bda7f62babf14d3196acfd4f3840ced6af2c79"
+    }
+  },
+  "reportMouseDependency": {
+    "nativeTrace": "drawing-messages-native-v112:END_FIELD13200; GetMsg records MouseButtons and MouseMove during held-button stroke",
+    "candidateTrace": "drawing-messages-v111:END_FIELD40300; GetMsg records MouseButtons down/up only,no MouseMove",
+    "requestedTag": "use-first-fault-v97:OpenWindowTagList contains WA_ReportMouse (0x80000086),value1",
+    "nativeWindowFlags": "0x13B40",
+    "candidateWindowFlags": "0x13940",
+    "missingFlag": "WFLG_REPORTMOUSE 0x200",
+    "source": "NativeIntuitionLibrary.OpenWindow does not handle WA_ReportMouse,so NativeDesktopInput.Send filters application movement messages",
+    "candidate": "Handle WA_ReportMouse through existing Flag helper,including clearing on zero",
+    "initialHarnessAttempt": "dpaint-report-mouse-before-v113:6 compilation failures; broad Dispatch root pulls a stale missing EasyRequest export. Not runtime regression evidence.",
+    "regressionHarness": "NativeClockWindowProbe now compiles OpenWindow directly from its existing argument frame; preserves ordinary,zoom,Workbench,fullscreen and scratch-register cases",
+    "beforeRegression": "dpaint-report-mouse-before-v114:6 executed,5 pass,1 fails at missing ReportMouse public flag",
+    "afterRegression": "dpaint-report-mouse-after-v115:6 executed,6 pass,no skips; includes ordered enable/disable tags",
+    "next": "Basic drawing qualified; final fresh-source collection sweep pending",
+    "producerCommit": "CopperStart b07353c pushed origin/main",
+    "payloadCompile": "dpaint-report-mouse-provider-v116:1 native payload test executed,1 passed,2m3s",
+    "sourceBuild": "dpaint-report-mouse-solution-v119:0 warnings,0 errors",
+    "inputs": {
+      "romSha256": "d307f189516bedf080777a4a44b018039a346ba25254b6afffddc819f572eec8",
+      "hdfSha256": "823f6ba94d0fda8ab0925ff31ee7a79b0c866672d49b1c6540548d7928e31309",
+      "adfSha256": "f7dc6ad364e474c877dff913a588046796232eab22d8609bec9ef938f337ac48",
+      "providerSha256": "a2c6b33eca4ed4e75d3e0d539d9e4b236255a554942892115d6fb73006384d54",
+      "inputScript": "copperstart-depth-draw-v109.json",
+      "inputScriptSha256": "869de09b7ca517efb87cd45075083bb853f21e49aec0c121a11dc5fec5c1ff80"
+    },
+    "replay": {
+      "run": "copperstart-report-mouse-draw-v118",
+      "fields": 45000,
+      "status": "Complete original29-file floppy;32-color editor and persistent light-gray stroke; mouse released at40200 and moved away at41000",
+      "bplcon0": "5200",
+      "unsupported": null,
+      "rgbSha256": "ceb5cf70ddf2a771d90efb233d415b496566328ea53abf1444e745eb7c81abd7",
+      "strokeCrop": {
+        "hostRectangle": [
+          450,
+          115,
+          650,
+          155
+        ],
+        "beforeField": 40000,
+        "beforeNonblackPixels": 0,
+        "afterFields": [
+          42000,
+          45000
+        ],
+        "afterNonblackPixels": 182,
+        "strokeRgb": [
+          170,
+          170,
+          170
+        ],
+        "afterSha256": "174d28d8061b6a1c4a1fa623366ea795fd27c9ea875fde1a5671a9f121e94d0f",
+        "scope": "Unchanged crop after pointer departure establishes persistence; no pixel-exact whole-screen native parity claimed"
+      }
     }
   }
 }

@@ -24,7 +24,7 @@ marking the collection complete.
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
 | 11 | Amiga LhA 2.15 | VERIFIED MINIMUM:5-member CRC test and CLI return; default4KiB command stack stays in bounds | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
-| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | VERIFIED MINIMUM:32-color editor on native3.1/CopperStart; drawing differs on CopperStart and remains under investigation; final source sweep pending | [Startup receipt](UTILITY_DPAINT_STARTUP_2026-10-31.json) |
+| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | VERIFIED MINIMUM:32-color editor and persistent drawing stroke on native3.1/CopperStart; final source sweep pending | [Startup receipt](UTILITY_DPAINT_STARTUP_2026-10-31.json) |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
 OCS 8371/8362, 512 KiB Chip and 512 KiB slow RAM, no Fast RAM, RTC or host
@@ -969,3 +969,19 @@ the full32-color editor without the memory requester. This establishes the
 requested main-screen minimum. CopperStart's scripted stroke still differs
 from the persistent line in native `kick31-draw-v15`; drawing is not certified.
 The final fresh-source sweep of the collection remains pending.
+
+CopperStart `b07353c` handles the previously ignored `WA_ReportMouse` tag.
+DPaint explicitly requests it; native Kickstart sets WFLG_REPORTMOUSE and
+returns movement messages during the stroke, while the old provider filtered
+them. The corrected instruction regression fails before the fix and all six
+window cases pass after it. The initial broad test root had a stale export
+dependency; compiling the tested OpenWindow core directly resolves that
+harness failure. A fresh GUI payload and complete producer build both pass.
+
+Original-floppy replay `copperstart-report-mouse-draw-v118` reaches the32-color
+editor and draws a persistent light-gray stroke. The mouse is released at40200
+and moved away at41000. The stroke crop is black before drawing, then contains
+182 nonblack host pixels and retains its exact hash at42000 and45000. This
+qualifies the requested main screen and basic drawing, alongside the retained
+native Kickstart3.1 control. Demo-disabled Save/Print/Delete/Copy are not tested.
+The final fresh-source collection sweep remains outstanding.
