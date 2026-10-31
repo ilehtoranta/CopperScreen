@@ -46,6 +46,9 @@ if(!string.IsNullOrWhiteSpace(attachedAdfPath))
     m.MountAdf(0,attachedAdf); m.SetDriveWriteProtected(0,true);
 }
 var start = int.Parse(args[3]); var end = int.Parse(args[4]);
+var inputPath = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_INPUT");
+var inputBytes = string.IsNullOrWhiteSpace(inputPath) ? null : File.ReadAllBytes(inputPath);
+var inputScript = inputBytes is null ? null : new NativeInputScript(inputPath!, File.ReadAllBytes);
 var watchText = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_WATCH_ADDRESS");
 uint? watchAddress = string.IsNullOrWhiteSpace(watchText) ? null : Convert.ToUInt32(watchText, 16);
 var watchExpected = watchAddress.HasValue
@@ -327,7 +330,7 @@ void Check(string kind)
     var pc = m.Cpu.ProgramCounter;
     if (pc < 0x1000 || !peek(pc, out _)) { Keep("LOW_OR_UNPEEKABLE_PC"); stop = true; reason = "LOW_OR_UNPEEKABLE_PC"; }
 }
-for (var frame = 0; frame < start; frame++) m.ExecuteFrame();
+for (var frame = 0; frame < start; frame++) { inputScript?.Apply(m, frame); m.ExecuteFrame(); }
 // A late trace may start after these libraries were opened. Discover their
 // public bases without issuing guest calls or advancing emulated time.
 var seenLibraries = new HashSet<uint>();
@@ -346,6 +349,7 @@ if (watchAddress is uint initialWatch && ReadByte(initialWatch) != watchExpected
 Console.WriteLine($"Trace starts field={m.CompletedFrames} PC={m.Cpu.ProgramCounter:X8}");
 while (m.CompletedFrames < end && !stop)
 {
+    inputScript?.Apply(m, checked((int)m.CompletedFrames));
     var target = m.CompletedFrames + 1;
     while (m.CompletedFrames < target && !stop)
     {
@@ -375,7 +379,7 @@ while (m.CompletedFrames < end && !stop)
 var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => ring[(Math.Max(0,count-ring.Length)+i)%ring.Length]).ToArray();
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
-    profile, mediaMode, attachedAdfSha256, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
+    profile, mediaMode, attachedAdfSha256, inputScriptSha256=inputBytes is null ? null : Convert.ToHexString(SHA256.HashData(inputBytes)), configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
     watchAddress, watchExpected, stopStackTask, stopStackFloor, stackCaptureWindowBytes=4096, stackCaptureChecks, minimumCapturedStack=stackCaptureChecks==0?(uint?)null:minimumCapturedStack, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, stopFailedLibrary, stopFailedGui, ringSize, stopPc, stopPcD0,
     recordPcMin, recordPcMax, executedInstructions,

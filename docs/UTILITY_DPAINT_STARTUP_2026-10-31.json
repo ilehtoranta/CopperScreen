@@ -338,5 +338,55 @@
     "window": "No public OpenWindow/OpenScreen vector entered in capture; normal font opens continue before cleanup",
     "next": "gadtools-return-v69,28550..28700,stop on failed CreateGadget/CreateContext/GetVisualInfo; public NewObject calls also captured; running",
     "diagnosticScope": "External instruction observer only; no production engine changes"
+  },
+  "frameClassDependency": {
+    "trace": "gadtools-return-v69: GUI_SETUP_FAILED at field28575; GadTools string gadget asks NewObjectA for frameiclass and receives0",
+    "producerCommit": "CopperStart 7accfbc pushed origin/main",
+    "implementation": "Native frameiclass attributes, IM_FRAMEBOX, planar IM_DRAW/IM_DRAWFRAME, hit testing and lifecycle",
+    "nativeOracle": "Kickstart3.1 A500; public BOOPSI/Graphics calls; explicit WaitBlit before captured bitmap readback",
+    "comparisons": [
+      {
+        "run": "frame-edge-candidate-v88",
+        "cases": 16,
+        "reference": "artifacts\\utility-sequential-2026-10-31\\dpaint\\frame-wait-edge-native-v85",
+        "failures": [],
+        "passed": true
+      },
+      {
+        "run": "frame-filled-candidate-v88",
+        "cases": 16,
+        "reference": "artifacts\\utility-sequential-2026-10-31\\dpaint\\frame-wait-filled-native-v85",
+        "failures": [],
+        "passed": true
+      },
+      {
+        "run": "frame-nullinfo-candidate-v88",
+        "cases": 16,
+        "reference": "artifacts\\utility-sequential-2026-10-31\\dpaint\\frame-wait-nullinfo-native-v85",
+        "failures": [],
+        "passed": true
+      },
+      {
+        "run": "frame-odd-candidate-v88",
+        "cases": 16,
+        "reference": "artifacts\\utility-sequential-2026-10-31\\dpaint\\frame-odd-native-v82",
+        "failures": [],
+        "passed": true
+      }
+    ],
+    "coverage": "48 drawing cases pixel-exact plus16 odd-dimension geometry cases; all64 objects created; no skips",
+    "instructionTests": {
+      "candidate": "13 executed:11 pass,2 fail; both new Frame cases pass",
+      "unchangedProviderControl": "Current harness with only DesktopProviders replaced by0abcd45 component:13 executed,9 pass,4 fail; same2 older getter failures plus2 missing Frame cases",
+      "scope": "Full baseline solution build unavailable due missing SFS checkout inputs; component comparison only"
+    },
+    "sourceBuild": "dpaint-frame-solution-v95:0 warnings,0 errors",
+    "providerSha256": "0e2a36a390c4e87aaf0df1d459fab9c48dd5d78b506901baad7ef42c51f50bd4",
+    "hdfSha256": "9321e2ddfcdd763901e7b2870c118161a1e78efe2e8547239482158a683a24be",
+    "adfSha256": "12bc952ed3b5a61d044485ee63a98bf8facce45118789b5b981418eb8b69a4de",
+    "chooserReplay": "copperstart-frameclass-v89:40000 fields; populated Screen Format chooser, PAL STANDARD+,320x256,32 colors; editor not yet reached",
+    "useReplay": "copperstart-use-v96:45000 fields terminal; scripted Use at35100 causes corrupted execution by40000 (PC231C2319). Not a pass.",
+    "next": "use-first-fault-v97: bounded observer with same input script; investigate earliest fault after Use",
+    "debugLane": "prepare_dpaint_media --demo-on-hdf copies complete original demo to SYS:Utilities for separate diagnostics; no floppy qualification inferred"
   }
 }

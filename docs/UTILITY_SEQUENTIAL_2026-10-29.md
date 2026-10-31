@@ -934,3 +934,17 @@ all planes; the producer solution builds with no warnings or errors. The next
 The hidden console bitmap confirms the prompt, rather than an application wait.
 A public-vector capture confirms the custom dpaint font opens successfully;
 dialog setup is the current investigation. Utility12 remains IN PROGRESS.
+
+The dialog failure is a missing native `frameiclass`: GadTools creates a string
+gadget frame through NewObjectA and receives zero. CopperStart `7accfbc` adds
+its geometry, attributes, planar drawing and lifecycle. Public guest probes
+match native Kickstart 3.1 in 48 pixel-exact drawing cases and 16 odd-dimension
+geometry cases. The two new instruction cases pass. Two older getter failures
+also occur with the unchanged provider component; the complete instruction
+suite is therefore not reported as passing. The producer solution builds with
+zero warnings or errors.
+
+Original-floppy replay `copperstart-frameclass-v89` now reaches a populated
+Screen Format chooser (PAL STANDARD+, 320x256). Clicking Use in
+`copperstart-use-v96` causes corrupted execution before the editor. The next
+bounded trace follows that click. Deluxe Paint remains IN PROGRESS.

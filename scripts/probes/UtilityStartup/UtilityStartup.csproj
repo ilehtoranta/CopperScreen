@@ -5,4 +5,5 @@
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup><ProjectReference Include="../../../CopperMod.Amiga.Lightweight/CopperMod.Amiga.Lightweight.csproj" /></ItemGroup>
+  <ItemGroup><Compile Include="../../../CopperMod.Amiga.Lightweight.Runner/NativeInputScript.cs" Link="NativeInputScript.cs" /></ItemGroup>
 </Project>

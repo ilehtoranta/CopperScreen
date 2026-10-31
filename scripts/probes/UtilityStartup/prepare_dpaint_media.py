@@ -44,6 +44,7 @@ def main():
     parser.add_argument('--native-ffp', type=Path, help='CopperStart disk-loaded FFP module test output directory')
     parser.add_argument('--gui-provider', type=Path, help='Native GUI payload and matching canonical CopperGui loader receipts')
     parser.add_argument('--shell-provider', type=Path, help='Native Shell payload directory with shell-manifest.json')
+    parser.add_argument('--demo-on-hdf', action='store_true', help='Also copy the complete demo to the boot HDF for separate startup diagnostics')
     parser.add_argument('--workbench-31', type=Path, help='Private pinned Workbench3.1 ZIP providing standard OS libraries')
     args = parser.parse_args()
     for output in (args.output_adf, args.output_hdf):
@@ -117,7 +118,10 @@ def main():
         workbench = {'sourceSha256': sha(source), 'adfSha256': sha(adf),
                      'libraries': [{'path': path, 'bytes': len(data), 'sha256': sha(data)}
                                    for path, data in sorted(libraries.items())]}
-    startup = b'C:CopperGui\nC:Assign FONTS: DF0:Fonts\nCD DF0:\nDF0:DPaint_Demo\n'
+    demo_directory = 'Utilities/DPaintV_demo'
+    demo_hdf = {demo_directory + '/' + path: data for path, data in payloads.items()} if args.demo_on_hdf else {}
+    demo_root = 'SYS:' + demo_directory + '/' if args.demo_on_hdf else 'DF0:'
+    startup = ('C:CopperGui\nC:Assign FONTS: ' + demo_root + 'Fonts\nCD ' + demo_root + '\n' + demo_root + 'DPaint_Demo\n').encode('ascii')
     ffp = None
     if args.native_ffp:
         ffp = json.loads((args.native_ffp / 'mathffp.json').read_text(encoding='utf-8-sig'))
@@ -157,10 +161,11 @@ def main():
             content = bytes(volume.read_file(FSString(item['path'])))
             if len(content) != item['bytes'] or sha(content) != item['sha256']:
                 raise ValueError('System input mismatch: ' + item['path'])
-        for path, data in libraries.items():
+        for path, data in {**libraries, **demo_hdf}.items():
             put(volume, path, data, replace=True)
             files[path.casefold()] = {'path': path, 'bytes': len(data), 'sha256': sha(data),
-                                      'origin': ('CopperOS native Shell prerequisite' if args.shell_provider and path == 'L/CopperShell' else
+                                      'origin': ('complete pinned original DPaint demo' if path in demo_hdf else
+                                                 'CopperOS native Shell prerequisite' if args.shell_provider and path == 'L/CopperShell' else
                                                  'CopperStart native GUI prerequisite' if args.gui_provider and path in
                                                  ('C/Intuition', 'C/CopperGui') else
                                                  'CopperStart native FFP prerequisite' if path in
@@ -168,7 +173,7 @@ def main():
                                                  'private pinned Workbench3.1 OS prerequisite')}
         put(volume, 'S/Startup-Sequence', startup, replace=True)
         files['s/startup-sequence'] = {'path': 'S/Startup-Sequence', 'bytes': len(startup),
-                                     'sha256': sha(startup), 'origin': 'controlled floppy-only DPaint invocation'}
+                                     'sha256': sha(startup), 'origin': 'controlled DPaint invocation on ' + ('HDF' if args.demo_on_hdf else 'floppy')}
         for item in files.values():
             if sha(bytes(volume.read_file(FSString(item['path'])))) != item['sha256']:
                 raise ValueError('Final system readback mismatch: ' + item['path'])
@@ -176,7 +181,8 @@ def main():
         volume.close()
         device.close()
     receipt = dict(base)
-    receipt.update(kind='controlled-dpaint-floppy-boot', baseSha256=base['sha256'],
+    receipt.update(kind=('controlled-dpaint-hdf-debug' if args.demo_on_hdf else 'controlled-dpaint-floppy-boot'), baseSha256=base['sha256'],
+                   demoOnHdf=args.demo_on_hdf,
                    sha256=sha(args.output_hdf.read_bytes()), startup=startup.decode(), workbench31=workbench,
                    nativeFfp=ffp,
                    guiProvider=gui,
@@ -187,7 +193,8 @@ def main():
                                'archiveSha256': sha(archive_bytes),
                                'files': [{'path': path, 'bytes': len(data), 'sha256': sha(data)}
                                          for path, data in sorted(payloads.items())]},
-                   scope='Complete original demo retained on its own floppy, including root Libs and required fonts. System HDF supplies boot prerequisites only. Preparation is not runtime qualification.')
+                   scope=('Complete original demo also copied to HDF for separate diagnostics; this does not qualify the original floppy replay.' if args.demo_on_hdf else
+                          'Complete original demo retained on its own floppy, including root Libs and required fonts. System HDF supplies boot prerequisites only.') + ' Preparation is not runtime qualification.')
     Path(str(args.output_hdf) + '.json').write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
     Path(str(args.output_adf) + '.json').write_text(json.dumps(receipt['demoFloppy'], indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'hdfSha256': receipt['sha256'], 'adfSha256': receipt['demoFloppy']['sha256'],
