@@ -1,0 +1,288 @@
+{
+  "status": "VERIFIED Personal Paint main editor and requester dismissal on native 1.3 and CopperStart with explicit guest prerequisites and 2 MiB Fast RAM. Caption and backdrop corrections pass both native controls and replacement controls. Later utilities and final current-source sweep remain pending.",
+  "previousReceipt": "UTILITY_PPAINT_SETRAST_2026-10-31.json",
+  "fixes": [
+    "Forward WindowFlags.Backdrop into LayerCreationFlags.Backdrop for shared window creation.",
+    "Allow built-in backfill to target concealed smart bitmaps independently of RP.BitMap; retain guest-mutation identity and sealed journal checks.",
+    "WindowToFront is a no-op for backdrop windows, matching both native ROMs and preserving the complete layer order."
+  ],
+  "provider": {
+    "sha256": "CB0C85B243E0408BAFC032A95E11922C7150E8264C4903D67353419C0C1E82D1",
+    "entry": 0,
+    "installer": 314678,
+    "inputEntry": 314506,
+    "textEntry": 314530,
+    "classicEntry": 314554,
+    "codeBytes": 318104,
+    "imageBytes": 332388,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "7E02D1A1685C4D03594F35BE00CD0BBB072DAA1E5B3463D0AAD9C8D1B05BD3E6"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "361EBECE7909DC22DBF9A62CA05B8A46E1292B99C407DE33598C792D183D5562"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "inputScope": {
+    "allEightHashesVerified": true,
+    "changedFromSetRast": [
+      "CopperStart.DesktopProviders.dll",
+      "CopperStart.Layers.dll"
+    ],
+    "frozenOtherInputsUnchanged": true,
+    "finalCurrentToolchainQualification": false
+  },
+  "managedMethodAudit": {
+    "baselineMethods": 1430,
+    "baselineRebuildAllIlIdentical": true,
+    "patchedMethods": 1430,
+    "changedBodies": [
+      {
+        "index": 30,
+        "old": "StageLayersPixelBackfill:D6571C361B34FBAF8C388D81D153385653ED19757F7DEF7F6002C746EC0083E1",
+        "updated": "StageLayersPixelBackfill:6D7E9F8F99FA80740840461012A8FE00CAED295FBAEE12C734697EB7F78508D5"
+      },
+      {
+        "index": 38,
+        "old": "ValidatePixelOperation:A9CD58DFA9B5E8AAAD389AE4C3071DE42150075D56A4CFF7CF56FB18AD2EDF1D",
+        "updated": "ValidatePixelOperation:B97861666B99E8866D47AB81B87BAC68B6FB8A8C34DD9725196D404EE3453F07"
+      }
+    ],
+    "rejectedCandidate": "v83 incremental build retained old IL and native compile was aborted"
+  },
+  "nativeControls": [
+    {
+      "version": "13",
+      "normalFirst": false,
+      "frames": 225,
+      "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+      "receipt": "backdrop-native13-v86\\backdrop-False.json",
+      "sha256": "4298726022fbbadfbde79b76e8ecfdd0550d67464037fe20378a8dc55bbbd1e7",
+      "before": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "after": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "verdict": "PASS; zero skips; unchanged complete order asserted"
+    },
+    {
+      "version": "13",
+      "normalFirst": true,
+      "frames": 228,
+      "romSha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53",
+      "receipt": "backdrop-native13-v86\\backdrop-True.json",
+      "sha256": "126958a109a3ebdeb013099c67a7467bce780f27ec5ceb89096f2c2e159f6dd6",
+      "before": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "after": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "verdict": "PASS; zero skips; unchanged complete order asserted"
+    },
+    {
+      "version": "31",
+      "normalFirst": false,
+      "frames": 222,
+      "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+      "receipt": "backdrop-native31-v86\\backdrop-False.json",
+      "sha256": "c2157aefcb0f271090d33df889c9af57df37e20c4ac113ec880828895efa022a",
+      "before": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "after": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "verdict": "PASS; zero skips; unchanged complete order asserted"
+    },
+    {
+      "version": "31",
+      "normalFirst": true,
+      "frames": 222,
+      "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+      "receipt": "backdrop-native31-v86\\backdrop-True.json",
+      "sha256": "f73acf07c207f702baade66a41404efda4b488faf43d5a4a16bfca0fef0c352b",
+      "before": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "after": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "verdict": "PASS; zero skips; unchanged complete order asserted"
+    }
+  ],
+  "productionBuild": {
+    "log": "backdrop-solution-build-v86.log",
+    "errors": 0,
+    "warnings": 9,
+    "scope": "isolated snapshot plus selected utility source changes; separate outputs"
+  },
+  "failureEvidence": {
+    "artifact": "backdrop-create-failure-v82",
+    "sha256": "a00eb82c1a7718a1eaa01722524d57605885ee04f320d75f99d3469bd9000040",
+    "field": 24818,
+    "cycle": 3526777460,
+    "reason": "CREATE_LAYER_FAILED",
+    "api": "CreateUpfrontHookLayer",
+    "flags": 66,
+    "rejectedAt": "StageLayersPixelBackfill checks RP.BitMap equality against a legitimate concealed destination.",
+    "diagnosticPcFilter": [
+      "0x232e58",
+      "0x280878"
+    ],
+    "scalarInstructionTimingPreserved": true
+  },
+  "media": {
+    "ofs": {
+      "sha256": "3b9d542b63dd09dce877c4c2af8e7e947a1dc46bdc4b21ad5f0ceaf864c31be4",
+      "files": 580
+    },
+    "ffs": {
+      "sha256": "886888399499b078ce79682d9d9135505d132fc84c88af24457e22fdda7d669d",
+      "files": 580
+    },
+    "allFileBytesReadBack": true,
+    "logicalFilesIdentical": true,
+    "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPaint/PPaint\n"
+  },
+  "scope": "Main-screen and selected input correctness; no drawing/menu-command, full graphics conformance or performance acceptance claim.",
+  "replacementControls": [
+    {
+      "normalFirst": false,
+      "frames": 25163,
+      "romSha256": "812E600EBCBCDDC9FB31A1515A8045583DBD32CCF5378EBEB0543E24EF209F54",
+      "receipt": "backdrop-copperstart-v87\\backdrop-False.json",
+      "sha256": "ef03cc6bf08f9baa6ee68aa462d8e751be5d18b74ac77bb1b0df776dcf9cff98",
+      "before": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "after": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "emptyWindowListAfterClose": true,
+      "verdict": "PASS; zero skips"
+    },
+    {
+      "normalFirst": true,
+      "frames": 25181,
+      "romSha256": "812E600EBCBCDDC9FB31A1515A8045583DBD32CCF5378EBEB0543E24EF209F54",
+      "receipt": "backdrop-copperstart-v87\\backdrop-True.json",
+      "sha256": "2f6fc8d61eeabb93fe8fdb85b08b5a6e495caf1594f3ef1cd82176ec38b2a7a8",
+      "before": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "after": [
+        "ordinary",
+        "bar",
+        "smart",
+        "simple"
+      ],
+      "emptyWindowListAfterClose": true,
+      "verdict": "PASS; zero skips"
+    }
+  ],
+  "regressions": {
+    "timer": {
+      "log": "backdrop-timer-v87.log",
+      "passed": 1,
+      "skipped": 0
+    },
+    "classicAndFooter": {
+      "log": "backdrop-regressions-v87.log",
+      "passed": 2,
+      "skipped": 0,
+      "scope": "original 1 MiB Classic upgrade/window lifecycle and bottom-relative console footer rendering"
+    }
+  },
+  "applicationNative13": {
+    "artifact": "kick13-backdrop-v87",
+    "fields": 8000,
+    "inputFields": [
+      5000,
+      5004
+    ],
+    "verdict": "Main editor visually verified; retained native pixel hash",
+    "rgbSha256": "f47ac96796e8d0211eba4e0ed762de1419369be0566ac3119c8405b906b0f0da"
+  },
+  "applicationCopperStart": {
+    "artifact": "copperstart-backdrop-v87",
+    "fields": 32000,
+    "inputFields": [
+      28000,
+      28004
+    ],
+    "verdict": "Main editor visually verified: caption restored, full toolbar, palette and canvas. Return dismisses Memory save mode requester. Stable at 29000 and 32000.",
+    "rgbSha256BeforeInput": "71450fcaff7ba7345ee3771336a71e0a274ac1a3358849900521152c56e77162",
+    "rgbSha256AfterInput": "3a022dba408c8dfacd6f40bbaa151425140b15b3e0caa1d3cc0241249ef67057",
+    "pixelIdentityToNativeNotClaimed": true,
+    "drawingAndMenuCommandsVerified": false
+  },
+  "intermediateEvidence": {
+    "v78": "Caption restored but smart-after-simple default-backfill creation failed; not final qualification.",
+    "v83": "Stale incremental build caught by method audit and its native compile aborted; not qualified.",
+    "v85": "Creation succeeds after journal correction, but native comparison exposed WindowToFront reordering backdrop peers; superseded by v87."
+  },
+  "producerMainCommit": "0906c47d7130c1dfd4b7d68cfd44e3b6bca3c23a"
+}

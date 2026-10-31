@@ -18,7 +18,7 @@ marking the collection complete.
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
-| 6 | Personal Paint 7.1c complimentary edition | IN PROGRESS: editor minimum reached on both ROMs with explicit guest prerequisites and 2 MiB Fast RAM; caption/backdrop discrepancy under investigation | [SetRast and editor receipt](UTILITY_PPAINT_SETRAST_2026-10-31.json) |
+| 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
@@ -621,3 +621,42 @@ Personal Paint remains current before advancing to PPShow.
 The [SetRast receipt](UTILITY_PPAINT_SETRAST_2026-10-31.json) records these
 controls, editor/input evidence, media identities and remaining caption issue.
 These runs are correctness diagnostics, not performance acceptance.
+
+
+### Personal Paint main editor verified, 2026-10-31
+
+CopperStart main commit `0906c47d7130c1dfd4b7d68cfd44e3b6bca3c23a` forwards
+WindowFlags.Backdrop into layer creation, preserves backdrop order on
+WindowToFront, and permits built-in default backfill of concealed smart
+bitmaps through the native pixel journal. Guest mutation identity and private
+snapshot/operation checks remain intact.
+
+The native comparison exposed the full sequence rather than just priority:
+WindowToFront is a no-op for backdrop windows on both native 1.3 and 3.1.
+Two creation orders pass on each native ROM and CopperStart, including simple
+and smart backdrop flags, ordinary windows above BarLayer, unchanged complete
+ordering, and an empty window list after closing. No cases are skipped.
+The final timer, original 1 MiB Classic window lifecycle and console footer
+regressions pass. The native module passes freestanding checks and all eight
+input hashes match; two intended DLLs change and six frozen inputs remain
+unchanged. Rebuilding the old Layers source matches all 1,430 method bodies;
+only the two intended journal methods change after correction. The separate
+Release solution build completes with zero errors and nine warnings.
+
+The final matched OFS/FFS pair contains 580 identical, byte-readback-verified
+files. Fresh native 1.3 replay retains its editor pixel hash. CopperStart now
+displays its caption, full toolbar, palette and canvas. Return dismisses the
+Memory save mode requester at fields 28,000/28,004; the editor is stable at
+fields 29,000 and 32,000. This meets the main-screen minimum. Drawing and menu
+commands, pixel identity to Kickstart and throughput are not qualified.
+The original BCPL Assign lane retains its separate failure.
+
+The [backdrop/editor receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) pins the
+module, media, controls and inspected screen evidence. Earlier failed and
+superseded candidates remain identified; a stale incremental candidate was
+rejected before qualification. The external instruction probe gains optional
+failed-layer stopping, ring capacity and PC sample filtering without changing
+guest results or emulated timing.
+
+Personal Paint's minimum check is complete. PPShow is next; the later utilities
+and final current-source/toolchain sweep remain pending.

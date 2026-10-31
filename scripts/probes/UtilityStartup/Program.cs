@@ -72,12 +72,18 @@ string Name(uint a)
     for(var i=0;i<128 && ReadByte(a+(uint)i)!=0;i++) bytes.Add(ReadByte(a+(uint)i));
     return Encoding.ASCII.GetString(bytes.ToArray());
 }
-var ring = new Entry[512]; long count = 0; bool stop = false; string reason = "END_FIELD";
+var ringSize = int.Parse(Environment.GetEnvironmentVariable("COPPERSTART_PROBE_RING_SIZE") ?? "512");
+if (ringSize < 1 || ringSize > 1048576) throw new ArgumentOutOfRangeException(nameof(ringSize));
+uint? recordPcMin = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_PC_MIN") is { Length: > 0 } minPc ? Convert.ToUInt32(minPc, 16) : null;
+uint? recordPcMax = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_PC_MAX") is { Length: > 0 } maxPc ? Convert.ToUInt32(maxPc, 16) : null;
+long executedInstructions = 0;
+var ring = new Entry[ringSize]; long count = 0; bool stop = false; string reason = "END_FIELD";
 var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
-var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue;
+var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue, layersBase=uint.MaxValue;
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
 var stopSetFunction = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_SET_FUNCTION") == "1";
+var stopFailedLayer = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_LAYER") == "1";
 void ObserveCall()
 {
     var c=m.Cpu;
@@ -111,6 +117,13 @@ void ObserveCall()
             entryCycle=c.Cycles,frame=m.CompletedFrames,address=c.A[0],tags=c.A[1],lvo=displacement,
             bytes=Convert.ToHexString(Enumerable.Range(0,36).Select(i=>ReadByte(c.A[0]+(uint)i)).ToArray())});
         pending.Add(("OpenScreen","intuition.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    }
+    else if(c.A[6]==layersBase && displacement is -36 or -42 or -186 or -192)
+    {
+        calls.Add(new {Api="CreateLayerInput",Library="layers.library",callPc=c.ProgramCounter,
+            entryCycle=c.Cycles,frame=m.CompletedFrames,lvo=displacement,
+            addressRegisters=c.A.ToArray(),dataRegisters=c.D.ToArray()});
+        pending.Add(("CreateLayer","layers.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
     }
     else if(displacement==-204 && c.A[6]==intuitionBase)
     {
@@ -149,6 +162,9 @@ void ObserveReturn()
             intuitionFront=p.A6==intuitionBase ? Read(intuitionBase+60) : 0, intuitionActive=p.A6==intuitionBase ? Read(intuitionBase+52) : 0});
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
         if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
+        if(p.Library=="layers.library" && p.Api=="OpenLibrary") layersBase=c.D[0];
+        if(stopFailedLayer && p.Api=="CreateLayer" && c.D[0]==0)
+        { Keep("CREATE_LAYER_FAILED"); stop=true; reason="CREATE_LAYER_FAILED"; }
         if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
         { Keep("OPEN_DEVICE_FAILED"); stop=true; reason="OPEN_DEVICE_FAILED"; }
         pending.RemoveAt(i); break;
@@ -160,7 +176,12 @@ Entry Snapshot(string kind)
     return new(kind,m.CompletedFrames,c.Cycles,c.ProgramCounter,op,c.StatusRegister,c.A[7],c.UserStackPointer,c.SupervisorStackPointer,
         c.D[0],c.D[1],c.D[2],c.D[3],c.D[4],c.A[0],c.A[1],c.A[3],c.A[6], Read(c.A[7]));
 }
-void Keep(string kind) { ring[count++ % ring.Length] = Snapshot(kind); }
+void Keep(string kind)
+{
+    if (kind == "instruction" && (recordPcMin.HasValue && m.Cpu.ProgramCounter < recordPcMin.Value ||
+        recordPcMax.HasValue && m.Cpu.ProgramCounter >= recordPcMax.Value)) return;
+    ring[count++ % ring.Length] = Snapshot(kind);
+}
 void Check(string kind)
 {
     if (watchAddress is uint watched && ReadByte(watched) != watchExpected)
@@ -178,6 +199,7 @@ for (var node = Read(Read(4) + 378); node != 0 && Read(node) != 0 && seenLibrari
     var libraryName = Name(Read(node + 10));
     if (libraryName == "dos.library") dosBase = node;
     if (libraryName == "intuition.library") intuitionBase = node;
+    if (libraryName == "layers.library") layersBase = node;
 }
 if (watchAddress is uint initialWatch && ReadByte(initialWatch) != watchExpected)
 { Keep("WATCH_ALREADY_CHANGED_AT_START"); stop = true; reason = "WATCH_ALREADY_CHANGED_AT_START"; }
@@ -202,7 +224,7 @@ while (m.CompletedFrames < end && !stop)
             if (dispatch()) { Keep("interrupt-inner"); Check("INVALID_STACK_AFTER_INTERRUPT"); continue; }
             if (c.Halted || c.Stopped) break;
             Keep("instruction"); ObserveCall(); if(stop) break; var before = c.Cycles;
-            core.ExecuteInstruction(); advance(c.Cycles);
+            core.ExecuteInstruction(); executedInstructions++; advance(c.Cycles);
             ObserveReturn();
             if (c.Cycles <= before) throw new Exception("No CPU progress");
             Check("INVALID_STACK_AFTER_INSTRUCTION");
@@ -215,7 +237,8 @@ File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
-    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction,
+    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, ringSize,
+    recordPcMin, recordPcMax, executedInstructions,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());
 File.WriteAllBytes(Path.Combine(output,"slowram.bin"),slow);

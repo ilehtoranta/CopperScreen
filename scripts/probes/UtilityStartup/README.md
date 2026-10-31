@@ -19,7 +19,7 @@ execution uses ordinary `ExecuteFrame`. Afterwards the probe invokes existing
 private scalar execution helpers by reflection, retaining hardware advancement
 and the scalar loop's interrupt sampling. It is coupled to those internal APIs.
 
-A bounded 512-entry host trace records recent instructions and interrupt events.
+A bounded host trace (512 entries by default) records recent instructions and interrupt events.
 The probe observes `JSR d16(A6)` Exec OpenLibrary/OldOpenLibrary returns and
 Intuition OpenScreen/OpenWindow returns, then stops before negative-vector calls with a
 null A6. Low stacks (below `$400`), stacks outside the configured RAM ranges,
@@ -38,7 +38,7 @@ retain the original IORequest address and its io_Error byte on return. Set
 OpenDevice returns a nonzero D0, before the guest's error cleanup. The default
 continues tracing. This diagnostic switch does not change the device result.
 
-At START_FIELD the probe also discovers DOS and Intuition bases from Exec's
+At START_FIELD the probe also discovers DOS, Intuition and Layers bases from Exec's
 public library list, so a late trace can observe libraries opened earlier.
 OpenWindow observations retain the caller's 48-byte NewWindow before the call.
 AllocMem/AllocVec observations record size, flags and result. DOS Write retains
@@ -151,3 +151,24 @@ same call inputs are recorded and execution continues. This observation covers
 that instruction form, not arbitrary indirect/tail calls. The diskfont case
 shows why caller-side evidence matters: the Shell passed InitResident's success
 value 1 as a library base even though diskfont had published a valid library.
+
+
+For layer-creation diagnosis, `COPPERSTART_PROBE_STOP_FAILED_LAYER=1` records
+classic/hook creation arguments and stops when an observed creation returns
+null. This covers `JSR d16(A6)` calls to CreateUpfrontLayer, CreateBehindLayer,
+CreateUpfrontHookLayer and CreateBehindHookLayer. It does not change their
+results or classify an allocation failure as an emulator fault.
+
+`COPPERSTART_PROBE_RING_SIZE` selects retained entry capacity (default 512).
+Optional hexadecimal `COPPERSTART_PROBE_PC_MIN` and `COPPERSTART_PROBE_PC_MAX`
+filter ordinary instruction samples to an inclusive minimum and exclusive
+maximum. API observations, interrupt boundaries and diagnostic stops remain
+recorded. Execution and emulated timing are unchanged. The trace records these
+settings so filtered evidence can be distinguished from complete instruction
+samples.
+
+`executedInstructions` counts scalar instruction executions after START_FIELD.
+The historical `instructions` field counts recorded entries, including boundary
+and stop entries; with a PC filter it is a sample count. Preserve input, filter
+and artifact identities with the result. This remains a correctness diagnostic,
+not a host-throughput acceptance measurement.
