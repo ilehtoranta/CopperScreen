@@ -19,7 +19,7 @@ marking the collection complete.
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
-| 7 | PPShow 4.0 | IN PROGRESS: native 3.1 displays ILBM; CopperStart traps in SetRGB32CM; native 1.3 unsupported | [Diagnostic receipt](UTILITY_PPSHOW_2026-10-31.json) |
+| 7 | PPShow 4.0 | IN PROGRESS: native 3.1 displays ILBM; SetRGB32CM component fixed; Classic ROM fit/startup and viewer replay pending | [Latest palette receipt](UTILITY_PPSHOW_PALETTE_2026-10-31.json) |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
@@ -687,3 +687,38 @@ fields with corrupted execution and does not display the fixture. Completion
 and an empty runner unsupported field do not establish application success.
 The [receipt](UTILITY_PPSHOW_2026-10-31.json) records inputs and trace evidence.
 PPShow remains current; fixing and qualifying the palette API is pending.
+
+### PPShow palette component corrected; application still pending
+
+CopperStart main commits `54b2e14` and `14adce0` implement compact ROM
+SetRGB32CM and native comparison controls. Each control covers 36 color writes
+and an out-of-range pen. Native Kickstart 3.1, generated compact graphics and
+an installed ROM all pass, with no skips. The tests compare complete map and
+table buffers, sentinels, callee registers and stack. Native instruction
+observation establishes type-zero aliasing and the low blue-nibble behavior;
+initial assumptions that failed the native control are not retained as oracles.
+
+The clean-main Release solution builds with zero errors and ten warnings.
+Its native Classic ROM compilation succeeds, but composition fails: compiled
+system code extends beyond the fixed graphics start, and the graphics block
+would also cross the footer. The raw compiler output is not a usable ROM.
+
+The separate completed single-bank `.44` snapshot provides a diagnostic layout
+control. Its captured source and dependencies reproduce its ROM byte-for-byte.
+Adding only the new palette file and composition call produces a valid 512 KiB
+ROM, grows graphics by 146 bytes and retains 502 bytes before the footer.
+The installed palette control passes on that image, and all three controls
+also pass after rebuilding the current shared producer graphics sources.
+This proves the sampled API correction and fit on that frozen layout, not
+Classic A500 integration or final current-toolchain acceptance. The separate
+producer prerequisites are not included in the utility commits.
+
+Both frozen baseline and palette candidate complete 32,000 fields against
+the same PPShow FFS image but remain at the CLI without launching the viewer.
+Their final CPU/hardware/output fingerprints and RGB hashes agree. These are
+failed startup controls, not application passes. Native 3.1 remains the positive
+image-display reference; the original Classic fault remains preserved.
+
+The [palette receipt](UTILITY_PPSHOW_PALETTE_2026-10-31.json) records source,
+ROM, dependency, build and runtime identities. PPShow remains current until
+Classic ROM integration and an inspected viewer replay are complete.

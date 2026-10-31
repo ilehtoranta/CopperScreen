@@ -1,0 +1,120 @@
+{
+  "utility": "PPShow 4.0",
+  "status": "IN PROGRESS: palette component fixed and pushed; Classic A500 ROM integration and viewer replay remain pending",
+  "producerCommits": [
+    "54b2e14def87e7ec5d7154c73f5cc6790a6cc302",
+    "14adce0e97030e49cfaaf038e5b0cc06a96e0a68"
+  ],
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/14adce0e97030e49cfaaf038e5b0cc06a96e0a68/Docs/NativeColorMap3220261031.md",
+  "fix": {
+    "api": "graphics.library/SetRGB32CM, LVO -996",
+    "composition": "Compact standalone graphics, emitted ROM routine; no host shim or runtime instruction generation",
+    "nativeObservations": [
+      "signed WORD count comparison",
+      "public caller-owned ColorMap does not require allocator provenance",
+      "type zero aliases the low table to ColorTable, whose second write replaces the high word",
+      "nonzero type high write preserves only previous bit 15",
+      "low-table blue nibble uses bits 19..16"
+    ],
+    "newSourceSha256": "a04a851a1ad093401397f443f4a914412fd7d0c5a97c0a78b1856f2e8566949a"
+  },
+  "controls": {
+    "casesPerControl": "36 writes: types 0/1/2 x indices 0/7/31 x four RGB tuples; one additional out-of-range call at index 32",
+    "assertions": "Complete ColorMap header, both complete tables, adjacent sentinels, public callee registers and stack; installed vector points into ROM",
+    "final": {
+      "path": "../CopperStart/artifacts/ppshow-palette-controls-v15.log",
+      "sha256": "76eb55a055fa4edb134e8179cc53a7f19a30509f9e210a9809ebbce4b1565415",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-palette-work\\tests\\CopperStart.Graphics.Tests\\bin\\Release\\net10.0\\CopperStart.Graphics.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     3, Skipped:     0, Total:     3, Duration: 13 s - CopperStart.Graphics.Tests.dll (net10.0)"
+      ]
+    },
+    "currentSharedTree": {
+      "path": "../CopperStart/artifacts/ppshow-palette-current-v16.log",
+      "sha256": "b5bfaed9e5ba50fab263cf9988ebdd090da5ee95ec5828d4e2b497f8e0b6f297",
+      "tail": [
+        "Test run for C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-palette-current-v16\\bin\\CopperStart.Graphics.Tests\\release\\CopperStart.Graphics.Tests.dll (.NETCoreApp,Version=v10.0)",
+        "A total of 1 test files matched the specified pattern.",
+        "",
+        "Passed!  - Failed:     0, Passed:     3, Skipped:     0, Total:     3, Duration: 3 s - CopperStart.Graphics.Tests.dll (net10.0)"
+      ]
+    },
+    "result": "Three pass, zero failures/skips: native Kickstart 3.1, generated compact ROM and installed frozen-layout candidate",
+    "oracleDevelopment": "Initial high-nibble/flag assumptions failed native comparison. Native instruction observation at F88E02 identified type-zero alias and the low blue nibble; rejected expectations were corrected before candidate acceptance."
+  },
+  "builds": {
+    "releaseSolution": {
+      "path": "../CopperStart/artifacts/ppshow-palette-solution-v10.log",
+      "sha256": "1b0ffd5743d8a7adc67d7e91bde4c5a2edaa8a657a4124cffc49f93e0aa70f47",
+      "tail": [
+        "    10 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:32.97"
+      ]
+    },
+    "releaseResult": "0 errors, 10 warnings; sequential build, ordinary project outputs, ShouldUnsetParentConfigurationAndPlatform=false. CopperOS Shell also references shared CopperStart sources, so this is not a frozen whole-source graph.",
+    "initialSolutionFailure": "Shared artifacts directory attempt v9 failed compiler attribute resolution; not counted as a passing build",
+    "cleanClassicRom": {
+      "path": "../CopperStart/artifacts/ppshow-palette-rom-v7.log",
+      "sha256": "220a0eca7930f24f0f9c4afbb18c6d9b203550440aff6efcae445858ca81178d",
+      "tail": [
+        "Time Elapsed 00:00:15.59",
+        "Unhandled exception. System.InvalidOperationException: Native graphics and compiled ROM ranges overlap or exceed the ROM: codeEnd=500748, graphics=[497664,524296), checksum=524268.",
+        "   at CopperStart.Graphics.NativeGraphicsRomImage.LinkInto(Byte[] rom, Int32 compiledCodeBytes, Boolean installClassicCommandEntry) in C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-palette-work\\native\\CopperStart.Graphics\\NativeGraphicsRomImage.cs:line 267",
+        "   at CopperStart.Graphics.NativeGraphicsLinker.Main(String[] args) in C:\\Users\\ilkle\\Koodit\\GIT\\CopperStart\\artifacts\\ppshow-palette-work\\native\\CopperStart.Graphics\\NativeGraphicsLinker.cs:line 58"
+      ]
+    },
+    "cleanClassicResult": {
+      "compiledCodeEnd": 500748,
+      "fixedGraphicsStart": 497664,
+      "graphicsEnd": 524296,
+      "checksumFooterStart": 524268,
+      "result": "FAILED ROM composition; raw compiler output is not usable linked ROM and must not replace an app pin"
+    }
+  },
+  "frozenLayout": {
+    "scope": "Separate completed .44 single-bank A1200 layout, diagnostic only; not a qualified replacement for the original Classic A500 lane. Uncommitted producer prerequisites are excluded from these utility commits.",
+    "baselineSha256": "fb170b81928775cd9b462ad46871acc9d2a7d603ccd9f5254f5b35a24eacfc12",
+    "baselineReproducedExactly": true,
+    "candidateSha256": "fcc223a0517a5d4a76b1333eeebda5274576284f72d5293e006d8c6ce49308af",
+    "bytes": 524288,
+    "rawCompilerSha256": "8BA11BDB14EB8441EEA80BB040EE478D43C70D8A82A38AE1BC88A8C35D566447",
+    "graphicsBytesBefore": 25860,
+    "graphicsBytesAfter": 26006,
+    "contiguousGraphicsBytes": 25078,
+    "precedingInitializerBytes": 928,
+    "footerHeadroom": 502,
+    "sourceChanges": [
+      "Display/ColorMap32.cs",
+      "Library/StandaloneComposition.cs"
+    ],
+    "allFrozenEmitterDependenciesIdentical": true,
+    "snapshotManifestSha256": "3600ee9bc306ee377d9bcb20893a96ce4eabe6ed85bfd1e6cfe946dcdcfc4785"
+  },
+  "replays": [
+    {
+      "directory": "artifacts/utility-sequential-2026-10-31/ppshow/copperstart-baseline-v14",
+      "fields": 32000,
+      "pc": "0020420E",
+      "rgbSha256": "4e88f5af80a123a46d81fb285037cdd358eabb4eae760810b5ba53a1a3a86041",
+      "result": "CLI prompt, no PPShow launch or fixture display; initial frame 2000 inspected, final RGB is identical"
+    },
+    {
+      "directory": "artifacts/utility-sequential-2026-10-31/ppshow/copperstart-candidate-v14",
+      "fields": 32000,
+      "pc": "0020420E",
+      "rgbSha256": "4e88f5af80a123a46d81fb285037cdd358eabb4eae760810b5ba53a1a3a86041",
+      "result": "CLI prompt, no PPShow launch or fixture display; initial frame 2000 inspected, final RGB is identical"
+    }
+  ],
+  "next": "Resolve Classic A500 ROM fit/startup integration and replay PPShow before advancing to DiskMaster. Native 3.1 fixture display and original Classic palette fault remain recorded in UTILITY_PPSHOW_2026-10-31.json.",
+  "limitations": [
+    "No CopperStart PPShow main-screen pass",
+    "No new app firmware pin or package publication",
+    "No current-toolchain whole-system acceptance or throughput claim",
+    "No ROM, system file or utility media is committed"
+  ]
+}
