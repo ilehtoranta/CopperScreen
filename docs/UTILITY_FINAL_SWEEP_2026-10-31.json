@@ -678,7 +678,43 @@
     {
       "order": 9,
       "utility": "MuchMore4.6",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "MAIN_READER_AND_SPACE_SCROLL_VERIFIED_BOTH_ROMS",
+      "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; read-only HDF",
+      "guiProvider": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-muchmore-copperstart-v184",
+          "completedFields": 16000,
+          "beforeAndAfterScrollVisuallyInspected": true,
+          "beforeRgbSha256": "1fbd380c85eebde20c9ff68a917073e8a9086f5f48eb395aba2f3aa4e11def1f",
+          "afterRgbSha256": "b9af4650004e2266c1ce92f20b0c9c00c74a3f20f9993d0b4ac24a0680f9e202",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick31",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-muchmore-kick31-v184",
+          "completedFields": 12000,
+          "beforeAndAfterScrollVisuallyInspected": true,
+          "beforeRgbSha256": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
+          "afterRgbSha256": "74c89055c073054db947c4e7654d7f1f1fa9af56d99adcf187a2e25a09237e51",
+          "unsupportedReported": false
+        }
+      ],
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-muchmore-ffs-v183.hdf",
+          "sha256": "75257744d5068070a016951e4ff6fe0a0b94d7f4df7dbf199fdb540b3686b791",
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-muchmore-ofs-v183.hdf",
+          "sha256": "50e2988df744675dbe388cce8de9219eac1c95f76b2df7d0a5629b96498f160f",
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "inputScript": "artifacts/utility-sequential-2026-10-31/final-muchmore-input-v184.json",
+      "limitations": "Fonts and scroll distance differ; no pixel parity or exact line-count/scroll-distance qualification."
     },
     {
       "order": 10,
@@ -730,7 +766,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Eight refreshed utilities verified. Continue with MuchMore;4 final replay rows remain pending. Audit earlier GUI-dependent rows against final payload.",
+  "nextInvestigation": "Nine refreshed utilities verified. Continue with MemCheck;3 final replay rows remain pending, then completion audit and earlier GUI-dependent rechecks.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
