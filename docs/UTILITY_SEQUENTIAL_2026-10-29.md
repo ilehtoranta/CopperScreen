@@ -994,3 +994,21 @@ start497664). This is not a runnable combined image. A separate size-policy
 candidate is under investigation; no final utility replay is claimed yet.
 See the [final sweep receipt](UTILITY_FINAL_SWEEP_2026-10-31.json) for the
 current source identities, unsuccessful configurations and pending cases.
+
+The follow-up SmartFS work initialization and allocation-header snapshot changes
+save1482 bytes against that baseline, leaving1374 bytes of overlap in v131.
+Focused DOS tests after the subsequent process-snapshot/FFS candidate pass1346
+cases, with one optional native MakeLink test skipped. Three native direct-write
+tests fail in both the candidate-era run and the unchanged b07353c control using
+the pinned CopperSFS submodule; each reports the same7/15 passing scenarios.
+These remain failed coverage. A source-inspection test also assumes a sibling
+CopperOS checkout and is unavailable at the detached worktree location.
+
+The first process-snapshot size comparison (v135) is invalid: a simultaneous test
+build replaced shared managed outputs with the Full SFS profile before the ROM
+snapshot was copied. Its map retains Full SFS write methods absent in the Classic
+baseline. A serialized Classic rebuild (v139) is pending; do not infer a Classic
+size regression from v135. A refreshed Kickstart1.3 ProTracker run with the current
+runner completes26000 fields, shows the editor, and retains the same1024-byte
+final pattern hash as the earlier native reference. The CopperStart refresh and
+the remaining final collection replays are pending.

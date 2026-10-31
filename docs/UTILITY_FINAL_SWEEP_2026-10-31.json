@@ -65,6 +65,40 @@
       "graphicsStart": 497664,
       "overlapBytes": 22902,
       "notes": "Compilation and compatibility check finish,but the alternate general size policy loses the compact ROM frame lowering and makes the combined image larger. Not a runnable ROM."
+    },
+    {
+      "run": "utility-shared-helpers-rom-v127",
+      "status": "NO_SIZE_CHANGE",
+      "notes": "NoInlining diagnostic produced the same raw ROM hash as v121. All annotations reverted; no retained source change."
+    },
+    {
+      "run": "utility-direct-work-rom-v129",
+      "status": "COMPOSITION_FAILED",
+      "codeEnd": 499278,
+      "graphicsStart": 497664,
+      "overlapBytes": 1614,
+      "savedBytesVsV121": 1242,
+      "notes": "Initialize Smart work areas directly in existing helper; no guard or API removal."
+    },
+    {
+      "run": "utility-direct-header-rom-v131",
+      "status": "COMPOSITION_FAILED",
+      "codeEnd": 499038,
+      "graphicsStart": 497664,
+      "overlapBytes": 1374,
+      "savedBytesVsV121": 1482,
+      "notes": "Also read allocation headers directly into fresh caller snapshots."
+    },
+    {
+      "run": "utility-direct-process-rom-v134",
+      "status": "SOURCE_BUILD_FAILED",
+      "notes": "Mechanical conversion incorrectly changed a multiline argument separator; corrected before v135. No native image produced."
+    },
+    {
+      "run": "utility-direct-process-rom-v135",
+      "status": "INVALID_PROFILE_COMPARISON",
+      "codeEnd": 511940,
+      "notes": "Native map retains WriteSmartFile and Full SFS methods absent in v131. A parallel default-profile test build replaced shared managed outputs before the ROM snapshot was copied. Does not establish Classic size or a process-reader regression. Rebuilding Classic alone as v139."
     }
   ],
   "gui": {
@@ -172,12 +206,59 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Retain v121 as the fresh-source baseline; inspect redundant source/emission size without removing supported guest APIs. All final replay rows remain pending.",
+  "nextInvestigation": "Await serialized Classic v139 ROM build. The v135 comparison was contaminated by shared build outputs; do not use its size to judge the process snapshot conversion. Final utility replay rows remain pending.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
     "largestMethodBytes": 7242,
     "romCodeBytes": 489412,
     "romRodataBytes": 11100
+  },
+  "footprintValidation": [
+    {
+      "log": "../CopperStart/utility-direct-work-native-v130.log",
+      "scope": "MC68000 manual-unmap/SCSI work initialization",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "log": "../CopperStart/utility-direct-header-host-v132.log",
+      "scope": "DOS suite with direct Smart work and allocation-header changes",
+      "passed": 1346,
+      "failed": 4,
+      "skipped": 1,
+      "notes": "One source-path test assumes a sibling CopperOS checkout. Three native direct-write failures need an unchanged-source control; not dismissed as unrelated."
+    },
+    {
+      "log": "../CopperStart/utility-direct-process-host-v136.log",
+      "scope": "DOS suite after direct process snapshots and FFS work initialization",
+      "passed": 1346,
+      "failed": 0,
+      "skipped": 1,
+      "excluded": "Three native direct-write tests and one sibling source-path test; both separately tracked."
+    },
+    {
+      "log": "../CopperStart/utility-control-direct-write-v137.log",
+      "scope": "Unchanged b07353c plus pinned CopperSFS 662562bb86ea77a0e4dfb68e405a6b668278b885",
+      "passed": 0,
+      "failed": 3,
+      "skipped": 0,
+      "notes": "All three CPUs reproduce prior failures. Each runs15 scenarios,7 pass and8 fail, with16 native operation entries,10 operation returns and9 cleanup returns. Control is evidence of pre-existing failures, not passing write qualification."
+    }
+  ],
+  "protrackerNativeRefresh": {
+    "directory": "artifacts/utility-sequential-2026-10-31/final-protracker-kick13-v138",
+    "status": "MAIN_SCREEN_AND_FINAL_PATTERN_VERIFIED",
+    "completedFields": 26000,
+    "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "adfSha256": "38898d61f5b96971be4946761ac3101181d01e40c33512453d39eb76dca60a3a",
+    "inputScriptSha256": "abfff3ac95aa815257d8ade151ed0e128ad7dc1c1db095155a05e31bcc5c4aea",
+    "mainScreenVisuallyInspected": true,
+    "finalPatternAddress": "00C329B4",
+    "patternBytes": 1024,
+    "finalPatternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+    "matchesRetainedNativeFinalPattern": true,
+    "notes": "Refresh uses current runner; screenshot checked. CopperStart side still pending. No sample-audio or save/reload qualification."
   }
 }
