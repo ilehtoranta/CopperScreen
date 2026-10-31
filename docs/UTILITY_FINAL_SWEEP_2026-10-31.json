@@ -637,7 +637,43 @@
     {
       "order": 8,
       "utility": "DiskMaster2V37",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "THREE_MAIN_PANES_AND_ABOUT_DISMISSAL_VERIFIED_BOTH_ROMS",
+      "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; read-only HDF",
+      "guiProvider": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-diskmaster-copperstart-v182",
+          "completedFields": 20000,
+          "aboutDismissalInputField": 16000,
+          "threePopulatedPanesVisuallyInspected": true,
+          "finalRgbSha256": "c46498a3c1a31e5b092213c8a34419bfd9b30da895d54eacf05f0dc142720fb2",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick31",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-diskmaster-kick31-v182",
+          "completedFields": 10000,
+          "aboutDismissalInputField": 6000,
+          "threePopulatedPanesVisuallyInspected": true,
+          "finalRgbSha256": "4022ec020429c05c1ad7270bdaa3ca935393b622c382663cf9218dd50439038f",
+          "unsupportedReported": false
+        }
+      ],
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-diskmaster-ffs-v181.hdf",
+          "sha256": "b926b4aa7210be021b204bef64847937ee0a336b4f43c7ec15913a6f98715e3c",
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-diskmaster-ofs-v181.hdf",
+          "sha256": "a8ac29955c27b23ce3e7881a222d2c7354a1b2bf1544b7d73f0c2d440a2cae39",
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "limitations": "OS V37+ utility; no native1.3 positive claim. Fonts, title and colors differ; file operations and pixel parity are not qualified.",
+      "prerequisites": "Complete package, guest GUI/FFP/Shell; retained private relocated GadTools for CopperStart. Native reference selects original resident libraries and retains ENV setup."
     },
     {
       "order": 9,
@@ -694,7 +730,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Seven refreshed utilities verified. Continue with DiskMaster;5 final replay rows remain pending. Earlier GUI-dependent rows retain their exact payload identities for completion audit.",
+  "nextInvestigation": "Eight refreshed utilities verified. Continue with MuchMore;4 final replay rows remain pending. Audit earlier GUI-dependent rows against final payload.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
