@@ -1,0 +1,253 @@
+{
+  "utility": "DeluxePaint V demo5.0b9 (1994-08-12)",
+  "status": "IN PROGRESS: native Kickstart3.1 reaches editor and draws a stroke. CopperStart DF0 filesystem mount omission identified; source fix and regression are under ROM-layout qualification.",
+  "archive": {
+    "path": "media/utilities/originals/DPaintV.lha",
+    "sha256": "9e8a31c13c9cb69046376968ef05a43c2e3cc298e14fb7698cf04f97b7cb4091",
+    "files": 29,
+    "expandedBytes": 690159,
+    "executableBytes": 582264,
+    "executableSha256": "5402cc3dd2fe6d0ec84be9cc6eb389ec4dc207709b48e7be66366065847f635e"
+  },
+  "installation": "Complete demo remains on901120-byte OFS floppy DPaintV_demo, including its root Libs and Fonts; system HDF supplies OS only. Archive bytes independently verified after reopening the floppy. Demo readme only qualifies floppy operation.",
+  "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; protected system/demo media",
+  "romSha256": "fc7d8392d7c4fbda24810540a166abbe88e3f2740eb754ee2cc9a82535041837",
+  "producerCommit": "f1ea3b26380f65618b81ab25f6f4581c04312d23",
+  "attempts": {
+    "kick31-v4": "Stops at Cannot open asl.library v38; original system image has no ASL file. No utility pass.",
+    "kick31-wb31-v6": "After installing private WB3.1 standard libraries, native run requests a write to protected PpaintControl volume; not main/editor.",
+    "copperstart-v4": "Fails before DPaint launch while running old system C:Assign.",
+    "copperstart-first-fault-v7": {
+      "field": 1884,
+      "cycle": 267808324,
+      "reason": "LOW_OR_UNPEEKABLE_PC",
+      "pc": "00000000",
+      "observation": "Old Workbench Assign entry0028F618 calls through A5 into new RunCommand data002E6C70. Fault is in startup command, not yet DPaint.",
+      "attachedAdfSha256": "931e6bcf323c85e82e77e265d92b66374a9bc6f981a3a267fe4127a101753e9c"
+    }
+  },
+  "currentInputs": {
+    "native": {
+      "hdf": "system-native-wb31-ofs-v8.hdf",
+      "hdfSha256": "c58003084d017f4e379206e661b8d9620cb198dc67bdfff98ad5c20f0bda53ba",
+      "adfSha256": "ef8ff6e9dfda6458c160b286d860df8e174355b954634700d0bbf8211768d59c",
+      "startup": "C:Assign ENV: RAM:\nC:Assign T: RAM:\nC:CopperGui\nC:Assign FONTS: DF0:Fonts\nCD DF0:\nDF0:DPaint_Demo\n",
+      "workbench31": {
+        "sourceSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+        "adfSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+        "libraries": [
+          {
+            "path": "C/Assign",
+            "bytes": 3220,
+            "sha256": "2f58ca68d02a750a44b46e4b255e53cb244db7a9ce56ce40210594e46bd47a4e"
+          },
+          {
+            "path": "Libs/asl.library",
+            "bytes": 40944,
+            "sha256": "955622370b3fa8fb8353f39fc428f4429786840c565bb87a5632fa0c81711ae9"
+          },
+          {
+            "path": "Libs/commodities.library",
+            "bytes": 8644,
+            "sha256": "a9d4f7659b6ee7ec41b44b530c5324882230bebff772ef60fc739d29a93da0e4"
+          },
+          {
+            "path": "Libs/datatypes.library",
+            "bytes": 15592,
+            "sha256": "54ae9b75767b8c57f80528c50e60e040f0fe4f973620feb86c0abbd645e5bc53"
+          },
+          {
+            "path": "Libs/diskfont.library",
+            "bytes": 15340,
+            "sha256": "0c7e298097a9aa374ff423dc60e47ed6d860fd1f61f7f69e83a36db099f0ccbb"
+          },
+          {
+            "path": "Libs/iffparse.library",
+            "bytes": 6832,
+            "sha256": "3ea9f30cea549ca3b6ced046152b7cef15a3fafba935ca232870d5394097ca9b"
+          },
+          {
+            "path": "Libs/locale.library",
+            "bytes": 18072,
+            "sha256": "7a5e637728adebb7e14a2722d90dfb3739ac5abf6746a39931e0aa4f14ef327f"
+          },
+          {
+            "path": "Libs/mathtrans.library",
+            "bytes": 4280,
+            "sha256": "e0fac048fb68b56f1f4eeab36f2680f08de94d6511b67f487edccc4b880c3055"
+          },
+          {
+            "path": "Libs/rexxsyslib.library",
+            "bytes": 33392,
+            "sha256": "953ecce75d6c5926e5f00981a1adb4208addadcae1ef5306637cf7c76793daaf"
+          }
+        ]
+      },
+      "runtime": "kick31-wb31-v9",
+      "status": "terminal10000 fields; Screen Format chooser visible; Use still needs activation"
+    },
+    "copperStart": {
+      "hdf": "system-wb31-ffs-v8.hdf",
+      "hdfSha256": "47cd3e3b340bb447e0cef8d2b59a3b30ffcbe87f5811307509022b0b85472c27",
+      "adfSha256": "eed9db54ff1699d01d9d6295088935ef2022c2888a926a95bb9b0f2d790ff547",
+      "startup": "C:CopperGui\nC:Assign FONTS: DF0:Fonts\nCD DF0:\nDF0:DPaint_Demo\n",
+      "workbench31": {
+        "sourceSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+        "adfSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+        "libraries": [
+          {
+            "path": "C/Assign",
+            "bytes": 3220,
+            "sha256": "2f58ca68d02a750a44b46e4b255e53cb244db7a9ce56ce40210594e46bd47a4e"
+          },
+          {
+            "path": "Libs/asl.library",
+            "bytes": 40944,
+            "sha256": "955622370b3fa8fb8353f39fc428f4429786840c565bb87a5632fa0c81711ae9"
+          },
+          {
+            "path": "Libs/commodities.library",
+            "bytes": 8644,
+            "sha256": "a9d4f7659b6ee7ec41b44b530c5324882230bebff772ef60fc739d29a93da0e4"
+          },
+          {
+            "path": "Libs/datatypes.library",
+            "bytes": 15592,
+            "sha256": "54ae9b75767b8c57f80528c50e60e040f0fe4f973620feb86c0abbd645e5bc53"
+          },
+          {
+            "path": "Libs/diskfont.library",
+            "bytes": 15340,
+            "sha256": "0c7e298097a9aa374ff423dc60e47ed6d860fd1f61f7f69e83a36db099f0ccbb"
+          },
+          {
+            "path": "Libs/iffparse.library",
+            "bytes": 6832,
+            "sha256": "3ea9f30cea549ca3b6ced046152b7cef15a3fafba935ca232870d5394097ca9b"
+          },
+          {
+            "path": "Libs/locale.library",
+            "bytes": 18072,
+            "sha256": "7a5e637728adebb7e14a2722d90dfb3739ac5abf6746a39931e0aa4f14ef327f"
+          },
+          {
+            "path": "Libs/mathtrans.library",
+            "bytes": 4280,
+            "sha256": "e0fac048fb68b56f1f4eeab36f2680f08de94d6511b67f487edccc4b880c3055"
+          },
+          {
+            "path": "Libs/rexxsyslib.library",
+            "bytes": 33392,
+            "sha256": "953ecce75d6c5926e5f00981a1adb4208addadcae1ef5306637cf7c76793daaf"
+          }
+        ]
+      },
+      "runtime": "copperstart-wb31-v9",
+      "status": "terminal10000 fields; Cannot find DF0:Fonts; CLI; DPaint not launched"
+    }
+  },
+  "remaining": [
+    "Qualify DPaint editor/basic drawing under CopperStart after program-directory handling",
+    "Commit/push any completed Shell source correction and native regression",
+    "Final current-source/compiler sweep remains pending; no host-throughput claim"
+  ],
+  "nativeEditor": {
+    "run": "kick31-use-v12",
+    "field": 16000,
+    "inputScript": "native-use-v12.json",
+    "inspection": "DeluxePaint Colour editor, canvas/tool palette visible after Use",
+    "drawingRun": "kick31-draw-v15",
+    "drawingField": 20000,
+    "drawingInputScript": "native-draw-v15.json",
+    "drawingInspection": "Persistent white stroke visible on canvas after mouse release",
+    "scope": "Minimum native editor/basic-drawing control, not disabled demo Save/Print/Delete/Copy features",
+    "editorRgbSha256": "8aa24f5ecbdf6743d39ba59b0d84479455759141d698eef40ebaa432f67dcbe9",
+    "drawingRgbSha256": "16e3acea5e93a7ac7f489c2b7afa3f1eafd4d12799b7c90f232f90919d7a7b66"
+  },
+  "df0MountDiagnosis": {
+    "source": "NativeDosBoot.Startup mounts optional DF2/DF3 but omits DF0 after HDF boot",
+    "fix": "Initialize mounts the prepared DF0 DeviceNode unconditionally; the existing HDF loop still selects the highest-priority boot volume.",
+    "systemBaselineIl": "313 methods,0 changed versus retained System input",
+    "correctedSystemIl": "Latest prepared-node variant replaces the bootFs expression in Initialize; native qualification pending.",
+    "regression": "HdfShellReadsARealNonBootableDf0Volume generates distinct HDF/OFS floppy payloads and reads DF0 through public DOS",
+    "beforeRegression": "dpaint-df0-before-v17:1 test executed and failed as expected at zero Lock result, frame1182, ROMFC7D8392...",
+    "candidate": "dpaint-df0-rom-v14: raw512KiB compilation succeeds; graphics composition rejects338-byte overlap (coreEnd499546, resident499208)",
+    "nextControl": "Unchanged rebuilt System input reproduced the retained raw ROM byte for byte (v18).",
+    "unchangedSystemNativeControl": {
+      "root": "dpaint-system-baseline-rom-v18",
+      "rawRomSha256": "706b674881496d9f5c3da2af6eb137b790803eca2a9f4889b3edbf21150293d0",
+      "result": "Byte-identical to retained LhA raw ROM; rebuild is not the cause of growth"
+    },
+    "nextCandidate": "v31 composed and passes DF0 regression. DPaint v34 10000 fields has no DF0:Fonts error but editor not reached; v35 extends to 30000 fields.",
+    "helperV20": "Raw ROM compiles; composition rejects306-byte overlap. Artifact replacement was compiled at item0 instead of original item19.",
+    "orderedBuild": "Compile item order matches the original 31 source items; helper variant v23 still overlapped by 306 bytes.",
+    "sourceSolution": "dpaint-df0-node-solution-v32.log: 0 warnings, 0 errors (owned main worktree source).",
+    "orderedV23": "Compile order preservation did not reduce306-byte overlap; it was not sufficient to explain the remaining growth.",
+    "initializeV25": {
+      "result": "Raw compile succeeds, composition rejects4-byte overlap",
+      "codeEnd": 499212,
+      "resident": 499208
+    },
+    "initializeReuseV28": "Raw compile succeeds; composition rejects 14-byte overlap; reusing the platform variable did not reduce size.",
+    "preparedNodeV31": {
+      "romSha256": "d307f189516bedf080777a4a44b018039a346ba25254b6afffddc819f572eec8",
+      "bytes": 524288,
+      "composition": "24996 native graphics bytes,74 supported vectors; no overlap",
+      "regression": "dpaint-df0-after-v33: 1 executed,1 passed; distinct DF0 payload read through public DOS"
+    },
+    "producerCommit": "8997abe (pushed origin/main): Mount DF0 data volumes when booting from HDF",
+    "noFloppyRegression": {
+      "run": "lha-no-floppy-v36",
+      "fields": 10000,
+      "result": "All five archive members pass CRC, Operation successful, CLI returned",
+      "rgbSha256": "fd6be908b56e5f203c7f270a7545c55a83d1cfe003561bb98fba783e9fed3ed8",
+      "comparison": "Exact previous qualified LhA RGB output"
+    }
+  },
+  "mathFfpDependency": {
+    "firstRun": "copperstart-df0-long-v35",
+    "fields": 30000,
+    "result": "Cannot open version 0 of mathffp.library; CLI returned; editor not reached",
+    "source": "CopperStart native/CopperStart.Intuition/NativeMathFfp.cs already provides native FFP",
+    "moduleTest": "native-ffp-v37: DiskLoadedFfpKeepsCodeResidentAndMatchesNativeValuesAndConditionCodes,1 executed,1 passed,51 numerical/CCR cases",
+    "moduleReceipt": {
+      "sha256": "506FB64C3C4D7BC8F41A870F267AE526176CE221311D6FDF66D554CD72CC8E20",
+      "installerSha256": "702CF9381D53BB1FF6D976E8674EBC14CC057092B761AD298A739227375D34FE",
+      "kernelSha256": "B3B458D5B4952AD95927E6C149BB78C37BC48B78D41BDEC3ADD49A27205EEB21",
+      "kernelBytes": 1052,
+      "cases": 51,
+      "lifetime": "Retain the entire guest module until reset; installer never UnLoadSegs it",
+      "emitterSha256": "2AC4945CF64450823C7DFB5C32BB957D8203F3DBD2D4A5B94A4BADCB9FC3E166"
+    },
+    "nextRun": "copperstart-ffp-v39: 30000 fields terminal; FFP prerequisite resolved; graphical requester cannot open workbench.library; editor not reached",
+    "hdfSha256": "42d5e9b79e79b14511cafcd7d2b9d1f0eb0db0c8d8469987e2615454f376872c",
+    "adfSha256": "fe91b267bb3fd955c3da42b0e5e968b44b52e520c8d2d05449332f6cda620efc",
+    "mathtrans": "Current fixture uses privately owned Workbench3.1 mathtrans.library; CopperOS replacement exists locally but has not been substituted or qualified in DPaint."
+  },
+  "workbenchDependency": {
+    "runtime": "copperstart-workbench-v48:30000 fields,Workbench error resolved,next requester cannot open PROGDIR:libs/dpblit.library",
+    "result": "Graphical System Message requester: cannot open workbench.library",
+    "source": "ClassicDesktopEntry installs GUI/display/console/timer/keymap but does not call existing NativeWorkbenchLibrary.Install",
+    "beforeTest": "dpaint-workbench-before-v41: fresh source payload compiles,1 test executed and fails at public Workbench OpenLibrary returning zero,field25504",
+    "next": "Native program-directory regression and Shell foreground fix; editor still unverified",
+    "afterTest": "dpaint-workbench-after-v45: fresh payload compiles; 1 native regression executed,1 passed,public Workbench OpenLibrary and original window/display checks",
+    "producerCommit": "65966d7 pushed origin/main",
+    "payloadSha256": "67c39c0738733a20cfaf2baf0d9df92848c3180c9b673a5da68ea92019228e10",
+    "payloadBytes": 367160
+  },
+  "programDirectoryDependency": {
+    "runtime": "copperstart-workbench-v48",
+    "hdfSha256": "f6bc4fc437b8f3d734221577d715d5ffbdf1db4f082f22537764c4c3ed19415b",
+    "adfSha256": "6705e6cbb19f67d77e54e04f36f24108cabdc42608a242c3ac79db09ad804dba",
+    "trace": "dpblit-failure-v50",
+    "stop": "OPEN_LIBRARY_FAILED",
+    "field": 25748,
+    "observedInstructions": 59540824,
+    "library": "PROGDIR:libs/dpblit.library",
+    "requestedVersion": 0,
+    "result": 0,
+    "snapshot": "Shell process 0x231230,pr_HomeDir at188 is0; bundled dpblit3408bytes has resident tag; all29 original demo files independently read back",
+    "source": "CopperOS DosShellNativeForegroundCore.Execute does not set a program-directory lock around RunCommand",
+    "regression": "HdfShellResolvesProgramDirectoryFromExecutableLocation: command in C:,current SYS:Data,reads C:Sibling through PROGDIR:,before run v51 active"
+  }
+}

@@ -36,6 +36,15 @@ using var m = new LightweightA500Machine(new LightweightA500Configuration
 var rom = File.ReadAllBytes(args[0]);
 m.LoadKickstart(rom);
 if (mediaMode == "adf") { m.MountAdf(0, File.ReadAllBytes(args[1])); m.SetDriveWriteProtected(0,true); }
+var attachedAdfPath=Environment.GetEnvironmentVariable("COPPERSTART_PROBE_ADF");
+string? attachedAdfSha256=null;
+if(!string.IsNullOrWhiteSpace(attachedAdfPath))
+{
+    if(mediaMode=="adf") throw new ArgumentException("Primary ADF is already mounted");
+    var attachedAdf=File.ReadAllBytes(attachedAdfPath);
+    attachedAdfSha256=Convert.ToHexString(SHA256.HashData(attachedAdf));
+    m.MountAdf(0,attachedAdf); m.SetDriveWriteProtected(0,true);
+}
 var start = int.Parse(args[3]); var end = int.Parse(args[4]);
 var watchText = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_WATCH_ADDRESS");
 uint? watchAddress = string.IsNullOrWhiteSpace(watchText) ? null : Convert.ToUInt32(watchText, 16);
@@ -95,6 +104,7 @@ var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILL
 var stopSetFunction = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_SET_FUNCTION") == "1";
 var stopFailedLayer = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_LAYER") == "1";
 var stopFailedReadArgs = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_READARGS") == "1";
+var stopFailedLibrary = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_LIBRARY");
 void ObserveCall()
 {
     var c=m.Cpu;
@@ -260,6 +270,9 @@ void ObserveReturn()
         { Keep("READARGS_FAILED"); stop=true; reason="READARGS_FAILED"; }
         if(stopFailedDevice && p.Api=="OpenDevice" && c.D[0]!=0)
         { Keep("OPEN_DEVICE_FAILED"); stop=true; reason="OPEN_DEVICE_FAILED"; }
+        if(p.Api=="OpenLibrary" && c.D[0]==0 && !string.IsNullOrWhiteSpace(stopFailedLibrary) &&
+            string.Equals(p.Library,stopFailedLibrary,StringComparison.OrdinalIgnoreCase))
+        { Keep("OPEN_LIBRARY_FAILED"); stop=true; reason="OPEN_LIBRARY_FAILED"; }
         pending.RemoveAt(i); break;
     }
 }
@@ -329,9 +342,9 @@ while (m.CompletedFrames < end && !stop)
 var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => ring[(Math.Max(0,count-ring.Length)+i)%ring.Length]).ToArray();
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
-    profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
+    profile, mediaMode, attachedAdfSha256, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
-    watchAddress, watchExpected, stopStackTask, stopStackFloor, stackCaptureWindowBytes=4096, stackCaptureChecks, minimumCapturedStack=stackCaptureChecks==0?(uint?)null:minimumCapturedStack, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, ringSize, stopPc, stopPcD0,
+    watchAddress, watchExpected, stopStackTask, stopStackFloor, stackCaptureWindowBytes=4096, stackCaptureChecks, minimumCapturedStack=stackCaptureChecks==0?(uint?)null:minimumCapturedStack, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, stopFailedLibrary, ringSize, stopPc, stopPcD0,
     recordPcMin, recordPcMax, executedInstructions,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());

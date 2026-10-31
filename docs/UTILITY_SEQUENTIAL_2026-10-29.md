@@ -24,7 +24,7 @@ marking the collection complete.
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
 | 11 | Amiga LhA 2.15 | VERIFIED MINIMUM:5-member CRC test and CLI return; default4KiB command stack stays in bounds | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
-| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
+| 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | IN PROGRESS | Native 3.1 editor/drawing verified; CopperStart passes DF0/FFP/Workbench prerequisites; bundled PROGDIR library fails |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
 OCS 8371/8362, 512 KiB Chip and 512 KiB slow RAM, no Fast RAM, RTC or host
@@ -894,3 +894,23 @@ but graphics composition overlaps by 3176 bytes. Fresh-source Shell and GUI
 payload compilation checks both pass. DeluxePaint is next after this utility
 fix and evidence are pushed. The [receipt](UTILITY_LHA_STARTUP_2026-10-31.json)
 retains the invalid-input correction and the intermediate failed candidates.
+
+
+Deluxe Paint investigation, 2026-10-31: the complete 29-file demo floppy reaches
+the editor and draws a persistent stroke under native Kickstart 3.1. CopperStart
+initially omitted DF0 while booting SYS: from HDF. Producer commit `8997abe`
+mounts the prepared DF0 node during DOS initialization. A native public-DOS
+regression reads distinct bytes from a nonbootable floppy, and the no-floppy
+LhA replay retains its exact successful output. Both pass on the composed
+512 KiB candidate. CopperStart's existing disk-loaded FFP module passes all
+51 numerical/CCR cases and resolves DPaint's next missing-library error.
+The subsequent 30000-field run reaches a graphical requester for missing
+`workbench.library`; the CopperStart editor remains unverified. See the
+[DPaint receipt](UTILITY_DPAINT_STARTUP_2026-10-31.json) for inputs and scope.
+
+CopperStart commit `65966d7` publishes its existing native Workbench API with
+Classic GUI prerequisites. The fresh native upgrade regression passes, including
+public Workbench opening and its previous window/display checks. DPaint now
+requests `PROGDIR:libs/dpblit.library` unsuccessfully. A bounded trace stops on
+that failed public OpenLibrary at field 25748; the foreground process has no
+program-directory lock. The Shell program-directory regression is in progress.
