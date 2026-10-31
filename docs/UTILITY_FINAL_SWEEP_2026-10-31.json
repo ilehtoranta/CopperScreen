@@ -129,7 +129,7 @@
     "status": "PAYLOAD_COMPILE_PASSED",
     "executed": 1,
     "passed": 1,
-    "runtimeQualification": false,
+    "runtimeQualification": "SysInfo main screen on refreshed Classic ROM; payload also byte-identical to retained qualified DPaint v116.",
     "compileDuration": "2m16s"
   },
   "utilities": [
@@ -376,7 +376,30 @@
     {
       "order": 4,
       "utility": "SysInfo4.4",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "MAIN_SCREEN_VERIFIED_BOTH_ROMS",
+      "controlledDisk": "artifacts/utility-sequential-2026-10-31/final-sysinfo-gui-v145.adf",
+      "controlledDiskSha256": "8747040f7019b91b8b9a89d1ad7264dcba7f49de7af9cb088eb6676170157b4f",
+      "programSha256": "65f36c3bda05b4133314ff05c272499fbbf50be6b94434c40babfc8c9083cf02",
+      "guiProviderSha256": "a2c6b33eca4ed4e75d3e0d539d9e4b236255a554942892115d6fb73006384d54",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-sysinfo-copperstart-v146",
+          "completedFields": 40000,
+          "mainScreenVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "c78f3912b2139c2bbbf3736c1980522dc1f5c8e0fb48bbf3083324b162215415"
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-sysinfo-kick13-v146",
+          "completedFields": 12000,
+          "mainScreenVisuallyInspected": true,
+          "unsupportedReported": false,
+          "finalRgbSha256": "3fa1e4a7aa0b80427a3f47f5870df0034006a4c63907a5d1139cec2303f8a6ff"
+        }
+      ],
+      "limitations": "Main-screen startup only. Font and reported system details differ; speed/report accuracy and complete GUI interactions not qualified."
     },
     {
       "order": 5,
@@ -453,7 +476,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Three refreshed utilities verified. Continue with SysInfo;9 final replay rows remain pending.",
+  "nextInvestigation": "Four refreshed utilities verified. Continue with PPMore;8 final replay rows remain pending.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
