@@ -73,7 +73,7 @@
     <Error Condition="!Exists('$(CopperOsBundleDirectory)/CopperStart-A1200.rom') Or !Exists('$(CopperOsBundleDirectory)/CopperOS.hdf')"
            Text="Stage the qualified CopperOS bundle using scripts/prepare-copperos-bundle.ps1 -CopperStartA1200Rom &lt;rom&gt; -CopperOsHdf &lt;hdf&gt;, or set CopperOsBundleDirectory to the staged directory." />
     <ItemGroup>
-      <_CopperOsBundleInput Include="$(CopperOsBundleDirectory)/CopperStart-A1200.rom" ExpectedHash="ADD5F92850CE3E32C5F8283734A319D445300FE11F0B15F111B19A7D5ECF3680" />
+      <_CopperOsBundleInput Include="$(CopperOsBundleDirectory)/CopperStart-A1200.rom" ExpectedHash="3D25D4C903BEEB4FA21D38E9F2DD8B37D76EAFA1150D4686CBB8DF706008A4D6" />
       <_CopperOsBundleInput Include="$(CopperOsBundleDirectory)/CopperOS.hdf" ExpectedHash="DC597FA79C5479D43E98ABDEDFCB885056F9C22AFFA161126FF1B27C39C3CFA7" />
     </ItemGroup>
     <GetFileHash Files="@(_CopperOsBundleInput)" Algorithm="SHA256">

@@ -59,3 +59,6 @@ improves specific calls; it does not close the broader performance goal.
 Local producer evidence is in `CopperStart/artifacts/graphics-512-20261029`;
 consumer captures are in `artifacts/graphics-512/qualified-control` and
 `qualified-profile`. ROM/media and local artifacts are not committed or released.
+
+The [cold-boot follow-up](COPPEROS_COLD_BOOT_2026-10-31.md) recovers this regression
+with qualification `.49`; the measurements above retain their historical scope.

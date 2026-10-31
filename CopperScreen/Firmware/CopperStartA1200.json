@@ -1,9 +1,9 @@
 {
-  "qualificationId": "diskboot-2026-10-29-a1200-desktop-single-bank.37",
+  "qualificationId": "diskboot-2026-10-31-a1200-desktop-single-bank.49",
   "producerCommit": "a58bca7053d775d92819d3b04e267b01cc3ba209",
   "bytes": 524288,
-  "sha256": "add5f92850ce3e32c5f8283734a319d445300fe11f0b15f111b19a7d5ecf3680",
+  "sha256": "3d25d4c903beeb4fa21d38e9f2dd8b37d76eafa1150d4686cbb8df706008a4d6",
   "requirements": "PAL A1200, 68EC020 interpreter, Alice/Lisa, 2 MiB Chip RAM, no slow/Fast RAM, one existing FFS HDF on unit 0 and empty floppy drives. No RTC, RTG or shared folders. One standard 512 KiB F80000 ROM, including native graphics; no extension bank or companion ROM.",
-  "evidence": "docs/COPPEROS_SINGLE_BANK_2026-10-29.md",
-  "producerSourceSnapshot": "Frozen 2026-10-29 standalone reset inputs with on+generated+frame lowering and CLR always, shared console font source, real IRQ preemption and native DOS/HDF boot. Native graphics development snapshot: restored TextLength vector, two pen-contribution tables, adjacent rectangle-word updates, shared Chip Copper/VBlank initialization, and original-controlled depth-sized palette emission. Exact frozen input hashes, root map, compatibility report and emitter identity are retained in producer artifacts/graphics-512-20261029/rom-qualified. Desktop HDF and app system files retain exec-preemption.10. Development qualification; guest-cycle results and cold-boot regression are recorded separately."
+  "evidence": "docs/COPPEROS_COLD_BOOT_2026-10-31.md",
+  "producerSourceSnapshot": "Frozen .48 compiler/reset inputs, graphics emitter and Layers platform; unchanged exec-preemption.10 desktop HDF. Exec Clear walks its destination with a local count and 64-byte stores. TLSF validates consecutive boundary intervals with direct size extraction, retaining private metadata/range/bin checks. Size-bin selection uses a bounded bit search. Only these three Exec source files change; source snapshots and exact inputs are retained in CopperScreen artifacts/coldboot-20261031. The .48 Layer drawing improvements remain included; separate color-map/backfill work and the system-ROM migration remain outside this development qualification."
 }

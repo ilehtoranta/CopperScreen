@@ -66,7 +66,16 @@ void Map(string path,uint offset)
 }
 Map(args[2],0);
 if (args.Length >= 10) Map(args[9],0);
-var modules=new[]{new Module(args[3],args[4]),new Module(args[5],args[6])};
+// Optional disk-module symbols may be unavailable in a retained ROM/HDF bundle.
+// A pair of '-' arguments omits attribution, without changing guest execution
+// or the desktop-ready condition. Record this as a separate diagnostic protocol.
+var modules = new List<Module>();
+for (var i = 3; i <= 5; i += 2)
+{
+    if (args[i] == "-" && args[i + 1] == "-") continue;
+    if (args[i] == "-" || args[i + 1] == "-") throw new ArgumentException("Omit both module and map with '-'.");
+    modules.Add(new Module(args[i], args[i + 1]));
+}
 var milestones=new Dictionary<string,long>();
 void Mark(string name) {milestones.TryAdd(name,machine.Cycle);}
 void Discover()
@@ -222,7 +231,7 @@ if (ready && args.Length>=11)
 string Hash(ReadOnlySpan<byte> bytes)=>Convert.ToHexString(SHA256.HashData(bytes));
 var result=new
 {
-    protocol=settleFields==0?"copperos-a1200-graphics-completion-v2":"copperos-a1200-graphics-completion-aligned-v3", profile, ready, machine.CompletedFrames, machine.Cycle, samples,
+    protocol=modules.Count<2?"copperos-a1200-coldboot-optional-symbols-v4":settleFields==0?"copperos-a1200-graphics-completion-v2":"copperos-a1200-graphics-completion-aligned-v3", profile, ready, machine.CompletedFrames, machine.Cycle, samples,
     seconds=readyCycle/7093790.0,inputAfterFields=settleFields,inputCycle=bootCycle,
     milestones=milestones.Select(p=>new{name=p.Key,cycle=p.Value,seconds=p.Value/7093790.0}),
     modules=modules.Select(m=>new{m.Path,m.Address}),
@@ -232,7 +241,7 @@ var result=new
     interaction,
     unmappedPages=unmappedPages.Select((cost,i)=>new{address=i*256,cycles=cost}).OrderByDescending(p=>p.cycles).Take(20),
     hot=symbols.Select((s,i)=>new{s.Address,s.Size,s.Name,cycles=cycles[i],instructions=instructions[i],seconds=cycles[i]/7093790.0}).OrderByDescending(p=>p.cycles).Take(60),
-    inputs=args.Take(7).Select(p=>new{path=p,sha256=Hash(File.ReadAllBytes(p))}),
+    inputs=args.Take(7).Where(p=>p!="-").Select(p=>new{path=p,sha256=Hash(File.ReadAllBytes(p))}),
     graphicsMap=args.Length >= 10 ? new{path=args[9],sha256=Hash(File.ReadAllBytes(args[9]))} : null,
     displayRegisters=new[]{0x02,0x80,0x82,0x8E,0x90,0x92,0x94,0xE0,0xE2,0xE4,0xE6,0x100,0x102,0x108,0x10A,0x180,0x182,0x184,0x186}
         .ToDictionary(offset=>offset.ToString("X3"),offset=>custom((ushort)offset).ToString("X4")),
