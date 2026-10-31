@@ -257,3 +257,14 @@ certified merely by reaching its output screen. Optional `--completion-marker`
 and `--echo-control` retain the separate C:Echo instrumentation failure for
 reproduction; normal qualification uses MemCheck's own summary and CLI return.
 See the [receipt](../../../docs/UTILITY_MEMCHECK_2026-10-31.json).
+
+`prepare_lha_hdf.py` validates the pinned Amiga SFX and its embedded payload,
+installs the complete distribution, and runs lha_68k against that unchanged
+compressed payload. Optional `--gadtools` validates the same private module
+receipt used by DiskMaster. Full byte readback does not qualify runtime CRCs;
+see the [startup receipt](../../../docs/UTILITY_LHA_STARTUP_2026-10-31.json).
+
+DOS public-vector entry/return observation covers indirect callers separately
+from the A6-relative call observer. It records the actual caller return PC,
+file metadata and before/after read prefixes/hashes (capped at256KiB and labeled
+with the hashed byte count). These observer reads do not advance emulated time.

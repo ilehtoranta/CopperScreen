@@ -1,0 +1,363 @@
+{
+  "utility": "LhA2.15 /lha_68k",
+  "status": "IN PROGRESS: native3.1 tests5compressed members; CopperStart starts after GadTools prerequisite but tests no files because DOS returns CopperShell data for distribution.lha",
+  "archive": {
+    "file": "media/utilities/originals/lha.run",
+    "sha256": "76bae515264fcc3e1c69058ff03a4bcb096152a732cf19fdb03cceee18932497",
+    "bytes": 173803,
+    "payloadOffset": 6112,
+    "payloadBytes": 167691,
+    "payloadSha256": "b1e9ce416a84c4e2b53c70fd51d434df09eb11fe110014d86c0bea76147d1899",
+    "scope": "Complete5-file distribution retained; invoke only68000 executable; original compressed payload is the CRC-test input"
+  },
+  "profile": "PAL OCS68000 interpreter,512KiB Chip+512KiB slow+2MiB Fast, protected media",
+  "romSha256": "174a7ebabec8cefb28897bcf3e3eb53361270e11f45c96863601dbb39bb65c7b",
+  "native31": {
+    "run": "kick31-v2",
+    "fields": 10000,
+    "inspection": "LhA Freeware2.15 banner;5files tested, all files OK; Operation successful and CLI return",
+    "rgb": {
+      "frame-004000": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4",
+      "frame-006000": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4",
+      "frame-008000": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4",
+      "frame-010000": "4f79d41b7dc0cd3f2890000c5699f847c58e516279de98f984326f05d49e81b4"
+    },
+    "media": {
+      "sha256": "a73160d4b5cee1403685e9727218ff3b937dc1f1ce55ef4529f684eba6a90a14",
+      "startup": "C:Assign ENV: SYS:ENV\nC:CopperGui\nSYS:LhA/lha_68k t SYS:fixtures/lha/distribution.lha\n",
+      "filesystem": "ofs",
+      "payloadSha256": "b1e9ce416a84c4e2b53c70fd51d434df09eb11fe110014d86c0bea76147d1899",
+      "payloadOffset": 6112,
+      "provider": {
+        "sha256": "0A506ED3B585120A8BB230AFD826A46FE715805D338F55ABD92914539DB290A3",
+        "entry": 0,
+        "installer": 314560,
+        "inputEntry": 314388,
+        "textEntry": 314412,
+        "classicEntry": 314436,
+        "codeBytes": 317984,
+        "imageBytes": 332256,
+        "lifetime": "Retain the entire HUNK until reset",
+        "inputs": [
+          {
+            "file": "CopperStart.DesktopProviders.dll",
+            "sha256": "7E02D1A1685C4D03594F35BE00CD0BBB072DAA1E5B3463D0AAD9C8D1B05BD3E6"
+          },
+          {
+            "file": "CopperStart.Layers.dll",
+            "sha256": "14039091900EE855B674576ED5A8806D99C4FDAE7D0DC2378E2CA40C8DCAB94A"
+          },
+          {
+            "file": "CopperStart.Utility.dll",
+            "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+          },
+          {
+            "file": "CopperStart.Exec.dll",
+            "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.dll",
+            "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.Support.dll",
+            "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+          },
+          {
+            "file": "CopperSharp.Compiler.dll",
+            "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+          },
+          {
+            "file": "CopperSharp.Targets.Amiga.dll",
+            "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+          }
+        ]
+      },
+      "shell": {
+        "sha256": "E9295B56C3F0F9DA67AF8C50F6170D8868CF77EBDE4F506832007464E79D5F20",
+        "peepholeOptimization": "FixedPoint",
+        "codeSizeOptimizations": true,
+        "dosClient": {
+          "originalDosSha256": "9B2DD54FDE8662C416F6A79E2476ABF0D1D16B5A91AED6DE32C02D8996BBB2C5",
+          "serviceVersion": 2,
+          "path": "client/CopperStart.Dos.dll"
+        },
+        "inputs": [
+          {
+            "file": "CopperStart.Shell.dll",
+            "sha256": "3C317F0A0C3121EE3FF1FACCB11E6D7DA7D461F0F58E102F039C8CB55ACAC3A5"
+          },
+          {
+            "file": "CopperOS.Shell.Dos.dll",
+            "sha256": "411B65A1CDD07EA01C0751020C413DA8D4BC303BAEF925564021D8F887228FF1"
+          },
+          {
+            "file": "CopperStart.Dos.dll",
+            "sha256": "76DFB70CBF81832B2C0441EA56FA58A353101058279D4884AB0CB3C570F09F39"
+          },
+          {
+            "file": "CopperStart.Exec.dll",
+            "sha256": "029BBC2EB243D05C0521B84EC7F99A58F20E0F395B99038D767F462D60C63BBA"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.dll",
+            "sha256": "DB2BF54D6AEB3E2E51676E019D30FB0EBD6F7133FF4E5AF46E1B1C55B64512B6"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.Support.dll",
+            "sha256": "8005DBBB183B4382057518440F15F21F58CDF5A5FA0AA586AD38039D49FC4A02"
+          },
+          {
+            "file": "CopperSharp.Compiler.dll",
+            "sha256": "D4EEC3AC834B33F018398CDB5C30D2EAFD5F1DA5D9C75EB81C7021429E647113"
+          },
+          {
+            "file": "CopperStart.Utility.dll",
+            "sha256": "45744EC43BF662BB28E359D6AE04FED116921888EB2A4B2F990575C4C4A28DC1"
+          },
+          {
+            "file": "CopperStart.Icon.dll",
+            "sha256": "6EB9561013BCDAA4FD514B115F695C7F9EEB49BD1330DDF97A9711D5204BA327"
+          },
+          {
+            "file": "CopperSFS.Core.dll",
+            "sha256": "A56F05867540D28F69D06013230492C6D0496D73DB93C9EA661380CCB0ED4F7A"
+          }
+        ]
+      },
+      "gadtoolsDependency": null
+    }
+  },
+  "initialCopperStart": {
+    "run": "copperstart-v2",
+    "inspection": "Cannot open gadtools.library version37; no archive test"
+  },
+  "withGadTools": {
+    "run": "copperstart-gadtools-v4",
+    "fields": 10000,
+    "inspection": "Banner visible, No files tested followed by Operation successful. This does not pass the CRC-test objective.",
+    "rgb": {
+      "frame-004000": "e17fa56870a6454f420a4ac27bb4a19900aa8c87e97e8d04daa65b6e902f8b80",
+      "frame-006000": "e17fa56870a6454f420a4ac27bb4a19900aa8c87e97e8d04daa65b6e902f8b80",
+      "frame-008000": "e17fa56870a6454f420a4ac27bb4a19900aa8c87e97e8d04daa65b6e902f8b80",
+      "frame-010000": "e17fa56870a6454f420a4ac27bb4a19900aa8c87e97e8d04daa65b6e902f8b80"
+    },
+    "media": {
+      "sha256": "6f79d621d974b5e041e7dd95965567ecc13ad3f4fefd6fba738845bda74de04c",
+      "startup": "C:CopperGui\nSYS:LhA/lha_68k t SYS:fixtures/lha/distribution.lha\n",
+      "filesystem": "ffs",
+      "payloadSha256": "5294e58b9115545e4a64b6e92e06a6b666e153982c2b4777d74fbc381b896faf",
+      "payloadOffset": 6112,
+      "provider": {
+        "sha256": "C7E0F82C97923B9273F8B8E2F7039BFB6FD2C1090A56A20D47E597948B438046",
+        "entry": 0,
+        "installer": 316418,
+        "inputEntry": 316246,
+        "textEntry": 316270,
+        "classicEntry": 316294,
+        "codeBytes": 319864,
+        "imageBytes": 334396,
+        "lifetime": "Retain the entire HUNK until reset",
+        "inputs": [
+          {
+            "file": "CopperStart.DesktopProviders.dll",
+            "sha256": "DBC01EF2288F3413D953A992499C208933E53808648191D4407BC36C5E8C23CF"
+          },
+          {
+            "file": "CopperStart.Layers.dll",
+            "sha256": "14039091900EE855B674576ED5A8806D99C4FDAE7D0DC2378E2CA40C8DCAB94A"
+          },
+          {
+            "file": "CopperStart.Utility.dll",
+            "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+          },
+          {
+            "file": "CopperStart.Exec.dll",
+            "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.dll",
+            "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.Support.dll",
+            "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+          },
+          {
+            "file": "CopperSharp.Compiler.dll",
+            "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+          },
+          {
+            "file": "CopperSharp.Targets.Amiga.dll",
+            "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+          }
+        ]
+      },
+      "shell": {
+        "sha256": "5294E58B9115545E4A64B6E92E06A6B666E153982C2B4777D74FBC381B896FAF",
+        "peepholeOptimization": "FixedPoint",
+        "codeSizeOptimizations": true,
+        "dosClient": {
+          "originalDosSha256": "76DFB70CBF81832B2C0441EA56FA58A353101058279D4884AB0CB3C570F09F39",
+          "serviceVersion": 2,
+          "path": "client/CopperStart.Dos.dll"
+        },
+        "inputs": [
+          {
+            "file": "CopperStart.Shell.dll",
+            "sha256": "66AB945678AA08F060731F215086F8FB3F94B96695E979FF7AE9D9181501A876"
+          },
+          {
+            "file": "CopperOS.Shell.Dos.dll",
+            "sha256": "411B65A1CDD07EA01C0751020C413DA8D4BC303BAEF925564021D8F887228FF1"
+          },
+          {
+            "file": "CopperStart.Dos.dll",
+            "sha256": "76DFB70CBF81832B2C0441EA56FA58A353101058279D4884AB0CB3C570F09F39"
+          },
+          {
+            "file": "CopperStart.Exec.dll",
+            "sha256": "029BBC2EB243D05C0521B84EC7F99A58F20E0F395B99038D767F462D60C63BBA"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.dll",
+            "sha256": "DB2BF54D6AEB3E2E51676E019D30FB0EBD6F7133FF4E5AF46E1B1C55B64512B6"
+          },
+          {
+            "file": "CopperSharp.Sdk.Amiga.Support.dll",
+            "sha256": "8005DBBB183B4382057518440F15F21F58CDF5A5FA0AA586AD38039D49FC4A02"
+          },
+          {
+            "file": "CopperSharp.Compiler.dll",
+            "sha256": "D4EEC3AC834B33F018398CDB5C30D2EAFD5F1DA5D9C75EB81C7021429E647113"
+          },
+          {
+            "file": "CopperStart.Utility.dll",
+            "sha256": "45744EC43BF662BB28E359D6AE04FED116921888EB2A4B2F990575C4C4A28DC1"
+          },
+          {
+            "file": "CopperStart.Icon.dll",
+            "sha256": "6EB9561013BCDAA4FD514B115F695C7F9EEB49BD1330DDF97A9711D5204BA327"
+          },
+          {
+            "file": "CopperSFS.Core.dll",
+            "sha256": "A56F05867540D28F69D06013230492C6D0496D73DB93C9EA661380CCB0ED4F7A"
+          }
+        ]
+      },
+      "gadtoolsDependency": {
+        "kind": "private-kickstart-library-module",
+        "name": "gadtools.library",
+        "moduleName": "gadtools.library_40.4",
+        "bytes": 23572,
+        "sha256": "93a1b6ad5737665f43606cd13269df8f03921f1b3a96a15aa1e623e34b67f590",
+        "sourceRomSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+        "romMatch": "Kickstart 40.63 (A500/A600/A2000)",
+        "moduleOffset": 428644,
+        "moduleBytes": 23444,
+        "relocations": [
+          2,
+          6,
+          14,
+          18,
+          22,
+          74,
+          82,
+          228,
+          1456,
+          1838,
+          3342,
+          3718,
+          4386,
+          4780,
+          5086,
+          5878,
+          5894,
+          7724,
+          7950,
+          9590,
+          12536,
+          15844,
+          17078,
+          17118,
+          19206,
+          22844,
+          23356,
+          23388,
+          23392,
+          23396,
+          23400,
+          23404,
+          23408,
+          23412,
+          23416,
+          23420,
+          23424,
+          23432,
+          23436,
+          23440
+        ],
+        "fixes": [
+          [
+            6,
+            23444
+          ]
+        ],
+        "patchesApplied": false,
+        "scope": "Private relocated guest library dependency; not runtime qualification",
+        "tool": "amitools RomSplitter/BinFmtHunk with bundled Remus splitdata",
+        "toolSource": "https://github.com/cnvogelg/amitools/blob/main/amitools/rom/romsplitter.py"
+      }
+    }
+  },
+  "diagnosis": {
+    "trace": "copperstart-read-v10",
+    "examine": {
+      "field": 2453,
+      "fileType": -3,
+      "name": "distribution.lha",
+      "reportedBytes": 334836,
+      "expectedBytes": 167691
+    },
+    "readInput": {
+      "Api": "DOS.ReadVectorInput",
+      "Library": "dos.library",
+      "frame": 2517,
+      "entryCycle": 357812508,
+      "vectorPc": 2247134,
+      "vector": -42,
+      "callerReturnPc": 3077042,
+      "d1": 671301,
+      "d2": 3501032,
+      "d3": 131072,
+      "name": null,
+      "inputDataPrefix": "0000000000000000000000000000000000000000000000000000000000000000",
+      "inputHashedBytes": 131072,
+      "inputDataSha256": "FA43239BCEE7B97CA62F007CC68487560A39E19F74F3DDE7486DB3F98DF8E471"
+    },
+    "readReturn": {
+      "Api": "DOS.ReadVectorReturn",
+      "Library": "dos.library",
+      "frame": 2553,
+      "returnCycle": 362910458,
+      "callerReturnPc": 3077042,
+      "result": 131072,
+      "record": 0,
+      "dataPrefix": "000003F30000000000000001000000000000000000013BE9000003E900013BE9",
+      "outputHashedBytes": 131072,
+      "outputDataSha256": "20EE56F7825E35B793327926833005B0FDF1F86034784176F2DC26D980D25631"
+    },
+    "actualPrefixSource": "L/CopperShell",
+    "shellBytes": 334836,
+    "shellPrefix131072Sha256": "20ee56f7825e35b793327926833005b0fdf1f86034784176f2dc26d980d25631",
+    "archivePrefix131072Sha256": "6c9e54dcf224c863ed9fab19acb921f86d56153510f0cc86b03592e3962e0b9f",
+    "conclusion": "The requested archive is found and opened, but metadata/data come from CopperShell. Input buffer begins zero; read changes it to the exact Shell prefix, so this is not a no-copy/stale-buffer result. Native file/provider selection is next to investigate. No root-cause fix yet."
+  },
+  "remaining": [
+    "Fix incorrect native DOS file selection/provider contents, then replay original CRC test",
+    "Extraction, creation and permission preservation unverified",
+    "Native1.3 outside documented OS2.0+ requirement",
+    "Frozen compiler/dependency graph; final current-source/current-toolchain sweep required",
+    "Correctness diagnostic only; no throughput acceptance claim"
+  ]
+}

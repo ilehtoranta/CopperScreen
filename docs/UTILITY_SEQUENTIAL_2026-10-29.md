@@ -23,7 +23,7 @@ marking the collection complete.
 | 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
-| 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
+| 11 | Amiga LhA 2.15 | IN PROGRESS: native3.1 tests5files; CopperStart DOS returns Shell metadata/data for archive | [Startup receipt](UTILITY_LHA_STARTUP_2026-10-31.json) |
 | 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
 
 The initial lane is the existing PAL A500 profile: MC68000 interpreter,
@@ -856,3 +856,20 @@ control reproduces failure without MemCheck. The original failed images remain
 preserved, and the separate command failure is explicit in the
 [receipt](UTILITY_MEMCHECK_2026-10-31.json). No OS version was patched and no
 emulator change was needed for these MemCheck results. LhA2.15 is next.
+
+### LhA2.15 compressed-input qualification
+
+The original SFX payload at offset6112 is pinned and installed unchanged as
+an archive-test fixture. The complete distribution is retained and only
+lha_68k is invoked. Native3.1 tests all5members successfully and returns to CLI.
+CopperStart needs the same private GadTools module qualified for DiskMaster.
+With it loaded, LhA says No files tested; its subsequent Operation successful
+is not a successful archive test.
+
+Public-vector tracing confirms the archive is found/opened. Examine names
+it distribution.lha but reports334836bytes instead of167691. The128KiB read
+changes an initially zero buffer into bytes matching the CopperShell prefix
+exactly. This is incorrect file/provider selection, not an absent copy or an
+unproven compression defect. Inputs, hashes and before/after read evidence are
+in the [receipt](UTILITY_LHA_STARTUP_2026-10-31.json). LhA remains current;
+DeluxePaint and the final current-toolchain sweep remain pending.

@@ -81,6 +81,7 @@ uint? stopPcD0 = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_PC_D
 long executedInstructions = 0;
 var ring = new Entry[ringSize]; long count = 0; bool stop = false; string reason = "END_FIELD";
 var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
+var vectorPending = new List<(string Api,uint ReturnPc,uint ReturnSp,uint Record,uint Buffer,uint Length)>();
 var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue, layersBase=uint.MaxValue, graphicsBase=uint.MaxValue;
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
@@ -95,6 +96,25 @@ void ObserveCall()
     peek(c.ProgramCounter,out var op); peek(c.ProgramCounter+2,out var ext);
     if(stopIllegal && op==0x4AFC)
     { Keep("ILLEGAL_INSTRUCTION"); stop=true; reason="ILLEGAL_INSTRUCTION"; return; }
+    // Public DOS vector entries also expose callers using a different base
+    // register or an indirect JSR. Keep their actual return address explicit.
+    if(op==0x4ef9 && c.ProgramCounter<dosBase && dosBase-c.ProgramCounter<=1000 && (dosBase-c.ProgramCounter)%6==0)
+    {
+        var vector = unchecked((int)c.ProgramCounter-(int)dosBase);
+        var api = vector switch { -30=>"DOS.Open", -42=>"DOS.Read", -84=>"DOS.Lock", -102=>"DOS.Examine", -108=>"DOS.ExNext",
+            -390=>"DOS.ExamineFH", -822=>"DOS.MatchFirst", -828=>"DOS.MatchNext", -834=>"DOS.MatchEnd", _=>null };
+        if(api is not null)
+        {
+            calls.Add(new { Api=api+"VectorInput", Library="dos.library", frame=m.CompletedFrames, entryCycle=c.Cycles,
+                vectorPc=c.ProgramCounter, vector, callerReturnPc=Read(c.A[7]), d1=c.D[1], d2=c.D[2], d3=c.D[3],
+                name=vector is -30 or -84 or -822 ? Name(c.D[1]) : null,
+                inputDataPrefix=vector != -42 ? null : Convert.ToHexString(Enumerable.Range(0,(int)Math.Min(c.D[3],32u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray()),
+                inputHashedBytes=vector != -42 ? 0 : Math.Min(c.D[3],262144u),
+                inputDataSha256=vector != -42 ? null : Convert.ToHexString(SHA256.HashData(Enumerable.Range(0,(int)Math.Min(c.D[3],262144u)).Select(n=>ReadByte(c.D[2]+(uint)n)).ToArray())) });
+            var record=vector is -102 or -108 or -390 or -822 ? c.D[2] : vector is -828 or -834 ? c.D[1] : 0;
+            vectorPending.Add((api,Read(c.A[7]),c.A[7]+4,record,vector == -42 ? c.D[2] : 0,vector == -42 ? c.D[3] : 0));
+        }
+    }
     if(op!=0x4eae) return;
     var displacement=unchecked((short)ext);
     if(c.A[6]==Read(4) && displacement == -420)
@@ -165,6 +185,16 @@ void ObserveCall()
             addressRegisters=c.A.ToArray(),dataRegisters=c.D.ToArray()});
         pending.Add(("DOS.ReadArgs",Name(c.D[1]),c.ProgramCounter+4,c.A[7],c.A[6],c.D[2],c.Cycles,0,null));
     }
+    else if(c.A[6]==dosBase && displacement is -84 or -102 or -108 or -228 or -390 or -402 or -822 or -828 or -834)
+    {
+        var api = displacement switch { -84=>"DOS.Lock", -102=>"DOS.Examine", -108=>"DOS.ExNext", -228=>"DOS.AllocDosObject",
+            -390=>"DOS.ExamineFH", -402=>"DOS.NameFromLock", -822=>"DOS.MatchFirst", -828=>"DOS.MatchNext", _=>"DOS.MatchEnd" };
+        calls.Add(new { Api=api+"Input", Library="dos.library", frame=m.CompletedFrames, callPc=c.ProgramCounter,
+            entryCycle=c.Cycles, d1=c.D[1], d2=c.D[2], d3=c.D[3],
+            name=displacement is -84 or -822 ? Name(c.D[1]) : null });
+        var record = displacement is -102 or -108 or -390 or -822 ? c.D[2] : displacement is -828 or -834 ? c.D[1] : 0;
+        pending.Add((api,"dos.library",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,record,null));
+    }
     else if(c.A[6]==dosBase && displacement is -30 or -42 or -48)
         pending.Add((displacement == -30 ? "DOS.Open" : displacement == -42 ? "DOS.Read" : "DOS.Write",
             displacement == -30 ? Name(c.D[1]) : $"D1={c.D[1]:X8},D2={c.D[2]:X8},D3={c.D[3]:X8}",
@@ -176,6 +206,17 @@ void ObserveCall()
 void ObserveReturn()
 {
     var c=m.Cpu;
+    for(var i=vectorPending.Count-1;i>=0;i--)
+    {
+        var p=vectorPending[i]; if(c.ProgramCounter!=p.ReturnPc || c.A[7]!=p.ReturnSp) continue;
+        calls.Add(new { Api=p.Api+"VectorReturn", Library="dos.library", frame=m.CompletedFrames, returnCycle=c.Cycles,
+            callerReturnPc=p.ReturnPc, result=c.D[0], record=p.Record,
+            bytes=p.Record==0 ? null : Convert.ToHexString(Enumerable.Range(0,384).Select(n=>ReadByte(p.Record+(uint)n)).ToArray()),
+            dataPrefix=p.Buffer==0 ? null : Convert.ToHexString(Enumerable.Range(0,(int)Math.Min(p.Length,32u)).Select(n=>ReadByte(p.Buffer+(uint)n)).ToArray()),
+            outputHashedBytes=p.Buffer==0 || c.D[0]>p.Length ? 0 : Math.Min(c.D[0],262144u),
+            outputDataSha256=p.Buffer==0 || c.D[0]>p.Length ? null : Convert.ToHexString(SHA256.HashData(Enumerable.Range(0,(int)Math.Min(c.D[0],262144u)).Select(n=>ReadByte(p.Buffer+(uint)n)).ToArray())) });
+        vectorPending.RemoveAt(i); break;
+    }
     for(var i=pending.Count-1;i>=0;i--)
     {
         var p=pending[i]; if(c.ProgramCounter!=p.Pc || c.A[7]!=p.Sp) continue;
@@ -184,6 +225,10 @@ void ObserveReturn()
             ioRequest=p.Request,ioError=p.Request==0 ? 0 : ReadByte(p.Request+31),writePrefix=p.Text,
             messagePrefix=p.Api=="GetMsg" ? Convert.ToHexString(Enumerable.Range(0,52).Select(n=>ReadByte(c.D[0]+(uint)n)).ToArray()) : null,
             intuitionFront=p.A6==intuitionBase ? Read(intuitionBase+60) : 0, intuitionActive=p.A6==intuitionBase ? Read(intuitionBase+52) : 0});
+        if(p.Api is "DOS.Examine" or "DOS.ExNext" or "DOS.ExamineFH" or "DOS.MatchFirst" or "DOS.MatchNext")
+            calls.Add(new { Api=p.Api+"Record", Library="dos.library", frame=m.CompletedFrames, returnCycle=c.Cycles,
+                result=c.D[0], address=p.Request,
+                bytes=Convert.ToHexString(Enumerable.Range(0,384).Select(n=>ReadByte(p.Request+(uint)n)).ToArray()) });
         if(p.Api is "Graphics.MrgCop" or "Graphics.MakeVPort" or "Graphics.LoadView")
             calls.Add(new { Api=p.Api+"DisplayReturn", Library="graphics.library", frame=m.CompletedFrames,
                 returnCycle=c.Cycles, result=c.D[0], view=p.Request, activeView=Read(p.A6+34),
