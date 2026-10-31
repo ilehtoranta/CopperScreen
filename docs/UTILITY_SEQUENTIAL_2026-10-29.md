@@ -22,7 +22,7 @@ marking the collection complete.
 | 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
 | 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
-| 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
+| 10 | MemCheck 1.2 (37.13) | VERIFIED MINIMUM: default segment test starts; ADDRESSONLY finishes with0errors and CLI return on native3.1/CopperStart, guest GUI prerequisite; full segment completion unverified | [Receipt](UTILITY_MEMCHECK_2026-10-31.json) |
 | 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
 | 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
 
@@ -840,3 +840,19 @@ scrolling. Font glyphs/metrics and elapsed scroll distance differ from native;
 those limits remain explicit in the [receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json).
 PPShow remains byte-identical. Main `01b0802` corrects one recorded control field.
 MemCheck is next; final current-source/current-toolchain checks remain required.
+
+### MemCheck1.2 runtime prerequisite and memory-test lanes
+
+The generic version error on bare CopperStart is caused by the linked runtime
+opening intuition.library37 while the boot provider is33. Exec40.0 and DOS51.71
+already meet the version check. Loading the qualified guest GUI provider allows
+the default invocation to enter its segment test and advance patterns. The
+8000-field default capture is a prefix, not a completed memory certification.
+
+A fresh ADDRESSONLY guest on each ROM reports ADDRESS TEST FINISHED and
+0 ERRORS APPEARED, then returns to its CLI prompt. The original appended
+C:Echo measurement command independently fails on CopperStart: the Echo-only
+control reproduces failure without MemCheck. The original failed images remain
+preserved, and the separate command failure is explicit in the
+[receipt](UTILITY_MEMCHECK_2026-10-31.json). No OS version was patched and no
+emulator change was needed for these MemCheck results. LhA2.15 is next.

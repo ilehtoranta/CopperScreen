@@ -248,3 +248,12 @@ records the native text display and CopperStart's rejected tall screen.
 The external startup observer records MakeVPort, MrgCop and LoadView call/return
 boundaries with the requested and active View and Copper-list pointers. This
 is bounded diagnostic observation and does not change production execution.
+
+`prepare_memcheck_hdf.py` installs the complete pinned MemCheck1.2 package.
+`--gui` loads the qualified native Intuition prerequisite, `--address-only`
+selects the documented allocated-memory test, and `--native-env` labels the
+native-ROM ENV setup. Every run starts fresh. Default segment testing is not
+certified merely by reaching its output screen. Optional `--completion-marker`
+and `--echo-control` retain the separate C:Echo instrumentation failure for
+reproduction; normal qualification uses MemCheck's own summary and CLI return.
+See the [receipt](../../../docs/UTILITY_MEMCHECK_2026-10-31.json).
