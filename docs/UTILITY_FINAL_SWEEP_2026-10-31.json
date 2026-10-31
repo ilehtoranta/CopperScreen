@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "IN PROGRESS",
   "scope": "Repeat all12 main-screen/basic-invocation checks against a common current source/compiler graph; retained native references remain separately identified. No formal throughput result.",
-  "producerCommit": "b07353c",
+  "producerCommit": "226d94b",
   "consumerCommit": "af77cd7",
   "consumerBuild": {
     "command": "dotnet build CopperScreen.slnx -c Release",
@@ -99,6 +99,28 @@
       "status": "INVALID_PROFILE_COMPARISON",
       "codeEnd": 511940,
       "notes": "Native map retains WriteSmartFile and Full SFS methods absent in v131. A parallel default-profile test build replaced shared managed outputs before the ROM snapshot was copied. Does not establish Classic size or a process-reader regression. Rebuilding Classic alone as v139."
+    },
+    {
+      "run": "utility-direct-process-classic-rom-v139",
+      "status": "COMPOSITION_FAILED",
+      "codeEnd": 498562,
+      "graphicsStart": 497664,
+      "overlapBytes": 898,
+      "savedBytesVsV121": 1958,
+      "notes": "Serialized Classic build. Retains direct process snapshots and FFS work initialization; no Full SFS write methods. Source compiles with3 existing unused-variable warnings and0 errors."
+    },
+    {
+      "run": "utility-private-snapshots-classic-rom-v140",
+      "status": "LINKED_PROTRACKER_MAIN_AND_PATTERN_VERIFIED",
+      "codeEnd": 497550,
+      "graphicsStart": 497664,
+      "remainingGapBytes": 114,
+      "romBytes": 524288,
+      "sha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+      "checksum": "ffffffff",
+      "graphicsBytes": 26438,
+      "supportedGraphicsVectors": 76,
+      "notes": "Classic standalone512KiB A500; no extension; source build3 existing warnings0 errors, graphics emitter0 warnings0 errors. Direct private snapshots and work initialization only."
     }
   ],
   "gui": {
@@ -114,7 +136,17 @@
     {
       "order": 1,
       "utility": "ProTracker2.3F",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "MAIN_SCREEN_AND_FINAL_PATTERN_VERIFIED_BOTH_ROMS",
+      "copperstartDirectory": "artifacts/utility-sequential-2026-10-31/final-protracker-copperstart-v142",
+      "nativeDirectory": "artifacts/utility-sequential-2026-10-31/final-protracker-kick13-v138",
+      "completedFields": 26000,
+      "finalPatternBytes": 1024,
+      "finalPatternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
+      "copperstartPatternAddress": "00C43BAC",
+      "nativePatternAddress": "00C329B4",
+      "mainScreensVisuallyInspected": true,
+      "unsupportedReported": false,
+      "mediaUnchanged": true
     },
     {
       "order": 2,
@@ -206,7 +238,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Await serialized Classic v139 ROM build. The v135 comparison was contaminated by shared build outputs; do not use its size to judge the process snapshot conversion. Final utility replay rows remain pending.",
+  "nextInvestigation": "Source footprint fix pushed to CopperStart main226d94b; ProTracker refresh verified. Continue with X-Copy; all remaining final replay rows stay pending.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
@@ -245,6 +277,14 @@
       "failed": 3,
       "skipped": 0,
       "notes": "All three CPUs reproduce prior failures. Each runs15 scenarios,7 pass and8 fail, with16 native operation entries,10 operation returns and9 cleanup returns. Control is evidence of pre-existing failures, not passing write qualification."
+    },
+    {
+      "log": "../CopperStart/utility-private-snapshots-host-v141.log",
+      "scope": "DOS suite after deferred cleanup, DOS-list lock and attribute-plan snapshots, separate test worktree",
+      "passed": 1346,
+      "failed": 0,
+      "skipped": 1,
+      "excluded": "Three pre-existing native direct-write failures and one sibling source-path test, tracked separately."
     }
   ],
   "protrackerNativeRefresh": {
@@ -260,5 +300,55 @@
     "finalPatternSha256": "401b96dec5b8b3c8885ff755088c4a46507ce62610f5b938b734552861c2b28d",
     "matchesRetainedNativeFinalPattern": true,
     "notes": "Refresh uses current runner; screenshot checked. CopperStart side still pending. No sample-audio or save/reload qualification."
+  },
+  "baselineProducerCommit": "b07353c",
+  "qualifiedRom": {
+    "directory": "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140",
+    "sha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3",
+    "bytes": 524288,
+    "checksum": "ffffffff",
+    "compiledEnd": 497550,
+    "graphicsStart": 497664,
+    "gapBytes": 114,
+    "profile": "Classic standalone A500; no extension",
+    "sourceCommit": "226d94b",
+    "inputs": [
+      {
+        "file": "CopperStart-System.dll",
+        "sha256": "3EF11BE37EA80CF26A0216BE14CA08CD9911B1A84CEB9B0C19D100EAE67F820F"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "B94CB7EF7885F85441ACCC2EF10326A0F73DFD8102654169E79648030F139F3C"
+      },
+      {
+        "file": "CopperStart.Devices.dll",
+        "sha256": "3FDB7FA1469E3E9C0DB3BB96F8A4DEF59F522B802A4D79E8CBB6790A49F0A4E8"
+      },
+      {
+        "file": "CopperStart.Dos.dll",
+        "sha256": "AE16BD9651B382D3DB3A15C16C222C42D7AF9376FD22DF019909A45D548A56CC"
+      },
+      {
+        "file": "CopperSFS.Core.dll",
+        "sha256": "A297255B880F361EC1C4990354B097EC16DDBD9AA3AB687E748B53A5B9632223"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "E0851AB194B0DB8C789A69FC7A341EF4F1632B4B21284A7256D4F06C7E1A1989"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "B8B13AC30038270142944688539FA3A70CF6699AE3EBAA58BB0268A945096C4A"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "745FF7B7F749DB56C3CBE91817E4E6CF480C53FDDAE048F52687BB894F2C4F70"
+      },
+      {
+        "file": "CopperStart.Graphics.dll",
+        "sha256": "FF5BA7CFFBD750964BA958D1BF9720F6E9AC7F5FD5A2D0831D664A86F01FF816"
+      }
+    ]
   }
 }

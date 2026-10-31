@@ -1012,3 +1012,13 @@ size regression from v135. A refreshed Kickstart1.3 ProTracker run with the curr
 runner completes26000 fields, shows the editor, and retains the same1024-byte
 final pattern hash as the earlier native reference. The CopperStart refresh and
 the remaining final collection replays are pending.
+
+CopperStart `226d94b` resolves the fresh Classic footprint overlap by eliminating
+private-record return copies and initializing work areas directly. The linked
+512KiB ROM saves2970 bytes, leaves114 bytes before graphics, and has checksum
+FFFFFFFF. The final isolated test run passes1346 DOS cases with one optional
+skip; previously reproduced native write failures remain separately recorded.
+ProTracker refreshes `final-protracker-kick13-v138` and
+`final-protracker-copperstart-v142` both complete26000 fields and show the editor.
+Their1024-byte final pattern hashes match exactly. The source fix is pushed to
+main before proceeding to X-Copy. The other11 final replay rows remain pending.
