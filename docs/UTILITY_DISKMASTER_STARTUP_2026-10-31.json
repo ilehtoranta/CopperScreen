@@ -1,6 +1,6 @@
 {
   "utility": "DiskMaster 2 2.5.30a V37 (2005-07-16)",
-  "status": "IN PROGRESS: native 3.1 main verified; CopperStart loads GadTools after loader fixes, then traps at RefreshWindowFrame; main screen unverified",
+  "status": "IN PROGRESS: native 3.1 main verified; CopperStart frame-refresh fixed, three panes visible but directory entries and command labels absent",
   "archive": {
     "file": "media/utilities/originals/DiskMasterV37.lha",
     "sha256": "d1a440c52909bf3f040e204daf6b670c9663e61db17ab277f1bd3c11ef3e67bd",
@@ -8,7 +8,8 @@
   },
   "producerCommits": [
     "fb2bd72cf350d945544d1cb5b5fd640f8e10763b",
-    "205d3e6bd5eb985735c6283a02d83223baeea854"
+    "205d3e6bd5eb985735c6283a02d83223baeea854",
+    "4582592"
   ],
   "producerNotes": [
     "https://github.com/ilehtoranta/CopperStart/blob/205d3e6bd5eb985735c6283a02d83223baeea854/Docs/NativeCompactLoadSeg20261031.md",
@@ -229,5 +230,90 @@
     "Commit and push completed fixes before advancing to MuchMore",
     "Finish remaining utilities and final current-source/current-toolchain sweep"
   ],
-  "performance": "Correctness diagnostics only; no throughput acceptance claim"
+  "performance": "Correctness diagnostics only; no throughput acceptance claim",
+  "frameRefresh": {
+    "producerCommit": "4582592",
+    "note": "https://github.com/ilehtoranta/CopperStart/blob/4582592/Docs/NativeWindowFrameRefresh20261031.md",
+    "native31Control": {
+      "field": 226,
+      "samplesBeforeAfter": [
+        1,
+        0,
+        1
+      ],
+      "client": 2,
+      "result": "PASS"
+    },
+    "oldProviderControl": {
+      "field": 24829,
+      "pc": "00000016",
+      "result": "FAIL before completion marker"
+    },
+    "correctedProviderControl": {
+      "field": 24963,
+      "samplesBeforeAfter": [
+        1,
+        2,
+        1
+      ],
+      "client": 2,
+      "result": "PASS"
+    },
+    "provider": {
+      "sha256": "4D52BD6B34BE43D5D63635F85BC025ABFEE31A553EC3BF1D3A7821D3D6D02E91",
+      "entry": 0,
+      "installer": 314706,
+      "inputEntry": 314534,
+      "textEntry": 314558,
+      "classicEntry": 314582,
+      "codeBytes": 318128,
+      "imageBytes": 332436,
+      "lifetime": "Retain the entire HUNK until reset",
+      "inputs": [
+        {
+          "file": "CopperStart.DesktopProviders.dll",
+          "sha256": "6678F8F930420E44DF9D22921B232B278B19F378B0C8FEE31383A0A81A7E43DD"
+        },
+        {
+          "file": "CopperStart.Layers.dll",
+          "sha256": "14039091900EE855B674576ED5A8806D99C4FDAE7D0DC2378E2CA40C8DCAB94A"
+        },
+        {
+          "file": "CopperStart.Utility.dll",
+          "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+        },
+        {
+          "file": "CopperStart.Exec.dll",
+          "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.dll",
+          "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+        },
+        {
+          "file": "CopperSharp.Sdk.Amiga.Support.dll",
+          "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+        },
+        {
+          "file": "CopperSharp.Compiler.dll",
+          "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+        },
+        {
+          "file": "CopperSharp.Targets.Amiga.dll",
+          "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+        }
+      ]
+    },
+    "mediaSha256": "5cdc1436400df2ef8a7f00e6abf07195fd81993d08ee9b983e7b9bd0e3876f85",
+    "probe": "copperstart-frame-v35: END_FIELD 8000, no illegal-instruction stop",
+    "renderedReplay": {
+      "run": "copperstart-main-v36",
+      "fields": 10000,
+      "input": "Return down/up 6000/6004, same script as native reference",
+      "inspected": "Three panes visible, no file listing or command labels; not a main-screen pass",
+      "rgbSha256Fields4000To10000": "62d131a20444e5dba0e5142546f4be0e6a8be3b5493bb576bc453638da2516b8"
+    },
+    "sourceBuild": "Release solution: zero errors, seven warnings; frozen native inputs remain separate from final current-toolchain coverage"
+  },
+  "nextInvestigation": "Guest formatting loop reads public Window.GZZHeight at +114 as zero, subtracts 12 and performs unsigned division by font height 8. Investigate ordinary-window inner dimension initialization against native ROM; no fix or root-cause claim yet."
 }
