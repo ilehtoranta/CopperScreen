@@ -21,7 +21,7 @@ marking the collection complete.
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
 | 7 | PPShow 4.0 | VERIFIED MINIMUM: ILBM fixture and border, native 3.1 and CopperStart with explicit guest prerequisites; frozen graph, final toolchain sweep pending | [Main-screen receipt](UTILITY_PPSHOW_MAIN_2026-10-31.json) |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | VERIFIED MINIMUM: three populated panes, native 3.1 and CopperStart; file operations unverified, frozen graph | [Main-screen receipt](UTILITY_DISKMASTER_MAIN_2026-10-31.json) |
-| 9 | MuchMore 4.6 | IN PROGRESS: native 3.1 text reader visible; CopperStart tall screen fixed; ScrollVPort fault | [Startup receipt](UTILITY_MUCHMORE_STARTUP_2026-10-31.json) |
+| 9 | MuchMore 4.6 | VERIFIED MINIMUM: text reader and Space scrolling, native3.1/CopperStart; font/scroll-distance differences recorded, frozen graph | [Main-screen receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json) |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
 | 11 | Amiga LhA 2.15 | PENDING | Not yet verified in this sequence |
 | 12 | DeluxePaint V demo 5.0b9 (1994-08-12) | PENDING | Not yet verified in this sequence |
@@ -829,3 +829,14 @@ rebuild. CopperStart passes it; the older provider returns a null screen.
 PPShow retains its qualified image hash. The initial below-text-clip sample
 difference is recorded explicitly. MuchMore next traps at ScrollVPort (-588),
 field3246; the reader remains unverified and MemCheck has not begun.
+
+Producer main `a252d6c` adds vertical ScrollVPort support to the compact native
+Copper-list owner. Both hardware and intermediate lists change; a later rebuild
+preserves the scrolled pixels. Two native reference and two candidate controls
+pass, with zero skips. The prior provider passes the rebuild path and fails the
+direct vector. Current source solution builds with zero errors and seven warnings.
+The MuchMore replay now displays its text and responds to Space starting/stopping
+scrolling. Font glyphs/metrics and elapsed scroll distance differ from native;
+those limits remain explicit in the [receipt](UTILITY_MUCHMORE_MAIN_2026-10-31.json).
+PPShow remains byte-identical. Main `01b0802` corrects one recorded control field.
+MemCheck is next; final current-source/current-toolchain checks remain required.

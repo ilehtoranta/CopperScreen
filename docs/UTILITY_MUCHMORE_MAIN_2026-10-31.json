@@ -1,0 +1,328 @@
+{
+  "utility": "MuchMore 4.6",
+  "status": "VERIFIED MINIMUM: text reader and selected Space-key scrolling, native3.1 and CopperStart; visual/font/scroll-distance differences retained, frozen graph",
+  "producerCommits": [
+    "188ec4a",
+    "a252d6c",
+    "01b0802"
+  ],
+  "producerNotes": [
+    "https://github.com/ilehtoranta/CopperStart/blob/01b0802/Docs/NativeTallScreen20261031.md",
+    "https://github.com/ilehtoranta/CopperStart/blob/01b0802/Docs/NativeScrollVPort20261031.md"
+  ],
+  "startupEvidence": "UTILITY_MUCHMORE_STARTUP_2026-10-31.json",
+  "archiveSha256": "12062ff0e0f1d0cecbd36c94f8205c29e9111ec11d9d429f8b481b66e96f52b7",
+  "fixture": "Authored ASCII header and120 numbered text lines; full archive retained including bundled source",
+  "profile": "PAL OCS68000 interpreter,512KiB Chip+512KiB slow+2MiB Fast; protected media",
+  "romSha256": "174a7ebabec8cefb28897bcf3e3eb53361270e11f45c96863601dbb39bb65c7b",
+  "copperStartMediaSha256": "bf034224558d1af222352b5fab7706a5457a7cba253048cef981d7d084a46dcb",
+  "provider": {
+    "sha256": "C7E0F82C97923B9273F8B8E2F7039BFB6FD2C1090A56A20D47E597948B438046",
+    "entry": 0,
+    "installer": 316418,
+    "inputEntry": 316246,
+    "textEntry": 316270,
+    "classicEntry": 316294,
+    "codeBytes": 319864,
+    "imageBytes": 334396,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "DBC01EF2288F3413D953A992499C208933E53808648191D4407BC36C5E8C23CF"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "14039091900EE855B674576ED5A8806D99C4FDAE7D0DC2378E2CA40C8DCAB94A"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "guiLoader": {
+    "kind": "canonical-CopperGui-native-loader",
+    "bytes": 232,
+    "sha256": "31226F9B4CDD83DCC7B17B1E063B691087C7CC84B8CDE4B0E3C93FC44344CC2E",
+    "classicEntry": 316294,
+    "providerSha256": "C7E0F82C97923B9273F8B8E2F7039BFB6FD2C1090A56A20D47E597948B438046",
+    "sourceMethod": "CopperStart.Floppy.Native.Tests.NativeClassicDesktopUpgradeTests.Installer",
+    "emitterAssemblySha256": "C59921CBB5E9EEE3E14E346D3BAC2D4EA65B355E793532068E6EA891EF3F38BE"
+  },
+  "prerequisites": "Qualified native GUI, FFP and corrected Shell with retained private Workbench libraries; no XPK or host service needed for plain text; native ENV assignment difference explicit",
+  "input": [
+    {
+      "Frame": 8000,
+      "KeyCode": 320
+    },
+    {
+      "Frame": 8004,
+      "KeyCode": 448
+    },
+    {
+      "Frame": 8400,
+      "KeyCode": 320
+    },
+    {
+      "Frame": 8404,
+      "KeyCode": 448
+    }
+  ],
+  "native31": {
+    "run": "kick31-scroll-v37",
+    "fields": 12000,
+    "media": "muchmore-env-ofs-v1.hdf",
+    "inspectedFields": [
+      8000,
+      12000
+    ],
+    "inspection": "Header and001-021 initially; Space scrolls then pauses with038-061 and footer visible",
+    "rgb": {
+      "frame-004000": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
+      "frame-006000": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
+      "frame-008000": "7ec9ad7a6c2176132b928a0f74bbbcffb62900496864319a701bdb6fd35876d8",
+      "frame-010000": "74c89055c073054db947c4e7654d7f1f1fa9af56d99adcf187a2e25a09237e51",
+      "frame-012000": "74c89055c073054db947c4e7654d7f1f1fa9af56d99adcf187a2e25a09237e51"
+    }
+  },
+  "copperStart": {
+    "run": "copperstart-scroll-v40",
+    "fields": 12000,
+    "inspectedFields": [
+      6000,
+      12000
+    ],
+    "inspection": "Header and001-028 initially; Space scrolls then pauses with007-037 and footer visible",
+    "rgb": {
+      "frame-004000": "174b93fedaa1064407026104a9a5c4de522b127654042dd5887de48534f847da",
+      "frame-006000": "1fbd380c85eebde20c9ff68a917073e8a9086f5f48eb395aba2f3aa4e11def1f",
+      "frame-008000": "1fbd380c85eebde20c9ff68a917073e8a9086f5f48eb395aba2f3aa4e11def1f",
+      "frame-010000": "b9af4650004e2266c1ce92f20b0c9c00c74a3f20f9993d0b4ac24a0680f9e202",
+      "frame-012000": "b9af4650004e2266c1ce92f20b0c9c00c74a3f20f9993d0b4ac24a0680f9e202"
+    }
+  },
+  "controls": {
+    "native31": [
+      {
+        "provider": "",
+        "receipt": 21480,
+        "CompletedFrames": 237,
+        "pc": 12630132,
+        "stagePixels": [
+          -16777216,
+          -1,
+          -1
+        ],
+        "clipPixels": [
+          -16777216,
+          -1,
+          -1,
+          -5592406,
+          -1,
+          -5592406
+        ],
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "values": [
+          12586068,
+          12616814,
+          134217920,
+          3094740992,
+          0,
+          12631784,
+          0,
+          0,
+          512,
+          512,
+          512,
+          256,
+          256,
+          512,
+          0,
+          1413565516,
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "provider": "",
+        "receipt": 21480,
+        "CompletedFrames": 235,
+        "pc": 12630124,
+        "stagePixels": [
+          -16777216,
+          -1,
+          -1
+        ],
+        "clipPixels": [
+          -16777216,
+          -1,
+          -1,
+          -5592406,
+          -1,
+          -5592406
+        ],
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "values": [
+          12586068,
+          12616814,
+          134217920,
+          3094216704,
+          0,
+          12631784,
+          0,
+          0,
+          512,
+          512,
+          512,
+          256,
+          256,
+          512,
+          0,
+          1413565516,
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    "corrected": [
+      {
+        "provider": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\utility-sequential-2026-10-31\\muchmore\\scroll-provider-native-v33",
+        "receipt": 63968,
+        "CompletedFrames": 25943,
+        "pc": 2289272,
+        "stagePixels": [
+          -16777216,
+          -1,
+          -1
+        ],
+        "clipPixels": [
+          -16777216,
+          -5592406,
+          -1,
+          -5592406,
+          -1,
+          -5592406
+        ],
+        "romSha256": "174A7EBABEC8CEFB28897BCF3E3EB53361270E11F45C96863601DBB39BB65C7B",
+        "values": [
+          2102676,
+          2636096,
+          134217762,
+          4000972800,
+          0,
+          2288160,
+          0,
+          0,
+          512,
+          512,
+          512,
+          256,
+          256,
+          512,
+          0,
+          1413565516,
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "provider": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\utility-sequential-2026-10-31\\muchmore\\scroll-provider-native-v33",
+        "receipt": 63968,
+        "CompletedFrames": 25939,
+        "pc": 2289264,
+        "stagePixels": [
+          -16777216,
+          -1,
+          -1
+        ],
+        "clipPixels": [
+          -16777216,
+          -5592406,
+          -1,
+          -5592406,
+          -1,
+          -5592406
+        ],
+        "romSha256": "174A7EBABEC8CEFB28897BCF3E3EB53361270E11F45C96863601DBB39BB65C7B",
+        "values": [
+          2102676,
+          2636096,
+          134217762,
+          4000448512,
+          0,
+          2288160,
+          0,
+          0,
+          512,
+          512,
+          512,
+          256,
+          256,
+          512,
+          0,
+          1413565516,
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    "oldProvider": "scroll-old-provider-v34: Intuition rebuild path passes; direct ScrollVPort fails at unsupported vector, 1pass/1expectedfail",
+    "result": "Native and corrected provider each2passes/0skips; samples black\u2192white\u2192white across scroll and hardware rebuild"
+  },
+  "sourceValidation": "Release solution zero errors, seven warnings; Vector/Install/Needs/Dispatch change and TryScroll added; only DesktopProviders.dll changes among8 native compiler inputs",
+  "ppshowRegression": {
+    "run": "ppshow-scroll-regression-v41",
+    "rgb": {
+      "frame-004000": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be",
+      "frame-006000": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be",
+      "frame-008000": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
+    },
+    "result": "Exact prior qualified fixture hashes retained"
+  },
+  "remaining": [
+    "Compact font uses uppercase glyphs and different metrics; no font/pixel-equivalence claim",
+    "Scroll distance differs for the same timed inputs; no native speed equivalence claim",
+    "Initial tall-screen below-text-clip sample differs as recorded in startup receipt",
+    "Search, other navigation, other scroll modes and other formats unverified",
+    "Native1.3 is outside the application OS2.04+ requirement",
+    "Frozen compiler/dependency graph; final current-source/current-toolchain sweep required",
+    "Correctness diagnostics, not throughput acceptance"
+  ]
+}
