@@ -151,7 +151,29 @@
     {
       "order": 2,
       "utility": "X-Copy5.21",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "MAIN_SCREEN_VERIFIED_BOTH_ROMS",
+      "completedFields": 12000,
+      "screen": "X-Copy5.21 DOSCOPY, RAM device and DF0 controls",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-xcopy-copperstart-v143",
+          "mainScreenVisuallyInspected": true,
+          "finalRgbSha256": "bcd7b1ecdbeeb588dcf674e8403bace6ffd540f9bf6644e68185aa3c5389845a",
+          "unsupported": null,
+          "videoUnsupported": null
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-xcopy-kick13-v143",
+          "mainScreenVisuallyInspected": true,
+          "finalRgbSha256": "72d5533c1698efe49af8ce3716e4a8bf7d007f6dc660ff637f1eb224454e70e8",
+          "unsupported": null,
+          "videoUnsupported": null
+        }
+      ],
+      "mediaSha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde",
+      "limitations": "Copy/format operations not qualified."
     },
     {
       "order": 3,
@@ -238,7 +260,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Source footprint fix pushed to CopperStart main226d94b; ProTracker refresh verified. Continue with X-Copy; all remaining final replay rows stay pending.",
+  "nextInvestigation": "ProTracker and X-Copy final refreshes verified. Continue with Amiga Test Kit;10 final replay rows remain pending.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
