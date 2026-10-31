@@ -1,4 +1,4 @@
-"""Refresh only CopperGui/Intuition on a hash-pinned local utility ADF."""
+"""Refresh only CopperGui/Intuition on a hash-pinned local utility filesystem image."""
 import argparse
 import hashlib
 import json
@@ -38,7 +38,7 @@ def main():
     args = parser.parse_args()
     base_hash = sha(args.base.read_bytes())
     if base_hash != args.expected_sha256.lower():
-        raise ValueError("Base ADF differs from its pinned receipt")
+        raise ValueError("Base image differs from its pinned receipt")
     if args.output.exists():
         raise FileExistsError("Preserve earlier utility images")
     provider = (args.provider_root / "CopperIntuition.hunk").read_bytes()
@@ -57,9 +57,11 @@ def main():
     try:
         volume.open()
         before = inventory(volume)
-        updates = {"C/Intuition": provider, "C/CopperGui": loader}
-        if not updates.keys() <= before.keys():
+        names = {path.casefold(): path for path in before}
+        updates = {"c/intuition": provider, "c/coppergui": loader}
+        if not updates.keys() <= names.keys():
             raise ValueError("Base must already contain the guest GUI installation")
+        updates = {names[path]: data for path, data in updates.items()}
         for path, data in updates.items():
             volume.delete(FSString(path))
             volume.write_file(data, FSString(path))

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "IN PROGRESS",
   "scope": "Repeat all12 main-screen/basic-invocation checks against a common current source/compiler graph; retained native references remain separately identified. No formal throughput result.",
-  "producerCommit": "226d94b",
+  "producerCommit": "eaeffe7",
   "consumerCommit": "af77cd7",
   "consumerBuild": {
     "command": "dotnet build CopperScreen.slnx -c Release",
@@ -436,7 +436,81 @@
     {
       "order": 6,
       "utility": "PersonalPaint7.1c",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "REGRESSION_UNDER_REPAIR",
+      "profile": "PAL OCS MC68000,512KiB Chip+512KiB slow+2048KiB Fast; read-only hardfile",
+      "failedReplay": "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-v152",
+      "nativePositive": "artifacts/utility-sequential-2026-10-31/final-ppaint-kick13-v152",
+      "firstFault": {
+        "directory": "artifacts/utility-sequential-2026-10-31/ppaint-first-fault-v154",
+        "field": 25504,
+        "pc": "00FF99B6",
+        "reason": "ILLEGAL_INSTRUCTION",
+        "caller": "standalone planar ReadPixel layer rejection"
+      },
+      "controls": [
+        {
+          "directory": "artifacts/utility-sequential-2026-10-31/ppaint-control-oldrom-newgui-v153",
+          "rom": "retained dpaint v31",
+          "gui": "current v123",
+          "result": "editor and requester reached; valid execution at28000"
+        },
+        {
+          "directory": "artifacts/utility-sequential-2026-10-31/ppaint-control-newrom-oldgui-v153",
+          "rom": "fresh v140",
+          "gui": "qualified PPaint v87",
+          "result": "invalid execution before main-screen qualification"
+        }
+      ],
+      "repair": "Recognize standalone ReadPixel/WritePixel bounds wrappers with explicit layer-to-trap fallback; install existing layer-aware guest implementations. Do not replace capable or foreign vector owners.",
+      "regressionBefore": {
+        "log": "../CopperStart/utility-pixel-upgrade-before-v157.log",
+        "executed": 1,
+        "failed": 1,
+        "expected": 1,
+        "actual": 0
+      },
+      "regressionAfter": {
+        "emitterBefore": {
+          "log": "../CopperStart/utility-pixel-emitter-before-v168.log",
+          "failed": 1,
+          "passed": 0
+        },
+        "emitterAfter": {
+          "log": "../CopperStart/utility-pixel-emitter-after-v169.log",
+          "failed": 0,
+          "passed": 1,
+          "skipped": 0
+        },
+        "selectedNativeAndGui": {
+          "log": "../CopperStart/utility-pixel-upgrade-after-v163.log",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0
+        },
+        "solution": {
+          "log": "../CopperStart/utility-pixel-upgrade-solution-v170.log",
+          "warnings": 6,
+          "errors": 0
+        }
+      },
+      "notes": "Initial matcher fixture approximated WritePixel incorrectly; final regression uses the production standalone emitter. v164/v165 test build needed the existing SystemRom namespace import; corrected in v168/v169. GUI-only component fix is committed; application qualification remains pending.",
+      "repairCommit": "eaeffe7",
+      "intermediateReplay": {
+        "readOnlyCandidate": "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-v160",
+        "nextFault": "artifacts/utility-sequential-2026-10-31/ppaint-next-fault-v162",
+        "nextFaultField": 25491,
+        "reason": "WritePixel remained in ROM; fixed after inspecting actual emitted WritePixel layout"
+      },
+      "latestReplay": {
+        "directory": "artifacts/utility-sequential-2026-10-31/final-ppaint-copperstart-v167",
+        "completedFields": 42000,
+        "verdict": "REGRESSION_UNDER_REPAIR: stable requester through34000, further failure after Return at35000",
+        "readPixelEntryAt32000": "002ED2C2",
+        "writePixelEntryAt32000": "002ED2DA",
+        "finalPc": "220AB816",
+        "finalBplcon0": "0000",
+        "nextTrace": "artifacts/utility-sequential-2026-10-31/ppaint-dismiss-fault-v171"
+      }
     },
     {
       "order": 7,
@@ -503,7 +577,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Five refreshed utilities verified and producer solution build passed. Continue with PPaint;7 final replay rows remain pending.",
+  "nextInvestigation": "Keep PPaint current. Inspect requester-dismissal trace v171 after the committed pixel upgrade; repair and qualify the remaining failure before proceeding to PPShow.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",

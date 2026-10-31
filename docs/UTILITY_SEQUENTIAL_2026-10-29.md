@@ -1034,3 +1034,14 @@ parity is not claimed. The GUI refresh recipe verifies every non-GUI guest file
 is unchanged. The final producer solution Release build passes. Five refreshed
 utilities are verified; PPaint, PPShow, DiskMaster, MuchMore, MemCheck, LhA and
 DPaint remain pending in the final sweep.
+
+PPaint final refresh exposed a current-ROM regression. The retained planar
+ReadPixel/WritePixel entries were not selected for the guest layer-aware upgrade.
+CopperStart `eaeffe7` recognizes their bounds wrappers and explicit trap fallback.
+The production-emitter regression fails before the fix and passes after; five
+selected native/GUI checks pass, and the producer solution builds with6 warnings
+and0 errors. The corrected replay survives at the expected startup requester
+through34000 fields, with both vectors pointing into the guest module. Return at
+35000 exposes a further failure, so PPaint remains current and unqualified in
+this final sweep. Requester-dismissal trace v171 is pending. Later utilities
+have not been started.
