@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "IN PROGRESS",
+  "status": "12_REFRESHED_MINIMUMS_VERIFIED_AUDIT_PENDING",
   "scope": "Repeat all12 main-screen/basic-invocation checks against a common current source/compiler graph; retained native references remain separately identified. No formal throughput result.",
   "producerCommit": "0f07cc2",
   "consumerCommit": "af77cd7",
@@ -799,7 +799,69 @@
     {
       "order": 12,
       "utility": "DeluxePaintVdemo5.0b9",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "32_COLOR_EDITOR_AND_PERSISTENT_STROKE_VERIFIED_BOTH_ROMS",
+      "profile": "PAL OCS68000,512KiB Chip+512KiB slow+2MiB Fast; read-only system HDF and complete original29-file DF0 demo",
+      "guiProvider": "e4e1a0a722f4d95d8ab90b90730458a565fdb0671dbc3b7d98d7e1e733a1f1df",
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-dpaint-copperstart-v190",
+          "completedFields": 45000,
+          "mainEditorAndDrawingVisuallyInspected": true,
+          "inputScript": "artifacts/utility-sequential-2026-10-31/dpaint/copperstart-depth-draw-v109.json",
+          "rgbSha256": "ceb5cf70ddf2a771d90efb233d415b496566328ea53abf1444e745eb7c81abd7",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick31",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-dpaint-kick31-v190",
+          "completedFields": 20000,
+          "mainEditorAndDrawingVisuallyInspected": true,
+          "inputScript": "artifacts/utility-sequential-2026-10-31/dpaint/native-draw-v15.json",
+          "rgbSha256": "16e3acea5e93a7ac7f489c2b7afa3f1eafd4d12799b7c90f232f90919d7a7b66",
+          "unsupportedReported": false
+        }
+      ],
+      "media": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-dpaint-ffs-v189.hdf",
+          "sha256": "d96e6e0371f21ebdc9b9e0155205092811cf9cc50c01fc8e6f7d3f4075a99048",
+          "onlyGuiFilesChanged": true
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/final-dpaint-ofs-v189.hdf",
+          "sha256": "3f833093db1f92a2bc869432ab657289daa3b747a58921418e6819ab04e736a0",
+          "onlyGuiFilesChanged": true
+        }
+      ],
+      "adf": {
+        "path": "artifacts/utility-sequential-2026-10-31/dpaint/demo-report-mouse-ofs-v117.adf",
+        "sha256": "f7dc6ad364e474c877dff913a588046796232eab22d8609bec9ef938f337ac48"
+      },
+      "stroke": {
+        "hostRectangle": [
+          450,
+          115,
+          650,
+          155
+        ],
+        "beforeField": 40000,
+        "beforeNonblackPixels": 0,
+        "afterFields": [
+          42000,
+          45000
+        ],
+        "afterNonblackPixels": 182,
+        "strokeRgb": [
+          170,
+          170,
+          170
+        ],
+        "afterSha256": "174d28d8061b6a1c4a1fa623366ea795fd27c9ea875fde1a5671a9f121e94d0f",
+        "releasedAtField": 40200,
+        "pointerMovedAwayAtField": 41000
+      },
+      "limitations": "Demo-disabled Save/Print/Delete/Copy are intentionally unavailable. Full drawing/menu coverage and whole-screen pixel parity are not qualified."
     }
   ],
   "romInputAssemblies": [
@@ -836,7 +898,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "Eleven refreshed utilities verified. Continue with DeluxePaintVdemo;1 final replay row remains pending, then completion audit and earlier GUI-dependent rechecks.",
+  "nextInvestigation": "All12 final replay rows verified. Recheck SysInfo and PPMore with the final v174 GUI, then audit runtime receipts, media/binary hashes, required builds and remote commits before completion.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
