@@ -18,7 +18,7 @@ marking the collection complete.
 | 3 | Amiga Test Kit 1.21 | VERIFIED: main menu and selected audio controls, both ROMs | [Receipt](UTILITY_TESTKIT_2026-10-29.json) |
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
-| 6 | Personal Paint 7.1c complimentary edition | IN PROGRESS: both ROMs launch program with recorded filesystem/FFP prerequisites; Workbench mathtrans.library missing | [Library prerequisite receipt](UTILITY_PPAINT_LIBRARIES_2026-10-30.json) |
+| 6 | Personal Paint 7.1c complimentary edition | IN PROGRESS: editor minimum reached on both ROMs with explicit guest prerequisites and 2 MiB Fast RAM; caption/backdrop discrepancy under investigation | [SetRast and editor receipt](UTILITY_PPAINT_SETRAST_2026-10-31.json) |
 | 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
@@ -587,3 +587,37 @@ unverified. Later utilities and the final source sweep remain pending.
 The [BltTemplate receipt](UTILITY_PPAINT_BLTTEMPLATE_2026-10-31.json) records
 the module and media identities, native/replacement comparisons and next fault.
 These are correctness diagnostics, not throughput acceptance measurements.
+
+
+### Personal Paint SetRast qualification and editor, 2026-10-31
+
+CopperStart main commit `cf2f28dd820fe6e9e6c88451e04e743bb8f2c547` recognizes
+the retained compact SetRast prologue and installs the layered implementation.
+It also follows native superbitmap semantics: the complete backing bitmap and
+visible screen clips are filled while masked planes are retained. Native 1.3,
+native 3.1 and CopperStart each pass 72 cases without skips. Their outputs are
+identical across drawing modes, pens and unlayered/smart/superbitmap ports.
+The timer, original 1 MiB Classic window lifecycle and console footer regressions
+pass. The module passes freestanding checks, all eight frozen-input manifest
+hashes match, and the separate Release solution build has zero errors and nine
+warnings. Final current-toolchain qualification remains pending.
+
+Fresh matched OFS/FFS images contain 580 identical, byte-readback-verified files.
+Native 1.3 reaches its previous editor pixels. CopperStart now reaches its
+canvas, full toolbar and palette; Return dismisses the Memory save mode
+requester, and the screen remains stable at fields 29,000 and 32,000. Drawing
+and menu commands remain unverified.
+
+A caption difference remains. An extra native 3.1 replay first stopped at a
+missing ENV assignment, which is unavailable editor coverage. A separately
+labeled diagnostic image supplies an empty ENV directory and assignment;
+native 3.1 then reaches the editor with its caption. The original matched
+1.3/CopperStart pair remains unchanged. Structure captures show that native
+backdrop windows have layer flag 0x40, while CopperStart's OpenWindow omits
+that flag. Consequently its canvas covers BarLayer rather than sitting behind
+it. Propagating and qualifying the backdrop flag is the next correction;
+Personal Paint remains current before advancing to PPShow.
+
+The [SetRast receipt](UTILITY_PPAINT_SETRAST_2026-10-31.json) records these
+controls, editor/input evidence, media identities and remaining caption issue.
+These runs are correctness diagnostics, not performance acceptance.
