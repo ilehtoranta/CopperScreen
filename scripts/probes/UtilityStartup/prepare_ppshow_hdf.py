@@ -51,8 +51,12 @@ def main():
                         help='Native-ROM diagnostic: create ENV and run the retained Workbench Assign command')
     parser.add_argument('--gui-loader', type=Path,
                         help='Canonical CopperGui loader with a matching .json receipt for this base provider')
+    parser.add_argument('--gui-provider', type=Path,
+                        help='Native provider directory with matching intuition.json; requires --gui-loader')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    if args.gui_provider and not args.gui_loader:
+        parser.error('--gui-provider requires its matching --gui-loader')
     if args.output.exists():
         raise FileExistsError('Preserve earlier images')
     base = json.loads(Path(str(args.base_hdf) + '.json').read_text(encoding='utf-8-sig'))
@@ -110,6 +114,16 @@ def main():
             if path.startswith('PPShow/libs/'):
                 add('Libs/' + path.rsplit('/', 1)[1], content, 'bundled PPShow prerequisite: ' + entry.filename)
         add('fixtures/control.ilbm', control_ilbm(), 'original deterministic 320x200 three-plane color bars with white border')
+        provider = base['provider']
+        if args.gui_provider:
+            provider = json.loads((args.gui_provider / 'intuition.json').read_text(encoding='utf-8-sig'))
+            payload = (args.gui_provider / 'CopperIntuition.hunk').read_bytes()
+            if (provider['sha256'].lower() != sha(payload)
+                    or provider['imageBytes'] != len(payload)
+                    or not 0 < provider['classicEntry'] < provider['codeBytes']
+                    or len(provider['inputs']) != 8):
+                raise ValueError('Native GUI provider receipt mismatch')
+            add('C/Intuition', payload, 'native GUI provider with matching compiler-input receipt')
         gui_loader = None
         if args.gui_loader:
             gui_loader = json.loads(Path(str(args.gui_loader) + '.json').read_text(encoding='utf-8-sig'))
@@ -117,8 +131,8 @@ def main():
             if (gui_loader['kind'] != 'canonical-CopperGui-native-loader'
                     or gui_loader['sha256'].lower() != sha(loader)
                     or gui_loader['bytes'] != len(loader)
-                    or gui_loader['classicEntry'] != base['provider']['classicEntry']
-                    or gui_loader['providerSha256'].lower() != base['provider']['sha256'].lower()):
+                    or gui_loader['classicEntry'] != provider['classicEntry']
+                    or gui_loader['providerSha256'].lower() != provider['sha256'].lower()):
                 raise ValueError('Canonical GUI loader/provider receipt mismatch')
             add('C/CopperGui', loader, 'canonical native GUI loader receipt; missing-provider creation enabled')
         workbench = None
@@ -158,7 +172,7 @@ def main():
     receipt = {'kind': 'controlled-ppshow-installation', 'filesystem': base['filesystem'],
                'baseSha256': base['sha256'], 'archiveSha256': archive_hash,
                'sha256': sha(args.output.read_bytes()), 'startup': startup.decode(),
-               'provider': base['provider'], 'shell': base['shell'], 'mathFfp': base['mathFfp'],
+               'provider': provider, 'shell': base['shell'], 'mathFfp': base['mathFfp'],
                'workbenchDependency': workbench,
                'guiLoader': gui_loader,
                'changedPaths': changed, 'files': sorted(files.values(), key=lambda f: f['path']),

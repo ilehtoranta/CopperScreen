@@ -76,6 +76,8 @@ var ringSize = int.Parse(Environment.GetEnvironmentVariable("COPPERSTART_PROBE_R
 if (ringSize < 1 || ringSize > 1048576) throw new ArgumentOutOfRangeException(nameof(ringSize));
 uint? recordPcMin = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_PC_MIN") is { Length: > 0 } minPc ? Convert.ToUInt32(minPc, 16) : null;
 uint? recordPcMax = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_PC_MAX") is { Length: > 0 } maxPc ? Convert.ToUInt32(maxPc, 16) : null;
+uint? stopPc = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_PC") is { Length: > 0 } targetPc ? Convert.ToUInt32(targetPc, 16) : null;
+uint? stopPcD0 = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_PC_D0") is { Length: > 0 } targetD0 ? Convert.ToUInt32(targetD0, 16) : null;
 long executedInstructions = 0;
 var ring = new Entry[ringSize]; long count = 0; bool stop = false; string reason = "END_FIELD";
 var pending=new List<(string Api,string Library,uint Pc,uint Sp,uint A6,uint Version,long Cycle,uint Request,string? Text)>();
@@ -88,6 +90,8 @@ var stopFailedReadArgs = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_S
 void ObserveCall()
 {
     var c=m.Cpu;
+    if (stopPc == c.ProgramCounter && (stopPcD0 is null || stopPcD0 == c.D[0]))
+    { Keep("TARGET_PC"); stop=true; reason="TARGET_PC"; return; }
     peek(c.ProgramCounter,out var op); peek(c.ProgramCounter+2,out var ext);
     if(stopIllegal && op==0x4AFC)
     { Keep("ILLEGAL_INSTRUCTION"); stop=true; reason="ILLEGAL_INSTRUCTION"; return; }
@@ -248,7 +252,7 @@ File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     profile, mediaMode, configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
-    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, ringSize,
+    watchAddress, watchExpected, stopFailedDevice, stopIllegal, stopSetFunction, stopFailedLayer, stopFailedReadArgs, ringSize, stopPc, stopPcD0,
     recordPcMin, recordPcMax, executedInstructions,
     calls,pendingCalls=pending.Select(p=>new {p.Api,p.Library,callPc=p.Pc-4,p.Sp,p.A6,p.Version,p.Cycle,p.Request}),entries },new JsonSerializerOptions { WriteIndented=true }));
 File.WriteAllBytes(Path.Combine(output,"chipram.bin"),m.ChipRam.ToArray());

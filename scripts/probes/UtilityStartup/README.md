@@ -204,3 +204,18 @@ missing-provider installation path while retaining the same compiled GUI HUNK.
 The [loader receipt](../../../docs/UTILITY_PPSHOW_LOADER_2026-10-31.json) records
 native display and both Classic/missing-provider timer controls. Alternate ROM
 input-device failure and failed ROM builds are diagnostic evidence only.
+
+`COPPERSTART_PROBE_STOP_PC` stops before the hexadecimal guest PC is executed.
+Optional `COPPERSTART_PROBE_STOP_PC_D0` requires the given hexadecimal D0 value.
+Both are captured in the trace receipt. This allows inspection before a caller
+frees failed-operation records; it changes only the diagnostic stop point.
+
+`prepare_ppshow_hdf.py --gui-provider DIR --gui-loader FILE` replaces the native
+GUI HUNK and loader together. It verifies the provider's image hash, length,
+Classic entry and compiler-input receipt before accepting the matching loader.
+All final files are still read back and hashed. Replacing inputs requires fresh
+native controls and application replay; image preparation is not qualification.
+
+The [PPShow main-screen receipt](../../../docs/UTILITY_PPSHOW_MAIN_2026-10-31.json)
+records the completed minimum ILBM display and concealed Smart-hook correction.
+Earlier receipts retain the original failures; they are not relabeled passes.

@@ -233,5 +233,5 @@
     "Native Kickstart 1.3 remains unsupported by PPShow; its input control is separate coverage",
     "Correctness diagnostics only; no throughput acceptance"
   ],
-  "followUp": "UTILITY_PPSHOW_FINDCOLOR_2026-10-31.json: Classic graphics fit and FindColor corrected; window layer failure remains"
+  "followUp": "UTILITY_PPSHOW_MAIN_2026-10-31.json: minimum ILBM viewer verified with corrected concealed Smart-hook staging"
 }

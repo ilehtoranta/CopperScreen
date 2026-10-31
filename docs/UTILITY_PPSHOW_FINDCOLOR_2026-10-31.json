@@ -63,5 +63,6 @@
     "Verify CopperStart fixture display",
     "Commit and push completed fixes before utility eight",
     "Finish remaining utilities and final current-source/current-toolchain sweep"
-  ]
+  ],
+  "followUp": "UTILITY_PPSHOW_MAIN_2026-10-31.json: minimum ILBM viewer verified with corrected concealed Smart-hook staging"
 }

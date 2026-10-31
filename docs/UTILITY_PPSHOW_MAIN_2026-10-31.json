@@ -1,0 +1,232 @@
+{
+  "utility": "PPShow 4.0",
+  "status": "VERIFIED MINIMUM: displays the original ILBM fixture; later utilities and final current-source/current-toolchain sweep pending",
+  "producerCommit": "85cb965826aae5b6234f0010344e756343e0946a",
+  "producerNote": "https://github.com/ilehtoranta/CopperStart/blob/85cb965826aae5b6234f0010344e756343e0946a/Docs/NativeSmartHookBackdrop20261031.md",
+  "priorGraphicsCommit": "a91a3dc29f4f1b7f5e8e650eda02746a08255858",
+  "rom": {
+    "sha256": "a88909e72878a3a04e26303647a3d58eaa6875a905f064cf0e1497cd873a7eda",
+    "path": "../CopperStart/artifacts/ppshow-classic-emitter-v52/candidate.rom",
+    "bytes": 524288,
+    "profile": "PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + 2 MiB Fast",
+    "graphicsBytes": 24996,
+    "footerHeadroomBytes": 72,
+    "provenance": "Original qualified Classic compiler output plus corrected source graphics emitter; frozen dependencies, not final current-source/toolchain ROM"
+  },
+  "provider": {
+    "sha256": "0A506ED3B585120A8BB230AFD826A46FE715805D338F55ABD92914539DB290A3",
+    "entry": 0,
+    "installer": 314560,
+    "inputEntry": 314388,
+    "textEntry": 314412,
+    "classicEntry": 314436,
+    "codeBytes": 317984,
+    "imageBytes": 332256,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "7E02D1A1685C4D03594F35BE00CD0BBB072DAA1E5B3463D0AAD9C8D1B05BD3E6"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "14039091900EE855B674576ED5A8806D99C4FDAE7D0DC2378E2CA40C8DCAB94A"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "DA188519C1A81B3B8B242573291098F3094CF5CB48AFB78CF793EB230BADDE13"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "20512367B2A0E15E480D8FD2CD036504D0FD5FD5D55E35CAE77E84F34D8BCC23"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "BCC2C09B1489F37E5B2E6644FCDDB2A2E85B73E25698A2D0614799C1C2CB56D2"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "F171B5A636E0C292D81E0B63DD7B445074109465061E39E0A329B219BE909829"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "54E9772945F6AACF0ABF343C6B525A1E26C29279ECCE1721FEC14609EA999704"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "10B98D3004EF3FECD4D97EB484547170B8C29BA7A5528F6CD6BBCE769E3E86A2"
+      }
+    ]
+  },
+  "loader": {
+    "kind": "canonical-CopperGui-native-loader",
+    "bytes": 232,
+    "sha256": "2DA6EFE7A4AAD71FF21B195B2AE93DF40FCA060ECF522CF03FD5298BBDE76EBB",
+    "classicEntry": 314436,
+    "providerSha256": "0A506ED3B585120A8BB230AFD826A46FE715805D338F55ABD92914539DB290A3",
+    "sourceMethod": "CopperStart.Floppy.Native.Tests.NativeClassicDesktopUpgradeTests.Installer",
+    "emitterAssemblySha256": "23DD84F0C08A3FDC92CF16695C21F29B7AD39D80FBE4759EB73BD5BCC0019A3C"
+  },
+  "media": [
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\ppshow\\ppshow-ofs-v70.hdf",
+      "sha256": "55c98d4604a96bbcbad33a6eab04105719d38684280b5369948370e9579bbc1f",
+      "fileCount": 593,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "providerSha256": "0a506ed3b585120a8bb230afd826a46fe715805d338f55abd92914539db290a3",
+      "loaderSha256": "2da6efe7a4aad71ff21b195b2ae93df40fca060ecf522cf03fd5298bbde76ebb"
+    },
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\ppshow\\ppshow-ffs-v70.hdf",
+      "sha256": "4699b37db75b97e2949a00b758b62a391151878824fb182ccdfe7cc108031885",
+      "fileCount": 593,
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "providerSha256": "0a506ed3b585120a8bb230afd826a46fe715805d338f55abd92914539db290a3",
+      "loaderSha256": "2da6efe7a4aad71ff21b195b2ae93df40fca060ecf522cf03fd5298bbde76ebb"
+    },
+    {
+      "path": "artifacts\\utility-sequential-2026-10-31\\ppshow\\ppshow-env-ofs-v70.hdf",
+      "sha256": "2e504f4fadb75b7291b27dca1c48ab68fb37359ebce655f3e2f3a524a68c5a74",
+      "fileCount": 593,
+      "startup": "C:Assign ENV: SYS:ENV\nC:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "providerSha256": "0a506ed3b585120a8bb230afd826a46fe715805d338f55abd92914539db290a3",
+      "loaderSha256": "2da6efe7a4aad71ff21b195b2ae93df40fca060ecf522cf03fd5298bbde76ebb"
+    }
+  ],
+  "controls": [
+    {
+      "run": "hook-native31-v72",
+      "field": 216,
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "passed": true,
+      "skipped": false,
+      "callbackCount": 2,
+      "displayCallbacks": 1,
+      "concealedCallbacks": 1,
+      "window": 12635204,
+      "windowListAfterClose": 0
+    },
+    {
+      "run": "hook-corrected-provider-v73",
+      "field": 24852,
+      "romSha256": "a88909e72878a3a04e26303647a3d58eaa6875a905f064cf0e1497cd873a7eda",
+      "passed": true,
+      "skipped": false,
+      "callbackCount": 2,
+      "displayCallbacks": 1,
+      "concealedCallbacks": 1,
+      "window": 2299344,
+      "windowListAfterClose": 0
+    }
+  ],
+  "before": {
+    "run": "hook-old-provider-v63",
+    "result": "FAIL: null window before any hook callback",
+    "native31EarlierControl": "hook-native31-v62 passed; header-identity surface classification was then corrected to compare bitmap planes",
+    "finalControlReplay": {
+      "run": "hook-old-provider-v75",
+      "result": "FAIL: null window before any hook callback",
+      "field": 24871,
+      "window": 0,
+      "callbackCount": 0
+    }
+  },
+  "faultEvidence": {
+    "trace": "artifacts\\utility-sequential-2026-10-31\\ppshow\\copperstart-layer-stage-v58\\trace.json",
+    "stop": "TARGET_PC",
+    "field": 3731,
+    "cycle": 530293196,
+    "pc": "002B9F12",
+    "d0": 0,
+    "cause": "StageLayersPixelBackfill rejects a concealed backing surface because the original RastPort still points to the display. Callback execution retargets that RastPort later."
+  },
+  "sourceValidation": {
+    "baselineIl": "1394 method bodies identical to prior qualified Layers input",
+    "correctedIl": "Only StageLayersPixelBackfill and ValidatePixelOperation change after resolving metadata operands",
+    "nativeCompile": "Freestanding control passed; only Layers.dll changed among eight compiler inputs",
+    "graphicsControls": "ppshow-graphics-v54.log: 10 passed, zero failed/skipped",
+    "sourceBuild": "../CopperStart/artifacts/ppshow-hook-solution-v74.log: Release solution succeeds, 0 errors, 10 existing warnings",
+    "consumerBuild": "consumer-build-v55.log: production Release solution succeeds, 0 errors/warnings",
+    "probeBuild": "target-probe-build-v58.log: Release diagnostic probe succeeds"
+  },
+  "nativeReference": {
+    "rom": "Kickstart 3.1 A500",
+    "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+    "run": "kick31-hook-v71",
+    "fields": 8000,
+    "nativeOnlyStartupDifference": "C:Assign ENV: SYS:ENV plus empty ENV directory; explicitly retained diagnostic difference",
+    "kickstart13": "PPShow requires Kickstart/Workbench 2.0+; the recorded 1.3 failure is not positive coverage"
+  },
+  "copperStartReplay": {
+    "run": "copperstart-hook-v71",
+    "fields": 12000,
+    "visuallyInspectedFields": [
+      4000,
+      8000
+    ],
+    "stableFields": [
+      4000,
+      6000,
+      8000,
+      10000,
+      12000
+    ],
+    "minimum": "Color bars and white border displayed; application remains open"
+  },
+  "imageComparison": {
+    "frames": [
+      {
+        "run": "copperstart-hook-v71",
+        "field": 4000,
+        "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
+      },
+      {
+        "run": "copperstart-hook-v71",
+        "field": 6000,
+        "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
+      },
+      {
+        "run": "copperstart-hook-v71",
+        "field": 8000,
+        "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
+      },
+      {
+        "run": "copperstart-hook-v71",
+        "field": 10000,
+        "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
+      },
+      {
+        "run": "copperstart-hook-v71",
+        "field": 12000,
+        "rgbSha256": "eb1930a370c212449cfea6237d08b989f1459ce72c09ca4a05d4ea9eed54c2be"
+      },
+      {
+        "run": "kick31-hook-v71",
+        "field": 6000,
+        "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb"
+      },
+      {
+        "run": "kick31-hook-v71",
+        "field": 8000,
+        "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb"
+      }
+    ],
+    "width": 908,
+    "height": 313,
+    "differenceBoundingBox": [
+      258,
+      44,
+      278,
+      60
+    ],
+    "differentPixels": 186,
+    "interpretation": "Difference is confined to the pointer at top left; full fixture and border are identical. Full frames were retained; no emulated display cropping or change."
+  },
+  "limitations": [
+    "No pointer pixel equivalence claim",
+    "Keyboard/mouse commands and other image formats unverified",
+    "Frozen compiler output and dependency graph; final current-source/current-toolchain sweep remains mandatory",
+    "Correctness replay, not throughput acceptance"
+  ],
+  "nextUtility": "DiskMaster 2 2.5.30a V37"
+}
