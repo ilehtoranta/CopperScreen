@@ -59,8 +59,12 @@
     },
     {
       "run": "utility-final-size-candidate-v126",
-      "status": "RUNNING",
-      "scope": "Same v121 frozen source inputs; CodeSizeOptions baseline passes plus shared arithmetic; excludes four extra SSA/size-selection passes from the failed candidate. No ROM qualification yet."
+      "status": "COMPOSITION_FAILED",
+      "scope": "Same v121 frozen source inputs; CodeSizeOptions baseline passes plus shared arithmetic; excludes four extra SSA/size-selection passes from the failed candidate. No ROM qualification yet.",
+      "codeEnd": 520566,
+      "graphicsStart": 497664,
+      "overlapBytes": 22902,
+      "notes": "Compilation and compatibility check finish,but the alternate general size policy loses the compact ROM frame lowering and makes the combined image larger. Not a runnable ROM."
     }
   ],
   "gui": {
@@ -167,5 +171,13 @@
       "file": "CopperStart.Exec.dll",
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
-  ]
+  ],
+  "nextInvestigation": "Retain v121 as the fresh-source baseline; inspect redundant source/emission size without removing supported guest APIs. All final replay rows remain pending.",
+  "sizeInspection": {
+    "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
+    "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
+    "largestMethodBytes": 7242,
+    "romCodeBytes": 489412,
+    "romRodataBytes": 11100
+  }
 }
