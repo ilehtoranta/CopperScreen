@@ -1,6 +1,6 @@
 {
   "utility": "LhA2.15 /lha_68k",
-  "status": "IN PROGRESS: native3.1 tests5compressed members; CopperStart starts after GadTools prerequisite but tests no files because DOS returns CopperShell data for distribution.lha",
+  "status": "SUPERSEDED DIAGNOSIS: original CopperStart fixture contains Shell bytes due preparation-variable reuse; DOS reading those bytes is correct. Corrected input replay is in progress.",
   "archive": {
     "file": "media/utilities/originals/lha.run",
     "sha256": "76bae515264fcc3e1c69058ff03a4bcb096152a732cf19fdb03cceee18932497",
@@ -351,7 +351,8 @@
     "shellBytes": 334836,
     "shellPrefix131072Sha256": "20ee56f7825e35b793327926833005b0fdf1f86034784176f2dc26d980d25631",
     "archivePrefix131072Sha256": "6c9e54dcf224c863ed9fab19acb921f86d56153510f0cc86b03592e3962e0b9f",
-    "conclusion": "The requested archive is found and opened, but metadata/data come from CopperShell. Input buffer begins zero; read changes it to the exact Shell prefix, so this is not a no-copy/stale-buffer result. Native file/provider selection is next to investigate. No root-cause fix yet."
+    "conclusion": "The prior file/provider-selection conclusion was incorrect. Independent amitools inspection confirms that the prepared archive file itself is334836bytes of CopperShell. prepare_lha_hdf.py reused payload for the Shell replacement before writing the archive fixture. No DOS fault is established by these old runs.",
+    "historicalConclusion": "The requested archive is found and opened, but metadata/data come from CopperShell. Input buffer begins zero; read changes it to the exact Shell prefix, so this is not a no-copy/stale-buffer result. Native file/provider selection is next to investigate. No root-cause fix yet."
   },
   "remaining": [
     "Fix incorrect native DOS file selection/provider contents, then replay original CRC test",
@@ -359,5 +360,13 @@
     "Native1.3 outside documented OS2.0+ requirement",
     "Frozen compiler/dependency graph; final current-source/current-toolchain sweep required",
     "Correctness diagnostic only; no throughput acceptance claim"
-  ]
+  ],
+  "correction": {
+    "cause": "Archive payload variable was overwritten by replacement Shell bytes",
+    "fix": "Separate archive_payload and shell_payload; require final fixture to have167691bytes and independently pinned SHA256b1e9ce416a84c4e2b53c70fd51d434df09eb11fe110014d86c0bea76147d1899",
+    "correctedMedia": "lha-corrected-ffs-v11.hdf",
+    "correctedMediaSha256": "b0b7bcc90a874e495f260f14c934510907f6f0626787fdddf9823f011b27d9a6",
+    "replay": "copperstart-corrected-v12: banner and first member testing visible at10000fields; complete CRC-test success not yet established",
+    "oldInputs": "Preserved unchanged as invalid test-input evidence"
+  }
 }

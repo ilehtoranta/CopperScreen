@@ -70,10 +70,10 @@ def main():
                                       'sha256': sha(content), 'origin': origin}
             changed.append(path)
 
-        payload = args.archive.read_bytes()[6112:]
-        if sha(payload) != 'b1e9ce416a84c4e2b53c70fd51d434df09eb11fe110014d86c0bea76147d1899':
+        archive_payload = args.archive.read_bytes()[6112:]
+        if len(archive_payload) != 167691 or sha(archive_payload) != 'b1e9ce416a84c4e2b53c70fd51d434df09eb11fe110014d86c0bea76147d1899':
             raise ValueError('Pinned SFX payload mismatch')
-        archive = lhafile.Lhafile(io.BytesIO(payload))
+        archive = lhafile.Lhafile(io.BytesIO(archive_payload))
         for entry in archive.infolist():
             path = 'LhA/' + entry.filename.replace('\\', '/')
             if not path.endswith('/'):
@@ -81,12 +81,12 @@ def main():
         shell = base['shell']
         if args.shell_root:
             shell = json.loads((args.shell_root / 'shell-manifest.json').read_text(encoding='utf-8-sig'))
-            payload = (args.shell_root / 'CopperShell').read_bytes()
-            if (shell['sha256'].lower() != sha(payload)
+            shell_payload = (args.shell_root / 'CopperShell').read_bytes()
+            if (shell['sha256'].lower() != sha(shell_payload)
                     or shell['dosClient']['serviceVersion'] != 2
                     or not shell['codeSizeOptimizations']):
                 raise ValueError('Native Shell receipt mismatch')
-            add('L/CopperShell', payload, 'native Shell with matching compiler-input receipt')
+            add('L/CopperShell', shell_payload, 'native Shell with matching compiler-input receipt')
         gadtools = None
         if args.gadtools:
             gadtools = json.loads(Path(str(args.gadtools) + '.json').read_text(encoding='utf-8-sig'))
@@ -98,7 +98,10 @@ def main():
                     or gadtools['sha256'].lower() != sha(library)):
                 raise ValueError('Private GadTools dependency receipt mismatch')
             add('Libs/gadtools.library', library, 'private native GadTools module with matching relocation receipt')
-        add('fixtures/lha/distribution.lha', payload, 'original pinned self-extractor compressed payload at offset6112')
+        add('fixtures/lha/distribution.lha', archive_payload, 'original pinned self-extractor compressed payload at offset6112')
+        fixture_readback = bytes(volume.read_file(FSString('fixtures/lha/distribution.lha')))
+        if len(fixture_readback) != 167691 or sha(fixture_readback) != 'b1e9ce416a84c4e2b53c70fd51d434df09eb11fe110014d86c0bea76147d1899':
+            raise ValueError('Installed archive does not match the pinned original payload')
         startup = b'C:CopperGui\nSYS:LhA/lha_68k t SYS:fixtures/lha/distribution.lha\n'
         if args.native_env:
             if volume.get_path_name(FSString('ENV')) is None:
@@ -113,7 +116,8 @@ def main():
         volume.close()
         device.close()
     receipt = {'kind': 'controlled-lha-installation', 'filesystem': base['filesystem'],
-               'baseSha256': base['sha256'], 'archiveSha256': archive_sha, 'payloadSha256': sha(payload), 'payloadOffset': 6112,
+               'baseSha256': base['sha256'], 'archiveSha256': archive_sha, 'payloadSha256': sha(archive_payload), 'payloadOffset': 6112,
+               'payloadBytes': len(archive_payload), 'payloadReadbackSha256': sha(fixture_readback),
                'sha256': sha(args.output.read_bytes()), 'startup': startup.decode(),
                'provider': base['provider'], 'guiLoader': base.get('guiLoader'),
                'shell': shell, 'mathFfp': base['mathFfp'], 'gadtoolsDependency': gadtools,
