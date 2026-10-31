@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "kind": "copperos-native-mui-builtins-diagnostic",
+  "date": "2026-10-31",
+  "applicationQualified": false,
+  "machine": {
+    "cpu": "68000",
+    "executionMode": "Interpreter",
+    "chipset": "PAL OCS MOS8371/MOS8362",
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 2097152,
+    "hardfiles": "read-only",
+    "performanceAcceptance": false
+  },
+  "roms": [
+    {
+      "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+      "bytes": 524288,
+      "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+    },
+    {
+      "path": "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3"
+    }
+  ],
+  "library": {
+    "artifact": {
+      "path": "artifacts/utility-mui-2026-10-31/copperos-mui-builtin-68000-v30/muimaster.library",
+      "bytes": 1018472,
+      "sha256": "350854a006d8ff5a0ef3d8c5ce91cb9985a7fc4291139cb7cf060c0b6f71c01f"
+    },
+    "buildReceipt": {
+      "Format": "single-code-hunk-development-library",
+      "Cpu": "68000",
+      "Name": "muimaster.library",
+      "Version": 4,
+      "Revision": 1,
+      "PositiveBytes": 48,
+      "NegativeBytes": 756,
+      "ImageBytes": 1018472,
+      "CodeBytes": 951016,
+      "Sha256": "350854A006D8FF5A0EF3D8C5CE91CB9985A7FC4291139CB7CF060C0B6F71C01F",
+      "Layout": {
+        "Resident": 4,
+        "AutoInit": 32,
+        "FunctionTable": 48,
+        "Name": 556,
+        "IdString": 574,
+        "CompiledCode": 6616,
+        "EndMarker": 951010
+      },
+      "Exports": {
+        "copperos.mui.builtin.dispatch": 6408,
+        "copperos.mui.custom.dispatch": 6202,
+        "copperos.mui.library.add-clip-region": 5172,
+        "copperos.mui.library.add-clipping": 4760,
+        "copperos.mui.library.alloc-asl-request": 2906,
+        "copperos.mui.library.asl-request": 3112,
+        "copperos.mui.library.begin-refresh": 5584,
+        "copperos.mui.library.close": 948474,
+        "copperos.mui.library.create-custom-class": 1464,
+        "copperos.mui.library.delete-custom-class": 1670,
+        "copperos.mui.library.dispose-object": 2082,
+        "copperos.mui.library.end-refresh": 5790,
+        "copperos.mui.library.error": 2494,
+        "copperos.mui.library.expunge": 948508,
+        "copperos.mui.library.free-asl-request": 3318,
+        "copperos.mui.library.free-class": 846,
+        "copperos.mui.library.get-class": 640,
+        "copperos.mui.library.get-rgb-color": 5996,
+        "copperos.mui.library.init": 948394,
+        "copperos.mui.library.layout": 4142,
+        "copperos.mui.library.make-object-a": 2288,
+        "copperos.mui.library.new-object-a": 1876,
+        "copperos.mui.library.obtain-pen": 4348,
+        "copperos.mui.library.open": 948440,
+        "copperos.mui.library.redraw": 3936,
+        "copperos.mui.library.reject-idcmp": 1258,
+        "copperos.mui.library.release-pen": 4554,
+        "copperos.mui.library.remove-clip-region": 5378,
+        "copperos.mui.library.remove-clipping": 4966,
+        "copperos.mui.library.request-a": 3524,
+        "copperos.mui.library.request-idcmp": 1052,
+        "copperos.mui.library.request-object-a": 3730,
+        "copperos.mui.library.reserved": 948542,
+        "copperos.mui.library.set-error": 2700,
+        "copperos.mui.library.unsupported": 948574
+      },
+      "RelocationCount": 16851,
+      "InputSha256": {
+        "CopperOS.MuiMaster.LibraryBuilder.dll": "3B92BAB21B1E044C4919EF5D9F5C3BD77BD553EEF0FBCE0472CA2C56D69F32A9",
+        "CopperOS.MuiMaster.dll": "40916C0B6A77B15544273B8D49018B8CE03228C69259A69CD5D615AEE47CC22B",
+        "CopperSharp.Compiler.dll": "D1082A3128C5DB266F8C8240A73619CCD04F8F1A883CA223D871A38112735F2A",
+        "CopperSharp.Runtime.AmigaPal.dll": "9D0834836C032EFC8B2EE8467D9A5448E247E9C1B9318B5CBFB106F007B1DE55",
+        "CopperSharp.Runtime.Managed.dll": "E69DFF35E56B4F9BC6A0D5E44134D3E7181A3BF692AB967EFE48022E88FC8E68",
+        "CopperSharp.Sdk.Amiga.Support.dll": "0DE95230B67E9D35A565AF039A1DB2B8DF12E71C51AB4AD0C3E4A37EAE7D45D5",
+        "CopperSharp.Sdk.Amiga.dll": "B02D0E45185C7A4642AF04DBF3CF0E95C33A6E4F2A6D06030894F33D442D88D6",
+        "CopperSharp.Targets.Amiga.dll": "E10C7CCFBE4D005665BAA4615D52A2B29CB344B82E36A6EA741849E319E2943C"
+      }
+    },
+    "profile": "CopperOSMuiClassicCompatibility=true",
+    "developmentOnly": true,
+    "builtins": [
+      "Notify",
+      "Family",
+      "Area",
+      "Group",
+      "Rectangle",
+      "Text",
+      "List",
+      "Listview",
+      "Window",
+      "Application",
+      "Menustrip",
+      "Menu",
+      "Menuitem",
+      "String",
+      "Image",
+      "Cycle"
+    ],
+    "nativeWindowPresenter": false
+  },
+  "originalClient": {
+    "archive": {
+      "path": "media/utilities/originals/MUI_Calc125.lha",
+      "bytes": 25119,
+      "sha256": "ca41cecb89027fa2a3fd199df2ff200a98819646d2c32876490992b01c4d35fd"
+    },
+    "unmodifiedExecutableSha256": "bcdbab4a3fc558ed811537232ff47e5974f7104a45792903b100e47b8278f0ba",
+    "packageFilesPreserved": 7
+  },
+  "images": [
+    {
+      "image": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperos-ofs-v30.hdf",
+        "bytes": 16777216,
+        "sha256": "3115afbd38956ee1f7d236b1df71bc2cee6aebf7e29ca24fb70bdc51d782e4a6"
+      },
+      "preparationReceipt": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperos-ofs-v30.hdf.json",
+        "bytes": 66253,
+        "sha256": "abd1197c333ad67676e582a5e6060169f00885c993ee669e1f6bca1df7de91b0"
+      }
+    },
+    {
+      "image": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperos-ffs-v30.hdf",
+        "bytes": 16777216,
+        "sha256": "86f603e8a80cdd7e94b7e568cf9e5d4b4fee8130f7617a3892fdedd2d635aa43"
+      },
+      "preparationReceipt": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperos-ffs-v30.hdf.json",
+        "bytes": 66873,
+        "sha256": "41029438fd8f82711fb8811303ae3832937f27f99e56d93b58ee9b0bae95bcb0"
+      }
+    },
+    {
+      "image": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-builtin-probe-ofs-v30.hdf",
+        "bytes": 16777216,
+        "sha256": "ac6419d836a0176eb4a9cd8957043a8b50051111dd572ec763866d383440cb14"
+      },
+      "preparationReceipt": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-builtin-probe-ofs-v30.hdf.json",
+        "bytes": 61401,
+        "sha256": "cceb8cdcafea79ccab5bd47a2c633e0158b6d6ebec79de79a365d3c65432bd5b"
+      }
+    },
+    {
+      "image": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-builtin-probe-ffs-v30.hdf",
+        "bytes": 16777216,
+        "sha256": "5ca16f8f8bb47c30be9e691a15788ee378991929b68bfb6ccefe848f6a5c64d7"
+      },
+      "preparationReceipt": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-builtin-probe-ffs-v30.hdf.json",
+        "bytes": 62058,
+        "sha256": "bfa080a811ca4d194730c235844f42a85e092d908ff89b9b0d318b0ba72fdeaf"
+      }
+    }
+  ],
+  "nativeProbe": {
+    "protocol": "MUB3",
+    "commandSha256": "7b02b19f1bc47afb6f2b55f80bb279272f3599afa5cb845ebe0e36144ef24bd2",
+    "results": [
+      {
+        "capture": "artifacts\\utility-mui-2026-10-31\\mui-builtin-probe-kick31-v30\\frame-015000.fastram",
+        "sha256": "92c426b0342158971c2e7355831acf941661fc807c576ef64b9dbc08596e775e",
+        "result": "PASS",
+        "protocol": "MUB3",
+        "resourceAddress": 2200752,
+        "libraryBase": 2207372,
+        "availableAfterCycles": [
+          2061264,
+          2061264
+        ],
+        "cycles": [
+          {
+            "class": 2207424,
+            "object": 2199876,
+            "insertReturn": 1,
+            "entriesAfterInsert": 1,
+            "clearReturn": 1,
+            "entriesAfterClear": 0,
+            "listview": 3293220,
+            "cycleObject": 2199876,
+            "cycleActive": 0
+          },
+          {
+            "class": 2207424,
+            "object": 2199876,
+            "insertReturn": 1,
+            "entriesAfterInsert": 1,
+            "clearReturn": 1,
+            "entriesAfterClear": 0,
+            "listview": 3293220,
+            "cycleObject": 2199876,
+            "cycleActive": 0
+          }
+        ]
+      },
+      {
+        "capture": "artifacts\\utility-mui-2026-10-31\\mui-builtin-probe-copperstart-v30\\frame-020000.fastram",
+        "sha256": "f925f8173fae60aa99ba3d69cdc9848b555ff42e2bad29b11ba248bae28d806c",
+        "result": "PASS",
+        "protocol": "MUB3",
+        "resourceAddress": 2719920,
+        "libraryBase": 2722388,
+        "availableAfterCycles": [
+          1107024,
+          1107024
+        ],
+        "cycles": [
+          {
+            "class": 2720552,
+            "object": 2723564,
+            "insertReturn": 1,
+            "entriesAfterInsert": 1,
+            "clearReturn": 1,
+            "entriesAfterClear": 0,
+            "listview": 4069612,
+            "cycleObject": 2723612,
+            "cycleActive": 0
+          },
+          {
+            "class": 2720552,
+            "object": 2723564,
+            "insertReturn": 1,
+            "entriesAfterInsert": 1,
+            "clearReturn": 1,
+            "entriesAfterClear": 0,
+            "listview": 4069612,
+            "cycleObject": 2723612,
+            "cycleActive": 0
+          }
+        ]
+      }
+    ],
+    "bounds": {
+      "kickstart31Fields": 15000,
+      "copperStartFields": 20000
+    },
+    "finalRegistryObjects": 0,
+    "finalRegistryBuiltinClasses": 0
+  },
+  "tests": {
+    "muiClassic": {
+      "passed": 3864,
+      "skipped": 0,
+      "log": {
+        "path": "artifacts/utility-mui-builtin-host-tests-v30.log",
+        "bytes": 459,
+        "sha256": "78a922fec752937fa129a6bd7e218db9a1caa788cde5c8d42fb90170ecde4ef9"
+      }
+    },
+    "muiDefault": {
+      "passed": 3864,
+      "skipped": 0,
+      "log": {
+        "path": "artifacts/utility-mui-builtin-host-default-tests-v30.log",
+        "bytes": 1628,
+        "sha256": "d0f51d026d3eb93e21544f379aa6b17331d40296a443e9f55463b82077ea7baf"
+      }
+    },
+    "packagerClassic": {
+      "passed": 22,
+      "skipped": 0,
+      "log": {
+        "path": "artifacts/utility-mui-builtin-packager-tests-v30.log",
+        "bytes": 563,
+        "sha256": "01faf544835b705140e805865901426f6d7b21028b4094ab5bd5c99c2640f98f"
+      }
+    },
+    "packagerDefault": {
+      "passed": 22,
+      "skipped": 0,
+      "log": {
+        "path": "artifacts/utility-mui-builtin-packager-default-tests-v30.log",
+        "bytes": 2118,
+        "sha256": "45c9a39cd9a49231e349f8803090eaff6d36293188729ccba224e6b044528349"
+      }
+    },
+    "productionSolution": {
+      "result": "FAILED_MISSING_BUNDLE",
+      "reason": "Required qualified CopperOS A1200 ROM/HDF bundle is not staged; build stops in RequireCopperOsBundle. No bundle checks were relaxed.",
+      "log": {
+        "path": "artifacts/utility-mui-builtin-copperscreen-build-v30.log",
+        "bytes": 1636,
+        "sha256": "297c885f9e3825d9152e400cb745a0223bc5bfb6b5d4bda6ea5094d311de2ac1"
+      }
+    }
+  },
+  "provenance": {
+    "copperScreenHead": "50acfda102153968c4aebd8ee922430c6de4b784",
+    "copperOsHead": "69da2695d4153f1231d61743b538d066c62160b5",
+    "uncommittedSource": true,
+    "producerSources": [
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/CopperOS.MuiMaster.csproj",
+        "bytes": 1427,
+        "sha256": "f67e0bda3460177a4d9c07e78cfec3832b539c6ab841d860eb3209ca17218f77"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/ListviewCore.cs",
+        "bytes": 213474,
+        "sha256": "a76b74fd506810f7c6225c2695bd7dd8f6b17bcbd49be8b18bca92088c35cabe"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeBoopsiDispatch.cs",
+        "bytes": 3469,
+        "sha256": "493f8b68da33290697cad716b75a8c02c642c731b9bdb549b07499081a05ab6e"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeBuiltinClasses.cs",
+        "bytes": 11568,
+        "sha256": "de5b1d21a36220ed1e4632e1514f26caa8c11c502e5fcb3ea3df49f56f8387ea"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeBuiltinPlatform.cs",
+        "bytes": 9461,
+        "sha256": "b2c7d7e939cd38bf471259b3b06a42c12880558c076a0f266cf6fc669b36f99d"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeLayout.cs",
+        "bytes": 4328,
+        "sha256": "a23b5fcf74699fae877f109172f2631c9d22e52c2b7c87e8eba289c13dd8c664"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeLibrary.cs",
+        "bytes": 24369,
+        "sha256": "07c8f81f13529ef58a09457700b5fc777ae5cb9fae2c0e370d0781eade0e8c7a"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeProviderOwner.cs",
+        "bytes": 11695,
+        "sha256": "ee422a7723f7dec7fc1eb1f5276d7656ccca9c5811104a04b34802aad2f3974d"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativePublicObject.cs",
+        "bytes": 72064,
+        "sha256": "09dc257ae02b67da9dd27bc65fe278d6844d78d569ac0de446619146e5604857"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiNativeRedraw.cs",
+        "bytes": 23715,
+        "sha256": "98dbca8dcdf1a720859634c875031fa1a35752dc5d9eef9767c65cc8902031dc"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiOwnedClassServices.cs",
+        "bytes": 12640,
+        "sha256": "302c953b6361dd91dffc3ea3e7c4b3d53c2fd573cdc89358dd230390ea4f4c89"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/MuiSignalSemaphoreCodec.cs",
+        "bytes": 4863,
+        "sha256": "f23cdd8261f6242fb7ffd0f4b0ba7717c562bf4e5a09263d1eb2b70a0d21fadb"
+      },
+      {
+        "path": "../CopperOS/src/Libraries/muimaster.library/ResidentAndVectors.cs",
+        "bytes": 3650,
+        "sha256": "ab2159ca774503fda51686a6b72301f36001f72f0a6678f63986bf5b535606a0"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster.ExecIntegration/LibraryFixture.cs",
+        "bytes": 5449,
+        "sha256": "5dec2aafae4ba9f61f4314ee4034a8ad0d83977398c682f3e1bc5ff5b1d4c091"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster.ExecIntegration/PackagedHunk.cs",
+        "bytes": 7881,
+        "sha256": "9900d4bfc4c7f2dfddc72044efcc1a157c1612d44aa9a6a3fd13d7511cfd85cb"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster.NativeRoot/CopperOS.MuiMaster.NativeRoot.csproj",
+        "bytes": 1614,
+        "sha256": "2af4a7e775b3288b0fa3d700489a28e100b235050808e1805fce00861441d385"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster.NativeRoot/MuiLibraryIntegrationRoots.cs",
+        "bytes": 20929,
+        "sha256": "b1a20665ffe7b4e694d581d7ba5eefb46f6005fcd9509b55285c47e4a3b08fbd"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster/CopperOS.MuiMaster.Tests.csproj",
+        "bytes": 1011,
+        "sha256": "4cfbacaf99c356cc8134f5c395fd55f7c90036097eb81bdf06d8368cc2a397e5"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster/MuiFoundationTests.cs",
+        "bytes": 11023,
+        "sha256": "7ac71ff8a60b6f276ff67b6cf5531c39d15ff1ae2b7586d2e9ba06b0afd8120b"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster/MuiListviewExternalScrollerTests.cs",
+        "bytes": 28599,
+        "sha256": "827345bc0f30979072c3434779347347d62527b817ac1f4adb8fb0235f59e1c2"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster/MuiNativeBoopsiHeaderTests.cs",
+        "bytes": 2397,
+        "sha256": "dd419fbaa0ff44327ae2512ee7ee43dcdcf3db942770afa47d22490497f890cd"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster/MuiNativeClassOwnerTests.cs",
+        "bytes": 35431,
+        "sha256": "c949036e4b759ef3894b30075e3446f2a4f479bee6b05f6001b334a4739cb341"
+      },
+      {
+        "path": "../CopperOS/tests/MuiMaster/MuiNativePublicObjectTests.cs",
+        "bytes": 9348,
+        "sha256": "bb686735fcefbea69c241f61d84e90cf401e1c743feb44b346940c2ec864405b"
+      },
+      {
+        "path": "../CopperOS/tools/MuiMaster.LibraryBuilder/MuiLibraryPackager.cs",
+        "bytes": 15663,
+        "sha256": "e71b2f6b66a160a884ffd4881190cd3dfca819ba2a33ac93872e1904e34150ca"
+      },
+      {
+        "path": "../CopperOS/tools/MuiMaster.LibraryBuilder/MuiNativeStackGate.cs",
+        "bytes": 2998,
+        "sha256": "196c5c518257c2687707aa25716ed864e3d15628921a00e1b2b0f31c651e29b4"
+      },
+      {
+        "path": "../CopperOS/tools/MuiMaster.LibraryBuilder/Program.cs",
+        "bytes": 5947,
+        "sha256": "71a6a86a7f191f7e23d5f707d7ddaef155a9a44e349d016a1cd99acbfc11c993"
+      },
+      {
+        "path": "../CopperOS/tools/MuiMaster.LibraryBuilder/README.md",
+        "bytes": 7402,
+        "sha256": "f9c1860a59f8bf0870c377c1fa990c7b76f054553444150a8205c72a2c8e92bd"
+      },
+      {
+        "path": "../CopperOS/tools/MuiMaster.LibraryBuilder/tests/MuiLibraryPackagerTests.cs",
+        "bytes": 16016,
+        "sha256": "fb175c40868992e642026fec3d186c07db2ed0fa62c292f92c72661736128c47"
+      }
+    ],
+    "consumerSources": [
+      {
+        "path": "scripts/probes/UtilityStartup/Program.cs",
+        "bytes": 30299,
+        "sha256": "1fe6ba3478486a6dbe65d23a1f8d07a573d18cd496901860f021c334d6b33b30"
+      },
+      {
+        "path": "scripts/probes/UtilityStartup/inspect_mui_builtin_probe.py",
+        "bytes": 2837,
+        "sha256": "4a71e447c1a7fa203579b46fde90a18af90bb9f74d902072bec32cc9478be4b7"
+      },
+      {
+        "path": "scripts/probes/UtilityStartup/inspect_mui_library_probe.py",
+        "bytes": 1843,
+        "sha256": "6ea6743d7301c4def22eb897c6d657412ce515c247016e2fac42d1476fa71514"
+      },
+      {
+        "path": "scripts/probes/UtilityStartup/mui_builtin_probe.py",
+        "bytes": 4120,
+        "sha256": "932a6dddb6e642ae6358108ed388c3c098341ef8a162f38c9d0343c8efeee105"
+      },
+      {
+        "path": "scripts/probes/UtilityStartup/prepare_mui_calc.py",
+        "bytes": 5022,
+        "sha256": "0b3eb6eda4280231e5ac2e0cc49fc52cac80dcfe356ad7934892cdd9b064c0de"
+      },
+      {
+        "path": "scripts/probes/UtilityStartup/prepare_mui_library_probe.py",
+        "bytes": 4535,
+        "sha256": "11e477474136e7a5339175230930f03900cc6878aa439329c4aa46936067a0f2"
+      },
+      {
+        "path": "scripts/qualification/amiga-utilities-v1.json",
+        "bytes": 25310,
+        "sha256": "3a127ed3e666126da320c4977b577cb778441b961b2911316670d3d21ad7117e"
+      }
+    ]
+  },
+  "applicationReplays": [
+    {
+      "rom": "kickstart31",
+      "completedFields": 60000,
+      "result": "APPLICATION_CREATION_FAILED",
+      "visibleRequester": "Failed to create application.",
+      "arithmetic": "NOT_RUN",
+      "registryObjectCount": 71,
+      "registeredBuiltinCount": 16,
+      "objectCountsByClass": {
+        "Cycle.mui": 1,
+        "String.mui": 1,
+        "Window.mui": 2,
+        "Listview.mui": 2,
+        "List.mui": 2,
+        "Text.mui": 45,
+        "Rectangle.mui": 4,
+        "Group.mui": 14
+      },
+      "pc": "00F81476",
+      "unsupported": null,
+      "videoUnsupported": null,
+      "captures": [
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-kick31-v30/frame-060000.json",
+          "bytes": 1105,
+          "sha256": "3a298e1f3cceee87d92f6bcdbf1086d5d023574c932d78ae34764ec113e31a14"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-kick31-v30/frame-060000.bmp",
+          "bytes": 1136870,
+          "sha256": "3a88627dedd854d94e702ad2642f9df2d6b42c94cac252d0677ac1a7a527b0ea"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-kick31-v30/frame-060000.chipram",
+          "bytes": 524288,
+          "sha256": "06098035d7aac00e2ded11780f9302e6b3e6b7e6922f1a80e0f698fb0b29acd5"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-kick31-v30/frame-060000.fastram",
+          "bytes": 2097152,
+          "sha256": "2e6be3f8667ad8ae5a500e7f93ec3a638267c728f7333109afe75fc1804c66a0"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-kick31-v30/frame-060000.slowram",
+          "bytes": 524288,
+          "sha256": "d2171cb6a81540432281f40ca9366dad48e1057e149b966fc6cc467681e55fea"
+        }
+      ]
+    },
+    {
+      "rom": "copperstart",
+      "completedFields": 70000,
+      "result": "APPLICATION_CREATION_FAILED",
+      "visibleRequester": "Failed to create application.",
+      "arithmetic": "NOT_RUN",
+      "registryObjectCount": 71,
+      "registeredBuiltinCount": 16,
+      "objectCountsByClass": {
+        "Cycle.mui": 1,
+        "String.mui": 1,
+        "Window.mui": 2,
+        "Listview.mui": 2,
+        "List.mui": 2,
+        "Text.mui": 45,
+        "Rectangle.mui": 4,
+        "Group.mui": 14
+      },
+      "pc": "0020420E",
+      "unsupported": null,
+      "videoUnsupported": null,
+      "captures": [
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperstart-v30/frame-070000.json",
+          "bytes": 1096,
+          "sha256": "e8ddf3d19d26e0c0d02ec348b77977b98ed141067ac0bec8b3bde24a1c8561ec"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperstart-v30/frame-070000.bmp",
+          "bytes": 1136870,
+          "sha256": "c5b91b1968ef9990dccc4784b468d6a3e6f3de30a6a97e943330acf5d00d63f7"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperstart-v30/frame-070000.chipram",
+          "bytes": 524288,
+          "sha256": "34f2ac581e897267c3ace068a05753343fa7c1a8fdbd95279360b6b544d5525c"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperstart-v30/frame-070000.fastram",
+          "bytes": 2097152,
+          "sha256": "36d53521b7bff4c62146f15d012bc25a93aaaf18f44dc9bcdfba0838969414de"
+        },
+        {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-copperstart-v30/frame-070000.slowram",
+          "bytes": 524288,
+          "sha256": "b68140cf26f7901d5a24287d4e28ff71c042dd5084eea742c0b9648ac903106e"
+        }
+      ]
+    }
+  ],
+  "runner": {
+    "path": "CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.Runner.dll",
+    "bytes": 88064,
+    "sha256": "216b956cb712861aa4bfa237e22b0cfdcf3c890a6df46391a17879ea53f37a6e"
+  },
+  "remainingCompatibility": {
+    "classicApplicationMenu": {
+      "attribute": "0x80420e1f",
+      "capturedTagAddress": "0x2292d0",
+      "value": "0x219cd4",
+      "firstNewMenuEntryHex": "01000021b80a0000000000000000000000000000",
+      "firstLabel": "Project",
+      "evidenceCapture": {
+        "path": "artifacts/utility-mui-2026-10-31/mui-calc-kick31-v30/frame-040000.fastram",
+        "bytes": 2097152,
+        "sha256": "347707c9104586988ea635f7347b147fbebf4f307ff479881a861417ce73368b"
+      },
+      "producerBehavior": "SetApplicationMenuValue forwards to SetApplicationMenustripValue, requiring a registered Menustrip.mui object; the original client passes a raw NewMenu vector."
+    },
+    "nativeWindowPresenter": false
+  },
+  "historicalCycleFailureTrace": {
+    "path": "artifacts/utility-mui-2026-10-31/mui-calc-first-failure-kick31-v29/trace.json",
+    "bytes": 1260040,
+    "sha256": "8406d39f177dd241bccbb9bb47aaf3f23201e53cd7821f808d00cb033754f898"
+  }
+}

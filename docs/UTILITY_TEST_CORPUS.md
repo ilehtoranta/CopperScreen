@@ -1,24 +1,27 @@
 # Amiga utility test collection
 
-Collected 2026-10-27; latest testing 2026-10-29. Collection ID: `amiga-utilities-v1`.
+Collected 2026-10-27; latest testing 2026-10-31. Collection ID: `amiga-utilities-v1`.
 
-The [sequential current-source checks](UTILITY_SEQUENTIAL_2026-10-29.md) verify
-ProTracker's main editor and selected inputs under both ROMs. X-Copy now reaches
-its DOSCOPY main screen under both ROMs; disk operations remain unverified.
-Amiga Test Kit's main menu and selected audio controls are also verified.
-SysInfo's startup investigation remains open, with eight later utilities pending
-in that sequence; older exploratory results below retain their recorded inputs and scope.
+The [final sweep](UTILITY_FINAL_SWEEP_2026-10-31.json) records bounded main-screen
+or basic-invocation checks for the original twelve utilities under both ROMs.
+Its exact ROM, GUI and machine inputs define the result; older exploratory
+results below retain their recorded inputs and scope. The thirteenth utility,
+[MUI Calc](UTILITY_MUI_CALC_2026-10-31.md), is installed with CopperOS's native
+MUI library in private images. Its explicit classic profile opens under both
+ROMs and [native built-ins now construct calculator controls](UTILITY_MUI_BUILTINS_2026-10-31.md).
+Both runs still report failed application construction; calculator interaction
+remains unverified.
 
 This is a local collection for manual emulation checks and CopperStart versus
-native Kickstart comparisons: **12 utilities, 14 original downloads, four ADFs
+native Kickstart comparisons: **13 utilities, 16 original downloads, four ADFs
 available to mount**. Downloads and archive integrity were checked. The
 [first native Kickstart 1.3 exploration](UTILITY_VALIDATION_2026-10-27.md)
 records the four ADFs' initial checks. The subsequent
 [rebuilt CopperStart / Kickstart comparison](UTILITY_AB_2026-10-28.md) completes
 both sides: Test Kit's selected audio controls work under both ROMs, while
 ProTracker, X-Copy and SysInfo expose CopperStart startup differences. The size
-blocker is resolved for this development ROM. The remaining eight utilities
-remain **NOT RUN**. These are bounded observations, not full compatibility
+blocker was resolved for that development ROM. Later checks are recorded in the
+final sweep linked above. These are bounded observations, not full compatibility
 qualifications or adoption of a new app firmware pin.
 
 The [manifest](../scripts/qualification/amiga-utilities-v1.json) records exact
@@ -102,6 +105,7 @@ run alone does not qualify a corresponding CopperStart configuration.
 
 | Utility and source | Requirements from the distribution | Suggested scenario |
 | --- | --- | --- |
+| [MUI Calc 1.25](https://aminet.net/package/util/wb/MUI_Calc125) | MUI 2.0; retain all seven package files. CopperOS's explicit 68000 classic profile registers native built-ins and constructs controls under both ROMs. Application construction still fails. See [current evidence](UTILITY_MUI_BUILTINS_2026-10-31.md). | RPN `5 ENTER 6 ENTER +` produces 11, stack list, paging buttons and menus. Pending successful application construction and native Window presentation. |
 | [Personal Paint 7.1c](https://www.amigaforever.com/classic/download/) | Manual section 1.2 requires at least 2 MiB RAM; prefers 1 MiB Chip. Kickstart 1.2+ and Workbench 1.3 libraries. Beyond the qualified 1 MiB A500 profile. | Draw/fill, brush copy/rotate, palette edits, undo, file requester, original ILBM save/reload and cold-boot readback. Record hardware/software blitter settings. |
 | [PPShow 4.0](https://aminet.net/package/gfx/show/PPShow40) | Kickstart and Workbench 2.0+; ReqTools and PowerPacker libraries included. DataTypes optional. | Original ILBM display, palette cycling, small generated ANIM5, cancel requester and return to desktop. |
 | [DiskMaster 2.5.30a V37](https://aminet.net/package/util/dir/DiskMasterV37) | Readme says Kickstart V37+; Aminet architecture field says OS 2.1+. Resolve library requirements before selecting an OS 2.04 reference; ReqTools required. | Dual directory listing, sorting, create/rename/copy/delete scratch files and cancel requesters; verify file bytes after reboot. |

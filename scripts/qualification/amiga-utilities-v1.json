@@ -1,10 +1,36 @@
 {
   "schemaVersion": 1,
   "collectionId": "amiga-utilities-v1",
-  "reviewedDate": "2026-10-29",
+  "reviewedDate": "2026-10-31",
   "purpose": "Local manual compatibility and CopperStart/native Kickstart A/B exploration. Acquisition is not compatibility evidence.",
-  "executionStatus": "sequential-verification-in-progress",
+  "executionStatus": "original-twelve-bounded-checks-complete; mui-calc-builtins-registered-classic-application-menu-blocked",
   "applications": [
+    {
+      "id": "mui-calc-125",
+      "name": "MUI Calc",
+      "version": "1.25",
+      "sourceUrl": "https://aminet.net/package/util/wb/MUI_Calc125",
+      "rights": "Robert Poole's giftware; MUI_Calc.doc permits redistribution with all files included. Retain the complete seven-file archive. Original MUI is a separate product; this test uses the CopperOS development library.",
+      "requirements": "MUI 2.0 built-in classes. Private images include CopperOS's explicit experimental classic-client 68000 muimaster.library 4.1 profile. Sixteen native built-ins are registered, including Cycle.mui, and both ROMs pass repeated native List/Listview/Cycle lifecycle checks. MUI Calc builds matching 71-control trees but application creation fails: classic Application_Menu NewMenu input is treated as a Menustrip-object alias. Native Window presentation is also unavailable. Default CopperOS development identity remains 0.1.",
+      "lane": "copperos-mui-development",
+      "scenario": "Reach the calculator, enter 5 ENTER 6 ENTER + and verify 11; exercise stack list, paging buttons and menus. Arithmetic and GUI scenario remain unavailable because application construction fails.",
+      "executionStatus": "native-builtins-registered-classic-application-menu-blocked-both-roms",
+      "evidenceDocument": "docs/UTILITY_MUI_BUILTINS_2026-10-31.md",
+      "assets": [
+        {
+          "file": "originals/MUI_Calc125.lha",
+          "url": "https://aminet.net/util/wb/MUI_Calc125.lha",
+          "bytes": 25119,
+          "sha256": "ca41cecb89027fa2a3fd199df2ff200a98819646d2c32876490992b01c4d35fd"
+        },
+        {
+          "file": "originals/MUI_Calc125.readme",
+          "url": "https://aminet.net/util/wb/MUI_Calc125.readme",
+          "bytes": 569,
+          "sha256": "a48f4a164a6f876e3177bfbd9ecb38150fe6373a78dfd8024d2b29b5e3222f97"
+        }
+      ]
+    },
     {
       "id": "protracker-23f",
       "name": "ProTracker",
@@ -409,5 +435,6 @@
       "sha256": "c23e1b69d50d07cfb0e974373f9fa483eb4d5e5b991bb2f2a650cf552158fdde"
     }
   ],
-  "latestEvidenceDocument": "docs/UTILITY_AB_2026-10-28.md"
+  "latestEvidenceDocument": "docs/UTILITY_FINAL_SWEEP_2026-10-31.json",
+  "muiEvidenceDocument": "docs/UTILITY_MUI_BUILTINS_2026-10-31.md"
 }

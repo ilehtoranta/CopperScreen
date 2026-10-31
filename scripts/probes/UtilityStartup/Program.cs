@@ -72,7 +72,9 @@ uint Read(uint a)
         return BinaryPrimitives.ReadUInt32BigEndian(m.FastRam.Span.Slice((int)(a-fast),4));
     return 0;
 }
-bool Stack(uint sp) => sp >= 0x400 && sp <= 0x80000 || sp >= 0xc00004 && sp <= 0xc80000 ||
+// Native Kickstart's early supervisor stack can legitimately be below $400.
+var minimumChipStack = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_ALLOW_BOOT_STACK") == "1" ? 4u : 0x400u;
+bool Stack(uint sp) => sp >= minimumChipStack && sp <= 0x80000 || sp >= 0xc00004 && sp <= 0xc80000 ||
     m.FastRamBase is uint fast && sp >= fast+4 && sp-fast <= m.FastRam.Length;
 byte ReadByte(uint a) => a<m.ChipRam.Length ? m.ChipRam.Span[(int)a] :
     a>=0xc00000 && a<0xc80000 ? slow[a-0xc00000] :
@@ -104,6 +106,7 @@ var vectorPending = new List<(string Api,uint ReturnPc,uint ReturnSp,uint Record
 var calls=new List<object>(); uint intuitionBase=uint.MaxValue, dosBase=uint.MaxValue, layersBase=uint.MaxValue, graphicsBase=uint.MaxValue;
 uint diskfontBase=uint.MaxValue;
 uint gadtoolsBase=uint.MaxValue;
+uint muiBase=uint.MaxValue;
 var stopFailedGui = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_GUI") == "1";
 var stopFailedDevice = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_DEVICE") == "1";
 var stopIllegal = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_ILLEGAL") == "1";
@@ -111,9 +114,17 @@ var stopSetFunction = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP
 var stopFailedLayer = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_LAYER") == "1";
 var stopFailedReadArgs = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_READARGS") == "1";
 var stopFailedLibrary = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_STOP_FAILED_LIBRARY");
+uint? watchedEntry = Environment.GetEnvironmentVariable("COPPERSTART_PROBE_ENTRY_PC") is { Length: > 0 } entryText ? Convert.ToUInt32(entryText,16) : null;
 void ObserveCall()
 {
     var c=m.Cpu;
+    if (watchedEntry == c.ProgramCounter)
+    {
+        var method = Read(c.A[1]);
+        calls.Add(new { Api="WatchedEntryInput", frame=m.CompletedFrames, pc=c.ProgramCounter,
+            method, className=Name(Read(c.A[0]+28)), address=c.A.ToArray(), data=c.D.ToArray() });
+        pending.Add(("WatchedEntry",Name(Read(c.A[0]+28)),Read(c.A[7]),c.A[7]+4,c.A[6],method,c.Cycles,0,null));
+    }
     if (stopStackTask is uint task && stopStackFloor is uint floor && (c.StatusRegister & 0x2000)==0 &&
         Read(Read(4)+276)==task && Read(task+58)==floor && c.A[7]<=Read(task+62) &&
         (c.A[7]>=floor || floor-c.A[7]<=4096))
@@ -136,14 +147,15 @@ void ObserveCall()
             c.ProgramCounter==unchecked(gadtoolsBase-114) ? "GadTools.CreateContext" :
             c.ProgramCounter==unchecked(gadtoolsBase-126) ? "GadTools.GetVisualInfo" :
             c.ProgramCounter==unchecked(intuitionBase-636) ? "Intuition.NewObject" :
-            c.ProgramCounter==unchecked(graphicsBase-72) ? "Graphics.OpenFont" : null;
+            c.ProgramCounter==unchecked(graphicsBase-72) ? "Graphics.OpenFont" :
+            c.ProgramCounter==unchecked(muiBase-30) ? "Muimaster.NewObject" : null;
         if(api is not null)
         {
             calls.Add(new {Api=api+"VectorInput",frame=m.CompletedFrames,entryCycle=c.Cycles,
                 vectorPc=c.ProgramCounter,callerReturnPc=Read(c.A[7]),callerSp=c.A[7],task=Read(Read(4)+276),
                 addressRegisters=c.A.ToArray(),dataRegisters=c.D.ToArray(),
                 name=api.Contains("Font",StringComparison.Ordinal) ? Name(Read(c.A[0])) : null,
-                className=api=="Intuition.NewObject" ? Name(c.A[1]) : null,
+                className=api=="Intuition.NewObject" ? Name(c.A[1]) : api=="Muimaster.NewObject" ? Name(c.A[0]) : null,
                 newGadgetBytes=api=="GadTools.CreateGadget" ? Convert.ToHexString(Enumerable.Range(0,30).Select(n=>ReadByte(c.A[1]+(uint)n)).ToArray()) : null,
                 specBytes=Convert.ToHexString(Enumerable.Range(0,48).Select(n=>ReadByte(c.A[0]+(uint)n)).ToArray()),
                 tagBytes=Convert.ToHexString(Enumerable.Range(0,256).Select(n=>ReadByte(c.A[api=="GadTools.CreateGadget" || api=="Intuition.NewObject" ? 2 : 1]+(uint)n)).ToArray())});
@@ -185,9 +197,14 @@ void ObserveCall()
         pending.Add(("OpenLibrary",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],displacement==-408?0:c.D[0],c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement == -498)
         pending.Add(("OpenResource",Name(c.A[1]),c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
+    else if(c.A[6]==Read(4) && displacement == -144)
+        pending.Add(("SetSR","exec.library",c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement is -198 or -684)
         pending.Add((displacement == -198 ? "AllocMem" : "AllocVec",$"D0={c.D[0]:X8},D1={c.D[1]:X8}",
             c.ProgramCounter+4,c.A[7],c.A[6],c.D[1],c.Cycles,0,null));
+    else if(c.A[6]==Read(4) && displacement == -210)
+        pending.Add(("FreeMem",$"A1={c.A[1]:X8},D0={c.D[0]:X8}",
+            c.ProgramCounter+4,c.A[7],c.A[6],c.D[0],c.Cycles,c.A[1],null));
     else if(c.A[6]==Read(4) && displacement==-372)
         pending.Add(("GetMsg",$"A0={c.A[0]:X8}",c.ProgramCounter+4,c.A[7],c.A[6],0,c.Cycles,0,null));
     else if(c.A[6]==Read(4) && displacement is -444 or -456 or -318)
@@ -272,7 +289,7 @@ void ObserveReturn()
             dataPrefix=p.Buffer==0 ? null : Convert.ToHexString(Enumerable.Range(0,(int)Math.Min(p.Length,32u)).Select(n=>ReadByte(p.Buffer+(uint)n)).ToArray()),
             outputHashedBytes=p.Buffer==0 || c.D[0]>p.Length ? 0 : Math.Min(c.D[0],262144u),
             outputDataSha256=p.Buffer==0 || c.D[0]>p.Length ? null : Convert.ToHexString(SHA256.HashData(Enumerable.Range(0,(int)Math.Min(c.D[0],262144u)).Select(n=>ReadByte(p.Buffer+(uint)n)).ToArray())) });
-        if(stopFailedGui && c.D[0]==0 && p.Api is "GadTools.CreateGadget" or "GadTools.CreateContext" or "GadTools.GetVisualInfo")
+        if(stopFailedGui && c.D[0]==0 && p.Api is "GadTools.CreateGadget" or "GadTools.CreateContext" or "GadTools.GetVisualInfo" or "Muimaster.NewObject")
         { Keep("GUI_SETUP_FAILED"); stop=true; reason="GUI_SETUP_FAILED"; }
         vectorPending.RemoveAt(i); break;
     }
@@ -294,6 +311,7 @@ void ObserveReturn()
                 cpr=Read(p.Request+4), cprStart=Read(Read(p.Request+4)+4) });
         if(p.Library=="graphics.library" && p.Api=="OpenLibrary") graphicsBase=c.D[0];
         if(p.Library=="intuition.library" && p.Api=="OpenLibrary") intuitionBase=c.D[0];
+        if(p.Library=="muimaster.library" && p.Api=="OpenLibrary" && c.D[0]!=0) muiBase=c.D[0];
         if(p.Library=="dos.library" && p.Api=="OpenLibrary") dosBase=c.D[0];
         if(p.Library=="layers.library" && p.Api=="OpenLibrary") layersBase=c.D[0];
         if(p.Library=="diskfont.library" && p.Api=="OpenLibrary") diskfontBase=c.D[0];
@@ -328,7 +346,7 @@ void Check(string kind)
     { Keep("WATCH_BYTE_CHANGED"); stop = true; reason = "WATCH_BYTE_CHANGED"; }
     if (!Stack(m.Cpu.A[7]) || !Stack(m.Cpu.SupervisorStackPointer)) { Keep(kind); stop = true; reason = kind; }
     var pc = m.Cpu.ProgramCounter;
-    if (pc < 0x1000 || !peek(pc, out _)) { Keep("LOW_OR_UNPEEKABLE_PC"); stop = true; reason = "LOW_OR_UNPEEKABLE_PC"; }
+    if (pc < (minimumChipStack == 4 ? 4u : 0x1000u) || !peek(pc, out _)) { Keep("LOW_OR_UNPEEKABLE_PC"); stop = true; reason = "LOW_OR_UNPEEKABLE_PC"; }
 }
 for (var frame = 0; frame < start; frame++) { inputScript?.Apply(m, frame); m.ExecuteFrame(); }
 // A late trace may start after these libraries were opened. Discover their
@@ -343,6 +361,7 @@ for (var node = Read(Read(4) + 378); node != 0 && Read(node) != 0 && seenLibrari
     if (libraryName == "graphics.library") graphicsBase = node;
     if (libraryName == "diskfont.library") diskfontBase = node;
     if (libraryName == "gadtools.library") gadtoolsBase = node;
+    if (libraryName == "muimaster.library") muiBase = node;
 }
 if (watchAddress is uint initialWatch && ReadByte(initialWatch) != watchExpected)
 { Keep("WATCH_ALREADY_CHANGED_AT_START"); stop = true; reason = "WATCH_ALREADY_CHANGED_AT_START"; }
@@ -378,6 +397,7 @@ while (m.CompletedFrames < end && !stop)
 }
 var entries = Enumerable.Range(0,(int)Math.Min(count,ring.Length)).Select(i => ring[(Math.Max(0,count-ring.Length)+i)%ring.Length]).ToArray();
 File.WriteAllText(Path.Combine(output,"trace.json"),JsonSerializer.Serialize(new { reason, m.CompletedFrames, m.Cycle, instructions=count,
+    registers=new { data=m.Cpu.D.ToArray(), address=m.Cpu.A.ToArray() },
     romSha256=Convert.ToHexString(SHA256.HashData(rom)), diskSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(args[1]))),
     profile, mediaMode, attachedAdfSha256, inputScriptSha256=inputBytes is null ? null : Convert.ToHexString(SHA256.HashData(inputBytes)), configuration=$"PAL OCS 68000 interpreter, 512 KiB Chip + 512 KiB slow + {fastBytes/1024} KiB Fast, media={mediaMode} read-only",
     fastRamBase=m.FastRamBase,fastRamBytes=m.FastRam.Length,startField=start,endField=end,
