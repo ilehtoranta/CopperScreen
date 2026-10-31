@@ -172,3 +172,21 @@ The historical `instructions` field counts recorded entries, including boundary
 and stop entries; with a PC filter it is a sample count. Preserve input, filter
 and artifact identities with the result. This remains a correctness diagnostic,
 not a host-throughput acceptance measurement.
+
+`prepare_ppshow_hdf.py` extends a qualified local system HDF (with its full
+file-manifest sidecar) using the complete pinned PPShow 4.0 archive. It verifies
+the base image and every original file, installs the bundled libraries in Libs,
+and adds an original uncompressed 320x200 ILBM fixture. Every final file is read
+back and hashed. Images remain private; no system libraries or media are
+redistributed. Preparation is not a runtime verdict.
+
+Pass `--base-hdf`, `--archive` and a fresh `--output`. Optional `--workbench`
+accepts a privately supplied OS 2.0+ ADF or single-ADF ZIP and installs its
+unchanged `Libs/iffparse.library`, recording source and library hashes. PPShow
+requires that library and Kickstart/Workbench 2.0+. Native 1.3 is not a positive
+reference. `--native-env` is a separately labeled native-ROM diagnostic: it
+creates an empty ENV directory and prepends `C:Assign ENV: SYS:ENV` using the
+retained system command. The original Workbench 1.3 Assign lane has a recorded
+CopperStart failure; do not silently apply this switch to the CopperStart pair.
+The [PPShow receipt](../../../docs/UTILITY_PPSHOW_2026-10-31.json) records the
+native display and unresolved CopperStart SetRGB32CM fault.

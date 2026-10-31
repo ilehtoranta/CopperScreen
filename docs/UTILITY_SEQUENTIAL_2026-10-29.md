@@ -19,7 +19,7 @@ marking the collection complete.
 | 4 | SysInfo 4.4 | VERIFIED: main information screen, both ROMs, with explicit guest GUI prerequisite; controls unverified | [Latest receipt](UTILITY_SYSINFO_MAIN_2026-10-30.json) |
 | 5 | PPMore 1.8a | VERIFIED: main reader and footer, both ROMs, explicit 2 MiB profile and guest prerequisites; original 1 MiB lane fails; navigation unverified | [Main-screen receipt](UTILITY_PPMORE_MAIN_2026-10-30.json) |
 | 6 | Personal Paint 7.1c complimentary edition | VERIFIED: main editor, restored caption and requester dismissal, both ROMs; explicit guest prerequisites and 2 MiB Fast RAM; editing/menu commands unverified | [Latest receipt](UTILITY_PPAINT_BACKDROP_2026-10-31.json) |
-| 7 | PPShow 4.0 | PENDING | Not yet verified in this sequence |
+| 7 | PPShow 4.0 | IN PROGRESS: native 3.1 displays ILBM; CopperStart traps in SetRGB32CM; native 1.3 unsupported | [Diagnostic receipt](UTILITY_PPSHOW_2026-10-31.json) |
 | 8 | DiskMaster 2 2.5.30a (V37 build) | PENDING | Not yet verified in this sequence |
 | 9 | MuchMore 4.6 | PENDING | Not yet verified in this sequence |
 | 10 | MemCheck 1.2 (37.13) | PENDING | Not yet verified in this sequence |
@@ -660,3 +660,30 @@ guest results or emulated timing.
 
 Personal Paint's minimum check is complete. PPShow is next; the later utilities
 and final current-source/toolchain sweep remain pending.
+
+### PPShow prerequisite controls and first fault, 2026-10-31
+
+PPShow requires Kickstart and Workbench 2.0 or later. The native 1.3 run ends
+in a software-failure requester and does not supply positive coverage. The
+initial native 3.1 run reports missing V37 iffparse.library. Installing that
+library unchanged from the privately supplied Workbench 3.1 disk resolves the
+open failure; assigning ENV in a separate native startup resolves the next
+requester. Native 3.1 then displays the original 320x200 ILBM fixture: eight
+color bars with a white border. Inspected output is stable at fields 6,000 and
+8,000. This verifies one image display, not viewer interaction or other formats.
+
+The new OFS/FFS images retain the qualified PPaint system testbed and install
+the complete PPShow archive, including its bundled libraries, without executing
+PPaint. All 593 files pass preparation byte readback. The native ENV variant
+has an explicitly different startup and an empty ENV directory. CopperStart
+retains the direct startup because the old Workbench Assign lane has its own
+recorded failure. These differences are recorded rather than described as an
+identical media A/B result.
+
+CopperStart's first captured fault is field 3,626, cycle 515,379,228:
+PPShow calls graphics.library SetRGB32CM at LVO -996; vector 0022007C targets
+the pinned ROM's ILLEGAL stub at 00FF9FBE. The full replay completes 32,000
+fields with corrupted execution and does not display the fixture. Completion
+and an empty runner unsupported field do not establish application success.
+The [receipt](UTILITY_PPSHOW_2026-10-31.json) records inputs and trace evidence.
+PPShow remains current; fixing and qualifying the palette API is pending.

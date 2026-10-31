@@ -1,0 +1,155 @@
+{
+  "utility": "PPShow 4.0 (executable 39.983, 17.2.94)",
+  "status": "IN PROGRESS: native 3.1 fixture display verified; CopperStart fails SetRGB32CM; native 1.3 unsupported",
+  "profile": "PAL A500 OCS 8371/8362, MC68000 interpreter, 512 KiB Chip + 512 KiB slow + 2048 KiB Fast, read-only hardfile",
+  "archive": {
+    "path": "media/utilities/originals/PPShow40.lha",
+    "sha256": "66383bf59b4842f140f86455a20c535c4ebf2d9996138218b06b7a7cc205bdf3",
+    "distribution": "Complete original archive installed, bundled reqtools and powerpacker additionally placed in Libs"
+  },
+  "prerequisites": {
+    "base": "Qualified PPaint v87 private system testbed, 580 files retained; PPaint is not executed",
+    "providerSha256": "cb0c85b243e0408bafc032a95e11922c7150e8264c4903d67353419c0c1e82d1",
+    "fixture": "Original uncompressed 320x200 three-plane ILBM, eight color bars and white eight-pixel border",
+    "minimumOS": "Manual requires Kickstart AND Workbench 2.0+; native 1.3 is not a positive reference"
+  },
+  "media": [
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-ofs-v1.hdf",
+      "sha256": "f948ca2d7f288480171d4fee9d19418fc10ca744386a5c93d48f054cd3930815",
+      "files": 592,
+      "baseSha256": "3b9d542b63dd09dce877c4c2af8e7e947a1dc46bdc4b21ad5f0ceaf864c31be4",
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "workbenchDependency": null
+    },
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-ffs-v1.hdf",
+      "sha256": "72629f356617acf5d6bd96015ed8a2bbed3da0efdf13db19da786f8936a55818",
+      "files": 592,
+      "baseSha256": "886888399499b078ce79682d9d9135505d132fc84c88af24457e22fdda7d669d",
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "workbenchDependency": null
+    },
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-ofs-v7.hdf",
+      "sha256": "f2dc0729ad8181f617eba0636ff2e744078f11f8c5c8b48b98665c6dbc06a6e4",
+      "files": 593,
+      "baseSha256": "3b9d542b63dd09dce877c4c2af8e7e947a1dc46bdc4b21ad5f0ceaf864c31be4",
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "workbenchDependency": {
+        "sourceSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+        "adfSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+        "iffparseSha256": "3ea9f30cea549ca3b6ced046152b7cef15a3fafba935ca232870d5394097ca9b"
+      }
+    },
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-ffs-v7.hdf",
+      "sha256": "5361ce7f9f2a0abbd3d9cf75eaf55a8f86143cde54cd1c26cabd62db3737b174",
+      "files": 593,
+      "baseSha256": "886888399499b078ce79682d9d9135505d132fc84c88af24457e22fdda7d669d",
+      "startup": "C:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "workbenchDependency": {
+        "sourceSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+        "adfSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+        "iffparseSha256": "3ea9f30cea549ca3b6ced046152b7cef15a3fafba935ca232870d5394097ca9b"
+      }
+    },
+    {
+      "path": "artifacts/utility-sequential-2026-10-31/ppshow/ppshow-env-ofs-v9.hdf",
+      "sha256": "d6198f69f94ac01b3d07e5820740ddc7b44de871b9a7c0f42daae1c17b6b4068",
+      "files": 593,
+      "baseSha256": "3b9d542b63dd09dce877c4c2af8e7e947a1dc46bdc4b21ad5f0ceaf864c31be4",
+      "startup": "C:Assign ENV: SYS:ENV\nC:CopperGui\nC:CopperFfp\nSYS:PPShow/PPShow SYS:fixtures/control.ilbm\n",
+      "workbenchDependency": {
+        "sourceSha256": "d93611887acf91f68f5608a5b7812f03eb16f743f40451b67c93067b04c967ed",
+        "adfSha256": "a8f167bad2897e8c7f2cfe73de7a9f8dad10c7a5b1f78ca17f818ab17278b985",
+        "iffparseSha256": "3ea9f30cea549ca3b6ced046152b7cef15a3fafba935ca232870d5394097ca9b"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "name": "kick13-v1",
+      "romSha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+      "fields": 8000,
+      "result": "Software failure task-held requester; unsupported OS, not a pass"
+    },
+    {
+      "name": "kick31-v1",
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "fields": 8000,
+      "result": "You need V37 iffparse.library; returns 20. Original small screenshot was initially misread as reqtools; zoom and OpenLibrary trace corrected it"
+    },
+    {
+      "name": "kick31-v7",
+      "fields": 8000,
+      "result": "IFFParse installed unchanged from private Workbench 3.1, now blocked on missing ENV assignment"
+    },
+    {
+      "name": "kick31-env-v9",
+      "fields": 8000,
+      "result": "Verified fixture display, native-only ENV assignment prepended. Same logical files as v7 except startup; empty ENV directory added",
+      "screens": [
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/ppshow/kick31-env-v9/frame-006000.bmp",
+          "field": 6000,
+          "bmpSha256": "33c8393c29680e09dda121afbb3d085601c48d5c5252d95cfe863e9d1726a49b",
+          "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb",
+          "pc": "00F81476",
+          "visuallyInspected": false
+        },
+        {
+          "path": "artifacts/utility-sequential-2026-10-31/ppshow/kick31-env-v9/frame-008000.bmp",
+          "field": 8000,
+          "bmpSha256": "33c8393c29680e09dda121afbb3d085601c48d5c5252d95cfe863e9d1726a49b",
+          "rgbSha256": "d9581418645b4a11720b12ab3fd111d0ede1e285e1d71e711a1cd2f2070bb1cb",
+          "pc": "00F81476",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "name": "copperstart-v1",
+      "fields": 32000,
+      "result": "Missing iffparse; no fixture display. END_FIELD is not application success"
+    },
+    {
+      "name": "copperstart-v7",
+      "fields": 32000,
+      "result": "Runner completed all fields with corrupt PC/stack after palette API fault. No display pass"
+    }
+  ],
+  "firstFault": {
+    "trace": "artifacts/utility-sequential-2026-10-31/ppshow/copperstart-trace-v10/trace.json",
+    "traceSha256": "ee8dd93767ebfd028bae772ac93a9702edeb06cd92bb66e9ad639227dfa91db7",
+    "reason": "ILLEGAL_INSTRUCTION",
+    "field": 3626,
+    "cycle": 515379228,
+    "romSha256": "812E600EBCBCDDC9FB31A1515A8045583DBD32CCF5378EBEB0543E24EF209F54",
+    "diskSha256": "5361CE7F9F2A0ABBD3D9CF75EAF55A8F86143CDE54CD1C26CABD62DB3737B174",
+    "callPc": "002E902E",
+    "instruction": "JSR -996(A6)",
+    "graphicsBase": "00220460",
+    "vector": "0022007C",
+    "target": "00FF9FBE",
+    "targetInstruction": "4AFC ILLEGAL",
+    "api": "graphics.library/SetRGB32CM",
+    "callArguments": {
+      "A0": "0030FA18",
+      "D0": 0,
+      "D1": 0,
+      "D2": 0,
+      "D3": 0
+    },
+    "scope": "First captured intentional ILLEGAL stub; subsequent memory/stack corruption is downstream, not separately diagnosed"
+  },
+  "limitations": [
+    "No CopperStart main-screen pass yet",
+    "Viewer interaction, exit, multiple images, ANIM and compressed formats unverified",
+    "Native reference has an explicit ENV assignment difference from CopperStart startup",
+    "Initial trace attempts at fields 0 and 100 stopped on legitimate native boot low stacks; traces at 500 and 1000 missed application startup",
+    "Correctness diagnostics only, no throughput acceptance",
+    "No source fix or ROM rebuild claimed in this receipt",
+    "CopperOS mathtrans replacement is not used; base retains Workbench original library"
+  ]
+}
