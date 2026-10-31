@@ -178,7 +178,200 @@
     {
       "order": 3,
       "utility": "AmigaTestKit1.21",
-      "finalReplayStatus": "PENDING"
+      "finalReplayStatus": "MAIN_MENU_AND_SELECTED_AUDIO_CONTROLS_VERIFIED_BOTH_ROMS",
+      "completedFields": 7200,
+      "checkpoints": [
+        {
+          "field": 2900,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "ed4a2709d3ed5c960049cb4298fc7c5fbf1dbb54a41859fa53aa159c8d45070e",
+              "rms": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "ed4a2709d3ed5c960049cb4298fc7c5fbf1dbb54a41859fa53aa159c8d45070e",
+              "rms": [
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 3100,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+              "rms": [
+                9421.42,
+                2805.35
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+              "rms": [
+                9420.9,
+                2806.55
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 3400,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "3a7b0737454a154dbbef365de22465eac5139a2724cd07a5d977f67bf739da1d",
+              "rms": [
+                3669.5,
+                2774.94
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "3a7b0737454a154dbbef365de22465eac5139a2724cd07a5d977f67bf739da1d",
+              "rms": [
+                3670.35,
+                2774.79
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 3600,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "5ee347b59fe8414fb84d9718db492b917c2fdba104d04f3251a41323c2f3e0b2",
+              "rms": [
+                3685.15,
+                2784.36
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "5ee347b59fe8414fb84d9718db492b917c2fdba104d04f3251a41323c2f3e0b2",
+              "rms": [
+                3683.4,
+                2783.48
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 3800,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "cf80374a43fba591aad052571b1fdbdfc099ed9215ce7955eb7300956737e07f",
+              "rms": [
+                3710.29,
+                0.0
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "cf80374a43fba591aad052571b1fdbdfc099ed9215ce7955eb7300956737e07f",
+              "rms": [
+                3708.58,
+                0.0
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 4000,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "645a6e06ed83a68815c6e94ca68617da46fb0a074af9a1a31be49d15ca17d221",
+              "rms": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "645a6e06ed83a68815c6e94ca68617da46fb0a074af9a1a31be49d15ca17d221",
+              "rms": [
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 4200,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+              "rms": [
+                2155.63,
+                2357.99
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+              "rms": [
+                2155.22,
+                2357.47
+              ]
+            }
+          ],
+          "rgbEqual": true
+        },
+        {
+          "field": 7200,
+          "runs": [
+            {
+              "side": "copperstart",
+              "rgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+              "rms": [
+                11509.41,
+                3388.98
+              ]
+            },
+            {
+              "side": "kick13",
+              "rgbSha256": "de78a0019347b9c72d1ddd3bf0738409a08f30c9c4a819aaf39445cd65aca490",
+              "rms": [
+                11508.47,
+                3389.57
+              ]
+            }
+          ],
+          "rgbEqual": true
+        }
+      ],
+      "runs": [
+        {
+          "side": "copperstart",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-testkit-copperstart-v144",
+          "unsupportedReported": false
+        },
+        {
+          "side": "kick13",
+          "directory": "artifacts/utility-sequential-2026-10-31/final-testkit-kick13-v144",
+          "unsupportedReported": false
+        }
+      ],
+      "mediaSha256": "abe7426c93619a7bb61ce10e3e66a4747fcaf22acd1d1876310033faa700ad28",
+      "limitations": "Selected menu/audio controls only; not a complete hardware diagnostic qualification."
     },
     {
       "order": 4,
@@ -260,7 +453,7 @@
       "sha256": "b94cb7ef7885f85441accc2ef10326a0f73dfd8102654169e79648030f139f3c"
     }
   ],
-  "nextInvestigation": "ProTracker and X-Copy final refreshes verified. Continue with Amiga Test Kit;10 final replay rows remain pending.",
+  "nextInvestigation": "Three refreshed utilities verified. Continue with SysInfo;9 final replay rows remain pending.",
   "sizeInspection": {
     "map": "utility-final-classic-rom-v121/CopperStart-DiskBoot.rom.map",
     "largestMethod": "NativeAmigaFileSystem.DispatchPacket",
