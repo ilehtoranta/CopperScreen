@@ -1,0 +1,784 @@
+{
+  "schemaVersion": 1,
+  "reviewedDate": "2026-11-01",
+  "candidate": "v50-backfill",
+  "status": "PASS-bounded-rpn-close-and-background-restoration",
+  "profile": "a500-ocs-5m-diagnostic-v1",
+  "machine": {
+    "chipKiB": 512,
+    "slowKiB": 512,
+    "fastKiB": 4096,
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS 8371/8362",
+    "readonlyHdf": true,
+    "hostOsShims": false
+  },
+  "librarySha256": "54c3d69c4a1358a3f4281cdebbf94db6001935e7ef5b3aabbe43e86c61a2e816",
+  "sourceFiles": {
+    "..\\CopperStart\\src\\CopperStart.Layers\\LayersPartitionPixelCore.cs": "9eca6a4cda4fe40172f003334d6e916a40b74b71e1d647d486bad3ea04f89ab4",
+    "..\\CopperStart\\tests\\CopperStart.Exec.Tests\\LayersVectorRouterTests.DefaultBackground.cs": "b5092fedd689b43edaabd08ffd68d92a176b649913df1702da32fe7dd660f882"
+  },
+  "sourceScope": "Layers pixel plan now stages default LayerInfo background fill in its existing provider transaction. No MUI source or ROM changes for this follow-up.",
+  "build": {
+    "solution": "PASS, 4 warnings / 0 errors",
+    "selectedLayersHostPassed": 570,
+    "selectedLayersSkipped": 0,
+    "dedicatedRegressionsPassed": 7,
+    "allocationFailurePositions": 28,
+    "nativeFreestandingProvider": "PASS"
+  },
+  "preexistingFailures": [
+    "Bootstrap trampoline binding test and typed-codec architecture test also fail in the retained pre-fix build. See baseline-check log."
+  ],
+  "nativeBackgroundProbes": {
+    "default": {
+      "record": "0x4980b0",
+      "screen": "0x498760",
+      "window": "0x498ef0",
+      "beforePixel": 1,
+      "afterPixel": 0,
+      "firstWindow": "0x0",
+      "completeMagic": "0x42474631",
+      "phase": 4,
+      "suppress": false,
+      "status": "PASS",
+      "bankSha256": "f9cd593098939d3185d44e064378c5577341e07b0a41db330c97658db60737db",
+      "nativeProvider": {
+        "lastLvo": "0xff88",
+        "lastResult": 1,
+        "snapshotLedgerCount": 0
+      }
+    },
+    "suppress": {
+      "record": "0x4980b0",
+      "screen": "0x498780",
+      "window": "0x498f10",
+      "beforePixel": 1,
+      "afterPixel": 1,
+      "firstWindow": "0x0",
+      "completeMagic": "0x42474631",
+      "phase": 4,
+      "suppress": true,
+      "status": "PASS",
+      "bankSha256": "21e97727456545cc7c1304ee83146f22db2a3857c95319cd798531941ee0c2e9",
+      "nativeProvider": {
+        "lastLvo": "0xff88",
+        "lastResult": 1,
+        "snapshotLedgerCount": 0
+      }
+    }
+  },
+  "provider": {
+    "sha256": "3EB6C22D1669F6D63C0AFF7EBB16739B010AE2927800D071B286C6C2DE64DB4E",
+    "entry": 0,
+    "installer": 350380,
+    "inputEntry": 350170,
+    "textEntry": 350194,
+    "classicEntry": 350218,
+    "codeBytes": 354108,
+    "imageBytes": 370940,
+    "lifetime": "Retain the entire HUNK until reset",
+    "inputs": [
+      {
+        "file": "CopperStart.DesktopProviders.dll",
+        "sha256": "68A439D409B68AB2E9A7702BA34B04896151BA9A3FB3611FF09F4BE0C8DBDBF6"
+      },
+      {
+        "file": "CopperStart.Layers.dll",
+        "sha256": "D4A954FA52946B5B62FA6135DB61DFAA884691781279DF9956910031C32639B5"
+      },
+      {
+        "file": "CopperStart.Utility.dll",
+        "sha256": "99AA2E846EE4C21EDD7A9F06D6AF1A52DA57D835F7412C69D3AFC3E98C8FE45F"
+      },
+      {
+        "file": "CopperStart.Exec.dll",
+        "sha256": "4C3BB40630FD0F8095CCF03E154A2DC296EE6EF8E3D3B5875182F9D97F2357A7"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.dll",
+        "sha256": "3C01BB3DB8159ADAC0BF3374D6615563014D3094298CED6270D648C27CBBE6B9"
+      },
+      {
+        "file": "CopperSharp.Sdk.Amiga.Support.dll",
+        "sha256": "1766199619DEA6DEFC81C3BC4899EF83D4671B1D752C3431DF6B5B2C9C1EE0FA"
+      },
+      {
+        "file": "CopperSharp.Compiler.dll",
+        "sha256": "E1E2AE7292BB2BFCB8BA4E9309FD329EB97F6E60078468B271B8918E53C91C8D"
+      },
+      {
+        "file": "CopperSharp.Targets.Amiga.dll",
+        "sha256": "4A69944DFC9D3385BC8ABFC697F203EB52C57740A2CE6E0B61C41141BFBCF1D7"
+      }
+    ]
+  },
+  "loader": {
+    "kind": "canonical-CopperGui-entry-refresh",
+    "bytes": 232,
+    "sha256": "bf6a0252cc94efd303149b5476c8abddd6ea61a60228c3a49bd8d70f0b64b489",
+    "classicEntry": 350218,
+    "providerSha256": "3EB6C22D1669F6D63C0AFF7EBB16739B010AE2927800D071B286C6C2DE64DB4E",
+    "templateSha256": "0ab4717a1c0713dd488babd6fd8f241f165629584626d0e91d66da8aded9cb41",
+    "templateClassicEntry": 349266
+  },
+  "baselineBitmap": {
+    "schemaVersion": 1,
+    "arithmeticCapture": "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v48\\frame-353901-arithmetic-result.fastram",
+    "settledCapture": "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v48\\frame-401251-quit-settled.fastram",
+    "captureSha256": {
+      "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v48\\frame-353901-arithmetic-result.fastram": "c8ab95654315a219871c2ee0dc3ff3205d7659904178fc4e9b124ef2a85ddd69",
+      "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v48\\frame-401251-quit-settled.fastram": "dd8e7fa6f6c4b7de92978c48f1ff7d412ac63dafcad787f1cdfb29f25cebe1c2"
+    },
+    "nativeWindow": "0x670d20",
+    "screen": "0x6703e0",
+    "bitmap": "0x670680",
+    "rectangle": {
+      "left": 12,
+      "top": 16,
+      "width": 320,
+      "height": 180
+    },
+    "bitmapStride": 80,
+    "bitmapRows": 256,
+    "bitmapDepth": 2,
+    "screenFirstWindow": "0x0",
+    "muiRegistry": {
+      "classes": 0,
+      "objects": 0,
+      "dispatchDepth": 0,
+      "callbackDepth": 0
+    },
+    "nonzeroPixelsBefore": 25121,
+    "nonzeroPixelsAfter": 25121,
+    "backgroundClear": "FAIL",
+    "scope": "Pen-zero restoration in the closed window rectangle; hardware sprites are separate."
+  },
+  "limitations": [
+    "Bounded mouse RPN workflow; menus, paging, keyboard and complete MUI API remain unqualified.",
+    "Retained 3 MiB load failure remains FAIL.",
+    "Rebuilt guest-loaded provider on pinned CopperStart ROM; this is not a rebuilt-ROM qualification.",
+    "Correctness diagnostic; no throughput acceptance claim."
+  ],
+  "runs": [
+    {
+      "rom": "kick31",
+      "rawResult": {
+        "schemaVersion": 4,
+        "protocol": "mui-calc-native-mouse-v4",
+        "profile": "a500-ocs-5m-diagnostic-v1",
+        "buttonPressTimeoutFields": 60000,
+        "buttonReleaseTimeoutFields": 60000,
+        "quitSettleFields": 5000,
+        "cleanupObservedFrame": 328001,
+        "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+        "imageSha256": "E1733F3CF0922DC1D1F10F9B10DE37E16B2F486D108811A1D7E3D0A03A10E799",
+        "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+        "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+        "CompletedFrames": 333051,
+        "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+        "inputAndCleanup": "PASS",
+        "arithmeticVerification": "REQUIRES_VISUAL_REVIEW_OF_ARITHMETIC_RESULT",
+        "events": [
+          {
+            "frame": 138551,
+            "phase": "aim",
+            "action": 0,
+            "target": 3645116,
+            "targetX": 121,
+            "targetY": 114
+          },
+          {
+            "frame": 139751,
+            "phase": "press",
+            "action": 0,
+            "target": 3645116,
+            "targetX": 121,
+            "targetY": 114
+          },
+          {
+            "frame": 154751,
+            "phase": "release",
+            "action": 0,
+            "target": 3645116,
+            "targetX": 121,
+            "targetY": 114
+          },
+          {
+            "frame": 172150,
+            "operation": "5",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 172151,
+            "phase": "aim",
+            "action": 1,
+            "target": 3667212,
+            "targetX": 238,
+            "targetY": 158
+          },
+          {
+            "frame": 172801,
+            "phase": "press",
+            "action": 1,
+            "target": 3667212,
+            "targetX": 238,
+            "targetY": 158
+          },
+          {
+            "frame": 187451,
+            "phase": "release",
+            "action": 1,
+            "target": 3667212,
+            "targetX": 238,
+            "targetY": 158
+          },
+          {
+            "frame": 205450,
+            "operation": "Enter",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 205451,
+            "phase": "aim",
+            "action": 2,
+            "target": 3646956,
+            "targetX": 199,
+            "targetY": 114
+          },
+          {
+            "frame": 206101,
+            "phase": "press",
+            "action": 2,
+            "target": 3646956,
+            "targetX": 199,
+            "targetY": 114
+          },
+          {
+            "frame": 221101,
+            "phase": "release",
+            "action": 2,
+            "target": 3646956,
+            "targetX": 199,
+            "targetY": 114
+          },
+          {
+            "frame": 237550,
+            "operation": "6",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 237551,
+            "phase": "aim",
+            "action": 3,
+            "target": 3667212,
+            "targetX": 238,
+            "targetY": 158
+          },
+          {
+            "frame": 238201,
+            "phase": "press",
+            "action": 3,
+            "target": 3667212,
+            "targetX": 238,
+            "targetY": 158
+          },
+          {
+            "frame": 253051,
+            "phase": "release",
+            "action": 3,
+            "target": 3667212,
+            "targetX": 238,
+            "targetY": 158
+          },
+          {
+            "frame": 271150,
+            "operation": "Enter",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 271151,
+            "phase": "aim",
+            "action": 4,
+            "target": 3663436,
+            "targetX": 277,
+            "targetY": 134
+          },
+          {
+            "frame": 271651,
+            "phase": "press",
+            "action": 4,
+            "target": 3663436,
+            "targetX": 277,
+            "targetY": 134
+          },
+          {
+            "frame": 286651,
+            "phase": "release",
+            "action": 4,
+            "target": 3663436,
+            "targetX": 277,
+            "targetY": 134
+          },
+          {
+            "frame": 306300,
+            "operation": "+",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 306301,
+            "phase": "close-aim",
+            "action": 5,
+            "target": 3663436,
+            "targetX": 5,
+            "targetY": 5
+          },
+          {
+            "frame": 307501,
+            "phase": "close-press",
+            "action": 5,
+            "target": 3663436,
+            "targetX": 5,
+            "targetY": 5
+          },
+          {
+            "frame": 308051,
+            "phase": "cleanup",
+            "action": 5,
+            "target": 3663436,
+            "targetX": 5,
+            "targetY": 5
+          },
+          {
+            "frame": 328001,
+            "phase": "quit-settle",
+            "action": 5,
+            "target": 3663436,
+            "targetX": 5,
+            "targetY": 5
+          }
+        ],
+        "phase": "quit-settle",
+        "action": 5,
+        "finalObjects": 0,
+        "finalClasses": 0,
+        "finalDepth": 0,
+        "originalNativeWindow": 3685804,
+        "originalScreen": 2205704,
+        "nativeWindowUnlinked": true
+      },
+      "rawResultPath": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-kick31-v50-backfill/result.json",
+      "rawResultSha256": "2acd1d4d81ef5eb096338672b3ceccc8f2ae317bd3ea106618fec2f2c1ab41b7",
+      "captures": {
+        "opened": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-kick31-v50-backfill/frame-138551-opened",
+          "hashes": {
+            ".fastram": "688fbe8d3085a9646206d637c6eb2001fef3403e85580705aecb02bf194277c4",
+            ".chipram": "cbe9504b802b1730abb8b61f308c1dd459f1a56e8e75b4d6276b2e9f18141b8e",
+            ".slowram": "ad1f79e056c8561a27e020f41f6f6a9ababc2ed31f4f04dda1cca7301bd5b8e5",
+            ".memory.json": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e",
+            ".json": "6455e14069e456fdbaa95141add0670fc10b4d3cfbbe5f390276fbd8e15b6382",
+            ".bmp": "3877e658cb1f5caaf7102a9fc3bc2ddfb07e5835d57571ac872490b2a2f6a8a1"
+          }
+        },
+        "arithmetic-result": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-kick31-v50-backfill/frame-306301-arithmetic-result",
+          "hashes": {
+            ".fastram": "50e50a1f4fc0ec0750effced44b59f755c8bcf7edd7df4631a11f0ffee280fde",
+            ".chipram": "1fd3c95cd34f5f564b73bc6df901377e091a16bedf3eec1d1b0ac0b357482379",
+            ".slowram": "ad1f79e056c8561a27e020f41f6f6a9ababc2ed31f4f04dda1cca7301bd5b8e5",
+            ".memory.json": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e",
+            ".json": "8a317e02ae75334743a65d6ddc029f555e738913af277a4f95e2f3da7ad31170",
+            ".bmp": "ab8061fb3087b776060fbcc90e4103e6833817d9f4cb89f092b499ad67b84918"
+          }
+        },
+        "cleaned": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-kick31-v50-backfill/frame-328001-cleaned",
+          "hashes": {
+            ".fastram": "6d80d52d2b8d5f39fbc86e99ec656325211e2e2d24f9ad9b82cf10d7cf9c0ff0",
+            ".chipram": "88628ec51d389a555d70b4e3b2b52a8d31cbd034a42dc65f653e818fc5ab88cb",
+            ".slowram": "ad1f79e056c8561a27e020f41f6f6a9ababc2ed31f4f04dda1cca7301bd5b8e5",
+            ".memory.json": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e",
+            ".json": "a944bb597bec56ec08e06c3870af0550e2a744d40ffe6a78f6464ac342103ca0",
+            ".bmp": "7cd7bb6f0675b2a8f8ad5d979848abd27fa6e0a80af02c7c63fc1a938b62a677"
+          }
+        },
+        "quit-settled": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-kick31-v50-backfill/frame-333051-quit-settled",
+          "hashes": {
+            ".fastram": "023fa4c3a59ccd29abfe090a8957ee755a326df98c009ec4e209430458ac9559",
+            ".chipram": "88628ec51d389a555d70b4e3b2b52a8d31cbd034a42dc65f653e818fc5ab88cb",
+            ".slowram": "ad1f79e056c8561a27e020f41f6f6a9ababc2ed31f4f04dda1cca7301bd5b8e5",
+            ".memory.json": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e",
+            ".json": "fb5fd59ebb255784014fce5c01ada29eafa4b348cc5c542fbab7870f497d6d17",
+            ".bmp": "7cd7bb6f0675b2a8f8ad5d979848abd27fa6e0a80af02c7c63fc1a938b62a677"
+          }
+        }
+      },
+      "visualArithmetic": "PASS: arithmetic-result BMP visibly shows 11.000...",
+      "visualQuit": "PASS: CLI prompt visible",
+      "rawRegistryAudit": {
+        "cleaned": {
+          "cookie": "0x4d554934",
+          "classes": 0,
+          "objects": 0,
+          "dispatchDepth": 0,
+          "callbackDepth": 0
+        },
+        "quit-settled": {
+          "cookie": "0x4d554934",
+          "classes": 0,
+          "objects": 0,
+          "dispatchDepth": 0,
+          "callbackDepth": 0
+        }
+      }
+    },
+    {
+      "rom": "copperstart",
+      "rawResult": {
+        "schemaVersion": 4,
+        "protocol": "mui-calc-native-mouse-v4",
+        "profile": "a500-ocs-5m-diagnostic-v1",
+        "buttonPressTimeoutFields": 60000,
+        "buttonReleaseTimeoutFields": 60000,
+        "quitSettleFields": 5000,
+        "cleanupObservedFrame": 396251,
+        "romSha256": "ADAAECE2E195E4BE9524CF5413630BEBCF099C1B2CB99DBD17E19127251907A3",
+        "imageSha256": "4473C347E20345E0F13171876B0147BBD63C4CB00CD79A5E19A21AB63B084695",
+        "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+        "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+        "CompletedFrames": 401301,
+        "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+        "inputAndCleanup": "PASS",
+        "arithmeticVerification": "REQUIRES_VISUAL_REVIEW_OF_ARITHMETIC_RESULT",
+        "events": [
+          {
+            "frame": 174001,
+            "phase": "aim",
+            "action": 0,
+            "target": 6689420,
+            "targetX": 120,
+            "targetY": 115
+          },
+          {
+            "frame": 174601,
+            "phase": "press",
+            "action": 0,
+            "target": 6689420,
+            "targetX": 120,
+            "targetY": 115
+          },
+          {
+            "frame": 189851,
+            "phase": "release",
+            "action": 0,
+            "target": 6689420,
+            "targetX": 120,
+            "targetY": 115
+          },
+          {
+            "frame": 208900,
+            "operation": "5",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 208901,
+            "phase": "aim",
+            "action": 1,
+            "target": 6721804,
+            "targetX": 239,
+            "targetY": 159
+          },
+          {
+            "frame": 209201,
+            "phase": "press",
+            "action": 1,
+            "target": 6721804,
+            "targetX": 239,
+            "targetY": 159
+          },
+          {
+            "frame": 224151,
+            "phase": "release",
+            "action": 1,
+            "target": 6721804,
+            "targetX": 239,
+            "targetY": 159
+          },
+          {
+            "frame": 244600,
+            "operation": "Enter",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 244601,
+            "phase": "aim",
+            "action": 2,
+            "target": 6692124,
+            "targetX": 199,
+            "targetY": 115
+          },
+          {
+            "frame": 244901,
+            "phase": "press",
+            "action": 2,
+            "target": 6692124,
+            "targetX": 199,
+            "targetY": 115
+          },
+          {
+            "frame": 260251,
+            "phase": "release",
+            "action": 2,
+            "target": 6692124,
+            "targetX": 199,
+            "targetY": 115
+          },
+          {
+            "frame": 279200,
+            "operation": "6",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 279201,
+            "phase": "aim",
+            "action": 3,
+            "target": 6721804,
+            "targetX": 239,
+            "targetY": 159
+          },
+          {
+            "frame": 279501,
+            "phase": "press",
+            "action": 3,
+            "target": 6721804,
+            "targetX": 239,
+            "targetY": 159
+          },
+          {
+            "frame": 294451,
+            "phase": "release",
+            "action": 3,
+            "target": 6721804,
+            "targetX": 239,
+            "targetY": 159
+          },
+          {
+            "frame": 315000,
+            "operation": "Enter",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 315001,
+            "phase": "aim",
+            "action": 4,
+            "target": 6716332,
+            "targetX": 278,
+            "targetY": 135
+          },
+          {
+            "frame": 315251,
+            "phase": "press",
+            "action": 4,
+            "target": 6716332,
+            "targetX": 278,
+            "targetY": 135
+          },
+          {
+            "frame": 330551,
+            "phase": "release",
+            "action": 4,
+            "target": 6716332,
+            "targetX": 278,
+            "targetY": 135
+          },
+          {
+            "frame": 353950,
+            "operation": "+",
+            "result": "accepted-mouse-release"
+          },
+          {
+            "frame": 353951,
+            "phase": "close-aim",
+            "action": 5,
+            "target": 6716332,
+            "targetX": 5,
+            "targetY": 5
+          },
+          {
+            "frame": 354551,
+            "phase": "close-press",
+            "action": 5,
+            "target": 6716332,
+            "targetX": 5,
+            "targetY": 5
+          },
+          {
+            "frame": 355101,
+            "phase": "cleanup",
+            "action": 5,
+            "target": 6716332,
+            "targetX": 5,
+            "targetY": 5
+          },
+          {
+            "frame": 396251,
+            "phase": "quit-settle",
+            "action": 5,
+            "target": 6716332,
+            "targetX": 5,
+            "targetY": 5
+          }
+        ],
+        "phase": "quit-settle",
+        "action": 5,
+        "finalObjects": 0,
+        "finalClasses": 0,
+        "finalDepth": 0,
+        "originalNativeWindow": 6754512,
+        "originalScreen": 6752144,
+        "nativeWindowUnlinked": true
+      },
+      "rawResultPath": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-copperstart-v50-backfill/result.json",
+      "rawResultSha256": "7baf19ace334c565cf5a5205725b2143d6310fbbd512114e1905602770aad92c",
+      "captures": {
+        "opened": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-copperstart-v50-backfill/frame-174001-opened",
+          "hashes": {
+            ".fastram": "e13c92442fca29f3334d7b9466178694cbc8cad67d53737352a9932a580357e3",
+            ".chipram": "8192dcdeddb0261209859cd9dedbfa2367ebfa594a7bc0f2403f4c02376be774",
+            ".slowram": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca",
+            ".memory.json": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec",
+            ".json": "63741dd3642794654b7a0dba64f8348f2f62e4817f1756e19114e8410b20d288",
+            ".bmp": "566c5e5e4e09c0ac1dfefc87f0c66d2a8f853dfbdf69c5f0729dbd49b16180c5"
+          }
+        },
+        "arithmetic-result": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-copperstart-v50-backfill/frame-353951-arithmetic-result",
+          "hashes": {
+            ".fastram": "67076894875dbdc989e8ae4ae68a4421b072c529461187bf0655fc662567105b",
+            ".chipram": "a644fb375869a4bffe5efd82a3317e20b5b582542a6d5bc9df931e3cba3f2b49",
+            ".slowram": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca",
+            ".memory.json": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec",
+            ".json": "b1ae71bb2c49c1aa3934396b6c77e10293deb1375ec9c2a637dd1ef6810db38c",
+            ".bmp": "f1a30067fbd73a82bc814793c871a32e0fd044f3085e2dd9278272ed46316922"
+          }
+        },
+        "cleaned": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-copperstart-v50-backfill/frame-396251-cleaned",
+          "hashes": {
+            ".fastram": "1c9bcda1e1f67262468e66001671d2e68c9923b829dda29dcb257ad66d899a0d",
+            ".chipram": "3264df9c0877baae8890581a694e8cb17392e9c039d1ee9578b6bcf62825ffad",
+            ".slowram": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca",
+            ".memory.json": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec",
+            ".json": "e9bdb714ed294af3a5554a08088227db98a2427db7f53a4b4c3e333bb69e48be",
+            ".bmp": "4434fadd2c9840e59eb48ea438f9f5dbcc5d3a33e75cce1213a5b4f83948130f"
+          }
+        },
+        "quit-settled": {
+          "path": "artifacts/utility-mui-2026-10-31/mui-calc-native-interaction-copperstart-v50-backfill/frame-401301-quit-settled",
+          "hashes": {
+            ".fastram": "5a991b37515e99eb7197d9bf3fac85aef36c9d0951743ff573d43c74ed67e1cc",
+            ".chipram": "f6a183b442fc2e0cb9477deb89613996616c537f35ca566c381468752c4ac5ae",
+            ".slowram": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca",
+            ".memory.json": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec",
+            ".json": "24700028a841f8ee5db081446b86fd7b3d00da98e023c4f465d7cdebea017842",
+            ".bmp": "4434fadd2c9840e59eb48ea438f9f5dbcc5d3a33e75cce1213a5b4f83948130f"
+          }
+        }
+      },
+      "visualArithmetic": "PASS: arithmetic-result BMP visibly shows 11.000...",
+      "visualQuit": "PASS: gray bare screen, no retained Calc rectangle",
+      "bitmapAudit": {
+        "schemaVersion": 1,
+        "arithmeticCapture": "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v50-backfill\\frame-353951-arithmetic-result.fastram",
+        "settledCapture": "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v50-backfill\\frame-401301-quit-settled.fastram",
+        "captureSha256": {
+          "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v50-backfill\\frame-353951-arithmetic-result.fastram": "67076894875dbdc989e8ae4ae68a4421b072c529461187bf0655fc662567105b",
+          "artifacts\\utility-mui-2026-10-31\\mui-calc-native-interaction-copperstart-v50-backfill\\frame-401301-quit-settled.fastram": "5a991b37515e99eb7197d9bf3fac85aef36c9d0951743ff573d43c74ed67e1cc"
+        },
+        "nativeWindow": "0x6710d0",
+        "screen": "0x670790",
+        "bitmap": "0x670a30",
+        "rectangle": {
+          "left": 12,
+          "top": 16,
+          "width": 320,
+          "height": 180
+        },
+        "bitmapStride": 80,
+        "bitmapRows": 256,
+        "bitmapDepth": 2,
+        "screenFirstWindow": "0x0",
+        "muiRegistry": {
+          "classes": 0,
+          "objects": 0,
+          "dispatchDepth": 0,
+          "callbackDepth": 0
+        },
+        "nonzeroPixelsBefore": 25121,
+        "nonzeroPixelsAfter": 0,
+        "backgroundClear": "PASS",
+        "scope": "Pen-zero restoration in the closed window rectangle; hardware sprites are separate."
+      },
+      "rawRegistryAudit": {
+        "cleaned": {
+          "cookie": "0x4d554934",
+          "classes": 0,
+          "objects": 0,
+          "dispatchDepth": 0,
+          "callbackDepth": 0
+        },
+        "quit-settled": {
+          "cookie": "0x4d554934",
+          "classes": 0,
+          "objects": 0,
+          "dispatchDepth": 0,
+          "callbackDepth": 0
+        }
+      },
+      "processExitAudit": {
+        "beforeTaskNames": [
+          "MUI_calc_process",
+          "Intuition refresh",
+          "",
+          "",
+          "Native timer",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "afterTaskNames": [
+          "Intuition refresh",
+          "",
+          "",
+          "Native timer",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "muiProcessGone": true,
+        "parentProcess": "0x42d0b0",
+        "parentCli": "0x42e1bc",
+        "returnCode": 0,
+        "module": 0,
+        "commandEmpty": true
+      }
+    }
+  ],
+  "sourceCommits": {
+    "CopperOS": "6ad194fb7d3cfe84dc1770e583bf59db00f71e1f",
+    "CopperStart": "1cd778bd4a6e5c8da1160f4d5599de2730220a73"
+  },
+  "isolatedPublishChecks": {
+    "muiDefaultPassed": 3902,
+    "muiClassicPassed": 3902,
+    "selectedLayersPassed": 570,
+    "skipped": 0,
+    "sdk": "explicit local CopperSharp; public development g20 package unavailable",
+    "copperScreenProductionBuild": "UNAVAILABLE: qualified CopperOS bundle not staged"
+  }
+}

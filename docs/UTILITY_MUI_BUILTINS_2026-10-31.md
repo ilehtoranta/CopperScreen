@@ -1,5 +1,9 @@
 # CopperOS native MUI built-in classes — 2026-10-31
 
+The subsequent [classic NewMenu fix and replays](UTILITY_MUI_NEWMENU_2026-10-31.md)
+resolve the Application_Menu mismatch identified below. This report retains
+the earlier v30 registration results and failures.
+
 This continues the [library opening/version fix](UTILITY_MUI_CALC_2026-10-31.md).
 The two reference ROMs remain the qualified standalone A500 CopperStart ROM
 and native Kickstart 3.1. MUI requires BOOPSI from OS 2 or later; Kickstart 1.3

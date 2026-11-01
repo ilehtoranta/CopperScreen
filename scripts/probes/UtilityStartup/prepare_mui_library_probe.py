@@ -84,8 +84,19 @@ def main():
     p.add_argument('--base-sha256', required=True)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--native-reference', action='store_true')
-    p.add_argument('--builtins', action='store_true')
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument('--builtins', action='store_true')
+    mode.add_argument('--classic-menu', action='store_true')
+    mode.add_argument('--native-window', action='store_true')
+    mode.add_argument('--native-window-text', action='store_true')
+    mode.add_argument('--native-window-pointer', action='store_true')
+    mode.add_argument('--native-window-resize', action='store_true')
+    mode.add_argument('--native-window-update', action='store_true')
+    mode.add_argument('--native-window-indexed-background', action='store_true')
+    mode.add_argument('--native-window-list-rows', action='store_true')
+    mode.add_argument('--native-window-list-array', action='store_true')
     p.add_argument('--probe-only', action='store_true')
+    p.add_argument('--preload-mui', action='store_true', help='Versioned guest allocation-order experiment before CopperGui')
     args = p.parse_args()
     if sha(args.base.read_bytes()) != args.base_sha256.lower():
         raise ValueError('Unexpected base image')
@@ -97,9 +108,47 @@ def main():
     if args.builtins:
         from mui_builtin_probe import command as probe_command
         probe_name = 'MuiBuiltinProbe'
+    if args.classic_menu:
+        from mui_classic_menu_probe import command as probe_command
+        probe_name = 'MuiClassicMenuProbe'
+    if args.native_window:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True)
+        probe_name = 'MuiWindowProbe'
+    if args.native_window_text:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True)
+        probe_name = 'MuiWindowTextProbe'
+    if args.native_window_pointer:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True, pointer_hook=True)
+        probe_name = 'MuiWindowPointerProbe'
+    if args.native_window_resize:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True, pointer_hook=True, tall_text=True)
+        probe_name = 'MuiWindowResizeProbe'
+    if args.native_window_update:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True, pointer_hook=True, update_text=True)
+        probe_name = 'MuiWindowUpdateProbe'
+    if args.native_window_indexed_background:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True, pointer_hook=True, update_text=True, indexed_background=True)
+        probe_name = 'MuiWindowIndexedBackgroundProbe'
+    if args.native_window_list_rows:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True, pointer_hook=True, update_text=True, indexed_background=True, list_rows=True)
+        probe_name = 'MuiWindowListRowsProbe'
+    if args.native_window_list_array:
+        from mui_classic_menu_probe import command as window_command
+        probe_command = lambda: window_command(open_windows=True, text_roots=True, pointer_hook=True, update_text=True, indexed_background=True, list_rows=True, array_insert=True)
+        probe_name = 'MuiWindowListArrayProbe'
     tail = '' if args.probe_only else 'SYS:MUICalc/muicalc\n'
     files = {'C/' + probe_name: probe_command(), 'S/Startup-Sequence':
-             startup + ('C:CopperGui\nC:' + probe_name + '\n' + tail).encode('ascii')}
+             startup + (('C:MuiPreloadProbe\n' if args.preload_mui else '') + 'C:CopperGui\nC:' + probe_name + '\n' + tail).encode('ascii')}
+    if args.preload_mui:
+        from mui_preload_probe import command as preload_command
+        files['C/MuiPreloadProbe'] = preload_command()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(args.base, args.output)
     device = BlkDevFactory().open(str(args.output))
@@ -118,6 +167,7 @@ def main():
         volume.close()
         device.close()
     receipt = {'baseSha256': args.base_sha256, 'sha256': sha(args.output.read_bytes()),
+               'allocationOrder': 'mui-before-gui-v1' if args.preload_mui else 'gui-before-mui-v1',
                'commandSha256': sha(files['C/' + probe_name]), 'allGuestFiles': after}
     Path(str(args.output) + '.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps({k: v for k, v in receipt.items() if k != 'allGuestFiles'}))

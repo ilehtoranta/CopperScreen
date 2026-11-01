@@ -1,6 +1,6 @@
 # Amiga utility test collection
 
-Collected 2026-10-27; latest testing 2026-10-31. Collection ID: `amiga-utilities-v1`.
+Collected 2026-10-27; latest testing 2026-11-01. Collection ID: `amiga-utilities-v1`.
 
 The [final sweep](UTILITY_FINAL_SWEEP_2026-10-31.json) records bounded main-screen
 or basic-invocation checks for the original twelve utilities under both ROMs.
@@ -8,9 +8,18 @@ Its exact ROM, GUI and machine inputs define the result; older exploratory
 results below retain their recorded inputs and scope. The thirteenth utility,
 [MUI Calc](UTILITY_MUI_CALC_2026-10-31.md), is installed with CopperOS's native
 MUI library in private images. Its explicit classic profile opens under both
-ROMs and [native built-ins now construct calculator controls](UTILITY_MUI_BUILTINS_2026-10-31.md).
-Both runs still report failed application construction; calculator interaction
-remains unverified.
+ROMs and [native built-ins construct calculator controls](UTILITY_MUI_BUILTINS_2026-10-31.md).
+The [classic NewMenu fix](UTILITY_MUI_NEWMENU_2026-10-31.md) now allows original
+Application/menu construction under both ROMs. Separate
+[5 MiB native-window diagnostics](UTILITY_MUI_NATIVE_WINDOW_2026-11-01.md)
+verify the original client's physical mouse `5 Enter 6 Enter + = 11` on
+CopperStart and native Kickstart 3.1. The [Layers default-background
+fix](UTILITY_MUI_BACKFILL_FIX_2026-11-01.md) now passes both full-client retests:
+native close unlinks the OS window and releases all MUI objects/classes;
+Kickstart returns to CLI and CopperStart clears the closed rectangle to its
+background pen. Menus, paging, keyboard, full MUI API and full Workbench desktop
+coverage remain unqualified. The retained 3 MiB CopperStart library-load failure
+remains FAIL. See the [reviewed receipt](UTILITY_MUI_BACKFILL_FIX_2026-11-01.json).
 
 This is a local collection for manual emulation checks and CopperStart versus
 native Kickstart comparisons: **13 utilities, 16 original downloads, four ADFs
@@ -105,7 +114,7 @@ run alone does not qualify a corresponding CopperStart configuration.
 
 | Utility and source | Requirements from the distribution | Suggested scenario |
 | --- | --- | --- |
-| [MUI Calc 1.25](https://aminet.net/package/util/wb/MUI_Calc125) | MUI 2.0; retain all seven package files. CopperOS's explicit 68000 classic profile registers native built-ins and constructs controls under both ROMs. Application construction still fails. See [current evidence](UTILITY_MUI_BUILTINS_2026-10-31.md). | RPN `5 ENTER 6 ENTER +` produces 11, stack list, paging buttons and menus. Pending successful application construction and native Window presentation. |
+| [MUI Calc 1.25](https://aminet.net/package/util/wb/MUI_Calc125) | MUI 2.0; retain all seven package files. CopperOS classic-client 68000 MUI profile and rebuilt CopperStart GUI provider. Separate 5 MiB diagnostic; retained 3 MiB load failure remains FAIL. See [current evidence](UTILITY_MUI_BACKFILL_FIX_2026-11-01.md). | PASS on both ROMs: physical mouse `5 ENTER 6 ENTER +` visibly produces 11; native window unlinking and empty MUI registries after settling. CopperStart restores the bare-screen background with zero stale pixels. Menus, paging, keyboard and complete MUI/Workbench coverage remain unqualified. |
 | [Personal Paint 7.1c](https://www.amigaforever.com/classic/download/) | Manual section 1.2 requires at least 2 MiB RAM; prefers 1 MiB Chip. Kickstart 1.2+ and Workbench 1.3 libraries. Beyond the qualified 1 MiB A500 profile. | Draw/fill, brush copy/rotate, palette edits, undo, file requester, original ILBM save/reload and cold-boot readback. Record hardware/software blitter settings. |
 | [PPShow 4.0](https://aminet.net/package/gfx/show/PPShow40) | Kickstart and Workbench 2.0+; ReqTools and PowerPacker libraries included. DataTypes optional. | Original ILBM display, palette cycling, small generated ANIM5, cancel requester and return to desktop. |
 | [DiskMaster 2.5.30a V37](https://aminet.net/package/util/dir/DiskMasterV37) | Readme says Kickstart V37+; Aminet architecture field says OS 2.1+. Resolve library requirements before selecting an OS 2.04 reference; ReqTools required. | Dual directory listing, sorting, create/rename/copy/delete scratch files and cancel requesters; verify file bytes after reboot. |

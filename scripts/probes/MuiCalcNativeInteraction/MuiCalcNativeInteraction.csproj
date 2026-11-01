@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Freeze the same built engine/dependencies used by the native runner. -->
+    <Reference Include="CopperMod.Amiga.Lightweight">
+      <HintPath>../../../CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperMod.Amiga.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="Copper68k">
+      <HintPath>../../../CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/Copper68k.dll</HintPath>
+    </Reference>
+    <Reference Include="CopperDisk">
+      <HintPath>../../../CopperMod.Amiga.Lightweight.Runner/bin/Release/net10.0/CopperDisk.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

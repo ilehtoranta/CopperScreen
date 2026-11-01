@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "collectionId": "amiga-utilities-v1",
-  "reviewedDate": "2026-10-31",
+  "reviewedDate": "2026-11-01",
   "purpose": "Local manual compatibility and CopperStart/native Kickstart A/B exploration. Acquisition is not compatibility evidence.",
-  "executionStatus": "original-twelve-bounded-checks-complete; mui-calc-builtins-registered-classic-application-menu-blocked",
+  "executionStatus": "original-twelve-bounded-checks-complete; mui-calc-native-rpn-close-default-background-pass-5m",
   "applications": [
     {
       "id": "mui-calc-125",
@@ -11,11 +11,11 @@
       "version": "1.25",
       "sourceUrl": "https://aminet.net/package/util/wb/MUI_Calc125",
       "rights": "Robert Poole's giftware; MUI_Calc.doc permits redistribution with all files included. Retain the complete seven-file archive. Original MUI is a separate product; this test uses the CopperOS development library.",
-      "requirements": "MUI 2.0 built-in classes. Private images include CopperOS's explicit experimental classic-client 68000 muimaster.library 4.1 profile. Sixteen native built-ins are registered, including Cycle.mui, and both ROMs pass repeated native List/Listview/Cycle lifecycle checks. MUI Calc builds matching 71-control trees but application creation fails: classic Application_Menu NewMenu input is treated as a Menustrip-object alias. Native Window presentation is also unavailable. Default CopperOS development identity remains 0.1.",
+      "requirements": "MUI 2.0 built-in classes. Private images include CopperOS's experimental classic-client 68000 muimaster.library 4.1 profile. Sixteen built-ins are registered; classic NewMenu input becomes native menu objects. Separate 5 MiB diagnostics verify native rendering, mouse input, RPN arithmetic and MUI cleanup on both ROMs. The newer library exceeds CopperStart's available memory in the retained 3 MiB run. Default CopperOS development identity remains 0.1.",
       "lane": "copperos-mui-development",
-      "scenario": "Reach the calculator, enter 5 ENTER 6 ENTER + and verify 11; exercise stack list, paging buttons and menus. Arithmetic and GUI scenario remain unavailable because application construction fails.",
-      "executionStatus": "native-builtins-registered-classic-application-menu-blocked-both-roms",
-      "evidenceDocument": "docs/UTILITY_MUI_BUILTINS_2026-10-31.md",
+      "scenario": "PASS in separate 5 MiB profile on CopperStart and native Kickstart 3.1: original unchanged Calc, hardware mouse 5 Enter 6 Enter + visibly produces 11. Native close unlinks the OS window; MUI registries remain empty after settling. CopperStart process exits with return code 0 and its closed rectangle contains zero stale pixels. Menus, paging, keyboard, complete MUI API and full Workbench desktop coverage remain unqualified. Retained 3 MiB load failure remains FAIL.",
+      "executionStatus": "native-rpn-close-and-default-background-pass-5m",
+      "evidenceDocument": "docs/UTILITY_MUI_BACKFILL_FIX_2026-11-01.md",
       "assets": [
         {
           "file": "originals/MUI_Calc125.lha",
@@ -436,5 +436,5 @@
     }
   ],
   "latestEvidenceDocument": "docs/UTILITY_FINAL_SWEEP_2026-10-31.json",
-  "muiEvidenceDocument": "docs/UTILITY_MUI_BUILTINS_2026-10-31.md"
+  "muiEvidenceDocument": "docs/UTILITY_MUI_BACKFILL_FIX_2026-11-01.md"
 }
