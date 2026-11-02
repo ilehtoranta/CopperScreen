@@ -1,0 +1,932 @@
+{
+  "schemaVersion": 1,
+  "reviewedDate": "2026-11-01",
+  "protocol": "small-mui-ab-investigation-v1",
+  "status": "EIGHT_NATIVE_UTILITY_RUNS_COMPLETE_WITH_BLOCKERS_NO_FULL_APP_PASSES",
+  "profile": "a500-ocs-5m-diagnostic-v1",
+  "machine": {
+    "chipRamBytes": 524288,
+    "slowRamBytes": 524288,
+    "fastRamBytes": 4194304,
+    "cpu": "68000 interpreter",
+    "chipset": "PAL OCS8371/8362",
+    "readonlyHdf": true,
+    "hostMemoryWrites": false,
+    "hostOsShims": false,
+    "throughputMeasurement": false
+  },
+  "pins": {
+    "copperstartRom": {
+      "path": "../CopperStart/artifacts/utility-private-snapshots-classic-rom-v140/CopperStart-DiskBoot.rom",
+      "bytes": 524288,
+      "sha256": "adaaece2e195e4be9524cf5413630bebcf099c1b2cb99dbd17e19127251907a3"
+    },
+    "kickstartRom": {
+      "path": "C:/Data/ROM/kickstart-3.1-a500.rom",
+      "bytes": 524288,
+      "sha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee"
+    },
+    "muiLibrary": {
+      "path": "artifacts/utility-mui-2026-10-31/copperos-mui-native-window-68000-v48/muimaster.library",
+      "bytes": 1254232,
+      "sha256": "54c3d69c4a1358a3f4281cdebbf94db6001935e7ef5b3aabbe43e86c61a2e816"
+    },
+    "engine": {
+      "path": "artifacts/mui-calc-native-interaction-v4/bin/MuiCalcNativeInteraction/release/CopperMod.Amiga.Lightweight.dll",
+      "bytes": 295424,
+      "sha256": "e0c814475caf09c50024762067fcf76071ec9bad5a4aa390f801efe9c545c4e2"
+    },
+    "cpu": {
+      "path": "artifacts/mui-calc-native-interaction-v4/bin/MuiCalcNativeInteraction/release/Copper68k.dll",
+      "bytes": 978944,
+      "sha256": "ff3a73b2dd2a62329be1fcdad1eab8ca3a62d95f73bcfc03a4b87bd25955837a"
+    }
+  },
+  "sourceFiles": [
+    {
+      "path": "scripts/probes/MuiUtilityInteraction/Program.cs",
+      "bytes": 17926,
+      "sha256": "6fbc850a9238ff8abcacd940b642a9207d9fcf65fc592c4447051f1c29516a24"
+    },
+    {
+      "path": "scripts/probes/MuiUtilityInteraction/MuiUtilityInteraction.csproj",
+      "bytes": 948,
+      "sha256": "9a0bba576993369ee072cb7fbbf060981d67ed69d6878b3896afaf65d7153dff"
+    },
+    {
+      "path": "scripts/probes/UtilityStartup/prepare_small_mui_utilities.py",
+      "bytes": 3035,
+      "sha256": "a9f225714d214ee9a69ed8c3f0819283f2e58239b16f4018a7efd5770371596d"
+    },
+    {
+      "path": "scripts/probes/UtilityStartup/inspect_small_mui_compatibility.py",
+      "bytes": 1666,
+      "sha256": "58e050ea0060363148940110648307daa705c398a08cff4e3af9e69f00e17760"
+    },
+    {
+      "path": "scripts/probes/UtilityStartup/manual_stack_delay_probe.py",
+      "bytes": 2988,
+      "sha256": "9fbcc255c8172378a2e195ba5d5e1b38d656e747f915d68863e2fc98b08db773"
+    },
+    {
+      "path": "scripts/probes/UtilityStartup/manual_stack_timer_probe.py",
+      "bytes": 3645,
+      "sha256": "797de6a781b2edf0ecf021005b6d6d64c00f9273a2cff4b8d53b8b7329b59a49"
+    },
+    {
+      "path": "scripts/probes/UtilityStartup/inspect_manual_stack_probe.py",
+      "bytes": 1917,
+      "sha256": "9a516ffc2e33f180e5114ea7fe47e568cf0e8d153fee1d7f96d277dda12d29b0"
+    }
+  ],
+  "acquisitionReceipt": {
+    "path": "docs/UTILITY_MUI_SMALL_TOOLS_2026-11-01.json",
+    "bytes": 9929,
+    "sha256": "da514f9248358a6535f6316846616f7abbdf1f25892c24e210f8a084d750830c"
+  },
+  "results": [
+    {
+      "utility": "mui-mem-11",
+      "rom": "copperstart",
+      "status": "FAIL_STARTUP_WAIT_BEFORE_MUI",
+      "scope": "mathffp 37 installed; blocked GetDiskObject on manually allocated stack; no MUI window at 30000 fields",
+      "fields": 30000,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images-v2/mui-mem-11-copperstart.hdf.json",
+        "bytes": 63680,
+        "sha256": "c320baf3ec7604a067d78e3e79c67dd0c91b9eb228485a4eb444f5ee0366f344"
+      },
+      "imageSha256": "6ded0ff19236df5a394c0235036749832536ff7c82d6532f0677f9ef2c856473",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-030000-final.json",
+          "bytes": 934,
+          "sha256": "993649143673316516f0c5fcadea3520b5afb5f346dffbf6e368683257591b8d"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-030000-final.bmp",
+          "bytes": 1136870,
+          "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-030000-final.fastram",
+          "bytes": 4194304,
+          "sha256": "ebb64d75142d16b8f45b854b168dc2be78cfae03cc606488df687cea1ee7cc64"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-030000-final.chipram",
+          "bytes": 524288,
+          "sha256": "cf31a2ea8cbe0618cbee0927dc706503dcfe9b5ff3217324ae346572aa737f00"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-030000-final.slowram",
+          "bytes": 524288,
+          "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-030000-final.memory.json",
+          "bytes": 46,
+          "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/result.json",
+          "bytes": 1188,
+          "sha256": "68707445e146645d113dffbc17665fbd18b930d524060be5b7945ecc2fa4c10a"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-mem-11-copperstart-ffp/frame-025001-progress.startup-globals.json",
+          "bytes": 246,
+          "sha256": "9cac619b4b20c34fe2fc3a2f5ada93d6df6772462d082e4351dd029a6b49981d"
+        }
+      ]
+    },
+    {
+      "utility": "mui-mem-11",
+      "rom": "kickstart31",
+      "status": "FAIL_MUI_VERSION_GATE",
+      "scope": "Explicit error requester: binary requires MUI major 10, library major 4; requester literal V12+",
+      "fields": 25001,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-mem-11-kickstart31.hdf.json",
+        "bytes": 63048,
+        "sha256": "f87c0f8f23eb0b00e1b60e7643442014b50aff2159ca8e22521d8619f5f7d2b1"
+      },
+      "imageSha256": "0fec877cbc557cee504d13fff56a9c241c90ba349b04256ceebbe67b9366225f",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/frame-025001-progress.json",
+          "bytes": 442,
+          "sha256": "6e6697d0e8700ec12ff8db1be2cf5022c521a8efabb423a112644f9486a7e718"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/frame-025001-progress.bmp",
+          "bytes": 1136870,
+          "sha256": "d2d9c14183c2dfc522339730249d9e66af6aa06166db7f08c0096c6a3bc60c2c"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/frame-025001-progress.fastram",
+          "bytes": 4194304,
+          "sha256": "fcfbb97efd85e08f3089f6266d14d50b4055d1b20f9e727f1582119e2eb81480"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/frame-025001-progress.chipram",
+          "bytes": 524288,
+          "sha256": "23acd259c9c4f627a8e18d71f68c95995242b990c1a5b90c9437f56a3a53ab0e"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/frame-025001-progress.slowram",
+          "bytes": 524288,
+          "sha256": "88b8c17dcd33894898e7b32c858bfde48bbf4d47bb488571e6d8101864532210"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/frame-025001-progress.memory.json",
+          "bytes": 46,
+          "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-mem-11-kickstart31/observed-failure.json",
+          "bytes": 370,
+          "sha256": "8b037834b8e6776ed0c87b401fded07ef869023347a7f73c7ca9872c118aa9f9"
+        }
+      ]
+    },
+    {
+      "utility": "mui-join-10",
+      "rom": "copperstart",
+      "status": "FAIL_MUI_VERSION_GATE",
+      "scope": "Explicit Cannot Open MUIMaster Library; binary requires 8, library major 4. Native CLI returncode20; CopperStart returns to prompt.",
+      "fields": 25001,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-join-10-copperstart.hdf.json",
+        "bytes": 64238,
+        "sha256": "2bf48235d7309aeff4734c8cd2199b7573cbdb688e86e4cb84d5de5cf4459f68"
+      },
+      "imageSha256": "1d399e1b33c8d5c0b86398a6ad4fd1605dcb1ca8e7d8db93b968fecdec41e45c",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/frame-025001-progress.json",
+          "bytes": 546,
+          "sha256": "13f7f5bdea49df58b6cb5ab20064c62991b29aab39e13378ed5e13704f0e7143"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/frame-025001-progress.bmp",
+          "bytes": 1136870,
+          "sha256": "c4a8ef0afcab9e3c6deed8815d3b8b06b24c16971bb7f8f999059fb8d4c09cf2"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/frame-025001-progress.fastram",
+          "bytes": 4194304,
+          "sha256": "93baf44831abd1778195a07e43dadb2b01c5b3782cb62a46186f52d6de986272"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/frame-025001-progress.chipram",
+          "bytes": 524288,
+          "sha256": "4ae879d0ba9d52a772bc06114c219eb1db6ae48810d94dad74bc60bcf3cd17cc"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/frame-025001-progress.slowram",
+          "bytes": 524288,
+          "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/frame-025001-progress.memory.json",
+          "bytes": 46,
+          "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-copperstart/observed-failure.json",
+          "bytes": 372,
+          "sha256": "46a67e1022fb8460522516e90f3e6317c76e0e908b7583d0fa42aa4179bc1d17"
+        }
+      ]
+    },
+    {
+      "utility": "mui-join-10",
+      "rom": "kickstart31",
+      "status": "FAIL_MUI_VERSION_GATE",
+      "scope": "Explicit Cannot Open MUIMaster Library; binary requires 8, library major 4. Native CLI returncode20; CopperStart returns to prompt.",
+      "fields": 25001,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-join-10-kickstart31.hdf.json",
+        "bytes": 63619,
+        "sha256": "29bd6b23f1a1bfd817fbad0362b79816f14359c163fbd090bd0049dbc3a6da6f"
+      },
+      "imageSha256": "3b34f84741715bb35f8966538abc6e1b2b3e4f5e459d60e1b23626986222ed5f",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/frame-025001-progress.json",
+          "bytes": 442,
+          "sha256": "fd9e4263f33216612b13a01861369b218a06dfa8cf1b2c2c6e0e577f45b4412c"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/frame-025001-progress.bmp",
+          "bytes": 1136870,
+          "sha256": "fd7f283bb3f7952faf8c67affc5deb840954e893eef95637e4cbdd61b9c385c0"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/frame-025001-progress.fastram",
+          "bytes": 4194304,
+          "sha256": "1436d6e0612dae2db140f234116abf43995e0ed3d6f9ccd5ff51918bbeda0084"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/frame-025001-progress.chipram",
+          "bytes": 524288,
+          "sha256": "d9c96fc5a0ed7687ccdefd298a64f19ffee78d96c5c208059f52794cf6224a41"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/frame-025001-progress.slowram",
+          "bytes": 524288,
+          "sha256": "ab701bac7e8deece61baaa73181ad5a619d09089ca630360c1791bb48a25b2ba"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/frame-025001-progress.memory.json",
+          "bytes": 46,
+          "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/runs/mui-join-10-kickstart31/observed-failure.json",
+          "bytes": 374,
+          "sha256": "a69ef14a3ea547ff84deae64dbbe6a02d7e4a7748e98f8278e3958ccefbd760d"
+        }
+      ]
+    },
+    {
+      "utility": "mui-menu-100",
+      "rom": "copperstart",
+      "status": "PARTIAL_UI_FAIL_DYNAMIC_MEMBERSHIP_AND_CLEANUP",
+      "scope": "Main/static UI renders; configured launcher unavailable. Hardware QUIT unlinks window, CLI code0, but 15 objects/16 classes remain, depth0 and library open count0.",
+      "fields": 100001,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-menu-100-copperstart.hdf.json",
+        "bytes": 64503,
+        "sha256": "7d2f3492073f390f15d285876a436af3b3f7ec2e626aab89816489dcde5aacba"
+      },
+      "imageSha256": "4db2c8c34471b9ad8f154dd360039ad807607c41b6abfae338a82b2e49e61ec9",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-100001-progress.json",
+          "bytes": 5772,
+          "sha256": "bd36c1c037a8a840c5c772f8309d3cd5118610ea6977a5268764ff4f45a77270"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-100001-progress.bmp",
+          "bytes": 1136870,
+          "sha256": "0374431cf7d807e1588816e6232a2167ebddbd57c89d54d63ea30c58145ff37a"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-100001-progress.fastram",
+          "bytes": 4194304,
+          "sha256": "122c82d3736f31c58f3e2c28295ac1d36a8650cc1685487f14472cd954105dca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-100001-progress.chipram",
+          "bytes": 524288,
+          "sha256": "d6e9c7eb0d50a874c33b5c48a10849f40720ea0868dc6476d12793ac82017c8c"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-100001-progress.slowram",
+          "bytes": 524288,
+          "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-100001-progress.memory.json",
+          "bytes": 46,
+          "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/observed-quit.json",
+          "bytes": 2124,
+          "sha256": "e985cc8356a125d228256b5b07f89e2cfcf04a2bd3af376e75437ed2df443083"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-observed.json",
+          "bytes": 12649,
+          "sha256": "7e905b2e550fa8f028b395d4ed6e3bd2c2e9e1eb6383ef94eb46faabd51e773c"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-observed.bmp",
+          "bytes": 1136870,
+          "sha256": "243cc131a27df87d4bd31d66685868a8cd09f3251ec597c93493ea122a81a8a6"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-observed.fastram",
+          "bytes": 4194304,
+          "sha256": "2a60b50667d15f8511ef528af3a334bfca3944a9aae3665f671de1f77258365d"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-observed.chipram",
+          "bytes": 524288,
+          "sha256": "0c3401350385e84c07447d138c8e957547b655bc303385e4635adef415994641"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-observed.slowram",
+          "bytes": 524288,
+          "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-observed.memory.json",
+          "bytes": 46,
+          "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-button-unavailable.json",
+          "bytes": 12649,
+          "sha256": "7e905b2e550fa8f028b395d4ed6e3bd2c2e9e1eb6383ef94eb46faabd51e773c"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-button-unavailable.bmp",
+          "bytes": 1136870,
+          "sha256": "243cc131a27df87d4bd31d66685868a8cd09f3251ec597c93493ea122a81a8a6"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-button-unavailable.fastram",
+          "bytes": 4194304,
+          "sha256": "2a60b50667d15f8511ef528af3a334bfca3944a9aae3665f671de1f77258365d"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-button-unavailable.chipram",
+          "bytes": 524288,
+          "sha256": "0c3401350385e84c07447d138c8e957547b655bc303385e4635adef415994641"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-button-unavailable.slowram",
+          "bytes": 524288,
+          "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-copperstart/frame-057101-button-unavailable.memory.json",
+          "bytes": 46,
+          "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+        }
+      ]
+    },
+    {
+      "utility": "mui-menu-100",
+      "rom": "kickstart31",
+      "status": "PARTIAL_UI_FAIL_DYNAMIC_MEMBERSHIP_AND_CLEANUP",
+      "scope": "Main/static UI renders; configured launcher unavailable. Hardware QUIT unlinks window, CLI code0, but 15 objects/16 classes remain, depth0 and library open count0.",
+      "fields": 100001,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-menu-100-kickstart31.hdf.json",
+        "bytes": 63884,
+        "sha256": "7a6dda332dd1352800f3276af468b0df84a1a3faba3ae2dc414b0e7aba1b94a8"
+      },
+      "imageSha256": "d085bb285577e1934f64c4b4f75a4f8193a7a83839b2559446fdf1e54402514d",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-100001-progress.json",
+          "bytes": 5775,
+          "sha256": "f6b89ccab778cfd148f670c0321b9833639a697046adb5ce1b21e490407b4702"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-100001-progress.bmp",
+          "bytes": 1136870,
+          "sha256": "bd5d662c08e25ec2ff1fd930b73dec43be51b2ae0c67d619462fd1ca298ea859"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-100001-progress.fastram",
+          "bytes": 4194304,
+          "sha256": "2a6fc9d807ec155490b031f61d1f8e53cf87217d85672981649e6c9175997aea"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-100001-progress.chipram",
+          "bytes": 524288,
+          "sha256": "20f33f27ba13d40839f49470139e43d78a98d64f1e91c679b33e64d74573e584"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-100001-progress.slowram",
+          "bytes": 524288,
+          "sha256": "5cc6302abf747901266771f6b51a47a2dccf2824cc97d88e91548541599db0fe"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-100001-progress.memory.json",
+          "bytes": 46,
+          "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/observed-quit.json",
+          "bytes": 2141,
+          "sha256": "8b7116dd4ef96c9488ed19c674d2837f14b2605009dcb5654468eabadc64eef9"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-observed.json",
+          "bytes": 12651,
+          "sha256": "ad209714c1a8acae64fdad0fef15ed14fb478ce3d792c81baf9e491ee519abbe"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-observed.bmp",
+          "bytes": 1136870,
+          "sha256": "c8fb9106848875c7d7214101a46068d39867b4ad6bc077584825c1be9657913d"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-observed.fastram",
+          "bytes": 4194304,
+          "sha256": "1fb7de3b42da1bff8d3092305d84ba9aa15a1c0fce709e74cbbbb534debefef7"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-observed.chipram",
+          "bytes": 524288,
+          "sha256": "fd2190219d833f694cef3a7556b294aae2cff82f937dc583ebf0a63f570b1902"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-observed.slowram",
+          "bytes": 524288,
+          "sha256": "5cc6302abf747901266771f6b51a47a2dccf2824cc97d88e91548541599db0fe"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-observed.memory.json",
+          "bytes": 46,
+          "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-button-unavailable.json",
+          "bytes": 12651,
+          "sha256": "ad209714c1a8acae64fdad0fef15ed14fb478ce3d792c81baf9e491ee519abbe"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-button-unavailable.bmp",
+          "bytes": 1136870,
+          "sha256": "c8fb9106848875c7d7214101a46068d39867b4ad6bc077584825c1be9657913d"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-button-unavailable.fastram",
+          "bytes": 4194304,
+          "sha256": "1fb7de3b42da1bff8d3092305d84ba9aa15a1c0fce709e74cbbbb534debefef7"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-button-unavailable.chipram",
+          "bytes": 524288,
+          "sha256": "fd2190219d833f694cef3a7556b294aae2cff82f937dc583ebf0a63f570b1902"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-button-unavailable.slowram",
+          "bytes": 524288,
+          "sha256": "5cc6302abf747901266771f6b51a47a2dccf2824cc97d88e91548541599db0fe"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v5/mui-menu-100-kickstart31/frame-047951-button-unavailable.memory.json",
+          "bytes": 46,
+          "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+        }
+      ]
+    },
+    {
+      "utility": "mui-icon-update-12",
+      "rom": "copperstart",
+      "status": "FAIL_INVALID_OBJECT_DISPATCH",
+      "scope": "Original notification setup uses image operand no longer live. Illegal instruction before native Window open. CopperStart field24163 PC0x10; native field17813 PC0x8.",
+      "fields": 24163,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-icon-update-12-copperstart.hdf.json",
+        "bytes": 66046,
+        "sha256": "2f3ffa2b5fb675ae2c32af1ce4ff872fbce36dc269a5bbb8b8cb6d906375f242"
+      },
+      "imageSha256": "cc6834928bbd01cba9636c8b32ef923f03b57a7cb8944947b807a67e21e5443f",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/frame-024163-final.json",
+          "bytes": 13399,
+          "sha256": "e43c8646fb0dbd7fc31bbca383167a9f46ba0b479da151a9a79b67d630801d69"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/frame-024163-final.bmp",
+          "bytes": 1136870,
+          "sha256": "d431d8cab80e8a7fe215bd467edb45627888ed001e5fea1571aa4d6b28bf2e1a"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/frame-024163-final.fastram",
+          "bytes": 4194304,
+          "sha256": "f3b9e6035a9d26c2b5e480daf72bd8aa3bb2c700a6995261599a23233fb78221"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/frame-024163-final.chipram",
+          "bytes": 524288,
+          "sha256": "891eb83c9a7f06d94776abbec08eb73052652327f25b9e0486fa22f2c8d4301a"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/frame-024163-final.slowram",
+          "bytes": 524288,
+          "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/frame-024163-final.memory.json",
+          "bytes": 46,
+          "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/result.json",
+          "bytes": 1309,
+          "sha256": "8ba4147b627ed9775762ea5bde0f168628477ea15052a0e4766b4341f27a0971"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-copperstart/forensics.json",
+          "bytes": 15505,
+          "sha256": "e611e355cf65208e89f21de7c804357e4b0d67dc4c1f970003643ecd697062a3"
+        }
+      ]
+    },
+    {
+      "utility": "mui-icon-update-12",
+      "rom": "kickstart31",
+      "status": "FAIL_INVALID_OBJECT_DISPATCH",
+      "scope": "Original notification setup uses image operand no longer live. Illegal instruction before native Window open. CopperStart field24163 PC0x10; native field17813 PC0x8.",
+      "fields": 17813,
+      "image": {
+        "path": "artifacts/mui-small-utilities-2026-11-01/images/mui-icon-update-12-kickstart31.hdf.json",
+        "bytes": 65427,
+        "sha256": "4cb4c908a19ba75340e3f9f30933aa3f4c7be8a249f30d8e0a696daf07095fde"
+      },
+      "imageSha256": "c5a391eb1c2624f7e9ae838f80fe8f1d60f434a31ca6e9357f3b7386a570f150",
+      "captures": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/frame-017813-final.json",
+          "bytes": 13403,
+          "sha256": "607d1f7f7abdfde62344496f6ab3962794adbf28cfed690f57b7b65a2c8c35ff"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/frame-017813-final.bmp",
+          "bytes": 1136870,
+          "sha256": "22f12a6efe927fb9bbab7681f3af54d48189d26bc49c1fe9c2975d7f4eb7423f"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/frame-017813-final.fastram",
+          "bytes": 4194304,
+          "sha256": "ab9668edf97bbdcd9d263ed3046f670580dd10c1f4d3cb6af0b0f74943c32b45"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/frame-017813-final.chipram",
+          "bytes": 524288,
+          "sha256": "abf0c7aad31520458a7b172aa5712bf0b1c3498cfbda091ab17c1ca23dd8d981"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/frame-017813-final.slowram",
+          "bytes": 524288,
+          "sha256": "fecf73e4660baf81765bf3fb57a88f5f59274e9a84c90baf6b5dfaf3209dc6d1"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/frame-017813-final.memory.json",
+          "bytes": 46,
+          "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+        }
+      ],
+      "otherEvidence": [
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/result.json",
+          "bytes": 1310,
+          "sha256": "c403a171894d7b022a44ca422b3e5a6140cfe04b38df483be9b16014c6847ef5"
+        },
+        {
+          "path": "artifacts/mui-small-utilities-2026-11-01/interaction-v4/mui-icon-update-12-kickstart31/forensics.json",
+          "bytes": 15575,
+          "sha256": "e04aef6b19104352f260a9645dc4de2e6d3e43dcf5829c8445ff79efca29c4dc"
+        }
+      ]
+    }
+  ],
+  "alternateStackNativeComparison": {
+    "alternate": {
+      "copperstart": {
+        "result": {
+          "protocol": "manual-stack-timer-v1",
+          "capture": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.fastram",
+          "resource": "0x430590",
+          "stage": 1,
+          "alternateStack": "0x4f96d0",
+          "oldSp": "0x4f9690",
+          "task": "0x42d0b0",
+          "recordedLower": "0x4f86c0",
+          "recordedUpper": "0x4f96cc",
+          "savedContext": "0x4fbeee",
+          "taskState": "04",
+          "verdict": "WAIT_DID_NOT_RETURN_WITHIN_CAPTURE",
+          "port": "0x498070",
+          "ioRequest": "0x497f90",
+          "openDeviceError": 0,
+          "ioError": "00",
+          "ioCommand": 9,
+          "ioFlags": "00",
+          "ioMessageType": "07",
+          "taskSignalWait": "0x1",
+          "taskSignalReceived": "0x2"
+        },
+        "evidence": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/probe-result.json",
+          "bytes": 718,
+          "sha256": "f9f652889e318b3f6d3af13fd30ecf21817ec431fe10c4bb7d64d8064104f796"
+        },
+        "captures": [
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.json",
+            "bytes": 933,
+            "sha256": "299cd3cb3aef6f09b1bc632845e836d706a65198d2e37626c471a56c8360cfa6"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.bmp",
+            "bytes": 1136870,
+            "sha256": "b73d103e19b91decc229c2b867fff714e60417809deb7af0a2d480c686249627"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.fastram",
+            "bytes": 4194304,
+            "sha256": "85d64dbb9a64a475a4d799135efb89d8d87f892d37e9b80efdb1eeb32f705f2b"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.chipram",
+            "bytes": 524288,
+            "sha256": "c223315299d12a6ed608658ecd8e987c5743a2ba34ceb1050226e0acd3f4bb8c"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.slowram",
+            "bytes": 524288,
+            "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/frame-005000-final.memory.json",
+            "bytes": 46,
+            "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+          }
+        ],
+        "runReceipt": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/copperstart/result.json",
+          "bytes": 1216,
+          "sha256": "26a53576cd1b1ca93c9a5e03b6cc9b360a8fc77db2d1228e669ce3e1ea60b41a"
+        }
+      },
+      "kickstart31": {
+        "result": {
+          "protocol": "manual-stack-timer-v1",
+          "capture": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.fastram",
+          "resource": "0x219118",
+          "stage": 3,
+          "alternateStack": "0x21a650",
+          "oldSp": "0x21a618",
+          "task": "0x20d448",
+          "recordedLower": "0x219650",
+          "recordedUpper": "0x21a650",
+          "savedContext": "0x20de6e",
+          "taskState": "04",
+          "verdict": "RETURNED_AND_STACK_FREED",
+          "port": "0x219198",
+          "ioRequest": "0x2191c0",
+          "openDeviceError": 0
+        },
+        "evidence": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/probe-result.json",
+          "bytes": 563,
+          "sha256": "cd6dba69396b6951fc44440d796f260c4bd05cbf23aa97375f75ca6c75d5dcbe"
+        },
+        "captures": [
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.json",
+            "bytes": 934,
+            "sha256": "ecfa049b094511031cbf59ffd42ec47d0edc4131d06e3e595875fa5f522f1fcb"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.bmp",
+            "bytes": 1136870,
+            "sha256": "22f12a6efe927fb9bbab7681f3af54d48189d26bc49c1fe9c2975d7f4eb7423f"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.fastram",
+            "bytes": 4194304,
+            "sha256": "f1eb50c026e40720c908f04a673ed650ccb7d1da89d857320f65c33195700aae"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.chipram",
+            "bytes": 524288,
+            "sha256": "fe98ea505118852264bd5514ea0e56905b33a0873332dfedafb8d4b3b27e3298"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.slowram",
+            "bytes": 524288,
+            "sha256": "ab701bac7e8deece61baaa73181ad5a619d09089ca630360c1791bb48a25b2ba"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/frame-005000-final.memory.json",
+            "bytes": 46,
+            "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+          }
+        ],
+        "runReceipt": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-v2/kickstart31/result.json",
+          "bytes": 1217,
+          "sha256": "3a8a44791a319d8a9e05d74fbb233354ef5b5e883e612b992b829cfc59fed024"
+        }
+      }
+    },
+    "normalControl": {
+      "copperstart": {
+        "result": {
+          "protocol": "manual-stack-timer-v1",
+          "capture": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.fastram",
+          "resource": "0x430590",
+          "stage": 3,
+          "alternateStack": "0x4f8660",
+          "oldSp": "0x4994c0",
+          "task": "0x42d0b0",
+          "recordedLower": "0x4984f0",
+          "recordedUpper": "0x4994fc",
+          "savedContext": "0x48b20a",
+          "taskState": "04",
+          "verdict": "RETURNED_AND_STACK_FREED",
+          "port": "0x498070",
+          "ioRequest": "0x497f90",
+          "openDeviceError": 0
+        },
+        "evidence": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/probe-result.json",
+          "bytes": 571,
+          "sha256": "df30a9f79600a3abe0baea595e2cc939e6c8f7dc35f656222e16aa473a960e4d"
+        },
+        "captures": [
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.json",
+            "bytes": 932,
+            "sha256": "67d0e212cc08b23e2f5bd0cf0b435a729910cece6f31721b520cb372b3dcb45c"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.bmp",
+            "bytes": 1136870,
+            "sha256": "d431d8cab80e8a7fe215bd467edb45627888ed001e5fea1571aa4d6b28bf2e1a"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.fastram",
+            "bytes": 4194304,
+            "sha256": "e59c3e09470cf43faa57a61c9e6d66e17a727f485e0f745e953023673a6faa07"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.chipram",
+            "bytes": 524288,
+            "sha256": "40ec749e2806953518a44a54f0f114961e0fad63eed67790e2302ccb728d1386"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.slowram",
+            "bytes": 524288,
+            "sha256": "e8fdd62b4e453f54a7423b6304f9107aa9907a78fd5c97b47ad5210f7adf02ca"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/frame-005000-final.memory.json",
+            "bytes": 46,
+            "sha256": "aa512f39057b78e6c4e4ebe4ba6039ddce4abb6838d8d7817f56bba1f9dbbcec"
+          }
+        ],
+        "runReceipt": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/copperstart/result.json",
+          "bytes": 1216,
+          "sha256": "e410beebe3a0c01b135857ae61935f000bd2f24e3e9b75834e825325ad874896"
+        }
+      },
+      "kickstart31": {
+        "result": {
+          "protocol": "manual-stack-timer-v1",
+          "capture": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.fastram",
+          "resource": "0x219118",
+          "stage": 3,
+          "alternateStack": "0x21a648",
+          "oldSp": "0x21a610",
+          "task": "0x20d448",
+          "recordedLower": "0x219648",
+          "recordedUpper": "0x21a648",
+          "savedContext": "0x20de6e",
+          "taskState": "04",
+          "verdict": "RETURNED_AND_STACK_FREED",
+          "port": "0x219198",
+          "ioRequest": "0x2191c0",
+          "openDeviceError": 0
+        },
+        "evidence": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/probe-result.json",
+          "bytes": 571,
+          "sha256": "1e10fa895ba133b7d1e929049396d558910edb1b6486db52600ece48943d5a73"
+        },
+        "captures": [
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.json",
+            "bytes": 934,
+            "sha256": "ecfa049b094511031cbf59ffd42ec47d0edc4131d06e3e595875fa5f522f1fcb"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.bmp",
+            "bytes": 1136870,
+            "sha256": "22f12a6efe927fb9bbab7681f3af54d48189d26bc49c1fe9c2975d7f4eb7423f"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.fastram",
+            "bytes": 4194304,
+            "sha256": "30683c4763ceb8b6f938325cb8cb26af653de24dbe48d05e1414da92f2f2642d"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.chipram",
+            "bytes": 524288,
+            "sha256": "fe98ea505118852264bd5514ea0e56905b33a0873332dfedafb8d4b3b27e3298"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.slowram",
+            "bytes": 524288,
+            "sha256": "ab701bac7e8deece61baaa73181ad5a619d09089ca630360c1791bb48a25b2ba"
+          },
+          {
+            "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/frame-005000-final.memory.json",
+            "bytes": 46,
+            "sha256": "388e674b323578762075fdbff9177f706315a4d9171530d5c177419b3188ab2e"
+          }
+        ],
+        "runReceipt": {
+          "path": "artifacts/mui-small-utilities-2026-11-01/stack-timer-control-v1/kickstart31/result.json",
+          "bytes": 1217,
+          "sha256": "e2f483acb291c4a092313fd3ced0b7fa8a7b84d08e8acb267675b7ac3aa4849f"
+        }
+      }
+    }
+  },
+  "excludedExperiments": [
+    "Initial CopperStart MUImem image omitted CopperFfp; its blank result does not qualify MUI. Corrected mathffp37 run is selected.",
+    "v2 fault harness failed converting negative CPU sentinel; unavailable native coverage.",
+    "v3 fault-stop treated ordinary privilege traps as failures; excluded.",
+    "Native-close MUIMenu v1 correctly demonstrates intentional hide, not shutdown. Separate hardware QUIT replays selected.",
+    "DOS Delay alternate-stack probe returns on both but CopperStart implementation does not establish actual timed suspension.",
+    "Initial timer v1 omitted CopperGui, so CopperStart could not open timer.device; excluded. Timer v2 and normal controls install the provider first."
+  ],
+  "unavailableCoverage": [
+    "MUImem display/refresh/memory values, Radio control and MUI3 features",
+    "MUIJoin split/join/file integrity and requesters",
+    "MUIMenu command execution, settings/editor/Popasl and full repeated-reopen workflow",
+    "Icon Update source/target image replacement, metadata preservation, save/reload, drag/drop and ARexx",
+    "Complete keyboard, MUI API or Workbench compatibility"
+  ],
+  "implementationChanges": "None in CopperOS or CopperStart; diagnostic harness/image/inspection and corpus documentation only",
+  "harnessBinaries": [
+    {
+      "version": 1,
+      "path": "artifacts/mui-small-utilities-harness-v1/bin/MuiUtilityInteraction/release/MuiUtilityInteraction.dll",
+      "bytes": 45568,
+      "sha256": "0e352017cbd15993e94345e8a50e60902a1ae97cd659f415dae0b306c13ccbaa"
+    },
+    {
+      "version": 4,
+      "path": "artifacts/mui-small-utilities-harness-v4/bin/MuiUtilityInteraction/release/MuiUtilityInteraction.dll",
+      "bytes": 51712,
+      "sha256": "51da4321fd2a90e834f4a863713037b9cabac0e63f29fb55e301f841c0d5955a"
+    },
+    {
+      "version": 5,
+      "path": "artifacts/mui-small-utilities-harness-v5/bin/MuiUtilityInteraction/release/MuiUtilityInteraction.dll",
+      "bytes": 53760,
+      "sha256": "1434c0ef26ec90b1acb23ca9328cdecaf87049c60055cacaa50f657ef5b6f915"
+    }
+  ]
+}

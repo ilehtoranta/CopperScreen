@@ -3,7 +3,7 @@
   "collectionId": "amiga-utilities-v1",
   "reviewedDate": "2026-11-01",
   "purpose": "Local manual compatibility and CopperStart/native Kickstart A/B exploration. Acquisition is not compatibility evidence.",
-  "executionStatus": "original-twelve-bounded-checks-complete; mui-calc-native-rpn-close-default-background-pass-5m",
+  "executionStatus": "original-twelve-bounded-checks-complete; mui-calc-native-rpn-close-default-background-pass-5m; four-small-mui-tools-ab-tested-with-compatibility-blockers",
   "applications": [
     {
       "id": "mui-calc-125",
@@ -415,6 +415,154 @@
           "retrievedUtc": "2026-10-26T22:37:55.0103979Z"
         }
       ]
+    },
+    {
+      "id": "mui-mem-11",
+      "name": "MUImem",
+      "version": "1.1",
+      "rights": "Roland Fulde identifies MUImem as freeware. Preserve the complete original archive and its documentation; no open-source licence is claimed.",
+      "requirements": "Original MUI version 10 request; experimental CopperOS classic 12.1 profile, Radio.mui, graphics/icon/mathffp and authored 8 KiB launch stack. CopperStart installs its guest CopperFfp prerequisite. Retina disabled. Bounded native OCS workflow passes; exhaustive Radio modes unqualified.",
+      "scenario": "CopperStart stalls during GetDiskObject on its manually allocated stack even after installing mathffp.library 37. An isolated alternate-stack timer WaitIO fails to resume on CopperStart while normal-stack controls and Kickstart pass. Kickstart explicitly rejects the MUI library version: binary requires 10, current classic profile is 4; requester text says V12+. No memory UI/refresh or close qualification.",
+      "sourceUrl": "https://aminet.net/package/util/wb/MUImem",
+      "lane": "copperos-mui-development",
+      "executionStatus": "bounded-functional-workflow-and-cleanup-pass-both-roms",
+      "evidenceDocument": "docs/UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md",
+      "assets": [
+        {
+          "file": "originals/MUImem.lha",
+          "url": "https://aminet.net/util/wb/MUImem.lha",
+          "bytes": 8747,
+          "sha256": "d453d47e7030db3c9289da08c15982135a465d6d05ab9eced6d212949db874dc"
+        },
+        {
+          "file": "originals/MUImem.readme",
+          "url": "https://aminet.net/util/wb/MUImem.readme",
+          "bytes": 1663,
+          "sha256": "a4d1f1876cb75426a03649e85d95c1857c528e5fe8d0659b48bcd6b322e592ea"
+        }
+      ],
+      "distributionInspection": {
+        "archiveMembers": 5,
+        "allMemberCrcsVerified": true,
+        "binary": {
+          "path": "MUImem/MUImem",
+          "bytes": 21756,
+          "sha256": "e8d0322f300f865cc7f8f6c473f1255dd9b5f4e3b7b36bdd0cd36f3a914fba02"
+        }
+      },
+      "plannedScenario": "Observe Chip/Fast memory values and refresh, change guest memory use with a bounded fixture, then close/reopen and inspect MUI/native-window cleanup. Compare with each ROM's guest AvailMem results; do not require identical absolute free-memory totals across OS implementations.",
+      "historicalExecutionStatus": "startup-blocked-5m-copperstart-icon-stack-kick31-mui-version"
+    },
+    {
+      "id": "mui-join-10",
+      "name": "MUIJoin",
+      "version": "1.0",
+      "rights": "Roberto Fabbri's emailware. Guide permits intact noncommercial redistribution with all original contents; commercial distribution requires written permission. No messages are sent as part of acquisition.",
+      "requirements": "Distribution requires OS 2.0+ and MUI 2.3+; original binary requests MUI major 8 and asl.library. CopperOS classic 12.1 with native String/Popasl and authored 8 KiB launch stack. Preferences and actual Split/rejoin bytes pass in the bounded diagnostic profile.",
+      "scenario": "Original binary requests muimaster.library version 8; both ROMs reject CopperOS classic profile version 4 and print Cannot Open MUIMaster Library. Kickstart reports exit code 20. No split/join, requester or data-integrity pass.",
+      "sourceUrl": "https://aminet.net/package/util/wb/MUIJoin10",
+      "lane": "copperos-mui-development",
+      "executionStatus": "bounded-functional-workflow-and-cleanup-pass-both-roms",
+      "evidenceDocument": "docs/UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md",
+      "assets": [
+        {
+          "file": "originals/MUIJoin10.lha",
+          "url": "https://aminet.net/util/wb/MUIJoin10.lha",
+          "bytes": 21652,
+          "sha256": "18e5521097e1ae1eea665e36ca3406bb850c508b07a04984e1a96ab91d36de75"
+        },
+        {
+          "file": "originals/MUIJoin10.readme",
+          "url": "https://aminet.net/util/wb/MUIJoin10.readme",
+          "bytes": 402,
+          "sha256": "086bf4ef5c9e3472304d12c8405df1a96b4ed1c334dce10aa218d737550dde65"
+        }
+      ],
+      "distributionInspection": {
+        "archiveMembers": 7,
+        "allMemberCrcsVerified": true,
+        "binary": {
+          "path": "MUIJoin/MUIJoin",
+          "bytes": 22220,
+          "sha256": "783e4eb88aea56af5abf3415e9afbde3c20791838d56eb9c750f1d0d354c011d"
+        }
+      },
+      "plannedScenario": "Use generated scratch files: split a deterministic 8193-byte input into small parts, join in order and compare the complete output hash and byte count. Exercise list ordering, file requester cancellation and normal quit. No personal files are used.",
+      "historicalExecutionStatus": "startup-fail-5m-mui-version-both-roms"
+    },
+    {
+      "id": "mui-menu-100",
+      "name": "MUIMenu",
+      "version": "1.00",
+      "rights": "Giuseppe Chiesa's giftware. Documentation permits use without restrictions and redistribution of the complete unchanged MUIMenu.lha archive. Included source is retained as supplied; no separate open-source licence is inferred.",
+      "requirements": "Distribution requires WB 2.0+ and MUI 2.0+/classes. CopperOS classic 12.1 provides Popasl and classic dynamic Family membership. Authored 4 KiB launch stack. Exactly one command execution and complete cleanup pass; exhaustive editor coverage unqualified.",
+      "scenario": "Both ROMs open/render the original main window, but the configured launcher group remains detached because OM_ADDMEMBER is not routed. Native close intentionally hides. Hardware QUIT removes the native window and returns CLI code 0 on both, yet 15 MUI objects and 16 classes remain with zero dispatch depth/open count at field 100001. Launcher execution, editor/Popasl, settings and full functionality remain unavailable.",
+      "sourceUrl": "https://aminet.net/package/util/wb/MUIMenu",
+      "lane": "copperos-mui-development",
+      "executionStatus": "bounded-functional-workflow-and-cleanup-pass-both-roms",
+      "evidenceDocument": "docs/UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md",
+      "assets": [
+        {
+          "file": "originals/MUIMenu.lha",
+          "url": "https://aminet.net/util/wb/MUIMenu.lha",
+          "bytes": 29280,
+          "sha256": "20fa514db62af45261ba0ab411308fe3767e4938d0098073e6c36ced6e090c94"
+        },
+        {
+          "file": "originals/MUIMenu.readme",
+          "url": "https://aminet.net/util/wb/MUIMenu.readme",
+          "bytes": 400,
+          "sha256": "a3d6d2e85546e3d25368965db1f8681a4d13bcb0e7c4f29fb3a4c0cfa1389143"
+        }
+      ],
+      "distributionInspection": {
+        "archiveMembers": 7,
+        "allMemberCrcsVerified": true,
+        "binary": {
+          "path": "MUIMenu/MUIMenu",
+          "bytes": 22620,
+          "sha256": "04507b419b7157ec31f03d2f19b634da842532726738bc5c50c1e0c41d156a73"
+        }
+      },
+      "plannedScenario": "Create two launcher buttons targeting harmless guest fixture commands, activate each and verify distinct output/exit witnesses. Exercise command strings, dynamic layout, settings/requester cancellation and repeated close/reopen.",
+      "historicalExecutionStatus": "partial-ui-fail-dynamic-membership-and-cleanup-both-roms"
+    },
+    {
+      "id": "mui-icon-update-12",
+      "name": "MUI Icon Update",
+      "version": "1.2",
+      "rights": "Robert Poole's giftware. Documentation permits distribution of the complete unchanged archive. Modified sources/binaries may not be redistributed; recompilation is for personal use only. Keep all original source, documentation, icons and support files.",
+      "requirements": "Distribution requires MUI 2.0, Popasl and icon.library. CopperOS classic 12.1 requester-fixed v49; authored 8 KiB launch stack and original detached worker stack. CopperStart additionally loads the isolated classic guest icon writer; Kickstart uses its own icon.library. Actual update and cleanup pass; ARexx, full Workbench refresh and newer formats unqualified.",
+      "scenario": "Both ROMs construct an incomplete tree with missing Popasl support, then fail while original notification setup dispatches on a no-longer-live image object. First RAM illegal instruction: CopperStart field 24163 PC 0x10; Kickstart field 17813 PC 0x8. No native window opens and no icon-operation or cleanup pass is claimed.",
+      "sourceUrl": "https://aminet.net/package/util/wb/MUI_IconUpd12",
+      "lane": "copperos-mui-development",
+      "executionStatus": "bounded-functional-workflow-and-cleanup-pass-both-roms",
+      "evidenceDocument": "docs/UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md",
+      "assets": [
+        {
+          "file": "originals/MUI_IconUpd12.lha",
+          "url": "https://aminet.net/util/wb/MUI_IconUpd12.lha",
+          "bytes": 26479,
+          "sha256": "583303d4df9ad276876c80d3687bb553344f88f8acd9cccdee88a9ad2df0d250"
+        },
+        {
+          "file": "originals/MUI_IconUpd12.readme",
+          "url": "https://aminet.net/util/wb/MUI_IconUpd12.readme",
+          "bytes": 718,
+          "sha256": "d5b3ac589dc71a57c311977801dfc817434cdd90c09cd94c398e1a07629b79c4"
+        }
+      ],
+      "distributionInspection": {
+        "archiveMembers": 14,
+        "allMemberCrcsVerified": true,
+        "binary": {
+          "path": "MUI_IconUpdate",
+          "bytes": 19260,
+          "sha256": "361a2aeb15040b8d2491df1c18a870289b6f3f45e6abb56f8bfb736b71f35515"
+        }
+      },
+      "plannedScenario": "Use generated/copied scratch .info files only. Copy source icon imagery to a destination while preserving its tooltypes, default tool and other selected attributes; reload with icon.library and verify image/metadata. Exercise checkboxes, file selection, cancellation and normal quit.",
+      "historicalExecutionStatus": "startup-fail-invalid-object-dispatch-both-roms"
     }
   ],
   "readyImages": [
@@ -436,5 +584,6 @@
     }
   ],
   "latestEvidenceDocument": "docs/UTILITY_FINAL_SWEEP_2026-10-31.json",
-  "muiEvidenceDocument": "docs/UTILITY_MUI_BACKFILL_FIX_2026-11-01.md"
+  "muiEvidenceDocument": "docs/UTILITY_MUI_BACKFILL_FIX_2026-11-01.md",
+  "muiSmallUtilitiesEvidenceDocument": "docs/UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md"
 }

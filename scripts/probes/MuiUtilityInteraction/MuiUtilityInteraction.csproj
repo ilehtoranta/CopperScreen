@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <FrozenRunnerDirectory Condition="'$(FrozenRunnerDirectory)' == ''">../../../artifacts/mui-calc-native-interaction-v4/bin/MuiCalcNativeInteraction/release</FrozenRunnerDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Freeze the same built engine/dependencies used by the native runner. -->
+    <Reference Include="CopperMod.Amiga.Lightweight">
+      <HintPath>$(FrozenRunnerDirectory)/CopperMod.Amiga.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="Copper68k">
+      <HintPath>$(FrozenRunnerDirectory)/Copper68k.dll</HintPath>
+    </Reference>
+    <Reference Include="CopperDisk">
+      <HintPath>$(FrozenRunnerDirectory)/CopperDisk.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -21,8 +21,17 @@ background pen. Menus, paging, keyboard, full MUI API and full Workbench desktop
 coverage remain unqualified. The retained 3 MiB CopperStart library-load failure
 remains FAIL. See the [reviewed receipt](UTILITY_MUI_BACKFILL_FIX_2026-11-01.json).
 
+Four [small MUI utilities added on 2026-11-01](UTILITY_MUI_SMALL_TOOLS_2026-11-01.md)
+are MUImem 1.1, MUIJoin 1.0, MUIMenu 1.00 and MUI Icon Update 1.2. Their
+complete archives/readmes and all member CRCs are verified. All four have now
+been [tested on CopperStart and Kickstart 3.1](UTILITY_MUI_SMALL_TOOLS_AB_2026-11-01.md)
+with CopperOS MUI. After the [compatibility fixes and retests](UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md),
+all four pass their exercised functional workflows on both ROMs. Per-build
+identities and retained failures are recorded separately; this is not full MUI
+conformance, exhaustive utility coverage or performance acceptance.
+
 This is a local collection for manual emulation checks and CopperStart versus
-native Kickstart comparisons: **13 utilities, 16 original downloads, four ADFs
+native Kickstart comparisons: **17 utilities, 24 original downloads, four ADFs
 available to mount**. Downloads and archive integrity were checked. The
 [first native Kickstart 1.3 exploration](UTILITY_VALIDATION_2026-10-27.md)
 records the four ADFs' initial checks. The subsequent
@@ -115,6 +124,10 @@ run alone does not qualify a corresponding CopperStart configuration.
 | Utility and source | Requirements from the distribution | Suggested scenario |
 | --- | --- | --- |
 | [MUI Calc 1.25](https://aminet.net/package/util/wb/MUI_Calc125) | MUI 2.0; retain all seven package files. CopperOS classic-client 68000 MUI profile and rebuilt CopperStart GUI provider. Separate 5 MiB diagnostic; retained 3 MiB load failure remains FAIL. See [current evidence](UTILITY_MUI_BACKFILL_FIX_2026-11-01.md). | PASS on both ROMs: physical mouse `5 ENTER 6 ENTER +` visibly produces 11; native window unlinking and empty MUI registries after settling. CopperStart restores the bare-screen background with zero stale pixels. Menus, paging, keyboard and complete MUI/Workbench coverage remain unqualified. |
+| [MUImem 1.1](https://aminet.net/package/util/wb/MUImem) | MUI binary requires version 10 (requester says V12+); Radio.mui, graphics/icon/mathffp; Retina disabled. | PASS on both ROMs: labels/maximum counters, original helper and stack checks, close and full cleanup. Retina and exhaustive Radio modes remain unqualified. See [fixed A/B evidence](UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md). |
+| [MUIJoin 1.0](https://aminet.net/package/util/wb/MUIJoin10) | OS 2.0+, MUI 2.3+; binary requires MUI major version 8; ASL. | PASS on both ROMs: preferences preservation, actual Split/rejoin file bytes and full cleanup. Periodic fixture limits remain; exhaustive ordering is unqualified. See [fixed A/B evidence](UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md). |
+| [MUIMenu 1.00](https://aminet.net/package/util/wb/MUIMenu) | WB 2.0+, MUI 2.0+/classes, Popasl editor and classic OM_ADDMEMBER. | PASS on both ROMs: exactly one actual command execution, quit and full cleanup. Exhaustive editor/options coverage remains unqualified. See [fixed A/B evidence](UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md). |
+| [MUI Icon Update 1.2](https://aminet.net/package/util/wb/MUI_IconUpd12) | MUI 2.0, Popasl.mui, icon.library; ARexx optional. | PASS on both ROMs: actual source image/type copied, target position/stack retained, source unchanged and full cleanup. CopperStart uses a retained guest classic-icon writer; Workbench refresh, newer formats and ARexx remain unqualified. See [fixed A/B evidence](UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md). |
 | [Personal Paint 7.1c](https://www.amigaforever.com/classic/download/) | Manual section 1.2 requires at least 2 MiB RAM; prefers 1 MiB Chip. Kickstart 1.2+ and Workbench 1.3 libraries. Beyond the qualified 1 MiB A500 profile. | Draw/fill, brush copy/rotate, palette edits, undo, file requester, original ILBM save/reload and cold-boot readback. Record hardware/software blitter settings. |
 | [PPShow 4.0](https://aminet.net/package/gfx/show/PPShow40) | Kickstart and Workbench 2.0+; ReqTools and PowerPacker libraries included. DataTypes optional. | Original ILBM display, palette cycling, small generated ANIM5, cancel requester and return to desktop. |
 | [DiskMaster 2.5.30a V37](https://aminet.net/package/util/dir/DiskMasterV37) | Readme says Kickstart V37+; Aminet architecture field says OS 2.1+. Resolve library requirements before selecting an OS 2.04 reference; ReqTools required. | Dual directory listing, sorting, create/rename/copy/delete scratch files and cancel requesters; verify file bytes after reboot. |

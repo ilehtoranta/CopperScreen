@@ -1,0 +1,3306 @@
+{
+  "schemaVersion": 1,
+  "protocol": "small-mui-fix-investigation-v13",
+  "profile": "a500-ocs-5m-diagnostic-v1",
+  "status": "PASS_BOUNDED_FOUR_UTILITY_AB_WORKFLOWS",
+  "report": "docs/UTILITY_MUI_SMALL_TOOLS_FIX_2026-11-01.md",
+  "library": {
+    "bytes": 1260812,
+    "sha256": "6133bd60ffcc84b0480271d94aaad10abff110a4411867c3cdbf62baf89e36ba",
+    "version": 12,
+    "revision": 1
+  },
+  "runs": [
+    {
+      "utility": "mui-mem-11",
+      "rom": "copperstart",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-mem-11-copperstart/result.json",
+      "archiveSha256": "d453d47e7030db3c9289da08c15982135a465d6d05ab9eced6d212949db874dc",
+      "imageSha256": "ddd3378d9d314846db941bc34e247ea7fe9c004cadb62d5400902dcd5e8ea290",
+      "status": "PASS",
+      "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+      "completedFields": 188551,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "f4790c40fa6d340a91f4707d7eff5e5aba5aced16e0c84f22b33ab284859e052",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true
+    },
+    {
+      "utility": "mui-mem-11",
+      "rom": "kickstart31",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-mem-11-kickstart31/result.json",
+      "archiveSha256": "d453d47e7030db3c9289da08c15982135a465d6d05ab9eced6d212949db874dc",
+      "imageSha256": "304acfd8a09b11c50147cc20a74a7d8a8c8a43ea1c511f692f92d1500a13899e",
+      "status": "PASS",
+      "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+      "completedFields": 166051,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true
+    },
+    {
+      "utility": "mui-join-10",
+      "rom": "copperstart",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-join-10-copperstart/result.json",
+      "archiveSha256": "18e5521097e1ae1eea665e36ca3406bb850c508b07a04984e1a96ab91d36de75",
+      "imageSha256": "73c7ea8328e02b2d384fdafe6de363a79ca57bc05737fadedc520b5b6f7810e5",
+      "status": "PASS",
+      "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+      "completedFields": 47801,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "f4790c40fa6d340a91f4707d7eff5e5aba5aced16e0c84f22b33ab284859e052",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true
+    },
+    {
+      "utility": "mui-join-10",
+      "rom": "kickstart31",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-join-10-kickstart31/result.json",
+      "archiveSha256": "18e5521097e1ae1eea665e36ca3406bb850c508b07a04984e1a96ab91d36de75",
+      "imageSha256": "33688226fe2c118b4e22d045f73e3b599e602441d99319773b342829ae4a8d6f",
+      "status": "PASS",
+      "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+      "completedFields": 41451,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true
+    },
+    {
+      "utility": "mui-menu-100",
+      "rom": "copperstart",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-menu-100-copperstart/result.json",
+      "archiveSha256": "20fa514db62af45261ba0ab411308fe3767e4938d0098073e6c36ced6e090c94",
+      "imageSha256": "b7ecd78518d419d4cda5b2c3a55c82f899d0e0a099e39302034e2f1058844d64",
+      "status": "PASS",
+      "scope": "CONFIGURED_MENU_LAUNCH_AND_QUIT",
+      "completedFields": 102601,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "f4790c40fa6d340a91f4707d7eff5e5aba5aced16e0c84f22b33ab284859e052",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true,
+      "commandWitness": {
+        "protocol": "mui-menu-native-launch-witness-v1",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\runs-v13\\mui-menu-100-copperstart\\frame-102601-final.fastram",
+        "resources": [
+          {
+            "address": "0x62e1f0",
+            "launches": 1,
+            "task": "0x62a180"
+          }
+        ],
+        "verdict": "PASS_COMMAND_EXECUTED_ONCE"
+      }
+    },
+    {
+      "utility": "mui-menu-100",
+      "rom": "kickstart31",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-menu-100-kickstart31/result.json",
+      "archiveSha256": "20fa514db62af45261ba0ab411308fe3767e4938d0098073e6c36ced6e090c94",
+      "imageSha256": "1746229aee07535c446ed64b2ffe92fbcd555dd9cdba169ffb08bd138176f531",
+      "status": "PASS",
+      "scope": "CONFIGURED_MENU_LAUNCH_AND_QUIT",
+      "completedFields": 94851,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true,
+      "commandWitness": {
+        "protocol": "mui-menu-native-launch-witness-v1",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\runs-v13\\mui-menu-100-kickstart31\\frame-094851-final.fastram",
+        "resources": [
+          {
+            "address": "0x34cba0",
+            "launches": 1,
+            "task": "0x34b620"
+          }
+        ],
+        "verdict": "PASS_COMMAND_EXECUTED_ONCE"
+      }
+    },
+    {
+      "utility": "mui-icon-update-12",
+      "rom": "copperstart",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-icon-update-12-copperstart/result.json",
+      "archiveSha256": "583303d4df9ad276876c80d3687bb553344f88f8acd9cccdee88a9ad2df0d250",
+      "imageSha256": "41d093fbe9dacc0bcf02fc5669a5b1f858742a71af667f00816ad1f896ca4738",
+      "status": "PASS",
+      "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+      "completedFields": 110001,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "f4790c40fa6d340a91f4707d7eff5e5aba5aced16e0c84f22b33ab284859e052",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true
+    },
+    {
+      "utility": "mui-icon-update-12",
+      "rom": "kickstart31",
+      "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/runs-v13/mui-icon-update-12-kickstart31/result.json",
+      "archiveSha256": "583303d4df9ad276876c80d3687bb553344f88f8acd9cccdee88a9ad2df0d250",
+      "imageSha256": "7f31a0280b98dc9d99e707d739583985c1fb8c09a08f1d75b2c97de74de47c84",
+      "status": "PASS",
+      "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+      "completedFields": 94901,
+      "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+      "romSha256": "8c8a0cf04f91b88eaf0c4f1126041987067e2286a8ee590bdbae447a8000c5ee",
+      "finalObjects": 0,
+      "finalClasses": 0,
+      "finalDepth": 0,
+      "finalActiveOperations": 0,
+      "nativeWindowUnlinked": true
+    }
+  ],
+  "knownIssues": [
+    "No remaining failure in the exercised workflows; see explicit scope limits."
+  ],
+  "unqualifiedFunctions": [
+    "Complete MUI conformance and exhaustive utility option coverage",
+    "Nonperiodic/reordered MUIJoin fixture coverage",
+    "Exhaustive MUImem Radio interaction and all live counter modes",
+    "Workbench icon refresh notification and newer icon file formats",
+    "Production ROM qualification and host performance acceptance"
+  ],
+  "hostTests": {
+    "muiClassicPassed": 3935,
+    "muiClassicSkipped": 0,
+    "stackGateBuilderPassed": 26,
+    "copperStartFocusedPassed": 46,
+    "muiDefaultPassed": 3933,
+    "muiDefaultSkipped": 0,
+    "copperStartMemoryVectorContextPassed": 25
+  },
+  "productionBuild": {
+    "status": "PASS",
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "artifacts/mui-small-utilities-fix-2026-11-01/production-build-v18.log"
+  },
+  "guestProviders": [
+    {
+      "protocol": "mui-library-presence-v1",
+      "capture": "artifacts\\mui-small-utilities-fix-2026-11-01\\library-presence-v1\\copperstart\\frame-005000-final.fastram",
+      "verdict": "COMPLETE",
+      "libraries": [
+        {
+          "name": "asl.library",
+          "opened": true,
+          "version": 40,
+          "revision": 6
+        },
+        {
+          "name": "keymap.library",
+          "opened": true,
+          "version": 40,
+          "revision": 0
+        },
+        {
+          "name": "mathtrans.library",
+          "opened": true,
+          "version": 37,
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "protocol": "mui-library-presence-v1",
+      "capture": "artifacts\\mui-small-utilities-fix-2026-11-01\\library-presence-v1\\kickstart31\\frame-005000-final.fastram",
+      "verdict": "COMPLETE",
+      "libraries": [
+        {
+          "name": "asl.library",
+          "opened": true,
+          "version": 40,
+          "revision": 6
+        },
+        {
+          "name": "keymap.library",
+          "opened": true,
+          "version": 40,
+          "revision": 4
+        },
+        {
+          "name": "mathtrans.library",
+          "opened": true,
+          "version": 37,
+          "revision": 1
+        }
+      ]
+    }
+  ],
+  "followUpCandidates": [
+    {
+      "id": "popasl-v24",
+      "status": "NATIVE_REBUILD_RUNNING",
+      "scope": "native Family ownership for worker completion",
+      "log": "../CopperOS/artifacts/mui-small-tools-native-v24-popasl.log",
+      "watcherPid": 34740,
+      "watcherScript": "artifacts\\mui-small-utilities-fix-2026-11-01\\run-popasl-v24.ps1"
+    },
+    {
+      "id": "availmem-rom-v24",
+      "status": "NATIVE_PROBE_PASS_MUIMEM_RETEST_RUNNING",
+      "romSha256": "396c58ee218967d79bfdecbe709ac0fe05007491c4b136e4c07cd1df60fa36de",
+      "bytes": 524288,
+      "jobs": "artifacts\\mui-small-utilities-fix-2026-11-01\\availmem-rom-v24-jobs.json"
+    }
+  ],
+  "functionalFollowUp": {
+    "copperstart": {
+      "equalSize": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\equal-v19\\copperstart\\result.json",
+        "result": {
+          "schemaVersion": 9,
+          "protocol": "mui-utility-native-input-v10",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": null,
+          "romSha256": "F4790C40FA6D340A91F4707D7EFF5E5ABA5ACED16E0C84F22B33AB284859E052",
+          "imageSha256": "AEBD0A5650E45D3761005B5F0E1DD52D41A065C591686BE259DE93D95326DFD6",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 240000,
+          "reason": "MAX_FIELDS",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": false,
+          "requesterWindow": 0,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 0,
+              "exceptionVector": 4,
+              "pc": 16298790,
+              "sp": 524280
+            },
+            {
+              "frame": 24,
+              "exceptionVector": 8,
+              "pc": 16747160,
+              "sp": 4342100
+            },
+            {
+              "frame": 127451,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 132501,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 132751,
+              "phase": "close-press",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 133301,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "cleanup",
+          "action": 0,
+          "finalObjects": 106,
+          "finalClasses": 19,
+          "finalDepth": 1,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 6741904,
+          "originalScreen": 6739536,
+          "nativeWindowUnlinked": null
+        }
+      },
+      "initialTyping": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\keyboard-v18\\copperstart\\result.json",
+        "result": {
+          "schemaVersion": 8,
+          "protocol": "mui-utility-native-input-v9",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": null,
+          "romSha256": "F4790C40FA6D340A91F4707D7EFF5E5ABA5ACED16E0C84F22B33AB284859E052",
+          "imageSha256": "F5ECBB3C5DEC4731BB60D49A121F609241EC2F69DF57D16EFB05452A30961887",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 150201,
+          "reason": "STRING_INPUT_MISMATCH",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "scope": "HARDWARE_STRING_TEST_RETURN_AND_CLOSE",
+          "stringInputPassed": false,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 0,
+              "exceptionVector": 4,
+              "pc": 16298790,
+              "sp": 524280
+            },
+            {
+              "frame": 24,
+              "exceptionVector": 8,
+              "pc": 16747160,
+              "sp": 4342100
+            },
+            {
+              "frame": 86101,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 91151,
+              "phase": "string-aim",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 91651,
+              "phase": "string-press",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 92701,
+              "phase": "string-focused",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 94751,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 95801,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 96851,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 97901,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 98951,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 100001,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 101051,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 102101,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 103151,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 104201,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 105251,
+              "phase": "string-verify",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 150201,
+              "operation": "hardware-string-input",
+              "expected": "test",
+              "actual": "ttttest",
+              "passed": false
+            }
+          ],
+          "phase": "string-verify",
+          "action": 0,
+          "finalObjects": 51,
+          "finalClasses": 19,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 6658944,
+          "originalScreen": 6639840,
+          "nativeWindowUnlinked": null
+        }
+      },
+      "labelGeometry": {
+        "protocol": "muimem-topaz8-label-geometry-v1",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\equal-v19\\copperstart\\frame-132501-observed.json",
+        "scope": "KNOWN_STATIC_LABEL_WIDTHS_AND_HEADER_SEPARATION_ONLY",
+        "observations": [
+          {
+            "label": "Chip",
+            "expectedMinimumWidth": 32,
+            "matches": [
+              {
+                "object": "0x64ae9c",
+                "left": 108,
+                "top": 70,
+                "width": 32,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Fast",
+            "expectedMinimumWidth": 32,
+            "matches": [
+              {
+                "object": "0x64dfec",
+                "left": 180,
+                "top": 70,
+                "width": 32,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Total",
+            "expectedMinimumWidth": 40,
+            "matches": [
+              {
+                "object": "0x65113c",
+                "left": 248,
+                "top": 70,
+                "width": 40,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Available",
+            "expectedMinimumWidth": 72,
+            "matches": [
+              {
+                "object": "0x6487cc",
+                "left": 16,
+                "top": 80,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "In-Use",
+            "expectedMinimumWidth": 48,
+            "matches": [
+              {
+                "object": "0x6490ec",
+                "left": 16,
+                "top": 90,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Largest",
+            "expectedMinimumWidth": 56,
+            "matches": [
+              {
+                "object": "0x6499fc",
+                "left": 16,
+                "top": 100,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Maximum",
+            "expectedMinimumWidth": 56,
+            "matches": [
+              {
+                "object": "0x64a30c",
+                "left": 16,
+                "top": 110,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          }
+        ],
+        "headersSeparated": true,
+        "verdict": "PASS_LABEL_GEOMETRY"
+      },
+      "maximumCounters": {
+        "protocol": "muimem-exec-maximum-counters-v2",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\equal-v19\\copperstart\\frame-132501-observed.json",
+        "scope": "MAXIMUM_ROW_REGION_EXTENTS_ONLY",
+        "regions": [
+          {
+            "address": "0x420000",
+            "attributes": 5,
+            "lower": "0x420040",
+            "upper": "0x800000",
+            "bytes": 4063200
+          },
+          {
+            "address": "0xc00000",
+            "attributes": 5,
+            "lower": "0xc00020",
+            "upper": "0xc80000",
+            "bytes": 524288
+          },
+          {
+            "address": "0x2000",
+            "attributes": 3,
+            "lower": "0x2020",
+            "upper": "0x80000",
+            "bytes": 516096
+          }
+        ],
+        "columns": [
+          "Chip",
+          "Fast",
+          "Total"
+        ],
+        "expected": [
+          516096,
+          4587488,
+          5103584
+        ],
+        "actual": [
+          2271940,
+          2486464,
+          2939216
+        ],
+        "verdict": "FAIL_OR_UNAVAILABLE_MAXIMUM_COUNTERS"
+      },
+      "splitRequesterCancellation": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\join-requester-v15\\copperstart\\result.json",
+        "result": {
+          "schemaVersion": 12,
+          "protocol": "mui-utility-native-input-v13",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 53801,
+          "romSha256": "F4790C40FA6D340A91F4707D7EFF5E5ABA5ACED16E0C84F22B33AB284859E052",
+          "imageSha256": "73C7EA8328E02B2D384FDAFE6DE363A79CA57BC05737FADEDC520B5B6F7810E5",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 58851,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "MUIJOIN_SPLIT_REQUESTER_CANCEL_AND_CLOSE",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": true,
+          "requesterWindow": 6515312,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 0,
+              "exceptionVector": 4,
+              "pc": 16298790,
+              "sp": 524280
+            },
+            {
+              "frame": 24,
+              "exceptionVector": 8,
+              "pc": 16747160,
+              "sp": 4342100
+            },
+            {
+              "frame": 29401,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 34451,
+              "phase": "aim",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 81,
+              "targetY": 17
+            },
+            {
+              "frame": 34751,
+              "phase": "press",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 81,
+              "targetY": 17
+            },
+            {
+              "frame": 38101,
+              "phase": "requester-wait",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 81,
+              "targetY": 17
+            },
+            {
+              "frame": 44201,
+              "phase": "requester-aim",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 44351,
+              "phase": "requester-cancel-down",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 45401,
+              "phase": "requester-cancel-wait",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 45501,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 45651,
+              "phase": "close-press",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 46201,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 53801,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 6544748,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 6616240,
+          "originalScreen": 6613872,
+          "nativeWindowUnlinked": true
+        }
+      },
+      "correctedTyping": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\keyboard-v19\\copperstart\\result.json",
+        "result": {
+          "schemaVersion": 12,
+          "protocol": "mui-utility-native-input-v13",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 151651,
+          "romSha256": "F4790C40FA6D340A91F4707D7EFF5E5ABA5ACED16E0C84F22B33AB284859E052",
+          "imageSha256": "F5ECBB3C5DEC4731BB60D49A121F609241EC2F69DF57D16EFB05452A30961887",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 156701,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "HARDWARE_STRING_TEST_RETURN_AND_CLOSE",
+          "stringInputPassed": true,
+          "requesterCancellationPassed": false,
+          "requesterWindow": 0,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 0,
+              "exceptionVector": 4,
+              "pc": 16298790,
+              "sp": 524280
+            },
+            {
+              "frame": 24,
+              "exceptionVector": 8,
+              "pc": 16747160,
+              "sp": 4342100
+            },
+            {
+              "frame": 86101,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 91151,
+              "phase": "string-aim",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 91651,
+              "phase": "string-press",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 92701,
+              "phase": "string-focused",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 94751,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 94753,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 95801,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 95803,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 96851,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 96853,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 97901,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 97903,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 98951,
+              "phase": "key-down",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 98953,
+              "phase": "key-up",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 100001,
+              "phase": "string-verify",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 90,
+              "targetY": 81
+            },
+            {
+              "frame": 137651,
+              "operation": "hardware-string-input",
+              "expected": "test",
+              "actual": "test",
+              "passed": true
+            },
+            {
+              "frame": 137651,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 138051,
+              "phase": "close-press",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 138601,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 151651,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 6571932,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 6658944,
+          "originalScreen": 6639840,
+          "nativeWindowUnlinked": true
+        }
+      },
+      "popaslFirstCandidate": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\popasl-v23\\copperstart\\result.json",
+        "result": {
+          "schemaVersion": 13,
+          "protocol": "mui-utility-native-input-v14",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": null,
+          "romSha256": "F4790C40FA6D340A91F4707D7EFF5E5ABA5ACED16E0C84F22B33AB284859E052",
+          "imageSha256": "CD5D45831D730D2FCCB940C7E2AAB93869069F8A97D524FE38BA514F241C4913",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 186901,
+          "reason": "ASL_REQUESTER_CANCEL_TIMEOUT",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "scope": "POPASL_ASYNC_ACTIVE_REQUESTER_CANCEL_AND_CLOSE",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": false,
+          "requesterWindow": 6701216,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 0,
+              "exceptionVector": 4,
+              "pc": 16298790,
+              "sp": 524280
+            },
+            {
+              "frame": 24,
+              "exceptionVector": 8,
+              "pc": 16747160,
+              "sp": 4342100
+            },
+            {
+              "frame": 86251,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 91301,
+              "phase": "aim",
+              "action": 0,
+              "target": 6583372,
+              "targetX": 130,
+              "targetY": 81
+            },
+            {
+              "frame": 91801,
+              "phase": "press",
+              "action": 0,
+              "target": 6583372,
+              "targetX": 130,
+              "targetY": 81
+            },
+            {
+              "frame": 106901,
+              "phase": "requester-wait",
+              "action": 0,
+              "target": 6583372,
+              "targetX": 130,
+              "targetY": 81
+            },
+            {
+              "frame": 125601,
+              "phase": "requester-aim",
+              "action": 0,
+              "target": 6583372,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 125801,
+              "phase": "requester-cancel-down",
+              "action": 0,
+              "target": 6583372,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 126851,
+              "phase": "requester-cancel-wait",
+              "action": 0,
+              "target": 6583372,
+              "targetX": 4,
+              "targetY": 6
+            }
+          ],
+          "phase": "requester-cancel-wait",
+          "action": 0,
+          "finalObjects": 51,
+          "finalClasses": 19,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 6667616,
+          "originalScreen": 6648512,
+          "nativeWindowUnlinked": null
+        }
+      }
+    },
+    "kickstart31": {
+      "equalSize": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\equal-v19\\kickstart31\\result.json",
+        "result": {
+          "schemaVersion": 9,
+          "protocol": "mui-utility-native-input-v10",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 154801,
+          "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+          "imageSha256": "DDD3EEE6830C6B607DA050FB0D0C67C0CEDD03590484756D31E2E6066C497B88",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 159851,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "OPEN_OBSERVE_5000_FIELDS_NATIVE_CLOSE_ONLY",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": false,
+          "requesterWindow": 0,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 32,
+              "exceptionVector": 4,
+              "pc": 16256056,
+              "sp": 1012
+            },
+            {
+              "frame": 109,
+              "exceptionVector": 8,
+              "pc": 16255934,
+              "sp": 2110076
+            },
+            {
+              "frame": 116601,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 121651,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 122151,
+              "phase": "close-press",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 122701,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 154801,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 0,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 3677524,
+          "originalScreen": 3674616,
+          "nativeWindowUnlinked": true
+        }
+      },
+      "initialTyping": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\keyboard-v18\\kickstart31\\result.json",
+        "result": {
+          "schemaVersion": 8,
+          "protocol": "mui-utility-native-input-v9",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": null,
+          "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+          "imageSha256": "54ED90034C3F4BA40BF2541BE91B766FF6913870DCC55AE4907293C671F52A72",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 133851,
+          "reason": "STRING_INPUT_MISMATCH",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "scope": "HARDWARE_STRING_TEST_RETURN_AND_CLOSE",
+          "stringInputPassed": false,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 32,
+              "exceptionVector": 4,
+              "pc": 16256056,
+              "sp": 1012
+            },
+            {
+              "frame": 109,
+              "exceptionVector": 8,
+              "pc": 16255934,
+              "sp": 2110076
+            },
+            {
+              "frame": 74351,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 79401,
+              "phase": "string-aim",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 80351,
+              "phase": "string-press",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 81401,
+              "phase": "string-focused",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 83451,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 84501,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 85551,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 86601,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 87651,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 88701,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 89751,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 90801,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 91851,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 92901,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 93951,
+              "phase": "string-verify",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 133851,
+              "operation": "hardware-string-input",
+              "expected": "test",
+              "actual": "ttttest",
+              "passed": false
+            }
+          ],
+          "phase": "string-verify",
+          "action": 0,
+          "finalObjects": 51,
+          "finalClasses": 19,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 3607796,
+          "originalScreen": 2201488,
+          "nativeWindowUnlinked": null
+        }
+      },
+      "labelGeometry": {
+        "protocol": "muimem-topaz8-label-geometry-v1",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\equal-v19\\kickstart31\\frame-121651-observed.json",
+        "scope": "KNOWN_STATIC_LABEL_WIDTHS_AND_HEADER_SEPARATION_ONLY",
+        "observations": [
+          {
+            "label": "Chip",
+            "expectedMinimumWidth": 32,
+            "matches": [
+              {
+                "object": "0x36a884",
+                "left": 108,
+                "top": 69,
+                "width": 32,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Fast",
+            "expectedMinimumWidth": 32,
+            "matches": [
+              {
+                "object": "0x36ca94",
+                "left": 180,
+                "top": 69,
+                "width": 32,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Total",
+            "expectedMinimumWidth": 40,
+            "matches": [
+              {
+                "object": "0x36eca4",
+                "left": 248,
+                "top": 69,
+                "width": 40,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Available",
+            "expectedMinimumWidth": 72,
+            "matches": [
+              {
+                "object": "0x368d8c",
+                "left": 16,
+                "top": 79,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "In-Use",
+            "expectedMinimumWidth": 48,
+            "matches": [
+              {
+                "object": "0x3693d4",
+                "left": 16,
+                "top": 89,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Largest",
+            "expectedMinimumWidth": 56,
+            "matches": [
+              {
+                "object": "0x369a1c",
+                "left": 16,
+                "top": 99,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          },
+          {
+            "label": "Maximum",
+            "expectedMinimumWidth": 56,
+            "matches": [
+              {
+                "object": "0x36a064",
+                "left": 16,
+                "top": 109,
+                "width": 72,
+                "height": 10
+              }
+            ],
+            "passed": true
+          }
+        ],
+        "headersSeparated": true,
+        "verdict": "PASS_LABEL_GEOMETRY"
+      },
+      "maximumCounters": {
+        "protocol": "muimem-exec-maximum-counters-v2",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\equal-v19\\kickstart31\\frame-121651-observed.json",
+        "scope": "MAXIMUM_ROW_REGION_EXTENTS_ONLY",
+        "regions": [
+          {
+            "address": "0x200000",
+            "attributes": 1541,
+            "lower": "0x200020",
+            "upper": "0x600000",
+            "bytes": 4194304
+          },
+          {
+            "address": "0xc00000",
+            "attributes": 1797,
+            "lower": "0xc00020",
+            "upper": "0xc80000",
+            "bytes": 524288
+          },
+          {
+            "address": "0x400",
+            "attributes": 1795,
+            "lower": "0x420",
+            "upper": "0x80000",
+            "bytes": 523264
+          }
+        ],
+        "columns": [
+          "Chip",
+          "Fast",
+          "Total"
+        ],
+        "expected": [
+          523264,
+          4718592,
+          5241856
+        ],
+        "actual": [
+          523264,
+          4718592,
+          5241856
+        ],
+        "verdict": "PASS_MAXIMUM_COUNTERS"
+      },
+      "splitRequesterCancellation": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\join-requester-v14\\kickstart31\\result.json",
+        "result": {
+          "schemaVersion": 10,
+          "protocol": "mui-utility-native-input-v11",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 46951,
+          "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+          "imageSha256": "33688226FE2C118B4E22D045F73E3B599E602441D99319773B342829AE4A8D6F",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 52001,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "MUIJOIN_SPLIT_REQUESTER_CANCEL_AND_CLOSE",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": true,
+          "requesterWindow": 3459492,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 32,
+              "exceptionVector": 4,
+              "pc": 16256056,
+              "sp": 1012
+            },
+            {
+              "frame": 109,
+              "exceptionVector": 8,
+              "pc": 16255934,
+              "sp": 2110076
+            },
+            {
+              "frame": 24251,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 29301,
+              "phase": "aim",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 82,
+              "targetY": 16
+            },
+            {
+              "frame": 29851,
+              "phase": "press",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 82,
+              "targetY": 16
+            },
+            {
+              "frame": 33151,
+              "phase": "requester-wait",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 82,
+              "targetY": 16
+            },
+            {
+              "frame": 38551,
+              "phase": "requester-aim",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 38901,
+              "phase": "requester-cancel-down",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 39951,
+              "phase": "requester-cancel-wait",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 40101,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 40351,
+              "phase": "close-press",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 40901,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 46951,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 2200068,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 3585964,
+          "originalScreen": 3583056,
+          "nativeWindowUnlinked": true
+        }
+      },
+      "correctedTyping": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\keyboard-v19\\kickstart31\\result.json",
+        "result": {
+          "schemaVersion": 12,
+          "protocol": "mui-utility-native-input-v13",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 135201,
+          "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+          "imageSha256": "54ED90034C3F4BA40BF2541BE91B766FF6913870DCC55AE4907293C671F52A72",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 140251,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "HARDWARE_STRING_TEST_RETURN_AND_CLOSE",
+          "stringInputPassed": true,
+          "requesterCancellationPassed": false,
+          "requesterWindow": 0,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 32,
+              "exceptionVector": 4,
+              "pc": 16256056,
+              "sp": 1012
+            },
+            {
+              "frame": 109,
+              "exceptionVector": 8,
+              "pc": 16255934,
+              "sp": 2110076
+            },
+            {
+              "frame": 74351,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 79401,
+              "phase": "string-aim",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 80351,
+              "phase": "string-press",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 81401,
+              "phase": "string-focused",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 83451,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 83453,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 84501,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 84503,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 85551,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 85553,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 86601,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 86603,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 87651,
+              "phase": "key-down",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 87653,
+              "phase": "key-up",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 88701,
+              "phase": "string-verify",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 92,
+              "targetY": 80
+            },
+            {
+              "frame": 124401,
+              "operation": "hardware-string-input",
+              "expected": "test",
+              "actual": "test",
+              "passed": true
+            },
+            {
+              "frame": 124401,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 125201,
+              "phase": "close-press",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 125751,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 135201,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 3560612,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 3607796,
+          "originalScreen": 2201488,
+          "nativeWindowUnlinked": true
+        }
+      },
+      "popaslFirstCandidate": {
+        "evidence": "artifacts\\mui-small-utilities-fix-2026-11-01\\popasl-v23\\kickstart31\\result.json",
+        "result": {
+          "schemaVersion": 13,
+          "protocol": "mui-utility-native-input-v14",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": null,
+          "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+          "imageSha256": "5B244ADFCB37FF34B3D42267587F73DAF3D3A613902E19A30DD717C3170C79E7",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 174001,
+          "reason": "ASL_REQUESTER_CANCEL_TIMEOUT",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "scope": "POPASL_ASYNC_ACTIVE_REQUESTER_CANCEL_AND_CLOSE",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": false,
+          "requesterWindow": 3651468,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 32,
+              "exceptionVector": 4,
+              "pc": 16256056,
+              "sp": 1012
+            },
+            {
+              "frame": 109,
+              "exceptionVector": 8,
+              "pc": 16255934,
+              "sp": 2110076
+            },
+            {
+              "frame": 74451,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 79501,
+              "phase": "aim",
+              "action": 0,
+              "target": 3571124,
+              "targetX": 132,
+              "targetY": 80
+            },
+            {
+              "frame": 80451,
+              "phase": "press",
+              "action": 0,
+              "target": 3571124,
+              "targetX": 132,
+              "targetY": 80
+            },
+            {
+              "frame": 95301,
+              "phase": "requester-wait",
+              "action": 0,
+              "target": 3571124,
+              "targetX": 132,
+              "targetY": 80
+            },
+            {
+              "frame": 112551,
+              "phase": "requester-aim",
+              "action": 0,
+              "target": 3571124,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 112901,
+              "phase": "requester-cancel-down",
+              "action": 0,
+              "target": 3571124,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 113951,
+              "phase": "requester-cancel-wait",
+              "action": 0,
+              "target": 3571124,
+              "targetX": 10,
+              "targetY": 5
+            }
+          ],
+          "phase": "requester-cancel-wait",
+          "action": 0,
+          "finalObjects": 51,
+          "finalClasses": 19,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 3616428,
+          "originalScreen": 2201488,
+          "nativeWindowUnlinked": null
+        }
+      }
+    }
+  },
+  "nativeAvailMemControl": {
+    "protocol": "exec-availmem-native-probe-v1",
+    "capture": "artifacts\\mui-small-utilities-fix-2026-11-01\\availmem-native-v25\\kickstart31\\frame-005000-final.fastram",
+    "complete": true,
+    "regions": [
+      {
+        "address": "0x200000",
+        "attributes": 1541,
+        "total": 4194304
+      },
+      {
+        "address": "0xc00000",
+        "attributes": 1797,
+        "total": 524288
+      },
+      {
+        "address": "0x400",
+        "attributes": 1795,
+        "total": 523264
+      }
+    ],
+    "values": {
+      "0x0": 5113336,
+      "0x2": 502664,
+      "0x4": 4610672,
+      "0x80000": 5241856,
+      "0x80002": 523264,
+      "0x80004": 4718592,
+      "0x20000": 4086280,
+      "0xa0000": 4086280
+    },
+    "expectedTotals": {
+      "0x80000": 5241856,
+      "0x80002": 523264,
+      "0x80004": 4718592
+    },
+    "transientAllocation": "0x21a5f8",
+    "totalWhileAllocated": 5241856,
+    "verdict": "PASS_TOTAL_FILTERING_ALLOCATION_INVARIANCE_AND_LARGEST_PRECEDENCE"
+  },
+  "nativeAvailMemFixedCopperStart": {
+    "protocol": "exec-availmem-native-probe-v1",
+    "capture": "artifacts\\mui-small-utilities-fix-2026-11-01\\availmem-native-v25\\copperstart\\frame-005000-final.fastram",
+    "complete": true,
+    "regions": [
+      {
+        "address": "0x420000",
+        "attributes": 5,
+        "total": 4063200
+      },
+      {
+        "address": "0xc00000",
+        "attributes": 5,
+        "total": 524288
+      },
+      {
+        "address": "0x2000",
+        "attributes": 3,
+        "total": 516096
+      }
+    ],
+    "values": {
+      "0x0": 4157004,
+      "0x2": 454192,
+      "0x4": 3702812,
+      "0x80000": 5103584,
+      "0x80002": 516096,
+      "0x80004": 4587488,
+      "0x20000": 3173884,
+      "0xa0000": 3173884
+    },
+    "expectedTotals": {
+      "0x80000": 5103584,
+      "0x80002": 516096,
+      "0x80004": 4587488
+    },
+    "transientAllocation": "0x4f9200",
+    "totalWhileAllocated": 5103584,
+    "verdict": "PASS_TOTAL_FILTERING_ALLOCATION_INVARIANCE_AND_LARGEST_PRECEDENCE"
+  },
+  "sourceCompletionOwnershipDiagnostic": [
+    {
+      "object": "0x372a5c",
+      "className": "Application.mui",
+      "chain": [
+        {
+          "record": "0x372a68",
+          "object": "0x372a5c",
+          "appInitialized": 0
+        }
+      ],
+      "work": "0x0",
+      "result": null,
+      "replyPort": "0x0",
+      "replyHead": null,
+      "queuedReply": null
+    },
+    {
+      "object": "0x36af64",
+      "className": "Popasl.mui",
+      "chain": [
+        {
+          "record": "0x36af70",
+          "object": "0x36af64",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x36b1a8",
+          "object": "0x36b19c",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x36c0d0",
+          "object": "0x36c0c4",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x3725a8",
+          "object": "0x37259c",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x372760",
+          "object": "0x372754",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x372a68",
+          "object": "0x372a5c",
+          "appInitialized": 0
+        }
+      ],
+      "work": "0x0",
+      "result": null,
+      "replyPort": "0x0",
+      "replyHead": null,
+      "queuedReply": null
+    },
+    {
+      "object": "0x3684ac",
+      "className": "Popasl.mui",
+      "chain": [
+        {
+          "record": "0x3684b8",
+          "object": "0x3684ac",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x3686f0",
+          "object": "0x3686e4",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x36c0d0",
+          "object": "0x36c0c4",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x3725a8",
+          "object": "0x37259c",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x372760",
+          "object": "0x372754",
+          "appInitialized": 0
+        },
+        {
+          "record": "0x372a68",
+          "object": "0x372a5c",
+          "appInitialized": 0
+        }
+      ],
+      "work": "0x37afa0",
+      "result": 0,
+      "replyPort": "0x376ac0",
+      "replyHead": "0x37afa0",
+      "queuedReply": true
+    }
+  ],
+  "continued20261102": {
+    "muimemMaximum": {
+      "protocol": "muimem-exec-maximum-counters-v2",
+      "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\mem-availmem-v24\\copperstart\\frame-137351-observed.json",
+      "scope": "MAXIMUM_ROW_REGION_EXTENTS_ONLY",
+      "regions": [
+        {
+          "address": "0x420000",
+          "attributes": 5,
+          "lower": "0x420040",
+          "upper": "0x800000",
+          "bytes": 4063200
+        },
+        {
+          "address": "0xc00000",
+          "attributes": 5,
+          "lower": "0xc00020",
+          "upper": "0xc80000",
+          "bytes": 524288
+        },
+        {
+          "address": "0x2000",
+          "attributes": 3,
+          "lower": "0x2020",
+          "upper": "0x80000",
+          "bytes": 516096
+        }
+      ],
+      "columns": [
+        "Chip",
+        "Fast",
+        "Total"
+      ],
+      "expected": [
+        516096,
+        4587488,
+        5103584
+      ],
+      "actual": [
+        516096,
+        4587488,
+        5103584
+      ],
+      "verdict": "PASS_MAXIMUM_COUNTERS"
+    },
+    "muimemDeadlock": {
+      "protocol": "mui-native-paint-refresh-lock-cycle-v1",
+      "capture": "artifacts\\mui-small-utilities-fix-2026-11-01\\mem-availmem-v24\\copperstart\\frame-150001-progress.json",
+      "application": "0x42d0a0",
+      "refreshTask": "0x4f7050",
+      "window": "0x66df90",
+      "layer": "0x66e660",
+      "layerInfo": "0x66d730",
+      "applicationWait": {
+        "address": "0x66d170",
+        "task": "0x42d0a0",
+        "token": "0x4c0d95dc",
+        "signal": 3,
+        "waitObject": "0x66d730"
+      },
+      "refreshWait": {
+        "address": "0x66cbc0",
+        "task": "0x4f7050",
+        "token": "0x4c00073c",
+        "signal": 2,
+        "waitObject": "0x66e660"
+      },
+      "layerSemaphore": {
+        "address": "0x66e6a8",
+        "owner": "0x42d0a0",
+        "nestCount": 1,
+        "queueCount": 0
+      },
+      "layerInfoSemaphore": {
+        "address": "0x66d748",
+        "owner": "0x4f7050",
+        "nestCount": 0,
+        "queueCount": 0
+      },
+      "verdict": "CONFIRMED_TWO_TASK_LOCK_CYCLE"
+    },
+    "paintLockFix": {
+      "status": "SOURCE_FIXED_NATIVE_BUILD_PENDING",
+      "hostTests": {
+        "passed": 3935,
+        "failed": 0,
+        "skipped": 0,
+        "log": "../CopperOS/artifacts/mui-small-tools-classic-v28.log"
+      },
+      "nativeOutput": "../CopperOS/artifacts/mui-small-tools-native-v30-paint",
+      "replayController": "artifacts/mui-small-utilities-fix-2026-11-01/run-paint-v30.ps1",
+      "nativeVectors": "SDK LayersLvo.LockLayerInfo and LayersLvo.UnlockLayerInfo",
+      "builderTests": {
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "log": "../CopperOS/artifacts/mui-small-tools-paint-v30-tests.log"
+      }
+    },
+    "popupCompletion": {
+      "librarySha256": "1586d966911c4755859206d68e9237d45bafcbe4919558625208a613d98b9597",
+      "imageBytes": 1272984,
+      "status": "PASS_CANCEL_COMPLETION_AND_CLEANUP_BOTH_ROMS",
+      "jobs": "artifacts\\mui-small-utilities-fix-2026-11-01\\popasl-jobs-v25.json",
+      "scope": "Real ASL open/cancel, Active clear, zero registries/depth/owner operations, native window unlink; selected-file/default-hook behavior unqualified.",
+      "results": {
+        "copperstart": {
+          "schemaVersion": 13,
+          "protocol": "mui-utility-native-input-v14",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 141501,
+          "romSha256": "396C58EE218967D79BFDECBE709AC0FE05007491C4B136E4C07CD1DF60FA36DE",
+          "imageSha256": "0B875191630FD477A58DD763F7772FB28381C50ABEF5FABE2FBFCCBF988A22ED",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 146551,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "POPASL_ASYNC_ACTIVE_REQUESTER_CANCEL_AND_CLOSE",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": true,
+          "requesterWindow": 6700768,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 0,
+              "exceptionVector": 4,
+              "pc": 16298842,
+              "sp": 524280
+            },
+            {
+              "frame": 16,
+              "exceptionVector": 8,
+              "pc": 16745038,
+              "sp": 4342308
+            },
+            {
+              "frame": 86001,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 91051,
+              "phase": "aim",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 130,
+              "targetY": 81
+            },
+            {
+              "frame": 91551,
+              "phase": "press",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 130,
+              "targetY": 81
+            },
+            {
+              "frame": 106601,
+              "phase": "requester-wait",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 130,
+              "targetY": 81
+            },
+            {
+              "frame": 125251,
+              "phase": "requester-aim",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 125451,
+              "phase": "requester-cancel-down",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 126501,
+              "phase": "requester-cancel-wait",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 4,
+              "targetY": 6
+            },
+            {
+              "frame": 127051,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 127451,
+              "phase": "close-press",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 128001,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 141501,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 6583452,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 6667696,
+          "originalScreen": 6648592,
+          "nativeWindowUnlinked": true
+        },
+        "kickstart31": {
+          "schemaVersion": 13,
+          "protocol": "mui-utility-native-input-v14",
+          "profile": "a500-ocs-5m-diagnostic-v1",
+          "libraryVersionRevision": 786433,
+          "buttonPressTimeoutFields": 60000,
+          "buttonReleaseTimeoutFields": 60000,
+          "quitSettleFields": 5000,
+          "cleanupObservedFrame": 125001,
+          "romSha256": "8C8A0CF04F91B88EAF0C4F1126041987067E2286A8EE590BDBAE447A8000C5EE",
+          "imageSha256": "40D6AA5E70821A1D7BAD14BD6A75E3B436815E1E14062986BC9D384C7B04C7D2",
+          "engineSha256": "E0C814475CAF09C50024762067FCF76071EC9BAD5A4AA390F801EFE9C545C4E2",
+          "cpuSha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A",
+          "CompletedFrames": 130051,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "scope": "POPASL_ASYNC_ACTIVE_REQUESTER_CANCEL_AND_CLOSE",
+          "stringInputPassed": false,
+          "requesterCancellationPassed": true,
+          "requesterWindow": 3651548,
+          "unavailableActions": [],
+          "events": [
+            {
+              "frame": 32,
+              "exceptionVector": 4,
+              "pc": 16256056,
+              "sp": 1012
+            },
+            {
+              "frame": 109,
+              "exceptionVector": 8,
+              "pc": 16255934,
+              "sp": 2110076
+            },
+            {
+              "frame": 74401,
+              "phase": "observe",
+              "action": 0,
+              "target": 0,
+              "targetX": 0,
+              "targetY": 0
+            },
+            {
+              "frame": 79451,
+              "phase": "aim",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 132,
+              "targetY": 80
+            },
+            {
+              "frame": 80401,
+              "phase": "press",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 132,
+              "targetY": 80
+            },
+            {
+              "frame": 95201,
+              "phase": "requester-wait",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 132,
+              "targetY": 80
+            },
+            {
+              "frame": 112451,
+              "phase": "requester-aim",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 112801,
+              "phase": "requester-cancel-down",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 113851,
+              "phase": "requester-cancel-wait",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 10,
+              "targetY": 5
+            },
+            {
+              "frame": 114101,
+              "phase": "close-aim",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 114851,
+              "phase": "close-press",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 115401,
+              "phase": "cleanup",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 5,
+              "targetY": 5
+            },
+            {
+              "frame": 125001,
+              "phase": "quit-settle",
+              "action": 0,
+              "target": 3571204,
+              "targetX": 5,
+              "targetY": 5
+            }
+          ],
+          "phase": "quit-settle",
+          "action": 0,
+          "finalObjects": 0,
+          "finalClasses": 0,
+          "finalDepth": 0,
+          "finalActiveOperations": 0,
+          "originalNativeWindow": 3616508,
+          "originalScreen": 2201488,
+          "nativeWindowUnlinked": true
+        }
+      }
+    },
+    "iconWriteFixture": {
+      "status": "V26_AFTER_SNAPSHOT_PREMATURE_UNQUALIFIED",
+      "inputPreflight": true,
+      "reason": "Original executable detaches into MUI_Icon_Update_process; startup return is not GUI exit.",
+      "replacementProtocol": "icon-update-native-file-write-v2",
+      "replacementRequires": "Named process observed running then gone before guest DOS file readback; independent metadata/pixel verifier.",
+      "copperStartV26": "CANCELLED_FAULT_BEFORE_UTILITY_PREFLIGHT: invalid guest PC 0x10 at field 1842 in general Copy startup; retained separately, no utility verdict.",
+      "replacement": "Bounded native guest DOS copy helper, independently verified before bytes; revised after command waits for detached utility process lifecycle."
+    },
+    "joinPreferences": {
+      "status": "DISCOVERY_REPLAY_RUNNING",
+      "jobs": "artifacts\\mui-small-utilities-fix-2026-11-01\\join-prefs-jobs-v26.json",
+      "scope": "Prefs/Use/Quit, not Split/rejoin bytes.",
+      "copperstartV26": {
+        "navigation": "PASS",
+        "fields": 98551,
+        "numericContents": "KNOWN_EMPTY_FIELDS_NOT_A_SEMANTIC_PREFS_PASS"
+      },
+      "kickstartV26": {
+        "status": "UNEXPECTED_MUI_LIBRARY_REPLACEMENT_AFTER_USE",
+        "oldLibrary": "0x22095c",
+        "newLibrary": "0x21ad3c",
+        "evidence": "join-prefs-v26/kickstart31/frame-075001-progress.json",
+        "scope": "No cached-observer pass; retest with corrected control setters."
+      }
+    },
+    "classicControlSetter": {
+      "status": "SOURCE_FIXED_NATIVE_RETEST_PENDING",
+      "cause": "Classic native OM_SET/OM_UPDATE and public Set methods bypassed typed control setters; MUIJoin Length/Buffer remained empty despite raw integer attributes.",
+      "source": "../CopperOS/src/Libraries/muimaster.library/MuiNativeBuiltinControlSetter.cs",
+      "hostTests": {
+        "passed": 3942,
+        "failed": 0,
+        "skipped": 0,
+        "log": "../CopperOS/artifacts/mui-small-tools-setter-v31-full-v2.log"
+      },
+      "builderTests": {
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "log": "../CopperOS/artifacts/mui-small-tools-setter-native-v31-tests.log"
+      }
+    },
+    "nativeFrozenSetter": {
+      "status": "COMPOSED_FRESH_REPLAYS_STARTING",
+      "imageBytes": 1359004,
+      "sha256": "be30c9544f50711b64ee035632059fba67e9fe5d0b56c4e78d78dc33e0b9b74c",
+      "manifest": "../CopperOS/artifacts/mui-small-tools-native-v32-frozen-setter/muimaster.library.json",
+      "frozenDependencyReceipt": "../CopperOS/artifacts/mui-small-tools-frozen-v32/frozen-input-receipt.json",
+      "controller": "artifacts\\mui-small-utilities-fix-2026-11-01\\run-setter-v33.ps1",
+      "harness": "mui-utility-native-input-v19"
+    },
+    "fixtureInputs": {
+      "protocol": "native-file-fixture-setup-v2",
+      "rows": [
+        {
+          "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\fixture-setup-v32-mui-icon-update-12-copperstart.json",
+          "utility": "mui-icon-update-12",
+          "preflight": true,
+          "kind": "copperstart"
+        },
+        {
+          "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\fixture-setup-v32-mui-icon-update-12-kickstart31.json",
+          "utility": "mui-icon-update-12",
+          "preflight": true,
+          "kind": "kickstart31"
+        },
+        {
+          "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\fixture-setup-v32-mui-join-10-copperstart.json",
+          "utility": "mui-join-10",
+          "preflight": true,
+          "kind": "copperstart"
+        },
+        {
+          "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\fixture-setup-v32-mui-join-10-kickstart31.json",
+          "utility": "mui-join-10",
+          "preflight": true,
+          "kind": "kickstart31"
+        }
+      ],
+      "status": "PASS_INPUT_BYTES_ONLY_NOT_UTILITY_OPERATION",
+      "passed": true,
+      "scope": "Exact owned before bytes copied through real guest DOS on both ROMs; not a utility file-write pass."
+    },
+    "joinOwnedFixture": {
+      "inputBytes": 12345,
+      "inputSha256": "c2349f4afe0adcc26724c9a8101ec50fd4b17cf511cac103aa7e8a1ccd9a6093",
+      "parts": [
+        4096,
+        4096,
+        4096,
+        57
+      ],
+      "preferences": "j/out/4096/4096/0",
+      "encoding": [
+        {
+          "before": true,
+          "codeBytes": 232,
+          "instructions": 63
+        },
+        {
+          "before": false,
+          "codeBytes": 638,
+          "instructions": 177
+        }
+      ]
+    },
+    "ownedInputDelivery": {
+      "status": "SOURCE_AND_HOST_TESTS_PASS_NATIVE_PENDING",
+      "source": "../CopperOS/src/Libraries/muimaster.library/MuiNativeIntuiMessageDelivery.cs",
+      "scope": "Owned normal IDCMP copy, early original reply; RAWKEY owns four history bytes; opaque provider payloads retain prior borrowed path.",
+      "hostTests": {
+        "passed": 3948,
+        "failed": 0,
+        "skipped": 0,
+        "log": "../CopperOS/artifacts/mui-small-tools-delivery-v36-full.log"
+      },
+      "focusedTests": {
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "log": "../CopperOS/artifacts/mui-small-tools-delivery-v36-focused.log"
+      }
+    },
+    "nativeDeliveryCandidate": {
+      "status": "PAIRED_REPLAYS_RUNNING",
+      "imageBytes": 1361108,
+      "sha256": "b160ebe47fea440cf7f3d6f09c6f3e37fd60efcccd2aef8c97825c5b9ed4490c",
+      "manifest": "../CopperOS/artifacts/mui-small-tools-native-v36-delivery/muimaster.library.json",
+      "frozenDependencyReceipt": "../CopperOS/artifacts/mui-small-tools-frozen-v36/frozen-input-receipt.json",
+      "buildLog": "../CopperOS/artifacts/mui-small-tools-delivery-v36-frozen-build.log",
+      "compositionLog": "../CopperOS/artifacts/mui-small-tools-native-v36-delivery.log",
+      "scope": "MUI C# directly references frozen SDK binaries; frozen compiler/runtime/builder unchanged."
+    },
+    "preferencesV33": {
+      "copperstart": {
+        "inputAndCleanup": "PASS",
+        "fields": 100251,
+        "evidence": "delivery predecessor: paint-v33/mui-join-10/copperstart/result.json"
+      },
+      "kickstart31": {
+        "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+        "fields": 240000,
+        "reason": "MAX_FIELDS_AFTER_USE",
+        "evidence": "paint-v33/mui-join-10/kickstart31/result.json"
+      }
+    },
+    "splitRejoinV34": {
+      "librarySha256": "be30c9544f50711b64ee035632059fba67e9fe5d0b56c4e78d78dc33e0b9b74c",
+      "copperstart": {
+        "status": "FAIL_INVALID_GUEST_PC",
+        "fields": 82019,
+        "pc": "0x10",
+        "evidence": "join-write-v34/copperstart/result.json"
+      },
+      "kickstart31": {
+        "status": "PASS_ACTUAL_SPLIT_REJOIN_BYTES_AND_CLEANUP",
+        "fields": 175151,
+        "byteEvidence": "join-write-v34-kickstart31-bytes.json",
+        "guiEvidence": "join-write-v34/kickstart31/result.json",
+        "visualReview": {
+          "fiveFileDrawer": "join-write-v34/kickstart31/frame-129501-file-typed-drawer.bmp",
+          "selectedFourParts": "join-write-v34/kickstart31/frame-152101-join-four-parts-selected.bmp",
+          "review": "Four parts selected; original excluded."
+        }
+      }
+    },
+    "deliveryV36Preferences": {
+      "copperstart": {
+        "status": "PASS_INPUT_AND_CLEANUP",
+        "fields": 99251,
+        "evidence": "delivery-v36/mui-join-10/copperstart/result.json"
+      },
+      "kickstart31": {
+        "status": "CANCELLED_AFTER_DECISIVE_LIBRARY_REPLACEMENT_NOT_PASS",
+        "evidence": "delivery-v36-kickstart31-prefs-cancellation.json",
+        "scope": "Owned input fix alone does not resolve Use; icon-sized stack replay pending."
+      }
+    },
+    "deliveryV36SplitRejoin": {
+      "kickstart31": {
+        "status": "PASS_ACTUAL_SPLIT_REJOIN_BYTES_AND_CLEANUP",
+        "fields": 175151,
+        "evidence": "join-write-v36/kickstart31/result.json",
+        "byteEvidence": "join-write-v36-kickstart31-bytes.json"
+      },
+      "copperstart": {
+        "status": "DIAGNOSTIC_INVALID_PC_AFTER_GLOBAL_CORRUPTION",
+        "evidence": "join-write-v36/copperstart/file-acceptance-trace.json",
+        "fields": 82024,
+        "scope": "Scalar trace is not the normal replay protocol."
+      }
+    },
+    "originalLaunchStackCorrection": {
+      "status": "INPUTS_CORRECTED_PAIRED_REPLAYS_RUNNING",
+      "protocol": "small-mui-private-images-v2",
+      "source": "scripts/probes/UtilityStartup/prepare_small_mui_utilities.py --respect-icon-stack",
+      "authorDiskObjectStackBytes": {
+        "mui-mem-11": 8192,
+        "mui-join-10": 8192,
+        "mui-menu-100": 4096,
+        "mui-icon-update-12": 8192
+      },
+      "iconDetachedProgramSourceStackBytes": 20000,
+      "guestCommand": "scripts/probes/UtilityStartup/native_stack_preference.py",
+      "scope": "FindTask plus public Process.pr_CLI and CLI.DefaultStack; no host memory/register patches or current-task stack replacement.",
+      "nativeBoundsInspector": "scripts/probes/UtilityStartup/inspect_utility_task_stack.py",
+      "negativeControl": "stack-inspector-v40-negative-control.json",
+      "nativeStackCommandControl": "stack-inspector-v40-32768-control.json",
+      "images": "images-author-stack-v40/",
+      "controllers": [
+        "run-author-stack-v40.ps1 -Group join",
+        "run-author-stack-v40.ps1 -Group other"
+      ]
+    },
+    "firstGlobalCorruption": {
+      "status": "OBSERVED_UNDERSIZED_STACK_OVERLAP",
+      "fields": 44573,
+      "sourceTrace": "join-global-watch-v37/copperstart/file-acceptance-trace.json",
+      "pc": "0xffbe74",
+      "instruction": "MOVE.L 0x3e(A3),0x4c(A4)",
+      "stackPointer": "0x518040",
+      "taskStackLower": "0x518200",
+      "taskStackUpper": "0x51920c",
+      "writeAddress": "0x51808c",
+      "overlappingDosBase": "0x51808e",
+      "dosBaseBefore": "0x4249d8",
+      "dosBaseAfter": "0x49d8",
+      "scope": "Original launch used 4108 bytes of Task bounds rather than icon-requested 8192; larger intended launch still requires native confirmation."
+    },
+    "authorStackV40Preferences": {
+      "bounds": {
+        "copperstart": {
+          "bytes": 8204,
+          "evidence": "author-stack-v40-prefs-copperstart-bounds.json"
+        },
+        "kickstart31": {
+          "bytes": 8192,
+          "evidence": "author-stack-v40-prefs-kickstart31-bounds.json"
+        }
+      },
+      "copperstart": {
+        "status": "PASS_INPUT_AND_CLEANUP",
+        "fields": 99401,
+        "evidence": "author-stack-v40/prefs/copperstart/result.json"
+      },
+      "kickstart31": {
+        "status": "FAIL_LIBRARY_REPLACEMENT_AFTER_USE",
+        "evidence": "author-stack-v40-kickstart31-prefs-replacement.json",
+        "scope": "Also reproduced with independently confirmed 32768-byte control; corrected stack alone does not resolve this issue."
+      },
+      "followUpTrace": "prefs-use-trace-v41/kickstart31/"
+    }
+  },
+  "latestInvestigation": {
+    "date": "2026-11-02",
+    "status": "PASS_BOUNDED_FOUR_UTILITY_AB_WORKFLOWS",
+    "historicalRunsPreserved": true,
+    "nativeV40": {
+      "librarySha256": "b160ebe47fea440cf7f3d6f09c6f3e37fd60efcccd2aef8c97825c5b9ed4490c",
+      "copperStartRomSha256": "396c58ee218967d79bfdecbe709ac0fe05007491c4b136e4c07cd1df60fa36de",
+      "passedScopes": [
+        "MUImem layout/maximum/original code/cleanup on both ROMs",
+        "MUIJoin actual Split/rejoin bytes and cleanup on both ROMs",
+        "MUIMenu exactly one command execution and cleanup on both ROMs"
+      ],
+      "scopeLimits": [
+        "Periodic Split fixture first three parts identical",
+        "Kickstart MUImem Task-bound capture sees temporary MUI stack",
+        "Not a full MUI conformance or performance qualification"
+      ]
+    },
+    "kickstartPreferencesDiagnosis": {
+      "status": "EXEC_ALERT_AND_REBOOT_WITH_V36",
+      "trace": "artifacts/mui-small-utilities-fix-2026-11-01/prefs-alert-control-v45/kickstart31/native-trace.json",
+      "field": 70473,
+      "alertNumber": "0x81000005",
+      "earlierReplacementInterpretationSuperseded": true
+    },
+    "v44InputDelivery": {
+      "fullHostTestsPassed": 3965,
+      "skipped": 0,
+      "nativeControl": "v46 preferences Use/Quit/empty registries/native unlink/settle passed on both ROMs",
+      "fields": {
+        "copperstart": 99401,
+        "kickstart31": 90551
+      },
+      "semanticPreferencesPassed": false
+    },
+    "preferencesGetterBug": {
+      "status": "PROVEN_BOTH_ROMS",
+      "expectedSuffixes": [
+        ".j",
+        ".out"
+      ],
+      "actualSuffixes": [
+        ".",
+        "."
+      ],
+      "verifier": "scripts/probes/UtilityStartup/inspect_mui_join_preferences.py",
+      "negativeEvidence": [
+        "candidate-v46-prefs-copperstart-values.json",
+        "candidate-v46-prefs-kickstart31-values.json",
+        "author-stack-v40-prefs-copperstart-values.json"
+      ],
+      "v47Fix": "Preserve successful owned String.Contents/String.Integer getters instead of stale raw native tags",
+      "fullHostTestsPassed": 3971,
+      "skipped": 0,
+      "nativeStatus": "PASS_BOTH_ROMS_V48"
+    },
+    "registeredWitnessPolicy": "Inspectors accept actual Exec ResourceList nodes with valid backlinks/sentinel, not unregistered cookie copies",
+    "iconReaderCorrection": {
+      "oldRunStatus": "INVALID_FIXTURE_TIMEOUT_WHILE_DETACHED_GUI_ALIVE",
+      "delayOnePollBudget": 1000000,
+      "functionalFieldBound": 500000,
+      "actualWriteQualification": "PASS_BOTH_ROMS_V56"
+    },
+    "v48FinalCandidate": {
+      "protocol": "small-mui-candidate-v48-functional-evidence-v1",
+      "librarySha256": "3a89edbbb3e5e1eeb7556e9e3bd61941adf093c61c9b6b86eb1d4a9e187d1906",
+      "completedRuns": 10,
+      "expectedRuns": 10,
+      "rows": [
+        {
+          "test": "prefs",
+          "rom": "kickstart31",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\prefs\\kickstart31\\result.json",
+          "fields": 90551,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_PREFERENCES_PRESERVED",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-prefs-kickstart31-values-independent.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "prefs",
+          "rom": "copperstart",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\prefs\\copperstart\\result.json",
+          "fields": 99401,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_PREFERENCES_PRESERVED",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-prefs-copperstart-values-independent.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "mem",
+          "rom": "kickstart31",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\mem\\kickstart31\\result.json",
+          "fields": 186101,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_LABEL_GEOMETRY",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-kickstart31-layout.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_MAXIMUM_COUNTERS",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-kickstart31-maximum.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_ORIGINAL_HELPER_INTACT",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-kickstart31-code-guard.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_ACTUAL_TASK_STACK_MINIMUM",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-kickstart31-bounds.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "mem",
+          "rom": "copperstart",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\mem\\copperstart\\result.json",
+          "fields": 208951,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_LABEL_GEOMETRY",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-copperstart-layout.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_MAXIMUM_COUNTERS",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-copperstart-maximum.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_ORIGINAL_HELPER_INTACT",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-copperstart-code-guard.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_ACTUAL_TASK_STACK_MINIMUM",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-mem-copperstart-bounds.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "split-rejoin",
+          "rom": "kickstart31",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\split-rejoin\\kickstart31\\result.json",
+          "fields": 175151,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_ACTUAL_SPLIT_AND_REJOIN_BYTES",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-split-rejoin-kickstart31-registered-bytes.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "split-rejoin",
+          "rom": "copperstart",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\split-rejoin\\copperstart\\result.json",
+          "fields": 178451,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_ACTUAL_SPLIT_AND_REJOIN_BYTES",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-split-rejoin-copperstart-registered-bytes.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "icon",
+          "rom": "kickstart31",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\icon\\kickstart31\\result.json",
+          "fields": 265751,
+          "reason": "ICON_RESULT_DIALOG_TIMEOUT",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "checks": [
+            {
+              "passed": false,
+              "verdict": "UNAVAILABLE_OR_FAILED_FILE_EVIDENCE",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-icon-kickstart31-registered-bytes.json"
+            }
+          ],
+          "machineChecksPassed": false
+        },
+        {
+          "test": "menu",
+          "rom": "copperstart",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\menu\\copperstart\\result.json",
+          "fields": 103651,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_COMMAND_EXECUTED_ONCE",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-menu-copperstart-registered-witness.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "menu",
+          "rom": "kickstart31",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\menu\\kickstart31\\result.json",
+          "fields": 95601,
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "inputAndCleanup": "PASS",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_COMMAND_EXECUTED_ONCE",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-menu-kickstart31-registered-witness.json"
+            }
+          ],
+          "machineChecksPassed": true
+        },
+        {
+          "test": "icon",
+          "rom": "copperstart",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48\\icon\\copperstart\\result.json",
+          "fields": 352106,
+          "reason": "INVALID_GUEST_PC_DURING_UTILITY",
+          "inputAndCleanup": "INCOMPLETE_OR_FAILED",
+          "checks": [
+            {
+              "passed": false,
+              "verdict": "UNAVAILABLE_OR_FAILED_FILE_EVIDENCE",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v48-icon-copperstart-registered-bytes.json"
+            }
+          ],
+          "machineChecksPassed": false
+        }
+      ],
+      "allMachineChecksPassed": false,
+      "scope": "Native hardware input and independent preferences/file/command/memory evidence. Visual review and final report remain separate; not performance acceptance."
+    },
+    "v49RequesterFix": {
+      "librarySha256": "5065a4ea443cb6f12ec6267e07cee7e03cba4c19bad80c41634288b59338be30",
+      "bytes": 1361540,
+      "hostTestsPassed": 3973,
+      "skipped": 0,
+      "nativeStandaloneRequestA": {
+        "copperstart": {
+          "fields": 21001,
+          "inputAndCleanup": "PASS",
+          "resourceOracle": "candidate-v50-requester-copperstart-resource.json"
+        },
+        "kickstart31": {
+          "fields": 17051,
+          "inputAndCleanup": "PASS",
+          "resourceOracle": "candidate-v50-requester-kickstart31-resource.json"
+        }
+      },
+      "scope": "Native hardware OK and request return/disposal/cleanup/settle; original Icon Update still requires full file workflow."
+    },
+    "iconNativeWriter": {
+      "status": "PASS_HOST_NATIVE_API_AND_ORIGINAL_UTILITY_WORKFLOW",
+      "source": "CopperStart native disk-loaded guest provider; ROM unchanged",
+      "hostEncoderStoreTestsPassed": 17,
+      "skipped": 0,
+      "providerBytes": 5380,
+      "providerSha256": "75d604e359fe4e34923c4184585f6b4c6b0ff3eeaf3993c8fe668144f8671d3a",
+      "nativeApiOracle": {
+        "protocol": "classic-icon-native-put-file-bytes-v1",
+        "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v53\\api\\copperstart\\frame-010000-final.fastram",
+        "preflight": true,
+        "exactSourceAndTargetBytes": true,
+        "writer": {
+          "address": "0x497c10",
+          "library": "0x49121a",
+          "segment": 1303681,
+          "entry": "0x4f9f9a",
+          "calls": 1,
+          "lastResult": 1,
+          "installed": 1,
+          "vectorMatches": true
+        },
+        "result": 1,
+        "ioError": 0,
+        "lengths": [
+          130,
+          130
+        ],
+        "verdict": "PASS_NATIVE_ICON_PUT_DISK_OBJECT_BYTES",
+        "scope": "Standalone genuine guest public icon API and DOS byte snapshots, not an original utility or GUI replay."
+      },
+      "nativeApiHarnessScope": "No MUI application; raw viewer MAX_FIELDS/INCOMPLETE_OR_FAILED is not counted as a MUI replay. Dedicated registered-resource actual-byte oracle supplies the API verdict.",
+      "limits": [
+        "Classic V1 format only",
+        "No Workbench change notification qualification",
+        "No ROM-residency or performance claim"
+      ],
+      "originalUtilityJobs": [
+        "candidate-v56/icon/copperstart",
+        "candidate-v56/icon/kickstart31"
+      ],
+      "unsupportedSlotForensics": "candidate-v48-copperstart-unsupported-icon-vector.json"
+    },
+    "v54ReferenceRequester": {
+      "copperstart": {
+        "fields": 23301,
+        "inputAndCleanup": "PASS",
+        "resource": {
+          "protocol": "mui-requester-native-return-resource-v1",
+          "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v54\\reference\\copperstart\\frame-023301-final.fastram",
+          "observations": [
+            {
+              "address": "0x4f8190",
+              "library": "0x4f8a04",
+              "application": "0x49878c",
+              "stage": 3,
+              "requestResult": 0,
+              "complete": 1,
+              "referenceObject": "0x4986dc",
+              "referenceNativeWindow": "0x654ca0",
+              "referenceGetSucceeded": 1
+            }
+          ],
+          "requireReferenceWindow": true,
+          "verdict": "PASS_REQUEST_CALL_RETURNED_AND_APPLICATION_DISPOSED",
+          "scope": "Requires separate native dialog-text/hardware OK/cleanup proof; a rejected request can also return zero."
+        }
+      },
+      "kickstart31": {
+        "fields": 18701,
+        "inputAndCleanup": "PASS",
+        "resource": {
+          "protocol": "mui-requester-native-return-resource-v1",
+          "capture": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v54\\reference\\kickstart31\\frame-018701-final.fastram",
+          "observations": [
+            {
+              "address": "0x2194b0",
+              "library": "0x219cfc",
+              "application": "0x21aca4",
+              "stage": 3,
+              "requestResult": 0,
+              "complete": 1,
+              "referenceObject": "0x21aaf4",
+              "referenceNativeWindow": "0x37481c",
+              "referenceGetSucceeded": 1
+            }
+          ],
+          "requireReferenceWindow": true,
+          "verdict": "PASS_REQUEST_CALL_RETURNED_AND_APPLICATION_DISPOSED",
+          "scope": "Requires separate native dialog-text/hardware OK/cleanup proof; a rejected request can also return zero."
+        }
+      }
+    },
+    "iconDriverLayoutCorrection": {
+      "oldControlStatus": "UNAVAILABLE_INVALID_DRIVER_CLICK",
+      "evidence": "candidate-v50/icon/kickstart31/frame-223951-icon-update-success-dialog.json",
+      "oldHitRectangle": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "laterHitRectangle": [
+        4,
+        94,
+        312,
+        10
+      ],
+      "fixedProtocol": "mui-utility-native-input-v30",
+      "retirement": "icon-layout-fixture-retirement-v55.json",
+      "requiredChecks": [
+        "OK rectangle ready",
+        "Modal object disposed and native window unlinked before main close",
+        "Original native cleanup and actual file before/after oracle",
+        "CopperStart retained writer/vector/call ownership"
+      ]
+    },
+    "producerBuild": {
+      "solution": "CopperStart.slnx",
+      "configuration": "Release",
+      "status": "PASS",
+      "errors": 0,
+      "warnings": 12,
+      "evidence": "../CopperStart/artifacts/utility-icon-writer-v56-production-build.log",
+      "nativeGuestProviderProject": {
+        "status": "PASS",
+        "errors": 0,
+        "warnings": 0,
+        "evidence": "../CopperStart/artifacts/utility-icon-provider-v55-project-build.log"
+      }
+    },
+    "v56OriginalIconUpdate": {
+      "protocol": "original-icon-update-ab-functional-v56",
+      "librarySha256": "5065a4ea443cb6f12ec6267e07cee7e03cba4c19bad80c41634288b59338be30",
+      "completedRuns": 2,
+      "rows": [
+        {
+          "rom": "kickstart31",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v56\\icon\\kickstart31\\result.json",
+          "fields": 247801,
+          "inputAndCleanup": "PASS",
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_ACTUAL_ICON_IMAGE_UPDATE_AND_DEFAULT_METADATA_PRESERVATION",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v56-icon-kickstart31-registered-bytes.json"
+            }
+          ],
+          "passed": true
+        },
+        {
+          "rom": "copperstart",
+          "result": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v56\\icon\\copperstart\\result.json",
+          "fields": 409451,
+          "inputAndCleanup": "PASS",
+          "reason": "EMPTY_REGISTRIES_AND_NATIVE_WINDOW_UNLINKED_AFTER_QUIT_AND_SETTLE",
+          "checks": [
+            {
+              "passed": true,
+              "verdict": "PASS_ACTUAL_ICON_IMAGE_UPDATE_AND_DEFAULT_METADATA_PRESERVATION",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v56-icon-copperstart-registered-bytes.json"
+            },
+            {
+              "passed": true,
+              "verdict": "PASS_RETAINED_ICON_WRITER_USED_ONCE",
+              "evidence": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\mui-small-utilities-fix-2026-11-01\\candidate-v56-icon-copperstart-writer-ownership.json"
+            }
+          ],
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "scope": "Unchanged original Icon Update, real hardware input, exact guest file before/after evidence and full native cleanup; CopperStart guest writer ownership checked separately."
+    },
+    "finalScope": {
+      "otherUtilities": "Retained v48 results, MUI SHA-256 3a89edbbb3e5e1eeb7556e9e3bd61941adf093c61c9b6b86eb1d4a9e187d1906",
+      "iconUpdate": "Fresh v56 results, MUI SHA-256 5065a4ea443cb6f12ec6267e07cee7e03cba4c19bad80c41634288b59338be30",
+      "hardware": "Frozen a500-ocs-5m-diagnostic-v1; ROMs and engine unchanged during final replays",
+      "scope": "Functional workflows and complete native cleanup; not a full common-binary matrix or performance qualification"
+    },
+    "commitIntegration": {
+      "date": "2026-11-02",
+      "status": "PASS",
+      "isolatedCheckouts": true,
+      "muiClassic": {
+        "passed": 3973,
+        "skipped": 0
+      },
+      "muiDefault": {
+        "passed": 3973,
+        "skipped": 0
+      },
+      "muiBuilder": {
+        "passed": 26,
+        "skipped": 0
+      },
+      "copperStartFocused": {
+        "passed": 30,
+        "skipped": 0
+      },
+      "copperStartRelease": {
+        "errors": 0,
+        "warnings": 13
+      },
+      "replayHarnessBuild": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "iconProviderBuild": {
+        "errors": 0,
+        "warnings": 1,
+        "warningScope": "Existing sibling compiler nullable warning"
+      },
+      "scope": "Source integration only; frozen native replay evidence retains its own exact input identities."
+    }
+  },
+  "historicalKnownIssuesBeforeFinalReplay": [
+    "MUImem v19 static geometry passes both ROMs. CopperStart close times out at 240000 fields; new-ROM retest running.",
+    "Native Popasl v23 opens on both ROMs, but completion uses an unset portable Application flag. Worker reply remains queued. Ownership-chain fix passes 3935 classic tests; native rebuild pending.",
+    "Split/join bytes, actual icon update and Radio selection remain unqualified."
+  ],
+  "historicalUnqualifiedFunctionsBeforeFinalReplay": [
+    "MUIJoin split/rejoin byte comparison",
+    "ASL file selection/cancellation",
+    "MUImem live-counter correctness and Radio input",
+    "Icon Update actual file update"
+  ],
+  "statusScope": "Final per-binary functional evidence in latestInvestigation; historical runs and library identity remain unchanged",
+  "libraryRecordScope": "Historical baseline; exact final library identities are in latestInvestigation.finalScope",
+  "runsRecordScope": "Historical runs; final evidence is v48 for memory/join/menu/preferences and v56 for Icon Update"
+}

@@ -1,0 +1,51 @@
+"""Guest public GetDiskObjectNew/PutDiskObject and actual DOS file snapshots."""
+from prepare_frame_image_probe import Assembler
+
+
+def command():
+    a=Assembler()
+    def call(lvo):a.words(0x4eae,lvo)
+    a.words(0x48e7,0x3f3e,0x2c78,4)
+    a.immediate(0,1280);a.immediate(1,0x10001);call(-198)
+    a.words(0x4a80);a.branch(0x6700,'done')
+    a.words(0x2a40,0x1b7c,8,8,0x43ed,64,0x2b49,10)
+    a.address(0,'name');a.immediate(0,20);call(-624)
+    a.words(0x224d);call(-486);a.words(0x2b7c,0x4950,0x4231,16)
+    a.address(1,'dos');a.words(0x7025);call(-552)
+    a.words(0x2840,0x4a80);a.branch(0x6700,'wait')
+    a.address(1,'icon');a.words(0x7027);call(-552)
+    a.words(0x2e00,0x2b40,20,0x4a80);a.branch(0x6700,'close_dos')
+    a.words(0x2c47);a.address(0,'src');call(-132)
+    a.words(0x2b40,24,0x4a80);a.branch(0x6700,'close_icon')
+    a.address(0,'dst');call(-132)
+    a.words(0x2b40,28,0x4a80);a.branch(0x6700,'free_source')
+    a.words(0x2c78,4,0x704e);a.immediate(1,0x10001);call(-198)
+    a.words(0x2c00,0x4a80);a.branch(0x6700,'free_objects')
+    a.words(0x206d,24,0x2246,0x704e);call(-624)
+    a.words(0x206d,28,0x2246)
+    for offset in [58,62,74]:a.words(0x2368,offset,offset)
+    a.words(0x2c47,0x2246);a.address(0,'dst');call(-84)
+    a.words(0x2b40,32,0x2c4c);call(-132);a.words(0x2b40,36)
+    a.words(0x2c78,4,0x2246,0x704e);call(-210)
+    a.label('free_objects');a.words(0x2c47,0x206d,28);call(-90)
+    a.label('free_source');a.words(0x2c47,0x206d,24);call(-90)
+    a.words(0x2c4c)
+    for index,(label,buffer) in enumerate([('src_info',128),('dst_info',640)]):
+        a.address(0,label);a.words(0x2208);a.immediate(2,1005);call(-30)
+        a.words(0x2c00,0x2b40,52+index*4,0x4a80);a.branch(0x6700,'next'+str(index))
+        a.words(0x2206,0x41ed,buffer,0x2408);a.immediate(3,512);call(-42)
+        a.words(0x2b40,40+index*4,0x2206);call(-36)
+        a.words(0x2b40,88+index*4)
+        a.label('next'+str(index))
+    a.words(0x2b7c,0,1,48)
+    a.label('close_icon');a.words(0x2c78,4,0x2247);call(-414)
+    a.label('close_dos');a.words(0x2c78,4,0x224c);call(-414)
+    a.label('wait');a.words(0x2c78,4);a.immediate(0,0x80000000);call(-318)
+    a.branch(0x6000,'wait')
+    a.label('done');a.words(0x7000,0x4cdf,0x7cfc,0x4e75)
+    for label,text in [('name','MUI_IconPutProbe'),('dos','dos.library'),('icon','icon.library'),
+                       ('src','RAM:src'),('dst','RAM:dst'),('src_info','RAM:src.info'),('dst_info','RAM:dst.info')]:
+        a.label(label);a.code+=text.encode()+b'\0'
+        if label=='name':a.code+=bytes(20-len(text)-1)
+        if len(a.code)&1:a.code.append(0)
+    return a.finish()

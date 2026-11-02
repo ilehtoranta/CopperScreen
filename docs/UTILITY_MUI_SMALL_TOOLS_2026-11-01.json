@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "reviewedDate": "2026-11-01",
+  "scope": "Acquisition, archive/member integrity and documentation review only; no guest executions.",
+  "applications": [
+    {
+      "id": "mui-mem-11",
+      "archive": {
+        "file": "originals/MUImem.lha",
+        "url": "https://aminet.net/util/wb/MUImem.lha",
+        "bytes": 8747,
+        "sha256": "d453d47e7030db3c9289da08c15982135a465d6d05ab9eced6d212949db874dc"
+      },
+      "readme": {
+        "file": "originals/MUImem.readme",
+        "url": "https://aminet.net/util/wb/MUImem.readme",
+        "bytes": 1663,
+        "sha256": "a4d1f1876cb75426a03649e85d95c1857c528e5fe8d0659b48bcd6b322e592ea"
+      },
+      "members": [
+        {
+          "path": "MUImem.info",
+          "bytes": 1233,
+          "sha256": "5295c8faa1bdd0b29b5fc54ed0c9d2bd9368391c87e31f6d3d3f5fb3d8a06898",
+          "crc16": "41b9"
+        },
+        {
+          "path": "MUImem/MUImem",
+          "bytes": 21756,
+          "sha256": "e8d0322f300f865cc7f8f6c473f1255dd9b5f4e3b7b36bdd0cd36f3a914fba02",
+          "crc16": "4482"
+        },
+        {
+          "path": "MUImem/MUImem.info",
+          "bytes": 1580,
+          "sha256": "7fc72203ebced969e69a7aeb5624990838c6cdb39d61633309411d65dd6ae325",
+          "crc16": "c6fc"
+        },
+        {
+          "path": "MUImem/MUImem.readme",
+          "bytes": 1621,
+          "sha256": "985c8c8c5e16be16400b8e4c72fc3f21b10a95f7648d71ebd5ac2eb837d6169b",
+          "crc16": "0053"
+        },
+        {
+          "path": "MUImem/MUImem.readme.info",
+          "bytes": 1451,
+          "sha256": "26296a497f06a2dc98542d96f3dd0ba7e3f3808634f8c35e93ef44ae37411379",
+          "crc16": "2d13"
+        }
+      ],
+      "binary": {
+        "path": "MUImem/MUImem",
+        "bytes": 21756,
+        "sha256": "e8d0322f300f865cc7f8f6c473f1255dd9b5f4e3b7b36bdd0cd36f3a914fba02"
+      }
+    },
+    {
+      "id": "mui-join-10",
+      "archive": {
+        "file": "originals/MUIJoin10.lha",
+        "url": "https://aminet.net/util/wb/MUIJoin10.lha",
+        "bytes": 21652,
+        "sha256": "18e5521097e1ae1eea665e36ca3406bb850c508b07a04984e1a96ab91d36de75"
+      },
+      "readme": {
+        "file": "originals/MUIJoin10.readme",
+        "url": "https://aminet.net/util/wb/MUIJoin10.readme",
+        "bytes": 402,
+        "sha256": "086bf4ef5c9e3472304d12c8405df1a96b4ed1c334dce10aa218d737550dde65"
+      },
+      "members": [
+        {
+          "path": "MUIJoin.info",
+          "bytes": 1188,
+          "sha256": "63691c76be2e09573f9fa05d99fd5fd28824803ed998aa41f09c03fa71c26453",
+          "crc16": "cc9b"
+        },
+        {
+          "path": "MUIJoin/MUIJoin",
+          "bytes": 22220,
+          "sha256": "783e4eb88aea56af5abf3415e9afbde3c20791838d56eb9c750f1d0d354c011d",
+          "crc16": "083f"
+        },
+        {
+          "path": "MUIJoin/MUIJoin.guide",
+          "bytes": 14641,
+          "sha256": "bd467054246a65b6d46c0641fce751de6d16b37fc65a62795fac3053e9ed6502",
+          "crc16": "65ce"
+        },
+        {
+          "path": "MUIJoin/MUIJoin.guide.info",
+          "bytes": 953,
+          "sha256": "c058bcd98cc747754d37e6cc977b60b04049db8b9002519056616c8f6489a92f",
+          "crc16": "bb77"
+        },
+        {
+          "path": "MUIJoin/MUIJoin.info",
+          "bytes": 1704,
+          "sha256": "e294fef36409ee653960bb5e806253ca93c823ac630fb718d51d6a18c3f90af6",
+          "crc16": "ea91"
+        },
+        {
+          "path": "MUIJoin/ReadMe.mui",
+          "bytes": 970,
+          "sha256": "fe3818f185c14e9e1caf67ca68ccce7df1c15aef5d24c4604b05aa3d52b53d79",
+          "crc16": "cfad"
+        },
+        {
+          "path": "MUIJoin/ReadMe.mui.info",
+          "bytes": 857,
+          "sha256": "a848a9adff9d48503efb0bdfc057c13ed1bf75afc9ad1d97c544716c836c3e03",
+          "crc16": "2719"
+        }
+      ],
+      "binary": {
+        "path": "MUIJoin/MUIJoin",
+        "bytes": 22220,
+        "sha256": "783e4eb88aea56af5abf3415e9afbde3c20791838d56eb9c750f1d0d354c011d"
+      }
+    },
+    {
+      "id": "mui-menu-100",
+      "archive": {
+        "file": "originals/MUIMenu.lha",
+        "url": "https://aminet.net/util/wb/MUIMenu.lha",
+        "bytes": 29280,
+        "sha256": "20fa514db62af45261ba0ab411308fe3767e4938d0098073e6c36ced6e090c94"
+      },
+      "readme": {
+        "file": "originals/MUIMenu.readme",
+        "url": "https://aminet.net/util/wb/MUIMenu.readme",
+        "bytes": 400,
+        "sha256": "a3d6d2e85546e3d25368965db1f8681a4d13bcb0e7c4f29fb3a4c0cfa1389143"
+      },
+      "members": [
+        {
+          "path": "MUIMenu/Docs/MUIMenu.doc",
+          "bytes": 12174,
+          "sha256": "c521d0da2a2da6150c7089169505323c17fa483c481ba44df4b6d31e8dc1104e",
+          "crc16": "82e1"
+        },
+        {
+          "path": "MUIMenu/Docs/MUIMenu.guide",
+          "bytes": 14108,
+          "sha256": "7d9f7f66b1a28fd64c89ace81d76abd6079ddbffccaa1fab390624a25dbc31a7",
+          "crc16": "68bf"
+        },
+        {
+          "path": "MUIMenu/MUIMenu",
+          "bytes": 22620,
+          "sha256": "04507b419b7157ec31f03d2f19b634da842532726738bc5c50c1e0c41d156a73",
+          "crc16": "eb3a"
+        },
+        {
+          "path": "MUIMenu/MUIMenu.info",
+          "bytes": 376,
+          "sha256": "73ceae16f5b777c7a52d29fa9a0060ae0b0ee2d3d0f44272ef37546d8d61782f",
+          "crc16": "d640"
+        },
+        {
+          "path": "MUIMenu/ReadMe",
+          "bytes": 612,
+          "sha256": "e8014e4a00dd0e47e984b00eb059d3e2c70494b1ae328472b657eba54947d2d6",
+          "crc16": "34c6"
+        },
+        {
+          "path": "MUIMenu/Source/code.h",
+          "bytes": 2472,
+          "sha256": "a0aff30fc3263c8daa72516e25233e2bd107716cce7519db6ddf707e11c0ab2d",
+          "crc16": "6edd"
+        },
+        {
+          "path": "MUIMenu/Source/MUIMenu.c",
+          "bytes": 19438,
+          "sha256": "2f72f5e318bdbd73a1fcb3a8f516bbd7742810ec1abfe0d0968c473e277d89b4",
+          "crc16": "8b16"
+        }
+      ],
+      "binary": {
+        "path": "MUIMenu/MUIMenu",
+        "bytes": 22620,
+        "sha256": "04507b419b7157ec31f03d2f19b634da842532726738bc5c50c1e0c41d156a73"
+      }
+    },
+    {
+      "id": "mui-icon-update-12",
+      "archive": {
+        "file": "originals/MUI_IconUpd12.lha",
+        "url": "https://aminet.net/util/wb/MUI_IconUpd12.lha",
+        "bytes": 26479,
+        "sha256": "583303d4df9ad276876c80d3687bb553344f88f8acd9cccdee88a9ad2df0d250"
+      },
+      "readme": {
+        "file": "originals/MUI_IconUpd12.readme",
+        "url": "https://aminet.net/util/wb/MUI_IconUpd12.readme",
+        "bytes": 718,
+        "sha256": "d5b3ac589dc71a57c311977801dfc817434cdd90c09cd94c398e1a07629b79c4"
+      },
+      "members": [
+        {
+          "path": "Build.info",
+          "bytes": 3538,
+          "sha256": "44ea98da94b52e593ef9702c8ee3e0e7c0e3c84b4670325ed8fb9d30a21fede3",
+          "crc16": "77dd"
+        },
+        {
+          "path": "drophere.c",
+          "bytes": 30870,
+          "sha256": "7e620878f2aac69a55d6cce0caeb6d2edda3cf8421a7b722d115313f1feca1ee",
+          "crc16": "1326"
+        },
+        {
+          "path": "drophere.c.info",
+          "bytes": 3485,
+          "sha256": "2af4c16585d124fef90b922db526a4917baf424996fc5f91b7385c4c839b9893",
+          "crc16": "349d"
+        },
+        {
+          "path": "iconupd.mrx",
+          "bytes": 676,
+          "sha256": "06a4f7be57860b4c151849e9a0b5320fbad0d54a81edfaec706920ecb7aeba49",
+          "crc16": "dcc6"
+        },
+        {
+          "path": "MUI.readme",
+          "bytes": 972,
+          "sha256": "e28f5679c9f2cc183f57efc99c1738fe345334692c7eee7b7569517f4faa6bcd",
+          "crc16": "1ea4"
+        },
+        {
+          "path": "MUI.readme.info",
+          "bytes": 3820,
+          "sha256": "3ed2c96664b8690a667c002c06a0cc6443a0c0b9bd7e70e33167255136983bec",
+          "crc16": "e462"
+        },
+        {
+          "path": "MUI_Icon_Update.c",
+          "bytes": 31464,
+          "sha256": "678b47c1c7b50d020fd99728b4b36c3c08bbf8e80edafb4d137e7debcf1f59cd",
+          "crc16": "e6f1"
+        },
+        {
+          "path": "MUI_Icon_Update.c.info",
+          "bytes": 486,
+          "sha256": "dd713887379bc70a2855c1b5f49de4969325a0f4ad94af8e4b1746dd0d4204d4",
+          "crc16": "ea42"
+        },
+        {
+          "path": "MUI_IconUpdate",
+          "bytes": 19260,
+          "sha256": "361a2aeb15040b8d2491df1c18a870289b6f3f45e6abb56f8bfb736b71f35515",
+          "crc16": "71c2"
+        },
+        {
+          "path": "MUI_IconUpdate.doc",
+          "bytes": 8005,
+          "sha256": "1fecb6a08f39c01fba4c46adedf6e7eecc2459465b425657b8676ca596912cb1",
+          "crc16": "1c3b"
+        },
+        {
+          "path": "MUI_IconUpdate.doc.info",
+          "bytes": 4652,
+          "sha256": "24c728b0787c7525e7f77b8ef209d9adaeb41fbeb8784dd3b5d77c1333f1a83c",
+          "crc16": "55c8"
+        },
+        {
+          "path": "MUI_IconUpdate.info",
+          "bytes": 835,
+          "sha256": "6b2f25b39b2712812e728dc2aae4d80c1ffa23fef4c82e01a4b72349369625bb",
+          "crc16": "a591"
+        },
+        {
+          "path": "SCOPTIONS",
+          "bytes": 167,
+          "sha256": "5568537979373669d82ec8e231fa55582004c29f95abde57d5397e1a40e93bba",
+          "crc16": "1293"
+        },
+        {
+          "path": "SCoptions.info",
+          "bytes": 4275,
+          "sha256": "49a5985ff212d63d849c14f006438d20550a1a40179bbc7138841005d753aee2",
+          "crc16": "694c"
+        }
+      ],
+      "binary": {
+        "path": "MUI_IconUpdate",
+        "bytes": 19260,
+        "sha256": "361a2aeb15040b8d2491df1c18a870289b6f3f45e6abb56f8bfb736b71f35515"
+      }
+    }
+  ]
+}
