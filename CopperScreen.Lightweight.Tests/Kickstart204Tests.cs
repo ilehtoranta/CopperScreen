@@ -75,22 +75,31 @@ public sealed class Kickstart204Tests(ITestOutputHelper output) : IDisposable
 
     [Theory]
     [InlineData(262144, 37, 175)]
+    [InlineData(524288, 44, 1)]
+    public void UnsupportedRomShapesAndReleasesAreRejected(int size, ushort major, ushort revision)
+        => Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(
+            Rom(size, major, revision), CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart20));
+
+    [Theory]
     [InlineData(524288, 37, 299)]
     [InlineData(524288, 37, 300)]
     [InlineData(524288, 37, 350)]
     [InlineData(524288, 40, 63)]
     [InlineData(524288, 39, 106)]
-    public void OtherRomRevisionsCannotSilentlySubstituteFor204(int size, ushort major, ushort revision)
-        => Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(
-            Rom(size, major, revision), CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart20));
+    public void OtherRecognizedRomVersionsAreAccepted(int size, ushort major, ushort revision)
+    {
+        var rom = Rom(size, major, revision);
+        Assert.Equal(File.ReadAllBytes(rom), CopperScreenKickstartRomArchive.ReadNativeRom(
+            rom, CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart20));
+    }
 
     [Fact]
-    public void Explicit13And31SourcesReject204AndA1200StillRequiresItsOwnRom()
+    public void A1200AndLegacyVersionSourcesAcceptOtherRecognizedRoms()
     {
         var rom = Rom();
         foreach (var source in new[] { CopperScreenKickstartSource.Kickstart13Rom, CopperScreenKickstartSource.Kickstart31Rom })
-            Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(rom, source, KickstartVersion.Kickstart20));
-        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(rom,
+            Assert.Equal(File.ReadAllBytes(rom), CopperScreenKickstartRomArchive.ReadNativeRom(rom, source, KickstartVersion.Kickstart20));
+        Assert.Equal(File.ReadAllBytes(rom), CopperScreenKickstartRomArchive.ReadNativeRom(rom,
             CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart20, a1200: true));
         var draft = A500Plus(rom);
         draft.CpuBackend = M68kBackendKind.AccurateM68020;

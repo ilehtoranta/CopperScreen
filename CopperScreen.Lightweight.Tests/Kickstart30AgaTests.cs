@@ -36,11 +36,13 @@ public sealed class Kickstart30AgaTests : IDisposable
         Assert.Null(session.FaultMessage); Assert.Equal(4, session.PresentationGeometry.HorizontalSamplesPerLowResPixel);
     }
     [Theory]
-    [InlineData(40, 63)] [InlineData(40, 68)] [InlineData(39, 105)] [InlineData(34, 5)]
-    public void A1200ProfileRequiresItsOwnRomRevision(ushort major, ushort revision)
+    [InlineData(40, 63)] [InlineData(37, 175)]
+    public void A1200CanTryOtherRecognizedNativeRomVersions(ushort major, ushort revision)
     {
         var draft = Draft(); draft.KickstartRomPath = Rom(major, revision);
-        Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(draft.ToStartupOptions(_directory)));
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        Assert.True(session.Machine.IsAga);
     }
     [Theory]
     [InlineData("denise")] [InlineData("agnus")] [InlineData("cpu")] [InlineData("chip")] [InlineData("slow")] [InlineData("ntsc")]

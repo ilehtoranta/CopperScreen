@@ -5,6 +5,14 @@ internal enum CopperScreenMachineModel { Amiga500, Amiga500Ecs, Amiga1200 }
 // Desktop presets only; the session validator remains the hardware authority.
 internal static class CopperScreenMachinePresets
 {
+    public static KickstartVersion RecommendedKickstartVersion(CopperScreenMachineModel model) => model switch
+    {
+        CopperScreenMachineModel.Amiga500 => KickstartVersion.Kickstart13,
+        CopperScreenMachineModel.Amiga500Ecs => KickstartVersion.Kickstart20,
+        CopperScreenMachineModel.Amiga1200 => KickstartVersion.Kickstart30,
+        _ => throw new ArgumentOutOfRangeException(nameof(model))
+    };
+
     public static string Label(CopperScreenMachineModel model) => model switch
     {
         CopperScreenMachineModel.Amiga500 => "Amiga 500",
@@ -39,14 +47,14 @@ internal static class CopperScreenMachinePresets
         draft.RtgVramMb = 0;
         draft.RtcEnabled = model == CopperScreenMachineModel.Amiga500Ecs;
         draft.CpuBackend = model == CopperScreenMachineModel.Amiga1200 ? M68kBackendKind.AccurateM68EC020 : M68kBackendKind.AccurateM68000;
-        draft.RomVersion = model == CopperScreenMachineModel.Amiga1200 ? KickstartVersion.Kickstart30
-            : current.RomVersion is KickstartVersion.Kickstart20 or KickstartVersion.Kickstart31 ? current.RomVersion : KickstartVersion.Kickstart13;
+        var hasSelectedNativeRom = current.KickstartSource is (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom) &&
+            !string.IsNullOrWhiteSpace(current.KickstartRomPath);
+        draft.RomVersion = hasSelectedNativeRom ? current.RomVersion : RecommendedKickstartVersion(model);
         draft.KickstartSource = current.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenKickstartSource.CopperStart
             : model == CopperScreenMachineModel.Amiga1200 ? CopperScreenKickstartSource.KickstartRom
             : model == CopperScreenMachineModel.Amiga500 && current.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot && draft.HardDrives.Count == 0 && draft.HostDirectories.Count == 0
                 ? CopperScreenKickstartSource.MinimalDiskBoot
-                : draft.RomVersion == KickstartVersion.Kickstart20 ? CopperScreenKickstartSource.KickstartRom
-                : draft.RomVersion == KickstartVersion.Kickstart31 ? CopperScreenKickstartSource.Kickstart31Rom : CopperScreenKickstartSource.Kickstart13Rom;
+                : CopperScreenKickstartSource.KickstartRom;
         draft.MarkRequiresRestart();
         return draft;
     }

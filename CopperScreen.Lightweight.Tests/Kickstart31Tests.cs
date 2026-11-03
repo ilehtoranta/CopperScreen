@@ -65,24 +65,23 @@ public sealed class Kickstart31Tests : IDisposable
 
     [Theory]
     [InlineData(262144, 40, 63)]
-    [InlineData(524288, 39, 106)]
-    [InlineData(524288, 40, 68)]
-    [InlineData(524288, 40, 70)]
     [InlineData(524288, 34, 5)]
-    public void UnsupportedRomShapesAndOtherMachineRevisionsAreRejected(int size, ushort major, ushort revision)
+    [InlineData(524288, 44, 1)]
+    public void UnsupportedRomShapesAndRevisionsAreRejected(int size, ushort major, ushort revision)
     {
         var path = Rom(size, major, revision);
         Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.Kickstart31Rom, KickstartVersion.Kickstart31));
     }
 
     [Fact]
-    public void NeitherTheSelectedVersionNorAnExplicit13SourceCanSilentlyUse31()
+    public void NativeRomVersionCanDifferFromTheSelectedModelAndVersionHint()
     {
         var path = Rom();
-        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart13));
-        Assert.Throws<NotSupportedException>(() => CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart31));
-        var draft = new CopperScreenSettingsDraft { KickstartSource = CopperScreenKickstartSource.Kickstart31Rom };
-        Assert.NotNull(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        var expected = File.ReadAllBytes(path);
+        Assert.Equal(expected, CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart13));
+        Assert.Equal(expected, CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.Kickstart13Rom, KickstartVersion.Kickstart31));
+        var draft = new CopperScreenSettingsDraft { KickstartSource = CopperScreenKickstartSource.Kickstart31Rom, RomVersion = KickstartVersion.Kickstart13 };
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
     }
 
     [Fact]

@@ -1,7 +1,7 @@
 {
   "id": "a500-plus-ecs-pal",
   "displayName": "A500 Plus ECS PAL",
-  "description": "PAL A500+, 68000, ECS Agnus/Denise, 1 MiB Chip RAM and RTC. Supply a native Kickstart 2.04 ROM (v37.175). Floppy disks are optional.",
+  "description": "PAL A500+, 68000, ECS Agnus/Denise, 1 MiB Chip RAM and RTC. Kickstart 2.04 is recommended; other supported ROM versions can be tried. Floppy disks are optional.",
   "machine": {
     "model": "A500Plus",
     "agnus": "8375-318069-10",

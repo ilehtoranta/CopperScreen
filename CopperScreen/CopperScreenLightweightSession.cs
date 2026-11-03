@@ -176,7 +176,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (requireRomPath && minimal && string.IsNullOrWhiteSpace(options.DriveDiskPaths[0]))
             return "Choose a standard ADF startup disk in DF0 for minimal disk boot.";
         if (requireRomPath && !minimal && string.IsNullOrWhiteSpace(options.KickstartRomPath))
-            return copperStart ? CopperScreenCopperStartRom.RecoveryFor(aga) : "Choose the matching Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM in Settings > Setup, or supply --kickstart <path> with the matching profile.";
+            return copperStart ? CopperScreenCopperStartRom.RecoveryFor(aga) : "Choose a supported native Kickstart ROM in Settings > Setup, or supply --kickstart <path>. Recommended versions are 1.3 for A500, 2.04 for A500+ and 3.0 for A1200; other supported combinations may have compatibility issues.";
         var maxFast = LightweightA500Configuration.MaximumFastRamBytes(GetCpuModel(cpu));
         if (!LightweightA500Configuration.IsSupportedFastRamSize(p.RealFastRamSize) || p.RealFastRamSize > maxFast)
             return $"Fast RAM must use a standard size up to {maxFast / 1048576} MiB for the selected CPU.";

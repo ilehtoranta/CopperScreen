@@ -44,7 +44,7 @@ public sealed class MachinePresetTests
         Assert.Equal(4096, original.RealFastRamKb);
         Assert.Equal(512, original.ChipRamKb);
         Assert.Equal(0, changed.RealFastRamKb);
-        Assert.Equal(KickstartVersion.Kickstart30, changed.RomVersion);
+        Assert.Equal(KickstartVersion.Kickstart13, changed.RomVersion);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class MachinePresetTests
         var a500 = CopperScreenMachinePresets.Apply(aga, CopperScreenMachineModel.Amiga500);
         Assert.Equal(M68kBackendKind.AccurateM68000, a500.CpuBackend);
         Assert.Equal(KickstartVersion.Kickstart13, a500.RomVersion);
-        Assert.Equal(CopperScreenKickstartSource.Kickstart13Rom, a500.KickstartSource);
+        Assert.Equal(CopperScreenKickstartSource.KickstartRom, a500.KickstartSource);
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(a500, AppContext.BaseDirectory));
     }
 

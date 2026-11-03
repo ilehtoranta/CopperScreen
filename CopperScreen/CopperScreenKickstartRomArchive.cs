@@ -11,38 +11,32 @@ namespace CopperScreen;
 internal static class CopperScreenKickstartRomArchive
 {
 	private const long MaximumRomImageSize = 16 * 1024 * 1024;
+	private const int MaximumRomKeySize = 512 * 1024;
+	private const string EncodedRomHeader = "AMIROMTYPE1";
 	private static readonly string[] RomExtensions = [".rom", ".bin", ".kick"];
 
-	internal static byte[] ReadNativeRom(string path, CopperScreenKickstartSource source, KickstartVersion version, bool a1200 = false)
+	internal static byte[] ReadNativeRom(string path, KickstartVersion versionHint)
 	{
-		var rom = ReadRomImage(path, source, version);
-		if (a1200)
-		{
-			if (source != CopperScreenKickstartSource.KickstartRom || version != KickstartVersion.Kickstart30 ||
-				rom.Length != 524288 || BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(12)) != 39 ||
-				BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(14)) != 106)
-				throw new NotSupportedException("Choose an A1200 Kickstart 3.0 ROM (512 KiB, v39.106) for the initial AGA profile.");
-			return rom;
-		}
-		var actual = IdentifyNativeVersion(rom);
-		if (actual != version ||
-			(source == CopperScreenKickstartSource.Kickstart13Rom && actual != KickstartVersion.Kickstart13) ||
-			(source == CopperScreenKickstartSource.Kickstart31Rom && actual != KickstartVersion.Kickstart31))
-			throw new NotSupportedException("The ROM does not match the selected Kickstart version. Choose Kickstart 1.3, A500+ Kickstart 2.04 or A500 Kickstart 3.1 in Settings.");
+		var rom = ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, versionHint);
+		_ = IdentifyNativeVersion(rom);
 		return rom;
 	}
+
+	internal static byte[] ReadNativeRom(string path, CopperScreenKickstartSource source, KickstartVersion versionHint, bool a1200 = false)
+		=> ReadNativeRom(path, versionHint);
 
 	internal static KickstartVersion IdentifyNativeVersion(ReadOnlySpan<byte> rom)
 	{
 		if (rom.Length == 262144 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 34)
 			return KickstartVersion.Kickstart13;
-		if (rom.Length == 524288 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 37 &&
-			BinaryPrimitives.ReadUInt16BigEndian(rom[14..]) == 175)
+		var major = rom.Length >= 16 ? BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) : 0;
+		if (rom.Length == 524288 && major == 37)
 			return KickstartVersion.Kickstart20;
-		if (rom.Length == 524288 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 40 &&
-			BinaryPrimitives.ReadUInt16BigEndian(rom[14..]) == 63)
+		if (rom.Length == 524288 && major == 39)
+			return KickstartVersion.Kickstart30;
+		if (rom.Length == 524288 && major == 40)
 			return KickstartVersion.Kickstart31;
-		throw new NotSupportedException("Choose native Kickstart 1.3 (256 KiB, v34), A500+ Kickstart 2.04 (512 KiB, v37.175) or A500/A600/A2000 Kickstart 3.1 (512 KiB, v40.63). Other machine ROMs are unavailable.");
+		throw new NotSupportedException("Choose a supported native Kickstart ROM: version 1.3, 2.x, 3.0 or 3.1. Other Kickstart releases are not yet recognized.");
 	}
 
 	public static byte[] ReadRomImage(
@@ -52,7 +46,7 @@ internal static class CopperScreenKickstartRomArchive
 	{
 		if (!Path.GetExtension(path).Equals(".zip", StringComparison.OrdinalIgnoreCase))
 		{
-			return File.ReadAllBytes(path);
+			return DecodeCloantoRomIfNeeded(path, File.ReadAllBytes(path));
 		}
 
 		using var archive = ZipFile.OpenRead(path);
@@ -79,7 +73,33 @@ internal static class CopperScreenKickstartRomArchive
 		using var input = selected.Open();
 		using var rom = new MemoryStream(checked((int)selected.Length));
 		input.CopyTo(rom);
-		return rom.ToArray();
+		return DecodeCloantoRomIfNeeded(path, rom.ToArray());
+	}
+
+	private static byte[] DecodeCloantoRomIfNeeded(string romPath, byte[] image)
+	{
+		var header = System.Text.Encoding.ASCII.GetBytes(EncodedRomHeader);
+		if (image.Length < header.Length || !image.AsSpan(0, header.Length).SequenceEqual(header))
+			return image;
+
+		var directory = Path.GetDirectoryName(Path.GetFullPath(romPath))!;
+		var keyPath = Path.Combine(directory, "rom.key");
+		if (!File.Exists(keyPath))
+			throw new InvalidDataException("This ROM is Amiga Forever encoded (AMIROMTYPE1). Put its rom.key file in the same folder, then select the ROM again.");
+
+		var keyLength = new FileInfo(keyPath).Length;
+		if (keyLength is <= 0 or > MaximumRomKeySize)
+			throw new InvalidDataException("The rom.key file beside this encoded ROM is empty or too large.");
+
+		var key = File.ReadAllBytes(keyPath);
+		if (image.Length - header.Length > MaximumRomImageSize)
+			throw new InvalidDataException("The encoded Kickstart ROM is too large.");
+
+		var decoded = image.AsSpan(header.Length).ToArray();
+		for (var i = 0; i < decoded.Length; i++)
+			decoded[i] ^= key[i % key.Length];
+
+		return decoded;
 	}
 
 	private static ZipArchiveEntry? SelectEntry(
