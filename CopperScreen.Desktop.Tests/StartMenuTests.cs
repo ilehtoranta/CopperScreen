@@ -38,8 +38,8 @@ public sealed partial class LaunchWorkflowTests
             var image = MenuDraft(window).HardDrives.Single().Path;
             Assert.NotEqual(oldPath, image);
             Assert.Contains("A1200-Desktop", image);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 0;
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 0);
+            LaunchSelection.Select(window, 3);
             Assert.Equal(image, MenuDraft(window).HardDrives.Single().Path);
             Assert.Equal(original, File.ReadAllBytes(oldPath));
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
@@ -65,7 +65,7 @@ public sealed partial class LaunchWorkflowTests
         string image;
         try
         {
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             var draft = MenuDraft(window);
             image = Assert.Single(draft.HardDrives).Path;
             Assert.NotEqual(Path.GetDirectoryName(typeof(MainWindow).Assembly.Location), Path.GetDirectoryName(image));
@@ -73,9 +73,9 @@ public sealed partial class LaunchWorkflowTests
             // again must not reset a disk that no longer matches its seed.
             using (var stream = File.OpenWrite(image)) { stream.Position = stream.Length - 1; stream.WriteByte(0x5A); }
             var expected = File.ReadAllBytes(image);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 0;
+            LaunchSelection.Select(window, 0);
             Assert.True(Button(window, "Choose ROM…").IsEffectivelyVisible);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             Assert.Equal(image, Assert.Single(MenuDraft(window).HardDrives).Path);
             Assert.Equal(expected, File.ReadAllBytes(image));
             new CopperScreenRecentSession(_root).Save(MenuDraft(window), 50, false, AppContext.BaseDirectory);
@@ -84,7 +84,7 @@ public sealed partial class LaunchWorkflowTests
         var reopened = new MainWindow([], new CopperScreenRecentSession(_root)); reopened.Show();
         try
         {
-            Assert.Equal(3, Named<ComboBox>(reopened, "Start configuration").SelectedIndex);
+            Assert.Equal(3, LaunchSelection.Current(reopened));
             Assert.True(Button(reopened, "Start CopperOS").IsEnabled);
             Assert.Equal(image, Assert.Single(MenuDraft(reopened).HardDrives).Path);
             Assert.Equal(0x5A, File.ReadAllBytes(image)[^1]);
@@ -177,7 +177,7 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             var draft = MenuDraft(window);
             var image = Assert.Single(draft.HardDrives).Path;
             Assert.False(draft.HardDrives[0].ReadOnly);
@@ -219,7 +219,7 @@ public sealed partial class LaunchWorkflowTests
             Capture(window, "copperos-hdf-native-desktop");
             Click(Named<Button>(window, "Stop"));
             await Until(() => window.GetLogicalDescendants().OfType<Button>().Any(b => b.Content is "Start CopperOS" && b.IsEffectivelyVisible && b.IsEnabled));
-            Assert.Equal(3, Named<ComboBox>(window, "Start configuration").SelectedIndex);
+            Assert.Equal(3, LaunchSelection.Current(window));
             var restored = new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!;
             Assert.Equal(image, Assert.Single(restored.HardDrives).Path);
             Assert.All(restored.DriveDiskPaths, Assert.Null);
@@ -251,7 +251,7 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = choice;
+            LaunchSelection.Select(window, choice);
             var draft = MenuDraft(window);
             Assert.Equal(choice, CopperScreenLaunchWorkflow.StartChoice(draft));
             draft.KickstartRomPath = path;
@@ -286,10 +286,10 @@ public sealed partial class LaunchWorkflowTests
             Assert.False(Button(window, "Remove floppy disk").IsEffectivelyVisible);
             var draft = MenuDraft(window); draft.KickstartRomPath = "a500.rom";
             SetMenuDraft(window, draft);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 1;
+            LaunchSelection.Select(window, 1);
             Assert.Null(MenuDraft(window).KickstartRomPath);
             Assert.Equal(KickstartVersion.Kickstart20, MenuDraft(window).RomVersion);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             draft = MenuDraft(window);
             Assert.Equal(CopperScreenKickstartSource.CopperStart, draft.KickstartSource);
             Assert.Equal(M68kBackendKind.AccurateM68EC020, draft.CpuBackend);
@@ -310,7 +310,7 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             var draft = CopperScreenLaunchWorkflow.SelectCopperOsHdf(MenuDraft(window), path);
             Assert.True(Assert.Single(draft.HardDrives).ReadOnly);
             Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory));
@@ -324,7 +324,7 @@ public sealed partial class LaunchWorkflowTests
             var restored = new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!;
             Assert.Equal(draft.HardDrives[0], restored.HardDrives[0]);
             Assert.Equal(bytes, File.ReadAllBytes(path));
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 2;
+            LaunchSelection.Select(window, 2);
             Assert.Empty(MenuDraft(window).HardDrives);
             Assert.True(Button(window, "Choose disk…").IsEffectivelyVisible);
             Assert.True(Button(window, "Choose ROM…").IsEffectivelyVisible);

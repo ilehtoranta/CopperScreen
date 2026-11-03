@@ -128,7 +128,7 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            var boot = Named<ComboBox>(window, "Start configuration");
+            var boot = Named<ComboBox>(window, "Amiga model");
             boot.Focus();
             Press(window, Key.Down); Release(window, Key.Down);
             Assert.Equal(1, boot.SelectedIndex);
@@ -157,7 +157,7 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
         {
             window.SetRenderScaling(scale);
             window.SizeToContent = SizeToContent.Manual; window.Width = width; window.Height = height;
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             window.GetLogicalDescendants().OfType<Expander>().Single(e => e.Header is "Saved launch profiles").IsExpanded = true;
             await Task.Delay(50); // Platform resize/scaling notifications arrive after the property setters.
             window.UpdateLayout();

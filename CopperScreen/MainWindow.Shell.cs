@@ -428,7 +428,7 @@ internal sealed partial class MainWindow
         AutomationProperties.SetName(_muteButton, _muteButton.Content.ToString()!);
         _sessionStatus.Text = !running ? "Ready when you are" : sessionState.FaultMessage != null ? "Stopped" : sessionState.IsPaused ? "Paused" : "Running · " + MachineName(_committedSettings);
         _sessionStatus.Foreground = sessionState.IsPaused ? Accent : MutedText;
-        _captureStatus.Text = !running ? "Choose a launch workflow below" : _mouseGrabActive ? "Mouse captured · F10 to release" : workspace ? "CopperOS: type Demo at the Shell prompt · F10 releases input · More for help/export" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
+        _captureStatus.Text = !running ? "" : _mouseGrabActive ? "Mouse captured · F10 to release" : workspace ? "CopperOS: type Demo at the Shell prompt · F10 releases input · More for help/export" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
         _captureStatus.Foreground = _mouseGrabActive ? Accent : MutedText;
         if (!_toolbar.IsVisible && WindowState != WindowState.FullScreen)
             _captureStatus.Text += " · F11 controls";

@@ -3,7 +3,7 @@ using CopperScreen;
 
 namespace CopperScreen.Tests;
 
-public sealed class CopperScreenMinimalBootTests : IDisposable
+public sealed partial class CopperScreenMinimalBootTests : IDisposable
 {
     private readonly string _directory = Path.Combine(Path.GetTempPath(), "copperscreen-minimal-" + Guid.NewGuid().ToString("N"));
     public CopperScreenMinimalBootTests() => Directory.CreateDirectory(_directory);

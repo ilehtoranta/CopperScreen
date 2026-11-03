@@ -21,7 +21,7 @@ public sealed partial class LaunchWorkflowTests
         var cpu = model == 2 ? M68kBackendKind.AccurateM68030 : M68kBackendKind.AccurateM68010;
         try
         {
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = model;
+            LaunchSelection.Select(window, model);
             Click(Button(window, "Configure Amiga…"));
             var settings = SettingsField<Window>(window, "_settingsWindow");
             settings.GetLogicalDescendants().OfType<ComboBox>().Single(c => AutomationProperties.GetName(c) == "Amiga CPU").SelectedItem = cpu.ToString();
@@ -37,7 +37,7 @@ public sealed partial class LaunchWorkflowTests
         var reopened = new MainWindow([], new CopperScreenRecentSession(_root)); reopened.Show();
         try
         {
-            Assert.Equal(model, Named<ComboBox>(reopened, "Start configuration").SelectedIndex);
+            Assert.Equal(model, LaunchSelection.Current(reopened));
             Assert.Equal(cpu, MenuDraft(reopened).CpuBackend);
             Assert.Equal(2048, MenuDraft(reopened).RealFastRamKb);
             Assert.True(MenuDraft(reopened).RtcEnabled);

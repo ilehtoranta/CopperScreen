@@ -490,8 +490,39 @@ internal sealed partial class LightweightVideo
         if (x >= VisibleRasterXStart && x >= _horizontalWindowStart &&
             x + 1 < _horizontalWindowStop)
         {
-            RenderHiresVisiblePair(line, x, index, firstPair, machine);
-            RenderHiresVisiblePair(line, x + 1, index + 2, secondPair, machine);
+            if (machine.TryAdvanceTransparentHiresSpriteCck(line, x))
+            {
+                var first = firstPair >> 6;
+                var second = firstPair & 63;
+                var third = secondPair >> 6;
+                var fourth = secondPair & 63;
+                if ((_effectiveBplcon0 & 0x0400) != 0)
+                {
+                    var fields = _dualPlayfieldPixels;
+                    first = fields[first] & 15;
+                    second = fields[second] & 15;
+                    third = fields[third] & 15;
+                    fourth = fields[fourth] & 15;
+                }
+                var palette = Palette;
+                ref var destination = ref _rendering[index];
+                Vector128.Create(palette[first], palette[second], palette[third], palette[fourth])
+                    .StoreUnsafe(ref destination);
+                return;
+            }
+
+            // No control input occurs between these pairs. Sprite comparison,
+            // collision observation and shifting still run at both positions.
+            if ((_effectiveBplcon0 & 0x0400) != 0)
+            {
+                RenderDualHiresVisiblePair(line, x, index, firstPair, machine);
+                RenderDualHiresVisiblePair(line, x + 1, index + 2, secondPair, machine);
+            }
+            else
+            {
+                RenderSingleHiresVisiblePair(line, x, index, firstPair, machine);
+                RenderSingleHiresVisiblePair(line, x + 1, index + 2, secondPair, machine);
+            }
             return;
         }
         RenderHiresBoundaryCck(line, x, index, firstPair, secondPair, machine);
@@ -513,6 +544,13 @@ internal sealed partial class LightweightVideo
             RenderDualHiresVisiblePair(line, x, index, pair, machine);
             return;
         }
+        RenderSingleHiresVisiblePair(line, x, index, pair, machine);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void RenderSingleHiresVisiblePair(int line, int x, int index, int pair,
+        LightweightA500Machine machine)
+    {
         var first = pair >> 6;
         var second = pair & 0x3F;
         machine.ComposeHiresSpriteColorIndexes(line, x, first, second,

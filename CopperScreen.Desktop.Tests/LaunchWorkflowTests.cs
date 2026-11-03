@@ -41,10 +41,15 @@ public sealed partial class LaunchWorkflowTests
         window.Show();
         try
         {
-            Assert.Contains(window.GetLogicalDescendants().OfType<TextBlock>(), t => t.Text == CopperScreenLaunchWorkflow.ContentGuidance);
+            var labels = window.GetLogicalDescendants().OfType<TextBlock>().Select(t => t.Text).ToArray();
+            Assert.DoesNotContain("COPPERSCREEN", labels);
+            Assert.DoesNotContain("Start your Amiga", labels);
+            Assert.DoesNotContain(CopperScreenLaunchWorkflow.ContentGuidance, labels);
+            Assert.Contains("Amiga model", labels);
+            Assert.Equal("Kickstart 1.3 ROM required.", Named<TextBlock>(window, "ROM requirements").Text);
             Assert.False(Button(window, "Start Amiga").IsEnabled);
             Capture(window, "first-run");
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
             Assert.False(Button(window, "Choose disk…").IsEffectivelyVisible);
@@ -64,7 +69,7 @@ public sealed partial class LaunchWorkflowTests
         window.Show();
         try
         {
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Button(window, "Configure Amiga…").RaiseEvent(new RoutedEventArgs(Avalonia.Controls.Button.ClickEvent));
             // Configuration opens normally after selecting the bounded preview.
@@ -148,7 +153,7 @@ public sealed partial class LaunchWorkflowTests
         {
             Assert.False(Button(window, "Start Amiga").IsEnabled);
             Assert.False(string.IsNullOrWhiteSpace(Named<TextBlock>(window, "Startup guidance").Text));
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Assert.Equal("broken archive", File.ReadAllText(zip));
         }
@@ -191,7 +196,7 @@ public sealed partial class LaunchWorkflowTests
         window.Show();
         try
         {
-            Assert.Equal(-1, Named<ComboBox>(window, "Start configuration").SelectedIndex);
+            Assert.Equal(4, LaunchSelection.Current(window));
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Capture(window, "copperos-ready");
             Click(Button(window, "Start CopperOS"));

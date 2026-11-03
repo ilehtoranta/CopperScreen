@@ -1,10 +1,12 @@
-# Minimal disk boot — 2026-10-04
+# Minimal disk boot
 
 CopperScreen supplies an original, deliberately limited boot firmware for demos
 and games that replace the operating system after boot. Select **Minimal disk
-boot (experimental)** on the welcome screen or in Settings > Setup > Boot method.
+boot — Free** in the launcher or Configure Amiga > Setup > Boot method.
 An ADF in DF0 is required; a Kickstart ROM is not required. The application
-remembers this explicit choice. Native Kickstart remains the default.
+remembers a separate setup for each model and boot method. Native Kickstart remains
+the default. The bootstrap is experimental; individual disks must support the
+selected machine and the bounded services below.
 
 The equivalent command line is:
 
@@ -18,7 +20,7 @@ boot option together is rejected. A remembered ROM path is retained for switchin
 back to native boot, together with its version metadata, but is not opened or
 passed to the minimal boot session.
 
-## Current product scope — 2026-10-05
+## Current product scope — 2026-11-03
 
 Legacy boot restoration is not required. CopperScreen's boot paths are native
 Kickstart and this bounded firmware, both on Lightweight. Full replacement-OS
@@ -49,8 +51,11 @@ available in the standard application.
 
 ## Supported boot contract
 
-- PAL OCS A500, 68000, 512 KiB Chip RAM, zero or 512 KiB slow RAM, no Autoconfig
-  Fast RAM or hard drives. Additional connected drives remain physical devices
+- Standard PAL profiles: OCS A500 / 68000 / 512 KiB Chip RAM and zero or 512 KiB
+  slow RAM; ECS A500+ / 8375 (318069-10) / 68000 / 1 MiB Chip RAM;
+  Alice/Lisa A1200 / 68EC020 / 2 MiB Chip RAM. A500+/A1200 use no slow RAM.
+  No Autoconfig Fast RAM, hard drives or shared folders. Other CPU/memory/chipset
+  combinations are rejected with an explanation. Additional connected drives remain physical devices
   that guest takeover code can operate; the shim's trackdisk service serves DF0.
 - Standard 880 KiB ADF, including a selected ZIP entry. Initial media validation
   requires a DOS boot identifier and the end-around-carry boot checksum.
@@ -63,6 +68,8 @@ available in the standard application.
   is embedded in the generated image, and no decoded track cache survives a DoIO.
   Disk swap and direct guest disk operations therefore cannot stale a host cache.
 - Supervisor executes the A5 callback through a guest TRAP/RTE transition.
+  A1200 boot entry uses the 020 format-zero exception frame, exposes the 68010/020
+  AttnFlags, and reads the saved PC at the 020 exception-frame offset on faults.
   Disable/Enable control the Amiga interrupt master with a nest count;
   Forbid/Permit track the single boot context without a task scheduler.
 - AllocMem implements PUBLIC/CHIP/FAST/CLEAR with 8-byte alignment and failure
@@ -102,12 +109,120 @@ block below the allocation pool also avoids raw loader buffers near the top of
 Chip RAM. Reads into ordinary takeover-loader memory above the allocation pool
 are allowed when they avoid resident services; the original 1 KiB boot buffer
 can also be re-read through its I/O request.
-Slow allocations use `$C00000–$C7FFFF` when fitted.
+Slow allocations use `$C00000–$C7FFFF` when fitted. A500+/A1200 add a second Chip
+free chunk at `$080000` through the end of fitted RAM (`$100000`/`$200000`, exclusive).
+The low pool and resident services keep their addresses. AllocMem, FreeMem,
+AvailMem, the memory headers and trackdisk read bounds use the fitted Chip size.
+Memory and CPU traits specialize the guest source once at construction; there
+are no extra per-cycle host branches.
 
 A loader that has retired OS use may reclaim the physical memory described by
 the headers, including the shim's RAM. Calling services after overwriting their
 state/vectors is unsupported. The host never attempts to restore that memory or
 turn the services off automatically. This is essential for hardware takeover.
+
+## A500+/A1200 verification — 2026-11-03
+
+The original A500 generated instruction stream remains byte-identical to the
+pre-change baseline, SHA-256
+`d6141aeac4380561fa1831eb5d15bf7c064cf2476f3d623d441ba4f88a4ace48`.
+This is the current stream including the October null-sentinel correction;
+it is distinct from the older vasm comparison below.
+
+The model regressions execute original synthetic boot blocks through actual guest
+disk DMA. Coverage includes user-mode entry, Supervisor stack frames and returns,
+CPU flags, VBlank interrupt takeover/RTE, full extended-pool CLEAR/allocation/free/
+coalescing, executing a second stage loaded at the top of Chip RAM across track
+boundaries, disk swap/reset, and explicit unsupported-service/overlap/guest faults.
+Launcher and Configure Amiga checks exercise both extended models, disk-required
+and ready states, switching boot methods with saved media, and rejected Fast RAM.
+Both public and CopperStart-enabled editions expose free boot independently of
+the full-ROM build flag.
+
+Validation: `dotnet build CopperScreen.slnx -c Release` succeeds with zero warnings
+and errors. 51 targeted host tests pass (39 minimal-boot cases plus model/CPU
+configuration tests); public-edition boot UI tests pass 5/5. The enabled edition's
+launcher/configuration suite passes 89 cases, with 3 optional workspace cases
+skipped (unavailable coverage). Native replay results are recorded separately below.
+
+Original-media checks run without input for up to **3,000 output fields**:
+
+| Model | Media | Result |
+| --- | --- | --- |
+| A500+ | Arte (Sanity) | 3,000 fields; 2,270 with non-silent audio, final PC `$083908`; captured artwork displayed. |
+| A500+ | Desert Dream disk A | 3,000 fields; 1,623 with non-silent audio, final PC `$060910`; captured introductory ship scene. |
+| A1200 | Desert Dream disk A | 3,000 fields; 1,655 with non-silent audio, final PC `$061E46`; captured introductory ship scene. |
+| A1200 | Arte (Sanity), before Copper correction | **FAIL in the initial replay**: after 101 completed fields the guest loader at `$0010CE` encounters `disk FIFO overrun timing`. Corrected in the separate follow-up below. |
+
+Decoded media SHA-256 values are the same as in the historical table below.
+Generated 256 KiB firmware SHA-256, no slow RAM:
+A500+ `20cde1d9a4af89fc76971caf6ece7e3a59452690c8f100ba2f5b2c1dfef60105`;
+A1200 `1761e23454a76bec0a5de21e38a225c30b6ea9d4b9c51754bd3b64ab3b7a2b2b`.
+The captures establish early progression, not full demo/game compatibility, AGA-only
+software compatibility, cycle accuracy or performance. This initial model extension
+did not change the engine or shared CPU. Its Arte A1200 failure is preserved as
+before-fix evidence; the subsequent general Copper correction is recorded below.
+
+Ignored evidence is in `artifacts/minimal-boot-models-20261103/`: baseline source,
+TRX results, per-model `replay.json` and PNG checkpoints. Repeat the functional
+tests with `dotnet test CopperScreen.Lightweight.Tests -c Release --filter
+FullyQualifiedName~CopperScreenMinimalBootTests`. The optional
+`MinimalBootNativeReplayTests` requires `COPPERSCREEN_MINIMAL_BOOT_ADF` (ADF or
+ZIP-entry path); set `COPPERSCREEN_MINIMAL_BOOT_OUTPUT` for captures/results.
+Unset media means skipped/unavailable native coverage, never a pass.
+
+## Arte A1200 Copper SKIP correction — 2026-11-03
+
+The FIFO failure was downstream of an incorrect Copper protection check.
+An external instruction-boundary probe reproduced the first stop at canonical
+cycle 14,604,961, CPU PC `$0010CE`. The beam was held at V59/H0, disk DMA was
+active with 6,400 words remaining, and three received words were waiting with
+no eligible input slot. BPLCON0 was `$06EA`, including ERSY. Disk rotation/input
+continued while Agnus DMA was held by absent external sync, eventually filling
+the FIFO. The normal session reported this at its next output boundary.
+
+Earlier in the same unmodified guest, COP1LC points to `$0013EE`. The Copper
+interprets `$48E7/$3030` as WAIT, `$3D79/$00DF` as SKIP, then `$F00A/$063C`
+as a MOVE to protected offset `$00A`. Lightweight suppressed that MOVE before
+checking protection, and continued into more CPU instructions. The later pair
+`$6100/$06EA` at `$001402` writes BPLCON0, observed by cycle 10,826,564, stopping
+sync at the line boundary. Different beam phase explains why the A500+ replay did not
+reach the same failure.
+
+The independent [vAmigaTS copskip4 description](https://github.com/dirkwhoffmann/vAmigaTS/blob/93fbdd2b0a842d28f35a6a36081967c86c946ef5/Agnus/Copper/Skip/README.md#copskip4)
+and [probe source](https://github.com/dirkwhoffmann/vAmigaTS/blob/93fbdd2b0a842d28f35a6a36081967c86c946ef5/Agnus/Copper/Skip/copskip4/copskip4.s)
+show that a skipped illegal write still stops Copper. The correction moves the
+existing protection check ahead of SKIP suppression. It retains the existing
+second-word output phase, address mask and COPCON limits. No disk FIFO behavior,
+sync behavior, CPU, bootstrap firmware or media bytes are changed, and there is
+no title-specific branch or new runtime diagnostic.
+
+Twelve focused regressions cover OCS, ECS and AGA, high instruction-address bits,
+COPCON danger limits, permitted skipped writes and recovery by COPJMP. Seven
+illegal-destination cases fail before the correction; all twelve pass afterward.
+All 39 Copper tests and the full diagnostic suite pass: **1,299 passed, 7 optional
+native cases skipped**. Skips are unavailable coverage. The production Release
+solution builds with zero warnings/errors.
+
+Original Arte, using the same ADF and generated firmware hashes listed above,
+now completes **3,000 fields on A1200**, with **2,381 fields of non-silent audio**,
+animated multicolour captures and no unsupported-feature/fault stop. Final cycle
+426,306,001, PC `$0011BA`. A500+ also passes 3,000 fields; its four checkpoint PNGs,
+cycle/PC/colour checkpoints and 2,270 audible fields retain the initial result.
+These are boot/early-sequence checks, not a complete-demo or performance claim.
+The copskip4 reference supports the shared semantic correction; no new physical
+AGA timing measurement was made.
+
+Local evidence: `artifacts/arte-a1200-fifo-20261103/` contains frozen source,
+external trace/history and RAM captures (ignored), before/after test results,
+and `arte-after/model-{1,2}/replay.json` plus PNG checkpoints. Reproduce with:
+
+```powershell
+dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --artifacts-path artifacts/diagnostic-tests
+$env:COPPERSCREEN_MINIMAL_BOOT_ADF = 'C:/Data/TestImages/Arte (Sanity).zip#/Arte (Sanity).adf'
+$env:COPPERSCREEN_MINIMAL_BOOT_OUTPUT = 'artifacts/arte-a1200-replay'
+dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release --filter FullyQualifiedName~MinimalBootNativeReplayTests
+```
 
 ## Arte full A1200 replay — 2026-11-03
 
@@ -160,7 +275,7 @@ final partial capture interval. The production Release solution builds with zero
 warnings/errors. The diagnostic-suite result in the preceding section belongs
 to the Copper correction; no engine implementation changed in this follow-up.
 
-## Verification and limits
+## Historical A500 verification — 2026-10-04/08
 
 Release production solution: zero warnings/errors. Host suite: 171 passed;
 six optional native cases skipped in that ordinary run are unavailable coverage.
@@ -222,6 +337,9 @@ for this change; optional skips never count as successful replays.
 
 ## References
 
+The 020 entry frame follows the [MC68020 User's Manual](https://www.nxp.com/docs/en/data-sheet/MC68020UM.pdf),
+section 6.4.2 and table 6-5: normal format-zero RTE consumes SR, PC and the
+format/vector word (eight bytes).
 The boot invocation follows Commodore's [Bootblock Booting contract](https://amigadev.grimore.org/Devices_Manual_guide/node007d.html).
 Disk transfers follow Commodore's [DSKLEN DMA sequence](https://scratch.grimore.org/Hardware_Manual_guide/node0192.html).
 The existing CopperDisk encoder/decoder provides the repository's standard MFM

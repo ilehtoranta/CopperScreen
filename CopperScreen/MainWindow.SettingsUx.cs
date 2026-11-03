@@ -145,22 +145,26 @@ internal sealed partial class MainWindow
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
         layout.Children.Add(CreateMachineControls(welcome: false));
-        layout.Children.Add(SettingsNote("Selecting a model restores its saved configuration. Changes are saved automatically. Change memory sizes and connected drives in their settings pages."));
+        layout.Children.Add(SettingsHelp("Model help", "Selecting a model restores its saved configuration. Changes are saved automatically. Change memory sizes and connected drives in their settings pages."));
         var form = CreateSettingsGroupForm();
-        _kickstartSourceBox = AddComboSetting(form, "Boot method", ["Kickstart13Rom", "Kickstart31Rom", "KickstartRom", "MinimalDiskBoot", "CopperStart", "DiagRom"]);
-        _kickstartSourceBox.SelectionChanged += (_, _) => UpdateBootMethodControls();
-        _kickstartRomBox = new TextBox { PlaceholderText = "Choose Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM", MinWidth = 0 };
+        _kickstartSourceBox = AddComboSetting(form, "Boot method", [], markRestart: false);
+        ConfigureBootMethodSelector(_kickstartSourceBox);
+        _kickstartSourceBox.SelectionChanged += (_, _) => SelectSettingsBootMethod();
+        _kickstartRomBox = new TextBox { PlaceholderText = "Choose a boot ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
         var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
         AutomationProperties.SetName(browse, "Browse for boot ROM");
         _bootRomRow = CreateSettingsRow("Boot ROM", WithAction(_kickstartRomBox, browse));
         form.Children.Add(_bootRomRow);
         AutomationProperties.SetName(_kickstartRomBox, "Boot ROM path");
-        _romValidation = SettingsNote("Choose a Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM to continue.");
+        _romValidation = SettingsNote("Choose a boot ROM.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
         form.Children.Add(_romValidation);
-        form.Children.Add(SettingsNote("CopperStart requires the separately qualified ROM for the selected Amiga model. A1200 uses a CopperOS FFS HDF with empty floppy drives; no Fast RAM, RTC or shared folders."));
-        _setupDiskBox = new TextBox { PlaceholderText = "Optional · ADF, ADZ, DMS, IPF, SCP or ZIP", MinWidth = 0 };
+        _copperStartSettingsNote = SettingsNote(string.Empty);
+        _copperStartSettingsNote.IsVisible = false;
+        AutomationProperties.SetName(_copperStartSettingsNote, "CopperStart requirements");
+        form.Children.Add(_copperStartSettingsNote);
+        _setupDiskBox = new TextBox { PlaceholderText = "Optional disk image", MinWidth = 0 };
         _setupDiskBox.TextChanged += (_, _) =>
         {
             if (_updatingSettingsUi || _drivePathBoxes[0] == null) return;
@@ -170,6 +174,8 @@ internal sealed partial class MainWindow
         AutomationProperties.SetName(diskBrowse, "Browse for startup disk");
         form.Children.Add(CreateSettingsRow("Startup disk", WithAction(_setupDiskBox, diskBrowse)));
         AutomationProperties.SetName(_setupDiskBox, "Optional startup disk path");
+        _bootSettingsHelp = SettingsNote(string.Empty);
+        form.Children.Add(SettingsHelp("Boot help", _bootSettingsHelp));
         layout.Children.Add(CreateSettingsGroup("Boot and disk", form));
 
         var options = CreateSettingsGroupForm();
@@ -180,7 +186,7 @@ internal sealed partial class MainWindow
             if (_updatingSettingsUi || _updatingMachineControls || _cpuBackendBox.SelectedItem is not string selected) return;
             EditMachine(draft => { CopperScreenMachinePresets.SetCpu(draft, Enum.Parse<M68kBackendKind>(selected)); draft.MarkRequiresRestart(); return draft; });
         };
-        options.Children.Add(SettingsNote("Greyed choices are planned and not yet available. They cannot be selected."));
+        options.Children.Add(SettingsHelp("Availability help", "Greyed choices are not yet available and cannot be selected. Legacy is unavailable; use Lightweight. CPU choices depend on the selected model."));
         var reset = CreatePanelButton("Use supported Amiga 500 settings", UseSupportedMachine);
         options.Children.Add(reset);
         layout.Children.Add(new Expander { Header = "Machine options and availability", Content = options, HorizontalAlignment = HorizontalAlignment.Stretch });
@@ -235,7 +241,6 @@ internal sealed partial class MainWindow
     private Control CreateProfilesPage()
     {
         var layout = CreateSettingsPageLayout();
-        layout.Children.Add(SettingsNote("Choose a profile, then Load profile. Saving a preset creates a personal profile and keeps the bundled original. Unavailable machines cannot be selected."));
         _profileDirectoryText = SettingsNote(string.Empty);
         _profileList = new ListBox
         {
@@ -274,12 +279,16 @@ internal sealed partial class MainWindow
         _profileDescriptionBox.MinHeight = 64;
         _profileIdBox = AddTextSetting(metadata, "File name");
         layout.Children.Add(CreateSettingsGroup("Profile details", metadata));
+        layout.Children.Add(SettingsHelp("Profile help", "Choose a profile, then Load profile. Saving a bundled preset creates a personal profile and keeps the original. Unavailable machines cannot be selected."));
         layout.Children.Add(new Expander { Header = "Personal profile folder", Content = _profileDirectoryText });
         return CreateScrollableSettingsPage(layout);
     }
 
     private void ConfigureChoices(ComboBox combo, string label)
     {
+        // Display copy is independent of selection values and availability keys.
+        string DisplayLabel(string value) => label == "Pixel aspect" && value == "LCD crisp (1:1 hires / 1:2 superhires)"
+            ? "LCD crisp" : CopperScreenAvailability.ChoiceLabel(value);
         bool Available(string value) => CopperScreenAvailability.IsChoiceAvailable(label, value) &&
             (label != "CPU backend" || CopperScreenMachinePresets.CpuChoices(_settingsDraft).Contains(value)) &&
             (label != "Profile kind" || value != "Mouse" ||
@@ -296,14 +305,14 @@ internal sealed partial class MainWindow
         };
         combo.ItemTemplate = new FuncDataTemplate<string>((value, _) => new TextBlock
         {
-            Text = value == null ? string.Empty : CopperScreenAvailability.ChoiceLabel(value) + (Available(value) ? "" : " — Not yet available"),
+            Text = value == null ? string.Empty : DisplayLabel(value) + (Available(value) ? "" : " — Not yet available"),
             TextWrapping = TextWrapping.Wrap
         });
         combo.ContainerPrepared += (_, args) =>
         {
             var value = combo.Items[args.Index]?.ToString() ?? "";
             args.Container.IsEnabled = Available(value);
-            AutomationProperties.SetName(args.Container, CopperScreenAvailability.ChoiceLabel(value) + (args.Container.IsEnabled ? "" : ", not yet available"));
+            AutomationProperties.SetName(args.Container, DisplayLabel(value) + (args.Container.IsEnabled ? "" : ", not yet available"));
         };
         combo.DropDownOpened += (_, _) =>
         {
@@ -350,7 +359,7 @@ internal sealed partial class MainWindow
         _masterMuteBox = new CheckBox { Content = "Mute emulator audio", IsChecked = _outputMuted };
         _masterMuteBox.IsCheckedChanged += (_, _) => UpdateSettingsStatus();
         playback.Children.Add(_masterMuteBox);
-        playback.Children.Add(SettingsNote("Playback volume applies to this app session and does not change the Amiga's audio output."));
+        playback.Children.Add(SettingsHelp("Playback help", "Playback volume controls what you hear in CopperScreen. It does not change the Amiga's emulated audio output."));
         layout.Children.Add(CreateSettingsGroup("Playback", playback));
         var floppy = CreateSettingsGroupForm();
         _floppySoundsEnabledBox = new CheckBox { Content = "Play floppy drive sounds" };
@@ -359,7 +368,7 @@ internal sealed partial class MainWindow
         _floppySoundModeBox = AddComboSetting(floppy, "Sound mode", ["Synthetic", "Samples"]);
         _floppySoundPackBox = AddTextSetting(floppy, "Sound pack");
         _floppySoundVolumeBox = AddTextSetting(floppy, "Drive volume (0–1)");
-        floppy.Children.Add(SettingsNote("Changes to floppy drive sounds take effect after restarting the Amiga."));
+        floppy.Children.Add(SettingsNote("Requires restart"));
         layout.Children.Add(CreateSettingsGroup("Floppy drive effects", floppy));
         return CreateScrollableSettingsPage(layout);
     }
@@ -428,7 +437,7 @@ internal sealed partial class MainWindow
         var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
         var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = copperStart ? _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Choose CopperStart A1200 ROM (1 MiB)" : "Choose qualified CopperStart A500 ROM" : "Choose Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM", AllowMultiple = false,
+            Title = copperStart ? _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Choose CopperStart A1200 ROM (1 MiB)" : "Choose qualified CopperStart A500 ROM" : "Choose a native Kickstart ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Boot ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
         var path = files.FirstOrDefault()?.TryGetLocalPath();
@@ -445,37 +454,17 @@ internal sealed partial class MainWindow
             }
             if (!_settingsVisible)
             {
-                // The start selector owns the model/version. A picker must not
-                // silently turn an A500+ selection into Kickstart 1.3.
-                _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, _settingsDraft.KickstartSource,
-                    _settingsDraft.RomVersion, _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
+                var rom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, _settingsDraft.RomVersion);
+                _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
+                _settingsDraft.KickstartSource = CopperScreenKickstartSource.KickstartRom;
+                _settingsDraft.KickstartRomPath = path;
                 ClearSettingsStartupError();
                 UpdateSettingsStatus();
                 return;
             }
-            var selectedVersion = _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? KickstartVersion.Kickstart30 : ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) switch
-            {
-                CopperScreenKickstartSource.Kickstart13Rom => KickstartVersion.Kickstart13,
-                CopperScreenKickstartSource.Kickstart31Rom => KickstartVersion.Kickstart31,
-                _ => _settingsDraft.RomVersion
-            };
-            var rom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, selectedVersion);
-            if (_settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)
-            {
-                _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart30, a1200: true);
-                _settingsDraft.RomVersion = KickstartVersion.Kickstart30;
-                _kickstartSourceBox.SelectedItem = "KickstartRom";
-            }
-            else
-            {
-                _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
-                _kickstartSourceBox.SelectedItem = _settingsDraft.RomVersion switch
-                {
-                    KickstartVersion.Kickstart20 => "KickstartRom",
-                    KickstartVersion.Kickstart31 => "Kickstart31Rom",
-                    _ => "Kickstart13Rom"
-                };
-            }
+            var selectedRom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, _settingsDraft.RomVersion);
+            _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(selectedRom);
+            _settingsDraft.KickstartSource = CopperScreenKickstartSource.KickstartRom;
             UpdateSettingsStatus();
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
@@ -492,8 +481,8 @@ internal sealed partial class MainWindow
             return ValidateMinimalBootDisk(disk);
         }
         var path = draft.ToStartupOptions(AppContext.BaseDirectory).KickstartRomPath;
-        if (string.IsNullOrWhiteSpace(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.RecoveryFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : "Choose a Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM to continue.";
-        if (!File.Exists(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "ROM file not found. " + CopperScreenCopperStartRom.RecoveryFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : "ROM file not found. Choose an existing Kickstart 1.3, A500+ 2.04, A500 3.1 or A1200 3.0 ROM.";
+        if (string.IsNullOrWhiteSpace(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.RecoveryFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : "Choose a supported native Kickstart ROM to continue.";
+        if (!File.Exists(path)) return draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "ROM file not found. " + CopperScreenCopperStartRom.RecoveryFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : "ROM file not found. Choose an existing native Kickstart ROM.";
         var info = new FileInfo(path);
         if (_validatedRomPath == path && _validatedRomWriteTime == info.LastWriteTimeUtc && _validatedRomLength == info.Length &&
             _validatedRomSource == draft.KickstartSource && _validatedRomVersion == draft.RomVersion && _validatedRomA1200 == (draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)) return _romError;
@@ -506,7 +495,7 @@ internal sealed partial class MainWindow
         try
         {
             _ = draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.Read(path, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa)
-                : CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.KickstartSource, draft.RomVersion, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
+                : CopperScreenKickstartRomArchive.ReadNativeRom(path, draft.RomVersion);
             _romError = null;
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)

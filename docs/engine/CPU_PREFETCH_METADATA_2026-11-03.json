@@ -1,0 +1,3261 @@
+{
+  "SchemaVersion": 1,
+  "Date": "2026-11-03",
+  "Protocol": "cpu-prefetch-metadata-evidence-v1",
+  "Implementation": "Plain-bus fetch/retirement/branch paths avoid unused publication-context values; shared timing/queue kernels and actual-consumer snapshot ownership remain",
+  "Source": {
+    "CopperScreenHead": "214d58a37d67c73256cd1fc2192d19da040ec967",
+    "ProducerWorktree": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata",
+    "ProducerBranch": "codex/plain-bus-prefetch-metadata",
+    "ProducerBase": "535e9ecfc543931b46f7c332d9593805382bd7cf",
+    "ProducerFilesChanged": [
+      "Copper68k/M68kCore.cs",
+      "Copper68k/Copper68k.csproj"
+    ],
+    "CopperModMainChanged": false,
+    "EngineSourceChanged": false,
+    "InterruptSamplingChanged": false,
+    "GoldenChanged": false
+  },
+  "Package": {
+    "DevelopmentVersion": "1.5.5-prefetch-metadata-dev.1",
+    "Published": false,
+    "DefaultPin": "1.5.4",
+    "DefaultPinChanged": false,
+    "NuGetAssetsType": "package",
+    "PackageBinaryMatches": true,
+    "NormalizedDependenciesMatch": true,
+    "ReferenceCpu": {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\Copper68k.dll",
+      "Bytes": 978944,
+      "Sha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A"
+    },
+    "CandidateCpu": {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\Copper68k.dll",
+      "Bytes": 980480,
+      "Sha256": "20B4E1002E8F7B2994EB139E04905BE1B5AC2970C360C4E2B1F682CA14029133"
+    },
+    "ProjectReferenceAdded": false,
+    "CheckedInPackageLocksChanged": false,
+    "Feed": "artifacts/cpu-prefetch-metadata-20261103/feed",
+    "ConsumerOverride": "-p:Copper68kBoundaryVersion=1.5.5-prefetch-metadata-dev.1 -p:RestoreAdditionalProjectSources=<local-feed> -p:CustomBeforeMicrosoftCommonTargets=<private-lock-targets>"
+  },
+  "Validation": {
+    "ProductionBuild": "PASS",
+    "Warnings": 0,
+    "Errors": 0,
+    "StandardCpuPassed": 4475,
+    "StandardCpuSkipped": 19,
+    "StandardCpuScope": "All tests outside Copper68k.Tests.Synthetic",
+    "EnginePassed": 1285,
+    "EngineSkipped": 7,
+    "NativeCaptureFilesMatched": 320,
+    "NativeCaptureRuns": [
+      {
+        "Mode": "normal",
+        "FilesCompared": 160,
+        "Mismatches": 0,
+        "RawResult": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=0 frames=18120 completed=18120 fps=300,20 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x72FF28A9A6D931E7 pixels=284204 audioSamples=1924 pcm=real allocated=21199856 adf=True unsupported=none",
+        "ThroughputExcluded": true
+      },
+      {
+        "Mode": "scalar",
+        "FilesCompared": 160,
+        "Mismatches": 0,
+        "RawResult": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=scalar warmup=0 frames=18120 completed=18120 fps=299,39 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x72FF28A9A6D931E7 pixels=284204 audioSamples=1924 pcm=real allocated=21199216 adf=True unsupported=none",
+        "ThroughputExcluded": true
+      }
+    ],
+    "OptionalSkipsAreUnavailableCoverage": true,
+    "SupersededPrototypeBroadRuns": "ABORTED; not passing evidence"
+  },
+  "GeneratedCode": {
+    "Workload": "Native 18120-field normal capture, selected JIT disassembly; diagnostic only",
+    "Runtime": "10.0.12",
+    "TieringAndPgo": "Normal runtime defaults",
+    "Rows": [
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOneWithoutPublication(byref,byte,long,bool,bool,long):long:this (Tier1)",
+        "Bytes": 2183,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOneCore(byref,byte,long,byref,bool,bool,long):long:this (Tier1)",
+        "Bytes": 2337,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:CommitIssuedPendingPrefetch():this (Tier1)",
+        "Bytes": 278,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOne(byref,byte,long,bool,bool,long):long:this (Tier1)",
+        "Bytes": 2401,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:RefillTargetAndSampleInterrupt(byte,byte,System.Nullable`1[byte]):long:this (Tier1)",
+        "Bytes": 4863,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchAtRetirement():this (Tier1)",
+        "Bytes": 86,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchAtRetirementCore(byref):this (Tier1)",
+        "Bytes": 3144,
+        "Copies152": 3,
+        "Memcpy": 3
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:FullPrefetch(uint):long:this (Tier1)",
+        "Bytes": 4670,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOne():long:this (Tier1)",
+        "Bytes": 28,
+        "Copies152": 0,
+        "Memcpy": 0
+      },
+      {
+        "Header": "; Assembly listing for method Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]]:TopUpPrefetchOne(byref):long:this (Tier1)",
+        "Bytes": 2182,
+        "Copies152": 0,
+        "Memcpy": 0
+      }
+    ],
+    "MetadataOnlyHelpersCompiled": 0,
+    "RetirementCopyGuard": "The three remaining 152-byte copy sites are in IG71/IG74/IG127; IG71 and IG127 are entered only by non-null _instructionFetchWindowBus branches. Plain bus takes neither.",
+    "WholeProgramSizeOrCycleClaim": false
+  },
+  "NativeComparison": {
+    "Protocol": "cpu-prefetch-metadata-v1",
+    "Status": "VALID_NATIVE_COMPARISON",
+    "CommonIdentity": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+    "Statistics": {
+      "Pairs": 6,
+      "DegreesOfFreedom": 5,
+      "MeanReferenceFps": 307.44,
+      "MeanCandidateFps": 328.79333333333335,
+      "PairedThroughputChangePercent": 6.94807186226849,
+      "ThroughputTwoSided95LowerPercent": 4.747144533728687,
+      "ThroughputTwoSided95UpperPercent": 9.19524466248276,
+      "PairedFrameTimeChangePercent": -6.496678005767576,
+      "FrameTimeOneSided95UpperPercent": -4.960060600004823
+    },
+    "Pairs": [
+      {
+        "Pair": 1,
+        "ReferenceFps": 304.98,
+        "CandidateFps": 332.94,
+        "LogFrameTimeRatio": -0.08771609287899865
+      },
+      {
+        "Pair": 2,
+        "ReferenceFps": 304.43,
+        "CandidateFps": 331.85,
+        "LogFrameTimeRatio": -0.08624188392707362
+      },
+      {
+        "Pair": 3,
+        "ReferenceFps": 311.15,
+        "CandidateFps": 329.12,
+        "LogFrameTimeRatio": -0.0561473148894202
+      },
+      {
+        "Pair": 4,
+        "ReferenceFps": 311.65,
+        "CandidateFps": 323.56,
+        "LogFrameTimeRatio": -0.03750380489489239
+      },
+      {
+        "Pair": 5,
+        "ReferenceFps": 302.43,
+        "CandidateFps": 326.66,
+        "LogFrameTimeRatio": -0.07707002889103337
+      },
+      {
+        "Pair": 6,
+        "ReferenceFps": 310.0,
+        "CandidateFps": 328.63,
+        "LogFrameTimeRatio": -0.05836020036572012
+      }
+    ],
+    "Telemetry": {
+      "Intervals": 729,
+      "Violations": 0,
+      "CompetingJobIntervals": 0,
+      "PeakSelectedOther": 8.750000000000002,
+      "PeakSibling": 46.83544303797468,
+      "PeakPackageOther": 41.53804390290198
+    },
+    "CausalPerformanceConclusionAllowed": true,
+    "FrozenFilesUnchanged": true,
+    "SampleTrimming": false,
+    "LogicalProcessor": 2,
+    "ProtectedCpus": [
+      2,
+      3
+    ],
+    "Priority": "Normal",
+    "Cpu": "AMD Ryzen 5 5600X 6-Core Processor             ",
+    "PowerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Tasapainotettu)",
+    "Runtime": "10.0.12",
+    "FullThreeWorkloadAcceptance": false,
+    "MetadataConsumerThroughputMeasured": false,
+    "ReleaseQualification": false
+  },
+  "EvidenceFiles": [
+    {
+      "Path": "C:\\Data\\ROM\\Kickstart_13.rom",
+      "Bytes": 262144,
+      "Sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+    },
+    {
+      "Path": "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "Bytes": 607191,
+      "Sha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\.version",
+      "Bytes": 51,
+      "Sha256": "5821D4886CE8720FEA8A95A798A003E0A31197DE1EFC4FD22FA6A008EECFA3A8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clretwrc.dll",
+      "Bytes": 317736,
+      "Sha256": "7A2186201C87BBC597A1B8B26FACD88E68F03BE4C4A4211FD65CC6595C72E45B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrgc.dll",
+      "Bytes": 674088,
+      "Sha256": "65E2F97D263824BFB9F75F92E66EBD22229AAF3A5FADDEF9345811D856C8840E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrgcexp.dll",
+      "Bytes": 711464,
+      "Sha256": "23A8050EC68542989B6DA6CC906A90FAF8A14E6416FD2871A260B781B1C374AE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrjit.dll",
+      "Bytes": 2092328,
+      "Sha256": "0749D8FC8E944D0576E1BB47120F87ADD8F875E5CD8968995633063FC79256F6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+      "Bytes": 4614992,
+      "Sha256": "128AEE8C62A673D64739E585E3876B61133571CEC83A46240A62581D5465639B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\createdump.exe",
+      "Bytes": 71552,
+      "Sha256": "315307159925D33EB604186A512901D080ECFC4CD8B8198030A7D398C6AF2B0B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\hostpolicy.dll",
+      "Bytes": 378664,
+      "Sha256": "E92A2E71EEEAF7C574E905935B3E3724EF29BADE44317659DBE06F505E99DBE0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.CSharp.dll",
+      "Bytes": 980776,
+      "Sha256": "2000912F2FC52E0C64ED893D79F4E7B143502540FB7170B5AE5FCEA7099BA431"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.DiaSymReader.Native.amd64.dll",
+      "Bytes": 2377016,
+      "Sha256": "70E4B89978CE57EF87B28F4921F3140C383B04AA96E7F3BDB3C4EBB898FD8A72"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.NETCore.App.deps.json",
+      "Bytes": 29720,
+      "Sha256": "DB6BF68420F350411629571D31AEA9232F05E9464E0F48F306041EFD0971615D"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.NETCore.App.runtimeconfig.json",
+      "Bytes": 54,
+      "Sha256": "31C8CE517CDDC0DEACEB26B5DFF6BA5DF55AC4E06E9AFD0026E51FACA23DC8A4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.VisualBasic.Core.dll",
+      "Bytes": 1193768,
+      "Sha256": "2666B24EB6E295476B44ABD057EA250FD5957DB9C1C7ADEE6A223A747DDFE3D2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.VisualBasic.dll",
+      "Bytes": 17192,
+      "Sha256": "E192508ADDE6A758138A5A8E28998DCCB64E7F45EAF30D8AB3564F87749028B1"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.Win32.Primitives.dll",
+      "Bytes": 15656,
+      "Sha256": "6C21472B0AE2F9B484A97614FAD5485A22F18F9F19EE1ADB9CEB3ED8DDB072D7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.Win32.Registry.dll",
+      "Bytes": 116520,
+      "Sha256": "76849CFDE4369F3AE93E28261FE5E1010DBF1332F7DA95C98543CBA9B03961C0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscordaccore_amd64_amd64_10.0.1226.42308.dll",
+      "Bytes": 1356640,
+      "Sha256": "86C29A7B945525135DE16C3DCB71E3B8517848C459CBB21395B352D4E6BBA09C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscordaccore.dll",
+      "Bytes": 1356640,
+      "Sha256": "86C29A7B945525135DE16C3DCB71E3B8517848C459CBB21395B352D4E6BBA09C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscordbi.dll",
+      "Bytes": 1237888,
+      "Sha256": "753E92805F3886221F56DCFC07191AD7EE44235BF689DB0490BDF777F25E9175"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscorlib.dll",
+      "Bytes": 59728,
+      "Sha256": "B698595367A7D4FA57CCACAB73751FDE0BB8F2415345C62CDFE7CED890DA2C0C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscorrc.dll",
+      "Bytes": 133968,
+      "Sha256": "F0D8C7491D4659A4C5A4C00615255A60E05634F311162C2775A51E03C070C9E0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\msquic.dll",
+      "Bytes": 536344,
+      "Sha256": "B7158D427B01C70483BB3D80C5211E387DD98E9471C8A70E4484D449DE9157E8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\netstandard.dll",
+      "Bytes": 100648,
+      "Sha256": "3DC81DBC9DACD28261632C94410859EDA24C2DB50CD6C14309CBB2A434B50C57"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.AppContext.dll",
+      "Bytes": 15144,
+      "Sha256": "D9DD9FA44E019F27172D6B2662E2B6038F48C270912AC8AAE53D4D909DA7E9BE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Buffers.dll",
+      "Bytes": 15144,
+      "Sha256": "A1A35F5524E2F831D08CA55F702FBDDCB8C6DFECD264F0F563D81A1C8B8280BD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.Concurrent.dll",
+      "Bytes": 231248,
+      "Sha256": "082F4BC0DA1141EB65111B6DA633D75624ADFB7BB067D7EE90C5622C8B30885B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.dll",
+      "Bytes": 296744,
+      "Sha256": "DF6F2037EABEE28100184E92F7536427BA2F086C1110629804D466B124BC4D54"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.Immutable.dll",
+      "Bytes": 976680,
+      "Sha256": "B527DD7B2BEB82C22AA39787298CBEB33F3EAC9EB9B83A0F0271353421DB28DB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.NonGeneric.dll",
+      "Bytes": 104232,
+      "Sha256": "AA4D5216D066C91CB489F63C6CBFCAF1F47B6E74E070DB45639D3460454FC60B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.Specialized.dll",
+      "Bytes": 104272,
+      "Sha256": "E31AF1F866E880844E027BE59F545B9A6B34108E0B0680EBE3FBC19A53070819"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.Annotations.dll",
+      "Bytes": 198480,
+      "Sha256": "E3BE2D35D81E6475C64110CFC099895B71DF22C8B46A18C2D7C76A913B8BA903"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.DataAnnotations.dll",
+      "Bytes": 16720,
+      "Sha256": "D40E8C7062E6B9CE11BA83EAB3D26BE0EEC8066B99970EA88B8E87FB75F411BD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.dll",
+      "Bytes": 30544,
+      "Sha256": "E3B6F75864EE944898540937C1F300E04F44A1B2729516F0BBF948589A8B14B2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.EventBasedAsync.dll",
+      "Bytes": 46888,
+      "Sha256": "CC84FE814EF5E58271D83193E328F8EC220EFD4696D90AF9A7C4690C10451495"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.Primitives.dll",
+      "Bytes": 79656,
+      "Sha256": "1E2451184C287409EA25ACDE3C90F25950BF34D16458A6E52A94CA4292434F62"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.TypeConverter.dll",
+      "Bytes": 767784,
+      "Sha256": "10DAE312A6697718F8CE3DFCDB17D6AE4B74687C765D74D50DE8A8E69E08F5E7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Configuration.dll",
+      "Bytes": 19240,
+      "Sha256": "3952A72E1F18774F16952B46C20E80ED2BC601A06ECA01F33FA924C738022A9C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Console.dll",
+      "Bytes": 169808,
+      "Sha256": "3B85DAF02A3D9ED99B84BB1C639FE8B1CED46D8D157FA56F525F6B8C5BE43B3E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Core.dll",
+      "Bytes": 23336,
+      "Sha256": "AC23FAF1B37FA49F1B117BAAD951A65609E799A6E669A6DF06D3552677E0C086"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Data.Common.dll",
+      "Bytes": 2770728,
+      "Sha256": "66BDD62047EE460E2CE2C33D15DD1173AC97997B2745864A905179594F821ACC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Data.DataSetExtensions.dll",
+      "Bytes": 15656,
+      "Sha256": "AEEAE0755C8C7F6747765CDF82FA43182E320E97F2035E3A0A19F21905E6C113"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Data.dll",
+      "Bytes": 25424,
+      "Sha256": "49F52958A2A6E461D0FD7A47E54A199EB263C69ECFCC0FC684B73B5918EBF466"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Contracts.dll",
+      "Bytes": 16208,
+      "Sha256": "6C05CACD9B61B08AE75F2D783CC402B0B5FC848E3D68C29C10B93897CC083E8B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Debug.dll",
+      "Bytes": 15656,
+      "Sha256": "8B160FFE7518588BF64E13C01C6DCB2EF504D64F38BBF0F198D31E7B698DB92C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.DiagnosticSource.dll",
+      "Bytes": 501544,
+      "Sha256": "6267C1BD1BDF2BDD4B5748B885B0ADCDA10F18697ADFEA8488A19A009AD44FDB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.FileVersionInfo.dll",
+      "Bytes": 46928,
+      "Sha256": "E94F158142E93834DEC3100BDE3313935517D549FF36C65819A06D3104DEC427"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Process.dll",
+      "Bytes": 329552,
+      "Sha256": "51A57FBE918F8B68930C090792B718FC0850EA12DA869D50B97A3796AF29A740"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.StackTrace.dll",
+      "Bytes": 46888,
+      "Sha256": "8F6397C1E2BA9B8B8BFA317962151B5035049CE8D6B3575E5027A0D0EEACC797"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.TextWriterTraceListener.dll",
+      "Bytes": 67368,
+      "Sha256": "1BF165CEE916A854E1150F489E4348CE94755359D5FCDCC0BC2BBBE6A7102BDD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Tools.dll",
+      "Bytes": 15144,
+      "Sha256": "841C5E2B6C171FA9AAFF0FC6295F3FBC93DC5DCAB44118B62F1C942BB674AFF2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.TraceSource.dll",
+      "Bytes": 141096,
+      "Sha256": "8445C7F1BBAAE6CFFDE60E2C9A8753FAAA5100255FBE31D0A1927D9D9BB7F194"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Tracing.dll",
+      "Bytes": 16208,
+      "Sha256": "9563D5EEC35F94D13A5E62EAA9535DBE0E9EA474F055DA132FB8AF46B0B01263"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.dll",
+      "Bytes": 50472,
+      "Sha256": "EF135F0BDA0C41E142FDBD67B93E5AA7911916CB250F7DF302F4151A3BBFA380"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Drawing.dll",
+      "Bytes": 20304,
+      "Sha256": "585A8DA9952D715F8DE7A7B1879B59D68FF8608B92F6ED1C5F0E1D251180D3C6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Drawing.Primitives.dll",
+      "Bytes": 132944,
+      "Sha256": "17585B32CA91BAC8CCFF2EF1C6DDF62EE9EA5EFC552928C3A9D1B868394246E9"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Dynamic.Runtime.dll",
+      "Bytes": 16168,
+      "Sha256": "C0EAC30C791DB8C1A2B50B61C50D029F4DDD0EADFDD35433745001688A3E7466"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Formats.Asn1.dll",
+      "Bytes": 239440,
+      "Sha256": "A163FE5F96D1689F1BC1AC531B38C3ABA95792AC7DD52231D325D658947FBCFD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Formats.Tar.dll",
+      "Bytes": 272168,
+      "Sha256": "44C9984F269A158915195FD32007F22C3BB692DCFEB933CDA8EA45A3AC6CD1CE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Globalization.Calendars.dll",
+      "Bytes": 15656,
+      "Sha256": "E0F3F3F6E4ACC7B6755782FED5CB075ECF70BEEE4FC5D404579AE99BC0883EF2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Globalization.dll",
+      "Bytes": 15696,
+      "Sha256": "66902CFFD057673B4B77AA68FAF80D33FFA4C94510E61DB2A067943CC53B7702"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Globalization.Extensions.dll",
+      "Bytes": 15144,
+      "Sha256": "BE0390557CC72078A7217CF94FD44B9AB66AA30838C00A92AA78C62469C44AA0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.Brotli.dll",
+      "Bytes": 83752,
+      "Sha256": "0A59A95787EE15784D73079FDD5DC555B78659A6C560B6CBBF0D7452E638DF89"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.dll",
+      "Bytes": 419624,
+      "Sha256": "C942747F84B730887090F5E0CF86D164C0EE402E524DCE2750E06A6DF48513FB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.FileSystem.dll",
+      "Bytes": 15184,
+      "Sha256": "4AEEC2C0189F73BA8122F05C0D759008DDAE1A8873B167CC8A558D53F2AF80E1"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.Native.dll",
+      "Bytes": 937256,
+      "Sha256": "4D174B78AA8B3516C7E3CEC0355DFE9AE570894055C377D2E5565D077A9A7A1E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.ZipFile.dll",
+      "Bytes": 100176,
+      "Sha256": "2DA76EB281740BE485B5637DA8C60FE0CE12BC2848D1A1A81CE144FA74313E18"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.dll",
+      "Bytes": 15656,
+      "Sha256": "388400CCB189B819D6EC5F1EF70710A39641D93ED5B870FC9324866B75DFB78B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.AccessControl.dll",
+      "Bytes": 104232,
+      "Sha256": "F7F9ED6CDAB35274711E9345266784EC332AE8040DB184D141C70E7941FBBEC5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.dll",
+      "Bytes": 15656,
+      "Sha256": "C251F33B29382C47B773D907463EDD9FE978A06E39EFD5670EF3B3B1D4F8C2B7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.DriveInfo.dll",
+      "Bytes": 55120,
+      "Sha256": "0A7F3DD2FB6147A3FC046AEAC8501D764EFFE5A3D8CFA56D2B244AA50B874B98"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.Primitives.dll",
+      "Bytes": 15144,
+      "Sha256": "D3B21B8B38E48C6B4D1CB5CFE9ADFE4ABAD7B3353601FEBD3C7E4027F9EF9C6B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.Watcher.dll",
+      "Bytes": 87848,
+      "Sha256": "8AB1704E4BD171056EC5A11E886D5199D05A641C6D0233C53D4766BF30328DD3"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.IsolatedStorage.dll",
+      "Bytes": 87848,
+      "Sha256": "2272A8BDE18ED0E7C9E54ECE9B849B9BE76C90B978909D2B2FC94CF0CCBCE427"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.MemoryMappedFiles.dll",
+      "Bytes": 83752,
+      "Sha256": "6E8B281ECB2F0F5E7AAD3980F61D8812CAA6B37884737F542F95410A76663E0E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Pipelines.dll",
+      "Bytes": 190248,
+      "Sha256": "EE9F0FD6C659F50799AFD103C6ED9C5E408967E28DFA059BDDF4B0A3FD2557DD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Pipes.AccessControl.dll",
+      "Bytes": 15656,
+      "Sha256": "1102F25A6E88F2FAE81E4CD3628D8EF826F847B9C9B6A4D32FF8B37E0300DA35"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Pipes.dll",
+      "Bytes": 165712,
+      "Sha256": "3804F9992861122E60990B0765D0B50B33CDC2E4D89D26D9DBF8641D1D0134A2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.UnmanagedMemoryStream.dll",
+      "Bytes": 15696,
+      "Sha256": "AD6A5F859589E1951103A00F45566DA079CF87BD8B03F0C6AD985A6F39F19C5A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.AsyncEnumerable.dll",
+      "Bytes": 1292072,
+      "Sha256": "925208E8AC40AC3F7B988ABA6CCBBB58ADAC38AD1876A7D97EE137BE6C21A653"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.dll",
+      "Bytes": 698192,
+      "Sha256": "284D38945B6E92E847129BD28AF458B19818D0F2181F79882888AB2003F4C519"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.Expressions.dll",
+      "Bytes": 3639080,
+      "Sha256": "8830F4A6A6982F53CFBB54F992858EE36B4994A6FF6E6078C39627E77BEF282F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.Parallel.dll",
+      "Bytes": 775976,
+      "Sha256": "AA6068E3D8F6B2E492CC63DCAAD6B02942EDBAE445CB2B88C24F1850B25C49F5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.Queryable.dll",
+      "Bytes": 182056,
+      "Sha256": "B3B3A9C1B87A51DACD46A3F9EC392C5D05E449152D44D6BD495DF0994350E2FA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Memory.dll",
+      "Bytes": 161576,
+      "Sha256": "F8F9D38EFD6B0DE30954D6BF1F353E9617BFB36D3D245C013A3B12BE9F6BD88A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.dll",
+      "Bytes": 17192,
+      "Sha256": "481B38C912F8779B3510CD00F079E45096EA22B6DEFDAAB66780D5AC3AE6986A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Http.dll",
+      "Bytes": 1746768,
+      "Sha256": "B98ED0CB80DD54C33FC049F33AF5448710752155BBD5CC8CBCD932E01F066801"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Http.Json.dll",
+      "Bytes": 128848,
+      "Sha256": "A9FE81BA3C048F9977E0099800EEFD570A49BE723C555725DA57BA797C92B4E0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.HttpListener.dll",
+      "Bytes": 534312,
+      "Sha256": "3DFE11FB30C5F84C911D9562BE6C2037113CD8976EF2DEF3550AC415AE58955B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Mail.dll",
+      "Bytes": 481064,
+      "Sha256": "B585A55EE67C80D7F02A84D50D626D279C7AA77FD3E38206B434BD20C181EEDC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.NameResolution.dll",
+      "Bytes": 124712,
+      "Sha256": "E786C0940F5322F0AD6E8E34E7B582E5B050DF0FB2230329325307E61BFD994C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.NetworkInformation.dll",
+      "Bytes": 157520,
+      "Sha256": "7E8791833EB2D0AEA77B119FED3CAB8BF501F6A553155CC1C4E5B1C02F65593B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Ping.dll",
+      "Bytes": 91984,
+      "Sha256": "06BB307343DB955A312634D00BA5E097CF5168A901284437592C28D780804E33"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Primitives.dll",
+      "Bytes": 210728,
+      "Sha256": "4DBB41A178EF013A898327152ECCD146228DD2EB83859B9BB36078333B41F0F1"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Quic.dll",
+      "Bytes": 358224,
+      "Sha256": "AF5B52CDEE62D014AF677C411530A3FDE5C1C368ADECB8F83DCFE9246E8BBE73"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Requests.dll",
+      "Bytes": 374568,
+      "Sha256": "ED82D9D0B7942B2B02C5744A4591FBE2316879618ADFC5660C9F111F814155F2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Security.dll",
+      "Bytes": 665424,
+      "Sha256": "A78BD713E807729F15B0E085C67FD6CBFEFA85736A2618512D4FF1212759EBA5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.ServerSentEvents.dll",
+      "Bytes": 83752,
+      "Sha256": "C0B1944020D0E5688B90FBA9F29209E367674E29D2020F700C302994D5417EDA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.ServicePoint.dll",
+      "Bytes": 15144,
+      "Sha256": "84FA83CD96E62FDA02991B8A8E99FA1C7B3AC08807B04F7486A896CFE6B4A760"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Sockets.dll",
+      "Bytes": 530216,
+      "Sha256": "645C56D637CE15976998119E50722A911315682CE141B4AAB98874CE1B063F3A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebClient.dll",
+      "Bytes": 165672,
+      "Sha256": "DEFA7BBF90C77ED01D6ADD53F678E4ADFBCF97F3B1152AFFEC06E652D327F1A2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebHeaderCollection.dll",
+      "Bytes": 63312,
+      "Sha256": "74D66F776B4C15936A7B887F47CEB8BF277DBE82E71A78DD3EA5D02502B081E7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebProxy.dll",
+      "Bytes": 42832,
+      "Sha256": "408E3DAABB3F42B4F1B72A1E1DEF38F12BA58EB9D23DCA620086819CF7484195"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebSockets.Client.dll",
+      "Bytes": 104232,
+      "Sha256": "F308A69B9EE1AC982F53D1D94374F4972A7E3C700742901FF7C2BBFB570019D2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebSockets.dll",
+      "Bytes": 243496,
+      "Sha256": "C014A074D408C71011E26EAC69BE85003A852CFE115E8608BB5D4FD70536EB2E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Numerics.dll",
+      "Bytes": 15184,
+      "Sha256": "35ADC9360421B3B7A3D50399CB2C651C160158D7E8C302907ACBCE5F61F4A4F7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Numerics.Vectors.dll",
+      "Bytes": 15656,
+      "Sha256": "A9A980EE33ED0C798A5E1960C4557521F465AC9E0987DFD2C3049D53B1F2FA5A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ObjectModel.dll",
+      "Bytes": 79656,
+      "Sha256": "2179BB19F335B4FCACD0994AD2CCFDAC6840DEFF09C7889DEBFE9DBB5B88A3E6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+      "Bytes": 16033576,
+      "Sha256": "1125ACC8106C43FC8BAD2D203C4C4485DF6182D292846C2FFF415C1040C54678"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.DataContractSerialization.dll",
+      "Bytes": 2062120,
+      "Sha256": "8C07A5333C4E938CAD8AC8F24B5965121BC0622442A352CBE81C58F17C2349A8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.Uri.dll",
+      "Bytes": 255824,
+      "Sha256": "B15C84D2120E1EC9612C66BA59BC3D7E67D841E2BCE7B7D0478CB212537539B4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.Xml.dll",
+      "Bytes": 7788328,
+      "Sha256": "D71E72A7A9DE324352EDD281A46466B51BD0BDD2831B1573F8D3BAE8BD2DD4A6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.Xml.Linq.dll",
+      "Bytes": 390952,
+      "Sha256": "C832B73DE9783E6929CA5FF4863FC313E13EF7CFB5965C52587C4F77F6E037A7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.DispatchProxy.dll",
+      "Bytes": 75600,
+      "Sha256": "BF93A361C0BBA8497889C9F7713ADD5968BA39394F9E6BDA27E86294C6C43560"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.dll",
+      "Bytes": 16168,
+      "Sha256": "95059346D6271DD6D0322CC321E5FB8CCEAB662F550C67AEE7615059E41739BB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Emit.dll",
+      "Bytes": 309032,
+      "Sha256": "09059981BBEEA0FDC5DF589BE5D7E3937D57E22BEC4D78CEB492C587926FC238"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Emit.ILGeneration.dll",
+      "Bytes": 15656,
+      "Sha256": "6B42DDD05B0CA1C7342D73EA9F401FE588044215D65C67B756DEB780F0894A26"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Emit.Lightweight.dll",
+      "Bytes": 15656,
+      "Sha256": "D2724A2B7B46146877EC1F6E400C49EA05F84BDD31F3BBA52AE139EE68A4F779"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Extensions.dll",
+      "Bytes": 15144,
+      "Sha256": "CEB1B81E1EB488D87BD43D16DC54450B2A78E0B653C44C988AAE2A20ABC162BC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Metadata.dll",
+      "Bytes": 1156904,
+      "Sha256": "82973E772017944A0548E445F30757595D95FE99E1F5C4A446DF8C4DB04B1C18"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Primitives.dll",
+      "Bytes": 15656,
+      "Sha256": "C2BBD885D03DA5E880667C228AC1F56A5F3A72EA37D43F010ADA000ADC33DA28"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.TypeExtensions.dll",
+      "Bytes": 42792,
+      "Sha256": "7CAC73ED746CE05A4A2F1E61DD52D41322ECC6BA84CFEC463380F49487031459"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Resources.Reader.dll",
+      "Bytes": 15144,
+      "Sha256": "20BDB5D302B5E28F6042C9F281CFA3AE2F2358544CC40783052FE5ABF6AA859B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Resources.ResourceManager.dll",
+      "Bytes": 15696,
+      "Sha256": "F709EB5CF16E26679782784C428825019785FCC7085562092425D4999BECE03D"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Resources.Writer.dll",
+      "Bytes": 50984,
+      "Sha256": "684836486B9BA2817EFA3099118860D259FD16DB0C4C0533D42CAD8C6C165B62"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.CompilerServices.Unsafe.dll",
+      "Bytes": 15184,
+      "Sha256": "6E685EC0477B21A688CD38BFCAFC673888CDF186C99DF3C96FAB352E96D6FDC8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.CompilerServices.VisualC.dll",
+      "Bytes": 30504,
+      "Sha256": "5FD85D3D7B47A921BDF48BF938C6615A49A4A3D493E1EA199F1B997C709618F4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.dll",
+      "Bytes": 44840,
+      "Sha256": "76BE53624F64B23D0249DFA0BBE85390086DE7C44BFD490642EA86C6FAAF44AF"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Extensions.dll",
+      "Bytes": 17704,
+      "Sha256": "3D7B517D4FD89EE58C53E0F642CC9BE42E7A8669B51A85E861DAFE118067CBFD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Handles.dll",
+      "Bytes": 15656,
+      "Sha256": "985457A3E6A67E96A445EE0FB69B2D58BCDADC4C964253FB63E2D5061A36B050"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.InteropServices.dll",
+      "Bytes": 112464,
+      "Sha256": "E5EB1679F3579C9141E2BB9DBDCE62624A623F38D299805CC1DE07BACD21841F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.InteropServices.JavaScript.dll",
+      "Bytes": 50984,
+      "Sha256": "5BA32BCDE2D72362DB2D6E02763ECE79FA35BC878B50493E956CE594307E997F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.InteropServices.RuntimeInformation.dll",
+      "Bytes": 15656,
+      "Sha256": "C26D9F94329422BD000F28F6C65FDC162BF9397A6D29E418A189D4CA49C5C3EC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Intrinsics.dll",
+      "Bytes": 17192,
+      "Sha256": "B07694EC91F3A200ACF0F8B37C6CE5FCF05126A9198AE156D839FA5CA8439DC5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Loader.dll",
+      "Bytes": 15656,
+      "Sha256": "9B9B2A4F0358D9146E76178DDB87D019BE380C78BAA7DAC853493D45DF089F03"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Numerics.dll",
+      "Bytes": 354128,
+      "Sha256": "8AC94FB810C092A9297A903762E79A75AE07D7229D0721540C391F86D3D5D220"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.dll",
+      "Bytes": 17192,
+      "Sha256": "D565FC261CA98CBD14833821F777860291E8A0F775DE7AEE91778A9F6647F6F4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Formatters.dll",
+      "Bytes": 124712,
+      "Sha256": "5E8E957C6B7A63132555EDE5BCF5FE6A59934C83300E28074EC6E9845ECDD17F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Json.dll",
+      "Bytes": 15656,
+      "Sha256": "2FD71E3545DAB4FC89B3FE54D13A1142F26A0CF187EBE375B3F7FA210FCB2596"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Primitives.dll",
+      "Bytes": 38696,
+      "Sha256": "F96093940E64D8EEAD98C86DE9773D3C9D12C2B033BC6B1312AC88398303FDF3"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Xml.dll",
+      "Bytes": 16680,
+      "Sha256": "EEDB66EA2CD1A26CC45A46D6631209CCBEC959AF82208872A93B3AE52F189222"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.AccessControl.dll",
+      "Bytes": 227112,
+      "Sha256": "CDC304F9DDB32023ADB8DB8953E56711C9B64462E4341D0B62E87CCD19DC7B10"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Claims.dll",
+      "Bytes": 100176,
+      "Sha256": "C53C8A7E95D8296F951872FDD2E6334D11C20BFFD4322F1A088773BF9DCAA3C2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Algorithms.dll",
+      "Bytes": 17232,
+      "Sha256": "EB99AE7DBE058A1B015ABA6769CE1F65155B7FF51FF9A7203FCF6D7CDEA5FEF7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Cng.dll",
+      "Bytes": 16168,
+      "Sha256": "7319F97896D92A7D0729CF28DC6C4D1F797C1520B656EE01A780EEC726EC2C16"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Csp.dll",
+      "Bytes": 16208,
+      "Sha256": "4002AF141E9CB29875B677841ADF64A9681E5672C2595492DCBC161460D4E121"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.dll",
+      "Bytes": 2549544,
+      "Sha256": "E0A839A540E47343B53A936B32D91599A3470005228D50FD0B896F8BBDCC65B0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Encoding.dll",
+      "Bytes": 15656,
+      "Sha256": "994494AEC7760F40FADE2264AA7C13EEBAE36360F0B1399A7134BB19C9D58FDA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.OpenSsl.dll",
+      "Bytes": 15656,
+      "Sha256": "1A8902BBAD1B577A98BEC62A8472105DC1E9A253E390F69FBE3D167E93206968"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Primitives.dll",
+      "Bytes": 15656,
+      "Sha256": "194CCCEA9354BB248E44C954B5373F9069163F8F21524B3EE4B3185FE436BC15"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.X509Certificates.dll",
+      "Bytes": 16680,
+      "Sha256": "7439C3B90BC2EE49A9275B28ED29052B4D48B45999AC1B7D25593033B1BB8DD6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.dll",
+      "Bytes": 18256,
+      "Sha256": "D8EFD304765E859369698EFEF9B3CA707DEFA8E142721FE5605D7A2DE7D38375"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Principal.dll",
+      "Bytes": 15144,
+      "Sha256": "1D3E351058BE3A33214B23B308FE57F78CD6FD4D8FAD448FC84CBBE7376129F9"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Principal.Windows.dll",
+      "Bytes": 178000,
+      "Sha256": "2311A3F92971DE918943573DFB66E04E25C1D543663951EB24E8EB1A0DCD4251"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.SecureString.dll",
+      "Bytes": 15696,
+      "Sha256": "73AAC97072B7DEEFA4DE9647BF822162224F1452AD467841B989FF89D4D94595"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ServiceModel.Web.dll",
+      "Bytes": 16680,
+      "Sha256": "CE91013EE3A9A9D69A85E258F7749E6ECE488295D7CB66F7C1079F2E8678FC5E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ServiceProcess.dll",
+      "Bytes": 15696,
+      "Sha256": "63FC498C9D04E3C4345DFDB8016AD0639D54562DD7D8C707C072792C854DF944"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encoding.CodePages.dll",
+      "Bytes": 862032,
+      "Sha256": "226E216E33C94EF7594BDFFE670BA4DC5907151C113CB41AC9E9D570227E1765"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encoding.dll",
+      "Bytes": 15696,
+      "Sha256": "5E347DB6B4F9B2746D50E1AC85BE2D9CC7DC4038FDE98AC4295BC7030C83CDA9"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encoding.Extensions.dll",
+      "Bytes": 15656,
+      "Sha256": "8F51B9535DB64FE027A40D6076200B1A6B0889BF05F62BB8E68C3EB083C7F113"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encodings.Web.dll",
+      "Bytes": 124752,
+      "Sha256": "D20431F20D992E71A4E82E5F25C822474E2F4097D8527972D3D78EA1F26E47C3"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Json.dll",
+      "Bytes": 1890128,
+      "Sha256": "FA99F413BE21ED5F484A09093FE5F0BEBA7DE3062CF9CC9F847DBF8108DBA55A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.RegularExpressions.dll",
+      "Bytes": 1034064,
+      "Sha256": "060BCC88A688E687FF1404B83B5FB5CF17E19EC57F33D5B8A48AB494DA83C134"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.AccessControl.dll",
+      "Bytes": 75560,
+      "Sha256": "66D618B5522B3E4F7A3C7F2BD872FC378FA6F9BBDCA3636854EB1A8CB948E631"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Channels.dll",
+      "Bytes": 157480,
+      "Sha256": "AFC5DEB3C32B3F64BCED2025D0B01B316D41B691EBC6CCB1A2EC445AD4C15E39"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.dll",
+      "Bytes": 83792,
+      "Sha256": "6C32ED1BF8067E4169E8FEDDD15E6489B89D19D1C7AAE1520A551B57745D0A60"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Overlapped.dll",
+      "Bytes": 15696,
+      "Sha256": "89FDE15F8E520C4BCBC6CBFDCEBA2BAED8670CDF52399A4CD7A21C6EFB276C1A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.Dataflow.dll",
+      "Bytes": 472872,
+      "Sha256": "A895B0C73D3A1AFC4D89C1D9E445ED447AF12864C25AAD2C4CB7398FF50AA934"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.dll",
+      "Bytes": 16680,
+      "Sha256": "F80B21F7DAE04377B73945456CABE25E2AB1F4B564095AED546C2AA571644567"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.Extensions.dll",
+      "Bytes": 15696,
+      "Sha256": "F148E3A1414B7C2763AE21529AD79AD759F7CFD3C885256B64B0D2209DEC2613"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.Parallel.dll",
+      "Bytes": 132904,
+      "Sha256": "6FA359BDBEBB56BE96339F244ED41658AFCEAD5E010074DA470DF1115D1E7699"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Thread.dll",
+      "Bytes": 15696,
+      "Sha256": "CE71949BB1EA67B686E799128582015EBF8758F1107E59E43F342ECE3F662930"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.ThreadPool.dll",
+      "Bytes": 15656,
+      "Sha256": "58FBC6C4B9C72087152FD0F0670A527098C00B0C19BA8D0979D3CA5CE07C6936"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Timer.dll",
+      "Bytes": 15144,
+      "Sha256": "9E4620846572F49AEB476AA99405071B4BBD0DF4323E4E232787ED73642B1EE5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Transactions.dll",
+      "Bytes": 16720,
+      "Sha256": "56ABFCA0350C111D077B3D86A2469EA3DA4FCCC1871F7C51A8B4FDB664BB0EDE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Transactions.Local.dll",
+      "Bytes": 640808,
+      "Sha256": "8D0283A311A16333FFB6F966D9765E4D8B866777AD99291A93B30DB349A15BC4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ValueTuple.dll",
+      "Bytes": 15696,
+      "Sha256": "07A5347F6A597E5E0D72109EFA1A525697E8C3F74FB0029005500F8EBBF9187A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Web.dll",
+      "Bytes": 15144,
+      "Sha256": "BC260B3DB247AD9A6E4A82A275DA85C3691A41272CC745CB7EAEFCF1F31CC817"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Web.HttpUtility.dll",
+      "Bytes": 63272,
+      "Sha256": "2CEDEF51B0A2C2B84240583339ECF2422C650E3388AA46F3494160B93B673887"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Windows.dll",
+      "Bytes": 15696,
+      "Sha256": "716EEE98CEEE87D38F0B301224462F8442AA793F4B1B9C3FFAC315753320AB37"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.dll",
+      "Bytes": 23376,
+      "Sha256": "277A84BA155FE7808A514F32694A8157EC9F0EEEEF00EF9643E5250004054FF0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.Linq.dll",
+      "Bytes": 15696,
+      "Sha256": "AE04903B25717FA4695E7E63489091F0D461E791E0BD264C6C85250D668F540D"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.ReaderWriter.dll",
+      "Bytes": 21840,
+      "Sha256": "8E48FED4D12BCFFFF01E8059CAAFB564697275797D2F5EC6823FDD82B87FE938"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.Serialization.dll",
+      "Bytes": 16208,
+      "Sha256": "489694401C60905CB6DCA8EF0BF738CB609CD45B337126A01C825B913086BA43"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XDocument.dll",
+      "Bytes": 15696,
+      "Sha256": "3FF858607DE5146051498A7124EF983BEA280D86E165F993516C6C26AF81CFB5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XmlDocument.dll",
+      "Bytes": 15656,
+      "Sha256": "A50B9B3A03596E36E73E7A7D54F4D018E8DCFAA7FE79E8CF900AF8838EF3EC36"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XmlSerializer.dll",
+      "Bytes": 17744,
+      "Sha256": "0B7D057C2B5B2272E8D4096A755EDFD96F3CF03AB9AAA3FEF54B462BF48D517E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XPath.dll",
+      "Bytes": 15656,
+      "Sha256": "C817B11C58D95FA942FBC62A4CFA8219E16DAFA5641EB004CB2BE424028ED5D8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XPath.XDocument.dll",
+      "Bytes": 30504,
+      "Sha256": "5BCD27A7E93515B745993F6DDA51391033883CB8A1A8A2E3DAD5CAED3548F0DA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\WindowsBase.dll",
+      "Bytes": 16208,
+      "Sha256": "0EC46A38F29A234B9A4D0AE9364C8322F661A47C831C5B948F2787B7CA12DBBD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata\\artifacts\\prefetch-metadata-final-constant.log",
+      "Bytes": 1364,
+      "Sha256": "BAA59F318E9F6718F9F30CD6612C0AF021C66D9B8F11EED6902BFEEBB9E4FA35"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata\\artifacts\\prefetch-metadata-pack.log",
+      "Bytes": 333,
+      "Sha256": "1A184A53505CBF73588E96D563179F17CDC7493A38E533C05621AE7C3A4E6142"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata\\artifacts\\prefetch-metadata-standard.log",
+      "Bytes": 5271,
+      "Sha256": "425EB35890170E73D5692275563CD864B283C325873CD8CE938EE4D019D1E648"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata\\Copper68k.Tests\\TestResults\\prefetch-metadata-standard.trx",
+      "Bytes": 6932922,
+      "Sha256": "FB8A20C2F237069974CA42333E281CF988937D4AE0E831F00C3B41E85590D247"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata\\Copper68k\\Copper68k.csproj",
+      "Bytes": 2623,
+      "Sha256": "166CF2976EF481308A79AD099B2475A98962DB93467696CB7A0C89A0E2B8F448"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperMod-prefetch-metadata\\Copper68k\\M68kCore.cs",
+      "Bytes": 664124,
+      "Sha256": "1583553945093CF5F1DA9D7072EF1FE487BAC4F1FB7DC3F763B012D64557CE23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\AGENTS.md",
+      "Bytes": 5834,
+      "Sha256": "2B70D8F1E0A686934AF4C1D4C0380E12FCA0354FB7069F10A74CADEC0ED32256"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\analyze-results.ps1",
+      "Bytes": 3974,
+      "Sha256": "37F259B59BE32B105E7963848C4E7886833C8BFF17A3AC968411D6AC46F7BE20"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate-jit-raw-summary.json",
+      "Bytes": 2763,
+      "Sha256": "877711550A6B0A9E8B6FA114BA7E2625905694AAC9E9E265E8511F3A1756C022"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate-jit-summary.json",
+      "Bytes": 2743,
+      "Sha256": "62E4855D162F7DA78255EC31F7DF0BECFA2826695F1C67C17844356C404BA175"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate-native.asm",
+      "Bytes": 312658,
+      "Sha256": "52740F290C9A97A2485CDA5DE9ABA6706942D09CEE3D2532756D02485E308FA6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\Copper68k.dll",
+      "Bytes": 980480,
+      "Sha256": "20B4E1002E8F7B2994EB139E04905BE1B5AC2970C360C4E2B1F682CA14029133"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "75BCF29B83377521BE9DE04539B038AB5FC682FE66AB677202629FCFDDB8C831"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperDisk.pdb",
+      "Bytes": 42880,
+      "Sha256": "09078676FCECEDD931E2C0D54AA11A7680D2EDF1F2EC27914D2BB7F19C1DB586"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "6F942E7E70E1097004D5816486C3FBC9468ABBF3C33B5214BD676B065ADE250E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120316,
+      "Sha256": "82DE956CCEEF6D1C81EB5C1140CA04E2CB02BF671F15EC99A4E5354EC65E00AD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2653,
+      "Sha256": "2CF2AD5985F3B326C9A888FB03AF772437C6695463E05B4F16C66C85763D0875"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "50FEC6C02DC4DB40DD7CD5507FDA07176C17651ABB105174D99B16CE27680BDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24888,
+      "Sha256": "B80B4FF04875673AA2DDB0114B2F71371CF3D02D0724A40200ECD1603D58E871"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\candidate\\CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capsule-construction.json",
+      "Bytes": 212,
+      "Sha256": "00487377C5C9CEA94917D94C5DFD81F4ACD0CE4AED2A0D95BA3D15067A4C6FA6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-native.ps1",
+      "Bytes": 3773,
+      "Sha256": "AEA2EDDBFEA4D4E24128E4B239E6BCEF5881D34075D8242F029E32D694396BBE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal.log",
+      "Bytes": 35606,
+      "Sha256": "BCD751032CC2A5E8B1C2DE17DBF675ADB1F7341A66E390E4D4D190C233979DF7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000001.bmp",
+      "Bytes": 1136870,
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000001.chipram",
+      "Bytes": 524288,
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000001.json",
+      "Bytes": 1086,
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000001.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000001.slowram",
+      "Bytes": 524288,
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000600.chipram",
+      "Bytes": 524288,
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000600.json",
+      "Bytes": 1067,
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000600.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-000600.slowram",
+      "Bytes": 524288,
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001200.chipram",
+      "Bytes": 524288,
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001200.json",
+      "Bytes": 1071,
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001200.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001800.chipram",
+      "Bytes": 524288,
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001800.json",
+      "Bytes": 1071,
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-001800.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-002400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-002400.chipram",
+      "Bytes": 524288,
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-002400.json",
+      "Bytes": 1105,
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-002400.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-002400.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003000.chipram",
+      "Bytes": 524288,
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003000.json",
+      "Bytes": 1073,
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003000.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003000.slowram",
+      "Bytes": 524288,
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003600.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003600.json",
+      "Bytes": 1105,
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-003600.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004200.chipram",
+      "Bytes": 524288,
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004200.json",
+      "Bytes": 1104,
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004200.pcm",
+      "Bytes": 3848,
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004200.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004800.chipram",
+      "Bytes": 524288,
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004800.json",
+      "Bytes": 1102,
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004800.pcm",
+      "Bytes": 3844,
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-004800.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-005400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-005400.chipram",
+      "Bytes": 524288,
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-005400.json",
+      "Bytes": 1103,
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-005400.pcm",
+      "Bytes": 3848,
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-005400.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006000.chipram",
+      "Bytes": 524288,
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006000.json",
+      "Bytes": 1070,
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006000.pcm",
+      "Bytes": 3844,
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006000.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006600.chipram",
+      "Bytes": 524288,
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006600.json",
+      "Bytes": 1102,
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-006600.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007200.chipram",
+      "Bytes": 524288,
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007200.json",
+      "Bytes": 1103,
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007200.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007200.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007800.chipram",
+      "Bytes": 524288,
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007800.json",
+      "Bytes": 1103,
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007800.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-007800.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-008400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-008400.chipram",
+      "Bytes": 524288,
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-008400.json",
+      "Bytes": 1103,
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-008400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-008400.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009000.chipram",
+      "Bytes": 524288,
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009000.json",
+      "Bytes": 1105,
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009000.slowram",
+      "Bytes": 524288,
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009600.chipram",
+      "Bytes": 524288,
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009600.json",
+      "Bytes": 1106,
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-009600.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010200.chipram",
+      "Bytes": 524288,
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010200.json",
+      "Bytes": 1107,
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010200.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010800.chipram",
+      "Bytes": 524288,
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010800.json",
+      "Bytes": 1107,
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-010800.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-011400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-011400.chipram",
+      "Bytes": 524288,
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-011400.json",
+      "Bytes": 1107,
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-011400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-011400.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012000.chipram",
+      "Bytes": 524288,
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012000.json",
+      "Bytes": 1105,
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012000.slowram",
+      "Bytes": 524288,
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012600.chipram",
+      "Bytes": 524288,
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012600.json",
+      "Bytes": 1076,
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-012600.slowram",
+      "Bytes": 524288,
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013200.chipram",
+      "Bytes": 524288,
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013200.json",
+      "Bytes": 1102,
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013800.chipram",
+      "Bytes": 524288,
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013800.json",
+      "Bytes": 1103,
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-013800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-014400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-014400.chipram",
+      "Bytes": 524288,
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-014400.json",
+      "Bytes": 1102,
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-014400.pcm",
+      "Bytes": 3848,
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-014400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015000.chipram",
+      "Bytes": 524288,
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015000.json",
+      "Bytes": 1102,
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015000.pcm",
+      "Bytes": 3844,
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015600.chipram",
+      "Bytes": 524288,
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015600.json",
+      "Bytes": 1102,
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015600.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-015600.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016200.chipram",
+      "Bytes": 524288,
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016200.json",
+      "Bytes": 1102,
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016200.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016800.chipram",
+      "Bytes": 524288,
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016800.json",
+      "Bytes": 1102,
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016800.pcm",
+      "Bytes": 3844,
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-016800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-017400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-017400.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-017400.json",
+      "Bytes": 1102,
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-017400.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-017400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018000.chipram",
+      "Bytes": 524288,
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018000.json",
+      "Bytes": 1102,
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018000.pcm",
+      "Bytes": 3848,
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018120.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018120.chipram",
+      "Bytes": 524288,
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018120.json",
+      "Bytes": 1102,
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018120.pcm",
+      "Bytes": 3848,
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-normal\\frame-018120.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-results.json",
+      "Bytes": 907,
+      "Sha256": "A7E9D7A28C18EB5F815233A5C31DFAE4AA1FBE7888E49B1A3402780F32371A61"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar.log",
+      "Bytes": 35594,
+      "Sha256": "F19555D6F7E40842A03C931D057F9D25FCBFD3697658563399A54B062F419184"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000001.bmp",
+      "Bytes": 1136870,
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000001.chipram",
+      "Bytes": 524288,
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000001.json",
+      "Bytes": 1086,
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000001.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000001.slowram",
+      "Bytes": 524288,
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000600.chipram",
+      "Bytes": 524288,
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000600.json",
+      "Bytes": 1067,
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000600.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-000600.slowram",
+      "Bytes": 524288,
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001200.chipram",
+      "Bytes": 524288,
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001200.json",
+      "Bytes": 1071,
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001200.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001800.chipram",
+      "Bytes": 524288,
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001800.json",
+      "Bytes": 1071,
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-001800.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-002400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-002400.chipram",
+      "Bytes": 524288,
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-002400.json",
+      "Bytes": 1105,
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-002400.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-002400.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003000.chipram",
+      "Bytes": 524288,
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003000.json",
+      "Bytes": 1073,
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003000.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003000.slowram",
+      "Bytes": 524288,
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003600.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003600.json",
+      "Bytes": 1105,
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-003600.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004200.chipram",
+      "Bytes": 524288,
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004200.json",
+      "Bytes": 1104,
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004200.pcm",
+      "Bytes": 3848,
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004200.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004800.chipram",
+      "Bytes": 524288,
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004800.json",
+      "Bytes": 1102,
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004800.pcm",
+      "Bytes": 3844,
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-004800.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-005400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-005400.chipram",
+      "Bytes": 524288,
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-005400.json",
+      "Bytes": 1103,
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-005400.pcm",
+      "Bytes": 3848,
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-005400.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006000.chipram",
+      "Bytes": 524288,
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006000.json",
+      "Bytes": 1070,
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006000.pcm",
+      "Bytes": 3844,
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006000.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006600.chipram",
+      "Bytes": 524288,
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006600.json",
+      "Bytes": 1102,
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-006600.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007200.chipram",
+      "Bytes": 524288,
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007200.json",
+      "Bytes": 1103,
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007200.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007200.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007800.chipram",
+      "Bytes": 524288,
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007800.json",
+      "Bytes": 1103,
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007800.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-007800.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-008400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-008400.chipram",
+      "Bytes": 524288,
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-008400.json",
+      "Bytes": 1103,
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-008400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-008400.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009000.chipram",
+      "Bytes": 524288,
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009000.json",
+      "Bytes": 1105,
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009000.slowram",
+      "Bytes": 524288,
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009600.chipram",
+      "Bytes": 524288,
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009600.json",
+      "Bytes": 1106,
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-009600.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010200.chipram",
+      "Bytes": 524288,
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010200.json",
+      "Bytes": 1107,
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010200.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010800.chipram",
+      "Bytes": 524288,
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010800.json",
+      "Bytes": 1107,
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-010800.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-011400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-011400.chipram",
+      "Bytes": 524288,
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-011400.json",
+      "Bytes": 1107,
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-011400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-011400.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012000.chipram",
+      "Bytes": 524288,
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012000.json",
+      "Bytes": 1105,
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012000.slowram",
+      "Bytes": 524288,
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012600.chipram",
+      "Bytes": 524288,
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012600.json",
+      "Bytes": 1076,
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-012600.slowram",
+      "Bytes": 524288,
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013200.chipram",
+      "Bytes": 524288,
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013200.json",
+      "Bytes": 1102,
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013800.chipram",
+      "Bytes": 524288,
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013800.json",
+      "Bytes": 1103,
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-013800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-014400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-014400.chipram",
+      "Bytes": 524288,
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-014400.json",
+      "Bytes": 1102,
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-014400.pcm",
+      "Bytes": 3848,
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-014400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015000.chipram",
+      "Bytes": 524288,
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015000.json",
+      "Bytes": 1102,
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015000.pcm",
+      "Bytes": 3844,
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015600.chipram",
+      "Bytes": 524288,
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015600.json",
+      "Bytes": 1102,
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015600.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-015600.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016200.chipram",
+      "Bytes": 524288,
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016200.json",
+      "Bytes": 1102,
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016200.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016800.chipram",
+      "Bytes": 524288,
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016800.json",
+      "Bytes": 1102,
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016800.pcm",
+      "Bytes": 3844,
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-016800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-017400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-017400.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-017400.json",
+      "Bytes": 1102,
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-017400.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-017400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018000.chipram",
+      "Bytes": 524288,
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018000.json",
+      "Bytes": 1102,
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018000.pcm",
+      "Bytes": 3848,
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018120.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018120.chipram",
+      "Bytes": 524288,
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018120.json",
+      "Bytes": 1102,
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018120.pcm",
+      "Bytes": 3848,
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\capture-scalar\\frame-018120.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\consumer-build.log",
+      "Bytes": 2568,
+      "Sha256": "239F02979CC284C64D6E6763F92EDFF3BE24704F0519AE7D6FE7CB4137FF157E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\consumer-build\\obj\\CopperMod.Amiga.Lightweight\\project.assets.json",
+      "Bytes": 24720,
+      "Sha256": "D87469E95104B958D2176EF62222A84556A3E8BECAF011D67D1FD4DD4A943459"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\engine-source-before.json",
+      "Bytes": 698,
+      "Sha256": "8A199A67B7728B6B27B6EBB7AEA155A9657725F1375C28C7EDC92EE7DCED7EE9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\engine-tests.log",
+      "Bytes": 3449,
+      "Sha256": "8D9907F70567A6AC86D1C946466914A5F6DC20C07117C2F114D1A2968340352B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\feed\\Copper68k.1.5.5-prefetch-metadata-dev.1.nupkg",
+      "Bytes": 374601,
+      "Sha256": "DB14ACA425038D4AFA5F198483DCFE483D2D9739764DFC392F2AC308F8D5A0FC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\independent-analysis.json",
+      "Bytes": 1806,
+      "Sha256": "39BE5844CBCFBEA0416EEE9697C49BC09FF1C0580C27EB590560B70ABB33E1E9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "3F2DD77DBA22BA4E1F6D35D8AC407C41D58DD41192084B10A9CDC9E1976A9261"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "A892EC188DE6F77F15924662F66B7B5B4D7D5DCD87643BB20ED058004408E905"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C3.stdout.log",
+      "Bytes": 320,
+      "Sha256": "892308C47A04A6B3F6D41A009C3A710A88DB5C8CCDDEED3167AE47CE349F1FF6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C4.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C4.stdout.log",
+      "Bytes": 320,
+      "Sha256": "1C66425C7BA5FEE0A40267779079E5CD5822DA40EB488E958800DD599E5FF3B6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C5.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C5.stdout.log",
+      "Bytes": 320,
+      "Sha256": "7B3A289825238A030C56085A43E5E5B369E23C5F43F285448E4E77E1EECCBD1A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C6.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\C6.stdout.log",
+      "Bytes": 320,
+      "Sha256": "B1DF5D2A4E17F7EED53F01632C03A68B575798F95655441FFF531706D4C4F0B2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\comparison-record.json",
+      "Bytes": 165646,
+      "Sha256": "7BED0B98EF05CBBCEE6C98051320C2FD3F596BD78C92F5A8ACD6BF53342A03D0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "0AB7A45B671AB1FB7A90E3199535C18D4914F4DEBB6FEC246C8D317DB52D9A3F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "976AB12A4E132147C8AE3BDBADEB523DC9AB2E8D048CA4014A56D82DA3A315AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R3.stdout.log",
+      "Bytes": 320,
+      "Sha256": "67C6199084A56E15C9E6506AB67D8F6C7A77DA923C524957635347267BCD1CFB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R4.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R4.stdout.log",
+      "Bytes": 320,
+      "Sha256": "AABACBE41A9576C6F340E28D86EC2AB3830AC58A5CD8F1604D9F2280C9E0BB55"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R5.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R5.stdout.log",
+      "Bytes": 320,
+      "Sha256": "661C29928C67CDA0FE86EB469972EFFF8BBBC84B08302196F7054A70B77B703F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R6.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\R6.stdout.log",
+      "Bytes": 320,
+      "Sha256": "58853E031FF01C283AF1F9571BC6BB43A61B65CB9DCF872489FC5719D5363C73"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\native-six-pairs\\telemetry.jsonl",
+      "Bytes": 103355,
+      "Sha256": "63B92C38DCC50854D01A5AA8D267EC713407F2D53EFD5BABC7C8545655E6691C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\Private.Restore.targets",
+      "Bytes": 164,
+      "Sha256": "EDC0C91DD9B40BA992BA448280E2F6CE6231A1758DF6AC20C675F429CF410656"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\producer-change.patch",
+      "Bytes": 27439,
+      "Sha256": "EA19FF2E7B203E1C7D308594D50E78E80819E3BF605CE7EE78D53C085B529077"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\prototype-common\\Copper68k.dll",
+      "Bytes": 979968,
+      "Sha256": "09C20FC20818D360DB4B5628A15E2ECE9206047B1D1B3CB4E10C59CD9731A744"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\prototype-common\\M68kCore.cs",
+      "Bytes": 661983,
+      "Sha256": "E058B78B17DBEEBEDDECA924325D8152D359FE6554A6B7F32DDFF696E4A89165"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\prototype-test-disposition.json",
+      "Bytes": 183,
+      "Sha256": "20EC1271B95A4CE53A2F86DF687102393AABBDC086F41E4E92F8CF0C9132989E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\prototype-test-processes.json",
+      "Bytes": 948,
+      "Sha256": "802AE15E602D85952C04D2883E728FE551DE7B4358FDCD7075DCC434AC6FE83A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\qualification.json",
+      "Bytes": 104581,
+      "Sha256": "C001B4B1A9AD86A0B0200A1D9D3805BEB90F1A535751F2266742B1D523C425FF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\qualify.ps1",
+      "Bytes": 7034,
+      "Sha256": "8A45DFE780670ECBAE1A0185E295DE4BBC8E4422A68A766B2779251BB3596AAA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\Copper68k.dll",
+      "Bytes": 978944,
+      "Sha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "75BCF29B83377521BE9DE04539B038AB5FC682FE66AB677202629FCFDDB8C831"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperDisk.pdb",
+      "Bytes": 42880,
+      "Sha256": "09078676FCECEDD931E2C0D54AA11A7680D2EDF1F2EC27914D2BB7F19C1DB586"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "6F942E7E70E1097004D5816486C3FBC9468ABBF3C33B5214BD676B065ADE250E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120316,
+      "Sha256": "82DE956CCEEF6D1C81EB5C1140CA04E2CB02BF671F15EC99A4E5354EC65E00AD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2509,
+      "Sha256": "29DFB857F40EFD18FA9C9597EF78B08C0EECBB402F317182A7E558EF3E029AFB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "50FEC6C02DC4DB40DD7CD5507FDA07176C17651ABB105174D99B16CE27680BDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24888,
+      "Sha256": "B80B4FF04875673AA2DDB0114B2F71371CF3D02D0724A40200ECD1603D58E871"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\reference\\CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\cpu-prefetch-metadata-20261103\\write-evidence.ps1",
+      "Bytes": 4668,
+      "Sha256": "09DCF800175C7DE4F7F9137E3D03F3E666978AB6DA15C85EB0FA82B23FFD2244"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lemmings-benchmark-20261102-input\\lemmings-cpu-bus-timing-v1.json",
+      "Bytes": 1229,
+      "Sha256": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Tests\\TestResults\\cpu-prefetch-metadata-20261103.trx",
+      "Bytes": 2020109,
+      "Sha256": "F52D7C2BC7E8B863EE5B1DBCC867713FB9E4D4887F7086F502B3774FA172E359"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\CopperMod.Amiga.Lightweight.csproj",
+      "Bytes": 2431,
+      "Sha256": "CD62BBFDDC2F3FAA62D9A173CC6F284DC06CBFDFACF02DE4C24F6FFEF694836D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Machine.cs",
+      "Bytes": 108777,
+      "Sha256": "2E036F421344FE38D0EE10C9AC56E70134C352816CB491101BD0E1BF90DA3D16"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightVideo.cs",
+      "Bytes": 42457,
+      "Sha256": "E7606EFBFFA011A2061DBE5EEC8A91A3D88D04CD2BA6DA07BBF44077D8B38E3E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\CPU_PREFETCH_METADATA_2026-11-03.md",
+      "Bytes": 8502,
+      "Sha256": "67745AA6BB2FBF6C1DB2DAE56DFF171ED939AA9102579350E596D7636B4CB4FF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\LEMMINGS_CORRECTNESS_2026-11-02.json",
+      "Bytes": 27974,
+      "Sha256": "663D84DEFAFEA783AA7353EAF50D21F35E9DBD1CAB734AFEA1F850967E7FAEA9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\PERFORMANCE_BASELINE_2026-10-12.json",
+      "Bytes": 15788,
+      "Sha256": "BA7A5977E0F3F2E2B984F393220CECAA3393E326E458A452F9DBF7BA4803FF00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\media\\lemmings-disk2.zip",
+      "Bytes": 767037,
+      "Sha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\scripts\\agnus-g6-host-load.ps1",
+      "Bytes": 6589,
+      "Sha256": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\scripts\\measure-cpu-prefetch-metadata-v1.ps1",
+      "Bytes": 15625,
+      "Sha256": "E535730A3C0684B9940AF411F911ABD3E50B82A06F7A5D3517557C7044D78F2C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\scripts\\qualification\\CopperScreen.Qualification.psm1",
+      "Bytes": 3249,
+      "Sha256": "0642ABF70C8C44044C1D39D29C0C779FED3DF168BC736DC700169A50EF55C82C"
+    }
+  ]
+}

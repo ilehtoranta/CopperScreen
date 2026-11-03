@@ -27,8 +27,8 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], recent); window.Show();
         try
         {
-            if (choice == 0) Named<ComboBox>(window, "Start configuration").SelectedIndex = 1;
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = choice;
+            if (choice == 0) LaunchSelection.Select(window, 1);
+            LaunchSelection.Select(window, choice);
             var draft = MenuDraft(window);
             rom = draft.KickstartRomPath;
             disk = draft.DriveDiskPaths[0];
@@ -39,7 +39,7 @@ public sealed partial class LaunchWorkflowTests
         var reopened = new MainWindow([], new CopperScreenRecentSession(_root)); reopened.Show();
         try
         {
-            Assert.Equal(choice, Named<ComboBox>(reopened, "Start configuration").SelectedIndex);
+            Assert.Equal(choice, LaunchSelection.Current(reopened));
             var draft = MenuDraft(reopened);
             Assert.Equal(rom, draft.KickstartRomPath);
             Assert.Equal(disk, draft.DriveDiskPaths[0]);
@@ -53,12 +53,12 @@ public sealed partial class LaunchWorkflowTests
     public Task UnconfiguredModelSelectionAlsoSurvivesClosing() => Ui(() =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
-        try { Named<ComboBox>(window, "Start configuration").SelectedIndex = 2; }
+        try { LaunchSelection.Select(window, 2); }
         finally { window.Close(); }
         var reopened = new MainWindow([], new CopperScreenRecentSession(_root)); reopened.Show();
         try
         {
-            Assert.Equal(2, Named<ComboBox>(reopened, "Start configuration").SelectedIndex);
+            Assert.Equal(2, LaunchSelection.Current(reopened));
             Assert.Null(MenuDraft(reopened).KickstartRomPath);
             Assert.False(Button(reopened, "Start Amiga").IsEnabled);
         }

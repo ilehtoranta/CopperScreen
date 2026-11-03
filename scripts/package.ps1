@@ -2,7 +2,8 @@
 param(
     [string]$RuntimeIdentifier = 'win-x64',
     [string]$AdditionalPackageSource,
-    [string]$PackagesPath
+    [string]$PackagesPath,
+    [switch]$EnableCopperStart
 )
 
 $ErrorActionPreference = 'Stop'
@@ -12,6 +13,7 @@ $output = Join-Path $repository ('artifacts/package-' + [Guid]::NewGuid().ToStri
 $publish = Join-Path $output 'CopperScreen'
 $null = New-Item -ItemType Directory -Path $publish
 $arguments = @('publish', "$repository/CopperScreen/CopperScreen.csproj", '-c', 'Release', '-r', $RuntimeIdentifier, '--self-contained', 'true', '-p:PublishTrimmed=false', '-p:DebugType=None', '-p:DebugSymbols=false', "-p:NuGetLockFilePath=$output/packages.lock.json", '-o', $publish)
+$arguments += "-p:CopperScreenEnableCopperStart=$($EnableCopperStart.IsPresent.ToString().ToLowerInvariant())"
 if ($AdditionalPackageSource) { $arguments += "-p:RestoreAdditionalProjectSources=$AdditionalPackageSource" }
 if ($PackagesPath) { $arguments += "-p:RestorePackagesPath=$PackagesPath" }
 & dotnet @arguments

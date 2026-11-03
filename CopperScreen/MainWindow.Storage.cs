@@ -14,11 +14,13 @@ internal sealed partial class MainWindow
     private Control CreateHardfileSettings()
     {
         var layout = new StackPanel { Spacing = 10 };
-        layout.Children.Add(SettingsNote("Hard disks attach when the Amiga starts. Writable images save directly to their backing file. CopperStart accepts one existing image on unit 0: choose RDB to discover its FFS partitions and boot priorities, or Partition to enter exact geometry. TD64 supports FFS offsets above 4 GiB. Changes require a restart."));
-        layout.Children.Add(SettingsNote("Stop the Amiga before backup or restore. A backup includes every complete hard-disk image, all RDB partitions and the machine settings. Firmware, floppy images and shared-folder contents stay at their original paths and are not included. Restore creates new working disks and preserves their saved write protection."));
+        layout.Children.Add(SettingsHelp("Hard disk help", "Hard disks attach when the Amiga starts. CopperStart accepts one existing image on unit 0: choose RDB to discover its FFS partitions and boot priorities, or Partition to enter exact geometry. TD64 supports FFS offsets above 4 GiB. Changes require a restart."));
+        layout.Children.Add(SettingsNote("Includes hard disks and settings only."));
         layout.Children.Add(CommandGroup(CreatePanelButton("Export hard-disk backup…", async () => await ExportHardDiskBackupAsync()),
             CreatePanelButton("Restore hard-disk backup…", async () => await RestoreHardDiskBackupAsync())));
-        _hardDiskBackupStatus = SettingsNote("Backups never replace an existing file. Keep the exported backup outside app data.");
+        layout.Children.Add(SettingsHelp("Backup help", "Stop the Amiga before backup or restore. A backup includes every complete hard-disk image, all RDB partitions and the machine settings. Firmware, floppy images and shared-folder contents are not included. Restore creates new working disks and preserves their saved write protection. Backups never replace an existing file. Keep the exported backup outside app data."));
+        _hardDiskBackupStatus = SettingsNote(string.Empty);
+        _hardDiskBackupStatus.IsVisible = false;
         layout.Children.Add(_hardDiskBackupStatus);
         _hardfileRows = new StackPanel { Spacing = 10 };
         layout.Children.Add(_hardfileRows);
@@ -55,7 +57,7 @@ internal sealed partial class MainWindow
             var form = CreateSettingsGroupForm();
             var unit = AddTextSetting(form, "Unit"); unit.Text = settings.Unit.ToString(CultureInfo.InvariantCulture);
             var path = AddTextSetting(form, "HDF path"); path.Text = settings.Path;
-            var readOnly = new CheckBox { Content = "Read-only (clear to allow direct writes to this file)", IsChecked = settings.ReadOnly };
+            var readOnly = new CheckBox { Content = "Read-only", IsChecked = settings.ReadOnly };
             path.TextChanged += (_, _) => { if (path.Text != settings.Path) readOnly.IsChecked = true; };
             form.Children.Add(CreatePanelButton("Browse HDF…", async () =>
             {
@@ -64,12 +66,12 @@ internal sealed partial class MainWindow
                 if (selected.Count == 1) { path.Text = selected[0].TryGetLocalPath(); readOnly.IsChecked = true; }
             }));
             readOnly.IsCheckedChanged += (_, _) => MarkSettingsRestartRequired(); form.Children.Add(readOnly);
+            form.Children.Add(SettingsWriteWarning(readOnly, "Writes directly to this file.", $"Hard disk {settings.Unit} write warning"));
             var mode = AddComboSetting(form, "Image layout", ["Auto", "RDB", "Partition"]); mode.SelectedIndex = (int)settings.Mode;
             var size = AddTextSetting(form, "Create size (bytes)"); size.Text = settings.CreateSizeBytes.ToString(CultureInfo.InvariantCulture);
-            form.Children.Add(SettingsNote("Use 0 for an existing image. Creation only applies to a missing file; the size must be a multiple of 512 bytes."));
             var advanced = CreateSettingsGroupForm();
             var partitionForm = CreateSettingsGroupForm();
-            form.Children.Add(SettingsNote("RDB reads partition names, geometry and boot priorities from the image. Partition mode uses the fields below. No disk is formatted."));
+            form.Children.Add(SettingsHelp("Image layout help", "RDB reads partition names, geometry and boot priorities from the image. Partition mode uses the fields below. No disk is formatted. Use a create size of 0 for an existing image. Creation only applies to a missing file; the size must be a multiple of 512 bytes."));
             var partition = settings.Partition ?? new AmigaHardfilePartitionMetadata();
             var fields = new Dictionary<string, TextBox>();
             // The advanced fields correspond directly to the saved profile's
@@ -86,7 +88,7 @@ internal sealed partial class MainWindow
                     ? "From the image's partition definition" : "Default";
                 fields.Add(property.Name, box);
             }
-            partitionForm.Children.Add(SettingsNote("First and last cylinders are inclusive. Heads and blocks per track must match the formatted image. FFS uses 512-byte blocks; its DOS type is $444F5301."));
+            partitionForm.Children.Add(SettingsHelp("Partition help", "First and last cylinders are inclusive. Heads and blocks per track must match the formatted image. FFS uses 512-byte blocks; its DOS type is $444F5301."));
             form.Children.Add(CreatePanelButton("Use FFS partition settings", () =>
             {
                 mode.SelectedItem = "Partition";

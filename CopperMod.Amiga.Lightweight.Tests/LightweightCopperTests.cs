@@ -203,6 +203,58 @@ public sealed class LightweightCopperTests
         Assert.True(machine.CopperWaiting);
     }
 
+    // vAmigaTS Agnus/Copper/Skip/copskip4: SKIP suppresses the write, but
+    // an illegal MOVE still stops Copper. Exercise the fitted COPCON limits
+    // and ignored high address bits as well as the original $003E probe.
+    [Theory]
+    [InlineData(0, 0x003E, 0, false)]
+    [InlineData(1, 0x003E, 0, false)]
+    [InlineData(2, 0x003E, 0, false)]
+    [InlineData(0, 0xF00A, 0, false)]
+    [InlineData(1, 0xF00A, 0, false)]
+    [InlineData(2, 0xF00A, 0, false)]
+    [InlineData(0, 0x003E, 2, false)]
+    [InlineData(1, 0x003E, 2, true)]
+    [InlineData(2, 0x003E, 2, true)]
+    [InlineData(0, 0x0040, 2, true)]
+    [InlineData(1, 0x0040, 2, true)]
+    [InlineData(2, 0x0040, 2, true)]
+    public void SatisfiedSkipStillChecksMoveProtection(int model, int instruction, int danger, bool permitted)
+    {
+        using var machine = new LightweightA500Machine(new()
+        {
+            AgnusModel = model == 2 ? LightweightAgnusModel.Mos8374Alice : model == 1 ? LightweightAgnusModel.Mos8375Pal2M : LightweightAgnusModel.Mos8371,
+            DeniseModel = model == 2 ? LightweightDeniseModel.Lisa4203 : model == 1 ? LightweightDeniseModel.Mos8373 : LightweightDeniseModel.Mos8362,
+            CpuModel = model == 2 ? M68kCpuModel.M68EC020 : M68kCpuModel.M68000,
+            ChipRamBytes = model == 2 ? 2097152 : model == 1 ? 1048576 : 524288,
+            SlowRamBytes = 0
+        });
+        WriteControl(machine, LightweightRegisters.Copcon, (ushort)danger);
+        var cycle = StartCopper(machine,
+            (0x0180, 0x0111),
+            (0x0001, 0xFFFF),
+            ((ushort)instruction, 0xBEEF),
+            (0x0100, 0x0200),
+            (0x0180, 0x0222),
+            (0xFFFF, 0xFFFE));
+        machine.AdvanceHardwareTo(cycle + 256);
+        Assert.Equal(permitted ? 0x0222 : 0x0111, machine.GetCustomRegister(0x180));
+        Assert.Equal(permitted ? 0x0200 : 0, machine.GetCustomRegister(0x100));
+        Assert.NotEqual(0xBEEF, machine.GetCustomRegister((ushort)(instruction & 0x1FE)));
+        Assert.Equal(ListAddress + (permitted ? 24u : 12u), machine.CopperProgramCounter);
+        Assert.Equal(long.MaxValue, machine.CopperNextCycle);
+        Assert.Null(machine.UnsupportedActiveFeature);
+
+        // An explicit jump recovers from protection and clears the SKIP latch.
+        machine.WriteChipWordDma(ListAddress, 0x0180);
+        machine.WriteChipWordDma(ListAddress + 2, 0x0333);
+        machine.WriteChipWordDma(ListAddress + 4, 0xFFFF);
+        machine.WriteChipWordDma(ListAddress + 6, 0xFFFE);
+        WriteControl(machine, LightweightRegisters.Copjmp1, 0);
+        machine.AdvanceHardwareTo(machine.Cycle + 64);
+        Assert.Equal(0x0333, machine.GetCustomRegister(0x180));
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

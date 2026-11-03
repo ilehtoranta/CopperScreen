@@ -1,0 +1,986 @@
+{
+  "Schema": "lemmings-performance-investigation-v1",
+  "Date": "2026-11-02",
+  "SourceHead": "214d58a37d67c73256cd1fc2192d19da040ec967",
+  "ReferenceSourceHead": "575d5cf81681c7ffa5c7d0cd40bbda6a7d16af53",
+  "Disposition": "INVALID / RERUN",
+  "CausalRegressionEstablished": false,
+  "OptimizationGainEstablished": false,
+  "AcceptanceMeasurement": false,
+  "OwnerRequestedLoadedDiagnostics": true,
+  "Scope": "Full native Lemmings source-stack comparison; not engine-only, CPU-only, full three-workload retention or installed-app acceptance.",
+  "LoadedSeries": {
+    "Record": "artifacts/lemmings-performance-20261102/loaded-six-pairs/comparison-record.json",
+    "Samples": [
+      {
+        "Label": "R1",
+        "Role": "R",
+        "Pair": 1,
+        "Fps": 155.9,
+        "MsPerField": 6.414368184733804,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C1",
+        "Role": "C",
+        "Pair": 1,
+        "Fps": 166.79,
+        "MsPerField": 5.995563283170454,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C2",
+        "Role": "C",
+        "Pair": 2,
+        "Fps": 205.07,
+        "MsPerField": 4.87638367386746,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "R2",
+        "Role": "R",
+        "Pair": 2,
+        "Fps": 233.18,
+        "MsPerField": 4.288532464190753,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "R3",
+        "Role": "R",
+        "Pair": 3,
+        "Fps": 244.48,
+        "MsPerField": 4.090314136125655,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C3",
+        "Role": "C",
+        "Pair": 3,
+        "Fps": 70.36,
+        "MsPerField": 14.212620807276862,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C4",
+        "Role": "C",
+        "Pair": 4,
+        "Fps": 177.35,
+        "MsPerField": 5.638567803777841,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "R4",
+        "Role": "R",
+        "Pair": 4,
+        "Fps": 325.62,
+        "MsPerField": 3.0710644309317607,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "R5",
+        "Role": "R",
+        "Pair": 5,
+        "Fps": 333.94,
+        "MsPerField": 2.9945499191471523,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C5",
+        "Role": "C",
+        "Pair": 5,
+        "Fps": 327.71,
+        "MsPerField": 3.051478441304812,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C6",
+        "Role": "C",
+        "Pair": 6,
+        "Fps": 326.42,
+        "MsPerField": 3.0635377734207463,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "R6",
+        "Role": "R",
+        "Pair": 6,
+        "Fps": 334.57,
+        "MsPerField": 2.9889111396718175,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      }
+    ],
+    "Summary": [
+      {
+        "Role": "R",
+        "Samples": 6,
+        "MeanFps": 271.2816666666667,
+        "MinFps": 155.9,
+        "MaxFps": 334.57,
+        "MeanMsPerField": 3.9746233791334906
+      },
+      {
+        "Role": "C",
+        "Samples": 6,
+        "MeanFps": 212.28333333333333,
+        "MinFps": 70.36,
+        "MaxFps": 327.71,
+        "MeanMsPerField": 6.1396919638030285
+      }
+    ],
+    "Status": "INVALID / RERUN",
+    "HostLoadViolations": 540,
+    "FrozenFilesUnchanged": true,
+    "TelemetrySummary": {
+      "Intervals": 782,
+      "IntervalsWithJobs": 371,
+      "PeakSelectedOther": 95.8904109589041,
+      "PeakSibling": 100.0,
+      "PeakPackageOther": 98.67578444712412,
+      "WeightedPackageOther": 53.27797073826944
+    },
+    "RawLogsAndFrozenFilesIndependentlyVerified": true
+  },
+  "StrictSeries": {
+    "Record": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/comparison-record.json",
+    "Samples": [
+      {
+        "Label": "R1",
+        "Role": "R",
+        "Pair": 1,
+        "Fps": 328.4,
+        "MsPerField": 3.0450669914738127,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "C1",
+        "Role": "C",
+        "Pair": 1,
+        "Fps": 330.25,
+        "MsPerField": 3.028009084027252,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      }
+    ],
+    "Status": "INVALID / RERUN",
+    "FailedSample": "C2",
+    "Error": "System.Management.Automation.RuntimeException: G6 performance INVALID / RERUN: sustained Package interference >=25% for 10.5320612000069 seconds.",
+    "FrozenFilesIndependentlyVerified": true,
+    "PartialSampleExcluded": true
+  },
+  "Profiles": {
+    "DiagnosticOnly": true,
+    "ToolVersion": "dotnet-trace 10.0.745401",
+    "ContinuousLoadTelemetryAvailable": false,
+    "Reference": {
+      "Analysis": "artifacts/lemmings-performance-20261102/reference-profile-analysis.json",
+      "Slices": 132,
+      "MaximumSampleIntervalMs": 162.01589965820312,
+      "TopExclusive": [
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices(int64)",
+          "InclusiveMs": 5649.59186851811,
+          "ExclusiveMs": 2762.561849877966,
+          "InclusivePercent": 55.79844052054655,
+          "ExclusivePercent": 27.284562611277526,
+          "InclusiveSlices": 72,
+          "ExclusiveSlices": 36
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 1063.3493958007748,
+          "ExclusiveMs": 1063.3493958007748,
+          "InclusivePercent": 10.50221669016098,
+          "ExclusivePercent": 10.50221669016098,
+          "InclusiveSlices": 14,
+          "ExclusiveSlices": 14
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.RenderHiresCck(int32,int32,int32,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 643.6412914550892,
+          "ExclusiveMs": 643.6412914550892,
+          "InclusivePercent": 6.356951290225655,
+          "ExclusivePercent": 6.356951290225655,
+          "InclusiveSlices": 7,
+          "ExclusiveSlices": 7
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GrantCpuWord(unsigned int32,int64,int64&,int64&,bool)",
+          "InclusiveMs": 5238.374374585008,
+          "ExclusiveMs": 582.2009908447362,
+          "InclusivePercent": 51.737033004705424,
+          "ExclusivePercent": 5.750133481265851,
+          "InclusiveSlices": 65,
+          "ExclusiveSlices": 7
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody(int64)",
+          "InclusiveMs": 9542.924845312547,
+          "ExclusiveMs": 514.0974883544986,
+          "InclusivePercent": 94.25111349023659,
+          "ExclusivePercent": 5.077506268295302,
+          "InclusiveSlices": 124,
+          "ExclusiveSlices": 7
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceToCpuGrant(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 4656.173383740272,
+          "ExclusiveMs": 513.8134906982305,
+          "InclusivePercent": 45.986899523439575,
+          "ExclusivePercent": 5.074701353055396,
+          "InclusiveSlices": 58,
+          "ExclusiveSlices": 6
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].BranchToAndRefillTarget(unsigned int32,unsigned int32,bool,value class Copper68k.M68kBranchInterruptTransitionKind)",
+          "InclusiveMs": 2305.365468640157,
+          "ExclusiveMs": 459.11099123537133,
+          "InclusivePercent": 22.76904260940551,
+          "ExclusivePercent": 4.534429731026847,
+          "InclusiveSlices": 31,
+          "ExclusiveSlices": 7
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction()",
+          "InclusiveMs": 9989.079995568885,
+          "ExclusiveMs": 446.15515025633795,
+          "InclusivePercent": 98.65758429270956,
+          "ExclusivePercent": 4.406470802472974,
+          "InclusiveSlices": 130,
+          "ExclusiveSlices": 6
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 409.98635450440634,
+          "ExclusiveMs": 409.98635450440634,
+          "InclusivePercent": 4.049248113572206,
+          "ExclusivePercent": 4.049248113572206,
+          "InclusiveSlices": 5,
+          "ExclusiveSlices": 5
+        },
+        {
+          "Name": "System.Private.CoreLib.il!System.SpanHelpers.Memmove(unsigned int8&,unsigned int8&,unsigned int)",
+          "InclusiveMs": 400.6451874389604,
+          "ExclusiveMs": 400.6451874389604,
+          "InclusivePercent": 3.9569896695953513,
+          "ExclusivePercent": 3.9569896695953513,
+          "InclusiveSlices": 5,
+          "ExclusiveSlices": 5
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedBranch(unsigned int16,unsigned int32)",
+          "InclusiveMs": 2714.067561590593,
+          "ExclusiveMs": 334.6191950988723,
+          "InclusivePercent": 26.805606657721366,
+          "ExclusivePercent": 3.304881076242249,
+          "InclusiveSlices": 36,
+          "ExclusiveSlices": 4
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind(unsigned int16,unsigned int32,value class Copper68k.M68kOpcodePlanKind)",
+          "InclusiveMs": 7497.034637792967,
+          "ExclusiveMs": 329.7857917663496,
+          "InclusivePercent": 74.04478961541243,
+          "ExclusivePercent": 3.257143757399017,
+          "InclusiveSlices": 96,
+          "ExclusiveSlices": 5
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceTo(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 1579.740496606435,
+          "ExclusiveMs": 222.1736068725586,
+          "InclusivePercent": 15.602375921875902,
+          "ExclusivePercent": 2.194307319329507,
+          "InclusiveSlices": 21,
+          "ExclusiveSlices": 3
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedTestByteDisplacement(unsigned int16,unsigned int32)",
+          "InclusiveMs": 1698.8595775268477,
+          "ExclusiveMs": 152.5427944946132,
+          "InclusivePercent": 16.778860720474857,
+          "ExclusivePercent": 1.506595563632854,
+          "InclusiveSlices": 21,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+          "InclusiveMs": 147.82949517823,
+          "ExclusiveMs": 147.82949517823,
+          "InclusivePercent": 1.4600444573438747,
+          "ExclusivePercent": 1.4600444573438747,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 702.7533468750189,
+          "ExclusiveMs": 144.93749719238258,
+          "InclusivePercent": 6.940774084005865,
+          "ExclusivePercent": 1.4314815130897838,
+          "InclusiveSlices": 9,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.RefreshNextCycle()",
+          "InclusiveMs": 134.7654924072267,
+          "ExclusiveMs": 134.7654924072267,
+          "InclusivePercent": 1.3310172641336708,
+          "ExclusivePercent": 1.3310172641336708,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.EmitOutputTo(int64)",
+          "InclusiveMs": 109.32219578856893,
+          "ExclusiveMs": 109.32219578856893,
+          "InclusivePercent": 1.0797254352612278,
+          "ExclusivePercent": 1.0797254352612278,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightSprites.ComposeColorIndexSlow(int32,int32,int32,int32,int32)",
+          "InclusiveMs": 99.86159853514982,
+          "ExclusiveMs": 99.86159853514982,
+          "InclusivePercent": 0.9862874338233969,
+          "ExclusivePercent": 0.9862874338233969,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedImmediateBtst(unsigned int16)",
+          "InclusiveMs": 1856.5031287597812,
+          "ExclusiveMs": 72.2220968749898,
+          "InclusivePercent": 18.335834130525065,
+          "ExclusivePercent": 0.7133046900616751,
+          "InclusiveSlices": 23,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchAtRetirement()",
+          "InclusiveMs": 1037.2505922119308,
+          "ExclusiveMs": 72.03249993897043,
+          "InclusivePercent": 10.244450718104751,
+          "ExclusivePercent": 0.7114321276529979,
+          "InclusiveSlices": 14,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedMove(unsigned int16)",
+          "InclusiveMs": 756.601079516593,
+          "ExclusiveMs": 71.2297954345704,
+          "InclusivePercent": 7.472603564239678,
+          "ExclusivePercent": 0.7035041816018989,
+          "InclusiveSlices": 9,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ReadLong(unsigned int32,int64&,value class Copper68k.M68kBusAccessKind)",
+          "InclusiveMs": 150.14249331055908,
+          "ExclusiveMs": 70.44429689942626,
+          "InclusivePercent": 1.482888884289135,
+          "ExclusivePercent": 0.6957461710566675,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.WriteCustomRegister(unsigned int16,unsigned int16,int64)",
+          "InclusiveMs": 69.84719700927963,
+          "ExclusiveMs": 69.84719700927963,
+          "InclusivePercent": 0.6898488879465672,
+          "ExclusivePercent": 0.6898488879465672,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.UsesAgnusBus(unsigned int32)",
+          "InclusiveMs": 67.56799941406643,
+          "ExclusiveMs": 67.56799941406643,
+          "InclusivePercent": 0.6673382934804869,
+          "ExclusivePercent": 0.6673382934804869,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        }
+      ]
+    },
+    "Current": {
+      "Analysis": "artifacts/lemmings-performance-20261102/current-profile-analysis.json",
+      "Slices": 91,
+      "MaximumSampleIntervalMs": 117.76329803466797,
+      "TopExclusive": [
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.TickDevices(int64)",
+          "InclusiveMs": 2954.0241067871248,
+          "ExclusiveMs": 1793.335889294438,
+          "InclusivePercent": 46.38128944018996,
+          "ExclusivePercent": 28.15726207302741,
+          "InclusiveSlices": 42,
+          "ExclusiveSlices": 26
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteSingleInstruction()",
+          "InclusiveMs": 6096.211207428001,
+          "ExclusiveMs": 673.6733385376137,
+          "InclusivePercent": 95.71693604348226,
+          "ExclusivePercent": 10.577380878870331,
+          "InclusiveSlices": 87,
+          "ExclusiveSlices": 10
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecutePlannedBranch(unsigned int16,unsigned int32)",
+          "InclusiveMs": 1521.5410904418823,
+          "ExclusiveMs": 565.3668887329113,
+          "InclusivePercent": 23.88979749650118,
+          "ExclusivePercent": 8.8768555564501,
+          "InclusiveSlices": 22,
+          "ExclusiveSlices": 8
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ExecuteInstructionBody(int64)",
+          "InclusiveMs": 5422.5378688903875,
+          "ExclusiveMs": 471.2188778320269,
+          "InclusivePercent": 85.13955516461193,
+          "ExclusivePercent": 7.3986326354593075,
+          "InclusiveSlices": 77,
+          "ExclusiveSlices": 7
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightVideo.RenderHiresCck(int32,int32,int32,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 444.4290301391593,
+          "ExclusiveMs": 444.4290301391593,
+          "InclusivePercent": 6.978003813559501,
+          "ExclusivePercent": 6.978003813559501,
+          "InclusiveSlices": 7,
+          "ExclusiveSlices": 7
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceTo(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 1024.733261718764,
+          "ExclusiveMs": 311.7358719726617,
+          "InclusivePercent": 16.08939138362724,
+          "ExclusivePercent": 4.8945814875490985,
+          "InclusiveSlices": 14,
+          "ExclusiveSlices": 4
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TryExecutePlannedKind(unsigned int16,unsigned int32,value class Copper68k.M68kOpcodePlanKind)",
+          "InclusiveMs": 3854.628863757316,
+          "ExclusiveMs": 276.035496289056,
+          "InclusivePercent": 60.52173257613913,
+          "ExclusivePercent": 4.334047992273815,
+          "InclusiveSlices": 54,
+          "ExclusiveSlices": 4
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.GrantCpuWord(unsigned int32,int64,int64&,int64&,bool)",
+          "InclusiveMs": 2507.819257824711,
+          "ExclusiveMs": 256.3502960205078,
+          "InclusivePercent": 39.375403400941956,
+          "ExclusivePercent": 4.024969617034464,
+          "InclusiveSlices": 35,
+          "ExclusiveSlices": 3
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightClock.AdvanceToCpuGrant(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 2251.468961804203,
+          "ExclusiveMs": 214.44978824463033,
+          "InclusivePercent": 35.35043378390749,
+          "ExclusivePercent": 3.367087518381723,
+          "InclusiveSlices": 32,
+          "ExclusiveSlices": 3
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.CompleteOutput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 169.78269918213482,
+          "ExclusiveMs": 169.78269918213482,
+          "InclusivePercent": 2.6657671799666103,
+          "ExclusivePercent": 2.6657671799666103,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchAtRetirement()",
+          "InclusiveMs": 1015.0003308532905,
+          "ExclusiveMs": 138.2230729431176,
+          "InclusivePercent": 15.936574119023444,
+          "ExclusivePercent": 2.1702478117079287,
+          "InclusiveSlices": 15,
+          "ExclusiveSlices": 3
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ExecuteScalarFallbackQuantum(int64)",
+          "InclusiveMs": 6368.999530719011,
+          "ExclusiveMs": 135.70018288573192,
+          "InclusivePercent": 100.0,
+          "ExclusivePercent": 2.1306357808824083,
+          "InclusiveSlices": 91,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "System.Private.CoreLib.il!System.SpanHelpers.Memmove(unsigned int8&,unsigned int8&,unsigned int)",
+          "InclusiveMs": 134.3481058349571,
+          "ExclusiveMs": 134.3481058349571,
+          "InclusivePercent": 2.109406747275898,
+          "ExclusivePercent": 2.109406747275898,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.RefreshNextCycle()",
+          "InclusiveMs": 134.32029412841075,
+          "ExclusiveMs": 134.32029412841075,
+          "InclusivePercent": 2.108970074193851,
+          "ExclusivePercent": 2.108970074193851,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 2
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightCopper.AdvanceControlInput(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 108.01679707031872,
+          "ExclusiveMs": 108.01679707031872,
+          "InclusivePercent": 1.6959774694491845,
+          "ExclusivePercent": 1.6959774694491845,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightA500Machine.ReadWordAt(unsigned int32,int64)",
+          "InclusiveMs": 106.63860321044922,
+          "ExclusiveMs": 106.63860321044922,
+          "InclusivePercent": 1.6743383744355613,
+          "ExclusivePercent": 1.6743383744355613,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBitplanes.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 103.59120178222656,
+          "ExclusiveMs": 103.59120178222656,
+          "InclusivePercent": 1.6264909627106208,
+          "ExclusivePercent": 1.6264909627106208,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.ComputeAreaOutput()",
+          "InclusiveMs": 67.66689755859261,
+          "ExclusiveMs": 67.66689755859261,
+          "InclusivePercent": 1.0624415535316194,
+          "ExclusivePercent": 1.0624415535316194,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightPaulaAudio.Step(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine)",
+          "InclusiveMs": 67.24799783935305,
+          "ExclusiveMs": 67.24799783935305,
+          "InclusivePercent": 1.0558643867847997,
+          "ExclusivePercent": 1.0558643867847997,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon].ReadByte(!0,unsigned int32,int64&)",
+          "InclusiveMs": 388.8795979004062,
+          "ExclusiveMs": 65.87979888916016,
+          "InclusivePercent": 6.105819226783719,
+          "ExclusivePercent": 1.034382222379012,
+          "InclusiveSlices": 5,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "CopperMod.Amiga.Lightweight!CopperMod.Amiga.Lightweight.LightweightBlitter.TryAcceptPhase(int64,class CopperMod.Amiga.Lightweight.LightweightA500Machine,bool)",
+          "InclusiveMs": 133.30019735108363,
+          "ExclusiveMs": 65.63329979249102,
+          "InclusivePercent": 2.092953480497981,
+          "ExclusivePercent": 1.0305119269663616,
+          "InclusiveSlices": 2,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].Shift(unsigned int32,int32,value class Copper68k.M68kOperandSize,int32,bool)",
+          "InclusiveMs": 65.3551025390625,
+          "ExclusiveMs": 65.3551025390625,
+          "InclusivePercent": 1.0261439371103929,
+          "ExclusivePercent": 1.0261439371103929,
+          "InclusiveSlices": 1,
+          "ExclusiveSlices": 1
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].ResolvePlannedEa(int32,int32,value class Copper68k.M68kOperandSize,bool,bool,int32)",
+          "InclusiveMs": 304.67189786378003,
+          "ExclusiveMs": 0.0,
+          "InclusivePercent": 4.783669654775197,
+          "ExclusivePercent": 0.0,
+          "InclusiveSlices": 4,
+          "ExclusiveSlices": 0
+        },
+        {
+          "Name": "Process64 dotnet (40556) Args:  exec --fx-version 10.0.12 artifacts/lemmings-benchmark-20261102-runner/CopperMod.Amiga.Lightweight.Runner.dll --rom C:/Data/ROM/Kickstart_13.rom --adf \"C:/Data/TestImages/Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip\" --input-script artifacts/lemmings-benchmark-20261102-input/lemmings-cpu-bus-timing-v1.json --warmup 14520 --frames 3600 ",
+          "InclusiveMs": 6368.999530719011,
+          "ExclusiveMs": 0.0,
+          "InclusivePercent": 100.0,
+          "ExclusivePercent": 0.0,
+          "InclusiveSlices": 91,
+          "ExclusiveSlices": 0
+        },
+        {
+          "Name": "Copper68k!Copper68k.M68kInterpreterCore`2[System.__Canon,Copper68k.M68kNoExactCpuDataAccess`1[System.__Canon]].TopUpPrefetchOne(int64&)",
+          "InclusiveMs": 1503.8893875976646,
+          "ExclusiveMs": 0.0,
+          "InclusivePercent": 23.612647172355608,
+          "ExclusivePercent": 0.0,
+          "InclusiveSlices": 20,
+          "ExclusiveSlices": 0
+        }
+      ]
+    },
+    "Limits": "Approximate measured-tail window; sampled managed stacks include inlined code and descheduling gaps. Inclusive parents overlap children. Counts and attributed time are diagnostic, not a confidence bound or causal speedup."
+  },
+  "SourceObservation": {
+    "AddedWork": "Corrected adapter samples IPL even when inactive or masked, adding CPU-state access, interface check and stateful sampler invocation to the formerly cheap path.",
+    "Attribution": "Plausible source cost only; individual contribution not isolated or established as the regression cause.",
+    "GeneratedCode": {
+      "Tiering": false,
+      "Pgo": false,
+      "ReferenceAdapterBytes": 270,
+      "CurrentAdapterBytes": 257,
+      "ThroughputConclusion": false
+    },
+    "ProductionEngineChanged": false,
+    "GoldensChanged": false,
+    "HistoricalProtocolsChanged": false
+  },
+  "Tooling": [
+    {
+      "Path": "scripts/measure-lemmings-regression-v1.ps1",
+      "Sha256": "7682B660AAF933FE61BE8FEE49AC1458D506259EFED32C6D6A6335D496AEE207"
+    },
+    {
+      "Path": "scripts/analyze-lemmings-profile-v1.ps1",
+      "Sha256": "37FFEA1DB6171109E4E85799ED0C62DC505BAA605CEFA9CAD8305637B06C7F43"
+    }
+  ],
+  "Remaining": "A complete fresh strict native series is required to quantify a small source-stack difference; source-stage timing is needed to attribute any demonstrated loss.",
+  "Artifacts": [
+    {
+      "Path": "artifacts/lemmings-performance-20261102/current-disasm.log",
+      "Sha256": "306F376E3A5C65CA292D564B04C6C2A163BEADE5404F3EE3CDAFDF61273B8626",
+      "Bytes": 307
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/current-interrupt.asm",
+      "Sha256": "484E9DEC9A5CF717B0ECBC03C9E3123C243ECA27F295F708598371EED2B16D86",
+      "Bytes": 3515
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/current-profile-analysis.json",
+      "Sha256": "170697272114E37E0B7C314452ABAA6744E7CB2BA008C3402D498AB677AE246F",
+      "Bytes": 27320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/current-profile.log",
+      "Sha256": "D9FBBB37ABF697860FA079E13968883BDCDD643E493FC2AD49074AB01D7D54F1",
+      "Bytes": 619
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/current-profile.nettrace",
+      "Sha256": "D961DBD0B0BEE2C65089DC19D7F237A4D5960E5E4DBF198F8E2D2AC748A1769C",
+      "Bytes": 2213826
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/current-profile.speedscope.json",
+      "Sha256": "1DFE12B08BFF9408CCE51ABBB88F80D8800BBD07B9BF9519EB0904186B352200",
+      "Bytes": 556203
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-pair-summary.json",
+      "Sha256": "371214444A389297AA162E64375044FAE0C1BC4D50940A55108D0DB9D514ECBA",
+      "Bytes": 495
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C1.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C1.stdout.log",
+      "Sha256": "58DC99331D95C5FB258B594C9F80AF47DDC90BED63B3BB53991E5B8341562C5F",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C2.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C2.stdout.log",
+      "Sha256": "03D1D94A1B6E7E46C85398A6D6834975D26C846925DC769445D963A024DADA89",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C3.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C3.stdout.log",
+      "Sha256": "DDA059CFF1627F3D0A2ABC4ADF012460638C677385441D166BDD0F5425351A25",
+      "Bytes": 319
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C4.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C4.stdout.log",
+      "Sha256": "EFD6B75FF67338F1A4EB96B3938E2E048192C0121AE02DCED627FBE5C947592C",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C5.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C5.stdout.log",
+      "Sha256": "7D796393AD6AF4A61D7BA1E4A0F171D8508243D19D002266C67B472D0D0DB727",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C6.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/C6.stdout.log",
+      "Sha256": "E1FF552E807734E1DD595E239624E5F7D00B96743E51B2DF9ADDB2B1A4541CD7",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/comparison-record.json",
+      "Sha256": "E7FEA6AF27A92F035EBB04502459F194B338747F07A5DB71684730365CAFC727",
+      "Bytes": 167721
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R1.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R1.stdout.log",
+      "Sha256": "1A3480990312A1987877625061DAA92C6F1C656BF3AD4B70F240B0C29682E60C",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R2.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R2.stdout.log",
+      "Sha256": "F353E58659567A6E772C8C36AF5524595B361670452DEC96F94DA947BC62B3F8",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R3.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R3.stdout.log",
+      "Sha256": "567AA42E99C41394661394D596F1D7602B2F00D63B7564D41C2287B5C57C102B",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R4.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R4.stdout.log",
+      "Sha256": "E242F2E1BFB32C35071999A9A0924D88EAFC7BF89C8B0600AD5356EF8D06E9A0",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R5.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R5.stdout.log",
+      "Sha256": "326B862B46B184D2FA17F9431575C5CBC9963F5355B57D32A1D3A6825383B559",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R6.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/R6.stdout.log",
+      "Sha256": "CE75C1AF9BF4AC6B1F5E82F25574FD3370B458D2AB630AB35A4666DED30BA451",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-six-pairs/telemetry.jsonl",
+      "Sha256": "8B1997697C1F06F6920B628A7FFB6C8FE8532AEB236F96BBBBC76BCE838B93DA",
+      "Bytes": 143054
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/loaded-telemetry-summary.json",
+      "Sha256": "D9DB765E04B78B5E1A7526A69E0BC7197468845F31F03CAD32D06FC3DC16BD03",
+      "Bytes": 210
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/preflight-1/comparison-record.json",
+      "Sha256": "FF68E12F25A80AF3C0E654E26C04CE18F2A59696B0630085CA276DF1FE6AF050",
+      "Bytes": 59627
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/preflight-1/telemetry.jsonl",
+      "Sha256": "12C86D97EEC5334C7D945F42559CBAA1C3C824A0BEFFE137DCA11706D43EEC81",
+      "Bytes": 216
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference-disasm.log",
+      "Sha256": "C7A05E25CF389789E07CC4433F8843FDB5AA1E1AD106D0B9D199957C54948922",
+      "Bytes": 307
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference-interrupt.asm",
+      "Sha256": "F9D0A36F08778CAAB115CA131FF2095E066FD35F9F65682762D4F6EE4AF88E9C",
+      "Bytes": 3543
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference-profile-analysis.json",
+      "Sha256": "64A012A0D66D197D469CD92E677C3B616F5D7316EA33CFCB74A0F14C6CE94929",
+      "Bytes": 32818
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference-profile.log",
+      "Sha256": "9E53776CE03EB775DB3C544FCAF4F8187C27C0C37777E24D54E887BB29DA3D6D",
+      "Bytes": 623
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference-profile.nettrace",
+      "Sha256": "F16C5BC98B78F6C9FB9389FC72A6A18A6A458A622BE2820C2302ADBEB29D486F",
+      "Bytes": 2239234
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference-profile.speedscope.json",
+      "Sha256": "888025516D33671B9F36FA4C2749D6F5DCE407F15CC375F13F46E91445BE3E97",
+      "Bytes": 702482
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/Copper68k.dll",
+      "Sha256": "5780F5084FD44E2D4732969BC0F9CE7AE7E3BEFFC1135DED92BC46D9B21399F2",
+      "Bytes": 939520
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperDisk.dll",
+      "Sha256": "22E97067458C070F9ABECEB592A75607468C0381F3671F86D95846BE1BC46F0A",
+      "Bytes": 105472
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperDisk.pdb",
+      "Sha256": "2DF4A07648C1C436C1F847017C50FE2B537EBF92BCEF80E8DF77A4EF9A70D480",
+      "Bytes": 42036
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperDisk.xml",
+      "Sha256": "B5E21B2026216BFE4EF67D71790EE83DAF38C9E524307F1AF23ABC4260098D69",
+      "Bytes": 49078
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperFloat.dll",
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235",
+      "Bytes": 28672
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.dll",
+      "Sha256": "442E0D0455BACC28272F4C8D606455E1A73512E0F0FBEA171CE166DADFB88995",
+      "Bytes": 288256
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.pdb",
+      "Sha256": "B42E58A5451A140A9A09CEF03AA3790225A7051CA8795FA4DE3EB36F4EF59862",
+      "Bytes": 114872
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Sha256": "ED1D59937BF6394E624022FFF2DCC752BDDF47E5CF08E2B66BC907DA67D5DFE4",
+      "Bytes": 2575
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.Runner.dll",
+      "Sha256": "A9CF3D3CEBA0B5E836702F014BBB3C8A69C9A287EB2F94EFA1DF42D2D92B6D3B",
+      "Bytes": 79872
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.Runner.exe",
+      "Sha256": "4139297A80695987FEA914A10D67E8E30C98246EA353818616470F08625A8654",
+      "Bytes": 162816
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Sha256": "9CE2BFF8BEE62A205D87E18F0B18752845EB7B0EAACC69EEEDF31475626360BA",
+      "Bytes": 23956
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "Bytes": 342
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/reference/CopperMod.Amiga.Lightweight.xml",
+      "Sha256": "CEDF10E07B9EB59CB07833559D026E3EC647E9CD5E12CB0EAB3423B966419B1B",
+      "Bytes": 20679
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/runner-scheduling-observations.jsonl",
+      "Sha256": "0D670AA56441E12BDB0D7DD1EB2046A107BE05BA28AA4B49875C334241721A60",
+      "Bytes": 335
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/C1.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/C1.stdout.log",
+      "Sha256": "781405BF36EF6765A29A7A97D58DEF5C3361FDF77B8ADDAE00C5A25D966F8F5B",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/C2.partial.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/C2.partial.stdout.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/comparison-record.json",
+      "Sha256": "B970CEA3D7577897257910CDB1FCFBCD98D768925B2712EEBA195C0AB54F4E7C",
+      "Bytes": 60749
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/R1.stderr.log",
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+      "Bytes": 2
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/R1.stdout.log",
+      "Sha256": "4F13E897850BEE991793F98BDABEB3F111F16E1038B44F79581D55EBEE7C1CB0",
+      "Bytes": 320
+    },
+    {
+      "Path": "artifacts/lemmings-performance-20261102/strict-six-pairs-1/telemetry.jsonl",
+      "Sha256": "36A65602BF36AE8B339ACCDE49589A0D110554C0B3EB7DFDF95F2D25EF7A6B15",
+      "Bytes": 20643
+    }
+  ]
+}

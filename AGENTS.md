@@ -13,6 +13,49 @@ and `docs/engine/ISSUES.md`. Lightweight is the active engine; Legacy remains
 unavailable. CopperStart uses only the qualified standalone guest ROM and bounded
 A500 configuration documented in `docs/COPPERSTART_APP.md`; do not restore host OS shims.
 
+## Lightweight execution principles
+
+Hardware correctness and a small execution cost are requirements together. Preserve
+implemented behavior while simplifying how it runs; feature growth must not make
+unfitted hardware or unused optional services part of the default A500 hot path.
+
+- Retain one execution owner, one canonical integer CPU-cycle clock and explicit
+  address/input/output phases. Keep compact device state and shared CPU/Copper
+  register semantics. Do not introduce parallel timelines, generic event queues,
+  requester graphs, per-device virtual dispatch or speculative schedule caches.
+- Preserve every required CPU fetch, contention decision, accepted DMA transfer,
+  pixel, collision, PCM sample and interrupt sample. Inactive or masked IPL can
+  still require sampling. Matching a game or fingerprint does not justify skipping
+  work that implements hardware behavior.
+- Optional metadata, tracing, JIT and unfitted chipset features must stay behind
+  their actual consumer boundary. Avoid constructing, zeroing or copying unused
+  snapshots. Zero managed allocations alone does not establish a lightweight path:
+  inspect stack copies, repeated branches, field loads and generated code too.
+- Resolve immutable fitted traits outside recurring CCK work and specialize shared
+  implementation where useful. Apply live register controls at their existing
+  phases. Share preparation only over a proven stable interval; retain individual
+  sprite/comparator, shifter, collision and transfer operations within it.
+- Reuse output buffers and existing canonical state. Prefer removing redundant
+  work to adding caches, mirrored state, callbacks or framework layers. A cache
+  needs measured benefit and correct invalidation; its presence is not an
+  optimization result.
+- Keep diagnostics out of recurring Release hardware execution: no per-cycle
+  logging, diagnostic polling, counters or callbacks. Preserve zero steady-state
+  managed allocations for the default interpreter at stable output geometry;
+  loading, geometry changes and optional compilation have separate costs. Use
+  bounded external probes or separate diagnostic builds. Do not add production
+  abstractions solely to make tests or profiles easier.
+- Start from the actual workload profile and change one bounded source of cost.
+  Freeze the reference before editing, check affected behavior, and inspect normal
+  optimized code when the intended saving depends on JIT decisions. Smaller code
+  or fewer source lines is not an FPS result. Measure throughput separately with
+  unchanged work and inputs; disclose invalid timing and unmeasured retention.
+- Fix shared CPU costs in Copper68k through its maintained package boundary.
+  Do not work around them by weakening engine timing or adding sibling source
+  references. Keep current limitations and evidence in the engine documentation.
+
+## Validation and evidence
+
 Build the production solution with `dotnet build CopperScreen.slnx -c Release`.
 Run engine diagnostic tests separately with
 `dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --artifacts-path artifacts/diagnostic-tests`.

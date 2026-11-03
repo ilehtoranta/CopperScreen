@@ -9,6 +9,18 @@ performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS D
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
 The host's [Minimal disk boot](MINIMAL_DISK_BOOT.md) has a separately bounded
 service/compatibility contract; it does not provide DOS, Workbench or CopperStart.
+The 2026-11-03 model extension verifies guest boot/services on standard PAL A500+
+and A1200, including a 3,000-field Desert Dream startup on both. Arte's A1200
+`disk FIFO overrun timing` stop was traced to Copper SKIP bypassing illegal-MOVE
+protection. Checking protection before suppressing the write fixes the unwanted
+ERSY write and the downstream overrun; the original disk now completes 3,000
+fields with animated output and audio on A1200. The subsequent
+[full Arte replay](MINIMAL_DISK_BOOT.md#arte-full-a1200-replay--2026-11-03) verifies
+the ending credits and automatic restart on A1200 and A500+, with 40,000 fields
+per profile and no captured CPU exception or fault; no further fix was needed.
+See the
+[Copper SKIP follow-up](MINIMAL_DISK_BOOT.md#arte-a1200-copper-skip-correction--2026-11-03)
+for evidence and limits. It is separate from the historical A500 exception below.
 The [Arte minimal-boot investigation](ARTE_MINIMAL_BOOT_CRASH_2026-10-08.md)
 reproduces SOS exception 3 after 22,008 completed fields; native Kickstart 1.3
 progresses through 40,000 fields on the same engine/media. The firmware's nonzero

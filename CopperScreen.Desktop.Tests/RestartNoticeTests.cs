@@ -73,7 +73,7 @@ public sealed partial class LaunchWorkflowTests
                 Assert.Equal("AccurateM68000", SettingsField<ComboBox>(window, "_cpuBackendBox").SelectedItem);
                 Assert.Equal("0", SettingsField<TextBox>(window, "_realFastRamBox").Text);
                 Assert.False(settingsRevert.IsEnabled);
-                Assert.DoesNotContain("Restart Amiga required", SettingsField<TextBlock>(window, "_settingsStatus").Text);
+                Assert.DoesNotContain("Restart required", SettingsField<TextBlock>(window, "_settingsStatus").Text);
                 Click(SettingsField<Button>(window, "_settingsCloseButton"));
             }
             else Click(revert);

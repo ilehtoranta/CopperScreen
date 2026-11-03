@@ -3,11 +3,20 @@
 CopperScreen is an Amiga emulator with an Avalonia desktop interface,
 a lightweight emulation engine, a disk-image library and a headless runner.
 
-The start screen offers **Amiga 500**, **Amiga 500+**, **Amiga 1200**, and
-**Amiga 1200 with CopperOS HDF**. It explains each ROM requirement and lets
+The start screen separates **Amiga model** (500, 500+, or 1200) from
+**Boot method**: **Minimal disk boot — Free**, **Original Kickstart ROM**, and,
+in builds that enable it, **CopperStart ROM**. The free bootstrap requires a
+compatible standard ADF and a standard PAL A500, A500+ or A1200 setup;
+it provides no DOS or Workbench. Software must support the selected CPU/chipset.
+Unsupported model combinations remain visible with a requirement message and
+cannot start. Launcher and Configure Amiga remember a separate complete setup
+for each model and boot method, including ROM, disks and optional hardware.
+The bundled CopperStart
+ROM and CopperOS desktop are selectable on all three models; A500/A500+
+compatibility is experimental and has not been verified. The screen explains each ROM requirement and lets
 native Kickstart start without a floppy disk. CopperOS includes its CopperStart
 A1200 ROM and 8 MiB FFS HDF. Selecting it creates a personal writable disk on
-first use and reuses that disk thereafter. See [ROM and HDF setup](docs/COPPERSTART_APP.md).
+first use for each model and reuses that disk thereafter. See [ROM and HDF setup](docs/COPPERSTART_APP.md).
 Each native Amiga model remembers its own selected Kickstart ROM across model
 switches and app restarts. Choosing another valid ROM updates only that model's default.
 Selected floppy and hard disks are also remembered per model, including empty
@@ -40,7 +49,7 @@ the settings window open while restoring the running configuration.
 - Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional Autoconfig Fast RAM is separate, up to 8 MiB with 24-bit CPUs or 1 GiB with full 32-bit CPUs. See [CPU/memory configuration and native evidence](docs/engine/CPU_MEMORY_UPGRADES.md).
 - Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
 - PAL A500+ with native Kickstart 2.04 (v37.175), existing ECS hardware, 1 MiB Chip RAM and RTC: choose Amiga 500+ or use the `a500-plus-ecs-pal` profile. See [setup and native boot evidence](docs/engine/KICKSTART_204_2026-10-21.md).
-- Optional [Minimal disk boot](docs/engine/MINIMAL_DISK_BOOT.md): experimental ROM-free ADF bootstrap for takeover demos/games on the default PAL 68000 A500. It supplies a small boot-service surface; DOS and Workbench require native Kickstart.
+- Optional [Minimal disk boot](docs/engine/MINIMAL_DISK_BOOT.md): experimental ROM-free ADF bootstrap for takeover demos/games on standard PAL A500 (68000, 512 KiB Chip plus optional 512 KiB slow RAM), A500+ (68000, 1 MiB Chip), and A1200 (68EC020, 2 MiB Chip). It supplies a small boot-service surface; DOS and Workbench require native Kickstart. See the linked model tests and title-specific limitations.
 - Explicit [CopperStart standalone ROM](docs/COPPERSTART_APP.md) boot on Lightweight: qualified experimental PAL OCS 68000 A500, 512 KiB Chip + 512 KiB slow RAM and read-only DF0 by default. Supply the matching versioned ROM; explicitly admitted CopperOS workspaces can be writable.
 - One to four floppy drives (DF0–DF3): 880 KiB DD / 1760 KiB HD ADF with explicit Save ADF, plus read-only ADZ, DMS, modern extended ADF, IPF and SCP, including selected ZIP entries. SCP uses a decoded first revolution. See [format support and limits](docs/engine/DISK_FORMATS.md). The default remains one write-protected drive. Select DD or HD per drive in **Settings > Floppy Drives** and restart the Amiga. Drive types are saved in profiles and the remembered last machine. The runner accepts repeatable `--drive-type 0 HD` (units 0–3; `DD` is the default); connect external units with `--drives`.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
@@ -60,7 +69,9 @@ Compatibility and timing accuracy are still being developed. Known limitations,
 including residual interlace instability, are recorded in the
 [engine issue register](docs/engine/ISSUES.md).
 Native Kickstart ROMs, Workbench and game media are not included. The original
-CopperStart A1200 ROM and CopperOS desktop HDF are bundled with the application.
+CopperStart A1200 ROM and CopperOS desktop HDF are bundled only when
+`CopperScreenEnableCopperStart=true`. Default builds hide CopperStart and exclude
+both payloads; saved CopperStart profiles remain intact but cannot start.
 The CopperOS option starts the native Home/Files/Editor desktop directly.
 
 ## Build and run
@@ -87,17 +98,31 @@ The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
 passes the original Lotus III input through a driving demo without changing its press timings.
 
 ```powershell
-./scripts/prepare-copperos-bundle.ps1 -CopperStartA1200Rom "path/to/CopperStart-A1200.rom" -CopperOsHdf "path/to/CopperOS.hdf"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
 ```
 
+To enable licensed CopperStart, stage its qualified inputs and opt in explicitly:
+
+```powershell
+./scripts/prepare-copperos-bundle.ps1 -CopperStartA1200Rom "path/to/CopperStart-A1200.rom" -CopperOsHdf "path/to/CopperOS.hdf"
+dotnet build CopperScreen.slnx -c Release -p:CopperScreenEnableCopperStart=true
+```
+
+Use the same property with `dotnet run`, `test` and `publish`. Existing
+CopperStart/CopperOS qualification suites require the enabled build. The public
+boot-option UI checks can run with the default disabled build using
+`dotnet test CopperScreen.Desktop.Tests -c Release --filter Area=BootOptions`.
+ZIP and MSIX packaging scripts expose the opt-in as `-EnableCopperStart`;
+omitting it produces a public build. They create local artifacts only.
+
 Bundle preparation is a developer build step using the qualified producer outputs;
 it is not an end-user setup step. Inputs are hash checked and staged under ignored
 `artifacts/copperos-bundle`, then embedded in build and publish outputs. CI can
 set `CopperOsBundleDirectory` to an equivalent staged directory. Missing or
-unqualified inputs fail the build. Media binaries are not committed.
+unqualified inputs fail a CopperStart-enabled build. Default builds require no
+CopperStart bundle. Media binaries are not committed.
 The [desktop HDF recipe and verification](docs/COPPEROS_DESKTOP_A1200.md) identify
 the native desktop payloads, reproducible composition command and workspace migration.
 

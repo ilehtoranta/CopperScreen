@@ -307,16 +307,18 @@ internal sealed class LightweightCopper
         if ((firstWord & 1) == 0)
         {
             _stage = ControlStage.ReadFirst;
-            if (_skipNextMove)
-            {
-                _skipNextMove = false;
-                return;
-            }
-
             var offset = (ushort)(firstWord & 0x01FE);
+            // SKIP inhibits the register write, not MOVE protection. Even a
+            // skipped illegal destination stops Copper (vAmigaTS copskip4).
             if (!CanWriteRegister(offset, machine.GetCustomRegister(LightweightRegisters.Copcon), machine.IsEcsAgnus))
             {
                 _stage = ControlStage.Dormant;
+                return;
+            }
+
+            if (_skipNextMove)
+            {
+                _skipNextMove = false;
                 return;
             }
 

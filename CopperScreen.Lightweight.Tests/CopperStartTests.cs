@@ -62,7 +62,7 @@ public sealed class CopperStartTests : IDisposable
             case "rtc": draft.RtcEnabled = true; break;
             case "aga": draft.Chipset = new(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal); break;
         }
-        Assert.Contains("CopperStart standalone ROM preset", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
         Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(draft.ToStartupOptions(_directory)));
     }
 
@@ -148,7 +148,7 @@ public sealed class CopperStartTests : IDisposable
             case "floppy": draft.DriveDiskPaths[0] = "boot.adf"; break;
             case "no-hdf": draft.HardDrives.Clear(); break;
         }
-        Assert.Contains("CopperStart standalone ROM preset", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
     }
 
     private static void Run(CopperScreenLightweightSession session, int fields)

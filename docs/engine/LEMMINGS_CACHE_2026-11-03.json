@@ -1,0 +1,360 @@
+{
+  "Schema": "lemmings-interface-cache-comparison-v1",
+  "Date": "2026-11-03",
+  "Protocol": "lemmings-interface-cache-v1",
+  "Status": "VALID_NATIVE_COMPARISON",
+  "SourceHead": "214d58a37d67c73256cd1fc2192d19da040ec967",
+  "Scope": "Qualified current engine without versus with interface cache; identical runner and dependencies; native Lemmings only",
+  "AcceptanceMeasurement": false,
+  "SourceChangedForBenchmark": false,
+  "SourceQualification": {
+    "Path": "docs/engine/INTERRUPT_BOOKKEEPING_2026-11-02.json",
+    "Sha256": "D8AFA045BF53A81CD3E738829BF8D8FE42DE1CA15519193913E0CE7C74720AE8"
+  },
+  "ReferenceEngineSha256": "859B6D399CE169189C27581D634A7DCC6165503B186828D7BCE00050F4380A98",
+  "CandidateEngineSha256": "8056A36DBABF5604408914C09F7FDD0AC7FF8D07D60929A764AF3AD8C6332AE5",
+  "SharedCapsuleFilesVerified": [
+    "Copper68k.dll",
+    "CopperDisk.dll",
+    "CopperDisk.pdb",
+    "CopperDisk.xml",
+    "CopperFloat.dll",
+    "CopperMod.Amiga.Lightweight.pdb",
+    "CopperMod.Amiga.Lightweight.Runner.deps.json",
+    "CopperMod.Amiga.Lightweight.Runner.dll",
+    "CopperMod.Amiga.Lightweight.Runner.exe",
+    "CopperMod.Amiga.Lightweight.Runner.pdb",
+    "CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+    "CopperMod.Amiga.Lightweight.xml"
+  ],
+  "ExpectedCommonIdentity": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+  "Samples": [
+    {
+      "Label": "R1",
+      "Role": "R",
+      "Pair": 1,
+      "Fps": 327.2,
+      "MsPerField": 3.056234718826406,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "C1",
+      "Role": "C",
+      "Pair": 1,
+      "Fps": 327.47,
+      "MsPerField": 3.0537148441078568,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "C2",
+      "Role": "C",
+      "Pair": 2,
+      "Fps": 323.99,
+      "MsPerField": 3.0865150158955523,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "R2",
+      "Role": "R",
+      "Pair": 2,
+      "Fps": 326.67,
+      "MsPerField": 3.06119325313007,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "R3",
+      "Role": "R",
+      "Pair": 3,
+      "Fps": 328.57,
+      "MsPerField": 3.043491493441276,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "C3",
+      "Role": "C",
+      "Pair": 3,
+      "Fps": 325.5,
+      "MsPerField": 3.0721966205837172,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "C4",
+      "Role": "C",
+      "Pair": 4,
+      "Fps": 331.54,
+      "MsPerField": 3.0162273028895457,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "R4",
+      "Role": "R",
+      "Pair": 4,
+      "Fps": 327.34,
+      "MsPerField": 3.0549275982159223,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "R5",
+      "Role": "R",
+      "Pair": 5,
+      "Fps": 336.46,
+      "MsPerField": 2.9721215003269337,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "C5",
+      "Role": "C",
+      "Pair": 5,
+      "Fps": 327.77,
+      "MsPerField": 3.0509198523354795,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "C6",
+      "Role": "C",
+      "Pair": 6,
+      "Fps": 326.4,
+      "MsPerField": 3.0637254901960786,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    {
+      "Label": "R6",
+      "Role": "R",
+      "Pair": 6,
+      "Fps": 330.48,
+      "MsPerField": 3.025901718712176,
+      "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    }
+  ],
+  "Analysis": {
+    "Status": "VALID_NATIVE_COMPARISON",
+    "Pairs": [
+      {
+        "Pair": 1,
+        "UncachedFps": 327.2,
+        "CachedFps": 327.47,
+        "CachedFpsChangePercent": 0.0825183374083327,
+        "LogFrameTimeRatio": -0.0008248430974637101
+      },
+      {
+        "Pair": 2,
+        "UncachedFps": 326.67,
+        "CachedFps": 323.99,
+        "CachedFpsChangePercent": -0.8203997918388661,
+        "LogFrameTimeRatio": 0.008237835907590004
+      },
+      {
+        "Pair": 3,
+        "UncachedFps": 328.57,
+        "CachedFps": 325.5,
+        "CachedFpsChangePercent": -0.9343518884864732,
+        "LogFrameTimeRatio": 0.009387443377765028
+      },
+      {
+        "Pair": 4,
+        "UncachedFps": 327.34,
+        "CachedFps": 331.54,
+        "CachedFpsChangePercent": 1.2830695912507073,
+        "LogFrameTimeRatio": -0.012749079918982232
+      },
+      {
+        "Pair": 5,
+        "UncachedFps": 336.46,
+        "CachedFps": 327.77,
+        "CachedFpsChangePercent": -2.5827735837841037,
+        "LogFrameTimeRatio": 0.02616712838846028
+      },
+      {
+        "Pair": 6,
+        "UncachedFps": 330.48,
+        "CachedFps": 326.4,
+        "CachedFpsChangePercent": -1.2345679012345845,
+        "LogFrameTimeRatio": 0.012422519998557329
+      }
+    ],
+    "Summary": [
+      {
+        "Role": "R",
+        "Samples": 6,
+        "MeanFps": 329.4533333333333,
+        "MinFps": 326.67,
+        "MaxFps": 336.46,
+        "MeanMsPerField": 3.035645047108797
+      },
+      {
+        "Role": "C",
+        "Samples": 6,
+        "MeanFps": 327.1116666666667,
+        "MinFps": 323.99,
+        "MaxFps": 331.54,
+        "MeanMsPerField": 3.0572165210013718
+      }
+    ],
+    "PairedFpsChangePercent": -0.7081640281905943,
+    "PairedFps95LowerPercent": -2.061611598656199,
+    "PairedFps95UpperPercent": 0.6639873453077261,
+    "PairedFrameTimeChangePercent": 0.7132147585544146,
+    "OneSided95UpperFrameTimePercent": 1.8026052819209548,
+    "OneSided95LowerFrameTimePercent": -0.3645181877872883,
+    "FpsBenefitEstablished": false,
+    "FpsLossEstablished": false,
+    "NativeOnePercentRetentionEstablished": false,
+    "TelemetryIntervals": 682,
+    "CompetingJobIntervals": 0,
+    "HostLoadViolations": 0,
+    "PeakSelectedOther": 22.891566265060238,
+    "PeakSibling": 20.731707317073166,
+    "PeakPackageOther": 39.45225175328973,
+    "WeightedPackageOther": 8.94628928126027,
+    "FrozenFilesUnchanged": true,
+    "SharedCapsuleFilesMatch": true
+  },
+  "AllRawIdentitiesIndependentlyVerified": true,
+  "AllFrozenFilesIndependentlyVerified": true,
+  "PowerPlanUnchanged": true,
+  "NativeOnePercentDisposition": "INCONCLUSIVE",
+  "Conclusion": "No native FPS benefit established. The point estimate favors the uncached engine, but the interval spans both loss and gain. This does not establish a slowdown either.",
+  "Remaining": "Full three-workload and release acceptance are not supplied; native 1% noninferiority remains inconclusive.",
+  "Harness": {
+    "Path": "scripts/measure-lemmings-cache-v1.ps1",
+    "Sha256": "D0591736EAEBB346F74EFAFB60D4C2043EFCC760A52DA02AE2FDE67149C3D90D"
+  },
+  "RawRecord": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/comparison-record.json",
+  "Artifacts": [
+    {
+      "Path": "artifacts/lemmings-cache-20261103/paired-analysis.json",
+      "Bytes": 2385,
+      "Sha256": "C274A5C9A15F51D5F4DBB012665F7A0E3EC68D03B66ABDD4CC61252382D69E63"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "8133C1A7934C0D808E0762698F592AC275A2CDB62131C0CB7CD448FC34B238D4"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "A2026E962A921F7825A183EDA3DE8BC97F8A2DE8C1D82BA1F4475D15A096ADB6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C3.stdout.log",
+      "Bytes": 320,
+      "Sha256": "3DC559463ABE29438F03900E66C59C547F6A81A977E67AC20C231005F56069E6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C4.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C4.stdout.log",
+      "Bytes": 320,
+      "Sha256": "781B0564B2B12C24BFFAEE591C9C93C064CEC7A9DF7EDAC6920F37335F799A41"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C5.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C5.stdout.log",
+      "Bytes": 320,
+      "Sha256": "511EE2BC9AF12F01C314C5F481A61F6441BD999455E1DBCF29FAFD19FF5DF186"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C6.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/C6.stdout.log",
+      "Bytes": 320,
+      "Sha256": "1E502C49A3E848C13BD55190620D1A9075E9B050903894294F35977416826687"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/comparison-record.json",
+      "Bytes": 66512,
+      "Sha256": "76A7A5EE5110428B3B007E23B3B5E2D48E0ED2BB61743BBA53A944C671CC0B3B"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "C73B45D6D1DE1D6F4428E46647A2041DA3AB97E724911596ACD229FA03D9A5C1"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "4B4E23A73F0D7C96EB74A2C16DA11FE7027E6771423E4A9C776FAE55B027BD10"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R3.stdout.log",
+      "Bytes": 320,
+      "Sha256": "5108D77F2DE4352AA86BA9371E0E400652A8A615AF8E3D12809B6C0D4C4619F5"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R4.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R4.stdout.log",
+      "Bytes": 320,
+      "Sha256": "A21E4E1457C2E4EBEA377EF123D9BCE4D6D858D9C6D9617F5A2225B00749ABDE"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R5.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R5.stdout.log",
+      "Bytes": 320,
+      "Sha256": "D7790845262B85B716D8B1FD9CD085B5DA75DB88FA047095DBA1973A98071C38"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R6.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/R6.stdout.log",
+      "Bytes": 320,
+      "Sha256": "844DE2DE553535A7873C8A1B68E7D2013742FD12BF65471C84B9750FBC33C4DC"
+    },
+    {
+      "Path": "artifacts/lemmings-cache-20261103/strict-six-pairs-1/telemetry.jsonl",
+      "Bytes": 91110,
+      "Sha256": "C21F167A826BFAC75E7299330D0757FC73F5868B230F4B8164A660F51146013C"
+    }
+  ]
+}

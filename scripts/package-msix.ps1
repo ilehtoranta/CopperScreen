@@ -12,11 +12,13 @@ param(
     [string]$CertificateThumbprint,
     [string]$CopperOsSeed,
     [string]$CopperStartRom,
+    [switch]$EnableCopperStart,
     [switch]$InstalledTestBuild
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if (($CopperOsSeed -or $CopperStartRom) -and -not $EnableCopperStart) { throw 'CopperStart diagnostic assets require -EnableCopperStart.' }
 if (-not $IsWindows) { throw 'MSIX packaging requires Windows and the Windows SDK.' }
 Import-Module (Join-Path $PSScriptRoot 'msix/CopperScreen.Msix.psm1') -Force
 Import-Module (Join-Path $PSScriptRoot 'CopperScreen.Artifacts.psm1') -Force
@@ -49,6 +51,7 @@ $arguments = @('publish', (Join-Path $repository 'CopperScreen/CopperScreen.cspr
     '-p:PublishTrimmed=false', '-p:PublishSingleFile=false', '-p:DebugType=portable', '-p:DebugSymbols=true',
     "-p:Version=$PackageVersion", "-p:AssemblyVersion=$PackageVersion", "-p:FileVersion=$PackageVersion",
     "-p:CustomBeforeMicrosoftCommonTargets=$lockTargets", "-p:CopperScreenInstalledTests=$($InstalledTestBuild.IsPresent.ToString().ToLowerInvariant())")
+$arguments += "-p:CopperScreenEnableCopperStart=$($EnableCopperStart.IsPresent.ToString().ToLowerInvariant())"
 if ($AdditionalPackageSource) { $arguments += "-p:RestoreAdditionalProjectSources=$AdditionalPackageSource" }
 if ($PackagesPath) { $arguments += "-p:RestorePackagesPath=$PackagesPath" }
 & dotnet @arguments 2>&1 | Tee-Object -FilePath (Join-Path $output 'publish.log') | Out-Host
@@ -131,9 +134,10 @@ $record = [ordered]@{
     SourceInputs = @(& git -C $repository ls-files --cached --others --exclude-standard -- CopperScreen CopperDisk CopperMod.Amiga.Lightweight packaging/msix |
         Where-Object { $_ -match '\.(cs|csproj|json|ico|xml|manifest)$' -and (Test-Path -LiteralPath (Join-Path $repository $_) -PathType Leaf) } |
         ForEach-Object { @{ Path = $_; Sha256 = (Get-FileHash -LiteralPath (Join-Path $repository $_) -Algorithm SHA256).Hash } })
-    GuestAssets = 'Embedded qualified CopperStart A1200 ROM and CopperOS HDF; personal writable HDF created on first selection.'
-    BundledCopperStart = Get-Content (Join-Path $repository 'CopperScreen/Firmware/CopperStartA1200.json') -Raw | ConvertFrom-Json
-    BundledCopperOs = Get-Content (Join-Path $repository 'CopperScreen/Firmware/CopperOsA1200.json') -Raw | ConvertFrom-Json
+    CopperStartEnabled = $EnableCopperStart.IsPresent
+    GuestAssets = if ($EnableCopperStart) { 'Embedded qualified CopperStart A1200 ROM and CopperOS HDF; personal writable HDF created on first selection.' } else { 'Minimal disk bootstrap only; users supply their licensed original Kickstart ROM.' }
+    BundledCopperStart = if ($EnableCopperStart) { Get-Content (Join-Path $repository 'CopperScreen/Firmware/CopperStartA1200.json') -Raw | ConvertFrom-Json } else { $null }
+    BundledCopperOs = if ($EnableCopperStart) { Get-Content (Join-Path $repository 'CopperScreen/Firmware/CopperOsA1200.json') -Raw | ConvertFrom-Json } else { $null }
     DiagnosticA500GuestAssets = $nativeGuestProof
 }
 $record | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $output 'package-record.json') -Encoding utf8

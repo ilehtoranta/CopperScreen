@@ -27,7 +27,7 @@ public sealed partial class LaunchWorkflowTests
         window.Show();
         try
         {
-            Assert.Equal(1, Named<ComboBox>(window, "Start configuration").SelectedIndex);
+            Assert.Equal(1, LaunchSelection.Current(window));
             Assert.Contains("Kickstart 2.04", Named<TextBlock>(window, "ROM requirements").Text);
             Assert.True(Button(window, "Start Amiga").IsEnabled);
             Assert.StartsWith("Optional", Named<TextBlock>(window, "Startup disk selection").Text);

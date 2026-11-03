@@ -12,7 +12,7 @@ internal sealed partial class MainWindow
     private Control CreateSharedFolderSettings()
     {
         var layout = new StackPanel { Spacing = 10 };
-        layout.Children.Add(SettingsNote("Shared folders appear as Amiga drives. Writable mounts save files directly into the selected folder. Bootable folders require your own Workbench files. Changes require a restart."));
+        layout.Children.Add(SettingsHelp("Shared folder help", "Shared folders appear as Amiga drives. Bootable folders require your own Workbench files. Changes require a restart."));
         _sharedFolderRows = new StackPanel { Spacing = 10 }; layout.Children.Add(_sharedFolderRows);
         layout.Children.Add(CreatePanelButton("Add shared folder", () =>
         {
@@ -44,7 +44,7 @@ internal sealed partial class MainWindow
             var device = AddTextSetting(form, "Device name"); device.Text = mount.DeviceName;
             var volume = AddTextSetting(form, "Volume label"); volume.Text = mount.VolumeName;
             var path = AddTextSetting(form, "Host folder"); path.Text = mount.Path;
-            var readOnly = new CheckBox { Content = "Read-only (clear to allow direct changes in this folder)", IsChecked = mount.ReadOnly };
+            var readOnly = new CheckBox { Content = "Read-only", IsChecked = mount.ReadOnly };
             path.TextChanged += (_, _) => { if (path.Text != mount.Path) readOnly.IsChecked = true; };
             form.Children.Add(CreatePanelButton("Choose folder…", async () =>
             {
@@ -52,6 +52,7 @@ internal sealed partial class MainWindow
                 if (selected.Count == 1) { path.Text = selected[0].TryGetLocalPath(); readOnly.IsChecked = true; }
             }));
             form.Children.Add(readOnly);
+            form.Children.Add(SettingsWriteWarning(readOnly, "Changes files in this folder directly.", $"Shared folder {mount.DeviceName} write warning"));
             var boot = new CheckBox { Content = "Boot from this folder", IsChecked = mount.BootPriority.HasValue }; form.Children.Add(boot);
             var priority = AddTextSetting(form, "Boot priority"); priority.Text = (mount.BootPriority ?? 0).ToString(); priority.IsEnabled = boot.IsChecked == true;
             boot.IsCheckedChanged += (_, _) => { priority.IsEnabled = boot.IsChecked == true; MarkSettingsRestartRequired(); };

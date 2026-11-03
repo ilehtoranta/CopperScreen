@@ -14,9 +14,12 @@ internal static class CopperScreenBundledCopperOs
 
     public static CopperScreenSettingsDraft PrepareForLaunch(CopperScreenSettingsDraft current, string userData)
     {
-        if (CopperScreenLaunchWorkflow.StartChoice(current) != 3) return current;
-        if (current.HardDrives.Count == 0) return Prepare(current, userData);
-        var desktop = Path.Combine(userData, "CopperOS", "A1200-Desktop");
+        if (!CopperScreenBootMethods.CopperStartEnabled || current.KickstartSource != CopperScreenKickstartSource.CopperStart) return current;
+        var choice = CopperScreenLaunchWorkflow.StartChoice(current);
+        if (choice < 3) return current;
+        if (current.HardDrives.Count == 0)
+            return choice == 3 || string.IsNullOrWhiteSpace(current.KickstartRomPath) ? Prepare(current, userData) : current;
+        var desktop = Path.Combine(userData, "CopperOS", DesktopFolder(current));
         if (current.HardDrives.Count == 1 &&
             Path.GetFullPath(current.HardDrives[0].Path).Equals(Path.GetFullPath(Path.Combine(desktop, "CopperOS.hdf")), StringComparison.OrdinalIgnoreCase) &&
             ReadMarker(desktop) is { } desktopSeed && IsDesktopSeed(desktopSeed))
@@ -29,6 +32,7 @@ internal static class CopperScreenBundledCopperOs
         }
         // Only upgrade the app-created Shell proof configuration. Keep its disk
         // (including edits) intact and leave explicitly selected disks alone.
+        if (choice != 3) return current;
         var legacy = Path.Combine(userData, "CopperOS", "A1200");
         if (current.HardDrives.Count != 1 ||
             !Path.GetFullPath(current.HardDrives[0].Path).Equals(Path.GetFullPath(Path.Combine(legacy, "CopperOS.hdf")), StringComparison.OrdinalIgnoreCase))
@@ -38,6 +42,13 @@ internal static class CopperScreenBundledCopperOs
             previous.Sha256 != "54c6f78a7480437069b66a5f913c5ccde76fc3e604babeb1dc22674360242175") return current;
         return Prepare(current, userData);
     }
+
+    private static string DesktopFolder(CopperScreenSettingsDraft draft) => CopperScreenMachinePresets.Identify(draft) switch
+    {
+        CopperScreenMachineModel.Amiga500 => "A500-Desktop",
+        CopperScreenMachineModel.Amiga500Ecs => "A500Plus-Desktop",
+        _ => "A1200-Desktop"
+    };
 
     private static SeedContract? ReadMarker(string workspace)
     {
@@ -66,6 +77,7 @@ internal static class CopperScreenBundledCopperOs
 
     public static CopperScreenSettingsDraft Prepare(CopperScreenSettingsDraft current, string userData)
     {
+        if (!CopperScreenBootMethods.CopperStartEnabled) throw new NotSupportedException("CopperStart is not enabled in this build.");
         lock (PreparationGate) return PrepareOwned(current, userData);
     }
 
@@ -96,7 +108,7 @@ internal static class CopperScreenBundledCopperOs
         _ = CopperScreenCopperStartRom.Read(romPath, a1200: true);
 
         var parent = Path.Combine(userData, "CopperOS");
-        var workspace = Path.Combine(parent, "A1200-Desktop");
+        var workspace = Path.Combine(parent, DesktopFolder(current));
         var image = Path.Combine(workspace, "CopperOS.hdf");
         if (!Directory.Exists(workspace))
         {

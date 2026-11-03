@@ -34,6 +34,7 @@ internal sealed partial class MainWindow
             await Task.Run(() => CopperScreenHardDiskBackup.Export(draft, path, AppContext.BaseDirectory, _recentSession.DataDirectory));
             ClearSettingsStartupError();
             _hardDiskBackupStatus.Text = "Backup exported to " + path;
+            _hardDiskBackupStatus.IsVisible = true;
             ShowDiskFeedback("Hard disks and machine settings backed up. Keep this file outside app data before uninstalling.", true);
         }
         finally { _applyingSettings = false; UpdateSettingsStatus(); UpdateToolbarStatus(); }
@@ -66,6 +67,7 @@ internal sealed partial class MainWindow
                 restored => _recentSession.RememberRestoredMachine(restored, AppContext.BaseDirectory)));
             SetWelcomeDraft(draft);
             _hardDiskBackupStatus.Text = "Restored into new disk files. The backup is unchanged. Check the firmware path, then start the Amiga.";
+            _hardDiskBackupStatus.IsVisible = true;
             ShowDiskFeedback("Backup restored into new disk files. Machine settings and disk write protection are preserved. Check the firmware path, then start the Amiga.", true);
         }
         finally { _applyingSettings = false; UpdateSettingsStatus(); UpdateToolbarStatus(); }

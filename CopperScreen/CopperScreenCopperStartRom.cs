@@ -40,7 +40,13 @@ internal static class CopperScreenCopperStartRom
     {
         if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
             throw new FileNotFoundException("CopperStart ROM is missing. " + RecoveryFor(a1200), path);
-        try { return ReadExisting(path, a1200); }
+        try
+        {
+            try { return ReadExisting(path, a1200); }
+            // Experimental OCS/ECS launches may use the bundled desktop ROM.
+            // Both paths still verify a pinned artifact; arbitrary firmware is not admitted.
+            catch (InvalidOperationException) when (!a1200) { return ReadExisting(path, true); }
+        }
         catch (Exception ex) when (ex is IOException or InvalidDataException)
         { throw new InvalidOperationException("Could not read the CopperStart ROM: " + ex.Message + " " + RecoveryFor(a1200), ex); }
     }

@@ -23,7 +23,7 @@ internal static class CopperScreenAvailability
     {
         "Engine" => value == "Lightweight",
         "CPU backend" => value is "AccurateM68000" or "AccurateM68010" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040" or "JitM68040",
-        "Kickstart" or "Boot method" => value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom" or "MinimalDiskBoot" or "CopperStart",
+        "Kickstart" or "Boot method" => (value != "CopperStart" || CopperScreenBootMethods.CopperStartEnabled) && value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom" or "MinimalDiskBoot" or "CopperStart",
         "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M" or "AgaAlice",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
@@ -59,11 +59,11 @@ internal static class CopperScreenAvailability
         "AccurateM68040" => "Motorola 68040 (experimental)",
         "AccurateM68060" => "Motorola 68060 (requires 060 OS support)",
         "JitM68040" => "Motorola 68040 (JIT)",
-        "Kickstart13Rom" => "Kickstart 1.3 ROM",
+        "Kickstart13Rom" => "Native Kickstart ROM",
         "MinimalDiskBoot" => "Minimal disk boot (experimental)",
         "CopperStart" => "CopperStart standalone ROM (experimental)",
-        "Kickstart31Rom" => "Kickstart 3.1 ROM (A500)",
-        "KickstartRom" => "Native Kickstart ROM (1.3, A500+ 2.04, A500 3.1 or A1200 3.0)",
+        "Kickstart31Rom" => "Native Kickstart ROM",
+        "KickstartRom" => "Native Kickstart ROM (version detected from file)",
         "DiagRom" => "Diagnostic ROM",
         "KeyboardJoystick" => "Keyboard joystick",
         _ => value

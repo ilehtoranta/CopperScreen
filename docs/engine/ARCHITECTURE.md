@@ -186,6 +186,11 @@ remain unverified. See the [Desert Dream correction and limits](DESERT_DREAM_LIV
 
 ## Clock and state invariants
 
+Copper SKIP suppresses a MOVE's register write but does not bypass destination
+protection. A skipped illegal MOVE stops Copper at the existing second-word
+completion phase; COPCON retains its fitted OCS/ECS/AGA limits. See the
+[Arte A1200 correction and independent copskip4 reference](MINIMAL_DISK_BOOT.md#arte-a1200-copper-skip-correction--2026-11-03).
+
 Keyboard startup/recovery, physical key state, A500 reset, CIA serial/CNT modes
 and timer-port/pin interfaces are specified in [KEYBOARD_CIA.md](KEYBOARD_CIA.md).
 Idle CIA timers retain arithmetic advancement; active pin edges share the existing

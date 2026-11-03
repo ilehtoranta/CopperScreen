@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless;
+using Avalonia.LogicalTree;
 using CopperScreen;
 
 namespace CopperScreen.Tests;
@@ -24,6 +25,43 @@ public sealed class LaunchUiCollection : ICollectionFixture<LaunchUiFixture> { }
 [Collection("Desktop UI")]
 public sealed partial class LaunchWorkflowTests : IDisposable
 {
+    [Theory]
+    [InlineData(1040, 1.0)]
+    [InlineData(1040, 1.25)]
+    [InlineData(1040, 2.0)]
+    [InlineData(712, 1.0)]
+    [InlineData(712, 1.25)]
+    [InlineData(712, 2.0)]
+    public Task ModelSelectionKeepsTheLaunchCardAndSelectorWidth(int width, double scale) => UiAsync(async () =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
+        try
+        {
+            window.Width = width; window.Height = 760; window.SetRenderScaling(scale);
+            var selector = Named<ComboBox>(window, "Amiga model");
+            window.UpdateLayout();
+            await Task.Delay(40);
+            var card = selector.GetLogicalAncestors().OfType<Border>().First();
+            var selectorWidth = selector.Bounds.Width;
+            var cardWidth = card.Bounds.Width;
+            var cardHeight = card.Bounds.Height;
+            var position = selector.TranslatePoint(default, window)!.Value.X;
+            Assert.True(selectorWidth > 0);
+            foreach (var model in new[] { 1, 2, 3, 4, 5, 0 })
+            {
+                LaunchSelection.Select(window, model);
+                window.UpdateLayout();
+                await Task.Delay(40);
+                Assert.Equal(selectorWidth, selector.Bounds.Width, 2);
+                Assert.Equal(cardWidth, card.Bounds.Width, 2);
+                Assert.Equal(cardHeight, card.Bounds.Height, 2);
+                Assert.Equal(position, selector.TranslatePoint(default, window)!.Value.X, 2);
+                Assert.True(position >= 0 && position + selector.Bounds.Width <= window.ClientSize.Width);
+            }
+        }
+        finally { window.Close(); }
+    });
+
     private readonly LaunchUiFixture _ui;
     private readonly string _root = Path.Combine(Path.GetTempPath(), "copperscreen-launch-" + Guid.NewGuid().ToString("N"));
     public LaunchWorkflowTests(LaunchUiFixture ui) { _ui = ui; Directory.CreateDirectory(_root); }

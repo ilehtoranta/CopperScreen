@@ -1,16 +1,48 @@
 # CopperStart standalone ROM in CopperScreen
 
-The start screen offers **Amiga 500**, **Amiga 500+**, **Amiga 1200**, and
-**Amiga 1200 with CopperOS HDF**. The native choices require Kickstart 1.3,
-2.04 (v37.175), and A1200 3.0 (v39.106), respectively. Floppy disks are optional;
+The start screen separates **Amiga model** (500, 500+, or 1200) from
+**Boot method** (free Minimal disk boot, your licensed original Kickstart ROM,
+or licensed CopperStart ROM when enabled by the build). For native boot, Kickstart 1.3 is
+recommended for A500, 2.04 for A500+, and 3.0 for A1200. Other supported native ROM versions
+can be selected on any model; compatibility varies by ROM and software. Floppy disks are optional;
 with no boot media, native Kickstart shows its insert-disk screen.
 
-For CopperOS, select **Amiga 1200 with CopperOS HDF** and press **Start CopperOS**.
+The launcher and Configure Amiga share these boot choices and restore the saved
+setup for each model/method pair. Free minimal disk boot supports the standard PAL
+A500 (OCS, 68000, 512 KiB Chip plus optional 512 KiB slow RAM), A500+ (ECS, 68000,
+1 MiB Chip), and A1200 (Alice/Lisa, 68EC020, 2 MiB Chip). It requires a compatible
+880 KiB startup ADF and supplies no DOS or Workbench. Fast RAM, hard drives,
+shared folders and other hardware combinations remain unavailable with an
+explanation and disabled Start. See [boot contract and model evidence](engine/MINIMAL_DISK_BOOT.md).
+
+CopperStart is disabled by default. Build or publish with
+`-p:CopperScreenEnableCopperStart=true` to show its option and embed the qualified
+ROM/HDF pair. `scripts/package.ps1` and `scripts/package-msix.ps1` expose this as
+`-EnableCopperStart`. Disabled builds omit both payloads and reject CopperStart
+launches, including saved profiles and command-line requests. Personal setups and
+disks are retained. The flag selects a distribution capability; it does not verify
+license ownership. Existing CopperStart qualification commands need the enabled
+build property; `scripts/test-copperstart.ps1` supplies it automatically.
+
+For CopperOS, select a model, choose **CopperStart ROM** under Boot method,
+and press **Start CopperOS**. A500 and A500+ selection is experimental:
+the current A1200 ROM/desktop pair is admitted for compatibility testing, not
+claimed compatible. Guest boot and application testing for these combinations
+is deferred. A500 uses 68000/OCS with 512 KiB Chip + 512 KiB slow RAM;
+A500+ uses 68000/ECS with 1 MiB Chip RAM and RTC disabled. No chipset timing
+or CPU semantics are changed. Both original A500 and current bundled ROM hashes
+remain checked; arbitrary ROMs are not admitted as CopperStart.
+Existing custom A500 ROM paths and media remain loadable without replacement.
+Each model has its own writable disk: `A500-Desktop`, `A500Plus-Desktop`, or
+`A1200-Desktop` under the CopperOS user-data folder.
 The qualified **CopperStart A1200 ROM (512 KiB)** and **8 MiB CopperOS FFS HDF**
 are embedded in the application. The HDF starts the native **CopperOS Desktop**
 with Home, Files, Editor and About. No ROM, HDF or ADF picker is needed.
-The current [single-bank qualification](COPPEROS_COLD_BOOT_2026-10-31.md)
-records the cold-boot fix and retains the prior Layer drawing improvements.
+The current [single-bank qualification](COPPEROS_CSHARP_GRAPHICS_2026-11-01.md)
+uses compiled C# for BltClear and pen/mode getters. It retains shared rectangle
+geometry, short CPU plane/row loops, internal blitter ownership, register-based
+solid-fill DMA, ECS size registers, the
+[cold-boot fix](COPPEROS_COLD_BOOT_2026-10-31.md) and Layer ownership improvements.
 The launcher creates `CopperOS/A1200-Desktop/CopperOS.hdf` in the user's app-data
 directory once, mounts it writable with `DH0:2:32:0:255`, and reuses it across
 launches, reselection and updates. The embedded seed is immutable. An existing
@@ -26,7 +58,7 @@ unchanged. See [desktop image and native A1200 verification](COPPEROS_DESKTOP_A1
 Developer builds stage the two qualified outputs with
 `scripts/prepare-copperos-bundle.ps1`; see the README. Their SHA-256 identities
 are pinned in `Firmware/CopperStartA1200.json`, `Firmware/CopperOsA1200.json`
-and the build gate. Normal publish/MSIX outputs carry the embedded bundle;
+and the build gate. CopperStart-enabled publish/MSIX outputs carry the embedded bundle;
 diagnostic-only A500 floppy assets remain separate.
 
 For the older A500 CopperStart setup, load **A500 + CopperStart
@@ -50,9 +82,9 @@ in a stable user-owned folder when updating the installed app.
 
 The following contract is the existing A500 qualification. A1200 CopperOS HDF
 boot uses a [separate ROM and machine contract](COPPEROS_HDF_A1200_2026-10-22.md).
-The fourth start-screen choice selects this A1200 configuration. Existing
+Selecting Amiga 1200 and CopperOS selects this A1200 configuration. Existing
 custom profiles, including A500 floppy workspaces, remain loadable; their
-selector shows **Saved custom configuration** rather than silently converting
+boot selector identifies the custom boot method rather than silently converting
 them into an A1200 setup.
 
 The embedded [artifact contract](../CopperScreen/Firmware/CopperStart.json) pins:

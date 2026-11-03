@@ -37,14 +37,8 @@ internal sealed partial class MainWindow
         model.SelectionChanged += (_, _) =>
         {
             if (_updatingMachineControls || _updatingSettingsUi || _applyingSettings || model.SelectedItem is not CopperScreenMachineModel selected) return;
-            EditMachine(draft =>
-            {
-                _recentSession.RememberKickstart(draft, AppContext.BaseDirectory);
-                _recentSession.RememberDisks(draft, AppContext.BaseDirectory);
-                _recentSession.RememberConfiguration(draft, AppContext.BaseDirectory);
-                return _recentSession.RestoreDisks(_recentSession.RestoreKickstart(
-                    _recentSession.RestoreConfiguration(CopperScreenMachinePresets.Apply(draft, selected), AppContext.BaseDirectory)));
-            });
+            EditMachine(draft => SelectRememberedSetup(draft,
+                CopperScreenBootMethods.Choice(selected, CopperScreenBootMethods.Method(draft))));
         };
         cpu.SelectionChanged += (_, _) =>
         {
@@ -72,7 +66,9 @@ internal sealed partial class MainWindow
         var options = new StackPanel { Spacing = 4 };
         options.Children.Add(SectionLabel("CPU"));
         options.Children.Add(cpu);
-        options.Children.Add(SettingsNote("CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
+        options.Children.Add(welcome
+            ? SettingsNote("CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing.")
+            : SettingsHelp("CPU help", "CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
         options.Children.Add(slow);
         options.Children.Add(WithAction(fast, fastSize));
         options.Children.Add(rtc);
@@ -134,7 +130,7 @@ internal sealed partial class MainWindow
                 controls.Rtc.IsEnabled = controls.DriveSounds.IsEnabled = enabled;
                 controls.DriveSounds.IsChecked = draft.FloppyDriveAudio.Enabled;
                 controls.Note.Text = CopperScreenMachinePresets.Identify(draft) == CopperScreenMachineModel.Amiga1200
-                    ? $"PAL · AGA · {CopperScreenAvailability.ChoiceLabel(draft.CpuBackend.ToString())} · 2 MiB Chip RAM · requires A1200 Kickstart 3.0. Compatibility is experimental."
+                    ? $"PAL · AGA · {CopperScreenAvailability.ChoiceLabel(draft.CpuBackend.ToString())} · 2 MiB Chip RAM · any supported native Kickstart version. Compatibility is experimental."
                     : $"PAL · {(draft.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "ECS" : "OCS")} · {CopperScreenAvailability.ChoiceLabel(draft.CpuBackend.ToString())} · {draft.ChipRamKb} KiB Chip RAM";
             }
         }

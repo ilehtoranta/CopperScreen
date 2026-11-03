@@ -72,11 +72,13 @@ public sealed class MachinePresetTests
         Assert.False(CopperScreenMachinePresets.CanUseFastRam(draft));
         var ecs = CopperScreenMachinePresets.Apply(draft, CopperScreenMachineModel.Amiga500Ecs);
         Assert.False(CopperScreenMachinePresets.CanUseSlowRam(ecs));
-        Assert.True(CopperScreenMachinePresets.CanUseFastRam(ecs));
-        Assert.NotEqual(CopperScreenKickstartSource.MinimalDiskBoot, ecs.KickstartSource);
+        Assert.False(CopperScreenMachinePresets.CanUseFastRam(ecs));
+        Assert.Equal(CopperScreenKickstartSource.MinimalDiskBoot, ecs.KickstartSource);
+        Assert.True(CopperScreenMachinePresets.CanUseMinimalBoot(ecs));
         var aga = CopperScreenMachinePresets.Apply(ecs, CopperScreenMachineModel.Amiga1200);
         Assert.False(CopperScreenMachinePresets.CanUseSlowRam(aga));
-        Assert.True(CopperScreenMachinePresets.CanUseFastRam(aga));
-        Assert.False(CopperScreenMachinePresets.CanUseMinimalBoot(aga));
+        Assert.False(CopperScreenMachinePresets.CanUseFastRam(aga));
+        Assert.Equal(CopperScreenKickstartSource.MinimalDiskBoot, aga.KickstartSource);
+        Assert.True(CopperScreenMachinePresets.CanUseMinimalBoot(aga));
     }
 }

@@ -1,0 +1,761 @@
+{
+  "Schema": "lemmings-correctness-investigation-v1",
+  "Date": "2026-11-02",
+  "SourceHead": "214d58a37d67c73256cd1fc2192d19da040ec967",
+  "WorkingTreeDirty": true,
+  "Verdict": "No correctness regression found in checked PAL OCS/68000 scope; retain current timing corrections. Historical benchmark fingerprints remain immutable.",
+  "PerformanceVerdict": "NOT ASSESSED: captures and isolated diagnostic replay rates are not performance acceptance measurements.",
+  "Profile": {
+    "Video": "PAL OCS",
+    "Cpu": "68000",
+    "CpuMode": "Interpreter",
+    "ChipRamKiB": 512,
+    "SlowRamKiB": 512,
+    "Framebuffer": "908x313",
+    "Frames": 18120,
+    "InputScript": "CopperScreen.Lightweight.Tests/Workloads/lemmings-cpu-bus-timing-v1.json",
+    "ScriptSha256": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA"
+  },
+  "CurrentBinaries": [
+    {
+      "File": "Copper68k.dll",
+      "Sha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A"
+    },
+    {
+      "File": "CopperMod.Amiga.Lightweight.dll",
+      "Sha256": "859B6D399CE169189C27581D634A7DCC6165503B186828D7BCE00050F4380A98"
+    },
+    {
+      "File": "CopperMod.Amiga.Lightweight.Runner.dll",
+      "Sha256": "42250A4352EB0B5FF6E169E5DA885989ECABB929CE5C1F5EB764F121BC4AF490"
+    },
+    {
+      "File": "CopperDisk.dll",
+      "Sha256": "C649D446E4E10975451FCBF5D1630A07CE75D860FB3110A4FECE0CD8BDFD4FB9"
+    }
+  ],
+  "Tests": {
+    "Focused": {
+      "Passed": 119,
+      "Failed": 0,
+      "Skipped": 0,
+      "Trx": "CopperMod.Amiga.Lightweight.Tests/TestResults/lemmings-correctness-focused.trx",
+      "Sha256": "CCF45B2DABD8CD81827B3F9A2FE0D7DBCB3A944D6C662848FD5BB110D9FCCD49"
+    },
+    "FullEngine": {
+      "Passed": 1285,
+      "Failed": 0,
+      "SkippedOptionalNative": 7,
+      "SkippedIsUnavailableCoverage": true,
+      "Trx": "CopperMod.Amiga.Lightweight.Tests/TestResults/lemmings-correctness-full.trx",
+      "Sha256": "9799093C0FD8E0E4F01C675CFC42E7CDDDF91419379A09552B859FA84D169783"
+    }
+  },
+  "NativeReplay": {
+    "NormalDirectory": "artifacts/lemmings-correctness-20261102/normal-extended",
+    "ScalarDirectory": "artifacts/lemmings-correctness-20261102/scalar",
+    "ExitCodes": [
+      0,
+      0
+    ],
+    "SnapshotsPerMode": 32,
+    "ComparedFiles": 160,
+    "Mismatches": 0,
+    "Types": [
+      "BMP framebuffer",
+      "JSON CPU/device state",
+      "Chip RAM",
+      "Slow RAM",
+      "signed 16-bit stereo PCM"
+    ],
+    "UnsupportedSnapshots": 0,
+    "NonzeroPcmSnapshots": 13,
+    "InspectedFrames": [
+      14400,
+      18120
+    ],
+    "Observed": "Intact level-one terrain, moving lemmings, pointer and HUD. Field 14400: OUT 8, IN 00%, TIME 4-45. Field 18120: OUT 10, IN 00%, TIME 3-31.",
+    "FingerprintProtocol": "Full capture run has zero warmup; its accumulated output checksum is separate from the 14520-warmup benchmark protocol.",
+    "CurrentBenchmarkIdentity": "cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 unsupported=none"
+  },
+  "Isolation": {
+    "ProductionSourceChanged": false,
+    "ProbeWorktree": "artifacts/lemmings-investigate-probe",
+    "HistoricalSource": "575d5cf81681c7ffa5c7d0cd40bbda6a7d16af53",
+    "HistoricalReplayMatchesOldCompleteIdentity": true,
+    "AudioOnlyRollbackRestoresSynthetic": false,
+    "AudioAndSpriteRollbackRestoresSynthetic": true,
+    "AudioSpriteCopperInterruptRollbackRestoresNative": false,
+    "SameFourRollbacksPlusExactOldCpuRestoresNative": true,
+    "OldCpuSha256": "5780F5084FD44E2D4732969BC0F9CE7AE7E3BEFFC1135DED92BC46D9B21399F2",
+    "OldCpuVersion": "1.5.4-detroit-dev.2",
+    "CurrentCpuVersion": "1.5.4",
+    "OldIdentity": "cycle=2574756850 cpu=0x505451D28DF1C053 hardware=0x20084440BFE4BC5A output=0x9DE548805866DC63 pixels=284204 audioSamples=1922 pcm=real allocated=0 unsupported=none",
+    "IsolationLimit": "Component-level combined rollback, not a per-instruction attribution of every native difference.",
+    "FinalProbeLog": "artifacts/lemmings-correctness-20261102/oldcpu-probe.log",
+    "FinalProbeLogSha256": "013AFE98E159B9D1873A051E57781CB3A912A36F585ECA013B102A7079051626"
+  },
+  "HardwareReview": {
+    "AudioInputs": "0D/0F/11/13",
+    "SpriteInputs": "15/17 through 31/33",
+    "OutputConvention": "Existing engine address input followed by RAM output one CCK later",
+    "DmaEvidence": "Original Commodore Hardware Reference Manual figure 6-9; chart inspected visually. Sprite 6 completes before the conflicting scrolled-playfield fetch. Physical pending-output arbitration replaces the former coarse channel eligibility table.",
+    "SpriteRegisterEvidence": "Commodore HRM chapter 4 describes VSTART/VSTOP as the DMA controls and SPRxPOS/CTL as processor/Copper writable registers.",
+    "InterruptEvidence": "Published CPU HasRecognizedInterrupt mutates retained IPL pipeline state even when the input is low; adapter must forward inactive/masked samples. The repeated-request tests verify equal recognition windows.",
+    "CpuEvidence": "Published 1.5.4 includes mandatory memory BTST final prefetch after waited reads; qualification and independent bus-sequence evidence retained in docs/engine/NITRO_RACE_START_2026-10-17.md and COPPER68K_1_5_4_RELEASE_2026-10-22.md.",
+    "Sources": [
+      "https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_6.html",
+      "https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_4.html",
+      "https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf",
+      "https://github.com/ilehtoranta/CopperMod/blob/535e9ecfc543931b46f7c332d9593805382bd7cf/Copper68k/M68kCore.cs"
+    ]
+  },
+  "Limits": [
+    "Normal/scalar parity is an implementation consistency check, not an independent hardware oracle.",
+    "This bounded replay does not qualify every timing edge, chipset profile, full-game completion or audio fidelity.",
+    "Seven optional native engine test groups remain unavailable.",
+    "No golden or historical protocol was changed; a new benchmark contract needs separately validated expectations."
+  ],
+  "CapturedFiles": [
+    {
+      "File": "frame-000001.bmp",
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "File": "frame-000001.chipram",
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "File": "frame-000001.json",
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "File": "frame-000001.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-000001.slowram",
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "File": "frame-000600.bmp",
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "File": "frame-000600.chipram",
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "File": "frame-000600.json",
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "File": "frame-000600.pcm",
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "File": "frame-000600.slowram",
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "File": "frame-001200.bmp",
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "File": "frame-001200.chipram",
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "File": "frame-001200.json",
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "File": "frame-001200.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-001200.slowram",
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "File": "frame-001800.bmp",
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "File": "frame-001800.chipram",
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "File": "frame-001800.json",
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "File": "frame-001800.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-001800.slowram",
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "File": "frame-002400.bmp",
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "File": "frame-002400.chipram",
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "File": "frame-002400.json",
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "File": "frame-002400.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-002400.slowram",
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "File": "frame-003000.bmp",
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "File": "frame-003000.chipram",
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "File": "frame-003000.json",
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "File": "frame-003000.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-003000.slowram",
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "File": "frame-003600.bmp",
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "File": "frame-003600.chipram",
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "File": "frame-003600.json",
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "File": "frame-003600.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-003600.slowram",
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "File": "frame-004200.bmp",
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "File": "frame-004200.chipram",
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "File": "frame-004200.json",
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "File": "frame-004200.pcm",
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "File": "frame-004200.slowram",
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "File": "frame-004800.bmp",
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "File": "frame-004800.chipram",
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "File": "frame-004800.json",
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "File": "frame-004800.pcm",
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "File": "frame-004800.slowram",
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "File": "frame-005400.bmp",
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "File": "frame-005400.chipram",
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "File": "frame-005400.json",
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "File": "frame-005400.pcm",
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "File": "frame-005400.slowram",
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "File": "frame-006000.bmp",
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "File": "frame-006000.chipram",
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "File": "frame-006000.json",
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "File": "frame-006000.pcm",
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "File": "frame-006000.slowram",
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "File": "frame-006600.bmp",
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "File": "frame-006600.chipram",
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "File": "frame-006600.json",
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "File": "frame-006600.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-006600.slowram",
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "File": "frame-007200.bmp",
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "File": "frame-007200.chipram",
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "File": "frame-007200.json",
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "File": "frame-007200.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-007200.slowram",
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "File": "frame-007800.bmp",
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "File": "frame-007800.chipram",
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "File": "frame-007800.json",
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "File": "frame-007800.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-007800.slowram",
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "File": "frame-008400.bmp",
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "File": "frame-008400.chipram",
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "File": "frame-008400.json",
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "File": "frame-008400.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-008400.slowram",
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "File": "frame-009000.bmp",
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "File": "frame-009000.chipram",
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "File": "frame-009000.json",
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "File": "frame-009000.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-009000.slowram",
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "File": "frame-009600.bmp",
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "File": "frame-009600.chipram",
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "File": "frame-009600.json",
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "File": "frame-009600.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-009600.slowram",
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "File": "frame-010200.bmp",
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "File": "frame-010200.chipram",
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "File": "frame-010200.json",
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "File": "frame-010200.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-010200.slowram",
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "File": "frame-010800.bmp",
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "File": "frame-010800.chipram",
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "File": "frame-010800.json",
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "File": "frame-010800.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-010800.slowram",
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "File": "frame-011400.bmp",
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "File": "frame-011400.chipram",
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "File": "frame-011400.json",
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "File": "frame-011400.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-011400.slowram",
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "File": "frame-012000.bmp",
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "File": "frame-012000.chipram",
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "File": "frame-012000.json",
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "File": "frame-012000.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-012000.slowram",
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "File": "frame-012600.bmp",
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "File": "frame-012600.chipram",
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "File": "frame-012600.json",
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "File": "frame-012600.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-012600.slowram",
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "File": "frame-013200.bmp",
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "File": "frame-013200.chipram",
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "File": "frame-013200.json",
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "File": "frame-013200.pcm",
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "File": "frame-013200.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-013800.bmp",
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "File": "frame-013800.chipram",
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "File": "frame-013800.json",
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "File": "frame-013800.pcm",
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "File": "frame-013800.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-014400.bmp",
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "File": "frame-014400.chipram",
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "File": "frame-014400.json",
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "File": "frame-014400.pcm",
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "File": "frame-014400.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-015000.bmp",
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "File": "frame-015000.chipram",
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "File": "frame-015000.json",
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "File": "frame-015000.pcm",
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "File": "frame-015000.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-015600.bmp",
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "File": "frame-015600.chipram",
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "File": "frame-015600.json",
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "File": "frame-015600.pcm",
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "File": "frame-015600.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-016200.bmp",
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "File": "frame-016200.chipram",
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "File": "frame-016200.json",
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "File": "frame-016200.pcm",
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "File": "frame-016200.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-016800.bmp",
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "File": "frame-016800.chipram",
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "File": "frame-016800.json",
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "File": "frame-016800.pcm",
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "File": "frame-016800.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-017400.bmp",
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "File": "frame-017400.chipram",
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "File": "frame-017400.json",
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "File": "frame-017400.pcm",
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "File": "frame-017400.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-018000.bmp",
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "File": "frame-018000.chipram",
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "File": "frame-018000.json",
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "File": "frame-018000.pcm",
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "File": "frame-018000.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "File": "frame-018120.bmp",
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "File": "frame-018120.chipram",
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "File": "frame-018120.json",
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "File": "frame-018120.pcm",
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "File": "frame-018120.slowram",
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    }
+  ]
+}

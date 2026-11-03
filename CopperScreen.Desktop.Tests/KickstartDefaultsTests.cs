@@ -25,23 +25,23 @@ public sealed partial class LaunchWorkflowTests
         {
             for (var i = 0; i < 3; i++)
             {
-                Named<ComboBox>(window, "Start configuration").SelectedIndex = i;
+                LaunchSelection.Select(window, i);
                 var draft = MenuDraft(window); draft.KickstartRomPath = paths[i];
                 SetMenuDraft(window, draft);
             }
             // Going through CopperOS must not replace A1200's native ROM default.
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             for (var i = 0; i < 3; i++)
             {
-                Named<ComboBox>(window, "Start configuration").SelectedIndex = i;
+                LaunchSelection.Select(window, i);
                 Assert.Equal(paths[i], MenuDraft(window).KickstartRomPath);
                 Assert.True(Button(window, "Start Amiga").IsEnabled);
             }
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 1;
+            LaunchSelection.Select(window, 1);
             paths[1] = DefaultRomFixture(1, "replacement-204");
             var replacement = MenuDraft(window); replacement.KickstartRomPath = paths[1];
             SetMenuDraft(window, replacement);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 0;
+            LaunchSelection.Select(window, 0);
         }
         finally { window.Close(); }
         var reopened = new MainWindow([], new CopperScreenRecentSession(_root)); reopened.Show();
@@ -49,7 +49,7 @@ public sealed partial class LaunchWorkflowTests
         {
             foreach (var i in new[] { 1, 2, 0 })
             {
-                Named<ComboBox>(reopened, "Start configuration").SelectedIndex = i;
+                LaunchSelection.Select(reopened, i);
                 Assert.Equal(paths[i], MenuDraft(reopened).KickstartRomPath);
                 Assert.True(Button(reopened, "Start Amiga").IsEnabled);
             }

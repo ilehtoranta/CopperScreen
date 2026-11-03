@@ -29,7 +29,7 @@ try {
     $env:COPPERSCREEN_COPPERSTART_HDF = $HardDiskFixturePath
     $env:COPPERSCREEN_COPPERSTART_OUTPUT = Join-Path $output 'lotus-app'
     $arguments = @('test', (Join-Path $repository 'CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj'),
-        '-c', 'Release', '-m:1', '--artifacts-path', (Join-Path $output 'build'), '--filter', 'FullyQualifiedName~CopperStartTests|FullyQualifiedName~QualifiedHardDiskFreshBootReadsThroughPersistedAppSettings',
+        '-c', 'Release', '-p:CopperScreenEnableCopperStart=true', '-m:1', '--artifacts-path', (Join-Path $output 'build'), '--filter', 'FullyQualifiedName~CopperStartTests|FullyQualifiedName~QualifiedHardDiskFreshBootReadsThroughPersistedAppSettings',
         '--logger', 'trx;LogFileName=copperstart.trx', '--results-directory', $output)
     if ($AdditionalPackageSource) { $arguments += "-p:RestoreAdditionalProjectSources=$AdditionalPackageSource" }
     & dotnet @arguments 2>&1 | Tee-Object -FilePath (Join-Path $output 'tests.log') | Out-Host

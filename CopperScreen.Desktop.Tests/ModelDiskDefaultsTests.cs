@@ -16,7 +16,7 @@ public sealed partial class LaunchWorkflowTests
         {
             for (var i = 0; i < 3; i++)
             {
-                Named<ComboBox>(window, "Start configuration").SelectedIndex = i;
+                LaunchSelection.Select(window, i);
                 Assert.All(MenuDraft(window).DriveDiskPaths, Assert.Null);
                 var draft = MenuDraft(window);
                 draft.KickstartRomPath = roms[i];
@@ -27,11 +27,11 @@ public sealed partial class LaunchWorkflowTests
                 draft.FloppyDriveTypes[1] = LightweightFloppyDriveType.HighDensity;
                 SetMenuDraft(window, draft);
             }
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 3;
+            LaunchSelection.Select(window, 3);
             Assert.All(MenuDraft(window).DriveDiskPaths, Assert.Null);
             foreach (var i in new[] { 0, 1, 2 })
             {
-                Named<ComboBox>(window, "Start configuration").SelectedIndex = i;
+                LaunchSelection.Select(window, i);
                 Assert.Equal(paths[i], MenuDraft(window).DriveDiskPaths[0]);
                 Assert.Equal(roms[i], MenuDraft(window).KickstartRomPath);
             }
@@ -42,7 +42,7 @@ public sealed partial class LaunchWorkflowTests
         {
             foreach (var i in new[] { 1, 2, 0 })
             {
-                Named<ComboBox>(reopened, "Start configuration").SelectedIndex = i;
+                LaunchSelection.Select(reopened, i);
                 var draft = MenuDraft(reopened);
                 Assert.Equal(paths[i], draft.DriveDiskPaths[0]);
                 Assert.Equal(paths[i] + ".zip::disk.adf", draft.DriveDiskPaths[1]);
@@ -68,8 +68,8 @@ public sealed partial class LaunchWorkflowTests
             Click(Button(window, "Remove floppy disk"));
             restored = new CopperScreenRecentSession(_root).RestoreDisks(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 0));
             Assert.Null(restored.DriveDiskPaths[0]);
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 1;
-            Named<ComboBox>(window, "Start configuration").SelectedIndex = 0;
+            LaunchSelection.Select(window, 1);
+            LaunchSelection.Select(window, 0);
             Assert.Null(MenuDraft(window).DriveDiskPaths[0]);
         }
         finally { window.Close(); }

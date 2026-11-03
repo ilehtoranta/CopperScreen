@@ -8,21 +8,43 @@ internal sealed class CopperScreenMinimalBoot
     internal const uint RomBase = 0xFC0000, StateAddress = 0x75800, BootAddress = 0x6800;
     internal byte[] Rom { get; }
     internal uint FaultAddress { get; }
-    internal CopperScreenMinimalBoot(CopperScreenAdfImage disk, bool slowRam)
+    internal CopperScreenMinimalBoot(CopperScreenAdfImage disk, bool slowRam, int chipRamBytes = 524288, bool ec020 = false)
     {
         ValidateDisk(disk);
         var assembler = new CopperScreenBootAssembler(RomBase);
-        var code = assembler.Assemble(BuildSource());
+        var code = assembler.Assemble(BuildSource(chipRamBytes, ec020));
         Rom = new byte[262144];
         code.CopyTo(Rom, 0);
         BinaryPrimitives.WriteUInt32BigEndian(Rom.AsSpan((int)(assembler.Symbol("slow_config") - RomBase)), slowRam ? 1u : 0u);
         FaultAddress = assembler.Symbol("fault");
     }
-    internal static string BuildSource()
+    internal static string BuildSource(int chipRamBytes = 524288, bool ec020 = false)
     {
+        if (chipRamBytes is not (524288 or 1048576 or 2097152)) throw new ArgumentOutOfRangeException(nameof(chipRamBytes));
         using var stream = typeof(CopperScreenMinimalBoot).Assembly.GetManifestResourceStream("CopperScreen.Firmware.MinimalDiskBoot.s")!;
         using var reader = new StreamReader(stream);
-        var source = new StringBuilder(reader.ReadToEnd());
+        // Specialize immutable fitted memory and CPU traits once, before execution.
+        // The A500 instruction stream stays byte-identical. Resident boot services
+        // keep their low-memory addresses; extended Chip RAM is a second free chunk.
+        var firmware = reader.ReadToEnd()
+            .Replace("chiplimit equ $80000", $"chiplimit equ ${chipRamBytes:x}")
+            .Replace("chipfree equ $69000", $"chipfree equ ${0x69000 + chipRamBytes - 0x80000:x}")
+            .Replace("; FITTED_CHIP_INIT", chipRamBytes > 524288 ? $"""
+                move.l #$80000,chipfirst
+                clr.l $80000
+                move.l #${chipRamBytes - 0x80000:x},$80004
+                """ : "")
+            .Replace("; FITTED_CHIP_FREE", chipRamBytes > 524288 ? """
+                cmpi.l #$80000,d0
+                bcs freetryslow
+                cmpi.l #chiplimit,d3
+                bls freepool
+                freetryslow:
+                """ : "")
+            .Replace("; CPU_BOOT_FRAME", ec020 ? "clr.w -(sp)" : "")
+            .Replace("; CPU_FLAGS", ec020 ? "move.w #3,exec+296" : "")
+            .Replace("groupzero_pc equ 10", ec020 ? "groupzero_pc equ 2" : "groupzero_pc equ 10");
+        var source = new StringBuilder(firmware);
         var exec = new Dictionary<int, string>
         {
             [30] = "supervisor", [120] = "disable", [126] = "enable", [132] = "forbid", [138] = "permit",

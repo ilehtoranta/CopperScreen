@@ -1257,6 +1257,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             out first,
             out second);
 
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal bool TryAdvanceTransparentHiresSpriteCck(int line, int x)
+        => _sprites.TryAdvanceTransparentHiresCck(line, x);
+
     internal void ComposeHiresSpriteColorIndexes(int line, int x, int firstPlayfield,
         int secondPlayfield, int placement, out int first, out int second)
         => _sprites.ComposeHiresColorIndexes(line, x, firstPlayfield, secondPlayfield,

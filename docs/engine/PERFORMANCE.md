@@ -37,6 +37,79 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The [2026-11-03 transparent hires sprite candidate](HIRES_TRANSPARENT_2026-11-03.md)
+combines existing empty-sprite checks over one CCK and stores all four pixels,
+retaining dirty collision state, comparator and shifter fallbacks. Production
+builds with published/default and common development CPU packages pass; 1,287
+engine cases pass (seven optional groups unavailable), and 320 retained native
+capture files match. The source remains an **unmeasured performance candidate**:
+all timing attempts are **INVALID / RERUN**. A bounded loaded-host series retains
+two pairs per workload, 12 matching identities, 457 telemetry intervals and 209
+violation observations. No causal FPS gain, full retention or release acceptance
+is established. The new versioned checker distinguishes provably idle reusable
+Visual Studio nodes from active builds; historical evidence is unchanged.
+
+The [2026-11-03 CPU prefetch metadata cleanup](CPU_PREFETCH_METADATA_2026-11-03.md)
+removes unused 152-byte context copies from the plain-bus path through an
+unpublished Copper68k development NuGet package; the default pin stays 1.5.4.
+The consumer build, 4,475 standard CPU cases, 1,285 engine cases and 320 retained
+native capture-file comparisons pass (19 CPU and seven engine optional checks
+remain unavailable). Six native pairs are **VALID**: throughput **+6.9481%**,
+two-sided 95% interval **+4.7471% to +9.1952%**, and one-sided 95% upper frame-time
+change **−4.9601%**. All 729 telemetry intervals pass policy v2, with unchanged
+identities/files and zero measured allocations. Complete three-workload retention,
+metadata-consumer throughput and release qualification remain separate.
+
+The [2026-11-03 hires mode cleanup](HIRES_MODE_SELECTION_2026-11-03.md) removes
+one repeated mode test per ordinary visible hires CCK while preserving both
+sprite/compositor operations. The Release build and 174 focused cases pass;
+320 retained native capture files match. Six paired native runs are **VALID**:
+paired FPS change **+0.2172%**, two-sided 95% interval **−0.8976% to +1.3446%**,
+so no speedup or slowdown is established. The one-sided 95% upper frame-time
+change is **+0.6621%**, within the native 1% limit. All 725 telemetry intervals
+pass policy v2, with zero measured allocations and unchanged frozen files.
+The complete three-workload retention and release boundaries remain open.
+
+The [2026-11-03 cache revert and bottleneck investigation](LEMMINGS_BOTTLENECKS_2026-11-03.md)
+removes the capability cache while retaining corrected inactive/masked IPL
+sampling. The Release build and five focused interrupt cases pass; two fresh
+full native profiles match the complete identity with zero measured allocations.
+All 151 telemetry intervals pass policy v2. Coarse stack attribution and optimized
+code prioritize residual 152-byte CPU prefetch metadata copies, repeated hires
+preparation and active OCS bitplane control. This is diagnostic evidence, without
+a new throughput gain or performance gate claim.
+
+The [2026-11-03 paired Lemmings cache comparison](LEMMINGS_CACHE_2026-11-03.md)
+completes **VALID** with six engine-only pairs, identical runner/dependencies and
+one matching complete identity. Uncached averages **329.45 FPS** and cached
+**327.11 FPS**. Paired throughput change is **−0.7082%**, with a two-sided 95%
+interval of **−2.0616% to +0.6640%**: no speedup or slowdown is established.
+The one-sided 95% upper frame-time change is **+1.8026%**, leaving the native
+1% retention decision **INCONCLUSIVE**. All 682 telemetry intervals pass policy
+v2 with zero competing jobs/violations, zero measured allocations and unchanged
+frozen files. The three-workload and release acceptance boundaries remain open.
+
+The [2026-11-02 interrupt-bookkeeping isolation](INTERRUPT_BOOKKEEPING_2026-11-02.md)
+tested removal of the repeated runtime interface check from the corrected IPL
+polling path by caching the fixed CPU capability; that cache is now reverted.
+All 1,285 engine tests passed (seven optional
+native groups unavailable), both full Lemmings modes retain 160 baseline capture
+files each, and lores/hires complete identities match. An artificial six-round
+poll diagnostic observes lower mean thread costs with the cache, but all 68
+telemetry intervals violate policy v2: **INVALID / RERUN**, with no causal native
+speedup or performance acceptance claimed. Every required sample remains active.
+
+The [2026-11-02 Lemmings investigation](LEMMINGS_PERFORMANCE_2026-11-02.md)
+completes a separate six-pair native source-stack diagnostic against reconstructed
+October 12 source. All twelve complete identities match, with zero measured
+allocations and unchanged frozen files, but 540 load-policy violations leave the
+entire series **INVALID / RERUN**. A fresh strict attempt stops during C2 on
+sustained package interference. Two diagnostic profiles identify device stepping,
+rendering and CPU execution as the main sampled costs; added interrupt sampling
+is a source-stage hypothesis, not a measured regression cause. No causal slowdown,
+optimization gain or 1% retention decision is established. Historical evidence
+and the complete three-workload gate remain unchanged.
+
 The [2026-10-12 execution profile](PROFILE_2026-10-12.md) completes two full
 sampled replays per workload with exact retained identities and zero allocation,
 plus three bounded optimized-code inspections. It identifies repeated ordinary

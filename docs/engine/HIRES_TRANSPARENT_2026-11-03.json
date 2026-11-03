@@ -1,0 +1,2808 @@
+{
+  "SchemaVersion": 1,
+  "Date": "2026-11-03",
+  "Protocol": "hires-transparent-evidence-v2",
+  "Implementation": "Combine already transparent hires sprite positions over one stable CCK; preserve bitplane shifts, four pixels and all dirty/comparator/shifter fallbacks; no new cached state",
+  "Source": {
+    "CopperScreenHead": "214d58a37d67c73256cd1fc2192d19da040ec967",
+    "EngineFiles": [
+      "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "CopperMod.Amiga.Lightweight/LightweightSprites.cs",
+      "CopperMod.Amiga.Lightweight/LightweightVideo.cs"
+    ],
+    "RegressionFile": "CopperMod.Amiga.Lightweight.Tests/LightweightCollisionTests.cs",
+    "InterruptSamplingChanged": false,
+    "ClockOrOrderingChanged": false,
+    "GoldenChanged": false,
+    "BitplanePrototypeRetained": false,
+    "RetainedAsUnmeasuredPerformanceCandidate": true
+  },
+  "Package": {
+    "CommonCpu": "1.5.5-prefetch-metadata-dev.1",
+    "CommonCpuSha256": "20B4E1002E8F7B2994EB139E04905BE1B5AC2970C360C4E2B1F682CA14029133",
+    "DefaultPin": "1.5.4",
+    "DefaultPinChanged": false,
+    "Published": false,
+    "ProjectReferenceAdded": false,
+    "CheckedInPackageLocksChanged": false,
+    "OnlyEngineDllDiffersBetweenCapsules": true
+  },
+  "Validation": {
+    "ProductionDevelopmentConsumerBuild": "PASS",
+    "ProductionDefaultPublishedConsumerBuild": "PASS",
+    "EnginePassed": 1287,
+    "EngineSkipped": 7,
+    "GuardMutationExpectedFailures": 2,
+    "NativeCaptureFilesMatched": 320,
+    "NativeCaptureRuns": [
+      {
+        "Mode": "normal",
+        "FilesCompared": 160,
+        "Mismatches": 0,
+        "RawResult": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=0 frames=18120 completed=18120 fps=287,42 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x72FF28A9A6D931E7 pixels=284204 audioSamples=1924 pcm=real allocated=21201016 adf=True unsupported=none",
+        "ThroughputExcluded": true
+      },
+      {
+        "Mode": "scalar",
+        "FilesCompared": 160,
+        "Mismatches": 0,
+        "RawResult": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=scalar warmup=0 frames=18120 completed=18120 fps=300,44 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x72FF28A9A6D931E7 pixels=284204 audioSamples=1924 pcm=real allocated=21200432 adf=True unsupported=none",
+        "ThroughputExcluded": true
+      }
+    ],
+    "DiagnosticFpsExcluded": true,
+    "FreshStableCpuThroughputMeasured": false
+  },
+  "GeneratedCode": [
+    {
+      "Role": "reference",
+      "Header": "; Assembly listing for method CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresCck(int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)",
+      "Bytes": 1524,
+      "Branches": 47,
+      "Calls": [
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ComposeHiresColorIndexes(int,int,int,int,int,byref,byref):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresBoundaryCck(int,int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:PrepareHiresLine(int,int,int,int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:LatchComparatorsThrough(int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ObserveActiveSpriteCollisions(int,int):this]",
+        "call     CORINFO_HELP_RNGCHKFAIL"
+      ]
+    },
+    {
+      "Role": "reference",
+      "Header": "; Assembly listing for method CopperMod.Amiga.Lightweight.LightweightSprites:ComposeHiresColorIndexes(int,int,int,int,int,byref,byref):this (Tier1)",
+      "Bytes": 610,
+      "Branches": 24,
+      "Calls": [
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:PrepareHiresLine(int,int,int,int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:LatchComparatorsThrough(int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ObserveActiveSpriteCollisions(int,int):this]",
+        "call     CORINFO_HELP_RNGCHKFAIL"
+      ]
+    },
+    {
+      "Role": "candidate-vector",
+      "Header": "; Assembly listing for method CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresCck(int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this (Tier1)",
+      "Bytes": 1210,
+      "Branches": 36,
+      "Calls": [
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresBoundaryCck(int,int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightA500Machine:ComposeHiresSpriteColorIndexes(int,int,int,int,int,byref,byref):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightA500Machine:ComposeHiresSpriteColorIndexes(int,int,int,int,int,byref,byref):this]",
+        "call     CORINFO_HELP_RNGCHKFAIL"
+      ]
+    },
+    {
+      "Role": "candidate-vector",
+      "Header": "; Assembly listing for method CopperMod.Amiga.Lightweight.LightweightSprites:TryAdvanceTransparentHiresCck(int,int):bool:this (Tier1)",
+      "Bytes": 46,
+      "Branches": 5,
+      "Calls": []
+    }
+  ],
+  "Comparison": {
+    "Status": "INVALID / RERUN",
+    "Protocol": "hires-transparent-v2",
+    "PlannedOrder": [
+      {
+        "Label": "lores-R1",
+        "Role": "R",
+        "Pair": 1,
+        "Workload": "lores"
+      },
+      {
+        "Label": "lores-C1",
+        "Role": "C",
+        "Pair": 1,
+        "Workload": "lores"
+      },
+      {
+        "Label": "hires-R1",
+        "Role": "R",
+        "Pair": 1,
+        "Workload": "hires"
+      },
+      {
+        "Label": "hires-C1",
+        "Role": "C",
+        "Pair": 1,
+        "Workload": "hires"
+      },
+      {
+        "Label": "lemmings-R1",
+        "Role": "R",
+        "Pair": 1,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lemmings-C1",
+        "Role": "C",
+        "Pair": 1,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lores-C2",
+        "Role": "C",
+        "Pair": 2,
+        "Workload": "lores"
+      },
+      {
+        "Label": "lores-R2",
+        "Role": "R",
+        "Pair": 2,
+        "Workload": "lores"
+      },
+      {
+        "Label": "hires-C2",
+        "Role": "C",
+        "Pair": 2,
+        "Workload": "hires"
+      },
+      {
+        "Label": "hires-R2",
+        "Role": "R",
+        "Pair": 2,
+        "Workload": "hires"
+      },
+      {
+        "Label": "lemmings-C2",
+        "Role": "C",
+        "Pair": 2,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lemmings-R2",
+        "Role": "R",
+        "Pair": 2,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lores-R3",
+        "Role": "R",
+        "Pair": 3,
+        "Workload": "lores"
+      },
+      {
+        "Label": "lores-C3",
+        "Role": "C",
+        "Pair": 3,
+        "Workload": "lores"
+      },
+      {
+        "Label": "hires-R3",
+        "Role": "R",
+        "Pair": 3,
+        "Workload": "hires"
+      },
+      {
+        "Label": "hires-C3",
+        "Role": "C",
+        "Pair": 3,
+        "Workload": "hires"
+      },
+      {
+        "Label": "lemmings-R3",
+        "Role": "R",
+        "Pair": 3,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lemmings-C3",
+        "Role": "C",
+        "Pair": 3,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lores-C4",
+        "Role": "C",
+        "Pair": 4,
+        "Workload": "lores"
+      },
+      {
+        "Label": "lores-R4",
+        "Role": "R",
+        "Pair": 4,
+        "Workload": "lores"
+      },
+      {
+        "Label": "hires-C4",
+        "Role": "C",
+        "Pair": 4,
+        "Workload": "hires"
+      },
+      {
+        "Label": "hires-R4",
+        "Role": "R",
+        "Pair": 4,
+        "Workload": "hires"
+      },
+      {
+        "Label": "lemmings-C4",
+        "Role": "C",
+        "Pair": 4,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lemmings-R4",
+        "Role": "R",
+        "Pair": 4,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lores-R5",
+        "Role": "R",
+        "Pair": 5,
+        "Workload": "lores"
+      },
+      {
+        "Label": "lores-C5",
+        "Role": "C",
+        "Pair": 5,
+        "Workload": "lores"
+      },
+      {
+        "Label": "hires-R5",
+        "Role": "R",
+        "Pair": 5,
+        "Workload": "hires"
+      },
+      {
+        "Label": "hires-C5",
+        "Role": "C",
+        "Pair": 5,
+        "Workload": "hires"
+      },
+      {
+        "Label": "lemmings-R5",
+        "Role": "R",
+        "Pair": 5,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lemmings-C5",
+        "Role": "C",
+        "Pair": 5,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lores-C6",
+        "Role": "C",
+        "Pair": 6,
+        "Workload": "lores"
+      },
+      {
+        "Label": "lores-R6",
+        "Role": "R",
+        "Pair": 6,
+        "Workload": "lores"
+      },
+      {
+        "Label": "hires-C6",
+        "Role": "C",
+        "Pair": 6,
+        "Workload": "hires"
+      },
+      {
+        "Label": "hires-R6",
+        "Role": "R",
+        "Pair": 6,
+        "Workload": "hires"
+      },
+      {
+        "Label": "lemmings-C6",
+        "Role": "C",
+        "Pair": 6,
+        "Workload": "lemmings"
+      },
+      {
+        "Label": "lemmings-R6",
+        "Role": "R",
+        "Pair": 6,
+        "Workload": "lemmings"
+      }
+    ],
+    "PlannedSamples": 36,
+    "CompleteSamples": 12,
+    "InterruptedNextSample": "lores-R3",
+    "CommonInputs": true,
+    "ExpectedIdentities": {
+      "lores": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x62C260C0EA540A03 output=0x7A75BAAC02CAC735 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "hires": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "lemmings": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+    },
+    "HostCpu": "AMD Ryzen 5 5600X 6-Core Processor             ",
+    "Windows": "Microsoft Windows NT 10.0.26200.0",
+    "Runtime": ".NET SDK:\r\n Version:           10.0.401\r\n Commit:            e34a38d2ae\r\n Workload version:  10.0.400-manifests.b0700452\r\n MSBuild version:   18.9.11+e34a38d2a\r\n\r\nRuntime Environment:\r\n OS Name:     Windows\r\n OS Version:  10.0.26200\r\n OS Platform: Windows\r\n RID:         win-x64\r\n Base Path:   C:\\Program Files\\dotnet\\sdk\\10.0.401\\\r\n\r\n.NET workloads installed:\r\n [maui-windows]\r\n   Installation Source: VS 18.10.12224.181\r\n   Manifest Version:    10.0.20/10.0.100\r\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.maui\\10.0.20\\WorkloadManifest.json\r\n   Install Type:              Msi\r\n\r\n [maccatalyst]\r\n   Installation Source: VS 18.10.12224.181\r\n   Manifest Version:    26.5.10301/10.0.100\r\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.maccatalyst\\26.5.10301\\WorkloadManifest.json\r\n   Install Type:              Msi\r\n\r\n [ios]\r\n   Installation Source: VS 18.10.12224.181\r\n   Manifest Version:    26.5.10301/10.0.100\r\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.ios\\26.5.10301\\WorkloadManifest.json\r\n   Install Type:              Msi\r\n\r\n [android]\r\n   Installation Source: VS 18.10.12224.181\r\n   Manifest Version:    36.1.69/10.0.100\r\n   Manifest Path:       C:\\Program Files\\dotnet\\sdk-manifests\\10.0.100\\microsoft.net.sdk.android\\36.1.69\\WorkloadManifest.json\r\n   Install Type:              Msi\r\n\r\nConfigured to use workload sets when installing new manifests.\r\nNo workload sets are installed. Run \"dotnet workload restore\" to install a workload set.\r\n\r\nHost:\r\n  Version:      10.0.12\r\n  Architecture: x64\r\n  Commit:       95017c711e\r\n\r\n.NET SDKs installed:\r\n  10.0.401 [C:\\Program Files\\dotnet\\sdk]\r\n\r\n.NET runtimes installed:\r\n  Microsoft.AspNetCore.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.AspNetCore.App]\r\n  Microsoft.AspNetCore.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.AspNetCore.App]\r\n  Microsoft.NETCore.App 8.0.21 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]\r\n  Microsoft.NETCore.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]\r\n  Microsoft.NETCore.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]\r\n  Microsoft.WindowsDesktop.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]\r\n  Microsoft.WindowsDesktop.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]\r\n\r\nOther architectures found:\r\n  x86   [C:\\Program Files (x86)\\dotnet]\r\n    registered at [HKLM\\SOFTWARE\\dotnet\\Setup\\InstalledVersions\\x86\\InstallLocation]\r\n\r\nEnvironment variables:\r\n  Not set\r\n\r\nglobal.json file:\r\n  C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\global.json\r\n\r\nLearn more:\r\n  https://aka.ms/dotnet/info\r\n\r\nDownload .NET:\r\n  https://aka.ms/dotnet/download\r\n",
+    "PowerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Tasapainotettu)",
+    "LogicalProcessor": 2,
+    "ProtectedCpus": [
+      2,
+      3
+    ],
+    "Topology": [
+      {
+        "Group": 0,
+        "Cpu": 0,
+        "Core": 0,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 1,
+        "Core": 0,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 2,
+        "Core": 2,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 3,
+        "Core": 2,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 4,
+        "Core": 4,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 5,
+        "Core": 4,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 6,
+        "Core": 6,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 7,
+        "Core": 6,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 8,
+        "Core": 8,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 9,
+        "Core": 8,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 10,
+        "Core": 10,
+        "Efficiency": 0
+      },
+      {
+        "Group": 0,
+        "Cpu": 11,
+        "Core": 10,
+        "Efficiency": 0
+      }
+    ],
+    "Priority": "Normal",
+    "HostLoadPolicy": "v2, unchanged limits and rejection rules",
+    "IdleBuildNodeClassification": "Native zero CPU delta, unchanged identity, explicit reusable node mode and VS parent required; missing/active nodes remain jobs. Historical records unchanged.",
+    "LoadedHostDiagnostics": true,
+    "Samples": [
+      {
+        "Label": "lores-R1",
+        "Role": "R",
+        "Pair": 1,
+        "Workload": "lores",
+        "Fps": 263.96,
+        "MsPerField": 3.7884527958781637,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x62C260C0EA540A03 output=0x7A75BAAC02CAC735 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "lores-C1",
+        "Role": "C",
+        "Pair": 1,
+        "Workload": "lores",
+        "Fps": 238.49,
+        "MsPerField": 4.1930479265378,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x62C260C0EA540A03 output=0x7A75BAAC02CAC735 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "hires-R1",
+        "Role": "R",
+        "Pair": 1,
+        "Workload": "hires",
+        "Fps": 299.68,
+        "MsPerField": 3.3368926855312333,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "hires-C1",
+        "Role": "C",
+        "Pair": 1,
+        "Workload": "hires",
+        "Fps": 296.82,
+        "MsPerField": 3.369045212586753,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "lemmings-R1",
+        "Role": "R",
+        "Pair": 1,
+        "Workload": "lemmings",
+        "Fps": 298.47,
+        "MsPerField": 3.3504204777699598,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "lemmings-C1",
+        "Role": "C",
+        "Pair": 1,
+        "Workload": "lemmings",
+        "Fps": 346.74,
+        "MsPerField": 2.884005306569764,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "lores-C2",
+        "Role": "C",
+        "Pair": 2,
+        "Workload": "lores",
+        "Fps": 326.35,
+        "MsPerField": 3.0641948827945455,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x62C260C0EA540A03 output=0x7A75BAAC02CAC735 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "lores-R2",
+        "Role": "R",
+        "Pair": 2,
+        "Workload": "lores",
+        "Fps": 300.48,
+        "MsPerField": 3.32800851970181,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395730 cpu=0x61B8E8E422AA0567 hardware=0x62C260C0EA540A03 output=0x7A75BAAC02CAC735 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "hires-C2",
+        "Role": "C",
+        "Pair": 2,
+        "Workload": "hires",
+        "Fps": 263.2,
+        "MsPerField": 3.799392097264438,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "hires-R2",
+        "Role": "R",
+        "Pair": 2,
+        "Workload": "hires",
+        "Fps": 263.05,
+        "MsPerField": 3.801558639042007,
+        "Fingerprint": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none"
+      },
+      {
+        "Label": "lemmings-C2",
+        "Role": "C",
+        "Pair": 2,
+        "Workload": "lemmings",
+        "Fps": 297.89,
+        "MsPerField": 3.356943838329585,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      },
+      {
+        "Label": "lemmings-R2",
+        "Role": "R",
+        "Pair": 2,
+        "Workload": "lemmings",
+        "Fps": 255.28,
+        "MsPerField": 3.917267314321529,
+        "Fingerprint": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none"
+      }
+    ],
+    "DescriptiveComparisons": [
+      {
+        "Workload": "lores",
+        "Pairs": [
+          {
+            "Pair": 1,
+            "ReferenceFps": 263.96,
+            "CandidateFps": 238.49,
+            "LogFrameTimeRatio": 0.10147019578703222
+          },
+          {
+            "Pair": 2,
+            "ReferenceFps": 300.48,
+            "CandidateFps": 326.35,
+            "LogFrameTimeRatio": -0.08258922906132839
+          }
+        ],
+        "Statistics": {
+          "Workload": "lores",
+          "Pairs": 2,
+          "MeanReferenceFps": 282.22,
+          "MeanCandidateFps": 282.42,
+          "DescriptivePairedThroughputChangePercent": -0.9396061896396635,
+          "ConfidenceInterval": null,
+          "CausalConclusionAllowed": false
+        },
+        "Retention": "INVALID / RERUN"
+      },
+      {
+        "Workload": "hires",
+        "Pairs": [
+          {
+            "Pair": 1,
+            "ReferenceFps": 299.68,
+            "CandidateFps": 296.82,
+            "LogFrameTimeRatio": 0.009589344228106122
+          },
+          {
+            "Pair": 2,
+            "ReferenceFps": 263.05,
+            "CandidateFps": 263.2,
+            "LogFrameTimeRatio": -0.0005700712743458631
+          }
+        ],
+        "Statistics": {
+          "Workload": "hires",
+          "Pairs": 2,
+          "MeanReferenceFps": 281.365,
+          "MeanCandidateFps": 280.01,
+          "DescriptivePairedThroughputChangePercent": -0.44994833343645624,
+          "ConfidenceInterval": null,
+          "CausalConclusionAllowed": false
+        },
+        "Retention": "INVALID / RERUN"
+      },
+      {
+        "Workload": "lemmings",
+        "Pairs": [
+          {
+            "Pair": 1,
+            "ReferenceFps": 298.47,
+            "CandidateFps": 346.74,
+            "LogFrameTimeRatio": -0.14990579428836345
+          },
+          {
+            "Pair": 2,
+            "ReferenceFps": 255.28,
+            "CandidateFps": 297.89,
+            "LogFrameTimeRatio": -0.15436330887430622
+          }
+        ],
+        "Statistics": {
+          "Workload": "lemmings",
+          "Pairs": 2,
+          "MeanReferenceFps": 276.875,
+          "MeanCandidateFps": 322.315,
+          "DescriptivePairedThroughputChangePercent": 16.431688657137713,
+          "ConfidenceInterval": null,
+          "CausalConclusionAllowed": false
+        },
+        "Retention": "INVALID / RERUN"
+      }
+    ],
+    "Telemetry": {
+      "Intervals": 457,
+      "Violations": 209,
+      "RawJobPresenceIntervals": 457,
+      "IdleBuildNodeExclusionIntervals": 454,
+      "CompetingJobIntervals": 120,
+      "PeakSelectedOther": 87.37864077669903,
+      "PeakSibling": 100.0,
+      "PeakPackageOther": 96.41238846577089
+    },
+    "CausalPerformanceConclusionAllowed": false,
+    "ThreeWorkloadRetention": "INVALID / RERUN",
+    "ReleaseAcceptance": false,
+    "AllFrozenFilesUnchanged": true,
+    "SampleTrimming": false,
+    "StoppingReason": "Persistent real build activity and sustained host interference; stop after two complete rounds instead of spending the remaining planned rounds on invalid timing.",
+    "EarlierAttempts": [
+      {
+        "Directory": "artifacts/hires-transparent-20261103/retention-six-pairs",
+        "Status": "INVALID / RERUN",
+        "CompleteSamples": 1,
+        "FailedSample": "lores-C1",
+        "Error": "System.Management.Automation.RuntimeException: Runner exited -1.",
+        "Pooled": false
+      },
+      {
+        "Directory": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun",
+        "Status": "INVALID / RERUN",
+        "CompleteSamples": 1,
+        "FailedSample": "lores-C1",
+        "Error": "System.Management.Automation.RuntimeException: G6 performance INVALID / RERUN: competing test/build/benchmark: MSBuild.exe[29868], MSBuild.exe[43580], dotnet.exe[39188], MSBuild.exe[24068]",
+        "Pooled": false
+      }
+    ]
+  },
+  "EvidenceFiles": [
+    {
+      "Path": "AGENTS.md",
+      "Bytes": 5834,
+      "Sha256": "2B70D8F1E0A686934AF4C1D4C0380E12FCA0354FB7069F10A74CADEC0ED32256"
+    },
+    {
+      "Path": "artifacts/bitplane-active-20261103/disposition.json",
+      "Bytes": 276,
+      "Sha256": "AD837CD8843F9F4DBE2D469778CABBA02F1A922603B935423ACD5323C31F6967"
+    },
+    {
+      "Path": "artifacts/bitplane-active-20261103/reference-record.json",
+      "Bytes": 3743,
+      "Sha256": "026F77BA5A472C248370C9D37A57F5A6D83F62864A26ABB6456BCD828F671FF2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/analyze-bounded.ps1",
+      "Bytes": 4726,
+      "Sha256": "EF41BEF41DDCC3F16A708A113D0B585386B14DD7F1F36605A78095FDFBCD9894"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/analyze-results.ps1",
+      "Bytes": 5868,
+      "Sha256": "2C82CE110DD4D7B613B74A32C9C44F4B2A2D22F2760709EF085C3BCB2F1D8CF5"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/bounded-stop.json",
+      "Bytes": 441,
+      "Sha256": "D018D87F6F4527CB614062CCE0ECB0876708C09F86358382C2983C698BF81C17"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate-vector-native.asm",
+      "Bytes": 39786,
+      "Sha256": "B4283E5DF69F91137968D62BC2940967C40C062D4DAB76A2C25705F1842AC668"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/Copper68k.dll",
+      "Bytes": 980480,
+      "Sha256": "20B4E1002E8F7B2994EB139E04905BE1B5AC2970C360C4E2B1F682CA14029133"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "B424D27A47E2A76612087ADF1F799FF41E3848D0A0F76DFE2696FF3AA67C28A2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperDisk.pdb",
+      "Bytes": 42876,
+      "Sha256": "03C2B549D8828094860A0B6176C7140C287985F387BBE00111BD24A63A07D4AC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "9F435B0D49E29BB0FFBFC1DFA05223909CEAD18DFA1102EAF394D35E698DF3ED"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120368,
+      "Sha256": "6D167E611313F1B67C662D5C06C02BFCA5F808FFCF80D4B6279255EC9B2F0902"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2653,
+      "Sha256": "2CF2AD5985F3B326C9A888FB03AF772437C6695463E05B4F16C66C85763D0875"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "664320169D13110C7987C008991FBB05169E83CB2E4632689EF1EB8D37947706"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24884,
+      "Sha256": "5ED5F9E2B9EB7464CC2C9D331A3CE6B6F75DE00F4EAD5898E0678565C7251BEA"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/candidate/CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-native.ps1",
+      "Bytes": 3916,
+      "Sha256": "2B30B7D08E42EB257F16372F5FA6744ADA53A09052D36DFA06BEA83E7A381739"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector.log",
+      "Bytes": 35606,
+      "Sha256": "6FF46F7AEB9B003DD35DACD651CAB96667AE261A3DF8578B14AE0EFDCFB5114A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000001.bmp",
+      "Bytes": 1136870,
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000001.chipram",
+      "Bytes": 524288,
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000001.json",
+      "Bytes": 1086,
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000001.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000001.slowram",
+      "Bytes": 524288,
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000600.chipram",
+      "Bytes": 524288,
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000600.json",
+      "Bytes": 1067,
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000600.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-000600.slowram",
+      "Bytes": 524288,
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001200.chipram",
+      "Bytes": 524288,
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001200.json",
+      "Bytes": 1071,
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001200.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001800.chipram",
+      "Bytes": 524288,
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001800.json",
+      "Bytes": 1071,
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-001800.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-002400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-002400.chipram",
+      "Bytes": 524288,
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-002400.json",
+      "Bytes": 1105,
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-002400.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-002400.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003000.chipram",
+      "Bytes": 524288,
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003000.json",
+      "Bytes": 1073,
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003000.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003000.slowram",
+      "Bytes": 524288,
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003600.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003600.json",
+      "Bytes": 1105,
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-003600.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004200.chipram",
+      "Bytes": 524288,
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004200.json",
+      "Bytes": 1104,
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004200.pcm",
+      "Bytes": 3848,
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004200.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004800.chipram",
+      "Bytes": 524288,
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004800.json",
+      "Bytes": 1102,
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004800.pcm",
+      "Bytes": 3844,
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-004800.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-005400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-005400.chipram",
+      "Bytes": 524288,
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-005400.json",
+      "Bytes": 1103,
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-005400.pcm",
+      "Bytes": 3848,
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-005400.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006000.chipram",
+      "Bytes": 524288,
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006000.json",
+      "Bytes": 1070,
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006000.pcm",
+      "Bytes": 3844,
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006000.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006600.chipram",
+      "Bytes": 524288,
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006600.json",
+      "Bytes": 1102,
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-006600.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007200.chipram",
+      "Bytes": 524288,
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007200.json",
+      "Bytes": 1103,
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007200.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007200.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007800.chipram",
+      "Bytes": 524288,
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007800.json",
+      "Bytes": 1103,
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007800.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-007800.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-008400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-008400.chipram",
+      "Bytes": 524288,
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-008400.json",
+      "Bytes": 1103,
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-008400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-008400.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009000.chipram",
+      "Bytes": 524288,
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009000.json",
+      "Bytes": 1105,
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009000.slowram",
+      "Bytes": 524288,
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009600.chipram",
+      "Bytes": 524288,
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009600.json",
+      "Bytes": 1106,
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-009600.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010200.chipram",
+      "Bytes": 524288,
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010200.json",
+      "Bytes": 1107,
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010200.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010800.chipram",
+      "Bytes": 524288,
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010800.json",
+      "Bytes": 1107,
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-010800.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-011400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-011400.chipram",
+      "Bytes": 524288,
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-011400.json",
+      "Bytes": 1107,
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-011400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-011400.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012000.chipram",
+      "Bytes": 524288,
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012000.json",
+      "Bytes": 1105,
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012000.slowram",
+      "Bytes": 524288,
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012600.chipram",
+      "Bytes": 524288,
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012600.json",
+      "Bytes": 1076,
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-012600.slowram",
+      "Bytes": 524288,
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013200.chipram",
+      "Bytes": 524288,
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013200.json",
+      "Bytes": 1102,
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013800.chipram",
+      "Bytes": 524288,
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013800.json",
+      "Bytes": 1103,
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-013800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-014400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-014400.chipram",
+      "Bytes": 524288,
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-014400.json",
+      "Bytes": 1102,
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-014400.pcm",
+      "Bytes": 3848,
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-014400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015000.chipram",
+      "Bytes": 524288,
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015000.json",
+      "Bytes": 1102,
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015000.pcm",
+      "Bytes": 3844,
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015600.chipram",
+      "Bytes": 524288,
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015600.json",
+      "Bytes": 1102,
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015600.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-015600.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016200.chipram",
+      "Bytes": 524288,
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016200.json",
+      "Bytes": 1102,
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016200.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016800.chipram",
+      "Bytes": 524288,
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016800.json",
+      "Bytes": 1102,
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016800.pcm",
+      "Bytes": 3844,
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-016800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-017400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-017400.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-017400.json",
+      "Bytes": 1102,
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-017400.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-017400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018000.chipram",
+      "Bytes": 524288,
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018000.json",
+      "Bytes": 1102,
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018000.pcm",
+      "Bytes": 3848,
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018120.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018120.chipram",
+      "Bytes": 524288,
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018120.json",
+      "Bytes": 1102,
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018120.pcm",
+      "Bytes": 3848,
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-normal-vector/frame-018120.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector.log",
+      "Bytes": 35594,
+      "Sha256": "E1769B0FB08C091D2752EA480D0FDA091F2B6CD1D3B6016DAA73D56BAA439BDE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000001.bmp",
+      "Bytes": 1136870,
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000001.chipram",
+      "Bytes": 524288,
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000001.json",
+      "Bytes": 1086,
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000001.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000001.slowram",
+      "Bytes": 524288,
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000600.chipram",
+      "Bytes": 524288,
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000600.json",
+      "Bytes": 1067,
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000600.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-000600.slowram",
+      "Bytes": 524288,
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001200.chipram",
+      "Bytes": 524288,
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001200.json",
+      "Bytes": 1071,
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001200.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001800.chipram",
+      "Bytes": 524288,
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001800.json",
+      "Bytes": 1071,
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-001800.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-002400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-002400.chipram",
+      "Bytes": 524288,
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-002400.json",
+      "Bytes": 1105,
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-002400.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-002400.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003000.chipram",
+      "Bytes": 524288,
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003000.json",
+      "Bytes": 1073,
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003000.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003000.slowram",
+      "Bytes": 524288,
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003600.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003600.json",
+      "Bytes": 1105,
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-003600.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004200.chipram",
+      "Bytes": 524288,
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004200.json",
+      "Bytes": 1104,
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004200.pcm",
+      "Bytes": 3848,
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004200.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004800.chipram",
+      "Bytes": 524288,
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004800.json",
+      "Bytes": 1102,
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004800.pcm",
+      "Bytes": 3844,
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-004800.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-005400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-005400.chipram",
+      "Bytes": 524288,
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-005400.json",
+      "Bytes": 1103,
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-005400.pcm",
+      "Bytes": 3848,
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-005400.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006000.chipram",
+      "Bytes": 524288,
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006000.json",
+      "Bytes": 1070,
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006000.pcm",
+      "Bytes": 3844,
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006000.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006600.chipram",
+      "Bytes": 524288,
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006600.json",
+      "Bytes": 1102,
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-006600.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007200.chipram",
+      "Bytes": 524288,
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007200.json",
+      "Bytes": 1103,
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007200.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007200.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007800.chipram",
+      "Bytes": 524288,
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007800.json",
+      "Bytes": 1103,
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007800.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-007800.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-008400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-008400.chipram",
+      "Bytes": 524288,
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-008400.json",
+      "Bytes": 1103,
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-008400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-008400.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009000.chipram",
+      "Bytes": 524288,
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009000.json",
+      "Bytes": 1105,
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009000.slowram",
+      "Bytes": 524288,
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009600.chipram",
+      "Bytes": 524288,
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009600.json",
+      "Bytes": 1106,
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-009600.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010200.chipram",
+      "Bytes": 524288,
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010200.json",
+      "Bytes": 1107,
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010200.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010800.chipram",
+      "Bytes": 524288,
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010800.json",
+      "Bytes": 1107,
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-010800.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-011400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-011400.chipram",
+      "Bytes": 524288,
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-011400.json",
+      "Bytes": 1107,
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-011400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-011400.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012000.chipram",
+      "Bytes": 524288,
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012000.json",
+      "Bytes": 1105,
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012000.slowram",
+      "Bytes": 524288,
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012600.chipram",
+      "Bytes": 524288,
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012600.json",
+      "Bytes": 1076,
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-012600.slowram",
+      "Bytes": 524288,
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013200.chipram",
+      "Bytes": 524288,
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013200.json",
+      "Bytes": 1102,
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013800.chipram",
+      "Bytes": 524288,
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013800.json",
+      "Bytes": 1103,
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-013800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-014400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-014400.chipram",
+      "Bytes": 524288,
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-014400.json",
+      "Bytes": 1102,
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-014400.pcm",
+      "Bytes": 3848,
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-014400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015000.chipram",
+      "Bytes": 524288,
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015000.json",
+      "Bytes": 1102,
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015000.pcm",
+      "Bytes": 3844,
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015600.chipram",
+      "Bytes": 524288,
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015600.json",
+      "Bytes": 1102,
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015600.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-015600.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016200.chipram",
+      "Bytes": 524288,
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016200.json",
+      "Bytes": 1102,
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016200.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016800.chipram",
+      "Bytes": 524288,
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016800.json",
+      "Bytes": 1102,
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016800.pcm",
+      "Bytes": 3844,
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-016800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-017400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-017400.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-017400.json",
+      "Bytes": 1102,
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-017400.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-017400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018000.chipram",
+      "Bytes": 524288,
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018000.json",
+      "Bytes": 1102,
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018000.pcm",
+      "Bytes": 3848,
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018120.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018120.chipram",
+      "Bytes": 524288,
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018120.json",
+      "Bytes": 1102,
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018120.pcm",
+      "Bytes": 3848,
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-scalar-vector/frame-018120.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/capture-vector-results.json",
+      "Bytes": 907,
+      "Sha256": "2CD7561251365A64D2F0700CEB65FB259370DAC1498A5FE986865D3A466BF967"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/default-build.log",
+      "Bytes": 2528,
+      "Sha256": "4DA637A9954DFA87397EC78F63BA27F8E78790BF6E5F6FEF21F15080B6D5A88E"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/default-build/bin/CopperMod.Amiga.Lightweight/release/CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "632AD55809FA90B5C2F81A9034C6FE5B1754649864CBB9D7B341EA76FF84E905"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/default-build/obj/CopperMod.Amiga.Lightweight/project.assets.json",
+      "Bytes": 24445,
+      "Sha256": "1F6003BAC0893F729A94D069839E4A3598C5D5905081CEC6E01161507217B4BC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/Default.Restore.targets",
+      "Bytes": 172,
+      "Sha256": "BF0566E2277BF82BEDD8D8DCA60DC99AA8E92EDFF2D382FC26D1321BA19F4D44"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/export-evidence.ps1",
+      "Bytes": 5333,
+      "Sha256": "57ED1D5A1B53D9B1E1E52F863F2922D438C723539F4A9E56211C3EF329C966C3"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/independent-analysis.json",
+      "Bytes": 3189,
+      "Sha256": "3198FDB3984E7C18AF49904790C0C684ED7F4FBDB40B978D73DFDB73682DF5B7"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/inspect-reference.ps1",
+      "Bytes": 1515,
+      "Sha256": "AB7141501BFD64727DF8EA7DDDA6D253C3805100095D82F8B9EE02E9F149E314"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/mutant-interior-tests.log",
+      "Bytes": 3108,
+      "Sha256": "67A5E4A37A3FE631E9230BBED4FC6C7EACED7B08DC28D8148E1B5218B0C00306"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/qualification.json",
+      "Bytes": 105651,
+      "Sha256": "9F715DF34AAF280A5E6D5E9B834E670FAD61D89BAE9912A74673F8AA326521FE"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/qualify.ps1",
+      "Bytes": 6293,
+      "Sha256": "87CDA68BA83462A4C484338D8CBB18DC442D585A9809005BFCD38A53BB17B32A"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference-inspection.log",
+      "Bytes": 319,
+      "Sha256": "950A1A6982B5916B107D867FAB403ED6235082D3B9290CAF9DF02B8B13054126"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference-native.asm",
+      "Bytes": 54886,
+      "Sha256": "1E680BF62BD93A8A6562084CE7794201560015EFBF9E107B4AEA4297C0983A26"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/Copper68k.dll",
+      "Bytes": 980480,
+      "Sha256": "20B4E1002E8F7B2994EB139E04905BE1B5AC2970C360C4E2B1F682CA14029133"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "B424D27A47E2A76612087ADF1F799FF41E3848D0A0F76DFE2696FF3AA67C28A2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperDisk.pdb",
+      "Bytes": 42876,
+      "Sha256": "03C2B549D8828094860A0B6176C7140C287985F387BBE00111BD24A63A07D4AC"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "217B17AE2148F79EB24C2798E94666AD492B768B71780D33812DECB07950E164"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120368,
+      "Sha256": "6D167E611313F1B67C662D5C06C02BFCA5F808FFCF80D4B6279255EC9B2F0902"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2653,
+      "Sha256": "2CF2AD5985F3B326C9A888FB03AF772437C6695463E05B4F16C66C85763D0875"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "664320169D13110C7987C008991FBB05169E83CB2E4632689EF1EB8D37947706"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24884,
+      "Sha256": "5ED5F9E2B9EB7464CC2C9D331A3CE6B6F75DE00F4EAD5898E0678565C7251BEA"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/reference/CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/comparison-record.json",
+      "Bytes": 206908,
+      "Sha256": "22532CBB3B696DE77EE02A822F079FBACACC12809C19269AE4C0F8E9902CB161"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-C1.stdout.log",
+      "Bytes": 333,
+      "Sha256": "EE2B4BAD9EF42511F974A272B7EE3500A82B5DF24322DFA8B95680DA1380F284"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-C2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-C2.stdout.log",
+      "Bytes": 333,
+      "Sha256": "3B743F2EDE88703F2DDD7D68CFEBD4B4E75E108EA60D91A754CF1C9E4662702C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-R1.stdout.log",
+      "Bytes": 333,
+      "Sha256": "77A028C287FAAE84F1BA14EC0E6FA0A971C74D42E8EA51C5D95CACCBA6221927"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-R2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/hires-R2.stdout.log",
+      "Bytes": 333,
+      "Sha256": "5BA9D4EC9EDF471E70A36D105C07E151494B6BDB699FA5C8E686A8D5EFDFFA4B"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-C1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "6D77B0F0D518DEDFFBAE682782DC2AD480FEEA6052B07064300DA8B16180B4AA"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-C2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-C2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "E772050EC8A9EC5FF63A3758DAF18AA941F365B12DEE7DECBA5039D572FCEBEB"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-R1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "85B02E262E1959F969181EF9DBCA408ABB36C033C3CE08D2A3D4FC61FB57D938"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-R2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lemmings-R2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "09EFAD5E700C729BEEA394E34E37F2E9ADB80C992362FCA42DC100027909C755"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-C1.stdout.log",
+      "Bytes": 327,
+      "Sha256": "3A0B6BAB894C2CF609F5D29A661E19568A9D61153B58EFF98C68F0E17D631F82"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-C2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-C2.stdout.log",
+      "Bytes": 327,
+      "Sha256": "A1DAEFFDF8DF0562DAEBF28CBFA70400A93E77C61E14A40C4EFF227451EFB940"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R1.stdout.log",
+      "Bytes": 327,
+      "Sha256": "291E167C2054A00750EF7990902E2C319EA41FFA873FCFD5E9E9D94D000C3844"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R2.stdout.log",
+      "Bytes": 327,
+      "Sha256": "3A69A67F7FD97B90C28968A48E529D2A7EF8C7C2F32F50613D6E226CC2C042B2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R3.partial.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R3.partial.stdout.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/lores-R3.stdout.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-loaded/telemetry.jsonl",
+      "Bytes": 1407263,
+      "Sha256": "D4648B9300643541E4497F248D63FED051ED581B13BC922284E1A12E8D25A79C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun/comparison-record.json",
+      "Bytes": 164898,
+      "Sha256": "B5FB996F00E7E646338E6F5A4C0A0AFDE18EDF757D4DD2A4205541A84E3B5D67"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun/lores-C1.partial.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun/lores-C1.partial.stdout.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun/lores-R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun/lores-R1.stdout.log",
+      "Bytes": 327,
+      "Sha256": "EF35669786BB550D4FBCC43CA32FA998A0EBC3B28110540F448CFEF04B3F5127"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs-rerun/telemetry.jsonl",
+      "Bytes": 40319,
+      "Sha256": "DF4B0C6E1958E4433FA6E8D81109B857FAF65833B3F5DF9F858E14E4B16CE851"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/comparison-record.json",
+      "Bytes": 164944,
+      "Sha256": "F4007014B58BFCE347C130B05F3511096F2E890D3456781F7C7A0470F0066031"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/lores-C1.partial.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/lores-C1.partial.stdout.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/lores-C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/lores-C1.stdout.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/lores-R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/lores-R1.stdout.log",
+      "Bytes": 327,
+      "Sha256": "215F421A7E0BE2F08CFEC63CE4B606B8B13D6D05E134A4581CBC2CDFA207CE84"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/retention-six-pairs/telemetry.jsonl",
+      "Bytes": 41920,
+      "Sha256": "38B12272606D2275937C90376F7503BB5BA79483F36F9D6F6768AD43E278BB95"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/setup-note.json",
+      "Bytes": 237,
+      "Sha256": "762C3307621BBAF9959B4C8D778513FB11C901D7E23887FA9CB568F49958CB8C"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/stop-after-two-rounds.ps1",
+      "Bytes": 1623,
+      "Sha256": "355FA4B84CB11B40327D19534C9B1C905F73BE610A301E72C96DC85F8E8738B2"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/vector-build.log",
+      "Bytes": 1563,
+      "Sha256": "B8A5382EB3DFFF07D12D492068FA5EBC0281319DFA27998FA23B0CE4DDFC3DB9"
+    },
+    {
+      "Path": "artifacts/hires-transparent-20261103/vector-tests.log",
+      "Bytes": 3138,
+      "Sha256": "50FB0F5F0CDA363065264F6879A58E4E0DAC86A093493D49FF81833E09559C9B"
+    },
+    {
+      "Path": "artifacts/interrupt-bookkeeping-20261102/reference-hires.log",
+      "Bytes": 331,
+      "Sha256": "6F37B3886C2064FCA9E6B1FD04216019505C084D640B7CD3093FB3BD1BB1334A"
+    },
+    {
+      "Path": "artifacts/interrupt-bookkeeping-20261102/reference-lores.log",
+      "Bytes": 325,
+      "Sha256": "FC1B4B1C716182DAD2F6CE98BD0B31F2D0FA7518FC5DA5E945F097207C78DF75"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight.Tests/LightweightCollisionTests.cs",
+      "Bytes": 9565,
+      "Sha256": "ED9FD5813E76D986B13705190D30EB7763CAC2E2815788DAE2DA3F211337304C"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight.Tests/TestResults/hires-transparent-mutant-interior-20261103.trx",
+      "Bytes": 8802,
+      "Sha256": "2A5399FB81135FB02945BEF53DF62C0737CF5C8C369904D9C316D4243BC402BB"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight.Tests/TestResults/hires-transparent-vector-20261103.trx",
+      "Bytes": 2023289,
+      "Sha256": "A6C6185E6B6B2279C95CB7233B19D53FBA97411EF74D01B42BA24386ACFA1376"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight/LightweightA500Machine.cs",
+      "Bytes": 109042,
+      "Sha256": "95FFC4C8438DF284D5299111AC03FF6F4A159B7CC4C58A4B6A1617A99AFB8189"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight/LightweightBitplanes.cs",
+      "Bytes": 20185,
+      "Sha256": "C3F0BC5E0C4862C82653BCE047D4D5CE6AF162BA43E729BD88CDBFD30BABE810"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight/LightweightSprites.cs",
+      "Bytes": 33148,
+      "Sha256": "E76BEBFD39C04A37EEA7D3212BD8A7A4BE46F15C545C213FFF2CC45C338F367D"
+    },
+    {
+      "Path": "CopperMod.Amiga.Lightweight/LightweightVideo.cs",
+      "Bytes": 43373,
+      "Sha256": "EC12258262DAA4DCBFE248E3FE731F9D22BD4CDEAC91B76592840777C3341E58"
+    },
+    {
+      "Path": "docs/engine/INTERRUPT_BOOKKEEPING_2026-11-02.json",
+      "Bytes": 68345,
+      "Sha256": "D8AFA045BF53A81CD3E738829BF8D8FE42DE1CA15519193913E0CE7C74720AE8"
+    },
+    {
+      "Path": "docs/engine/LEMMINGS_CORRECTNESS_2026-11-02.json",
+      "Bytes": 27974,
+      "Sha256": "663D84DEFAFEA783AA7353EAF50D21F35E9DBD1CAB734AFEA1F850967E7FAEA9"
+    },
+    {
+      "Path": "scripts/measure-hires-transparent-v2.ps1",
+      "Bytes": 18374,
+      "Sha256": "44B3BEDCF65E9279CA7D9A726DA2E75F9B66AD13482AAE97DB442D8269D5152E"
+    },
+    {
+      "Path": "scripts/qualification/CopperScreen.IdleBuildNodes.psm1",
+      "Bytes": 3206,
+      "Sha256": "AE77DB9F2E1D236097B7A71316AE320068867246E97B6AD9509D53A7F99CEB45"
+    }
+  ]
+}

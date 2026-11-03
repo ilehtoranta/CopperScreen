@@ -185,6 +185,29 @@ public sealed class LightweightCollisionTests
         Assert.Equal(0x8023, Peek(m));
     }
 
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void TransparentHiresSpritesStillRearmPlayfieldCollisionsAfterReadClear(bool dual)
+    {
+        using var m = Create(true, dual, 1, 0x0041);
+        // Leave CPU slots for a read inside the window, away from its scalar edge.
+        W(m, 0x100, (ushort)(0x9200 | (dual ? 0x400 : 0)));
+        m.AdvanceHardwareTo(44 * 454L + 100 * 2);
+        Assert.Equal(0x8001, Peek(m));
+
+        var cycle = m.Cycle;
+        Assert.Equal(0x8001, m.ReadWord(0xDFF00E, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.InRange(cycle - 44 * 454L, 200, 300);
+        m.AdvanceHardwareTo(cycle + 8);
+        Assert.Equal(0x8001, Peek(m));
+
+        W(m, 0x098, 0x0040); // The same raw plane now fails the match.
+        cycle = m.Cycle;
+        m.ReadWord(0xDFF00E, ref cycle, M68kBusAccessKind.CpuDataRead);
+        m.AdvanceHardwareTo(cycle + 8);
+        Assert.Equal(0x8000, Peek(m));
+    }
+
     private static ushort Peek(LightweightA500Machine m) => m.GetCustomRegister(0x00E);
 
     private static LightweightA500Machine Create(bool hires, bool dual, int code, int control, int startX = 129)

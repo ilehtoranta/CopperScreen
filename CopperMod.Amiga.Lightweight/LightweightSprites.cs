@@ -453,6 +453,19 @@ internal sealed partial class LightweightSprites
         return result;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool TryAdvanceTransparentHiresCck(int line, int x)
+    {
+        // Dirty collision/register state and either comparator position still
+        // require the ordinary per-position path, even with no shifting sprite.
+        if (_outputLine != line || x <= _lastOutputX || _dirtyMask != 0 ||
+            _shiftingMask != 0 || _nextStart <= x + 1)
+            return false;
+
+        _lastOutputX = x + 1;
+        return true;
+    }
+
     // Resolve one lores sprite sample against two hires playfield samples,
     // then advance the sprite exactly once. The ordinary lores path is unchanged.
     internal void ComposeHiresColorIndexes(int line, int x, int firstPlayfield,

@@ -1926,10 +1926,10 @@ internal sealed partial class MainWindow : Window
 
 		foreach (var field in new[] { _pseudoFastRamBox, _pseudoFastBaseBox, _realFastBaseBox }) field.IsReadOnly = true;
 		_rtgVramBox.IsEnabled = false;
-		layout.Children.Add(SettingsNote("Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. Display chips: OCS Denise, ECS Denise or AGA Lisa. Fast RAM uses standard power-of-two sizes from 512 KiB to 8 MiB with 24-bit CPUs, or up to 1 GiB with full 68020/030/040 CPUs. More than 8 MiB requires Kickstart 3.x. Kickstart assigns its address; changing the size requires a restart. Optional RTC uses host local time; guest clock changes last for this session. RTG is not yet available."));
 		layout.Children.Add(CreateSettingsGroupPair(
 			CreateSettingsGroup("Chipset and memory", chipAndPseudoFast),
 			CreateSettingsGroup("Expansion memory and RTC", realFast)));
+		layout.Children.Add(SettingsHelp("Memory help", "Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. Display chips: OCS Denise, ECS Denise or AGA Lisa. Fast RAM uses standard power-of-two sizes from 512 KiB to 8 MiB with 24-bit CPUs, or up to 1 GiB with full 68020/030/040 CPUs. More than 8 MiB requires Kickstart 3.x. Kickstart assigns its address; changing the size requires a restart. Optional RTC uses host local time; guest clock changes last for this session. RTG is not yet available."));
 
 		return CreateScrollableSettingsPage(layout);
 	}
@@ -2023,9 +2023,10 @@ internal sealed partial class MainWindow : Window
             actions.Children.Add(saveAdf);
 			actions.Children.Add(CreatePanelButton("Discard and eject", () => _ = DiscardAndEjectDiskAsync(index)));
 			driveMedia.Children.Add(CreateSettingsRow("", actions));
+			driveMedia.Children.Add(SettingsWriteWarning(writeProtect, "Changes stay in memory. Save ADF to keep them.", $"DF{driveIndex} write warning", box));
 		}
 
-        layout.Children.Add(SettingsNote("DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. ADF writes stay in memory: use Save ADF before replacing a disk or closing the app. HD drives accept both DD and HD media. Changing the connected drive count or drive type requires a restart."));
+        driveMedia.Children.Add(SettingsHelp("Disk format help", "DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. Save ADF before replacing a writable disk or closing the app. HD drives accept DD and HD media. Changing the connected drive count or drive type requires a restart."));
         layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
         layout.Children.Add(CreateHardfileSettings());
         layout.Children.Add(CreateSharedFolderSettings());
@@ -2041,6 +2042,7 @@ internal sealed partial class MainWindow : Window
 		_pixelAspectModeBox.SelectionChanged += (_, _) => StagePresentationSettings();
 		_lacedPresentationModeBox = AddComboSetting(display, "Laced display", ["CRT phosphor", "Stable weave"], markRestart: false);
 		_lacedPresentationModeBox.SelectionChanged += (_, _) => StagePresentationSettings();
+		display.Children.Add(SettingsHelp("Display help", "LCD crisp uses 1:1 hires and 1:2 superhires pixels. CRT-correct aspect follows the proportions of a CRT display. For interlaced video, CRT phosphor blends fields with persistence; Stable weave combines alternating fields for a steady image."));
 		layout.Children.Add(CreateSettingsGroup("Video Output", display));
 
 		return CreateScrollableSettingsPage(layout);
@@ -2056,13 +2058,13 @@ internal sealed partial class MainWindow : Window
 		var layout = CreateSettingsPageLayout();
 
 		var ports = CreateSettingsGroupForm();
-		ports.Children.Add(SettingsNote("Port 1 is usually the mouse. Most games use a joystick in Port 2. Inputs can also be changed from the main window's Inputs menu."));
 		_port1ControllerBox = AddComboSetting(ports, "Port 1 · Mouse / joystick", [], markRestart: false);
 		ConfigureControllerChoices(_port1ControllerBox, 1);
 		_port1ControllerBox.SelectionChanged += (_, _) => StageInputSettings();
 		_port2ControllerBox = AddComboSetting(ports, "Port 2 · Main joystick", [], markRestart: false);
 		ConfigureControllerChoices(_port2ControllerBox, 2);
 		_port2ControllerBox.SelectionChanged += (_, _) => StageInputSettings();
+		ports.Children.Add(SettingsHelp("Input help", "Port 1 is usually the mouse. Most games use a joystick in Port 2. Inputs can also be changed from the main window's Inputs menu. A mouse cannot be assigned to Port 2."));
 		layout.Children.Add(CreateSettingsGroup("Input ports", ports));
 
 		var profile = CreateSettingsGroupForm();
@@ -2418,7 +2420,7 @@ internal sealed partial class MainWindow : Window
 			_profileIdBox.Text = _settingsDraft.Id;
 			_profileNameBox.Text = _settingsDraft.DisplayName;
 			_profileDescriptionBox.Text = _settingsDraft.Description;
-			_kickstartSourceBox.SelectedItem = _settingsDraft.KickstartSource.ToString();
+			RefreshBootMethodSelector(_kickstartSourceBox);
 			_kickstartRomBox.Text = _settingsDraft.KickstartRomPath ?? string.Empty;
 			_cpuBackendBox.SelectedItem = _settingsDraft.CpuBackend.ToString();
 			_engineBox.SelectedItem = _settingsDraft.Engine.ToString();
@@ -2501,6 +2503,7 @@ internal sealed partial class MainWindow : Window
 		if (_settingsStatus == null || _updatingSettingsUi) return;
 		RememberSettingsEdits();
 		ApplyLiveSettings();
+		UpdateSettingsBootHelp();
 		var valid = CanStartFromSettings(out var error);
 		_settingsRevertButton.IsVisible = _runtime != null;
 		var pendingSettings = false;
@@ -2510,14 +2513,15 @@ internal sealed partial class MainWindow : Window
 		UpdateMachineControls();
 		_settingsStartButton.IsEnabled = valid && !_applyingSettings;
 		_settingsStartButton.Content = _runtime == null ? "Start Amiga" : "Restart Amiga";
-		_settingsStatus.Foreground = valid && _settingsStartupError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
-		if (valid && _settingsStartupError == null && _runtime != null && ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings))
+		var statusError = _settingsStartupError ?? _recentSession.LastError;
+		_settingsStatus.Foreground = valid && statusError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
+		if (valid && statusError == null && _runtime != null && ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings))
 			_settingsStatus.Foreground = new SolidColorBrush(Color.Parse("#FFC477"));
-		_settingsStatus.Text = _settingsStartupError ?? (!valid ? error : _runtime == null
-			? "Settings saved. Changes take effect when you start the Amiga."
+		_settingsStatus.Text = statusError ?? (!valid ? error : _runtime == null
+			? "Saved · Applies on start"
 			: ReadSettingsDraft().NeedsRestartComparedWith(_committedSettings)
-				? "Restart Amiga required: " + ReadSettingsDraft().RestartChangeSummary(_committedSettings) + ". Other changes apply immediately. Settings saved."
-				: "Changes apply immediately. Settings saved.");
+				? "Saved · Restart required: " + ReadSettingsDraft().RestartChangeSummary(_committedSettings)
+				: "Saved · Changes apply immediately");
 		UpdateWelcomeStatus(valid, error);
 		UpdateRestartNotice(valid);
 		UpdateShellStatus(_latestState);
@@ -2532,12 +2536,12 @@ internal sealed partial class MainWindow : Window
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenCopperStartRom.DescriptionFor(draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa) : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental · no DOS or Workbench." : draft.RomVersion switch
+			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart ROM ready · experimental" : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental" : draft.RomVersion switch
             {
-                KickstartVersion.Kickstart20 => "A500+ Kickstart 2.04 ROM selected.",
-                KickstartVersion.Kickstart30 => "A1200 Kickstart 3.0 ROM selected.",
-                KickstartVersion.Kickstart31 => "A500 Kickstart 3.1 ROM selected.",
-                _ => "Kickstart 1.3 ROM selected."
+                KickstartVersion.Kickstart20 => "Kickstart 2.x detected · compatibility may vary",
+                KickstartVersion.Kickstart30 => "Kickstart 3.0 detected · compatibility may vary",
+                KickstartVersion.Kickstart31 => "Kickstart 3.1 detected · compatibility may vary",
+                _ => "Kickstart 1.3 detected · compatibility may vary"
             });
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
 			if (unavailable == null && romError == null && draft.KickstartSource == CopperScreenKickstartSource.CopperStart && draft.HardDrives.Count == 1)
@@ -2682,18 +2686,6 @@ internal sealed partial class MainWindow : Window
 		draft.Id = _profileIdBox.Text?.Trim() ?? string.Empty;
 		draft.DisplayName = _profileNameBox.Text?.Trim() ?? string.Empty;
 		draft.Description = _profileDescriptionBox.Text?.Trim() ?? string.Empty;
-		var kickstartSource = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem);
-		if (kickstartSource != draft.KickstartSource)
-		{
-			draft.RomVersion = kickstartSource switch
-			{
-				CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.Kickstart13Rom => KickstartVersion.Kickstart13,
-				CopperScreenKickstartSource.Kickstart31Rom => KickstartVersion.Kickstart31,
-				CopperScreenKickstartSource.DiagRom => KickstartVersion.Kickstart20,
-				_ => draft.RomVersion
-			};
-		}
-		draft.KickstartSource = kickstartSource;
 		draft.KickstartRomPath = string.IsNullOrWhiteSpace(_kickstartRomBox.Text) ? null : _kickstartRomBox.Text.Trim();
 		draft.CpuBackend = ParseCpuSelection(_cpuBackendBox.SelectedItem);
 		draft.Engine = _engineBox.SelectedItem switch
@@ -3226,16 +3218,18 @@ internal sealed partial class MainWindow : Window
 		UpdateWelcomeStatus(false, error);
 	}
 
-	private static CopperScreenKickstartSource ParseKickstartSourceSelection(object? value)
+	private CopperScreenKickstartSource ParseKickstartSourceSelection(object? value)
 	{
 		return value?.ToString() switch
 		{
-			string source when string.Equals(source, "KickstartRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.KickstartRom,
+			string source when string.Equals(source, "KickstartRom", StringComparison.OrdinalIgnoreCase) =>
+                CopperScreenBootMethods.Method(_settingsDraft) == CopperScreenBootMethod.KickstartRom ? _settingsDraft.KickstartSource : CopperScreenKickstartSource.KickstartRom,
 			string source when string.Equals(source, "Kickstart13Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart13Rom,
 			string source when string.Equals(source, "Kickstart31Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart31Rom,
 			string source when string.Equals(source, "MinimalDiskBoot", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.MinimalDiskBoot,
 			string source when string.Equals(source, "DiagRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.DiagRom,
-			_ => CopperScreenKickstartSource.CopperStart
+			string source when source == "CopperStart" => CopperScreenKickstartSource.CopperStart,
+            _ => _settingsDraft.KickstartSource
 		};
 	}
 

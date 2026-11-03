@@ -1,0 +1,3633 @@
+{
+  "SchemaVersion": 1,
+  "Date": "2026-11-03",
+  "Protocol": "hires-mode-cleanup-evidence-v1",
+  "SourceHead": "214d58a37d67c73256cd1fc2192d19da040ec967",
+  "Implementation": "Select single/dual mode once for the ordinary visible hires CCK; reuse the original pair compositor for both sprite positions",
+  "Guidance": "Root AGENTS.md strengthened with Lightweight execution principles; existing ownership/build/measurement boundaries retained",
+  "CacheAdded": false,
+  "CpuDependencyChanged": false,
+  "InterruptSamplingChanged": false,
+  "GoldenChanged": false,
+  "ProductionInstrumentationAdded": false,
+  "ProductionBuild": {
+    "Result": "PASS",
+    "Warnings": 0,
+    "Errors": 0,
+    "Command": "dotnet build CopperScreen.slnx -c Release --artifacts-path artifacts/lightweight-hires-20261103/build -m:1"
+  },
+  "FocusedTests": {
+    "Passed": 174,
+    "Failed": 0,
+    "Skipped": 0,
+    "Classes": [
+      "LightweightHiresTests",
+      "LightweightDualPlayfieldTests",
+      "LightweightCollisionTests",
+      "LightweightVideoTests",
+      "LightweightEcsDisplayTests",
+      "LightweightInterruptSamplingTests"
+    ],
+    "FullEngineSuiteRerun": false
+  },
+  "NativeCaptureRuns": [
+    {
+      "Mode": "normal",
+      "FilesCompared": 160,
+      "Mismatches": 0,
+      "RawResult": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=0 frames=18120 completed=18120 fps=295,79 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x72FF28A9A6D931E7 pixels=284204 audioSamples=1924 pcm=real allocated=21197872 adf=True unsupported=none",
+      "ThroughputExcluded": true
+    },
+    {
+      "Mode": "scalar",
+      "FilesCompared": 160,
+      "Mismatches": 0,
+      "RawResult": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=scalar warmup=0 frames=18120 completed=18120 fps=288,35 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x72FF28A9A6D931E7 pixels=284204 audioSamples=1924 pcm=real allocated=21196528 adf=True unsupported=none",
+      "ThroughputExcluded": true
+    }
+  ],
+  "NativeCaptureFilesMatched": 320,
+  "GeneratedCode": [
+    {
+      "Role": "reference",
+      "Tier1Bytes": 2323,
+      "DualModeTests": 2,
+      "StackReservationBytes": 136,
+      "Calls": 12,
+      "ConditionalBranches": 72
+    },
+    {
+      "Role": "candidate",
+      "Tier1Bytes": 2238,
+      "DualModeTests": 1,
+      "StackReservationBytes": 120,
+      "Calls": 12,
+      "ConditionalBranches": 71
+    }
+  ],
+  "GeneratedCodeLimits": "Selected synthetic-hires Tier1 body under ordinary runtime tiering/PGO defaults. Workload-specific code size, branch and stack counts are not an FPS result. Earlier shared-local prototype and an appended-output inspection are excluded.",
+  "ExcludedPrototype": {
+    "Directory": "artifacts/lightweight-hires-20261103/prototype-shared-setup",
+    "Retained": false,
+    "Reason": "Keeping shared setup locals live across sprite calls increased the inspected body from 2323 to 2499 bytes and stack reservation from 136 to 152 bytes",
+    "NativeTimingIncluded": false
+  },
+  "NativeComparison": {
+    "Status": "VALID_NATIVE_COMPARISON",
+    "Protocol": "lightweight-hires-mode-v1",
+    "ReferenceDirectory": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference",
+    "CandidateDirectory": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate",
+    "CommonExpectedIdentity": "engine=lightweight-a500 workload=image executionMode=Interpreter cpuMode=conservative-batch warmup=14520 frames=3600 completed=18120 cycle=2574756906 cpu=0x0BC2B7554DA315AB hardware=0x8F41668D6DF17C3C output=0x36816A410DDEEE52 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=True unsupported=none",
+    "Statistics": {
+      "Pairs": 6,
+      "DegreesOfFreedom": 5,
+      "MeanReferenceFps": 328.73999999999995,
+      "MeanCandidateFps": 329.46166666666664,
+      "PairedThroughputChangePercent": 0.2172252752597137,
+      "ThroughputTwoSided95LowerPercent": -0.8975843791897753,
+      "ThroughputTwoSided95UpperPercent": 1.3445754975436763,
+      "PairedFrameTimeChangePercent": -0.2167544298528279,
+      "FrameTimeOneSided95UpperPercent": 0.6620704125449128
+    },
+    "Pairs": [
+      {
+        "Pair": 1,
+        "ReferenceFps": 327.64,
+        "CandidateFps": 331.47,
+        "LogFrameTimeRatio": -0.011621863145792131
+      },
+      {
+        "Pair": 2,
+        "ReferenceFps": 328.83,
+        "CandidateFps": 326.37,
+        "LogFrameTimeRatio": 0.007509192794640741
+      },
+      {
+        "Pair": 3,
+        "ReferenceFps": 325.71,
+        "CandidateFps": 324.67,
+        "LogFrameTimeRatio": 0.003198133049697839
+      },
+      {
+        "Pair": 4,
+        "ReferenceFps": 327.15,
+        "CandidateFps": 332.79,
+        "LogFrameTimeRatio": -0.017092879102930347
+      },
+      {
+        "Pair": 5,
+        "ReferenceFps": 331.32,
+        "CandidateFps": 332.72,
+        "LogFrameTimeRatio": -0.004216619704592994
+      },
+      {
+        "Pair": 6,
+        "ReferenceFps": 331.79,
+        "CandidateFps": 328.75,
+        "LogFrameTimeRatio": 0.009204655172458531
+      }
+    ],
+    "Telemetry": {
+      "Intervals": 725,
+      "Violations": 0,
+      "CompetingJobIntervals": 0,
+      "PeakSelectedOther": 9.090909090909083,
+      "PeakSibling": 12.345679012345679,
+      "PeakPackageOther": 30.087786038845284
+    },
+    "CausalPerformanceConclusionAllowed": true,
+    "FullThreeWorkloadAcceptance": false,
+    "Priority": "Normal",
+    "Cpu": "AMD Ryzen 5 5600X 6-Core Processor             ",
+    "LogicalProcessor": 2,
+    "ProtectedCpus": [
+      2,
+      3
+    ],
+    "PowerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Tasapainotettu)",
+    "Runtime": "10.0.12",
+    "SourceAndFrozenFilesUnchanged": true,
+    "SampleTrimming": false
+  },
+  "RemainingCandidates": [
+    "Unused Copper68k prefetch publication-context copies, through the maintained producer/package boundary",
+    "Active OCS bitplane control checks and constant mask specialization"
+  ],
+  "EvidenceFiles": [
+    {
+      "Path": "C:\\Data\\ROM\\Kickstart_13.rom",
+      "Bytes": 262144,
+      "Sha256": "EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53"
+    },
+    {
+      "Path": "C:\\Data\\TestImages\\Lemmings (1991)(Psygnosis)(Disk 1 of 2)[cr SR].zip",
+      "Bytes": 607191,
+      "Sha256": "5FC56B436722688BA37836E273A3A1C84D724235A91B39272768FF3E4CAC0A59"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\.version",
+      "Bytes": 51,
+      "Sha256": "5821D4886CE8720FEA8A95A798A003E0A31197DE1EFC4FD22FA6A008EECFA3A8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clretwrc.dll",
+      "Bytes": 317736,
+      "Sha256": "7A2186201C87BBC597A1B8B26FACD88E68F03BE4C4A4211FD65CC6595C72E45B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrgc.dll",
+      "Bytes": 674088,
+      "Sha256": "65E2F97D263824BFB9F75F92E66EBD22229AAF3A5FADDEF9345811D856C8840E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrgcexp.dll",
+      "Bytes": 711464,
+      "Sha256": "23A8050EC68542989B6DA6CC906A90FAF8A14E6416FD2871A260B781B1C374AE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\clrjit.dll",
+      "Bytes": 2092328,
+      "Sha256": "0749D8FC8E944D0576E1BB47120F87ADD8F875E5CD8968995633063FC79256F6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+      "Bytes": 4614992,
+      "Sha256": "128AEE8C62A673D64739E585E3876B61133571CEC83A46240A62581D5465639B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\createdump.exe",
+      "Bytes": 71552,
+      "Sha256": "315307159925D33EB604186A512901D080ECFC4CD8B8198030A7D398C6AF2B0B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\hostpolicy.dll",
+      "Bytes": 378664,
+      "Sha256": "E92A2E71EEEAF7C574E905935B3E3724EF29BADE44317659DBE06F505E99DBE0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.CSharp.dll",
+      "Bytes": 980776,
+      "Sha256": "2000912F2FC52E0C64ED893D79F4E7B143502540FB7170B5AE5FCEA7099BA431"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.DiaSymReader.Native.amd64.dll",
+      "Bytes": 2377016,
+      "Sha256": "70E4B89978CE57EF87B28F4921F3140C383B04AA96E7F3BDB3C4EBB898FD8A72"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.NETCore.App.deps.json",
+      "Bytes": 29720,
+      "Sha256": "DB6BF68420F350411629571D31AEA9232F05E9464E0F48F306041EFD0971615D"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.NETCore.App.runtimeconfig.json",
+      "Bytes": 54,
+      "Sha256": "31C8CE517CDDC0DEACEB26B5DFF6BA5DF55AC4E06E9AFD0026E51FACA23DC8A4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.VisualBasic.Core.dll",
+      "Bytes": 1193768,
+      "Sha256": "2666B24EB6E295476B44ABD057EA250FD5957DB9C1C7ADEE6A223A747DDFE3D2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.VisualBasic.dll",
+      "Bytes": 17192,
+      "Sha256": "E192508ADDE6A758138A5A8E28998DCCB64E7F45EAF30D8AB3564F87749028B1"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.Win32.Primitives.dll",
+      "Bytes": 15656,
+      "Sha256": "6C21472B0AE2F9B484A97614FAD5485A22F18F9F19EE1ADB9CEB3ED8DDB072D7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\Microsoft.Win32.Registry.dll",
+      "Bytes": 116520,
+      "Sha256": "76849CFDE4369F3AE93E28261FE5E1010DBF1332F7DA95C98543CBA9B03961C0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscordaccore_amd64_amd64_10.0.1226.42308.dll",
+      "Bytes": 1356640,
+      "Sha256": "86C29A7B945525135DE16C3DCB71E3B8517848C459CBB21395B352D4E6BBA09C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscordaccore.dll",
+      "Bytes": 1356640,
+      "Sha256": "86C29A7B945525135DE16C3DCB71E3B8517848C459CBB21395B352D4E6BBA09C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscordbi.dll",
+      "Bytes": 1237888,
+      "Sha256": "753E92805F3886221F56DCFC07191AD7EE44235BF689DB0490BDF777F25E9175"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscorlib.dll",
+      "Bytes": 59728,
+      "Sha256": "B698595367A7D4FA57CCACAB73751FDE0BB8F2415345C62CDFE7CED890DA2C0C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\mscorrc.dll",
+      "Bytes": 133968,
+      "Sha256": "F0D8C7491D4659A4C5A4C00615255A60E05634F311162C2775A51E03C070C9E0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\msquic.dll",
+      "Bytes": 536344,
+      "Sha256": "B7158D427B01C70483BB3D80C5211E387DD98E9471C8A70E4484D449DE9157E8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\netstandard.dll",
+      "Bytes": 100648,
+      "Sha256": "3DC81DBC9DACD28261632C94410859EDA24C2DB50CD6C14309CBB2A434B50C57"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.AppContext.dll",
+      "Bytes": 15144,
+      "Sha256": "D9DD9FA44E019F27172D6B2662E2B6038F48C270912AC8AAE53D4D909DA7E9BE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Buffers.dll",
+      "Bytes": 15144,
+      "Sha256": "A1A35F5524E2F831D08CA55F702FBDDCB8C6DFECD264F0F563D81A1C8B8280BD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.Concurrent.dll",
+      "Bytes": 231248,
+      "Sha256": "082F4BC0DA1141EB65111B6DA633D75624ADFB7BB067D7EE90C5622C8B30885B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.dll",
+      "Bytes": 296744,
+      "Sha256": "DF6F2037EABEE28100184E92F7536427BA2F086C1110629804D466B124BC4D54"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.Immutable.dll",
+      "Bytes": 976680,
+      "Sha256": "B527DD7B2BEB82C22AA39787298CBEB33F3EAC9EB9B83A0F0271353421DB28DB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.NonGeneric.dll",
+      "Bytes": 104232,
+      "Sha256": "AA4D5216D066C91CB489F63C6CBFCAF1F47B6E74E070DB45639D3460454FC60B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Collections.Specialized.dll",
+      "Bytes": 104272,
+      "Sha256": "E31AF1F866E880844E027BE59F545B9A6B34108E0B0680EBE3FBC19A53070819"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.Annotations.dll",
+      "Bytes": 198480,
+      "Sha256": "E3BE2D35D81E6475C64110CFC099895B71DF22C8B46A18C2D7C76A913B8BA903"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.DataAnnotations.dll",
+      "Bytes": 16720,
+      "Sha256": "D40E8C7062E6B9CE11BA83EAB3D26BE0EEC8066B99970EA88B8E87FB75F411BD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.dll",
+      "Bytes": 30544,
+      "Sha256": "E3B6F75864EE944898540937C1F300E04F44A1B2729516F0BBF948589A8B14B2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.EventBasedAsync.dll",
+      "Bytes": 46888,
+      "Sha256": "CC84FE814EF5E58271D83193E328F8EC220EFD4696D90AF9A7C4690C10451495"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.Primitives.dll",
+      "Bytes": 79656,
+      "Sha256": "1E2451184C287409EA25ACDE3C90F25950BF34D16458A6E52A94CA4292434F62"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ComponentModel.TypeConverter.dll",
+      "Bytes": 767784,
+      "Sha256": "10DAE312A6697718F8CE3DFCDB17D6AE4B74687C765D74D50DE8A8E69E08F5E7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Configuration.dll",
+      "Bytes": 19240,
+      "Sha256": "3952A72E1F18774F16952B46C20E80ED2BC601A06ECA01F33FA924C738022A9C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Console.dll",
+      "Bytes": 169808,
+      "Sha256": "3B85DAF02A3D9ED99B84BB1C639FE8B1CED46D8D157FA56F525F6B8C5BE43B3E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Core.dll",
+      "Bytes": 23336,
+      "Sha256": "AC23FAF1B37FA49F1B117BAAD951A65609E799A6E669A6DF06D3552677E0C086"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Data.Common.dll",
+      "Bytes": 2770728,
+      "Sha256": "66BDD62047EE460E2CE2C33D15DD1173AC97997B2745864A905179594F821ACC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Data.DataSetExtensions.dll",
+      "Bytes": 15656,
+      "Sha256": "AEEAE0755C8C7F6747765CDF82FA43182E320E97F2035E3A0A19F21905E6C113"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Data.dll",
+      "Bytes": 25424,
+      "Sha256": "49F52958A2A6E461D0FD7A47E54A199EB263C69ECFCC0FC684B73B5918EBF466"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Contracts.dll",
+      "Bytes": 16208,
+      "Sha256": "6C05CACD9B61B08AE75F2D783CC402B0B5FC848E3D68C29C10B93897CC083E8B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Debug.dll",
+      "Bytes": 15656,
+      "Sha256": "8B160FFE7518588BF64E13C01C6DCB2EF504D64F38BBF0F198D31E7B698DB92C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.DiagnosticSource.dll",
+      "Bytes": 501544,
+      "Sha256": "6267C1BD1BDF2BDD4B5748B885B0ADCDA10F18697ADFEA8488A19A009AD44FDB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.FileVersionInfo.dll",
+      "Bytes": 46928,
+      "Sha256": "E94F158142E93834DEC3100BDE3313935517D549FF36C65819A06D3104DEC427"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Process.dll",
+      "Bytes": 329552,
+      "Sha256": "51A57FBE918F8B68930C090792B718FC0850EA12DA869D50B97A3796AF29A740"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.StackTrace.dll",
+      "Bytes": 46888,
+      "Sha256": "8F6397C1E2BA9B8B8BFA317962151B5035049CE8D6B3575E5027A0D0EEACC797"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.TextWriterTraceListener.dll",
+      "Bytes": 67368,
+      "Sha256": "1BF165CEE916A854E1150F489E4348CE94755359D5FCDCC0BC2BBBE6A7102BDD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Tools.dll",
+      "Bytes": 15144,
+      "Sha256": "841C5E2B6C171FA9AAFF0FC6295F3FBC93DC5DCAB44118B62F1C942BB674AFF2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.TraceSource.dll",
+      "Bytes": 141096,
+      "Sha256": "8445C7F1BBAAE6CFFDE60E2C9A8753FAAA5100255FBE31D0A1927D9D9BB7F194"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Diagnostics.Tracing.dll",
+      "Bytes": 16208,
+      "Sha256": "9563D5EEC35F94D13A5E62EAA9535DBE0E9EA474F055DA132FB8AF46B0B01263"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.dll",
+      "Bytes": 50472,
+      "Sha256": "EF135F0BDA0C41E142FDBD67B93E5AA7911916CB250F7DF302F4151A3BBFA380"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Drawing.dll",
+      "Bytes": 20304,
+      "Sha256": "585A8DA9952D715F8DE7A7B1879B59D68FF8608B92F6ED1C5F0E1D251180D3C6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Drawing.Primitives.dll",
+      "Bytes": 132944,
+      "Sha256": "17585B32CA91BAC8CCFF2EF1C6DDF62EE9EA5EFC552928C3A9D1B868394246E9"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Dynamic.Runtime.dll",
+      "Bytes": 16168,
+      "Sha256": "C0EAC30C791DB8C1A2B50B61C50D029F4DDD0EADFDD35433745001688A3E7466"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Formats.Asn1.dll",
+      "Bytes": 239440,
+      "Sha256": "A163FE5F96D1689F1BC1AC531B38C3ABA95792AC7DD52231D325D658947FBCFD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Formats.Tar.dll",
+      "Bytes": 272168,
+      "Sha256": "44C9984F269A158915195FD32007F22C3BB692DCFEB933CDA8EA45A3AC6CD1CE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Globalization.Calendars.dll",
+      "Bytes": 15656,
+      "Sha256": "E0F3F3F6E4ACC7B6755782FED5CB075ECF70BEEE4FC5D404579AE99BC0883EF2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Globalization.dll",
+      "Bytes": 15696,
+      "Sha256": "66902CFFD057673B4B77AA68FAF80D33FFA4C94510E61DB2A067943CC53B7702"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Globalization.Extensions.dll",
+      "Bytes": 15144,
+      "Sha256": "BE0390557CC72078A7217CF94FD44B9AB66AA30838C00A92AA78C62469C44AA0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.Brotli.dll",
+      "Bytes": 83752,
+      "Sha256": "0A59A95787EE15784D73079FDD5DC555B78659A6C560B6CBBF0D7452E638DF89"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.dll",
+      "Bytes": 419624,
+      "Sha256": "C942747F84B730887090F5E0CF86D164C0EE402E524DCE2750E06A6DF48513FB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.FileSystem.dll",
+      "Bytes": 15184,
+      "Sha256": "4AEEC2C0189F73BA8122F05C0D759008DDAE1A8873B167CC8A558D53F2AF80E1"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.Native.dll",
+      "Bytes": 937256,
+      "Sha256": "4D174B78AA8B3516C7E3CEC0355DFE9AE570894055C377D2E5565D077A9A7A1E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Compression.ZipFile.dll",
+      "Bytes": 100176,
+      "Sha256": "2DA76EB281740BE485B5637DA8C60FE0CE12BC2848D1A1A81CE144FA74313E18"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.dll",
+      "Bytes": 15656,
+      "Sha256": "388400CCB189B819D6EC5F1EF70710A39641D93ED5B870FC9324866B75DFB78B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.AccessControl.dll",
+      "Bytes": 104232,
+      "Sha256": "F7F9ED6CDAB35274711E9345266784EC332AE8040DB184D141C70E7941FBBEC5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.dll",
+      "Bytes": 15656,
+      "Sha256": "C251F33B29382C47B773D907463EDD9FE978A06E39EFD5670EF3B3B1D4F8C2B7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.DriveInfo.dll",
+      "Bytes": 55120,
+      "Sha256": "0A7F3DD2FB6147A3FC046AEAC8501D764EFFE5A3D8CFA56D2B244AA50B874B98"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.Primitives.dll",
+      "Bytes": 15144,
+      "Sha256": "D3B21B8B38E48C6B4D1CB5CFE9ADFE4ABAD7B3353601FEBD3C7E4027F9EF9C6B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.FileSystem.Watcher.dll",
+      "Bytes": 87848,
+      "Sha256": "8AB1704E4BD171056EC5A11E886D5199D05A641C6D0233C53D4766BF30328DD3"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.IsolatedStorage.dll",
+      "Bytes": 87848,
+      "Sha256": "2272A8BDE18ED0E7C9E54ECE9B849B9BE76C90B978909D2B2FC94CF0CCBCE427"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.MemoryMappedFiles.dll",
+      "Bytes": 83752,
+      "Sha256": "6E8B281ECB2F0F5E7AAD3980F61D8812CAA6B37884737F542F95410A76663E0E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Pipelines.dll",
+      "Bytes": 190248,
+      "Sha256": "EE9F0FD6C659F50799AFD103C6ED9C5E408967E28DFA059BDDF4B0A3FD2557DD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Pipes.AccessControl.dll",
+      "Bytes": 15656,
+      "Sha256": "1102F25A6E88F2FAE81E4CD3628D8EF826F847B9C9B6A4D32FF8B37E0300DA35"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.Pipes.dll",
+      "Bytes": 165712,
+      "Sha256": "3804F9992861122E60990B0765D0B50B33CDC2E4D89D26D9DBF8641D1D0134A2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.IO.UnmanagedMemoryStream.dll",
+      "Bytes": 15696,
+      "Sha256": "AD6A5F859589E1951103A00F45566DA079CF87BD8B03F0C6AD985A6F39F19C5A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.AsyncEnumerable.dll",
+      "Bytes": 1292072,
+      "Sha256": "925208E8AC40AC3F7B988ABA6CCBBB58ADAC38AD1876A7D97EE137BE6C21A653"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.dll",
+      "Bytes": 698192,
+      "Sha256": "284D38945B6E92E847129BD28AF458B19818D0F2181F79882888AB2003F4C519"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.Expressions.dll",
+      "Bytes": 3639080,
+      "Sha256": "8830F4A6A6982F53CFBB54F992858EE36B4994A6FF6E6078C39627E77BEF282F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.Parallel.dll",
+      "Bytes": 775976,
+      "Sha256": "AA6068E3D8F6B2E492CC63DCAAD6B02942EDBAE445CB2B88C24F1850B25C49F5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Linq.Queryable.dll",
+      "Bytes": 182056,
+      "Sha256": "B3B3A9C1B87A51DACD46A3F9EC392C5D05E449152D44D6BD495DF0994350E2FA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Memory.dll",
+      "Bytes": 161576,
+      "Sha256": "F8F9D38EFD6B0DE30954D6BF1F353E9617BFB36D3D245C013A3B12BE9F6BD88A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.dll",
+      "Bytes": 17192,
+      "Sha256": "481B38C912F8779B3510CD00F079E45096EA22B6DEFDAAB66780D5AC3AE6986A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Http.dll",
+      "Bytes": 1746768,
+      "Sha256": "B98ED0CB80DD54C33FC049F33AF5448710752155BBD5CC8CBCD932E01F066801"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Http.Json.dll",
+      "Bytes": 128848,
+      "Sha256": "A9FE81BA3C048F9977E0099800EEFD570A49BE723C555725DA57BA797C92B4E0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.HttpListener.dll",
+      "Bytes": 534312,
+      "Sha256": "3DFE11FB30C5F84C911D9562BE6C2037113CD8976EF2DEF3550AC415AE58955B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Mail.dll",
+      "Bytes": 481064,
+      "Sha256": "B585A55EE67C80D7F02A84D50D626D279C7AA77FD3E38206B434BD20C181EEDC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.NameResolution.dll",
+      "Bytes": 124712,
+      "Sha256": "E786C0940F5322F0AD6E8E34E7B582E5B050DF0FB2230329325307E61BFD994C"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.NetworkInformation.dll",
+      "Bytes": 157520,
+      "Sha256": "7E8791833EB2D0AEA77B119FED3CAB8BF501F6A553155CC1C4E5B1C02F65593B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Ping.dll",
+      "Bytes": 91984,
+      "Sha256": "06BB307343DB955A312634D00BA5E097CF5168A901284437592C28D780804E33"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Primitives.dll",
+      "Bytes": 210728,
+      "Sha256": "4DBB41A178EF013A898327152ECCD146228DD2EB83859B9BB36078333B41F0F1"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Quic.dll",
+      "Bytes": 358224,
+      "Sha256": "AF5B52CDEE62D014AF677C411530A3FDE5C1C368ADECB8F83DCFE9246E8BBE73"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Requests.dll",
+      "Bytes": 374568,
+      "Sha256": "ED82D9D0B7942B2B02C5744A4591FBE2316879618ADFC5660C9F111F814155F2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Security.dll",
+      "Bytes": 665424,
+      "Sha256": "A78BD713E807729F15B0E085C67FD6CBFEFA85736A2618512D4FF1212759EBA5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.ServerSentEvents.dll",
+      "Bytes": 83752,
+      "Sha256": "C0B1944020D0E5688B90FBA9F29209E367674E29D2020F700C302994D5417EDA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.ServicePoint.dll",
+      "Bytes": 15144,
+      "Sha256": "84FA83CD96E62FDA02991B8A8E99FA1C7B3AC08807B04F7486A896CFE6B4A760"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.Sockets.dll",
+      "Bytes": 530216,
+      "Sha256": "645C56D637CE15976998119E50722A911315682CE141B4AAB98874CE1B063F3A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebClient.dll",
+      "Bytes": 165672,
+      "Sha256": "DEFA7BBF90C77ED01D6ADD53F678E4ADFBCF97F3B1152AFFEC06E652D327F1A2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebHeaderCollection.dll",
+      "Bytes": 63312,
+      "Sha256": "74D66F776B4C15936A7B887F47CEB8BF277DBE82E71A78DD3EA5D02502B081E7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebProxy.dll",
+      "Bytes": 42832,
+      "Sha256": "408E3DAABB3F42B4F1B72A1E1DEF38F12BA58EB9D23DCA620086819CF7484195"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebSockets.Client.dll",
+      "Bytes": 104232,
+      "Sha256": "F308A69B9EE1AC982F53D1D94374F4972A7E3C700742901FF7C2BBFB570019D2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Net.WebSockets.dll",
+      "Bytes": 243496,
+      "Sha256": "C014A074D408C71011E26EAC69BE85003A852CFE115E8608BB5D4FD70536EB2E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Numerics.dll",
+      "Bytes": 15184,
+      "Sha256": "35ADC9360421B3B7A3D50399CB2C651C160158D7E8C302907ACBCE5F61F4A4F7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Numerics.Vectors.dll",
+      "Bytes": 15656,
+      "Sha256": "A9A980EE33ED0C798A5E1960C4557521F465AC9E0987DFD2C3049D53B1F2FA5A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ObjectModel.dll",
+      "Bytes": 79656,
+      "Sha256": "2179BB19F335B4FCACD0994AD2CCFDAC6840DEFF09C7889DEBFE9DBB5B88A3E6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+      "Bytes": 16033576,
+      "Sha256": "1125ACC8106C43FC8BAD2D203C4C4485DF6182D292846C2FFF415C1040C54678"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.DataContractSerialization.dll",
+      "Bytes": 2062120,
+      "Sha256": "8C07A5333C4E938CAD8AC8F24B5965121BC0622442A352CBE81C58F17C2349A8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.Uri.dll",
+      "Bytes": 255824,
+      "Sha256": "B15C84D2120E1EC9612C66BA59BC3D7E67D841E2BCE7B7D0478CB212537539B4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.Xml.dll",
+      "Bytes": 7788328,
+      "Sha256": "D71E72A7A9DE324352EDD281A46466B51BD0BDD2831B1573F8D3BAE8BD2DD4A6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.Xml.Linq.dll",
+      "Bytes": 390952,
+      "Sha256": "C832B73DE9783E6929CA5FF4863FC313E13EF7CFB5965C52587C4F77F6E037A7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.DispatchProxy.dll",
+      "Bytes": 75600,
+      "Sha256": "BF93A361C0BBA8497889C9F7713ADD5968BA39394F9E6BDA27E86294C6C43560"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.dll",
+      "Bytes": 16168,
+      "Sha256": "95059346D6271DD6D0322CC321E5FB8CCEAB662F550C67AEE7615059E41739BB"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Emit.dll",
+      "Bytes": 309032,
+      "Sha256": "09059981BBEEA0FDC5DF589BE5D7E3937D57E22BEC4D78CEB492C587926FC238"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Emit.ILGeneration.dll",
+      "Bytes": 15656,
+      "Sha256": "6B42DDD05B0CA1C7342D73EA9F401FE588044215D65C67B756DEB780F0894A26"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Emit.Lightweight.dll",
+      "Bytes": 15656,
+      "Sha256": "D2724A2B7B46146877EC1F6E400C49EA05F84BDD31F3BBA52AE139EE68A4F779"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Extensions.dll",
+      "Bytes": 15144,
+      "Sha256": "CEB1B81E1EB488D87BD43D16DC54450B2A78E0B653C44C988AAE2A20ABC162BC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Metadata.dll",
+      "Bytes": 1156904,
+      "Sha256": "82973E772017944A0548E445F30757595D95FE99E1F5C4A446DF8C4DB04B1C18"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.Primitives.dll",
+      "Bytes": 15656,
+      "Sha256": "C2BBD885D03DA5E880667C228AC1F56A5F3A72EA37D43F010ADA000ADC33DA28"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Reflection.TypeExtensions.dll",
+      "Bytes": 42792,
+      "Sha256": "7CAC73ED746CE05A4A2F1E61DD52D41322ECC6BA84CFEC463380F49487031459"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Resources.Reader.dll",
+      "Bytes": 15144,
+      "Sha256": "20BDB5D302B5E28F6042C9F281CFA3AE2F2358544CC40783052FE5ABF6AA859B"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Resources.ResourceManager.dll",
+      "Bytes": 15696,
+      "Sha256": "F709EB5CF16E26679782784C428825019785FCC7085562092425D4999BECE03D"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Resources.Writer.dll",
+      "Bytes": 50984,
+      "Sha256": "684836486B9BA2817EFA3099118860D259FD16DB0C4C0533D42CAD8C6C165B62"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.CompilerServices.Unsafe.dll",
+      "Bytes": 15184,
+      "Sha256": "6E685EC0477B21A688CD38BFCAFC673888CDF186C99DF3C96FAB352E96D6FDC8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.CompilerServices.VisualC.dll",
+      "Bytes": 30504,
+      "Sha256": "5FD85D3D7B47A921BDF48BF938C6615A49A4A3D493E1EA199F1B997C709618F4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.dll",
+      "Bytes": 44840,
+      "Sha256": "76BE53624F64B23D0249DFA0BBE85390086DE7C44BFD490642EA86C6FAAF44AF"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Extensions.dll",
+      "Bytes": 17704,
+      "Sha256": "3D7B517D4FD89EE58C53E0F642CC9BE42E7A8669B51A85E861DAFE118067CBFD"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Handles.dll",
+      "Bytes": 15656,
+      "Sha256": "985457A3E6A67E96A445EE0FB69B2D58BCDADC4C964253FB63E2D5061A36B050"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.InteropServices.dll",
+      "Bytes": 112464,
+      "Sha256": "E5EB1679F3579C9141E2BB9DBDCE62624A623F38D299805CC1DE07BACD21841F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.InteropServices.JavaScript.dll",
+      "Bytes": 50984,
+      "Sha256": "5BA32BCDE2D72362DB2D6E02763ECE79FA35BC878B50493E956CE594307E997F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.InteropServices.RuntimeInformation.dll",
+      "Bytes": 15656,
+      "Sha256": "C26D9F94329422BD000F28F6C65FDC162BF9397A6D29E418A189D4CA49C5C3EC"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Intrinsics.dll",
+      "Bytes": 17192,
+      "Sha256": "B07694EC91F3A200ACF0F8B37C6CE5FCF05126A9198AE156D839FA5CA8439DC5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Loader.dll",
+      "Bytes": 15656,
+      "Sha256": "9B9B2A4F0358D9146E76178DDB87D019BE380C78BAA7DAC853493D45DF089F03"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Numerics.dll",
+      "Bytes": 354128,
+      "Sha256": "8AC94FB810C092A9297A903762E79A75AE07D7229D0721540C391F86D3D5D220"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.dll",
+      "Bytes": 17192,
+      "Sha256": "D565FC261CA98CBD14833821F777860291E8A0F775DE7AEE91778A9F6647F6F4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Formatters.dll",
+      "Bytes": 124712,
+      "Sha256": "5E8E957C6B7A63132555EDE5BCF5FE6A59934C83300E28074EC6E9845ECDD17F"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Json.dll",
+      "Bytes": 15656,
+      "Sha256": "2FD71E3545DAB4FC89B3FE54D13A1142F26A0CF187EBE375B3F7FA210FCB2596"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Primitives.dll",
+      "Bytes": 38696,
+      "Sha256": "F96093940E64D8EEAD98C86DE9773D3C9D12C2B033BC6B1312AC88398303FDF3"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Serialization.Xml.dll",
+      "Bytes": 16680,
+      "Sha256": "EEDB66EA2CD1A26CC45A46D6631209CCBEC959AF82208872A93B3AE52F189222"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.AccessControl.dll",
+      "Bytes": 227112,
+      "Sha256": "CDC304F9DDB32023ADB8DB8953E56711C9B64462E4341D0B62E87CCD19DC7B10"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Claims.dll",
+      "Bytes": 100176,
+      "Sha256": "C53C8A7E95D8296F951872FDD2E6334D11C20BFFD4322F1A088773BF9DCAA3C2"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Algorithms.dll",
+      "Bytes": 17232,
+      "Sha256": "EB99AE7DBE058A1B015ABA6769CE1F65155B7FF51FF9A7203FCF6D7CDEA5FEF7"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Cng.dll",
+      "Bytes": 16168,
+      "Sha256": "7319F97896D92A7D0729CF28DC6C4D1F797C1520B656EE01A780EEC726EC2C16"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Csp.dll",
+      "Bytes": 16208,
+      "Sha256": "4002AF141E9CB29875B677841ADF64A9681E5672C2595492DCBC161460D4E121"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.dll",
+      "Bytes": 2549544,
+      "Sha256": "E0A839A540E47343B53A936B32D91599A3470005228D50FD0B896F8BBDCC65B0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Encoding.dll",
+      "Bytes": 15656,
+      "Sha256": "994494AEC7760F40FADE2264AA7C13EEBAE36360F0B1399A7134BB19C9D58FDA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.OpenSsl.dll",
+      "Bytes": 15656,
+      "Sha256": "1A8902BBAD1B577A98BEC62A8472105DC1E9A253E390F69FBE3D167E93206968"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.Primitives.dll",
+      "Bytes": 15656,
+      "Sha256": "194CCCEA9354BB248E44C954B5373F9069163F8F21524B3EE4B3185FE436BC15"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Cryptography.X509Certificates.dll",
+      "Bytes": 16680,
+      "Sha256": "7439C3B90BC2EE49A9275B28ED29052B4D48B45999AC1B7D25593033B1BB8DD6"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.dll",
+      "Bytes": 18256,
+      "Sha256": "D8EFD304765E859369698EFEF9B3CA707DEFA8E142721FE5605D7A2DE7D38375"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Principal.dll",
+      "Bytes": 15144,
+      "Sha256": "1D3E351058BE3A33214B23B308FE57F78CD6FD4D8FAD448FC84CBBE7376129F9"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.Principal.Windows.dll",
+      "Bytes": 178000,
+      "Sha256": "2311A3F92971DE918943573DFB66E04E25C1D543663951EB24E8EB1A0DCD4251"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Security.SecureString.dll",
+      "Bytes": 15696,
+      "Sha256": "73AAC97072B7DEEFA4DE9647BF822162224F1452AD467841B989FF89D4D94595"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ServiceModel.Web.dll",
+      "Bytes": 16680,
+      "Sha256": "CE91013EE3A9A9D69A85E258F7749E6ECE488295D7CB66F7C1079F2E8678FC5E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ServiceProcess.dll",
+      "Bytes": 15696,
+      "Sha256": "63FC498C9D04E3C4345DFDB8016AD0639D54562DD7D8C707C072792C854DF944"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encoding.CodePages.dll",
+      "Bytes": 862032,
+      "Sha256": "226E216E33C94EF7594BDFFE670BA4DC5907151C113CB41AC9E9D570227E1765"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encoding.dll",
+      "Bytes": 15696,
+      "Sha256": "5E347DB6B4F9B2746D50E1AC85BE2D9CC7DC4038FDE98AC4295BC7030C83CDA9"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encoding.Extensions.dll",
+      "Bytes": 15656,
+      "Sha256": "8F51B9535DB64FE027A40D6076200B1A6B0889BF05F62BB8E68C3EB083C7F113"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Encodings.Web.dll",
+      "Bytes": 124752,
+      "Sha256": "D20431F20D992E71A4E82E5F25C822474E2F4097D8527972D3D78EA1F26E47C3"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.Json.dll",
+      "Bytes": 1890128,
+      "Sha256": "FA99F413BE21ED5F484A09093FE5F0BEBA7DE3062CF9CC9F847DBF8108DBA55A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Text.RegularExpressions.dll",
+      "Bytes": 1034064,
+      "Sha256": "060BCC88A688E687FF1404B83B5FB5CF17E19EC57F33D5B8A48AB494DA83C134"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.AccessControl.dll",
+      "Bytes": 75560,
+      "Sha256": "66D618B5522B3E4F7A3C7F2BD872FC378FA6F9BBDCA3636854EB1A8CB948E631"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Channels.dll",
+      "Bytes": 157480,
+      "Sha256": "AFC5DEB3C32B3F64BCED2025D0B01B316D41B691EBC6CCB1A2EC445AD4C15E39"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.dll",
+      "Bytes": 83792,
+      "Sha256": "6C32ED1BF8067E4169E8FEDDD15E6489B89D19D1C7AAE1520A551B57745D0A60"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Overlapped.dll",
+      "Bytes": 15696,
+      "Sha256": "89FDE15F8E520C4BCBC6CBFDCEBA2BAED8670CDF52399A4CD7A21C6EFB276C1A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.Dataflow.dll",
+      "Bytes": 472872,
+      "Sha256": "A895B0C73D3A1AFC4D89C1D9E445ED447AF12864C25AAD2C4CB7398FF50AA934"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.dll",
+      "Bytes": 16680,
+      "Sha256": "F80B21F7DAE04377B73945456CABE25E2AB1F4B564095AED546C2AA571644567"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.Extensions.dll",
+      "Bytes": 15696,
+      "Sha256": "F148E3A1414B7C2763AE21529AD79AD759F7CFD3C885256B64B0D2209DEC2613"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Tasks.Parallel.dll",
+      "Bytes": 132904,
+      "Sha256": "6FA359BDBEBB56BE96339F244ED41658AFCEAD5E010074DA470DF1115D1E7699"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Thread.dll",
+      "Bytes": 15696,
+      "Sha256": "CE71949BB1EA67B686E799128582015EBF8758F1107E59E43F342ECE3F662930"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.ThreadPool.dll",
+      "Bytes": 15656,
+      "Sha256": "58FBC6C4B9C72087152FD0F0670A527098C00B0C19BA8D0979D3CA5CE07C6936"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Threading.Timer.dll",
+      "Bytes": 15144,
+      "Sha256": "9E4620846572F49AEB476AA99405071B4BBD0DF4323E4E232787ED73642B1EE5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Transactions.dll",
+      "Bytes": 16720,
+      "Sha256": "56ABFCA0350C111D077B3D86A2469EA3DA4FCCC1871F7C51A8B4FDB664BB0EDE"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Transactions.Local.dll",
+      "Bytes": 640808,
+      "Sha256": "8D0283A311A16333FFB6F966D9765E4D8B866777AD99291A93B30DB349A15BC4"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.ValueTuple.dll",
+      "Bytes": 15696,
+      "Sha256": "07A5347F6A597E5E0D72109EFA1A525697E8C3F74FB0029005500F8EBBF9187A"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Web.dll",
+      "Bytes": 15144,
+      "Sha256": "BC260B3DB247AD9A6E4A82A275DA85C3691A41272CC745CB7EAEFCF1F31CC817"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Web.HttpUtility.dll",
+      "Bytes": 63272,
+      "Sha256": "2CEDEF51B0A2C2B84240583339ECF2422C650E3388AA46F3494160B93B673887"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Windows.dll",
+      "Bytes": 15696,
+      "Sha256": "716EEE98CEEE87D38F0B301224462F8442AA793F4B1B9C3FFAC315753320AB37"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.dll",
+      "Bytes": 23376,
+      "Sha256": "277A84BA155FE7808A514F32694A8157EC9F0EEEEF00EF9643E5250004054FF0"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.Linq.dll",
+      "Bytes": 15696,
+      "Sha256": "AE04903B25717FA4695E7E63489091F0D461E791E0BD264C6C85250D668F540D"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.ReaderWriter.dll",
+      "Bytes": 21840,
+      "Sha256": "8E48FED4D12BCFFFF01E8059CAAFB564697275797D2F5EC6823FDD82B87FE938"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.Serialization.dll",
+      "Bytes": 16208,
+      "Sha256": "489694401C60905CB6DCA8EF0BF738CB609CD45B337126A01C825B913086BA43"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XDocument.dll",
+      "Bytes": 15696,
+      "Sha256": "3FF858607DE5146051498A7124EF983BEA280D86E165F993516C6C26AF81CFB5"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XmlDocument.dll",
+      "Bytes": 15656,
+      "Sha256": "A50B9B3A03596E36E73E7A7D54F4D018E8DCFAA7FE79E8CF900AF8838EF3EC36"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XmlSerializer.dll",
+      "Bytes": 17744,
+      "Sha256": "0B7D057C2B5B2272E8D4096A755EDFD96F3CF03AB9AAA3FEF54B462BF48D517E"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XPath.dll",
+      "Bytes": 15656,
+      "Sha256": "C817B11C58D95FA942FBC62A4CFA8219E16DAFA5641EB004CB2BE424028ED5D8"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Xml.XPath.XDocument.dll",
+      "Bytes": 30504,
+      "Sha256": "5BCD27A7E93515B745993F6DDA51391033883CB8A1A8A2E3DAD5CAED3548F0DA"
+    },
+    {
+      "Path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\WindowsBase.dll",
+      "Bytes": 16208,
+      "Sha256": "0EC46A38F29A234B9A4D0AE9364C8322F661A47C831C5B948F2787B7CA12DBBD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\AGENTS.md",
+      "Bytes": 5834,
+      "Sha256": "2B70D8F1E0A686934AF4C1D4C0380E12FCA0354FB7069F10A74CADEC0ED32256"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lemmings-benchmark-20261102-input\\lemmings-cpu-bus-timing-v1.json",
+      "Bytes": 1229,
+      "Sha256": "2A02229461094001E2BE4A65E3114338CF96A1C5003CD59C532927C586CE44BA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\analyze-results.ps1",
+      "Bytes": 3975,
+      "Sha256": "57BFA4D7C7809FCBBBD1267EE594162CD13591F3CEDE8F22B2A13A5DFFBE5DBB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate-mode-hires.asm",
+      "Bytes": 34669,
+      "Sha256": "A50927BC04B3AEC4E911939BE935FAAF01CDD1268D6E1998E7467AF5B77E856E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate-mode-hires.log",
+      "Bytes": 333,
+      "Sha256": "EB629642C8DDFD54910C9F6FA6A5AE694ADD94A254183A6C2B4296FE3630E1EB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\Copper68k.dll",
+      "Bytes": 978944,
+      "Sha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "75BCF29B83377521BE9DE04539B038AB5FC682FE66AB677202629FCFDDB8C831"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperDisk.pdb",
+      "Bytes": 42880,
+      "Sha256": "09078676FCECEDD931E2C0D54AA11A7680D2EDF1F2EC27914D2BB7F19C1DB586"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "6F942E7E70E1097004D5816486C3FBC9468ABBF3C33B5214BD676B065ADE250E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120316,
+      "Sha256": "82DE956CCEEF6D1C81EB5C1140CA04E2CB02BF671F15EC99A4E5354EC65E00AD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2509,
+      "Sha256": "29DFB857F40EFD18FA9C9597EF78B08C0EECBB402F317182A7E558EF3E029AFB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "50FEC6C02DC4DB40DD7CD5507FDA07176C17651ABB105174D99B16CE27680BDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24888,
+      "Sha256": "B80B4FF04875673AA2DDB0114B2F71371CF3D02D0724A40200ECD1603D58E871"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\candidate\\CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-native.ps1",
+      "Bytes": 3323,
+      "Sha256": "9A4369C810612591B86307D7DDC5FB5E9BDE83A427F81B841CC425C9A1FEED64"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000001.bmp",
+      "Bytes": 1136870,
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000001.chipram",
+      "Bytes": 524288,
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000001.json",
+      "Bytes": 1086,
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000001.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000001.slowram",
+      "Bytes": 524288,
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000600.chipram",
+      "Bytes": 524288,
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000600.json",
+      "Bytes": 1067,
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000600.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-000600.slowram",
+      "Bytes": 524288,
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001200.chipram",
+      "Bytes": 524288,
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001200.json",
+      "Bytes": 1071,
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001200.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001800.chipram",
+      "Bytes": 524288,
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001800.json",
+      "Bytes": 1071,
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-001800.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-002400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-002400.chipram",
+      "Bytes": 524288,
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-002400.json",
+      "Bytes": 1105,
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-002400.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-002400.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003000.chipram",
+      "Bytes": 524288,
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003000.json",
+      "Bytes": 1073,
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003000.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003000.slowram",
+      "Bytes": 524288,
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003600.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003600.json",
+      "Bytes": 1105,
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-003600.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004200.chipram",
+      "Bytes": 524288,
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004200.json",
+      "Bytes": 1104,
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004200.pcm",
+      "Bytes": 3848,
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004200.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004800.chipram",
+      "Bytes": 524288,
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004800.json",
+      "Bytes": 1102,
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004800.pcm",
+      "Bytes": 3844,
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-004800.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-005400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-005400.chipram",
+      "Bytes": 524288,
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-005400.json",
+      "Bytes": 1103,
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-005400.pcm",
+      "Bytes": 3848,
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-005400.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006000.chipram",
+      "Bytes": 524288,
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006000.json",
+      "Bytes": 1070,
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006000.pcm",
+      "Bytes": 3844,
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006000.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006600.chipram",
+      "Bytes": 524288,
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006600.json",
+      "Bytes": 1102,
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-006600.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007200.chipram",
+      "Bytes": 524288,
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007200.json",
+      "Bytes": 1103,
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007200.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007200.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007800.chipram",
+      "Bytes": 524288,
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007800.json",
+      "Bytes": 1103,
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007800.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-007800.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-008400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-008400.chipram",
+      "Bytes": 524288,
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-008400.json",
+      "Bytes": 1103,
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-008400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-008400.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009000.chipram",
+      "Bytes": 524288,
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009000.json",
+      "Bytes": 1105,
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009000.slowram",
+      "Bytes": 524288,
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009600.chipram",
+      "Bytes": 524288,
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009600.json",
+      "Bytes": 1106,
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-009600.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010200.chipram",
+      "Bytes": 524288,
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010200.json",
+      "Bytes": 1107,
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010200.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010800.chipram",
+      "Bytes": 524288,
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010800.json",
+      "Bytes": 1107,
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-010800.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-011400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-011400.chipram",
+      "Bytes": 524288,
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-011400.json",
+      "Bytes": 1107,
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-011400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-011400.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012000.chipram",
+      "Bytes": 524288,
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012000.json",
+      "Bytes": 1105,
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012000.slowram",
+      "Bytes": 524288,
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012600.chipram",
+      "Bytes": 524288,
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012600.json",
+      "Bytes": 1076,
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-012600.slowram",
+      "Bytes": 524288,
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013200.chipram",
+      "Bytes": 524288,
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013200.json",
+      "Bytes": 1102,
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013800.chipram",
+      "Bytes": 524288,
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013800.json",
+      "Bytes": 1103,
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-013800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-014400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-014400.chipram",
+      "Bytes": 524288,
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-014400.json",
+      "Bytes": 1102,
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-014400.pcm",
+      "Bytes": 3848,
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-014400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015000.chipram",
+      "Bytes": 524288,
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015000.json",
+      "Bytes": 1102,
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015000.pcm",
+      "Bytes": 3844,
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015600.chipram",
+      "Bytes": 524288,
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015600.json",
+      "Bytes": 1102,
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015600.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-015600.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016200.chipram",
+      "Bytes": 524288,
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016200.json",
+      "Bytes": 1102,
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016200.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016800.chipram",
+      "Bytes": 524288,
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016800.json",
+      "Bytes": 1102,
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016800.pcm",
+      "Bytes": 3844,
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-016800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-017400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-017400.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-017400.json",
+      "Bytes": 1102,
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-017400.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-017400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018000.chipram",
+      "Bytes": 524288,
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018000.json",
+      "Bytes": 1102,
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018000.pcm",
+      "Bytes": 3848,
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018120.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018120.chipram",
+      "Bytes": 524288,
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018120.json",
+      "Bytes": 1102,
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018120.pcm",
+      "Bytes": 3848,
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-normal\\frame-018120.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-results.json",
+      "Bytes": 907,
+      "Sha256": "C71DBBAA93F4CCAF31C929CBFF67272603BEEDB365ED2FD7A04AC6B8F2FA8021"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000001.bmp",
+      "Bytes": 1136870,
+      "Sha256": "3FE7C52F12EC7DEBEA1CAAF422E968055F974127935A12DF80391AF775807A24"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000001.chipram",
+      "Bytes": 524288,
+      "Sha256": "39161BC532FEB140FAF1AC405C9B10A663EEFFC5BA3E15DDC6EA134BF285FA35"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000001.json",
+      "Bytes": 1086,
+      "Sha256": "76B07EDF91847CA8E9B5A3AE98B81B454CBDA89265EDB9A7564863F549B6C6AB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000001.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000001.slowram",
+      "Bytes": 524288,
+      "Sha256": "07854D2FEF297A06BA81685E660C332DE36D5D18D546927D30DAAD6D7FDA1541"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "BBDE08A8CF93B7005898C0F7BDA21AB9CFFEDFFAAF1A475A6240AEB6EE0CD144"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000600.chipram",
+      "Bytes": 524288,
+      "Sha256": "8A727518AFE5F3AD376072CF063096916430DC4CB5C05A0C50831C44A30B1163"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000600.json",
+      "Bytes": 1067,
+      "Sha256": "397C921E6BA8EAB9E8B38C64EA0CEF2C186F6D20FFA6321FD67A9F06F8B578A0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000600.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EE6D51A4933E7868EFB7E822ED88BBA776DC6985E4D99EF7C571F39BB80F502"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-000600.slowram",
+      "Bytes": 524288,
+      "Sha256": "278E55F7BED2B224F8A727096C06A0D8D7C7421B550F2A02C397216CF721B874"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001200.chipram",
+      "Bytes": 524288,
+      "Sha256": "FC3C79264EA2CC7EE0EBCF0848DDA5A4E99AC5715A15BAD7638A210DF5BC7E29"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001200.json",
+      "Bytes": 1071,
+      "Sha256": "536D48CC1380F25103400D9B875697749A452FFD2BFD1A900B828B01D95FEB4C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001200.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0E4E5377948882A2257057F9CD107A7294FC6656F78E9CC9B43D4F7A408A9F1E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001800.chipram",
+      "Bytes": 524288,
+      "Sha256": "8590C6B7B393A661331E90D5F66C41E0E6DF6B14CD3939345F2543CF8891F782"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001800.json",
+      "Bytes": 1071,
+      "Sha256": "072A88E70FB6574B61062A2B17C767182540141984DA17807912FDBD11B1ABDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-001800.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-002400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-002400.chipram",
+      "Bytes": 524288,
+      "Sha256": "79CE4624EF377B97ACAD418F415033987968B01807F68481646AA88444AB5636"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-002400.json",
+      "Bytes": 1105,
+      "Sha256": "E9ACEC7471E64EC9609407EF2EFAF039BCBCDAEED32DF77D0363C4ECC29060E2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-002400.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-002400.slowram",
+      "Bytes": 524288,
+      "Sha256": "D0F5DED89E98ED959FBDE0BCC6E92C054617FA37D66A29A1B18DAE829DD8F7FD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C2391068821ACEBB2667FD42C89F30A655F7B4DE11B1ACA215BFB55DAEAE14BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003000.chipram",
+      "Bytes": 524288,
+      "Sha256": "D956919BC39A22409A318DE8A78955E6DAD9216671EDD4800A20F8F1DEF3555B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003000.json",
+      "Bytes": 1073,
+      "Sha256": "0F120328E6E1D396CE5C051C7B3A21D12B45E43B6292F746D285FEF57DE6C556"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003000.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003000.slowram",
+      "Bytes": 524288,
+      "Sha256": "10028EA1074FF44AAF20D470AC929F9C892234260EE5E117584FAFD48E9E73AC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ADEA687F9F7D089FCECC9283B54CA9C4A34B7E2332280A060F28B9B1CD1C8503"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003600.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C47F2B4E262D4A22F8478FA2F364959B42AD2BB4EF997AF340CB8392B948B4E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003600.json",
+      "Bytes": 1105,
+      "Sha256": "006B929A68C0C76F8ECC663B6597EFCF76C00342478603859BB500A4C32E5CDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-003600.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "61EF3D78933A057B6C2536C2B927775AA8665BBCF1C4CA0F5AB3EE4C7CF6B210"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004200.chipram",
+      "Bytes": 524288,
+      "Sha256": "EEED107437A25BD3619C1941AA50703705EA77409DF33738B3FB6881358B84C1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004200.json",
+      "Bytes": 1104,
+      "Sha256": "33D882C65C56E92FE992C869178F926AB1BD1D6C81B8A80E0613A5566E1CEB50"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004200.pcm",
+      "Bytes": 3848,
+      "Sha256": "2B0D002B15A98C59FE883B60C05381920D0AF4E5966ABCA4E2E6C1F94E0FEAD6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004200.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "60470AA455A4C72F7C295C457C791D26891510544E3BD8300852F72B6DC3DC56"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004800.chipram",
+      "Bytes": 524288,
+      "Sha256": "32C027BECE3870BF6A50C7085D0C3C88DDA44B12477C78E2FF347BF072731C00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004800.json",
+      "Bytes": 1102,
+      "Sha256": "9C5981C202992FE55844473AC603EFFBB49FB83DAEFB621745C11D535E2F886C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004800.pcm",
+      "Bytes": 3844,
+      "Sha256": "2A99E88E61D42FDCF53EEE0DF1D167E6C93D6C9FB7DDF5254DCCFDD614255407"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-004800.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-005400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "B083F0F669B8B4026A0FD975FA03FD6CEEF60930C52D9220D60008E577024CC0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-005400.chipram",
+      "Bytes": 524288,
+      "Sha256": "660AB01A4DB27788D255743E3CC3D6A978C3BAC62C2291CE9AD9047809A2AECF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-005400.json",
+      "Bytes": 1103,
+      "Sha256": "5A152DD649F5DEC6E9B1B930C21D603DA038F33C1F032D10B3D58B2B793E09B3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-005400.pcm",
+      "Bytes": 3848,
+      "Sha256": "0D0AB9B7A0C5CF8D0037FC44E128D8C72B2462278BBFBED31B6B4E578EF2B727"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-005400.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8E70642A31AB53E009101C68CAE644E39080ACABBC07AE98C220BF0F97ECC147"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006000.chipram",
+      "Bytes": 524288,
+      "Sha256": "39A9738A53507F38ABA3CA78300ECD5115CFC84DA7A4035FD337D61032BF854B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006000.json",
+      "Bytes": 1070,
+      "Sha256": "227A53E0ACA7C03026AAF227145DF461FC9442E7D17BFDA8963EEA0C8851A0E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006000.pcm",
+      "Bytes": 3844,
+      "Sha256": "4327D6C6FE15311D0EE468E64D970753461D657E70A94BFBD2F5CC653B9DDE10"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006000.slowram",
+      "Bytes": 524288,
+      "Sha256": "A7BEA3765BD721AE90A46EF42693AE4E088BB61786023EFC0335B444CC28B836"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006600.chipram",
+      "Bytes": 524288,
+      "Sha256": "C47517B56D4DED937848105BE11DCAD221AF2D381B92C44503992EB1F14733A9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006600.json",
+      "Bytes": 1102,
+      "Sha256": "D3DD201C1201D8F33BD0128940047DC79A857C07195F0B143A4B3FFD6976967B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-006600.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007200.chipram",
+      "Bytes": 524288,
+      "Sha256": "329BD0FA8D3FDF43FB5D819F6D488B00FD032D773584B5A547A0BAB26DB017C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007200.json",
+      "Bytes": 1103,
+      "Sha256": "9BC652B459645EBFABE8EEE35EA1E9F625B766C966FF9D68DDEC4B9F6647AC9C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007200.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007200.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007800.chipram",
+      "Bytes": 524288,
+      "Sha256": "518E777D49006C1D4D2FE1F93B5CA03376C8E4CFFDCCF89E6BCBA450E126D858"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007800.json",
+      "Bytes": 1103,
+      "Sha256": "AB1D3653EE4F3265A1D0427B1AEDFD0428E20E614A77B5E6F545F7AB8260E76D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007800.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-007800.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-008400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "469277D52EA31D21DD733F4EFEF5775FA9637DC4E9A9EBCD5F73972A6DD8F0BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-008400.chipram",
+      "Bytes": 524288,
+      "Sha256": "F3F4C5568CEFCC33808ABE23020B5EDF13E15543A3FF777DFBD125CE765F3505"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-008400.json",
+      "Bytes": 1103,
+      "Sha256": "D3EEA12FD52B955FA88CAAB1711157E885E371787B868FD711454E4433F8A544"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-008400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-008400.slowram",
+      "Bytes": 524288,
+      "Sha256": "9C51849520E1CFCFCB2369910FAE46B9F36D501030387FD27FFBD3656475F73E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A0D3A445528F4BFE5B254E7220AA7129A77E7E85CE74892EB2B443AC7DCFD54A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009000.chipram",
+      "Bytes": 524288,
+      "Sha256": "289197DB8D4B8E1F990F732F5DA1D1C1DA9043FB381432404FEC78AD09B60A0D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009000.json",
+      "Bytes": 1105,
+      "Sha256": "EF334C9ED794B0FA93CD7A1BCC4049BC057B2B3C9188FA257FC636E14C71BAC3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009000.slowram",
+      "Bytes": 524288,
+      "Sha256": "0ACE59CD37A3A114C2044036A6F26A99BE0F7CF5E9EAF9BBB5DFEE120A94604A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DED09940836BB30F195DFE2957533C4ADAE8BDE2CF89AC38F85658B22337CCB7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009600.chipram",
+      "Bytes": 524288,
+      "Sha256": "7B20EEE08479F84DEC96A8ADAC4AB421ADFB645E36277FC0C0A7FCCDD978F229"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009600.json",
+      "Bytes": 1106,
+      "Sha256": "C5B1E6D8632D4A3A69F6D31C9058D0C81F37F897D1E94CD2AA5E580D064238BB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009600.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-009600.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "A5D951F36444B24CFBC800A89B5F494B48483820A7033D24F88CF495C2669B68"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010200.chipram",
+      "Bytes": 524288,
+      "Sha256": "44D3A71B7FDF3D2C8E8DD55496F839393058D86E97503CE3F3504EE368EFC17E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010200.json",
+      "Bytes": 1107,
+      "Sha256": "9926D24E47CDB8C65AEDE007EF4E22F35778B4FEBE2DAFD0FCDB317F9960AD30"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010200.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "DD3F47F6E386621CFBC4B0445FA1B79AE036F08CDD39BA8CD2C61DFA535ED339"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010800.chipram",
+      "Bytes": 524288,
+      "Sha256": "99D1EFA191596123EA8C1809D9A7C7469840CD6BFC48B0277DDB8BAC9B2CE8B2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010800.json",
+      "Bytes": 1107,
+      "Sha256": "0AE3D74C6A9C7821A52A79971B3812CFECEF380837209B22DE9F97609A97E869"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-010800.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-011400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8B1682124D695FBF73E494FA61F935E8F5C3F26BDD884D1B155766040A6116D4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-011400.chipram",
+      "Bytes": 524288,
+      "Sha256": "D0EBDC5CBEBA3C5520756F71BD15E259A4973162B4155D4B5C4044E932EBE70E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-011400.json",
+      "Bytes": 1107,
+      "Sha256": "D8295C6E0F5C3A4A0E1606D478C8AD7CB2C803D92835BEB41256E6065A2EF1B9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-011400.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-011400.slowram",
+      "Bytes": 524288,
+      "Sha256": "0CCF595D15469BDB8D01CAC27B34649FEF5A401B4739BBAEEF9CE804EA931A19"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EA4B61D9B79998267346741E7D5EF2764FCC2CF5A614ACCE26EEDA27FD2C9E89"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012000.chipram",
+      "Bytes": 524288,
+      "Sha256": "282D9A83F15E22B61DC3061106F96293C47DCE17E740D7805AF62453A67BA37F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012000.json",
+      "Bytes": 1105,
+      "Sha256": "3A3D0F5C3613A3D4C10A8D7E16681E1A36DCFCFCB1C0A760F1A22F7843EB9545"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012000.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012000.slowram",
+      "Bytes": 524288,
+      "Sha256": "ED8C44800690DA4E5E6450F7E0374EE288ED38FED9B78FD9258BB0CBCA465B58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "56D5573751AF6572A3EEC4DB5A2855462F90B9103D60217BAA3BCF4493FD7AF9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012600.chipram",
+      "Bytes": 524288,
+      "Sha256": "79754012E20B156834D8884EF4CEEDB9BE50AE8A192DDE6B3858DA8765FE93CD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012600.json",
+      "Bytes": 1076,
+      "Sha256": "DD46521E83DB987AFEAA0AD7A19C7F1B266910C2522B22EF8FCE9EF0B3021C3B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012600.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-012600.slowram",
+      "Bytes": 524288,
+      "Sha256": "5F1F4EF420C89404C75A75B9CA3F342C9C34A068965E9F6F4728DB815CE7AD7A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "585958AC57E3FC12FCD8B4410D6871DED0E99FBE63D19DB5314F9088C8B71A23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013200.chipram",
+      "Bytes": 524288,
+      "Sha256": "24A6EBAF020BFE4DAF76DF8D7880E57353915CCA29118CB5FE251B67B6BADE75"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013200.json",
+      "Bytes": 1102,
+      "Sha256": "41B9F69BF4B04251E3194127F2B942692BA64D250ABB64E704A7BE5FA11BDEEC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013200.pcm",
+      "Bytes": 3844,
+      "Sha256": "6E95A12B948493E2398DE7E6F7AFD3176C44277B4241EE992508FB3B81DA8D66"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "ABFA589FF8218707E557C8880FCF957910F427DAD2BFC6F70BC0CCB69ADE0EA9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013800.chipram",
+      "Bytes": 524288,
+      "Sha256": "E368889F1F4485E3547C3E4C2596DB4A744E197F434DA258AF50DB2D4A44F05E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013800.json",
+      "Bytes": 1103,
+      "Sha256": "FADAD4C8B1657C19CD0F7A4BC40B3177449F8FFE389920019936B5FEC49543EB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013800.pcm",
+      "Bytes": 3848,
+      "Sha256": "01ECA2AC88A17C467EC82DBD1E69F7DD7268B9570493929FE2A6FB6EE8B676F0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-013800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-014400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "EEA2532E2BF81AD7E4E121153BC73B06B4098EB13FFBBBE4CFC96D12371B4BDF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-014400.chipram",
+      "Bytes": 524288,
+      "Sha256": "8BAFD449B5016038C85D772466BC5D6CC92CDC0F16C93E255FAC7494CB1F1CF2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-014400.json",
+      "Bytes": 1102,
+      "Sha256": "8E389CB07F13CFF3DBEA00A7347D3570498F86FE684D00E9E7591279AA845CFF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-014400.pcm",
+      "Bytes": 3848,
+      "Sha256": "33C3B287DC28CEF4329206F63D371E49F1096808FCB1AFA082B058F1DC7F60E7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-014400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "7B014E769FB5C8B2D57A559559639775FAAD5DCB3FDD8DC89372114D9A34C8C8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015000.chipram",
+      "Bytes": 524288,
+      "Sha256": "81C46500A5061F2D2E88F8DB5A8127DF5A5C75FB732AB24B786CC88A015BE0BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015000.json",
+      "Bytes": 1102,
+      "Sha256": "74D0B9369939B5C0AC0625F2392D0CD446E619338C47C372704832FAC711800E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015000.pcm",
+      "Bytes": 3844,
+      "Sha256": "83ACD2B870A04BE4EDF1D6CBD397A9EB9C48A0D740EAF38F7F5760BED7CBFDB4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015600.bmp",
+      "Bytes": 1136870,
+      "Sha256": "123579687208F727AFC88154B45DAC4FB8EE944907523B4572BA5C01BE556BFE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015600.chipram",
+      "Bytes": 524288,
+      "Sha256": "ACB1388D10B2977F6AFB91F14833C3E2F337CF6B88561F44330ED07B3B0CDF23"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015600.json",
+      "Bytes": 1102,
+      "Sha256": "7826A726D2FD422C6AE88945F390D50A3F9A8497EFB1D1F63B5B7D046B4D6590"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015600.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD28B54B450AEE50820F365FC5349F85B53141355243401F3AD22D8D24A793E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-015600.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016200.bmp",
+      "Bytes": 1136870,
+      "Sha256": "C1BF535FA66091A9E57D970AE5AF137DF52B07B82BC4A3E32B6278885C193B07"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016200.chipram",
+      "Bytes": 524288,
+      "Sha256": "7A26CF9B02D3517A70BEF02D65AFB03AF9056CEE5C62E306A1D024C59B04452A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016200.json",
+      "Bytes": 1102,
+      "Sha256": "65878FDD306BFDB0738CD09C22146830FB83BAD82D99C62675D7FD42AFAF17D0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016200.pcm",
+      "Bytes": 3848,
+      "Sha256": "1AD7CC446350BB495B52C5E04F244BDA902D3A6B1CACFD39DF766DDF0E638D00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016200.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016800.bmp",
+      "Bytes": 1136870,
+      "Sha256": "8895C05841029F3EDCCC4AF35EF24B850BF656D409463CA99766319A27656211"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016800.chipram",
+      "Bytes": 524288,
+      "Sha256": "A678B96BA9DBF63BF60D3345E5E8A73E20B64698B42EA3BFEC68F42271F053BE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016800.json",
+      "Bytes": 1102,
+      "Sha256": "C8E658EA8FBD8BD3C4B5FA04C5935185D1FC3C3217A15822C017C18E6B183BED"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016800.pcm",
+      "Bytes": 3844,
+      "Sha256": "1047FBCA5014A8B8684403F74A286161783FCB6586CCBEE92600EB1B09B3F7AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-016800.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-017400.bmp",
+      "Bytes": 1136870,
+      "Sha256": "80D86984AB6022ADADACBF863C092849896243BB5871DEC1E3AB196C13D468CE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-017400.chipram",
+      "Bytes": 524288,
+      "Sha256": "5C0E387AF2082BFC1F2479877CFA5905CEDD72C588F1806B9D633CD0CA8AB065"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-017400.json",
+      "Bytes": 1102,
+      "Sha256": "BE7F792C7D8E78CEBC8ED2E0617E1971DAF60A555B48B6DA74096D5881C4CD26"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-017400.pcm",
+      "Bytes": 3848,
+      "Sha256": "2EBD66EF86432A2EDD014284D426D5E237926A9BEC0C27C19A5930FEB21CAAEE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-017400.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018000.bmp",
+      "Bytes": 1136870,
+      "Sha256": "600EC4A223E4AC12046D0C8BAB7AD9A2BA9ED16018333925762ADBD680DA3A04"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018000.chipram",
+      "Bytes": 524288,
+      "Sha256": "B7D5E64B1B982D5C214D95CE4075D1B771A876A62FA90FE56A8ED838E88F6776"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018000.json",
+      "Bytes": 1102,
+      "Sha256": "B4087959A254CB4C26237C07AB567FC2F9F60CFE00F800ABD118D7C6A489503B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018000.pcm",
+      "Bytes": 3848,
+      "Sha256": "3DBAE2F9E3E8AFA188EA8376976455F5FD30980DDA1245FB563D79A544546C17"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018000.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018120.bmp",
+      "Bytes": 1136870,
+      "Sha256": "0919509F56690100BF0E74604EE95E55C3504DCF9007BD98F8E8565A9A146D58"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018120.chipram",
+      "Bytes": 524288,
+      "Sha256": "41E351CD1D81A1FD2F721F89BC36A12982BD7027AEEC6B5129F9DEC6B6506971"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018120.json",
+      "Bytes": 1102,
+      "Sha256": "0E380E101A78EA6D83992332CB5F11C161A3931479C6CA838605A06B73FC57BC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018120.pcm",
+      "Bytes": 3848,
+      "Sha256": "15402D56C2CE4F1FCB43F6BEF664BAC749BA6874F6706875276DE60DA0C8A2C4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\capture-scalar\\frame-018120.slowram",
+      "Bytes": 524288,
+      "Sha256": "104496D2A0CBF3A92730C9B786246EF60FAF7D2028A20DF4EB34112F5363B268"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\final-build.log",
+      "Bytes": 1563,
+      "Sha256": "ED01FEB1071803142F859D2E84A2D45B68995C41FDCB88F961EB4BB8C90F85DF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\final-focused-tests.log",
+      "Bytes": 1085,
+      "Sha256": "B847842E0107DE26ADD87DE067BA20BC1B1152260793FC18EEDCDE92ACCC8751"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\independent-analysis.json",
+      "Bytes": 1833,
+      "Sha256": "6AF3CB54F52C44C0E722F66337D74E16CEA0A32BC2C93D6DB6CAA0ACA507C960"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\input-pins.json",
+      "Bytes": 826,
+      "Sha256": "B1D34F3AF1C48F75154CCE60F44AB9C33161D28F9EB4BF4FB4D0B4C333D12A80"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\inspect-jit.ps1",
+      "Bytes": 2231,
+      "Sha256": "D6AFA4A64A6208A34D473EE7AFFEF2D24BA7774D479C3E03701F22AA1396AD6B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "87F1FAD8C87BE72F686A6A9F130DD0BECEBEAABDE42F6313387633552CE9D080"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "EA1360819978058AC9330814D733CB0A284699D773D0F479A18E28ADE5A1CA76"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C3.stdout.log",
+      "Bytes": 320,
+      "Sha256": "17BD0685A303F73E2365B59B81F00F0D13F6FF9D26EB7FD49DEE004F2F1B72F4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C4.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C4.stdout.log",
+      "Bytes": 320,
+      "Sha256": "022C6956177B31F0837A1782F6187D86069A29D84DCA2D204686B8131767D706"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C5.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C5.stdout.log",
+      "Bytes": 320,
+      "Sha256": "7B899FA39520B0F6C388634AB5805CBE7EC0566A088238FAF7ED88C90A110553"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C6.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\C6.stdout.log",
+      "Bytes": 320,
+      "Sha256": "7296C86ADB9431634A0B609C1D4DD72E2B464D06ECD9294FCBAC17906506AF2B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\comparison-record.json",
+      "Bytes": 179231,
+      "Sha256": "A83298B5F6753EAE5BDF0AD01BD340C848E6B104E562601B60563BF1E7A963AA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R1.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R1.stdout.log",
+      "Bytes": 320,
+      "Sha256": "1CF178553D20B7F960DE18739F35639DF84D30C88B1F7297C464AB89956ACBA6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R2.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R2.stdout.log",
+      "Bytes": 320,
+      "Sha256": "73731E38438C456C554F91EB0C5A5408BF58F7FECA39D4CE9EAB9EF32D48B73D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R3.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R3.stdout.log",
+      "Bytes": 320,
+      "Sha256": "E95823951713694C09F84DF0F0F0FC4E6B932EF844DE7BA0F2FBB73791F55F33"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R4.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R4.stdout.log",
+      "Bytes": 320,
+      "Sha256": "00D55296F7708D703A4A7E01D1157D9D48F8A90487CC6596A75E2AD53821BA8E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R5.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R5.stdout.log",
+      "Bytes": 320,
+      "Sha256": "24C8FE8D8CDF471E1854502306B3262DC7AB49B04A5B886BED9483E147B22B17"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R6.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\R6.stdout.log",
+      "Bytes": 320,
+      "Sha256": "F74D607455B2B5D9A0D371A47480B4328AF2E5D6E3C864205B6731A692FBCC2B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\native-six-pairs\\telemetry.jsonl",
+      "Bytes": 96850,
+      "Sha256": "78E39F084FAA94E1EDC75E674366A4FDFB350A483625B14765480455334BC352"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\candidate-build.log",
+      "Bytes": 1563,
+      "Sha256": "7049DEADA796B702949A970B129788539DB240EA6341323E2D092FCAD6D316C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\candidate-hires.asm",
+      "Bytes": 46905,
+      "Sha256": "7EEFFE6AF9ABAE2885BDDB09A5B3DDCD7B02C16EAF6DBFEFF58790CA559964BF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\candidate-hires.log",
+      "Bytes": 333,
+      "Sha256": "ABE948017071565B10CD7EE44193EE727569FD53835170EF9E647F645BB92553"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\candidate-hires.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\candidate-jit-summary.json",
+      "Bytes": 91,
+      "Sha256": "0234B0EEFE8E79C51B656613C77453EB8CC549AD7C4C85C3C8AC39E87FF18BC4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\Copper68k.dll",
+      "Bytes": 978944,
+      "Sha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "75BCF29B83377521BE9DE04539B038AB5FC682FE66AB677202629FCFDDB8C831"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperDisk.pdb",
+      "Bytes": 42880,
+      "Sha256": "09078676FCECEDD931E2C0D54AA11A7680D2EDF1F2EC27914D2BB7F19C1DB586"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "A4857F938838BDA22EE0BDA44EE5BC9B9A3F3CBB6507DE5B935FD502984B4FFB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120316,
+      "Sha256": "82DE956CCEEF6D1C81EB5C1140CA04E2CB02BF671F15EC99A4E5354EC65E00AD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2509,
+      "Sha256": "29DFB857F40EFD18FA9C9597EF78B08C0EECBB402F317182A7E558EF3E029AFB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "50FEC6C02DC4DB40DD7CD5507FDA07176C17651ABB105174D99B16CE27680BDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24888,
+      "Sha256": "B80B4FF04875673AA2DDB0114B2F71371CF3D02D0724A40200ECD1603D58E871"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\focused-tests.log",
+      "Bytes": 1082,
+      "Sha256": "E99C3E95C4F7285253B50E33A5F7D3BD3E053A3340D960CB0883FF4EDCA4CA7A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\LightweightVideo.cs",
+      "Bytes": 43205,
+      "Sha256": "DA50A31155727076A07E50C08DEF89F550FF1C2B1156B14FEA6713D2E1DF3CCA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\prototype-shared-setup\\tests.trx",
+      "Bytes": 271794,
+      "Sha256": "611D471BB6673C52044CF6599F7852E7E927CBBA6CD8E6B687CEB680B8C81DF5"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\qualification.json",
+      "Bytes": 114996,
+      "Sha256": "602805173F78C5F86EECB50FEC689B20A865F76C842501AC1361343110637197"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\qualify.ps1",
+      "Bytes": 4493,
+      "Sha256": "CE4D5821163B626E6DF70C1B7ACFF2C30DCB2A203E8C3A43601EC2B388F56243"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference-hires.asm",
+      "Bytes": 32907,
+      "Sha256": "D03B9C46BAC1A063190F000BCC7CE0C40B5D84582AE2FF9D31F137081C8D9931"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference-hires.log",
+      "Bytes": 333,
+      "Sha256": "137504DF94C8C2781E9111BB179483F1DA7BF6B67C0F10871B823939F7BA1356"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference-record.json",
+      "Bytes": 3763,
+      "Sha256": "FEC70DDB782E17A98E133C27D5AEA61D2F3EA8AB9D5A84A621B55E002EA1C02F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\Copper68k.dll",
+      "Bytes": 978944,
+      "Sha256": "FF3A73B2DD2A62329BE1FCDAD1EAB8CA3A62D95F73BCFC03A4B87BD25955837A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "75BCF29B83377521BE9DE04539B038AB5FC682FE66AB677202629FCFDDB8C831"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperDisk.pdb",
+      "Bytes": 42880,
+      "Sha256": "09078676FCECEDD931E2C0D54AA11A7680D2EDF1F2EC27914D2BB7F19C1DB586"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295424,
+      "Sha256": "1112FBED2D361A79EC54F76E149184D8959BE2C0AD9B4B01245D38619E14EC6A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120316,
+      "Sha256": "82DE956CCEEF6D1C81EB5C1140CA04E2CB02BF671F15EC99A4E5354EC65E00AD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2509,
+      "Sha256": "29DFB857F40EFD18FA9C9597EF78B08C0EECBB402F317182A7E558EF3E029AFB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "50FEC6C02DC4DB40DD7CD5507FDA07176C17651ABB105174D99B16CE27680BDD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24888,
+      "Sha256": "B80B4FF04875673AA2DDB0114B2F71371CF3D02D0724A40200ECD1603D58E871"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\reference\\CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\lightweight-hires-20261103\\write-evidence.ps1",
+      "Bytes": 5071,
+      "Sha256": "AAE173B8BB6AB591049BF39A215F31E7DFEB73BAFDFEE6AAD976D1E4AAE799E0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AdfDiskMedia.cs",
+      "Bytes": 4882,
+      "Sha256": "52666E5A46A4FFA0B2EB5642CCBB2B83773F6262BFEFF87DED2CB3FA4979ACAC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDiskException.cs",
+      "Bytes": 861,
+      "Sha256": "149A20691A57A95EE10CF596E59613FBF7D7998F663C084AFDCB1DA3C91381E1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDiskGeometry.cs",
+      "Bytes": 1385,
+      "Sha256": "0D0D44D4296DA8422C452A01C6723DF5C81C4B3B10A99552A999CE5EB369E25B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDiskLoader.cs",
+      "Bytes": 14188,
+      "Sha256": "829EAFD8DFFA6688024528766039A6A675B1E8765B2A16AA250CA470483B571A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDiskLoadOptions.cs",
+      "Bytes": 691,
+      "Sha256": "44926A0A09A61CD873D8D524E1C1E9B56247F262214B765EEAD1CDFB6A00AA60"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDiskLoadResult.cs",
+      "Bytes": 866,
+      "Sha256": "B3B940C2A2CF23114A7BCC98308462436BAC3B596FB9AE05770FCA2194AB0AFA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDiskMedia.cs",
+      "Bytes": 7369,
+      "Sha256": "A536F79AAD853092E008012A9CE17A549187E1E91318CFFF7BF751CC3F51A291"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDosTrackDecoder.cs",
+      "Bytes": 11924,
+      "Sha256": "DBD4D41DEDD65D67B20319D3A615BA1E1C5B00D4E447B292208301C2BE2CEA2F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaDosTrackEncoder.cs",
+      "Bytes": 7579,
+      "Sha256": "B03D5EB5ED7DBE9ADFFA36BDD2B3D46BB5F125BECD2CFCB2A87EF35A6E4F7143"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaEncodedTrack.cs",
+      "Bytes": 9330,
+      "Sha256": "AA0126CEE43A68DA87E83D3D26480CE383245E1559CE2DA32AE7212084D0FAD2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaFfsPartition.cs",
+      "Bytes": 3564,
+      "Sha256": "D8C7D8E672654563F9254CF1353EE11F0778B849A417E663208479065F91F808"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaHardfile.cs",
+      "Bytes": 35603,
+      "Sha256": "015E9E3E2DB351D7BF14F0DEB69AFA770C345430B14A26E44B68B7E6CBEF3346"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaRdbImage.cs",
+      "Bytes": 486,
+      "Sha256": "C9F75E185F3695792F52032D256A59A034B4A10E51CB75632DFA14EBCC59C2F3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AmigaTrackRegion.cs",
+      "Bytes": 1421,
+      "Sha256": "C2DD9E52F8256643BE4F219532DB1AE084FB99629653069B040016D917FF3EE8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\AssemblyInfo.cs",
+      "Bytes": 221,
+      "Sha256": "6C77E4E5F4C05E2946A35521B0CE28A94358029DCB5290FF108146C5BF6D65D6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\BigEndian.cs",
+      "Bytes": 1364,
+      "Sha256": "2630EF5C92BDE5AB744DC31FC5BC134BF6E7C657B857DC039132ADB510F6D255"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\CopperDisk.csproj",
+      "Bytes": 2166,
+      "Sha256": "748E252164F4C03131E512BDBE087DEF87F4F0A08935ADECF9EB7C8040D17CFD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\DmsDecoder.cs",
+      "Bytes": 34236,
+      "Sha256": "CCF7E3B7B610FE77FB946313CA3B6445F863159D4005A96D4F7B266CB2A4D69F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ExtendedAdfDecoder.cs",
+      "Bytes": 6742,
+      "Sha256": "EFB81EEA94A9E01D62AF51CB5433001088E7DCD02EDD00D46F538BB1655C7CB3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\IpfDecodeException.cs",
+      "Bytes": 467,
+      "Sha256": "F673F97EF9374123E33047F65A5854D549C08DDD6B4F21FAC72509477AFED1FB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\IpfDecodeOptions.cs",
+      "Bytes": 855,
+      "Sha256": "DECBE4202F04323E3F36653DB89E2E906CF70A895FD79C5473C94DFE52852908"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\IpfDecoder.cs",
+      "Bytes": 30452,
+      "Sha256": "BE6C90E5DF4836576185B2DA43CBA99CFA85A74D5B3F882C7BA6CBC1CD4C8A6D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\IpfDiskImage.cs",
+      "Bytes": 1380,
+      "Sha256": "094926013836F02B36A821C34F1AE609CCF19E384A8B0730462A64942A8B29D2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\IpfTrack.cs",
+      "Bytes": 2489,
+      "Sha256": "71C929345FA9B17D2033E920695CFD17862CFA518890DC03D25D42688B4C1C67"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ReadOnlyAdfDiskMedia.cs",
+      "Bytes": 1040,
+      "Sha256": "45C0016DC22CB79E5E22FDC06CC9B689F27D81165C04DE018BA70A0D2CA937EA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ScpDecodeException.cs",
+      "Bytes": 471,
+      "Sha256": "DFB9354D44E7B9B8C1C910549D4FBBFB47082DDD0E898754ED789C57370A94A0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ScpDecodeOptions.cs",
+      "Bytes": 1159,
+      "Sha256": "0E7475656A9E7B9B31A5A862D668FB1329F023EA8AFDD5B469A96807E809D76C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ScpDecoder.cs",
+      "Bytes": 12831,
+      "Sha256": "70E03FA204622A7FD429579BBFE30B8B6050BF4DD8BB793322B58C5A7741448E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ScpDiskImage.cs",
+      "Bytes": 1312,
+      "Sha256": "703375D8ED27EBD648A313CCAECABFF7417D66B05A66B4FDD49CC3D53565D53A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\ScpTrack.cs",
+      "Bytes": 1789,
+      "Sha256": "CA7B0B174026CDF674D2656B5A723AEEA165D5BBD459104066ACEB020D8FC659"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperDisk\\TrackBackedDiskMedia.cs",
+      "Bytes": 4052,
+      "Sha256": "19EC750BEC60B0CA484EB1C34612301DC02E96DEBBABAD48D608CDDBA6701CB8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Runner\\CopperMod.Amiga.Lightweight.Runner.csproj",
+      "Bytes": 882,
+      "Sha256": "38F7D054D7F084A6002D3603F04935AB7BCBF19BE14E2C0365504CA78423D569"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Runner\\NativeBootProbe.cs",
+      "Bytes": 9185,
+      "Sha256": "54FDD08412DCAA119F4C8A0010CA6E70BCEA86E59A88F3CD8C42492C506416EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Runner\\NativeInputScript.cs",
+      "Bytes": 3636,
+      "Sha256": "E5E36E1A3A8F8C7FA145481D442CCE4EAD764A59095D0FE16B71B8DA62D3F617"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Runner\\Program.cs",
+      "Bytes": 60625,
+      "Sha256": "22F3FEB1CDEF92B67D7FFD3A20B484E24DDD74C884E97F9723413B6FFDF6F1A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Tests\\TestResults\\hires-mode-selection-20261103.trx",
+      "Bytes": 271794,
+      "Sha256": "7FA2401AB26855DDB8EA5329E86EE5F1F85B2D9794A39AA490E741FCEF26F5E0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\AssemblyInfo.cs",
+      "Bytes": 181,
+      "Sha256": "220120098395A637162A315523D2B6A2240B89917E816307FAB883123181AE16"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\CopperMod.Amiga.Lightweight.csproj",
+      "Bytes": 2431,
+      "Sha256": "CD62BBFDDC2F3FAA62D9A173CC6F284DC06CBFDFACF02DE4C24F6FFEF694836D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA1200Io.cs",
+      "Bytes": 4045,
+      "Sha256": "04C560F0E5F34C2D19DEF4DFF5525303C52361F2D5282524B091EAF04BA299D4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Configuration.cs",
+      "Bytes": 4236,
+      "Sha256": "6245476458B3951E0053AE1392952FD77C1EBF7C4BA04DDF665E55AC221F37AE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Machine.Aga.cs",
+      "Bytes": 2316,
+      "Sha256": "DC5E15A16433F2FFCD8CD3916EADEEA24EE2DBEA53D37BC146C2D158B06B2F2B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Machine.cs",
+      "Bytes": 108777,
+      "Sha256": "2E036F421344FE38D0EE10C9AC56E70134C352816CB491101BD0E1BF90DA3D16"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Machine.Display.cs",
+      "Bytes": 2519,
+      "Sha256": "8AD12803779C245824E665F8CF1B65CF1E817EB8BFC687AC297DD062E823BF70"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Machine.Jit.cs",
+      "Bytes": 5739,
+      "Sha256": "A0A71AD4A26B14FACC0998D72ECA1D93DA0318A6BF33DF7A6A6364F3CDC5A2AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightA500Machine.Storage.cs",
+      "Bytes": 441,
+      "Sha256": "4CD4963B4E92467477C4EE02F67E0897085E2CB14E0DEE86820D36318963E758"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightAcceleratorBus.cs",
+      "Bytes": 6921,
+      "Sha256": "A445E61B81EE60F96605A6AF5E841B8C92DD7E2688BE4A8B3CC41E6D215A1DF3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightAgnusModel.cs",
+      "Bytes": 1718,
+      "Sha256": "BE840B5CC6259EFA30C9A9E22940E1F2DCD8A29D91EB3D06697F9E739BA5B5EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightAutoconfig.cs",
+      "Bytes": 15817,
+      "Sha256": "71473A7FCB265ED7316279A62B6048EBF9EECA745E10D77ACB4F46C3E161F1DC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightBitplanes.cs",
+      "Bytes": 20179,
+      "Sha256": "8AEFE9B4C36D878AD586FC6EBF07E32344732489692C578F7F82657EEC86A41A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightBlitter.cs",
+      "Bytes": 37615,
+      "Sha256": "4F544DE0F6D8446DD21C726D3E340EFC248126D8418F41F1CB5A2E55B83F0D99"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightBusArbiter.cs",
+      "Bytes": 1662,
+      "Sha256": "6D4D469525D384697D7765C84CF4EB8A4513B9C34C739070CF1D279A70CA16EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightCia.cs",
+      "Bytes": 22554,
+      "Sha256": "5CA6B61E6E3D2C59FCD8F1ACC8929FDE97A18A4B2BD7D72A99F128576CC48152"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightClock.cs",
+      "Bytes": 10990,
+      "Sha256": "C73197E90173E0441972199FDA9F12B4ECAF06683D665F53E2C0E71DA0006365"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightControllers.cs",
+      "Bytes": 2174,
+      "Sha256": "818E0BCF6605F370DA1AB464CB9341C479A0DC385F6AA5C2FDBB5EB46931A5DB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightCopper.cs",
+      "Bytes": 15339,
+      "Sha256": "ED998714E024A6E8C89E2E06C43B3B53CB441014C9C09924FF55ECB3711911AD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightCopperHdfController.cs",
+      "Bytes": 78160,
+      "Sha256": "1FE43570753D4D2B78645A15BB8F9FA52DBDC681C021B4B1E7F48EB833E09AC8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightCpuBoundary.cs",
+      "Bytes": 3887,
+      "Sha256": "D0FE3276155110976812A1789B8DE91233F5ADE3A61694DAF5EF527855380ADB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightDeniseModel.cs",
+      "Bytes": 301,
+      "Sha256": "5DB47E674024D18F72FCC346A0B3E278F4B883674ED06694048A3F782531B4EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightDiskDma.cs",
+      "Bytes": 11066,
+      "Sha256": "BF655E8B88837F4820F8D95D4544F558185176537F9A1E9E9204C23F5E35C4A5"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightDiskReceiver.cs",
+      "Bytes": 3577,
+      "Sha256": "21AB816A0F76CA00BC889E1CC5A687E533B943559F9CF25D02F5691F50D8771A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightDiskSerial.cs",
+      "Bytes": 4984,
+      "Sha256": "0FB1CAB0ECC0BB3E18F995D6835DEB2C056AD624C7B3D85C5E8CC603DDE69F6A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightDisplayWindow.cs",
+      "Bytes": 1027,
+      "Sha256": "B9F16FA8D3467C200FB06C8230A831561AD385408B57C1B04424BB068601E7A7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightExecutionPath.cs",
+      "Bytes": 897,
+      "Sha256": "D31E35C1E53CCBF60CC571F191C7F91E977A688032ADEC00DBBCDFA9611FED37"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightFastRam.cs",
+      "Bytes": 4204,
+      "Sha256": "4C17F39C80AF27B4BF69E45A65AA3D01E2B90295D0C780D329501247C1464709"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightFloppyDrive.cs",
+      "Bytes": 15266,
+      "Sha256": "191154561096AB6074FCC39C4C715421F39B4B730ADE2914CBDFB0FECF9A1A47"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightFloppyDriveType.cs",
+      "Bytes": 329,
+      "Sha256": "9E4B198354F0CE4F34E80CF43A96A0E079DD63ADB91BC6659A20A28C6A192015"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightFloppyFormat.cs",
+      "Bytes": 218,
+      "Sha256": "8E59F1F44152A515F9BF4C0C4DAF37A2B127811E500F4D00040E352F9466CB78"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightFloppyImage.cs",
+      "Bytes": 3854,
+      "Sha256": "C8F53DE3034998067EE94A7E94441A51A6BCDB787BDE98C8060D3AF9B58FB30D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightHdfBus.cs",
+      "Bytes": 8564,
+      "Sha256": "5CDEC0CCDAD06BCF6DE6257D0FF060ADA7FEE4272F4F0F528AC8FE7253125987"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightHostDirectory.cs",
+      "Bytes": 18164,
+      "Sha256": "D4D9592292AA33B13930BD69A88DFA9FE305D5D5F4D15023335725F9677CC4F1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightHostDirectoryConfiguration.cs",
+      "Bytes": 1471,
+      "Sha256": "6219200A33AE2527F62005DAF50AD80EEDE67F32E3A8A640E777DC3D5732AE4C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightHostFsController.cs",
+      "Bytes": 38215,
+      "Sha256": "FAE5563B0CCFA04296D119656C36F4BFB85F94DAEB1499CA081B23A8D44DBF0A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightIpfImage.cs",
+      "Bytes": 6609,
+      "Sha256": "5539EACA99EB4E4B4544DAD015566B190867764A2836306405D384196BD7B2B3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightKeyboard.cs",
+      "Bytes": 6875,
+      "Sha256": "FED9C9E6D6288DB28773B9E4A27D2099AEB18EF4873D0A08ED33CD09C1B9358F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightPaulaAudio.cs",
+      "Bytes": 23505,
+      "Sha256": "AA792460117151563FAF75081091562B265683E409BB937331B6235267A31A21"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightPaulaAudio.Output.cs",
+      "Bytes": 3919,
+      "Sha256": "458BBD8434405565302B2C5B7E3F1DF1FCA7F67C30FB87869CB027DF41BE8A78"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightPaulaSerial.cs",
+      "Bytes": 4457,
+      "Sha256": "13F4CD4AE0BFA57DC32C54C5684B4F10F734124DBABE815DE93843A828A5B2C8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightPotentiometers.cs",
+      "Bytes": 2611,
+      "Sha256": "E43C1F7BD537BB27700987A5640C8E611E79A7BB42AA29D2C95057BAFEB12C73"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightRealTimeClock.cs",
+      "Bytes": 10684,
+      "Sha256": "C5B8537DA0D0635AA39949001DEC50E7000EF33D704EEA0A76FB320F564F16CB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightRegisters.cs",
+      "Bytes": 11254,
+      "Sha256": "69583594D395C018893BD991ECD911C01AC8D8CFFD5315D726ABE4C7FAC7CF38"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightSpriteDma.cs",
+      "Bytes": 18690,
+      "Sha256": "CBBD4E7F6B65844A7B9C5E476FEACCB0FC76264C34A5BF060B721658CE9231FF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightSprites.Aga.cs",
+      "Bytes": 8992,
+      "Sha256": "F694E3EF28961C03868BD6DC23FF2D98C308178A308D5246868B0772DA479167"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightSprites.cs",
+      "Bytes": 32634,
+      "Sha256": "D62E125FA6B7433579D5BCA4A930B58F7A6F55B7E4D40A40F799609240F231AB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightVideo.Aga.cs",
+      "Bytes": 10247,
+      "Sha256": "3D606A2C69BC3FCDB0C133CC9D09770A3C9D1CD359C1838ADA40675A0F7E518A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightVideo.cs",
+      "Bytes": 42457,
+      "Sha256": "E7606EFBFFA011A2061DBE5EEC8A91A3D88D04CD2BA6DA07BBF44077D8B38E3E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight\\LightweightVideo.Ecs.cs",
+      "Bytes": 9228,
+      "Sha256": "90ADB59D3998128D3A4D55759FC9C6F7B64C303BCC036FF2D2FD49CEADAA488F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\HIRES_MODE_SELECTION_2026-11-03.md",
+      "Bytes": 6887,
+      "Sha256": "D60231EEB06D1285958B0C198812686C32090C6ED93BF83E9872A6B4631F97C2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\LEMMINGS_CORRECTNESS_2026-11-02.json",
+      "Bytes": 27974,
+      "Sha256": "663D84DEFAFEA783AA7353EAF50D21F35E9DBD1CAB734AFEA1F850967E7FAEA9"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\PERFORMANCE_BASELINE_2026-10-12.json",
+      "Bytes": 15788,
+      "Sha256": "BA7A5977E0F3F2E2B984F393220CECAA3393E326E458A452F9DBF7BA4803FF00"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\media\\lemmings-disk2.zip",
+      "Bytes": 767037,
+      "Sha256": "0C1CB9C49CBC29B56D2F974A90C510752E256148F8E8CC10CFBD026DB73DEA1A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\scripts\\agnus-g6-host-load.ps1",
+      "Bytes": 6589,
+      "Sha256": "7E1F03FC09E80199B8A18BB32781C967C5035300E5C79B1227EA0DD5F8F1D8C6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\scripts\\measure-lightweight-hires-v1.ps1",
+      "Bytes": 15428,
+      "Sha256": "8E17A4A0C795AE87941B74BB32735A6E848B7D61C0A4E1E5EC1779C9707AE4B0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\scripts\\qualification\\CopperScreen.Qualification.psm1",
+      "Bytes": 3249,
+      "Sha256": "0642ABF70C8C44044C1D39D29C0C779FED3DF168BC736DC700169A50EF55C82C"
+    }
+  ]
+}

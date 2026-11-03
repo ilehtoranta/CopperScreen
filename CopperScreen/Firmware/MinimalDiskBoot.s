@@ -1,4 +1,4 @@
-; CopperScreen original PAL 68000 A500 bootstrap. See docs/engine/MINIMAL_DISK_BOOT.md.
+; CopperScreen original PAL A500/A500+/A1200 bootstrap. See docs/engine/MINIMAL_DISK_BOOT.md.
 ; This is source, assembled once at machine construction by CopperScreenBootAssembler.
 ; No host traps, CPU hooks, filesystem, scheduler or replacement operating system.
 custom equ $dff000
@@ -13,6 +13,9 @@ decoded equ $5000
 boot equ $6800
 chipfirst equ $7000
 chipend equ $70000
+chiplimit equ $80000
+chipfree equ $69000
+groupzero_pc equ 10
 slowfirst equ $c00000
 slowend equ $c80000
 chipheader equ state+256
@@ -57,6 +60,7 @@ clearstate:
     move.l #chipfirst,chipheader+16
     clr.l chipfirst
     move.l #chipend-chipfirst,chipfirst+4
+    ; FITTED_CHIP_INIT
     move.l slow_config,state+44
     beq noslow
     move.l #slowfirst,slowheader+16
@@ -80,8 +84,8 @@ clearlibraries:
     ; Physical bounds include memory occupied by boot services. The free list
     ; excludes those allocations; takeover code can reclaim RAM after retiring OS use.
     move.l #$800,chipheader+20
-    move.l #$80000,chipheader+24
-    move.l #chipend-chipfirst,chipheader+28
+    move.l #chiplimit,chipheader+24
+    move.l #chipfree,chipheader+28
     tst.l state+44
     beq memoryheadersready
     move.l #slowheader,exec+322
@@ -125,12 +129,13 @@ copygfx:
     move.l #$7b800,state+190
     move.l #$400,exec+54
     move.l #$100,exec+58
-    move.l #$80000,exec+62
+    move.l #chiplimit,exec+62
     tst.l state+44
     beq noextendedbound
     move.l #slowend,exec+78
 noextendedbound:
     move.w #$ffff,exec+294
+    ; CPU_FLAGS
     move.b #50,exec+530
     move.b #50,exec+531
     lea ioreq,a1
@@ -180,6 +185,7 @@ bootchecksum_next:
     move.l #$7b800,a0
     move.l #boot_returned,-(a0)
     move.l a0,usp
+    ; CPU_BOOT_FRAME
     move.l #boot+12,-(sp)
     move.w #$0000,-(sp)
     rte
@@ -205,7 +211,7 @@ exception:
     bra fault
 groupzero:
     move.w #$ffff,state
-    move.l 10(sp),state+4
+    move.l groupzero_pc(sp),state+4
     bra fault
 boot_returned:
     move.w #$fffe,state
@@ -281,7 +287,7 @@ allocmem:
     movem.l d1-d7/a0-a5,-(sp)
     tst.l d0
     beq allocfail
-    cmpi.l #$80000,d0
+    cmpi.l #chiplimit,d0
     bhi allocfail
     addi.l #7,d0
     andi.l #$fffffff8,d0
@@ -371,6 +377,7 @@ freemem:
     bcs freebad
     cmpi.l #chipend,d3
     bls freepool
+    ; FITTED_CHIP_FREE
     tst.l state+44
     beq freebad
     cmpi.l #slowfirst,d0
@@ -652,7 +659,7 @@ readrequest:
     bls io_addressok
     bra io_badaddress
 io_chipaddress:
-    cmpi.l #$80000,d2
+    cmpi.l #chiplimit,d2
     bhi io_slowaddress
     cmpi.l #state,d2
     bls io_addressok

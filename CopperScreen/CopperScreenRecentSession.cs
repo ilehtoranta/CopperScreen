@@ -168,7 +168,7 @@ internal sealed class CopperScreenRecentSession
             var model = CopperScreenMachinePresets.Identify(draft);
             var rom = new NativeRom(path, draft.KickstartSource, draft.RomVersion);
             if (_kickstartRoms.GetValueOrDefault(model.ToString()) == rom) return false;
-            _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, rom.Source, rom.Version, model == CopperScreenMachineModel.Amiga1200);
+            _ = CopperScreenKickstartRomArchive.ReadNativeRom(path, rom.Version);
             _kickstartRoms[model.ToString()] = rom;
             return true;
         }

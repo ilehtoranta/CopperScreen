@@ -51,8 +51,7 @@ internal static class CopperScreenMachinePresets
             !string.IsNullOrWhiteSpace(current.KickstartRomPath);
         draft.RomVersion = hasSelectedNativeRom ? current.RomVersion : RecommendedKickstartVersion(model);
         draft.KickstartSource = current.KickstartSource == CopperScreenKickstartSource.CopperStart ? CopperScreenKickstartSource.CopperStart
-            : model == CopperScreenMachineModel.Amiga1200 ? CopperScreenKickstartSource.KickstartRom
-            : model == CopperScreenMachineModel.Amiga500 && current.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot && draft.HardDrives.Count == 0 && draft.HostDirectories.Count == 0
+            : current.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot && draft.HardDrives.Count == 0 && draft.HostDirectories.Count == 0
                 ? CopperScreenKickstartSource.MinimalDiskBoot
                 : CopperScreenKickstartSource.KickstartRom;
         draft.MarkRequiresRestart();
@@ -66,7 +65,7 @@ internal static class CopperScreenMachinePresets
         => draft.KickstartSource is not (CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart);
 
     public static string[] CpuChoices(CopperScreenSettingsDraft draft)
-        => draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? Identify(draft) == CopperScreenMachineModel.Amiga1200 ? ["AccurateM68EC020"] : ["AccurateM68000"]
+        => draft.KickstartSource is CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.MinimalDiskBoot ? Identify(draft) == CopperScreenMachineModel.Amiga1200 ? ["AccurateM68EC020"] : ["AccurateM68000"]
             : Identify(draft) == CopperScreenMachineModel.Amiga1200
             ? ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"]
             : ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"];
@@ -95,6 +94,9 @@ internal static class CopperScreenMachinePresets
     }
 
     public static bool CanUseMinimalBoot(CopperScreenSettingsDraft draft)
-        => draft.Chipset == AmigaChipset.OcsPal && draft.ChipRamKb == 512 && draft.CpuBackend == M68kBackendKind.AccurateM68000
-            && draft.RealFastRamKb == 0 && draft.HardDrives.Count == 0 && draft.HostDirectories.Count == 0;
+    {
+        var candidate = draft.Clone();
+        candidate.KickstartSource = CopperScreenKickstartSource.MinimalDiskBoot;
+        return CopperScreenAvailability.GetUnavailableReason(candidate, AppContext.BaseDirectory) == null;
+    }
 }

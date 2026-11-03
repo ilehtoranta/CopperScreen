@@ -36,7 +36,7 @@ public sealed partial class LaunchWorkflowTests
             Assert.Equal(31, SettingsField<double>(window, "_outputVolume"));
             Assert.True(SettingsField<bool>(window, "_outputMuted"));
             var status = SettingsField<TextBlock>(window, "_settingsStatus").Text;
-            Assert.Contains("Restart Amiga required", status);
+            Assert.StartsWith("Saved · Restart required:", status);
             Assert.Contains("CPU", status); Assert.Contains("RAM", status);
             Assert.DoesNotContain("Apply", status);
             SettingsField<TextBox>(window, "_setupDiskBox").Text = disk;
@@ -44,7 +44,7 @@ public sealed partial class LaunchWorkflowTests
             SettingsField<ComboBox>(window, "_cpuBackendBox").SelectedItem = "AccurateM68000";
             SettingsField<TextBox>(window, "_realFastRamBox").Text = "0";
             await Task.Delay(50);
-            Assert.Contains("Changes apply immediately", SettingsField<TextBlock>(window, "_settingsStatus").Text);
+            Assert.Equal("Saved · Changes apply immediately", SettingsField<TextBlock>(window, "_settingsStatus").Text);
             Click(SettingsField<Button>(window, "_settingsCloseButton"));
             Assert.Equal(CopperScreenPixelAspectMode.CrtCorrect, MenuDraft(window).PresentationOptions.PixelAspectMode);
         }
