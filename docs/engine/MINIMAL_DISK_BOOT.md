@@ -109,6 +109,57 @@ the headers, including the shim's RAM. Calling services after overwriting their
 state/vectors is unsupported. The host never attempts to restore that memory or
 turn the services off automatically. This is essential for hardware takeover.
 
+## Arte full A1200 replay — 2026-11-03
+
+The follow-up runs the original Arte ADF through its complete sequence, ending
+credits and automatic restart with **minimal disk boot on PAL A1200** (68EC020,
+Alice/Lisa, 2 MiB Chip RAM, no Fast/Slow RAM). A PAL A500+ (68000, ECS, 1 MiB
+Chip RAM, no Fast/Slow RAM) is the control. Both use the production host session,
+read-only DF0 and no user input. Neither uses a licensed Kickstart/CopperStart
+ROM, disk patches or host OS services. The preceding Copper protection correction
+is retained; this follow-up requires **no additional emulator or firmware fix**.
+
+Each run executes 40,000 fields, approximately **13 minutes 21 seconds of
+emulated time**, including one complete pass and the start of a second pass.
+There are no captured Copper68k exceptions, CPU halts, minimal-boot service
+faults, unsupported-feature stops or disk FIFO failures. Continuous 48 kHz stereo
+PCM and 800 PNG/checkpoint pairs per run are retained locally. The ending and
+restart, rather than the field budget alone, establish completion:
+
+| Profile | Observed completion checkpoints |
+| --- | --- |
+| A1200 | 22,500: end scroller and 3D objects; 25,000: credits/greetings; 29,750–30,000: “ARTE is rebooting in a few seconds”; 30,750: opening presentation again; 31,250: opening tunnel again. |
+| A500+ | 29,500–29,750: reboot message; 30,500: opening presentation again; 31,000: opening tunnel again. |
+
+Intermediate A1200 captures also show the opening tunnel/cubes, sphere, Einstein
+picture, starfield, kaleidoscope, face zoom, dot landscape, plasma, rubber sphere,
+later artwork, particle effects and the final loading transition. The demo's
+own “No AGA” text appears before the end section; it continues into the credits.
+The earlier A1200 FIFO stop and historical A500 late SOS exception do not recur.
+
+The [machine-readable record](ARTE_A1200_FULL_2026-11-03.json) retains input,
+firmware, engine, PCM and checkpoint hashes, final CPU/cycle state and selected
+scene fingerprints. Local captures, RAM and PCM are under
+`artifacts/arte-a1200-full-20261103/{discovery,a500-plus-control}/`; media and
+generated artifacts remain ignored. This is sampled visual progression with
+continuous PCM capture, not a pixel-perfect or listening-based audio comparison,
+physical-hardware certification, desktop UI soak test or host throughput result.
+
+The external [ArteFullReplay probe](../../scripts/probes/ArteFullReplay/Program.cs)
+retains the investigation without adding diagnostics to production execution.
+It checks the qualified ADF hash, records CPU exceptions, captures every 50 fields
+and exits nonzero on a fault. Model values are `0` (A500), `1` (A500+) and `2`
+(A1200); use a fresh output directory for each replay:
+
+```powershell
+dotnet run --project scripts/probes/ArteFullReplay/ArteFullReplay.csproj -c Release --artifacts-path artifacts/arte-full-build -- 'C:/Data/TestImages/Arte (Sanity).zip#/Arte (Sanity).adf' artifacts/arte-full-a1200 2 40000
+```
+
+The retained probe builds and passes a 151-field A1200 smoke run, including the
+final partial capture interval. The production Release solution builds with zero
+warnings/errors. The diagnostic-suite result in the preceding section belongs
+to the Copper correction; no engine implementation changed in this follow-up.
+
 ## Verification and limits
 
 Release production solution: zero warnings/errors. Host suite: 171 passed;

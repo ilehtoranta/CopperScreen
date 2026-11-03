@@ -1,0 +1,179 @@
+{
+  "date": "2026-11-03",
+  "purpose": "Full Arte minimal-disk-boot progression after the Copper SKIP protection correction",
+  "method": "Original read-only ADF; no user input; production host session; every field executed and PCM saved; PNG/checkpoint every 50 fields; manual ending and automatic restart review",
+  "limits": "Sampled visuals and non-silent PCM are not continuous pixel/audio fidelity or physical-hardware certification; no host throughput result",
+  "copper68kVersion": "1.5.4",
+  "productionChangesInFollowup": "None; prior Copper protection fix retained",
+  "runs": [
+    {
+      "profile": "PAL A1200 / 68EC020 / Alice / Lisa / 2 MiB Chip RAM / no Fast or Slow RAM",
+      "artifactDirectory": "artifacts/arte-a1200-full-20261103/discovery",
+      "summary": {
+        "model": 2,
+        "frames": 40000,
+        "limit": 40000,
+        "audible": 36717,
+        "sampleCount": 76922446,
+        "failure": null,
+        "exceptions": [],
+        "mediaSha256": "EB7521FC1DE886C69706AB0E21898A89199FB12256DB40743F3ED190957E896A",
+        "firmwareSha256": "1761E23454A76BEC0A5DE21E38A225C30B6EA9D4B9C51754BD3B64AB3B7A2B2B",
+        "engineSha256": "F09080F253F2A0E29170A61E7CEDBEE3A91414B423B9C4E165745DDEE5DAC601",
+        "scope": "No-input full-sequence investigation; frame PNG every 50 fields, continuous guest PCM; no host performance measurement"
+      },
+      "emulatedSecondsFromPcm": 801.2754791666666,
+      "checkpoints": 800,
+      "finalCycle": 5684080100,
+      "finalPc": "00007B36",
+      "pcmSha256": "3F5B777469058F12A77B7F52C3A01A456ADC357F9A05B5A8CF21DFA468E5BA5B",
+      "checkpointLogSha256": "A56AA8979C33E1974807560752224578B257FE0BED179A2EAEFF7CF64986163E",
+      "milestones": [
+        {
+          "field": 500,
+          "cycle": 71051005,
+          "pc": "00002780",
+          "framebufferSha256": "065A5B41BE46380E5FF9292C1CE0E8BE7145D5B87289157099154D26D899108F",
+          "pngSha256": "A1E630F772AA571C2BA7AF3AFD34DFAF29647F1E960C2602ED20B2CDC5A6F4C9"
+        },
+        {
+          "field": 3000,
+          "cycle": 426306001,
+          "pc": "000011BA",
+          "framebufferSha256": "0ADF68CBEF5B8E8BC5B9FDD76C789FA0EAE249C912830952910539C4AC931CC9",
+          "pngSha256": "A7ACE81AAA2A350B3FA18BA68DBEA5805D18BB8327A1AB402A2FDE12B2E53CE1"
+        },
+        {
+          "field": 9000,
+          "cycle": 1278918001,
+          "pc": "000CC15C",
+          "framebufferSha256": "02C45098E05F3F2816E045826CD447B39AE970A8C68B8AE02A0326EBDDBEAF54",
+          "pngSha256": "2E193A2FD772EAF3CD234C74CE9DC36B287BE03EC154C66B0C3BADEB5AE24429"
+        },
+        {
+          "field": 13000,
+          "cycle": 1847326003,
+          "pc": "00002076",
+          "framebufferSha256": "7F19636C0CE81057BB24A56E096C4CD7534A97C335972F1BFC8A6C163E67732D",
+          "pngSha256": "E21D531083617713843C47029BF6EE7A16D703695F94626EDD38FA4404FBE9E7"
+        },
+        {
+          "field": 18000,
+          "cycle": 2557836001,
+          "pc": "000AF32E",
+          "framebufferSha256": "918261837994235724604BCA5102EE48267B38969196918AB83FD916221B1A1F",
+          "pngSha256": "439F03C52684A5795B4FB44D72C8B74A47BA4EF1C8C6338587E9D70DF7CECE58"
+        },
+        {
+          "field": 22500,
+          "cycle": 3197295000,
+          "pc": "00020E3A",
+          "framebufferSha256": "521567C219BF227D7C6C71CF7F27E9BB6E04C6E5765757842DC0511DE97B9E0B",
+          "pngSha256": "EC2D5367082A05CF2F1A989DC9619514B8B4B2EF4B6BCF56143B343515555B50"
+        },
+        {
+          "field": 25000,
+          "cycle": 3552550014,
+          "pc": "000206AC",
+          "framebufferSha256": "CF896F0F8D26364339B5FFCA7F9980C4A2EED0C52558BE20940D21D131E62C15",
+          "pngSha256": "19BA5CA23FA51AEDD447C19307A872EF144B0133D2FECD3D2A9C5D4277A0C476"
+        },
+        {
+          "field": 29750,
+          "cycle": 4227534500,
+          "pc": "00020A4C",
+          "framebufferSha256": "3A6C5EA7B25371F81C2F9C069BF8B7A8B9FF177A3896A6732C090E2799968AF7",
+          "pngSha256": "E3E28B3956A1D771B50A6790A86B8A6E8D3664AA6F850A7F025D6D2AC758747E"
+        },
+        {
+          "field": 30000,
+          "cycle": 4263060001,
+          "pc": "00020A32",
+          "framebufferSha256": "3C5A671C0EB702FFAC716AA3BCCCF2966450BC8C393F844BB9A9E5CAF68C26B3",
+          "pngSha256": "89ECE14A71DECEC086A186A6B464CA74F0431FF3FBD18E0FA667BD6E8F8C243D"
+        },
+        {
+          "field": 30750,
+          "cycle": 4369636501,
+          "pc": "0008296A",
+          "framebufferSha256": "57C2C90A61F6E7EF3B8F51BEC126BFC29BD782FF7221987773BB78F61AEE3D62",
+          "pngSha256": "880AEF6550D883E409F3EFB0BEA80AC4BD9126A9520BE510127A014D1D3A0911"
+        },
+        {
+          "field": 31250,
+          "cycle": 4440687508,
+          "pc": "000011C0",
+          "framebufferSha256": "053ADCED63858D8C026DDD22800CF205BAB36DD1D61D24320C0F7A675938FD01",
+          "pngSha256": "A186EC6AE01609FFEADE26ED6299BAABB7F8ECF8FCA71F87DFA6A42063AF6544"
+        },
+        {
+          "field": 40000,
+          "cycle": 5684080100,
+          "pc": "00007B36",
+          "framebufferSha256": "644B883D1760718B7953EACB2CEFDA6092EA37C6D9DA79B269D70EC6AB45406C",
+          "pngSha256": "CCC60E8B40BAA6AC20E1D346DB8D77D35937793AEA799535E1129319863FC675"
+        }
+      ]
+    },
+    {
+      "profile": "PAL A500+ / 68000 / ECS / 1 MiB Chip RAM / no Fast or Slow RAM",
+      "artifactDirectory": "artifacts/arte-a1200-full-20261103/a500-plus-control",
+      "summary": {
+        "model": 1,
+        "frames": 40000,
+        "limit": 40000,
+        "audible": 36104,
+        "sampleCount": 76922446,
+        "failure": null,
+        "exceptions": [],
+        "mediaSha256": "EB7521FC1DE886C69706AB0E21898A89199FB12256DB40743F3ED190957E896A",
+        "firmwareSha256": "20CDE1D9A4AF89FC76971CAF6ECE7E3A59452690C8F100BA2F5B2C1DFEF60105",
+        "engineSha256": "F09080F253F2A0E29170A61E7CEDBEE3A91414B423B9C4E165745DDEE5DAC601",
+        "scope": "No-input full-sequence investigation; frame PNG every 50 fields, continuous guest PCM; no host performance measurement"
+      },
+      "emulatedSecondsFromPcm": 801.2754791666666,
+      "checkpoints": 800,
+      "finalCycle": 5684080016,
+      "finalPc": "00002A42",
+      "pcmSha256": "270939450DAE52EEC7D631D759AF02D1BE152E8BBF9B4A56A1F4B1669C1BEDBF",
+      "checkpointLogSha256": "02D805033E7D5AEC6D262D301ADBA431F3F431268D41459A1EC08FA810EA2E17",
+      "milestones": [
+        {
+          "field": 29500,
+          "cycle": 4192009018,
+          "pc": "0001F224",
+          "framebufferSha256": "936B94E5EDADE513FFD08D1C62862DFEDEDB1CCE697661AD0BE6C57A663BCF68",
+          "pngSha256": "3F2524ACB3B41F4382E962297265103B798603A5F6820D38D8209162430B7B12"
+        },
+        {
+          "field": 29750,
+          "cycle": 4227534522,
+          "pc": "0001FC76",
+          "framebufferSha256": "4DEE92D3D2F16FEDA8D51CE6AC83F5EE0EB8E0340039B4A05C9340DF7C1CFD64",
+          "pngSha256": "C0B6D876988049CBC70754DD87A44253B3B3D0A5E70E69BAC962EDC178D8ACCC"
+        },
+        {
+          "field": 30500,
+          "cycle": 4334111002,
+          "pc": "0008296A",
+          "framebufferSha256": "435A2F93B30E3003958A7776080DE809080AA5F36FD2AB84CF5837BF5E9C9A8A",
+          "pngSha256": "AA146BE7F118795106FFC87B78D72466CCE69FCB7269F3E808BCCDC72C964A95"
+        },
+        {
+          "field": 31000,
+          "cycle": 4405162000,
+          "pc": "000011B2",
+          "framebufferSha256": "FB1CCE50A6D06FF06E06E9FF45B187E95D7BA67B3BB065D596A8D0B86D6E67DE",
+          "pngSha256": "9389A1B48A457102B7CA02100321CDF161FDB670F8A75225B7F425032CC1A55E"
+        },
+        {
+          "field": 40000,
+          "cycle": 5684080016,
+          "pc": "00002A42",
+          "framebufferSha256": "644B883D1760718B7953EACB2CEFDA6092EA37C6D9DA79B269D70EC6AB45406C",
+          "pngSha256": "CCC60E8B40BAA6AC20E1D346DB8D77D35937793AEA799535E1129319863FC675"
+        }
+      ]
+    }
+  ]
+}
