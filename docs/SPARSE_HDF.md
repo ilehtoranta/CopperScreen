@@ -29,10 +29,11 @@ aliased bitmap pages, malformed extension chains, and metadata marked free are
 rejected. TRIM does not repair a filesystem. Failed requests can have discarded
 part of their range; completed counters exclude that request and retry scans afresh.
 
-OFS uses the CopperFFS handler for read access and manual TRIM. Its normal OFS
-writer remains separate: stop/unmount it before using the maintenance handler,
-and unmount the maintenance handler before returning to normal writes. The FFS
-writer stays disabled for OFS. Only one handler may own a partition at a time.
+CopperFFS supports OFS reads, writes and manual TRIM on the same mount; routine
+use no longer requires switching handlers. OFS writes maintain data headers,
+checksums and both file chains, including extension blocks. Failed mutations
+leave the bitmap invalid and block later writes and TRIM until separately
+validated. Only one handler may own a partition at a time.
 
 The command counts filesystem blocks submitted for discard, not host bytes
 reclaimed. Hard-disk settings display virtual bytes and host allocated bytes
@@ -82,17 +83,19 @@ corruption and cleanup. `HardDiskSparseRestoreFailureTests` additionally uses th
 existing `CopperScreenInstalledTests=true` diagnostic build to exercise disk-full
 injection and actual child-process termination during restore.
 
-The CopperSFS repository owns version-4 scanning and recovery tests. CopperStart's
+The CopperFS umbrella repository owns CopperFFS (OFS/FFS), CopperSFS (classic SFS
+and SFS2), shared native handlers and CopperTrim. CopperStart consumes its pinned
+`external/CopperFS` dependency. CopperFS owns version-4 scanning and recovery tests. CopperStart's
 `build/Test-SparseHdf.ps1` builds a development handler/command/extension set and
 runs compiled guest write/delete/TRIM/rewrite/cold-reboot tests. It records hashes
 and a host-specific receipt. No packages, firmware or media are published by it.
 
-CopperStart owns the OFS/FFS scanner in `AmigaFfsTrim.cs`. Build its standalone handler
+CopperFS owns the OFS/FFS scanner in `src/CopperFFS.Core/AmigaFfsTrim.cs`. Build its standalone handler
 with `build/Build-SfsHandler.ps1 -Ffs` and the shared commands with
 `build/Build-Trim.ps1`. `Test-SparseHdf.ps1` now qualifies OFS and FFS as well as SFS/SFS2,
 including poisoned partial discard, fresh retry, rewrite and cold reboot.
 
-The OFS development-v3 run on 2026-11-04 passed 139 managed filesystem tests and
+The earlier OFS development-v3 run on 2026-11-04 passed 139 managed filesystem tests and
 all 12 native cases with no skips. OFS cases cover production TRIM, a no-TRIM
 control and destructive partial-discard retry. Four cold boots switch exclusively
 between the ROM OFS writer and the CopperFFS maintenance handler. A live file and
@@ -101,6 +104,22 @@ After rewrite and reboot, the OFS production image retained 16 MiB of logical
 capacity while host allocation fell from 16 MiB to 512 KiB. The control retained
 16 MiB of allocation. Measurements and the receipt are under CopperStart's
 `artifacts/ofs-qualification/`. Both extension variants built successfully.
+
+The subsequent OFS writer run passed 164 managed filesystem tests and all six
+focused OFS/FFS native cases without skips. CopperFFS performs OFS write, partial
+overwrite, delete, CopperTrim and rewrite on one mount; cold boots verify the
+data through both CopperFFS and the ROM OFS reader. Corrupt metadata, interrupted
+writes, partial discard, allocation after retry and non-default block sizes are
+covered. OFS and FFS production images again retained 16 MiB logical capacity
+while allocation fell to 512 KiB; controls retained 16 MiB. Evidence and the rebuilt
+standalone handler are under CopperStart's `artifacts/ofs-write/`. This focused
+run does not qualify a new extension/reset-ROM bundle or replace the desktop ROM.
+
+The CopperFS umbrella migration subsequently passed 1,000 portable filesystem
+tests, all 164 CopperStart integration tests and all twelve native sparse-storage
+cases on Windows/NTFS. One external-media core test was unavailable. All three
+Release solutions built. CopperFFS and the commands remained byte-identical;
+standalone migration evidence is under CopperStart's `artifacts/copperfs-migration/`.
 
 Windows/NTFS has been exercised on this development host. Linux/ext4 and
 macOS/APFS implementation is present but runtime qualification is unavailable
