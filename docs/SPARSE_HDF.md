@@ -17,17 +17,22 @@ CopperTrim DH0:
 ```
 
 Install the matching development handler and command. CopperTrim supports our
-DOS1/FFS, classic SFS and SFS2 handlers through the same version-1 packet. The old
+DOS0/OFS, DOS1/FFS, classic SFS and SFS2 handlers through the same version-1 packet. The old
 CopperSFSTrim name remains a compatibility alias. Old handlers do not gain TRIM
 from the host setting alone. The currently qualified desktop reset ROM is not
 replaced by this development handler build, and no volume is automatically trimmed.
 
-FFS requires a valid allocation bitmap. The handler holds the mount, durably
+OFS/FFS requires a valid allocation bitmap. The handler holds the mount, durably
 flushes pending writes, and validates all bitmap pages and extension pointers
 before discarding anything. Unvalidated volumes, checksum damage, missing or
 aliased bitmap pages, malformed extension chains, and metadata marked free are
 rejected. TRIM does not repair a filesystem. Failed requests can have discarded
 part of their range; completed counters exclude that request and retry scans afresh.
+
+OFS uses the CopperFFS handler for read access and manual TRIM. Its normal OFS
+writer remains separate: stop/unmount it before using the maintenance handler,
+and unmount the maintenance handler before returning to normal writes. The FFS
+writer stays disabled for OFS. Only one handler may own a partition at a time.
 
 The command counts filesystem blocks submitted for discard, not host bytes
 reclaimed. Hard-disk settings display virtual bytes and host allocated bytes
@@ -82,10 +87,20 @@ The CopperSFS repository owns version-4 scanning and recovery tests. CopperStart
 runs compiled guest write/delete/TRIM/rewrite/cold-reboot tests. It records hashes
 and a host-specific receipt. No packages, firmware or media are published by it.
 
-CopperStart owns the FFS scanner in `AmigaFfsTrim.cs`. Build its standalone handler
+CopperStart owns the OFS/FFS scanner in `AmigaFfsTrim.cs`. Build its standalone handler
 with `build/Build-SfsHandler.ps1 -Ffs` and the shared commands with
-`build/Build-Trim.ps1`. `Test-SparseHdf.ps1` now qualifies FFS as well as SFS/SFS2,
+`build/Build-Trim.ps1`. `Test-SparseHdf.ps1` now qualifies OFS and FFS as well as SFS/SFS2,
 including poisoned partial discard, fresh retry, rewrite and cold reboot.
+
+The OFS development-v3 run on 2026-11-04 passed 139 managed filesystem tests and
+all 12 native cases with no skips. OFS cases cover production TRIM, a no-TRIM
+control and destructive partial-discard retry. Four cold boots switch exclusively
+between the ROM OFS writer and the CopperFFS maintenance handler. A live file and
+the rewritten data survive; independent checks validate OFS headers and bitmaps.
+After rewrite and reboot, the OFS production image retained 16 MiB of logical
+capacity while host allocation fell from 16 MiB to 512 KiB. The control retained
+16 MiB of allocation. Measurements and the receipt are under CopperStart's
+`artifacts/ofs-qualification/`. Both extension variants built successfully.
 
 Windows/NTFS has been exercised on this development host. Linux/ext4 and
 macOS/APFS implementation is present but runtime qualification is unavailable
