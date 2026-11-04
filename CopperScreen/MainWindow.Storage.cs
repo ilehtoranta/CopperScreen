@@ -88,7 +88,7 @@ internal sealed partial class MainWindow
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException) { SetSettingsError(ex.Message); }
             }));
-            form.Children.Add(SettingsHelp("Sparse storage help", "Virtual capacity stays fixed. CopperSFSTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
+            form.Children.Add(SettingsHelp("Sparse storage help", "Virtual capacity stays fixed. CopperTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
             path.TextChanged += (_, _) => { sparseEnabled = null; RefreshAllocation(); };
             RefreshAllocation();
             var readOnly = new CheckBox { Content = "Read-only", IsChecked = settings.ReadOnly };

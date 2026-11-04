@@ -11,15 +11,23 @@ This prepares the file and saves the disk preference with the machine settings.
 Enable guest writes to permit discard. Reclamation is an explicit guest operation:
 
 ```text
-CopperSFSTrim SFS0: CHECK
-CopperSFSTrim SFS0: DRYRUN
-CopperSFSTrim SFS0:
+CopperTrim DH0: CHECK
+CopperTrim DH0: DRYRUN
+CopperTrim DH0:
 ```
 
-Install the matching development CopperSFS handler and command. Classic SFS and
-SFS2 are supported by their respective handler profiles. FFS and old handlers do
-not gain a free-space scanner from this setting. The bundled desktop's existing
-FFS volume is not converted or automatically trimmed.
+Install the matching development handler and command. CopperTrim supports our
+DOS1/FFS, classic SFS and SFS2 handlers through the same version-1 packet. The old
+CopperSFSTrim name remains a compatibility alias. Old handlers do not gain TRIM
+from the host setting alone. The currently qualified desktop reset ROM is not
+replaced by this development handler build, and no volume is automatically trimmed.
+
+FFS requires a valid allocation bitmap. The handler holds the mount, durably
+flushes pending writes, and validates all bitmap pages and extension pointers
+before discarding anything. Unvalidated volumes, checksum damage, missing or
+aliased bitmap pages, malformed extension chains, and metadata marked free are
+rejected. TRIM does not repair a filesystem. Failed requests can have discarded
+part of their range; completed counters exclude that request and retry scans afresh.
 
 The command counts filesystem blocks submitted for discard, not host bytes
 reclaimed. Hard-disk settings display virtual bytes and host allocated bytes
@@ -74,6 +82,11 @@ The CopperSFS repository owns version-4 scanning and recovery tests. CopperStart
 runs compiled guest write/delete/TRIM/rewrite/cold-reboot tests. It records hashes
 and a host-specific receipt. No packages, firmware or media are published by it.
 
+CopperStart owns the FFS scanner in `AmigaFfsTrim.cs`. Build its standalone handler
+with `build/Build-SfsHandler.ps1 -Ffs` and the shared commands with
+`build/Build-Trim.ps1`. `Test-SparseHdf.ps1` now qualifies FFS as well as SFS/SFS2,
+including poisoned partial discard, fresh retry, rewrite and cold reboot.
+
 Windows/NTFS has been exercised on this development host. Linux/ext4 and
 macOS/APFS implementation is present but runtime qualification is unavailable
 here (no Linux environment or Mac). Run the same storage and native suites on
@@ -100,3 +113,12 @@ the six cases. This is correctness evidence, not a throughput measurement.
 The receipt used CopperSFS `3cb300be936712f16dd2a0a83423fa1fc687e430`.
 The subsequent pin `cd606a9` adds only assertions that completed-range counters
 exclude partially failed requests; production code and native binaries are unchanged.
+
+The subsequent FFS/CopperTrim development-v2 run on 2026-11-04 passed nine native
+cases with no skips, 112 managed filesystem tests (including 27 FFS TRIM cases),
+and the 11 focused CopperHDF discard diagnostics. Both Release solutions built.
+The matching handler/command/extension hashes and native TRX are under
+`CopperStart-sparse-publish/artifacts/ffs-trim/`; source integration is on that
+worktree's `codex/ffs-trim` branch with CopperSFS pin `ee11ac9`. The original
+CopperStart checkout's unrelated local edits were preserved. This development
+qualification does not replace the currently pinned desktop reset ROM.
