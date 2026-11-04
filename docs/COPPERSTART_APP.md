@@ -38,7 +38,7 @@ Each model has its own writable disk: `A500-Desktop`, `A500Plus-Desktop`, or
 The qualified **CopperStart A1200 ROM (512 KiB)** and **8 MiB CopperOS FFS HDF**
 are embedded in the application. The HDF starts the native **CopperOS Desktop**
 with Home, Files, Editor and About. No ROM, HDF or ADF picker is needed.
-The current [single-bank qualification](COPPEROS_CSHARP_GRAPHICS_2026-11-01.md)
+The current [single-bank qualification](COPPEROS_BLTCLEAR_PRIVATE_CONTRACT_2026-11-04.md)
 uses compiled C# for BltClear and pen/mode getters. It retains shared rectangle
 geometry, short CPU plane/row loops, internal blitter ownership, register-based
 solid-fill DMA, ECS size registers, the

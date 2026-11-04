@@ -1,9 +1,9 @@
 {
-  "qualificationId": "diskboot-2026-11-04-a1200-desktop-single-bank.60",
+  "qualificationId": "diskboot-2026-11-04-a1200-desktop-single-bank.61",
   "producerCommit": "b0f23ddc4f4d8bf075b837b602200f0244dd0ace",
   "bytes": 524288,
-  "sha256": "9e871250a72e568fa844751140d6b391a71893c405913e96e749ca1d87027f9f",
+  "sha256": "40354240a611bf324e240b83407113683dfa6bd698f547fa97e41c3bc47ad6de",
   "requirements": "PAL A1200, 68EC020 interpreter, Alice/Lisa, 2 MiB Chip RAM, no slow/Fast RAM, one existing FFS HDF on unit 0 and empty floppy drives. No RTC, RTG or shared folders. One standard 512 KiB F80000 ROM, including native graphics; no extension bank or companion ROM.",
-  "evidence": "docs/COPPEROS_BLTCLEAR_OWNERSHIP_2026-11-04.md",
-  "producerSourceSnapshot": "Development working-tree snapshot based on the named producer commit. Seventeen bounded emitter changes from the frozen .59 composition; .49 reset input and exec-preemption.10 HDF remain. All internal graphics waits directly use the C# hardware fence, compiled to the same 18-byte register-preserving body as public WaitBlit. Compiler metadata binds BltClear ownership calls to the existing private entries while preserving reservation, queue and release behavior. The 1124-byte C# kernel is 12 bytes smaller; the 524288-byte ROM uses 522256 bytes. Sources, runtime receipts, profiles, two identical 572-row comparisons, tests and paired A1200 replays are in artifacts/graphics-bltclear-owner-20261103. Concurrent producer development is excluded."
+  "evidence": "docs/COPPEROS_BLTCLEAR_PRIVATE_CONTRACT_2026-11-04.md",
+  "producerSourceSnapshot": "Development working-tree snapshot based on the named producer commit. Four bounded emitter files change from the frozen .60 composition; the .49 reset and exec-preemption.10 HDF remain. CopperSharp68k honors explicit private register-preservation contracts before allocation, without a synthetic void return clobber. BltClear shares the direct C# hardware fence and DMA completion exit; private release trusts its existing ownership grant while preserving public admission and queue handoff. C# kernel 1060 bytes; standard 524288-byte ROM uses 522196 bytes. Exact sources, runtime receipts, two identical 572-row comparisons, ordered profiles, tests and paired A1200 replays are in artifacts/graphics-bltclear-flat-20261104. Concurrent producer development is excluded."
 }
