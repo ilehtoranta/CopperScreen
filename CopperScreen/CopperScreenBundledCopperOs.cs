@@ -110,6 +110,7 @@ internal static class CopperScreenBundledCopperOs
         var parent = Path.Combine(userData, "CopperOS");
         var workspace = Path.Combine(parent, DesktopFolder(current));
         var image = Path.Combine(workspace, "CopperOS.hdf");
+        var createdImage = false;
         if (!Directory.Exists(workspace))
         {
             Directory.CreateDirectory(parent);
@@ -123,7 +124,7 @@ internal static class CopperScreenBundledCopperOs
                     if (seed.Length != Seed.Bytes || !Convert.ToHexString(SHA256.HashData(seed)).Equals(Seed.Sha256, StringComparison.OrdinalIgnoreCase))
                         throw new InvalidDataException("The bundled CopperOS image is damaged. Reinstall the application; existing personal hard disks are preserved.");
                 File.WriteAllText(Path.Combine(temporary, "seed.json"), JsonSerializer.Serialize(Seed));
-                try { Directory.Move(temporary, workspace); }
+                try { Directory.Move(temporary, workspace); createdImage = true; }
                 catch (IOException) when (Directory.Exists(workspace)) { }
             }
             finally { if (Directory.Exists(temporary)) Directory.Delete(temporary, recursive: true); }
@@ -147,7 +148,9 @@ internal static class CopperScreenBundledCopperOs
                 finally { if (File.Exists(temporary)) File.Delete(temporary); }
             }
         }
-        var hardfile = CopperScreenHardfileSettings.Ffs(0, image, false, "DH0:2:32:0:255");
+        var sparse = current.HardDrives.FirstOrDefault(d =>
+            Path.GetFullPath(d.Path).Equals(Path.GetFullPath(image), StringComparison.OrdinalIgnoreCase))?.SparseStorage ?? createdImage;
+        var hardfile = CopperScreenHardfileSettings.Ffs(0, image, false, "DH0:2:32:0:255") with { SparseStorage = sparse };
         hardfile.ValidateCopperStart(checkImage: true);
         var draft = current.Clone();
         draft.KickstartRomPath = romPath;
@@ -161,7 +164,8 @@ internal static class CopperScreenBundledCopperOs
         using var source = typeof(CopperScreenBundledCopperOs).Assembly.GetManifestResourceStream("CopperScreen.Bundled." + name)
             ?? throw new InvalidOperationException("The CopperOS bundle is missing. Reinstall the application.");
         using var output = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None);
-        source.CopyTo(output);
+        if (name.EndsWith(".hdf", StringComparison.OrdinalIgnoreCase)) CopperDisk.AmigaSparseFile.Copy(source, output);
+        else source.CopyTo(output);
         output.Flush(flushToDisk: true);
     }
 

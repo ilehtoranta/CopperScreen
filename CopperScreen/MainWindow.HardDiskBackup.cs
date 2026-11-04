@@ -63,12 +63,15 @@ internal sealed partial class MainWindow
         _applyingSettings = true; UpdateSettingsStatus(); UpdateToolbarStatus();
         try
         {
+            var sparseUnavailable = new List<int>();
             var draft = await Task.Run(() => CopperScreenHardDiskBackup.Restore(path, _recentSession.DataDirectory, AppContext.BaseDirectory,
-                restored => _recentSession.RememberRestoredMachine(restored, AppContext.BaseDirectory)));
+                restored => _recentSession.RememberRestoredMachine(restored, AppContext.BaseDirectory), sparseUnavailable.Add));
             SetWelcomeDraft(draft);
-            _hardDiskBackupStatus.Text = "Restored into new disk files. The backup is unchanged. Check the firmware path, then start the Amiga.";
+            var sparseStatus = sparseUnavailable.Count == 0 ? " Sparse storage enabled." :
+                $" Sparse storage unavailable for units {string.Join(", ", sparseUnavailable)}; restored as ordinary images.";
+            _hardDiskBackupStatus.Text = "Restored into new disk files. The backup is unchanged. Check the firmware path, then start the Amiga." + sparseStatus;
             _hardDiskBackupStatus.IsVisible = true;
-            ShowDiskFeedback("Backup restored into new disk files. Machine settings and disk write protection are preserved. Check the firmware path, then start the Amiga.", true);
+            ShowDiskFeedback("Backup restored into new disk files. Machine settings and disk write protection are preserved. Check the firmware path, then start the Amiga." + sparseStatus, true);
         }
         finally { _applyingSettings = false; UpdateSettingsStatus(); UpdateToolbarStatus(); }
     }

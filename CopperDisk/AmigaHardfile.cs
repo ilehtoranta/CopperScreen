@@ -151,6 +151,9 @@ namespace CopperDisk
         /// <summary>Missing-file creation size in bytes, or zero to require an existing file.</summary>
         public long CreateSizeBytes { get; }
 
+        /// <summary>Enable host sparse storage and manual discard. Null enables new files only.</summary>
+        public bool? SparseStorage { get; init; }
+
         /// <summary>RDB/partition discovery mode.</summary>
         public AmigaHardfileMountMode MountMode { get; }
 
@@ -174,6 +177,7 @@ namespace CopperDisk
         }
         private readonly Backing _backing;
         private readonly IAmigaHardfileIoHook? _ioHook;
+        private bool _sparseDiscard;
         private FileStream _stream => _backing.Stream;
         private bool _disposed;
 
@@ -213,10 +217,10 @@ namespace CopperDisk
 
         public long SectorCount => Length / SectorSize;
 
-        internal bool SupportsDiscard => !ReadOnly && _ioHook is IAmigaHardfileDiscardIoHook
-            { SupportsDiscard: true, MaximumDiscardSectors: > 0 };
+        internal bool SupportsDiscard => !ReadOnly && (_ioHook is null ? _sparseDiscard : _ioHook is IAmigaHardfileDiscardIoHook
+            { SupportsDiscard: true, MaximumDiscardSectors: > 0 });
         internal uint MaximumDiscardSectors => SupportsDiscard
-            ? Math.Min(((IAmigaHardfileDiscardIoHook)_ioHook!).MaximumDiscardSectors, int.MaxValue / SectorSize) : 0;
+            ? _ioHook is IAmigaHardfileDiscardIoHook hook ? Math.Min(hook.MaximumDiscardSectors, int.MaxValue / SectorSize) : 4096u : 0;
 
         internal void Discard(long byteOffset, int bytes)
         {
@@ -224,7 +228,8 @@ namespace CopperDisk
             ValidateRange(byteOffset, bytes);
             if (!SupportsDiscard || byteOffset % SectorSize != 0 || bytes <= 0 || bytes % SectorSize != 0 ||
                 bytes / SectorSize > MaximumDiscardSectors) throw new ArgumentOutOfRangeException(nameof(bytes));
-            ((IAmigaHardfileDiscardIoHook)_ioHook!).Discard(_stream, byteOffset, bytes);
+            if (_ioHook is IAmigaHardfileDiscardIoHook hook) hook.Discard(_stream, byteOffset, bytes);
+            else AmigaSparseFile.Discard(_stream, byteOffset, bytes);
         }
 
         public bool HasRigidDiskBlock => AmigaRigidDiskBlock.TryFind(this, out _);
@@ -233,14 +238,15 @@ namespace CopperDisk
         {
             ArgumentNullException.ThrowIfNull(configuration);
             var fullPath = System.IO.Path.GetFullPath(configuration.Path);
-            if (!File.Exists(fullPath))
+            var creating = !File.Exists(fullPath);
+            if (creating)
             {
                 if (configuration.CreateSizeBytes <= 0)
                 {
                     throw new FileNotFoundException("Hardfile image was not found.", fullPath);
                 }
 
-                CreateBlank(fullPath, configuration.CreateSizeBytes);
+                CreateBlank(fullPath, configuration.CreateSizeBytes, configuration.SparseStorage ?? true);
             }
 
             var access = configuration.ReadOnly ? FileAccess.Read : FileAccess.ReadWrite;
@@ -261,6 +267,8 @@ namespace CopperDisk
                 new Backing(stream), configuration.IoHook, configuration.ExposeBootNode);
             try
             {
+                hardfile._sparseDiscard = !configuration.ReadOnly && configuration.IoHook is null &&
+                    (configuration.SparseStorage ?? creating) && AmigaSparseFile.TryEnable(stream);
                 if (configuration.MountMode == AmigaHardfileMountMode.RigidDiskBlock && !hardfile.HasRigidDiskBlock)
                     throw new InvalidDataException($"Hardfile '{fullPath}' was configured for RDB mounting but no valid RDB was found.");
                 return hardfile;
@@ -284,6 +292,8 @@ namespace CopperDisk
                 configuration.ExposeBootNode);
             try
             {
+                replacement._sparseDiscard = !configuration.ReadOnly && configuration.IoHook is null &&
+                    (configuration.SparseStorage ?? _sparseDiscard) && (_sparseDiscard || AmigaSparseFile.TryEnable(_stream));
                 if (configuration.MountMode == AmigaHardfileMountMode.RigidDiskBlock && !replacement.HasRigidDiskBlock)
                     throw new InvalidDataException($"Hardfile '{Path}' has no valid RDB.");
                 return replacement;
@@ -291,7 +301,7 @@ namespace CopperDisk
             catch { replacement.Dispose(); throw; }
         }
 
-        public static void CreateBlank(string path, long sizeBytes)
+        public static void CreateBlank(string path, long sizeBytes, bool sparseStorage = true)
         {
             if (string.IsNullOrWhiteSpace(path))
             {
@@ -310,6 +320,7 @@ namespace CopperDisk
             }
 
             using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+            if (sparseStorage) AmigaSparseFile.TryEnable(stream);
             stream.SetLength(sizeBytes);
         }
 

@@ -7,7 +7,8 @@ internal sealed record CopperScreenHardfileSettings(
 	bool ReadOnly,
 	long CreateSizeBytes,
 	AmigaHardfileMountMode Mode = AmigaHardfileMountMode.Auto,
-	AmigaHardfilePartitionMetadata? Partition = null)
+	AmigaHardfilePartitionMetadata? Partition = null,
+    bool? SparseStorage = null)
 {
     internal static CopperScreenHardfileSettings Ffs(int unit, string path, bool readOnly, string geometry)
     {

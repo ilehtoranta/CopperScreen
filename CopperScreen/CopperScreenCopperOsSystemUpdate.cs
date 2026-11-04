@@ -85,7 +85,7 @@ internal static class CopperScreenCopperOsSystemUpdate
             if (!TryCreateSystemImage(original, replacement, command, gui, out var updated)) return false;
             if (updated is null) return true;
             using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-            { output.Write(updated); output.Flush(flushToDisk: true); }
+            { using var source = new MemoryStream(updated, writable: false); CopperDisk.AmigaSparseFile.Copy(source, output); output.Flush(flushToDisk: true); }
             var backup = Path.Combine(directory, "CopperOS.before-drawing-" + Guid.NewGuid().ToString("N") + ".hdf");
             File.Replace(temporary, path, backup);
             return true;

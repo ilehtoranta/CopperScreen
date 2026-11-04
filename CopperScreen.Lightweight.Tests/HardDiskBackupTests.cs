@@ -11,6 +11,48 @@ public sealed class HardDiskBackupTests : IDisposable
     public HardDiskBackupTests() => Directory.CreateDirectory(_root);
     public void Dispose() => Directory.Delete(_root, true);
     private string PathOf(string name) => Path.Combine(_root, name);
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void SparseRestorePreservesLogicalBytesAndTrailingHolesFromBothZipEncodings(bool legacy)
+    {
+        var draft = Draft(); draft.HardDrives.RemoveAt(1);
+        var bytes = new byte[4 * 1024 * 1024]; bytes[0] = 19; bytes[500000] = 77;
+        File.WriteAllBytes(draft.HardDrives[0].Path, bytes);
+        var backup = PathOf("sparse.copperhdf");
+        CopperScreenHardDiskBackup.Export(draft, backup, AppContext.BaseDirectory, PathOf("private"));
+        Assert.True(new FileInfo(backup).Length < bytes.Length / 10);
+        if (legacy)
+        {
+            using var zip = ZipFile.Open(backup, ZipArchiveMode.Update);
+            zip.GetEntry("disks/unit-0.hdf")!.Delete();
+            using var stream = zip.CreateEntry("disks/unit-0.hdf", CompressionLevel.NoCompression).Open();
+            stream.Write(bytes);
+        }
+        var unavailable = new List<int>();
+        var restored = CopperScreenHardDiskBackup.Restore(backup, PathOf("restored"), AppContext.BaseDirectory, sparseUnavailable: unavailable.Add);
+        var path = restored.HardDrives[0].Path;
+        Assert.Equal(bytes, File.ReadAllBytes(path));
+        Assert.Empty(unavailable);
+        Assert.True(CopperDisk.AmigaSparseFile.GetAllocatedBytes(path) < bytes.Length / 2);
+        Assert.True(restored.HardDrives[0].SparseStorage);
+        Assert.True(CopperScreenProfile.TryLoad(restored.SourcePath!, AppContext.BaseDirectory, out var profile, out var error, PathOf("restored")), error);
+        Assert.True(CopperScreenSettingsDraft.FromProfile(profile).HardDrives[0].SparseStorage);
+    }
+
+    [Theory]
+    [InlineData(null)] [InlineData(false)] [InlineData(true)]
+    public void SparsePreferenceSurvivesProfileAndRememberedSession(bool? enabled)
+    {
+        var draft = Draft(); draft.HardDrives[0] = draft.HardDrives[0] with { SparseStorage = enabled };
+        var profilePath = PathOf("profile.json");
+        File.WriteAllText(profilePath, CopperScreenProfileStore.Serialize(draft, AppContext.BaseDirectory));
+        Assert.True(CopperScreenProfile.TryLoad(profilePath, AppContext.BaseDirectory, out var profile, out var error, PathOf("private")), error);
+        Assert.Equal(enabled, CopperScreenSettingsDraft.FromProfile(profile).HardDrives[0].SparseStorage);
+        var recent = new CopperScreenRecentSession(PathOf("private"));
+        recent.Save(draft, 37, true, AppContext.BaseDirectory);
+        Assert.Equal(enabled, new CopperScreenRecentSession(PathOf("private")).LoadMachine(AppContext.BaseDirectory)!.HardDrives[0].SparseStorage);
+    }
+
     private CopperScreenSettingsDraft Draft()
     {
         var draft = new CopperScreenSettingsDraft { Id = "personal", DisplayName = "My disks", Description = "Keep all settings", KickstartSource = CopperScreenKickstartSource.CopperStart, KickstartRomPath = PathOf("external.rom") };
@@ -35,7 +77,7 @@ public sealed class HardDiskBackupTests : IDisposable
         {
             Assert.NotEqual(draft.HardDrives[i].Path, restored.HardDrives[i].Path);
             Assert.Equal(File.ReadAllBytes(draft.HardDrives[i].Path), File.ReadAllBytes(restored.HardDrives[i].Path));
-            Assert.Equal(draft.HardDrives[i] with { Path = restored.HardDrives[i].Path }, restored.HardDrives[i]);
+            Assert.Equal(draft.HardDrives[i] with { Path = restored.HardDrives[i].Path, SparseStorage = true }, restored.HardDrives[i]);
         }
         var comparable = restored.Clone(); comparable.HardDrives.Clear(); comparable.HardDrives.AddRange(draft.HardDrives);
         Assert.Equal(saved, CopperScreenProfileStore.Serialize(comparable, AppContext.BaseDirectory));

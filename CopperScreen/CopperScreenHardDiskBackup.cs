@@ -65,7 +65,7 @@ internal static class CopperScreenHardDiskBackup
                     for (var i = 0; i < sources.Count; i++)
                     {
                         var source = sources[i];
-                        using var entry = archive.CreateEntry(ImageName(draft.HardDrives[i].Unit), CompressionLevel.NoCompression).Open();
+                        using var entry = archive.CreateEntry(ImageName(draft.HardDrives[i].Unit), CompressionLevel.Fastest).Open();
                         using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
                         Copy(source, entry, source.Length, hash, "export-chunk", temporary);
                         images.Add(new(draft.HardDrives[i].Unit, source.Length, Convert.ToHexString(hash.GetHashAndReset())));
@@ -86,7 +86,7 @@ internal static class CopperScreenHardDiskBackup
         }
     }
 
-    internal static CopperScreenSettingsDraft Restore(string backup, string userDataDirectory, string baseDirectory, Action<CopperScreenSettingsDraft>? remember = null)
+    internal static CopperScreenSettingsDraft Restore(string backup, string userDataDirectory, string baseDirectory, Action<CopperScreenSettingsDraft>? remember = null, Action<int>? sparseUnavailable = null)
     {
         CopperScreenHardDiskBackupCleanup.Cleanup(userDataDirectory);
         using var input = new FileStream(backup, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -135,12 +135,15 @@ internal static class CopperScreenHardDiskBackup
                 using var target = new FileStream(Path.Combine(staging, $"unit-{image.Unit}.hdf"), FileMode.CreateNew, FileAccess.Write, FileShare.None);
                 operation?.TrackFile($"unit-{image.Unit}.hdf", target.SafeFileHandle);
                 using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
-                Copy(source, target, image.Bytes, hash, "restore-chunk", staging);
+                var sparse = CopperDisk.AmigaSparseFile.TryEnable(target);
+                if (!sparse) sparseUnavailable?.Invoke(image.Unit);
+                Copy(source, target, image.Bytes, hash, "restore-chunk", staging, sparse);
+                target.SetLength(image.Bytes);
                 if (Convert.ToHexString(hash.GetHashAndReset()) != image.Sha256) throw new InvalidDataException("A disk image failed its integrity check. Keep the backup and try another copy.");
                 target.Flush(flushToDisk: true);
             }
             for (var i = 0; i < draft.HardDrives.Count; i++)
-                draft.HardDrives[i] = draft.HardDrives[i] with { Path = Path.Combine(directory, $"unit-{draft.HardDrives[i].Unit}.hdf") };
+                draft.HardDrives[i] = draft.HardDrives[i] with { Path = Path.Combine(directory, $"unit-{draft.HardDrives[i].Unit}.hdf"), SparseStorage = true };
             draft.SourcePath = Path.Combine(directory, "profile.json");
             // Staging is unpublished; keep its recorded file identity stable.
             using (var profileFile = new FileStream(profilePath, FileMode.Truncate, FileAccess.Write, FileShare.None))
@@ -182,7 +185,7 @@ internal static class CopperScreenHardDiskBackup
         return memory.ToArray();
     }
 
-    private static void Copy(Stream input, Stream output, long length, IncrementalHash hash, string? stage = null, string? path = null)
+    private static void Copy(Stream input, Stream output, long length, IncrementalHash hash, string? stage = null, string? path = null, bool sparse = false)
     {
         var buffer = new byte[128 * 1024];
         long copied = 0;
@@ -190,7 +193,9 @@ internal static class CopperScreenHardDiskBackup
         {
             var count = input.Read(buffer, 0, (int)Math.Min(length, buffer.Length));
             if (count == 0) throw new InvalidDataException("The backup or disk image is incomplete.");
-            output.Write(buffer, 0, count); hash.AppendData(buffer, 0, count); length -= count;
+            if (sparse && output is FileStream file) CopperDisk.AmigaSparseFile.Write(file, buffer.AsSpan(0, count), true);
+            else output.Write(buffer, 0, count);
+            hash.AppendData(buffer, 0, count); length -= count;
             copied += count;
             if (stage != null) Observe(stage, path!, copied);
         }

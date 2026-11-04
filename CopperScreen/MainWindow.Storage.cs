@@ -57,6 +57,40 @@ internal sealed partial class MainWindow
             var form = CreateSettingsGroupForm();
             var unit = AddTextSetting(form, "Unit"); unit.Text = settings.Unit.ToString(CultureInfo.InvariantCulture);
             var path = AddTextSetting(form, "HDF path"); path.Text = settings.Path;
+            bool? sparseEnabled = settings.SparseStorage;
+            var allocation = SettingsNote(string.Empty);
+            void RefreshAllocation()
+            {
+                try
+                {
+                    var selectedPath = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory);
+                    if (selectedPath is null || !File.Exists(selectedPath)) { allocation.Text = "New images use sparse storage where supported."; return; }
+                    var allocated = CopperDisk.AmigaSparseFile.GetAllocatedBytes(selectedPath);
+                    allocation.Text = $"Virtual capacity: {new FileInfo(selectedPath).Length:N0} bytes. Host allocation: " +
+                        (allocated is { } bytes ? $"{bytes:N0} bytes." : "unavailable.") +
+                        (sparseEnabled == true ? " Sparse storage enabled; guest TRIM requires host filesystem support." : " Sparse storage not enabled.");
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException) { allocation.Text = "Disk allocation unavailable."; }
+            }
+            form.Children.Add(allocation);
+            form.Children.Add(CreatePanelButton("Enable sparse storage", () =>
+            {
+                try
+                {
+                    if (_runtime != null || _applyingSettings) throw new InvalidOperationException("Stop the Amiga before enabling sparse storage.");
+                    var selectedPath = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
+                        ?? throw new InvalidOperationException("Choose an existing disk image.");
+                    using var file = new FileStream(selectedPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                    if (!CopperDisk.AmigaSparseFile.TryEnable(file)) throw new IOException("Sparse storage is unavailable on this filesystem. The image can still be used normally.");
+                    sparseEnabled = true;
+                    file.Dispose();
+                    RefreshAllocation(); MarkSettingsRestartRequired();
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException) { SetSettingsError(ex.Message); }
+            }));
+            form.Children.Add(SettingsHelp("Sparse storage help", "Virtual capacity stays fixed. CopperSFSTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
+            path.TextChanged += (_, _) => { sparseEnabled = null; RefreshAllocation(); };
+            RefreshAllocation();
             var readOnly = new CheckBox { Content = "Read-only", IsChecked = settings.ReadOnly };
             path.TextChanged += (_, _) => { if (path.Text != settings.Path) readOnly.IsChecked = true; };
             form.Children.Add(CreatePanelButton("Browse HDF…", async () =>
@@ -127,7 +161,7 @@ internal sealed partial class MainWindow
                 if (string.IsNullOrWhiteSpace(path.Text)) throw new InvalidOperationException($"Choose a backing file for hard disk unit {number}.");
                 if (!long.TryParse(size.Text, out var bytes) || bytes < 0 || bytes % 512 != 0) throw new InvalidOperationException("Hard disk creation size must be a nonnegative multiple of 512 bytes.");
                 if (mode.SelectedIndex == (int)AmigaHardfileMountMode.RigidDiskBlock)
-                    return new(number, path.Text.Trim(), readOnly.IsChecked == true, 0, AmigaHardfileMountMode.RigidDiskBlock);
+                    return new(number, path.Text.Trim(), readOnly.IsChecked == true, 0, AmigaHardfileMountMode.RigidDiskBlock, SparseStorage: sparseEnabled);
                 var metadata = new AmigaHardfilePartitionMetadata(); var any = false;
                 foreach (var property in properties)
                 {
@@ -142,7 +176,8 @@ internal sealed partial class MainWindow
                     property.SetValue(metadata, value);
                 }
                 return new(number, path.Text.Trim(), readOnly.IsChecked == true, bytes,
-                    (AmigaHardfileMountMode)mode.SelectedIndex, any ? metadata : null);
+                    (AmigaHardfileMountMode)mode.SelectedIndex, any ? metadata : null,
+                    sparseEnabled ?? (bytes > 0 && !File.Exists(CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory))));
             });
             _hardfileRows.Children.Add(new Expander { Header = $"Unit {settings.Unit}: {System.IO.Path.GetFileName(settings.Path)}", Content = form, IsExpanded = true, HorizontalAlignment = HorizontalAlignment.Stretch });
         }

@@ -57,7 +57,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
                 ChipRamBytes = options.Profile.ChipRamSize, SlowRamBytes = options.Profile.ExpansionRamSize,
                 FastRamBytes = options.Profile.RealFastRamSize,
                 RtcEnabled = options.Profile.RtcEnabled,
-                Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition))).ToArray(),
+                Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition)) { SparseStorage = h.SparseStorage }).ToArray(),
                 HostDirectories = options.HostDirectories };
         if (previous is not null && !previous.IsPaused) throw new InvalidOperationException("Pause before preparing a replacement machine.");
         _machine = previous?._machine.CreateRestartCandidate(configuration) ?? new(configuration);

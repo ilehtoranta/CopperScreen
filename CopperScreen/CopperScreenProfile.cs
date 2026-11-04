@@ -685,7 +685,7 @@ internal sealed class CopperScreenProfile
 				drive.ReadOnly,
 				sizeMb == 0 ? 0 : checked((long)sizeMb * 1024L * 1024L),
 				ParseHardfileMountMode(drive.Mode),
-				ParseHardfilePartition(drive.Partition)));
+				ParseHardfilePartition(drive.Partition), drive.SparseStorage));
 		}
 
 		return drives;
@@ -1036,6 +1036,7 @@ internal sealed class CopperScreenProfile
 		public bool ReadOnly { get; set; } = true;
 
 		public int? SizeMb { get; set; }
+        public bool? SparseStorage { get; set; }
 
 		public string? Mode { get; set; }
 

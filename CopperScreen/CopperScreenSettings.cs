@@ -361,6 +361,7 @@ internal static partial class CopperScreenProfileStore
 							Unit = drive.Unit,
 							Path = drive.Path,
 							ReadOnly = drive.ReadOnly,
+                            SparseStorage = drive.SparseStorage,
 							SizeMb = drive.CreateSizeBytes == 0 ? null : checked((int)(drive.CreateSizeBytes / (1024 * 1024))),
 							Mode = drive.Mode == AmigaHardfileMountMode.Auto ? null : FormatHardfileMountMode(drive.Mode),
 							Partition = HardDrivePartitionFile.FromMetadata(drive.Partition)
@@ -513,6 +514,7 @@ internal static partial class CopperScreenProfileStore
 		public bool ReadOnly { get; set; }
 
 		public int? SizeMb { get; set; }
+        public bool? SparseStorage { get; set; }
 
 		public string? Mode { get; set; }
 

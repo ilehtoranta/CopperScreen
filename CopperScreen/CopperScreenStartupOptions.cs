@@ -898,7 +898,7 @@ internal sealed class CopperScreenStartupOptions
 		foreach (var drive in hardDrives)
 		{
 			var path = ResolveOptionalPath(drive.Path, baseDirectory) ?? Path.GetFullPath(Path.Combine(baseDirectory, drive.Path));
-			normalized.Add(drive with { Path = path });
+			normalized.Add(drive with { Path = path, SparseStorage = drive.SparseStorage ?? (drive.CreateSizeBytes > 0 && !File.Exists(path) ? true : null) });
 		}
 
 		return normalized;

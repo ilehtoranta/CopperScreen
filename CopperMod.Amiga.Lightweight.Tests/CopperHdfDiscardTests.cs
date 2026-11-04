@@ -5,6 +5,41 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class CopperHdfDiscardTests
 {
+    [Fact]
+    public void ProductionUnmapReclaimsStorageAboveFourGiBAndPreservesAdjacentData()
+    {
+        var path = Path.GetTempFileName();
+        const long offset = 5L * 1024 * 1024 * 1024;
+        try
+        {
+            using (var file = File.OpenWrite(path))
+            {
+                Assert.True(AmigaSparseFile.TryEnable(file));
+                file.SetLength(offset + 1024 * 1024);
+                file.Position = offset; file.Write(Enumerable.Repeat((byte)0xA7, 1024 * 1024).ToArray());
+                file.Flush(flushToDisk: true);
+            }
+            var before = AmigaSparseFile.GetAllocatedBytes(path);
+            using (var machine = new LightweightA500Machine(new() { Hardfiles = [new(0, path) { SparseStorage = true }] }))
+            {
+                var bus = machine.HardfileBus!;
+                bus.WriteLong(0x1000, 0); bus.WriteLong(0x1118, 0x1000);
+                Command(bus, 0x12, 6, 64);
+                bus.WriteByte(0x1401, 1); bus.WriteByte(0x1402, 0xB2); bus.WriteByte(0x1404, 64);
+                Execute(bus); Assert.Equal(0x80, bus.ReadByte(0x1505));
+                Unmap(bus, (uint)(offset / 512 + 128), 1024); Execute(bus);
+                Assert.Equal(0, bus.ReadByte(0x111F));
+                Assert.Equal(offset + 1024 * 1024, bus.CopperHdf.Hardfiles[0].Length);
+                var after = AmigaSparseFile.GetAllocatedBytes(path);
+                Assert.True(after < before, $"Host allocation before={before}, after={after}");
+                Assert.All(bus.CopperHdf.Hardfiles[0].ReadBytes(offset, 65536), value => Assert.Equal(0xA7, value));
+                Assert.All(bus.CopperHdf.Hardfiles[0].ReadBytes(offset + 589824, 65536), value => Assert.Equal(0xA7, value));
+            }
+            using var reopened = File.OpenRead(path); Assert.Equal(offset + 1024 * 1024, reopened.Length);
+        }
+        finally { File.Delete(path); }
+    }
+
     [Theory]
     [InlineData(false, false)]
     [InlineData(true, false)]
