@@ -132,10 +132,28 @@ public sealed class CopperStartTests : IDisposable
     }
 
     [Theory]
+    [InlineData(0x444F5300u)]
+    [InlineData(0x444F5301u)]
+    [InlineData(0x53465300u)]
+    [InlineData(0x53465302u)]
+    public void FullFileSystemPartitionSurvivesProfileRoundTrip(uint dosType)
+    {
+        Assert.True(CopperScreenCopperStartRom.HasFullFileSystemsFor(true));
+        var draft = A1200HdfDraft();
+        var drive = draft.HardDrives[0];
+        draft.HardDrives[0] = drive with { Partition = drive.Partition! with { DosType = dosType } };
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        var path = CopperScreenProfileStore.Save(draft, AppContext.BaseDirectory, _directory);
+        Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error, _directory), error);
+        var restored = CopperScreenSettingsDraft.FromProfile(loaded);
+        Assert.Equal(dosType, Assert.Single(restored.HardDrives).Partition!.DosType);
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(restored, _directory));
+    }
+
+    [Theory]
     [InlineData("cpu")]
     [InlineData("slow")]
     [InlineData("fast")]
-    [InlineData("floppy")]
     [InlineData("no-hdf")]
     public void A1200CopperStartRejectsUnqualifiedConfigurations(string change)
     {
@@ -145,10 +163,34 @@ public sealed class CopperStartTests : IDisposable
             case "cpu": draft.CpuBackend = M68kBackendKind.AccurateM68030; break;
             case "slow": draft.PseudoFastRamKb = 512; break;
             case "fast": draft.RealFastRamKb = 512; break;
-            case "floppy": draft.DriveDiskPaths[0] = "boot.adf"; break;
             case "no-hdf": draft.HardDrives.Clear(); break;
         }
         Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+    }
+
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void FullA1200AllowsWritableDf0WithOrWithoutAnHdf(bool hardfile)
+    {
+        var draft = A1200HdfDraft();
+        draft.DriveDiskPaths[0] = "disposable.adf"; draft.DriveWriteProtected[0] = false;
+        if (!hardfile) draft.HardDrives.Clear();
+        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        draft.FloppyDriveCount = 2;
+        Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+    }
+
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void FullA1200SessionCanToggleProtectionOutsideAWorkspace(bool protectedAtStartup)
+    {
+        var draft = CopperScreenBundledCopperOs.Prepare(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 3), _directory);
+        draft.HardDrives.Clear(); draft.DriveDiskPaths[0] = OriginalDisk(); draft.DriveWriteProtected[0] = protectedAtStartup;
+        using var session = Assert.IsType<CopperScreenLightweightSession>(CopperScreenSession.Create(draft.ToStartupOptions(AppContext.BaseDirectory)));
+        Assert.Equal(protectedAtStartup, session.Machine.IsDriveWriteProtected(0));
+        Assert.True(session.SetDriveWriteProtected(0, !protectedAtStartup));
+        Assert.Equal(!protectedAtStartup, session.Machine.IsDriveWriteProtected(0));
+        Assert.Equal(File.ReadAllBytes(draft.DriveDiskPaths[0]!), session.ExportAdf(0));
     }
 
     private static void Run(CopperScreenLightweightSession session, int fields)

@@ -8,13 +8,14 @@ namespace CopperScreen;
 // Firmware remains a guest ROM: no callbacks, host services or Legacy fallback.
 internal static class CopperScreenCopperStartRom
 {
-    private sealed record Artifact(string QualificationId, string ProducerCommit, int Bytes, string Sha256, string Requirements);
+    private sealed record Artifact(string QualificationId, string ProducerCommit, int Bytes, string Sha256, string Requirements, string? FileSystemProfile);
     private static readonly Artifact Qualified = LoadArtifact("CopperStart");
     private static readonly Artifact QualifiedA1200 = LoadArtifact("CopperStartA1200");
     public static string Version => Qualified.QualificationId;
     public static string ProducerCommit => Qualified.ProducerCommit;
     public static string Sha256 => Qualified.Sha256;
     public static string Sha256For(bool a1200) => Select(a1200).Sha256;
+    public static bool HasFullFileSystemsFor(bool a1200) => Select(a1200).FileSystemProfile == "Full";
     public static string Requirements => Qualified.Requirements;
     public static string Description => DescriptionFor(false);
     public static string DescriptionFor(bool a1200)
@@ -45,7 +46,15 @@ internal static class CopperScreenCopperStartRom
             try { return ReadExisting(path, a1200); }
             // Experimental OCS/ECS launches may use the bundled desktop ROM.
             // Both paths still verify a pinned artifact; arbitrary firmware is not admitted.
-            catch (InvalidOperationException) when (!a1200) { return ReadExisting(path, true); }
+            catch (InvalidOperationException original) when (!a1200)
+            {
+                try { return ReadExisting(path, true); }
+                catch (InvalidOperationException)
+                {
+                    System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(original).Throw();
+                    throw;
+                }
+            }
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException)
         { throw new InvalidOperationException("Could not read the CopperStart ROM: " + ex.Message + " " + RecoveryFor(a1200), ex); }

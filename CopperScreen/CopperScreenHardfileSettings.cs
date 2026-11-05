@@ -23,22 +23,25 @@ internal sealed record CopperScreenHardfileSettings(
         });
     }
 
-    internal void ValidateCopperStart(bool checkImage)
+    internal void ValidateCopperStart(bool checkImage, bool fullFileSystems = false)
     {
         if (Unit != 0 || Mode is not (AmigaHardfileMountMode.Partition or AmigaHardfileMountMode.RigidDiskBlock) || CreateSizeBytes != 0)
-            throw new NotSupportedException("CopperStart supports one existing hard disk image on unit 0. Select RDB for partitions stored in the image, or Partition for explicit FFS geometry. Image creation and automatic layout detection are not supported.");
+            throw new NotSupportedException("CopperStart supports one existing hard disk image on unit 0. Select RDB for partitions stored in the image, or Partition for explicit filesystem geometry. Image creation and automatic layout detection are not supported.");
         if (Mode == AmigaHardfileMountMode.RigidDiskBlock)
         {
             if (checkImage) CopperDisk.AmigaRdbImage.Validate(Path);
             return;
         }
-        var (start, length) = CopperDisk.AmigaFfsPartition.GetByteRange(CopperScreenLightweightSession.ConvertPartition(Partition));
+        var partition = CopperScreenLightweightSession.ConvertPartition(Partition);
+        var (start, length) = fullFileSystems
+            ? CopperDisk.AmigaFileSystemPartition.GetByteRange(partition)
+            : CopperDisk.AmigaFfsPartition.GetByteRange(partition);
         if (checkImage)
         {
             var info = new FileInfo(Path);
-            if (!info.Exists) throw new FileNotFoundException("Choose an existing formatted FFS hard disk image.", Path);
+            if (!info.Exists) throw new FileNotFoundException("Choose an existing hard disk image.", Path);
             if (info.Length % 512 != 0 || info.Length < start + length)
-                throw new InvalidOperationException("The hard disk image must contain the entire configured FFS partition and have a size divisible by 512 bytes.");
+                throw new InvalidOperationException("The hard disk image must contain the entire configured partition and have a size divisible by 512 bytes.");
         }
     }
 }

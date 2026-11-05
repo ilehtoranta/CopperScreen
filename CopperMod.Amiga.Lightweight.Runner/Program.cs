@@ -9,6 +9,7 @@ if (args.Contains("--help"))
 {
     Console.WriteLine("""
         Lightweight runner: --rom <ROM> [--frames <count>] [--disk <ADF/IPF/SCP>]
+          ROM may be a standard reset image or a 1 MiB CopperStart pair (E00000 bank, then F80000 bank).
         --hdf-ffs <existing-image> <DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER>
           One explicit FFS/DOS1 partition, 512-byte blocks, inclusive cylinders; TD64 supports offsets above 4 GiB.
           Read-only by default. Use --hdf-ffs-writable to allow direct backing-file writes.
@@ -16,7 +17,7 @@ if (args.Contains("--help"))
         --hdf <image> / --hdf-ro <image>: automatic RDB/OFS detection for native Kickstart.
           The legacy --hdf runner option permits writes; --hdf-ro protects the image.
         --hdf-rdb <existing-image>: require the image's RDB partition table; read-only by default.
-          Use --hdf-rdb-writable to allow direct writes. CopperStart mounts FFS/DOS1 partitions
+          Use --hdf-rdb-writable to allow direct writes. The Full CopperStart pair mounts OFS/FFS and SFS partitions
           using TD64 offsets above 4 GiB and selects the highest signed boot priority stored in the RDB.
         --drives <1..4> --drive-type <0..3> <DD|HD>
         --boot-probe <directory> --boot-probe-extended --boot-probe-storage
@@ -326,7 +327,15 @@ var supportsSpriteDma = machine.GetType().GetProperty(
 if (syntheticRomLoop || syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes || syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites || syntheticSpriteDma || syntheticPaulaManual)
     machine.LoadKickstart(CreateSyntheticRom(syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes || syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites || syntheticSpriteDma || syntheticPaulaManual));
 else if (romPath is not null)
-    machine.LoadKickstart(ReadImage(romPath, ".rom", ".bin", ".kick"));
+{
+    var image = ReadImage(romPath, ".rom", ".bin", ".kick");
+    if (image.Length == 1048576)
+    {
+        machine.LoadKickstart(image.AsSpan(524288));
+        machine.LoadExtensionRom(image.AsSpan(0, 524288));
+    }
+    else machine.LoadKickstart(image);
+}
 if (adfPath is not null) NativeInputScript.Mount(machine, 0, ReadImage(adfPath, ".adf", ".adz", ".dms", ".ipf", ".scp"), adfPath);
 for (var i = 0; i < extraAdfPaths.Length; i++)
     if (extraAdfPaths[i] is { } path) NativeInputScript.Mount(machine, i + 1, ReadImage(path, ".adf", ".adz", ".dms", ".ipf", ".scp"), path);

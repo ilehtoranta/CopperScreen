@@ -35,14 +35,19 @@ remain checked; arbitrary ROMs are not admitted as CopperStart.
 Existing custom A500 ROM paths and media remain loadable without replacement.
 Each model has its own writable disk: `A500-Desktop`, `A500Plus-Desktop`, or
 `A1200-Desktop` under the CopperOS user-data folder.
-The qualified **CopperStart A1200 ROM (512 KiB)** and **8 MiB CopperOS FFS HDF**
+The qualified **CopperStart A1200 ROM pair (1 MiB)** and **8 MiB CopperOS FFS HDF**
 are embedded in the application. The HDF starts the native **CopperOS Desktop**
 with Home, Files, Editor and About. No ROM, HDF or ADF picker is needed.
-The current [single-bank qualification](COPPEROS_CSHARP_GRAPHICS_2026-11-01.md)
-uses compiled C# for BltClear and pen/mode getters. It retains shared rectangle
-geometry, short CPU plane/row loops, internal blitter ownership, register-based
-solid-fill DMA, ECS size registers, the
-[cold-boot fix](COPPEROS_COLD_BOOT_2026-10-31.md) and Layer ownership improvements.
+The current [Full filesystem qualification](COPPERSTART_FULL_FILESYSTEMS_V2_2026-11-05.md)
+adds native OFS/DOS0, FFS/DOS1, classic SFS and SFS2 boot/read/write/quick-format support through
+explicit partitions and RDB. OFS/FFS DD and HD DF0 writes, MFM export and fresh
+protected reboot are also qualified. Choose a matching DD/HD drive type and
+insert formatting targets before boot. DOS2-DOS5 remain read-only. The 512 KiB reset bank
+contains graphics; the matching 512 KiB E00000 extension supplies SFS/SFS2 and the
+shared filesystem task. Both banks are admitted as one hash-pinned file.
+The previous [single-bank qualification](COPPEROS_CSHARP_GRAPHICS_2026-11-01.md)
+retains its own graphics and performance evidence. The Full pair has separate
+storage and desktop checks and makes no host-throughput claim.
 The launcher creates `CopperOS/A1200-Desktop/CopperOS.hdf` in the user's app-data
 directory once, mounts it writable with `DH0:2:32:0:255`, and reuses it across
 launches, reselection and updates. The embedded seed is immutable. An existing

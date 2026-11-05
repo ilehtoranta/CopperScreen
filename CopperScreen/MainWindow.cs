@@ -2545,7 +2545,11 @@ internal sealed partial class MainWindow : Window
             });
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));
 			if (unavailable == null && romError == null && draft.KickstartSource == CopperScreenKickstartSource.CopperStart && draft.HardDrives.Count == 1)
-				draft.ToStartupOptions(AppContext.BaseDirectory).HardDrives[0].ValidateCopperStart(checkImage: true);
+            {
+                var startup = draft.ToStartupOptions(AppContext.BaseDirectory);
+                startup.HardDrives[0].ValidateCopperStart(checkImage: true,
+                    fullFileSystems: CopperScreenCopperStartRom.HasFullFileSystemsFor(startup.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa));
+            }
 			error = unavailable ?? romError ?? string.Empty;
 			return error.Length == 0;
 		}

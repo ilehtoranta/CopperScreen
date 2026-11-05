@@ -1,9 +1,10 @@
 {
-  "qualificationId": "diskboot-2026-11-04-a1200-desktop-single-bank.60",
-  "producerCommit": "b0f23ddc4f4d8bf075b837b602200f0244dd0ace",
-  "bytes": 524288,
-  "sha256": "9e871250a72e568fa844751140d6b391a71893c405913e96e749ca1d87027f9f",
-  "requirements": "PAL A1200, 68EC020 interpreter, Alice/Lisa, 2 MiB Chip RAM, no slow/Fast RAM, one existing FFS HDF on unit 0 and empty floppy drives. No RTC, RTG or shared folders. One standard 512 KiB F80000 ROM, including native graphics; no extension bank or companion ROM.",
-  "evidence": "docs/COPPEROS_BLTCLEAR_OWNERSHIP_2026-11-04.md",
-  "producerSourceSnapshot": "Development working-tree snapshot based on the named producer commit. Seventeen bounded emitter changes from the frozen .59 composition; .49 reset input and exec-preemption.10 HDF remain. All internal graphics waits directly use the C# hardware fence, compiled to the same 18-byte register-preserving body as public WaitBlit. Compiler metadata binds BltClear ownership calls to the existing private entries while preserving reservation, queue and release behavior. The 1124-byte C# kernel is 12 bytes smaller; the 524288-byte ROM uses 522256 bytes. Sources, runtime receipts, profiles, two identical 572-row comparisons, tests and paired A1200 replays are in artifacts/graphics-bltclear-owner-20261103. Concurrent producer development is excluded."
+  "qualificationId": "diskboot-2026-11-05-a1200-full-filesystems.2",
+  "producerCommit": "395753337557b72b2c093adb01776fe4556bc712",
+  "bytes": 1048576,
+  "sha256": "269c41ee42f89859769be7f171f7d18c0528bb5c1c38efbe25ecf1f16a380962",
+  "requirements": "PAL A1200, 68EC020 interpreter, Alice/Lisa, 2 MiB Chip RAM, no slow/Fast RAM. One DD/HD OFS/FFS DF0 disk and/or one existing OFS/FFS/SFS/SFS2 HDF on unit 0 (explicit partitions or RDB). Native read/write and quick formatting for DOS0/DOS1, SFS0 and SFS2; DOS2-DOS5 remain read-only. No RTC, RTG or shared folders. Paired 1 MiB image: 512 KiB E00000 filesystem extension followed by the 512 KiB F80000 reset ROM with graphics.",
+  "evidence": "docs/COPPERSTART_FULL_FILESYSTEMS_V2_2026-11-05.md",
+  "producerSourceSnapshot": "Development Full ROM pair from artifacts/full-filesystems-v2-20261105/rom-full-v5 and its frozen source/input hashes. Maintained CopperFS OFS/FFS/SFS/SFS2 formatters are source-linked; the existing SFS engines remain the pinned CopperSFS dependency. CSEE/15 supplies the shared filesystem task, SFS/SFS2 and native DOS client service. One mount state, ordinary guest Exec/device I/O and ROM-resident routine bodies. Qualification and limits: docs/COPPERSTART_FULL_FILESYSTEMS_V2_2026-11-05.md. No package/ROM publication or throughput qualification.",
+  "fileSystemProfile": "Full"
 }

@@ -73,7 +73,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
                 }
                 else _workspace = CopperOsWorkspace.Open(options.DriveDiskPaths[0]!);
             }
-            var integratedExtension = _copperStart && _machine.IsAga && rom.Length == 1048576;
+            var integratedExtension = _copperStart && rom.Length == 1048576;
             _machine.LoadKickstart(integratedExtension ? rom.AsSpan(524288) : rom);
             if (integratedExtension)
                 _machine.LoadExtensionRom(rom.AsSpan(0, 524288));
@@ -141,18 +141,19 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (copperStart && !CopperScreenBootMethods.CopperStartEnabled) return "CopperStart is not enabled in this build. Choose another boot method or use a CopperStart-enabled edition.";
         var copperStartA1200 = p.Chipset == new AmigaChipset(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal) &&
             cpu == M68kBackendKind.AccurateM68EC020 && p.ChipRamSize == 2097152 && p.ExpansionRamSize == 0 &&
-            options.HardDrives.Count == 1 && options.DriveDiskPaths.All(path => path == null);
+            (options.HardDrives.Count == 1 || options.DriveDiskPaths[0] != null);
         var copperStartA500 = p.Chipset == AmigaChipset.OcsPal && cpu == M68kBackendKind.AccurateM68000 &&
             p.ChipRamSize == 524288 && p.ExpansionRamSize == 524288;
         var copperStartA500Plus = p.Chipset == new AmigaChipset(DmaChipModel.Agnus8375Pal2M, DisplayChipModel.EcsDenise, VideoStandard.Pal) &&
             cpu == M68kBackendKind.AccurateM68000 && p.ChipRamSize == 1048576 && p.ExpansionRamSize == 0;
         if (copperStart && ((!copperStartA500 && !copperStartA500Plus && !copperStartA1200) || p.RealFastRamSize != 0 ||
-            p.FloppyDriveCount != 1 || (options.DriveWriteProtected[0] == false && !CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0])) || p.RtcEnabled || options.HardDrives.Count > 1 || options.HostDirectories.Count != 0))
-            return "CopperStart requires a standard PAL A500, experimental A500+ (68000, 1 MiB Chip RAM), or A1200 (68EC020, 2 MiB Chip RAM and one FFS HDF with empty floppies). Use one drive, read-only DF0 outside an owned CopperOS workspace, and no Fast RAM, RTC or shared folders.";
+            p.FloppyDriveCount != 1 || (options.DriveWriteProtected[0] == false && !copperStartA1200 && !CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0])) || p.RtcEnabled || options.HardDrives.Count > 1 || options.HostDirectories.Count != 0))
+            return "CopperStart requires a standard PAL A500, experimental A500+ (68000, 1 MiB Chip RAM), or A1200 (68EC020, 2 MiB Chip RAM, an OFS/FFS DF0 disk or one OFS/FFS/SFS/SFS2 HDF). Use one drive; writable DD/HD DF0 is qualified on A1200. A500/A500+ require read-only DF0 outside an owned CopperOS workspace. Fast RAM, RTC and shared folders are unavailable.";
         if (copperStart && CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0]))
             CopperOsWorkspace.ValidateOwnership(options.DriveDiskPaths[0]!);
         if (copperStart && options.HardDrives.Count == 1)
-            options.HardDrives[0].ValidateCopperStart(checkImage: requireRomPath);
+            options.HardDrives[0].ValidateCopperStart(checkImage: requireRomPath,
+                fullFileSystems: CopperScreenCopperStartRom.HasFullFileSystemsFor(copperStartA1200));
 
         var minimalA500 = p.Chipset == AmigaChipset.OcsPal && cpu == M68kBackendKind.AccurateM68000 &&
             p.ChipRamSize == 524288 && p.ExpansionRamSize is 0 or 524288;
@@ -433,7 +434,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
         if (!writeProtected && _pendingAdf[drive] != null) return Reject("Wait for the disk swap to finish before enabling writes.");
-        if (_copperStart && !writeProtected && _workspace == null) return Reject("CopperStart writes require a user-owned CopperOS workspace. The seed stays read-only.");
+        if (_copperStart && !writeProtected && _workspace == null &&
+            !(_machine.IsAga && CopperScreenCopperStartRom.HasFullFileSystemsFor(true))) return Reject("CopperStart writes require a user-owned CopperOS workspace. The seed stays read-only.");
         if (!writeProtected && (_pendingAdf[drive]?.Format ?? _machine.GetDriveFormat(drive)) is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf))
             return Reject("This disk format is permanently read-only.");
         _machine.SetDriveWriteProtected(drive, writeProtected);
