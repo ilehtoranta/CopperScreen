@@ -15,6 +15,6 @@ components. Native runtime dependencies are supplied by the corresponding NuGet
 packages. Packaging an application does not change their license obligations.
 
 The application includes the original CopperStart A1200 boot ROM and CopperOS
-HDF pinned by the firmware manifests. CopperStart is MIT licensed; its license
+HDF pinned by the firmware manifests. CopperStart is proprietary, with all rights reserved; its copyright notice
 is included as `CopperStart-LICENSE.txt`. Native Kickstart ROMs, Commodore
 Workbench distributions and game images are not supplied or licensed here.
