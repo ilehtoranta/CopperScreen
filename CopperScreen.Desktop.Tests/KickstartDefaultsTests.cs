@@ -17,7 +17,12 @@ public sealed partial class LaunchWorkflowTests
     }
 
     [Fact]
-    public Task SwitchingModelsRestoresEachRomAndReplacementAcrossWindows() => Ui(() =>
+    public Task SwitchingModelsRestoresEachRomAndReplacementAcrossWindows() => CheckModelRomDefaults(includeCopperOs: false);
+
+    [CopperStartFact]
+    public Task SwitchingThroughCopperOsPreservesEachNativeRomDefault() => CheckModelRomDefaults(includeCopperOs: true);
+
+    private Task CheckModelRomDefaults(bool includeCopperOs) => Ui(() =>
     {
         var paths = Enumerable.Range(0, 3).Select(i => DefaultRomFixture(i, "model-" + i)).ToArray();
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
@@ -30,7 +35,7 @@ public sealed partial class LaunchWorkflowTests
                 SetMenuDraft(window, draft);
             }
             // Going through CopperOS must not replace A1200's native ROM default.
-            LaunchSelection.Select(window, 3);
+            if (includeCopperOs) LaunchSelection.Select(window, 3);
             for (var i = 0; i < 3; i++)
             {
                 LaunchSelection.Select(window, i);
@@ -67,7 +72,10 @@ public sealed partial class LaunchWorkflowTests
         draft.RomVersion = KickstartVersion.Kickstart31;
         recent.RememberKickstart(draft, AppContext.BaseDirectory);
         var expected = draft.KickstartRomPath;
-        draft.KickstartRomPath = DefaultRomFixture(1, "wrong-model");
+        draft.KickstartRomPath = Path.Combine(_root, "unsupported.rom");
+        var unsupported = new byte[524288];
+        BinaryPrimitives.WriteUInt16BigEndian(unsupported.AsSpan(12), 41);
+        File.WriteAllBytes(draft.KickstartRomPath, unsupported);
         recent.RememberKickstart(draft, AppContext.BaseDirectory);
         var restored = new CopperScreenRecentSession(_root).RestoreKickstart(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 0));
         Assert.Equal(expected, restored.KickstartRomPath);

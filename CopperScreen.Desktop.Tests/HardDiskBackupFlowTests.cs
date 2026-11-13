@@ -107,6 +107,7 @@ public sealed partial class LaunchWorkflowTests
             typeof(MainWindow).GetMethod("ShowSettingsWindow", flags)!.Invoke(window, null);
             typeof(MainWindow).GetMethod("SelectSettingsPage", flags)!.Invoke(window, [3]);
             var settings = (Window)typeof(MainWindow).GetField("_settingsWindow", flags)!.GetValue(window)!;
+            SettingsNamed<TabControl>(settings, "Storage tabs").SelectedIndex = 2;
             var labels = settings.GetLogicalDescendants().OfType<Button>().Select(b => b.Content as string).ToArray();
             Assert.Contains("Export hard-disk backup…", labels); Assert.Contains("Restore hard-disk backup…", labels);
             var backup = Path.Combine(_root, "export.copperhdf");

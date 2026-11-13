@@ -7,7 +7,12 @@ namespace CopperScreen.Tests;
 public sealed partial class LaunchWorkflowTests
 {
     [Fact]
-    public Task ModelSwitchesRestoreDisksAndRomTogetherAcrossRestart() => Ui(() =>
+    public Task ModelSwitchesRestoreDisksAndRomTogetherAcrossRestart() => CheckModelDisksAndRoms(includeCopperOs: false);
+
+    [CopperStartFact]
+    public Task ModelDisksAndRomsSurviveCopperOsSelectionAndRestart() => CheckModelDisksAndRoms(includeCopperOs: true);
+
+    private Task CheckModelDisksAndRoms(bool includeCopperOs) => Ui(() =>
     {
         var paths = Enumerable.Range(0, 3).Select(i => Path.Combine(_root, $"disk-{i}.adf")).ToArray();
         var roms = Enumerable.Range(0, 3).Select(i => DefaultRomFixture(i, "rom-" + i)).ToArray();
@@ -27,8 +32,11 @@ public sealed partial class LaunchWorkflowTests
                 draft.FloppyDriveTypes[1] = LightweightFloppyDriveType.HighDensity;
                 SetMenuDraft(window, draft);
             }
-            LaunchSelection.Select(window, 3);
-            Assert.All(MenuDraft(window).DriveDiskPaths, Assert.Null);
+            if (includeCopperOs)
+            {
+                LaunchSelection.Select(window, 3);
+                Assert.All(MenuDraft(window).DriveDiskPaths, Assert.Null);
+            }
             foreach (var i in new[] { 0, 1, 2 })
             {
                 LaunchSelection.Select(window, i);

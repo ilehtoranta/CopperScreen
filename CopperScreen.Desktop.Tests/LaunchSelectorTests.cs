@@ -7,7 +7,7 @@ namespace CopperScreen.Tests;
 
 public sealed partial class LaunchWorkflowTests
 {
-    [Theory]
+    [CopperStartTheory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
@@ -47,7 +47,7 @@ public sealed partial class LaunchWorkflowTests
         finally { reopened.Close(); }
     });
 
-    [Fact]
+    [CopperStartFact]
     public Task ExistingA500CopperStartProfileIsDisplayedWithoutConversion() => Ui(() =>
     {
         var draft = CopperScreenLaunchWorkflow.CopperStart(new());

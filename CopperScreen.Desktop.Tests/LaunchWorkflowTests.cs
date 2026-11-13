@@ -35,7 +35,7 @@ public sealed partial class LaunchWorkflowTests
         .OfType<Button>().Single(c => c.Content is string value && value == label);
 
     [Fact]
-    public Task OfflineFirstRunOffersFourMachinesAndCopperOsNeedsNoFiles() => Ui(() =>
+    public Task OfflineFirstRunOffersModelsAndExplainsTheNativeRomRecommendation() => Ui(() =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root));
         window.Show();
@@ -46,9 +46,21 @@ public sealed partial class LaunchWorkflowTests
             Assert.DoesNotContain("Start your Amiga", labels);
             Assert.DoesNotContain(CopperScreenLaunchWorkflow.ContentGuidance, labels);
             Assert.Contains("Amiga model", labels);
-            Assert.Equal("Kickstart 1.3 ROM required.", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.Contains("Recommended for Amiga 500: Kickstart 1.3", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.Contains("Other supported versions are accepted", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.Equal(new[] { "Amiga 500", "Amiga 500+", "Amiga 1200" }, Named<ComboBox>(window, "Amiga model").Items.Cast<object>().Select(m => m.ToString()));
             Assert.False(Button(window, "Start Amiga").IsEnabled);
             Capture(window, "first-run");
+        }
+        finally { window.Close(); }
+    });
+
+    [CopperStartFact]
+    public Task CopperOsFirstRunNeedsNoFileSelection() => Ui(() =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
+        try
+        {
             LaunchSelection.Select(window, 3);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
@@ -60,7 +72,7 @@ public sealed partial class LaunchWorkflowTests
         finally { window.Close(); }
     });
 
-    [Fact]
+    [CopperStartFact]
     public Task SelectingCopperStartResetsUnsupportedHardwareAndKeepsTheOriginalDraftIndependent() => Ui(() =>
     {
         var original = new CopperScreenSettingsDraft { ChipRamKb = 2048, RealFastRamKb = 8192, RtcEnabled = true, FloppyDriveCount = 4 };
@@ -84,7 +96,9 @@ public sealed partial class LaunchWorkflowTests
         var current = new CopperScreenSettingsDraft { Engine = CopperScreenEngine.Legacy, ChipRamKb = 2048, RealFastRamKb = 8192, RtcEnabled = true, FloppyDriveCount = 4, KickstartRomPath = "native.rom" };
         current.DriveDiskPaths[0] = "original.adf"; current.DriveWriteProtected[0] = false;
         var launch = CopperScreenLaunchWorkflow.CopperStart(current);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(launch, AppContext.BaseDirectory));
+        var unavailable = CopperScreenAvailability.GetUnavailableReason(launch, AppContext.BaseDirectory);
+        if (CopperScreenBootMethods.CopperStartEnabled) Assert.Null(unavailable);
+        else Assert.Contains("CopperStart is not enabled", unavailable);
         Assert.Equal(CopperScreenEngine.Lightweight, launch.Engine);
         Assert.Equal(512, launch.ChipRamKb); Assert.Equal(512, launch.PseudoFastRamKb);
         Assert.Equal(0, launch.RealFastRamKb); Assert.False(launch.RtcEnabled);
@@ -144,7 +158,12 @@ public sealed partial class LaunchWorkflowTests
     });
 
     [Fact]
-    public Task CorruptRomArchiveInSavedProfileKeepsTheLauncherAvailableForRepair() => Ui(() =>
+    public Task CorruptRomArchiveInSavedProfileKeepsTheLauncherAvailableForRepair() => CheckCorruptRomRecovery(useCopperOs: false);
+
+    [CopperStartFact]
+    public Task CorruptRomArchiveCanBeRecoveredBySelectingCopperOs() => CheckCorruptRomRecovery(useCopperOs: true);
+
+    private Task CheckCorruptRomRecovery(bool useCopperOs) => Ui(() =>
     {
         var zip = Path.Combine(_root, "damaged-rom.zip"); File.WriteAllText(zip, "broken archive");
         new CopperScreenRecentSession(_root).Save(new() { KickstartRomPath = zip }, 37, true, AppContext.BaseDirectory);
@@ -153,8 +172,11 @@ public sealed partial class LaunchWorkflowTests
         {
             Assert.False(Button(window, "Start Amiga").IsEnabled);
             Assert.False(string.IsNullOrWhiteSpace(Named<TextBlock>(window, "Startup guidance").Text));
-            LaunchSelection.Select(window, 3);
-            Assert.True(Button(window, "Start CopperOS").IsEnabled);
+            if (useCopperOs)
+            {
+                LaunchSelection.Select(window, 3);
+                Assert.True(Button(window, "Start CopperOS").IsEnabled);
+            }
             Assert.Equal("broken archive", File.ReadAllText(zip));
         }
         finally { window.Close(); }
@@ -266,10 +288,11 @@ public sealed partial class LaunchWorkflowTests
     });
 }
 
-public sealed class LaunchAssetsFactAttribute : FactAttribute
+public sealed class LaunchAssetsFactAttribute : CopperStartFactAttribute
 {
     public LaunchAssetsFactAttribute()
     {
+        if (Skip != null) return;
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_LAUNCH_ROM")) ||
             string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_LAUNCH_SEED")))
             Skip = "Qualified CopperStart/CopperOS pair unavailable; native desktop launch coverage unavailable.";

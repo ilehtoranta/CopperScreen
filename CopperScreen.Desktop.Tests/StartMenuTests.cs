@@ -24,7 +24,7 @@ public sealed partial class LaunchWorkflowTests
         return draft;
     }
 
-    [Fact]
+    [CopperStartFact]
     public Task BundledShellUpgradesOnReopenAndReselectionWithoutChangingOldDisk() => Ui(() =>
     {
         var legacy = LegacyBundledShell();
@@ -47,7 +47,7 @@ public sealed partial class LaunchWorkflowTests
         finally { window.Close(); }
     });
 
-    [Fact]
+    [CopperStartFact]
     public void BundledMigrationLeavesCustomDisksAndUnmarkedWorkspacesAlone()
     {
         var draft = LegacyBundledShell();
@@ -58,7 +58,7 @@ public sealed partial class LaunchWorkflowTests
         Assert.True(draft.HardDrives[0].ReadOnly);
     }
 
-    [Fact]
+    [CopperStartFact]
     public Task BundledWorkspaceSurvivesReselectionAndNewWindow() => Ui(() =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
@@ -92,7 +92,7 @@ public sealed partial class LaunchWorkflowTests
         finally { reopened.Close(); }
     });
 
-    [Fact]
+    [CopperStartFact]
     public void BundledFirmwareUpgradePreservesEditedDiskAndWriteProtection()
     {
         var draft = CopperScreenBundledCopperOs.Prepare(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 3), _root);
@@ -111,7 +111,7 @@ public sealed partial class LaunchWorkflowTests
         Assert.Equal(new byte[] { 0 }, File.ReadAllBytes(draft.KickstartRomPath));
     }
 
-    [Theory]
+    [CopperStartTheory]
     [InlineData(false, 0)] [InlineData(true, 0)]
     [InlineData(false, 1)] [InlineData(true, 1)]
     [InlineData(false, 2)] [InlineData(true, 2)]
@@ -137,7 +137,7 @@ public sealed partial class LaunchWorkflowTests
         Assert.Empty(Directory.GetFiles(directory, "CopperOS.before-drawing-*.hdf"));
     }
 
-    [Fact]
+    [CopperStartFact]
     public void MissingPersonalDiskIsNeverSilentlyReplacedWithSeed()
     {
         var draft = CopperScreenBundledCopperOs.Prepare(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 3), _root);
@@ -147,7 +147,7 @@ public sealed partial class LaunchWorkflowTests
         Assert.False(File.Exists(image));
     }
 
-    [Fact]
+    [CopperStartFact]
     public void BundledRomCacheCanBeRepairedWithoutReplacingThePersonalDisk()
     {
         var draft = CopperScreenBundledCopperOs.Prepare(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 3), _root);
@@ -159,7 +159,7 @@ public sealed partial class LaunchWorkflowTests
         Assert.Equal(0x5A, File.ReadAllBytes(image)[^1]);
     }
 
-    [Fact]
+    [CopperStartFact]
     public async Task ConcurrentFirstUseCreatesOneCompleteWorkspace()
     {
         var drafts = await Task.WhenAll(Enumerable.Range(0, 3).Select(_ => Task.Run(() =>
@@ -171,7 +171,7 @@ public sealed partial class LaunchWorkflowTests
         Assert.Empty(Directory.GetDirectories(Path.Combine(_root, "CopperOS"), ".a1200-*"));
     }
 
-    [Fact]
+    [CopperStartFact]
     public Task BundledCopperOsStartsWithoutFileSelectionAndReachesNativeDesktop() => UiAsync(async () =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
@@ -236,7 +236,8 @@ public sealed partial class LaunchWorkflowTests
     [Theory]
     [InlineData(0, 262144, 34, 5, "Kickstart 1.3")]
     [InlineData(1, 524288, 37, 175, "Kickstart 2.04")]
-    [InlineData(2, 524288, 39, 106, "Kickstart 3.0")]
+    [InlineData(2, 524288, 40, 68, "Kickstart 3.1")]
+    [InlineData(2, 524288, 39, 106, "Kickstart 3.1")]
     public Task MachineChoiceCanLaunchWithRomAndNoAdf(int choice, int size, ushort major, ushort minor, string requirement) => UiAsync(async () =>
     {
         // Synthetic reset loops test menu admission and Start/Stop wiring only.
@@ -273,7 +274,7 @@ public sealed partial class LaunchWorkflowTests
     });
 
     [Fact]
-    public Task RemovingFloppyAndSwitchingMachinesKeepsRequirementsConsistent() => UiAsync(async () =>
+    public Task RemovingFloppyAndSwitchingMachinesCarriesTheSelectedNativeRom() => UiAsync(async () =>
     {
         var path = Path.Combine(_root, "disk.adf"); File.WriteAllBytes(path, new byte[901120]);
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
@@ -284,24 +285,27 @@ public sealed partial class LaunchWorkflowTests
             Click(Button(window, "Remove floppy disk"));
             Assert.Null(MenuDraft(window).DriveDiskPaths[0]);
             Assert.False(Button(window, "Remove floppy disk").IsEffectivelyVisible);
-            var draft = MenuDraft(window); draft.KickstartRomPath = "a500.rom";
+            var draft = MenuDraft(window); draft.KickstartRomPath = DefaultRomFixture(0, "carried-rom");
+            var selectedRom = draft.KickstartRomPath;
+            var selectedVersion = draft.RomVersion;
             SetMenuDraft(window, draft);
             LaunchSelection.Select(window, 1);
-            Assert.Null(MenuDraft(window).KickstartRomPath);
-            Assert.Equal(KickstartVersion.Kickstart20, MenuDraft(window).RomVersion);
-            LaunchSelection.Select(window, 3);
-            draft = MenuDraft(window);
-            Assert.Equal(CopperScreenKickstartSource.CopperStart, draft.KickstartSource);
-            Assert.Equal(M68kBackendKind.AccurateM68EC020, draft.CpuBackend);
-            Assert.Equal(2048, draft.ChipRamKb);
-            Assert.Equal("none", draft.Input.Port2ProfileId);
-            Assert.All(draft.DriveDiskPaths, Assert.Null);
-            Assert.True(Button(window, "Start CopperOS").IsEnabled);
+            Assert.Equal(selectedRom, MenuDraft(window).KickstartRomPath);
+            Assert.Equal(selectedVersion, MenuDraft(window).RomVersion);
+            Assert.Equal(CopperScreenMachineModel.Amiga500Ecs, CopperScreenMachinePresets.Identify(MenuDraft(window)));
+            Assert.Contains("Kickstart 2.04", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.True(Button(window, "Start Amiga").IsEnabled);
+            Assert.All(MenuDraft(window).DriveDiskPaths, Assert.Null);
+            LaunchSelection.Select(window, 2);
+            Assert.Equal(selectedRom, MenuDraft(window).KickstartRomPath);
+            Assert.Equal(selectedVersion, MenuDraft(window).RomVersion);
+            Assert.Contains("Kickstart 3.1", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.True(Button(window, "Start Amiga").IsEnabled);
         }
         finally { window.Close(); }
     });
 
-    [Fact]
+    [CopperStartFact]
     public Task HdfSelectionUsesQualifiedGeometryAndPreservesMediaAndWriteSetting() => Ui(() =>
     {
         var path = Path.Combine(_root, "CopperOS.hdf");

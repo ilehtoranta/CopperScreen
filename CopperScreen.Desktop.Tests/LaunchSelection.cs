@@ -13,10 +13,12 @@ internal static class LaunchSelection
     public static void Select(Window window, int choice)
     {
         var method = choice >= 6 ? "MinimalDiskBoot" : choice >= 3 ? "CopperStart" : "KickstartRom";
+        var boot = Selector(window, "Boot method");
+        Assert.Contains(method, boot.Items); // Do not silently test another setup when a build omits this method.
         // Select a portable method before changing models to leave unsupported saved combinations.
-        Selector(window, "Boot method").SelectedItem = "KickstartRom";
+        boot.SelectedItem = "KickstartRom";
         Selector(window, "Amiga model").SelectedIndex = choice >= 6 ? choice - 6 : choice >= 4 ? choice - 4 : Math.Min(choice, 2);
-        Selector(window, "Boot method").SelectedItem = method;
+        boot.SelectedItem = method;
     }
 
     public static int Current(Window window) => Selector(window, "Boot method").SelectedItem is string method

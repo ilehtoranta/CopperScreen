@@ -92,10 +92,11 @@ public sealed class CopperOsLayerBridgeUpgradeTests
     private static string Hash(byte[] bytes) => Convert.ToHexString(SHA256.HashData(bytes));
 }
 
-public sealed class CopperOsSeedReplayFactAttribute : FactAttribute
+public sealed class CopperOsSeedReplayFactAttribute : CopperStartFactAttribute
 {
     public CopperOsSeedReplayFactAttribute(string environmentVariable, string seed)
     {
+        if (Skip != null) return;
         if (!File.Exists(Environment.GetEnvironmentVariable(environmentVariable)))
             Skip = $"Set {environmentVariable} to the frozen {seed} HDF for this migration replay.";
     }

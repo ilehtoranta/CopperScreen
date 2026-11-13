@@ -59,7 +59,7 @@ the settings window open while restoring the running configuration.
 - Optional Legacy-compatible A501 RTC, selected in Settings > Memory > RTC clock
   or runner `--rtc`. Host local time and guest-set session offsets; see
   [RTC behavior and limits](docs/engine/RTC.md).
-- Initial PAL A1200 profile: Alice/Lisa, 68EC020, 2 MiB Chip RAM and native Kickstart 3.0 (39.106). Eight-plane, 256-colour RGB24 output and native CopperHDF boot/persistence are verified. HAM8, dual playfields and enhanced sprites remain next steps; see [AGA evidence and limits](docs/engine/AGA_INITIAL_2026-10-01.md).
+- PAL A1200 profile: Alice/Lisa, 68EC020 and 2 MiB Chip RAM, with Kickstart 3.1 recommended. Other supported native ROM versions are accepted; compatibility varies. The original native Kickstart 3.0 (39.106) boot and CopperHDF persistence evidence remains in [AGA evidence and limits](docs/engine/AGA_INITIAL_2026-10-01.md).
 
 Legacy host services, full AGA compatibility, A2024 external scan conversion, other accelerator profiles and physical IDE/SCSI controllers are not supported by
 the current application. Unsupported settings are reported explicitly rather

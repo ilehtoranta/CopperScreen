@@ -15,7 +15,7 @@ internal sealed partial class MainWindow
         _latestState = saved.State;
         if (!saved.Success || saved.State.Drives.Any(d => d.HasUnsavedChanges))
         {
-            var message = saved.Success ? "Save ADF in Floppy settings, or discard and eject changed disks before stopping or restarting."
+            var message = saved.Success ? "Save ADF in Storage > Floppy drives, or choose Eject to save or discard changed disks before stopping or restarting."
                 : saved.Message + (CopperOsWorkspace.IsWorkspace(_committedSettings.DriveDiskPaths[0])
                     ? " Use Export workspace to save elsewhere, then retry."
                     : " Keep the session open, restore storage access and retry. Direct hard-disk and shared-folder writes already made cannot be undone.");

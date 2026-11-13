@@ -135,6 +135,11 @@ public sealed partial class LaunchWorkflowTests
             Assert.Contains("not enabled", CopperScreenAvailability.GetUnavailableReason(MenuDraft(window), AppContext.BaseDirectory));
             Assert.False(Directory.Exists(Path.Combine(_root, "Firmware")));
             Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(MenuDraft(window).ToStartupOptions(AppContext.BaseDirectory)));
+            Click(Button(window, "Configure Amiga…"));
+            var settingsBoot = SettingsField<ComboBox>(window, "_kickstartSourceBox");
+            Assert.DoesNotContain("CopperStart", settingsBoot.Items);
+            Assert.Null(settingsBoot.SelectedItem);
+            Assert.False(SettingsField<Button>(window, "_settingsStartButton").IsEnabled);
         }
         finally { window.Close(); }
     });

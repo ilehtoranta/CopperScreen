@@ -13,6 +13,25 @@ public sealed class MachinePresetTests
         Assert.Equal(M68kBackendKind.AccurateM68000, draft.CpuBackend);
     }
 
+    [Fact]
+    public void NewA1200SetupsRecommendKickstart31AndRetainASelectedNativeRom()
+    {
+        var fresh = CopperScreenMachinePresets.Apply(new(), CopperScreenMachineModel.Amiga1200);
+        Assert.Equal(KickstartVersion.Kickstart31, fresh.RomVersion);
+        Assert.Equal(KickstartVersion.Kickstart31, CopperScreenLaunchWorkflow.SelectStartChoice(new(), 2).RomVersion);
+        Assert.Contains("Kickstart 3.1", CopperScreenLaunchWorkflow.RomGuidance(fresh));
+        foreach (var name in new[] { "a1200-aga-pal", "a1200-aga-ntsc" })
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, "Presets", name + ".json");
+            Assert.True(CopperScreenProfile.TryLoad(path, AppContext.BaseDirectory, out var profile, out var error), error);
+            Assert.Equal(KickstartVersion.Kickstart31, profile.KickstartVersion);
+        }
+        var selected = new CopperScreenSettingsDraft { KickstartRomPath = "selected.rom", RomVersion = KickstartVersion.Kickstart20 };
+        var carried = CopperScreenMachinePresets.Apply(selected, CopperScreenMachineModel.Amiga1200);
+        Assert.Equal("selected.rom", carried.KickstartRomPath);
+        Assert.Equal(KickstartVersion.Kickstart20, carried.RomVersion);
+    }
+
     [Theory]
     [InlineData(0, 512)]
     [InlineData(1, 1024)]

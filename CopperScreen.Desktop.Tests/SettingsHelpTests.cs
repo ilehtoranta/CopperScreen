@@ -17,7 +17,7 @@ public sealed partial class LaunchWorkflowTests
         typeof(MainWindow).GetMethod(method, BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(window, args);
 
     private static T SettingsNamed<T>(Control root, string name) where T : Control => root.GetLogicalDescendants()
-        .OfType<T>().Single(c => AutomationProperties.GetName(c) == name);
+        .OfType<T>().Distinct().Single(c => AutomationProperties.GetName(c) == name);
 
     [Fact]
     public Task SettingsHelpWorksWithKeyboardAndPreservesDraftFocusAndExpansion() => UiAsync(async () =>
@@ -68,9 +68,6 @@ public sealed partial class LaunchWorkflowTests
             var boot = SettingsField<ComboBox>(window, "_kickstartSourceBox");
             boot.SelectedItem = "KickstartRom";
             Assert.False(note.IsVisible);
-            SettingsField<TextBox>(window, "_realFastRamBox").Text = "0";
-            boot.SelectedItem = "CopperStart";
-            Assert.True(note.IsVisible); Assert.Contains("A500", note.Text);
             Assert.False(SettingsNamed<Expander>(settings, "Boot help").IsExpanded);
             boot.SelectedItem = "KickstartRom";
             SettingsField<TextBox>(window, "_realFastRamBox").Text = "0";
@@ -85,6 +82,25 @@ public sealed partial class LaunchWorkflowTests
             var pixel = SettingsField<ComboBox>(window, "_pixelAspectModeBox");
             Assert.Equal("LCD crisp (1:1 hires / 1:2 superhires)", pixel.SelectedItem);
             Assert.Contains(pixel.GetVisualDescendants().OfType<TextBlock>(), t => t.Text == "LCD crisp");
+        }
+        finally { window.Close(); }
+    });
+
+    [CopperStartFact]
+    public Task CopperStartBootHelpAppearsOnlyForItsBootMethod() => Ui(() =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
+        try
+        {
+            Click(Button(window, "Configure Amiga…"));
+            var boot = SettingsField<ComboBox>(window, "_kickstartSourceBox");
+            var note = SettingsField<TextBlock>(window, "_copperStartSettingsNote");
+            Assert.False(note.IsVisible);
+            boot.SelectedItem = "CopperStart";
+            Assert.True(note.IsVisible); Assert.Contains("A500", note.Text);
+            Assert.False(SettingsNamed<Expander>(SettingsField<Window>(window, "_settingsWindow"), "Boot help").IsExpanded);
+            boot.SelectedItem = "KickstartRom";
+            Assert.False(note.IsVisible);
         }
         finally { window.Close(); }
     });
@@ -113,6 +129,8 @@ public sealed partial class LaunchWorkflowTests
             Assert.True(floppy.IsEffectivelyVisible, $"Visible={floppy.IsVisible}, protection={protect.IsChecked}, enabled={protect.IsEnabled}, path={SettingsField<TextBox[]>(window, "_drivePathBoxes")[0].Text}");
             protect.IsChecked = true; Assert.False(floppy.IsVisible);
             protect.IsChecked = false; Assert.True(floppy.IsVisible);
+            SettingsNamed<TabControl>(settings, "Storage tabs").SelectedIndex = 1;
+            settings.UpdateLayout();
             foreach (var (field, name) in new[] { ("_hardfileRows", "Hard disk 0 write warning"), ("_sharedFolderRows", "Shared folder HOST0 write warning") })
             {
                 var rows = SettingsField<StackPanel>(window, field);

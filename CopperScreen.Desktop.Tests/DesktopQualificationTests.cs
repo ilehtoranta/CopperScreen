@@ -150,14 +150,23 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
     [InlineData(800, 600, 1.25)]
     [InlineData(1280, 720, 1.5)]
     [InlineData(960, 640, 2.0)]
-    public Task LauncherScrollsAtBoundedClientSizesAndScaling(int width, int height, double scale) => UiAsync(async () =>
+    public Task LauncherScrollsAtBoundedClientSizesAndScaling(int width, int height, double scale) => CheckLauncherLayout(width, height, scale, choice: 0);
+
+    [CopperStartTheory]
+    [InlineData(800, 600, 1.0)]
+    [InlineData(800, 600, 1.25)]
+    [InlineData(1280, 720, 1.5)]
+    [InlineData(960, 640, 2.0)]
+    public Task CopperOsLauncherScrollsAtBoundedClientSizesAndScaling(int width, int height, double scale) => CheckLauncherLayout(width, height, scale, choice: 3);
+
+    private Task CheckLauncherLayout(int width, int height, double scale, int choice) => UiAsync(async () =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
             window.SetRenderScaling(scale);
             window.SizeToContent = SizeToContent.Manual; window.Width = width; window.Height = height;
-            LaunchSelection.Select(window, 3);
+            LaunchSelection.Select(window, choice);
             window.GetLogicalDescendants().OfType<Expander>().Single(e => e.Header is "Saved launch profiles").IsExpanded = true;
             await Task.Delay(50); // Platform resize/scaling notifications arrive after the property setters.
             window.UpdateLayout();

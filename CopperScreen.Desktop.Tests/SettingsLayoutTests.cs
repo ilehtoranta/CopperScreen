@@ -33,10 +33,15 @@ public sealed partial class LaunchWorkflowTests
             var pages = SettingsField<Control[]>(window, "_settingsPages");
             var directory = Environment.GetEnvironmentVariable("COPPERSCREEN_SETTINGS_CAPTURE");
             if (directory != null) Directory.CreateDirectory(directory);
-            for (var page = 0; page < pages.Length; page++)
+            var views = pages.SelectMany((control, index) => control is TabControl tabs
+                ? Enumerable.Range(0, tabs.Items.Count).Select(tab => (Page: index, Tab: tab))
+                : [(Page: index, Tab: -1)]);
+            foreach (var (page, tab) in views)
             {
                 typeof(MainWindow).GetMethod("SelectSettingsPage", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(window, [page]);
-                var scroll = Assert.IsType<ScrollViewer>(pages[page]);
+                if (pages[page] is TabControl tabs) tabs.SelectedIndex = tab;
+                settings.UpdateLayout();
+                var scroll = Assert.IsType<ScrollViewer>(pages[page] is TabControl selected ? selected.SelectedContent : pages[page]);
                 scroll.Offset = default;
                 settings.UpdateLayout();
                 await Task.Delay(40);
@@ -50,7 +55,7 @@ public sealed partial class LaunchWorkflowTests
                             $"Page {page}: {field.GetType().Name} outside settings width");
                 }
                 if (directory == null) continue;
-                var prefix = $"{width}-{height}-{scale}-page-{page}";
+                var prefix = $"{width}-{height}-{scale}-page-{page}" + (tab < 0 ? "" : $"-tab-{tab}");
                 var visibleText = pages[page].GetVisualDescendants().OfType<TextBlock>()
                     .Where(t => t.IsEffectivelyVisible).Select(t => t.Text).ToArray();
                 File.WriteAllText(Path.Combine(directory, prefix + ".json"), JsonSerializer.Serialize(visibleText));
@@ -77,11 +82,24 @@ public sealed partial class LaunchWorkflowTests
             foreach (var page in new[] { 1, 2, 3 })
             {
                 SettingsCall(window, "SelectSettingsPage", page);
+                if (pages[page] is TabControl tabs) tabs.SelectedIndex = 1;
                 foreach (var expander in pages[page].GetLogicalDescendants().OfType<Expander>()) expander.IsExpanded = true;
                 settings.UpdateLayout();
                 await Task.Delay(40);
-                var scroll = Assert.IsType<ScrollViewer>(pages[page]);
+                var scroll = Assert.IsType<ScrollViewer>(pages[page] is TabControl selected ? selected.SelectedContent : pages[page]);
                 Assert.True(scroll.Extent.Width <= scroll.Viewport.Width + 1, $"Expanded page {page} overflows horizontally");
+                if (directory != null && page == 3)
+                {
+                    foreach (var expander in pages[page].GetLogicalDescendants().OfType<Expander>()) expander.IsExpanded = false;
+                    foreach (var rows in new[] { "_hardfileRows", "_sharedFolderRows" })
+                        foreach (var expander in SettingsField<StackPanel>(window, rows).Children.OfType<Expander>()) expander.IsExpanded = true;
+                    settings.UpdateLayout();
+                    using var bitmap = new RenderTargetBitmap(
+                        new PixelSize((int)Math.Ceiling(settings.ClientSize.Width * scale), (int)Math.Ceiling(settings.ClientSize.Height * scale)),
+                        new Vector(96 * scale, 96 * scale));
+                    bitmap.Render(settings);
+                    bitmap.Save(Path.Combine(directory, $"{width}-{height}-{scale}-storage-populated.png"));
+                }
             }
         }
         finally { window.Close(); }

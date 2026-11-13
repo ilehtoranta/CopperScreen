@@ -21,10 +21,11 @@ Downgrading to a 24-bit CPU clamps an installed larger bank to 8 MiB and updates
 the Autoconfig address hint. CPU and RAM changes require a restart. Minimal disk
 boot retains its stock 68000 layout and has no Fast RAM.
 
-Banks above 8 MiB require Kickstart 3.x. The supported A500 ROM is native
-Kickstart 3.1 (40.63); the A1200 still requires native Kickstart 3.0 (39.106),
-PAL Alice/Lisa, 2 MiB Chip RAM and no trapdoor slow RAM. The 060 remains an
-engine/runner option, unavailable in the desktop pending compatible OS/FPU
+Banks above 8 MiB require Kickstart 3.x. Kickstart 3.1 is recommended for the
+A1200; other recognized native ROM versions are accepted, with varying compatibility.
+Native A500 Fast RAM evidence uses Kickstart 3.1 (40.63), and the original A1200
+evidence uses Kickstart 3.0 (39.106), PAL Alice/Lisa, 2 MiB Chip RAM and no trapdoor
+slow RAM. The 060 remains an engine/runner option, unavailable in the desktop pending compatible OS/FPU
 validation. See [CPU support](CPU_SUPPORT.md).
 
 ## Engine behavior

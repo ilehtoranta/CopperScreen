@@ -32,7 +32,18 @@ public sealed partial class LaunchWorkflowTests : IDisposable
     [InlineData(712, 1.0)]
     [InlineData(712, 1.25)]
     [InlineData(712, 2.0)]
-    public Task ModelSelectionKeepsTheLaunchCardAndSelectorWidth(int width, double scale) => UiAsync(async () =>
+    public Task ModelSelectionKeepsTheLaunchCardAndSelectorWidth(int width, double scale) => CheckModelSelectionLayout(width, scale, includeCopperOs: false);
+
+    [CopperStartTheory]
+    [InlineData(1040, 1.0)]
+    [InlineData(1040, 1.25)]
+    [InlineData(1040, 2.0)]
+    [InlineData(712, 1.0)]
+    [InlineData(712, 1.25)]
+    [InlineData(712, 2.0)]
+    public Task CopperStartModelSelectionKeepsTheLaunchCardAndSelectorWidth(int width, double scale) => CheckModelSelectionLayout(width, scale, includeCopperOs: true);
+
+    private Task CheckModelSelectionLayout(int width, double scale, bool includeCopperOs) => UiAsync(async () =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
@@ -47,7 +58,7 @@ public sealed partial class LaunchWorkflowTests : IDisposable
             var cardHeight = card.Bounds.Height;
             var position = selector.TranslatePoint(default, window)!.Value.X;
             Assert.True(selectorWidth > 0);
-            foreach (var model in new[] { 1, 2, 3, 4, 5, 0 })
+            foreach (var model in includeCopperOs ? new[] { 1, 2, 3, 4, 5, 0 } : new[] { 1, 2, 0 })
             {
                 LaunchSelection.Select(window, model);
                 window.UpdateLayout();

@@ -45,6 +45,9 @@ internal sealed partial class MainWindow : Window
 		"Input"
 	];
 	private readonly Button?[] _driveSaveAdfButtons = new Button?[4];
+	private readonly Button?[] _driveEjectButtons = new Button?[4];
+	private readonly TextBlock?[] _driveUnsavedNotes = new TextBlock?[4];
+	private readonly Control?[] _driveMediaRows = new Control?[4];
 	internal static readonly string[] AmigaDiskImagePickerPatterns = ["*.adf", "*.adz", "*.dms", "*.ipf", "*.scp", "*.zip"];
 	private sealed record ArchiveDiskAssignmentDialogResult(CopperScreenDriveDiskAssignment[] Assignments, int FloppyDriveCount);
 	private sealed record ArchiveEntryChoice(string Label, string? DiskPath)
@@ -1619,7 +1622,7 @@ internal sealed partial class MainWindow : Window
 			CreateProfilesSettingsPage(),
 			CreateMachineSettingsPage(),
 			CreateMemorySettingsPage(),
-			CreateFloppySettingsPage(),
+			CreateStorageSettingsPage(),
 			CreateDisplaySettingsPage(),
 			CreateAudioSettingsPage(),
 			CreateInputSettingsPage()
@@ -1954,11 +1957,15 @@ internal sealed partial class MainWindow : Window
             };
             _floppyDriveTypeBoxes[driveIndex] = typeBox;
         }
-		layout.Children.Add(CreateSettingsGroup("Drive Configuration", driveOptions));
+		var configuration = new Expander { Header = "Drive configuration", Content = driveOptions,
+			HorizontalAlignment = HorizontalAlignment.Stretch };
 
 		var driveMedia = CreateSettingsGroupForm();
 		for (var driveIndex = 0; driveIndex < _drivePathBoxes.Length; driveIndex++)
 		{
+			var driveForm = CreateSettingsGroupForm();
+			_driveMediaRows[driveIndex] = driveForm;
+			driveMedia.Children.Add(driveForm);
 			var row = new Grid
 			{
 				ColumnDefinitions =
@@ -2016,20 +2023,27 @@ internal sealed partial class MainWindow : Window
 			row.Children.Add(browse);
 			Grid.SetColumn(writeProtect, 2);
 			row.Children.Add(writeProtect);
-			driveMedia.Children.Add(CreateSettingsRow($"DF{driveIndex}", row));
+			driveForm.Children.Add(CreateSettingsRow($"DF{driveIndex}", row));
 			var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
             var saveAdf = CreatePanelButton($"Save DF{driveIndex} ADF…", () => _ = SaveDiskAdfAsync(index));
             _driveSaveAdfButtons[driveIndex] = saveAdf;
             actions.Children.Add(saveAdf);
-			actions.Children.Add(CreatePanelButton("Discard and eject", () => _ = DiscardAndEjectDiskAsync(index)));
-			driveMedia.Children.Add(CreateSettingsRow("", actions));
-			driveMedia.Children.Add(SettingsWriteWarning(writeProtect, "Changes stay in memory. Save ADF to keep them.", $"DF{driveIndex} write warning", box));
+			var eject = CreatePanelButton("Eject", () => _ = EjectDriveDiskAsync(index));
+			AutomationProperties.SetName(eject, $"Eject DF{driveIndex}");
+			_driveEjectButtons[driveIndex] = eject;
+			actions.Children.Add(eject);
+			driveForm.Children.Add(CreateSettingsRow("", actions));
+			var unsaved = SettingsNote("Unsaved changes");
+			AutomationProperties.SetName(unsaved, $"DF{driveIndex} unsaved changes");
+			unsaved.IsVisible = false;
+			_driveUnsavedNotes[driveIndex] = unsaved;
+			driveForm.Children.Add(unsaved);
+			driveForm.Children.Add(SettingsWriteWarning(writeProtect, "Changes stay in memory. Save ADF to keep them.", $"DF{driveIndex} write warning", box));
 		}
 
         driveMedia.Children.Add(SettingsHelp("Disk format help", "DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. Save ADF before replacing a writable disk or closing the app. HD drives accept DD and HD media. Changing the connected drive count or drive type requires a restart."));
         layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
-        layout.Children.Add(CreateHardfileSettings());
-        layout.Children.Add(CreateSharedFolderSettings());
+		layout.Children.Add(configuration);
 		return CreateScrollableSettingsPage(layout);
 	}
 
@@ -2367,6 +2381,7 @@ internal sealed partial class MainWindow : Window
 		for (var driveIndex = 0; driveIndex < _drivePathBoxes.Length; driveIndex++)
 		{
 			var connected = driveIndex < _settingsDraft.FloppyDriveCount;
+            if (_driveMediaRows[driveIndex] is { } row) row.IsVisible = connected;
             _floppyDriveTypeBoxes[driveIndex].IsEnabled = connected;
 			_drivePathBoxes[driveIndex].IsEnabled = connected;
 			_driveBrowseButtons[driveIndex].IsEnabled = connected;
@@ -2374,6 +2389,9 @@ internal sealed partial class MainWindow : Window
             var ipf = drive is { } state && IsDrivePermanentlyReadOnly(state);
             _driveWriteProtectBoxes[driveIndex].IsEnabled = connected && !ipf;
             if (_driveSaveAdfButtons[driveIndex] is { } save) save.IsEnabled = connected && drive?.CanExportAdf == true;
+            if (_driveEjectButtons[driveIndex] is { } eject)
+                eject.IsEnabled = connected && (drive?.HasDisk == true || drive?.IsSwapPending == true);
+            if (_driveUnsavedNotes[driveIndex] is { } unsaved) unsaved.IsVisible = drive?.HasUnsavedChanges == true;
             if (ipf)
             {
                 var wasUpdating = _updatingSettingsUi;
@@ -2926,9 +2944,11 @@ internal sealed partial class MainWindow : Window
 		UpdateSettingsStatus();
 	}
 
-	private async Task SaveDiskAdfAsync(int driveIndex)
+	private async Task SaveDiskAdfAsync(int driveIndex) => await TrySaveDiskAdfAsync(driveIndex);
+
+	private async Task<bool> TrySaveDiskAdfAsync(int driveIndex)
 	{
-		if (_runtime == null) { SetSettingsError("Start the Amiga before saving a mounted disk."); return; }
+		if (_runtime == null) { SetSettingsError("Start the Amiga before saving a mounted disk."); return false; }
         var runtime = _runtime;
 		var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
 		var file = await owner.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
@@ -2939,13 +2959,15 @@ internal sealed partial class MainWindow : Window
 			ShowOverwritePrompt = true,
 			FileTypeChoices = [new FilePickerFileType("Amiga disk image") { Patterns = ["*.adf"] }]
 		});
-		if (file?.TryGetLocalPath() is not { } path) return;
-        if (_runtime != runtime) { SetSettingsError("The session changed. Choose Save ADF again."); return; }
+		if (file?.TryGetLocalPath() is not { } path) return false;
+        if (_runtime != runtime) { SetSettingsError("The session changed. Choose Save ADF again."); return false; }
 		var result = await runtime.SaveAdfAsync(driveIndex, path, overwriteExisting: File.Exists(path));
+		if (_runtime != runtime) return false;
 		_latestState = result.State;
 		if (!result.Success) SetSettingsError(result.Message);
 		ShowDiskFeedback(result.Message, result.Success);
 		UpdateToolbarStatus();
+		return result.Success;
 	}
 
 	private bool _allowDiscardOnClose, _checkingDiskChanges;
@@ -2964,14 +2986,6 @@ internal sealed partial class MainWindow : Window
 			new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12, Children = { keep, discard } }
 		} };
 		return dialog.ShowDialog<bool>(this);
-	}
-
-	private async Task DiscardAndEjectDiskAsync(int driveIndex)
-	{
-		if (_runtime == null) return;
-		var result = await _runtime.DiscardAndEjectDiskAsync(driveIndex);
-		_latestState = result.State;
-		UpdateToolbarStatus();
 	}
 
 	private async Task<bool> TryAssignArchiveDiskSetAsync(string path)
@@ -4165,6 +4179,10 @@ internal sealed partial class MainWindow : Window
 				_committedSettings.DriveWriteProtected[drive.Index] = _settingsDraft.DriveWriteProtected[drive.Index] = drive.WriteProtected;
 				SetDrivePathTextSilently(drive.Index, drive.DiskPath ?? string.Empty);
 			}
+			var wasUpdating = _updatingSettingsUi;
+			_updatingSettingsUi = true;
+			try { _setupDiskBox.Text = _settingsDraft.DriveDiskPaths[0] ?? string.Empty; }
+			finally { _updatingSettingsUi = wasUpdating; }
 			RememberCurrentSession();
 		}
 		ShowDiskFeedback(result.Message, result.Success);
@@ -4457,7 +4475,7 @@ internal sealed partial class MainWindow : Window
 
 		var insertedDisk = string.IsNullOrWhiteSpace(drive.DiskPath) ? drive.DiskName : drive.DiskPath;
 		return $"DF{drive.Index}: {drive.DiskName} ({drive.Format})\n{insertedDisk}\nWrite protect: {(drive.WriteProtected ? "on" : "off")}" +
-			(drive.HasUnsavedChanges ? "\nUnsaved changes — use Settings > Floppy > Save ADF" : "") + "\nClick to change disk image";
+			(drive.HasUnsavedChanges ? "\nUnsaved changes — use Settings > Storage > Floppy drives > Save ADF" : "") + "\nClick to change disk image";
 	}
 
 	private void SetWriteProtectToolTip(string text)

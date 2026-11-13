@@ -3,7 +3,7 @@
 The start screen separates **Amiga model** (500, 500+, or 1200) from
 **Boot method** (free Minimal disk boot, your licensed original Kickstart ROM,
 or licensed CopperStart ROM when enabled by the build). For native boot, Kickstart 1.3 is
-recommended for A500, 2.04 for A500+, and 3.0 for A1200. Other supported native ROM versions
+recommended for A500, 2.04 for A500+, and 3.1 for A1200. Other supported native ROM versions
 can be selected on any model; compatibility varies by ROM and software. Floppy disks are optional;
 with no boot media, native Kickstart shows its insert-disk screen.
 
@@ -23,6 +23,28 @@ launches, including saved profiles and command-line requests. Personal setups an
 disks are retained. The flag selects a distribution capability; it does not verify
 license ownership. Existing CopperStart qualification commands need the enabled
 build property; `scripts/test-copperstart.ps1` supplies it automatically.
+
+Desktop tests use the capability in the referenced CopperScreen assembly. The
+ordinary suite runs native ROM, model/settings and disabled-CopperStart controls;
+CopperStart-only facts and theories report an explicit unavailable-coverage skip
+when the capability is disabled:
+
+```powershell
+dotnet test CopperScreen.Desktop.Tests/CopperScreen.Desktop.Tests.csproj -c Release -p:CopperScreenEnableCopperStart=false --artifacts-path artifacts/desktop-native-tests
+```
+
+For CopperStart coverage, stage the qualified ROM/HDF pair with
+`scripts/prepare-copperos-bundle.ps1`, then use separate build outputs:
+
+```powershell
+dotnet test CopperScreen.Desktop.Tests/CopperScreen.Desktop.Tests.csproj -c Release -p:CopperScreenEnableCopperStart=true --artifacts-path artifacts/desktop-copperstart-tests
+```
+
+The enabled build validates the bundle hashes. Missing or invalid embedded payloads
+are failures, not skips. Historical seed and external workspace replays also need
+their documented environment variables; their absence remains unavailable coverage.
+Mixed native/CopperStart scenarios have separate tests so the native portions run
+in both builds. Do not use a default-build skip as evidence of a CopperOS replay.
 
 For CopperOS, select a model, choose **CopperStart ROM** under Boot method,
 and press **Start CopperOS**. A500 and A500+ selection is experimental:
@@ -225,7 +247,7 @@ open, and P1-07 owns the wider frozen compatibility matrix.
 
 ## RDB disk backups and reinstall recovery
 
-Stop the Amiga, then open Settings > Storage > Hard disks and choose
+Stop the Amiga, then open Settings > Storage > Backups and choose
 **Export hard-disk backup…**. Save the `.copperhdf` file outside app data.
 It contains every complete configured HDF and the machine profile, including
 RDB metadata, every partition, boot priorities, explicit partition geometry

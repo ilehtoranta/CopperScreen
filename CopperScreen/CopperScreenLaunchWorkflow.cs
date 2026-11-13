@@ -56,7 +56,7 @@ internal static class CopperScreenLaunchWorkflow
         {
             CopperScreenMachineModel.Amiga500 => "Recommended for Amiga 500: Kickstart 1.3. Other supported versions are accepted; compatibility varies.",
             CopperScreenMachineModel.Amiga500Ecs => "Recommended for Amiga 500+: Kickstart 2.04. Other supported versions are accepted; compatibility varies.",
-            _ => "Recommended for Amiga 1200: Kickstart 3.0. Other supported versions are accepted; compatibility varies."
+            _ => "Recommended for Amiga 1200: Kickstart 3.1. Other supported versions are accepted; compatibility varies."
         };
 
     public static CopperScreenSettingsDraft SelectCopperOsHdf(CopperScreenSettingsDraft current, string path)

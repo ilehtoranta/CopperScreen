@@ -514,19 +514,4 @@ internal sealed partial class MainWindow
         _mediaFeedback.IsVisible = !string.IsNullOrWhiteSpace(message);
     }
 
-    private async Task EjectDriveDiskAsync(int index)
-    {
-        if (_runtime != null) await CompleteDiskCommandAsync(_runtime.EjectDiskAsync(index));
-        else
-        {
-            _settingsDraft.DriveDiskPaths[index] = null;
-            _committedSettings.DriveDiskPaths[index] = null;
-            SetDrivePathTextSilently(index, string.Empty);
-            if (index == 0) _setupDiskBox.Text = string.Empty;
-            _latestState = CreateIdleState(_settingsDraft);
-            RememberCurrentSession();
-            UpdateSettingsStatus();
-            UpdateToolbarStatus();
-        }
-    }
 }

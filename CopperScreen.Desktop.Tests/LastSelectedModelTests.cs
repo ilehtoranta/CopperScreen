@@ -9,8 +9,12 @@ public sealed partial class LaunchWorkflowTests
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
-    [InlineData(3)]
-    public Task SelectedModelAndMediaReopenWithoutStarting(int choice) => Ui(() =>
+    public Task SelectedModelAndMediaReopenWithoutStarting(int choice) => CheckSelectedModelAndMedia(choice);
+
+    [CopperStartFact]
+    public Task SelectedCopperOsModelAndMediaReopenWithoutStarting() => CheckSelectedModelAndMedia(3);
+
+    private Task CheckSelectedModelAndMedia(int choice) => Ui(() =>
     {
         var recent = new CopperScreenRecentSession(_root);
         for (var i = 0; i < 3; i++)

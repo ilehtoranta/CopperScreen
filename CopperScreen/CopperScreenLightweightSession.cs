@@ -398,7 +398,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (disk.RequiresHighDensityDrive && _driveTypes[drive] != LightweightFloppyDriveType.HighDensity)
             return Reject($"DF{drive} is a DD drive. Select HD in Floppy Drives settings and restart the Amiga before inserting HD media.");
         var adf = disk; // Fully prepared by the loader before changing the existing medium.
-        if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or discard and eject it before replacing the disk.");
+        if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or choose Eject to save or discard them before replacing the disk.");
         if (markChanged)
         {
             _machine.EjectAdf(drive);
@@ -416,7 +416,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     {
         if (_workspace != null && drive == 0) return Reject("Close this CopperOS session before changing its workspace disk.");
         if ((uint)drive >= (uint)_machine.FloppyDriveCount) return Reject("Floppy drive is not connected.");
-        if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or use Discard and eject.");
+        if (_machine.IsDriveDirty(drive)) return Reject($"DF{drive} has unsaved changes. Save ADF or confirm discarding the changes before ejecting.");
         return DiscardAndEjectDisk(drive);
     }
 

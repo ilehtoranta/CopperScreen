@@ -6,7 +6,12 @@ namespace CopperScreen.Tests;
 public sealed partial class LaunchWorkflowTests
 {
     [Fact]
-    public Task WholeMachineConfigurationsSurviveSwitchesAndRestartWithoutBoot() => Ui(() =>
+    public Task WholeMachineConfigurationsSurviveSwitchesAndRestartWithoutBoot() => CheckMachineConfigurations(includeCopperOs: false);
+
+    [CopperStartFact]
+    public Task WholeMachineConfigurationsSurviveCopperOsSelectionAndRestart() => CheckMachineConfigurations(includeCopperOs: true);
+
+    private Task CheckMachineConfigurations(bool includeCopperOs) => Ui(() =>
     {
         var expected = new CopperScreenSettingsDraft[3];
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
@@ -26,9 +31,12 @@ public sealed partial class LaunchWorkflowTests
                 expected[i] = draft.Clone();
                 SetMenuDraft(window, draft);
             }
-            LaunchSelection.Select(window, 3);
-            Assert.Equal(M68kBackendKind.AccurateM68EC020, MenuDraft(window).CpuBackend);
-            Assert.Equal(0, MenuDraft(window).RealFastRamKb);
+            if (includeCopperOs)
+            {
+                LaunchSelection.Select(window, 3);
+                Assert.Equal(M68kBackendKind.AccurateM68EC020, MenuDraft(window).CpuBackend);
+                Assert.Equal(0, MenuDraft(window).RealFastRamKb);
+            }
             foreach (var i in new[] { 0, 1, 2 })
             {
                 LaunchSelection.Select(window, i);

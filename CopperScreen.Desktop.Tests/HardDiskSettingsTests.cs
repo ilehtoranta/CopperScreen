@@ -24,9 +24,8 @@ public sealed partial class LaunchWorkflowTests
             var mode = controls.OfType<ComboBox>().Single(c => AutomationProperties.GetName(c) == "Image layout");
             var cylinder = controls.OfType<TextBox>().Single(c => AutomationProperties.GetName(c) == "First cylinder");
             cylinder.Text = "invalid hidden geometry"; mode.SelectedItem = "RDB";
-            var size = controls.OfType<TextBox>().Single(c => AutomationProperties.GetName(c) == "Create size (bytes)");
-            await Until(() => !size.IsEnabled);
-            Assert.Equal("0", size.Text);
+            await Until(() => !cylinder.IsEffectivelyVisible);
+            Assert.DoesNotContain(controls.OfType<TextBox>(), c => AutomationProperties.GetName(c) == "Create size (bytes)");
             Assert.Contains(cylinder.GetLogicalAncestors().OfType<Control>(), parent => !parent.IsVisible);
             typeof(MainWindow).GetMethod("ReadHardfileSettings", flags)!.Invoke(window, [draft]);
             var drive = Assert.Single(draft.HardDrives);

@@ -1,3 +1,5 @@
+using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Platform.Storage;
@@ -11,34 +13,128 @@ internal sealed partial class MainWindow
     private readonly List<Func<CopperScreenHardfileSettings>> _hardfileReaders = [];
     private TextBlock _hardDiskBackupStatus = null!;
 
+    private Control CreateStorageSettingsPage()
+    {
+        var disks = CreateSettingsPageLayout();
+        disks.Children.Add(CreateHardfileSettings());
+        disks.Children.Add(CreateSharedFolderSettings());
+        var tabs = new TabControl
+        {
+            HorizontalContentAlignment = HorizontalAlignment.Stretch,
+            VerticalContentAlignment = VerticalAlignment.Stretch,
+            Items =
+            {
+                new TabItem { Header = "Floppy drives", Content = CreateFloppySettingsPage() },
+                new TabItem { Header = "Hard disks & folders", Content = CreateScrollableSettingsPage(disks) },
+                new TabItem { Header = "Backups", Content = CreateHardDiskBackupSettingsPage() }
+            }
+        };
+        tabs.SelectedIndex = 0;
+        AutomationProperties.SetName(tabs, "Storage tabs");
+        return tabs;
+    }
+
+    private Control CreateHardDiskBackupSettingsPage()
+    {
+        var page = CreateSettingsPageLayout();
+        var layout = CreateSettingsGroupForm();
+        layout.Children.Add(SettingsNote("Includes complete hard-disk images and machine settings. Excludes ROMs, floppy images and shared-folder contents."));
+        layout.Children.Add(SettingsNote("Stop the Amiga before exporting or restoring. Keep backups outside app data so they survive uninstalling."));
+        layout.Children.Add(CreatePanelButton("Export hard-disk backup…", async () => await ExportHardDiskBackupAsync()));
+        layout.Children.Add(SettingsNote("Restore creates new disk files and loads the saved machine configuration, including disk write protection. Check the ROM path before starting the Amiga."));
+        layout.Children.Add(CreatePanelButton("Restore hard-disk backup…", async () => await RestoreHardDiskBackupAsync()));
+        layout.Children.Add(SettingsHelp("Backup details", "Every complete hard-disk image is included, with all RDB partitions and unpartitioned space. Existing files and backups are preserved. CopperOS floppy workspace backups are managed separately from the launcher."));
+        _hardDiskBackupStatus = SettingsNote(string.Empty);
+        _hardDiskBackupStatus.IsVisible = false;
+        layout.Children.Add(_hardDiskBackupStatus);
+        page.Children.Add(CreateSettingsGroup("Hard-disk backups", layout));
+        return CreateScrollableSettingsPage(page);
+    }
+
     private Control CreateHardfileSettings()
     {
         var layout = new StackPanel { Spacing = 10 };
         layout.Children.Add(SettingsHelp("Hard disk help", "Hard disks attach when the Amiga starts. CopperStart accepts one existing image on unit 0: choose RDB to discover its FFS partitions and boot priorities, or Partition to enter exact geometry. TD64 supports FFS offsets above 4 GiB. Changes require a restart."));
-        layout.Children.Add(SettingsNote("Includes hard disks and settings only."));
-        layout.Children.Add(CommandGroup(CreatePanelButton("Export hard-disk backup…", async () => await ExportHardDiskBackupAsync()),
-            CreatePanelButton("Restore hard-disk backup…", async () => await RestoreHardDiskBackupAsync())));
-        layout.Children.Add(SettingsHelp("Backup help", "Stop the Amiga before backup or restore. A backup includes every complete hard-disk image, all RDB partitions and the machine settings. Firmware, floppy images and shared-folder contents are not included. Restore creates new working disks and preserves their saved write protection. Backups never replace an existing file. Keep the exported backup outside app data."));
-        _hardDiskBackupStatus = SettingsNote(string.Empty);
-        _hardDiskBackupStatus.IsVisible = false;
-        layout.Children.Add(_hardDiskBackupStatus);
+        layout.Children.Add(SettingsNote("Attach an existing image or create a blank image. Changes apply when the Amiga restarts."));
         _hardfileRows = new StackPanel { Spacing = 10 };
         layout.Children.Add(_hardfileRows);
-        layout.Children.Add(CreatePanelButton("Add hard disk", () =>
-        {
-            try
-            {
-                ReadHardfileSettings(_settingsDraft);
-                var unit = 0;
-                while (_settingsDraft.HardDrives.Any(h => h.Unit == unit)) unit++;
-                _settingsDraft.HardDrives.Add(_settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart
-                    ? new(unit, "", true, 0, AmigaHardfileMountMode.RigidDiskBlock)
-                    : new(unit, "", true, 0));
-                RefreshHardfileSettings(); MarkSettingsRestartRequired();
-            }
-            catch (Exception ex) when (ex is ArgumentException or FormatException or OverflowException or InvalidOperationException) { SetSettingsError(ex.Message); }
-        }));
+        layout.Children.Add(CommandGroup(
+            CreatePanelButton("Add existing disk…", async () => await AddExistingHardDiskAsync()),
+            CreatePanelButton("Create disk image…", async () => await CreateHardDiskImageAsync())));
         return CreateSettingsGroup("Hard disks", layout);
+    }
+
+    private int NextHardDiskUnit()
+    {
+        var unit = 0;
+        while (_settingsDraft.HardDrives.Any(h => h.Unit == unit)) unit++;
+        return unit;
+    }
+
+    private async Task AddExistingHardDiskAsync()
+    {
+        try
+        {
+            var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
+            var selected = await owner.StorageProvider.OpenFilePickerAsync(new()
+            {
+                Title = "Choose hard disk image", AllowMultiple = false,
+                FileTypeFilter = [new("Hard disk images") { Patterns = ["*.hdf", "*.img"] }, FilePickerFileTypes.All]
+            });
+            if (selected.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+            ReadHardfileSettings(_settingsDraft);
+            _settingsDraft.HardDrives.Add(new(NextHardDiskUnit(), path, true, 0,
+                _settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart ? AmigaHardfileMountMode.RigidDiskBlock : AmigaHardfileMountMode.Auto));
+            RefreshHardfileSettings(); MarkSettingsRestartRequired();
+        }
+        catch (Exception ex) when (IsWorkspaceFileError(ex) || ex is FormatException or OverflowException) { SetSettingsError(ex.Message); }
+    }
+
+    private async Task CreateHardDiskImageAsync()
+    {
+        if (_settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart)
+        {
+            SetSettingsError("CopperStart requires an existing disk image. Choose Add existing disk instead.");
+            return;
+        }
+        var owner = _settingsVisible ? (Window)_settingsWindow : this;
+        var dialog = new Window { Title = "Create disk image", Width = 480, SizeToContent = SizeToContent.Height,
+            CanResize = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
+        var form = CreateSettingsGroupForm();
+        form.Margin = new Thickness(20);
+        form.Children.Add(SettingsNote("Add a blank image to this machine. The file is created when the Amiga starts; format it inside the Amiga before use."));
+        var path = AddTextSetting(form, "New image file", markRestart: false);
+        form.Children.Add(CreatePanelButton("Choose location…", async () =>
+        {
+            var file = await dialog.StorageProvider.SaveFilePickerAsync(new()
+            {
+                Title = "New hard disk image", SuggestedFileName = "Amiga.hdf", DefaultExtension = "hdf",
+                FileTypeChoices = [new("Hard disk image") { Patterns = ["*.hdf"] }]
+            });
+            if (file?.TryGetLocalPath() is { } selected) path.Text = selected;
+        }));
+        var size = AddTextSetting(form, "Capacity (MiB)", markRestart: false); size.Text = "100";
+        var error = SettingsNote(string.Empty); form.Children.Add(error);
+        form.Children.Add(CommandGroup(CreatePanelButton("Cancel", () => dialog.Close()),
+            CreatePanelButton("Add blank image", () =>
+            {
+                try
+                {
+                    var destination = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
+                        ?? throw new InvalidOperationException("Choose a new image file.");
+                    if (File.Exists(destination) || Directory.Exists(destination)) throw new IOException("Choose a new filename. Existing files are preserved.");
+                    if (!long.TryParse(size.Text, NumberStyles.None, CultureInfo.InvariantCulture, out var mib) || mib <= 0)
+                        throw new InvalidOperationException("Capacity must be a positive whole number of MiB.");
+                    var bytes = checked(mib * 1024 * 1024);
+                    ReadHardfileSettings(_settingsDraft);
+                    _settingsDraft.HardDrives.Add(new(NextHardDiskUnit(), destination, true, bytes, SparseStorage: true));
+                    RefreshHardfileSettings(); MarkSettingsRestartRequired();
+                    dialog.Close();
+                }
+                catch (Exception ex) when (IsWorkspaceFileError(ex) || ex is FormatException or OverflowException) { error.Text = ex.Message; }
+            })));
+        dialog.Content = form;
+        await dialog.ShowDialog(owner);
     }
 
     private void ReadHardfileSettings(CopperScreenSettingsDraft draft)
@@ -55,9 +151,11 @@ internal sealed partial class MainWindow
         foreach (var (settings, index) in _settingsDraft.HardDrives.Select((h, i) => (h, i)))
         {
             var form = CreateSettingsGroupForm();
-            var unit = AddTextSetting(form, "Unit"); unit.Text = settings.Unit.ToString(CultureInfo.InvariantCulture);
+            var diskOptions = CreateSettingsGroupForm();
+            var unit = AddTextSetting(diskOptions, "Unit"); unit.Text = settings.Unit.ToString(CultureInfo.InvariantCulture);
             var path = AddTextSetting(form, "HDF path"); path.Text = settings.Path;
             bool? sparseEnabled = settings.SparseStorage;
+            var sparseForm = CreateSettingsGroupForm();
             var allocation = SettingsNote(string.Empty);
             void RefreshAllocation()
             {
@@ -72,8 +170,8 @@ internal sealed partial class MainWindow
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException) { allocation.Text = "Disk allocation unavailable."; }
             }
-            form.Children.Add(allocation);
-            form.Children.Add(CreatePanelButton("Enable sparse storage", () =>
+            sparseForm.Children.Add(allocation);
+            sparseForm.Children.Add(CreatePanelButton("Enable sparse storage", () =>
             {
                 try
                 {
@@ -88,24 +186,27 @@ internal sealed partial class MainWindow
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException) { SetSettingsError(ex.Message); }
             }));
-            form.Children.Add(SettingsHelp("Sparse storage help", "Virtual capacity stays fixed. CopperTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
+            sparseForm.Children.Add(SettingsNote("Virtual capacity stays fixed. CopperTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
             path.TextChanged += (_, _) => { sparseEnabled = null; RefreshAllocation(); };
             RefreshAllocation();
             var readOnly = new CheckBox { Content = "Read-only", IsChecked = settings.ReadOnly };
             path.TextChanged += (_, _) => { if (path.Text != settings.Path) readOnly.IsChecked = true; };
             form.Children.Add(CreatePanelButton("Browse HDF…", async () =>
             {
-                var selected = await StorageProvider.OpenFilePickerAsync(new() { Title = "Choose hard disk image", AllowMultiple = false,
+                var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
+                var selected = await owner.StorageProvider.OpenFilePickerAsync(new() { Title = "Choose hard disk image", AllowMultiple = false,
                     FileTypeFilter = [new("Hard disk images") { Patterns = ["*.hdf", "*.img"] }, FilePickerFileTypes.All] });
                 if (selected.Count == 1) { path.Text = selected[0].TryGetLocalPath(); readOnly.IsChecked = true; }
             }));
             readOnly.IsCheckedChanged += (_, _) => MarkSettingsRestartRequired(); form.Children.Add(readOnly);
             form.Children.Add(SettingsWriteWarning(readOnly, "Writes directly to this file.", $"Hard disk {settings.Unit} write warning"));
-            var mode = AddComboSetting(form, "Image layout", ["Auto", "RDB", "Partition"]); mode.SelectedIndex = (int)settings.Mode;
-            var size = AddTextSetting(form, "Create size (bytes)"); size.Text = settings.CreateSizeBytes.ToString(CultureInfo.InvariantCulture);
+            var mode = AddComboSetting(diskOptions, "Image layout", ["Auto", "RDB", "Partition"]); mode.SelectedIndex = (int)settings.Mode;
+            var createSizeBytes = settings.CreateSizeBytes;
+            var creationNote = SettingsNote($"Blank image: {createSizeBytes / 1048576d:N1} MiB. Created on start if the file does not exist; format it inside the Amiga.");
+            form.Children.Add(creationNote);
             var advanced = CreateSettingsGroupForm();
             var partitionForm = CreateSettingsGroupForm();
-            form.Children.Add(SettingsHelp("Image layout help", "RDB reads partition names, geometry and boot priorities from the image. Partition mode uses the fields below. No disk is formatted. Use a create size of 0 for an existing image. Creation only applies to a missing file; the size must be a multiple of 512 bytes."));
+            diskOptions.Children.Add(SettingsHelp("Image layout help", "RDB reads partition names, geometry and boot priorities from the image. Partition mode uses the fields below. No disk is formatted. Use Create disk image to add a new blank image."));
             var partition = settings.Partition ?? new AmigaHardfilePartitionMetadata();
             var fields = new Dictionary<string, TextBox>();
             // The advanced fields correspond directly to the saved profile's
@@ -123,7 +224,7 @@ internal sealed partial class MainWindow
                 fields.Add(property.Name, box);
             }
             partitionForm.Children.Add(SettingsHelp("Partition help", "First and last cylinders are inclusive. Heads and blocks per track must match the formatted image. FFS uses 512-byte blocks; its DOS type is $444F5301."));
-            form.Children.Add(CreatePanelButton("Use FFS partition settings", () =>
+            diskOptions.Children.Add(CreatePanelButton("Use FFS partition settings", () =>
             {
                 mode.SelectedItem = "Partition";
                 fields["DosType"].Text = "$444F5301";
@@ -136,16 +237,18 @@ internal sealed partial class MainWindow
                 MarkSettingsRestartRequired();
             }));
             partitionForm.Children.Add(new Expander { Header = "Partition metadata", Content = advanced, HorizontalAlignment = HorizontalAlignment.Stretch });
-            form.Children.Add(partitionForm);
+            diskOptions.Children.Add(partitionForm);
             void UpdateLayout()
             {
                 var rdb = mode.SelectedIndex == (int)AmigaHardfileMountMode.RigidDiskBlock;
                 partitionForm.IsVisible = !rdb;
-                size.IsEnabled = !rdb;
-                if (rdb) size.Text = "0";
+                if (rdb) createSizeBytes = 0;
+                creationNote.IsVisible = createSizeBytes > 0;
             }
             mode.SelectionChanged += (_, _) => { UpdateLayout(); MarkSettingsRestartRequired(); };
             UpdateLayout();
+            form.Children.Add(new Expander { Header = "Disk layout and partition settings", Content = diskOptions, HorizontalAlignment = HorizontalAlignment.Stretch });
+            form.Children.Add(new Expander { Header = "Host storage allocation", Content = sparseForm, HorizontalAlignment = HorizontalAlignment.Stretch });
             form.Children.Add(CreatePanelButton("Remove hard disk", () =>
             {
                 // Removal also works for an incomplete row.
@@ -159,7 +262,8 @@ internal sealed partial class MainWindow
             {
                 if (!int.TryParse(unit.Text, out var number) || number < 0) throw new InvalidOperationException("Hard disk unit must be a nonnegative integer.");
                 if (string.IsNullOrWhiteSpace(path.Text)) throw new InvalidOperationException($"Choose a backing file for hard disk unit {number}.");
-                if (!long.TryParse(size.Text, out var bytes) || bytes < 0 || bytes % 512 != 0) throw new InvalidOperationException("Hard disk creation size must be a nonnegative multiple of 512 bytes.");
+                var bytes = createSizeBytes;
+                if (bytes < 0 || bytes % 512 != 0) throw new InvalidOperationException("Hard disk creation size must be a nonnegative multiple of 512 bytes.");
                 if (mode.SelectedIndex == (int)AmigaHardfileMountMode.RigidDiskBlock)
                     return new(number, path.Text.Trim(), readOnly.IsChecked == true, 0, AmigaHardfileMountMode.RigidDiskBlock, SparseStorage: sparseEnabled);
                 var metadata = new AmigaHardfilePartitionMetadata(); var any = false;
@@ -179,7 +283,13 @@ internal sealed partial class MainWindow
                     (AmigaHardfileMountMode)mode.SelectedIndex, any ? metadata : null,
                     sparseEnabled ?? (bytes > 0 && !File.Exists(CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory))));
             });
-            _hardfileRows.Children.Add(new Expander { Header = $"Unit {settings.Unit}: {System.IO.Path.GetFileName(settings.Path)}", Content = form, IsExpanded = true, HorizontalAlignment = HorizontalAlignment.Stretch });
+            var summary = SettingsNote(string.Empty);
+            void UpdateSummary() => summary.Text = $"Unit {unit.Text} · {System.IO.Path.GetFileName(path.Text)} · " + (readOnly.IsChecked == true ? "Read-only" : "Writable");
+            UpdateSummary();
+            path.TextChanged += (_, _) => UpdateSummary();
+            unit.TextChanged += (_, _) => UpdateSummary();
+            readOnly.IsCheckedChanged += (_, _) => UpdateSummary();
+            _hardfileRows.Children.Add(new Expander { Header = summary, Content = form, IsExpanded = true, HorizontalAlignment = HorizontalAlignment.Stretch });
         }
     }
 }

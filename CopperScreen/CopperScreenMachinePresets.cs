@@ -9,7 +9,7 @@ internal static class CopperScreenMachinePresets
     {
         CopperScreenMachineModel.Amiga500 => KickstartVersion.Kickstart13,
         CopperScreenMachineModel.Amiga500Ecs => KickstartVersion.Kickstart20,
-        CopperScreenMachineModel.Amiga1200 => KickstartVersion.Kickstart30,
+        CopperScreenMachineModel.Amiga1200 => KickstartVersion.Kickstart31,
         _ => throw new ArgumentOutOfRangeException(nameof(model))
     };
 

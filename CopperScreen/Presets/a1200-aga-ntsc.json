@@ -1,7 +1,7 @@
 {
   "id": "a1200-aga-ntsc",
   "displayName": "Amiga 1200 AGA NTSC",
-  "description": "Amiga 1200 NTSC with Alice/Lisa, 2 MiB chip RAM, one empty floppy drive, and a required Kickstart 3.0 ROM.",
+  "description": "Amiga 1200 NTSC with Alice/Lisa, 2 MiB chip RAM and one empty floppy drive. Kickstart 3.1 is recommended; other supported native ROM versions are accepted, with varying compatibility.",
   "machine": {
     "model": "A1200",
     "agnus": "Alice",
@@ -18,6 +18,6 @@
   },
   "kickstart": {
     "source": "KickstartRom",
-    "version": "3.0"
+    "version": "3.1"
   }
 }

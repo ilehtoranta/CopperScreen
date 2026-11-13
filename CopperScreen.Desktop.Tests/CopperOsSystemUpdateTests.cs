@@ -7,10 +7,11 @@ namespace CopperScreen.Tests;
 
 public sealed class CopperOsSystemUpdateTests
 {
-    [Fact]
+    [CopperStartFact]
     public void CurrentThreeComponentBundleIsIdempotentAndMismatchedGuiDoesNotPublishPartialUpdates()
     {
-        using var stream=typeof(CopperScreenBundledCopperOs).Assembly.GetManifestResourceStream("CopperScreen.Bundled.CopperOS.hdf")!;
+        using var stream=typeof(CopperScreenBundledCopperOs).Assembly.GetManifestResourceStream("CopperScreen.Bundled.CopperOS.hdf");
+        Assert.NotNull(stream);
         using var buffer=new MemoryStream();stream.CopyTo(buffer);var image=buffer.ToArray();var before=(byte[])image.Clone();
         var home=CopperScreenCopperOsSystemUpdate.ReadHome(image);var command=CopperScreenCopperOsSystemUpdate.ReadCommand(image);var gui=CopperScreenCopperOsSystemUpdate.ReadGui(image);
         Assert.True(CopperScreenCopperOsSystemUpdate.TryCreateSystemImage(image,home,command,gui,out var same));Assert.Null(same);
