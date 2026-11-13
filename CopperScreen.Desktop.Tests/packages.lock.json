@@ -191,6 +191,27 @@
           "HidSharp": "2.6.4"
         }
       },
+      "CopperSharp.Compiler": {
+        "type": "Transitive",
+        "resolved": "0.1.0-preview.1",
+        "contentHash": "23EOJVkPDbmIKA49g0xH4IuLtuwOsvwA42lQxUb6/bKCpl6tEsSrbJngL2rOJC4rFIN7B0oCIsQokhur96yRnA=="
+      },
+      "CopperSharp.Sdk.Amiga": {
+        "type": "Transitive",
+        "resolved": "0.1.0-preview.1",
+        "contentHash": "O0g248rgmjfcWpTxU7hhHqqblu1ikVREnnR2Zi5YtQkEODoYfkZx3NV5mFiQuZA1xEzFPFVDAfHcSu2eUMX19g==",
+        "dependencies": {
+          "CopperSharp.Compiler": "0.1.0-preview.1"
+        }
+      },
+      "CopperSharp.Sdk.Amiga.Support": {
+        "type": "Transitive",
+        "resolved": "0.1.0-preview.1",
+        "contentHash": "fr69BvDHMb8FljYh71b1gM1QlIRqbm5e9acOKHQJwNXGaVq0KUxy8VQsg7RvMl2vspz44xs7w52V1sNCxpTvyg==",
+        "dependencies": {
+          "CopperSharp.Sdk.Amiga": "0.1.0-preview.1"
+        }
+      },
       "HarfBuzzSharp": {
         "type": "Transitive",
         "resolved": "8.3.1.3",
@@ -359,8 +380,15 @@
           "CopperMod.Amiga.Lightweight": "[0.1.0-preview.2, )",
           "CopperPad": "[2.0.0-preview.2, )",
           "CopperPad.HidSharp": "[2.0.0-preview.2, )",
+          "CopperScreen.FileSystems": "[1.0.0, )",
           "HotPathGuard.Abstractions": "[0.1.0, )",
           "Miniaudio-CS": "[1.0.4, )"
+        }
+      },
+      "copperscreen.filesystems": {
+        "type": "Project",
+        "dependencies": {
+          "CopperSharp.Sdk.Amiga.Support": "[0.1.0-preview.1, 0.1.0-preview.1]"
         }
       }
     }

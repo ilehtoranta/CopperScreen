@@ -15,6 +15,9 @@ documents the library's track APIs, supported formats and decoder limits.
 The source also owns `AmigaHardfileConfiguration`/partition metadata and internal
 file-range, RDB and filesystem metadata helpers used by Lightweight CopperHDF.
 Guest device registration, boot discovery and I/O gateways remain in the engine.
+Source also exposes `AmigaRdbSetup` for strict offline 512-byte RDB
+inspection and adding partitions in unpublished image copies. Filesystem
+formatting remains in CopperFS; see [offline disk setup](../docs/HARDDISK_SETUP.md).
 See the [storage interface](https://github.com/ilehtoranta/CopperScreen/blob/main/docs/engine/STORAGE.md).
 
 ## Installation

@@ -1,0 +1,238 @@
+using Amiga;
+
+namespace CopperStart.Dos;
+
+public static partial class AmigaFfsWriteCore
+{
+    // Validate pointer order and forward chains, including FFS 40.1's separate
+    // append runs (old EOF link zero, new sequence starting at one).
+    // Use the existing three scratch blocks, never a volume-sized key array.
+    private static bool OfsChain<T>(ref T p, ref Work w, uint header, bool release,
+        out uint lastData) where T : struct, IAmigaWritableFileSystemPlatform
+    {
+        lastData = 0;
+        var g = AmigaFfsGeometry.Read(ref p); var payload = g.BlockBytes - 24;
+        if (!Header(ref p, ref w, header) || p.ReadUInt32(w.Meta, g.Tail + 508) != 0xFFFFFFFD)
+            return Fail(ref w, DOS.Error.DiskNotValidated);
+        var remaining = p.ReadUInt32(w.Meta, g.Tail + 324);
+        var blocks = remaining == 0 ? 0 : AmigaGeometryMath.Divide(remaining - 1, payload) + 1;
+        if (blocks > g.BlockCount - g.ReservedBlocks) return Fail(ref w, DOS.Error.DiskNotValidated);
+        var expected = p.ReadUInt32(w.Meta, 16); var table = header; var index = 0u;
+        var sequenceBase = 0u;
+        for (var guard = 0u; guard < g.BlockCount; guard++)
+        {
+            if (!Allocated(ref p, ref w, in g, table) || !p.ReadBlock(table, w.Meta) ||
+                !AmigaDiskFileSystemCore.Checksum(ref p, w.Meta) || p.ReadUInt32(w.Meta, 4) != table ||
+                p.ReadUInt32(w.Meta) != (guard == 0 ? 2u : 16u) ||
+                p.ReadUInt32(w.Meta, g.Tail + 508) != 0xFFFFFFFD ||
+                (guard != 0 && p.ReadUInt32(w.Meta, g.Tail + 500) != header))
+                return Fail(ref w, DOS.Error.DiskNotValidated);
+            var count = blocks - index; if (count > g.TableEntries) count = g.TableEntries;
+            if (p.ReadUInt32(w.Meta, 8) != count) return Fail(ref w, DOS.Error.DiskNotValidated);
+            for (var i = 0u; i < count; i++)
+            {
+                var key = p.ReadUInt32(w.Meta, g.Tail + 308 - (int)i * 4);
+                var bytes = remaining > payload ? payload : remaining;
+                if ((key != expected && (expected != 0 || index == 0)) || key == header || key == table ||
+                    !Allocated(ref p, ref w, in g, key) || !p.ReadBlock(key, w.Data) ||
+                    !AmigaDiskFileSystemCore.Checksum(ref p, w.Data) || p.ReadUInt32(w.Data) != 8 ||
+                    p.ReadUInt32(w.Data, 4) != header ||
+                    p.ReadUInt32(w.Data, 12) != bytes) return Fail(ref w, DOS.Error.DiskNotValidated);
+                var sequence = p.ReadUInt32(w.Data, 8);
+                if (expected == 0 && index != 0)
+                {
+                    if (sequence != 1) return Fail(ref w, DOS.Error.DiskNotValidated);
+                    sequenceBase = index;
+                }
+                if (sequence != index + 1 && (sequenceBase == 0 || sequence != index + 1 - sequenceBase))
+                    return Fail(ref w, DOS.Error.DiskNotValidated);
+                // The absolute sequence previously proved uniqueness. For a
+                // restarted sequence, check earlier pointers explicitly, using
+                // only the metadata scratch and restoring its current table.
+                if (sequence != index + 1 && !OfsUniquePrefix(ref p, ref w, header, table, index, key)) return false;
+                expected = p.ReadUInt32(w.Data, 16); lastData = key;
+                index++; remaining -= bytes;
+                if (release) Bit(ref p, ref w, key, true);
+                if (w.Error != DOS.Error.None) return false;
+            }
+            var next = p.ReadUInt32(w.Meta, g.Tail + 504);
+            if (guard != 0 && release) Bit(ref p, ref w, table, true);
+            if (w.Error != DOS.Error.None) return false;
+            if (index == blocks)
+                return (next == 0 && expected == 0) || Fail(ref w, DOS.Error.DiskNotValidated);
+            if (next == 0 || next == header) return Fail(ref w, DOS.Error.DiskNotValidated);
+            table = next;
+        }
+        return Fail(ref w, DOS.Error.DiskNotValidated);
+    }
+
+    private static bool OfsUniquePrefix<T>(ref T p, ref Work w, uint header,
+        uint currentTable, uint index, uint key) where T : struct, IAmigaWritableFileSystemPlatform
+    {
+        var g = AmigaFfsGeometry.Read(ref p); var table = header;
+        for (var seen = 0u; seen < index;)
+        {
+            if (!p.ReadBlock(table, w.Meta)) return Fail(ref w, DOS.Error.DiskNotValidated);
+            var count = index - seen; if (count > g.TableEntries) count = g.TableEntries;
+            for (var slot = 0u; slot < count; slot++)
+                if (p.ReadUInt32(w.Meta, g.Tail + 308 - (int)slot * 4) == key)
+                    return Fail(ref w, DOS.Error.DiskNotValidated);
+            seen += count; table = p.ReadUInt32(w.Meta, g.Tail + 504);
+        }
+        return p.ReadBlock(currentTable, w.Meta) || Fail(ref w, DOS.Error.DiskNotValidated);
+    }
+
+    // Called after Prepare has selected DOS0. FFS retains its existing writer.
+    // A complete single-table file has one publication point for both the
+    // pointer table and the head of the OFS forward chain.
+    private static bool WriteReplacementOfsData<T>(ref T p, ref Work w, ref Request r, uint first, uint count)
+        where T : struct, IAmigaWritableFileSystemPlatform
+    {
+        var payload = p.BlockBytes - 24;
+        for (var i = 0u; i < count; i++)
+        {
+            p.WriteUInt32(w.Data, 0, 8); p.WriteUInt32(w.Data, 4, r.Header);
+            p.WriteUInt32(w.Data, 8, i + 1); p.WriteUInt32(w.Data, 12, payload);
+            p.WriteUInt32(w.Data, 16, i + 1 == count ? 0 : first + i + 1);
+            p.Copy(APTR.FromPointer(r.Buffer.Raw + i * payload), APTR.FromPointer(w.Data.Raw + 24), payload);
+            if (!Put(ref p, ref w, first + i, w.Data, 20)) return false;
+        }
+        return true;
+    }
+
+    private static bool WriteOfs<T>(ref T p, ref Work w, ref Request r, out uint actual, bool fixedHardDisk)
+        where T : struct, IAmigaWritableFileSystemPlatform
+    {
+        actual = 0; var g = AmigaFfsGeometry.Read(ref p); var payload = g.BlockBytes - 24;
+        if (!Header(ref p, ref w, r.Header)) return false;
+        if (p.ReadUInt32(w.Meta, g.Tail + 508) != 0xFFFFFFFD) return Fail(ref w, DOS.Error.ObjectWrongType);
+        if ((p.ReadUInt32(w.Meta, g.Tail + 320) & 4) != 0) return Fail(ref w, DOS.Error.WriteProtected);
+        var size = p.ReadUInt32(w.Meta, g.Tail + 324);
+        if (r.Position > size) return Fail(ref w, DOS.Error.SeekError);
+        if (r.Length > uint.MaxValue - r.Position) return Fail(ref w, DOS.Error.DiskFull);
+        if (r.Length == 0) return true;
+        var end = r.Position + r.Length; var newSize = end > size ? end : size;
+        var oldBlocks = size == 0 ? 0 : AmigaGeometryMath.Divide(size - 1, payload) + 1;
+        if (!OfsChain(ref p, ref w, r.Header, false, out var previousData)) return false;
+        var newBlocks = oldBlocks;
+        if (end > size)
+        {
+            newBlocks = AmigaGeometryMath.Divide(end - 1, payload) + 1;
+            var oldExt = oldBlocks == 0 ? 0 : AmigaGeometryMath.Divide(oldBlocks - 1, g.TableEntries);
+            var newExt = AmigaGeometryMath.Divide(newBlocks - 1, g.TableEntries);
+            if (!Prepare(ref p, ref w, newBlocks - oldBlocks + newExt - oldExt)) return false;
+        }
+        if (!Begin(ref p, ref w, in g)) return false;
+        if (fixedHardDisk && g.BlockBytes == 512 && r.Position == 0 && r.Length == size &&
+            oldBlocks >= 64 && oldBlocks <= g.TableEntries && size == oldBlocks * payload)
+        {
+            if (!Header(ref p, ref w, r.Header) ||
+                !RelocateOverwrite(ref p, ref w, in g, ref r, r.Header, 0, oldBlocks, ref actual, out var moved)) return false;
+            if (moved) return Finish(ref p, ref w, in g);
+        }
+        var table = r.Header; var tableIndex = 0u;
+        uint runFirst = 0, runCount = 0;
+        while (actual < r.Length)
+        {
+            var position = r.Position + actual; var index = AmigaGeometryMath.DivRem(position, payload, out var withinRemainder);
+            var targetTable = AmigaGeometryMath.DivRem(index, g.TableEntries, out var slotRemainder);
+            var slot = slotRemainder;
+            while (tableIndex < targetTable)
+            {
+                runCount = 0;
+                if (!p.ReadBlock(table, w.Meta)) return Fail(ref w, DOS.Error.DiskNotValidated);
+                var next = p.ReadUInt32(w.Meta, g.Tail + 504);
+                if (next == 0)
+                {
+                    next = Allocate(ref p, ref w); if (next == 0) return false;
+                    p.WriteUInt32(w.Meta, g.Tail + 504, next);
+                    if (!Put(ref p, ref w, table, w.Meta, 20)) return false;
+                    p.Clear(w.Meta, g.BlockBytes); p.WriteUInt32(w.Meta, 0, 16); p.WriteUInt32(w.Meta, 4, next);
+                    p.WriteUInt32(w.Meta, g.Tail + 500, r.Header); p.WriteUInt32(w.Meta, g.Tail + 508, 0xFFFFFFFD);
+                    if (!Put(ref p, ref w, next, w.Meta, 20)) return false;
+                }
+                table = next; tableIndex++;
+            }
+            if (!p.ReadBlock(table, w.Meta)) return Fail(ref w, DOS.Error.DiskNotValidated);
+            var at = g.Tail + 308 - (int)slot * 4;
+            var key = p.ReadUInt32(w.Meta, at); var allocate = index >= oldBlocks;
+            if (allocate)
+            {
+                var wanted = newBlocks - index;
+                var slots = g.TableEntries - slot;
+                if (wanted > slots) wanted = slots;
+                key = AllocateData(ref p, ref w, in g, (previousData == 0 ? r.Header : previousData) + 1,
+                    wanted, ref runFirst, ref runCount);
+                if (key == 0) return false;
+                if (withinRemainder == 0 && runCount != 0)
+                {
+                    // Allocate a verified contiguous run before constructing its
+                    // forward chain. Each new data block is sealed once. Publish
+                    // its pointer prefix only after every data write succeeds;
+                    // every failure after Begin still leaves the root invalid.
+                    var blocks = runCount + 1;
+                    for (var n = 1u; n < blocks; n++)
+                    {
+                        if (!IsFree(ref p, ref w, key + n)) return Fail(ref w, DOS.Error.DiskNotValidated);
+                        Bit(ref p, ref w, key + n, false);
+                        if (w.Error != DOS.Error.None) return false;
+                    }
+                    for (var n = 0u; n < blocks; n++)
+                    {
+                        var bytes = r.Length - actual; if (bytes > payload) bytes = payload;
+                        if (bytes != payload) p.Clear(w.Data, g.BlockBytes);
+                        p.WriteUInt32(w.Data, 0, 8); p.WriteUInt32(w.Data, 4, r.Header);
+                        p.WriteUInt32(w.Data, 8, index + n + 1); p.WriteUInt32(w.Data, 12, bytes);
+                        p.WriteUInt32(w.Data, 16, n + 1 == blocks ? 0 : key + n + 1);
+                        p.Copy(APTR.FromPointer(r.Buffer.Raw + actual), APTR.FromPointer(w.Data.Raw + 24), bytes);
+                        if (!Put(ref p, ref w, key + n, w.Data, 20)) return false;
+                        p.WriteUInt32(w.Meta, at - (int)n * 4, key + n);
+                        actual += bytes;
+                    }
+                    if (previousData != 0)
+                    {
+                        if (!p.ReadBlock(previousData, w.Data)) return Fail(ref w, DOS.Error.DiskNotValidated);
+                        p.WriteUInt32(w.Data, 16, key);
+                        if (!Put(ref p, ref w, previousData, w.Data, 20)) return false;
+                    }
+                    previousData = key + blocks - 1;
+                    p.WriteUInt32(w.Meta, 8, slot + blocks);
+                    if (index == 0) p.WriteUInt32(w.Meta, 16, key);
+                    if (!Put(ref p, ref w, table, w.Meta, 20)) return false;
+                    runFirst += blocks - 1; runCount = 0;
+                    continue;
+                }
+                p.Clear(w.Data, g.BlockBytes); p.WriteUInt32(w.Data, 0, 8);
+                p.WriteUInt32(w.Data, 4, r.Header); p.WriteUInt32(w.Data, 8, index + 1);
+            }
+            else if (!p.ReadBlock(key, w.Data)) return Fail(ref w, DOS.Error.DiskNotValidated);
+            var within = withinRemainder;
+            var count = payload - within;
+            if (count > r.Length - actual) count = r.Length - actual;
+            p.Copy(APTR.FromPointer(r.Buffer.Raw + actual), APTR.FromPointer(w.Data.Raw + 24 + within), count);
+            var dataBytes = newSize - index * payload; if (dataBytes > payload) dataBytes = payload;
+            p.WriteUInt32(w.Data, 12, dataBytes);
+            if (!Put(ref p, ref w, key, w.Data, 20)) return false;
+            if (allocate)
+            {
+                // Publish the new data only after its header, payload and checksum
+                // have been written. Any later failure leaves the root invalid.
+                if (previousData != 0)
+                {
+                    if (!p.ReadBlock(previousData, w.Data)) return Fail(ref w, DOS.Error.DiskNotValidated);
+                    p.WriteUInt32(w.Data, 16, key);
+                    if (!Put(ref p, ref w, previousData, w.Data, 20)) return false;
+                }
+                previousData = key;
+                p.WriteUInt32(w.Meta, at, key); p.WriteUInt32(w.Meta, 8, slot + 1);
+                if (index == 0) p.WriteUInt32(w.Meta, 16, key);
+                if (!Put(ref p, ref w, table, w.Meta, 20)) return false;
+            }
+            actual += count;
+        }
+        if (newSize == size) return Finish(ref p, ref w, in g);
+        if (!Header(ref p, ref w, r.Header)) return false;
+        p.WriteUInt32(w.Meta, g.Tail + 324, newSize);
+        return Put(ref p, ref w, r.Header, w.Meta, 20) && Finish(ref p, ref w, in g);
+    }
+}

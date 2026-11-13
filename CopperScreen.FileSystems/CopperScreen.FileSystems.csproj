@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <Description>Bundled CopperFS sources for offline CopperScreen disk setup.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CopperSharp.Sdk.Amiga.Support" Version="[0.1.0-preview.1]" />
+    <Using Include="CopperSFS" />
+    <None Update="Upstream/CopperFS/LICENSE" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Upstream/CopperFS/snapshot.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Import Project="Upstream/CopperFS/snapshot.props" />
+  <Target Name="VerifyCopperFsSnapshot" BeforeTargets="CoreCompile">
+    <GetFileHash Files="@(_CopperFsSnapshotInput)" Algorithm="SHA256">
+      <Output TaskParameter="Items" ItemName="_CopperFsSnapshotHash" />
+    </GetFileHash>
+    <Error Condition="'%(_CopperFsSnapshotHash.FileHash)' != '%(_CopperFsSnapshotHash.ExpectedHash)'"
+           Text="CopperFS snapshot differs from its recorded source: %(_CopperFsSnapshotHash.Identity). Update it with scripts/update-copperfs-snapshot.ps1; maintain filesystem changes in CopperFS." />
+  </Target>
+</Project>

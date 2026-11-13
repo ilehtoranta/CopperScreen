@@ -58,6 +58,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../CopperScreen.FileSystems/CopperScreen.FileSystems.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Presets\*.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Firmware/CopperStart-LICENSE.txt" Link="CopperStart-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="Firmware\MinimalDiskBoot.s" />

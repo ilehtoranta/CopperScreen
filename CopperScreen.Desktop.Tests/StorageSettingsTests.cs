@@ -106,6 +106,20 @@ public sealed partial class LaunchWorkflowTests
             var dialog = settings.OwnedWindows.Single(w => w.Title == "Create disk image");
             var path = SettingsNamed<TextBox>(dialog, "New image file");
             var size = SettingsNamed<TextBox>(dialog, "Capacity (MiB)");
+            var filesystem = SettingsNamed<ComboBox>(dialog, "Filesystem");
+            Assert.Equal("FFS", filesystem.SelectedItem);
+            var firstCylinder = SettingsNamed<TextBox>(dialog, "New first cylinder");
+            Assert.True(firstCylinder.GetLogicalAncestors().OfType<Control>().All(c => c.IsVisible));
+            filesystem.SelectedItem = "CPX (experimental)";
+            var experimental = dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CPX volume");
+            Assert.True(experimental.IsVisible);
+            experimental.IsChecked = true;
+            filesystem.SelectedItem = "Unformatted";
+            Assert.False(experimental.IsVisible);
+            Assert.False(experimental.IsChecked);
+            Assert.Contains(firstCylinder.GetLogicalAncestors().OfType<Control>(), c => !c.IsVisible);
+            // Hidden partition fields cannot prevent creating an unformatted image.
+            firstCylinder.Text = "unused geometry";
             var add = dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Add blank image");
             var existing = Path.Combine(_root, "existing.hdf"); File.WriteAllText(existing, "keep");
             path.Text = existing; Click(add);

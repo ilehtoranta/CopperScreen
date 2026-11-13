@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/ilehtoranta/CopperFS.git",
+  "baseCommit": "81fdc487aeb23bd453706ff3b6b7929beb2cacef",
+  "sourceKind": "working-tree snapshot; file hashes identify the exact inputs, including uncommitted CPX development",
+  "sourceStatus": [
+    " M src/CopperFFS.Core/AmigaDiskFileSystemCore.cs",
+    " M src/CopperFFS.Core/AmigaFfsTrim.cs",
+    " M src/CopperFFS.Core/AmigaFfsWriteCore.cs",
+    " M src/CopperFFS.Core/AmigaOfsWrite.cs",
+    " M src/CopperSFS.Core/AmigaFileSystemDiscard.cs",
+    " M src/CopperSFS.Core/AmigaFileSystemWriteCombiner.cs",
+    " M src/CopperSFS.Core/AmigaScsiUnmap.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystem2BatchedWrite.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystem2Layout.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystem2Relocation.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystem2Trim.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystem2Trst.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystem2WriteCore.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemReadOnlyCore.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemReadOnlyNative.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemRedoArena.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemRelocation.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemTrim.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemTrst.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemTrstContinuation.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemTrstGroup.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemTrstPending.cs",
+    " M src/CopperSFS.Core/AmigaSmartFileSystemWriteCore.cs",
+    " M src/CopperSFS.Core/CopperSFS.Core.csproj",
+    " M src/CopperSFS.Core/IAmigaFileSystemPlatform.cs",
+    "?? prototypes/CopperFS.Prototype/WideMath32.cs",
+    "?? src/CopperCPX.Core/CopperCPX.Core.csproj",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.ExAll.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Information.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Lifecycle.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Links.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Media.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Notifications.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Records.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.Volume.cs",
+    "?? src/CopperCPX.Core/CpxDosDispatcher.cs",
+    "?? src/CopperCPX.Core/CpxEngine.AllocateWrite.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Comment.cs",
+    "?? src/CopperCPX.Core/CpxEngine.FileData.cs",
+    "?? src/CopperCPX.Core/CpxEngine.FileMutations.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Format.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Information.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Label.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Links.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Lookup.cs",
+    "?? src/CopperCPX.Core/CpxEngine.MetadataAllocation.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Namespace.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Objects.cs",
+    "?? src/CopperCPX.Core/CpxEngine.PruneTree.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Reclaim.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Recovery.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Resize.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Transaction.cs",
+    "?? src/CopperCPX.Core/CpxEngine.TreeCursor.cs",
+    "?? src/CopperCPX.Core/CpxEngine.TreeMutation.cs",
+    "?? src/CopperCPX.Core/CpxEngine.Trim.cs",
+    "?? src/CopperCPX.Core/CpxEngine.WriteGap.cs",
+    "?? src/CopperCPX.Core/CpxEngine.cs",
+    "?? src/CopperCPX.Core/FixedPools.cs",
+    "?? src/CopperCPX.Core/Td64Transfer.cs",
+    "?? src/CopperCPX.Core/Wide.cs",
+    "?? src/CopperFFS.Core/AmigaFfsAutomaticTrim.cs",
+    "?? src/CopperSFS.Core/AmigaAutomaticTrimBatch.cs",
+    "?? src/CopperSFS.Core/AmigaFreedRangeQueue.cs",
+    "?? src/CopperSFS.Core/AmigaSmartFileSystem2AutomaticTrim.cs",
+    "?? src/CopperSFS.Core/AmigaSmartFileSystem2Owned.cs",
+    "?? src/CopperSFS.Core/AmigaSmartFileSystem2TrstData.cs",
+    "?? src/CopperSFS.Core/AmigaSmartFileSystem2TrstGroup.cs",
+    "?? src/CopperSFS.Core/AmigaSmartFileSystemAutomaticTrim.cs",
+    "?? src/CopperSFS.Core/Sfs2MetadataStore.cs",
+    "?? src/CopperSFS.Core/Sfs2MountContext.cs",
+    "?? src/CopperSFS.Core/SfsSharedImagePool.cs"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "9EB97775C4F5A8F8A761280530CE85E9C21B80C04B7475ED0A8BA37B11C788A6"
+    },
+    {
+      "path": "prototypes/CopperFS.Prototype/WideMath32.cs",
+      "sha256": "6E772A8FD616F0607A458ACF0287936286D02637F5F19E3CDEEAC27A804AE51B"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaBitmapWordCore.cs",
+      "sha256": "A7E4B8C03F3FFEDE69BE7240BD95D14F03D7E4F7235EED92B6785DE0CD01486A"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaDiskFileSystemCore.cs",
+      "sha256": "77516EE04A409DDE3BFFF3246ADE75D5BF5D9666D4FFD4245D54706B435451A3"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaDiskFileSystemFormatCore.cs",
+      "sha256": "D915D5D5773D47158FB9E6A21D0445386635B0B0C31AF09C54677DD9B95DAC0A"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFfsAutomaticTrim.cs",
+      "sha256": "3F40E59E568FAC3ACF80164918EC2F3F11E920BE8DF61241747D6CC4CFAFF861"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFfsGeometry.cs",
+      "sha256": "4F55ED5B4354C0D444D02A2A4B895CD7C73EFBB81479735AD2634D7A190B87C6"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFfsReadLinkCore.cs",
+      "sha256": "46C799BDAE77EF6C51F3A8730F981242CDC1F29E1B1413577B1D6101F99DB473"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFfsTrim.cs",
+      "sha256": "AD14F9BF1EDC98B4348EE82B5938990B2B0968F08F33B84DE22E29649F03E0B1"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFfsWriteCore.cs",
+      "sha256": "0338037D28340DBA5E1568D7BAB135D08EDC073D7F5FCC7AD890E094A9F11F26"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFilePositionCore.cs",
+      "sha256": "5C0041A3E9345E1407648259F128C21A3C31CFD224AFBF665B2743411FC8D41C"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaFileSystemDeviceCore.cs",
+      "sha256": "A75ABBD9EAAD3B18C3E3CEA9E3B670372465BFF1EABC518DC06964C18479998F"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaGeometryMath.cs",
+      "sha256": "0384B1325106C26BB9EF9701FAE8D55DCC621250AE52C5E167112585C82EDB5D"
+    },
+    {
+      "path": "src/CopperFFS.Core/AmigaOfsWrite.cs",
+      "sha256": "09EBC080F3C8A03055F83CBBA1AD57D0F26623A34DFD266494A2925E8D601C19"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaAutomaticTrimBatch.cs",
+      "sha256": "1D23F5F1AE37FA9433211B8C55E9C4402448C4B628C0A87710BBCA43741602BF"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFileSystemBlockIo.cs",
+      "sha256": "08739D6B188B4DB24AF0C2B26C1E8AC75E24BFF0CF5BFCDD46EBD2A4849051C9"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFileSystemBufferLayout.cs",
+      "sha256": "4702F4292E9D98B1A91095DF006D00B217E58D90F4634198FC3B5F7FAE9853B2"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFileSystemDataCache.cs",
+      "sha256": "CA6475EE22F9B0E5DD45189324E501557FE1CEA27D956FAFA44CDE19AE49D7D0"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFileSystemDiscard.cs",
+      "sha256": "64F4C5F942E1A4DFF34B1DC98B65D57C91A4D4ACC571EA8806AB7AB728A457AC"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFileSystemWriteCombiner.cs",
+      "sha256": "7C35DB66692D35CC45A0A61647ED6D36EBEC175DE7A9E8B4009A537DE27528FD"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFileSystemWriteQueueHeaderView.cs",
+      "sha256": "7D99DD9FD49DBDD9EAAD461748F2DED88A398F36BEEB511AEA7A5EEEBFF037A0"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaFreedRangeQueue.cs",
+      "sha256": "A0CFF5F97E85DD86EE30B136560429046ABD7C2573EAA89336AFAF36DEF94F82"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaScsiUnmap.cs",
+      "sha256": "2032C75CAFD88E54339EF57A29307C8C991AF14851CA03A116488C68B2F61988"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSfsGeometryMath.cs",
+      "sha256": "E18B429587D292850A840EEB7C352D7D1DB7B51DBA77B73643E7426CBE7DD30E"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2AutomaticTrim.cs",
+      "sha256": "A2491D6B8E354253C40578A8599EC6B82301DF0386FCEA8261511260AC8412B6"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2BatchedWrite.cs",
+      "sha256": "AE94DF9775EB3F8D7ABDE7BBE18980708BBACE649FB8CD695F799D2E24651354"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2Layout.cs",
+      "sha256": "96546585145C3C8C2748790E1D860B96783D5FE6ABEB7CB74A6EABD568960E70"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2NativeRecovery.cs",
+      "sha256": "DE56144CA4520924F6540CFEB2604717146ABECE1E96F48118C59D179B7F6EDF"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2Owned.cs",
+      "sha256": "E3EEABB872C7F80A3D81E44F476F4E0689BD10E6615DF038DB1BE49E4D0A84FA"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2Relocation.cs",
+      "sha256": "854767D1B49CBCFC9D2D619BA54DBDCFBED2E66D791F1639208C46E6C1A8FC89"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2Trim.cs",
+      "sha256": "814EF8FD6FB1FA168755987645697F1F896FBF53DBB81607B4EFEBF3C711FE4B"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2Trst.cs",
+      "sha256": "76AD15182B495267472ED03B2F74432C647F872198AB3E5ECB503AE24B8F4E8C"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2TrstData.cs",
+      "sha256": "04055ED34EC9B7D87B1D723A13CB38BC2087F032BA99D8E7A58AF857948D8C1E"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2TrstGroup.cs",
+      "sha256": "C698854B2FDB37A69D289BF373BAC00B254CEAB186749F3D97638339D9E03C9B"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystem2WriteCore.cs",
+      "sha256": "6C0C08D4C9C4F72E7111FBF0E2BA9B03F2BFBC33B7F07A7F2BE590DD70C0897A"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemAutomaticTrim.cs",
+      "sha256": "DC1A5018189C5C31203AA820537A6A93695FFA934CA7599006065C402DED511A"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemBatchedWrite.cs",
+      "sha256": "4517134A3349BB8FF6719AC6CA053C2AE9EFEE57E5238D00884DCA0491CAB271"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemBufferedWrites.cs",
+      "sha256": "FC692314F2BB9128A26C4B279B767A09125E396CE55C2D76233992053C5679F7"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemCore.cs",
+      "sha256": "284FB12873642347E0B3874D471072AF27E337733CDDDFD09809785F010B6D27"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemDirectoryCursor.cs",
+      "sha256": "B7136CF421609B8A9908A3B89B21611A5FDA8C10BBAB5D5AF8891C0BDDC4C406"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemFormatCore.cs",
+      "sha256": "F273F42D270A33296C7198F650E931C6719B522C1612A12AE0CF4A051DD72379"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemNativeRecovery.cs",
+      "sha256": "18843C302CAF5A75FD0037427D48179CA998063BC27F0F2977548AF05AC732ED"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemReadOnlyCore.cs",
+      "sha256": "9A04A85E7C5C4116B75C548E764CD08E5CB21A90F526741575A69A3036C917C1"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemReadOnlyNative.cs",
+      "sha256": "93C1716BF160831CBE4D9132C06FF4C25425D3CF6D6E67CED2F7538A28B4DCEC"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemRecycling.cs",
+      "sha256": "6C52529831A8297F6031BC14206A5391134E0D6A82834312C51CBFBEBB8768B7"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemRedoArena.cs",
+      "sha256": "58B8AEA88BE0786AEDEC1704435F633D130A93252F9A6DAB6B93906975AC322D"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemRelocation.cs",
+      "sha256": "A3F02F78580985D1BF13B0FFB4F594BBEB4C1275A599B125957F02B9E0D14384"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemReservations.cs",
+      "sha256": "A17F69741C0FE4E670BD64D040B4CE4D12122F1A47E647FBC20C083CC59BD87A"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTransactionBuffer.cs",
+      "sha256": "2296A2FA9B71507C250BD56F496C9D6E4D860C0BDFCEA3E9FF1591A18A5D2503"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrim.cs",
+      "sha256": "50993571728DF325477F6845D4683F841DB318D42C63C301C92E1AE752727CA3"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrst.cs",
+      "sha256": "08C2A06260974694902382F7239D0C775A78BB6376275CB9450038E40259B0D3"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstAllocation.cs",
+      "sha256": "AA7509ABB9131BC6387C44B67364431FC8DE995BEDE554998CB95EE7CFCF6F3D"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstBitmapWords.cs",
+      "sha256": "BF4AF91E6980E99CE54526F1F64A4B82C8B0D1949A42B0D224153C62B56DD68C"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstBoundary.cs",
+      "sha256": "ECA3E497B909DB6EF86BC0B5AFC1CFE108FC4491F962388322B961F8F424D4A8"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstCodec.cs",
+      "sha256": "9F22DB3FBA14B271529F6D041E24A298CC7883C53843161B51674BF225CF2C15"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstContinuation.cs",
+      "sha256": "D45228BE0CBC9860EF470775C924BE9F0A478124EB1813F1C4CC44E7CC7B4495"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstData.cs",
+      "sha256": "EC91947AEA20E2EB29428EB465C98AA0B88D49065DFB7A785CB925C8932790F2"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstDeferred.cs",
+      "sha256": "C33320736C3B3EFFB2A28709BFCE399821800163051C21449CB73A5BF0CB426C"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstGroup.cs",
+      "sha256": "F44B73487C967AA45B25177FE70ACAAC4371AE6443A1464C1BA8F77C1CE3E77B"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstPending.cs",
+      "sha256": "B1CA2C69E8132B6C5D7082A30105CE7019CCE3009824D57C564C0B5088066A76"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstProof.cs",
+      "sha256": "34B5B96CF37B942225F64BA58BFBF64585719528BC2ECF0D2CF5A18313A09827"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemTrstRootInstall.cs",
+      "sha256": "7CC7172A5587E63A28004BFE5FEE19BB669CEF181E0366AE1A4294A052B31C28"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemWriteBuffer.cs",
+      "sha256": "4454D17609FD1880A4C11F727AF636DA50D790EC93F4C6D201228210CA02C99F"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaSmartFileSystemWriteCore.cs",
+      "sha256": "AE2FD1708B5EBD2CFF42A9782EE59362F92153FDCDEEBD5777AEB00402C2FA84"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaTrimValidation.cs",
+      "sha256": "F730729810FD39EAD1EA9F93F70C42209A48D4E9968BE981C7DEEE3D8260DFF2"
+    },
+    {
+      "path": "src/CopperSFS.Core/AmigaVolumeGeometry.cs",
+      "sha256": "866D92212C12B1205D2986BDF218B1D2B175417D0A18D12E3FDC8C60A127EC56"
+    },
+    {
+      "path": "src/CopperSFS.Core/IAmigaFileSystemPlatform.cs",
+      "sha256": "F6E292284F7F14C7FB3133E8166A870E94814302BD97C41BC7384EEE6A1DDFAD"
+    },
+    {
+      "path": "src/CopperSFS.Core/Sfs2MetadataStore.cs",
+      "sha256": "76CAA778588AF1F0B1B8F215150C2E815DCFDA4613EA02185204422EF59FEA34"
+    },
+    {
+      "path": "src/CopperSFS.Core/Sfs2MountContext.cs",
+      "sha256": "9AB49845F24E014E662D959615714AD9489A3479E3C44F95AF6AAFDB5D026F6E"
+    },
+    {
+      "path": "src/CopperSFS.Core/SfsSharedImagePool.cs",
+      "sha256": "62D182EF7B5E4D8515CAACEC171C2CB38F9A86A7F099A29BB0CEB13CA5D28EB6"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.cs",
+      "sha256": "072E13029C80D2042B65A2F73EAC93970BED36642A697B7D4C568A08AF3906FB"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.ExAll.cs",
+      "sha256": "D9106A8924761B540E2AA06DD7456EF840A0A88B4FDFCCBD25F28BB12BFED459"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Information.cs",
+      "sha256": "1F21D0BA908F75ADEA965C990C95B4C8CF54411D23030533B3DD5B4FE87D2EA4"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Lifecycle.cs",
+      "sha256": "C73F6E64E4E488DBA0BAD0D892339016B0B2915E07CB51DB32A7017B91377D00"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Links.cs",
+      "sha256": "6D3891679423B56EA615B36AFAFDA318984AD93C0CD28F00B563158FFB77D463"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Media.cs",
+      "sha256": "C04FD7D9636FE58A69E7311CB37E4AF56640FE5A274919D33C41E1FF6FFD3332"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Notifications.cs",
+      "sha256": "2694C65789FCCFB54AAE2FAACD91D1063A7C11F59AA92241627B24299E3B7DA9"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Records.cs",
+      "sha256": "5722CE2A50A94262CF9D80D674531D56CDD073E2DAF90FAEC129AEA4DB3ADBA0"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxDosDispatcher.Volume.cs",
+      "sha256": "BEB1655CBEE53F619E9C6EDE5E0C689EBFCD940CA7B6BE011F44DCA25F36BF50"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.AllocateWrite.cs",
+      "sha256": "0C0AD8D6C64689ABE2BABECE5970C3C0FC62B4513CA86C7DB96D3126F426B987"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Comment.cs",
+      "sha256": "940A580B53178A472A4CC36728D1958F2776429B24EF905DD561F5C80FAB8773"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.cs",
+      "sha256": "1B68BA06A65094CF395BC234C11E762A28BECED556E23F07626FECF1E3A88877"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.FileData.cs",
+      "sha256": "0F8AE93E3479CDBB480BC60F612D5DE2BB8C47C73A5EF350AD1FDDFD8C72BA07"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.FileMutations.cs",
+      "sha256": "EDFCC80F783A88FBEB4E2564175049DB67275FC763C5DD972B85F5AE1310EBCD"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Format.cs",
+      "sha256": "3A39A3E289DE66794B65B0E2ABB61F47238197C829CFA02A0168D78CD1818EEB"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Information.cs",
+      "sha256": "BEA7E14357CAAE4F1B6AE29ED325AD5405A02978EE70D98808A702C3B9AD0B90"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Label.cs",
+      "sha256": "FC1E0FE33D85A48E24DC4F570E1F8B1E94F72062823710CA39B66519317D86C4"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Links.cs",
+      "sha256": "69027C8D4CCB9D27E2F2D33A2A8783A3B00A4A4520B1E6B538C26EE7C0442AB7"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Lookup.cs",
+      "sha256": "955CE9D1D96C5FD84D140527280AC8FC8054745E86588231632B584889CC48A5"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.MetadataAllocation.cs",
+      "sha256": "645DADFD1289F3DDBAD50DB1F5E03F7625B8DBED6FF5C1B3ED68C8FD5C6B1EBF"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Namespace.cs",
+      "sha256": "9CACA5B6984BA10D4FB2ACF5513D10B47886360A8D0B4C2171411E84AD566848"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Objects.cs",
+      "sha256": "116F786C84E5EF2D87751EA1FFFA094E8CD6648514BC2C57C213671AA32219C7"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.PruneTree.cs",
+      "sha256": "22B14906C0ED2290BE84BCEA0BF176891FAAB4545A11C3C0ECB95D798665C87A"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Reclaim.cs",
+      "sha256": "B5C67B6DF448C5E51FB08B6708E8A618778A4772A1A9671A6B03985103C8191A"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Recovery.cs",
+      "sha256": "F1502AC6AE3F1DBE1277D615BAA3AFF8C31E913A33EFC03DE853C878E3191BC2"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Resize.cs",
+      "sha256": "5035C8B6935580FCAE409421D53B6F4726861CCBDAE8CF30B04F83631ECBB151"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Transaction.cs",
+      "sha256": "1C91B16FFEB7EF7C598F2AC784E17166EE6F5F55021F303CB0A113CEF89DEEE7"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.TreeCursor.cs",
+      "sha256": "6E4B98ADC729725E229D19DE0180533FDADBD070E687A7F3672EA46A945E2048"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.TreeMutation.cs",
+      "sha256": "27D363ACF329C929CE00442060F97026ED8130963515EBDE0D8D4B2FEF77DEF4"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.Trim.cs",
+      "sha256": "4CA46CF95884A8AACF30200329B4B4380C08DC2DF9302CCAE117F68352CA4E67"
+    },
+    {
+      "path": "src/CopperCPX.Core/CpxEngine.WriteGap.cs",
+      "sha256": "9C8FC0AEF7AEFCCA1D322356D51511F1A8518E327EDD8514CA20899D0D4BB01B"
+    },
+    {
+      "path": "src/CopperCPX.Core/FixedPools.cs",
+      "sha256": "62896BC5EC46AA6DA167A0B35EA7264D6C4ADB7D0597FEDE72226CE94EC22E1C"
+    },
+    {
+      "path": "src/CopperCPX.Core/Td64Transfer.cs",
+      "sha256": "5993C27D405F9A424DAE17162E23E98DA7F6A947D0FFE53DD4877651F764AB52"
+    },
+    {
+      "path": "src/CopperCPX.Core/Wide.cs",
+      "sha256": "387E9492F8C67A8E7928A93367FB1B3BB173C952A506759D5361B9EC21D3658D"
+    }
+  ]
+}

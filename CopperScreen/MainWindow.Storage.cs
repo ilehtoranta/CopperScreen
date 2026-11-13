@@ -55,7 +55,7 @@ internal sealed partial class MainWindow
     {
         var layout = new StackPanel { Spacing = 10 };
         layout.Children.Add(SettingsHelp("Hard disk help", "Hard disks attach when the Amiga starts. CopperStart accepts one existing image on unit 0: choose RDB to discover its FFS partitions and boot priorities, or Partition to enter exact geometry. TD64 supports FFS offsets above 4 GiB. Changes require a restart."));
-        layout.Children.Add(SettingsNote("Attach an existing image or create a blank image. Changes apply when the Amiga restarts."));
+        layout.Children.Add(SettingsNote("Attach an existing image or create a new one. Changes apply when the Amiga restarts."));
         _hardfileRows = new StackPanel { Spacing = 10 };
         layout.Children.Add(_hardfileRows);
         layout.Children.Add(CommandGroup(
@@ -90,52 +90,7 @@ internal sealed partial class MainWindow
         catch (Exception ex) when (IsWorkspaceFileError(ex) || ex is FormatException or OverflowException) { SetSettingsError(ex.Message); }
     }
 
-    private async Task CreateHardDiskImageAsync()
-    {
-        if (_settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart)
-        {
-            SetSettingsError("CopperStart requires an existing disk image. Choose Add existing disk instead.");
-            return;
-        }
-        var owner = _settingsVisible ? (Window)_settingsWindow : this;
-        var dialog = new Window { Title = "Create disk image", Width = 480, SizeToContent = SizeToContent.Height,
-            CanResize = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
-        var form = CreateSettingsGroupForm();
-        form.Margin = new Thickness(20);
-        form.Children.Add(SettingsNote("Add a blank image to this machine. The file is created when the Amiga starts; format it inside the Amiga before use."));
-        var path = AddTextSetting(form, "New image file", markRestart: false);
-        form.Children.Add(CreatePanelButton("Choose location…", async () =>
-        {
-            var file = await dialog.StorageProvider.SaveFilePickerAsync(new()
-            {
-                Title = "New hard disk image", SuggestedFileName = "Amiga.hdf", DefaultExtension = "hdf",
-                FileTypeChoices = [new("Hard disk image") { Patterns = ["*.hdf"] }]
-            });
-            if (file?.TryGetLocalPath() is { } selected) path.Text = selected;
-        }));
-        var size = AddTextSetting(form, "Capacity (MiB)", markRestart: false); size.Text = "100";
-        var error = SettingsNote(string.Empty); form.Children.Add(error);
-        form.Children.Add(CommandGroup(CreatePanelButton("Cancel", () => dialog.Close()),
-            CreatePanelButton("Add blank image", () =>
-            {
-                try
-                {
-                    var destination = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
-                        ?? throw new InvalidOperationException("Choose a new image file.");
-                    if (File.Exists(destination) || Directory.Exists(destination)) throw new IOException("Choose a new filename. Existing files are preserved.");
-                    if (!long.TryParse(size.Text, NumberStyles.None, CultureInfo.InvariantCulture, out var mib) || mib <= 0)
-                        throw new InvalidOperationException("Capacity must be a positive whole number of MiB.");
-                    var bytes = checked(mib * 1024 * 1024);
-                    ReadHardfileSettings(_settingsDraft);
-                    _settingsDraft.HardDrives.Add(new(NextHardDiskUnit(), destination, true, bytes, SparseStorage: true));
-                    RefreshHardfileSettings(); MarkSettingsRestartRequired();
-                    dialog.Close();
-                }
-                catch (Exception ex) when (IsWorkspaceFileError(ex) || ex is FormatException or OverflowException) { error.Text = ex.Message; }
-            })));
-        dialog.Content = form;
-        await dialog.ShowDialog(owner);
-    }
+    private Task CreateHardDiskImageAsync() => OpenHardDiskSetupAsync(null);
 
     private void ReadHardfileSettings(CopperScreenSettingsDraft draft)
     {
@@ -249,6 +204,16 @@ internal sealed partial class MainWindow
             UpdateLayout();
             form.Children.Add(new Expander { Header = "Disk layout and partition settings", Content = diskOptions, HorizontalAlignment = HorizontalAlignment.Stretch });
             form.Children.Add(new Expander { Header = "Host storage allocation", Content = sparseForm, HorizontalAlignment = HorizontalAlignment.Stretch });
+            var addPartition = CreatePanelButton("Add partition and format…", async () =>
+            {
+                try
+                {
+                    ReadHardfileSettings(_settingsDraft);
+                    await OpenHardDiskSetupAsync(index);
+                }
+                catch (Exception ex) when (IsWorkspaceFileError(ex) || ex is FormatException or OverflowException) { SetSettingsError(ex.Message); }
+            });
+            form.Children.Add(addPartition);
             form.Children.Add(CreatePanelButton("Remove hard disk", () =>
             {
                 // Removal also works for an incomplete row.

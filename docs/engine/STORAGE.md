@@ -106,6 +106,10 @@ settings; applying hardware changes requires restart. Existing desktop `--hdf`
 and `--hdf-readonly` options now mount read-only; `--hdf-writable` explicitly
 allows direct writes. New imports reset write permission; explicit saved profile
 choices remain intact. See [media protection and recovery](../MEDIA_PERSISTENCE.md).
+The [offline hard disk setup](../HARDDISK_SETUP.md) bundles CopperFS's
+formatters in the desktop UI for new RDB images and new partitions in saved copies.
+This host authoring tool does not change mounted-device timing or guest handler
+availability.
 The runner supports repeated `--hdf`/`--hdf-ro`
 for sequential Auto units. Custom units/modes/metadata are available through the
 engine configuration and desktop profiles/editor, not new runner switches.
