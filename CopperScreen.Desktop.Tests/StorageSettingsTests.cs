@@ -112,8 +112,8 @@ public sealed partial class LaunchWorkflowTests
             dialog.UpdateLayout();
             Assert.False(dialog.GetLogicalDescendants().OfType<Expander>().Single(e => e.Header is "Advanced geometry").IsExpanded);
             Assert.False(firstCylinder.IsEnabled);
-            filesystem.SelectedItem = "CPX (experimental)";
-            var experimental = dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CPX volume");
+            filesystem.SelectedItem = "CopperNova (CNFS)";
+            var experimental = dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CopperNova (CNFS) volume");
             Assert.True(experimental.IsVisible);
             experimental.IsChecked = true;
             filesystem.SelectedItem = "Unformatted";

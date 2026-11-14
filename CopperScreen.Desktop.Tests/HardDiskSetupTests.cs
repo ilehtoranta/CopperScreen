@@ -30,6 +30,7 @@ public sealed class HardDiskSetupTests : IDisposable
         var before = File.ReadAllBytes(source);
         var first = Assert.Single(CopperScreenHardDiskSetup.Inspect(source).Partitions);
         Assert.Equal(CopperScreenHardDiskSetup.DosType(fs), first.DosType);
+        if (fs == CopperScreenHardDiskSetup.FileSystem.Cpx) Assert.Equal(0x43505834u, first.DosType); // CNFS retains the CPX4 disk identifier.
         Assert.Equal(blockSize, first.BlockSize);
         Assert.Equal(128u, BinaryPrimitives.ReadUInt32BigEndian(before.AsSpan(512 + 132)));
         Assert.Equal(blockSize / 512, BinaryPrimitives.ReadUInt32BigEndian(before.AsSpan(512 + 144)));

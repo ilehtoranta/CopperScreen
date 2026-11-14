@@ -8,8 +8,9 @@ include it; users do not need a CopperFS checkout or a feature build flag.
 `Upstream/CopperFS/snapshot.json` records the base repository commit, working-tree
 status and SHA-256 of every imported file. CPX is currently uncommitted upstream
 development, so its exact bytes are identified by those hashes, not by the base
-commit alone. This is not a CopperFS package or format release. CPX remains an
-experimental UI choice and requires a compatible guest handler.
+commit alone. This is not a CopperFS package or format release. The UI names this
+filesystem CopperNova (CNFS); it remains experimental and requires a compatible
+guest handler. Its on-disk CPX4 format and upstream source names are unchanged.
 
 The sources and license are copied byte-for-byte. Maintain filesystem changes
 in CopperFS and refresh this consumer with:

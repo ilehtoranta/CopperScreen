@@ -7,7 +7,7 @@ namespace CopperScreen;
 internal static class CopperScreenHardDiskSetup
 {
     internal enum FileSystem { Ffs, Sfs, Sfs2, Cpx }
-    internal static readonly string[] FileSystemNames = ["FFS", "SFS", "SFS2", "CPX (experimental)"];
+    internal static readonly string[] FileSystemNames = ["FFS", "SFS", "SFS2", "CopperNova (CNFS)"];
     internal static readonly uint[] BlockSizes = [512, 1024, 2048, 4096];
     internal const long NewCylinderBytes = 2 * 32 * 512;
     internal readonly record struct PartitionRange(uint First, uint Last, long Bytes);

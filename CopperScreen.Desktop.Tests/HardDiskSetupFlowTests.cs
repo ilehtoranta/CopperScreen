@@ -39,10 +39,10 @@ public sealed partial class LaunchWorkflowTests
             SettingsNamed<ComboBox>(dialog, "Filesystem block size").SelectedItem = "4 KiB";
             if (cpx)
             {
-                SettingsNamed<ComboBox>(dialog, "Filesystem").SelectedItem = "CPX (experimental)";
+                SettingsNamed<ComboBox>(dialog, "Filesystem").SelectedItem = "CopperNova (CNFS)";
                 Click(dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Create image"));
                 Assert.False(File.Exists(source));
-                dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CPX volume").IsChecked = true;
+                dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CopperNova (CNFS) volume").IsChecked = true;
             }
             Capture(dialog, cpx ? "harddisk-format-cpx" : "harddisk-format-ffs");
             Click(dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Create image"));

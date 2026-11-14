@@ -7,7 +7,8 @@ and attaching it; the source is never overwritten. Removing, resizing and
 reformatting existing partitions are outside this editor's scope.
 
 Choose **Create disk image…** for a new image. The filesystem picker defaults to
-FFS and also offers Unformatted, SFS, SFS2 and experimental CPX. Unformatted hides
+FFS and also offers Unformatted, SFS, SFS2 and CopperNova (CNFS). CNFS remains
+experimental. Unformatted hides
 the partition options and adds a blank image that is created on the next Amiga
 start; format it inside the Amiga before use. Formatted images are created and
 verified immediately. Choose **Add partition and format…** on an existing disk
@@ -39,13 +40,14 @@ native guest compatibility for every block-size/ROM combination.
 | FFS | DOS1 / `$444F5301` | FFS handler or compatible ROM |
 | SFS | `$53465300` | Classic SFS handler or compatible Full ROM |
 | SFS2 | `$53465302` | SFS2 handler or compatible Full ROM |
-| CPX (experimental) | CPX4 / `$43505834` | Matching experimental CPX handler |
+| CopperNova (CNFS) | CPX4 / `$43505834` (unchanged) | Matching experimental CNFS handler |
 
 Formatting installs filesystem metadata, not an operating system, boot files or
 an RDB filesystem handler. A bootable flag alone does not make a disk bootable.
 The qualified CopperStart ROM restrictions still apply; selecting a filesystem
-here does not add that filesystem to the ROM. CPX is the temporary name of the
-new CopperFS filesystem. Its development format and guest compatibility may
+here does not add that filesystem to the ROM. CopperNova (CNFS), previously
+called CPX, is the new CopperFS filesystem. The rename leaves its on-disk format
+and CPX4 DOS type unchanged. Its development format and guest compatibility may
 change. Creating it requires an explicit experimental-volume checkbox.
 The current UI accepts 1–30 Latin-1 label characters without NUL, colon or slash.
 New disks start read-only. A partitioned copy retains the source disk's saved
@@ -93,7 +95,7 @@ to the copy only after publication. Process termination can leave an unpublished
 `.disk-setup-*.tmp` file beside the destination; setup does not resume it.
 
 All formatter I/O is bounded to the new partition. FFS/SFS volumes are checked
-through CopperFS's readers and CPX through a fresh read-only mount before the
+through CopperFS's readers and CNFS through a fresh read-only mount before the
 new image is published. These are host checks, not native guest replay or
 boot-compatibility qualification. No recurring emulator execution path changes.
 
@@ -107,5 +109,5 @@ dotnet test CopperScreen.Desktop.Tests/CopperScreen.Desktop.Tests.csproj -c Rele
 
 The normal desktop tests cover all four formatters, preserving existing partition bytes
 in a copied disk, overlap/label rejection, cancellation, destination preservation,
-and the visible new-disk/add-partition buttons and dialogs including CPX acknowledgement. They use
+and the visible new-disk/add-partition buttons and dialogs including CNFS acknowledgement. They use
 synthetic temporary images, with no ROM or media committed.

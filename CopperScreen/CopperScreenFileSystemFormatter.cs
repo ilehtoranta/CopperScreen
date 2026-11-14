@@ -47,12 +47,12 @@ internal static class CopperScreenFileSystemFormatter
         var idBytes = Guid.NewGuid().ToByteArray();
         var id = new Wide(BinaryPrimitives.ReadUInt32BigEndian(idBytes), BinaryPrimitives.ReadUInt32BigEndian(idBytes.AsSpan(4)));
         var error = engine.BeginFormat(512, blockSize, new((uint)(sectors >> 32), (uint)sectors), id, 1, 90000, (uint)label.Length);
-        if (error != CpxError.None) throw new ArgumentException("CPX requires a partition of at least 4 MiB with supported geometry: " + error);
+        if (error != CpxError.None) throw new ArgumentException("CopperNova (CNFS) requires a partition of at least 4 MiB with supported geometry: " + error);
         DriveCpx(ref engine, bytes, disk, start, length, cancellation);
         if (engine.Initialize(512, blockSize, new((uint)(sectors >> 32), (uint)sectors), 2, true) != CpxError.None ||
-            engine.BeginOperation(CpxOperation.Mount) != CpxError.None) throw new InvalidDataException("CPX verification could not start.");
+            engine.BeginOperation(CpxOperation.Mount) != CpxError.None) throw new InvalidDataException("CopperNova (CNFS) verification could not start.");
         DriveCpx(ref engine, bytes, disk, start, length, cancellation);
-        if (!engine.IsMounted) throw new InvalidDataException("The new CPX volume could not be mounted for verification.");
+        if (!engine.IsMounted) throw new InvalidDataException("The new CopperNova (CNFS) volume could not be mounted for verification.");
     }
     private static void DriveCpx(ref CpxEngine<CpxMemory> engine, byte[] ram, FileStream disk,
         long start, long length, CancellationToken cancellation)
@@ -62,7 +62,7 @@ internal static class CopperScreenFileSystemFormatter
             cancellation.ThrowIfCancellationRequested();
             var step = engine.Step();
             if (step == StepResult.Complete) return;
-            if (step == StepResult.Failed) throw new InvalidDataException("CPX setup failed: " + engine.Error);
+            if (step == StepResult.Failed) throw new InvalidDataException("CopperNova (CNFS) setup failed: " + engine.Error);
             if (step != StepResult.NeedIo) continue;
             var io = engine.Request;
             if (io.Kind == IoKind.Flush) disk.Flush(true);
@@ -70,13 +70,13 @@ internal static class CopperScreenFileSystemFormatter
             {
                 var sector = ((ulong)io.Sector.High << 32) | io.Sector.Low;
                 if (sector > (ulong)length / 512 || io.Bytes > (ulong)length - sector * 512)
-                    throw new InvalidDataException("CPX requested I/O outside its partition.");
+                    throw new InvalidDataException("CopperNova (CNFS) requested I/O outside its partition.");
                 disk.Position = checked(start + (long)(sector * 512));
                 var buffer = ram.AsSpan(checked((int)io.Buffer), checked((int)io.Bytes));
                 if (io.Kind == IoKind.Read) disk.ReadExactly(buffer); else disk.Write(buffer);
             }
-            else throw new InvalidDataException("Unexpected discard during CPX format.");
-            if (engine.CompleteIo(io.Token, io.Bytes, true) != CpxError.None) throw new IOException("CPX I/O completion failed.");
+            else throw new InvalidDataException("Unexpected discard during CopperNova (CNFS) format.");
+            if (engine.CompleteIo(io.Token, io.Bytes, true) != CpxError.None) throw new IOException("CopperNova (CNFS) I/O completion failed.");
         }
     }
     private readonly struct CpxMemory(byte[] bytes) : ICpxMemory

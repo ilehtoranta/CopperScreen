@@ -86,8 +86,8 @@ internal sealed partial class MainWindow
             partition.Children.Add(SettingsNote("Filesystem blocks are independent of the disk's 512-byte sectors. The guest filesystem handler must support the chosen block size."));
             var label = AddTextSetting(partition, "Volume label", markRestart: false); label.Text = "Work";
             var bootable = new CheckBox { Content = "Bootable partition", IsChecked = false }; partition.Children.Add(bootable);
-            partition.Children.Add(SettingsHelp("Filesystem details", "FFS uses DOS1; SFS and SFS2 require a compatible guest ROM or handler. CPX is experimental and requires a CPX handler. Formatting does not install a handler or boot files."));
-            var experimental = new CheckBox { Content = "I want to create an experimental CPX volume", IsVisible = false }; partition.Children.Add(experimental);
+            partition.Children.Add(SettingsHelp("Filesystem details", "FFS uses DOS1; SFS and SFS2 require a compatible guest ROM or handler. CopperNova (CNFS) is experimental and requires a compatible CNFS handler. Formatting does not install a handler or boot files."));
+            var experimental = new CheckBox { Content = "I want to create an experimental CopperNova (CNFS) volume", IsVisible = false }; partition.Children.Add(experimental);
             var preview = SettingsNote(string.Empty); AutomationProperties.SetName(preview, "Partition size preview"); partition.Children.Add(preview);
             partition.Children.Add(SettingsNote("A partition uses one contiguous free area. The preview shows the usable size after alignment and disk metadata."));
             var advanced = CreateSettingsGroupForm();
@@ -148,7 +148,7 @@ internal sealed partial class MainWindow
                 {
                     RequireStoppedForHardDiskSetup();
                     if (!IsBlank() && FileSystemIndex() == 3 && experimental.IsChecked != true)
-                        throw new InvalidOperationException("Confirm that you want an experimental CPX volume.");
+                        throw new InvalidOperationException("Confirm that you want an experimental CopperNova (CNFS) volume.");
                     var destination = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
                         ?? throw new InvalidOperationException("Choose a new destination filename.");
                     if (IsBlank())
