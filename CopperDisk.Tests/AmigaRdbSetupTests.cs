@@ -5,6 +5,28 @@ namespace CopperDisk.Tests;
 
 public sealed class AmigaRdbSetupTests
 {
+    [Theory]
+    [InlineData(512u)] [InlineData(1024u)] [InlineData(2048u)] [InlineData(4096u)]
+    public void FilesystemBlockSizeIsRecordedWithoutChangingDeviceSectorGeometry(uint blockSize)
+    {
+        using var disk = Blank();
+        AmigaRdbSetup.Initialize(disk);
+        var metadata = AmigaRdbSetup.AddPartition(disk, "DH0", 1, 255, 0x444F5301, false, blockSize);
+        var layout = AmigaRdbSetup.ReadLayout(disk);
+        Assert.Equal(2u, layout.Heads); Assert.Equal(32u, layout.SectorsPerTrack);
+        Assert.Equal(128u, metadata.SizeBlockLongs); Assert.Equal(blockSize / 512, metadata.SectorsPerBlock);
+        Assert.Equal(blockSize, Assert.Single(layout.Partitions).BlockSize);
+    }
+
+    [Fact]
+    public void InvalidFilesystemBlockSizeLeavesThePartitionTableUnchanged()
+    {
+        using var disk = Blank(); AmigaRdbSetup.Initialize(disk);
+        var before = disk.ToArray();
+        Assert.Throws<ArgumentException>(() => AmigaRdbSetup.AddPartition(disk, "DH0", 1, 255, 0x444F5301, false, 1000));
+        Assert.Equal(before, disk.ToArray());
+    }
+
     private static MemoryStream Blank() => new(new byte[8 * 1024 * 1024], writable: true);
     [Fact]
     public void AddsPartitionsWithoutChangingExistingMetadataOrPayload()

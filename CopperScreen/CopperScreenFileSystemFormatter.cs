@@ -10,18 +10,20 @@ namespace CopperScreen;
 internal static class CopperScreenFileSystemFormatter
 {
     internal static void Format(FileStream disk, long start, long length, CopperScreenHardDiskSetup.FileSystem fs,
-        string label, CancellationToken cancellation)
+        string label, CancellationToken cancellation, uint blockSize = 512)
     {
-        if (start < 0 || length < 512 || start % 512 != 0 || length % 512 != 0 || start > disk.Length - length)
+        if (!CopperScreenHardDiskSetup.BlockSizes.Contains(blockSize) || start < 0 || length < blockSize || start % 512 != 0 || length % blockSize != 0 || start > disk.Length - length)
             throw new ArgumentException("The filesystem must fit entirely in its partition.");
         if (fs == CopperScreenHardDiskSetup.FileSystem.Cpx)
-        { FormatCpx(disk, start, length, label, cancellation); return; }
-        if (length / 512 > uint.MaxValue || !AmigaVolumeGeometry.Create((uint)(length / 512), 512, 2, out var geometry))
+        { FormatCpx(disk, start, length, label, cancellation, blockSize); return; }
+        if (length / blockSize > uint.MaxValue || !AmigaVolumeGeometry.Create((uint)(length / blockSize), blockSize, 2, out var geometry))
             throw new ArgumentException("The partition exceeds the filesystem's supported block count.");
         geometry.StartByte = (ulong)start;
-        var ram = new byte[4096]; Encoding.Latin1.GetBytes(label).CopyTo(ram, 2048);
+        geometry.SectorBytes = 512;
+        var labelAddress = checked((int)blockSize + 512);
+        var ram = new byte[labelAddress + 512]; Encoding.Latin1.GetBytes(label).CopyTo(ram, labelAddress);
         var platform = new Platform(disk, ram, geometry, cancellation);
-        var scratch = APTR.FromPointer(512); var name = APTR.FromPointer(2048);
+        var scratch = APTR.FromPointer(512); var name = APTR.FromPointer((uint)labelAddress);
         var date = DateTime.UtcNow - new DateTime(1978, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         var type = CopperScreenHardDiskSetup.DosType(fs);
         bool ok;
@@ -37,17 +39,17 @@ internal static class CopperScreenFileSystemFormatter
         if (!mounted) throw new InvalidDataException("The newly formatted volume could not be mounted for verification.");
     }
 
-    private static void FormatCpx(FileStream disk, long start, long length, string label, CancellationToken cancellation)
+    private static void FormatCpx(FileStream disk, long start, long length, string label, CancellationToken cancellation, uint blockSize)
     {
         var bytes = new byte[100000]; Encoding.Latin1.GetBytes(label).CopyTo(bytes, 90000);
         var ram = new CpxMemory(bytes); var engine = new CpxEngine<CpxMemory>(ram, 32);
         var sectors = (ulong)length / 512;
         var idBytes = Guid.NewGuid().ToByteArray();
         var id = new Wide(BinaryPrimitives.ReadUInt32BigEndian(idBytes), BinaryPrimitives.ReadUInt32BigEndian(idBytes.AsSpan(4)));
-        var error = engine.BeginFormat(512, 512, new((uint)(sectors >> 32), (uint)sectors), id, 1, 90000, (uint)label.Length);
+        var error = engine.BeginFormat(512, blockSize, new((uint)(sectors >> 32), (uint)sectors), id, 1, 90000, (uint)label.Length);
         if (error != CpxError.None) throw new ArgumentException("CPX requires a partition of at least 4 MiB with supported geometry: " + error);
         DriveCpx(ref engine, bytes, disk, start, length, cancellation);
-        if (engine.Initialize(512, 512, new((uint)(sectors >> 32), (uint)sectors), 2, true) != CpxError.None ||
+        if (engine.Initialize(512, blockSize, new((uint)(sectors >> 32), (uint)sectors), 2, true) != CpxError.None ||
             engine.BeginOperation(CpxOperation.Mount) != CpxError.None) throw new InvalidDataException("CPX verification could not start.");
         DriveCpx(ref engine, bytes, disk, start, length, cancellation);
         if (!engine.IsMounted) throw new InvalidDataException("The new CPX volume could not be mounted for verification.");
@@ -93,8 +95,8 @@ internal static class CopperScreenFileSystemFormatter
         {
             cancellation.ThrowIfCancellationRequested();
             if (block >= geometry.BlockCount || count > geometry.BlockCount - block) throw new InvalidDataException("Filesystem I/O exceeded its partition.");
-            disk.Position = checked((long)(geometry.StartByte + (ulong)block * 512));
-            var bytes = ram.AsSpan((int)buffer.Raw, checked((int)count * 512));
+            disk.Position = checked((long)(geometry.StartByte + (ulong)block * geometry.BlockBytes));
+            var bytes = ram.AsSpan((int)buffer.Raw, checked((int)count * (int)geometry.BlockBytes));
             if (write) disk.Write(bytes); else disk.ReadExactly(bytes);
             return true;
         }

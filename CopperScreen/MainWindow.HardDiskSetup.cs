@@ -1,5 +1,6 @@
 using System.Globalization;
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Platform.Storage;
@@ -15,6 +16,19 @@ internal sealed partial class MainWindow
         if (_applyingSettings) throw new InvalidOperationException("Wait for the current operation to finish.");
     }
 
+    private TextBox AddDiskSizeInput(StackPanel form, string label, string value, out ComboBox unit)
+    {
+        var size = new TextBox { Text = value, MinWidth = 0, HorizontalAlignment = HorizontalAlignment.Stretch };
+        unit = new ComboBox { ItemsSource = new[] { "MiB", "GiB" }, SelectedIndex = 0, MinWidth = 76 };
+        AutomationProperties.SetName(size, label);
+        AutomationProperties.SetName(unit, label + " unit");
+        form.Children.Add(CreateSettingsRow(label, WithAction(size, unit)));
+        return size;
+    }
+
+    private static string DiskSizeText(long bytes) => bytes >= 1073741824L
+        ? $"{bytes / 1073741824m:0.#####} GiB" : $"{bytes / 1048576m:0.#####} MiB";
+
     private async Task OpenHardDiskSetupAsync(int? diskIndex)
     {
         try
@@ -26,25 +40,23 @@ internal sealed partial class MainWindow
                 throw new InvalidOperationException("Choose RDB layout before adding a partition. Raw partition images cannot be repartitioned here.");
             var layout = source == null ? null : CopperScreenHardDiskSetup.Inspect(source);
             var free = layout == null ? null : CopperScreenHardDiskSetup.FirstFreeRange(layout);
-            if (layout != null && free == null) throw new InvalidOperationException("This disk has no free cylinders. Existing partitions are preserved.");
+            if (layout != null && free == null) throw new InvalidOperationException("This disk has no free space. Existing partitions are preserved.");
+            var sourceCapacity = source == null ? 0 : new FileInfo(source).Length;
             var owner = _settingsVisible ? (Window)_settingsWindow : this;
             var dialog = new Window
             {
                 Title = existing == null ? "Create disk image" : "Add partition and format",
-                Width = 560, MaxHeight = 800, SizeToContent = SizeToContent.Height,
+                Width = 580, MaxHeight = 800, SizeToContent = SizeToContent.Height,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             var form = CreateSettingsGroupForm(); form.Margin = new Thickness(20);
             var explanation = SettingsNote(existing == null
-                ? "Create a new RDB disk with one formatted partition. The disk is attached read-only; enable writes in disk settings when ready."
-                : "Save a new copy with an additional formatted partition, then attach that copy. The original disk and existing partitions are preserved. Allow enough host storage for the copy.");
+                ? "Create a new disk with one formatted partition. It starts read-only; enable writes in disk settings when ready."
+                : "Save a new copy with an additional partition, then attach that copy. The original disk and existing partitions are preserved.");
             form.Children.Add(explanation);
             if (layout != null)
-            {
-                form.Children.Add(SettingsNote($"{layout.Heads} heads × {layout.SectorsPerTrack} sectors/track. Usable cylinders {layout.FirstCylinder}–{layout.LastCylinder}."));
                 foreach (var p in layout.Partitions)
-                    form.Children.Add(SettingsNote($"{p.DeviceName}: cylinders {p.FirstCylinder}–{p.LastCylinder}, DOS type ${p.DosType:X8}"));
-            }
+                    form.Children.Add(SettingsNote($"{p.DeviceName}: {DiskSizeText(checked(((long)p.LastCylinder - p.FirstCylinder + 1) * layout.Heads * layout.SectorsPerTrack * 512))}, {p.BlockSize}-byte blocks."));
             var path = AddTextSetting(form, "New image file", markRestart: false);
             form.Children.Add(CreatePanelButton("Choose destination…", async () =>
             {
@@ -55,30 +67,75 @@ internal sealed partial class MainWindow
                 });
                 if (file?.TryGetLocalPath() is { } selected) path.Text = selected;
             }));
-            var size = AddTextSetting(form, "Capacity (MiB)", markRestart: false); size.Text = "100";
-            size.IsEnabled = existing == null;
-            if (source != null) size.Text = (new FileInfo(source).Length / 1048576d).ToString(CultureInfo.InvariantCulture);
+            var size = AddDiskSizeInput(form, "Disk capacity", source == null ? "100" : (sourceCapacity / 1048576m).ToString(CultureInfo.InvariantCulture), out var sizeUnit);
+            size.IsEnabled = sizeUnit.IsEnabled = existing == null;
             var fs = AddComboSetting(form, "Filesystem", existing == null
                 ? ["Unformatted", .. CopperScreenHardDiskSetup.FileSystemNames] : CopperScreenHardDiskSetup.FileSystemNames, markRestart: false);
             fs.SelectedIndex = existing == null ? 1 : 0;
             bool IsBlank() => existing == null && fs.SelectedIndex == 0;
             int FileSystemIndex() => fs.SelectedIndex - (existing == null ? 1 : 0);
-            var partition = CreateSettingsGroupForm();
-            form.Children.Add(partition);
+            var partition = CreateSettingsGroupForm(); form.Children.Add(partition);
             var device = AddTextSetting(partition, "New partition device", markRestart: false);
             var deviceNumber = 0;
             while (layout?.Partitions.Any(p => string.Equals(p.DeviceName, $"DH{deviceNumber}", StringComparison.OrdinalIgnoreCase)) == true) deviceNumber++;
             device.Text = $"DH{deviceNumber}";
-            var first = AddTextSetting(partition, "New first cylinder", markRestart: false);
-            var last = AddTextSetting(partition, "New last cylinder", markRestart: false);
-            first.Text = free?.First.ToString(CultureInfo.InvariantCulture) ?? "1";
-            last.Text = free?.Last.ToString(CultureInfo.InvariantCulture) ?? "";
-            last.PlaceholderText = "End of disk (leave blank for a new disk)";
-            if (existing == null) partition.Children.Add(SettingsNote("New disks use 32 KiB cylinders. Set the last cylinder to leave free space for more partitions, or leave it blank to fill the disk."));
+            var fill = new CheckBox { Content = "Use available space", IsChecked = true }; partition.Children.Add(fill);
+            var partitionSize = AddDiskSizeInput(partition, "Partition size", "8", out var partitionUnit);
+            var blockSize = AddComboSetting(partition, "Filesystem block size", ["512 bytes", "1 KiB", "2 KiB", "4 KiB"], markRestart: false);
+            blockSize.SelectedIndex = 0;
+            partition.Children.Add(SettingsNote("Filesystem blocks are independent of the disk's 512-byte sectors. The guest filesystem handler must support the chosen block size."));
             var label = AddTextSetting(partition, "Volume label", markRestart: false); label.Text = "Work";
             var bootable = new CheckBox { Content = "Bootable partition", IsChecked = false }; partition.Children.Add(bootable);
-            partition.Children.Add(SettingsNote("FFS uses DOS1; SFS and SFS2 require a compatible guest ROM or handler. CPX is the unnamed experimental CPX4 format and requires a CPX handler. Formatting does not install a handler or boot files."));
+            partition.Children.Add(SettingsHelp("Filesystem details", "FFS uses DOS1; SFS and SFS2 require a compatible guest ROM or handler. CPX is experimental and requires a CPX handler. Formatting does not install a handler or boot files."));
             var experimental = new CheckBox { Content = "I want to create an experimental CPX volume", IsVisible = false }; partition.Children.Add(experimental);
+            var preview = SettingsNote(string.Empty); AutomationProperties.SetName(preview, "Partition size preview"); partition.Children.Add(preview);
+            partition.Children.Add(SettingsNote("A partition uses one contiguous free area. The preview shows the usable size after alignment and disk metadata."));
+            var advanced = CreateSettingsGroupForm();
+            var geometry = SettingsNote(string.Empty); advanced.Children.Add(geometry);
+            var explicitRange = new CheckBox { Content = "Use explicit cylinder range" }; advanced.Children.Add(explicitRange);
+            var first = AddTextSetting(advanced, "First cylinder", markRestart: false); first.Text = free?.First.ToString(CultureInfo.InvariantCulture) ?? "1";
+            var last = AddTextSetting(advanced, "Last cylinder", markRestart: false); last.Text = free?.Last.ToString(CultureInfo.InvariantCulture) ?? "";
+            advanced.Children.Add(SettingsNote("Normal sizes are rounded down to whole cylinders and filesystem blocks. Automatic placement uses a contiguous free area; the explicit range overrides the partition size."));
+            partition.Children.Add(new Expander { Header = "Advanced geometry", Content = advanced, HorizontalAlignment = HorizontalAlignment.Stretch });
+            CopperScreenHardDiskSetup.PartitionRange? currentRange = null;
+            (long Capacity, AmigaRdbSetupLayout Layout, CopperScreenHardDiskSetup.PartitionRange Range, uint BlockSize) ReadPartition()
+            {
+                var capacity = source == null ? CopperScreenHardDiskSetup.AlignNewCapacity(CopperScreenHardDiskSetup.ParseSize(size.Text, sizeUnit.SelectedItem?.ToString() ?? "")) : sourceCapacity;
+                var diskLayout = layout ?? CopperScreenHardDiskSetup.NewLayout(capacity);
+                if ((uint)blockSize.SelectedIndex >= CopperScreenHardDiskSetup.BlockSizes.Length) throw new ArgumentException("Choose a filesystem block size.");
+                var blocks = CopperScreenHardDiskSetup.BlockSizes[blockSize.SelectedIndex];
+                uint? low = null, high = null;
+                if (explicitRange.IsChecked == true)
+                {
+                    if (!uint.TryParse(first.Text?.Trim(), NumberStyles.None, CultureInfo.InvariantCulture, out var f) ||
+                        !uint.TryParse(last.Text?.Trim(), NumberStyles.None, CultureInfo.InvariantCulture, out var l))
+                        throw new ArgumentException("Enter whole first and last cylinder numbers.");
+                    low = f; high = l;
+                }
+                var requested = explicitRange.IsChecked == true || fill.IsChecked == true ? (long?)null
+                    : CopperScreenHardDiskSetup.ParseSize(partitionSize.Text, partitionUnit.SelectedItem?.ToString() ?? "");
+                return (capacity, diskLayout, CopperScreenHardDiskSetup.PlanPartition(diskLayout, requested, blocks, low, high), blocks);
+            }
+            void RefreshPreview()
+            {
+                var manual = explicitRange.IsChecked == true;
+                first.IsEnabled = last.IsEnabled = manual;
+                fill.IsEnabled = !manual;
+                partitionSize.IsEnabled = partitionUnit.IsEnabled = !manual && fill.IsChecked != true;
+                if (IsBlank()) { currentRange = null; return; }
+                try
+                {
+                    var planned = ReadPartition(); currentRange = planned.Range;
+                    if (manual || fill.IsChecked == true)
+                        partitionSize.Text = (planned.Range.Bytes / (partitionUnit.SelectedItem is "GiB" ? 1073741824m : 1048576m)).ToString(CultureInfo.InvariantCulture);
+                    var cylinderBytes = checked((long)planned.Layout.Heads * planned.Layout.SectorsPerTrack * 512);
+                    geometry.Text = $"512-byte device sectors; {planned.Layout.Heads} heads × {planned.Layout.SectorsPerTrack} sectors/track. Cylinder: {cylinderBytes:N0} bytes. Usable cylinders {planned.Layout.FirstCylinder}–{planned.Layout.LastCylinder}.";
+                    var usableBytes = checked(((long)planned.Layout.LastCylinder - planned.Layout.FirstCylinder + 1) * cylinderBytes);
+                    var occupiedBytes = planned.Layout.Partitions.Sum(p => checked(((long)p.LastCylinder - p.FirstCylinder + 1) * cylinderBytes));
+                    preview.Text = $"Disk: {DiskSizeText(planned.Capacity)}. Partition: {DiskSizeText(planned.Range.Bytes)} ({planned.Range.Bytes:N0} bytes). Free space after creation: {DiskSizeText(usableBytes - occupiedBytes - planned.Range.Bytes)}.";
+                }
+                catch (Exception ex) when (ex is ArgumentException or OverflowException) { currentRange = null; preview.Text = ex.Message; }
+            }
             var status = SettingsNote(string.Empty); form.Children.Add(status);
             using var cancellation = new CancellationTokenSource();
             var busy = false;
@@ -94,44 +151,30 @@ internal sealed partial class MainWindow
                         throw new InvalidOperationException("Confirm that you want an experimental CPX volume.");
                     var destination = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
                         ?? throw new InvalidOperationException("Choose a new destination filename.");
-                    long bytes = 0; uint? low = null, high = null;
-                    if (existing == null)
-                    {
-                        if (!long.TryParse(size.Text, NumberStyles.None, CultureInfo.InvariantCulture, out var mib) || mib < (IsBlank() ? 1 : 8))
-                            throw new InvalidOperationException(IsBlank() ? "Capacity must be a positive whole number of MiB." : "Capacity must be a whole number of MiB, at least 8.");
-                        bytes = checked(mib * 1048576);
-                    }
                     if (IsBlank())
                     {
                         if (_settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart)
                             throw new InvalidOperationException("CopperStart needs an existing disk image. Choose a filesystem to create a formatted image instead.");
+                        var bytes = CopperScreenHardDiskSetup.ParseSize(size.Text, sizeUnit.SelectedItem?.ToString() ?? "");
+                        if (bytes < 1048576) throw new ArgumentException("Unformatted images need at least 1 MiB.");
                         if (Path.Exists(destination)) throw new IOException("Choose a new filename. Existing files are preserved.");
                         ReadHardfileSettings(_settingsDraft);
                         _settingsDraft.HardDrives.Add(new(NextHardDiskUnit(), destination, true, bytes, SparseStorage: true));
                         RefreshHardfileSettings(); ClearSettingsStartupError(); MarkSettingsRestartRequired();
-                        close = true;
-                        return;
+                        close = true; return;
                     }
-                    if (!uint.TryParse(first.Text, NumberStyles.None, CultureInfo.InvariantCulture, out var f))
-                        throw new InvalidOperationException("Enter the first cylinder as a whole number.");
-                    low = f;
-                    if (existing != null || !string.IsNullOrWhiteSpace(last.Text))
-                    {
-                        if (!uint.TryParse(last.Text, NumberStyles.None, CultureInfo.InvariantCulture, out var l))
-                            throw new InvalidOperationException("Enter the last cylinder as a whole number.");
-                        high = l;
-                    }
+                    var planned = ReadPartition();
                     ReadHardfileSettings(_settingsDraft);
                     var name = device.Text ?? ""; var volume = label.Text ?? "";
                     var fileSystem = (CopperScreenHardDiskSetup.FileSystem)FileSystemIndex(); var boot = bootable.IsChecked == true;
                     busy = true; _applyingSettings = true; UpdateSettingsStatus(); UpdateToolbarStatus();
                     status.Text = "Preparing and verifying disk… Cancel leaves the original disk unchanged.";
-                    await Task.Run(() => CopperScreenHardDiskSetup.Create(destination, bytes, source, name, low, high, fileSystem, volume, boot, cancellation.Token));
+                    await Task.Run(() => CopperScreenHardDiskSetup.Create(destination, planned.Capacity, source, name,
+                        planned.Range.First, planned.Range.Last, fileSystem, volume, boot, cancellation.Token, planned.BlockSize));
                     var attached = new CopperScreenHardfileSettings(existing?.Unit ?? NextHardDiskUnit(), destination, existing?.ReadOnly ?? true,
                         0, AmigaHardfileMountMode.RigidDiskBlock, SparseStorage: true);
                     if (diskIndex is { } row) _settingsDraft.HardDrives[row] = attached; else _settingsDraft.HardDrives.Add(attached);
-                    RefreshHardfileSettings(); ClearSettingsStartupError(); MarkSettingsRestartRequired();
-                    close = true;
+                    RefreshHardfileSettings(); ClearSettingsStartupError(); MarkSettingsRestartRequired(); close = true;
                 }
                 catch (OperationCanceledException) { status.Text = "Disk setup cancelled. No new disk was attached."; close = true; }
                 catch (Exception ex) when (IsWorkspaceFileError(ex) || ex is FormatException or OverflowException) { status.Text = ex.Message; }
@@ -144,14 +187,24 @@ internal sealed partial class MainWindow
             fs.SelectionChanged += (_, _) =>
             {
                 partition.IsVisible = !IsBlank();
-                experimental.IsVisible = !IsBlank() && FileSystemIndex() == 3;
-                experimental.IsChecked = false;
+                experimental.IsVisible = !IsBlank() && FileSystemIndex() == 3; experimental.IsChecked = false;
                 status.Text = string.Empty;
                 if (existing == null) explanation.Text = IsBlank()
                     ? "Add an unformatted image to this machine. The file is created when the Amiga starts; format it inside the Amiga before use."
-                    : "Create a new RDB disk with one formatted partition. The disk is attached read-only; enable writes in disk settings when ready.";
+                    : "Create a new disk with one formatted partition. It starts read-only; enable writes in disk settings when ready.";
                 if (existing == null) save.Content = IsBlank() ? "Add blank image" : "Create image";
+                RefreshPreview();
             };
+            explicitRange.IsCheckedChanged += (_, _) =>
+            {
+                if (explicitRange.IsChecked == true && currentRange is { } range)
+                { first.Text = range.First.ToString(CultureInfo.InvariantCulture); last.Text = range.Last.ToString(CultureInfo.InvariantCulture); }
+                RefreshPreview();
+            };
+            fill.IsCheckedChanged += (_, _) => RefreshPreview();
+            foreach (var box in new[] { size, partitionSize, first, last }) box.TextChanged += (_, _) => RefreshPreview();
+            foreach (var combo in new[] { sizeUnit, partitionUnit, blockSize }) combo.SelectionChanged += (_, _) => RefreshPreview();
+            RefreshPreview();
             form.Children.Add(CommandGroup(cancel, save));
             dialog.Closing += (_, e) => { if (busy) { e.Cancel = true; cancellation.Cancel(); } };
             dialog.Content = new ScrollViewer { Content = form, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled };

@@ -105,11 +105,13 @@ public sealed partial class LaunchWorkflowTests
             var create = (Task)typeof(MainWindow).GetMethod("CreateHardDiskImageAsync", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(window, null)!;
             var dialog = settings.OwnedWindows.Single(w => w.Title == "Create disk image");
             var path = SettingsNamed<TextBox>(dialog, "New image file");
-            var size = SettingsNamed<TextBox>(dialog, "Capacity (MiB)");
+            var size = SettingsNamed<TextBox>(dialog, "Disk capacity");
             var filesystem = SettingsNamed<ComboBox>(dialog, "Filesystem");
             Assert.Equal("FFS", filesystem.SelectedItem);
-            var firstCylinder = SettingsNamed<TextBox>(dialog, "New first cylinder");
-            Assert.True(firstCylinder.GetLogicalAncestors().OfType<Control>().All(c => c.IsVisible));
+            var firstCylinder = SettingsNamed<TextBox>(dialog, "First cylinder");
+            dialog.UpdateLayout();
+            Assert.False(dialog.GetLogicalDescendants().OfType<Expander>().Single(e => e.Header is "Advanced geometry").IsExpanded);
+            Assert.False(firstCylinder.IsEnabled);
             filesystem.SelectedItem = "CPX (experimental)";
             var experimental = dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CPX volume");
             Assert.True(experimental.IsVisible);
@@ -125,7 +127,7 @@ public sealed partial class LaunchWorkflowTests
             path.Text = existing; Click(add);
             Assert.True(dialog.IsVisible); Assert.Empty(MenuDraft(window).HardDrives);
             var destination = Path.Combine(_root, "blank.hdf"); path.Text = destination;
-            foreach (var invalid in new[] { "0", "-1", "1.5", long.MaxValue.ToString() })
+            foreach (var invalid in new[] { "0", "-1", "invalid", long.MaxValue.ToString() })
             {
                 size.Text = invalid; Click(add);
                 Assert.True(dialog.IsVisible); Assert.Empty(MenuDraft(window).HardDrives);

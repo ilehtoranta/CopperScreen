@@ -11,13 +11,28 @@ FFS and also offers Unformatted, SFS, SFS2 and experimental CPX. Unformatted hid
 the partition options and adds a blank image that is created on the next Amiga
 start; format it inside the Amiga before use. Formatted images are created and
 verified immediately. Choose **Add partition and format…** on an existing disk
-configured with RDB layout. Enter a new destination filename,
-a unique device name such as DH1, an inclusive cylinder range, filesystem and
-volume label. The first free interval is suggested for an existing disk. New
-disks use 2 heads, 32 sectors per track and 512-byte sectors (32 KiB cylinders),
-reserve cylinder 0 for RDB metadata, and require at least 8 MiB. A blank last
-cylinder on a new disk fills the remaining space; choose a smaller last cylinder
-to leave room for subsequent partitions.
+configured with RDB layout. Enter a new destination filename, disk capacity,
+partition size, filesystem and volume label. Disk and partition sizes accept
+fractional **MiB** or **GiB** values. **Use available space** fills one contiguous
+free area; turn it off to set a partition size and leave space for more partitions.
+Automatic placement chooses the first free area large enough for that size.
+The preview shows actual aligned partition size and remaining free space.
+
+Cylinder boundaries are calculated internally. **Advanced geometry** shows the
+device geometry and offers **Use explicit cylinder range** for an exact override;
+that override replaces the normal partition-size input and must fit one free area.
+Existing images retain their geometry. New images use 2 heads, 32 sectors per
+track and 512-byte device sectors (32 KiB cylinders), reserve cylinder 0 for RDB
+metadata, and require at least 8 MiB. Disk capacity is rounded down to complete
+cylinders; partition sizes are rounded down to complete cylinders and filesystem
+blocks. The preview exposes the resulting sizes before creation.
+
+**Filesystem block size** offers **512 bytes, 1 KiB, 2 KiB and 4 KiB** for all four
+formatters, defaulting to 512 bytes. This is independent of cylinder size and the
+512-byte device sector size. RDB metadata records the selected sectors-per-block
+value, and formatting and verification use that same block size. The guest's
+filesystem handler must support it; host formatting checks do not establish
+native guest compatibility for every block-size/ROM combination.
 
 | Choice | Partition DOS type | Guest requirement |
 | --- | --- | --- |
@@ -57,7 +72,8 @@ qualification remains separate from authoring an image on the host.
 ## Preservation and limits
 
 The editor accepts consistent, checksum-valid 512-byte RDB layouts whose
-partition environment vectors use 512-byte sectors and agree with the disk
+partition environment vectors use 512-byte device sectors, whole filesystem
+blocks and agree with the disk
 geometry. It includes disabled partitions in overlap checks, checks metadata
 chains and the RDB high-water mark, and requires an unused metadata block.
 Unsupported, overlapping, cyclic or damaged layouts fail closed. The editor is

@@ -4,7 +4,11 @@ using System.Text;
 namespace CopperDisk;
 
 /// <summary>A partition extent, including partitions disabled for mounting.</summary>
-public sealed record AmigaRdbSetupPartition(string DeviceName, uint FirstCylinder, uint LastCylinder, uint DosType);
+public sealed record AmigaRdbSetupPartition(string DeviceName, uint FirstCylinder, uint LastCylinder, uint DosType)
+{
+    /// <summary>Filesystem block size in bytes; device sectors remain 512 bytes.</summary>
+    public uint BlockSize { get; init; } = 512;
+}
 
 /// <summary>Validated geometry for the bounded 512-byte RDB setup editor.</summary>
 public sealed record AmigaRdbSetupLayout(uint Heads, uint SectorsPerTrack, uint FirstCylinder,
@@ -67,7 +71,12 @@ public static class AmigaRdbSetup
                     U(part, 140) != heads || U(part, 148) != sectors || U(part, 144) == 0 ||
                     U(part, 164) < low || U(part, 168) > high || U(part, 168) < U(part, 164) || part[36] is 0 or > 31)
                     throw new InvalidDataException("Unsupported or inconsistent partition geometry.");
-                var p = new AmigaRdbSetupPartition(Encoding.Latin1.GetString(part, 37, part[36]), U(part, 164), U(part, 168), U(part, 192));
+                var perBlock = U(part, 144);
+                var sectorsInPartition = ((ulong)U(part, 168) - U(part, 164) + 1) * cylinder;
+                if (perBlock > uint.MaxValue / 512 || (perBlock & (perBlock - 1)) != 0 || sectorsInPartition % perBlock != 0)
+                    throw new InvalidDataException("The partition must contain whole power-of-two filesystem blocks.");
+                var p = new AmigaRdbSetupPartition(Encoding.Latin1.GetString(part, 37, part[36]), U(part, 164), U(part, 168), U(part, 192))
+                    { BlockSize = perBlock * 512 };
                 if (partitions.Any(old => p.FirstCylinder <= old.LastCylinder && old.FirstCylinder <= p.LastCylinder))
                     throw new InvalidDataException("Existing RDB partitions overlap.");
                 partitions.Add(p); next = U(part, 16);
@@ -114,6 +123,10 @@ public static class AmigaRdbSetup
 
     /// <summary>Add one partition in free cylinders. Existing partition blocks and contents are retained.</summary>
     public static AmigaHardfilePartitionMetadata AddPartition(Stream disk, string device, uint first, uint last, uint dosType, bool bootable)
+        => AddPartition(disk, device, first, last, dosType, bootable, 512);
+
+    /// <summary>Add a partition with an explicit filesystem block size and 512-byte device sectors.</summary>
+    public static AmigaHardfilePartitionMetadata AddPartition(Stream disk, string device, uint first, uint last, uint dosType, bool bootable, uint blockSize)
     {
         var parsed = Parse(disk); var layout = parsed.Layout; var b = parsed.Header;
         if (!disk.CanWrite) throw new UnauthorizedAccessException("The staging image must be writable.");
@@ -124,18 +137,21 @@ public static class AmigaRdbSetup
         if (first < layout.FirstCylinder || last > layout.LastCylinder || last < first ||
             layout.Partitions.Any(p => first <= p.LastCylinder && p.FirstCylinder <= last))
             throw new ArgumentException("Choose whole free cylinders outside existing partitions and RDB metadata.");
+        var partitionBytes = ((ulong)last - first + 1) * layout.Heads * layout.SectorsPerTrack * 512;
+        if (blockSize < 512 || (blockSize & (blockSize - 1)) != 0 || partitionBytes % blockSize != 0)
+            throw new ArgumentException("Use power-of-two filesystem blocks of at least 512 bytes that fit the partition exactly.");
         var slot = (ulong)U(b, 152) + 1;
         while (slot <= U(b, 132) && Read(disk, (uint)slot).AsSpan().ContainsAnyExcept((byte)0)) slot++;
         if (slot > U(b, 132)) throw new InvalidDataException("No unused RDB metadata block remains.");
         var p = new byte[512]; Put(p, 0, 0x50415254); Put(p, 4, 64); Put(p, 12, 7);
         Put(p, 16, U(b, 28)); Put(p, 20, bootable ? 1u : 0); p[36] = (byte)device.Length;
         Encoding.ASCII.GetBytes(device).CopyTo(p, 37);
-        Put(p, 128, 16); Put(p, 132, 128); Put(p, 140, layout.Heads); Put(p, 144, 1);
+        Put(p, 128, 16); Put(p, 132, 128); Put(p, 140, layout.Heads); Put(p, 144, blockSize / 512);
         Put(p, 148, layout.SectorsPerTrack); Put(p, 152, 2); Put(p, 164, first); Put(p, 168, last);
         Put(p, 172, 30); Put(p, 176, 1); Put(p, 180, 0x1FE00); Put(p, 184, 0xFFFFFFFE); Put(p, 192, dosType);
         Write(disk, (uint)slot, p); Put(b, 28, (uint)slot); Put(b, 152, (uint)slot); Write(disk, parsed.Block, b);
         return new() { DeviceName = device, TableSize = 16, SizeBlockLongs = 128, Surfaces = layout.Heads,
-            SectorsPerBlock = 1, BlocksPerTrack = layout.SectorsPerTrack, ReservedBlocks = 2,
+            SectorsPerBlock = blockSize / 512, BlocksPerTrack = layout.SectorsPerTrack, ReservedBlocks = 2,
             LowCylinder = first, HighCylinder = last, NumBuffers = 30, BufferMemoryType = 1,
             MaxTransfer = 0x1FE00, Mask = 0xFFFFFFFE, BootPriority = 0, DosType = dosType };
     }
