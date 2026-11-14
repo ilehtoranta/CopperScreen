@@ -4,7 +4,7 @@ using Xunit;
 
 namespace CopperMod.Amiga.Lightweight.Tests;
 
-public sealed class CopperHdfControllerTests
+public sealed partial class CopperHdfControllerTests
 {
     [Fact]
     public void OwnerFlushPersistsHardfileWritesWithoutAdvancingGuestTime()

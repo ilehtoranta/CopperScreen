@@ -114,6 +114,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         LightweightRealTimeClock? previousRtc = null)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
+        _hasClockedStorage = _configuration.IdeMaster is not null || _configuration.HardfileTimings.Count != 0;
         _rtc = _configuration.RtcEnabled
             ? previousRtc?.CreateRestartClock(_configuration.RtcNowProvider) ?? new(_configuration.RtcNowProvider)
             : null;
@@ -140,6 +141,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (IsAga && _configuration.CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010)
             throw new ArgumentException("A1200 requires 68EC020 or a 68020/030/040/060 upgrade.", nameof(configuration));
         _a1200Io = IsAga ? new() : null;
+        if (_configuration.IdeMaster is not null && !IsAga)
+            throw new ArgumentException("Native Gayle IDE requires an A1200 motherboard.", nameof(configuration));
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
         _copper = new(_registers.DmaAddressMask);
         _bitplanes = new(_registers.DmaAddressMask, IsEcsAgnus, IsAga);
@@ -183,6 +186,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _enableConservativeCpuLoopBatch = enableConservativeCpuLoopBatch;
         try
         {
+            if (_configuration.IdeMaster is { } ide) _a1200Io!.Attach(ide, _configuration.StorageObserver);
             if (_configuration.Hardfiles.Count != 0 || _configuration.HostDirectories.Count != 0)
                 _hdf = new(this, _configuration.Hardfiles, previousHardfiles, _configuration.HostDirectories);
             if (_fastRam is not null || _hdf is not null)
@@ -196,7 +200,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             InstallResetLoop();
             Reset();
         }
-        catch { try { _hdf?.Dispose(); } finally { _cpu.Dispose(); } throw; }
+        catch { try { _hdf?.Dispose(); _a1200Io?.Dispose(); } finally { _cpu.Dispose(); } throw; }
     }
 
     public M68kCpuState Cpu => _cpu.State;
@@ -394,6 +398,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _nextOutputCycle = MaximumOutputIntervalCycles;
         _unsynchronizedField = false;
         _nextDeviceCycle = long.MaxValue;
+        _nextStorageCycle = long.MaxValue;
         _nextVerticalBlankLatchCycle = long.MaxValue;
         _nextCiaInterruptCycle = long.MaxValue;
         _nextInterruptPinEvaluationCycle = long.MaxValue;
@@ -760,7 +765,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if (_disposed) return;
         _disposed = true;
-        try { _hdf?.Dispose(); }
+        try { _hdf?.Dispose(); _a1200Io?.Dispose(); }
         finally { _cpu.Dispose(); }
     }
 
@@ -859,6 +864,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _registers.Reset();
         _a1200Io?.Reset();
         _rtc?.ResetControlRegisters();
+        RefreshStorageSchedule(cycle);
         ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
@@ -910,6 +916,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         bool byteAccess = false)
     {
         var start = Math.Max(requestedCycle, _clock.Cycle);
+        if (_a1200Io?.HasDrive == true && address is >= LightweightA1200Io.IdeStart and < LightweightA1200Io.GayleCardStatus)
+        {
+            _a1200Io.Grant(start, out grantedCycle, out completedCycle);
+            AdvanceHardwareTo(grantedCycle);
+            return;
+        }
         // Agnus regions cannot overlap either CIA byte lane. Classify the
         // common RAM/custom path before decoding the peripheral fallback.
         if (UsesAgnusBus(address))
@@ -1394,6 +1406,14 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _video.Step<TPath>(cycle, this);
         }
 
+        // A value driven on the previous CCK reaches Denise now. Retire it
+        // after this cycle's pixels and before DMA or Copper can drive the
+        // next value into the single pending input latch.
+        if (cycle == _sprites.NextCycle)
+        {
+            _sprites.Step(cycle, this);
+        }
+
         if (cycle == _nextDiskCycle)
         {
             if (_selectedReaders > 1 && !_diskDma.Writing)
@@ -1437,16 +1457,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _blitter.Step(cycle, this);
         }
 
-        if (cycle == _sprites.NextCycle)
-        {
-            _sprites.Step(cycle, this);
-        }
-
         if (cycle >= _nextVerticalBlankLatchCycle)
         {
             _nextVerticalBlankLatchCycle = long.MaxValue;
             LatchHardwareInterrupt(0x0020, cycle, cpuVisibilityDelay: 0);
         }
+        if (cycle == _nextStorageCycle) TickStorage(cycle);
 
         if (cycle >= _nextInterruptPinEvaluationCycle)
         {
@@ -1707,6 +1723,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             next = _nextCiaInterruptCycle;
         if (_nextInterruptPinEvaluationCycle < next)
             next = _nextInterruptPinEvaluationCycle;
+        if (_nextStorageCycle < next) next = _nextStorageCycle;
         _nextDeviceCycle = next;
     }
 
@@ -1796,7 +1813,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return ReadRomWord((int)(address - RomBase));
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
             return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return (ushort)((_a1200Io.PeekByte(address) << 8) | _a1200Io.PeekByte(address + 1));
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return _a1200Io.ReadWord(address, Cycle, false);
         if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
         {
             _rtc.TryReadByte(address, out var high);
@@ -1809,7 +1826,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private ushort ReadWordAt(uint address, long cycle)
     {
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return (ushort)((_a1200Io.ReadByte(address) << 8) | _a1200Io.ReadByte(address + 1));
+        if (_hasClockedStorage && address >= 0x200000 && _hdf?.CopperHdf.TryReadCompletionWord(address, out var completion) == true)
+        { RefreshStorageSchedule(cycle); return completion; }
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        { var value = _a1200Io.ReadWord(address, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
             return _sprites.ReadCollisionData();
         StrobeCopperRead(address, cycle);
@@ -1830,8 +1850,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private byte ReadByteAt(uint address, long cycle)
     {
+        if (_hasClockedStorage && address >= 0x200000 && _hdf?.CopperHdf.TryReadCompletionByte(address, out var completion) == true)
+        { RefreshStorageSchedule(cycle); return completion; }
         if (_rtc is not null && _rtc.TryReadByte(address, out var rtcValue)) return rtcValue;
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return _a1200Io.ReadByte(address);
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        { var value = _a1200Io.ReadByte(address, true, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
         {
             var collision = _sprites.ReadCollisionData();
@@ -1873,7 +1896,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
         address &= 0x00FF_FFFFu;
         if (_rtc is not null && _rtc.TryWriteByte(address, value)) return;
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) { _a1200Io.WriteByte(address, value); return; }
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        { _a1200Io.WriteByte(address, value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
         if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
         if (IsCiaWordAccess(aligned))
@@ -1928,7 +1952,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             NotifyJitRamWrite(address, 2);
             return;
         }
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) { _a1200Io.WriteByte(address, (byte)(value >> 8)); _a1200Io.WriteByte(address + 1, (byte)value); return; }
+        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        { _a1200Io.WriteByte(address, (byte)(value >> 8), cycle); _a1200Io.WriteByte(address + 1, (byte)value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
         if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
         {
             _rtc.TryWriteByte(address, (byte)(value >> 8));
@@ -2179,6 +2204,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                     {
                         ushort held = 0;
                         if (_ciaA.InterruptAsserted) held |= 0x0008;
+                        if (_a1200Io?.InterruptAsserted == true || TimedStorageInterrupt) held |= 0x0008;
                         if (_ciaB.InterruptAsserted) held |= 0x2000;
                         _registers.SetHardwareInterruptRequest((ushort)(held & value));
                     }

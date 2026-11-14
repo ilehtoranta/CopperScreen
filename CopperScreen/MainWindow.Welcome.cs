@@ -83,6 +83,7 @@ internal sealed partial class MainWindow
         customise.Background = Brushes.Transparent;
         customise.BorderBrush = QuietBorder;
         content.Children.Add(CommandGroup(_welcomeStart, customise));
+        content.Children.Add(CreatePanelButton("Disk Image Manager…", () => _ = ShowDiskImageManagerAsync()));
         _welcomeProfiles = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetName(_welcomeProfiles, "Saved launch profiles");
         var load = CreatePanelButton("Load profile", LoadWelcomeProfile);

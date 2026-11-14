@@ -37,17 +37,41 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
-The [2026-11-03 transparent hires sprite candidate](HIRES_TRANSPARENT_2026-11-03.md)
-combines existing empty-sprite checks over one CCK and stores all four pixels,
-retaining dirty collision state, comparator and shifter fallbacks. Production
-builds with published/default and common development CPU packages pass; 1,287
-engine cases pass (seven optional groups unavailable), and 320 retained native
-capture files match. The source remains an **unmeasured performance candidate**:
-all timing attempts are **INVALID / RERUN**. A bounded loaded-host series retains
-two pairs per workload, 12 matching identities, 457 telemetry intervals and 209
-violation observations. No causal FPS gain, full retention or release acceptance
-is established. The new versioned checker distinguishes provably idle reusable
-Visual Studio nodes from active builds; historical evidence is unchanged.
+The [idle-host inlining rerun](HIRES_FALLBACK_IDLE_2026-11-04.md) is **VALID**, with six pairs per workload. Lemmings changes -0.7596% (95% interval -2.7803% to +1.3031%); hires changes +3.0532% (interval +0.0119% to +6.1871%). Hires passes its 1% retention bound and has recovered against the original baseline; Lemmings and lores retention remain unestablished. Three-workload retention is **NOT_ESTABLISHED**. All 36 identities and 1312 telemetry intervals pass. Earlier invalid evidence is preserved separately.
+
+The [2026-11-04 fallback inlining fix](HIRES_FALLBACK_INLINE_2026-11-04.md) adds a
+targeted compositor inlining hint while preserving the transparent path and all
+method bodies. The production build, 1,300 engine cases (seven optional groups
+unavailable), and 320 native capture-file comparisons pass. Fresh hires Tier1
+code confirms both compositor fallbacks inline again in the hires fixture.
+Paired timing is **INVALID / RERUN and incomplete**: the final loaded-host
+diagnostic stops at 22 of 36 planned runs as host utilization reaches saturation.
+All 22 identities match; 844 telemetry intervals contain 565 violation
+observations and 496 competing-job intervals. No FPS recovery or retention
+result is established. Earlier valid/invalid evidence remains unchanged.
+
+The [2026-11-04 transparent hires sprite benchmark](HIRES_TRANSPARENT_BENCHMARK_2026-11-04.md)
+completes a **VALID** six-pair comparison per workload using the unchanged frozen
+engine pair and common development CPU. Lemmings averages **356.7050 to 357.5133
+FPS**: paired change **+0.2248%**, two-sided 95% interval **−1.2826% to +1.7551%**,
+so no native speedup is established. Hires DMA regresses **−2.5702%**, interval
+**−4.8113% to −0.2764%**. Lores changes **+0.4224%**, interval **−0.5241% to
++1.3780%**. Native/lores pass their 1% retention bounds; hires does not establish
+retention, leaving the full three-workload target **NOT ESTABLISHED**. All 36
+identities match with zero measured allocations; all **1,330 telemetry intervals**
+pass with zero competing jobs or idle-node exclusions. This does not justify the
+candidate as an FPS optimization. The [implementation record](HIRES_TRANSPARENT_2026-11-03.md)
+retains the prior builds, 1,287 passing engine cases (seven optional groups
+unavailable), 320 matched native files and all earlier **INVALID / RERUN** timings.
+Historical records remain unchanged; release/default-CPU qualification is separate.
+
+The [fixture-specific regression diagnosis](HIRES_TRANSPARENT_DIAGNOSIS_2026-11-04.md)
+finds that only 58.14% of guard entries use the transparent path; 41.86% require
+the active/comparator fallback in a complete diagnostic run. Fresh hires Tier1
+code inlines both compositors in the reference but leaves two fallback calls in
+the candidate. This is the strongest supported explanation for the regression.
+Vector packing adds three dependent insertions, but its net cost is not isolated.
+Diagnostic counters remain outside production source; their FPS is excluded.
 
 The [2026-11-03 CPU prefetch metadata cleanup](CPU_PREFETCH_METADATA_2026-11-03.md)
 removes unused 152-byte context copies from the plain-bus path through an

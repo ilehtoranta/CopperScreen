@@ -126,7 +126,12 @@ public sealed partial class CopperOsGraphicsDmaTests
             advance=machine.GetType().GetMethod("AdvanceHardwareTo",flags)!.CreateDelegate<Action<long>>(machine);
             busy=machine.GetType().GetProperty("BlitterBusy",flags)!.GetMethod!.CreateDelegate<Func<bool>>(machine);
             Long(4,Exec); Long(Exec+62,(uint)machine.ChipRam.Length); Long(Gfx+0x1A4,Exec);
-            Word(Gfx+0x10,1200); Word(Gfx+0x12,512); // ReadExecBase supported; synthetic gate has no private owner
+            Word(Gfx+0x10,1200); // synthetic Exec allocation; positive size comes from AUTOINIT
+            Long(Exec+322,Exec+326); Long(Exec+326,0); Long(Exec+330,Exec+322); // empty MemList
+            // Isolated Exec boundaries for AUTOINIT's one 48-byte Chip allocation
+            // and permanent VBlank server. The allocation is outside test planes.
+            Word(Exec-198,0x203C); Long(Exec-196,0x48000); Word(Exec-192,0x4E75);
+            Word(Exec-168,0x4E75);
             int RomOffset(uint address)=>address is >=0xF80000 and <0x1000000
                 ?checked((int)(address-0xF80000))+(combined?524288:0)
                 :combined && address is >=0xE00000 and <0xE80000?checked((int)(address-0xE00000)):-1;
@@ -139,7 +144,18 @@ public sealed partial class CopperOsGraphicsDmaTests
                 return name>=0 && name<=rom.Length-17 && rom.AsSpan(name,17).SequenceEqual("graphics.library\0"u8);
             }).ToArray();
             var resident=Assert.Single(residents);
-            var table=RomLong(RomOffset(RomLong(resident+22))+4);
+            var autoInit=RomOffset(RomLong(resident+22));
+            Word(Gfx+0x12,checked((ushort)RomLong(autoInit)));
+            // Execute the bundled ROM's initializer instead of inventing its
+            // private gate state. This also works with retained ROM overrides.
+            Long(Stack,Return); core.Reset(RomLong(autoInit+12),Stack);
+            machine.Cpu.Cycles=machine.Cycle; machine.Cpu.StatusRegister=0x2700;
+            machine.Cpu.D[0]=Gfx; machine.Cpu.A[0]=0; machine.Cpu.A[6]=Exec;
+            for(var i=0;i<200_000 && machine.Cpu.ProgramCounter!=Return;i++)
+            { core.ExecuteInstruction(); advance(machine.Cpu.Cycles); Assert.False(machine.Cpu.Halted); }
+            Assert.Equal(Return,machine.Cpu.ProgramCounter); Assert.Equal(Gfx,machine.Cpu.D[0]);
+            Assert.Equal(Stack+4,machine.Cpu.A[7]);
+            var table=RomLong(autoInit+4);
             var tableOffset=RomOffset(table);
             Assert.Equal(0xFFFF,BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(tableOffset,2)));
             for(var slot=0;slot<200;slot++)
@@ -149,6 +165,7 @@ public sealed partial class CopperOsGraphicsDmaTests
                 var vector=Gfx-(uint)((slot+1)*6);
                 Word(vector,0x4EF9); Long(vector+2,unchecked(table+(uint)relative));
             }
+            clock=machine.Cycle; machine.WriteWord(0xDFF096,0x7FFF,ref clock,default);
             machine.WriteWord(0xDFF096,0x8240,ref clock,default);
         }
         private void Long(uint at,uint value)=>BinaryPrimitives.WriteUInt32BigEndian(Ram.Slice((int)at,4),value);

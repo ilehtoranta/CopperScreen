@@ -6,10 +6,10 @@
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// A1200 motherboard decode with no IDE drive and no PCMCIA card installed.
-/// Values model floating, physically absent devices; no boot-delay shortcuts are used.
+/// A1200 motherboard decode with an optional read-only IDE master and no PCMCIA
+/// card. Unfitted devices float high; no boot-delay shortcuts are used.
 /// </summary>
-internal sealed class LightweightA1200Io
+internal sealed class LightweightA1200Io : IDisposable
 {
     internal const uint PcmciaStart = 0x0060_0000;
     internal const uint PcmciaEndExclusive = 0x00A8_0000;
@@ -28,12 +28,33 @@ internal sealed class LightweightA1200Io
     private byte _interruptEnable;
     private byte _configuration;
     private int _identificationBit;
+    private LightweightAtaDrive? _ide;
+    private bool _ideInterruptLine;
+    private long _lastAccessEnd;
+    internal bool HasDrive => _ide is not null;
+    internal long NextCycle => _ide?.NextCycle ?? long.MaxValue;
+    internal void Attach(LightweightIdeDriveConfiguration configuration, ILightweightStorageObserver? observer)
+        => _ide = new(configuration, observer);
+    internal void Step(long cycle) { _ide?.Step(cycle); SyncInterrupt(); }
+    internal void Grant(long cycle, out long grant, out long end)
+    { grant = Math.Max(cycle, _lastAccessEnd); end = checked(grant + 5); _lastAccessEnd = end; }
+    private void SyncInterrupt()
+    {
+        // Keep the drive's live status separate from Gayle's change latch.
+        // Acknowledging Gayle before ATA must not immediately relatch a held
+        // input; the next assertion is a new interrupt event.
+        var line=_ide?.InterruptAsserted==true;
+        if (line && !_ideInterruptLine) _interruptRequest|=0x80;
+        _ideInterruptLine=line;
+    }
+    private static bool TaskFileLane(uint address) => (address & 0x1000) == 0 &&
+        (address & 3) == ((address & 0x2000) != 0 ? 0u : 2u);
 
     internal byte CardControl => _cardControl;
     internal byte InterruptRequest => _interruptRequest;
     internal byte InterruptEnable => _interruptEnable;
     internal byte Configuration => _configuration;
-    internal bool InterruptAsserted => false;
+    internal bool InterruptAsserted => (_interruptRequest & _interruptEnable & 0x80) != 0;
 
     internal static bool ContainsAddress(uint address)
         => address is >= PcmciaStart and < PcmciaEndExclusive ||
@@ -42,12 +63,12 @@ internal sealed class LightweightA1200Io
 
     internal byte PeekByte(uint address) => ReadByte(address, false);
 
-    internal byte ReadByte(uint address, bool strobe = true)
+    internal byte ReadByte(uint address, bool strobe = true, long cycle = 0)
     {
         address &= 0x00FF_FFFF;
         if (address == GayleCardStatus)
         {
-            return _cardControl;
+            return (byte)(_cardControl | (_ideInterruptLine ? 0x80 : 0));
         }
 
         if (address == GayleInterruptRequest)
@@ -75,6 +96,17 @@ internal sealed class LightweightA1200Io
 
         if (address is >= IdeStart and < GayleCardStatus)
         {
+            if (_ide is not null && address < IdeStart+0x4000)
+            {
+                if (_ide.DataRegister(address))
+                {
+                    var word = _ide.ReadData(cycle, strobe); SyncInterrupt();
+                    return (address & 1) == 0 ? (byte)(word >> 8) : (byte)word;
+                }
+                var alternate = (address & 0x101C) == 0x1018;
+                if (alternate || TaskFileLane(address))
+                { var value = _ide.ReadRegister(alternate ? 7 : (int)(address >> 2 & 7), alternate, strobe); SyncInterrupt(); return value; }
+            }
             // An unattached ATA bus floats high. In particular, status is FF rather
             // than the emulator-specific 7F fast-boot value used by some emulators.
             return 0xFF;
@@ -84,7 +116,14 @@ internal sealed class LightweightA1200Io
         return 0xFF;
     }
 
-    internal void WriteByte(uint address, byte value)
+    internal ushort ReadWord(uint address, long cycle, bool strobe = true)
+    {
+        if (_ide is not null && address is >= IdeStart and < GayleCardStatus && _ide.DataRegister(address))
+        { var result = _ide.ReadData(cycle, strobe); SyncInterrupt(); return result; }
+        return (ushort)((ReadByte(address, strobe, cycle) << 8) | ReadByte(address + 1, strobe, cycle));
+    }
+
+    internal void WriteByte(uint address, byte value, long cycle = 0)
     {
         address &= 0x00FF_FFFF;
         if (address == GayleCardStatus)
@@ -107,6 +146,12 @@ internal sealed class LightweightA1200Io
         {
             _identificationBit = 0;
         }
+        else if (_ide is not null && address is >= IdeStart and < IdeStart+0x4000)
+        {
+            if ((address & 0x101C) == 0x1018) _ide.WriteControl(value, cycle);
+            else if (TaskFileLane(address)) _ide.WriteRegister((int)(address >> 2 & 7), value, cycle);
+            SyncInterrupt();
+        }
     }
 
     internal void Reset()
@@ -116,5 +161,7 @@ internal sealed class LightweightA1200Io
         _interruptEnable = 0;
         _configuration = 0;
         _identificationBit = 0;
+        _lastAccessEnd = 0; _ideInterruptLine=false; _ide?.Reset();
     }
+    public void Dispose() => _ide?.Dispose();
 }

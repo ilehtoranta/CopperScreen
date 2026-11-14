@@ -1,0 +1,149 @@
+using System.Buffers.Binary;
+using System.Security.Cryptography;
+using CopperScreen;
+
+namespace CopperScreen.Tests;
+
+public sealed class DiskImageImportTests : IDisposable
+{
+    private readonly string _root = Path.Combine(Path.GetTempPath(), "copper-import-" + Guid.NewGuid().ToString("N"));
+    public DiskImageImportTests() => Directory.CreateDirectory(_root);
+    public void Dispose()
+    {
+        var image = Path.Combine(_root, "Disk.img"); if (File.Exists(image)) File.SetAttributes(image, FileAttributes.Normal);
+        Directory.Delete(_root, true);
+    }
+
+    private string Blank(CopperScreenHardDiskSetup.FileSystem fs = CopperScreenHardDiskSetup.FileSystem.Ffs, bool raw = false, bool ofs = false, uint blockSize = 512)
+    {
+        var path = Path.Combine(_root, "Disk.img");
+        using var file = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+        file.SetLength(raw ? 901120 : 4096 * blockSize);
+        CopperScreenFileSystemFormatter.Format(file, 0, file.Length, fs, "Import", default, blockSize);
+        if (ofs) { file.Position = 0; file.Write(new byte[] { 0x44, 0x4F, 0x53, 0 }); }
+        return path;
+    }
+    private string Tree(int bytes = 140013)
+    {
+        var source = Path.Combine(_root, "Host", "Tree"); Directory.CreateDirectory(Path.Combine(source, "Nested", "Empty"));
+        File.WriteAllBytes(Path.Combine(source, "Nested", "Payload"), Enumerable.Range(0, bytes).Select(i => (byte)(i * 13 + i / 71)).ToArray());
+        File.WriteAllBytes(Path.Combine(source, "Zero"), []); File.WriteAllBytes(Path.Combine(source, "Tree.info"), [1, 5, 9]);
+        File.SetLastWriteTime(Path.Combine(source, "Nested", "Payload"), new DateTime(2020, 5, 6, 7, 8, 9));
+        return source;
+    }
+    [Theory]
+    [InlineData(0)] [InlineData(1)] [InlineData(2)] [InlineData(3)]
+    public void GuestImportRoundTripsNestedTreesAndMetadataForEachWritableFormat(int format)
+    {
+        var path = Blank(format >= 2 ? format == 2 ? CopperScreenHardDiskSetup.FileSystem.Sfs : CopperScreenHardDiskSetup.FileSystem.Sfs2 : CopperScreenHardDiskSetup.FileSystem.Ffs,
+            raw: format < 2, ofs: format == 0);
+        var source = Tree(); var expected = File.ReadAllBytes(Path.Combine(source, "Nested", "Payload"));
+        if (Environment.GetEnvironmentVariable("COPPERSCREEN_IMPORT_FIXTURES") is { } fixtures)
+        { Directory.CreateDirectory(fixtures); File.Copy(path, Path.Combine(fixtures, $"blank-{format}.img"), true); }
+        using (var image = CopperScreenDiskImage.Open(path))
+        {
+            var volume = image.Volumes[0]; var root = volume.Root; Assert.Null(volume.ImportUnavailableReason);
+            var result = image.Import(volume, root, [source]); Assert.Equal(3, result.Files);
+            var updated = image.Volumes[0]; var tree = updated.ReadDirectory(updated.Root).Single(e => e.Name == "Tree");
+            var host = Path.Combine(_root, "Extracted"); Directory.CreateDirectory(host);
+            CopperScreenDiskExtraction.Extract(updated, [tree], host);
+            Assert.Equal(expected, File.ReadAllBytes(Path.Combine(host, "Tree", "Nested", "Payload")));
+            Assert.Empty(File.ReadAllBytes(Path.Combine(host, "Tree", "Zero")));
+            Assert.True(Directory.Exists(Path.Combine(host, "Tree", "Nested", "Empty")));
+            Assert.Equal(new byte[] { 1, 5, 9 }, File.ReadAllBytes(Path.Combine(host, "Tree", "Tree.info")));
+            Assert.Equal(new DateTime(2020, 5, 6, 7, 8, 9), File.GetLastWriteTime(Path.Combine(host, "Tree", "Nested", "Payload")));
+            Assert.Throws<ArgumentException>(() => updated.ReadDirectory(root));
+            Assert.Throws<IOException>(() => new FileStream(path, FileMode.Open, FileAccess.Write, FileShare.ReadWrite));
+        }
+        using var reopened = CopperScreenDiskImage.Open(path); Assert.Single(reopened.Volumes[0].ReadDirectory(reopened.Volumes[0].Root));
+        Assert.Equal(expected, File.ReadAllBytes(Path.Combine(source, "Nested", "Payload"))); AssertNoStage();
+    }
+
+    [Theory]
+    [InlineData("conflict")] [InlineData("invalid-name")] [InlineData("disk-full")] [InlineData("cancelled")]
+    public void FailedOrCancelledImportNeverPublishesPartialImageChanges(string failure)
+    {
+        var path = Blank(raw: true); var source = Tree(failure == "disk-full" ? 1000000 : 140013);
+        var empty = Path.Combine(_root, "Before"); File.WriteAllBytes(empty, [7]);
+        using var image = CopperScreenDiskImage.Open(path); var volume = image.Volumes[0]; _ = volume.Root;
+        if (failure == "conflict") { image.Import(volume, volume.Root, [source]); volume = image.Volumes[0]; _ = volume.Root; }
+        if (failure == "invalid-name") File.WriteAllText(Path.Combine(source, new string('a', 31)), "cannot fit");
+        var before = SHA256.HashData(File.ReadAllBytes(path)); using var cancel = new CancellationTokenSource();
+        var progress = failure == "cancelled" ? new CancelOnProgress(cancel) : null;
+        var error = Record.Exception(() => image.Import(volume, volume.Root, [empty, source], cancel.Token, progress));
+        if (failure == "cancelled") Assert.IsType<OperationCanceledException>(error);
+        else if (failure == "invalid-name") Assert.IsType<ArgumentException>(error);
+        else if (failure == "disk-full") Assert.IsType<CopperStart.FileSystem.FileSystemServiceException>(error);
+        else Assert.IsType<IOException>(error);
+        Assert.Equal(before, SHA256.HashData(File.ReadAllBytes(path))); AssertNoStage();
+        if (failure == "cancelled") Assert.True(cancel.IsCancellationRequested);
+    }
+    private sealed class CancelOnProgress(CancellationTokenSource cancel) : IProgress<DiskExtractionProgress>
+    { public void Report(DiskExtractionProgress value) => cancel.Cancel(); }
+
+    [Fact]
+    public void ReadOnlyImageRefusesImportAndKeepsTheSourceUnchanged()
+    {
+        var path = Blank(); var source = Tree(); File.SetAttributes(path, FileAttributes.ReadOnly);
+        var before = File.ReadAllBytes(path);
+        using var image = CopperScreenDiskImage.Open(path); var v = image.Volumes[0]; _ = v.Root;
+        Assert.Contains("read-only", v.ImportUnavailableReason);
+        Assert.Throws<NotSupportedException>(() => image.Import(v, v.Root, [source])); Assert.Equal(before, File.ReadAllBytes(path));
+        AssertNoStage();
+    }
+
+    [Fact]
+    public void RdbImportChangesOnlyTheSelectedPartitionAndCanTargetNestedDirectories()
+    {
+        var path = Path.Combine(_root, "Disk.img");
+        var raw = new CopperDisk.Tests.AmigaFileSystemFixture().Rdb(true);
+        File.WriteAllBytes(path, raw);
+        using (var file = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+        {
+            CopperScreenFileSystemFormatter.Format(file, 44 * 512, 1760 * 512, CopperScreenHardDiskSetup.FileSystem.Ffs, "First", default);
+            CopperScreenFileSystemFormatter.Format(file, 1804 * 512, 1760 * 512, CopperScreenHardDiskSetup.FileSystem.Sfs, "Second", default);
+        }
+        var before = File.ReadAllBytes(path); var source = Tree();
+        using var image = CopperScreenDiskImage.Open(path); var v = image.Volumes[1]; _ = v.Root;
+        image.Import(v, v.Root, [source]);
+        var after = File.ReadAllBytes(path); Assert.Equal(before[..(1804 * 512)], after[..(1804 * 512)]);
+        v = image.Volumes[1]; var tree = v.ReadDirectory(v.Root).Single(e => e.Name == "Tree");
+        var nested = v.ReadDirectory(tree).Single(e => e.Name == "Nested");
+        var extra = Path.Combine(_root, "Extra"); File.WriteAllBytes(extra, [4, 2]); image.Import(v, nested, [extra]);
+        v = image.Volumes[1]; tree = v.ReadDirectory(v.Root).Single(e => e.Name == "Tree"); nested = v.ReadDirectory(tree).Single(e => e.Name == "Nested");
+        Assert.Contains(v.ReadDirectory(nested), e => e.Name == "Extra"); AssertNoStage();
+    }
+    private void AssertNoStage() => Assert.DoesNotContain(Directory.GetFileSystemEntries(_root), p => Path.GetFileName(p).StartsWith(".copperscreen-import-"));
+
+    [Fact]
+    public void PublicationSharingFailureLeavesTheOriginalImageIntactAndReopensStorage()
+    {
+        var path = Blank(); var source = Tree(); var before = File.ReadAllBytes(path);
+        using var image = CopperScreenDiskImage.Open(path); var v = image.Volumes[0]; _ = v.Root;
+        using (var blocker = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            Assert.Throws<IOException>(() => image.Import(v, v.Root, [source]));
+        Assert.Equal(before, File.ReadAllBytes(path)); AssertNoStage();
+        v = image.Volumes[0]; Assert.Empty(v.ReadDirectory(v.Root));
+        image.Import(v, v.Root, [source]); v = image.Volumes[0]; Assert.Single(v.ReadDirectory(v.Root));
+    }
+
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void LargerRdbFilesystemBlocksRemainWithinTheDeclaredExtent(bool smart)
+    {
+        var fixture = new CopperDisk.Tests.AmigaFileSystemFixture(blockSize: 1024);
+        var bytes = fixture.Rdb(); var path = Path.Combine(_root, "Disk.img");
+        if (smart)
+        {
+            ServiceImageFixture.Put(bytes, 512 + 192, 0x53465302);
+            var part = bytes.AsSpan(512, 256).ToArray(); ServiceImageFixture.Seal(part, 8); part.CopyTo(bytes, 512);
+        }
+        File.WriteAllBytes(path, bytes);
+        using (var disk = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            CopperScreenFileSystemFormatter.Format(disk, 44 * 512, 1760 * 1024, smart ? CopperScreenHardDiskSetup.FileSystem.Sfs2 : CopperScreenHardDiskSetup.FileSystem.Ffs, "Large", default, 1024);
+        var prefix = File.ReadAllBytes(path)[..(44 * 512)]; var source = Tree();
+        using var image = CopperScreenDiskImage.Open(path); var v = image.Volumes[0]; _ = v.Root;
+        image.Import(v, v.Root, [source]); v = image.Volumes[0]; Assert.Single(v.ReadDirectory(v.Root));
+        Assert.Equal(prefix, File.ReadAllBytes(path)[..(44 * 512)]);
+    }
+}

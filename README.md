@@ -53,6 +53,7 @@ the settings window open while restoring the running configuration.
 - Explicit [CopperStart standalone ROM](docs/COPPERSTART_APP.md) boot on Lightweight: qualified experimental PAL OCS 68000 A500, 512 KiB Chip + 512 KiB slow RAM and read-only DF0 by default. Supply the matching versioned ROM; explicitly admitted CopperOS workspaces can be writable.
 - One to four floppy drives (DF0–DF3): 880 KiB DD / 1760 KiB HD ADF with explicit Save ADF, plus read-only ADZ, DMS, modern extended ADF, IPF and SCP, including selected ZIP entries. SCP uses a decoded first revolution. See [format support and limits](docs/engine/DISK_FORMATS.md). The default remains one write-protected drive. Select DD or HD per drive in **Settings > Floppy Drives** and restart the Amiga. Drive types are saved in profiles and the remembered last machine. The runner accepts repeatable `--drive-type 0 HD` (units 0–3; `DD` is the default); connect external units with `--drives`.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).
+- [Disk Image Manager](docs/DISK_IMAGE_MANAGER.md): two-pane OFS/FFS, SFS and SFS2 browsing and extraction, plus staged host-to-image copying for DOS0/DOS1, SFS and SFS2, using the packaged CopperStart filesystem guest.
 - [Media protection and recovery](docs/MEDIA_PERSISTENCE.md): new imports are read-only, ADF replacement requires consent, and CopperOS provides versioned workspace backups, import and previous-checkpoint recovery.
 - Live [shared folders](docs/engine/HOST_DIRECTORIES.md), read-only by default, with native DOS access, optional Workbench folder boot, persistent comments/protection and reversible Windows filename mappings. Mount changes require restart; users supply the OS files.
 - Mouse and keyboard input, framebuffer output and stereo audio.
@@ -97,7 +98,11 @@ and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
 The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
 passes the original Lotus III input through a driving demo without changing its press timings.
 
+Stage the pinned local development filesystem-service package once before restoring
+on a fresh checkout; see the [Disk Image Manager build instructions](docs/DISK_IMAGE_MANAGER.md#development-package).
+
 ```powershell
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.2.0-dev.2.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"

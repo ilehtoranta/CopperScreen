@@ -358,6 +358,13 @@ VSTART/VSTOP equality/reuse, starts on the reset line, manual POS/CTL interactio
 and partial control pairs under stolen slots remain unverified. Obtain physical
 expectations before expanding or certifying the later range-based sequencer.
 
+A CPX Kickstart 3.1 replay exposed a same-cycle collision between a pending
+sprite DMA DATAA input and a Copper sprite-register output. The engine now
+retires the existing Denise input after the current pixel step and before the
+new bus output, preserving both values. A focused DMA/Copper test covers the
+two successive inputs; this does not qualify the remaining physical sprite
+comparator or stolen-slot edges.
+
 The [Superfrog character follow-up](SUPERFROG_CHARACTER_2026-10-20.md) resolves
 the earlier visibility uncertainty. CPU/Copper POS/CTL writes now update
 Agnus's vertical controls and reprogram an exhausted channel, while preserving
@@ -562,3 +569,27 @@ and distinguish repaired symptoms from remaining uncertainty. Implementation and
 focused tests are in [the engine](../../CopperMod.Amiga.Lightweight) and
 [diagnostic test project](../../CopperMod.Amiga.Lightweight.Tests); host regressions
 are in [CopperScreen.Lightweight.Tests](../../CopperScreen.Lightweight.Tests).
+
+## Storage benchmark follow-up, 2026-11-07
+
+- **LWA-HDF-002 — repaired synthetic read-ahead stream resumption:** after a
+  metadata detour, a hit in retained payload could leave background prefetch on
+  the abandoned metadata stream. A cached successor could also stop resumption.
+  The shared timed-drive model now redirects out-of-stream hits, skips retained
+  successors and protects them while filling free space. A failing-before
+  regression observes the next fetched sector; the focused allocation check
+  passes with zero managed bytes. All 1,323 Lightweight diagnostics pass, with
+  seven optional skips. The canonical clock, profile parameters and bus timing
+  are unchanged. See [the model contract](TIMED_STORAGE.md) and the
+  [CopperFS comparison](../../../CopperFS/docs/kickstart-ffs-hdd-cached-followup-2026-11-07.md).
+  This qualifies a synthetic-model correction, not physical HDD/Gayle accuracy.
+- **LWA-HDF-003 — OPEN: unchanged-control timing variation:** the CopperFS IDE
+  rerun records one original-FFS control workload (Kickstart 3.1, 2 MiB Chip plus
+  8 MiB Fast, HDD, 512 B) 1.108% different from the earlier run, with matching
+  ROM/handler/probe/payload/timing identities and the same engine/harness hashes.
+  The three trials agree within each run; other original controls differ by at
+  most about 0.04%. The cause is not established. Preserve the records in
+  `CopperFS/artifacts/ffs-ide-regression/qualified-analysis/audit.json` and
+  reproduce with fixed RTC input and a hashed, fixed-timestamp boot ADF before
+  attributing this difference. Small performance changes of this scale remain
+  inconclusive; it is not evidence for changing CPU or device timing.

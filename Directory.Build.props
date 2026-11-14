@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreAdditionalProjectSources Condition="Exists('$(MSBuildThisFileDirectory)artifacts/filesystem-service-feed')">$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)artifacts/filesystem-service-feed</RestoreAdditionalProjectSources>
   </PropertyGroup>
 </Project>

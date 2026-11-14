@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CopperMod.Amiga.Lightweight
 {
-    internal sealed class CopperHdfController : AutoconfigBoard, IDisposable
+    internal sealed partial class CopperHdfController : AutoconfigBoard, IDisposable
     {
         public const string DeviceName = "copperhdf.device";
         public const uint AutoConfigBase = AutoconfigChain.ZorroIIConfigBase;
@@ -198,6 +198,8 @@ namespace CopperMod.Amiga.Lightweight
         public override byte ReadBoardByte(uint address)
         {
             var offset = (int)((address - ConfiguredBase) & (BoardSize - 1));
+            if (_timedUnits.Length != 0 && offset is >= 0x6000 and < 0x6004)
+                return (byte)(PeekCompletion() >> ((3 - (offset - 0x6000)) * 8));
             return _boardRom[offset];
         }
 
@@ -281,6 +283,7 @@ namespace CopperMod.Amiga.Lightweight
                         // The hardfile is fixed media, but a registered change
                         // request remains pending until TD_REMCHANGEINT.
                         _changeInterruptRequests.Add(ioRequestAddress);
+                        bus.WriteByte(ioRequestAddress + 8, 5, 0); // NT_MESSAGE until the pending request is removed/replied
                         CompleteIo(bus, ioRequestAddress, 0, 0);
                         bus.WriteByte(ioRequestAddress + IoFlagsOffset,
                             (byte)(bus.ReadByte(ioRequestAddress + IoFlagsOffset) & ~1), 0);
@@ -392,6 +395,7 @@ namespace CopperMod.Amiga.Lightweight
             ResidentInitCalled = true;
             RegisterSystemIntegration(state);
             state.D[0] = _deviceBase != 0 ? _deviceBase : 1;
+            InstallTimedCompletion(state);
         }
 
         private void RegisterSystemIntegration(M68kCpuState state)
@@ -957,6 +961,7 @@ namespace CopperMod.Amiga.Lightweight
                 CompleteIo(bus, ioRequest, IoErrBadAddress, 0);
                 return;
             }
+            if (TryQueueTimedRead(bus, ioRequest, state)) return;
             // Complete synchronously, but preserve the caller's IO_QUICK contract.
             if (!TryExecuteIoRequest(bus, ioRequest))
             {
@@ -977,6 +982,7 @@ namespace CopperMod.Amiga.Lightweight
         {
             var bus = _bootstrapBus;
             var ioRequest = state.A[1];
+            if (bus is not null && AbortTimed(bus, ioRequest)) { state.D[0] = 0; return; }
             if (bus != null && ioRequest != 0 && bus.IsMappedMemoryRange(ioRequest, 0x20))
             {
                 _changeInterruptRequests.Remove(ioRequest);

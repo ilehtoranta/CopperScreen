@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "coppersharp.compiler": {
+        "type": "Project"
+      },
+      "coppersharp.runtime.amigapal": {
+        "type": "Project",
+        "dependencies": {
+          "CopperSharp.Compiler": "[0.1.0-preview.1, )",
+          "CopperSharp.Runtime.Managed": "[0.1.0-preview.1, )",
+          "CopperSharp.Sdk.Amiga": "[0.1.0-preview.1, )"
+        }
+      },
+      "coppersharp.runtime.managed": {
+        "type": "Project",
+        "dependencies": {
+          "CopperSharp.Compiler": "[0.1.0-preview.1, )"
+        }
+      },
+      "coppersharp.sdk.amiga": {
+        "type": "Project",
+        "dependencies": {
+          "CopperSharp.Compiler": "[0.1.0-preview.1, )"
+        }
+      },
+      "coppersharp.targets.amiga": {
+        "type": "Project",
+        "dependencies": {
+          "CopperSharp.Compiler": "[0.1.0-preview.1, )",
+          "CopperSharp.Runtime.AmigaPal": "[0.1.0-preview.1, )",
+          "CopperSharp.Sdk.Amiga": "[0.1.0-preview.1, )"
+        }
+      },
+      "storagecompletion.guest": {
+        "type": "Project",
+        "dependencies": {
+          "CopperSharp.Sdk.Amiga": "[0.1.0-preview.1, )"
+        }
+      }
+    }
+  }
+}

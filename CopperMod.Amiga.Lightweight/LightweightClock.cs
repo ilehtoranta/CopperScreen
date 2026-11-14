@@ -151,6 +151,16 @@ internal sealed class LightweightClock
         machine.UpdateCpuRequestCandidate(firstCandidate);
         AdvanceTo<TPath>(firstCandidate, machine);
         System.Diagnostics.Debug.Assert(_cpuPhase == 0);
+        if (machine.HasClockedStorage)
+        {
+            while (machine.IsCpuOutputOwned(Cycle))
+            {
+                var next = Cycle + CpuCyclesPerColorClock;
+                machine.UpdateCpuRequestCandidate(next);
+                AdvanceTo<TPath>(next, machine);
+            }
+            return Cycle;
+        }
         while (machine.IsCpuOutputOwned(Cycle))
         {
             var next = Cycle + CpuCyclesPerColorClock;
@@ -164,6 +174,24 @@ internal sealed class LightweightClock
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
     internal void AdvanceTo<TPath>(long targetCycle, LightweightA500Machine machine)
+        where TPath : struct, ILightweightExecutionPath
+    {
+        if (!machine.HasClockedStorage)
+        { AdvanceClockTo<TPath>(targetCycle, machine); return; }
+        while (true)
+        {
+            var boundary = Math.Min(targetCycle, machine.NextStorageCycle);
+            AdvanceClockTo<TPath>(boundary, machine);
+            // Storage is not restricted to an Agnus CCK edge. In particular a
+            // STOPped CPU must observe an odd-cycle completion without waiting
+            // for another bus access. Even edges may already have retired it.
+            if (machine.NextStorageCycle == Cycle) machine.TickStorage(Cycle);
+            if (Cycle == targetCycle) return;
+        }
+    }
+
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
+    private void AdvanceClockTo<TPath>(long targetCycle, LightweightA500Machine machine)
         where TPath : struct, ILightweightExecutionPath
     {
         if (targetCycle < Cycle)

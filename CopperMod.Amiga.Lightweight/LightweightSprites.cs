@@ -468,6 +468,8 @@ internal sealed partial class LightweightSprites
 
     // Resolve one lores sprite sample against two hires playfield samples,
     // then advance the sprite exactly once. The ordinary lores path is unchanged.
+    // Keep the active fallback inline after the visible-CCK transparent guard.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal void ComposeHiresColorIndexes(int line, int x, int firstPlayfield,
         int secondPlayfield, int placement, out int first, out int second)
     {

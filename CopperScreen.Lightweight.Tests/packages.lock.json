@@ -193,6 +193,14 @@
           "CopperSharp.Sdk.Amiga": "0.1.0-preview.1"
         }
       },
+      "CopperStart.FileSystem.Service": {
+        "type": "Transitive",
+        "resolved": "0.2.0-dev.2",
+        "contentHash": "enC4WsTXTObUdWXxZg9zPhhzGiLbWbHEFyHoV5glMxBAVyoMQPMYUUaI7V1z5xU4729qPMJSGxdTlJdcI36twQ==",
+        "dependencies": {
+          "Copper68k": "[1.5.4]"
+        }
+      },
       "HarfBuzzSharp": {
         "type": "Transitive",
         "resolved": "8.3.1.3",
@@ -362,6 +370,7 @@
           "CopperPad": "[2.0.0-preview.2, )",
           "CopperPad.HidSharp": "[2.0.0-preview.2, )",
           "CopperScreen.FileSystems": "[1.0.0, )",
+          "CopperStart.FileSystem.Service": "[0.2.0-dev.2, 0.2.0-dev.2]",
           "HotPathGuard.Abstractions": "[0.1.0, )",
           "Miniaudio-CS": "[1.0.4, )"
         }

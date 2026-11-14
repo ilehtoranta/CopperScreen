@@ -67,7 +67,7 @@ protected reboot are also qualified. Choose a matching DD/HD drive type and
 insert formatting targets before boot. DOS2-DOS5 remain read-only. The 512 KiB reset bank
 contains graphics; the matching 512 KiB E00000 extension supplies SFS/SFS2 and the
 shared filesystem task. Both banks are admitted as one hash-pinned file.
-The previous [single-bank qualification](COPPEROS_CSHARP_GRAPHICS_2026-11-01.md)
+The previous [single-bank qualification](COPPEROS_BLTCLEAR_REGISTER_HOMES_2026-11-05.md)
 retains its own graphics and performance evidence. The Full pair has separate
 storage and desktop checks and makes no host-throughput claim.
 The launcher creates `CopperOS/A1200-Desktop/CopperOS.hdf` in the user's app-data

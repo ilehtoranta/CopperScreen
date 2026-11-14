@@ -159,6 +159,7 @@ internal sealed partial class MainWindow
         more.Children.Add(SectionLabel("Session"));
         more.Children.Add(_releaseInputButton);
         more.Children.Add(_exportWorkspaceButton);
+        more.Children.Add(CreatePanelButton("Disk Image Manager…", () => _ = ShowDiskImageManagerAsync()));
         more.Children.Add(SettingsNote(CopperScreenLaunchWorkflow.GuestHelp));
         more.Children.Add(SectionLabel("Display"));
         more.Children.Add(_overscanButton);

@@ -22,6 +22,13 @@ public sealed record LightweightA500Configuration
     public IReadOnlyList<LightweightFloppyDriveType> FloppyDriveTypes { get; init; } = [];
     /// <summary>File-backed CopperHDF units, attached at construction. Changes require a new machine.</summary>
     public IReadOnlyList<AmigaHardfileConfiguration> Hardfiles { get; init; } = [];
+    /// <summary>Optional synthetic timing per CopperHDF unit. Omitted units remain synchronous.</summary>
+    public IReadOnlyDictionary<int, LightweightDriveTimingProfile> HardfileTimings { get; init; } =
+        new Dictionary<int, LightweightDriveTimingProfile>();
+    /// <summary>Optional read-only ATA master. Requires an A1200 profile.</summary>
+    public LightweightIdeDriveConfiguration? IdeMaster { get; init; }
+    /// <summary>Optional storage observations; absent from ordinary device execution.</summary>
+    public ILightweightStorageObserver? StorageObserver { get; init; }
     /// <summary>Live host-folder DOS volumes. Attach/detach requires a new machine.</summary>
     public IReadOnlyList<LightweightHostDirectoryConfiguration> HostDirectories { get; init; } = [];
     public LightweightAgnusModel AgnusModel { get; init; } = LightweightAgnusModel.Mos8371;

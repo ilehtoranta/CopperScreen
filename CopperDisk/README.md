@@ -22,6 +22,13 @@ See the [storage interface](https://github.com/ilehtoranta/CopperScreen/blob/mai
 
 ## Installation
 
+The development source includes `AmigaSectorImage`, a read-only image handle with
+writer exclusion, RDB discovery and bounded volume-relative byte views. It supplies
+geometry and storage; it contains no filesystem reader or CPU dependency.
+CopperScreen consumes the separate packaged CopperStart filesystem service to
+browse and extract files. See the [Disk Image Manager guide](../docs/DISK_IMAGE_MANAGER.md)
+for supported filesystems and package provisioning.
+
 ```shell
 dotnet add package CopperDisk --version 3.0.0
 ```

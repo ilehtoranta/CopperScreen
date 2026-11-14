@@ -16,6 +16,9 @@ configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A
 (v40.63), one to four floppy drives with standard writable
 880 KiB DD / 1760 KiB HD ADF and read-only ADZ/DMS/extended ADF/IPF/SCP (including selected ZIP entries through the host/runner),
 and optional file-backed CopperHDF units.
+Optional [timed CopperHDF and native A1200 Gayle IDE](../docs/engine/TIMED_STORAGE.md)
+share a bounded synthetic drive model. They are read-only opt-in devices; the
+unconfigured empty IDE bus and synchronous CopperHDF remain the defaults.
 ROMs and game media are not distributed with this package.
 
 CopperScreen also accepts a separately supplied, hash-qualified

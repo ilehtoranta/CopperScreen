@@ -11,6 +11,11 @@ See [performance](PERFORMANCE.md) and [open issues](ISSUES.md).
 
 ## Media and timing contract
 
+The opt-in [timed CopperHDF and native Gayle IDE expansion](TIMED_STORAGE.md)
+uses synthetic HDD/CF assumptions on the canonical clock. Native Kickstart
+`scsi.device` performs actual PIO bus accesses. Precise AA-Gayle electrical timing
+remains unqualified; this is separate from historical storage evidence below.
+
 The [2026-10-07 format integration](DISK_FORMATS.md) adds read-only ADZ, DMS,
 modern UAE-1ADF and first-revolution SCP playback. Historical compatibility and
 performance evidence below remains attached to its original candidate.

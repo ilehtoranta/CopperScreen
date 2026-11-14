@@ -1,0 +1,502 @@
+{
+  "SchemaVersion": 1,
+  "Date": "2026-11-04",
+  "Protocol": "hires-transparent-diagnosis-v1",
+  "Scope": "Explanation of valid hires DMA regression; no production source change",
+  "MeasuredThroughputSource": "docs/engine/HIRES_TRANSPARENT_BENCHMARK_2026-11-04.json",
+  "DiagnosticThroughputExcluded": true,
+  "CountWindow": "Full 7800 fields including 600 warmup",
+  "Counters": {
+    "Calls": 317491200,
+    "Line": 0,
+    "Dirty": 1,
+    "DirtyCollision": 0,
+    "Shifting": 119799061,
+    "Comparator": 13103026,
+    "Hits": 184589112
+  },
+  "HitPercent": 58.13991442912433,
+  "FallbackPercent": 41.86008557087567,
+  "ImpliedFallbackCompositorEntries": 265804176,
+  "Code": [
+    {
+      "Role": "reference",
+      "Bytes": 2221,
+      "CompositorCallSites": 0,
+      "PackingInsertions": 0,
+      "AllCalls": [
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:LatchComparatorsThrough(int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ObserveActiveSpriteCollisions(int,int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:LatchComparatorsThrough(int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ObserveActiveSpriteCollisions(int,int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresBoundaryCck(int,int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:PrepareHiresLine(int,int,int,int):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:PrepareHiresLine(int,int,int,int):this]",
+        "call     CORINFO_HELP_RNGCHKFAIL"
+      ]
+    },
+    {
+      "Role": "candidate",
+      "Bytes": 1217,
+      "CompositorCallSites": 2,
+      "PackingInsertions": 3,
+      "AllCalls": [
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:ShiftPlayfieldPairWithReload(int):int:this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ComposeHiresColorIndexes(int,int,int,int,int,byref,byref):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightSprites:ComposeHiresColorIndexes(int,int,int,int,int,byref,byref):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderHiresBoundaryCck(int,int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     [CopperMod.Amiga.Lightweight.LightweightVideo:RenderDualHiresVisiblePair(int,int,int,int,CopperMod.Amiga.Lightweight.LightweightA500Machine):this]",
+        "call     CORINFO_HELP_RNGCHKFAIL"
+      ]
+    }
+  ],
+  "Inspections": [
+    {
+      "Role": "reference",
+      "Identity": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "DiagnosticFpsExcluded": true,
+      "Probe": null
+    },
+    {
+      "Role": "candidate",
+      "Identity": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "DiagnosticFpsExcluded": true,
+      "Probe": null
+    },
+    {
+      "Role": "counter",
+      "Identity": "engine=lightweight-a500 workload=paula-dma-wide-hires executionMode=Interpreter cpuMode=conservative-batch warmup=600 frames=7200 completed=7800 cycle=1108395726 cpu=0x9453D8C5C72902D3 hardware=0x8276E46E62973F58 output=0x4E2C05A1B5DEAFB2 pixels=284204 audioSamples=1924 pcm=real allocated=0 adf=False unsupported=none",
+      "DiagnosticFpsExcluded": true,
+      "Probe": {
+        "Calls": 317491200,
+        "Line": 0,
+        "Dirty": 1,
+        "DirtyCollision": 0,
+        "Shifting": 119799061,
+        "Comparator": 13103026,
+        "Hits": 184589112
+      }
+    }
+  ],
+  "Inference": "Frequent fallback plus lost compositor inlining is the strongest supported explanation; exact contribution and scalar/vector packing cost are not isolated",
+  "ProductionCountersAdded": false,
+  "ReleaseCapsulesChanged": false,
+  "EvidenceFiles": [
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-build\\obj\\CopperMod.Amiga.Lightweight\\project.assets.json",
+      "Bytes": 23894,
+      "Sha256": "BDAF28EAC931CB54962427AA916D6DE8CA4D44E3609C66062CF564CF55A99CFC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\candidate-hires.asm",
+      "Bytes": 60189,
+      "Sha256": "361B497151EBF98558F8A2327307FBEA0CB1EDAE0BD1B4C72AA78B448196C59D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\candidate-hires.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\candidate-hires.stdout.log",
+      "Bytes": 333,
+      "Sha256": "321456D323EE860A87CFF62B0E48EDE30E14977DA286028CB76A855AD77FAEF4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-build.log",
+      "Bytes": 485,
+      "Sha256": "A144886F8F365AA960E44BC20FF3FB3BFA4F706EC638C30747268BC16F13EE5C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-hires.stderr.log",
+      "Bytes": 133,
+      "Sha256": "D0C8923E75DD082DCA13D56C0353966909272CA4F8644CA8D2E22C4CF21CADA5"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-hires.stdout.log",
+      "Bytes": 333,
+      "Sha256": "2CEC4C20C38497CC90EF3C69F45A767026099F64531C3C5EA606D91564D53C7A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\AssemblyInfo.cs",
+      "Bytes": 181,
+      "Sha256": "220120098395A637162A315523D2B6A2240B89917E816307FAB883123181AE16"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\CopperMod.Amiga.Lightweight.csproj",
+      "Bytes": 2502,
+      "Sha256": "1960B0C9B501DA264A734AA85938654BDB3E63FA27A474A198BB3D0E9159C204"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA1200Io.cs",
+      "Bytes": 4045,
+      "Sha256": "04C560F0E5F34C2D19DEF4DFF5525303C52361F2D5282524B091EAF04BA299D4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA500Configuration.cs",
+      "Bytes": 4236,
+      "Sha256": "6245476458B3951E0053AE1392952FD77C1EBF7C4BA04DDF665E55AC221F37AE"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA500Machine.Aga.cs",
+      "Bytes": 2316,
+      "Sha256": "DC5E15A16433F2FFCD8CD3916EADEEA24EE2DBEA53D37BC146C2D158B06B2F2B"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA500Machine.cs",
+      "Bytes": 109042,
+      "Sha256": "95FFC4C8438DF284D5299111AC03FF6F4A159B7CC4C58A4B6A1617A99AFB8189"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA500Machine.Display.cs",
+      "Bytes": 2519,
+      "Sha256": "8AD12803779C245824E665F8CF1B65CF1E817EB8BFC687AC297DD062E823BF70"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA500Machine.Jit.cs",
+      "Bytes": 5739,
+      "Sha256": "A0A71AD4A26B14FACC0998D72ECA1D93DA0318A6BF33DF7A6A6364F3CDC5A2AF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightA500Machine.Storage.cs",
+      "Bytes": 441,
+      "Sha256": "4CD4963B4E92467477C4EE02F67E0897085E2CB14E0DEE86820D36318963E758"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightAcceleratorBus.cs",
+      "Bytes": 6921,
+      "Sha256": "A445E61B81EE60F96605A6AF5E841B8C92DD7E2688BE4A8B3CC41E6D215A1DF3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightAgnusModel.cs",
+      "Bytes": 1718,
+      "Sha256": "BE840B5CC6259EFA30C9A9E22940E1F2DCD8A29D91EB3D06697F9E739BA5B5EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightAutoconfig.cs",
+      "Bytes": 15817,
+      "Sha256": "71473A7FCB265ED7316279A62B6048EBF9EECA745E10D77ACB4F46C3E161F1DC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightBitplanes.cs",
+      "Bytes": 20185,
+      "Sha256": "C3F0BC5E0C4862C82653BCE047D4D5CE6AF162BA43E729BD88CDBFD30BABE810"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightBlitter.cs",
+      "Bytes": 37615,
+      "Sha256": "4F544DE0F6D8446DD21C726D3E340EFC248126D8418F41F1CB5A2E55B83F0D99"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightBusArbiter.cs",
+      "Bytes": 1662,
+      "Sha256": "6D4D469525D384697D7765C84CF4EB8A4513B9C34C739070CF1D279A70CA16EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightCia.cs",
+      "Bytes": 22554,
+      "Sha256": "5CA6B61E6E3D2C59FCD8F1ACC8929FDE97A18A4B2BD7D72A99F128576CC48152"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightClock.cs",
+      "Bytes": 10990,
+      "Sha256": "C73197E90173E0441972199FDA9F12B4ECAF06683D665F53E2C0E71DA0006365"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightControllers.cs",
+      "Bytes": 2174,
+      "Sha256": "818E0BCF6605F370DA1AB464CB9341C479A0DC385F6AA5C2FDBB5EB46931A5DB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightCopper.cs",
+      "Bytes": 15504,
+      "Sha256": "F6C10035C44A260E59978F14BCBD1DD435386E42E1B11A11B1B05E1AFA3D44E4"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightCopperHdfController.cs",
+      "Bytes": 78160,
+      "Sha256": "1FE43570753D4D2B78645A15BB8F9FA52DBDC681C021B4B1E7F48EB833E09AC8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightCpuBoundary.cs",
+      "Bytes": 3887,
+      "Sha256": "D0FE3276155110976812A1789B8DE91233F5ADE3A61694DAF5EF527855380ADB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightDeniseModel.cs",
+      "Bytes": 301,
+      "Sha256": "5DB47E674024D18F72FCC346A0B3E278F4B883674ED06694048A3F782531B4EC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightDiskDma.cs",
+      "Bytes": 11066,
+      "Sha256": "BF655E8B88837F4820F8D95D4544F558185176537F9A1E9E9204C23F5E35C4A5"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightDiskReceiver.cs",
+      "Bytes": 3577,
+      "Sha256": "21AB816A0F76CA00BC889E1CC5A687E533B943559F9CF25D02F5691F50D8771A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightDiskSerial.cs",
+      "Bytes": 4984,
+      "Sha256": "0FB1CAB0ECC0BB3E18F995D6835DEB2C056AD624C7B3D85C5E8CC603DDE69F6A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightDisplayWindow.cs",
+      "Bytes": 1027,
+      "Sha256": "B9F16FA8D3467C200FB06C8230A831561AD385408B57C1B04424BB068601E7A7"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightExecutionPath.cs",
+      "Bytes": 897,
+      "Sha256": "D31E35C1E53CCBF60CC571F191C7F91E977A688032ADEC00DBBCDFA9611FED37"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightFastRam.cs",
+      "Bytes": 4204,
+      "Sha256": "4C17F39C80AF27B4BF69E45A65AA3D01E2B90295D0C780D329501247C1464709"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightFloppyDrive.cs",
+      "Bytes": 15266,
+      "Sha256": "191154561096AB6074FCC39C4C715421F39B4B730ADE2914CBDFB0FECF9A1A47"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightFloppyDriveType.cs",
+      "Bytes": 329,
+      "Sha256": "9E4B198354F0CE4F34E80CF43A96A0E079DD63ADB91BC6659A20A28C6A192015"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightFloppyFormat.cs",
+      "Bytes": 218,
+      "Sha256": "8E59F1F44152A515F9BF4C0C4DAF37A2B127811E500F4D00040E352F9466CB78"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightFloppyImage.cs",
+      "Bytes": 3854,
+      "Sha256": "C8F53DE3034998067EE94A7E94441A51A6BCDB787BDE98C8060D3AF9B58FB30D"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightHdfBus.cs",
+      "Bytes": 8564,
+      "Sha256": "5CDEC0CCDAD06BCF6DE6257D0FF060ADA7FEE4272F4F0F528AC8FE7253125987"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightHostDirectory.cs",
+      "Bytes": 18164,
+      "Sha256": "D4D9592292AA33B13930BD69A88DFA9FE305D5D5F4D15023335725F9677CC4F1"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightHostDirectoryConfiguration.cs",
+      "Bytes": 1471,
+      "Sha256": "6219200A33AE2527F62005DAF50AD80EEDE67F32E3A8A640E777DC3D5732AE4C"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightHostFsController.cs",
+      "Bytes": 38215,
+      "Sha256": "FAE5563B0CCFA04296D119656C36F4BFB85F94DAEB1499CA081B23A8D44DBF0A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightIpfImage.cs",
+      "Bytes": 6609,
+      "Sha256": "5539EACA99EB4E4B4544DAD015566B190867764A2836306405D384196BD7B2B3"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightKeyboard.cs",
+      "Bytes": 6875,
+      "Sha256": "FED9C9E6D6288DB28773B9E4A27D2099AEB18EF4873D0A08ED33CD09C1B9358F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightPaulaAudio.cs",
+      "Bytes": 23505,
+      "Sha256": "AA792460117151563FAF75081091562B265683E409BB937331B6235267A31A21"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightPaulaAudio.Output.cs",
+      "Bytes": 3919,
+      "Sha256": "458BBD8434405565302B2C5B7E3F1DF1FCA7F67C30FB87869CB027DF41BE8A78"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightPaulaSerial.cs",
+      "Bytes": 4457,
+      "Sha256": "13F4CD4AE0BFA57DC32C54C5684B4F10F734124DBABE815DE93843A828A5B2C8"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightPotentiometers.cs",
+      "Bytes": 2611,
+      "Sha256": "E43C1F7BD537BB27700987A5640C8E611E79A7BB42AA29D2C95057BAFEB12C73"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightRealTimeClock.cs",
+      "Bytes": 10684,
+      "Sha256": "C5B8537DA0D0635AA39949001DEC50E7000EF33D704EEA0A76FB320F564F16CB"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightRegisters.cs",
+      "Bytes": 11254,
+      "Sha256": "69583594D395C018893BD991ECD911C01AC8D8CFFD5315D726ABE4C7FAC7CF38"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightSpriteDma.cs",
+      "Bytes": 18690,
+      "Sha256": "CBBD4E7F6B65844A7B9C5E476FEACCB0FC76264C34A5BF060B721658CE9231FF"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightSprites.Aga.cs",
+      "Bytes": 8992,
+      "Sha256": "F694E3EF28961C03868BD6DC23FF2D98C308178A308D5246868B0772DA479167"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightSprites.cs",
+      "Bytes": 33772,
+      "Sha256": "06BE9BE3BEA9139D90EADF2DB35F328DA683A99649FE168024302AA9B868F07E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightVideo.Aga.cs",
+      "Bytes": 10247,
+      "Sha256": "3D606A2C69BC3FCDB0C133CC9D09770A3C9D1CD359C1838ADA40675A0F7E518A"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightVideo.cs",
+      "Bytes": 43396,
+      "Sha256": "FB909AFC2629F25FA055422DEE33F049EB90AF45EDC9A848DB780B2D4FE8380E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\LightweightVideo.Ecs.cs",
+      "Bytes": 9228,
+      "Sha256": "90ADB59D3998128D3A4D55759FC9C6F7B64C303BCC036FF2D2FD49CEADAA488F"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\packages.lock.json",
+      "Bytes": 672,
+      "Sha256": "769F2A6676508BCEA54A5E81917C16779DCCFC62530FBDCA555C0D792661B066"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter-source\\README.md",
+      "Bytes": 24778,
+      "Sha256": "0DA8EDA38BD6EAA61922C2B0618D5D7786F073EDCBAD38D30116E3F34F9CD58E"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\Copper68k.dll",
+      "Bytes": 980480,
+      "Sha256": "20B4E1002E8F7B2994EB139E04905BE1B5AC2970C360C4E2B1F682CA14029133"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperDisk.dll",
+      "Bytes": 111104,
+      "Sha256": "B424D27A47E2A76612087ADF1F799FF41E3848D0A0F76DFE2696FF3AA67C28A2"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperDisk.pdb",
+      "Bytes": 42876,
+      "Sha256": "03C2B549D8828094860A0B6176C7140C287985F387BBE00111BD24A63A07D4AC"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperDisk.xml",
+      "Bytes": 52889,
+      "Sha256": "BF9CF2783E1C76E3E18AB10CFE667D8C96D0CF8D64B5C60BB78346E3BFAA1954"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperFloat.dll",
+      "Bytes": 28672,
+      "Sha256": "4DCCA673E38589763D9488DD38C34034780944D4DA9BFDA943A34DC1A64AD235"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 299520,
+      "Sha256": "EED1C9A1F1AC2BAEC8731876E189CBAF8264F25500265203B04B3CD38047D237"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.pdb",
+      "Bytes": 120368,
+      "Sha256": "6D167E611313F1B67C662D5C06C02BFCA5F808FFCF80D4B6279255EC9B2F0902"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.Runner.deps.json",
+      "Bytes": 2653,
+      "Sha256": "2CF2AD5985F3B326C9A888FB03AF772437C6695463E05B4F16C66C85763D0875"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.Runner.dll",
+      "Bytes": 88064,
+      "Sha256": "664320169D13110C7987C008991FBB05169E83CB2E4632689EF1EB8D37947706"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.Runner.exe",
+      "Bytes": 162816,
+      "Sha256": "F4128A88191ACE1D589B7D045E8F0F2722C76A289626A2CC93577742EF1FF8BD"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.Runner.pdb",
+      "Bytes": 24884,
+      "Sha256": "5ED5F9E2B9EB7464CC2C9D331A3CE6B6F75DE00F4EAD5898E0678565C7251BEA"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.Runner.runtimeconfig.json",
+      "Bytes": 342,
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\counter\\CopperMod.Amiga.Lightweight.xml",
+      "Bytes": 22348,
+      "Sha256": "E06C082034C6806E1DB2030B80B4D7DC77C9680EDC7478A46F012062F2A79890"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\inspect-hires.ps1",
+      "Bytes": 2732,
+      "Sha256": "456615251B51D7F30AB9C2894D685C72E64CF830B61F36E57565996643B58680"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\inspection-results.json",
+      "Bytes": 1478,
+      "Sha256": "65D2723EA85D96FA868003E0824141F48AC69EFE759D31D194A348C2B51AFA12"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\reference-hires.asm",
+      "Bytes": 60394,
+      "Sha256": "BE1F3A8877C1324662561CC6FEBF3D6679084B69634643B696C8569CF12EEFD0"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\reference-hires.stderr.log",
+      "Bytes": 2,
+      "Sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-regression-diagnosis-20261104\\reference-hires.stdout.log",
+      "Bytes": 333,
+      "Sha256": "4891CA88001A2CEF11E22E12022E3E9D08A8B30D284495A89489527D91C03EB5"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-transparent-20261103\\candidate\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "9F435B0D49E29BB0FFBFC1DFA05223909CEAD18DFA1102EAF394D35E698DF3ED"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\artifacts\\hires-transparent-20261103\\reference\\CopperMod.Amiga.Lightweight.dll",
+      "Bytes": 295936,
+      "Sha256": "217B17AE2148F79EB24C2798E94666AD492B768B71780D33812DECB07950E164"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\CopperMod.Amiga.Lightweight.Runner\\Program.cs",
+      "Bytes": 60625,
+      "Sha256": "22F3FEB1CDEF92B67D7FFD3A20B484E24DDD74C884E97F9723413B6FFDF6F1A6"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\HIRES_TRANSPARENT_BENCHMARK_2026-11-04.json",
+      "Bytes": 203566,
+      "Sha256": "4E23D9B2A97CF8D86581A0DE0B5B7B3665C83CCD36DF88A87BE69F2C64D76A54"
+    },
+    {
+      "Path": "C:\\Users\\ilkle\\Koodit\\GIT\\CopperScreen\\docs\\engine\\HIRES_TRANSPARENT_BENCHMARK_2026-11-04.md",
+      "Bytes": 6420,
+      "Sha256": "EAAEB42423C5120C3A494DAC5B82360462FE9C3ADB65B3FAC29EEBC019E69579"
+    }
+  ]
+}

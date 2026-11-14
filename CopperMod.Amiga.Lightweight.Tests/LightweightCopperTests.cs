@@ -90,6 +90,26 @@ public sealed class LightweightCopperTests
     }
 
     [Fact]
+    public void CopperSpriteWriteRetainsDmaInputDueOnTheSameCycle()
+    {
+        using var machine = new LightweightA500Machine();
+        var cycle = StartCopper(machine,
+            ((ushort)(LightweightRegisters.SpriteDataFirst + 8), 0x8000),
+            (0xFFFF, 0xFFFE));
+        machine.AdvanceHardwareTo(cycle + 4);
+        machine.OnSpriteDmaDataAOutput(0, 0x8000, cycle + 4);
+
+        machine.AdvanceHardwareTo(cycle + 6);
+        Assert.True(machine.IsManualSpriteArmed(0));
+        Assert.Equal((ushort)0x8000, machine.GetCustomRegister(LightweightRegisters.SpriteDataFirst));
+        Assert.False(machine.IsManualSpriteArmed(1));
+        Assert.Equal(cycle + 8, machine.SpriteNextCycle);
+
+        machine.AdvanceHardwareTo(cycle + 8);
+        Assert.True(machine.IsManualSpriteArmed(1));
+    }
+
+    [Fact]
     public void MoveCommitsAtRetainedSecondWordOutputPhase()
     {
         using var machine = new LightweightA500Machine();

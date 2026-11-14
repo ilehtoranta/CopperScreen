@@ -21,6 +21,7 @@ internal sealed class LightweightHdfBus : IDisposable
         CopperHdf = new(configurations, previous?.CopperHdf);
         try
         {
+            CopperHdf.ConfigureTimings(machine.StorageTimings, machine.StorageObserver);
             if (hostDirectories is { Count: > 0 })
             {
                 var names = CopperHdf.Hardfiles.Values.SelectMany(h => h.GetMountablePartitions()).Select(p => p.DeviceName).ToHashSet(StringComparer.OrdinalIgnoreCase);
@@ -34,6 +35,7 @@ internal sealed class LightweightHdfBus : IDisposable
 
     internal void Reset()
     {
+        CopperHdf.ResetTimedStorage();
         _callbacks.Clear();
         _fixedGateways.Clear();
         _nextToken = 0;
@@ -44,6 +46,8 @@ internal sealed class LightweightHdfBus : IDisposable
 
     internal byte ReadExpansionByte(uint address)
         => _machine.ReadExpansionByte(address);
+    internal long Cycle => _machine.Cycle;
+    internal void StorageChanged() => _machine.RefreshStorageSchedule(_machine.Cycle);
 
     internal bool TryWriteExpansionByte(uint address, byte value)
         => _machine.TryWriteExpansionByte(address, value);
