@@ -2,324 +2,424 @@ using Avalonia;
 using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 
 namespace CopperScreen;
 
-internal sealed class DiskImageManagerWindow : Window
+internal sealed partial class DiskImageManagerWindow : Window
 {
-    private readonly Grid _body = new() { RowDefinitions = new("Auto,*"), RowSpacing = 16 };
-    private readonly ListBox _host = new() { SelectionMode = SelectionMode.Multiple }, _entries = new() { SelectionMode = SelectionMode.Multiple };
-    private readonly TextBox _hostPath = new();
-    private readonly TextBlock _imageName = Note("No image opened"), _imagePath = Note("/"), _details = Note("");
-    private readonly TextBlock _status = Note("Open an ADF or HDF image to browse, extract or import files.");
-    private readonly ComboBox _volumes = new() { HorizontalAlignment = HorizontalAlignment.Stretch };
-    private readonly Button _copy, _import, _cancel;
-    private readonly Stack<DiskImageEntry> _directory = new();
-    private CopperScreenDiskImage? _image;
-    private DiskImageVolume? _volume;
+    private readonly Pane _left = new(true, true), _right = new(false, false);
+    private readonly Pane[] _panes;
+    private Pane _active;
     private CancellationTokenSource? _operation;
-    private bool _busy, _closeRequested;
-    private string _destination = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-    private sealed record HostItem(string Name, string Path, bool IsDirectory, long Size)
-    {
-        public override string ToString() => IsDirectory ? $"▸ {Name}/" : $"{Name}    {Size:N0} bytes";
-    }
-    private sealed record ImageItem(DiskImageEntry Entry)
-    {
-        public override string ToString() => Entry.IsLink ? $"{Entry.Name}    [link — unavailable]"
-            : Entry.IsDirectory ? $"▸ {Entry.Name}/" : $"{Entry.Name}    {Entry.Size:N0} bytes";
-    }
-    private sealed record VolumeItem(DiskImageVolume Volume)
-    {
-        public override string ToString() => Volume.UnsupportedReason == null
-            ? $"{Volume.DeviceName}: {Volume.DisplayName} · {Volume.FileSystemName}"
-            : $"{Volume.DeviceName}: unavailable";
-    }
+    private bool _busy, _closeRequested, _disposed;
 
     internal DiskImageManagerWindow()
     {
-        Title = "Disk Image Manager";
-        Width = 1060; Height = 720; MinWidth = 760; MinHeight = 620;
+        _panes = [_left, _right]; _active = _right;
+        Title = "Disk Image Manager"; Width = 1060; Height = 720; MinWidth = 760; MinHeight = 620;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        Background = CopperScreenAppearance.Background;
-        var root = new Grid { Margin = new Thickness(20), RowDefinitions = new("*,Auto,Auto"), RowSpacing = 12 };
-        var heading = new StackPanel { Spacing = 6 };
-        heading.Children.Add(new TextBlock { Text = "Disk Image Manager", FontSize = 23, FontWeight = FontWeight.SemiBold });
-        heading.Children.Add(Note("Browse OFS/FFS, SFS and SFS2 images. Copy files and directories between the host and supported images."));
-        heading.Children.Add(Note("Existing entries are preserved. Links are not followed; comments and protection bits are not mapped."));
-        _details.MaxLines = 2;
-        _details.TextTrimming = TextTrimming.CharacterEllipsis;
-        _details.PropertyChanged += (_, e) => { if (e.Property == TextBlock.TextProperty) ToolTip.SetTip(_details, _details.Text); };
-        _body.Children.Add(heading);
-
-        var panes = new Grid { ColumnDefinitions = new("*,*"), ColumnSpacing = 16 };
-        var hostPane = new Grid { RowDefinitions = new("Auto,Auto,Auto,*"), RowSpacing = 8 };
-        hostPane.Children.Add(Label("Host folder"));
-        _hostPath.Text = _destination;
-        AutomationProperties.SetName(_hostPath, "Host folder path");
-        Add(hostPane, _hostPath, 1);
-        var hostCommands = Commands(
-            Button("Choose folder…", async () =>
-            {
-                var picked = await StorageProvider.OpenFolderPickerAsync(new() { Title = "Choose host destination", AllowMultiple = false });
-                if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await NavigateHostAsync(path);
-            }),
-            Button("Go", () => NavigateHostAsync(_hostPath.Text ?? "")),
-            Button("Up", () => NavigateHostAsync(Path.GetDirectoryName(_destination) ?? _destination)),
-            Button("Refresh", () => NavigateHostAsync(_destination)));
-        Add(hostPane, hostCommands, 2);
-        Add(hostPane, _host, 3);
-        AutomationProperties.SetName(_host, "Host files");
-        _host.SelectionChanged += (_, _) => UpdateCopy();
-        _host.DoubleTapped += async (_, _) => await OpenHostSelectionAsync();
-        _host.KeyDown += async (_, e) => { if (e.Key == Key.Enter) { e.Handled = true; await OpenHostSelectionAsync(); } };
-        _hostPath.KeyDown += async (_, e) => { if (e.Key == Key.Enter) { e.Handled = true; await NavigateHostAsync(_hostPath.Text ?? ""); } };
-
-        var imagePane = new Grid { RowDefinitions = new("Auto,Auto,Auto,Auto,*,Auto"), RowSpacing = 8 };
-        imagePane.Children.Add(Label("Disk image · imports saved only after success"));
-        _imageName.TextWrapping = TextWrapping.NoWrap; _imageName.TextTrimming = TextTrimming.CharacterEllipsis;
-        _imagePath.TextWrapping = TextWrapping.NoWrap; _imagePath.TextTrimming = TextTrimming.CharacterEllipsis;
-        Add(imagePane, ActionRow(Button("Open ADF/HDF…", ChooseImageAsync), _imageName), 1);
-        AutomationProperties.SetName(_volumes, "Image volumes");
-        Add(imagePane, _volumes, 2);
-        Add(imagePane, ActionRow(Button("Parent directory", ParentImageAsync), _imagePath), 3);
-        Add(imagePane, _entries, 4);
-        Add(imagePane, _details, 5);
-        AutomationProperties.SetName(_entries, "Image files");
-        _volumes.SelectionChanged += async (_, _) =>
-        {
-            if (_volumes.SelectedItem is VolumeItem selected) await RunAsync(ct => SelectVolumeAsync(selected.Volume, ct));
-        };
-        _entries.SelectionChanged += (_, _) =>
-        {
-            var selected = _entries.SelectedItems?.OfType<ImageItem>().ToArray() ?? [];
-            _details.Text = selected.Length == 1 ? Details(selected[0].Entry) : $"{selected.Length} entries selected";
-            UpdateCopy();
-        };
-        _entries.DoubleTapped += async (_, _) => await OpenImageSelectionAsync();
-        _entries.KeyDown += async (_, e) => { if (e.Key == Key.Enter) { e.Handled = true; await OpenImageSelectionAsync(); } };
-        panes.Children.Add(hostPane); Grid.SetColumn(imagePane, 1); panes.Children.Add(imagePane);
-        Add(_body, panes, 1);
-        root.Children.Add(_body);
-        _copy = Button("← Copy selected to host", CopySelectedAsync);
-        _copy.IsEnabled = false;
-        _import = Button("Copy host selection to image →", CopyHostSelectedAsync);
-        _import.IsEnabled = false;
-        _cancel = Button("Cancel", () => { _operation?.Cancel(); return Task.CompletedTask; });
-        _cancel.IsEnabled = false;
-        _hostPath.PropertyChanged += (_, e) => { if (e.Property == TextBox.TextProperty) UpdateCopy(); };
-        Add(root, Commands(_copy, _import, _cancel, Button("Close", () => { Close(); return Task.CompletedTask; })), 1);
-        AutomationProperties.SetName(_status, "Disk manager status");
-        Add(root, _status, 2);
-        Content = root;
-        Opened += async (_, _) => await NavigateHostAsync(_destination);
+        Background = CopperScreenAppearance.Background; FontSize = 13;
+        BuildLayout();
+        AddHandler(KeyDownEvent, HandleCommandKey, RoutingStrategies.Bubble);
+        SetActivePane(_right);
+        Opened += async (_, _) => await NavigateHostAsync(_left.HostDirectory);
         Closing += (_, e) =>
         {
             if (!_busy) return;
             e.Cancel = true; _closeRequested = true; _operation?.Cancel();
         };
-        Closed += (_, _) => _image?.Dispose();
+        Closed += (_, _) => { _disposed = true; foreach (var pane in _panes) ReleaseImage(pane); };
     }
 
-    private static string Details(DiskImageEntry e) =>
-        $"{e.Name} · {(e.Modified?.ToString("yyyy-MM-dd HH:mm:ss") ?? "date unavailable")} · Protection: {e.Protection:X8}" +
-        (e.Comment.Length == 0 ? "" : $"\n{e.Comment}");
+    private Pane Other => ReferenceEquals(_active, _left) ? _right : _left;
+    private Pane Side(int index) => index switch { 0 => _left, 1 => _right, _ => throw new ArgumentOutOfRangeException(nameof(index)) };
 
-    private async Task ChooseImageAsync()
+    private async Task ChooseImageAsync(Pane pane)
     {
         var picked = await StorageProvider.OpenFilePickerAsync(new()
         {
-            Title = "Open disk image for browsing", AllowMultiple = false,
+            Title = $"Open {pane.Side.ToLowerInvariant()} disk image", AllowMultiple = false,
             FileTypeFilter = [new("Sector disk images") { Patterns = ["*.adf", "*.hdf", "*.img"] }]
         });
-        if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await OpenImageAsync(path);
+        if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await OpenImageAsync(pane, path);
+        ApplyMode(pane);
     }
 
-    internal Task OpenImageAsync(string path) => RunAsync(async ct =>
+    private async Task ChooseHostAsync(Pane pane)
     {
-        var opened = await Task.Run(() => CopperScreenDiskImage.Open(path), ct);
-        _image?.Dispose(); _image = opened;
-        _imageName.Text = Path.GetFileName(path); ToolTip.SetTip(_imageName, path);
-        _volumes.ItemsSource = opened.Volumes.Select(v => new VolumeItem(v)).ToArray();
-        var first = opened.Volumes.FirstOrDefault(v => v.UnsupportedReason == null) ?? opened.Volumes[0];
-        _volumes.SelectedIndex = opened.Volumes.ToList().IndexOf(first);
-        await SelectVolumeAsync(first, ct);
+        var picked = await StorageProvider.OpenFolderPickerAsync(new() { Title = $"Choose {pane.Side.ToLowerInvariant()} host folder", AllowMultiple = false });
+        if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await RunAsync(ct => ReadHostAsync(pane, path, ct));
+        ApplyMode(pane);
+    }
+
+    internal Task OpenImageAsync(string path) => OpenImageAsync(_right, path);
+    internal Task OpenImageAsync(int pane, string path) => OpenImageAsync(Side(pane), path);
+    internal Task NavigateHostAsync(string path) => NavigateHostAsync(0, path);
+    internal Task NavigateHostAsync(int pane, string path) => RunAsync(ct => ReadHostAsync(Side(pane), path, ct));
+
+    private Task OpenImageAsync(Pane pane, string path) => RunAsync(async ct =>
+    {
+        var full = Path.GetFullPath(path);
+        var shared = _panes.Select(p => p.Image).FirstOrDefault(i => i != null && string.Equals(i.FilePath, full, StringComparison.OrdinalIgnoreCase));
+        var image = shared?.Retain() ?? await Task.Run(() => CopperScreenDiskImage.Open(full), ct);
+        ReleaseImage(pane); pane.Image = image; pane.IsHost = false; pane.Directories.Clear();
+        pane.List.SelectedItems!.Clear(); pane.List.ItemsSource = null;
+        ApplyMode(pane);
+        pane.Volumes.ItemsSource = image.Volumes.Select(v => new VolumeItem(v, Path.GetFileName(full))).ToArray();
+        var first = image.Volumes.FirstOrDefault(v => v.UnsupportedReason == null) ?? image.Volumes[0];
+        pane.Volumes.SelectedIndex = image.Volumes.ToList().IndexOf(first);
+        await SelectVolumeAsync(pane, first, ct);
     });
 
-    private async Task SelectVolumeAsync(DiskImageVolume volume, CancellationToken ct)
+    private async Task SelectVolumeAsync(Pane pane, DiskImageVolume volume, CancellationToken ct, string path = "/")
     {
-        _volume = volume; _directory.Clear(); _entries.ItemsSource = null; _details.Text = ""; _imagePath.Text = "/";
+        if (pane.Volume is { } previous && !ReferenceEquals(previous, volume) &&
+            !_panes.Any(p => !ReferenceEquals(p, pane) && ReferenceEquals(p.Volume, previous))) previous.Close();
+        pane.Volume = volume; pane.Directories.Clear(); pane.List.SelectedItems!.Clear(); pane.List.ItemsSource = null; pane.ImagePath.Text = "/";
         var entries = await Task.Run(() => { volume.Mount(ct); return volume.ReadDirectory(volume.Root, ct); }, ct);
-        _directory.Push(volume.Root);
-        var selectedIndex = _volumes.SelectedIndex;
-        _volumes.ItemsSource = _image!.Volumes.Select(v => new VolumeItem(v)).ToArray();
-        _volumes.SelectedIndex = selectedIndex;
-        SetImageEntries(entries);
-        _status.Text = $"{volume.Root.Name} · {volume.FileSystemName}. " +
-            (volume.ImportUnavailableReason ?? "Select host entries to import, or image entries to extract.");
-    }
-
-    private Task OpenImageSelectionAsync() => RunAsync(async ct =>
-    {
-        if (_entries.SelectedItem is not ImageItem selected || !selected.Entry.IsDirectory || _volume == null) return;
-        var children = await Task.Run(() => _volume.ReadDirectory(selected.Entry, ct), ct);
-        _directory.Push(selected.Entry); SetImageEntries(children);
-    });
-
-    private Task ParentImageAsync() => RunAsync(async ct =>
-    {
-        if (_directory.Count <= 1 || _volume == null) return;
-        var parent = _directory.Skip(1).First();
-        var entries = await Task.Run(() => _volume.ReadDirectory(parent, ct), ct);
-        _directory.Pop(); SetImageEntries(entries);
-    });
-
-    private void SetImageEntries(IReadOnlyList<DiskImageEntry> entries)
-    {
-        _entries.ItemsSource = entries.Select(e => new ImageItem(e)).ToArray();
-        _imagePath.Text = "/" + string.Join("/", _directory.Reverse().Skip(1).Select(e => e.Name));
-        ToolTip.SetTip(_imagePath, _imagePath.Text);
-        _status.Text = $"{entries.Count} entries · {_volume!.FileSystemName}";
-    }
-
-    internal Task NavigateHostAsync(string path) => RunAsync(async ct =>
-    {
-        var fullPath = Path.GetFullPath(path);
-        var items = await Task.Run(() => Directory.EnumerateFileSystemEntries(fullPath).Select(p =>
-        {
-            ct.ThrowIfCancellationRequested();
-            var directory = Directory.Exists(p);
-            return new HostItem(Path.GetFileName(p), p, directory, directory ? 0 : new FileInfo(p).Length);
-        }).OrderByDescending(e => e.IsDirectory).ThenBy(e => e.Name, StringComparer.OrdinalIgnoreCase).ToArray(), ct);
-        _destination = fullPath; _hostPath.Text = fullPath; _host.ItemsSource = items;
-        _status.Text = $"Host destination: {fullPath}";
-    });
-
-    private async Task OpenHostSelectionAsync()
-    {
-        if (_host.SelectedItem is HostItem { IsDirectory: true } item) await NavigateHostAsync(item.Path);
-    }
-
-    internal async Task CopySelectedAsync()
-    {
-        if (_busy || _volume == null || _volume.UnsupportedReason != null) return;
-        if (_hostPath.Text != _destination)
-        {
-            _status.Text = "Choose Go to open the entered host folder before copying.";
-            return;
-        }
-        var selected = _entries.SelectedItems?.OfType<ImageItem>().Select(i => i.Entry).ToArray() ?? [];
-        if (selected.Length == 0) { _status.Text = "Select files or directories to copy."; return; }
-        var volume = _volume;
-        var destination = _destination;
-        DiskExtractionProgress result = default;
-        var completed = false;
-        await RunAsync(async ct =>
-        {
-            var progress = new Progress<DiskExtractionProgress>(p =>
-            {
-                if (_busy) _status.Text = $"Copying: {p.Files:N0} files · {p.Bytes:N0} bytes · {p.Name}";
-            });
-            result = await Task.Run(() => CopperScreenDiskExtraction.Extract(volume, selected, destination, progress, ct), ct);
-            completed = true;
-        });
-        if (_closeRequested) return;
-        if (completed)
-        {
-            await NavigateHostAsync(destination);
-            _status.Text = $"Copied {selected.Length} entries ({result.Files:N0} files, {result.Bytes:N0} bytes) to {destination}.";
-        }
-    }
-
-    internal Task CopyHostSelectedAsync() => RunAsync(async ct =>
-    {
-        if (_image == null || _volume == null || _directory.Count == 0) return;
-        if (_hostPath.Text != _destination) throw new InvalidOperationException("Choose Go to open the entered host folder before copying.");
-        if (_volume.ImportUnavailableReason is { } reason) throw new NotSupportedException(reason);
-        var sources = _host.SelectedItems?.OfType<HostItem>().Select(i => i.Path).ToArray() ?? [];
-        if (sources.Length == 0) throw new InvalidOperationException("Select host files or directories to copy.");
-        var index = _image.Volumes.ToList().IndexOf(_volume); var path = _directory.Peek().Path;
-        var progress = new Progress<DiskExtractionProgress>(p =>
-        {
-            if (_busy) _status.Text = $"Importing: {p.Files:N0} files · {p.Bytes:N0} bytes · {p.Name}";
-        });
-        var result = await Task.Run(() => _image.Import(_volume, _directory.Peek(), sources, ct, progress), ct);
-        // Publication has completed; finish refreshing the saved image even if cancellation arrives now.
-        ct = CancellationToken.None;
-        _volumes.ItemsSource = _image.Volumes.Select(v => new VolumeItem(v)).ToArray(); _volumes.SelectedIndex = index;
-        await SelectVolumeAsync(_image.Volumes[index], ct);
+        pane.Directories.Push(volume.Root);
         foreach (var part in path.Split('/', StringSplitOptions.RemoveEmptyEntries))
         {
-            var next = (await Task.Run(() => _volume!.ReadDirectory(_directory.Peek(), ct), ct)).Single(e => e.Name == part && e.IsDirectory);
-            var entries = await Task.Run(() => _volume!.ReadDirectory(next, ct), ct);
-            _directory.Push(next); SetImageEntries(entries);
+            var child = entries.SingleOrDefault(e => e.Name == part && e.IsDirectory && !e.IsLink);
+            if (child == null) break;
+            entries = await Task.Run(() => volume.ReadDirectory(child, ct), ct); pane.Directories.Push(child);
         }
-        _status.Text = $"Imported {sources.Length} entries ({result.Files:N0} files, {result.Bytes:N0} bytes). Image saved.";
+        var index = pane.Image!.Volumes.ToList().IndexOf(volume);
+        pane.Volumes.ItemsSource = pane.Image.Volumes.Select(v => new VolumeItem(v, Path.GetFileName(pane.Image.FilePath))).ToArray();
+        pane.Volumes.SelectedIndex = index;
+        SetImageEntries(pane, entries);
+        if (volume.ImportUnavailableReason is { } reason) _status.Text += " · " + reason;
+    }
+
+    private async Task ReadHostAsync(Pane pane, string path, CancellationToken ct)
+    {
+        var full = Path.GetFullPath(path);
+        var items = await Task.Run(() => Directory.EnumerateFileSystemEntries(full).Select(p =>
+        {
+            ct.ThrowIfCancellationRequested(); var directory = Directory.Exists(p);
+            return new HostItem(Path.GetFileName(p), p, directory, directory ? 0 : new FileInfo(p).Length);
+        }).ToArray(), ct);
+        ReleaseImage(pane); pane.Directories.Clear(); pane.IsHost = true;
+        pane.Volumes.ItemsSource = null; pane.Volumes.SelectedIndex = -1;
+        pane.HostDirectory = full; pane.HostPath.Text = full; pane.HostPath.CaretIndex = full.Length;
+        ToolTip.SetTip(pane.HostPath, full); pane.HostLabel.Text = Path.GetFileName(Path.TrimEndingDirectorySeparator(full));
+        pane.List.SelectedItems!.Clear(); pane.List.ItemsSource = items;
+        ApplyMode(pane); SortItems(pane);
+        _status.Text = $"{items.Length:N0} host entries";
+    }
+
+    private void SetImageEntries(Pane pane, IReadOnlyList<DiskImageEntry> entries)
+    {
+        pane.List.SelectedItems!.Clear(); pane.List.ItemsSource = entries.Select(e => new ImageItem(e)).ToArray(); SortItems(pane);
+        pane.ImagePath.Text = pane.DirectoryPath; ToolTip.SetTip(pane.ImagePath, pane.DirectoryPath);
+        _status.Text = $"{entries.Count:N0} entries · {pane.Volume!.FileSystemName}";
+    }
+
+    private Task OpenSelectionAsync(Pane pane)
+    {
+        if (pane.IsHost)
+            return pane.List.SelectedItem is HostItem { IsDirectory: true } h ? RunAsync(ct => ReadHostAsync(pane, h.Path, ct)) : Task.CompletedTask;
+        return RunAsync(async ct =>
+        {
+            if (pane.List.SelectedItem is not ImageItem { Entry.IsDirectory: true, Entry.IsLink: false } selected || pane.Volume == null) return;
+            var entries = await Task.Run(() => pane.Volume.ReadDirectory(selected.Entry, ct), ct);
+            pane.Directories.Push(selected.Entry); SetImageEntries(pane, entries);
+        });
+    }
+
+    private Task ParentAsync() => _active.IsHost
+        ? RunAsync(ct => ReadHostAsync(_active, Path.GetDirectoryName(_active.HostDirectory) ?? _active.HostDirectory, ct))
+        : RunAsync(async ct =>
+        {
+            var pane = _active; if (pane.Directories.Count <= 1 || pane.Volume == null) return;
+            var parent = pane.Directories.Skip(1).First();
+            var entries = await Task.Run(() => pane.Volume.ReadDirectory(parent, ct), ct);
+            pane.Directories.Pop(); SetImageEntries(pane, entries);
+        });
+
+    private Task RefreshAsync() => RunAsync(ct => RefreshPaneAsync(_active, ct));
+    private Task RefreshPaneAsync(Pane pane, CancellationToken ct)
+        => pane.IsHost ? ReadHostAsync(pane, pane.HostDirectory, ct) : pane.Volume == null ? Task.CompletedTask
+        : SelectVolumeAsync(pane, pane.Volume, ct, pane.DirectoryPath);
+
+    internal Task CopySelectedAsync() => CopyAsync(_right, _left);
+    internal Task CopyHostSelectedAsync() => CopyAsync(_left, _right);
+    private Task CopyActiveAsync() => _copy.IsEnabled ? CopyAsync(_active, Other) : Task.CompletedTask;
+
+    private Task CopyAsync(Pane source, Pane destination) => TransferAsync(source, destination, false);
+
+    private Task TransferAsync(Pane source, Pane destination, bool move, object[]? selection = null) => RunAsync(async ct =>
+    {
+        if ((move ? MoveUnavailable(source, destination) : CopyUnavailable(source, destination)) is { } reason) throw new InvalidOperationException(reason);
+        var selected = selection ?? source.List.SelectedItems!.Cast<object>().ToArray();
+        var views = CaptureImageViews();
+        var progress = new Progress<DiskExtractionProgress>(p =>
+        {
+            if (_busy) _status.Text = $"{(move ? "Moving" : "Copying")}: {p.Files:N0} files · {p.Bytes:N0} bytes · {p.Name}";
+        });
+        var sourceHost = source.IsHost; var destinationHost = destination.IsHost;
+        DiskExtractionProgress result;
+        try { result = await Task.Run(() =>
+        {
+            if (sourceHost)
+            {
+                var paths = selected.Cast<HostItem>().Select(i => i.Path).ToArray();
+                using var removal = move ? new CopperScreenHostMove(paths, ct) : null;
+                var copied = destinationHost ? CopperScreenDiskExtraction.CopyHost(paths, destination.HostDirectory, progress, ct)
+                    : destination.Image!.Import(destination.Volume!, destination.Directories.Peek(), paths, ct, progress);
+                if (removal != null)
+                    try { removal.Remove(ct); }
+                    catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
+                    { throw new IOException("Copy saved, but host source removal did not finish. Destination files are retained; check the source for remaining entries. " + ex.Message, ex); }
+                return copied;
+            }
+            var entries = selected.Cast<ImageItem>().Select(i => i.Entry).ToArray();
+            if (move && !destinationHost)
+                return destination.Image!.MoveFromImage(destination.Volume!, destination.Directories.Peek(), source.Volume!, source.Directories.Peek(), entries, ct, progress);
+            var copiedImage = destinationHost ? CopperScreenDiskExtraction.Extract(source.Volume!, entries, destination.HostDirectory, progress, ct)
+                : destination.Image!.CopyFromImage(destination.Volume!, destination.Directories.Peek(), source.Volume!, entries, ct, progress);
+            if (move)
+                try { source.Image!.Delete(source.Volume!, source.Directories.Peek(), entries, ct); }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or OperationCanceledException or TimeoutException)
+                { throw new IOException("Copy saved, but source removal could not be confirmed. Destination files are retained. Check the source before retrying. " + ex.Message, ex); }
+            return copiedImage;
+        }, ct); }
+        finally
+        {
+            // Host removals can finish partially (for example a newly locked file).
+            // Reconcile the visible tree even when the transfer reports an error.
+            if (move && sourceHost) await RefreshHostSelectionAsync(source);
+            if (destinationHost) await RefreshHostSelectionAsync(destination);
+        }
+        // A completed image publication cannot be cancelled during the listing refresh.
+        await RefreshImageViewsAsync(views);
+        _status.Text = move ? $"Moved {selected.Length} entries." : $"{(sourceHost && !destinationHost ? "Imported" : "Copied")} {selected.Length} entries ({result.Files:N0} files, {result.Bytes:N0} bytes).";
+        if (!destinationHost || move && !sourceHost) _status.Text += " Image saved.";
     });
+
+    private async Task RefreshHostSelectionAsync(Pane pane)
+    {
+        var selection = pane.List.SelectedItems!.OfType<HostItem>().Select(i => i.Path).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            await ReadHostAsync(pane, pane.HostDirectory, CancellationToken.None);
+            foreach (var item in pane.List.Items.OfType<HostItem>()) if (selection.Contains(item.Path)) pane.List.SelectedItems!.Add(item);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        { pane.List.ItemsSource = null; _status.Text = "Could not refresh the host folder: " + ex.Message; }
+    }
+
+    private async Task MovePromptAsync(Pane source, Pane destination, object[]? selection = null)
+    {
+        if (_busy || MoveUnavailable(source, destination) != null) return;
+        var selected = selection ?? source.List.SelectedItems!.Cast<object>().ToArray();
+        string Location(Pane p) => p.IsHost ? p.HostDirectory : $"{Path.GetFileName(p.Image!.FilePath)} · {p.Volume!.DeviceName}:{p.DirectoryPath}";
+        var names = string.Join("\n", selected.Take(4).Select(i => i is HostItem h ? h.Name : ((ImageItem)i).Entry.Name));
+        if (!await ConfirmAsync("Move entries", "Move", $"Move {selected.Length:N0} selected entries and their contents?\n\nFrom: {Location(source)}\nTo: {Location(destination)}\n\n{names}\n\nThe source entries will be removed. Existing destinations are never replaced.")) return;
+        await TransferAsync(source, destination, true, selected);
+    }
+
+    private Task EditAsync(Action<CopperScreenDiskImage, DiskImageVolume, DiskImageEntry, CancellationToken> edit, string result,
+        string? selectName = null, DirectoryRename? rename = null)
+        => RunAsync(async ct =>
+        {
+            var pane = _active;
+            if (WriteUnavailable(pane) is { } reason) throw new NotSupportedException(reason);
+            var views = CaptureImageViews(pane.Image);
+            await Task.Run(() => edit(pane.Image!, pane.Volume!, pane.Directories.Peek(), ct), ct);
+            await RefreshImageViewsAsync(views, rename);
+            if (selectName != null) pane.List.SelectedItem = pane.List.Items.OfType<ImageItem>().SingleOrDefault(i => i.Entry.Name == selectName);
+            _status.Text = result + " Image saved.";
+        });
+
+    internal Task CreateDirectoryAsync(string name) => EditAsync((image, volume, parent, ct) => image.CreateDirectory(volume, parent, name, ct), "Directory created.", name);
+    internal Task RenameSelectedAsync(string name)
+    {
+        var entry = _active.List.SelectedItems?.OfType<ImageItem>().SingleOrDefault()?.Entry;
+        DirectoryRename? rename = entry?.IsDirectory == true
+            ? new(_active.Volumes.SelectedIndex, entry.Path, _active.DirectoryPath.TrimEnd('/') + "/" + name) : null;
+        return entry == null ? Task.CompletedTask : EditAsync((image, volume, parent, ct) => image.Rename(volume, parent, entry, name, ct), "Entry renamed.", name, rename);
+    }
+
+    private async Task NewDirectoryPromptAsync()
+    {
+        if (!_newDirectory.IsEnabled) return;
+        if (await AskNameAsync("New directory", "", "Create") is { } name) await CreateDirectoryAsync(name);
+    }
+    private async Task RenamePromptAsync()
+    {
+        if (!_rename.IsEnabled || _active.List.SelectedItem is not ImageItem entry) return;
+        if (await AskNameAsync("Rename", entry.Entry.Name, "Rename") is { } name) await RenameSelectedAsync(name);
+    }
+    private async Task DeletePromptAsync()
+    {
+        if (!_delete.IsEnabled) return;
+        var selected = _active.List.SelectedItems!.OfType<ImageItem>().Select(i => i.Entry).ToArray();
+        var names = string.Join("\n", selected.Take(4).Select(e => e.Name)) + (selected.Length > 4 ? "\n…" : "");
+        if (!await ConfirmDeleteAsync($"Delete {selected.Length:N0} selected entries and their contents from the image?\n\n{names}")) return;
+        await EditAsync((image, volume, parent, ct) => image.Delete(volume, parent, selected, ct), $"Deleted {selected.Length:N0} entries.");
+    }
 
     private async Task RunAsync(Func<CancellationToken, Task> action)
     {
-        if (_busy) return;
-        _busy = true; _body.IsEnabled = false; _copy.IsEnabled = false; _import.IsEnabled = false; _cancel.IsEnabled = true;
-        using var operation = new CancellationTokenSource(); _operation = operation;
-        _status.Text = "Working…";
-        var resetVolume = false;
-        try
-        {
-            await action(operation.Token);
-            if (_status.Text == "Working…") _status.Text = "Ready.";
-        }
-        catch (OperationCanceledException) { resetVolume = true; _status.Text = "Cancelled. Files already copied to the destination are retained."; }
-        catch (TimeoutException ex) { resetVolume = true; _status.Text = ex.Message; }
-        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or NotSupportedException or ArgumentException or OverflowException or InvalidOperationException || _volume?.IsFaulted == true)
+        if (_busy || _disposed) return;
+        Control? focused = _panes.FirstOrDefault(p => p.List.IsKeyboardFocusWithin)?.List ?? FocusManager?.GetFocusedElement() as Control;
+        var views = CaptureImageViews();
+        _busy = true; _body.IsEnabled = _toolbar.IsEnabled = _commands.IsEnabled = false;
+        _copy.IsVisible = false; _cancel.IsVisible = true;
+        using var operation = new CancellationTokenSource(); _operation = operation; _status.Text = "Working…";
+        var reset = false;
+        try { await action(operation.Token); if (_status.Text == "Working…") _status.Text = "Ready."; }
+        catch (OperationCanceledException) { reset = true; _status.Text = "Cancelled. Files already copied to the destination are retained."; }
+        catch (TimeoutException ex) { reset = true; _status.Text = ex.Message; }
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or NotSupportedException or ArgumentException or OverflowException or InvalidOperationException || _panes.Any(p => p.Volume?.IsFaulted == true))
         { _status.Text = ex.Message; }
         finally
         {
-            if (_volume != null && (resetVolume || _volume.IsFaulted || !_volume.IsMounted))
+            // Even a failed publication can reopen storage and replace volume
+            // records. Do not leave either pane holding entries from a disposed mount.
+            var message = _status.Text;
+            try { await RefreshImageViewsAsync(views); _status.Text = message; }
+            catch (Exception ex) when (ex is IOException or NotSupportedException or ArgumentException or InvalidOperationException or TimeoutException)
+            { _status.Text = message + " Could not refresh the image: " + ex.Message; }
+            var reselect = false;
+            foreach (var pane in _panes)
             {
-                _volume.Close(); _directory.Clear(); _entries.ItemsSource = null; _details.Text = ""; _imagePath.Text = "/";
-                _volumes.SelectedIndex = -1;
-                _volumes.ItemsSource = _image?.Volumes.Select(v => new VolumeItem(v)).ToArray();
-                _status.Text += " Reselect the volume to start a fresh filesystem session.";
+                if (pane.Volume is not { } volume || !(reset || volume.IsFaulted || !volume.IsMounted)) continue;
+                volume.Close(); pane.Directories.Clear(); pane.List.SelectedItems!.Clear(); pane.List.ItemsSource = null; pane.ImagePath.Text = "/";
+                pane.Volumes.SelectedIndex = -1;
+                pane.Volumes.ItemsSource = pane.Image?.Volumes.Select(v => new VolumeItem(v, Path.GetFileName(pane.Image.FilePath))).ToArray();
+                reselect = true;
             }
-            _busy = false; _operation = null; _body.IsEnabled = true; _cancel.IsEnabled = false; UpdateCopy();
+            if (reselect) _status.Text += " Reselect the volume to start a fresh filesystem session.";
+            _busy = false; _operation = null; _body.IsEnabled = _toolbar.IsEnabled = _commands.IsEnabled = true;
+            _copy.IsVisible = true; _cancel.IsVisible = false;
+            foreach (var pane in _panes) ApplyMode(pane);
+            UpdateCommands();
+            if (!_closeRequested && focused is { IsEffectivelyEnabled: true, IsEffectivelyVisible: true }) focused.Focus();
             if (_closeRequested) Close();
         }
     }
 
-    private void UpdateCopy()
+    private void SetActivePane(Pane pane)
     {
-        _copy.IsEnabled = !_busy && _hostPath.Text == _destination && _volume is { UnsupportedReason: null, IsMounted: true } &&
-            _entries.SelectedItems is { Count: > 0 } selected && selected.OfType<ImageItem>().All(i => !i.Entry.IsLink);
-        _import.IsEnabled = !_busy && _hostPath.Text == _destination && _volume is { ImportUnavailableReason: null } && _host.SelectedItems is { Count: > 0 };
-        ToolTip.SetTip(_import, _volume?.ImportUnavailableReason ?? "Copy into the current image directory. Existing entries are preserved.");
+        var changed = !ReferenceEquals(_active, pane); _active = pane;
+        foreach (var p in _panes)
+        {
+            var active = ReferenceEquals(p, pane);
+            p.Frame.BorderBrush = active ? CopperScreenAppearance.Accent : CopperScreenAppearance.QuietBorder;
+            p.Header.Background = active ? CopperScreenAppearance.ProtectedSurface : CopperScreenAppearance.ControlSurface;
+            AutomationProperties.SetHelpText(p.List, active ? "Source pane" : "Destination pane");
+        }
+        UpdateCommands(); if (changed) SelectionStatus();
     }
 
-    private static TextBlock Note(string text) => new() { Text = text, TextWrapping = TextWrapping.Wrap, Foreground = CopperScreenAppearance.MutedText };
-    private static TextBlock Label(string text) => new() { Text = text, FontWeight = FontWeight.SemiBold };
-    private static Button Button(string text, Func<Task> action)
+    private static string? WriteUnavailable(Pane pane) => pane.IsHost ? "Choose an image for this operation."
+        : pane.Volume == null ? "Select a mounted image volume." : pane.Volume.ImportUnavailableReason;
+    private string? MoveUnavailable(Pane source, Pane destination)
     {
-        var button = new Button { Content = text, Padding = new Thickness(12, 7) };
-        button.Click += async (_, _) => await action();
-        CopperScreenAppearance.ConfigureKeyboardFocus(button);
-        return button;
+        if (CopyUnavailable(source, destination) is { } reason) return reason;
+        if (!source.IsHost) return WriteUnavailable(source);
+        foreach (var item in source.List.SelectedItems!.OfType<HostItem>())
+            if (_panes.Any(p => p.Image != null && (string.Equals(item.Path, p.Image.FilePath, StringComparison.OrdinalIgnoreCase) ||
+                item.IsDirectory && p.Image.FilePath.StartsWith(item.Path.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))))
+                return "Close images contained in the host selection before moving it.";
+        return null;
     }
-    private static WrapPanel Commands(params Control[] controls)
+    private static string? CopyUnavailable(Pane source, Pane destination)
     {
-        var panel = new WrapPanel { Orientation = Orientation.Horizontal };
-        foreach (var control in controls) { control.Margin = new Thickness(0, 0, 8, 4); panel.Children.Add(control); }
-        return panel;
+        if (source.IsHost && source.HostPath.Text != source.HostDirectory || destination.IsHost && destination.HostPath.Text != destination.HostDirectory)
+            return "Press Enter to open the entered host folder.";
+        if (!source.IsHost && source.Volume?.IsMounted != true) return source.Volume?.UnsupportedReason ?? "Select a source volume.";
+        if (!destination.IsHost && WriteUnavailable(destination) is { } reason) return reason;
+        if (source.List.SelectedItems is not { Count: > 0 }) return "Select source files or directories.";
+        if (source.List.SelectedItems.OfType<ImageItem>().Any(i => i.Entry.IsLink)) return "Links cannot be copied.";
+        if (!source.IsHost && !destination.IsHost && ReferenceEquals(source.Volume, destination.Volume))
+        {
+            if (source.DirectoryPath == destination.DirectoryPath) return "Choose a different destination directory.";
+            if (source.List.SelectedItems.OfType<ImageItem>().Any(i => i.Entry.IsDirectory &&
+                (destination.DirectoryPath == i.Entry.Path || destination.DirectoryPath.StartsWith(i.Entry.Path + "/", StringComparison.Ordinal))))
+                return "A directory cannot be copied into itself or its descendants.";
+        }
+        if (source.IsHost && destination.IsHost && source.HostDirectory.Equals(destination.HostDirectory, StringComparison.OrdinalIgnoreCase))
+            return "Choose a different destination folder.";
+        return null;
     }
-    private static Grid ActionRow(Button button, TextBlock text)
+
+    private void UpdateCommands()
     {
-        var row = new Grid { ColumnDefinitions = new("Auto,*"), ColumnSpacing = 8 };
-        text.VerticalAlignment = VerticalAlignment.Center;
-        row.Children.Add(button); Grid.SetColumn(text, 1); row.Children.Add(text);
-        return row;
+        if (_copy == null) return;
+        _imageName.Text = _active.Image == null ? "" : Path.GetFileName(_active.Image.FilePath);
+        ToolTip.SetTip(_imageName, _active.Image?.FilePath);
+        _copy.Content = ReferenceEquals(_active, _left) ? "Copy →" : "← Copy";
+        var reason = _busy ? "An operation is running." : CopyUnavailable(_active, Other);
+        _copy.IsEnabled = reason == null;
+        ToolTip.SetTip(_copy, reason ?? $"Copy {_active.Side.ToLowerInvariant()} selection to the {Other.Side.ToLowerInvariant()} directory (F5)");
+        AutomationProperties.SetHelpText(_copy, reason ?? $"Copy from {_active.Side} to {Other.Side}");
+        _move.Content = ReferenceEquals(_active, _left) ? "Move →" : "← Move";
+        var moveReason = _busy ? "An operation is running." : MoveUnavailable(_active, Other);
+        _move.IsEnabled = moveReason == null;
+        ToolTip.SetTip(_move, moveReason ?? "Move selection to the other directory; confirmation required (Shift+F5)");
+        _parent.IsEnabled = _active.IsHost ? Path.GetDirectoryName(_active.HostDirectory) != null : _active.Directories.Count > 1;
+        _refresh.IsEnabled = _active.IsHost || _active.Volume?.IsMounted == true;
+        _all.IsEnabled = _invert.IsEnabled = _active.List.ItemCount > 0;
+        _clear.IsEnabled = _active.List.SelectedItems is { Count: > 0 };
+        _info.IsEnabled = _active.List.SelectedItems is { Count: 1 };
+        var unavailable = WriteUnavailable(_active);
+        _newDirectory.IsEnabled = unavailable == null;
+        _rename.IsEnabled = unavailable == null && _active.List.SelectedItems is { Count: 1 } && _active.List.SelectedItem is ImageItem { Entry.IsLink: false };
+        _delete.IsEnabled = unavailable == null && _active.List.SelectedItems is { Count: > 0 } selected && selected.OfType<ImageItem>().All(i => !i.Entry.IsLink);
+        _protect.IsEnabled = _delete.IsEnabled;
+        ToolTip.SetTip(_protect, unavailable ?? "Set protection flags on selected image entries");
+        foreach (var button in new[] { _newDirectory, _rename, _delete })
+            ToolTip.SetTip(button, unavailable ?? (button == _newDirectory ? "Create a directory in the active image (F7)" : button == _rename ? "Rename one selected entry (F2)" : "Delete selected entries and their contents (Delete)"));
+        ToolTip.SetTip(_info, _info.IsEnabled ? "View selected entry metadata" : "Select one entry to view metadata");
     }
-    private static void Add(Grid grid, Control control, int row) { Grid.SetRow(control, row); grid.Children.Add(control); }
+
+    private void SelectionStatus()
+    {
+        if (_busy || (!_active.IsHost && _active.Volume?.IsMounted != true)) return;
+        var selected = _active.List.SelectedItems!.Cast<object>().ToArray();
+        var bytes = selected.Sum(i => i is HostItem h ? (h.IsDirectory ? 0 : h.Size) : ((ImageItem)i).Entry is { IsDirectory: false, IsLink: false } e ? e.Size : 0);
+        _status.Text = $"{_active.Side} · {selected.Length:N0}/{_active.List.ItemCount:N0} selected · {bytes:N0} file bytes";
+    }
+
+    private enum SelectionAction { All, Invert, Clear }
+    private Task SelectAsync(SelectionAction action)
+    {
+        var list = _active.List;
+        if (action == SelectionAction.All) list.SelectAll();
+        else if (action == SelectionAction.Clear) list.UnselectAll();
+        else
+        {
+            var selected = list.SelectedItems!.Cast<object>().ToHashSet(); list.UnselectAll();
+            foreach (var item in list.Items) if (item != null && !selected.Contains(item)) list.SelectedItems!.Add(item);
+        }
+        return Task.CompletedTask;
+    }
+
+    private async void HandleCommandKey(object? sender, KeyEventArgs e)
+    {
+        if (e.Handled) return;
+        if (e.Key == Key.Escape && _busy) { _operation?.Cancel(); e.Handled = true; return; }
+        if (_busy || e.Source is TextBox) return;
+        Func<Task>? action = e.Key switch
+        {
+            Key.F6 when e.KeyModifiers == KeyModifiers.None => () => { SetActivePane(Other); _active.List.Focus(); return Task.CompletedTask; },
+            Key.F5 when e.KeyModifiers == KeyModifiers.None => CopyActiveAsync,
+            Key.F5 when e.KeyModifiers == KeyModifiers.Shift => () => MovePromptAsync(_active, Other),
+            Key.F7 when e.KeyModifiers == KeyModifiers.None => NewDirectoryPromptAsync,
+            Key.F2 when e.KeyModifiers == KeyModifiers.None => RenamePromptAsync,
+            Key.Delete when e.KeyModifiers == KeyModifiers.None => DeletePromptAsync,
+            Key.Up when e.KeyModifiers == KeyModifiers.Alt && _parent.IsEnabled => ParentAsync,
+            Key.R when e.KeyModifiers == KeyModifiers.Control && _refresh.IsEnabled => RefreshAsync,
+            Key.A when e.KeyModifiers == KeyModifiers.Control => () => SelectAsync(SelectionAction.All),
+            _ => null
+        };
+        if (action == null) return; e.Handled = true; await action();
+    }
 }

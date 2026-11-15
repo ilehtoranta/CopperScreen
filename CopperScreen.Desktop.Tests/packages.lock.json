@@ -214,8 +214,8 @@
       },
       "CopperStart.FileSystem.Service": {
         "type": "Transitive",
-        "resolved": "0.2.0-dev.2",
-        "contentHash": "enC4WsTXTObUdWXxZg9zPhhzGiLbWbHEFyHoV5glMxBAVyoMQPMYUUaI7V1z5xU4729qPMJSGxdTlJdcI36twQ==",
+        "resolved": "0.4.0-dev.4",
+        "contentHash": "kf31wn0XfPC+tAZTD1GTo73v3Bi3HYafKgLIpLr/zt4ayfwzCN8886QSRE1n3Fp2hvN+5PoM8oeu44VJ3EeE3w==",
         "dependencies": {
           "Copper68k": "[1.5.4]"
         }
@@ -389,7 +389,7 @@
           "CopperPad": "[2.0.0-preview.2, )",
           "CopperPad.HidSharp": "[2.0.0-preview.2, )",
           "CopperScreen.FileSystems": "[1.0.0, )",
-          "CopperStart.FileSystem.Service": "[0.2.0-dev.2, 0.2.0-dev.2]",
+          "CopperStart.FileSystem.Service": "[0.4.0-dev.4, 0.4.0-dev.4]",
           "HotPathGuard.Abstractions": "[0.1.0, )",
           "Miniaudio-CS": "[1.0.4, )"
         }

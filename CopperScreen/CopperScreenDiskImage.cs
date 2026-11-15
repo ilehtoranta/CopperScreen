@@ -10,7 +10,7 @@ internal sealed partial class CopperScreenDiskImage : IDisposable
 {
     private AmigaSectorImage _image;
     private readonly string _path;
-    private DiskImageVolume? _selected;
+    private int _references = 1;
     internal IReadOnlyList<DiskImageVolume> Volumes { get; private set; }
     private CopperScreenDiskImage(AmigaSectorImage image, string path)
     {
@@ -20,14 +20,28 @@ internal sealed partial class CopperScreenDiskImage : IDisposable
     }
     internal static CopperScreenDiskImage Open(string path) => new(AmigaSectorImage.Open(path), Path.GetFullPath(path));
     internal bool IsReadOnly => (File.GetAttributes(_path) & FileAttributes.ReadOnly) != 0;
-    internal void Select(DiskImageVolume volume)
+    internal string FilePath => _path;
+    // Each pane owns one reference. Volumes keep separate guest sessions, while
+    // the physical image has one protected storage handle and publication owner.
+    internal CopperScreenDiskImage Retain()
     {
-        if (ReferenceEquals(_selected, volume)) return;
-        _selected?.Close(); _selected = volume;
+        ObjectDisposedException.ThrowIf(_references == 0, this);
+        _references = checked(_references + 1);
+        return this;
+    }
+    internal void RequireCurrent(DiskImageVolume volume)
+    {
+        ObjectDisposedException.ThrowIf(_references == 0, this);
+        if (!Volumes.Contains(volume)) throw new InvalidOperationException("Reselect the volume after the image changed.");
+    }
+    private void CloseVolumes()
+    {
+        foreach (var volume in Volumes) volume.Close();
     }
     public void Dispose()
     {
-        try { _selected?.Close(); }
+        if (_references == 0 || --_references != 0) return;
+        try { CloseVolumes(); }
         finally { _image.Dispose(); }
     }
 }
@@ -62,7 +76,7 @@ internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVol
     internal bool IsMounted => _session != null && !_session.IsFaulted;
     internal string? ImportUnavailableReason => !IsMounted ? "Select a mounted volume first." :
         owner.IsReadOnly ? "The image file is read-only." :
-        (_detectedType is 0x444F5300 or 0x444F5301 or 0x53465300 or 0x53465302 ? null : "Import supports DOS0/DOS1, SFS and SFS2. This volume remains browse-only.");
+        (_detectedType is >= 0x444F5300 and <= 0x444F5305 or 0x53465300 or 0x53465302 ? null : "Import supports DOS0–DOS5, SFS and SFS2.");
     internal DiskImageEntry Root { get { if (_root == null) Mount(); return _root!; } }
     internal string DisplayName => _root?.Name ?? DeviceName;
     internal string FileSystemName => (_detectedType ?? range.DosType) switch
@@ -74,7 +88,7 @@ internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVol
 
     internal void Mount(CancellationToken cancellationToken = default)
     {
-        owner.Select(this);
+        owner.RequireCurrent(this);
         if (_session is { IsFaulted: false }) return;
         Close(); _mountError = null;
         if (UnsupportedReason is { } unavailable) throw new NotSupportedException(unavailable);
@@ -127,6 +141,11 @@ internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVol
             }
         }
         finally { ArrayPool<byte>.Shared.Return(buffer); }
+    }
+    internal Stream OpenRead(DiskImageEntry file, CancellationToken cancellationToken)
+    {
+        Check(file);
+        return _session!.OpenRead(file.Native, cancellationToken: cancellationToken);
     }
     private void Check(DiskImageEntry entry)
     {

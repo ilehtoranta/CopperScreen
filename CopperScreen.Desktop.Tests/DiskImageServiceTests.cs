@@ -49,7 +49,7 @@ public sealed class DiskImageServiceTests : IDisposable
 
     [Theory]
     [InlineData(false)] [InlineData(true)]
-    public void SelectingRdbPartitionsReleasesThePreviousCpuAndRemountsOnDemand(bool sfs2)
+    public void RdbPartitionSessionsRemainIndependentUntilExplicitlyClosed(bool sfs2)
     {
         var fixture = ServiceImageFixture.Smart(sfs2); var bytes = MixedRdb(sfs2, fixture); var path = Save(bytes);
         using (var image = CopperScreenDiskImage.Open(path))
@@ -57,11 +57,13 @@ public sealed class DiskImageServiceTests : IDisposable
             Assert.All(image.Volumes, v => Assert.False(v.IsMounted));
             var ffs = image.Volumes[0]; var smart = image.Volumes[1];
             var oldRoot = ffs.Root; Assert.True(ffs.IsMounted); Assert.False(smart.IsMounted);
-            Assert.Equal("Fixture", smart.Root.Name); Assert.False(ffs.IsMounted);
+            Assert.Equal("Fixture", smart.Root.Name); Assert.True(ffs.IsMounted);
             var docs = smart.ReadDirectory(smart.Root).Single(e => e.Name == "Docs");
             using var output = new MemoryStream(); smart.CopyFileTo(smart.ReadDirectory(docs).Single(e => e.Name == "Payload"), output);
             Assert.Equal(fixture.Expected, output.ToArray());
-            Assert.Equal("Fixture", ffs.Root.Name); Assert.False(smart.IsMounted);
+            Assert.Equal(3, ffs.ReadDirectory(oldRoot).Count);
+            ffs.Close(); Assert.True(smart.IsMounted);
+            Assert.Equal("Fixture", ffs.Root.Name); Assert.True(smart.IsMounted);
             Assert.Throws<ArgumentException>(() => ffs.ReadDirectory(oldRoot));
             Assert.Equal(3, ffs.ReadDirectory(ffs.Root).Count);
         }

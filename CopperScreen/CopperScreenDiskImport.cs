@@ -23,6 +23,34 @@ internal sealed partial class CopperScreenDiskImage
                 Directory.Exists(full) && _path.StartsWith(full + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
                 throw new IOException("The host selection must not contain the destination image itself.");
         }
+        return Mutate(volume, directory, (session, parent, ct) =>
+        {
+            var result = new DiskExtractionProgress();
+            var roots = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var source in sources)
+            {
+                ct.ThrowIfCancellationRequested();
+                var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(source));
+                if (!roots.Add(name)) throw new IOException("Selected host names collide in the image.");
+                ImportTree(session, parent, Path.GetFullPath(source), ref result, progress, ct);
+            }
+            return result;
+        }, cancellationToken);
+    }
+
+    private DiskExtractionProgress Mutate(DiskImageVolume volume, DiskImageEntry directory,
+        Func<FileSystemSession, FileSystemEntry, CancellationToken, DiskExtractionProgress> action, CancellationToken cancellationToken,
+        DiskImageVolume? secondVolume = null, Action<FileSystemSession, CancellationToken>? secondAction = null)
+    {
+        if (!ReferenceEquals(volume.Owner, this) || !ReferenceEquals(directory.Volume, volume) || !directory.IsDirectory)
+            throw new ArgumentException("Choose a directory in this image.");
+        if (volume.ImportUnavailableReason is { } reason) throw new NotSupportedException(reason);
+        if (secondVolume != null)
+        {
+            RequireCurrent(secondVolume);
+            if (secondVolume.ImportUnavailableReason is { } secondReason) throw new NotSupportedException(secondReason);
+        }
+        RequireOrdinarySource(_path);
         var stage = Path.Combine(Path.GetDirectoryName(_path)!, ".copperscreen-import-" + Guid.NewGuid().ToString("N"));
         // Both publication and cleanup are confined to this generated sibling.
         if (Path.GetDirectoryName(Path.GetFullPath(stage)) != Path.GetDirectoryName(_path)) throw new IOException("Invalid import staging path.");
@@ -34,28 +62,28 @@ internal sealed partial class CopperScreenDiskImage
             {
                 _image.CopyTo(disk, cancellationToken);
                 disk.Position = 0; var originalHash = Hash(disk, cancellationToken);
-                volume.Close();
+                // Readers continue to use the protected original, including a
+                // source directory/partition in this same image. Only the clone is written.
                 var reserved = range.DosType == null && volume.FileSystemName.StartsWith("SFS", StringComparison.Ordinal) ? 1u : range.ReservedBlocks;
                 var geometry = new FileSystemGeometry(checked((uint)(range.Length / range.BlockSize)), range.BlockSize, reserved);
                 using (var session = new FileSystemSession(new ImportSource(disk, range), geometry,
                     new FileSystemServiceOptions { AllowWrites = true }, cancellationToken))
                 {
                     var parent = ResolveDirectory(session, targetPath, cancellationToken);
-                    var roots = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                    foreach (var source in sources)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(source));
-                        if (!roots.Add(name)) throw new IOException("Selected host names collide in the image.");
-                        ImportTree(session, parent, Path.GetFullPath(source), ref result, progress, cancellationToken);
-                    }
+                    result = action(session, parent, cancellationToken);
+                }
+                if (secondVolume != null)
+                {
+                    using (var session = StageSession(disk, secondVolume, true, cancellationToken)) secondAction!(session, cancellationToken);
+                    using var checkSource = StageSession(disk, secondVolume, false, cancellationToken);
+                    _ = checkSource.EnumerateDirectory(checkSource.Root, cancellationToken).ToArray();
                 }
                 // A fresh guest mount checks that the completed writer left a clean, browsable volume.
                 using (var check = new FileSystemSession(new ImportSource(disk, range), geometry, cancellationToken: cancellationToken))
                     _ = check.EnumerateDirectory(ResolveDirectory(check, targetPath, cancellationToken), cancellationToken).ToArray();
                 disk.Flush(true);
                 cancellationToken.ThrowIfCancellationRequested();
-                _selected = null; _image.Dispose();
+                CloseVolumes(); _image.Dispose();
                 try
                 {
                     // Reacquire exclusive writer ownership and verify the protected snapshot before replacement.
@@ -75,6 +103,14 @@ internal sealed partial class CopperScreenDiskImage
             return result;
         }
         finally { if (File.Exists(stage)) File.Delete(stage); }
+    }
+
+    private static FileSystemSession StageSession(FileStream disk, DiskImageVolume volume, bool writable, CancellationToken ct)
+    {
+        var range = volume.Range;
+        var reserved = range.DosType == null && volume.FileSystemName.StartsWith("SFS", StringComparison.Ordinal) ? 1u : range.ReservedBlocks;
+        var geometry = new FileSystemGeometry(checked((uint)(range.Length / range.BlockSize)), range.BlockSize, reserved);
+        return new FileSystemSession(new ImportSource(disk, range), geometry, new FileSystemServiceOptions { AllowWrites = writable }, ct);
     }
 
     private static byte[] Hash(Stream stream, CancellationToken token)
@@ -129,7 +165,7 @@ internal sealed partial class CopperScreenDiskImage
     {
         if (date >= new DateTime(1978, 1, 1) && date < new DateTime(2114, 2, 7)) session.SetModified(entry, date, token);
     }
-    private static void RequireOrdinarySource(string path)
+    internal static void RequireOrdinarySource(string path)
     {
         for (FileSystemInfo? item = Directory.Exists(path) ? new DirectoryInfo(path) : new FileInfo(path); item != null;
             item = item is DirectoryInfo dir ? dir.Parent : ((FileInfo)item).Directory)

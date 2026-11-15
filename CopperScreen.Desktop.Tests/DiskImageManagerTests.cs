@@ -2,10 +2,12 @@ using System.Reflection;
 using Avalonia;
 using Avalonia.Automation;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Headless;
 using Avalonia.Input;
 using Avalonia.LogicalTree;
 using Avalonia.Media.Imaging;
+using Avalonia.VisualTree;
 using CopperDisk;
 using CopperDisk.Tests;
 using CopperScreen;
@@ -13,7 +15,7 @@ using CopperScreen;
 namespace CopperScreen.Tests;
 
 [Collection("Desktop UI")]
-public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
+public sealed partial class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
 {
     private readonly string _root = Path.Combine(Path.GetTempPath(), "copperscreen-manager-" + Guid.NewGuid().ToString("N"));
     public void Dispose() { if (Directory.Exists(_root)) Directory.Delete(_root, true); }
@@ -111,6 +113,11 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
     private static T Named<T>(Window window, string name) where T : Control => window.GetLogicalDescendants()
         .OfType<T>().Single(c => AutomationProperties.GetName(c) == name);
     private static Button Command(Window window, string label) => window.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is string s && s == label);
+    private static Button CopyButton(Window window, bool hostSource = false)
+    {
+        Named<ListBox>(window, hostSource ? "Host files" : "Image files").Focus();
+        return Named<Button>(window, "Copy active selection");
+    }
     private static bool Busy(DiskImageManagerWindow window) => (bool)typeof(DiskImageManagerWindow).GetField("_busy", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(window)!;
     private static async Task Idle(DiskImageManagerWindow window)
     {
@@ -120,7 +127,7 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
     private async Task UiAsync(Func<Task> action) => await ui.Session.Dispatch(async () => { await action(); return true; }, CancellationToken.None);
 
     [Theory]
-    [InlineData(1060, 720, 1.0)] [InlineData(760, 620, 1.0)] [InlineData(1060, 720, 2.0)]
+    [InlineData(1060, 720, 1.0)] [InlineData(760, 620, 1.0)] [InlineData(1060, 720, 2.0)] [InlineData(760, 620, 2.0)]
     public Task TwoPaneWindowBrowsesNavigatesAndCopiesSelectedDirectory(int width, int height, double scale) => UiAsync(async () =>
     {
         var f = new AmigaFileSystemFixture(); var path = Save(f); var host = Destination();
@@ -131,12 +138,12 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
             var files = Named<ListBox>(window, "Image files");
             Assert.Equal(3, files.ItemCount);
             files.SelectedIndex = 0;
-            Assert.True(Command(window, "← Copy selected to host").IsEnabled);
+            Assert.True(CopyButton(window).IsEnabled);
             files.RaiseEvent(new KeyEventArgs { RoutedEvent = InputElement.KeyDownEvent, Key = Key.Enter });
             await Idle(window);
             Assert.Equal(2, files.ItemCount);
-            Assert.False(Command(window, "← Copy selected to host").IsEnabled);
-            Command(window, "Parent directory").RaiseEvent(new Avalonia.Interactivity.RoutedEventArgs(Button.ClickEvent));
+            Assert.False(CopyButton(window).IsEnabled);
+            Command(window, "Parent").RaiseEvent(new Avalonia.Interactivity.RoutedEventArgs(Button.ClickEvent));
             await Idle(window); Assert.Equal(3, files.ItemCount); files.SelectedIndex = 0;
             await window.CopySelectedAsync();
             Assert.True(File.Exists(Path.Combine(host, "Tools", "Nested.bin")));
@@ -146,10 +153,13 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
             foreach (var list in new[] { files, Named<ListBox>(window, "Host files") })
             {
                 var origin = list.TranslatePoint(default, window)!.Value;
-                Assert.True(list.Bounds.Width > 200 && list.Bounds.Height > 100, $"List bounds at {width}×{height}: {list.Bounds}");
+                Assert.True(list.Bounds.Width > 200 && list.Bounds.Height >= window.ClientSize.Height * .75, $"List bounds at {width}×{height}: {list.Bounds}");
+                if (height == 720) Assert.True(list.Bounds.Height >= window.ClientSize.Height * .8);
                 Assert.InRange(origin.X, 0, window.ClientSize.Width - list.Bounds.Width + 1);
                 Assert.InRange(origin.Y, 0, window.ClientSize.Height - list.Bounds.Height + 1);
             }
+            Assert.Equal(files.Bounds.Height, Named<ListBox>(window, "Host files").Bounds.Height);
+            Assert.Equal(files.TranslatePoint(default, window)!.Value.Y, Named<ListBox>(window, "Host files").TranslatePoint(default, window)!.Value.Y);
             if (Environment.GetEnvironmentVariable("COPPERSCREEN_MANAGER_CAPTURE") is { } directory)
             {
                 Directory.CreateDirectory(directory);
@@ -169,7 +179,7 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
         {
             await Idle(window); await window.OpenImageAsync(path);
             Assert.Contains("OFS/FFS", Named<TextBlock>(window, "Disk manager status").Text);
-            Assert.False(Command(window, "← Copy selected to host").IsEnabled);
+            Assert.False(CopyButton(window).IsEnabled);
             Assert.Equal(0, Named<ListBox>(window, "Image files").ItemCount);
         }
         finally { window.Close(); }
@@ -202,9 +212,9 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
             await Idle(window); await window.NavigateHostAsync(host); await window.OpenImageAsync(path);
             var files = Named<ListBox>(window, "Image files");
             files.SelectedItems!.Add(files.Items[1]); files.SelectedItems.Add(files.Items[2]);
-            Assert.True(Command(window, "← Copy selected to host").IsEnabled);
+            Assert.True(CopyButton(window).IsEnabled);
             var hostPath = Named<TextBox>(window, "Host folder path"); hostPath.Text = Path.Combine(host, "not-applied");
-            Assert.False(Command(window, "← Copy selected to host").IsEnabled);
+            Assert.False(CopyButton(window).IsEnabled);
             hostPath.Text = host;
             await window.CopySelectedAsync();
             Assert.Equal(f.Content, File.ReadAllBytes(Path.Combine(host, "ReadMe")));
@@ -239,7 +249,11 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
             Assert.Equal(2, files.ItemCount);
             // Normal SFS files expose their comment and protection metadata.
             files.SelectedIndex = 1;
-            Assert.Contains("Comment", window.GetLogicalDescendants().OfType<TextBlock>().Single(t => t.Text?.Contains("Protection:") == true).Text);
+            files.Focus();
+            Command(window, "Info").RaiseEvent(new Avalonia.Interactivity.RoutedEventArgs(Button.ClickEvent));
+            var flyout = Assert.IsType<Flyout>(FlyoutBase.GetAttachedFlyout(Command(window, "Info")));
+            Assert.Contains("Comment", Assert.IsType<ScrollViewer>(flyout.Content).GetLogicalDescendants().OfType<TextBlock>().Single(t => t.Text?.Contains("Protection:") == true).Text);
+            flyout.Hide();
             if (Environment.GetEnvironmentVariable("COPPERSCREEN_MANAGER_CAPTURE") is { } directory)
             {
                 Directory.CreateDirectory(directory); window.UpdateLayout(); await Task.Delay(60);
@@ -266,7 +280,7 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
         {
             await Idle(window); await window.OpenImageAsync(path);
             Assert.Contains("recovery", Named<TextBlock>(window, "Disk manager status").Text);
-            Assert.False(Command(window, "← Copy selected to host").IsEnabled);
+            Assert.False(CopyButton(window).IsEnabled);
             Assert.Equal(0, Named<ListBox>(window, "Image files").ItemCount);
         }
         finally { window.Close(); }
@@ -316,7 +330,7 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
         {
             await Idle(window); await window.NavigateHostAsync(host); await window.OpenImageAsync(path);
             var source = Named<ListBox>(window, "Host files"); source.SelectedIndex = 0;
-            var import = Command(window, "Copy host selection to image →"); Assert.True(import.IsEnabled);
+            var import = CopyButton(window, true); Assert.True(import.IsEnabled);
             await window.CopyHostSelectedAsync(); Assert.Contains("Image saved", Named<TextBlock>(window, "Disk manager status").Text);
             var files = Named<ListBox>(window, "Image files"); Assert.Equal(1, files.ItemCount);
             files.SelectedIndex = 0; files.RaiseEvent(new KeyEventArgs { RoutedEvent = InputElement.KeyDownEvent, Key = Key.Enter }); await Idle(window);
@@ -338,20 +352,35 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
         Assert.Equal(bytes, output.ToArray()); Assert.Equal(bytes, File.ReadAllBytes(Path.Combine(host, "Folder", "Payload")));
     });
 
-    [Fact]
-    public Task InternationalVariantsRemainBrowseOnlyAndCannotImport() => UiAsync(async () =>
+    [Theory]
+    [InlineData(2)] [InlineData(3)] [InlineData(4)] [InlineData(5)]
+    public Task InternationalVariantsImportAndRefreshTheirImageDirectory(int dos) => UiAsync(async () =>
     {
-        var path = Save(new CopperDisk.Tests.AmigaFileSystemFixture(3)); var host = Destination();
-        File.WriteAllBytes(Path.Combine(host, "Source"), [1]);
+        Directory.CreateDirectory(_root); var path = Path.Combine(_root, "International.adf");
+        using (var disk = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
+        {
+            disk.SetLength(901120);
+            CopperScreenFileSystemFormatter.Format(disk, 0, disk.Length, CopperScreenHardDiskSetup.FileSystem.Ffs, "International", default);
+        }
+        DiskImageImportTests.SetClassicVariant(path, dos); var host = Destination();
+        Directory.CreateDirectory(Path.Combine(host, "été", "Empty")); File.WriteAllBytes(Path.Combine(host, "été", "café"), [1, 3, 5]);
         var window = new DiskImageManagerWindow(); window.Show();
         try
         {
             await Idle(window); await window.NavigateHostAsync(host); await window.OpenImageAsync(path);
             Named<ListBox>(window, "Host files").SelectedIndex = 0;
-            Assert.False(Command(window, "Copy host selection to image →").IsEnabled);
-            Assert.Contains("browse-only", Named<TextBlock>(window, "Disk manager status").Text);
-            var files = Named<ListBox>(window, "Image files"); files.SelectedIndex = 2;
-            Assert.True(Command(window, "← Copy selected to host").IsEnabled);
+            Assert.True(CopyButton(window, true).IsEnabled);
+            await window.CopyHostSelectedAsync(); Assert.Contains("Image saved", Named<TextBlock>(window, "Disk manager status").Text);
+            var files = Named<ListBox>(window, "Image files"); Assert.Equal(1, files.ItemCount); files.SelectedIndex = 0;
+            Assert.True(CopyButton(window).IsEnabled);
+            files.RaiseEvent(new KeyEventArgs { RoutedEvent = InputElement.KeyDownEvent, Key = Key.Enter }); await Idle(window);
+            Assert.Equal(2, files.ItemCount);
+            if (Environment.GetEnvironmentVariable("COPPERSCREEN_MANAGER_CAPTURE") is { } directory)
+            {
+                Directory.CreateDirectory(directory); window.UpdateLayout(); await Task.Delay(60);
+                using var bitmap = new RenderTargetBitmap(new PixelSize(1060, 720), new Vector(96, 96));
+                bitmap.Render(window); bitmap.Save(Path.Combine(directory, $"manager-dos{dos}.png"));
+            }
         }
         finally { window.Close(); }
     });
@@ -376,7 +405,7 @@ public sealed class DiskImageManagerTests(LaunchUiFixture ui) : IDisposable
             Assert.Contains("Reselect", Named<TextBlock>(window, "Disk manager status").Text); Assert.Equal(before, File.ReadAllBytes(path));
             Assert.DoesNotContain(Directory.GetFiles(_root), p => Path.GetFileName(p).StartsWith(".copperscreen-import-"));
             Named<ComboBox>(window, "Image volumes").SelectedIndex = 0; await Idle(window);
-            Assert.True(Command(window, "Copy host selection to image →").IsEnabled);
+            Assert.True(CopyButton(window, true).IsEnabled);
             await window.CopyHostSelectedAsync(); Assert.Contains("Image saved", Named<TextBlock>(window, "Disk manager status").Text);
         }
         finally { window.Close(); }

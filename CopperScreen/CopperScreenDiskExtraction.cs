@@ -5,6 +5,65 @@ internal readonly record struct DiskExtractionProgress(int Files, long Bytes, st
 // Host destination policy belongs to the desktop tool, not the emulated hardware.
 internal static class CopperScreenDiskExtraction
 {
+    internal static DiskExtractionProgress CopyHost(IReadOnlyList<string> entries, string destination,
+        IProgress<DiskExtractionProgress>? progress, CancellationToken token)
+    {
+        destination = Path.TrimEndingDirectorySeparator(Path.GetFullPath(destination));
+        RequireOrdinaryDirectory(destination);
+        if (entries.Count == 0) throw new ArgumentException("Select files or directories to copy.");
+        var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var source in entries)
+        {
+            CopperScreenDiskImage.RequireOrdinarySource(source);
+            var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(source)); ValidateName(name);
+            if (!names.Add(name)) throw new IOException("Selected host names collide.");
+            RequireAbsent(Path.Combine(destination, name));
+            if (Directory.Exists(source) && (destination.Equals(source, StringComparison.OrdinalIgnoreCase) ||
+                destination.StartsWith(Path.TrimEndingDirectorySeparator(source) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)))
+                throw new IOException("A directory cannot be copied into itself or its descendants.");
+        }
+        var stage = Path.GetFullPath(Path.Combine(destination, ".copperscreen-extract-" + Guid.NewGuid().ToString("N")));
+        if (Path.GetDirectoryName(stage) != destination) throw new IOException("Invalid staging path.");
+        Directory.CreateDirectory(stage);
+        try
+        {
+            var result = new DiskExtractionProgress(); var buffer = new byte[65536];
+            var pending = new Stack<(string Source, string Parent, bool Finish)>();
+            foreach (var source in entries.Reverse()) pending.Push((source, stage, false));
+            while (pending.TryPop(out var item))
+            {
+                token.ThrowIfCancellationRequested(); CopperScreenDiskImage.RequireOrdinarySource(item.Source);
+                var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(item.Source)); ValidateName(name);
+                var target = Path.Combine(item.Parent, name);
+                if (item.Finish) { Directory.SetLastWriteTime(target, Directory.GetLastWriteTime(item.Source)); continue; }
+                RequireAbsent(target);
+                if (Directory.Exists(item.Source))
+                {
+                    Directory.CreateDirectory(target); pending.Push((item.Source, item.Parent, true));
+                    foreach (var child in Directory.EnumerateFileSystemEntries(item.Source)) pending.Push((child, target, false));
+                }
+                else
+                {
+                    using var input = new FileStream(item.Source, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    using var output = new FileStream(target, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    int read; long bytes = 0;
+                    while ((read = input.Read(buffer)) != 0) { token.ThrowIfCancellationRequested(); output.Write(buffer, 0, read); bytes += read; }
+                    output.Dispose(); File.SetLastWriteTime(target, File.GetLastWriteTime(item.Source));
+                    result = new(result.Files + 1, result.Bytes + bytes, name); progress?.Report(result);
+                }
+            }
+            token.ThrowIfCancellationRequested(); RequireOrdinaryDirectory(destination);
+            foreach (var source in entries) RequireAbsent(Path.Combine(destination, Path.GetFileName(Path.TrimEndingDirectorySeparator(source))));
+            foreach (var source in entries)
+            {
+                var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(source)); var target = Path.Combine(destination, name);
+                if (Directory.Exists(source)) Directory.Move(Path.Combine(stage, name), target); else File.Move(Path.Combine(stage, name), target);
+            }
+            return result;
+        }
+        finally { Directory.Delete(stage, true); }
+    }
+
     internal static DiskExtractionProgress Extract(DiskImageVolume volume,
         IReadOnlyList<DiskImageEntry> entries, string destination,
         IProgress<DiskExtractionProgress>? progress = null, CancellationToken cancellationToken = default)

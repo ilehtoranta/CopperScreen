@@ -4,15 +4,127 @@ Open **Disk Image Manager…** from the launcher or the **More** menu. Stop the
 Amiga first. Save any unsaved floppy changes separately: the tool reads the saved
 image on the host.
 
-The left pane is the host folder. Choose a folder, enter a path and choose
-**Go**, or double-click a directory to enter it. The right pane is the disk image:
+Both panes can browse a **Host** folder or an **Image**. Choose the type in the
+pane header and use **…** to choose its location. Each image has its own volume
+selector. The highlighted pane is the source. **Copy →** or **← Copy** copies its
+selection into the other pane's current directory. Clicking a centre command
+retains the source pane. **Open image…** opens an image in the active pane.
 
-1. Choose **Open ADF/HDF…** and select an existing sector image.
+1. Activate a pane, choose **Open image…** and select an existing sector image.
 2. For an RDB hard disk, select a volume in **Image volumes**.
-3. Double-click directories or press Enter to browse; **Parent directory** goes up.
-4. Select one or more entries (Ctrl/Shift selection is supported), then choose
-   **← Copy selected to host**. Directories include their entire tree, including
+3. Double-click directories or press Enter to browse; **Parent** goes up in the
+   active pane. Choose **…** in the host header to pick a folder, or enter a path
+   in its bottom address bar and press Enter.
+4. Choose a location in the other pane, select source entries, then choose **Copy**. Directories include their entire tree, including
    empty directories and ordinary `.info` files.
+
+Click selects one entry, Ctrl toggles and Shift selects a range. **All**, **Invert**
+and **Clear** change the active selection. Click **Name** or **Size** to sort;
+directories stay first and sizes are bytes. **Info** shows the selected entry's
+metadata; **Help** explains operation limits and shortcuts. Full paths and status
+messages are available in tooltips. Selected file bytes exclude directory contents.
+
+| Shortcut | Action |
+| --- | --- |
+| F6 | Switch active pane |
+| F5 | Copy active selection |
+| Shift+F5 | Move active selection, with confirmation |
+| F7 | New directory in the active image |
+| F2 | Rename the selected image entry |
+| Delete | Delete selected image entries, with confirmation |
+| Alt+Up | Parent directory |
+| Ctrl+R | Refresh active listing |
+| Ctrl+A | Select all entries |
+| Escape | Cancel a running operation |
+
+Commands do not intercept address-bar editing. While busy, **Cancel** replaces
+Copy and conflicting controls are disabled.
+
+## Image-to-image copying and image edits
+
+ADF ↔ ADF, ADF ↔ HDF, HDF ↔ HDF, host ↔ image and host ↔ host are supported.
+The two images may use different supported filesystems and block sizes. Image
+copies stream directly between independent guest sessions; files do not pass
+through a temporary host directory. This preserves Amiga names such as `CON`
+that Windows cannot represent. Dates, comments and protection bits are preserved
+within destination-format limits. An unrepresentable name or metadata value
+aborts the whole selection; nothing is silently truncated.
+
+The same ADF/HDF can be opened in both panes to copy between directories or RDB
+partitions. Volume choices, paths and selections are independent. Both views share
+one protected image handle; copying reads the unchanged original while writing an
+unpublished clone. A successful save refreshes both panes and preserves their
+volume, path and surviving selections. Renaming a directory updates an open view
+below it; deleting it returns that view to its nearest surviving ancestor.
+
+Copying into the same directory, or copying a directory into itself or its
+descendants, is refused. Existing destination entries are never overwritten or
+merged. Closing or changing one pane leaves the other image view usable.
+
+**New dir**, **Rename** and **Delete** operate on the active image. Rename acts
+on one selected entry, including case-only renames. Delete asks for confirmation
+and removes selected directory trees, including empty directories. Guest
+protection flags are respected. Links cannot be renamed, deleted or followed.
+These three commands are disabled for host folders and read-only images.
+
+**Move →** / **← Move** transfers the active selection and removes the source.
+The confirmation names both locations; Cancel leaves them unchanged. Move works
+with host folders, separate images, directories in one image and different RDB
+partitions in one image. Read-only images can be copy sources but cannot be move
+sources. Same-directory, self/descendant and destination-conflict guards apply.
+
+Same-volume OFS/FFS, classic SFS and SFS2 moves use guest rename. File contents
+are neither copied nor removed, and no room for a second copy is needed inside
+the volume. Normal filesystem metadata-space requirements still apply. Image
+saves retain the unpublished host clone, clean remount and atomic replacement;
+host staging space is still required. No guest fault is retried or saved.
+Moves between partitions in one image copy then remove the
+source in the same clone; failure or cancellation leaves the whole image unchanged.
+
+Separate images and host locations cannot be saved as one transaction. The
+destination copy completes first; source removal begins only after that succeeds.
+If removal fails or is cancelled, the destination is retained and the status
+reports the incomplete move. Image source deletion is staged as a whole; host
+source deletion can finish partially. Host trees are checked against a pre-copy
+snapshot (including file hashes); read handles protect existing source files
+during the copy. Windows removal verifies each file through the same handle it
+marks for deletion. Links and read-only entries are refused, and only examined
+files and empty directories are removed. Check remaining source
+entries before retrying; existing destinations are never replaced automatically.
+
+**Protect** opens a confirmation editor for selected image entries. Readable,
+Writable, Executable and Deletable are permissions (the underlying RWED bits are
+inverted); Archive, Pure, Script and Hold set the remaining Amiga flags. Mixed
+checkboxes leave that flag unchanged. Apply preserves other protection bits and
+changes selected entries only, with no implicit recursion. Cancel saves nothing.
+The edit uses the same staged save and respects guest errors.
+
+Drag selected entries onto the other pane's file list to copy to its current
+directory. Hold Shift while dropping to request a confirmed move. Dropping on a
+directory row still uses the pane's **current** directory. Native host file/folder
+drops into either pane copy only, even with Shift; CopperScreen never asks the
+external drag source to delete them. Busy, read-only destination, unavailable
+volume, stale selection and unsafe same-directory drops are refused. Image entries
+are internal drags, not Windows virtual files; dragging them out to another app
+is not supported. Use a Host pane to extract them.
+
+Every image edit uses the same unpublished whole-image clone, clean guest remount,
+hash check and atomic replacement as imports. A failed or cancelled edit leaves
+the original unchanged. After saving, the pane reopens its previous volume and
+directory. There is no separate Save command or persistent backup.
+
+The reference DiskMaster/FileMaster commands suggest these further additions:
+
+| Command | Possible next addition |
+| --- | --- |
+| Copy As | Prompt for a destination name, using the existing staged transfer |
+| Comment | Edit the comment already displayed by Info; the guest API supports it |
+| Read / Show Asc / Show Hex | Bounded, read-only text and hex viewers using guest streams |
+| DiskInfo / DiskSize | Volume information; free/used space needs a guest query rather than a host filesystem parser |
+| Find file | Cancellable directory search through guest enumeration |
+
+Media playback, executable launching and raw disk/file editing are separate
+features, beyond the filesystem manager operations implemented here.
 
 Browsing opens images read-only with a handle that excludes concurrent writers. The
 modal manager prevents another machine start through its owner while it is open.
@@ -34,7 +146,7 @@ Unsupported or damaged volumes show an explanation. Custom game filesystems,
 encoded/extended ADF, compressed/archive images, PFS and DOS6/DOS7 long-name FFS
 are unavailable. Links are displayed as metadata, but cannot be traversed or
 selected for copying. A link inside a copied directory stops extraction before its
-staged roots are published. This is a reader, not a repair or recovery tool.
+staged roots are published. The manager does not repair or recover filesystems.
 
 The packaged CopperFS cores perform filesystem detection, traversal, metadata
 validation and file reading in the guest. In particular, OFS reading follows the
@@ -44,17 +156,19 @@ ambiguous duplicate directory rows and unsafe host destinations.
 
 ## Host-to-image copying
 
-Select host files or directories in the left pane, browse to the destination
-**directory** in the right pane, then choose **Copy host selection to image →**.
+Select files or directories in a **Host** pane, browse to the destination
+**directory** in an **Image** pane, activate the host pane, then choose **Copy**
+toward the image.
 The current image directory is the destination; selecting a file does not change
 it. Multiple host selections and entire directory trees, including empty
 folders and `.info` files, are supported. Imports preserve representable local
 modification dates, with the filesystem's timestamp precision. Host permissions,
 links, comments and extended metadata are not mapped.
 
-Import supports **DOS0/DOS1, SFS and SFS2** through CopperFS's maintained native
-writers. DOS2–DOS5 remain browse/extract-only. The button is disabled for these
-volumes and for an image whose host file has the read-only attribute. Dirty Smart
+Import supports **DOS0–DOS5, SFS and SFS2** through CopperFS's maintained native
+writers. DOS2–DOS5 use international Latin-1 hashing; DOS4/DOS5 also maintain
+directory caches. Imports and image edits are disabled when the destination image
+file is read-only; such images can still be copy sources. Dirty Smart
 volumes are refused at mount. Existing image entries are never overwritten or
 merged; a conflict aborts the whole selection. Latin-1 names must fit the writer:
 30 characters for OFS/FFS, 100 for classic SFS and 107 for SFS2. Names are never
@@ -99,7 +213,7 @@ can be retried by reopening the image after repairing it elsewhere.
 
 File contents, directory structure and representable local modification dates are
 exported. Amiga protection bits and comments can be inspected by selecting one
-entry; they are not mapped to host permissions or exported as sidecar files.
+entry and choosing **Info**; they are not mapped to host permissions or exported as sidecar files.
 No timezone is inferred from Amiga dates. `.info` icons are ordinary files.
 
 ## Implementation
@@ -123,19 +237,19 @@ in `CopperScreenDiskExtraction`.
 
 ## Development package
 
-The app references `CopperStart.FileSystem.Service` **[0.2.0-dev.2]** through NuGet.
+The app references `CopperStart.FileSystem.Service` **[0.4.0-dev.4]** through NuGet.
 This development package is local, not published to a feed or checked into Git.
 Obtain the producer's built package (CopperStart's
 `build/Build-FileSystemService.ps1` creates it) and stage that artifact:
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.2.0-dev.2.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.4.0-dev.4.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
 
 The script verifies the pinned package SHA-256:
-`366314B88B2E457CD657A7A2333A9F71B5E736A8B16D2B001850F8009A714AD1`.
+`3400321124A10E12FE44359D4EAC0F9CFC91816CB7C8087EA8BEEAD7BDD74D52`.
 It copies the package to ignored `artifacts/filesystem-service-feed`, an additional
 restore source when present. Lock files also pin the NuGet content hash.
 Consumers need the managed package and its pinned CPU dependency; CopperStart,
@@ -193,3 +307,220 @@ import/extraction/conflict checks through the app adapter for DOS0, DOS1, SFS an
 SFS2, without filesystem source checkouts. Captures, generated blank fixtures and
 receipts are ignored under `artifacts/disk-image-import`. External real-media write
 compatibility and throughput remain unmeasured.
+
+DOS2–DOS5 integration checkpoint on 2026-11-14 (0.3.0-dev.1): CopperFS now
+writes and quick-formats all classic variants. International hash folding is
+shared with the reader, including the non-folding Latin-1 0xFF boundary. DOS4/DOS5
+create and maintain directory caches for entry creation, file growth/truncation,
+metadata updates, moves and deletion. Independent on-disk tests compare cache
+records and allocation bits against canonical headers; the hash-chain reader is
+not used as the cache oracle. The implementation and layout references are in
+CopperFS's `docs/classic-variant-writes.md`.
+
+The final CopperFFS managed suite passed 311 tests. The actual compiled 68020
+service ROM passed 42 tests; the app's 105 focused image-manager tests passed
+without skips. Full desktop validation passed 239 with 31 optional boot/bundle
+skips; separate engine diagnostics passed 1,324 with seven optional media skips.
+Production Release build, locked restore and publish passed. A new isolated
+package consumer imported, extracted and checked atomic conflict handling for
+all eight formats using a fresh cache with no CopperFS/CopperStart source
+references. DOS2–DOS5 checks include raw images and RDB ranges with larger
+filesystem blocks, international names, cached-volume corruption, disk-full
+failures and cancellation without publishing source changes.
+
+The ROM uses 241,510 bytes in 262,144 allocated bytes (ABI 2, minimum 68020,
+interpreter execution). The rebuilt standalone 68000 CopperFFS handler is 74,392
+bytes. External real-media/AmigaOS directory-cache interoperability and performance
+remain separate, unavailable coverage; no JIT or throughput improvement is claimed.
+Receipts, captures and generated fixtures are ignored under `artifacts/dos2-dos5`.
+
+CopperStart's final focused native replay run passed 41 tests on the 68000
+interpreter (overwrite, geometry and link instruction coverage). The overwrite
+fixture now explicitly supplies its optional native platform operations and
+handles odd/short copy buffers; a null adapter call was diagnosed without changing
+Copper68k or weakening instruction semantics. The full CopperStart solution build
+passed with 11 existing dependency/desktop warnings; CopperFS and CopperScreen
+solution builds passed without warnings.
+
+The broad `dotnet test CopperFS.slnx -c Release` run is not a clean suite pass:
+MSBuild could not replace `CopperCPX.InstructionTests.dll` because another
+`testhost` process held it (MSB3027/MSB3021). Completed projects in that run passed
+1 prototype-instruction, 77 prototype, 444 CPX-core, 311 CopperFFS-core,
+18 native-interface and 32 storage-harness tests. This limitation is separate
+from the isolated, passing filesystem/service/app checks above. External licensed
+media skips remain unavailable coverage.
+The broad run was stopped after the CPX instruction-test output lock had already
+failed its build step; its remaining SFS tests had not completed. This is
+incomplete solution-wide coverage, not a passing full suite. No other test run
+was stopped. The focused, isolated checks recorded above had completed.
+
+## Interchangeable panes and editing checkpoint — 2026-11-14
+
+The manager now supports independent Host/Image locations in either pane,
+direct image-to-image transfers, and staged New dir/Rename/recursive Delete on
+images. Folder icons have a fixed gutter, checked at both window sizes and 200%
+scaling. The reference-command audit is listed above under image edits.
+
+The new service package is `0.4.0-dev.3`, ABI 3, pinned to Copper68k 1.5.4 and
+the 68020 interpreter. Its immutable ROM uses **274,318 bytes in 524,288 allocated
+bytes**, the next power-of-two allocation required by the linked image, with
+513 symbols and no OS/desktop/chipset/format/trim roots. RAM remains 1 MiB per
+session. Two image panes use independent serialized guest sessions. The package
+is local development output; no feed publication or older-version replacement
+was performed.
+
+Validation receipts are ignored under `artifacts/two-images` in CopperScreen,
+`artifacts/filesystem-service`, `artifacts/manager-native*` and
+`artifacts/manager-solution` in CopperStart, and `artifacts/manager-validation`
+in CopperFS:
+
+- Production CopperScreen Release solution build: zero warnings/errors.
+- Full desktop suite: **269 passed, 31 optional boot/bundle cases skipped**.
+  Eight additional protected-delete rollback cases passed, one per filesystem.
+- Standalone service: **50 compiled-ROM tests passed**, covering all supported
+  formats, Rename/Delete/metadata/protection, case-only rename and retained read,
+  transport, cancellation and instruction-budget checks. A fresh isolated package
+  consumer restored the final package and browsed/extracted all eight formats.
+- Direct image-copy fixtures cover ADF/HDF and filesystem changes, nested/empty
+  directories, empty and multi-batch files, dates/protection/comments, source
+  immutability, invalid Windows names, guest-specific name comparison, conflicts,
+  read-only storage, cancellation and cleanup. Image edits remount cleanly.
+- The full CopperFS solution build passed with one existing compiler nullable
+  warning. Its entire test run completed: **2,315 passed and 8 optional cases
+  skipped**, including 338 CopperFFS core tests, 1,339 CopperSFS core tests and
+  66 CPX instruction tests. This completed isolated run is separate from the older
+  incomplete output-lock run recorded above.
+- Full CopperStart solution build: zero errors, 13 existing dependency/compiler/
+  desktop warnings.
+- Three full-system FFS boot replays failed before guest execution: the Full
+  filesystem-profile ROM required **603,636 code bytes**, exceeding its 524,260-byte
+  code allowance (`C68K0007`). These are unavailable full-system replay coverage,
+  not successful replays or failures of the separate filesystem-service ROM.
+- A separate Classic-profile follow-up (`CopperStartNativeSfsWrites=false`) built
+  successfully but was stopped after more than 17 minutes in compiler optimization,
+  before guest execution. A captured stack identifies
+  `M68kPeepholeOptimizer.TryForwardGeneratedRegisterCopies` inside ROM compilation.
+  Only that verified testhost was stopped. This is incomplete additional replay
+  coverage, not a pass; its log and stack are retained under CopperStart artifacts.
+  Resolving full-system ROM size/optimizer issues is separate from this service.
+- Locked package restore passed. Captures at 1060×720 and 760×620, including 200%
+  scaling, cover populated, empty, unavailable and busy states and two loaded
+  images. File views retain their compact height and folder icons have clear gaps.
+
+The maintained CopperFFS rename core now updates stored casing and DOS4/DOS5
+directory caches for case-only renames; exact no-op renames retain their prior
+behavior. Image-only operations delegate name comparison to CopperFS, including
+the distinction between ASCII and international Latin-1 folding. Host transfers
+retain their existing Windows collision policy. Same-image dual-pane access,
+overwrite/merge, links and journal recovery remain unavailable.
+
+## Shared-image panes checkpoint — 2026-11-15
+
+Both panes can now share one ADF/HDF, including different RDB partitions. The
+manager retains one protected storage owner per open image and one guest session
+per mounted volume; pane paths and selections remain independent. Sessions for
+volumes no longer shown are released without closing a volume used by the other
+pane. Changing one pane to Host releases only that pane's image reference.
+
+Copies read the original image while the destination guest writes its unpublished
+clone. All readers close only after the copy and clean remount finish, immediately
+before the hash-checked atomic publication. Both panes then rebind to fresh volume
+records, restore surviving selections and keep their volume/directory. Directory
+renames remap an open descendant path; deletion falls back to a surviving parent.
+Same-directory and self/descendant copies are refused before staging. Failed or
+cancelled copies retain the original bytes and remove staging files.
+
+Focused validation passed 136 checks, including same-volume trees and metadata in
+DOS0–DOS5/SFS/SFS2, RDB transfers in both directions with unchanged source partitions
+and RDB bytes, cancellation/conflicts, reader lifetime and shared-pane UI edits.
+The production Release solution build passed with zero warnings/errors. The full
+desktop suite passed **297 tests**, with 31 optional boot/bundle cases skipped.
+Receipts and the same-image capture are ignored under `artifacts/same-image`. The pinned
+guest package, ROM ABI, CPU backend and filesystem cores are unchanged by this slice.
+
+## Move, Protect and drag-and-drop checkpoint — 2026-11-15
+
+Move routes the same highlighted source as Copy and requires confirmation for
+buttons, Shift+F5 and Shift-drop. Same-image partition moves publish one clone.
+Separate-storage moves retain a completed destination if source removal cannot
+be confirmed; that result remains visible after both panes refresh. Host moves
+hold source read handles during copying and verify files again before removal.
+Protect applies masked HSPARWED edits through the guest, preserving mixed and
+unexposed bits without recursively changing directory contents.
+
+Validation for this slice:
+
+- Final Disk Image Manager/storage/service regression run: **208 passed, zero
+  skipped**. Coverage includes DOS0–DOS5, classic SFS and SFS2 moves and protection,
+  both RDB directions, same-image rollback, protected/locked/changed sources,
+  cancellation, source/destination conflicts, modal confirmations, mixed flags,
+  pointer-initiated dragging, routed copy/move drops and external host-file drops.
+- Full desktop run: **341 passed, 31 optional boot/bundle cases skipped**. This
+  broad run preceded the final host read-lock and status-retention refinements;
+  those refinements and the additional partial-move UI regression are covered by
+  the final 208-check run above. A separate five-check host run also passed.
+- Final `dotnet build CopperScreen.slnx -c Release`: zero warnings and errors.
+- Populated, empty, unavailable and busy captures at 1060×720 and 760×620,
+  including 200% scaling, retain aligned file views occupying at least 75% of
+  client height. Reviewed captures also include Move and the Protect dialog.
+  Host drop events were injected through Avalonia.Headless; Explorer shell
+  interoperability was not manually exercised. Image virtual-file export to
+  external applications is not implemented.
+
+The initial direct classic SFS directory reparent test faulted in the pinned
+guest at PC `$00FA70EE`, reading `$00100004`. The original image stayed unchanged.
+Move therefore uses qualified guest copy/delete commands in one clone for
+classic SFS, with the free-space and descendant-protection limits described
+above. This does not fix or retry the guest's reparent command. Its failing
+receipt is retained alongside the successful final regression receipts.
+
+Logs and TRX files are ignored under `artifacts/move*.log` and `artifacts/move/`;
+captures are under `artifacts/move/captures/`. No CopperFS, guest ROM, package or
+emulator sources changed, and no new external-media replay coverage is claimed.
+
+## Classic SFS native reparenting checkpoint — 2026-11-15
+
+The preceding checkpoint's classic SFS copy/delete fallback is superseded by
+local package `0.4.0-dev.4`. All supported same-volume image moves now call native
+Rename, including classic SFS. Existing staging, confirmation, conflict,
+cancellation and shared-pane refresh safeguards remain in place. Cross-volume
+and cross-image transfers retain their copy/remove behavior.
+
+The fault was in the standalone guest platform adapter, not CopperFS's rename
+implementation or Copper68k. Classic SFS directory reparenting describes destination
+ancestors through ObjectView, which reads optional `SfsMountStorage`. The stateless
+adapter inherited that property's default interface body. Compiled interface
+dispatch attempted to interpret the value-type platform as an object and scanned
+outside guest RAM at `$00100004` (old PC `$00FA70EE`). The adapter now explicitly
+returns `APTR.Null`, as intended for this service without a mount cache. The linked
+ROM resolves this call to `ServicePlatform::get_SfsMountStorage`; the interface
+getter is no longer linked. No filesystem-core, compiler or CPU source was changed.
+
+The new direct directory-rename regression failed on the old ROM for classic SFS
+and passed for the other seven formats. With the fix, the full service suite
+passed **58 compiled-ROM checks**, including all eight directory-reparent cases,
+node identity, preserved metadata, empty/nested directories, protected descendants,
+descendant rejection, fresh mounts, streaming, corruption and transport guards.
+
+Two separate nearly-full-volume tests passed for classic SFS and SFS2. Each fills
+a 2 MiB image until copying the 100,013-byte payload tree fails with status 221
+(disk full), verifies the failed copy left the original unchanged, then moves the
+tree through native Rename and verifies its bytes, dates, comment and protection
+after fresh mounts. No duplicate payload space inside the volume is required.
+Normal metadata allocation and host space for the staged image still apply.
+
+The immutable local development package was restored into an isolated consumer,
+which browsed/extracted all eight formats without sibling references. CopperScreen
+consumes that same package through the updated pin and NuGet lock hashes. Nothing
+was published. Package SHA-256 is recorded in Development package above; ROM
+SHA-256 is `210BFD2170BDD7AAB0E147A61DF77CECFB20C2B86E6B1921737C7DB2D59F8D5B`.
+The ROM uses **302,362 bytes**, allocates **524,288 bytes**, and links **557 symbols**,
+with excluded OS/chipset components absent. ABI 3 and the pinned Copper68k 1.5.4
+M68020 interpreter are unchanged; no throughput or JIT improvement is claimed.
+
+The full desktop suite passed **344 tests**, with 31 optional boot/bundle skips.
+The CopperScreen Release solution build passed with zero warnings/errors; the
+CopperStart Release solution build passed with 11 existing warnings. No new
+full-system ROM or external-media replay coverage is claimed. Baseline failure,
+fixed service, nearly-full-volume and desktop TRX receipts are ignored under
+`artifacts/sfs-reparent/`; build/consumer logs are `artifacts/sfs-reparent-*.log`.
