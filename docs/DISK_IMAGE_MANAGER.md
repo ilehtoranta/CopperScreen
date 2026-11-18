@@ -238,9 +238,15 @@ in `CopperScreenDiskExtraction`.
 ## Development package
 
 The app builds `CopperDisk.FileSystem` from source and uses the pinned
-`CopperStart.FileSystem.Service` **[0.5.0-dev.1]**. The service package is on a
-private feed. If you already have the exact package artifact, stage it locally
-to restore and build without feed credentials:
+`CopperStart.FileSystem.Service` **[0.5.0-dev.1]** from NuGet.org. A clean
+checkout needs no private feed credentials:
+
+```powershell
+dotnet restore CopperScreen.slnx --locked-mode
+dotnet build CopperScreen.slnx -c Release --no-restore
+```
+
+If you have the original qualified archive, you can also stage it in the local feed:
 
 ```powershell
 ./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.1.nupkg"
