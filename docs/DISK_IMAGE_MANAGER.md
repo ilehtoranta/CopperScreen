@@ -237,19 +237,19 @@ in `CopperScreenDiskExtraction`.
 
 ## Development package
 
-The app references `CopperStart.FileSystem.Service` **[0.4.0-dev.4]** through NuGet.
-This development package is local, not published to a feed or checked into Git.
-Obtain the producer's built package (CopperStart's
-`build/Build-FileSystemService.ps1` creates it) and stage that artifact:
+The app builds `CopperDisk.FileSystem` from source and uses the pinned
+`CopperStart.FileSystem.Service` **[0.5.0-dev.1]**. The service package is on a
+private feed. If you already have the exact package artifact, stage it locally
+to restore and build without feed credentials:
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.4.0-dev.4.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.1.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
 
 The script verifies the pinned package SHA-256:
-`3400321124A10E12FE44359D4EAC0F9CFC91816CB7C8087EA8BEEAD7BDD74D52`.
+`248F5BE9D717C0CD7343FF9F9CE7383E5B7A2139279E84CDE4DF2B5547F36D87`.
 It copies the package to ignored `artifacts/filesystem-service-feed`, an additional
 restore source when present. Lock files also pin the NuGet content hash.
 Consumers need the managed package and its pinned CPU dependency; CopperStart,

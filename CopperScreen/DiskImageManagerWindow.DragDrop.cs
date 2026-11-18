@@ -51,9 +51,11 @@ internal sealed partial class DiskImageManagerWindow
                 await RunAsync(async ct =>
                 {
                     var views = CaptureImageViews(pane.Image);
+                    var interpretation = pane.IsHost ? CopperDisk.FileSystem.HostNameInterpretation.Literal : await ChooseImportNamesAsync(paths, ct);
+                    if (interpretation == null) { _status.Text = "Import cancelled; no changes saved."; return; }
                     var progress = new Progress<DiskExtractionProgress>(p => { if (_busy) _status.Text = $"Copying: {p.Files:N0} files · {p.Bytes:N0} bytes · {p.Name}"; });
                     var result = await Task.Run(() => pane.IsHost ? CopperScreenDiskExtraction.CopyHost(paths, pane.HostDirectory, progress, ct)
-                        : pane.Image!.Import(pane.Volume!, pane.Directories.Peek(), paths, ct, progress), ct);
+                        : pane.Image!.Import(pane.Volume!, pane.Directories.Peek(), paths, ct, progress, interpretation.Value), ct);
                     if (pane.IsHost) await ReadHostAsync(pane, pane.HostDirectory, CancellationToken.None);
                     else await RefreshImageViewsAsync(views);
                     _status.Text = $"Copied {result.Files:N0} files · {result.Bytes:N0} bytes." + (pane.IsHost ? "" : " Image saved.");

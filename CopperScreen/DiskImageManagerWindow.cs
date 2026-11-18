@@ -43,7 +43,7 @@ internal sealed partial class DiskImageManagerWindow : Window
         var picked = await StorageProvider.OpenFilePickerAsync(new()
         {
             Title = $"Open {pane.Side.ToLowerInvariant()} disk image", AllowMultiple = false,
-            FileTypeFilter = [new("Sector disk images") { Patterns = ["*.adf", "*.hdf", "*.img"] }]
+            FileTypeFilter = [new("Amiga disk images") { Patterns = ["*.adf", "*.hdf", "*.img", "*.ipf", "*.dms"] }]
         });
         if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await OpenImageAsync(pane, path);
         ApplyMode(pane);
@@ -162,6 +162,13 @@ internal sealed partial class DiskImageManagerWindow : Window
             if (_busy) _status.Text = $"{(move ? "Moving" : "Copying")}: {p.Files:N0} files · {p.Bytes:N0} bytes · {p.Name}";
         });
         var sourceHost = source.IsHost; var destinationHost = destination.IsHost;
+        var interpretation = CopperDisk.FileSystem.HostNameInterpretation.RestoreEncoded;
+        if (sourceHost && !destinationHost)
+        {
+            var choice = await ChooseImportNamesAsync(selected.Cast<HostItem>().Select(i => i.Path).ToArray(), ct);
+            if (choice == null) { _status.Text = "Import cancelled; no changes saved."; return; }
+            interpretation = choice.Value;
+        }
         DiskExtractionProgress result;
         try { result = await Task.Run(() =>
         {
@@ -170,7 +177,7 @@ internal sealed partial class DiskImageManagerWindow : Window
                 var paths = selected.Cast<HostItem>().Select(i => i.Path).ToArray();
                 using var removal = move ? new CopperScreenHostMove(paths, ct) : null;
                 var copied = destinationHost ? CopperScreenDiskExtraction.CopyHost(paths, destination.HostDirectory, progress, ct)
-                    : destination.Image!.Import(destination.Volume!, destination.Directories.Peek(), paths, ct, progress);
+                    : destination.Image!.Import(destination.Volume!, destination.Directories.Peek(), paths, ct, progress, interpretation);
                 if (removal != null)
                     try { removal.Remove(ct); }
                     catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)

@@ -214,8 +214,8 @@
       },
       "CopperStart.FileSystem.Service": {
         "type": "Transitive",
-        "resolved": "0.4.0-dev.4",
-        "contentHash": "kf31wn0XfPC+tAZTD1GTo73v3Bi3HYafKgLIpLr/zt4ayfwzCN8886QSRE1n3Fp2hvN+5PoM8oeu44VJ3EeE3w==",
+        "resolved": "0.5.0-dev.1",
+        "contentHash": "Q5rfPe/koyAJIBer0osmVz5B38p+rx/kS1LiHmg9iwXFBU90vkp9ZeRKA+72Fi1j+CaXzsMg1PJEmRUw12w1fw==",
         "dependencies": {
           "Copper68k": "[1.5.4]"
         }
@@ -370,6 +370,14 @@
       "copperdisk": {
         "type": "Project"
       },
+      "copperdisk.filesystem": {
+        "type": "Project",
+        "dependencies": {
+          "Copper68k": "[1.5.4, 1.5.4]",
+          "CopperDisk": "[3.0.1-dev.5, )",
+          "CopperStart.FileSystem.Service": "[0.5.0-dev.1, 0.5.0-dev.1]"
+        }
+      },
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
@@ -385,11 +393,12 @@
           "Avalonia.Themes.Fluent": "[12.0.3, )",
           "Copper68k": "[1.5.4, 1.5.4]",
           "CopperDisk": "[3.0.1-dev.5, )",
+          "CopperDisk.FileSystem": "[0.1.0-dev.6, )",
           "CopperMod.Amiga.Lightweight": "[0.1.0-preview.2, )",
           "CopperPad": "[2.0.0-preview.2, )",
           "CopperPad.HidSharp": "[2.0.0-preview.2, )",
           "CopperScreen.FileSystems": "[1.0.0, )",
-          "CopperStart.FileSystem.Service": "[0.4.0-dev.4, 0.4.0-dev.4]",
+          "CopperStart.FileSystem.Service": "[0.5.0-dev.1, 0.5.0-dev.1]",
           "HotPathGuard.Abstractions": "[0.1.0, )",
           "Miniaudio-CS": "[1.0.4, )"
         }
