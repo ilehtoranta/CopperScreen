@@ -25,6 +25,12 @@ See the [storage interface](https://github.com/ilehtoranta/CopperScreen/blob/mai
 The development source includes `AmigaSectorImage`, a read-only image handle with
 writer exclusion, RDB discovery and bounded volume-relative byte views. It supplies
 geometry and storage; it contains no filesystem reader or CPU dependency.
+`OpenDms` uses the existing DMS decoder for complete, unencrypted standard DD
+archives, retaining the source's writer exclusion. `CopyTo` creates a decoded
+working image; `WriteDmsReplacement` encodes and verifies an empty seekable
+read/write staging stream without publishing it. Header metadata is preserved.
+Auxiliary/unsupported records and flags or trailing data keep an archive read-only;
+invalid or incomplete archives fail to open. Filesystem tools own publication.
 CopperScreen consumes the separate packaged CopperStart filesystem service to
 browse and extract files. See the [Disk Image Manager guide](../docs/DISK_IMAGE_MANAGER.md)
 for supported filesystems and package provisioning.
@@ -33,7 +39,7 @@ for supported filesystems and package provisioning.
 dotnet add package CopperDisk --version 3.0.0
 ```
 
-## Development source: 3.0.1-dev.1
+## Development source: 3.0.1-dev.5
 
 Read-only UAE-1ADF and encoded-track media accept one to 168 physical tracks
 (up to 84 DD cylinders). Extra raw tracks retain their stored bits, and normal

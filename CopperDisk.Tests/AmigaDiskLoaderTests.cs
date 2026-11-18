@@ -737,7 +737,7 @@ public sealed class AmigaDiskLoaderTests
         return memory.ToArray();
     }
 
-    private static byte[] CreateDms(byte[] adf, byte mode, int cylinderCount = AmigaDiskGeometry.CylinderCount)
+    internal static byte[] CreateDms(byte[] adf, byte mode, int cylinderCount = AmigaDiskGeometry.CylinderCount)
     {
         var body = new List<byte>();
         for (var cylinder = 0; cylinder < cylinderCount; cylinder++)

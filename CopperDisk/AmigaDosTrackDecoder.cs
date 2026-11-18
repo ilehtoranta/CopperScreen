@@ -10,7 +10,7 @@ namespace CopperDisk;
 /// This helper scans for standard AmigaDOS sync/header/checksum structures. It preserves unreadable sectors as
 /// zero-filled data and is not a filesystem validator.
 /// </remarks>
-public static class AmigaDosTrackDecoder
+public static partial class AmigaDosTrackDecoder
 {
     private const ushort SyncWord = 0x4489;
     private const uint MfmDataMask = 0x5555_5555;
