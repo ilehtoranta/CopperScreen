@@ -509,6 +509,8 @@ internal sealed class CopperScreenProfile
 		}
 
 		var version = value.Trim();
+		if (version.Equals("CopperStart Mini", StringComparison.OrdinalIgnoreCase))
+			return KickstartVersion.CopperStartMini;
 		return version.StartsWith("3.0", StringComparison.Ordinal)
 			? KickstartVersion.Kickstart30
 			: version.StartsWith("3.1", StringComparison.Ordinal)

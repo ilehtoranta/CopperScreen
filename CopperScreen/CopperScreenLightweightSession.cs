@@ -172,7 +172,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             p.FloppyDriveCount is < 1 or > 4 ||
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
             p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart) ||
-            (!minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart20 or KickstartVersion.Kickstart30 or KickstartVersion.Kickstart31)))
+            (!minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart20 or KickstartVersion.Kickstart30 or KickstartVersion.Kickstart31 or KickstartVersion.CopperStartMini)))
             return "Lightweight supports PAL / OCS, ECS or AGA Alice/Lisa / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / supported native Kickstart ROMs / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.";
         if (p.Chipset.DmaChip is not (DmaChipModel.OcsAgnus or DmaChipModel.Agnus8372A or DmaChipModel.Agnus8375Pal2M or DmaChipModel.AgaAlice))
             return "Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.";

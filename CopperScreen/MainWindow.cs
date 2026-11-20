@@ -2559,6 +2559,7 @@ internal sealed partial class MainWindow : Window
                 KickstartVersion.Kickstart20 => "Kickstart 2.x detected · compatibility may vary",
                 KickstartVersion.Kickstart30 => "Kickstart 3.0 detected · compatibility may vary",
                 KickstartVersion.Kickstart31 => "Kickstart 3.1 detected · compatibility may vary",
+                KickstartVersion.CopperStartMini => "CopperStart Mini detected",
                 _ => "Kickstart 1.3 detected · compatibility may vary"
             });
 			_romValidation.Foreground = romError == null ? MutedText : new SolidColorBrush(Color.Parse("#FFBCAC"));

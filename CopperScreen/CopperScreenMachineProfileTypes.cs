@@ -9,7 +9,7 @@ internal readonly record struct AmigaChipset(DmaChipModel DmaChip, DisplayChipMo
 {
     public static AmigaChipset OcsPal => new(DmaChipModel.OcsAgnus, DisplayChipModel.OcsDenise, VideoStandard.Pal);
 }
-internal enum KickstartVersion { Kickstart13, Kickstart20, Kickstart30, Kickstart31 }
+internal enum KickstartVersion { Kickstart13, Kickstart20, Kickstart30, Kickstart31, CopperStartMini }
 internal enum M68kBackendKind
 {
     AccurateM68000 = 0, AccurateM68020 = 1, FastM68000 = 2, JitM68000 = 3,

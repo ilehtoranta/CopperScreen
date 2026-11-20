@@ -27,6 +27,8 @@ internal static class CopperScreenKickstartRomArchive
 
 	internal static KickstartVersion IdentifyNativeVersion(ReadOnlySpan<byte> rom)
 	{
+		if (rom.Length == 524288 && rom.Slice(8, 8).SequenceEqual("CSMI\0\u0001\0\0"u8))
+			return KickstartVersion.CopperStartMini;
 		if (rom.Length == 262144 && BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) == 34)
 			return KickstartVersion.Kickstart13;
 		var major = rom.Length >= 16 ? BinaryPrimitives.ReadUInt16BigEndian(rom[12..]) : 0;
@@ -36,7 +38,7 @@ internal static class CopperScreenKickstartRomArchive
 			return KickstartVersion.Kickstart30;
 		if (rom.Length == 524288 && major == 40)
 			return KickstartVersion.Kickstart31;
-		throw new NotSupportedException("Choose a supported native Kickstart ROM: version 1.3, 2.x, 3.0 or 3.1. Other Kickstart releases are not yet recognized.");
+		throw new NotSupportedException("Choose a supported Kickstart ROM: 1.3, 2.x, 3.0, 3.1 or CopperStart Mini.");
 	}
 
 	public static byte[] ReadRomImage(
@@ -151,9 +153,11 @@ internal static class CopperScreenKickstartRomArchive
 			KickstartVersion.Kickstart20 => new[] { "204", "2.04", "37.175", "20", "200", "2.0" },
 			KickstartVersion.Kickstart30 => new[] { "30", "300", "3.0" },
 			KickstartVersion.Kickstart31 => new[] { "31", "310", "3.1" },
+			KickstartVersion.CopperStartMini => new[] { "copperstartmini" },
 			_ => Array.Empty<string>()
 		};
-		if (versionToken.Any(token => fileName.Contains(token, StringComparison.OrdinalIgnoreCase)))
+		var versionName = version == KickstartVersion.CopperStartMini ? normalized : fileName;
+		if (versionToken.Any(token => versionName.Contains(token, StringComparison.OrdinalIgnoreCase)))
 		{
 			score += 50;
 		}

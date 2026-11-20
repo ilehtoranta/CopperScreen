@@ -336,6 +336,7 @@ internal static partial class CopperScreenProfileStore
 						KickstartVersion.Kickstart20 => "2.04",
 						KickstartVersion.Kickstart30 => "3.0",
 						KickstartVersion.Kickstart31 => "3.1",
+						KickstartVersion.CopperStartMini => "CopperStart Mini",
 						_ => "1.3"
 					},
 					Path = string.IsNullOrWhiteSpace(draft.KickstartRomPath) ? null : draft.KickstartRomPath.Trim()
