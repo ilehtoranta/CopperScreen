@@ -10,13 +10,32 @@ selector. The highlighted pane is the source. **Copy →** or **← Copy** copie
 selection into the other pane's current directory. Clicking a centre command
 retains the source pane. **Open image…** opens an image in the active pane.
 
-1. Activate a pane, choose **Open image…** and select an existing sector image.
+1. Activate a pane, choose **Open image…** and select an ADF/HDF, IPF or DMS image.
 2. For an RDB hard disk, select a volume in **Image volumes**.
 3. Double-click directories or press Enter to browse; **Parent** goes up in the
    active pane. Choose **…** in the host header to pick a folder, or enter a path
    in its bottom address bar and press Enter.
 4. Choose a location in the other pane, select source entries, then choose **Copy**. Directories include their entire tree, including
    empty directories and ordinary `.info` files.
+
+IPF images are read-only sources. Complete, unencrypted standard DD DMS archives
+support imports, New directory, Rename, Delete, Move and Protect on recognizable
+filesystems. DMS saves recompress and verify the entire disk before staged
+replacement; compression methods and archive size may change. Header metadata is
+preserved. Archives with auxiliary records (such as banners/FILEID), trailing data
+or unsupported flags remain read-only. Encrypted, incomplete, corrupt, HD and
+non-Amiga archives are rejected.
+
+On Windows filesystems supporting sparse storage, saves keep zero-filled image
+regions unallocated on the host. ADF/HDF images retain their full logical capacity;
+only **Size on disk** can shrink. DMS uses sparse working files and saves its usual
+compressed archive. Deletes and source removal during moves also reclaim eligible
+nonzero former file data: CopperFS rechecks freed blocks in the guest before the
+staged image is published. Other file data and image capacity stay intact.
+Historical unused contents outside the tracked interval are retained. Unsupported
+host filesystems use ordinary files. Cancellation or TRIM failure prevents saving
+the staged changes. Classic SFS Delete permanently removes the selected entries;
+it does not change the volume's recycling setting or purge other recycled files.
 
 Click selects one entry, Ctrl toggles and Shift selects a range. **All**, **Invert**
 and **Clear** change the active selection. Click **Name** or **Size** to sort;
@@ -28,6 +47,8 @@ messages are available in tooltips. Selected file bytes exclude directory conten
 | --- | --- |
 | F6 | Switch active pane |
 | F5 | Copy active selection |
+| F3 | View one selected file as text |
+| Shift+F3 | View one selected file as hex |
 | Shift+F5 | Move active selection, with confirmation |
 | F7 | New directory in the active image |
 | F2 | Rename the selected image entry |
@@ -39,6 +60,39 @@ messages are available in tooltips. Selected file bytes exclude directory conten
 
 Commands do not intercept address-bar editing. While busy, **Cancel** replaces
 Copy and conflicting controls are disabled.
+
+## Text and hex viewers
+
+Select one ordinary file in either pane, then choose **Text** or **Hex**. F3 opens
+Text; Shift+F3 opens Hex. Enter or double-click also opens a selected file as text;
+directories still open in the pane. Viewing works with host files and all supported
+image filesystems, including read-only images. Directories, links and multiple
+selections are excluded.
+
+The read-only viewer has a mode selector, first/previous/next/last-page buttons,
+hexadecimal byte offset and Go. Prefixing the offset with `0x` is optional.
+Ctrl+PageUp/PageDown changes pages; F3/Shift+F3 switches modes within the viewer.
+Contents are selectable, so Ctrl+A/C can copy displayed text. Escape or Close
+closes the viewer and cancels a pending read.
+
+Files are read on demand in 4 KiB pages, with only a few boundary bytes retained
+to display split UTF-8 characters and CRLF correctly. Large files are not loaded
+in full or silently truncated. The status shows byte range and total file length;
+offsets above 4 GiB are supported. Lines remain unwrapped, with horizontal scrolling.
+Text initially selects UTF-8 when the first page is valid UTF-8 (including its
+optional BOM), otherwise Latin-1. The encoding selector permits switching between
+UTF-8 and Amiga Latin-1. Other encodings, such as UTF-16, are not decoded in this
+version. Nonprinting control/format characters appear as dots; file contents are
+never interpreted as terminal escapes, markup or commands. Hex displays sixteen
+bytes per row, byte offsets and printable ASCII; other bytes appear as dots.
+
+Image pages come from CopperFS guest streams, with each page's stream closed
+before another operation. The modal viewer prevents concurrent pane edits. Reads
+use the manager's existing cancellation, instruction-budget and fault recovery.
+A later-page error clears displayed contents, disables further navigation and
+keeps the reason visible in both viewer and manager. Host file length/date changes
+are detected when opening a page; close and reopen the viewer after editing the
+file externally. Viewing never saves or changes the source.
 
 ## Image-to-image copying and image edits
 
@@ -119,7 +173,6 @@ The reference DiskMaster/FileMaster commands suggest these further additions:
 | --- | --- |
 | Copy As | Prompt for a destination name, using the existing staged transfer |
 | Comment | Edit the comment already displayed by Info; the guest API supports it |
-| Read / Show Asc / Show Hex | Bounded, read-only text and hex viewers using guest streams |
 | DiskInfo / DiskSize | Volume information; free/used space needs a guest query rather than a host filesystem parser |
 | Find file | Cancellable directory search through guest enumeration |
 
@@ -172,7 +225,29 @@ file is read-only; such images can still be copy sources. Dirty Smart
 volumes are refused at mount. Existing image entries are never overwritten or
 merged; a conflict aborts the whole selection. Latin-1 names must fit the writer:
 30 characters for OFS/FFS, 100 for classic SFS and 107 for SFS2. Names are never
-silently truncated or renamed. Case collisions are refused for round trips.
+silently truncated. The guest enforces the destination filesystem's case comparison
+rules; conflicts are refused without overwrite or merge.
+
+### Reversible Windows names
+
+Image views retain original Amiga names. Export preserves compatible Windows
+names and encodes invalid/reserved names, trailing dots/spaces, reserved-prefix
+names and every member of a case-insensitive sibling collision group. The alias
+is `.copperimage-v1-` followed by uppercase hexadecimal Latin-1 name bytes. A
+readable extension is retained only when it is ASCII alphanumeric and at most
+16 characters. Each path component is mapped separately. Mapping uses the full
+source directory even when only part of it is selected, so aliases remain stable.
+
+Import previews encoded names and defaults to restoring original names. Choose
+**Literal names** explicitly to import the host spellings instead. Malformed
+encodings cannot be restored; traversal components and destination collisions
+are rejected. No sidecars are required. Image-to-image transfers bypass Windows
+aliases and preserve supported Amiga metadata. Shared-folder mappings are separate.
+
+The image operation implementation is shared with CopperExplorer through the
+UI-independent `CopperDisk.FileSystem` library. IPF sector decoding is opt-in and
+strict: unreadable, corrupt, conflicting or weak-dependent accessed sectors fail
+instead of yielding placeholder bytes. IPF sources are always read-only.
 
 The manager copies the entire image to a temporary sibling, then creates
 folders and writes file contents through the packaged 68020 guest. Writes are
@@ -193,9 +268,9 @@ keep your own backup when editing valuable media.
 ## Host extraction
 
 Existing files and directories are never overwritten or merged. Choose a different
-destination when a selected name already exists. Names are preserved exactly;
-names that cannot safely be represented on Windows, case collisions, and paths
-through host symbolic links or junctions are rejected.
+destination when a selected name already exists. Compatible names are preserved;
+other names use the reversible aliases described above. Destinations through
+host symbolic links or junctions are rejected.
 
 Copying uses disposable sequential guest streams with a reusable 64 KiB transfer
 buffer. Trees are staged in a temporary child of the destination, then moved into
@@ -524,3 +599,27 @@ CopperStart Release solution build passed with 11 existing warnings. No new
 full-system ROM or external-media replay coverage is claimed. Baseline failure,
 fixed service, nearly-full-volume and desktop TRX receipts are ignored under
 `artifacts/sfs-reparent/`; build/consumer logs are `artifacts/sfs-reparent-*.log`.
+
+## Text and hex viewer checkpoint — 2026-11-15
+
+Text and Hex commands view one selected file from either host or image pane.
+Image pages use the existing guest OpenRead offset API; no filesystem-core, guest ROM,
+package or emulator changes were needed. Each request reads at most 4,101 bytes,
+including boundary context, and releases its stream before returning. The modal
+viewer serializes reads through the manager's operation/fault-recovery path.
+
+The 25 focused checks passed for host and actual guest reads in all eight
+formats, source immutability, UTF-8/CRLF page boundaries, Latin-1, exact hex/ASCII,
+empty/read-only files, 64-bit offsets, changed/short/corrupt reads, selection and
+shortcut routing, and closing either window during a pending page read. Captures
+under `artifacts/viewers/captures/` were reviewed for Text and Hex, including a
+760×620 viewer at 200% scaling with an offset above 4 GiB.
+
+The viewer slice was also applied to an isolated checkout of the committed
+manager baseline: its Release solution build passed with zero warnings/errors,
+and its full desktop suite passed **369 tests**, with 31 optional boot/bundle
+cases skipped. The shared checkout's Release build also passed; its broad run
+had **368 passes, one failure and 31 skips** because the concurrent lossless
+filename-encoding refactor changes the old case-collision extraction expectation.
+That unrelated behavior/test was left untouched. Viewer receipts and isolated
+validation logs are ignored under `artifacts/viewers/` and `artifacts/viewer-*.log`.

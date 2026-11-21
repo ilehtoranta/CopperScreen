@@ -3,33 +3,45 @@ using System.Buffers.Binary;
 using CopperDisk;
 using CopperStart.FileSystem;
 
-namespace CopperScreen;
+namespace CopperDisk.FileSystem;
 
 // Image storage stays in CopperDisk; all filesystem operations execute in the packaged guest service.
-internal sealed partial class CopperScreenDiskImage : IDisposable
+public sealed partial class DiskImageSession : IDisposable
 {
     private AmigaSectorImage _image;
     private readonly string _path;
     private int _references = 1;
-    internal IReadOnlyList<DiskImageVolume> Volumes { get; private set; }
-    private CopperScreenDiskImage(AmigaSectorImage image, string path)
+    private int _readers;
+    public Guid Generation { get; private set; } = Guid.NewGuid();
+    internal void RequireNoReaders() { if (_readers != 0) throw new IOException("An image read stream is active. Finish or cancel the transfer before saving."); }
+    internal Stream TrackRead(Stream stream) { _readers++; return new TrackedRead(stream, () => _readers--); }
+    public IReadOnlyList<DiskVolume> Volumes { get; private set; }
+    private DiskImageSession(AmigaSectorImage image, string path)
     {
         _image = image;
         _path = path;
-        Volumes = image.Volumes.Select(v => new DiskImageVolume(this, v)).ToArray();
+        Volumes = image.Volumes.Select(v => new DiskVolume(this, v)).ToArray();
     }
-    internal static CopperScreenDiskImage Open(string path) => new(AmigaSectorImage.Open(path), Path.GetFullPath(path));
-    internal bool IsReadOnly => (File.GetAttributes(_path) & FileAttributes.ReadOnly) != 0;
-    internal string FilePath => _path;
+    public static DiskImageSession Open(string path) => new(OpenStorage(path), Path.GetFullPath(path));
+    private static AmigaSectorImage OpenStorage(string path) => Path.GetExtension(path).ToLowerInvariant() switch
+    {
+        ".ipf" => AmigaSectorImage.OpenIpf(path),
+        ".dms" => AmigaSectorImage.OpenDms(path),
+        _ => AmigaSectorImage.Open(path)
+    };
+    public string? WriteUnavailableReason => _image.WriteUnavailableReason ??
+        ((File.GetAttributes(_path) & FileAttributes.ReadOnly) != 0 ? "The image file is read-only." : null);
+    public bool IsReadOnly => WriteUnavailableReason != null;
+    public string FilePath => _path;
     // Each pane owns one reference. Volumes keep separate guest sessions, while
     // the physical image has one protected storage handle and publication owner.
-    internal CopperScreenDiskImage Retain()
+    public DiskImageSession Retain()
     {
         ObjectDisposedException.ThrowIf(_references == 0, this);
         _references = checked(_references + 1);
         return this;
     }
-    internal void RequireCurrent(DiskImageVolume volume)
+    public void RequireCurrent(DiskVolume volume)
     {
         ObjectDisposedException.ThrowIf(_references == 0, this);
         if (!Volumes.Contains(volume)) throw new InvalidOperationException("Reselect the volume after the image changed.");
@@ -46,47 +58,62 @@ internal sealed partial class CopperScreenDiskImage : IDisposable
     }
 }
 
-internal sealed class DiskImageEntry(DiskImageVolume volume, FileSystemEntry entry, string path)
+public sealed class DiskEntry
 {
-    internal DiskImageVolume Volume { get; } = volume;
-    internal FileSystemEntry Native { get; } = entry;
-    internal string Path { get; } = path;
-    internal string Name => Native.Name;
-    internal bool IsDirectory => Native.Kind == FileSystemEntryKind.Directory;
-    internal bool IsLink => Native.Kind == FileSystemEntryKind.Link;
-    internal long Size => checked((long)Native.Length);
-    internal DateTime? Modified => Native.Modified;
-    internal uint Protection => Native.Protection;
-    internal string Comment => Native.Comment;
+    public DiskEntryId Id => new(Generation, Volume.Id, Path);
+    internal DiskEntry(DiskVolume volume, FileSystemEntry entry, string path)
+        => (Volume, Native, Path, Generation) = (volume, entry, path, volume.Owner.Generation);
+    public Guid Generation { get; }
+    public DiskVolume Volume { get; }
+    internal FileSystemEntry Native { get; }
+    public string Path { get; }
+    public string Name => Native.Name;
+    public bool IsDirectory => Native.Kind == FileSystemEntryKind.Directory;
+    public bool IsLink => Native.Kind == FileSystemEntryKind.Link;
+    public long Size => checked((long)Native.Length);
+    public DateTime? Modified => Native.Modified;
+    public uint Protection => Native.Protection;
+    public string Comment => Native.Comment;
 }
 
-internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVolume range)
+public sealed class DiskVolume(DiskImageSession owner, AmigaImageVolume range)
 {
-    internal CopperScreenDiskImage Owner => owner;
-    internal AmigaImageVolume Range => range;
+    public Guid Id { get; } = Guid.NewGuid();
+    public DiskVolumeCapabilities Capabilities
+    {
+        get
+        {
+            var operations = IsMounted ? DiskVolumeOperations.Browse | DiskVolumeOperations.Read : DiskVolumeOperations.None;
+            if (ImportUnavailableReason == null) operations |= DiskVolumeOperations.Import | DiskVolumeOperations.NewDirectory |
+                DiskVolumeOperations.Rename | DiskVolumeOperations.Delete | DiskVolumeOperations.Move | DiskVolumeOperations.Protect;
+            return new(operations, IsMounted ? null : UnsupportedReason ?? "Mount the volume first.", ImportUnavailableReason);
+        }
+    }
+    public DiskImageSession Owner => owner;
+    public AmigaImageVolume Range => range;
     private FileSystemSession? _session;
-    private DiskImageEntry? _root;
+    private DiskEntry? _root;
     private uint? _detectedType;
     private string? _mountError;
-    internal string DeviceName => range.DeviceName;
-    internal uint BlockSize => range.BlockSize;
-    internal string? UnsupportedReason => range.UnsupportedReason ?? _mountError ??
+    public string DeviceName => range.DeviceName;
+    public uint BlockSize => range.BlockSize;
+    public string? UnsupportedReason => range.UnsupportedReason ?? _mountError ??
         (range.DosType is { } type && !Supported(type) ? "Only OFS/FFS (DOS0–DOS5), SFS and SFS2 are supported." : null);
-    internal bool IsFaulted => _session?.IsFaulted == true;
-    internal bool IsMounted => _session != null && !_session.IsFaulted;
-    internal string? ImportUnavailableReason => !IsMounted ? "Select a mounted volume first." :
-        owner.IsReadOnly ? "The image file is read-only." :
+    public bool IsFaulted => _session?.IsFaulted == true;
+    public bool IsMounted => _session != null && !_session.IsFaulted;
+    public string? ImportUnavailableReason => !IsMounted ? "Select a mounted volume first." :
+        owner.WriteUnavailableReason is { } readOnly ? readOnly :
         (_detectedType is >= 0x444F5300 and <= 0x444F5305 or 0x53465300 or 0x53465302 ? null : "Import supports DOS0–DOS5, SFS and SFS2.");
-    internal DiskImageEntry Root { get { if (_root == null) Mount(); return _root!; } }
-    internal string DisplayName => _root?.Name ?? DeviceName;
-    internal string FileSystemName => (_detectedType ?? range.DosType) switch
+    public DiskEntry Root { get { if (_root == null) Mount(); return _root!; } }
+    public string DisplayName => _root?.Name ?? DeviceName;
+    public string FileSystemName => (_detectedType ?? range.DosType) switch
     {
         >= 0x444F5300 and <= 0x444F5305 => $"{(((_detectedType ?? range.DosType) & 1) == 0 ? "OFS" : "FFS")} (DOS{(_detectedType ?? range.DosType) & 255})",
         0x53465300 => "SFS", 0x53465302 => "SFS2", _ => "Not mounted"
     };
     private static bool Supported(uint type) => type is >= 0x444F5300 and <= 0x444F5305 or 0x53465300 or 0x53465302;
 
-    internal void Mount(CancellationToken cancellationToken = default)
+    public void Mount(CancellationToken cancellationToken = default)
     {
         owner.RequireCurrent(this);
         if (_session is { IsFaulted: false }) return;
@@ -113,11 +140,11 @@ internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVol
         { session?.Dispose(); _mountError = ex.Message; throw; }
     }
 
-    internal IReadOnlyList<DiskImageEntry> ReadDirectory(DiskImageEntry directory, CancellationToken cancellationToken = default)
+    public IReadOnlyList<DiskEntry> ReadDirectory(DiskEntry directory, CancellationToken cancellationToken = default)
     {
         Check(directory);
         var names = new HashSet<string>(StringComparer.Ordinal);
-        var entries = new List<DiskImageEntry>();
+        var entries = new List<DiskEntry>();
         foreach (var entry in _session!.EnumerateDirectory(directory.Native, cancellationToken))
         {
             // Reject ambiguous repeated rows before displaying them or starting extraction.
@@ -126,7 +153,7 @@ internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVol
         }
         return entries.OrderByDescending(e => e.IsDirectory).ThenBy(e => e.Name, StringComparer.OrdinalIgnoreCase).ToArray();
     }
-    internal void CopyFileTo(DiskImageEntry file, Stream destination, CancellationToken cancellationToken = default)
+    public void CopyFileTo(DiskEntry file, Stream destination, CancellationToken cancellationToken = default)
     {
         Check(file); ArgumentNullException.ThrowIfNull(destination);
         using var input = _session!.OpenRead(file.Native, cancellationToken: cancellationToken);
@@ -142,17 +169,20 @@ internal sealed class DiskImageVolume(CopperScreenDiskImage owner, AmigaImageVol
         }
         finally { ArrayPool<byte>.Shared.Return(buffer); }
     }
-    internal Stream OpenRead(DiskImageEntry file, CancellationToken cancellationToken)
+    public Stream OpenRead(DiskEntry file, CancellationToken cancellationToken = default, long offset = 0)
     {
         Check(file);
-        return _session!.OpenRead(file.Native, cancellationToken: cancellationToken);
+        if (offset < 0 || offset > file.Size) throw new ArgumentOutOfRangeException(nameof(offset));
+        return owner.TrackRead(_session!.OpenRead(file.Native, (ulong)offset, cancellationToken));
     }
-    private void Check(DiskImageEntry entry)
+    private void Check(DiskEntry entry)
     {
+        owner.RequireCurrent(this);
         if (!ReferenceEquals(entry.Volume, this)) throw new ArgumentException("The entry belongs to another volume.", nameof(entry));
+        if (entry.Generation != owner.Generation) throw new InvalidOperationException("The entry is stale; refresh the directory.");
         if (_session == null || _session.IsFaulted) throw new InvalidOperationException("Reselect the volume to start a fresh filesystem session.");
     }
-    internal void Close()
+    public void Close()
     {
         try { _session?.Dispose(); }
         finally { _session = null; _root = null; }

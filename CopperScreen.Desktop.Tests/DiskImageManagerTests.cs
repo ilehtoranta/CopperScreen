@@ -76,13 +76,15 @@ public sealed partial class DiskImageManagerTests(LaunchUiFixture ui) : IDisposa
     public void RejectsUnsafeOrUnrepresentableHostNames(string name) => Assert.Throws<IOException>(() => CopperScreenDiskExtraction.ValidateName(name));
 
     [Fact]
-    public void RejectsCaseCollisionsInsideDirectoriesBeforePublishingAnyRoots()
+    public void EncodesCaseCollisionsInsideDirectoriesWithoutLosingEitherName()
     {
         var f = new AmigaFileSystemFixture(); f.BString(31, 432, "nested.BIN"); f.Fix(31);
         var path = Save(f); var host = Destination();
         using var image = CopperScreenDiskImage.Open(path); var v = image.Volumes[0];
-        Assert.Throws<IOException>(() => CopperScreenDiskExtraction.Extract(v, v.ReadDirectory(v.Root), host));
-        Assert.Empty(Directory.GetFileSystemEntries(host));
+        CopperScreenDiskExtraction.Extract(v, v.ReadDirectory(v.Root), host);
+        var names = Directory.GetFileSystemEntries(Path.Combine(host, "Tools")).Select(Path.GetFileName).ToArray();
+        Assert.Contains(CopperDisk.FileSystem.HostNameCodec.Encode("nested.BIN"), names);
+        Assert.Contains(CopperDisk.FileSystem.HostNameCodec.Encode("Nested.bin"), names);
     }
 
     private sealed class CancelAfterFile(CancellationTokenSource source) : IProgress<DiskExtractionProgress>

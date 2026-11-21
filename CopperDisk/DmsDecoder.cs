@@ -9,7 +9,7 @@ internal static class DmsDecoder
     private const int TrackBufferLength = 32000;
     private const int CylinderBytes = AmigaDiskGeometry.HeadCount * AmigaDiskGeometry.SectorsPerTrack * AmigaDiskGeometry.SectorSize;
 
-    public static byte[] Decode(ReadOnlySpan<byte> image)
+    public static byte[] Decode(ReadOnlySpan<byte> image, CancellationToken cancellationToken = default)
     {
         if (image.Length < HeaderLength)
         {
@@ -74,6 +74,7 @@ internal static class DmsDecoder
 
         while (offset < image.Length)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             if (image.Length - offset < TrackHeaderLength)
             {
                 if (IsTrailingPadding(image[offset..]))

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "Copper68k": {
+        "type": "Direct",
+        "requested": "[1.5.4, 1.5.4]",
+        "resolved": "1.5.4",
+        "contentHash": "k23LflcKNLuTVGK4mJxHhPPcx15ThxwFKWnWhItUK9obPpYKo9jAOqYBc/8SCxiueVkJFUVUcVWlgINbeTaaxg==",
+        "dependencies": {
+          "CopperFloat": "[1.0.0]"
+        }
+      },
+      "CopperStart.FileSystem.Service": {
+        "type": "Direct",
+        "requested": "[0.5.0-dev.1, 0.5.0-dev.1]",
+        "resolved": "0.5.0-dev.1",
+        "contentHash": "Q5rfPe/koyAJIBer0osmVz5B38p+rx/kS1LiHmg9iwXFBU90vkp9ZeRKA+72Fi1j+CaXzsMg1PJEmRUw12w1fw==",
+        "dependencies": {
+          "Copper68k": "[1.5.4]"
+        }
+      },
+      "CopperFloat": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "3JsCmXbubyK694it2nOL9KDp0LMVRp0VTBIf6e1ZFJ98Q59CAEBtLm+CF8tNgYmfMWkMQYPfGh9AJ9cFhaS2Rw=="
+      },
+      "copperdisk": {
+        "type": "Project"
+      }
+    }
+  }
+}

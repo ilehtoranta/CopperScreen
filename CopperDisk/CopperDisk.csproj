@@ -9,7 +9,7 @@
     <Title>CopperDisk</Title>
     <Authors>Ilkka Lehtoranta</Authors>
     <Description>Managed Amiga ADF, extended ADF, ADZ, DMS, IPF, and SCP disk image library.</Description>
-    <PackageVersion>3.0.1-dev.1</PackageVersion>
+    <PackageVersion>3.0.1-dev.5</PackageVersion>
     <Version>$(PackageVersion)</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://ilehtoranta.github.io/CopperScreen/copperdisk.html</PackageProjectUrl>

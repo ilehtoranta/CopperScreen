@@ -1,23 +1,39 @@
 using CopperStart.FileSystem;
 
-namespace CopperScreen;
+namespace CopperDisk.FileSystem;
 
-internal sealed partial class CopperScreenDiskImage
+public sealed partial class DiskImageSession
 {
-    internal void CreateDirectory(DiskImageVolume volume, DiskImageEntry directory, string name, CancellationToken token = default)
+    public void CreateDirectory(DiskVolume volume, DiskEntry directory, string name, CancellationToken token = default)
         => Mutate(volume, directory, (s, parent, ct) => { s.CreateDirectory(parent, name, ct); return default; }, token);
 
-    internal void Rename(DiskImageVolume volume, DiskImageEntry directory, DiskImageEntry entry, string name, CancellationToken token = default)
+    public void Rename(DiskVolume volume, DiskEntry directory, DiskEntry entry, string name, CancellationToken token = default)
+        => RenameTogether(volume, directory, [(entry, name)], token);
+
+    /// <summary>Rename entries in one directory and publish only if every rename succeeds.</summary>
+    public void RenameTogether(DiskVolume volume, DiskEntry directory,
+        IReadOnlyList<(DiskEntry Entry, string Name)> renames, CancellationToken token = default)
     {
-        RequireChild(volume, directory, entry);
+        if (renames.Count == 0) throw new ArgumentException("Select entries to rename.", nameof(renames));
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var (entry, _) in renames)
+        {
+            RequireChild(volume, directory, entry);
+            if (!seen.Add(entry.Path)) throw new ArgumentException("An entry can only be renamed once.", nameof(renames));
+        }
         Mutate(volume, directory, (s, parent, ct) =>
         {
-            var target = FindChild(s, parent, entry.Name, ct);
-            s.Rename(target, parent, name, ct); return default;
+            foreach (var (entry, name) in renames)
+            {
+                ct.ThrowIfCancellationRequested();
+                var target = FindChild(s, parent, entry.Name, ct);
+                s.Rename(target, parent, name, ct);
+            }
+            return default;
         }, token);
     }
 
-    internal void Delete(DiskImageVolume volume, DiskImageEntry directory, IReadOnlyList<DiskImageEntry> entries, CancellationToken token = default)
+    public void Delete(DiskVolume volume, DiskEntry directory, IReadOnlyList<DiskEntry> entries, CancellationToken token = default)
     {
         if (entries.Count == 0) throw new ArgumentException("Select entries to delete.");
         foreach (var entry in entries) RequireChild(volume, directory, entry);
@@ -50,17 +66,19 @@ internal sealed partial class CopperScreenDiskImage
     private static FileSystemEntry FindChild(FileSystemSession s, FileSystemEntry parent, string name, CancellationToken ct)
         => s.EnumerateDirectory(parent, ct).Single(e => e.Name == name);
 
-    private static void RequireChild(DiskImageVolume volume, DiskImageEntry directory, DiskImageEntry entry)
+    private static void RequireChild(DiskVolume volume, DiskEntry directory, DiskEntry entry)
     {
         volume.Owner.RequireCurrent(volume);
+        if (entry.Generation != volume.Owner.Generation || directory.Generation != volume.Owner.Generation)
+            throw new InvalidOperationException("The selection is stale; refresh before saving.");
         if (!ReferenceEquals(directory.Volume, volume) || !directory.IsDirectory || !ReferenceEquals(entry.Volume, volume) || entry.IsLink || entry.Path == "/" ||
             entry.Path != directory.Path.TrimEnd('/') + "/" + entry.Name)
             throw new NotSupportedException("Choose an ordinary entry in the current directory.");
     }
 
-    internal DiskExtractionProgress CopyFromImage(DiskImageVolume target, DiskImageEntry directory,
-        DiskImageVolume source, IReadOnlyList<DiskImageEntry> entries, CancellationToken token = default,
-        IProgress<DiskExtractionProgress>? progress = null)
+    public DiskProgress CopyFromImage(DiskVolume target, DiskEntry directory,
+        DiskVolume source, IReadOnlyList<DiskEntry> entries, CancellationToken token = default,
+        IProgress<DiskProgress>? progress = null)
     {
         if (!ReferenceEquals(source.Owner, this) && string.Equals(source.Owner.FilePath, FilePath, StringComparison.OrdinalIgnoreCase))
             throw new NotSupportedException("Use one shared image owner for copies within an image.");
@@ -79,11 +97,11 @@ internal sealed partial class CopperScreenDiskImage
         }, token);
     }
 
-    private static DiskExtractionProgress CopyTrees(FileSystemSession s, FileSystemEntry parent,
-        DiskImageVolume source, IReadOnlyList<DiskImageEntry> entries, CancellationToken ct, IProgress<DiskExtractionProgress>? progress)
+    private static DiskProgress CopyTrees(FileSystemSession s, FileSystemEntry parent,
+        DiskVolume source, IReadOnlyList<DiskEntry> entries, CancellationToken ct, IProgress<DiskProgress>? progress)
     {
-        var result = new DiskExtractionProgress();
-        var pending = new Stack<(DiskImageEntry Entry, FileSystemEntry Parent, FileSystemEntry? Finish)>();
+        var result = new DiskProgress();
+        var pending = new Stack<(DiskEntry Entry, FileSystemEntry Parent, FileSystemEntry? Finish)>();
         foreach (var entry in entries.Reverse()) pending.Push((entry, parent, null));
         long directories = 0;
         while (pending.TryPop(out var item))
@@ -113,7 +131,7 @@ internal sealed partial class CopperScreenDiskImage
         return result;
     }
 
-    internal void Protect(DiskImageVolume volume, DiskImageEntry directory, IReadOnlyList<DiskImageEntry> entries,
+    public void Protect(DiskVolume volume, DiskEntry directory, IReadOnlyList<DiskEntry> entries,
         uint mask, uint value, CancellationToken token = default)
     {
         if (entries.Count == 0) throw new ArgumentException("Select entries to protect.");
@@ -130,9 +148,9 @@ internal sealed partial class CopperScreenDiskImage
         }, token);
     }
 
-    internal DiskExtractionProgress MoveFromImage(DiskImageVolume target, DiskImageEntry directory,
-        DiskImageVolume source, DiskImageEntry sourceDirectory, IReadOnlyList<DiskImageEntry> entries,
-        CancellationToken token = default, IProgress<DiskExtractionProgress>? progress = null)
+    public DiskProgress MoveFromImage(DiskVolume target, DiskEntry directory,
+        DiskVolume source, DiskEntry sourceDirectory, IReadOnlyList<DiskEntry> entries,
+        CancellationToken token = default, IProgress<DiskProgress>? progress = null)
     {
         if (source.ImportUnavailableReason is { } reason) throw new NotSupportedException(reason);
         if (entries.Count == 0) throw new ArgumentException("Select entries to move.");
@@ -159,11 +177,11 @@ internal sealed partial class CopperScreenDiskImage
         var result = CopyFromImage(target, directory, source, entries, token, progress);
         try { source.Owner.Delete(source, sourceDirectory, entries, token); }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or OperationCanceledException or TimeoutException)
-        { throw new IOException("Copy saved, but source removal could not be confirmed. Destination files are retained. Check the source before retrying. " + ex.Message, ex); }
+        { throw new DiskMoveIncompleteException(result, ex); }
         return result;
     }
 
-    private static void Metadata(FileSystemSession s, FileSystemEntry target, DiskImageEntry source, CancellationToken ct)
+    private static void Metadata(FileSystemSession s, FileSystemEntry target, DiskEntry source, CancellationToken ct)
     {
         if (source.Modified is { } date) SetDate(s, target, date, ct);
         s.SetComment(target, source.Comment, ct);

@@ -37,6 +37,14 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
+The 2026-11-21 SysInfo 4.4 development replay scored 2,102,037 Dhrystones in
+two cold and two warm runs using the 256× 68040 JIT and the frozen CopperStart
+installation. Click to result took 7.674–7.676 wall seconds for 7.672 PAL seconds,
+with at most 10.349 ms of field lateness. The separate AMD diagnostic pins the
+emulation thread, places helper threads outside its physical core and applies
+host-load policy v2 across preflight, execution and cooldown. These results are
+for the local development CPU package and the paced SysInfo workload.
+
 The [idle-host inlining rerun](HIRES_FALLBACK_IDLE_2026-11-04.md) is **VALID**, with six pairs per workload. Lemmings changes -0.7596% (95% interval -2.7803% to +1.3031%); hires changes +3.0532% (interval +0.0119% to +6.1871%). Hires passes its 1% retention bound and has recovered against the original baseline; Lemmings and lores retention remain unestablished. Three-workload retention is **NOT_ESTABLISHED**. All 36 identities and 1312 telemetry intervals pass. Earlier invalid evidence is preserved separately.
 
 The [2026-11-04 fallback inlining fix](HIRES_FALLBACK_INLINE_2026-11-04.md) adds a

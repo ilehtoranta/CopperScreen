@@ -2,12 +2,76 @@ using System.Buffers.Binary;
 namespace CopperDisk;
 
 /// <summary>A read-only, protected against concurrent writers, sector image for desktop disk tools.</summary>
-/// <remarks>Single-consumer API. Supports raw ADF/HDF and RDB partitions; contains no filesystem implementation.</remarks>
+/// <remarks>Single-consumer API. Supports raw ADF/HDF, RDB partitions and read-only IPF/DMS; contains no filesystem implementation.</remarks>
 public sealed class AmigaSectorImage : IDisposable
 {
     private readonly FileStream _stream;
+    private readonly ValidatedSectorImage? _decoded;
+    private readonly byte[]? _dmsSectors;
+    private readonly DmsArchive? _dmsArchive;
 
     private AmigaSectorImage(FileStream stream) => _stream = stream;
+    private AmigaSectorImage(FileStream stream, ValidatedSectorImage decoded) => (_stream, _decoded) = (stream, decoded);
+    private AmigaSectorImage(FileStream stream, byte[] sectors, DmsArchive archive) => (_stream, _dmsSectors, _dmsArchive) = (stream, sectors, archive);
+
+    /// <summary>Whether decoded sectors must be encoded as DMS before publication.</summary>
+    public bool IsDms => _dmsArchive != null;
+    /// <summary>Container-level write restriction, independent of host file permissions.</summary>
+    public string? WriteUnavailableReason => _decoded != null ? "IPF images are read-only." : _dmsArchive?.WriteUnavailableReason;
+
+    /// <summary>Encode and verify a DMS replacement, preserving archive header metadata. Does not publish it.</summary>
+    public void WriteDmsReplacement(Stream sectors, Stream destination, CancellationToken cancellationToken = default)
+    {
+        if (_dmsArchive == null) throw new InvalidOperationException("This image is not a DMS archive.");
+        _dmsArchive.WriteReplacement(sectors, destination, cancellationToken);
+    }
+
+    /// <summary>Open a complete, unencrypted standard DD DMS archive as read-only sectors.</summary>
+    public static AmigaSectorImage OpenDms(string path)
+    {
+        var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        try
+        {
+            if (source.Length > 256 * 1024 * 1024) throw new InvalidDataException("DMS archive exceeds the 256 MiB decoding limit.");
+            var bytes = new byte[checked((int)source.Length)];
+            source.ReadExactly(bytes);
+            byte[] sectors;
+            try { sectors = DmsDecoder.Decode(bytes); }
+            catch (AmigaDiskException ex) { throw new InvalidDataException(ex.Message, ex); }
+            var image = new AmigaSectorImage(source, sectors, new DmsArchive(bytes));
+            image.Volumes = Array.AsReadOnly(new[] { new AmigaImageVolume(image, "DMS", 0, sectors.LongLength, 512, 2, null, null) });
+            return image;
+        }
+        catch { source.Dispose(); throw; }
+    }
+
+    /// <summary>Open IPF preservation media as a strictly validated read-only sector view.</summary>
+    public static AmigaSectorImage OpenIpf(string path)
+    {
+        var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        try
+        {
+            if (source.Length > 256 * 1024 * 1024) throw new InvalidDataException("IPF image exceeds the 256 MiB decoding limit.");
+            var bytes = new byte[checked((int)source.Length)]; source.ReadExactly(bytes);
+            var ipf = IpfDecoder.Decode(bytes);
+            if (ipf.MinCylinder < 0 || ipf.MaxCylinder > 83 || ipf.MinHead < 0 || ipf.MaxHead > 1) throw new NotSupportedException("Unsupported IPF geometry.");
+            var tracks = new IAmigaTrack[(Math.Max(79, ipf.MaxCylinder) + 1) * 2];
+            Array.Fill<IAmigaTrack>(tracks, AmigaEncodedTrack.FromBytes(AmigaDosTrackEncoder.CreateUnformattedTrack()));
+            var seen = new HashSet<int>();
+            foreach (var track in ipf.Tracks)
+            {
+                if (track.Cylinder is < 0 or > 83 || track.Head is < 0 or > 1) throw new InvalidDataException("Invalid IPF track coordinates.");
+                var number = checked(track.Cylinder * 2 + track.Head);
+                if ((uint)number >= tracks.Length || !seen.Add(number)) throw new InvalidDataException("Duplicate or invalid IPF track.");
+                tracks[number] = track;
+            }
+            var decoded = AmigaDosTrackDecoder.DecodeValidated(tracks);
+            var image = new AmigaSectorImage(source, decoded);
+            image.Volumes = Array.AsReadOnly(new[] { new AmigaImageVolume(image, "IPF", 0, decoded.SectorCount * 512L, 512, 2, null, null) });
+            return image;
+        }
+        catch { source.Dispose(); throw; }
+    }
 
     /// <summary>Discovered volumes, including invalid extents with an explanation.</summary>
     public IReadOnlyList<AmigaImageVolume> Volumes { get; private set; } = [];
@@ -62,15 +126,32 @@ public sealed class AmigaSectorImage : IDisposable
         catch { stream.Dispose(); throw; }
     }
 
-    internal long Length => _stream.Length;
-    /// <summary>Copy the protected image bytes to an unpublished host file.</summary>
+    internal long Length => _dmsSectors?.LongLength ?? (_decoded == null ? _stream.Length : _decoded.SectorCount * 512L);
+    /// <summary>Copy protected raw/decoded sectors into an empty working file, using sparse
+    /// host storage when supported. Returns whether sparse storage was enabled.</summary>
+    public bool CopyToSparse(FileStream destination, CancellationToken cancellationToken = default)
+    {
+        if (WriteUnavailableReason is { } reason) throw new NotSupportedException(reason);
+        if (_dmsSectors != null)
+        {
+            using var source = new MemoryStream(_dmsSectors, writable: false);
+            return AmigaSparseFile.Copy(source, destination, cancellationToken);
+        }
+        _stream.Position = 0;
+        return AmigaSparseFile.Copy(_stream, destination, cancellationToken);
+    }
+    /// <summary>Copy protected raw/decoded sectors to an unpublished working file.</summary>
     public void CopyTo(Stream destination, CancellationToken cancellationToken = default)
     {
+        if (WriteUnavailableReason is { } reason) throw new NotSupportedException(reason);
+        if (_dmsSectors != null) { destination.WriteAsync(_dmsSectors, cancellationToken).AsTask().GetAwaiter().GetResult(); return; }
         _stream.Position = 0;
         _stream.CopyToAsync(destination, 65536, cancellationToken).GetAwaiter().GetResult();
     }
     internal void Read(long offset, Span<byte> data)
     {
+        if (_dmsSectors != null) { _dmsSectors.AsSpan(checked((int)offset), data.Length).CopyTo(data); return; }
+        if (_decoded != null) { _decoded.Read(offset, data); return; }
         _stream.Position = offset;
         _stream.ReadExactly(data);
     }

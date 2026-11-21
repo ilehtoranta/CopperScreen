@@ -123,11 +123,19 @@ public sealed partial class LightweightA500Machine
         ThrowIfDisposed();
         return new(configuration, _enableConservativeCpuLoopBatch, _hdf, _rtc);
     }
-    public bool HasHostGateway(uint address) => _hdf is { } hdf && hdf.HasHostGateway(address);
+    public bool HasHostGateway(uint address) => IsCopperStartBootstrapGateway(address) ||
+        _hdf is { } hdf && hdf.HasHostGateway(address);
     internal uint NormalizeCpuAddress(uint address)
         => CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010 or M68kCpuModel.M68EC020 ? address & 0xFFFFFF : address;
     public bool TryInvokeHostGateway(uint address, uint token, M68kCpuState state)
-        => _hdf is { } hdf && hdf.TryInvokeHostGateway(address, token, state);
+    {
+        if (token == CopperStartBootstrapToken && IsCopperStartBootstrapGateway(address))
+        {
+            HandleCopperStartBootstrap(state);
+            return true;
+        }
+        return _hdf is { } hdf && hdf.TryInvokeHostGateway(address, token, state);
+    }
 
     internal bool IsHdfRamRange(uint address, int count)
         => count >= 0 && ((address < _chipRam.Length && (ulong)address + (uint)count <= (uint)_chipRam.Length) ||

@@ -73,18 +73,49 @@ public sealed class CopperOsDesktopBootTests
                 { fields, cycle = session.Machine.Cycle, guestSeconds = session.Machine.Cycle / 7093790.0 }));
             var redrawStart = fields;
             var redrawCycle = session.Machine.Cycle;
+            var beforeSelection = session.Framebuffer.ToArray();
             session.KeyDown(AmigaRawKey.Tab); Run(4); session.KeyUp(AmigaRawKey.Tab); Run(4);
             bool Redrawn() => Ready() && Long(State() + 28) == 1 && Long(State() + 156) == 1;
             while (!Redrawn() && fields - redrawStart < 40) Run(1);
             Assert.True(Redrawn(), "Tab selection did not finish drawing");
-            Assert.InRange(fields - redrawStart, 1, 17); // exec.6 takes 15; redraw.5 took 17, text.4 took 21.
+            Assert.False(beforeSelection.AsSpan().SequenceEqual(session.Framebuffer));
+            Assert.InRange(fields - redrawStart, 1, 17); // Historical compact-image work bound.
             File.WriteAllText(Path.Combine(output, "redraw-timing.json"), System.Text.Json.JsonSerializer.Serialize(new
                 { fields = fields - redrawStart, guestSeconds = (session.Machine.Cycle - redrawCycle) / 7093790.0 }));
             NativeCapture.WritePng(Path.Combine(output, "selected-desktop.png"), session.Framebuffer, session.Width, session.Height);
             session.KeyDown(AmigaRawKey.E); Run(4); session.KeyUp(AmigaRawKey.E); Run(4);
             Wait(2, "editor");
+            void Press(AmigaRawKey key)
+            { session.KeyDown(key); Run(4); session.KeyUp(key); Run(4); }
+            Press(AmigaRawKey.A); Run(20);
+            var document = Long(State() + 208);
+            Assert.NotEqual(0u, document);
+            Assert.Equal(1u, Long(document));
+            session.KeyDown(AmigaRawKey.LeftShift); Run(4);
+            Press(AmigaRawKey.B);
+            session.KeyUp(AmigaRawKey.LeftShift); Run(4); Run(20);
+            Assert.Equal(2u, Long(document));
+            Assert.Equal("aB", System.Text.Encoding.ASCII.GetString(session.Machine.ChipRam.Span.Slice((int)document + 544, 2)));
+            Press(AmigaRawKey.Backspace); Run(20);
+            Assert.Equal(1u, Long(document));
+            Assert.Equal((byte)'a', session.Machine.ChipRam.Span[(int)document + 544]);
+            NativeCapture.WritePng(Path.Combine(output, "editor-input.png"), session.Framebuffer, session.Width, session.Height);
             session.Reset();
             Wait(0, "reset-desktop");
+            // Move the physical relative mouse to the centre of the Editor tile.
+            // Screen's public WORD MouseY/MouseX use screen pixels. The
+            // IntuitionBase coordinates use hires/interlace units instead.
+            for (var move = 0; move < 8; move++)
+            {
+                var mouse = Long(Long(State() + 16) + 16);
+                var dx = 310 - (short)mouse; var dy = 112 - (short)(mouse >> 16);
+                if (Math.Abs(dx) <= 1 && dy == 0) break;
+                session.MoveMousePort(Math.Clamp(dx / 2, -80, 80), Math.Clamp(dy, -80, 80));
+                Run(4);
+            }
+            session.SetMouseButtons(true, false); Run(4);
+            session.SetMouseButtons(false, false); Run(4);
+            Wait(2, "mouse-editor");
             session.SavePersistentStorage();
             session.Dispose();
             using var reopened = Assert.IsType<CopperScreenLightweightSession>(CopperScreenSession.Create(draft.ToStartupOptions(AppContext.BaseDirectory)));

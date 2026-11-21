@@ -117,6 +117,57 @@ public sealed class LightweightCpuIntegrationTests
         Assert.False(bus.IsJitCodeAddress(0x10FE, 4, M68kBusAccessKind.CpuInstructionFetch));
     }
 
+    [Fact]
+    public void AcceleratedFastRamSnapshotTracksBothPages()
+    {
+        const uint firstPage = 0x00200000;
+        const uint secondPage = firstPage + 0x100;
+        using var machine = new LightweightA500Machine(new()
+        {
+            CpuModel = M68kCpuModel.M68040,
+            CpuExecutionMode = M68kExecutionMode.Jit,
+            CpuClockMultiplier = 4,
+            FastRamBytes = 512 * 1024
+        });
+        var cycle = machine.Cycle;
+        machine.WriteByte(0xE8004A, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteByte(0xE80048, 0x20, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteWord(secondPage - 2, 0x7201, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteWord(secondPage, 0x60FC, ref cycle, M68kBusAccessKind.CpuDataWrite);
+
+        var bus = new LightweightAccelerated040Bus(machine);
+        var notifiedAddress = 0u;
+        machine.JitCodeRangeWritten += (address, _) => notifiedAddress = address;
+        Assert.True(bus.CanCaptureJitCodeSnapshot(secondPage - 2, 4));
+        Assert.False(bus.CanCaptureJitCodeSnapshot(secondPage - 1, 4));
+        Assert.False(bus.CanCaptureJitCodeSnapshot(secondPage, 1));
+        Assert.False(bus.CanCaptureJitCodeSnapshot(0xDFF000, 4));
+        machine.WriteWord(secondPage - 2, 0x7202, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0u, notifiedAddress);
+        machine.WriteWord(secondPage - 2, 0x7201, ref cycle, M68kBusAccessKind.CpuDataWrite);
+
+        Assert.True(machine.TryCaptureJitCodeSnapshot(secondPage - 2, 4, out var snapshot));
+        Assert.Equal(new byte[] { 0x72, 1, 0x60, 0xFC }, snapshot.Bytes);
+        Assert.Equal(new[] { firstPage, secondPage }, snapshot.GenerationStamp.Pages);
+        var generations = snapshot.GenerationStamp.Generations;
+        Assert.True(machine.JitCodeRangeGenerationMatches(secondPage - 2, 4, generations[0], generations[1]));
+
+        machine.WriteWord(secondPage, 0x4E71, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(secondPage, notifiedAddress);
+        Assert.Equal(generations[0], machine.GetJitCodePageGeneration(firstPage));
+        Assert.False(machine.JitCodeRangeGenerationMatches(secondPage - 2, 4, generations[0], generations[1]));
+        Assert.Equal(new byte[] { 0x72, 1, 0x60, 0xFC }, snapshot.Bytes);
+
+        const uint romPageEnd = 0x00F800FE;
+        var rom = new byte[512 * 1024];
+        rom[0xFE] = 0x4E;
+        rom[0xFF] = 0x71;
+        machine.LoadKickstart(rom);
+        Assert.True(bus.CanCaptureJitCodeSnapshot(romPageEnd, 4));
+        Assert.True(bus.TryCaptureJitCodeSnapshot(romPageEnd, 4, out var romSnapshot));
+        Assert.Equal(new byte[] { 0x4E, 0x71 }, romSnapshot.Bytes);
+    }
+
     [Theory]
     [InlineData(false)] [InlineData(true)]
     public void PendingInterruptExitsRunningLoopWithArchitecturalFrame(bool jit)

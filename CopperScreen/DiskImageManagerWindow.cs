@@ -43,7 +43,7 @@ internal sealed partial class DiskImageManagerWindow : Window
         var picked = await StorageProvider.OpenFilePickerAsync(new()
         {
             Title = $"Open {pane.Side.ToLowerInvariant()} disk image", AllowMultiple = false,
-            FileTypeFilter = [new("Sector disk images") { Patterns = ["*.adf", "*.hdf", "*.img"] }]
+            FileTypeFilter = [new("Amiga disk images") { Patterns = ["*.adf", "*.hdf", "*.img", "*.ipf", "*.dms"] }]
         });
         if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await OpenImageAsync(pane, path);
         ApplyMode(pane);
@@ -121,6 +121,7 @@ internal sealed partial class DiskImageManagerWindow : Window
 
     private Task OpenSelectionAsync(Pane pane)
     {
+        if (ViewUnavailable(pane) == null) return ShowFileAsync(pane, false);
         if (pane.IsHost)
             return pane.List.SelectedItem is HostItem { IsDirectory: true } h ? RunAsync(ct => ReadHostAsync(pane, h.Path, ct)) : Task.CompletedTask;
         return RunAsync(async ct =>
@@ -162,6 +163,13 @@ internal sealed partial class DiskImageManagerWindow : Window
             if (_busy) _status.Text = $"{(move ? "Moving" : "Copying")}: {p.Files:N0} files · {p.Bytes:N0} bytes · {p.Name}";
         });
         var sourceHost = source.IsHost; var destinationHost = destination.IsHost;
+        var interpretation = CopperDisk.FileSystem.HostNameInterpretation.RestoreEncoded;
+        if (sourceHost && !destinationHost)
+        {
+            var choice = await ChooseImportNamesAsync(selected.Cast<HostItem>().Select(i => i.Path).ToArray(), ct);
+            if (choice == null) { _status.Text = "Import cancelled; no changes saved."; return; }
+            interpretation = choice.Value;
+        }
         DiskExtractionProgress result;
         try { result = await Task.Run(() =>
         {
@@ -170,7 +178,7 @@ internal sealed partial class DiskImageManagerWindow : Window
                 var paths = selected.Cast<HostItem>().Select(i => i.Path).ToArray();
                 using var removal = move ? new CopperScreenHostMove(paths, ct) : null;
                 var copied = destinationHost ? CopperScreenDiskExtraction.CopyHost(paths, destination.HostDirectory, progress, ct)
-                    : destination.Image!.Import(destination.Volume!, destination.Directories.Peek(), paths, ct, progress);
+                    : destination.Image!.Import(destination.Volume!, destination.Directories.Peek(), paths, ct, progress, interpretation);
                 if (removal != null)
                     try { removal.Remove(ct); }
                     catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
@@ -369,6 +377,10 @@ internal sealed partial class DiskImageManagerWindow : Window
         _all.IsEnabled = _invert.IsEnabled = _active.List.ItemCount > 0;
         _clear.IsEnabled = _active.List.SelectedItems is { Count: > 0 };
         _info.IsEnabled = _active.List.SelectedItems is { Count: 1 };
+        var viewReason = _busy ? "An operation is running." : ViewUnavailable(_active);
+        _text.IsEnabled = _hex.IsEnabled = viewReason == null;
+        ToolTip.SetTip(_text, viewReason ?? "View selected file as text (F3)");
+        ToolTip.SetTip(_hex, viewReason ?? "View selected file as hexadecimal bytes (Shift+F3)");
         var unavailable = WriteUnavailable(_active);
         _newDirectory.IsEnabled = unavailable == null;
         _rename.IsEnabled = unavailable == null && _active.List.SelectedItems is { Count: 1 } && _active.List.SelectedItem is ImageItem { Entry.IsLink: false };
@@ -412,6 +424,8 @@ internal sealed partial class DiskImageManagerWindow : Window
             Key.F6 when e.KeyModifiers == KeyModifiers.None => () => { SetActivePane(Other); _active.List.Focus(); return Task.CompletedTask; },
             Key.F5 when e.KeyModifiers == KeyModifiers.None => CopyActiveAsync,
             Key.F5 when e.KeyModifiers == KeyModifiers.Shift => () => MovePromptAsync(_active, Other),
+            Key.F3 when e.KeyModifiers == KeyModifiers.None => () => ShowFileAsync(_active, false),
+            Key.F3 when e.KeyModifiers == KeyModifiers.Shift => () => ShowFileAsync(_active, true),
             Key.F7 when e.KeyModifiers == KeyModifiers.None => NewDirectoryPromptAsync,
             Key.F2 when e.KeyModifiers == KeyModifiers.None => RenamePromptAsync,
             Key.Delete when e.KeyModifiers == KeyModifiers.None => DeletePromptAsync,

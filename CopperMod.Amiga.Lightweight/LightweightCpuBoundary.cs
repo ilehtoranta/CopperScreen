@@ -45,7 +45,10 @@ internal class LightweightCpuBoundary :
         _machine.AdvanceHardwareTo(currentCycle);
     }
 
+    protected LightweightA500Machine Machine => _machine;
     protected bool DispatchPendingInterrupt() => _machine.DispatchPendingCpuInterrupt();
+    public virtual bool PreservesBusDeadlineOnEarlyReturn => false;
+
 
     public virtual bool TryBeginBusAccessTraceBatch(
         M68kCpuState state,
@@ -57,7 +60,7 @@ internal class LightweightCpuBoundary :
         return batchTargetCycle > state.Cycles;
     }
 
-    public void AfterBusAccessTraceBatch(
+    public virtual void AfterBusAccessTraceBatch(
         long previousCycle,
         long currentCycle,
         int instructionCount)
@@ -69,7 +72,7 @@ internal class LightweightCpuBoundary :
         }
     }
 
-    public bool TryFastForwardStoppedInstruction(
+    public virtual bool TryFastForwardStoppedInstruction(
         M68kCpuState state,
         long targetCycle,
         out long advancedCycles)
@@ -91,9 +94,18 @@ internal class LightweightCpuBoundary :
 
 // Only JIT exposes the pure compiled-slice contract. The 68000 interpreter's
 // existing conservative boundary and execution path remain unchanged.
-internal sealed class LightweightJitCpuBoundary(LightweightA500Machine machine)
+internal class LightweightJitCpuBoundary(LightweightA500Machine machine)
     : LightweightCpuBoundary(machine), IM68kPureCpuTraceBatchBoundary
 {
+    public override bool TryFastForwardStoppedInstruction(
+        M68kCpuState state, long targetCycle, out long advancedCycles)
+    {
+        // Hand STOP back to the machine owner. It samples IPL between device
+        // edges and can sleep to a field boundary with all fitted IPLs masked.
+        advancedCycles = 0;
+        return false;
+    }
+
     public override bool TryBeginBusAccessTraceBatch(M68kCpuState state, long targetCycle, out long batchTargetCycle)
     {
         var allowed = base.TryBeginBusAccessTraceBatch(state, targetCycle, out batchTargetCycle);
@@ -106,4 +118,56 @@ internal sealed class LightweightJitCpuBoundary(LightweightA500Machine machine)
         => TryBeginBusAccessTraceBatch(state, targetCycle, out batchTargetCycle);
     public void AfterPureCpuTraceBatch(long previousCycle, long currentCycle, int instructionCount)
         => AfterBusAccessTraceBatch(previousCycle, currentCycle, instructionCount);
+}
+
+internal sealed class Lightweight040JitCpuBoundary(LightweightA500Machine machine)
+    : LightweightJitCpuBoundary(machine), IM68kInstructionBoundary
+{
+    private long _targetCompletedFrames;
+
+    public override bool PreservesBusDeadlineOnEarlyReturn => Machine.UsesAcceleratedCpuClock;
+
+    internal void BeginFrameProbe(long targetCompletedFrames)
+    {
+        _targetCompletedFrames = targetCompletedFrames;
+        Machine.AdvanceHardwareTo(Machine.ToBoardCycle(Machine.Cpu.Cycles));
+    }
+
+    bool IM68kInstructionBoundary.BeforeInstruction()
+    {
+        Machine.AdvanceHardwareTo(Machine.ToBoardCycle(Machine.Cpu.Cycles));
+        // A live raster change can complete the field before the deadline
+        // given to the CPU when the probe began.
+        return Machine.CompletedFrames < _targetCompletedFrames && !DispatchPendingInterrupt();
+    }
+
+    void IM68kInstructionBoundary.AfterInstruction(long previousCycle, long currentCycle)
+        => Machine.AdvanceHardwareTo(Machine.ToBoardCycle(currentCycle));
+
+    public override bool TryBeginBusAccessTraceBatch(M68kCpuState state, long targetCycle, out long batchTargetCycle)
+    {
+        if (Machine.CompletedFrames >= _targetCompletedFrames)
+        {
+            batchTargetCycle = state.Cycles;
+            return false;
+        }
+        if (!Machine.UsesAcceleratedCpuClock)
+            return base.TryBeginBusAccessTraceBatch(state, targetCycle, out batchTargetCycle);
+
+        Machine.AdvanceHardwareTo(Machine.ToBoardCycle(state.Cycles));
+        if (Machine.CompletedFrames >= _targetCompletedFrames || DispatchPendingInterrupt())
+        {
+            batchTargetCycle = state.Cycles;
+            return false;
+        }
+        var boardDeadline = Machine.ClampAcceleratedJitToDeviceEdge(Machine.ToBoardCycle(targetCycle));
+        batchTargetCycle = Math.Min(targetCycle, Machine.ToCpuCycle(boardDeadline));
+        return batchTargetCycle > state.Cycles;
+    }
+
+    public override void AfterBusAccessTraceBatch(long previousCycle, long currentCycle, int instructionCount)
+    {
+        if (instructionCount > 0)
+            Machine.AdvanceHardwareTo(Machine.ToBoardCycle(currentCycle));
+    }
 }

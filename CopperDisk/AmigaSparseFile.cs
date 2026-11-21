@@ -68,14 +68,63 @@ public static class AmigaSparseFile
 
     /// <summary>Copy into an empty output, retaining its complete logical length.</summary>
     public static bool Copy(Stream source, FileStream target)
+        => Copy(source, target, CancellationToken.None);
+
+    /// <summary>Copy into an empty output with cancellation and optional sparse storage.
+    /// Unsupported sparse storage falls back to ordinary writes.</summary>
+    public static bool Copy(Stream source, FileStream target, CancellationToken cancellationToken, bool sparseStorage = true)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         if (target.Length != 0 || target.Position != 0) throw new ArgumentException("Sparse copy requires an empty output.", nameof(target));
-        var sparse = TryEnable(target);
+        var sparse = sparseStorage && TryEnable(target);
         var buffer = new byte[65536];
         int count;
-        while ((count = source.Read(buffer)) != 0) Write(target, buffer.AsSpan(0, count), sparse);
+        while ((count = source.Read(buffer)) != 0)
+        { cancellationToken.ThrowIfCancellationRequested(); Write(target, buffer.AsSpan(0, count), sparse); }
+        cancellationToken.ThrowIfCancellationRequested();
         target.SetLength(target.Position);
         return sparse;
+    }
+
+    /// <summary>Reclaim verified zero-only allocation units after writes to an owned sparse file.
+    /// Preserves every logical byte, the file length and the caller's position.</summary>
+    public static void CompactZeros(FileStream file, bool sparse, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!sparse) return;
+        var position = file.Position;
+        var length = file.Length;
+        var buffer = new byte[Alignment];
+        long zeroStart = 0, zeroLength = 0;
+        void Reclaim()
+        {
+            // Discard accepts an int length. Split large runs on allocation boundaries.
+            const int maximum = int.MaxValue / Alignment * Alignment;
+            while (zeroLength >= Alignment)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var count = (int)Math.Min(zeroLength / Alignment * Alignment, maximum);
+                Discard(file, zeroStart, count); zeroStart += count; zeroLength -= count;
+            }
+            zeroLength = 0;
+        }
+        try
+        {
+            file.Flush(); file.Position = 0;
+            for (long offset = 0; offset < length;)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var count = (int)Math.Min(Alignment, length - offset);
+                file.ReadExactly(buffer.AsSpan(0, count));
+                if (!buffer.AsSpan(0, count).ContainsAnyExcept((byte)0))
+                { if (zeroLength == 0) zeroStart = offset; zeroLength += count; }
+                else Reclaim();
+                offset += count;
+            }
+            Reclaim();
+            cancellationToken.ThrowIfCancellationRequested();
+        }
+        finally { file.Position = position; }
     }
 
     /// <summary>Actual host allocation, or null on an unsupported OS/ABI or failed query.</summary>

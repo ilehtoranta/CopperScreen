@@ -16,6 +16,11 @@ public sealed record LightweightA500Configuration
     public M68kCpuModel CpuModel { get; init; } = M68kCpuModel.M68000;
     /// <summary>Optional 68040 JIT with interpreter fallback at unsupported instructions and MMU accesses.</summary>
     public M68kExecutionMode CpuExecutionMode { get; init; } = M68kExecutionMode.Interpreter;
+    /// <summary>
+    /// Number of CPU timing units per motherboard cycle for the 68040 JIT.
+    /// Powers of two greater than one select experimental zero-wait Fast RAM and ROM.
+    /// </summary>
+    public int CpuClockMultiplier { get; init; } = 1;
     /// <summary>Connected drives, DF0 through DF3 (1–4). Media starts write protected.</summary>
     public int FloppyDriveCount { get; init; } = 1;
     /// <summary>Fitted drive types in DF0–DF3 order. Unspecified connected drives are DD.</summary>

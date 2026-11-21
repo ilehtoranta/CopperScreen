@@ -1,12 +1,12 @@
-namespace CopperScreen;
+namespace CopperDisk.FileSystem;
 
-internal readonly record struct DiskExtractionProgress(int Files, long Bytes, string Name);
+public readonly record struct DiskProgress(int Files, long Bytes, string Name);
 
 // Host destination policy belongs to the desktop tool, not the emulated hardware.
-internal static class CopperScreenDiskExtraction
+public static class DiskTransfer
 {
-    internal static DiskExtractionProgress CopyHost(IReadOnlyList<string> entries, string destination,
-        IProgress<DiskExtractionProgress>? progress, CancellationToken token)
+    public static DiskProgress CopyHost(IReadOnlyList<string> entries, string destination,
+        IProgress<DiskProgress>? progress, CancellationToken token)
     {
         destination = Path.TrimEndingDirectorySeparator(Path.GetFullPath(destination));
         RequireOrdinaryDirectory(destination);
@@ -14,7 +14,7 @@ internal static class CopperScreenDiskExtraction
         var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach (var source in entries)
         {
-            CopperScreenDiskImage.RequireOrdinarySource(source);
+            DiskImageSession.RequireOrdinarySource(source);
             var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(source)); ValidateName(name);
             if (!names.Add(name)) throw new IOException("Selected host names collide.");
             RequireAbsent(Path.Combine(destination, name));
@@ -27,12 +27,12 @@ internal static class CopperScreenDiskExtraction
         Directory.CreateDirectory(stage);
         try
         {
-            var result = new DiskExtractionProgress(); var buffer = new byte[65536];
+            var result = new DiskProgress(); var buffer = new byte[65536];
             var pending = new Stack<(string Source, string Parent, bool Finish)>();
             foreach (var source in entries.Reverse()) pending.Push((source, stage, false));
             while (pending.TryPop(out var item))
             {
-                token.ThrowIfCancellationRequested(); CopperScreenDiskImage.RequireOrdinarySource(item.Source);
+                token.ThrowIfCancellationRequested(); DiskImageSession.RequireOrdinarySource(item.Source);
                 var name = Path.GetFileName(Path.TrimEndingDirectorySeparator(item.Source)); ValidateName(name);
                 var target = Path.Combine(item.Parent, name);
                 if (item.Finish) { Directory.SetLastWriteTime(target, Directory.GetLastWriteTime(item.Source)); continue; }
@@ -64,38 +64,41 @@ internal static class CopperScreenDiskExtraction
         finally { Directory.Delete(stage, true); }
     }
 
-    internal static DiskExtractionProgress Extract(DiskImageVolume volume,
-        IReadOnlyList<DiskImageEntry> entries, string destination,
-        IProgress<DiskExtractionProgress>? progress = null, CancellationToken cancellationToken = default)
+    public static DiskProgress Extract(DiskVolume volume,
+        IReadOnlyList<DiskEntry> entries, string destination,
+        IProgress<DiskProgress>? progress = null, CancellationToken cancellationToken = default)
     {
         if (entries.Count == 0) throw new InvalidOperationException("Select files or directories to copy.");
         destination = Path.TrimEndingDirectorySeparator(Path.GetFullPath(destination));
         RequireOrdinaryDirectory(destination);
+        var roots = entries.Select(e => e.Path[..Math.Max(1, e.Path.LastIndexOf('/'))]).Distinct(StringComparer.Ordinal).ToArray();
+        if (roots.Length != 1) throw new ArgumentException("Select entries in one directory.");
+        var root = DiskImageSession.ResolvePath(volume, roots[0], cancellationToken);
+        var aliases = HostNameCodec.MapSiblings(volume.ReadDirectory(root, cancellationToken).Select(e => e.Name));
         var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach (var entry in entries)
         {
-            ValidateName(entry.Name);
-            if (!names.Add(entry.Name)) throw new IOException("Selected names collide on the host.");
-            RequireAbsent(Path.Combine(destination, entry.Name));
+            var hostName = aliases[entry.Name];
+            if (!names.Add(aliases[entry.Name])) throw new IOException("Selected names collide on the host.");
+            RequireAbsent(Path.Combine(destination, aliases[entry.Name]));
         }
         var staging = Path.GetFullPath(Path.Combine(destination, ".copperscreen-extract-" + Guid.NewGuid().ToString("N")));
         // The only recursive cleanup below is confined to this newly generated child.
         if (Path.GetDirectoryName(staging) != destination) throw new IOException("Invalid extraction staging path.");
         Directory.CreateDirectory(staging);
-        var result = new DiskExtractionProgress();
+        var result = new DiskProgress();
         try
         {
-            var seen = new HashSet<DiskImageEntry>();
-            var pending = new Stack<(DiskImageEntry Entry, string Parent, bool Finish)>();
-            foreach (var entry in entries.Reverse()) pending.Push((entry, staging, false));
+            var seen = new HashSet<DiskEntry>();
+            var pending = new Stack<(DiskEntry Entry, string Parent, string HostName, bool Finish)>();
+            foreach (var entry in entries.Reverse()) pending.Push((entry, staging, aliases[entry.Name], false));
             // Guard repeated selected paths; filesystem traversal and parent validation belong to the guest.
             var directories = new HashSet<string>(StringComparer.Ordinal);
             while (pending.TryPop(out var item))
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var entry = item.Entry;
-                ValidateName(entry.Name);
-                var path = Path.Combine(item.Parent, entry.Name);
+                var path = Path.Combine(item.Parent, item.HostName);
                 if (item.Finish)
                 {
                     if (entry.Modified is { } date) Directory.SetLastWriteTime(path, date);
@@ -108,14 +111,15 @@ internal static class CopperScreenDiskExtraction
                 {
                     if (!directories.Add(entry.Path)) throw new InvalidDataException("A directory tree contains a repeated directory.");
                     Directory.CreateDirectory(path);
-                    pending.Push((entry, item.Parent, true));
+                    pending.Push((entry, item.Parent, item.HostName, true));
                     var children = volume.ReadDirectory(entry, cancellationToken);
                     var childNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    var childAliases = HostNameCodec.MapSiblings(children.Select(e => e.Name));
                     foreach (var child in children.Reverse())
                     {
-                        ValidateName(child.Name);
-                        if (!childNames.Add(child.Name)) throw new IOException($"Names in {entry.Name} collide on the host.");
-                        pending.Push((child, path, false));
+                        var childName = childAliases[child.Name];
+                        if (!childNames.Add(childName)) throw new IOException($"Names in {entry.Name} collide on the host.");
+                        pending.Push((child, path, childName, false));
                     }
                 }
                 else
@@ -129,11 +133,11 @@ internal static class CopperScreenDiskExtraction
             }
             cancellationToken.ThrowIfCancellationRequested();
             RequireOrdinaryDirectory(destination);
-            foreach (var entry in entries) RequireAbsent(Path.Combine(destination, entry.Name));
+            foreach (var entry in entries) RequireAbsent(Path.Combine(destination, aliases[entry.Name]));
             foreach (var entry in entries)
             {
-                var source = Path.Combine(staging, entry.Name);
-                var target = Path.Combine(destination, entry.Name);
+                var source = Path.Combine(staging, aliases[entry.Name]);
+                var target = Path.Combine(destination, aliases[entry.Name]);
                 if (entry.IsDirectory) Directory.Move(source, target);
                 else File.Move(source, target); // No overwrite and no merge, even if a destination appeared meanwhile.
             }
@@ -142,7 +146,7 @@ internal static class CopperScreenDiskExtraction
         finally { Directory.Delete(staging, recursive: true); }
     }
 
-    internal static void ValidateName(string name)
+    public static void ValidateName(string name)
     {
         if (string.IsNullOrWhiteSpace(name) || name is "." or ".." || name.EndsWith('.') || name.EndsWith(' ') ||
             name.Any(c => c < 32 || "<>:\"/\\|?*".Contains(c)))

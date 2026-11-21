@@ -10,12 +10,12 @@ public sealed partial class DiskImageOperationsTests : IDisposable
     public DiskImageOperationsTests() => Directory.CreateDirectory(_root);
     public void Dispose() => Directory.Delete(_root, true);
 
-    private string Blank(string name, int format)
+    private string Blank(string name, int format, bool floppy = false)
     {
         var path = Path.Combine(_root, name + (format < 6 && format % 2 == 0 ? ".adf" : ".hdf"));
         using (var disk = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
         {
-            disk.SetLength(format < 6 && format % 2 == 0 ? 901120 : 2 * 1024 * 1024);
+            disk.SetLength(floppy || format < 6 && format % 2 == 0 ? 901120 : 2 * 1024 * 1024);
             CopperScreenFileSystemFormatter.Format(disk, 0, disk.Length, format < 6 ? CopperScreenHardDiskSetup.FileSystem.Ffs
                 : format == 6 ? CopperScreenHardDiskSetup.FileSystem.Sfs : CopperScreenHardDiskSetup.FileSystem.Sfs2, name, default);
         }
