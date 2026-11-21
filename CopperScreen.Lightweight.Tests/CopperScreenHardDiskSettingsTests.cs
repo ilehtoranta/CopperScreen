@@ -21,7 +21,7 @@ public sealed class CopperScreenHardDiskSettingsTests : IDisposable
         var drive = CopperScreenHardfileSettings.Ffs(0, "disk.hdf", readOnly, "DH0:2:32:4:58");
         drive = drive with { Partition = drive.Partition! with { SectorOrigin = 0, PreAllocBlocks = 0, Interleave = 0, NumBuffers = 30, BufferMemoryType = 1, BootPriority = -5 } };
         draft.HardDrives.Add(drive);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory);
         var clone = draft.Clone();
         Assert.False(draft.NeedsRestartComparedWith(clone));
         clone.HardDrives[0] = drive with { Partition = drive.Partition! with { HighCylinder = 59 } };
@@ -49,7 +49,8 @@ public sealed class CopperScreenHardDiskSettingsTests : IDisposable
         Assert.Null(options.Error);
         Assert.All(options.DriveDiskPaths, path => Assert.Null(path));
         Assert.Equal(CopperScreenHardfileSettings.Ffs(0, Path.Combine(_directory, "disk.hdf"), readOnly, "DH0:2:32:4:58"), Assert.Single(options.HardDrives));
-        CopperScreenLightweightSession.Validate(options, requireRomPath: false);
+        Assert.Single(options.HardDrives).ValidateCopperStart(checkImage: false);
+        CopperStartAvailabilityAssert.ForProfile(CopperScreenSettingsDraft.FromStartupOptions(options), _directory);
     }
 
     [Theory]
@@ -85,7 +86,10 @@ public sealed class CopperScreenHardDiskSettingsTests : IDisposable
         var draft = Draft();
         var path = Path.Combine(_directory, "short.hdf"); File.WriteAllBytes(path, new byte[512]);
         draft.HardDrives.Add(CopperScreenHardfileSettings.Ffs(0, path, true, "DH0:2:32:4:58"));
-        Assert.Contains("entire configured FFS partition", Assert.Throws<InvalidOperationException>(() => CopperScreenLightweightSession.Validate(draft.ToStartupOptions(_directory))).Message);
+        Assert.Contains("entire configured partition", Assert.Throws<InvalidOperationException>(() =>
+            Assert.Single(draft.HardDrives).ValidateCopperStart(checkImage: true)).Message);
+        if (CopperScreenBootMethods.CopperStartEnabled)
+            Assert.Contains("entire configured partition", Assert.Throws<InvalidOperationException>(() => CopperScreenLightweightSession.Validate(draft.ToStartupOptions(_directory))).Message);
     }
 
     [Theory]
@@ -98,11 +102,12 @@ public sealed class CopperScreenHardDiskSettingsTests : IDisposable
         var draft = Draft();
         var drive = CopperScreenHardfileSettings.Ffs(0, "large.hdf", false, geometry);
         draft.HardDrives.Add(drive);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory);
         new CopperScreenRecentSession(_directory).Save(draft, 100, false);
         var restored = new CopperScreenRecentSession(_directory).LoadMachine(_directory)!;
         Assert.Equal(drive.Partition, Assert.Single(restored.HardDrives).Partition);
-        CopperScreenLightweightSession.Validate(restored.ToStartupOptions(_directory), requireRomPath: false);
+        Assert.Single(restored.HardDrives).ValidateCopperStart(checkImage: false);
+        CopperStartAvailabilityAssert.ForProfile(restored, _directory);
     }
 
     [CopperStartHardDiskFact]
@@ -145,9 +150,9 @@ public sealed class CopperScreenHardDiskSettingsTests : IDisposable
     public void Dispose() => Directory.Delete(_directory, true);
 }
 
-public class CopperStartHardDiskFactAttribute : CopperStartFactAttribute
+public class CopperStartHardDiskFactAttribute : CopperStartRomFactAttribute
 {
-    public CopperStartHardDiskFactAttribute()
+    public CopperStartHardDiskFactAttribute(bool requiresHost = true) : base(requiresHost)
     {
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_HDF")))
             Skip = "Qualified original CopperHDF fixture not supplied; full-ROM hard-disk coverage unavailable.";

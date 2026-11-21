@@ -5,7 +5,7 @@ namespace CopperScreen.Tests;
 
 public sealed class CopperOsDesktopBootTests
 {
-    [Fact]
+    [CopperStartFact]
     public void BundledA1200BootsNativeDesktop()
     {
         var root = Path.Combine(Path.GetTempPath(), "copperos-desktop-" + Guid.NewGuid().ToString("N"));

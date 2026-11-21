@@ -209,7 +209,7 @@ public sealed partial class CopperStartHardDiskWriteTests : IDisposable
 
 public sealed class CopperStartHardDiskRunnerFactAttribute : CopperStartHardDiskFactAttribute
 {
-    public CopperStartHardDiskRunnerFactAttribute()
+    public CopperStartHardDiskRunnerFactAttribute() : base(requiresHost: false)
     {
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_LIGHTWEIGHT_RUNNER")))
             Skip = "Built Lightweight runner not supplied; command-line native write coverage unavailable.";

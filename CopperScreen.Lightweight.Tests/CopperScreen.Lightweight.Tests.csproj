@@ -13,6 +13,7 @@
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
     <Using Include="Xunit" />
+    <Compile Include="../CopperScreen.Desktop.Tests/CopperStartTestAttributes.cs" Link="CopperStartTestAttributes.cs" />
     <Compile Include="../CopperScreen/Diagnostics/CopperOsNativeStorageProof.cs" Link="Diagnostics/CopperOsNativeStorageProof.cs" />
     <Compile Include="../CopperScreen/Diagnostics/CopperScreenInstalledMediaProof.cs" Link="Diagnostics/CopperScreenInstalledMediaProof.cs" />
     <Compile Include="../CopperScreen/Diagnostics/CopperScreenRdbImageProof.cs" Link="Diagnostics/CopperScreenRdbImageProof.cs" />

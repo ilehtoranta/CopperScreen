@@ -26,7 +26,7 @@ public sealed class CopperStartTests : IDisposable
         Assert.Equal("lightweight-a500-copperstart", options.Profile.Id);
         Assert.True(options.Profile.UsesKickstartRom);
         var draft = CopperScreenSettingsDraft.FromStartupOptions(options);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory);
         draft.Id = "personal-copperstart";
         var path = CopperScreenProfileStore.Save(draft, AppContext.BaseDirectory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error, _directory), error);
@@ -62,7 +62,7 @@ public sealed class CopperStartTests : IDisposable
             case "rtc": draft.RtcEnabled = true; break;
             case "aga": draft.Chipset = new(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal); break;
         }
-        Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory, "CopperStart requires");
         Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(draft.ToStartupOptions(_directory)));
     }
 
@@ -75,7 +75,11 @@ public sealed class CopperStartTests : IDisposable
         Assert.Contains("wrong size", Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(path)).Message);
         var native = new byte[524288]; native[13] = 40; native[15] = 63;
         File.WriteAllBytes(path, native);
-        Assert.Contains("unqualified version", Assert.Throws<InvalidOperationException>(() => CopperScreenSession.Create(Options(path))).Message);
+        Assert.Contains("unqualified version", Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(path)).Message);
+        if (CopperScreenBootMethods.CopperStartEnabled)
+            Assert.Contains("unqualified version", Assert.Throws<InvalidOperationException>(() => CopperScreenSession.Create(Options(path))).Message);
+        else
+            Assert.Contains("CopperStart is not enabled", Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(Options(path))).Message);
         var zip = Path.Combine(_directory, "ambiguous.zip");
         using (var archive = ZipFile.Open(zip, ZipArchiveMode.Create))
             foreach (var name in new[] { "CopperStart.rom", "kickstart.rom" })
@@ -100,7 +104,7 @@ public sealed class CopperStartTests : IDisposable
         Assert.Equal(new[] { "AccurateM68000" }, CopperScreenMachinePresets.CpuChoices(draft));
         Assert.Equal(new[] { 0 }, CopperScreenMachinePresets.FastRamChoices(draft));
         draft.DriveWriteProtected[0] = false;
-        Assert.Contains("read-only DF0", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory, "read-only DF0");
     }
 
     private CopperScreenSettingsDraft A1200HdfDraft()
@@ -116,7 +120,7 @@ public sealed class CopperStartTests : IDisposable
     public void A1200HdfProfilePreservesFirmwareAndMediaAcrossSaveAndReload()
     {
         var draft = A1200HdfDraft();
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory);
         Assert.Equal(new[] { "AccurateM68EC020" }, CopperScreenMachinePresets.CpuChoices(draft));
         Assert.Equal(new[] { 0 }, CopperScreenMachinePresets.FastRamChoices(draft));
         var path = CopperScreenProfileStore.Save(draft, AppContext.BaseDirectory, _directory);
@@ -125,7 +129,7 @@ public sealed class CopperStartTests : IDisposable
         Assert.Equal(CopperScreenKickstartSource.CopperStart, restored.KickstartSource);
         Assert.Equal(draft.KickstartRomPath, restored.KickstartRomPath);
         Assert.Equal(draft.HardDrives, restored.HardDrives);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(restored, _directory));
+        CopperStartAvailabilityAssert.ForProfile(restored, _directory);
         Assert.NotEqual(CopperScreenCopperStartRom.Recovery, CopperScreenCopperStartRom.RecoveryFor(true));
         Assert.Contains(CopperScreenCopperStartRom.RecoveryFor(true),
             Assert.Throws<FileNotFoundException>(() => CopperScreenCopperStartRom.Read(null, a1200: true)).Message);
@@ -142,12 +146,12 @@ public sealed class CopperStartTests : IDisposable
         var draft = A1200HdfDraft();
         var drive = draft.HardDrives[0];
         draft.HardDrives[0] = drive with { Partition = drive.Partition! with { DosType = dosType } };
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory);
         var path = CopperScreenProfileStore.Save(draft, AppContext.BaseDirectory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error, _directory), error);
         var restored = CopperScreenSettingsDraft.FromProfile(loaded);
         Assert.Equal(dosType, Assert.Single(restored.HardDrives).Partition!.DosType);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(restored, _directory));
+        CopperStartAvailabilityAssert.ForProfile(restored, _directory);
     }
 
     [Theory]
@@ -165,7 +169,7 @@ public sealed class CopperStartTests : IDisposable
             case "fast": draft.RealFastRamKb = 512; break;
             case "no-hdf": draft.HardDrives.Clear(); break;
         }
-        Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory, "CopperStart requires");
     }
 
     [Theory]
@@ -175,12 +179,12 @@ public sealed class CopperStartTests : IDisposable
         var draft = A1200HdfDraft();
         draft.DriveDiskPaths[0] = "disposable.adf"; draft.DriveWriteProtected[0] = false;
         if (!hardfile) draft.HardDrives.Clear();
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory);
         draft.FloppyDriveCount = 2;
-        Assert.Contains("CopperStart requires", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        CopperStartAvailabilityAssert.ForProfile(draft, _directory, "CopperStart requires");
     }
 
-    [Theory]
+    [CopperStartTheory]
     [InlineData(false)] [InlineData(true)]
     public void FullA1200SessionCanToggleProtectionOutsideAWorkspace(bool protectedAtStartup)
     {
@@ -226,7 +230,7 @@ public sealed class CopperStartTests : IDisposable
     private static void AssertBooted(CopperScreenLightweightSession session)
         => Assert.Equal(0x43535452u, BinaryPrimitives.ReadUInt32BigEndian(session.Machine.ChipRam.Span[0x3000..]));
 
-    [CopperStartFact]
+    [CopperStartRomFact]
     public void QualifiedRomColdBootResetReinsertAndRestartUseStandardSession()
     {
         var disk = OriginalDisk();
@@ -340,15 +344,16 @@ public sealed class CopperStartTests : IDisposable
     public void Dispose() => Directory.Delete(_directory, true);
 }
 
-public class CopperStartFactAttribute : FactAttribute
+public class CopperStartRomFactAttribute : FactAttribute
 {
-    public CopperStartFactAttribute()
+    public CopperStartRomFactAttribute(bool requiresHost = true)
     {
+        if (requiresHost && !CopperScreenBootMethods.CopperStartEnabled) Skip = CopperStartFactAttribute.DisabledReason;
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_ROM")))
             Skip = "Qualified standalone CopperStart ROM not supplied; native boot coverage unavailable.";
     }
 }
-public sealed class CopperStartReplayFactAttribute : CopperStartFactAttribute
+public sealed class CopperStartReplayFactAttribute : CopperStartRomFactAttribute
 {
     public CopperStartReplayFactAttribute()
     {

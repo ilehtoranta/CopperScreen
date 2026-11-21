@@ -15,7 +15,6 @@ public sealed class SettingsWorkflowTests
     [InlineData("CPU backend", "AccurateM68040", true)]
     [InlineData("CPU backend", "AccurateM68060", false)]
     [InlineData("CPU backend", "JitM68040", true)]
-    [InlineData("Kickstart", "CopperStart", true)]
     [InlineData("Kickstart", "DiagRom", false)]
     [InlineData("Kickstart", "Kickstart31Rom", true)]
     [InlineData("Connected", "1", true)]
@@ -25,6 +24,10 @@ public sealed class SettingsWorkflowTests
     [InlineData("Connected", "5", false)]
     public void FutureChoicesHaveExplicitAvailability(string setting, string value, bool available)
         => Assert.Equal(available, CopperScreenAvailability.IsChoiceAvailable(setting, value));
+
+    [Fact]
+    public void CopperStartChoiceFollowsTheHostEdition()
+        => Assert.Equal(CopperScreenBootMethods.CopperStartEnabled, CopperScreenAvailability.IsChoiceAvailable("Kickstart", "CopperStart"));
 
     [Fact]
     public void MouseRemainsAvailableOnlyOnTheSupportedPort()

@@ -25,7 +25,7 @@ public sealed class CopperScreenRdbSettingsTests : IDisposable
         Assert.Equal(AmigaHardfileMountMode.RigidDiskBlock, drive.Mode); Assert.Null(drive.Partition);
         Assert.Equal(readOnly, drive.ReadOnly); Assert.Equal(Path.Combine(AppContext.BaseDirectory, "disk with spaces.hdf"), drive.Path);
         var draft = CopperScreenSettingsDraft.FromStartupOptions(options);
-        Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, _root));
+        CopperStartAvailabilityAssert.ForProfile(draft, _root);
         Assert.False(draft.NeedsRestartComparedWith(draft.Clone()));
         var clone = draft.Clone(); clone.HardDrives[0] = drive with { ReadOnly = !readOnly };
         Assert.True(draft.NeedsRestartComparedWith(clone));
@@ -55,7 +55,10 @@ public sealed class CopperScreenRdbSettingsTests : IDisposable
         var path = Path.Combine(_root, "invalid.hdf"); var bytes = new byte[512]; File.WriteAllBytes(path, bytes);
         var options = CopperScreenStartupOptions.Parse(["--copperstart", "--rom", "missing.rom", "--hdf-rdb", path], AppContext.BaseDirectory, userDataDirectory: _root);
         Assert.Null(options.Error);
-        Assert.Contains("no valid RDB", Assert.Throws<InvalidDataException>(() => CopperScreenLightweightSession.Validate(options)).Message);
+        Assert.Contains("no valid RDB", Assert.Throws<InvalidDataException>(() =>
+            Assert.Single(options.HardDrives).ValidateCopperStart(checkImage: true)).Message);
+        if (CopperScreenBootMethods.CopperStartEnabled)
+            Assert.Contains("no valid RDB", Assert.Throws<InvalidDataException>(() => CopperScreenLightweightSession.Validate(options)).Message);
         Assert.Equal(bytes, File.ReadAllBytes(path));
     }
 
@@ -122,16 +125,16 @@ public sealed class CopperScreenRdbSettingsTests : IDisposable
     }
     public void Dispose() => Directory.Delete(_root, true);
 }
-public class CopperStartRdbFactAttribute : CopperStartFactAttribute
+public class CopperStartRdbFactAttribute : CopperStartRomFactAttribute
 {
-    public CopperStartRdbFactAttribute()
+    public CopperStartRdbFactAttribute(bool requiresHost = true) : base(requiresHost)
     {
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_COPPERSTART_RDB"))) Skip = "Qualified original RDB fixture not supplied.";
     }
 }
 public sealed class CopperStartRdbRunnerFactAttribute : CopperStartRdbFactAttribute
 {
-    public CopperStartRdbRunnerFactAttribute()
+    public CopperStartRdbRunnerFactAttribute() : base(requiresHost: false)
     {
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_LIGHTWEIGHT_RUNNER"))) Skip = "Built Lightweight runner not supplied.";
     }

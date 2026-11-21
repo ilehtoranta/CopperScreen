@@ -4,7 +4,7 @@ namespace CopperScreen.Tests;
 
 public sealed class CopperStartA500PlusProbeTests
 {
-    [Fact]
+    [CopperStartFact]
     public void A500PlusBundledCopperStartReachesDesktop()
     {
         var root = Path.Combine(Path.GetTempPath(), "copperstart-a500plus-probe-" + Guid.NewGuid().ToString("N"));

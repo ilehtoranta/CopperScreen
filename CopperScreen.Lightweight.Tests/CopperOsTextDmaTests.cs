@@ -11,7 +11,7 @@ public sealed partial class CopperOsGraphicsDmaTests
         return slot switch {0=>(byte)(0x81^(row*17)),1=>(byte)(0xA5+row*3),2=>(byte)(0x80>>row),_=>(byte)(0x3C^(row*9))};
     }
 
-    [Theory]
+    [GraphicsDmaTheory]
     [InlineData(M68kCpuModel.M68000)]
     [InlineData(M68kCpuModel.M68EC020)]
     public void NativeTextStagesRomFontsAndFallsBackForLongStrings(M68kCpuModel model)
@@ -38,7 +38,7 @@ public sealed partial class CopperOsGraphicsDmaTests
         }
     }
 
-    [Theory]
+    [GraphicsDmaTheory]
     [InlineData(M68kCpuModel.M68000)]
     [InlineData(M68kCpuModel.M68EC020)]
     public void NativeTextDmaMatchesAllModesAlignmentsAndSimpleSmartClipping(M68kCpuModel model)

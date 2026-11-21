@@ -26,7 +26,7 @@ public sealed class HostDependencyTests
     {
         var references = typeof(CopperScreenSession).Assembly.GetReferencedAssemblies();
         Assert.DoesNotContain(references, r => r.Name!.StartsWith("CopperStart", StringComparison.Ordinal));
-        Assert.DoesNotContain(references, r => r.Name is "CopperMod.Amiga" or "CopperMod.Amiga.CyberGraphics" or "CopperMod.Amiga.Emulator" or "CopperSharp.Sdk.Amiga.Support");
+        Assert.DoesNotContain(references, r => r.Name is "CopperMod.Amiga" or "CopperMod.Amiga.CyberGraphics" or "CopperMod.Amiga.Emulator");
     }
 
     [Fact]

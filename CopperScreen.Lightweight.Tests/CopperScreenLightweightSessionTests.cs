@@ -423,13 +423,14 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     [Theory]
     [InlineData("KickstartRom")]
     [InlineData("Kickstart13Rom")]
-    public void UnsupportedRomVersionIsNotDowngradedBySettings(string source)
+    public void UnknownRomVersionIsNotDowngradedBySettings(string source)
     {
         var draft = CopperScreenSettingsDraft.FromStartupOptions(Options());
         draft.KickstartSource = Enum.Parse<CopperScreenKickstartSource>(source);
-        draft.RomVersion = KickstartVersion.Kickstart30;
+        var unknownVersion = (KickstartVersion)999;
+        draft.RomVersion = unknownVersion;
         var options = draft.ToStartupOptions(_directory);
-        Assert.Equal(KickstartVersion.Kickstart30, options.Profile.KickstartVersion);
+        Assert.Equal(unknownVersion, options.Profile.KickstartVersion);
         Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(options));
     }
 

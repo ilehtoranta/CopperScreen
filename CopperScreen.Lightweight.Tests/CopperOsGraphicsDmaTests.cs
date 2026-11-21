@@ -7,12 +7,21 @@ using CopperScreen;
 
 namespace CopperScreen.Tests;
 
+public sealed class GraphicsDmaTheoryAttribute : TheoryAttribute
+{
+    public GraphicsDmaTheoryAttribute()
+    {
+        if (!CopperScreenBootMethods.CopperStartEnabled && string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_GRAPHICS_DMA_ROM")))
+            Skip = "Graphics DMA replay requires the bundled CopperStart ROM or COPPERSCREEN_GRAPHICS_DMA_ROM.";
+    }
+}
+
 // Execute the bundled guest graphics vectors against real Lightweight DMA.
 // Synthetic library storage isolates raster semantics; full boot tests cover
 // installed library ownership, Layer locking, scheduling and input together.
 public sealed partial class CopperOsGraphicsDmaTests
 {
-    [Theory]
+    [GraphicsDmaTheory]
     [InlineData(M68kCpuModel.M68000)]
     [InlineData(M68kCpuModel.M68EC020)]
     public void NativeRectangleDmaMatchesPixelOracleAndPreservesRegisters(M68kCpuModel model)
@@ -40,7 +49,7 @@ public sealed partial class CopperOsGraphicsDmaTests
         }
     }
 
-    [Theory]
+    [GraphicsDmaTheory]
     [InlineData(M68kCpuModel.M68000)]
     [InlineData(M68kCpuModel.M68EC020)]
     public void NativeSetRastUsesDmaAndRetainsUnselectedPlanes(M68kCpuModel model)
@@ -57,7 +66,7 @@ public sealed partial class CopperOsGraphicsDmaTests
         }
     }
 
-    [Theory]
+    [GraphicsDmaTheory]
     [InlineData(M68kCpuModel.M68000)]
     [InlineData(M68kCpuModel.M68EC020)]
     public void NativeBitmapCopyUsesDmaForBothShiftDirectionsAndPreservesEdges(M68kCpuModel model)
@@ -103,10 +112,14 @@ public sealed partial class CopperOsGraphicsDmaTests
             machine=new(new(){CpuModel=model,AgnusModel=aga?LightweightAgnusModel.Mos8374Alice:LightweightAgnusModel.Mos8372A,
                 DeniseModel=aga?LightweightDeniseModel.Lisa4203:LightweightDeniseModel.Mos8362,
                 ChipRamBytes=aga?2097152:1048576,SlowRamBytes=0});
-            using var stream=typeof(CopperScreenBundledCopperOs).Assembly.GetManifestResourceStream("CopperScreen.Bundled.CopperStart-A1200.rom")!;
-            using var buffer=new MemoryStream(); stream.CopyTo(buffer);
-            var path=Environment.GetEnvironmentVariable("COPPERSCREEN_GRAPHICS_DMA_ROM");
-            var rom=path==null?buffer.ToArray():File.ReadAllBytes(path);
+            var path = Environment.GetEnvironmentVariable("COPPERSCREEN_GRAPHICS_DMA_ROM");
+            using var stream = string.IsNullOrWhiteSpace(path)
+                ? typeof(CopperScreenBundledCopperOs).Assembly.GetManifestResourceStream("CopperScreen.Bundled.CopperStart-A1200.rom")
+                    ?? throw new InvalidDataException("The CopperStart-enabled host is missing its bundled A1200 ROM.")
+                : File.OpenRead(path);
+            using var buffer = new MemoryStream();
+            stream.CopyTo(buffer);
+            var rom = buffer.ToArray();
             var combined=rom.Length==1048576;
             Assert.True(combined || rom.Length==524288);
             // Test-only ROM font outside emitted code. DMA must stage this
