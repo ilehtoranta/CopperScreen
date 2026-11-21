@@ -16,6 +16,7 @@ internal sealed partial class MainWindow
     private CopperScreenSettingsDraft _committedSettings = null!;
     private CopperScreenPresentationOptions _presentationOptions = CopperScreenPresentationOptions.Default;
     private TextBox _setupDiskBox = null!;
+    private Button _settingsUseBundledRom = null!, _settingsUseCopperOs = null!, _settingsChooseCopperStartRom = null!;
     private TextBlock _romValidation = null!;
     private Slider _masterVolumeSlider = null!;
     private CheckBox _masterMuteBox = null!;
@@ -147,15 +148,15 @@ internal sealed partial class MainWindow
         layout.Children.Add(CreateMachineControls(welcome: false));
         layout.Children.Add(SettingsHelp("Model help", "Selecting a model restores its saved configuration. Changes are saved automatically. Change memory sizes and connected drives in their settings pages."));
         var form = CreateSettingsGroupForm();
-        _kickstartSourceBox = AddComboSetting(form, "Boot method", [], markRestart: false);
-        ConfigureBootMethodSelector(_kickstartSourceBox);
-        _kickstartSourceBox.SelectionChanged += (_, _) => SelectSettingsBootMethod();
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose a boot ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
-        var browse = CreatePanelButton("Browse…", () => _ = PickRomAsync());
+        var browse = CreatePanelButton("Choose ROM…", () => _ = PickRomAsync());
         AutomationProperties.SetName(browse, "Browse for boot ROM");
-        _bootRomRow = CreateSettingsRow("Boot ROM", WithAction(_kickstartRomBox, browse));
-        form.Children.Add(_bootRomRow);
+        form.Children.Add(CreateSettingsRow("ROM", WithAction(_kickstartRomBox, browse)));
+        _settingsUseBundledRom = CreatePanelButton("Use built-in ROM", UseBundledRom);
+        _settingsUseCopperOs = CreatePanelButton("Use CopperOS", UseCopperOs);
+        _settingsChooseCopperStartRom = CreatePanelButton("Choose CopperStart ROM…", () => _ = PickRomAsync(copperStart: true));
+        form.Children.Add(CommandGroup(_settingsUseBundledRom, _settingsUseCopperOs, _settingsChooseCopperStartRom));
         AutomationProperties.SetName(_kickstartRomBox, "Boot ROM path");
         _romValidation = SettingsNote("Choose a boot ROM.");
         AutomationProperties.SetName(_romValidation, "ROM validation");
@@ -214,6 +215,7 @@ internal sealed partial class MainWindow
         };
         _settingsDraft.DriveDiskPaths[0] = string.IsNullOrWhiteSpace(disk) ? null : disk;
         _settingsDraft.DriveWriteProtected[0] = true;
+        CopperScreenLaunchWorkflow.UseDefaultRom(_settingsDraft);
         _settingsStartupError = null;
         RefreshSettingsUi();
     }
@@ -431,50 +433,62 @@ internal sealed partial class MainWindow
         }
     }
 
-    private async Task PickRomAsync()
+    private async Task PickRomAsync(bool copperStart = false)
     {
-        var copperStart = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) == CopperScreenKickstartSource.CopperStart;
         var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
         var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = copperStart ? _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Choose CopperStart A1200 ROM (1 MiB)" : "Choose qualified CopperStart A500 ROM" : "Choose a native Kickstart ROM", AllowMultiple = false,
+            Title = copperStart ? "Choose a CopperStart ROM" : "Choose an original Kickstart ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Boot ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
         var path = files.FirstOrDefault()?.TryGetLocalPath();
         if (path == null) return;
-        _kickstartRomBox.Text = path;
-        try
+        if (copperStart)
         {
-            if (copperStart)
+            ApplyRomSelection(draft =>
             {
-                _ = CopperScreenCopperStartRom.Read(path, _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
-                ClearSettingsStartupError();
-                UpdateSettingsStatus();
-                return;
-            }
-            if (!_settingsVisible)
-            {
-                var rom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, _settingsDraft.RomVersion);
-                _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
-                _settingsDraft.KickstartSource = CopperScreenKickstartSource.KickstartRom;
-                _settingsDraft.KickstartRomPath = path;
-                ClearSettingsStartupError();
-                UpdateSettingsStatus();
-                return;
-            }
-            var selectedRom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, _settingsDraft.RomVersion);
-            _settingsDraft.RomVersion = CopperScreenKickstartRomArchive.IdentifyNativeVersion(selectedRom);
-            _settingsDraft.KickstartSource = CopperScreenKickstartSource.KickstartRom;
-            UpdateSettingsStatus();
+                _ = CopperScreenCopperStartRom.Read(path, draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
+                draft.KickstartRomPath = path;
+                return draft;
+            });
         }
-        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
-        { SetSettingsError(ex.Message); }
+        else SelectOriginalRom(path);
+    }
+
+    internal void SelectOriginalRom(string path)
+    {
+        ApplyRomSelection(draft =>
+        {
+            var hint = CopperScreenMachinePresets.RecommendedKickstartVersion(CopperScreenMachinePresets.Identify(draft));
+            var rom = CopperScreenKickstartRomArchive.ReadRomImage(path, CopperScreenKickstartSource.KickstartRom, hint);
+            var version = CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom);
+            if (CopperScreenBootMethods.Method(draft) != CopperScreenBootMethod.KickstartRom)
+            {
+                draft = SelectRememberedSetup(draft,
+                    CopperScreenBootMethods.Choice(CopperScreenMachinePresets.Identify(draft), CopperScreenBootMethod.KickstartRom));
+            }
+            draft.KickstartSource = CopperScreenKickstartSource.KickstartRom;
+            draft.KickstartRomPath = path;
+            draft.RomVersion = version;
+            return draft;
+        });
+    }
+
+    private void UpdateSettingsRomControls()
+    {
+        var mini = _settingsDraft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
+        var copperStart = _settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart;
+        _kickstartRomBox.IsVisible = !mini;
+        _settingsUseBundledRom.IsVisible = CopperScreenBundledMiniRom.Included && !mini;
+        _settingsUseCopperOs.IsVisible = CopperScreenBootMethods.CopperStartEnabled && !copperStart;
+        _settingsChooseCopperStartRom.IsVisible = CopperScreenBootMethods.CopperStartEnabled && copperStart;
     }
 
     private string? ValidateSelectedRom(CopperScreenSettingsDraft draft)
     {
         if (draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
         {
+            if (!CopperScreenBundledMiniRom.Included) return CopperScreenBundledMiniRom.UnavailableMessage;
             var disk = draft.ToStartupOptions(AppContext.BaseDirectory).DriveDiskPaths[0];
             if (string.IsNullOrWhiteSpace(disk)) return null;
             if (!CopperScreenDiskImageArchive.DiskPathExists(disk)) return "Startup disk not found. Choose an existing ADF disk.";
@@ -517,8 +531,7 @@ internal sealed partial class MainWindow
         _validatedBootDiskLength = info.Length;
         try
         {
-            var disk = CopperScreenDiskImageArchive.LoadDiskImage(path);
-            if (!CopperScreenBundledMiniRom.Included) CopperScreenMinimalBoot.ValidateDisk(disk);
+            _ = CopperScreenDiskImageArchive.LoadDiskImage(path);
             _bootDiskError = null;
         }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)

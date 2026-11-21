@@ -1,19 +1,20 @@
 # CopperStart standalone ROM in CopperScreen
 
-The start screen separates **Amiga model** (500, 500+, or 1200) from
-**Boot method** (CopperStart Mini, your licensed original Kickstart ROM,
-or licensed CopperStart ROM when enabled by the build). For native boot, Kickstart 1.3 is
+The **ROM** row shows the active ROM for the selected Amiga model. CopperStart
+Mini is the default for new setups in bundled builds. **Choose ROM…** selects
+an original Kickstart. **Use built-in ROM** switches back to Mini. For original
+Kickstart, version 1.3 is
 recommended for A500, 2.04 for A500+, and 3.1 for A1200. Other supported native ROM versions
 can be selected on any model; compatibility varies by ROM and software. Floppy disks are optional;
 with no boot media, native Kickstart shows its insert-disk screen.
 
-The launcher and Configure Amiga share these boot choices and restore the saved
-setup for each model/method pair.
+The launcher and Configure Amiga share these controls and restore saved setups
+for each model and ROM.
 
 ## CopperStart Mini bundle
 
-Choose **CopperStart Mini** to boot the bundled 512 KiB ROM without choosing a
-ROM file. This is the ROM qualified in WinUAE with the two-stage startup screen.
+Press **Start Amiga** to boot the default 512 KiB Mini ROM. This is the ROM
+qualified in WinUAE with the two-stage startup screen.
 Its splash appears at reset. With DF0 empty, Mini then shows **Insert boot disk**
 and waits for a compatible disk. With a bootable disk already inserted, Mini
 hands off directly after the splash. Mini supports standard PAL A500, A500+
@@ -36,10 +37,11 @@ location can be set with `CopperStartMiniBundleDirectory`. The ZIP packaging
 script requires the staged ROM. MSIX can include it with
 `-IncludeCopperStartMini` for noncommercial builds.
 
-A source-only build offers **Minimal floppy boot**, which uses the
-[original CopperScreen firmware](engine/MINIMAL_DISK_BOOT.md). Use
-`-p:CopperScreenIncludeMiniRom=false` to build that variant with staging present.
-Both variants use the existing `--minimal-disk-boot` flag and saved profile IDs.
+Builds without the bundle use **Choose ROM…** for an original Kickstart.
+Use `-p:CopperScreenIncludeMiniRom=false` to omit the bundle with staging
+present. The `--minimal-disk-boot` flag and existing minimal disk boot profiles
+select CopperStart Mini in bundled builds. The original [minimal floppy
+firmware](engine/MINIMAL_DISK_BOOT.md) is retired.
 
 ## CopperStart ROM and CopperOS
 
@@ -74,7 +76,7 @@ their documented environment variables; their absence remains unavailable covera
 Mixed native/CopperStart scenarios have separate tests so the native portions run
 in both builds. Do not use a default-build skip as evidence of a CopperOS replay.
 
-For CopperOS, select a model, choose **CopperStart ROM** under Boot method,
+For CopperOS, select a model, press **Use CopperOS** on the launcher,
 and press **Start CopperOS**. A500 and A500+ selection is experimental:
 the current A1200 ROM/desktop pair is admitted for compatibility testing, not
 claimed compatible. Guest boot and application testing for these combinations
@@ -120,7 +122,7 @@ For the older A500 CopperStart setup, load **A500 + CopperStart
 standalone ROM (experimental)** in Settings > Profiles. In Setup, choose the
 qualified ROM and a startup disk or an RDB/explicit FFS hard disk. Without a hard disk,
 a missing floppy leaves the ROM waiting for DF0;
-insert a disk to continue. Native Kickstart remains the default boot method.
+insert a disk to continue.
 
 Command-line equivalent:
 
@@ -139,8 +141,7 @@ The following contract is the existing A500 qualification. A1200 CopperOS HDF
 boot uses a [separate ROM and machine contract](COPPEROS_HDF_A1200_2026-10-22.md).
 Selecting Amiga 1200 and CopperOS selects this A1200 configuration. Existing
 custom profiles, including A500 floppy workspaces, remain loadable; their
-boot selector identifies the custom boot method rather than silently converting
-them into an A1200 setup.
+ROM row shows the saved ROM and the launcher retains each profile's model.
 
 The embedded [artifact contract](../CopperScreen/Firmware/CopperStart.json) pins:
 

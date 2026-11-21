@@ -3,8 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace CopperScreen;
 
-// Deliberately small assembler for our original boot firmware. Runs at construction,
-// before guest execution. No toolchain, compiled ROM or external CPU project.
+// Small assembler used to build synthetic boot blocks in host tests.
 internal sealed class CopperScreenBootAssembler
 {
     private readonly Dictionary<string, uint> _symbols = new(StringComparer.OrdinalIgnoreCase);

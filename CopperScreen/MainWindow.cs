@@ -130,7 +130,6 @@ internal sealed partial class MainWindow : Window
 	private TextBox _profileIdBox = null!;
 	private TextBox _profileNameBox = null!;
 	private TextBox _profileDescriptionBox = null!;
-	private ComboBox _kickstartSourceBox = null!;
 	private TextBox _kickstartRomBox = null!;
 	private ComboBox _cpuBackendBox = null!;
 	private ComboBox _engineBox = null!;
@@ -209,6 +208,8 @@ internal sealed partial class MainWindow : Window
 			_settingsDraft = lastMachine;
 		if (args.Length == 0)
 			_settingsDraft = _recentSession.RestoreDisks(_recentSession.RestoreKickstart(_settingsDraft), clearIfMissing: false);
+		if (!_initialStartupOptions.HasExplicitProfile && _initialStartupOptions.Error == null)
+			CopperScreenLaunchWorkflow.UseDefaultRom(_settingsDraft);
 		_outputVolume = _recentSession.Volume;
 		_outputMuted = _recentSession.Muted;
 		_settingsStartupError = _initialStartupOptions.Error ?? migrationError ?? _recentSession.LastError;
@@ -2438,8 +2439,8 @@ internal sealed partial class MainWindow : Window
 			_profileIdBox.Text = _settingsDraft.Id;
 			_profileNameBox.Text = _settingsDraft.DisplayName;
 			_profileDescriptionBox.Text = _settingsDraft.Description;
-			RefreshBootMethodSelector(_kickstartSourceBox);
 			_kickstartRomBox.Text = _settingsDraft.KickstartRomPath ?? string.Empty;
+			UpdateSettingsRomControls();
 			_cpuBackendBox.SelectedItem = _settingsDraft.CpuBackend.ToString();
 			_engineBox.SelectedItem = _settingsDraft.Engine.ToString();
 			_agnusModelBox.SelectedItem = _settingsDraft.Chipset.DmaChip.ToString();
@@ -2554,7 +2555,7 @@ internal sealed partial class MainWindow : Window
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart ROM ready · experimental" : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? CopperScreenBootMethods.Label("MinimalDiskBoot") : draft.RomVersion switch
+			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart ROM ready · experimental" : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "CopperStart Mini (built in)" : draft.RomVersion switch
             {
                 KickstartVersion.Kickstart20 => "Kickstart 2.x detected · compatibility may vary",
                 KickstartVersion.Kickstart30 => "Kickstart 3.0 detected · compatibility may vary",
@@ -3235,21 +3236,6 @@ internal sealed partial class MainWindow : Window
 		_settingsStatus.Text = error;
 		_settingsStatus.Foreground = new SolidColorBrush(Color.FromRgb(255, 194, 194));
 		UpdateWelcomeStatus(false, error);
-	}
-
-	private CopperScreenKickstartSource ParseKickstartSourceSelection(object? value)
-	{
-		return value?.ToString() switch
-		{
-			string source when string.Equals(source, "KickstartRom", StringComparison.OrdinalIgnoreCase) =>
-                CopperScreenBootMethods.Method(_settingsDraft) == CopperScreenBootMethod.KickstartRom ? _settingsDraft.KickstartSource : CopperScreenKickstartSource.KickstartRom,
-			string source when string.Equals(source, "Kickstart13Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart13Rom,
-			string source when string.Equals(source, "Kickstart31Rom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.Kickstart31Rom,
-			string source when string.Equals(source, "MinimalDiskBoot", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.MinimalDiskBoot,
-			string source when string.Equals(source, "DiagRom", StringComparison.OrdinalIgnoreCase) => CopperScreenKickstartSource.DiagRom,
-			string source when source == "CopperStart" => CopperScreenKickstartSource.CopperStart,
-            _ => _settingsDraft.KickstartSource
-		};
 	}
 
 	private static M68kBackendKind ParseCpuSelection(object? value)

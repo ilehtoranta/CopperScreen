@@ -1,76 +1,33 @@
 using Avalonia.Automation;
 using Avalonia.Controls;
-using Avalonia.Controls.Templates;
 using Avalonia.Layout;
-using Avalonia.Media;
 
 namespace CopperScreen;
 
 internal sealed partial class MainWindow
 {
-    private void ConfigureBootMethodSelector(ComboBox selector)
-    {
-        AutomationProperties.SetName(selector, "Boot method");
-        selector.ItemsSource = CopperScreenBootMethods.Choices;
-        selector.HorizontalAlignment = HorizontalAlignment.Stretch;
-        selector.PlaceholderText = "Choose an available boot method";
-        selector.ContainerPrepared += (_, args) =>
-        {
-            var method = selector.Items[args.Index]?.ToString() ?? "";
-            args.Container.IsEnabled = CopperScreenBootMethods.Unavailable(method, CopperScreenMachinePresets.Identify(_settingsDraft)) == null;
-        };
-        selector.DropDownOpened += (_, _) =>
-        {
-            for (var i = 0; i < selector.ItemCount; i++)
-                if (selector.ContainerFromIndex(i) is Control container)
-                    container.IsEnabled = CopperScreenBootMethods.Unavailable(selector.Items[i]?.ToString() ?? "", CopperScreenMachinePresets.Identify(_settingsDraft)) == null;
-        };
-    }
-
-    private void RefreshBootMethodSelector(ComboBox selector)
-    {
-        // Recreate the labels when the model changes, including the closed selection.
-        var model = CopperScreenMachinePresets.Identify(_settingsDraft);
-        selector.ItemTemplate = new FuncDataTemplate<string>((value, _) => new TextBlock
-        {
-            Text = CopperScreenBootMethods.Label(value ?? "") +
-                (CopperScreenBootMethods.Unavailable(value ?? "", model) is { } reason ? " — " + reason : ""),
-            TextWrapping = TextWrapping.Wrap
-        });
-        selector.SelectedItem = _settingsDraft.KickstartSource == CopperScreenKickstartSource.DiagRom
-            ? null : CopperScreenBootMethods.Method(_settingsDraft).ToString();
-    }
-
-    private void CreateWelcomeLaunchSelectors()
+    private void CreateWelcomeModelSelector()
     {
         _welcomeModel = new ComboBox { ItemsSource = new[] { "Amiga 500", "Amiga 500+", "Amiga 1200" }, HorizontalAlignment = HorizontalAlignment.Stretch };
-        _welcomeBootMethod = new ComboBox();
         AutomationProperties.SetName(_welcomeModel, "Amiga model");
-        ConfigureBootMethodSelector(_welcomeBootMethod);
         _welcomeModel.SelectionChanged += (_, _) =>
         {
-            if (_updatingBootMethod || _welcomeModel.SelectedIndex < 0) return;
-            SelectWelcomeLaunch(CopperScreenBootMethods.Choice((CopperScreenMachineModel)_welcomeModel.SelectedIndex, CopperScreenBootMethods.Method(_settingsDraft)));
-        };
-        _welcomeBootMethod.SelectionChanged += (_, _) =>
-        {
-            if (_updatingBootMethod || _welcomeModel.SelectedIndex < 0 || _welcomeBootMethod.SelectedItem is not string selected) return;
+            if (_updatingWelcomeModel || _welcomeModel.SelectedIndex < 0 || _settingsVisible) return;
             var model = (CopperScreenMachineModel)_welcomeModel.SelectedIndex;
-            if (CopperScreenBootMethods.Unavailable(selected, model) != null)
-            {
-                _updatingBootMethod = true;
-                try { RefreshWelcomeLaunchSelectors(); }
-                finally { _updatingBootMethod = false; }
-                return;
-            }
-            SelectWelcomeLaunch(CopperScreenBootMethods.Choice(model, Enum.Parse<CopperScreenBootMethod>(selected)));
+            ApplyRomSelection(draft => SelectModelSetup(draft, model));
         };
     }
 
-    private void RefreshWelcomeLaunchSelectors()
+    private CopperScreenSettingsDraft SelectModelSetup(CopperScreenSettingsDraft current, CopperScreenMachineModel model)
     {
-        _welcomeModel.SelectedIndex = (int)CopperScreenMachinePresets.Identify(_settingsDraft);
-        RefreshBootMethodSelector(_welcomeBootMethod);
+        var method = CopperScreenBootMethods.Method(current);
+        if (method != CopperScreenBootMethod.CopperStart)
+        {
+            var usesMini = _recentSession.ModelUsesMini(model) ??
+                (method == CopperScreenBootMethod.MinimalDiskBoot || string.IsNullOrWhiteSpace(current.KickstartRomPath));
+            method = usesMini && CopperScreenBundledMiniRom.Included ? CopperScreenBootMethod.MinimalDiskBoot : CopperScreenBootMethod.KickstartRom;
+        }
+        return SelectRememberedSetup(current, CopperScreenBootMethods.Choice(model, method));
     }
 
     private CopperScreenSettingsDraft SelectRememberedSetup(CopperScreenSettingsDraft current, int choice)
@@ -78,49 +35,64 @@ internal sealed partial class MainWindow
         _recentSession.RememberKickstart(current, AppContext.BaseDirectory);
         _recentSession.RememberDisks(current, AppContext.BaseDirectory);
         _recentSession.RememberConfiguration(current, AppContext.BaseDirectory);
-        var draft = CopperScreenLaunchWorkflow.SelectStartChoice(current, choice);
-        draft = _recentSession.RestoreConfiguration(draft, AppContext.BaseDirectory);
+        var fallback = CopperScreenLaunchWorkflow.SelectStartChoice(current, choice);
+        var draft = _recentSession.RestoreConfiguration(fallback, AppContext.BaseDirectory);
         draft = _recentSession.RestoreKickstart(draft);
         draft = _recentSession.RestoreDisks(draft);
+        if (ReferenceEquals(draft, fallback) && draft.DriveDiskPaths.All(string.IsNullOrWhiteSpace) &&
+            CopperScreenMachinePresets.Identify(current) == CopperScreenMachinePresets.Identify(draft) &&
+            CopperScreenBootMethods.Method(current) != CopperScreenBootMethods.Method(draft) &&
+            current.KickstartSource != CopperScreenKickstartSource.CopperStart &&
+            draft.KickstartSource != CopperScreenKickstartSource.CopperStart)
+        {
+            // The first switch between the bundled and original ROM starts
+            // with the floppy already selected for this machine.
+            Array.Copy(current.DriveDiskPaths, draft.DriveDiskPaths, draft.FloppyDriveCount);
+            Array.Copy(current.DriveWriteProtected, draft.DriveWriteProtected, draft.FloppyDriveCount);
+            Array.Copy(current.FloppyDriveTypes, draft.FloppyDriveTypes, draft.FloppyDriveCount);
+        }
         return CopperScreenBundledCopperOs.PrepareForLaunch(draft, _recentSession.DataDirectory);
     }
 
-    private void SelectSettingsBootMethod()
+    private void SelectRomSetup(int choice) => ApplyRomSelection(draft => SelectRememberedSetup(draft, choice));
+
+    private void UseBundledRom()
     {
-        if (_updatingSettingsUi || _applyingSettings || _kickstartSourceBox.SelectedItem is not string selected) return;
-        var model = CopperScreenMachinePresets.Identify(_settingsDraft);
-        if (CopperScreenBootMethods.Unavailable(selected, model) != null)
+        if (!CopperScreenBundledMiniRom.Included) return;
+        SelectRomSetup(CopperScreenBootMethods.Choice(CopperScreenMachinePresets.Identify(_settingsDraft), CopperScreenBootMethod.MinimalDiskBoot));
+    }
+
+    private void UseCopperOs()
+    {
+        if (!CopperScreenBootMethods.CopperStartEnabled) return;
+        SelectRomSetup(CopperScreenBootMethods.Choice(CopperScreenMachinePresets.Identify(_settingsDraft), CopperScreenBootMethod.CopperStart));
+    }
+
+    private void ApplyRomSelection(Func<CopperScreenSettingsDraft, CopperScreenSettingsDraft> select)
+    {
+        if (_applyingSettings) return;
+        if (_settingsVisible)
         {
-            RefreshSettingsUi();
+            EditMachine(select);
             return;
         }
-        EditMachine(draft => SelectRememberedSetup(draft,
-            CopperScreenBootMethods.Choice(model, Enum.Parse<CopperScreenBootMethod>(selected))));
-        // A partial settings edit or an IO error may have prevented the switch.
-        // Keep the selector consistent with the last complete draft.
-        if (CopperScreenBootMethods.Method(_settingsDraft).ToString() != selected)
+
+        try
         {
-            _updatingSettingsUi = true;
-            try { RefreshBootMethodSelector(_kickstartSourceBox); }
-            finally { _updatingSettingsUi = false; }
+            SetWelcomeDraft(select(ReadSettingsDraft()));
+            RememberCurrentSession();
+        }
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or FormatException or OverflowException)
+        {
+            SetSettingsError(ex.Message);
+            RefreshWelcomeModel();
         }
     }
 
-    private void SelectWelcomeLaunch(int choice)
+    private void RefreshWelcomeModel()
     {
-        if (_kickstartSourceBox == null || _settingsVisible || _applyingSettings) return;
-        try
-        {
-            SetWelcomeDraft(SelectRememberedSetup(_settingsDraft, choice));
-            RememberCurrentSession();
-            if (_recentSession.LastError is { } error) SetSettingsError(error);
-        }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or FormatException or OverflowException)
-        {
-            SetSettingsError(ex.Message);
-            _updatingBootMethod = true;
-            try { RefreshWelcomeLaunchSelectors(); }
-            finally { _updatingBootMethod = false; }
-        }
+        _updatingWelcomeModel = true;
+        try { _welcomeModel.SelectedIndex = (int)CopperScreenMachinePresets.Identify(_settingsDraft); }
+        finally { _updatingWelcomeModel = false; }
     }
 }

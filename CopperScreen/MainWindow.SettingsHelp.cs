@@ -52,15 +52,14 @@ internal sealed partial class MainWindow
     private void UpdateSettingsBootHelp()
     {
         if (_bootSettingsHelp == null) return;
-        var copperStart = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) == CopperScreenKickstartSource.CopperStart;
+        var copperStart = _settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart;
         var a1200 = _deniseModelBox.SelectedItem as string == "AgaLisa";
         _copperStartSettingsNote.IsVisible = copperStart;
         _copperStartSettingsNote.Text = a1200
             ? "Requires the qualified A1200 ROM pair, an OFS/FFS DD or HD floppy and/or one OFS/FFS/SFS/SFS2 hard disk. Native writes and quick formatting are supported. Disable Fast RAM, RTC and shared folders."
             : "A500/A500+ can use the bundled ROM experimentally. Compatibility is unverified. Disable Fast RAM, RTC and shared folders.";
         _bootSettingsHelp.Text = "Choose any supported licensed native Kickstart ROM. Recommended versions are 1.3 for Amiga 500, 2.04 for Amiga 500+ and 3.0 for Amiga 1200. Other model/version combinations are allowed and may have compatibility issues. " +
-            CopperScreenBootMethods.Label("MinimalDiskBoot") + " can start with DF0 empty. Insert a bootable standard ADF when ready. " +
-            "Unavailable boot methods cannot be selected." +
+            (CopperScreenBundledMiniRom.Included ? "CopperStart Mini can start with DF0 empty. Insert a bootable standard ADF when ready." : "") +
             (copperStart
                 ? "\n" + CopperScreenCopperStartRom.DescriptionFor(a1200)
                 : "");

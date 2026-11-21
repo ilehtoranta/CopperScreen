@@ -1,28 +1,15 @@
-# Minimal floppy boot for source builds
+# Original minimal floppy boot (retired)
 
-CopperScreen supplies an original, deliberately limited boot firmware for demos
-and games that replace the operating system after boot. In source-only builds
-select **Minimal floppy boot** in the launcher or Configure Amiga > Setup > Boot
-method. The [CopperStart Mini bundle](../COPPERSTART_APP.md#copperstart-mini-bundle)
-uses the WinUAE-qualified standalone ROM under the same profile ID. The
-boot services and historical evidence below describe the original source-only
-firmware. Start with an ADF in
-DF0 or insert one while the firmware waits for media. The application
-remembers a separate setup for each model and boot method. Native Kickstart remains
-the default. The bootstrap is experimental; individual disks must support the
-selected machine and the bounded services below.
-
-The equivalent command line is:
+The records below document the former CopperScreen bootstrap. Bundled builds
+now default to [CopperStart Mini](../COPPERSTART_APP.md#copperstart-mini-bundle).
+The old startup flag and saved profile IDs still select the bundled ROM:
 
 ```powershell
 dotnet CopperScreen.dll --minimal-disk-boot 'C:\path\demo.adf'
 ```
 
 Omit the ADF path to start with empty drives. `--profile minimal-disk-boot` also
-selects the shipped `lightweight-a500-minimal-disk-boot` profile. Supplying a native ROM and the minimal
-boot option together is rejected. A remembered ROM path is retained for switching
-back to native boot, together with its version metadata, but is not opened or
-passed to the minimal boot session.
+selects the shipped `lightweight-a500-minimal-disk-boot` profile in bundled builds.
 
 ## Current product scope — 2026-11-03
 
@@ -33,13 +20,8 @@ is superseded; its host build errors are not unfinished minimal-boot work.
 
 ## Ownership
 
-This is a small CopperScreen boot component, not CopperStart or the former
-CopperMod host-trap shim. Its source is
-[`MinimalDiskBoot.s`](../../CopperScreen/Firmware/MinimalDiskBoot.s), packaged as
-text and assembled at construction by
-[`CopperScreenBootAssembler`](../../CopperScreen/CopperScreenBootAssembler.cs).
-The narrow assembler accepts only this internal source; it is not a general
-application API. No compiled ROM or third-party firmware is committed.
+This was a small CopperScreen boot component. The app packaged its
+`MinimalDiskBoot.s` source as text and assembled it at session construction.
 
 The resulting 256 KiB image enters the existing `LoadKickstart` reset/overlay
 path. Every instruction, CIA operation, disk transfer and wait executes through

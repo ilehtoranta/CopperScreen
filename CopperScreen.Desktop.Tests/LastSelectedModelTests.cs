@@ -57,14 +57,14 @@ public sealed partial class LaunchWorkflowTests
     public Task UnconfiguredModelSelectionAlsoSurvivesClosing() => Ui(() =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
-        try { LaunchSelection.Select(window, 2); }
+        try { Named<ComboBox>(window, "Amiga model").SelectedIndex = 2; }
         finally { window.Close(); }
         var reopened = new MainWindow([], new CopperScreenRecentSession(_root)); reopened.Show();
         try
         {
-            Assert.Equal(2, LaunchSelection.Current(reopened));
+            Assert.Equal(2, (int)CopperScreenMachinePresets.Identify(MenuDraft(reopened)));
             Assert.Null(MenuDraft(reopened).KickstartRomPath);
-            Assert.False(Button(reopened, "Start Amiga").IsEnabled);
+            Assert.Equal(CopperScreenBundledMiniRom.Included, Button(reopened, "Start Amiga").IsEnabled);
         }
         finally { reopened.Close(); }
     });

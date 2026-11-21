@@ -86,18 +86,18 @@ public sealed class MachinePresetTests
         Assert.False(CopperScreenMachinePresets.CanUseMinimalBoot(draft));
         Assert.Null(CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory));
         draft.RealFastRamKb = 0;
-        Assert.True(CopperScreenMachinePresets.CanUseMinimalBoot(draft));
+        Assert.Equal(CopperScreenBundledMiniRom.Included, CopperScreenMachinePresets.CanUseMinimalBoot(draft));
         draft.KickstartSource = CopperScreenKickstartSource.MinimalDiskBoot;
         Assert.False(CopperScreenMachinePresets.CanUseFastRam(draft));
         var ecs = CopperScreenMachinePresets.Apply(draft, CopperScreenMachineModel.Amiga500Ecs);
         Assert.False(CopperScreenMachinePresets.CanUseSlowRam(ecs));
         Assert.False(CopperScreenMachinePresets.CanUseFastRam(ecs));
         Assert.Equal(CopperScreenKickstartSource.MinimalDiskBoot, ecs.KickstartSource);
-        Assert.True(CopperScreenMachinePresets.CanUseMinimalBoot(ecs));
+        Assert.Equal(CopperScreenBundledMiniRom.Included, CopperScreenMachinePresets.CanUseMinimalBoot(ecs));
         var aga = CopperScreenMachinePresets.Apply(ecs, CopperScreenMachineModel.Amiga1200);
         Assert.False(CopperScreenMachinePresets.CanUseSlowRam(aga));
         Assert.False(CopperScreenMachinePresets.CanUseFastRam(aga));
         Assert.Equal(CopperScreenKickstartSource.MinimalDiskBoot, aga.KickstartSource);
-        Assert.True(CopperScreenMachinePresets.CanUseMinimalBoot(aga));
+        Assert.Equal(CopperScreenBundledMiniRom.Included, CopperScreenMachinePresets.CanUseMinimalBoot(aga));
     }
 }

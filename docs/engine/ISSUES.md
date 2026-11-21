@@ -7,8 +7,9 @@ Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
-The host's [Minimal disk boot](MINIMAL_DISK_BOOT.md) has a separately bounded
-service/compatibility contract; it does not provide DOS, Workbench or CopperStart.
+The retired [minimal floppy firmware](MINIMAL_DISK_BOOT.md) had a separately
+bounded service contract. Bundled builds now default to the
+[standalone CopperStart Mini ROM](../COPPERSTART_APP.md#copperstart-mini-bundle).
 The 2026-11-03 model extension verifies guest boot/services on standard PAL A500+
 and A1200, including a 3,000-field Desert Dream startup on both. Arte's A1200
 `disk FIFO overrun timing` stop was traced to Copper SKIP bypassing illegal-MOVE

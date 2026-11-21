@@ -716,7 +716,7 @@ internal sealed class CopperScreenStartupOptions
 		else if (kickstartRomPath != null && !profile.UsesKickstartRom)
 		{
 			error ??= profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot
-				? "A Kickstart ROM path was supplied with minimal disk boot. Choose one boot method."
+				? "Choose either the bundled CopperStart Mini ROM or the supplied Kickstart ROM."
 				: "A Kickstart ROM path was supplied with a CopperStart profile.";
 		}
 

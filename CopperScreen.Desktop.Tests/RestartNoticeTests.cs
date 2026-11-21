@@ -23,7 +23,7 @@ public sealed partial class LaunchWorkflowTests
         try
         {
             window.Width = width;
-            var draft = MenuDraft(window); draft.KickstartRomPath = rom; SetMenuDraft(window, draft);
+            window.SelectOriginalRom(rom);
             Click(Button(window, "Start Amiga"));
             await Until(() => Named<Button>(window, "Pause").IsEnabled);
             var original = SettingsField<CopperScreenRuntime>(window, "_runtime");

@@ -181,7 +181,7 @@ public sealed partial class LaunchWorkflowTests
             var draft = MenuDraft(window);
             var image = Assert.Single(draft.HardDrives).Path;
             Assert.False(draft.HardDrives[0].ReadOnly);
-            Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
+            Assert.True(Button(window, "Choose ROM…").IsEffectivelyVisible);
             Assert.False(Named<Button>(window, "Browse…").IsEnabled);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Capture(window, "copperos-hdf-ready");
@@ -287,7 +287,8 @@ public sealed partial class LaunchWorkflowTests
             Click(eject);
             Assert.Null(MenuDraft(window).DriveDiskPaths[0]);
             Assert.False(eject.IsEnabled);
-            var draft = MenuDraft(window); draft.KickstartRomPath = DefaultRomFixture(0, "carried-rom");
+            window.SelectOriginalRom(DefaultRomFixture(0, "carried-rom"));
+            var draft = MenuDraft(window);
             var selectedRom = draft.KickstartRomPath;
             var selectedVersion = draft.RomVersion;
             SetMenuDraft(window, draft);

@@ -3,7 +3,17 @@ namespace CopperScreen;
 // Desktop setup only. ROM execution and workspace writes remain on Lightweight.
 internal static class CopperScreenLaunchWorkflow
 {
-    public static readonly string[] StartChoices = ["Amiga 500", "Amiga 500+", "Amiga 1200", "Amiga 1200 with CopperOS HDF", "Amiga 500 with CopperStart", "Amiga 500+ with CopperStart", "Amiga 500 with minimal disk boot", "Amiga 500+ with minimal disk boot", "Amiga 1200 with minimal disk boot"];
+    public static readonly string[] StartChoices = ["Amiga 500", "Amiga 500+", "Amiga 1200", "Amiga 1200 with CopperOS HDF", "Amiga 500 with CopperStart", "Amiga 500+ with CopperStart", "Amiga 500 with CopperStart Mini", "Amiga 500+ with CopperStart Mini", "Amiga 1200 with CopperStart Mini"];
+
+    public static void UseDefaultRom(CopperScreenSettingsDraft draft)
+    {
+        if (CopperScreenBootMethods.Method(draft) != CopperScreenBootMethod.KickstartRom ||
+            draft.KickstartSource == CopperScreenKickstartSource.DiagRom ||
+            !string.IsNullOrWhiteSpace(draft.KickstartRomPath) ||
+            !CopperScreenMachinePresets.CanUseMinimalBoot(draft)) return;
+        draft.KickstartSource = CopperScreenKickstartSource.MinimalDiskBoot;
+        draft.RomVersion = KickstartVersion.CopperStartMini;
+    }
 
     public static int StartChoice(CopperScreenSettingsDraft draft)
     {
@@ -25,7 +35,8 @@ internal static class CopperScreenLaunchWorkflow
         draft.Id = choice >= 6 ? "my-" + new[] { "a500", "a500-plus", "a1200" }[model] + "-minimal" : choice >= 3 ? "my-" + new[] { "a500", "a500-plus", "a1200" }[model] + "-copperos" : "my-" + new[] { "a500", "a500-plus", "a1200" }[choice];
         draft.DisplayName = StartChoices[choice];
         draft.SourcePath = null;
-        draft.RomVersion = hasSelectedNativeRom ? current.RomVersion : CopperScreenMachinePresets.RecommendedKickstartVersion((CopperScreenMachineModel)model);
+        draft.RomVersion = choice >= 6 ? KickstartVersion.CopperStartMini
+            : hasSelectedNativeRom ? current.RomVersion : CopperScreenMachinePresets.RecommendedKickstartVersion((CopperScreenMachineModel)model);
         draft.KickstartSource = choice switch { >= 6 => CopperScreenKickstartSource.MinimalDiskBoot, >= 3 => CopperScreenKickstartSource.CopperStart, _ => CopperScreenKickstartSource.KickstartRom };
         draft.KickstartRomPath = choice < 3 && hasSelectedNativeRom ? current.KickstartRomPath : null;
         draft.HardDrives.Clear();
@@ -46,12 +57,12 @@ internal static class CopperScreenLaunchWorkflow
     }
 
     public static string RomGuidance(CopperScreenSettingsDraft draft) => draft.KickstartSource == CopperScreenKickstartSource.CopperStart
-        ? !CopperScreenBootMethods.CopperStartEnabled ? "CopperStart is not enabled in this build. Choose another boot method."
+        ? !CopperScreenBootMethods.CopperStartEnabled ? "CopperStart is not enabled in this build. Choose a Kickstart ROM."
         : draft.Chipset.DisplayChip == DisplayChipModel.AgaLisa
             ? "Licensed CopperStart ROM and CopperOS system disk included with this edition."
             : "Licensed CopperStart ROM included with this edition. A500/A500+ compatibility is experimental."
         : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot
-            ? CopperScreenBootMethods.Unavailable("MinimalDiskBoot", CopperScreenMachinePresets.Identify(draft)) ?? "Built-in floppy boot for compatible games and demos. A startup ADF is optional."
+            ? CopperScreenBundledMiniRom.Included ? "" : CopperScreenBundledMiniRom.UnavailableMessage
         : CopperScreenMachinePresets.Identify(draft) switch
         {
             CopperScreenMachineModel.Amiga500 => "Recommended for Amiga 500: Kickstart 1.3. Other supported versions are accepted; compatibility varies.",

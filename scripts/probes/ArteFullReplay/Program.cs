@@ -22,8 +22,7 @@ draft.DriveDiskPaths[0] = args[0];
 var disk = CopperScreenDiskImageArchive.LoadDiskImage(args[0]);
 if (Convert.ToHexString(SHA256.HashData(disk.Data)) != "EB7521FC1DE886C69706AB0E21898A89199FB12256DB40743F3ED190957E896A")
     throw new InvalidDataException("This probe's recorded scene evidence requires the qualified Arte ADF. See docs/engine/MINIMAL_DISK_BOOT.md.");
-var rom = CopperScreenBundledMiniRom.Included ? CopperScreenBundledMiniRom.Read()
-    : new CopperScreenMinimalBoot(disk, model == 0, draft.ChipRamKb * 1024, model == 2).Rom;
+var rom = CopperScreenBundledMiniRom.Read();
 using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(AppContext.BaseDirectory));
 using var log = new StreamWriter(Path.Combine(output, "frames.jsonl")) { AutoFlush = true };
 using var pcm = File.Create(Path.Combine(output, "audio.wav")); pcm.Write(new byte[44]);

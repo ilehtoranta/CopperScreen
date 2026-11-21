@@ -3,16 +3,17 @@
 CopperScreen is an Amiga emulator with an Avalonia desktop interface,
 a lightweight emulation engine, a disk-image library and a headless runner.
 
-The start screen separates **Amiga model** (500, 500+, or 1200) from
-**Boot method**: **CopperStart Mini**, **Original Kickstart ROM**, and,
-in builds that enable it, **CopperStart ROM**. The [CopperStart Mini bundle](docs/COPPERSTART_APP.md#copperstart-mini-bundle)
-uses the same native ROM qualified in WinUAE on PAL A500, A500+ and A1200.
+Select **Amiga 500**, **Amiga 500+**, or **Amiga 1200** and press **Start Amiga**.
+The [bundled CopperStart Mini ROM](docs/COPPERSTART_APP.md#copperstart-mini-bundle)
+is the default for a new setup and uses the same native ROM qualified in WinUAE.
+Use **Choose ROM…** for an original Kickstart and **Use built-in ROM** to switch
+back. Builds without the bundle need an original Kickstart ROM.
 It shows its splash at startup and prompts for a boot disk if DF0 is empty.
 It supports compatible takeovers and OFS/FFS startup disks. Workbench requires a
 native Kickstart ROM.
 Unsupported model combinations remain visible with a requirement message and
 cannot start. Launcher and Configure Amiga remember a separate complete setup
-for each model and boot method, including ROM, disks and optional hardware.
+for each model and ROM, including disks and optional hardware.
 The bundled CopperStart
 ROM and CopperOS desktop are selectable on all three models; A500/A500+
 compatibility is experimental and has not been verified. The screen explains each ROM requirement and lets
@@ -51,7 +52,7 @@ the settings window open while restoring the running configuration.
 - Explicit PAL Agnus: 8371 with 512 KiB Chip RAM, 8372A with 512 KiB or 1 MiB, or 8375 (318069-10) with 1 or 2 MiB. The default remains 8371 / 512 KiB Chip + 512 KiB slow RAM. Larger Chip RAM layouts use no slow RAM; optional Autoconfig Fast RAM is separate, up to 8 MiB with 24-bit CPUs or 1 GiB with full 32-bit CPUs. See [CPU/memory configuration and native evidence](docs/engine/CPU_MEMORY_UPGRADES.md).
 - Native Kickstart 1.3 (v34) or A500 Kickstart 3.1 (v40.63) ROM, supplied by the user. Workbench 3.1 floppy boot is verified with and without 2 MiB Fast RAM; see the [native boot record](docs/engine/KICKSTART_31_2026-09-30.md).
 - PAL A500+ with native Kickstart 2.04 (v37.175), existing ECS hardware, 1 MiB Chip RAM and RTC: choose Amiga 500+ or use the `a500-plus-ecs-pal` profile. See [setup and native boot evidence](docs/engine/KICKSTART_204_2026-10-21.md).
-- [CopperStart Mini](docs/COPPERSTART_APP.md#copperstart-mini-bundle) boots compatible takeover and OFS/FFS disks on standard PAL A500, A500+ and A1200. Source builds without the bundled ROM offer the original [minimal floppy firmware](docs/engine/MINIMAL_DISK_BOOT.md).
+- [CopperStart Mini](docs/COPPERSTART_APP.md#copperstart-mini-bundle) boots compatible takeover and OFS/FFS disks on standard PAL A500, A500+ and A1200.
 - Explicit [CopperStart standalone ROM](docs/COPPERSTART_APP.md) boot on Lightweight: qualified experimental PAL OCS 68000 A500, 512 KiB Chip + 512 KiB slow RAM and read-only DF0 by default. Supply the matching versioned ROM; explicitly admitted CopperOS workspaces can be writable.
 - One to four floppy drives (DF0–DF3): 880 KiB DD / 1760 KiB HD ADF with explicit Save ADF, plus read-only ADZ, DMS, modern extended ADF, IPF and SCP, including selected ZIP entries. SCP uses a decoded first revolution. See [format support and limits](docs/engine/DISK_FORMATS.md). The default remains one write-protected drive. Select DD or HD per drive in **Settings > Floppy Drives** and restart the Amiga. Drive types are saved in profiles and the remembered last machine. The runner accepts repeatable `--drive-type 0 HD` (units 0–3; `DD` is the default); connect external units with `--drives`.
 - File-backed CopperHDF virtual hard disks with partition/RDB discovery, native Kickstart 1.3 OFS boot and [Kickstart 3.1 FFS boot/write/reopen](docs/engine/KICKSTART_31_HD_2026-09-30.md). See the [storage contract and incomplete IPF compatibility validation](docs/engine/STORAGE.md).

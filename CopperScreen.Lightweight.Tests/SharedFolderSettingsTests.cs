@@ -52,6 +52,6 @@ public sealed class SharedFolderSettingsTests
         var draft = new CopperScreenSettingsDraft { KickstartSource = CopperScreenKickstartSource.MinimalDiskBoot };
         draft.HostDirectories.Add(new("HOST0", "Exchange", AppContext.BaseDirectory));
         var error = Assert.Throws<NotSupportedException>(() => CopperScreenLightweightSession.Validate(draft.ToStartupOptions(AppContext.BaseDirectory), requireRomPath: false));
-        Assert.Contains("Minimal disk boot", error.Message);
+        Assert.Contains("CopperStart Mini", error.Message);
     }
 }

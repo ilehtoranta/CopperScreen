@@ -12,6 +12,7 @@ internal sealed class CopperScreenRecentSession
     private readonly List<string> _recentDisks = [];
     private readonly Dictionary<string, NativeRom> _kickstartRoms = [];
     private readonly Dictionary<string, ModelDisks> _modelDisks = [];
+    private readonly Dictionary<string, bool> _modelUsesMini = [];
 
     public CopperScreenRecentSession(string directory)
     {
@@ -28,6 +29,9 @@ internal sealed class CopperScreenRecentSession
                 if (Enum.TryParse<CopperScreenMachineModel>(entry.Key, out var model) && Enum.IsDefined(model) &&
                     entry.Value is { } rom && IsNative(rom.Source) && Enum.IsDefined(rom.Version) && !string.IsNullOrWhiteSpace(rom.Path))
                     _kickstartRoms[model.ToString()] = rom;
+            foreach (var entry in history.ModelUsesMini ?? [])
+                if (Enum.TryParse<CopperScreenMachineModel>(entry.Key, out var model) && Enum.IsDefined(model))
+                    _modelUsesMini[model.ToString()] = entry.Value;
             foreach (var entry in history.ModelDisks ?? [])
                 if (Enum.TryParse<CopperScreenMachineModel>(entry.Key, out var model) && Enum.IsDefined(model) &&
                     entry.Value is { Paths.Length: 4, WriteProtected.Length: 4, Types.Length: 4, DriveCount: >= 1 and <= 4 } disks)
@@ -79,10 +83,13 @@ internal sealed class CopperScreenRecentSession
         {
             Directory.CreateDirectory(_directory);
             if (machine != null) TryRememberKickstart(machine, baseDirectory ?? AppContext.BaseDirectory);
+            if (machine != null && (machine.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ||
+                IsNative(machine.KickstartSource) && !string.IsNullOrWhiteSpace(machine.KickstartRomPath)))
+                _modelUsesMini[CopperScreenMachinePresets.Identify(machine).ToString()] = machine.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
             if (machine != null) TryRememberDisks(machine, baseDirectory ?? AppContext.BaseDirectory);
             if (machine != null) RememberConfiguration(machine, baseDirectory ?? AppContext.BaseDirectory);
             if (machine != null) CopperScreenProfileStore.SaveToPath(machine, MachinePath, baseDirectory: baseDirectory);
-            CopperScreenUserData.WriteAtomically(HistoryPath, JsonSerializer.Serialize(new History { Volume = Volume, Muted = Muted, RecentDisks = _recentDisks.ToArray(), KickstartRoms = _kickstartRoms, ModelDisks = _modelDisks }));
+            CopperScreenUserData.WriteAtomically(HistoryPath, JsonSerializer.Serialize(new History { Volume = Volume, Muted = Muted, RecentDisks = _recentDisks.ToArray(), KickstartRoms = _kickstartRoms, ModelDisks = _modelDisks, ModelUsesMini = _modelUsesMini }));
             LastError = null;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
@@ -95,6 +102,13 @@ internal sealed class CopperScreenRecentSession
     }
 
     private string ConfigurationPath(int choice) => Path.Combine(_directory, "MachineDefaults", $"model-{choice}.json");
+
+    public bool? ModelUsesMini(CopperScreenMachineModel model)
+    {
+        var key = model.ToString();
+        if (_modelUsesMini.TryGetValue(key, out var usesMini)) return usesMini;
+        return _kickstartRoms.ContainsKey(key) ? false : null;
+    }
 
     public void RememberConfiguration(CopperScreenSettingsDraft draft, string baseDirectory)
     {
@@ -209,5 +223,6 @@ internal sealed class CopperScreenRecentSession
         public string[]? RecentDisks { get; set; }
         public Dictionary<string, NativeRom>? KickstartRoms { get; set; }
         public Dictionary<string, ModelDisks>? ModelDisks { get; set; }
+        public Dictionary<string, bool>? ModelUsesMini { get; set; }
     }
 }

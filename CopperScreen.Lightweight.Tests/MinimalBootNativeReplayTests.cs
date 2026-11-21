@@ -19,8 +19,7 @@ public sealed class MinimalBootNativeReplayTests
         var draft = CopperScreenLaunchWorkflow.SelectStartChoice(new(), 6 + model);
         draft.DriveDiskPaths[0] = path;
         var disk = CopperScreenDiskImageArchive.LoadDiskImage(path);
-        var rom = CopperScreenBundledMiniRom.Included ? CopperScreenBundledMiniRom.Read()
-            : new CopperScreenMinimalBoot(disk, false, draft.ChipRamKb * 1024, model == 2).Rom;
+        var rom = CopperScreenBundledMiniRom.Read();
         using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(AppContext.BaseDirectory));
         var frames = 0; var audibleFrames = 0;
         var checkpoints = new List<object>();
@@ -63,7 +62,9 @@ public sealed class MinimalBootReplayTheoryAttribute : TheoryAttribute
 {
     public MinimalBootReplayTheoryAttribute()
     {
-        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_MINIMAL_BOOT_ADF")))
+        if (!CopperScreenBundledMiniRom.Included)
+            Skip = "Stage the qualified CopperStart Mini ROM for native boot coverage.";
+        else if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("COPPERSCREEN_MINIMAL_BOOT_ADF")))
             Skip = "Supply COPPERSCREEN_MINIMAL_BOOT_ADF for original-media boot coverage.";
     }
 }

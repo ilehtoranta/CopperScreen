@@ -23,7 +23,6 @@ internal static class CopperScreenAvailability
     {
         "Engine" => value == "Lightweight",
         "CPU backend" => value is "AccurateM68000" or "AccurateM68010" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040" or "JitM68040",
-        "Kickstart" or "Boot method" => (value != "CopperStart" || CopperScreenBootMethods.CopperStartEnabled) && value is "KickstartRom" or "Kickstart13Rom" or "Kickstart31Rom" or "MinimalDiskBoot" or "CopperStart",
         "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M" or "AgaAlice",
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
@@ -61,7 +60,7 @@ internal static class CopperScreenAvailability
         "AccurateM68060" => "Motorola 68060 (requires 060 OS support)",
         "JitM68040" => "Motorola 68040 (JIT)",
         "Kickstart13Rom" => "Native Kickstart ROM",
-        "MinimalDiskBoot" => CopperScreenBootMethods.Label(value),
+        "MinimalDiskBoot" => "CopperStart Mini",
         "CopperStart" => "CopperStart standalone ROM (experimental)",
         "Kickstart31Rom" => "Native Kickstart ROM",
         "KickstartRom" => "Native Kickstart ROM (version detected from file)",

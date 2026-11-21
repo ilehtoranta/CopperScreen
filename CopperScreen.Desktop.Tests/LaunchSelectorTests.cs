@@ -19,10 +19,10 @@ public sealed partial class LaunchWorkflowTests
         {
             LaunchSelection.Select(window, model);
             window.UpdateLayout();
-            var boot = Named<ComboBox>(window, "Boot method");
-            var card = Avalonia.LogicalTree.LogicalExtensions.GetLogicalAncestors(boot).OfType<Border>().First();
+            var selector = Named<ComboBox>(window, "Amiga model");
+            var card = Avalonia.LogicalTree.LogicalExtensions.GetLogicalAncestors(selector).OfType<Border>().First();
             var size = card.Bounds.Size;
-            boot.SelectedItem = "CopperStart";
+            Click(Button(window, "Use CopperOS"));
             window.UpdateLayout();
             Assert.Equal(size, card.Bounds.Size);
             var draft = MenuDraft(window);
@@ -31,9 +31,9 @@ public sealed partial class LaunchWorkflowTests
             Assert.NotEmpty(CopperScreenCopperStartRom.Read(draft.KickstartRomPath, model == 2));
             disk = Assert.Single(draft.HardDrives).Path;
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
-            boot.SelectedItem = "KickstartRom";
+            window.SelectOriginalRom(DefaultRomFixture(model, "original-for-layout"));
             window.UpdateLayout(); Assert.Equal(size, card.Bounds.Size);
-            boot.SelectedItem = "CopperStart";
+            Click(Button(window, "Use CopperOS"));
             Assert.Equal(disk, Assert.Single(MenuDraft(window).HardDrives).Path);
         }
         finally { window.Close(); }
@@ -41,7 +41,7 @@ public sealed partial class LaunchWorkflowTests
         try
         {
             Assert.Equal(model, Named<ComboBox>(reopened, "Amiga model").SelectedIndex);
-            Assert.Equal("CopperStart", Named<ComboBox>(reopened, "Boot method").SelectedItem);
+            Assert.Equal(CopperScreenKickstartSource.CopperStart, MenuDraft(reopened).KickstartSource);
             Assert.Equal(disk, Assert.Single(MenuDraft(reopened).HardDrives).Path);
         }
         finally { reopened.Close(); }
@@ -57,7 +57,6 @@ public sealed partial class LaunchWorkflowTests
         try
         {
             Assert.Equal(0, Named<ComboBox>(window, "Amiga model").SelectedIndex);
-            Assert.Equal("CopperStart", Named<ComboBox>(window, "Boot method").SelectedItem);
             Assert.Equal(draft.KickstartRomPath, MenuDraft(window).KickstartRomPath);
             Assert.Equal(CopperScreenKickstartSource.CopperStart, MenuDraft(window).KickstartSource);
         }

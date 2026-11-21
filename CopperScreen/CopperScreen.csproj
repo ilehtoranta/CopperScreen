@@ -69,7 +69,6 @@
   <ItemGroup>
     <None Include="Presets\*.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Firmware/CopperStart-LICENSE.txt" Link="CopperStart-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-    <EmbeddedResource Include="Firmware\MinimalDiskBoot.s" />
     <EmbeddedResource Condition="'$(CopperScreenIncludeMiniRom)' == 'true'" Include="$(CopperStartMiniBundleDirectory)/CopperStart-Mini.rom" LogicalName="CopperScreen.Bundled.CopperStart-Mini.rom" />
     <None Condition="'$(CopperScreenIncludeMiniRom)' == 'true'" Include="$(CopperStartMiniBundleDirectory)/LICENSE.txt" Link="Firmware/CopperStartMini/LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="Firmware\CopperStartA1200.json" LogicalName="CopperScreen.Firmware.CopperStartA1200.json" />

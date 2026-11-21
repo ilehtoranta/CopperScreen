@@ -71,13 +71,13 @@ public sealed partial class LaunchWorkflowTests
         try
         {
             await window.InsertDriveDiskAsync(0, disk);
-            var restored = new CopperScreenRecentSession(_root).RestoreDisks(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 0));
+            var restored = new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!;
             Assert.Equal(disk, restored.DriveDiskPaths[0]);
             Click(Named<Button>(window, "Eject"));
-            restored = new CopperScreenRecentSession(_root).RestoreDisks(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 0));
+            restored = new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!;
             Assert.Null(restored.DriveDiskPaths[0]);
-            LaunchSelection.Select(window, 1);
-            LaunchSelection.Select(window, 0);
+            Named<ComboBox>(window, "Amiga model").SelectedIndex = 1;
+            Named<ComboBox>(window, "Amiga model").SelectedIndex = 0;
             Assert.Null(MenuDraft(window).DriveDiskPaths[0]);
         }
         finally { window.Close(); }

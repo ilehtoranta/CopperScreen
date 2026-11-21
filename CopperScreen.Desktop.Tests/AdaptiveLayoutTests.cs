@@ -1,4 +1,3 @@
-using System.Buffers.Binary;
 using System.Reflection;
 using Avalonia.Interactivity;
 using Avalonia;
@@ -30,24 +29,7 @@ public sealed class AdaptiveLayoutTests(LaunchUiFixture ui) : IDisposable
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(15));
         while (!condition()) await Task.Delay(20, timeout.Token);
     }
-    private MainWindow Running()
-    {
-        Directory.CreateDirectory(_root);
-        var disk = new byte[901120]; "DOS\0"u8.CopyTo(disk);
-        new CopperScreenBootAssembler(CopperScreenMinimalBoot.BootAddress + 12).Assemble("loop:\n bra loop").CopyTo(disk, 12);
-        uint sum = 0;
-        for (var i = 0; i < 1024; i += 4)
-        {
-            var next = unchecked(sum + BinaryPrimitives.ReadUInt32BigEndian(disk.AsSpan(i)));
-            if (next < sum) next++;
-            sum = next;
-        }
-        BinaryPrimitives.WriteUInt32BigEndian(disk.AsSpan(4), ~sum);
-        var path = Path.Combine(_root, "original.adf"); File.WriteAllBytes(path, disk);
-        var window = new MainWindow(["--minimal-disk-boot", path], new CopperScreenRecentSession(_root));
-        window.Show();
-        return window;
-    }
+    private MainWindow Running() => LaunchSelection.RunningWithOriginalRom(_root);
     private static CopperScreenRuntime Runtime(MainWindow window) => (CopperScreenRuntime)typeof(MainWindow)
         .GetField("_runtime", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(window)!;
 

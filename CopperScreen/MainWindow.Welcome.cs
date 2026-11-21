@@ -11,12 +11,11 @@ namespace CopperScreen;
 internal sealed partial class MainWindow
 {
     private readonly CopperScreenRecentSession _recentSession;
-    private Button _welcomeStart = null!, _welcomeRomButton = null!;
+    private Button _welcomeStart = null!, _welcomeRomButton = null!, _welcomeUseBundledRom = null!, _welcomeUseCopperOs = null!;
     private TextBlock _welcomeRom = null!, _welcomeMessage = null!;
     private StackPanel _welcomeRecent = null!;
-    private ComboBox _welcomeBootMethod = null!, _welcomeModel = null!;
-    private Control? _bootRomRow, _welcomeRomRow;
-    private bool _updatingBootMethod;
+    private ComboBox _welcomeModel = null!;
+    private bool _updatingWelcomeModel;
     private bool _welcomeCopperOs;
     private Control _welcomeWorkspacePanel = null!, _welcomeHdfPanel = null!;
     private TextBlock _welcomeRequirements = null!, _welcomeHdf = null!;
@@ -30,23 +29,23 @@ internal sealed partial class MainWindow
     {
         _welcomeCopperOs = CopperScreenLaunchWorkflow.IsWorkspacePath(_settingsDraft.DriveDiskPaths[0], _recentSession.DataDirectory);
         var content = new StackPanel { Spacing = 16, MaxWidth = 570, Margin = new Thickness(32), HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Center };
-        CreateWelcomeLaunchSelectors();
+        CreateWelcomeModelSelector();
         _welcomeRom = new TextBlock();
-        _welcomeRomButton = CreatePanelButton("Choose ROM…", () => _ = ChooseWelcomeRomAsync());
+        AutomationProperties.SetName(_welcomeRom, "Selected ROM");
+        _welcomeRomButton = CreatePanelButton("Choose ROM…", () => _ = PickRomAsync());
+        _welcomeUseBundledRom = CreatePanelButton("Use built-in ROM", UseBundledRom);
+        _welcomeUseCopperOs = CreatePanelButton("Use CopperOS", UseCopperOs);
         var setup = new StackPanel { Spacing = 10 };
         var modelLabel = new TextBlock { Text = "Amiga model", Foreground = CopperScreenAppearance.Text, FontWeight = FontWeight.SemiBold };
         AutomationProperties.SetLabeledBy(_welcomeModel, modelLabel);
         setup.Children.Add(modelLabel);
         setup.Children.Add(_welcomeModel);
-        var bootLabel = new TextBlock { Text = "Boot method", Foreground = CopperScreenAppearance.Text, FontWeight = FontWeight.SemiBold };
-        AutomationProperties.SetLabeledBy(_welcomeBootMethod, bootLabel);
-        setup.Children.Add(bootLabel);
-        setup.Children.Add(_welcomeBootMethod);
+        setup.Children.Add(new TextBlock { Text = "ROM", Foreground = CopperScreenAppearance.Text, FontWeight = FontWeight.SemiBold });
+        setup.Children.Add(WithAction(_welcomeRom, _welcomeRomButton));
+        setup.Children.Add(CommandGroup(_welcomeUseBundledRom, _welcomeUseCopperOs));
         _welcomeRequirements = new TextBlock { Foreground = MutedText, FontSize = 13, TextWrapping = TextWrapping.Wrap };
         AutomationProperties.SetName(_welcomeRequirements, "ROM requirements");
         setup.Children.Add(_welcomeRequirements);
-        _welcomeRomRow = WithAction(_welcomeRom, _welcomeRomButton);
-        setup.Children.Add(_welcomeRomRow);
         _welcomeHdf = new TextBlock();
         AutomationProperties.SetName(_welcomeHdf, "CopperOS HDF selection");
         var hdfPanel = new StackPanel { Spacing = 8 };
@@ -58,7 +57,7 @@ internal sealed partial class MainWindow
         setup.Children.Add(hdfPanel);
         _welcomeWorkspacePanel = CreateWelcomeWorkspacePanel();
         setup.Children.Add(_welcomeWorkspacePanel);
-        content.Children.Add(new Border { Background = Surface, CornerRadius = new CornerRadius(12), Padding = new Thickness(22), Height = 360, Child = new ScrollViewer { Content = setup, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled } });
+        content.Children.Add(new Border { Background = Surface, CornerRadius = new CornerRadius(12), Padding = new Thickness(22), Height = 300, Child = new ScrollViewer { Content = setup, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled } });
         _welcomeMessage = new TextBlock { Foreground = MutedText, TextWrapping = TextWrapping.Wrap, FontSize = 13 };
         _welcomeMessage.PropertyChanged += (_, args) =>
         {
@@ -101,55 +100,36 @@ internal sealed partial class MainWindow
         return new Border { Background = CopperScreenAppearance.Background, Child = new ScrollViewer { Name = "LauncherScroll", Content = content, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled }, MaxHeight = 720, IsVisible = _runtime == null };
     }
 
-    private void UpdateBootMethodControls()
-    {
-        if (_kickstartSourceBox == null) return;
-        var source = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem);
-        var minimal = source == CopperScreenKickstartSource.MinimalDiskBoot;
-        _welcomeCopperOs = source == CopperScreenKickstartSource.CopperStart && CopperOsWorkspace.IsWorkspace(_settingsDraft.DriveDiskPaths[0]);
-        var hdf = source == CopperScreenKickstartSource.CopperStart && _settingsDraft.HardDrives.Count > 0;
-        if (_welcomeWorkspacePanel != null) _welcomeWorkspacePanel.IsVisible = _welcomeCopperOs;
-        if (_welcomeHdfPanel != null) _welcomeHdfPanel.IsVisible = hdf;
-        if (_bootRomRow != null) _bootRomRow.IsVisible = !minimal;
-        if (_welcomeRomRow != null) _welcomeRomRow.IsVisible = !minimal && !hdf;
-        if (_setupDiskBox != null) _setupDiskBox.PlaceholderText = minimal ? "Optional · standard ADF or ZIP containing an ADF" : "Optional · boot without a floppy disk";
-        if (_welcomeRequirements != null)
-        {
-            _welcomeRequirements.Text = CopperScreenLaunchWorkflow.RomGuidance(_settingsDraft);
-            _welcomeRequirements.IsVisible = !minimal && (source == CopperScreenKickstartSource.CopperStart || string.IsNullOrWhiteSpace(_kickstartRomBox.Text));
-        }
-        if (_welcomeBootMethod != null)
-        {
-            _updatingBootMethod = true;
-            try
-            {
-                RefreshWelcomeLaunchSelectors();
-            }
-            finally { _updatingBootMethod = false; }
-        }
-        if (_welcomeRecent != null) _welcomeRecent.IsVisible = _recentSession.RecentDisks.Count > 0 && !_welcomeCopperOs && !hdf;
-    }
-
     private void UpdateWelcomeStatus(bool valid, string error)
     {
         if (_welcomeStart == null || _runtime != null) return;
-        UpdateBootMethodControls();
-        var minimal = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) == CopperScreenKickstartSource.MinimalDiskBoot;
-        var copperStart = ParseKickstartSourceSelection(_kickstartSourceBox.SelectedItem) == CopperScreenKickstartSource.CopperStart;
+        RefreshWelcomeModel();
+        var minimal = _settingsDraft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
+        var copperStart = _settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart;
         var hdf = copperStart && _settingsDraft.HardDrives.Count > 0;
+        _welcomeCopperOs = copperStart && CopperOsWorkspace.IsWorkspace(_settingsDraft.DriveDiskPaths[0]);
+        _welcomeWorkspacePanel.IsVisible = _welcomeCopperOs;
+        _welcomeHdfPanel.IsVisible = hdf;
+        if (_welcomeRecent != null) _welcomeRecent.IsVisible = _recentSession.RecentDisks.Count > 0 && !_welcomeCopperOs && !hdf;
         _welcomeHdf.Text = _settingsDraft.HardDrives.FirstOrDefault() is { } hardfile
             ? Path.GetFileName(hardfile.Path) + (hardfile.ReadOnly ? " · read-only" : " · changes saved between sessions")
             : "No personal hard disk available";
         ToolTip.SetTip(_welcomeHdf, _settingsDraft.HardDrives.FirstOrDefault()?.Path);
-        var rom = _kickstartRomBox.Text;
-        _welcomeRom.Text = string.IsNullOrWhiteSpace(rom) ? "No ROM selected" : Path.GetFileName(rom);
+        var rom = minimal ? null : _kickstartRomBox.Text;
+        _welcomeRom.Text = minimal && CopperScreenBundledMiniRom.Included ? "CopperStart Mini (built in)"
+            : hdf ? "CopperStart ROM"
+            : string.IsNullOrWhiteSpace(rom) ? "No ROM selected" : Path.GetFileName(rom);
         ToolTip.SetTip(_welcomeRom, rom);
+        _welcomeRequirements.Text = CopperScreenLaunchWorkflow.RomGuidance(_settingsDraft);
+        _welcomeRequirements.IsVisible = !minimal && (copperStart || string.IsNullOrWhiteSpace(rom));
         var disk = _setupDiskBox.Text;
         var workspaceReady = !_welcomeCopperOs || CopperOsWorkspace.IsWorkspace(disk);
         _welcomeStart.IsEnabled = valid && workspaceReady && !_settingsVisible && !_applyingSettings;
         _welcomeStart.Content = _applyingSettings ? "Starting…" : (_welcomeCopperOs || hdf) ? "Start CopperOS" : copperStart ? "Start CopperStart" : "Start Amiga";
         _welcomeRomButton.IsEnabled = !_settingsVisible && !_applyingSettings;
-        _welcomeModel.IsEnabled = _welcomeBootMethod.IsEnabled = !_settingsVisible && !_applyingSettings;
+        _welcomeUseBundledRom.IsVisible = CopperScreenBundledMiniRom.Included && !minimal;
+        _welcomeUseCopperOs.IsVisible = CopperScreenBootMethods.CopperStartEnabled && !copperStart;
+        _welcomeUseBundledRom.IsEnabled = _welcomeUseCopperOs.IsEnabled = _welcomeModel.IsEnabled = !_settingsVisible && !_applyingSettings;
         _welcomeHdfPanel.IsEnabled = !_settingsVisible && !_applyingSettings;
         if (_welcomeCreateWorkspace != null)
         {
@@ -160,7 +140,7 @@ internal sealed partial class MainWindow
             ? workspaceReady ? "" : "Create a workspace or select one and choose Resume workspace."
             : hdf ? valid ? _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Startup takes about 25 seconds." : "" : error
             : copperStart ? valid ? "Experimental CopperStart boot" : error
-            : minimal ? valid ? CopperScreenBundledMiniRom.Included ? "Floppy boot · OFS and FFS startup disks" : "Minimal floppy boot · no DOS or Workbench" : error
+            : minimal ? valid ? "" : error
             : valid || string.IsNullOrWhiteSpace(rom) ? "" : error);
         _welcomeMessage.Foreground = _settingsStartupError != null || (!valid && (minimal ? !string.IsNullOrWhiteSpace(disk) : !string.IsNullOrWhiteSpace(rom))) ? new SolidColorBrush(Color.Parse("#FFBCAC")) : MutedText;
     }
@@ -282,20 +262,6 @@ internal sealed partial class MainWindow
         draft.Engine = CopperScreenEngine.Lightweight;
         _welcomeCopperOs = CopperScreenLaunchWorkflow.IsWorkspacePath(draft.DriveDiskPaths[0], _recentSession.DataDirectory);
         SetWelcomeDraft(draft);
-    }
-
-    private async Task ChooseWelcomeRomAsync()
-    {
-        await PickRomAsync();
-        if (_settingsStartupError == null)
-        {
-            _settingsDraft = ReadSettingsDraft();
-            _committedSettings = _settingsDraft.Clone();
-            _latestState = CreateIdleState(_settingsDraft);
-            RememberCurrentSession();
-        }
-        UpdateSettingsStatus();
-        UpdateToolbarStatus();
     }
 
     private void RememberCurrentSession()

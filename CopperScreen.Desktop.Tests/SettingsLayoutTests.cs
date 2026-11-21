@@ -24,9 +24,8 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
+            window.SelectOriginalRom(DefaultRomFixture(0, "settings-layout"));
             var draft = MenuDraft(window);
-            draft.KickstartRomPath = DefaultRomFixture(0, "settings-layout");
-            SetMenuDraft(window, draft);
             Click(Button(window, "Configure Amiga…"));
             var settings = SettingsField<Window>(window, "_settingsWindow");
             settings.Width = width; settings.Height = height; settings.SetRenderScaling(scale);

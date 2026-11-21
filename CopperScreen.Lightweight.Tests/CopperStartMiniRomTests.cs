@@ -10,6 +10,18 @@ public sealed class CopperStartMiniRomTests
     private const int ScreenStateAddress = 0x740 + 12;
     private const uint Splash = 6, WaitingForDisk = 1;
 
+    [Fact]
+    public void HistoricalMiniSwitchSelectsTheBundledRom()
+    {
+        var options = CopperScreenStartupOptions.Parse(["--minimal-disk-boot"], AppContext.BaseDirectory);
+        Assert.Null(options.Error);
+        Assert.Equal(CopperScreenKickstartSource.MinimalDiskBoot, options.Profile.KickstartSource);
+        Assert.Equal(KickstartVersion.CopperStartMini, options.Profile.KickstartVersion);
+        Assert.Null(options.KickstartRomPath);
+        Assert.Equal(CopperScreenBundledMiniRom.Included ? null : CopperScreenBundledMiniRom.UnavailableMessage,
+            CopperScreenLightweightSession.GetValidationError(options));
+    }
+
     [BundledMiniTheory]
     [InlineData(0)]
     [InlineData(1)]
@@ -46,7 +58,7 @@ public sealed class CopperStartMiniRomTests
             Assert.False(bundled.Framebuffer.AsSpan().SequenceEqual(splash), "The insert-disk screen did not replace the splash.");
 
             var diskPath = Path.Combine(directory.FullName, "takeover.adf");
-            File.WriteAllBytes(diskPath, CopperScreenMinimalBootTests.Disk("move.l #$12345678,$800\nloop:\nbra loop"));
+            File.WriteAllBytes(diskPath, TakeoverDisk());
             Assert.True(bundled.InsertLoadedDisk(0, diskPath, CopperScreenDiskImageArchive.LoadDiskImage(diskPath), markChanged: true));
             RunUntil(bundled, 0x800, 0x12345678u);
 
@@ -67,6 +79,21 @@ public sealed class CopperStartMiniRomTests
         var frames = RunUntil(session, ScreenStateAddress, state);
         Run(session, 2); // Allow the guest's Copper list to finish presenting a complete field.
         return frames + 2;
+    }
+
+    private static byte[] TakeoverDisk()
+    {
+        var disk = new byte[901120];
+        "DOS\0"u8.CopyTo(disk);
+        new CopperScreenBootAssembler(12).Assemble("move.l #$12345678,$800\nloop:\nbra loop").CopyTo(disk, 12);
+        uint sum = 0;
+        for (var i = 0; i < 1024; i += 4)
+        {
+            var next = unchecked(sum + BinaryPrimitives.ReadUInt32BigEndian(disk.AsSpan(i, 4)));
+            sum = next < sum ? next + 1 : next;
+        }
+        BinaryPrimitives.WriteUInt32BigEndian(disk.AsSpan(4), ~sum);
+        return disk;
     }
 
     private static int RunUntil(CopperScreenLightweightSession session, int address, uint value)

@@ -12,29 +12,11 @@ internal static class CopperScreenBootMethods
         false;
 #endif
 
-    public static string[] Choices => CopperStartEnabled
-        ? ["MinimalDiskBoot", "KickstartRom", "CopperStart"] : ["MinimalDiskBoot", "KickstartRom"];
-
     public static CopperScreenBootMethod Method(CopperScreenSettingsDraft draft) => draft.KickstartSource switch
     {
         CopperScreenKickstartSource.MinimalDiskBoot => CopperScreenBootMethod.MinimalDiskBoot,
         CopperScreenKickstartSource.CopperStart => CopperScreenBootMethod.CopperStart,
         _ => CopperScreenBootMethod.KickstartRom
-    };
-
-    public static string Label(string method) => method switch
-    {
-        "MinimalDiskBoot" => CopperScreenBundledMiniRom.Included ? "CopperStart Mini" : "Minimal floppy boot",
-        "KickstartRom" => "Original Kickstart ROM",
-        "CopperStart" => "CopperStart ROM",
-        _ => method
-    };
-
-    public static string? Unavailable(string method, CopperScreenMachineModel model) => method switch
-    {
-        _ when !Enum.IsDefined(model) => "Choose a supported Amiga model.",
-        "CopperStart" when !CopperStartEnabled => "CopperStart is not enabled in this build.",
-        _ => null
     };
 
     // Preserve existing saved model-0..5 profiles; minimal boot gets its own slots.

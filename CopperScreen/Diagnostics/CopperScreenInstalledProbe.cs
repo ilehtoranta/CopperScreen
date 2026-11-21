@@ -36,7 +36,10 @@ internal static class CopperScreenInstalledProbe
                 // Keep the persistence fixture untouched when changing the launcher's boot choice.
                 launcher = new MainWindow([], new CopperScreenRecentSession(Path.Combine(ActiveSession.DataDirectory, "LauncherLayout")));
                 launcher.Show();
-                launcher.GetLogicalDescendants().OfType<ComboBox>().Single(c => AutomationProperties.GetName(c) == "Boot method").SelectedIndex = 3;
+                launcher.GetLogicalDescendants().OfType<ComboBox>().Single(c => AutomationProperties.GetName(c) == "Amiga model").SelectedItem = "Amiga 1200";
+                var useCopperOs = launcher.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Use CopperOS");
+                Require(useCopperOs.IsEffectivelyVisible, "The diagnostic build must include the CopperOS bundle.");
+                useCopperOs.RaiseEvent(new Avalonia.Interactivity.RoutedEventArgs(Button.ClickEvent));
                 var cases = new List<object>();
                 foreach (var (width, height) in new[] { (800, 600), (1280, 720), (960, 640) })
                 {

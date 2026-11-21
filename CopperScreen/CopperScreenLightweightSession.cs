@@ -8,7 +8,6 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 {
     private readonly LightweightA500Machine _machine;
     private readonly IReadOnlyList<LightweightFloppyDriveType> _driveTypes;
-    private readonly CopperScreenMinimalBoot? _minimalBoot;
     private readonly bool _bundledMini;
     private readonly bool _copperStart;
     private readonly CopperOsWorkspace? _workspace;
@@ -29,26 +28,15 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Validate(options);
         _driveTypes = options.Profile.FloppyDriveTypes;
         _copperStart = options.Profile.KickstartSource == CopperScreenKickstartSource.CopperStart;
-        var minimal = options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
-        _bundledMini = minimal && CopperScreenBundledMiniRom.Included;
-        // Media decoding is mount-time only; none of the old execution machinery is created.
-        CopperScreenAdfImage? bootDisk = null;
+        _bundledMini = options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
         byte[] rom;
         if (_bundledMini) rom = CopperScreenBundledMiniRom.Read();
-        else if (minimal)
-        {
-            if (options.DriveDiskPaths[0] is { } path)
-                bootDisk = CopperScreenDiskImageArchive.LoadDiskImage(path);
-            _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0, options.Profile.ChipRamSize,
-                (options.CpuBackendOverride ?? options.Profile.CpuBackend) == M68kBackendKind.AccurateM68EC020);
-            rom = _minimalBoot.Rom;
-        }
         else if (_copperStart) rom = CopperScreenCopperStartRom.Read(options.KickstartRomPath, options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa);
         else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!, options.Profile.KickstartVersion);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
         var modelName = options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Amiga 1200" : options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "Amiga 500+" : "Amiga 500";
-        ProfileName = minimal ? modelName + " · " + (_bundledMini ? "CopperStart Mini" : "Minimal disk boot") : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
+        ProfileName = _bundledMini ? modelName + " · CopperStart Mini" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
             ? string.Empty : $" [{CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
@@ -96,7 +84,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             for (var i = 0; i < _machine.FloppyDriveCount; i++)
             {
                 var path = options.DriveDiskPaths[i];
-                if (path != null) (i == 0 && bootDisk != null ? bootDisk : CopperScreenDiskImageArchive.LoadDiskImage(path)).Mount(_machine, i);
+                if (path != null) CopperScreenDiskImageArchive.LoadDiskImage(path).Mount(_machine, i);
                 _machine.SetDriveWriteProtected(i, (_machine.IsDriveMounted(i) && !_machine.CanWriteDrive(i)) || (options.DriveWriteProtected[i] ?? true));
                 _diskPaths[i] = path;
             }
@@ -143,7 +131,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var cpu = options.CpuBackendOverride ?? p.CpuBackend;
         var minimal = p.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
         var copperStart = p.KickstartSource == CopperScreenKickstartSource.CopperStart;
-        if (copperStart && !CopperScreenBootMethods.CopperStartEnabled) return "CopperStart is not enabled in this build. Choose another boot method or use a CopperStart-enabled edition.";
+        if (minimal && !CopperScreenBundledMiniRom.Included) return CopperScreenBundledMiniRom.UnavailableMessage;
+        if (copperStart && !CopperScreenBootMethods.CopperStartEnabled) return "CopperStart is not enabled in this build. Choose a Kickstart ROM or use a CopperStart-enabled edition.";
         var copperStartA1200 = p.Chipset == new AmigaChipset(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal) &&
             cpu == M68kBackendKind.AccurateM68EC020 && p.ChipRamSize == 2097152 && p.ExpansionRamSize == 0 &&
             (options.HardDrives.Count == 1 || options.DriveDiskPaths[0] != null);
@@ -166,7 +155,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             cpu == M68kBackendKind.AccurateM68EC020 && p.ChipRamSize == 2097152 && p.ExpansionRamSize == 0;
         if (minimal && ((!minimalA500 && !copperStartA500Plus && !minimalA1200) ||
             p.RealFastRamSize != 0 || options.HardDrives.Count != 0 || options.HostDirectories.Count != 0))
-            return "Minimal disk boot requires a standard PAL A500 (OCS, 68000, 512 KiB Chip and optional 512 KiB slow RAM), A500+ (ECS, 68000, 1 MiB Chip RAM), or A1200 (Alice/Lisa, 68EC020, 2 MiB Chip RAM). Fast RAM, hard drives and shared folders are unavailable.";
+            return "CopperStart Mini requires a standard PAL A500 (OCS, 68000, 512 KiB Chip and optional 512 KiB slow RAM), A500+ (ECS, 68000, 1 MiB Chip RAM), or A1200 (Alice/Lisa, 68EC020, 2 MiB Chip RAM). Fast RAM, hard drives and shared folders require an original Kickstart ROM.";
         var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
             aga && cpu is not (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040))
@@ -315,16 +304,6 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
             { _workspaceSaveFailed = true; SetStatusText("CopperOS changes are not saved: " + ex.Message); }
-        }
-        if (_minimalBoot is { } boot && _machine.Cpu.ProgramCounter >= boot.FaultAddress && _machine.Cpu.ProgramCounter < boot.FaultAddress + 4)
-        {
-            var address = (int)CopperScreenMinimalBoot.StateAddress;
-            var ram = _machine.ChipRam.Span;
-            CaptureFatalException(new NotSupportedException(CopperScreenMinimalBoot.DescribeFault(
-                System.Buffers.Binary.BinaryPrimitives.ReadUInt16BigEndian(ram.Slice(address, 2)),
-                System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(ram.Slice(address + 4, 4)),
-                System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(ram.Slice(address + 52, 4)))));
-            throw new NotSupportedException(StatusText);
         }
         if (_machine.UnsupportedActiveFeature is { } feature)
         {
@@ -510,7 +489,6 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         ApplyInput();
         StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
             : _bundledMini ? ProfileName
-            : _minimalBoot != null ? ProfileName + (_machine.IsDriveMounted(0) ? " (experimental; no DOS or Workbench)" : " · DF0 empty")
             : _copperStart ? CopperScreenCopperStartRom.DescriptionFor(_machine.IsAga)
             : _machine.IsAga ? "Amiga 1200 (experimental) — native Kickstart 3.0, initial AGA display"
             : "Amiga 500 — native Kickstart, ADF / read-only IPF / CopperHDF";

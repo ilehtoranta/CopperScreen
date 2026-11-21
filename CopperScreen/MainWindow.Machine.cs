@@ -37,8 +37,7 @@ internal sealed partial class MainWindow
         model.SelectionChanged += (_, _) =>
         {
             if (_updatingMachineControls || _updatingSettingsUi || _applyingSettings || model.SelectedItem is not CopperScreenMachineModel selected) return;
-            EditMachine(draft => SelectRememberedSetup(draft,
-                CopperScreenBootMethods.Choice(selected, CopperScreenBootMethods.Method(draft))));
+            EditMachine(draft => SelectModelSetup(draft, selected));
         };
         cpu.SelectionChanged += (_, _) =>
         {
@@ -125,7 +124,7 @@ internal sealed partial class MainWindow
                 ToolTip.SetTip(controls.SlowRam, "Available with a 512 KiB Chip RAM layout.");
                 controls.FastRam.IsChecked = draft.RealFastRamKb > 0;
                 controls.FastRam.IsEnabled = enabled && (CopperScreenMachinePresets.CanUseFastRam(draft) || draft.RealFastRamKb > 0);
-                ToolTip.SetTip(controls.FastRam, "24-bit CPUs: up to 8 MiB. Full 32-bit CPUs: up to 1 GiB; more than 8 MiB requires Kickstart 3.x. Minimal disk boot has no Fast RAM.");
+                ToolTip.SetTip(controls.FastRam, "24-bit CPUs: up to 8 MiB. Full 32-bit CPUs: up to 1 GiB. More than 8 MiB requires Kickstart 3.x. CopperStart Mini uses Chip RAM and optional A500 slow RAM.");
                 controls.Rtc.IsChecked = draft.RtcEnabled;
                 controls.Rtc.IsEnabled = controls.DriveSounds.IsEnabled = enabled;
                 controls.DriveSounds.IsChecked = draft.FloppyDriveAudio.Enabled;

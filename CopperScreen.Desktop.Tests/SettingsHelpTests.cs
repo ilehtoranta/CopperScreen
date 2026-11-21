@@ -25,7 +25,7 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            var draft = MenuDraft(window); draft.KickstartRomPath = DefaultRomFixture(0, "settings-help"); SetMenuDraft(window, draft);
+            window.SelectOriginalRom(DefaultRomFixture(0, "settings-help"));
             Click(Button(window, "Configure Amiga…"));
             var settings = SettingsField<Window>(window, "_settingsWindow");
             SettingsCall(window, "SelectSettingsPage", 2);
@@ -62,14 +62,12 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
+            window.SelectOriginalRom(DefaultRomFixture(0, "boot-help"));
             Click(Button(window, "Configure Amiga…"));
             var settings = SettingsField<Window>(window, "_settingsWindow");
             var note = SettingsField<TextBlock>(window, "_copperStartSettingsNote");
-            var boot = SettingsField<ComboBox>(window, "_kickstartSourceBox");
-            boot.SelectedItem = "KickstartRom";
             Assert.False(note.IsVisible);
             Assert.False(SettingsNamed<Expander>(settings, "Boot help").IsExpanded);
-            boot.SelectedItem = "KickstartRom";
             SettingsField<TextBox>(window, "_realFastRamBox").Text = "0";
             SettingsField<TextBox>(window, "_kickstartRomBox").Text = Path.Combine(_root, "missing.rom");
             SettingsCall(window, "UpdateSettingsStatus");
@@ -93,13 +91,12 @@ public sealed partial class LaunchWorkflowTests
         try
         {
             Click(Button(window, "Configure Amiga…"));
-            var boot = SettingsField<ComboBox>(window, "_kickstartSourceBox");
             var note = SettingsField<TextBlock>(window, "_copperStartSettingsNote");
             Assert.False(note.IsVisible);
-            boot.SelectedItem = "CopperStart";
+            Click(SettingsField<Button>(window, "_settingsUseCopperOs"));
             Assert.True(note.IsVisible); Assert.Contains("A500", note.Text);
             Assert.False(SettingsNamed<Expander>(SettingsField<Window>(window, "_settingsWindow"), "Boot help").IsExpanded);
-            boot.SelectedItem = "KickstartRom";
+            window.SelectOriginalRom(DefaultRomFixture(0, "return-from-copperos"));
             Assert.False(note.IsVisible);
         }
         finally { window.Close(); }
@@ -153,7 +150,7 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
-            var draft = MenuDraft(window); draft.KickstartRomPath = DefaultRomFixture(0, "save-error"); SetMenuDraft(window, draft);
+            window.SelectOriginalRom(DefaultRomFixture(0, "save-error"));
             Click(Button(window, "Configure Amiga…"));
             Assert.Equal("Saved · Applies on start", SettingsField<TextBlock>(window, "_settingsStatus").Text);
             var path = Path.Combine(_root, "last-machine.json"); File.Delete(path); Directory.CreateDirectory(path);
