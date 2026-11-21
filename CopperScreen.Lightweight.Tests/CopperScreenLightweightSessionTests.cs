@@ -622,7 +622,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         Assert.True((await runtime.EjectDiskAsync()).Success);
         Assert.True((await runtime.ResetAsync()).Success);
         Assert.Equal(2, audio.DiscardCount);
-        Assert.Contains("Lightweight", runtime.CurrentState.ProfileName);
+        Assert.Equal(Options().Profile.DisplayName, runtime.CurrentState.ProfileName);
         Assert.DoesNotContain("48 kHz stereo required", runtime.CurrentState.StatusText);
     }
 
