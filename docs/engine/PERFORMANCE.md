@@ -6,7 +6,7 @@ On 2026-09-24, Copper68k's stable `1.4.1` NuGet package replaced the earlier
 retain their actual package identities and are not relabeled as measurements of
 stable `1.4.1`.
 
-The current project pins published Copper68k version `1.5.4`
+The current project pins published Copper68k version `1.5.5`
 and CopperDisk `3.0.0`; the normal production build uses the local CopperDisk
 source project. The
 [Copper68k 1.5.0 release record](COPPER68K_MAINLINE_1_5_0.md) remains historical;
@@ -37,7 +37,7 @@ supports current-machine comparisons without reclassifying historical evidence.
 
 ## Current availability
 
-The 2026-11-21 SysInfo 4.4 development replay scored 2,102,037 Dhrystones in
+The [2026-11-21 SysInfo 4.4 development replay](SYSINFO_040_JIT_2026-11-21.md) scored 2,102,037 Dhrystones in
 two cold and two warm runs using the 256× 68040 JIT and the frozen CopperStart
 installation. Click to result took 7.674–7.676 wall seconds for 7.672 PAL seconds,
 with at most 10.349 ms of field lateness. The separate AMD diagnostic pins the
