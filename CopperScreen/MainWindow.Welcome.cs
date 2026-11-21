@@ -160,7 +160,7 @@ internal sealed partial class MainWindow
             ? workspaceReady ? "" : "Create a workspace or select one and choose Resume workspace."
             : hdf ? valid ? _settingsDraft.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Startup takes about 25 seconds." : "" : error
             : copperStart ? valid ? "Experimental CopperStart boot" : error
-            : minimal ? valid ? "Experimental boot · no DOS or Workbench" : error : valid || string.IsNullOrWhiteSpace(rom) ? "" : error);
+            : minimal ? valid ? "Minimal floppy boot · no DOS or Workbench" : error : valid || string.IsNullOrWhiteSpace(rom) ? "" : error);
         _welcomeMessage.Foreground = _settingsStartupError != null || (!valid && (minimal ? !string.IsNullOrWhiteSpace(disk) : !string.IsNullOrWhiteSpace(rom))) ? new SolidColorBrush(Color.Parse("#FFBCAC")) : MutedText;
     }
 
